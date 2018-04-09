@@ -1,3 +1,2 @@
 # JDI Light
-
-Simple library that enchance posibilities of ordinar Selenium
+Is UI testing framework powered by Selenium
