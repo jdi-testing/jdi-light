@@ -18,7 +18,7 @@ import static com.epam.jdi.light.common.FormFilters.*;
 import static com.epam.jdi.light.common.UIUtils.getButton;
 import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
-import static com.epam.jdi.tools.LinqUtils.foreach;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getFields;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
@@ -67,10 +67,10 @@ public class Form<T> extends Section {
         switch (getFilter()) {
             case MANDATORY:
                 return LinqUtils.where(getFields(this, ISetValue.class),
-                        field -> field.isAnnotationPresent(Mandatory.class));
+                        field -> hasAnnotation(field, Mandatory.class));
             case OPTIONAL:
                 return LinqUtils.where(getFields(this, ISetValue.class),
-                        field -> !field.isAnnotationPresent(Mandatory.class));
+                        field -> !hasAnnotation(field, Mandatory.class));
             default:
                 return getFields(this, ISetValue.class, WebElement.class);
         }
@@ -182,13 +182,13 @@ public class Form<T> extends Section {
      * e.g. if you call "submit(user, "Publish") then you should have Element 'publishButton'. <br>
      * * Letters case in button name  no matters
      */
-    @JDIAction("Submit {0} and press {1}")
+    @JDIAction("Fill {0} and press {1}")
     public void submit(T entity, String buttonName) {
         submit(getMapFromObject(entity), buttonName);
     }
 
 
-    @JDIAction("Submit {0} and press {1}")
+    @JDIAction("Fill {0} and press {1}")
     public void submit(MapArray<String, String> objStrings, String name) {
         fill(objStrings);
         getButton(this, name).click();

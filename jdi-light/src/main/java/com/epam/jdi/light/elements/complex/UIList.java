@@ -7,24 +7,30 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.ISetValue;
+import com.epam.jdi.tools.CacheValue;
 import org.openqa.selenium.WebElement;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.map;
 
 public class UIList extends JDIBase implements List<WebElement>, ISetValue {
-    public String titleFieldName = NO_TITLE_FIELD;
-    public static final String NO_TITLE_FIELD = "NO TITLE FIELD";
-
-    public UIList() {
-        webElements.useCache(true);
-    }
+    private CacheValue<List<WebElement>> webElements = new CacheValue<>();
     public void select(String name) {
-        get(name).click();
+        if (getByLocator(getLocator()).contains("%s"))
+            get(name).click();
+        for(WebElement el : getAll())
+            if (el.getText().equals(name)) {
+                el.click();
+                return;
+            }
+        throw exception("Can't select '%s'. No elements with this name found");
     }
     public void select(Enum name) {
         select(getEnumValue(name));
@@ -100,7 +106,9 @@ public class UIList extends JDIBase implements List<WebElement>, ISetValue {
     }
 
     public WebElement get(int index) {
-        return getAll().get(index);
+        if (!webElements.hasValue())
+            webElements.set(getAll());
+        return webElements.get().get(index);
     }
 
     public WebElement set(int index, WebElement element) {
@@ -143,6 +151,6 @@ public class UIList extends JDIBase implements List<WebElement>, ISetValue {
         return null;
     }
     public boolean isDisplayed() {
-        return any(getAll(), WebElement::isDisplayed);
+        return getWebElements().get(0).isDisplayed();
     }
 }

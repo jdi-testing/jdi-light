@@ -23,9 +23,9 @@ public class EpamGithubSite {
 	@JPage(url = "/index.html", title = "Home Page")
 	public static HomePage homePage;
 
-	@Css("[ui=label]")
+	@Css(".sidebar-menu [ui=label]")
 	public static List<WebElement> navigation;
-	@Css("[ui=label]")
+	@Css(".sidebar-menu [ui=label]")
 	public static UIList navigationL;
 
 	@Css("header") public static Header header;

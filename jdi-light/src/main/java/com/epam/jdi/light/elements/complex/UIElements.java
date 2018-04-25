@@ -40,27 +40,23 @@ public class UIElements<T extends Section> extends JDIBase implements IList<T> {
         values.clear();
     }
     public List<T> values() {
-        if (elements.isUseCache()) {
-            if (values.hasValue())
-                return values.get();
-            if (elements.hasValue())
-                return elements.get().values();
-        } else values.clear();
+        if (values.hasValue())
+            return values.get();
+        if (elements.hasValue())
+            return elements.get().values();
         return values.set(LinqUtils.select(this.getAll(), this::initElement));
     }
     public MapArray<String, T> getMap() {
-        if (elements.isUseCache())
-            if (elements.hasValue())
-                return elements.get();
-        else  { elements.clear(); values.clear(); }
-        elements.set(values.hasValue()
+        if (elements.hasValue())
+            return elements.get();
+        List<WebElement> els = getAll();
+        return elements.set(values.hasValue()
             ? new MapArray<>(
-                LinqUtils.select(this.getAll(), this::elementTitle),
+                LinqUtils.select(els, this::elementTitle),
                 values.get())
-            : new MapArray<>(this.getAll(),
+            : new MapArray<>(els,
                 this::elementTitle,
                 this::initElement));
-        return elements.get();
     }
     @Override
     public boolean isEmpty() {
@@ -104,12 +100,10 @@ public class UIElements<T extends Section> extends JDIBase implements IList<T> {
 
     private void identifyTitleField() {
         Field[] fields = classType.getFields();
-
-        // Get title from annotation
-        List<Field> expectedFields = LinqUtils.where(fields, f -> f.isAnnotationPresent(Title.class));
-        if (expectedFields.size() != 1)
-            throw exception("Entity should have only 1 @Title annotation. Please correct '%s' class", classType.getSimpleName());
-        titleFieldName = expectedFields.get(0).getName();
+        Field expectedFields = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
+        if (expectedFields == null)
+            throw exception("No title name specified for '%s' class", classType.getSimpleName());
+        titleFieldName = expectedFields.getName();
     }
 
     public T get(Enum name) {

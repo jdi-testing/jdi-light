@@ -1,9 +1,6 @@
 package com.epam.jdi.light.driver.get;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static org.openqa.selenium.remote.BrowserType.CHROME;
-import static org.openqa.selenium.remote.BrowserType.FIREFOX;
-import static org.openqa.selenium.remote.BrowserType.IE;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

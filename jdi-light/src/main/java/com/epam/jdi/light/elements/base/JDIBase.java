@@ -11,7 +11,6 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -26,33 +25,34 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static com.epam.jdi.tools.Switch.Case;
-import static com.epam.jdi.tools.logger.LogLevels.*;
+import static com.epam.jdi.tools.Switch.Default;
+import static com.epam.jdi.light.logger.LogLevels.INFO;
+import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
- * Created by Roman_Iovlev on 3/25/2018.
+ * Created by Roman Iovlev on 14.02.2018
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
+
 public class JDIBase implements INamed {
     public String name;
     public String varName;
     public String typeName;
     public Object parent;
-    protected CacheValue<WebElement> webElement = new CacheValue<>();
-    protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
     protected By byLocator;
+    private CacheValue<WebElement> webElement = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
     public String driverName = "";
-    public JFunc1<WebElement, Boolean> searchRule = null;
+    public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
     public void setName(String varName, String className) {
         this.name = splitCamelCase(varName);
         this.varName = className + "." + varName;
     }
+    public void setWebElement(WebElement el) { webElement.setForce(el); }
     public void setTypeName(String typeName) {
         this.typeName = typeName;
-    }
-    public void setWebElement(WebElement element) {
-        webElement.setForce(element);
     }
     public String getName() {
         return isBlank(name) ? getClass().getSimpleName() : name;
@@ -91,7 +91,8 @@ public class JDIBase implements INamed {
 
     public WebElement get(String... args) {
         // TODO SAVE GET ELEMENT AND STALE ELEMENT PROCESS
-        if (webElement.hasValue()) return webElement.get();
+        if (webElement.hasValue())
+            return webElement.get();
         List<WebElement> result = getAll(args);
         switch (result.size()) {
             case 0:
@@ -103,7 +104,6 @@ public class JDIBase implements INamed {
         }
     }
     protected WebElement getWebElement(Object... args) {
-        if (webElement.hasValue()) return webElement.get();
         List<WebElement> result = getWebElements(args);
         return result.size() > 0 ? result.get(0) : null;
     }
@@ -112,18 +112,17 @@ public class JDIBase implements INamed {
         return filter(getWebElements(args), el -> searchRule.invoke(el));
     }
     protected List<WebElement> getWebElements(Object... args) {
-        if (webElements.hasValue()) return webElements.get(ArrayList::new);
         SearchContext searchContext = containsRoot(getLocator(args))
-                ? getDefaultContext()
-                : getSearchContext(parent);
-        return webElements.set(searchContext.findElements(correctLocator(getLocator())));
+            ? getDefaultContext()
+            : getSearchContext(parent);
+        return searchContext.findElements(correctLocator(getLocator()));
     }
 
     private SearchContext getSearchContext(Object element) {
         if (element == null || !isClass(element.getClass(), JDIBase.class))
             return getDefaultContext();
         JDIBase bElement = (JDIBase) element;
-        if (bElement.webElement.isUseCache() && bElement.webElement.hasValue())
+        if (bElement.webElement.hasValue())
             return bElement.webElement.get();
         Object parent = bElement.parent;
         By locator = bElement.getLocator();
@@ -185,8 +184,7 @@ public class JDIBase implements INamed {
                 l -> msgFormat(PRINT_ELEMENT_STEP, this)),
             Case(l -> l == INFO,
                 l -> msgFormat(PRINT_ELEMENT_INFO, this)),
-            Case(l -> l.equalOrLessThan(DEBUG),
-                l -> msgFormat(PRINT_ELEMENT_DEBUG, this))
+            Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, this))
         );
     }
 }

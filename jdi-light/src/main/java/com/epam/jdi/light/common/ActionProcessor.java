@@ -7,8 +7,9 @@ package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.tools.func.*;
-import com.epam.jdi.tools.logger.LogLevels;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JAction2;
+import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -21,15 +22,14 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.Switch;
-import static com.epam.jdi.tools.ReflectionUtils.getFields;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitLowerCase;
 import static com.epam.jdi.tools.Switch.*;
-import static com.epam.jdi.tools.logger.LogLevels.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static java.lang.Character.toUpperCase;
@@ -47,63 +47,97 @@ public class ActionProcessor {
     private static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? SHORT_TEMPLATE : DEFAULT_TEMPLATE;
     }
-    private static ThreadLocal<WebPage> previousPage = new ThreadLocal<>();
     public static JAction1<WebPage> newPage = page -> {
-        page.checkOpened();
-        logger.info("Page: " + page.getName());
+        if (CHECK_AFTER_OPEN)
+            page.checkOpened();
+        logger.toLog("Page: " + page.getName());
     };
-    public static JAction1<JoinPoint> jdiBefore = joinPoint -> {
-        Object element = joinPoint.getThis();
-        if (isClass(element.getClass(), JDIBase.class)) {
-            WebPage page = ((JDIBase) element).getPage();
-            if (page != null)
-                if (previousPage.get() != null &&
-                    !previousPage.get().getName().equals(page.getName()))
-                    newPage.invoke(page);
-                previousPage.set(page);
-        }
-        if (logger.getLogLevel() != OFF) {
-            String actionName = getActionName(joinPoint);
-            String logString = joinPoint.getThis() == null
+    public static JAction1<JoinPoint> stepBefore = joinPoint -> {
+        processNewPage(joinPoint);
+        String actionName = getActionName(joinPoint);
+        String logString = joinPoint.getThis() == null
                 ? actionName
                 : msgFormat(getTemplate(logger.getLogLevel()), map(
-                    $("action", actionName),
-                    $("element", getElementName(joinPoint))));
-            logString = toUpperCase(logString.charAt(0)) + logString.substring(1);
-            logger.toLog(logString, logLevel(joinPoint));
+                $("action", actionName),
+                $("element", getElementName(joinPoint))));
+        logString = toUpperCase(logString.charAt(0)) + logString.substring(1);
+        logger.toLog(logString, logLevel(joinPoint));
+    };
+    public static JAction1<JoinPoint> jdiBefore = joinPoint -> {
+        if (logger.getLogLevel() != OFF) {
+            stepBefore.execute(joinPoint);
         }
         logger.logOff();
     };
-    public static JAction2<JoinPoint, Object> jdiAfter = (joinPoint, result) -> {
-        logger.logOn();
-        if (logger.getLogLevel() == OFF) return;
+    public static JAction2<JoinPoint, Object> stepAfter = (joinPoint, result) -> {
         if (result != null && logLevel(joinPoint).equalOrMoreThan(INFO))
             logger.info(">>> " + result);
         logger.debug("Done");
     };
+    public static JAction2<JoinPoint, Object> jdiAfter = (joinPoint, result) -> {
+        logger.logOn();
+        if (logger.getLogLevel() == OFF) return;
+        stepAfter.execute(joinPoint, result);
+    };
+
+    private static void processNewPage(JoinPoint joinPoint) {
+        Object element = joinPoint.getThis();
+        if (element != null) { //TODO support static pages
+            WebPage page = getPage(element);
+            if (getCurrentPage() != null && page != null) {
+                if (!getCurrentPage().equals(page.getName())) {
+                    setCurrentPage(page);
+                    newPage.execute(page);
+                }
+            }
+        }
+    }
+    private static WebPage getPage(Object element) {
+        if (isClass(element.getClass(), JDIBase.class))
+            return ((JDIBase) element).getPage();
+        return null;
+    }
+
     public static JAction2<JoinPoint, Throwable> jdiError = (joinPoint, error) -> {
         throw exception("Action %s failed. Can't get result. Reason: %s", getActionName(joinPoint), error.getMessage());
     };
 
-    @Pointcut("execution(* *(..)) && " +
-            "(@annotation(com.epam.jdi.uitests.core.annotations.JDIAction)" +
-            "|| @annotation(ru.yandex.qatools.allure.annotations.Step))")
-    protected void logPointCut() { }
+    @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
+    protected void jdiPointcut() { }
+    @Pointcut("execution(* *(..)) && @annotation(ru.yandex.qatools.allure.annotations.Step)")
+    protected void stepPointcut() { }
 
-    @Before("logPointCut()")
+    @Before("jdiPointcut()")
     public void before(JoinPoint joinPoint) {
         if (jdiBefore != null)
             jdiBefore.execute(joinPoint);
     }
 
-    @AfterReturning(pointcut = "logPointCut()", returning = "result")
+    @AfterReturning(pointcut = "jdiPointcut()", returning = "result")
     public void after(JoinPoint joinPoint, Object result) {
         if (jdiAfter != null)
             jdiAfter.execute(joinPoint, result);
     }
 
-    @AfterThrowing(pointcut = "logPointCut()", throwing = "error")
+    @AfterThrowing(pointcut = "jdiPointcut()", throwing = "error")
     public void error(JoinPoint joinPoint, Throwable error) {
+        if (jdiError != null)
+            jdiError.execute(joinPoint, error);
+    }
+    @Before("stepPointcut()")
+    public void beforeStep(JoinPoint joinPoint) {
+        if (stepBefore != null)
+            stepBefore.execute(joinPoint);
+    }
+
+    @AfterReturning(pointcut = "stepPointcut()", returning = "result")
+    public void afterStep(JoinPoint joinPoint, Object result) {
+        if (stepAfter != null)
+            stepAfter.execute(joinPoint, result);
+    }
+
+    @AfterThrowing(pointcut = "stepPointcut()", throwing = "error")
+    public void errorStep(JoinPoint joinPoint, Throwable error) {
         if (jdiError != null)
             jdiError.execute(joinPoint, error);
     }

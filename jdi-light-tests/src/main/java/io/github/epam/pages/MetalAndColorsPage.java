@@ -6,9 +6,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
-import io.github.epam.enums.ColorsList;
-import io.github.epam.enums.Metals;
-import io.github.epam.enums.Vegetables;
 import io.github.epam.sections.LogSidebar;
 import org.openqa.selenium.WebElement;
 

@@ -2,8 +2,6 @@ package io.github.epam.sections;
 
 import com.epam.jdi.light.elements.complex.Dropdown;
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import io.github.epam.entities.User;
@@ -21,7 +19,7 @@ public class ContactForm extends Form<User> {
 	@XPath(".//button[@type='submit']") public WebElement submit;
 	@Css("input[type=checkbox]#Passport") public WebElement passport;
 	@Css("input[type=checkbox]#accept-conditions") public WebElement acceptConditions;
-	@Css("input[type=text]#Name") public WebElement name;
+	@Css("input[type=text]#Name") public WebElement userName;
 	@Css("input[type=text]#LastName") public WebElement lastName;
 	@Css("input[type=text]#Position") public WebElement position;
 	@Css("input[type=text]#Number") public WebElement number;

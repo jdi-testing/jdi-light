@@ -5,9 +5,6 @@ package com.epam.jdi.light.elements.interfaces;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.interfaces.IHasValue;
-import com.epam.jdi.light.elements.interfaces.INamed;
-
 import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.common.Exceptions.exception;

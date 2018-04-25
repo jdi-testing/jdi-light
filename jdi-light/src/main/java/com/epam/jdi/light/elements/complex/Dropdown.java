@@ -1,9 +1,9 @@
 package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.IHasValue;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.interfaces.IHasValue;
 import com.epam.jdi.light.elements.interfaces.ISetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
 import org.openqa.selenium.By;
@@ -143,6 +143,7 @@ public class Dropdown extends JDIBase implements ISetup, IHasValue, ISetValue {
             setLocator(root);
         if (valueLocator != null) {
             value = new UIElement();
+            value.name = getName() + " value element";
             value.setLocator(valueLocator);
             value.parent = this;
             value.driverName = driverName;
@@ -151,12 +152,14 @@ public class Dropdown extends JDIBase implements ISetup, IHasValue, ISetValue {
         }
         if (listLocator != null) {
             list = new UIList();
+            list.name = getName() + " list element";
             list.setLocator(listLocator);
             list.parent = this;
             list.driverName = driverName;
         }
         if (expandLocator != null) {
             expander = new UIElement();
+            expander.name = getName() + " expander element";
             expander.setLocator(expandLocator);
             expander.parent = this;
             expander.driverName = driverName;

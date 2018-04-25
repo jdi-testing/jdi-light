@@ -5,7 +5,7 @@ import com.google.GoogleSite;
 import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.logger.LogLevels.INFO;
+import static com.epam.jdi.light.logger.LogLevels.INFO;
 
 public class GoogleInit  {
     @BeforeSuite(alwaysRun = true)
@@ -13,7 +13,7 @@ public class GoogleInit  {
         logger.setLogLevel(INFO);
         PageFactory.initElements(GoogleSite.class);
         GoogleSite.homePage.open();
-        logger.info("Run Tests");
+        logger.toLog("Run Tests");
     }
 
 

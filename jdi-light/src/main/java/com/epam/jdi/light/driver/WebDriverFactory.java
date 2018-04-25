@@ -9,38 +9,25 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.Function;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
-import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
 import static java.lang.System.setProperty;
 import static java.lang.Thread.currentThread;
-import static java.util.Arrays.asList;
-import static org.openqa.selenium.ie.InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS;
-import static org.openqa.selenium.remote.CapabilityType.PAGE_LOAD_STRATEGY;
 
 public class WebDriverFactory {
-    public static String DRIVER_NAME = "chrome";
-    public static String PAGELOAD_STRATEGY = "normal";
-    public static String DRIVER_PATH;
-
     public static MapArray<String, JFunc<WebDriver>> drivers = new MapArray<>();
     private static ThreadLocal<MapArray<String, WebDriver>> runDrivers = new ThreadLocal<>();
 
@@ -62,65 +49,47 @@ public class WebDriverFactory {
     }
 
     private static WebDriver initDriver(DriverTypes type) {
+        WebDriver driver;
         switch (type) {
             case CHROME:
                 if (DRIVER_VERSION.equals(""))
                     setProperty("webdriver.chrome.driver", chromeDriverPath());
                 else
                     downloadDriver(CHROME);
-                return new ChromeDriver(defaultChromeOptions());
+                driver = new ChromeDriver(CHROME_OPTIONS.execute());
+                break;
             case FIREFOX:
                 if (DRIVER_VERSION.equals(""))
                     setProperty("webdriver.gecko.driver", firefoxDriverPath());
                 else
                     downloadDriver(FIREFOX);
-                return new FirefoxDriver(defaultFirefoxOptions());
+                driver = new FirefoxDriver(FIREFOX_OPTIONS.execute());
+                break;
             case IE:
                 if (DRIVER_VERSION.equals(""))
                     setProperty("webdriver.ie.driver", ieDriverPath());
                 else
                     downloadDriver(IE);
-                return new InternetExplorerDriver(defaultIEOptions());
+                driver = new InternetExplorerDriver(IE_OPTIONS.execute());
+                break;
             case EDGE:
                 // TODO
+                driver = new ChromeDriver(CHROME_OPTIONS.execute());
+                break;
             case PHANTOMJS:
                 // TODO
+                driver = new ChromeDriver(CHROME_OPTIONS.execute());
+                break;
             case OPERA:
                 // TODO
+                driver = new ChromeDriver(CHROME_OPTIONS.execute());
+                break;
+            default:
+                throw exception("Unknown driver: " + type);
         }
-        throw exception("Unknown driver: " + type);
+        return DRIVER_SETTINGS.execute(driver);
     }
     // GET DRIVER
-
-    public static Dimension BROWSER_SIZES;
-    public static Function<WebDriver, WebDriver> driverSettings = driver -> {
-        if (BROWSER_SIZES == null) {
-            if (any(asList("chrome", "internetexplorer"),
-                    el -> driver.toString().toLowerCase().contains(el)))
-                driver.manage().window().maximize();
-        }
-        else
-            driver.manage().window().setSize(BROWSER_SIZES);
-        return driver;
-    };
-    private static ChromeOptions defaultChromeOptions() {
-        ChromeOptions cap = new ChromeOptions();
-        cap.setCapability(PAGE_LOAD_STRATEGY, PAGELOAD_STRATEGY);
-        return cap;
-    }
-    private static FirefoxOptions defaultFirefoxOptions() {
-        FirefoxOptions cap = new FirefoxOptions();
-        cap.setCapability(PAGE_LOAD_STRATEGY, PAGELOAD_STRATEGY);
-        return cap;
-    }
-    private static InternetExplorerOptions defaultIEOptions() {
-        InternetExplorerOptions cap = new InternetExplorerOptions();
-        cap.setCapability(INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-        cap.setCapability("ignoreZoomSetting", true);
-        //cap.setCapability("requireWindowFocus", true);
-        cap.setCapability(PAGE_LOAD_STRATEGY, PAGELOAD_STRATEGY);
-        return cap;
-    }
     public static String useDriver(DriverTypes driverType, JFunc<WebDriver> driver) {
         String driverName = driverType.name;
         if (drivers.keys().contains(driverName))

@@ -63,7 +63,8 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
     @JDIAction
     public boolean isDisplayed() {
         WebElement el = getWebElement();
-        return el != null && el.isDisplayed();
+        try { return el != null && el.isDisplayed();
+        } catch (Exception ex) { return false; }
     }
     public Point getLocation() {
         return get().getLocation();
@@ -95,4 +96,5 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
         clear();
         sendKeys(value);
     }
+
 }

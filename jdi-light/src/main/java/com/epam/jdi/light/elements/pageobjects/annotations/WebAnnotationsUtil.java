@@ -5,17 +5,18 @@ package com.epam.jdi.light.elements.pageobjects.annotations;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.WithText;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Quotes;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.function.Consumer;
 
-import static com.epam.jdi.light.common.CheckTypes.*;
-import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.tools.StringUtils.format;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
@@ -23,8 +24,14 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class WebAnnotationsUtil {
 
+    public static boolean hasAnnotation(Field field, Class<? extends Annotation> annotation) {
+        return field.isAnnotationPresent(annotation);
+    }
+    public static <T extends Annotation> T getAnnotation(Field field, Class<T> annotation) {
+        return field.getAnnotation(annotation);
+    }
     public static String getElementName(Field field) {
-        if (field.isAnnotationPresent(Name.class))
+        if (hasAnnotation(field, Name.class))
             return field.getAnnotation(Name.class).value();
         if (field.getType().isAnnotationPresent(Name.class))
             return field.getType().getAnnotation(Name.class).value();

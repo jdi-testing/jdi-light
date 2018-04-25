@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.LinqUtils.select;
@@ -45,7 +46,7 @@ public final class UIUtils {
             });
     }
     public static String getElementName(Field field) {
-        if (field.isAnnotationPresent(Name.class))
+        if (hasAnnotation(field, Name.class))
             return field.getAnnotation(Name.class).value();
         if (field.getType().isAnnotationPresent(Name.class))
             return field.getType().getAnnotation(Name.class).value();

@@ -5,7 +5,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.interfaces.IComposite;
 import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
@@ -19,14 +18,8 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.Switch;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
-import static com.epam.jdi.tools.Switch.Case;
-import static com.epam.jdi.tools.Switch.Else;
-import static com.epam.jdi.tools.Switch.Value;
-import static com.epam.jdi.tools.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.logger.LogLevels.INFO;
-import static com.epam.jdi.tools.logger.LogLevels.STEP;
-import static com.epam.jdi.tools.map.MapArray.map;
-import static com.epam.jdi.tools.pairs.Pair.$;
+import static com.epam.jdi.tools.Switch.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
 import static java.lang.String.format;
 
 /**
@@ -35,7 +28,7 @@ import static java.lang.String.format;
  */
 
 public class WebPage implements IComposite {
-    public static boolean checkAfterOpen = false;
+    public static boolean CHECK_AFTER_OPEN = false;
     public String url;
     public String title;
 
@@ -44,7 +37,12 @@ public class WebPage implements IComposite {
     private CheckTypes checkUrlType = EQUALS;
     private CheckTypes checkTitleType = EQUALS;
 
-    public static WebPage currentPage;
+    private static ThreadLocal<String> currentPage = new ThreadLocal<>();
+    public static String getCurrentPage() { return currentPage.get(); }
+    public static void setCurrentPage(WebPage page) {
+        currentPage.set(page.getName());
+        CacheValue.reset();
+    }
     public String driverName;
     public WebDriver getDriver() { return WebDriverFactory.getDriver(driverName); }
     private String name;
@@ -99,12 +97,10 @@ public class WebPage implements IComposite {
     /**
      * Check that page opened
      */
-    @JDIAction("Check opened")
+    @JDIAction
     public void checkOpened() {
-        logger.logOff();
         if (!isOpened())
             throw exception("Page '%s' is not opened", toString());
-        logger.logOn();
     }
     public boolean isOpened() {
         if (!hasRunDrivers())
@@ -116,18 +112,21 @@ public class WebPage implements IComposite {
                 Else(false)
         );
         if (!result) return false;
-        return Switch(checkTitleType).get(
+        result = Switch(checkTitleType).get(
                 Value(EQUALS, title().check()),
                 Value(MATCH, title().match()),
                 Value(CONTAINS, title().contains()),
                 Else(false)
         );
+        if (result)
+            setCurrentPage(this);
+        return result;
     }
 
     /**
      * Opens url specified for page
      */
-    @JDIAction("open {url}")
+    @JDIAction("Open {url}")
     public void open() {
         CacheValue.reset();
         try {
@@ -136,18 +135,15 @@ public class WebPage implements IComposite {
             logger.debug("Second try open page: " + toString());
             getDriver().navigate().to(url);
         }
-        if (checkAfterOpen)
-            checkOpened();
-        currentPage = this;
+        setCurrentPage(this);
     }
+    @JDIAction
     public void shouldBeOpened() {
         try {
-            logger.info(format("Page '%s' should be opened", getName()));
-            logger.logOff(() -> {
-                if (isOpened()) return;
-                open();
-                checkOpened();
-            });
+            if (isOpened()) return;
+            open();
+            checkOpened();
+            setCurrentPage(this);
         } catch (Exception ex) {
             throw exception(format("Can't open page '%s'. Reason: %s", getName(), ex.getMessage()));
         }
@@ -156,7 +152,7 @@ public class WebPage implements IComposite {
     /**
      * Reload current page
      */
-    @JDIAction("Reload current page '{name}'")
+    @JDIAction("Reload current page")
     public void refresh() {
         getDriver().navigate().refresh();
     }
@@ -203,8 +199,7 @@ public class WebPage implements IComposite {
                 l -> msgFormat(PRINT_PAGE_STEP, this)),
             Case(l -> l == INFO,
                 l -> msgFormat(PRINT_PAGE_INFO, this)),
-            Case(l -> l.equalOrLessThan(DEBUG),
-                l -> msgFormat(PRINT_PAGE_DEBUG, this))
+            Default(msgFormat(PRINT_PAGE_DEBUG, this))
         );
     }
 
@@ -222,9 +217,8 @@ public class WebPage implements IComposite {
         /**
          * Check that current page url/title equals to expected url/title
          */
-        @JDIAction
         public boolean check() {
-            logger.info("Check that page %s equals to '%s'", what, equals);
+            logger.toLog(format("Check that page %s equals to '%s'", what, equals));
             return equals == null
                     || equals.equals("")
                     || actual.get().equals(equals);
@@ -233,9 +227,8 @@ public class WebPage implements IComposite {
         /**
          * Check that current page url/title matches to expected url/title-matcher
          */
-        @JDIAction
         public boolean match() {
-            logger.info("Check that page %s matches to '%s'", what, equals);
+            logger.toLog(format("Check that page %s matches to '%s'", what, equals));
             return equals == null
                     || equals.equals("")
                     || actual.get().matches(equals);
@@ -244,9 +237,8 @@ public class WebPage implements IComposite {
         /**
          * Check that current page url/title contains expected url/title-matcher
          */
-        @JDIAction
         public boolean contains() {
-            logger.info("Check that page %s contains to '%s'", what, equals);
+            logger.toLog(format("Check that page %s contains to '%s'", what, equals));
             return equals == null
                     || equals.equals("")
                     || actual.get().contains(equals);

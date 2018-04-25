@@ -31,7 +31,6 @@ public final class WebDriverByUtils {
     private static String getBadLocatorMsg(String byLocator, Object... args) {
         return "Bad locator template '" + byLocator + "'. Args: " + print(select(args, Object::toString), ", ", "'%s'") + ".";
     }
-
     public static By fillByTemplate(By by, Object... args) {
         String byLocator = getByLocator(by);
         if (!byLocator.contains("%"))

@@ -22,6 +22,6 @@ public final class WebDriverUtils {
             killByName("geckodriver.exe");
             killByName("IEDriverServer.exe");
             killByName("MicrosoftWebDriver.exe");
-        } catch (Throwable ex) { logger.info("Can't kill drivers: ", ex.getMessage()); }
+        } catch (Throwable ex) { logger.error("Can't kill drivers: ", ex.getMessage()); }
     }
 }

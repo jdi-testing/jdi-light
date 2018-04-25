@@ -6,26 +6,28 @@ package com.epam.jdi.light.settings;
  */
 
 import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.logger.ILogger;
-import com.epam.jdi.tools.logger.JDILogger;
-import org.openqa.selenium.Dimension;
+import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.light.logger.JDILogger;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Objects;
 
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVERS_FOLDER;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_VERSION;
+import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
+import static com.epam.jdi.tools.PropertyReader.getProperties;
+import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
+import static org.openqa.selenium.PageLoadStrategy.*;
 
 public class WebSettings {
     public static ILogger logger = JDILogger.instance("JDI");
     public static String DOMAIN;
-    public static String killBrowser = "afterAndBefore";
+    public static String KILL_BROWSER = "afterAndBefore";
     public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = Objects::nonNull;
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
@@ -33,53 +35,53 @@ public class WebSettings {
     }
     public static boolean initialized = false;
     public static int TIMEOUT = 10;
-    public static String jdiSettingsPath = "test.properties";
-    public static boolean USE_CACHE = false;
     public static String TEST_GROUP = "";
+    public static String TEST_PROPERTIES_PATH = "test.properties";
 
     public static synchronized void init() {
-        fillAction(p -> USE_CACHE =
-                p.toLowerCase().equals("true") || p.toLowerCase().equals("1"), "cache");
+        getProperties(TEST_PROPERTIES_PATH);
         fillAction(p -> TIMEOUT = parseInt(p), "timeout.wait.element");
         fillAction(p -> DOMAIN = p, "domain");
         fillAction(p -> DRIVER_VERSION = p, "drivers.version");
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
-        fillAction(p -> DRIVER_PATH = p, "driver.path");
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
         fillAction(p -> DRIVER_VERSION =
             p.toLowerCase().equals("true") || p.toLowerCase().equals("1")
-                ? "LATEST" : "", "driver.getLatest");
+                ? "LATEST" : "", "drivers.getLatest");
         // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
-        fillAction(p -> killBrowser = p, "browser.kill");
-        fillAction(p -> {
-            p = p.toLowerCase();
-            if (p.equals("soft"))
-                p = "any, multiple";
-            if (p.equals("strict"))
-                p = "visible, single";
-            if (p.split(",").length == 2) {
-                List<String> params = asList(p.split(","));
-                if (params.contains("visible") || params.contains("displayed"))
-                    SEARCH_CONDITION = WebElement::isDisplayed;
-                if (params.contains("any") || params.contains("all"))
-                    SEARCH_CONDITION = Objects::nonNull;
-                if (params.contains("single"))
-                    STRICT_SEARCH = true;
-                if (params.contains("multiple"))
-                    STRICT_SEARCH = false;
-            }
-        }, "search.element.strategy" );
-        fillAction(p -> {
-            String[] split = null;
-            if (p.split(",").length == 2)
-                split = p.split(",");
-            if (p.toLowerCase().split("x").length == 2)
-                split = p.toLowerCase().split("x");
-            if (split != null)
-                BROWSER_SIZES = new Dimension(parseInt(split[0].trim()), parseInt(split[1].trim()));
-        }, "browser.size");
-        fillAction(p -> PAGELOAD_STRATEGY = p, "page.load.strategy");
+        fillAction(p -> KILL_BROWSER = p, "browser.kill");
+        fillAction(p -> setSearchStrategy(p), "element.search.strategy" );
+        fillAction(p -> BROWSER_SIZE = p, "browser.size");
+        fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
+        fillAction(p -> CHECK_AFTER_OPEN = parseBoolean(p), "page.check.after.open");
         initialized = true;
+    }
+    private static void setSearchStrategy(String p) {
+        p = p.toLowerCase();
+        if (p.equals("soft"))
+            p = "any, multiple";
+        if (p.equals("strict"))
+            p = "visible, single";
+        if (p.split(",").length == 2) {
+            List<String> params = asList(p.split(","));
+            if (params.contains("visible") || params.contains("displayed"))
+                SEARCH_CONDITION = WebElement::isDisplayed;
+            if (params.contains("any") || params.contains("all"))
+                SEARCH_CONDITION = Objects::nonNull;
+            if (params.contains("single"))
+                STRICT_SEARCH = true;
+            if (params.contains("multiple"))
+                STRICT_SEARCH = false;
+        }
+    }
+
+    private static PageLoadStrategy getPageLoadStrategy(String strategy) {
+        switch (strategy.toLowerCase()) {
+            case "normal": return NORMAL;
+            case "none": return NONE;
+            case "eager": return EAGER;
+        }
+        return NORMAL;
     }
     public static void initDriver() {
         if (!initialized)

@@ -11,11 +11,14 @@ import org.openqa.selenium.By;
 public class UIFactory {
     public static UIElement element(String locator) {
         UIElement el =  new UIElement();
-        By byLocator = locator.charAt(1) == '/'
-                ? By.cssSelector(locator)
-                : By.xpath(locator);
+        By byLocator = getLocator(locator);
         el.setLocator(byLocator);
         return el;
+    }
+    private static By getLocator(String locator) {
+        return locator.charAt(1) == '/'
+                ? By.cssSelector(locator)
+                : By.xpath(locator);
     }
     public static UIElement $(String locator) {
         return element(locator);
@@ -27,9 +30,7 @@ public class UIFactory {
     }
     public static UIList list(String locator) {
         UIList list =  new UIList();
-        By byLocator = locator.charAt(1) == '/'
-                ? By.cssSelector(locator)
-                : By.xpath(locator);
+        By byLocator = getLocator(locator);
         list.setLocator(byLocator);
         return list;
     }
@@ -43,9 +44,7 @@ public class UIFactory {
     }
     public static Dropdown dropdown(String locator) {
         Dropdown el =  new Dropdown();
-        By byLocator = locator.charAt(1) == '/'
-                ? By.cssSelector(locator)
-                : By.xpath(locator);
+        By byLocator = getLocator(locator);
         el.setLocator(byLocator);
         return el;
     }

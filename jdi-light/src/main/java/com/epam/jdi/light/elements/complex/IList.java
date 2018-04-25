@@ -6,7 +6,6 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.ISetValue;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
@@ -17,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import static com.epam.jdi.tools.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 public interface IList<T> extends List<T> {
     /**

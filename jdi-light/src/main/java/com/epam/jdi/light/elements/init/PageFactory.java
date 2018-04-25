@@ -1,15 +1,17 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.UIElements;
 import com.epam.jdi.light.elements.complex.UIList;
-import com.epam.jdi.light.elements.interfaces.IComposite;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.IComposite;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
-import com.epam.jdi.light.settings.WebSettings;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.WithText;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,17 +24,16 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import static com.epam.jdi.light.common.CheckTypes.*;
+import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
+import static com.epam.jdi.light.common.CheckTypes.MATCH;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverFactory.DRIVER_NAME;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
 import static com.epam.jdi.light.settings.WebSettings.SEARCH_CONDITION;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
-import static com.epam.jdi.tools.LinqUtils.Switch;
-import static com.epam.jdi.tools.LinqUtils.any;
-import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.Switch.*;
+import static com.epam.jdi.tools.Switch.Case;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -47,8 +48,6 @@ public class PageFactory {
         for (Field pageField : pages) {
             try {
                 Class type = pageField.getType();
-                if (isClass(type, JDIBase.class))
-                    initElement(pageField, false, site, DRIVER_NAME);
                 if (isClass(type, WebPage.class)) {
                     WebPage page = (WebPage) newInstance(pageField, site.getSimpleName());
                     page.driverName = DRIVER_NAME;
@@ -66,9 +65,11 @@ public class PageFactory {
                     initElements(page, DRIVER_NAME);
                     pageField.set(null, page);
                 }
+                else
+                    initElement(pageField, false, site, DRIVER_NAME);
             } catch (Exception ex) {
                 throw exception("Can't init %s '%s' on '%s'. Exception: %s",
-                        isClass(pageField.getType(), WebPage.class) ? "page" : "element",
+                    isClass(pageField.getType(), WebPage.class) ? "page" : "element",
                         pageField.getName(),
                         site.getSimpleName(),
                         ex.getMessage());
@@ -100,11 +101,10 @@ public class PageFactory {
                     JDIBase jdi = (JDIBase) instance;
                     By locator = getLocatorFromField(field);
                     if (locator != null ) jdi.setLocator(locator);
-                    if (field.isAnnotationPresent(Frame.class))
+                    if (hasAnnotation(field, Frame.class))
                         jdi.setFrame(getFrame(field.getAnnotation(Frame.class)));
                     jdi.setName(field.getName(), sectionName);
                     jdi.setTypeName(type.getName());
-                    jdi.searchRule = SEARCH_CONDITION;
                     jdi.parent = section;
                     jdi.driverName = isBlank(driverName) ? DRIVER_NAME : driverName;
                     if (isInterface(field, ISetup.class))
@@ -153,6 +153,11 @@ public class PageFactory {
             throw exception("Can't instantiate List<%s> field '%s' on page '%s'", genericType == null ? "UNKNOWN" : genericType.getSimpleName(), field.getName(), sectionName);
         }
     }
+    public static void initElements(Class<?>... pages) {
+        for (Class<?> page : pages) {
+            initElements((WebDriver) null, page);
+        }
+    }
     public static void initElements(Object... pages) {
         for (Object page : pages) {
             if (isClass(page.getClass(), WebPage.class)) {
@@ -168,15 +173,15 @@ public class PageFactory {
         FindBy[] jfindbys = field.getAnnotationsByType(FindBy.class);
         if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
             return findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP)));
-        if (field.isAnnotationPresent(org.openqa.selenium.support.FindBy.class))
+        if (hasAnnotation(field, org.openqa.selenium.support.FindBy.class))
             return findByToBy(field.getAnnotation(org.openqa.selenium.support.FindBy.class));
-        if (field.isAnnotationPresent(Css.class))
+        if (hasAnnotation(field, Css.class))
             return findByToBy(field.getAnnotation(Css.class));
-        if (field.isAnnotationPresent(XPath.class))
+        if (hasAnnotation(field, XPath.class))
             return findByToBy(field.getAnnotation(XPath.class));
-        if (field.isAnnotationPresent(ByText.class))
+        if (hasAnnotation(field, ByText.class))
             return findByToBy(field.getAnnotation(ByText.class));
-        if (field.isAnnotationPresent(WithText.class))
+        if (hasAnnotation(field, WithText.class))
             return findByToBy(field.getAnnotation(WithText.class));
         return null;
     }
@@ -190,7 +195,7 @@ public class PageFactory {
 
     // Selenium PageFactory
     public static <T> T initElements(WebDriver driver, Class<T> pageClassToProxy) {
-        T page;
+        T page; //TODO support static pages
         try {
             Constructor<T> constructor = pageClassToProxy.getConstructor(new Class[]{WebDriver.class});
             page = constructor.newInstance(new Object[]{driver});
