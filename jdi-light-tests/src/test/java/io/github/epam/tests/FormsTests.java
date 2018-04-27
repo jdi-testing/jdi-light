@@ -15,9 +15,7 @@ public class FormsTests extends SimpleTestsInit {
     @Test
     public void loginTest() {
         shouldBeLoggedOut();
-        StopWatch s = StopWatch.createStarted();
         header.userIcon.click();
-        System.out.println("TIME: " + s.getTime());
         header.loginForm.submit(DEFAULT_USER, "enter");
         homePage.checkOpened();
     }
