@@ -9,7 +9,6 @@ import static java.lang.String.format;
 public class Exceptions {
     public static RuntimeException exception(String msg, Object... args) {
         String message = format(msg, args);
-        logger.dropLogOff();
         return new RuntimeException(message);
     }
 }

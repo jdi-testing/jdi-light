@@ -29,11 +29,10 @@ import static com.epam.jdi.light.common.CheckTypes.MATCH;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
-import static com.epam.jdi.light.settings.WebSettings.SEARCH_CONDITION;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.Switch.Case;
+import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -93,8 +92,11 @@ public class PageFactory {
         String sectionName = section == null ? null : section.getClass().getSimpleName();
         try {
             Object instance = getValueField(field, section);
-            if (instance == null)
+            boolean changed = false;
+            if (instance == null) {
                 instance = newInstance(field, sectionName);
+                changed = true;
+            }
             if (instance != null) {
                 Class<?> type = instance.getClass();
                 if (isClass(type, JDIBase.class)) {
@@ -109,8 +111,10 @@ public class PageFactory {
                     jdi.driverName = isBlank(driverName) ? DRIVER_NAME : driverName;
                     if (isInterface(field, ISetup.class))
                         ((ISetup)jdi).setup(field);
+                    changed = true;
                 }
-                field.set(isClass ? null : section, instance);
+                if (changed)
+                    field.set(isClass ? null : section, instance);
                 if (isInterface(type, IComposite.class))
                     initElements(instance, driverName);
             }

@@ -25,10 +25,14 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class WebAnnotationsUtil {
 
     public static boolean hasAnnotation(Field field, Class<? extends Annotation> annotation) {
-        return field.isAnnotationPresent(annotation);
+        return field.isAnnotationPresent(annotation)
+                || field.getType().isAnnotationPresent(annotation);
     }
     public static <T extends Annotation> T getAnnotation(Field field, Class<T> annotation) {
-        return field.getAnnotation(annotation);
+        T result = field.getAnnotation(annotation);
+        return result == null
+            ? field.getType().getAnnotation(annotation)
+            : result;
     }
     public static String getElementName(Field field) {
         if (hasAnnotation(field, Name.class))

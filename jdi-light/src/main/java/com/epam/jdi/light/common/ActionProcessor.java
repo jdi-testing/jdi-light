@@ -24,14 +24,13 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.Switch;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitLowerCase;
-import static com.epam.jdi.tools.Switch.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
+import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.Character.toUpperCase;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
@@ -97,9 +96,12 @@ public class ActionProcessor {
             return ((JDIBase) element).getPage();
         return null;
     }
-
+    public static boolean ERROR_THROWN = false;
     public static JAction2<JoinPoint, Throwable> jdiError = (joinPoint, error) -> {
-        throw exception("Action %s failed. Can't get result. Reason: %s", getActionName(joinPoint), error.getMessage());
+        if (!ERROR_THROWN) {
+            ERROR_THROWN = true;
+            throw exception("Action %s failed. Can't get result. Reason: %s", getActionName(joinPoint), error.getMessage());
+        }
     };
 
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
@@ -176,30 +178,32 @@ public class ActionProcessor {
             MethodSignature method = getMethod(joinPoint);
             String template = methodNameTemplate(method);
             return Switch(template).get(
-                Case(t -> t.contains("{0"), t -> MessageFormat.format(t, joinPoint.getArgs())),
-                Case(t -> t.contains("{"), t -> {
-                    MapArray obj = new MapArray<>("this", getElementName(joinPoint));
-                    return getActionName(method, t, obj, methodArgs(joinPoint, method), classFields(joinPoint));
-                }),
+                Case(t -> t.contains("{0"), t ->
+                    MessageFormat.format(t, joinPoint.getArgs())),
+                Case(t -> t.contains("{"), t -> getActionName(method, t,
+                    new MapArray<>("this", getElementName(joinPoint)),
+                    methodArgs(joinPoint, method), classFields(joinPoint))
+                ),
                 Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
-                Default(t -> {
-                    MapArray<String, Object> args = methodArgs(joinPoint, method);
-                    if (args.size() == 1 && args.get(0).value.getClass().isArray())
-                        return format("%s(%s)", t, arrayToString(args.get(0).value));
-                    MapArray<String, String> methodArgs = args.toMapArray(Object::toString);
-                    String stringArgs = Switch(methodArgs.size()).get(
-                        Value(0, ""),
-                        Value(1, v->"("+methodArgs.get(0).value+")"),
-                        Default(v->"("+methodArgs.toString()+")")
-                    );
-                    return format("%s%s", t, stringArgs);
-                })
+                Default(t -> getDefaultName(t, methodArgs(joinPoint, method)))
             );
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: " +
                     "Can't get action name: " + ex.getMessage());
         }
     }
+    private static String getDefaultName(String t, MapArray<String, Object> args) {
+        if (args.size() == 1 && args.get(0).value.getClass().isArray())
+            return format("%s(%s)", t, arrayToString(args.get(0).value));
+        MapArray<String, String> methodArgs = args.toMapArray(Object::toString);
+        String stringArgs = Switch(methodArgs.size()).get(
+                Value(0, ""),
+                Value(1, v->"("+methodArgs.get(0).value+")"),
+                Default(v->"("+methodArgs.toString()+")")
+        );
+        return format("%s%s", t, stringArgs);
+    }
+
     static String arrayToString(Object array) {
         String result = "";
         boolean first = true;
@@ -239,7 +243,6 @@ public class ActionProcessor {
                     result += " '" + args[1].values().get(0) + "'";
             } else {
                 result = value;
-                result = msgFormat(result, args[1].values());
                 for (MapArray<String, Object> params : args)
                     result = msgFormat(result, params);
             }

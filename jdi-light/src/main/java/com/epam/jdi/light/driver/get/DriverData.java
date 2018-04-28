@@ -5,9 +5,9 @@ package com.epam.jdi.light.driver.get;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.tools.Switch;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.switcher.SwitchActions;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,10 +20,11 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.driver.get.Platform.X32;
-import static com.epam.jdi.tools.LinqUtils.Switch;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.RegExUtils.matches;
+import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 import static org.openqa.selenium.ie.InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR;
 import static org.openqa.selenium.remote.CapabilityType.ACCEPT_SSL_CERTS;
@@ -59,9 +60,9 @@ public class DriverData {
     public static OsTypes getOs() {
         String osName = System.getProperty("os.name").toLowerCase();
         return Switch(osName).get(
-            Switch.Case(os -> os.contains("mac"), MAC),
-            Switch.Case(os -> os.contains("win") || os.contains("ms"), WIN),
-            Switch.Default(LINUX)
+            Case(os -> os.contains("mac"), MAC),
+            Case(os -> os.contains("win") || os.contains("ms"), WIN),
+            Default(LINUX)
         );
     }
 
