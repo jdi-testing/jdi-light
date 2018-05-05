@@ -55,21 +55,21 @@ public class WebDriverFactory {
                 if (DRIVER_VERSION.equals(""))
                     setProperty("webdriver.chrome.driver", chromeDriverPath());
                 else
-                    downloadDriver(CHROME);
+                    downloadDriver(CHROME, PLATFORM, DRIVER_VERSION);
                 driver = new ChromeDriver(CHROME_OPTIONS.execute());
                 break;
             case FIREFOX:
                 if (DRIVER_VERSION.equals(""))
                     setProperty("webdriver.gecko.driver", firefoxDriverPath());
                 else
-                    downloadDriver(FIREFOX);
+                    downloadDriver(FIREFOX, PLATFORM, DRIVER_VERSION);
                 driver = new FirefoxDriver(FIREFOX_OPTIONS.execute());
                 break;
             case IE:
                 if (DRIVER_VERSION.equals(""))
                     setProperty("webdriver.ie.driver", ieDriverPath());
                 else
-                    downloadDriver(IE);
+                    downloadDriver(IE, PLATFORM, DRIVER_VERSION);
                 driver = new InternetExplorerDriver(IE_OPTIONS.execute());
                 break;
             case EDGE:

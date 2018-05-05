@@ -45,7 +45,7 @@ public class UIList extends JDIBase implements List<WebElement>, ISetValue {
         return map(getAll(), WebElement::getText);
     }
     public void refresh() {
-        webElements.get().clear();
+        webElements.clear();
     }
 
     public int size() {
