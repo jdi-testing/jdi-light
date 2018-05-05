@@ -11,6 +11,7 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.switcher.SwitchActions;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -24,14 +25,14 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.Switch;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitLowerCase;
-import static com.epam.jdi.tools.Switch.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
+import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static java.lang.Character.toUpperCase;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
@@ -43,6 +44,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class ActionProcessor {
     public static String SHORT_TEMPLATE = "{element} {action}";
     public static String DEFAULT_TEMPLATE = "{action} ({element})";
+    public static boolean ERROR_THROWN = false;
 
     private static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? SHORT_TEMPLATE : DEFAULT_TEMPLATE;
@@ -121,8 +123,12 @@ public class ActionProcessor {
 
     @AfterThrowing(pointcut = "jdiPointcut()", throwing = "error")
     public void error(JoinPoint joinPoint, Throwable error) {
-        if (jdiError != null)
-            jdiError.execute(joinPoint, error);
+        if (jdiError != null) {
+            if (!ERROR_THROWN) {
+                ERROR_THROWN = true;
+                jdiError.execute(joinPoint, error);
+            }
+        }
     }
     @Before("stepPointcut()")
     public void beforeStep(JoinPoint joinPoint) {
@@ -176,13 +182,13 @@ public class ActionProcessor {
             MethodSignature method = getMethod(joinPoint);
             String template = methodNameTemplate(method);
             return Switch(template).get(
-                Case(t -> t.contains("{0"), t -> MessageFormat.format(t, joinPoint.getArgs())),
-                Case(t -> t.contains("{"), t -> {
+                    Case(t -> t.contains("{0"), t -> MessageFormat.format(t, joinPoint.getArgs())),
+                    Case(t -> t.contains("{"), t -> {
                     MapArray obj = new MapArray<>("this", getElementName(joinPoint));
                     return getActionName(method, t, obj, methodArgs(joinPoint, method), classFields(joinPoint));
                 }),
-                Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
-                Default(t -> {
+                    Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
+                    Default(t -> {
                     MapArray<String, Object> args = methodArgs(joinPoint, method);
                     if (args.size() == 1 && args.get(0).value.getClass().isArray())
                         return format("%s(%s)", t, arrayToString(args.get(0).value));

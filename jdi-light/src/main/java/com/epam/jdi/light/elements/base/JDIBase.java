@@ -19,15 +19,15 @@ import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.LinqUtils.Switch;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
-import static com.epam.jdi.tools.Switch.Case;
-import static com.epam.jdi.tools.Switch.Default;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
+import static com.epam.jdi.tools.switcher.SwitchActions.Case;
+import static com.epam.jdi.tools.switcher.SwitchActions.Default;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
