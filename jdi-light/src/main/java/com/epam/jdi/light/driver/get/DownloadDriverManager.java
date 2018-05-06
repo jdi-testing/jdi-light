@@ -1,10 +1,14 @@
 package com.epam.jdi.light.driver.get;
 
+import com.epam.jdi.light.settings.WebSettings;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.PLATFORM;
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
+import static com.epam.jdi.light.driver.get.OsTypes.WIN;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  * Created by Roman_Iovlev on 11/28/2017.
@@ -12,14 +16,16 @@ import static com.epam.jdi.light.driver.get.DriverData.PLATFORM;
 public class DownloadDriverManager {
     public static boolean DOWNLOAD_DRIVER = true;
 
-    private static boolean hasVersion() {
-        char c = DRIVER_VERSION.charAt(0);
+    private static boolean hasVersion(String version) {
+        char c = version.charAt(0);
         return (c >= '0' && c <= '9');
     }
 
-    public static void downloadDriver(DriverTypes driverType) {
+    public static void downloadDriver(DriverTypes driverType,
+          Platform platform, String version) {
         WebDriverManager wdm;
         try {
+            String driverName = driverType.toString();
             switch (driverType) {
                 case CHROME:
                     wdm = WebDriverManager.chromedriver(); break;
@@ -36,13 +42,23 @@ public class DownloadDriverManager {
                 default:
                     throw exception("Unknown driver: " + driverType);
             }
-            switch (PLATFORM) {
-                case X32: wdm = wdm.arch32(); break;
-                case X64: wdm = wdm.arch64(); break;
+            if (getOs() == WIN) {
+                switch (platform) {
+                    case X32:
+                        wdm = wdm.arch32();
+                        break;
+                    case X64:
+                        wdm = wdm.arch64();
+                        break;
+                }
+                driverName += " " + platform;
             }
-            if (hasVersion())
-                wdm = wdm.version(DRIVER_VERSION);
+            if (hasVersion(version)) {
+                wdm = wdm.version(version);
+                driverName += " " + version;
+            }
             wdm.setup();
+            logger.info("Download driver: " +  driverName);
         } catch (Exception ex) {
             throw exception("Can't download latest driver for " + driverType
                     + ". Exception " + ex.getMessage());

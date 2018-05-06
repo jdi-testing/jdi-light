@@ -14,8 +14,7 @@ import static com.google.GoogleSite.searchPage;
  * Created by Roman_Iovlev on 3/2/2018.
  */
 public class ElementsGoogleTests extends GoogleInit {
-    //@Test
-    // Blocked by Roskomnadzor
+    @Test
     public void resultsAsList() {
         Assert.assertTrue(homePage.getDriver().getCurrentUrl()
             .contains( "https://www.google."));

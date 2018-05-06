@@ -18,6 +18,7 @@ public class FormsTests extends SimpleTestsInit {
         header.userIcon.click();
         header.loginForm.submit(DEFAULT_USER, "enter");
         homePage.checkOpened();
+        
     }
     @Test
     public void fillContactFormTest() {

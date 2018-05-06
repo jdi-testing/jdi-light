@@ -25,9 +25,7 @@ import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
-import static com.epam.jdi.tools.switcher.SwitchActions.Case;
-import static com.epam.jdi.tools.switcher.SwitchActions.Default;
-import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
+import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -119,7 +117,7 @@ public class JDIBase implements INamed {
     }
 
     private SearchContext getSearchContext(Object element) {
-        if (element == null || !isClass(element.getClass(), JDIBase.class))
+        if (isRoot(element))
             return getDefaultContext();
         JDIBase bElement = (JDIBase) element;
         if (bElement.webElement.hasValue())
@@ -129,12 +127,19 @@ public class JDIBase implements INamed {
         By frame = bElement.getFrame();
         SearchContext searchContext = frame != null
             ? getFrameContext(frame)
-            : parent == null || containsRoot(locator)
-                ? getDefaultContext()
-                : getSearchContext(parent);
+            : getContext(parent, locator);
         return locator != null
             ? searchContext.findElement(correctLocator(locator))
             : searchContext;
+    }
+    private boolean isRoot(Object parent) {
+        return parent == null || isClass(parent.getClass(), WebPage.class)
+                || !isClass(parent.getClass(), JDIBase.class);
+    }
+    private SearchContext getContext(Object parent, By locator) {
+        return isRoot(parent) || containsRoot(locator)
+                ? getDefaultContext()
+                : getSearchContext(parent);
     }
     private SearchContext getFrameContext(By frame) {
         return getDriver().switchTo().frame(getDriver().findElement(frame));

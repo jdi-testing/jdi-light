@@ -7,6 +7,7 @@ package com.epam.jdi.light.driver.get;
 
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.switcher.SwitchActions;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -23,6 +24,7 @@ import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.RegExUtils.matches;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 import static org.openqa.selenium.ie.InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR;
 import static org.openqa.selenium.remote.CapabilityType.ACCEPT_SSL_CERTS;
