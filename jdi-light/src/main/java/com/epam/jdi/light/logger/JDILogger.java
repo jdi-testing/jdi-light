@@ -16,8 +16,8 @@ import org.apache.logging.log4j.MarkerManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.tools.StringUtils.format;
 import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.tools.StringUtils.format;
 import static java.lang.Thread.currentThread;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;

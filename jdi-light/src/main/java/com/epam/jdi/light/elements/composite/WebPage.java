@@ -14,10 +14,11 @@ import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
+import static com.epam.jdi.light.logger.LogLevels.INFO;
+import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
-import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.String.format;
 

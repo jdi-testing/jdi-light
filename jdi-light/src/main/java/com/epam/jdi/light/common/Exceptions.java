@@ -1,6 +1,5 @@
 package com.epam.jdi.light.common;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.String.format;
 
 /**

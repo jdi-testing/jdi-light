@@ -1,7 +1,6 @@
 package io.github.epam.tests;
 
 import io.github.epam.SimpleTestsInit;
-import org.apache.commons.lang3.time.StopWatch;
 import org.testng.annotations.Test;
 
 import static io.github.epam.EpamGithubSite.*;

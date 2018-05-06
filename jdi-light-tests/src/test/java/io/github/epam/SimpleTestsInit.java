@@ -6,8 +6,8 @@ import com.epam.jdi.light.settings.WebSettings;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class SimpleTestsInit {
     @BeforeSuite(alwaysRun = true)

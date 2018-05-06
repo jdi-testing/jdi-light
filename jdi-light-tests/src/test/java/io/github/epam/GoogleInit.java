@@ -4,8 +4,8 @@ import com.epam.jdi.light.elements.init.PageFactory;
 import com.google.GoogleSite;
 import org.testng.annotations.BeforeSuite;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class GoogleInit  {
     @BeforeSuite(alwaysRun = true)
