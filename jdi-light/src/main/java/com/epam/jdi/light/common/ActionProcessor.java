@@ -12,6 +12,7 @@ import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.switcher.SwitchActions;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -32,6 +33,8 @@ import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static java.lang.Character.toUpperCase;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
@@ -42,6 +45,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class ActionProcessor {
     public static String SHORT_TEMPLATE = "{element} {action}";
     public static String DEFAULT_TEMPLATE = "{action} ({element})";
+    public static boolean ERROR_THROWN = false;
 
     private static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? SHORT_TEMPLATE : DEFAULT_TEMPLATE;
@@ -144,8 +148,12 @@ public class ActionProcessor {
 
     @AfterThrowing(pointcut = "jdiPointcut()", throwing = "error")
     public void error(JoinPoint joinPoint, Throwable error) {
-        if (jdiError != null)
-            jdiError.execute(joinPoint, error);
+        if (jdiError != null) {
+            if (!ERROR_THROWN) {
+                ERROR_THROWN = true;
+                jdiError.execute(joinPoint, error);
+            }
+        }
     }
     @Before("stepPointcut()")
     public void beforeStep(JoinPoint joinPoint) {
@@ -202,6 +210,35 @@ public class ActionProcessor {
                 Default(v->"("+methodArgs.toString()+")")
         );
         return format("%s%s", method, stringArgs);
+    }
+    static String getActionName(JoinPoint joinPoint) {
+        try {
+            MethodSignature method = getMethod(joinPoint);
+            String template = methodNameTemplate(method);
+            return Switch(template).get(
+                    Case(t -> t.contains("{0"), t -> MessageFormat.format(t, joinPoint.getArgs())),
+                    Case(t -> t.contains("{"), t -> {
+                    MapArray obj = new MapArray<>("this", getElementName(joinPoint));
+                    return getActionName(method, t, obj, methodArgs(joinPoint, method), classFields(joinPoint));
+                }),
+                    Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
+                    Default(t -> {
+                    MapArray<String, Object> args = methodArgs(joinPoint, method);
+                    if (args.size() == 1 && args.get(0).value.getClass().isArray())
+                        return format("%s(%s)", t, arrayToString(args.get(0).value));
+                    MapArray<String, String> methodArgs = args.toMapArray(Object::toString);
+                    String stringArgs = Switch(methodArgs.size()).get(
+                        Value(0, ""),
+                        Value(1, v->"("+methodArgs.get(0).value+")"),
+                        Default(v->"("+methodArgs.toString()+")")
+                    );
+                    return format("%s%s", t, stringArgs);
+                })
+            );
+        } catch (Exception ex) {
+            throw new RuntimeException("Surround method issue: " +
+                    "Can't get action name: " + ex.getMessage());
+        }
     }
 
     static String arrayToString(Object array) {
@@ -272,54 +309,3 @@ public class ActionProcessor {
         }
     }
 }
-/*    private String processNameTemplate(
-            String template, MapArray<String, Object> params, MapArray<String, Object> fields) {
-        final Matcher matcher = Pattern.compile("\\{([^}]*)}").matcher(template);
-        final StringBuffer sb = new StringBuffer();
-        while (matcher.find()) {
-            final String pattern = matcher.group(1);
-            String replacement = processPattern(pattern, params);
-            if (replacement == null)
-                replacement = processPattern(pattern, fields);
-            if (replacement == null) replacement = matcher.group();
-            matcher.appendReplacement(sb, Matcher.quoteReplacement(replacement));
-        }
-        matcher.appendTail(sb);
-        return sb.toString();
-    }
-    @SuppressWarnings("ReturnCount")
-    private static String processPattern(String pattern, MapArray<String, Object> params) {
-        final String[] parts = pattern.split("\\.");
-        final String parameterName = parts[0];
-        if (!params.keys().contains(parameterName))
-            return null;
-        final Object param = params.get(parameterName);
-        return extractProperties(param, parts, 1);
-    }
-
-    @SuppressWarnings("ReturnCount")
-    private static String extractProperties(final Object object, final String[] parts, final int index) {
-        if (Objects.isNull(object)) {
-            return "null";
-        }
-        if (index < parts.length) {
-            if (object instanceof Object[]) {
-                return Stream.of((Object[]) object)
-                        .map(child -> extractProperties(child, parts, index))
-                        .collect(JOINER);
-            }
-            if (object instanceof Iterable) {
-                final Spliterator<?> iterator = ((Iterable) object).spliterator();
-                return StreamSupport.stream(iterator, false)
-                        .map(child -> extractProperties(child, parts, index))
-                        .collect(JOINER);
-            }
-            final Object child = on(object).get(parts[index]);
-            return extractProperties(child, parts, index + 1);
-        }
-        if (object instanceof Object[]) {
-            return Arrays.toString((Object[]) object);
-        }
-        return String.valueOf(object);
-    }
-*/
