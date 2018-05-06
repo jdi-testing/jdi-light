@@ -36,7 +36,6 @@ import static java.lang.Character.toUpperCase;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 @SuppressWarnings("unused")
 @Aspect
@@ -216,8 +215,27 @@ public class ActionProcessor {
         return result;
     }
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
-        return new MapArray<>(method.getParameterNames(), joinPoint.getArgs());
+        return new MapArray<>(method.getParameterNames(), getArgs(joinPoint.getArgs()));
     }
+    static Object[] getArgs(Object[] args) {
+        Object[] result = new String [args.length];
+        for (int i = 0; i< args.length; i++)
+            result[i] = Switch(args[i]).get(
+                Case(arg -> arg.getClass().isArray(),
+                    arg ->  printList(asList((Object[])arg))),
+                Case(arg -> isInterface(arg.getClass(), List.class),
+                    arg ->  printList((List<?>)arg)),
+                Default(arg -> arg));
+        return result;
+    }
+
+    static String printList(List<?> list) {
+        String result = "";
+        for (int i=0; i<list.size()-1;i++)
+            result += list.get(i)+",";
+        return result + list.get(list.size()-1);
+    }
+
     static MapArray<String, Object> classFields(JoinPoint joinPoint) {
         return new MapArray<>(getThisFields(joinPoint), Field::getName, value -> getValueField(value, joinPoint.getThis()));
     }
@@ -238,7 +256,7 @@ public class ActionProcessor {
             MapArray<String, Object>... args) {
         String result;
         try {
-            if (isEmpty(value)) {
+            if (isBlank(value)) {
                 result = splitLowerCase(method.getMethod().getName());
                 if (args[1].size() == 1)
                     result += " '" + args[1].values().get(0) + "'";
