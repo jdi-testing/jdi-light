@@ -23,8 +23,10 @@ import static com.epam.jdi.tools.LinqUtils.map;
 public class UIList extends JDIBase implements List<WebElement>, ISetValue {
     private CacheValue<List<WebElement>> webElements = new CacheValue<>();
     public void select(String name) {
-        if (getByLocator(getLocator()).contains("%s"))
+        if (getByLocator(getLocator()).contains("%s")) {
             get(name).click();
+            return;
+        }
         for(WebElement el : getAll())
             if (el.getText().equals(name)) {
                 el.click();

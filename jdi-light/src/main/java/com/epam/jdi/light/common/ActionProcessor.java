@@ -6,34 +6,34 @@ package com.epam.jdi.light.common;
  */
 
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.logger.LogLevels;
-import com.epam.jdi.tools.func.*;
-import com.epam.jdi.tools.map.MapArray;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
-import org.aspectj.lang.reflect.MethodSignature;
-import ru.yandex.qatools.allure.annotations.Step;
+        import com.epam.jdi.light.elements.composite.WebPage;
+        import com.epam.jdi.light.logger.LogLevels;
+        import com.epam.jdi.tools.func.*;
+        import com.epam.jdi.tools.map.MapArray;
+        import org.aspectj.lang.JoinPoint;
+        import org.aspectj.lang.annotation.*;
+        import org.aspectj.lang.reflect.MethodSignature;
+        import ru.yandex.qatools.allure.annotations.Step;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.text.MessageFormat;
-import java.util.List;
+        import java.lang.reflect.Field;
+        import java.lang.reflect.Method;
+        import java.text.MessageFormat;
+        import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.msgFormat;
-import static com.epam.jdi.tools.StringUtils.splitLowerCase;
-import static com.epam.jdi.tools.map.MapArray.map;
-import static com.epam.jdi.tools.pairs.Pair.$;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.lang.Character.toUpperCase;
-import static java.lang.String.format;
-import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+        import static com.epam.jdi.light.common.Exceptions.exception;
+        import static com.epam.jdi.light.elements.composite.WebPage.*;
+        import static com.epam.jdi.light.logger.LogLevels.*;
+        import static com.epam.jdi.light.settings.WebSettings.logger;
+        import static com.epam.jdi.tools.ReflectionUtils.*;
+        import static com.epam.jdi.tools.StringUtils.msgFormat;
+        import static com.epam.jdi.tools.StringUtils.splitLowerCase;
+        import static com.epam.jdi.tools.map.MapArray.map;
+        import static com.epam.jdi.tools.pairs.Pair.$;
+        import static com.epam.jdi.tools.switcher.SwitchActions.*;
+        import static java.lang.Character.toUpperCase;
+        import static java.lang.String.format;
+        import static java.util.Arrays.asList;
+        import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @SuppressWarnings("unused")
 @Aspect
@@ -56,14 +56,14 @@ public class ActionProcessor {
             if (isBlank(template))
                 return getDefaultName(method.getName(), methodArgs(joinPoint, method));
             return Switch(template).get(
-                Case(t -> t.contains("{0"), t ->
-                    MessageFormat.format(t, joinPoint.getArgs())),
-                Case(t -> t.contains("{"), t -> getActionNameFromTemplate(method, t,
-                    new MapArray<>("this", getElementName(joinPoint)),
-                    methodArgs(joinPoint, method), classFields(joinPoint))
-                ),
-                Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
-                Default(t -> method.getName())
+                    Case(t -> t.contains("{0"), t ->
+                            MessageFormat.format(t, joinPoint.getArgs())),
+                    Case(t -> t.contains("{"), t -> getActionNameFromTemplate(method, t,
+                            new MapArray<>("this", getElementName(joinPoint)),
+                            methodArgs(joinPoint, method), classFields(joinPoint))
+                    ),
+                    Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
+                    Default(t -> method.getName())
             );
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: " +
@@ -212,9 +212,9 @@ public class ActionProcessor {
             return Switch(template).get(
                     Case(t -> t.contains("{0"), t -> MessageFormat.format(t, joinPoint.getArgs())),
                     Case(t -> t.contains("{"), t -> {
-                    MapArray obj = new MapArray<>("this", getElementName(joinPoint));
-                    return getActionNameFromTemplate(method, t, obj, methodArgs(joinPoint, method), classFields(joinPoint));
-                }),
+                        MapArray obj = new MapArray<>("this", getElementName(joinPoint));
+                        return getActionNameFromTemplate(method, t, obj, methodArgs(joinPoint, method), classFields(joinPoint));
+                    }),
                     Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
                     Default(t -> getDefaultName(t, methodArgs(joinPoint, method)))
             );
@@ -241,11 +241,11 @@ public class ActionProcessor {
         Object[] result = new String [args.length];
         for (int i = 0; i< args.length; i++)
             result[i] = Switch(args[i]).get(
-                Case(arg -> arg.getClass().isArray(),
-                    arg ->  printList(asList((Object[])arg))),
-                Case(arg -> isInterface(arg.getClass(), List.class),
-                    arg ->  printList((List<?>)arg)),
-                Default(arg -> arg));
+                    Case(arg -> arg.getClass().isArray(),
+                            arg ->  printList(asList((Object[])arg))),
+                    Case(arg -> isInterface(arg.getClass(), List.class),
+                            arg ->  printList((List<?>)arg)),
+                    Default(arg -> arg));
         return result;
     }
 
@@ -273,7 +273,7 @@ public class ActionProcessor {
                 : asList(joinPoint.getSignature().getDeclaringType().getFields());
     }
     static String getActionNameFromTemplate(MethodSignature method, String value,
-            MapArray<String, Object>... args) {
+                                            MapArray<String, Object>... args) {
         String result;
         try {
             if (isBlank(value)) {

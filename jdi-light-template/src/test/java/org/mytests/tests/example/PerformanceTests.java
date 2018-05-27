@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import static org.mytests.uiobjects.example.site.JDIExampleSite.*;
 
-public class PerformanceTests extends SimpleTestsInit {
+public class   PerformanceTests extends SimpleTestsInit {
 
     @BeforeMethod
     public void openPerformancePage() {
@@ -29,6 +29,8 @@ public class PerformanceTests extends SimpleTestsInit {
     public void bigDropdownTest() {
         String name = "Charles Byers";
         StopWatch timer = StopWatch.createStarted();
+        performancePage.names.select(name);
+        performancePage.namesDropdown.select(name);
         performancePage.select(name);
         System.out.println("Time: " + timer.getTime());
         Assert.assertEquals(performancePage.isSelected(), name);

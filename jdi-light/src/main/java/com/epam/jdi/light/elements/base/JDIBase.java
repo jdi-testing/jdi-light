@@ -113,7 +113,7 @@ public class JDIBase implements INamed {
         SearchContext searchContext = containsRoot(getLocator(args))
             ? getDefaultContext()
             : getSearchContext(parent);
-        return searchContext.findElements(correctLocator(getLocator()));
+        return searchContext.findElements(correctLocator(getLocator(args)));
     }
 
     private SearchContext getSearchContext(Object element) {

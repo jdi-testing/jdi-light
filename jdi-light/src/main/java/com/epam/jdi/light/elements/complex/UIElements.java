@@ -24,8 +24,8 @@ import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 
 public class UIElements<T extends Section> extends JDIBase implements IList<T> {
 
-    private CacheValue<MapArray<String, T>> elements;
-    private CacheValue<List<T>> values;
+    private CacheValue<MapArray<String, T>> elements = new CacheValue<>();
+    private CacheValue<List<T>> values = new CacheValue<>();
     private Class<T> classType;
     public String titleFieldName = NO_TITLE_FIELD;
     public static final String NO_TITLE_FIELD = "NO TITLE FIELD";

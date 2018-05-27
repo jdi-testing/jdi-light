@@ -19,8 +19,7 @@ public class ElementsGoogleTests extends GoogleInit {
         Assert.assertTrue(homePage.getDriver().getCurrentUrl()
             .contains( "https://www.google."));
         homePage.search("jdi");
-        List<SearchResult> jobs = searchPage.jobsE;
-        for (SearchResult job : jobs)
+        for (SearchResult job : searchPage.jobsE)
             System.out.println(job.print());
     }
 }

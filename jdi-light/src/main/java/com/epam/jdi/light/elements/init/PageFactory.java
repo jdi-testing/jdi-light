@@ -128,7 +128,7 @@ public class PageFactory {
         return Switch(field).get(
             Case(f -> isInterface(f, WebElement.class),
                 f -> new UIElement()),
-            Case(f -> isList(f, WebElement.class) || isClass(f, UIList.class),
+            Case(f -> isClass(f, UIList.class) || isList(f, WebElement.class),
                 f -> new UIList()),
             Case(f -> isList(f, IComposite.class),
                 f -> initJElements(f, sectionName)),
@@ -139,7 +139,7 @@ public class PageFactory {
         );
     }
     private static boolean isList(Field field, Class<?> type) {
-        return field.getType().isAssignableFrom(List.class)
+        return isInterface(field, List.class)
                 && isInterface(getGenericType(field), type);
     }
 
