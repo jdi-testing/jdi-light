@@ -12,6 +12,8 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 
+import static com.epam.jdi.tools.StringUtils.charSequenceToString;
+import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class UIElement extends JDIBase implements WebElement, ISetValue, IHasValue {
@@ -20,12 +22,20 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
     public void click() {
         get().click();
     }
+    public void jsClick() {
+        jsExecute("click()");
+    }
+
     public void submit() {
         get().submit();
     }
     @JDIAction("Input {value}")
     public void sendKeys(CharSequence... value) {
         get().sendKeys(value);
+    }
+    public UIElement setText(String value) {
+        jsExecute("value = '"+value+"'");
+        return this;
     }
     @JDIAction
     public void clear() {
@@ -84,6 +94,40 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
     public String getAttribute(String name) {
         return get().getAttribute(name);
     }
+    public UIElement setAttribute(String name, String value) {
+        jsExecute("setAttribute('"+name+"','"+value+"')");
+        return this;
+    }
+    public UIElement higlight() {
+        jsExecute("style.border='3px dashed red'");
+        return this;
+    }
+    //region Scroll
+    public UIElement show() {
+        jsExecute("scrollIntoView(true)");
+        return this;
+    }
+    private void scroll(int x, int y) {
+        js().executeScript("window.scrollBy("+x+","+y+")");
+    }
+    public UIElement scrollDown(int value) {
+        scroll(0,value);
+        return this;
+    }
+    public UIElement scrollUp(int value) {
+        scroll(0,-value);
+        return this;
+    }
+    public UIElement scrollRight(int value) {
+        scroll(value,0);
+        return this;
+    }
+    public UIElement scrollLeft(int value) {
+        scroll(-value,0);
+        return this;
+    }
+    //endregion
+
     public String getValue() {
         return getText();
     }
@@ -95,6 +139,10 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
     public void setValue(String value) {
         clear();
         sendKeys(value);
+    }
+
+    private void jsExecute(String text) {
+        js().executeScript("arguments[0]."+text+";", get());
     }
 
 }

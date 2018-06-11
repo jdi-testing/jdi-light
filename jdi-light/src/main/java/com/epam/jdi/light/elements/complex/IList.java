@@ -6,7 +6,9 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.tools.func.JFunc2;
+import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -33,36 +35,61 @@ public interface IList<T> extends List<T> {
     @JDIAction(level = DEBUG)
     List<T> values();
     default T last() {
-        return getMap().last().value;
+        return values().get(size()-1);
     }
     default T first() {
-        return getMap().first().value;
+        return values().get(0);
     }
-    default List<T> where(JFunc2<String, T, Boolean> func) {
-        return getMap().filter(func).values();
+    default List<T> where(JFunc1<T, Boolean> func) {
+        return LinqUtils.where(values(),func);
     }
-    default List<T> filter(JFunc2<String, T, Boolean> func) {
+    default List<T> filter(JFunc1<T, Boolean> func) {
         return where(func);
     }
-    default <R> List<R> select(JFunc2<String, T, R> func) {
-        return getMap().select(func);
+    default <R> List<R> select(JFunc1<T, R> func) {
+        return LinqUtils.select(values(), func);
     }
-    default <R> List<R> map(JFunc2<String, T, R> func) {
+    default <R> List<R> map(JFunc1< T, R> func) {
         return select(func);
     }
-    default T first(JFunc2<String, T, Boolean> func) {
-        return getMap().first(func);
+    default T first(JFunc1<T, Boolean> func) {
+        return LinqUtils.first(values(), func);
     }
-    default T last(JFunc2<String, T, Boolean> func) {
-        return getMap().last(func);
+    default T last(JFunc1<T, Boolean> func) {
+        return LinqUtils.last(values(), func);
     }
+    default void ifDo(JFunc1<T, Boolean> condition, JAction1<T> action) {
+        LinqUtils.ifDo(values(), condition, action);
+    }
+    default <R> List<R> ifSelect(JFunc1<T, Boolean> condition, JFunc1<T, R> transform) {
+        return LinqUtils.ifSelect(values(), condition, transform);
+    }
+    default void foreach(JAction1<T> action) {
+        LinqUtils.foreach(values(), action);
+    }
+    default boolean any(JFunc1<T, Boolean> func) {
+        return LinqUtils.any(values(), func);
+    }
+    default boolean all(JFunc1<T, Boolean> func) {
+        return LinqUtils.all(values(), func);
+    }
+    default List<T> listCopy(int from) {
+        return listCopy(from, values().size() - 1);
+    }
+    default List<T> listCopy(int from, int to) {
+        return LinqUtils.listCopy(values(), from, to);
+    }
+    default <R> List<R> selectMany(JFunc1<T, List<R>> func) {
+        return LinqUtils.selectMany(values(), func);
+    }
+
     @Override
     default int size() {
-        return getMap().size();
+        return values().size();
     }
     @JDIAction(level = DEBUG)
     default boolean isEmpty() {
-        return getMap().isEmpty();
+        return values().isEmpty();
     }
     @JDIAction(level = DEBUG)
     default boolean any() { return !isEmpty(); }

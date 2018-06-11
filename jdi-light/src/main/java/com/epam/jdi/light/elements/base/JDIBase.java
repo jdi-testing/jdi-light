@@ -6,10 +6,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.By;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.List;
 
@@ -145,6 +142,7 @@ public class JDIBase implements INamed {
         return getDriver().switchTo().frame(getDriver().findElement(frame));
     }
     public WebDriver getDriver() { return WebDriverFactory.getDriver(driverName); }
+    public JavascriptExecutor js() { return (JavascriptExecutor)getDriver(); }
     private SearchContext getDefaultContext() {
         return getDriver().switchTo().defaultContent();
     }
