@@ -12,7 +12,6 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 public class SimpleTestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        WebSettings.init();
         logger.setLogLevel(STEP);
         PageFactory.initElements(EpamGithubSite.class);
         EpamGithubSite.homePage.open();

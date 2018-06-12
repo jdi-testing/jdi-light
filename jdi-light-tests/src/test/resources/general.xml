@@ -3,7 +3,7 @@
 <suite name="Test suite" parallel="methods" thread-count="1">
     <test name="Tests" preserve-order="true">
         <classes>
-            <class name="io.github.epam.tests.FormsTests"/>
+            <class name="io.github.epam.tests.epam.FormsTests"/>
         </classes>
     </test>
 </suite>

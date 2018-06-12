@@ -1,4 +1,4 @@
-package io.github.epam.tests;
+package io.github.epam.tests.epam;
 
 import io.github.epam.SimpleTestsInit;
 import org.testng.annotations.Test;
@@ -17,7 +17,6 @@ public class FormsTests extends SimpleTestsInit {
         header.userIcon.click();
         header.loginForm.submit(DEFAULT_USER, "enter");
         homePage.checkOpened();
-        
     }
     @Test
     public void fillContactFormTest() {

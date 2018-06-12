@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.composite;
 import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.elements.base.DriverBased;
 import com.epam.jdi.light.elements.interfaces.IComposite;
 import com.epam.jdi.tools.CacheValue;
 import org.openqa.selenium.Cookie;
@@ -13,7 +14,9 @@ import java.util.function.Supplier;
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.getJSExecutor;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
+import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -27,7 +30,7 @@ import static java.lang.String.format;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class WebPage implements IComposite {
+public class WebPage extends DriverBased implements IComposite {
     public static boolean CHECK_AFTER_OPEN = false;
     public String url;
     public String title;
@@ -44,7 +47,6 @@ public class WebPage implements IComposite {
         CacheValue.reset();
     }
     public String driverName;
-    public WebDriver getDriver() { return WebDriverFactory.getDriver(driverName); }
     private String name;
     private String varName;
 
@@ -153,17 +155,17 @@ public class WebPage implements IComposite {
      * Reload current page
      */
     @JDIAction("Reload current page")
-    public void refresh() {
-        getDriver().navigate().refresh();
+    public static void refresh() {
+        WebDriverFactory.getDriver().navigate().refresh();
     }
-    public void reload() { refresh(); }
+    public static void reload() { refresh(); }
 
     /**
      * Go back to previous page
      */
     @JDIAction("Go back to previous page")
-    public void back() {
-        getDriver().navigate().back();
+    public static void back() {
+        WebDriverFactory.getDriver().navigate().back();
     }
 
 
@@ -171,8 +173,8 @@ public class WebPage implements IComposite {
      * Go forward to next page
      */
     @JDIAction("Go forward to next page")
-    public void forward() {
-        getDriver().navigate().forward();
+    public static void forward() {
+        WebDriverFactory.getDriver().navigate().forward();
     }
 
     /**
@@ -180,16 +182,26 @@ public class WebPage implements IComposite {
      *               Add cookie in browser
      */
     @JDIAction
-    public void addCookie(Cookie cookie) {
-        getDriver().manage().addCookie(cookie);
+    public static void addCookie(Cookie cookie) {
+        WebDriverFactory.getDriver().manage().addCookie(cookie);
     }
 
     /**
      * Clear browsers cache
      */
     @JDIAction("Delete all cookies")
-    public void clearCache() {
-        getDriver().manage().deleteAllCookies();
+    public static void clearCache() {
+        WebDriverFactory.getDriver().manage().deleteAllCookies();
+    }
+
+    @JDIAction
+    public static void zoom(double factor) {
+        jsExecute("document.body.style.transform = 'scale(' + arguments[0] + ')';" +
+                        "document.body.style.transformOrigin = '0 0';", factor);
+    }
+    @JDIAction
+    public static String getHtml() {
+        return WebDriverFactory.getDriver().getPageSource();
     }
 
     @Override

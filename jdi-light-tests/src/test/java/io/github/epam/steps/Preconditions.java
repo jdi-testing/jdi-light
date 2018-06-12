@@ -21,6 +21,7 @@ public class Preconditions {
     }
     @Step
     public static void shouldBeLoggedOut() {
+        System.out.println("THREAD ID" + Thread.currentThread().getId());
         if (header.piterChailovskii.isDisplayed())
             logout();
     }

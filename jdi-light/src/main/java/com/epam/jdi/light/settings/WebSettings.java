@@ -5,12 +5,14 @@ package com.epam.jdi.light.settings;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.light.logger.JDILogger;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,22 +41,25 @@ public class WebSettings {
     public static String TEST_PROPERTIES_PATH = "test.properties";
 
     public static synchronized void init() {
-        getProperties(TEST_PROPERTIES_PATH);
-        fillAction(p -> TIMEOUT = parseInt(p), "timeout.wait.element");
-        fillAction(p -> DOMAIN = p, "domain");
-        fillAction(p -> DRIVER_VERSION = p, "drivers.version");
-        fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
-        fillAction(p -> SCREEN_PATH = p, "screens.folder");
-        fillAction(p -> DRIVER_VERSION =
-            p.toLowerCase().equals("true") || p.toLowerCase().equals("1")
-                ? "LATEST" : "", "drivers.getLatest");
-        // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
-        fillAction(p -> KILL_BROWSER = p, "browser.kill");
-        fillAction(p -> setSearchStrategy(p), "element.search.strategy" );
-        fillAction(p -> BROWSER_SIZE = p, "browser.size");
-        fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
-        fillAction(p -> CHECK_AFTER_OPEN = parseBoolean(p), "page.check.after.open");
-        initialized = true;
+        if (!initialized) {
+            getProperties(TEST_PROPERTIES_PATH);
+            fillAction(p -> TIMEOUT = parseInt(p), "timeout.wait.element");
+            fillAction(p -> DOMAIN = p, "domain");
+            fillAction(p -> DRIVER_VERSION = p, "drivers.version");
+            fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
+            fillAction(p -> SCREEN_PATH = p, "screens.folder");
+            fillAction(p -> DRIVER_VERSION =
+                    p.toLowerCase().equals("true") || p.toLowerCase().equals("1")
+                            ? "LATEST" : "", "drivers.getLatest");
+            // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
+            fillAction(p -> KILL_BROWSER = p, "browser.kill");
+            fillAction(p -> setSearchStrategy(p), "element.search.strategy");
+            fillAction(p -> BROWSER_SIZE = p, "browser.size");
+            fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
+            fillAction(p -> CHECK_AFTER_OPEN = parseBoolean(p), "page.check.after.open");
+            WebDriverFactory.INIT_THREAD_ID = Thread.currentThread().getId();
+            initialized = true;
+        }
     }
     private static void setSearchStrategy(String p) {
         p = p.toLowerCase();
@@ -82,13 +87,5 @@ public class WebSettings {
             case "eager": return EAGER;
         }
         return NORMAL;
-    }
-    public static void initDriver() {
-        if (!initialized)
-            try {
-                init();
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
     }
 }

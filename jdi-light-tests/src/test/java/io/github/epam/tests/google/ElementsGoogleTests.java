@@ -1,4 +1,4 @@
-package io.github.epam.tests;
+package io.github.epam.tests.google;
 
 import com.google.custom.SearchResult;
 import io.github.epam.GoogleInit;

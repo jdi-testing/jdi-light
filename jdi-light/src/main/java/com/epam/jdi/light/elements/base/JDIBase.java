@@ -31,7 +31,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class JDIBase implements INamed {
+public class JDIBase extends DriverBased implements INamed {
     public String name;
     public String varName;
     public String typeName;
@@ -39,7 +39,6 @@ public class JDIBase implements INamed {
     protected By byLocator;
     private CacheValue<WebElement> webElement = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
-    public String driverName = "";
     public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
     public void setName(String varName, String className) {
         this.name = splitCamelCase(varName);
@@ -141,8 +140,6 @@ public class JDIBase implements INamed {
     private SearchContext getFrameContext(By frame) {
         return getDriver().switchTo().frame(getDriver().findElement(frame));
     }
-    public WebDriver getDriver() { return WebDriverFactory.getDriver(driverName); }
-    public JavascriptExecutor js() { return (JavascriptExecutor)getDriver(); }
     private SearchContext getDefaultContext() {
         return getDriver().switchTo().defaultContent();
     }
@@ -189,5 +186,8 @@ public class JDIBase implements INamed {
                 l -> msgFormat(PRINT_ELEMENT_INFO, this)),
             Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, this))
         );
+    }
+    public void jsExecute(String text) {
+        js().executeScript("arguments[0]."+text+";", get());
     }
 }

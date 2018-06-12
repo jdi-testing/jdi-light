@@ -12,8 +12,6 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.StringUtils.charSequenceToString;
-import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class UIElement extends JDIBase implements WebElement, ISetValue, IHasValue {
@@ -139,10 +137,6 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
     public void setValue(String value) {
         clear();
         sendKeys(value);
-    }
-
-    private void jsExecute(String text) {
-        js().executeScript("arguments[0]."+text+";", get());
     }
 
 }

@@ -108,6 +108,9 @@ public class WebDriverFactory {
         return driverName;
     }
 
+    public static void jsExecute(String script, Object... args) {
+        ((JavascriptExecutor)getDriver()).executeScript(script, args);
+    }
     public static WebDriver getDriver() {
         try {
             if (!DRIVER_NAME.equals(""))
@@ -118,8 +121,15 @@ public class WebDriverFactory {
             throw exception("Can't get WebDriver. " + LINE_BREAK + ex.getMessage());
         }
     }
+    public static long INIT_THREAD_ID = -1;
+    public static boolean SWITCH_THREAD = false;
 
     public static WebDriver getDriver(String driverName) {
+        /* TODO
+        if (SWITCH_THREAD && INIT_THREAD_ID != Thread.currentThread().getId())
+            runDrivers.get().ge
+        if (INIT_THREAD_ID == Thread.currentThread().getId())
+            SWITCH_THREAD = true; */
         if (!drivers.keys().contains(driverName))
             if (drivers.count() == 0)
                 useDriver(driverName);

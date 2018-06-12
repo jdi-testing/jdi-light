@@ -12,6 +12,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.WithText;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -45,6 +46,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class PageFactory {
 
     public static void initSite(Class<?> site) {
+        WebSettings.init();
         Field[] pages = site.getDeclaredFields();
         for (Field pageField : pages) {
             try {

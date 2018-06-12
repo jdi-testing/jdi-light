@@ -1,4 +1,4 @@
-package io.github.epam.tests;
+package io.github.epam.tests.epam;
 
 import io.github.epam.SimpleTestsInit;
 import org.testng.annotations.BeforeMethod;
