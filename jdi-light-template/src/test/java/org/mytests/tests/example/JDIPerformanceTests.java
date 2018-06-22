@@ -43,7 +43,7 @@ public class JDIPerformanceTests extends SimpleTestsInit {
                 "Has eirmod consequat ad. Sea illud clita ut, has quando accusata cotidieque an, volutpat iudicabit definitionem ut sea. Pri at atqui molestiae, nibh ullum consulatu vix at. Nec id nisl nonumes epicurei, et vitae possit probatus ius. Fierent delicata argumentum ut quo. Tation tincidunt sed eu, sit in nostrud democritum.\\n\\n" +
                 "Usu esse utroque sapientem ad. Eam ut consul soleat sapientem, cu dolor consequuntur vis. Erat temporibus mea id, has ex dicam tritani. Pertinacia expetendis consectetuer eos ei, vidit malis periculis est ea, ne nam movet fuisset. Pro id habemus definitiones, in ferri solum reprehendunt mei. Vel eligendi honestatis liberavisse id.";
         StopWatch timer = StopWatch.createStarted();
-        jdiPerformancePage.textfield.sendKeys(text + "\\n"+ text);
+        jdiPerformancePage.textfield.setText(text + "\\n"+ text);
         System.out.println("Time: " + timer.getTime());
     }
 }
