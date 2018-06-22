@@ -12,7 +12,7 @@ import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class SimpleTestsInit {
-    @BeforeClass(alwaysRun = true)
+    @BeforeSuit(alwaysRun = true)
     public static void setUp() {
         logger.setLogLevel(STEP);
         initElements(JDIExampleSite.class);
@@ -24,7 +24,7 @@ public class SimpleTestsInit {
         ERROR_THROWN = false;
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterSuit(alwaysRun = true)
     public void teardown() {
         WebDriverFactory.close();
     }
