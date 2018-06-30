@@ -6,10 +6,10 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.interfaces.IHasValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -20,7 +20,7 @@ import java.util.ListIterator;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
-public interface IList<T> extends List<T> {
+public interface IList<T> extends List<T>, IHasValue {
     /**
      *  Get all application elements
      */
@@ -29,83 +29,83 @@ public interface IList<T> extends List<T> {
 
     /**
      *  Get all application elements
-     */
+
     @JDIAction(level = DEBUG)
-    MapArray<String, T> getMap();
+    MapArray<String, T> getMap();*/
     @JDIAction(level = DEBUG)
-    List<T> values();
+    List<T> elements();
     default T last() {
-        return values().get(size()-1);
+        return elements().get(size()-1);
     }
     default T first() {
-        return values().get(0);
+        return elements().get(0);
     }
-    default List<T> where(JFunc1<T, Boolean> func) {
-        return LinqUtils.where(values(),func);
+    default List<T> where(JFunc1<T, Boolean> condition) {
+        return LinqUtils.where(elements(),condition);
     }
-    default List<T> filter(JFunc1<T, Boolean> func) {
-        return where(func);
+    default List<T> filter(JFunc1<T, Boolean> condition) {
+        return where(condition);
     }
-    default <R> List<R> select(JFunc1<T, R> func) {
-        return LinqUtils.select(values(), func);
+    default <R> List<R> select(JFunc1<T, R> transform) {
+        return LinqUtils.select(elements(), transform);
     }
-    default <R> List<R> map(JFunc1< T, R> func) {
-        return select(func);
+    default <R> List<R> map(JFunc1<T, R> transform) {
+        return select(transform);
     }
-    default T first(JFunc1<T, Boolean> func) {
-        return LinqUtils.first(values(), func);
+    default T first(JFunc1<T, Boolean> condition) {
+        return LinqUtils.first(elements(), condition);
     }
-    default T last(JFunc1<T, Boolean> func) {
-        return LinqUtils.last(values(), func);
+    default T last(JFunc1<T, Boolean> condition) {
+        return LinqUtils.last(elements(), condition);
     }
     default void ifDo(JFunc1<T, Boolean> condition, JAction1<T> action) {
-        LinqUtils.ifDo(values(), condition, action);
+        LinqUtils.ifDo(elements(), condition, action);
     }
     default <R> List<R> ifSelect(JFunc1<T, Boolean> condition, JFunc1<T, R> transform) {
-        return LinqUtils.ifSelect(values(), condition, transform);
+        return LinqUtils.ifSelect(elements(), condition, transform);
     }
     default void foreach(JAction1<T> action) {
-        LinqUtils.foreach(values(), action);
+        LinqUtils.foreach(elements(), action);
     }
-    default boolean any(JFunc1<T, Boolean> func) {
-        return LinqUtils.any(values(), func);
+    default boolean any(JFunc1<T, Boolean> condition) {
+        return LinqUtils.any(elements(), condition);
     }
-    default boolean all(JFunc1<T, Boolean> func) {
-        return LinqUtils.all(values(), func);
+    default boolean all(JFunc1<T, Boolean> condition) {
+        return LinqUtils.all(elements(), condition);
     }
     default List<T> listCopy(int from) {
-        return listCopy(from, values().size() - 1);
+        return listCopy(from, elements().size() - 1);
     }
     default List<T> listCopy(int from, int to) {
-        return LinqUtils.listCopy(values(), from, to);
+        return LinqUtils.listCopy(elements(), from, to);
     }
     default <R> List<R> selectMany(JFunc1<T, List<R>> func) {
-        return LinqUtils.selectMany(values(), func);
+        return LinqUtils.selectMany(elements(), func);
     }
 
     @Override
     default int size() {
-        return values().size();
+        return elements().size();
     }
     @JDIAction(level = DEBUG)
     default boolean isEmpty() {
-        return values().isEmpty();
+        return elements().isEmpty();
     }
     @JDIAction(level = DEBUG)
     default boolean any() { return !isEmpty(); }
 
     // List methods
     default boolean contains(Object o) {
-        return values().contains(o);
+        return elements().contains(o);
     }
     default Iterator<T> iterator() {
-        return values().iterator();
+        return elements().iterator();
     }
     default Object[] toArray() {
-        return values().toArray();
+        return elements().toArray();
     }
     default <T1> T1[] toArray(T1[] a) {
-        return values().toArray(a);
+        return elements().toArray(a);
     }
     default boolean add(T t) {
         throw new NotImplementedException();
@@ -114,7 +114,7 @@ public interface IList<T> extends List<T> {
         throw new NotImplementedException();
     }
     default boolean containsAll(Collection<?> c) {
-        return values().containsAll(c);
+        return elements().containsAll(c);
     }
     default boolean addAll(Collection<? extends T> c) {
         throw new NotImplementedException();
@@ -130,7 +130,7 @@ public interface IList<T> extends List<T> {
     }
     default void clear() { throw new NotImplementedException(); }
     default T get(int index) {
-        return values().get(index);
+        return elements().get(index);
     }
     default T set(int index, T element) {
         throw new NotImplementedException();
@@ -142,18 +142,18 @@ public interface IList<T> extends List<T> {
         throw new NotImplementedException();
     }
     default int indexOf(Object o) {
-        return values().indexOf(o);
+        return elements().indexOf(o);
     }
     default int lastIndexOf(Object o) {
-        return values().lastIndexOf(o);
+        return elements().lastIndexOf(o);
     }
     default ListIterator<T> listIterator() {
-        return values().listIterator();
+        return elements().listIterator();
     }
     default ListIterator<T> listIterator(int index) {
-        return values().listIterator(index);
+        return elements().listIterator(index);
     }
     default List<T> subList(int fromIndex, int toIndex) {
-        return values().subList(fromIndex, toIndex);
+        return elements().subList(fromIndex, toIndex);
     }
 }

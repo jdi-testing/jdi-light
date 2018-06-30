@@ -47,7 +47,7 @@ public class UIElements<T extends Section> extends JDIBase implements IList<T> {
         elements.clear();
         values.clear();
     }
-    public List<T> values() {
+    public List<T> elements() {
         if (values.hasValue())
             return values.get();
         if (elements.hasValue())
@@ -65,10 +65,6 @@ public class UIElements<T extends Section> extends JDIBase implements IList<T> {
             : new MapArray<>(els,
                 this::elementTitle,
                 this::initElement));
-    }
-    @Override
-    public boolean isEmpty() {
-        return this.getMap().size() == 0;
     }
 
     private String elementTitle(WebElement el) {
@@ -119,7 +115,7 @@ public class UIElements<T extends Section> extends JDIBase implements IList<T> {
     }
 
     public String getValue() {
-        return null;
+        return getMap().toString();
     }
 
 }

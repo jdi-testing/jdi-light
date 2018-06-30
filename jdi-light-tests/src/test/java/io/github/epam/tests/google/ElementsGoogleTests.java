@@ -1,5 +1,6 @@
 package io.github.epam.tests.google;
 
+import com.epam.jdi.tools.map.MapArray;
 import com.google.custom.SearchResult;
 import io.github.epam.GoogleInit;
 import org.testng.Assert;
@@ -7,6 +8,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.tools.map.MapArray.map;
+import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.google.GoogleSite.homePage;
 import static com.google.GoogleSite.searchPage;
 

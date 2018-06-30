@@ -8,7 +8,11 @@ package com.epam.jdi.light.elements.base;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.IHasValue;
 import com.epam.jdi.light.elements.interfaces.ISetValue;
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -20,8 +24,10 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
     public void click() {
         get().click();
     }
-    public void jsClick() {
+    @JDIAction
+    public UIElement jsClick() {
         jsExecute("click()");
+        return this;
     }
 
     public void submit() {
@@ -31,6 +37,7 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
     public void sendKeys(CharSequence... value) {
         get().sendKeys(value);
     }
+    @JDIAction
     public UIElement setText(String value) {
         jsExecute("value = '"+value+"'");
         return this;
@@ -96,11 +103,16 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
         jsExecute("setAttribute('"+name+"','"+value+"')");
         return this;
     }
-    public UIElement higlight() {
-        jsExecute("style.border='3px dashed red'");
+    @JDIAction
+    public UIElement higlight(String color) {
+        jsExecute("style.border='3px dashed "+color+"'");
         return this;
     }
+    public UIElement higlight() { show();
+        return higlight("red");
+    }
     //region Scroll
+    @JDIAction
     public UIElement show() {
         jsExecute("scrollIntoView(true)");
         return this;
@@ -108,18 +120,23 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
     private void scroll(int x, int y) {
         js().executeScript("window.scrollBy("+x+","+y+")");
     }
+
+    @JDIAction
     public UIElement scrollDown(int value) {
         scroll(0,value);
         return this;
     }
+    @JDIAction
     public UIElement scrollUp(int value) {
         scroll(0,-value);
         return this;
     }
+    @JDIAction
     public UIElement scrollRight(int value) {
         scroll(value,0);
         return this;
     }
+    @JDIAction
     public UIElement scrollLeft(int value) {
         scroll(-value,0);
         return this;
@@ -129,14 +146,46 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
     public String getValue() {
         return getText();
     }
+
     @JDIAction
-    public void select(String name) {
+    public UIElement select(String name) {
         get(name).click();
+        return this;
     }
 
     public void setValue(String value) {
         clear();
         sendKeys(value);
     }
+    public Select select() {
+        return new Select(get());
+    }
+
+    //region Actions
+    @JDIAction
+    public UIElement dragAndDropTo(WebElement to) {
+        doActions(a -> a.clickAndHold(get()).moveToElement(to).release(to));
+        return this;
+    }
+    @JDIAction
+    public UIElement doubleClick() {
+        doActions(Actions::doubleClick);
+        return this;
+    }
+    @JDIAction
+    public UIElement rightClick() {
+        doActions(Actions::contextClick);
+        return this;
+    }
+    @JDIAction
+    public UIElement dragAndDropTo(int x, int y) {
+        doActions(a -> a.dragAndDropBy(get(), x, y));
+        return this;
+    }
+    public UIElement doActions(JFunc1<Actions, Actions> actions) {
+        actions.execute(new Actions(getDriver())).build().perform();
+        return this;
+    }
+    //endregion
 
 }

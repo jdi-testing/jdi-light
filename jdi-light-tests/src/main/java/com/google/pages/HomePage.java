@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class HomePage extends WebPage {
     @Css("[name=q]") public WebElement search;
+
     public void search(String text) {
         search.sendKeys(text + Keys.ENTER);
     }

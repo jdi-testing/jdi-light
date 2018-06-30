@@ -6,8 +6,10 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.ISetValue;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.LinqUtils;
 import org.openqa.selenium.WebElement;
 
 import java.util.Collection;
@@ -19,8 +21,9 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.PrintUtils.print;
 
-public class UIList extends JDIBase implements List<WebElement>, ISetValue {
+public class UIList extends JDIBase implements IList<WebElement>, ISetValue {
     private CacheValue<List<WebElement>> webElements = new CacheValue<>();
     public void select(String name) {
         if (getByLocator(getLocator()).contains("%s")) {
@@ -43,64 +46,12 @@ public class UIList extends JDIBase implements List<WebElement>, ISetValue {
     public void select(int index) {
         get(index).click();
     }
+    public List<WebElement> elements() { return getAll(); }
     public List<String> values() {
-        return map(getAll(), WebElement::getText);
+        return LinqUtils.map(getAll(), WebElement::getText);
     }
     public void refresh() {
         webElements.clear();
-    }
-
-    public int size() {
-        return getAll().size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return getAll().size() == 0;
-    }
-
-    public boolean contains(Object o) {
-        return getAll().contains(o);
-    }
-
-    public Iterator<WebElement> iterator() {
-        return getAll().iterator();
-    }
-
-    public Object[] toArray() {
-        return getAll().toArray();
-    }
-
-    public <T> T[] toArray(T[] a) {
-        return getAll().toArray(a);
-    }
-
-    public boolean add(WebElement element) {
-        throw exception("List<WebElement> readonly");
-    }
-
-    public boolean remove(Object o) {
-        throw exception("List<WebElement> readonly");
-    }
-
-    public boolean containsAll(Collection<?> c) {
-        return getAll().containsAll(c);
-    }
-
-    public boolean addAll(Collection<? extends WebElement> c) {
-        throw exception("List<WebElement> readonly");
-    }
-
-    public boolean addAll(int index, Collection<? extends WebElement> c) {
-        throw exception("List<WebElement> readonly");
-    }
-
-    public boolean removeAll(Collection<?> c) {
-        throw exception("List<WebElement> readonly");
-    }
-
-    public boolean retainAll(Collection<?> c) {
-        throw exception("List<WebElement> readonly");
     }
 
     public void clear() {
@@ -113,44 +64,12 @@ public class UIList extends JDIBase implements List<WebElement>, ISetValue {
         return webElements.get().get(index);
     }
 
-    public WebElement set(int index, WebElement element) {
-        throw exception("List<WebElement> readonly");
-    }
-
-    public void add(int index, WebElement element) {
-        throw exception("List<WebElement> readonly");
-    }
-
-    public WebElement remove(int index) {
-        throw exception("List<WebElement> readonly");
-    }
-
-    public int indexOf(Object o) {
-        throw exception("List<WebElement> readonly");
-    }
-
-    public int lastIndexOf(Object o) {
-        throw exception("List<WebElement> readonly");
-    }
-
-    public ListIterator<WebElement> listIterator() {
-        return getAll().listIterator();
-    }
-
-    public ListIterator<WebElement> listIterator(int index) {
-        return getAll().listIterator(index);
-    }
-
-    public List<WebElement> subList(int fromIndex, int toIndex) {
-        return getAll().subList(fromIndex, toIndex);
-    }
-
     public void setValue(String value) {
         select(value);
     }
 
     public String getValue() {
-        return null;
+        return print(values());
     }
     public boolean isDisplayed() {
         return getWebElements().get(0).isDisplayed();
