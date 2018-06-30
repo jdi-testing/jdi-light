@@ -26,12 +26,15 @@ import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
 import static java.lang.System.setProperty;
 import static java.lang.Thread.currentThread;
+import static java.util.Objects.nonNull;
 
 public class WebDriverFactory {
     public static MapArray<String, JFunc<WebDriver>> drivers = new MapArray<>();
     private static ThreadLocal<MapArray<String, WebDriver>> runDrivers = new ThreadLocal<>();
 
-    private WebDriverFactory() { }
+    private WebDriverFactory() {
+    }
+
     public static boolean hasRunDrivers() {
         return runDrivers.get() != null && runDrivers.get().any();
     }
@@ -44,6 +47,7 @@ public class WebDriverFactory {
     public static String useDriver(String driverName) {
         return useDriver(getByName(driverName));
     }
+
     public static String useDriver(DriverTypes driverType) {
         return useDriver(driverType, () -> initDriver(driverType));
     }
@@ -89,6 +93,7 @@ public class WebDriverFactory {
         }
         return DRIVER_SETTINGS.execute(driver);
     }
+
     // GET DRIVER
     public static String useDriver(DriverTypes driverType, JFunc<WebDriver> driver) {
         String driverName = driverType.name;
@@ -109,8 +114,9 @@ public class WebDriverFactory {
     }
 
     public static void jsExecute(String script, Object... args) {
-        ((JavascriptExecutor)getDriver()).executeScript(script, args);
+        ((JavascriptExecutor) getDriver()).executeScript(script, args);
     }
+
     public static WebDriver getDriver() {
         try {
             if (!DRIVER_NAME.equals(""))
@@ -121,6 +127,7 @@ public class WebDriverFactory {
             throw exception("Can't get WebDriver. " + LINE_BREAK + ex.getMessage());
         }
     }
+
     public static long INIT_THREAD_ID = -1;
     public static boolean SWITCH_THREAD = false;
 
@@ -160,12 +167,14 @@ public class WebDriverFactory {
                     "Exception: " + ex.getMessage());
         }
     }
+
     public static JavascriptExecutor getJSExecutor() {
         if (getDriver() instanceof JavascriptExecutor)
             return (JavascriptExecutor) getDriver();
         else
             throw new ClassCastException("JavaScript Executor doesn't support");
     }
+
     public static void reopenDriver() {
         reopenDriver(DRIVER_NAME);
     }
@@ -187,10 +196,15 @@ public class WebDriverFactory {
         else
             throw exception("Can't switch to Webdriver '%s'. This Driver name not registered", driverName);
     }
+
     public static void close() {
-        for (Pair<String, WebDriver> driver : runDrivers.get())
-            driver.value.quit();
-        runDrivers.get().clear();
+        if (nonNull(runDrivers.get())) {
+            for (Pair<String, WebDriver> pair : runDrivers.get())
+                pair.value.quit();
+            runDrivers.get().clear();
+        } else {
+            throw exception("None Driver has been found for current thread. Probably Fixture configuration is wrong.");
+        }
     }
 
     public static void quit() {
