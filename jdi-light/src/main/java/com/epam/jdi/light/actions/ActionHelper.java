@@ -1,43 +1,48 @@
-package com.epam.jdi.light.common;
+package com.epam.jdi.light.actions;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
-        import com.epam.jdi.light.elements.composite.WebPage;
-        import com.epam.jdi.light.logger.LogLevels;
-        import com.epam.jdi.tools.func.*;
-        import com.epam.jdi.tools.map.MapArray;
-        import org.aspectj.lang.JoinPoint;
-        import org.aspectj.lang.annotation.*;
-        import org.aspectj.lang.reflect.MethodSignature;
-        import ru.yandex.qatools.allure.annotations.Step;
+import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.logger.LogLevels;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JAction2;
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.map.MapArray;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
+import ru.yandex.qatools.allure.annotations.Step;
 
-        import java.lang.reflect.Field;
-        import java.lang.reflect.Method;
-        import java.text.MessageFormat;
-        import java.util.List;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.text.MessageFormat;
+import java.util.List;
 
-        import static com.epam.jdi.light.common.Exceptions.exception;
-        import static com.epam.jdi.light.elements.composite.WebPage.*;
-        import static com.epam.jdi.light.logger.LogLevels.*;
-        import static com.epam.jdi.light.settings.WebSettings.logger;
-        import static com.epam.jdi.tools.ReflectionUtils.*;
-        import static com.epam.jdi.tools.StringUtils.msgFormat;
-        import static com.epam.jdi.tools.StringUtils.splitLowerCase;
-        import static com.epam.jdi.tools.map.MapArray.map;
-        import static com.epam.jdi.tools.pairs.Pair.$;
-        import static com.epam.jdi.tools.switcher.SwitchActions.*;
-        import static java.lang.Character.toUpperCase;
-        import static java.lang.String.format;
-        import static java.util.Arrays.asList;
-        import static org.apache.commons.lang3.StringUtils.isBlank;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.StringUtils.msgFormat;
+import static com.epam.jdi.tools.StringUtils.splitLowerCase;
+import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
+import static com.epam.jdi.tools.map.MapArray.map;
+import static com.epam.jdi.tools.pairs.Pair.$;
+import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static java.lang.Character.toUpperCase;
+import static java.lang.String.format;
+import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @SuppressWarnings("unused")
 @Aspect
-public class ActionProcessor {
+public class ActionHelper {
     public static String SHORT_TEMPLATE = "{element} {action}";
     public static String DEFAULT_TEMPLATE = "{action} ({element})";
 
@@ -57,10 +62,10 @@ public class ActionProcessor {
                 return getDefaultName(method.getName(), methodArgs(joinPoint, method));
             return Switch(template).get(
                     Case(t -> t.contains("{0"), t ->
-                            MessageFormat.format(t, joinPoint.getArgs())),
+                        MessageFormat.format(t, joinPoint.getArgs())),
                     Case(t -> t.contains("{"), t -> getActionNameFromTemplate(method, t,
-                            new MapArray<>("this", getElementName(joinPoint)),
-                            methodArgs(joinPoint, method), classFields(joinPoint))
+                        tomap(()->new MapArray<>("this", getElementName(joinPoint))),
+                        methodArgs(joinPoint, method), classFields(joinPoint))
                     ),
                     Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
                     Default(t -> method.getName())
@@ -122,50 +127,6 @@ public class ActionProcessor {
             throw exception("Action %s failed. Can't get result. Reason: %s", getActionName.execute(joinPoint), error.getMessage());
         }
     };
-
-    @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
-    protected void jdiPointcut() { }
-    @Pointcut("execution(* *(..)) && @annotation(ru.yandex.qatools.allure.annotations.Step)")
-    protected void stepPointcut() { }
-
-    @Before("jdiPointcut()")
-    public void before(JoinPoint joinPoint) {
-        if (jdiBefore != null)
-            jdiBefore.execute(joinPoint);
-    }
-
-    @AfterReturning(pointcut = "jdiPointcut()", returning = "result")
-    public void after(JoinPoint joinPoint, Object result) {
-        if (jdiAfter != null)
-            jdiAfter.execute(joinPoint, result);
-    }
-
-    @AfterThrowing(pointcut = "jdiPointcut()", throwing = "error")
-    public void error(JoinPoint joinPoint, Throwable error) {
-        if (jdiError != null) {
-            if (!ERROR_THROWN) {
-                ERROR_THROWN = true;
-                jdiError.execute(joinPoint, error);
-            }
-        }
-    }
-    @Before("stepPointcut()")
-    public void beforeStep(JoinPoint joinPoint) {
-        if (stepBefore != null)
-            stepBefore.execute(joinPoint);
-    }
-
-    @AfterReturning(pointcut = "stepPointcut()", returning = "result")
-    public void afterStep(JoinPoint joinPoint, Object result) {
-        if (stepAfter != null)
-            stepAfter.execute(joinPoint, result);
-    }
-
-    @AfterThrowing(pointcut = "stepPointcut()", throwing = "error")
-    public void errorStep(JoinPoint joinPoint, Throwable error) {
-        if (jdiError != null)
-            jdiError.execute(joinPoint, error);
-    }
     static MethodSignature getMethod(JoinPoint joinPoint) {
         return (MethodSignature) joinPoint.getSignature();
     }
@@ -212,7 +173,7 @@ public class ActionProcessor {
             return Switch(template).get(
                     Case(t -> t.contains("{0"), t -> MessageFormat.format(t, joinPoint.getArgs())),
                     Case(t -> t.contains("{"), t -> {
-                        MapArray obj = new MapArray<>("this", getElementName(joinPoint));
+                        MapArray obj = tomap(()->new MapArray<>("this", getElementName(joinPoint)));
                         return getActionNameFromTemplate(method, t, obj, methodArgs(joinPoint, method), classFields(joinPoint));
                     }),
                     Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
@@ -235,17 +196,24 @@ public class ActionProcessor {
         return result;
     }
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
-        return new MapArray<>(method.getParameterNames(), getArgs(joinPoint.getArgs()));
+        return tomap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint.getArgs())));
+    }
+
+    static MapArray<String, Object> tomap(JFunc<MapArray<String, Object>> getMap) {
+        IGNORE_NOT_UNIQUE = true;
+        MapArray<String, Object> map = getMap.execute();
+        IGNORE_NOT_UNIQUE = false;
+        return map;
     }
     static Object[] getArgs(Object[] args) {
         Object[] result = new String [args.length];
         for (int i = 0; i< args.length; i++)
             result[i] = Switch(args[i]).get(
-                    Case(arg -> arg.getClass().isArray(),
-                            arg ->  printList(asList((Object[])arg))),
-                    Case(arg -> isInterface(arg.getClass(), List.class),
-                            arg ->  printList((List<?>)arg)),
-                    Default(arg -> arg));
+                Case(arg -> arg.getClass().isArray(),
+                    arg ->  printList(asList((Object[])arg))),
+                Case(arg -> isInterface(arg.getClass(), List.class),
+                    arg ->  printList((List<?>)arg)),
+                Default(arg -> arg));
         return result;
     }
 
@@ -257,7 +225,7 @@ public class ActionProcessor {
     }
 
     static MapArray<String, Object> classFields(JoinPoint joinPoint) {
-        return new MapArray<>(getThisFields(joinPoint), Field::getName, value -> getValueField(value, joinPoint.getThis()));
+        return tomap(()->new MapArray<>(getThisFields(joinPoint), Field::getName, value -> getValueField(value, joinPoint.getThis())));
     }
 
     static String getElementName(JoinPoint joinPoint) {

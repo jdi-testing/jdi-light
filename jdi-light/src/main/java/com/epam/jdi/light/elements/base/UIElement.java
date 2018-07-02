@@ -8,7 +8,6 @@ package com.epam.jdi.light.elements.base;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.IHasValue;
 import com.epam.jdi.light.elements.interfaces.ISetValue;
-import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;

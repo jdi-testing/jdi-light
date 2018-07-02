@@ -9,8 +9,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import io.github.epam.sections.LogSidebar;
 import org.openqa.selenium.WebElement;
 
-import static com.epam.jdi.light.elements.init.UIFactory.dropdown;
-
 public class MetalAndColorsPage extends WebPage {
 	@Css(".uui-side-bar[name='log-sidebar']") public LogSidebar logSidebar;
 	@JDropdown(root = @FindBy(css ="div[ui=dropdown]"),

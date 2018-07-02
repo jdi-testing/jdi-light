@@ -1,20 +1,12 @@
-package org.mytests.uiobjects.example.site.pages;
+package org.mytests.uiobjects.example.seleniumPO;
 
-import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.Dropdown;
-import com.epam.jdi.light.elements.complex.UIList;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.elements.pageobjects.annotations.JPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-
-public class PerformancePage extends WebPage {
+public class PerformancePage {
     //Table
     @FindBy(id = "users-table") public WebElement table;
 
@@ -23,7 +15,7 @@ public class PerformancePage extends WebPage {
         for (WebElement row : rows) {
             List<WebElement> columns = row.findElements(By.tagName("td"));
             if (columns.size() == 4 && columns.get(0).getText().contains(name) &&
-                columns.get(2).getText().contains(email))
+                    columns.get(2).getText().contains(email))
                 return row;
         }
         return null;

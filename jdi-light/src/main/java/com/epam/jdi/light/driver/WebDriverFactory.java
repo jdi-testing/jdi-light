@@ -22,6 +22,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
+import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
 import static java.lang.System.setProperty;
@@ -29,7 +30,7 @@ import static java.lang.Thread.currentThread;
 import static java.util.Objects.nonNull;
 
 public class WebDriverFactory {
-    public static MapArray<String, JFunc<WebDriver>> drivers = new MapArray<>();
+    public static MapArray<String, JFunc<WebDriver>> drivers = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
     private static ThreadLocal<MapArray<String, WebDriver>> runDrivers = new ThreadLocal<>();
 
     private WebDriverFactory() {
@@ -105,7 +106,7 @@ public class WebDriverFactory {
     }
 
     public static String useDriver(String driverName, JFunc<WebDriver> driver) {
-        if (drivers.keys().contains(driverName))
+        if (!drivers.keys().contains(driverName))
             drivers.add(driverName, driver);
         else
             throw exception("Can't register WebDriver '%s'. Driver with same name already registered", driverName);

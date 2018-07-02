@@ -3,18 +3,16 @@ package com.epam.jdi.light.elements.composite;
 import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.elements.base.DriverBased;
+import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.IComposite;
 import com.epam.jdi.tools.CacheValue;
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
 
 import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.getJSExecutor;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
@@ -30,7 +28,7 @@ import static java.lang.String.format;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class WebPage extends DriverBased implements IComposite {
+public class WebPage extends DriverBase implements IComposite {
     public static boolean CHECK_AFTER_OPEN = false;
     public String url;
     public String title;

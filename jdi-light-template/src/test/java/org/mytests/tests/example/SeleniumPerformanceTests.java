@@ -6,15 +6,16 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.mytests.uiobjects.example.site.JDIExampleSite.*;
+import static org.mytests.uiobjects.example.seleniumPO.SiteSelenium.*;
 
-public class SeleniumPerformanceTests extends SimpleTestsInit {
+
+public class SeleniumPerformanceTests {
 
     @BeforeMethod
     public void openPerformancePage() {
         homePage.open();
         login(new User());
-        navigation.get(9).click();
+        homePage.navigateTo("Performance");
     }
 
     @Test

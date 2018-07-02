@@ -1,12 +1,13 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.LocatorType;
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class JDIBase extends DriverBased implements INamed {
+public class JDIBase extends DriverBase implements INamed {
     public String name;
     public String varName;
     public String typeName;

@@ -19,6 +19,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.driver.get.Platform.X32;
+import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.RegExUtils.matches;
@@ -37,7 +38,7 @@ public class DriverData {
     public static String DOWNLOADS_DIR = mergePath(TEST_PATH, "resources", "downloads");
     public static PageLoadStrategy PAGE_LOAD_STRATEGY = NORMAL;
     public static String BROWSER_SIZE = "MAXIMIZE";
-    public static String DRIVER_NAME = "chrome";
+    public static String DRIVER_NAME = DEFAULT_DRIVER;
 
     public static String chromeDriverPath() { return mergePath(DRIVERS_FOLDER,
         getOs() == WIN ? "chromedriver.exe" : "chromedriver"); }

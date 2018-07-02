@@ -28,6 +28,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
 import static com.epam.jdi.light.common.CheckTypes.MATCH;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
@@ -203,12 +204,17 @@ public class PageFactory {
 
     // Selenium PageFactory
     public static <T> T initElements(WebDriver driver, Class<T> pageClassToProxy) {
-        T page; //TODO support static pages
+        T page;
+        useDriver(() -> driver);
         try {
             Constructor<T> constructor = pageClassToProxy.getConstructor(new Class[]{WebDriver.class});
             page = constructor.newInstance(new Object[]{driver});
-        } catch (Exception ex) { throw exception(pageClassToProxy + " class should has constructor with WebDriver parameter"); }
-        initElements(driver, page);
+        } catch (Exception ignore) {
+            try {
+                page = pageClassToProxy.newInstance();
+            } catch (Exception ex) { throw exception(pageClassToProxy + " class should has constructor with WebDriver parameter"); }
+        }
+        initElements(page);
         return page;
     }
     public static void initElements(WebDriver driver, Object page) {
