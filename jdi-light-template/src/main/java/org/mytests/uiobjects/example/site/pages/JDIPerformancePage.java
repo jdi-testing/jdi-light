@@ -1,7 +1,7 @@
 package org.mytests.uiobjects.example.site.pages;
 
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.UIList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.JPage;
@@ -30,7 +30,7 @@ public class JDIPerformancePage extends WebPage {
 
     // Dropdown
     @Css("#user-names option")
-    public UIList names;
+    public WebList names;
     @FindBy(xpath = "//*[@id='user-names']//*[text()='%s']")
     public UIElement namesDropdown;
     @FindBy(css = "select[ui=dropdown]")

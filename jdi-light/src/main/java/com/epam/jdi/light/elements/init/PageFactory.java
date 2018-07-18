@@ -3,8 +3,8 @@ package com.epam.jdi.light.elements.init;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.UIElements;
 import com.epam.jdi.light.elements.complex.UIList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.IComposite;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
@@ -131,8 +131,8 @@ public class PageFactory {
         return Switch(field).get(
             Case(f -> isInterface(f, WebElement.class),
                 f -> new UIElement()),
-            Case(f -> isClass(f, UIList.class) || isList(f, WebElement.class),
-                f -> new UIList()),
+            Case(f -> isClass(f, WebList.class) || isList(f, WebElement.class),
+                f -> new WebList()),
             Case(f -> isList(f, IComposite.class),
                 f -> initJElements(f, sectionName)),
             Case(f -> isInterface(f, IComposite.class),
@@ -153,11 +153,11 @@ public class PageFactory {
             throw exception("Can't instantiate Section field '%s' on page '%s'", field.getName(), sectionName);
         }
     }
-    private static UIElements initJElements(Field field, String sectionName) {
+    private static UIList initJElements(Field field, String sectionName) {
         Class<?> genericType = null;
         try {
             genericType = getGenericType(field);
-            return new UIElements(genericType);
+            return new UIList(genericType);
         } catch (Exception ex) {
             throw exception("Can't instantiate List<%s> field '%s' on page '%s'", genericType == null ? "UNKNOWN" : genericType.getSimpleName(), field.getName(), sectionName);
         }

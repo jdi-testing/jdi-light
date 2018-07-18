@@ -1,6 +1,6 @@
 package org.mytests.uiobjects.example.site;
 
-import com.epam.jdi.light.elements.complex.UIList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import org.mytests.uiobjects.example.entities.User;
 import org.mytests.uiobjects.example.site.pages.HomePage;
@@ -20,7 +20,7 @@ public class SiteJdi {
     @FindBy(css = ".profile-photo [ui=label]") public static WebElement userName;
 
     @FindBy(css = ".sidebar-menu [ui=label]")
-    public static UIList navigation;
+    public static WebList navigation;
 
     @Step("Login")
     public static void login(User user) {

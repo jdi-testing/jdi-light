@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.Dropdown;
-import com.epam.jdi.light.elements.complex.UIList;
+import com.epam.jdi.light.elements.complex.WebList;
 import org.openqa.selenium.By;
 
 /**
@@ -28,17 +28,17 @@ public class UIFactory {
         el.setLocator(By.xpath(locator));
         return el;
     }
-    public static UIList list(String locator) {
-        UIList list =  new UIList();
+    public static WebList list(String locator) {
+        WebList list =  new WebList();
         By byLocator = getLocator(locator);
         list.setLocator(byLocator);
         return list;
     }
-    public static UIList $$(String locator) {
+    public static WebList $$(String locator) {
         return list(locator);
     }
-    public static UIList $$x(String locator) {
-        UIList list =  new UIList();
+    public static WebList $$x(String locator) {
+        WebList list =  new WebList();
         list.setLocator(By.xpath(locator));
         return list;
     }

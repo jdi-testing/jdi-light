@@ -50,6 +50,8 @@ public class WebAnnotationsUtil {
                 siteDomain = DOMAIN;
             else DOMAIN = siteDomain;
         }
+        if (isBlank(siteDomain)) return "";
+        if (isBlank(uri)) return siteDomain;
         return siteDomain.replaceAll("/*$", "") + "/" + uri.replaceAll("^/*", "");
     }
 

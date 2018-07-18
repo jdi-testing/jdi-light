@@ -6,67 +6,108 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.interfaces.ISetValue;
+import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 
-public class UIList extends JDIBase implements IList<WebElement>, ISetValue {
-    private CacheValue<List<WebElement>> webElements = new CacheValue<>();
-    public void select(String name) {
-        if (getByLocator(getLocator()).contains("%s")) {
-            get(name).click();
-            return;
-        }
-        for(WebElement el : getAll())
-            if (el.getText().equals(name)) {
-                el.click();
-                return;
-            }
-        throw exception("Can't select '%s'. No elements with this name found");
-    }
-    public void select(Enum name) {
-        select(getEnumValue(name));
-    }
-    public void get(Enum name) {
-        get(getEnumValue(name));
-    }
-    public void select(int index) {
-        get(index).click();
-    }
-    public List<WebElement> elements() { return getAll(); }
-    public List<String> values() {
-        return LinqUtils.map(getAll(), WebElement::getText);
+public class UIList<T extends Section> extends JDIBase implements IList<T> {
+
+    private CacheValue<MapArray<String, T>> elements = new CacheValue<>();
+    private CacheValue<List<T>> values = new CacheValue<>();
+    private Class<T> classType;
+    public String titleFieldName = NO_TITLE_FIELD;
+    public static final String NO_TITLE_FIELD = "NO TITLE FIELD";
+
+    public UIList(Class<T> classType) {
+        this.classType = classType;
+        elements.setForce(new MapArray<>());
+        values.setForce(new ArrayList<>());
     }
     public void refresh() {
-        webElements.clear();
+        elements.clear();
+        values.clear();
+    }
+    public List<T> elements() {
+        if (values.hasValue())
+            return values.get();
+        if (elements.hasValue())
+            return elements.get().values();
+        return values.set(LinqUtils.select(this.getAll(), this::initElement));
+    }
+    public MapArray<String, T> getMap() {
+        if (elements.hasValue())
+            return elements.get();
+        List<WebElement> els = getAll();
+        return elements.set(values.hasValue()
+            ? new MapArray<>(
+                LinqUtils.select(els, this::elementTitle),
+                values.get())
+            : new MapArray<>(els,
+                this::elementTitle,
+                this::initElement));
     }
 
-    public void clear() {
-        webElements.get().clear();
+    private String elementTitle(WebElement el) {
+        if (titleFieldName == null)
+            identifyTitleField();
+        return titleFieldName.equals(NO_TITLE_FIELD)
+                ? el.getText()
+                : getElementTitle(el, titleFieldName);
+    }
+    private String getElementTitle(WebElement el, String titleField) {
+        T element = initElement(el);
+        Field field = null;
+        try { field = element.getClass().getField(titleField);
+        } catch (NoSuchFieldException ex) { /* if titleField defined then field always exist */ }
+        return ((WebElement) getValueField(field, element)).getText();
     }
 
-    public WebElement get(int index) {
-        if (!webElements.hasValue())
-            webElements.set(getAll());
-        return webElements.get().get(index);
+    private T initElement(WebElement el) {
+        try {
+            T element = classType.newInstance();
+            element.setWebElement(el);
+            element.parent = this;
+            initElements(element, driverName);
+            return element;
+        } catch (Exception ex) {
+            throw exception("Can't instantiate list element");
+        }
     }
 
-    public void setValue(String value) {
-        select(value);
+    public <E> List<E> asData(Class<E> entityClass) {
+        return getMap().select((k, v) -> v.asEntity(entityClass));
+    }
+
+    public T get(String name) {
+        return getMap().get(name);
+    }
+
+    private void identifyTitleField() {
+        Field[] fields = classType.getFields();
+        Field expectedFields = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
+        if (expectedFields == null)
+            throw exception("No title name specified for '%s' class", classType.getSimpleName());
+        titleFieldName = expectedFields.getName();
+    }
+
+    public T get(Enum name) {
+        return get(getEnumValue(name));
     }
 
     public String getValue() {
-        return print(values());
+        return getMap().toString();
     }
-    public boolean isDisplayed() {
-        return getWebElements().get(0).isDisplayed();
-    }
+
 }

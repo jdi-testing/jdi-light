@@ -29,6 +29,12 @@
             <artifactId>allure-testng-adaptor</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

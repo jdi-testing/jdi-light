@@ -34,7 +34,7 @@ public class Dropdown extends JDIBase implements ISetup, IHasValue, ISetValue {
 
     protected UIElement expander;
     protected UIElement value;
-    protected UIList list;
+    protected WebList list;
 
     @JDIAction
     public void select(String name) {
@@ -151,7 +151,7 @@ public class Dropdown extends JDIBase implements ISetup, IHasValue, ISetValue {
                 expander = value;
         }
         if (listLocator != null) {
-            list = new UIList();
+            list = new WebList();
             list.name = getName() + " list element";
             list.setLocator(listLocator);
             list.parent = this;
