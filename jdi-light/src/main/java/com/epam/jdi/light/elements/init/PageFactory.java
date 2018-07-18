@@ -1,17 +1,11 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.UIList;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.base.*;
+import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.IComposite;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.WithText;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.By;
