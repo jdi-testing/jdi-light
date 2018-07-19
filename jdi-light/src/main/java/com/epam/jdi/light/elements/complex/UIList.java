@@ -11,16 +11,19 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
+import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UIList<T extends Section> extends JDIBase implements IList<T> {
 
@@ -110,4 +113,7 @@ public class UIList<T extends Section> extends JDIBase implements IList<T> {
         return getMap().toString();
     }
 
+    public <E> void is(Class<E> entityClass, Matcher<Collection<? extends E>> condition) {
+        assertThat(asData(entityClass), condition);
+    }
 }

@@ -16,7 +16,7 @@ public final class WebDriverUtils {
     }
 
     //TODO Add OS type and current user check.
-    public static void killAllRunWebBrowsers() throws IOException {
+    public static void killAllRunWebBrowsers() {
         try {
             killByName("chromedriver.exe");
             killByName("geckodriver.exe");

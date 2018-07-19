@@ -19,6 +19,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllRunWebBrowsers;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
@@ -206,6 +207,7 @@ public class WebDriverFactory {
         } else {
             throw exception("None Driver has been found for current thread. Probably Fixture configuration is wrong.");
         }
+        killAllRunWebBrowsers();
     }
 
     public static void quit() {

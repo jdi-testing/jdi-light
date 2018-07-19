@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.0.1</version>
+            <version>RELEASE</version>
         </dependency>
 		
         <!--Allure-->

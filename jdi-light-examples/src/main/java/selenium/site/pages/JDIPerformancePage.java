@@ -1,11 +1,11 @@
-package org.mytests.uiobjects.example.site.pages;
+package selenium.site.pages;
 
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.JPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -14,8 +14,9 @@ import java.util.List;
 @JPage(url = "/performance.html")
 public class JDIPerformancePage extends WebPage {
     //Table
-    @Css("#users-table") public WebElement table;
+    @FindBy(id = "users-table") public WebElement table;
 
+    //TODO Add Tables
     public WebElement getUser(String name, String email) {
         List<WebElement> rows = table.findElements(By.tagName("tr"));
         for (WebElement row : rows) {
@@ -30,16 +31,18 @@ public class JDIPerformancePage extends WebPage {
     // Dropdown
     @Css("#user-names option")
     public WebList names;
-    @XPath("//*[@id='user-names']//*[text()='%s']")
+    @FindBy(xpath = "//*[@id='user-names']//*[text()='%s']")
     public UIElement namesDropdown;
-    @Css("select[ui=dropdown]") WebElement dropdownValue;
-    @Css("#user-names option") List<WebElement> dropdown;
+    @FindBy(css = "select[ui=dropdown]")
+    private WebElement dropdownValue;
+    @FindBy(css = "#user-names option")
+    private List<WebElement> dropdown;
 
     public String isSelected() {
         return dropdownValue.getText();
     }
 
     // Textfield
-    @Css("#textarea-performance")
+    @FindBy(css = "#textarea-performance")
     public UIElement textfield;
 }

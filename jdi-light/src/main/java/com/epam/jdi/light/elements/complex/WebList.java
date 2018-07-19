@@ -9,14 +9,17 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.ISetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
+import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
 
+import java.util.Collection;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
     private CacheValue<List<WebElement>> webElements = new CacheValue<>();
@@ -69,4 +72,14 @@ public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
     public boolean isDisplayed() {
         return getWebElements().get(0).isDisplayed();
     }
+
+
+    //region matchers
+    public void is(Matcher<Collection<? extends String>> condition) {
+        assertThat(values(), condition);
+    }
+    public void displayed() {
+        assertThat(isDisplayed() ? "displayed" : "invisible", org.hamcrest.Matchers.is("displayed"));
+    }
+    //endregion
 }

@@ -1,25 +1,24 @@
-package org.mytests.uiobjects.example.site;
+package selenium.site;
 
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import org.mytests.uiobjects.example.entities.User;
-import org.mytests.uiobjects.example.site.pages.HomePage;
-import org.mytests.uiobjects.example.site.pages.JDIPerformancePage;
-import org.mytests.uiobjects.example.site.sections.LoginForm;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.allure.annotations.Step;
+import selenium.entities.User;
+import selenium.site.pages.*;
+import selenium.site.sections.LoginForm;
 
 @JSite("https://epam.github.io/JDI/")
 public class SiteJdi {
     public static HomePage homePage;
     public static JDIPerformancePage jdiPerformancePage;
-    @Css("form") public static LoginForm loginForm;
+    @FindBy(css = "form") public static LoginForm loginForm;
 
-    @Css(".profile-photo") public static WebElement profilePhoto;
-    @Css(".profile-photo [ui=label]") public static WebElement userName;
+    @FindBy(css = ".profile-photo") public static WebElement profilePhoto;
+    @FindBy(css = ".profile-photo [ui=label]") public static WebElement userName;
 
-    @Css(".sidebar-menu [ui=label]")
+    @FindBy(css = ".sidebar-menu [ui=label]")
     public static WebList navigation;
 
     @Step("Login")

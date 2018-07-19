@@ -49,14 +49,6 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
         return get().getTagName();
     }
     @JDIAction
-    public boolean isSelected() {
-        return get().isSelected();
-    }
-    @JDIAction
-    public boolean isEnabled() {
-        return get().isEnabled();
-    }
-    @JDIAction
     public String getText() {
         WebElement el = get();
         String value = el.getAttribute("value");
@@ -74,6 +66,14 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
         return get().findElement(by);
     }
 
+    @JDIAction
+    public boolean isSelected() {
+        return get().isSelected();
+    }
+    @JDIAction
+    public boolean isEnabled() {
+        return get().isEnabled();
+    }
     @JDIAction
     public boolean isDisplayed() {
         WebElement el = getWebElement();
@@ -186,5 +186,8 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
         return this;
     }
     //endregion
+    public IsAssert is() {
+        return new IsAssert(this);
+    }
 
 }

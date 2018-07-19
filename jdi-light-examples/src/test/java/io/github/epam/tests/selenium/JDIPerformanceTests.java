@@ -1,12 +1,14 @@
-package org.mytests.tests.example;
+package io.github.epam.tests.selenium;
 
 import org.apache.commons.lang3.time.StopWatch;
-import org.mytests.uiobjects.example.entities.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import selenium.entities.User;
 
-import static org.mytests.uiobjects.example.site.SiteJdi.*;
+import static selenium.seleniumPO.SiteSelenium.homePage;
+import static selenium.site.SiteJdi.*;
+
 
 public class JDIPerformanceTests extends SimpleTestsInit {
 
@@ -19,6 +21,7 @@ public class JDIPerformanceTests extends SimpleTestsInit {
 
     @Test
     public void hugeTableTest() {
+        // TODO ADD TABLES
         StopWatch timer = StopWatch.createStarted();
         String row = jdiPerformancePage.getUser("Meyer", "co.uk").getText();
         System.out.println("Time: " + timer.getTime());
