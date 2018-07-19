@@ -202,6 +202,27 @@ public class WebPage extends DriverBase implements IComposite {
         return WebDriverFactory.getDriver().getPageSource();
     }
 
+    private static void scroll(int x, int y) {
+        jsExecute("window.scrollBy("+x+","+y+")");
+    }
+
+    @JDIAction
+    public static void  scrollDown(int value) {
+        scroll(0,value);
+    }
+    @JDIAction
+    public static void  scrollUp(int value) {
+        scroll(0,-value);
+    }
+    @JDIAction
+    public static void  scrollRight(int value) {
+        scroll(value,0);
+    }
+    @JDIAction
+    public static void scrollLeft(int value) {
+        scroll(-value,0);
+    }
+
     @Override
     public String toString() {
         return Switch(logger.getLogLevel()).get(

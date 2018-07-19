@@ -110,37 +110,11 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
     public UIElement higlight() { show();
         return higlight("red");
     }
-    //region Scroll
     @JDIAction
     public UIElement show() {
         jsExecute("scrollIntoView(true)");
         return this;
     }
-    private void scroll(int x, int y) {
-        js().executeScript("window.scrollBy("+x+","+y+")");
-    }
-
-    @JDIAction
-    public UIElement scrollDown(int value) {
-        scroll(0,value);
-        return this;
-    }
-    @JDIAction
-    public UIElement scrollUp(int value) {
-        scroll(0,-value);
-        return this;
-    }
-    @JDIAction
-    public UIElement scrollRight(int value) {
-        scroll(value,0);
-        return this;
-    }
-    @JDIAction
-    public UIElement scrollLeft(int value) {
-        scroll(-value,0);
-        return this;
-    }
-    //endregion
 
     public String getValue() {
         return getText();
