@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.LocatorType;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -38,6 +37,10 @@ public class JDIBase extends DriverBase implements INamed {
     public String varName;
     public String typeName;
     public Object parent;
+    public <T extends JDIBase> T setParent(Object parent) {
+        this.parent = parent;
+        return (T) this;
+    }
     protected By byLocator;
     private CacheValue<WebElement> webElement = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
@@ -62,9 +65,10 @@ public class JDIBase extends DriverBase implements INamed {
         return ((JDIBase)parent).getPage();
     }
 
-    public void setLocator(By locator) {
+    public <T extends JDIBase> T setLocator(By locator) {
         locatorType = DEFAULT;
         byLocator = locator;
+        return (T) this;
     }
     public By getLocator(Object... args) {
         if (locatorType == FRAME) return null;

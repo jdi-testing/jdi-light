@@ -10,7 +10,6 @@ import com.epam.jdi.light.elements.interfaces.IHasValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.WebElement;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Collection;
@@ -23,13 +22,6 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 public interface IList<T> extends List<T>, IHasValue {
     /**
      *  Get all application elements
-     */
-    @JDIAction(level = DEBUG)
-    List<WebElement> getAll(Object... args);
-
-    /**
-     *  Get all application elements
-
     @JDIAction(level = DEBUG)
     MapArray<String, T> getMap();*/
     @JDIAction(level = DEBUG)
