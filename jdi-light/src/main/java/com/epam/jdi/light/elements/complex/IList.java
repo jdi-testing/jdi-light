@@ -147,7 +147,7 @@ public interface IList<T> extends List<T>, IHasValue {
     }
     @Override
     default T remove(int index) {
-        throw new NotImplementedException();
+        return elements().remove(index);
     }
     @Override
     default int indexOf(Object o) {

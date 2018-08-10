@@ -19,8 +19,9 @@ public @interface JTable {
     String[] header() default {};
 
     FindBy headers() default @FindBy();
-    FindBy cell() default @FindBy();
     FindBy row() default @FindBy();
     FindBy column() default @FindBy();
+    FindBy cell() default @FindBy();
     int size() default -1;
+    int count() default -1;
 }

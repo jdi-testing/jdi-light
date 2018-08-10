@@ -5,6 +5,8 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.IHasValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
+import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -12,10 +14,12 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.LinqUtils.firstIndex;
 import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.util.Arrays.asList;
 
@@ -23,27 +27,19 @@ public class Table extends JDIBase implements ISetup, IHasValue {
     protected By rowsLocator = By.cssSelector("tr");
     protected By columnsLocator = By.cssSelector("td");
     protected By headerLocator = By.cssSelector("th");
-    protected List<String> headers;
-    protected List<String> getHeaders() {
-        if (headers == null)
-            headers = select(getDriver().findElements(headerLocator), WebElement::getText);
-        return headers;
-    }
-    protected int size = -1;
-    public int getSize() {
-        if (size == -1)
-            size = getHeaders().size();
-        return size;
-    }
-    protected int count = -1;
-    public int getCount() {
-        if (count == -1)
-            count = getRows().size();
-        return count;
-    }
+    protected CacheValue<List<String>> headers = new CacheValue<>(() -> select($$(headerLocator, this), WebElement::getText));
+    protected CacheValue<Integer> size = new CacheValue<>(() -> headers.get().size());
+    protected CacheValue<List<WebElement> > rows = new CacheValue<>(() -> {
+        List<WebElement> value = get().findElements(rowsLocator);
+        if (value.get(0).findElements(columnsLocator).size() == 0 && value.get(1).findElements(columnsLocator).size() != 0)
+            value.remove(0);
+        return value;
+    });
+
+    protected CacheValue<Integer> count = new CacheValue<>(() -> rows.get().size());
 
     public List<WebElement> webRow(int rowNum) {
-        return getRows().get(rowNum)
+        return rows.get().get(rowNum-1)
                 .findElements(columnsLocator);
     }
     @JDIAction
@@ -51,7 +47,7 @@ public class Table extends JDIBase implements ISetup, IHasValue {
         return new Line(webRow(rowNum));
     }
     public List<WebElement> webColumn(int colNum) {
-        return select(getRows(), r -> r.findElements(columnsLocator).get(colNum));
+        return select(rows.get(), r -> r.findElements(columnsLocator).get(colNum-1));
     }
     @JDIAction
     public Line column(int colNum) {
@@ -65,17 +61,15 @@ public class Table extends JDIBase implements ISetup, IHasValue {
         return new Line(webColumn(colName));
     }
     private int getColIndexByName(String colName) {
-        int colNum = firstIndex(headers, h -> h.equals(colName));
+        int colNum = firstIndex(headers.get(), h -> simplify.execute(h).equals(simplify.execute(colName)));
         if (colNum == -1)
             throw exception("Can't find column '%s'", colName);
-        return colNum;
+        return colNum + 1;
     }
-    private List<WebElement> getRows() {
-        return getDriver().findElement(getLocator()).findElements(rowsLocator);
-    }
+    public JFunc1<String, String> simplify = STRING_SIMPLIFY;
 
     public WebElement webCell(int colNum, int rowNum) {
-        return webRow(rowNum).get(colNum);
+        return webRow(rowNum).get(colNum-1);
     }
     @JDIAction
     public String cell(int colNum, int rowNum) {
@@ -99,6 +93,7 @@ public class Table extends JDIBase implements ISetup, IHasValue {
         By headers = findByToBy(j.headers());
         List<String> header = asList(j.header());
         int size = j.size();
+        int count = j.count();
 
         if (root != null)
             setLocator(root);
@@ -109,20 +104,20 @@ public class Table extends JDIBase implements ISetup, IHasValue {
         if (headers != null)
             this.headerLocator = headers;
         if (header.size() > 0)
-            this.headers = header;
+            this.headers.set(header);
         if (size != -1)
-            this.size = size;
+            this.size.set(size);
+        if (count != -1)
+            this.count.set(count);
     }
 
+    public String preview() {
+        return get().getText();
+    }
     public String getValue() {
-        int i = 1;
-        String value = "||X||" + select(getHeaders(), h -> h + "|") + "|" + LINE_BREAK;
-        for (WebElement row : getRows()) {
-            value += "||" + i++ + "||";
-            for (WebElement cell : row.findElements(columnsLocator))
-                value += cell.getText() + "|";
-            value += "|" + LINE_BREAK;
-        }
+        String value = "||X||" + print(headers.get(), "|") + "||" + LINE_BREAK;
+        for (int i = 1; i <= count.get(); i++)
+            value += "||" + i + "||" + print(row(i), "|") + "||" + LINE_BREAK;
         return value;
     }
 }

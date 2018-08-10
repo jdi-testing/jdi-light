@@ -10,8 +10,10 @@ import org.openqa.selenium.By;
  */
 public class UIFactory {
     public static UIElement element(String locator) {
+        return element(getLocator(locator));
+    }
+    public static UIElement element(By byLocator) {
         UIElement el =  new UIElement();
-        By byLocator = getLocator(locator);
         el.setLocator(byLocator);
         return el;
     }
@@ -23,19 +25,33 @@ public class UIFactory {
     public static UIElement $(String locator) {
         return element(locator);
     }
+    public static UIElement $(By locator) {
+        return element(locator);
+    }
+    public static UIElement $(By locator, Object parent) {
+        return element(locator).setParent(parent);
+    }
     public static UIElement $x(String locator) {
         UIElement el =  new UIElement();
         el.setLocator(By.xpath(locator));
         return el;
     }
     public static WebList list(String locator) {
+        return list(getLocator(locator));
+    }
+    public static WebList list(By byLocator) {
         WebList list =  new WebList();
-        By byLocator = getLocator(locator);
         list.setLocator(byLocator);
         return list;
     }
     public static WebList $$(String locator) {
         return list(locator);
+    }
+    public static WebList $$(By locator) {
+        return list(locator);
+    }
+    public static WebList $$(By locator, Object parent) {
+        return list(locator).setParent(parent);
     }
     public static WebList $$x(String locator) {
         WebList list =  new WebList();

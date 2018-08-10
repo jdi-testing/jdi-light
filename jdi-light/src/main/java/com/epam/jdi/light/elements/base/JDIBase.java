@@ -37,6 +37,7 @@ public class JDIBase extends DriverBase implements INamed {
     public String varName;
     public String typeName;
     public Object parent;
+    public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     public <T extends JDIBase> T setParent(Object parent) {
         this.parent = parent;
         return (T) this;

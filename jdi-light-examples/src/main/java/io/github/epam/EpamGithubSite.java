@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import io.github.epam.pages.ContactFormPage;
 import io.github.epam.pages.HomePage;
 import io.github.epam.pages.MetalAndColorsPage;
+import io.github.epam.pages.PerformancePage;
 import io.github.epam.sections.Footer;
 import io.github.epam.sections.Header;
 import io.github.epam.sections.NavigationSidebar;
@@ -22,6 +23,8 @@ public class EpamGithubSite {
 	public static ContactFormPage contactFormPage;
 	@JPage(url = "/index.html", title = "Home Page")
 	public static HomePage homePage;
+	@JPage(url = "/performance.html", title = "Simple Table")
+	public static PerformancePage tablePage;
 
 	@Css(".sidebar-menu [ui=label]")
 	public static List<WebElement> navigation;
