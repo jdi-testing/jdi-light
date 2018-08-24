@@ -171,13 +171,13 @@ public class ActionHelper {
             MethodSignature method = getMethod(joinPoint);
             String template = methodNameTemplate(method);
             return Switch(template).get(
-                    Case(t -> t.contains("{0"), t -> MessageFormat.format(t, joinPoint.getArgs())),
-                    Case(t -> t.contains("{"), t -> {
-                        MapArray obj = tomap(()->new MapArray<>("this", getElementName(joinPoint)));
-                        return getActionNameFromTemplate(method, t, obj, methodArgs(joinPoint, method), classFields(joinPoint));
-                    }),
-                    Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
-                    Default(t -> getDefaultName(t, methodArgs(joinPoint, method)))
+                Case(t -> t.contains("{0"), t -> MessageFormat.format(t, joinPoint.getArgs())),
+                Case(t -> t.contains("{"), t -> {
+                    MapArray obj = tomap(()->new MapArray<>("this", getElementName(joinPoint)));
+                    return getActionNameFromTemplate(method, t, obj, methodArgs(joinPoint, method), classFields(joinPoint));
+                }),
+                Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
+                Default(t -> getDefaultName(t, methodArgs(joinPoint, method)))
             );
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: " +

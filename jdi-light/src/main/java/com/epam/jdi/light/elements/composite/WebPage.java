@@ -6,6 +6,7 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.IComposite;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.Cookie;
 
 import java.util.function.Supplier;
@@ -106,17 +107,17 @@ public class WebPage extends DriverBase implements IComposite {
         if (!hasRunDrivers())
             return false;
         boolean result = Switch(checkUrlType).get(
-                Value(EQUALS, url().check()),
-                Value(MATCH, url().match()),
-                Value(CONTAINS, url().contains()),
-                Else(false)
+            Value(EQUALS, url().check()),
+            Value(MATCH, url().match()),
+            Value(CONTAINS, url().contains()),
+            Else(false)
         );
         if (!result) return false;
         result = Switch(checkTitleType).get(
-                Value(EQUALS, title().check()),
-                Value(MATCH, title().match()),
-                Value(CONTAINS, title().contains()),
-                Else(false)
+            Value(EQUALS, title().check()),
+            Value(MATCH, title().match()),
+            Value(CONTAINS, title().contains()),
+            Else(false)
         );
         if (result)
             setCurrentPage(this);
@@ -221,6 +222,15 @@ public class WebPage extends DriverBase implements IComposite {
     @JDIAction
     public static void scrollLeft(int value) {
         scroll(-value,0);
+    }
+
+    private static MapArray<String, WebPage> pages = new MapArray<>();
+    public static void addPage(WebPage page) {
+        pages.update(page.getName(), page);
+    }
+    public static <T extends WebPage> T getPage(String name) {
+        WebPage page = pages.get(name);
+        return (T) (page == null ? pages.get(name + " Page") : page);
     }
 
     @Override
