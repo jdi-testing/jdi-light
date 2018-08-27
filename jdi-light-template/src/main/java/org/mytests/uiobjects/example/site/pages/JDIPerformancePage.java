@@ -3,7 +3,7 @@ package org.mytests.uiobjects.example.site.pages;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.JPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import org.openqa.selenium.By;
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-@JPage(url = "/performance.html")
+@Url("/performance.html")
 public class JDIPerformancePage extends WebPage {
     //Table
     @Css("#users-table") public WebElement table;

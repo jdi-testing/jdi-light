@@ -145,10 +145,10 @@ public class JDIBase extends DriverBase implements INamed {
                 : getSearchContext(parent);
     }
     private SearchContext getFrameContext(By frame) {
-        return getDriver().switchTo().frame(getDriver().findElement(frame));
+        return driver().switchTo().frame(driver().findElement(frame));
     }
     private SearchContext getDefaultContext() {
-        return getDriver().switchTo().defaultContent();
+        return driver().switchTo().defaultContent();
     }
     private By correctLocator(By locator) {
         if (locator == null) return null;

@@ -156,7 +156,7 @@ public class UIElement extends JDIBase implements WebElement, ISetValue, IHasVal
         return this;
     }
     public UIElement doActions(JFunc1<Actions, Actions> actions) {
-        actions.execute(new Actions(getDriver())).build().perform();
+        actions.execute(new Actions(driver())).build().perform();
         return this;
     }
     //endregion

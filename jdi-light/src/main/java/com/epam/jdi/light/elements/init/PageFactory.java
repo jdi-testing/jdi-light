@@ -7,7 +7,10 @@ import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.IComposite;
-import com.epam.jdi.light.elements.pageobjects.annotations.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
+import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
+import com.epam.jdi.light.elements.pageobjects.annotations.Title;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.WithText;
@@ -25,8 +28,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
-import static com.epam.jdi.light.common.CheckTypes.MATCH;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
@@ -56,14 +57,9 @@ public class PageFactory {
                 if (isClass(type, WebPage.class)) {
                     WebPage page = (WebPage) newInstance(pageField, site.getSimpleName());
                     page.setName(pageField.getName(), site.getSimpleName());
-                    if (hasAnnotation(pageField, UrlContains.class))
-                        page.setCheckUrl(getAnnotation(pageField, UrlContains.class).value(), CONTAINS);
-                    if (hasAnnotation(pageField, UrlMatch.class))
-                        page.setCheckUrl(getAnnotation(pageField, UrlMatch.class).value(), MATCH);
-                    if (hasAnnotation(pageField, TitleContains.class))
-                        page.setCheckTitle(getAnnotation(pageField, TitleContains.class).value(), CONTAINS);
-                    if (hasAnnotation(pageField, TitleMatch.class))
-                        page.setCheckTitle(getAnnotation(pageField, TitleMatch.class).value(), MATCH);
+                    setDomain(site);
+                    page.updatePageData(getAnnotation(pageField, Url.class),
+                                        getAnnotation(pageField, Title.class));
                     initElements(page);
                     pageField.set(null, page);
                 }
@@ -170,8 +166,8 @@ public class PageFactory {
             if (isClass(obj.getClass(), WebPage.class)) {
                 WebPage page = (WebPage) obj;
                 page.driverName = DRIVER_NAME;
-                if (page.getClass().isAnnotationPresent(JPage.class))
-                    fillPageFromAnnotaiton(page, page.getClass().getAnnotation(JPage.class), null);
+                page.updatePageData(page.getClass().getAnnotation(Url.class),
+                        page.getClass().getAnnotation(Title.class));
                 addPage(page);
             }
             initElements(obj, DRIVER_NAME);

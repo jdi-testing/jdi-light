@@ -1,8 +1,9 @@
 package io.github.epam;
 
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.pageobjects.annotations.JPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
+import com.epam.jdi.light.elements.pageobjects.annotations.Title;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import io.github.epam.pages.ContactFormPage;
 import io.github.epam.pages.HomePage;
@@ -17,13 +18,13 @@ import java.util.List;
 
 @JSite("https://epam.github.io/JDI/")
 public class EpamGithubSite {
-	@JPage(url = "/metals-colors.html", title = "Metal and Colors")
+	@Url("/metals-colors.html") @Title("Metal and Colors")
 	public static MetalAndColorsPage metalAndColorsPage;
-	@JPage(url = "/contacts.html", title = "Contact Form")
+	@Url("/contacts.html") @Title("Contact Form")
 	public static ContactFormPage contactFormPage;
-	@JPage(url = "/index.html", title = "Home Page")
+	@Url("/index.html") @Title("Home Page")
 	public static HomePage homePage;
-	@JPage(url = "/performance.html", title = "Simple Table")
+	@Url("/performance.html") @Title("Simple Table")
 	public static PerformancePage tablePage;
 
 	@Css(".sidebar-menu [ui=label]")

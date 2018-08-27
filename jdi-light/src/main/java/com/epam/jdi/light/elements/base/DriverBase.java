@@ -7,6 +7,6 @@ import org.openqa.selenium.WebDriver;
 public class DriverBase {
     public static final String DEFAULT_DRIVER = "chrome";
     public String driverName = DEFAULT_DRIVER;
-    public WebDriver getDriver() { return WebDriverFactory.getDriver(driverName); }
-    public JavascriptExecutor js() { return (JavascriptExecutor)getDriver(); }
+    public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
+    public JavascriptExecutor js() { return (JavascriptExecutor) driver(); }
 }

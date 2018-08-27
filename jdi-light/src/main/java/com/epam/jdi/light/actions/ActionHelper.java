@@ -90,7 +90,7 @@ public class ActionHelper {
             processNewPage(joinPoint);
             stepBefore.execute(joinPoint);
         }
-        logger.logOff();
+        //logger.logOff();
     };
     public static JAction2<JoinPoint, Object> stepAfter = (joinPoint, result) -> {
         if (result != null && logLevel(joinPoint).equalOrMoreThan(INFO))
@@ -98,7 +98,7 @@ public class ActionHelper {
         logger.debug("Done");
     };
     public static JAction2<JoinPoint, Object> jdiAfter = (joinPoint, result) -> {
-        logger.logOn();
+        //logger.logOn();
         if (logger.getLogLevel() == OFF) return;
         stepAfter.execute(joinPoint, result);
     };
@@ -107,8 +107,9 @@ public class ActionHelper {
         Object element = joinPoint.getThis();
         if (element != null) { //TODO support static pages
             WebPage page = getPage(element);
-            if (getCurrentPage() != null && page != null) {
-                if (!getCurrentPage().equals(page.getName())) {
+            String currentPage = getCurrentPage();
+            if (currentPage != null && page != null) {
+                if (!currentPage.equals(page.getName())) {
                     setCurrentPage(page);
                     newPage.execute(page);
                 }

@@ -25,6 +25,7 @@ import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.RegExUtils.matches;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
+import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;
 import static org.openqa.selenium.ie.InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR;
 import static org.openqa.selenium.remote.CapabilityType.ACCEPT_SSL_CERTS;
 import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
@@ -83,6 +84,7 @@ public class DriverData {
         FirefoxOptions cap = new FirefoxOptions();
         cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY);
         cap.setCapability(ACCEPT_SSL_CERTS, true);
+        cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT);
         cap.addArguments(getBrowserSizeOption());
         cap.setProfile(firefoxProfile);
         return cap;
@@ -102,6 +104,7 @@ public class DriverData {
         cap.addArguments("--disable-web-security", "--disable-extensions", "test-type");
         cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY);
         cap.setCapability(ACCEPT_SSL_CERTS, true);
+        cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT);
         cap.addArguments(getBrowserSizeOption());
         cap.setExperimentalOption("prefs", chromePrefs);
         return cap;
@@ -122,7 +125,7 @@ public class DriverData {
         cap.takeFullPageScreenshot();
         cap.setCapability(ACCEPT_SSL_CERTS, true);
         cap.destructivelyEnsureCleanSession();
-        cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, true);
+        cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT);
         cap.is(SUPPORTS_JAVASCRIPT);
         return cap;
     };

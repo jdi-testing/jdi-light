@@ -5,7 +5,6 @@ package com.epam.jdi.light.elements.pageobjects.annotations;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.WithText;
@@ -42,27 +41,16 @@ public class WebAnnotationsUtil {
         return splitCamelCase(field.getName());
     }
 
-    public static String getUrlFromUri(String uri, Class<?> parentClass) {
-        String siteDomain = DOMAIN;
+    public static void setDomain(Class<?> parentClass) {
         if (parentClass != null && parentClass.isAnnotationPresent(JSite.class)) {
-            siteDomain = parentClass.getAnnotation(JSite.class).value();
-            if (isBlank(siteDomain))
-                siteDomain = DOMAIN;
-            else DOMAIN = siteDomain;
+            String siteDomain = parentClass.getAnnotation(JSite.class).value();
+            if (!isBlank(siteDomain))
+                DOMAIN = siteDomain;
         }
-        if (isBlank(siteDomain)) return "";
-        if (isBlank(uri)) return siteDomain;
-        return siteDomain.replaceAll("/*$", "") + "/" + uri.replaceAll("^/*", "");
     }
-
-    public static void fillPageFromAnnotaiton(WebPage page, JPage pageAnnotation, Class<?> parentClass) {
-        String url = !isBlank(pageAnnotation.value())
-                ? pageAnnotation.value()
-                : pageAnnotation.url();
-        if (!url.contains("://"))
-            url = getUrlFromUri(url, parentClass);
-        String title = pageAnnotation.title();
-        page.updatePageData(url, title);
+    public static String getUrlFromUri(String uri) {
+        if (isBlank(uri)) return DOMAIN;
+        return DOMAIN.replaceAll("/*$", "") + "/" + uri.replaceAll("^/*", "");
     }
 
     public static By getFrame(Frame frame) {

@@ -6,20 +6,22 @@ package com.epam.jdi.light.settings;
  */
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.driver.get.DriverData;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.light.logger.JDILogger;
+import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
 
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
-import static com.epam.jdi.tools.PropertyReader.getProperties;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
@@ -44,6 +46,7 @@ public class WebSettings {
             getProperties(TEST_PROPERTIES_PATH);
             fillAction(p -> TIMEOUT = parseInt(p), "timeout.wait.element");
             fillAction(p -> DOMAIN = p, "domain");
+            fillAction(p -> DriverData.DRIVER_NAME = p, "driver");
             fillAction(p -> DRIVER_VERSION = p, "drivers.version");
             fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
             fillAction(p -> SCREEN_PATH = p, "screens.folder");
@@ -86,5 +89,9 @@ public class WebSettings {
             case "eager": return EAGER;
         }
         return NORMAL;
+    }
+    public static Properties getProperties(String path) {
+        Properties p = PropertyReader.getProperties("/../../target/classes/" + path);
+        return p.size() > 0 ? p : PropertyReader.getProperties(path);
     }
 }

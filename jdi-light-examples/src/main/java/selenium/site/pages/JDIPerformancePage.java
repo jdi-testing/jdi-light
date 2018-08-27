@@ -4,14 +4,14 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.elements.pageobjects.annotations.JPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-@JPage(url = "/performance.html")
+@Url("/performance.html")
 public class JDIPerformancePage extends WebPage {
     //Table
     @FindBy(id = "users-table") public WebElement table;

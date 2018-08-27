@@ -140,9 +140,7 @@ public class WebDriverFactory {
         if (INIT_THREAD_ID == Thread.currentThread().getId())
             SWITCH_THREAD = true; */
         if (!drivers.keys().contains(driverName))
-            if (drivers.count() == 0)
-                useDriver(driverName);
-            else throw exception("Can't find driver with name '%s'", driverName);
+            useDriver(driverName);
         try {
             Lock lock = new ReentrantLock();
             lock.lock();

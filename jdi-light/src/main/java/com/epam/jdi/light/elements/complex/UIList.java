@@ -5,11 +5,13 @@ package com.epam.jdi.light.elements.complex;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
@@ -21,6 +23,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -42,12 +45,14 @@ public class UIList<T extends Section> extends JDIBase implements IList<T> {
         elements.clear();
         values.clear();
     }
+    @JDIAction(level = DEBUG)
     public List<T> elements() {
-        if (values.hasValue())
+        if (values.hasValue() && values.get().size() > 0)
             return values.get();
-        if (elements.hasValue())
+        if (elements.hasValue() && elements.get().size() > 0)
             return elements.get().values();
-        return values.set(LinqUtils.select(this.getAll(), this::initElement));
+        return values.set(LinqUtils.select(
+            Timer.getByCondition(() -> getAll(), l -> l.size() > 0), this::initElement));
     }
     public MapArray<String, T> getMap() {
         if (elements.hasValue())

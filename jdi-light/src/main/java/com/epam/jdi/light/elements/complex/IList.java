@@ -134,6 +134,7 @@ public interface IList<T> extends List<T>, IHasValue {
     @Override
     default void clear() { throw new NotImplementedException(); }
     @Override
+    @JDIAction(level = DEBUG)
     default T get(int index) {
         return elements().get(index);
     }

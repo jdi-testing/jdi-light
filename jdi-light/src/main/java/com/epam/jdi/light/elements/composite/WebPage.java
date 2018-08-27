@@ -5,6 +5,8 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.IComposite;
+import com.epam.jdi.light.elements.pageobjects.annotations.Title;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.Cookie;
@@ -16,13 +18,16 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
+import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 25.03.2018
@@ -35,9 +40,8 @@ public class WebPage extends DriverBase implements IComposite {
     public String title;
 
     private String checkUrl;
-    private String checkTitle;
-    private CheckTypes checkUrlType = EQUALS;
-    private CheckTypes checkTitleType = EQUALS;
+    private CheckTypes checkUrlType = CONTAINS;
+    private CheckTypes checkTitleType = NONE;
 
     private static ThreadLocal<String> currentPage = new ThreadLocal<>();
     public static String getCurrentPage() { return currentPage.get(); }
@@ -45,7 +49,6 @@ public class WebPage extends DriverBase implements IComposite {
         currentPage.set(page.getName());
         CacheValue.reset();
     }
-    public String driverName;
     private String name;
     private String varName;
 
@@ -71,28 +74,32 @@ public class WebPage extends DriverBase implements IComposite {
         return WebDriverFactory.getDriver().getTitle();
     }
 
-    public void updatePageData(String url, String title) {
-        this.url = url;
-        this.checkUrl = url;
-
-        this.title = title;
-        this.checkTitle = title;
-    }
-    public void setCheckUrl(String url, CheckTypes type) {
-        this.checkUrl = url;
-        this.checkUrlType = type;
-    }
-    public void setCheckTitle(String title, CheckTypes type) {
-        this.checkTitle = title;
-        this.checkTitleType = type;
+    public void updatePageData(Url urlAnnotation, Title titleAnnotation) {
+        if (urlAnnotation != null) {
+            url = urlAnnotation.value();
+            checkUrl = urlAnnotation.template();
+            checkUrlType = urlAnnotation.validate();
+            if (isBlank(checkUrl)) {
+                if (checkUrlType != MATCH)
+                    checkUrl = url;
+                else throw exception("In order to validate MATCH for page '%s', please specify 'template' in @Url",
+                        getName());
+            } else if (checkUrlType == null) checkUrlType = MATCH;
+            if (!url.contains("://"))
+                url = getUrlFromUri(url);
+        } else  { url = DOMAIN; }
+        if (titleAnnotation != null) {
+            title = titleAnnotation.value();
+            checkTitleType = titleAnnotation.validate();
+        }
     }
 
     public StringCheckType url() {
-        return new StringCheckType(getDriver()::getCurrentUrl, checkUrl, "url");
+        return new StringCheckType(driver()::getCurrentUrl, checkUrl, "url");
     }
 
     public StringCheckType title() {
-        return new StringCheckType(getDriver()::getTitle, checkTitle, "title");
+        return new StringCheckType(driver()::getTitle, title, "title");
     }
 
     /**
@@ -107,16 +114,18 @@ public class WebPage extends DriverBase implements IComposite {
         if (!hasRunDrivers())
             return false;
         boolean result = Switch(checkUrlType).get(
-            Value(EQUALS, url().check()),
-            Value(MATCH, url().match()),
-            Value(CONTAINS, url().contains()),
+            Value(NONE, t -> true),
+            Value(EQUALS, t -> url().check()),
+            Value(MATCH, t -> url().match()),
+            Value(CONTAINS, t -> url().contains()),
             Else(false)
         );
         if (!result) return false;
         result = Switch(checkTitleType).get(
-            Value(EQUALS, title().check()),
-            Value(MATCH, title().match()),
-            Value(CONTAINS, title().contains()),
+            Value(NONE, t -> true),
+            Value(EQUALS, t -> title().check()),
+            Value(MATCH, t -> title().match()),
+            Value(CONTAINS, t -> title().contains()),
             Else(false)
         );
         if (result)
@@ -131,10 +140,10 @@ public class WebPage extends DriverBase implements IComposite {
     public void open() {
         CacheValue.reset();
         try {
-            getDriver().navigate().to(url);
+            driver().navigate().to(url);
         } catch (Exception ex) {
             logger.debug("Second try open page: " + toString());
-            getDriver().navigate().to(url);
+            driver().navigate().to(url);
         }
         setCurrentPage(this);
     }
@@ -259,30 +268,33 @@ public class WebPage extends DriverBase implements IComposite {
          * Check that current page url/title equals to expected url/title
          */
         public boolean check() {
-            logger.toLog(format("Check that page %s equals to '%s'", what, equals));
+            String value = actual.get();
+            logger.toLog(format("Check that page %s(%s) equals to '%s'", what, value, equals));
             return equals == null
                     || equals.equals("")
-                    || actual.get().equals(equals);
+                    || value.equals(equals);
         }
 
         /**
          * Check that current page url/title matches to expected url/title-matcher
          */
         public boolean match() {
-            logger.toLog(format("Check that page %s matches to '%s'", what, equals));
+            String value = actual.get();
+            logger.toLog(format("Check that page %s(%s) matches to '%s'", what, value, equals));
             return equals == null
                     || equals.equals("")
-                    || actual.get().matches(equals);
+                    || value.matches(equals);
         }
 
         /**
          * Check that current page url/title contains expected url/title-matcher
          */
         public boolean contains() {
-            logger.toLog(format("Check that page %s contains to '%s'", what, equals));
+            String value = actual.get();
+            logger.toLog(format("Check that page %s(%s) contains '%s'", what, value, equals));
             return equals == null
                     || equals.equals("")
-                    || actual.get().contains(equals);
+                    || value.contains(equals);
         }
     }
 }
