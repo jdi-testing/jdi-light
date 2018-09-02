@@ -87,7 +87,7 @@ public class WebPage extends DriverBase implements IComposite {
             } else if (checkUrlType == null) checkUrlType = MATCH;
             if (!url.contains("://"))
                 url = getUrlFromUri(url);
-        } else  { url = DOMAIN; }
+        } else  { if (isBlank(url)) url = DOMAIN; }
         if (titleAnnotation != null) {
             title = titleAnnotation.value();
             checkTitleType = titleAnnotation.validate();

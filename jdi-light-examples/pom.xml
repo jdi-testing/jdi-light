@@ -11,7 +11,7 @@
 
     <properties>
         <aspectj.version>1.8.5</aspectj.version>
-        <driver>ie</driver>
+        <driver>chrome</driver>
     </properties>
 
 
