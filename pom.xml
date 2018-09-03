@@ -8,7 +8,7 @@
     <version>2.0.21</version>
     <artifactId>jdi-2</artifactId>
     <name>JDI UI 2.0</name>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
 	
     <build>

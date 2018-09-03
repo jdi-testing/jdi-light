@@ -53,7 +53,7 @@ public class FastTable extends Table {
     }
 
     public List<WebElement> webRow(int rowNum) {
-        if (!rows.keys().contains(rowNum+"")) {
+        if (!rows.has(rowNum+"")) {
             if (gotTable)
                 return select(cells, c -> c.value.get(rowNum+""));
             rows.add(rowNum+"", getRow(rowNum));
@@ -61,7 +61,7 @@ public class FastTable extends Table {
         return rows.get(rowNum+"");
     }
     public List<WebElement> webColumn(int colNum) {
-        if (!columns.keys().contains(colNum+"")) {
+        if (!columns.has(colNum+"")) {
             if (gotTable)
                 return cells.get(colNum + "").values();
             columns.add(colNum + "", getColumn(colNum));
@@ -70,13 +70,13 @@ public class FastTable extends Table {
     }
     public WebElement webCell(int colNum, int rowNum) {
         if (!gotTable) {
-            if (rows.keys().contains(rowNum + ""))
+            if (rows.has(rowNum + ""))
                 return rows.get(rowNum + "").get(colNum - 1);
-            if (columns.keys().contains(colNum + ""))
+            if (columns.has(colNum + ""))
                 return columns.get(colNum + "").get(rowNum - 1);
-            if (!cells.keys().contains(colNum + ""))
+            if (!cells.has(colNum + ""))
                 cells.add(colNum + "", new MapArray<>(rowNum + "", getCell(colNum, rowNum)));
-            else if (!cells.get(colNum + "").keys().contains(rowNum + ""))
+            else if (!cells.get(colNum + "").has(rowNum + ""))
                 cells.get(colNum + "").add(rowNum + "", getCell(colNum, rowNum));
         }
         return cells.get(colNum+"").get(rowNum+"");

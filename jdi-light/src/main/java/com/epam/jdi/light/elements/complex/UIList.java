@@ -6,6 +6,7 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -26,9 +27,10 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class UIList<T extends Section> extends JDIBase implements IList<T> {
+public class UIList<T> extends JDIBase implements IList<T> {
 
     private CacheValue<MapArray<String, T>> elements = new CacheValue<>();
     private CacheValue<List<T>> values = new CacheValue<>();
@@ -85,8 +87,11 @@ public class UIList<T extends Section> extends JDIBase implements IList<T> {
     private T initElement(WebElement el) {
         try {
             T element = classType.newInstance();
-            element.setWebElement(el);
-            element.parent = this;
+            if (isClass(Section.class)) {
+                Section section = (Section)element;
+                section.setWebElement(el);
+                section.parent = this;
+            }
             initElements(element, driverName);
             return element;
         } catch (Exception ex) {
@@ -95,7 +100,7 @@ public class UIList<T extends Section> extends JDIBase implements IList<T> {
     }
 
     public <E> List<E> asData(Class<E> entityClass) {
-        return getMap().select((k, v) -> v.asEntity(entityClass));
+        return getMap().select((k, v) -> UIUtils.asEntity(v, entityClass));
     }
 
     public T get(String name) {

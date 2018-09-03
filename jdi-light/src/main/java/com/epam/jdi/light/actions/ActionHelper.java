@@ -25,6 +25,9 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.JDIStrings.DEFAULT_TEMPLATE;
+import static com.epam.jdi.light.common.JDIStrings.SHORT_TEMPLATE;
+import static com.epam.jdi.light.elements.base.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -43,8 +46,6 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 @SuppressWarnings("unused")
 @Aspect
 public class ActionHelper {
-    public static String SHORT_TEMPLATE = "{element} {action}";
-    public static String DEFAULT_TEMPLATE = "{action} ({element})";
 
     private static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? SHORT_TEMPLATE : DEFAULT_TEMPLATE;
@@ -86,10 +87,11 @@ public class ActionHelper {
         logger.toLog(logString, logLevel(joinPoint));
     };
     public static JAction1<JoinPoint> jdiBefore = joinPoint -> {
-        if (logger.getLogLevel() != OFF) {
-            processNewPage(joinPoint);
-            stepBefore.execute(joinPoint);
-        }
+        //if (logger.getLogLevel() != OFF) {
+        getWindows();
+        processNewPage(joinPoint);
+        stepBefore.execute(joinPoint);
+        //}
         //logger.logOff();
     };
     public static JAction2<JoinPoint, Object> stepAfter = (joinPoint, result) -> {

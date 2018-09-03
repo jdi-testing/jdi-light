@@ -17,7 +17,6 @@ import java.lang.reflect.Field;
 import java.util.function.Consumer;
 
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
-import static com.epam.jdi.tools.StringUtils.format;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -56,6 +55,9 @@ public class WebAnnotationsUtil {
     public static By getFrame(Frame frame) {
         if (frame == null) return null;
 
+        if (!"".equals(frame.value()))
+            return By.id(frame.value());
+
         if (!"".equals(frame.xpath()))
             return By.xpath(frame.xpath());
         if (!"".equals(frame.css()))
@@ -77,17 +79,6 @@ public class WebAnnotationsUtil {
             return By.className(frame.className());
         if (!"".equals(frame.name()))
             return By.name(frame.name());
-        if (!"".equals(frame.value()))
-            return getAttribute("value", frame.value());
-        if (!"".equals(frame.title()))
-            return getAttribute("title", frame.title());
-
-        if (!"".equals(frame.model()))
-            return By.cssSelector(format("[ng-model='%s']", frame.model()));
-        if (!"".equals(frame.binding()))
-            return By.cssSelector(format("[ng-binding='%s']", frame.binding()));
-        if (!"".equals(frame.repeat()))
-            return By.cssSelector(format("[ng-repeat='%s']", frame.repeat()));
 
         return null;
     }
@@ -143,17 +134,6 @@ public class WebAnnotationsUtil {
             return By.className(locator.className());
         if (!"".equals(locator.name()))
             return By.name(locator.name());
-        if (!"".equals(locator.value()))
-            return getAttribute("value", locator.value());
-        if (!"".equals(locator.title()))
-            return getAttribute("title", locator.title());
-
-        if (!"".equals(locator.model()))
-            return By.cssSelector(format("[ng-model='%s']", locator.model()));
-        if (!"".equals(locator.binding()))
-            return By.cssSelector(format("[ng-binding='%s']", locator.binding()));
-        if (!"".equals(locator.repeat()))
-            return By.cssSelector(format("[ng-repeat='%s']", locator.repeat()));
 
         return null;
     }

@@ -99,7 +99,7 @@ public class WebDriverFactory {
     // GET DRIVER
     public static String useDriver(DriverTypes driverType, JFunc<WebDriver> driver) {
         String driverName = driverType.name;
-        if (drivers.keys().contains(driverName))
+        if (drivers.has(driverName))
             driverName = driverName + System.currentTimeMillis();
         drivers.add(driverName, driver);
         DRIVER_NAME = driverName;
@@ -107,7 +107,7 @@ public class WebDriverFactory {
     }
 
     public static String useDriver(String driverName, JFunc<WebDriver> driver) {
-        if (!drivers.keys().contains(driverName))
+        if (!drivers.has(driverName))
             drivers.add(driverName, driver);
         else
             throw exception("Can't register WebDriver '%s'. Driver with same name already registered", driverName);
@@ -139,12 +139,12 @@ public class WebDriverFactory {
             runDrivers.get().ge
         if (INIT_THREAD_ID == Thread.currentThread().getId())
             SWITCH_THREAD = true; */
-        if (!drivers.keys().contains(driverName))
+        if (!drivers.has(driverName))
             useDriver(driverName);
         try {
             Lock lock = new ReentrantLock();
             lock.lock();
-            if (runDrivers.get() == null || !runDrivers.get().keys().contains(driverName)) {
+            if (runDrivers.get() == null || !runDrivers.get().has(driverName)) {
                 MapArray<String, WebDriver> rDrivers = runDrivers.get();
                 if (rDrivers == null)
                     rDrivers = new MapArray<>();
@@ -181,17 +181,17 @@ public class WebDriverFactory {
 
     public static void reopenDriver(String driverName) {
         MapArray<String, WebDriver> rDriver = runDrivers.get();
-        if (rDriver.keys().contains(driverName)) {
+        if (rDriver.has(driverName)) {
             rDriver.get(driverName).close();
             rDriver.removeByKey(driverName);
             runDrivers.set(rDriver);
         }
-        if (drivers.keys().contains(driverName))
+        if (drivers.has(driverName))
             getDriver();
     }
 
     public static void switchToDriver(String driverName) {
-        if (drivers.keys().contains(driverName))
+        if (drivers.has(driverName))
             DRIVER_NAME = driverName;
         else
             throw exception("Can't switch to Webdriver '%s'. This Driver name not registered", driverName);

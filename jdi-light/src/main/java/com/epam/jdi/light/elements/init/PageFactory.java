@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.IComposite;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -16,6 +15,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.WithText;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import com.epam.jdi.light.settings.WebSettings;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -37,8 +37,7 @@ import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
 import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.switcher.SwitchActions.Case;
-import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
+import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -114,12 +113,19 @@ public class PageFactory {
                 }
                 if (changed)
                     field.set(isClass ? null : section, instance);
-                if (isInterface(type, IComposite.class))
+                if (isPageObject(instance.getClass()))
                     initElements(instance, driverName);
             }
         } catch (Exception ex) {
             throw exception("Can't init or setup element '%s' on page '%s'", field.getName(), sectionName);
         }
+    }
+    private static boolean isPageObject(Class<?> type) {
+        return LinqUtils.any(type.getFields(),
+                f -> isInterface(f, WebElement.class) ||
+                isList(f, WebElement.class) ||
+                isClass(f, JDIBase.class)
+        );
     }
     private static Object newInstance(Field field, String sectionName) {
         return Switch(field).get(
@@ -127,12 +133,9 @@ public class PageFactory {
                 f -> new UIElement()),
             Case(f -> isClass(f, WebList.class) || isList(f, WebElement.class),
                 f -> new WebList()),
-            Case(f -> isList(f, IComposite.class),
+            Case(f -> isInterface(f, List.class) && isPageObject(getGenericType(field)),
                 f -> initJElements(f, sectionName)),
-            Case(f -> isInterface(f, IComposite.class),
-                f -> initSection(f, sectionName)),
-            Case(f -> isInterface(f, ISetup.class),
-                f -> f.getType().newInstance() )
+            Default(f -> initSection(f, sectionName))
         );
     }
     private static boolean isList(Field field, Class<?> type) {

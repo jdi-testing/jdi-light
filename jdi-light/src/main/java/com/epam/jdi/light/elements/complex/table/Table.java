@@ -38,6 +38,7 @@ public class Table extends JDIBase implements ISetup, IHasValue {
 
     protected CacheValue<Integer> count = new CacheValue<>(() -> rows.get().size());
 
+    public int size() {return rows.get().size(); }
     public List<WebElement> webRow(int rowNum) {
         return rows.get().get(rowNum-1)
                 .findElements(columnsLocator);

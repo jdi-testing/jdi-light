@@ -80,7 +80,7 @@ public final class WebDriverByUtils {
         Matcher m = Pattern.compile("By\\.(?<locator>.*):.*").matcher(by.toString());
         if (m.find()) {
             String result = m.group("locator");
-            return byReplace.keys().contains(result) ? byReplace.get(result) : result;
+            return byReplace.has(result) ? byReplace.get(result) : result;
         }
         throw new RuntimeException("Can't get By name for: " + by);
     }

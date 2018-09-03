@@ -25,13 +25,6 @@ public @interface FindBy {
     String id() default "";
     String name() default "";
     String className() default "";
-    String value() default "";
-    String title() default "";
-
-    // Angular
-    String model() default "";
-    String binding() default "";
-    String repeat() default "";
 
     // Group
     String group() default "";

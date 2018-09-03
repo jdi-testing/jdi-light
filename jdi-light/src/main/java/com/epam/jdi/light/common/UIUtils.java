@@ -6,6 +6,8 @@ package com.epam.jdi.light.common;
  */
 
 import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.interfaces.IHasValue;
+import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
@@ -19,6 +21,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.foreach;
 import static com.epam.jdi.tools.LinqUtils.select;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
@@ -77,5 +80,28 @@ public final class UIUtils {
 
     private static String toButton(String buttonName) {
         return buttonName.toLowerCase().contains("button") ? buttonName : buttonName + "button";
+    }
+
+    public static <T> T asEntity(Object obj, Class<T> entityClass) {
+        try {
+            T data = newEntity(entityClass);
+            foreach(getFields(obj, IHasValue.class), item -> {
+                Field field = first(getFields(data, String.class), f ->
+                        namesEqual(f.getName(), item.getName()));
+                if (field == null)
+                    return;
+                try {
+                    field.set(data, ((IHasValue) getValueField(item, obj)).getValue());
+                } catch (Exception ignore) { }
+            });
+            return data;
+        } catch (Exception ex) {
+            throw exception("Can't get entity from '" + getName(obj) + "' for class: " + entityClass.getClass());
+        }
+    }
+    private static String getName(Object obj) {
+        return isInterface(obj.getClass(), INamed.class)
+            ? ((INamed)obj).getName()
+            : obj.getClass().getSimpleName();
     }
 }

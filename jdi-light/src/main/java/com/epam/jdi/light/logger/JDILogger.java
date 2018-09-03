@@ -27,7 +27,7 @@ public class JDILogger implements ILogger {
     private static Marker jdiMarker = MarkerManager.getMarker("JDI");
 
     public static JDILogger instance(String name) {
-        if (!loggers.keys().contains(name))
+        if (!loggers.has(name))
             loggers.add(name, new JDILogger(name));
         return loggers.get(name);
     }
