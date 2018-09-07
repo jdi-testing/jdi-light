@@ -19,7 +19,7 @@
         <!--JDI-->
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light</artifactId>
+            <artifactId>jdi-light-html</artifactId>
             <version>1.0.4</version>
         </dependency>
 		

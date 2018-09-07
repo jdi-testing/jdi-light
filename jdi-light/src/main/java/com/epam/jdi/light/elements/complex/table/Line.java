@@ -24,6 +24,7 @@ public class Line implements IList<String> {
     public String getValue() {
         return print(elements);
     }
+    public void clear() { elements.clear(); }
     public <T> T asData(Class<T> cl) {
         T instance;
         try { instance = cl.newInstance(); }

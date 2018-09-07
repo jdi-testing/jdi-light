@@ -39,6 +39,11 @@ public class Table extends JDIBase implements ISetup, IHasValue {
     protected CacheValue<Integer> count = new CacheValue<>(() -> rows.get().size());
 
     public int size() {return rows.get().size(); }
+    @JDIAction
+    public boolean isEmpty() { return size() == 0; }
+    @JDIAction
+    public boolean isNotEmpty() { return size() != 0; }
+
     public List<WebElement> webRow(int rowNum) {
         return rows.get().get(rowNum-1)
                 .findElements(columnsLocator);
@@ -112,9 +117,11 @@ public class Table extends JDIBase implements ISetup, IHasValue {
             this.count.set(count);
     }
 
+    @JDIAction
     public String preview() {
         return get().getText();
     }
+    @JDIAction
     public String getValue() {
         String value = "||X||" + print(headers.get(), "|") + "||" + LINE_BREAK;
         for (int i = 1; i <= count.get(); i++)

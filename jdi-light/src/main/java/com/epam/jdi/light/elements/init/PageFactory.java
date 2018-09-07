@@ -1,13 +1,7 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.UIList;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;
@@ -15,30 +9,28 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.WithText;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import com.epam.jdi.light.settings.WebSettings;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Modifier;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.composite.WebPage.addPage;
+import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
-import static com.epam.jdi.tools.LinqUtils.any;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -48,22 +40,23 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class PageFactory {
 
     public static void initSite(Class<?> site) {
+        SiteInfo info = new SiteInfo();
+        info.parentClass = site;
+        info.driverName = DRIVER_NAME;
         WebSettings.init();
+        setDomain(site);
         Field[] pages = site.getDeclaredFields();
-        for (Field pageField : pages) {
+        List<Field> staticPages = filter(pages, p -> Modifier.isStatic(p.getModifiers()));
+        for (Field pageField : staticPages) {
             try {
-                Class type = pageField.getType();
-                if (isClass(type, WebPage.class)) {
-                    WebPage page = (WebPage) newInstance(pageField, site.getSimpleName());
-                    page.setName(pageField.getName(), site.getSimpleName());
-                    setDomain(site);
-                    page.updatePageData(getAnnotation(pageField, Url.class),
-                                        getAnnotation(pageField, Title.class));
-                    initElements(page);
-                    pageField.set(null, page);
-                }
-                else
-                    initElement(pageField, false, site, DRIVER_NAME);
+                info.field = pageField;
+                Object instance = Switch(info).get(
+                    Case(i -> isClass(i.fieldType(), WebPage.class),
+                        i-> SETUP_WEBPAGE_ON_SITE.execute(i)),
+                    Case(i -> isPageObject(i.fieldType()),
+                        i -> SETUP_PAGE_OBJECT_ON_SITE.execute(info)),
+                    Else(PageFactory::initElement));
+                pageField.set(null, instance);
             } catch (Exception ex) {
                 throw exception("Can't init %s '%s' on '%s'. Exception: %s",
                     isClass(pageField.getType(), WebPage.class) ? "page" : "element",
@@ -78,85 +71,41 @@ public class PageFactory {
     }
     public static void initElements(JFunc<WebDriver> driver, Object... pages) { }
 
-    public static void initElements(Object section, String driverName) {
-        boolean isClass = section.getClass().isAssignableFrom(Class.class);
-        Class<?> type = isClass ? (Class)section : section.getClass();
-        Field[] fields = type.getDeclaredFields();
+    public static void initElements(SiteInfo info) {
+        List<Field> fields = filter(info.instance.getClass().getDeclaredFields(),
+                f -> isJDIField(f) || isPageObject(f.getType()));
+        SiteInfo pageInfo = new SiteInfo(info);
+        pageInfo.parent = info.instance;
         for (Field field : fields) {
-            initElement(field, isClass, section, driverName);
-        }
-    }
-    private static void initElement(Field field, boolean isClass, Object section, String driverName) {
-        String sectionName = section == null ? null : section.getClass().getSimpleName();
-        try {
-            Object instance = getValueField(field, section);
-            boolean changed = false;
-            if (instance == null) {
-                instance = newInstance(field, sectionName);
-                changed = true;
+            pageInfo.field = field;
+            try {
+                field.set(info.instance, initElement(pageInfo));
+            } catch (Exception ex) {
+                throw exception("Can't init %s '%s' on '%s'. Exception: %s",
+                        isClass(pageInfo.field.getType(), WebPage.class) ? "page" : "element",
+                        pageInfo.field.getName(),
+                        info.field.getType().getSimpleName(),
+                        ex.getMessage());
             }
-            if (instance != null) {
-                Class<?> type = instance.getClass();
-                if (isClass(type, JDIBase.class)) {
-                    JDIBase jdi = (JDIBase) instance;
-                    By locator = getLocatorFromField(field);
-                    if (locator != null ) jdi.setLocator(locator);
-                    if (hasAnnotation(field, Frame.class))
-                        jdi.setFrame(getFrame(field.getAnnotation(Frame.class)));
-                    jdi.setName(field.getName(), sectionName);
-                    jdi.setTypeName(type.getName());
-                    jdi.parent = section;
-                    jdi.driverName = isBlank(driverName) ? DRIVER_NAME : driverName;
-                    if (isInterface(field, ISetup.class))
-                        ((ISetup)jdi).setup(field);
-                    changed = true;
-                }
-                if (changed)
-                    field.set(isClass ? null : section, instance);
-                if (isPageObject(instance.getClass()))
-                    initElements(instance, driverName);
+        }
+        return;
+    }
+    private static Object initElement(SiteInfo info) {
+        try {
+            info.instance = getValueField(info.field, info.parent);
+            if (info.instance == null) {
+                if (any(INIT_RULES, r -> r.key.execute(info.field)))
+                    info.instance = first(INIT_RULES, r -> r.key.execute(info.field))
+                        .value.execute(info);
+                else throw exception("Can't init field '%s'. No init rules found (you can add appropriate rule in InitActions.INIT_RULES)");
             }
+            if (info.instance != null) {
+                ifDo(SETUP_RULES, rule -> rule.key.execute(info),
+                    rule -> rule.value.execute(info));
+            }
+            return info.instance;
         } catch (Exception ex) {
-            throw exception("Can't init or setup element '%s' on page '%s'", field.getName(), sectionName);
-        }
-    }
-    private static boolean isPageObject(Class<?> type) {
-        return LinqUtils.any(type.getFields(),
-                f -> isInterface(f, WebElement.class) ||
-                isList(f, WebElement.class) ||
-                isClass(f, JDIBase.class)
-        );
-    }
-    private static Object newInstance(Field field, String sectionName) {
-        return Switch(field).get(
-            Case(f -> isInterface(f, WebElement.class),
-                f -> new UIElement()),
-            Case(f -> isClass(f, WebList.class) || isList(f, WebElement.class),
-                f -> new WebList()),
-            Case(f -> isInterface(f, List.class) && isPageObject(getGenericType(field)),
-                f -> initJElements(f, sectionName)),
-            Default(f -> initSection(f, sectionName))
-        );
-    }
-    private static boolean isList(Field field, Class<?> type) {
-        return isInterface(field, List.class)
-                && isInterface(getGenericType(field), type);
-    }
-
-    private static Object initSection(Field field, String sectionName) {
-        try {
-            return field.getType().newInstance();
-        } catch (Exception ex) {
-            throw exception("Can't instantiate Section field '%s' on page '%s'", field.getName(), sectionName);
-        }
-    }
-    private static UIList initJElements(Field field, String sectionName) {
-        Class<?> genericType = null;
-        try {
-            genericType = getGenericType(field);
-            return new UIList(genericType);
-        } catch (Exception ex) {
-            throw exception("Can't instantiate List<%s> field '%s' on page '%s'", genericType == null ? "UNKNOWN" : genericType.getSimpleName(), field.getName(), sectionName);
+            throw exception("Can't init or setup element '%s' on page '%s'", info.field.getName(), info.parentName());
         }
     }
     public static void initElements(Class<?>... pages) {
@@ -166,6 +115,9 @@ public class PageFactory {
     }
     public static void initElements(Object... pages) {
         for (Object obj : pages) {
+            SiteInfo info = new SiteInfo();
+            info.instance = obj;
+            info.driverName = DRIVER_NAME;
             if (isClass(obj.getClass(), WebPage.class)) {
                 WebPage page = (WebPage) obj;
                 page.driverName = DRIVER_NAME;
@@ -173,11 +125,11 @@ public class PageFactory {
                         page.getClass().getAnnotation(Title.class));
                 addPage(page);
             }
-            initElements(obj, DRIVER_NAME);
+            initElements(info);
         }
     }
 
-    private static By getLocatorFromField(Field field) {
+    public static By getLocatorFromField(Field field) {
         FindBy[] jfindbys = field.getAnnotationsByType(FindBy.class);
         if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
             return findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP)));
@@ -192,13 +144,6 @@ public class PageFactory {
         if (hasAnnotation(field, WithText.class))
             return findByToBy(field.getAnnotation(WithText.class));
         return null;
-    }
-    private static Class<?> getGenericType(Field field) {
-        try {
-            return (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
-        } catch (Exception ex) {
-            throw exception(field.getName() + " is List but has no Generic type");
-        }
     }
 
     // Selenium PageFactory

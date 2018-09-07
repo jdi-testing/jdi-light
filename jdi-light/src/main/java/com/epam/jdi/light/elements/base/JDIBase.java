@@ -33,38 +33,12 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  */
 
 public class JDIBase extends DriverBase implements INamed {
-    public String name;
-    public String varName;
-    public String typeName;
-    public Object parent;
     public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
-    public <T extends JDIBase> T setParent(Object parent) {
-        this.parent = parent;
-        return (T) this;
-    }
     protected By byLocator;
     private CacheValue<WebElement> webElement = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
     public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
-    public void setName(String varName, String className) {
-        this.name = splitCamelCase(varName);
-        this.varName = className + "." + varName;
-    }
-    public void setWebElement(WebElement el) { webElement.setForce(el); }
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
-    }
-    public String getName() {
-        return isBlank(name) ? getClass().getSimpleName() : name;
-    }
-
-    public WebPage getPage() {
-        if (parent == null) return null;
-        if (isClass(parent.getClass(), WebPage.class))
-            return (WebPage) parent;
-        if (!isClass(parent.getClass(), JDIBase.class)) return null;
-        return ((JDIBase)parent).getPage();
-    }
+    public <T extends JDIBase> T setWebElement(WebElement el) { webElement.setForce(el); return (T)this; }
 
     public <T extends JDIBase> T setLocator(By locator) {
         locatorType = DEFAULT;

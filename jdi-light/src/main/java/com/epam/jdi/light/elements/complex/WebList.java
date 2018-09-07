@@ -5,7 +5,9 @@ package com.epam.jdi.light.elements.complex;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.ISetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
@@ -17,12 +19,16 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static java.lang.String.format;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
     private CacheValue<List<WebElement>> webElements = new CacheValue<>();
+
+    @JDIAction
     public void select(String name) {
         if (getByLocator(getLocator()).contains("%s")) {
             get(name).click();
@@ -38,9 +44,11 @@ public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
     public void select(Enum name) {
         select(getEnumValue(name));
     }
+    @JDIAction
     public void get(Enum name) {
         get(getEnumValue(name));
     }
+    @JDIAction
     public void select(int index) {
         get(index).click();
     }
@@ -48,18 +56,24 @@ public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
     public List<String> values() {
         return LinqUtils.map(getAll(), WebElement::getText);
     }
+    @JDIAction(level = DEBUG)
     public void refresh() {
         webElements.clear();
     }
 
+    @JDIAction(level = DEBUG)
     public void clear() {
-        webElements.get().clear();
+        webElements.clear();
     }
 
-    public WebElement get(int index) {
+    @JDIAction(level = DEBUG)
+    public UIElement get(int index) {
         if (!webElements.hasValue())
             webElements.set(getAll());
-        return webElements.get().get(index);
+        UIElement element = new UIElement();
+        element.name = format("%s[%s]", getName(), index);
+        element.setWebElement(webElements.get().get(index));
+        return element;
     }
 
     public void setValue(String value) {
@@ -69,10 +83,19 @@ public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
     public String getValue() {
         return print(values());
     }
+    @JDIAction
     public boolean isDisplayed() {
         return getWebElements().get(0).isDisplayed();
     }
-
+    @JDIAction
+    public void showAll() {
+        int size;
+        do {
+            size = size();
+            ((UIElement) new UIElement().setWebElement(get(size-1))).show();
+            clear();
+        } while (size < size());
+    }
 
     //region matchers
     public void is(Matcher<Collection<? extends String>> condition) {

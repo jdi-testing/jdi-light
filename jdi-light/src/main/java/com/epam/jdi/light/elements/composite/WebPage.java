@@ -24,7 +24,6 @@ import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -48,16 +47,6 @@ public class WebPage extends DriverBase implements INamed {
     public static void setCurrentPage(WebPage page) {
         currentPage.set(page.getName());
         CacheValue.reset();
-    }
-    private String name;
-    private String varName;
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String varName, String className) {
-        this.name = splitCamelCase(varName);
-        this.varName = className + "." + varName;
     }
 
     public WebPage() { }
@@ -215,9 +204,17 @@ public class WebPage extends DriverBase implements INamed {
     private static void scroll(int x, int y) {
         jsExecute("window.scrollBy("+x+","+y+")");
     }
+    @JDIAction
+    public static void scrollToTop() {
+        jsExecute("window.scrollTo(0,0)");
+    }
+    @JDIAction
+    public static void scrollToBottom() {
+        jsExecute("window.scrollTo(0,document.body.scrollHeight)");
+    }
 
     @JDIAction
-    public static void  scrollDown(int value) {
+    public static void scrollDown(int value) {
         scroll(0,value);
     }
     @JDIAction

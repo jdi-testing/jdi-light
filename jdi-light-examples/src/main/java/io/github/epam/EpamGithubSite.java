@@ -1,6 +1,7 @@
 package io.github.epam;
 
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
@@ -28,6 +29,6 @@ public class EpamGithubSite {
 	@Css("header") public static Header header;
 	@Css("footer") public static Footer footer;
 
-
+	@Frame("iframe") public static HomePageFrame iframe;
 	public static GithubPage githubPage;
 }

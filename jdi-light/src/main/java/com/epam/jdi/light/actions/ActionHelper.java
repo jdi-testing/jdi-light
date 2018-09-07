@@ -6,7 +6,7 @@ package com.epam.jdi.light.actions;
  */
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.func.JAction1;
@@ -87,12 +87,12 @@ public class ActionHelper {
         logger.toLog(logString, logLevel(joinPoint));
     };
     public static JAction1<JoinPoint> jdiBefore = joinPoint -> {
-        //if (logger.getLogLevel() != OFF) {
-        getWindows();
-        processNewPage(joinPoint);
-        stepBefore.execute(joinPoint);
-        //}
-        //logger.logOff();
+        if (logger.getLogLevel() != OFF) {
+            getWindows();
+            processNewPage(joinPoint);
+            stepBefore.execute(joinPoint);
+        }
+        logger.logOff();
     };
     public static JAction2<JoinPoint, Object> stepAfter = (joinPoint, result) -> {
         if (result != null && logLevel(joinPoint).equalOrMoreThan(INFO))
@@ -100,7 +100,7 @@ public class ActionHelper {
         logger.debug("Done");
     };
     public static JAction2<JoinPoint, Object> jdiAfter = (joinPoint, result) -> {
-        //logger.logOn();
+        logger.logOn();
         if (logger.getLogLevel() == OFF) return;
         stepAfter.execute(joinPoint, result);
     };
@@ -119,8 +119,9 @@ public class ActionHelper {
         }
     }
     private static WebPage getPage(Object element) {
-        if (isClass(element.getClass(), JDIBase.class))
-            return ((JDIBase) element).getPage();
+        if (isClass(element.getClass(), DriverBase.class) &&
+            !isClass(element.getClass(), WebPage.class))
+            return ((DriverBase) element).getPage();
         return null;
     }
     public static boolean ERROR_THROWN = false;
@@ -209,7 +210,7 @@ public class ActionHelper {
         return map;
     }
     static Object[] getArgs(Object[] args) {
-        Object[] result = new String [args.length];
+        Object[] result = new Object[args.length];
         for (int i = 0; i< args.length; i++)
             result[i] = Switch(args[i]).get(
                 Case(arg -> arg.getClass().isArray(),

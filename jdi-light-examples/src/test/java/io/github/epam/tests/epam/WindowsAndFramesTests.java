@@ -5,8 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.base.WindowsManager.*;
-import static io.github.epam.EpamGithubSite.githubPage;
-import static io.github.epam.EpamGithubSite.homePage;
+import static io.github.epam.EpamGithubSite.*;
 import static io.github.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
@@ -19,6 +18,7 @@ public class WindowsAndFramesTests extends SimpleTestsInit {
     }
     @Test
     public void windowsTest() {
+        homePage.shouldBeOpened();
         homePage.githubLink.click();
         System.out.println("New window is opened: " + newWindowIsOpened());
         System.out.println("Windows count: " + windowsCount());
@@ -38,6 +38,6 @@ public class WindowsAndFramesTests extends SimpleTestsInit {
 
     @Test
     public void frameTest() {
-        homePage.iframe.userIcon.click();
+        iframe.userIcon.click();
     }
 }

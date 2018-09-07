@@ -8,7 +8,8 @@ import static io.github.epam.EpamGithubSite.*;
 import static io.github.epam.enums.ColorsList.Green;
 import static io.github.epam.enums.Metals.Gold;
 import static io.github.epam.enums.Navigation.*;
-import static io.github.epam.enums.NavigationNums.*;
+import static io.github.epam.enums.NavigationNums.nContactForm;
+import static io.github.epam.enums.NavigationNums.nHome;
 import static io.github.epam.steps.Preconditions.shouldBeLoggedIn;
 
 public class ComplexElementsTests extends SimpleTestsInit {
@@ -23,15 +24,13 @@ public class ComplexElementsTests extends SimpleTestsInit {
         metalAndColorsPage.colors.select(Green);
         metalAndColorsPage.metals.select(Gold);
         //metalAndColorsPage.vegetables.check(Onion, Tomato);
-        System.out.println("Set elements");
     }
     @Test
     public void navigationListTest() {
         navigation.get(nContactForm).click();
         contactFormPage.checkOpened();
         navigation.get(nHome).click();
-        homePage.checkOpened();
-        navigation.get(nComplexTable).click();
+        homePage.jdiText.getText();
     }
     @Test
     public void navigationMenuTest() {

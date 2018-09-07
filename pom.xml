@@ -29,6 +29,7 @@
         <module>jdi-light</module>
         <module>jdi-light-examples</module>
         <module>jdi-light-template</module>
+        <module>jdi-light-html</module>
     </modules>
 
 </project>

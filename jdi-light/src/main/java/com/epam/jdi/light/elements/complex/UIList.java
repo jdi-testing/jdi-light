@@ -9,6 +9,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
@@ -43,18 +44,19 @@ public class UIList<T> extends JDIBase implements IList<T> {
         elements.setForce(new MapArray<>());
         values.setForce(new ArrayList<>());
     }
-    public void refresh() {
-        elements.clear();
-        values.clear();
-    }
     @JDIAction(level = DEBUG)
     public List<T> elements() {
-        if (values.hasValue() && values.get().size() > 0)
+        if (values.hasValue())
             return values.get();
-        if (elements.hasValue() && elements.get().size() > 0)
+        if (elements.hasValue())
             return elements.get().values();
         return values.set(LinqUtils.select(
             Timer.getByCondition(() -> getAll(), l -> l.size() > 0), this::initElement));
+    }
+    @JDIAction(level = DEBUG)
+    public void clear() {
+        elements.clear();
+        values.clear();
     }
     public MapArray<String, T> getMap() {
         if (elements.hasValue())
@@ -92,7 +94,10 @@ public class UIList<T> extends JDIBase implements IList<T> {
                 section.setWebElement(el);
                 section.parent = this;
             }
-            initElements(element, driverName);
+            SiteInfo info = new SiteInfo();
+            info.instance = element;
+            info.driverName = driverName;
+            initElements(info);
             return element;
         } catch (Exception ex) {
             throw exception("Can't instantiate list element");
@@ -103,6 +108,7 @@ public class UIList<T> extends JDIBase implements IList<T> {
         return getMap().select((k, v) -> UIUtils.asEntity(v, entityClass));
     }
 
+    @JDIAction(level = DEBUG)
     public T get(String name) {
         return getMap().get(name);
     }
@@ -113,6 +119,17 @@ public class UIList<T> extends JDIBase implements IList<T> {
         if (expectedFields == null)
             throw exception("No title name specified for '%s' class", classType.getSimpleName());
         titleFieldName = expectedFields.getName();
+    }
+    @JDIAction
+    public void showAll() {
+        if (!isClass(classType, Section.class))
+            throw exception("Show all can be executed only for List of Sections. Please add ' extend Section' to your PageObject class in List");
+        int size;
+        do {
+            size = size();
+            js().executeScript("arguments[0].scrollIntoView(true);", ((Section)get(size-1)).get());
+            clear();
+        } while (size < size());
     }
 
     public T get(Enum name) {

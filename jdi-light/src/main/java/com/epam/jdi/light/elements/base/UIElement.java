@@ -17,11 +17,15 @@ import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-public class UIElement extends JDIBase implements WebElement, ISetValue, IHasValue {
+public class UIElement extends JDIBase implements WebElement, BaseElement, ISetValue, IHasValue {
 
     @JDIAction
     public void click() {
         get().click();
+    }
+    @JDIAction
+    public void hover() {
+        doActions(a -> a.moveToElement(getWebElement()));
     }
     @JDIAction
     public UIElement jsClick() {
