@@ -11,6 +11,7 @@ import static io.github.epam.enums.Navigation.*;
 import static io.github.epam.enums.NavigationNums.nContactForm;
 import static io.github.epam.enums.NavigationNums.nHome;
 import static io.github.epam.steps.Preconditions.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.containsString;
 
 public class ComplexElementsTests extends SimpleTestsInit {
 
@@ -30,7 +31,9 @@ public class ComplexElementsTests extends SimpleTestsInit {
         navigation.get(nContactForm).click();
         contactFormPage.checkOpened();
         navigation.get(nHome).click();
-        homePage.jdiText.getText();
+        System.out.println(homePage.jdiText.getText());
+        homePage.jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
+        homePage.githubLink.click().getText();
     }
     @Test
     public void navigationMenuTest() {

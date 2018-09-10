@@ -15,13 +15,29 @@ public class IsAssert {
     public void attr(String attrName, Matcher<? super String> condition) {
         assertThat(element.getAttribute(attrName), condition);
     }
+    public void css(String css, Matcher<? super String> condition) {
+        assertThat(element.getCssValue(css), condition);
+    }
+    public void tag(Matcher<? super String> condition) {
+        assertThat(element.getTagName(), condition);
+    }
     public void displayed() {
-        assertThat(element.isDisplayed() ? "displayed" : "invisible", is("displayed"));
+        assertThat(element.isDisplayed() ? "displayed" : "hidden", is("displayed"));
+    }
+
+    public void hidden() {
+        assertThat(element.isDisplayed() ? "displayed" : "hidden", is("hidden"));
     }
     public void selected() {
         assertThat(element.isSelected() ? "selected" : "not selected", is("selected"));
     }
+    public void notSelected() {
+        assertThat(element.isSelected() ? "selected" : "not selected", is("not selected"));
+    }
     public void enabled() {
         assertThat(element.isEnabled() ? "enabled" : "disabled", is("enabled"));
+    }
+    public void disabled() {
+        assertThat(element.isEnabled() ? "enabled" : "disabled", is("disabled"));
     }
 }

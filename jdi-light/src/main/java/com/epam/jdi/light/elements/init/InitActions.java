@@ -80,6 +80,27 @@ public class InitActions {
         $(f -> isPageObject(f.getType()), InitActions::initSection)
     );
 
+    public static Pairs<JFunc1<SiteInfo, Boolean>, JAction1<SiteInfo>> SETUP_RULES = new Pairs<>(
+            $(info -> isClass(info.instance.getClass(), JDIBase.class),
+                    info -> {
+                        String parentName = info.parent == null ? null : info.parent.getClass().getSimpleName();
+                        Class<?> type = info.instance.getClass();
+                        JDIBase jdi = (JDIBase) info.instance;
+                        By locator = getLocatorFromField(info.field);
+                        if (locator != null ) jdi.setLocator(locator);
+                        if (hasAnnotation(info.field, Frame.class))
+                            jdi.setFrame(getFrame(info.field.getAnnotation(Frame.class)));
+                        jdi.setName(info.field.getName(), parentName);
+                        jdi.setTypeName(type.getName());
+                        jdi.parent = info.parent;
+                        jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
+                    }),
+            $(info -> isInterface(info.field, ISetup.class),
+                    info -> ((ISetup)info.instance).setup(info.field)
+            ),
+            $(info -> isPageObject(info.instance.getClass()),
+                    PageFactory::initElements)
+    );
     private static <T> T initSection(SiteInfo info) {
         try {
             return (T) info.fieldType().newInstance();
@@ -97,28 +118,6 @@ public class InitActions {
                     ? "UNKNOWN" : genericType.getSimpleName(), info.field.getName(), info.parentName());
         }
     }
-
-    public static Pairs<JFunc1<SiteInfo, Boolean>, JAction1<SiteInfo>> SETUP_RULES = new Pairs<>(
-        $(info -> isClass(info.instance.getClass(), JDIBase.class),
-            info -> {
-            String parentName = info.parent == null ? null : info.parent.getClass().getSimpleName();
-            Class<?> type = info.instance.getClass();
-            JDIBase jdi = (JDIBase) info.instance;
-            By locator = getLocatorFromField(info.field);
-            if (locator != null ) jdi.setLocator(locator);
-            if (hasAnnotation(info.field, Frame.class))
-                jdi.setFrame(getFrame(info.field.getAnnotation(Frame.class)));
-            jdi.setName(info.field.getName(), parentName);
-            jdi.setTypeName(type.getName());
-            jdi.parent = info.parent;
-            jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
-        }),
-        $(info -> isInterface(info.field, ISetup.class),
-            info -> ((ISetup)info.instance).setup(info.field)
-        ),
-        $(info -> isPageObject(info.instance.getClass()),
-            PageFactory::initElements)
-    );
     public static boolean isJDIField(Field field) {
         return isInterface(field, WebElement.class) ||
                 isInterface(field, BaseElement.class) ||
