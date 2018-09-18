@@ -17,7 +17,6 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -31,6 +30,7 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static java.lang.reflect.Modifier.isStatic;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -46,7 +46,7 @@ public class PageFactory {
         WebSettings.init();
         setDomain(site);
         Field[] pages = site.getDeclaredFields();
-        List<Field> staticPages = filter(pages, p -> Modifier.isStatic(p.getModifiers()));
+        List<Field> staticPages = filter(pages, p -> isStatic(p.getModifiers()));
         for (Field pageField : staticPages) {
             try {
                 info.field = pageField;
@@ -55,8 +55,9 @@ public class PageFactory {
                         i-> SETUP_WEBPAGE_ON_SITE.execute(i)),
                     Case(i -> isPageObject(i.fieldType()),
                         i -> SETUP_PAGE_OBJECT_ON_SITE.execute(info)),
-                    Else(PageFactory::initElement));
-                pageField.set(null, instance);
+                    Case(i -> isJDIField(pageField), PageFactory::initElement));
+                if (instance != null)
+                    pageField.set(null, instance);
             } catch (Exception ex) {
                 throw exception("Can't init %s '%s' on '%s'. Exception: %s",
                     isClass(pageField.getType(), WebPage.class) ? "page" : "element",
@@ -79,7 +80,8 @@ public class PageFactory {
         for (Field field : fields) {
             pageInfo.field = field;
             try {
-                field.set(info.instance, initElement(pageInfo));
+                Object obj = isStatic(field.getModifiers()) ? null : info.instance;
+                field.set(obj, initElement(pageInfo));
             } catch (Exception ex) {
                 throw exception("Can't init %s '%s' on '%s'. Exception: %s",
                         isClass(pageInfo.field.getType(), WebPage.class) ? "page" : "element",
@@ -88,7 +90,6 @@ public class PageFactory {
                         ex.getMessage());
             }
         }
-        return;
     }
     private static Object initElement(SiteInfo info) {
         try {

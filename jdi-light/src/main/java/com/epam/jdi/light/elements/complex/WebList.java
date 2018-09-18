@@ -7,14 +7,13 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.ListAssert;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.ISetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
-import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
 
-import java.util.Collection;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -23,30 +22,30 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
     private CacheValue<List<WebElement>> webElements = new CacheValue<>();
 
     @JDIAction
     public void select(String name) {
-        if (getByLocator(getLocator()).contains("%s")) {
-            get(name).click();
-            return;
-        }
-        for(WebElement el : getAll())
-            if (el.getText().equals(name)) {
-                el.click();
-                return;
-            }
-        throw exception("Can't select '%s'. No elements with this name found");
+        get(name).click();
     }
     public void select(Enum name) {
         select(getEnumValue(name));
     }
+
     @JDIAction
-    public void get(Enum name) {
-        get(getEnumValue(name));
+    public UIElement get(String name) {
+        if (getByLocator(getLocator()).contains("%s"))
+            return getUI(name);
+        UIElement el = LinqUtils.first(allUI(), e -> e.getText().equals(name));
+        if (el == null)
+            throw exception("Can't select '%s'. No elements with this name found");
+        return el;
+    }
+    @JDIAction
+    public UIElement get(Enum name) {
+        return get(getEnumValue(name));
     }
     @JDIAction
     public void select(int index) {
@@ -84,10 +83,6 @@ public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
         return print(values());
     }
     @JDIAction
-    public boolean isDisplayed() {
-        return getWebElements().get(0).isDisplayed();
-    }
-    @JDIAction
     public void showAll() {
         int size;
         do {
@@ -98,11 +93,11 @@ public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
     }
 
     //region matchers
-    public void is(Matcher<Collection<? extends String>> condition) {
-        assertThat(values(), condition);
+    public ListAssert is() {
+        return new ListAssert(this);
     }
-    public void displayed() {
-        assertThat(isDisplayed() ? "displayed" : "invisible", org.hamcrest.Matchers.is("displayed"));
+    public ListAssert assertThat() {
+        return is();
     }
     //endregion
 }

@@ -20,9 +20,9 @@ import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -64,7 +64,7 @@ public class JDIBase extends DriverBase implements INamed {
     public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
             = "Find %s elements instead of one for Element '%s' during %s seconds";
 
-    public WebElement get(String... args) {
+    public WebElement get(Object... args) {
         // TODO SAVE GET ELEMENT AND STALE ELEMENT PROCESS
         if (webElement.hasValue())
             return webElement.get();
@@ -78,19 +78,19 @@ public class JDIBase extends DriverBase implements INamed {
                 throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT);
         }
     }
-    protected WebElement getWebElement(Object... args) {
-        List<WebElement> result = getWebElements(args);
-        return result.size() > 0 ? result.get(0) : null;
+    public UIElement getUI(Object... args) {
+        return new UIElement().setWebElement(get(args));
     }
 
     public List<WebElement> getAll(Object... args) {
-        return filter(getWebElements(args), el -> searchRule.invoke(el));
-    }
-    protected List<WebElement> getWebElements(Object... args) {
         SearchContext searchContext = containsRoot(getLocator(args))
-            ? getDefaultContext()
-            : getSearchContext(parent);
-        return searchContext.findElements(correctLocator(getLocator(args)));
+                ? getDefaultContext()
+                : getSearchContext(parent);
+        List<WebElement> els = searchContext.findElements(correctLocator(getLocator(args)));
+        return filter(els, el -> searchRule.invoke(el));
+    }
+    public List<UIElement> allUI(Object... args) {
+        return map(getAll(args), el -> new UIElement().setWebElement(el));
     }
 
     private SearchContext getSearchContext(Object element) {

@@ -25,12 +25,11 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, ISetV
     }
     @JDIAction
     public void hover() {
-        doActions(a -> a.moveToElement(getWebElement()));
+        doActions(a -> a.moveToElement(get()));
     }
     @JDIAction
-    public UIElement jsClick() {
+    public void jsClick() {
         jsExecute("click()");
-        return this;
     }
 
     public void submit() {
@@ -40,6 +39,13 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, ISetV
     public void sendKeys(CharSequence... value) {
         get().sendKeys(value);
     }
+    @JDIAction("Input {value}")
+    public void input(String value) {
+        clear();
+        sendKeys(value);
+    }
+    public void focus(){ sendKeys(""); }
+
     @JDIAction
     public UIElement setText(String value) {
         jsExecute("value = '"+value+"'");
@@ -72,15 +78,19 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, ISetV
 
     @JDIAction
     public boolean isSelected() {
-        return get().isSelected();
+        return getAttribute("class").contains("checked") ||
+            getAttribute("checked") != null || get().isSelected();
     }
     @JDIAction
     public boolean isEnabled() {
-        return get().isEnabled();
+        String cl = getAttribute("class");
+        return cl.contains("active") ||
+            get().isEnabled() && !cl.contains("disabled");
     }
+
     @JDIAction
     public boolean isDisplayed() {
-        WebElement el = getWebElement();
+        WebElement el = get();
         try { return el != null && el.isDisplayed();
         } catch (Exception ex) { return false; }
     }
@@ -166,6 +176,9 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, ISetV
     //endregion
     public IsAssert is() {
         return new IsAssert(this);
+    }
+    public IsAssert assertThat() {
+        return is();
     }
 
 }

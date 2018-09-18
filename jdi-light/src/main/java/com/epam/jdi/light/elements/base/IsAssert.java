@@ -21,6 +21,9 @@ public class IsAssert {
     public void tag(Matcher<? super String> condition) {
         assertThat(element.getTagName(), condition);
     }
+    public void cssClass(Matcher<? super String> condition) {
+        assertThat(element.getAttribute("class"), condition);
+    }
     public void displayed() {
         assertThat(element.isDisplayed() ? "displayed" : "hidden", is("displayed"));
     }
