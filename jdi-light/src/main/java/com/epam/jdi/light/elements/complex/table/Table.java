@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -30,8 +31,8 @@ public class Table extends JDIBase implements ISetup, IHasValue {
     protected CacheValue<List<String>> headers = new CacheValue<>(() -> select($$(headerLocator, this), WebElement::getText));
     protected CacheValue<Integer> size = new CacheValue<>(() -> headers.get().size());
     protected CacheValue<List<WebElement> > rows = new CacheValue<>(() -> {
-        List<WebElement> value = get().findElements(rowsLocator);
-        if (value.get(0).findElements(columnsLocator).size() == 0 && value.get(1).findElements(columnsLocator).size() != 0)
+        List<WebElement> value = uiSearch(get(),rowsLocator);
+        if (uiSearch(value.get(0),columnsLocator).size() == 0 && uiSearch(value.get(1),columnsLocator).size() != 0)
             value.remove(0);
         return value;
     });
@@ -45,15 +46,14 @@ public class Table extends JDIBase implements ISetup, IHasValue {
     public boolean isNotEmpty() { return size() != 0; }
 
     public List<WebElement> webRow(int rowNum) {
-        return rows.get().get(rowNum-1)
-                .findElements(columnsLocator);
+        return uiSearch(rows.get().get(rowNum-1), columnsLocator);
     }
     @JDIAction
     public Line row(int rowNum) {
         return new Line(webRow(rowNum));
     }
     public List<WebElement> webColumn(int colNum) {
-        return select(rows.get(), r -> r.findElements(columnsLocator).get(colNum-1));
+        return select(rows.get(), r -> uiSearch(r,columnsLocator).get(colNum-1));
     }
     @JDIAction
     public Line column(int colNum) {

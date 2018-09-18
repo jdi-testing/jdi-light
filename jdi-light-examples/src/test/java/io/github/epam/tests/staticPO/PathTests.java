@@ -85,7 +85,7 @@ public class PathTests extends StaticTestsInit {
                     ? ctx.findElements((By)locator)
                     : els.get(0).findElements((By)locator);
             else if (isClass(locator.getClass(), Integer.class))
-                els = asList(els.get((Integer)locator));
+                els = asList(els.get((Integer)locator-1));
         }
         return els.get(0);
     }

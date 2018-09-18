@@ -86,7 +86,7 @@ public class JDIBase extends DriverBase implements INamed {
         SearchContext searchContext = containsRoot(getLocator(args))
                 ? getDefaultContext()
                 : getSearchContext(parent);
-        List<WebElement> els = searchContext.findElements(correctLocator(getLocator(args)));
+        List<WebElement> els = uiSearch(searchContext, correctLocator(getLocator(args)));
         return filter(els, el -> searchRule.invoke(el));
     }
     public List<UIElement> allUI(Object... args) {
@@ -106,7 +106,7 @@ public class JDIBase extends DriverBase implements INamed {
             ? getFrameContext(frame)
             : getContext(parent, locator);
         return locator != null
-            ? searchContext.findElement(correctLocator(locator))
+            ? uiSearch(searchContext, correctLocator(locator)).get(0)
             : searchContext;
     }
     private boolean isRoot(Object parent) {
@@ -119,7 +119,7 @@ public class JDIBase extends DriverBase implements INamed {
                 : getSearchContext(parent);
     }
     private SearchContext getFrameContext(By frame) {
-        return driver().switchTo().frame(driver().findElement(frame));
+        return driver().switchTo().frame(uiSearch(driver(),frame).get(0));
     }
     private SearchContext getDefaultContext() {
         return driver().switchTo().defaultContent();

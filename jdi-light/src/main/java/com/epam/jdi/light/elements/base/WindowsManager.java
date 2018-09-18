@@ -6,6 +6,7 @@ import java.util.Set;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class WindowsManager {
@@ -24,13 +25,16 @@ public class WindowsManager {
         return getWindows().size();
     }
 
-    public static void openNewWindow() {
+    public static void switchToNewWindow() {
         String last = "";
         for (String window : getWindows())
             last = window;
         if (!isBlank(last))
             getDriver().switchTo().window(last);
         else throw exception("No windows found");
+    }
+    public static void openNewTab() {
+        jsExecute("window.open()");
     }
 
     public static void originalWindow() {

@@ -38,7 +38,7 @@ public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
     public UIElement get(String name) {
         if (getByLocator(getLocator()).contains("%s"))
             return getUI(name);
-        UIElement el = LinqUtils.first(allUI(), e -> e.getText().equals(name));
+        UIElement el = LinqUtils.first(allUI(), e -> e.getText().trim().toLowerCase().equals(name.trim().toLowerCase()));
         if (el == null)
             throw exception("Can't select '%s'. No elements with this name found", name);
         return el;

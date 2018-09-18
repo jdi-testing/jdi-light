@@ -4,8 +4,8 @@ import com.epam.jdi.light.elements.complex.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import io.github.epam.sections.LogSidebar;
 import org.openqa.selenium.WebElement;
 
@@ -27,7 +27,7 @@ public class MetalAndColorsPage extends WebPage {
 			expand = @FindBy(css =".caret"),
 			isselected = @FindBy(xpath ="././/input")
 	) public Dropdown vegetables;*/
-	@ByText("Calculate") public WebElement calculate;
-	@ByText("Submit") public WebElement submit;
+	@UI("['Calculate']") public WebElement calculate;
+	@UI("['Submit']") public WebElement submit;
 
 }
