@@ -10,8 +10,9 @@ import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 import static staticPageObject.StaticSite.homePage;
 import static staticPageObject.StaticSite.iframe;
-import static staticPageObject.pages.GithubPage.*;
-import static staticPageObject.pages.HomePage.*;
+import static staticPageObject.pages.GithubPage.repoDescription;
+import static staticPageObject.pages.HomePage.githubLink;
+import static staticPageObject.pages.HomePage.jdiText;
 
 public class WindowsAndFramesTests extends StaticTestsInit {
 
@@ -37,6 +38,8 @@ public class WindowsAndFramesTests extends StaticTestsInit {
         switchToWindow("Github");
         assertEquals(repoDescription.getText(),
                 "JDI is the test Framework for UI test automation");
+        openNewTab();
+        originalWindow();
     }
 
     @Test

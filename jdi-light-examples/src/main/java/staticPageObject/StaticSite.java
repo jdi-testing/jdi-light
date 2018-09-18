@@ -25,6 +25,7 @@ public class StaticSite {
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;
+	@Css("[ui=label][*'%s']") public static WebList navigationS;
 
 	@Css("header") public static Header header;
 	@Css("footer") public static Footer footer;

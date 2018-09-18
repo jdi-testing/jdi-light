@@ -162,7 +162,12 @@ public final class WebDriverByUtils {
         String locator = getByLocator(by);
         List<By> result = replaceUp(locator);
         result = replaceText(result);
-        return valueOrDefault(replaceChildren(result), asList(by));
+        return valueOrDefault(replaceChildren(result), one(by));
+    }
+    private static List<Object> one(By by) {
+        List<Object> result = new ArrayList<>();
+        result.add(by);
+        return result;
     }
 
     private static List<By> replaceUp(String locator) {
