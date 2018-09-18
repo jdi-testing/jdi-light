@@ -21,17 +21,6 @@ import static staticPageObject.StaticSite.homePage;
 public class StaticTestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        List<By> r;
-        r = searchBy(By.xpath("//*[text()='test']"));
-        r = searchBy(By.cssSelector(".user[2]"));
-        r = searchBy(By.cssSelector(".product<div[title=test]>#name"));
-        r = searchBy(By.cssSelector("['test']"));
-        r = searchBy(By.cssSelector("['test text']"));
-        r = searchBy(By.cssSelector("['test text']<.name[3]"));
-        // Double
-        r = searchBy(By.cssSelector(".user[2].user[1]"));
-        r = searchBy(By.cssSelector(".product<<div[title=test]<#name"));
-        r = searchBy(By.cssSelector("['test'].name['value']"));
 
         logger.setLogLevel(STEP);
         InitActions.INIT_RULES.add(f -> isInterface(f, Text.class), info -> new HtmlElement());

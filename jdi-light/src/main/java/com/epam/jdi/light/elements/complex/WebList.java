@@ -40,7 +40,7 @@ public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
             return getUI(name);
         UIElement el = LinqUtils.first(allUI(), e -> e.getText().equals(name));
         if (el == null)
-            throw exception("Can't select '%s'. No elements with this name found");
+            throw exception("Can't select '%s'. No elements with this name found", name);
         return el;
     }
     @JDIAction
