@@ -19,8 +19,8 @@ public class UIFactory {
     }
     private static By getLocator(String locator) {
         return locator.charAt(1) == '/'
-                ? By.cssSelector(locator)
-                : By.xpath(locator);
+                ? By.xpath(locator)
+                : By.cssSelector(locator);
     }
     public static UIElement $(String locator) {
         return element(locator);
@@ -31,11 +31,7 @@ public class UIFactory {
     public static UIElement $(By locator, Object parent) {
         return element(locator).setParent(parent);
     }
-    public static UIElement $x(String locator) {
-        UIElement el =  new UIElement();
-        el.setLocator(By.xpath(locator));
-        return el;
-    }
+
     public static WebList list(String locator) {
         return list(getLocator(locator));
     }
@@ -53,11 +49,7 @@ public class UIFactory {
     public static WebList $$(By locator, Object parent) {
         return list(locator).setParent(parent);
     }
-    public static WebList $$x(String locator) {
-        WebList list =  new WebList();
-        list.setLocator(By.xpath(locator));
-        return list;
-    }
+
     public static Dropdown dropdown(String locator) {
         Dropdown el =  new Dropdown();
         By byLocator = getLocator(locator);

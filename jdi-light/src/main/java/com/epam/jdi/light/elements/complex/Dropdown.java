@@ -76,7 +76,10 @@ public class Dropdown extends JDIBase implements ISetup, IHasValue, ISetValue {
     @JDIAction
     public boolean isExpanded() {
         assertLinked(list, "list", "expand");
-        return list.isDisplayed();
+        try {
+            list.is().displayed();
+            return true;
+        } catch (Throwable ex) { return false; }
     }
     /**
      * Expanding DropDown

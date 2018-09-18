@@ -1,11 +1,12 @@
 package com.epam.jdi.light.elements.base;
 
+import com.epam.jdi.light.elements.interfaces.IHasValue;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-public interface BaseElement {
+public interface BaseElement extends IHasValue {
     void hover();
     boolean isEnabled();
     boolean isDisplayed();
@@ -23,5 +24,6 @@ public interface BaseElement {
     UIElement dragAndDropTo(int x, int y);
     UIElement doActions(JFunc1<Actions, Actions> actions);
     IsAssert is();
+    IsAssert assertThat();
 
 }

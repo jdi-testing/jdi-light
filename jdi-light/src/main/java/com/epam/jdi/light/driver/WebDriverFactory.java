@@ -11,24 +11,24 @@ import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllRunWebBrowsers;
+import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
 import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
-import static com.epam.jdi.light.settings.WebSettings.DRIVER_REMOTE_URL;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
-import static com.epam.jdi.tools.switcher.SwitchActions.Value;
 import static java.lang.String.format;
+import static java.lang.System.setProperty;
 import static java.lang.Thread.currentThread;
 import static java.util.Objects.nonNull;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class WebDriverFactory {
     public static MapArray<String, JFunc<WebDriver>> drivers = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
@@ -38,39 +38,61 @@ public class WebDriverFactory {
     }
 
     public static boolean hasRunDrivers() {
-
         return runDrivers.get() != null && runDrivers.get().any();
     }
 
     // REGISTER DRIVER
     public static String useDriver(JFunc<WebDriver> driver) {
-
         return useDriver("Driver" + (drivers.size() + 1), driver);
     }
 
     public static String useDriver(String driverName) {
-
         return useDriver(getByName(driverName));
     }
 
     public static String useDriver(DriverTypes driverType) {
         return useDriver(driverType, () -> initDriver(driverType));
     }
-    public static boolean isRemote() {
-        return isNotEmpty(DRIVER_REMOTE_URL);
-    }
 
     private static WebDriver initDriver(DriverTypes type) {
-        WebDriver driver = Switch(type).get(
-            Value(CHROME, t -> CHROME_INFO.getDriver()),
-            Value(FIREFOX, t -> FF_INFO.getDriver()),
-            Value(IE, t -> IE_INFO.getDriver()),
-            Value(PHANTOMJS, t -> CHROME_INFO.getDriver()),
-            Value(OPERA, t -> CHROME_INFO.getDriver()),
-            Value(EDGE, t -> CHROME_INFO.getDriver())
-        );
-        if (driver == null)
-            throw exception("Unknown driver: " + type);
+        WebDriver driver;
+        switch (type) {
+            case CHROME:
+                if (DRIVER_VERSION.equals(""))
+                    setProperty("webdriver.chrome.driver", chromeDriverPath());
+                else
+                    downloadDriver(CHROME, PLATFORM, DRIVER_VERSION);
+                driver = new ChromeDriver(CHROME_OPTIONS.execute());
+                break;
+            case FIREFOX:
+                if (DRIVER_VERSION.equals(""))
+                    setProperty("webdriver.gecko.driver", firefoxDriverPath());
+                else
+                    downloadDriver(FIREFOX, PLATFORM, DRIVER_VERSION);
+                driver = new FirefoxDriver(FIREFOX_OPTIONS.execute());
+                break;
+            case IE:
+                if (DRIVER_VERSION.equals(""))
+                    setProperty("webdriver.ie.driver", ieDriverPath());
+                else
+                    downloadDriver(IE, PLATFORM, DRIVER_VERSION);
+                driver = new InternetExplorerDriver(IE_OPTIONS.execute());
+                break;
+            case EDGE:
+                // TODO
+                driver = new ChromeDriver(CHROME_OPTIONS.execute());
+                break;
+            case PHANTOMJS:
+                // TODO
+                driver = new ChromeDriver(CHROME_OPTIONS.execute());
+                break;
+            case OPERA:
+                // TODO
+                driver = new ChromeDriver(CHROME_OPTIONS.execute());
+                break;
+            default:
+                throw exception("Unknown driver: " + type);
+        }
         return DRIVER_SETTINGS.execute(driver);
     }
 
