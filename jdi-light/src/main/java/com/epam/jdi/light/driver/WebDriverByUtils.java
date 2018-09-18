@@ -5,20 +5,31 @@ package com.epam.jdi.light.driver;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.logging.log4j.util.Strings.isEmpty;
+import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 
 public final class WebDriverByUtils {
 
@@ -128,4 +139,102 @@ public final class WebDriverByUtils {
         map.put("By.xpath", By::xpath);
         return map;
     }
+    public static List<WebElement> uiSearch(By by) {
+        return uiSearch(getDriver(), by);
+    }
+
+    public static List<WebElement> uiSearch(SearchContext ctx, By by) {
+        List<WebElement> els = null;
+        for (Object step : searchBy(by)) {
+            if (isClass(step.getClass(), By.class))
+                els = els == null
+                    ? ctx.findElements((By)step)
+                    : selectMany(els, e -> e.findElements((By)step));
+            else if (isClass(step.getClass(), Integer.class))
+                els = asList(els.get((Integer)step-1));
+        }
+        return els;
+    }
+
+    public static List<Object> searchBy(By by) {
+        if (!getByName(by).equals("css"))
+            return asList(by);
+        String locator = getByLocator(by);
+        List<By> result = replaceUp(locator);
+        result = replaceText(result);
+        return valueOrDefault(replaceChildren(result), asList(by));
+    }
+
+    private static List<By> replaceUp(String locator) {
+        List<By> result = null;
+        if (locator.contains("<")) {
+            result = new ArrayList<>();
+            String loc = locator.replaceAll(" *< *", "<");
+            Matcher m = Pattern.compile("(?<up><+)").matcher(loc);
+            while (m.find()) {
+                String[] locs = loc.split(m.group("up"));
+                result.add(By.cssSelector(locs[0]));
+                result.add(getUpXpath(m.group("up")));
+                loc = locs.length == 2 ?  locs[1] : "";
+            }
+            if (isNotEmpty(loc))
+                result.add(By.cssSelector(loc));
+        }
+        return valueOrDefault(result, asList(By.cssSelector(locator)));
+    }
+    private static By getUpXpath(String group) {
+        String result = ".." + StringUtils.repeat("/..", group.length()-1);
+        return By.xpath(result);
+    }
+
+    private static List<By> replaceText(List<By> bys) {
+        List<By> result = new ArrayList<>();
+        for (By by : bys)
+            if (getByName(by).equals("css"))
+                result.addAll(replaceText(getByLocator(by)));
+            else result.add(by);
+        return result;
+    }
+
+    private static List<By> replaceText(String locator) {
+        List<By> result = new ArrayList<>();
+        String loc = locator;
+        Matcher m = Pattern.compile("\\[(?<modifier>\\*?)'(?<text>[^']+)']").matcher(loc);
+        while (m.find() && isNotEmpty(loc)) {
+            String[] locs = loc.split("\\[\\*?'"+m.group("text")+"']");
+            result.add(By.cssSelector(locs[0]));
+            result.add(m.group("modifier").equals("")
+                ? By.xpath(".//*[text()='" + m.group("text") + "']")
+                : By.xpath(".//*[contains(text(),'" + m.group("text") + "')]"));
+            loc = locs.length == 2 ?  locs[1] : "";
+        }
+        if (isNotEmpty(loc))
+            result.add(By.cssSelector(loc));
+        return result;
+    }
+
+    private static List<Object> replaceChildren(List<By> bys) {
+        List<Object> result = new ArrayList<>();
+        for (By by : bys)
+            if (getByName(by).equals("css"))
+                result.addAll(replaceChildren(getByLocator(by)));
+            else result.add(by);
+        return result;
+    }
+
+    private static List<Object> replaceChildren(String locator) {
+        List<Object> result = new ArrayList<>();
+        String loc = locator;
+        Matcher m = Pattern.compile("\\[(?<num>\\d+)]").matcher(loc);
+        while (m.find() && isNotEmpty(loc)) {
+            String[] locs = loc.split("\\["+m.group("num")+"]");
+            result.add(By.cssSelector(locs[0]));
+            result.add(Integer.parseInt(m.group("num")));
+            loc = locs.length == 2 ?  locs[1] : "";
+        }
+        if (isNotEmpty(loc))
+            result.add(By.cssSelector(loc));
+        return result;
+    }
+
 }

@@ -29,7 +29,6 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UIList<T> extends JDIBase implements IList<T> {
 
@@ -141,6 +140,9 @@ public class UIList<T> extends JDIBase implements IList<T> {
     }
 
     public <E> void is(Class<E> entityClass, Matcher<Collection<? extends E>> condition) {
-        assertThat(asData(entityClass), condition);
+        org.hamcrest.MatcherAssert.assertThat(asData(entityClass), condition);
+    }
+    public <E> void assertThat(Class<E> entityClass, Matcher<Collection<? extends E>> condition) {
+        is(entityClass, condition);
     }
 }
