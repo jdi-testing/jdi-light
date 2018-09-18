@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import staticPageObject.pages.*;
 import staticPageObject.pages.Footer;
 import staticPageObject.pages.Header;
@@ -25,7 +26,7 @@ public class StaticSite {
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;
-	@Css("[ui=label][*'%s']") public static WebList navigationS;
+	@UI("[ui=label][*'%s']") public static WebList navigationS;
 
 	@Css("header") public static Header header;
 	@Css("footer") public static Footer footer;
