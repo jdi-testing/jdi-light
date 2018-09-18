@@ -1,19 +1,20 @@
-package io.github.epam.tests.epam;
+package io.github.epam.tests.staticPO;
 
-import io.github.epam.SimpleTestsInit;
+import io.github.epam.StaticTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.epam.EpamGithubSite.*;
 import static io.github.epam.enums.ColorsList.Green;
 import static io.github.epam.enums.Metals.Gold;
 import static io.github.epam.enums.Navigation.*;
-import static io.github.epam.enums.NavigationNums.nContactForm;
-import static io.github.epam.enums.NavigationNums.nHome;
-import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.enums.NavigationNums.*;
+import static io.github.epam.tests.staticPO.steps.Preconditions.*;
 import static org.hamcrest.Matchers.containsString;
+import static staticPageObject.StaticSite.*;
+import static staticPageObject.pages.HomePage.*;
+import static staticPageObject.pages.MetalAndColorsPage.*;
 
-public class ComplexElementsTests extends SimpleTestsInit {
+public class ComplexElementsTests extends StaticTestsInit {
 
     @BeforeMethod
     public void before() {
@@ -22,8 +23,8 @@ public class ComplexElementsTests extends SimpleTestsInit {
     }
     @Test
     public void complexTest() {
-        metalAndColorsPage.colors.select(Green);
-        metalAndColorsPage.metals.select(Gold);
+        colors.select(Green);
+        metals.select(Gold);
         //metalAndColorsPage.vegetables.check(Onion, Tomato);
     }
     @Test
@@ -31,9 +32,9 @@ public class ComplexElementsTests extends SimpleTestsInit {
         navigation.get(nContactForm).click();
         contactFormPage.checkOpened();
         navigation.get(nHome).click();
-        System.out.println(homePage.jdiText.getText());
-        homePage.jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
-        homePage.githubLink.click();
+        System.out.println(jdiText.getText());
+        jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
+        githubLink.click();
     }
     @Test
     public void navigationMenuTest() {

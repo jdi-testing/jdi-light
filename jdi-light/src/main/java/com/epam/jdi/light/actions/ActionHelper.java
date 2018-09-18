@@ -107,7 +107,7 @@ public class ActionHelper {
 
     private static void processNewPage(JoinPoint joinPoint) {
         Object element = joinPoint.getThis();
-        if (element != null) { //TODO support static pages
+        if (element != null) { // TODO support static pages
             WebPage page = getPage(element);
             String currentPage = getCurrentPage();
             if (currentPage != null && page != null) {

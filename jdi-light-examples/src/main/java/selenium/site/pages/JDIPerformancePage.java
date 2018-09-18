@@ -16,7 +16,7 @@ public class JDIPerformancePage extends WebPage {
     //Table
     @FindBy(id = "users-table") public WebElement table;
 
-    //TODO Add Tables
+    // TODO Add Tables
     public WebElement getUser(String name, String email) {
         List<WebElement> rows = table.findElements(By.tagName("tr"));
         for (WebElement row : rows) {
