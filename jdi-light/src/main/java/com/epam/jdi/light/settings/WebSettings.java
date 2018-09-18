@@ -5,11 +5,11 @@ package com.epam.jdi.light.settings;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverData;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.light.logger.JDILogger;
 import com.epam.jdi.tools.PropertyReader;
+import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebElement;
@@ -19,12 +19,15 @@ import java.util.Objects;
 import java.util.Properties;
 
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
+import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
 public class WebSettings {
@@ -40,6 +43,7 @@ public class WebSettings {
     public static int TIMEOUT = 10;
     public static String TEST_GROUP = "";
     public static String TEST_PROPERTIES_PATH = "test.properties";
+    public static String DRIVER_REMOTE_URL;
 
     public static synchronized void init() {
         if (!initialized) {
@@ -55,14 +59,35 @@ public class WebSettings {
                             ? "LATEST" : "", "drivers.getLatest");
             // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
             fillAction(p -> KILL_BROWSER = p, "browser.kill");
-            fillAction(p -> setSearchStrategy(p), "element.search.strategy");
+            fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
             fillAction(p -> BROWSER_SIZE = p, "browser.size");
             fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
             fillAction(p -> CHECK_AFTER_OPEN = parseBoolean(p), "page.check.after.open");
-            WebDriverFactory.INIT_THREAD_ID = Thread.currentThread().getId();
+
+            // RemoteWebDriver properties
+            fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
+
+            loadCapabilities("chrome.capabilities.path",
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
+            loadCapabilities("ff.capabilities.path",
+                    p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
+            loadCapabilities("ie.capabilities.path",
+                    p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
+
+            INIT_THREAD_ID = Thread.currentThread().getId();
             initialized = true;
         }
     }
+
+    private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {
+        String path = "";
+        try { path = getProperty(property);
+        } catch (Exception ignore) { }
+        if(isNotEmpty(path)) {
+            setCapabilities.execute(getProperties(path));
+        }
+    }
+
     private static void setSearchStrategy(String p) {
         p = p.toLowerCase();
         if (p.equals("soft"))

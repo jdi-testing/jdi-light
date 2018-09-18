@@ -33,7 +33,7 @@ public class ComplexElementsTests extends SimpleTestsInit {
         navigation.get(nHome).click();
         System.out.println(homePage.jdiText.getText());
         homePage.jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
-        homePage.githubLink.click().getText();
+        homePage.githubLink.click();
     }
     @Test
     public void navigationMenuTest() {

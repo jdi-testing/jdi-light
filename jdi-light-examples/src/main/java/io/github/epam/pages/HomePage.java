@@ -10,5 +10,5 @@ import org.openqa.selenium.WebElement;
 public class HomePage extends WebPage {
 	@Css("h3[name='main-title']") public WebElement mainTitle;
 	@Css(".main-txt") public Text jdiText;
-	@ByText("JDI Github") public Button githubLink;
+	@ByText("JDI Github") public WebElement githubLink;
 }
