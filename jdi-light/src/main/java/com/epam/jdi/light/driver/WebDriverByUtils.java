@@ -21,6 +21,7 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -157,12 +158,14 @@ public final class WebDriverByUtils {
     }
 
     public static List<Object> searchBy(By by) {
-        if (!getByName(by).equals("css"))
-            return asList(by);
-        String locator = getByLocator(by);
-        List<By> result = replaceUp(locator);
-        result = replaceText(result);
-        return valueOrDefault(replaceChildren(result), one(by));
+        try {
+            if (!getByName(by).equals("css"))
+                return asList(by);
+            String locator = getByLocator(by);
+            List<By> result = replaceUp(locator);
+            result = replaceText(result);
+            return valueOrDefault(replaceChildren(result), one(by));
+        } catch (Exception ex) { throw exception("Search By failed"); }
     }
     private static List<Object> one(By by) {
         List<Object> result = new ArrayList<>();
@@ -178,7 +181,8 @@ public final class WebDriverByUtils {
             Matcher m = Pattern.compile("(?<up><+)").matcher(loc);
             while (m.find()) {
                 String[] locs = loc.split(m.group("up"));
-                result.add(By.cssSelector(locs[0]));
+                if (locs.length > 0)
+                    result.add(By.cssSelector(locs[0]));
                 result.add(getUpXpath(m.group("up")));
                 loc = locs.length == 2 ?  locs[1] : "";
             }
@@ -207,7 +211,8 @@ public final class WebDriverByUtils {
         Matcher m = Pattern.compile("\\[(?<modifier>\\*?)'(?<text>[^']+)']").matcher(loc);
         while (m.find() && isNotEmpty(loc)) {
             String[] locs = loc.split("\\[\\*?'"+m.group("text")+"']");
-            result.add(By.cssSelector(locs[0]));
+            if (locs.length > 0)
+                result.add(By.cssSelector(locs[0]));
             result.add(m.group("modifier").equals("")
                 ? By.xpath(".//*[text()='" + m.group("text") + "']")
                 : By.xpath(".//*[contains(text(),'" + m.group("text") + "')]"));
@@ -233,7 +238,8 @@ public final class WebDriverByUtils {
         Matcher m = Pattern.compile("\\[(?<num>\\d+)]").matcher(loc);
         while (m.find() && isNotEmpty(loc)) {
             String[] locs = loc.split("\\["+m.group("num")+"]");
-            result.add(By.cssSelector(locs[0]));
+            if (locs.length > 0)
+                result.add(By.cssSelector(locs[0]));
             result.add(Integer.parseInt(m.group("num")));
             loc = locs.length == 2 ?  locs[1] : "";
         }

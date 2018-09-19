@@ -69,13 +69,13 @@ public class InitActions {
 
     public static Pairs<JFunc1<Field, Boolean>, JFunc1<SiteInfo, Object>> INIT_RULES = new Pairs<>(
         $(f -> isInterface(f, WebElement.class), info -> new UIElement()),
-        $(f -> isClass(f, DriverBase.class),
-            info -> info.field.getType().newInstance()),
         $(f -> isClass(f, WebList.class), info -> new WebList()),
         $(f -> isList(f, WebElement.class), info -> new WebList()),
         $(f -> isInterface(f, List.class) && isPageObject(getGenericType(f)),
             InitActions::initJElements),
-        $(f -> isPageObject(f.getType()), InitActions::initSection)
+        $(f -> isPageObject(f.getType()), InitActions::initSection),
+        $(f -> isClass(f, DriverBase.class),
+            info -> info.field.getType().newInstance())
     );
 
     public static Pairs<JFunc1<SiteInfo, Boolean>, JAction1<SiteInfo>> SETUP_RULES = new Pairs<>(

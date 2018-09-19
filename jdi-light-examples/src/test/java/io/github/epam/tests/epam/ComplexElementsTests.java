@@ -1,9 +1,11 @@
 package io.github.epam.tests.epam;
 
+import com.epam.jdi.light.elements.base.WindowsManager;
 import io.github.epam.SimpleTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.base.WindowsManager.originalWindow;
 import static io.github.epam.EpamGithubSite.*;
 import static io.github.epam.enums.ColorsList.Green;
 import static io.github.epam.enums.Metals.Gold;
@@ -34,6 +36,7 @@ public class ComplexElementsTests extends SimpleTestsInit {
         System.out.println(homePage.jdiText.getText());
         homePage.jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
         homePage.githubLink.click();
+        originalWindow();
     }
     @Test
     public void navigationMenuTest() {

@@ -19,10 +19,10 @@ public class WindowsAndFramesTests extends StaticTestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
+        homePage.shouldBeOpened();
     }
     @Test
     public void windowsTest() {
-        homePage.shouldBeOpened();
         githubLink.click();
         System.out.println("New window is opened: " + newWindowIsOpened());
         System.out.println("Windows count: " + windowsCount());
