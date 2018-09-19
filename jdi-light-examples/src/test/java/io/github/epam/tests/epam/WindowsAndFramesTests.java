@@ -15,6 +15,7 @@ public class WindowsAndFramesTests extends SimpleTestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
+        homePage.shouldBeOpened();
     }
     @Test
     public void windowsTest() {
