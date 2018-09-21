@@ -88,7 +88,7 @@ public class UIList<T> extends JDIBase implements IList<T> {
     private T initElement(WebElement el) {
         try {
             T element = classType.newInstance();
-            if (isClass(Section.class)) {
+            if (isClass(classType, Section.class)) {
                 Section section = (Section)element;
                 section.setWebElement(el);
                 section.parent = this;

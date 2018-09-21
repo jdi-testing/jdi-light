@@ -3,6 +3,7 @@ package selenium.seleniumPO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class PerformancePage {
         }
     }
     public String isSelected() {
-        return dropdownValue.getText();
+        return new Select(dropdownValue).getFirstSelectedOption().getText();
     }
 
     // Textfield

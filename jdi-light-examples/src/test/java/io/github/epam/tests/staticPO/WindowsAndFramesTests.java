@@ -30,12 +30,12 @@ public class WindowsAndFramesTests extends StaticTestsInit {
         switchToWindow(2); // open second window
         assertEquals(repoDescription.getText(),
         "JDI is the test Framework for UI test automation");
-        setWindowName("Github");
+        setWindowName("Github 2");
         switchToWindow(1); // open first (original) window
 
         jdiText.is().text(
             containsString("QUIS NOSTRUD EXERCITATION"));
-        switchToWindow("Github");
+        switchToWindow("Github 2");
         assertEquals(repoDescription.getText(),
                 "JDI is the test Framework for UI test automation");
         openNewTab();
