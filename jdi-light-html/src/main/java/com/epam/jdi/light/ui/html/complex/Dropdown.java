@@ -5,6 +5,6 @@ package com.epam.jdi.light.ui.html.complex;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class Dropdown extends com.epam.jdi.light.elements.complex.Dropdown {
-
+public interface Dropdown {
+    // TODO
 }

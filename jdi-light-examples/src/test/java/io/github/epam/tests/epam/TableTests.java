@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.epam.EpamGithubSite.tablePage;
-import static io.github.epam.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static java.lang.System.*;
 import static java.lang.System.currentTimeMillis;
 import static org.testng.Assert.assertEquals;

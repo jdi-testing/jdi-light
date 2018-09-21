@@ -8,9 +8,7 @@ public interface Input extends BaseElement {
     void sendKeys(CharSequence... value);
     UIElement setText(String value);
     void clear();
-    default void input(String value) {
-        clear();
-        sendKeys(value);
-    }
-    default void focus(){ sendKeys(""); }
+    void input(String value);
+    void focus();
+
 }

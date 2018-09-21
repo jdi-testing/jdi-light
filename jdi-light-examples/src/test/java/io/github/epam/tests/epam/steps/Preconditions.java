@@ -1,4 +1,4 @@
-package io.github.epam.steps;
+package io.github.epam.tests.epam.steps;
 
 import ru.yandex.qatools.allure.annotations.Step;
 

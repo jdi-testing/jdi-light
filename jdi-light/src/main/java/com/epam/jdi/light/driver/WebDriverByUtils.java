@@ -9,16 +9,19 @@ import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public final class WebDriverByUtils {
 
@@ -127,5 +130,53 @@ public final class WebDriverByUtils {
         map.put("By.tagName", By::tagName);
         map.put("By.xpath", By::xpath);
         return map;
+    }
+    public static List<By> searchBy(By by) {
+        if (!getByName(by).equals("css"))
+            return asList(by);
+        String locator = getByLocator(by);
+        locator = replaceChilds(locator);
+        List<By> result = replaceUp(locator);
+        result = replaceText(locator);
+        return valueOrDefault(result, asList(by));
+    }
+    private static String replaceChilds(String locator) {
+        String result = "";
+        Matcher m = Pattern.compile("\\[(?<num>\\d*)]").matcher(locator);
+        while (m.find()) {
+            result += m.replaceAll("::nph-child("+m.group("num")+")");
+        }
+        return isBlank(result) ? locator : result;
+    }
+
+    private static List<By> replaceUp(String locator) {
+        List<By> bys = new ArrayList<>();
+        String[] ups = locator.split("<");
+        if (ups.length > 1) {
+            bys = addLocator(ups, By.xpath("./../"));
+        }
+        return bys;
+    }
+    private static List<By> replaceText(String locator) {
+        List<By> bys = new ArrayList<>();
+        Matcher m = Pattern.compile("\\['(?<text>[^'])']").matcher(locator);
+        if (m.find()) {
+            String g = m.group("text");
+            String[] locs = locator.split("\\['[^'=]*']");
+            bys = addLocator(locs, By.xpath("./[text()='"+m.group("text")+"'"));
+        }
+        return bys;
+    }
+
+    private static List<By> addLocator(String[] locs, By by) {
+        List<By> bys = new ArrayList<>();
+        boolean first = true;
+        for (String loc : locs) {
+            if (first)
+                first = false;
+            else bys.add(by);
+            bys.add(By.cssSelector(loc));
+        }
+        return bys;
     }
 }

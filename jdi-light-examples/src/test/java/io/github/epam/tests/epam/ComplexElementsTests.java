@@ -10,7 +10,7 @@ import static io.github.epam.enums.Metals.Gold;
 import static io.github.epam.enums.Navigation.*;
 import static io.github.epam.enums.NavigationNums.nContactForm;
 import static io.github.epam.enums.NavigationNums.nHome;
-import static io.github.epam.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
 public class ComplexElementsTests extends SimpleTestsInit {
@@ -33,7 +33,7 @@ public class ComplexElementsTests extends SimpleTestsInit {
         navigation.get(nHome).click();
         System.out.println(homePage.jdiText.getText());
         homePage.jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
-        homePage.githubLink.click().getText();
+        homePage.githubLink.click();
     }
     @Test
     public void navigationMenuTest() {

@@ -4,5 +4,4 @@ import com.epam.jdi.light.elements.base.BaseElement;
 
 public interface Text extends BaseElement {
     String getText();
-
 }

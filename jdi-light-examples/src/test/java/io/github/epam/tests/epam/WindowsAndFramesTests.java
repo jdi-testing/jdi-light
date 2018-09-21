@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.base.WindowsManager.*;
 import static io.github.epam.EpamGithubSite.*;
-import static io.github.epam.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 
