@@ -1,9 +1,11 @@
 package io.github.epam.tests.epam.steps;
 
+import com.epam.jdi.light.elements.composite.WebPage;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static io.github.epam.EpamGithubSite.header;
 import static io.github.epam.entities.Users.DEFAULT_USER;
+import static staticPageObject.StaticSite.homePage;
 
 /**
  * Created by Roman_Iovlev on 3/1/2018.
@@ -11,6 +13,8 @@ import static io.github.epam.entities.Users.DEFAULT_USER;
 public class Preconditions {
     @Step
     public static void shouldBeLoggedIn() {
+        if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
+            homePage.open();
         if (!header.piterChailovskii.isDisplayed())
             login();
     }
@@ -21,7 +25,8 @@ public class Preconditions {
     }
     @Step
     public static void shouldBeLoggedOut() {
-        System.out.println("THREAD ID" + Thread.currentThread().getId());
+        if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
+            homePage.open();
         if (header.piterChailovskii.isDisplayed())
             logout();
     }

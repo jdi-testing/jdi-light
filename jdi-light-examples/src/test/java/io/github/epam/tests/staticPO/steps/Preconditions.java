@@ -1,8 +1,11 @@
 package io.github.epam.tests.staticPO.steps;
 
+import com.epam.jdi.light.elements.composite.WebPage;
+import io.github.epam.EpamGithubSite;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static io.github.epam.entities.Users.DEFAULT_USER;
+import static staticPageObject.StaticSite.homePage;
 import static staticPageObject.pages.Header.*;
 
 /**
@@ -11,6 +14,8 @@ import static staticPageObject.pages.Header.*;
 public class Preconditions {
     @Step
     public static void shouldBeLoggedIn() {
+        if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
+            homePage.open();
         if (!piterChailovskii.isDisplayed())
             login();
     }
