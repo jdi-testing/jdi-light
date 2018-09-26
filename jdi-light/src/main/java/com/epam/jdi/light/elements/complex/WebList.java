@@ -7,7 +7,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.ListAssert;
+import com.epam.jdi.light.asserts.ListAssert;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.ISetValue;
 import com.epam.jdi.tools.CacheValue;
@@ -38,9 +38,9 @@ public class WebList extends JDIBase implements IList<WebElement>, ISetValue {
     public UIElement get(String name) {
         if (getByLocator(getLocator()).contains("%s"))
             return getUI(name);
-        UIElement el = LinqUtils.first(allUI(), e -> e.getText().equals(name));
+        UIElement el = LinqUtils.first(allUI(), e -> e.getText().trim().toLowerCase().equals(name.trim().toLowerCase()));
         if (el == null)
-            throw exception("Can't select '%s'. No elements with this name found");
+            throw exception("Can't select '%s'. No elements with this name found", name);
         return el;
     }
     @JDIAction

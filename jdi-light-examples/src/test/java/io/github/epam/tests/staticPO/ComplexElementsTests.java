@@ -4,6 +4,7 @@ import io.github.epam.StaticTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.base.WindowsManager.originalWindow;
 import static io.github.epam.enums.ColorsList.Green;
 import static io.github.epam.enums.Metals.Gold;
 import static io.github.epam.enums.Navigation.*;
@@ -35,6 +36,7 @@ public class ComplexElementsTests extends StaticTestsInit {
         System.out.println(jdiText.getText());
         jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
         githubLink.click();
+        originalWindow();
     }
     @Test
     public void navigationMenuTest() {
@@ -44,5 +46,14 @@ public class ComplexElementsTests extends StaticTestsInit {
         navigationL.select(Home);
         homePage.checkOpened();
         navigationL.select(ComplexTable);
+    }
+    @Test
+    public void navigationMenuSTest() {
+        navigationS.select(ContactForm);
+        //navigationL.select("Contact form");
+        contactFormPage.checkOpened();
+        navigationS.select(Home);
+        homePage.checkOpened();
+        navigationS.select(ComplexTable);
     }
 }

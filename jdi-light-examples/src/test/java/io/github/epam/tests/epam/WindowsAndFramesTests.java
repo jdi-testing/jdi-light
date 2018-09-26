@@ -15,6 +15,7 @@ public class WindowsAndFramesTests extends SimpleTestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
+        homePage.shouldBeOpened();
     }
     @Test
     public void windowsTest() {
@@ -34,6 +35,7 @@ public class WindowsAndFramesTests extends SimpleTestsInit {
         switchToWindow("Github");
         assertEquals(githubPage.repoDescription.getText(),
                 "JDI is the test Framework for UI test automation");
+        closeWindow();
     }
 
     @Test

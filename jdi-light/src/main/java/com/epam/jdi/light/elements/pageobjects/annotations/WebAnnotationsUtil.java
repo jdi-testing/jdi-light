@@ -5,16 +5,12 @@ package com.epam.jdi.light.elements.pageobjects.annotations;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.WithText;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Quotes;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.function.Consumer;
 
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
@@ -104,12 +100,6 @@ public class WebAnnotationsUtil {
         return null;
     }
 
-    public static void fillLocator(org.openqa.selenium.support.FindBy value, Consumer<By> action) {
-        By by = findByToBy(value);
-        if (by != null)
-            action.accept(by);
-    }
-
     public static By findByToBy(FindBy locator) {
         if (locator == null) return null;
 
@@ -138,29 +128,27 @@ public class WebAnnotationsUtil {
         return null;
     }
 
-    private static By getAttribute(String name, String value) {
-        return By.xpath(".//*[@" + name + '=' + Quotes.escape(value) + ']');
-    }
-
     public static By findByToBy(Css locator){
         if (locator == null) return null;
         return By.cssSelector(locator.value());
     }
-
+    public static By findByToBy(XPath locator){
+        if (locator == null) return null;
+        return By.xpath(locator.value());
+    }
+    public static By findByToBy(UI locator){
+        if (locator == null) return null;
+        return By.cssSelector(locator.value());
+    }
     public static By findByToBy(ByText locator){
         if (locator == null) return null;
         return By.xpath(".//*/text()[normalize-space(.) = " +
                 Quotes.escape(locator.value()) + "]/parent::*");
     }
-
     public static By findByToBy(WithText locator){
         if (locator == null) return null;
         return By.xpath(".//*/text()[contains(normalize-space(.), "+
                 Quotes.escape(locator.value())+")]/parent::*");
     }
 
-    public static By findByToBy(XPath locator){
-        if (locator == null) return null;
-        return By.xpath(locator.value());
-    }
 }

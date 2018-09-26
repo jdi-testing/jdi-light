@@ -1,8 +1,7 @@
 package staticPageObject.pages;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import com.epam.jdi.light.ui.html.common.Text;
 import org.openqa.selenium.WebElement;
 

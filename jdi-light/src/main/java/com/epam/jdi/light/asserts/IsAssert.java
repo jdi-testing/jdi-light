@@ -1,5 +1,6 @@
-package com.epam.jdi.light.elements.base;
+package com.epam.jdi.light.asserts;
 
+import com.epam.jdi.light.elements.base.UIElement;
 import org.hamcrest.Matcher;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -9,19 +10,19 @@ public class IsAssert {
     UIElement element;
     public IsAssert(UIElement element) { this.element = element; }
 
-    public void text(Matcher<? super String> condition) {
+    public void text(Matcher<String> condition) {
         assertThat(element.getText(), condition);
     }
-    public void attr(String attrName, Matcher<? super String> condition) {
+    public void attr(String attrName, Matcher<String> condition) {
         assertThat(element.getAttribute(attrName), condition);
     }
-    public void css(String css, Matcher<? super String> condition) {
+    public void css(String css, Matcher<String> condition) {
         assertThat(element.getCssValue(css), condition);
     }
-    public void tag(Matcher<? super String> condition) {
+    public void tag(Matcher<String> condition) {
         assertThat(element.getTagName(), condition);
     }
-    public void cssClass(Matcher<? super String> condition) {
+    public void cssClass(Matcher<String> condition) {
         assertThat(element.getAttribute("class"), condition);
     }
     public void displayed() {

@@ -10,8 +10,9 @@ import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 import static staticPageObject.StaticSite.homePage;
 import static staticPageObject.StaticSite.iframe;
-import static staticPageObject.pages.GithubPage.*;
-import static staticPageObject.pages.HomePage.*;
+import static staticPageObject.pages.GithubPage.repoDescription;
+import static staticPageObject.pages.HomePage.githubLink;
+import static staticPageObject.pages.HomePage.jdiText;
 
 public class WindowsAndFramesTests extends StaticTestsInit {
 
@@ -21,7 +22,6 @@ public class WindowsAndFramesTests extends StaticTestsInit {
     }
     @Test
     public void windowsTest() {
-        homePage.shouldBeOpened();
         githubLink.click();
         System.out.println("New window is opened: " + newWindowIsOpened());
         System.out.println("Windows count: " + windowsCount());
@@ -29,14 +29,15 @@ public class WindowsAndFramesTests extends StaticTestsInit {
         switchToWindow(2); // open second window
         assertEquals(repoDescription.getText(),
         "JDI is the test Framework for UI test automation");
-        setWindowName("Github");
+        setWindowName("Github 2");
         switchToWindow(1); // open first (original) window
 
         jdiText.is().text(
             containsString("QUIS NOSTRUD EXERCITATION"));
-        switchToWindow("Github");
+        switchToWindow("Github 2");
         assertEquals(repoDescription.getText(),
                 "JDI is the test Framework for UI test automation");
+        closeWindow();
     }
 
     @Test

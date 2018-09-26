@@ -1,5 +1,6 @@
 package io.github.epam.tests.selenium;
 
+import io.github.epam.EpamGithubSite;
 import org.apache.commons.lang3.time.StopWatch;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +15,7 @@ public class JDIPerformanceTests extends SimpleTestsInit {
 
     @BeforeMethod
     public void openPerformancePage() {
-        homePage.open();
+        EpamGithubSite.homePage.shouldBeOpened();
         login(new User());
         navigation.select("Performance");
     }

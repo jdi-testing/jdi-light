@@ -1,13 +1,9 @@
 package com.epam.jdi.light.elements.init;
 
+import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.WithText;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
+import com.epam.jdi.light.elements.pageobjects.annotations.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.By;
@@ -53,7 +49,7 @@ public class PageFactory {
                 Object instance = Switch(info).get(
                     Case(i -> isClass(i.fieldType(), WebPage.class),
                         i-> SETUP_WEBPAGE_ON_SITE.execute(i)),
-                    Case(i -> isPageObject(i.fieldType()),
+                    Case(i -> isPageObject(i.fieldType()) && !isClass(i.fieldType(), DriverBase.class),
                         i -> SETUP_PAGE_OBJECT_ON_SITE.execute(info)),
                     Case(i -> isJDIField(pageField), PageFactory::initElement));
                 if (instance != null)
@@ -84,14 +80,14 @@ public class PageFactory {
                 field.set(obj, initElement(pageInfo));
             } catch (Exception ex) {
                 throw exception("Can't init %s '%s' on '%s'. Exception: %s",
-                        isClass(pageInfo.field.getType(), WebPage.class) ? "page" : "element",
-                        pageInfo.field.getName(),
-                        info.field.getType().getSimpleName(),
-                        ex.getMessage());
+                    isClass(pageInfo.field.getType(), WebPage.class) ? "page" : "element",
+                    pageInfo.field.getName(),
+                    info.field.getType().getSimpleName(),
+                    ex.getMessage());
             }
         }
     }
-    private static Object initElement(SiteInfo info) {
+    public static Object initElement(SiteInfo info) {
         try {
             info.instance = getValueField(info.field, info.parent);
             if (info.instance == null) {
@@ -131,11 +127,14 @@ public class PageFactory {
     }
 
     public static By getLocatorFromField(Field field) {
+        if (hasAnnotation(field, org.openqa.selenium.support.FindBy.class))
+            return findByToBy(field.getAnnotation(org.openqa.selenium.support.FindBy.class));
+        UI[] uis = field.getAnnotationsByType(UI.class);
+        if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
+            return findByToBy(first(uis, j -> j.group().equals(TEST_GROUP)));
         FindBy[] jfindbys = field.getAnnotationsByType(FindBy.class);
         if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
             return findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP)));
-        if (hasAnnotation(field, org.openqa.selenium.support.FindBy.class))
-            return findByToBy(field.getAnnotation(org.openqa.selenium.support.FindBy.class));
         if (hasAnnotation(field, Css.class))
             return findByToBy(field.getAnnotation(Css.class));
         if (hasAnnotation(field, XPath.class))

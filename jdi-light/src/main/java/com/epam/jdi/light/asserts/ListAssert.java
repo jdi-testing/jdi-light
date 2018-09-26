@@ -1,6 +1,6 @@
-package com.epam.jdi.light.elements.base;
+package com.epam.jdi.light.asserts;
 
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.base.UIElement;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
 
@@ -13,14 +13,13 @@ import static org.hamcrest.Matchers.*;
 
 public class ListAssert {
     List<UIElement> elements;
-    List<String> values;
-    public ListAssert(WebList elements) {
-        this.elements = elements.allUI();
-        this.values = elements.values();
+
+    public ListAssert(List<WebElement> elements) {
+        this.elements = map(elements, el -> new UIElement().setWebElement(el));
     }
 
     public void texts(Matcher<Collection<? extends String>> condition) {
-        assertThat(values, condition);
+        assertThat(map(elements, WebElement::getText), condition);
     }
     public void attrs(String attrName, Matcher<Collection<? extends String>> condition) {
         assertThat(map(elements, el -> el.getAttribute(attrName)), condition);

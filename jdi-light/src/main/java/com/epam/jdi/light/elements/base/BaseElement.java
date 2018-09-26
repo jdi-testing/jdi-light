@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.base;
 
+import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.elements.interfaces.IHasValue;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;

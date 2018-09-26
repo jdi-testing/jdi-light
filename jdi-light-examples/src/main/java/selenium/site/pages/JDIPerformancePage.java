@@ -34,12 +34,12 @@ public class JDIPerformancePage extends WebPage {
     @FindBy(xpath = "//*[@id='user-names']//*[text()='%s']")
     public UIElement namesDropdown;
     @FindBy(css = "select[ui=dropdown]")
-    private WebElement dropdownValue;
+    private UIElement dropdownValue;
     @FindBy(css = "#user-names option")
     private List<WebElement> dropdown;
 
     public String isSelected() {
-        return dropdownValue.getText();
+        return dropdownValue.select().getFirstSelectedOption().getText();
     }
 
     // Textfield

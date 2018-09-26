@@ -5,6 +5,7 @@ package com.epam.jdi.light.elements.base;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.IHasValue;
 import com.epam.jdi.light.elements.interfaces.ISetValue;
@@ -15,7 +16,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class UIElement extends JDIBase implements WebElement, BaseElement, ISetValue, IHasValue {
 
@@ -61,19 +63,19 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, ISetV
     @JDIAction
     public String getText() {
         WebElement el = get();
-        String value = el.getAttribute("value");
-        if (!isBlank(value))
-            return value;
         String text = el.getText();
-        return text != null ? text : value;
+        if (isNotBlank(text))
+            return text;
+        String value = el.getAttribute("value");
+        return isNotBlank(value) ? value : text;
     }
 
     public List<WebElement> findElements(By by) {
-        return get().findElements(by);
+        return uiSearch(get(),by);
     }
 
     public WebElement findElement(By by) {
-        return get().findElement(by);
+        return findElements(by).get(0);
     }
 
     @JDIAction

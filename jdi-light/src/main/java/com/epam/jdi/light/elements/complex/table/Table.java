@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
+import com.epam.jdi.light.asserts.TableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -7,6 +8,8 @@ import com.epam.jdi.light.elements.interfaces.IHasValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.pairs.Pair;
+import org.hamcrest.Matcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -14,11 +17,11 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.tools.LinqUtils.firstIndex;
-import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.util.Arrays.asList;
@@ -27,33 +30,36 @@ public class Table extends JDIBase implements ISetup, IHasValue {
     protected By rowsLocator = By.cssSelector("tr");
     protected By columnsLocator = By.cssSelector("td");
     protected By headerLocator = By.cssSelector("th");
-    protected CacheValue<List<String>> headers = new CacheValue<>(() -> select($$(headerLocator, this), WebElement::getText));
-    protected CacheValue<Integer> size = new CacheValue<>(() -> headers.get().size());
-    protected CacheValue<List<WebElement> > rows = new CacheValue<>(() -> {
-        List<WebElement> value = get().findElements(rowsLocator);
-        if (value.get(0).findElements(columnsLocator).size() == 0 && value.get(1).findElements(columnsLocator).size() != 0)
+    public CacheValue<List<String>> header = new CacheValue<>(() -> select($$(headerLocator, this), WebElement::getText));
+    public CacheValue<Integer> size = new CacheValue<>(() -> header.get().size());
+    public CacheValue<List<WebElement> > rows = new CacheValue<>(() -> {
+        List<WebElement> value = uiSearch(get(),rowsLocator);
+        if (uiSearch(value.get(0),columnsLocator).size() == 0 && uiSearch(value.get(1),columnsLocator).size() != 0)
             value.remove(0);
         return value;
     });
 
-    protected CacheValue<Integer> count = new CacheValue<>(() -> rows.get().size());
+    public CacheValue<Integer> count = new CacheValue<>(() -> rows.get().size());
 
     public int size() {return rows.get().size(); }
     @JDIAction
     public boolean isEmpty() { return size() == 0; }
     @JDIAction
     public boolean isNotEmpty() { return size() != 0; }
+    @JDIAction
+    public List<String> header() {
+        return header.getForce();
+    }
 
     public List<WebElement> webRow(int rowNum) {
-        return rows.get().get(rowNum-1)
-                .findElements(columnsLocator);
+        return uiSearch(rows.get().get(rowNum-1), columnsLocator);
     }
     @JDIAction
     public Line row(int rowNum) {
         return new Line(webRow(rowNum));
     }
     public List<WebElement> webColumn(int colNum) {
-        return select(rows.get(), r -> r.findElements(columnsLocator).get(colNum-1));
+        return select(rows.get(), r -> uiSearch(r,columnsLocator).get(colNum-1));
     }
     @JDIAction
     public Line column(int colNum) {
@@ -66,8 +72,34 @@ public class Table extends JDIBase implements ISetup, IHasValue {
     public Line column(String colName) {
         return new Line(webColumn(colName));
     }
+
+    @JDIAction
+    public List<Line> rows() {
+        return map(rows.get(), r -> new Line(uiSearch(r,columnsLocator)));
+    }
+    @JDIAction
+    public List<Line> filterRows(Matcher<String> matcher, Column column) {
+        return filter(rows(),
+                line -> matcher.matches(line.get(column.num)));
+    }
+    @JDIAction
+    public List<Line> filterRows(Pair<Matcher<String>, Column>... matchers) {
+        return filter(rows(), line ->
+            all(matchers, m -> m.key.matches(line.get(m.value.num))));
+    }
+    @JDIAction
+    public Line row(Matcher<String> matcher, Column column) {
+        return first(rows(),
+                line -> matcher.matches(line.get(column.num)));
+    }
+    @JDIAction
+    public Line row(Pair<Matcher<String>, Column>... matchers) {
+        return first(rows(), line ->
+                all(matchers, m -> m.key.matches(line.get(m.value.num))));
+    }
+
     private int getColIndexByName(String colName) {
-        int colNum = firstIndex(headers.get(), h -> simplify.execute(h).equals(simplify.execute(colName)));
+        int colNum = firstIndex(header.get(), h -> simplify.execute(h).equals(simplify.execute(colName)));
         if (colNum == -1)
             throw exception("Can't find column '%s'", colName);
         return colNum + 1;
@@ -110,7 +142,7 @@ public class Table extends JDIBase implements ISetup, IHasValue {
         if (headers != null)
             this.headerLocator = headers;
         if (header.size() > 0)
-            this.headers.set(header);
+            this.header.set(header);
         if (size != -1)
             this.size.set(size);
         if (count != -1)
@@ -123,9 +155,14 @@ public class Table extends JDIBase implements ISetup, IHasValue {
     }
     @JDIAction
     public String getValue() {
-        String value = "||X||" + print(headers.get(), "|") + "||" + LINE_BREAK;
+        String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
         for (int i = 1; i <= count.get(); i++)
             value += "||" + i + "||" + print(row(i), "|") + "||" + LINE_BREAK;
         return value;
     }
+
+    public TableAssert assertThat() {
+        return new TableAssert(this);
+    }
+
 }

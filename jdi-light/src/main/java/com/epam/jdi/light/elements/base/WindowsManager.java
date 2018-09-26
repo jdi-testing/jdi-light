@@ -1,11 +1,14 @@
 package com.epam.jdi.light.elements.base;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.tools.map.MapArray;
 
 import java.util.Set;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.drivers;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class WindowsManager {
@@ -24,7 +27,8 @@ public class WindowsManager {
         return getWindows().size();
     }
 
-    public static void openNewWindow() {
+    @JDIAction
+    public static void switchToNewWindow() {
         String last = "";
         for (String window : getWindows())
             last = window;
@@ -32,11 +36,17 @@ public class WindowsManager {
             getDriver().switchTo().window(last);
         else throw exception("No windows found");
     }
+    @JDIAction
+    public static void openNewTab() {
+        jsExecute("window.open()");
+    }
 
+    @JDIAction
     public static void originalWindow() {
         getDriver().switchTo().window(getWindows().iterator().next());
     }
 
+    @JDIAction
     public static void switchToWindow(int number) {
         int counter = 0;
         if (getWindows().size() < number)
@@ -49,9 +59,20 @@ public class WindowsManager {
             }
         }
     }
+    @JDIAction
     public static void switchToWindow(String name) {
         if (!windowHandles.has(name))
             throw exception("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", name);
         getDriver().switchTo().window(windowHandles.get(name));
+    }
+    @JDIAction
+    public static void closeWindow() {
+        getDriver().close();
+        originalWindow();
+    }
+    @JDIAction
+    public static void closeWindow(String name) {
+        switchToWindow(name);
+        closeWindow();
     }
 }
