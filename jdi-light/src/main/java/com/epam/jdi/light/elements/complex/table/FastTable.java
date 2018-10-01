@@ -38,7 +38,7 @@ public class FastTable extends Table {
     private int getRowIndex(int rowNum) {
         if (headerIsRow == null) {
             List<String> firstRow = $$(fillByTemplate(rowsLocator, 1), this).values();
-            headerIsRow = firstRow.isEmpty() || listEquals(headers.get(), firstRow);
+            headerIsRow = firstRow.isEmpty() || listEquals(header.get(), firstRow);
         }
         return headerIsRow ? rowNum + 1 : rowNum;
     }

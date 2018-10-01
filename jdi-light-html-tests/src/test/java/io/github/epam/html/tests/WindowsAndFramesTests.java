@@ -1,11 +1,11 @@
 package io.github.epam.html.tests;
 
 import io.github.epam.TestsInit;
-import io.github.epam.html.tests.steps.Preconditions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.base.WindowsManager.*;
+import static io.github.epam.html.tests.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 import static io.github.com.StaticSite.homePage;
@@ -18,7 +18,7 @@ public class WindowsAndFramesTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        Preconditions.shouldBeLoggedIn();
+        shouldBeLoggedIn();
         homePage.shouldBeOpened();
     }
     @Test

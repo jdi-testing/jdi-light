@@ -3,7 +3,6 @@ package com.epam.jdi.light.ui.html.base;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.ui.html.common.*;
 import com.epam.jdi.tools.PrintUtils;
-import com.sun.tools.javac.comp.Check;
 import org.openqa.selenium.WebElement;
 
 import java.net.MalformedURLException;
