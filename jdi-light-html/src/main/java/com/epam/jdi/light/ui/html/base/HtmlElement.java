@@ -1,23 +1,25 @@
 package com.epam.jdi.light.ui.html.base;
 
-import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.ui.html.asserts.TextAssert;
 import com.epam.jdi.light.ui.html.common.*;
-import com.epam.jdi.light.ui.html.complex.MultiSelect;
 import com.epam.jdi.tools.PrintUtils;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import com.sun.tools.javac.comp.Check;
+import org.openqa.selenium.WebElement;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 
-public class HtmlElement extends BaseUIElement implements Text, Button, FileInput, Icon, Image, Link, TextArea, TextField, Title {
+public class HtmlElement extends UIElement implements Text, Button, FileInput, Icon, Image, Link, TextArea,
+        TextField, Title, Checkbox {
+
+    public HtmlElement() { }
+    public HtmlElement(WebElement el) { super(el); }
 
     public String getAlt() { return getAttribute("alt"); }
     public String getSrc() { return getAttribute("src"); }
@@ -31,6 +33,7 @@ public class HtmlElement extends BaseUIElement implements Text, Button, FileInpu
         try { return new URL(getRef());
         } catch (MalformedURLException ex) { throw exception(ex.getMessage()); }
     }
+    public String placeholder() { return getAttribute("placeholder"); }
     public void setLines(String... lines) {
         setText(PrintUtils.print(asList(lines), "/n"));
     }
@@ -42,10 +45,18 @@ public class HtmlElement extends BaseUIElement implements Text, Button, FileInpu
     public int minlength() { return parseInt(getAttribute("minlength")); }
     public int maxlength() { return parseInt(getAttribute("maxlength")); }
 
-    public TextAssert is() {
-        return new TextAssert(this);
+    public void check() {
+        if (!isSelected())
+            click();
     }
-    public TextAssert assertThat() {
-        return is();
+    public void uncheck() {
+        if (isSelected())
+            click();
+    }
+    public Title label() {
+        return (Title) $("[for="+this.getAttribute("ïd")+"]");
+    }
+    public String labelText() {
+        return label().getText();
     }
 }

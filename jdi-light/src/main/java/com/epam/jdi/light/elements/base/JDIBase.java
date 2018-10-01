@@ -64,6 +64,9 @@ public class JDIBase extends DriverBase implements INamed {
     public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
             = "Find %s elements instead of one for Element '%s' during %s seconds";
 
+    public WebElement get() {
+        return get(new Object[]{});
+    }
     public WebElement get(Object... args) {
         // TODO SAVE GET ELEMENT AND STALE ELEMENT PROCESS
         if (webElement.hasValue())

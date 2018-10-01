@@ -1,26 +1,100 @@
 package com.epam.jdi.light.ui.html.base;
 
-import com.epam.jdi.light.ui.html.asserts.DropdownAssert;
+import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.ui.html.asserts.BaseSelectorAssert;
+import com.epam.jdi.light.ui.html.asserts.SelectAssert;
+import com.epam.jdi.light.ui.html.common.Title;
 import com.epam.jdi.light.ui.html.complex.Combobox;
 import com.epam.jdi.light.ui.html.complex.DataList;
 import com.epam.jdi.light.ui.html.complex.Dropdown;
+import com.epam.jdi.light.ui.html.complex.MultiSelect;
+import org.openqa.selenium.WebElement;
 
-public class HtmlSelector extends HtmlBaseSelector implements Dropdown, DataList, Combobox {
-    @Override
-    public void select(String value) { select().selectByVisibleText(value); }
-    public void select(int index) { select().selectByIndex(index); }
-    public String selected() { return select().getFirstSelectedOption().getText(); }
+import java.util.List;
 
-    @Override
-    public void setValue(String value) { select(value); }
-    @Override
-    public String getValue() { return selected(); }
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.tools.LinqUtils.ifSelect;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static java.util.Arrays.asList;
 
-    public DropdownAssert is() {
-        return new DropdownAssert(this);
+public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropdown, DataList, Combobox, MultiSelect {
+
+    public HtmlSelector() { }
+    public HtmlSelector(WebElement el) { super(el); }
+    @Override
+    public void select(String value) {
+        select().selectByVisibleText(value);
     }
-    public DropdownAssert assertThat() {
+    public void select(int index) {
+        select().selectByIndex(index);
+    }
+
+    public void check(String... values) {
+        select().deselectAll();
+        for (String value : values)
+            select().selectByVisibleText(value);
+    }
+    public void uncheck(String... values) {
+        for (WebElement opt : select().getOptions()) {
+            if (opt.isSelected() && asList(values).contains(opt.getText())
+                || !opt.isSelected() && !asList(values).contains(opt.getText()))
+                opt.click();
+        }
+    }
+    public void check(int... values) {
+        select().deselectAll();
+        for (int index : values)
+            select().selectByIndex(index);
+    }
+    public void uncheck(int... values) {
+        List<WebElement> options = select().getOptions();
+        for (int i = 0; i < options.size(); i++) {
+            WebElement opt = options.get(i);
+            if (opt.isSelected() && asList(values).contains(i)
+                    || !opt.isSelected() && !asList(values).contains(i))
+                opt.click();
+        }
+    }
+
+    public List<String> checked() {
+        return map(select().getAllSelectedOptions(), WebElement::getText);
+    }
+    public String selected() {
+        return select().getFirstSelectedOption().getText();
+    }
+    public String placeholder() { return getAttribute("placeholder"); }
+
+    public List<String> values() {
+        return map(select().getOptions(), WebElement::getText);
+    }
+
+    public List<String> enabled() { return ifSelect(getUI().find("option").allUI(),
+            UIElement::isEnabled, UIElement::getText);
+    }
+    public List<String> disabled() { return ifSelect(getUI().find("option").allUI(),
+            uiElement -> !uiElement.isEnabled(), UIElement::getText);
+    }
+
+    @Override
+    public void setValue(String value) {
+        if (select().isMultiple())
+            check(value.split(";"));
+        else select(value);
+    }
+    @Override
+    public String getValue() {
+        return select().isMultiple() ? print(checked(),";") : selected();
+    }
+
+    public SelectAssert is() {
+        return new SelectAssert(this);
+    }
+    public SelectAssert assertThat() {
         return is();
     }
 
+    public Title label() {
+        return (Title) $("[for="+this.getAttribute("ïd")+"]");
+    }
 }

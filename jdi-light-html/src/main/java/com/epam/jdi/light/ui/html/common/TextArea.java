@@ -9,4 +9,5 @@ public interface TextArea extends TextField {
     int cols();
     int minlength();
     int maxlength();
+    String placeholder();
 }

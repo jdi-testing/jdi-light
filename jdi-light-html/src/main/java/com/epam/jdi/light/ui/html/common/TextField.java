@@ -9,5 +9,6 @@ public interface TextField extends Text, SetValue, HasLabel {
     void clear();
     void input(String value);
     void focus();
+    String placeholder();
 
 }
