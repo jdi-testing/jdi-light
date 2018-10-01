@@ -6,7 +6,7 @@ package com.epam.jdi.light.common;
  */
 
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.interfaces.IHasValue;
+import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.epam.jdi.tools.map.MapArray;
@@ -85,13 +85,13 @@ public final class UIUtils {
     public static <T> T asEntity(Object obj, Class<T> entityClass) {
         try {
             T data = newEntity(entityClass);
-            foreach(getFields(obj, IHasValue.class), item -> {
+            foreach(getFields(obj, HasValue.class), item -> {
                 Field field = first(getFields(data, String.class), f ->
                         namesEqual(f.getName(), item.getName()));
                 if (field == null)
                     return;
                 try {
-                    field.set(data, ((IHasValue) getValueField(item, obj)).getValue());
+                    field.set(data, ((HasValue) getValueField(item, obj)).getValue());
                 } catch (Exception ignore) { }
             });
             return data;

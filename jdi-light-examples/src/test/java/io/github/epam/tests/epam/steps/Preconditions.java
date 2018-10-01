@@ -5,7 +5,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import static io.github.epam.EpamGithubSite.header;
 import static io.github.epam.entities.Users.DEFAULT_USER;
-import static staticPageObject.StaticSite.homePage;
+import static io.github.com.StaticSite.homePage;
 
 /**
  * Created by Roman_Iovlev on 3/1/2018.

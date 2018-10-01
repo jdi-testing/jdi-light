@@ -1,6 +1,5 @@
 package io.github.epam.tests.epam;
 
-import com.epam.jdi.light.elements.base.WindowsManager;
 import io.github.epam.SimpleTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

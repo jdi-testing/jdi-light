@@ -35,10 +35,10 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class JDIBase extends DriverBase implements INamed {
     public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     protected By byLocator;
-    private CacheValue<WebElement> webElement = new CacheValue<>();
+    protected CacheValue<WebElement> webElement = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
     public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
-    public <T extends JDIBase> T setWebElement(WebElement el) { webElement.setForce(el); return (T)this; }
+    public UIElement setWebElement(WebElement el) { webElement.setForce(el); return (UIElement) this; }
 
     public <T extends JDIBase> T setLocator(By locator) {
         locatorType = DEFAULT;
@@ -79,7 +79,7 @@ public class JDIBase extends DriverBase implements INamed {
         }
     }
     public UIElement getUI(Object... args) {
-        return new UIElement().setWebElement(get(args));
+        return new UIElement(get(args));
     }
 
     public List<WebElement> getAll(Object... args) {
@@ -90,7 +90,7 @@ public class JDIBase extends DriverBase implements INamed {
         return filter(els, el -> searchRule.invoke(el));
     }
     public List<UIElement> allUI(Object... args) {
-        return map(getAll(args), el -> new UIElement().setWebElement(el));
+        return map(getAll(args), UIElement::new);
     }
 
     private SearchContext getSearchContext(Object element) {

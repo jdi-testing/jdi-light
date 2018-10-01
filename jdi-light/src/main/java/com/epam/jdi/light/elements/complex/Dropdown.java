@@ -3,8 +3,8 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.interfaces.IHasValue;
-import com.epam.jdi.light.elements.interfaces.ISetValue;
+import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -26,7 +26,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class Dropdown extends JDIBase implements ISetup, IHasValue, ISetValue {
+public class Dropdown extends JDIBase implements ISetup, SetValue {
     private static final String SELECT_ERROR =
             "Can't %s element in dropdown '%s'. Dropdown should have JDropdown annotation or locator to 'select' tag";
     private static final String TO_MUCH_ELEMENTS_FOUND_ERROR =
