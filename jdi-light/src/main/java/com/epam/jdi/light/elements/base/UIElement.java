@@ -5,8 +5,8 @@ package com.epam.jdi.light.elements.base;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.asserts.IsAssert;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;

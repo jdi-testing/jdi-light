@@ -58,4 +58,9 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
     public String labelText() {
         return label().getText();
     }
+
+    @Override
+    public HtmlAssertion is() { return new HtmlAssertion(this); }
+    @Override
+    public HtmlAssertion assertThat() { return is(); }
 }
