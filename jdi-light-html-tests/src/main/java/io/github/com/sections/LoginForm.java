@@ -3,13 +3,15 @@ package io.github.com.sections;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
+import com.epam.jdi.light.ui.html.common.Button;
+import com.epam.jdi.light.ui.html.common.TextField;
 import io.github.com.entities.User;
 import org.openqa.selenium.WebElement;
 
 public class LoginForm extends Form<User> {
-	@Css("input[type=text]") public WebElement userName;
-	@Css("input[type=password]") public WebElement password;
+	@Css("input[type=text]") public TextField userName;
+	@Css("input[type=password]") public TextField password;
 
-	@XPath(".//button[@type='submit']") public WebElement enter;
+	@XPath(".//button[@type='submit']") public Button enter;
 
 }

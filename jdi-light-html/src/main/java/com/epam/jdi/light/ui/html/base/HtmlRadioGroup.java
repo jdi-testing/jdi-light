@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
@@ -26,8 +27,9 @@ public class HtmlRadioGroup extends UIElement implements BaseSelectorAssert, Rad
     public void select(String value) {
         label.get(value).click();
     }
-    public void selectById(String id) {
-        input.get(id).click();
+    @Override
+    public <TEnum extends Enum> void select(TEnum value) {
+        input.get(getEnumValue(value)).click();
     }
     public void select(int index) {
         getAll().get(index).click();

@@ -8,13 +8,17 @@ import com.epam.jdi.light.ui.html.complex.Combobox;
 import com.epam.jdi.light.ui.html.complex.DataList;
 import com.epam.jdi.light.ui.html.complex.Dropdown;
 import com.epam.jdi.light.ui.html.complex.MultiSelect;
+import com.epam.jdi.tools.EnumUtils;
+import com.epam.jdi.tools.LinqUtils;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.LinqUtils.toStringArray;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
@@ -41,6 +45,12 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
                 || !opt.isSelected() && !asList(values).contains(opt.getText()))
                 opt.click();
         }
+    }
+    public <TEnum extends Enum> void check(TEnum... values) {
+        check(getEnumValues(values));
+    }
+    public <TEnum extends Enum> void uncheck(TEnum... values) {
+        uncheck(getEnumValues(values));
     }
     public void check(int... values) {
         select().deselectAll();
@@ -95,6 +105,6 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
     }
 
     public Title label() {
-        return (Title) $("[for="+this.getAttribute("ïd")+"]");
+        return (Title) $("[for="+getAttribute("ïd")+"]");
     }
 }

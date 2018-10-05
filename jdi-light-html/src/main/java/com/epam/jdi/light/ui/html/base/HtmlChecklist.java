@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
@@ -25,8 +27,9 @@ public class HtmlChecklist extends UIElement implements BaseSelectorAssert, Chec
     public void select(String value) {
         label.get(value).click();
     }
-    public void selectById(String id) {
-        input.get(id).click();
+    @Override
+    public <TEnum extends Enum> void select(TEnum value) {
+        input.get(getEnumValue(value)).click();
     }
     public void select(int index) {
         getAll().get(index).click();
@@ -45,6 +48,12 @@ public class HtmlChecklist extends UIElement implements BaseSelectorAssert, Chec
                     || !ui.isSelected() && !asList(values).contains(ui.labelText()))
                 ui.click();
         }
+    }
+    public <TEnum extends Enum> void check(TEnum... values) {
+        check(getEnumValues(values));
+    }
+    public <TEnum extends Enum> void uncheck(TEnum... values) {
+        uncheck(getEnumValues(values));
     }
     public void check(int... values) {
         List<UIElement> options = allUI();

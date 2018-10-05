@@ -8,6 +8,7 @@ package com.epam.jdi.light.elements.base;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.asserts.IsAssert;
 import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.tools.EnumUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -16,6 +17,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class UIElement extends JDIBase implements WebElement, BaseElement, SetValue {
@@ -153,6 +155,10 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
     @JDIAction
     public void select(String name) {
         get(name).click();
+    }
+    @JDIAction
+    public <TEnum extends Enum> void select(TEnum name) {
+        select(getEnumValue(name));
     }
 
     public void setValue(String value) {

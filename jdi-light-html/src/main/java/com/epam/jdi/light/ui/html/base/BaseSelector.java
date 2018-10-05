@@ -13,6 +13,7 @@ import java.util.List;
 
 public interface BaseSelector extends BaseElement, SetValue {
     void select(String value);
+    <TEnum extends Enum> void select(TEnum value);
     void select(int index);
     List<String> values();
     List<String> enabled();
