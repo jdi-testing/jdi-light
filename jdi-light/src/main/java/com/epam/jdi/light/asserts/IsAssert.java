@@ -1,5 +1,6 @@
 package com.epam.jdi.light.asserts;
 
+import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import org.hamcrest.Matcher;
 
@@ -7,8 +8,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class IsAssert {
-    UIElement element;
-    public IsAssert(UIElement element) { this.element = element; }
+    protected UIElement element;
+    public IsAssert(BaseElement element) { this.element = (UIElement) element; }
 
     public void text(Matcher<String> condition) {
         assertThat(element.getText(), condition);

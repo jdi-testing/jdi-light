@@ -6,9 +6,8 @@ package com.epam.jdi.light.elements.base;
  */
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.asserts.IsAssert;
+import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.tools.EnumUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;

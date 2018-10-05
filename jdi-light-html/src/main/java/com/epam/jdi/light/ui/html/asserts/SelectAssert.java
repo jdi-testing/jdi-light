@@ -1,8 +1,7 @@
 package com.epam.jdi.light.ui.html.asserts;
 
-import com.epam.jdi.light.elements.asserts.IsAssert;
+import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
-import com.epam.jdi.light.ui.html.base.HtmlSelector;
 import org.hamcrest.Matcher;
 
 import static org.hamcrest.MatcherAssert.assertThat;

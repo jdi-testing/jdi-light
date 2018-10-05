@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.base;
 
-import com.epam.jdi.light.elements.asserts.IsAssert;
+import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
