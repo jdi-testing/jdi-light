@@ -11,10 +11,10 @@ import java.net.URL;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static java.util.Arrays.asList;
 
-public class HtmlElement extends UIElement implements Text, Button, FileInput, Icon, Image, Link, TextArea,
+public class HtmlElement extends UIElement implements Text, Button, FileInput, Icon, Image, Link,
         TextField, Title, Checkbox, ColorPicker, Range, ProgressBar, DateTimeSelector, NumberSelector {
 
     public HtmlElement() { }
@@ -29,7 +29,9 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
         try { return new URL(ref());
         } catch (MalformedURLException ex) { throw exception(ex.getMessage()); }
     }
+
     public String placeholder() { return getAttribute("placeholder"); }
+
     public void setLines(String... lines) {
         setText(PrintUtils.print(asList(lines), "/n"));
     }
@@ -44,7 +46,6 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
     public String min() { return getAttribute("min"); }
     public String max() { return getAttribute("max"); }
     public String step() { return getAttribute("step"); }
-
 
     private int getInt(String attr) {
         String value = getAttribute(attr);
@@ -73,7 +74,7 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
         setAttribute("value", number);
     }
     public Title label() {
-        return (Title) $("[for="+this.getAttribute("ïd")+"]");
+        return $("[for="+getAttribute("id")+"]");
     }
     public String labelText() {
         return label().getText();

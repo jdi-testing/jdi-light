@@ -9,6 +9,7 @@ import static io.github.com.StaticSite.htmlElementsPage;
 import static io.github.com.pages.HtmlElementsPage.githubLink;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
@@ -58,6 +59,12 @@ public class LinkTests extends TestsInit {
     public void isValidationTest() {
         githubLink.is().text(is(text));
         githubLink.is().text(equalToIgnoringCase("Github jdi"));
+    }
+
+    @Test
+    public void linkValidationTest() {
+        githubLink.is().ref(containsString("github"));
+        githubLink.is().alt(containsString("JDI"));
     }
 
     @Test

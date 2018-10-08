@@ -18,9 +18,9 @@ public class HtmlFactory {
         return el;
     }
     private static By getLocator(String locator) {
-        return locator.charAt(1) == '/'
-                ? By.cssSelector(locator)
-                : By.xpath(locator);
+        return locator.substring(0,2).contains("/")
+                ? By.xpath(locator)
+                : By.cssSelector(locator);
     }
     public static HtmlElement $(String locator) {
         return element(locator);

@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.html.base.*;
 import com.epam.jdi.light.ui.html.common.Button;
+import com.epam.jdi.light.ui.html.common.TextArea;
 import com.epam.jdi.light.ui.html.complex.Checklist;
 import com.epam.jdi.light.ui.html.complex.RadioButtons;
 import com.epam.jdi.light.ui.html.complex.RadioGroup;
@@ -37,6 +38,7 @@ public class HtmlSettings {
                 $(f -> isInterface(f, RadioGroup.class) || isInterface(f, RadioButtons.class),
                         info -> new HtmlRadioGroup()),
                 $(f -> isInterface(f, BaseSelector.class), info -> new HtmlSelector()),
+                $(f -> isInterface(f, TextArea.class), info -> new TextAreaElement()),
                 $(f -> isInterface(f, BaseElement.class) , info -> new HtmlElement())
                 );
 

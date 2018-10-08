@@ -11,4 +11,6 @@ public interface TextField extends Text, SetValue, HasLabel {
     void focus();
     String placeholder();
 
+    @Override
+    default void setValue(String value) { setText(value); }
 }
