@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.tools.map.MapArray;
+import org.openqa.selenium.Alert;
 
 import java.util.Set;
 
@@ -73,5 +74,10 @@ public class WindowsManager {
     public static void closeWindow(String name) {
         switchToWindow(name);
         closeWindow();
+    }
+
+    @JDIAction
+    public static Alert alert() {
+        return getDriver().switchTo().alert();
     }
 }

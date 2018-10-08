@@ -20,13 +20,13 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
     public HtmlElement() { }
     public HtmlElement(WebElement el) { super(el); }
 
-    public String getAlt() { return getAttribute("alt"); }
-    public String getSrc() { return getAttribute("src"); }
-    public String getHeight() { return getAttribute("height"); }
-    public String getWidth() { return getAttribute("width"); }
-    public String getRef() { return getAttribute("href"); }
-    public URL getUrl() {
-        try { return new URL(getRef());
+    public String alt() { return getAttribute("alt"); }
+    public String src() { return getAttribute("src"); }
+    public String height() { return getAttribute("height"); }
+    public String width() { return getAttribute("width"); }
+    public String ref() { return getAttribute("href"); }
+    public URL url() {
+        try { return new URL(ref());
         } catch (MalformedURLException ex) { throw exception(ex.getMessage()); }
     }
     public String placeholder() { return getAttribute("placeholder"); }

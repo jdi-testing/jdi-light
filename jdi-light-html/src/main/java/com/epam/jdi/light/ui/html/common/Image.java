@@ -5,10 +5,10 @@ import com.epam.jdi.light.ui.html.asserts.ImageAssert;
 
 public interface Image extends BaseElement {
     void click();
-    String getSrc();
-    String getHeight();
-    String getWidth();
-    String getAlt();
+    String src();
+    String height();
+    String width();
+    String alt();
 
     ImageAssert is();
     ImageAssert assertThat();

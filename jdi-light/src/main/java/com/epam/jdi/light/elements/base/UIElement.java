@@ -75,8 +75,9 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
 
     @JDIAction
     public boolean isDisplayed() {
-        WebElement el = get();
-        try { return el != null && el.isDisplayed();
+        try {
+            WebElement el = get();
+            return el != null && el.isDisplayed();
         } catch (Exception ex) { return false; }
     }
     public Point getLocation() {

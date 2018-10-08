@@ -7,6 +7,7 @@ package com.epam.jdi.light.settings;
 
 import com.epam.jdi.light.driver.get.DriverData;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.light.logger.JDILogger;
 import com.epam.jdi.tools.PropertyReader;
@@ -48,14 +49,15 @@ public class WebSettings {
     public static String TEST_GROUP = "";
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static String DRIVER_REMOTE_URL;
+
     public static JFunc1<JDIBase, WebElement> SMART_SEARCH = el -> {
         String locatorName = splitHythen(el.name);
-        WebElement result = $("#"+locatorName).get();
-        if (result != null)
-            return result;
-        result = $("[ui='"+locatorName+"']").setParent(el.parent).get();
-        if (result != null)
-            return result;
+        UIElement ui = $("#"+locatorName).setName(el.name);
+        if (ui.isDisplayed())
+            return ui.get();
+        ui= $("[ui='"+locatorName+"']").setName(el.name).setParent(el.parent);
+        if (ui.isDisplayed())
+            return ui.get();
         throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.name);
     };
 

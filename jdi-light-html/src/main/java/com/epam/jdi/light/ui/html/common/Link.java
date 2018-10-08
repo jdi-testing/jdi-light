@@ -8,9 +8,9 @@ import java.net.URL;
 public interface Link extends BaseElement {
     void click();
     String getText();
-    String getRef();
-    URL getUrl();
-    String getAlt();
+    String ref();
+    URL url();
+    String alt();
 
     LinkAssert is();
     LinkAssert assertThat();
