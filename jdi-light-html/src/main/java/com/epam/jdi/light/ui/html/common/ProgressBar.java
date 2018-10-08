@@ -1,19 +1,10 @@
 package com.epam.jdi.light.ui.html.common;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import com.epam.jdi.light.elements.base.BaseElement;
+import com.epam.jdi.light.ui.html.base.HasLabel;
 
-public interface ProgressBar extends Button {
-    default String getValue() {
-        return getAttribute("value");
-    }
-    default int max() {
-        try {
-            return Integer.parseInt(getAttribute("value"));
-        } catch (Exception ex) { throw exception("Can't parse value"); }
-    }
-    default int min() {
-        try {
-            return Integer.parseInt(getAttribute("value"));
-        } catch (Exception ex) { throw exception("Can't parse value"); }
-    }
+public interface ProgressBar extends BaseElement, HasLabel {
+    String value();
+    String max();
+
 }

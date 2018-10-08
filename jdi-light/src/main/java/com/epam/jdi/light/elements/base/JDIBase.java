@@ -24,6 +24,7 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -35,10 +36,10 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class JDIBase extends DriverBase implements INamed {
     public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     protected By byLocator;
-    private CacheValue<WebElement> webElement = new CacheValue<>();
+    protected CacheValue<WebElement> webElement = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
     public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
-    public <T extends JDIBase> T setWebElement(WebElement el) { webElement.setForce(el); return (T)this; }
+    public UIElement setWebElement(WebElement el) { webElement.setForce(el); return (UIElement) this; }
 
     public <T extends JDIBase> T setLocator(By locator) {
         locatorType = DEFAULT;
@@ -64,10 +65,15 @@ public class JDIBase extends DriverBase implements INamed {
     public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
             = "Find %s elements instead of one for Element '%s' during %s seconds";
 
+    public WebElement get() {
+        return get(new Object[]{});
+    }
     public WebElement get(Object... args) {
-        // TODO SAVE GET ELEMENT AND STALE ELEMENT PROCESS
+        // TODO SAFE GET ELEMENT AND STALE ELEMENT PROCESS
         if (webElement.hasValue())
             return webElement.get();
+        if (byLocator == null)
+            return SMART_SEARCH.execute(this);
         List<WebElement> result = getAll(args);
         switch (result.size()) {
             case 0:
@@ -79,10 +85,12 @@ public class JDIBase extends DriverBase implements INamed {
         }
     }
     public UIElement getUI(Object... args) {
-        return new UIElement().setWebElement(get(args));
+        return new UIElement(get(args));
     }
 
     public List<WebElement> getAll(Object... args) {
+        if (byLocator == null)
+            return asList(SMART_SEARCH.execute(this));
         SearchContext searchContext = containsRoot(getLocator(args))
                 ? getDefaultContext()
                 : getSearchContext(parent);
@@ -90,7 +98,7 @@ public class JDIBase extends DriverBase implements INamed {
         return filter(els, el -> searchRule.invoke(el));
     }
     public List<UIElement> allUI(Object... args) {
-        return map(getAll(args), el -> new UIElement().setWebElement(el));
+        return map(getAll(args), UIElement::new);
     }
 
     private SearchContext getSearchContext(Object element) {

@@ -2,8 +2,8 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.IHasValue;
-import com.epam.jdi.light.elements.interfaces.ISetValue;
+import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
@@ -15,7 +15,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.FormFilters.*;
-import static com.epam.jdi.light.common.UIUtils.getButton;
+import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
@@ -32,7 +32,7 @@ import static java.lang.String.format;
  */
 
 public class Form<T> extends Section {
-    public void fillAction(ISetValue element, String value) {
+    public void fillAction(SetValue element, String value) {
         element.setValue(value);
     }
     private FormFilters filter = ALL;
@@ -58,7 +58,7 @@ public class Form<T> extends Section {
                     namesEqual(name, getElementName(field)));
                 if (fieldValue == null)
                     continue;
-                ISetValue setValueElement = (ISetValue) getValueField(field, this);
+                SetValue setValueElement = (SetValue) getValueField(field, this);
                 fillAction(setValueElement, fieldValue);
             } catch (Exception ex) { throw exception("Can't fill element %s. Exception: %s", field.getName(), ex.getMessage()); }
         setFilterAll();
@@ -66,13 +66,13 @@ public class Form<T> extends Section {
     public List<Field> allFields() {
         switch (getFilter()) {
             case MANDATORY:
-                return LinqUtils.where(getFields(this, ISetValue.class),
+                return LinqUtils.where(getFields(this, SetValue.class),
                         field -> hasAnnotation(field, Mandatory.class));
             case OPTIONAL:
-                return LinqUtils.where(getFields(this, ISetValue.class),
+                return LinqUtils.where(getFields(this, SetValue.class),
                         field -> !hasAnnotation(field, Mandatory.class));
             default:
-                return getFields(this, ISetValue.class, WebElement.class);
+                return getFields(this, SetValue.class, WebElement.class);
         }
     }
 
@@ -104,7 +104,7 @@ public class Form<T> extends Section {
             String fieldValue = map.first((name, value) ->
                     namesEqual(name, getElementName(field)));
             if (fieldValue == null) continue;
-            IHasValue valueField = (IHasValue) getValueField(field, this);
+            HasValue valueField = (HasValue) getValueField(field, this);
             String actual = valueField.getValue().trim();
             if (!actual.equals(fieldValue))
                 compareFalse.add(format("Field '%s' (Actual: '%s' <> Expected: '%s')", field.getName(), actual, fieldValue));
@@ -143,7 +143,7 @@ public class Form<T> extends Section {
     /**
      * @param text Specify text
      *             Fill first setable field with value and click on Button “submit” <br>
-     * @apiNote To use this option Form pageObject should have at least one ISetValue element and only one IButton Element
+     * @apiNote To use this option Form pageObject should have at least one SetValue element and only one IButton Element
      */
     public void submit(String text) {
         submit(text, "submit");
@@ -153,15 +153,15 @@ public class Form<T> extends Section {
      * @param text       Specify text
      * @param buttonName button name for form submiting
      *                   Fill first setable field with value and click on Button “buttonName” <br>
-     * @apiNote To use this option Form pageObject should have at least one ISetValue element <br>
+     * @apiNote To use this option Form pageObject should have at least one SetValue element <br>
      * Allowed different buttons to send one form e.g. save/ publish / cancel / search update ...
      */
     @JDIAction("{1}: {0}")
     public void submit(String text, String buttonName) {
-        Field field = getFields(this, ISetValue.class).get(0);
-        ISetValue setValueElement = (ISetValue) getValueField(field, this);
+        Field field = getFields(this, SetValue.class).get(0);
+        SetValue setValueElement = (SetValue) getValueField(field, this);
         fillAction(setValueElement, text);
-        getButton(this, buttonName).click();
+        GET_BUTTON.execute(setValueElement, text).click();
     }
 
     /**
@@ -191,7 +191,7 @@ public class Form<T> extends Section {
     @JDIAction("Fill {0} and press {1}")
     public void submit(MapArray<String, String> objStrings, String name) {
         fill(objStrings);
-        getButton(this, name).click();
+        GET_BUTTON.execute(this, name).click();
     }
     /**
      * @param objStrings Fill all SetValue elements and click on Button specified button e.g. "Publish" or "Save" <br>

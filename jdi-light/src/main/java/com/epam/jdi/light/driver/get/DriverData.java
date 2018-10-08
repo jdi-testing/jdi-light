@@ -7,14 +7,15 @@ package com.epam.jdi.light.driver.get;
 
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,7 +82,18 @@ public class DriverData {
     }
 
     // GET DRIVER
-    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver -> driver;
+    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver ->
+        getOs().equals(MAC) ? maximizeScreen(driver) : driver;
+
+    private static WebDriver maximizeScreen(WebDriver driver) {
+        java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Point position = new Point(0, 0);
+        driver.manage().window().setPosition(position);
+        Dimension maximizedScreenSize =
+                new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
+        driver.manage().window().setSize(maximizedScreenSize);
+        return driver;
+    }
 
     public static JFunc<Capabilities> CHROME_OPTIONS = () -> {
         HashMap<String, Object> chromePrefs = new HashMap<>();

@@ -31,18 +31,18 @@ public class HtmlList extends WebList implements Menu {
             el -> new UIElement().setWebElement(el));
         UIElement el = LinqUtils.first(uiElements, e -> e.getText().equals(name));
         if (el == null) {
-            el = LinqUtils.first(uiElements, e -> verifyLabel(e, name));
-            if (el == null)
+            //el = LinqUtils.first(uiElements, e -> verifyLabel(e, name));
+            //if (el == null)
                 throw exception("Can't select '%s'. No elements with this name found");
         }
         return el;
     }
-    private boolean verifyLabel(WebElement element, String name) {
-        List<WebElement> els =  element.findElements(By.xpath("//../label"));
-        return els.size() == 1 && els.get(0).getText().equals(name);
-    }
+//    private boolean verifyLabel(UIElement element, String name) {
+//        List<WebElement> els =  element.find("<label").getAll();
+//        return els.size() == 1 && els.get(0).getText().equals(name);
+//    }
 
-    public String getSelected() {
+    public String selected() {
         List<String> selected = getSelectedOptions();
         if (selected.size() == 1)
             return selected.get(0);
@@ -52,6 +52,7 @@ public class HtmlList extends WebList implements Menu {
     public List<String> getSelectedOptions() {
         return LinqUtils.ifSelect(allUI(), UIElement::isSelected, UIElement::getText);
     }
-    // TODO locators for ul > li and select > option
 
+    // TODO locators for ul > li and select > option
+    public List<String> values() { return LinqUtils.map(elements(), WebElement::getText); }
 }

@@ -7,7 +7,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import selenium.entities.User;
 
-import static selenium.seleniumPO.SiteSelenium.homePage;
 import static selenium.site.SiteJdi.*;
 
 

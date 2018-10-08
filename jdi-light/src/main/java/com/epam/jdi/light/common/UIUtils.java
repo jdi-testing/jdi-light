@@ -6,9 +6,10 @@ package com.epam.jdi.light.common;
  */
 
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.interfaces.IHasValue;
+import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
+import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 
@@ -20,9 +21,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.LinqUtils.foreach;
-import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
@@ -62,7 +61,8 @@ public final class UIUtils {
             elements.add(get(array, i).toString());
         return print(elements);
     }
-    public static UIElement getButton(Object obj, String buttonName) {
+
+    public static JFunc2<Object, String, UIElement> GET_BUTTON = (obj, buttonName) -> {
         List<Field> fields = getFields(obj, WebElement.class);
         switch (fields.size()) {
             case 0:
@@ -76,8 +76,15 @@ public final class UIUtils {
                     throw exception("Can't find button '%s' for Element '%s'", buttonName, obj);
                 return button;
         }
-    }
+    };
 
+    public static UIElement getButtonByName(List<Field> fields, Object obj, String buttonName) {
+        Collection<UIElement> buttons = select(fields, f -> (UIElement) getValueField(f, obj));
+        UIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
+        if (button == null)
+            throw exception("Can't find button '%s' for Element '%s'", buttonName, obj);
+        return button;
+    }
     private static String toButton(String buttonName) {
         return buttonName.toLowerCase().contains("button") ? buttonName : buttonName + "button";
     }
@@ -85,13 +92,13 @@ public final class UIUtils {
     public static <T> T asEntity(Object obj, Class<T> entityClass) {
         try {
             T data = newEntity(entityClass);
-            foreach(getFields(obj, IHasValue.class), item -> {
+            foreach(getFields(obj, HasValue.class), item -> {
                 Field field = first(getFields(data, String.class), f ->
                         namesEqual(f.getName(), item.getName()));
                 if (field == null)
                     return;
                 try {
-                    field.set(data, ((IHasValue) getValueField(item, obj)).getValue());
+                    field.set(data, ((HasValue) getValueField(item, obj)).getValue());
                 } catch (Exception ignore) { }
             });
             return data;

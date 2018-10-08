@@ -1,0 +1,38 @@
+package io.github.epam.tests.recommended.steps;
+
+import com.epam.jdi.light.elements.composite.WebPage;
+import ru.yandex.qatools.allure.annotations.Step;
+
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.pages.Header.*;
+import static io.github.epam.entities.Users.DEFAULT_USER;
+
+/**
+ * Created by Roman_Iovlev on 3/1/2018.
+ */
+public class Preconditions {
+    @Step
+    public static void shouldBeLoggedIn() {
+        if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
+            homePage.open();
+        if (!piterChailovskii.isDisplayed())
+            login();
+    }
+    @Step
+    public static void login() {
+        userIcon.click();
+        loginForm.submit(DEFAULT_USER, "enter");
+    }
+    @Step
+    public static void shouldBeLoggedOut() {
+        if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
+            homePage.open();
+        if (piterChailovskii.isDisplayed())
+            logout();
+    }
+    @Step
+    public static void logout() {
+        userIcon.click();
+        logout.click();
+    }
+}

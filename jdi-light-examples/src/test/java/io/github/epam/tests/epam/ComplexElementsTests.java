@@ -1,7 +1,6 @@
 package io.github.epam.tests.epam;
 
-import com.epam.jdi.light.elements.base.WindowsManager;
-import io.github.epam.SimpleTestsInit;
+import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -15,7 +14,7 @@ import static io.github.epam.enums.NavigationNums.nHome;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
-public class ComplexElementsTests extends SimpleTestsInit {
+public class ComplexElementsTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -45,6 +44,7 @@ public class ComplexElementsTests extends SimpleTestsInit {
         contactFormPage.checkOpened();
         navigationL.select(Home);
         homePage.checkOpened();
+        navigationL.select(Service);
         navigationL.select(ComplexTable);
     }
 }

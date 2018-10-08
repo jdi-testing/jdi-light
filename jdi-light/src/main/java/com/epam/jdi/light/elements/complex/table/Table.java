@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.TableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.interfaces.IHasValue;
+import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JFunc1;
@@ -26,7 +26,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.util.Arrays.asList;
 
-public class Table extends JDIBase implements ISetup, IHasValue {
+public class Table extends JDIBase implements ISetup, HasValue {
     protected By rowsLocator = By.cssSelector("tr");
     protected By columnsLocator = By.cssSelector("td");
     protected By headerLocator = By.cssSelector("th");

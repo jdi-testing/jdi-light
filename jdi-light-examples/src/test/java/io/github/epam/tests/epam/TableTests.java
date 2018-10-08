@@ -1,17 +1,17 @@
 package io.github.epam.tests.epam;
 
 import com.epam.jdi.light.elements.complex.table.Table;
-import io.github.epam.SimpleTestsInit;
+import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.epam.EpamGithubSite.tablePage;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
-import static java.lang.System.*;
 import static java.lang.System.currentTimeMillis;
+import static java.lang.System.out;
 import static org.testng.Assert.assertEquals;
 
-public class TableTests extends SimpleTestsInit {
+public class TableTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();

@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.light.actions.ActionHelper.ERROR_THROWN;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
-import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class SimpleTestsInit {

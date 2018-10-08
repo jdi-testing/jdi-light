@@ -6,7 +6,7 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.IHasValue;
+import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
@@ -19,7 +19,7 @@ import java.util.ListIterator;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
-public interface IList<T> extends List<T>, IHasValue {
+public interface IList<T> extends List<T>, HasValue {
     /**
      *  Get all application elements
     @JDIAction(level = DEBUG)

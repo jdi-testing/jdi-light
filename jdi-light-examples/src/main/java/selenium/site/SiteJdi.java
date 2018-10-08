@@ -6,7 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.allure.annotations.Step;
 import selenium.entities.User;
-import selenium.site.pages.*;
+import selenium.site.pages.HomePage;
+import selenium.site.pages.JDIPerformancePage;
 import selenium.site.sections.LoginForm;
 
 @JSite("https://epam.github.io/JDI/")
