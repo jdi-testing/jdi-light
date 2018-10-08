@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.html.base;
+package com.epam.jdi.light.ui.html.asserts;
 
 import org.hamcrest.Matcher;
 

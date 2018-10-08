@@ -1,32 +1,30 @@
-package io.github.epam.html.tests;
+package io.github.epam.tests.recommended;
 
 import com.epam.jdi.light.elements.complex.table.Table;
-import io.github.epam.TestsInit;
-import io.github.epam.html.tests.steps.Preconditions;
+import io.github.epam.StaticTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.PerformancePage.users;
-import static io.github.com.pages.PerformancePage.usersFast;
+import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
 import static org.testng.Assert.assertEquals;
 
-public class TableTests extends TestsInit {
+public class TableTests extends StaticTestsInit {
     @BeforeMethod
     public void before() {
-        Preconditions.shouldBeLoggedIn();
+        shouldBeLoggedIn();
         tablePage.shouldBeOpened();
     }
     @Test
     public void tableTest() {
         out.println("==================");
         out.println("Table");
-        tableTestScenario(users);
+        tableTestScenario(tablePage.users);
         out.println("==================");
         out.println("Fast Table");
-        tableTestScenario(usersFast);
+        tableTestScenario(tablePage.usersFast);
         out.println("==================");
     }
     private void tableTestScenario(Table table) {

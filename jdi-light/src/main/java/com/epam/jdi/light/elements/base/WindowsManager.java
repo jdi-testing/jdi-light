@@ -6,7 +6,6 @@ import com.epam.jdi.tools.map.MapArray;
 import java.util.Set;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverFactory.drivers;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static org.apache.commons.lang3.StringUtils.isBlank;

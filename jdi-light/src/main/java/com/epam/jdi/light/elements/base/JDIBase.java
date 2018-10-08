@@ -24,6 +24,7 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -68,9 +69,11 @@ public class JDIBase extends DriverBase implements INamed {
         return get(new Object[]{});
     }
     public WebElement get(Object... args) {
-        // TODO SAVE GET ELEMENT AND STALE ELEMENT PROCESS
+        // TODO SAFE GET ELEMENT AND STALE ELEMENT PROCESS
         if (webElement.hasValue())
             return webElement.get();
+        if (byLocator == null)
+            return SMART_SEARCH.execute(this);
         List<WebElement> result = getAll(args);
         switch (result.size()) {
             case 0:
@@ -86,6 +89,8 @@ public class JDIBase extends DriverBase implements INamed {
     }
 
     public List<WebElement> getAll(Object... args) {
+        if (byLocator == null)
+            return asList(SMART_SEARCH.execute(this));
         SearchContext searchContext = containsRoot(getLocator(args))
                 ? getDefaultContext()
                 : getSearchContext(parent);

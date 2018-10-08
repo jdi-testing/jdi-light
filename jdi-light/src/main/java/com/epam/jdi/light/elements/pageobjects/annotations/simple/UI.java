@@ -5,8 +5,6 @@ package com.epam.jdi.light.elements.pageobjects.annotations.simple;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.pageobjects.annotations.FindBys;
-
 import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)

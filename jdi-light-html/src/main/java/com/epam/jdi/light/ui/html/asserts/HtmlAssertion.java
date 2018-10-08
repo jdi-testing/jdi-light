@@ -1,7 +1,7 @@
-package com.epam.jdi.light.ui.html.base;
+package com.epam.jdi.light.ui.html.asserts;
 
 import com.epam.jdi.light.asserts.IsAssert;
-import com.epam.jdi.light.ui.html.common.Image;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.common.Exceptions.exception;

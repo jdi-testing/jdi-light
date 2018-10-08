@@ -6,18 +6,17 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.base.WindowsManager.originalWindow;
-import static io.github.com.enums.ColorsList.*;
+import static io.github.com.StaticSite.*;
+import static io.github.com.enums.ColorsList.Green;
 import static io.github.com.enums.Metals.Gold;
-import static io.github.com.enums.Navigation.ComplexTable;
-import static io.github.com.enums.Navigation.ContactForm;
-import static io.github.com.enums.Navigation.Home;
+import static io.github.com.enums.Navigation.*;
 import static io.github.com.enums.NavigationNums.nContactForm;
 import static io.github.com.enums.NavigationNums.nHome;
 import static io.github.com.pages.HomePage.githubLink;
 import static io.github.com.pages.HomePage.jdiText;
-import static io.github.com.pages.MetalAndColorsPage.*;
+import static io.github.com.pages.MetalAndColorsPage.colors;
+import static io.github.com.pages.MetalAndColorsPage.metals;
 import static org.hamcrest.Matchers.containsString;
-import static io.github.com.StaticSite.*;
 
 public class ComplexElementsTests extends TestsInit {
 

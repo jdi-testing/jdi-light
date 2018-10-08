@@ -8,6 +8,7 @@ public enum Navigation {
     ContactForm("Contact form"),
     Support,
     Dates,
+    Service,
     ComplexTable("Complex Table"),
     SimpleTable("Simple Table"),
     UserTable("User Table"),

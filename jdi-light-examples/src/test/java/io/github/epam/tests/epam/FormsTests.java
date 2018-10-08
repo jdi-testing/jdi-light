@@ -1,6 +1,6 @@
 package io.github.epam.tests.epam;
 
-import io.github.epam.SimpleTestsInit;
+import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
 import static io.github.epam.EpamGithubSite.*;
@@ -9,7 +9,7 @@ import static io.github.epam.entities.Users.USER_WITH_CONTACTS;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedOut;
 
-public class FormsTests extends SimpleTestsInit {
+public class FormsTests extends TestsInit {
 
     @Test
     public void loginTest() {

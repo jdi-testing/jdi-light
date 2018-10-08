@@ -8,8 +8,6 @@ import com.epam.jdi.light.ui.html.complex.Combobox;
 import com.epam.jdi.light.ui.html.complex.DataList;
 import com.epam.jdi.light.ui.html.complex.Dropdown;
 import com.epam.jdi.light.ui.html.complex.MultiSelect;
-import com.epam.jdi.tools.EnumUtils;
-import com.epam.jdi.tools.LinqUtils;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -18,7 +16,6 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.LinqUtils.toStringArray;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 

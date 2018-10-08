@@ -5,4 +5,5 @@ import com.epam.jdi.light.ui.html.base.HasLabel;
 
 public interface FileInput extends Text, SetValue, HasLabel {
     void uploadFile(String path);
+    String value();
 }

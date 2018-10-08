@@ -11,7 +11,6 @@ import com.epam.jdi.light.ui.html.common.TextField;
 import com.epam.jdi.light.ui.html.complex.Combobox;
 import com.epam.jdi.light.ui.html.complex.MultiSelect;
 import io.github.com.entities.Contacts;
-import org.openqa.selenium.WebElement;
 
 
 public class ContactForm extends Form<Contacts> {

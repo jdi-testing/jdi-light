@@ -15,7 +15,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.FormFilters.*;
-import static com.epam.jdi.light.common.UIUtils.getButton;
+import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
@@ -161,7 +161,7 @@ public class Form<T> extends Section {
         Field field = getFields(this, SetValue.class).get(0);
         SetValue setValueElement = (SetValue) getValueField(field, this);
         fillAction(setValueElement, text);
-        getButton(this, buttonName).click();
+        GET_BUTTON.execute(setValueElement, text).click();
     }
 
     /**
@@ -191,7 +191,7 @@ public class Form<T> extends Section {
     @JDIAction("Fill {0} and press {1}")
     public void submit(MapArray<String, String> objStrings, String name) {
         fill(objStrings);
-        getButton(this, name).click();
+        GET_BUTTON.execute(this, name).click();
     }
     /**
      * @param objStrings Fill all SetValue elements and click on Button specified button e.g. "Publish" or "Save" <br>

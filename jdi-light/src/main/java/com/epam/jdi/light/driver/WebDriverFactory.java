@@ -17,7 +17,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllRunWebBrowsers;
-import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_SETTINGS;
 import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
 import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;

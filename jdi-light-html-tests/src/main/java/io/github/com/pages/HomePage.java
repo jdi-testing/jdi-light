@@ -4,9 +4,8 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.ui.html.common.Link;
-import com.epam.jdi.light.ui.html.common.Title;
 import com.epam.jdi.light.ui.html.common.Text;
-import org.openqa.selenium.WebElement;
+import com.epam.jdi.light.ui.html.common.Title;
 
 public class HomePage extends WebPage {
 	@Css("h3[name='main-title']") public static Title mainTitle;

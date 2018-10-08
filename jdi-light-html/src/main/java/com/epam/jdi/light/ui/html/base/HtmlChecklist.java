@@ -3,7 +3,7 @@ package com.epam.jdi.light.ui.html.base;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.ui.html.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.ui.html.asserts.SelectAssert;
-import com.epam.jdi.light.ui.html.complex.*;
+import com.epam.jdi.light.ui.html.complex.Checklist;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -11,7 +11,8 @@ import java.util.List;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.ifSelect;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 

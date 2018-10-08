@@ -1,20 +1,24 @@
-package io.github.epam.tests.epam;
+package io.github.epam.tests.recommended;
 
-import io.github.epam.TestsInit;
+import io.github.epam.StaticTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.base.WindowsManager.originalWindow;
-import static io.github.epam.EpamGithubSite.*;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.HomePage.githubLink;
+import static io.github.com.pages.HomePage.jdiText;
+import static io.github.com.pages.MetalAndColorsPage.colors;
+import static io.github.com.pages.MetalAndColorsPage.metals;
 import static io.github.epam.enums.ColorsList.Green;
 import static io.github.epam.enums.Metals.Gold;
 import static io.github.epam.enums.Navigation.*;
 import static io.github.epam.enums.NavigationNums.nContactForm;
 import static io.github.epam.enums.NavigationNums.nHome;
-import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
-public class ComplexElementsTests extends TestsInit {
+public class ComplexElementsTests extends StaticTestsInit {
 
     @BeforeMethod
     public void before() {
@@ -23,8 +27,8 @@ public class ComplexElementsTests extends TestsInit {
     }
     @Test
     public void complexTest() {
-        metalAndColorsPage.colors.select(Green);
-        metalAndColorsPage.metals.select(Gold);
+        colors.select(Green);
+        metals.select(Gold);
         //metalAndColorsPage.vegetables.check(Onion, Tomato);
     }
     @Test
@@ -32,9 +36,9 @@ public class ComplexElementsTests extends TestsInit {
         navigation.get(nContactForm).click();
         contactFormPage.checkOpened();
         navigation.get(nHome).click();
-        System.out.println(homePage.jdiText.getText());
-        homePage.jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
-        homePage.githubLink.click();
+        System.out.println(jdiText.getText());
+        jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
+        githubLink.click();
         originalWindow();
     }
     @Test

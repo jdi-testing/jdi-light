@@ -1,6 +1,6 @@
 package io.github.epam.tests.epam;
 
-import io.github.epam.SimpleTestsInit;
+import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -10,10 +10,11 @@ import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 
-public class WindowsAndFramesTests extends SimpleTestsInit {
+public class WindowsAndFramesTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
+        getWindows();
         shouldBeLoggedIn();
         homePage.shouldBeOpened();
     }

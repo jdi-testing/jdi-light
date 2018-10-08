@@ -8,8 +8,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import io.github.com.pages.*;
-import io.github.com.pages.Footer;
-import io.github.com.pages.Header;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

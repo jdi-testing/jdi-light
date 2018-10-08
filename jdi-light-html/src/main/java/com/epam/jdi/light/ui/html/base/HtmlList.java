@@ -3,7 +3,6 @@ package com.epam.jdi.light.ui.html.base;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.ui.html.common.Title;
 import com.epam.jdi.light.ui.html.complex.Menu;
 import com.epam.jdi.tools.LinqUtils;
 import org.openqa.selenium.By;
@@ -12,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 public class HtmlList extends WebList implements Menu {
 

@@ -9,9 +9,11 @@ import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
@@ -27,11 +29,10 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.elements.init.PageFactory.getLocatorFromField;
-import static com.epam.jdi.light.elements.init.PageFactory.initElement;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
-import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
+import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.pairs.Pair.$;
@@ -99,6 +100,26 @@ public class InitActions {
             $(info -> isPageObject(info.instance.getClass()),
                     PageFactory::initElements)
     );
+
+    private static By getLocatorFromField(Field field) {
+        if (hasAnnotation(field, org.openqa.selenium.support.FindBy.class))
+            return findByToBy(field.getAnnotation(org.openqa.selenium.support.FindBy.class));
+        UI[] uis = field.getAnnotationsByType(UI.class);
+        if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
+            return findByToBy(first(uis, j -> j.group().equals(TEST_GROUP)));
+        FindBy[] jfindbys = field.getAnnotationsByType(FindBy.class);
+        if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
+            return findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP)));
+        if (hasAnnotation(field, Css.class))
+            return findByToBy(field.getAnnotation(Css.class));
+        if (hasAnnotation(field, XPath.class))
+            return findByToBy(field.getAnnotation(XPath.class));
+        if (hasAnnotation(field, ByText.class))
+            return findByToBy(field.getAnnotation(ByText.class));
+        if (hasAnnotation(field, WithText.class))
+            return findByToBy(field.getAnnotation(WithText.class));
+        return null;
+    }
     private static <T> T initSection(SiteInfo info) {
         try {
             return (T) info.fieldType().newInstance();

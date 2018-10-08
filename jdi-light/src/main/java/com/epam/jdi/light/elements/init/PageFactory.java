@@ -2,11 +2,11 @@ package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.*;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.Title;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.settings.WebSettings;
+import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
@@ -20,12 +20,12 @@ import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.composite.WebPage.addPage;
 import static com.epam.jdi.light.elements.init.InitActions.*;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
-import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.Case;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static java.lang.reflect.Modifier.isStatic;
 
 /**
@@ -35,11 +35,13 @@ import static java.lang.reflect.Modifier.isStatic;
 
 public class PageFactory {
 
+    public static JAction PRE_INIT = WebSettings::init;
+
     public static void initSite(Class<?> site) {
         SiteInfo info = new SiteInfo();
         info.parentClass = site;
         info.driverName = DRIVER_NAME;
-        WebSettings.init();
+        PRE_INIT.execute();
         setDomain(site);
         Field[] pages = site.getDeclaredFields();
         List<Field> staticPages = filter(pages, p -> isStatic(p.getModifiers()));
@@ -115,6 +117,7 @@ public class PageFactory {
             SiteInfo info = new SiteInfo();
             info.instance = obj;
             info.driverName = DRIVER_NAME;
+            PRE_INIT.execute();
             if (isClass(obj.getClass(), WebPage.class)) {
                 WebPage page = (WebPage) obj;
                 page.driverName = DRIVER_NAME;
@@ -124,26 +127,6 @@ public class PageFactory {
             }
             initElements(info);
         }
-    }
-
-    public static By getLocatorFromField(Field field) {
-        if (hasAnnotation(field, org.openqa.selenium.support.FindBy.class))
-            return findByToBy(field.getAnnotation(org.openqa.selenium.support.FindBy.class));
-        UI[] uis = field.getAnnotationsByType(UI.class);
-        if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
-            return findByToBy(first(uis, j -> j.group().equals(TEST_GROUP)));
-        FindBy[] jfindbys = field.getAnnotationsByType(FindBy.class);
-        if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
-            return findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP)));
-        if (hasAnnotation(field, Css.class))
-            return findByToBy(field.getAnnotation(Css.class));
-        if (hasAnnotation(field, XPath.class))
-            return findByToBy(field.getAnnotation(XPath.class));
-        if (hasAnnotation(field, ByText.class))
-            return findByToBy(field.getAnnotation(ByText.class));
-        if (hasAnnotation(field, WithText.class))
-            return findByToBy(field.getAnnotation(WithText.class));
-        return null;
     }
 
     // Selenium PageFactory

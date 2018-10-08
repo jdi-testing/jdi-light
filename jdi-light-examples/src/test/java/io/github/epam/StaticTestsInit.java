@@ -1,9 +1,9 @@
 package io.github.epam;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import io.github.com.StaticSite;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
