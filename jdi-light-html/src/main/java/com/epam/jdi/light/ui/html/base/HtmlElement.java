@@ -12,6 +12,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
 public class HtmlElement extends UIElement implements Text, Button, FileInput, Icon, Image, Link,
@@ -33,10 +34,10 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
     public String placeholder() { return getAttribute("placeholder"); }
 
     public void setLines(String... lines) {
-        setText(PrintUtils.print(asList(lines), "/n"));
+        setText(print(asList(lines), "\\n"));
     }
     public List<String> getLines() {
-        return asList(getText().split("/n"));
+        return asList(getText().split("\\n"));
     }
     public int rows() { return getInt("rows"); }
     public int cols() { return getInt("cols"); }

@@ -119,7 +119,7 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
 
     @JDIAction
     public void setText(String value) {
-        jsExecute("value = '"+value+"'");
+        jsExecute("value='"+value+"'");
     }
 
     public UIElement find(String by) {

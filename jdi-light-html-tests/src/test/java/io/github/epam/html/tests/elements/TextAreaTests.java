@@ -1,6 +1,7 @@
 package io.github.epam.html.tests.elements;
 
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -8,6 +9,7 @@ import static io.github.com.StaticSite.htmlElementsPage;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
+import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
@@ -51,6 +53,12 @@ public class TextAreaTests extends TestsInit {
         textArea.setText(text);
         textArea.setValue("New text");
         assertEquals(textArea.getText(), "New text");
+    }
+
+    @Test
+    public void getLinesTest() {
+        textArea.setLines("test 1", "test 2", "test 3");
+        assertEquals(textArea.getLines(), asList("test 1", "test 2", "test 3"));
     }
 
     @Test
@@ -99,4 +107,18 @@ public class TextAreaTests extends TestsInit {
     public void baseValidationTest() {
         baseValidation(name);
     }
+
+    @Test
+    public void rowsTest() {
+        assertEquals(textArea.rows(), 3);
+        assertEquals(textArea.cols(), 33);
+        assertEquals(textArea.minlength(), 10);
+        assertEquals(textArea.maxlength(), 200);
+
+        textArea.is().rows(is(3));
+        textArea.is().cols(is(33));
+        textArea.is().minlength(is(10));
+        textArea.is().maxlength(is(200));
+    }
+
 }

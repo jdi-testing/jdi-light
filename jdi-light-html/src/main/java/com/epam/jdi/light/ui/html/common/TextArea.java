@@ -1,5 +1,7 @@
 package com.epam.jdi.light.ui.html.common;
 
+import com.epam.jdi.light.ui.html.asserts.TextAreaAssert;
+
 import java.util.List;
 
 public interface TextArea extends TextField {
@@ -11,4 +13,6 @@ public interface TextArea extends TextField {
     int maxlength();
     String placeholder();
 
+    TextAreaAssert is();
+    TextAreaAssert assertThat();
 }

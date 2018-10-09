@@ -8,7 +8,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class HtmlAssertion extends IsAssert implements ImageAssert, TextAssert, LinkAssert {
+public class HtmlAssertion extends IsAssert implements ImageAssert, TextAssert, LinkAssert, TextAreaAssert {
 
     HtmlElement html;
     public HtmlAssertion(HtmlElement html) { super(html); this.html = html; }
@@ -32,4 +32,8 @@ public class HtmlAssertion extends IsAssert implements ImageAssert, TextAssert, 
         assertThat(width, is(value));
     }
 
+    public void rows(Matcher<Integer> condition) { assertThat(html.rows(), condition); }
+    public void cols(Matcher<Integer> condition) { assertThat(html.cols(), condition); }
+    public void minlength(Matcher<Integer> condition) { assertThat(html.minlength(), condition); }
+    public void maxlength(Matcher<Integer> condition) { assertThat(html.maxlength(), condition); }
 }
