@@ -36,8 +36,8 @@ public class TitleTests extends TestsInit {
     @Test
     public void clickTest() {
         jdiTitle.click();
-        assertEquals(alert().getText(), "JDI Title");
-        alert().accept();
+        assertEquals(getAlertText(), "JDI Title");
+        acceptAlert();
     }
 
     @Test

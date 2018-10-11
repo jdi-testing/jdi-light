@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.OutputTemplates.*;
+import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;

@@ -6,16 +6,15 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.base.WindowsManager.alert;
+import static com.epam.jdi.light.elements.base.WindowsManager.acceptAlert;
+import static com.epam.jdi.light.elements.base.WindowsManager.getAlertText;
 import static io.github.com.StaticSite.htmlElementsPage;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class ButtonTests extends TestsInit {
 
@@ -39,16 +38,16 @@ public class ButtonTests extends TestsInit {
     @Test
     public void clickTest() {
         redButton.click();
-        assertEquals(alert().getText(), "Red button");
-        alert().accept();
+        assertEquals(getAlertText(), "Red button");
+        acceptAlert();
 
         blueButton.click();
-        assertEquals(alert().getText(), "Blue button");
-        alert().accept();
+        assertEquals(getAlertText(), "Blue button");
+        acceptAlert();
 
         disabledButton.click();
         try {
-            alert();
+            acceptAlert();
             Assert.fail("Disabled button should not work, but work");
         } catch (NoAlertPresentException ex) { }
     }

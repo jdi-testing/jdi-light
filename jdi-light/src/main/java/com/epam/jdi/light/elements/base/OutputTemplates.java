@@ -1,4 +1,4 @@
-package com.epam.jdi.light.common;
+package com.epam.jdi.light.elements.base;
 
 /**
  * Created by Roman_Iovlev on 4/8/2018.
@@ -11,4 +11,7 @@ public class OutputTemplates {
     public static String PRINT_ELEMENT_STEP = "{name} ({context})";
     public static String PRINT_ELEMENT_INFO = "{name} ({context})";
     public static String PRINT_ELEMENT_DEBUG = "{name} ({varName}; {context})";
+
+    public static String SHORT_TEMPLATE = "{element} {action}";
+    public static String DEFAULT_TEMPLATE = "{action} ({element})";
 }

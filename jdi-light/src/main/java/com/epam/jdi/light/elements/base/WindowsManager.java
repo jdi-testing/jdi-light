@@ -75,9 +75,27 @@ public class WindowsManager {
         switchToWindow(name);
         closeWindow();
     }
+    @JDIAction
+    public static void acceptAlert() {
+        alert().accept();
+    }
 
     @JDIAction
-    public static Alert alert() {
+    public static void declineAlert() {
+        alert().dismiss();
+    }
+
+    @JDIAction
+    public static String getAlertText() {
+        return alert().getText();
+    }
+
+    @JDIAction
+    public static void sendKeysInAlert(String text) {
+        alert().sendKeys(text);
+    }
+
+    private static Alert alert() {
         return getDriver().switchTo().alert();
     }
 }

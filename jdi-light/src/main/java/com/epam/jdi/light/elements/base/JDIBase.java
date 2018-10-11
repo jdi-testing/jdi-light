@@ -14,7 +14,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.DEFAULT;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
-import static com.epam.jdi.light.common.OutputTemplates.*;
+import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;

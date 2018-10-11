@@ -25,8 +25,7 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.JDIStrings.DEFAULT_TEMPLATE;
-import static com.epam.jdi.light.common.JDIStrings.SHORT_TEMPLATE;
+import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.base.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
