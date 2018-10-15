@@ -10,11 +10,19 @@
     <packaging>jar</packaging>
     <version>1.0.4</version>
 
+    <parent>
+        <groupId>com.epam.jdi</groupId>
+        <version>2.0.21</version>
+        <artifactId>jdi-2</artifactId>
+    </parent>
+
     <properties>
-        <project.build.sourceEncoding>utf8</project.build.sourceEncoding>
+   <!-- <project.build.sourceEncoding>utf8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>utf8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <aspectj.version>1.8.3</aspectj.version>
+        <aspectj.maven>1.4</aspectj.maven>
+        -->
+        <!--<aspectj.version>1.8.3</aspectj.version>-->
     </properties>
 
     <dependencies>
@@ -73,10 +81,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
-                <configuration>
+          <!--      <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                </configuration>
+                </configuration>-->
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

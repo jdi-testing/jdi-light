@@ -30,7 +30,7 @@
             <artifactId>jdi-light</artifactId>
             <version>1.0.4</version>
         </dependency>
-		
+
         <!--Allure-->
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
@@ -97,12 +97,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
-                <!-- not needed because of <maven.compiler.source> and <maven.compiler.target> properties-->
-                <!--                <configuration>
-                                    <source>${java.version}</source>
-                                    <target>${java.version}</target>
-                                </configuration>-->
+                <version>3.2
+                </version>
+              <configuration>
+                <source>${java.version}</source>
+                <target>${java.version}</target>
+              </configuration>
             </plugin>
         </plugins>
         <!-- For using properties from pom -->

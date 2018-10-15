@@ -14,8 +14,13 @@
         <project.build.sourceEncoding>utf8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>utf8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <aspectj.version>1.8.3</aspectj.version>
-    </properties-->
+    </properties>
+-->
+    <parent>
+        <groupId>com.epam.jdi</groupId>
+        <version>2.0.21</version>
+        <artifactId>jdi-2</artifactId>
+    </parent>
 
     <dependencies>
         <dependency>

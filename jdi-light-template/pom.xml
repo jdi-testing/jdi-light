@@ -9,9 +9,15 @@
     <version>1.0</version>
     <name>JDI Test project Template</name>
 
+
+    <parent>
+        <groupId>com.epam.jdi</groupId>
+        <version>2.0.21</version>
+        <artifactId>jdi-2</artifactId>
+    </parent>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <aspectj.version>1.8.5</aspectj.version>
+        <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+        <!--<aspectj.version>1.8.5</aspectj.version>-->
         <driver>chrome</driver>
     </properties>
 
@@ -22,7 +28,7 @@
             <artifactId>jdi-light</artifactId>
             <version>RELEASE</version>
         </dependency>
-		
+
         <!--Allure-->
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
@@ -38,7 +44,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>${surefire.version}</version>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
@@ -60,7 +66,7 @@
             <plugin>
                 <groupId>ru.yandex.qatools.allure</groupId>
                 <artifactId>allure-maven-plugin</artifactId>
-                <version>2.5</version>
+                <version>${allure.maven.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -75,10 +81,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
+                <!--      <configuration>
+                          <source>1.8</source>
+                          <target>1.8</target>
+                      </configuration>-->
             </plugin>
         </plugins>
         <!-- For using properties from pom -->
@@ -97,7 +103,7 @@
             <plugin>
                 <groupId>ru.yandex.qatools.allure</groupId>
                 <artifactId>allure-maven-plugin</artifactId>
-                <version>LATEST</version>
+                <version>${allure.maven.version}</version>
             </plugin>
         </plugins>
     </reporting>
