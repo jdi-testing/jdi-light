@@ -24,6 +24,7 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -176,7 +177,7 @@ public class JDIBase extends DriverBase implements INamed {
             Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, this))
         );
     }
-    public void jsExecute(String text) {
-        js().executeScript("arguments[0]."+text+";", get());
+    public String jsExecute(String text) {
+        return valueOf(js().executeScript("arguments[0]."+text+";", get()));
     }
 }

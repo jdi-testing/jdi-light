@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-template</artifactId>
-    <version>1.0</version>
+    <version>1.0.10</version>
     <name>JDI Test project Template</name>
 
     <properties>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>RELEASE</version>
+            <version>1.0.10</version>
         </dependency>
 		
         <!--Allure-->

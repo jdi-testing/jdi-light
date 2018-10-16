@@ -19,7 +19,9 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 
@@ -30,7 +32,7 @@ public class WebList extends JDIBase implements IList<WebElement>, SetValue {
     public void select(String name) {
         get(name).click();
     }
-    public void select(Enum name) {
+    public <TEnum extends Enum> void select(TEnum name) {
         select(getEnumValue(name));
     }
 
@@ -58,6 +60,12 @@ public class WebList extends JDIBase implements IList<WebElement>, SetValue {
     @JDIAction(level = DEBUG)
     public void refresh() {
         webElements.clear();
+    }
+    @JDIAction(level = DEBUG)
+    public String isSelected() {
+        UIElement first = logger.logOff(() ->
+            LinqUtils.first(allUI(), UIElement::isSelected) );
+        return first != null ? first.getText() : "";
     }
 
     @JDIAction(level = DEBUG)

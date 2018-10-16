@@ -10,16 +10,12 @@ import org.openqa.selenium.WebElement;
 
 public class MetalAndColorsPage extends WebPage {
 	@Css(".uui-side-bar[name='log-sidebar']") public static LogSidebar logSidebar;
-	@JDropdown(root = @FindBy(css ="div[ui=dropdown]"),
-			value = @FindBy(css =".filter-option"),
-			list = @FindBy(css ="li"),
-			expand = @FindBy(css =".caret")
-	) public static Dropdown colors;
-	@JDropdown(root = @FindBy(css ="div[ui=combobox]"),
-			value = @FindBy(css ="input"),
-			list = @FindBy(css ="li"),
-			expand = @FindBy(css =".caret")
-	) public static Dropdown metals;
+	@JDropdown(root = "div[ui=dropdown]", value = ".filter-option",
+			list = "li", expand = ".caret")
+	public static Dropdown colors;
+	@JDropdown(root = "div[ui=combobox]", value = "input",
+			list = "li", expand = ".caret")
+	public static Dropdown metals;
 	/*@JDropdown(root = @FindBy(css ="div[ui=droplist]"),
 			value = @FindBy(css ="button"),
 			list = @FindBy(css ="li"),

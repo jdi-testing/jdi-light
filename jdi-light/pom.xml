@@ -8,7 +8,7 @@
     <artifactId>jdi-light</artifactId>
     <name>JDI Light</name>
     <packaging>jar</packaging>
-    <version>1.0.4</version>
+    <version>1.0.10</version>
 
     <properties>
         <project.build.sourceEncoding>utf8</project.build.sourceEncoding>
