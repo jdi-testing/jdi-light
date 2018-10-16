@@ -1,45 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.epam.jdi</groupId>
-    <version>2.0.21</version>
-    <artifactId>jdi-2</artifactId>
-    <name>JDI UI 2.0</name>
-    <packaging>pom</packaging>
+  <groupId>com.epam.jdi</groupId>
+  <version>2.0.21</version>
+  <artifactId>jdi-2</artifactId>
+  <name>JDI UI 2.0</name>
+  <packaging>pom</packaging>
 
-    <properties>
-        <surefire.version>2.20</surefire.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <java.version>1.8</java.version>
-        <allure.maven.version>2.6</allure.maven.version>
-        <aspectj.version>1.9.1</aspectj.version>
-        <aspectj.maven>1.11</aspectj.maven>
+  <properties>
+    <surefire.version>2.20</surefire.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <java.version>1.8</java.version>
+    <allure.maven.version>2.6</allure.maven.version>
+    <aspectj.version>1.9.1</aspectj.version>
+    <aspectj.maven>1.11</aspectj.maven>
+    <jetty.version>9.4.12.RC2</jetty.version>
+    <allure.testng>2.0-BETA14</allure.testng>
+    <allure.maven>2.9</allure.maven>
+  </properties>
 
-    </properties>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-           <!--     <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>-->
-            </plugin>
-        </plugins>
-    </build>
+  <!--Allure 2.0-->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-testng</artifactId>
+        <version>${allure.testng}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
 
-    <modules>
-        <module>jdi-light</module>
-        <module>jdi-light-examples</module>
-        <module>jdi-light-html-tests</module>
-        <module>jdi-light-template</module>
-        <module>jdi-light-html</module>
-    </modules>
+  </dependencyManagement>
+  <build>
+
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.20.1</version>
+
+          <configuration>
+
+            <systemPropertyVariables>
+              <allure.results.directory>target/allure-results</allure.results.directory>
+            </systemPropertyVariables>
+            <testFailureIgnore>true</testFailureIgnore>
+            <argLine>
+              -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+            </argLine>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.aspectj</groupId>
+              <artifactId>aspectjweaver</artifactId>
+              <version>${aspectj.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+
+        <plugin>
+          <groupId>org.eclipse.jetty</groupId>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>${jetty.version}</version>
+          <configuration>
+            <webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
+
+            <scanIntervalSeconds>10</scanIntervalSeconds>
+            <supportedPackagings>
+              <supportedPackaging>jar</supportedPackaging>
+            </supportedPackagings>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>io.qameta.allure</groupId>
+          <artifactId>allure-maven</artifactId>
+          <version>2.9</version>
+          <configuration>
+            <resultsDirectory>allure-results</resultsDirectory>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>report</goal>
+              </goals>
+              <phase>post-integration-test</phase>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <modules>
+    <module>jdi-light</module>
+    <module>jdi-light-examples</module>
+    <module>jdi-light-html-tests</module>
+    <module>jdi-light-template</module>
+    <module>jdi-light-html</module>
+  </modules>
 
 </project>

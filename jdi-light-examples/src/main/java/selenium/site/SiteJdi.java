@@ -2,9 +2,9 @@ package selenium.site;
 
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ru.yandex.qatools.allure.annotations.Step;
 import selenium.entities.User;
 import selenium.site.pages.HomePage;
 import selenium.site.pages.JDIPerformancePage;

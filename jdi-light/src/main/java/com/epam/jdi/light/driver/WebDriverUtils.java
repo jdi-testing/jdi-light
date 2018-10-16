@@ -44,10 +44,10 @@ public final class WebDriverUtils {
         killByName("MicrosoftWebDriver.exe");
     }
 
-    private static void killMacOSDriverProcesses(String driverName) {
+    private static void killMacOSDriverProcesses(String browserName) {
 
         String name = null;
-        switch (driverName.toLowerCase()) {
+        switch (browserName.toLowerCase()) {
             case "firefox":
             case "gecko":
                 name = "geckodriver";
