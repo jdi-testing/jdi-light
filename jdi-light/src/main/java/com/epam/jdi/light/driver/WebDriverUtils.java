@@ -4,11 +4,13 @@ package com.epam.jdi.light.driver;
  * Created by Roman Iovlev on 14.02.2018 Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import java.io.IOException;
-
 import static org.openqa.selenium.os.WindowsUtils.killByName;
 
+import com.epam.jdi.light.common.UnixProcessUtils;
+import java.io.IOException;
+
 public final class WebDriverUtils {
+
 
     private WebDriverUtils() {
     }
@@ -64,24 +66,7 @@ public final class WebDriverUtils {
      * @param driverName
      */
     private static void killAllMacOSDriverProcessesByName(String driverName) {
-        try {
-            Process child = new ProcessBuilder(
-                "pkill ",
-                "-9 -P | pgrep ",
-                driverName)
-                .start();
-            child.waitFor();
-
-            Process process = new ProcessBuilder(
-                "pkill -9",
-                "-afi",
-                driverName)
-                .start();
-            process.waitFor();
-
-        } catch (IOException | InterruptedException e1) {
-            e1.printStackTrace();
-        }
+            UnixProcessUtils.killProcessesTree(driverName);
     }
 
 }

@@ -185,7 +185,7 @@ public class WebDriverFactory {
         } else {
             throw exception("None Driver has been found for current thread. Probably Fixture configuration is wrong.");
         }
-       // WebDriverUtils.killAllBrowsersStartedBySelenium();
+       WebDriverUtils.killAllBrowsersStartedBySelenium();
     }
 
     public static void quit() {
