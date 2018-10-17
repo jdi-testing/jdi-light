@@ -14,7 +14,6 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.StaticSite.navigationL;
-import static io.github.com.StaticSite.navigationS;
 import static io.github.epam.enums.Navigation.Service;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.util.Arrays.asList;

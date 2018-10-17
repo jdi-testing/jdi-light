@@ -13,7 +13,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static java.lang.String.format;

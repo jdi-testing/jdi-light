@@ -6,11 +6,9 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.htmlElementsPage;
 import static io.github.com.pages.HtmlElementsPage.jdiText;
-import static io.github.com.pages.HtmlElementsPage.jdiTitle;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 

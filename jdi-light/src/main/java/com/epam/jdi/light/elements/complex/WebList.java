@@ -21,7 +21,6 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 

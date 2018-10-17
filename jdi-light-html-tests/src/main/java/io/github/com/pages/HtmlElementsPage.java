@@ -5,8 +5,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.ui.html.common.*;
 import com.epam.jdi.light.ui.html.complex.*;
 
-import java.util.List;
-
 public class HtmlElementsPage extends WebPage {
     //region Simple Elements
 

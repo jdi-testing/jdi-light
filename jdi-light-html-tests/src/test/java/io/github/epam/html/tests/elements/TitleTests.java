@@ -1,11 +1,11 @@
 package io.github.epam.html.tests.elements;
 
-import com.epam.jdi.light.elements.base.WindowsManager;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.base.WindowsManager.*;
+import static com.epam.jdi.light.elements.base.WindowsManager.acceptAlert;
+import static com.epam.jdi.light.elements.base.WindowsManager.getAlertText;
 import static io.github.com.StaticSite.htmlElementsPage;
 import static io.github.com.pages.HtmlElementsPage.jdiTitle;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;

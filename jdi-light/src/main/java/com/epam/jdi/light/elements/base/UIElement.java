@@ -8,9 +8,6 @@ package com.epam.jdi.light.elements.base;
 import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -22,12 +19,8 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class UIElement extends JDIBase implements WebElement, BaseElement, SetValue {
