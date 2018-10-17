@@ -52,10 +52,20 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
      * @return String href value
      */
     public String getRef() { return getAttribute("href"); }
-    public URL getUrl() {
+
+  /**
+   * Creating a URL
+   * @return URL with value from getRef()
+   */
+  public URL getUrl() {
         try { return new URL(getRef());
         } catch (MalformedURLException ex) { throw exception(ex.getMessage()); }
     }
+
+  /**
+   * Gets attribute 'placeholder'
+   * @return String placeholder value
+   */
     public String placeholder() { return getAttribute("placeholder"); }
     public void setLines(String... lines) {
         setText(PrintUtils.print(asList(lines), "/n"));
@@ -72,7 +82,11 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
     public String max() { return getAttribute("max"); }
     public String step() { return getAttribute("step"); }
 
-
+  /**
+   * Gets attribute and casts it to int
+   * @param attr String - attribute to find
+   * @return int attribute value
+   */
     private int getInt(String attr) {
         String value = getAttribute(attr);
         try {
@@ -80,34 +94,83 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
         } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Integer", attr, value); }
     }
 
+  /**
+   * If not selected - click to select
+   */
     public void check() {
         if (!isSelected())
             click();
     }
+
+  /**
+   * If selected - click to deselect
+   */
     public void uncheck() {
         if (isSelected())
             click();
     }
 
+  /**
+   * Gets attribute 'value' from color picker
+   * @return String color value
+   */
     public String color() { return getAttribute("value"); }
-    public void setColor(String color) { setAttribute("value", color); }
-    public void setDateTime(String dateTime) { setAttribute("value", dateTime); }
-    public void uploadFile(String path) { setAttribute("value", path); }
-    public void setVolume(String volume) {
-        setAttribute("value", volume);
-    }
-    public void setNumber(String number) {
-        setAttribute("value", number);
-    }
-    public Title label() {
-        return (Title) $("[for="+this.getAttribute("ïd")+"]");
-    }
-    public String labelText() {
-        return label().getText();
-    }
 
-    @Override
-    public HtmlAssertion is() { return new HtmlAssertion(this); }
-    @Override
-    public HtmlAssertion assertThat() { return is(); }
+  /**
+   * Sets color value
+   * @param color value to set
+   */
+  public void setColor(String color) { setAttribute("value", color); }
+
+  /**
+   * Sets value for DateTimeSelector
+   * @param dateTime value to set
+   */
+    public void setDateTime(String dateTime) { setAttribute("value", dateTime); }
+
+  /**
+   * Sets value for FileInput
+   * @param path String value to set
+   */
+  public void uploadFile(String path) {
+    setAttribute("value", path);
+  }
+
+  /**
+   * Sets value for range element
+   * @param volume String value to set
+   */
+  public void setVolume(String volume) {
+    setAttribute("value", volume);
+  }
+
+  /**
+   * Sets value for NumberSelector
+   * @param number String value to set
+   */
+  public void setNumber(String number) {
+    setAttribute("value", number);
+  }
+
+  public Title label() {
+    return (Title) $("[for=" + this.getAttribute("ïd") + "]");
+  }
+
+  /**
+   * Gets label text
+   * @return String text
+   */
+  public String labelText() {
+    return label().getText();
+  }
+
+  @Override
+  public HtmlAssertion is() {
+    return new HtmlAssertion(this);
+  }
+
+  @Override
+  public HtmlAssertion assertThat() {
+    return is();
+  }
 }
