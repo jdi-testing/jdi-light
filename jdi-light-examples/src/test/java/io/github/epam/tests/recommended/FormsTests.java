@@ -1,6 +1,7 @@
 package io.github.epam.tests.recommended;
 
 import io.github.epam.StaticTestsInit;
+import java.nio.file.Paths;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.contactFormPage;
@@ -17,6 +18,7 @@ public class FormsTests extends StaticTestsInit {
 
     @Test
     public void loginTest() {
+        System.out.println(Paths.get(".").toAbsolutePath());
         shouldBeLoggedOut();
         userIcon.click();
         loginForm.submit(DEFAULT_USER, "enter");

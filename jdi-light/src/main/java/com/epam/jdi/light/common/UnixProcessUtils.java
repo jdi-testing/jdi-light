@@ -4,6 +4,7 @@ import com.epam.jdi.light.logger.JDILogger;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,10 +12,12 @@ import java.util.List;
 
 public class UnixProcessUtils {
 
-    private static JDILogger logger=JDILogger.instance(UnixProcessUtils.class.getName());
+    private static JDILogger logger = JDILogger.instance(UnixProcessUtils.class.getName());
 
     public static void main(String[] args) {
 
+        System.out.println(Paths.get(".")
+            .toAbsolutePath());
         killProcessesTree("chromedriver");
         return;
 
@@ -39,7 +42,7 @@ public class UnixProcessUtils {
             }
             killProcessesByNamePart(rootNamePart);
 
-            logger.info("Process: "+rootNamePart);
+            logger.info("Process: " + rootNamePart);
 
 
         } catch (InterruptedException | IOException e) {
@@ -75,7 +78,7 @@ public class UnixProcessUtils {
         while ((line = reader.readLine()) != null) {
             list.add(line);
         }
-        logger.info("Parent Pids: "+list);
+        logger.info("Parent Pids: " + list);
         return list;
 
     }
@@ -85,8 +88,16 @@ public class UnixProcessUtils {
      * @param pid
      */
     public static void killChildProcesses(int pid) {
-        String ppid = String.valueOf("-P "+pid);
+        String ppid = String.valueOf("-P " + pid);
         killProcessWithArgs(Collections.singletonList(ppid));
+    }
+
+    /**
+     *
+     * @param name
+     */
+    public static void killProcessesByNamePart(String name) {
+        killProcessWithArgs(Arrays.asList("-aif", name));
     }
 
     /**
@@ -96,8 +107,8 @@ public class UnixProcessUtils {
     private static void killProcessWithArgs(List<String> args) {
 
         List<String> list = new ArrayList<>();
-        list.add("/usr/bin/pkill" );
-        list.addAll(args );
+        list.add("/usr/bin/pkill");
+        list.addAll(args);
 
         try {
             Process child = new ProcessBuilder(list.toArray(new String[list.size()]))
@@ -109,14 +120,6 @@ public class UnixProcessUtils {
             JDILogger.instance(UnixProcessUtils.class.getName())
                 .error(e.getMessage());
         }
-    }
-
-    /**
-     *
-     * @param name
-     */
-    public static void killProcessesByNamePart(String name) {
-        killProcessWithArgs(Arrays.asList("-aif", name));
     }
 
 }

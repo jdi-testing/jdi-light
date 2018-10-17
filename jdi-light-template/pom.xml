@@ -1,72 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
+  <groupId>com.epam.jdi</groupId>
+  <artifactId>jdi-light-template</artifactId>
+  <version>1.0</version>
+  <name>JDI Test project Template</name>
+
+
+  <parent>
     <groupId>com.epam.jdi</groupId>
-    <artifactId>jdi-light-template</artifactId>
-    <version>1.0</version>
-    <name>JDI Test project Template</name>
+    <version>2.0.21</version>
+    <artifactId>jdi-2</artifactId>
+  </parent>
+  <properties>
+    <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+    <!--<aspectj.version>1.8.5</aspectj.version>-->
+    <driver>chrome</driver>
+  </properties>
 
+  <dependencies>
+    <!--JDI-->
+    <dependency>
+      <groupId>com.epam.jdi</groupId>
+      <artifactId>jdi-light</artifactId>
+      <version>RELEASE</version>
+    </dependency>
 
-    <parent>
-        <groupId>com.epam.jdi</groupId>
-        <version>2.0.21</version>
-        <artifactId>jdi-2</artifactId>
-    </parent>
-    <properties>
-        <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
-        <!--<aspectj.version>1.8.5</aspectj.version>-->
-        <driver>chrome</driver>
-    </properties>
+    <!--Allure config in parent-->
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-testng</artifactId>
 
-    <dependencies>
-        <!--JDI-->
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light</artifactId>
-            <version>RELEASE</version>
-        </dependency>
+    </dependency>
+  </dependencies>
 
-        <!--Allure config in parent-->
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
-            
-        </dependency>
-    </dependencies>
-
-    <build>
+  <build>
     <plugins>
 
-        <!--Allure reporting config in parent-->
+      <!--Allure reporting config in parent-->
 
-        <plugin>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-maven-plugin</artifactId>
-        </plugin>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+      </plugin>
 
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-        </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
 
-        <plugin>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-maven</artifactId>
-        </plugin>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+      </plugin>
     </plugins>
-</build>
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+  </build>
 
-    <!-- Allure reporting config in parent-->
-    <reporting>
-        <excludeDefaults>true</excludeDefaults>
-        <plugins>
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-            </plugin>
-        </plugins>
-    </reporting>
+  <!-- Allure reporting config in parent-->
+  <reporting>
+    <excludeDefaults>true</excludeDefaults>
+    <plugins>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
