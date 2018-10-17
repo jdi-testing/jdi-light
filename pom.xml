@@ -14,13 +14,19 @@
     <surefire.version>2.20</surefire.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
-    <allure.maven.version>2.6</allure.maven.version>
+    <allure.maven>2.9</allure.maven>
     <aspectj.version>1.9.1</aspectj.version>
     <aspectj.maven>1.11</aspectj.maven>
     <jetty.version>9.4.12.RC2</jetty.version>
-    <allure.testng>2.0-BETA14</allure.testng>
-    <allure.maven>2.9</allure.maven>
+    <allure.testng>2.7.0</allure.testng>
+    <java.version>1.8</java.version>
+    <testng.version>7.0.0-beta1</testng.version>
+
+    <log4j2.version>2.11.1</log4j2.version>
+
   </properties>
 
   <!--Allure 2.0-->
@@ -31,6 +37,24 @@
         <artifactId>allure-testng</artifactId>
         <version>${allure.testng}</version>
         <scope>test</scope>
+      </dependency>
+
+      <!--log4j 2.0-->
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${log4j2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-slf4j-impl</artifactId>
+        <version>${log4j2.version}</version>
       </dependency>
     </dependencies>
 
