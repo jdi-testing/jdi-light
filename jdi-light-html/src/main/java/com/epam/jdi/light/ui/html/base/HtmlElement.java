@@ -70,17 +70,78 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
     public void setLines(String... lines) {
         setText(PrintUtils.print(asList(lines), "/n"));
     }
-    public List<String> getLines() {
+
+  /**
+   * Gets lines of text in line
+   * @return List<String> divided by rows
+   */
+  public List<String> getLines() {
         return asList(getText().split("/n"));
     }
-    public int rows() { return getInt("rows"); }
-    public int cols() { return getInt("cols"); }
-    public int minlength() { return getInt("minlength"); }
-    public int maxlength() { return getInt("maxlength"); }
-    public String value() { return getAttribute("value"); }
-    public String min() { return getAttribute("min"); }
-    public String max() { return getAttribute("max"); }
-    public String step() { return getAttribute("step"); }
+
+  /**
+   * Gets attribute rows in int
+   * @return int number of rows
+   */
+  public int rows() {
+    return getInt("rows");
+  }
+
+  /**
+   * Gets attribute cols in int
+   * @return int number of cols
+   */
+  public int cols() {
+    return getInt("cols");
+  }
+
+  /**
+   * Gets attribute minlength in int
+   * @return int value of minlength
+   */
+  public int minlength() {
+    return getInt("minlength");
+  }
+
+  /**
+   * Gets attribute maxlength in int
+   * @return int value of maxlength
+   */
+  public int maxlength() {
+    return getInt("maxlength");
+  }
+
+  /**
+   * Gets attribute with name value
+   * @return String
+   */
+  public String value() {
+    return getAttribute("value");
+  }
+
+  /**
+   * Gets attribute with name min
+   * @return String min value
+   */
+  public String min() {
+    return getAttribute("min");
+  }
+
+  /**
+   * Gets attribute with name max
+   * @return String max value
+   */
+  public String max() {
+    return getAttribute("max");
+  }
+
+  /**
+   * Gets attribute with name step
+   * @return String step value
+   */
+  public String step() {
+    return getAttribute("step");
+  }
 
   /**
    * Gets attribute and casts it to int
