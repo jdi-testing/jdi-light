@@ -1,4 +1,4 @@
-package io.github.epam.html.tests;
+package io.github.epam.html.tests.site;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -10,7 +10,7 @@ import static io.github.com.StaticSite.iframe;
 import static io.github.com.pages.GithubPage.repoDescription;
 import static io.github.com.pages.HomePage.githubLink;
 import static io.github.com.pages.HomePage.jdiText;
-import static io.github.epam.html.tests.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 

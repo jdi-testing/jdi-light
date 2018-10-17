@@ -4,14 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.epam.jdi</groupId>
     <version>1.0-SNAPSHOT</version>
     <artifactId>jdi-light-examples</artifactId>
     <name>JDI Web Tests</name>
 
+    <parent>
+        <groupId>com.epam.jdi</groupId>
+        <version>1.0.10</version>
+        <artifactId>jdi-2</artifactId>
+    </parent>
+
     <properties>
-        <aspectj.version>1.8.5</aspectj.version>
         <driver>chrome</driver>
+        <jetty.version>9.4.12.RC2</jetty.version>
     </properties>
 
 
@@ -20,9 +25,9 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.10</version>
         </dependency>
-		
+
         <!--Allure-->
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
@@ -35,10 +40,25 @@
         <plugins>
 
             <!--Allure reporting -->
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <configuration>
+                    <webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
+
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <supportedPackagings>
+                        <supportedPackaging>jar</supportedPackaging>
+                    </supportedPackagings>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>${surefire.version}</version>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
@@ -60,7 +80,7 @@
             <plugin>
                 <groupId>ru.yandex.qatools.allure</groupId>
                 <artifactId>allure-maven-plugin</artifactId>
-                <version>2.5</version>
+                <version>${allure.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -74,11 +94,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
+                <version>3.2
+                </version>
+              <configuration>
+                <source>${java.version}</source>
+                <target>${java.version}</target>
+              </configuration>
             </plugin>
         </plugins>
         <!-- For using properties from pom -->
@@ -97,7 +118,7 @@
             <plugin>
                 <groupId>ru.yandex.qatools.allure</groupId>
                 <artifactId>allure-maven-plugin</artifactId>
-                <version>RELEASE</version>
+                <version>${allure.version}</version>
             </plugin>
         </plugins>
     </reporting>

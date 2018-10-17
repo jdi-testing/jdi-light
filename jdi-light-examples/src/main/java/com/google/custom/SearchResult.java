@@ -9,7 +9,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class SearchResult extends Section {
     @Title
-    @Css("h3>a") public WebElement name;
+    @Css("h3") public WebElement name;
     @Css(".st")  public WebElement description;
     @Css("cite") public WebElement link;
 

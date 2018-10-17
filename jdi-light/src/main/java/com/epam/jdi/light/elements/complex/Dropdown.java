@@ -13,11 +13,11 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 
 /**
@@ -137,10 +137,14 @@ public class Dropdown extends JDIBase implements ISetup, SetValue {
         if (!fieldHasAnnotation(field, JDropdown.class, Dropdown.class))
             return;
         JDropdown j = field.getAnnotation(JDropdown.class);
-        By root = findByToBy(j.root());
-        By valueLocator = findByToBy(j.value());
-        By listLocator = findByToBy(j.list());
-        By expandLocator = findByToBy(j.expand());
+        By root = isNotBlank(j.root())
+                ? By.cssSelector(j.root()) : null;
+        By valueLocator = isNotBlank(j.value())
+                ? By.cssSelector(j.value()) : null;
+        By listLocator = isNotBlank(j.list())
+                ? By.cssSelector(j.list()) : null;
+        By expandLocator = isNotBlank(j.expand())
+                ? By.cssSelector(j.expand()) : null;
         if (root != null)
             setLocator(root);
         if (valueLocator != null) {

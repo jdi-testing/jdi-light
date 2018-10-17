@@ -13,10 +13,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class UIElement extends JDIBase implements WebElement, BaseElement, SetValue {
@@ -63,8 +67,8 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
 
     @JDIAction
     public boolean isSelected() {
-        return getAttribute("class").contains("checked") ||
-                getAttribute("checked") != null || get().isSelected();
+        return get().isSelected() || getAttribute("class").contains("checked") ||
+                getAttribute("checked").equals("true");
     }
     @JDIAction
     public boolean isEnabled() {
@@ -75,8 +79,9 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
 
     @JDIAction
     public boolean isDisplayed() {
-        WebElement el = get();
-        try { return el != null && el.isDisplayed();
+        try {
+            WebElement el = get();
+            return el != null && el.isDisplayed();
         } catch (Exception ex) { return false; }
     }
     public Point getLocation() {
@@ -95,7 +100,7 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
         return get().getScreenshotAs(outputType);
     }
     public String getAttribute(String name) {
-        return get().getAttribute(name);
+        return valueOrDefault(get().getAttribute(name), "");
     }
     //endregion
 
@@ -118,9 +123,8 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
 
     @JDIAction
     public void setText(String value) {
-        jsExecute("value = '"+value+"'");
+        jsExecute("value='"+value+"'");
     }
-
     public UIElement find(String by) {
         return find(By.cssSelector(by));
     }
@@ -132,8 +136,34 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
         return el;
     }
 
+    public List<UIElement> finds(String by) {
+        return finds(By.cssSelector(by));
+    }
+
+    public List<UIElement> finds(By by) {
+        UIElement el = new UIElement();
+        el.parent = this;
+        el.setLocator(by);
+        return el.allUI();
+    }
+
     public void setAttribute(String name, String value) {
         jsExecute("setAttribute('"+name+"','"+value+"')");
+    }
+    public List<String> getAllAttributes() {
+        List<String> result;
+        try {
+            result = (List<String>) js().executeScript("var s = []; var attrs = arguments[0].attributes; for (var l = 0; l < attrs.length; ++l) { var a = attrs[l]; s.push(a.name + '=\"' + a.value + '\"'); } ; return s;", get());
+        } catch (Exception ignore) { return new ArrayList<>(); }
+        if (getAttribute("selected").equals("true"))
+            result.add("selected");
+        if (getAttribute("checked").equals("true"))
+            result.add("checked");
+        return result;
+    }
+    public String printHtml() {
+        return MessageFormat.format("<{0}{1}>{2}</{0}>", getTagName(),
+                print(getAllAttributes(), el -> " "+ el), getAttribute("innerHTML"));
     }
     @JDIAction
     public void higlight(String color) {

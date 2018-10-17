@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
+import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.*;
 
 public class JDIPerformanceTests extends SimpleTestsInit {
 
@@ -14,13 +15,14 @@ public class JDIPerformanceTests extends SimpleTestsInit {
     public void openPerformancePage() {
         homePage.open();
         login(new User());
+        navigation.select("Service");
         navigation.select("Performance");
     }
 
     @Test
     public void hugeTableTest() {
         StopWatch timer = StopWatch.createStarted();
-        String row = jdiPerformancePage.getUser("Meyer", "co.uk").getText();
+        String row = getUser("Meyer", "co.uk").getText();
         System.out.println("Time: " + timer.getTime());
         Assert.assertEquals(row, "Brian Meyer (016977) 0358 mollis.nec@seddictumeleifend.co.uk Houston");
     }
@@ -29,9 +31,9 @@ public class JDIPerformanceTests extends SimpleTestsInit {
     public void bigDropdownTest() {
         String name = "Charles Byers";
         StopWatch timer = StopWatch.createStarted();
-        jdiPerformancePage.names.select(name);
+        names.select(name);
         System.out.println("Time: " + timer.getTime());
-        Assert.assertEquals(jdiPerformancePage.isSelected(), name);
+        Assert.assertEquals(names.isSelected(), name);
     }
 
     @Test
@@ -42,7 +44,7 @@ public class JDIPerformanceTests extends SimpleTestsInit {
                 "Has eirmod consequat ad. Sea illud clita ut, has quando accusata cotidieque an, volutpat iudicabit definitionem ut sea. Pri at atqui molestiae, nibh ullum consulatu vix at. Nec id nisl nonumes epicurei, et vitae possit probatus ius. Fierent delicata argumentum ut quo. Tation tincidunt sed eu, sit in nostrud democritum.\\n\\n" +
                 "Usu esse utroque sapientem ad. Eam ut consul soleat sapientem, cu dolor consequuntur vis. Erat temporibus mea id, has ex dicam tritani. Pertinacia expetendis consectetuer eos ei, vidit malis periculis est ea, ne nam movet fuisset. Pro id habemus definitiones, in ferri solum reprehendunt mei. Vel eligendi honestatis liberavisse id.";
         StopWatch timer = StopWatch.createStarted();
-        jdiPerformancePage.textfield.setText(text + "\\n"+ text);
+        textfield.setText(text + "\\n"+ text);
         System.out.println("Time: " + timer.getTime());
     }
 }

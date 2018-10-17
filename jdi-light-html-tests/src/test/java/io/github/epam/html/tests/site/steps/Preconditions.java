@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.steps;
+package io.github.epam.html.tests.site.steps;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import ru.yandex.qatools.allure.annotations.Step;

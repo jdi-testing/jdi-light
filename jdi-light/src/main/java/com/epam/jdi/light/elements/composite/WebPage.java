@@ -15,9 +15,9 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
@@ -27,6 +27,7 @@ import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 25.03.2018
@@ -96,9 +97,27 @@ public class WebPage extends DriverBase implements INamed {
      */
     @JDIAction
     public void checkOpened() {
-        if (!isOpened())
-            throw exception("Page '%s' is not opened", toString());
+        if (!hasRunDrivers())
+            throw exception("Page '%s' is not opened: Driver is not run", toString());
+        String result = Switch(checkUrlType).get(
+                Value(NONE, ""),
+                Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
+                Value(MATCH, t -> !url().match() ? "Url '%s' doesn't match to '%s'" : ""),
+                Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
+        );
+        if (isNotBlank(result))
+            throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getCurrentUrl(), checkUrl));
+        result = Switch(checkTitleType).get(
+                Value(NONE, ""),
+                Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
+                Value(MATCH, t -> !title().match() ? "Title '%s' doesn't match to '%s'" : ""),
+                Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
+        );
+        if (isNotBlank(result))
+            throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
+        setCurrentPage(this);
     }
+
     public boolean isOpened() {
         if (!hasRunDrivers())
             return false;
@@ -138,14 +157,9 @@ public class WebPage extends DriverBase implements INamed {
     }
     @JDIAction
     public void shouldBeOpened() {
-        try {
-            if (isOpened()) return;
-            open();
-            checkOpened();
-            setCurrentPage(this);
-        } catch (Exception ex) {
-            throw exception(format("Can't open page '%s'. Reason: %s", getName(), ex.getMessage()));
-        }
+        if (isOpened()) return;
+        open();
+        checkOpened();
     }
 
     /**

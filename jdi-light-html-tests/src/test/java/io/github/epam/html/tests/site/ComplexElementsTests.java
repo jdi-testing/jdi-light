@@ -1,7 +1,7 @@
-package io.github.epam.html.tests;
+package io.github.epam.html.tests.site;
 
 import io.github.epam.TestsInit;
-import io.github.epam.html.tests.steps.Preconditions;
+import io.github.epam.html.tests.site.steps.Preconditions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -48,7 +48,8 @@ public class ComplexElementsTests extends TestsInit {
         contactFormPage.checkOpened();
         navigationL.select(Home);
         homePage.checkOpened();
-        navigationL.select(ComplexTable);
+        navigationS.select(Service);
+        navigationS.select(ComplexTable);
     }
     @Test
     public void navigationMenuSTest() {
@@ -57,6 +58,7 @@ public class ComplexElementsTests extends TestsInit {
         contactFormPage.checkOpened();
         navigationS.select(Home);
         homePage.checkOpened();
+        navigationS.select(Service);
         navigationS.select(ComplexTable);
     }
 }

@@ -14,9 +14,9 @@ import java.util.List;
 @Url("/performance.html")
 public class JDIPerformancePage extends WebPage {
     //Table
-    @Css("#users-table") public WebElement table;
+    @Css("#users-table") public static WebElement table;
 
-    public WebElement getUser(String name, String email) {
+    public static WebElement getUser(String name, String email) {
         List<WebElement> rows = table.findElements(By.tagName("tr"));
         for (WebElement row : rows) {
             List<WebElement> columns = row.findElements(By.tagName("td"));
@@ -29,17 +29,11 @@ public class JDIPerformancePage extends WebPage {
 
     // Dropdown
     @Css("#user-names option")
-    public WebList names;
+    public static WebList names;
     @XPath("//*[@id='user-names']//*[text()='%s']")
-    public UIElement namesDropdown;
-    @Css("select[ui=dropdown]") WebElement dropdownValue;
-    @Css("#user-names option") List<WebElement> dropdown;
 
-    public String isSelected() {
-        return dropdownValue.getText();
-    }
 
     // Textfield
     @Css("#textarea-performance")
-    public UIElement textfield;
+    public static UIElement textfield;
 }

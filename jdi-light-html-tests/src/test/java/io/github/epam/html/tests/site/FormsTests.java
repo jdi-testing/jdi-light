@@ -1,7 +1,7 @@
-package io.github.epam.html.tests;
+package io.github.epam.html.tests.site;
 
 import io.github.epam.TestsInit;
-import io.github.epam.html.tests.steps.Preconditions;
+import io.github.epam.html.tests.site.steps.Preconditions;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.contactFormPage;

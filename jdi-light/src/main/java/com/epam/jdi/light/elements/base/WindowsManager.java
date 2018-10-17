@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.tools.map.MapArray;
+import org.openqa.selenium.Alert;
 
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class WindowsManager {
     }
     private static MapArray<String, String> windowHandles = new MapArray<>();
     public static void setWindowName(String name) {
-        windowHandles.add(name, getDriver().getWindowHandle());
+        windowHandles.update(name, getDriver().getWindowHandle());
     }
     public static int windowsCount() {
         return getWindows().size();
@@ -73,5 +74,28 @@ public class WindowsManager {
     public static void closeWindow(String name) {
         switchToWindow(name);
         closeWindow();
+    }
+    @JDIAction
+    public static void acceptAlert() {
+        alert().accept();
+    }
+
+    @JDIAction
+    public static void declineAlert() {
+        alert().dismiss();
+    }
+
+    @JDIAction
+    public static String getAlertText() {
+        return alert().getText();
+    }
+
+    @JDIAction
+    public static void sendKeysInAlert(String text) {
+        alert().sendKeys(text);
+    }
+
+    private static Alert alert() {
+        return getDriver().switchTo().alert();
     }
 }

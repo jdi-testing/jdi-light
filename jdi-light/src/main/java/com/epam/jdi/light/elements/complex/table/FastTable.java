@@ -23,13 +23,15 @@ import static com.epam.jdi.tools.LinqUtils.select;
 public class FastTable extends Table {
     protected By cellLocator;
     protected By allCells;
+    protected By rowLocator;
+    protected By columnLocator;
     protected MapArray<String, List<WebElement>> rows = new MapArray<>();
     protected MapArray<String, List<WebElement>> columns = new MapArray<>();
     protected MapArray<String, MapArray<String, WebElement>> cells = new MapArray<>();
 
     public FastTable() {
-        rowsLocator = By.xpath("//tr[%s]/td");
-        columnsLocator = By.xpath("//tr/td[%s]");
+        rowLocator = By.xpath("//tr[%s]/td");
+        columnLocator = By.xpath("//tr/td[%s]");
         cellLocator = By.xpath("//tr[{1}]/td[{0}]");
         allCells = By.cssSelector("td");
         count = new CacheValue<>(() -> webColumn(1).size());
@@ -37,16 +39,16 @@ public class FastTable extends Table {
     private Boolean headerIsRow = null;
     private int getRowIndex(int rowNum) {
         if (headerIsRow == null) {
-            List<String> firstRow = $$(fillByTemplate(rowsLocator, 1), this).values();
+            List<String> firstRow = $$(fillByTemplate(rowLocator, 1), this).values();
             headerIsRow = firstRow.isEmpty() || listEquals(header.get(), firstRow);
         }
         return headerIsRow ? rowNum + 1 : rowNum;
     }
     private WebList getRow(int rowNum) {
-        return $$(fillByTemplate(rowsLocator, getRowIndex(rowNum), this));
+        return $$(fillByTemplate(rowLocator, getRowIndex(rowNum), this));
     }
     private WebList getColumn(int colNum) {
-        return $$(fillByTemplate(columnsLocator, colNum), this);
+        return $$(fillByTemplate(columnLocator, colNum), this);
     }
     private WebElement getCell(int colNum, int rowNum) {
         return $(fillByMsgTemplate(cellLocator, colNum, getRowIndex(rowNum), this));

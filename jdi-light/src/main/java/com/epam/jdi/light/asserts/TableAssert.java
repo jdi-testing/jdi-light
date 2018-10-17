@@ -14,8 +14,7 @@ public class TableAssert {
     Table table;
 
     public TableAssert(Table table) {
-
-        //this.elements = new MapArray<>(header, LinqUtils.map(elements, WebElement::getText));
+        this.table = table;
     }
 
     public void isEmpty() {

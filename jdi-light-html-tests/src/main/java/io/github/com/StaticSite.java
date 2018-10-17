@@ -19,8 +19,9 @@ public class StaticSite {
 	public static MetalAndColorsPage metalAndColorsPage;
 	@Url("/contacts.html") @Title("Contact Form")
 	public static ContactFormPage contactFormPage;
-	@Url("/performance.html") @Title("Simple Table")
-	public static PerformancePage tablePage;
+	@Url("/performance.html") @Title("Performance page")
+	public static PerformancePage performancePage;
+	@Url("/html5.html") public static HtmlElementsPage htmlElementsPage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;

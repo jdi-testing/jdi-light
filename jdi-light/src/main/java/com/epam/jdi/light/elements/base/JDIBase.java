@@ -14,8 +14,8 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.DEFAULT;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
-import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.*;
@@ -24,6 +24,7 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -39,7 +40,10 @@ public class JDIBase extends DriverBase implements INamed {
     protected CacheValue<WebElement> webElement = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
     public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
-    public UIElement setWebElement(WebElement el) { webElement.setForce(el); return (UIElement) this; }
+    public UIElement setWebElement(WebElement el) {
+        webElement.setForce(el);
+        return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();
+    }
 
     public <T extends JDIBase> T setLocator(By locator) {
         locatorType = DEFAULT;
@@ -176,7 +180,7 @@ public class JDIBase extends DriverBase implements INamed {
             Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, this))
         );
     }
-    public void jsExecute(String text) {
-        js().executeScript("arguments[0]."+text+";", get());
+    public String jsExecute(String text) {
+        return valueOf(js().executeScript("arguments[0]."+text+";", get()));
     }
 }

@@ -39,17 +39,19 @@ public class TableTests extends StaticTestsInit {
         assertEquals(table.column(2).getValue().substring(0, 30),
                 "076 1971 1687,(011307) 16843,0");
         logTime("Get column(1)");
-        assertEquals(table.preview().substring(0,198),
+        String value = table.preview();
+        assertEquals(value.substring(0,198),
                 "Name Phone Email City\n" +
                         "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe\n" +
                         "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas\n" +
                         "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauvais\n");
         logTime("Preview");
-        assertEquals(table.getValue().substring(0,230),
-                "||X||Name|Phone|Email|City||\r\n" +
-                        "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||\r\n" +
-                        "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||\r\n" +
-                        "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||\r\n");
+        value = table.getValue();
+        assertEquals(value.substring(0,225),
+                "||X||Name|Phone|Email|City||\n" +
+                        "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||\n" +
+                        "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||\n" +
+                        "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||");
         logTime("Get value");
     }
 
