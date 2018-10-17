@@ -80,6 +80,7 @@
               <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
             </suiteXmlFiles>-->
             <systemPropertyVariables>
+              <log4j.configurationFile>log4j2.xml</log4j.configurationFile>
               <allure.results.directory>target/allure-results</allure.results.directory>
             </systemPropertyVariables>
             <testFailureIgnore>true</testFailureIgnore>
