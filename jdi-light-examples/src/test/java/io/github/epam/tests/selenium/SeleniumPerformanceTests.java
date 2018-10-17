@@ -15,6 +15,7 @@ public class SeleniumPerformanceTests {
     public void openPerformancePage() {
         homePage.open();
         login(new User());
+        homePage.navigateTo("Service");
         homePage.navigateTo("Performance");
     }
 

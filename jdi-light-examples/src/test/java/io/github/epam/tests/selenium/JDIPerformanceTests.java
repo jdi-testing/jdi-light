@@ -1,31 +1,36 @@
 package io.github.epam.tests.selenium;
 
-import io.github.epam.EpamGithubSite;
 import org.apache.commons.lang3.time.StopWatch;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import selenium.entities.User;
 
+import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
+import static com.epam.jdi.tools.pairs.Pair.$;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.*;
 import static selenium.site.SiteJdi.*;
+import static selenium.site.pages.JDIPerformancePage.usersTable;
 
 
 public class JDIPerformanceTests extends SimpleTestsInit {
 
     @BeforeMethod
     public void openPerformancePage() {
-        EpamGithubSite.homePage.shouldBeOpened();
+        homePage.shouldBeOpened();
         login(new User());
+        navigation.select("Service");
         navigation.select("Performance");
     }
 
     @Test
     public void hugeTableTest() {
-        // TODO ADD TABLES
         StopWatch timer = StopWatch.createStarted();
-        String row = jdiPerformancePage.getUser("Meyer", "co.uk").getText();
+        String row = usersTable.row($(containsString("Meyer"), inColumn("name")),
+                               $(containsString("co.uk"), inColumn("email"))).print();
         System.out.println("Time: " + timer.getTime());
-        Assert.assertEquals(row, "Brian Meyer (016977) 0358 mollis.nec@seddictumeleifend.co.uk Houston");
+        assertEquals(row, "Brian Meyer,(016977) 0358,mollis.nec@seddictumeleifend.co.uk,Houston");
     }
 
     @Test
@@ -34,7 +39,7 @@ public class JDIPerformanceTests extends SimpleTestsInit {
         StopWatch timer = StopWatch.createStarted();
         jdiPerformancePage.names.select(name);
         System.out.println("Time: " + timer.getTime());
-        Assert.assertEquals(jdiPerformancePage.isSelected(), name);
+        assertEquals(jdiPerformancePage.isSelected(), name);
     }
 
     @Test

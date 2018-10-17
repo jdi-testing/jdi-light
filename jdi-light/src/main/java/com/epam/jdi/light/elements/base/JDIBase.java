@@ -40,7 +40,10 @@ public class JDIBase extends DriverBase implements INamed {
     protected CacheValue<WebElement> webElement = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
     public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
-    public UIElement setWebElement(WebElement el) { webElement.setForce(el); return (UIElement) this; }
+    public UIElement setWebElement(WebElement el) {
+        webElement.setForce(el);
+        return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();
+    }
 
     public <T extends JDIBase> T setLocator(By locator) {
         locatorType = DEFAULT;

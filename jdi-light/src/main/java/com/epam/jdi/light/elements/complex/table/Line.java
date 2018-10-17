@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.PrintUtils;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -22,8 +23,9 @@ public class Line implements IList<String> {
     }
 
     public String getValue() {
-        return print(elements);
+        return PrintUtils.print(elements);
     }
+    public String print() { return getValue(); }
     public void clear() { elements.clear(); }
     public <T> T asData(Class<T> cl) {
         T instance;

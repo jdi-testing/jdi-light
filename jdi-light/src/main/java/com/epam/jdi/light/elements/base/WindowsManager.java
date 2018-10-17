@@ -21,7 +21,7 @@ public class WindowsManager {
     }
     private static MapArray<String, String> windowHandles = new MapArray<>();
     public static void setWindowName(String name) {
-        windowHandles.add(name, getDriver().getWindowHandle());
+        windowHandles.update(name, getDriver().getWindowHandle());
     }
     public static int windowsCount() {
         return getWindows().size();
