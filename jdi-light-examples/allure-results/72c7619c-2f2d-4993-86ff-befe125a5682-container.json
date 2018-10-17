@@ -1,0 +1,1 @@
+{"uuid":"72c7619c-2f2d-4993-86ff-befe125a5682","name":"io.github.epam.tests.smart.path.PathTests.before","description":"","start":1539792437185,"stop":1539792437369,"children":["e14a88ec-3743-4fdf-be51-485dacc79c95"],"befores":[{"name":"before","status":"passed","stage":"finished","description":"","start":1539792437185,"stop":1539792437369}]}

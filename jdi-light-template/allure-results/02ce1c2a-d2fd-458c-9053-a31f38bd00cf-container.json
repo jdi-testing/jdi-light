@@ -1,0 +1,1 @@
+{"uuid":"02ce1c2a-d2fd-458c-9053-a31f38bd00cf","name":"org.mytests.tests.example.SimpleTestsInit.before","description":"","start":1539791768720,"stop":1539791768733,"children":["fe5363b2-3a62-41d7-9e6f-45dea9c6b34d"],"befores":[{"name":"before","status":"passed","stage":"finished","description":"","start":1539791768720,"stop":1539791768732}]}

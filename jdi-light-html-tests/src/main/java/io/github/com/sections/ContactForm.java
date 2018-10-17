@@ -8,14 +8,13 @@ import com.epam.jdi.light.ui.html.common.Button;
 import com.epam.jdi.light.ui.html.common.Checkbox;
 import com.epam.jdi.light.ui.html.common.TextArea;
 import com.epam.jdi.light.ui.html.common.TextField;
-import com.epam.jdi.light.ui.html.complex.Combobox;
 import com.epam.jdi.light.ui.html.complex.MultiSelect;
 import io.github.com.entities.Contacts;
 
 
 public class ContactForm extends Form<Contacts> {
 	@Css("select[ui=dropdown]") public Dropdown gender;
-	@Css("div[ui=combobox] input") public Combobox religion;
+	@Css("div[ui=combobox] input") public Dropdown religion;
 	@Css("div[ui=droplist]") public MultiSelect wheather;
 	@XPath(".//button[@type='submit']") public Button submit;
 	@Css("#Passport") public TextField passport;

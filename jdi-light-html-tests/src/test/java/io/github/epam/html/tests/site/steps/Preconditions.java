@@ -1,7 +1,7 @@
 package io.github.epam.html.tests.site.steps;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import ru.yandex.qatools.allure.annotations.Step;
+import io.qameta.allure.Step;
 
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
