@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
     <version>1.0-SNAPSHOT</version>
     <artifactId>jdi-light-examples</artifactId>
@@ -16,9 +16,10 @@
 
     <properties>
         <driver>chrome</driver>
+        <allure.testng>2.7.0</allure.testng>
+        <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
     </properties>
-
 
     <dependencies>
         <!--JDI-->
@@ -28,10 +29,16 @@
             <version>1.0.10</version>
         </dependency>
 
-        <!--Allure-->
+        <!--Allure config in parent-->
         <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-testng-adaptor</artifactId>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.testng}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
             <version>RELEASE</version>
         </dependency>
     </dependencies>
@@ -39,71 +46,31 @@
     <build>
         <plugins>
 
-            <!--Allure reporting -->
+            <!--Allure reporting config in parent-->
 
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
-                <configuration>
-                    <webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
-
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <supportedPackagings>
-                        <supportedPackaging>jar</supportedPackaging>
-                    </supportedPackagings>
-                </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.version}</version>
-                <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                    <testFailureIgnore>true</testFailureIgnore>
-                    <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                    </argLine>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjweaver</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
+                <version>${allure.maven}</version>
             </plugin>
 
             <plugin>
-                <groupId>ru.yandex.qatools.allure</groupId>
-                <artifactId>allure-maven-plugin</artifactId>
-                <version>${allure.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <phase>post-integration-test</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Java version 8 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2
-                </version>
-              <configuration>
-                <source>${java.version}</source>
-                <target>${java.version}</target>
-              </configuration>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.maven}</version>
             </plugin>
         </plugins>
-        <!-- For using properties from pom -->
+
         <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+            </resource>
             <resource>
                 <directory>src/test/resources</directory>
                 <filtering>true</filtering>
@@ -111,15 +78,15 @@
         </resources>
     </build>
 
-    <!-- Allure reporting -->
+    <!-- Allure reporting config in parent-->
     <reporting>
         <excludeDefaults>true</excludeDefaults>
         <plugins>
             <plugin>
-                <groupId>ru.yandex.qatools.allure</groupId>
-                <artifactId>allure-maven-plugin</artifactId>
-                <version>${allure.version}</version>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
             </plugin>
         </plugins>
     </reporting>
+    
 </project>
