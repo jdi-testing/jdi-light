@@ -14,16 +14,43 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static java.util.Arrays.asList;
 
+/**
+ * Base html element
+ */
 public class HtmlElement extends UIElement implements Text, Button, FileInput, Icon, Image, Link, TextArea,
         TextField, Title, Checkbox, ColorPicker, Range, ProgressBar, DateTimeSelector, NumberSelector {
 
     public HtmlElement() { }
     public HtmlElement(WebElement el) { super(el); }
 
+    /**
+     * Gets attribute 'alt'
+     * @return String alt value
+     */
     public String getAlt() { return getAttribute("alt"); }
+
+    /**
+     * Gets attribute 'src'
+     * @return String src value
+     */
     public String getSrc() { return getAttribute("src"); }
+
+    /**
+     * Gets attribute 'height'
+     * @return String height value
+     */
     public String getHeight() { return getAttribute("height"); }
+
+    /**
+     * Gets attribute 'width'
+     * @return String width value
+     */
     public String getWidth() { return getAttribute("width"); }
+
+    /**
+     * Gets attribute 'href'
+     * @return String href value
+     */
     public String getRef() { return getAttribute("href"); }
     public URL getUrl() {
         try { return new URL(getRef());

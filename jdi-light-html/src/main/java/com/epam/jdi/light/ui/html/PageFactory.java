@@ -10,6 +10,8 @@ import static com.epam.jdi.light.elements.init.PageFactory.PRE_INIT;
 /**
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ * <p>
+ * Selenium PageFactory
  */
 
 public class PageFactory {
