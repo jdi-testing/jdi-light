@@ -13,10 +13,28 @@ public class HtmlAssertion extends IsAssert implements ImageAssert, TextAssert, 
     HtmlElement html;
     public HtmlAssertion(HtmlElement html) { super(html); this.html = html; }
 
+    /**
+     * Custom match src attribute and passed condition
+     * @param condition
+     */
     public void src(Matcher<String> condition) { assertThat(html.getSrc(), condition); }
+
+    /**
+     * Custom match alt attribute and passed condition
+     * @param condition
+     */
     public void alt(Matcher<String> condition) { assertThat(html.getAlt(), condition); }
+
+    /**
+     * Custom match href attribute and passed condition
+     * @param condition
+     */
     public void ref(Matcher<String> condition) { assertThat(html.getRef(), condition); }
 
+    /**
+     * Match passed value with html element height
+     * @param value to compare
+     */
     public void height(int value) {
         int height;
         try {
@@ -24,6 +42,11 @@ public class HtmlAssertion extends IsAssert implements ImageAssert, TextAssert, 
         } catch (Exception ex) { throw exception("Can't parse 'height' attribute '"+ html.getHeight()+"' to integer"); }
         assertThat(height, is(value));
     }
+
+    /**
+     * Match passed value with html element width
+     * @param value to compare
+     */
     public void width(int value) {
         int width;
         try {
