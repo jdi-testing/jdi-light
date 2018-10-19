@@ -36,6 +36,10 @@ public class HtmlChecklist extends UIElement implements BaseSelectorAssert, Chec
         getAll().get(index).click();
     }
 
+    /**
+     * Checks particular elements in checklist
+     * @param values String varargs to check
+     */
     public void check(String... values) {
         for (HtmlElement ui :  elements()) {
             if (ui.isSelected() && !asList(values).contains(ui.labelText())
@@ -43,6 +47,11 @@ public class HtmlChecklist extends UIElement implements BaseSelectorAssert, Chec
                 ui.click();
         }
     }
+
+    /**
+     * Uncheck particular elements in checklist
+     * @param values String varargs to uncheck
+     */
     public void uncheck(String... values) {
         for (HtmlElement ui :  elements()) {
             if (ui.isSelected() && asList(values).contains(ui.labelText())
@@ -56,6 +65,11 @@ public class HtmlChecklist extends UIElement implements BaseSelectorAssert, Chec
     public <TEnum extends Enum> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
+
+    /**
+     * Checks particular elements in checklist based on their index
+     * @param values int varargs to check
+     */
     public void check(int... values) {
         List<UIElement> options = allUI();
         for (int i = 0; i < options.size(); i++) {
@@ -65,6 +79,11 @@ public class HtmlChecklist extends UIElement implements BaseSelectorAssert, Chec
                 opt.click();
         }
     }
+
+    /**
+     * Uncheck particular elements in checklist based on their index
+     * @param values int varargs to uncheck
+     */
     public void uncheck(int... values) {
         List<UIElement> options = allUI();
         for (int i = 0; i < options.size(); i++) {
@@ -75,10 +94,18 @@ public class HtmlChecklist extends UIElement implements BaseSelectorAssert, Chec
         }
     }
 
+    /**
+     * Gets selected values with separator
+     * @return String
+     */
     public String selected() {
         return print(checked(),";");
     }
 
+    /**
+     * Gets selected list
+     * @return List String
+     */
     public List<String> checked() {
         return ifSelect(elements(), UIElement::isSelected, HtmlElement::labelText);
     }
@@ -94,10 +121,19 @@ public class HtmlChecklist extends UIElement implements BaseSelectorAssert, Chec
         return ifSelect(elements(), el -> !el.isEnabled(), HtmlElement::labelText);
     }
 
+    /**
+     * Sets values in checklist
+     * @param value String to set. Can accept multi value with separator ;
+     */
     @Override
     public void setValue(String value) {
         check(value.split(";"));
     }
+
+    /**
+     * Gets selected values
+     * @return String
+     */
     @Override
     public String getValue() {
         return selected();
