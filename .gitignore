@@ -6,3 +6,4 @@ target/
 .logs/
 *.xlsx
 .DS_Store
+allure-results/
