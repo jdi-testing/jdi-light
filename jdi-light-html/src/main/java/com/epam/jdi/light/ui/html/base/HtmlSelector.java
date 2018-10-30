@@ -99,6 +99,11 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
     public String selected() {
         return select().getFirstSelectedOption().getText();
     }
+
+    /**
+     * Gets attr 'placeholder'
+     * @return String
+     */
     public String placeholder() { return getAttribute("placeholder"); }
 
     public List<String> values() {

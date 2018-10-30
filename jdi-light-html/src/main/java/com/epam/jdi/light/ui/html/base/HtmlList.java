@@ -42,6 +42,10 @@ public class HtmlList extends WebList implements Menu {
 //        return els.size() == 1 && els.get(0).getText().equals(name);
 //    }
 
+    /**
+     * Gets selected value from list
+     * @return String
+     */
     public String selected() {
         List<String> selected = getSelectedOptions();
         if (selected.size() == 1)
@@ -49,6 +53,10 @@ public class HtmlList extends WebList implements Menu {
         throw exception("Get selected");
     }
 
+    /**
+     * Gets selected option
+     * @return List String
+     */
     public List<String> getSelectedOptions() {
         return LinqUtils.ifSelect(allUI(), UIElement::isSelected, UIElement::getText);
     }

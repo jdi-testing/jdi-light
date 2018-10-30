@@ -67,7 +67,12 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
    * @return String placeholder value
    */
     public String placeholder() { return getAttribute("placeholder"); }
-    public void setLines(String... lines) {
+
+  /**
+   * Sets value for lines
+   * @param lines String var arg
+   */
+  public void setLines(String... lines) {
         setText(PrintUtils.print(asList(lines), "/n"));
     }
 
