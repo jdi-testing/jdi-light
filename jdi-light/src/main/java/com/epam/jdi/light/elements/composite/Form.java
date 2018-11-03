@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 
@@ -22,6 +23,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getFields;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
@@ -32,9 +34,12 @@ import static java.lang.String.format;
  */
 
 public class Form<T> extends Section {
-    public void fillAction(SetValue element, String value) {
-        element.setValue(value);
-    }
+    public static JAction2<Object, String> FILL_ACTION = (fieldValue, setValue) ->  {
+        if (isInterface(fieldValue.getClass(), SetValue.class)) {
+            ((SetValue) fieldValue).setValue(setValue);
+        }
+    };
+
     private FormFilters filter = ALL;
     public FormFilters getFilter() {
         return filter;
@@ -54,12 +59,11 @@ public class Form<T> extends Section {
     public void fill(MapArray<String, String> map) {
         for (Field field : allFields())
             try {
-                String fieldValue = map.first((name, value) ->
+                String setValue = map.first((name, value) ->
                     namesEqual(name, getElementName(field)));
-                if (fieldValue == null)
+                if (setValue == null)
                     continue;
-                SetValue setValueElement = (SetValue) getValueField(field, this);
-                fillAction(setValueElement, fieldValue);
+                FILL_ACTION.execute(getValueField(field, this), setValue);
             } catch (Exception ex) { throw exception("Can't fill element %s. Exception: %s", field.getName(), ex.getMessage()); }
         setFilterAll();
     }
@@ -159,9 +163,8 @@ public class Form<T> extends Section {
     @JDIAction("{1}: {0}")
     public void submit(String text, String buttonName) {
         Field field = getFields(this, SetValue.class).get(0);
-        SetValue setValueElement = (SetValue) getValueField(field, this);
-        fillAction(setValueElement, text);
-        GET_BUTTON.execute(setValueElement, text).click();
+        FILL_ACTION.execute(field, text);
+        GET_BUTTON.execute(buttonName, text).click();
     }
 
     /**

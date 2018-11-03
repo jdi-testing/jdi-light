@@ -148,7 +148,7 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
     }
 
     public void setAttribute(String name, String value) {
-        jsExecute("setAttribute('"+name+"','"+value+"')");
+        jsExecute(name+"='"+value+"'");
     }
     public List<String> getAllAttributes() {
         List<String> result;
