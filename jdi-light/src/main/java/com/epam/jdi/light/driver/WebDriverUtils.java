@@ -8,6 +8,7 @@ import com.epam.jdi.light.common.UnixProcessUtils;
 
 import java.io.IOException;
 
+import static com.epam.jdi.light.common.UnixProcessUtils.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Runtime.getRuntime;
 import static java.lang.String.format;
@@ -75,7 +76,7 @@ public final class WebDriverUtils {
      * @param driverName
      */
     private static void killAllMacOSDriverProcessesByName(String driverName) {
-            UnixProcessUtils.killProcessesTree(driverName);
+            killProcessesTree(driverName);
     }
 
 }

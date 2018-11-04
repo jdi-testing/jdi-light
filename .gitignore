@@ -7,3 +7,4 @@ target/
 *.xlsx
 .DS_Store
 allure-results/
+downloads/
