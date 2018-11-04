@@ -23,19 +23,38 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
 
     public HtmlSelector() { }
     public HtmlSelector(WebElement el) { super(el); }
+
+    /**
+     * Selects the value based on its visible text
+     * @param value String to search
+     */
     @Override
     public void select(String value) {
         select().selectByVisibleText(value);
     }
+
+    /**
+     * Selects the value based on its index
+     * @param index int to search
+     */
     public void select(int index) {
         select().selectByIndex(index);
     }
 
+    /**
+     * Selects only particular elements
+     * @param values String var arg, elements with text to select
+     */
     public void check(String... values) {
         select().deselectAll();
         for (String value : values)
             select().selectByVisibleText(value);
     }
+
+    /**
+     * Unselects only particular elements
+     * @param values String var arg, elements with text to unselect
+     */
     public void uncheck(String... values) {
         for (WebElement opt : select().getOptions()) {
             if (opt.isSelected() && asList(values).contains(opt.getText())
@@ -49,11 +68,21 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
     public <TEnum extends Enum> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
+
+    /**
+     * Checks particular elements by index
+     * @param values int var arg, ids to check
+     */
     public void check(int... values) {
         select().deselectAll();
         for (int index : values)
             select().selectByIndex(index);
     }
+
+    /**
+     * Unchecks particular elements by index
+     * @param values int var arg, ids to uncheck
+     */
     public void uncheck(int... values) {
         List<WebElement> options = select().getOptions();
         for (int i = 0; i < options.size(); i++) {
@@ -70,6 +99,11 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
     public String selected() {
         return select().getFirstSelectedOption().getText();
     }
+
+    /**
+     * Gets attr 'placeholder'
+     * @return String
+     */
     public String placeholder() { return getAttribute("placeholder"); }
 
     public List<String> values() {

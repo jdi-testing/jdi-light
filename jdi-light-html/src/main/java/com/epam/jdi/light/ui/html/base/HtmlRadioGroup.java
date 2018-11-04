@@ -22,6 +22,10 @@ public class HtmlRadioGroup extends UIElement implements BaseSelectorAssert, Rad
     public HtmlRadioGroup(WebElement el) { super(el); }
     List<HtmlElement> elements() { return map(getAll(), HtmlElement::new); }
 
+    /**
+     * Selects radio based on value
+     * @param value String to select
+     */
     @Override
     public void select(String value) {
         label.get(value).click();
@@ -30,10 +34,18 @@ public class HtmlRadioGroup extends UIElement implements BaseSelectorAssert, Rad
     public <TEnum extends Enum> void select(TEnum value) {
         input.get(getEnumValue(value)).click();
     }
+
+    /**
+     * Selects radio based on index
+     * @param index int to select
+     */
     public void select(int index) {
         getAll().get(index).click();
     }
-
+    /**
+     * Gets secleted radio
+     * @return String
+     */
     public String selected() {
         HtmlElement result = first(elements(), UIElement::isSelected);
         return result != null ? result.labelText() : "";
