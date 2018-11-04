@@ -17,13 +17,36 @@ public class HtmlAssertion extends IsAssert implements ImageAssert, TextAssert,
     public HtmlAssertion(HtmlElement html) { super(html); this.html = html; }
 
     public void isSelected(Matcher<Boolean> condition) { assertThat(html.isSelected(), condition); }
+    /**
+     * Custom match src attribute and passed condition
+     * @param condition
+     */
     public void src(Matcher<String> condition) { assertThat(html.src(), condition); }
+
+    /**
+     * Custom match alt attribute and passed condition
+     * @param condition
+     */
     public void alt(Matcher<String> condition) { assertThat(html.alt(), condition); }
+
+    /**
+     * Custom match href attribute and passed condition
+     * @param condition
+     */
     public void ref(Matcher<String> condition) { assertThat(html.ref(), condition); }
 
+    /**
+     * Match passed value with html element height
+     * @param value to compare
+     */
     public void height(int value) {
         assertThat(getInt("height", html), is(value));
     }
+
+    /**
+     * Match passed value with html element width
+     * @param value to compare
+     */
     public void width(int value) {
         assertThat(getInt("width", html), is(value));
     }
