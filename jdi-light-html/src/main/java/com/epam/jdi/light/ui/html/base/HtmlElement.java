@@ -153,19 +153,6 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
     public String step() { return getAttribute("step"); }
 
     /**
-     * Gets attribute and casts it to int
-     * @param attr String - attribute to find
-     * @return int attribute value
-     */
-    @JDIAction
-    private int getInt(String attr) {
-        String value = getAttribute(attr);
-        try {
-            return Integer.parseInt(value);
-        } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Integer", attr, value); }
-    }
-
-    /**
      * If not selected - click to select
      */
     @JDIAction
