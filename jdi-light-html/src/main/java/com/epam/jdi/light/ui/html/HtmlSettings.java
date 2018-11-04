@@ -7,25 +7,31 @@ package com.epam.jdi.light.ui.html;
 
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.settings.WebSettings;
+import com.epam.jdi.light.ui.html.annotations.FillValue;
+import com.epam.jdi.light.ui.html.annotations.VerifyValue;
 import com.epam.jdi.light.ui.html.base.*;
-import com.epam.jdi.light.ui.html.common.*;
-import com.epam.jdi.light.ui.html.complex.*;
-import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.light.ui.html.common.Button;
+import com.epam.jdi.light.ui.html.common.TextArea;
+import com.epam.jdi.light.ui.html.complex.Checklist;
+import com.epam.jdi.light.ui.html.complex.RadioButtons;
+import com.epam.jdi.light.ui.html.complex.RadioGroup;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getButtonByName;
-import static com.epam.jdi.light.elements.composite.Form.FILL_ACTION;
 import static com.epam.jdi.light.elements.init.InitActions.INIT_RULES;
 import static com.epam.jdi.light.settings.WebSettings.initialized;
+import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 
 public class HtmlSettings {
@@ -57,41 +63,25 @@ public class HtmlSettings {
                 }
             };
 
-            FILL_ACTION = (fieldValue, setValue) -> {
-                Class<?> cl = fieldValue.getClass();
-                if (isClass(cl, HtmlElement.class)) {
-                    if (SET_METHODS.contains(cl))
-                        fieldValue.getClass().getMethod(SET_METHODS.get(cl))
-                            .invoke(fieldValue, setValue);
+            Form.FILL_ACTION = (field, parent, setValue) -> {
+                Method[] methods = field.getType().getDeclaredMethods();
+                Object fieldValue = getValueField(field, parent);
+                Method setMethod = first(methods, m -> m.isAnnotationPresent(FillValue.class));
+                if (setMethod != null) {
+                    setMethod.invoke(fieldValue, setValue);
                     return;
                 }
-                if (isInterface(cl, SetValue.class)) {
-                    ((SetValue) fieldValue).setValue(setValue);
-                    return;
+                ((SetValue) getValueField(field, parent)).setValue(setValue);
+            };
+            Form.GET_ACTION = (field, parent) -> {
+                Method[] methods = field.getType().getDeclaredMethods();
+                Object fieldValue = getValueField(field, parent);
+                Method getMethod = first(methods, m -> m.isAnnotationPresent(VerifyValue.class));
+                if (getMethod != null) {
+                    return getMethod.invoke(fieldValue).toString();
                 }
+                return ((HasValue) getValueField(field, parent)).getValue().trim();
             };
         }
     }
-
-    public static MapArray<Class, String> GET_METHODS = map(
-        $(Checkbox.class, "isSelected"),
-        $(ColorPicker.class, "color"),
-        $(DateTimeSelector.class, "value"),
-        $(FileInput.class, "value"),
-        $(NumberSelector.class, "value"),
-        $(Range.class, "value"),
-        $(TextArea.class, "getText"),
-        $(TextField.class, "getText")
-    );
-
-    public static MapArray<Class, String> SET_METHODS = map(
-        $(Checkbox.class, "check"),
-        $(ColorPicker.class, "setColor"),
-        $(DateTimeSelector.class, "setDateTime"),
-        $(FileInput.class, "uploadFile"),
-        $(NumberSelector.class, "setNumber"),
-        $(Range.class, "setVolume"),
-        $(TextArea.class, "setText"),
-        $(TextField.class, "setText")
-    );
 }

@@ -8,8 +8,7 @@ import selenium.entities.User;
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 import static selenium.site.SiteJdi.*;
 import static selenium.site.pages.JDIPerformancePage.usersTable;
 

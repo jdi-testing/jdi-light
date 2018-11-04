@@ -1,7 +1,6 @@
 package io.github.epam.tests.recommended;
 
 import io.github.epam.StaticTestsInit;
-import java.nio.file.Paths;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.contactFormPage;

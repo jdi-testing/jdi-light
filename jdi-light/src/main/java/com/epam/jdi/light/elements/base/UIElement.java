@@ -17,10 +17,12 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class UIElement extends JDIBase implements WebElement, BaseElement, SetValue {
@@ -37,7 +39,14 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
     }
     @JDIAction("Input {value}")
     public void sendKeys(CharSequence... value) {
+        checkEnabled();
         get().sendKeys(value);
+    }
+    protected void checkEnabled() {
+        if (isDisabled()) {
+            String methodName = currentThread().getStackTrace()[2].getMethodName();
+            throw exception("Can't do "+methodName+" for disabled element '"+getName()+"'");
+        }
     }
 
     @JDIAction
@@ -123,6 +132,7 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
 
     @JDIAction
     public void setText(String value) {
+        //setAttribute("value", value);
         jsExecute("value='"+value+"'");
     }
     public UIElement find(String by) {
@@ -148,7 +158,7 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
     }
 
     public void setAttribute(String name, String value) {
-        jsExecute(name+"='"+value+"'");
+        jsExecute("setAttribute('"+name+"','"+value+"')");
     }
     public List<String> getAllAttributes() {
         List<String> result;
@@ -165,6 +175,14 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
         return MessageFormat.format("<{0}{1}>{2}</{0}>", getTagName(),
                 print(getAllAttributes(), el -> " "+ el), getAttribute("innerHTML"));
     }
+
+    public boolean isDisabled() {
+        return !isEnabled();
+    }
+    public boolean isHidden() {
+        return !isDisplayed();
+    }
+
     @JDIAction
     public void higlight(String color) {
         jsExecute("style.border='3px dashed "+color+"'");

@@ -2,13 +2,15 @@ package org.mytests.tests.example;
 
 import org.testng.annotations.Test;
 
-import static org.mytests.tests.example.Preconditions.*;
+import static org.mytests.tests.example.Preconditions.shouldBeLoggedIn;
+import static org.mytests.tests.example.Preconditions.shouldBeLoggedOut;
 import static org.mytests.uiobjects.example.entities.Users.DEFAULT_USER;
 import static org.mytests.uiobjects.example.entities.Users.USER_WITH_CONTACTS;
 import static org.mytests.uiobjects.example.site.SiteJdi.contactFormPage;
 import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
 import static org.mytests.uiobjects.example.site.pages.ContactFormPage.contactForm;
-import static org.mytests.uiobjects.example.site.sections.Header.*;
+import static org.mytests.uiobjects.example.site.sections.Header.loginForm;
+import static org.mytests.uiobjects.example.site.sections.Header.userIcon;
 
 
 public class FormsTests extends SimpleTestsInit {

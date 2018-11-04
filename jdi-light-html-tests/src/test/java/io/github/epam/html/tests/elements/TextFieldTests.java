@@ -18,45 +18,34 @@ public class TextFieldTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         htmlElementsPage.shouldBeOpened();
-        name.clear();
+        name.setText(text);
     }
     String text = "TextField";
 
     @Test
     public void getTextTest() {
-        name.setText(text);
         assertEquals(name.getText(), text);
     }
 
     @Test
     public void getValueTest() {
-        name.setText(text);
         assertEquals(name.getValue(), text);
     }
 
     @Test
     public void sendKeysTest() {
-        name.setText(text);
         name.sendKeys("Test");
         assertEquals(name.getValue(), text+"Test");
     }
+
     @Test
     public void inputTest() {
-        name.setText(text);
         name.input("New text");
         assertEquals(name.getText(), "New text");
     }
 
     @Test
-    public void setValueTest() {
-        name.setText(text);
-        name.setValue("New text");
-        assertEquals(name.getText(), "New text");
-    }
-
-    @Test
     public void clearTest() {
-        name.setText(text);
         name.clear();
         assertEquals(name.getText(), "");
     }
@@ -68,8 +57,15 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void disabledTest() {
-        disabledName.setText(text);
-        assertEquals(name.getText(), "");
+        try {
+            disabledName.sendKeys(text);
+        } catch (Exception ignore) {}
+        assertEquals(disabledName.getText(), "");
+
+        try {
+            disabledName.input(text);
+        } catch (Exception ignore) {}
+        assertEquals(disabledName.getText(), "");
     }
 
     @Test
@@ -79,7 +75,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
-        name.setText(text);
         name.is().text(is(text));
         name.is().text(containsString("Field"));
     }
@@ -93,7 +88,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void assertValidationTest() {
-        name.setText(text);
         name.assertThat().text(is(text));
     }
 

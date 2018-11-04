@@ -17,17 +17,15 @@ public class HtmlElementsPage extends WebPage {
     // @Css("input[type=button].red") public static Button redButton;
     @Css("[value*='Disabled Button']") public static Button disabledButtonInput;
     // @Css("input[type=button][disabled]") public static Button disabledButtonInput;
-    public static Button blueButton;
+    public static Button blueButton, disabledButton;
     // @Css("#blue-button") public static Button blueButton;
-    public static Button disabledButton;
     // @Css("#disabled-button") public static Button disabledButton;
 
     public static Link githubLink;
     // @Css("[ui=github-link]") public static Link gitHubLink;
 
-    public static TextField name;
+    public static TextField name, disabledName;
     // @Css("#name") public static TextField name;
-    public static TextField disabledName;
     // @Css("#disabled-name") public static TextField disabledName;
 
     public static TextArea textArea;
@@ -37,9 +35,30 @@ public class HtmlElementsPage extends WebPage {
     public static FileInput avatar;
     // @Css("#avatar") public static FileInput avatar;
     @Css("input[type=file][disabled]") public static FileInput disabledFileInput;
+    @Css("[download]") public static Link downloadJdiLogo;
 
     public static Image jdiLogo;
     // @Css("#jdi-logo") public static Image jdiLogo;
+
+    public static ColorPicker colorPicker;
+    @Css("#disabled-picker") public static ColorPicker disabledPicker;
+
+    public static Range volume;
+    // @Css("#volume") public static Range volume;
+    @Css("[type=range][disabled]") public static Range disabledRange;
+
+    public static ProgressBar progress;
+    // @Css("#progress") public static ProgressBar progress;
+
+    public static DateTimeSelector birthDate, monthDate, partyTime, bookingTime, autumnWeek;
+    // @Css("#birth-date") public static DateTimeSelector birthDate;
+    // @Css("#month-date") public static DateTimeSelector monthDate;
+    // @Css("#party-date") public static DateTimeSelector partyTime;
+    // @Css("#booking-date") public static DateTimeSelector bookingTime;
+    // @Css("#autumn-week") public static DateTimeSelector autumnWeek;
+
+    public static NumberSelector height;
+    // @Css("#height") public static NumberSelector height;
 
     //endregion
 
@@ -70,34 +89,6 @@ public class HtmlElementsPage extends WebPage {
 
     // TODO NEED VERIFICATION
     public static RadioButtons colors;
-
-    public static ColorPicker colorPicker;
-    @Css("#disabled-picker") public static ColorPicker disabledPicker;
-
-    public static Range volume;
-    // @Css("#volume") public static Range volume;
-    @Css("[type=range][disabled]") public static Range disabledRange;
-
-    public static ProgressBar progress;
-    // @Css("#progress") public static ProgressBar progress;
-
-    public static DateTimeSelector birthDate;
-    // @Css("#birth-date") public static DateTimeSelector birthDate;
-
-    public static DateTimeSelector monthDate;
-    // @Css("#month-date") public static DateTimeSelector monthDate;
-
-    public static DateTimeSelector partyTime;
-    // @Css("#party-date") public static DateTimeSelector partyTime;
-
-    public static DateTimeSelector bookingTime;
-    // @Css("#booking-date") public static DateTimeSelector bookingTime;
-
-    public static DateTimeSelector autumnWeek;
-    // @Css("#autumn-week") public static DateTimeSelector autumnWeek;
-
-    public static NumberSelector height;
-    // @Css("#height") public static NumberSelector height;
 
     //endregion
 

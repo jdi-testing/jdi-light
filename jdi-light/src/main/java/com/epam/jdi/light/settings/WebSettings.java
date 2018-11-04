@@ -5,8 +5,6 @@ package com.epam.jdi.light.settings;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.driver.WebDriverByUtils;
-import com.epam.jdi.light.driver.WebDriverUtils;
 import com.epam.jdi.light.driver.get.DriverData;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
@@ -25,7 +23,6 @@ import java.util.Properties;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
-import static com.epam.jdi.light.driver.WebDriverUtils.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;

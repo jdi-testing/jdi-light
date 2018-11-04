@@ -16,6 +16,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
 import java.awt.*;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +36,8 @@ import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
 
 public class DriverData {
     public static final String PROJECT_PATH = path("");
-    public static String SRC_PATH = mergePath(PROJECT_PATH,"main");
-    public static String TEST_PATH = mergePath(PROJECT_PATH, "test");
+    public static String SRC_PATH = mergePath(PROJECT_PATH,"src", "main");
+    public static String TEST_PATH = mergePath(PROJECT_PATH, "src" ,"test");
     public static String LOGS_PATH = mergePath(TEST_PATH, ".logs");
     public static String DRIVERS_FOLDER = mergePath(SRC_PATH,"resources", "drivers");
     public static String DOWNLOADS_DIR = mergePath(TEST_PATH, "resources", "downloads");
@@ -98,6 +99,7 @@ public class DriverData {
     public static JFunc<Capabilities> CHROME_OPTIONS = () -> {
         HashMap<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("credentials_enable_service", false);
+        new File(DOWNLOADS_DIR).mkdirs();
         chromePrefs.put("download.default_directory", DOWNLOADS_DIR);
         chromePrefs.put("profile.default_content_setting_values.notifications", 0);
         chromePrefs.put("profile.default_content_settings.popups", 0);

@@ -2,16 +2,11 @@ package org.mytests.uiobjects.example.site;
 
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import io.qameta.allure.Step;
-import org.mytests.uiobjects.example.entities.User;
 import org.mytests.uiobjects.example.site.pages.ContactFormPage;
 import org.mytests.uiobjects.example.site.pages.HomePage;
 import org.mytests.uiobjects.example.site.pages.JDIPerformancePage;
 import org.mytests.uiobjects.example.site.sections.Header;
-import org.mytests.uiobjects.example.site.sections.LoginForm;
 import org.openqa.selenium.WebElement;
 
 @JSite("https://epam.github.io/JDI/")

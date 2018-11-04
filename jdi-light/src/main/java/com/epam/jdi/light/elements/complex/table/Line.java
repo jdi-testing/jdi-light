@@ -9,7 +9,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.PrintUtils.print;
 
 public class Line implements IList<String> {
     private List<String> elements;

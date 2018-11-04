@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.LocatorType;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -40,6 +41,7 @@ public class JDIBase extends DriverBase implements INamed {
     protected CacheValue<WebElement> webElement = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
     public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
+    public static Timer timer () { return new Timer(TIMEOUT*1000); }
     public UIElement setWebElement(WebElement el) {
         webElement.setForce(el);
         return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();

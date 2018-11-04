@@ -14,5 +14,4 @@ public interface Link extends BaseElement {
 
     LinkAssert is();
     LinkAssert assertThat();
-
 }

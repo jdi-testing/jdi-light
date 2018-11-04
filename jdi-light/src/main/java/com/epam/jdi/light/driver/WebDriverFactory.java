@@ -16,7 +16,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_SETTINGS;
 import static com.epam.jdi.light.driver.get.DriverInfos.*;

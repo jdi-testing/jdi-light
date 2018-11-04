@@ -49,13 +49,6 @@ public class TextAreaTests extends TestsInit {
     }
 
     @Test
-    public void setValueTest() {
-        textArea.setText(text);
-        textArea.setValue("New text");
-        assertEquals(textArea.getText(), "New text");
-    }
-
-    @Test
     public void getLinesTest() {
         textArea.setLines("test 1", "test 2", "test 3");
         assertEquals(textArea.getLines(), asList("test 1", "test 2", "test 3"));
