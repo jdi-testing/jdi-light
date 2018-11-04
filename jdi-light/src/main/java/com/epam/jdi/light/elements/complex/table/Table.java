@@ -80,22 +80,22 @@ public class Table extends JDIBase implements ISetup, HasValue {
     @JDIAction
     public List<Line> filterRows(Matcher<String> matcher, Column column) {
         return filter(rows(),
-                line -> matcher.matches(line.get(column.num)));
+                line -> matcher.matches(line.get(column.getIndex(header()))));
     }
     @JDIAction
     public List<Line> filterRows(Pair<Matcher<String>, Column>... matchers) {
         return filter(rows(), line ->
-            all(matchers, m -> m.key.matches(line.get(m.value.num))));
+            all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header())))));
     }
     @JDIAction
     public Line row(Matcher<String> matcher, Column column) {
         return first(rows(),
-                line -> matcher.matches(line.get(column.num)));
+                line -> matcher.matches(line.get(column.getIndex(header()))));
     }
     @JDIAction
     public Line row(Pair<Matcher<String>, Column>... matchers) {
         return first(rows(), line ->
-                all(matchers, m -> m.key.matches(line.get(m.value.num))));
+                all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header())))));
     }
 
     private int getColIndexByName(String colName) {
@@ -161,8 +161,11 @@ public class Table extends JDIBase implements ISetup, HasValue {
         return value;
     }
 
-    public TableAssert assertThat() {
+    public TableAssert is() {
         return new TableAssert(this);
+    }
+    public TableAssert assertThat() {
+        return is();
     }
 
 }

@@ -4,38 +4,23 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-html</artifactId>
     <name>JDI Light Html Elements</name>
     <packaging>jar</packaging>
-    <version>1.0.4</version>
+    <version>1.0.10</version>
 
-    <!--properties>
-        <project.build.sourceEncoding>utf8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>utf8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <aspectj.version>1.8.3</aspectj.version>
-    </properties-->
+    <parent>
+        <groupId>com.epam.jdi</groupId>
+        <version>1.0.10</version>
+        <artifactId>jdi-2</artifactId>
+    </parent>
 
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.10</version>
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

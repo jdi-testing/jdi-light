@@ -9,4 +9,5 @@ import com.epam.jdi.light.ui.html.common.Title;
 
 public interface HasLabel {
     Title label();
+    String labelText();
 }

@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -136,6 +136,10 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
     }
 
     public Title label() {
-        return (Title) $("[for="+getAttribute("ïd")+"]");
+        return $("[for="+getAttribute("id")+"]");
+    }
+
+    public String labelText() {
+        return label().getText();
     }
 }

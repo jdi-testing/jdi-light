@@ -13,6 +13,8 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.searchBy;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static io.github.com.StaticSite.contactFormPage;
+import static io.github.com.StaticSite.navigationL;
+import static io.github.epam.enums.Navigation.Service;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
@@ -35,7 +37,8 @@ public class PathTests extends StaticTestsInit {
         assertEquals(bys.size(), 2);
         assertEquals(getElement(bys).findElement(By.xpath("..")).getText(), "Last Name");
 
-        bys = searchBy(By.cssSelector(".sidebar-menu>li[3][ui='label'][2]span"));
+        navigationL.select(Service);
+        bys = searchBy(By.cssSelector(".sidebar-menu>li[3]li[ui='label'][2]span"));
         assertEquals(bys.size(), 5);
         assertEquals(getElement(bys).getText(), "Dates");
 

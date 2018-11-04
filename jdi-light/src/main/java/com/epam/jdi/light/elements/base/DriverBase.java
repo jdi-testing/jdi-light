@@ -29,6 +29,10 @@ public class DriverBase {
         return (T) this;
     }
 
+    public UIElement setName(String name) {
+        this.name = name;
+        return (UIElement) this;
+    }
     public void setName(String varName, String className) {
         this.name = splitCamelCase(varName);
         this.varName = className + "." + varName;

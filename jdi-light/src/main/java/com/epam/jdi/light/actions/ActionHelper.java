@@ -14,10 +14,10 @@ import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
+import io.qameta.allure.Step;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import ru.yandex.qatools.allure.annotations.Step;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -25,8 +25,8 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.JDIStrings.DEFAULT_TEMPLATE;
-import static com.epam.jdi.light.common.JDIStrings.SHORT_TEMPLATE;
+import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
+import static com.epam.jdi.light.elements.base.OutputTemplates.SHORT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.LogLevels.*;

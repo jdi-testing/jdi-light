@@ -5,3 +5,5 @@ target/
 *.exe
 .logs/
 *.xlsx
+.DS_Store
+allure-results/

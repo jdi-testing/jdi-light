@@ -5,101 +5,90 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.ui.html.common.*;
 import com.epam.jdi.light.ui.html.complex.*;
 
-import java.util.List;
-
 public class HtmlElementsPage extends WebPage {
     //region Simple Elements
 
-    public Title jdiTitle;
-    // @Css("[ui=jdi-title]") public Title jdiTitle;
-	public Text jdiText;
-	// @Css("[ui=jdi-text]") public Text jdiText;
+    public static Title jdiTitle;
+    // @Css("[ui=jdi-title]") public static Title jdiTitle;
+	public static Text jdiText;
+	// @Css("[ui=jdi-text]") public static Text jdiText;
 
-    @Css("[value*='Red Button']") public Button redButton;
-    // @Css("input[type=button].red") public Button redButton;
-    @Css("[value*='Disabled Button']") public Button disabledButtonInput;
-    // @Css("input[type=button][disabled]") public Button disabledButtonInput;
-    public Button blueButton;
-    // @Css("#blue-button") public Button blueButton;
-    public Button disabledButton;
-    // @Css("#disabled-button") public Button disabledButton;
+    @Css("[value*='Red Button']") public static Button redButton;
+    // @Css("input[type=button].red") public static Button redButton;
+    @Css("[value*='Disabled Button']") public static Button disabledButtonInput;
+    // @Css("input[type=button][disabled]") public static Button disabledButtonInput;
+    public static Button blueButton, disabledButton;
+    // @Css("#blue-button") public static Button blueButton;
+    // @Css("#disabled-button") public static Button disabledButton;
 
-    public Link githubLink;
-    // @Css("[ui=github-link]") public Link gitHubLink;
+    public static Link githubLink;
+    // @Css("[ui=github-link]") public static Link gitHubLink;
 
-    public TextField name;
-    // @Css("#name") public TextField name;
-    public TextField disabledName;
-    // @Css("#disabled-name") public TextField disabledName;
+    public static TextField name, disabledName;
+    // @Css("#name") public static TextField name;
+    // @Css("#disabled-name") public static TextField disabledName;
 
-    public TextArea textArea;
-    // @Css("#text-area") public TextArea textArea;
-    @Css("textarea[disabled]") public TextArea disabledTextArea;
+    public static TextArea textArea;
+    // @Css("#text-area") public static TextArea textArea;
+    @Css("textarea[disabled]") public static TextArea disabledTextArea;
 
-    public FileInput avatar;
-    // @Css("#avatar") public FileInput avatar;
-    @Css("input[type=file][disabled]") public FileInput disabledFileInput;
+    public static FileInput avatar;
+    // @Css("#avatar") public static FileInput avatar;
+    @Css("input[type=file][disabled]") public static FileInput disabledFileInput;
+    @Css("[download]") public static Link downloadJdiLogo;
 
-    public Image jdiLogo;
-    // @Css("#jdi-logo") public Image jdiLogo;
+    public static Image jdiLogo;
+    // @Css("#jdi-logo") public static Image jdiLogo;
+
+    public static ColorPicker colorPicker;
+    @Css("#disabled-picker") public static ColorPicker disabledPicker;
+
+    public static Range volume;
+    // @Css("#volume") public static Range volume;
+    @Css("[type=range][disabled]") public static Range disabledRange;
+
+    public static ProgressBar progress;
+    // @Css("#progress") public static ProgressBar progress;
+
+    public static DateTimeSelector birthDate, monthDate, partyTime, bookingTime, autumnWeek;
+    // @Css("#birth-date") public static DateTimeSelector birthDate;
+    // @Css("#month-date") public static DateTimeSelector monthDate;
+    // @Css("#party-date") public static DateTimeSelector partyTime;
+    // @Css("#booking-date") public static DateTimeSelector bookingTime;
+    // @Css("#autumn-week") public static DateTimeSelector autumnWeek;
+
+    public static NumberSelector height;
+    // @Css("#height") public static NumberSelector height;
 
     //endregion
 
     //region Complex Elements
     // TODO add Enum
 
-    public Dropdown dressCode;
-    // @Css("#dress-code") public Dropdown dressCode;
-    @Css("#disabled-dropdown") public Dropdown disabledDropdown;
+    public static Dropdown dressCode;
+    // @Css("#dress-code") public static Dropdown dressCode;
+    @Css("#disabled-dropdown") public static Dropdown disabledDropdown;
 
-    public MultiSelect ages;
-    // @Css("#ages") public MultiSelect ages;
+    public static MultiSelect ages;
+    // @Css("#ages") public static MultiSelect ages;
 
     // TODO Multi Dropdown ?
-    public MultiSelect multiDropdown;
-    // @Css("#multi-dropdown") public MultiSelect multiDropdown;
+    public static MultiSelect multiDropdown;
+    // @Css("#multi-dropdown") public static MultiSelect multiDropdown;
 
-    public Combobox iceCream;
-    // @Css("#ice-cream") public Combobox iceCream;
-    @Css("#ice-cream") public DataList iceCreamDataList;
+    public static Combobox iceCream;
+    // @Css("#ice-cream") public static Combobox iceCream;
+    @Css("#ice-cream") public static DataList iceCreamDataList;
 
-    public Checkbox acceptConditions;
-    // @Css("#accept-conditions") public Checkbox acceptConditions;
-
-    // TODO NEED VERIFICATION
-    public List<Checkbox> checkboxList;
-    public Checklist checklist;
+    public static Checkbox acceptConditions;
+    // @Css("#accept-conditions") public static Checkbox acceptConditions;
 
     // TODO NEED VERIFICATION
-    public RadioButtons colors;
+    // TODO UNCOMMENT public static List<Checkbox> checkboxList;
+    public static Checklist checklist;
 
-    public ColorPicker colorPicker;
-    @Css("#disabled-picker") public ColorPicker disabledPicker;
-
-    public Range volume;
-    // @Css("#volume") public Range volume;
-    @Css("[type=range][disabled]") public Range disabledRange;
-
-    public ProgressBar progress;
-    // @Css("#progress") public ProgressBar progress;
-
-    public DateTimeSelector birthDate;
-    // @Css("#birth-date") public DateTimeSelector birthDate;
-
-    public DateTimeSelector monthDate;
-    // @Css("#month-date") public DateTimeSelector monthDate;
-
-    public DateTimeSelector partyTime;
-    // @Css("#party-date") public DateTimeSelector partyTime;
-
-    public DateTimeSelector bookingTime;
-    // @Css("#booking-date") public DateTimeSelector bookingTime;
-
-    public DateTimeSelector autumnWeek;
-    // @Css("#autumn-week") public DateTimeSelector autumnWeek;
-
-    public NumberSelector height;
-    // @Css("#height") public NumberSelector height;
+    // TODO NEED VERIFICATION
+    public static RadioButtons colors;
 
     //endregion
 

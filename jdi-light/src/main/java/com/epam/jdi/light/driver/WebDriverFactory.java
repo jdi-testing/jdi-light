@@ -16,7 +16,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverUtils.killAllRunWebBrowsers;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_SETTINGS;
 import static com.epam.jdi.light.driver.get.DriverInfos.*;
@@ -29,6 +28,7 @@ import static com.epam.jdi.tools.switcher.SwitchActions.Value;
 import static java.lang.String.format;
 import static java.lang.Thread.currentThread;
 import static java.util.Objects.nonNull;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class WebDriverFactory {
@@ -45,12 +45,10 @@ public class WebDriverFactory {
 
     // REGISTER DRIVER
     public static String useDriver(JFunc<WebDriver> driver) {
-
         return useDriver("Driver" + (drivers.size() + 1), driver);
     }
 
     public static String useDriver(String driverName) {
-
         return useDriver(getByName(driverName));
     }
 
@@ -100,7 +98,7 @@ public class WebDriverFactory {
 
     public static WebDriver getDriver() {
         try {
-            if (!DRIVER_NAME.equals(""))
+            if (isNotBlank(DRIVER_NAME))
                 return getDriver(DRIVER_NAME);
             useDriver(CHROME);
             return getDriver(CHROME.name);
@@ -184,7 +182,6 @@ public class WebDriverFactory {
         } else {
             throw exception("None Driver has been found for current thread. Probably Fixture configuration is wrong.");
         }
-        killAllRunWebBrowsers();
     }
 
     public static void quit() {

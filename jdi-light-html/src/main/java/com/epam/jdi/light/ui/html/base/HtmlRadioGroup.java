@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.util.Arrays.asList;

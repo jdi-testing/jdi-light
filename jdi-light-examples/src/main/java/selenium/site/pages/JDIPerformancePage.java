@@ -2,11 +2,11 @@ package selenium.site.pages;
 
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.table.FastTable;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -14,19 +14,7 @@ import java.util.List;
 @Url("/performance.html")
 public class JDIPerformancePage extends WebPage {
     //Table
-    @FindBy(id = "users-table") public WebElement table;
-
-    // TODO Add Tables
-    public WebElement getUser(String name, String email) {
-        List<WebElement> rows = table.findElements(By.tagName("tr"));
-        for (WebElement row : rows) {
-            List<WebElement> columns = row.findElements(By.tagName("td"));
-            if (columns.size() == 4 && columns.get(0).getText().contains(name) &&
-                columns.get(2).getText().contains(email))
-                return row;
-        }
-        return null;
-    }
+    public static FastTable usersTable;
 
     // Dropdown
     @Css("#user-names option")

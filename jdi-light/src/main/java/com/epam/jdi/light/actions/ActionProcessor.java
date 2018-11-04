@@ -16,7 +16,7 @@ public class ActionProcessor {
 
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { }
-    @Pointcut("execution(* *(..)) && @annotation(ru.yandex.qatools.allure.annotations.Step)")
+    @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() { }
 
     @Before("jdiPointcut()")
