@@ -200,8 +200,9 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
     }
 
     @JDIAction
-    public void select(String name) {
-        get(name).click();
+    public void select(String... names) {
+        for (String name : names)
+            get(name).click();
     }
     @JDIAction
     public <TEnum extends Enum> void select(TEnum name) {

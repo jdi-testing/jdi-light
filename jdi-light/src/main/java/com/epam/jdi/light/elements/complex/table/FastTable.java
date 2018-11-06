@@ -1,9 +1,16 @@
 package com.epam.jdi.light.elements.complex.table;
 
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.WebDriverByUtils;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.pairs.Pair;
+import org.apache.commons.lang3.StringUtils;
+import org.hamcrest.Matcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -13,12 +20,14 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByMsgTemplate;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
+import static com.epam.jdi.light.elements.complex.table.TableMatchers.GET_ROW;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.tools.LinqUtils.listEquals;
-import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static java.lang.String.format;
 
 public class FastTable extends Table {
     protected By cellLocator;
@@ -54,6 +63,14 @@ public class FastTable extends Table {
         return $(fillByMsgTemplate(cellLocator, colNum, getRowIndex(rowNum), this));
     }
 
+    @JDIAction
+    public Line row(TableMatchers... matchers) {
+        String locator = format(GET_ROW, print(map(matchers, m ->
+            m.getLocator(this) + "/.."),""));
+        return new Line($$(locator, this));
+    }
+
+// //*[@id='users-table']//td[1][contains(text(),'Brock')]/../td[4][contains(text(),'Alco')]/..
     public List<WebElement> webRow(int rowNum) {
         if (!rows.has(rowNum+"")) {
             if (gotTable)

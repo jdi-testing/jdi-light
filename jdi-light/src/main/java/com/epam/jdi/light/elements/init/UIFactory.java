@@ -25,6 +25,9 @@ public class UIFactory {
     public static UIElement $(String locator) {
         return element(locator);
     }
+    public static UIElement $(String locator, Object parent) {
+        return element(locator).setParent(parent);
+    }
     public static UIElement $(By locator) {
         return element(locator);
     }
@@ -42,6 +45,9 @@ public class UIFactory {
     }
     public static WebList $$(String locator) {
         return list(locator);
+    }
+    public static WebList $$(String locator, Object parent) {
+        return list(locator).setParent(parent);
     }
     public static WebList $$(By locator) {
         return list(locator);

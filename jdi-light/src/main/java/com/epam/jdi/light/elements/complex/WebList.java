@@ -12,6 +12,7 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -28,8 +29,9 @@ public class WebList extends JDIBase implements IList<WebElement>, SetValue {
     private CacheValue<List<WebElement>> webElements = new CacheValue<>();
 
     @JDIAction
-    public void select(String name) {
-        get(name).click();
+    public void select(String... names) {
+        for (String name : names)
+            get(name).click();
     }
     public <TEnum extends Enum> void select(TEnum name) {
         select(getEnumValue(name));

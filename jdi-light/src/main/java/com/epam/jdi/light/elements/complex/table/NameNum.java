@@ -28,6 +28,6 @@ public class NameNum extends DataClass<NameNum> {
     }
     public int getIndex(List<String> headers) {
         return !hasName() ? num  : firstIndex(headers,
-                h -> equalsIgnoreCase(h, name));
+                h -> equalsIgnoreCase(h, name))+1;
     }
 }
