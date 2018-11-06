@@ -10,7 +10,12 @@ import java.util.List;
 public interface MultiSelect extends BaseSelector, HasLabel {
     void check(String... values);
     <TEnum extends Enum> void check(TEnum... values);
+    void check(int... values);
+
+    void uncheck(String... values);
+    <TEnum extends Enum> void uncheck(TEnum... values);
     void uncheck(int... indexes);
+
     List<String> checked();
 
 }

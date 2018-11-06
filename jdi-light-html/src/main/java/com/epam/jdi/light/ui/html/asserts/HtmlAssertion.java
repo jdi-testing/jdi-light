@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.is;
 
 public class HtmlAssertion extends IsAssert implements ImageAssert, TextAssert,
         LinkAssert, TextAreaAssert, ColorAssert, CheckboxAssert, DateTimeAssert,
-        RangeAssert, NumberAssert {
+        RangeAssert, NumberAssert, ProgressAssert {
 
     HtmlElement html;
     public HtmlAssertion(HtmlElement html) { super(html); this.html = html; }

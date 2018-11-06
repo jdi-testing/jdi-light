@@ -38,7 +38,7 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
      * @param index int to search
      */
     public void select(int index) {
-        select().selectByIndex(index);
+        select().selectByIndex(index-1);
     }
 
     /**
@@ -76,7 +76,7 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
     public void check(int... values) {
         select().deselectAll();
         for (int index : values)
-            select().selectByIndex(index);
+            select(index);
     }
 
     /**
@@ -110,7 +110,8 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
         return map(select().getOptions(), WebElement::getText);
     }
 
-    public List<String> enabled() { return ifSelect(getUI().find("option").allUI(),
+    public List<String> enabled() {
+        return ifSelect(getUI().find("option").allUI(),
             UIElement::isEnabled, UIElement::getText);
     }
     public List<String> disabled() { return ifSelect(getUI().find("option").allUI(),

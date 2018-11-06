@@ -5,14 +5,17 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class BaseValidations {
 
-    static void baseValidation(BaseElement el) {
+    public static void baseValidation(BaseElement el) {
         el.hover();
-        assertEquals(el.isEnabled(), true);
-        assertEquals(el.isDisplayed(), true);
+        assertTrue(el.isEnabled());
+        assertTrue(el.isDisplayed());
+        assertFalse(el.isDisabled());
+        assertFalse(el.isHidden());
         Point location = el.getLocation();
         assertTrue(location.x > 0 && location.y > 0, "Location: " + location);
         Dimension size = el.getSize();
