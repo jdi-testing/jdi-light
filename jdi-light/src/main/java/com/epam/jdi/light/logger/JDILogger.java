@@ -8,6 +8,7 @@ package com.epam.jdi.light.logger;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
+import io.qameta.allure.model.StepResult;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
@@ -15,9 +16,12 @@ import org.apache.logging.log4j.MarkerManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.StringUtils.format;
+import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
+import static io.qameta.allure.model.Status.PASSED;
 import static java.lang.Thread.currentThread;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
@@ -25,6 +29,7 @@ import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
 public class JDILogger implements ILogger {
     private static MapArray<String, JDILogger> loggers = new MapArray<>();
     private static Marker jdiMarker = MarkerManager.getMarker("JDI");
+    public static boolean writeToAllure = true;
 
     public static JDILogger instance(String name) {
         if (!loggers.has(name))
@@ -92,36 +97,50 @@ public class JDILogger implements ILogger {
     private String name;
     private Logger logger;
     private List<Long> multiThread = new ArrayList<>();
-    private String getRecord(String record) {
+    private String getRecord(String record, Object... args) {
         if (!multiThread.contains(currentThread().getId()))
             multiThread.add(currentThread().getId());
-        return multiThread.size() > 1
+        return format(multiThread.size() > 1
                 ? "[" + currentThread().getId() + "]" + record
-                : record;
+                : record, args);
     }
 
     public String getName() {
         return name;
     }
 
-    public void step(String s, Object... args) {
-        if (logLevel.equalOrLessThan(STEP))
-            logger.log(Level.forName("STEP", 350), jdiMarker, getRecord(format(s, args)));
+    private static void writeToAllure(String message) {
+        if (!writeToAllure) return;
+        final String uuid = UUID.randomUUID().toString();
+        StepResult step = new StepResult().withName(message).withStatus(PASSED);
+        getLifecycle().startStep(uuid, step);
+        getLifecycle().stopStep(uuid);
     }
+
+    public void step(String s, Object... args) {
+        if (logLevel.equalOrLessThan(STEP)) {
+            logger.log(Level.forName("STEP", 350), jdiMarker, getRecord(s, args));
+            writeToAllure(getRecord(s, args));
+        }
+    }
+
     public void trace(String s, Object... args) {
-        if (logLevel.equalOrLessThan(TRACE))
-            logger.trace(jdiMarker, getRecord(format(s, args)));
+        if (logLevel.equalOrLessThan(TRACE)) {
+            logger.trace(jdiMarker, getRecord(s, args));
+        }
     }
     public void debug(String s, Object... args) {
-        if (logLevel.equalOrLessThan(DEBUG))
-            logger.debug(jdiMarker, getRecord(format(s, args)));
+        if (logLevel.equalOrLessThan(DEBUG)) {
+            logger.debug(jdiMarker, getRecord(s, args));
+        }
     }
     public void info(String s, Object... args) {
-        if (logLevel.equalOrLessThan(INFO))
-            logger.info(jdiMarker, getRecord(format(s, args)));
+        if (logLevel.equalOrLessThan(INFO)) {
+            logger.info(jdiMarker, getRecord(s, args));
+        }
     }
     public void error(String s, Object... args) {
-        logger.error(jdiMarker, getRecord(format(s, args)));
+        logger.error(jdiMarker, getRecord(s, args));
     }
 
     public void toLog(String msg) {

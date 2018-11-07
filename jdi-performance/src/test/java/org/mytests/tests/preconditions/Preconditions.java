@@ -3,7 +3,6 @@ package org.mytests.tests.preconditions;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 import org.mytests.uiobjects.example.entities.User;
-import org.mytests.uiobjects.example.site.SiteJdi;
 
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
 
