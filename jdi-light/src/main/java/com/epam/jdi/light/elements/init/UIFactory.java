@@ -13,7 +13,7 @@ public class UIFactory {
         return element(getLocator(locator));
     }
     public static UIElement element(By byLocator) {
-        UIElement el =  new UIElement();
+        UIElement<UIElement> el =  new UIElement<>();
         el.setLocator(byLocator);
         return el;
     }

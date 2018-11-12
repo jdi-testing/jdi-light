@@ -47,7 +47,7 @@ public class DropdownTests extends TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(dressCode.selected(), "Casual");
+        assertEquals(dressCode.selected(), text);
     }
 
     @Test

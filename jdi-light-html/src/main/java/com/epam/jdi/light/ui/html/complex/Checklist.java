@@ -7,7 +7,16 @@ import java.util.List;
 public interface Checklist extends BaseSelector {
     void check(String... values);
     <TEnum extends Enum> void check(TEnum... values);
-    void uncheck(int... indexes);
-    List<String> checked();
+    void check(int... values);
 
+    void uncheck(String... values);
+    <TEnum extends Enum> void uncheck(TEnum... values);
+    void uncheck(int... indexes);
+
+    void select(String... value);
+    <TEnum extends Enum> void select(TEnum... value);
+    void select(int... index);
+    String selected();
+
+    List<String> checked();
 }

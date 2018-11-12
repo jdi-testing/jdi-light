@@ -6,9 +6,11 @@ import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.ReflectionUtils;
 import com.epam.jdi.tools.func.JAction3;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -21,6 +23,7 @@ import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
+import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getFields;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
@@ -57,14 +60,15 @@ public class Form<T> extends Section {
      */
     @JDIAction("Fill form: {0}")
     public void fill(MapArray<String, String> map) {
-        for (Field field : allFields())
+        List<Field> allFields = allFields();
+        Field setField = null;
+        for (Pair<String, String> pair : map)
             try {
-                String setValue = map.first((name, value) ->
-                    namesEqual(name, getElementName(field)));
-                if (setValue == null)
+                setField = first(allFields, f -> namesEqual(pair.key, getElementName(f)));
+                if (setField == null)
                     continue;
-                FILL_ACTION.execute(field, this, setValue);
-            } catch (Exception ex) { throw exception("Can't fill element %s. Exception: %s", field.getName(), ex.getMessage()); }
+                FILL_ACTION.execute(setField, this, pair.value);
+            } catch (Exception ex) { throw exception("Can't fill element '%s'. Exception: %s", setField != null ? setField.getName() : "UNKNOWN FIELD", ex.getMessage()); }
         setFilterAll();
     }
     public List<Field> allFields() {

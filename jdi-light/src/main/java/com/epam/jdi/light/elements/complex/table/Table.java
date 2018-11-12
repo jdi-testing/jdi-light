@@ -3,7 +3,9 @@ package com.epam.jdi.light.elements.complex.table;
 import com.epam.jdi.light.asserts.TableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
 import com.epam.jdi.tools.CacheValue;
@@ -14,29 +16,33 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.TableAssert.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
+import static com.epam.jdi.light.elements.complex.table.TableMatchers.GET_ROW;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 
 public class Table extends JDIBase implements ISetup, HasValue {
     protected By rowsLocator = By.cssSelector("tr");
     protected By columnsLocator = By.cssSelector("td");
     protected By headerLocator = By.cssSelector("th");
-    public CacheValue<List<String>> header = new CacheValue<>(() -> select($$(headerLocator, this), WebElement::getText));
+    public CacheValue<List<String>> header = new CacheValue<>(() -> select($$(headerLocator, this), UIElement::getText));
     public CacheValue<Integer> size = new CacheValue<>(() -> header.get().size());
-    public CacheValue<List<WebElement> > rows = new CacheValue<>(() -> {
+    public CacheValue<List<UIElement> > rows = new CacheValue<>(() -> {
         List<WebElement> value = uiSearch(get(),rowsLocator);
         if (uiSearch(value.get(0),columnsLocator).size() == 0 && uiSearch(value.get(1),columnsLocator).size() != 0)
             value.remove(0);
-        return value;
+        return map(value, UIElement::new);
     });
 
     public CacheValue<Integer> count = new CacheValue<>(() -> rows.get().size());
@@ -51,21 +57,49 @@ public class Table extends JDIBase implements ISetup, HasValue {
         return header.getForce();
     }
 
-    public List<WebElement> webRow(int rowNum) {
-        return uiSearch(rows.get().get(rowNum-1), columnsLocator);
+    public List<UIElement> webRow(int rowNum) {
+        return map(uiSearch(rows.get().get(rowNum-1), columnsLocator), UIElement::new);
     }
     @JDIAction
     public Line row(int rowNum) {
         return new Line(webRow(rowNum));
     }
-    public List<WebElement> webColumn(int colNum) {
-        return select(rows.get(), r -> uiSearch(r,columnsLocator).get(colNum-1));
+    public List<UIElement> webColumn(int colNum) {
+        return map(rows.get(), r -> new UIElement(uiSearch(r,columnsLocator).get(colNum-1)));
     }
+    @JDIAction
+    public Line row(TableMatchers... matchers) {
+        WebList lines = getMatchLines(this, matchers);
+        if (lines == null || lines.size() == 0)
+            return null;
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < header().size(); i++)
+            result.add(lines.get(i).getText());
+        return new Line(() -> result);
+    }
+
+    @JDIAction
+    public List<Line> rows(TableMatchers... matchers) {
+        List<String> lines = getMatchLines(this, matchers).values();
+        if (lines == null || lines.size() == 0)
+            return null;
+        List<Line> listOfLines = new ArrayList<>();
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i <lines.size(); i++) {
+            result.add(lines.get(i));
+            if (result.size() == header().size()) {
+                listOfLines.add(new Line(() -> result));
+                result.clear();
+            }
+        }
+        return listOfLines;
+    }
+
     @JDIAction
     public Line column(int colNum) {
         return new Line(webColumn(colNum));
     }
-    public List<WebElement> webColumn(String colName) {
+    public List<UIElement> webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
     }
     @JDIAction
@@ -75,7 +109,7 @@ public class Table extends JDIBase implements ISetup, HasValue {
 
     @JDIAction
     public List<Line> rows() {
-        return map(rows.get(), r -> new Line(uiSearch(r,columnsLocator)));
+        return map(rows.get(), r -> new Line(r.finds(columnsLocator)));
     }
     @JDIAction
     public List<Line> filterRows(Matcher<String> matcher, Column column) {
@@ -106,14 +140,14 @@ public class Table extends JDIBase implements ISetup, HasValue {
     }
     public JFunc1<String, String> simplify = STRING_SIMPLIFY;
 
-    public WebElement webCell(int colNum, int rowNum) {
+    public UIElement webCell(int colNum, int rowNum) {
         return webRow(rowNum).get(colNum-1);
     }
     @JDIAction
     public String cell(int colNum, int rowNum) {
         return webCell(colNum, rowNum).getText();
     }
-    public WebElement webCell(String colName, int rowNum) {
+    public UIElement webCell(String colName, int rowNum) {
         return webCell(getColIndexByName(colName), rowNum);
     }
     @JDIAction

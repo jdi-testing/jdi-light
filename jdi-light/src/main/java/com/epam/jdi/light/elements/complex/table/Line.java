@@ -1,8 +1,11 @@
 package com.epam.jdi.light.elements.complex.table;
 
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
+import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -13,10 +16,12 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 public class Line implements IList<String> {
     private List<String> elements;
 
-    public Line(List<WebElement> elements) {
+    public Line(List<UIElement> elements) {
         this.elements = LinqUtils.select(elements, WebElement::getText);
     }
-
+    public Line(JFunc<List<String>> list) {
+        this.elements = list.execute();
+    }
     public List<String> elements() {
         return elements;
     }

@@ -1,9 +1,11 @@
 package com.epam.jdi.light.ui.html.base;
 
+import com.epam.jdi.light.asserts.ListAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.ui.html.complex.Menu;
+import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,13 +13,40 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static java.lang.String.format;
 
-public class HtmlList extends WebList implements Menu {
+public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
+    protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
 
-    @Override @JDIAction
-    public UIElement get(String name) {
+    public HtmlList() {}
+    public HtmlList(List<WebElement> elements) {
+        this.webElements.setForce(elements);
+    }
+
+    public List<HtmlElement> elements() {
+        return LinqUtils.map(webElements.hasValue()
+                ? webElements.get()
+                : webElements.set(getAll()), HtmlElement::new);
+    }
+
+    @JDIAction
+    public void select(String... names) {
+        for (String name : names)
+            get(name).click();
+    }
+    public <TEnum extends Enum> void select(TEnum name) {
+        select(getEnumValue(name));
+    }
+
+    @JDIAction
+
+    public HtmlElement get(String name) {
         if (getLocator().toString().contains("%s"))
-            return getUI(name);
+            return new HtmlElement(super.get(name));
         List<WebElement> elements = getAll();
         if (elements.size() == 1) {
             String tagName = elements.get(0).getTagName();
@@ -27,40 +56,72 @@ public class HtmlList extends WebList implements Menu {
                 case "select" : elements = element.findElements(By.tagName("option")); break;
             }
         }
-        List<UIElement> uiElements = LinqUtils.map(elements,
-            el -> new UIElement().setWebElement(el));
-        UIElement el = LinqUtils.first(uiElements, e -> e.getText().equals(name));
+        List<HtmlElement> htmlElements = LinqUtils.map(elements, HtmlElement::new);
+        HtmlElement el = LinqUtils.first(htmlElements, e -> e.getText().equals(name));
         if (el == null) {
             //el = LinqUtils.first(uiElements, e -> verifyLabel(e, name));
             //if (el == null)
-                throw exception("Can't select '%s'. No elements with this name found");
+            throw exception("Can't select '%s'. No elements with this name found");
         }
         return el;
     }
-//    private boolean verifyLabel(UIElement element, String name) {
-//        List<WebElement> els =  element.find("<label").getAll();
-//        return els.size() == 1 && els.get(0).getText().equals(name);
-//    }
-
-    /**
-     * Gets selected value from list
-     * @return String
-     */
-    public String selected() {
-        List<String> selected = getSelectedOptions();
-        if (selected.size() == 1)
-            return selected.get(0);
-        throw exception("Get selected");
+    @JDIAction
+    public HtmlElement get(Enum name) {
+        return get(getEnumValue(name));
     }
 
-    /**
-     * Gets selected option
-     * @return List String
-     */
-    public List<String> getSelectedOptions() {
-        return LinqUtils.ifSelect(allUI(), UIElement::isSelected, UIElement::getText);
+    @JDIAction
+    public void select(int index) {
+        get(index).click();
+    }
+    public List<String> values() {
+        return LinqUtils.map(elements(), HtmlElement::getText);
+    }
+    @JDIAction(level = DEBUG)
+    public void refresh() {
+        webElements.clear();
+    }
+    @JDIAction(level = DEBUG)
+    public String isSelected() {
+        HtmlElement first = logger.logOff(() ->
+                LinqUtils.first(elements(), HtmlElement::isSelected) );
+        return first != null ? first.getText() : "";
     }
 
-    // TODO locators for ul > li and select > option
-    public List<String> values() { return LinqUtils.map(elements(), WebElement::getText); }
+    @JDIAction(level = DEBUG)
+    public void clear() {
+        webElements.clear();
+    }
+
+    @JDIAction(level = DEBUG)
+    public HtmlElement get(int index) {
+        HtmlElement element = new HtmlElement(elements().get(index));
+        element.name = format("%s[%s]", getName(), index);
+        return element;
+    }
+    public void setValue(String value) {
+        select(value);
+    }
+
+    public String getValue() {
+        return print(values());
+    }
+    @JDIAction
+    public void showAll() {
+        int size;
+        do {
+            size = size();
+            new HtmlElement(get(size-1)).show();
+            clear();
+        } while (size < size());
+    }
+
+    //region matchers
+    public ListAssert is() {
+        return new ListAssert<>(this);
+    }
+    public ListAssert assertThat() {
+        return is();
+    }
+    //endregion
 }

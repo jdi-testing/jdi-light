@@ -12,8 +12,9 @@ import java.util.List;
 public interface BaseSelectorAssert {
     WebElement get();
     String selected();
-    List<String> checked();
+    boolean selected(String value);
     List<String> values();
+    List<String> checked();
     List<String> enabled();
     List<String> disabled();
 }

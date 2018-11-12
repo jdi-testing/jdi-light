@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
@@ -17,6 +18,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.pairs.Pair;
 import com.epam.jdi.tools.pairs.Pairs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,6 +38,7 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.pairs.Pair.$;
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
@@ -68,7 +71,8 @@ public class InitActions {
         return info.instance;
     };
 
-    public static Pairs<JFunc1<Field, Boolean>, JFunc1<SiteInfo, Object>> INIT_RULES = new Pairs<>(
+    public static List<Pair<JFunc1<Field, Boolean>, JFunc1<SiteInfo, Object>>> INIT_RULES = asList(
+        $(f -> isClass(f, Selector.class), info -> new Selector()),
         $(f -> isInterface(f, WebElement.class), info -> new UIElement()),
         $(f -> isClass(f, WebList.class), info -> new WebList()),
         $(f -> isList(f, WebElement.class), info -> new WebList()),
@@ -120,14 +124,14 @@ public class InitActions {
             return findByToBy(field.getAnnotation(WithText.class));
         return null;
     }
-    private static <T> T initSection(SiteInfo info) {
+    public static <T> T initSection(SiteInfo info) {
         try {
             return (T) info.fieldType().newInstance();
         } catch (Exception ex) {
             throw exception("Can't instantiate Section field '%s' on page '%s'", info.field.getName(), info.parentName());
         }
     }
-    private static UIList initJElements(SiteInfo info) {
+    public static UIList initJElements(SiteInfo info) {
         Class<?> genericType = null;
         try {
             genericType = getGenericType(info.field);
@@ -149,11 +153,11 @@ public class InitActions {
         return isClass(type, Section.class) || isClass(type, WebPage.class) ||
             LinqUtils.any(type.getFields(), InitActions::isJDIField);
     }
-    private static boolean isList(Field field, Class<?> type) {
+    public static boolean isList(Field field, Class<?> type) {
         return isInterface(field, List.class)
                 && isInterface(getGenericType(field), type);
     }
-    private static Class<?> getGenericType(Field field) {
+    public static Class<?> getGenericType(Field field) {
         try {
             return (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
         } catch (Exception ex) {

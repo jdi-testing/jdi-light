@@ -13,18 +13,23 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class SelectAssert extends IsAssert {
+public class SelectAssert extends IsAssert implements ComboboxAssert {
 
     BaseSelectorAssert selector;
     public SelectAssert(BaseSelectorAssert selector) {
-        super(new HtmlElement(selector.get())); this.selector = selector;
+        super(getHtml(selector));
+        this.selector = selector;
+    }
+    private static HtmlElement getHtml(BaseSelectorAssert selector) {
+        try { return new HtmlElement(selector.get()); }
+        catch (Exception ignore) { return null; }
     }
 
     public void selected(String option) {
-        assertThat(selector.selected(), is(option));
+        assertThat(selector.selected(option), is(true));
     }
     public <TEnum extends Enum> void selected(TEnum option) {
-        assertThat(selector.selected(), is(getEnumValue(option)));
+        selected(getEnumValue(option));
     }
     public void selected(Matcher<? super List<String>> condition) {
         assertThat(selector.checked(), condition);

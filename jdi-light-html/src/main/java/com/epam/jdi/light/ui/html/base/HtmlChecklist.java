@@ -4,136 +4,171 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.ui.html.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.ui.html.asserts.SelectAssert;
 import com.epam.jdi.light.ui.html.complex.Checklist;
+import com.epam.jdi.tools.EnumUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.ifSelect;
-import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
+import static org.openqa.selenium.By.cssSelector;
 
-public class HtmlChecklist extends UIElement implements BaseSelectorAssert, Checklist {
-    UIElement input = $("input[type='checkbox'][id='%s']").setParent(parent);
-    UIElement label = $("label['%s']").setParent(parent);
+public class HtmlChecklist extends UIElement<UIElement> implements BaseSelectorAssert, Checklist {
+    By checkbox = cssSelector("input[type=checkbox][id='%s']");
+    By label = By.xpath(".//label[text()='%s']");
+    private String getId(String name) { return label(name).getAttribute("for"); }
+    public HtmlElement get(String name) { return
+            $(fillByTemplate(checkbox, getId(name)), parent).setName("checkboxes");
+    }
+    private HtmlElement label(String name) {
+        return $(fillByTemplate(label, name), parent).setName("label");
+    }
+
 
     public HtmlChecklist() { }
     public HtmlChecklist(WebElement el) { super(el); }
-    List<HtmlElement> elements() { return map(getAll(), HtmlElement::new); }
+    List<UIElement> labels() {
+        return map(getAll(), el -> new HtmlElement(el).label());
+    }
+    List<HtmlElement> checkboxes() { return map(getAll(), HtmlElement::new); }
 
+    /**
+     * Select values from parameters
+     * @param names String var arg, elements with text to select
+     */
     @Override
-    public void select(String value) {
-        label.get(value).click();
+    public void select(String... names) {
+        for (String name : names) {
+            HtmlElement value = get(name);
+            if (value.isEnabled())
+                value.click();
+        }
     }
-    @Override
-    public <TEnum extends Enum> void select(TEnum value) {
-        input.get(getEnumValue(value)).click();
-    }
-    public void select(int index) {
-        getAll().get(index).click();
+    public <TEnum extends Enum> void select(TEnum... value) {
+        select(toStringArray(map(value, EnumUtils::getEnumValue)));
     }
 
     /**
-     * Checks particular elements in checklist
-     * @param values String varargs to check
+     * Selects only particular elements
+     * @param indexes String var arg, elements with text to select
      */
-    public void check(String... values) {
-        for (HtmlElement ui :  elements()) {
-            if (ui.isSelected() && !asList(values).contains(ui.labelText())
-                    || !ui.isSelected() && asList(values).contains(ui.labelText()))
-                ui.click();
+    public void select(int... indexes) {
+        for (int i = 1; i <= indexes.length; i++) {
+            HtmlElement value = checkboxes().get(indexes[i]);
+            if (value.isEnabled())
+                value.click();
         }
     }
 
     /**
-     * Uncheck particular elements in checklist
-     * @param values String varargs to uncheck
+     * Selects only particular elements
+     * @param names String var arg, elements with text to select
      */
-    public void uncheck(String... values) {
-        for (HtmlElement ui :  elements()) {
-            if (ui.isSelected() && asList(values).contains(ui.labelText())
-                    || !ui.isSelected() && !asList(values).contains(ui.labelText()))
-                ui.click();
+    public void check(String... names) {
+        List<String> listNames = asList(names);
+        for (String name : values()) {
+            HtmlElement value = get(name);
+            if (value.isDisabled()) continue;
+            if (value.isSelected() && !listNames.contains(value.labelText().trim())
+                    || !value.isSelected() && listNames.contains(value.labelText().trim()))
+                value.click();
+        }
+    }
+
+    /**
+     * Unselects only particular elements
+     * @param names String var arg, elements with text to unselect
+     */
+    public void uncheck(String... names) {
+        List<String> listNames = asList(names);
+        for (String name : values()) {
+            HtmlElement value = get(name);
+            if (value.isDisabled()) continue;
+            if (value.isSelected() && listNames.contains(value.labelText().trim())
+                    || !value.isSelected() && !listNames.contains(value.labelText().trim()))
+                value.click();
         }
     }
     public <TEnum extends Enum> void check(TEnum... values) {
         check(getEnumValues(values));
     }
+
     public <TEnum extends Enum> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
 
     /**
-     * Checks particular elements in checklist based on their index
-     * @param values int varargs to check
+     * Checks particular elements by index
+     * @param indexes int var arg, ids to check
      */
-    public void check(int... values) {
-        List<UIElement> options = allUI();
-        for (int i = 0; i < options.size(); i++) {
-            WebElement opt = options.get(i);
-            if (opt.isSelected() && !asList(values).contains(i)
-                    || !opt.isSelected() && asList(values).contains(i))
-                opt.click();
+    public void check(int... indexes) {
+        List<Integer> listIndexes = toList(indexes);
+        for (int i = 1; i <= values().size(); i++) {
+            HtmlElement value = checkboxes().get(i-1);
+            if (value.isDisabled()) continue;
+            if (value.isSelected() && !listIndexes.contains(i)
+                    || !value.isSelected() && listIndexes.contains(i))
+                value.click();
         }
     }
 
     /**
-     * Uncheck particular elements in checklist based on their index
-     * @param values int varargs to uncheck
+     * Unchecks particular elements by index
+     * @param indexes int var arg, ids to uncheck
      */
-    public void uncheck(int... values) {
-        List<UIElement> options = allUI();
-        for (int i = 0; i < options.size(); i++) {
-            WebElement opt = options.get(i);
-            if (opt.isSelected() && asList(values).contains(i)
-                    || !opt.isSelected() && !asList(values).contains(i))
-                opt.click();
+    public void uncheck(int... indexes) {
+        List<Integer> listIndexes = toList(indexes);
+        for (int i = 1; i <= values().size(); i++) {
+            HtmlElement value = checkboxes().get(i-1);
+            if (value.isDisabled()) continue;
+            if (value.isSelected() && listIndexes.contains(i)
+                    || !value.isSelected() && !listIndexes.contains(i))
+                value.click();
         }
     }
 
-    /**
-     * Gets selected values with separator
-     * @return String
-     */
-    public String selected() {
-        return print(checked(),";");
-    }
-
-    /**
-     * Gets selected list
-     * @return List String
-     */
     public List<String> checked() {
-        return ifSelect(elements(), UIElement::isSelected, HtmlElement::labelText);
+        return ifSelect(checkboxes(), HtmlElement::isSelected, HtmlElement::labelText);
+    }
+
+    public void select(String value) {
+        select(new String[]{value});
+    }
+
+    public void select(int index) {
+        select(new int[]{index});
     }
 
     public List<String> values() {
-        return map(elements(), HtmlElement::labelText);
+        return map(labels(), element -> element.getText().trim());
     }
 
     public List<String> enabled() {
-        return ifSelect(elements(), HtmlElement::isEnabled, HtmlElement::labelText);
+        return ifSelect(checkboxes(),
+                HtmlElement::isEnabled,
+                HtmlElement::labelText);
     }
     public List<String> disabled() {
-        return ifSelect(elements(), el -> !el.isEnabled(), HtmlElement::labelText);
+        return ifSelect(checkboxes(),
+                HtmlElement::isDisabled,
+                HtmlElement::labelText);
     }
 
-    /**
-     * Sets values in checklist
-     * @param value String to set. Can accept multi value with separator ;
-     */
     @Override
     public void setValue(String value) {
         check(value.split(";"));
     }
-
-    /**
-     * Gets selected values
-     * @return String
-     */
+    @Override
+    public String selected() { return print(ifSelect(checkboxes(),
+            HtmlElement::isSelected, HtmlElement::labelText)); }
+    public boolean selected(String value) {
+        return get(value).isSelected();
+    }
     @Override
     public String getValue() {
         return selected();
@@ -145,4 +180,5 @@ public class HtmlChecklist extends UIElement implements BaseSelectorAssert, Chec
     public SelectAssert assertThat() {
         return is();
     }
+
 }

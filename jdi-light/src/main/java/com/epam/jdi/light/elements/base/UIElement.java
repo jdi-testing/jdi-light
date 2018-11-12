@@ -19,15 +19,20 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.Thread.currentThread;
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class UIElement extends JDIBase implements WebElement, BaseElement, SetValue {
+public class UIElement<T extends UIElement> extends JDIBase implements WebElement, BaseElement, SetValue {
     public UIElement() { }
     public UIElement(WebElement el) { webElement.setForce(el); }
+
+    protected T newElement(WebElement el) { return (T) new UIElement(el); }
 
     //region WebElement Wrapper
     @JDIAction
@@ -47,6 +52,41 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
             String methodName = currentThread().getStackTrace()[2].getMethodName();
             throw exception("Can't do "+methodName+" for disabled element '"+getName()+"'");
         }
+    }
+
+    /**
+     * If not selected - click to select
+     */
+    @JDIAction
+    public void check() {
+        checkEnabled();
+        if (!isSelected())
+            click();
+    }
+
+    /**
+     * If selected - click to deselect
+     */
+    @JDIAction
+    public void uncheck() {
+        checkEnabled();
+        if (isSelected())
+            click();
+    }
+
+
+    @JDIAction
+    public UIElement label() {
+        return $("[for="+getAttribute("id")+"]");
+    }
+
+    /**
+     * Gets label text
+     * @return String text
+     */
+    @JDIAction
+    public String labelText() {
+        return label().getText();
     }
 
     @JDIAction
@@ -76,7 +116,8 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
 
     @JDIAction
     public boolean isSelected() {
-        return get().isSelected() || getAttribute("class").contains("checked") ||
+        List<String> cl = classes();
+        return get().isSelected() || cl.contains("checked") || cl.contains("active")||
                 getAttribute("checked").equals("true");
     }
     @JDIAction
@@ -135,26 +176,17 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
         //setAttribute("value", value);
         jsExecute("value='"+value+"'");
     }
-    public UIElement find(String by) {
+    public T find(String by) {
         return find(By.cssSelector(by));
     }
-
-    public UIElement find(By by) {
-        UIElement el = new UIElement();
-        el.parent = this;
-        el.setLocator(by);
-        return el;
+    public T find(By by) {
+        return newElement(get().findElement(by));
     }
-
-    public List<UIElement> finds(String by) {
+    public List<T> finds(String by) {
         return finds(By.cssSelector(by));
     }
-
-    public List<UIElement> finds(By by) {
-        UIElement el = new UIElement();
-        el.parent = this;
-        el.setLocator(by);
-        return el.allUI();
+    public List<T> finds(By by) {
+        return map(get().findElements(by), this::newElement);
     }
 
     public void setAttribute(String name, String value) {
@@ -171,6 +203,10 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
             result.add("checked");
         return result;
     }
+    public List<String> classes() {
+        return asList(getAttribute("class").split(" "));
+    }
+
     public String printHtml() {
         return MessageFormat.format("<{0}{1}>{2}</{0}>", getTagName(),
                 print(getAllAttributes(), el -> " "+ el), getAttribute("innerHTML"));
@@ -200,9 +236,13 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
     }
 
     @JDIAction
+    public void select(String name) {
+        get(name).click();
+    }
+    @JDIAction
     public void select(String... names) {
         for (String name : names)
-            get(name).click();
+            select(name);
     }
     @JDIAction
     public <TEnum extends Enum> void select(TEnum name) {
@@ -212,6 +252,19 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
     public void setValue(String value) {
         setText(value);
     }
+
+    /**
+     * Gets attr 'placeholder'
+     * @return String
+     */
+    public String placeholder() { return getAttribute("placeholder"); }
+    /**
+     * Gets attribute with name value
+     * @return String
+     */
+    @JDIAction
+    public String value() { return getAttribute("value"); }
+
     public Select select() {
         return new Select(get());
     }
@@ -236,6 +289,9 @@ public class UIElement extends JDIBase implements WebElement, BaseElement, SetVa
     }
     public void doActions(JFunc1<Actions, Actions> actions) {
         actions.execute(new Actions(driver())).build().perform();
+    }
+    public void doActionsOnElement(JFunc1<Actions, Actions> actions) {
+        actions.execute(new Actions(driver()).moveToElement(this)).build().perform();
     }
     //endregion
 

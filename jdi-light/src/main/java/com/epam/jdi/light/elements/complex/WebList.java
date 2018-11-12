@@ -12,7 +12,6 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -25,8 +24,19 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 
-public class WebList extends JDIBase implements IList<WebElement>, SetValue {
-    private CacheValue<List<WebElement>> webElements = new CacheValue<>();
+public class WebList extends JDIBase implements IList<UIElement>, SetValue {
+    protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
+
+    public WebList() {}
+    public WebList(List<WebElement> elements) {
+        this.webElements.setForce(elements);
+    }
+
+    public List<UIElement> elements() {
+        return LinqUtils.map(webElements.hasValue()
+                ? webElements.get()
+                : webElements.set(getAll()), UIElement::new);
+    }
 
     @JDIAction
     public void select(String... names) {
@@ -41,7 +51,7 @@ public class WebList extends JDIBase implements IList<WebElement>, SetValue {
     public UIElement get(String name) {
         if (getByLocator(getLocator()).contains("%s"))
             return getUI(name);
-        UIElement el = LinqUtils.first(allUI(), e -> e.getText().trim().toLowerCase().equals(name.trim().toLowerCase()));
+        UIElement el = LinqUtils.first(elements(), e -> e.getText().trim().toLowerCase().equals(name.trim().toLowerCase()));
         if (el == null)
             throw exception("Can't select '%s'. No elements with this name found", name);
         return el;
@@ -54,9 +64,8 @@ public class WebList extends JDIBase implements IList<WebElement>, SetValue {
     public void select(int index) {
         get(index).click();
     }
-    public List<WebElement> elements() { return getAll(); }
     public List<String> values() {
-        return LinqUtils.map(getAll(), WebElement::getText);
+        return LinqUtils.map(elements(), UIElement::getText);
     }
     @JDIAction(level = DEBUG)
     public void refresh() {
@@ -65,7 +74,7 @@ public class WebList extends JDIBase implements IList<WebElement>, SetValue {
     @JDIAction(level = DEBUG)
     public String isSelected() {
         UIElement first = logger.logOff(() ->
-            LinqUtils.first(allUI(), UIElement::isSelected) );
+            LinqUtils.first(elements(), UIElement::isSelected) );
         return first != null ? first.getText() : "";
     }
 
@@ -76,9 +85,7 @@ public class WebList extends JDIBase implements IList<WebElement>, SetValue {
 
     @JDIAction(level = DEBUG)
     public UIElement get(int index) {
-        if (!webElements.hasValue())
-            webElements.set(getAll());
-        UIElement element = new UIElement(webElements.get().get(index));
+        UIElement element = new UIElement(elements().get(index));
         element.name = format("%s[%s]", getName(), index);
         return element;
     }
@@ -102,7 +109,7 @@ public class WebList extends JDIBase implements IList<WebElement>, SetValue {
 
     //region matchers
     public ListAssert is() {
-        return new ListAssert(this);
+        return new ListAssert<>(this);
     }
     public ListAssert assertThat() {
         return is();

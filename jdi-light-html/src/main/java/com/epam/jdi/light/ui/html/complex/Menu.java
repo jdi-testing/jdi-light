@@ -1,13 +1,13 @@
 package com.epam.jdi.light.ui.html.complex;
 
 import com.epam.jdi.light.elements.complex.IList;
-import org.openqa.selenium.WebElement;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
 
 import java.util.List;
 
-public interface Menu extends IList<WebElement> {
+public interface Menu extends IList<HtmlElement> {
     void select(String... value);
     <TEnum extends Enum> void select(TEnum value);
-    String selected();
+    String isSelected();
     List<String> values();
 }

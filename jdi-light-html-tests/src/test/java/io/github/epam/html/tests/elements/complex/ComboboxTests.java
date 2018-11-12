@@ -7,9 +7,12 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.htmlElementsPage;
 import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
 import static io.github.com.pages.HtmlElementsPage.iceCream;
+import static io.github.com.pages.HtmlElementsPage.name;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.Casual;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.Fancy;
+import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Strawberry;
+import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Vanilla;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
@@ -22,7 +25,7 @@ public class ComboboxTests extends TestsInit {
         htmlElementsPage.shouldBeOpened();
         iceCream.select(text);
     }
-    String text = "Casual";
+    String text = "Coconut";
 
     @Test
     public void getValueTest() {
@@ -31,53 +34,41 @@ public class ComboboxTests extends TestsInit {
 
     @Test
     public void selectTest() {
-        iceCream.select("Pirate");
-        assertEquals(iceCream.getValue(), "Pirate");
+        iceCream.select("Chocolate");
+        assertEquals(iceCream.getValue(), "Chocolate");
     }
 
     @Test
     public void selectEnumTest() {
-        iceCream.select(Fancy);
-        assertEquals(iceCream.getValue(), "Fancy");
+        iceCream.select(Strawberry);
+        assertEquals(iceCream.getValue(), "Strawberry");
     }
     @Test
     public void selectNumTest() {
-        iceCream.select(1);
-        assertEquals(iceCream.getValue(), "Fancy");
+        iceCream.select(5);
+        assertEquals(iceCream.getValue(), "Vanilla");
     }
     @Test
     public void selectedTest() {
-        assertEquals(iceCream.selected(), "Casual");
-    }
-
-    @Test
-    public void disabledTest() {
-        try {
-            disabledDropdown.select("Pirate");
-        } catch (Exception ignore) {}
-        assertEquals(disabledDropdown.getValue(), "Disabled");
+        assertEquals(iceCream.selected(), text);
     }
 
     @Test
     public void labelTest() {
-        assertEquals(iceCream.label().getText(), "Dress code:");
-        iceCream.label().is().text(containsString("Dress"));
+        assertEquals(iceCream.label().getText(), "Choose your lovely icecream");
+        iceCream.label().is().text(containsString("lovely icecream"));
     }
 
     @Test
     public void isValidationTest() {
-        iceCream.is().selected("Casual");
-        iceCream.is().selected(Casual);
-        iceCream.is().values(hasItem("Pirate"));
-        iceCream.is().disabled(hasItem("Disabled"));
-        iceCream.is().enabled(not(hasItem("Disabled")));
-        iceCream.is().enabled(hasItems("Pirate", "Fancy"));
+        iceCream.is().text(is(text));
+        iceCream.select(Vanilla);
+        iceCream.is().text(containsString("Van"));
     }
 
     @Test
     public void assertValidationTest() {
-        iceCream.assertThat().values(contains("Fancy", "Casual", "Disabled", "Pirate"));
-        disabledDropdown.assertThat().selected("Disabled");
+        iceCream.assertThat().text(is(text));
     }
 
     @Test

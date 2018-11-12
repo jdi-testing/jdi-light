@@ -13,7 +13,7 @@ import selenium.site.sections.LoginForm;
 @JSite("https://epam.github.io/JDI/")
 public class SiteJdi {
     public static HomePage homePage;
-    public static JDIPerformancePage jdiPerformancePage;
+    public static JDIPerformancePage performancePage;
     @FindBy(css = "form") public static LoginForm loginForm;
 
     @FindBy(css = ".profile-photo") public static WebElement profilePhoto;

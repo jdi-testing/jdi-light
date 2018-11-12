@@ -2,8 +2,11 @@ package com.epam.jdi.light.ui.html.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.complex.IList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.asserts.HtmlAssertion;
 import com.epam.jdi.light.ui.html.common.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.net.MalformedURLException;
@@ -12,6 +15,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
+import static com.epam.jdi.light.ui.html.HtmlFactory.$$;
 import static com.epam.jdi.light.ui.html.utils.HtmlUtils.getInt;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
@@ -19,7 +23,7 @@ import static java.util.Arrays.asList;
 /**
  * Base html element
  */
-public class HtmlElement extends UIElement implements Text, Button, FileInput, Icon, Image, Link, TextArea,
+public class HtmlElement extends UIElement<HtmlElement> implements Text, Button, FileInput, Icon, Image, Link, TextArea,
         TextField, Title, Checkbox, ColorPicker, Range, ProgressBar, DateTimeSelector, NumberSelector {
 
     public HtmlElement() { }
@@ -71,13 +75,6 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
     }
 
     /**
-     * Gets attribute 'placeholder'
-     * @return String placeholder value
-     */
-    @JDIAction
-    public String placeholder() { return getAttribute("placeholder"); }
-
-    /**
      * Sets value for lines
      * @param lines String var arg
      */
@@ -125,13 +122,6 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
     public int maxlength() { return getInt("maxlength", this); }
 
     /**
-     * Gets attribute with name value
-     * @return String
-     */
-    @JDIAction
-    public String value() { return getAttribute("value"); }
-
-    /**
      * Gets attribute with name min
      * @return String min value
      */
@@ -152,25 +142,6 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
     @JDIAction
     public String step() { return getAttribute("step"); }
 
-    /**
-     * If not selected - click to select
-     */
-    @JDIAction
-    public void check() {
-        checkEnabled();
-        if (!isSelected())
-            click();
-    }
-
-    /**
-     * If selected - click to deselect
-     */
-    @JDIAction
-    public void uncheck() {
-        checkEnabled();
-        if (isSelected())
-            click();
-    }
 
   /**
    * Gets attribute 'value' from color picker
@@ -230,20 +201,6 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
         checkEnabled();
         setValue(number);
     }
-          
-    @JDIAction
-    public Title label() {
-        return $("[for="+getAttribute("id")+"]");
-    }
-
-    /**
-     * Gets label text
-     * @return String text
-     */
-    @JDIAction
-    public String labelText() {
-        return label().getText();
-    }
 
     @Override
     public HtmlAssertion is() {
@@ -253,5 +210,10 @@ public class HtmlElement extends UIElement implements Text, Button, FileInput, I
     @Override
     public HtmlAssertion assertThat() {
       return is();
+    }
+
+    @Override
+    public HtmlElement newElement(WebElement el) {
+        return new HtmlElement(el);
     }
 }

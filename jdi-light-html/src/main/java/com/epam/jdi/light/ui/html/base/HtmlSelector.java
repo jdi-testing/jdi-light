@@ -3,8 +3,6 @@ package com.epam.jdi.light.ui.html.base;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.ui.html.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.ui.html.asserts.SelectAssert;
-import com.epam.jdi.light.ui.html.common.Title;
-import com.epam.jdi.light.ui.html.complex.Combobox;
 import com.epam.jdi.light.ui.html.complex.DataList;
 import com.epam.jdi.light.ui.html.complex.Dropdown;
 import com.epam.jdi.light.ui.html.complex.MultiSelect;
@@ -12,14 +10,13 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
-public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropdown, DataList, Combobox, MultiSelect {
+public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropdown, MultiSelect {
 
     public HtmlSelector() { }
     public HtmlSelector(WebElement el) { super(el); }
@@ -99,6 +96,9 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
     public String selected() {
         return select().getFirstSelectedOption().getText();
     }
+    public boolean selected(String value) {
+        return selected().trim().equalsIgnoreCase(value.trim());
+    }
 
     /**
      * Gets attr 'placeholder'
@@ -111,11 +111,12 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
     }
 
     public List<String> enabled() {
-        return ifSelect(getUI().find("option").allUI(),
+        return ifSelect(getUI().finds("option"),
             UIElement::isEnabled, UIElement::getText);
     }
-    public List<String> disabled() { return ifSelect(getUI().find("option").allUI(),
-            uiElement -> !uiElement.isEnabled(), UIElement::getText);
+    public List<String> disabled() {
+        return ifSelect(getUI().finds("option"),
+            UIElement::isDisabled, UIElement::getText);
     }
 
     @Override
@@ -136,11 +137,4 @@ public class HtmlSelector extends UIElement implements BaseSelectorAssert, Dropd
         return is();
     }
 
-    public Title label() {
-        return $("[for="+getAttribute("id")+"]");
-    }
-
-    public String labelText() {
-        return label().getText();
-    }
 }

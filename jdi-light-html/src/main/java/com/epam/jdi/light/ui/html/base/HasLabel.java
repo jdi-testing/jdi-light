@@ -1,6 +1,6 @@
 package com.epam.jdi.light.ui.html.base;
 
-import com.epam.jdi.light.ui.html.common.Title;
+import com.epam.jdi.light.elements.base.UIElement;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -8,6 +8,6 @@ import com.epam.jdi.light.ui.html.common.Title;
  */
 
 public interface HasLabel {
-    Title label();
+    UIElement label();
     String labelText();
 }

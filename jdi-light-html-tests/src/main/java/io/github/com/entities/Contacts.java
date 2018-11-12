@@ -4,16 +4,15 @@ package io.github.com.entities;
 import com.epam.jdi.tools.DataClass;
 
 public class Contacts extends DataClass<Contacts> {
-    public String passport;
-    public String acceptConditions;
+    public String name;
     public String lastName;
+    //public boolean passport;
+    public String acceptConditions;
     public String position;
-    public String number;
-    public String seria;
+    public String passportNumber;
+    public String passportSeria;
     public String description;
     public String gender;
     public String religion;
-    public String wheather;
-
-
+    public String weather;
 }

@@ -35,11 +35,11 @@ public final class UIUtils {
     public static MapArray<String, String> getMapFromObject(Object obj) {
         if (obj == null)
             return new MapArray<>();
-        return new MapArray<>(getFields(obj, Object.class), UIUtils::getElementName,
+        List<Field> notNullFields = filter(getFields(obj, Object.class),
+            f -> getValueField(f, obj) != null);
+        return new MapArray<>(notNullFields, UIUtils::getElementName,
             field -> {
                 Object value = getValueField(field, obj);
-                if (value == null)
-                    return null;
                 if (isClass(value.getClass(), String.class, Integer.class, Boolean.class))
                     return value.toString();
                 if (isClass(value.getClass(), Enum.class))

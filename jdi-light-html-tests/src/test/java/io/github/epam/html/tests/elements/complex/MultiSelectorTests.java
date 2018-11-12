@@ -52,7 +52,7 @@ public class MultiSelectorTests extends TestsInit {
     @Test
     public void disabledTest() {
         ages.select("Disabled");
-        assertEquals(ages.getValue(), "Steam");
+        assertEquals(ages.getValue(), text);
     }
 
     @Test

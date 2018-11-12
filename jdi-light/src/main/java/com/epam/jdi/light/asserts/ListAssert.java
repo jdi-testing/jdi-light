@@ -11,11 +11,11 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class ListAssert {
-    List<UIElement> elements;
+public class ListAssert<T extends UIElement> {
+    List<T> elements;
 
-    public ListAssert(List<WebElement> elements) {
-        this.elements = map(elements, el -> new UIElement().setWebElement(el));
+    public ListAssert(List<T> elements) {
+        this.elements = elements;
     }
 
     public void texts(Matcher<Collection<? extends String>> condition) {

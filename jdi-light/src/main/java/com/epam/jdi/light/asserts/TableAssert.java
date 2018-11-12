@@ -1,12 +1,21 @@
 package com.epam.jdi.light.asserts;
 
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.Column;
 import com.epam.jdi.light.elements.complex.table.Table;
+import com.epam.jdi.light.elements.complex.table.TableMatchers;
 import com.epam.jdi.tools.pairs.Pair;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
+import java.util.Collection;
 import java.util.List;
 
+import static com.epam.jdi.light.elements.complex.table.TableMatchers.GET_ROW;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static java.lang.String.format;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -34,15 +43,20 @@ public class TableAssert {
         for(String column : columns)
             hasColumn(column);
     }
-    public void columnsCount(int count) {
-        assertThat(table.header(), hasSize(count));
+    public void columns(Matcher<Collection<? extends String>> count) {
+        assertThat(table.header(), count);
     }
-    public void hasRowsWhereValue(Matcher<String> matcher, Column column) {
-        assertThat(table.row(matcher, column), notNullValue());
+    public void rowsWithValues(int count, TableMatchers... matchers) {
+        assertThat(getMatchLines(table, matchers).size(),
+            greaterThan(table.header().size()*count-1));
     }
-    public void hasRowsWhereValue(Pair<Matcher<String>, Column>... matchers) {
-        for (Pair<Matcher<String>, Column> matcher : matchers)
-            hasRowsWhereValue(matcher.key, matcher.value);
+    public void hasRowWithValues(TableMatchers... matchers) {
+        assertThat(getMatchLines(table, matchers), is(not(empty())));
+    }
+    public static WebList getMatchLines(Table table, TableMatchers... matchers) {
+        String locator = format(GET_ROW, print(map(matchers, m ->
+                m.getLocator(table) + "/.."),""));
+        return $$(locator, table);
     }
 
 }

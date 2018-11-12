@@ -1,16 +1,10 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
 import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
-import org.apache.commons.lang3.StringUtils;
-import org.hamcrest.Matcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -20,23 +14,21 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByMsgTemplate;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
-import static com.epam.jdi.light.elements.complex.table.TableMatchers.GET_ROW;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.LinqUtils.listEquals;
+import static com.epam.jdi.tools.LinqUtils.select;
 
 public class FastTable extends Table {
     protected By cellLocator;
     protected By allCells;
     protected By rowLocator;
     protected By columnLocator;
-    protected MapArray<String, List<WebElement>> rows = new MapArray<>();
-    protected MapArray<String, List<WebElement>> columns = new MapArray<>();
-    protected MapArray<String, MapArray<String, WebElement>> cells = new MapArray<>();
+    protected MapArray<String, List<UIElement>> rows = new MapArray<>();
+    protected MapArray<String, List<UIElement>> columns = new MapArray<>();
+    protected MapArray<String, MapArray<String, UIElement>> cells = new MapArray<>();
 
     public FastTable() {
         rowLocator = By.xpath("//tr[%s]/td");
@@ -59,27 +51,21 @@ public class FastTable extends Table {
     private WebList getColumn(int colNum) {
         return $$(fillByTemplate(columnLocator, colNum), this);
     }
-    private WebElement getCell(int colNum, int rowNum) {
+    private UIElement getCell(int colNum, int rowNum) {
         return $(fillByMsgTemplate(cellLocator, colNum, getRowIndex(rowNum), this));
     }
 
-    @JDIAction
-    public Line row(TableMatchers... matchers) {
-        String locator = format(GET_ROW, print(map(matchers, m ->
-            m.getLocator(this) + "/.."),""));
-        return new Line($$(locator, this));
-    }
 
 // //*[@id='users-table']//td[1][contains(text(),'Brock')]/../td[4][contains(text(),'Alco')]/..
-    public List<WebElement> webRow(int rowNum) {
+    public List<UIElement> webRow(int rowNum) {
         if (!rows.has(rowNum+"")) {
             if (gotTable)
                 return select(cells, c -> c.value.get(rowNum+""));
-            rows.add(rowNum+"", getRow(rowNum));
+            rows.add(rowNum+"", getRow(rowNum).elements());
         }
         return rows.get(rowNum+"");
     }
-    public List<WebElement> webColumn(int colNum) {
+    public List<UIElement> webColumn(int colNum) {
         if (!columns.has(colNum+"")) {
             if (gotTable)
                 return cells.get(colNum + "").values();
@@ -87,7 +73,7 @@ public class FastTable extends Table {
         }
         return columns.get(colNum+"");
     }
-    public WebElement webCell(int colNum, int rowNum) {
+    public UIElement webCell(int colNum, int rowNum) {
         if (!gotTable) {
             if (rows.has(rowNum + ""))
                 return rows.get(rowNum + "").get(colNum - 1);
@@ -122,7 +108,7 @@ public class FastTable extends Table {
                     cells.add(i+"", new MapArray<>());
                 while (k < listOfCells.size()) {
                     for (int i = 1; i <= size.get(); i++)
-                        cells.get(i+"").add(j+"", listOfCells.get(k++));
+                        cells.get(i+"").add(j+"", new UIElement(listOfCells.get(k++)));
                     j++;
                 }
                 gotTable = true;

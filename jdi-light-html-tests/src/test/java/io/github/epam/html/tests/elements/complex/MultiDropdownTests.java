@@ -19,7 +19,6 @@ public class MultiDropdownTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         htmlElementsPage.shouldBeOpened();
-        // TODO
         multiDropdown.check(text);
     }
     String text = "Steam";
@@ -47,13 +46,13 @@ public class MultiDropdownTests extends TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(multiDropdown.checked(), asList(text));
+        assertEquals(multiDropdown.selected(), text);
     }
 
     @Test
     public void disabledTest() {
         multiDropdown.select("Disabled");
-        assertEquals(multiDropdown.getValue(), "Steam");
+        assertEquals(multiDropdown.selected(), "Steam");
     }
 
     @Test

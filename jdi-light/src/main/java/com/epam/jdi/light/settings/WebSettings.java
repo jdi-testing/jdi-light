@@ -55,7 +55,7 @@ public class WebSettings {
         UIElement ui = $("#"+locatorName).setName(el.name);
         if (ui.isDisplayed())
             return ui.get();
-        ui= $("[ui='"+locatorName+"']").setName(el.name).setParent(el.parent);
+        ui = $("[ui='"+locatorName+"']", el.parent).setName(el.name);
         if (ui.isDisplayed())
             return ui.get();
         throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.name);

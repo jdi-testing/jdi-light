@@ -2,6 +2,8 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
+import com.epam.jdi.light.ui.html.base.Combobox;
+import com.epam.jdi.light.ui.html.base.MultiDropdown;
 import com.epam.jdi.light.ui.html.common.*;
 import com.epam.jdi.light.ui.html.complex.*;
 
@@ -71,9 +73,8 @@ public class HtmlElementsPage extends WebPage {
 
     public static MultiSelect ages;
     // @Css("#ages") public static MultiSelect ages;
-
-    // TODO Multi Dropdown ?
-    public static MultiSelect multiDropdown;
+    @Css("#multi-dropdown")
+    public static MultiDropdown multiDropdown;
     // @Css("#multi-dropdown") public static MultiSelect multiDropdown;
 
     public static Combobox iceCream;
@@ -85,10 +86,13 @@ public class HtmlElementsPage extends WebPage {
 
     // TODO NEED VERIFICATION
     // TODO UNCOMMENT public static List<Checkbox> checkboxList;
-    public static Checklist checklist;
+    @Css("[name=checks-group]")
+    public static Checklist weather;
+    public static Checklist weatherNoLocator;
 
-    // TODO NEED VERIFICATION
+    @Css("[name=colors]")
     public static RadioButtons colors;
+    public static RadioButtons colorsNoLocator;
 
     //endregion
 

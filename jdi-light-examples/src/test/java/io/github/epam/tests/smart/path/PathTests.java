@@ -59,12 +59,12 @@ public class PathTests extends StaticTestsInit {
         bys = searchBy(By.cssSelector("#contact-form['Last Name']"));
         assertEquals(bys.size(), 2);
         assertEquals(getElement(bys).getTagName(), "label");
-        assertEquals(getElement(bys).getAttribute("for"), "LastName");
+        assertEquals(getElement(bys).getAttribute("for"), "last-name");
 
         bys = searchBy(By.cssSelector("#contact-form[*'Last N']"));
         assertEquals(bys.size(), 2);
         assertEquals(getElement(bys).getTagName(), "label");
-        assertEquals(getElement(bys).getAttribute("for"), "LastName");
+        assertEquals(getElement(bys).getAttribute("for"), "last-name");
     }
 
     private WebElement getElement(List<Object> locators) {

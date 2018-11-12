@@ -90,11 +90,12 @@ public class JDIBase extends DriverBase implements INamed {
                 throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT);
         }
     }
-    public UIElement getUI(Object... args) {
-        return new UIElement(get(args));
+    public UIElement<UIElement> getUI(Object... args) {
+        return new UIElement<>(get(args));
     }
 
     public List<WebElement> getAll(Object... args) {
+        //TODO rethink SMART SEARCH
         if (byLocator == null)
             return asList(SMART_SEARCH.execute(this));
         SearchContext searchContext = containsRoot(getLocator(args))
@@ -119,6 +120,7 @@ public class JDIBase extends DriverBase implements INamed {
         SearchContext searchContext = frame != null
             ? getFrameContext(frame)
             : getContext(parent, locator);
+        //TODO rethink SMART SEARCH
         return locator != null
             ? uiSearch(searchContext, correctLocator(locator)).get(0)
             : searchContext;
