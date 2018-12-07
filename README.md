@@ -8,11 +8,8 @@
 JDI – is the test Framework for UI test automation. It extends the Page Objects design pattern and introduces many additional elements along with implementation of its common usages.
 
 Our Test site: https://epam.github.io/JDI/
-Login to get access to all pages: 
 
-Login: epam
-
-Password: 1234
+Login to get access to all pages (Login: epam; Password: 1234)
 
 Html Elements examples: https://epam.github.io/JDI/html5.html
 
