@@ -13,6 +13,10 @@ Login to get access to all pages (Login: epam; Password: 1234)
 
 Html Elements examples: https://epam.github.io/JDI/html5.html
 
+Example Html elements tests: https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests
+
+Example Scenario tests: https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-examples
+
 ## Links
 
 Site: http://jdi.epam.com/
