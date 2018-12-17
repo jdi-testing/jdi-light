@@ -10,16 +10,16 @@ import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.init.rules.InitRule;
+import com.epam.jdi.light.elements.init.rules.SetupRule;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.pairs.Pair;
-import com.epam.jdi.tools.pairs.Pairs;
+import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,29 +31,36 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.elements.init.PageFactory.initElement;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
+import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
-import static java.util.Arrays.asList;
+import static com.epam.jdi.tools.switcher.SwitchActions.Case;
+import static com.epam.jdi.tools.switcher.SwitchActions.Default;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
+    public static JFunc1<SiteInfo, Object> SETUP_SECTION_ON_SITE = info -> {
+        info.instance = initElement(info);
+        initElements(info);
+        return info.instance;
+    };
     public static JFunc1<SiteInfo, WebPage> SETUP_WEBPAGE_ON_SITE = info -> {
-        WebPage page = initSection(info);
-        page.setName(info.field.getName(), info.parentClass.getSimpleName());
-        page.driverName = DRIVER_NAME;
+        WebPage page = (WebPage) SETUP_SECTION_ON_SITE.execute(info);
         page.updatePageData(
             valueOrDefault(getAnnotation(info.field, Url.class),
                 page.getClass().getAnnotation(Url.class)),
             valueOrDefault(getAnnotation(info.field, Title.class),
                 page.getClass().getAnnotation(Title.class))
         );
-        info.instance = page;
-        initElements(info);
         return page;
     };
 
@@ -71,39 +78,50 @@ public class InitActions {
         return info.instance;
     };
 
-    public static List<Pair<JFunc1<Field, Boolean>, JFunc1<SiteInfo, Object>>> INIT_RULES = asList(
-        $(f -> isClass(f, Selector.class), info -> new Selector()),
-        $(f -> isInterface(f, WebElement.class), info -> new UIElement()),
-        $(f -> isClass(f, WebList.class), info -> new WebList()),
-        $(f -> isList(f, WebElement.class), info -> new WebList()),
-        $(f -> isInterface(f, List.class) && isPageObject(getGenericType(f)),
-            InitActions::initJElements),
-        $(f -> isPageObject(f.getType()), InitActions::initSection),
-        $(f -> isClass(f, DriverBase.class),
-            info -> info.field.getType().newInstance())
+    public static MapArray<String, InitRule> INIT_RULES = map(
+        $("Selector", iRule(f -> isClass(f, Selector.class),
+            info -> new Selector())),
+        $("UIElement", iRule(f -> isInterface(f, WebElement.class),
+            info -> new UIElement())),
+        $("WebList", iRule(f -> isClass(f, WebList.class) || isList(f, WebElement.class),
+            info -> new WebList())),
+        $("UIList", iRule(f -> isInterface(f, List.class) && isPageObject(getGenericType(f)),
+            InitActions::initUIList)),
+        $("PageObject", iRule(f -> isPageObject(f.getType()),
+            InitActions::initSection)),
+        $("Default", iRule(f -> isClass(f, DriverBase.class),
+            info -> info.field.getType().newInstance()))
     );
 
-    public static Pairs<JFunc1<SiteInfo, Boolean>, JAction1<SiteInfo>> SETUP_RULES = new Pairs<>(
-            $(info -> isClass(info.instance.getClass(), JDIBase.class),
-                info -> {
-                    String parentName = info.parent == null ? null : info.parent.getClass().getSimpleName();
-                    Class<?> type = info.instance.getClass();
-                    JDIBase jdi = (JDIBase) info.instance;
-                    By locator = getLocatorFromField(info.field);
-                    if (locator != null ) jdi.setLocator(locator);
-                    if (hasAnnotation(info.field, Frame.class))
-                        jdi.setFrame(getFrame(info.field.getAnnotation(Frame.class)));
-                    jdi.setName(info.field.getName(), parentName);
-                    jdi.setTypeName(type.getName());
-                    jdi.parent = info.parent;
-                    jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
-                }),
-            $(info -> isInterface(info.field, ISetup.class),
-                    info -> ((ISetup)info.instance).setup(info.field)
-            ),
-            $(info -> isPageObject(info.instance.getClass()),
-                    PageFactory::initElements)
+    public static MapArray<String, SetupRule> SETUP_RULES = map(
+        $("Element", sRule(info -> isClass(info.instance.getClass(), JDIBase.class),
+            InitActions::defaultSetup)),
+        $("ISetup", sRule(info -> isInterface(info.field, ISetup.class),
+            info -> ((ISetup)info.instance).setup(info.field))),
+        $("PageObject", sRule(info -> isPageObject(info.instance.getClass()),
+                PageFactory::initElements))
     );
+
+    private static void defaultSetup(SiteInfo info) {
+        String parentName = Switch(info).get(
+            Case(i-> i.parent != null,
+                i -> i.parent.getClass().getSimpleName()),
+            Case(i-> i.parentClass != null,
+                i -> i.parentClass.getSimpleName()),
+            Default(null)
+        );
+        Class<?> type = info.instance.getClass();
+        JDIBase jdi = (JDIBase) info.instance;
+        By locator = getLocatorFromField(info.field);
+        if (locator != null ) jdi.setLocator(locator);
+        if (hasAnnotation(info.field, Frame.class))
+            jdi.setFrame(getFrame(info.field.getAnnotation(Frame.class)));
+        jdi.setName(info.field.getName(), parentName);
+        jdi.setTypeName(type.getName());
+        jdi.parent = info.parent;
+        jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
+        info.instance = jdi;
+    }
 
     private static By getLocatorFromField(Field field) {
         if (hasAnnotation(field, org.openqa.selenium.support.FindBy.class))
@@ -131,7 +149,7 @@ public class InitActions {
             throw exception("Can't instantiate Section field '%s' on page '%s'", info.field.getName(), info.parentName());
         }
     }
-    public static UIList initJElements(SiteInfo info) {
+    public static UIList initUIList(SiteInfo info) {
         Class<?> genericType = null;
         try {
             genericType = getGenericType(info.field);

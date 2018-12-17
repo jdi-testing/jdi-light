@@ -14,10 +14,10 @@ public class SelectAssert extends IsAssert {
 
     Selector selector;
     public SelectAssert(Selector selector) {
-        super(getHtml(selector));
+        super(getElement(selector));
         this.selector = selector;
     }
-    private static UIElement<UIElement> getHtml(Selector selector) {
+    private static UIElement<UIElement> getElement(Selector selector) {
         try { return new UIElement<>(selector.get()); }
         catch (Exception ignore) { return null; }
     }

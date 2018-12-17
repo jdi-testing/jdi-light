@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.complex;
 
+import com.epam.jdi.light.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.elements.base.UIElement;
 import org.openqa.selenium.WebElement;
@@ -12,7 +13,7 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
-public class Selector extends UIElement {
+public class Selector extends UIElement implements BaseSelectorAssert {
 
     public Selector() { }
     public Selector(WebElement el) { super(el); }

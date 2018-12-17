@@ -1,8 +1,9 @@
 package com.epam.jdi.light.ui.html.base;
 
+import com.epam.jdi.light.asserts.BaseSelectorAssert;
+import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.ui.html.asserts.BaseSelectorAssert;
-import com.epam.jdi.light.ui.html.asserts.SelectAssert;
+import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.ui.html.complex.MultiSelect;
 import org.openqa.selenium.By;
 
@@ -15,7 +16,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.util.Arrays.asList;
 
-public class MultiDropdown extends UIElement implements BaseSelectorAssert, MultiSelect {
+public class MultiDropdown extends Selector implements BaseSelectorAssert {
     By expandArrow = By.cssSelector(".caret");
     By values = By.tagName("li");
     By valueTemplate = By.xpath(".//label[@title='%s']/../..");

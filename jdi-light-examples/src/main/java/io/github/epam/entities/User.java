@@ -1,6 +1,7 @@
 package io.github.epam.entities;
 
 
+import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.epam.jdi.tools.DataClass;
 
 public class User extends DataClass<User> {

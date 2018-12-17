@@ -6,11 +6,10 @@ package com.epam.jdi.light.ui.html;
  */
 
 import com.epam.jdi.light.elements.base.BaseElement;
-import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.init.InitActions;
+import com.epam.jdi.light.elements.init.PageFactory;
+import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.settings.WebSettings;
@@ -22,7 +21,7 @@ import com.epam.jdi.light.ui.html.common.TextArea;
 import com.epam.jdi.light.ui.html.complex.Checklist;
 import com.epam.jdi.light.ui.html.complex.DataList;
 import com.epam.jdi.light.ui.html.complex.RadioButtons;
-import com.epam.jdi.light.ui.html.complex.RadioGroup;
+import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -33,37 +32,35 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getButtonByName;
 import static com.epam.jdi.light.elements.init.InitActions.*;
+import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
+import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
 import static com.epam.jdi.light.settings.WebSettings.initialized;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
-import static java.util.Arrays.asList;
 
 public class HtmlSettings {
 
     public static synchronized void init() {
         if (!initialized) {
             WebSettings.init();
-            INIT_RULES = asList(
-                $(f -> isClass(f, MultiDropdown.class), info -> new MultiDropdown()),
-                $(f -> isInterface(f, DataList.class),
-                        info -> new Combobox()),
-                $(f -> isInterface(f, Checklist.class), info -> new HtmlChecklist()),
-                $(f -> isInterface(f, RadioGroup.class) || isInterface(f, RadioButtons.class),
-                        info -> new HtmlRadioGroup()),
-                $(f -> isInterface(f, BaseSelector.class), info -> new HtmlSelector()),
-                $(f -> isInterface(f, TextArea.class), info -> new TextAreaElement()),
-                $(f -> isInterface(f, BaseElement.class) , info -> new HtmlElement()),
-                $(f -> isInterface(f, WebElement.class), info -> new HtmlElement()),
-                $(f -> isClass(f, WebList.class), info -> new WebList()),
-                $(f -> isList(f, WebElement.class), info -> new WebList()),
-                $(f -> isInterface(f, List.class) && isPageObject(getGenericType(f)),
-                        InitActions::initJElements),
-                $(f -> isPageObject(f.getType()), InitActions::initSection),
-                $(f -> isClass(f, DriverBase.class),
-                        info -> info.field.getType().newInstance())
+            MapArray<String, InitRule> newRules = map(
+                $("Combobox", iRule(f -> isInterface(f, DataList.class), info -> new Combobox())),
+                $("Checklist", iRule(f -> isInterface(f, Checklist.class), info -> new HtmlChecklist())),
+                $("RadioButtons", iRule(f -> isInterface(f, RadioButtons.class), info -> new HtmlRadioGroup())),
+                $("BaseSelector", iRule(f -> isInterface(f, BaseSelector.class), info -> new HtmlSelector())),
+                $("TextArea", iRule(f -> isInterface(f, TextArea.class), info -> new TextAreaElement()))
             );
-
+            INIT_RULES.update("Selector",
+                iRule(f -> isInterface(f, BaseSelector.class), info -> new HtmlSelector()));
+            INIT_RULES.update("UIElement",
+                iRule(f -> isInterface(f, BaseElement.class) || isInterface(f, WebElement.class),
+                    info -> new HtmlElement()));
+            INIT_RULES = newRules.merge(INIT_RULES);
+            SETUP_RULES.update("PageObject",
+                sRule(info -> isPageObject(info.instance.getClass()),
+                        PageFactory::initElements));
             GET_BUTTON = (obj, buttonName) -> {
                 List<Field> fields = getFields(obj, Button.class);
                 if (fields.size() == 0)

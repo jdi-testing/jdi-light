@@ -1,8 +1,8 @@
 package com.epam.jdi.light.ui.html.base;
 
+import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.light.ui.html.asserts.SelectAssert;
 
 import java.util.List;
 

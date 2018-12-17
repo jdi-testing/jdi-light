@@ -1,10 +1,10 @@
 package com.epam.jdi.light.ui.html.base;
 
+import com.epam.jdi.light.asserts.BaseSelectorAssert;
+import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.ui.html.asserts.BaseSelectorAssert;
-import com.epam.jdi.light.ui.html.asserts.SelectAssert;
+import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.ui.html.complex.RadioButtons;
-import com.epam.jdi.light.ui.html.complex.RadioGroup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -13,12 +13,11 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.util.Arrays.asList;
 import static org.openqa.selenium.By.cssSelector;
 
-public class HtmlRadioGroup extends UIElement<UIElement> implements BaseSelectorAssert, RadioGroup, RadioButtons {
+public class HtmlRadioGroup extends Selector implements BaseSelectorAssert, RadioButtons {
     By radioButton = cssSelector("input[type=radio][id='%s']");
     By label = By.xpath(".//label[text()='%s']");
     private String getId(String name) { return label(name).getAttribute("for"); }
@@ -48,10 +47,6 @@ public class HtmlRadioGroup extends UIElement<UIElement> implements BaseSelector
     @Override
     public void select(String value) {
         label(value).click();
-    }
-    @Override
-    public <TEnum extends Enum> void select(TEnum value) {
-        select(getEnumValue(value));
     }
 
     /**

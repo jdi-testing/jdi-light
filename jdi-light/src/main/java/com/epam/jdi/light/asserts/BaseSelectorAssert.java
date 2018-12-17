@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.html.asserts;
+package com.epam.jdi.light.asserts;
 
 import org.openqa.selenium.WebElement;
 

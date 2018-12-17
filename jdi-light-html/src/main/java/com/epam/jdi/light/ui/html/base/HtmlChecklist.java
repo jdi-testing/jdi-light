@@ -1,8 +1,9 @@
 package com.epam.jdi.light.ui.html.base;
 
+import com.epam.jdi.light.asserts.BaseSelectorAssert;
+import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.ui.html.asserts.BaseSelectorAssert;
-import com.epam.jdi.light.ui.html.asserts.SelectAssert;
+import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.ui.html.complex.Checklist;
 import com.epam.jdi.tools.EnumUtils;
 import org.openqa.selenium.By;
@@ -18,7 +19,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 import static org.openqa.selenium.By.cssSelector;
 
-public class HtmlChecklist extends UIElement<UIElement> implements BaseSelectorAssert, Checklist {
+public class HtmlChecklist extends Selector implements BaseSelectorAssert, Checklist {
     By checkbox = cssSelector("input[type=checkbox][id='%s']");
     By label = By.xpath(".//label[text()='%s']");
     private String getId(String name) { return label(name).getAttribute("for"); }

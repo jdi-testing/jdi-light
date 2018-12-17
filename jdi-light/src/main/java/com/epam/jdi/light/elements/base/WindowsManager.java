@@ -13,13 +13,14 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class WindowsManager {
     private static Set<String> windowHandlers;
+    private static MapArray<String, String> windowHandles = new MapArray<>();
+
     public static Set<String> getWindows() {
         return windowHandlers = getDriver().getWindowHandles();
     }
     public static boolean newWindowIsOpened() {
         return windowHandlers.size() < getDriver().getWindowHandles().size();
     }
-    private static MapArray<String, String> windowHandles = new MapArray<>();
     public static void setWindowName(String name) {
         windowHandles.update(name, getDriver().getWindowHandle());
     }
