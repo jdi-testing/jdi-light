@@ -26,7 +26,8 @@ public class FastTable extends Table {
     protected By allCells;
     protected By rowLocator;
     protected By columnLocator;
-    protected MapArray<String, List<UIElement>> rows = new MapArray<>();
+    // TODO
+    public MapArray<String, List<UIElement>> rows = new MapArray<>();
     protected MapArray<String, List<UIElement>> columns = new MapArray<>();
     protected MapArray<String, MapArray<String, UIElement>> cells = new MapArray<>();
 
@@ -45,7 +46,8 @@ public class FastTable extends Table {
         }
         return headerIsRow ? rowNum + 1 : rowNum;
     }
-    private WebList getRow(int rowNum) {
+    // TODO
+    public WebList getRow(int rowNum) {
         return $$(fillByTemplate(rowLocator, getRowIndex(rowNum), this));
     }
     private WebList getColumn(int colNum) {

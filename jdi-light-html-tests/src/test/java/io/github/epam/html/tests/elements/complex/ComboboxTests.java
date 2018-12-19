@@ -45,6 +45,7 @@ public class ComboboxTests extends TestsInit {
     }
     @Test
     public void selectNumTest() {
+        iceCream.clear();
         iceCream.select(5);
         assertEquals(iceCream.getValue(), "Vanilla");
     }

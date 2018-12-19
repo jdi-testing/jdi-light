@@ -1,1 +1,0 @@
-{"uuid":"e5271cc1-4b87-4dfd-97a4-29b76f64711f","name":"io.github.epam.tests.selenium.JDIPerformanceTests.openPerformancePage","description":"","start":1539792389310,"stop":1539792389987,"children":["0bd75de9-11ed-4376-a572-5854e57cc61a"],"befores":[{"name":"openPerformancePage","status":"passed","stage":"finished","description":"","start":1539792389310,"stop":1539792389987}]}

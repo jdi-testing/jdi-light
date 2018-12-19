@@ -1,11 +1,13 @@
 package io.github.epam;
 
+import com.epam.jdi.light.common.PageChecks;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.init.PageFactory;
 import com.google.GoogleSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -15,7 +17,7 @@ public class GoogleInit  {
     public static void setUp() {
         logger.setLogLevel(INFO);
         PageFactory.initElements(GoogleSite.class);
-        CHECK_AFTER_OPEN = true;
+        CHECK_AFTER_OPEN = EVERY_PAGE;
         GoogleSite.homePage.open();
         logger.toLog("Run Tests");
     }

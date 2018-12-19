@@ -26,6 +26,7 @@ import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -50,7 +51,6 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class InitActions {
     public static JFunc1<SiteInfo, Object> SETUP_SECTION_ON_SITE = info -> {
         info.instance = initElement(info);
-        initElements(info);
         return info.instance;
     };
     public static JFunc1<SiteInfo, WebPage> SETUP_WEBPAGE_ON_SITE = info -> {
@@ -95,31 +95,39 @@ public class InitActions {
 
     public static MapArray<String, SetupRule> SETUP_RULES = map(
         $("Element", sRule(info -> isClass(info.instance.getClass(), JDIBase.class),
-            InitActions::defaultSetup)),
+            InitActions::elementSetup)),
         $("ISetup", sRule(info -> isInterface(info.field, ISetup.class),
             info -> ((ISetup)info.instance).setup(info.field))),
+        $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class),
+            InitActions::defaultSetup)),
+        $("Section", sRule(info -> isClass(info.instance.getClass(), Section.class),
+            InitActions::elementSetup)),
         $("PageObject", sRule(info -> isPageObject(info.instance.getClass()),
-                PageFactory::initElements))
+            PageFactory::initElements))
     );
 
-    private static void defaultSetup(SiteInfo info) {
+    public static void defaultSetup(SiteInfo info) {
         String parentName = Switch(info).get(
-            Case(i-> i.parent != null,
-                i -> i.parent.getClass().getSimpleName()),
-            Case(i-> i.parentClass != null,
-                i -> i.parentClass.getSimpleName()),
-            Default(null)
+                Case(i-> i.parent != null,
+                        i -> i.parent.getClass().getSimpleName()),
+                Case(i-> i.parentClass != null,
+                        i -> i.parentClass.getSimpleName()),
+                Default(null)
         );
-        Class<?> type = info.instance.getClass();
+        DriverBase jdi = (DriverBase) info.instance;
+        jdi.setName(info.field.getName(), parentName);
+        jdi.setTypeName(info.instance.getClass().getName());
+        jdi.parent = info.parent;
+        jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
+        info.instance = jdi;
+    }
+    public static void elementSetup(SiteInfo info) {
+        defaultSetup(info);
         JDIBase jdi = (JDIBase) info.instance;
         By locator = getLocatorFromField(info.field);
         if (locator != null ) jdi.setLocator(locator);
         if (hasAnnotation(info.field, Frame.class))
             jdi.setFrame(getFrame(info.field.getAnnotation(Frame.class)));
-        jdi.setName(info.field.getName(), parentName);
-        jdi.setTypeName(type.getName());
-        jdi.parent = info.parent;
-        jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
         info.instance = jdi;
     }
 
@@ -150,13 +158,17 @@ public class InitActions {
         }
     }
     public static UIList initUIList(SiteInfo info) {
-        Class<?> genericType = null;
+        Class<?> type = null;
+        Class<?> entity = null;
         try {
-            genericType = getGenericType(info.field);
-            return new UIList(genericType);
+            Type[] types = getGenericTypes(info.field);
+            type = types[0].toString().equals("?") ? null : (Class<?>)types[0];
+            entity = types[1].toString().equals("?") ? null : (Class<?>)types[1];
+            return new UIList(type, entity);
         } catch (Exception ex) {
-            throw exception("Can't instantiate List<%s> field '%s' on page '%s'", genericType == null
-                    ? "UNKNOWN" : genericType.getSimpleName(), info.field.getName(), info.parentName());
+            throw exception("Can't instantiate List<%s, %s> field '%s' on page '%s'", type == null
+                ? "?" : type.getSimpleName(), entity == null ? "?" : entity.getSimpleName(),
+                    info.field.getName(), info.parentName());
         }
     }
     public static boolean isJDIField(Field field) {
@@ -174,6 +186,14 @@ public class InitActions {
     public static boolean isList(Field field, Class<?> type) {
         return isInterface(field, List.class)
                 && isInterface(getGenericType(field), type);
+    }
+
+    public static Type[] getGenericTypes(Field field) {
+        try {
+            return ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+        } catch (Exception ex) {
+            throw exception(field.getName() + " is List but has no Generic type");
+        }
     }
     public static Class<?> getGenericType(Field field) {
         try {

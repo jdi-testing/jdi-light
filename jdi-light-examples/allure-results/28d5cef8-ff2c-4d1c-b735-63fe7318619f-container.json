@@ -1,1 +1,0 @@
-{"uuid":"28d5cef8-ff2c-4d1c-b735-63fe7318619f","name":"io.github.epam.tests.recommended.TableTests.before","description":"","start":1539792304231,"stop":1539792304716,"children":["dbe30bd4-60df-413f-8888-2f83366c1331"],"befores":[{"name":"before","status":"passed","stage":"finished","description":"","start":1539792304231,"stop":1539792304716}]}

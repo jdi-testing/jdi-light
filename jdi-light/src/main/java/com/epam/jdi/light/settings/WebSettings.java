@@ -21,6 +21,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
@@ -29,7 +30,6 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static com.epam.jdi.tools.StringUtils.splitHythen;
-import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
@@ -39,7 +39,7 @@ public class WebSettings {
     public static ILogger logger = JDILogger.instance("JDI");
     public static String DOMAIN;
     public static String KILL_BROWSER = "afterAndBefore";
-    public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = Objects::nonNull;
+    public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = WebElement::isDisplayed;
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
         return DOMAIN != null && DOMAIN.contains("://");
@@ -78,7 +78,7 @@ public class WebSettings {
             fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
             fillAction(p -> BROWSER_SIZE = p, "browser.size");
             fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
-            fillAction(p -> CHECK_AFTER_OPEN = parseBoolean(p), "page.check.after.open");
+            fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
 
             // RemoteWebDriver properties
             fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");

@@ -1,1 +1,0 @@
-{"uuid":"1191e728-261c-4839-8173-f856dc33413c","name":"io.github.epam.tests.epam.WindowsAndFramesTests.before","description":"","start":1539792380813,"stop":1539792381008,"children":["efd45a42-23c6-469b-aacd-f9477773dc55"],"befores":[{"name":"before","status":"passed","stage":"finished","description":"","start":1539792380813,"stop":1539792381008}]}

@@ -5,6 +5,7 @@ package com.epam.jdi.light.elements.complex;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.asserts.UIListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
@@ -16,6 +17,7 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -30,11 +32,12 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 
-public class UIList<T> extends JDIBase implements IList<T> {
+public class UIList<T, E> extends JDIBase implements IList<T> {
 
     private CacheValue<MapArray<String, T>> elements = new CacheValue<>();
     private CacheValue<List<T>> values = new CacheValue<>();
     private Class<T> classType;
+    private Class<E> entityType;
     public String titleFieldName = NO_TITLE_FIELD;
     public static final String NO_TITLE_FIELD = "NO TITLE FIELD";
 
@@ -42,6 +45,10 @@ public class UIList<T> extends JDIBase implements IList<T> {
         this.classType = classType;
         elements.setForce(new MapArray<>());
         values.setForce(new ArrayList<>());
+    }
+    public UIList(Class<T> classType, Class<E> entityType) {
+        this(classType);
+        this.entityType = entityType;
     }
     @JDIAction(level = DEBUG)
     public List<T> elements() {
@@ -103,8 +110,8 @@ public class UIList<T> extends JDIBase implements IList<T> {
         }
     }
 
-    public <E> List<E> asData(Class<E> entityClass) {
-        return getMap().select((k, v) -> UIUtils.asEntity(v, entityClass));
+    public List<E> asData() {
+        return getMap().select((k, v) -> UIUtils.asEntity(v, entityType));
     }
 
     @JDIAction(level = DEBUG)
@@ -139,10 +146,13 @@ public class UIList<T> extends JDIBase implements IList<T> {
         return getMap().toString();
     }
 
-    public <E> void is(Class<E> entityClass, Matcher<Collection<? extends E>> condition) {
-        org.hamcrest.MatcherAssert.assertThat(asData(entityClass), condition);
+    public void is(Class<E> entityClass, Matcher<Collection<? extends E>> condition) {
+        org.hamcrest.MatcherAssert.assertThat(asData(), condition);
     }
-    public <E> void assertThat(Class<E> entityClass, Matcher<Collection<? extends E>> condition) {
-        is(entityClass, condition);
+    public UIListAssert<E> assertThat() {
+        return new UIListAssert<>(asData());
+    }
+    public void assertThat(Matcher<? super List<E>> c) {
+        MatcherAssert.assertThat(asData(), c);
     }
 }

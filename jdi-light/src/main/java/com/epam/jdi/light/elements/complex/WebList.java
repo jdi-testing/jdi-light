@@ -33,9 +33,12 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue {
     }
 
     public List<UIElement> elements() {
-        return LinqUtils.map(webElements.hasValue()
-                ? webElements.get()
-                : webElements.set(getAll()), UIElement::new);
+        if (webElements.hasValue())
+            return LinqUtils.map(webElements.get(), UIElement::new);
+        List<WebElement> result = getAll();
+        if (result.size() > 0)
+            webElements.set(result);
+        return LinqUtils.map(result, UIElement::new);
     }
 
     @JDIAction
@@ -51,6 +54,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue {
     public UIElement get(String name) {
         if (getByLocator(getLocator()).contains("%s"))
             return getUI(name);
+        clear();
         UIElement el = LinqUtils.first(elements(), e -> e.getText().trim().toLowerCase().equals(name.trim().toLowerCase()));
         if (el == null)
             throw exception("Can't select '%s'. No elements with this name found", name);

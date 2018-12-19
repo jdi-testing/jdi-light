@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.LocatorType;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
@@ -78,17 +79,24 @@ public class JDIBase extends DriverBase implements INamed {
         // TODO SAFE GET ELEMENT AND STALE ELEMENT PROCESS
         if (webElement.hasValue())
             return webElement.get();
-        if (byLocator == null)
-            return SMART_SEARCH.execute(this);
-        List<WebElement> result = getAll(args);
-        switch (result.size()) {
-            case 0:
+        if (byLocator == null) {
+            try {
+                WebElement element = SMART_SEARCH.execute(this);
+                if (element != null)
+                    return element;
+                throw exception("");
+            } catch (Exception ex) {
                 throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT);
-            case 1:
-                return result.get(0);
-            default:
-                throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT);
+            }
         }
+        List<WebElement> result = getAll(args);
+        if (result.size() == 0)
+            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT);
+        if (result.size() > 1)
+            result = LinqUtils.filter(result, el -> searchRule.execute(el));
+        if (result.size() == 1)
+            return result.get(0);
+        throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT);
     }
     public UIElement<UIElement> getUI(Object... args) {
         return new UIElement<>(get(args));

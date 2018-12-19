@@ -6,6 +6,7 @@ package com.epam.jdi.light.actions;
  */
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.PageChecks;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.logger.LogLevels;
@@ -25,6 +26,8 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
+import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
 import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.OutputTemplates.SHORT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.WindowsManager.getWindows;
@@ -46,15 +49,9 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 @SuppressWarnings("unused")
 @Aspect
 public class ActionHelper {
-
     private static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? SHORT_TEMPLATE : DEFAULT_TEMPLATE;
     }
-    public static JAction1<WebPage> newPage = page -> {
-        if (CHECK_AFTER_OPEN)
-            page.checkOpened();
-        logger.toLog("Page: " + page.getName());
-    };
     public static JFunc1<JoinPoint, String> getActionName = (joinPoint) -> {
         try {
             MethodSignature method = getMethod(joinPoint);
@@ -65,7 +62,7 @@ public class ActionHelper {
                     Case(t -> t.contains("{0"), t ->
                         MessageFormat.format(t, joinPoint.getArgs())),
                     Case(t -> t.contains("{"), t -> getActionNameFromTemplate(method, t,
-                        tomap(()->new MapArray<>("this", getElementName(joinPoint))),
+                        toMap(()->new MapArray<>("this", getElementName(joinPoint))),
                         methodArgs(joinPoint, method), classFields(joinPoint))
                     ),
                     Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
@@ -113,8 +110,9 @@ public class ActionHelper {
             if (currentPage != null && page != null) {
                 if (!currentPage.equals(page.getName())) {
                     setCurrentPage(page);
-                    newPage.execute(page);
+                    BEFORE_NEW_PAGE.execute(page);
                 }
+                else BEFORE_EACH_PAGE.execute(page);
             }
         }
     }
@@ -177,7 +175,7 @@ public class ActionHelper {
             return Switch(template).get(
                 Case(t -> t.contains("{0"), t -> MessageFormat.format(t, joinPoint.getArgs())),
                 Case(t -> t.contains("{"), t -> {
-                    MapArray obj = tomap(()->new MapArray<>("this", getElementName(joinPoint)));
+                    MapArray obj = toMap(()->new MapArray<>("this", getElementName(joinPoint)));
                     return getActionNameFromTemplate(method, t, obj, methodArgs(joinPoint, method), classFields(joinPoint));
                 }),
                 Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
@@ -200,10 +198,10 @@ public class ActionHelper {
         return result;
     }
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
-        return tomap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint.getArgs())));
+        return toMap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint.getArgs())));
     }
 
-    static MapArray<String, Object> tomap(JFunc<MapArray<String, Object>> getMap) {
+    static MapArray<String, Object> toMap(JFunc<MapArray<String, Object>> getMap) {
         IGNORE_NOT_UNIQUE = true;
         MapArray<String, Object> map = getMap.execute();
         IGNORE_NOT_UNIQUE = false;
@@ -229,7 +227,7 @@ public class ActionHelper {
     }
 
     static MapArray<String, Object> classFields(JoinPoint joinPoint) {
-        return tomap(()->new MapArray<>(getThisFields(joinPoint), Field::getName, value -> getValueField(value, joinPoint.getThis())));
+        return toMap(()->new MapArray<>(getThisFields(joinPoint), Field::getName, value -> getValueField(value, joinPoint.getThis())));
     }
 
     static String getElementName(JoinPoint joinPoint) {

@@ -210,4 +210,136 @@ public class Form<T> extends Section {
         submit(objStrings, "submit");
     }
 
+    //region Business action with form
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “login” or ”loginButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Login as {0}")
+    public void login(T entity) {
+        submit(entity, "login");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “login” or ”loginButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Login as {0}")
+    public void loginAs(T entity) {
+        login(entity);
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “send” or ”sendButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Send {0}")
+    public void send(T entity) {
+        submit(entity, "send");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “add” or ”addButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Add {0}")
+    public void add(T entity) {
+        submit(entity, "add");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “publish” or ”publishButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Publish {0}")
+    public void publish(T entity) {
+        submit(entity, "publish");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “save” or ”saveButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Save {0}")
+    public void save(T entity) {
+        submit(entity, "save");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “update” or ”updateButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Update {0}")
+    public void update(T entity) {
+        submit(entity, "update");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “cancel” or ”cancelButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Fill {0} and cancel")
+    public void cancel(T entity) {
+        submit(entity, "cancel");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “close” or ”closeButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Fill {0} and close")
+    public void close(T entity) {
+        submit(entity, "close");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “back” or ”backButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Fill {0} and go back")
+    public void back(T entity) {
+        submit(entity, "back");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “select” or ”selectButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Select {0}")
+    public void select(T entity) {
+        submit(entity, "select");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “next” or ”nextButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Fill {0} and go to next")
+    public void next(T entity) {
+        submit(entity, "next");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “search” or ”searchButton” <br>
+     * @apiNote To use this option Form pageObject should have only one IButton Element
+     */
+    @JDIAction("Search for {0}")
+    public void search(T entity) {
+        submit(entity, "search");
+    }
+
+    //endregion
 }

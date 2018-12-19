@@ -17,7 +17,7 @@ public class FormsTests extends TestsInit {
     public void loginTest() {
         Preconditions.shouldBeLoggedOut();
         userIcon.click();
-        loginForm.submit(DEFAULT_USER, "enter");
+        loginForm.loginAs(DEFAULT_USER);
         homePage.checkOpened();
     }
 

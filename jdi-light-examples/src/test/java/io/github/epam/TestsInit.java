@@ -12,7 +12,6 @@ import static io.github.epam.EpamGithubSite.homePage;
 public class TestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-
         logger.setLogLevel(STEP);
         initElements(EpamGithubSite.class);
         homePage.open();

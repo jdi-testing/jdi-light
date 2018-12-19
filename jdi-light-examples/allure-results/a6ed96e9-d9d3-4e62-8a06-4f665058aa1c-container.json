@@ -1,1 +1,0 @@
-{"uuid":"a6ed96e9-d9d3-4e62-8a06-4f665058aa1c","name":"io.github.epam.tests.epam.ComplexElementsTests.before","description":"","start":1539792378987,"stop":1539792379289,"children":["dcae1b01-2a19-43d9-945d-f13dd8dde93d"],"befores":[{"name":"before","status":"passed","stage":"finished","description":"","start":1539792378987,"stop":1539792379289}]}

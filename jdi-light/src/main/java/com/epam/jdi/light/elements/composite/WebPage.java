@@ -2,12 +2,14 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.PageChecks;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.Cookie;
 
@@ -15,6 +17,9 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
+import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
+import static com.epam.jdi.light.common.PageChecks.NONE;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
@@ -35,13 +40,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 
 public class WebPage extends DriverBase implements INamed {
-    public static boolean CHECK_AFTER_OPEN = false;
     public String url;
     public String title;
 
     private String checkUrl;
     private CheckTypes checkUrlType = CONTAINS;
-    private CheckTypes checkTitleType = NONE;
+    private CheckTypes checkTitleType = CheckTypes.NONE;
 
     private static ThreadLocal<String> currentPage = new ThreadLocal<>();
     public static String getCurrentPage() { return currentPage.get(); }
@@ -100,7 +104,7 @@ public class WebPage extends DriverBase implements INamed {
         if (!hasRunDrivers())
             throw exception("Page '%s' is not opened: Driver is not run", toString());
         String result = Switch(checkUrlType).get(
-                Value(NONE, ""),
+                Value(CheckTypes.NONE, ""),
                 Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
                 Value(MATCH, t -> !url().match() ? "Url '%s' doesn't match to '%s'" : ""),
                 Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
@@ -108,7 +112,7 @@ public class WebPage extends DriverBase implements INamed {
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getCurrentUrl(), checkUrl));
         result = Switch(checkTitleType).get(
-                Value(NONE, ""),
+                Value(CheckTypes.NONE, ""),
                 Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
                 Value(MATCH, t -> !title().match() ? "Title '%s' doesn't match to '%s'" : ""),
                 Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
@@ -122,7 +126,7 @@ public class WebPage extends DriverBase implements INamed {
         if (!hasRunDrivers())
             return false;
         boolean result = Switch(checkUrlType).get(
-            Value(NONE, t -> true),
+            Value(CheckTypes.NONE, t -> true),
             Value(EQUALS, t -> url().check()),
             Value(MATCH, t -> url().match()),
             Value(CONTAINS, t -> url().contains()),
@@ -130,7 +134,7 @@ public class WebPage extends DriverBase implements INamed {
         );
         if (!result) return false;
         result = Switch(checkTitleType).get(
-            Value(NONE, t -> true),
+            Value(CheckTypes.NONE, t -> true),
             Value(EQUALS, t -> title().check()),
             Value(MATCH, t -> title().match()),
             Value(CONTAINS, t -> title().contains()),
@@ -186,23 +190,6 @@ public class WebPage extends DriverBase implements INamed {
     @JDIAction("Go forward to next page")
     public static void forward() {
         WebDriverFactory.getDriver().navigate().forward();
-    }
-
-    /**
-     * @param cookie Specify cookie
-     *               Add cookie in browser
-     */
-    @JDIAction
-    public static void addCookie(Cookie cookie) {
-        WebDriverFactory.getDriver().manage().addCookie(cookie);
-    }
-
-    /**
-     * Clear browsers cache
-     */
-    @JDIAction("Delete all cookies")
-    public static void clearCache() {
-        WebDriverFactory.getDriver().manage().deleteAllCookies();
     }
 
     @JDIAction
@@ -308,4 +295,15 @@ public class WebPage extends DriverBase implements INamed {
                     || value.contains(equals);
         }
     }
+
+    public static PageChecks CHECK_AFTER_OPEN = NONE;
+    public static JAction1<WebPage> BEFORE_NEW_PAGE = page -> {
+        if (CHECK_AFTER_OPEN == NEW_PAGE)
+            page.checkOpened();
+        logger.toLog("Page: " + page.getName());
+    };
+    public static JAction1<WebPage> BEFORE_EACH_PAGE = page -> {
+        if (CHECK_AFTER_OPEN == EVERY_PAGE)
+            page.checkOpened();
+    };
 }

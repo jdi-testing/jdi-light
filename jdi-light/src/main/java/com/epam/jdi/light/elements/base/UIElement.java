@@ -287,12 +287,17 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
     public void dragAndDropTo(int x, int y) {
         doActions(a -> a.dragAndDropBy(get(), x, y));
     }
-    private Actions actionsClass = new Actions(driver());
+    private Actions actions = null;
+    private Actions actionsClass() {
+        if (actions == null)
+            actions = new Actions(driver());
+        return actions;
+    }
     public void doActions(JFunc1<Actions, Actions> actions) {
-        actions.execute(actionsClass).build().perform();
+        actions.execute(actionsClass()).build().perform();
     }
     public void actions(JFunc1<Actions, Actions> actions) {
-        actions.execute(actionsClass.moveToElement(this)).build().perform();
+        actions.execute(actionsClass().moveToElement(this)).build().perform();
     }
     //endregion
 
