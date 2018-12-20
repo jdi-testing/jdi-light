@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <version>1.0.10</version>
+    <version>1.0.18</version>
     <artifactId>jdi-light-html-tests</artifactId>
     <name>JDI Html Tests</name>
 
     <parent>
         <groupId>com.epam.jdi</groupId>
-        <version>1.0.10</version>
+        <version>1.0.18</version>
         <artifactId>jdi-2</artifactId>
     </parent>
 
@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.0.3</version>
+            <version>1.0.18</version>
         </dependency>
 
         <!--Allure config in parent-->
@@ -47,7 +47,6 @@
         <plugins>
 
             <!--Allure reporting config in parent-->
-
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>

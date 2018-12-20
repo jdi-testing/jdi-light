@@ -8,5 +8,5 @@ import com.epam.jdi.light.elements.base.JDIBase;
  */
 
 public class Section extends JDIBase {
-
+    public void open() { WebPage.openUrl("");}
 }

@@ -43,6 +43,9 @@ public class WebPage extends DriverBase implements INamed {
     public String url;
     public String title;
 
+    //TODO is Displayed wait
+    //TODO [ STEP 16:15.801] : Home Page Open {url}
+
     private String checkUrl;
     private CheckTypes checkUrlType = CONTAINS;
     private CheckTypes checkTitleType = CheckTypes.NONE;

@@ -31,14 +31,6 @@ public class TableTests extends StaticTestsInit {
     }
     private void tableTestScenario(Table table) {
         timeStart = currentTimeMillis();
-        /*
-        if (table.getClass() == FastTable.class) {
-            FastTable t = (FastTable)table;
-            t.getRow(1);
-            t.rows.add(1+"", t.getRow(1).elements());
-            Line line = table.row(1);
-        }
-        */
         assertEquals(table.row(1).getValue(), "Burke Tucker,076 1971 1687,et.euismod.et@ut.edu,GozŽe");
         logTime("Get 1 row");
         String zacharyEmail = "ipsum.non.arcu@auctorullamcorper.ca";

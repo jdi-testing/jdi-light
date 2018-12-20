@@ -59,12 +59,16 @@ public class ActionHelper {
             if (isBlank(template))
                 return getDefaultName(method.getName(), methodArgs(joinPoint, method));
             return Switch(template).get(
-                    Case(t -> t.contains("{0"), t ->
-                        MessageFormat.format(t, joinPoint.getArgs())),
-                    Case(t -> t.contains("{"), t -> getActionNameFromTemplate(method, t,
-                        toMap(()->new MapArray<>("this", getElementName(joinPoint))),
-                        methodArgs(joinPoint, method), classFields(joinPoint))
-                    ),
+                    Case(t -> t.contains("{0"), t -> {
+                        Object[] args = joinPoint.getArgs();
+                        return MessageFormat.format(t, args);
+                    }),
+                    Case(t -> t.contains("{"), t -> {
+                        MapArray<String, Object> obj = toMap(()->new MapArray<>("this", getElementName(joinPoint)));
+                        MapArray<String, Object> args = methodArgs(joinPoint, method);
+                        MapArray<String, Object> fields = classFields(joinPoint);
+                        return getActionNameFromTemplate(method, t, obj, args, fields);
+                    }),
                     Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
                     Default(t -> method.getName())
             );
@@ -239,7 +243,7 @@ public class ActionHelper {
     static List<Field> getThisFields(JoinPoint joinPoint) {
         Object obj = joinPoint.getThis();
         return obj != null
-                ? getFields(obj)
+                ? getFieldsDeep(obj)
                 : asList(joinPoint.getSignature().getDeclaringType().getFields());
     }
     static String getActionNameFromTemplate(MethodSignature method, String value,
