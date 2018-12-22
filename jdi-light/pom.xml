@@ -7,13 +7,13 @@
     <artifactId>jdi-light</artifactId>
     <name>JDI Light</name>
     <packaging>jar</packaging>
-    <version>1.0.18</version>
+    <version>1.0.19</version>
+    <groupId>com.epam.jdi</groupId>
 
-    <parent>
-        <groupId>com.epam.jdi</groupId>
-        <version>1.0.18</version>
+    <!--parent>
+        <version>1.0.19</version>
         <artifactId>jdi-2</artifactId>
-    </parent>
+    </parent-->
 
     <properties>
         <surefire.version>2.20</surefire.version>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>com.epam.jdi.tools</groupId>
             <artifactId>jdi-light-saber</artifactId>
-            <version>2.0.36</version>
+            <version>2.0.37</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -90,12 +90,12 @@
             <version>RELEASE</version>
         </dependency>
 
-        <!-- From general pom
+        <!-- From general pom -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>RELEASE</version>
-        </dependency>-->
+        </dependency>
     </dependencies>
 
     <build>
@@ -136,7 +136,7 @@
                 </dependencies>
             </plugin>
 
-            <!-- From general pom
+            <!-- From general pom -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -176,7 +176,7 @@
                 <configuration>
                     <additionalparam>-Xdoclint:none</additionalparam>
                 </configuration>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 

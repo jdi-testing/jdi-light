@@ -1,6 +1,7 @@
 package com.epam.jdi.light.ui.html.base;
 
-import com.epam.jdi.light.ui.html.complex.*;
+import com.epam.jdi.light.ui.html.complex.ComboBox;
+import com.epam.jdi.light.ui.html.complex.DataList;
 
 import java.util.List;
 import java.util.Objects;

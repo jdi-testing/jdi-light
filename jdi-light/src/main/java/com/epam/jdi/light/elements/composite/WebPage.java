@@ -11,14 +11,13 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
-import org.openqa.selenium.Cookie;
 
+import java.text.MessageFormat;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
-import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
+import static com.epam.jdi.light.common.PageChecks.*;
 import static com.epam.jdi.light.common.PageChecks.NONE;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
@@ -42,9 +41,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class WebPage extends DriverBase implements INamed {
     public String url;
     public String title;
-
-    //TODO is Displayed wait
-    //TODO [ STEP 16:15.801] : Home Page Open {url}
 
     private String checkUrl;
     private CheckTypes checkUrlType = CONTAINS;
@@ -151,17 +147,23 @@ public class WebPage extends DriverBase implements INamed {
     /**
      * Opens url specified for page
      */
+
     @JDIAction("Open {url}")
     public void open() {
+        open(null);
+    }
+    @JDIAction("Open {url}")
+    public void open(Object... params) {
+        String urlWithParams = params == null || params.length == 0
+            ? url
+            : url.contains("%s")
+                ? String.format(url, params)
+                : MessageFormat.format(url, params);
         CacheValue.reset();
-        try {
-            driver().navigate().to(url);
-        } catch (Exception ex) {
-            logger.debug("Second try open page: " + toString());
-            driver().navigate().to(url);
-        }
+        driver().navigate().to(urlWithParams);
         setCurrentPage(this);
     }
+
     @JDIAction
     public void shouldBeOpened() {
         if (isOpened()) return;

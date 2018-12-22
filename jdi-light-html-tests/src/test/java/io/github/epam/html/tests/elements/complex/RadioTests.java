@@ -5,15 +5,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.htmlElementsPage;
-import static io.github.com.pages.HtmlElementsPage.colorsNoLocator;
-import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
 import static io.github.com.pages.HtmlElementsPage.colors;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.com.pages.HtmlElementsPage.colorsNoLocator;
 import static io.github.epam.html.tests.elements.complex.enums.Colors.Blue;
-import static io.github.epam.html.tests.elements.complex.enums.Colors.Green;
 import static io.github.epam.html.tests.elements.complex.enums.Colors.Red;
-import static io.github.epam.html.tests.elements.complex.enums.Dress.Casual;
-import static io.github.epam.html.tests.elements.complex.enums.Dress.Fancy;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;

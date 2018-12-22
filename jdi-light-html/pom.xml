@@ -7,23 +7,23 @@
     <artifactId>jdi-light-html</artifactId>
     <name>JDI Light Html Elements</name>
     <packaging>jar</packaging>
-    <version>1.0.18</version>
+    <version>1.0.19</version>
+    <groupId>com.epam.jdi</groupId>
 
-    <parent>
-        <groupId>com.epam.jdi</groupId>
-        <version>1.0.18</version>
+    <!--parent>
+        <version>1.0.19</version>
         <artifactId>jdi-2</artifactId>
-    </parent>
+    </parent-->
 
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.0.18</version>
+            <version>1.0.19</version>
         </dependency>
     </dependencies>
 
-    <!--build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -66,5 +66,5 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build-->
+    </build>
 </project>

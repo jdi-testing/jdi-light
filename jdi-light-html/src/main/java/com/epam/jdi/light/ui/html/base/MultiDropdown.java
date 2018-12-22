@@ -2,9 +2,7 @@ package com.epam.jdi.light.ui.html.base;
 
 import com.epam.jdi.light.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
-import com.epam.jdi.light.ui.html.complex.MultiSelect;
 import org.openqa.selenium.By;
 
 import java.util.List;

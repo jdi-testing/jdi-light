@@ -2,11 +2,8 @@ package com.epam.jdi.light.ui.html.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.IList;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.asserts.HtmlAssertion;
 import com.epam.jdi.light.ui.html.common.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.net.MalformedURLException;
@@ -14,8 +11,6 @@ import java.net.URL;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.ui.html.HtmlFactory.$;
-import static com.epam.jdi.light.ui.html.HtmlFactory.$$;
 import static com.epam.jdi.light.ui.html.utils.HtmlUtils.getInt;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;

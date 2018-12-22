@@ -1,12 +1,9 @@
 package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.complex.table.Column;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.complex.table.TableMatchers;
-import com.epam.jdi.tools.pairs.Pair;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 
 import java.util.Collection;
 import java.util.List;

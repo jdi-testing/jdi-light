@@ -5,10 +5,16 @@ package com.epam.jdi.light.actions;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.settings.WebSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.lang.System.currentTimeMillis;
 
 @SuppressWarnings("unused")
 @Aspect
@@ -19,42 +25,33 @@ public class ActionProcessor {
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() { }
 
-    @Before("jdiPointcut()")
-    public void before(JoinPoint joinPoint) {
-        if (jdiBefore != null)
-            jdiBefore.execute(joinPoint);
+    @Around("jdiPointcut()")
+    public Object jdiAround(ProceedingJoinPoint jp) {
+        BEFORE_JDI_ACTION.execute(jp);
+        Object result = stableAction(jp);
+        return AFTER_JDI_ACTION.execute(jp, result);
     }
 
-    @AfterReturning(pointcut = "jdiPointcut()", returning = "result")
-    public void after(JoinPoint joinPoint, Object result) {
-        if (jdiAfter != null)
-            jdiAfter.execute(joinPoint, result);
+    private static Object stableAction(ProceedingJoinPoint jp) {
+        long start = currentTimeMillis();
+        do { try {
+            logger.logOff();
+            Object result =  jp.proceed();
+            logger.logOn();
+            return result;
+        } catch (Throwable ex) {
+            try {
+                Thread.sleep(200);
+            } catch (Exception ignore) {} }
+        } while (currentTimeMillis() - start < TIMEOUT*1000);
+        throw exception("Failed to execute %s action during %s seconds",
+                jp.getSignature().getName(), TIMEOUT);
     }
 
-    @AfterThrowing(pointcut = "jdiPointcut()", throwing = "error")
-    public void error(JoinPoint joinPoint, Throwable error) {
-        if (jdiError != null) {
-            if (!ERROR_THROWN) {
-                ERROR_THROWN = true;
-                jdiError.execute(joinPoint, error);
-            }
-        }
-    }
-    @Before("stepPointcut()")
-    public void beforeStep(JoinPoint joinPoint) {
-        if (stepBefore != null)
-            stepBefore.execute(joinPoint);
-    }
-
-    @AfterReturning(pointcut = "stepPointcut()", returning = "result")
-    public void afterStep(JoinPoint joinPoint, Object result) {
-        if (stepAfter != null)
-            stepAfter.execute(joinPoint, result);
-    }
-
-    @AfterThrowing(pointcut = "stepPointcut()", throwing = "error")
-    public void errorStep(JoinPoint joinPoint, Throwable error) {
-        if (jdiError != null)
-            jdiError.execute(joinPoint, error);
+    @Around("stepPointcut()")
+    public Object stepAround(ProceedingJoinPoint jp) {
+        BEFORE_STEP_ACTION.execute(jp);
+        Object result = stableAction(jp);
+        return AFTER_STEP_ACTION.execute(jp, result);
     }
 }

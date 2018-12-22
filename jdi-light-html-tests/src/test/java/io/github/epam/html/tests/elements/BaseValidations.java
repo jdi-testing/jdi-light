@@ -4,9 +4,7 @@ import com.epam.jdi.light.elements.base.BaseElement;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class BaseValidations {
 

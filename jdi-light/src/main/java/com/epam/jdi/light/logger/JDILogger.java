@@ -55,6 +55,7 @@ public class JDILogger implements ILogger {
     }
     public void setLogLevel(LogLevels logLevel) {
         this.logLevel = logLevel;
+        this.currentLevel = logLevel;
         setRootLevel(getLog4j2Level(logLevel));
     }
     private LogLevels currentLevel = INFO;
@@ -76,7 +77,7 @@ public class JDILogger implements ILogger {
     }
     public void dropLogOff() {
         logOffDeepness = 0;
-        logLevel =currentLevel;
+        logLevel = currentLevel;
     }
     public void logOff(JAction action) {
         logOff(() -> { action.invoke(); return null; });

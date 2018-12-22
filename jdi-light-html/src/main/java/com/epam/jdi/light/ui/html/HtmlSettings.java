@@ -8,7 +8,6 @@ package com.epam.jdi.light.ui.html;
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.init.InitActions;
 import com.epam.jdi.light.elements.init.PageFactory;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.interfaces.HasValue;
@@ -63,7 +62,7 @@ public class HtmlSettings {
                 sRule(info -> isPageObject(info.instance.getClass()),
                     PageFactory::initElements));
             GET_BUTTON = (obj, buttonName) -> {
-                List<Field> fields = getFields(obj, Button.class);
+                List<Field> fields = getFieldsExact(obj, Button.class);
                 if (fields.size() == 0)
                     fields = getFields(obj, WebElement.class);
                 switch (fields.size()) {

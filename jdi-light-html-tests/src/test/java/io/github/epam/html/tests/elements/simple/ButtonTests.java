@@ -1,12 +1,13 @@
 package io.github.epam.html.tests.elements.simple;
 
+import com.epam.jdi.light.settings.WebSettings;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.NoAlertPresentException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.base.WindowsManager.acceptAlert;
 import static com.epam.jdi.light.elements.base.WindowsManager.getAlertText;
+import static com.epam.jdi.light.settings.WebSettings.TIMEOUT;
 import static io.github.com.StaticSite.htmlElementsPage;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
@@ -47,9 +48,13 @@ public class ButtonTests extends TestsInit {
 
         disabledButton.click();
         try {
+            TIMEOUT = 1;
             acceptAlert();
             fail("Disabled button should not work, but work");
-        } catch (NoAlertPresentException ex) { }
+        } catch (Exception ex) { }
+        finally {
+            TIMEOUT = 10;
+        }
     }
 
     @Test
