@@ -34,6 +34,7 @@ public class ActionProcessor {
 
     private static Object stableAction(ProceedingJoinPoint jp) {
         long start = currentTimeMillis();
+        Throwable exception = null;
         do { try {
             logger.logOff();
             Object result =  jp.proceed();
@@ -41,11 +42,12 @@ public class ActionProcessor {
             return result;
         } catch (Throwable ex) {
             try {
+                exception = ex;
                 Thread.sleep(200);
-            } catch (Exception ignore) {} }
+            } catch (Exception ignore) {  } }
         } while (currentTimeMillis() - start < TIMEOUT*1000);
-        throw exception("Failed to execute %s action during %s seconds",
-                jp.getSignature().getName(), TIMEOUT);
+        throw exception("Failed to execute %s action during %s seconds. Exception: %s",
+                jp.getSignature().getName(), TIMEOUT, exception.getMessage());
     }
 
     @Around("stepPointcut()")
