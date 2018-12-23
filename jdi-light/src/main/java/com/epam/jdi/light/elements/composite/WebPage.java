@@ -147,21 +147,19 @@ public class WebPage extends DriverBase implements INamed {
     /**
      * Opens url specified for page
      */
-
     @JDIAction("Open {url}")
-    public void open() {
-        open(null);
+    private void open(String url) {
+        CacheValue.reset();
+        driver().navigate().to(url);
+        setCurrentPage(this);
     }
-    @JDIAction("Open {url}")
     public void open(Object... params) {
         String urlWithParams = params == null || params.length == 0
-            ? url
-            : url.contains("%s")
+                ? url
+                : url.contains("%s")
                 ? String.format(url, params)
                 : MessageFormat.format(url, params);
-        CacheValue.reset();
-        driver().navigate().to(urlWithParams);
-        setCurrentPage(this);
+        open(urlWithParams);
     }
 
     @JDIAction

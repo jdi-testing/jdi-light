@@ -42,6 +42,7 @@ public class ActionProcessor {
             return result;
         } catch (Throwable ex) {
             try {
+                System.out.println("ERROR");
                 exception = ex;
                 Thread.sleep(200);
             } catch (Exception ignore) {  } }
