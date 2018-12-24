@@ -116,12 +116,27 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
 
     @JDIAction
     public boolean isSelected() {
+        return selected();
+    }
+    @JDIAction
+    public boolean isDeselected() {
+        return !selected();
+    }
+    private boolean selected() {
         List<String> cl = classes();
         return get().isSelected() || cl.contains("checked") || cl.contains("active")||
                 getAttribute("checked").equals("true");
     }
+
     @JDIAction
     public boolean isEnabled() {
+        return enabled();
+    }
+    @JDIAction
+    public boolean isDisabled() {
+        return !enabled();
+    }
+    private boolean enabled() {
         String cl = getAttribute("class");
         return cl.contains("active") ||
                 get().isEnabled() && !cl.contains("disabled");
@@ -129,11 +144,19 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
 
     @JDIAction
     public boolean isDisplayed() {
+        return displayed();
+    }
+    @JDIAction
+    public boolean isHidden() {
+        return !displayed();
+    }
+    public boolean displayed() {
         try {
             WebElement el = get();
             return el != null && el.isDisplayed();
         } catch (Exception ex) { return false; }
     }
+
     public Point getLocation() {
         return get().getLocation();
     }
@@ -212,13 +235,6 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
                 print(getAllAttributes(), el -> " "+ el), getAttribute("innerHTML"));
     }
 
-    public boolean isDisabled() {
-        return !isEnabled();
-    }
-    public boolean isHidden() {
-        return !isDisplayed();
-    }
-
     @JDIAction
     public void higlight(String color) {
         jsExecute("style.border='3px dashed "+color+"'");
@@ -239,6 +255,7 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
     public void select(String name) {
         get(name).click();
     }
+
     @JDIAction
     public void select(String... names) {
         for (String name : names)

@@ -1,16 +1,9 @@
 package io.github.epam.tests.google;
 
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.UIList;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.StringUtils;
-import com.epam.jdi.tools.Timer;
 import com.google.custom.Result;
 import com.google.custom.SearchResult;
 import io.github.epam.GoogleInit;
-import org.hamcrest.MatcherAssert;
-import org.openqa.selenium.SearchContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -18,9 +11,6 @@ import java.util.List;
 
 import static com.google.GoogleSite.homePage;
 import static com.google.GoogleSite.searchPage;
-import static java.util.Arrays.asList;
-import static javafx.beans.binding.Bindings.select;
-import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.*;
 
 /**

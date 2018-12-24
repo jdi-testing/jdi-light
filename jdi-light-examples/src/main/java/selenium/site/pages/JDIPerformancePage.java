@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.table.FastTable;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import org.openqa.selenium.WebElement;
 
 @Url("/performance.html")
 public class JDIPerformancePage extends WebPage {

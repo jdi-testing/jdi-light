@@ -1,6 +1,5 @@
 package io.github.epam.sections;
 
-import com.epam.jdi.light.elements.complex.Dropdown;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;

@@ -8,9 +8,11 @@ import java.util.List;
 
 public interface BaseElement extends HasValue {
     void hover();
+    boolean isSelected();
+    boolean isDeselected();
     boolean isEnabled();
-    boolean isDisplayed();
     boolean isDisabled();
+    boolean isDisplayed();
     boolean isHidden();
     Point getLocation();
     Dimension getSize();

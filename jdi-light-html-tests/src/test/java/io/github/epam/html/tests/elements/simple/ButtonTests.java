@@ -1,12 +1,14 @@
 package io.github.epam.html.tests.elements.simple;
 
-import com.epam.jdi.light.settings.WebSettings;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.base.WindowsManager.acceptAlert;
 import static com.epam.jdi.light.elements.base.WindowsManager.getAlertText;
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.settings.WebSettings.TIMEOUT;
 import static io.github.com.StaticSite.htmlElementsPage;
 import static io.github.com.pages.HtmlElementsPage.*;
@@ -74,5 +76,21 @@ public class ButtonTests extends TestsInit {
     @Test
     public void baseValidationTest() {
         baseValidation(redButton);
+    }
+
+    @Test
+    public void suspendButtonTest() {
+        refresh();
+        suspendButton.click();
+        assertEquals(getAlertText(), "Suspend button");
+        acceptAlert();
+    }
+
+    @Test
+    public void seleniumButtonTest() throws InterruptedException {
+        refresh();
+        Thread.sleep(4000); // comment to fail selenium test
+        getDriver().findElement(By.id("suspend-button")).click();
+        acceptAlert();
     }
 }

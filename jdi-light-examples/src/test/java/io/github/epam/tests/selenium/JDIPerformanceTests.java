@@ -9,7 +9,6 @@ import selenium.entities.User;
 
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatchers.containsValue;
-import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static selenium.entities.TestData.TABLE_SNAPSHOOT;
 import static selenium.seleniumPO.HomePage.leftNavigation;
 import static selenium.seleniumPO.SiteSelenium.homePage;

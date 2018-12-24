@@ -86,9 +86,9 @@ public class WebSettings {
             loadCapabilities("chrome.capabilities.path",
                 p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
             loadCapabilities("ff.capabilities.path",
-                    p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
             loadCapabilities("ie.capabilities.path",
-                    p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
 
             INIT_THREAD_ID = Thread.currentThread().getId();
             initialized = true;
