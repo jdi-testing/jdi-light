@@ -1,5 +1,10 @@
 package com.epam.jdi.light.elements.complex.table;
 
+import com.epam.jdi.light.elements.complex.WebList;
+
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 
 public class TableMatchers {
@@ -19,4 +24,10 @@ public class TableMatchers {
     }
     public String getLocator(Table table) { return format(locator, column.getIndex(table.header())); }
 
+
+    public static WebList getMatchLines(Table table, TableMatchers... matchers) {
+        String locator = format(GET_ROW, print(map(matchers, m ->
+                m.getLocator(table) + "/.."),""));
+        return $$(locator, table);
+    }
 }

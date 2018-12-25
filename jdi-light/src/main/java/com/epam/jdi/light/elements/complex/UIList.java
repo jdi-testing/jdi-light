@@ -11,10 +11,9 @@ import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.SiteInfo;
+import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.Timer;
+import com.epam.jdi.tools.*;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
@@ -29,6 +28,8 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.getFields;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 
@@ -38,8 +39,7 @@ public class UIList<T, E> extends JDIBase implements IList<T> {
     private CacheValue<List<T>> values = new CacheValue<>();
     private Class<T> classType;
     private Class<E> entityType;
-    public String titleFieldName = NO_TITLE_FIELD;
-    public static final String NO_TITLE_FIELD = "NO TITLE FIELD";
+    public String titleFieldName = null;
 
     public UIList(Class<T> classType) {
         this.classType = classType;
@@ -79,16 +79,17 @@ public class UIList<T, E> extends JDIBase implements IList<T> {
 
     private String elementTitle(WebElement el) {
         if (titleFieldName == null)
-            identifyTitleField();
-        return titleFieldName.equals(NO_TITLE_FIELD)
-                ? el.getText()
-                : getElementTitle(el, titleFieldName);
+            titleFieldName = identifyTitleField();
+        return titleFieldName == null
+            ? el.getText()
+            : getElementTitle(el, titleFieldName);
     }
     private String getElementTitle(WebElement el, String titleField) {
         T element = initElement(el);
         Field field = null;
-        try { field = element.getClass().getField(titleField);
-        } catch (NoSuchFieldException ex) { /* if titleField defined then field always exist */ }
+        try {
+            field = element.getClass().getField(titleField);
+        } catch (Exception ignore) { /* if field name identified it is always exist */ }
         return ((WebElement) getValueField(field, element)).getText();
     }
 
@@ -119,13 +120,14 @@ public class UIList<T, E> extends JDIBase implements IList<T> {
         return getMap().get(name);
     }
 
-    private void identifyTitleField() {
+    private String identifyTitleField() {
         Field[] fields = classType.getFields();
         Field expectedFields = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
         if (expectedFields == null)
             throw exception("No title name specified for '%s' class", classType.getSimpleName());
-        titleFieldName = expectedFields.getName();
+        return expectedFields.getName();
     }
+
     @JDIAction
     public void showAll() {
         if (!isClass(classType, Section.class))
@@ -143,7 +145,7 @@ public class UIList<T, E> extends JDIBase implements IList<T> {
     }
 
     public String getValue() {
-        return getMap().toString();
+        return PrintUtils.print(LinqUtils.map(asData(), Object::toString));
     }
 
     public void is(Class<E> entityClass, Matcher<Collection<? extends E>> condition) {
@@ -152,6 +154,7 @@ public class UIList<T, E> extends JDIBase implements IList<T> {
     public UIListAssert<E> assertThat() {
         return new UIListAssert<>(asData());
     }
+
     public void assertThat(Matcher<? super List<E>> c) {
         MatcherAssert.assertThat(asData(), c);
     }

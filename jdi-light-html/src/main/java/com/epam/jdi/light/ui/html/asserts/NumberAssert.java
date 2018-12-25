@@ -8,9 +8,9 @@ import org.hamcrest.Matcher;
  */
 
 public interface NumberAssert {
-    void minValue(double value);
-    void maxValue(double value);
-    void stepValue(double value);
-    void placeholder(Matcher<String> value);
-    void number(Matcher<Double> matcher);
+    HtmlAssertion minValue(double value);
+    HtmlAssertion maxValue(double value);
+    HtmlAssertion stepValue(double value);
+    HtmlAssertion placeholder(Matcher<String> value);
+    HtmlAssertion number(Matcher<Double> matcher);
 }

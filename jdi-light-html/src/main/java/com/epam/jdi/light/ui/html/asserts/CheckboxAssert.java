@@ -6,5 +6,5 @@ package com.epam.jdi.light.ui.html.asserts;
  */
 
 public interface CheckboxAssert {
-    void selected(Boolean value);
+    HtmlAssertion selected(Boolean value);
 }

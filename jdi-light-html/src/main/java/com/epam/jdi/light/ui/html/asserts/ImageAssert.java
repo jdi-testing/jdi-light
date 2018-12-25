@@ -8,9 +8,9 @@ import org.hamcrest.Matcher;
  */
 
 public interface ImageAssert {
-    void src(Matcher<String> condition);
-    void alt(Matcher<String> condition);
+    HtmlAssertion src(Matcher<String> condition);
+    HtmlAssertion alt(Matcher<String> condition);
 
-    void height(int value);
-    void width(int value);
+    HtmlAssertion height(int value);
+    HtmlAssertion width(int value);
 }

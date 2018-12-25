@@ -6,5 +6,5 @@ package com.epam.jdi.light.ui.html.asserts;
  */
 
 public interface ColorAssert {
-    void color(String color);
+    HtmlAssertion color(String color);
 }

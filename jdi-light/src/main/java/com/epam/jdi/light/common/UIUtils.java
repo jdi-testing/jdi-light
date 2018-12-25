@@ -92,8 +92,9 @@ public final class UIUtils {
     public static <T> T asEntity(Object obj, Class<T> entityClass) {
         try {
             T data = newEntity(entityClass);
+            List<Field> dataFields = getFields(data, String.class);
             foreach(getFields(obj, HasValue.class), item -> {
-                Field field = first(getFields(data, String.class), f ->
+                Field field = first(dataFields, f ->
                         namesEqual(f.getName(), item.getName()));
                 if (field == null)
                     return;

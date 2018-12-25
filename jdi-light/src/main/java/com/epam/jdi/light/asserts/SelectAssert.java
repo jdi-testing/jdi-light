@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
 
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.BaseSelectorAssert.waitAssert;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -22,23 +23,28 @@ public class SelectAssert extends IsAssert {
         catch (Exception ignore) { return null; }
     }
 
-    public void selected(String option) {
-        assertThat(selector.selected(option), is(true));
+    public SelectAssert selected(String option) {
+        waitAssert(() -> assertThat(selector.selected(option), is(true)));
+        return this;
     }
-    public <TEnum extends Enum> void selected(TEnum option) {
-        selected(getEnumValue(option));
+    public <TEnum extends Enum> SelectAssert selected(TEnum option) {
+        return selected(getEnumValue(option));
     }
-    public void selected(Matcher<? super List<String>> condition) {
-        assertThat(selector.checked(), condition);
+    public SelectAssert selected(Matcher<? super List<String>> condition) {
+        waitAssert(() -> assertThat(selector.checked(), condition));
+        return this;
     }
 
-    public void values(Matcher<? super List<String>> condition) {
-        assertThat(selector.values(), condition);
+    public SelectAssert values(Matcher<? super List<String>> condition) {
+        waitAssert(() -> assertThat(selector.values(), condition));
+        return this;
     }
-    public void enabled(Matcher<? super List<String>> condition) {
-        assertThat(selector.enabled(), condition);
+    public SelectAssert enabled(Matcher<? super List<String>> condition) {
+        waitAssert(() -> assertThat(selector.enabled(), condition));
+        return this;
     }
-    public void disabled(Matcher<? super List<String>> condition) {
-        assertThat(selector.disabled(), condition);
+    public SelectAssert disabled(Matcher<? super List<String>> condition) {
+        waitAssert(() -> assertThat(selector.disabled(), condition));
+        return this;
     }
 }

@@ -7,7 +7,7 @@ import org.hamcrest.Matcher;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public interface LinkAssert extends TextAssert {
-    void ref(Matcher<String> condition);
-    void alt(Matcher<String> condition);
+    HtmlAssertion ref(Matcher<String> condition);
+    HtmlAssertion alt(Matcher<String> condition);
 
 }

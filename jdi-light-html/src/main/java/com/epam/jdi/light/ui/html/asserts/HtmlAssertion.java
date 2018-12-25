@@ -9,105 +9,146 @@ import static com.epam.jdi.light.ui.html.utils.HtmlUtils.getInt;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class HtmlAssertion extends IsAssert implements ImageAssert, TextAssert,
+public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAssert, TextAssert,
         LinkAssert, TextAreaAssert, ColorAssert, CheckboxAssert, DateTimeAssert,
         RangeAssert, NumberAssert, ProgressAssert, ComboboxAssert {
 
     HtmlElement html;
     public HtmlAssertion(HtmlElement html) { super(html); this.html = html; }
 
-    public void isSelected(Matcher<Boolean> condition) { assertThat(html.isSelected(), condition); }
     /**
      * Custom match src attribute and passed condition
      * @param condition
      */
-    public void src(Matcher<String> condition) { assertThat(html.src(), condition); }
+    public HtmlAssertion src(Matcher<String> condition) {
+        assertThat(html.src(), condition);
+        return this;
+    }
 
     /**
      * Custom match alt attribute and passed condition
      * @param condition
      */
-    public void alt(Matcher<String> condition) { assertThat(html.alt(), condition); }
+    public HtmlAssertion alt(Matcher<String> condition) {
+        assertThat(html.alt(), condition);
+        return this;
+    }
 
     /**
      * Custom match href attribute and passed condition
      * @param condition
      */
-    public void ref(Matcher<String> condition) { assertThat(html.ref(), condition); }
+    public HtmlAssertion ref(Matcher<String> condition) {
+        assertThat(html.ref(), condition);
+        return this;
+    }
 
     /**
      * Match passed value with html element height
      * @param value to compare
      */
-    public void height(int value) {
+    public HtmlAssertion height(int value) {
         assertThat(getInt("height", html), is(value));
+        return this;
     }
 
     /**
      * Match passed value with html element width
      * @param value to compare
      */
-    public void width(int value) {
+    public HtmlAssertion width(int value) {
         assertThat(getInt("width", html), is(value));
+        return this;
     }
 
-    public void rows(Matcher<Integer> condition) { assertThat(html.rows(), condition); }
-    public void cols(Matcher<Integer> condition) { assertThat(html.cols(), condition); }
-    public void minlength(Matcher<Integer> condition) { assertThat(html.minlength(), condition); }
-    public void maxlength(Matcher<Integer> condition) { assertThat(html.maxlength(), condition); }
+    public HtmlAssertion rows(Matcher<Integer> condition) {
+        assertThat(html.rows(), condition);
+        return this;
+    }
+    public HtmlAssertion cols(Matcher<Integer> condition) {
+        assertThat(html.cols(), condition);
+        return this;
+    }
+    public HtmlAssertion minlength(Matcher<Integer> condition) {
+        assertThat(html.minlength(), condition);
+        return this;
+    }
+    public HtmlAssertion maxlength(Matcher<Integer> condition) {
+        assertThat(html.maxlength(), condition);
+        return this;
+    }
 
-    public void color(String color) {
+    public HtmlAssertion color(String color) {
         assertThat(html.color(), is(color));
+        return this;
     }
-    public void selected(Boolean value) {
+    public HtmlAssertion selected(Boolean value) {
         assertThat(html.isSelected(), is(value));
+        return this;
     }
-    public void minValue(double min) {
+    public HtmlAssertion minValue(double min) {
         assertThat(getDouble("min", html), is(min));
+        return this;
     }
-    public void maxValue(double max) {
-        assertThat(getDouble("max", html), is(max));}
-    public void stepValue(double step) {
-        assertThat(getDouble("step", html), is(step));}
-    public void placeholder(Matcher<String> value) {
+    public HtmlAssertion maxValue(double max) {
+        assertThat(getDouble("max", html), is(max));
+        return this;
+    }
+    public HtmlAssertion stepValue(double step) {
+        assertThat(getDouble("step", html), is(step));
+        return this;
+    }
+    public HtmlAssertion placeholder(Matcher<String> value) {
         assertThat(html.placeholder(), value);
+        return this;
     }
-    public void number(Matcher<Double> matcher) {
+    public HtmlAssertion number(Matcher<Double> matcher) {
         assertThat(getDouble("value", html), matcher);
+        return this;
     }
-    public void min(String min) {
+    public HtmlAssertion min(String min) {
         assertThat(html.min(), is(min));
+        return this;
     }
 
-    public void max(String max) {
+    public HtmlAssertion max(String max) {
         assertThat(html.max(), is(max));
+        return this;
     }
 
-    public void volume(Matcher<Integer> matcher) {
+    public HtmlAssertion volume(Matcher<Integer> matcher) {
         assertThat(getInt("value", html), matcher);
+        return this;
     }
-    public void minVolume(int min) {
+    public HtmlAssertion minVolume(int min) {
         assertThat(getInt("min", html), is(min));
+        return this;
     }
-    public void maxVolume(int max) {
+    public HtmlAssertion maxVolume(int max) {
         assertThat(getInt("max", html), is(max));
+        return this;
     }
-    public void step(int step) {
+    public HtmlAssertion step(int step) {
         assertThat(getInt("step", html), is(step));
+        return this;
     }
 
-    public void date(Matcher<String> date) {
+    public HtmlAssertion date(Matcher<String> date) {
         assertThat(html.value(), date);
+        return this;
     }
 
-    public void month(Matcher<String> month) {
+    public HtmlAssertion month(Matcher<String> month) {
         assertThat(html.value(), month);
+        return this;
     }
 
-    public void week(Matcher<String> week) {
+    public HtmlAssertion week(Matcher<String> week) {
         assertThat(html.value(), week);
+        return this;
     }
-    public void time(Matcher<String> time) {
+    public HtmlAssertion time(Matcher<String> time) {
         assertThat(html.value(), time);
+        return this;
     }
 }

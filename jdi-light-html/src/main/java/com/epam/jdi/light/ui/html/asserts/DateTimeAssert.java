@@ -8,11 +8,11 @@ import org.hamcrest.Matcher;
  */
 
 public interface DateTimeAssert {
-    void min(String value);
-    void max(String value);
+    HtmlAssertion min(String value);
+    HtmlAssertion max(String value);
 
-    void date(Matcher<String> date);
-    void month(Matcher<String> month);
-    void week(Matcher<String> week);
-    void time(Matcher<String> time);
+    HtmlAssertion date(Matcher<String> date);
+    HtmlAssertion month(Matcher<String> month);
+    HtmlAssertion week(Matcher<String> week);
+    HtmlAssertion time(Matcher<String> time);
 }

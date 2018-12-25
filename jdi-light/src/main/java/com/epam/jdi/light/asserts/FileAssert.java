@@ -5,6 +5,7 @@ import org.hamcrest.Matcher;
 import java.io.File;
 import java.io.IOException;
 
+import static com.epam.jdi.light.asserts.BaseSelectorAssert.waitAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
 import static com.epam.jdi.light.elements.base.JDIBase.timer;
@@ -25,7 +26,7 @@ public class FileAssert {
         file = new File(mergePath(DOWNLOADS_DIR, fileName));
     }
     public FileAssert isDownloaded() {
-        assertThat(timer().wait(() -> file.exists()), is(true));
+        waitAssert(() -> assertThat(timer().wait(() -> file.exists()), is(true)));
         return this;
     }
     public FileAssert text(Matcher<String> text) {
@@ -39,7 +40,7 @@ public class FileAssert {
         } catch (IOException ex) {
             throw exception("Can't read File: " + ex.getMessage());
         }
-        assertThat(fileText, text);
+        waitAssert(() -> assertThat(fileText, text));
         return this;
     }
 

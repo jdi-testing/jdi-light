@@ -63,6 +63,10 @@ public class ButtonTests extends TestsInit {
     public void isValidationTest() {
         redButton.is().text(is(text));
         redButton.is().text(containsString("Red Button"));
+        redButton.is()
+                .text(is(text))
+                .cssClass(is("uui-button red"))
+                .attr("type", is("button"));
         blueButton.is().text(containsString("Blue Button".toUpperCase()));
         disabledButton.is().text(containsString("Disabled Button".toUpperCase()));
         disabledButtonInput.is().text(containsString("Disabled Button"));

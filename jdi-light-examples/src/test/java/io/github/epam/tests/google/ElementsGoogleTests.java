@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.google.GoogleSite.homePage;
 import static com.google.GoogleSite.searchPage;
 import static org.hamcrest.Matchers.*;
@@ -47,13 +48,14 @@ public class ElementsGoogleTests extends GoogleInit {
         UIList<SearchResult, Result> jobs = searchPage.jobsE;
 
         /*
+        String expetedValue = searchPage.jobsE.getValue();
+        jobs.assertThat().value(expetedValue);
         jobs.assertThat().any(e -> e.name.toLowerCase().contains("jdi"));
         jobs.assertThat().each(e -> e.name.toLowerCase().contains("jdi")
             || e.name.contains("株式会")
             || e.name.contains("Japan"));
         jobs.assertThat().onlyOne(e -> e.name.contains("株式会"));
-        jobs.assertThat().noOne(e -> e.name.contains("SELENIDE"));
-        */
+        jobs.assertThat().noOne(e -> e.name.contains("SELENIDE"));*/
     }
 
     private static List<Result> jobs() {

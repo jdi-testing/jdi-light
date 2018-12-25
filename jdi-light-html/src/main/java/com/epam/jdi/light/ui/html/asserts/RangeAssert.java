@@ -8,8 +8,8 @@ import org.hamcrest.Matcher;
  */
 
 public interface RangeAssert {
-    void minVolume(int value);
-    void maxVolume(int value);
-    void step(int value);
-    void volume(Matcher<Integer> matcher);
+    HtmlAssertion minVolume(int value);
+    HtmlAssertion maxVolume(int value);
+    HtmlAssertion step(int value);
+    HtmlAssertion volume(Matcher<Integer> matcher);
 }

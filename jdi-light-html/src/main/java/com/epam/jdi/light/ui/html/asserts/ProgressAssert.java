@@ -8,6 +8,6 @@ import org.hamcrest.Matcher;
  */
 
 public interface ProgressAssert {
-    void maxVolume(int value);
-    void volume(Matcher<Integer> matcher);
+    HtmlAssertion maxVolume(int value);
+    HtmlAssertion volume(Matcher<Integer> matcher);
 }
