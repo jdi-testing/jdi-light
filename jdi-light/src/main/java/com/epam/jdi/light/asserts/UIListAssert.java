@@ -1,16 +1,13 @@
 package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.JFunc1;
-import org.hamcrest.Matchers;
 
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.BaseSelectorAssert.waitAssert;
-import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.LinqUtils.all;
-import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 

@@ -1,6 +1,5 @@
 package com.epam.jdi.light.ui.html.base;
 
-import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.ui.html.asserts.HtmlAssertion;

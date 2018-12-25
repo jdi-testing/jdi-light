@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.PrintUtils.print;
 import static com.google.GoogleSite.homePage;
 import static com.google.GoogleSite.searchPage;
 import static org.hamcrest.Matchers.*;
