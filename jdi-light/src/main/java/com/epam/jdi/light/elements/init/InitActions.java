@@ -47,6 +47,7 @@ import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
+    public static void init() {}
     public static JFunc1<SiteInfo, Object> SETUP_SECTION_ON_SITE = info -> {
         info.instance = initElement(info);
         return info.instance;

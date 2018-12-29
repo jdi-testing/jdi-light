@@ -8,7 +8,9 @@ package com.epam.jdi.light.ui.html;
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.light.elements.init.InitActions;
 import com.epam.jdi.light.elements.init.PageFactory;
+import com.epam.jdi.light.elements.init.UIFactory;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
@@ -67,6 +69,8 @@ public class HtmlSettings {
                     fields = getFields(obj, WebElement.class);
                 switch (fields.size()) {
                     case 0:
+                        if (obj.getClass().getSimpleName().equals("Form"))
+                            return UIFactory.$("[type=submit]");
                         throw exception("Can't find any buttons on form '%s.", obj);
                     case 1:
                         return (UIElement) getValueField(fields.get(0), obj);
@@ -75,24 +79,26 @@ public class HtmlSettings {
                 }
             };
 
-            Form.FILL_ACTION = (field, parent, setValue) -> {
-                Method[] methods = field.getType().getDeclaredMethods();
-                Object fieldValue = getValueField(field, parent);
-                Method setMethod = first(methods, m -> m.isAnnotationPresent(FillValue.class));
-                if (setMethod != null) {
-                    setMethod.invoke(fieldValue, setValue);
-                    return;
+            Form.FILL_ACTION = (field, element, parent, setValue) -> {
+                if (field != null) {
+                    Method[] methods = field.getType().getDeclaredMethods();
+                    Method setMethod = first(methods, m -> m.isAnnotationPresent(FillValue.class));
+                    if (setMethod != null) {
+                        setMethod.invoke(element, setValue);
+                        return;
+                    }
                 }
-                ((SetValue) getValueField(field, parent)).setValue(setValue);
+                ((SetValue) element).setValue(setValue);
             };
-            Form.GET_ACTION = (field, parent) -> {
-                Method[] methods = field.getType().getDeclaredMethods();
-                Object fieldValue = getValueField(field, parent);
-                Method getMethod = first(methods, m -> m.isAnnotationPresent(VerifyValue.class));
-                if (getMethod != null) {
-                    return getMethod.invoke(fieldValue).toString();
+            Form.GET_ACTION = (field, element, parent) -> {
+                if (field != null) {
+                    Method[] methods = field.getType().getDeclaredMethods();
+                    Method getMethod = first(methods, m -> m.isAnnotationPresent(VerifyValue.class));
+                    if (getMethod != null) {
+                        return getMethod.invoke(element).toString();
+                    }
                 }
-                return ((HasValue) getValueField(field, parent)).getValue().trim();
+                return ((HasValue) element).getValue().trim();
             };
         }
     }

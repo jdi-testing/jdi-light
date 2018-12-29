@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import selenium.entities.User;
 
 public class LoginForm extends Form<User> {
-    @Css("#Name")      WebElement userName;
-    @Css("#Password")  WebElement password;
+    @Css("#name")      WebElement userName;
+    @Css("#password")  WebElement password;
 
     @Css("[type=submit]") WebElement enter;
 }

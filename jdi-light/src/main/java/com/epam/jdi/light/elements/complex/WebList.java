@@ -32,6 +32,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue {
         this.webElements.setForce(elements);
     }
 
+    @JDIAction(level = DEBUG)
     public List<UIElement> elements() {
         if (webElements.hasValue())
             return LinqUtils.map(webElements.get(), UIElement::new);

@@ -26,13 +26,6 @@ public class JDIPerformanceTests extends SimpleTestsInit {
     }
 
     @Test
-    public void fillContactFormTest() {
-        contactFormPage.shouldBeOpened();
-        contactForm.submit(DEFAULT_CONTACT);
-        contactForm.check(DEFAULT_CONTACT);
-    }
-
-    @Test
     public void hugeTableSearchTest() {
         StopWatch timer = StopWatch.createStarted();
         /*usersTable.assertThat().hasRowWithValues(

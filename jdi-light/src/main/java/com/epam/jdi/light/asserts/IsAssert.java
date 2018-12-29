@@ -36,8 +36,8 @@ public class IsAssert<T extends IsAssert> {
         waitAssert(() -> assertThat(element.isDisplayed() ? "displayed" : "hidden", is("displayed")));
         return (T) this;
     }
-    public T hidden() {
-        waitAssert(() -> assertThat(element.isDisplayed() ? "displayed" : "hidden", is("hidden")));
+    public T disappear() {
+        waitAssert(() -> assertThat(element.isDisplayed() ? "displayed" : "disappear", is("disappear")));
         return (T) this;
     }
     public T selected() {

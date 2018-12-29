@@ -27,6 +27,7 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
         this.webElements.setForce(elements);
     }
 
+    @JDIAction(level = DEBUG)
     public List<HtmlElement> elements() {
         return LinqUtils.map(webElements.hasValue()
                 ? webElements.get()
@@ -42,8 +43,7 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
         select(getEnumValue(name));
     }
 
-    @JDIAction
-
+    @JDIAction(level = DEBUG)
     public HtmlElement get(String name) {
         if (getLocator().toString().contains("%s"))
             return new HtmlElement(super.get(name));
@@ -65,7 +65,7 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
         }
         return el;
     }
-    @JDIAction
+    @JDIAction(level = DEBUG)
     public HtmlElement get(Enum name) {
         return get(getEnumValue(name));
     }
@@ -106,7 +106,7 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
     public String getValue() {
         return print(values());
     }
-    @JDIAction
+    @JDIAction(level = DEBUG)
     public void showAll() {
         int size;
         do {

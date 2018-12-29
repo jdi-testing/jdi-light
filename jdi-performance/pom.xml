@@ -21,7 +21,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.0.19</version>
+            <version>1.0.21</version>
         </dependency>
 		
         <!--Allure-->
@@ -34,6 +34,16 @@
 
     <build>
         <plugins>
+            <!-- Java version 8 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
 
             <!--Allure reporting -->
             <plugin>
@@ -70,16 +80,6 @@
                         <phase>post-integration-test</phase>
                     </execution>
                 </executions>
-            </plugin>
-            <!-- Java version 8 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
             </plugin>
         </plugins>
         <!-- For using properties from pom -->

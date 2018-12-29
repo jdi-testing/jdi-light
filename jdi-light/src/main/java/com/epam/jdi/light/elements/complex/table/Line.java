@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.tools.LinqUtils;
@@ -11,6 +12,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 public class Line implements IList<String> {
     private List<String> elements;
@@ -21,6 +23,7 @@ public class Line implements IList<String> {
     public Line(JFunc<List<String>> list) {
         this.elements = list.execute();
     }
+    @JDIAction(level = DEBUG)
     public List<String> elements() {
         return elements;
     }

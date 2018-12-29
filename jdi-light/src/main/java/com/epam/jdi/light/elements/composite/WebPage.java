@@ -45,6 +45,9 @@ public class WebPage extends DriverBase implements INamed {
     private String checkUrl;
     private CheckTypes checkUrlType = CONTAINS;
     private CheckTypes checkTitleType = CheckTypes.NONE;
+    public <T> Form<T> asForm() {
+        return new Form<>().setPageObject(this).setName(getName()+" Form");
+    }
 
     private static ThreadLocal<String> currentPage = new ThreadLocal<>();
     public static String getCurrentPage() { return currentPage.get(); }

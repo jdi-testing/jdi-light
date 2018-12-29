@@ -63,7 +63,7 @@ public class ActionProcessor {
 
     private static String getConditionName(ProceedingJoinPoint jp) {
         JDIAction ja = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
-        return ja.condition();
+        return ja != null ? ja.condition() : "";
     }
     public static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
         $("", result -> true),
@@ -74,15 +74,15 @@ public class ActionProcessor {
     );
     private static boolean condition(ProceedingJoinPoint jp) {
         String conditionName = getConditionName(jp);
-        if (CONDITIONS.has(conditionName))
-            return CONDITIONS.get(conditionName).execute(jp);
-        throw exception("Can't find CONDITION '%s'. Please add this condition in ActionProcessor.CONDITIONS", conditionName);
+        return CONDITIONS.has(conditionName)
+            ? CONDITIONS.get(conditionName).execute(jp)
+            : true;
     }
 
     @Around("stepPointcut()")
-    public Object stepAround(ProceedingJoinPoint jp) {
+    public Object stepAround(ProceedingJoinPoint jp) throws Throwable {
         BEFORE_STEP_ACTION.execute(jp);
-        Object result = stableAction(jp);
+        Object result = jp.proceed();
         return AFTER_STEP_ACTION.execute(jp, result);
     }
 }

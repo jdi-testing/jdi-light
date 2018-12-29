@@ -91,6 +91,11 @@ public class ButtonTests extends TestsInit {
     }
 
     @Test
+    public void vanishButtonTest() {
+        refresh();
+        ghostButton.is().disappear();
+    }
+    @Test
     public void seleniumButtonTest() throws InterruptedException {
         refresh();
         Thread.sleep(4000); // comment to fail selenium test

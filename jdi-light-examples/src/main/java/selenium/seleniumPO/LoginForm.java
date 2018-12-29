@@ -5,8 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import selenium.entities.User;
 
 public class LoginForm {
-    @FindBy(css="form #Name")      WebElement userName;
-    @FindBy(css="form #Password")  WebElement password;
+    @FindBy(css="form #name")      WebElement userName;
+    @FindBy(css="form #password")  WebElement password;
 
     @FindBy(css="form [type=submit]") WebElement enter;
 

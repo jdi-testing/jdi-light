@@ -54,7 +54,6 @@ public final class WebDriverUtils {
     }
 
     private static void killMacOSDriverProcesses(String browserName) {
-
         String name = null;
         switch (browserName.toLowerCase()) {
             case "firefox":

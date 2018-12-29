@@ -19,7 +19,7 @@ public class HtmlElementsPage extends WebPage {
     // @Css("input[type=button].red") public static Button redButton;
     @Css("[value*='Disabled Button']") public static Button disabledButtonInput;
     // @Css("input[type=button][disabled]") public static Button disabledButtonInput;
-    public static Button blueButton, disabledButton, suspendButton;
+    public static Button blueButton, disabledButton, suspendButton, ghostButton;
     // @Css("#blue-button") public static Button blueButton;
     // @Css("#disabled-button") public static Button disabledButton;
 

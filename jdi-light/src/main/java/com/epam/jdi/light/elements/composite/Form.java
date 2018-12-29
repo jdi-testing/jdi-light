@@ -2,12 +2,13 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JAction3;
-import com.epam.jdi.tools.func.JFunc2;
+import com.epam.jdi.tools.func.JAction4;
+import com.epam.jdi.tools.func.JFunc3;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
@@ -36,11 +37,11 @@ import static java.lang.String.format;
  */
 
 public class Form<T> extends Section {
-    public static JAction3<Field, Object, String> FILL_ACTION = (field, parent, setValue)
-        -> ((SetValue) getValueField(field, parent)).setValue(setValue);
+    public static JAction4<Field, Object, Object, String> FILL_ACTION = (field, element, parent, setValue)
+        -> ((SetValue) element).setValue(setValue);
 
-    public static JFunc2<Field, Object, String> GET_ACTION = (field, parent)
-        -> ((HasValue) getValueField(field, parent)).getValue().trim();
+    public static JFunc3<Field, Object, Object, String> GET_ACTION = (field, element, parent)
+        -> ((HasValue) element).getValue().trim();
 
     private FormFilters filter = ALL;
     public FormFilters getFilter() {
@@ -60,26 +61,42 @@ public class Form<T> extends Section {
     @JDIAction("Fill form: {0}")
     public void fill(MapArray<String, String> map) {
         List<Field> allFields = allFields();
+        if (allFields.size() == 0) {
+            for (Pair<String, String> pair : map) {
+                UIElement element = new UIElement<>().setName(pair.key);
+                FILL_ACTION.execute(null, element, pageObject, pair.value);
+            }
+            return;
+        }
         Field setField = null;
         for (Pair<String, String> pair : map)
             try {
                 setField = first(allFields, f -> namesEqual(pair.key, getElementName(f)));
                 if (setField == null)
                     continue;
-                FILL_ACTION.execute(setField, this, pair.value);
-            } catch (Exception ex) { throw exception("Can't fill element '%s'. Exception: %s", setField != null ? setField.getName() : "UNKNOWN FIELD", ex.getMessage()); }
+                FILL_ACTION.execute(setField, getValueField(setField, pageObject), pageObject, pair.value);
+            } catch (Exception ex) { throw exception("Can't fill element '%s'. Exception: %s",
+                    setField != null ? setField.getName() : "UNKNOWN FIELD", ex.getMessage()); }
         setFilterAll();
     }
+    private Object pageObject = this;
+    public Form<T> setPageObject(Object obj) {
+        pageObject = obj;
+        return this;
+    }
     public List<Field> allFields() {
+        return allFields(pageObject);
+    }
+    public List<Field> allFields(Object obj) {
         switch (getFilter()) {
             case MANDATORY:
-                return LinqUtils.where(getFields(this, SetValue.class),
+                return LinqUtils.where(getFields(obj, SetValue.class),
                         field -> hasAnnotation(field, Mandatory.class));
             case OPTIONAL:
-                return LinqUtils.where(getFields(this, SetValue.class),
+                return LinqUtils.where(getFields(obj, SetValue.class),
                         field -> !hasAnnotation(field, Mandatory.class));
             default:
-                return getFields(this, SetValue.class, WebElement.class);
+                return getFields(obj, SetValue.class, WebElement.class);
         }
     }
 
@@ -111,7 +128,7 @@ public class Form<T> extends Section {
             String fieldValue = map.first((name, value) ->
                     namesEqual(name, getElementName(field)));
             if (fieldValue == null) continue;
-            String actual = GET_ACTION.execute(field, this);
+            String actual = GET_ACTION.execute(field, getValueField(field, pageObject), pageObject);
             if (!actual.equals(fieldValue))
                 compareFalse.add(format("Field '%s' (Actual: '%s' <> Expected: '%s')", field.getName(), actual, fieldValue));
         }
@@ -164,9 +181,9 @@ public class Form<T> extends Section {
      */
     @JDIAction("{1}: {0}")
     public void submit(String text, String buttonName) {
-        Field field = getFields(this, SetValue.class).get(0);
-        FILL_ACTION.execute(field, this, text);
-        GET_BUTTON.execute(buttonName, text).click();
+        Field field = getFields(pageObject, SetValue.class).get(0);
+        FILL_ACTION.execute(field, getValueField(field, pageObject), pageObject, text);
+        GET_BUTTON.execute(pageObject, buttonName).click();
     }
 
     /**
@@ -196,7 +213,7 @@ public class Form<T> extends Section {
     @JDIAction("Fill {0} and press {1}")
     public void submit(MapArray<String, String> objStrings, String name) {
         fill(objStrings);
-        GET_BUTTON.execute(this, name).click();
+        GET_BUTTON.execute(pageObject, name).click();
     }
     /**
      * @param objStrings Fill all SetValue elements and click on Button specified button e.g. "Publish" or "Save" <br>
