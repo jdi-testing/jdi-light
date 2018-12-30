@@ -2,6 +2,7 @@ package com.epam.jdi.light.ui.html.base;
 
 import com.epam.jdi.light.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.ui.html.complex.Checklist;
@@ -42,6 +43,7 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
      * Select values from parameters
      * @param names String var arg, elements with text to select
      */
+    @JDIAction
     @Override
     public void select(String... names) {
         for (String name : names) {
@@ -50,6 +52,7 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
                 value.click();
         }
     }
+    @JDIAction
     public <TEnum extends Enum> void select(TEnum... value) {
         select(toStringArray(map(value, EnumUtils::getEnumValue)));
     }
@@ -58,6 +61,7 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
      * Selects only particular elements
      * @param indexes String var arg, elements with text to select
      */
+    @JDIAction
     public void select(int... indexes) {
         for (int i = 1; i <= indexes.length; i++) {
             HtmlElement value = checkboxes().get(indexes[i]);
@@ -70,6 +74,7 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
      * Selects only particular elements
      * @param names String var arg, elements with text to select
      */
+    @JDIAction
     public void check(String... names) {
         List<String> listNames = asList(names);
         for (String name : values()) {
@@ -85,6 +90,7 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
      * Unselects only particular elements
      * @param names String var arg, elements with text to unselect
      */
+    @JDIAction
     public void uncheck(String... names) {
         List<String> listNames = asList(names);
         for (String name : values()) {
@@ -95,10 +101,12 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
                 value.click();
         }
     }
+    @JDIAction
     public <TEnum extends Enum> void check(TEnum... values) {
         check(getEnumValues(values));
     }
 
+    @JDIAction
     public <TEnum extends Enum> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
@@ -107,6 +115,7 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
      * Checks particular elements by index
      * @param indexes int var arg, ids to check
      */
+    @JDIAction
     public void check(int... indexes) {
         List<Integer> listIndexes = toList(indexes);
         for (int i = 1; i <= values().size(); i++) {
@@ -122,6 +131,7 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
      * Unchecks particular elements by index
      * @param indexes int var arg, ids to uncheck
      */
+    @JDIAction
     public void uncheck(int... indexes) {
         List<Integer> listIndexes = toList(indexes);
         for (int i = 1; i <= values().size(); i++) {
@@ -133,27 +143,33 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
         }
     }
 
+    @JDIAction
     public List<String> checked() {
         return ifSelect(checkboxes(), HtmlElement::isSelected, HtmlElement::labelText);
     }
 
+    @JDIAction
     public void select(String value) {
         select(new String[]{value});
     }
 
+    @JDIAction
     public void select(int index) {
         select(new int[]{index});
     }
 
+    @JDIAction
     public List<String> values() {
         return map(labels(), element -> element.getText().trim());
     }
 
+    @JDIAction
     public List<String> enabled() {
         return ifSelect(checkboxes(),
                 HtmlElement::isEnabled,
                 HtmlElement::labelText);
     }
+    @JDIAction
     public List<String> disabled() {
         return ifSelect(checkboxes(),
                 HtmlElement::isDisabled,
@@ -164,9 +180,13 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
     public void setValue(String value) {
         check(value.split(";"));
     }
+    @JDIAction
     @Override
-    public String selected() { return print(ifSelect(checkboxes(),
-            HtmlElement::isSelected, HtmlElement::labelText)); }
+    public String selected() {
+        return print(ifSelect(checkboxes(), HtmlElement::isSelected, HtmlElement::labelText));
+    }
+
+    @JDIAction
     public boolean selected(String value) {
         return get(value).isSelected();
     }

@@ -15,6 +15,7 @@ public interface MultiSelect extends BaseSelector, HasLabel {
     void uncheck(String... values);
     <TEnum extends Enum> void uncheck(TEnum... values);
     void uncheck(int... indexes);
+    String selected();
 
     List<String> checked();
 

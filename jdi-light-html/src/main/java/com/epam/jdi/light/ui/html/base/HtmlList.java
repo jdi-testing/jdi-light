@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.ui.html.complex.Menu;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.EnumUtils;
 import com.epam.jdi.tools.LinqUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.LinqUtils.toStringArray;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 
@@ -39,8 +41,9 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
         for (String name : names)
             get(name).click();
     }
-    public <TEnum extends Enum> void select(TEnum name) {
-        select(getEnumValue(name));
+    @JDIAction
+    public <TEnum extends Enum> void select(TEnum... names) {
+        select(toStringArray(LinqUtils.map(names, EnumUtils::getEnumValue)));
     }
 
     @JDIAction(level = DEBUG)
@@ -82,7 +85,7 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
         webElements.clear();
     }
     @JDIAction(level = DEBUG)
-    public String isSelected() {
+    public String selected() {
         HtmlElement first = logger.logOff(() ->
                 LinqUtils.first(elements(), HtmlElement::isSelected) );
         return first != null ? first.getText() : "";
@@ -117,10 +120,10 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
     }
 
     //region matchers
-    public ListAssert is() {
+    public ListAssert<HtmlElement> is() {
         return new ListAssert<>(this);
     }
-    public ListAssert assertThat() {
+    public ListAssert<HtmlElement> assertThat() {
         return is();
     }
     //endregion

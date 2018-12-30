@@ -8,6 +8,7 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.ListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.CacheValue;
@@ -24,7 +25,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 
-public class WebList extends JDIBase implements IList<UIElement>, SetValue {
+public class WebList extends JDIBase implements IList<UIElement>, SetValue, JDIElement {
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
 
     public WebList() {}

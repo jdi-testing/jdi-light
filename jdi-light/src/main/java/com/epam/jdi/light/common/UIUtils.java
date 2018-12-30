@@ -9,7 +9,6 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
-import com.epam.jdi.tools.func.JAction4;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;

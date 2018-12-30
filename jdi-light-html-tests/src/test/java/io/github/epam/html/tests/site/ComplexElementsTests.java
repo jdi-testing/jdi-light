@@ -42,6 +42,15 @@ public class ComplexElementsTests extends TestsInit {
         originalWindow();
     }
     @Test
+    public void menuTest() {
+        leftMenu.select(ContactForm);
+        //navigationL.select("Contact form");
+        contactFormPage.checkOpened();
+        leftMenu.select(Home);
+        homePage.checkOpened();
+        leftMenu.select(Service, ComplexTable);
+    }
+    @Test
     public void navigationMenuTest() {
         navigationL.select(ContactForm);
         //navigationL.select("Contact form");

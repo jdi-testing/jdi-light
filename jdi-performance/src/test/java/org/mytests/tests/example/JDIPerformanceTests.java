@@ -11,10 +11,7 @@ import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatchers.containsValue;
 import static org.mytests.tests.preconditions.Preconditions.shouldBeLoggedIn;
 import static org.mytests.uiobjects.example.TestData.TABLE_SNAPSHOOT;
-import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_CONTACT;
-import static org.mytests.uiobjects.example.site.SiteJdi.contactFormPage;
 import static org.mytests.uiobjects.example.site.SiteJdi.performancePage;
-import static org.mytests.uiobjects.example.site.pages.ContactFormPage.contactForm;
 import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.*;
 
 public class JDIPerformanceTests extends SimpleTestsInit {

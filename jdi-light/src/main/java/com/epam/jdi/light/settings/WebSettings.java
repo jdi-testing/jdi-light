@@ -8,14 +8,11 @@ package com.epam.jdi.light.settings;
 import com.epam.jdi.light.driver.get.DriverData;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.init.InitActions;
-import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.light.logger.JDILogger;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebElement;
 

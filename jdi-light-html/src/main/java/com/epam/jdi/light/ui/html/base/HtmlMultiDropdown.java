@@ -2,19 +2,22 @@ package com.epam.jdi.light.ui.html.base;
 
 import com.epam.jdi.light.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.Selector;
+import com.epam.jdi.light.ui.html.complex.MultiDropdown;
 import org.openqa.selenium.By;
 
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$$;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.util.Arrays.asList;
 
-public class MultiDropdown extends Selector implements BaseSelectorAssert {
+public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, MultiDropdown {
     By expandArrow = By.cssSelector(".caret");
     By values = By.tagName("li");
     By valueTemplate = By.xpath(".//label[@title='%s']/../..");
@@ -23,13 +26,14 @@ public class MultiDropdown extends Selector implements BaseSelectorAssert {
 
     HtmlElement root() { return $(By.xpath(".."),this).setName("root"); }
     HtmlElement expander() { return root().find(expandArrow).setName("expandArrow"); }
-    HtmlElement valuesList() { return root().find(valuesConatiner).setName("valuesConatiner"); }
+    HtmlElement valuesList() { return root().find(valuesConatiner).setName("valuesContainer"); }
     HtmlElement value(String name) {
         return root().find(fillByTemplate(valueTemplate, name)).setName("valueTemplate");
     }
     HtmlElement valueText() { return root().find(value).setName("value"); }
     List<HtmlElement> allValues() { return root().finds(values); }
 
+    @JDIAction(level = DEBUG)
     private void expand() {
         if (valuesList().isHidden())
             expander().click();
@@ -39,6 +43,7 @@ public class MultiDropdown extends Selector implements BaseSelectorAssert {
      * Select values from parameters
      * @param names String var arg, elements with text to select
      */
+    @JDIAction
     @Override
     public void select(String... names) {
         expand();
@@ -53,6 +58,7 @@ public class MultiDropdown extends Selector implements BaseSelectorAssert {
      * Selects only particular elements
      * @param indexes String var arg, elements with text to select
      */
+    @JDIAction
     public void select(int... indexes) {
         expand();
         for (int i = 1; i <= indexes.length; i++) {
@@ -66,6 +72,7 @@ public class MultiDropdown extends Selector implements BaseSelectorAssert {
      * Selects only particular elements
      * @param names String var arg, elements with text to select
      */
+    @JDIAction
     public void check(String... names) {
         expand();
         List<String> listNames = asList(names);
@@ -82,6 +89,7 @@ public class MultiDropdown extends Selector implements BaseSelectorAssert {
      * Unselects only particular elements
      * @param names String var arg, elements with text to unselect
      */
+    @JDIAction
     public void uncheck(String... names) {
         expand();
         List<String> listNames = asList(names);
@@ -93,10 +101,12 @@ public class MultiDropdown extends Selector implements BaseSelectorAssert {
                 value.click();
         }
     }
+    @JDIAction
     public <TEnum extends Enum> void check(TEnum... values) {
         check(getEnumValues(values));
     }
 
+    @JDIAction
     public <TEnum extends Enum> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
@@ -105,6 +115,7 @@ public class MultiDropdown extends Selector implements BaseSelectorAssert {
      * Checks particular elements by index
      * @param indexes int var arg, ids to check
      */
+    @JDIAction
     public void check(int... indexes) {
         expand();
         List<Integer> listIndexes = toList(indexes);
@@ -121,6 +132,7 @@ public class MultiDropdown extends Selector implements BaseSelectorAssert {
      * Unchecks particular elements by index
      * @param indexes int var arg, ids to uncheck
      */
+    @JDIAction
     public void uncheck(int... indexes) {
         expand();
         List<Integer> listIndexes = toList(indexes);
@@ -133,29 +145,35 @@ public class MultiDropdown extends Selector implements BaseSelectorAssert {
         }
     }
 
+    @JDIAction
     public List<String> checked() {
         return ifSelect(allValues(),
                 HtmlElement::isSelected,
                 HtmlElement::getText);
     }
 
+    @JDIAction
     public void select(String value) {
         select(new String[]{value});
     }
 
+    @JDIAction
     public void select(int index) {
         select(new int[]{index});
     }
 
+    @JDIAction
     public List<String> values() {
         return map(allValues(), HtmlElement::getText);
     }
 
+    @JDIAction
     public List<String> enabled() {
         return ifSelect(allValues(),
                 HtmlElement::isEnabled,
                 HtmlElement::getText);
     }
+    @JDIAction
     public List<String> disabled() {
         return ifSelect(allValues(),
                 HtmlElement::isDisabled,
@@ -166,15 +184,19 @@ public class MultiDropdown extends Selector implements BaseSelectorAssert {
     public void setValue(String value) {
         check(value.split(";"));
     }
+
+    @JDIAction
     @Override
     public String selected() {
         return valueText().getText();
     }
 
+    @JDIAction
     public boolean selected(String value) {
         return selected().trim().equalsIgnoreCase(value.trim());
     }
 
+    @JDIAction
     @Override
     public String getValue() {
         return selected();

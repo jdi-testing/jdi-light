@@ -1,8 +1,8 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.Selector;
@@ -172,19 +172,18 @@ public class InitActions {
     }
     public static boolean isJDIField(Field field) {
         return isInterface(field, WebElement.class) ||
-                isInterface(field, BaseElement.class) ||
-                isClass(field, DriverBase.class) ||
-                isList(field, WebElement.class) ||
-                isList(field, DriverBase.class)||
-                isList(field, BaseElement.class);
+                isInterface(field, JDIElement.class) ||
+                isList(field, WebElement.class);
     }
     public static boolean isPageObject(Class<?> type) {
         return isClass(type, Section.class) || isClass(type, WebPage.class) ||
             LinqUtils.any(type.getFields(), InitActions::isJDIField);
     }
     public static boolean isList(Field field, Class<?> type) {
-        return isInterface(field, List.class)
-                && isInterface(getGenericType(field), type);
+        try {
+            return isInterface(field, List.class)
+                    && isInterface(getGenericType(field), type);
+        } catch (Exception ex) { return false; }
     }
 
     public static Type[] getGenericTypes(Field field) {

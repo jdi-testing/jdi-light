@@ -7,8 +7,8 @@ package com.epam.jdi.light.ui.html;
 
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.init.InitActions;
 import com.epam.jdi.light.elements.init.PageFactory;
 import com.epam.jdi.light.elements.init.UIFactory;
 import com.epam.jdi.light.elements.init.rules.InitRule;
@@ -20,9 +20,7 @@ import com.epam.jdi.light.ui.html.annotations.VerifyValue;
 import com.epam.jdi.light.ui.html.base.*;
 import com.epam.jdi.light.ui.html.common.Button;
 import com.epam.jdi.light.ui.html.common.TextArea;
-import com.epam.jdi.light.ui.html.complex.Checklist;
-import com.epam.jdi.light.ui.html.complex.DataList;
-import com.epam.jdi.light.ui.html.complex.RadioButtons;
+import com.epam.jdi.light.ui.html.complex.*;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 
@@ -48,12 +46,17 @@ public class HtmlSettings {
         if (!initialized) {
             WebSettings.init();
             MapArray<String, InitRule> newRules = map(
-                $("Combobox", iRule(f -> isInterface(f, DataList.class), info -> new Combobox())),
+                $("WebList", iRule(f -> isClass(f, WebList.class), info -> new WebList())),
+                $("HtmlList", iRule(f -> isClass(f.getType(), HtmlList.class, Menu.class, Options.class, Tabs.class)
+                    || isList(f, WebElement.class), info -> new HtmlList())),
+                $("Combobox", iRule(f -> isInterface(f, DataList.class), info -> new HtmlCombobox())),
                 $("Checklist", iRule(f -> isInterface(f, Checklist.class), info -> new HtmlChecklist())),
                 $("RadioButtons", iRule(f -> isInterface(f, RadioButtons.class), info -> new HtmlRadioGroup())),
+                $("MultiDropdown", iRule(f -> isInterface(f, MultiDropdown.class), info -> new HtmlMultiDropdown())),
                 $("BaseSelector", iRule(f -> isInterface(f, BaseSelector.class), info -> new HtmlSelector())),
                 $("TextArea", iRule(f -> isInterface(f, TextArea.class), info -> new TextAreaElement()))
             );
+            INIT_RULES.removeByKey("WebList");
             INIT_RULES.update("Selector",
                 iRule(f -> isInterface(f, BaseSelector.class), info -> new HtmlSelector()));
             INIT_RULES.update("UIElement",

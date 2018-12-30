@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-public interface BaseElement extends HasValue {
+public interface BaseElement extends JDIElement, HasValue {
     void hover();
     boolean isSelected();
     boolean isDeselected();

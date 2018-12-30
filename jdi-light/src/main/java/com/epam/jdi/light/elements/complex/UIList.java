@@ -9,6 +9,7 @@ import com.epam.jdi.light.asserts.UIListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -33,7 +34,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 
-public class UIList<T, E> extends JDIBase implements IList<T> {
+public class UIList<T, E> extends JDIBase implements IList<T>, JDIElement {
 
     private CacheValue<MapArray<String, T>> elements = new CacheValue<>();
     private CacheValue<List<T>> values = new CacheValue<>();

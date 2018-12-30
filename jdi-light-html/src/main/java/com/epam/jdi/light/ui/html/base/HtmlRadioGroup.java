@@ -2,6 +2,7 @@ package com.epam.jdi.light.ui.html.base;
 
 import com.epam.jdi.light.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.ui.html.complex.RadioButtons;
@@ -44,6 +45,7 @@ public class HtmlRadioGroup extends Selector implements BaseSelectorAssert, Radi
      * Selects radio based on value
      * @param value String to select
      */
+    @JDIAction
     @Override
     public void select(String value) {
         label(value).click();
@@ -53,6 +55,7 @@ public class HtmlRadioGroup extends Selector implements BaseSelectorAssert, Radi
      * Selects radio based on index
      * @param index int to select
      */
+    @JDIAction
     public void select(int index) {
         labels().get(index-1).click();
     }
@@ -60,25 +63,31 @@ public class HtmlRadioGroup extends Selector implements BaseSelectorAssert, Radi
      * Gets secleted radio
      * @return String
      */
+    @JDIAction
     public String selected() {
         HtmlElement result = first(radioButtons(), HtmlElement::isSelected);
         return result != null ? result.labelText() : "";
     }
+    @JDIAction
     public boolean selected(String value) {
         return get(value).isSelected();
     }
 
+    @JDIAction
     public List<String> values() {
         return map(labels(), UIElement::getText);
     }
 
+    @JDIAction
     public List<String> checked() {
         return asList(selected());
     }
 
+    @JDIAction
     public List<String> enabled() {
         return ifSelect(radioButtons(), HtmlElement::isEnabled, HtmlElement::labelText);
     }
+    @JDIAction
     public List<String> disabled() {
         return ifSelect(radioButtons(), HtmlElement::isDisabled, HtmlElement::labelText);
     }

@@ -4,7 +4,6 @@ import org.mytests.tests.SimpleTestsInit;
 import org.mytests.tests.preconditions.Preconditions;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_CONTACT;
 import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_USER;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
