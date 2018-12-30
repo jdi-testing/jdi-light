@@ -4,7 +4,7 @@ import com.epam.jdi.light.ui.html.common.TextField;
 
 import java.util.List;
 
-// Implements TextField + Dropdown
+// Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
 public interface DataList extends TextField {
     void select(String value);

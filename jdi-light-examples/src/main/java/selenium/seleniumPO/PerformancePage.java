@@ -22,7 +22,7 @@ public class PerformancePage {
         return null;
     }
 
-    // Dropdown
+    // Droplist
     @FindBy(css = "select[ui=dropdown]")
     private WebElement dropdownValue;
     @FindBy(css = "#user-names option")

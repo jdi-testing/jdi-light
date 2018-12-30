@@ -9,7 +9,7 @@ import com.epam.jdi.light.ui.html.base.HasLabel;
  */
 
 public interface Dropdown extends BaseSelector, HasLabel {
-    // TODO add Dropdown<TEnum extends Enum>
+    // TODO add Droplist<TEnum extends Enum>
     void select(String value);
     <TEnum extends Enum> void select(TEnum value);
     void select(int index);

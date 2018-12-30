@@ -1,7 +1,7 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.Dropdown;
+import com.epam.jdi.light.elements.complex.Droplist;
 import com.epam.jdi.light.elements.complex.WebList;
 import org.openqa.selenium.By;
 
@@ -56,13 +56,13 @@ public class UIFactory {
         return list(locator).setParent(parent);
     }
 
-    public static Dropdown dropdown(String locator) {
-        Dropdown el =  new Dropdown();
+    public static Droplist dropdown(String locator) {
+        Droplist el =  new Droplist();
         By byLocator = getLocator(locator);
         el.setLocator(byLocator);
         return el;
     }
-    public static Dropdown $d(String locator) {
+    public static Droplist $d(String locator) {
         return dropdown(locator);
     }
 }

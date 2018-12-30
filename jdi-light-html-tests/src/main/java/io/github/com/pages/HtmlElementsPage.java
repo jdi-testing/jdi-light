@@ -68,7 +68,7 @@ public class HtmlElementsPage extends WebPage {
     // TODO add Enum
 
     public static Dropdown dressCode;
-    // @Css("#dress-code") public static Dropdown dressCode;
+    // @Css("#dress-code") public static Droplist dressCode;
     @Css("#disabled-dropdown") public static Dropdown disabledDropdown;
 
     public static MultiSelect ages;

@@ -1,6 +1,6 @@
 package io.github.com.sections;
 
-import com.epam.jdi.light.elements.complex.Dropdown;
+import com.epam.jdi.light.elements.complex.Droplist;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.ui.html.base.Combobox;
@@ -15,7 +15,7 @@ import io.github.com.entities.Contacts;
 public class ContactForm extends Form<Contacts> {
 	TextField name, lastName, position, passportNumber, passportSeria;
 
-	Dropdown gender;
+	Droplist gender;
 	Combobox religion;
 	// MultiDropdown
 	MultiDropdown weather;

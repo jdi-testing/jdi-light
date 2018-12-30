@@ -25,9 +25,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class Dropdown extends JDIBase implements ISetup, SetValue {
+public class Droplist extends JDIBase implements ISetup, SetValue {
     private static final String SELECT_ERROR =
-            "Can't %s element in dropdown '%s'. Dropdown should have JDropdown annotation or locator to 'select' tag";
+            "Can't %s element in dropdown '%s'. Droplist should have JDropdown annotation or locator to 'select' tag";
     private static final String TO_MUCH_ELEMENTS_FOUND_ERROR =
             "Found more than 1 <select> tag with locator '%s' for dropdown '%s'";
 
@@ -136,10 +136,10 @@ public class Dropdown extends JDIBase implements ISetup, SetValue {
 
     private void assertLinked(Object element, String name, String actionName) {
         if (element == null)
-            throw exception(format("You must specify '%s' in Dropdown annotation in order to perform %s action", name ,actionName));
+            throw exception(format("You must specify '%s' in Droplist annotation in order to perform %s action", name ,actionName));
     }
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDropdown.class, Dropdown.class))
+        if (!fieldHasAnnotation(field, JDropdown.class, Droplist.class))
             return;
         JDropdown j = field.getAnnotation(JDropdown.class);
         By root = isNotBlank(j.root())
