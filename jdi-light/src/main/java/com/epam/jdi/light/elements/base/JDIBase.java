@@ -42,6 +42,7 @@ public class JDIBase extends DriverBase implements INamed {
     protected CacheValue<WebElement> webElement = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
     public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
+    public boolean isRootLocator = false;
     public static Timer timer () { return new Timer(TIMEOUT*1000); }
     public UIElement setWebElement(WebElement el) {
         webElement.setForce(el);
@@ -106,7 +107,7 @@ public class JDIBase extends DriverBase implements INamed {
         //TODO rethink SMART SEARCH
         if (byLocator == null)
             return asList(SMART_SEARCH.execute(this));
-        SearchContext searchContext = containsRoot(getLocator(args))
+        SearchContext searchContext = isRootLocator
                 ? getDefaultContext()
                 : getSearchContext(parent);
         List<WebElement> els = uiSearch(searchContext, correctLocator(getLocator(args)));
@@ -127,7 +128,7 @@ public class JDIBase extends DriverBase implements INamed {
         By frame = bElement.getFrame();
         SearchContext searchContext = frame != null
             ? getFrameContext(frame)
-            : getContext(parent, locator);
+            : getContext(parent, bElement.isRootLocator);
         //TODO rethink SMART SEARCH
         return locator != null
             ? uiSearch(searchContext, correctLocator(locator)).get(0)
@@ -137,8 +138,8 @@ public class JDIBase extends DriverBase implements INamed {
         return parent == null || isClass(parent.getClass(), WebPage.class)
                 || !isClass(parent.getClass(), JDIBase.class);
     }
-    private SearchContext getContext(Object parent, By locator) {
-        return isRoot(parent) || containsRoot(locator)
+    private SearchContext getContext(Object parent, boolean isRoot) {
+        return isRoot || isRoot(parent)
                 ? getDefaultContext()
                 : getSearchContext(parent);
     }

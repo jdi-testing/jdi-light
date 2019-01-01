@@ -5,6 +5,8 @@ import com.epam.jdi.light.elements.complex.Droplist;
 import com.epam.jdi.light.elements.complex.WebList;
 import org.openqa.selenium.By;
 
+import static com.epam.jdi.light.driver.WebDriverByUtils.getLocator;
+
 /**
  * Created by Roman_Iovlev on 3/28/2018.
  */
@@ -16,11 +18,6 @@ public class UIFactory {
         UIElement<UIElement> el =  new UIElement<>();
         el.setLocator(byLocator);
         return el;
-    }
-    private static By getLocator(String locator) {
-        return locator.charAt(1) == '/'
-                ? By.xpath(locator)
-                : By.cssSelector(locator);
     }
     public static UIElement $(String locator) {
         return element(locator);

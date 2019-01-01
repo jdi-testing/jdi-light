@@ -54,7 +54,8 @@ public class ElementsGoogleTests extends GoogleInit {
             || e.name.contains("株式会")
             || e.name.contains("Japan"));
         jobs.assertThat().onlyOne(e -> e.name.contains("株式会"));
-        jobs.assertThat().noOne(e -> e.name.contains("SELENIDE"));*/
+        jobs.assertThat().noOne(e -> e.name.contains("SELENIDE"));
+        */
     }
 
     private static List<Result> jobs() {

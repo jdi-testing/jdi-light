@@ -164,6 +164,12 @@ public final class WebDriverByUtils {
             return valueOrDefault(replaceChildren(result), one(by));
         } catch (Exception ex) { throw exception("Search By failed"); }
     }
+    public static By getLocator(String locator) {
+        return locator.charAt(1) == '/'
+                ? By.xpath(locator)
+                : By.cssSelector(locator);
+    }
+
     private static List<Object> one(By by) {
         List<Object> result = new ArrayList<>();
         result.add(by);

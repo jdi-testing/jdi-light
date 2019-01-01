@@ -16,6 +16,7 @@ import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
@@ -50,14 +51,14 @@ public class WebSettings {
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static String DRIVER_REMOTE_URL;
 
+    public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<JDIBase, WebElement> SMART_SEARCH = el -> {
         String locatorName = splitHythen(el.name);
-        UIElement ui = $("#"+locatorName).setName(el.name);
-        if (ui.isDisplayed())
-            return ui.get();
-        ui = $("[ui='"+locatorName+"']", el.parent).setName(el.name);
-        if (ui.isDisplayed())
-            return ui.get();
+        for (String template : SMART_SEARCH_LOCATORS) {
+            UIElement ui = $(String.format(template, locatorName)).setName(el.name);
+            if (ui.isDisplayed())
+                return ui.get();
+        }
         throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.name);
     };
 
@@ -91,6 +92,7 @@ public class WebSettings {
                 p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
 
             INIT_THREAD_ID = Thread.currentThread().getId();
+            SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
             initialized = true;
         }
     }

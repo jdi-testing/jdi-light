@@ -12,10 +12,7 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
-import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
@@ -30,6 +27,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverByUtils.containsRoot;
+import static com.epam.jdi.light.driver.WebDriverByUtils.correctXPaths;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.init.PageFactory.initElement;
@@ -107,11 +106,11 @@ public class InitActions {
 
     public static void defaultSetup(SiteInfo info) {
         String parentName = Switch(info).get(
-                Case(i-> i.parent != null,
-                        i -> i.parent.getClass().getSimpleName()),
-                Case(i-> i.parentClass != null,
-                        i -> i.parentClass.getSimpleName()),
-                Default(null)
+            Case(i-> i.parent != null,
+                i -> i.parent.getClass().getSimpleName()),
+            Case(i-> i.parentClass != null,
+                i -> i.parentClass.getSimpleName()),
+            Default(null)
         );
         DriverBase jdi = (DriverBase) info.instance;
         jdi.setName(info.field.getName(), parentName);
@@ -124,7 +123,15 @@ public class InitActions {
         defaultSetup(info);
         JDIBase jdi = (JDIBase) info.instance;
         By locator = getLocatorFromField(info.field);
-        if (locator != null ) jdi.setLocator(locator);
+        if (locator != null) {
+            if (containsRoot(locator)) {
+                locator = correctXPaths(locator);
+                jdi.isRootLocator = true;
+            }
+            jdi.setLocator(locator);
+        }
+        if (info.field.getAnnotation(Root.class) != null)
+            jdi.isRootLocator = true;
         if (hasAnnotation(info.field, Frame.class))
             jdi.setFrame(getFrame(info.field.getAnnotation(Frame.class)));
         info.instance = jdi;
