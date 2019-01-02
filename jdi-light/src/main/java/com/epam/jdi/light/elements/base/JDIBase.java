@@ -20,12 +20,17 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
+import static com.epam.jdi.tools.StringUtils.splitHythen;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
@@ -43,7 +48,7 @@ public class JDIBase extends DriverBase implements INamed {
     protected LocatorType locatorType = DEFAULT;
     public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
     public boolean isRootLocator = false;
-    public static Timer timer () { return new Timer(TIMEOUT*1000); }
+    public static Timer timer () { return new Timer(TIMEOUT.get()*1000); }
     public UIElement setWebElement(WebElement el) {
         webElement.setForce(el);
         return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();
@@ -87,17 +92,17 @@ public class JDIBase extends DriverBase implements INamed {
                     return element;
                 throw exception("");
             } catch (Exception ex) {
-                throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT);
+                throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
             }
         }
         List<WebElement> result = getAll(args);
         if (result.size() == 0)
-            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT);
+            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
         if (result.size() > 1)
             result = LinqUtils.filter(result, el -> searchRule.execute(el));
         if (result.size() == 1)
             return result.get(0);
-        throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT);
+        throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get());
     }
     public UIElement<UIElement> getUI(Object... args) {
         return new UIElement<>(get(args));
@@ -113,6 +118,7 @@ public class JDIBase extends DriverBase implements INamed {
         List<WebElement> els = uiSearch(searchContext, correctLocator(getLocator(args)));
         return filter(els, el -> searchRule.invoke(el));
     }
+
     public List<UIElement> allUI(Object... args) {
         return map(getAll(args), UIElement::new);
     }
@@ -151,9 +157,7 @@ public class JDIBase extends DriverBase implements INamed {
     }
     private By correctLocator(By locator) {
         if (locator == null) return null;
-        return correctXPaths(containsRoot(locator)
-                ? trimRoot(locator)
-                : locator);
+        return correctXPaths(locator);
     }
 
     public String printContext() {
@@ -178,21 +182,28 @@ public class JDIBase extends DriverBase implements INamed {
             isFrame = "Frame: ";
             locator = getFrame();
         }
-        return isFrame + shortBy(locator);
+        String shortLocator = locator != null
+            ? shortBy(locator)
+            : print(select(SMART_SEARCH_LOCATORS, l -> format(l, splitHythen(name))), " or ");
+        return isFrame + shortLocator;
     }
 
     @Override
     public String toString() {
-        if (locator == null) locator = printLocator();
-        if (context == null) context = printFullLocator();
-        return Switch(logger.getLogLevel()).get(
-            Case(l -> l == STEP,
-                l -> msgFormat(PRINT_ELEMENT_STEP, this)),
-            Case(l -> l == INFO,
-                l -> msgFormat(PRINT_ELEMENT_INFO, this)),
-            Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, this))
-        );
+        return PRINT_ELEMENT.execute(this);
     }
+
+    public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
+        if (element.locator == null) element.locator = element.printLocator();
+        if (element.context == null) element.context = element.printFullLocator();
+        return Switch(logger.getLogLevel()).get(
+                Case(l -> l == STEP,
+                    l -> msgFormat(PRINT_ELEMENT_STEP, element)),
+                Case(l -> l == INFO,
+                    l -> msgFormat(PRINT_ELEMENT_INFO, element)),
+                Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
+        );
+    };
     public String jsExecute(String text) {
         return valueOf(js().executeScript("arguments[0]."+text+";", get()));
     }

@@ -5,7 +5,7 @@ package com.epam.jdi.light.settings;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.driver.get.DriverData;
+import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.logger.ILogger;
@@ -28,6 +28,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.settings.TimeoutSettings.*;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static com.epam.jdi.tools.StringUtils.splitHythen;
@@ -46,18 +47,19 @@ public class WebSettings {
         return DOMAIN != null && DOMAIN.contains("://");
     }
     public static boolean initialized = false;
-    public static int TIMEOUT = 10;
     public static String TEST_GROUP = "";
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static String DRIVER_REMOTE_URL;
+    public static String TEST_NAME;
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<JDIBase, WebElement> SMART_SEARCH = el -> {
         String locatorName = splitHythen(el.name);
         for (String template : SMART_SEARCH_LOCATORS) {
             UIElement ui = $(String.format(template, locatorName)).setName(el.name);
-            if (ui.isDisplayed())
+            try {
                 return ui.get();
+            } catch (Exception ignore) { }
         }
         throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.name);
     };
@@ -65,9 +67,10 @@ public class WebSettings {
     public static synchronized void init() {
         if (!initialized) {
             getProperties(TEST_PROPERTIES_PATH);
-            fillAction(p -> TIMEOUT = parseInt(p), "timeout.wait.element");
+            fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
+            fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(p -> DOMAIN = p, "domain");
-            fillAction(p -> DriverData.DRIVER_NAME = p, "driver");
+            fillAction(p -> DRIVER_NAME = p, "driver");
             fillAction(p -> DRIVER_VERSION = p, "drivers.version");
             fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
             fillAction(p -> SCREEN_PATH = p, "screens.folder");
@@ -93,6 +96,7 @@ public class WebSettings {
 
             INIT_THREAD_ID = Thread.currentThread().getId();
             SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
+
             initialized = true;
         }
     }

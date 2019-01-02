@@ -15,19 +15,19 @@ public class Preconditions {
     public static void shouldBeLoggedIn() {
         if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
             homePage.open();
-        if (!header.piterChailovskii.isDisplayed())
+        if (!header.userName.isDisplayed())
             login();
     }
     @Step
     public static void login() {
         header.userIcon.click();
-        header.loginForm.submit(DEFAULT_USER, "enter");
+        header.loginForm.loginAs(DEFAULT_USER);
     }
     @Step
     public static void shouldBeLoggedOut() {
         if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
             homePage.open();
-        if (header.piterChailovskii.isDisplayed())
+        if (header.userName.isDisplayed())
             logout();
     }
     @Step

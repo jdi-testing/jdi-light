@@ -1,5 +1,7 @@
 package com.epam.jdi.light.common;
 
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.tools.Timer.nowTime;
 import static java.lang.String.format;
 
 /**
@@ -8,6 +10,6 @@ import static java.lang.String.format;
 public class Exceptions {
     public static RuntimeException exception(String msg, Object... args) {
         String message = format(msg, args);
-        return new RuntimeException(message);
+        return new RuntimeException(LINE_BREAK + message);
     }
 }

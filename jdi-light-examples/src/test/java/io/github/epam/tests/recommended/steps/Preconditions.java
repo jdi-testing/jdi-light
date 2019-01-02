@@ -15,7 +15,7 @@ public class Preconditions {
     public static void shouldBeLoggedIn() {
         if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
             homePage.open();
-        if (!piterChailovskii.isDisplayed())
+        if (!userName.isDisplayed())
             login();
     }
     @Step
@@ -27,7 +27,7 @@ public class Preconditions {
     public static void shouldBeLoggedOut() {
         if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
             homePage.open();
-        if (piterChailovskii.isDisplayed())
+        if (userName.isDisplayed())
             logout();
     }
     @Step

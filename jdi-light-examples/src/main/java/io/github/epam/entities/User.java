@@ -4,10 +4,9 @@ package io.github.epam.entities;
 import com.epam.jdi.tools.DataClass;
 
 public class User extends DataClass<User> {
-    private String userName = "epam";
+    public String name = "epam";
     public String password = "1234";
 
-    public String name;
     public String lastName;
     //public boolean passport;
     public String acceptConditions;

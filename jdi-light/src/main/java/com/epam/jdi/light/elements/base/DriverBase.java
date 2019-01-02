@@ -20,9 +20,9 @@ public class DriverBase {
         return UIUtils.asEntity(this, entityClass);
     }
 
-    public String name;
-    public String varName;
-    public String typeName;
+    public String name = "NO NAME";
+    public String varName = "NO VAR NAME";
+    public String typeName = "NO TYPE NAME";
     public Object parent;
     public <T extends JDIBase> T setParent(Object parent) {
         this.parent = parent;

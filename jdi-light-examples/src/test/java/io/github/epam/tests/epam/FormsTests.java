@@ -15,7 +15,7 @@ public class FormsTests extends TestsInit {
     public void loginTest() {
         shouldBeLoggedOut();
         header.userIcon.click();
-        header.loginForm.submit(DEFAULT_USER, "enter");
+        header.loginForm.login(DEFAULT_USER);
         homePage.checkOpened();
     }
 

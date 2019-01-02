@@ -11,8 +11,8 @@ import io.github.com.sections.LoginForm;
 public class Header extends Section {
 	@Css("form") public static LoginForm loginForm;
 	@Css(".fa-sign-out") public static Button logout;
-	@Css("img#epam_logo") public static Image epamLogo;
-	@Css("img#user-icon") public static Icon userIcon;
-	@XPath(".//*[@ui='label']") public static Icon piterChailovskii;
+	public static Image epamLogo;
+	public static Icon userIcon;
+	public static Icon userName;
 
 }

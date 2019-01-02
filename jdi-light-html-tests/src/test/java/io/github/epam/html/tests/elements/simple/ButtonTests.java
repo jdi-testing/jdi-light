@@ -9,7 +9,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.base.WindowsManager.acceptAlert;
 import static com.epam.jdi.light.elements.base.WindowsManager.getAlertText;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static com.epam.jdi.light.settings.WebSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.htmlElementsPage;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
@@ -50,12 +50,12 @@ public class ButtonTests extends TestsInit {
 
         disabledButton.click();
         try {
-            TIMEOUT = 1;
+            TIMEOUT .set(1);
             acceptAlert();
             fail("Disabled button should not work, but work");
         } catch (Exception ex) { }
         finally {
-            TIMEOUT = 10;
+            TIMEOUT.reset();
         }
     }
 

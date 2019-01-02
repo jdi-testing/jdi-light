@@ -9,9 +9,7 @@ import com.epam.jdi.light.ui.html.common.TextField;
 import io.github.com.entities.User;
 
 public class LoginForm extends Form<User> {
-	@Css("input[type=text]") public TextField userName;
-	@Css("input[type=password]") public TextField password;
-
-	@UI(".//button[@type='submit']") public Button enter;
+	public TextField name, password;
+	public Button loginButton;
 
 }

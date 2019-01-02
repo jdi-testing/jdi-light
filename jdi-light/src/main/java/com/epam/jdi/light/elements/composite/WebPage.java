@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.settings.TimeoutSettings;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
@@ -19,12 +20,15 @@ import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.*;
 import static com.epam.jdi.light.common.PageChecks.NONE;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
+import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
@@ -63,11 +67,11 @@ public class WebPage extends DriverBase implements INamed {
     }
 
     public static String getUrl() {
-        return WebDriverFactory.getDriver().getCurrentUrl();
+        return getDriver().getCurrentUrl();
     }
 
     public static String getTitle() {
-        return WebDriverFactory.getDriver().getTitle();
+        return getDriver().getTitle();
     }
 
     public void updatePageData(Url urlAnnotation, Title titleAnnotation) {
@@ -158,8 +162,8 @@ public class WebPage extends DriverBase implements INamed {
     }
     public void open(Object... params) {
         String urlWithParams = params == null || params.length == 0
-                ? url
-                : url.contains("%s")
+            ? url
+            : url.contains("%s")
                 ? String.format(url, params)
                 : MessageFormat.format(url, params);
         open(urlWithParams);
@@ -177,7 +181,7 @@ public class WebPage extends DriverBase implements INamed {
      */
     @JDIAction("Reload current page")
     public static void refresh() {
-        WebDriverFactory.getDriver().navigate().refresh();
+        getDriver().navigate().refresh();
     }
     public static void reload() { refresh(); }
 
@@ -186,7 +190,7 @@ public class WebPage extends DriverBase implements INamed {
      */
     @JDIAction("Go back to previous page")
     public static void back() {
-        WebDriverFactory.getDriver().navigate().back();
+        getDriver().navigate().back();
     }
 
 
@@ -195,7 +199,7 @@ public class WebPage extends DriverBase implements INamed {
      */
     @JDIAction("Go forward to next page")
     public static void forward() {
-        WebDriverFactory.getDriver().navigate().forward();
+        getDriver().navigate().forward();
     }
 
     @JDIAction
@@ -205,7 +209,7 @@ public class WebPage extends DriverBase implements INamed {
     }
     @JDIAction
     public static String getHtml() {
-        return WebDriverFactory.getDriver().getPageSource();
+        return getDriver().getPageSource();
     }
 
     private static void scroll(int x, int y) {
@@ -307,6 +311,7 @@ public class WebPage extends DriverBase implements INamed {
         if (CHECK_AFTER_OPEN == NEW_PAGE)
             page.checkOpened();
         logger.toLog("Page: " + page.getName());
+        TIMEOUT.set(PAGE_TIMEOUT.get());
     };
     public static JAction1<WebPage> BEFORE_EACH_PAGE = page -> {
         if (CHECK_AFTER_OPEN == EVERY_PAGE)

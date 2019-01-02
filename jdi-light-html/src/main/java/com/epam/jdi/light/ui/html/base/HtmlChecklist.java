@@ -35,7 +35,7 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
     public HtmlChecklist() { }
     public HtmlChecklist(WebElement el) { super(el); }
     List<UIElement> labels() {
-        return map(getAll(), el -> new HtmlElement(el).label());
+        return map(getAll(), el -> new HtmlElement(el).label().setName(getName()+ " label"));
     }
     List<HtmlElement> checkboxes() { return map(getAll(), HtmlElement::new); }
 

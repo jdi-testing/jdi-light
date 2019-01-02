@@ -7,7 +7,9 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.ScreenshotMaker;
 import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -18,8 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.ScreenshotMaker.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
@@ -74,8 +79,6 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
             click();
     }
 
-
-    @JDIAction
     public UIElement label() {
         return $("[for="+getAttribute("id")+"]");
     }
@@ -152,8 +155,14 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
     }
     public boolean displayed() {
         try {
-            WebElement el = get();
-            return el != null && el.isDisplayed();
+            if (webElement.hasValue())
+                return webElement.get().isDisplayed();
+            if (byLocator == null) {
+                WebElement element = SMART_SEARCH.execute(this);
+                return element != null && element.isDisplayed();
+            }
+            List<WebElement> result = getAll();
+            return result.size() == 1 && result.get(0).isDisplayed();
         } catch (Exception ex) { return false; }
     }
 
@@ -241,6 +250,11 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
     }
     public void higlight() { show();
         higlight("red");
+    }
+    public String makePhoto() {
+        show();
+        higlight();
+        return takeScreen();
     }
     @JDIAction
     public void show() {

@@ -8,10 +8,11 @@ import io.github.com.sections.LoginForm;
 import org.openqa.selenium.WebElement;
 
 public class Header extends Section {
-	@Css("header form") public static LoginForm loginForm;
+	@Css("form") public static LoginForm loginForm;
 	@Css(".fa-sign-out") public static WebElement logout;
-	@Css("img#epam_logo") public static WebElement epamLogo;
-	@Css("img#user-icon") public static WebElement userIcon;
-	@XPath(".//*[@ui='label']") public static WebElement piterChailovskii;
+	public static WebElement epamLogo;
+	public static WebElement userIcon;
+	@Css(".icon-search:not(.active)") public static WebElement searchIcon;
+	@XPath(".//*[@ui='label']") public static WebElement userName;
 
 }

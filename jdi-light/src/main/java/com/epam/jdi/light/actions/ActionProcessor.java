@@ -6,6 +6,8 @@ package com.epam.jdi.light.actions;
  */
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -18,8 +20,11 @@ import java.util.List;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.settings.WebSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.Timer.nowTime;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static java.lang.System.currentTimeMillis;
@@ -35,15 +40,20 @@ public class ActionProcessor {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        BEFORE_JDI_ACTION.execute(jp);
-        Object result = stableAction(jp);
-        return AFTER_JDI_ACTION.execute(jp, result);
+        try {
+            BEFORE_JDI_ACTION.execute(jp);
+            Object result = stableAction(jp);
+            return AFTER_JDI_ACTION.execute(jp, result);
+        } catch (Throwable ex) {
+            throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(jp.getThis(), ex.getMessage()));
+        }
     }
 
     private static Object stableAction(ProceedingJoinPoint jp) {
         long start = currentTimeMillis();
         Throwable exception = null;
         logger.logOff();
+        int timeout = TIMEOUT.get();
         do { try {
             Object result =  jp.proceed();
             boolean c = condition(jp);
@@ -55,10 +65,10 @@ public class ActionProcessor {
                 exception = ex;
                 Thread.sleep(200);
             } catch (Exception ignore) {  } }
-        } while (currentTimeMillis() - start < TIMEOUT*1000);
+        } while (currentTimeMillis() - start < timeout*1000);
         logger.logOn();
         throw exception("Failed to execute %s action during %s seconds. Exception: %s",
-                jp.getSignature().getName(), TIMEOUT, exception);
+                jp.getSignature().getName(), timeout, exception);
     }
 
     private static String getConditionName(ProceedingJoinPoint jp) {
@@ -81,8 +91,12 @@ public class ActionProcessor {
 
     @Around("stepPointcut()")
     public Object stepAround(ProceedingJoinPoint jp) throws Throwable {
-        BEFORE_STEP_ACTION.execute(jp);
-        Object result = jp.proceed();
-        return AFTER_STEP_ACTION.execute(jp, result);
+        try {
+            BEFORE_STEP_ACTION.execute(jp);
+            Object result = jp.proceed();
+            return AFTER_STEP_ACTION.execute(jp, result);
+        } catch (Throwable ex) {
+            throw exception(ACTION_FAILED.execute(jp.getThis(), ex.getMessage()));
+        }
     }
 }

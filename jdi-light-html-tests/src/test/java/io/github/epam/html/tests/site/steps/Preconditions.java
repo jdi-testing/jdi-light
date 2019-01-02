@@ -1,6 +1,7 @@
 package io.github.epam.html.tests.site.steps;
 
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
 import io.qameta.allure.Step;
 
 import static io.github.com.StaticSite.homePage;
@@ -15,7 +16,7 @@ public class Preconditions {
     public static void shouldBeLoggedIn() {
         if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
             homePage.open();
-        if (!piterChailovskii.isDisplayed())
+        if (userName.isHidden())
             login();
     }
     @Step
@@ -26,7 +27,7 @@ public class Preconditions {
     @Step
     public static void shouldBeLoggedOut() {
         System.out.println("THREAD ID" + Thread.currentThread().getId());
-        if (piterChailovskii.isDisplayed())
+        if (userName.isDisplayed())
             logout();
     }
     @Step

@@ -23,6 +23,8 @@ import static com.epam.jdi.light.driver.get.DriverTypes.*;
 import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.DRIVER_REMOTE_URL;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.tools.map.MapArray.*;
+import static com.epam.jdi.tools.pairs.Pair.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static com.epam.jdi.tools.switcher.SwitchActions.Value;
 import static java.lang.String.format;
@@ -109,13 +111,14 @@ public class WebDriverFactory {
 
     public static long INIT_THREAD_ID = -1;
     public static boolean SWITCH_THREAD = false;
+    public static WebDriver INIT_DRIVER;
 
     public static WebDriver getDriver(String driverName) {
-        /* TODO
-        if (SWITCH_THREAD && INIT_THREAD_ID != Thread.currentThread().getId())
-            runDrivers.get().ge
-        if (INIT_THREAD_ID == Thread.currentThread().getId())
-            SWITCH_THREAD = true; */
+        if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
+            runDrivers.set(map($(driverName, INIT_DRIVER)));
+            SWITCH_THREAD = true;
+            return INIT_DRIVER;
+        }
         if (!drivers.has(driverName))
             useDriver(driverName);
         try {
@@ -136,6 +139,8 @@ public class WebDriverFactory {
                 result = drivers.get(driverName).invoke();
                 runDrivers.get().update(driverName, result);
             }
+            if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId())
+                INIT_DRIVER = result;
             lock.unlock();
             return result;
         } catch (Exception ex) {

@@ -81,8 +81,6 @@ public class HtmlElementsPage extends WebPage {
     public static Checkbox acceptConditions;
     // @UI("#accept-conditions") public static Checkbox acceptConditions;
 
-    // TODO NEED VERIFICATION
-    // TODO UNCOMMENT public static List<Checkbox> checkboxList;
     @UI("[name=checks-group]")
     public static Checklist weather;
     public static Checklist weatherNoLocator;

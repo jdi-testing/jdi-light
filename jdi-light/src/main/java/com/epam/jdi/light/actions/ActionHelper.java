@@ -7,6 +7,8 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.func.JAction1;
@@ -27,6 +29,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
+import static com.epam.jdi.light.elements.base.OutputTemplates.PRINT_ELEMENT_STEP;
 import static com.epam.jdi.light.elements.base.OutputTemplates.SHORT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
@@ -34,6 +37,7 @@ import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitLowerCase;
 import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
@@ -99,8 +103,8 @@ public class ActionHelper {
     private static String getBeforeLogString(ProceedingJoinPoint jp) {
         String actionName = GET_ACTION_NAME.execute(jp);
         String logString = jp.getThis() == null
-                ? actionName
-                : msgFormat(getTemplate(logger.getLogLevel()), map(
+            ? actionName
+            : msgFormat(getTemplate(logger.getLogLevel()), map(
                 $("action", actionName),
                 $("element", getElementName(jp))));
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
@@ -121,6 +125,8 @@ public class ActionHelper {
             }
         }
     }
+
+    public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
     private static WebPage getPage(Object element) {
         if (isClass(element.getClass(), DriverBase.class) &&
             !isClass(element.getClass(), WebPage.class))

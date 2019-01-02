@@ -28,7 +28,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.containsRoot;
-import static com.epam.jdi.light.driver.WebDriverByUtils.correctXPaths;
+import static com.epam.jdi.light.driver.WebDriverByUtils.trimRoot;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.init.PageFactory.initElement;
@@ -125,7 +125,7 @@ public class InitActions {
         By locator = getLocatorFromField(info.field);
         if (locator != null) {
             if (containsRoot(locator)) {
-                locator = correctXPaths(locator);
+                locator = trimRoot(locator);
                 jdi.isRootLocator = true;
             }
             jdi.setLocator(locator);

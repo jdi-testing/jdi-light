@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.settings.WebSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 
 /**
  * Created by Roman Iovlev on 02.03.2018
@@ -15,7 +15,7 @@ import static com.epam.jdi.light.settings.WebSettings.TIMEOUT;
 
 public interface BaseSelectorAssert {
     static void waitAssert(JAction action) {
-        new Timer(TIMEOUT*1000).wait(action::execute);
+        new Timer(TIMEOUT.get()*1000).wait(action::execute);
     }
     WebElement get();
     String selected();
