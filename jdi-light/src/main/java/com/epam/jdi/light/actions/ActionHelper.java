@@ -7,8 +7,6 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.DriverBase;
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.func.JAction1;
@@ -24,20 +22,16 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Objects;
 
 import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
-import static com.epam.jdi.light.elements.base.OutputTemplates.PRINT_ELEMENT_STEP;
 import static com.epam.jdi.light.elements.base.OutputTemplates.SHORT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitLowerCase;
 import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
@@ -62,20 +56,19 @@ public class ActionHelper {
             String template = methodNameTemplate(method);
             if (isBlank(template))
                 return getDefaultName(method.getName(), methodArgs(jp, method));
-            return Switch(template).get(
-                    Case(t -> t.contains("{0"), t -> {
-                        Object[] args = jp.getArgs();
-                        return MessageFormat.format(t, args);
-                    }),
-                    Case(t -> t.contains("{"), t -> {
-                        MapArray<String, Object> obj = toMap(()->new MapArray<>("this", getElementName(jp)));
-                        MapArray<String, Object> args = methodArgs(jp, method);
-                        MapArray<String, Object> fields = classFields(jp);
-                        return getActionNameFromTemplate(method, t, obj, args, fields);
-                    }),
-                    Case(t -> t.contains("%s"), t -> format(t, jp.getArgs())),
-                    Default(t -> method.getName())
-            );
+            if (template.contains("{0")) {
+                Object[] args = jp.getArgs();
+                template = msgFormat(template, args);
+            } else if (template.contains("%s")) {
+                template = format(template, jp.getArgs());
+            }
+            if (template.contains("{")) {
+                MapArray<String, Object> obj = toMap(()->new MapArray<>("this", getElementName(jp)));
+                MapArray<String, Object> args = methodArgs(jp, method);
+                MapArray<String, Object> fields = classFields(jp);
+                return getActionNameFromTemplate(method, template, obj, args, fields);
+            }
+            return template;
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: " +
                     "Can't get action name: " + ex.getMessage());
@@ -89,11 +82,16 @@ public class ActionHelper {
         BEFORE_STEP_ACTION.execute(jp);
         processNewPage(jp);
     };
-
+    public static int CUT_STEP_TEXT = 30;
     public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
-        if (result != null && logLevel(jp).equalOrMoreThan(INFO))
-            logger.info(">>> " + result);
-        logger.debug("Done");
+        LogLevels logLevel = logLevel(jp);
+        if (result != null) {
+            String text = result.toString();
+            if (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5)
+                text = text.substring(0, CUT_STEP_TEXT) + "...";
+            logger.toLog(">>> " + text, logLevel);
+        } else
+            logger.debug("Done");
         return result;
     };
     public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_JDI_ACTION =
@@ -171,24 +169,6 @@ public class ActionHelper {
         );
         return format("%s%s", method, stringArgs);
     }
-    static String getActionName(JoinPoint joinPoint) {
-        try {
-            MethodSignature method = getMethod(joinPoint);
-            String template = methodNameTemplate(method);
-            return Switch(template).get(
-                Case(t -> t.contains("{0"), t -> MessageFormat.format(t, joinPoint.getArgs())),
-                Case(t -> t.contains("{"), t -> {
-                    MapArray obj = toMap(()->new MapArray<>("this", getElementName(joinPoint)));
-                    return getActionNameFromTemplate(method, t, obj, methodArgs(joinPoint, method), classFields(joinPoint));
-                }),
-                Case(t -> t.contains("%s"), t -> format(t, joinPoint.getArgs())),
-                Default(t -> getDefaultName(t, methodArgs(joinPoint, method)))
-            );
-        } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: " +
-                    "Can't get action name: " + ex.getMessage());
-        }
-    }
 
     static String arrayToString(Object array) {
         String result = "";
@@ -244,9 +224,9 @@ public class ActionHelper {
     }
     static List<Field> getThisFields(JoinPoint joinPoint) {
         Object obj = joinPoint.getThis();
-        return obj != null
+        return /*obj != null
                 ? getFieldsDeep(obj)
-                : asList(joinPoint.getSignature().getDeclaringType().getFields());
+                : */asList(joinPoint.getSignature().getDeclaringType().getFields());
     }
     static String getActionNameFromTemplate(MethodSignature method, String value,
                                             MapArray<String, Object>... args) {

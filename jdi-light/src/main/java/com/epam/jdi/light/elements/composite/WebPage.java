@@ -3,12 +3,10 @@ package com.epam.jdi.light.elements.composite;
 import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.settings.TimeoutSettings;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
@@ -21,12 +19,9 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.*;
 import static com.epam.jdi.light.common.PageChecks.NONE;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
-import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
-import static com.epam.jdi.light.logger.LogLevels.INFO;
-import static com.epam.jdi.light.logger.LogLevels.STEP;
+import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
@@ -43,8 +38,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 
 public class WebPage extends DriverBase implements INamed {
-    public String url;
-    public String title;
+    public String url = "";
+    public String title = "";
 
     private String checkUrl;
     private CheckTypes checkUrlType = CONTAINS;
@@ -66,10 +61,12 @@ public class WebPage extends DriverBase implements INamed {
         new WebPage(url).open();
     }
 
+    @JDIAction(level = DEBUG)
     public static String getUrl() {
         return getDriver().getCurrentUrl();
     }
 
+    @JDIAction(level = DEBUG)
     public static String getTitle() {
         return getDriver().getTitle();
     }
@@ -105,7 +102,7 @@ public class WebPage extends DriverBase implements INamed {
     /**
      * Check that page opened
      */
-    @JDIAction
+    @JDIAction("Check that '{name}'(url={url}; title={title}) is opened")
     public void checkOpened() {
         if (!hasRunDrivers())
             throw exception("Page '%s' is not opened: Driver is not run", toString());
@@ -128,6 +125,7 @@ public class WebPage extends DriverBase implements INamed {
         setCurrentPage(this);
     }
 
+    @JDIAction(level = DEBUG)
     public boolean isOpened() {
         if (!hasRunDrivers())
             return false;
@@ -154,7 +152,7 @@ public class WebPage extends DriverBase implements INamed {
     /**
      * Opens url specified for page
      */
-    @JDIAction("Open {url}")
+    @JDIAction("Open '{name}'(url={url})")
     private void open(String url) {
         CacheValue.reset();
         driver().navigate().to(url);
@@ -169,7 +167,7 @@ public class WebPage extends DriverBase implements INamed {
         open(urlWithParams);
     }
 
-    @JDIAction
+    @JDIAction("'{name}'(url={url}) should be opened")
     public void shouldBeOpened() {
         if (isOpened()) return;
         open();
@@ -202,7 +200,7 @@ public class WebPage extends DriverBase implements INamed {
         getDriver().navigate().forward();
     }
 
-    @JDIAction
+    @JDIAction(level = DEBUG)
     public static void zoom(double factor) {
         jsExecute("document.body.style.transform = 'scale(' + arguments[0] + ')';" +
                         "document.body.style.transformOrigin = '0 0';", factor);
@@ -212,6 +210,7 @@ public class WebPage extends DriverBase implements INamed {
         return getDriver().getPageSource();
     }
 
+    @JDIAction(level = DEBUG)
     private static void scroll(int x, int y) {
         jsExecute("window.scrollBy("+x+","+y+")");
     }

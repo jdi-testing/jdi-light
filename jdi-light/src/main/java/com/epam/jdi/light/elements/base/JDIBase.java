@@ -18,13 +18,10 @@ import static com.epam.jdi.light.common.LocatorType.DEFAULT;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
-import static com.epam.jdi.light.logger.LogLevels.INFO;
-import static com.epam.jdi.light.logger.LogLevels.STEP;
+import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
@@ -192,7 +189,9 @@ public class JDIBase extends DriverBase implements INamed {
     public String toString() {
         return PRINT_ELEMENT.execute(this);
     }
-
+    public String toError() {
+        return msgFormat(PRINT_ELEMENT_ERROR, this);
+    }
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
         if (element.locator == null) element.locator = element.printLocator();
         if (element.context == null) element.context = element.printFullLocator();
@@ -201,6 +200,8 @@ public class JDIBase extends DriverBase implements INamed {
                     l -> msgFormat(PRINT_ELEMENT_STEP, element)),
                 Case(l -> l == INFO,
                     l -> msgFormat(PRINT_ELEMENT_INFO, element)),
+                Case(l -> l == ERROR,
+                    l -> msgFormat(PRINT_ELEMENT_ERROR, element)),
                 Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
         );
     };

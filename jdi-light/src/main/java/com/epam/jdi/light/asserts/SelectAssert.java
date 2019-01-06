@@ -1,6 +1,5 @@
 package com.epam.jdi.light.asserts;
 
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import org.hamcrest.Matcher;
 
@@ -12,39 +11,35 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class SelectAssert extends IsAssert {
-
     Selector selector;
+
     public SelectAssert(Selector selector) {
-        super(getElement(selector));
+        super(selector);
         this.selector = selector;
-    }
-    private static UIElement<UIElement> getElement(Selector selector) {
-        try { return new UIElement<>(selector.get()); }
-        catch (Exception ignore) { return null; }
     }
 
     public SelectAssert selected(String option) {
-        waitAssert(() -> assertThat(selector.selected(option), is(true)));
+        waitAssert(() -> assertThat(selector.selected(option), is(true)), name);
         return this;
     }
     public <TEnum extends Enum> SelectAssert selected(TEnum option) {
         return selected(getEnumValue(option));
     }
     public SelectAssert selected(Matcher<? super List<String>> condition) {
-        waitAssert(() -> assertThat(selector.checked(), condition));
+        waitAssert(() -> assertThat(selector.checked(), condition), name);
         return this;
     }
 
     public SelectAssert values(Matcher<? super List<String>> condition) {
-        waitAssert(() -> assertThat(selector.values(), condition));
+        waitAssert(() -> assertThat(selector.values(), condition), name);
         return this;
     }
     public SelectAssert enabled(Matcher<? super List<String>> condition) {
-        waitAssert(() -> assertThat(selector.enabled(), condition));
+        waitAssert(() -> assertThat(selector.listEnabled(), condition), name);
         return this;
     }
     public SelectAssert disabled(Matcher<? super List<String>> condition) {
-        waitAssert(() -> assertThat(selector.disabled(), condition));
+        waitAssert(() -> assertThat(selector.listDisabled(), condition), name);
         return this;
     }
 }

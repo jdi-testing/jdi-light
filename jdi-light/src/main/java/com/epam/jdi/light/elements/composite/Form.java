@@ -58,8 +58,7 @@ public class Form<T> extends Section {
      * @param map Specify entity as map
      *            Fills all elements on the form which implements SetValue interface and can be matched with fields in input entity
      */
-    @JDIAction("Fill form: {0}")
-    public void fill(MapArray<String, String> map) {
+    protected void fill(MapArray<String, String> map) {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
@@ -112,7 +111,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fills all elements on the form which implements SetValue interface and can be matched with fields in input entity
      */
-    @JDIAction("Fill form: {0}")
+    @JDIAction("Fill '{name}' with {0}")
     public void fill(T entity) {
         fill(getMapFromObject(entity));
     }
@@ -121,8 +120,7 @@ public class Form<T> extends Section {
      * @param map Specify entity as mapArray
      *            Fills all elements on the form which implements SetValue interface and can be matched with fields in input entity
      */
-    @JDIAction("Verify form value: {0}")
-    public List<String> verify(MapArray<String, String> map) {
+    protected List<String> verify(MapArray<String, String> map) {
         List<String> compareFalse = new ArrayList<>();
         for (Field field : allFields()) {
             String fieldValue = map.first((name, value) ->
@@ -139,7 +137,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      * Verify that form filled correctly. If not returns list of keys where verification fails
      */
-    @JDIAction("Verify form: {0}")
+    @JDIAction("Verify that '{name}' values are: {0}")
     public List<String> verify(T entity) {
         return verify(getMapFromObject(entity));
     }
@@ -148,8 +146,7 @@ public class Form<T> extends Section {
      * @param map Specify entity as mapArray
      *            Verify that form filled correctly. If not throws error
      */
-    @JDIAction("Check form: {0}")
-    public void check(MapArray<String, String> map) {
+    protected void check(MapArray<String, String> map) {
         List<String> result = verify(map);
         if (result.size() != 0)
             throw exception( "Check form failed:" + LINE_BREAK + print(result, LINE_BREAK));
@@ -158,7 +155,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Verify that form filled correctly. If not throws error
      */
-    @JDIAction("Check form: {0}")
+    @JDIAction("Check that '{name}' values are: {0}")
     public void check(T entity) {
         check(getMapFromObject(entity));
     }
@@ -168,6 +165,7 @@ public class Form<T> extends Section {
      *             Fill first setable field with value and click on Button “submit” <br>
      * @apiNote To use this option Form pageObject should have at least one SetValue element and only one IButton Element
      */
+    @JDIAction("Submit '{name}' with value '{0}'")
     public void submit(String text) {
         submit(text, "submit");
     }
@@ -179,7 +177,7 @@ public class Form<T> extends Section {
      * @apiNote To use this option Form pageObject should have at least one SetValue element <br>
      * Allowed different buttons to send one form e.g. save/ publish / cancel / search update ...
      */
-    @JDIAction("{1}: {0}")
+    @JDIAction("Submit '{name}' with value '{0}' and press '{1}' button")
     public void submit(String text, String buttonName) {
         Field field = getFields(pageObject, SetValue.class).get(0);
         FILL_ACTION.execute(field, getValueField(field, pageObject), pageObject, text);
@@ -191,7 +189,7 @@ public class Form<T> extends Section {
      *               Fill all SetValue elements and click on Button “submit” <br>
      * @apiNote To use this option Form pageObject should have only one IButton Element
      */
-    @JDIAction("Submit {0}")
+    @JDIAction("Submit '{name}' with {0}")
     public void submit(T entity) {
         submit(entity, "submit");
     }
@@ -204,14 +202,13 @@ public class Form<T> extends Section {
      * e.g. if you call "submit(user, "Publish") then you should have Element 'publishButton'. <br>
      * * Letters case in button name  no matters
      */
-    @JDIAction("Fill {0} and press {1}")
+    @JDIAction("Fill '{name}' with {0} and press '{1}'")
     public void submit(T entity, String buttonName) {
         submit(getMapFromObject(entity), buttonName);
     }
 
 
-    @JDIAction("Fill {0} and press {1}")
-    public void submit(MapArray<String, String> objStrings, String name) {
+    protected void submit(MapArray<String, String> objStrings, String name) {
         fill(objStrings);
         GET_BUTTON.execute(pageObject, name).click();
     }
@@ -221,8 +218,7 @@ public class Form<T> extends Section {
      * e.g. if you call "submit(user, "Publish") then you should have Element 'publishButton'. <br>
      * * Letters case in button name  no matters
      */
-    @JDIAction("Submit {0}")
-    public void submit(MapArray<String, String> objStrings) {
+    protected void submit(MapArray<String, String> objStrings) {
         submit(objStrings, "submit");
     }
 

@@ -168,13 +168,13 @@ public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, M
     }
 
     @JDIAction
-    public List<String> enabled() {
+    public List<String> listEnabled() {
         return ifSelect(allValues(),
                 HtmlElement::isEnabled,
                 HtmlElement::getText);
     }
     @JDIAction
-    public List<String> disabled() {
+    public List<String> listDisabled() {
         return ifSelect(allValues(),
                 HtmlElement::isDisabled,
                 HtmlElement::getText);

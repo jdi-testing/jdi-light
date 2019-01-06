@@ -14,49 +14,51 @@ import static org.hamcrest.Matchers.*;
 
 public class ListAssert<T extends UIElement> {
     List<T> elements;
+    String name;
 
-    public ListAssert(List<T> elements) {
+    public ListAssert(List<T> elements, String name) {
         this.elements = elements;
+        this.name = name;
     }
 
     public ListAssert<T> texts(Matcher<Collection<? extends String>> condition) {
-        waitAssert(() -> assertThat(map(elements, WebElement::getText), condition));
+        waitAssert(() -> assertThat(map(elements, WebElement::getText), condition), name);
         return this;
     }
     public ListAssert<T> attrs(String attrName, Matcher<Collection<? extends String>> condition) {
-        waitAssert(() -> assertThat(map(elements, el -> el.getAttribute(attrName)), condition));
+        waitAssert(() -> assertThat(map(elements, el -> el.getAttribute(attrName)), condition), name);
         return this;
     }
     public ListAssert<T> css(String css, Matcher<Collection<? extends String>> condition) {
-        waitAssert(() -> assertThat(map(elements, el -> el.getCssValue(css)), condition));
+        waitAssert(() -> assertThat(map(elements, el -> el.getCssValue(css)), condition), name);
         return this;
     }
     public ListAssert<T> tags(Matcher<Collection<? extends String>> condition) {
-        waitAssert(() -> assertThat(map(elements, WebElement::getTagName), condition));
+        waitAssert(() -> assertThat(map(elements, WebElement::getTagName), condition), name);
         return this;
     }
     public ListAssert<T> cssClasses(Matcher<Collection<? extends String>> condition) {
-        waitAssert(() -> assertThat(map(elements, el -> el.getAttribute("class")), condition));
+        waitAssert(() -> assertThat(map(elements, el -> el.getAttribute("class")), condition), name);
         return this;
     }
     public ListAssert<T> allDisplayed() {
-        waitAssert(() -> assertThat(map(elements, UIElement::isDisplayed), everyItem(is(true))));
+        waitAssert(() -> assertThat(map(elements, UIElement::isDisplayed), everyItem(is(true))), name);
         return this;
     }
     public ListAssert<T> displayed() {
-        waitAssert(() -> assertThat(map(elements, UIElement::isDisplayed), hasItem(true)));
+        waitAssert(() -> assertThat(map(elements, UIElement::isDisplayed), hasItem(true)), name);
         return this;
     }
     public ListAssert<T> hidden() {
-        waitAssert(() -> assertThat(map(elements, UIElement::isDisplayed), everyItem(is(false))));
+        waitAssert(() -> assertThat(map(elements, UIElement::isDisplayed), everyItem(is(false))), name);
         return this;
     }
     public ListAssert<T> selected(Matcher<Collection<? extends Boolean>> condition) {
-        waitAssert(() -> assertThat(map(elements, UIElement::isSelected), condition));
+        waitAssert(() -> assertThat(map(elements, UIElement::isSelected), condition), name);
         return this;
     }
     public ListAssert<T> enabled(Matcher<Collection<? extends Boolean>> condition) {
-        waitAssert(() -> assertThat(map(elements, UIElement::isEnabled), condition));
+        waitAssert(() -> assertThat(map(elements, UIElement::isEnabled), condition), name);
         return this;
     }
 }

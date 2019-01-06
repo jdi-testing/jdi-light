@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.base.BaseElement;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static org.testng.Assert.*;
 
 public class BaseValidations {

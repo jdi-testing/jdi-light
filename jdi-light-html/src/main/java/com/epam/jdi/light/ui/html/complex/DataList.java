@@ -12,7 +12,7 @@ public interface DataList extends TextField {
     void select(int index);
     String selected();
     List<String> values();
-    List<String> enabled();
-    List<String> disabled();
+    List<String> listEnabled();
+    List<String> listDisabled();
 
 }

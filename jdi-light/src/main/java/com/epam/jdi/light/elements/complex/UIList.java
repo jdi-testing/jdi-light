@@ -24,7 +24,6 @@ import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -129,7 +128,7 @@ public class UIList<T, E> extends JDIBase implements IList<T>, JDIElement {
         return expectedFields.getName();
     }
 
-    @JDIAction
+    @JDIAction("Scroll to list elements")
     public void showAll() {
         if (!isClass(classType, Section.class))
             throw exception("Show all can be executed only for List of Sections. Please add ' extend Section' to your PageObject class in List");
@@ -149,14 +148,19 @@ public class UIList<T, E> extends JDIBase implements IList<T>, JDIElement {
         return PrintUtils.print(LinqUtils.map(asData(), Object::toString));
     }
 
-    public void is(Class<E> entityClass, Matcher<Collection<? extends E>> condition) {
-        org.hamcrest.MatcherAssert.assertThat(asData(), condition);
+    //public void is(Matcher<Collection<? extends E>> condition) {
+    public void is(Matcher<? super List<E>> condition) {
+        //org.hamcrest.MatcherAssert.assertThat(asData(), condition);
+        MatcherAssert.assertThat(asData(), condition);
+    }
+    public UIListAssert<E> is() {
+        return new UIListAssert<>(asData(), toError());
     }
     public UIListAssert<E> assertThat() {
-        return new UIListAssert<>(asData());
+        return is();
     }
 
-    public void assertThat(Matcher<? super List<E>> c) {
-        MatcherAssert.assertThat(asData(), c);
+    public void assertThat(Matcher<? super List<E>> condition) {
+        is(condition);
     }
 }

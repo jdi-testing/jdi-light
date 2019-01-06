@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.utils;
 
+import com.epam.jdi.light.elements.base.UIElement;
 import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -12,7 +13,7 @@ public class HtmlUtils {
      * @param attr String - attribute to find
      * @return int attribute value
      */
-    public static int getInt(String attr, WebElement el) {
+    public static int getInt(String attr, UIElement el) {
         String value = el.getAttribute(attr);
         try {
             return parseInt(value);

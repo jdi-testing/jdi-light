@@ -16,8 +16,8 @@ public interface BaseSelector extends BaseElement, SetValue {
     <TEnum extends Enum> void select(TEnum value);
     void select(int index);
     List<String> values();
-    List<String> enabled();
-    List<String> disabled();
+    List<String> listEnabled();
+    List<String> listDisabled();
 
     SelectAssert is();
     SelectAssert assertThat();

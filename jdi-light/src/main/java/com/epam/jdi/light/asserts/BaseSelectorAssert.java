@@ -6,7 +6,10 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 
 /**
  * Created by Roman Iovlev on 02.03.2018
@@ -14,14 +17,25 @@ import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
  */
 
 public interface BaseSelectorAssert {
-    static void waitAssert(JAction action) {
-        new Timer(TIMEOUT.get()*1000).wait(action::execute);
+    static void waitAssert(JAction action, String name) {
+        try {
+            action.execute();
+        } catch (Throwable ignore) {
+            try {
+                logger.logOff(() ->
+                    new Timer(TIMEOUT.get() * 1000).wait(action::execute)
+                );
+            } catch (Throwable ex) {
+                throw exception("Failed for " + name +
+                    LINE_BREAK + ex.getMessage());
+            }
+        }
     }
     WebElement get();
     String selected();
     boolean selected(String value);
     List<String> values();
     List<String> checked();
-    List<String> enabled();
-    List<String> disabled();
+    List<String> listEnabled();
+    List<String> listDisabled();
 }

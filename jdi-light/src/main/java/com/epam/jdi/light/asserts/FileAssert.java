@@ -26,7 +26,7 @@ public class FileAssert {
         file = new File(mergePath(DOWNLOADS_DIR, fileName));
     }
     public FileAssert isDownloaded() {
-        waitAssert(() -> assertThat(timer().wait(() -> file.exists()), is(true)));
+        waitAssert(() -> assertThat(timer().wait(() -> file.exists()), is(true)), file.getName());
         return this;
     }
     public FileAssert text(Matcher<String> text) {
@@ -40,7 +40,7 @@ public class FileAssert {
         } catch (IOException ex) {
             throw exception("Can't read File: " + ex.getMessage());
         }
-        waitAssert(() -> assertThat(fileText, text));
+        waitAssert(() -> assertThat(fileText, text), file.getName());
         return this;
     }
 

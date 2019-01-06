@@ -121,7 +121,7 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
 
     //region matchers
     public ListAssert<HtmlElement> is() {
-        return new ListAssert<>(this);
+        return new ListAssert<>(this, toError());
     }
     public ListAssert<HtmlElement> assertThat() {
         return is();

@@ -14,6 +14,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -35,7 +36,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
     protected UIElement value;
     protected WebList list;
 
-    @JDIAction
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(String name) {
         if (expander != null && list != null) {
             expand();
@@ -44,7 +45,8 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
         else getSelectElement(format("select '%s'", name)).selectByVisibleText(name);
     }
     public <TEnum extends Enum> void select(TEnum name) { select(getEnumValue(name));}
-    @JDIAction
+
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
         if (expander != null && list != null) {
             expand();
@@ -52,7 +54,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
         }
         else getSelectElement(format("select '%s'", index)).selectByIndex(index);
     }
-    @JDIAction
+    @JDIAction("Get '{name}' text")
     public String getText() {
         if (value != null) {
             String result = "";
@@ -71,9 +73,8 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
             return new Select(root);
         throw exception(SELECT_ERROR, action, this);
     }
-    boolean b;
-    boolean b1;
-    @JDIAction
+
+    @JDIAction("Is '{name}' expanded")
     public boolean isExpanded() {
         assertLinked(list, "list", "expand");
         try {
@@ -87,7 +88,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
     /**
      * Expanding DropDown
      */
-    @JDIAction
+    @JDIAction(level = DEBUG)
     public void expand() {
         if (!isExpanded()) {
             click();
@@ -96,18 +97,20 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
     /**
      * Closing DropDown
      */
-    @JDIAction
+    @JDIAction(level = DEBUG)
     public void close() {
         if (isExpanded())
             click();
     }
     public String getValue() { return getText(); }
 
+    @JDIAction("Is '{0}' displayed in list")
     public boolean isDisplayed(String name) {
         assertLinked(list, "list", "isDisplayed");
         return isExpanded() && list.values().contains(name);
     }
 
+    @JDIAction(level = DEBUG)
     public String getSelected() {
         return getText();
     }
@@ -115,21 +118,22 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
     /**
      * Waits while Element becomes visible
      */
+    @JDIAction("Is list displayed")
     public boolean isDisplayed() {
         return value.isDisplayed();
     }
 
-    @JDIAction
+    @JDIAction("Get '{name}' values")
     public List<String> values() {
         assertLinked(list, "list", "values");
         return list.values();
     }
-    @JDIAction
+    @JDIAction(level = DEBUG)
     public void click() {
         assertLinked(list, "expander", "click");
         expander.click();
     }
-    @JDIAction
+    @JDIAction("Input '{0}' in '{name}'")
     public void sendKeys(CharSequence... charSequence) {
         value.sendKeys(charSequence);
     }

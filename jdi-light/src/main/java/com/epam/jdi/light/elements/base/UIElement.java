@@ -7,9 +7,7 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.ScreenshotMaker;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -20,10 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.ScreenshotMaker.*;
+import static com.epam.jdi.light.common.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -40,14 +38,15 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
     protected T newElement(WebElement el) { return (T) new UIElement(el); }
 
     //region WebElement Wrapper
-    @JDIAction
+    @JDIAction("Click on '{name}'")
     public void click() {
         get().click();
     }
+    @JDIAction(level = DEBUG)
     public void submit() {
         get().submit();
     }
-    @JDIAction("Input {value}")
+    @JDIAction("Input '{value}' in '{name}'")
     public void sendKeys(CharSequence... value) {
         checkEnabled();
         get().sendKeys(value);
@@ -62,7 +61,7 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
     /**
      * If not selected - click to select
      */
-    @JDIAction
+    @JDIAction("Check '{name}'")
     public void check() {
         checkEnabled();
         if (!isSelected())
@@ -72,7 +71,7 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
     /**
      * If selected - click to deselect
      */
-    @JDIAction
+    @JDIAction("Uncheck '{name}'")
     public void uncheck() {
         checkEnabled();
         if (isSelected())
@@ -87,19 +86,20 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
      * Gets label text
      * @return String text
      */
-    @JDIAction
+    @JDIAction("Get '{name}' label text")
     public String labelText() {
         return label().getText();
     }
 
-    @JDIAction
+    @JDIAction("Clear '{name}'")
     public void clear() {
         get().clear();
     }
+    @JDIAction(level = DEBUG)
     public String getTagName() {
         return get().getTagName();
     }
-    @JDIAction
+    @JDIAction("Get '{name}' text")
     public String getText() {
         WebElement el = get();
         String text = el.getText();
@@ -117,39 +117,40 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
         return findElements(by).get(0);
     }
 
-    @JDIAction
+    @JDIAction("Check that '{name}' is selected")
     public boolean isSelected() {
         return selected();
     }
-    @JDIAction
+    @JDIAction("Check that '{name}' is deselected")
     public boolean isDeselected() {
         return !selected();
     }
+    @JDIAction(level = DEBUG)
     private boolean selected() {
         List<String> cl = classes();
         return get().isSelected() || cl.contains("checked") || cl.contains("active")||
                 getAttribute("checked").equals("true");
     }
 
-    @JDIAction
+    @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return enabled();
     }
-    @JDIAction
+    @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
         return !enabled();
     }
-    private boolean enabled() {
+    public boolean enabled() {
         String cl = getAttribute("class");
         return cl.contains("active") ||
                 get().isEnabled() && !cl.contains("disabled");
     }
 
-    @JDIAction
+    @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {
         return displayed();
     }
-    @JDIAction
+    @JDIAction("Check that '{name}' is hidden")
     public boolean isHidden() {
         return !displayed();
     }
@@ -166,44 +167,51 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
         } catch (Exception ex) { return false; }
     }
 
+    @JDIAction(level = DEBUG)
     public Point getLocation() {
         return get().getLocation();
     }
+    @JDIAction(level = DEBUG)
     public Dimension getSize() {
         return get().getSize();
     }
+    @JDIAction(level = DEBUG)
     public Rectangle getRect() {
         return get().getRect();
     }
+    @JDIAction(level = DEBUG)
     public String getCssValue(String s) {
         return get().getCssValue(s);
     }
+    @JDIAction(level = DEBUG)
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
         return get().getScreenshotAs(outputType);
     }
+    @JDIAction(value = "Get '{name}' attribute '{0}'", level = DEBUG)
     public String getAttribute(String name) {
         return valueOrDefault(get().getAttribute(name), "");
     }
     //endregion
 
     //region Enchantments
-    @JDIAction
+    @JDIAction("Hover to '{name}'")
     public void hover() {
         doActions(a -> a.moveToElement(get()));
     }
-    @JDIAction
+    @JDIAction("Click on '{name}'")
     public void jsClick() {
         jsExecute("click()");
     }
 
-    @JDIAction("Input {value}")
+    @JDIAction("Input '{value}' in '{name}'")
     public void input(String value) {
         clear();
         sendKeys(value);
     }
+    @JDIAction(level = DEBUG)
     public void focus(){ sendKeys(""); }
 
-    @JDIAction
+    @JDIAction("Set '{value}' in '{name}'")
     public void setText(String value) {
         //setAttribute("value", value);
         jsExecute("value='"+value+"'");
@@ -221,6 +229,7 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
         return map(get().findElements(by), this::newElement);
     }
 
+    @JDIAction(level = DEBUG)
     public void setAttribute(String name, String value) {
         jsExecute("setAttribute('"+name+"','"+value+"')");
     }
@@ -239,20 +248,22 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
         return asList(getAttribute("class").split(" "));
     }
 
+    @JDIAction(level = DEBUG)
     public String printHtml() {
         return MessageFormat.format("<{0}{1}>{2}</{0}>", getTagName(),
                 print(getAllAttributes(), el -> " "+ el), getAttribute("innerHTML"));
     }
 
-    @JDIAction
+    @JDIAction(level = DEBUG)
     public void higlight(String color) {
         jsExecute("style.border='3px dashed "+color+"'");
     }
-    public void higlight() { show();
+    public void higlight() {
+        show();
         higlight("red");
     }
+    @JDIAction(level = DEBUG)
     public String makePhoto() {
-        show();
         higlight();
         return takeScreen();
     }
@@ -261,21 +272,21 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
         jsExecute("scrollIntoView(true)");
     }
 
+    @JDIAction(level = DEBUG)
     public String getValue() {
         return getText();
     }
 
-    @JDIAction
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(String name) {
         get(name).click();
     }
 
-    @JDIAction
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(String... names) {
         for (String name : names)
             select(name);
     }
-    @JDIAction
     public <TEnum extends Enum> void select(TEnum name) {
         select(getEnumValue(name));
     }
@@ -288,12 +299,12 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
      * Gets attr 'placeholder'
      * @return String
      */
+    @JDIAction(level = DEBUG)
     public String placeholder() { return getAttribute("placeholder"); }
     /**
      * Gets attribute with name value
      * @return String
      */
-    @JDIAction
     public String value() { return getAttribute("value"); }
 
     public Select select() {
@@ -302,19 +313,19 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
     //endregion
 
     //region Actions
-    @JDIAction
-    public void dragAndDropTo(WebElement to) {
+    @JDIAction("Drag '{name}' and drop it to '{value}'")
+    public void dragAndDropTo(UIElement to) {
         doActions(a -> a.clickAndHold(get()).moveToElement(to).release(to));
     }
-    @JDIAction
+    @JDIAction("DoubleClick on '{name}'")
     public void doubleClick() {
         doActions(Actions::doubleClick);
     }
-    @JDIAction
+    @JDIAction("RightClick on '{name}'")
     public void rightClick() {
         doActions(Actions::contextClick);
     }
-    @JDIAction
+    @JDIAction("Drag '{name}' and drop it to ({0},{1})")
     public void dragAndDropTo(int x, int y) {
         doActions(a -> a.dragAndDropBy(get(), x, y));
     }

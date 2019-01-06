@@ -2,11 +2,13 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIElement;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -23,6 +25,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * @param value String to search
      */
     @Override
+    @JDIAction("Select '{0}'")
     public void select(String value) {
         select().selectByVisibleText(value);
     }
@@ -31,6 +34,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Selects the value based on its index
      * @param index int to search
      */
+    @JDIAction("Select '{0}'")
     public void select(int index) {
         select().selectByIndex(index-1);
     }
@@ -39,6 +43,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Selects only particular elements
      * @param values String var arg, elements with text to select
      */
+    @JDIAction("Check '{0}'")
     public void check(String... values) {
         select().deselectAll();
         for (String value : values)
@@ -49,6 +54,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Unselects only particular elements
      * @param values String var arg, elements with text to unselect
      */
+    @JDIAction("Uncheck '{0}'")
     public void uncheck(String... values) {
         for (WebElement opt : select().getOptions()) {
             if (opt.isSelected() && asList(values).contains(opt.getText())
@@ -67,6 +73,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Checks particular elements by index
      * @param values int var arg, ids to check
      */
+    @JDIAction("Check '{0}'")
     public void check(int... values) {
         select().deselectAll();
         for (int index : values)
@@ -77,6 +84,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Unchecks particular elements by index
      * @param values int var arg, ids to uncheck
      */
+    @JDIAction("Uncheck '{0}'")
     public void uncheck(int... values) {
         List<WebElement> options = select().getOptions();
         for (int i = 0; i < options.size(); i++) {
@@ -87,12 +95,15 @@ public class Selector extends UIElement implements BaseSelectorAssert {
         }
     }
 
+    @JDIAction("Get checked elements")
     public List<String> checked() {
         return map(select().getAllSelectedOptions(), WebElement::getText);
     }
+    @JDIAction("Get selected value")
     public String selected() {
         return select().getFirstSelectedOption().getText();
     }
+    @JDIAction("Is '{0}' selected")
     public boolean selected(String value) {
         return selected().trim().equalsIgnoreCase(value.trim());
     }
@@ -101,17 +112,21 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Gets attr 'placeholder'
      * @return String
      */
+    @JDIAction(level = DEBUG)
     public String placeholder() { return getAttribute("placeholder"); }
 
+    @JDIAction(level = DEBUG)
     public List<String> values() {
         return map(select().getOptions(), WebElement::getText);
     }
 
-    public List<String> enabled() {
+    @JDIAction(level = DEBUG)
+    public List<String> listEnabled() {
         return ifSelect(getUI().finds("option"),
             UIElement::isEnabled, UIElement::getText);
     }
-    public List<String> disabled() {
+    @JDIAction(level = DEBUG)
+    public List<String> listDisabled() {
         return ifSelect(getUI().finds("option"),
             UIElement::isDisabled, UIElement::getText);
     }

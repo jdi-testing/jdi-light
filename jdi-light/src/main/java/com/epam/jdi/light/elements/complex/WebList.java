@@ -115,7 +115,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, JDIE
 
     //region matchers
     public ListAssert is() {
-        return new ListAssert<>(this);
+        return new ListAssert<>(this, toError());
     }
     public ListAssert assertThat() {
         return is();

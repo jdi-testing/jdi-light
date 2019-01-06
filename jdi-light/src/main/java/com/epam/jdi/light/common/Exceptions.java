@@ -1,7 +1,6 @@
 package com.epam.jdi.light.common;
 
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.Timer.nowTime;
 import static java.lang.String.format;
 
 /**

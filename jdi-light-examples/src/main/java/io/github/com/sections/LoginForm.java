@@ -8,9 +8,9 @@ import io.github.epam.entities.User;
 import org.openqa.selenium.WebElement;
 
 public class LoginForm extends Form<User> {
-	@XPath("*root*.//header//form//input[@type='text']") public WebElement name;
-	@Css("input[type=password]") public WebElement password;
+	@XPath("*root*.//header//form//input[@type='text']") WebElement name;
+	@Css("input[type=password]") WebElement password;
 
-	@Root @XPath(".//header//form//button[@type='submit']") public WebElement enter;
+	@Root @XPath(".//header//form//button[@type='submit']") WebElement enter;
 
 }

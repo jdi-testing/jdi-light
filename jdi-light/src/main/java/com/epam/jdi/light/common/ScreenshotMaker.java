@@ -5,9 +5,7 @@ package com.epam.jdi.light.common;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.remote.ScreenshotException;
 
 import java.io.File;
 import java.io.IOException;

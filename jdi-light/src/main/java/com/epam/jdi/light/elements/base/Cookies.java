@@ -13,14 +13,14 @@ public class Cookies {
     /**
      *   Get all browser cookies
      */
-    @JDIAction
+    @JDIAction("Get site cookies")
     public static Set<Cookie> getCookies() {
         return manage().getCookies();
     }
     /**
      * @param name Get cookie by nam
      */
-    @JDIAction
+    @JDIAction("Get cookie '{0}'")
     public static Cookie getCookie(String name) {
         return manage().getCookieNamed(name);
     }
@@ -28,7 +28,7 @@ public class Cookies {
      * @param cookie Specify cookie
      *               Add cookie in browser
      */
-    @JDIAction
+    @JDIAction("Add cookie '{0}'")
     public static void addCookie(Cookie cookie) {
         manage().addCookie(cookie);
     }

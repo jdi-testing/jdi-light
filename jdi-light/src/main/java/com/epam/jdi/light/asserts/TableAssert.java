@@ -13,27 +13,29 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class TableAssert {
-    Table table;
+    protected Table table;
+    protected String name;
 
     public TableAssert(Table table) {
         this.table = table;
+        this.name = table.toError();
     }
 
     public TableAssert isEmpty() {
-        waitAssert(() -> assertThat(table.isEmpty() ? "is empty" : "is not empty", is("is empty")));
+        waitAssert(() -> assertThat(table.isEmpty() ? "is empty" : "is not empty", is("is empty")), name);
         return this;
     }
     public TableAssert isNotEmpty() {
-        waitAssert(() -> assertThat(table.isEmpty() ? "is empty" : "is not empty", is("is not empty")));
+        waitAssert(() -> assertThat(table.isEmpty() ? "is empty" : "is not empty", is("is not empty")), name);
         return this;
     }
     public TableAssert size(int size) {
-        waitAssert(() -> assertThat(table.size(), is(size)));
+        waitAssert(() -> assertThat(table.size(), is(size)), name);
         return this;
     }
 
     public TableAssert hasColumn(String column) {
-        waitAssert(() -> assertThat(table.header(), hasItem(column)));
+        waitAssert(() -> assertThat(table.header(), hasItem(column)), name);
         return this;
     }
     public TableAssert hasColumns(List<String> columns) {
@@ -42,16 +44,16 @@ public class TableAssert {
         return this;
     }
     public TableAssert columns(Matcher<Collection<? extends String>> count) {
-        waitAssert(() -> assertThat(table.header(), count));
+        waitAssert(() -> assertThat(table.header(), count), name);
         return this;
     }
     public TableAssert rowsWithValues(int count, TableMatchers... matchers) {
         waitAssert(() -> assertThat(getMatchLines(table, matchers).size(),
-            greaterThan(table.header().size()*count-1)));
+            greaterThan(table.header().size()*count-1)), name);
         return this;
     }
     public TableAssert hasRowWithValues(TableMatchers... matchers) {
-        waitAssert(() -> assertThat(getMatchLines(table, matchers), is(not(empty()))));
+        waitAssert(() -> assertThat(getMatchLines(table, matchers), is(not(empty()))), name);
         return this;
     }
 

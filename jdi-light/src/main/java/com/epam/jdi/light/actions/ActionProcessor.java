@@ -6,8 +6,6 @@ package com.epam.jdi.light.actions;
  */
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -22,8 +20,6 @@ import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.Timer.nowTime;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;

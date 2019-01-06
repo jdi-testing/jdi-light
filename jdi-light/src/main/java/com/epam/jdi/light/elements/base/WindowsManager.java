@@ -18,17 +18,19 @@ public class WindowsManager {
     public static Set<String> getWindows() {
         return windowHandlers = getDriver().getWindowHandles();
     }
+    @JDIAction("Check that new window is opened")
     public static boolean newWindowIsOpened() {
         return windowHandlers.size() < getDriver().getWindowHandles().size();
     }
     public static void setWindowName(String name) {
         windowHandles.update(name, getDriver().getWindowHandle());
     }
+    @JDIAction("Get windows count")
     public static int windowsCount() {
         return getWindows().size();
     }
 
-    @JDIAction
+    @JDIAction("Switch to new window")
     public static void switchToNewWindow() {
         String last = "";
         for (String window : getWindows())
@@ -37,17 +39,17 @@ public class WindowsManager {
             getDriver().switchTo().window(last);
         else throw exception("No windows found");
     }
-    @JDIAction
+    @JDIAction("Open new tab")
     public static void openNewTab() {
         jsExecute("window.open()");
     }
 
-    @JDIAction
+    @JDIAction("Go back to original window")
     public static void originalWindow() {
         getDriver().switchTo().window(getWindows().iterator().next());
     }
 
-    @JDIAction
+    @JDIAction("Switch to window '{number}'")
     public static void switchToWindow(int number) {
         int counter = 0;
         if (getWindows().size() < number)
@@ -60,18 +62,18 @@ public class WindowsManager {
             }
         }
     }
-    @JDIAction
+    @JDIAction("Switch to window '{0}'")
     public static void switchToWindow(String name) {
         if (!windowHandles.has(name))
             throw exception("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", name);
         getDriver().switchTo().window(windowHandles.get(name));
     }
-    @JDIAction
+    @JDIAction("Close current window")
     public static void closeWindow() {
         getDriver().close();
         originalWindow();
     }
-    @JDIAction
+    @JDIAction("Close window '{0}'")
     public static void closeWindow(String name) {
         switchToWindow(name);
         closeWindow();
@@ -91,9 +93,10 @@ public class WindowsManager {
         return alert().getText();
     }
 
-    @JDIAction
+    @JDIAction("Input '{0}' in alert and accept")
     public static void sendKeysInAlert(String text) {
         alert().sendKeys(text);
+        alert().accept();
     }
 
     private static Alert alert() {

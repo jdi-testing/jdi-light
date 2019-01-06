@@ -12,12 +12,16 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
+import static com.epam.jdi.light.common.CheckTypes.MATCH;
+
 @JSite("https://epam.github.io/JDI/")
 public class StaticSite {
-	@Url("/index.html") public static HomePage homePage;
+	@Url("/index.html")  @Title(value = "Home", validate = CONTAINS)
+	public static HomePage homePage;
 	@Url("/metals-colors.html") @Title("Metal and Colors")
 	public static MetalAndColorsPage metalAndColorsPage;
-	@Url("/contacts.html") @Title("Contact Form")
+	@Url("/contacts.html") @Title(value = ".*tact \\w{4}", validate = MATCH)
 	public static ContactFormPage contactFormPage;
 	@Url("/performance.html") @Title("Performance page")
 	public static PerformancePage tablePage;

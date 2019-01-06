@@ -1,7 +1,7 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.pageobjects.annotations.Root;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import io.github.com.sections.LoginForm;
@@ -13,6 +13,6 @@ public class Header extends Section {
 	public static WebElement epamLogo;
 	public static WebElement userIcon;
 	@Css(".icon-search:not(.active)") public static WebElement searchIcon;
-	@XPath(".//*[@ui='label']") public static WebElement userName;
+	@XPath(".//*[@ui='label']") public static UIElement userName;
 
 }

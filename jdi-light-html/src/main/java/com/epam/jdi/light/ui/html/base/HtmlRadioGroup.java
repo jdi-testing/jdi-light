@@ -84,11 +84,11 @@ public class HtmlRadioGroup extends Selector implements BaseSelectorAssert, Radi
     }
 
     @JDIAction
-    public List<String> enabled() {
+    public List<String> listEnabled() {
         return ifSelect(radioButtons(), HtmlElement::isEnabled, HtmlElement::labelText);
     }
     @JDIAction
-    public List<String> disabled() {
+    public List<String> listDisabled() {
         return ifSelect(radioButtons(), HtmlElement::isDisabled, HtmlElement::labelText);
     }
 

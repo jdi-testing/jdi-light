@@ -5,7 +5,6 @@ package com.epam.jdi.light.logger;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.StringUtils.format;
 import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
