@@ -19,7 +19,7 @@ public class StaticTestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         logger.setLogLevel(INFO);
-        OutputTemplates.SHORT_TEMPLATE = "{action}";
+        OutputTemplates.STEP_TEMPLATE = "{action}";
         ACTION_FAILED = (el, ex) ->
             ex + LINE_BREAK + "Screenshot: " + takeScreen();
         initElements(StaticSite.class);

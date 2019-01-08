@@ -35,9 +35,9 @@ public class UnixProcessUtils {
      * @throws IOException
      * @throws InterruptedException
      */
-    private static List<String> getPIDsByNamePart(String name) throws IOException, InterruptedException {
+    private static List<String> getPIDsByNamePart(String value) throws IOException, InterruptedException {
         Process process = new ProcessBuilder(
-            "/usr/bin/pgrep", "-afi", name)
+            "/usr/bin/pgrep", "-afi", value)
             .start();
         process.waitFor();
         return inputStreamToList(process.getInputStream());

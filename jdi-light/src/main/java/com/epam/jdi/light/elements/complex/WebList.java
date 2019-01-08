@@ -43,7 +43,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, JDIE
         return LinqUtils.map(result, UIElement::new);
     }
 
-    @JDIAction
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(String... names) {
         for (String name : names)
             get(name).click();
@@ -52,21 +52,20 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, JDIE
         select(getEnumValue(name));
     }
 
-    @JDIAction
-    public UIElement get(String name) {
+    @JDIAction("Get '{0}' in '{name}'")
+    public UIElement get(String value) {
         if (getByLocator(getLocator()).contains("%s"))
-            return getUI(name);
+            return getUI(value);
         clear();
-        UIElement el = LinqUtils.first(elements(), e -> e.getText().trim().toLowerCase().equals(name.trim().toLowerCase()));
+        UIElement el = LinqUtils.first(elements(), e -> e.getText().trim().toLowerCase().equals(value.trim().toLowerCase()));
         if (el == null)
-            throw exception("Can't select '%s'. No elements with this name found", name);
+            throw exception("Can't select '%s'. No elements with this name found", value);
         return el;
     }
-    @JDIAction
     public UIElement get(Enum name) {
         return get(getEnumValue(name));
     }
-    @JDIAction
+    @JDIAction("Get '{0}' in '{name}'")
     public void select(int index) {
         get(index).click();
     }

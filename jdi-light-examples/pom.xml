@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.0.22</version>
+            <version>1.0.26</version>
         </dependency>
 
         <!--Allure config in parent-->

@@ -9,7 +9,7 @@ public class TextAreaElement extends HtmlElement implements TextArea {
     public TextAreaElement() { }
     public TextAreaElement(WebElement el) { super(el); }
 
-    @JDIAction
     @Override
+    @JDIAction
     public String getText() { return getAttribute("value"); }
 }

@@ -40,8 +40,8 @@ public class ScreenshotMaker {
     public String takeScreenshot() {
         return takeScreenshot(SCREEN_NAME, "yyyy-MM-dd-HH-mm-ss");
     }
-    public String takeScreenshot(String name) {
-        return takeScreenshot(name, "yyyy-MM-dd-HH-mm-ss");
+    public String takeScreenshot(String value) {
+        return takeScreenshot(value, "yyyy-MM-dd-HH-mm-ss");
     }
     public String takeScreenshot(String name, String dateFormat) {
         if (!hasRunDrivers())

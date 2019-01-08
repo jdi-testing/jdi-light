@@ -22,8 +22,8 @@ public class WindowsManager {
     public static boolean newWindowIsOpened() {
         return windowHandlers.size() < getDriver().getWindowHandles().size();
     }
-    public static void setWindowName(String name) {
-        windowHandles.update(name, getDriver().getWindowHandle());
+    public static void setWindowName(String value) {
+        windowHandles.update(value, getDriver().getWindowHandle());
     }
     @JDIAction("Get windows count")
     public static int windowsCount() {
@@ -63,10 +63,10 @@ public class WindowsManager {
         }
     }
     @JDIAction("Switch to window '{0}'")
-    public static void switchToWindow(String name) {
-        if (!windowHandles.has(name))
-            throw exception("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", name);
-        getDriver().switchTo().window(windowHandles.get(name));
+    public static void switchToWindow(String value) {
+        if (!windowHandles.has(value))
+            throw exception("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", value);
+        getDriver().switchTo().window(windowHandles.get(value));
     }
     @JDIAction("Close current window")
     public static void closeWindow() {
@@ -74,8 +74,8 @@ public class WindowsManager {
         originalWindow();
     }
     @JDIAction("Close window '{0}'")
-    public static void closeWindow(String name) {
-        switchToWindow(name);
+    public static void closeWindow(String value) {
+        switchToWindow(value);
         closeWindow();
     }
     @JDIAction

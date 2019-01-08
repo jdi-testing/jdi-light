@@ -188,8 +188,8 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
         return get().getScreenshotAs(outputType);
     }
     @JDIAction(value = "Get '{name}' attribute '{0}'", level = DEBUG)
-    public String getAttribute(String name) {
-        return valueOrDefault(get().getAttribute(name), "");
+    public String getAttribute(String value) {
+        return valueOrDefault(get().getAttribute(value), "");
     }
     //endregion
 
@@ -278,8 +278,8 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
     }
 
     @JDIAction("Select '{0}' for '{name}'")
-    public void select(String name) {
-        get(name).click();
+    public void select(String value) {
+        get(value).click();
     }
 
     @JDIAction("Select '{0}' for '{name}'")

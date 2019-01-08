@@ -145,12 +145,12 @@ public class HtmlChecklist extends Selector implements BaseSelectorAssert, Check
         return ifSelect(checkboxes(), HtmlElement::isSelected, HtmlElement::labelText);
     }
 
-    @JDIAction("Select '{0}' in '{name}'")
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
         select(new String[]{value});
     }
 
-    @JDIAction("Select '{0}' in '{name}'")
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
         select(new int[]{index});
     }

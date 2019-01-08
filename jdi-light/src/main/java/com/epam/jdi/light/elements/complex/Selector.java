@@ -25,7 +25,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * @param value String to search
      */
     @Override
-    @JDIAction("Select '{0}'")
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
         select().selectByVisibleText(value);
     }
@@ -34,7 +34,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Selects the value based on its index
      * @param index int to search
      */
-    @JDIAction("Select '{0}'")
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
         select().selectByIndex(index-1);
     }
@@ -43,7 +43,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Selects only particular elements
      * @param values String var arg, elements with text to select
      */
-    @JDIAction("Check '{0}'")
+    @JDIAction("Check '{0}' for '{name}'")
     public void check(String... values) {
         select().deselectAll();
         for (String value : values)
@@ -54,7 +54,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Unselects only particular elements
      * @param values String var arg, elements with text to unselect
      */
-    @JDIAction("Uncheck '{0}'")
+    @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(String... values) {
         for (WebElement opt : select().getOptions()) {
             if (opt.isSelected() && asList(values).contains(opt.getText())
@@ -73,7 +73,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Checks particular elements by index
      * @param values int var arg, ids to check
      */
-    @JDIAction("Check '{0}'")
+    @JDIAction("Check '{0}' for '{name}'")
     public void check(int... values) {
         select().deselectAll();
         for (int index : values)
@@ -84,7 +84,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Unchecks particular elements by index
      * @param values int var arg, ids to uncheck
      */
-    @JDIAction("Uncheck '{0}'")
+    @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(int... values) {
         List<WebElement> options = select().getOptions();
         for (int i = 0; i < options.size(); i++) {

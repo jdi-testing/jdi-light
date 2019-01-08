@@ -36,12 +36,11 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
                 : webElements.set(getAll()), HtmlElement::new);
     }
 
-    @JDIAction
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(String... names) {
         for (String name : names)
             get(name).click();
     }
-    @JDIAction
     public <TEnum extends Enum> void select(TEnum... names) {
         select(toStringArray(LinqUtils.map(names, EnumUtils::getEnumValue)));
     }
@@ -64,7 +63,7 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
         if (el == null) {
             //el = LinqUtils.first(uiElements, e -> verifyLabel(e, name));
             //if (el == null)
-            throw exception("Can't select '%s'. No elements with this name found");
+            throw exception("Can't select '%s'. No elements with this name found", name);
         }
         return el;
     }
@@ -73,7 +72,7 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
         return get(getEnumValue(name));
     }
 
-    @JDIAction
+    @JDIAction("Select '{0}' for '{names}'")
     public void select(int index) {
         get(index).click();
     }
@@ -84,7 +83,8 @@ public class HtmlList extends JDIBase implements IList<HtmlElement>, Menu {
     public void refresh() {
         webElements.clear();
     }
-    @JDIAction(level = DEBUG)
+
+    @JDIAction("Get '{names}' selected value")
     public String selected() {
         HtmlElement first = logger.logOff(() ->
                 LinqUtils.first(elements(), HtmlElement::isSelected) );

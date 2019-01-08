@@ -100,6 +100,24 @@ public class WebPage extends DriverBase implements INamed {
     }
 
     /**
+     * Opens url specified for page
+     */
+    @JDIAction("Open '{name}'(url={url})")
+    private void open(String url) {
+        CacheValue.reset();
+        driver().navigate().to(url);
+        setCurrentPage(this);
+    }
+    public void open(Object... params) {
+        String urlWithParams = params == null || params.length == 0
+            ? url
+            : url.contains("%s")
+                ? String.format(url, params)
+                : MessageFormat.format(url, params);
+        open(urlWithParams);
+    }
+
+    /**
      * Check that page opened
      */
     @JDIAction("Check that '{name}'(url={url}; title={title}) is opened")
@@ -130,41 +148,23 @@ public class WebPage extends DriverBase implements INamed {
         if (!hasRunDrivers())
             return false;
         boolean result = Switch(checkUrlType).get(
-            Value(CheckTypes.NONE, t -> true),
-            Value(EQUALS, t -> url().check()),
-            Value(MATCH, t -> url().match()),
-            Value(CONTAINS, t -> url().contains()),
-            Else(false)
+                Value(CheckTypes.NONE, t -> true),
+                Value(EQUALS, t -> url().check()),
+                Value(MATCH, t -> url().match()),
+                Value(CONTAINS, t -> url().contains()),
+                Else(false)
         );
         if (!result) return false;
         result = Switch(checkTitleType).get(
-            Value(CheckTypes.NONE, t -> true),
-            Value(EQUALS, t -> title().check()),
-            Value(MATCH, t -> title().match()),
-            Value(CONTAINS, t -> title().contains()),
-            Else(false)
+                Value(CheckTypes.NONE, t -> true),
+                Value(EQUALS, t -> title().check()),
+                Value(MATCH, t -> title().match()),
+                Value(CONTAINS, t -> title().contains()),
+                Else(false)
         );
         if (result)
             setCurrentPage(this);
         return result;
-    }
-
-    /**
-     * Opens url specified for page
-     */
-    @JDIAction("Open '{name}'(url={url})")
-    private void open(String url) {
-        CacheValue.reset();
-        driver().navigate().to(url);
-        setCurrentPage(this);
-    }
-    public void open(Object... params) {
-        String urlWithParams = params == null || params.length == 0
-            ? url
-            : url.contains("%s")
-                ? String.format(url, params)
-                : MessageFormat.format(url, params);
-        open(urlWithParams);
     }
 
     @JDIAction("'{name}'(url={url}) should be opened")
@@ -223,19 +223,19 @@ public class WebPage extends DriverBase implements INamed {
         jsExecute("window.scrollTo(0,document.body.scrollHeight)");
     }
 
-    @JDIAction
+    @JDIAction("Scroll screen down on '{0}'")
     public static void scrollDown(int value) {
         scroll(0,value);
     }
-    @JDIAction
+    @JDIAction("Scroll screen up on '{0}'")
     public static void  scrollUp(int value) {
         scroll(0,-value);
     }
-    @JDIAction
+    @JDIAction("Scroll screen to the right on '{0}'")
     public static void  scrollRight(int value) {
         scroll(value,0);
     }
-    @JDIAction
+    @JDIAction("Scroll screen to the left on '{0}'")
     public static void scrollLeft(int value) {
         scroll(-value,0);
     }
@@ -244,9 +244,9 @@ public class WebPage extends DriverBase implements INamed {
     public static void addPage(WebPage page) {
         pages.update(page.getName(), page);
     }
-    public static <T extends WebPage> T getPage(String name) {
-        WebPage page = pages.get(name);
-        return (T) (page == null ? pages.get(name + " Page") : page);
+    public static <T extends WebPage> T getPage(String value) {
+        WebPage page = pages.get(value);
+        return (T) (page == null ? pages.get(value + " Page") : page);
     }
 
     @Override

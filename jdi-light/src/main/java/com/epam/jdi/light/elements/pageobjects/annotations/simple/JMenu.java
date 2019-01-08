@@ -12,6 +12,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface UIGroup {
-    UI[] value();
+public @interface JMenu {
+    String[] value();
+    String group() default "";
 }

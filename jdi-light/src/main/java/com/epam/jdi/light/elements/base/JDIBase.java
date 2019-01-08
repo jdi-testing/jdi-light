@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.LocatorType;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
@@ -24,8 +23,7 @@ import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.StringUtils.msgFormat;
-import static com.epam.jdi.tools.StringUtils.splitHythen;
+import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
@@ -74,6 +72,9 @@ public class JDIBase extends DriverBase implements INamed {
             = "Can't find Element '%s' during %s seconds";
     public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
             = "Find %s elements instead of one for Element '%s' during %s seconds";
+    public static final String ELEMENTS_FILTERED_MESSAGE
+            = "Found %s elements but no one pass results filtering. Please change locator or filtering rules (WebSettings.SEARCH_CONDITION = el -> ...)" +
+            LINE_BREAK + "Element '%s' search during %s seconds";
 
     public WebElement get() {
         return get(new Object[]{});
@@ -95,8 +96,12 @@ public class JDIBase extends DriverBase implements INamed {
         List<WebElement> result = getAll(args);
         if (result.size() == 0)
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
-        if (result.size() > 1)
-            result = LinqUtils.filter(result, el -> searchRule.execute(el));
+        if (result.size() > 1) {
+            int found = result.size();
+            result = filter(result, el -> searchRule.execute(el));
+            if (result.size() == 0)
+                throw exception(ELEMENTS_FILTERED_MESSAGE, found, toString(), TIMEOUT.get());
+        }
         if (result.size() == 1)
             return result.get(0);
         throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get());

@@ -20,13 +20,16 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
-import static com.epam.jdi.light.elements.base.OutputTemplates.SHORT_TEMPLATE;
+import static com.epam.jdi.light.elements.base.OutputTemplates.STEP_TEMPLATE;
 import static com.epam.jdi.light.elements.base.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
@@ -48,7 +51,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class ActionHelper {
 
     private static String getTemplate(LogLevels level) {
-        return level.equalOrMoreThan(STEP) ? SHORT_TEMPLATE : DEFAULT_TEMPLATE;
+        return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
     }
     public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = jp -> {
         try {
@@ -57,10 +60,10 @@ public class ActionHelper {
             if (isBlank(template))
                 return getDefaultName(method.getName(), methodArgs(jp, method));
             if (template.contains("{0")) {
-                Object[] args = jp.getArgs();
+                Object[] args = getArgs(jp);
                 template = msgFormat(template, args);
             } else if (template.contains("%s")) {
-                template = format(template, jp.getArgs());
+                template = format(template, getArgs(jp));
             }
             if (template.contains("{")) {
                 MapArray<String, Object> obj = toMap(()->new MapArray<>("this", getElementName(jp)));
@@ -181,7 +184,7 @@ public class ActionHelper {
         return result;
     }
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
-        return toMap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint.getArgs())));
+        return toMap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint)));
     }
 
     static MapArray<String, Object> toMap(JFunc<MapArray<String, Object>> getMap) {
@@ -190,26 +193,66 @@ public class ActionHelper {
         IGNORE_NOT_UNIQUE = false;
         return map;
     }
-    static Object[] getArgs(Object[] args) {
+    static Object[] getArgs(JoinPoint jp) {
+        Object[] args = jp.getArgs();
         if (args.length == 1 && args[0] == null)
             return new Object[] {};
         Object[] result = new Object[args.length];
         for (int i = 0; i< args.length; i++)
             result[i] = Switch(args[i]).get(
                 Case(Objects::isNull, null),
-                Case(arg -> arg.getClass().isArray(),
-                    arg ->  printList(asList((Object[])arg))),
+                Case(arg -> arg.getClass().isArray(), ActionHelper::printArray),
                 Case(arg -> isInterface(arg.getClass(), List.class),
-                    arg ->  printList((List<?>)arg)),
+                        ActionHelper::printList),
                 Default(arg -> arg));
         return result;
     }
 
-    static String printList(List<?> list) {
-        String result = "";
+    private static String printList(Object obj) {
+        List<?> list = (List<?>)obj;
+        String result = "[";
         for (int i=0; i<list.size()-1;i++)
-            result += list.get(i)+",";
-        return result + list.get(list.size()-1);
+            result += list.get(i)+", ";
+        return result + list.get(list.size()-1) + "]";
+    }
+    private static String printArray(Object array) {
+        try {
+            return Arrays.toString((int[])array);
+        } catch (Exception ex) {}
+        try {
+            return Arrays.toString((Integer[])array);
+        } catch (Exception ex) {}
+        try {
+            return Arrays.toString((String[])array);
+        } catch (Exception ex) {}
+        try {
+            return Arrays.toString((boolean[])array);
+        } catch (Exception ex) {}
+        try {
+            return Arrays.toString((Boolean[])array);
+        } catch (Exception ex) {}
+        try {
+            return Arrays.toString((float[])array);
+        } catch (Exception ex) {}
+        try {
+            return Arrays.toString((Float[])array);
+        } catch (Exception ex) {}
+        try {
+            return Arrays.toString((double[])array);
+        } catch (Exception ex) {}
+        try {
+            return Arrays.toString((Double[])array);
+        } catch (Exception ex) {}
+        try {
+            return Arrays.toString((char[])array);
+        } catch (Exception ex) {}
+        try {
+            return Arrays.toString((byte[])array);
+        } catch (Exception ex) {}
+        try {
+            return Arrays.toString((Byte[])array);
+        } catch (Exception ex) {}
+        return "";
     }
 
     static MapArray<String, Object> classFields(JoinPoint joinPoint) {

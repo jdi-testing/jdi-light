@@ -10,8 +10,7 @@ import static io.github.com.StaticSite.htmlElementsPage;
 import static io.github.com.pages.HtmlElementsPage.jdiTitle;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.equalToIgnoringCase;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
 public class TitleTests extends TestsInit {
@@ -43,6 +42,7 @@ public class TitleTests extends TestsInit {
     @Test
     public void isValidationTest() {
         jdiTitle.is().text(is(text));
+        jdiTitle.is().text(equalTo(text));
         jdiTitle.is().text(equalToIgnoringCase("jdi TESTING platform"));
     }
 

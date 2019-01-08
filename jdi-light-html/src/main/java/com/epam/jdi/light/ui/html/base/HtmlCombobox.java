@@ -22,7 +22,7 @@ public class HtmlCombobox extends HtmlElement implements DataList, Combobox {
     }
 
     @Override
-    @JDIAction("Select '{0}' in '{name}'")
+    @JDIAction("Select '{0}' for '{name}''")
     public void select(String value) {
         super.setText(value);
     }
@@ -31,7 +31,7 @@ public class HtmlCombobox extends HtmlElement implements DataList, Combobox {
      * Selects the value based on its index
      * @param index int to search
      */
-    @JDIAction("Select '{0}' in '{name}'")
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
         setText(list().get(index-1));
     }

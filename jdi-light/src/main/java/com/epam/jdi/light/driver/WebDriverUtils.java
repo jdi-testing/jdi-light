@@ -49,8 +49,8 @@ public final class WebDriverUtils {
         killByName("MicrosoftWebDriver");
     }
 	
-    private static void killByName(String name) throws IOException {
-        getRuntime().exec(format("taskkill /F /IM %s.exe /T", name));
+    private static void killByName(String value) throws IOException {
+        getRuntime().exec(format("taskkill /F /IM %s.exe /T", value));
     }
 
     private static void killMacOSDriverProcesses(String browserName) {

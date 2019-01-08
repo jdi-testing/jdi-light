@@ -43,8 +43,8 @@ public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, M
      * Select values from parameters
      * @param names String var arg, elements with text to select
      */
-    @JDIAction
     @Override
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(String... names) {
         expand();
         for (String name : names) {
@@ -58,7 +58,7 @@ public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, M
      * Selects only particular elements
      * @param indexes String var arg, elements with text to select
      */
-    @JDIAction
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(int... indexes) {
         expand();
         for (int i = 1; i <= indexes.length; i++) {
@@ -72,7 +72,7 @@ public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, M
      * Selects only particular elements
      * @param names String var arg, elements with text to select
      */
-    @JDIAction
+    @JDIAction("Check '{0}' for '{name}'")
     public void check(String... names) {
         expand();
         List<String> listNames = asList(names);
@@ -89,7 +89,7 @@ public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, M
      * Unselects only particular elements
      * @param names String var arg, elements with text to unselect
      */
-    @JDIAction
+    @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(String... names) {
         expand();
         List<String> listNames = asList(names);
@@ -101,12 +101,10 @@ public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, M
                 value.click();
         }
     }
-    @JDIAction
     public <TEnum extends Enum> void check(TEnum... values) {
         check(getEnumValues(values));
     }
 
-    @JDIAction
     public <TEnum extends Enum> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
@@ -115,7 +113,7 @@ public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, M
      * Checks particular elements by index
      * @param indexes int var arg, ids to check
      */
-    @JDIAction
+    @JDIAction("Check '{0}' for '{name}'")
     public void check(int... indexes) {
         expand();
         List<Integer> listIndexes = toList(indexes);
@@ -132,7 +130,7 @@ public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, M
      * Unchecks particular elements by index
      * @param indexes int var arg, ids to uncheck
      */
-    @JDIAction
+    @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(int... indexes) {
         expand();
         List<Integer> listIndexes = toList(indexes);
@@ -145,35 +143,35 @@ public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, M
         }
     }
 
-    @JDIAction
+    @JDIAction("Get '{name}' checked values")
     public List<String> checked() {
         return ifSelect(allValues(),
                 HtmlElement::isSelected,
                 HtmlElement::getText);
     }
 
-    @JDIAction
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
         select(new String[]{value});
     }
 
-    @JDIAction
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
         select(new int[]{index});
     }
 
-    @JDIAction
+    @JDIAction("Get '{name}' list values")
     public List<String> values() {
         return map(allValues(), HtmlElement::getText);
     }
 
-    @JDIAction
+    @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
         return ifSelect(allValues(),
                 HtmlElement::isEnabled,
                 HtmlElement::getText);
     }
-    @JDIAction
+    @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {
         return ifSelect(allValues(),
                 HtmlElement::isDisabled,
@@ -185,18 +183,17 @@ public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, M
         check(value.split(";"));
     }
 
-    @JDIAction
     @Override
+    @JDIAction("Get '{name}' selected value")
     public String selected() {
         return valueText().getText();
     }
 
-    @JDIAction
+    @JDIAction("Is '{0}' selected for '{name}'")
     public boolean selected(String value) {
         return selected().trim().equalsIgnoreCase(value.trim());
     }
 
-    @JDIAction
     @Override
     public String getValue() {
         return selected();

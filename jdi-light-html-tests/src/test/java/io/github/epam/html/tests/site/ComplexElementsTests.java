@@ -44,7 +44,6 @@ public class ComplexElementsTests extends TestsInit {
     @Test
     public void menuTest() {
         leftMenu.select(ContactForm);
-        //navigationL.select("Contact form");
         contactFormPage.checkOpened();
         leftMenu.select(Home);
         homePage.checkOpened();
