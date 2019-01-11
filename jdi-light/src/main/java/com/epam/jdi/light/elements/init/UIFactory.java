@@ -32,24 +32,24 @@ public class UIFactory {
         return element(locator).setParent(parent);
     }
 
-    public static WebList list(String locator) {
+    public static WebList<UIElement> list(String locator) {
         return list(getLocator(locator));
     }
-    public static WebList list(By byLocator) {
+    public static WebList<UIElement> list(By byLocator) {
         WebList list =  new WebList();
         list.setLocator(byLocator);
         return list;
     }
-    public static WebList $$(String locator) {
+    public static WebList<UIElement> $$(String locator) {
         return list(locator);
     }
-    public static WebList $$(String locator, Object parent) {
+    public static WebList<UIElement> $$(String locator, Object parent) {
         return list(locator).setParent(parent);
     }
-    public static WebList $$(By locator) {
+    public static WebList<UIElement> $$(By locator) {
         return list(locator);
     }
-    public static WebList $$(By locator, Object parent) {
+    public static WebList<UIElement> $$(By locator, Object parent) {
         return list(locator).setParent(parent);
     }
 

@@ -61,4 +61,16 @@ public class ListAssert<T extends UIElement> {
         waitAssert(() -> assertThat(map(elements, UIElement::isEnabled), condition), name);
         return this;
     }
+    public ListAssert<T> empty() {
+        waitAssert(() -> assertThat(elements.isEmpty() ? "list is empty" : "list is not empty", is("list is empty")), name);
+        return this;
+    }
+    public ListAssert<T> notEmpty() {
+        waitAssert(() -> assertThat(elements.isEmpty() ? "list is empty" : "list is not empty", is("list is not empty")), name);
+        return this;
+    }
+    public ListAssert<T> size(Matcher<Integer> condition) {
+        waitAssert(() -> assertThat(elements.size(), condition), name);
+        return this;
+    }
 }

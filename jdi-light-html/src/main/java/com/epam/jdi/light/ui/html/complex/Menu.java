@@ -9,6 +9,8 @@ import java.util.List;
 public interface Menu extends IList<HtmlElement>, JDIElement {
     void select(String... value);
     <TEnum extends Enum> void select(TEnum... value);
+    void select(String value);
+    <TEnum extends Enum> void select(TEnum value);
     String selected();
     List<String> values();
 }

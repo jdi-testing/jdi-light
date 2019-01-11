@@ -1,7 +1,9 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
@@ -26,6 +28,9 @@ public interface BaseElement extends JDIElement, HasValue {
     String printHtml();
     void show();
     Select select();
+    void doActions(JFunc1<Actions, Actions> actions);
+    void actions(JFunc1<Actions, Actions> actions);
+
 
     default UIElement base() {return (UIElement) this; }
 }

@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.JMenu;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import com.epam.jdi.light.ui.html.base.HtmlList;
 import com.epam.jdi.light.ui.html.complex.Menu;
 import io.github.com.pages.*;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,7 @@ public class StaticSite {
 	public static ContactFormPage contactFormPage;
 	@Url(value = "/html5/%s", template = "/html5/+*", validate = CONTAINS) public static HtmlElementsPage htmlElementsPage2;
 	@Url("/html5.html") public static HtmlElementsPage htmlElementsPage;
+	@Url("/dates.html") @Title("Dates") public static DatesPage datesPage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;

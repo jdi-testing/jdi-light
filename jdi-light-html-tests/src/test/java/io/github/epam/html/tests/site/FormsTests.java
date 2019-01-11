@@ -4,8 +4,7 @@ import io.github.epam.TestsInit;
 import io.github.epam.html.tests.site.steps.Preconditions;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.contactFormPage;
-import static io.github.com.StaticSite.homePage;
+import static io.github.com.StaticSite.*;
 import static io.github.com.entities.Users.DEFAULT_CONTACT;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.ContactFormPage.main;

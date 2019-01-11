@@ -9,6 +9,8 @@ import selenium.entities.User;
 
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatchers.containsValue;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
 import static selenium.entities.TestData.TABLE_SNAPSHOOT;
 import static selenium.seleniumPO.HomePage.leftNavigation;
 import static selenium.seleniumPO.SiteSelenium.homePage;

@@ -38,7 +38,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
     protected UIElement value;
     protected WebList list;
 
-    @JDIAction("Select '{0}' for '{name}'")
+    @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
         if (expander != null && list != null) {
             expand();
@@ -48,7 +48,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
     }
     public <TEnum extends Enum> void select(TEnum name) { select(getEnumValue(name));}
 
-    @JDIAction("Select '{0}' for '{name}'")
+    @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
         if (expander != null && list != null) {
             expand();

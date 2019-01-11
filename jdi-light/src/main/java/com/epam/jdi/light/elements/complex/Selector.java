@@ -25,7 +25,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * @param value String to search
      */
     @Override
-    @JDIAction("Select '{0}' for '{name}'")
+    @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
         select().selectByVisibleText(value);
     }
@@ -34,7 +34,7 @@ public class Selector extends UIElement implements BaseSelectorAssert {
      * Selects the value based on its index
      * @param index int to search
      */
-    @JDIAction("Select '{0}' for '{name}'")
+    @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
         select().selectByIndex(index-1);
     }

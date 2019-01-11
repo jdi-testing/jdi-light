@@ -8,8 +8,10 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.UIListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.UIUtils;
+import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.JDIElement;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -33,7 +35,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 
-public class UIList<T, E> extends JDIBase implements IList<T>, JDIElement {
+public class UIList<T extends JDIBase, E> extends JDIBase implements IList<T>, JDIElement {
 
     private CacheValue<MapArray<String, T>> elements = new CacheValue<>();
     private CacheValue<List<T>> values = new CacheValue<>();
@@ -50,11 +52,17 @@ public class UIList<T, E> extends JDIBase implements IList<T>, JDIElement {
         this(classType);
         this.entityType = entityType;
     }
+    private boolean isActual() {
+        try {
+            elements.get().get(0).value.get().getTagName();
+            return true;
+        } catch (Exception ex) { return false; }
+    }
     @JDIAction(level = DEBUG)
     public List<T> elements() {
         if (values.hasValue())
             return values.get();
-        if (elements.hasValue())
+        if (elements.hasValue() && isActual())
             return elements.get().values();
         return values.set(LinqUtils.select(
             Timer.getByCondition(() -> getAll(), l -> l.size() > 0), this::initElement));
@@ -65,7 +73,7 @@ public class UIList<T, E> extends JDIBase implements IList<T>, JDIElement {
         values.clear();
     }
     public MapArray<String, T> getMap() {
-        if (elements.hasValue())
+        if (elements.hasValue() && isActual())
             return elements.get();
         List<WebElement> els = getAll();
         return elements.set(values.hasValue()

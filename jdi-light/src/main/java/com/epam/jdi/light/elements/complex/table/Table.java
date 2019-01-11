@@ -46,11 +46,11 @@ public class Table extends JDIBase implements ISetup, HasValue {
     public CacheValue<Integer> count = new CacheValue<>(() -> rows.get().size());
 
     public int size() {return rows.get().size(); }
-    @JDIAction
+    @JDIAction("Is '{name}' table empty")
     public boolean isEmpty() { return size() == 0; }
-    @JDIAction
+    @JDIAction("Is '{name}' table not empty")
     public boolean isNotEmpty() { return size() != 0; }
-    @JDIAction
+    @JDIAction("Get '{name}' table header")
     public List<String> header() {
         return header.getForce();
     }
@@ -58,14 +58,14 @@ public class Table extends JDIBase implements ISetup, HasValue {
     public List<UIElement> webRow(int rowNum) {
         return map(uiSearch(rows.get().get(rowNum-1), columnsLocator), UIElement::new);
     }
-    @JDIAction
+    @JDIAction("Get row '{0}' for '{name}' table")
     public Line row(int rowNum) {
         return new Line(webRow(rowNum));
     }
     public List<UIElement> webColumn(int colNum) {
         return map(rows.get(), r -> new UIElement(uiSearch(r,columnsLocator).get(colNum-1)));
     }
-    @JDIAction
+    @JDIAction("Get first '{name}' table row that match criteria")
     public Line row(TableMatchers... matchers) {
         WebList lines = getMatchLines(this, matchers);
         if (lines == null || lines.size() == 0)
@@ -76,7 +76,7 @@ public class Table extends JDIBase implements ISetup, HasValue {
         return new Line(() -> result);
     }
 
-    @JDIAction
+    @JDIAction("Get all '{name}' table rows that match criteria")
     public List<Line> rows(TableMatchers... matchers) {
         List<String> lines = getMatchLines(this, matchers).values();
         if (lines == null || lines.size() == 0)
@@ -93,38 +93,39 @@ public class Table extends JDIBase implements ISetup, HasValue {
         return listOfLines;
     }
 
-    @JDIAction
+    @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(int colNum) {
         return new Line(webColumn(colNum));
     }
     public List<UIElement> webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
     }
-    @JDIAction
+
+    @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(String colName) {
         return new Line(webColumn(colName));
     }
 
-    @JDIAction
+    @JDIAction("Get all '{name}' rows")
     public List<Line> rows() {
         return map(rows.get(), r -> new Line(r.finds(columnsLocator)));
     }
-    @JDIAction
+    @JDIAction("Filter '{name}' table rows that match criteria in column '{1}'")
     public List<Line> filterRows(Matcher<String> matcher, Column column) {
         return filter(rows(),
                 line -> matcher.matches(line.get(column.getIndex(header()))));
     }
-    @JDIAction
+    @JDIAction("Filter '{name}' table rows that match criteria")
     public List<Line> filterRows(Pair<Matcher<String>, Column>... matchers) {
         return filter(rows(), line ->
             all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header())))));
     }
-    @JDIAction
+    @JDIAction("Get '{name}' table row that match criteria in column '{1}'")
     public Line row(Matcher<String> matcher, Column column) {
         return first(rows(),
                 line -> matcher.matches(line.get(column.getIndex(header()))));
     }
-    @JDIAction
+    @JDIAction("Get '{name}' table row that match criteria")
     public Line row(Pair<Matcher<String>, Column>... matchers) {
         return first(rows(), line ->
                 all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header())))));
@@ -141,14 +142,16 @@ public class Table extends JDIBase implements ISetup, HasValue {
     public UIElement webCell(int colNum, int rowNum) {
         return webRow(rowNum).get(colNum-1);
     }
-    @JDIAction
+
+    @JDIAction("Get cell({0}, {1}) from '{name}' table")
     public String cell(int colNum, int rowNum) {
         return webCell(colNum, rowNum).getText();
     }
     public UIElement webCell(String colName, int rowNum) {
         return webCell(getColIndexByName(colName), rowNum);
     }
-    @JDIAction
+
+    @JDIAction("Get cell({0}, {1}) from '{name}' table")
     public String cell(String colName, int rowNum) {
         return webCell(colName, rowNum).getText();
     }
@@ -181,11 +184,11 @@ public class Table extends JDIBase implements ISetup, HasValue {
             this.count.set(count);
     }
 
-    @JDIAction
+    @JDIAction("Preview '{name}' table")
     public String preview() {
         return get().getText();
     }
-    @JDIAction
+    @JDIAction("Get '{name}' table value")
     public String getValue() {
         String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
         for (int i = 1; i <= count.get(); i++)

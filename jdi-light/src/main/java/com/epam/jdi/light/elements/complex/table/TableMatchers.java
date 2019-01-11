@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
@@ -25,7 +26,7 @@ public class TableMatchers {
     public String getLocator(Table table) { return format(locator, column.getIndex(table.header())); }
 
 
-    public static WebList getMatchLines(Table table, TableMatchers... matchers) {
+    public static WebList<UIElement> getMatchLines(Table table, TableMatchers... matchers) {
         String locator = format(GET_ROW, print(map(matchers, m ->
                 m.getLocator(table) + "/.."),""));
         return $$(locator, table);

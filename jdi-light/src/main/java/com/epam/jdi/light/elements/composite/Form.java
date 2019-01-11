@@ -43,6 +43,13 @@ public class Form<T> extends Section {
     public static JFunc3<Field, Object, Object, String> GET_ACTION = (field, element, parent)
         -> ((HasValue) element).getValue().trim();
 
+    public void fillAction(Field field, Object element, Object parent, String setValue) {
+        FILL_ACTION.execute(field, element, parent, setValue);
+    }
+    public String getAction(Field field, Object element, Object parent) {
+        return GET_ACTION.execute(field, element, parent);
+    }
+
     private FormFilters filter = ALL;
     public FormFilters getFilter() {
         return filter;
@@ -63,7 +70,7 @@ public class Form<T> extends Section {
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
                 UIElement element = new UIElement<>().setName(pair.key);
-                FILL_ACTION.execute(null, element, pageObject, pair.value);
+                fillAction(null, element, pageObject, pair.value);
             }
             return;
         }
@@ -73,7 +80,7 @@ public class Form<T> extends Section {
                 setField = first(allFields, f -> namesEqual(pair.key, getElementName(f)));
                 if (setField == null)
                     continue;
-                FILL_ACTION.execute(setField, getValueField(setField, pageObject), pageObject, pair.value);
+                fillAction(setField, getValueField(setField, pageObject), pageObject, pair.value);
             } catch (Exception ex) { throw exception("Can't fill element '%s'. Exception: %s",
                     setField != null ? setField.getName() : "UNKNOWN FIELD", ex.getMessage()); }
         setFilterAll();
@@ -126,7 +133,7 @@ public class Form<T> extends Section {
             String fieldValue = map.first((name, value) ->
                     namesEqual(name, getElementName(field)));
             if (fieldValue == null) continue;
-            String actual = GET_ACTION.execute(field, getValueField(field, pageObject), pageObject);
+            String actual = getAction(field, getValueField(field, pageObject), pageObject);
             if (!actual.equals(fieldValue))
                 compareFalse.add(format("Field '%s' (Actual: '%s' <> Expected: '%s')", field.getName(), actual, fieldValue));
         }

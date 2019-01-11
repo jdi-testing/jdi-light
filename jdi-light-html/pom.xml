@@ -7,24 +7,66 @@
     <artifactId>jdi-light-html</artifactId>
     <name>JDI Light Html Elements</name>
     <packaging>jar</packaging>
-    <version>1.0.26</version>
+    <version>1.0.27</version>
     <groupId>com.epam.jdi</groupId>
 
     <!--parent>
         <version>1.0.22</version>
         <artifactId>jdi-2</artifactId>
     </parent-->
+    <properties>
+        <aspectj.version>1.9.1</aspectj.version>
+        <aspectj.maven>1.11</aspectj.maven>
+        <java.version>1.8</java.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.0.26</version>
+            <version>1.0.27</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>${aspectj.maven}</version>
+                <configuration>
+                    <showWeaveInfo>true</showWeaveInfo>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <Xlint>ignore</Xlint>
+                    <complianceLevel>${java.version}</complianceLevel>
+                    <encoding>UTF-8</encoding>
+                    <verbose>false</verbose>
+                    <outxml>true</outxml>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjrt</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjtools</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- From general pom -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

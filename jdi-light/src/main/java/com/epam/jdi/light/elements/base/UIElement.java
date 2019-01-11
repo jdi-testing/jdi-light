@@ -277,12 +277,12 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
         return getText();
     }
 
-    @JDIAction("Select '{0}' for '{name}'")
+    @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
         get(value).click();
     }
 
-    @JDIAction("Select '{0}' for '{name}'")
+    @JDIAction("Select '{0}' in '{name}'")
     public void select(String... names) {
         for (String name : names)
             select(name);

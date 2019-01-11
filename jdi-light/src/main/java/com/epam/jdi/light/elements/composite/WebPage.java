@@ -17,7 +17,6 @@ import java.util.function.Supplier;
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.*;
-import static com.epam.jdi.light.common.PageChecks.NONE;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
@@ -41,9 +40,9 @@ public class WebPage extends DriverBase implements INamed {
     public String url = "";
     public String title = "";
 
-    private String checkUrl;
-    private CheckTypes checkUrlType = CONTAINS;
-    private CheckTypes checkTitleType = CheckTypes.NONE;
+    public String checkUrl;
+    public CheckTypes checkUrlType = CONTAINS;
+    public CheckTypes checkTitleType = CheckTypes.NONE;
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this).setName(getName()+" Form");
     }
@@ -102,25 +101,27 @@ public class WebPage extends DriverBase implements INamed {
     /**
      * Opens url specified for page
      */
-    @JDIAction("Open '{name}'(url={url})")
+    @JDIAction("Open '{name}'(url={0})")
     private void open(String url) {
         CacheValue.reset();
         driver().navigate().to(url);
         setCurrentPage(this);
     }
     public void open(Object... params) {
-        String urlWithParams = params == null || params.length == 0
-            ? url
-            : url.contains("%s")
-                ? String.format(url, params)
-                : MessageFormat.format(url, params);
-        open(urlWithParams);
+        open(getUrlWithParams(params));
+    }
+    private String getUrlWithParams(Object... params) {
+        return params == null || params.length == 0
+                ? url
+                : url.contains("%s")
+                    ? String.format(url, params)
+                    : MessageFormat.format(url, params);
     }
 
     /**
      * Check that page opened
      */
-    @JDIAction("Check that '{name}'(url={url}; title={title}) is opened")
+    @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
     public void checkOpened() {
         if (!hasRunDrivers())
             throw exception("Page '%s' is not opened: Driver is not run", toString());
@@ -167,13 +168,18 @@ public class WebPage extends DriverBase implements INamed {
         return result;
     }
 
-    @JDIAction("'{name}'(url={url}) should be opened")
     public void shouldBeOpened() {
+        openePage(url);
+    }
+    public void shouldBeOpened(Object... params) {
+        openePage(getUrlWithParams(params));
+    }
+    @JDIAction("'{name}'(url={0}) should be opened")
+    private void openePage(String url) {
         if (isOpened()) return;
-        open();
+        open(url);
         checkOpened();
     }
-
     /**
      * Reload current page
      */
@@ -305,7 +311,7 @@ public class WebPage extends DriverBase implements INamed {
         }
     }
 
-    public static PageChecks CHECK_AFTER_OPEN = NONE;
+    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
     public static JAction1<WebPage> BEFORE_NEW_PAGE = page -> {
         if (CHECK_AFTER_OPEN == NEW_PAGE)
             page.checkOpened();

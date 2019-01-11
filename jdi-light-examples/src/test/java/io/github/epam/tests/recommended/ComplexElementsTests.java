@@ -25,6 +25,13 @@ public class ComplexElementsTests extends StaticTestsInit {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
     }
+
+    @Test
+    public void pageParamsTest() {
+        metalAndColorsPageParams.open("?");
+        metalAndColorsPageParams.shouldBeOpened("?");
+        metalAndColorsPageParams.checkOpened();
+    }
     @Test
     public void complexTest() {
         colors.select(Green);
@@ -50,5 +57,15 @@ public class ComplexElementsTests extends StaticTestsInit {
         homePage.checkOpened();
         navigationL.select(Service);
         navigationL.select(ComplexTable);
+    }
+    @Test
+    public void navigationMenuTemplate() {
+        navigationS.select(ContactForm);
+        //navigationL.select("Contact form");
+        contactFormPage.checkOpened();
+        menu.select(Home);
+        homePage.checkOpened();
+        navigationL.select(3);
+        menu.select(ComplexTable);
     }
 }
