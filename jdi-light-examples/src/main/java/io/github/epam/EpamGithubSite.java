@@ -1,5 +1,6 @@
 package io.github.epam;
 
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
@@ -24,7 +25,7 @@ public class EpamGithubSite {
 	public static PerformancePage tablePage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
-	@Css("[ui=label]") public static WebList navigationL;
+	@Css("[ui=label]") public static WebList<UIElement> navigationL;
 
 	@Css("header") public static Header header;
 	@Css("footer") public static Footer footer;

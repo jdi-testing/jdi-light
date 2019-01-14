@@ -10,8 +10,6 @@ import java.util.List;
 
 public interface BaseElement extends JDIElement, HasValue {
     void hover();
-    boolean isSelected();
-    boolean isDeselected();
     boolean isEnabled();
     boolean isDisabled();
     boolean isDisplayed();
@@ -30,7 +28,6 @@ public interface BaseElement extends JDIElement, HasValue {
     Select select();
     void doActions(JFunc1<Actions, Actions> actions);
     void actions(JFunc1<Actions, Actions> actions);
-
 
     default UIElement base() {return (UIElement) this; }
 }

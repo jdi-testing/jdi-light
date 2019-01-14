@@ -1,6 +1,5 @@
 package org.mytests.uiobjects.example.site;
 
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
@@ -23,9 +22,6 @@ public class SiteJdi {
     @Css(".profile-photo [ui=label]") public static WebElement userName;
     @Css(".fa-sign-out") public static WebElement logout;
     @Css("img#user-icon") public static WebElement userIcon;
-
-    @Css(".sidebar-menu [ui=label]")
-    public static WebList navigation;
 
     @Step
     public static void shouldBeLoggedIn() {

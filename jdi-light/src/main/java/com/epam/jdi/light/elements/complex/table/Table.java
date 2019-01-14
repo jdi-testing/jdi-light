@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.pairs.Pair;
 import org.hamcrest.Matcher;
@@ -34,7 +35,7 @@ public class Table extends JDIBase implements ISetup, HasValue {
     protected By rowsLocator = By.cssSelector("tr");
     protected By columnsLocator = By.cssSelector("td");
     protected By headerLocator = By.cssSelector("th");
-    public CacheValue<List<String>> header = new CacheValue<>(() -> select($$(headerLocator, this), UIElement::getText));
+    public CacheValue<List<String>> header = new CacheValue<>(() -> LinqUtils.select($$(headerLocator, this), UIElement::getText));
     public CacheValue<Integer> size = new CacheValue<>(() -> header.get().size());
     public CacheValue<List<UIElement> > rows = new CacheValue<>(() -> {
         List<WebElement> value = uiSearch(get(),rowsLocator);
@@ -67,7 +68,7 @@ public class Table extends JDIBase implements ISetup, HasValue {
     }
     @JDIAction("Get first '{name}' table row that match criteria")
     public Line row(TableMatchers... matchers) {
-        WebList lines = getMatchLines(this, matchers);
+        WebList<UIElement> lines = getMatchLines(this, matchers);
         if (lines == null || lines.size() == 0)
             return null;
         List<String> result = new ArrayList<>();

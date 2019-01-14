@@ -1,6 +1,5 @@
 package io.github.com;
 
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -29,8 +28,8 @@ public class StaticSite {
 	@Url("/dates.html") @Title("Dates") public static DatesPage datesPage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
-	@Css("[ui=label]") public static WebList navigationL;
-	@UI("[ui=label][*'%s']") public static WebList navigationS;
+	@Css("[ui=label]") public static HtmlList navigationL;
+	@UI("[ui=label][*'%s']") public static HtmlList navigationS;
 	@UI(".sidebar-menu span<[*'%s']") public static Menu leftMenu;
 	@JMenu({"[ui=label][*'%s']", "[ui=label][*'%s']"}) public static Menu leftMenu2D;
 

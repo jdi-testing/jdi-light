@@ -47,8 +47,8 @@ public class HtmlSettings {
         if (!initialized) {
             WebSettings.init();
             MapArray<String, InitRule> newRules = map(
-                $("WebList", iRule(f -> isClass(f, WebList.class), info -> new WebList())),
-                $("HtmlList", iRule(f -> isClass(f.getType(), HtmlList.class, Menu.class, Options.class, Tabs.class)
+                $("WebList", iRule(f -> f.getType() == WebList.class, info -> new WebList())),
+                $("HtmlList", iRule(f -> f.getType() == HtmlList.class || isInterface(f,Menu.class)
                     || isList(f, WebElement.class), info -> new HtmlList())),
                 $("Combobox", iRule(f -> isInterface(f, DataList.class), info -> new HtmlCombobox())),
                 $("Checklist", iRule(f -> isInterface(f, Checklist.class), info -> new HtmlChecklist())),

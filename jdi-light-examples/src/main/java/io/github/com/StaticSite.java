@@ -10,7 +10,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import io.github.com.pages.*;
 import org.openqa.selenium.WebElement;
-import org.w3c.dom.html.HTMLElement;
 
 import java.util.List;
 
@@ -31,8 +30,8 @@ public class StaticSite {
 	public static PerformancePage tablePage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
-	@Css("[ui=label]") public static WebList navigationL;
-	@UI("[ui=label][*'%s']") public static WebList navigationS;
+	@Css("[ui=label]") public static WebList<UIElement> navigationL;
+	@UI("[ui=label][*'%s']") public static WebList<UIElement> navigationS;
 	@UI("[ui=label][*'%s']") public static UIElement menu;
 
 	@Css("header") public static Header header;

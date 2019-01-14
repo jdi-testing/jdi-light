@@ -1,6 +1,7 @@
 package io.github.epam.tests.recommended;
 
 import io.github.epam.StaticTestsInit;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.homePage;
@@ -17,5 +18,9 @@ public class RootTests extends StaticTestsInit {
         searchIcon.click();
         loginForm.submit(DEFAULT_USER, "enter");
         homePage.checkOpened();
+    }
+    @Test
+    public void initDeepTest() {
+        Assert.assertNotNull(homePage.testField);
     }
 }

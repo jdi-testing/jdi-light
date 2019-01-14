@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
@@ -25,8 +26,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.addPage;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
 import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 import static java.lang.reflect.Modifier.isStatic;
 
 /**
@@ -77,8 +77,8 @@ public class PageFactory {
     public static void initElements(JFunc<WebDriver> driver, Object... pages) { }
 
     public static void initElements(SiteInfo info) {
-        List<Field> fields = filter(info.instance.getClass().getDeclaredFields(),
-                f -> isJDIField(f) || isPageObject(f.getType()));
+        List<Field> poFields = getFieldsDeep(info.instance.getClass(), Section.class, WebPage.class);
+        List<Field> fields = filter(poFields, f -> isJDIField(f) || isPageObject(f.getType()));
         SiteInfo pageInfo = new SiteInfo(info);
         pageInfo.parent = info.instance;
         for (Field field : fields) {

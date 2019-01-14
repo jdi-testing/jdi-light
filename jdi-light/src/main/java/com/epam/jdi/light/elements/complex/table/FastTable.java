@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,6 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.LinqUtils.listEquals;
-import static com.epam.jdi.tools.LinqUtils.select;
 
 public class FastTable extends Table {
     protected By cellLocator;
@@ -47,10 +47,10 @@ public class FastTable extends Table {
         return headerIsRow ? rowNum + 1 : rowNum;
     }
     // TODO
-    public WebList getRow(int rowNum) {
+    public WebList<UIElement> getRow(int rowNum) {
         return $$(fillByTemplate(rowLocator, getRowIndex(rowNum), this));
     }
-    private WebList getColumn(int colNum) {
+    private WebList<UIElement> getColumn(int colNum) {
         return $$(fillByTemplate(columnLocator, colNum), this);
     }
     private UIElement getCell(int colNum, int rowNum) {
@@ -62,7 +62,7 @@ public class FastTable extends Table {
     public List<UIElement> webRow(int rowNum) {
         if (!rows.has(rowNum+"")) {
             if (gotTable)
-                return select(cells, c -> c.value.get(rowNum+""));
+                return LinqUtils.select(cells, c -> c.value.get(rowNum+""));
             rows.add(rowNum+"", getRow(rowNum).elements());
         }
         return rows.get(rowNum+"");

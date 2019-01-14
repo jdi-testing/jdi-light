@@ -1,5 +1,6 @@
 package selenium.seleniumPO;
 
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import org.openqa.selenium.By;
@@ -37,5 +38,5 @@ public class HomePage {
     @FindBy(css = ".profile-photo") WebElement profilePhoto;
     @FindBy(css = ".profile-photo [ui=label]") WebElement userName;
 
-    @UI("[ui=label][*'%s']") public static WebList leftNavigation;
+    @UI("[ui=label][*'%s']") public static WebList<UIElement> leftNavigation;
 }

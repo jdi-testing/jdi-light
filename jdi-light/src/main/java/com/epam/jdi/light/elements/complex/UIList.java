@@ -8,10 +8,8 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.UIListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.UIUtils;
-import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.JDIElement;
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -35,7 +33,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 
-public class UIList<T extends JDIBase, E> extends JDIBase implements IList<T>, JDIElement {
+public class UIList<T extends Section, E> extends JDIBase implements IList<T>, JDIElement {
 
     private CacheValue<MapArray<String, T>> elements = new CacheValue<>();
     private CacheValue<List<T>> values = new CacheValue<>();
@@ -60,9 +58,9 @@ public class UIList<T extends JDIBase, E> extends JDIBase implements IList<T>, J
     }
     @JDIAction(level = DEBUG)
     public List<T> elements() {
-        if (values.hasValue())
+        if (values.hasValue() && isActual())
             return values.get();
-        if (elements.hasValue() && isActual())
+        if (elements.hasValue())
             return elements.get().values();
         return values.set(LinqUtils.select(
             Timer.getByCondition(() -> getAll(), l -> l.size() > 0), this::initElement));
@@ -161,10 +159,10 @@ public class UIList<T extends JDIBase, E> extends JDIBase implements IList<T>, J
         //org.hamcrest.MatcherAssert.assertThat(asData(), condition);
         MatcherAssert.assertThat(asData(), condition);
     }
-    public UIListAssert<E> is() {
-        return new UIListAssert<>(asData(), toError());
+    public UIListAssert<T, E> is() {
+        return new UIListAssert<>(elements(), asData(), toError());
     }
-    public UIListAssert<E> assertThat() {
+    public UIListAssert<T, E> assertThat() {
         return is();
     }
 

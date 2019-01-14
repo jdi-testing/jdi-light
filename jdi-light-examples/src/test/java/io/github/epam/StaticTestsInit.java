@@ -6,12 +6,9 @@ import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static com.epam.jdi.light.actions.ActionHelper.ACTION_FAILED;
-import static com.epam.jdi.light.common.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.homePage;
 
 public class StaticTestsInit {
@@ -20,8 +17,8 @@ public class StaticTestsInit {
     public static void setUp() {
         logger.setLogLevel(INFO);
         OutputTemplates.STEP_TEMPLATE = "{action}";
-        ACTION_FAILED = (el, ex) ->
-            ex + LINE_BREAK + "Screenshot: " + takeScreen();
+        /*ACTION_FAILED = (el, ex) ->
+            ex + LINE_BREAK + "Screenshot: " + takeScreen();*/
         initElements(StaticSite.class);
         homePage.open();
         logger.toLog("Run Tests");

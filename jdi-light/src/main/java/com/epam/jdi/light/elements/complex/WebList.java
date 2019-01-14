@@ -17,6 +17,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -52,18 +53,21 @@ public class WebList<T extends UIElement> extends JDIBase implements IList<T>, S
     }
     @JDIAction(level = DEBUG)
     public List<T> elements() {
-        if (webElements.hasValue() && isActual())
-            return LinqUtils.map(webElements.get(), this::getNewInstance);
-        List<WebElement> result = getAll();
-        if (result.size() > 0)
-            webElements.set(result);
-        return LinqUtils.map(result, this::getNewInstance);
+        try {
+            if (webElements.hasValue() && isActual())
+                return LinqUtils.map(webElements.get(), this::getNewInstance);
+            List<WebElement> result = getAll();
+            if (result.size() > 0)
+                webElements.set(result);
+            return LinqUtils.map(result, this::getNewInstance);
+        } catch (Exception ex) { return new ArrayList<>(); }
     }
 
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
         get(value).click();
     }
+    @JDIAction("Select ({0}) for '{name}'")
     public void select(String... names) {
         for (String value : names)
             select(value);
@@ -71,6 +75,7 @@ public class WebList<T extends UIElement> extends JDIBase implements IList<T>, S
     public <TEnum extends Enum> void select(TEnum value) {
         select(getEnumValue(value));
     }
+    @JDIAction("Select ({0}) for '{name}'")
     public <TEnum extends Enum> void select(TEnum... names) {
         for (TEnum value : names)
             select(value);
