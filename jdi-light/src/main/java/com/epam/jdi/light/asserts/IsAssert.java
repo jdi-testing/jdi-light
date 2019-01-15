@@ -1,5 +1,6 @@
 package com.epam.jdi.light.asserts;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import org.hamcrest.Matcher;
@@ -8,56 +9,64 @@ import static com.epam.jdi.light.asserts.BaseSelectorAssert.waitAssert;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class IsAssert<T extends IsAssert> {
-    protected UIElement element;
-    protected String name;
-    public IsAssert(BaseElement element) { 
-        this.element = (UIElement) element; 
-        this.name = ((UIElement) element).toError(); 
+public class IsAssert<T extends IsAssert> extends BaseAssert {
+    public IsAssert(BaseElement element) {
+        super(element);
     }
 
+    @JDIAction("Assert '{name}' text")
     public T text(Matcher<String> condition) {
-        waitAssert(() -> assertThat(element.getText(), condition), name);
+        assertThat(element.getText(), condition);
         return (T) this;
     }
+    @JDIAction("Assert '{name}' attribute")
     public T attr(String attrName, Matcher<String> condition) {
-        waitAssert(() -> assertThat(element.getAttribute(attrName), condition), name);
+        assertThat(element.getAttribute(attrName), condition);
         return (T) this;
     }
+    @JDIAction("Assert '{name}' css '{0}'")
     public T css(String css, Matcher<String> condition) {
-        waitAssert(() -> assertThat(element.getCssValue(css), condition), name);
+        assertThat(element.getCssValue(css), condition);
         return (T) this;
     }
+    @JDIAction("Assert '{name}' element tag")
     public T tag(Matcher<String> condition) {
-        waitAssert(() -> assertThat(element.getTagName(), condition), name);
+        assertThat(element.getTagName(), condition);
         return (T) this;
     }
+    @JDIAction("Assert '{name}' element tag")
     public T cssClass(Matcher<String> condition) {
-        waitAssert(() -> assertThat(element.getAttribute("class"), condition), name);
+        assertThat(element.getAttribute("class"), condition);
         return (T) this;
     }
+    @JDIAction("Assert that '{name}' is displayed")
     public T displayed() {
-        waitAssert(() -> assertThat(element.isDisplayed() ? "displayed" : "hidden", is("displayed")), name);
+        assertThat(element.isDisplayed() ? "displayed" : "hidden", is("displayed"));
         return (T) this;
     }
+    @JDIAction("Assert that '{name}' is disappear")
     public T disappear() {
-        waitAssert(() -> assertThat(element.isDisplayed() ? "displayed" : "disappear", is("disappear")), name);
+        assertThat(element.isDisplayed() ? "displayed" : "disappear", is("disappear"));
         return (T) this;
     }
+    @JDIAction("Assert that '{name}' is selected")
     public T selected() {
-        waitAssert(() -> assertThat(element.isSelected() ? "selected" : "not selected", is("selected")), name);
+        assertThat(element.isSelected() ? "selected" : "not selected", is("selected"));
         return (T) this;
     }
+    @JDIAction("Assert that '{name}' is deselected")
     public T deselected() {
-        waitAssert(() -> assertThat(element.isSelected() ? "selected" : "not selected", is("not selected")), name);
+        assertThat(element.isSelected() ? "selected" : "not selected", is("not selected"));
         return (T) this;
     }
+    @JDIAction("Assert that '{name}' is enabled")
     public T enabled() {
-        waitAssert(() -> assertThat(element.isEnabled() ? "enabled" : "disabled", is("enabled")), name);
+        assertThat(element.isEnabled() ? "enabled" : "disabled", is("enabled"));
         return (T) this;
     }
+    @JDIAction("Assert that '{name}' is disabled")
     public T disabled() {
-        waitAssert(() -> assertThat(element.isEnabled() ? "enabled" : "disabled", is("disabled")), name);
+        assertThat(element.isEnabled() ? "enabled" : "disabled", is("disabled"));
         return (T) this;
     }
 }

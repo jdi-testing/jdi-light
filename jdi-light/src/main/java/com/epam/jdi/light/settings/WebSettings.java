@@ -26,7 +26,6 @@ import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.elements.complex.WebList.setWebListClass;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
@@ -98,7 +97,6 @@ public class WebSettings {
 
             INIT_THREAD_ID = Thread.currentThread().getId();
             SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
-            setWebListClass(UIElement.class);
             initialized = true;
         }
     }

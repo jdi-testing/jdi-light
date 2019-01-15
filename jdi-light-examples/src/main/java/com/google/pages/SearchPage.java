@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 
 public class SearchPage extends WebPage {
     @Css(".srg>.g") public UIList<SearchResult, Result> jobsE;
+    @Css(".srg>.g") public UIList<SearchResult, ?> jobs2;
     @UI("[*'test Framework for UI']") public WebElement gitHubJdi;
 
 }

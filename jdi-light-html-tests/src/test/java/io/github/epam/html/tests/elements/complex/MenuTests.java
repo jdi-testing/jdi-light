@@ -13,7 +13,7 @@ public class MenuTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        htmlElementsPage.shouldBeOpened();
+        html5Page.shouldBeOpened();
     }
 
     @Test

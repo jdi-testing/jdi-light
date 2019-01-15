@@ -10,7 +10,7 @@ import static com.epam.jdi.light.elements.base.WindowsManager.acceptAlert;
 import static com.epam.jdi.light.elements.base.WindowsManager.getAlertText;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static io.github.com.StaticSite.htmlElementsPage;
+import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
@@ -24,7 +24,7 @@ public class ButtonTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        htmlElementsPage.shouldBeOpened();
+        html5Page.shouldBeOpened();
     }
     String text = "Big Red Button-Input";
 

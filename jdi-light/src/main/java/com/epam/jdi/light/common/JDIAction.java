@@ -20,4 +20,5 @@ public @interface JDIAction {
     String value() default "";
     LogLevels level() default STEP;
     String condition() default "";
+    boolean logResult() default true;
 }

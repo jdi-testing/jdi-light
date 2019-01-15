@@ -13,10 +13,13 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
+import jdk.nashorn.internal.runtime.ECMAException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,18 +30,26 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 
-public class WebList<T extends UIElement> extends JDIBase implements IList<T>, SetValue, JDIElement {
+public class WebList<T extends UIElement> extends JDIBase implements IList<T>, SetValue {
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
 
     public WebList() {}
     public WebList(List<WebElement> elements) {
         this.webElements.setForce(elements);
     }
-    protected static Class<?> initClass;
-    public static <E extends UIElement> void setWebListClass(Class<E> listClass) {
+    protected Class<?> initClass = UIElement.class;
+    public WebList<T> setInitClass(Class<T> listClass) {
         initClass = listClass;
+        return this;
     }
-
+    public WebList<T> setInitClass(Field field) {
+        try {
+            Class<?> initClass = (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
+            if (initClass == WebElement.class)
+                initClass = UIElement.class;
+            return setInitClass((Class<T>) initClass);
+        } catch (Exception ex) { throw  exception("Can't init WebList. Weblist elements should extend UIElement"); }
+    }
     private boolean isActual() {
         try {
             webElements.get().get(0).getTagName();
@@ -47,8 +58,12 @@ public class WebList<T extends UIElement> extends JDIBase implements IList<T>, S
     }
     private T getNewInstance(WebElement element) {
         try {
-            Constructor<T> constructor = ((Class<T>)initClass).getConstructor(new Class[]{WebElement.class});
-            return constructor.newInstance(new Object[]{element});
+            T instance = (T) initClass.newInstance();
+            instance.setWebElement(element).setName(getName());
+            instance.setTypeName(varName);
+            instance.setParent(parent);
+            instance.setLocator(getLocator());
+            return instance;
         } catch (Exception ex) { throw exception("Can't init new element for list"); }
     }
     @JDIAction(level = DEBUG)
@@ -137,7 +152,10 @@ public class WebList<T extends UIElement> extends JDIBase implements IList<T>, S
 
     @JDIAction(level = DEBUG)
     public T get(int index) {
-        T element = elements().get(index);
+        List<T> elements = elements();
+        if (elements.size() <= index)
+            throw exception("Can't get element with index '%s'. Found only '%s' elements", index, elements.size());
+        T element = elements.get(index);
         element.name = format("%s[%s]", getName(), index);
         return element;
     }

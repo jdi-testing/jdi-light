@@ -28,6 +28,7 @@ public interface BaseElement extends JDIElement, HasValue {
     Select select();
     void doActions(JFunc1<Actions, Actions> actions);
     void actions(JFunc1<Actions, Actions> actions);
+    boolean wait(JFunc1<BaseElement, Boolean> condition);
 
     default UIElement base() {return (UIElement) this; }
 }

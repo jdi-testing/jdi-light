@@ -33,7 +33,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 
-public class UIList<T extends Section, E> extends JDIBase implements IList<T>, JDIElement {
+public class UIList<T extends Section, E> extends JDIBase implements IList<T> {
 
     private CacheValue<MapArray<String, T>> elements = new CacheValue<>();
     private CacheValue<List<T>> values = new CacheValue<>();
@@ -118,7 +118,9 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, J
     }
 
     public List<E> asData() {
-        return getMap().select((k, v) -> UIUtils.asEntity(v, entityType));
+        try {
+            return getMap().select((k, v) -> UIUtils.asEntity(v, entityType));
+        } catch (Exception ex) { return new ArrayList<>(); }
     }
 
     @JDIAction(level = DEBUG)

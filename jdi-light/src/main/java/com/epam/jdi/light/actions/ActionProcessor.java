@@ -6,6 +6,8 @@ package com.epam.jdi.light.actions;
  */
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.settings.TimeoutSettings;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,12 +16,15 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.base.OutputTemplates.FAILED_ACTION_TEMPLATE;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.Timer.nowTime;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
@@ -41,13 +46,14 @@ public class ActionProcessor {
             Object result = stableAction(jp);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(jp.getThis(), ex.getMessage()));
+            Object element = jp.getThis() != null ? jp.getThis() : new Object();
+            throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, ex.getMessage()));
         }
     }
 
     private static Object stableAction(ProceedingJoinPoint jp) {
         long start = currentTimeMillis();
-        Throwable exception = null;
+        String exception = "";
         logger.logOff();
         int timeout = TIMEOUT.get();
         do { try {
@@ -58,13 +64,26 @@ public class ActionProcessor {
             return result;
         } catch (Throwable ex) {
             try {
-                exception = ex;
+                exception = ex.getMessage();
                 Thread.sleep(200);
             } catch (Exception ignore) {  } }
         } while (currentTimeMillis() - start < timeout*1000);
         logger.logOn();
-        throw exception("Failed to execute %s action during %s seconds. Exception: %s",
-                jp.getSignature().getName(), timeout, exception);
+        throw exception(getFailedMessage(jp, exception));
+    }
+    private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
+        MethodSignature method = getMethod(jp);
+        try {
+            String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
+                $("exception", exception),
+                $("timeout", TIMEOUT.get()),
+                $("action", method.getMethod().getName())
+            ));
+            return fillTemplate(result, jp, method);
+        } catch (Exception ex) {
+            throw new RuntimeException("Surround method issue: " +
+                    "Can't get failed message: " + ex.getMessage());
+        }
     }
 
     private static String getConditionName(ProceedingJoinPoint jp) {
@@ -92,7 +111,8 @@ public class ActionProcessor {
             Object result = jp.proceed();
             return AFTER_STEP_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            throw exception(ACTION_FAILED.execute(jp.getThis(), ex.getMessage()));
+            Object element = jp.getThis() != null ? jp.getThis() : new Object();
+            throw exception(ACTION_FAILED.execute(element, ex.getMessage()));
         }
     }
 }

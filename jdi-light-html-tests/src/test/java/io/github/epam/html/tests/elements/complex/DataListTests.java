@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.htmlElementsPage;
+import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.iceCreamDataList;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Strawberry;
@@ -19,7 +19,7 @@ public class DataListTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        htmlElementsPage.shouldBeOpened();
+        html5Page.shouldBeOpened();
         iceCreamDataList.select(text);
     }
     String text = "Coconut";

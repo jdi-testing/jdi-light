@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.htmlElementsPage;
+import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.weather;
 import static io.github.com.pages.HtmlElementsPage.weatherNoLocator;
 import static io.github.epam.html.tests.elements.complex.enums.Weather.*;
@@ -18,7 +18,7 @@ public class ChecklistTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        htmlElementsPage.shouldBeOpened();
+        html5Page.shouldBeOpened();
         weather.check(text);
     }
     String text = "Hot option";

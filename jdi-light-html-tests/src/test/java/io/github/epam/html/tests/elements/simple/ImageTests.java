@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.base.WindowsManager.acceptAlert;
 import static com.epam.jdi.light.elements.base.WindowsManager.getAlertText;
-import static io.github.com.StaticSite.htmlElementsPage;
+import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.jdiLogo;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
@@ -20,7 +20,7 @@ public class ImageTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        htmlElementsPage.shouldBeOpened();
+        html5Page.shouldBeOpened();
     }
     String text = "https://epam.github.io/JDI/images/jdi-logo.jpg";
 

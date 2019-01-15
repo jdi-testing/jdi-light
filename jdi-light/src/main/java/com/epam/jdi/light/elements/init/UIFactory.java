@@ -5,14 +5,14 @@ import com.epam.jdi.light.elements.complex.Droplist;
 import com.epam.jdi.light.elements.complex.WebList;
 import org.openqa.selenium.By;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.getLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 
 /**
  * Created by Roman_Iovlev on 3/28/2018.
  */
 public class UIFactory {
     public static UIElement element(String locator) {
-        return element(getLocator(locator));
+        return element(defineLocator(locator));
     }
     public static UIElement element(By byLocator) {
         UIElement<UIElement> el =  new UIElement<>();
@@ -33,7 +33,7 @@ public class UIFactory {
     }
 
     public static WebList<UIElement> list(String locator) {
-        return list(getLocator(locator));
+        return list(defineLocator(locator));
     }
     public static WebList<UIElement> list(By byLocator) {
         WebList list =  new WebList();
@@ -55,7 +55,7 @@ public class UIFactory {
 
     public static Droplist dropdown(String locator) {
         Droplist el =  new Droplist();
-        By byLocator = getLocator(locator);
+        By byLocator = defineLocator(locator);
         el.setLocator(byLocator);
         return el;
     }

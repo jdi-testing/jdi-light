@@ -7,6 +7,8 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.JDIElement;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.func.JAction1;
@@ -55,8 +57,17 @@ public class ActionHelper {
         try {
             MethodSignature method = getMethod(jp);
             String template = methodNameTemplate(method);
-            if (isBlank(template))
-                return getDefaultName(method.getName(), methodArgs(jp, method));
+            return isBlank(template)
+                ? getDefaultName(method.getName(), methodArgs(jp, method))
+                : fillTemplate(template, jp, method);
+        } catch (Exception ex) {
+            throw new RuntimeException("Surround method issue: " +
+                    "Can't get action name: " + ex.getMessage());
+        }
+    };
+    public static String fillTemplate(String template,
+        ProceedingJoinPoint jp, MethodSignature method) {
+        try {
             if (template.contains("{0")) {
                 Object[] args = getArgs(jp);
                 template = msgFormat(template, args);
@@ -64,17 +75,14 @@ public class ActionHelper {
                 template = format(template, getArgs(jp));
             }
             if (template.contains("{")) {
-                MapArray<String, Object> obj = toMap(()->new MapArray<>("this", getElementName(jp)));
+                MapArray<String, Object> obj = toMap(() -> new MapArray<>("this", getElementName(jp)));
                 MapArray<String, Object> args = methodArgs(jp, method);
                 MapArray<String, Object> fields = classFields(jp);
                 return getActionNameFromTemplate(method, template, obj, args, fields);
             }
             return template;
-        } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: " +
-                    "Can't get action name: " + ex.getMessage());
-        }
-    };
+        } catch (Exception ex) { throw new RuntimeException("Can't fill JDIAction template: " + template + "for method: " + method.getName()); }
+    }
 
     public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
         logger.toLog(getBeforeLogString(jp), logLevel(jp));
@@ -83,8 +91,9 @@ public class ActionHelper {
         BEFORE_STEP_ACTION.execute(jp);
         processNewPage(jp);
     };
-    public static int CUT_STEP_TEXT = 30;
+    public static int CUT_STEP_TEXT = 70;
     public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
+        if (!logResult(jp)) return result;
         LogLevels logLevel = logLevel(jp);
         if (result != null) {
             String text = result.toString();
@@ -95,6 +104,15 @@ public class ActionHelper {
             logger.debug("Done");
         return result;
     };
+    private static boolean logResult(ProceedingJoinPoint jp) {
+        Class<?> cl = jp.getThis() != null
+            ? jp.getThis().getClass()
+            : jp.getSignature().getDeclaringType();
+        if (!isInterface(cl, JDIElement.class)) return false;
+        JDIAction ja = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
+        return ja != null && ja.logResult();
+    }
+
     public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_JDI_ACTION =
         (jp, result) -> AFTER_STEP_ACTION.execute(jp, result);
 

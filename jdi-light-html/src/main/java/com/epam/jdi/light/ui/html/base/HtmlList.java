@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class HtmlList extends WebList<HtmlElement> implements IList<HtmlElement>, Menu {
-    public HtmlList() {}
+    public HtmlList() { setInitClass(HtmlElement.class); }
     public HtmlList(List<WebElement> elements) {
         this.webElements.setForce(elements);
     }

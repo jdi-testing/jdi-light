@@ -31,7 +31,6 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getButtonByName;
-import static com.epam.jdi.light.elements.complex.WebList.setWebListClass;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
@@ -47,7 +46,7 @@ public class HtmlSettings {
         if (!initialized) {
             WebSettings.init();
             MapArray<String, InitRule> newRules = map(
-                $("WebList", iRule(f -> f.getType() == WebList.class, info -> new WebList())),
+                $("WebList", iRule(f -> f.getType() == WebList.class, info -> new WebList().setInitClass(info.field))),
                 $("HtmlList", iRule(f -> f.getType() == HtmlList.class || isInterface(f,Menu.class)
                     || isList(f, WebElement.class), info -> new HtmlList())),
                 $("Combobox", iRule(f -> isInterface(f, DataList.class), info -> new HtmlCombobox())),
@@ -104,7 +103,6 @@ public class HtmlSettings {
                 }
                 return ((HasValue) element).getValue().trim();
             };
-            setWebListClass(HtmlElement.class);
         }
     }
 }

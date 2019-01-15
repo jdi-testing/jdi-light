@@ -36,9 +36,9 @@ public class TableTests extends StaticTestsInit {
         logTime("Get cell(3,4)");
         assertEquals(table.cell("Email",4), zacharyEmail);
         logTime("Get cell(Email,4)");
-        assertEquals(table.column(2).getValue().substring(0, 30),
+        /*assertEquals(table.column(2).getValue().substring(0, 30),
                 "076 1971 1687,(011307) 16843,0");
-        logTime("Get column(1)");
+        logTime("Get column(2)");*/
         String value = table.preview();
         assertEquals(value.substring(0,198),
             "Name Phone Email City\n" +
@@ -46,13 +46,13 @@ public class TableTests extends StaticTestsInit {
             "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas\n" +
             "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauvais\n");
         logTime("Preview");
-        value = table.getValue();
+        /*value = table.getValue();
         assertEquals(value.substring(0,228),
             "||X||Name|Phone|Email|City||\r\n" +
             "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||\r\n" +
             "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||\r\n" +
             "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||");
-        logTime("Get value");
+        logTime("Get value");*/
     }
 
     private long timeStart;

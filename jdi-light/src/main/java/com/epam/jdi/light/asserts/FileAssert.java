@@ -1,5 +1,6 @@
 package com.epam.jdi.light.asserts;
 
+import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matcher;
 
 import java.io.File;
@@ -16,19 +17,23 @@ import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class FileAssert {
+public class FileAssert extends BaseAssert {
     public static FileAssert assertThatFile(String fileName) {
         return new FileAssert(fileName);
     }
     private File file;
 
     public FileAssert(String fileName) {
+        super(fileName);
         file = new File(mergePath(DOWNLOADS_DIR, fileName));
     }
+
+    @JDIAction("Assert that file '{name}' is downloaded")
     public FileAssert isDownloaded() {
-        waitAssert(() -> assertThat(timer().wait(() -> file.exists()), is(true)), file.getName());
+        assertThat(timer().wait(() -> file.exists()), is(true));
         return this;
     }
+    @JDIAction("Assert file '{name}' text")
     public FileAssert text(Matcher<String> text) {
         boolean result = timer().wait(() -> {
             assertThat(readFileToString(file, "UTF-8"), text); return true; }
@@ -40,10 +45,11 @@ public class FileAssert {
         } catch (IOException ex) {
             throw exception("Can't read File: " + ex.getMessage());
         }
-        waitAssert(() -> assertThat(fileText, text), file.getName());
+        assertThat(fileText, text);
         return this;
     }
 
+    @JDIAction("Assert file '{name}' size")
     public FileAssert hasSize(Matcher<Long> size) {
         timer().wait(() -> {
             assertThat(file.length(), size);

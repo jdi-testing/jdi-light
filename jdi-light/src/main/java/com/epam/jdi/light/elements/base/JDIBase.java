@@ -41,7 +41,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class JDIBase extends DriverBase implements INamed {
+public class JDIBase extends DriverBase implements BaseElement, INamed {
     public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     protected By byLocator;
     protected CacheValue<WebElement> webElement = new CacheValue<>();
@@ -174,7 +174,7 @@ public class JDIBase extends DriverBase implements INamed {
         return jdiBase.getLocator() == null ? "" : jdiBase.printLocator();
     }
     private String context;
-    private String printFullLocator() {
+    public String printFullLocator() {
         return parent == null || isBlank(printContext())
             ? printLocator()
             : printContext() + ">" + printLocator();
@@ -262,9 +262,9 @@ public class JDIBase extends DriverBase implements INamed {
         return !enabled();
     }
     public boolean enabled() {
-        String cl = getAttribute("class");
-        return cl.contains("active") ||
-                get().isEnabled() && !cl.contains("disabled");
+        List<String> cls = classes();
+        return cls.contains("active") ||
+                get().isEnabled() && !cls.contains("disabled");
     }
 
     @JDIAction("Check that '{name}' is displayed")
@@ -311,6 +311,9 @@ public class JDIBase extends DriverBase implements INamed {
     }
     public List<String> classes() {
         return asList(getAttribute("class").split(" "));
+    }
+    public boolean hasClass(String className) {
+        return classes().contains(className);
     }
 
     @JDIAction(level = DEBUG)
@@ -372,6 +375,14 @@ public class JDIBase extends DriverBase implements INamed {
     }
     public void actions(JFunc1<Actions, Actions> actions) {
         actions.execute(actionsClass().moveToElement(get())).build().perform();
+    }
+
+    public boolean wait(JFunc1<BaseElement, Boolean> condition) {
+        return new Timer(TIMEOUT.get()).wait(() -> condition.execute(this));
+    }
+
+    public String getValue() {
+        return get().getText();
     }
     //endregion
 }

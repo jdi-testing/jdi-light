@@ -18,7 +18,7 @@ public class Cookies {
         return manage().getCookies();
     }
     /**
-     * @param name Get cookie by nam
+     * @param value Get cookie by nam
      */
     @JDIAction("Get cookie '{0}'")
     public static Cookie getCookie(String value) {

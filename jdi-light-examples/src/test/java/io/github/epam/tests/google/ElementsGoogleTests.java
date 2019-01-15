@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.complex.UIList;
 import com.google.custom.Result;
 import com.google.custom.SearchResult;
 import io.github.epam.GoogleInit;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -40,8 +41,21 @@ public class ElementsGoogleTests extends GoogleInit {
         jobs.assertThat(hasItems(expectedResultsList()));
         jobs.assertThat(not(hasItem(corruptedResult())));
         jobs.assertThat(not(hasItems(corruptedResultsList())));
-    }
 
+    }
+    @Test
+    public void validateEntities2Tests() {
+        UIList<SearchResult, ?> jobs = searchPage.jobs2;
+        int size = searchPage.jobs2.size();
+
+        try {
+            jobs.is().empty();
+            Assert.fail("List should not be empty");
+        } catch (Throwable ex) {}
+        jobs.is().notEmpty();
+        jobs.assertThat().size(equalTo(size));
+
+    }
     @Test
     public void validateFilterTests() {
         UIList<SearchResult, Result> jobs = searchPage.jobsE;

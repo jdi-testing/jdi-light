@@ -15,4 +15,6 @@ public class OutputTemplates {
 
     public static String STEP_TEMPLATE = "{action}";
     public static String DEFAULT_TEMPLATE = "{action} ({element})";
+    public static String FAILED_ACTION_TEMPLATE =
+        "Failed to execute '{action}' for element '{failElement}' action during '{timeout}' seconds. Exception: {exception}";
 }

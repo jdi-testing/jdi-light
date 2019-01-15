@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
@@ -50,10 +51,10 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
     }
 
     public T find(String by) {
-        return find(By.cssSelector(by));
+        return find(defineLocator(by));
     }
     public T find(By by) {
-        return newElement(get().findElement(by));
+        return newElement(uiSearch(get(), by).get(0));
     }
     public List<T> finds(String by) {
         return finds(By.cssSelector(by));
@@ -149,7 +150,7 @@ public class UIElement<T extends UIElement> extends JDIBase implements WebElemen
     public void focus(){ sendKeys(""); }
 
 
-    @JDIAction(level = DEBUG)
+    @JDIAction(level = DEBUG) @Override
     public String getValue() {
         return getText();
     }

@@ -65,15 +65,15 @@ public class UIListAssert<T extends Section, E> {
         } catch (Exception ex) { throw exception("Is element Displayed failed. UIList element not a Section. Only Sections can be assert on isDisplayed"); }
     }
     public UIListAssert<T, E> empty() {
-        waitAssert(() -> assertThat(data.isEmpty() ? "list is empty" : "list is not empty", is("list is empty")), name);
+        waitAssert(() -> assertThat(elements.isEmpty() ? "list is empty" : "list is not empty", is("list is empty")), name);
         return this;
     }
     public UIListAssert<T, E> notEmpty() {
-        waitAssert(() -> assertThat(data.isEmpty() ? "list is empty" : "list is not empty", is("list is not empty")), name);
+        waitAssert(() -> assertThat(elements.isEmpty() ? "list is empty" : "list is not empty", is("list is not empty")), name);
         return this;
     }
     public UIListAssert<T, E> size(Matcher<Integer> condition) {
-        waitAssert(() -> assertThat(data.size(), condition), name);
+        waitAssert(() -> assertThat(elements.size(), condition), name);
         return this;
     }
 }

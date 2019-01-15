@@ -82,7 +82,7 @@ public class InitActions {
         $("UIElement", iRule(f -> isInterface(f, WebElement.class),
             info -> new UIElement())),
         $("WebList", iRule(f -> isClass(f, WebList.class) || isList(f, WebElement.class),
-            info -> new WebList())),
+            info -> new WebList().setInitClass(info.field) )),
         $("UIList", iRule(f -> isInterface(f, List.class) && isPageObject(getGenericType(f)),
             InitActions::initUIList)),
         $("PageObject", iRule(f -> isPageObject(f.getType()),

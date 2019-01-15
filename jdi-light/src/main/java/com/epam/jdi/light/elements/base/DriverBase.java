@@ -23,6 +23,7 @@ public class DriverBase {
     public String name = "";
     public String varName = "";
     public String typeName = "";
+    public String failElement = "";
     public Object parent;
     public <T extends JDIBase> T setParent(Object parent) {
         this.parent = parent;
@@ -31,10 +32,12 @@ public class DriverBase {
 
     public <T> T setName(String name) {
         this.name = name;
+        this.failElement = name;
         return (T) this;
     }
     public void setName(String varName, String className) {
         this.name = splitCamelCase(varName);
+        this.failElement = this.name;
         this.varName = className + "." + varName;
     }
     public void setTypeName(String typeName) {
