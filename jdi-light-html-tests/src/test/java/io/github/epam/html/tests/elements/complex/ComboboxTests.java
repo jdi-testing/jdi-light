@@ -59,6 +59,7 @@ public class ComboboxTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
+        iceCream.is().enabled();
         iceCream.is().text(is(text));
         iceCream.select(Vanilla);
         iceCream.is().text(containsString("Van"));

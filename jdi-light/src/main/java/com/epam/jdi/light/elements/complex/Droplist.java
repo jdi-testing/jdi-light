@@ -35,7 +35,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
 
     protected UIElement expander;
     protected UIElement value;
-    protected WebList<UIElement> list;
+    protected WebList list;
 
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
@@ -78,7 +78,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
     @JDIAction("Is '{name}' expanded")
     public boolean isExpanded() {
         assertLinked(list, "list", "expand");
-        return any(list.getAll(), el -> new UIElement<>(el).displayed());
+        return any(list.getAll(), el -> new UIElement(el).displayed());
     }
     /**
      * Expanding DropDown

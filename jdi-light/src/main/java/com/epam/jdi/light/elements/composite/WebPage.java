@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
 import com.epam.jdi.light.elements.base.DriverBase;
-import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;

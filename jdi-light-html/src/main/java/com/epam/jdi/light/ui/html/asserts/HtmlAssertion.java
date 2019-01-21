@@ -1,12 +1,11 @@
 package com.epam.jdi.light.ui.html.asserts;
 
 import com.epam.jdi.light.asserts.IsAssert;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import org.hamcrest.Matcher;
 
-import static com.epam.jdi.light.asserts.BaseSelectorAssert.waitAssert;
-import static com.epam.jdi.light.ui.html.utils.HtmlUtils.getDouble;
-import static com.epam.jdi.light.ui.html.utils.HtmlUtils.getInt;
+import static com.epam.jdi.light.ui.html.utils.HtmlUtils.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -21,8 +20,18 @@ public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAsser
      * Custom match src attribute and passed condition
      * @param condition
      */
+    @JDIAction("Assert that '{name}' label {0}")
+    public HtmlAssertion label(Matcher<String> condition) {
+        assertThat(html.labelText(), condition);
+        return this;
+    }
+    /**
+     * Custom match src attribute and passed condition
+     * @param condition
+     */
+    @JDIAction("Assert that '{name}' src {0}")
     public HtmlAssertion src(Matcher<String> condition) {
-        waitAssert(() -> assertThat(html.src(), condition), name);
+        assertThat(html.src(), condition);
         return this;
     }
 
@@ -30,8 +39,9 @@ public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAsser
      * Custom match alt attribute and passed condition
      * @param condition
      */
+    @JDIAction("Assert that '{name}' alt {0}")
     public HtmlAssertion alt(Matcher<String> condition) {
-        waitAssert(() -> assertThat(html.alt(), condition), name);
+        assertThat(html.alt(), condition);
         return this;
     }
 
@@ -39,117 +49,146 @@ public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAsser
      * Custom match href attribute and passed condition
      * @param condition
      */
+    @JDIAction("Assert that '{name}' ref {0}")
     public HtmlAssertion ref(Matcher<String> condition) {
-        waitAssert(() -> assertThat(html.ref(), condition), name);
+        assertThat(html.ref(), condition);
         return this;
     }
 
     /**
      * Match passed value with html element height
-     * @param value to compare
+     * @param condition to compare
      */
-    public HtmlAssertion height(int value) {
-        waitAssert(() -> assertThat(getInt("height", html), is(value)), name);
+    @JDIAction("Assert that '{name}' height {0}")
+    public HtmlAssertion height(Matcher<Integer> condition) {
+        assertThat(getInt("height", html), condition);
         return this;
     }
 
     /**
      * Match passed value with html element width
-     * @param value to compare
+     * @param condition to compare
      */
-    public HtmlAssertion width(int value) {
-        waitAssert(() -> assertThat(getInt("width", html), is(value)), name);
+    @JDIAction("Assert that '{name}' width {0}")
+    public HtmlAssertion width(Matcher<Integer> condition) {
+        assertThat(getInt("width", html), condition);
         return this;
     }
 
-    public HtmlAssertion rows(Matcher<Integer> condition) {
-        waitAssert(() -> assertThat(html.rows(), condition), name);
+    @JDIAction("Assert that '{name}' rows count {0}")
+    public HtmlAssertion rowsCount(Matcher<Integer> condition) {
+        assertThat(html.rows(), condition);
         return this;
     }
-    public HtmlAssertion cols(Matcher<Integer> condition) {
-        waitAssert(() -> assertThat(html.cols(), condition), name);
+    @JDIAction("Assert that '{name}' columns count {0}")
+    public HtmlAssertion colsCount(Matcher<Integer> condition) {
+        assertThat(html.cols(), condition);
         return this;
     }
+    @JDIAction("Assert that '{name}' minlength {0}")
     public HtmlAssertion minlength(Matcher<Integer> condition) {
-        waitAssert(() -> assertThat(html.minlength(), condition), name);
+        assertThat(html.minlength(), condition);
         return this;
     }
+    @JDIAction("Assert that '{name}' maxlength {0}")
     public HtmlAssertion maxlength(Matcher<Integer> condition) {
-        waitAssert(() -> assertThat(html.maxlength(), condition), name);
+        assertThat(html.maxlength(), condition);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' color is {0}")
     public HtmlAssertion color(String color) {
-        waitAssert(() -> assertThat(html.color(), is(color)), name);
+        assertThat(html.color(), is(color));
         return this;
     }
-    public HtmlAssertion selected(Boolean value) {
-        waitAssert(() -> assertThat(html.isSelected(), is(value)), name);
+    @JDIAction("Assert that '{name}' is selected")
+    public HtmlAssertion selected() {
+        assertThat(html.isSelected() ? "selected" : "not selected", is("selected"));
         return this;
     }
-    public HtmlAssertion minValue(double min) {
-        waitAssert(() -> assertThat(getDouble("min", html), is(min)), name);
+    @JDIAction("Assert that '{name}' is not selected")
+    public HtmlAssertion deselected() {
+        assertThat(html.isSelected() ? "selected" : "not selected", is("not selected"));
         return this;
     }
-    public HtmlAssertion maxValue(double max) {
-        waitAssert(() -> assertThat(getDouble("max", html), is(max)), name);
+    @JDIAction("Assert that '{name}' minValue {0}")
+    public HtmlAssertion minValue(Matcher<Double> min) {
+        assertThat(getDouble("min", html), min);
         return this;
     }
-    public HtmlAssertion stepValue(double step) {
-        waitAssert(() -> assertThat(getDouble("step", html), is(step)), name);
+    @JDIAction("Assert that '{name}' maxValue {0}")
+    public HtmlAssertion maxValue(Matcher<Double> max) {
+        assertThat(getDouble("max", html), max);
         return this;
     }
-    public HtmlAssertion placeholder(Matcher<String> value) {
-        waitAssert(() -> assertThat(html.placeholder(), value), name);
+    @JDIAction("Assert that '{name}' step {0}")
+    public HtmlAssertion stepValue(Matcher<Double> step) {
+        assertThat(getDouble("step", html), step);
         return this;
     }
-    public HtmlAssertion number(Matcher<Double> matcher) {
-        waitAssert(() -> assertThat(getDouble("value", html), matcher), name);
+    @JDIAction("Assert that '{name}' placeholder {0}")
+    public HtmlAssertion placeholder(Matcher<String> placeholder) {
+        assertThat(html.placeholder(), placeholder);
         return this;
     }
-    public HtmlAssertion min(String min) {
-        waitAssert(() -> assertThat(html.min(), is(min)), name);
+    @JDIAction("Assert that '{name}' number {0}")
+    public HtmlAssertion number(Matcher<Double> number) {
+        assertThat(getDouble("value", html), number);
         return this;
     }
-
-    public HtmlAssertion max(String max) {
-        waitAssert(() -> assertThat(html.max(), is(max)), name);
-        return this;
-    }
-
-    public HtmlAssertion volume(Matcher<Integer> matcher) {
-        waitAssert(() -> assertThat(getInt("value", html), matcher), name);
-        return this;
-    }
-    public HtmlAssertion minVolume(int min) {
-        waitAssert(() -> assertThat(getInt("min", html), is(min)), name);
-        return this;
-    }
-    public HtmlAssertion maxVolume(int max) {
-        waitAssert(() -> assertThat(getInt("max", html), is(max)), name);
-        return this;
-    }
-    public HtmlAssertion step(int step) {
-        waitAssert(() -> assertThat(getInt("step", html), is(step)), name);
+    @JDIAction("Assert that '{name}' min {0}")
+    public HtmlAssertion min(Matcher<Float> min) {
+        assertThat(getFloat("min", html), min);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' max {0}")
+    public HtmlAssertion max(Matcher<Float> max) {
+        assertThat(getFloat("max", html), max);
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' volume {0}")
+    public HtmlAssertion volume(Matcher<Integer> volume) {
+        assertThat(getInt("value", html), volume);
+        return this;
+    }
+    @JDIAction("Assert that '{name}' min volume {0}")
+    public HtmlAssertion minVolume(Matcher<Integer> min) {
+        assertThat(getInt("min", html), min);
+        return this;
+    }
+    @JDIAction("Assert that '{name}' max volume {0}")
+    public HtmlAssertion maxVolume(Matcher<Integer> max) {
+        assertThat(getInt("max", html), max);
+        return this;
+    }
+    @JDIAction("Assert that '{name}' step {0}")
+    public HtmlAssertion step(Matcher<Integer> step) {
+        assertThat(getInt("step", html), step);
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' date {0}")
     public HtmlAssertion date(Matcher<String> date) {
-        waitAssert(() -> assertThat(html.value(), date), name);
+        assertThat(html.value(), date);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' month {0}")
     public HtmlAssertion month(Matcher<String> month) {
-        waitAssert(() -> assertThat(html.value(), month), name);
+        assertThat(html.value(), month);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' week {0}")
     public HtmlAssertion week(Matcher<String> week) {
-        waitAssert(() -> assertThat(html.value(), week), name);
+        assertThat(html.value(), week);
         return this;
     }
+    @JDIAction("Assert that '{name}' time {0}")
     public HtmlAssertion time(Matcher<String> time) {
-        waitAssert(() -> assertThat(html.value(), time), name);
+        assertThat(html.value(), time);
         return this;
     }
 }

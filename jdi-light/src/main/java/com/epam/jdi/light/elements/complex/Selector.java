@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import org.openqa.selenium.WebElement;
 
@@ -15,10 +16,11 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
-public class Selector extends UIElement implements BaseSelectorAssert {
+public class Selector<T extends BaseUIElement> extends BaseUIElement<T> implements BaseSelectorAssert {
 
     public Selector() { }
     public Selector(WebElement el) { super(el); }
+    public Selector(List<WebElement> els) { super(els); }
 
     /**
      * Selects the value based on its visible text
@@ -122,8 +124,8 @@ public class Selector extends UIElement implements BaseSelectorAssert {
 
     @JDIAction(level = DEBUG)
     public List<String> listEnabled() {
-        return ifSelect(getUI().finds("option"),
-            UIElement::isEnabled, UIElement::getText);
+        List<UIElement> els = getUI().finds("option");
+        return ifSelect(els, UIElement::isEnabled, UIElement::getText);
     }
     @JDIAction(level = DEBUG)
     public List<String> listDisabled() {

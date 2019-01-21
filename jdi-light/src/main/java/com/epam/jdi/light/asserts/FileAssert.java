@@ -6,7 +6,6 @@ import org.hamcrest.Matcher;
 import java.io.File;
 import java.io.IOException;
 
-import static com.epam.jdi.light.asserts.BaseSelectorAssert.waitAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
 import static com.epam.jdi.light.elements.base.JDIBase.timer;
@@ -33,7 +32,7 @@ public class FileAssert extends BaseAssert {
         assertThat(timer().wait(() -> file.exists()), is(true));
         return this;
     }
-    @JDIAction("Assert file '{name}' text")
+    @JDIAction("Assert that file '{name}' text {0}")
     public FileAssert text(Matcher<String> text) {
         boolean result = timer().wait(() -> {
             assertThat(readFileToString(file, "UTF-8"), text); return true; }

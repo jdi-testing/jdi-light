@@ -31,7 +31,7 @@ public class HtmlRadioGroup extends Selector implements BaseSelectorAssert, Radi
 
     public HtmlRadioGroup() { }
     public HtmlRadioGroup(WebElement el) { super(el); }
-    List<UIElement> labels() { return map(getAllElements(),
+    List<HtmlElement> labels() { return map(getAllElements(),
         el -> new HtmlElement(el).label());
     }
     List<HtmlElement> radioButtons() { return map(getAllElements(), HtmlElement::new); }
@@ -75,7 +75,7 @@ public class HtmlRadioGroup extends Selector implements BaseSelectorAssert, Radi
 
     @JDIAction("Get '{name}' list values")
     public List<String> values() {
-        return map(labels(), UIElement::getText);
+        return map(labels(), HtmlElement::getText);
     }
 
     @JDIAction("Get '{name}' checked values")

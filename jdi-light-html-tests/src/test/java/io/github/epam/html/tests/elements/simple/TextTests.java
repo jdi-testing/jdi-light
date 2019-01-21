@@ -33,6 +33,7 @@ public class TextTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
+        jdiText.is().enabled();
         jdiText.is().text(is(text));
         jdiText.is().text(containsString("Powerful Framework for UI"));
     }

@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.LocatorType;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.CacheValue;
@@ -22,6 +23,7 @@ import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.common.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
@@ -45,6 +47,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     protected By byLocator;
     protected CacheValue<WebElement> webElement = new CacheValue<>();
+    protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
     public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
     public boolean isRootLocator = false;
@@ -53,7 +56,9 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         webElement.setForce(el);
         return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();
     }
-
+    public void setWebElements(List<WebElement> els) {
+        webElements.setForce(els);
+    }
     public <T extends JDIBase> T setLocator(By locator) {
         locatorType = DEFAULT;
         byLocator = locator;
@@ -103,20 +108,22 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
         if (result.size() > 1) {
             int found = result.size();
-            result = filter(result, el -> searchRule.execute(el));
-            if (result.size() == 0)
+            List<WebElement> filtered = filter(result, el -> searchRule.execute(el));
+            if (filtered.size() == 0)
                 throw exception(ELEMENTS_FILTERED_MESSAGE, found, toString(), TIMEOUT.get());
         }
         if (result.size() == 1)
             return result.get(0);
         throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get());
     }
-    public UIElement<UIElement> getUI(Object... args) {
-        return new UIElement<>(get(args));
+    public UIElement getUI(Object... args) {
+        return new UIElement(get(args));
     }
 
     public List<WebElement> getAll(Object... args) {
         //TODO rethink SMART SEARCH
+        if (webElements.hasValue())
+            return webElements.get();
         if (byLocator == null)
             return asList(SMART_SEARCH.execute(this));
         SearchContext searchContext = isRootLocator
@@ -126,8 +133,8 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         return filter(els, el -> searchRule.invoke(el));
     }
 
-    public List<UIElement> allUI(Object... args) {
-        return map(getAll(args), UIElement::new);
+    public WebList allUI(Object... args) {
+        return new WebList(getAll(args)).setName(getName());
     }
 
     private SearchContext getSearchContext(Object element) {

@@ -51,6 +51,7 @@ public class MonthTests extends TestsInit {
     @Test
     public void isValidationTest() {
         monthDate.is().month(containsString("-05"));
+        monthDate.is().enabled();
     }
 
     @Test

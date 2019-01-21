@@ -59,10 +59,10 @@ public class ChecklistTests extends TestsInit {
     public void isValidationTest() {
         weather.is().selected("Hot option");
         weather.is().selected(Hot);
-        weather.is().values(hasItem("Sunny"));
-        weather.is().disabled(hasItem("Disabled"));
-        weather.is().enabled(not(hasItem("Disabled")));
-        weather.is().enabled(hasItems("Cold", "Sunny"));
+        weather.assertThat().values(hasItem("Sunny"));
+        weather.assertThat().disabled(hasItem("Disabled"));
+        weather.assertThat().enabled(not(hasItem("Disabled")));
+        weather.assertThat().enabled(hasItems("Cold", "Sunny"));
     }
 
     @Test

@@ -21,7 +21,7 @@ public class SiteJdi {
     @FindBy(css = ".profile-photo [ui=label]") public static WebElement userName;
 
     @FindBy(css = ".sidebar-menu [ui=label]")
-    public static WebList<UIElement> navigation;
+    public static WebList navigation;
 
     @Step("Login")
     public static void login(User user) {

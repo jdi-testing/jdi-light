@@ -9,7 +9,6 @@ import com.epam.jdi.light.asserts.UIListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;

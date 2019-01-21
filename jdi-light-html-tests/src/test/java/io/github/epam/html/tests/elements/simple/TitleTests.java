@@ -41,6 +41,7 @@ public class TitleTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
+        jdiTitle.is().enabled();
         jdiTitle.is().text(is(text));
         jdiTitle.is().text(equalTo(text));
         jdiTitle.is().text(equalToIgnoringCase("jdi TESTING platform"));

@@ -6,6 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.tablePage;
+import static io.github.com.pages.PerformancePage.users;
+import static io.github.com.pages.PerformancePage.usersFast;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
@@ -21,10 +23,10 @@ public class TableTests extends StaticTestsInit {
     public void tableTest() {
         out.println("==================");
         out.println("Table");
-        tableTestScenario(tablePage.users);
+        tableTestScenario(users);
         out.println("==================");
         out.println("Fast Table");
-        tableTestScenario(tablePage.usersFast);
+        tableTestScenario(usersFast);
         out.println("==================");
     }
     private void tableTestScenario(Table table) {

@@ -58,6 +58,7 @@ public class DataListTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
+        iceCreamDataList.is().enabled();
         iceCreamDataList.is().text(is(text));
         iceCreamDataList.select(Vanilla);
         iceCreamDataList.is().text(containsString("Van"));

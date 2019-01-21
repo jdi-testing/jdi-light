@@ -49,6 +49,7 @@ public class DateTests extends TestsInit {
     @Test
     public void isValidationTest() {
         birthDate.is().date(is("1985-06-18"));
+        birthDate.is().enabled();
     }
 
     @Test

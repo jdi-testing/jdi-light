@@ -45,8 +45,8 @@ public class ImageTests extends TestsInit {
         WebPage.refresh();
         jdiLogo.is().src(containsString("jdi-logo.jpg"));
         jdiLogo.is().alt(is("Jdi Logo 2"));
-        jdiLogo.is().height(100);
-        jdiLogo.is().width(101);
+        jdiLogo.assertThat().height(is(100));
+        jdiLogo.assertThat().width(is(101));
     }
 
     @Test

@@ -3,7 +3,6 @@ package com.epam.jdi.light.asserts;
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 
 public class BaseAssert {

@@ -49,6 +49,7 @@ public class WeekTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
+        autumnWeek.is().enabled();
         autumnWeek.assertThat().week(is("2018-W40"));
     }
 

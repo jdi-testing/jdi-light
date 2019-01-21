@@ -40,14 +40,6 @@ public class CheckboxTests extends TestsInit {
 
     @Test
     public void clickTest() {
-        acceptConditions.click();
-        assertFalse(acceptConditions.isSelected());
-        acceptConditions.click();
-        assertTrue(acceptConditions.isSelected());
-    }
-
-    @Test
-    public void isSelecetedTest() {
         assertTrue(acceptConditions.isSelected());
         acceptConditions.click();
         assertFalse(acceptConditions.isSelected());
@@ -55,7 +47,11 @@ public class CheckboxTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
-        acceptConditions.is().selected(true);
+        acceptConditions.is().selected();
+        acceptConditions.click();
+        acceptConditions.is().deselected();
+        acceptConditions.is().enabled();
+        acceptConditions.is().displayed();
     }
 
     @Test
@@ -67,7 +63,7 @@ public class CheckboxTests extends TestsInit {
     }
     @Test
     public void assertValidationTest() {
-        acceptConditions.assertThat().selected(true);
+        acceptConditions.assertThat().selected();
     }
 
     @Test

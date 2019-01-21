@@ -48,6 +48,7 @@ public class TimeTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
+        bookingTime.is().enabled();
         bookingTime.assertThat().time(is("11:00"));
     }
 

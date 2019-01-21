@@ -17,7 +17,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.util.Arrays.asList;
 
-public class HtmlMultiDropdown extends Selector implements BaseSelectorAssert, MultiDropdown {
+public class HtmlMultiDropdown extends Selector<HtmlElement> implements BaseSelectorAssert, MultiDropdown {
     By expandArrow = By.cssSelector(".caret");
     By values = By.tagName("li");
     By valueTemplate = By.xpath(".//label[@title='%s']/../..");

@@ -7,8 +7,8 @@ import org.hamcrest.Matcher;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public interface TextAreaAssert extends TextAssert {
-    HtmlAssertion rows(Matcher<Integer> condition);
-    HtmlAssertion cols(Matcher<Integer> condition);
+    HtmlAssertion rowsCount(Matcher<Integer> condition);
+    HtmlAssertion colsCount(Matcher<Integer> condition);
     HtmlAssertion minlength(Matcher<Integer> condition);
     HtmlAssertion maxlength(Matcher<Integer> condition);
 

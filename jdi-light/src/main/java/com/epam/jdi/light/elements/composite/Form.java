@@ -69,7 +69,7 @@ public class Form<T> extends Section {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
-                UIElement element = new UIElement<>().setName(pair.key);
+                UIElement element = new UIElement().setName(pair.key);
                 fillAction(null, element, pageObject, pair.value);
             }
             return;

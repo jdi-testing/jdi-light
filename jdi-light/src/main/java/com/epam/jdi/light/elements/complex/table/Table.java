@@ -22,7 +22,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
-import static com.epam.jdi.light.elements.complex.table.TableMatchers.getMatchLines;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.getMatchLines;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -67,8 +67,8 @@ public class Table extends JDIBase implements ISetup, HasValue {
         return map(rows.get(), r -> new UIElement(uiSearch(r,columnsLocator).get(colNum-1)));
     }
     @JDIAction("Get first '{name}' table row that match criteria")
-    public Line row(TableMatchers... matchers) {
-        WebList<UIElement> lines = getMatchLines(this, matchers);
+    public Line row(TableMatcher... matchers) {
+        WebList lines = getMatchLines(this, matchers);
         if (lines == null || lines.size() == 0)
             return null;
         List<String> result = new ArrayList<>();
@@ -78,7 +78,7 @@ public class Table extends JDIBase implements ISetup, HasValue {
     }
 
     @JDIAction("Get all '{name}' table rows that match criteria")
-    public List<Line> rows(TableMatchers... matchers) {
+    public List<Line> rows(TableMatcher... matchers) {
         List<String> lines = getMatchLines(this, matchers).values();
         if (lines == null || lines.size() == 0)
             return null;

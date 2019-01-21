@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.asserts;
 
+import com.epam.jdi.light.asserts.CommonAssert;
 import org.hamcrest.Matcher;
 
 /**
@@ -7,10 +8,10 @@ import org.hamcrest.Matcher;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public interface ImageAssert {
+public interface ImageAssert extends CommonAssert<HtmlAssertion> {
     HtmlAssertion src(Matcher<String> condition);
     HtmlAssertion alt(Matcher<String> condition);
 
-    HtmlAssertion height(int value);
-    HtmlAssertion width(int value);
+    HtmlAssertion height(Matcher<Integer> value);
+    HtmlAssertion width(Matcher<Integer> value);
 }

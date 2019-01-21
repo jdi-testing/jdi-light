@@ -38,5 +38,5 @@ public class HomePage {
     @FindBy(css = ".profile-photo") WebElement profilePhoto;
     @FindBy(css = ".profile-photo [ui=label]") WebElement userName;
 
-    @UI("[ui=label][*'%s']") public static WebList<UIElement> leftNavigation;
+    @UI("[ui=label][*'%s']") public static WebList leftNavigation;
 }

@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.asserts;
 
+import com.epam.jdi.light.asserts.CommonAssert;
 import org.hamcrest.Matcher;
 
 /**
@@ -7,9 +8,9 @@ import org.hamcrest.Matcher;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public interface DateTimeAssert {
-    HtmlAssertion min(String value);
-    HtmlAssertion max(String value);
+public interface DateTimeAssert  extends CommonAssert<HtmlAssertion> {
+    HtmlAssertion min(Matcher<Float> value);
+    HtmlAssertion max(Matcher<Float> value);
 
     HtmlAssertion date(Matcher<String> date);
     HtmlAssertion month(Matcher<String> month);

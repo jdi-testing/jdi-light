@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.asserts;
 
+import com.epam.jdi.light.asserts.CommonAssert;
 import org.hamcrest.Matcher;
 
 /**
@@ -7,10 +8,10 @@ import org.hamcrest.Matcher;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public interface NumberAssert {
-    HtmlAssertion minValue(double value);
-    HtmlAssertion maxValue(double value);
-    HtmlAssertion stepValue(double value);
+public interface NumberAssert extends CommonAssert<HtmlAssertion> {
+    HtmlAssertion minValue(Matcher<Double> value);
+    HtmlAssertion maxValue(Matcher<Double> value);
+    HtmlAssertion stepValue(Matcher<Double> value);
     HtmlAssertion placeholder(Matcher<String> value);
     HtmlAssertion number(Matcher<Double> matcher);
 }

@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.asserts;
 
+import com.epam.jdi.light.asserts.CommonAssert;
 import org.hamcrest.Matcher;
 
 /**
@@ -7,17 +8,6 @@ import org.hamcrest.Matcher;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public interface TextAssert  {
+public interface TextAssert extends CommonAssert<HtmlAssertion> {
     HtmlAssertion text(Matcher<String> condition);
-
-    HtmlAssertion attr(String attrName, Matcher<String> condition);
-    HtmlAssertion css(String css, Matcher<String> condition);
-    HtmlAssertion tag(Matcher<String> condition);
-    HtmlAssertion cssClass(Matcher<String> condition);
-    HtmlAssertion displayed();
-    HtmlAssertion disappear();
-    HtmlAssertion selected();
-    HtmlAssertion deselected();
-    HtmlAssertion enabled();
-    HtmlAssertion disabled();
 }

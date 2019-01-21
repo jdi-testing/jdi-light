@@ -20,7 +20,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 import static org.openqa.selenium.By.cssSelector;
 
-public class HtmlChecklist extends Selector implements BaseSelectorAssert, Checklist {
+public class HtmlChecklist extends Selector<HtmlElement> implements BaseSelectorAssert, Checklist {
     By checkbox = cssSelector("input[type=checkbox][id='%s']");
     By label = By.xpath(".//label[text()='%s']");
     private String getId(String name) { return label(name).getAttribute("for"); }

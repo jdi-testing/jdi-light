@@ -35,10 +35,11 @@ public class ProgressTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
-        progress.is().maxVolume(100);
+        progress.assertThat().maxVolume(is(100));
         progress.is().volume(greaterThanOrEqualTo(10));
         progress.is().volume(lessThanOrEqualTo(100));
-        progress.is().volume(is(70));
+        progress.assertThat().volume(is(70));
+        progress.is().enabled();
     }
 
     @Test

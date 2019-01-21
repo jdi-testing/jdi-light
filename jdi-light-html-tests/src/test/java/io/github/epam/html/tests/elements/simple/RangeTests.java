@@ -51,9 +51,10 @@ public class RangeTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
-        volume.is().minVolume(10);
-        volume.is().maxVolume(100);
-        volume.is().step(5);
+        volume.is().enabled();
+        volume.assertThat().minVolume(is(10));
+        volume.assertThat().maxVolume(is(100));
+        volume.assertThat().step(is(5));
         volume.is().volume(greaterThanOrEqualTo(10));
         volume.is().volume(lessThanOrEqualTo(100));
         volume.is().volume(is(90));

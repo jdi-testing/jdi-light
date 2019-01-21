@@ -47,10 +47,10 @@ public class FastTable extends Table {
         return headerIsRow ? rowNum + 1 : rowNum;
     }
     // TODO
-    public WebList<UIElement> getRow(int rowNum) {
+    public WebList getRow(int rowNum) {
         return $$(fillByTemplate(rowLocator, getRowIndex(rowNum), this));
     }
-    private WebList<UIElement> getColumn(int colNum) {
+    private WebList getColumn(int colNum) {
         return $$(fillByTemplate(columnLocator, colNum), this);
     }
     private UIElement getCell(int colNum, int rowNum) {

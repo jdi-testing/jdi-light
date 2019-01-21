@@ -30,8 +30,8 @@ public class StaticSite {
 	public static PerformancePage tablePage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
-	@Css("[ui=label]") public static WebList<UIElement> navigationL;
-	@UI("[ui=label][*'%s']") public static WebList<UIElement> navigationS;
+	@Css("[ui=label]") public static WebList navigationL;
+	@UI("[ui=label][*'%s']") public static WebList navigationS;
 	@UI("[ui=label][*'%s']") public static UIElement menu;
 
 	@Css("header") public static Header header;

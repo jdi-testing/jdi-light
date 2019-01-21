@@ -6,8 +6,6 @@ package com.epam.jdi.light.actions;
  */
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.settings.TimeoutSettings;
-import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -16,7 +14,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;

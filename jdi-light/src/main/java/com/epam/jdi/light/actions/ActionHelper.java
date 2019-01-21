@@ -8,7 +8,6 @@ package com.epam.jdi.light.actions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIElement;
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.func.JAction1;

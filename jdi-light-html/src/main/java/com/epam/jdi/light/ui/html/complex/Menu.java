@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.complex;
 
+import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.complex.IList;
@@ -14,4 +15,7 @@ public interface Menu extends IList<HtmlElement>, JDIElement, BaseElement {
     <TEnum extends Enum> void select(TEnum value);
     String selected();
     List<String> values();
+
+    SelectAssert is();
+    SelectAssert assertThat();
 }

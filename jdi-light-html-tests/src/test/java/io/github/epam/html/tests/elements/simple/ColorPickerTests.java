@@ -43,6 +43,8 @@ public class ColorPickerTests extends TestsInit {
     @Test
     public void isValidationTest() {
         disabledPicker.is().color(color);
+        colorPicker.is().enabled();
+        disabledPicker.is().disabled();
     }
 
     @Test

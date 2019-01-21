@@ -49,6 +49,7 @@ public class DateTimeTests extends TestsInit {
     @Test
     public void isValidationTest() {
         partyTime.is().date(equalToIgnoringCase("2018-06-12t19:30"));
+        partyTime.is().enabled();
     }
 
     @Test

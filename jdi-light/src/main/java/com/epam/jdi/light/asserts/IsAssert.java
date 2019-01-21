@@ -2,39 +2,37 @@ package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseElement;
-import com.epam.jdi.light.elements.base.UIElement;
 import org.hamcrest.Matcher;
 
-import static com.epam.jdi.light.asserts.BaseSelectorAssert.waitAssert;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class IsAssert<T extends IsAssert> extends BaseAssert {
+public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAssert<T> {
     public IsAssert(BaseElement element) {
         super(element);
     }
 
-    @JDIAction("Assert '{name}' text")
+    @JDIAction("Assert that '{name}' text {0}")
     public T text(Matcher<String> condition) {
         assertThat(element.getText(), condition);
         return (T) this;
     }
-    @JDIAction("Assert '{name}' attribute")
+    @JDIAction("Assert that '{name}' attribute '{0}' {1}")
     public T attr(String attrName, Matcher<String> condition) {
         assertThat(element.getAttribute(attrName), condition);
         return (T) this;
     }
-    @JDIAction("Assert '{name}' css '{0}'")
+    @JDIAction("Assert that '{name}' css '{0}' {1}")
     public T css(String css, Matcher<String> condition) {
         assertThat(element.getCssValue(css), condition);
         return (T) this;
     }
-    @JDIAction("Assert '{name}' element tag")
+    @JDIAction("Assert that '{name}' tag {0}")
     public T tag(Matcher<String> condition) {
         assertThat(element.getTagName(), condition);
         return (T) this;
     }
-    @JDIAction("Assert '{name}' element tag")
+    @JDIAction("Assert that '{name}' css class {0}")
     public T cssClass(Matcher<String> condition) {
         assertThat(element.getAttribute("class"), condition);
         return (T) this;

@@ -2,6 +2,7 @@ package io.github.epam.html.tests.elements.simple;
 
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -61,15 +62,19 @@ public class ButtonTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
+        redButton.is().displayed();
+        redButton.is().enabled();
         redButton.is().text(is(text));
         redButton.is().text(containsString("Red Button"));
         redButton.is()
                 .text(is(text))
                 .cssClass(is("uui-button red"))
-                .attr("type", is("button"));
+                .attr("type", is("button"))
+                .tag(is("input"));
         blueButton.is().text(containsString("Blue Button".toUpperCase()));
         disabledButton.is().text(containsString("Disabled Button".toUpperCase()));
         disabledButtonInput.is().text(containsString("Disabled Button"));
+        disabledButton.is().disabled();
     }
 
     @Test

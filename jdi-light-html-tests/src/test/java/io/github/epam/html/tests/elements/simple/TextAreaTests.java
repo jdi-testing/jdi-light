@@ -80,9 +80,11 @@ public class TextAreaTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
+        textArea.is().enabled();
         textArea.setText(text);
         textArea.is().text(is(text));
         textArea.is().text(containsString("Area"));
+        disabledTextArea.is().disabled();
     }
 
     @Test
@@ -104,8 +106,8 @@ public class TextAreaTests extends TestsInit {
         assertEquals(textArea.minlength(), 10);
         assertEquals(textArea.maxlength(), 200);
 
-        textArea.is().rows(is(3));
-        textArea.is().cols(is(33));
+        textArea.is().rowsCount(is(3));
+        textArea.is().colsCount(is(33));
         textArea.is().minlength(is(10));
         textArea.is().maxlength(is(200));
     }

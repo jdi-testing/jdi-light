@@ -1,10 +1,12 @@
 package com.epam.jdi.light.ui.html.utils;
 
 import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
 import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static java.lang.Double.parseDouble;
+import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 public class HtmlUtils {
@@ -13,7 +15,7 @@ public class HtmlUtils {
      * @param attr String - attribute to find
      * @return int attribute value
      */
-    public static int getInt(String attr, UIElement el) {
+    public static int getInt(String attr, HtmlElement el) {
         String value = el.getAttribute(attr);
         try {
             return parseInt(value);
@@ -28,6 +30,17 @@ public class HtmlUtils {
         String value = el.getAttribute(attr);
         try {
             return parseDouble(value);
+        } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Double", attr, value); }
+    }
+    /**
+     * Gets attribute and casts it to float
+     * @param attr String - attribute to find
+     * @return int attribute value
+     */
+    public static float getFloat(String attr, WebElement el) {
+        String value = el.getAttribute(attr);
+        try {
+            return parseFloat(value);
         } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Double", attr, value); }
     }
 }

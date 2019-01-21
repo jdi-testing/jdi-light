@@ -75,8 +75,10 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
+        name.is().enabled();
         name.is().text(is(text));
         name.is().text(containsString("Field"));
+        disabledName.is().disabled();
     }
 
     @Test
