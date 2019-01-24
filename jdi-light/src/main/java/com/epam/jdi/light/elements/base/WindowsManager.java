@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.tools.map.MapArray;
+import org.hamcrest.Matcher;
 import org.openqa.selenium.Alert;
 
 import java.util.Set;
@@ -10,6 +11,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WindowsManager {
     private static Set<String> windowHandlers;
@@ -91,6 +93,11 @@ public class WindowsManager {
     @JDIAction
     public static String getAlertText() {
         return alert().getText();
+    }
+    @JDIAction
+    public static void validateAlert(Matcher<String> text) {
+        assertThat(getAlertText(), text);
+        acceptAlert();
     }
 
     @JDIAction("Input '{0}' in alert and accept")

@@ -35,16 +35,20 @@ public class Table extends JDIBase implements ISetup, HasValue {
     protected By rowsLocator = By.cssSelector("tr");
     protected By columnsLocator = By.cssSelector("td");
     protected By headerLocator = By.cssSelector("th");
-    public CacheValue<List<String>> header = new CacheValue<>(() -> LinqUtils.select($$(headerLocator, this), UIElement::getText));
-    public CacheValue<Integer> size = new CacheValue<>(() -> header.get().size());
-    public CacheValue<List<UIElement> > rows = new CacheValue<>(() -> {
+
+    protected CacheValue<List<String>> header = new CacheValue<>(() -> LinqUtils.select($$(headerLocator, this), UIElement::getText));
+    protected CacheValue<Integer> size = new CacheValue<>(() -> header.get().size());
+    protected CacheValue<List<UIElement> > rows = new CacheValue<>(() -> {
         List<WebElement> value = uiSearch(get(),rowsLocator);
         if (uiSearch(value.get(0),columnsLocator).size() == 0 && uiSearch(value.get(1),columnsLocator).size() != 0)
             value.remove(0);
         return map(value, UIElement::new);
     });
 
-    public CacheValue<Integer> count = new CacheValue<>(() -> rows.get().size());
+    protected CacheValue<Integer> count = new CacheValue<>(() -> rows.get().size());
+    public void setHeader(List<String> header) {
+        this.header.setForce(header);
+    }
 
     public int size() {return rows.get().size(); }
     @JDIAction("Is '{name}' table empty")
@@ -61,7 +65,7 @@ public class Table extends JDIBase implements ISetup, HasValue {
     }
     @JDIAction("Get row '{0}' for '{name}' table")
     public Line row(int rowNum) {
-        return new Line(webRow(rowNum));
+        return new Line(webRow(rowNum), header());
     }
     public List<UIElement> webColumn(int colNum) {
         return map(rows.get(), r -> new UIElement(uiSearch(r,columnsLocator).get(colNum-1)));
@@ -96,7 +100,7 @@ public class Table extends JDIBase implements ISetup, HasValue {
 
     @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(int colNum) {
-        return new Line(webColumn(colNum));
+        return new Line(webColumn(colNum), header());
     }
     public List<UIElement> webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
@@ -104,12 +108,12 @@ public class Table extends JDIBase implements ISetup, HasValue {
 
     @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(String colName) {
-        return new Line(webColumn(colName));
+        return new Line(webColumn(colName), header());
     }
 
     @JDIAction("Get all '{name}' rows")
     public List<Line> rows() {
-        return map(rows.get(), r -> new Line(r.finds(columnsLocator)));
+        return map(rows.get(), r -> new Line(r.finds(columnsLocator), header()));
     }
     @JDIAction("Filter '{name}' table rows that match criteria in column '{1}'")
     public List<Line> filterRows(Matcher<String> matcher, Column column) {
@@ -178,11 +182,11 @@ public class Table extends JDIBase implements ISetup, HasValue {
         if (headers != null)
             this.headerLocator = headers;
         if (header.size() > 0)
-            this.header.set(header);
+            this.header.setForce(header);
         if (size != -1)
-            this.size.set(size);
+            this.size.setForce(size);
         if (count != -1)
-            this.count.set(count);
+            this.count.setForce(count);
     }
 
     @JDIAction("Preview '{name}' table")

@@ -1,6 +1,5 @@
 package io.github.epam;
 
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;

@@ -2,7 +2,6 @@ package com.epam.jdi.light.ui.html.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseUIElement;
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.ui.html.asserts.HtmlAssertion;
 import com.epam.jdi.light.ui.html.common.*;
 import org.openqa.selenium.WebElement;

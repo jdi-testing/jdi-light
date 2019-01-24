@@ -1,6 +1,5 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$$;

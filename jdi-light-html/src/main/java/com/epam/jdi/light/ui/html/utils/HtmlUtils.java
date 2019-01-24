@@ -1,6 +1,5 @@
 package com.epam.jdi.light.ui.html.utils;
 
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import org.openqa.selenium.WebElement;
 

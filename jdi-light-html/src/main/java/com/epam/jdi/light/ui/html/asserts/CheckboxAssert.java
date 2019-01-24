@@ -1,8 +1,6 @@
 package com.epam.jdi.light.ui.html.asserts;
 
-import com.epam.jdi.light.asserts.BaseAssert;
 import com.epam.jdi.light.asserts.CommonAssert;
-import org.hamcrest.Matcher;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

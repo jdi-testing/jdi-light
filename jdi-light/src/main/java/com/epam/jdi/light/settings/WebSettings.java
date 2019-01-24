@@ -49,6 +49,7 @@ public class WebSettings {
     }
     public static boolean initialized = false;
     public static String TEST_GROUP = "";
+    // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static String DRIVER_REMOTE_URL;
     public static String TEST_NAME;
@@ -138,6 +139,7 @@ public class WebSettings {
         return NORMAL;
     }
     public static Properties getProperties(String path) {
+        // TODO use mergePath macos and windows
         Properties p = PropertyReader.getProperties("/../../target/classes/" + path);
         return p.size() > 0 ? p : PropertyReader.getProperties(path);
     }

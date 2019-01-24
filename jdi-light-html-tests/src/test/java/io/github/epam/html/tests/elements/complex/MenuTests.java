@@ -1,17 +1,13 @@
 package io.github.epam.html.tests.elements.complex;
 
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.regex.Matcher;
 
 import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasItem;
 
 public class MenuTests extends TestsInit {

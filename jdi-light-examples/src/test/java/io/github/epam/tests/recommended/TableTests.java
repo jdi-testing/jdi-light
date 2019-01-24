@@ -2,15 +2,21 @@ package io.github.epam.tests.recommended;
 
 import com.epam.jdi.light.elements.complex.table.Table;
 import io.github.epam.StaticTestsInit;
+import io.github.epam.custom.UserRow;
+import io.github.epam.entities.UserInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.base.WindowsManager.validateAlert;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.PerformancePage.users;
 import static io.github.com.pages.PerformancePage.usersFast;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
+import static java.util.Arrays.asList;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class TableTests extends StaticTestsInit {
@@ -20,7 +26,7 @@ public class TableTests extends StaticTestsInit {
         tablePage.shouldBeOpened();
     }
     @Test
-    public void tableTest() {
+    public void tablePerformanceTest() {
         out.println("==================");
         out.println("Table");
         tableTestScenario(users);
@@ -29,8 +35,30 @@ public class TableTests extends StaticTestsInit {
         tableTestScenario(usersFast);
         out.println("==================");
     }
+
+    @Test
+    public void tableDataTest() {
+        UserInfo gradyBrock = new UserInfo().set(u-> {
+            u.name = "Grady Brock";
+            u.email = " (011307) 16843";
+            u.phone = "cursus.et@commodo.org";
+            u.city = "Alcobendas";
+        });
+        assertEquals(users.row(2).asData(UserInfo.class), gradyBrock);
+    }
+
+    @Test
+    public void tableEntityTest() {
+        users.row(2).asEntity(UserRow.class).name.click();
+        validateAlert(is("Grady Brock"));
+        validateAlert(containsString("Brock"));
+        users.row(2).asEntity(UserRow.class).city.click();
+        validateAlert(is("Alcobendas"));
+    }
+
     private void tableTestScenario(Table table) {
         timeStart = currentTimeMillis();
+        assertEquals(table.header(), asList("Name", "Phone", "Email", "City"));
         assertEquals(table.row(1).getValue(), "Burke Tucker,076 1971 1687,et.euismod.et@ut.edu,GozŽe");
         logTime("Get 1 row");
         String zacharyEmail = "ipsum.non.arcu@auctorullamcorper.ca";

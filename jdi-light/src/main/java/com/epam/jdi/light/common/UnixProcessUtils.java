@@ -30,7 +30,7 @@ public class UnixProcessUtils {
 
     /**
      *
-     * @param name
+     * @param value
      * @return
      * @throws IOException
      * @throws InterruptedException

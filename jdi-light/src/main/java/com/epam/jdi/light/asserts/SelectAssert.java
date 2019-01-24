@@ -10,9 +10,9 @@ import java.util.List;
 
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
-import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.is;
 
 public class SelectAssert extends IsAssert {
     Selector<UIElement> selector;
