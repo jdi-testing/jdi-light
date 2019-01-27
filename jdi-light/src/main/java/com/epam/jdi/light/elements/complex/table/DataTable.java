@@ -2,33 +2,20 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.TableAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.InitActions;
-import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.pairs.Pair;
 import org.hamcrest.Matcher;
-import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.getMatchLines;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static java.util.Arrays.asList;
 
-public class DataTable<E extends Section, D> extends FastTable {
+public class DataTable<E extends Section, D> extends Table {
     private Class<E> entityClass;
     private Class<D> dataClass;
 

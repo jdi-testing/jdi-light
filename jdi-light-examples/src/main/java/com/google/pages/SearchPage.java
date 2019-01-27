@@ -8,9 +8,12 @@ import com.google.custom.Result;
 import com.google.custom.SearchResult;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class SearchPage extends WebPage {
     @Css(".srg>.g") public UIList<SearchResult, Result> jobsE;
     @Css(".srg>.g") public UIList<SearchResult, ?> jobs2;
+    @Css(".srg>.g") public List<SearchResult> jobs3;
     @UI("[*'test Framework for UI']") public WebElement gitHubJdi;
 
 }

@@ -22,6 +22,7 @@ public @interface JTable {
     FindBy row() default @FindBy();
     FindBy column() default @FindBy();
     FindBy cell() default @FindBy();
+    FindBy allCells() default @FindBy();
     int size() default -1;
     int count() default -1;
 }

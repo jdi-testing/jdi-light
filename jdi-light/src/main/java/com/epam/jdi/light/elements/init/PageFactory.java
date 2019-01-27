@@ -97,27 +97,37 @@ public class PageFactory {
     }
     public static Object initElement(SiteInfo info) {
         info.instance = getValueField(info.field, info.parent);
+        String ruleName = "";
         if (info.instance == null) {
             try {
-                if (INIT_RULES.any(r -> r.condition.execute(info.field))) {
-                    InitRule rule = INIT_RULES.first((n, i) -> i.condition.execute(info.field));
-                    info.instance = rule.func.execute(info);
+                for (Pair<String, InitRule> rule : INIT_RULES) {
+                    ruleName = rule.key;
+                    if (rule.value.condition.execute(info.field)) {
+                        ruleName = "Init:" + ruleName;
+                        info.instance = rule.value.func.execute(info);
+                        break;
+                    }
                 }
-                else throw exception("");
+                if (!ruleName.contains("Init:")) throw exception("");
             } catch (Exception ex) {
-                throw exception("Can't init field '%s' on page '%s'. No init rules found (you can add appropriate rule in InitActions.INIT_RULES)",
+                throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'. No init rules found (you can add appropriate rule in InitActions.INIT_RULES)",
                     info.field.getName(), info.parentName());
             }
         }
         if (info.instance != null) {
             try {
                 for(Pair<String, SetupRule> rule : SETUP_RULES) {
-                    if (rule.value.condition.execute(info))
+                    ruleName = rule.key;
+                    if (rule.value.condition.execute(info)) {
+                        ruleName = "Setup:"+ruleName;
                         rule.value.action.execute(info);
+                    }
                 }
             } catch (Exception ex) {
-                throw exception("Can't setup field '%s' on page '%s'. No setup rules found (you can add appropriate rule in InitActions.SETUP_RULES)",
-                    info.field.getName(), info.parentName());
+                //TODO fix issue
+                // Can't setup field 'generalReportsPage' on page ''. No setup rules found (you can add appropriate rule in InitActions.SETUP_RULES)
+                throw exception("Setup rule '%s' failed. Can't setup field '%s' on page '%s'. No setup rules found (you can add appropriate rule in InitActions.SETUP_RULES)",
+                    ruleName, info.field.getName(), info.parentName());
             }
         }
         return info.instance;

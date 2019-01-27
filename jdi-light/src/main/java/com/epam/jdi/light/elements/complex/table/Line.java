@@ -10,6 +10,7 @@ import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -27,8 +28,8 @@ public class Line implements IList<String> {
         this.headers = headers;
         this.dataList = LinqUtils.select(elements, WebElement::getText);
     }
-    public Line(JFunc<List<String>> list) {
-        this.dataList = list.execute();
+    public Line(List<String> list) {
+        this.dataList = new ArrayList<>(list);
     }
     @JDIAction(level = DEBUG)
     public List<String> elements() {
