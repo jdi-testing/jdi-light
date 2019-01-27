@@ -11,18 +11,22 @@ public class SiteInfo {
         return parentClass != null ? parentClass : parent.getClass();
     }
     public String parentName() {
-        return parent == null ? "" : parent.getClass().getSimpleName();
+        if (parent != null)
+            return parent.getClass().getSimpleName();
+        return parentClass != null
+            ? parentClass.getSimpleName()
+            : "";
     }
     public Object instance;
     public String driverName;
 
     public SiteInfo() {}
     public SiteInfo(SiteInfo info) {
-        this.field = field;
-        this.parentClass = parentClass;
-        this.parent = parent;
-        this.instance = instance;
-        this.driverName = driverName;
+        this.field = info.field;
+        this.parentClass = info.parentClass;
+        this.parent = info.parent;
+        this.instance = info.instance;
+        this.driverName = info.driverName;
     }
 
 }

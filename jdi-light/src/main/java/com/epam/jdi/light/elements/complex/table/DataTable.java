@@ -52,7 +52,11 @@ public class DataTable<E extends Section, D> extends Table {
 
     @JDIAction("Get first '{name}' table row that match criteria")
     public D data(JFunc1<D, Boolean> filter) {
-        return row(matchers).asData(dataClass);
+        return row(toMatcher(filter)).asData(dataClass);
+    }
+    //TODO rewrite
+    private TableMatcher toMatcher(JFunc1<D, Boolean> filter) {
+        return new TableMatcher("", Column.column(1), "");
     }
     @JDIAction("Get first '{name}' table row that match criteria")
     public E entity(TableMatcher... matchers) {

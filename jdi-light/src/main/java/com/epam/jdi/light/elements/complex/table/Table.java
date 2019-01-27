@@ -5,7 +5,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.pairs.Pair;
 import org.hamcrest.Matcher;
 

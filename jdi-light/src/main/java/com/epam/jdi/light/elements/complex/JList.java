@@ -11,8 +11,11 @@ import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.light.settings.TimeoutSettings;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -23,6 +26,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -36,7 +40,7 @@ public abstract class JList<T extends BaseUIElement> extends JDIBase implements 
     public JList(List<WebElement> elements) {
         this.webElements.setForce(elements);
     }
-    protected Class<?> initClass;
+    protected Class<?> initClass = UIElement.class;
     public JList<T> setInitClass(Class<T> listClass) {
         initClass = listClass;
         return this;
@@ -94,12 +98,15 @@ public abstract class JList<T extends BaseUIElement> extends JDIBase implements 
         for (TEnum value : names)
             select(value);
     }
-
+    private String NO_ELEMENTS_FOUND = "Can't select '%s'. No elements with this name found";
     @JDIAction(level = DEBUG)
     public T get(String value) {
         if (getLocator().toString().contains("%s"))
             return getNewInstance(super.get(value));
-        List<WebElement> elements = getAll();
+        List<WebElement> elements = new Timer(TIMEOUT.get()*1000)
+            .getResultByCondition(this::getAll, r -> r.size() > 0);
+        if (elements == null || elements.size() == 0)
+            throw exception(NO_ELEMENTS_FOUND, value);
         if (elements.size() == 1) {
             String tagName = elements.get(0).getTagName();
             WebElement element = elements.get(0);
@@ -113,7 +120,7 @@ public abstract class JList<T extends BaseUIElement> extends JDIBase implements 
         if (el == null) {
             //el = LinqUtils.first(uiElements, e -> verifyLabel(e, name));
             //if (el == null)
-            throw exception("Can't select '%s'. No elements with this name found", value);
+            throw exception(NO_ELEMENTS_FOUND, value);
         }
         return el;
     }

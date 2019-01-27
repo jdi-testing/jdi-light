@@ -75,15 +75,19 @@ public class InitActions {
         initElements(info);
         return info.instance;
     };
-
+//
     public static MapArray<String, InitRule> INIT_RULES = map(
-        $("Selector", iRule(f -> isClass(f, Selector.class),
+        $("Selector", iRule(f -> f.getType() ==  Selector.class,
             info -> new Selector())),
-        $("UIElement", iRule(f -> isInterface(f, WebElement.class),
-            info -> new UIElement())),
-        $("WebList", iRule(f -> isClass(f, WebList.class) || isList(f, WebElement.class),
+        $("UIElement", iRule(f -> f.getType() == WebElement.class
+            || f.getType() == UIElement.class,
+            info -> new UIElement()
+        )),
+        $("WebList", iRule(f -> f.getType() == WebList.class
+            || isList(f, WebElement.class),
             info -> new WebList().setInitClass(info.field) )),
-        $("UIList", iRule(f -> isInterface(f, List.class) && isPageObject(getGenericType(f)),
+        $("UIList", iRule(f -> (f.getType() == List.class || f.getType() == UIList.class)
+                && isPageObject(getGenericType(f)),
             InitActions::initUIList)),
         $("PageObject", iRule(f -> isPageObject(f.getType()),
             InitActions::initSection)),
@@ -168,8 +172,14 @@ public class InitActions {
         Class<?> entity = null;
         try {
             Type[] types = getGenericTypes(info.field);
+            if (types.length == 0)
+                throw exception("Can't instantiate List<> with 0 parameters for field '%s' on page '%s'",
+                    info.field.getName(), info.parentName());
+            if (types.length > 2)
+                throw exception("Can't instantiate List<> with %s parameters(expected 1 or 2) for field '%s' on page '%s'",
+                    types.length, info.field.getName(), info.parentName());
             type = types[0].toString().equals("?") ? null : (Class<?>)types[0];
-            entity = types[1].toString().equals("?") ? null : (Class<?>)types[1];
+            entity = types.length == 1 || types[1].toString().equals("?") ? null : (Class<?>)types[1];
             return new UIList(type, entity);
         } catch (Exception ex) {
             throw exception("Can't instantiate List<%s, %s> field '%s' on page '%s'", type == null
@@ -180,7 +190,8 @@ public class InitActions {
     public static boolean isJDIField(Field field) {
         return isInterface(field, WebElement.class) ||
                 isInterface(field, JDIElement.class) ||
-                isList(field, WebElement.class);
+                isList(field, WebElement.class) ||
+                isList(field, Section.class);
     }
     public static boolean isPageObject(Class<?> type) {
         return isClass(type, Section.class) || isClass(type, WebPage.class) ||
@@ -188,8 +199,8 @@ public class InitActions {
     }
     public static boolean isList(Field field, Class<?> type) {
         try {
-            return isInterface(field, List.class)
-                    && isInterface(getGenericType(field), type);
+            return field.getType() == List.class
+                && isInterface(getGenericType(field), type);
         } catch (Exception ex) { return false; }
     }
 

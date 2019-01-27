@@ -27,6 +27,7 @@ import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.reflect.Modifier.isStatic;
 
 /**
@@ -110,8 +111,8 @@ public class PageFactory {
                 }
                 if (!ruleName.contains("Init:")) throw exception("");
             } catch (Exception ex) {
-                throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'. No init rules found (you can add appropriate rule in InitActions.INIT_RULES)",
-                    info.field.getName(), info.parentName());
+                throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'. No init rules found (you can add appropriate rule in InitActions.INIT_RULES).%s Exception: " + ex.getMessage(),
+                    ruleName, info.field.getName(), info.parentName(), LINE_BREAK);
             }
         }
         if (info.instance != null) {
@@ -124,10 +125,8 @@ public class PageFactory {
                     }
                 }
             } catch (Exception ex) {
-                //TODO fix issue
-                // Can't setup field 'generalReportsPage' on page ''. No setup rules found (you can add appropriate rule in InitActions.SETUP_RULES)
-                throw exception("Setup rule '%s' failed. Can't setup field '%s' on page '%s'. No setup rules found (you can add appropriate rule in InitActions.SETUP_RULES)",
-                    ruleName, info.field.getName(), info.parentName());
+                throw exception("Setup rule '%s' failed. Can't setup field '%s' on page '%s'. No setup rules found (you can add appropriate rule in InitActions.SETUP_RULES).%s Exception: " + ex.getMessage(),
+                    ruleName, info.field.getName(), info.parentName(), LINE_BREAK);
             }
         }
         return info.instance;
