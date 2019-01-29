@@ -24,15 +24,15 @@ public class JDIPerformanceTests extends SimpleTestsInit {
 
     @Test
     public void hugeTableSearchTest() {
-        StopWatch timer = StopWatch.createStarted();
-        /*usersTable.assertThat().hasRowWithValues(
+        usersTable.assertThat().hasRowWithValues(
             containsValue("Meyer", inColumn("Name")),
             containsValue("co.uk", inColumn("Email")));
-        */
+
+        StopWatch timer = StopWatch.createStarted();
         Line row = usersTable.row(
             containsValue("Meyer", inColumn("Name")),
             containsValue("co.uk", inColumn("Email")));
-        System.out.println("Huge table search test Time: " + timer.getTime() + "ms");
+        System.out.println("Huge table search test Time: " + timer.getTime());
         Assert.assertEquals(row.getValue(),
         "Brian Meyer;(016977) 0358;mollis.nec@seddictumeleifend.co.uk;Houston");
     }
@@ -41,7 +41,7 @@ public class JDIPerformanceTests extends SimpleTestsInit {
     public void hugeTableValidateTest() {
         StopWatch timer = StopWatch.createStarted();
         String actualTable = usersTable.preview();
-        System.out.println("Huge table validate test Time: " + timer.getTime() + "ms");
+        System.out.println("Huge table validate test Time: " + timer.getTime());
         Assert.assertEquals(actualTable, TABLE_SNAPSHOOT);
     }
 
@@ -50,7 +50,7 @@ public class JDIPerformanceTests extends SimpleTestsInit {
         String name = "Charles Byers";
         StopWatch timer = StopWatch.createStarted();
         userNames.select(name);
-        System.out.println("Big dropdown test Time: " + timer.getTime() + "ms");
+        System.out.println("Big dropdown test Time: " + timer.getTime());
         Assert.assertEquals(userNames.selected(), name);
     }
 
@@ -63,6 +63,6 @@ public class JDIPerformanceTests extends SimpleTestsInit {
                 "Usu esse utroque sapientem ad. Eam ut consul soleat sapientem, cu dolor consequuntur vis. Erat temporibus mea id, has ex dicam tritani. Pertinacia expetendis consectetuer eos ei, vidit malis periculis est ea, ne nam movet fuisset. Pro id habemus definitiones, in ferri solum reprehendunt mei. Vel eligendi honestatis liberavisse id.";
         StopWatch timer = StopWatch.createStarted();
         textareaPerformance.setText(text + "\\n"+ text);
-        System.out.println("Long text test Time: " + timer.getTime() + "ms");
+        System.out.println("Long text test Time: " + timer.getTime());
     }
 }

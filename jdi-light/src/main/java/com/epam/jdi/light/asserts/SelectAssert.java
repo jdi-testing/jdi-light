@@ -3,6 +3,7 @@ package com.epam.jdi.light.asserts;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.WebList;
 import org.hamcrest.Matcher;
@@ -18,9 +19,9 @@ import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.is;
 
 public class SelectAssert extends IsAssert {
-    Selector<BaseUIElement> selector;
+    ISelector selector;
 
-    public SelectAssert(Selector selector) {
+    public SelectAssert(ISelector selector) {
         super(selector);
         this.selector = selector;
     }
@@ -62,7 +63,7 @@ public class SelectAssert extends IsAssert {
     }
     @JDIAction("Assert that all '{name}' attributes {0}")
     public SelectAssert attrs(String attrName, Matcher<Collection<? extends String>> condition) {
-        assertThat(selector.getAllAttributes(), condition);
+        assertThat(selector.getAllAttributes().keys(), condition);
         return this;
     }
     @JDIAction("Assert that all '{name}' elements css '{0}' {1}")

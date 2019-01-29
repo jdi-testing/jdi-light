@@ -130,6 +130,7 @@ public abstract class BaseUIElement<T extends BaseUIElement> extends JDIBase imp
         String value = el.getAttribute("value");
         return isNotBlank(value) ? value : text;
     }
+    public String text() { return getText(); }
 
     public List<WebElement> findElements(By by) {
         return uiSearch(get(),by);

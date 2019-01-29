@@ -9,6 +9,7 @@ import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -264,6 +265,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public String getAttribute(String value) {
         return valueOrDefault(get().getAttribute(value), "");
     }
+    public String attr(String value) { return getAttribute(value); }
 
     @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
@@ -273,7 +275,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public boolean isDisabled() {
         return !enabled();
     }
-    public boolean enabled() {
+    private boolean enabled() {
         List<String> cls = classes();
         return cls.contains("active") ||
                 get().isEnabled() && !cls.contains("disabled");
@@ -310,17 +312,15 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public void setAttribute(String name, String value) {
         jsExecute("setAttribute('"+name+"','"+value+"')");
     }
-    public List<String> getAllAttributes() {
-        List<String> result;
+    public MapArray<String, String> getAllAttributes() {
+        List<String> jsList;
         try {
-            result = (List<String>) js().executeScript("var s = []; var attrs = arguments[0].attributes; for (var l = 0; l < attrs.length; ++l) { var a = attrs[l]; s.push(a.name + '=\"' + a.value + '\"'); } ; return s;", get());
-        } catch (Exception ignore) { return new ArrayList<>(); }
-        if (getAttribute("selected").equals("true"))
-            result.add("selected");
-        if (getAttribute("checked").equals("true"))
-            result.add("checked");
-        return result;
+            jsList = (List<String>) js().executeScript("var s = []; var attrs = arguments[0].attributes; for (var l = 0; l < attrs.length; ++l) { var a = attrs[l]; s.push(a.name + '=\"' + a.value + '\"'); } ; return s;", get());
+            return new MapArray<>(jsList, r -> r.split("=")[0], r -> r.split("=")[1].replace("\"", ""));
+        } catch (Exception ignore) { return new MapArray<>(); }
     }
+    public MapArray<String, String> attrs() { return getAllAttributes(); }
+
     public List<String> classes() {
         return asList(getAttribute("class").split(" "));
     }

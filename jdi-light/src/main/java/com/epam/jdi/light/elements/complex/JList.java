@@ -33,7 +33,8 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 
-public class JList<T extends BaseUIElement> extends JDIBase implements IList<T>, SetValue, ISetup {
+public class JList<T extends BaseUIElement> extends JDIBase
+        implements IList<T>, SetValue, ISetup, ISelector {
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
 
     public JList() {}
@@ -139,21 +140,17 @@ public class JList<T extends BaseUIElement> extends JDIBase implements IList<T>,
     }
     @JDIAction("Get '{names}' selected value")
     public String selected() {
-        T first = logger.logOff(() ->
-                LinqUtils.first(elements(), BaseUIElement::isSelected) );
+        T first = logger.logOff(() -> first(BaseUIElement::isSelected) );
         return first != null ? first.getText() : "";
     }
-    public List<String> values() {
-        return LinqUtils.map(elements(), T::getText);
-    }
+
     @JDIAction(level = DEBUG)
     public void refresh() {
         webElements.clear();
     }
     @JDIAction(level = DEBUG)
     public String isSelected() {
-        T first = logger.logOff(() ->
-            LinqUtils.first(elements(), T::isSelected) );
+        T first = logger.logOff(() -> first(T::isSelected) );
         return first != null ? first.getText() : "";
     }
 
@@ -179,6 +176,7 @@ public class JList<T extends BaseUIElement> extends JDIBase implements IList<T>,
     public String getValue() {
         return print(values());
     }
+
     @JDIAction
     public void showAll() {
         int size;
@@ -189,9 +187,36 @@ public class JList<T extends BaseUIElement> extends JDIBase implements IList<T>,
         } while (size < size());
     }
 
+
+    @Override
+    public boolean selected(String option) {
+        return get(option).isSelected();
+    }
+
+    @Override
+    public List<String> checked() {
+        return ifSelect(BaseUIElement::isSelected,
+                BaseUIElement::getText);
+    }
+
+    public List<String> values() {
+        return map(T::getText);
+    }
+
+    @Override
+    public List<String> listEnabled() {
+        return ifSelect(JDIBase::isEnabled,
+                BaseUIElement::getText);
+    }
+
+    @Override
+    public List<String> listDisabled() {
+        return ifSelect(JDIBase::isDisabled,
+                BaseUIElement::getText);
+    }
     //region matchers
     public ListAssert<T> is() {
-        return new ListAssert<>(this, toError());
+        return new ListAssert<>(this, this, toError());
     }
     public ListAssert<T> assertThat() {
         return is();

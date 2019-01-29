@@ -3,6 +3,7 @@ package com.epam.jdi.light.asserts;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.Selector;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
@@ -18,17 +19,11 @@ import static org.hamcrest.Matchers.*;
 public class ListAssert<T extends BaseUIElement> extends SelectAssert {
     List<T> elements;
 
-    public ListAssert(List<T> elements, String name) {
-        super(getSelector(elements, name));
+    public ListAssert(List<T> elements, ISelector selector, String name) {
+        super(selector.setName(name));
         this.elements = elements;
     }
-    private static Selector getSelector(List<?> elements, String name) {
-        Selector selector = new Selector();
-        if (isClass(elements.getClass(), JDIBase.class))
-            selector.setLocator(((JDIBase)elements).getLocator());
-        selector.setName(name);
-        return selector;
-    }
+
     @JDIAction("Assert that all '{name}' texts {0}")
     public ListAssert<T> texts(Matcher<Collection<? extends String>> condition) {
         assertThat(map(elements, WebElement::getText), condition);

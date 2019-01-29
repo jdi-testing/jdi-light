@@ -1,14 +1,14 @@
 package org.mytests.uiobjects.example.site;
 
+import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import io.qameta.allure.Step;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import com.epam.jdi.light.ui.html.complex.Menu;
 import org.mytests.uiobjects.example.entities.User;
-import org.mytests.uiobjects.example.site.pages.ContactFormPage;
-import org.mytests.uiobjects.example.site.pages.ContactsPage;
-import org.mytests.uiobjects.example.site.pages.HomePage;
-import org.mytests.uiobjects.example.site.pages.JDIPerformancePage;
+import org.mytests.uiobjects.example.site.custom.MenuItem;
+import org.mytests.uiobjects.example.site.pages.*;
 import org.openqa.selenium.WebElement;
 
 //@JSite("https://epam.github.io/JDI/")
@@ -17,34 +17,14 @@ public class SiteJdi {
     public static JDIPerformancePage performancePage;
     public static ContactFormPage contactFormPage;
     public static ContactsPage contactsPage;
+    public static DatesPage datesPage;
+    public static Html5Page html5Page;
     @Css("form") public static Form<User> loginForm;
 
-    @Css(".profile-photo [ui=label]") public static WebElement userName;
+    @Css(".profile-photo [ui=label]") public static UIElement userName;
     @Css(".fa-sign-out") public static WebElement logout;
     @Css("img#user-icon") public static WebElement userIcon;
+    @UI(".sidebar-menu span") public static Menu leftMenu;
+    @UI(".sidebar-menu li") public static JList<MenuItem> menu;
 
-    @Step
-    public static void shouldBeLoggedIn() {
-        if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
-            homePage.open();
-        if (!userName.isDisplayed())
-            login();
-    }
-    @Step
-    public static void login() {
-        userIcon.click();
-        loginForm.submit(new User(), "enter");
-    }
-    @Step
-    public static void shouldBeLoggedOut() {
-        if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
-            homePage.open();
-        if (userName.isDisplayed())
-            logout();
-    }
-    @Step
-    public static void logout() {
-        userIcon.click();
-        logout.click();
-    }
 }

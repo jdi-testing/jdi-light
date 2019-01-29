@@ -16,7 +16,8 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
-public class Selector<T extends BaseUIElement> extends BaseUIElement<T> implements BaseSelectorAssert {
+public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
+    implements BaseSelectorAssert, ISelector {
 
     public Selector() { }
     public Selector(WebElement el) { super(el); }

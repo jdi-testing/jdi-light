@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.site;
 
+import com.epam.jdi.tools.map.MapArray;
 import io.github.epam.TestsInit;
 import io.github.epam.html.tests.site.steps.Preconditions;
 import org.testng.annotations.Test;
@@ -11,6 +12,8 @@ import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.ContactFormPage.main;
 import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.userIcon;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class FormsTests extends TestsInit {
 
@@ -18,6 +21,9 @@ public class FormsTests extends TestsInit {
     public void loginTest() {
         Preconditions.shouldBeLoggedOut();
         userIcon.click();
+        MapArray<String, String> attrs = userIcon.attrs();
+        assertThat(attrs.size(), is(3));
+        assertThat(attrs.keys(), hasItem("alt"));
         loginForm.loginAs(DEFAULT_USER);
         homePage.checkOpened();
     }

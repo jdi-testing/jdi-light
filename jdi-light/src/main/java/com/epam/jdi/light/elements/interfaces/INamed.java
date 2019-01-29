@@ -8,4 +8,5 @@ package com.epam.jdi.light.elements.interfaces;
 public interface INamed {
     String getName();
     void setName(String varName, String className);
+    <T> T setName(String name);
 }
