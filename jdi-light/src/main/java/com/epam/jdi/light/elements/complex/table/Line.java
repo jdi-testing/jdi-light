@@ -37,7 +37,7 @@ public class Line implements IList<String> {
     }
 
     public String getValue() {
-        return PrintUtils.print(dataList);
+        return PrintUtils.print(dataList, ";");
     }
     public String print() { return getValue(); }
     public void clear() { dataList.clear(); }
@@ -89,4 +89,8 @@ public class Line implements IList<String> {
 
     }
 
+    @Override
+    public String toString() {
+        return print();
+    }
 }

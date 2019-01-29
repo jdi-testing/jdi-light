@@ -21,7 +21,7 @@ public class Preconditions {
     @Step
     public static void login() {
         userIcon.click();
-        loginForm.submit(DEFAULT_USER, "enter");
+        loginForm.submit(DEFAULT_USER);
     }
     @Step
     public static void shouldBeLoggedOut() {

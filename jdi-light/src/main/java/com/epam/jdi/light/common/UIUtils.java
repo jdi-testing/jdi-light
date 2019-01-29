@@ -5,6 +5,7 @@ package com.epam.jdi.light.common;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.INamed;
@@ -66,7 +67,7 @@ public final class UIUtils {
 
     public static JFunc1<String, UIElement> GET_DEFAULT_BUTTON = (buttonName) -> $("[type=submit]");
 
-    public static JFunc2<Object, String, UIElement> GET_BUTTON = (obj, buttonName) -> {
+    public static JFunc2<Object, String, BaseUIElement> GET_BUTTON = (obj, buttonName) -> {
         List<Field> fields = getFields(obj, WebElement.class);
         switch (fields.size()) {
             case 0:
@@ -74,10 +75,10 @@ public final class UIUtils {
                     return GET_DEFAULT_BUTTON.execute(buttonName);
                 throw exception("Can't find any buttons on form '%s.", obj);
             case 1:
-                return (UIElement) getValueField(fields.get(0), obj);
+                return (BaseUIElement) getValueField(fields.get(0), obj);
             default:
-                Collection<UIElement> buttons = select(fields, f -> (UIElement) getValueField(f, obj));
-                UIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
+                Collection<BaseUIElement> buttons = select(fields, f -> (BaseUIElement) getValueField(f, obj));
+                BaseUIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
                 if (button == null)
                     throw exception("Can't find button '%s' for Element '%s'", buttonName, obj);
                 return button;

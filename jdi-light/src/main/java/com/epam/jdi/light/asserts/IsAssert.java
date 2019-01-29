@@ -2,13 +2,14 @@ package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseElement;
+import com.epam.jdi.light.elements.base.BaseUIElement;
 import org.hamcrest.Matcher;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAssert<T> {
-    public IsAssert(BaseElement element) {
+    public IsAssert(BaseUIElement element) {
         super(element);
     }
 
@@ -39,12 +40,12 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
     }
     @JDIAction("Assert that '{name}' is displayed")
     public T displayed() {
-        assertThat(element.isDisplayed() ? "displayed" : "hidden", is("displayed"));
+        assertThat(element.displayed() ? "displayed" : "hidden", is("displayed"));
         return (T) this;
     }
     @JDIAction("Assert that '{name}' is disappear")
     public T disappear() {
-        assertThat(element.isDisplayed() ? "displayed" : "disappear", is("disappear"));
+        assertThat(element.displayed() ? "displayed" : "disappear", is("disappear"));
         return (T) this;
     }
     @JDIAction("Assert that '{name}' is selected")

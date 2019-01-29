@@ -21,6 +21,7 @@ import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 
-public abstract class JList<T extends BaseUIElement> extends JDIBase implements IList<T>, SetValue {
+public class JList<T extends BaseUIElement> extends JDIBase implements IList<T>, SetValue, ISetup {
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
 
     public JList() {}
@@ -45,12 +46,17 @@ public abstract class JList<T extends BaseUIElement> extends JDIBase implements 
         initClass = listClass;
         return this;
     }
-    public JList<T> setInitClass(Field field) {
+    public void setup(Field field) {
+        Type[] types;
         try {
-            Class<?> initClass = (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
+            types = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+        } catch (Exception ex) { return; }
+        if (types.length != 1) return;
+        try {
+            Class<?> initClass = (Class<?>) types[0];
             if (initClass == WebElement.class)
                 initClass = UIElement.class;
-            return setInitClass((Class<T>) initClass);
+            setInitClass((Class<T>) initClass);
         } catch (Exception ex) { throw  exception("Can't init WebList. Weblist elements should extend UIElement"); }
     }
     private boolean isActual() {

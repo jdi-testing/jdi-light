@@ -46,7 +46,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class JDIBase extends DriverBase implements BaseElement, INamed {
     public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     protected By byLocator;
-    protected CacheValue<WebElement> webElement = new CacheValue<>();
+    public CacheValue<WebElement> webElement = new CacheValue<>();
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
     protected LocatorType locatorType = DEFAULT;
     public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
@@ -71,6 +71,9 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
                 ? fillByTemplate(byLocator, args)
                 : fillByMsgTemplate(byLocator, args);
     }
+    public boolean hasLocator() {
+        return byLocator != null && locatorType == DEFAULT;
+    }
     public By getFrame() { return locatorType == FRAME ? byLocator : null; }
 
     public void setFrame(By locator) {
@@ -93,7 +96,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         // TODO SAFE GET ELEMENT AND STALE ELEMENT PROCESS
         if (webElement.hasValue())
             return webElement.get();
-        if (byLocator == null) {
+        if (!hasLocator()) {
             try {
                 WebElement element = SMART_SEARCH.execute(this);
                 if (element != null)
@@ -103,6 +106,8 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
                 throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
             }
         }
+        if (byLocator.toString().contains("%s") && args.length == 0)
+            throw exception("Can't get element with template locator '%s' without arguments", byLocator);
         List<WebElement> result = getAll(args);
         if (result.size() == 0)
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
@@ -124,7 +129,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         //TODO rethink SMART SEARCH
         if (webElements.hasValue())
             return webElements.get();
-        if (byLocator == null)
+        if (!hasLocator())
             return asList(SMART_SEARCH.execute(this));
         SearchContext searchContext = isRootLocator
                 ? getDefaultContext()

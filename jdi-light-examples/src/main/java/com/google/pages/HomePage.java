@@ -16,6 +16,7 @@ public class HomePage extends WebPage {
     public static Search suggestion;
 
     public void search(String text) {
+        search.clear();
         search.sendKeys(text + Keys.ENTER);
     }
 }

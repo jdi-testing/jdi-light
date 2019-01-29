@@ -43,17 +43,11 @@ public class MenuTests extends TestsInit {
     @Test
     public void isValidationTest() {
         leftMenu.is().selected(HTML5);
-        leftMenu.is().values(hasItem(ContactForm.value));
     }
 
     @Test
     public void assertValidationTest() {
-        leftMenu.assertThat().allEnabled();
-        leftMenu.assertThat().allDisplayed();
+        leftMenu.assertThat().selected(HTML5);
     }
 
-    @Test
-    public void baseValidationTest() {
-        baseValidation(leftMenu);
-    }
 }

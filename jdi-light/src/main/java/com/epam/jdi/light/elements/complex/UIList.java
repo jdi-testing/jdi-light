@@ -22,36 +22,33 @@ import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 
-public class UIList<T extends Section, E> extends JDIBase implements IList<T> {
+public class UIList<T extends Section, E> extends JDIBase implements IList<T>, ISetup {
 
-    private CacheValue<MapArray<String, T>> elements = new CacheValue<>();
-    private CacheValue<List<T>> values = new CacheValue<>();
+    private CacheValue<MapArray<String, T>> elements = new CacheValue<>(MapArray::new);
+    private CacheValue<List<T>> values = new CacheValue<>(ArrayList::new);
     private Class<T> classType;
-    private Class<E> entityType;
+    private Class<E> dataType;
     public String titleFieldName = null;
 
-    public UIList(Class<T> classType) {
-        this.classType = classType;
-        elements.setForce(new MapArray<>());
-        values.setForce(new ArrayList<>());
-    }
-    public UIList(Class<T> classType, Class<E> entityType) {
-        this(classType);
-        this.entityType = entityType;
-    }
+    public UIList() {}
+    public UIList(Class<T> type) { classType = type; }
+
     private boolean isActual() {
         try {
-            elements.get().get(0).value.get().getTagName();
+            values.get().get(0).get().getTagName();
             return true;
         } catch (Exception ex) { return false; }
     }
@@ -100,17 +97,16 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T> {
 
     private T initElement(WebElement el) {
         try {
-            T element = classType.newInstance();
+            T section = classType.newInstance();
             if (isClass(classType, Section.class)) {
-                Section section = (Section)element;
                 section.setWebElement(el);
                 section.parent = this;
             }
             SiteInfo info = new SiteInfo();
-            info.instance = element;
+            info.instance = section;
             info.driverName = driverName;
             initElements(info);
-            return element;
+            return section;
         } catch (Exception ex) {
             throw exception("Can't instantiate list element");
         }
@@ -118,8 +114,11 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T> {
 
     public List<E> asData() {
         try {
-            return getMap().select((k, v) -> UIUtils.asEntity(v, entityType));
-        } catch (Exception ex) { return new ArrayList<>(); }
+            if (dataType == null) return null;
+            return getMap().select((k, v) -> UIUtils.asEntity(v, dataType));
+        } catch (Exception ex) {
+            throw exception("Can't get UIList data" + LINE_BREAK + ex.getMessage());
+        }
     }
 
     @JDIAction(level = DEBUG)
@@ -155,9 +154,7 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T> {
         return PrintUtils.print(LinqUtils.map(asData(), Object::toString));
     }
 
-    //public void is(Matcher<Collection<? extends E>> condition) {
     public void is(Matcher<? super List<E>> condition) {
-        //org.hamcrest.MatcherAssert.assertThat(asData(), condition);
         MatcherAssert.assertThat(asData(), condition);
     }
     public UIListAssert<T, E> is() {
@@ -169,5 +166,23 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T> {
 
     public void assertThat(Matcher<? super List<E>> condition) {
         is(condition);
+    }
+
+    public void setup(Field field) {
+        try {
+            Type[] types = getGenericTypes(field);
+            if (types.length == 0)
+                throw exception("Can't setup UIList generic parameters for field '%s'. Actual 0 but expected 1 or 2",
+                        field.getName());
+            if (types.length > 2)
+                throw exception("Can't setup UIList generic parameters for field '%s'. Actual more than %s but expected 1 or 2",
+                        field.getName(), types.length);
+            classType = types[0].toString().equals("?") ? null : (Class<T>)types[0];
+            dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<E>)types[1];
+        } catch (Exception ex) {
+            throw exception("Can't instantiate List<%s, %s> field '%s'", classType == null
+                            ? "?" : classType.getSimpleName(), dataType == null ? "?" : dataType.getSimpleName(),
+                    field.getName());
+        }
     }
 }

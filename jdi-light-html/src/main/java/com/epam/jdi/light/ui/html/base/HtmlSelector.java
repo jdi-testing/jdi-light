@@ -6,7 +6,7 @@ import com.epam.jdi.light.ui.html.complex.MultiSelect;
 import org.openqa.selenium.WebElement;
 
 public class HtmlSelector extends Selector<HtmlElement> implements Dropdown, MultiSelect {
-    public HtmlSelector() { }
-    public HtmlSelector(WebElement el) { super(el); }
+    public HtmlSelector() { setInitClass(HtmlElement.class); }
+    public HtmlSelector(WebElement el) { super(el); setInitClass(HtmlElement.class); }
 
 }

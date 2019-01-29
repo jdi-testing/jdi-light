@@ -1,13 +1,16 @@
 package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
+import com.epam.jdi.light.elements.complex.WebList;
 import org.hamcrest.Matcher;
 
 import java.util.Collection;
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,7 +18,7 @@ import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.is;
 
 public class SelectAssert extends IsAssert {
-    Selector<UIElement> selector;
+    Selector<BaseUIElement> selector;
 
     public SelectAssert(Selector selector) {
         super(selector);
@@ -77,24 +80,30 @@ public class SelectAssert extends IsAssert {
         assertThat(selector.classes(), condition);
         return this;
     }
+    private WebList getWebList() {
+        WebList elements = selector.allUI();
+        if (elements.size() == 0)
+            throw exception("No elements found");
+        return elements;
+    }
     @JDIAction("Assert that all '{name}' elements are displayed")
     public SelectAssert allDisplayed() {
-        assertThat(map(selector.allUI(), UIElement::isDisplayed), everyItem(is(true)));
+        assertThat(map(getWebList(), UIElement::isDisplayed), everyItem(is(true)));
         return this;
     }
     @JDIAction("Assert that all '{name}' elements are hidden")
     public SelectAssert allHidden() {
-        assertThat(map(selector.allUI(), UIElement::isDisplayed), everyItem(is(false)));
+        assertThat(map(getWebList(), UIElement::isDisplayed), everyItem(is(false)));
         return this;
     }
     @JDIAction("Assert that all '{name}' elements are selected")
     public SelectAssert allSelected() {
-        assertThat(map(selector.allUI(), UIElement::isSelected), everyItem(is(true)));
+        assertThat(map(getWebList(), UIElement::isSelected), everyItem(is(true)));
         return this;
     }
     @JDIAction("Assert that all '{name}' elements are enabled")
     public SelectAssert allEnabled() {
-        assertThat(map(selector.allUI(), UIElement::isEnabled), everyItem(is(true)));
+        assertThat(map(getWebList(), UIElement::isEnabled), everyItem(is(true)));
         return this;
     }
 }

@@ -105,7 +105,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase implements 
     }
 
     protected WebList getRow(int rowNum) {
-        return $$(fillByTemplate(rowLocator, getRowIndex(rowNum), this));
+        return $$(fillByTemplate(rowLocator, getRowIndex(rowNum)), this);
     }
     protected boolean gotColumns = false;
     protected MapArray<String, List<UIElement>> getColumns() {
@@ -127,7 +127,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase implements 
     protected int getRowIndex(int rowNum) {
         if (headerIsRow == null) {
             List<String> firstRow = $$(fillByTemplate(rowLocator, 1), this).values();
-            headerIsRow = !firstRow.isEmpty() && listEquals(header.get(), firstRow);
+            headerIsRow = firstRow.isEmpty() || listEquals(header.get(), firstRow);
         }
         return headerIsRow ? rowNum + 1 : rowNum;
     }

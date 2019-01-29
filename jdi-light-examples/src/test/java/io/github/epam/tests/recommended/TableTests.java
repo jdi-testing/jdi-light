@@ -40,26 +40,27 @@ public class TableTests extends StaticTestsInit {
     public void tableDataTest() {
         UserInfo gradyBrock = new UserInfo().set(u-> {
             u.name = "Grady Brock";
-            u.email = " (011307) 16843";
-            u.phone = "cursus.et@commodo.org";
+            u.email = "cursus.et@commodo.org";
+            u.phone = "(011307) 16843";
             u.city = "Alcobendas";
         });
-        assertEquals(users.row(2).asData(UserInfo.class), gradyBrock);
+        assertEquals(users.row(2).asData(UserInfo.class),
+            gradyBrock);
     }
 
     @Test
     public void tableEntityTest() {
-        users.row(2).asEntity(UserRow.class).name.click();
-        validateAlert(is("Grady Brock"));
+        UserRow user = users.row(2).asEntity(UserRow.class);
+        user.name.click();
         validateAlert(containsString("Brock"));
-        users.row(2).asEntity(UserRow.class).city.click();
+        user.city.click();
         validateAlert(is("Alcobendas"));
     }
 
     private void tableTestScenario(Table table) {
         timeStart = currentTimeMillis();
         assertEquals(table.header(), asList("Name", "Phone", "Email", "City"));
-        assertEquals(table.row(1).getValue(), "Burke Tucker,076 1971 1687,et.euismod.et@ut.edu,GozŽe");
+        assertEquals(table.row(1).getValue(), "Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe");
         logTime("Get 1 row");
         String zacharyEmail = "ipsum.non.arcu@auctorullamcorper.ca";
         assertEquals(table.cell(3,4), zacharyEmail);

@@ -12,8 +12,8 @@ import java.util.List;
 
 public class UIElement extends BaseUIElement<UIElement> {
     public UIElement() { setInitClass(UIElement.class); }
-    public UIElement(WebElement el) { webElement.setForce(el); }
-    public UIElement(List<WebElement> els) { webElements.setForce(els); }
-    public UIElement(By locator) { setLocator(locator); }
+    public UIElement(WebElement el) { this(); webElement.setForce(el); }
+    public UIElement(List<WebElement> els) { this(); webElements.setForce(els); }
+    public UIElement(By locator) { this(); setLocator(locator); }
 
 }

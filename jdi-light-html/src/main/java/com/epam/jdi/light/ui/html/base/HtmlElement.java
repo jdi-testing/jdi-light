@@ -12,6 +12,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static com.epam.jdi.light.ui.html.utils.HtmlUtils.getInt;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
@@ -23,7 +24,7 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
         TextField, Title, Checkbox, ColorPicker, Range, ProgressBar, DateTimeSelector, NumberSelector {
 
     public HtmlElement() { setInitClass(HtmlElement.class); }
-    public HtmlElement(WebElement el) { super(el); }
+    public HtmlElement(WebElement el) { super(el); setInitClass(HtmlElement.class); }
 
     /**
      * Gets attribute 'alt'

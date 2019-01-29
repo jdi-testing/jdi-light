@@ -52,7 +52,6 @@ public class WebPage extends DriverBase implements INamed {
     public static String getCurrentPage() { return currentPage.get(); }
     public static void setCurrentPage(WebPage page) {
         currentPage.set(page.getName());
-        CacheValue.reset();
     }
 
     public WebPage() { }

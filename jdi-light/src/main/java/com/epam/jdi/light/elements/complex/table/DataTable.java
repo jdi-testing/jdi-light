@@ -2,8 +2,10 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.TableAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.complex.Droplist;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.InitActions;
+import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.pairs.Pair;
 import org.hamcrest.Matcher;
@@ -13,34 +15,13 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.LinqUtils.*;
 
 public class DataTable<E extends Section, D> extends Table {
     private Class<E> entityClass;
     private Class<D> dataClass;
 
-    @Override
-    public void setup(Field field) {
-        Type[] types = InitActions.getGenericTypes(field);
-        try {
-            entityClass = types[0].toString().equals("?") ? null : (Class<E>) types[0];
-            dataClass = types[1].toString().equals("?") ? null : (Class<D>) types[1];
-        } catch (Exception ex) {
-            throw exception("Can't get DataTable %s data or entity class", getName());
-        }
-        Type type = null;
-        if (entityClass != null)
-            type = types[0];
-        else if (dataClass != null)
-            type = types[1];
-        if (type != null) {
-            List<String> entityFields = map(type.getClass().getDeclaredFields(),
-                    Field::getName);
-            if (entityFields.size() > 0)
-                header.setForce(entityFields);
-        }
-        super.setup(field);
-    }
     @JDIAction("Get row '{0}' for '{name}' table")
     public D data(int rowNum) {
         return row(rowNum).asData(dataClass);
@@ -114,5 +95,28 @@ public class DataTable<E extends Section, D> extends Table {
         return is();
     }
 
-
+    @Override
+    public void setup(Field field) {
+        super.setup(field);
+        Type[] types = InitActions.getGenericTypes(field);
+        if (types.length != 2)
+            return;
+        try {
+            entityClass = types[0].toString().equals("?") ? null : (Class<E>) types[0];
+            dataClass = types[1].toString().equals("?") ? null : (Class<D>) types[1];
+        } catch (Exception ex) {
+            throw exception("Can't get DataTable %s data or entity class", getName());
+        }
+        Type type = null;
+        if (entityClass != null)
+            type = types[0];
+        else if (dataClass != null)
+            type = types[1];
+        if (type != null) {
+            List<String> entityFields = map(type.getClass().getDeclaredFields(),
+                    Field::getName);
+            if (entityFields.size() > 0)
+                header.setForce(entityFields);
+        }
+    }
 }

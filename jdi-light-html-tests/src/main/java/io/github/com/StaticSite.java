@@ -33,7 +33,7 @@ public class StaticSite {
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;
 	@UI("[ui=label][*'%s']") public static HtmlList navigationS;
-	@UI(".sidebar-menu span<[*'%s']") public static Menu leftMenu;
+	@UI(".sidebar-menu span<[*'%s']<<") public static Menu leftMenu;
 	@UI(".sidebar-menu span") public static JList<MenuItem> menu;
 	@JMenu({"[ui=label][*'%s']", "[ui=label][*'%s']"}) public static Menu leftMenu2D;
 

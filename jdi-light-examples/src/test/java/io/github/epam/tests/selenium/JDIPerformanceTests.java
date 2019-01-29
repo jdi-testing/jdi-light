@@ -32,7 +32,7 @@ public class JDIPerformanceTests extends SimpleTestsInit {
             containsValue("co.uk", inColumn("Email")));
         System.out.println("Huge table search test Time: " + timer.getTime());
         Assert.assertEquals(row.getValue(),
-        "Brian Meyer,(016977) 0358,mollis.nec@seddictumeleifend.co.uk,Houston");
+        "Brian Meyer;(016977) 0358;mollis.nec@seddictumeleifend.co.uk;Houston");
     }
 
     @Test

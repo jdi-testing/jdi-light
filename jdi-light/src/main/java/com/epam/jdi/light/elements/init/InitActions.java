@@ -4,10 +4,7 @@ import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.Selector;
-import com.epam.jdi.light.elements.complex.UIList;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
@@ -83,12 +80,11 @@ public class InitActions {
             || f.getType() == UIElement.class,
             info -> new UIElement()
         )),
-        $("WebList", iRule(f -> f.getType() == WebList.class
-            || isList(f, WebElement.class),
-            info -> new WebList().setInitClass(info.field) )),
-        $("UIList", iRule(f -> (f.getType() == List.class || f.getType() == UIList.class)
+        $("WebList", iRule(f -> f.getType() == WebList.class || isList(f, WebElement.class),
+            info -> new WebList())),
+        $("UIList", iRule(f -> (f.getType() == List.class)
                 && isPageObject(getGenericType(f)),
-            InitActions::initUIList)),
+            f -> new UIList(getGenericType(f.field)))),
         $("PageObject", iRule(f -> isPageObject(f.getType()),
             InitActions::initSection)),
         $("Default", iRule(f -> isClass(f, DriverBase.class),
@@ -98,7 +94,8 @@ public class InitActions {
     public static MapArray<String, SetupRule> SETUP_RULES = map(
         $("Element", sRule(info -> isClass(info.instance.getClass(), JDIBase.class),
             InitActions::elementSetup)),
-        $("ISetup", sRule(info -> isInterface(info.field, ISetup.class),
+        $("ISetup", sRule(info -> isInterface(info.field, ISetup.class)
+                || hasSetupValue(info),
             info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class),
             InitActions::defaultSetup)),
@@ -107,6 +104,14 @@ public class InitActions {
         $("PageObject", sRule(info -> isPageObject(info.instance.getClass()),
             PageFactory::initElements))
     );
+
+    private static boolean hasSetupValue(SiteInfo info) {
+        try {
+            Object value = info.field.get(info.parent);
+            if (value == null) return false;
+            return isInterface(value.getClass(), ISetup.class);
+        } catch (Exception ex) {return false; }
+    }
 
     public static void defaultSetup(SiteInfo info) {
         String parentName = Switch(info).get(
@@ -165,26 +170,6 @@ public class InitActions {
             return (T) info.fieldType().newInstance();
         } catch (Exception ex) {
             throw exception("Can't instantiate Section field '%s' on page '%s'", info.field.getName(), info.parentName());
-        }
-    }
-    public static UIList initUIList(SiteInfo info) {
-        Class<?> type = null;
-        Class<?> entity = null;
-        try {
-            Type[] types = getGenericTypes(info.field);
-            if (types.length == 0)
-                throw exception("Can't instantiate List<> with 0 parameters for field '%s' on page '%s'",
-                    info.field.getName(), info.parentName());
-            if (types.length > 2)
-                throw exception("Can't instantiate List<> with %s parameters(expected 1 or 2) for field '%s' on page '%s'",
-                    types.length, info.field.getName(), info.parentName());
-            type = types[0].toString().equals("?") ? null : (Class<?>)types[0];
-            entity = types.length == 1 || types[1].toString().equals("?") ? null : (Class<?>)types[1];
-            return new UIList(type, entity);
-        } catch (Exception ex) {
-            throw exception("Can't instantiate List<%s, %s> field '%s' on page '%s'", type == null
-                ? "?" : type.getSimpleName(), entity == null ? "?" : entity.getSimpleName(),
-                    info.field.getName(), info.parentName());
         }
     }
     public static boolean isJDIField(Field field) {

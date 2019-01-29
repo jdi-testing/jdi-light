@@ -6,6 +6,7 @@ package com.epam.jdi.light.ui.html;
  */
 
 import com.epam.jdi.light.elements.base.BaseElement;
+import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Form;
@@ -46,7 +47,7 @@ public class HtmlSettings {
         if (!initialized) {
             WebSettings.init();
             MapArray<String, InitRule> newRules = map(
-                $("WebList", iRule(f -> f.getType() == WebList.class, info -> new WebList().setInitClass(info.field))),
+                $("WebList", iRule(f -> f.getType() == WebList.class, info -> new WebList())),
                 $("HtmlList", iRule(f -> f.getType() == HtmlList.class || isInterface(f,Menu.class)
                     || isList(f, WebElement.class), info -> new HtmlList())),
                 $("Combobox", iRule(f -> isInterface(f, DataList.class), info -> new HtmlCombobox())),
@@ -76,7 +77,7 @@ public class HtmlSettings {
                             return UIFactory.$("[type=submit]");
                         throw exception("Can't find any buttons on form '%s.", obj);
                     case 1:
-                        return (UIElement) getValueField(fields.get(0), obj);
+                        return (BaseUIElement) getValueField(fields.get(0), obj);
                     default:
                         return getButtonByName(fields, obj, buttonName);
                 }

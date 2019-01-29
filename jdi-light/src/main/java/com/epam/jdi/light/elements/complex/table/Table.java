@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.TableAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.HasValue;
@@ -29,7 +30,7 @@ public class Table extends BaseTable<Table> implements ISetup, HasValue {
     public boolean isNotEmpty() { return size() != 0; }
     @JDIAction("Get '{name}' table header")
     public List<String> header() {
-        return header.getForce();
+        return header.get();
     }
 
     // Rows

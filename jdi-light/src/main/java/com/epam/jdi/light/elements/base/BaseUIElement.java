@@ -33,13 +33,20 @@ public abstract class BaseUIElement<T extends BaseUIElement> extends JDIBase imp
         initClass = listClass;
         return (T)this;
     }
-    protected T newElement(WebElement el) {
+
+    protected T newElement() {
         try {
             return initClass.newInstance();
         }
         catch (Exception ex) {
-            throw exception("Can't instantiate %s. Exception: ", getClass().getSimpleName(), ex.getMessage());
+            throw exception("Can't instantiate %s. Exception: ",
+                    getClass().getSimpleName(), ex.getMessage());
         }
+    }
+    protected T newElement(WebElement el) {
+        T element = newElement();
+        element.setWebElement(el);
+        return element;
     }
 
     //region WebElement Wrapper
@@ -96,8 +103,9 @@ public abstract class BaseUIElement<T extends BaseUIElement> extends JDIBase imp
     }
 
     public T label() {
-        return $("[for="+getAttribute("id")+"]")
-                .setName(getName() + " label");
+        return newElement()
+            .setLocator(By.cssSelector("[for="+getAttribute("id")+"]"))
+            .setName(getName() + " label");
     }
 
     /**

@@ -18,11 +18,11 @@ import static org.hamcrest.Matchers.*;
 public class UIListAssert<T extends Section, E> {
     List<E> data;
     List<T> elements;
-    String name;
+    public String name;
 
     public UIListAssert(List<T> elements, List<E> data, String name) {
-        this.data = data;
         this.elements = elements;
+        this.data = data;
         this.name = name;
     }
 
