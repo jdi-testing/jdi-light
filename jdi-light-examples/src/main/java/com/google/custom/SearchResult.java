@@ -11,7 +11,7 @@ import static java.lang.String.format;
 public class SearchResult extends Section {
     @Title
     @Css("h3") public WebElement name;
-    @Css(".st")  public WebElement description;
+    @Css(".st") public WebElement description;
     @Css("cite") public WebElement link;
 
     public String print() {

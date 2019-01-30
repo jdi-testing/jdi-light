@@ -63,6 +63,10 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public <T extends JDIBase> T setLocator(By locator) {
         locatorType = DEFAULT;
         byLocator = locator;
+        if (containsRoot(locator)) {
+            byLocator = trimRoot(locator);
+            isRootLocator = true;
+        }
         return (T) this;
     }
     public By getLocator(Object... args) {

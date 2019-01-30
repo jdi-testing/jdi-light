@@ -10,7 +10,7 @@ import java.util.Objects;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$$;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 
-public class HtmlCombobox extends HtmlElement implements DataList, Combobox {
+public class HtmlCombobox extends HtmlElement implements Combobox {
     HtmlList dataList() {
         HtmlList list = $$("#"+getAttribute("list")+" option");
         list.searchRule = Objects::nonNull;

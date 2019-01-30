@@ -16,6 +16,8 @@ import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.Timer;
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
@@ -39,27 +41,32 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
 
     private CacheValue<MapArray<String, T>> elements = new CacheValue<>(MapArray::new);
     private CacheValue<List<T>> values = new CacheValue<>(ArrayList::new);
-    private Class<T> classType;
-    private Class<E> dataType;
+    public Class<T> classType;
+    public Class<E> dataType;
     public String titleFieldName = null;
 
     public UIList() {}
     public UIList(Class<T> type) { classType = type; }
 
-    private boolean isActual() {
+    private boolean isActual(T element) {
         try {
-            values.get().get(0).get().getTagName();
+            element.get().getTagName();
             return true;
         } catch (Exception ex) { return false; }
     }
     @JDIAction(level = DEBUG)
     public List<T> elements() {
-        if (values.hasValue() && isActual())
+        if (values.hasValue() && isActual(values.get().get(0)))
             return values.get();
         if (elements.hasValue())
             return elements.get().values();
-        return values.set(LinqUtils.select(
-            Timer.getByCondition(() -> getAll(), l -> l.size() > 0), this::initElement));
+        List<WebElement> els = getAll();
+        if (els.size() > 0)
+            values.set(LinqUtils.select(
+                    Timer.getByCondition(() -> els, l -> l.size() > 0), this::initElement));
+        else
+            System.out.println("test");
+        return values.get();
     }
     @JDIAction(level = DEBUG)
     public void clear() {
@@ -67,7 +74,7 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         values.clear();
     }
     public MapArray<String, T> getMap() {
-        if (elements.hasValue() && isActual())
+        if (elements.hasValue() && isActual(elements.get().values().get(0)))
             return elements.get();
         List<WebElement> els = getAll();
         return elements.set(values.hasValue()
@@ -81,7 +88,7 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
 
     private String elementTitle(WebElement el) {
         if (titleFieldName == null)
-            titleFieldName = identifyTitleField();
+            titleFieldName = GET_TITLE_FIELD_NAME.execute(this);
         return titleFieldName == null
             ? el.getText()
             : getElementTitle(el, titleFieldName);
@@ -112,6 +119,16 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         }
     }
 
+    public E getData(String name) {
+        return get(name).asEntity(dataType);
+    }
+    public E getData(Enum name) {
+        return getData(getEnumValue(name));
+    }
+    public E getData(int index) {
+        return get(index).asEntity(dataType);
+    }
+
     public List<E> asData() {
         try {
             if (dataType == null) return null;
@@ -126,13 +143,13 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         return getMap().get(name);
     }
 
-    private String identifyTitleField() {
-        Field[] fields = classType.getFields();
+    public static JFunc1<UIList, String> GET_TITLE_FIELD_NAME = list -> {
+        Field[] fields = list.classType.getFields();
         Field expectedFields = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
         if (expectedFields == null)
-            throw exception("No title name specified for '%s' class", classType.getSimpleName());
+            throw exception("No title name specified for '%s' class", list.classType.getSimpleName());
         return expectedFields.getName();
-    }
+    };
 
     @JDIAction("Scroll to list elements")
     public void showAll() {
@@ -141,7 +158,7 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         int size;
         do {
             size = size();
-            js().executeScript("arguments[0].scrollIntoView(true);", ((Section)get(size-1)).get());
+            js().executeScript("arguments[0].scrollIntoView(true);", get(size-1).get());
             clear();
         } while (size < size());
     }

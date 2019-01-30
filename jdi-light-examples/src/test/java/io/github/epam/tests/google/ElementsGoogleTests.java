@@ -47,6 +47,9 @@ public class ElementsGoogleTests extends GoogleInit {
     @Test
     public void validateEntities2Tests() {
         UIList<SearchResult, ?> jobs = searchPage.jobs2;
+        System.out.println(jobs.get(0).name.getText());
+        System.out.println(jobs.get(1).name.getText());
+        System.out.println(jobs.get(2).name.getText());
         int size = searchPage.jobs2.size();
 
         try {

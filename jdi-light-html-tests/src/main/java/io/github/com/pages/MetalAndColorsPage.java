@@ -17,6 +17,9 @@ public class MetalAndColorsPage extends WebPage {
 	@JDropdown(root = "div[ui=combobox]", value = "input",
 			list = "li", expand = ".caret")
 	public static Droplist metals;
+	@JDropdown(root = "div[ui=combobox]", value = "input",
+			list = "*root*div[ui=combobox] li", expand = ".caret")
+	public static Droplist metals2;
 	@Css("div[ui=droplist]")
 	public static MultiSelect vegetables;
 	@ByText("Calculate") public static Button calculate;

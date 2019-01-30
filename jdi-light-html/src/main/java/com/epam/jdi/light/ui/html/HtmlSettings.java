@@ -8,6 +8,7 @@ package com.epam.jdi.light.ui.html;
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.init.PageFactory;
@@ -15,6 +16,7 @@ import com.epam.jdi.light.elements.init.UIFactory;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.html.annotations.FillValue;
 import com.epam.jdi.light.ui.html.annotations.VerifyValue;
@@ -22,6 +24,7 @@ import com.epam.jdi.light.ui.html.base.*;
 import com.epam.jdi.light.ui.html.common.Button;
 import com.epam.jdi.light.ui.html.common.TextArea;
 import com.epam.jdi.light.ui.html.complex.*;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 
@@ -36,6 +39,7 @@ import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
 import static com.epam.jdi.light.settings.WebSettings.initialized;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.map.MapArray.map;
@@ -51,11 +55,11 @@ public class HtmlSettings {
                 $("HtmlList", iRule(f -> f.getType() == HtmlList.class || isInterface(f,Menu.class)
                     || isList(f, WebElement.class), info -> new HtmlList())),
                 $("Combobox", iRule(f -> isInterface(f, DataList.class), info -> new HtmlCombobox())),
-                $("Checklist", iRule(f -> isInterface(f, Checklist.class), info -> new HtmlChecklist())),
-                $("RadioButtons", iRule(f -> isInterface(f, RadioButtons.class), info -> new HtmlRadioGroup())),
-                $("MultiDropdown", iRule(f -> isInterface(f, MultiDropdown.class), info -> new HtmlMultiDropdown())),
+                $("Checklist", iRule(f -> f.getType() == Checklist.class, info -> new HtmlChecklist())),
+                $("RadioButtons", iRule(f -> f.getType() == RadioButtons.class, info -> new HtmlRadioGroup())),
+                $("MultiDropdown", iRule(f -> f.getType() == MultiDropdown.class, info -> new HtmlMultiDropdown())),
                 $("BaseSelector", iRule(f -> isInterface(f, BaseSelector.class), info -> new HtmlSelector())),
-                $("TextArea", iRule(f -> isInterface(f, TextArea.class), info -> new TextAreaElement()))
+                $("TextArea", iRule(f -> f.getType() == TextArea.class, info -> new TextAreaElement()))
             );
             INIT_RULES.removeByKey("WebList");
             INIT_RULES.update("Selector",
@@ -103,6 +107,18 @@ public class HtmlSettings {
                     }
                 }
                 return ((HasValue) element).getValue().trim();
+            };
+            UIList.GET_TITLE_FIELD_NAME = list -> {
+                Field[] fields = list.classType.getFields();
+                Field expectedField = first(fields, f -> f.isAnnotationPresent(Title.class));
+                if (expectedField != null)
+                    return expectedField.getName();
+                List<Field> titles = filter(fields,
+                    f -> f.getType() == com.epam.jdi.light.ui.html.common.Title.class);
+                if (titles.size() == 1)
+                    return titles.get(0).getName();
+                else
+                    throw exception("No title name specified for '%s' class", list.classType.getSimpleName());
             };
         }
     }
