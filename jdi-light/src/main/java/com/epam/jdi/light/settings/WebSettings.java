@@ -32,7 +32,7 @@ import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
-import static com.epam.jdi.tools.StringUtils.splitHythen;
+import static com.epam.jdi.tools.StringUtils.splitHyphen;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
@@ -56,7 +56,7 @@ public class WebSettings {
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<JDIBase, WebElement> SMART_SEARCH = el -> {
-        String locatorName = splitHythen(el.name);
+        String locatorName = splitHyphen(el.name);
         for (String template : SMART_SEARCH_LOCATORS) {
             UIElement ui = $(String.format(template, locatorName)).setName(el.name);
             try {

@@ -1,10 +1,14 @@
 package com.epam.jdi.light.elements.init;
 
+import com.epam.jdi.light.common.JDILocator;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.complex.Selector;
+import com.epam.jdi.light.elements.complex.UIList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
@@ -24,8 +28,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.containsRoot;
-import static com.epam.jdi.light.driver.WebDriverByUtils.trimRoot;
+import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.init.PageFactory.initElement;
@@ -133,16 +136,12 @@ public class InitActions {
         JDIBase jdi = (JDIBase) info.instance;
         By locator = getLocatorFromField(info.field);
         if (locator != null) {
-            if (containsRoot(locator)) {
-                locator = trimRoot(locator);
-                jdi.isRootLocator = true;
-            }
             jdi.setLocator(locator);
         }
         if (info.field.getAnnotation(Root.class) != null)
-            jdi.isRootLocator = true;
+            jdi.locator.isRoot = true;
         if (hasAnnotation(info.field, Frame.class))
-            jdi.setFrame(getFrame(info.field.getAnnotation(Frame.class)));
+            jdi.locator = new JDILocator(getFrame(info.field.getAnnotation(Frame.class)), FRAME, jdi.name);
         info.instance = jdi;
     }
 

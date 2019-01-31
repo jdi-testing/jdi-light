@@ -2,9 +2,7 @@ package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseUIElement;
-import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.ISelector;
-import com.epam.jdi.light.elements.complex.Selector;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +10,6 @@ import java.util.Collection;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 

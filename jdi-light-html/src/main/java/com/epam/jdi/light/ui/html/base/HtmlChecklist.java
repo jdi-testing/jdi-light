@@ -3,7 +3,6 @@ package com.epam.jdi.light.ui.html.base;
 import com.epam.jdi.light.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.ui.html.complex.Checklist;
 import com.epam.jdi.tools.EnumUtils;
@@ -30,7 +29,6 @@ public class HtmlChecklist extends Selector<HtmlElement> implements BaseSelector
     private HtmlElement label(String name) {
         return $(fillByTemplate(label, name), parent).setName("label");
     }
-
 
     public HtmlChecklist() { }
     public HtmlChecklist(WebElement el) { super(el); }

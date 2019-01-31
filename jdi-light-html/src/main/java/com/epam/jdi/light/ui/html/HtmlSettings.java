@@ -7,7 +7,6 @@ package com.epam.jdi.light.ui.html;
 
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.BaseUIElement;
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Form;
@@ -24,7 +23,6 @@ import com.epam.jdi.light.ui.html.base.*;
 import com.epam.jdi.light.ui.html.common.Button;
 import com.epam.jdi.light.ui.html.common.TextArea;
 import com.epam.jdi.light.ui.html.complex.*;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 
@@ -39,7 +37,7 @@ import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
 import static com.epam.jdi.light.settings.WebSettings.initialized;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.map.MapArray.map;
@@ -115,10 +113,9 @@ public class HtmlSettings {
                     return expectedField.getName();
                 List<Field> titles = filter(fields,
                     f -> f.getType() == com.epam.jdi.light.ui.html.common.Title.class);
-                if (titles.size() == 1)
-                    return titles.get(0).getName();
-                else
-                    throw exception("No title name specified for '%s' class", list.classType.getSimpleName());
+                return titles.size() == 1
+                        ? titles.get(0).getName()
+                        : null;
             };
         }
     }

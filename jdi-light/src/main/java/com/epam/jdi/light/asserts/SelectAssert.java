@@ -1,10 +1,8 @@
 package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
-import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.WebList;
 import org.hamcrest.Matcher;
 

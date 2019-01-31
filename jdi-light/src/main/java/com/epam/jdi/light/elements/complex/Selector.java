@@ -108,7 +108,7 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
     }
     @JDIAction("Is '{0}' selected")
     public boolean selected(String value) {
-        return hasLocator() && getLocator().toString().contains("%s")
+        return locator.isTemplate()
             ? new UIElement(get(value)).isSelected()
             : selected().trim().equalsIgnoreCase(value.trim());
     }

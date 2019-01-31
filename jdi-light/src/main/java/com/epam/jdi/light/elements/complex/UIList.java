@@ -16,7 +16,6 @@ import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matcher;
@@ -146,9 +145,9 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     public static JFunc1<UIList, String> GET_TITLE_FIELD_NAME = list -> {
         Field[] fields = list.classType.getFields();
         Field expectedFields = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
-        if (expectedFields == null)
-            throw exception("No title name specified for '%s' class", list.classType.getSimpleName());
-        return expectedFields.getName();
+        return expectedFields != null
+            ? expectedFields.getName()
+            : null;
     };
 
     @JDIAction("Scroll to list elements")

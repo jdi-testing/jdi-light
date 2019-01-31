@@ -15,9 +15,7 @@ import static io.github.com.enums.NavigationNums.nContactForm;
 import static io.github.com.enums.NavigationNums.nHome;
 import static io.github.com.pages.HomePage.githubLink;
 import static io.github.com.pages.HomePage.jdiText;
-import static io.github.com.pages.MetalAndColorsPage.colors;
-import static io.github.com.pages.MetalAndColorsPage.metals;
-import static io.github.com.pages.MetalAndColorsPage.metals2;
+import static io.github.com.pages.MetalAndColorsPage.*;
 import static org.hamcrest.Matchers.containsString;
 
 public class ComplexElementsTests extends TestsInit {

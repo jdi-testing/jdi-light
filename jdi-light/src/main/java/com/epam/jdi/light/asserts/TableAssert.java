@@ -12,11 +12,12 @@ import static com.epam.jdi.light.elements.complex.table.TableMatcher.getMatchLin
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class TableAssert {
+public class TableAssert extends IsAssert {
     protected Table table;
     protected String name;
 
     public TableAssert(Table table) {
+        super(table);
         this.table = table;
         this.name = table.toError();
     }

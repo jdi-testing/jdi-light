@@ -12,7 +12,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static com.epam.jdi.light.ui.html.utils.HtmlUtils.getInt;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;

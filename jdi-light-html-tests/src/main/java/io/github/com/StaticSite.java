@@ -26,9 +26,13 @@ public class StaticSite {
 	public static MetalAndColorsPage metalAndColorsPage;
 	@Url("/contacts.html") @Title("Contact Form")
 	public static ContactFormPage contactFormPage;
-	@Url(value = "/html5/%s", template = "/html5/+*", validate = CONTAINS) public static HtmlElementsPage htmlElementsPage2;
+	@Url(value = "/html5/%s", template = "/html5/+*", validate = CONTAINS)
+	public static HtmlElementsPage htmlElementsPage2;
 	@Url("/html5.html") public static HtmlElementsPage html5Page;
-	@Url("/dates.html") @Title("Dates") public static DatesPage datesPage;
+	@Url("/dates.html") @Title("Dates")
+	public static DatesPage datesPage;
+	@Url("/user-table.html") @Title("User Table")
+	public static UsersPage usersPage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;

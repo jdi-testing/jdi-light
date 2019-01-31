@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.composite;
 
+import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.elements.base.JDIBase;
 
 /**
@@ -9,4 +10,12 @@ import com.epam.jdi.light.elements.base.JDIBase;
 
 public class Section extends JDIBase {
 
+    //region Asserts
+    public IsAssert is() {
+        return new IsAssert(this);
+    }
+    public IsAssert assertThat() {
+        return is();
+    }
+    //endregion
 }

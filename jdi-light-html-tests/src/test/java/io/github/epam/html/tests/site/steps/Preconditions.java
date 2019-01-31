@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.site.steps;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.tools.map.MapArray;
 import io.qameta.allure.Step;
 
 import static io.github.com.StaticSite.homePage;

@@ -2,7 +2,6 @@ package com.google.pages;
 
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.google.custom.JSearch;
 import com.google.custom.Search;

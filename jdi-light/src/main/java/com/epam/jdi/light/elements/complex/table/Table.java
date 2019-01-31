@@ -2,10 +2,11 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.TableAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.pairs.Pair;
 import org.hamcrest.Matcher;
 
@@ -13,32 +14,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.getMatchLines;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 
 public class Table extends BaseTable<Table> implements ISetup, HasValue {
-    public int size() {
-        if (rows.any())
-            return rows.get(0).value.size();
-        return webRow(1).size();
-    }
 
     @JDIAction("Is '{name}' table empty")
     public boolean isEmpty() { return size() == 0; }
     @JDIAction("Is '{name}' table not empty")
     public boolean isNotEmpty() { return size() != 0; }
-    @JDIAction("Get '{name}' table header")
-    public List<String> header() {
-        return header.get();
-    }
 
     // Rows
     @JDIAction("Get row '{0}' for '{name}' table")
     public Line row(int rowNum) {
         return new Line(webRow(rowNum), header());
     }
-// TODO ???
+    @JDIAction("Get row '{0}' for '{name}' table")
+    public Line row(String rowName) {
+        return new Line(webRow(rowName), header());
+    }
+    public Line row(Enum rowName) {
+        return row(getEnumValue(rowName));
+    }
+
     @JDIAction("Get first '{name}' table row that match criteria")
     public Line row(TableMatcher... matchers) {
         WebList lines = getMatchLines(this, matchers);
@@ -49,7 +49,6 @@ public class Table extends BaseTable<Table> implements ISetup, HasValue {
             result.add(lines.get(i).getText());
         return new Line(result);
     }
-// TODO ???
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<Line> rows(TableMatcher... matchers) {
         List<String> lines = getMatchLines(this, matchers).values();
@@ -81,6 +80,7 @@ public class Table extends BaseTable<Table> implements ISetup, HasValue {
         return filter(rows(), line ->
                 all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header())))));
     }
+
     @JDIAction("Get '{name}' table row that match criteria in column '{1}'")
     public Line row(Matcher<String> matcher, Column column) {
         return first(rows(),
@@ -94,15 +94,18 @@ public class Table extends BaseTable<Table> implements ISetup, HasValue {
     // Columns
     @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(int colNum) {
-        return new Line(webColumn(colNum), header());
+        return new Line(webColumn(colNum), rowHeader());
     }
     @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(String colName) {
-        return new Line(webColumn(colName), header());
+        return new Line(webColumn(colName), rowHeader());
+    }
+    public Line column(Enum colName) {
+        return column(getEnumValue(colName));
     }
     @JDIAction("Get all '{name}' columns")
     public List<Line> columns() {
-        return map(getColumns(), row -> new Line(row.value, header()));
+        return map(getColumns(), row -> new Line(row.value, rowHeader()));
     }
     // Cells
     @JDIAction("Get cell({0}, {1}) from '{name}' table")
@@ -111,20 +114,30 @@ public class Table extends BaseTable<Table> implements ISetup, HasValue {
     }
     @JDIAction("Get cell({0}, {1}) from '{name}' table")
     public String cell(String colName, int rowNum) {
-        return webCell(getColIndexByName(colName), rowNum).getText();
+        return cell(getColIndexByName(colName), rowNum);
     }
-
+    @JDIAction("Get cell({0}, {1}) from '{name}' table")
+    public String cell(int colNum, String rowName) {
+        return cell(colNum, getRowIndexByName(rowName));
+    }
+    @JDIAction("Get cell({0}, {1}) from '{name}' table")
+    public String cell(String colName, String rowName) {
+        return cell(getColIndexByName(colName), getRowIndexByName(rowName));
+    }
+    public static JFunc1<String, String> TRIM_VALUE =
+            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "\\\\n");
+    public static JFunc1<String, String> TRIM_PREVIEW =
+            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "");
     @JDIAction("Preview '{name}' table")
     public String preview() {
-        return get().getText();
+        return TRIM_PREVIEW.execute(get().getText());
     }
-
     @JDIAction("Get '{name}' table value")
     public String getValue() {
         getTable();
         String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
         for (int i = 1; i <= count.get(); i++)
-            value += "||" + i + "||" + print(row(i), "|") + "||" + LINE_BREAK;
+            value += "||" + i + "||" + print(map(row(i), TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         return value;
     }
 

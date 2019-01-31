@@ -11,8 +11,6 @@ import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.light.settings.TimeoutSettings;
-import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.Timer;

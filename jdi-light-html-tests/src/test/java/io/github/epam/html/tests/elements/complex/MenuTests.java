@@ -6,9 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.hasItem;
 
 public class MenuTests extends TestsInit {
 

@@ -12,7 +12,7 @@ import java.util.List;
 
 import static com.google.GoogleSite.homePage;
 import static com.google.GoogleSite.searchPage;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
 
 /**
  * Created by Roman_Iovlev on 3/2/2018.

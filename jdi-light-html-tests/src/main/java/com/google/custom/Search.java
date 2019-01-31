@@ -1,7 +1,6 @@
 package com.google.custom;
 
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import com.epam.jdi.light.ui.html.base.HtmlList;
 import org.openqa.selenium.By;

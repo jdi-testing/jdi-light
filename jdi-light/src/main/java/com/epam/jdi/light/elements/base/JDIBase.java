@@ -1,12 +1,11 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.LocatorType;
+import com.epam.jdi.light.common.JDILocator;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
@@ -15,14 +14,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.LocatorType.DEFAULT;
-import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.common.ScreenshotMaker.takeScreen;
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.driver.WebDriverByUtils.correctXPaths;
+import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
@@ -31,12 +29,11 @@ import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -46,12 +43,18 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class JDIBase extends DriverBase implements BaseElement, INamed {
     public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
-    protected By byLocator;
+    public JDILocator locator = new JDILocator();
     public CacheValue<WebElement> webElement = new CacheValue<>();
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
-    protected LocatorType locatorType = DEFAULT;
-    public JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
-    public boolean isRootLocator = false;
+    protected JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
+    public <T extends JDIBase> T noValidation() {
+        return setSearchRule(Objects::nonNull);
+    }
+    public <T extends JDIBase> T setSearchRule(JFunc1<WebElement, Boolean> rule) {
+        searchRule = rule;
+        return (T) this;
+    }
+
     public static Timer timer () { return new Timer(TIMEOUT.get()*1000); }
     public UIElement setWebElement(WebElement el) {
         webElement.setForce(el);
@@ -60,31 +63,16 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public void setWebElements(List<WebElement> els) {
         webElements.setForce(els);
     }
+
     public <T extends JDIBase> T setLocator(By locator) {
-        locatorType = DEFAULT;
-        byLocator = locator;
-        if (containsRoot(locator)) {
-            byLocator = trimRoot(locator);
-            isRootLocator = true;
-        }
+        this.locator = new JDILocator(locator, name);
         return (T) this;
     }
     public By getLocator(Object... args) {
-        if (locatorType == FRAME) return null;
-        if (isEmpty(args)) return byLocator;
-        return args.length == 1
-                ? fillByTemplate(byLocator, args)
-                : fillByMsgTemplate(byLocator, args);
+        if (locator.isFrame()) return null;
+        return locator.getLocator(args);
     }
-    public boolean hasLocator() {
-        return byLocator != null && locatorType == DEFAULT;
-    }
-    public By getFrame() { return locatorType == FRAME ? byLocator : null; }
-
-    public void setFrame(By locator) {
-        locatorType = FRAME;
-        byLocator = locator;
-    }
+    public By getFrame() { return locator.getFrame(); }
 
     public static final String FAILED_TO_FIND_ELEMENT_MESSAGE
             = "Can't find Element '%s' during %s seconds";
@@ -101,7 +89,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         // TODO SAFE GET ELEMENT AND STALE ELEMENT PROCESS
         if (webElement.hasValue())
             return webElement.get();
-        if (!hasLocator()) {
+        if (locator.isEmpty()) {
             try {
                 WebElement element = SMART_SEARCH.execute(this);
                 if (element != null)
@@ -111,8 +99,8 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
                 throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
             }
         }
-        if (byLocator.toString().contains("%s") && args.length == 0)
-            throw exception("Can't get element with template locator '%s' without arguments", byLocator);
+        if (locator.isTemplate() && args.length == 0)
+            throw exception("Can't get element with template locator '%s' without arguments", getLocator());
         List<WebElement> result = getAll(args);
         if (result.size() == 0)
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
@@ -134,13 +122,13 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         //TODO rethink SMART SEARCH
         if (webElements.hasValue())
             return webElements.get();
-        if (!hasLocator())
+        if (locator.isEmpty())
             return asList(SMART_SEARCH.execute(this));
-        SearchContext searchContext = isRootLocator
+        SearchContext searchContext = locator.isRoot
                 ? getDefaultContext()
                 : getSearchContext(parent);
         List<WebElement> els = uiSearch(searchContext, correctLocator(getLocator(args)));
-        return filter(els, el -> searchRule.invoke(el));
+        return filter(els, el -> searchRule.execute(el));
     }
 
     public WebList allUI(Object... args) {
@@ -158,7 +146,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         By frame = bElement.getFrame();
         SearchContext searchContext = frame != null
             ? getFrameContext(frame)
-            : getContext(parent, bElement.isRootLocator);
+            : getContext(parent, bElement.locator.isRoot);
         //TODO rethink SMART SEARCH
         return locator != null
             ? uiSearch(searchContext, correctLocator(locator)).get(0)
@@ -188,30 +176,13 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         if (!isClass(parent.getClass(), JDIBase.class))
             return "";
         JDIBase jdiBase = (JDIBase)parent;
-        return jdiBase.getLocator() == null ? "" : jdiBase.printLocator();
+        return jdiBase.getLocator() == null ? "" : jdiBase.locator.toString();
     }
     private String context;
     public String printFullLocator() {
         return parent == null || isBlank(printContext())
-            ? printLocator()
-            : printContext() + ">" + printLocator();
-    }
-    private String locator;
-    private String printLocator() {
-        try {
-            if (!hasDomain() && locatorType == DEFAULT)
-                return "No Locators";
-            String isFrame = "";
-            By locator = getLocator();
-            if (locatorType == FRAME) {
-                isFrame = "Frame: ";
-                locator = getFrame();
-            }
-            String shortLocator = locator != null
-                    ? shortBy(locator)
-                    : print(LinqUtils.select(SMART_SEARCH_LOCATORS, l -> format(l, splitHythen(name))), " or ");
-            return isFrame + shortLocator;
-        } catch (Exception ex) { throw exception("Can't print locator: " + ex.getMessage()); }
+            ? locator.toString()
+            : printContext() + ">" + locator.toString();
     }
 
     @Override
@@ -226,7 +197,6 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         } catch (Exception ex) { throw exception("Can't print element for error: " + ex.getMessage()); }
     }
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
-        if (element.locator == null) element.locator = element.printLocator();
         if (element.context == null) element.context = element.printFullLocator();
         return Switch(logger.getLogLevel()).get(
                 Case(l -> l == STEP,
@@ -243,7 +213,13 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     }
 
     public Select select() {
-        return new Select(get());
+        WebElement select = get();
+        if (!select.getTagName().equals("select")) {
+            List<WebElement> els = select.findElements(By.tagName("select"));
+            if (els.size() > 0)
+            select = els.get(0);
+        }
+        return new Select(select);
     }
     @JDIAction(level = DEBUG)
     public Point getLocation() {
@@ -297,7 +273,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         try {
             if (webElement.hasValue())
                 return webElement.get().isDisplayed();
-            if (byLocator == null) {
+            if (locator.isEmpty()) {
                 WebElement element = SMART_SEARCH.execute(this);
                 return element != null && element.isDisplayed();
             }
@@ -401,4 +377,5 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         return get().getText();
     }
     //endregion
+
 }

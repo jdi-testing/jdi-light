@@ -2,7 +2,6 @@ package com.epam.jdi.light.ui.html.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.complex.Combobox;
-import com.epam.jdi.light.ui.html.complex.DataList;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,10 +11,8 @@ import static com.epam.jdi.tools.LinqUtils.ifSelect;
 
 public class HtmlCombobox extends HtmlElement implements Combobox {
     HtmlList dataList() {
-        HtmlList list = $$("#"+getAttribute("list")+" option");
-        list.searchRule = Objects::nonNull;
-        list.setName("list");
-        return list;
+        return $$("#"+getAttribute("list")+" option")
+            .noValidation().setName("list");
     }
     List<String> list() {
         return dataList().values();

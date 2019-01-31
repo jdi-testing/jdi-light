@@ -1,9 +1,6 @@
 package org.mytests.tests.example;
 
 import org.mytests.tests.SimpleTestsInit;
-import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertTrue;
 
 public class RetryTests extends SimpleTestsInit {
 /*

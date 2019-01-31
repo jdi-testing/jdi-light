@@ -1,6 +1,5 @@
 package org.mytests.tests;
 
-import com.epam.jdi.light.elements.complex.WebList;
 import org.mytests.uiobjects.example.site.SiteJdi;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;

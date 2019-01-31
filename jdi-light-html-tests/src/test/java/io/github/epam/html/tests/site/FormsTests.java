@@ -13,7 +13,8 @@ import static io.github.com.pages.ContactFormPage.main;
 import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.userIcon;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
 
 public class FormsTests extends TestsInit {
 
