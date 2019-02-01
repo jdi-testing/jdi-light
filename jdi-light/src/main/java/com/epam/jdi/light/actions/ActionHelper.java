@@ -232,6 +232,9 @@ public class ActionHelper {
     }
     private static String printArray(Object array) {
         try {
+            return Arrays.toString((Enum[])array);
+        } catch (Exception ex) {}
+        try {
             return Arrays.toString((int[])array);
         } catch (Exception ex) {}
         try {

@@ -26,14 +26,14 @@ public class ElementsGoogleTests extends GoogleInit {
 
     @Test
     public void printResultListTest() {
-        for (SearchResult job : searchPage.jobsE) {
+        for (SearchResult job : searchPage.search) {
             System.out.println(job.print());
         }
     }
 
     @Test
     public void validateEntitiesTests() {
-        UIList<SearchResult, Result> jobs = searchPage.jobsE;
+        UIList<SearchResult, Result> jobs = searchPage.search;
 
         //TODO
         /*jobs.assertThat(not(empty()));
@@ -46,11 +46,11 @@ public class ElementsGoogleTests extends GoogleInit {
     }
     @Test
     public void validateEntities2Tests() {
-        UIList<SearchResult, ?> jobs = searchPage.jobs2;
+        UIList<SearchResult, ?> jobs = searchPage.search2;
         System.out.println(jobs.get(0).name.getText());
         System.out.println(jobs.get(1).name.getText());
         System.out.println(jobs.get(2).name.getText());
-        int size = searchPage.jobs2.size();
+        int size = searchPage.search2.size();
 
         try {
             jobs.is().empty();
@@ -62,10 +62,10 @@ public class ElementsGoogleTests extends GoogleInit {
     }
     @Test
     public void validateFilterTests() {
-        UIList<SearchResult, Result> jobs = searchPage.jobsE;
+        UIList<SearchResult, Result> jobs = searchPage.search;
 
         /*
-        String expetedValue = searchPage.jobsE.getValue();
+        String expetedValue = searchPage.search.getValue();
         jobs.assertThat().value(expetedValue);
         jobs.assertThat().any(e -> e.name.toLowerCase().contains("jdi"));
         jobs.assertThat().each(e -> e.name.toLowerCase().contains("jdi")
@@ -77,7 +77,7 @@ public class ElementsGoogleTests extends GoogleInit {
     }
 
     private static List<Result> jobs() {
-        return searchPage.jobsE.asData();
+        return searchPage.search.asData();
     }
 
     private static Result expectedResult() {

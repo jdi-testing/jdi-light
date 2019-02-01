@@ -10,9 +10,11 @@ import java.util.List;
 
 public interface Menu extends IList<HtmlElement>, JDIElement, BaseElement {
     void select(String... value);
-    <TEnum extends Enum> void select(TEnum... value);
     void select(String value);
+    <TEnum extends Enum> void select(TEnum... value);
     <TEnum extends Enum> void select(TEnum value);
+    void select(int... value);
+    void select(int value);
     String selected();
     List<String> values();
 

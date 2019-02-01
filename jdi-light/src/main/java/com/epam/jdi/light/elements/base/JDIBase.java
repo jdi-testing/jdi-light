@@ -124,9 +124,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
             return webElements.get();
         if (locator.isEmpty())
             return asList(SMART_SEARCH.execute(this));
-        SearchContext searchContext = locator.isRoot
-                ? getDefaultContext()
-                : getSearchContext(parent);
+        SearchContext searchContext = getContext(parent, locator);
         List<WebElement> els = uiSearch(searchContext, correctLocator(getLocator(args)));
         return filter(els, el -> searchRule.execute(el));
     }
@@ -136,8 +134,6 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     }
 
     private SearchContext getSearchContext(Object element) {
-        if (isRoot(element))
-            return getDefaultContext();
         JDIBase bElement = (JDIBase) element;
         if (bElement.webElement.hasValue())
             return bElement.webElement.get();
@@ -146,7 +142,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         By frame = bElement.getFrame();
         SearchContext searchContext = frame != null
             ? getFrameContext(frame)
-            : getContext(parent, bElement.locator.isRoot);
+            : getContext(parent, bElement.locator);
         //TODO rethink SMART SEARCH
         return locator != null
             ? uiSearch(searchContext, correctLocator(locator)).get(0)
@@ -156,8 +152,8 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         return parent == null || isClass(parent.getClass(), WebPage.class)
                 || !isClass(parent.getClass(), JDIBase.class);
     }
-    private SearchContext getContext(Object parent, boolean isRoot) {
-        return isRoot || isRoot(parent)
+    private SearchContext getContext(Object parent, JDILocator locator) {
+        return locator.isRoot || isRoot(parent)
                 ? getDefaultContext()
                 : getSearchContext(parent);
     }
@@ -193,7 +189,13 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     }
     public String toError() {
         try {
-            return msgFormat(PRINT_ELEMENT_ERROR, this);
+            return Switch(logger.getLogLevel()).get(
+                Case(l -> l == INFO,
+                        l -> msgFormat(PRINT_ERROR_INFO, this)),
+                Case(l -> l == DEBUG,
+                        l -> msgFormat(PRINT_ERROR_DEBUG, this)),
+                Default(l -> msgFormat(PRINT_ERROR_STEP, this))
+            );
         } catch (Exception ex) { throw exception("Can't print element for error: " + ex.getMessage()); }
     }
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
@@ -204,7 +206,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
                 Case(l -> l == INFO,
                     l -> msgFormat(PRINT_ELEMENT_INFO, element)),
                 Case(l -> l == ERROR,
-                    l -> msgFormat(PRINT_ELEMENT_ERROR, element)),
+                    l -> msgFormat(PRINT_ERROR_STEP, element)),
                 Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
         );
     };

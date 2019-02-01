@@ -11,7 +11,9 @@ public class OutputTemplates {
     public static String PRINT_ELEMENT_STEP = "{varName} ({context})";
     public static String PRINT_ELEMENT_INFO = "{varName} ({context})";
     public static String PRINT_ELEMENT_DEBUG = "{varName} ({context})";
-    public static String PRINT_ELEMENT_ERROR = "{varName} ({context})";
+    public static String PRINT_ERROR_STEP = "{varName} ({context})";
+    public static String PRINT_ERROR_INFO = "{name}";
+    public static String PRINT_ERROR_DEBUG = "{name}";
 
     public static String STEP_TEMPLATE = "{action}";
     public static String DEFAULT_TEMPLATE = "{action} ({element})";

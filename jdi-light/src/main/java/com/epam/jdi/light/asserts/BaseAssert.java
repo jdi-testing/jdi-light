@@ -11,7 +11,7 @@ public class BaseAssert {
     public static JFunc1<JDIBase, String> PRINT_ASSERT = JDIBase::toString;
 
     public BaseAssert(BaseElement element) {
-        this(get(element).name, get(element).toError());
+        this(get(element).getName(), get(element).toError());
         this.element = (JDIBase) element;
     }
     public BaseAssert(String name, String failElement) {

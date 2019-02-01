@@ -7,11 +7,11 @@
     <artifactId>jdi-light</artifactId>
     <name>JDI Light</name>
     <packaging>jar</packaging>
-    <version>1.0.35</version>
+    <version>1.0.36</version>
     <groupId>com.epam.jdi</groupId>
 
     <!--parent>
-        <version>1.0.35</version>
+        <version>1.0.36</version>
         <artifactId>jdi-2</artifactId>
     </parent-->
 

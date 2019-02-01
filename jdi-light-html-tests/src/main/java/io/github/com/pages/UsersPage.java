@@ -9,7 +9,7 @@ import io.github.com.entities.MarvelUserInfo;
 
 public class UsersPage extends WebPage {
 	@UI("#user-table") public static DataTable<MarvelUser, MarvelUserInfo> users;
-	@JTable(root = "#user-table", rowHeader = "User") public static
-	DataTable<MarvelUser, MarvelUserInfo> usersSetup;
+	@JTable(root = "#user-table", rowHeader = "User")
+	public static DataTable<MarvelUser, MarvelUserInfo> usersSetup;
 
 }

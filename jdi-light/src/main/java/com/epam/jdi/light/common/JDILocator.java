@@ -18,9 +18,11 @@ public class JDILocator {
     private By byLocator;
     public boolean isRoot = false;
     private String name;
+    private Object[] args = new Object[]{};
 
     public By getLocator() { return byLocator; }
     public By getLocator(Object... args) {
+        this.args = args;
         if (args.length == 0) return byLocator;
         return args.length == 1
                 ? fillByTemplate(byLocator, args)
@@ -73,7 +75,7 @@ public class JDILocator {
             if (!hasDomain() && locatorType == DEFAULT)
                 return "No Locators";
             String isFrame = "";
-            By locator = getLocator();
+            By locator = getLocator(args);
             if (locatorType == FRAME) {
                 isFrame = "Frame: ";
                 locator = getFrame();
