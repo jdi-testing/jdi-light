@@ -27,7 +27,7 @@ public class MenuTests extends TestsInit {
 
     @Test
     public void customMenuTest() {
-        menu.select(ContactForm);
+        menu.select(ContactForm.value);
         assertEquals(menu.isSelected(), ContactForm.value);
         menu.select(Service, Dates);
         assertEquals(menu.isSelected(), Service.value);

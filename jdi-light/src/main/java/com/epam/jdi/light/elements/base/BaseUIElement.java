@@ -22,7 +22,8 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public abstract class BaseUIElement<T extends BaseUIElement> extends JDIBase implements WebElement, BaseElement, SetValue {
+public abstract class BaseUIElement<T extends BaseUIElement>
+        extends JDIBase implements WebElement, BaseElement, SetValue {
     public BaseUIElement() { }
     public BaseUIElement(WebElement el) { webElement.setForce(el); }
     public BaseUIElement(List<WebElement> els) { webElements.setForce(els); }
@@ -81,6 +82,8 @@ public abstract class BaseUIElement<T extends BaseUIElement> extends JDIBase imp
     public List<T> finds(By by) {
         return map(get().findElements(by), this::newElement);
     }
+    public T firstChild() { return find("*"); }
+    public List<T> childs() { return finds("*"); }
     /**
      * If not selected - click to select
      */

@@ -21,11 +21,11 @@ public class HtmlRadioGroup extends Selector implements BaseSelectorAssert, Radi
     By radioButton = cssSelector("input[type=radio][id='%s']");
     By label = By.xpath(".//label[text()='%s']");
     private String getId(String name) { return label(name).getAttribute("for"); }
-    public HtmlElement get(String name) {
-        return $(fillByTemplate(radioButton, getId(name)), parent).setName("radioButton");
+    public HtmlElement get(String value) {
+        return $(fillByTemplate(radioButton, getId(value)), parent).setName("radioButton");
     }
-    private HtmlElement label(String name) {
-        return $(fillByTemplate(label, name), parent).setName("label");
+    private HtmlElement label(String value) {
+        return $(fillByTemplate(label, value), parent).setName("label");
     }
 
     public HtmlRadioGroup() { }

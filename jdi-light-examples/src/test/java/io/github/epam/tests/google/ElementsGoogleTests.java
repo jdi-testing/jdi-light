@@ -60,6 +60,7 @@ public class ElementsGoogleTests extends GoogleInit {
         jobs.assertThat().size(equalTo(size));
 
     }
+
     @Test
     public void validateFilterTests() {
         UIList<SearchResult, Result> jobs = searchPage.search;

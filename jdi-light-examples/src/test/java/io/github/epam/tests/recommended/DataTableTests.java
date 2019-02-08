@@ -7,11 +7,10 @@ import io.github.epam.entities.UserInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static com.epam.jdi.light.elements.base.WindowsManager.validateAlert;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.PerformancePage.*;
+import static io.github.com.pages.PerformancePage.usersData;
+import static io.github.com.pages.PerformancePage.usersDataSetup;
 import static io.github.epam.test.data.TableData.GRADY_BROCK;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.util.Arrays.asList;

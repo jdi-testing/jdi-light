@@ -27,6 +27,18 @@ public class MenuTests extends TestsInit {
         leftMenu.select(MetalsColors);
         metalAndColorsPage.checkOpened();
     }
+
+    @Test
+    public void selectTestList() {
+        leftMenuList.select("Contact form");
+        contactFormPage.checkOpened();
+    }
+
+    @Test
+    public void selectEnumTestList() {
+        leftMenuList.select(MetalsColors);
+        metalAndColorsPage.checkOpened();
+    }
     @Test
     public void selectListTest() {
         leftMenu.select("Service", "Dates");

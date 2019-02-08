@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
-import com.epam.jdi.light.elements.init.PageFactory;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.JFunc;

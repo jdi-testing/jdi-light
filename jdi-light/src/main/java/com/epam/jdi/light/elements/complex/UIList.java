@@ -55,16 +55,19 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     }
     @JDIAction(level = DEBUG)
     public List<T> elements() {
-        if (values.hasValue() && isActual(values.get().get(0)))
+        if (values.hasValue() &&
+            (values.get().size() == 0 || isActual(values.get().get(0))))
             return values.get();
         if (elements.hasValue())
             return elements.get().values();
         List<WebElement> els = getAll();
-        if (els.size() > 0)
+        if (els.size() > 0) {
             values.set(LinqUtils.select(
                     Timer.getByCondition(() -> els, l -> l.size() > 0), this::initElement));
-        else
-            System.out.println("test");
+        }
+        else {
+            values.set(new ArrayList<>());
+        }
         return values.get();
     }
     @JDIAction(level = DEBUG)
@@ -73,7 +76,8 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         values.clear();
     }
     public MapArray<String, T> getMap() {
-        if (elements.hasValue() && isActual(elements.get().values().get(0)))
+        if (elements.hasValue() &&
+            (elements.get().size() == 0 || isActual(elements.get().values().get(0))))
             return elements.get();
         List<WebElement> els = getAll();
         return elements.set(values.hasValue()
@@ -138,8 +142,14 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     }
 
     @JDIAction(level = DEBUG)
-    public T get(String name) {
-        return getMap().get(name);
+    public T get(String value) {
+        MapArray<String, T> elements = getMap();
+        if (getMap().isEmpty())
+            throw exception("Can't get '%s' element. List is empty", value);
+        T result = elements.get(value);
+        if (result == null)
+            throw exception("Can't find '%s' element in list %s", value, elements.keys());
+        return result;
     }
 
     public static JFunc1<UIList, String> GET_TITLE_FIELD_NAME = list -> {
@@ -171,10 +181,11 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     }
 
     public void is(Matcher<? super List<E>> condition) {
+        clear();
         MatcherAssert.assertThat(asData(), condition);
     }
     public UIListAssert<T, E> is() {
-        return new UIListAssert<>(elements(), asData(), toError());
+        return new UIListAssert<>(this, () -> { clear(); return asData(); }, toError(), failElement);
     }
     public UIListAssert<T, E> assertThat() {
         return is();

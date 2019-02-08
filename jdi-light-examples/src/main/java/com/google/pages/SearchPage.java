@@ -11,6 +11,7 @@ import java.util.List;
 public class SearchPage extends WebPage {
     @Css(".srg>.g") public UIList<SearchResult, Result> search;
     @Css(".srg>.g") public UIList<SearchResult, ?> search2;
+    @Css(".srg>.g") public static UIList<SearchResult, ?> searchS;
     @Css(".srg>.g") public static List<SearchResult> search3;
 
 }

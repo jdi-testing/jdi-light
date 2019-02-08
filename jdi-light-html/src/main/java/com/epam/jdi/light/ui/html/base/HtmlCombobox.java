@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.complex.Combobox;
 
 import java.util.List;
-import java.util.Objects;
 
 import static com.epam.jdi.light.ui.html.HtmlFactory.$$;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
