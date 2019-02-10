@@ -27,6 +27,9 @@ public class JDIPerformanceTests extends SimpleTestsInit {
         usersTable.assertThat().hasRowWithValues(
             containsValue("Meyer", inColumn("Name")),
             containsValue("co.uk", inColumn("Email")));
+        usersTable.assertThat().hasRowWithValues(
+                containsValue("Meyer", inColumn("Name")),
+                containsValue("co.uk", inColumn("Email")));
 
         StopWatch timer = StopWatch.createStarted();
         Line row = usersTable.row(
