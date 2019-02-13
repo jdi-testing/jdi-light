@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.tools.func.JFunc2;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -8,7 +9,11 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 
 public class TableMatcher {
-    public static String GET_ROW = "./%s/td";
+    public static JFunc2<Table, TableMatcher[], WebList> TABLE_MATCHER = (table, matchers) -> {
+        String locator = format("./%s/td", print(map(matchers, m ->
+                m.getLocator(table) + "/.."),""));
+        return $$(locator, table);
+    };
     public static TableMatcher hasValue(String value, Column column) {
         return new TableMatcher("/td[%s][text()='"+value+"']", column, "has '"+value +"'");
     }
@@ -28,11 +33,5 @@ public class TableMatcher {
     @Override
     public String toString() {
         return name;
-    }
-
-    public static WebList getMatchLines(Table table, TableMatcher... matchers) {
-        String locator = format(GET_ROW, print(map(matchers, m ->
-                m.getLocator(table) + "/.."),""));
-        return $$(locator, table);
     }
 }

@@ -11,7 +11,6 @@ import com.epam.jdi.tools.func.JAction4;
 import com.epam.jdi.tools.func.JFunc3;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -25,8 +24,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.getFields;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
@@ -102,7 +100,7 @@ public class Form<T> extends Section {
                 return LinqUtils.where(getFields(obj, SetValue.class),
                         field -> !hasAnnotation(field, Mandatory.class));
             default:
-                return getFields(obj, SetValue.class, WebElement.class);
+                return getFieldsInterfaceOf(obj, SetValue.class);
         }
     }
 

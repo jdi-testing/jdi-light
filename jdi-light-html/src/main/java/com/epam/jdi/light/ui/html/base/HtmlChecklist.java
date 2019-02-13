@@ -21,10 +21,10 @@ import static org.openqa.selenium.By.cssSelector;
 
 public class HtmlChecklist extends Selector<HtmlElement> implements BaseSelectorAssert, Checklist {
     By checkbox = cssSelector("input[type=checkbox][id='%s']");
-    By label = By.xpath(".//label[text()='%s']");
+    By label = LABEL_LOCATOR;
     private String getId(String name) { return label(name).getAttribute("for"); }
-    public HtmlElement get(String value) { return
-            $(fillByTemplate(checkbox, getId(value)), parent).setName("checkboxes");
+    public HtmlElement get(String value) {
+        return $(fillByTemplate(checkbox, getId(value)), parent).setName("checkboxes");
     }
     private HtmlElement label(String value) {
         return $(fillByTemplate(label, value), parent).setName("label");

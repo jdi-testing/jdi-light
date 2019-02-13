@@ -48,6 +48,13 @@ public class HtmlSettings {
     public static synchronized void init() {
         if (!initialized) {
             WebSettings.init();
+            INIT_RULES.removeByKey("WebList");
+            INIT_RULES.update("Selector",
+                    iRule(f -> isInterface(f, BaseSelector.class), info -> new HtmlSelector()));
+            INIT_RULES.update("UIElement",
+                    iRule(f -> isInterface(f, BaseElement.class) || isInterface(f, WebElement.class),
+                            info -> new HtmlElement()));
+
             MapArray<String, InitRule> newRules = map(
                 $("WebList", iRule(f -> f.getType() == WebList.class, info -> new WebList())),
                 $("HtmlList", iRule(f -> f.getType() == HtmlList.class || isInterface(f,Menu.class)
@@ -59,12 +66,6 @@ public class HtmlSettings {
                 $("BaseSelector", iRule(f -> isInterface(f, BaseSelector.class), info -> new HtmlSelector())),
                 $("TextArea", iRule(f -> f.getType() == TextArea.class, info -> new TextAreaElement()))
             );
-            INIT_RULES.removeByKey("WebList");
-            INIT_RULES.update("Selector",
-                iRule(f -> isInterface(f, BaseSelector.class), info -> new HtmlSelector()));
-            INIT_RULES.update("UIElement",
-                iRule(f -> isInterface(f, BaseElement.class) || isInterface(f, WebElement.class),
-                    info -> new HtmlElement()));
             INIT_RULES = newRules.merge(INIT_RULES);
             SETUP_RULES.update("PageObject",
                 sRule(info -> isPageObject(info.instance.getClass()),

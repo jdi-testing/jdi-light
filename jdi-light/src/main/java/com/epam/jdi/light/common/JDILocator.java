@@ -72,10 +72,10 @@ public class JDILocator {
     @Override
     public String toString() {
         try {
-            if (!hasDomain() && locatorType == DEFAULT)
-                return "No Locators";
-            String isFrame = "";
             By locator = getLocator(args);
+            if (locator == null || !hasDomain() && locatorType == DEFAULT)
+                return "";
+            String isFrame = "";
             if (locatorType == FRAME) {
                 isFrame = "Frame: ";
                 locator = getFrame();

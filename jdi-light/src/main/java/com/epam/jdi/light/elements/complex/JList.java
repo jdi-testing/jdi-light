@@ -28,6 +28,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class JList<T extends BaseUIElement> extends JDIBase
         implements IList<T>, SetValue, ISetup, ISelector {
@@ -231,8 +232,7 @@ public class JList<T extends BaseUIElement> extends JDIBase
     }
     private boolean isActual() {
         try {
-            elements.get().get(0).getTagName();
-            return true;
+            return elements.get().size() > 0 && isNotBlank(elements.get().get(0).getTagName());
         } catch (Exception ex) { return false; }
     }
     private List<T> toJList(List<WebElement> webElements) {

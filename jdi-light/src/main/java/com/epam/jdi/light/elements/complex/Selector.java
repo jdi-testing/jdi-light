@@ -5,6 +5,7 @@ import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.UIElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import static java.util.Arrays.asList;
 
 public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
     implements BaseSelectorAssert, ISelector {
+    public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
 
     public Selector() { }
     public Selector(WebElement el) { super(el); }

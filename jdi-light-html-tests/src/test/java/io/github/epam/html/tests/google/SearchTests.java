@@ -19,7 +19,7 @@ public class SearchTests extends GoogleInit {
 
     @Test
     public void printResultListTest() {
-        suggestion.typeAndSelect("jd", "jdi");
+        suggestion.typeAndSelect("jdi", "jdi");
         assertTrue(jobs3.get(2).name.getText().toLowerCase().contains("jdi")
             || jobs3.get(2).description.getText().toLowerCase().contains("jdi"));
     }

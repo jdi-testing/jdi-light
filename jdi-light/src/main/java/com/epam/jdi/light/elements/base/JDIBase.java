@@ -198,7 +198,17 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
             );
         } catch (Exception ex) { throw exception("Can't print element for error: " + ex.getMessage()); }
     }
+    private static String printWebElement(WebElement element) {
+        String asString = element.toString();
+        String result = asString.startsWith("WebElement:")
+                ? "" : "WebElement:";
+        if (asString.contains(")]"))
+            return result + element.toString().split("\\)]")[1].replaceAll("]", "");
+        return asString;
+    }
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
+        if (element.webElement.hasValue())
+            return printWebElement(element.webElement.get());
         if (element.context == null) element.context = element.printFullLocator();
         return Switch(logger.getLogLevel()).get(
                 Case(l -> l == STEP,

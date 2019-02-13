@@ -15,5 +15,6 @@ public class Defaults {
         c.acceptConditions = "true";
         c.gender = "Female";
         c.religion = "Other";
+        //c.weather = "Rain,Sun";
     });
 }

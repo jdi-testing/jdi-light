@@ -12,7 +12,7 @@ import org.hamcrest.Matcher;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.getMatchLines;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -40,7 +40,7 @@ public class Table extends BaseTable<Table> implements ISetup, HasValue {
 
     @JDIAction("Get first '{name}' table row that match criteria")
     public Line row(TableMatcher... matchers) {
-        WebList lines = getMatchLines(this, matchers);
+        WebList lines = TABLE_MATCHER.execute(this, matchers);
         if (lines == null || lines.size() == 0)
             return null;
         List<String> result = new ArrayList<>();
@@ -50,7 +50,7 @@ public class Table extends BaseTable<Table> implements ISetup, HasValue {
     }
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<Line> rows(TableMatcher... matchers) {
-        List<String> lines = getMatchLines(this, matchers).values();
+        List<String> lines = TABLE_MATCHER.execute(this, matchers).values();
         if (lines == null || lines.size() == 0)
             return null;
         List<Line> listOfLines = new ArrayList<>();

@@ -8,7 +8,7 @@ import org.hamcrest.Matcher;
 import java.util.Collection;
 import java.util.List;
 
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.getMatchLines;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -56,13 +56,13 @@ public class TableAssert extends IsAssert {
     }
     @JDIAction("Assert that '{name}' has at least '{0}' rows that {0}")
     public TableAssert rowsWithValues(int count, TableMatcher... matchers) {
-        assertThat(getMatchLines(table, matchers).size(),
+        assertThat(TABLE_MATCHER.execute(table, matchers).size(),
             greaterThan(table.header().size()*count-1));
         return this;
     }
     @JDIAction("Assert that '{name}' has at least one row that {0}}")
     public TableAssert hasRowWithValues(TableMatcher... matchers) {
-        assertThat(getMatchLines(table, matchers), is(not(empty())));
+        assertThat(TABLE_MATCHER.execute(table, matchers), is(not(empty())));
         return this;
     }
 

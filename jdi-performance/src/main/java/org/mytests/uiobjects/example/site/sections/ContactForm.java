@@ -8,6 +8,7 @@ import com.epam.jdi.light.ui.html.common.TextArea;
 import com.epam.jdi.light.ui.html.common.TextField;
 import com.epam.jdi.light.ui.html.complex.Combobox;
 import com.epam.jdi.light.ui.html.complex.Dropdown;
+import com.epam.jdi.light.ui.html.complex.MultiDropdown;
 import org.mytests.uiobjects.example.entities.Contacts;
 
 import java.lang.reflect.Field;
@@ -19,8 +20,10 @@ public class ContactForm extends Form<Contacts> {
 
 	Dropdown gender;
 	Combobox religion;
+	MultiDropdown weather;
 
-	public Checkbox passport, acceptConditions;
+
+	Checkbox passport, acceptConditions;
 	TextArea description;
 
 	@UI("['Submit']") public Button submit;

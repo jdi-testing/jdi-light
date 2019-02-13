@@ -1,4 +1,6 @@
 package com.epam.jdi.light.ui.html.complex;
 
-public interface MultiDropdown {
+import com.epam.jdi.light.elements.base.JDIElement;
+
+public interface MultiDropdown extends JDIElement {
 }

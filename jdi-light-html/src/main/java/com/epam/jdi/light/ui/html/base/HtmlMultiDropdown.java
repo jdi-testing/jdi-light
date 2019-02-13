@@ -20,7 +20,7 @@ import static java.util.Arrays.asList;
 public class HtmlMultiDropdown extends Selector<HtmlElement> implements BaseSelectorAssert, MultiDropdown {
     By expandArrow = By.cssSelector(".caret");
     By values = By.tagName("li");
-    By valueTemplate = By.xpath(".//label[@title='%s']/../..");
+    By valueTemplate = By.xpath(".//label[text()='%s']/../..");
     By value = By.cssSelector(".multiselect-selected-text");
     By valuesConatiner = By.tagName("ul");
 

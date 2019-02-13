@@ -21,7 +21,7 @@ public class SearchTests extends GoogleInit {
 
     @Test
     public void printResultListTest() {
-        suggestion.typeAndSelect("jd", "jdi");
+        suggestion.typeAndSelect("jdi", "jdi");
         SearchResult jdi = search3.get(2);
         assertTrue(jdi.name.getText().toLowerCase().contains("jdi")
             || jdi.description.getText().toLowerCase().contains("jdi"));

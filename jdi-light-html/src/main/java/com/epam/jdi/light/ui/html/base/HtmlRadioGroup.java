@@ -17,9 +17,9 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static java.util.Arrays.asList;
 import static org.openqa.selenium.By.cssSelector;
 
-public class HtmlRadioGroup extends Selector implements BaseSelectorAssert, RadioButtons {
+public class HtmlRadioGroup extends Selector<HtmlElement> implements BaseSelectorAssert, RadioButtons {
     By radioButton = cssSelector("input[type=radio][id='%s']");
-    By label = By.xpath(".//label[text()='%s']");
+    By label = LABEL_LOCATOR;
     private String getId(String name) { return label(name).getAttribute("for"); }
     public HtmlElement get(String value) {
         return $(fillByTemplate(radioButton, getId(value)), parent).setName("radioButton");

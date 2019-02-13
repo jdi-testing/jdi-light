@@ -56,7 +56,7 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     @JDIAction(level = DEBUG)
     public List<T> elements() {
         if (values.hasValue() &&
-            (values.get().size() == 0 || isActual(values.get().get(0))))
+            (values.get().size() > 0 && isActual(values.get().get(0))))
             return values.get();
         if (elements.hasValue())
             return elements.get().values();
@@ -77,7 +77,7 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     }
     public MapArray<String, T> getMap() {
         if (elements.hasValue() &&
-            (elements.get().size() == 0 || isActual(elements.get().values().get(0))))
+            (elements.get().size() > 0 && isActual(elements.get().values().get(0))))
             return elements.get();
         List<WebElement> els = getAll();
         return elements.set(values.hasValue()
