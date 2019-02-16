@@ -11,6 +11,7 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.light.logger.JDILogger;
 import com.epam.jdi.tools.PropertyReader;
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.PageLoadStrategy;
@@ -28,6 +29,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.logger.JDILogger.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
@@ -39,7 +41,7 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
 public class WebSettings {
-    public static ILogger logger = JDILogger.instance("JDI");
+    public static ILogger logger = instance("JDI");
     public static String DOMAIN;
     public static String KILL_BROWSER = "afterAndBefore";
     public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = WebElement::isDisplayed;
@@ -55,8 +57,9 @@ public class WebSettings {
     public static String TEST_NAME;
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
+    public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
     public static JFunc1<JDIBase, WebElement> SMART_SEARCH = el -> {
-        String locatorName = splitHyphen(el.name);
+        String locatorName = SMART_SEARCH_NAME.execute(el.name);
         for (String template : SMART_SEARCH_LOCATORS) {
             UIElement ui = $(String.format(template, locatorName)).setName(el.name);
             try {

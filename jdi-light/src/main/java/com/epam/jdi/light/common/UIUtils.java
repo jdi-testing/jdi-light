@@ -73,7 +73,7 @@ public final class UIUtils {
             case 0:
                 if (obj.getClass().getSimpleName().equals("Form"))
                     return GET_DEFAULT_BUTTON.execute(buttonName);
-                throw exception("Can't find any buttons on form '%s.", obj);
+                throw exception("Can't find any buttons on form '%s'.", obj);
             case 1:
                 return (BaseUIElement) getValueField(fields.get(0), obj);
             default:
