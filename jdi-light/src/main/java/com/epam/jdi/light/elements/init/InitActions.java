@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
@@ -75,23 +74,12 @@ public class InitActions {
         initElements(info);
         return info.instance;
     };
-//
+
     public static MapArray<String, InitRule> INIT_RULES = map(
-        $("Selector", iRule(f -> f.getType() ==  Selector.class,
-            info -> new Selector())),
-        $("UIElement", iRule(f -> f.getType() == WebElement.class
-            || f.getType() == UIElement.class,
-            info -> new UIElement()
-        )),
-        $("WebList", iRule(f -> f.getType() == WebList.class || isList(f, WebElement.class),
-            info -> new WebList())),
-        $("UIList", iRule(f -> (f.getType() == List.class)
-                && isPageObject(getGenericType(f)),
-            f -> new UIList(getGenericType(f.field)))),
-        $("PageObject", iRule(f -> isPageObject(f.getType()),
-            InitActions::initSection)),
-        $("Default", iRule(f -> isClass(f, DriverBase.class),
-            info -> info.field.getType().newInstance()))
+        $("UIElement", iRule(WebElement.class, info -> new UIElement())),
+        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList())),
+        $("UIList", iRule(f -> f.getType() == List.class && isPageObject(getGenericType(f)),
+            f -> new UIList(getGenericType(f.field))))
     );
 
     public static MapArray<String, SetupRule> SETUP_RULES = map(
@@ -173,9 +161,9 @@ public class InitActions {
     }
     public static boolean isJDIField(Field field) {
         return isInterface(field, WebElement.class) ||
-                isInterface(field, JDIElement.class) ||
-                isList(field, WebElement.class) ||
-                isList(field, Section.class);
+            isInterface(field, JDIElement.class) ||
+            isListOf(field, WebElement.class) ||
+            isListOf(field, Section.class);
     }
     public static boolean isPageObject(Class<?> type) {
         return isClass(type, Section.class) || isClass(type, WebPage.class) ||
@@ -184,10 +172,15 @@ public class InitActions {
     public static boolean isList(Field field, Class<?> type) {
         try {
             return field.getType() == List.class
-                && isInterface(getGenericType(field), type);
+                && getGenericType(field) == type;
         } catch (Exception ex) { return false; }
     }
-
+    public static boolean isListOf(Field field, Class<?> type) {
+        try {
+            return field.getType() == List.class
+                && isClass(getGenericType(field), type);
+        } catch (Exception ex) { return false; }
+    }
     public static Type[] getGenericTypes(Field field) {
         try {
             return ((ParameterizedType) field.getGenericType()).getActualTypeArguments();

@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
+import com.epam.jdi.light.asserts.DataTableAssert;
 import com.epam.jdi.light.asserts.TableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.composite.Section;
@@ -149,12 +150,6 @@ public class DataTable<L extends Section, D> extends Table {
         return row(matchers).asLine(lineClass);
     }
 
-    public TableAssert is() {
-        return new TableAssert(this);
-    }
-    public TableAssert assertThat() {
-        return is();
-    }
     @Override
     @JDIAction("Get '{name}' table value")
     public String getValue() {
@@ -211,5 +206,14 @@ public class DataTable<L extends Section, D> extends Table {
         MapArray<String, String> map = new MapArray<>(fields,
             Field::getName, f -> ((HasValue)f.get(line)).getValue());
         return row.asData(dataClass, map);
+    }
+
+    @Override
+    public DataTableAssert<D> is() {
+        return new DataTableAssert<>(this);
+    }
+    @Override
+    public DataTableAssert<D> assertThat() {
+        return is();
     }
 }

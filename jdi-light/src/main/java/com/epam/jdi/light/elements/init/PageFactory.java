@@ -101,6 +101,9 @@ public class PageFactory {
         String ruleName = "";
         if (info.instance == null) {
             try {
+            if (!info.field.getType().isInterface())
+                info.instance = info.field.getType().newInstance();
+            else {
                 for (Pair<String, InitRule> rule : INIT_RULES) {
                     ruleName = rule.key;
                     if (rule.value.condition.execute(info.field)) {
@@ -110,6 +113,7 @@ public class PageFactory {
                     }
                 }
                 if (!ruleName.contains("Init:")) throw exception("");
+            }
             } catch (Exception ex) {
                 throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'. No init rules found (you can add appropriate rule in InitActions.INIT_RULES).%s Exception: " + ex.getMessage(),
                     ruleName, info.field.getName(), info.parentName(), LINE_BREAK);

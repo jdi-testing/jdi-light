@@ -24,4 +24,6 @@ public @interface JTable {
     String rowHeader() default "";
     int size() default -1;
     int count() default -1;
+    int firstColumnIndex() default -1;
+    int[] columnsMapping() default {};
 }

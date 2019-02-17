@@ -39,7 +39,10 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
     protected By allCellsLocator = By.cssSelector("td");
     protected By headerLocator = By.cssSelector("th");
     protected int rowHeaderIndex = -1;
+    protected int firstColumnIndex = -1;
+    protected int[] columnsMapping = new int[]{};
     protected String rowHeaderName = "";
+
     protected int getRowHeaderIndex() {
         if (rowHeaderIndex == -1 && isNotBlank(rowHeaderName)) {
             int index = firstIndex(header(), h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowHeaderName)));
@@ -67,7 +70,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
 
     public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
     private WebList headerUI() {
-        return $$(headerLocator, this);
+        return $$(headerLocator, this).setName(getName() + " header");
     }
     protected List<String> getHeader() {
         return LinqUtils.select(headerUI(), UIElement::getText);
@@ -93,7 +96,8 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         if (columns.any())
             return columns.get(0).value.size();
         WebList firstColumn = $$(fillByTemplate(columnLocator, 1), this)
-            .noValidation();
+            .setName(getName() + " rows header");
+        firstColumn.noValidation();
         return firstColumn.size();
     }
     @JDIAction("Get {name} rows count")
@@ -115,7 +119,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         if (!rows.has(rowNum+"")) {
             List<UIElement> result = gotTable
                 ? LinqUtils.select(cells, c -> c.value.get(rowNum+""))
-                : getRow(rowNum).elements();
+                : getRow(rowNum);
             rows.add(rowNum+"", result);
         }
         return rows.get(rowNum+"");
@@ -187,8 +191,15 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         return $$(fillByTemplate(rowLocator, rowNum), this).noValidation();
     }
 
-    protected WebList getRow(int rowNum) {
-        return getRowByIndex(getRowIndex(rowNum));
+    protected List<UIElement> getRow(int rowNum) {
+        List<UIElement> elements = getRowByIndex(getRowIndex(rowNum)).elements();
+        List<UIElement> result = new ArrayList<>();
+        if (firstColumnIndex > 1 || columnsMapping.length > 0) {
+            for (int i = 1; i <= header().size(); i++)
+                result.add(elements.get(getColumnIndex(i)-1));
+            return result;
+        }
+        return elements;
     }
     protected boolean gotColumns = false;
     protected MapArray<String, List<UIElement>> getColumns() {
@@ -199,12 +210,18 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         gotColumns = true;
         return columns = result;
     }
-
+    private int getColumnIndex(int index) {
+        if (firstColumnIndex > 1)
+            return index + firstColumnIndex - 1;
+        if (columnsMapping.length > 0)
+            return columnsMapping[index-1];
+        return index;
+    }
     public WebList getColumn(int colNum) {
-        return $$(fillByTemplate(columnLocator, colNum), this).noValidation();
+        return $$(fillByTemplate(columnLocator, getColumnIndex(colNum)), this).noValidation();
     }
     protected UIElement getCell(int colNum, int rowNum) {
-        return $(fillByMsgTemplate(cellLocator, colNum, getRowIndex(rowNum), this));
+        return $(fillByMsgTemplate(cellLocator, getColumnIndex(colNum), getRowIndex(rowNum), this));
     }
 
     protected Boolean headerIsRow = null;
@@ -241,10 +258,14 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
             this.headerLocator = defineLocator(j.headers());
         if (header.size() > 0)
             this.header.setFinal(header);
+        if (j.columnsMapping().length > 0)
+            this.columnsMapping = j.columnsMapping();
         if (size != -1)
             this.size.setFinal(size);
         if (count != -1)
             this.count.setFinal(count);
+        if (count != -1)
+            this.firstColumnIndex = j.firstColumnIndex();
         if (isNotBlank(rowHeader))
             rowHeaderName = rowHeader;
     }

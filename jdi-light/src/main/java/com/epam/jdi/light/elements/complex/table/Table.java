@@ -19,7 +19,6 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 
 public class Table extends BaseTable<Table> implements ISetup, HasValue {
-
     @JDIAction("Is '{name}' table empty")
     public boolean isEmpty() { return size() == 0; }
     @JDIAction("Is '{name}' table not empty")

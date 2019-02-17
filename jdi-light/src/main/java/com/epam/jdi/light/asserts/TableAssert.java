@@ -3,6 +3,8 @@ package com.epam.jdi.light.asserts;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.complex.table.TableMatcher;
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 
 import java.util.Collection;
@@ -65,5 +67,4 @@ public class TableAssert extends IsAssert {
         assertThat(TABLE_MATCHER.execute(table, matchers), is(not(empty())));
         return this;
     }
-
 }
