@@ -2,6 +2,7 @@ package io.github.epam.html.tests.elements.simple;
 
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

@@ -6,6 +6,7 @@ package com.epam.jdi.light.common;
  */
 
 import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.INamed;
@@ -85,9 +86,9 @@ public final class UIUtils {
         }
     };
 
-    public static UIElement getButtonByName(List<Field> fields, Object obj, String buttonName) {
-        Collection<UIElement> buttons = select(fields, f -> (UIElement) getValueField(f, obj));
-        UIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
+    public static BaseUIElement getButtonByName(List<Field> fields, Object obj, String buttonName) {
+        Collection<BaseUIElement> buttons = select(fields, f -> (BaseUIElement) getValueField(f, obj));
+        BaseUIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
         if (button == null)
             throw exception("Can't find button '%s' for Element '%s'", buttonName, obj);
         return button;

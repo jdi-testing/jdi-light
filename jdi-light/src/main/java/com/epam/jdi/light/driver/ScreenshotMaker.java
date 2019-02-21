@@ -26,7 +26,7 @@ public class ScreenshotMaker {
     public static String SCREEN_NAME = "screen";
     public static String SCREEN_FILE_SUFFIX = ".jpg";
 
-    public static String takeScreen() throws IOException {
+    public static String takeScreen() {
         return new ScreenshotMaker().takeScreenshot();
     }
 

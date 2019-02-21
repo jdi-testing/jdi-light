@@ -157,7 +157,10 @@ public final class WebDriverByUtils {
         } catch (Exception ex) { throw exception("Search By failed"); }
     }
     public static By defineLocator(String locator) {
-        return locator.length() > 1 && (locator.charAt(1) == '/' || locator.substring(0,2).equals(".."))
+        String by = locator.contains("*root*")
+            ? locator.replaceAll("\\*root\\*", "")
+            : locator;
+        return by.length() > 1 && (by.charAt(1) == '/' || by.substring(0,2).equals(".."))
                 ? By.xpath(locator)
                 : By.cssSelector(locator);
     }

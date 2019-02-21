@@ -1,5 +1,6 @@
 package io.github.epam.tests.recommended;
 
+import com.epam.jdi.light.elements.base.UIElement;
 import io.github.epam.StaticTestsInit;
 import org.testng.annotations.Test;
 
@@ -18,6 +19,7 @@ public class FormsTests extends StaticTestsInit {
     public void loginTest() {
         shouldBeLoggedOut();
         userIcon.click();
+        ((UIElement) loginForm.name).input(DEFAULT_USER.name);
         loginForm.submit(DEFAULT_USER, "enter");
         homePage.checkOpened();
         userName.is().displayed();

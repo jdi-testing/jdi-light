@@ -26,9 +26,14 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.0.39</version>
+            <version>1.0.40</version>
         </dependency>
-		
+
+        <dependency>
+            <groupId>org.influxdb</groupId>
+            <artifactId>influxdb-java</artifactId>
+            <version>RELEASE</version>
+        </dependency>
         <!--Allure-->
         <dependency>
             <groupId>io.qameta.allure</groupId>
