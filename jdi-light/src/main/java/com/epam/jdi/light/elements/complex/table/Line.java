@@ -25,13 +25,17 @@ public class Line implements IList<String> {
     private List<UIElement> elements;
     private List<String> headers;
 
+    public Line() {}
     public Line(List<UIElement> elements, List<String> headers) {
         this.elements = elements;
         this.headers = headers;
         this.dataMap = () -> new MapArray<>(headers, LinqUtils.map(elements, BaseUIElement::getText));
     }
-    public Line(List<String> list) {
-        this.list = list;
+    public static Line initLine(List<String> list, List<String> headers) {
+        Line line = new Line();
+        line.list = list;
+        line.headers = headers;
+        return line;
     }
     private MapArray<String, String> data;
     private List<String> list;

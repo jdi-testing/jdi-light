@@ -241,9 +241,6 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         String rowHeader = j.rowHeader();
         List<String> header = asList(j.header());
 
-        int size = j.size();
-        int count = j.count();
-
         if (isNotBlank(j.root()))
             setLocator(defineLocator(j.root()));
         if (isNotBlank(j.row()))
@@ -260,11 +257,11 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
             this.header.setFinal(header);
         if (j.columnsMapping().length > 0)
             this.columnsMapping = j.columnsMapping();
-        if (size != -1)
-            this.size.setFinal(size);
-        if (count != -1)
-            this.count.setFinal(count);
-        if (count != -1)
+        if (j.size() != -1)
+            this.size.setFinal(j.size());
+        if (j.count() != -1)
+            this.count.setFinal(j.count());
+        if (j.firstColumnIndex() != -1)
             this.firstColumnIndex = j.firstColumnIndex();
         if (isNotBlank(rowHeader))
             rowHeaderName = rowHeader;
