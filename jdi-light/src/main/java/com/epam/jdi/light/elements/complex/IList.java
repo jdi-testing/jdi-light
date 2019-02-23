@@ -28,13 +28,13 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
         return elements(1).get(0);
     }
     default List<T> where(JFunc1<T, Boolean> condition) {
-        return LinqUtils.where(elements(1),condition);
+        return LinqUtils.where(elements(0),condition);
     }
     default List<T> filter(JFunc1<T, Boolean> condition) {
         return where(condition);
     }
     default <R> List<R> select(JFunc1<T, R> transform) {
-        return LinqUtils.select(elements(1), transform);
+        return LinqUtils.select(elements(0), transform);
     }
     default <R> List<R> map(JFunc1<T, R> transform) {
         return select(transform);
@@ -49,26 +49,26 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
         LinqUtils.ifDo(elements(1), condition, action);
     }
     default <R> List<R> ifSelect(JFunc1<T, Boolean> condition, JFunc1<T, R> transform) {
-        return LinqUtils.ifSelect(elements(1), condition, transform);
+        return LinqUtils.ifSelect(elements(0), condition, transform);
     }
     default void foreach(JAction1<T> action) {
-        LinqUtils.foreach(elements(1), action);
+        LinqUtils.foreach(elements(0), action);
     }
     default boolean hasAny(JFunc1<T, Boolean> condition) {
-        return LinqUtils.any(elements(1), condition);
+        return LinqUtils.any(elements(0), condition);
     }
     default boolean all(JFunc1<T, Boolean> condition) {
-        return LinqUtils.all(elements(1), condition);
+        return LinqUtils.all(elements(0), condition);
     }
     default List<T> slice(int from) {
-        return slice(from, elements(1).size() - 1);
+        return slice(from, elements(from).size() - 1);
     }
     default void refresh() { clear(); }
     default List<T> slice(int from, int to) {
         return LinqUtils.listCopy(elements(to), from, to);
     }
     default <R> List<R> selectMany(JFunc1<T, List<R>> func) {
-        return LinqUtils.selectMany(elements(1), func);
+        return LinqUtils.selectMany(elements(0), func);
     }
     default int size() {
         return elements(0).size();

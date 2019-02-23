@@ -85,9 +85,20 @@ public class DataTable<L extends Section, D> extends Table {
         return null;
     }
 
-    @JDIAction("Get first '{name}' table row that match criteria")
+    @JDIAction("Get all '{name}' table rows that match criteria")
     public List<D> datas(JFunc1<D, Boolean> matcher) {
         return filter(allData(), matcher::execute);
+    }
+    @JDIAction("Get at least {1} '{name}' table rows that match criteria")
+    public List<D> datas(JFunc1<D, Boolean> matcher, int amount) {
+        List<D> result = new ArrayList<>();
+        for (int i = 1; i <= count.get(); i++) {
+            if (matcher.execute(data(i)))
+                result.add(data(i));
+            if (result.size() == amount)
+                return result;
+        }
+        return result;
     }
     @JDIAction("Get first '{name}' table row that match criteria")
     public List<L> lines(JFunc1<D, Boolean> matcher) {
@@ -97,6 +108,7 @@ public class DataTable<L extends Section, D> extends Table {
 
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<D> datas(TableMatcher... matchers) {
+        if (matchers.length == 0) return allData();
         return map(rows(matchers), this::getLineData);
     }
     @JDIAction("Get all '{name}' table rows that match criteria")
@@ -212,6 +224,10 @@ public class DataTable<L extends Section, D> extends Table {
     }
     @Override
     public DataTableAssert<D> assertThat() {
+        return is();
+    }
+    @Override
+    public DataTableAssert<D> has() {
         return is();
     }
 }

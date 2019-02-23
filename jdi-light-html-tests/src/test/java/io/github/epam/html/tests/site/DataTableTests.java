@@ -11,17 +11,23 @@ import java.util.List;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.users;
 import static io.github.com.pages.UsersPage.usersSetup;
+import static io.github.epam.html.tests.elements.complex.DataTableInteractTests.validateUserRow;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
 import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN;
 import static java.util.Arrays.asList;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.testng.Assert.assertEquals;
 
 public class DataTableTests extends TestsInit {
+    private boolean firstTime = true;
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        usersPage.shouldBeOpened();
+        if (firstTime) {
+            usersPage.open();
+            firstTime = false;
+        }
     }
 
     @Test
@@ -36,12 +42,12 @@ public class DataTableTests extends TestsInit {
         value = users.getValue();
         assertEquals(value,
         "||X||Number|Type|User|Description||\r\n" +
-            "||1||1|Admin|Roman|Wolverine||\r\n" +
-            "||2||2|User|Sergey Ivan|Spider Man||\r\n" +
-            "||3||3|Manager|Vladzimir|Punisher||\r\n" +
-            "||4||4|User|Helen Bennett|Captain America\\nsome description||\r\n" +
-            "||5||5|User|Yoshi Tannamuri|Cyclope\\nsome description||\r\n" +
-            "||6||6|User|Giovanni Rovelli|Hulk\\nsome description||\r\n");
+            "||1||1|Admin|Roman|Wolverine:VIP||\r\n" +
+            "||2||2|User|Sergey Ivan|Spider Man:Dude||\r\n" +
+            "||3||3|Manager|Vladzimir|Punisher:VIP||\r\n" +
+            "||4||4|User|Helen Bennett|Captain America\\nsome description:Dude||\r\n" +
+            "||5||5|User|Yoshi Tannamuri|Cyclope\\nsome description:Dude||\r\n" +
+            "||6||6|User|Giovanni Rovelli|Hulk\\nsome description:Dude||\r\n");
     }
     @Test
     public void filterDataTest() {
@@ -53,10 +59,24 @@ public class DataTableTests extends TestsInit {
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), SPIDER_MAN);
     }
+    @Test
+    public void tableAssertsTest() {
+        users.is().displayed();
+        users.has().size(6);
+        users.assertThat().size(greaterThan(3));
+        users.is().size(lessThanOrEqualTo(6));
+        users.is().notEmpty();
+        users.has().row(d -> d.user.contains("Ivan"));
+        users.assertThat().allRows(d -> d.user.length() > 4);
+        users.assertThat().atLeast(3).rows(d -> d.type.contains("User"));
+        users.assertThat().exact(2).rows(d -> d.description.contains(":VIP"));
+        users.has().row(SPIDER_MAN);
+        users.assertThat().exact(1).rows(SPIDER_MAN);
+    }
 
     @Test
     public void filterLinesTest() {
-        MarvelUser line =  users.line(2);
+        MarvelUser line = users.line(2);
         validateUserRow(line);
         line = usersSetup.line("Sergey Ivan");
         validateUserRow(line);
@@ -66,12 +86,6 @@ public class DataTableTests extends TestsInit {
         List<MarvelUser> filteredData = users.lines(d -> d.user.contains("Ivan"));
         assertEquals(filteredData.size(), 1);
         validateUserRow(filteredData.get(0));
-    }
-
-    private void validateUserRow(MarvelUser line) {
-        line.type.select("Admin");
-        assertEquals(line.type.getValue(), "Admin");
-        line.type.select("User");
-        line.number.assertThat().text(is("2"));
+        usersPage.open();
     }
 }

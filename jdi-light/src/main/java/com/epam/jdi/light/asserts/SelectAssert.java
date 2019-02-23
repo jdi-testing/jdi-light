@@ -120,4 +120,8 @@ public class SelectAssert extends IsAssert {
         assertThat(selector.size(), condition);
         return this;
     }
+    @JDIAction("Assert that '{name}' size {0}")
+    public SelectAssert size(int size) {
+        return size(is(size));
+    }
 }

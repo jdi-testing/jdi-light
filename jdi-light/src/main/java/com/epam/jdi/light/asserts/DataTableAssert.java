@@ -19,18 +19,47 @@ public class DataTableAssert<D> extends TableAssert {
         super(table);
     }
     @JDIAction("Assert that '{name}' has rows that meet expected condition")
-    public DataTableAssert hasRow(JFunc1<D,Boolean> condition) {
+    public DataTableAssert row(JFunc1<D,Boolean> condition) {
         assertThat(getTable().data(condition), not(nullValue()));
         return this;
     }
+    @JDIAction("Assert that '{name}' has {0}")
+    public DataTableAssert row(D data) {
+        return row(d -> d.equals(data));
+    }
+    public class Exact {
+        public int count;
+        DataTableAssert dtAssert;
+        public boolean exact;
+        private Exact(int count, DataTableAssert dtAssert, boolean exact) {
+            this.count = count;
+            this.dtAssert = dtAssert;
+            this.exact = exact;
+        }
+        @JDIAction("Assert that '{name}' has '{count}' rows that meet expected condition")
+        public DataTableAssert rows(JFunc1<D,Boolean> condition) {
+            assertThat(exact
+                ? getTable().datas(condition)
+                : getTable().datas(condition, count),
+            hasSize(count));
+            return dtAssert;
+        }
+        @JDIAction("Assert that '{name}' at least '{count}' '{0}'")
+        public DataTableAssert rows(D data) {
+            return rows(d -> d.equals(data));
+        }
+    }
     @JDIAction("Assert that '{name}' has '{0}' rows that meet expected condition")
-    public DataTableAssert hasExactRows(int count, JFunc1<D,Boolean> condition) {
-        assertThat(getTable().datas(condition), hasSize(count));
-        return this;
+    public Exact exact(int count) {
+        return new Exact(count, this, true);
+    }
+    @JDIAction("Assert that '{name}' has '{0}' rows that meet expected condition")
+    public Exact atLeast(int count) {
+        return new Exact(count, this, false);
     }
     @JDIAction("Assert that all '{name}' rows meet expected condition")
     public DataTableAssert allRows(JFunc1<D,Boolean> condition) {
-        List<D> data = getTable().datas();
+        List<D> data = getTable().allData();
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < data.size(); i++)
             if (!condition.execute(data.get(i)))
@@ -39,5 +68,9 @@ public class DataTableAssert<D> extends TableAssert {
             throw exception("Rows [%s] of the '%s' table doesn't match expected condition",
                     print(map(result, Object::toString)), name);
         return this;
+    }
+    @JDIAction("Assert that all '{name}' rows meet expected condition")
+    public DataTableAssert noRows(JFunc1<D,Boolean> condition) {
+        return allRows(d -> !condition.execute(d));
     }
 }

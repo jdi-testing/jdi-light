@@ -14,6 +14,7 @@ public class Avatar extends Section implements HasValue {
 
     @Override
     public String getValue() {
-        return description.getText();
+        return description.getText() + ":" +
+            (vip.isSelected() ? "VIP" : "Dude");
     }
 }

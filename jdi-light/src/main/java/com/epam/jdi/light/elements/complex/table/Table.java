@@ -146,4 +146,7 @@ public class Table extends BaseTable<Table> implements ISetup, HasValue {
     public TableAssert assertThat() {
         return is();
     }
+    public TableAssert has() {
+        return is();
+    }
 }

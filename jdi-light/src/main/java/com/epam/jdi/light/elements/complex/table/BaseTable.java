@@ -191,7 +191,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
     }
 
     protected List<UIElement> getRow(int rowNum) {
-        List<UIElement> elements = getRowByIndex(getRowIndex(rowNum)).elements(rowNum-1);
+        List<UIElement> elements = getRowByIndex(getRowIndex(rowNum)).elements(size());
         elements = where(elements, JDIBase::isDisplayed);
         List<UIElement> result = new ArrayList<>();
         if (firstColumnIndex > 1 || columnsMapping.length > 0) {
