@@ -5,7 +5,6 @@ package com.epam.jdi.light.ui.html;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.composite.Form;

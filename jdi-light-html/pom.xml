@@ -7,7 +7,7 @@
     <artifactId>jdi-light-html</artifactId>
     <name>JDI Light Html Elements</name>
     <packaging>jar</packaging>
-    <version>1.0.41</version>
+    <version>1.0.42</version>
     <groupId>com.epam.jdi</groupId>
 
     <!--parent>
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.0.41</version>
+            <version>1.0.42</version>
         </dependency>
     </dependencies>
 

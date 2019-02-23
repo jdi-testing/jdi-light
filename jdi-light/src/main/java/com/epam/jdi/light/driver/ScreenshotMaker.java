@@ -8,7 +8,6 @@ package com.epam.jdi.light.driver;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
-import java.io.IOException;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;

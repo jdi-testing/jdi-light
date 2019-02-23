@@ -1,11 +1,7 @@
 package org.mytests.tests.example;
 
-import org.influxdb.InfluxDB;
-import org.influxdb.InfluxDBFactory;
 import org.mytests.tests.SimpleTestsInit;
 import org.testng.annotations.Test;
-
-import static org.influxdb.InfluxDBFactory.*;
 
 public class PerfGrafanaTest extends SimpleTestsInit {
 

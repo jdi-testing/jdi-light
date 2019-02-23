@@ -25,8 +25,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.firstIndex;
-import static com.epam.jdi.tools.LinqUtils.listEquals;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -192,7 +191,8 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
     }
 
     protected List<UIElement> getRow(int rowNum) {
-        List<UIElement> elements = getRowByIndex(getRowIndex(rowNum)).elements();
+        List<UIElement> elements = getRowByIndex(getRowIndex(rowNum)).elements(rowNum-1);
+        elements = where(elements, JDIBase::isDisplayed);
         List<UIElement> result = new ArrayList<>();
         if (firstColumnIndex > 1 || columnsMapping.length > 0) {
             for (int i = 1; i <= header().size(); i++)
@@ -228,7 +228,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
     protected int getRowIndex(int rowNum) {
         if (headerIsRow == null) {
             List<String> firstRow = getRowByIndex(1).values();
-            headerIsRow = firstRow.isEmpty() || listEquals(header(), firstRow);
+            headerIsRow = firstRow.isEmpty() || any(header(), firstRow::contains);
         }
         return headerIsRow ? rowNum + 1 : rowNum;
     }

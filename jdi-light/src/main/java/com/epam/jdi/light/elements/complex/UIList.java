@@ -15,7 +15,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matcher;
@@ -53,21 +52,19 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
             return true;
         } catch (Exception ex) { return false; }
     }
+    private boolean actualValuesValue() {
+        return values.hasValue() && values.get().size() > 0 && isActual(values.get().get(0));
+    }
+    private boolean actualMapValue() {
+        return elements.hasValue() && elements.get().size() > 0 && isActual(elements.get().values().get(0));
+    }
     @JDIAction(level = DEBUG)
-    public List<T> elements() {
-        if (values.hasValue() &&
-            (values.get().size() > 0 && isActual(values.get().get(0))))
+    public List<T> elements(int minAmount) {
+        if (actualValuesValue())
             return values.get();
-        if (elements.hasValue())
+        if (actualMapValue())
             return elements.get().values();
-        List<WebElement> els = getAll();
-        if (els.size() > 0) {
-            values.set(LinqUtils.select(
-                    Timer.getByCondition(() -> els, l -> l.size() > 0), this::initElement));
-        }
-        else {
-            values.set(new ArrayList<>());
-        }
+        values.set(LinqUtils.select(getList(minAmount), this::initElement));
         return values.get();
     }
     @JDIAction(level = DEBUG)
@@ -75,11 +72,10 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         elements.clear();
         values.clear();
     }
-    public MapArray<String, T> getMap() {
-        if (elements.hasValue() &&
-            (elements.get().size() > 0 && isActual(elements.get().values().get(0))))
+    public MapArray<String, T> getMap(int minAmount) {
+        if (actualMapValue())
             return elements.get();
-        List<WebElement> els = getAll();
+        List<WebElement> els = getList(minAmount);
         return elements.set(values.hasValue()
             ? new MapArray<>(
                 LinqUtils.select(els, this::elementTitle),
@@ -135,7 +131,7 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     public List<E> asData() {
         try {
             if (dataType == null) return null;
-            return getMap().select((k, v) -> UIUtils.asEntity(v, dataType));
+            return getMap(1).select((k, v) -> UIUtils.asEntity(v, dataType));
         } catch (Exception ex) {
             throw exception("Can't get UIList data" + LINE_BREAK + ex.getMessage());
         }
@@ -143,9 +139,7 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
 
     @JDIAction(level = DEBUG)
     public T get(String value) {
-        MapArray<String, T> elements = getMap();
-        if (getMap().isEmpty())
-            throw exception("Can't get '%s' element. List is empty", value);
+        MapArray<String, T> elements = getMap(1);
         T result = elements.get(value);
         if (result == null)
             throw exception("Can't find '%s' element in list %s", value, elements.keys());
@@ -167,8 +161,8 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         int size;
         do {
             size = size();
-            js().executeScript("arguments[0].scrollIntoView(true);", get(size-1).get());
-            clear();
+            get(size-1).show();
+            refresh();
         } while (size < size());
     }
 
@@ -181,7 +175,7 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     }
 
     public void is(Matcher<? super List<E>> condition) {
-        clear();
+        refresh();
         MatcherAssert.assertThat(asData(), condition);
     }
     public UIListAssert<T, E> is() {

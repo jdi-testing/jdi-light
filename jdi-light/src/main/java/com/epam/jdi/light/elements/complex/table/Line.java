@@ -39,21 +39,23 @@ public class Line implements IList<String> {
     }
     private MapArray<String, String> data;
     private List<String> list;
-    private List<String> getList() {
-        return list != null ? list : getData().values();
+    private List<String> getList(int minAmount) {
+        return list != null && list.size() >= minAmount
+                ? list
+                : getData(minAmount).values();
     }
-    private MapArray<String, String> getData() {
-        if (data == null)
+    private MapArray<String, String> getData(int minAmount) {
+        if (data == null || data.size() < minAmount)
             data = dataMap.execute();
         return data;
     }
     @JDIAction(level = DEBUG)
-    public List<String> elements() {
-        return getList();
+    public List<String> elements(int minAmount) {
+        return getList(minAmount);
     }
 
     public String getValue() {
-        return PrintUtils.print(getList(), ";");
+        return PrintUtils.print(getList(0), ";");
     }
     public String print() { return getValue(); }
 
@@ -66,9 +68,9 @@ public class Line implements IList<String> {
         int i = 0;
         for (Field field : data.getDeclaredFields()) {
             try {
-                field.set(instance, getList().get(i));
+                field.set(instance, getList(i).get(i));
             } catch (Exception ex) {
-                throw exception("Can't set table value '%s' to field '%s'", getData().get(i), field.getName());
+                throw exception("Can't set table value '%s' to field '%s'", getData(i).get(i), field.getName());
             }
             i++;
         }

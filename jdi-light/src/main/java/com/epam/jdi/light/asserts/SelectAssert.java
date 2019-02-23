@@ -105,4 +105,19 @@ public class SelectAssert extends IsAssert {
         assertThat(map(getWebList(), UIElement::isEnabled), everyItem(is(true)));
         return this;
     }
+    @JDIAction("Assert that '{name}' is empty")
+    public SelectAssert empty() {
+        assertThat(selector.isEmpty() ? "list is empty" : "list is not empty", is("list is empty"));
+        return this;
+    }
+    @JDIAction("Assert that '{name}' is not empty")
+    public SelectAssert notEmpty() {
+        assertThat(selector.isEmpty() ? "list is empty" : "list is not empty", is("list is not empty"));
+        return this;
+    }
+    @JDIAction("Assert that '{name}' size {0}")
+    public SelectAssert size(Matcher<Integer> condition) {
+        assertThat(selector.size(), condition);
+        return this;
+    }
 }

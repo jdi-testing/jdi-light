@@ -55,7 +55,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         return (T) this;
     }
 
-    public static Timer timer () { return new Timer(TIMEOUT.get()*1000); }
+    public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }
     public UIElement setWebElement(WebElement el) {
         webElement.setForce(el);
         return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();
@@ -86,7 +86,6 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         return get(new Object[]{});
     }
     public WebElement get(Object... args) {
-        // TODO SAFE GET ELEMENT AND STALE ELEMENT PROCESS
         if (webElement.hasValue())
             return webElement.get();
         if (locator.isEmpty()) {
@@ -128,7 +127,28 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         List<WebElement> els = uiSearch(searchContext, correctLocator(getLocator(args)));
         return filter(els, el -> searchRule.execute(el));
     }
-
+    public List<WebElement> getList(int minAmount) {
+        List<WebElement> elements = getAll();
+        if (elements == null)
+            throw exception("No elements found (%s)", toString());
+        if (elements.size() == 1)
+            elements = processListTag(elements);
+        if (elements.size() < minAmount)
+            throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
+        return elements;
+    }
+    private List<WebElement> processListTag(List<WebElement> elements) {
+        WebElement element = elements.get(0);
+        String tagName = element.getTagName();
+        switch (tagName) {
+            case "ul":
+                return element.findElements(By.tagName("li"));
+            case "select":
+                return element.findElements(By.tagName("option"));
+            default:
+                return elements;
+        }
+    }
     public WebList allUI(Object... args) {
         return new WebList(getAll(args)).setName(getName());
     }

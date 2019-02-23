@@ -126,7 +126,7 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
     public List<String> values() {
         return map(select().getOptions(), WebElement::getText);
     }
-
+    public int size() { return select().getOptions().size(); }
     @JDIAction(level = DEBUG)
     public List<String> listEnabled() {
         List<UIElement> els = getUI().finds("option");

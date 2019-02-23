@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.DataTableAssert;
-import com.epam.jdi.light.asserts.TableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.InitActions;
@@ -170,7 +169,6 @@ public class DataTable<L extends Section, D> extends Table {
             value += "||" + i + "||" + print(map(list, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         }
         return value;
-
     }
 
     @Override

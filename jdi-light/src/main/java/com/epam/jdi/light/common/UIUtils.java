@@ -6,7 +6,6 @@ package com.epam.jdi.light.common;
  */
 
 import com.epam.jdi.light.elements.base.BaseUIElement;
-import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.INamed;

@@ -19,7 +19,6 @@ import org.openqa.selenium.WebElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -38,6 +37,50 @@ public class JList<T extends BaseUIElement> extends JDIBase
     public JList(By locator) { setLocator(locator); }
     public JList(List<WebElement> elements) {
         this.elements.setForce(toJList(elements));
+    }
+
+    @JDIAction(level = DEBUG)
+    public List<T> elements(int minAmount) {
+        if (elements.hasValue() && isActual() && elements.get().size() >= minAmount)
+            return elements.get();
+        if (getLocator().toString().contains("%s"))
+            throw exception("You call method that can't be used with template locator. " +
+                    "Please correct %s locator to get List<WebElement> in order to use this method");
+        return this.elements.set(toJList(getList(minAmount)));
+    }
+
+    private String NO_ELEMENTS_FOUND = "Can't select '%s'. No elements with this name found";
+
+    @JDIAction(level = DEBUG)
+    public T get(String value) {
+        if (getLocator().toString().contains("%s"))
+            return getNewInstance(super.get(value));
+        refresh();
+        T el = first(e -> e.getText().equals(value));
+        if (el == null)
+            throw exception(NO_ELEMENTS_FOUND, value);
+        return el;
+    }
+    public T get(Enum name) {
+        return get(getEnumValue(name));
+    }
+
+    @JDIAction(level = DEBUG)
+    public T get(int index) {
+        if (index < 0)
+            throw exception("Can't get element with index '%s'. Index should be more than 0", index);
+        if (getLocator().toString().contains("%s")) {
+            WebElement element;
+            try {
+                element = super.get(index + "");
+            } catch (Exception ex) {
+                throw exception("Can't get element with index '%s' for template locator. " +
+                    "Maybe locator is wrong or you need to get element by name. Exception: %s",
+                        index, ex.getMessage());
+            }
+            return getNewInstance(element);
+        }
+        return elements(index).get(index).setName(format("%s[%s]", getName(), index));
     }
 
     @JDIAction("Select '{0}' for '{name}'")
@@ -68,83 +111,10 @@ public class JList<T extends BaseUIElement> extends JDIBase
     }
     @JDIAction("Get '{names}' selected value")
     public String selected() {
+        refresh();
         T first = logger.logOff(() -> first(BaseUIElement::isSelected) );
         return first != null ? first.getText() : "";
     }
-    @JDIAction(level = DEBUG)
-    public String isSelected() {
-        T first = logger.logOff(() -> first(T::isSelected) );
-        return first != null ? first.getText() : "";
-    }
-
-    private String NO_ELEMENTS_FOUND = "Can't select '%s'. No elements with this name found";
-
-    @JDIAction(level = DEBUG)
-    public List<T> elements() {
-        try {
-            if (elements.hasValue() && isActual())
-                return elements.get();
-            if (getLocator().toString().contains("%s"))
-                return new ArrayList<>();
-            List<WebElement> elements = getAll();
-            if (elements.size() == 0)
-                throw exception("No elements found (%s)", toString());
-            if (elements.size() == 1) {
-                WebElement element = elements.get(0);
-                String tagName = element.getTagName();
-                switch (tagName) {
-                    case "ul":
-                        elements = element.findElements(By.tagName("li"));
-                        break;
-                    case "select":
-                        elements = element.findElements(By.tagName("option"));
-                        break;
-                }
-            }
-            return this.elements.set(toJList(elements));
-        } catch (Exception ex) { return new ArrayList<>(); }
-    }
-    @JDIAction(level = DEBUG)
-    public T get(String value) {
-            if (getLocator().toString().contains("%s"))
-                return getNewInstance(super.get(value));
-            refresh();
-            T el = LinqUtils.first(elements(), e -> e.getText().equals(value));
-            if (el == null) {
-                //el = LinqUtils.first(uiElements, e -> verifyLabel(e, name));
-                //if (el == null)
-                throw exception(NO_ELEMENTS_FOUND, value);
-            }
-            return el;
-    }
-    public T get(Enum name) {
-        return get(getEnumValue(name));
-    }
-
-    @JDIAction(level = DEBUG)
-    public T get(int index) {
-        if (index < 0)
-            throw exception("Can't get element with index '%s'. Index should be more than 0", index);
-        if (getLocator().toString().contains("%s")) {
-            WebElement element;
-            try {
-                element = super.get(index + "");
-            } catch (Exception ex) {
-                throw exception("Can't get element with index '%s' for template locator. " +
-                    "Maybe locator is wrong or you need to get element by name. Exception: %s",
-                        index, ex.getMessage());
-            }
-            return getNewInstance(element);
-        }
-        if (size() < index) {
-            refresh();
-            if (size() < index)
-                throw exception("Can't get element with index '%s'. Found only '%s' elements", index, size());
-        }
-        return elements().get(index)
-            .setName(format("%s[%s]", getName(), index));
-    }
-
     @JDIAction(level = DEBUG)
     public void refresh() {
         elements.clear();

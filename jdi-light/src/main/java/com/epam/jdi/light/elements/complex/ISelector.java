@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.interfaces.INamed;
 
 import java.util.List;
 
-public interface ISelector extends BaseElement, INamed {
+public interface ISelector extends BaseElement, INamed, IHasSize {
     boolean selected(String option);
     List<String> checked();
     List<String> values();
