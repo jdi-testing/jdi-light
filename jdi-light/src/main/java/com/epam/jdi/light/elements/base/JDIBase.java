@@ -45,6 +45,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     public JDILocator locator = new JDILocator();
     public CacheValue<WebElement> webElement = new CacheValue<>();
+    private boolean byWebElement = false;
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
     protected JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
     public <T extends JDIBase> T noValidation() {
@@ -58,6 +59,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }
     public UIElement setWebElement(WebElement el) {
         webElement.setForce(el);
+        byWebElement = true;
         return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();
     }
     public void setWebElements(List<WebElement> els) {
@@ -88,6 +90,8 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public WebElement get(Object... args) {
         if (webElement.hasValue())
             return webElement.get();
+        if (byWebElement)
+            throw exception("Cache expire please get again list element");
         if (locator.isEmpty()) {
             try {
                 WebElement element = SMART_SEARCH.execute(this);

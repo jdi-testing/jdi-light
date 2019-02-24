@@ -214,7 +214,6 @@ public class JList<T extends BaseUIElement> extends JDIBase
             instance.setWebElement(element).setName(getName());
             instance.setTypeName(varName);
             instance.setParent(parent);
-            instance.setLocator(getLocator());
             return instance;
         } catch (Exception ex) { throw exception("Can't init new element for list"); }
     }
