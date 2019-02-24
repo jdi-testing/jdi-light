@@ -2,9 +2,11 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.DataTableAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.InitActions;
 import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -30,22 +32,31 @@ public class DataTable<L extends Section, D> extends Table {
     private Class<L> lineClass;
     private Class<D> dataClass;
 
+    protected CacheAll<MapArray<String, L>> lines
+        = new CacheAll<>(MapArray::new);
+    protected CacheAll<MapArray<String, D>> datas
+        = new CacheAll<>(MapArray::new);
+
     @JDIAction("Get row '{0}' for '{name}' table")
     public D data(int rowNum) {
-        return getLineData(row(rowNum));
+        if (!datas.get().has(rowNum+""))
+            datas.get().add(rowNum+"", getLineData(row(rowNum)));
+        return datas.get().get(rowNum+"");
     }
     @JDIAction("Get row '{0}' for '{name}' table")
     public L line(int rowNum) {
-        return row(rowNum).asLine(lineClass);
+        if (!lines.get().has(rowNum+""))
+            lines.get().add(rowNum+"", row(rowNum).asLine(lineClass));
+        return lines.get().get(rowNum+"");
     }
 
     @JDIAction("Get row '{0}' for '{name}' table")
     public D data(String rowName) {
-        return getLineData(row(rowName));
+        return data(getRowIndexByName(rowName));
     }
     @JDIAction("Get row '{0}' for '{name}' table")
     public L line(String rowName) {
-        return row(rowName).asLine(lineClass);
+        return line(getRowIndexByName(rowName));
     }
 
     @JDIAction("Get row '{0}' for '{name}' table")
@@ -54,7 +65,7 @@ public class DataTable<L extends Section, D> extends Table {
     }
     @JDIAction("Get row '{0}' for '{name}' table")
     public L line(Enum rowName) {
-        return row(rowName).asLine(lineClass);
+        return line(getEnumValue(rowName));
     }
 
     @JDIAction("Get first '{name}' table row that match criteria")
@@ -69,7 +80,7 @@ public class DataTable<L extends Section, D> extends Table {
     @JDIAction("Get first '{name}' table row that match criteria")
     public D data(JFunc1<D, Boolean> matcher) {
         for (int i = 1; i <= count.get(); i++) {
-            D data = getLineData(row(i));
+            D data = data(i);
             if (matcher.execute(data))
                 return data;
         }
@@ -118,11 +129,21 @@ public class DataTable<L extends Section, D> extends Table {
 
     @JDIAction("Get all '{name}' rows")
     public List<D> allData() {
-        return map(rows(), this::getLineData);
+        if (datas.isGotAll()) return datas.get().values();
+        MapArray<String, D> result = new MapArray<>();
+        for (int i = 1; i <= count.get(); i++)
+            result.add(i+"", data(i));
+        datas.gotAll();
+        return datas.set(result).values();
     }
     @JDIAction("Get all '{name}' rows")
     public List<L> allLines() {
-        return map(rows(), l -> l.asLine(lineClass));
+        if (lines.isGotAll()) return lines.get().values();
+        MapArray<String, L> result = new MapArray<>();
+        for (int i = 1; i <= count.get(); i++)
+            result.add(i+"", line(i));
+        lines.gotAll();
+        return lines.set(result).values();
     }
 
     @JDIAction("Filter '{name}' table rows that match criteria in column '{1}'")
@@ -182,7 +203,12 @@ public class DataTable<L extends Section, D> extends Table {
         }
         return value;
     }
-
+    @Override
+    public void refresh() {
+        super.refresh();
+        datas.clear();
+        lines.clear();
+    }
     @Override
     public void setup(Field field) {
         super.setup(field);

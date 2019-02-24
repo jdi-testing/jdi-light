@@ -26,8 +26,6 @@ public class DataTableTests extends TestsInit {
         shouldBeLoggedIn();
         if (firstTime) {
             usersPage.open();
-            users.refresh();
-            usersSetup.refresh();
             firstTime = false;
         }
     }
@@ -82,14 +80,12 @@ public class DataTableTests extends TestsInit {
         validateUserRow(line);
         line = usersSetup.line("Sergey Ivan");
         validateUserRow(line);
-        line =  users.line(d -> d.user.contains("Ivan"));
+        line = users.line(d -> d.user.contains("Ivan"));
         validateUserRow(line);
 
         List<MarvelUser> filteredData = users.lines(d -> d.user.contains("Ivan"));
         assertEquals(filteredData.size(), 1);
         validateUserRow(filteredData.get(0));
         usersPage.open();
-        users.refresh();
-        usersSetup.refresh();
     }
 }

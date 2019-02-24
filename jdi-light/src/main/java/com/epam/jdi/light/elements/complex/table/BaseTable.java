@@ -53,12 +53,12 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         return rowHeaderIndex;
     }
 
-    protected CacheValue<MapArray<String, List<UIElement>>> rows
-        = new CacheValue<>(MapArray::new);
-    protected CacheValue<MapArray<String, List<UIElement>>> columns
-        = new CacheValue<>(MapArray::new);
-    protected CacheValue<MapArray<String, MapArray<String, UIElement>>> cells
-            = new CacheValue<>(MapArray::new);
+    protected CacheAll<MapArray<String, List<UIElement>>> rows
+        = new CacheAll<>(MapArray::new);
+    protected CacheAll<MapArray<String, List<UIElement>>> columns
+        = new CacheAll<>(MapArray::new);
+    protected CacheAll<MapArray<String, MapArray<String, UIElement>>> cells
+            = new CacheAll<>(MapArray::new);
     // Amount of Rows
     protected CacheValue<Integer> count = new CacheValue<>(this::getCount);
     protected CacheValue<List<String>> header = new CacheValue<>(this::getHeader);
@@ -119,7 +119,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         if (rowNum > count.get())
             throw exception("Table has %s rows (but requested index is %s)", count.get(), rowNum);
         if (!rows.get().has(rowNum+"")) {
-            List<UIElement> result = gotTable
+            List<UIElement> result = cells.isGotAll()
                 ? LinqUtils.select(cells.get(), c -> c.value.get(rowNum+""))
                 : getRow(rowNum);
             rows.get().add(rowNum+"", result);
@@ -138,7 +138,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         if (colNum > count.get())
             throw exception("Table has %s columns (but requested index is %s)", size.get(), colNum);
         if (!columns.get().has(colNum+"")) {
-            List<UIElement> result = gotTable
+            List<UIElement> result = cells.isGotAll()
                 ? cells.get().get(colNum + "").values()
                 : getColumn(colNum);
             columns.get().add(colNum + "", result);
@@ -167,7 +167,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         return rowIndex + 1;
     }
     public UIElement webCell(int colNum, int rowNum) {
-        if (!gotTable) {
+        if (!cells.isGotAll()) {
             if (rows.get().has(rowNum + ""))
                 return rows.get().get(rowNum + "").get(colNum - 1);
             if (columns.get().has(colNum + ""))
@@ -179,14 +179,12 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         }
         return cells.get().get(colNum+"").get(rowNum+"");
     }
-
-    protected boolean gotRows = false;
     protected MapArray<String, List<UIElement>> getRows() {
-        if (gotRows) return rows.get();
+        if (rows.isGotAll()) return rows.get();
         MapArray<String, List<UIElement>> result = new MapArray<>();
         for (int i = 1; i <= count.get(); i++)
             result.add(i+"", webRow(i));
-        gotRows = true;
+        rows.gotAll();
         return rows.set(result);
     }
     protected WebList getRowByIndex(int rowNum) {
@@ -204,13 +202,12 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         }
         return elements;
     }
-    protected boolean gotColumns = false;
     protected MapArray<String, List<UIElement>> getColumns() {
-        if (gotColumns) return columns.get();
+        if (columns.isGotAll()) return columns.get();
         MapArray<String, List<UIElement>> result = new MapArray<>();
         for (int i = 1; i <= size.get(); i++)
             result.add(i+"", webColumn(i));
-        gotColumns = true;
+        columns.gotAll();
         return columns.set(result);
     }
     private int getColumnIndex(int index) {
@@ -270,10 +267,8 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
             rowHeaderName = rowHeader;
     }
 
-    protected boolean gotTable = false;
-
     public T getTable() {
-        if (!gotTable) {
+        if (!cells.isGotAll()) {
             try {
                 List<WebElement> listOfCells = $$(allCellsLocator, parent)
                     .noValidation().getAll();
@@ -287,16 +282,13 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
                         cells.get().get(i+"").add(j+"", new UIElement(listOfCells.get(k++)));
                     j++;
                 }
-                gotTable = true;
+                cells.gotAll();
             } catch (Exception ex) {throw exception("Can't get all cells. " + ex.getMessage()); }
         }
         return (T) this;
     }
 
     public void refresh() {
-        gotTable = false;
-        gotRows = false;
-        gotColumns = false;
         rows.clear();
         columns.clear();
         cells.clear();
