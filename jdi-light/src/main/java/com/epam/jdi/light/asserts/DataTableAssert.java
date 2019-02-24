@@ -27,16 +27,20 @@ public class DataTableAssert<D> extends TableAssert {
     public DataTableAssert row(D data) {
         return row(d -> d.equals(data));
     }
-    public class Exact {
+    public class Compare {
         public int count;
+        public String name;
+        public String type;
         DataTableAssert dtAssert;
         public boolean exact;
-        private Exact(int count, DataTableAssert dtAssert, boolean exact) {
+        private Compare(int count, DataTableAssert dtAssert, boolean exact) {
             this.count = count;
             this.dtAssert = dtAssert;
             this.exact = exact;
+            this.type = exact ? "exactly" : "at least";
+            this.name = dtAssert.name;
         }
-        @JDIAction("Assert that '{name}' has '{count}' rows that meet expected condition")
+        @JDIAction("Assert that '{name}' has {type} '{count}' rows that meet expected condition")
         public DataTableAssert rows(JFunc1<D,Boolean> condition) {
             assertThat(exact
                 ? getTable().datas(condition)
@@ -44,18 +48,16 @@ public class DataTableAssert<D> extends TableAssert {
             hasSize(count));
             return dtAssert;
         }
-        @JDIAction("Assert that '{name}' at least '{count}' '{0}'")
+        @JDIAction("Assert that '{name}' has {type} '{count}' '{0}'")
         public DataTableAssert rows(D data) {
             return rows(d -> d.equals(data));
         }
     }
-    @JDIAction("Assert that '{name}' has '{0}' rows that meet expected condition")
-    public Exact exact(int count) {
-        return new Exact(count, this, true);
+    public Compare exact(int count) {
+        return new Compare(count, this, true);
     }
-    @JDIAction("Assert that '{name}' has '{0}' rows that meet expected condition")
-    public Exact atLeast(int count) {
-        return new Exact(count, this, false);
+    public Compare atLeast(int count) {
+        return new Compare(count, this, false);
     }
     @JDIAction("Assert that all '{name}' rows meet expected condition")
     public DataTableAssert allRows(JFunc1<D,Boolean> condition) {

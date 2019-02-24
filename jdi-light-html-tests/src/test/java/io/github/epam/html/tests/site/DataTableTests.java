@@ -26,6 +26,8 @@ public class DataTableTests extends TestsInit {
         shouldBeLoggedIn();
         if (firstTime) {
             usersPage.open();
+            users.refresh();
+            usersSetup.refresh();
             firstTime = false;
         }
     }
