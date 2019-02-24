@@ -89,5 +89,7 @@ public class DataTableTests extends TestsInit {
         assertEquals(filteredData.size(), 1);
         validateUserRow(filteredData.get(0));
         usersPage.open();
+        users.refresh();
+        usersSetup.refresh();
     }
 }
