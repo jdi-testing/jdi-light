@@ -299,6 +299,9 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
     }
 
     public void offCache() {
+        rows.useCache(false);
+        columns.useCache(false);
+        cells.useCache(false);
         count.useCache(false);
         size.useCache(false);
         header.useCache(false);

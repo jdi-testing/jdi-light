@@ -41,8 +41,12 @@ public class ListAssert<T extends BaseUIElement> extends SelectAssert {
         assertThat(map(elements, WebElement::getTagName), condition);
         return this;
     }
+    @JDIAction("Assert that '{name}' has css class {0}") @Override
+    public ListAssert<T> hasCssClasses(String... classNames) {
+        return cssClasses(hasItems(classNames));
+    }
     @JDIAction("Assert that all '{name}' css classes {0}") @Override
-    public ListAssert<T> cssClasses(Matcher<Collection<? extends String>> condition) {
+    public ListAssert<T> cssClasses(Matcher<Iterable<String>> condition) {
         assertThat(map(elements, el -> el.getAttribute("class")), condition);
         return this;
     }

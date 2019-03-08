@@ -44,7 +44,7 @@ public class MonthTests extends TestsInit {
     @Test
     public void setDateTimeTest() {
         monthDate.setDateTime("2018-10");
-        monthDate.hover();
+        monthDate.show();
         assertEquals(monthDate.value(), "2018-10");
     }
 

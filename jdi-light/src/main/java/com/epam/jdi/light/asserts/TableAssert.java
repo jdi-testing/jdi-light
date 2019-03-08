@@ -20,6 +20,7 @@ public class TableAssert extends IsAssert {
     public TableAssert(Table table) {
         super(table);
         this.table = table;
+        table.refresh();
         this.name = table.toError();
     }
 

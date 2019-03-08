@@ -13,6 +13,7 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -22,6 +23,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -45,7 +47,7 @@ public class JList<T extends BaseUIElement> extends JDIBase
             return elements.get();
         if (getLocator().toString().contains("%s"))
             throw exception("You call method that can't be used with template locator. " +
-                    "Please correct %s locator to get List<WebElement> in order to use this method");
+                    "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator()));
         return this.elements.set(toJList(getList(minAmount)));
     }
 
@@ -59,6 +61,7 @@ public class JList<T extends BaseUIElement> extends JDIBase
         T el = first(e -> e.getText().equals(value));
         if (el == null)
             throw exception(NO_ELEMENTS_FOUND, value);
+        el.setName(value);
         return el;
     }
     public T get(Enum name) {
@@ -91,6 +94,23 @@ public class JList<T extends BaseUIElement> extends JDIBase
     public void select(String... names) {
         for (String value : names)
             select(value);
+    }
+    @JDIAction("Select ({0}) for '{name}'")
+    public void hoverAndClick(String... values) {
+        if (ArrayUtils.isEmpty(values))
+            throw exception("Nothing to select in %s", getName());
+        int length = values.length;
+        for (int i=0; i < length-1;i++) {
+            get(values[i]).hover();
+        }
+        get(values[length-1]).click();
+    }
+    @JDIAction("Select ({0}) for '{name}'")
+    public void hoverAndClick(String values) {
+        String[] split = values.split(">");
+        if (split.length == 1)
+            select(split[0]);
+        else hoverAndClick(split);
     }
     public <TEnum extends Enum> void select(TEnum value) {
         select(getEnumValue(value));

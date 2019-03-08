@@ -14,8 +14,6 @@ public class RootTests extends StaticTestsInit {
     @Test
     public void rootTest() {
         shouldBeLoggedOut();
-        userIcon.click();
-        searchIcon.click();
         loginForm.submit(DEFAULT_USER, "enter");
         homePage.checkOpened();
     }

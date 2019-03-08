@@ -93,9 +93,9 @@ public final class WebDriverByUtils {
                 : byValue;
     }
     public static String shortBy(By by) {
-        return by == null
+        return (by == null
                 ? "No locator"
-                : format("%s='%s'", getByName(by), getByLocator(by));
+                : format("%s='%s'", getByName(by), getByLocator(by))).replaceAll("%s", "VALUE");
     }
     public static By getByFromString(String stringLocator) {
         if (stringLocator == null || stringLocator.equals(""))

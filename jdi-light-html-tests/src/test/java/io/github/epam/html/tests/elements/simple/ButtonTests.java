@@ -10,6 +10,7 @@ import static com.epam.jdi.light.elements.base.WindowsManager.acceptAlert;
 import static com.epam.jdi.light.elements.base.WindowsManager.getAlertText;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;

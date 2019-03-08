@@ -23,7 +23,7 @@ import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public abstract class BaseUIElement<T extends BaseUIElement>
-        extends JDIBase implements WebElement, BaseElement, SetValue {
+        extends JDIBase implements WebElement, BaseFindElement<T>, SetValue {
     public BaseUIElement() { }
     public BaseUIElement(WebElement el) { webElement.setForce(el); }
     public BaseUIElement(List<WebElement> els) { webElements.setForce(els); }
@@ -58,7 +58,7 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     public void submit() {
         get().submit();
     }
-    @JDIAction("Input '{value}' in '{name}'")
+    @JDIAction("Input '{0}' in '{name}'")
     public void sendKeys(CharSequence... value) {
         checkEnabled();
         get().sendKeys(value);
@@ -165,7 +165,7 @@ public abstract class BaseUIElement<T extends BaseUIElement>
         jsExecute("click()");
     }
 
-    @JDIAction("Input '{value}' in '{name}'")
+    @JDIAction("Input '{0}' in '{name}'")
     public void input(String value) {
         clear();
         sendKeys(value);

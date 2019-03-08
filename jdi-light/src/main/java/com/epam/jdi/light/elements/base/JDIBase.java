@@ -71,6 +71,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         return (T) this;
     }
     public By getLocator(Object... args) {
+        initContext();
         if (locator.isFrame()) return null;
         return locator.getLocator(args);
     }
@@ -198,11 +199,14 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         JDIBase jdiBase = (JDIBase)parent;
         return jdiBase.getLocator() == null ? "" : jdiBase.locator.toString();
     }
-    private String context;
     public String printFullLocator() {
         return parent == null || isBlank(printContext())
             ? locator.toString()
             : printContext() + ">" + locator.toString();
+    }
+    private void initContext() {
+        if (context == null)
+            context = printFullLocator();
     }
 
     @Override
@@ -233,7 +237,6 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
         if (element.webElement.hasValue())
             return printWebElement(element.webElement.get());
-        if (element.context == null) element.context = element.printFullLocator();
         return Switch(logger.getLogLevel()).get(
                 Case(l -> l == STEP,
                     l -> msgFormat(PRINT_ELEMENT_STEP, element)),
@@ -318,7 +321,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         } catch (Exception ex) { return false; }
     }
 
-    @JDIAction("Set '{value}' in '{name}'")
+    @JDIAction("Set '{0}' in '{name}'")
     public void setText(String value) {
         //setAttribute("value", value);
         jsExecute("value='"+value+"'");
@@ -376,7 +379,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         doActions(a -> a.moveToElement(get()));
     }
     //region Actions
-    @JDIAction("Drag '{name}' and drop it to '{value}'")
+    @JDIAction("Drag '{name}' and drop it to '{0}'")
     public void dragAndDropTo(UIElement to) {
         doActions(a -> a.clickAndHold(get()).moveToElement(to).release(to));
     }

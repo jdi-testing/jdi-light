@@ -17,6 +17,7 @@ public class DataTableAssert<D> extends TableAssert {
     private DataTable<?,D> getTable() { return (DataTable<?,D>) table; }
     public DataTableAssert(DataTable<?,D> table) {
         super(table);
+        table.refresh();
     }
     @JDIAction("Assert that '{name}' has rows that meet expected condition")
     public DataTableAssert row(JFunc1<D,Boolean> condition) {

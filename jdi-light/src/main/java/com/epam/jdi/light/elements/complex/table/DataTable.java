@@ -209,6 +209,11 @@ public class DataTable<L extends Section, D> extends Table {
         datas.clear();
         lines.clear();
     }
+    public void offCache() {
+        super.offCache();
+        datas.useCache(false);
+        lines.useCache(false);
+    }
     @Override
     public void setup(Field field) {
         super.setup(field);

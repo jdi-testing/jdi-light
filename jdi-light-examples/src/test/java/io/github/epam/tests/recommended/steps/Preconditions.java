@@ -32,7 +32,8 @@ public class Preconditions {
     }
     @Step
     public static void logout() {
-        userIcon.click();
+        if (!logout.isDisplayed())
+            userIcon.click();
         logout.click();
     }
 }

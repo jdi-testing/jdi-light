@@ -8,6 +8,7 @@ import org.hamcrest.Matcher;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAssert<T> {
@@ -40,6 +41,11 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
     public T tag(Matcher<String> condition) {
         assertThat(element.getTagName(), condition);
         return (T) this;
+    }
+
+    @JDIAction("Assert that '{name}' has css class {0}")
+    public T hasClass(String className) {
+        return cssClass(containsString(className));
     }
     @JDIAction("Assert that '{name}' css class {0}")
     public T cssClass(Matcher<String> condition) {

@@ -2,6 +2,7 @@ package io.github.epam.tests.selenium;
 
 import com.epam.jdi.light.elements.complex.table.Line;
 import org.apache.commons.lang3.time.StopWatch;
+import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

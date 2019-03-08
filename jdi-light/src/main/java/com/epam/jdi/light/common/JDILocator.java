@@ -83,7 +83,7 @@ public class JDILocator {
             String shortLocator = locator != null
                     ? shortBy(locator)
                     : print(select(SMART_SEARCH_LOCATORS, l -> format(l, splitHyphen(name))), " or ");
-            return isFrame + shortLocator;
+            return isFrame + shortLocator.replaceAll("%s", "VALUE");
         } catch (Exception ex) { throw exception("Can't print locator: " + ex.getMessage()); }
     }
 }
