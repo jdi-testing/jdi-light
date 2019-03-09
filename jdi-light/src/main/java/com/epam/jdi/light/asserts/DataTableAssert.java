@@ -14,14 +14,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class DataTableAssert<D> extends TableAssert {
-    private DataTable<?,D> getTable() { return (DataTable<?,D>) table; }
+    @Override
+    protected DataTable<?,D> table() { return (DataTable<?,D>) super.table(); }
     public DataTableAssert(DataTable<?,D> table) {
         super(table);
-        table.refresh();
     }
     @JDIAction("Assert that '{name}' has rows that meet expected condition")
     public DataTableAssert row(JFunc1<D,Boolean> condition) {
-        assertThat(getTable().data(condition), not(nullValue()));
+        assertThat(table().data(condition), not(nullValue()));
         return this;
     }
     @JDIAction("Assert that '{name}' has {0}")
@@ -44,8 +44,8 @@ public class DataTableAssert<D> extends TableAssert {
         @JDIAction("Assert that '{name}' has {type} '{count}' rows that meet expected condition")
         public DataTableAssert rows(JFunc1<D,Boolean> condition) {
             assertThat(exact
-                ? getTable().datas(condition)
-                : getTable().datas(condition, count),
+                ? table().datas(condition)
+                : table().datas(condition, count),
             hasSize(count));
             return dtAssert;
         }
@@ -62,7 +62,7 @@ public class DataTableAssert<D> extends TableAssert {
     }
     @JDIAction("Assert that all '{name}' rows meet expected condition")
     public DataTableAssert allRows(JFunc1<D,Boolean> condition) {
-        List<D> data = getTable().allData();
+        List<D> data = table().allData();
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < data.size(); i++)
             if (!condition.execute(data.get(i)))

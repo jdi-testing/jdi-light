@@ -211,11 +211,13 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
 
     @Override
     public String toString() {
+        initContext();
         try {
             return PRINT_ELEMENT.execute(this);
         } catch (Exception ex) { throw exception("Can't print element: " + ex.getMessage()); }
     }
     public String toError() {
+        initContext();
         try {
             return Switch(logger.getLogLevel()).get(
                 Case(l -> l == INFO,
@@ -227,11 +229,13 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         } catch (Exception ex) { throw exception("Can't print element for error: " + ex.getMessage()); }
     }
     private static String printWebElement(WebElement element) {
-        String asString = element.toString();
-        String result = asString.startsWith("WebElement:")
-                ? "" : "WebElement:";
-        if (asString.contains(")]"))
-            return result + element.toString().split("\\)]")[1].replaceAll("]", "");
+        String asString = element.toString().replaceAll("css selector", "css");
+        String result = asString.startsWith("WebElement->")
+                ? "" : "WebElement->";
+        if (asString.contains(")]")) {
+            String s = asString.split("-> ")[1];
+            return result + s.substring(0,s.length()-1);
+        }
         return asString;
     }
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {

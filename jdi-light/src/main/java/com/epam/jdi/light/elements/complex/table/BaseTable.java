@@ -287,7 +287,9 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         }
         return (T) this;
     }
-
+    public void clear() {
+        refresh();
+    }
     public void refresh() {
         rows.clear();
         columns.clear();

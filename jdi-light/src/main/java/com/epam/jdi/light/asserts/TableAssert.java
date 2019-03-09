@@ -16,27 +16,30 @@ import static org.hamcrest.Matchers.*;
 public class TableAssert extends IsAssert {
     protected Table table;
     protected String name;
+    protected Table table() {
+        table.refresh();
+        return table;
+    }
 
     public TableAssert(Table table) {
         super(table);
         this.table = table;
-        table.refresh();
         this.name = table.toError();
     }
 
     @JDIAction("Assert is '{name}' empty")
     public TableAssert empty() {
-        assertThat(table.isEmpty() ? "is empty" : "is not empty", is("is empty"));
+        assertThat(table().isEmpty() ? "is empty" : "is not empty", is("is empty"));
         return this;
     }
     @JDIAction("Assert is '{name}' not empty")
     public TableAssert notEmpty() {
-        assertThat(table.isEmpty() ? "is empty" : "is not empty", is("is not empty"));
+        assertThat(table().isEmpty() ? "is empty" : "is not empty", is("is not empty"));
         return this;
     }
     @JDIAction("Assert that '{name}' size {0}")
     public TableAssert size(Matcher<Integer> condition) {
-        assertThat(table.count(), condition);
+        assertThat(table().count(), condition);
         return this;
     }
     @JDIAction("Assert that '{name}' size {0}")
@@ -45,7 +48,7 @@ public class TableAssert extends IsAssert {
     }
     @JDIAction("Assert that '{name}' has column'{0}'")
     public TableAssert hasColumn(String column) {
-        assertThat(table.header(), hasItem(column));
+        assertThat(table().header(), hasItem(column));
         return this;
     }
     @JDIAction("Assert that '{name}' has columns '{0}'")
@@ -56,18 +59,18 @@ public class TableAssert extends IsAssert {
     }
     @JDIAction("Assert that '{name}' columns {0}")
     public TableAssert columns(Matcher<Collection<? extends String>> condition) {
-        assertThat(table.header(), condition);
+        assertThat(table().header(), condition);
         return this;
     }
     @JDIAction("Assert that '{name}' has at least '{0}' rows that {0}")
     public TableAssert rowsWithValues(int count, TableMatcher... matchers) {
         assertThat(TABLE_MATCHER.execute(table, matchers).size(),
-            greaterThan(table.header().size()*count-1));
+            greaterThan(table().header().size()*count-1));
         return this;
     }
     @JDIAction("Assert that '{name}' has at least one row that {0}}")
     public TableAssert hasRowWithValues(TableMatcher... matchers) {
-        assertThat(TABLE_MATCHER.execute(table, matchers), is(not(Matchers.empty())));
+        assertThat(TABLE_MATCHER.execute(table(), matchers), is(not(Matchers.empty())));
         return this;
     }
 }
