@@ -42,7 +42,7 @@ public class TimeTests extends TestsInit {
     @Test
     public void setDateTimeTest() {
         bookingTime.setDateTime("05:00");
-        bookingTime.hover();
+        bookingTime.show();
         assertEquals(bookingTime.value(), "05:00");
     }
 

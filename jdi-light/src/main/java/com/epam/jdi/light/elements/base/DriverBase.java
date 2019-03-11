@@ -26,6 +26,7 @@ public class DriverBase implements INamed {
     public String typeName = "";
     public String failElement = "";
     public Object parent;
+    protected String context;
     public <T extends JDIBase> T setParent(Object parent) {
         this.parent = parent;
         return (T) this;

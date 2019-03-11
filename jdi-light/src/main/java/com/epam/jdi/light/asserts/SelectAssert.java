@@ -14,6 +14,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 
 public class SelectAssert extends IsAssert {
@@ -74,8 +75,13 @@ public class SelectAssert extends IsAssert {
         assertThat(map(selector.allUI(), UIElement::getTagName), condition);
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has css class {0}")
+    public SelectAssert hasCssClasses(String... classNames) {
+        return cssClasses(hasItems(classNames));
+    }
     @JDIAction("Assert that all '{name}' css classes {0}")
-    public SelectAssert cssClasses(Matcher<Collection<? extends String>> condition) {
+    public SelectAssert cssClasses(Matcher<Iterable<String>> condition) {
         assertThat(selector.classes(), condition);
         return this;
     }

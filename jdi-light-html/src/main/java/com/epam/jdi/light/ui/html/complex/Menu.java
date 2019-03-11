@@ -17,4 +17,6 @@ public interface Menu extends IList<HtmlElement>, JDIElement, BaseElement, IHasS
     void select(int value);
     String selected();
     List<String> values();
+    void hoverAndClick(String... values);
+    void hoverAndClick(String values);
 }

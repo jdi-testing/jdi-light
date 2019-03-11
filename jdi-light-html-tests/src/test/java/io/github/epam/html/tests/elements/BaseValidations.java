@@ -9,7 +9,7 @@ import static org.testng.Assert.*;
 public class BaseValidations {
 
     public static void baseValidation(BaseElement el) {
-        el.hover();
+        // EXCLUDED el.hover();
         assertTrue(el.isEnabled());
         assertTrue(el.isDisplayed());
         assertFalse(el.isDisabled());

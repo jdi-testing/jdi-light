@@ -2,9 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Test suite" parallel="classes" thread-count="1">
     <test name="Tests">
-        <!--packages>
+        <packages>
             <package name="org.mytests.tests.example"/>
-        </packages-->
+        </packages>
         <classes>
             <class name="org.mytests.tests.example.MenuTests" />
         </classes>

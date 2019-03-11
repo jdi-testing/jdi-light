@@ -6,6 +6,7 @@ public interface CommonAssert<T> {
     T attr(String attrName, Matcher<String> condition);
     T css(String css, Matcher<String> condition);
     T tag(Matcher<String> condition);
+    T hasClass(String className);
     T cssClass(Matcher<String> condition);
     T displayed();
     T disappear();

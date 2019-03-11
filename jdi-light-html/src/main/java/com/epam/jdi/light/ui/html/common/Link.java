@@ -1,11 +1,12 @@
 package com.epam.jdi.light.ui.html.common;
 
-import com.epam.jdi.light.elements.base.BaseElement;
+import com.epam.jdi.light.elements.base.BaseFindElement;
 import com.epam.jdi.light.ui.html.asserts.LinkAssert;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
 
 import java.net.URL;
 
-public interface Link extends BaseElement {
+public interface Link extends BaseFindElement<HtmlElement> {
     void click();
     String getText();
     String ref();

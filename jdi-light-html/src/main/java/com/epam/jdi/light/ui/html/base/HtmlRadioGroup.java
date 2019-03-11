@@ -23,7 +23,7 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements BaseSelecto
     By label = LABEL_LOCATOR;
     private String getId(String name) { return label(name).getAttribute("for"); }
     public HtmlElement get(String value) {
-        return $(fillByTemplate(radioButton, getId(value)), parent).setName("radioButton");
+        return $(fillByTemplate(radioButton, getId(value)), parent).setName(value);
     }
     private HtmlElement label(String value) {
         return $(fillByTemplate(label, value), parent).setName("label");

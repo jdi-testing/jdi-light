@@ -1,10 +1,11 @@
 package com.epam.jdi.light.ui.html.common;
 
-import com.epam.jdi.light.elements.base.BaseElement;
+import com.epam.jdi.light.elements.base.BaseFindElement;
 import com.epam.jdi.light.ui.html.asserts.ProgressAssert;
 import com.epam.jdi.light.ui.html.base.HasLabel;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
 
-public interface ProgressBar extends BaseElement, HasLabel {
+public interface ProgressBar extends BaseFindElement<HtmlElement>, HasLabel {
     String value();
     String max();
 

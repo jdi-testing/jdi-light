@@ -49,51 +49,67 @@ public class JDILogger implements ILogger {
         this(clazz.getSimpleName());
     }
 
-    private LogLevels logLevel = INFO;
+    private ThreadLocal<LogLevels> logLevel = new ThreadLocal<>();
 
     public LogLevels getLogLevel() {
-        return logLevel;
+        return getLevel();
     }
     public void setLogLevel(LogLevels logLevel) {
-        this.logLevel = logLevel;
         this.currentLevel = logLevel;
         setRootLevel(getLog4j2Level(logLevel));
     }
+    private LogLevels getLevel() {
+        if (logLevel.get() == null)
+            logLevel.set(currentLevel);
+        return logLevel.get();
+    }
     private LogLevels currentLevel = INFO;
-    private int logOffDeepness = 0;
-    public void logOff() {
-        if (logOffDeepness == 0) {
-            currentLevel = logLevel;
-            logLevel = OFF;
+    private ThreadLocal<Integer> logOffDeepness = new ThreadLocal<>();
+
+    private void increaseDeepness() {
+        if (logOffDeepness.get() == null) {
+            logOffDeepness.set(1);
+            return;
         }
-        logOffDeepness ++;
+        logOffDeepness.set(logOffDeepness.get()+1);
+    }
+    private void decreaseDeepness() {
+        if (logOffDeepness.get() == null) {
+            logOffDeepness.set(-1);
+            return;
+        }
+        logOffDeepness.set(logOffDeepness.get()-1);
+    }
+    public void logOff() {
+        logLevel.set(OFF);
+        increaseDeepness();
     }
     public void logOn() {
-        logOffDeepness --;
-        if (logOffDeepness > 0) return;
-        if (logOffDeepness == 0)
-            logLevel = currentLevel;
-        if (logOffDeepness <0)
+        decreaseDeepness();
+        if (logOffDeepness.get() > 0) return;
+        if (logOffDeepness.get() == 0)
+            logLevel.set(currentLevel);
+        if (logOffDeepness.get() < 0)
             throw new RuntimeException("Log Off Deepness to high. Please check that each logOff has appropriate logOn");
     }
     public void dropLogOff() {
-        logOffDeepness = 0;
-        logLevel = currentLevel;
+        logOffDeepness.set(0);
+        logLevel.set(currentLevel);
     }
     public void logOff(JAction action) {
         logOff(() -> { action.invoke(); return null; });
     }
     public <T> T logOff(JFunc<T> func) {
-        LogLevels currentLevel = logLevel;
-        if (logLevel == OFF) {
+        LogLevels tempLevel = getLevel();
+        if (getLevel() == OFF) {
             try { return func.invoke();
             } catch (Exception ex) { throw new RuntimeException(ex); }
         }
-        logLevel = OFF;
+        logLevel.set(OFF);
         T result;
         try{ result = func.invoke(); }
         catch (Exception ex) {throw new RuntimeException(ex); }
-        logLevel = currentLevel;
+        logLevel.set(tempLevel);
         return result;
     }
     private String name;
@@ -121,24 +137,24 @@ public class JDILogger implements ILogger {
     }
 
     public void step(String s, Object... args) {
-        if (logLevel.equalOrLessThan(STEP)) {
+        if (getLevel().equalOrLessThan(STEP)) {
             logger.log(Level.forName("STEP", 350), jdiMarker, getRecord(s, args));
             writeToAllure(getRecord(s, args));
         }
     }
 
     public void trace(String s, Object... args) {
-        if (logLevel.equalOrLessThan(TRACE)) {
+        if (getLevel().equalOrLessThan(TRACE)) {
             logger.trace(jdiMarker, getRecord(s, args));
         }
     }
     public void debug(String s, Object... args) {
-        if (logLevel.equalOrLessThan(DEBUG)) {
+        if (getLevel().equalOrLessThan(DEBUG)) {
             logger.debug(jdiMarker, getRecord(s, args));
         }
     }
     public void info(String s, Object... args) {
-        if (logLevel.equalOrLessThan(INFO)) {
+        if (getLevel().equalOrLessThan(INFO)) {
             logger.info(jdiMarker, getRecord(s, args));
         }
     }
@@ -150,7 +166,7 @@ public class JDILogger implements ILogger {
         toLog(msg, currentLevel);
     }
     public void toLog(String msg, LogLevels level) {
-        if (logLevel.equalOrLessThan(level))
+        if (getLevel().equalOrLessThan(level))
             switch (level) {
                 case ERROR: error(msg); break;
                 case STEP: step(msg); break;

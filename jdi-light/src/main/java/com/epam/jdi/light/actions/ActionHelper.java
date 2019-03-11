@@ -10,6 +10,8 @@ import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.logger.LogLevels;
+import com.epam.jdi.tools.PrintUtils;
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -34,6 +36,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.StringUtils.arrayToString;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.StringUtils.splitLowerCase;
 import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
@@ -188,16 +191,6 @@ public class ActionHelper {
         return format("%s%s", method, stringArgs);
     }
 
-    static String arrayToString(Object array) {
-        String result = "";
-        boolean first = true;
-        for(Object a : (Object[])array) {
-            if (first) first = false;
-            else result += ",";
-            result += a.toString();
-        }
-        return result;
-    }
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
         return toMap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint)));
     }
@@ -216,61 +209,11 @@ public class ActionHelper {
         for (int i = 0; i< args.length; i++)
             result[i] = Switch(args[i]).get(
                 Case(Objects::isNull, null),
-                Case(arg -> arg.getClass().isArray(), ActionHelper::printArray),
+                Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
                 Case(arg -> isInterface(arg.getClass(), List.class),
-                        ActionHelper::printList),
+                        PrintUtils::printList),
                 Default(arg -> arg));
         return result;
-    }
-
-    private static String printList(Object obj) {
-        List<?> list = (List<?>)obj;
-        String result = "[";
-        for (int i=0; i<list.size()-1;i++)
-            result += list.get(i)+", ";
-        return result + list.get(list.size()-1) + "]";
-    }
-    private static String printArray(Object array) {
-        try {
-            return Arrays.toString((Enum[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((int[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((Integer[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((String[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((boolean[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((Boolean[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((float[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((Float[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((double[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((Double[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((char[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((byte[])array);
-        } catch (Exception ex) {}
-        try {
-            return Arrays.toString((Byte[])array);
-        } catch (Exception ex) {}
-        return "";
     }
 
     static MapArray<String, Object> classFields(JoinPoint joinPoint) {

@@ -143,6 +143,7 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         T result = elements.get(value);
         if (result == null)
             throw exception("Can't find '%s' element in list %s", value, elements.keys());
+        result.setName(value);
         return result;
     }
 

@@ -4,12 +4,16 @@
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener" />
     </listeners>
-    <test name="Tests" preserve-order="true">
-        <classes>
+    <test name="Tests">
+        <!--classes>
             <class name="io.github.epam.tests.epam.FormsTests"/>
-        </classes>
-        <!--packages>
-            <package name="io.github.epam.tests"/>
-        </packages-->
+        </classes-->
+        <packages>
+            <package name="io.github.epam.tests.recommended"/>
+            <package name="io.github.epam.tests.selenium"/>
+            <package name="io.github.epam.tests.epam"/>
+            <package name="io.github.epam.tests.google"/>
+            <package name="io.github.epam.tests.smart.path"/>
+        </packages>
     </test>
 </suite>

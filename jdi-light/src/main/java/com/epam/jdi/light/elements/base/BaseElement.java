@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-public interface BaseElement extends JDIElement, HasValue {
+public interface BaseElement  extends JDIElement, HasValue {
     void hover();
     boolean isEnabled();
     boolean isDisabled();
@@ -33,4 +33,5 @@ public interface BaseElement extends JDIElement, HasValue {
     void actions(JFunc1<Actions, Actions> actions);
     boolean wait(JFunc1<BaseElement, Boolean> condition);
     List<String> classes();
+    boolean hasClass(String className);
 }

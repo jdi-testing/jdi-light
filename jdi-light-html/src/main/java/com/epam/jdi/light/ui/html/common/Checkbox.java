@@ -1,17 +1,17 @@
 package com.epam.jdi.light.ui.html.common;
 
-import com.epam.jdi.light.elements.base.BaseElement;
+import com.epam.jdi.light.elements.base.BaseFindElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.ui.html.annotations.FillValue;
 import com.epam.jdi.light.ui.html.annotations.VerifyValue;
 import com.epam.jdi.light.ui.html.asserts.CheckboxAssert;
 import com.epam.jdi.light.ui.html.base.HasLabel;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
 
-public interface Checkbox extends BaseElement, HasLabel, SetValue {
+public interface Checkbox extends BaseFindElement<HtmlElement>, HasLabel, SetValue {
     void click();
-    @FillValue
-    default void check(String value) {
-        if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("1"))
+    @FillValue default void check(String value) {
+        if (value.equalsIgnoreCase("true") || value.equals("1"))
             check();
         else uncheck();
     }

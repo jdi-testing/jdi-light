@@ -43,7 +43,7 @@ public class WeekTests extends TestsInit {
     @Test
     public void setDateTimeTest() {
         autumnWeek.setDateTime("2018-W12");
-        autumnWeek.hover();
+        autumnWeek.show();
         assertEquals(autumnWeek.value(), "2018-W12");
     }
 

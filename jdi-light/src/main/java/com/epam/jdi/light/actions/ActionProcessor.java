@@ -63,7 +63,7 @@ public class ActionProcessor {
             try {
                 exception = ex.getMessage();
                 Thread.sleep(200);
-            } catch (Exception ignore) {  } }
+            } catch (Exception ignore) { } }
         } while (currentTimeMillis() - start < timeout*1000);
         logger.logOn();
         throw exception(getFailedMessage(jp, exception));
