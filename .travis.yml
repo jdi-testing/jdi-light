@@ -1,5 +1,5 @@
 language: java
 script:
-  - mvn clean verify org.jacoco:jacoco-maven-plugin:0.7.9:prepare-agent install org.jacoco:jacoco-maven-plugin:0.7.9:report coveralls:report
+  - mvn clean verify jacoco:prepare-agent jacoco:report coveralls:report
 after_success:
   - mvn coveralls:report
