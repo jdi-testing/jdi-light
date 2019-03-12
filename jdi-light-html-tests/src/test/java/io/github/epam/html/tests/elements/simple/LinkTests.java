@@ -21,57 +21,57 @@ public class LinkTests extends TestsInit {
     }
     String text = "Github JDI";
 
-    @Test
+    //@Test
     public void getTextTest() {
         assertEquals(githubLink.getText(), text);
     }
 
-    @Test
+    //@Test
     public void getValueTest() {
         assertEquals(githubLink.getValue(), text);
     }
 
-    @Test
+    //@Test
     public void getRefTest() {
         assertEquals(githubLink.ref(), "https://github.com/jdi-testing");
     }
 
-    @Test
+    //@Test
     public void getUrlTest() {
         assertEquals(githubLink.url().getPath(), "/jdi-testing");
     }
 
-    @Test
+    //@Test
     public void getAltTest() {
         assertEquals(githubLink.alt(), "Github JDI Link");
     }
 
-    @Test
+    //@Test
     public void clickTest() {
         githubLink.click();
         assertEquals(getUrl(), "https://github.com/jdi-testing");
         html5Page.open();
     }
 
-    @Test
+    //@Test
     public void isValidationTest() {
         githubLink.is().text(is(text));
         githubLink.is().text(equalToIgnoringCase("Github jdi"));
         githubLink.is().enabled();
     }
 
-    @Test
+    //@Test
     public void linkValidationTest() {
         githubLink.is().ref(containsString("github"));
         githubLink.is().alt(containsString("JDI"));
     }
 
-    @Test
+    //@Test
     public void assertValidationTest() {
         githubLink.assertThat().text(is(text));
     }
 
-    @Test
+    //@Test
     public void baseValidationTest() {
         baseValidation(githubLink);
     }

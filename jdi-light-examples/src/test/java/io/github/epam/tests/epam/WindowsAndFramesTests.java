@@ -11,14 +11,14 @@ import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 
 public class WindowsAndFramesTests extends TestsInit {
-
+/*
     @BeforeMethod
     public void before() {
         getWindows();
         shouldBeLoggedIn();
         homePage.shouldBeOpened();
     }
-    @Test
+    //@Test
     public void windowsTest() {
         homePage.shouldBeOpened();
         homePage.githubLink.click();
@@ -39,8 +39,8 @@ public class WindowsAndFramesTests extends TestsInit {
         closeWindow();
     }
 
-    @Test
+    //@Test
     public void frameTest() {
         iframe.userIcon.click();
-    }
+    }*/
 }

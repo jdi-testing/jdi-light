@@ -15,14 +15,14 @@ import static org.mytests.uiobjects.example.site.SiteJdi.performancePage;
 import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.*;
 
 public class JDIPerformanceTests extends SimpleTestsInit {
-
+/*
     @BeforeMethod
     public void openPerformancePage() {
         shouldBeLoggedIn();
         performancePage.shouldBeOpened();
     }
 
-    @Test
+    //@Test
     public void hugeTableSearchTest() {
         usersTable.assertThat().hasRowWithValues(
             containsValue("Meyer", inColumn("Name")),
@@ -40,7 +40,7 @@ public class JDIPerformanceTests extends SimpleTestsInit {
         "Brian Meyer;(016977) 0358;mollis.nec@seddictumeleifend.co.uk;Houston");
     }
 
-    @Test
+    //@Test
     public void hugeTableValidateTest() {
         StopWatch timer = StopWatch.createStarted();
         String actualTable = usersTable.preview();
@@ -48,7 +48,7 @@ public class JDIPerformanceTests extends SimpleTestsInit {
         Assert.assertEquals(actualTable, TABLE_SNAPSHOOT);
     }
 
-    @Test
+    //@Test
     public void bigDropdownTest() {
         String name = "Charles Byers";
         StopWatch timer = StopWatch.createStarted();
@@ -57,7 +57,7 @@ public class JDIPerformanceTests extends SimpleTestsInit {
         Assert.assertEquals(userNames.selected(), name);
     }
 
-    @Test
+    //@Test
     public void longTextTest() {
         String text = "Lorem ipsum dolor sit amet, eos numquam rationibus ad. Ius cu accumsan salutatus, ne pro purto ridens vulputate. Cu eum doctus tritani, munere sanctus complectitur vis id. Paulo vulputate te eos, suas tollit laudem nam id. His esse rebum reprimique ut, te solum atqui homero vim.\\n\\n" +
                 "Labitur salutatus eos an. Vim ut dicam fuisset. Ex sed animal accommodare, utinam graeci iisque vim id, ea fugit scripta deleniti nec. Eos cu nisl veri meis. Affert audiam copiosae mel ne, fabulas menandri temporibus has et. Sed latine graecis ei, eu fugit soluta intellegam vis, nibh graeci meliore ad duo.\\n\\n" +
@@ -67,5 +67,5 @@ public class JDIPerformanceTests extends SimpleTestsInit {
         StopWatch timer = StopWatch.createStarted();
         textareaPerformance.setText(text + "\\n"+ text);
         System.out.println("Long text test Time: " + timer.getTime());
-    }
+    }*/
 }

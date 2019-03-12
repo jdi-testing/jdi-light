@@ -18,17 +18,17 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class DataTableTests extends StaticTestsInit {
-    @BeforeMethod
+    /*@BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         tablePage.shouldBeOpened();
     }
 
-    @Test
+    //@Test
     public void dataTableTest() {
         dataTableValidation(usersData);
     }
-    @Test
+    //@Test
     public void jDataTableTest() {
         dataTableValidation(usersDataSetup);
     }
@@ -43,20 +43,20 @@ public class DataTableTests extends StaticTestsInit {
             "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas" +
             "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauvais");
     }
-    @Test
+    //@Test
     public void filterDataTest() {
         assertEquals(usersData.data(2), GRADY_BROCK);
         assertEquals(usersData.data("Grady Brock"), GRADY_BROCK);
         assertEquals(usersData.data(d -> d.name.contains("Brock")), GRADY_BROCK);
         usersData.assertThat().row(d -> d.equals(GRADY_BROCK));
-        /*
+        *//*
         List<UserInfo> filteredData = usersData.datas(d -> d.name.contains("Brock"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), GRADY_BROCK);
-        */
+        *//*
     }
 
-    @Test
+    //@Test
     public void filterLinesTest() {
         UserRow line =  usersData.line(2);
         validateUserRow(line);
@@ -64,16 +64,16 @@ public class DataTableTests extends StaticTestsInit {
         validateUserRow(line);
         line =  usersData.line(d -> d.name.contains("Brock"));
         validateUserRow(line);
-        /*
+        *//*
         List<UserRow> filteredData = usersData.lines(d -> d.name.contains("Brock"));
         assertEquals(filteredData.size(), 1);
         validateUserRow(filteredData.get(0));
-        */
+        *//*
     }
 
     private void validateUserRow(UserRow line) {
         line.city.click();
         validateAlert(is(GRADY_BROCK.city));
         assertEquals(line.email.getText(), GRADY_BROCK.email);
-    }
+    }*/
 }

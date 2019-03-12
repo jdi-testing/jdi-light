@@ -26,7 +26,7 @@ public class PathTests extends StaticTestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
     }
-    @Test
+    //@Test
     public void complexTest() {
         List<Object> bys = searchBy(By.xpath("//*[text()='Description']"));
         assertEquals(bys.size(), 1);
