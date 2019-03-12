@@ -4,6 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![stackoverflow](https://img.shields.io/badge/stackoverflow-jdi-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/jdi)
+[![Coverage Status](https://coveralls.io/repos/github/jdi-testing/jdi-light/badge.svg?branch=master)](https://coveralls.io/github/jdi-testing/jdi-light?branch=master)
 
 ## Introduction
 
