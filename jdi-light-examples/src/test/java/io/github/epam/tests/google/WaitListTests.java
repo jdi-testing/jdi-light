@@ -25,31 +25,31 @@ public class WaitListTests extends GoogleInit {
         }).start();
     }
     /*
-    //@TestSkipp
+    //@Test
     public void notEmptyTest() {
         homePage.search("sgrgergsergsfdgdfgergsergserg");
         waitList(() -> homePage.search("jdi"));
         searchS.is().notEmpty();
     }
-    //@TestSkipp
+    //@Test
     public void notEmpty2Test() {
         homePage.search("sgrgergsergsfdgdfgergsergserg");
         waitList(() -> homePage.search("jdi"));
         searchS.assertThat(not(empty()));
     }
-    //@TestSkipp
+    //@Test
     public void emptyTest() {
         homePage.search("jdi");
         waitList(() -> homePage.search("sgrgergsergsfdgdfgergsergserg"));
         searchS.is().empty();
     }
-    //@TestSkipp
+    //@Test
     public void sizeTest() {
         homePage.search("jdi");
         waitList(() -> homePage.search("sgrgergsergsfdgdfgergsergserg"));
         searchS.is().size(equalTo(0));
     }
-    //@TestSkipp
+    //@Test
     public void sizeNotEmptyTest() {
         homePage.search("sgrgergsergsfdgdfgergsergserg");
         waitList(() -> homePage.search("jdi"));

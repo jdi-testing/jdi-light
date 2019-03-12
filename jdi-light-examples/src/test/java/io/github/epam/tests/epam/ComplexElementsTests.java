@@ -21,13 +21,13 @@ public class ComplexElementsTests extends TestsInit {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
     }
-    //@TestSkipp
+    //@Test
     public void complexTest() {
         metalAndColorsPage.colors.select(Green);
         metalAndColorsPage.metals.select(Gold);
         //metalAndColorsPage.vegetables.check(Onion, Tomato);
     }
-    //@TestSkipp
+    //@Test
     public void navigationListTest() {
         navigation.get(nContactForm).click();
         contactFormPage.checkOpened();
@@ -37,7 +37,7 @@ public class ComplexElementsTests extends TestsInit {
         homePage.githubLink.click();
         originalWindow();
     }
-    //@TestSkipp
+    //@Test
     public void navigationMenuTest() {
         navigationL.select(ContactForm);
         //navigationL.select("Contact form");

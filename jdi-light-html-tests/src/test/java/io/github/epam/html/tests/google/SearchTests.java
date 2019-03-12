@@ -17,7 +17,7 @@ public class SearchTests extends GoogleInit {
         homePage.shouldBeOpened();
     }
 
-    //@TestSkipp
+    //@Test
     public void printResultListTest() {
         suggestion.typeAndSelect("jdi", "jdi");
         assertTrue(jobs3.get(2).name.getText().toLowerCase().contains("jdi")
