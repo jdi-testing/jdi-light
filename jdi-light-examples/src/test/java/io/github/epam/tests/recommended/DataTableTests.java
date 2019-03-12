@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class DataTableTests extends StaticTestsInit {
-    @BeforeMethod
+    /*@BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         tablePage.shouldBeOpened();
@@ -49,11 +49,11 @@ public class DataTableTests extends StaticTestsInit {
         assertEquals(usersData.data("Grady Brock"), GRADY_BROCK);
         assertEquals(usersData.data(d -> d.name.contains("Brock")), GRADY_BROCK);
         usersData.assertThat().row(d -> d.equals(GRADY_BROCK));
-        /*
+        *//*
         List<UserInfo> filteredData = usersData.datas(d -> d.name.contains("Brock"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), GRADY_BROCK);
-        */
+        *//*
     }
 
     //@Test
@@ -64,16 +64,16 @@ public class DataTableTests extends StaticTestsInit {
         validateUserRow(line);
         line =  usersData.line(d -> d.name.contains("Brock"));
         validateUserRow(line);
-        /*
+        *//*
         List<UserRow> filteredData = usersData.lines(d -> d.name.contains("Brock"));
         assertEquals(filteredData.size(), 1);
         validateUserRow(filteredData.get(0));
-        */
+        *//*
     }
 
     private void validateUserRow(UserRow line) {
         line.city.click();
         validateAlert(is(GRADY_BROCK.city));
         assertEquals(line.email.getText(), GRADY_BROCK.email);
-    }
+    }*/
 }

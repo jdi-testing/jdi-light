@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
  * Created by Roman_Iovlev on 3/2/2018.
  */
 public class ElementsGoogleTests extends GoogleInit {
-    @BeforeMethod
+    /*@BeforeMethod
     public void before() {
         homePage.shouldBeOpened();
         homePage.search("jdi");
@@ -36,13 +36,13 @@ public class ElementsGoogleTests extends GoogleInit {
         UIList<SearchResult, Result> jobs = searchPage.search;
 
         //TODO
-        /*jobs.assertThat(not(empty()));
+        *//*jobs.assertThat(not(empty()));
         jobs.assertThat(hasSize(greaterThan(2)));
         jobs.assertThat(hasItem(expectedResult()));
         jobs.assertThat(hasItems(expectedResultsList()));
         jobs.assertThat(not(hasItem(corruptedResult())));
         jobs.assertThat(not(hasItems(corruptedResultsList())));
-        */
+        *//*
     }
     //@Test
     public void validateEntities2Tests() {
@@ -65,7 +65,7 @@ public class ElementsGoogleTests extends GoogleInit {
     public void validateFilterTests() {
         UIList<SearchResult, Result> jobs = searchPage.search;
 
-        /*
+        *//*
         String expetedValue = searchPage.search.getValue();
         jobs.assertThat().value(expetedValue);
         jobs.assertThat().any(e -> e.name.toLowerCase().contains("jdi"));
@@ -74,7 +74,7 @@ public class ElementsGoogleTests extends GoogleInit {
             || e.name.contains("Japan"));
         jobs.assertThat().onlyOne(e -> e.name.contains("株式会"));
         jobs.assertThat().noOne(e -> e.name.contains("SELENIDE"));
-        */
+        *//*
     }
 
     private static List<Result> jobs() {
@@ -99,5 +99,5 @@ public class ElementsGoogleTests extends GoogleInit {
         Result r2 = jobs().get(3);
         r2.description = "changed";
         return new Result[] {r, r2};
-    }
+    }*/
 }

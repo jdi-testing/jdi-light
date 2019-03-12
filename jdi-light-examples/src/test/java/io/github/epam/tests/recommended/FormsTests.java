@@ -14,7 +14,7 @@ import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLogge
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedOut;
 
 public class FormsTests extends StaticTestsInit {
-
+/*
     //@Test
     public void loginTest() {
         shouldBeLoggedOut();
@@ -31,5 +31,5 @@ public class FormsTests extends StaticTestsInit {
         contactFormPage.shouldBeOpened();
         main.contactForm.submit(USER_WITH_CONTACTS);
         main.contactForm.check(USER_WITH_CONTACTS);
-    }
+    }*/
 }
