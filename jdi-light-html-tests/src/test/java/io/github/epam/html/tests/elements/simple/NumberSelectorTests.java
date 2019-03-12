@@ -72,14 +72,14 @@ public class NumberSelectorTests extends TestsInit {
         height.label().is().text(equalToIgnoringCase("height (metres):"));
     }
 
-    @TestSkipp
+    //@TestSkipp
     public void assertValidationTest() {
         height.assertThat().number(greaterThan(0.0));
         height.assertThat().number(lessThan(3.0));
         height.assertThat().number(is(2.1));
     }
 
-    @TestSkipp
+    //@TestSkipp
     public void baseValidationTest() {
         baseValidation(height);
     }
