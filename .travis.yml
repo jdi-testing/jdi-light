@@ -1,5 +1,5 @@
 language: java
 script:
-  - mvn test jacoco:report coveralls:report
+  - mvn clean verify jacoco:prepare-agent test jacoco:report coveralls:report
 after_success:
   - mvn coveralls:report
