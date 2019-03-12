@@ -17,7 +17,7 @@ public class MenuTests extends TestsInit {
         shouldBeLoggedIn();
         homePage.open();
     }
-    @Test
+    //@Test
     public void menuTest() {
         leftMenu.select(Service, Dates);
         datesPage.checkOpened();
@@ -25,7 +25,7 @@ public class MenuTests extends TestsInit {
         html5Page.checkOpened();
     }
 
-    @Test
+    //@Test
     public void customMenuTest() {
         menu.select(ContactForm.value);
         assertEquals(menu.selected(), ContactForm.value);
@@ -35,25 +35,25 @@ public class MenuTests extends TestsInit {
 
     }
 
-    @Test
+    //@Test
     public void refreshAssertMenuTest() {
         menu.assertThat().size(is(5));
         menu.select(Service);
         menu.assertThat().size(is(13));
     }
 
-    @Test
+    //@Test
     public void refreshSelectTest() {
         menu.select(Service);
         menu.select(Dates);
     }
 
-    @Test
+    //@Test
     public void refreshTemplateSelectTest() {
         leftMenu.select(Service);
         leftMenu.select(Dates);
     }
-    @Test
+    //@Test
     public void refreshIndexSelectTest() {
         menu.select(2);
         menu.select(7);

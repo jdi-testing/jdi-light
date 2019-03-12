@@ -27,11 +27,11 @@ public class TableTests extends StaticTestsInit {
         tablePage.shouldBeOpened();
     }
 
-    @TestSkipp
+    //@TestSkipp
     public void tablePerformanceTest() {
         tablePerformance(users);
     }
-    @TestSkipp
+    //@TestSkipp
     public void jTablePerformanceTest() {
         tablePerformance(usersSetup);
     }
@@ -83,13 +83,13 @@ public class TableTests extends StaticTestsInit {
         logTime("Get value");*/
     }
 
-    @TestSkipp
+    //@TestSkipp
     public void tableDataTest() {
         assertEquals(users.row(2).asData(UserInfo.class),
                 GRADY_BROCK);
     }
 
-    @TestSkipp
+    //@TestSkipp
     public void tableEntityTest() {
         UserRow user = users.row(2).asLine(UserRow.class);
         user.name.click();

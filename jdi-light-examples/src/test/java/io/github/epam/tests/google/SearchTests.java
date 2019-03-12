@@ -19,7 +19,7 @@ public class SearchTests extends GoogleInit {
         homePage.shouldBeOpened();
     }
 
-    @TestSkipp
+    //@TestSkipp
     public void printResultListTest() {
         suggestion.typeAndSelect("jdi", "jdi");
         SearchResult jdi = search3.get(2);

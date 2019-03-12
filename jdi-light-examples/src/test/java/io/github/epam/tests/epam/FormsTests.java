@@ -11,7 +11,7 @@ import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedOut;
 
 public class FormsTests extends TestsInit {
 
-    @TestSkipp
+    //@TestSkipp
     public void loginTest() {
         shouldBeLoggedOut();
         header.userIcon.click();
@@ -19,7 +19,7 @@ public class FormsTests extends TestsInit {
         homePage.checkOpened();
     }
 
-    @TestSkipp
+    //@TestSkipp
     public void fillContactFormTest() {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();

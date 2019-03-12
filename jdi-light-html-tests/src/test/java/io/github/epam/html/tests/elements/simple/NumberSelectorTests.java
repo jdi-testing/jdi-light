@@ -21,39 +21,39 @@ public class NumberSelectorTests extends TestsInit {
     }
     String number = "2.1";
 
-    @TestSkipp
+    //@TestSkipp
     public void getLabelTextTest() {
         assertEquals(height.labelText(), "Height (metres):");
     }
 
-    @TestSkipp
+    //@TestSkipp
     public void getNumberTest() {
         assertEquals(height.value(), number);
     }
 
-    @TestSkipp
+    //@TestSkipp
     public void minTest() {
         assertEquals(height.min(), "0.3");
     }
-    @TestSkipp
+    //@TestSkipp
     public void maxTest() {
         assertEquals(height.max(), "2.5");
     }
-    @TestSkipp
+    //@TestSkipp
     public void stepTest() {
         assertEquals(height.step(), "0.2");
     }
-    @TestSkipp
+    //@TestSkipp
     public void placeholderTest() {
         assertEquals(height.placeholder(), "20 cm increments. Range [0.3,2.5]");
     }
-    @TestSkipp
+    //@TestSkipp
     public void setNumberTest() {
         height.setNumber("1.4");
         assertEquals(height.value(), "1.4");
     }
 
-    @TestSkipp
+    //@TestSkipp
     public void isValidationTest() {
         height.assertThat().minValue(is(0.3));
         height.assertThat().maxValue(is(2.5));
@@ -65,7 +65,7 @@ public class NumberSelectorTests extends TestsInit {
         height.is().enabled();
     }
 
-    @TestSkipp
+    //@TestSkipp
     public void labelTest() {
         assertEquals(height.label().getText(), "Height (metres):");
         height.label().is().text(containsString("Height"));
