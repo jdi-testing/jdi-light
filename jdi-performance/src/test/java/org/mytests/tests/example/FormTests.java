@@ -11,7 +11,7 @@ import static org.mytests.uiobjects.example.site.pages.ContactFormPage.contactFo
 
 public class FormTests extends SimpleTestsInit {
 /*
-    //@Test
+    @Test
     public void loginTest() {
         Preconditions.shouldBeLoggedOut();
         userIcon.click();
@@ -19,7 +19,7 @@ public class FormTests extends SimpleTestsInit {
         homePage.checkOpened();
     }
 
-    //@Test
+    @Test
     public void fillContactFormTest() {
         Preconditions.shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
@@ -27,7 +27,7 @@ public class FormTests extends SimpleTestsInit {
         contactForm.check(DEFAULT_CONTACT);
     }
 
-    //@Test
+    @Test
     public void fillContactsTest() {
         Preconditions.shouldBeLoggedIn();
         contactsPage.shouldBeOpened();

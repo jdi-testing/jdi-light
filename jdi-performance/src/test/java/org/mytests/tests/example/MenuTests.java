@@ -10,7 +10,7 @@ import static org.testng.Assert.assertEquals;
 
 public class MenuTests extends SimpleTestsInit {
 /*
-    //@Test
+    @Test
     public void menuTest() {
         Preconditions.shouldBeLoggedIn();
         homePage.shouldBeOpened();
@@ -19,7 +19,7 @@ public class MenuTests extends SimpleTestsInit {
         leftMenu.select(ElementsPacks, HTML5);
         html5Page.checkOpened();
     }
-    //@Test
+    @Test
     public void customMenuTest() {
         Preconditions.shouldBeLoggedIn();
         homePage.shouldBeOpened();

@@ -24,14 +24,14 @@ public class ElementsGoogleTests extends GoogleInit {
         homePage.search("jdi");
     }
 
-    //@Test
+    @Test
     public void printResultListTest() {
         for (SearchResult job : searchPage.search) {
             System.out.println(job.print());
         }
     }
 
-    //@Test
+    @Test
     public void validateEntitiesTests() {
         UIList<SearchResult, Result> jobs = searchPage.search;
 
@@ -44,7 +44,7 @@ public class ElementsGoogleTests extends GoogleInit {
         jobs.assertThat(not(hasItems(corruptedResultsList())));
         *//*
     }
-    //@Test
+    @Test
     public void validateEntities2Tests() {
         UIList<SearchResult, ?> jobs = searchPage.search2;
         System.out.println(jobs.get(0).name.getText());
@@ -61,7 +61,7 @@ public class ElementsGoogleTests extends GoogleInit {
 
     }
 
-    //@Test
+    @Test
     public void validateFilterTests() {
         UIList<SearchResult, Result> jobs = searchPage.search;
 

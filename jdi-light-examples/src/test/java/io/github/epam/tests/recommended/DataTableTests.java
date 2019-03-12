@@ -24,11 +24,11 @@ public class DataTableTests extends StaticTestsInit {
         tablePage.shouldBeOpened();
     }
 
-    //@Test
+    @Test
     public void dataTableTest() {
         dataTableValidation(usersData);
     }
-    //@Test
+    @Test
     public void jDataTableTest() {
         dataTableValidation(usersDataSetup);
     }
@@ -43,7 +43,7 @@ public class DataTableTests extends StaticTestsInit {
             "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas" +
             "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauvais");
     }
-    //@Test
+    @Test
     public void filterDataTest() {
         assertEquals(usersData.data(2), GRADY_BROCK);
         assertEquals(usersData.data("Grady Brock"), GRADY_BROCK);
@@ -56,7 +56,7 @@ public class DataTableTests extends StaticTestsInit {
         *//*
     }
 
-    //@Test
+    @Test
     public void filterLinesTest() {
         UserRow line =  usersData.line(2);
         validateUserRow(line);

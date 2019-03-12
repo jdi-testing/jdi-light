@@ -45,14 +45,6 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <version>4.3.0</version>
-                <configuration>
-                    <repoToken>ATjWMyhwSdGchsn9y8BGliiQvupgvpWWV</repoToken>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -66,6 +58,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.3.0</version>
+                <configuration>
+                    <repoToken>ATjWMyhwSdGchsn9y8BGliiQvupgvpWWV</repoToken>
+                </configuration>
             </plugin>
         </plugins>
     </build>

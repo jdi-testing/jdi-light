@@ -25,14 +25,14 @@ public class ComplexElementsTests extends TestsInit {
         Preconditions.shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
     }
-    //@Test
+    @Test
     public void complexTest() {
         colors.select(Green);
         metals.select(Gold);
         metals2.select(Silver);
         //metalAndColorsPage.vegetables.check(Onion, Tomato);
     }
-    //@Test
+    @Test
     public void navigationListTest() {
         navigation.get(nContactForm).click();
         contactFormPage.checkOpened();
@@ -42,7 +42,7 @@ public class ComplexElementsTests extends TestsInit {
         githubLink.click();
         originalWindow();
     }
-    //@Test
+    @Test
     public void menuTest() {
         leftMenu.select(ContactForm);
         contactFormPage.checkOpened();
@@ -50,7 +50,7 @@ public class ComplexElementsTests extends TestsInit {
         homePage.checkOpened();
         leftMenu.select(Service, ComplexTable);
     }
-    //@Test
+    @Test
     public void navigationMenuTest() {
         navigationL.select(ContactForm);
         contactFormPage.checkOpened();
@@ -59,7 +59,7 @@ public class ComplexElementsTests extends TestsInit {
         navigationS.select(Service);
         navigationS.select(ComplexTable);
     }
-    //@Test
+    @Test
     public void navigationMenuSTest() {
         navigationS.select(ContactForm);
         //navigationL.select("Contact form");

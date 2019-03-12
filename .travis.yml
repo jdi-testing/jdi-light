@@ -1,5 +1,5 @@
 language: java
 script:
-  - mvn clean verify jacoco:prepare-agent jacoco:report coveralls:report
+  - mvn clean verify
 after_success:
-  - mvn coveralls:report
+    - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:4.3.0:report
