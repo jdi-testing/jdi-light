@@ -23,7 +23,7 @@ public class WindowsAndFramesTests extends StaticTestsInit {
         homePage.shouldBeOpened();
     }
 
-    @Test
+    @TestSkipp
     public void windowsTest() {
         homePage.shouldBeOpened();
         githubLink.click();
@@ -44,7 +44,7 @@ public class WindowsAndFramesTests extends StaticTestsInit {
         closeWindow();
     }
 
-    @Test
+    @TestSkipp
     public void frameTest() {
         iframe.userIcon.click();
     }

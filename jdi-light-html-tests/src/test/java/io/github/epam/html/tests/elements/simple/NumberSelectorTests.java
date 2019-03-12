@@ -21,39 +21,39 @@ public class NumberSelectorTests extends TestsInit {
     }
     String number = "2.1";
 
-    @Test
+    @TestSkipp
     public void getLabelTextTest() {
         assertEquals(height.labelText(), "Height (metres):");
     }
 
-    @Test
+    @TestSkipp
     public void getNumberTest() {
         assertEquals(height.value(), number);
     }
 
-    @Test
+    @TestSkipp
     public void minTest() {
         assertEquals(height.min(), "0.3");
     }
-    @Test
+    @TestSkipp
     public void maxTest() {
         assertEquals(height.max(), "2.5");
     }
-    @Test
+    @TestSkipp
     public void stepTest() {
         assertEquals(height.step(), "0.2");
     }
-    @Test
+    @TestSkipp
     public void placeholderTest() {
         assertEquals(height.placeholder(), "20 cm increments. Range [0.3,2.5]");
     }
-    @Test
+    @TestSkipp
     public void setNumberTest() {
         height.setNumber("1.4");
         assertEquals(height.value(), "1.4");
     }
 
-    @Test
+    @TestSkipp
     public void isValidationTest() {
         height.assertThat().minValue(is(0.3));
         height.assertThat().maxValue(is(2.5));
@@ -65,21 +65,21 @@ public class NumberSelectorTests extends TestsInit {
         height.is().enabled();
     }
 
-    @Test
+    @TestSkipp
     public void labelTest() {
         assertEquals(height.label().getText(), "Height (metres):");
         height.label().is().text(containsString("Height"));
         height.label().is().text(equalToIgnoringCase("height (metres):"));
     }
 
-    @Test
+    @TestSkipp
     public void assertValidationTest() {
         height.assertThat().number(greaterThan(0.0));
         height.assertThat().number(lessThan(3.0));
         height.assertThat().number(is(2.1));
     }
 
-    @Test
+    @TestSkipp
     public void baseValidationTest() {
         baseValidation(height);
     }

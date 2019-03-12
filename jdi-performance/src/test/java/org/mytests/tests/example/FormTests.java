@@ -10,8 +10,8 @@ import static org.mytests.uiobjects.example.site.SiteJdi.*;
 import static org.mytests.uiobjects.example.site.pages.ContactFormPage.contactForm;
 
 public class FormTests extends SimpleTestsInit {
-
-    @Test
+/*
+    @TestSkippSkipp
     public void loginTest() {
         Preconditions.shouldBeLoggedOut();
         userIcon.click();
@@ -19,7 +19,7 @@ public class FormTests extends SimpleTestsInit {
         homePage.checkOpened();
     }
 
-    @Test
+    @TestSkippSkipp
     public void fillContactFormTest() {
         Preconditions.shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
@@ -27,11 +27,11 @@ public class FormTests extends SimpleTestsInit {
         contactForm.check(DEFAULT_CONTACT);
     }
 
-    @Test
+    @TestSkippSkipp
     public void fillContactsTest() {
         Preconditions.shouldBeLoggedIn();
         contactsPage.shouldBeOpened();
         contactsPage.asForm().submit(DEFAULT_CONTACT);
         contactsPage.asForm().check(DEFAULT_CONTACT);
-    }
+    }*/
 }

@@ -10,7 +10,7 @@ import static org.mytests.uiobjects.example.site.SiteJdi.*;
  * Created by Roman_Iovlev on 3/1/2018.
  */
 public class Preconditions {
-    @Step
+    /*@Step
     public static void shouldBeLoggedIn() {
         if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
             homePage.open();
@@ -33,5 +33,5 @@ public class Preconditions {
     public static void logout() {
         userIcon.click();
         logout.click();
-    }
+    }*/
 }

@@ -11,13 +11,13 @@ import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLogge
 
 public class RootTests extends StaticTestsInit {
 
-    @Test
+    @TestSkipp
     public void rootTest() {
         shouldBeLoggedOut();
         loginForm.submit(DEFAULT_USER, "enter");
         homePage.checkOpened();
     }
-    @Test
+    @TestSkipp
     public void initDeepTest() {
         Assert.assertNotNull(homePage.testField);
     }
