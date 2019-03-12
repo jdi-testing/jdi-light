@@ -10,8 +10,8 @@ import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedOut;
 
 public class FormsTests extends TestsInit {
-/*
-    //@Test
+
+    @Test
     public void loginTest() {
         shouldBeLoggedOut();
         header.userIcon.click();
@@ -19,11 +19,11 @@ public class FormsTests extends TestsInit {
         homePage.checkOpened();
     }
 
-    //@Test
+    @Test
     public void fillContactFormTest() {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         contactFormPage.main.contactForm.submit(USER_WITH_CONTACTS);
         contactFormPage.main.contactForm.check(USER_WITH_CONTACTS);
-    }*/
+    }
 }

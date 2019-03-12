@@ -10,17 +10,15 @@ import static io.github.epam.entities.Users.DEFAULT_USER;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedOut;
 
 public class RootTests extends StaticTestsInit {
-/*
 
-    //@Test
+    @Test
     public void rootTest() {
         shouldBeLoggedOut();
         loginForm.submit(DEFAULT_USER, "enter");
         homePage.checkOpened();
     }
-    //@Test
+    @Test
     public void initDeepTest() {
         Assert.assertNotNull(homePage.testField);
     }
-*/
 }

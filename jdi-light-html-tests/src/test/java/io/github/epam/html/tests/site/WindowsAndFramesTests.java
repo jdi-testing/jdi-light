@@ -21,7 +21,7 @@ public class WindowsAndFramesTests extends TestsInit {
         shouldBeLoggedIn();
         homePage.shouldBeOpened();
     }
-    //@Test
+    @Test
     public void windowsTest() {
         githubLink.click();
         System.out.println("New window is opened: " + newWindowIsOpened());
@@ -41,7 +41,7 @@ public class WindowsAndFramesTests extends TestsInit {
         closeWindow();
     }
 
-    //@Test
+    @Test
     public void frameTest() {
         iframe.userIcon.click();
     }

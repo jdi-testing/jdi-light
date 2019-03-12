@@ -23,14 +23,14 @@ public class ElementsGoogleTests extends GoogleInit {
         homePage.search("jdi");
     }
 
-    //@Test
+    @Test
     public void printResultListTest() {
         for (SearchResult job : searchPage.jobsE) {
             System.out.println(job.print());
         }
     }
 
-    //@Test
+    @Test
     public void validateEntitiesTests() {
         UIList<SearchResult, Result> jobs = searchPage.jobsE;
     /*
@@ -42,7 +42,7 @@ public class ElementsGoogleTests extends GoogleInit {
         jobs.assertThat(not(hasItems(corruptedResultsList())));
         */
     }
-    //@Test
+    @Test
     public void validateEntities2Tests() {
         UIList<SearchResult, ?> jobs = searchPage.jobs2;
 
@@ -56,7 +56,7 @@ public class ElementsGoogleTests extends GoogleInit {
         jobs.assertThat().size(equalTo(size));
 
     }
-    //@Test
+    @Test
     public void validateFilterTests() {
         UIList<SearchResult, Result> jobs = searchPage.jobsE;
 

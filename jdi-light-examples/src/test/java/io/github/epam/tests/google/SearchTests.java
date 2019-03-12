@@ -14,16 +14,16 @@ import static org.testng.Assert.assertTrue;
  * Created by Roman_Iovlev on 3/2/2018.
  */
 public class SearchTests extends GoogleInit {
-    /*@BeforeMethod
+    @BeforeMethod
     public void before() {
         homePage.shouldBeOpened();
     }
 
-    //@Test
+    @Test
     public void printResultListTest() {
         suggestion.typeAndSelect("jdi", "jdi");
         SearchResult jdi = search3.get(2);
         assertTrue(jdi.name.getText().toLowerCase().contains("jdi")
             || jdi.description.getText().toLowerCase().contains("jdi"));
-    }*/
+    }
 }

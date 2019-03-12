@@ -15,19 +15,19 @@ import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
 public class ComplexElementsTests extends TestsInit {
-/*
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
     }
-    //@Test
+    @Test
     public void complexTest() {
         metalAndColorsPage.colors.select(Green);
         metalAndColorsPage.metals.select(Gold);
         //metalAndColorsPage.vegetables.check(Onion, Tomato);
     }
-    //@Test
+    @Test
     public void navigationListTest() {
         navigation.get(nContactForm).click();
         contactFormPage.checkOpened();
@@ -37,7 +37,7 @@ public class ComplexElementsTests extends TestsInit {
         homePage.githubLink.click();
         originalWindow();
     }
-    //@Test
+    @Test
     public void navigationMenuTest() {
         navigationL.select(ContactForm);
         //navigationL.select("Contact form");
@@ -46,5 +46,5 @@ public class ComplexElementsTests extends TestsInit {
         homePage.checkOpened();
         navigationL.select(Service);
         navigationL.select(ComplexTable);
-    }*/
+    }
 }

@@ -32,7 +32,7 @@ public class DataTableTests extends TestsInit {
         }
     }
 
-    //@Test
+    @Test
     public void dataTableTest() {
         assertEquals(users.size(), 4);
         assertEquals(users.count(), 6);
@@ -51,7 +51,7 @@ public class DataTableTests extends TestsInit {
             "||5||5|User|Yoshi Tannamuri|Cyclope\\nsome description:Dude||\r\n" +
             "||6||6|User|Giovanni Rovelli|Hulk\\nsome description:Dude||\r\n");
     }
-    //@Test
+    @Test
     public void filterDataTest() {
         assertEquals(users.data(2), SPIDER_MAN);
         assertEquals(usersSetup.data("Sergey Ivan"), SPIDER_MAN);
@@ -61,7 +61,7 @@ public class DataTableTests extends TestsInit {
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), SPIDER_MAN);
     }
-    //@Test
+    @Test
     public void tableAssertsTest() {
         users.is().displayed();
         users.has().size(6);
@@ -76,7 +76,7 @@ public class DataTableTests extends TestsInit {
         users.assertThat().exact(1).rows(SPIDER_MAN);
     }
 
-    //@Test
+    @Test
     public void filterLinesTest() {
         MarvelUser line = users.line(2);
         validateUserRow(line);
