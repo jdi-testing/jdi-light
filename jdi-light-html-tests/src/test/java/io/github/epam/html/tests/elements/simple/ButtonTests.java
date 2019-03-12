@@ -21,7 +21,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 public class ButtonTests extends TestsInit {
-/*
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -106,5 +106,5 @@ public class ButtonTests extends TestsInit {
         Thread.sleep(4000); // comment to fail selenium test
         getDriver().findElement(By.id("suspend-button")).click();
         acceptAlert();
-    }*/
+    }
 }

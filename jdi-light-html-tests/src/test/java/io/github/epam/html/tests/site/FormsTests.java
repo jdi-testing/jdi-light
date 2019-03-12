@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.is;
 
 public class FormsTests extends TestsInit {
 
-    //@Test
+    @Test
     public void loginTest() {
         Preconditions.shouldBeLoggedOut();
         userIcon.click();
@@ -29,7 +29,7 @@ public class FormsTests extends TestsInit {
         homePage.checkOpened();
     }
 
-    //@Test
+    @Test
     public void fillContactFormTest() {
         Preconditions.shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
