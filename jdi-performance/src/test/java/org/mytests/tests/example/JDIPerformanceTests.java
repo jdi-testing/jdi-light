@@ -15,7 +15,7 @@ import static org.mytests.uiobjects.example.site.SiteJdi.performancePage;
 import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.*;
 
 public class JDIPerformanceTests extends SimpleTestsInit {
-/*
+
     @BeforeMethod
     public void openPerformancePage() {
         shouldBeLoggedIn();
@@ -67,5 +67,5 @@ public class JDIPerformanceTests extends SimpleTestsInit {
         StopWatch timer = StopWatch.createStarted();
         textareaPerformance.setText(text + "\\n"+ text);
         System.out.println("Long text test Time: " + timer.getTime());
-    }*/
+    }
 }

@@ -10,7 +10,6 @@ import static io.github.epam.entities.Users.DEFAULT_USER;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedOut;
 
 public class RootTests extends StaticTestsInit {
-/*
 
     @Test
     public void rootTest() {
@@ -22,5 +21,4 @@ public class RootTests extends StaticTestsInit {
     public void initDeepTest() {
         Assert.assertNotNull(homePage.testField);
     }
-*/
 }

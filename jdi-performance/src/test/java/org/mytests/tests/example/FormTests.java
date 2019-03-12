@@ -10,7 +10,7 @@ import static org.mytests.uiobjects.example.site.SiteJdi.*;
 import static org.mytests.uiobjects.example.site.pages.ContactFormPage.contactForm;
 
 public class FormTests extends SimpleTestsInit {
-/*
+
     @Test
     public void loginTest() {
         Preconditions.shouldBeLoggedOut();
@@ -33,5 +33,5 @@ public class FormTests extends SimpleTestsInit {
         contactsPage.shouldBeOpened();
         contactsPage.asForm().submit(DEFAULT_CONTACT);
         contactsPage.asForm().check(DEFAULT_CONTACT);
-    }*/
+    }
 }

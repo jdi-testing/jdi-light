@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 
 public class WindowsAndFramesTests extends TestsInit {
-/*
+
     @BeforeMethod
     public void before() {
         getWindows();
@@ -42,5 +42,5 @@ public class WindowsAndFramesTests extends TestsInit {
     @Test
     public void frameTest() {
         iframe.userIcon.click();
-    }*/
+    }
 }

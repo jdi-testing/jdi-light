@@ -11,7 +11,7 @@ import static com.epam.jdi.light.ui.html.PageFactory.initElements;
 import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
 
 public class SimpleTestsInit {
-    /*@BeforeSuite(alwaysRun = true)
+    @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         logger.setLogLevel(STEP);
         initElements(SiteJdi.class);
@@ -22,5 +22,5 @@ public class SimpleTestsInit {
     @AfterSuite(alwaysRun = true)
     public void teardown() {
         killAllSeleniumDrivers();
-    }*/
+    }
 }

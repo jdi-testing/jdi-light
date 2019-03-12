@@ -64,8 +64,6 @@ public class WaitListTests extends GoogleInit {
         jobs.assertThat(not(hasItems(corruptedResultsList())));
         */
 /*
-
-
     @Test
     public void validateFilterTests() {
         UIList<SearchResult, Result> jobs = searchPage.search;

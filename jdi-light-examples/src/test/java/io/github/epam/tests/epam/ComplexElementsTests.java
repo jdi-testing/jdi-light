@@ -15,7 +15,7 @@ import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
 public class ComplexElementsTests extends TestsInit {
-/*
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -46,5 +46,5 @@ public class ComplexElementsTests extends TestsInit {
         homePage.checkOpened();
         navigationL.select(Service);
         navigationL.select(ComplexTable);
-    }*/
+    }
 }

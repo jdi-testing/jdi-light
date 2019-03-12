@@ -9,7 +9,7 @@ import static org.mytests.uiobjects.example.site.SiteJdi.*;
 import static org.testng.Assert.assertEquals;
 
 public class MenuTests extends SimpleTestsInit {
-/*
+
     @Test
     public void menuTest() {
         Preconditions.shouldBeLoggedIn();
@@ -30,5 +30,5 @@ public class MenuTests extends SimpleTestsInit {
         datesPage.checkOpened();
         leftMenu.select(ElementsPacks, HTML5);
         html5Page.checkOpened();
-    }*/
+    }
 }

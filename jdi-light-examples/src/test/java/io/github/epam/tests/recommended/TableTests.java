@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class TableTests extends StaticTestsInit {
-    /*@BeforeMethod
+    @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         tablePage.shouldBeOpened();
@@ -74,13 +74,13 @@ public class TableTests extends StaticTestsInit {
             "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas" +
             "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauvais");
         logTime("Preview");
-        *//*value = table.getValue();
+        /*value = table.getValue();
         assertEquals(value.substring(0,228),
             "||X||Name|Phone|Email|City||\r\n" +
             "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||\r\n" +
             "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||\r\n" +
             "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||");
-        logTime("Get value");*//*
+        logTime("Get value");*/
     }
 
     @Test
@@ -106,4 +106,4 @@ public class TableTests extends StaticTestsInit {
         out.println(description + ": " + (currentTimeMillis() - timeStart) + "ms");
         timeStart = currentTimeMillis();
     }
-*/}
+}
