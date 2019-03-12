@@ -13,9 +13,17 @@ JDI – is the test Framework for UI test automation that helps to makes your te
 - Extends Page Objects pattern with powerful UI Elements: Buttons, TextFields, Forms, Tables etc ( TBD add good links to examples)
 - Write stable and predictable tests that fail only because of changing business logic or layout. No more waits, thread sleep and other flaky staff
 - Increase your tests execution speed in general and especially for complex cases like search in big tables, dropdowns with hundreds elements or enter text with thousand lines
-- Get detailed logs
+- Get detailed logs and good reports of all user actions with no effort
 
-Our Test site: https://epam.github.io/JDI/
+## Our plans
+### Ultimate Goal
+Develop an automation framework based on AI that can identify adn write correct stable PageObject automatically without engineers effort, generate smoke tests for application in seconds and some negative cases too. 
+Run test execution automatically and correct tests if any changes in layout happens provide good reports for test project team and recommendations how Project can be improved
+### Nearest plans
+[Features](https://github.com/jdi-testing/jdi-light/labels/feature)
+
+## Useful Links
+Test site: https://epam.github.io/JDI/
 
 Login to get access to all pages (Login: epam; Password: 1234)
 
@@ -24,8 +32,6 @@ Html Elements examples: https://epam.github.io/JDI/html5.html
 Example Html elements tests: https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests
 
 Example Scenario tests: https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-examples
-
-## Links
 
 Site: http://jdi.epam.com/
 
