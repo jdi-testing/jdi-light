@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.site.steps;
 
-import com.epam.jdi.light.actions.ActionHelper;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 

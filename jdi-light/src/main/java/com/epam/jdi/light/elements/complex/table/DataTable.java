@@ -2,11 +2,9 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.DataTableAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.InitActions;
 import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;

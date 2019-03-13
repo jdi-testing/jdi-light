@@ -1,10 +1,10 @@
 package com.epam.jdi.light.ui.html.complex;
 
+import com.epam.jdi.light.asserts.IHasSelectAssert;
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
-import com.epam.jdi.light.asserts.IHasSelectAssert;
 
 import java.util.List;
 

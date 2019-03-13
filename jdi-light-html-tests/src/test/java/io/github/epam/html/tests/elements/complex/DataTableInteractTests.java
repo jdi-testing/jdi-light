@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.elements.complex;
 
 import io.github.com.custom.MarvelUser;
-import io.github.com.entities.MarvelUserInfo;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -13,9 +12,7 @@ import static io.github.com.pages.UsersPage.users;
 import static io.github.com.pages.UsersPage.usersSetup;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
-import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN;
-import static java.util.Arrays.asList;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class DataTableInteractTests extends TestsInit {

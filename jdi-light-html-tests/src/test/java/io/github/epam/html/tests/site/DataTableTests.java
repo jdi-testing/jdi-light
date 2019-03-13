@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.site;
 
-import com.epam.jdi.tools.Timer;
 import io.github.com.custom.MarvelUser;
 import io.github.com.entities.MarvelUserInfo;
 import io.github.epam.TestsInit;
@@ -18,7 +17,6 @@ import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
-import static org.openqa.selenium.remote.ErrorCodes.TIMEOUT;
 import static org.testng.Assert.assertEquals;
 
 public class DataTableTests extends TestsInit {

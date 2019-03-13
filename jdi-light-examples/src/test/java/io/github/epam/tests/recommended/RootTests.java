@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.homePage;
-import static io.github.com.pages.Header.*;
+import static io.github.com.pages.Header.loginForm;
 import static io.github.epam.entities.Users.DEFAULT_USER;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedOut;
 
