@@ -7,6 +7,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.ui.html.complex.MultiDropdown;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -17,13 +18,18 @@ import static com.epam.jdi.light.ui.html.HtmlFactory.$$;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.util.Arrays.asList;
+import static org.jsoup.helper.StringUtil.isBlank;
 
 public class HtmlMultiDropdown extends Selector<HtmlElement>
-    implements BaseSelectorAssert, MultiDropdown, IHasSelectAssert {
+        implements BaseSelectorAssert, MultiDropdown, IHasSelectAssert {
+
+    public HtmlMultiDropdown() { setInitClass(HtmlElement.class); }
+    public HtmlMultiDropdown(WebElement el) { super(el); setInitClass(HtmlElement.class); }
+
     By expandArrow = By.cssSelector(".caret");
     By values = By.tagName("li");
     By valueTemplate = By.xpath(".//label[text()='%s']/../..");
-    By value = By.cssSelector(".multiselect-selected-text");
+    By value = By.cssSelector("button");
     By valuesConatiner = By.tagName("ul");
 
     HtmlElement root() { return $(By.xpath(".."),this).setName("root"); }
@@ -70,6 +76,10 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
         }
     }
 
+    public void check(String names) {
+        if (isBlank(names)) return;
+        check(names.split(","));
+    }
     /**
      * Selects only particular elements
      * @param names String var arg, elements with text to select
@@ -77,14 +87,16 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String... names) {
         expand();
-        List<String> listNames = asList(names);
+        List<String> listNames = map(names, String::trim);
         for (String name : values()) {
             HtmlElement value = value(name);
             if (value.isDisabled()) continue;
-            if (value.isSelected() && !listNames.contains(value.getText().trim())
-                    || !value.isSelected() && listNames.contains(value.getText().trim()))
+            boolean valueSelected = value.find("input").isSelected();
+            if (valueSelected && !listNames.contains(name.trim())
+                    || !valueSelected && listNames.contains(name.trim()))
                 value.click();
         }
+        label().click();
     }
 
     /**
@@ -182,7 +194,7 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
 
     @Override
     public void setValue(String value) {
-        check(value.split(";"));
+        check(value);
     }
 
     @Override

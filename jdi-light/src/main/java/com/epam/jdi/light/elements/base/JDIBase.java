@@ -22,6 +22,7 @@ import static com.epam.jdi.light.common.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverByUtils.correctXPaths;
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
+import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
@@ -32,6 +33,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -171,7 +173,9 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         //TODO rethink SMART SEARCH
         return locator != null
             ? uiSearch(searchContext, correctLocator(locator)).get(0)
-            : searchContext;
+            : isPageObject(bElement.getClass())
+                ? searchContext
+                : SMART_SEARCH.execute(bElement);
     }
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)
@@ -197,7 +201,12 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         if (!isClass(parent.getClass(), JDIBase.class))
             return "";
         JDIBase jdiBase = (JDIBase)parent;
-        return jdiBase.getLocator() == null ? "" : jdiBase.locator.toString();
+        String locator = jdiBase.getLocator() == null ? "" : jdiBase.locator.toString();
+        if (jdiBase.parent == null)
+            return locator;
+        if (isBlank(locator))
+            return jdiBase.printContext();
+        return jdiBase.printContext() + ">" + locator;
     }
     public String printFullLocator() {
         return parent == null || isBlank(printContext())
@@ -357,8 +366,9 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     }
     @JDIAction(level = DEBUG)
     public String printHtml() {
-        return MessageFormat.format("<{0}{1}>{2}</{0}>", getTagName(),
-                print(getAllAttributes(), el -> " "+ el), getAttribute("innerHTML"));
+        return MessageFormat.format("<{0} {1}>{2}</{0}>", getTagName(),
+                print(getAllAttributes(), el -> format("%s=\"%s\"", el.key, el.value), " "),
+                getAttribute("innerHTML"));
     }
 
     @JDIAction(level = DEBUG)

@@ -34,6 +34,7 @@ public class DriverBase implements INamed {
 
     public <T> T setName(String name) {
         this.name = name;
+        this.varName = name;
         this.failElement = name;
         return (T) this;
     }

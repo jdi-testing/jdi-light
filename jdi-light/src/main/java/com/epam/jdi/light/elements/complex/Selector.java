@@ -5,6 +5,7 @@ import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.UIElement;
+import org.apache.logging.log4j.util.Strings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -54,7 +55,11 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
         for (String value : values)
             select().selectByVisibleText(value);
     }
-
+    @JDIAction("Check '{0}' for '{name}'")
+    public void check(String values) {
+        if (Strings.isEmpty(values)) return;
+        check(values.split(","));
+    }
     /**
      * Unselects only particular elements
      * @param values String var arg, elements with text to unselect

@@ -14,8 +14,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
-import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -74,7 +73,10 @@ public abstract class BaseUIElement<T extends BaseUIElement>
         return find(defineLocator(by));
     }
     public T find(By by) {
-        return newElement(uiSearch(get(), by).get(0));
+        List<WebElement> els = uiSearch(get(), by);
+        if (els.size() > 0)
+            return newElement(els.get(0));
+        throw exception("Can't find sub element by locator %s for %s", shortBy(by), this);
     }
     public List<T> finds(String by) {
         return finds(By.cssSelector(by));
