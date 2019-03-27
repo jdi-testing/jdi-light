@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.JMenu;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
 import com.epam.jdi.light.ui.html.base.HtmlList;
 import com.epam.jdi.light.ui.html.complex.Menu;
 import io.github.com.custom.MenuItem;
@@ -38,7 +39,7 @@ public class StaticSite {
 	@Css("[ui=label]") public static WebList navigationL;
 	@UI("[ui=label][*'%s']") public static HtmlList navigationS;
 	@UI(".sidebar-menu span<[*'%s']<<") public static Menu leftMenu;
-	@UI(".sidebar-menu span<[*'%s']<<") public static JList<MenuItem> leftMenuList;
+	@UI(".sidebar-menu span<[*'%s']<<") public static JList<HtmlElement> leftMenuList;
 	@UI(".sidebar-menu span") public static JList<MenuItem> menu;
 	@JMenu({"[ui=label][*'%s']", "[ui=label][*'%s']"}) public static Menu leftMenu2D;
 

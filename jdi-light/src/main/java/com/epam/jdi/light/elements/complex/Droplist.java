@@ -1,6 +1,8 @@
 package com.epam.jdi.light.elements.complex;
 
+import com.epam.jdi.light.asserts.ListAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
@@ -18,6 +20,7 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.any;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -27,7 +30,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class Droplist extends JDIBase implements ISetup, SetValue {
+public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
     private static final String SELECT_ERROR =
             "Can't %s element in dropdown '%s'. Droplist should have JDropdown annotation or locator to 'select' tag";
     private static final String TO_MUCH_ELEMENTS_FOUND_ERROR =
@@ -118,11 +121,28 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
         return value.isDisplayed();
     }
 
+    public boolean selected(String option) {
+        return list.selected().equals(option);
+    }
+
+    public List<String> checked() {
+        return asList(list.selected());
+    }
+
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         assertLinked(list, "list", "values");
         return list.values();
     }
+
+    public List<String> listEnabled() {
+        return list.ifSelect(JDIBase::isEnabled, BaseUIElement::getText);
+    }
+
+    public List<String> listDisabled() {
+        return list.ifSelect(JDIBase::isDisabled, BaseUIElement::getText);
+    }
+
     @JDIAction(level = DEBUG)
     public void click() {
         assertLinked(list, "expander", "click");
@@ -181,4 +201,21 @@ public class Droplist extends JDIBase implements ISetup, SetValue {
     public void setValue(String value) {
         select(value);
     }
+
+    //region matchers
+    public ListAssert<UIElement> is() {
+        return new ListAssert<>(list, this, toError());
+    }
+    public ListAssert<UIElement> assertThat() {
+        return is();
+    }
+    public ListAssert<UIElement> has() {
+        return is();
+    }
+    //endregion
+
+    public int size() {
+        return list.size();
+    }
+
 }

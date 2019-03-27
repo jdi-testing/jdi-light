@@ -2,6 +2,7 @@ package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 
 public class BaseAssert {
@@ -22,6 +23,11 @@ public class BaseAssert {
         this.name = name;
         this.failElement = name;
     }
+    public <T extends BaseAssert> void soft(JFunc<T> isAssert) {
+        isAssert.execute();
+        verify();
+    }
+    private void verify() {}
     @Override
     public String toString() {
         return element != null

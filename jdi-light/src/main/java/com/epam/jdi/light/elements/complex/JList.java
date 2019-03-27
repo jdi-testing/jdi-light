@@ -55,13 +55,17 @@ public class JList<T extends BaseUIElement> extends JDIBase
 
     @JDIAction(level = DEBUG)
     public T get(String value) {
-        if (getLocator().toString().contains("%s"))
-            return getNewInstance(super.get(value));
+        if (getLocator().toString().contains("%s")) {
+            T element = getNewInstance(super.get(value)).setName(value);
+            element.setGetFunc(() -> super.get(value));
+            return element;
+        }
         refresh();
         T el = first(e -> e.getText().equals(value));
         if (el == null)
             throw exception(NO_ELEMENTS_FOUND, value);
         el.setName(value);
+        el.setGetFunc(() -> first(e -> e.getText().equals(value)));
         return el;
     }
     public T get(Enum name) {
@@ -198,6 +202,9 @@ public class JList<T extends BaseUIElement> extends JDIBase
         return new ListAssert<>(this, this, toError());
     }
     public ListAssert<T> assertThat() {
+        return is();
+    }
+    public ListAssert<T> has() {
         return is();
     }
     //endregion

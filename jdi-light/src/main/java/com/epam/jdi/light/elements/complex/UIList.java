@@ -139,14 +139,19 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
 
     @JDIAction(level = DEBUG)
     public T get(String value) {
+        if (getLocator().toString().contains("%s")) {
+            T element = initElement(super.get(value)).setName(value);
+            element.setGetFunc(() -> super.get(value));
+            return element;
+        }
         MapArray<String, T> elements = getMap(1);
         T result = elements.get(value);
         if (result == null)
             throw exception("Can't find '%s' element in list %s", value, elements.keys());
         result.setName(value);
+        result.setGetFunc(() -> getMap(1).get(value).get());
         return result;
     }
-
     public static JFunc1<UIList, String> GET_TITLE_FIELD_NAME = list -> {
         Field[] fields = list.classType.getFields();
         Field expectedFields = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
@@ -183,6 +188,9 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         return new UIListAssert<>(this, () -> { clear(); return asData(); }, toError(), failElement);
     }
     public UIListAssert<T, E> assertThat() {
+        return is();
+    }
+    public UIListAssert<T, E> has() {
         return is();
     }
 

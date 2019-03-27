@@ -1,5 +1,7 @@
 package io.github.epam.html.tests.elements.complex;
 
+import com.epam.jdi.light.ui.html.base.HtmlElement;
+import io.github.com.custom.MenuItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -31,6 +33,15 @@ public class MenuTests extends TestsInit {
     @Test
     public void selectTestList() {
         leftMenuList.select("Contact form");
+        contactFormPage.checkOpened();
+    }
+    @Test
+    public void getTestList() {
+        HtmlElement item = leftMenuList.get("Contact form");
+        item.show();
+        item.is().deselected();
+        item.click();
+        item.is().selected();
         contactFormPage.checkOpened();
     }
 

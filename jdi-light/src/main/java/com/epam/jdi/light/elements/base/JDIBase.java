@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Timer;
+import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.*;
@@ -47,7 +48,6 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     public JDILocator locator = new JDILocator();
     public CacheValue<WebElement> webElement = new CacheValue<>();
-    private boolean byWebElement = false;
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
     protected JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
     public <T extends JDIBase> T noValidation() {
@@ -61,7 +61,6 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }
     public UIElement setWebElement(WebElement el) {
         webElement.setForce(el);
-        byWebElement = true;
         return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();
     }
     public void setWebElements(List<WebElement> els) {
@@ -90,11 +89,22 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public WebElement get() {
         return get(new Object[]{});
     }
+    protected JFunc<WebElement> getElementFunc = null;
+    public void setGetFunc(JFunc<WebElement> func) { getElementFunc = func; }
     public WebElement get(Object... args) {
-        if (webElement.hasValue())
-            return webElement.get();
-        if (byWebElement)
-            throw exception("Cache expire please get again list element");
+        if (webElement.hasValue()) {
+            WebElement element = webElement.get();
+            try {
+                element.getTagName();
+                return element;
+            } catch (Exception ignore) {
+                if (getElementFunc == null)
+                    webElement.clear();
+                else {
+                    return webElement.set(getElementFunc.execute());
+                }
+            }
+        }
         if (locator.isEmpty()) {
             try {
                 WebElement element = SMART_SEARCH.execute(this);
@@ -126,8 +136,13 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
 
     public List<WebElement> getAll(Object... args) {
         //TODO rethink SMART SEARCH
-        if (webElements.hasValue())
-            return webElements.get();
+        if (webElements.hasValue()) {
+            List<WebElement> elements = webElements.get();
+            try {
+                elements.get(0).getTagName();
+                return elements;
+            } catch (Exception ignore) { webElements.clear(); }
+        }
         if (locator.isEmpty())
             return asList(SMART_SEARCH.execute(this));
         SearchContext searchContext = getContext(parent, locator);

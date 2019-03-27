@@ -1,5 +1,6 @@
 package com.epam.jdi.light.asserts;
 
+import com.epam.jdi.tools.func.JFunc;
 import org.hamcrest.Matcher;
 
 public interface CommonAssert<T> {
@@ -14,5 +15,5 @@ public interface CommonAssert<T> {
     T deselected();
     T enabled();
     T disabled();
-
+    //void soft(JFunc<T> isAssert);
 }

@@ -220,5 +220,8 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     public IsAssert assertThat() {
         return is();
     }
+    public IsAssert has() {
+        return is();
+    }
     //endregion
 }

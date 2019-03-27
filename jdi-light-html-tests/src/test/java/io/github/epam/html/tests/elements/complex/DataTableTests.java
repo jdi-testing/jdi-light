@@ -77,8 +77,7 @@ public class DataTableTests extends TestsInit {
         users.is().displayed();
         users.has().size(6);
         users.assertThat().size(greaterThan(3));
-        users.is().size(lessThanOrEqualTo(6));
-        users.is().notEmpty();
+        users.is().notEmpty().size(lessThanOrEqualTo(6));
     }
     @Test
     public void rowMatcherTest() {
@@ -103,5 +102,19 @@ public class DataTableTests extends TestsInit {
     @Test
     public void rowDataExactMatcherTest() {
         users.assertThat().exact(1).rows(SPIDER_MAN);
+    }
+    @Test
+    public void tableChainTest() {
+        users.assertThat()
+            .displayed()
+            .size(6)
+            .size(greaterThan(3))
+            .notEmpty()
+            .row(d -> d.user.contains("Ivan"))
+            .allRows(d -> d.user.length() > 4)
+            .atLeast(3).rows(d -> d.type.contains("User"))
+            .row(SPIDER_MAN)
+            .exact(2).rows(d -> d.description.contains(":VIP"))
+            .exact(1).rows(SPIDER_MAN);
     }
 }
