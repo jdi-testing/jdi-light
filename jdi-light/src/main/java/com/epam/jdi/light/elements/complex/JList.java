@@ -124,7 +124,7 @@ public class JList<T extends BaseUIElement> extends JDIBase
         for (TEnum value : names)
             select(value);
     }
-    @JDIAction("Select '{0}' for '{names}'")
+    @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
         get(index).click();
     }
@@ -133,7 +133,7 @@ public class JList<T extends BaseUIElement> extends JDIBase
         for (int index : indexes)
             select(index);
     }
-    @JDIAction("Get '{names}' selected value")
+    @JDIAction("Get '{name}' selected value")
     public String selected() {
         refresh();
         T first = logger.logOff(() -> first(BaseUIElement::isSelected) );
