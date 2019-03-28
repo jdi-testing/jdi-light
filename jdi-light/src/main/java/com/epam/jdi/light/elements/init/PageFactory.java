@@ -42,8 +42,8 @@ public class PageFactory {
     public static void initSite(Class<?> site) {
         SiteInfo info = new SiteInfo();
         info.parentClass = site;
-        info.driverName = DRIVER_NAME;
         PRE_INIT.execute();
+        info.driverName = DRIVER_NAME;
         setDomain(site);
         Field[] pages = site.getDeclaredFields();
         List<Field> staticPages = filter(pages, p -> isStatic(p.getModifiers()));
