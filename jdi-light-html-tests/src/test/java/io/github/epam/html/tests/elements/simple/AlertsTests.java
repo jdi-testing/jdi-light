@@ -16,7 +16,7 @@ public class AlertsTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        html5Page.shouldBeOpened();
+        html5Page.open();
     }
 
     @Test

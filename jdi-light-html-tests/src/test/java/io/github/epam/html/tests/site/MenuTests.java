@@ -39,7 +39,7 @@ public class MenuTests extends TestsInit {
     public void refreshAssertMenuTest() {
         menu.assertThat().size(is(5));
         menu.select(Service);
-        menu.assertThat().size(is(13));
+        menu.assertThat().size(is(14));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class MenuTests extends TestsInit {
     @Test
     public void refreshIndexSelectTest() {
         menu.select(2);
-        menu.select(7);
+        menu.select(8);
         usersPage.checkOpened();
     }
 
