@@ -1,103 +1,65 @@
 package io.github.epam.tests.google;
 
 import com.epam.jdi.light.elements.complex.UIList;
-import com.google.custom.Result;
-import com.google.custom.SearchResult;
-import io.github.epam.GoogleInit;
+import io.github.com.custom.Result;
+import io.github.com.custom.SearchResult;
+import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-import static com.google.GoogleSite.homePage;
-import static com.google.GoogleSite.searchPage;
-import static org.hamcrest.Matchers.equalTo;
+import static io.github.com.StaticSite.searchPage;
+import static io.github.com.pages.Header.epamLogo;
+import static io.github.com.pages.Header.search;
+import static io.github.epam.test.data.ListData.*;
+import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Roman_Iovlev on 3/2/2018.
  */
-public class ElementsGoogleTests extends GoogleInit {
+public class ElementsGoogleTests extends StaticTestsInit {
     @BeforeMethod
     public void before() {
-        homePage.shouldBeOpened();
-        homePage.search("jdi");
+        shouldBeLoggedIn();
+        epamLogo.click();
+        search("jdi");
     }
-
-    @Test
-    public void printResultListTest() {
-        for (SearchResult job : searchPage.search) {
-            System.out.println(job.print());
-        }
-    }
-
     @Test
     public void validateEntitiesTests() {
         UIList<SearchResult, Result> jobs = searchPage.search;
 
-        //TODO
-        /*jobs.assertThat(not(empty()));
-        jobs.assertThat(hasSize(greaterThan(2)));
-        jobs.assertThat(hasItem(expectedResult()));
-        jobs.assertThat(hasItems(expectedResultsList()));
-        jobs.assertThat(not(hasItem(corruptedResult())));
-        jobs.assertThat(not(hasItems(corruptedResultsList())));
-        */
+        jobs.assertThat(not(empty()))
+            .and(hasSize(greaterThan(2)))
+            .and(hasItem(CORRECT))
+            .and(hasItems(CORRECT, CORRECT_2, CORRECT_3))
+            .and(not(hasItem(CORRUPTED)))
+            .and(not(hasItems(CORRUPTED, CORRUPTED_2)));
     }
     @Test
     public void validateEntities2Tests() {
         UIList<SearchResult, ?> jobs = searchPage.search2;
-        System.out.println(jobs.get(0).name.getText());
-        System.out.println(jobs.get(1).name.getText());
-        System.out.println(jobs.get(2).name.getText());
-        int size = searchPage.search2.size();
-
+        assertEquals(jobs.get(0).name.getText(),"JDI SKYPE");
+        assertEquals(jobs.get(1).name.getText(),"JDI OWNER CONTACT");
         try {
             jobs.is().empty();
             Assert.fail("List should not be empty");
-        } catch (Throwable ex) {}
+        } catch (Throwable ex) { }
         jobs.is().notEmpty();
-        jobs.assertThat().size(equalTo(size));
-
+        jobs.assertThat().size(equalTo(8));
     }
 
     @Test
     public void validateFilterTests() {
         UIList<SearchResult, Result> jobs = searchPage.search;
 
-        /*
-        String expetedValue = searchPage.search.getValue();
-        jobs.assertThat().value(expetedValue);
-        jobs.assertThat().any(e -> e.name.toLowerCase().contains("jdi"));
-        jobs.assertThat().each(e -> e.name.toLowerCase().contains("jdi")
-            || e.name.contains("株式会")
-            || e.name.contains("Japan"));
-        jobs.assertThat().onlyOne(e -> e.name.contains("株式会"));
-        jobs.assertThat().noOne(e -> e.name.contains("SELENIDE"));
-        */
+        jobs.assertThat().value(containsString(
+            "name:JDI FACEBOOK GROUP; description:English Community Facebook group"))
+            .any(e -> e.description.toLowerCase().contains("jdi"))
+            .each(e -> e.name.toLowerCase().contains("jdi"))
+            .onlyOne(e -> e.name.contains("OWNER"))
+            .noOne(e -> e.name.equalsIgnoreCase("Selenide"));
     }
 
-    private static List<Result> jobs() {
-        return searchPage.search.asData();
-    }
-
-    private static Result expectedResult() {
-        return jobs().get(1);
-    }
-    private static Result corruptedResult() {
-        Result r = jobs().get(1);
-        r.name = "changed";
-        return r;
-    }
-    private static Result[] expectedResultsList() {
-        return new Result[] {jobs().get(1), jobs().get(3)};
-    }
-
-    private static Result[] corruptedResultsList() {
-        Result r = jobs().get(1);
-        r.name = "changed";
-        Result r2 = jobs().get(3);
-        r2.description = "changed";
-        return new Result[] {r, r2};
-    }
 }

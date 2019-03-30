@@ -1,6 +1,5 @@
 package io.github.epam.tests.recommended;
 
-import com.epam.jdi.light.elements.base.UIElement;
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
 import org.testng.annotations.Test;

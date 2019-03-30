@@ -180,9 +180,11 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         return PrintUtils.print(LinqUtils.map(asData(), Object::toString));
     }
 
-    public void is(Matcher<? super List<E>> condition) {
+    @JDIAction("Assert that {name} data meet condition")
+    public UIListAssert<T, E> is(Matcher<? super List<E>> condition) {
         refresh();
         MatcherAssert.assertThat(asData(), condition);
+        return new UIListAssert<>(this, () -> { clear(); return asData(); }, toError(), failElement);
     }
     public UIListAssert<T, E> is() {
         return new UIListAssert<>(this, () -> { clear(); return asData(); }, toError(), failElement);
@@ -194,8 +196,8 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         return is();
     }
 
-    public void assertThat(Matcher<? super List<E>> condition) {
-        is(condition);
+    public UIListAssert<T, E> assertThat(Matcher<? super List<E>> condition) {
+        return is(condition);
     }
 
     public void setup(Field field) {

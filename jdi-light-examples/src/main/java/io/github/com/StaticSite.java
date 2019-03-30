@@ -28,6 +28,8 @@ public class StaticSite {
 	public static ContactFormPage contactFormPage;
 	@Url("/performance.html") @Title("Performance page")
 	public static PerformancePage tablePage;
+	@Url("/search.html")
+	public static SearchPage searchPage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;

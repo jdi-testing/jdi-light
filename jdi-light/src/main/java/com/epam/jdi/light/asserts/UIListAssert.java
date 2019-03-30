@@ -6,6 +6,7 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 
 import java.util.List;
 
@@ -20,32 +21,34 @@ public class UIListAssert<T extends Section, E> {
     List<T> elements;
     JFunc<List<E>> data;
     public String name;
+    public String jdi_element;
     public String failElement;
 
     public UIListAssert(List<T> elements, JFunc<List<E>> data, String name, String failElement) {
         this.elements = elements;
         this.data = data;
         this.name = name;
+        jdi_element = elements.toString();
         this.failElement = failElement;
     }
 
-    @JDIAction("Assert that each of '{name}' elements {0}")
+    @JDIAction("Assert that each of '{name}' elements meet condition")
     public UIListAssert<T, E> each(JFunc1<E, Boolean> condition) {
         assertThat(all(data.execute(), condition::execute), is(true));
         return this;
     }
-    @JDIAction("Assert that any of '{name}' elements {0}")
+    @JDIAction("Assert that any of '{name}' elements meet condition")
     public UIListAssert<T, E> any(JFunc1<E, Boolean> condition) {
         assertThat(LinqUtils.any(data.execute(), condition::execute), is(true));
         return this;
     }
 
-    @JDIAction("Assert that only one of '{name}' elements {0}")
+    @JDIAction("Assert that only one of '{name}' elements meet condition")
     public UIListAssert<T, E> onlyOne(JFunc1<E, Boolean> condition) {
         assertThat(LinqUtils.single(data.execute(), condition::execute), is(notNullValue()));
         return this;
     }
-    @JDIAction("Assert that none of '{name}' {0} ")
+    @JDIAction("Assert that none of '{name}' meet condition")
     public UIListAssert<T, E> noOne(JFunc1<E, Boolean> condition) {
         assertThat(LinqUtils.first(data.execute(), condition::execute), is(nullValue()));
         return this;
@@ -54,6 +57,10 @@ public class UIListAssert<T extends Section, E> {
     public UIListAssert<T, E> value(Matcher<String> condition) {
         assertThat(print(data.execute(), Object::toString), condition);
         return this;
+    }
+    @JDIAction("Assert that '{name}' text {0}")
+    public UIListAssert<T, E> value(String text) {
+        return value(is(text));
     }
     @JDIAction("Assert that '{name}' is displayed")
     public UIListAssert<T, E> allDisplayed() {
@@ -94,6 +101,16 @@ public class UIListAssert<T extends Section, E> {
     public UIListAssert<T, E> size(Matcher<Integer> condition) {
         elements.clear();
         assertThat(elements.size(), condition);
+        return this;
+    }
+    @JDIAction("Assert that '{name}' size {0}")
+    public UIListAssert<T, E> size(int size) {
+        return size(equalTo(size));
+    }
+    @JDIAction("Assert that '{name}' data {0}")
+    public UIListAssert<T, E> and(Matcher<? super List<E>> condition) {
+        elements.clear();
+        MatcherAssert.assertThat(data.execute(), condition);
         return this;
     }
 }

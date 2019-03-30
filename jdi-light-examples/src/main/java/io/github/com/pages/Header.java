@@ -10,9 +10,18 @@ import org.openqa.selenium.WebElement;
 public class Header extends Section {
 	@Css("form") public static LoginForm loginForm;
 	@Css(".fa-sign-out") public static WebElement logout;
-	public static WebElement epamLogo;
+	@Css("#epam_logo") public static WebElement epamLogo;
 	public static WebElement userIcon;
-	@Css(".icon-search:not(.active)") public static WebElement searchIcon;
 	@XPath(".//*[@ui='label']") public static UIElement userName;
 
+	@Css(".search-field input") static UIElement searchInput;
+	@Css(".icon-search") static WebElement searchIcon;
+	@Css(".icon-search.active") static WebElement doSearch;
+
+	public static void search(String text) {
+		if (searchInput.isHidden())
+			searchIcon.click();
+		searchInput.input(text);
+		doSearch.click();
+	}
 }

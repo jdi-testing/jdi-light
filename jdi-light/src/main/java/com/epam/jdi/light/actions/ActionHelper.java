@@ -11,6 +11,7 @@ import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.PrintUtils;
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -216,11 +217,15 @@ public class ActionHelper {
         return toMap(()->new MapArray<>(getThisFields(joinPoint), Field::getName, value -> getValueField(value, joinPoint.getThis())));
     }
 
-    static String getElementName(JoinPoint joinPoint) {
-        Object obj = joinPoint.getThis();
+    static String getElementName(JoinPoint jp) {
+        if (classFields(jp).keys().contains("jdi_element"))
+            return classFields(jp).get("jdi_element").toString();
+        Object obj = jp.getThis();
         return obj != null
                 ? obj.toString()
-                : joinPoint.getSignature().getDeclaringType().getSimpleName();
+                //obj.toString().matches(".*\\.\\w++@\\w+")
+                : jp.getSignature().getDeclaringType().getSimpleName();
+
     }
     static List<Field> getThisFields(JoinPoint joinPoint) {
         Object obj = joinPoint.getThis();
