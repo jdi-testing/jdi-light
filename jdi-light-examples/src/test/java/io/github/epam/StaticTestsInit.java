@@ -1,7 +1,6 @@
 package io.github.epam;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.elements.base.OutputTemplates;
 import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;

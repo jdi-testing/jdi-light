@@ -10,7 +10,6 @@ import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.ui.html.PageFactory.initElements;
 import static io.github.com.StaticSite.homePage;
-import static java.util.Arrays.asList;
 
 public class TestsInit {
     @BeforeSuite(alwaysRun = true)

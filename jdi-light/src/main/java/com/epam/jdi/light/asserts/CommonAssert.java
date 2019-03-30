@@ -1,6 +1,5 @@
 package com.epam.jdi.light.asserts;
 
-import com.epam.jdi.tools.func.JFunc;
 import org.hamcrest.Matcher;
 
 public interface CommonAssert<T> {

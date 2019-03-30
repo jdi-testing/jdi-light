@@ -11,7 +11,6 @@ import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;

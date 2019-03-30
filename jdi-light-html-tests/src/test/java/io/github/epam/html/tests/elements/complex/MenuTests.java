@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.elements.complex;
 
 import com.epam.jdi.light.ui.html.base.HtmlElement;
-import io.github.com.custom.MenuItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

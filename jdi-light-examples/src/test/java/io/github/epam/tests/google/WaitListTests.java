@@ -1,12 +1,13 @@
 package io.github.epam.tests.google;
 
 import com.epam.jdi.tools.func.JAction;
-import io.github.epam.GoogleInit;
+import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.google.GoogleSite.homePage;
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.pages.Header.search;
 import static io.github.com.pages.SearchPage.searchS;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
@@ -14,11 +15,11 @@ import static org.testng.Assert.assertEquals;
 /**
  * Created by Roman_Iovlev on 3/2/2018.
  */
-public class WaitListTests extends GoogleInit {
+public class WaitListTests extends StaticTestsInit {
     @BeforeMethod
     public void before() {
         homePage.shouldBeOpened();
-        homePage.search("jdi");
+        search("jdi");
     }
 
     private void waitList(JAction action) {
