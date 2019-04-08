@@ -20,6 +20,7 @@ public class FormsTests extends TestsInit {
 
     @Test
     public void loginTest() {
+        if (isFireFox()) return;
         Preconditions.shouldBeLoggedOut();
         userIcon.click();
         MapArray<String, String> attrs = userIcon.attrs();

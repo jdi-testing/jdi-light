@@ -49,6 +49,7 @@ public class FileUploadTests extends TestsInit {
 
     @Test
     public void downloadTest() {
+        if (isFireFox()) return;
         cleanupDownloads();
         downloadJdiLogo.click();
         assertThatFile("jdi-logo.jpg")
