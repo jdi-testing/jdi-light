@@ -7,13 +7,14 @@ import com.epam.jdi.light.elements.interfaces.INamed;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class DriverBase implements INamed {
     public static final String DEFAULT_DRIVER = "chrome";
-    public String driverName = DEFAULT_DRIVER;
+    public String driverName = DRIVER_NAME;
     public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
     public JavascriptExecutor js() { return (JavascriptExecutor) driver(); }
 
