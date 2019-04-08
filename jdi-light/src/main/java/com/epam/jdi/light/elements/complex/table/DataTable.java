@@ -259,4 +259,12 @@ public class DataTable<L extends Section, D> extends Table {
     public DataTableAssert<D> has() {
         return is();
     }
+    @Override
+    public DataTableAssert<D> waitFor() {
+        return is();
+    }
+    @Override
+    public DataTableAssert<D> shouldBe() {
+        return is();
+    }
 }

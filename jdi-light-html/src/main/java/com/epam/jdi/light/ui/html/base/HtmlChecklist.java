@@ -78,12 +78,15 @@ public class HtmlChecklist extends Selector<HtmlElement> implements BaseSelector
         for (String name : values()) {
             HtmlElement value = get(name);
             if (value.isDisabled()) continue;
-            if (value.isSelected() && !listNames.contains(value.labelText().trim())
-                    || !value.isSelected() && listNames.contains(value.labelText().trim()))
+            if (isSelected(value) && !listNames.contains(value.labelText().trim())
+                    || !isSelected(value) && listNames.contains(value.labelText().trim()))
                 value.click();
         }
     }
 
+    protected boolean isSelected(HtmlElement value) {
+        return value.isSelected();
+    }
     /**
      * Unselects only particular elements
      * @param names String var arg, elements with text to unselect
@@ -94,8 +97,8 @@ public class HtmlChecklist extends Selector<HtmlElement> implements BaseSelector
         for (String name : values()) {
             HtmlElement value = get(name);
             if (value.isDisabled()) continue;
-            if (value.isSelected() && listNames.contains(value.labelText().trim())
-                    || !value.isSelected() && !listNames.contains(value.labelText().trim()))
+            if (isSelected(value) && listNames.contains(value.labelText().trim())
+                    || !isSelected(value) && !listNames.contains(value.labelText().trim()))
                 value.click();
         }
     }
@@ -117,8 +120,8 @@ public class HtmlChecklist extends Selector<HtmlElement> implements BaseSelector
         for (int i = 1; i <= values().size(); i++) {
             HtmlElement value = checkboxes().get(i-1);
             if (value.isDisabled()) continue;
-            if (value.isSelected() && !listIndexes.contains(i)
-                    || !value.isSelected() && listIndexes.contains(i))
+            if (isSelected(value) && !listIndexes.contains(i)
+                    || !isSelected(value) && listIndexes.contains(i))
                 value.click();
         }
     }
@@ -133,8 +136,8 @@ public class HtmlChecklist extends Selector<HtmlElement> implements BaseSelector
         for (int i = 1; i <= values().size(); i++) {
             HtmlElement value = checkboxes().get(i-1);
             if (value.isDisabled()) continue;
-            if (value.isSelected() && listIndexes.contains(i)
-                    || !value.isSelected() && !listIndexes.contains(i))
+            if (isSelected(value) && listIndexes.contains(i)
+                    || !isSelected(value) && !listIndexes.contains(i))
                 value.click();
         }
     }
@@ -193,6 +196,18 @@ public class HtmlChecklist extends Selector<HtmlElement> implements BaseSelector
 
     public SelectAssert is() {
         return new SelectAssert(this);
+    }
+    public SelectAssert assertThat() {
+        return is();
+    }
+    public SelectAssert has() {
+        return is();
+    }
+    public SelectAssert waitFor() {
+        return is();
+    }
+    public SelectAssert shouldBe() {
+        return is();
     }
 
 }

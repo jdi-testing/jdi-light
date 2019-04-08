@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.ListAssert;
+import com.epam.jdi.light.asserts.UIListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
@@ -210,6 +211,12 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
         return is();
     }
     public ListAssert<UIElement> has() {
+        return is();
+    }
+    public ListAssert<UIElement> waitFor() {
+        return is();
+    }
+    public ListAssert<UIElement> shouldBe() {
         return is();
     }
     //endregion

@@ -195,6 +195,12 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     public UIListAssert<T, E> has() {
         return is();
     }
+    public UIListAssert<T, E> waitFor() {
+        return is();
+    }
+    public UIListAssert<T, E> shouldBe() {
+        return is();
+    }
 
     public UIListAssert<T, E> assertThat(Matcher<? super List<E>> condition) {
         return is(condition);

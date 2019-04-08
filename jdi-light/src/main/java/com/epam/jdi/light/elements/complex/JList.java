@@ -207,6 +207,12 @@ public class JList<T extends BaseUIElement> extends JDIBase
     public ListAssert<T> has() {
         return is();
     }
+    public ListAssert<T> waitFor() {
+        return is();
+    }
+    public ListAssert<T> shouldBe() {
+        return is();
+    }
     //endregion
 
     protected Class<?> initClass = UIElement.class;

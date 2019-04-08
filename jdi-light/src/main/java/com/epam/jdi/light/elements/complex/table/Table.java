@@ -149,4 +149,10 @@ public class Table extends BaseTable<Table> implements ISetup, HasValue {
     public TableAssert has() {
         return is();
     }
+    public TableAssert waitFor() {
+        return is();
+    }
+    public TableAssert shouldBe() {
+        return is();
+    }
 }

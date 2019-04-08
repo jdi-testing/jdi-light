@@ -1,10 +1,16 @@
 package io.github.epam;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.driver.get.DriverTypes;
 import io.github.epam.testng.TestNGListener;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
+import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;

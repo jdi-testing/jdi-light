@@ -104,5 +104,17 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements BaseSelecto
     public SelectAssert is() {
         return new SelectAssert(this);
     }
+    public SelectAssert assertThat() {
+        return is();
+    }
+    public SelectAssert has() {
+        return is();
+    }
+    public SelectAssert waitFor() {
+        return is();
+    }
+    public SelectAssert shouldBe() {
+        return is();
+    }
 
 }

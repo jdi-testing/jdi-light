@@ -223,5 +223,11 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     public IsAssert has() {
         return is();
     }
+    public IsAssert waitFor() {
+        return is();
+    }
+    public IsAssert shouldBe() {
+        return is();
+    }
     //endregion
 }

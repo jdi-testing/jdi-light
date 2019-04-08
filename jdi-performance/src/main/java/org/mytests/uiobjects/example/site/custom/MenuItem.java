@@ -6,6 +6,6 @@ public class MenuItem extends HtmlElement {
     @Override
     public boolean isSelected() {
         return hasClass("active")
-            && getAttribute("ui").equals("label");
+            && attr("ui").equals("label");
     }
 }

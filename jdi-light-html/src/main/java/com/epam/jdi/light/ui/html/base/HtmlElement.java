@@ -199,6 +199,14 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
         return is();
     }
     @Override
+    public HtmlAssertion waitFor() {
+        return is();
+    }
+    @Override
+    public HtmlAssertion shouldBe() {
+        return is();
+    }
+    @Override
     public HtmlElement newElement(WebElement el) {
         return new HtmlElement(el);
     }
