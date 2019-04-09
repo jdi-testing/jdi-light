@@ -113,8 +113,8 @@ public class InitActions {
             Default(null)
         );
         DriverBase jdi = (DriverBase) info.instance;
-        jdi.setName(info.field.getName(), parentName);
-        jdi.setTypeName(info.instance.getClass().getName());
+        jdi.setName(info.field, parentName);
+        //jdi.setTypeName(info.instance.getClass().getName());
         jdi.parent = info.parent;
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
         info.instance = jdi;

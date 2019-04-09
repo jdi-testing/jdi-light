@@ -7,6 +7,8 @@ import com.epam.jdi.light.elements.interfaces.INamed;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.lang.reflect.Field;
+
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
@@ -39,10 +41,11 @@ public class DriverBase implements INamed {
         this.failElement = name;
         return (T) this;
     }
-    public void setName(String varName, String className) {
-        this.name = splitCamelCase(varName);
+    public void setName(Field field, String className) {
+        this.name = splitCamelCase(field.getName());
         this.failElement = this.name;
-        this.varName = className + "." + varName;
+        this.varName = className + "." + field.getName();
+        this.typeName = field.getType().getSimpleName();
     }
     public void setTypeName(String typeName) {
         this.typeName = typeName;

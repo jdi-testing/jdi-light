@@ -5,6 +5,7 @@ import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import static com.epam.jdi.light.actions.ActionOverride.OverrideAction;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;

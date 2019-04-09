@@ -74,12 +74,10 @@ public class WebSettings {
             fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(p -> DOMAIN = p, "domain");
             fillAction(p -> DRIVER_NAME = p, "driver");
-            fillAction(p -> DRIVER_VERSION = p, "drivers.version");
+            fillAction(p -> DRIVER_VERSION = p.toLowerCase().equals("latest")
+                    ? "LATEST" : p, "drivers.version");
             fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
             fillAction(p -> SCREEN_PATH = p, "screens.folder");
-            fillAction(p -> DRIVER_VERSION =
-                    p.toLowerCase().equals("true") || p.toLowerCase().equals("1")
-                            ? "LATEST" : "", "drivers.getLatest");
             // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
             fillAction(p -> KILL_BROWSER = p, "browser.kill");
             fillAction(WebSettings::setSearchStrategy, "element.search.strategy");

@@ -7,9 +7,9 @@ package com.epam.jdi.light.driver.get;
 
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -111,7 +111,6 @@ public class DriverData {
         cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT);
         cap.addArguments(getBrowserSizeOption());
         cap.setExperimentalOption("prefs", chromePrefs);
-
         // Capabilities from settings
         CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
         return cap;
@@ -154,10 +153,8 @@ public class DriverData {
         cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT);
         cap.is(SUPPORTS_JAVASCRIPT);
         cap.setCapability(ACCEPT_SSL_CERTS, true);
-
         // Capabilities from settings
         CAPABILITIES_FOR_IE.forEach(cap::setCapability);
-
 //        cap.setCapability("project", WebSettings.DRIVER_REMOTE_PROJECT_NAME);
 //        cap.setCapability("apm_id", WebSettings.DRIVER_REMOTE_APM_ID);
 //        cap.setCapability("user", WebSettings.DRIVER_REMOTE_USER_NAME);

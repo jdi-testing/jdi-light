@@ -24,6 +24,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -89,6 +90,7 @@ public class ActionHelper {
         BEFORE_STEP_ACTION.execute(jp);
         processNewPage(jp);
     };
+
     public static int CUT_STEP_TEXT = 70;
     public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
         if (!logResult(jp)) return result;
@@ -103,12 +105,15 @@ public class ActionHelper {
         return result;
     };
     private static boolean logResult(ProceedingJoinPoint jp) {
-        Class<?> cl = jp.getThis() != null
-            ? jp.getThis().getClass()
-            : jp.getSignature().getDeclaringType();
+        Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class)) return false;
         JDIAction ja = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
         return ja != null && ja.logResult();
+    }
+    static Class<?> getJpClass(ProceedingJoinPoint jp) {
+        return jp.getThis() != null
+                ? jp.getThis().getClass()
+                : jp.getSignature().getDeclaringType();
     }
 
     public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_JDI_ACTION =

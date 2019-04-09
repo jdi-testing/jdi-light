@@ -6,6 +6,7 @@ package com.epam.jdi.light.actions;
  */
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,6 +18,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import java.util.List;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
+import static com.epam.jdi.light.actions.ActionOverride.GetOverrideAction;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.base.OutputTemplates.FAILED_ACTION_TEMPLATE;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
@@ -48,14 +50,23 @@ public class ActionProcessor {
         }
     }
 
+
     private static Object stableAction(ProceedingJoinPoint jp) {
         long start = currentTimeMillis();
         String exception = "";
         logger.logOff();
         int timeout = TIMEOUT.get();
+        JFunc1<JDIBase, Object> overrideAction = null;
+        boolean replace = false;
+        JDIBase obj = null;
+        if (jp.getThis() != null && JDIBase.class.isAssignableFrom(jp.getThis().getClass())) {
+            overrideAction = GetOverrideAction(jp);
+            replace = overrideAction != null;
+            if (replace)
+                obj = (JDIBase) jp.getThis();
+        }
         do { try {
-            Object result =  jp.proceed();
-            boolean c = condition(jp);
+            Object result = replace ? overrideAction.execute(obj) : jp.proceed();
             if (!condition(jp)) continue;
             logger.logOn();
             return result;
