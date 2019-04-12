@@ -12,6 +12,7 @@ import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedI
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 
 public class ChecklistTests extends TestsInit {
 
@@ -70,6 +71,22 @@ public class ChecklistTests extends TestsInit {
         weather.assertThat().values(containsInAnyOrder(
         "Hot option", "Cold", "Rainy day", "Sunny", "Disabled"));
         weatherNoLocator.assertThat().selected("Hot option");
+    }
+
+    @Test
+    public void uncheckTest() {
+        weather.check("Rainy Day", "Sunny");
+        weather.uncheck(Rainy, Sunny);
+        assertNotEquals(weather.checked(), asList("Rainy Day", "Sunny"));
+    }
+
+    @Test
+    public void uncheckAllTest() {
+        weather.check(Rainy, Sunny);
+        weather.uncheckAll();
+
+        assertNotEquals(weather.checked(),
+                asList("Hot option", "Cold", "Rainy day", "Sunny", "Disabled"));
     }
 
 }

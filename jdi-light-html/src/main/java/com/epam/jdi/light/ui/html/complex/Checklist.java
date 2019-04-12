@@ -12,6 +12,7 @@ public interface Checklist extends BaseSelector {
     void uncheck(String... values);
     <TEnum extends Enum> void uncheck(TEnum... values);
     void uncheck(int... indexes);
+    void uncheckAll();
 
     void select(String... value);
     <TEnum extends Enum> void select(TEnum... value);

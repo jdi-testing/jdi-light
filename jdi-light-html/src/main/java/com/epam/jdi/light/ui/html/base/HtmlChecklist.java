@@ -142,6 +142,15 @@ public class HtmlChecklist extends Selector<HtmlElement> implements BaseSelector
         }
     }
 
+    @JDIAction("Uncheck '{name}' checked options")
+    public void uncheckAll() {
+        for (HtmlElement checkbox : checkboxes()) {
+            if (checkbox.isEnabled() && isSelected(checkbox)) {
+                checkbox.click();
+            }
+        }
+    }
+
     @JDIAction("Get '{name}' checked options")
     public List<String> checked() {
         return ifSelect(checkboxes(), HtmlElement::isSelected, HtmlElement::labelText);
