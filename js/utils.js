@@ -312,7 +312,7 @@ function closeSearch() {
 }
 
 function login() {
-    if ($('input#name').val() == 'epam' && $('input#password').val() == '1234') {
+    if ($('input#name').val() == 'Roman' && $('input#password').val() == 'Jdi1234') {
         $.cookie('authUser', 'true');
         $('.login-txt').addClass('hidden');
         checkLogin();
