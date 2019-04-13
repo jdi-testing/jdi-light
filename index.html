@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Home Page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/uui-all.css"/>
+    <link rel="stylesheet" href="css/custom-styles.css"/>
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css"/>
+    <script src="js/lib/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/uui-core.min.js" type="text/javascript"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
+    <!-- IE9- support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/lib/html5shiv.js"></script>
+    <script src="js/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+    <div class="replace site-header">replace</div>
+</header>
+<div class="wrapper">
+    <div class="replace left-side-bar">replace</div>
+    <div class="uui-main-container">
+        <main>
+            <div class="pattern-top"></div>
+            <div class="main-content">
+                <h3 class="main-title text-center" name="main-title" ui="title">EPAM framework Wishes…</h3>
+
+                <p class="main-txt text-center" name="jdi-text" ui="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+				<h3 class="text-center"><a ui="link" href="https://github.com/epam/JDI" target="_blank">JDI Github</a></h3>
+				<iframe id="iframe" src="https://epam.github.io/JDI/index.html" width="100%">
+				  <p>Your browser does not support iframes.</p>
+				</iframe>
+                <div class="row clerafix benefits">
+                    <div class="col-sm-3">
+                        <div class="benefit">
+                            <div class="benefit-icon">
+                                <span class="icons-benefit icon-practise"></span>
+                            </div>
+                            <span class="benefit-txt">To include good practices<br>and ideas from successful<br>EPAM project</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="benefit">
+                            <div class="benefit-icon">
+                                <span class="icons-benefit icon-custom"></span>
+                            </div>
+                            <span class="benefit-txt">To be flexible and<br>customizable </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="benefit">
+                            <div class="benefit-icon">
+                                <span class="icons-benefit icon-multi"></span>
+                            </div>
+                            <span class="benefit-txt">To be multiplatform </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="benefit">
+                            <div class="benefit-icon">
+                                <span class="icons-benefit icon-base"></span>
+                            </div>
+                            <span class="benefit-txt">Already have good base<br>(about 20 internal and<br>some external projects),<br>wish to get more…</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<footer>
+    <div class="replace footer">replace</div>
+</footer>
+</body>
+    <Script language="JavaScript">
+        UUI.Vertical_Menu.init({"open": true});
+    </script>
+    <script>
+		includeSideBar();
+		activateTopElement(1);
+	</script>
+</html>

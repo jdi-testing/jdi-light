@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+    <title>Dates</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/uui-all.css" />
+	<link rel="stylesheet" href="css/custom-styles.css" />
+	<link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/lib/components/awesome-bootstrap-checkbox.css" />
+	<link rel="stylesheet" href="css/lib/components/datepicker3.css" />
+	<link rel="stylesheet" href="css/lib/components/bootstrap-timepicker.css" />
+	<link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css" />
+	<script src="js/lib/jquery-1.11.1.min.js"></script>
+	<script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/uui-core.min.js" type="text/javascript"></script>
+	<script src="js/lib/components/bootstrap-datepicker.js"></script>
+	<script src="js/lib/components/bootstrap-timepicker.min.js"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
+	<!-- IE9- support of HTML5 -->
+    <!--[if lt IE 9]>
+        <script src="js/lib/html5shiv.js"></script>
+        <script src="js/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+    <div class="replace site-header">replace</div>
+</header>
+<div class="wrapper">
+    <div class="replace left-side-bar">replace</div>
+	<div class="uui-main-container page-inside">
+			<main>
+				<div class="pattern-top"></div>
+				<div class="main-content">
+					<div class="main-content-hg">
+						<form class="form">
+							<div class="row overflow">
+								<div class="col-sm-6">
+									<div class="form-group form-group10">
+										<label for="Name">Name</label>
+										<input id="Name" type="text" class="uui-form-element">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group form-group10">
+										<label for="LastName">Last Name</label>
+										<input id="LastName" type="text" class="uui-form-element">
+									</div>
+								</div>
+							</div>
+							<div class="row overflow">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="Description">Description</label>
+										<textarea class="uui-form-element" rows="8" cols="10" id="Description"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-5">
+									<div class="clearfix">
+										<label class="label-date">Period</label>
+										<div id="datepicker" class="date uui-datepicker date-button small">
+											<input type="text" class="uui-form-element small" />
+											<span class="input-group-addon uui-button small">
+												<i class="fa fa-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-5">
+									<div class="clearfix">
+										<label class="label-date">Time</label>
+										<div class="input-append bootstrap-timepicker uui-timepicker time-button">
+											<input id="timepicker" type="text" class="uui-form-element small" />
+											<span class="add-on uui-button small">
+												<i class="fa fa-clock-o"></i>
+											</span>
+										</div>
+									</div>
+									<div class="image-upload fileinput fileinput-new" data-provides="fileinput">
+										<label>Image input</label>
+                                        <a class="thumbnail">
+											<span>
+												<span class="up">Add your image</span>
+												<i class="fa fa-upload"></i>
+											</span>
+										</a>
+                                        <input type="file" name="..." style="-moz-opacity: 0; filter: alpha(opacity=0); opacity: 0; width: 0; height: 0; position:absolute;" />
+                                        <label class="filename hidden">File "<span></span>" has been uploaded!</label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-5">
+									<label for="Name">Range 1</label>
+									<div class="range-from overflow">
+										<span>From</span>
+										<input type="text" class="uui-form-element">
+										<span>to</span>
+										<input type="text" class="uui-form-element">
+									</div>
+								</div>
+								<div class="col-sm-5">
+									<label for="Name">Range 2</label>
+									<div class="uui-slider blue range">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12 text-right">
+									<button class="uui-button dark-blue m-t35" type="submit">Submit</button>
+								</div>
+							</div>
+						</form>
+					</div>
+                <div class="pagination">replace</ul>
+				</div>
+			</div>
+		</main>
+	</div>
+    <div class="replace right-side-bar">replace</div>
+</div>
+<footer>
+    <div class="replace footer">replace</div>
+</footer>
+	
+	<Script language="JavaScript">
+		UUI.Vertical_Menu.init({"open":true});
+	</script>
+	<script>
+		includeSideBar();
+		activateTopElement(3,2);
+		includePagination();
+	</script>
+	<script>
+		$('#datepicker').datepicker();
+		$('#timepicker').timepicker();
+		$('.uui-slider').slider();
+	</script>
+</body>
+</html>

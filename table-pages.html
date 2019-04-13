@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Table with pages</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/uui-all.css"/>
+    <link rel="stylesheet" href="css/custom-styles.css"/>
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/lib/components/awesome-bootstrap-checkbox.css"/>
+    <link rel="stylesheet" href="css/lib/components/datepicker3.css"/>
+    <link rel="stylesheet" href="css/lib/components/bootstrap-timepicker.css"/>
+    <link rel="stylesheet" href="css/lib/components/bootstrap-select.min.css"/>
+    <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css"/>
+    <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
+    <link rel="stylesheet" href="js/lib/components/DataTables-1.10.2/css/jquery.dataTables.min.css" />
+    <script src="js/lib/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/uui-core.min.js" type="text/javascript"></script>
+    <script src="js/lib/components/bootstrap-datepicker.js"></script>
+    <script src="js/lib/components/bootstrap-timepicker.min.js"></script>
+    <script src="js/lib/components/bootstrap-select.min.js"></script>
+    <script src="js/lib/components/DataTables-1.10.2/js/jquery.dataTables.min.js"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
+    <!-- IE9- support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/lib/html5shiv.js"></script>
+    <script src="js/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+    <div class="replace site-header">replace</div>
+</header>
+<div class="wrapper">
+    <div class="replace left-side-bar">replace</div>
+    <div class="uui-main-container page-inside">
+        <main>
+            <div class="pattern-top"></div>
+            <div class="main-content">
+                <div class="main-content-hg">
+                    <div class="support-title"><i class="fa fa-comments-o"></i>Support</div>
+                    <table class="uui-table dynamic stripe records-per-page search showing-pages paging" ui="d-table" id="table-with-pages">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Now</th>
+                            <th>Plans</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Drivers</td>
+                            <td>Selenium Custom</td>
+                            <td>JavaScript, Appium, WinAPI, Sikuli</td>
+                        </tr>
+                        <tr>
+                            <td>Test Runner</td>
+                            <td>TestNG, JUnit Custom</td>
+                            <td>MSTest, NUnit, Epam</td>
+                        </tr>
+                        <tr>
+                            <td>Asserter</td>
+                            <td>TestNG, JUnit, Custom</td>
+                            <td>MSTest, NUnit, Epam</td>
+                        </tr>
+                        <tr>
+                            <td>Logger</td>
+                            <td>Log4J, TestNG log, Custom</td>
+                            <td>Epam, XML/Json logging, Hyper logging</td>
+                        </tr>
+                        <tr>
+                            <td>Reporter</td>
+                            <td>Jenkins, Allure, Custom</td>
+                            <td>EPAM Report portal, Serenity, TimCity, Hudson</td>
+                        </tr>
+                        <tr>
+                            <td>BDD/DSL</td>
+                            <td>Custom</td>
+                            <td>Cucumber, Jbehave, Thucydides, SpecFlow</td>
+                        </tr>
+                        <tr>
+                            <td>ADO.NET</td>
+                            <td>Entity Framework</td>
+                            <td>LINQ</td>
+                        </tr>
+                        <tr>
+                            <td>ASP.NET </td>
+                            <td>AJAX</td>
+                            <td>LINQ</td>
+                        </tr>
+                        <tr>
+                            <td>Certificates </td>
+                            <td>Corporate </td>
+                            <td>Cognos Planning</td>
+                        </tr>
+                        <tr>
+                            <td>Cognos PowerPlay </td>
+                            <td>Hyperion Essbase </td>
+                            <td>Oracle OLAP</td>
+                        </tr>
+                        <tr>
+                            <td>Domain Experience </td>
+                            <td>Back- and Mid-Office Related</td>
+                            <td>Front-Office Related</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">replace</ul>
+            </div>
+        </main>
+    </div>
+    <div class="replace right-side-bar">replace</div>
+</div>
+<footer>
+    <div class="replace footer">replace</div>
+</footer>
+
+<Script language="JavaScript">
+    UUI.Vertical_Menu.init({"open": true});
+</script>
+<script>
+    $('.selectpicker').selectpicker();
+</script>
+<script>
+    var tDyn = $('.uui-table.dynamic'),
+            domElements = '';
+    tDyn.addClass('dataTable');
+    if (tDyn.hasClass('records-per-page')) {
+        domElements += 'l';
+    }
+    else {
+        domElements += '';
+    }
+    if (tDyn.hasClass('search')) {
+        domElements += 'f';
+    }
+    domElements += '<t>';
+    if (tDyn.hasClass('showing-pages')) {
+        domElements += 'i';
+    }
+    if (tDyn.hasClass('paging')) {
+        domElements += 'p';
+    }
+    tDyn.dataTable({
+        'dom': domElements,
+        "lengthMenu": [5, 10, 15, 20]
+    });
+    $('.uui-table.dynamic').parents('.dataTables_wrapper').find('input').addClass('uui-form-element');
+    $('.uui-table.dynamic').parents('.dataTables_wrapper').find('select').addClass('uui-form-element');
+</script>
+<script>
+		includeSideBar();
+		activateTopElement(3,6);
+		includePagination();
+	</script>
+</body>
+</html>

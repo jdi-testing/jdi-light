@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Complex Table</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/uui-all.css" />
+    <link rel="stylesheet" href="css/custom-styles.css" />
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/lib/components/awesome-bootstrap-checkbox.css" />
+    <link rel="stylesheet" href="css/lib/components/datepicker3.css" />
+    <link rel="stylesheet" href="css/lib/components/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="css/lib/components/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css" />
+    <script src="js/lib/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/uui-core.min.js" type="text/javascript"></script>
+    <script src="js/lib/components/bootstrap-datepicker.js"></script>
+    <script src="js/lib/components/bootstrap-timepicker.min.js"></script>
+    <script src="js/lib/components/bootstrap-select.min.js"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
+    <!-- IE9- support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/lib/html5shiv.js"></script>
+    <script src="js/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+    <div class="replace site-header">replace</div>
+</header>
+<div class="wrapper">
+    <div class="replace left-side-bar">replace</div>
+    <div class="uui-main-container page-inside">
+        <main>
+            <div class="pattern-top"></div>
+            <div class="main-content">
+                <div class="main-content-hg">
+                    <div class="support-title"><i class="fa fa-comments-o"></i>Support</div>
+                    <table class="uui-table stripe tbl-scroll table-delete" ui="d-table" id="complex-table">
+                        <thead>
+                        <tr>
+                            <th width="200px"></th>
+                            <th width="140px" >Column 1</th>
+                            <th width="200px" >Column 2</th>
+                            <th width="140px" >Column 3</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="4">
+                                <div class="tbl-height">
+                                    <table class="uui-table table-delete-body stripe " >
+                                        <tbody>
+                                        <tr>
+                                            <td  width="200px" class="title-col"><span>Microsoft Technologies</span></td>
+                                            <td  width="140px">
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g1" class="uui-form-element blue" />
+                                                    <label for="g1">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>.NET Technologies</p>
+                                            </td>
+                                            <td width="200px">
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g2" class="uui-form-element blue" />
+                                                    <label for="g2">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Internet Technologies</p></td>
+                                            <td width="140px">
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g3" class="uui-form-element blue" />
+                                                    <label for="g3">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Programming Languages</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title-col"><span>Mobile</span></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g4" class="uui-form-element blue" />
+                                                    <label for="g4">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>HTML5/CSS3</p>
+                                            </td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g5" class="uui-form-element blue" />
+                                                    <label for="g5">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>JQuery Mobile</p></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g6" class="uui-form-element blue" />
+                                                    <label for="g6">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>JQuery Mobile</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title-col"><span>UXD</span></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g7" class="uui-form-element blue" />
+                                                    <label for="g7">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>(X)CSS Development</p>
+                                            </td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g8" class="uui-form-element blue" />
+                                                    <label for="g8">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Grunt (The JavaScript Task Runner)</p></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g9" class="uui-form-element blue" />
+                                                    <label for="g9">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Less CSS</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title-col"><span>Version Control Systems</span></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g10" class="uui-form-element blue" />
+                                                    <label for="g10">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>CVS</p>
+                                            </td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g11" class="uui-form-element blue" />
+                                                    <label for="g11">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>TortoiseSVN</p></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g12" class="uui-form-element blue" />
+                                                    <label for="g12">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Git</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title-col"><span>JavaScript Components and Frameworks</span></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g13" class="uui-form-element blue" />
+                                                    <label for="g13">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Backbone marionette js</p>
+                                            </td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g14" class="uui-form-element blue" />
+                                                    <label for="g14">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Bootstrap</p></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g15" class="uui-form-element blue" />
+                                                    <label for="g15">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>RequireJS</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title-col"><span>Software Construction</span></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g16" class="uui-form-element blue" />
+                                                    <label for="g16">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Internet Technologies</p>
+                                            </td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g17" class="uui-form-element blue" />
+                                                    <label for="g17">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>JavaScript Components and Frameworks</p></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g18" class="uui-form-element blue" />
+                                                    <label for="g18">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Backend</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title-col"><span>Life Sciences</span></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g19" class="uui-form-element blue" />
+                                                    <label for="g19">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Biology</p>
+                                            </td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g20" class="uui-form-element blue" />
+                                                    <label for="g20">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Chemistry</p></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g21" class="uui-form-element blue" />
+                                                    <label for="g21">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Medicine</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title-col"><span>Content management</span></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g22" class="uui-form-element blue" />
+                                                    <label for="g22">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Drupal</p>
+                                            </td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g23" class="uui-form-element blue" />
+                                                    <label for="g23">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Adobe Day CRX</p></td>
+                                            <td>
+                                                <p class="checkbox">
+                                                    <input type="checkbox" id="g24" class="uui-form-element blue" />
+                                                    <label for="g24">Select</label>
+                                                </p>
+                                                <a href="#" class="seeMore">See More</a>
+                                                <p>Sharepoint</p>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>1 column</th>
+                            <th>2 column</th>
+                            <th>3 column</th>
+                            <th>4 column</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <div class="select-multiple">
+                        <p>Select multiple items:</p>
+                        <div id="columns">
+                            <select class="selectpicker uui-form-element raspberry-color" multiple="multiple">
+                                <option selected="true">Column 1</option>
+                                <option selected="true">Column 2</option>
+                                <option>Column 3</option>
+                            </select>
+                        </div>
+                        <button class="uui-button dark-blue">Reestablish</button>
+                        <button class="uui-button">Apply</button>
+                    </div>
+                </div>
+                <div class="pagination">replace</ul>
+            </div>
+        </main>
+    </div>
+    <div class="replace right-side-bar">replace</div>
+</div>
+<footer>
+    <div class="replace footer">replace</div>
+</footer>
+
+    <Script language="JavaScript">
+        UUI.Vertical_Menu.init({"open":true});
+    </script>
+    <script>
+        $('.selectpicker').selectpicker();
+    </script>
+    <script>
+		includeSideBar();
+		activateTopElement(3,3);
+		includePagination();
+	</script>
+</body>
+</html>

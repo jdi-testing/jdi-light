@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>User Table</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/uui-all.css" />
+    <link rel="stylesheet" href="css/custom-styles.css" />
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/lib/components/awesome-bootstrap-checkbox.css" />
+    <link rel="stylesheet" href="css/lib/components/datepicker3.css" />
+    <link rel="stylesheet" href="css/lib/components/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="css/lib/components/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css" />
+    <script src="js/lib/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/uui-core.min.js" type="text/javascript"></script>
+    <script src="js/lib/components/bootstrap-datepicker.js"></script>
+    <script src="js/lib/components/bootstrap-timepicker.min.js"></script>
+    <script src="js/lib/components/bootstrap-select.min.js"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
+    <!-- IE9- support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/lib/html5shiv.js"></script>
+    <script src="js/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+    <div class="replace site-header">replace</div>
+</header>
+<div class="wrapper">
+    <div class="replace left-side-bar">replace</div>
+    <div class="uui-main-container page-inside">
+        <main>
+            <div class="pattern-top"></div>
+            <div class="main-content">
+                <div class="main-content-hg">
+                    <div class="support-title"><i class="fa fa-comments-o"></i>Users</div>
+					<table id="user-table" ui="table">
+					  <tr>
+						<th width=20>Number</th>
+						<th width=120>Type</th>
+						<th width=120>User</th>
+						<th>Desciption</th>
+					  </tr>
+					  <tr>
+						<td>1</td>
+						<td>
+						  <select>
+							<option>Admin</option>
+							<option>User</option>
+							<option>Manager</option>
+						  </select>
+						</td>
+						<td><a href="">Roman</a></td>
+						<td>
+						  <img src="images/wolverin.jpg">
+						  <div class="user-descr">
+							<span>Wolverine</span><br>
+							  <input type="checkbox" id="roman" checked>
+							  <label for="roman">Vip</label>
+						  </div>
+						</td>
+					  </tr>
+					  <tr>
+						<td>2</td>
+						<td>
+						  <select>
+							<option>Admin</option>
+							<option selected>User</option>
+							<option>Manager</option>
+						  </select>
+						</td>
+						<td><a href="">Sergey Ivan</a></td>
+						<td>
+						  <img src="images/spider-man.jpg">
+						  <div class="user-descr">
+							<span>Spider Man</span><br>
+							  <input type="checkbox" id="ivan">
+							  <label for="ivan">Vip</label>
+						  </div>
+						</td>
+					  </tr>
+					  <tr>
+						<td>3</td>
+						<td>
+						  <select>
+							<option>Admin</option>
+							<option>User</option>
+							<option selected>Manager</option>
+						  </select>
+						</td>
+						<td><a href="">Vladzimir</a></td>
+						<td>
+						  <img src="images/punisher.jpg">
+						  <div class="user-descr">
+							<span>Punisher</span><br>
+							  <input type="checkbox" id="vlad" checked>
+							  <label for="vlad">Vip</label>
+						  </div>
+						</td>
+					  </tr>
+					  <tr>
+						<td>4</td>
+						<td>
+						  <select>
+							<option>Admin</option>
+							<option selected>User</option>
+							<option>Manager</option>
+						  </select>
+						</td>
+						<td><a href="">Helen Bennett</a></td>
+						<td>
+						  <img src="images/captain-america.jpg">
+						  <div class="user-descr">
+							<span>Captain America <br>some description</span><br>
+							  <input type="checkbox" id="helen">
+							  <label for="helen">Vip</label>
+						  </div>
+						</td>
+					  </tr>
+					  <tr>
+						<td>5</td>
+						<td>
+						  <select>
+							<option>Admin</option>
+							<option selected>User</option>
+							<option>Manager</option>
+						  </select>
+						</td>
+						<td><a href="">Yoshi Tannamuri</a></td>
+						<td>
+						  <img src="images/cyclope.jpg">
+						  <div class="user-descr">
+							<span>Cyclope <br>some description</span><br>
+							  <input type="checkbox" id="yoshi">
+							  <label for="yoshi">Vip</label>
+						  </div>
+						</td>
+					  </tr>
+					  <tr>
+						<td>6</td>
+						<td>
+						  <select>
+							<option>Admin</option>
+							<option selected>User</option>
+							<option>Manager</option>
+						  </select>
+						</td>
+						<td><a href="">Giovanni Rovelli</a></td>
+						<td>
+						  <img src="images/hulk.jpg">
+						  <div class="user-descr">
+							<span>Hulk<br>some description</span><br>
+							  <input type="checkbox" id="gio">
+							  <label for="gio">Vip</label>
+						  </div>
+						</td>
+					  </tr>
+					</table>
+                </div>
+                <div class="pagination">replace</ul>
+            </div>
+        </main>
+    </div>
+    <div class="replace right-side-bar">replace</div>
+</div>
+<footer>
+    <div class="replace footer">replace</div>
+</footer>
+
+<Script language="JavaScript">
+    UUI.Vertical_Menu.init({"open":true});
+</script>
+<script>
+    $('.selectpicker').selectpicker();
+</script>
+<script>
+		includeSideBar();
+		activateTopElement(3,5);
+		includePagination();
+	</script>
+</body>
+</html>
