@@ -12,7 +12,7 @@ public class Users {
         u.position = "ChiefQA";
         u.passportNumber = "4321";
         u.passportSeria = "123456";
-        u.description = "JDI - awesome UI autoamtion tool";
+        u.description = "JDI - awesome UI automation tool";
         u.gender = "Female";
         //u.religion = "Other";
         //u.weather = "Sun, Snow";

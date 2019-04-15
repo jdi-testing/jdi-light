@@ -184,11 +184,24 @@ public class Form<T> extends Section {
      */
     @JDIAction("Submit '{name}' with value '{0}' and press '{1}' button")
     public void submit(String text, String buttonName) {
-        Field field = getFields(pageObject, SetValue.class).get(0);
+        List<Field> fields = getFields(pageObject, SetValue.class);
+        if (fields.isEmpty())
+            throw exception("Can't submit '%s' in form %s", text, this);
+        Field field = fields.get(0);
         FILL_ACTION.execute(field, getValueField(field, pageObject), pageObject, text);
         GET_BUTTON.execute(pageObject, buttonName).click();
     }
 
+    /**
+     * Allowed different buttons to send one form e.g. save/ publish / cancel / search update ...
+     */
+    @JDIAction("Submit '{name}' and press '{0}' button")
+    public void pressButton(String buttonName) {
+        GET_BUTTON.execute(pageObject, buttonName).click();
+    }
+    public void submit() {
+        pressButton("submit");
+    }
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “submit” <br>
@@ -233,11 +246,14 @@ public class Form<T> extends Section {
      *               Fill all SetValue elements and click on Button “login” or ”loginButton” <br>
      * @apiNote To use this option Form pageObject should have only one IButton Element
      */
-    @JDIAction("Login in as {0}")
+    @JDIAction("Login as {0}")
     public void login(T entity) {
         submit(entity, "login");
     }
-
+    @JDIAction("Login")
+    public void login() {
+        GET_BUTTON.execute(pageObject, "login").click();
+    }
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “login” or ”loginButton” <br>
@@ -258,6 +274,10 @@ public class Form<T> extends Section {
         submit(entity, "send");
     }
 
+    @JDIAction("Send '{name}'")
+    public void send() {
+        GET_BUTTON.execute(pageObject, "send").click();
+    }
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “add” or ”addButton” <br>
