@@ -9,7 +9,6 @@ import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.init.PageFactory;
-import com.epam.jdi.light.elements.init.UIFactory;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -26,8 +25,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
-import static com.epam.jdi.light.common.UIUtils.getButtonByName;
+import static com.epam.jdi.light.common.UIUtils.*;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
@@ -43,7 +41,7 @@ public class HtmlSettings {
     public static synchronized void init() {
         if (!initialized) {
             WebSettings.init();
-            INIT_RULES.update("Selector", iRule(asList(Dropdown.class, MultiSelect.class),
+            INIT_RULES.update("Selector", iRule(asList(Dropdown.class, MultiSelector.class),
                 info -> new HtmlSelector()));
             INIT_RULES.update("UIElement", iRule(WebElement.class,
                 info -> new HtmlElement()));
@@ -72,7 +70,7 @@ public class HtmlSettings {
                 switch (fields.size()) {
                     case 0:
                         if (obj.getClass().getSimpleName().equals("Form"))
-                            return UIFactory.$("[type=submit]");
+                            return GET_DEFAULT_BUTTON.execute(buttonName);
                         throw exception("Can't find any buttons on form '%s.", obj);
                     case 1:
                         return (BaseUIElement) getValueField(fields.get(0), obj);
