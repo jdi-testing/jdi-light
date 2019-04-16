@@ -129,7 +129,7 @@ public class InitActions {
         if (info.field.getAnnotation(Root.class) != null)
             jdi.locator.isRoot = true;
         if (hasAnnotation(info.field, Frame.class))
-            jdi.locator = new JDILocator(getFrame(info.field.getAnnotation(Frame.class)), FRAME, jdi.name);
+            jdi.setFrame(getFrame(info.field.getAnnotation(Frame.class)));
         info.instance = jdi;
     }
 

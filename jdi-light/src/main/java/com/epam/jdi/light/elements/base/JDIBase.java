@@ -2,6 +2,8 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDILocator;
+import com.epam.jdi.light.common.LocatorType;
+import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
@@ -19,7 +21,9 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.common.ScreenshotMaker.takeScreen;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.correctXPaths;
 import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
@@ -68,7 +72,13 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     }
 
     public <T extends JDIBase> T setLocator(By locator) {
-        this.locator = new JDILocator(locator, name);
+        if (name.isEmpty()) name = shortBy(locator);
+        this.locator = new JDILocator(locator, this);
+        return (T) this;
+    }
+    public <T extends JDIBase> T setFrame(By locator) {
+        if (name.isEmpty()) name = shortBy(locator);
+        this.locator = new JDILocator(locator, FRAME, this);
         return (T) this;
     }
     public By getLocator(Object... args) {
