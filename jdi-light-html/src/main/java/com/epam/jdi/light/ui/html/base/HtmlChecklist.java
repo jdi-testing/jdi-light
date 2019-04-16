@@ -37,6 +37,10 @@ public class HtmlChecklist extends Selector<HtmlElement> implements BaseSelector
         return map(getAll(), el -> new HtmlElement(el).label().setName(getName()+ " label"));
     }
     List<HtmlElement> checkboxes() { return map(getAll(), HtmlElement::new); }
+    @Override
+    public int size() {
+        return checkboxes().size();
+    }
 
     /**
      * Select values from parameters
@@ -126,6 +130,14 @@ public class HtmlChecklist extends Selector<HtmlElement> implements BaseSelector
         }
     }
 
+    @JDIAction("Uncheck '{name}' checked options")
+    public void checkAll() {
+        for (HtmlElement checkbox : checkboxes()) {
+            if (checkbox.isEnabled() && !isSelected(checkbox)) {
+                checkbox.click();
+            }
+        }
+    }
     /**
      * Unchecks particular elements by index
      * @param indexes int var arg, ids to uncheck

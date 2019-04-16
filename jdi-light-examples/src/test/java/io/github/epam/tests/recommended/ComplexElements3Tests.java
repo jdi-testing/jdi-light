@@ -18,7 +18,7 @@ import static io.github.epam.enums.NavigationNums.nHome;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
-public class ComplexElementsTests extends StaticTestsInit {
+public class ComplexElements3Tests extends StaticTestsInit {
 
     @BeforeMethod
     public void before() {

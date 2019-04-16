@@ -60,10 +60,10 @@ public class ChecklistTests extends TestsInit {
     public void isValidationTest() {
         weather.is().selected("Hot option");
         weather.is().selected(Hot);
-        weather.assertThat().values(hasItem("Sunny"));
-        weather.assertThat().disabled(hasItem("Disabled"));
-        weather.assertThat().enabled(not(hasItem("Disabled")));
-        weather.assertThat().enabled(hasItems("Cold", "Sunny"));
+        weather.assertThat().values(hasItem("Sunny"))
+            .disabled(hasItem("Disabled"))
+            .enabled(not(hasItem("Disabled")))
+            .enabled(hasItems("Cold", "Sunny"));
     }
 
     @Test
@@ -75,18 +75,22 @@ public class ChecklistTests extends TestsInit {
 
     @Test
     public void uncheckTest() {
-        weather.check("Rainy Day", "Sunny");
+        weather.check("Rainy day", "Sunny");
         weather.uncheck(Rainy, Sunny);
-        assertNotEquals(weather.checked(), asList("Rainy Day", "Sunny"));
+        weather.is().selected(hasSize(2));
+        weather.is().selected(hasItems("Hot option", "Cold"));
     }
 
     @Test
     public void uncheckAllTest() {
         weather.check(Rainy, Sunny);
         weather.uncheckAll();
-
-        assertNotEquals(weather.checked(),
-                asList("Hot option", "Cold", "Rainy day", "Sunny", "Disabled"));
+        weather.is().selected(hasSize(0));
     }
-
+    @Test
+    public void checkAllTest() {
+        weather.checkAll();
+        weather.is().selected(hasSize(4));
+        weather.is().selected(hasItems("Hot option", "Cold", "Rainy day", "Sunny"));
+    }
 }

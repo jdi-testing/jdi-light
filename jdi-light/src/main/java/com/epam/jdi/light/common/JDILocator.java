@@ -1,5 +1,6 @@
 package com.epam.jdi.light.common;
 
+import com.epam.jdi.light.elements.base.JDIBase;
 import org.openqa.selenium.By;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -17,7 +18,7 @@ public class JDILocator {
     private LocatorType locatorType = DEFAULT;
     private By byLocator;
     public boolean isRoot = false;
-    private String name;
+    private JDIBase element;
     private Object[] args = new Object[]{};
 
     public By getLocator() { return byLocator; }
@@ -43,15 +44,15 @@ public class JDILocator {
 
     public JDILocator() {
     }
-    public JDILocator(By locator, String name) {
-        this(locator, DEFAULT, name);
+    public JDILocator(By locator, JDIBase element) {
+        this(locator, DEFAULT, element);
     }
-    public JDILocator(By locator, LocatorType type, String name) {
+    public JDILocator(By locator, LocatorType type, JDIBase element) {
         locatorType = type;
         byLocator = setRootLocator(locator)
                 ? trimRoot(locator)
                 : locator;
-        this.name = name;
+        this.element = element;
     }
     public boolean isTemplate() {
         return byLocator != null && byLocator.toString().contains("%s");
@@ -82,7 +83,7 @@ public class JDILocator {
             }
             String shortLocator = locator != null
                     ? shortBy(locator)
-                    : print(select(SMART_SEARCH_LOCATORS, l -> format(l, splitHyphen(name))), " or ");
+                    : print(select(SMART_SEARCH_LOCATORS, l -> format(l, splitHyphen(element.name))), " or ");
             return isFrame + shortLocator.replaceAll("%s", "VALUE");
         } catch (Exception ex) { throw exception("Can't print locator: " + ex.getMessage()); }
     }
