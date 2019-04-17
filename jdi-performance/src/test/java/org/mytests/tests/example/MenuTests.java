@@ -28,7 +28,6 @@ public class MenuTests extends SimpleTestsInit {
         menu.select(ContactForm);
         assertEquals(menu.selected(), ContactForm.value);
         menu.select(Service, Dates);
-        menu.assertThat().values(not(hasItem("Home")));
         menu.is().selected(Dates.value);
         datesPage.checkOpened();
         leftMenu.select(ElementsPacks, HTML5);
