@@ -2,7 +2,7 @@ package org.mytests.tests.example;
 
 import com.epam.jdi.light.elements.composite.Form;
 import org.mytests.tests.SimpleTestsInit;
-import org.mytests.tests.preconditions.Preconditions;
+import org.mytests.tests.states.States;
 import org.mytests.uiobjects.example.entities.Contacts;
 import org.testng.annotations.Test;
 
@@ -15,7 +15,7 @@ public class FormTests extends SimpleTestsInit {
 
     @Test
     public void loginTest() {
-        Preconditions.shouldBeLoggedOut();
+        States.shouldBeLoggedOut();
         userIcon.click();
         loginForm.loginAs(DEFAULT_USER);
         homePage.checkOpened();
@@ -23,7 +23,7 @@ public class FormTests extends SimpleTestsInit {
 
     @Test
     public void fillContactFormTest() {
-        Preconditions.shouldBeLoggedIn();
+        States.shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         contactForm.submit(DEFAULT_CONTACT);
         contactForm.check(DEFAULT_CONTACT);
@@ -31,7 +31,7 @@ public class FormTests extends SimpleTestsInit {
 
     @Test
     public void fillContactsTest() {
-        Preconditions.shouldBeLoggedIn();
+        States.shouldBeLoggedIn();
         contactsPage.shouldBeOpened();
         Form<Contacts> contactFrom = contactsPage.asForm();
         contactFrom.submit(DEFAULT_CONTACT);
