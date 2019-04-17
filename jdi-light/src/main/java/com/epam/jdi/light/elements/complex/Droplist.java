@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.ListAssert;
-import com.epam.jdi.light.asserts.UIListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;

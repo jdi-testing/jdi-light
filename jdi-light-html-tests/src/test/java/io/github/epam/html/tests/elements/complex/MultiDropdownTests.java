@@ -1,12 +1,9 @@
 package io.github.epam.html.tests.elements.complex;
 
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.multiDropdown;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;

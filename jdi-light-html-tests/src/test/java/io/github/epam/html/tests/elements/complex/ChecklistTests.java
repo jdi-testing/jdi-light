@@ -12,7 +12,6 @@ import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedI
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
 
 public class ChecklistTests extends TestsInit {
 

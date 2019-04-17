@@ -2,8 +2,6 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDILocator;
-import com.epam.jdi.light.common.LocatorType;
-import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
@@ -24,8 +22,6 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.common.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.driver.WebDriverByUtils.correctXPaths;
-import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
 import static com.epam.jdi.light.logger.LogLevels.*;

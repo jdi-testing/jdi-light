@@ -1,6 +1,5 @@
 package com.epam.jdi.light.elements.complex;
 
-import com.epam.jdi.light.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseUIElement;
@@ -19,7 +18,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
 public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
-    implements BaseSelectorAssert, ISelector {
+    implements ISelector {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
 
     public Selector() { }

@@ -10,8 +10,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-
 public class UIElement extends BaseUIElement<UIElement> {
     public UIElement() { setInitClass(UIElement.class); }
     public UIElement(WebElement el) { this(); webElement.setForce(el); }

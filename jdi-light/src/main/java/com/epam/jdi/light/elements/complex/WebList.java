@@ -12,8 +12,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-
 public class WebList extends JList<UIElement> {
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
 

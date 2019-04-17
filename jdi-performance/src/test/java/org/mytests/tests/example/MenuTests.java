@@ -4,6 +4,8 @@ import org.mytests.tests.SimpleTestsInit;
 import org.mytests.tests.preconditions.Preconditions;
 import org.testng.annotations.Test;
 
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.not;
 import static org.mytests.uiobjects.example.entities.LeftMenuData.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
 import static org.testng.Assert.assertEquals;
@@ -26,6 +28,7 @@ public class MenuTests extends SimpleTestsInit {
         menu.select(ContactForm);
         assertEquals(menu.selected(), ContactForm.value);
         menu.select(Service, Dates);
+        menu.assertThat().values(not(hasItem("Home")));
         menu.is().selected(Dates.value);
         datesPage.checkOpened();
         leftMenu.select(ElementsPacks, HTML5);

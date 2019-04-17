@@ -1,6 +1,5 @@
 package com.epam.jdi.light.ui.html.base;
 
-import com.epam.jdi.light.asserts.BaseSelectorAssert;
 import com.epam.jdi.light.asserts.IHasSelectAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
@@ -21,7 +20,7 @@ import static java.util.Arrays.asList;
 import static org.jsoup.helper.StringUtil.isBlank;
 
 public class HtmlMultiDropdown extends Selector<HtmlElement>
-        implements BaseSelectorAssert, MultiDropdown, IHasSelectAssert {
+        implements MultiDropdown, IHasSelectAssert {
 
     public HtmlMultiDropdown() { setInitClass(HtmlElement.class); }
     public HtmlMultiDropdown(WebElement el) { super(el); setInitClass(HtmlElement.class); }
