@@ -6,6 +6,7 @@ package com.epam.jdi.light.ui.html;
  */
 
 import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.init.PageFactory;
@@ -24,7 +25,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.*;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
@@ -66,12 +66,10 @@ public class HtmlSettings {
             GET_BUTTON = (obj, buttonName) -> {
                 List<Field> fields = getFieldsExact(obj, Button.class);
                 if (fields.size() == 0)
-                    fields = getFields(obj, WebElement.class);
+                    fields = getFieldsExact(obj, WebElement.class, UIElement.class);
                 switch (fields.size()) {
                     case 0:
-                        if (obj.getClass().getSimpleName().equals("Form"))
-                            return GET_DEFAULT_BUTTON.execute(buttonName);
-                        throw exception("Can't find any buttons on form '%s.", obj);
+                        return GET_DEFAULT_BUTTON.execute(obj, buttonName);
                     case 1:
                         return (BaseUIElement) getValueField(fields.get(0), obj);
                     default:

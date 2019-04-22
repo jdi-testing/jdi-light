@@ -182,10 +182,10 @@ public class WebDriverFactory {
     public static void close() {
         if (nonNull(runDrivers.get())) {
             for (Pair<String, WebDriver> pair : runDrivers.get())
-                pair.value.quit();
+                try {
+                    pair.value.quit();
+                } catch (Exception ignore) {}
             runDrivers.get().clear();
-        } else {
-            throw exception("None Driver has been found for current thread. Probably Fixture configuration is wrong.");
         }
     }
 

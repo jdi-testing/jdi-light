@@ -8,7 +8,7 @@ import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.weather;
 import static io.github.com.pages.HtmlElementsPage.weatherNoLocator;
 import static io.github.epam.html.tests.elements.complex.enums.Weather.*;
-import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;

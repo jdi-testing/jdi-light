@@ -10,7 +10,7 @@ import static io.github.com.pages.Header.*;
 /**
  * Created by Roman_Iovlev on 3/1/2018.
  */
-public class Preconditions {
+public class States {
     @Step
     public static void shouldBeLoggedIn() {
         if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))

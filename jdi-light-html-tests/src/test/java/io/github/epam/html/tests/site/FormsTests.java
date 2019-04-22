@@ -2,7 +2,7 @@ package io.github.epam.html.tests.site;
 
 import com.epam.jdi.tools.map.MapArray;
 import io.github.epam.TestsInit;
-import io.github.epam.html.tests.site.steps.Preconditions;
+import io.github.epam.html.tests.site.steps.States;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.contactFormPage;
@@ -21,7 +21,7 @@ public class FormsTests extends TestsInit {
     @Test
     public void loginTest() {
         if (isFireFox()) return;
-        Preconditions.shouldBeLoggedOut();
+        States.shouldBeLoggedOut();
         userIcon.click();
         MapArray<String, String> attrs = userIcon.attrs();
         assertThat(attrs.size(), is(3));
@@ -32,7 +32,7 @@ public class FormsTests extends TestsInit {
 
     @Test
     public void fillContactFormTest() {
-        Preconditions.shouldBeLoggedIn();
+        States.shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         main.contactForm.submit(DEFAULT_CONTACT);
         main.contactForm.check(DEFAULT_CONTACT);

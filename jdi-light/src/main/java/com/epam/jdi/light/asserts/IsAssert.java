@@ -3,9 +3,11 @@ package com.epam.jdi.light.asserts;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -60,6 +62,21 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
     @JDIAction("Assert that '{name}' is disappear")
     public T disappear() {
         assertThat(element.displayed() ? "displayed" : "disappear", is("disappear"));
+        return (T) this;
+    }
+    @JDIAction("Assert that '{name}' is hidden")
+    public T hidden() {
+        assertThat(element.displayed() ? "displayed" : "hidden", is("hidden"));
+        return (T) this;
+    }
+    public T notAppear() {
+        return notAppear(TIMEOUT.get());
+    }
+    @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
+    public T notAppear(int timeoutSec) {
+        boolean result = new Timer(timeoutSec*1000)
+            .wait(() -> element.displayed());
+        assertThat(result ? "displayed" : "hidden", is("hidden"));
         return (T) this;
     }
     @JDIAction("Assert that '{name}' is selected")

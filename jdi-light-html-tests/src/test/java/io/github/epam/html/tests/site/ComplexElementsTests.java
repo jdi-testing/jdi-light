@@ -1,7 +1,7 @@
 package io.github.epam.html.tests.site;
 
 import io.github.epam.TestsInit;
-import io.github.epam.html.tests.site.steps.Preconditions;
+import io.github.epam.html.tests.site.steps.States;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -22,7 +22,7 @@ public class ComplexElementsTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        Preconditions.shouldBeLoggedIn();
+        States.shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
     }
     @Test

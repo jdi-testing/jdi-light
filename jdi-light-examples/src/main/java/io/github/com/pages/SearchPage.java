@@ -11,8 +11,8 @@ import java.util.List;
 public class SearchPage extends BasePage {
 	@Css(".box") public UIList<SearchResult, Result> search;
 	@Css(".box") public UIList<SearchResult, ?> search2;
+	@Css(".box") public static List<SearchResult> search3;
+	@Css(".box") public static UIList<SearchResult, ?> searchS;
 	@XPath("//*[@class='box']/h3[text()=\"%s\"]")
 	public UIList<SearchResult, ?> searchT2;
-	@Css(".box") public static UIList<SearchResult, ?> searchS;
-	@Css(".box") public static List<SearchResult> search3;
 }

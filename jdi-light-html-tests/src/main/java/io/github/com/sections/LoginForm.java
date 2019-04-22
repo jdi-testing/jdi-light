@@ -6,7 +6,6 @@ import com.epam.jdi.light.ui.html.common.TextField;
 import io.github.com.entities.User;
 
 public class LoginForm extends Form<User> {
-	public TextField name, password;
-	public Button loginButton;
-
+	TextField name, password;
+	Button loginButton;
 }

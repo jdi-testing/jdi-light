@@ -50,12 +50,13 @@ public class ActionProcessor {
         }
     }
 
-
     private static Object stableAction(ProceedingJoinPoint jp) {
-        long start = currentTimeMillis();
         String exception = "";
         logger.logOff();
-        int timeout = TIMEOUT.get();
+        JDIAction ja = getMethod(jp).getMethod().getAnnotation(JDIAction.class);
+        int timeout = ja != null && ja.timeout() != -1
+            ? ja.timeout()
+            : TIMEOUT.get();
         JFunc1<JDIBase, Object> overrideAction = null;
         boolean replace = false;
         JDIBase obj = null;
@@ -65,6 +66,7 @@ public class ActionProcessor {
             if (replace)
                 obj = (JDIBase) jp.getThis();
         }
+        long start = currentTimeMillis();
         do { try {
             Object result = replace ? overrideAction.execute(obj) : jp.proceed();
             if (!condition(jp)) continue;

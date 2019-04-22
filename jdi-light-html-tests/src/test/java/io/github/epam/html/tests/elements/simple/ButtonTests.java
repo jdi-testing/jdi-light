@@ -12,8 +12,9 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.html.tests.elements.BaseValidations.*;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
@@ -89,7 +90,8 @@ public class ButtonTests extends TestsInit {
     @Test
     public void suspendButtonTest() {
         refresh();
-        suspendButton.click();
+        durationMoreThan(3,
+            () -> suspendButton.click());
         assertEquals(getAlertText(), "Suspend button");
         acceptAlert();
     }
@@ -97,8 +99,44 @@ public class ButtonTests extends TestsInit {
     @Test
     public void vanishButtonTest() {
         refresh();
-        ghostButton.is().disappear();
+        durationMoreThan(3, () ->
+            ghostButton.is().disappear());
     }
+    @Test
+    public void isNotAppearTimeoutFailedButtonTest() {
+        refresh();
+        try {
+            durationImmediately(() ->
+                ghostButton.is().notAppear(2));
+        } catch (Exception ex) {
+            assertThat(ex.getMessage(), containsString("but: was \"displayed\""));
+        }
+    }
+    @Test
+    public void isNotAppearFailedButtonTest() {
+        refresh();
+        try {
+        durationImmediately(() ->
+            ghostButton.is().notAppear());
+        } catch (Exception ex) {
+            assertThat(ex.getMessage(), containsString("but: was \"displayed\""));
+        }
+    }
+
+    @Test
+    public void isNotAppearButtonTest() {
+        ghostButton.is().hidden();
+        durationMoreThan(10, () ->
+            ghostButton.is().notAppear());
+    }
+
+    @Test
+    public void isNotAppearTimeoutButtonTest() {
+        ghostButton.is().hidden();
+        durationMoreThan(2, () ->
+            ghostButton.is().notAppear(2));
+    }
+
     @Test
     public void seleniumButtonTest() throws InterruptedException {
         refresh();

@@ -10,6 +10,9 @@ public interface CommonAssert<T> {
     T cssClass(Matcher<String> condition);
     T displayed();
     T disappear();
+    T hidden();
+    T notAppear();
+    T notAppear(int timeoutSec);
     T selected();
     T deselected();
     T enabled();
