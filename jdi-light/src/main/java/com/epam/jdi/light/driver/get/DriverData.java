@@ -70,7 +70,7 @@ public class DriverData {
     private static String driverPath(String driverName) {
         return mergePath(DRIVERS_FOLDER,getOs() == WIN ? driverName + ".exe" : driverName);
     }
-    public static String DRIVER_VERSION = "LATEST";
+    public static String DRIVER_VERSION = ""; // = "LATEST";
     public static Platform PLATFORM = X32;
 
     public static OsTypes getOs() {
