@@ -54,7 +54,7 @@ public class ButtonTests extends TestsInit {
             TIMEOUT .set(1);
             acceptAlert();
             fail("Disabled button should not work, but work");
-        } catch (Exception ex) { }
+        } catch (Exception ignore) { }
         finally {
             TIMEOUT.reset();
         }
@@ -67,10 +67,10 @@ public class ButtonTests extends TestsInit {
         redButton.is().text(is(text));
         redButton.is().text(containsString("Red Button"));
         redButton.is()
-                .text(is(text))
-                .cssClass(is("uui-button red"))
-                .attr("type", is("button"))
-                .tag(is("input"));
+            .text(is(text))
+            .cssClass(is("uui-button red"))
+            .attr("type", is("button"))
+            .tag(is("input"));
         blueButton.is().text(containsString("Blue Button".toUpperCase()));
         disabledButton.is().text(containsString("Disabled Button".toUpperCase()));
         disabledButtonInput.is().text(containsString("Disabled Button"));
@@ -104,7 +104,7 @@ public class ButtonTests extends TestsInit {
     }
     @Test
     public void isNotAppearTimeoutFailedButtonTest() {
-        refresh();
+        refresh();//TODO
         try {
             durationImmediately(() ->
                 ghostButton.is().notAppear(2));
@@ -116,8 +116,8 @@ public class ButtonTests extends TestsInit {
     public void isNotAppearFailedButtonTest() {
         refresh();
         try {
-        durationImmediately(() ->
-            ghostButton.is().notAppear());
+            durationImmediately(() ->
+                ghostButton.is().notAppear());
         } catch (Exception ex) {
             assertThat(ex.getMessage(), containsString("but: was \"displayed\""));
         }
