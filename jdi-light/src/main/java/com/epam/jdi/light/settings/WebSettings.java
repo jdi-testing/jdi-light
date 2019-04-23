@@ -26,6 +26,7 @@ import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
@@ -73,7 +74,8 @@ public class WebSettings {
             fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
             fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(p -> DOMAIN = p, "domain");
-            fillAction(p -> DRIVER_NAME = p, "driver");
+            if (DRIVER_NAME.equals(DEFAULT_DRIVER))
+                fillAction(p -> DRIVER_NAME = p, "driver");
             fillAction(p -> DRIVER_VERSION = p.toLowerCase().equals("latest")
                     ? "LATEST" : p, "drivers.version");
             fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");

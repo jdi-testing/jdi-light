@@ -38,12 +38,14 @@ import static java.lang.reflect.Modifier.isStatic;
 public class PageFactory {
 
     public static JAction PRE_INIT = WebSettings::init;
-
     public static void initSite(Class<?> site) {
+        initSite(site, DRIVER_NAME);
+    }
+    public static void initSite(Class<?> site, String driverName) {
         SiteInfo info = new SiteInfo();
         info.parentClass = site;
         PRE_INIT.execute();
-        info.driverName = DRIVER_NAME;
+        info.driverName = driverName;
         setDomain(site);
         Field[] pages = site.getDeclaredFields();
         List<Field> staticPages = filter(pages, p -> isStatic(p.getModifiers()));
