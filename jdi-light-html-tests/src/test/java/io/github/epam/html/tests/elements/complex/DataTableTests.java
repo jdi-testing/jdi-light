@@ -37,10 +37,9 @@ public class DataTableTests extends TestsInit {
 
     @Test
     public void previewTest() {
-        if (isFireFox()) return;
-        String value = users.preview();
+        String value = users.get().getText().replaceAll("\\s+"," ");
         assertEquals(value,
-                "Number Type User Desciption1  Admin User Manager RomanWolverineVip2  Admin User Manager Sergey IvanSpider ManVip3  Admin User Manager VladzimirPunisherVip4  Admin User Manager Helen BennettCaptain Americasome descriptionVip5  Admin User Manager Yoshi TannamuriCyclopesome descriptionVip6  Admin User Manager Giovanni RovelliHulksome descriptionVip");
+                "Number Type User Desciption 1 Admin User Manager Roman Wolverine Vip 2 Admin User Manager Sergey Ivan Spider Man Vip 3 Admin User Manager Vladzimir Punisher Vip 4 Admin User Manager Helen Bennett Captain America some description Vip 5 Admin User Manager Yoshi Tannamuri Cyclope some description Vip 6 Admin User Manager Giovanni Rovelli Hulk some description Vip");
     }
 
     @Test
