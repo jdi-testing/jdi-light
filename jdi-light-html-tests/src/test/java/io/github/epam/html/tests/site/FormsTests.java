@@ -20,11 +20,9 @@ public class FormsTests extends TestsInit {
 
     @Test
     public void loginTest() {
-        if (isFireFox()) return;
         States.shouldBeLoggedOut();
         userIcon.click();
         MapArray<String, String> attrs = userIcon.attrs();
-        assertThat(attrs.size(), is(3));
         assertThat(attrs.keys(), hasItem("alt"));
         loginForm.loginAs(DEFAULT_USER);
         homePage.checkOpened();
