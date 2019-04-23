@@ -19,9 +19,7 @@ public class CustomDriverTestsInit {
 
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        logger.setLogLevel(INFO);
         useDriver(() -> FF_INFO.getDriver() );
-        SMART_SEARCH_LOCATORS.add("[ui=%s]");
         initElements(StaticSite.class);
         homePage.open();
         logger.toLog("Run Tests");
