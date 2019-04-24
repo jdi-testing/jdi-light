@@ -55,7 +55,7 @@ public class HtmlSettings {
                 $("TextArea", iRule(TextArea.class, info -> new TextAreaElement())),
                 $("Default", iRule(asList(Text.class, Button.class, FileInput.class, Icon.class,
                     Image.class, Link.class, TextArea.class, TextField.class,
-                    com.epam.jdi.light.ui.html.common.Title.class,
+                    Label.class,
                     Checkbox.class, ColorPicker.class, Range.class, ProgressBar.class,
                     DateTimeSelector.class, NumberSelector.class),
                         info -> new HtmlElement()))
@@ -104,7 +104,7 @@ public class HtmlSettings {
                 if (expectedField != null)
                     return expectedField.getName();
                 List<Field> titles = filter(fields,
-                    f -> f.getType() == com.epam.jdi.light.ui.html.common.Title.class);
+                    f -> f.getType() == Label.class);
                 return titles.size() == 1
                         ? titles.get(0).getName()
                         : null;
