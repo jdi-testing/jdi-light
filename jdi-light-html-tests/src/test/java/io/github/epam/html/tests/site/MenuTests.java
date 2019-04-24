@@ -32,7 +32,6 @@ public class MenuTests extends TestsInit {
         menu.select(Service, Dates);
         assertEquals(menu.selected(), Service.value);
         datesPage.checkOpened();
-
     }
 
     @Test

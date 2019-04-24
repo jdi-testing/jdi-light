@@ -7,10 +7,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.driver.get.DriverInfos.FF_INFO;
-import static com.epam.jdi.light.logger.LogLevels.INFO;
-import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.ui.html.PageFactory.initElements;
 import static io.github.com.StaticSite.homePage;
