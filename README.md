@@ -1,4 +1,5 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/49c13734696f4baaacc3dde33926b6a1)](https://www.codacy.com/app/jdi-testing/jdi-light?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jdi-testing/jdi-light&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/jdi-testing/jdi-light.svg?branch=master)](https://travis-ci.org/jdi-testing/jdi-light)
 
 # JDI Light Test Automation Framework
 
