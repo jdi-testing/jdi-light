@@ -74,6 +74,13 @@ public class TextAreaTests extends TestsInit {
     }
 
     @Test
+    public void addNewLineTest(){
+        textArea.setLines("line1", "line2");
+        textArea.addNewLine("line3");
+        assertEquals(textArea.getText(), "line1" + "\n" +"line2" + "\n" +"line3");
+    }
+
+    @Test
     public void focusTest() {
         textArea.focus();
     }
