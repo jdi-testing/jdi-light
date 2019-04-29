@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.0.53</version>
+            <version>1.0.54</version>
         </dependency>
 
         <dependency>

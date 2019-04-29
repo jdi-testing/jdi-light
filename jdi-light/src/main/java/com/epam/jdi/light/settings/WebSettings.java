@@ -76,8 +76,9 @@ public class WebSettings {
             fillAction(p -> DOMAIN = p, "domain");
             if (DRIVER_NAME.equals(DEFAULT_DRIVER))
                 fillAction(p -> DRIVER_NAME = p, "driver");
-            fillAction(p -> DRIVER_VERSION = p.toLowerCase().equals("latest")
-                    ? "LATEST" : p, "drivers.version");
+            fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
+                    ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
+                        ? PRELATEST_VERSION : p, "drivers.version");
             fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
             fillAction(p -> SCREEN_PATH = p, "screens.folder");
             // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");

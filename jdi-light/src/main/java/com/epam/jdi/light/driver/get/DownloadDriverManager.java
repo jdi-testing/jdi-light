@@ -2,8 +2,11 @@ package com.epam.jdi.light.driver.get;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import java.util.List;
+
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.get.DriverData.getOs;
+import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.driver.get.DriverInfo.getBelowVersion;
 import static com.epam.jdi.light.driver.get.OsTypes.WIN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
@@ -17,10 +20,10 @@ public class DownloadDriverManager {
         char c = version.charAt(0);
         return (c >= '0' && c <= '9');
     }
+    public static WebDriverManager wdm;
 
     public static void downloadDriver(DriverTypes driverType,
           Platform platform, String version) {
-        WebDriverManager wdm;
         try {
             String driverName = driverType.toString();
             switch (driverType) {
@@ -53,6 +56,10 @@ public class DownloadDriverManager {
             if (hasVersion(version)) {
                 wdm = wdm.version(version);
                 driverName += " " + version;
+            }
+            if (version.equalsIgnoreCase(PRELATEST_VERSION)) {
+                wdm.setup();
+                wdm.version(getBelowVersion());
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");

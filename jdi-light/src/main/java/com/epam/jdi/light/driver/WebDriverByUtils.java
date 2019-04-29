@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Quotes;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -246,4 +247,12 @@ public final class WebDriverByUtils {
         return result;
     }
 
+    public static By byText(String text) {
+        return By.xpath(".//*/text()[normalize-space(.) = " +
+                Quotes.escape(text) + "]/parent::*");
+    }
+    public static By withText(String text) {
+        return By.xpath(".//*/text()[contains(normalize-space(.), "+
+                Quotes.escape(text)+")]/parent::*");
+    }
 }
