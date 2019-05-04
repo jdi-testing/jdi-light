@@ -23,14 +23,15 @@ public class PageFactory {
         com.epam.jdi.light.elements.init.PageFactory.initSite(site, driverName);
     }
     public static void initSite(Class<?> site) {
-        initSite(site, DRIVER_NAME);
+        PRE_INIT = HtmlSettings::init;
+        com.epam.jdi.light.elements.init.PageFactory.initSite(site);
     }
     public static void initElements(Class<?> site, JFunc<WebDriver> driver) {
         String driverName = WebDriverFactory.useDriver(driver);
         initSite(site, driverName);
     }
     public static void initElements(Class<?> site) {
-        initSite(site, DRIVER_NAME);
+        initSite(site);
     }
     public static void initElements(JFunc<WebDriver> driver, Object... pages) { }
     public static void initElements(Class<?>... pages) {

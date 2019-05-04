@@ -20,6 +20,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.composite.WebPage.addPage;
@@ -39,45 +40,57 @@ public class PageFactory {
 
     public static JAction PRE_INIT = WebSettings::init;
     public static void initSite(Class<?> site) {
-        initSite(site, DRIVER_NAME);
+        PRE_INIT.execute();
+        SiteInfo info = new SiteInfo();
+        info.driverName = DRIVER_NAME;
+        initialize(site, info);
     }
     public static void initSite(Class<?> site, String driverName) {
-        SiteInfo info = new SiteInfo();
-        info.parentClass = site;
         PRE_INIT.execute();
+        SiteInfo info = new SiteInfo();
         info.driverName = driverName;
+        initialize(site, info);
+    }
+    private static void initialize(Class<?> site, SiteInfo info) {
+        info.parentClass = site;
         setDomain(site);
         Field[] pages = site.getDeclaredFields();
         List<Field> staticPages = filter(pages, p -> isStatic(p.getModifiers()));
         for (Field pageField : staticPages) {
             try {
-                info.field = pageField;
-                Object instance = null;
-                if (isClass(info.fieldType(), WebPage.class))
-                    instance = SETUP_WEBPAGE_ON_SITE.execute(info);
-                else {
-                    if (isPageObject(info.fieldType()))
-                        instance = isClass(info.fieldType(), DriverBase.class)
-                            ? SETUP_SECTION_ON_SITE.execute(info)
-                            : SETUP_PAGE_OBJECT_ON_SITE.execute(info);
-                    else if(isJDIField(pageField))
-                        instance = PageFactory.initElement(info);
-                }
-                if (instance != null)
-                    pageField.set(null, instance);
+                initPageFields(info, pageField);
             } catch (Exception ex) {
                 throw exception("Can't init %s '%s' on '%s'. Exception: %s",
-                    isClass(pageField.getType(), WebPage.class) ? "page" : "element",
+                        isClass(pageField.getType(), WebPage.class) ? "page" : "element",
                         pageField.getName(),
                         site.getSimpleName(),
                         ex.getMessage());
             }
         }
     }
+    private static void initPageFields(SiteInfo info, Field pageField) throws IllegalAccessException {
+        info.field = pageField;
+        Object instance = null;
+        if (isClass(info.fieldType(), WebPage.class))
+            instance = SETUP_WEBPAGE_ON_SITE.execute(info);
+        else {
+            if (isPageObject(info.fieldType()))
+                instance = isClass(info.fieldType(), DriverBase.class)
+                    ? SETUP_SECTION_ON_SITE.execute(info)
+                    : SETUP_PAGE_OBJECT_ON_SITE.execute(info);
+            else if(isJDIField(pageField))
+                instance = PageFactory.initElement(info);
+        }
+        if (instance != null)
+            pageField.set(null, instance);
+    }
     public static void initElements(Class<?> site) {
         initSite(site);
     }
-    public static void initElements(JFunc<WebDriver> driver, Object... pages) { }
+    public static void initElements(JFunc<WebDriver> driver, Object... pages) {
+        useDriver(driver);
+        initElements(pages);
+    }
 
     public static void initElements(SiteInfo info) {
         List<Field> poFields = getFieldsDeep(info.instance.getClass(), Section.class, WebPage.class);
@@ -100,9 +113,16 @@ public class PageFactory {
     }
     public static Object initElement(SiteInfo info) {
         info.instance = getValueField(info.field, info.parent);
+        if (info.instance == null)
+            initFieldUsingRules(info);
+        if (info.instance != null)
+            setupFieldUsingRules(info);
+        return info.instance;
+    }
+
+    private static void initFieldUsingRules(SiteInfo info) {
         String ruleName = "";
-        if (info.instance == null) {
-            try {
+        try {
             if (!info.field.getType().isInterface())
                 info.instance = info.field.getType().newInstance();
             else {
@@ -116,38 +136,40 @@ public class PageFactory {
                 }
                 if (!ruleName.contains("Init:")) throw exception("");
             }
-            } catch (Exception ex) {
-                throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'. No init rules found (you can add appropriate rule in InitActions.INIT_RULES).%s Exception: " + ex.getMessage(),
+        } catch (Exception ex) {
+            throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'. No init rules found (you can add appropriate rule in InitActions.INIT_RULES).%s Exception: " + ex.getMessage(),
                     ruleName, info.field.getName(), info.parentName(), LINE_BREAK);
-            }
         }
-        if (info.instance != null) {
-            try {
-                for(Pair<String, SetupRule> rule : SETUP_RULES) {
-                    ruleName = rule.key;
-                    if (rule.value.condition.execute(info)) {
-                        ruleName = "Setup:"+ruleName;
-                        rule.value.action.execute(info);
-                    }
-                }
-            } catch (Exception ex) {
-                throw exception("Setup rule '%s' failed. Can't setup field '%s' on page '%s'. No setup rules found (you can add appropriate rule in InitActions.SETUP_RULES).%s Exception: " + ex.getMessage(),
-                    ruleName, info.field.getName(), info.parentName(), LINE_BREAK);
-            }
-        }
-        return info.instance;
     }
+
+    private static void setupFieldUsingRules(SiteInfo info) {
+        String ruleName = "";
+        try {
+            for(Pair<String, SetupRule> rule : SETUP_RULES) {
+                ruleName = rule.key;
+                if (rule.value.condition.execute(info)) {
+                    ruleName = "Setup:"+ruleName;
+                    rule.value.action.execute(info);
+                }
+            }
+        } catch (Exception ex) {
+            throw exception("Setup rule '%s' failed. Can't setup field '%s' on page '%s'. No setup rules found (you can add appropriate rule in InitActions.SETUP_RULES).%s Exception: " + ex.getMessage(),
+                    ruleName, info.field.getName(), info.parentName(), LINE_BREAK);
+        }
+    }
+
     public static void initElements(Class<?>... pages) {
+        PRE_INIT.execute();
         for (Class<?> page : pages) {
-            initElements((WebDriver) null, page);
+            initElements(getDriver(), page);
         }
     }
     public static void initElements(Object... pages) {
+        PRE_INIT.execute();
         for (Object obj : pages) {
             SiteInfo info = new SiteInfo();
             info.instance = obj;
             info.driverName = DRIVER_NAME;
-            PRE_INIT.execute();
             if (isClass(obj.getClass(), WebPage.class)) {
                 WebPage page = (WebPage) obj;
                 page.driverName = DRIVER_NAME;

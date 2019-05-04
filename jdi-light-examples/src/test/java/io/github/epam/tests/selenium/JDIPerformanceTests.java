@@ -15,7 +15,7 @@ import static selenium.seleniumPO.SiteSelenium.homePage;
 import static selenium.seleniumPO.SiteSelenium.login;
 import static selenium.site.pages.JDIPerformancePage.*;
 
-public class JDIPerformanceTests extends SimpleTestsInit {
+public class JDIPerformanceTests implements SimpleTestsInit {
 
     @BeforeMethod
     public void openPerformancePage() {

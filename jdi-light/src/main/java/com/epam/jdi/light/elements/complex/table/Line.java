@@ -44,6 +44,8 @@ public class Line implements IList<String> {
                 ? list
                 : getData(minAmount).values();
     }
+    // TODO Implement
+    public String get(String value) {return ""; }
     private MapArray<String, String> getData(int minAmount) {
         if (data == null || data.size() < minAmount)
             data = dataMap.execute();
