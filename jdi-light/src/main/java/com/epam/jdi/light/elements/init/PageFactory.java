@@ -1,10 +1,12 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
+import com.epam.jdi.light.elements.interfaces.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.settings.WebSettings;
@@ -94,6 +96,13 @@ public class PageFactory {
 
     public static void initElements(SiteInfo info) {
         List<Field> poFields = getFieldsDeep(info.instance.getClass(), Section.class, WebPage.class);
+        Class<?> base = info.instance.getClass().getSuperclass();
+        if (!base.equals(WebPage.class) && !base.equals(Section.class)&& !base.equals(Form.class)
+            && isInterface(base, PageObject.class)) {
+            List<Field> superFields = getFieldsDeep(base, Section.class, WebPage.class);
+            if (superFields.size() > 0)
+                poFields.addAll(superFields);
+        }
         List<Field> fields = filter(poFields, f -> isJDIField(f) || isPageObject(f.getType()));
         SiteInfo pageInfo = new SiteInfo(info);
         pageInfo.parent = info.instance;
