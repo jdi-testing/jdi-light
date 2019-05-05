@@ -19,7 +19,7 @@ public class TestJDIList {
     }
 
     @Test
-    public void TestJdi() {
+    public void testJdi() {
         JDISite.indexPageJdi.open();
         DashboardPage.documents.get("foo").is().displayed();
         DashboardPage.documents.get("bar").is().displayed();
