@@ -2,6 +2,7 @@ package io.github.com;
 
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -14,6 +15,7 @@ import com.epam.jdi.light.ui.html.base.HtmlList;
 import com.epam.jdi.light.ui.html.complex.Menu;
 import io.github.com.custom.MenuItem;
 import io.github.com.pages.*;
+import io.github.com.sections.MainSection;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -48,4 +50,7 @@ public class StaticSite {
 
 	@Frame("iframe") public static HomePageFrame iframe;
 	public static GithubPage githubPage;
+
+	@UI(".main-title") public static Section mainTitle;
+	@Frame(".main-content-hg") public static MainSection mainSection;
 }
