@@ -32,6 +32,7 @@ import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.reflect.Modifier.isStatic;
+import static java.util.Arrays.asList;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -95,14 +96,21 @@ public class PageFactory {
     }
 
     public static void initElements(SiteInfo info) {
+        List<Field> poFields = recursion(
+            t -> isInterface(t, PageObject.class) &&
+            !asList(WebPage.class, Section.class, Form.class).contains(t)
+            || !isClass(t, DriverBase.class) && !t.equals(Object.class),
+            info.instance.getClass(),
+            t -> getFieldsDeep(t, Section.class, WebPage.class));
+/*
         List<Field> poFields = getFieldsDeep(info.instance.getClass(), Section.class, WebPage.class);
         Class<?> base = info.instance.getClass().getSuperclass();
-        if (!base.equals(WebPage.class) && !base.equals(Section.class)&& !base.equals(Form.class)
+        if (!base.equals(WebPage.class) && !base.equals(Section.class) && !base.equals(Form.class)
             && isInterface(base, PageObject.class)) {
             List<Field> superFields = getFieldsDeep(base, Section.class, WebPage.class);
             if (superFields.size() > 0)
                 poFields.addAll(superFields);
-        }
+        }*/
         List<Field> fields = filter(poFields, f -> isJDIField(f) || isPageObject(f.getType()));
         SiteInfo pageInfo = new SiteInfo(info);
         pageInfo.parent = info.instance;
