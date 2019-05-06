@@ -1,13 +1,13 @@
-package issue70;
+package io.github.epam.html.tests.issue.issue70.test;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.html.PageFactory;
+import io.github.epam.html.tests.issue.issue70.po.DashboardPage;
+import io.github.epam.html.tests.issue.issue70.po.JDISite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import issue70.po.DashboardPage;
-import issue70.po.JDISite;
 
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 
