@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.Quotes;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -143,13 +143,11 @@ public class WebAnnotationsUtil {
     }
     public static By findByToBy(ByText locator){
         if (locator == null) return null;
-        return By.xpath(".//*/text()[normalize-space(.) = " +
-                Quotes.escape(locator.value()) + "]/parent::*");
+        return byText(locator.value());
     }
     public static By findByToBy(WithText locator){
         if (locator == null) return null;
-        return By.xpath(".//*/text()[contains(normalize-space(.), "+
-                Quotes.escape(locator.value())+")]/parent::*");
+        return withText(locator.value());
     }
 
 }

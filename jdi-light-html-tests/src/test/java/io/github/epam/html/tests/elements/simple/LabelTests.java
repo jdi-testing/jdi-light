@@ -9,11 +9,11 @@ import static com.epam.jdi.light.elements.base.Alerts.getAlertText;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.jdiTitle;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
-public class TitleTests extends TestsInit {
+public class LabelTests extends TestsInit {
 
     @BeforeMethod
     public void before() {

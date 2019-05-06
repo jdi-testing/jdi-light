@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
@@ -16,9 +17,17 @@ import static com.epam.jdi.light.elements.init.PageFactory.PRE_INIT;
 
 public class PageFactory {
 
+    public static void initSite(Class<?> site, String driverName) {
+        PRE_INIT = HtmlSettings::init;
+        com.epam.jdi.light.elements.init.PageFactory.initSite(site, driverName);
+    }
     public static void initSite(Class<?> site) {
         PRE_INIT = HtmlSettings::init;
         com.epam.jdi.light.elements.init.PageFactory.initSite(site);
+    }
+    public static void initElements(Class<?> site, JFunc<WebDriver> driver) {
+        String driverName = WebDriverFactory.useDriver(driver);
+        initSite(site, driverName);
     }
     public static void initElements(Class<?> site) {
         initSite(site);

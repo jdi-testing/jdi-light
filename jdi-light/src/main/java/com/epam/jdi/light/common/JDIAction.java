@@ -21,4 +21,5 @@ public @interface JDIAction {
     LogLevels level() default STEP;
     String condition() default "";
     boolean logResult() default true;
+    int timeout() default -1;
 }

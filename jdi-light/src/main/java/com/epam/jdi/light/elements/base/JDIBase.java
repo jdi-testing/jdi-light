@@ -49,13 +49,19 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public JDILocator locator = new JDILocator();
     public CacheValue<WebElement> webElement = new CacheValue<>();
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
-    protected JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
+    protected CacheValue<JFunc1<WebElement, Boolean>> searchRule =
+            new CacheValue<>(() -> SEARCH_CONDITION);
     public <T extends JDIBase> T noValidation() {
-        return setSearchRule(Objects::nonNull);
+        return setSearchRule(ANY_ELEMENT);
     }
+    public <T extends JDIBase> T onlyVisible() {
+        return setSearchRule(VISIBLE_ELEMENT);
+    }
+    public <T extends JDIBase> T onlyEnabled() { return setSearchRule(ENABLED_ELEMENT); }
     public <T extends JDIBase> T setSearchRule(JFunc1<WebElement, Boolean> rule) {
-        searchRule = rule;
+        searchRule.setForce(rule);
         return (T) this;
+
     }
 
     public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }
@@ -128,7 +134,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
         if (result.size() > 1) {
             int found = result.size();
-            List<WebElement> filtered = filter(result, el -> searchRule.execute(el));
+            List<WebElement> filtered = filter(result, el -> searchRule.get().execute(el));
             if (filtered.size() == 0)
                 throw exception(ELEMENTS_FILTERED_MESSAGE, found, toString(), TIMEOUT.get());
         }
@@ -153,7 +159,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
             return asList(SMART_SEARCH.execute(this));
         SearchContext searchContext = getContext(parent, locator);
         List<WebElement> els = uiSearch(searchContext, correctLocator(getLocator(args)));
-        return filter(els, el -> searchRule.execute(el));
+        return filter(els, el -> searchRule.get().execute(el));
     }
     public List<WebElement> getList(int minAmount) {
         List<WebElement> elements = getAll();

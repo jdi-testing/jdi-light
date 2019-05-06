@@ -1,6 +1,5 @@
 package io.github.epam.tests.google;
 
-import com.epam.jdi.tools.func.JAction;
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -22,15 +21,6 @@ public class WaitListTests extends StaticTestsInit {
         search("jdi");
     }
 
-    private void waitList(JAction action) {
-        new Thread(() -> {
-            try {
-                Thread.sleep(2000);
-            } catch (Exception ignore) {}
-            action.execute();
-        }).start();
-    }
-
     @Test
     public void notEmptyTest() {
         searchS.is().notEmpty();
@@ -44,7 +34,7 @@ public class WaitListTests extends StaticTestsInit {
         try {
             searchS.is().empty();
             Assert.fail("List should not be empty");
-        } catch (Throwable ex) { }
+        } catch (Throwable ignored) { }
     }
     @Test
     public void sizeTest() {

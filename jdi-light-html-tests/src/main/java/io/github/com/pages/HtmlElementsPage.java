@@ -8,8 +8,8 @@ import com.epam.jdi.light.ui.html.complex.*;
 public class HtmlElementsPage extends WebPage {
     //region Simple Elements
 
-    public static Title jdiTitle;
-    // @UI("[ui=jdi-title]") public static Title jdiTitle;
+    public static Label jdiTitle;
+    // @UI("[ui=jdi-title]") public static Label jdiTitle;
 	public static Text jdiText;
 	// @UI("[ui=jdi-text]") public static Text jdiText;
 

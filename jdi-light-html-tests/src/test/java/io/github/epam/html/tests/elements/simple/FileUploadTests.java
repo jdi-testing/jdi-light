@@ -15,7 +15,7 @@ import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.apache.commons.io.FileUtils.writeStringToFile;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;

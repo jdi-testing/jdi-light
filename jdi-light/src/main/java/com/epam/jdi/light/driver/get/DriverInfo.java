@@ -7,14 +7,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
+import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.isRemote;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_VERSION;
-import static com.epam.jdi.light.driver.get.DriverData.PLATFORM;
+import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
+import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.settings.WebSettings.DRIVER_REMOTE_URL;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.lang.Integer.parseInt;
 import static java.lang.System.setProperty;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class DriverInfo extends DataClass<DriverInfo> {
     public DriverTypes type;
@@ -31,13 +36,40 @@ public class DriverInfo extends DataClass<DriverInfo> {
     private WebDriver setupRemote() {
         try {
             return new RemoteWebDriver(new URL(DRIVER_REMOTE_URL), capabilities.execute());
-        } catch (Exception ex) { throw exception("Can't get remote "+type.name+" driver"); }
+        } catch (Exception ex) {
+            throw exception("Failed to setup remote "+type.name+" driver");
+        }
     }
     private WebDriver setupLocal() {
-        if (DRIVER_VERSION.isEmpty())
-            setProperty(properties, path);
-        else
-            downloadDriver(type, PLATFORM, DRIVER_VERSION);
-        return getDriver.execute();
+        try {
+            if (isNotBlank(DRIVERS_FOLDER)) {
+                setProperty(properties, path);
+                logger.info("Get local driver: " + path);
+            }
+            else {
+                downloadDriver(type, PLATFORM, DRIVER_VERSION);
+            }
+            return getDriver.execute();
+        } catch (Exception ex) {
+            try {
+                if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
+                    logger.info("!!! Failed to download driver of latest version:" +
+                            "TRY TO GET DRIVER PREVIOUS VERSION");
+                    downloadDriver(type, PLATFORM, getBelowVersion());
+                    return getDriver.execute();
+                }
+                throw exception(ex.getMessage());
+            } catch (Exception ex2) {
+                throw exception("Failed to setup local driver: " + ex2.getMessage());
+            }
+        }
+    }
+    public static String getBelowVersion() {
+        String currentMajor = wdm.getDownloadedVersion().split("\\.")[0];
+        List<String> allVersions = wdm.getVersions();
+        for (int i = allVersions.size()-1; i>=0; i--)
+             if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
+                 return allVersions.get(i);
+         throw exception("Can't find version below current(" + wdm.getDownloadedVersion()+")");
     }
 }
