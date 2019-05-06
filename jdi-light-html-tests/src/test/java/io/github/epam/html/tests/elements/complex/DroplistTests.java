@@ -8,11 +8,10 @@ import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.com.pages.MetalAndColorsPage.colors;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.elements.complex.enums.Colors.Green;
-import static io.github.epam.html.tests.elements.complex.enums.Colors.Yellow;
-import static io.github.epam.html.tests.site.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.html.tests.elements.complex.enums.Colors.*;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 /**
@@ -30,28 +29,30 @@ public class DroplistTests extends TestsInit {
     @Test
     public void selectStringTest() {
         colors.select("Red");
-        lastLogEntry.assertThat().text(containsString("Colors: value changed to Red"));
+        lastLogEntry.assertThat()
+            .text(containsString("Colors: value changed to Red"));
     }
 
     @Test
     public void selectEnumTest() {
         colors.select(Green);
-        lastLogEntry.assertThat().text(containsString("Colors: value changed to Green"));
+        lastLogEntry.assertThat()
+            .text(containsString("Colors: value changed to Green"));
     }
 
-    // Fails, wait until interface + jdi-light-html class implementation
-    @Test (enabled = false)
+    @Test
     public void selectIndexTest() {
         colors.select(4);
-        lastLogEntry.assertThat().text(containsString("Colors: value changed to Blue"));
+        lastLogEntry.assertThat()
+            .text(containsString("Colors: value changed to Blue"));
     }
 
     @Test
     public void selectedTest() {
         colors.select(Yellow);
-        assertEquals(colors.getValue(), "Yellow");
-        assertEquals(colors.getSelected(), "Yellow"); // May not be presented on interface implementation
-        assertEquals(colors.getText(), "Yellow"); // May not be presented on interface implementation
+        assertThat(colors.getValue(), is("Yellow"));
+        assertThat(colors.getSelected(), is("Yellow"));
+        assertThat(colors.getText(), is("Yellow"));
     }
 
     @Test
@@ -59,23 +60,45 @@ public class DroplistTests extends TestsInit {
         try {
             colors.select("GreyBrownCrimson");
             fail("You have selected color that does not exist in droplist - something went wrong");
-        } catch (Exception ex) { }
+        } catch (Exception ex) {
+            assertThat(ex.getMessage(), containsString("Can't select 'GreyBrownCrimson'. No elements with this name found"));
+        }
     }
 
-    // Fails, wait until interface + jdi-light-html class implementation
-    @Test (enabled = false)
+    @Test
     public void isValidationTest() {
-        colors.expand(); // Has to be handled by dropdown
-        colors.is().values(hasItem("Yellow"));
-        colors.is().selected("Color"); //here it falls
+        colors.is().selected("Colors");
+        colors.is().innerValues(hasItem("Yellow"));
     }
 
     @Test
     public void assertValidationTest() {
-        colors.expand(); // Has to be handled by dropdown
-        colors.assertThat().values(contains("Colors", "Red", "Green", "Blue", "Yellow"));
+        colors.assertThat().innerValues(contains("Colors", "Red", "Green", "Blue", "Yellow"));
     }
-
+    @Test
+    public void valuesTests() {
+        colors.select(Blue);
+        assertThat(colors.getSelected(), is("Blue"));
+        assertThat(colors.getText(), is("Blue"));
+        assertThat(colors.getValue(), is("Blue"));
+        assertThat(colors.checked(), hasItem("Blue"));
+    }
+    @Test
+    public void innerValuesTest() {
+        assertThat(colors.innerValues(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
+    }
+    @Test
+    public void isDisplayedTest() {
+        assertThat(colors.isDisplayed(), is(true));
+    }
+    @Test
+    public void expandTests() {
+        assertThat(colors.isExpanded(), is(false));
+        colors.expand();
+        assertThat(colors.isExpanded(), is(true));
+        assertThat(colors.listEnabled(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
+        assertThat(colors.values(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
+    }
     @Test
     public void baseValidationTest() {
         baseValidation(colors);

@@ -43,6 +43,11 @@ public class SelectAssert extends IsAssert {
         assertThat(selector.values(), condition);
         return this;
     }
+    @JDIAction("Assert that '{name}' values {0}")
+    public SelectAssert innerValues(Matcher<? super List<String>> condition) {
+        assertThat(selector.innerValues(), condition);
+        return this;
+    }
     @JDIAction("Assert that '{name}' enabled items {0}")
     public SelectAssert enabled(Matcher<? super List<String>> condition) {
         assertThat(selector.listEnabled(), condition);

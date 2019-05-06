@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
@@ -129,6 +130,10 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
     @JDIAction(level = DEBUG)
     public List<String> values() {
         return map(select().getOptions(), WebElement::getText);
+    }
+    @JDIAction(level = DEBUG)
+    public List<String> innerValues() {
+        return map(select().getOptions(), w -> $(w).innerText());
     }
     public int size() { return select().getOptions().size(); }
     @JDIAction(level = DEBUG)

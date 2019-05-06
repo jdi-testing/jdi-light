@@ -54,7 +54,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
     public void select(int index) {
         if (expander != null && list != null) {
             expand();
-            list.select(index);
+            list.select(index-1);
         }
         else getSelectElement(format("select '%s'", index)).selectByIndex(index);
     }
@@ -122,19 +122,23 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
     }
 
     public boolean selected(String option) {
-        return list.selected().equals(option);
+        return getSelected().equals(option);
     }
 
     public List<String> checked() {
-        return asList(list.selected());
+        return asList(getSelected());
     }
 
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         assertLinked(list, "list", "values");
-        return list.values();
+        return ((WebList)list.noValidation()).values();
     }
-
+    @JDIAction("Get '{name}' values")
+    public List<String> innerValues() {
+        assertLinked(list, "list", "values");
+        return ((WebList)list.noValidation()).innerValues();
+    }
     public List<String> listEnabled() {
         return list.ifSelect(JDIBase::isEnabled, BaseUIElement::getText);
     }

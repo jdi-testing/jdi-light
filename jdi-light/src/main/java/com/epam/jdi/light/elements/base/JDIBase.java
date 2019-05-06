@@ -288,7 +288,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         );
     };
     public String jsExecute(String text) {
-        return valueOf(js().executeScript("arguments[0]."+text+";", get()));
+        return valueOf(js().executeScript("return arguments[0]."+text+";", get()));
     }
 
     public Select select() {
