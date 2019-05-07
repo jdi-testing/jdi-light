@@ -64,7 +64,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
 
     }
 
-    public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }
+    public static Timer timer() { return new Timer(TIMEOUT.get().get()*1000); }
     public UIElement setWebElement(WebElement el) {
         webElement.setForce(el);
         return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();
@@ -124,23 +124,23 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
                     return element;
                 throw exception("");
             } catch (Exception ex) {
-                throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
+                throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get().get());
             }
         }
         if (locator.isTemplate() && args.length == 0)
             throw exception("Can't get element with template locator '%s' without arguments", getLocator());
         List<WebElement> result = getAll(args);
         if (result.size() == 0)
-            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
+            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get().get());
         if (result.size() > 1) {
             int found = result.size();
             List<WebElement> filtered = filter(result, el -> searchRule.get().execute(el));
             if (filtered.size() == 0)
-                throw exception(ELEMENTS_FILTERED_MESSAGE, found, toString(), TIMEOUT.get());
+                throw exception(ELEMENTS_FILTERED_MESSAGE, found, toString(), TIMEOUT.get().get());
         }
         if (result.size() == 1)
             return result.get(0);
-        throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get());
+        throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get().get());
     }
     public UIElement getUI(Object... args) {
         return new UIElement(get(args));
@@ -450,7 +450,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     }
 
     public boolean wait(JFunc1<BaseElement, Boolean> condition) {
-        return new Timer(TIMEOUT.get()).wait(() -> condition.execute(this));
+        return new Timer(TIMEOUT.get().get()).wait(() -> condition.execute(this));
     }
 
     public String getValue() {

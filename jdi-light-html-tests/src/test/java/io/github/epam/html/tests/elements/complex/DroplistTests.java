@@ -1,9 +1,13 @@
 package io.github.epam.html.tests.elements.complex;
 
+import com.epam.jdi.light.settings.TimeoutSettings;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
+import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_THIS_PAGE;
+import static com.epam.jdi.light.settings.TimeoutSettings.*;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.com.pages.MetalAndColorsPage.colors;
@@ -58,6 +62,7 @@ public class DroplistTests extends TestsInit {
     @Test
     public void negativeDroplistTest() {
         try {
+            TIMEOUT.get().set(1);
             colors.select("GreyBrownCrimson");
             fail("You have selected color that does not exist in droplist - something went wrong");
         } catch (Exception ex) {

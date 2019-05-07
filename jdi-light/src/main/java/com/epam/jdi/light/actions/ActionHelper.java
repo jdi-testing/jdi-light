@@ -140,7 +140,7 @@ public class ActionHelper {
                     setCurrentPage(page);
                     BEFORE_NEW_PAGE.execute(page);
                 }
-                else BEFORE_EACH_PAGE.execute(page);
+                else BEFORE_THIS_PAGE.execute(page);
             }
         }
     }

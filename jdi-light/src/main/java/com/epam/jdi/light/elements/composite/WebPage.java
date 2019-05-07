@@ -316,9 +316,9 @@ public class WebPage extends DriverBase implements PageObject {
         if (CHECK_AFTER_OPEN == NEW_PAGE)
             page.checkOpened();
         logger.toLog("Page: " + page.getName());
-        TIMEOUT.set(PAGE_TIMEOUT.get());
+        TIMEOUT.get().set(PAGE_TIMEOUT.get().get());
     };
-    public static JAction1<WebPage> BEFORE_EACH_PAGE = page -> {
+    public static JAction1<WebPage> BEFORE_THIS_PAGE = page -> {
         if (CHECK_AFTER_OPEN == EVERY_PAGE)
             page.checkOpened();
     };
