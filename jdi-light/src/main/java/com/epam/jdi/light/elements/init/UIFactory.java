@@ -29,6 +29,9 @@ public class UIFactory {
     public static UIElement $(By locator) {
         return element(locator);
     }
+    public static UIElement $(WebElement webElement) {
+        return new UIElement(webElement);
+    }
     public static UIElement $(By locator, Object parent) {
         return element(locator).setParent(parent);
     }
