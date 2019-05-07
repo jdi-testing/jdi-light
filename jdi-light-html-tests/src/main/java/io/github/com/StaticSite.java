@@ -52,5 +52,7 @@ public class StaticSite {
 	public static GithubPage githubPage;
 
 	@UI(".main-title") public static Section mainTitle;
+
 	@Frame(".main-content-hg") public static MainSection mainSection;
+	@Css(".main-content-hg") public static BasePage basePage;
 }

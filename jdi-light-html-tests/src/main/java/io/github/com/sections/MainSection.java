@@ -5,7 +5,7 @@ import com.epam.jdi.light.ui.html.common.TextField;
 import io.github.com.pages.BasePage;
 import org.openqa.selenium.WebElement;
 
-public class MainSection extends BasePage {
+public class MainSection {// extends BasePage {
     @UI("#name")
     TextField name;
 
@@ -19,7 +19,7 @@ public class MainSection extends BasePage {
     public WebElement wather;
 
     @UI("#passport")
-    public static  WebElement passport;
+    public static WebElement passport;
 
     @UI("#religion")
     WebElement religion;
