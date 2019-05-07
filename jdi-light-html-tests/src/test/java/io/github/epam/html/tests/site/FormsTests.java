@@ -12,6 +12,7 @@ import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.ContactFormPage.main;
 import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.userIcon;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
@@ -23,7 +24,9 @@ public class FormsTests extends TestsInit {
         States.shouldBeLoggedOut();
         userIcon.click();
         MapArray<String, String> attrs = userIcon.attrs();
-        assertThat(attrs.keys(), hasItem("alt"));
+        attrs = attrs.filter((k,v) -> isNotBlank(v));
+        assertThat(attrs.size(), is(2));
+        assertThat(attrs.keys(), hasItem("src"));
         loginForm.loginAs(DEFAULT_USER);
         homePage.checkOpened();
     }
