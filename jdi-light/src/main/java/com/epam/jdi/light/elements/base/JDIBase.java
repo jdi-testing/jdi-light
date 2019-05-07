@@ -16,7 +16,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.text.MessageFormat;
 import java.util.List;
-import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.FRAME;

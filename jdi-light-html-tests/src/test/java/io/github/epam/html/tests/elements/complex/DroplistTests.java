@@ -1,13 +1,10 @@
 package io.github.epam.html.tests.elements.complex;
 
-import com.epam.jdi.light.settings.TimeoutSettings;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
-import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_THIS_PAGE;
-import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.com.pages.MetalAndColorsPage.colors;

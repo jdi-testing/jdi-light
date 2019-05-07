@@ -20,7 +20,6 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.commons.lang3.StringUtils.repeat;
 
 public abstract class BaseUIElement<T extends BaseUIElement>
         extends JDIBase implements WebElement, BaseFindElement<T>, SetValue {
