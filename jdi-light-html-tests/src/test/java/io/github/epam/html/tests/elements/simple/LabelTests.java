@@ -13,7 +13,7 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
-public class TitleTests extends TestsInit {
+public class LabelTests extends TestsInit {
 
     @BeforeMethod
     public void before() {

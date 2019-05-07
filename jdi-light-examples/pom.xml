@@ -9,13 +9,8 @@
     <name>JDI Web Tests</name>
     <groupId>com.epam.jdi</groupId>
 
-    <!--parent>
-        <version>1.0.22</version>
-        <artifactId>jdi-2</artifactId>
-    </parent-->
-
     <properties>
-        <driver>chrome</driver>
+        <driver>firefox</driver>
         <allure.testng>2.7.0</allure.testng>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
@@ -26,7 +21,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.0.51</version>
+            <version>1.0.56</version>
         </dependency>
 
         <!--Allure config in parent-->

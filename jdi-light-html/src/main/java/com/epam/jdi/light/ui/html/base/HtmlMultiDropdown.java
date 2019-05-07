@@ -177,7 +177,10 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
     public List<String> values() {
         return map(allValues(), HtmlElement::getText);
     }
-
+    @JDIAction("Get '{name}' values")
+    public List<String> innerValues() {
+        return map(allValues(), HtmlElement::innerText);
+    }
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
         return ifSelect(allValues(),

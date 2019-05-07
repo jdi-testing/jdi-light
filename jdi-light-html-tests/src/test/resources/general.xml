@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
         <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Test suite" parallel="methods" thread-count="1">
+<suite name="Test suite" parallel="methods" thread-count="4">
     <test name="Tests">
         <packages>
-            <package name="io.github.epam.html.tests.site"/>
             <package name="io.github.epam.html.tests.elements.simple"/>
-            <package name="io.github.epam.html.tests.elements.complex"/>
+            <!--package name="io.github.epam.html.tests.elements.complex"/>
+            <package name="io.github.epam.html.tests.site"/-->
         </packages>
     </test>
 </suite>

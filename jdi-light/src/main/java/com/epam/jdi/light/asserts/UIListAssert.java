@@ -11,8 +11,7 @@ import org.hamcrest.MatcherAssert;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.LinqUtils.all;
-import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -45,13 +44,17 @@ public class UIListAssert<T extends Section, E> {
 
     @JDIAction("Assert that only one of '{name}' elements meet condition")
     public UIListAssert<T, E> onlyOne(JFunc1<E, Boolean> condition) {
-        assertThat(LinqUtils.single(data.execute(), condition::execute), is(notNullValue()));
+        assertThat(single(data.execute(), condition::execute), is(notNullValue()));
         return this;
     }
     @JDIAction("Assert that none of '{name}' meet condition")
     public UIListAssert<T, E> noOne(JFunc1<E, Boolean> condition) {
-        assertThat(LinqUtils.first(data.execute(), condition::execute), is(nullValue()));
+        assertThat(first(data.execute(), condition::execute), is(nullValue()));
         return this;
+    }
+    @JDIAction("Assert that '{name}' text {0}")
+    public UIListAssert<T, E> value(E item) {
+        return and(hasItem(item));
     }
     @JDIAction("Assert that '{name}' text {0}")
     public UIListAssert<T, E> value(Matcher<String> condition) {
@@ -60,7 +63,9 @@ public class UIListAssert<T extends Section, E> {
     }
     @JDIAction("Assert that '{name}' text {0}")
     public UIListAssert<T, E> value(String text) {
-        return value(is(text));
+        elements.clear();
+        assertThat(select(data.execute(), Object::toString), hasItem(text));
+        return this;
     }
     @JDIAction("Assert that '{name}' is displayed")
     public UIListAssert<T, E> allDisplayed() {

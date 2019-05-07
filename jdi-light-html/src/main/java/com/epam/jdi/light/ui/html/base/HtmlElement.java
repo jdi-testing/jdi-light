@@ -20,7 +20,7 @@ import static java.util.Arrays.asList;
  * Base html element
  */
 public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, Button, FileInput, Icon, Image, Link, TextArea,
-        TextField, Title, Checkbox, ColorPicker, Range, ProgressBar, DateTimeSelector, NumberSelector {
+        TextField, Label, Checkbox, ColorPicker, Range, ProgressBar, DateTimeSelector, NumberSelector {
 
     public HtmlElement() { setInitClass(HtmlElement.class); }
     public HtmlElement(WebElement el) { super(el); setInitClass(HtmlElement.class); }
@@ -106,6 +106,10 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
      * @return int value of maxlength
      */
     public int maxlength() { return getInt("maxlength", this); }
+
+    public void addNewLine(String line) {
+        sendKeys("\n" + line);
+    }
 
     /**
      * Gets attribute with name min

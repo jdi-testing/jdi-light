@@ -21,6 +21,7 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
      *  Get all application elements
      *  */
     List<T> elements(int minAmount);
+    T get(String value);
     default T last() {
         return elements(1).get(size()-1);
     }

@@ -165,7 +165,7 @@ public class InitActions {
     }
     public static boolean isPageObject(Class<?> type) {
         return isClass(type, Section.class) || isClass(type, WebPage.class) ||
-            LinqUtils.any(type.getFields(), InitActions::isJDIField);
+            LinqUtils.any(type.getDeclaredFields(), InitActions::isJDIField);
     }
     public static boolean isList(Field field, Class<?> type) {
         try {
