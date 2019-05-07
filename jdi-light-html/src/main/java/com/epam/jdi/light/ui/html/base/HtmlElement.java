@@ -107,6 +107,10 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
      */
     public int maxlength() { return getInt("maxlength", this); }
 
+    public void addNewLine(String line) {
+        sendKeys("\n" + line);
+    }
+
     /**
      * Gets attribute with name min
      * @return String min value
