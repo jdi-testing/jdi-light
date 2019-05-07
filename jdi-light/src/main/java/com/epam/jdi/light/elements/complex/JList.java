@@ -184,6 +184,11 @@ public class JList<T extends BaseUIElement> extends JDIBase
         return map(T::getText);
     }
 
+    public List<String> innerValues() {
+        refresh();
+        return map(T::innerText);
+    }
+
     @Override
     public List<String> listEnabled() {
         return ifSelect(JDIBase::isEnabled,

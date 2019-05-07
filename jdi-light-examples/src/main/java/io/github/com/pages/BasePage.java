@@ -6,5 +6,4 @@ import org.openqa.selenium.WebElement;
 
 public class BasePage extends WebPage {
     @Css("h3[name='test']") public WebElement testField;
-
 }

@@ -30,7 +30,6 @@ import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.RegExUtils.matches;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;

@@ -9,6 +9,7 @@ import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
@@ -30,6 +31,7 @@ import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
+import static com.epam.jdi.light.settings.TimeoutSettings.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
@@ -43,7 +45,23 @@ public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String DOMAIN;
     public static String KILL_BROWSER = "afterAndBefore";
-    public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = WebElement::isDisplayed;
+    public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
+    public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
+    public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
+        el != null && el.isDisplayed() && el.isEnabled();
+    public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = VISIBLE_ELEMENT;
+    public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
+        SEARCH_CONDITION = rule;
+    }
+    public static void noValidation() {
+        SEARCH_CONDITION = ANY_ELEMENT;
+    }
+    public static void onlyVisible() {
+        SEARCH_CONDITION = VISIBLE_ELEMENT;
+    }
+    public static void enabledElement() {
+        SEARCH_CONDITION = ENABLED_ELEMENT;
+    }
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
         return DOMAIN != null && DOMAIN.contains("://");
@@ -70,9 +88,11 @@ public class WebSettings {
 
     public static synchronized void init() {
         if (!initialized) {
+            TIMEOUT.set(new Timeout(10));
+            PAGE_TIMEOUT.set(new Timeout(30));
             getProperties(TEST_PROPERTIES_PATH);
-            fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
-            fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
+            fillAction(p -> TIMEOUT.set(new Timeout(parseInt(p))), "timeout.wait.element");
+            fillAction(p -> PAGE_TIMEOUT.set(new Timeout(parseInt(p))), "timeout.wait.page");
             fillAction(p -> DOMAIN = p, "domain");
             if (DRIVER_NAME.equals(DEFAULT_DRIVER))
                 fillAction(p -> DRIVER_NAME = p, "driver");
@@ -122,9 +142,9 @@ public class WebSettings {
         if (p.split(",").length == 2) {
             List<String> params = asList(p.split(","));
             if (params.contains("visible") || params.contains("displayed"))
-                SEARCH_CONDITION = WebElement::isDisplayed;
+                onlyVisible();
             if (params.contains("any") || params.contains("all"))
-                SEARCH_CONDITION = Objects::nonNull;
+                noValidation();
             if (params.contains("single"))
                 STRICT_SEARCH = true;
             if (params.contains("multiple"))

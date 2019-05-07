@@ -14,8 +14,6 @@ public class SearchResult extends Section {
         @Css("a") public UIElement link;
 
     public String print() {
-        logger.logOff(() -> logger.logOff(() -> System.out.println("test")));
-
         return logger.logOff(
             () -> format("SearchResult{NAME=%s; DESCRIPTION=%s; LINK=%s}",
                 name.getText(), description.getText(), link.getAttribute("href")));

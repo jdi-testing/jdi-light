@@ -9,6 +9,7 @@ public interface ISelector extends BaseElement, INamed, IHasSize {
     boolean selected(String option);
     List<String> checked();
     List<String> values();
+    List<String> innerValues();
     List<String> listEnabled();
     List<String> listDisabled();
     WebList allUI(Object... args);

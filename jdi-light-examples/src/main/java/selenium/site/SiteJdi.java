@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import selenium.entities.User;
+import selenium.site.pages.ContactPage;
 import selenium.site.pages.HomePage;
 import selenium.site.pages.JDIPerformancePage;
 import selenium.site.sections.LoginForm;
@@ -13,6 +14,7 @@ import selenium.site.sections.LoginForm;
 @JSite("https://epam.github.io/JDI/")
 public class SiteJdi {
     public static HomePage homePage;
+    public static ContactPage contactPage;
     public static JDIPerformancePage performancePage;
     @FindBy(css = "form") public static LoginForm loginForm;
 

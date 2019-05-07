@@ -8,7 +8,7 @@ import io.github.com.custom.SearchResult;
 
 import java.util.List;
 
-public class SearchPage extends BasePage {
+public class SearchPage extends BaseSelPage {
 	@Css(".box") public UIList<SearchResult, Result> search;
 	@Css(".box") public UIList<SearchResult, ?> search2;
 	@Css(".box") public static List<SearchResult> search3;

@@ -49,16 +49,22 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public JDILocator locator = new JDILocator();
     public CacheValue<WebElement> webElement = new CacheValue<>();
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
-    protected JFunc1<WebElement, Boolean> searchRule = SEARCH_CONDITION;
+    protected CacheValue<JFunc1<WebElement, Boolean>> searchRule =
+            new CacheValue<>(() -> SEARCH_CONDITION);
     public <T extends JDIBase> T noValidation() {
-        return setSearchRule(Objects::nonNull);
+        return setSearchRule(ANY_ELEMENT);
     }
+    public <T extends JDIBase> T onlyVisible() {
+        return setSearchRule(VISIBLE_ELEMENT);
+    }
+    public <T extends JDIBase> T onlyEnabled() { return setSearchRule(ENABLED_ELEMENT); }
     public <T extends JDIBase> T setSearchRule(JFunc1<WebElement, Boolean> rule) {
-        searchRule = rule;
+        searchRule.setForce(rule);
         return (T) this;
+
     }
 
-    public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }
+    public static Timer timer() { return new Timer(TIMEOUT.get().get()*1000); }
     public UIElement setWebElement(WebElement el) {
         webElement.setForce(el);
         return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();
@@ -118,23 +124,23 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
                     return element;
                 throw exception("");
             } catch (Exception ex) {
-                throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
+                throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get().get());
             }
         }
         if (locator.isTemplate() && args.length == 0)
             throw exception("Can't get element with template locator '%s' without arguments", getLocator());
         List<WebElement> result = getAll(args);
         if (result.size() == 0)
-            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
+            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get().get());
         if (result.size() > 1) {
             int found = result.size();
-            List<WebElement> filtered = filter(result, el -> searchRule.execute(el));
+            List<WebElement> filtered = filter(result, el -> searchRule.get().execute(el));
             if (filtered.size() == 0)
-                throw exception(ELEMENTS_FILTERED_MESSAGE, found, toString(), TIMEOUT.get());
+                throw exception(ELEMENTS_FILTERED_MESSAGE, found, toString(), TIMEOUT.get().get());
         }
         if (result.size() == 1)
             return result.get(0);
-        throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get());
+        throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get().get());
     }
     public UIElement getUI(Object... args) {
         return new UIElement(get(args));
@@ -153,7 +159,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
             return asList(SMART_SEARCH.execute(this));
         SearchContext searchContext = getContext(parent, locator);
         List<WebElement> els = uiSearch(searchContext, correctLocator(getLocator(args)));
-        return filter(els, el -> searchRule.execute(el));
+        return filter(els, el -> searchRule.get().execute(el));
     }
     public List<WebElement> getList(int minAmount) {
         List<WebElement> elements = getAll();
@@ -282,7 +288,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         );
     };
     public String jsExecute(String text) {
-        return valueOf(js().executeScript("arguments[0]."+text+";", get()));
+        return valueOf(js().executeScript("return arguments[0]."+text+";", get()));
     }
 
     public Select select() {
@@ -444,7 +450,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     }
 
     public boolean wait(JFunc1<BaseElement, Boolean> condition) {
-        return new Timer(TIMEOUT.get()).wait(() -> condition.execute(this));
+        return new Timer(TIMEOUT.get().get()).wait(() -> condition.execute(this));
     }
 
     public String getValue() {

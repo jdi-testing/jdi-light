@@ -181,7 +181,10 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
     public List<String> values() {
         return map(labels(), element -> element.getText().trim());
     }
-
+    @JDIAction("Get '{name}' values")
+    public List<String> innerValues() {
+        return map(labels(), element -> element.innerText().trim());
+    }
     @JDIAction("Get '{name}' enabled options")
     public List<String> listEnabled() {
         return ifSelect(checkboxes(),
