@@ -107,7 +107,6 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
      */
     public int maxlength() { return getInt("maxlength", this); }
 
-    @Override
     public void addNewLine(String line) {
         sendKeys("\n" + line);
     }
