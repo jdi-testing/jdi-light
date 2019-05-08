@@ -9,6 +9,10 @@ public class TextAreaElement extends HtmlElement implements TextArea {
     public TextAreaElement() { }
     public TextAreaElement(WebElement el) { super(el); }
 
+    /**
+     * Gets a text by attribute value
+     * @return String
+     */
     @Override
     @JDIAction
     public String getText() { return getAttribute("value"); }
