@@ -49,6 +49,7 @@ public class DataTableTests extends StaticTestsInit {
         assertEquals(usersData.data("Grady Brock"), GRADY_BROCK);
         assertEquals(usersData.data(d -> d.name.contains("Brock")), GRADY_BROCK);
         usersData.assertThat().row(d -> d.equals(GRADY_BROCK));
+        usersData.has().row(GRADY_BROCK);
         /*
         List<UserInfo> filteredData = usersData.datas(d -> d.name.contains("Brock"));
         assertEquals(filteredData.size(), 1);
