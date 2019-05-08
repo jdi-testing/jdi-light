@@ -1,5 +1,4 @@
 language: java
-os: osx
 script:
   - mvn clean verify -Ddriver=chrome
 after_failure:
