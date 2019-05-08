@@ -5,6 +5,7 @@ package com.epam.jdi.light.driver;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.settings.WebSettings;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
@@ -14,10 +15,13 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.LOGS_PATH;
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
+import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.Timer.nowTime;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.OutputType.FILE;
 
 public class ScreenshotMaker {
@@ -37,14 +41,15 @@ public class ScreenshotMaker {
             : PROJECT_PATH + SCREEN_PATH;
     }
     public String takeScreenshot() {
-        return takeScreenshot(SCREEN_NAME, "yyyy-MM-dd-HH-mm-ss");
+        String name = TEST_NAME.get();
+        return takeScreenshot(isNotBlank(name) ? name : SCREEN_NAME, "yyyy-MM-dd-HH-mm-ss");
     }
     public String takeScreenshot(String value) {
         return takeScreenshot(value, "yyyy-MM-dd-HH-mm-ss");
     }
     public String takeScreenshot(String name, String dateFormat) {
         if (!hasRunDrivers())
-            throw exception("Can't do Screenshot. No Drivers run");
+            throw exception("Failed to do screenshot. No Drivers run");
         String screensFilePath = getFileName(mergePath(
             getPath(), name + nowTime(dateFormat)));
         new File(screensFilePath).getParentFile().mkdirs();
@@ -54,6 +59,7 @@ public class ScreenshotMaker {
         } catch (Exception ex) {
             throw exception("Failed to do screenshot: " + ex.getMessage());
         }
+        logger.info("Screenshot: " + screensFilePath);
         return screensFilePath;
     }
 

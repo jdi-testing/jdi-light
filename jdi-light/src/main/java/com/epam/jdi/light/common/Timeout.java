@@ -1,7 +1,8 @@
 package com.epam.jdi.light.common;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
 import com.epam.jdi.tools.Safe;
+
+import static com.epam.jdi.light.common.Exceptions.exception;
 
 public class Timeout {
     private static int DEFAULT;

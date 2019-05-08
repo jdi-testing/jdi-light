@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.PropertyReader;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
@@ -69,7 +70,7 @@ public class WebSettings {
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static String DRIVER_REMOTE_URL;
-    public static String TEST_NAME;
+    public static Safe<String> TEST_NAME = new Safe<>((String) null);
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;

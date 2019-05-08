@@ -1,17 +1,10 @@
 package io.github.epam.tests.recommended;
 
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.tools.func.JAction1;
 import io.github.epam.StaticTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
 import static com.epam.jdi.light.elements.base.WindowsManager.originalWindow;
-import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
-import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.HomePage.githubLink;
 import static io.github.com.pages.HomePage.jdiText;
@@ -24,7 +17,6 @@ import static io.github.epam.enums.NavigationNums.nContactForm;
 import static io.github.epam.enums.NavigationNums.nHome;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
-import static selenium.site.pages.JDIPerformancePage.userNames;
 
 public class ComplexElements3Tests extends StaticTestsInit {
 

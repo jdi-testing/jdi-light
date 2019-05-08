@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.complex;
 
+import com.epam.jdi.light.driver.ScreenshotMaker;
 import io.github.com.entities.MarvelUserInfo;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -7,6 +8,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.users;
 import static io.github.com.pages.UsersPage.usersSetup;
@@ -22,6 +24,7 @@ public class DataTableTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
+        usersPage.shouldBeOpened();
         if (firstTime) {
             usersPage.open();
             firstTime = false;

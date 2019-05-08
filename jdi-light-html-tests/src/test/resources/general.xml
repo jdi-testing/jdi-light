@@ -8,4 +8,7 @@
             <package name="io.github.epam.html.tests.site"/>
         </packages>
     </test>
+    <listeners>
+        <listener class-name="io.github.epam.testng.TestNGListener" />
+    </listeners>
 </suite>

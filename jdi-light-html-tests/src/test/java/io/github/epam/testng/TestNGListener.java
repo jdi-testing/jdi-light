@@ -5,32 +5,45 @@ package io.github.epam.testng;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.tools.Safe;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
+    private Safe<Long> start = new Safe<>(0L);
     @Override
-    public void beforeInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
-        if (iInvokedMethod.isTestMethod()) {
-            Method testMethod = iInvokedMethod.getTestMethod().getConstructorOrMethod().getMethod();
+    public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
+        if (m.isTestMethod()) {
+            Method testMethod = m.getTestMethod().getConstructorOrMethod().getMethod();
             if (testMethod.isAnnotationPresent(Test.class)) {
-                TEST_NAME.set(iTestResult.getInstanceName()+"."+testMethod.getName());
+                TEST_NAME.set(tr.getTestClass().getRealClass().getSimpleName()+"."+testMethod.getName());
+                start.set(currentTimeMillis());
                 logger.step("== Test '%s' START ==", TEST_NAME.get());
             }
         }
     }
 
     @Override
-    public void afterInvocation(IInvokedMethod method, ITestResult result) {
+    public void afterInvocation(IInvokedMethod method, ITestResult r) {
         if (method.isTestMethod()) {
-            logger.step("=== Test '%s' %s ===", TEST_NAME.get(), getTestResult(result));
+            String result = getTestResult(r);
+            logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
+                    new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())));
+            if (result.equals("FAILED")) {
+                takeScreen();
+                logger.step("ERROR: " + r.getThrowable().getMessage());
+            }
             logger.step("");
         }
     }

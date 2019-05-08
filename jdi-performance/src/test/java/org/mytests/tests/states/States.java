@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 import org.mytests.uiobjects.example.entities.User;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
 
 /**

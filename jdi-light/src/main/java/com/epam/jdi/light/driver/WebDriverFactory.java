@@ -5,8 +5,8 @@ package com.epam.jdi.light.driver;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.tools.Safe;
 import com.epam.jdi.light.driver.get.DriverTypes;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -30,13 +30,14 @@ import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static com.epam.jdi.tools.switcher.SwitchActions.Value;
 import static java.lang.String.format;
 import static java.lang.Thread.currentThread;
-import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class WebDriverFactory {
-    public static MapArray<String, JFunc<WebDriver>> DRIVERS = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
-    private static Safe<MapArray<String, WebDriver>> RUN_DRIVERS = new Safe<>(new MapArray<>());
+    public static MapArray<String, JFunc<WebDriver>> DRIVERS
+        = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
+    private static Safe<MapArray<String, WebDriver>> RUN_DRIVERS
+        = new Safe<>(MapArray::new);
 
     private WebDriverFactory() {
     }

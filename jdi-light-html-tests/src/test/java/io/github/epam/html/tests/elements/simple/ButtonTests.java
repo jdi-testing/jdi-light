@@ -101,7 +101,7 @@ public class ButtonTests extends TestsInit {
     }
     @Test
     public void isNotAppearTimeoutFailedButtonTest() {
-        refresh();//TODO
+        refresh();
         try {
             durationImmediately(() ->
                 ghostButton.is().notAppear(2));

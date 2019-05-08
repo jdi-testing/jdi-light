@@ -3,12 +3,12 @@ package com.epam.jdi.light.elements.composite;
 import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
-import com.epam.jdi.tools.Safe;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
 
