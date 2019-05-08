@@ -1,4 +1,5 @@
 language: java
+os: windows
 script:
   - mvn clean verify -Ddriver=chrome
 after_failure:

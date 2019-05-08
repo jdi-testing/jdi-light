@@ -60,7 +60,6 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public <T extends JDIBase> T setSearchRule(JFunc1<WebElement, Boolean> rule) {
         searchRule.setForce(rule);
         return (T) this;
-
     }
 
     public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }

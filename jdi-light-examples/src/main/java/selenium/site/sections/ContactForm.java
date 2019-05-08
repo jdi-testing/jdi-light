@@ -6,6 +6,7 @@ import selenium.site.data.ContactInfo;
 
 import java.util.List;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
