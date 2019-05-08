@@ -5,7 +5,7 @@ import com.epam.jdi.light.ui.html.common.TextField;
 import io.github.com.pages.BasePage;
 import org.openqa.selenium.WebElement;
 
-public class MainSection {// extends BasePage {
+public class MainSection{ // extends BasePage {
     @UI("#name")
     TextField name;
 
