@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.ui.html.PageFactory.initElements;
 import static org.mytests.uiobjects.example.site.SiteJdi.homePage;

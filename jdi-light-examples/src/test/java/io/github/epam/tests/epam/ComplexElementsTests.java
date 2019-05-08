@@ -32,7 +32,6 @@ public class ComplexElementsTests extends TestsInit {
         navigation.get(nContactForm).click();
         contactFormPage.checkOpened();
         navigation.get(nHome).click();
-        System.out.println(homePage.jdiText.getText());
         homePage.jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
         homePage.githubLink.click();
         originalWindow();

@@ -47,6 +47,7 @@ public class JDIPerformanceTests implements SimpleTestsInit {
     public void bigDropdownTest() {
         String name = "Charles Byers";
         StopWatch timer = StopWatch.createStarted();
+        System.out.println("!!! " + (userNames == null));
         userNames.select(name);
         System.out.println("Big dropdown test Time: " + timer.getTime());
         Assert.assertEquals(userNames.selected(), name);

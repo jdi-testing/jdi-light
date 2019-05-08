@@ -86,11 +86,9 @@ public class WebSettings {
 
     public static synchronized void init() {
         if (!initialized) {
-            TIMEOUT.set(new Timeout(10));
-            PAGE_TIMEOUT.set(new Timeout(30));
             getProperties(TEST_PROPERTIES_PATH);
-            fillAction(p -> TIMEOUT.set(new Timeout(parseInt(p))), "timeout.wait.element");
-            fillAction(p -> PAGE_TIMEOUT.set(new Timeout(parseInt(p))), "timeout.wait.page");
+            fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
+            fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(p -> DOMAIN = p, "domain");
             if (DRIVER_NAME.equals(DEFAULT_DRIVER))
                 fillAction(p -> DRIVER_NAME = p, "driver");

@@ -59,7 +59,7 @@ public class DroplistTests extends TestsInit {
     @Test
     public void negativeDroplistTest() {
         try {
-            TIMEOUT.get().set(1);
+            TIMEOUT.set(1);
             colors.select("GreyBrownCrimson");
             fail("You have selected color that does not exist in droplist - something went wrong");
         } catch (Exception ex) {

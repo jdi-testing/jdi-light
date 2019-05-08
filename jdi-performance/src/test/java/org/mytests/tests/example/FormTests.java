@@ -6,6 +6,8 @@ import org.mytests.tests.states.States;
 import org.mytests.uiobjects.example.entities.Contacts;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static org.mytests.tests.states.States.*;
 import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_CONTACT;
 import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_USER;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
@@ -15,7 +17,7 @@ public class FormTests extends SimpleTestsInit {
 
     @Test
     public void loginTest() {
-        States.shouldBeLoggedOut();
+        shouldBeLoggedOut();
         userIcon.click();
         loginForm.loginAs(DEFAULT_USER);
         homePage.checkOpened();
@@ -23,7 +25,7 @@ public class FormTests extends SimpleTestsInit {
 
     @Test
     public void fillContactFormTest() {
-        States.shouldBeLoggedIn();
+        shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         contactForm.submit(DEFAULT_CONTACT);
         contactForm.check(DEFAULT_CONTACT);
@@ -31,7 +33,7 @@ public class FormTests extends SimpleTestsInit {
 
     @Test
     public void fillContactsTest() {
-        States.shouldBeLoggedIn();
+        shouldBeLoggedIn();
         contactsPage.shouldBeOpened();
         Form<Contacts> contactFrom = contactsPage.asForm();
         contactFrom.submit(DEFAULT_CONTACT);

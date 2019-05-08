@@ -22,8 +22,7 @@ public class TestNGListener implements IInvokedMethodListener {
             Method testMethod = iInvokedMethod.getTestMethod().getConstructorOrMethod().getMethod();
             if (testMethod.isAnnotationPresent(Test.class)) {
                 TEST_NAME = testMethod.getName();
-                logger.step("");
-                logger.step("== Test '%s' started ==", TEST_NAME);
+                logger.step("== Test '%s' START ==", TEST_NAME);
             }
         }
     }
@@ -32,6 +31,7 @@ public class TestNGListener implements IInvokedMethodListener {
     public void afterInvocation(IInvokedMethod method, ITestResult result) {
         if (method.isTestMethod()) {
             logger.step("=== Test '%s' %s ===", TEST_NAME, getTestResult(result));
+            logger.step("");
         }
     }
 
