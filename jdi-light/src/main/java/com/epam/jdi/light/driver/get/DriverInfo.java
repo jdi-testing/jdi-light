@@ -53,10 +53,12 @@ public class DriverInfo extends DataClass<DriverInfo> {
         } catch (Exception ex) {
             try {
                 if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
-                    logger.info("Failed to download driver of latest version:" +
-                            "TRY TO GET DRIVER PREVIOUS VERSION");
-                    downloadDriver(type, PLATFORM, getBelowVersion());
-                    return getDriver.execute();
+                    logger.info("Failed to download driver (%s %s) of latest version:" +
+                            "TRY TO GET DRIVER PREVIOUS VERSION", type, DRIVER_VERSION);
+                    try {
+                        downloadDriver(type, PLATFORM, getBelowVersion());
+                        return getDriver.execute();
+                    } catch (Exception ex2) { throw exception("Failed to download driver: " + ex2.getMessage()); }
                 }
                 throw exception(ex.getMessage());
             } catch (Exception ex2) {
