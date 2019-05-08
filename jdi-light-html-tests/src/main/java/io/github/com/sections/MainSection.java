@@ -5,7 +5,9 @@ import com.epam.jdi.light.ui.html.common.TextField;
 import io.github.com.pages.BasePage;
 import org.openqa.selenium.WebElement;
 
-public class MainSection{ // extends BasePage {
+import static io.github.com.StaticSite.mainSection;
+
+public class MainSection{//} extends BasePage {
     @UI("#name")
     TextField name;
 
@@ -25,4 +27,12 @@ public class MainSection{ // extends BasePage {
     WebElement religion;
 
 
+    public String accessPackageElementName(){
+        mainSection.name.setText("name");
+        return name.getText();
+    }
+
+    public boolean displayedPackageElementReligion(){
+        return religion.isDisplayed();
+    }
 }

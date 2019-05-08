@@ -33,12 +33,11 @@ public class SectionTests extends TestsInit {
         Assert.assertEquals(basePage.passportNumber.getText(), "1234");
     }
 
-//    @Test
-//    public void packageVisibleTest() {
-//        mainSection.religion.isDisplayed();
-//        mainSection.name.setText("name");
-//        Assert.assertNotNull(mainSection.name);
-//    }
+    @Test
+    public void packageVisibleTest() {
+        Assert.assertNotNull(mainSection.accessPackageElementName());
+        Assert.assertTrue(mainSection.displayedPackageElementReligion());
+    }
 
     @Test
     public void publicVisibleTest() {
