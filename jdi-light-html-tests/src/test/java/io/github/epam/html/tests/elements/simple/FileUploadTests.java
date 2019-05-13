@@ -11,6 +11,7 @@ import static com.epam.jdi.light.asserts.FileAssert.assertThatFile;
 import static com.epam.jdi.light.asserts.FileAssert.cleanupDownloads;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
@@ -35,12 +36,17 @@ public class FileUploadTests extends TestsInit {
         avatar.is().text(containsString("general.xml"));
         assertTrue(avatar.getText().contains("general.xml"));
         assertTrue(avatar.getValue().contains("general.xml"));
+    }
+
+    @Test
+    public void disabledUploadTest() {
+        TIMEOUT.set(2);
         try {
             disabledFileInput.uploadFile(mergePath(PROJECT_PATH, "/src/test/resources/general.xml"));
         } catch (Exception ignore) {}
+        TIMEOUT.set(2);
         disabledFileInput.is().text(is(""));
     }
-
     @Test
     public void labelTest() {
         assertEquals(avatar.labelText(), "Profile picture:");

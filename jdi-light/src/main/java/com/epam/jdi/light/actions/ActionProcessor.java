@@ -51,35 +51,42 @@ public class ActionProcessor {
     }
 
     private static Object stableAction(ProceedingJoinPoint jp) {
-        String exception = "";
-        logger.logOff();
-        JDIAction ja = getMethod(jp).getMethod().getAnnotation(JDIAction.class);
-        int timeout = ja != null && ja.timeout() != -1
-            ? ja.timeout()
-            : TIMEOUT.get();
-        JFunc1<JDIBase, Object> overrideAction = null;
-        boolean replace = false;
-        JDIBase obj = null;
-        if (jp.getThis() != null && JDIBase.class.isAssignableFrom(jp.getThis().getClass())) {
-            overrideAction = GetOverrideAction(jp);
-            replace = overrideAction != null;
-            if (replace)
-                obj = (JDIBase) jp.getThis();
-        }
-        long start = currentTimeMillis();
-        do { try {
-            Object result = replace ? overrideAction.execute(obj) : jp.proceed();
-            if (!condition(jp)) continue;
+        try {
+            logger.logOff();
+            TIMEOUT.freeze();
+            String exception = "";
+            JDIAction ja = getMethod(jp).getMethod().getAnnotation(JDIAction.class);
+            int timeout = ja != null && ja.timeout() != -1
+                    ? ja.timeout()
+                    : TIMEOUT.get();
+            JFunc1<JDIBase, Object> overrideAction = null;
+            boolean replace = false;
+            JDIBase obj = null;
+            if (jp.getThis() != null && JDIBase.class.isAssignableFrom(jp.getThis().getClass())) {
+                overrideAction = GetOverrideAction(jp);
+                replace = overrideAction != null;
+                if (replace)
+                    obj = (JDIBase) jp.getThis();
+            }
+            long start = currentTimeMillis();
+            do {
+                try {
+                    Object result = replace ? overrideAction.execute(obj) : jp.proceed();
+                    if (!condition(jp)) continue;
+                    return result;
+                } catch (Throwable ex) {
+                    try {
+                        exception = ex.getMessage();
+                        Thread.sleep(200);
+                    } catch (Exception ignore) {
+                    }
+                }
+            } while (currentTimeMillis() - start < timeout * 1000);
+            throw exception(getFailedMessage(jp, exception));
+        } finally {
             logger.logOn();
-            return result;
-        } catch (Throwable ex) {
-            try {
-                exception = ex.getMessage();
-                Thread.sleep(200);
-            } catch (Exception ignore) { } }
-        } while (currentTimeMillis() - start < timeout*1000);
-        logger.logOn();
-        throw exception(getFailedMessage(jp, exception));
+            TIMEOUT.stopFreeze();
+        }
     }
     private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
         MethodSignature method = getMethod(jp);

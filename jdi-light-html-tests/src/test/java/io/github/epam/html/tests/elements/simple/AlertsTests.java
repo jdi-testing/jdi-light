@@ -25,6 +25,7 @@ public class AlertsTests extends TestsInit {
         acceptAlert();
         blueButton.click();
         acceptAlert();
+        refresh();
         ghostButton.click();
         acceptAlert();
     }
@@ -34,6 +35,7 @@ public class AlertsTests extends TestsInit {
         dismissAlert();
         blueButton.click();
         dismissAlert();
+        refresh();
         ghostButton.click();
         dismissAlert();
     }
@@ -47,6 +49,7 @@ public class AlertsTests extends TestsInit {
         text = getAlertText();
         assertEquals(text, "Blue button");
         acceptAlert();
+        refresh();
         ghostButton.click();
         text = getAlertText();
         assertEquals(text, "Ghost button");
@@ -55,6 +58,7 @@ public class AlertsTests extends TestsInit {
 
     @Test
     public void inputAndAcceptAlertTest() {
+        refresh();
         ghostButton.click();
         inputAndAcceptAlert("Some text");
     }

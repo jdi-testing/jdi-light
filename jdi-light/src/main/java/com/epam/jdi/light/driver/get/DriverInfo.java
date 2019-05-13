@@ -16,7 +16,7 @@ import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.settings.WebSettings.DRIVER_REMOTE_URL;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static java.lang.Integer.*;
+import static java.lang.Integer.parseInt;
 import static java.lang.System.setProperty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -53,10 +53,12 @@ public class DriverInfo extends DataClass<DriverInfo> {
         } catch (Exception ex) {
             try {
                 if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
-                    logger.info("!!! Failed to download driver of latest version:" +
-                            "TRY TO GET DRIVER PREVIOUS VERSION");
-                    downloadDriver(type, PLATFORM, getBelowVersion());
-                    return getDriver.execute();
+                    logger.info("Failed to download driver (%s %s) of latest version:" +
+                            "TRY TO GET DRIVER PREVIOUS VERSION", type, DRIVER_VERSION);
+                    try {
+                        downloadDriver(type, PLATFORM, getBelowVersion());
+                        return getDriver.execute();
+                    } catch (Exception ex2) { throw exception("Failed to download driver: " + ex2.getMessage()); }
                 }
                 throw exception(ex.getMessage());
             } catch (Exception ex2) {

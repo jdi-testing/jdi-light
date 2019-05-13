@@ -51,13 +51,10 @@ public class ButtonTests extends TestsInit {
 
         disabledButton.click();
         try {
-            TIMEOUT .set(1);
+            TIMEOUT.set(1);
             acceptAlert();
             fail("Disabled button should not work, but work");
         } catch (Exception ignore) { }
-        finally {
-            TIMEOUT.reset();
-        }
     }
 
     @Test
@@ -104,7 +101,7 @@ public class ButtonTests extends TestsInit {
     }
     @Test
     public void isNotAppearTimeoutFailedButtonTest() {
-        refresh();//TODO
+        refresh();
         try {
             durationImmediately(() ->
                 ghostButton.is().notAppear(2));
@@ -116,8 +113,7 @@ public class ButtonTests extends TestsInit {
     public void isNotAppearFailedButtonTest() {
         refresh();
         try {
-            durationImmediately(() ->
-                ghostButton.is().notAppear());
+            durationImmediately(() -> ghostButton.is().notAppear());
         } catch (Exception ex) {
             assertThat(ex.getMessage(), containsString("but: was \"displayed\""));
         }
@@ -126,8 +122,8 @@ public class ButtonTests extends TestsInit {
     @Test
     public void isNotAppearButtonTest() {
         ghostButton.is().hidden();
-        durationMoreThan(10, () ->
-            ghostButton.is().notAppear());
+        TIMEOUT.set(3);
+        durationMoreThan(3, () -> ghostButton.is().notAppear());
     }
 
     @Test

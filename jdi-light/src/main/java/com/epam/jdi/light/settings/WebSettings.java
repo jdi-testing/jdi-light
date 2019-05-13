@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.PropertyReader;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
@@ -43,7 +44,23 @@ public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String DOMAIN;
     public static String KILL_BROWSER = "afterAndBefore";
-    public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = WebElement::isDisplayed;
+    public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
+    public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
+    public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
+        el != null && el.isDisplayed() && el.isEnabled();
+    public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = VISIBLE_ELEMENT;
+    public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
+        SEARCH_CONDITION = rule;
+    }
+    public static void noValidation() {
+        SEARCH_CONDITION = ANY_ELEMENT;
+    }
+    public static void onlyVisible() {
+        SEARCH_CONDITION = VISIBLE_ELEMENT;
+    }
+    public static void enabledElement() {
+        SEARCH_CONDITION = ENABLED_ELEMENT;
+    }
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
         return DOMAIN != null && DOMAIN.contains("://");
@@ -53,7 +70,7 @@ public class WebSettings {
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static String DRIVER_REMOTE_URL;
-    public static String TEST_NAME;
+    public static Safe<String> TEST_NAME = new Safe<>((String) null);
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
@@ -122,9 +139,9 @@ public class WebSettings {
         if (p.split(",").length == 2) {
             List<String> params = asList(p.split(","));
             if (params.contains("visible") || params.contains("displayed"))
-                SEARCH_CONDITION = WebElement::isDisplayed;
+                onlyVisible();
             if (params.contains("any") || params.contains("all"))
-                SEARCH_CONDITION = Objects::nonNull;
+                noValidation();
             if (params.contains("single"))
                 STRICT_SEARCH = true;
             if (params.contains("multiple"))

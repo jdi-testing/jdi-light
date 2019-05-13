@@ -134,6 +134,14 @@ public abstract class BaseUIElement<T extends BaseUIElement>
         String value = el.getAttribute("value");
         return isNotBlank(value) ? value : text;
     }
+    @JDIAction("Get '{name}' text")
+    public String getValueText() {
+        return getAttribute("value");
+    }
+    @JDIAction("Get '{name}' text")
+    public String innerText() {
+        return jsExecute("innerText");
+    }
     public String text() { return getText(); }
 
     public List<WebElement> findElements(By by) {
@@ -156,7 +164,7 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     private boolean selected() {
         List<String> cl = classes();
         return get().isSelected() || cl.contains("checked") || cl.contains("active")||
-                getAttribute("checked").equals("true");
+                cl.contains("selected") || getAttribute("checked").equals("true");
     }
     //endregion
 

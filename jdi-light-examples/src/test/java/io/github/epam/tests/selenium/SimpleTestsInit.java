@@ -9,10 +9,10 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
-public class SimpleTestsInit {
+public interface SimpleTestsInit {
 
     @BeforeSuite(alwaysRun = true)
-    public static void setUp() {
+    static void setUp() {
         logger.setLogLevel(STEP);
         initElements(SiteJdi.class);
         logger.info("Run Tests");
@@ -20,7 +20,7 @@ public class SimpleTestsInit {
 
 
     @AfterSuite(alwaysRun = true)
-    public void teardown() {
+    static void teardown() {
         killAllSeleniumDrivers();
     }
 }

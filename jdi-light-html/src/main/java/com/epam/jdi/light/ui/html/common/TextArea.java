@@ -12,6 +12,7 @@ public interface TextArea extends TextField {
     int minlength();
     int maxlength();
     String placeholder();
+    void addNewLine(String line);
 
     TextAreaAssert is();
     TextAreaAssert assertThat();

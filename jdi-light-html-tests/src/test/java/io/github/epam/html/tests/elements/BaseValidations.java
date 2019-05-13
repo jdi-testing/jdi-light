@@ -45,7 +45,7 @@ public class BaseValidations {
         long start = currentTimeMillis();
         action.execute();
         long passedTime = currentTimeMillis()-start;
-        assertThat(passedTime, greaterThan(min*1000L));
-        assertThat(passedTime, lessThan(max*1000L));
+        assertThat(passedTime, greaterThan(min*1000L-500));
+        assertThat(passedTime, lessThan(max*1000L+500));
     }
 }

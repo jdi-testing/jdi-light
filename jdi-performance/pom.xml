@@ -10,14 +10,13 @@
     <name>JDI Performance</name>
 
     <properties>
+        <driver>firefox</driver>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <aspectj.version>1.9.1</aspectj.version>
-        <driver>chrome</driver>
         <domain>https://epam.github.io/JDI/</domain>
         <allure.testng>2.7.0</allure.testng>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <driver>chrome</driver>
         <domain>https://epam.github.io/JDI/</domain>
     </properties>
 
@@ -26,7 +25,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.0.54</version>
+            <version>1.0.57</version>
         </dependency>
 
         <dependency>

@@ -8,7 +8,8 @@ import com.epam.jdi.light.ui.html.common.Image;
 import io.github.com.sections.LoginForm;
 
 public class Header extends Section {
-	@Css("form") public static LoginForm loginForm;
+	//@Css("form")
+	public static LoginForm loginForm;
 	@Css(".fa-sign-out") public static Button logout;
 	public static Image epamLogo;
 	public static Icon userIcon;
