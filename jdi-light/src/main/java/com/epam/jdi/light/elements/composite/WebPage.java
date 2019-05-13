@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
 
@@ -48,7 +49,7 @@ public class WebPage extends DriverBase implements PageObject {
         return new Form<>().setPageObject(this).setName(getName()+" Form");
     }
 
-    private static ThreadLocal<String> currentPage = new ThreadLocal<>();
+    private static Safe<String> currentPage = new Safe<>("Undefined Page");
     public static String getCurrentPage() { return currentPage.get(); }
     public static void setCurrentPage(WebPage page) {
         currentPage.set(page.getName());
@@ -316,7 +317,7 @@ public class WebPage extends DriverBase implements PageObject {
         if (CHECK_AFTER_OPEN == NEW_PAGE)
             page.checkOpened();
         logger.toLog("Page: " + page.getName());
-        TIMEOUT.get().set(PAGE_TIMEOUT.get().get());
+        TIMEOUT.set(PAGE_TIMEOUT.get());
     };
     public static JAction1<WebPage> BEFORE_THIS_PAGE = page -> {
         if (CHECK_AFTER_OPEN == EVERY_PAGE)

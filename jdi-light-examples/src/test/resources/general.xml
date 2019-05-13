@@ -6,7 +6,7 @@
     </listeners>
     <test name="Tests">
         <!--classes>
-            <class name="io.github.epam.tests.epam.FormsTests"/>
+            <class name="io.github.epam.tests.recommended.ComplexElements3Tests"/>
         </classes-->
         <packages>
             <package name="io.github.epam.tests.recommended"/>

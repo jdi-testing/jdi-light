@@ -5,9 +5,6 @@
         <packages>
             <package name="org.mytests.tests.example"/>
         </packages>
-        <classes>
-            <class name="org.mytests.tests.example.MenuTests" />
-        </classes>
     </test>
     <listeners>
         <listener class-name="org.mytests.tests.testng.TestNGListener" />

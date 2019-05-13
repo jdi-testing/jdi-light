@@ -9,8 +9,8 @@ import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.logger.ILogger;
-import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.PropertyReader;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
@@ -31,7 +31,6 @@ import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
-import static com.epam.jdi.light.settings.TimeoutSettings.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
@@ -71,7 +70,7 @@ public class WebSettings {
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static String DRIVER_REMOTE_URL;
-    public static String TEST_NAME;
+    public static Safe<String> TEST_NAME = new Safe<>((String) null);
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
@@ -88,11 +87,9 @@ public class WebSettings {
 
     public static synchronized void init() {
         if (!initialized) {
-            TIMEOUT.set(new Timeout(10));
-            PAGE_TIMEOUT.set(new Timeout(30));
             getProperties(TEST_PROPERTIES_PATH);
-            fillAction(p -> TIMEOUT.set(new Timeout(parseInt(p))), "timeout.wait.element");
-            fillAction(p -> PAGE_TIMEOUT.set(new Timeout(parseInt(p))), "timeout.wait.page");
+            fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
+            fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(p -> DOMAIN = p, "domain");
             if (DRIVER_NAME.equals(DEFAULT_DRIVER))
                 fillAction(p -> DRIVER_NAME = p, "driver");

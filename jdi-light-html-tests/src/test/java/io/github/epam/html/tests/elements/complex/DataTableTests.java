@@ -22,6 +22,7 @@ public class DataTableTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
+        usersPage.shouldBeOpened();
         if (firstTime) {
             usersPage.open();
             firstTime = false;

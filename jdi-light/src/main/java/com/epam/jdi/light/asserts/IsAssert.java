@@ -70,7 +70,7 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
         return (T) this;
     }
     public T notAppear() {
-        return notAppear(TIMEOUT.get().get());
+        return notAppear(TIMEOUT.get());
     }
     @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
     public T notAppear(int timeoutSec) {

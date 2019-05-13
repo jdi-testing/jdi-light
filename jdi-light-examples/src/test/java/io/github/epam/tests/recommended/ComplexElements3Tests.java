@@ -43,7 +43,6 @@ public class ComplexElements3Tests extends StaticTestsInit {
         navigation.get(nContactForm).click();
         contactFormPage.checkOpened();
         navigation.get(nHome).click();
-        System.out.println(jdiText.getText());
         jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
         githubLink.click();
         originalWindow();

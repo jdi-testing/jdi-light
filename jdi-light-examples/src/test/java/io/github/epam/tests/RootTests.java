@@ -1,4 +1,4 @@
-package io.github.epam.tests.recommended;
+package io.github.epam.tests;
 
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;

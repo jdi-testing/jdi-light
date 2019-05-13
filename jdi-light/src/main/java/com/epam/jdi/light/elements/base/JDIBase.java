@@ -16,11 +16,10 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.text.MessageFormat;
 import java.util.List;
-import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
-import static com.epam.jdi.light.common.ScreenshotMaker.takeScreen;
+import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
@@ -61,10 +60,9 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public <T extends JDIBase> T setSearchRule(JFunc1<WebElement, Boolean> rule) {
         searchRule.setForce(rule);
         return (T) this;
-
     }
 
-    public static Timer timer() { return new Timer(TIMEOUT.get().get()*1000); }
+    public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }
     public UIElement setWebElement(WebElement el) {
         webElement.setForce(el);
         return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();
@@ -124,23 +122,23 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
                     return element;
                 throw exception("");
             } catch (Exception ex) {
-                throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get().get());
+                throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
             }
         }
         if (locator.isTemplate() && args.length == 0)
             throw exception("Can't get element with template locator '%s' without arguments", getLocator());
         List<WebElement> result = getAll(args);
         if (result.size() == 0)
-            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get().get());
+            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
         if (result.size() > 1) {
             int found = result.size();
             List<WebElement> filtered = filter(result, el -> searchRule.get().execute(el));
             if (filtered.size() == 0)
-                throw exception(ELEMENTS_FILTERED_MESSAGE, found, toString(), TIMEOUT.get().get());
+                throw exception(ELEMENTS_FILTERED_MESSAGE, found, toString(), TIMEOUT.get());
         }
         if (result.size() == 1)
             return result.get(0);
-        throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get().get());
+        throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get());
     }
     public UIElement getUI(Object... args) {
         return new UIElement(get(args));
@@ -450,7 +448,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     }
 
     public boolean wait(JFunc1<BaseElement, Boolean> condition) {
-        return new Timer(TIMEOUT.get().get()).wait(() -> condition.execute(this));
+        return new Timer(TIMEOUT.get()).wait(() -> condition.execute(this));
     }
 
     public String getValue() {

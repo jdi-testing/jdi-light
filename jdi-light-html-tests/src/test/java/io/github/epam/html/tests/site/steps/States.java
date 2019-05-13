@@ -25,7 +25,6 @@ public class States {
     }
     @Step
     public static void shouldBeLoggedOut() {
-        System.out.println("THREAD ID" + Thread.currentThread().getId());
         if (userName.isDisplayed())
             logout();
     }

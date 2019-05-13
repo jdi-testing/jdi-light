@@ -53,12 +53,12 @@ public class ActionProcessor {
     private static Object stableAction(ProceedingJoinPoint jp) {
         try {
             logger.logOff();
-            TIMEOUT.get().freeze();
+            TIMEOUT.freeze();
             String exception = "";
             JDIAction ja = getMethod(jp).getMethod().getAnnotation(JDIAction.class);
             int timeout = ja != null && ja.timeout() != -1
                     ? ja.timeout()
-                    : TIMEOUT.get().get();
+                    : TIMEOUT.get();
             JFunc1<JDIBase, Object> overrideAction = null;
             boolean replace = false;
             JDIBase obj = null;
@@ -85,7 +85,7 @@ public class ActionProcessor {
             throw exception(getFailedMessage(jp, exception));
         } finally {
             logger.logOn();
-            TIMEOUT.get().stopFreeze();
+            TIMEOUT.stopFreeze();
         }
     }
     private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
@@ -93,7 +93,7 @@ public class ActionProcessor {
         try {
             String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
                 $("exception", exception),
-                $("timeout", TIMEOUT.get().get()),
+                $("timeout", TIMEOUT.get()),
                 $("action", method.getMethod().getName())
             ));
             return fillTemplate(result, jp, method);
