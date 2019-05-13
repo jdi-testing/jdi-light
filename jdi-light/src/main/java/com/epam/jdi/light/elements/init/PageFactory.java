@@ -1,6 +1,9 @@
 package com.epam.jdi.light.elements.init;
 
+import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -98,19 +101,11 @@ public class PageFactory {
     public static void initElements(SiteInfo info) {
         List<Field> poFields = recursion(
             t -> isInterface(t, PageObject.class) &&
-            !asList(WebPage.class, Section.class, Form.class).contains(t)
-            || !isClass(t, DriverBase.class) && !t.equals(Object.class),
+                !asList(WebPage.class, Section.class, Form.class).contains(t) ||
+                !isInterface(t, PageObject.class) &&
+                !asList(UIElement.class, BaseUIElement.class, JDIBase.class, Object.class).contains(t),
             info.instance.getClass(),
-            t -> getFieldsDeep(t, Section.class, WebPage.class));
-/*
-        List<Field> poFields = getFieldsDeep(info.instance.getClass(), Section.class, WebPage.class);
-        Class<?> base = info.instance.getClass().getSuperclass();
-        if (!base.equals(WebPage.class) && !base.equals(Section.class) && !base.equals(Form.class)
-            && isInterface(base, PageObject.class)) {
-            List<Field> superFields = getFieldsDeep(base, Section.class, WebPage.class);
-            if (superFields.size() > 0)
-                poFields.addAll(superFields);
-        }*/
+            t -> asList(t.getDeclaredFields()));
         List<Field> fields = filter(poFields, f -> isJDIField(f) || isPageObject(f.getType()));
         SiteInfo pageInfo = new SiteInfo(info);
         pageInfo.parent = info.instance;
