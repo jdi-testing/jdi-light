@@ -5,7 +5,6 @@ package com.epam.jdi.light.driver;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.settings.WebSettings;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
