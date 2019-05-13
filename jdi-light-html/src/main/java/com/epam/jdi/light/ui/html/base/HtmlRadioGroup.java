@@ -40,8 +40,9 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
             throw exception("Please specify RadioButtons locator in order to get all radio buttons");
         return getAll();
     }
+
     /**
-     * Selects radio based on value
+     * Selects a radio based on value
      * @param value String to select
      */
     @Override
@@ -51,7 +52,7 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
     }
 
     /**
-     * Selects radio based on index
+     * Selects a radio based on index
      * @param index int to select
      */
     @JDIAction("Select '{0}' for '{name}'")
@@ -59,7 +60,7 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
         labels().get(index-1).click();
     }
     /**
-     * Gets secleted radio
+     * Gets a selected radio
      * @return String
      */
     @JDIAction("Get '{name}' selected value")
@@ -67,24 +68,48 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
         HtmlElement result = first(radioButtons(), HtmlElement::isSelected);
         return result != null ? result.labelText() : "";
     }
+
+    /**
+     * Checks if a value is selected on a radio
+     * @param value String to select
+     * @return boolean
+     */
     @JDIAction("Is '{0}' selected for '{name}'")
     public boolean selected(String value) {
         return get(value).isSelected();
     }
 
+    /**
+     * Gets a list of text from each values from a radio
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' list values")
     public List<String> values() {
         return map(labels(), HtmlElement::getText);
     }
+
+    /**
+     * Gets a list of innerText from each values from a radio
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' list values")
     public List<String> innerValues() {
         return map(labels(), HtmlElement::innerText);
     }
 
+    /**
+     * Gets a list an enabled values of a radio
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
         return ifSelect(radioButtons(), HtmlElement::isEnabled, HtmlElement::labelText);
     }
+
+    /**
+     * Gets a list a disabled values of a radio
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {
         return ifSelect(radioButtons(), HtmlElement::isDisabled, HtmlElement::labelText);
@@ -114,5 +139,4 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
     public SelectAssert shouldBe() {
         return is();
     }
-
 }
