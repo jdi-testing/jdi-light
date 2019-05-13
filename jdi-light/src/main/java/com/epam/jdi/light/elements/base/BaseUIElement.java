@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -35,7 +36,7 @@ public abstract class BaseUIElement<T extends BaseUIElement>
 
     protected T newElement() {
         try {
-            return initClass.newInstance();
+            return create(initClass);
         }
         catch (Exception ex) {
             throw exception("Can't instantiate %s. Exception: ",

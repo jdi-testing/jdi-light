@@ -67,7 +67,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
     protected CacheValue<Integer> size = new CacheValue<>(this::getTableSize);
 
     public void setHeader(List<String> header) {
-        this.header.setForce(header);
+        this.header.setFinal(header);
     }
 
     public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
