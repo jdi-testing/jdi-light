@@ -40,6 +40,7 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
             throw exception("Please specify RadioButtons locator in order to get all radio buttons");
         return getAll();
     }
+
     /**
      * Selects a radio based on value
      * @param value String to select
@@ -97,16 +98,7 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
     }
 
     /**
-     * Gets a checked value of a radio
-     * @return List<String>
-     */
-    @JDIAction("Get '{name}' checked values")
-    public List<String> checked() {
-        return asList(selected());
-    }
-
-    /**
-     * Gets an enabled value of a radio
+     * Gets a list an enabled values of a radio
      * @return List<String>
      */
     @JDIAction("Get '{name}' enabled values")
@@ -115,7 +107,7 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
     }
 
     /**
-     * Gets a disabled value of a radio
+     * Gets a list a disabled values of a radio
      * @return List<String>
      */
     @JDIAction("Get '{name}' disabled values")
