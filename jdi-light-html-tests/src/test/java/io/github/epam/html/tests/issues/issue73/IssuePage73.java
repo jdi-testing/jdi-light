@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.issue.issue73;
+package io.github.epam.html.tests.issues.issue73;
 
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.composite.WebPage;

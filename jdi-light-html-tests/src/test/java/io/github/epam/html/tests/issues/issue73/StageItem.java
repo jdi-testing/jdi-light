@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.issue.issue73;
+package io.github.epam.html.tests.issues.issue73;
 
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;

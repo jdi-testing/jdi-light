@@ -7,6 +7,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.ListAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
@@ -23,6 +24,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -248,7 +250,7 @@ public class JList<T extends BaseUIElement> extends JDIBase
     }
     private T getNewInstance(WebElement element) {
         try {
-            T instance = (T) initClass.newInstance();
+            T instance = create(initClass);
             instance.setWebElement(element).setName(getName());
             instance.setTypeName(typeName);
             instance.setParent(parent);

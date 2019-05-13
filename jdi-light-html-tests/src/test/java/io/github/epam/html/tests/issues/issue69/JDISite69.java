@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.issue.issue69;
+package io.github.epam.html.tests.issues.issue69;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;

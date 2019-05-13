@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.init.PageFactory.initElement;
@@ -61,10 +62,10 @@ public class InitActions {
 
     public static JFunc1<SiteInfo, Object> SETUP_PAGE_OBJECT_ON_SITE = info -> {
         try {
-            info.instance = info.field.getType().newInstance();
+            info.instance = create(info.field.getType());
         } catch (Exception ignore) {
             try {
-                info.instance = info.field.getType().getDeclaredConstructor(WebDriver.class).newInstance(getDriver());
+                info.instance = create(info.field.getType(),getDriver());
             } catch (Exception ex) {
                 throw exception("Can't initialize Page Object '%s'. Exception: %s", info.field.getName(), ex.getMessage());
             }
@@ -152,7 +153,7 @@ public class InitActions {
     }
     public static <T> T initSection(SiteInfo info) {
         try {
-            return (T) info.fieldType().newInstance();
+            return (T) create(info.fieldType());
         } catch (Exception ex) {
             throw exception("Can't instantiate Section field '%s' on page '%s'", info.field.getName(), info.parentName());
         }

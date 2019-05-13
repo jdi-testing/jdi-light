@@ -22,9 +22,11 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
@@ -32,6 +34,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.addPage;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
 import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.reflect.Modifier.isStatic;
@@ -136,7 +139,7 @@ public class PageFactory {
         String ruleName = "";
         try {
             if (!info.field.getType().isInterface())
-                info.instance = info.field.getType().newInstance();
+                info.instance = create(info.field.getType());
             else {
                 for (Pair<String, InitRule> rule : INIT_RULES) {
                     ruleName = rule.key;
@@ -198,11 +201,10 @@ public class PageFactory {
         T page;
         useDriver(() -> driver);
         try {
-            Constructor<T> constructor = pageClassToProxy.getConstructor(new Class[]{WebDriver.class});
-            page = constructor.newInstance(new Object[]{driver});
+            page = create(pageClassToProxy,driver);
         } catch (Exception ignore) {
             try {
-                page = pageClassToProxy.newInstance();
+                page = create(pageClassToProxy);
             } catch (Exception ex) { throw exception(pageClassToProxy + " class should has constructor with WebDriver parameter"); }
         }
         initElements(page);
