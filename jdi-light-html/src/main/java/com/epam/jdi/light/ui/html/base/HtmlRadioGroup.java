@@ -80,10 +80,6 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
     public List<String> innerValues() {
         return map(labels(), HtmlElement::innerText);
     }
-    @JDIAction("Get '{name}' checked values")
-    public List<String> checked() {
-        return asList(selected());
-    }
 
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {

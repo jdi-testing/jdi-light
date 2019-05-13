@@ -1,11 +1,11 @@
-package io.github.epam.html.tests.issue.issue70.test;
+package io.github.epam.html.tests.issues.issue70.test;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.html.PageFactory;
-import io.github.epam.html.tests.issue.issue70.po.DashboardPage;
+import io.github.epam.html.tests.issues.issue70.po.DashboardPage;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -16,7 +16,6 @@ import static com.epam.jdi.light.logger.LogLevels.INFO;
 public class TestJDIList {
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite() {
-        WebSettings.logger.setLogLevel(INFO);
         PageFactory.initElements(TestJDIList.class);
     }
 
