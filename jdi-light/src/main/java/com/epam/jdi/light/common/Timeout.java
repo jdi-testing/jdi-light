@@ -5,7 +5,7 @@ import com.epam.jdi.tools.Safe;
 import static com.epam.jdi.light.common.Exceptions.exception;
 
 public class Timeout {
-    private static int DEFAULT;
+    private int DEFAULT;
     private Safe<Integer> current = new Safe<>(DEFAULT);
     private Safe<Integer> freeze = new Safe<>(0);
 

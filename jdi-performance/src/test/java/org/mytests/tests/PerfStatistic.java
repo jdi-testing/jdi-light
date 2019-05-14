@@ -67,4 +67,7 @@ public class PerfStatistic {
             System.out.println(format("%s:[%s]", stat.getKey(),
                     print(select(stat.getValue(), v -> v+""))));
     }
+    public static int actionsCount() {
+        return Statistic().stats.size();
+    }
 }

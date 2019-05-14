@@ -9,8 +9,11 @@ import org.testng.annotations.BeforeSuite;
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
+import static com.epam.jdi.light.settings.TimeoutSettings.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.ui.html.PageFactory.initElements;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.mytests.tests.PerfStatistic.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
 
@@ -20,6 +23,10 @@ public class SimpleTestsInit {
     public static void setUp() {
         logger.setLogLevel(STEP);
         initElements(SiteJdi.class);
+
+        assertThat(TIMEOUT.get(), is(5));
+        assertThat(PAGE_TIMEOUT.get(), is(25));
+
         BEFORE_JDI_ACTION = jp -> {
             BEFORE_STEP_ACTION.execute(jp);
             processNewPage(jp);
@@ -35,11 +42,12 @@ public class SimpleTestsInit {
 
     @AfterSuite(alwaysRun = true)
     public void teardown() {
-        System.out.println("Min:" + minTime());
-        System.out.println("Min Action:" + minAction());
-        System.out.println("Max:" + maxTime());
-        System.out.println("Max Action:" + maxAction());
-        System.out.println("Average:" + averageTime());
+        System.out.println("Min: " + minTime() + "ms");
+        System.out.println("Min Action: " + minAction());
+        System.out.println("Max: " + maxTime() + "ms");
+        System.out.println("Max Action: " + maxAction());
+        System.out.println("Average: " + averageTime() + "ms");
+        System.out.println("Actions Count: " + actionsCount());
         System.out.println("=== Statistic ===");
         printStatistic();
         killAllSeleniumDrivers();
