@@ -14,7 +14,6 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static java.util.Arrays.asList;
 import static org.openqa.selenium.By.cssSelector;
 
 public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButtons, IHasSelectAssert {
@@ -124,9 +123,6 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
         return selected();
     }
 
-    public SelectAssert is() {
-        return new SelectAssert(this);
-    }
     public SelectAssert assertThat() {
         return is();
     }

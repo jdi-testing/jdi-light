@@ -14,4 +14,10 @@ public interface IHasSelectAssert {
     default SelectAssert has() {
         return is();
     }
+    default SelectAssert waitFor() {
+        return is();
+    }
+    default SelectAssert shouldBe() {
+        return is();
+    }
 }

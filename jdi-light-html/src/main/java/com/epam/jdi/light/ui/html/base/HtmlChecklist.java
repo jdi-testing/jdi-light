@@ -217,9 +217,6 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
         return selected();
     }
 
-    public SelectAssert is() {
-        return new SelectAssert(this);
-    }
     public SelectAssert assertThat() {
         return is();
     }
@@ -232,5 +229,4 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
     public SelectAssert shouldBe() {
         return is();
     }
-
 }

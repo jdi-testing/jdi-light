@@ -20,5 +20,4 @@ public interface BaseSelector extends BaseElement, SetValue, IHasSelectAssert {
     List<String> listEnabled();
     List<String> listDisabled();
 
-    SelectAssert is();
 }
