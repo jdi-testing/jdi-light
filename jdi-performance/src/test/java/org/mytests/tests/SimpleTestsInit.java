@@ -1,26 +1,47 @@
 package org.mytests.tests;
 
+import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.Timer;
 import org.mytests.uiobjects.example.site.SiteJdi;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.ui.html.PageFactory.initElements;
+import static org.mytests.tests.PerfStatistic.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
 
 public class SimpleTestsInit {
+    public static Safe<Timer> TIMER = new Safe<>(null);
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         logger.setLogLevel(STEP);
         initElements(SiteJdi.class);
+        BEFORE_JDI_ACTION = jp -> {
+            BEFORE_STEP_ACTION.execute(jp);
+            processNewPage(jp);
+            TIMER.set(new Timer());
+        };
+        AFTER_JDI_ACTION = (jp, result) -> {
+            addStatistic(jp.getSignature().getName(), TIMER.get().timePassedInMSec());
+            return AFTER_STEP_ACTION.execute(jp, result);
+        };
         homePage.open();
         logger.info("Run Tests");
     }
 
     @AfterSuite(alwaysRun = true)
     public void teardown() {
+        System.out.println("Min:" + minTime());
+        System.out.println("Min Action:" + minAction());
+        System.out.println("Max:" + maxTime());
+        System.out.println("Max Action:" + maxAction());
+        System.out.println("Average:" + averageTime());
+        System.out.println("=== Statistic ===");
+        printStatistic();
         killAllSeleniumDrivers();
     }
 }

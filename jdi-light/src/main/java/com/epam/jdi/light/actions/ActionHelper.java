@@ -129,7 +129,7 @@ public class ActionHelper {
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
 
-    private static void processNewPage(JoinPoint joinPoint) {
+    public static void processNewPage(JoinPoint joinPoint) {
         getWindows();
         Object element = joinPoint.getThis();
         if (element != null) { // TODO support static pages
