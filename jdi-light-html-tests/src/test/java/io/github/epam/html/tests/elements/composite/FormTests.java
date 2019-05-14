@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.composite;
 
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
@@ -14,6 +15,8 @@ import static io.github.com.pages.ContactFormPage.main;
 import static io.github.com.pages.Header.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedOut;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static pseudo.site.PseudoSite.pseudoHeader;
 import static pseudo.site.pages.Header.*;
 
@@ -27,6 +30,12 @@ public class FormTests extends TestsInit {
         softAssert.assertNotNull(pseudoLoginFormLight);
         softAssert.assertNotNull(pseudoLoginForm);
         softAssert.assertNotNull(pseudoLoginFormSmart);
+        softAssert.assertNotNull(pseudoLoginForm.userName);
+        softAssert.assertNotNull(pseudoLoginForm.userPassword);
+        softAssert.assertNotNull(pseudoLoginForm.loginButton);
+        softAssert.assertNotNull(pseudoLoginFormSmart.userName);
+        softAssert.assertNotNull(pseudoLoginFormSmart.userPassword);
+        softAssert.assertNotNull(pseudoLoginFormSmart.loginButton);
 
         //2 Assert elements' locators are correct
         softAssert.assertEquals(pseudoLoginFormLight.locator.toString(), "");
@@ -58,7 +67,15 @@ public class FormTests extends TestsInit {
         softAssert.assertEquals(((HtmlElement) pseudoLoginFormSmart.userPassword).name, "User Password");
         softAssert.assertEquals(((HtmlElement) pseudoLoginFormSmart.loginButton).name, "Login Button");
 
-        //5 Collect assertions results
+        //5
+        checkInitializedElement((JDIBase) pseudoLoginForm.getFindByWebElement(), "css='#some-id'", pseudoLoginForm, "Find By Web Element");
+
+        //6
+        checkInitializedElement((JDIBase) pseudoLoginForm.getFindByWebElementList(), "css='.some-list-class'", pseudoLoginForm, "Find By Web Element List");
+
+        //7
+        checkInitializedElement(pseudoLoginForm.getFindByUIElement(), "css='.some-class'", pseudoLoginForm, "Find By UI Element");
+
         softAssert.assertAll();
     }
 
@@ -176,5 +193,12 @@ public class FormTests extends TestsInit {
         main.contactForm.fill(DEFAULT_CONTACT);
         main.contactForm.submit();
         main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    private void checkInitializedElement(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+        assertNotNull(htmlElementToCheck);
+        assertEquals(htmlElementToCheck.locator.toString(), expectedLocator);
+        assertEquals(htmlElementToCheck.parent, expectedParent);
+        assertEquals(htmlElementToCheck.name, expectedName);
     }
 }
