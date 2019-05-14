@@ -5,6 +5,7 @@
         <packages>
             <package name="io.github.epam.html.tests.elements.simple"/>
             <package name="io.github.epam.html.tests.elements.complex"/>
+            <package name="io.github.epam.html.tests.elements.composite"/>
             <package name="io.github.epam.html.tests.site"/>
         </packages>
     </test>
