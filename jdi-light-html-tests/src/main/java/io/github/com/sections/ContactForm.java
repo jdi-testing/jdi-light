@@ -21,4 +21,6 @@ public class ContactForm extends Form<Contacts> {
 	TextArea description;
 
 	@UI("['Submit']") public Button submit;
+	@UI("['Submit']")
+	public Button custom;
 }

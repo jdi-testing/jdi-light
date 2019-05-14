@@ -18,19 +18,28 @@ public class States {
         if (userName.isHidden())
             login();
     }
+
     @Step
     public static void login() {
-        userIcon.click();
+        if (loginForm.isHidden()) {
+            userIcon.click();
+        }
         loginForm.submit(DEFAULT_USER);
     }
+
     @Step
     public static void shouldBeLoggedOut() {
+        if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
+            homePage.open();
         if (userName.isDisplayed())
             logout();
     }
+
     @Step
     public static void logout() {
-        userIcon.click();
+        if (!logout.isDisplayed()) {
+            userIcon.click();
+        }
         logout.click();
     }
 }
