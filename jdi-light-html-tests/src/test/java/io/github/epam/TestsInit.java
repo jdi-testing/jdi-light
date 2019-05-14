@@ -5,6 +5,7 @@ import com.epam.jdi.light.driver.WebDriverUtils;
 import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
@@ -19,6 +20,7 @@ public class TestsInit {
         logger.setLogLevel(INFO);
         SMART_SEARCH_LOCATORS.add("[ui=%s]");
         initElements(StaticSite.class);
+        initElements(PseudoSite.class);
         homePage.open();
         logger.toLog("Run Tests");
     }
