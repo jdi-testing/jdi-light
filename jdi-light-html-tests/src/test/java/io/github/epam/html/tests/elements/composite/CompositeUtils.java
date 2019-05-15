@@ -6,7 +6,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 public class CompositeUtils {
-    public static void checkInitializedElement(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public static void checkInitializedElement(JDIBase htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         assertNotNull(htmlElementToCheck);
         assertEquals(htmlElementToCheck.locator.toString(), expectedLocator);
         assertEquals(htmlElementToCheck.parent, expectedParent);
