@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.elements.composite;
 
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.ui.html.base.HtmlElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.FormDataProvider;
@@ -13,19 +12,27 @@ import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.*;
 import static io.github.com.pages.ContactFormPage.main;
 import static io.github.com.pages.Header.*;
+import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedOut;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
 import static pseudo.site.PseudoSite.pseudoHeader;
-import static pseudo.site.pages.Header.*;
-import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
+import static pseudo.site.pages.Header.pseudoFormLight;
 
 public class FormTests extends TestsInit {
 
     @Test(dataProvider = "formDataProvider", dataProviderClass = FormDataProvider.class)
     public void formInitializationTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
+    }
+
+    @Test(dataProvider = "smartFormDataProvider", dataProviderClass = FormDataProvider.class)
+    public void smartFormInitializationTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+        checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
+    }
+
+    @Test
+    public void lightFormInitializationTest() {
+        checkInitializedElement(pseudoFormLight, "", pseudoHeader, "Pseudo Form Light");
     }
 
     @Test

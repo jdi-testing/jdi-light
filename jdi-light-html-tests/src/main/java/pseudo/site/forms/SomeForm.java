@@ -14,130 +14,75 @@ import pseudo.site.entities.User;
 import java.util.List;
 
 public class SomeForm extends Form<User> {
-    @FindBy(css = "#fbPublicStaticWebElement-id")
-    public static WebElement fbPublicStaticWebElement;
-    @FindBy(css = ".fbPublicStaticWebElementList-class")
-    public static List<WebElement> fbPublicStaticWebElementList;
-    @FindBy(css = "#fbPublicStaticUIElement-id")
-    public static UIElement fbPublicStaticUIElement;
-    @FindBy(css = ".fbPublicStaticUIElementList-class")
-    public static List<UIElement> fbPublicStaticUIElementList;
-    @FindBy(css = "#fbPublicStaticButton-id")
-    public static Button fbPublicStaticButton;
-    @FindBy(css = ".fbPublicStaticButtonList-class")
-    public static List<Button> fbPublicStaticButtonList;
-    @FindBy(css = ".fbPublicStaticWebList-class")
-    public static WebList fbPublicStaticWebList;
-    @JDropdown(root = "div[ui=publicStaticDropList]", value = "input", list = "li", expand = ".expand")
-    public static Droplist publicStaticDropList;
-    @FindBy(css = "#fbStaticWebElement-id")
-    static WebElement fbStaticWebElement;
-    @FindBy(css = ".fbStaticWebElementList-class")
-    static List<WebElement> fbStaticWebElementList;
-    @FindBy(css = "#fbStaticUIElement-id")
-    static UIElement fbStaticUIElement;
-    @FindBy(css = ".fbStaticUIElementList-class")
-    static List<UIElement> fbStaticUIElementList;
-    @FindBy(css = "#fbStaticButton-id")
-    static Button fbStaticButton;
-    @FindBy(css = ".fbStaticButtonList-class")
-    static List<Button> fbStaticButtonList;
-    @FindBy(css = ".fbStaticWebList-class")
-    static WebList fbStaticWebList;
-    @JDropdown(root = "div[ui=staticDropList]", value = "input", list = "li", expand = ".expand")
-    static Droplist staticDropList;
-    @FindBy(css = "#fbPrivateStaticWebElement-id")
-    private static WebElement fbPrivateStaticWebElement;
-    @FindBy(css = ".fbPrivateStaticWebElementList-class")
-    private static List<WebElement> fbPrivateStaticWebElementList;
-    @FindBy(css = "#fbPrivateStaticUIElement-id")
-    private static UIElement fbPrivateStaticUIElement;
-    @FindBy(css = ".fbPrivateStaticUIElementList-class")
-    private static List<UIElement> fbPrivateStaticUIElementList;
-    @FindBy(css = "#fbPrivateStaticButton-id")
-    private static Button fbPrivateStaticButton;
-    @FindBy(css = ".fbPrivateStaticButtonList-class")
-    private static List<Button> fbPrivateStaticButtonList;
-    @FindBy(css = ".fbPrivateStaticWebList-class")
-    private static WebList fbPrivateStaticWebList;
-    @JDropdown(root = "div[ui=privateStaticDropList]", value = "input", list = "li", expand = ".expand")
-    private static Droplist privateStaticDropList;
-    @FindBy(css = "#fbPublicWebElement-id")
-    public WebElement fbPublicWebElement;
-    @UI("#uiPublicWebElement-id")
-    public WebElement uiPublicWebElement;
-    @FindBy(css = ".fbPublicWebElementList-class")
-    public List<WebElement> fbPublicWebElementList;
-    @UI(".uiPublicWebElementList-class")
-    public List<WebElement> uiPublicWebElementList;
-    @FindBy(css = "#fbPublicUIElement-id")
-    public UIElement fbPublicUIElement;
-    @UI("#uiPublicUIElement-id")
-    public UIElement uiPublicUIElement;
-    @FindBy(css = ".fbPublicUIElementList-class")
-    public List<UIElement> fbPublicUIElementList;
-    @UI(".uiPublicUIElementList-class")
-    public List<UIElement> uiPublicUIElementList;
-    @FindBy(css = "#fbPublicButton-id")
-    public Button fbPublicButton;
-    @UI("#uiPublicButton-id")
-    public Button uiPublicButton;
-    @FindBy(css = ".fbPublicButtonList-class")
-    public List<Button> fbPublicButtonList;
-    @UI(".uiPublicButtonList-class")
-    public List<Button> uiPublicButtonList;
-    @FindBy(css = ".fbPublicWebList-class")
-    public WebList fbPublicWebList;
-    @UI(".uiPublicWebList-class")
-    public WebList uiPublicWebList;
-    @JDropdown(root = "div[ui=publicDropList]", value = "input", list = "li", expand = ".expand")
-    public Droplist publicDropList;
-    @FindBy(css = "#fbWebElement-id")
-    WebElement fbWebElement;
-    @UI("#uiWebElement-id")
-    WebElement uiWebElement;
-    @FindBy(css = ".fbWebElementList-class")
-    List<WebElement> fbWebElementList;
-    @UI(".uiWebElementList-class")
-    List<WebElement> uiWebElementList;
-    @FindBy(css = "#fbUIElement-id")
-    UIElement fbUIElement;
-    @UI("#uiUIElement-id")
-    UIElement uiUIElement;
-    @FindBy(css = ".fbUIElementList-class")
-    List<UIElement> fbUIElementList;
-    @UI(".uiUIElementList-class")
-    List<UIElement> uiUIElementList;
-    @FindBy(css = "#fbButton-id")
-    Button fbButton;
-    @UI("#uiButton-id")
-    Button uiButton;
-    @FindBy(css = ".fbButtonList-class")
-    List<Button> fbButtonList;
-    @UI(".uiButtonList-class")
-    List<Button> uiButtonList;
-    @FindBy(css = ".fbWebList-class")
-    WebList fbWebList;
-    @UI(".uiWebList-class")
-    WebList uiWebList;
-    @JDropdown(root = "div[ui=dropList]", value = "input", list = "li", expand = ".expand")
-    Droplist dropList;
-    @FindBy(css = "#fbPrivateWebElement-id")
-    private WebElement fbPrivateWebElement;
-    @FindBy(css = ".fbPrivateWebElementList-class")
-    private List<WebElement> fbPrivateWebElementList;
-    @FindBy(css = "#fbPrivateUIElement-id")
-    private UIElement fbPrivateUIElement;
-    @FindBy(css = ".fbPrivateUIElementList-class")
-    private List<UIElement> fbPrivateUIElementList;
-    @FindBy(css = "#fbPrivateButton-id")
-    private Button fbPrivateButton;
-    @FindBy(css = ".fbPrivateButtonList-class")
-    private List<Button> fbPrivateButtonList;
-    @FindBy(css = ".fbPrivateWebList-class")
-    private WebList fbPrivateWebList;
-    @JDropdown(root = "div[ui=privateDropList]", value = "input", list = "li", expand = ".expand")
-    private Droplist privateDropList;
+    @FindBy(css = "#fbWebElement-id") WebElement fbWebElement;
+    @FindBy(css = "#fbPublicWebElement-id") public WebElement fbPublicWebElement;
+    @FindBy(css = "#fbPrivateWebElement-id") private WebElement fbPrivateWebElement;
+    @FindBy(css = "#fbStaticWebElement-id") static WebElement fbStaticWebElement;
+    @FindBy(css = "#fbPublicStaticWebElement-id") public static WebElement fbPublicStaticWebElement;
+    @FindBy(css = "#fbPrivateStaticWebElement-id") private static WebElement fbPrivateStaticWebElement;
+    @UI("#uiWebElement-id") WebElement uiWebElement;
+    @UI("#uiPublicWebElement-id") public WebElement uiPublicWebElement;
+
+    @FindBy(css = ".fbWebElementList-class") List<WebElement> fbWebElementList;
+    @FindBy(css = ".fbPublicWebElementList-class") public List<WebElement> fbPublicWebElementList;
+    @FindBy(css = ".fbPrivateWebElementList-class") private List<WebElement> fbPrivateWebElementList;
+    @FindBy(css = ".fbStaticWebElementList-class") static List<WebElement> fbStaticWebElementList;
+    @FindBy(css = ".fbPublicStaticWebElementList-class") public static List<WebElement> fbPublicStaticWebElementList;
+    @FindBy(css = ".fbPrivateStaticWebElementList-class") private static List<WebElement> fbPrivateStaticWebElementList;
+    @UI(".uiWebElementList-class") List<WebElement> uiWebElementList;
+    @UI(".uiPublicWebElementList-class") public List<WebElement> uiPublicWebElementList;
+
+    @FindBy(css = "#fbUIElement-id") UIElement fbUIElement;
+    @FindBy(css = "#fbPublicUIElement-id") public UIElement fbPublicUIElement;
+    @FindBy(css = "#fbPrivateUIElement-id") private UIElement fbPrivateUIElement;
+    @FindBy(css = "#fbStaticUIElement-id") static UIElement fbStaticUIElement;
+    @FindBy(css = "#fbPublicStaticUIElement-id") public static UIElement fbPublicStaticUIElement;
+    @FindBy(css = "#fbPrivateStaticUIElement-id") private static UIElement fbPrivateStaticUIElement;
+    @UI("#uiUIElement-id") UIElement uiUIElement;
+    @UI("#uiPublicUIElement-id") public UIElement uiPublicUIElement;
+
+    @FindBy(css = ".fbUIElementList-class") List<UIElement> fbUIElementList;
+    @FindBy(css = ".fbPublicUIElementList-class") public List<UIElement> fbPublicUIElementList;
+    @FindBy(css = ".fbPrivateUIElementList-class") private List<UIElement> fbPrivateUIElementList;
+    @FindBy(css = ".fbStaticUIElementList-class") static List<UIElement> fbStaticUIElementList;
+    @FindBy(css = ".fbPublicStaticUIElementList-class") public static List<UIElement> fbPublicStaticUIElementList;
+    @FindBy(css = ".fbPrivateStaticUIElementList-class") private static List<UIElement> fbPrivateStaticUIElementList;
+    @UI(".uiUIElementList-class") List<UIElement> uiUIElementList;
+    @UI(".uiPublicUIElementList-class") public List<UIElement> uiPublicUIElementList;
+
+    @FindBy(css = "#fbButton-id") Button fbButton;
+    @FindBy(css = "#fbPublicButton-id") public Button fbPublicButton;
+    @FindBy(css = "#fbPrivateButton-id") private Button fbPrivateButton;
+    @FindBy(css = "#fbStaticButton-id") static Button fbStaticButton;
+    @FindBy(css = "#fbPublicStaticButton-id") public static Button fbPublicStaticButton;
+    @FindBy(css = "#fbPrivateStaticButton-id") private static Button fbPrivateStaticButton;
+    @UI("#uiButton-id") Button uiButton;
+    @UI("#uiPublicButton-id") public Button uiPublicButton;
+
+    @FindBy(css = ".fbButtonList-class") List<Button> fbButtonList;
+    @FindBy(css = ".fbPublicButtonList-class") public List<Button> fbPublicButtonList;
+    @FindBy(css = ".fbPrivateButtonList-class") private List<Button> fbPrivateButtonList;
+    @FindBy(css = ".fbStaticButtonList-class") static List<Button> fbStaticButtonList;
+    @FindBy(css = ".fbPublicStaticButtonList-class") public static List<Button> fbPublicStaticButtonList;
+    @FindBy(css = ".fbPrivateStaticButtonList-class") private static List<Button> fbPrivateStaticButtonList;
+    @UI(".uiButtonList-class") List<Button> uiButtonList;
+    @UI(".uiPublicButtonList-class") public List<Button> uiPublicButtonList;
+
+    @FindBy(css = ".fbWebList-class") WebList fbWebList;
+    @FindBy(css = ".fbPublicWebList-class") public WebList fbPublicWebList;
+    @FindBy(css = ".fbPrivateWebList-class") private WebList fbPrivateWebList;
+    @FindBy(css = ".fbStaticWebList-class") static WebList fbStaticWebList;
+    @FindBy(css = ".fbPublicStaticWebList-class") public static WebList fbPublicStaticWebList;
+    @FindBy(css = ".fbPrivateStaticWebList-class") private static WebList fbPrivateStaticWebList;
+    @UI(".uiWebList-class") WebList uiWebList;
+    @UI(".uiPublicWebList-class") public WebList uiPublicWebList;
+
+    @JDropdown(root = "div[ui=dropList]", value = "input", list = "li", expand = ".expand") Droplist dropList;
+    @JDropdown(root = "div[ui=publicDropList]", value = "input", list = "li", expand = ".expand") public Droplist publicDropList;
+    @JDropdown(root = "div[ui=privateDropList]", value = "input", list = "li", expand = ".expand") private Droplist privateDropList;
+    @JDropdown(root = "div[ui=staticDropList]", value = "input", list = "li", expand = ".expand") static Droplist staticDropList;
+    @JDropdown(root = "div[ui=publicStaticDropList]", value = "input", list = "li", expand = ".expand") public static Droplist publicStaticDropList;
+    @JDropdown(root = "div[ui=privateStaticDropList]", value = "input", list = "li", expand = ".expand") private static Droplist privateStaticDropList;
 
     public static WebElement getFbStaticWebElement() {
         return fbStaticWebElement;
