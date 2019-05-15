@@ -150,4 +150,123 @@ public class FormTests extends TestsInit {
         main.contactForm.submit();
         main.contactForm.check(DEFAULT_CONTACT);
     }
+
+    @Test
+    public void pressButtonTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.fill(DEFAULT_CONTACT);
+        main.contactForm.pressButton("custom");
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void sendTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.fill(DEFAULT_CONTACT);
+        main.contactForm.send();
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void sendEntityTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.send(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void addEntityTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.add(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void publishTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.publish(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void saveTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.save(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void updateTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.update(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void cancelTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.cancel(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void closeTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.close(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void backTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.back(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void selectTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.select(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void nextTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.next(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void searchTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.search(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
 }
