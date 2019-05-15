@@ -5,6 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.FormDataProvider;
 
+import static com.epam.jdi.light.common.FormFilters.ALL;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.contactFormPage;
@@ -15,6 +16,7 @@ import static io.github.com.pages.Header.*;
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedOut;
+import static org.testng.Assert.assertEquals;
 import static pseudo.site.PseudoSite.pseudoHeader;
 import static pseudo.site.pages.Header.pseudoFormLight;
 
@@ -101,7 +103,7 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.submit(defaultContactName);
+        main.contactForm.submit(defaultName);
         main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
     }
 
@@ -128,7 +130,7 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.submit(defaultContactName, "custom");
+        main.contactForm.submit(defaultName, "custom");
         main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
     }
 
@@ -138,7 +140,7 @@ public class FormTests extends TestsInit {
         contactFormPage.shouldBeOpened();
         refresh();
         TIMEOUT.set(1);
-        main.contactForm.submit(defaultContactName, "nonExistent");
+        main.contactForm.submit(defaultName, "nonExistent");
     }
 
     @Test
@@ -268,5 +270,25 @@ public class FormTests extends TestsInit {
         refresh();
         main.contactForm.search(DEFAULT_CONTACT);
         main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void onlyMandatoryTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.onlyMandatory().fill(DEFAULT_CONTACT);
+        main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
+        assertEquals(main.contactForm.getFilter(), ALL);
+    }
+
+    @Test
+    public void onlyOptionalTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.onlyOptional().fill(DEFAULT_CONTACT);
+        main.contactForm.check(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
+        assertEquals(main.contactForm.getFilter(), ALL);
     }
 }
