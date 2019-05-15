@@ -1,17 +1,16 @@
 package io.github.epam.html.tests.elements.composite;
 
+import com.epam.jdi.light.elements.base.JDIBase;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
+import pseudo.site.dataproviders.FormDataProvider;
 
-import static org.testng.Assert.assertNotNull;
-import static pseudo.site.pages.Header.*;
+import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 
 public class FormTests extends TestsInit {
 
-    @Test
-    public void formInitializationTest() {
-        assertNotNull(pseudoLoginFormLight);
-        assertNotNull(pseudoLoginForm);
-        assertNotNull(pseudoLoginFormSmart);
+    @Test(dataProvider = "formDataProvider", dataProviderClass = FormDataProvider.class)
+    public void formInitializationTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+        checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 }
