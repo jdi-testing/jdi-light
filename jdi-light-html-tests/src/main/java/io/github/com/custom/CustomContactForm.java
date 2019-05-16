@@ -12,8 +12,8 @@ import com.epam.jdi.light.ui.html.complex.Dropdown;
 import io.github.com.entities.Contacts;
 
 public class CustomContactForm extends Form<Contacts> {
-    @Mandatory @FirstTokenCapitalisation TextField lastName;
-    TextField name, position, passportNumber, passportSeria;
+    @Mandatory @FirstTokenCapitalisation TextField name;
+    TextField lastName, position, passportNumber, passportSeria;
 
     Dropdown gender;
     Combobox religion;

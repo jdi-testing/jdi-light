@@ -116,7 +116,7 @@ public class FormTests extends TestsInit {
         contactFormPage.shouldBeOpened();
         refresh();
         main.contactForm.submit(defaultName);
-        main.contactForm.check(ONLY_LAST_NAME_FILLED_DEFAULT_CONTACT);
+        main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
     }
 
     @Test
@@ -143,7 +143,7 @@ public class FormTests extends TestsInit {
         contactFormPage.shouldBeOpened();
         refresh();
         main.contactForm.submit(defaultName, "custom");
-        main.contactForm.check(ONLY_LAST_NAME_FILLED_DEFAULT_CONTACT);
+        main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
     }
 
     @Test(expectedExceptions = RuntimeException.class)
@@ -290,7 +290,7 @@ public class FormTests extends TestsInit {
         contactFormPage.shouldBeOpened();
         refresh();
         main.customContactForm.onlyMandatory().fill(DEFAULT_CONTACT);
-        main.customContactForm.check(ONLY_LAST_NAME_FILLED_DEFAULT_CONTACT);
+        main.customContactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
         assertEquals(main.customContactForm.getFilter(), ALL);
     }
 
@@ -300,7 +300,7 @@ public class FormTests extends TestsInit {
         contactFormPage.shouldBeOpened();
         refresh();
         main.customContactForm.onlyOptional().fill(DEFAULT_CONTACT);
-        main.customContactForm.check(ALL_EXCEPT_LAST_NAME_FILLED_DEFAULT_CONTACT);
+        main.customContactForm.check(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
         assertEquals(main.customContactForm.getFilter(), ALL);
     }
 
@@ -327,7 +327,7 @@ public class FormTests extends TestsInit {
         };
         try {
             Form.FILL_ACTION = newFillActionLambda;
-            main.customContactForm.fill(LOWER_CASE_LAST_NAME_CONTACT);
+            main.customContactForm.fill(LOWER_CASE_NAME_CONTACT);
             main.customContactForm.check(DEFAULT_CONTACT);
         } finally {
             Form.FILL_ACTION = initialFillActionLambda;
@@ -357,7 +357,7 @@ public class FormTests extends TestsInit {
         };
         try {
             Form.GET_ACTION = newGetActionLambda;
-            main.customContactForm.fill(LOWER_CASE_LAST_NAME_CONTACT);
+            main.customContactForm.fill(LOWER_CASE_NAME_CONTACT);
             main.customContactForm.check(DEFAULT_CONTACT);
         } finally {
             Form.GET_ACTION = initialGetActionLambda;

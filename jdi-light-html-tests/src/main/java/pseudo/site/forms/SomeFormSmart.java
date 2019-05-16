@@ -13,135 +13,30 @@ public class SomeFormSmart extends Form<User> {
     WebElement fbWebElement;
     public WebElement fbPublicWebElement;
     private WebElement fbPrivateWebElement;
-    static WebElement fbStaticWebElement;
-    public static WebElement fbPublicStaticWebElement;
-    private static WebElement fbPrivateStaticWebElement;
 
     List<WebElement> fbWebElementList;
     public List<WebElement> fbPublicWebElementList;
     private List<WebElement> fbPrivateWebElementList;
-    static List<WebElement> fbStaticWebElementList;
-    public static List<WebElement> fbPublicStaticWebElementList;
-    private static List<WebElement> fbPrivateStaticWebElementList;
 
     UIElement fbUIElement;
     public UIElement fbPublicUIElement;
     private UIElement fbPrivateUIElement;
-    static UIElement fbStaticUIElement;
-    public static UIElement fbPublicStaticUIElement;
-    private static UIElement fbPrivateStaticUIElement;
 
     List<UIElement> fbUIElementList;
     public List<UIElement> fbPublicUIElementList;
     private List<UIElement> fbPrivateUIElementList;
-    static List<UIElement> fbStaticUIElementList;
-    public static List<UIElement> fbPublicStaticUIElementList;
-    private static List<UIElement> fbPrivateStaticUIElementList;
 
     Button fbButton;
     public Button fbPublicButton;
     private Button fbPrivateButton;
-    static Button fbStaticButton;
-    public static Button fbPublicStaticButton;
-    private static Button fbPrivateStaticButton;
 
     List<Button> fbButtonList;
     public List<Button> fbPublicButtonList;
     private List<Button> fbPrivateButtonList;
-    static List<Button> fbStaticButtonList;
-    public static List<Button> fbPublicStaticButtonList;
-    private static List<Button> fbPrivateStaticButtonList;
 
     WebList fbWebList;
     public WebList fbPublicWebList;
     private WebList fbPrivateWebList;
-    static WebList fbStaticWebList;
-    public static WebList fbPublicStaticWebList;
-    private static WebList fbPrivateStaticWebList;
-
-    public static WebElement getFbStaticWebElement() {
-        return fbStaticWebElement;
-    }
-
-    public static WebElement getFbPublicStaticWebElement() {
-        return fbPublicStaticWebElement;
-    }
-
-    public static WebElement getFbPrivateStaticWebElement() {
-        return fbPrivateStaticWebElement;
-    }
-
-    public static List<WebElement> getFbStaticWebElementList() {
-        return fbStaticWebElementList;
-    }
-
-    public static List<WebElement> getFbPublicStaticWebElementList() {
-        return fbPublicStaticWebElementList;
-    }
-
-    public static List<WebElement> getFbPrivateStaticWebElementList() {
-        return fbPrivateStaticWebElementList;
-    }
-
-    public static UIElement getFbStaticUIElement() {
-        return fbStaticUIElement;
-    }
-
-    public static UIElement getFbPublicStaticUIElement() {
-        return fbPublicStaticUIElement;
-    }
-
-    public static UIElement getFbPrivateStaticUIElement() {
-        return fbPrivateStaticUIElement;
-    }
-
-    public static List<UIElement> getFbStaticUIElementList() {
-        return fbStaticUIElementList;
-    }
-
-    public static List<UIElement> getFbPublicStaticUIElementList() {
-        return fbPublicStaticUIElementList;
-    }
-
-    public static List<UIElement> getFbPrivateStaticUIElementList() {
-        return fbPrivateStaticUIElementList;
-    }
-
-    public static Button getFbStaticButton() {
-        return fbStaticButton;
-    }
-
-    public static Button getFbPublicStaticButton() {
-        return fbPublicStaticButton;
-    }
-
-    public static Button getFbPrivateStaticButton() {
-        return fbPrivateStaticButton;
-    }
-
-    public static List<Button> getFbStaticButtonList() {
-        return fbStaticButtonList;
-    }
-
-    public static List<Button> getFbPublicStaticButtonList() {
-        return fbPublicStaticButtonList;
-    }
-
-    public static List<Button> getFbPrivateStaticButtonList() {
-        return fbPrivateStaticButtonList;
-    }
-
-    public static WebList getFbStaticWebList() {
-        return fbStaticWebList;
-    }
-
-    public static WebList getFbPublicStaticWebList() {
-        return fbPublicStaticWebList;
-    }
-
-    public static WebList getFbPrivateStaticWebList() {
-        return fbPrivateStaticWebList;
-    }
 
     public WebElement getFbWebElement() {
         return fbWebElement;
