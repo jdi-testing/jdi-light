@@ -20,12 +20,6 @@ public class SomeSection extends Section {
     public WebElement webElementPublic;
     @FindBy(id = "webElementPrivate")
     private WebElement webElementPrivate;
-    @FindBy(id = "webElementPackageStatic")
-    static WebElement webElementPackageStatic;
-    @FindBy(id = "webElementPublicStatic")
-    public static WebElement webElementPublicStatic;
-    @FindBy(id = "webElementPrivateStatic")
-    private static WebElement webElementPrivateStatic;
     @UI(".webElementPackageUI")
     WebElement webElementPackageUI;
     @UI(".webElementPublicUI")
@@ -38,12 +32,6 @@ public class SomeSection extends Section {
     public List<WebElement> listWebElementPublic;
     @FindBy(id = "listWebElementPrivate")
     private List<WebElement> listWebElementPrivate;
-    @FindBy(id = "listWebElementPackageStatic")
-    static List<WebElement> listWebElementPackageStatic;
-    @FindBy(id = "listWebElementPublicStatic")
-    public static List<WebElement> listWebElementPublicStatic;
-    @FindBy(id = "listWebElementPrivateStatic")
-    private static List<WebElement> listWebElementPrivateStatic;
     @UI(".listWebElementPackageUI")
     List<WebElement> listWebElementPackageUI;
     @UI(".listWebElementPublicUI")
@@ -56,12 +44,6 @@ public class SomeSection extends Section {
     public UIElement uielementPublic;
     @FindBy(id = "uielementPrivate")
     private UIElement uielementPrivate;
-    @FindBy(id = "uielementPackageStatic")
-    static UIElement uielementPackageStatic;
-    @FindBy(id = "uielementPublicStatic")
-    public static UIElement uielementPublicStatic;
-    @FindBy(id = "uielementPrivateStatic")
-    private static UIElement uielementPrivateStatic;
     @UI(".uielementPackageUI")
     UIElement uielementPackageUI;
     @UI(".uielementPublicUI")
@@ -74,12 +56,6 @@ public class SomeSection extends Section {
     public Button buttonPublic;
     @FindBy(id = "buttonPrivate")
     private Button buttonPrivate;
-    @FindBy(id = "buttonPackageStatic")
-    static Button buttonPackageStatic;
-    @FindBy(id = "buttonPublicStatic")
-    public static Button buttonPublicStatic;
-    @FindBy(id = "buttonPrivateStatic")
-    private static Button buttonPrivateStatic;
     @UI(".buttonPackageUI")
     Button buttonPackageUI;
     @UI(".buttonPublicUI")
@@ -92,12 +68,6 @@ public class SomeSection extends Section {
     public List<UIElement> listUIElementPublic;
     @FindBy(id = "listUIElementPrivate")
     private List<UIElement> listUIElementPrivate;
-    @FindBy(id = "listUIElementPackageStatic")
-    static List<UIElement> listUIElementPackageStatic;
-    @FindBy(id = "listUIElementPublicStatic")
-    public static List<UIElement> listUIElementPublicStatic;
-    @FindBy(id = "listUIElementPrivateStatic")
-    private static List<UIElement> listUIElementPrivateStatic;
     @UI(".listUIElementPackageUI")
     List<UIElement> listUIElementPackageUI;
     @UI(".listUIElementPublicUI")
@@ -110,12 +80,6 @@ public class SomeSection extends Section {
     public List<Button> listButtonPublic;
     @FindBy(id = "listButtonPrivate")
     private List<Button> listButtonPrivate;
-    @FindBy(id = "listButtonPackageStatic")
-    static List<Button> listButtonPackageStatic;
-    @FindBy(id = "listButtonPublicStatic")
-    public static List<Button> listButtonPublicStatic;
-    @FindBy(id = "listButtonPrivateStatic")
-    private static List<Button> listButtonPrivateStatic;
     @UI(".listButtonPackageUI")
     List<Button> listButtonPackageUI;
     @UI(".listButtonPublicUI")
@@ -128,12 +92,6 @@ public class SomeSection extends Section {
     public WebList webListPublic;
     @FindBy(id = "webListPrivate")
     private WebList webListPrivate;
-    @FindBy(id = "webListPackageStatic")
-    static WebList webListPackageStatic;
-    @FindBy(id = "webListPublicStatic")
-    public static WebList webListPublicStatic;
-    @FindBy(id = "webListPrivateStatic")
-    private static WebList webListPrivateStatic;
     @UI(".webListPackageUI")
     WebList webListPackageUI;
     @UI(".webListPublicUI")
@@ -146,12 +104,6 @@ public class SomeSection extends Section {
     public UIList<SomeSection, ?> uilistQuestionPublic;
     @FindBy(id = "uilistQuestionPrivate")
     private UIList<SomeSection, ?> uilistQuestionPrivate;
-    @FindBy(id = "uilistQuestionPackageStatic")
-    static UIList<SomeSection, ?> uilistQuestionPackageStatic;
-    @FindBy(id = "uilistQuestionPublicStatic")
-    public static UIList<SomeSection, ?> uilistQuestionPublicStatic;
-    @FindBy(id = "uilistQuestionPrivateStatic")
-    private static UIList<SomeSection, ?> uilistQuestionPrivateStatic;
     @UI(".uilistQuestionPackageUI")
     UIList<SomeSection, ?> uilistQuestionPackageUI;
     @UI(".uilistQuestionPublicUI")
@@ -164,12 +116,6 @@ public class SomeSection extends Section {
     public UIList<SomeSection, SomeData> uilistSomedataPublic;
     @FindBy(id = "uilistSomedataPrivate")
     private UIList<SomeSection, SomeData> uilistSomedataPrivate;
-    @FindBy(id = "uilistSomedataPackageStatic")
-    static UIList<SomeSection, SomeData> uilistSomedataPackageStatic;
-    @FindBy(id = "uilistSomedataPublicStatic")
-    public static UIList<SomeSection, SomeData> uilistSomedataPublicStatic;
-    @FindBy(id = "uilistSomedataPrivateStatic")
-    private static UIList<SomeSection, SomeData> uilistSomedataPrivateStatic;
     @UI(".uilistSomedataPackageUI")
     UIList<SomeSection, SomeData> uilistSomedataPackageUI;
     @UI(".uilistSomedataPublicUI")
@@ -182,12 +128,6 @@ public class SomeSection extends Section {
     public Droplist droplistPublic;
     @JDropdown(root = "div[ui=droplistPrivate", value = "input", list = "li", expand = ".expand")
     private Droplist droplistPrivate;
-    @JDropdown(root = "div[ui=droplistPackageStatic", value = "input", list = "li", expand = ".expand")
-    static Droplist droplistPackageStatic;
-    @JDropdown(root = "div[ui=droplistPublicStatic", value = "input", list = "li", expand = ".expand")
-    public static Droplist droplistPublicStatic;
-    @JDropdown(root = "div[ui=droplistPrivateStatic", value = "input", list = "li", expand = ".expand")
-    private static Droplist droplistPrivateStatic;
     @UI(".droplistPackageUI")
     Droplist droplistPackageUI;
     @UI(".droplistPublicUI")
@@ -208,22 +148,6 @@ public class SomeSection extends Section {
 
     public void setWebElementPrivate(WebElement webElementPrivate) {
         this.webElementPrivate = webElementPrivate;
-    }
-
-    public static WebElement getWebElementPackageStatic() {
-        return webElementPackageStatic;
-    }
-
-    public static void setWebElementPackageStatic(WebElement webElementPackageStatic) {
-        SomeSection.webElementPackageStatic = webElementPackageStatic;
-    }
-
-    public static WebElement getWebElementPrivateStatic() {
-        return webElementPrivateStatic;
-    }
-
-    public static void setWebElementPrivateStatic(WebElement webElementPrivateStatic) {
-        SomeSection.webElementPrivateStatic = webElementPrivateStatic;
     }
 
     public WebElement getWebElementPackageUI() {
@@ -250,21 +174,6 @@ public class SomeSection extends Section {
         this.listWebElementPrivate = listWebElementPrivate;
     }
 
-    public static List<WebElement> getListWebElementPackageStatic() {
-        return listWebElementPackageStatic;
-    }
-
-    public static void setListWebElementPackageStatic(List<WebElement> listWebElementPackageStatic) {
-        SomeSection.listWebElementPackageStatic = listWebElementPackageStatic;
-    }
-
-    public static List<WebElement> getListWebElementPrivateStatic() {
-        return listWebElementPrivateStatic;
-    }
-
-    public static void setListWebElementPrivateStatic(List<WebElement> listWebElementPrivateStatic) {
-        SomeSection.listWebElementPrivateStatic = listWebElementPrivateStatic;
-    }
 
     public List<WebElement> getListWebElementPackageUI() {
         return listWebElementPackageUI;
@@ -290,21 +199,6 @@ public class SomeSection extends Section {
         this.uielementPrivate = uielementPrivate;
     }
 
-    public static UIElement getUielementPackageStatic() {
-        return uielementPackageStatic;
-    }
-
-    public static void setUielementPackageStatic(UIElement uielementPackageStatic) {
-        SomeSection.uielementPackageStatic = uielementPackageStatic;
-    }
-
-    public static UIElement getUielementPrivateStatic() {
-        return uielementPrivateStatic;
-    }
-
-    public static void setUielementPrivateStatic(UIElement uielementPrivateStatic) {
-        SomeSection.uielementPrivateStatic = uielementPrivateStatic;
-    }
 
     public UIElement getUielementPackageUI() {
         return uielementPackageUI;
@@ -328,22 +222,6 @@ public class SomeSection extends Section {
 
     public void setButtonPrivate(Button buttonPrivate) {
         this.buttonPrivate = buttonPrivate;
-    }
-
-    public static Button getButtonPackageStatic() {
-        return buttonPackageStatic;
-    }
-
-    public static void setButtonPackageStatic(Button buttonPackageStatic) {
-        SomeSection.buttonPackageStatic = buttonPackageStatic;
-    }
-
-    public static Button getButtonPrivateStatic() {
-        return buttonPrivateStatic;
-    }
-
-    public static void setButtonPrivateStatic(Button buttonPrivateStatic) {
-        SomeSection.buttonPrivateStatic = buttonPrivateStatic;
     }
 
     public Button getButtonPackageUI() {
@@ -370,22 +248,6 @@ public class SomeSection extends Section {
         this.listUIElementPrivate = listUIElementPrivate;
     }
 
-    public static List<UIElement> getListUIElementPackageStatic() {
-        return listUIElementPackageStatic;
-    }
-
-    public static void setListUIElementPackageStatic(List<UIElement> listUIElementPackageStatic) {
-        SomeSection.listUIElementPackageStatic = listUIElementPackageStatic;
-    }
-
-    public static List<UIElement> getListUIElementPrivateStatic() {
-        return listUIElementPrivateStatic;
-    }
-
-    public static void setListUIElementPrivateStatic(List<UIElement> listUIElementPrivateStatic) {
-        SomeSection.listUIElementPrivateStatic = listUIElementPrivateStatic;
-    }
-
     public List<UIElement> getListUIElementPackageUI() {
         return listUIElementPackageUI;
     }
@@ -408,22 +270,6 @@ public class SomeSection extends Section {
 
     public void setListButtonPrivate(List<Button> listButtonPrivate) {
         this.listButtonPrivate = listButtonPrivate;
-    }
-
-    public static List<Button> getListButtonPackageStatic() {
-        return listButtonPackageStatic;
-    }
-
-    public static void setListButtonPackageStatic(List<Button> listButtonPackageStatic) {
-        SomeSection.listButtonPackageStatic = listButtonPackageStatic;
-    }
-
-    public static List<Button> getListButtonPrivateStatic() {
-        return listButtonPrivateStatic;
-    }
-
-    public static void setListButtonPrivateStatic(List<Button> listButtonPrivateStatic) {
-        SomeSection.listButtonPrivateStatic = listButtonPrivateStatic;
     }
 
     public List<Button> getListButtonPackageUI() {
@@ -450,21 +296,6 @@ public class SomeSection extends Section {
         this.webListPrivate = webListPrivate;
     }
 
-    public static WebList getWebListPackageStatic() {
-        return webListPackageStatic;
-    }
-
-    public static void setWebListPackageStatic(WebList webListPackageStatic) {
-        SomeSection.webListPackageStatic = webListPackageStatic;
-    }
-
-    public static WebList getWebListPrivateStatic() {
-        return webListPrivateStatic;
-    }
-
-    public static void setWebListPrivateStatic(WebList webListPrivateStatic) {
-        SomeSection.webListPrivateStatic = webListPrivateStatic;
-    }
 
     public WebList getWebListPackageUI() {
         return webListPackageUI;
@@ -488,22 +319,6 @@ public class SomeSection extends Section {
 
     public void setUilistQuestionPrivate(UIList<SomeSection, ?> uilistQuestionPrivate) {
         this.uilistQuestionPrivate = uilistQuestionPrivate;
-    }
-
-    public static UIList<SomeSection, ?> getUilistQuestionPackageStatic() {
-        return uilistQuestionPackageStatic;
-    }
-
-    public static void setUilistQuestionPackageStatic(UIList<SomeSection, ?> uilistQuestionPackageStatic) {
-        SomeSection.uilistQuestionPackageStatic = uilistQuestionPackageStatic;
-    }
-
-    public static UIList<SomeSection, ?> getUilistQuestionPrivateStatic() {
-        return uilistQuestionPrivateStatic;
-    }
-
-    public static void setUilistQuestionPrivateStatic(UIList<SomeSection, ?> uilistQuestionPrivateStatic) {
-        SomeSection.uilistQuestionPrivateStatic = uilistQuestionPrivateStatic;
     }
 
     public UIList<SomeSection, ?> getUilistQuestionPackageUI() {
@@ -530,22 +345,6 @@ public class SomeSection extends Section {
         this.uilistSomedataPrivate = uilistSomedataPrivate;
     }
 
-    public static UIList<SomeSection, SomeData> getUilistSomedataPackageStatic() {
-        return uilistSomedataPackageStatic;
-    }
-
-    public static void setUilistSomedataPackageStatic(UIList<SomeSection, SomeData> uilistSomedataPackageStatic) {
-        SomeSection.uilistSomedataPackageStatic = uilistSomedataPackageStatic;
-    }
-
-    public static UIList<SomeSection, SomeData> getUilistSomedataPrivateStatic() {
-        return uilistSomedataPrivateStatic;
-    }
-
-    public static void setUilistSomedataPrivateStatic(UIList<SomeSection, SomeData> uilistSomedataPrivateStatic) {
-        SomeSection.uilistSomedataPrivateStatic = uilistSomedataPrivateStatic;
-    }
-
     public UIList<SomeSection, SomeData> getUilistSomedataPackageUI() {
         return uilistSomedataPackageUI;
     }
@@ -568,22 +367,6 @@ public class SomeSection extends Section {
 
     public void setDroplistPrivate(Droplist droplistPrivate) {
         this.droplistPrivate = droplistPrivate;
-    }
-
-    public static Droplist getDroplistPackageStatic() {
-        return droplistPackageStatic;
-    }
-
-    public static void setDroplistPackageStatic(Droplist droplistPackageStatic) {
-        SomeSection.droplistPackageStatic = droplistPackageStatic;
-    }
-
-    public static Droplist getDroplistPrivateStatic() {
-        return droplistPrivateStatic;
-    }
-
-    public static void setDroplistPrivateStatic(Droplist droplistPrivateStatic) {
-        SomeSection.droplistPrivateStatic = droplistPrivateStatic;
     }
 
     public Droplist getDroplistPackageUI() {

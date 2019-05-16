@@ -14,18 +14,4 @@ public class PseudoSite {
     @UI(".extendedSectionUI")
     public static ExtendedSection extendedSectionUI;
     public static ExtendedSection extendedSection;
-    @UI(".someObjectUI")
-    public static SomeObject someObjectUI;
-    public static SomeObject someObject;
-    @UI(".extendedObjectUI")
-    public static ExtendedObject extendedObjectUI;
-    public static ExtendedObject extendedObject;
-    @Url("/somepage.html")
-    @Title("Some Page")
-    public static SomePage somePageUrlTitle;
-    @Url("/somepage.html")
-    public static SomePage somePageUrl;
-    @Title("Some Page")
-    public static SomePage somePageTitle;
-    public static SomePage somePage;
 }
