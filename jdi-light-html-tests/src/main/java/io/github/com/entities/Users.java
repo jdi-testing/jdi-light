@@ -13,8 +13,9 @@ public class Users {
     public static final String defaultAcceptConditions = "true";
     public static final String defaultGender = "Female";
     public static final String defaultReligion = "Other";
+    public static final String lowerCaseLastName = defaultLastName.toLowerCase();
 
-    public static Contacts DEFAULT_CONTACT = new Contacts().set(c-> {
+    public static Contacts DEFAULT_CONTACT = new Contacts().set(c -> {
         c.name = defaultName;
         c.lastName = defaultLastName;
         c.position = defaultPosition;
@@ -27,10 +28,22 @@ public class Users {
         c.religion = defaultReligion;
     });
 
-    public static Contacts ONLY_NAME_FILLED_DEFAULT_CONTACT = new Contacts().set(c -> c.name = defaultName);
+    public static Contacts LOWER_CASE_LAST_NAME_CONTACT = new Contacts().set(c -> {
+        c.name = defaultName;
+        c.lastName = lowerCaseLastName;
+        c.position = defaultPosition;
+        c.passportNumber = defaultPassportNumber;
+        c.passportSeria = defaultPassportSeria;
+        c.description = defaultDescription;
+        c.acceptConditions = defaultAcceptConditions;
+        c.gender = defaultGender;
+        c.religion = defaultReligion;
+    });
 
-    public static Contacts ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT = new Contacts().set(c-> {
-        c.lastName = defaultLastName;
+    public static Contacts ONLY_LAST_NAME_FILLED_DEFAULT_CONTACT = new Contacts().set(c -> c.lastName = defaultLastName);
+
+    public static Contacts ALL_EXCEPT_LAST_NAME_FILLED_DEFAULT_CONTACT = new Contacts().set(c -> {
+        c.name = defaultName;
         c.position = defaultPosition;
         //c.passport = true;
         c.passportNumber = defaultPassportNumber;

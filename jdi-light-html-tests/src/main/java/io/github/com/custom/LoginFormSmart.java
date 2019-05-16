@@ -1,4 +1,4 @@
-package io.github.com.sections;
+package io.github.com.custom;
 
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.ui.html.common.Button;

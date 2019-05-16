@@ -6,9 +6,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.ui.html.common.Button;
 import com.epam.jdi.light.ui.html.common.Icon;
 import com.epam.jdi.light.ui.html.common.Image;
+import io.github.com.custom.LoginFormSmart;
 import io.github.com.entities.User;
 import io.github.com.sections.LoginForm;
-import io.github.com.sections.LoginFormSmart;
 
 public class Header extends Section {
 	//@Css("form")
@@ -19,5 +19,4 @@ public class Header extends Section {
 	public static Image epamLogo;
 	public static Icon userIcon;
 	public static Icon userName;
-
 }

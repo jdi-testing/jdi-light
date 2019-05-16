@@ -1,13 +1,25 @@
 package io.github.epam.html.tests.elements.composite;
 
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.light.ui.html.annotations.FillValue;
+import com.epam.jdi.light.ui.html.annotations.VerifyValue;
+import com.epam.jdi.tools.func.JAction4;
+import com.epam.jdi.tools.func.JFunc3;
+import io.github.com.custom.FirstTokenCapitalisation;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.FormDataProvider;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 import static com.epam.jdi.light.common.FormFilters.ALL;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.tools.LinqUtils.first;
 import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.*;
@@ -104,7 +116,7 @@ public class FormTests extends TestsInit {
         contactFormPage.shouldBeOpened();
         refresh();
         main.contactForm.submit(defaultName);
-        main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
+        main.contactForm.check(ONLY_LAST_NAME_FILLED_DEFAULT_CONTACT);
     }
 
     @Test
@@ -122,7 +134,7 @@ public class FormTests extends TestsInit {
         contactFormPage.shouldBeOpened();
         refresh();
         TIMEOUT.set(1);
-        main.contactForm.submit(DEFAULT_CONTACT, "nonExistent");
+        main.customContactForm.submit(DEFAULT_CONTACT, "nonExistent");
     }
 
     @Test
@@ -131,7 +143,7 @@ public class FormTests extends TestsInit {
         contactFormPage.shouldBeOpened();
         refresh();
         main.contactForm.submit(defaultName, "custom");
-        main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
+        main.contactForm.check(ONLY_LAST_NAME_FILLED_DEFAULT_CONTACT);
     }
 
     @Test(expectedExceptions = RuntimeException.class)
@@ -140,7 +152,7 @@ public class FormTests extends TestsInit {
         contactFormPage.shouldBeOpened();
         refresh();
         TIMEOUT.set(1);
-        main.contactForm.submit(defaultName, "nonExistent");
+        main.customContactForm.submit(defaultName, "nonExistent");
     }
 
     @Test
@@ -158,9 +170,9 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.fill(DEFAULT_CONTACT);
-        main.contactForm.pressButton("custom");
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.fill(DEFAULT_CONTACT);
+        main.customContactForm.pressButton("custom");
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -168,9 +180,9 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.fill(DEFAULT_CONTACT);
-        main.contactForm.send();
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.fill(DEFAULT_CONTACT);
+        main.customContactForm.send();
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -178,8 +190,8 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.send(DEFAULT_CONTACT);
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.send(DEFAULT_CONTACT);
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -187,8 +199,8 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.add(DEFAULT_CONTACT);
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.add(DEFAULT_CONTACT);
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -196,8 +208,8 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.publish(DEFAULT_CONTACT);
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.publish(DEFAULT_CONTACT);
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -205,8 +217,8 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.save(DEFAULT_CONTACT);
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.save(DEFAULT_CONTACT);
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -214,8 +226,8 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.update(DEFAULT_CONTACT);
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.update(DEFAULT_CONTACT);
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -223,8 +235,8 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.cancel(DEFAULT_CONTACT);
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.cancel(DEFAULT_CONTACT);
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -232,8 +244,8 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.close(DEFAULT_CONTACT);
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.close(DEFAULT_CONTACT);
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -241,8 +253,8 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.back(DEFAULT_CONTACT);
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.back(DEFAULT_CONTACT);
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -250,8 +262,8 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.select(DEFAULT_CONTACT);
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.select(DEFAULT_CONTACT);
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -259,8 +271,8 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.next(DEFAULT_CONTACT);
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.next(DEFAULT_CONTACT);
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -268,8 +280,8 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.search(DEFAULT_CONTACT);
-        main.contactForm.check(DEFAULT_CONTACT);
+        main.customContactForm.search(DEFAULT_CONTACT);
+        main.customContactForm.check(DEFAULT_CONTACT);
     }
 
     @Test
@@ -277,9 +289,9 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.onlyMandatory().fill(DEFAULT_CONTACT);
-        main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
-        assertEquals(main.contactForm.getFilter(), ALL);
+        main.customContactForm.onlyMandatory().fill(DEFAULT_CONTACT);
+        main.customContactForm.check(ONLY_LAST_NAME_FILLED_DEFAULT_CONTACT);
+        assertEquals(main.customContactForm.getFilter(), ALL);
     }
 
     @Test
@@ -287,8 +299,68 @@ public class FormTests extends TestsInit {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         refresh();
-        main.contactForm.onlyOptional().fill(DEFAULT_CONTACT);
-        main.contactForm.check(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
-        assertEquals(main.contactForm.getFilter(), ALL);
+        main.customContactForm.onlyOptional().fill(DEFAULT_CONTACT);
+        main.customContactForm.check(ALL_EXCEPT_LAST_NAME_FILLED_DEFAULT_CONTACT);
+        assertEquals(main.customContactForm.getFilter(), ALL);
+    }
+
+    @Test
+    public void modifiedLambdaFillActionTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        JAction4<Field, Object, Object, String> initialFillActionLambda = Form.FILL_ACTION;
+        JAction4<Field, Object, Object, String> newFillActionLambda = (field, element, parent, setValue) -> {
+            if (field != null) {
+                Method[] methods = field.getType().getDeclaredMethods();
+                Method setMethod = first(methods, m -> m.isAnnotationPresent(FillValue.class));
+                if (setMethod != null) {
+                    if (field.isAnnotationPresent(FirstTokenCapitalisation.class)) {
+                        setMethod.invoke(element, (setValue.substring(0, 1).toUpperCase() + setValue.substring(1)));
+                    } else {
+                        setMethod.invoke(element, setValue);
+                    }
+                    return;
+                }
+            }
+            ((SetValue) element).setValue(setValue);
+        };
+        try {
+            Form.FILL_ACTION = newFillActionLambda;
+            main.customContactForm.fill(LOWER_CASE_LAST_NAME_CONTACT);
+            main.customContactForm.check(DEFAULT_CONTACT);
+        } finally {
+            Form.FILL_ACTION = initialFillActionLambda;
+        }
+    }
+
+    @Test
+    public void modifiedLambdaGetActionTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        JFunc3<Field, Object, Object, String> initialGetActionLambda = Form.GET_ACTION;
+        JFunc3<Field, Object, Object, String> newGetActionLambda = (field, element, parent) -> {
+            if (field != null) {
+                Method[] methods = field.getType().getDeclaredMethods();
+                Method getMethod = first(methods, m -> m.isAnnotationPresent(VerifyValue.class));
+                if (getMethod != null) {
+                    if (field.isAnnotationPresent(FirstTokenCapitalisation.class)) {
+                        String getValue = getMethod.invoke(element).toString();
+                        return (getValue.substring(0, 1).toUpperCase() + getValue.substring(1));
+                    } else {
+                        return getMethod.invoke(element).toString();
+                    }
+                }
+            }
+            return ((HasValue) element).getValue().trim();
+        };
+        try {
+            Form.GET_ACTION = newGetActionLambda;
+            main.customContactForm.fill(LOWER_CASE_LAST_NAME_CONTACT);
+            main.customContactForm.check(DEFAULT_CONTACT);
+        } finally {
+            Form.GET_ACTION = initialGetActionLambda;
+        }
     }
 }
