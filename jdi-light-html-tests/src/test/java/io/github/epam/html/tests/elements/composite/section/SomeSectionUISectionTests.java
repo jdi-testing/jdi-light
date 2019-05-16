@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.elements.composite.Section;
+package io.github.epam.html.tests.elements.composite.section;
 
 import com.epam.jdi.light.elements.base.JDIBase;
 import io.github.epam.TestsInit;
