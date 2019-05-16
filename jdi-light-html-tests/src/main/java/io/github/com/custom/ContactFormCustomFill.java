@@ -1,7 +1,6 @@
 package io.github.com.custom;
 
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.ui.html.common.Button;
 import com.epam.jdi.light.ui.html.common.Checkbox;
@@ -11,8 +10,10 @@ import com.epam.jdi.light.ui.html.complex.Combobox;
 import com.epam.jdi.light.ui.html.complex.Dropdown;
 import io.github.com.entities.Contacts;
 
-public class CustomContactForm extends Form<Contacts> {
-    @Mandatory @FirstTokenCapitalisation TextField name;
+import java.lang.reflect.Field;
+
+public class ContactFormCustomFill extends Form<Contacts> {
+    @FirstTokenCapitalisation TextField name;
     TextField lastName, position, passportNumber, passportSeria;
 
     Dropdown gender;
@@ -22,16 +23,12 @@ public class CustomContactForm extends Form<Contacts> {
     TextArea description;
 
     @UI("['Submit']") public Button submit;
-    @UI("['Submit']") public Button custom;
-    @UI("['Submit']") public Button send;
-    @UI("['Submit']") public Button add;
-    @UI("['Submit']") public Button publish;
-    @UI("['Submit']") public Button save;
-    @UI("['Submit']") public Button update;
-    @UI("['Submit']") public Button cancel;
-    @UI("['Submit']") public Button close;
-    @UI("['Submit']") public Button back;
-    @UI("['Submit']") public Button select;
-    @UI("['Submit']") public Button next;
-    @UI("['Submit']") public Button search;
+
+    @Override
+    public void fillAction(Field field, Object element, Object parent, String setValue) {
+        if (field.isAnnotationPresent(FirstTokenCapitalisation.class)) {
+            setValue = setValue.substring(0, 1).toUpperCase() + setValue.substring(1);
+        }
+        super.fillAction(field, element, parent, setValue);
+    }
 }
