@@ -20,7 +20,7 @@ public class WebPageDataProvider {
                 {pageWithBoth = new PageWithBoth(), "www.pagewithboth.com","Page with both"},
                 {pageWithoutBoth = new PageWithoutBoth(), "",""},
                 {pageWithTitle = new PageWithTitle(), "","Page with title"},
-                {pageWithURL = new PageWithURL(), "www.pagewithboth.com",""}
+                {pageWithURL = new PageWithURL(), "www.pagewithurl.com",""}
         };
     }
 }
