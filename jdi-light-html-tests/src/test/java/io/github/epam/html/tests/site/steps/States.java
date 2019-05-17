@@ -3,6 +3,8 @@ package io.github.epam.html.tests.site.steps;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
+import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
@@ -41,5 +43,12 @@ public class States {
             userIcon.click();
         }
         logout.click();
+    }
+
+    @Step
+    public static void shouldContactPageBeOpenedAndRefreshed(){
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
     }
 }
