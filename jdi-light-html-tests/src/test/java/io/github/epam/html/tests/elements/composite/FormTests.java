@@ -15,6 +15,7 @@ import pseudo.site.dataproviders.FormDataProvider;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import static com.epam.jdi.light.common.FormFilters.ALL;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
@@ -29,6 +30,7 @@ import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkI
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedOut;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 import static pseudo.site.PseudoSite.pseudoHeader;
 import static pseudo.site.pages.Header.pseudoFormLight;
 
@@ -162,6 +164,37 @@ public class FormTests extends TestsInit {
         refresh();
         main.contactForm.fill(DEFAULT_CONTACT);
         main.contactForm.submit();
+        main.contactForm.check(DEFAULT_CONTACT);
+    }
+
+    @Test
+    public void formMethodVerifyPositiveTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.fill(DEFAULT_CONTACT);
+        List<String> verified = main.contactForm.verify(DEFAULT_CONTACT);
+        assertEquals(verified.size(), 0);
+    }
+
+    @Test
+    public void formMethodVerifyNegativeTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.fill(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
+        List<String> verified = main.contactForm.verify(DEFAULT_CONTACT);
+        assertEquals(verified.size(), 1);
+        assertTrue(verified.get(0).contains(defaultName));
+    }
+
+    @Test(expectedExceptions = RuntimeException.class)
+    public void formMethodCheckNegativeTest() {
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+        main.contactForm.fill(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
+        TIMEOUT.set(1);
         main.contactForm.check(DEFAULT_CONTACT);
     }
 
