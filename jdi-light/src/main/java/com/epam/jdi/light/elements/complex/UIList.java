@@ -164,7 +164,7 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     @JDIAction("Scroll to list elements")
     public void showAll() {
         if (!isClass(classType, Section.class))
-            throw exception("Show all can be executed only for List of Sections. Please add ' extend section' to your PageObject class in List");
+            throw exception("Show all can be executed only for List of Sections. Please add ' extend Section' to your PageObject class in List");
         int size;
         do {
             size = size();
