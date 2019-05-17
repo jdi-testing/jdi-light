@@ -6,7 +6,4 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 
 @Url("www.pagewithboth.com")
 @Title("Page with both")
-public class PageWithBoth extends WebPage {
-
-
-}
+public class PageWithBoth extends WebPage {}
