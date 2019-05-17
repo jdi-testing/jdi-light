@@ -1,7 +1,6 @@
-package pseudo.site.dataproviders.Section;
+package pseudo.site.dataproviders.section;
 
 import org.testng.annotations.DataProvider;
-import pseudo.site.section.ExtendedSection;
 
 import static pseudo.site.PseudoSite.extendedSectionUI;
 
