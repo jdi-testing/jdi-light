@@ -3,11 +3,11 @@ package io.github.epam.html.tests.elements.composite.section;
 import com.epam.jdi.light.elements.base.JDIBase;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
-import pseudo.site.dataproviders.Section.ExtendedSectionDataProvider;
+import pseudo.site.dataproviders.section.ExtendedSectionDataProvider;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 
-public class ExtendedSectionSectionTests extends TestsInit {
+public class ExtendedSectionTests extends TestsInit {
 
     @Test(dataProvider = "extendedSectionWebElementDataProvider", dataProviderClass = ExtendedSectionDataProvider.class)
     public void extendedSectionWebElementTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
