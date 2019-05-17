@@ -89,7 +89,7 @@ public class InitActions {
             info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class),
             InitActions::defaultSetup)),
-        $("section", sRule(info -> isClass(info.instance.getClass(), Section.class),
+        $("Section", sRule(info -> isClass(info.instance.getClass(), Section.class),
             InitActions::elementSetup)),
         $("PageObject", sRule(info -> isPageObject(info.instance.getClass()),
             PageFactory::initElements))
@@ -155,7 +155,7 @@ public class InitActions {
         try {
             return (T) create(info.fieldType());
         } catch (Exception ex) {
-            throw exception("Can't instantiate section field '%s' on page '%s'", info.field.getName(), info.parentName());
+            throw exception("Can't instantiate Section field '%s' on page '%s'", info.field.getName(), info.parentName());
         }
     }
     public static boolean isJDIField(Field field) {
