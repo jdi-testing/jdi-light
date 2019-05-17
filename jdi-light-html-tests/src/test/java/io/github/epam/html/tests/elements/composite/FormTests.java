@@ -25,9 +25,11 @@ import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.*;
 import static io.github.com.pages.ContactFormPage.main;
 import static io.github.com.pages.Header.*;
+import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedOut;
 import static io.github.epam.html.tests.site.steps.States.shouldContactPageBeOpenedAndRefreshed;
+import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static pseudo.site.PseudoSite.pseudoHeader;
@@ -104,6 +106,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactForm.submit(defaultName);
         main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -111,6 +114,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactForm.submit(DEFAULT_CONTACT);
         main.contactForm.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -132,6 +136,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactForm.submit(DEFAULT_CONTACT, "custom");
         main.contactForm.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test(expectedExceptions = RuntimeException.class)
@@ -147,6 +152,16 @@ public class FormTests extends TestsInit {
         main.contactForm.fill(DEFAULT_CONTACT);
         main.contactForm.submit();
         main.contactForm.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
+    }
+
+    @Test
+    public void pressButtonTest() {
+        shouldContactPageBeOpenedAndRefreshed();
+        main.contactFormCustom.fill(DEFAULT_CONTACT);
+        main.contactFormCustom.pressButton("custom");
+        main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -166,6 +181,14 @@ public class FormTests extends TestsInit {
         assertTrue(verified.get(0).contains(defaultName));
     }
 
+    @Test
+    public void checkMethodPositiveTest() {
+        shouldContactPageBeOpenedAndRefreshed();
+        main.contactForm.fill(DEFAULT_CONTACT);
+        main.contactForm.check(DEFAULT_CONTACT);
+        assertEquals(main.contactForm.verify(DEFAULT_CONTACT).size(), 0);
+    }
+
     @Test(expectedExceptions = RuntimeException.class)
     public void checkMethodNegativeTest() {
         shouldContactPageBeOpenedAndRefreshed();
@@ -175,19 +198,12 @@ public class FormTests extends TestsInit {
     }
 
     @Test
-    public void pressButtonTest() {
-        shouldContactPageBeOpenedAndRefreshed();
-        main.contactFormCustom.fill(DEFAULT_CONTACT);
-        main.contactFormCustom.pressButton("custom");
-        main.contactFormCustom.check(DEFAULT_CONTACT);
-    }
-
-    @Test
     public void sendMethodTest() {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.fill(DEFAULT_CONTACT);
         main.contactFormCustom.send();
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -195,6 +211,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.send(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -202,6 +219,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.add(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -209,6 +227,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.publish(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -216,6 +235,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.save(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -223,6 +243,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.update(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -230,6 +251,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.cancel(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -237,6 +259,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.close(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -244,6 +267,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.back(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -251,6 +275,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.select(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -258,6 +283,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.next(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -265,6 +291,7 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustom.search(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
+        checkContactFormSubmitted();
     }
 
     @Test
@@ -351,5 +378,10 @@ public class FormTests extends TestsInit {
         shouldContactPageBeOpenedAndRefreshed();
         main.contactFormCustomGet.fill(LOWER_CASE_NAME_CONTACT);
         main.contactFormCustomGet.check(DEFAULT_CONTACT);
+    }
+
+    private void checkContactFormSubmitted() {
+        lastLogEntry.assertThat()
+                .text(containsString("submit:button clicked"));
     }
 }
