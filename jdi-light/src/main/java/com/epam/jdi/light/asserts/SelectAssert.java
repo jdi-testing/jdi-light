@@ -15,7 +15,7 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class SelectAssert extends IsAssert {
+public class SelectAssert extends IsAssert<SelectAssert> {
     ISelector selector;
 
     public SelectAssert(ISelector selector) {

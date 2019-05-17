@@ -5,7 +5,6 @@ package com.epam.jdi.light.elements.base;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import org.openqa.selenium.By;
@@ -20,7 +19,6 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static java.lang.Thread.currentThread;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public abstract class BaseUIElement<T extends BaseUIElement>
         extends JDIBase implements WebElement, BaseFindElement<T>, SetValue {
@@ -50,10 +48,6 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     }
 
     //region WebElement Wrapper
-    @JDIAction("Click on '{name}'")
-    public void click() {
-        get().click();
-    }
     @JDIAction(level = DEBUG)
     public void submit() {
         get().submit();
@@ -109,8 +103,8 @@ public abstract class BaseUIElement<T extends BaseUIElement>
 
     public T label() {
         return newElement()
-            .setLocator(By.cssSelector("[for="+getAttribute("id")+"]"))
-            .setName(getName() + " label");
+                .setLocator(By.cssSelector("[for="+getAttribute("id")+"]"))
+                .setName(getName() + " label");
     }
 
     /**
@@ -125,15 +119,6 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     @JDIAction("Clear '{name}'")
     public void clear() {
         get().clear();
-    }
-    @JDIAction("Get '{name}' text")
-    public String getText() {
-        WebElement el = get();
-        String text = el.getText();
-        if (isNotBlank(text))
-            return text;
-        String value = el.getAttribute("value");
-        return isNotBlank(value) ? value : text;
     }
     @JDIAction("Get '{name}' text")
     public String getValueText() {
@@ -220,23 +205,5 @@ public abstract class BaseUIElement<T extends BaseUIElement>
      */
     public String value() { return getAttribute("value"); }
 
-    //endregion
-
-    //region Asserts
-    public IsAssert is() {
-        return new IsAssert(this);
-    }
-    public IsAssert assertThat() {
-        return is();
-    }
-    public IsAssert has() {
-        return is();
-    }
-    public IsAssert waitFor() {
-        return is();
-    }
-    public IsAssert shouldBe() {
-        return is();
-    }
     //endregion
 }

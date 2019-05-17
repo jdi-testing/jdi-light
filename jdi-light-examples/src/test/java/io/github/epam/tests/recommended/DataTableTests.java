@@ -9,8 +9,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.base.Alerts.validateAlert;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.PerformancePage.usersData;
-import static io.github.com.pages.PerformancePage.usersDataSetup;
+import static io.github.com.pages.PerformancePage.*;
 import static io.github.epam.test.data.TableData.GRADY_BROCK;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -31,6 +30,10 @@ public class DataTableTests extends StaticTestsInit {
     @Test
     public void jDataTableTest() {
         dataTableValidation(usersDataSetup);
+    }
+    @Test
+    public void customDataTableTest() {
+        dataTableValidation(customUsersDataSetup);
     }
     private void dataTableValidation(DataTable<UserRow, UserInfo> table) {
         assertEquals(table.size(), 4);

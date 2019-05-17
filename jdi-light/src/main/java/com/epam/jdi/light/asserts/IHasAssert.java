@@ -5,19 +5,19 @@ package com.epam.jdi.light.asserts;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public interface IHasSelectAssert {
+public interface IHasAssert<T> {
 
-    SelectAssert is();
-    default SelectAssert assertThat() {
+    T is();
+    default T assertThat() {
         return is();
     }
-    default SelectAssert has() {
+    default T has() {
         return is();
     }
-    default SelectAssert waitFor() {
+    default T waitFor() {
         return is();
     }
-    default SelectAssert shouldBe() {
+    default T shouldBe() {
         return is();
     }
 }
