@@ -207,7 +207,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
 
     //region matchers
     public ListAssert<UIElement> is() {
-        return new ListAssert<>(() -> { list.refresh(); return list; }, this, toError());
+        return new ListAssert<>(() -> { list.refresh(); return list; }, () -> { list.refresh(); return list; }, toError());
     }
     public ListAssert<UIElement> assertThat() {
         return is();

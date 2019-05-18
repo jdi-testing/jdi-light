@@ -17,8 +17,8 @@ import static org.hamcrest.Matchers.*;
 public class ListAssert<T extends BaseUIElement> extends SelectAssert {
     JFunc<List<T>> elements;
 
-    public ListAssert(JFunc<List<T>> elements, ISelector selector, String name) {
-        super(selector.setName(name));
+    public ListAssert(JFunc<List<T>> elements, JFunc<ISelector> selector, String name) {
+        super(() -> selector.execute().setName(name));
         this.elements = elements;
     }
 

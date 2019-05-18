@@ -257,7 +257,7 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
     }
 
     public SelectAssert is() {
-        return new SelectAssert(this);
+        return new SelectAssert(() -> this);
     }
     public SelectAssert assertThat() {
         return is();
