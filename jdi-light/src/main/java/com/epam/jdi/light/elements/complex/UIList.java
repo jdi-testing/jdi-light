@@ -183,9 +183,8 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
 
     @JDIAction("Assert that {name} data meet condition")
     public UIListAssert<T, E> is(Matcher<? super List<E>> condition) {
-        refresh();
         MatcherAssert.assertThat(asData(), condition);
-        return new UIListAssert<>(this, () -> { clear(); return asData(); }, toError(), failElement);
+        return is();
     }
     public UIListAssert<T, E> is() {
         return new UIListAssert<>(this, () -> { clear(); return asData(); }, toError(), failElement);

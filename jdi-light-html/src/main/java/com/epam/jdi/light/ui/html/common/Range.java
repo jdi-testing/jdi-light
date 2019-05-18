@@ -17,4 +17,7 @@ public interface Range extends BaseFindElement<HtmlElement>, HasLabel, SetValue 
 
     RangeAssert is();
     RangeAssert assertThat();
+    RangeAssert has();
+    RangeAssert waitFor();
+    RangeAssert shouldBe();
 }

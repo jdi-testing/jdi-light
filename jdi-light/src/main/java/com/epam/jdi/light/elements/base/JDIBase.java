@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.base;
 
+import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDILocator;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -37,6 +38,7 @@ import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -193,12 +195,12 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         By locator = bElement.getLocator();
         By frame = bElement.getFrame();
         SearchContext searchContext = frame != null
-            ? getFrameContext(frame)
-            : getContext(parent, bElement.locator);
+                ? getFrameContext(frame)
+                : getContext(parent, bElement.locator);
         //TODO rethink SMART SEARCH
         return locator != null
-            ? uiSearch(searchContext, correctLocator(locator)).get(0)
-            : isPageObject(bElement.getClass())
+                ? uiSearch(searchContext, correctLocator(locator)).get(0)
+                : isPageObject(bElement.getClass())
                 ? searchContext
                 : SMART_SEARCH.execute(bElement);
     }
@@ -235,8 +237,8 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     }
     public String printFullLocator() {
         return parent == null || isBlank(printContext())
-            ? locator.toString()
-            : printContext() + ">" + locator.toString();
+                ? locator.toString()
+                : printContext() + ">" + locator.toString();
     }
     private void initContext() {
         if (context == null)
@@ -254,11 +256,11 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         initContext();
         try {
             return Switch(logger.getLogLevel()).get(
-                Case(l -> l == INFO,
-                        l -> msgFormat(PRINT_ERROR_INFO, this)),
-                Case(l -> l == DEBUG,
-                        l -> msgFormat(PRINT_ERROR_DEBUG, this)),
-                Default(l -> msgFormat(PRINT_ERROR_STEP, this))
+                    Case(l -> l == INFO,
+                            l -> msgFormat(PRINT_ERROR_INFO, this)),
+                    Case(l -> l == DEBUG,
+                            l -> msgFormat(PRINT_ERROR_DEBUG, this)),
+                    Default(l -> msgFormat(PRINT_ERROR_STEP, this))
             );
         } catch (Exception ex) { throw exception("Can't print element for error: " + ex.getMessage()); }
     }
@@ -277,11 +279,11 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
             return printWebElement(element.webElement.get());
         return Switch(logger.getLogLevel()).get(
                 Case(l -> l == STEP,
-                    l -> msgFormat(PRINT_ELEMENT_STEP, element)),
+                        l -> msgFormat(PRINT_ELEMENT_STEP, element)),
                 Case(l -> l == INFO,
-                    l -> msgFormat(PRINT_ELEMENT_INFO, element)),
+                        l -> msgFormat(PRINT_ELEMENT_INFO, element)),
                 Case(l -> l == ERROR,
-                    l -> msgFormat(PRINT_ERROR_STEP, element)),
+                        l -> msgFormat(PRINT_ERROR_STEP, element)),
                 Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
         );
     };
@@ -294,9 +296,23 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         if (!select.getTagName().equals("select")) {
             List<WebElement> els = select.findElements(By.tagName("select"));
             if (els.size() > 0)
-            select = els.get(0);
+                select = els.get(0);
         }
         return new Select(select);
+    }
+    @JDIAction("Click on '{name}'")
+    public void click() {
+        get().click();
+    }
+
+    @JDIAction("Get '{name}' text")
+    public String getText() {
+        WebElement el = get();
+        String text = el.getText();
+        if (isNotBlank(text))
+            return text;
+        String value = el.getAttribute("value");
+        return isNotBlank(value) ? value : text;
     }
     @JDIAction(level = DEBUG)
     public Point getLocation() {
@@ -456,4 +472,21 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     }
     //endregion
 
+    //region Asserts
+    public IsAssert is() {
+        return new IsAssert(this);
+    }
+    public IsAssert assertThat() {
+        return is();
+    }
+    public IsAssert has() {
+        return is();
+    }
+    public IsAssert waitFor() {
+        return is();
+    }
+    public IsAssert shouldBe() {
+        return is();
+    }
+    //endregion
 }

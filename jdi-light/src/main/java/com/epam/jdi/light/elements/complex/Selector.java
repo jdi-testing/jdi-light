@@ -159,6 +159,6 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
     }
 
     public SelectAssert is() {
-        return new SelectAssert(this);
+        return new SelectAssert(() -> this);
     }
 }

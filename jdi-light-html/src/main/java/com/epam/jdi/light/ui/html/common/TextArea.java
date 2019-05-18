@@ -16,4 +16,7 @@ public interface TextArea extends TextField {
 
     TextAreaAssert is();
     TextAreaAssert assertThat();
+    TextAreaAssert has();
+    TextAreaAssert waitFor();
+    TextAreaAssert shouldBe();
 }

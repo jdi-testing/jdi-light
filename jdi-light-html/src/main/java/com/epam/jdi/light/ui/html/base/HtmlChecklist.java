@@ -1,6 +1,6 @@
 package com.epam.jdi.light.ui.html.base;
 
-import com.epam.jdi.light.asserts.IHasSelectAssert;
+import com.epam.jdi.light.asserts.IHasAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.Selector;
@@ -19,7 +19,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 import static org.openqa.selenium.By.cssSelector;
 
-public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, IHasSelectAssert {
+public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, IHasAssert<SelectAssert> {
     By checkbox = cssSelector("input[type=checkbox][id='%s']");
     By label = LABEL_LOCATOR;
     private String getId(String name) { return label(name).getAttribute("for"); }
