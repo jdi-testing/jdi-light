@@ -304,6 +304,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public void click() {
         get().click();
     }
+
     @JDIAction("Get '{name}' text")
     public String getText() {
         WebElement el = get();

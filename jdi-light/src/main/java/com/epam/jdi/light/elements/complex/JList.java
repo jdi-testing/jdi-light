@@ -205,8 +205,7 @@ public class JList<T extends BaseUIElement> extends JDIBase
 
     //region matchers
     public ListAssert<T> is() {
-        refresh();
-        return new ListAssert<>(this, this, toError());
+        return new ListAssert<>(() -> {refresh(); return this; }, this, toError());
     }
     public ListAssert<T> assertThat() {
         return is();

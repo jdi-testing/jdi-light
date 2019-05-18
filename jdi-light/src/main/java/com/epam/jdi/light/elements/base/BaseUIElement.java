@@ -19,6 +19,7 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static java.lang.Thread.currentThread;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public abstract class BaseUIElement<T extends BaseUIElement>
         extends JDIBase implements WebElement, BaseFindElement<T>, SetValue {
@@ -106,7 +107,8 @@ public abstract class BaseUIElement<T extends BaseUIElement>
                 .setLocator(By.cssSelector("[for="+getAttribute("id")+"]"))
                 .setName(getName() + " label");
     }
-
+    @Override
+    public String getText() { return super.getText(); }
     /**
      * Gets label text
      * @return String text
