@@ -41,6 +41,10 @@ public class JList<T extends BaseUIElement> extends JDIBase
         this.elements.setForce(toJList(elements));
     }
 
+    /**
+     * @param minAmount
+     * @return List
+     */
     @JDIAction(level = DEBUG)
     public List<T> elements(int minAmount) {
         if (elements.hasValue() && isActual() && elements.get().size() >= minAmount)
@@ -53,6 +57,9 @@ public class JList<T extends BaseUIElement> extends JDIBase
 
     private String NO_ELEMENTS_FOUND = "Can't select '%s'. No elements with this name found";
 
+    /**
+     * @param value
+     */
     @JDIAction(level = DEBUG)
     public T get(String value) {
         if (getLocator().toString().contains("%s")) {
@@ -72,6 +79,9 @@ public class JList<T extends BaseUIElement> extends JDIBase
         return get(getEnumValue(name));
     }
 
+    /**
+     * @param index
+     */
     @JDIAction(level = DEBUG)
     public T get(int index) {
         if (index < 0)
@@ -90,15 +100,29 @@ public class JList<T extends BaseUIElement> extends JDIBase
         return elements(index).get(index).setName(format("%s[%s]", getName(), index));
     }
 
+    /**
+     * Select the item by the value
+     * @param value
+     */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
         get(value).click();
     }
+
+    /**
+     * Select the items by the names
+     * @param names
+     */
     @JDIAction("Select ({0}) for '{name}'")
     public void select(String... names) {
         for (String value : names)
             select(value);
     }
+
+    /**
+     * Select the items by the values, hover and click on them
+     * @param values
+     */
     @JDIAction("Select ({0}) for '{name}'")
     public void hoverAndClick(String... values) {
         if (ArrayUtils.isEmpty(values))
@@ -109,6 +133,11 @@ public class JList<T extends BaseUIElement> extends JDIBase
         }
         get(values[length-1]).click();
     }
+
+    /**
+     * Select the items by the values, hover and click on them
+     * @param values
+     */
     @JDIAction("Select ({0}) for '{name}'")
     public void hoverAndClick(String values) {
         String[] split = values.split(">");
@@ -119,31 +148,58 @@ public class JList<T extends BaseUIElement> extends JDIBase
     public <TEnum extends Enum> void select(TEnum value) {
         select(getEnumValue(value));
     }
+
+    /**
+     * Select the items by the names
+     * @param names
+     */
     @JDIAction("Select ({0}) for '{name}'")
     public <TEnum extends Enum> void select(TEnum... names) {
         for (TEnum value : names)
             select(value);
     }
+
+    /**
+     * Select the item by the index
+     * @param index
+     */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
         get(index).click();
     }
+
+    /**
+     * Select the items by the indexes
+     * @param indexes
+     */
     @JDIAction("Select ({0}) for '{name}'")
     public void select(int... indexes) {
         for (int index : indexes)
             select(index);
     }
+
+    /**
+     * Get the selected element value
+     * @return String
+     */
     @JDIAction("Get '{name}' selected value")
     public String selected() {
         refresh();
         T first = logger.logOff(() -> first(BaseUIElement::isSelected) );
         return first != null ? first.getText() : "";
     }
+
+    /**
+     * Refresh the element
+     */
     @JDIAction(level = DEBUG)
     public void refresh() {
         elements.clear();
     }
 
+    /**
+     * Clear the element
+     */
     @JDIAction(level = DEBUG)
     public void clear() {
         refresh();
@@ -157,6 +213,9 @@ public class JList<T extends BaseUIElement> extends JDIBase
         return print(values());
     }
 
+    /**
+     * Show all items
+     */
     @JDIAction
     public void showAll() {
         int size;

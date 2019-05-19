@@ -298,36 +298,78 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         }
         return new Select(select);
     }
+
+    /**
+     * Get element location point
+     * @return Point
+     */
     @JDIAction(level = DEBUG)
     public Point getLocation() {
         return get().getLocation();
     }
+
+    /**
+     * Get element size
+     * @return Dimension
+     */
     @JDIAction(level = DEBUG)
     public Dimension getSize() {
         return get().getSize();
     }
+
+    /**
+     * Get element rectangle
+     * @return Rectangle
+     */
     @JDIAction(level = DEBUG)
     public Rectangle getRect() {
         return get().getRect();
     }
+
+    /**
+     * Get element css value
+     * @param s
+     * @return String
+     */
     @JDIAction(level = DEBUG)
     public String getCssValue(String s) {
         return get().getCssValue(s);
     }
+
+    /**
+     * Get screenshot in the specified output type
+     * @param outputType
+     */
     @JDIAction(level = DEBUG)
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
         return get().getScreenshotAs(outputType);
     }
+
+    /**
+     * Get the attribute value
+     * @param value
+     * @return String
+     */
     @JDIAction(value = "Get '{name}' attribute '{0}'", level = DEBUG)
     public String getAttribute(String value) {
         return valueOrDefault(get().getAttribute(value), "");
     }
+
     public String attr(String value) { return getAttribute(value); }
 
+    /**
+     * Check the element is enable
+     * @return boolean
+     */
     @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return enabled();
     }
+
+    /**
+     * Check the element is disable
+     * @return boolean
+     */
     @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
         return !enabled();
@@ -338,10 +380,19 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
                 get().isEnabled() && !cls.contains("disabled");
     }
 
+    /**
+     * Check the element is displayed
+     * @return boolean
+     */
     @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {
         return displayed();
     }
+
+    /**
+     * Check the element is hidden
+     * @return boolean
+     */
     @JDIAction("Check that '{name}' is hidden")
     public boolean isHidden() {
         return !displayed();
@@ -359,12 +410,21 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         } catch (Exception ex) { return false; }
     }
 
+    /**
+     * Set the text in the attribute "value"
+     * @param value
+     */
     @JDIAction("Set '{0}' in '{name}'")
     public void setText(String value) {
         //setAttribute("value", value);
         jsExecute("value='"+value+"'");
     }
 
+    /**
+     * Set the value in the specified attribute
+     * @param name
+     * @param value
+     */
     @JDIAction(level = DEBUG)
     public void setAttribute(String name, String value) {
         jsExecute("setAttribute('"+name+"','"+value+"')");
@@ -385,10 +445,19 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         return classes().contains(className);
     }
 
+    /**
+     * Get the element tag name
+     * @return String
+     */
     @JDIAction(level = DEBUG)
     public String getTagName() {
         return get().getTagName();
     }
+
+    /**
+     * Get the element attribute "innerHTML" value
+     * @return String
+     */
     @JDIAction(level = DEBUG)
     public String printHtml() {
         return MessageFormat.format("<{0} {1}>{2}</{0}>", getTagName(),
@@ -396,40 +465,76 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
                 getAttribute("innerHTML"));
     }
 
+    /**
+     * Make a border the specified color
+     * @param color
+     */
     @JDIAction(level = DEBUG)
-    public void higlight(String color) {
+    public void highlight(String color) {
         jsExecute("style.border='3px dashed "+color+"'");
     }
-    public void higlight() {
+    public void highlight() {
         show();
-        higlight("red");
+        highlight("red");
     }
+
+    /**
+     * Get screenshot with red border
+     * @return String
+     */
     @JDIAction(level = DEBUG)
     public String makePhoto() {
-        higlight();
+        highlight();
         return takeScreen();
     }
+
+    /**
+     * Show all items
+     */
     @JDIAction
     public void show() {
         jsExecute("scrollIntoView(true)");
     }
+
+    /**
+     * Hover over the element
+     */
     @JDIAction("Hover to '{name}'")
     public void hover() {
         doActions(a -> a.moveToElement(get()));
     }
+
     //region Actions
+    /**
+     * Drag element and drop it to the UI element
+     * @param to
+     */
     @JDIAction("Drag '{name}' and drop it to '{0}'")
     public void dragAndDropTo(UIElement to) {
         doActions(a -> a.clickAndHold(get()).moveToElement(to).release(to));
     }
+
+    /**
+     * Double click on the element
+     */
     @JDIAction("DoubleClick on '{name}'")
     public void doubleClick() {
         doActions(Actions::doubleClick);
     }
+
+    /**
+     * Right click on the element
+     */
     @JDIAction("RightClick on '{name}'")
     public void rightClick() {
         doActions(Actions::contextClick);
     }
+
+    /**
+     * Drag element and drop it to certain coordinates
+     * @param x
+     * @param y
+     */
     @JDIAction("Drag '{name}' and drop it to ({0},{1})")
     public void dragAndDropTo(int x, int y) {
         doActions(a -> a.dragAndDropBy(get(), x, y));

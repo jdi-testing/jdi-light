@@ -49,14 +49,26 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     }
 
     //region WebElement Wrapper
+    /**
+     * Сlick on the element
+     */
     @JDIAction("Click on '{name}'")
     public void click() {
         get().click();
     }
+
+    /**
+     * Submit
+     */
     @JDIAction(level = DEBUG)
     public void submit() {
         get().submit();
     }
+
+    /**
+     * Send specified value as keys
+     * @param value
+     */
     @JDIAction("Input '{0}' in '{name}'")
     public void sendKeys(CharSequence... value) {
         checkEnabled();
@@ -121,10 +133,18 @@ public abstract class BaseUIElement<T extends BaseUIElement>
         return label().getText();
     }
 
+    /**
+     * Clear
+     */
     @JDIAction("Clear '{name}'")
     public void clear() {
         get().clear();
     }
+
+    /**
+     * Get text
+     * @return String text
+     */
     @JDIAction("Get '{name}' text")
     public String getText() {
         WebElement el = get();
@@ -134,10 +154,20 @@ public abstract class BaseUIElement<T extends BaseUIElement>
         String value = el.getAttribute("value");
         return isNotBlank(value) ? value : text;
     }
+
+    /**
+     * Get attribute 'value'
+     * @return String
+     */
     @JDIAction("Get '{name}' text")
     public String getValueText() {
         return getAttribute("value");
     }
+
+    /**
+     * Get attribute innerText'
+     * @return String
+     */
     @JDIAction("Get '{name}' text")
     public String innerText() {
         return jsExecute("innerText");
@@ -152,14 +182,28 @@ public abstract class BaseUIElement<T extends BaseUIElement>
         return findElements(by).get(0);
     }
 
+    /**
+     * Check the element is selected
+     * @return boolean
+     */
     @JDIAction("Check that '{name}' is selected")
     public boolean isSelected() {
         return selected();
     }
+
+    /**
+     * Check the element is deselected
+     * @return boolean
+     */
     @JDIAction("Check that '{name}' is deselected")
     public boolean isDeselected() {
         return !selected();
     }
+
+    /**
+     * Check the element is selected
+     * @return boolean
+     */
     @JDIAction(level = DEBUG)
     private boolean selected() {
         List<String> cl = classes();
@@ -169,31 +213,52 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     //endregion
 
     //region Enchantments
-
+    /**
+     * Сlick on the element
+     */
     @JDIAction("Click on '{name}'")
     public void jsClick() {
         jsExecute("click()");
     }
 
+    /**
+     * Input specified value as keys
+     * @param value
+     */
     @JDIAction("Input '{0}' in '{name}'")
     public void input(String value) {
         clear();
         sendKeys(value);
     }
+
+    /**
+     * Focus
+     */
     @JDIAction(level = DEBUG)
     public void focus(){ sendKeys(""); }
 
-
+    /**
+     * Get item text
+     * @return String
+     */
     @JDIAction(level = DEBUG) @Override
     public String getValue() {
         return getText();
     }
 
+    /**
+     * Select item by the value
+     * @param value
+     */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
         get(value).click();
     }
 
+    /**
+     * Select items by the values
+     * @param names
+     */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String... names) {
         for (String name : names)
@@ -208,13 +273,13 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     }
 
     /**
-     * Gets attr 'placeholder'
+     * Gets attribute 'placeholder'
      * @return String
      */
     @JDIAction(level = DEBUG)
     public String placeholder() { return getAttribute("placeholder"); }
     /**
-     * Gets attribute with name value
+     * Gets attribute 'value'
      * @return String
      */
     public String value() { return getAttribute("value"); }

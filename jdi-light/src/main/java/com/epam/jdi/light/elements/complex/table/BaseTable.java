@@ -77,6 +77,11 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
     protected List<String> getHeader() {
         return LinqUtils.select(headerUI(), UIElement::getText);
     }
+
+    /**
+     * Get table header
+     * @return List
+     */
     @JDIAction("Get {name} header")
     public List<String> header() {
         return header.get();
@@ -102,6 +107,11 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         firstColumn.noValidation();
         return firstColumn.size();
     }
+
+    /**
+     * Get table rows count
+     * @return int
+     */
     @JDIAction("Get {name} rows count")
     public int count() { return count.get(); }
 
