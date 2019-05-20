@@ -9,18 +9,13 @@ import pseudo.site.pages.PageWithoutBoth;
 
 public class WebPageDataProvider {
 
-    private WebPage pageWithBoth;
-    private WebPage pageWithoutBoth;
-    private WebPage pageWithURL;
-    private WebPage pageWithTitle;
-
     @DataProvider
     public Object[][] annotationsWebPageDataProvider() {
         return new Object[][]{
-                {pageWithBoth = new PageWithBoth(), "www.pagewithboth.com","Page with both"},
-                {pageWithoutBoth = new PageWithoutBoth(), "",""},
-                {pageWithTitle = new PageWithTitle(), "","Page with title"},
-                {pageWithURL = new PageWithURL(), "www.pagewithurl.com",""}
+                {new PageWithBoth(), "www.pagewithboth.com","Page with both"},
+                {new PageWithoutBoth(), "",""},
+                {new PageWithTitle(), "","Page with title"},
+                {new PageWithURL(), "www.pagewithurl.com",""}
         };
     }
 }
