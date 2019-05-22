@@ -9,6 +9,7 @@ public interface BaseFindElement<T> extends BaseElement {
     T find(By by);
     List<T> finds(String by);
     List<T> finds(By by);
+    String css(String prop);
     T firstChild();
     List<T> childs();
 }

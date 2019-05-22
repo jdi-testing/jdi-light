@@ -65,22 +65,22 @@ public class ExtendedSectionUIDataProvider {
     @DataProvider
     public Object[][] extendedSectionUIListUIElementPublicDataProvider() {
         return new Object[][]{
-                {extendedSectionUI.listUIElementPublic, "id = 'listUIElementPublic'", extendedSectionUI, "List UIElement Public"},
-                {extendedSectionUI.getListUIElementPackage(), "id = 'listUIElementPackage'", extendedSectionUI, "List UIElement Package"},
-                {extendedSectionUI.getListUIElementPrivate(), "id = 'listUIElementPrivate'", extendedSectionUI, "List UIElement Private"},
-                {extendedSectionUI.getListUIElementPackageUI(), "css = '.listUIElementPackageUI'", extendedSectionUI, "List UIElement Package UI"},
-                {extendedSectionUI.listUIElementPublicUI, "css = '.listUIElementPublicUI'", extendedSectionUI, "List UIElement Public UI"},
+                {extendedSectionUI.listUIElementPublic, "id='listUIElementPublic'", extendedSectionUI, "List UI Element Public"},
+                {extendedSectionUI.getListUIElementPackage(), "id='listUIElementPackage'", extendedSectionUI, "List UI Element Package"},
+                {extendedSectionUI.getListUIElementPrivate(), "id='listUIElementPrivate'", extendedSectionUI, "List UI Element Private"},
+                {extendedSectionUI.getListUIElementPackageUI(), "css='.listUIElementPackageUI'", extendedSectionUI, "List UI Element Package UI"},
+                {extendedSectionUI.listUIElementPublicUI, "css='.listUIElementPublicUI'", extendedSectionUI, "List UI Element Public UI"},
         };
     }
 
     @DataProvider
     public Object[][] extendedSectionUIListButtonPublicDataProvider() {
         return new Object[][]{
-                {extendedSectionUI.getListButtonPackage(), "id = 'listButtonPackage'", extendedSectionUI, "List UIElement Package"},
-                {extendedSectionUI.listButtonPublic, "id = 'listUIElementPublic'", extendedSectionUI, "List UIElement Public"},
-                {extendedSectionUI.getListButtonPrivate(), "id = 'listButtonPrivate'", extendedSectionUI, "List UIElement Private"},
-                {extendedSectionUI.getListButtonPackageUI(), "css = '.listButtonPackageUI'", extendedSectionUI, "List UIElement Package UI"},
-                {extendedSectionUI.listButtonPublicUI, "css = '.listButtonPublicUI'", extendedSectionUI, "List UIElement Public UI"},
+                {extendedSectionUI.getListButtonPackage(), "id='listButtonPackage'", extendedSectionUI, "List Button Package"},
+                {extendedSectionUI.listButtonPublic, "id='listButtonPublic'", extendedSectionUI, "List Button Public"},
+                {extendedSectionUI.getListButtonPrivate(), "id='listButtonPrivate'", extendedSectionUI, "List Button Private"},
+                {extendedSectionUI.getListButtonPackageUI(), "css='.listButtonPackageUI'", extendedSectionUI, "List Button Package UI"},
+                {extendedSectionUI.listButtonPublicUI, "css='.listButtonPublicUI'", extendedSectionUI, "List Button Public UI"},
         };
     }
 

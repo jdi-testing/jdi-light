@@ -19,8 +19,8 @@ public class TestsInit {
     public static void setUp() {
         logger.setLogLevel(INFO);
         SMART_SEARCH_LOCATORS.add("[ui=%s]");
-        initElements(StaticSite.class);
         initElements(PseudoSite.class);
+        initElements(StaticSite.class);
         homePage.open();
         logger.toLog("Run Tests");
     }

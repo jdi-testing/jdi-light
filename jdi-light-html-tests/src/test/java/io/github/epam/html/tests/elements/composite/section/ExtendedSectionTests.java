@@ -4,8 +4,10 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.section.ExtendedSectionDataProvider;
+import pseudo.site.section.ExtendedSection;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
+import static pseudo.site.PseudoSite.extendedSection;
 
 public class ExtendedSectionTests extends TestsInit {
 
@@ -41,6 +43,7 @@ public class ExtendedSectionTests extends TestsInit {
 
     @Test(dataProvider = "extendedSectionListButtonPublicDataProvider", dataProviderClass = ExtendedSectionDataProvider.class)
     public void extendedSectionListButtonPublicTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+        ExtendedSection e = extendedSection;
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
