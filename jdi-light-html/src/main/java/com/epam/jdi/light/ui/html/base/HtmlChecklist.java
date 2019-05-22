@@ -23,6 +23,12 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
     By checkbox = cssSelector("input[type=checkbox][id='%s']");
     By label = LABEL_LOCATOR;
     private String getId(String name) { return label(name).getAttribute("for"); }
+
+    /**
+     * Gets a value
+     * @param value String
+     * @return HtmlElement
+     */
     public HtmlElement get(String value) {
         return $(fillByTemplate(checkbox, getId(value)), parent).setName(value);
     }
@@ -36,6 +42,11 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
         return map(getAll(), el -> new HtmlElement(el).label().setName(getName()+ " label"));
     }
     List<HtmlElement> checkboxes() { return map(getAll(), HtmlElement::new); }
+
+    /**
+     * Returns the number of elements in this checklist
+     * @return int
+     */
     @Override
     public int size() {
         return checkboxes().size();
@@ -129,7 +140,10 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
         }
     }
 
-    @JDIAction("Uncheck '{name}' checked options")
+    /**
+     * Checks all elements
+     */
+    @JDIAction("Check '{name}' unchecked options")
     public void checkAll() {
         for (HtmlElement checkbox : checkboxes()) {
             if (checkbox.isEnabled() && !isSelected(checkbox)) {
@@ -153,6 +167,9 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
         }
     }
 
+    /**
+     * Unchecks all elements
+     */
     @JDIAction("Uncheck '{name}' checked options")
     public void uncheckAll() {
         for (HtmlElement checkbox : checkboxes()) {
@@ -162,35 +179,66 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
         }
     }
 
+    /**
+     * Gets checked values in checklist
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' checked options")
     public List<String> checked() {
         return ifSelect(checkboxes(), HtmlElement::isSelected, HtmlElement::labelText);
     }
 
+    /**
+     * Selects a value in checklist
+     * @param value String var arg
+     */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
         select(new String[]{value});
     }
 
+    /**
+     * Selects a value with index in checklist
+     * @param index int var arg
+     */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
         select(new int[]{index});
     }
 
+    /**
+     * Gets a list of text from each values from checklist
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         return map(labels(), element -> element.getText().trim());
     }
+
+    /**
+     * Gets a list of innerText from each values from checklist
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' values")
     public List<String> innerValues() {
         return map(labels(), element -> element.innerText().trim());
     }
+
+    /**
+     * Gets enabled values from checklist
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' enabled options")
     public List<String> listEnabled() {
         return ifSelect(checkboxes(),
                 HtmlElement::isEnabled,
                 HtmlElement::labelText);
     }
+
+    /**
+     * Gets disabled values from checklist
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' disabled options")
     public List<String> listDisabled() {
         return ifSelect(checkboxes(),
@@ -198,20 +246,39 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
                 HtmlElement::labelText);
     }
 
+    /**
+     * Sets values in checklist
+     * @param value String with values separated ";"
+     */
     @Override
     public void setValue(String value) {
         check(value.split(";"));
     }
+
+    /**
+     * Gets selected values separated ";"
+     * @return String
+     */
     @Override
     @JDIAction("Get '{name}' selected option")
     public String selected() {
         return print(ifSelect(checkboxes(), HtmlElement::isSelected, HtmlElement::labelText));
     }
 
+    /**
+     * Checks if a value is selected in a checklist
+     * @param value String to select
+     * @return boolean
+     */
     @JDIAction("Is '{0}' selected in '{name}'")
     public boolean selected(String value) {
         return get(value).isSelected();
     }
+
+    /**
+     * Gets selected values separated ";"
+     * @return String
+     */
     @Override
     public String getValue() {
         return selected();

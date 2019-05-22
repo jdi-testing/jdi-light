@@ -13,11 +13,11 @@
         <driver>firefox</driver>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <aspectj.version>1.9.1</aspectj.version>
-        <domain>https://epam.github.io/JDI/</domain>
+        <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <allure.testng>2.7.0</allure.testng>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <domain>https://epam.github.io/JDI/</domain>
+        <domain>https://jdi-testing.github.io/jdi-light/</domain>
     </properties>
 
     <dependencies>

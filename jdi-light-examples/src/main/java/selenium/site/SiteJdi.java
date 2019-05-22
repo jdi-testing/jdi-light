@@ -11,7 +11,7 @@ import selenium.site.pages.HomePage;
 import selenium.site.pages.JDIPerformancePage;
 import selenium.site.sections.LoginForm;
 
-@JSite("https://epam.github.io/JDI/")
+@JSite("https://jdi-testing.github.io/jdi-light/")
 public class SiteJdi {
     public static HomePage homePage;
     public static ContactPage contactPage;
