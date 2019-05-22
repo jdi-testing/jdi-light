@@ -12,7 +12,7 @@ import java.util.List;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class HomePage {
-    private String url = "https://epam.github.io/JDI/index.html";
+    private String url = "https://jdi-testing.github.io/jdi-light/index.html";
     public void open() {
         getDriver().navigate().to(url);
     }
