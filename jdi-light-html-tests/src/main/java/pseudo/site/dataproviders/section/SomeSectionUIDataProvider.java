@@ -2,18 +2,18 @@ package pseudo.site.dataproviders.section;
 
 import org.testng.annotations.DataProvider;
 
-import static pseudo.site.PseudoSite.someSectionUI;
+import static pseudo.site.PseudoSite.customSectionUI;
 
 public class SomeSectionUIDataProvider {
     @DataProvider
     public Object[][] someSectionUIWebElementDataProvider() {
         return new Object[][]{
-                {someSectionUI.webElementPublic, "id='webElementPublic'", someSectionUI, "Web Element Public"},
-                {someSectionUI.webElementPublic, "id='webElementPublic'", someSectionUI, "Web Element Public"},
-                {someSectionUI.webElementPublicUI, "css='.webElementPublicUI'", someSectionUI, "Web Element Public UI"},
-                {someSectionUI.getWebElementPackage(), "id='webElementPackage'", someSectionUI, "Web Element Package"},
-                {someSectionUI.getWebElementPrivate(), "id='webElementPrivate'", someSectionUI, "Web Element Private"},
-                {someSectionUI.getWebElementPackageUI(), "css='.webElementPackageUI'", someSectionUI, "Web Element Package UI"},
+                {customSectionUI.webElementPublic, "id='webElementPublic'", customSectionUI, "Web Element Public"},
+                {customSectionUI.webElementPublic, "id='webElementPublic'", customSectionUI, "Web Element Public"},
+                {customSectionUI.webElementPublicUI, "css='.webElementPublicUI'", customSectionUI, "Web Element Public UI"},
+                {customSectionUI.getWebElementPackage(), "id='webElementPackage'", customSectionUI, "Web Element Package"},
+                {customSectionUI.getWebElementPrivate(), "id='webElementPrivate'", customSectionUI, "Web Element Private"},
+                {customSectionUI.getWebElementPackageUI(), "css='.webElementPackageUI'", customSectionUI, "Web Element Package UI"},
         };
     }
 
@@ -21,55 +21,55 @@ public class SomeSectionUIDataProvider {
     @DataProvider
     public Object[][] someSectionUIListWebElementDataProvider() {
         return new Object[][]{
-                {someSectionUI.listWebElementPublic, "id='listWebElementPublic'", someSectionUI, "List Web Element Public"},
-                {someSectionUI.listWebElementPublicUI, "css='.listWebElementPublicUI'", someSectionUI, "List Web Element Public UI"},
-                {someSectionUI.getListWebElementPackage(), "id='listWebElementPackage'", someSectionUI, "List Web Element Package"},
-                {someSectionUI.getListWebElementPrivate(), "id='listWebElementPrivate'", someSectionUI, "List Web Element Private"},
-                {someSectionUI.getListWebElementPackageUI(), "css='.listWebElementPackageUI'", someSectionUI, "List Web Element Package UI"},
+                {customSectionUI.listWebElementPublic, "id='listWebElementPublic'", customSectionUI, "List Web Element Public"},
+                {customSectionUI.listWebElementPublicUI, "css='.listWebElementPublicUI'", customSectionUI, "List Web Element Public UI"},
+                {customSectionUI.getListWebElementPackage(), "id='listWebElementPackage'", customSectionUI, "List Web Element Package"},
+                {customSectionUI.getListWebElementPrivate(), "id='listWebElementPrivate'", customSectionUI, "List Web Element Private"},
+                {customSectionUI.getListWebElementPackageUI(), "css='.listWebElementPackageUI'", customSectionUI, "List Web Element Package UI"},
         };
     }
 
     @DataProvider
     public Object[][] someSectionUIUIElementDataProvider() {
         return new Object[][]{
-                {someSectionUI.uielementPublic, "id='uielementPublic'", someSectionUI, "Uielement Public"},
-                {someSectionUI.uielementPublicUI, "css='.uielementPublicUI'", someSectionUI, "Uielement Public UI"},
-                {someSectionUI.getUielementPackage(), "id='uielementPackage'", someSectionUI, "Uielement Package"},
-                {someSectionUI.getUielementPrivate(), "id='uielementPrivate'", someSectionUI, "Uielement Private"},
-                {someSectionUI.getUielementPackageUI(), "css='.uielementPackageUI'", someSectionUI, "Uielement Package UI"},
+                {customSectionUI.uielementPublic, "id='uielementPublic'", customSectionUI, "Uielement Public"},
+                {customSectionUI.uielementPublicUI, "css='.uielementPublicUI'", customSectionUI, "Uielement Public UI"},
+                {customSectionUI.getUielementPackage(), "id='uielementPackage'", customSectionUI, "Uielement Package"},
+                {customSectionUI.getUielementPrivate(), "id='uielementPrivate'", customSectionUI, "Uielement Private"},
+                {customSectionUI.getUielementPackageUI(), "css='.uielementPackageUI'", customSectionUI, "Uielement Package UI"},
         };
     }
 
     @DataProvider
     public Object[][] someSectionUIButtonDataProvider() {
         return new Object[][]{
-                {someSectionUI.getButtonPackage(), "id='buttonPackage'", someSectionUI, "Button Package"},
-                {someSectionUI.buttonPublic, "id='buttonPublic'", someSectionUI, "Button Public"},
-                {someSectionUI.getButtonPrivate(), "id='buttonPrivate'", someSectionUI, "Button Private"},
-                {someSectionUI.buttonPublicUI, "css='.buttonPublicUI'", someSectionUI, "Button Public UI"},
+                {customSectionUI.getButtonPackage(), "id='buttonPackage'", customSectionUI, "Button Package"},
+                {customSectionUI.buttonPublic, "id='buttonPublic'", customSectionUI, "Button Public"},
+                {customSectionUI.getButtonPrivate(), "id='buttonPrivate'", customSectionUI, "Button Private"},
+                {customSectionUI.buttonPublicUI, "css='.buttonPublicUI'", customSectionUI, "Button Public UI"},
         };
     }
 
     @DataProvider
     public Object[][] someSectionUIWebListDataProvider() {
         return new Object[][]{
-                {someSectionUI.getWebListPackage(), "id='webListPackage'", someSectionUI, "Web List Package"},
-                {someSectionUI.webListPublic, "id='webListPublic'", someSectionUI, "Web List Public"},
-                {someSectionUI.getWebListPrivate(), "id='webListPrivate'", someSectionUI, "Web List Private"},
-                {someSectionUI.getWebListPrivate(), "id='webListPrivate'", someSectionUI, "Web List Private"},
-                {someSectionUI.getWebListPackageUI(), "css='.webListPackageUI'", someSectionUI, "Web List Package UI"},
-                {someSectionUI.webListPublicUI, "css='.webListPublicUI'", someSectionUI, "Web List Public UI"},
+                {customSectionUI.getWebListPackage(), "id='webListPackage'", customSectionUI, "Web List Package"},
+                {customSectionUI.webListPublic, "id='webListPublic'", customSectionUI, "Web List Public"},
+                {customSectionUI.getWebListPrivate(), "id='webListPrivate'", customSectionUI, "Web List Private"},
+                {customSectionUI.getWebListPrivate(), "id='webListPrivate'", customSectionUI, "Web List Private"},
+                {customSectionUI.getWebListPackageUI(), "css='.webListPackageUI'", customSectionUI, "Web List Package UI"},
+                {customSectionUI.webListPublicUI, "css='.webListPublicUI'", customSectionUI, "Web List Public UI"},
         };
     }
 
     @DataProvider
     public Object[][] someSectionUIListUIElementPublicDataProvider() {
         return new Object[][]{
-                {someSectionUI.listUIElementPublic, "id = 'listUIElementPublic'", someSectionUI, "List UIElement Public"},
-                {someSectionUI.getListUIElementPackage(), "id = 'listUIElementPackage'", someSectionUI, "List UIElement Package"},
-                {someSectionUI.getListUIElementPrivate(), "id = 'listUIElementPrivate'", someSectionUI, "List UIElement Private"},
-                {someSectionUI.getListUIElementPackageUI(), "css = '.listUIElementPackageUI'", someSectionUI, "List UIElement Package UI"},
-                {someSectionUI.listUIElementPublicUI, "css = '.listUIElementPublicUI'", someSectionUI, "List UIElement Public UI"},
+                {customSectionUI.listUIElementPublic, "id='listUIElementPublic'", customSectionUI, "List UI Element Public"},
+                {customSectionUI.getListUIElementPackage(), "id='listUIElementPackage'", customSectionUI, "List UI Element Package"},
+                {customSectionUI.getListUIElementPrivate(), "id='listUIElementPrivate'", customSectionUI, "List UI Element Private"},
+                {customSectionUI.getListUIElementPackageUI(), "css='.listUIElementPackageUI'", customSectionUI, "List UI Element Package UI"},
+                {customSectionUI.listUIElementPublicUI, "css='.listUIElementPublicUI'", customSectionUI, "List UI Element Public UI"},
         };
     }
 
@@ -77,11 +77,11 @@ public class SomeSectionUIDataProvider {
     @DataProvider
     public Object[][] someSectionUIListButtonPublicDataProvider() {
         return new Object[][]{
-                {someSectionUI.getListButtonPackage(), "id = 'listButtonPackage'", someSectionUI, "List UIElement Package"},
-                {someSectionUI.listButtonPublic, "id = 'listUIElementPublic'", someSectionUI, "List UIElement Public"},
-                {someSectionUI.getListButtonPrivate(), "id = 'listButtonPrivate'", someSectionUI, "List UIElement Private"},
-                {someSectionUI.getListButtonPackageUI(), "css = '.listButtonPackageUI'", someSectionUI, "List UIElement Package UI"},
-                {someSectionUI.listButtonPublicUI, "css = '.listButtonPublicUI'", someSectionUI, "List UIElement Public UI"},
+                {customSectionUI.getListButtonPackage(), "id='listButtonPackage'", customSectionUI, "List Button Package"},
+                {customSectionUI.listButtonPublic, "id='listButtonPublic'", customSectionUI, "List Button Public"},
+                {customSectionUI.getListButtonPrivate(), "id='listButtonPrivate'", customSectionUI, "List Button Private"},
+                {customSectionUI.getListButtonPackageUI(), "css='.listButtonPackageUI'", customSectionUI, "List Button Package UI"},
+                {customSectionUI.listButtonPublicUI, "css='.listButtonPublicUI'", customSectionUI, "List Button Public UI"},
         };
     }
 
@@ -89,33 +89,33 @@ public class SomeSectionUIDataProvider {
     @DataProvider
     public Object[][] someSectionUIUIListQuestionDataProvider() {
         return new Object[][]{
-                {someSectionUI.getUilistQuestionPackage(), "id='uilistQuestionPackage'", someSectionUI, "Uilist Question Package"},
-                {someSectionUI.uilistQuestionPublic, "id='uilistQuestionPublic'", someSectionUI, "Uilist Question Public"},
-                {someSectionUI.getUilistQuestionPrivate(), "id='uilistQuestionPrivate'", someSectionUI, "Uilist Question Private"},
-                {someSectionUI.getUilistQuestionPackageUI(), "css='.uilistQuestionPackageUI'", someSectionUI, "Uilist Question Package UI"},
-                {someSectionUI.uilistQuestionPublicUI, "css='.uilistQuestionPublicUI'", someSectionUI, "Uilist Question Public UI"},
+                {customSectionUI.getUilistQuestionPackage(), "id='uilistQuestionPackage'", customSectionUI, "Uilist Question Package"},
+                {customSectionUI.uilistQuestionPublic, "id='uilistQuestionPublic'", customSectionUI, "Uilist Question Public"},
+                {customSectionUI.getUilistQuestionPrivate(), "id='uilistQuestionPrivate'", customSectionUI, "Uilist Question Private"},
+                {customSectionUI.getUilistQuestionPackageUI(), "css='.uilistQuestionPackageUI'", customSectionUI, "Uilist Question Package UI"},
+                {customSectionUI.uilistQuestionPublicUI, "css='.uilistQuestionPublicUI'", customSectionUI, "Uilist Question Public UI"},
         };
     }
 
     @DataProvider
     public Object[][] someSectionUIUIListSomedataDataProvider() {
         return new Object[][]{
-                {someSectionUI.getUilistSomedataPackage(), "id='uilistSomedataPackage'", someSectionUI, "Uilist Somedata Package"},
-                {someSectionUI.uilistSomedataPublic, "id='uilistSomedataPublic'", someSectionUI, "Uilist Somedata Public"},
-                {someSectionUI.getUilistSomedataPrivate(), "id='uilistSomedataPrivate'", someSectionUI, "Uilist Somedata Private"},
-                {someSectionUI.getUilistSomedataPackageUI(), "css='.uilistSomedataPackageUI'", someSectionUI, "Uilist Somedata Package UI"},
-                {someSectionUI.uilistSomedataPublicUI, "css='.uilistSomedataPublicUI'", someSectionUI, "Uilist Somedata Public UI"},
+                {customSectionUI.getUilistSomedataPackage(), "id='uilistSomedataPackage'", customSectionUI, "Uilist Somedata Package"},
+                {customSectionUI.uilistSomedataPublic, "id='uilistSomedataPublic'", customSectionUI, "Uilist Somedata Public"},
+                {customSectionUI.getUilistSomedataPrivate(), "id='uilistSomedataPrivate'", customSectionUI, "Uilist Somedata Private"},
+                {customSectionUI.getUilistSomedataPackageUI(), "css='.uilistSomedataPackageUI'", customSectionUI, "Uilist Somedata Package UI"},
+                {customSectionUI.uilistSomedataPublicUI, "css='.uilistSomedataPublicUI'", customSectionUI, "Uilist Somedata Public UI"},
         };
     }
 
     @DataProvider
     public Object[][] someSectionUIDropDownDataProvider() {
         return new Object[][]{
-                {someSectionUI.getDroplistPackage(), "css='div[ui=droplistPackage'", someSectionUI, "Droplist Package"},
-                {someSectionUI.droplistPublic, "css='div[ui=droplistPublic'", someSectionUI, "Droplist Public"},
-                {someSectionUI.getDroplistPrivate(), "css='div[ui=droplistPrivate'", someSectionUI, "Droplist Private"},
-                {someSectionUI.getDroplistPackageUI(), "css='.droplistPackageUI'", someSectionUI, "Droplist Package UI"},
-                {someSectionUI.droplistPublicUI, "css='.droplistPublicUI'", someSectionUI, "Droplist Public UI"},
+                {customSectionUI.getDroplistPackage(), "css='div[ui=droplistPackage'", customSectionUI, "Droplist Package"},
+                {customSectionUI.droplistPublic, "css='div[ui=droplistPublic'", customSectionUI, "Droplist Public"},
+                {customSectionUI.getDroplistPrivate(), "css='div[ui=droplistPrivate'", customSectionUI, "Droplist Private"},
+                {customSectionUI.getDroplistPackageUI(), "css='.droplistPackageUI'", customSectionUI, "Droplist Package UI"},
+                {customSectionUI.droplistPublicUI, "css='.droplistPublicUI'", customSectionUI, "Droplist Public UI"},
         };
     }
 }

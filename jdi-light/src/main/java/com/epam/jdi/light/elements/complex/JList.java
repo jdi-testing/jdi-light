@@ -43,6 +43,13 @@ public class JList<T extends BaseUIElement> extends JDIBase
         this.elements.setForce(toJList(elements));
     }
 
+
+    protected Class<?> initClass = UIElement.class;
+    public JList<T> setInitClass(Class<T> listClass) {
+        initClass = listClass;
+        return this;
+    }
+
     @JDIAction(level = DEBUG)
     public List<T> elements(int minAmount) {
         if (elements.hasValue() && isActual() && elements.get().size() >= minAmount)
@@ -221,12 +228,6 @@ public class JList<T extends BaseUIElement> extends JDIBase
         return is();
     }
     //endregion
-
-    protected Class<?> initClass = UIElement.class;
-    public JList<T> setInitClass(Class<T> listClass) {
-        initClass = listClass;
-        return this;
-    }
     public void setup(Field field) {
         Type[] types;
         try {
