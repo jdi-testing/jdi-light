@@ -87,6 +87,7 @@ public class ButtonTests extends TestsInit {
         baseValidation(redButton);
     }
 
+    //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void suspendButtonTest() {
         refresh();
@@ -96,12 +97,15 @@ public class ButtonTests extends TestsInit {
         acceptAlert();
     }
 
+    //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void vanishButtonTest() {
         refresh();
         durationMoreThan(3, () ->
             ghostButton.is().disappear());
     }
+
+    //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void isNotAppearTimeoutFailedButtonTest() {
         refresh();
@@ -112,6 +116,8 @@ public class ButtonTests extends TestsInit {
             assertThat(ex.getMessage(), containsString("but: was \"displayed\""));
         }
     }
+
+    //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void isNotAppearFailedButtonTest() {
         refresh();
@@ -122,6 +128,7 @@ public class ButtonTests extends TestsInit {
         }
     }
 
+    //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void isNotAppearButtonTest() {
         ghostButton.is().hidden();
@@ -129,6 +136,7 @@ public class ButtonTests extends TestsInit {
         durationMoreThan(3, () -> ghostButton.is().notAppear());
     }
 
+    //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void isNotAppearTimeoutButtonTest() {
         ghostButton.is().hidden();
@@ -136,6 +144,7 @@ public class ButtonTests extends TestsInit {
             ghostButton.is().notAppear(2));
     }
 
+    //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void seleniumButtonTest() throws InterruptedException {
         refresh();

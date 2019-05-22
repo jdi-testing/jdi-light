@@ -14,5 +14,4 @@ public interface Dropdown extends BaseSelector, HasLabel {
     <TEnum extends Enum> void select(TEnum value);
     void select(int index);
     String selected();
-
 }

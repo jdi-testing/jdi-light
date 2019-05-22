@@ -11,7 +11,6 @@ public class AnnotationsWebPageTests extends TestsInit {
 
     @Test(dataProvider = "annotationsWebPageDataProvider", dataProviderClass = WebPageDataProvider.class)
     public void annotationsWebPageTest(WebPage webPage, String expectedURL, String expectedTitle) {
-
         Assert.assertEquals(webPage.url, expectedURL);
         Assert.assertEquals(webPage.title, expectedTitle);
     }
