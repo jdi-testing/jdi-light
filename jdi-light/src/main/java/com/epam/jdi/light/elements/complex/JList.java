@@ -6,9 +6,7 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.asserts.ListAssert;
-import com.epam.jdi.light.asserts.UIListAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
@@ -44,6 +42,13 @@ public class JList<T extends BaseUIElement> extends JDIBase
     public JList(By locator) { setLocator(locator); }
     public JList(List<WebElement> elements) {
         this.elements.setForce(toJList(elements));
+    }
+
+
+    protected Class<?> initClass = UIElement.class;
+    public JList<T> setInitClass(Class<T> listClass) {
+        initClass = listClass;
+        return this;
     }
 
     @JDIAction(level = DEBUG)
@@ -231,12 +236,6 @@ public class JList<T extends BaseUIElement> extends JDIBase
         return is();
     }
     //endregion
-
-    protected Class<?> initClass = UIElement.class;
-    public JList<T> setInitClass(Class<T> listClass) {
-        initClass = listClass;
-        return this;
-    }
     public void setup(Field field) {
         Type[] types;
         try {

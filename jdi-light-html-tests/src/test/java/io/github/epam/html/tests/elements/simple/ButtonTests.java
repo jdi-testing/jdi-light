@@ -56,15 +56,16 @@ public class ButtonTests extends TestsInit {
             fail("Disabled button should not work, but work");
         } catch (Exception ignore) { }
     }
-
     @Test
     public void isValidationTest() {
         redButton.is().displayed();
         redButton.is().enabled();
         redButton.is().text(is(text));
         redButton.is().text(containsString("Red Button"));
-        redButton.is()
+        assertThat(redButton.css("font-size"), is("14px"));
+        redButton.assertThat()
             .text(is(text))
+            .css("font-size", is("14px"))
             .cssClass(is("uui-button red"))
             .attr("type", is("button"))
             .tag(is("input"));
