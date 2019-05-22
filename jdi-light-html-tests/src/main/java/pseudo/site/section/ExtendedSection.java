@@ -6,7 +6,9 @@ import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import com.epam.jdi.light.ui.html.common.Button;
 import org.openqa.selenium.WebElement;
 
@@ -23,6 +25,10 @@ public class ExtendedSection extends CustomSection {
     WebElement webElementPackageUI;
     @UI(".webElementPublicUI")
     public WebElement webElementPublicUI;
+    @Css(".webElementPackageCss")
+    WebElement webElementPackageCss;
+    @XPath("//*[@class='webElementPublicXPath']")
+    public WebElement webElementPublicXPath;
 
     @FindBy(id = "listWebElementPackage")
     List<WebElement> listWebElementPackage;
@@ -34,6 +40,10 @@ public class ExtendedSection extends CustomSection {
     List<WebElement> listWebElementPackageUI;
     @UI(".listWebElementPublicUI")
     public List<WebElement> listWebElementPublicUI;
+    @Css(".listWebElementPackageCss")
+    List<WebElement> listWebElementPackageCss;
+    @XPath("//*[@class='listWebElementPublicXPath']")
+    public List<WebElement> listWebElementPublicXPath;
 
     @FindBy(id = "uielementPackage")
     UIElement uielementPackage;
@@ -45,7 +55,10 @@ public class ExtendedSection extends CustomSection {
     UIElement uielementPackageUI;
     @UI(".uielementPublicUI")
     public UIElement uielementPublicUI;
-
+    @Css(".uielementPackageCss")
+    UIElement uielementPackageCss;
+    @XPath("//*[@class='uielementPublicXPath']")
+    public UIElement uielementPublicXPath;
 
     @FindBy(id = "buttonPackage")
     Button buttonPackage;
@@ -57,7 +70,10 @@ public class ExtendedSection extends CustomSection {
     Button buttonPackageUI;
     @UI(".buttonPublicUI")
     public Button buttonPublicUI;
-
+    @Css(".buttonPackageCss")
+    UIElement buttonPackageCss;
+    @XPath("//*[@class='buttonPublicXPath']")
+    public UIElement buttonPublicXPath;
 
     @FindBy(id = "listUIElementPackage")
     List<UIElement> listUIElementPackage;
@@ -69,6 +85,10 @@ public class ExtendedSection extends CustomSection {
     List<UIElement> listUIElementPackageUI;
     @UI(".listUIElementPublicUI")
     public List<UIElement> listUIElementPublicUI;
+    @Css(".listUIElementPackageCss")
+    List<UIElement> listUIElementPackageCss;
+    @XPath("//*[@class='listUIElementPublicXPath']")
+    public List<UIElement> listUIElementPublicXPath;
 
     @FindBy(id = "listButtonPackage")
     List<Button> listButtonPackage;
@@ -80,6 +100,10 @@ public class ExtendedSection extends CustomSection {
     List<Button> listButtonPackageUI;
     @UI(".listButtonPublicUI")
     public List<Button> listButtonPublicUI;
+    @Css(".listButtonPackageCss")
+    List<Button> listButtonPackageCss;
+    @XPath("//*[@class='listButtonPublicXPath']")
+    public List<Button> listButtonPublicXPath;
 
     @FindBy(id = "webListPackage")
     WebList webListPackage;
@@ -91,7 +115,10 @@ public class ExtendedSection extends CustomSection {
     WebList webListPackageUI;
     @UI(".webListPublicUI")
     public WebList webListPublicUI;
-
+    @Css(".webListPackageCss")
+    WebList webListPackageCss;
+    @XPath("//*[@class='webListPublicXPath']")
+    public WebList webListPublicXPath;
 
     @FindBy(id = "uilistQuestionPackage")
     UIList<CustomSection, ?> uilistQuestionPackage;
@@ -103,7 +130,10 @@ public class ExtendedSection extends CustomSection {
     UIList<CustomSection, ?> uilistQuestionPackageUI;
     @UI(".uilistQuestionPublicUI")
     public UIList<CustomSection, ?> uilistQuestionPublicUI;
-
+    @Css(".uilistQuestionPackageCss")
+    UIList<CustomSection, ?> uilistQuestionPackageCss;
+    @XPath("//*[@class='uilistQuestionPublicXPath']")
+    public UIList<CustomSection, ?> uilistQuestionPublicXPath;
 
     @FindBy(id = "uilistSomedataPackage")
     UIList<CustomSection, SomeData> uilistSomedataPackage;
@@ -115,7 +145,10 @@ public class ExtendedSection extends CustomSection {
     UIList<CustomSection, SomeData> uilistSomedataPackageUI;
     @UI(".uilistSomedataPublicUI")
     public UIList<CustomSection, SomeData> uilistSomedataPublicUI;
-
+    @Css(".uilistSomedataPackageCss")
+    UIList<CustomSection, SomeData> uilistSomedataPackageCss;
+    @XPath("//*[@class='uilistSomedataPublicXPath']")
+    public UIList<CustomSection, SomeData> uilistSomedataPublicXPath;
 
     @JDropdown(root = "div[ui=droplistPackage", value = "input", list = "li", expand = ".expand")
     Droplist droplistPackage;
@@ -128,7 +161,6 @@ public class ExtendedSection extends CustomSection {
     Droplist droplistPackageUI;
     @UI(".droplistPublicUI")
     public Droplist droplistPublicUI;
-
 
     public WebElement getWebElementPackage() {
         return webElementPackage;
@@ -379,5 +411,41 @@ public class ExtendedSection extends CustomSection {
 
     public void setDroplistPackageUI(Droplist droplistPackageUI) {
         this.droplistPackageUI = droplistPackageUI;
+    }
+
+    public WebElement getWebElementPackageCss() {
+        return webElementPackageCss;
+    }
+
+    public List<WebElement> getListWebElementPackageCss() {
+        return listWebElementPackageCss;
+    }
+
+    public UIElement getUielementPackageCss() {
+        return uielementPackageCss;
+    }
+
+    public UIElement getButtonPackageCss() {
+        return buttonPackageCss;
+    }
+
+    public List<UIElement> getListUIElementPackageCss() {
+        return listUIElementPackageCss;
+    }
+
+    public List<Button> getListButtonPackageCss() {
+        return listButtonPackageCss;
+    }
+
+    public WebList getWebListPackageCss() {
+        return webListPackageCss;
+    }
+
+    public UIList<CustomSection, ?> getUilistQuestionPackageCss() {
+        return uilistQuestionPackageCss;
+    }
+
+    public UIList<CustomSection, SomeData> getUilistSomedataPackageCss() {
+        return uilistSomedataPackageCss;
     }
 }
