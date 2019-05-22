@@ -1,20 +1,18 @@
 package pseudo.site.dataproviders.WebPage;
 
 import org.testng.annotations.DataProvider;
-import pseudo.site.pages.PageWithBoth;
-import pseudo.site.pages.PageWithTitle;
-import pseudo.site.pages.PageWithURL;
-import pseudo.site.pages.PageWithoutBoth;
+import static pseudo.site.PseudoSite.*;
 
 public class WebPageDataProvider {
 
     @DataProvider
     public Object[][] annotationsWebPageDataProvider() {
         return new Object[][]{
-            {new PageWithBoth(), "www.pagewithboth.com","Page with both"},
-            {new PageWithTitle(), "","Page with title"},
-            {new PageWithURL(), "www.pagewithurl.com",""},
-            {new PageWithoutBoth(), "",""}
+            {pageWithBoth, "https://epam.github.io/JDI/pagewithboth.com","Page with both"},
+            {pageWithTitle, "https://epam.github.io/JDI/","Page with title"},
+            {pageWithURL, "https://epam.github.io/JDI/pagewithurl.com",""},
+            {slashPageWithURL, "https://epam.github.io/JDI/pagewithurl.com",""},
+            {pageWithoutBoth, "https://epam.github.io/JDI/",""}
         };
     }
 
