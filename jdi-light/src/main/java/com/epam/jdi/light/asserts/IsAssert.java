@@ -3,17 +3,25 @@ package com.epam.jdi.light.asserts;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseElement;
 import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.init.rules.ErrorCollector;
 import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matcher;
+
+import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.recursion;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAssert<T> {
+
+    private boolean isSoft = false;
+    ErrorCollector collector = new ErrorCollector();
+
     public IsAssert(BaseElement element) {
         super(element);
     }
@@ -39,6 +47,7 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
         assertThat(element.getCssValue(css), condition);
         return (T) this;
     }
+
     @JDIAction("Assert that '{name}' tag {0}")
     public T tag(Matcher<String> condition) {
         assertThat(element.getTagName(), condition);
@@ -64,11 +73,14 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
         assertThat(element.displayed() ? "displayed" : "disappear", is("disappear"));
         return (T) this;
     }
+
     @JDIAction("Assert that '{name}' is hidden")
     public T hidden() {
         assertThat(element.displayed() ? "displayed" : "hidden", is("hidden"));
+        // softAssertThat(element.displayed(),"displayed" ,"hidden");
         return (T) this;
     }
+
     public T notAppear() {
         return notAppear(TIMEOUT.get());
     }
@@ -97,6 +109,33 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
     @JDIAction("Assert that '{name}' is disabled")
     public T disabled() {
         assertThat(element.isEnabled() ? "enabled" : "disabled", is("disabled"));
+        //softAssertThat(element.isEnabled(), "disabled", "enabled");
+        return (T) this;
+    }
+
+    public List<Throwable> getResults(){
+        if(collector.showResults() != null){
+            throw new AssertionError(collector.showResults());
+            // return collector.showResults();
+        }
+        return null;
+    }
+
+    public void checkSoftAssertions(){
+        if(collector.showResults() != null){
+            throw new AssertionError(collector.showResults());
+        }
+    }
+    private T softAssertThat(boolean b, String expected, String notExpected){
+        if(isSoft){
+            try{
+                assertThat(b ? notExpected : expected, is(expected));
+            } catch (Throwable error){
+                collector.addError(error);
+            }
+        } else {
+            assertThat(b ? notExpected : expected, is(expected));
+        }
         return (T) this;
     }
 }
