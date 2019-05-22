@@ -1,6 +1,5 @@
 package io.github.epam.tests.google;
 
-import com.epam.jdi.light.driver.WebDriverUtils;
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;

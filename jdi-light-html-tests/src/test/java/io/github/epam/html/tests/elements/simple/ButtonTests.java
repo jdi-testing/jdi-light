@@ -1,7 +1,5 @@
 package io.github.epam.html.tests.elements.simple;
 
-import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.ui.html.base.HtmlElement;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;

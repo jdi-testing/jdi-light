@@ -85,7 +85,6 @@
             <version>RELEASE</version>
         </dependency>
 
-        <!-- From general pom -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>

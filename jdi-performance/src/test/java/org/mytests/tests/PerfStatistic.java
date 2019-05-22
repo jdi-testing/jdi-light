@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import java.util.stream.LongStream;
 
 import static com.epam.jdi.tools.LinqUtils.select;
-import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.format;
 import static com.epam.jdi.tools.pairs.Pair.$;
 

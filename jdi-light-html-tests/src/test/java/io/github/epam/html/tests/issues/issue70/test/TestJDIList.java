@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.ui.html.PageFactory;
 import io.github.epam.html.tests.issues.issue70.po.DashboardPage;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @JSite("https://epam.github.io/JDI/table-with-href/")
