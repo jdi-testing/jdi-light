@@ -191,11 +191,13 @@ public class JList<T extends BaseUIElement> extends JDIBase
 
     public List<String> values() {
         refresh();
+        noValidation();
         return map(T::getText);
     }
 
     public List<String> innerValues() {
         refresh();
+        noValidation();
         return map(T::innerText);
     }
 
