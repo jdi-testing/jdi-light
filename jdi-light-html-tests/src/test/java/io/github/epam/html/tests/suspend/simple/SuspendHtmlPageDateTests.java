@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.suspend;
+package io.github.epam.html.tests.suspend.simple;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -6,48 +6,40 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.StaticSite.suspendHtml5Page;
-import static io.github.com.pages.HtmlElementsPage.monthDate;
+import static io.github.com.pages.HtmlElementsPage.birthDate;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
-public class SuspendHtmlPageMonthTests extends TestsInit {
+public class SuspendHtmlPageDateTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         suspendHtml5Page.shouldBeOpened();
-        monthDate.setDateTime("2018-05");
-    }
-
-    @Test
-    public void setDateTimeTest() {
-        monthDate.setDateTime("2018-10");
-        monthDate.show();
-        assertEquals(monthDate.value(), "2018-10");
     }
 
     @Test
     public void isValidationTest() {
-        monthDate.is().month(containsString("-05"));
-        monthDate.is().enabled();
+        birthDate.is().date(is("1985-06-18"));
+        birthDate.is().enabled();
     }
 
     @Test
     public void labelTest() {
-        monthDate.label().is().text(containsString("Holidays"));
-        monthDate.label().is().text(equalToIgnoringCase("month of holidays"));
+        assertEquals(birthDate.label().getText(), "Birth date");
+        birthDate.label().is().text(containsString("Birth"));
     }
 
     @Test
     public void assertValidationTest() {
-        monthDate.assertThat().date(containsString("2018"));
+        birthDate.assertThat().date(containsString("1985"));
     }
 
     @Test
     public void baseValidationTest() {
-        baseValidation(monthDate);
+        baseValidation(birthDate);
     }
 }

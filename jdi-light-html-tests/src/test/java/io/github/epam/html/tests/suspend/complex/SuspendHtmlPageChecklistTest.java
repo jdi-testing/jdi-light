@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.suspend;
+package io.github.epam.html.tests.suspend.complex;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;

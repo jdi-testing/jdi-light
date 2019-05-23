@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.suspend;
+package io.github.epam.html.tests.suspend.simple;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
