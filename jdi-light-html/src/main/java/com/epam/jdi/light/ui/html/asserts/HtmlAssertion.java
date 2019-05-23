@@ -6,8 +6,8 @@ import com.epam.jdi.light.ui.html.base.HtmlElement;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.ui.html.utils.HtmlUtils.*;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static com.epam.jdi.light.asserts.SoftAssert.softAssertThat;
 
 public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAssert, TextAssert,
         LinkAssert, TextAreaAssert, ColorAssert, CheckboxAssert, DateTimeAssert,
@@ -22,7 +22,7 @@ public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAsser
      */
     @JDIAction("Assert that '{name}' label {0}")
     public HtmlAssertion label(Matcher<String> condition) {
-        assertThat(html.labelText(), condition);
+        softAssertThat(html.labelText(), condition);
         return this;
     }
     /**
@@ -31,7 +31,7 @@ public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAsser
      */
     @JDIAction("Assert that '{name}' src {0}")
     public HtmlAssertion src(Matcher<String> condition) {
-        assertThat(html.src(), condition);
+        softAssertThat(html.src(), condition);
         return this;
     }
 
@@ -41,7 +41,7 @@ public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAsser
      */
     @JDIAction("Assert that '{name}' alt {0}")
     public HtmlAssertion alt(Matcher<String> condition) {
-        assertThat(html.alt(), condition);
+        softAssertThat(html.alt(), condition);
         return this;
     }
 
@@ -51,7 +51,7 @@ public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAsser
      */
     @JDIAction("Assert that '{name}' ref {0}")
     public HtmlAssertion ref(Matcher<String> condition) {
-        assertThat(html.ref(), condition);
+        softAssertThat(html.ref(), condition);
         return this;
     }
 
@@ -61,7 +61,7 @@ public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAsser
      */
     @JDIAction("Assert that '{name}' height {0}")
     public HtmlAssertion height(Matcher<Integer> condition) {
-        assertThat(getInt("height", html), condition);
+        softAssertThat(getInt("height", html), condition);
         return this;
     }
 
@@ -71,124 +71,124 @@ public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAsser
      */
     @JDIAction("Assert that '{name}' width {0}")
     public HtmlAssertion width(Matcher<Integer> condition) {
-        assertThat(getInt("width", html), condition);
+        softAssertThat(getInt("width", html), condition);
         return this;
     }
 
     @JDIAction("Assert that '{name}' rows count {0}")
     public HtmlAssertion rowsCount(Matcher<Integer> condition) {
-        assertThat(html.rows(), condition);
+        softAssertThat(html.rows(), condition);
         return this;
     }
     @JDIAction("Assert that '{name}' columns count {0}")
     public HtmlAssertion colsCount(Matcher<Integer> condition) {
-        assertThat(html.cols(), condition);
+        softAssertThat(html.cols(), condition);
         return this;
     }
     @JDIAction("Assert that '{name}' minlength {0}")
     public HtmlAssertion minlength(Matcher<Integer> condition) {
-        assertThat(html.minlength(), condition);
+        softAssertThat(html.minlength(), condition);
         return this;
     }
     @JDIAction("Assert that '{name}' maxlength {0}")
     public HtmlAssertion maxlength(Matcher<Integer> condition) {
-        assertThat(html.maxlength(), condition);
+        softAssertThat(html.maxlength(), condition);
         return this;
     }
 
     @JDIAction("Assert that '{name}' color is {0}")
     public HtmlAssertion color(String color) {
-        assertThat(html.color(), is(color));
+        softAssertThat(html.color(), is(color));
         return this;
     }
     @JDIAction("Assert that '{name}' is selected")
     public HtmlAssertion selected() {
-        assertThat(html.isSelected() ? "selected" : "not selected", is("selected"));
+        softAssertThat(html.isSelected() ? "selected" : "not selected", is("selected"));
         return this;
     }
     @JDIAction("Assert that '{name}' is not selected")
     public HtmlAssertion deselected() {
-        assertThat(html.isSelected() ? "selected" : "not selected", is("not selected"));
+        softAssertThat(html.isSelected() ? "selected" : "not selected", is("not selected"));
         return this;
     }
     @JDIAction("Assert that '{name}' minValue {0}")
     public HtmlAssertion minValue(Matcher<Double> min) {
-        assertThat(getDouble("min", html), min);
+        softAssertThat(getDouble("min", html), min);
         return this;
     }
     @JDIAction("Assert that '{name}' maxValue {0}")
     public HtmlAssertion maxValue(Matcher<Double> max) {
-        assertThat(getDouble("max", html), max);
+        softAssertThat(getDouble("max", html), max);
         return this;
     }
     @JDIAction("Assert that '{name}' step {0}")
     public HtmlAssertion stepValue(Matcher<Double> step) {
-        assertThat(getDouble("step", html), step);
+        softAssertThat(getDouble("step", html), step);
         return this;
     }
     @JDIAction("Assert that '{name}' placeholder {0}")
     public HtmlAssertion placeholder(Matcher<String> placeholder) {
-        assertThat(html.placeholder(), placeholder);
+        softAssertThat(html.placeholder(), placeholder);
         return this;
     }
     @JDIAction("Assert that '{name}' number {0}")
     public HtmlAssertion number(Matcher<Double> number) {
-        assertThat(getDouble("value", html), number);
+        softAssertThat(getDouble("value", html), number);
         return this;
     }
     @JDIAction("Assert that '{name}' min {0}")
     public HtmlAssertion min(Matcher<Float> min) {
-        assertThat(getFloat("min", html), min);
+        softAssertThat(getFloat("min", html), min);
         return this;
     }
 
     @JDIAction("Assert that '{name}' max {0}")
     public HtmlAssertion max(Matcher<Float> max) {
-        assertThat(getFloat("max", html), max);
+        softAssertThat(getFloat("max", html), max);
         return this;
     }
 
     @JDIAction("Assert that '{name}' volume {0}")
     public HtmlAssertion volume(Matcher<Integer> volume) {
-        assertThat(getInt("value", html), volume);
+        softAssertThat(getInt("value", html), volume);
         return this;
     }
     @JDIAction("Assert that '{name}' min volume {0}")
     public HtmlAssertion minVolume(Matcher<Integer> min) {
-        assertThat(getInt("min", html), min);
+        softAssertThat(getInt("min", html), min);
         return this;
     }
     @JDIAction("Assert that '{name}' max volume {0}")
     public HtmlAssertion maxVolume(Matcher<Integer> max) {
-        assertThat(getInt("max", html), max);
+        softAssertThat(getInt("max", html), max);
         return this;
     }
     @JDIAction("Assert that '{name}' step {0}")
     public HtmlAssertion step(Matcher<Integer> step) {
-        assertThat(getInt("step", html), step);
+        softAssertThat(getInt("step", html), step);
         return this;
     }
 
     @JDIAction("Assert that '{name}' date {0}")
     public HtmlAssertion date(Matcher<String> date) {
-        assertThat(html.value(), date);
+        softAssertThat(html.value(), date);
         return this;
     }
 
     @JDIAction("Assert that '{name}' month {0}")
     public HtmlAssertion month(Matcher<String> month) {
-        assertThat(html.value(), month);
+        softAssertThat(html.value(), month);
         return this;
     }
 
     @JDIAction("Assert that '{name}' week {0}")
     public HtmlAssertion week(Matcher<String> week) {
-        assertThat(html.value(), week);
+        softAssertThat(html.value(), week);
         return this;
     }
     @JDIAction("Assert that '{name}' time {0}")
     public HtmlAssertion time(Matcher<String> time) {
-        assertThat(html.value(), time);
+        softAssertThat(html.value(), time);
         return this;
     }
 }

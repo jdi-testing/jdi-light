@@ -10,7 +10,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static com.epam.jdi.light.asserts.SoftAssert.softAssertThat;
 import static org.hamcrest.Matchers.*;
 
 public class DataTableAssert<D> extends TableAssert<DataTableAssert<D>> {
@@ -21,7 +21,7 @@ public class DataTableAssert<D> extends TableAssert<DataTableAssert<D>> {
     }
     @JDIAction("Assert that '{name}' has rows that meet expected condition")
     public DataTableAssert<D> row(JFunc1<D,Boolean> condition) {
-        assertThat(table().data(condition), not(nullValue()));
+        softAssertThat(table().data(condition), not(nullValue()));
         return this;
     }
     @JDIAction("Assert that '{name}' has {0}")
@@ -44,7 +44,7 @@ public class DataTableAssert<D> extends TableAssert<DataTableAssert<D>> {
         }
         @JDIAction("Assert that '{name}' has {type} '{count}' rows that meet expected condition")
         public DataTableAssert<D> rows(JFunc1<D,Boolean> condition) {
-            assertThat(exact
+            softAssertThat(exact
                 ? table().datas(condition)
                 : table().datas(condition, count),
             hasSize(count));

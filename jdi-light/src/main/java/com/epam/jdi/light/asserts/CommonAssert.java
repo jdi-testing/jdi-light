@@ -22,6 +22,5 @@ public interface CommonAssert<T> {
 
 
     List<Throwable> getResults();
-    void checkSoftAssertions();
     //void soft(JFunc<T> isAssert);
 }

@@ -17,4 +17,8 @@ public class ErrorCollector {
     public List<Throwable> showResults(){
         return errors;
     }
+
+    public void clear(){
+        errors.clear();
+    }
 }

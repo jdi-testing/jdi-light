@@ -1,8 +1,6 @@
 package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseElement;
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc;
@@ -11,12 +9,11 @@ import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 
 import java.util.List;
-
+import static com.epam.jdi.light.asserts.SoftAssert.softAssertThat;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T, E>> {
@@ -37,23 +34,23 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
 
     @JDIAction("Assert that each of '{name}' elements meet condition")
     public UIListAssert<T, E> each(JFunc1<E, Boolean> condition) {
-        assertThat(all(data.execute(), condition::execute), is(true));
+        softAssertThat(all(data.execute(), condition::execute), is(true));
         return this;
     }
     @JDIAction("Assert that any of '{name}' elements meet condition")
     public UIListAssert<T, E> any(JFunc1<E, Boolean> condition) {
-        assertThat(LinqUtils.any(data.execute(), condition::execute), is(true));
+        softAssertThat(LinqUtils.any(data.execute(), condition::execute), is(true));
         return this;
     }
 
     @JDIAction("Assert that only one of '{name}' elements meet condition")
     public UIListAssert<T, E> onlyOne(JFunc1<E, Boolean> condition) {
-        assertThat(single(data.execute(), condition::execute), is(notNullValue()));
+        softAssertThat(single(data.execute(), condition::execute), is(notNullValue()));
         return this;
     }
     @JDIAction("Assert that none of '{name}' meet condition")
     public UIListAssert<T, E> noOne(JFunc1<E, Boolean> condition) {
-        assertThat(first(data.execute(), condition::execute), is(nullValue()));
+        softAssertThat(first(data.execute(), condition::execute), is(nullValue()));
         return this;
     }
     @JDIAction("Assert that '{name}' text {0}")
@@ -62,31 +59,31 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
     }
     @JDIAction("Assert that '{name}' text {0}")
     public UIListAssert<T, E> value(Matcher<String> condition) {
-        assertThat(print(data.execute(), Object::toString), condition);
+        softAssertThat(print(data.execute(), Object::toString), condition);
         return this;
     }
     @JDIAction("Assert that '{name}' text {0}")
     public UIListAssert<T, E> value(String text) {
         elements.clear();
-        assertThat(select(data.execute(), Object::toString), hasItem(text));
+        softAssertThat(select(data.execute(), Object::toString), hasItem(text));
         return this;
     }
     @JDIAction("Assert that '{name}' is displayed")
     public UIListAssert<T, E> allDisplayed() {
         elements.clear();
-        assertThat(map(elements, this::isDisplayed), everyItem(is(true)));
+        softAssertThat(map(elements, this::isDisplayed), everyItem(is(true)));
         return this;
     }
     @JDIAction("Assert that '{name}' has at least one displayed element")
     public UIListAssert<T, E> displayed() {
         elements.clear();
-        assertThat(map(elements, this::isDisplayed), hasItem(true));
+        softAssertThat(map(elements, this::isDisplayed), hasItem(true));
         return this;
     }
     @JDIAction("Assert that '{name}' is hidden")
     public UIListAssert<T, E> hidden() {
         elements.clear();
-        assertThat(map(elements, this::isDisplayed), everyItem(is(false)));
+        softAssertThat(map(elements, this::isDisplayed), everyItem(is(false)));
         return this;
     }
     private boolean isDisplayed(T element) {
@@ -97,19 +94,19 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
     @JDIAction("Assert that '{name}' is empty")
     public UIListAssert<T, E> empty() {
         elements.clear();
-        assertThat(elements.isEmpty() ? "list is empty" : "list is not empty", is("list is empty"));
+        softAssertThat(elements.isEmpty() ? "list is empty" : "list is not empty", is("list is empty"));
         return this;
     }
     @JDIAction("Assert that '{name}' is not empty")
     public UIListAssert<T, E> notEmpty() {
         elements.clear();
-        assertThat(elements.isEmpty() ? "list is empty" : "list is not empty", is("list is not empty"));
+        softAssertThat(elements.isEmpty() ? "list is empty" : "list is not empty", is("list is not empty"));
         return this;
     }
     @JDIAction("Assert that '{name}' size {0}")
     public UIListAssert<T, E> size(Matcher<Integer> condition) {
         elements.clear();
-        assertThat(elements.size(), condition);
+        softAssertThat(elements.size(), condition);
         return this;
     }
     @JDIAction("Assert that '{name}' size {0}")
