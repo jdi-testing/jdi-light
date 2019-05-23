@@ -84,7 +84,7 @@ public class InitActions {
     public static MapArray<String, SetupRule> SETUP_RULES = map(
         $("Element", sRule(info -> isClass(info.instance.getClass(), JDIBase.class),
             InitActions::elementSetup)),
-        $("ISetup", sRule(info -> isInterface(info.field, ISetup.class)
+        $("ISetup", sRule(info -> isInterface(info.instance.getClass(), ISetup.class)
                 || hasSetupValue(info),
             info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class),

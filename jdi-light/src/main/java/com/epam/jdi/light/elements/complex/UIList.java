@@ -103,6 +103,8 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     }
 
     private T initElement(WebElement el) {
+        if (classType == null)
+            throw exception("Can't init UIList. Class Type is null.");
         try {
             T section = create(classType);
             if (isClass(classType, Section.class)) {

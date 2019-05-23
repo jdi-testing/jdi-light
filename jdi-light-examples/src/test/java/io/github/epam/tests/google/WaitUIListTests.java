@@ -51,7 +51,7 @@ public class WaitUIListTests extends StaticTestsInit {
         searchS.is().size(equalTo(8));
     }
     @Test
-    public void sizeNotEmptyTest() {
+    public void sizeGreaterTest() {
         searchS.is().size(greaterThan(7));
     }
 
