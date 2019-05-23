@@ -5,6 +5,7 @@ package com.epam.jdi.light.settings;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.asserts.SoftAssert;
 import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
@@ -44,7 +45,6 @@ public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String DOMAIN;
     public static String KILL_BROWSER = "afterAndBefore";
-    public static boolean IS_SOFT_ASSERT = true;
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
@@ -105,7 +105,7 @@ public class WebSettings {
             fillAction(p -> BROWSER_SIZE = p, "browser.size");
             fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
             fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
-            fillAction(WebSettings::setIsSoftAssert, "is.soft.assert");
+            fillAction(SoftAssert::setAssertType, "assert.type");
 
             // RemoteWebDriver properties
             fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
@@ -120,16 +120,6 @@ public class WebSettings {
             INIT_THREAD_ID = Thread.currentThread().getId();
             SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
             initialized = true;
-        }
-    }
-
-    private static void setIsSoftAssert(String p){
-        p = p.toLowerCase();
-        if (p.equals("true")){
-            IS_SOFT_ASSERT = true;
-        }
-        if (p.equals("false")){
-            IS_SOFT_ASSERT = false;
         }
     }
 

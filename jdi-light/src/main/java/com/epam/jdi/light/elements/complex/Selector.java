@@ -46,7 +46,7 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
     }
 
     /**
-     * Selects only particular elements
+     * Check that only particular elements are selected
      * @param values String var arg, elements with text to select
      */
     @JDIAction("Check '{0}' for '{name}'")
@@ -55,11 +55,17 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
         for (String value : values)
             select().selectByVisibleText(value);
     }
+
+    /**
+     * Check the particular element is selected
+     * @param values String var arg, element with text to select
+     */
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String values) {
         if (Strings.isEmpty(values)) return;
         check(values.split(","));
     }
+
     /**
      * Unselects only particular elements
      * @param values String var arg, elements with text to unselect
@@ -105,10 +111,19 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
         }
     }
 
+    /**
+     * Get checked elements
+     * @return List
+     */
     @JDIAction("Get checked elements")
     public List<String> checked() {
         return map(select().getAllSelectedOptions(), WebElement::getText);
     }
+
+    /**
+     * Get selected element value
+     * @return String
+     */
     @JDIAction("Get selected value")
     public String selected() {
         return select().getFirstSelectedOption().getText();
@@ -121,26 +136,45 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
     }
 
     /**
-     * Gets attr 'placeholder'
+     * Gets attribute 'placeholder'
      * @return String
      */
     @JDIAction(level = DEBUG)
     public String placeholder() { return getAttribute("placeholder"); }
 
+    /**
+     * Get the elements values
+     * @return List
+     */
     @JDIAction(level = DEBUG)
     public List<String> values() {
         return map(select().getOptions(), WebElement::getText);
     }
+
+    /**
+     * Get the elements values
+     * @return List
+     */
     @JDIAction(level = DEBUG)
     public List<String> innerValues() {
         return map(select().getOptions(), w -> $(w).innerText());
     }
     public int size() { return select().getOptions().size(); }
+
+    /**
+     * Get the list of enabled elements
+     * @return List
+     */
     @JDIAction(level = DEBUG)
     public List<String> listEnabled() {
         List<UIElement> els = getUI().finds("option");
         return ifSelect(els, UIElement::isEnabled, UIElement::getText);
     }
+
+    /**
+     * Get the list of disabled elements
+     * @return List
+     */
     @JDIAction(level = DEBUG)
     public List<String> listDisabled() {
         return ifSelect(getUI().finds("option"),

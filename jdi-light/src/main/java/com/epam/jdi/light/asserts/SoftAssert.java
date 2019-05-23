@@ -1,41 +1,46 @@
 package com.epam.jdi.light.asserts;
 
-import com.epam.jdi.light.elements.init.rules.ErrorCollector;
+import com.epam.jdi.tools.Safe;
 import org.hamcrest.Matcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.settings.WebSettings.IS_SOFT_ASSERT;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SoftAssert {
-    private static ErrorCollector collector = new ErrorCollector();
+    private static Safe<List<Throwable>> listOfErrors = new Safe<>(new ArrayList<>());
+    private static boolean IS_SOFT_ASSERT = false;
 
-    public static <T> void softAssertThat(T actual, Matcher<? super T> matcher) {
+    public static void setAssertType(String type) {
+        IS_SOFT_ASSERT = type.equalsIgnoreCase("soft");
+        clearResults();
+    }
+    public static void assertSoft() {
+        setAssertType("soft");
+    }
+    public static void assertStrict() {
+        setAssertType("strict");
+    }
+    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
         try {
             assertThat(actual, matcher);
         } catch (Throwable error) {
             if (IS_SOFT_ASSERT) {
-                collector.addError(error);
-            } else if (error.getMessage().length() != 0){
+                listOfErrors.get().add(error);
+            } else
                 throw new AssertionError(error);
-            }
         }
     }
 
-    public static List<Throwable> getResults() {
-        try {
-            if (collector.showResults().size() > 0) {
-                throw new AssertionError(collector.showResults());
-            }
-        } catch (AssertionError assertionError){
-            collector.clear();
-            throw new AssertionError(assertionError);
-        }
-        return null;
+    public static void assertResults() {
+        List<Throwable> errors = new ArrayList<>(listOfErrors.get());
+        clearResults();
+        if (!errors.isEmpty())
+            throw new AssertionError(errors);
     }
 
-    private static void clearResults(){
-        collector.clear();
+    public static void clearResults(){
+        listOfErrors.get().clear();
     }
 }

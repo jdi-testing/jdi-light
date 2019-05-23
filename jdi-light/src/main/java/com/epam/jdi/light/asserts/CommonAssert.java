@@ -2,8 +2,6 @@ package com.epam.jdi.light.asserts;
 
 import org.hamcrest.Matcher;
 
-import java.util.List;
-
 public interface CommonAssert<T> {
     T attr(String attrName, Matcher<String> condition);
     T css(String css, Matcher<String> condition);
@@ -20,7 +18,7 @@ public interface CommonAssert<T> {
     T enabled();
     T disabled();
 
-
-    List<Throwable> getResults();
-    //void soft(JFunc<T> isAssert);
+    default void assertResults() {
+        SoftAssert.assertResults();
+    }
 }

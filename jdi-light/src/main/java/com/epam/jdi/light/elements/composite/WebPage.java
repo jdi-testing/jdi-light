@@ -61,11 +61,19 @@ public class WebPage extends DriverBase implements PageObject {
         new WebPage(url).open();
     }
 
+    /**
+     * Get Web page URL
+     * @return String
+     */
     @JDIAction(level = DEBUG)
     public static String getUrl() {
         return getDriver().getCurrentUrl();
     }
 
+    /**
+     * Get Web page title
+     * @return String
+     */
     @JDIAction(level = DEBUG)
     public static String getTitle() {
         return getDriver().getTitle();
@@ -101,6 +109,7 @@ public class WebPage extends DriverBase implements PageObject {
 
     /**
      * Opens url specified for page
+     * @param url
      */
     @JDIAction("Open '{name}'(url={0})")
     private void open(String url) {
@@ -145,6 +154,10 @@ public class WebPage extends DriverBase implements PageObject {
         setCurrentPage(this);
     }
 
+    /**
+     * Check the page is opened
+     * @return boolean
+     */
     @JDIAction(level = DEBUG)
     public boolean isOpened() {
         if (!hasRunDrivers())
@@ -170,13 +183,18 @@ public class WebPage extends DriverBase implements PageObject {
     }
 
     public void shouldBeOpened() {
-        openePage(url);
+        openedPage(url);
     }
     public void shouldBeOpened(Object... params) {
-        openePage(getUrlWithParams(params));
+        openedPage(getUrlWithParams(params));
     }
+
+    /**
+     * Check the page is opened
+     * @param url
+     */
     @JDIAction("'{name}'(url={0}) should be opened")
-    private void openePage(String url) {
+    private void openedPage(String url) {
         if (isOpened()) return;
         open(url);
         checkOpened();
@@ -198,7 +216,6 @@ public class WebPage extends DriverBase implements PageObject {
         getDriver().navigate().back();
     }
 
-
     /**
      * Go forward to next page
      */
@@ -207,41 +224,82 @@ public class WebPage extends DriverBase implements PageObject {
         getDriver().navigate().forward();
     }
 
+    /**
+     * Scale the page by the specific factor
+     * @param factor
+     */
     @JDIAction(level = DEBUG)
     public static void zoom(double factor) {
         jsExecute("document.body.style.transform = 'scale(' + arguments[0] + ')';" +
                         "document.body.style.transformOrigin = '0 0';", factor);
     }
+
+    /**
+     * Get page html
+     * @return String
+     */
     @JDIAction
     public static String getHtml() {
         return getDriver().getPageSource();
     }
 
+    /**
+     * Scroll screen on specific values
+     * @param x
+     * @param y
+     */
     @JDIAction(level = DEBUG)
     private static void scroll(int x, int y) {
         jsExecute("window.scrollBy("+x+","+y+")");
     }
+
+    /**
+     * Scroll screen to top
+     */
     @JDIAction
     public static void scrollToTop() {
         jsExecute("window.scrollTo(0,0)");
     }
+
+    /**
+     * Scroll screen to bottom
+     */
     @JDIAction
     public static void scrollToBottom() {
         jsExecute("window.scrollTo(0,document.body.scrollHeight)");
     }
 
+    /**
+     * Scroll screen down on specific values
+     * @param value
+     */
     @JDIAction("Scroll screen down on '{0}'")
     public static void scrollDown(int value) {
         scroll(0,value);
     }
+
+    /**
+     * Scroll screen up on specific values
+     * @param value
+     */
     @JDIAction("Scroll screen up on '{0}'")
     public static void  scrollUp(int value) {
         scroll(0,-value);
     }
+
+    /**
+     * Scroll screen to the right on specific values
+     * @param value
+     */
     @JDIAction("Scroll screen to the right on '{0}'")
     public static void  scrollRight(int value) {
         scroll(value,0);
     }
+
+    /**
+     * Scroll screen to the left on specific values
+     * @param value
+     */
     @JDIAction("Scroll screen to the left on '{0}'")
     public static void scrollLeft(int value) {
         scroll(-value,0);

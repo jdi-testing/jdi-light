@@ -59,6 +59,11 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     private boolean actualMapValue() {
         return elements.hasValue() && elements.get().size() > 0 && isActual(elements.get().values().get(0));
     }
+
+    /**
+     * @param minAmount
+     * @return List
+     */
     @JDIAction(level = DEBUG)
     public List<T> elements(int minAmount) {
         if (actualValuesValue())
@@ -68,6 +73,10 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         values.set(LinqUtils.select(getList(minAmount), this::initElement));
         return values.get();
     }
+
+    /**
+     * Clear
+     */
     @JDIAction(level = DEBUG)
     public void clear() {
         elements.clear();
@@ -140,6 +149,10 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         }
     }
 
+    /**
+     * Get the element by the value
+     * @param value
+     */
     @JDIAction(level = DEBUG)
     public T get(String value) {
         if (getLocator().toString().contains("%s")) {
@@ -163,6 +176,9 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
             : null;
     };
 
+    /**
+     * Scroll to list elements
+     */
     @JDIAction("Scroll to list elements")
     public void showAll() {
         if (!isClass(classType, Section.class))
@@ -183,6 +199,11 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         return PrintUtils.print(LinqUtils.map(asData(), Object::toString));
     }
 
+    /**
+     * Match passed value with elements
+     * @param condition to compare
+     * @return UIListAsserts
+     */
     @JDIAction("Assert that {name} data meet condition")
     public UIListAssert<T, E> is(Matcher<? super List<E>> condition) {
         MatcherAssert.assertThat(asData(), condition);
