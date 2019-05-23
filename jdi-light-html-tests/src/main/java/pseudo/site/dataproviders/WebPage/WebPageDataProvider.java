@@ -16,12 +16,4 @@ public class WebPageDataProvider {
             {pageWithoutBoth, "https://epam.github.io/JDI/",""}
         };
     }
-
-    @DataProvider
-    public Object[][] actionsWebPageDataProvider() {
-        return new Object[][]{
-
-
-        };
-    }
 }
