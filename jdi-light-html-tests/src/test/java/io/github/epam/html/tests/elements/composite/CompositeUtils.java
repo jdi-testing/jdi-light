@@ -2,9 +2,8 @@ package io.github.epam.html.tests.elements.composite;
 
 import com.epam.jdi.light.elements.base.JDIBase;
 
-import java.lang.reflect.Modifier;
-
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 public class CompositeUtils {
     public static void checkInitializedElement(JDIBase htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {

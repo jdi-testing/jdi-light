@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import io.github.com.custom.UserTable;
 import io.github.epam.custom.UserRow;
 import io.github.epam.entities.UserInfo;
 
@@ -30,5 +31,7 @@ public class PerformancePage extends WebPage {
 		rowHeader = "Name", size = 4
 	)
 	public static DataTable<UserRow, UserInfo> usersDataSetup;
+	@UI("#users-table")
+	public static UserTable<UserRow, UserInfo> customUsersDataSetup;
 
 }

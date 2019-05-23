@@ -13,7 +13,6 @@ import com.epam.jdi.light.elements.interfaces.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.settings.WebSettings;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
@@ -22,9 +21,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -35,7 +32,7 @@ import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.composite.WebPage.addPage;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.reflect.Modifier.isStatic;

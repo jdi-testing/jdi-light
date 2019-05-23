@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.issues.issue73;
 
 import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.ui.html.common.TextField;
 
 class StageItem extends Section {

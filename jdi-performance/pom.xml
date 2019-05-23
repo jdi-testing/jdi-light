@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-performance</artifactId>
-    <version>1.0</version>
+    <version>1.0.61</version>
     <name>JDI Performance</name>
 
     <properties>
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.0.58</version>
+            <version>1.0.61</version>
         </dependency>
 
         <dependency>
@@ -38,6 +38,11 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.testng}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.2</version>
         </dependency>
 
         <dependency>

@@ -7,7 +7,6 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.ListAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
@@ -15,6 +14,8 @@ import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -212,8 +213,15 @@ public class JList<T extends BaseUIElement> extends JDIBase
 
     //region matchers
     public ListAssert<T> is() {
-        refresh();
-        return new ListAssert<>(this, this, toError());
+        return new ListAssert<>(() -> {refresh(); return this; }, () -> {refresh(); return this; }, toError());
+    }
+    @JDIAction("Assert that {name} list meet condition")
+    public ListAssert<T> is(Matcher<? super List<T>> condition) {
+        MatcherAssert.assertThat(this, condition);
+        return is();
+    }
+    public ListAssert<T> assertThat(Matcher<? super List<T>> condition) {
+        return is(condition);
     }
     public ListAssert<T> assertThat() {
         return is();

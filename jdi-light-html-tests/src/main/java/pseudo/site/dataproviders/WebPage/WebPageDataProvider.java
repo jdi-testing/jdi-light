@@ -1,6 +1,7 @@
 package pseudo.site.dataproviders.WebPage;
 
 import org.testng.annotations.DataProvider;
+
 import static pseudo.site.PseudoSite.*;
 
 public class WebPageDataProvider {

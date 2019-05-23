@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.UIUtils.*;
+import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
@@ -183,9 +183,8 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
 
     @JDIAction("Assert that {name} data meet condition")
     public UIListAssert<T, E> is(Matcher<? super List<E>> condition) {
-        refresh();
         MatcherAssert.assertThat(asData(), condition);
-        return new UIListAssert<>(this, () -> { clear(); return asData(); }, toError(), failElement);
+        return is();
     }
     public UIListAssert<T, E> is() {
         return new UIListAssert<>(this, () -> { clear(); return asData(); }, toError(), failElement);

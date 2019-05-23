@@ -85,7 +85,7 @@ public class ActionProcessor {
             throw exception(getFailedMessage(jp, exception));
         } finally {
             logger.logOn();
-            TIMEOUT.stopFreeze();
+            TIMEOUT.unfreeze();
         }
     }
     private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {

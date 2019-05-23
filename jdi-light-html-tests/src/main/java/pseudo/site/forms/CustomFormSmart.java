@@ -9,7 +9,7 @@ import pseudo.site.entities.User;
 
 import java.util.List;
 
-public class SomeFormSmart extends Form<User> {
+public class CustomFormSmart extends Form<User> {
     WebElement fbWebElement;
     public WebElement fbPublicWebElement;
     private WebElement fbPrivateWebElement;

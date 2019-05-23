@@ -1,10 +1,10 @@
 package io.github.epam;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import io.github.epam.testng.TestNGListener;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -21,6 +21,6 @@ public class TestsInit extends TestNGListener {
     }
     @AfterSuite(alwaysRun = true)
     public static void tearDown() {
-        WebDriverFactory.close();
+        killAllSeleniumDrivers();;
     }
 }
