@@ -28,7 +28,7 @@ Run test execution automatically and correct tests if any changes in layout happ
 ## Useful Links
 Test site: https://jdi-testing.github.io/jdi-light/
 
-Login to get access to all pages (Login: epam; Password: 1234)
+Login to get access to all pages (Login: Roman; Password: Jdi1234)
 
 Html Elements examples: https://jdi-testing.github.io/jdi-light/html5.html
 
