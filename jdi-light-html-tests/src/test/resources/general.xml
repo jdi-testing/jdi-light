@@ -7,6 +7,7 @@
             <package name="io.github.epam.html.tests.elements.complex"/>
             <package name="io.github.epam.html.tests.elements.composite.*"/>
             <package name="io.github.epam.html.tests.site"/>
+            <package name="io.github.epam.html.tests.suspend"/>
         </packages>
     </test>
     <listeners>
