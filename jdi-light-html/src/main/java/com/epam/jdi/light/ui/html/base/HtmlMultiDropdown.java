@@ -1,6 +1,6 @@
 package com.epam.jdi.light.ui.html.base;
 
-import com.epam.jdi.light.asserts.IHasSelectAssert;
+import com.epam.jdi.light.asserts.IHasAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.Selector;
@@ -20,7 +20,7 @@ import static java.util.Arrays.asList;
 import static org.jsoup.helper.StringUtil.isBlank;
 
 public class HtmlMultiDropdown extends Selector<HtmlElement>
-        implements MultiDropdown, IHasSelectAssert {
+        implements MultiDropdown, IHasAssert<SelectAssert> {
 
     public HtmlMultiDropdown() { setInitClass(HtmlElement.class); }
     public HtmlMultiDropdown(WebElement el) { super(el); setInitClass(HtmlElement.class); }
@@ -47,7 +47,7 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
     }
 
     /**
-     * Select values from parameters
+     * Selects values from parameters
      * @param names String var arg, elements with text to select
      */
     @Override
@@ -79,6 +79,7 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
         if (isBlank(names)) return;
         check(names.split(","));
     }
+    
     /**
      * Selects only particular elements
      * @param names String var arg, elements with text to select
@@ -156,6 +157,10 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
         }
     }
 
+    /**
+     * Gets checked values in dropdown
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' checked values")
     public List<String> checked() {
         return ifSelect(allValues(),
@@ -163,30 +168,57 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
                 HtmlElement::getText);
     }
 
+    /**
+     * Selects value in dropdown
+     * @param value String var arg
+     */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
         select(new String[]{value});
     }
 
+    /**
+     * Selects value with index in dropdown
+     * @param index int var arg
+     */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
         select(new int[]{index});
     }
 
+    /**
+     * Gets a list of text from each values from dropdown
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' list values")
     public List<String> values() {
         return map(allValues(), HtmlElement::getText);
     }
+
+    /**
+     * Gets a list of innerText from each values from dropdown
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' values")
     public List<String> innerValues() {
         return map(allValues(), HtmlElement::innerText);
     }
+
+    /**
+     * Gets enabled values from dropdown
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
         return ifSelect(allValues(),
                 HtmlElement::isEnabled,
                 HtmlElement::getText);
     }
+
+    /**
+     * Gets disabled values from dropdown
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {
         return ifSelect(allValues(),
@@ -199,12 +231,21 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
         check(value);
     }
 
+    /**
+     * Gets selected value
+     * @return String
+     */
     @Override
     @JDIAction("Get '{name}' selected value")
     public String selected() {
         return valueText().getText();
     }
 
+    /**
+     * Checks if a value is selected in a dropdown
+     * @param value String to select
+     * @return boolean
+     */
     @JDIAction("Is '{0}' selected for '{name}'")
     public boolean selected(String value) {
         return selected().trim().equalsIgnoreCase(value.trim());
@@ -216,7 +257,7 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
     }
 
     public SelectAssert is() {
-        return new SelectAssert(this);
+        return new SelectAssert(() -> this);
     }
     public SelectAssert assertThat() {
         return is();
@@ -230,5 +271,4 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
     public SelectAssert shouldBe() {
         return is();
     }
-
 }

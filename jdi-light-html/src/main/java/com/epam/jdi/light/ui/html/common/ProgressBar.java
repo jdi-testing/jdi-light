@@ -11,4 +11,7 @@ public interface ProgressBar extends BaseFindElement<HtmlElement>, HasLabel {
 
     ProgressAssert is();
     ProgressAssert assertThat();
+    ProgressAssert has();
+    ProgressAssert waitFor();
+    ProgressAssert shouldBe();
 }

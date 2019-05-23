@@ -18,4 +18,7 @@ public interface NumberSelector extends BaseFindElement<HtmlElement>, HasLabel, 
 
     NumberAssert is();
     NumberAssert assertThat();
+    NumberAssert has();
+    NumberAssert waitFor();
+    NumberAssert shouldBe();
 }

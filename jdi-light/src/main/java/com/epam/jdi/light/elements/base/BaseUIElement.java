@@ -5,7 +5,6 @@ package com.epam.jdi.light.elements.base;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import org.openqa.selenium.By;
@@ -14,12 +13,12 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static java.lang.Thread.currentThread;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public abstract class BaseUIElement<T extends BaseUIElement>
         extends JDIBase implements WebElement, BaseFindElement<T>, SetValue {
@@ -35,7 +34,7 @@ public abstract class BaseUIElement<T extends BaseUIElement>
 
     protected T newElement() {
         try {
-            return initClass.newInstance();
+            return create(initClass);
         }
         catch (Exception ex) {
             throw exception("Can't instantiate %s. Exception: ",
@@ -120,10 +119,11 @@ public abstract class BaseUIElement<T extends BaseUIElement>
 
     public T label() {
         return newElement()
-            .setLocator(By.cssSelector("[for="+getAttribute("id")+"]"))
-            .setName(getName() + " label");
+                .setLocator(By.cssSelector("[for="+getAttribute("id")+"]"))
+                .setName(getName() + " label");
     }
-
+    @Override
+    public String getText() { return super.getText(); }
     /**
      * Gets label text
      * @return String text
@@ -142,20 +142,6 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     }
 
     /**
-     * Get text
-     * @return String text
-     */
-    @JDIAction("Get '{name}' text")
-    public String getText() {
-        WebElement el = get();
-        String text = el.getText();
-        if (isNotBlank(text))
-            return text;
-        String value = el.getAttribute("value");
-        return isNotBlank(value) ? value : text;
-    }
-
-    /**
      * Get attribute 'value'
      * @return String
      */
@@ -163,16 +149,6 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     public String getValueText() {
         return getAttribute("value");
     }
-
-    /**
-     * Get attribute innerText'
-     * @return String
-     */
-    @JDIAction("Get '{name}' text")
-    public String innerText() {
-        return jsExecute("innerText");
-    }
-    public String text() { return getText(); }
 
     public List<WebElement> findElements(By by) {
         return uiSearch(get(),by);
@@ -284,23 +260,5 @@ public abstract class BaseUIElement<T extends BaseUIElement>
      */
     public String value() { return getAttribute("value"); }
 
-    //endregion
-
-    //region Asserts
-    public IsAssert is() {
-        return new IsAssert(this);
-    }
-    public IsAssert assertThat() {
-        return is();
-    }
-    public IsAssert has() {
-        return is();
-    }
-    public IsAssert waitFor() {
-        return is();
-    }
-    public IsAssert shouldBe() {
-        return is();
-    }
     //endregion
 }

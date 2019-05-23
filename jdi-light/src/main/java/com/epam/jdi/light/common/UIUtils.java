@@ -14,7 +14,9 @@ import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -95,7 +97,7 @@ public final class UIUtils {
 
     public static <T> T asEntity(Object obj, Class<T> entityClass) {
         try {
-            T data = newEntity(entityClass);
+            T data = create(entityClass);
             List<Field> dataFields = getFields(data, String.class);
             foreach(getFields(obj, HasValue.class), item -> {
                 Field field = first(dataFields, f ->
@@ -115,5 +117,28 @@ public final class UIUtils {
         return isInterface(obj.getClass(), INamed.class)
             ? ((INamed)obj).getName()
             : obj.getClass().getSimpleName();
+    }
+    private static <T> T csInit(Constructor<?> cs, Object... params) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        cs.setAccessible(true);
+        return (T) cs.newInstance(params);
+    }
+    public static <T> T create(Class<?> cs) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        Constructor<?>[] constructors = cs.getDeclaredConstructors();
+        Constructor<?> constructor = first(constructors, c -> c.getParameterCount() == 0);
+        if (constructor != null)
+            return csInit(constructor);
+        throw exception("%s has no empty constructors", cs.getSimpleName());
+    }
+    public static <T> T create(Class<?> cs, Object... params) {
+        Constructor<?>[] constructors = cs.getDeclaredConstructors();
+        List<Constructor<?>> listConst = filter(constructors, c -> c.getParameterCount() == params.length);
+        if (listConst.size() == 0)
+            throw exception("%s has no appropriate constructors", cs.getSimpleName());
+        for(Constructor<?> cnst : listConst) {
+            try {
+                return csInit(cnst);
+            } catch (Exception ignore) { }
+        }
+        throw exception("%s has no appropriate constructors", cs.getSimpleName());
     }
 }

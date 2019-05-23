@@ -107,6 +107,10 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
      */
     public int maxlength() { return getInt("maxlength", this); }
 
+    /**
+     * Adds text to the next line.
+     * @param line String
+     */
     public void addNewLine(String line) {
         sendKeys("\n" + line);
     }
@@ -129,15 +133,21 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
      */
     public String step() { return getAttribute("step"); }
 
-
   /**
    * Gets attribute 'value' from color picker
    * @return String color value
    */
     public String color() { return getAttribute("value"); }
 
+    /**
+     * Gets attribute value by range and casts it to int
+     * @return int attribute value by range
+     */
     @JDIAction(value = "Get '{name}' volume", level = DEBUG)
-    public int volume() { return getInt("value", this); }
+    public int volume() {
+        return getInt("value", this);
+    }
+
     /**
      * Sets color value
      * @param color value to set
@@ -210,6 +220,12 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
     public HtmlAssertion shouldBe() {
         return is();
     }
+
+    /**
+     * Create new HtmlElement by WebElement
+     * @param el WebElement
+     * @return HtmlElement
+     */
     @Override
     public HtmlElement newElement(WebElement el) {
         return new HtmlElement(el);

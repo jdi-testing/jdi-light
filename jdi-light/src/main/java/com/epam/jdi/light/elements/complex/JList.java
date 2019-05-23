@@ -14,6 +14,8 @@ import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -23,6 +25,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -40,11 +43,16 @@ public class JList<T extends BaseUIElement> extends JDIBase
     public JList(List<WebElement> elements) {
         this.elements.setForce(toJList(elements));
     }
-
     /**
      * @param minAmount
      * @return List
      */
+    protected Class<?> initClass = UIElement.class;
+    public JList<T> setInitClass(Class<T> listClass) {
+        initClass = listClass;
+        return this;
+    }
+
     @JDIAction(level = DEBUG)
     public List<T> elements(int minAmount) {
         if (elements.hasValue() && isActual() && elements.get().size() >= minAmount)
@@ -240,11 +248,13 @@ public class JList<T extends BaseUIElement> extends JDIBase
 
     public List<String> values() {
         refresh();
+        noValidation();
         return map(T::getText);
     }
 
     public List<String> innerValues() {
         refresh();
+        noValidation();
         return map(T::innerText);
     }
 
@@ -262,8 +272,15 @@ public class JList<T extends BaseUIElement> extends JDIBase
 
     //region matchers
     public ListAssert<T> is() {
-        refresh();
-        return new ListAssert<>(this, this, toError());
+        return new ListAssert<>(() -> {refresh(); return this; }, () -> {refresh(); return this; }, toError());
+    }
+    @JDIAction("Assert that {name} list meet condition")
+    public ListAssert<T> is(Matcher<? super List<T>> condition) {
+        MatcherAssert.assertThat(this, condition);
+        return is();
+    }
+    public ListAssert<T> assertThat(Matcher<? super List<T>> condition) {
+        return is(condition);
     }
     public ListAssert<T> assertThat() {
         return is();
@@ -278,12 +295,6 @@ public class JList<T extends BaseUIElement> extends JDIBase
         return is();
     }
     //endregion
-
-    protected Class<?> initClass = UIElement.class;
-    public JList<T> setInitClass(Class<T> listClass) {
-        initClass = listClass;
-        return this;
-    }
     public void setup(Field field) {
         Type[] types;
         try {
@@ -307,7 +318,7 @@ public class JList<T extends BaseUIElement> extends JDIBase
     }
     private T getNewInstance(WebElement element) {
         try {
-            T instance = (T) initClass.newInstance();
+            T instance = create(initClass);
             instance.setWebElement(element).setName(getName());
             instance.setTypeName(typeName);
             instance.setParent(parent);

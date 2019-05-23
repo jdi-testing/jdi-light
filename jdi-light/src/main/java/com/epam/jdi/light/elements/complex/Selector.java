@@ -193,19 +193,6 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
     }
 
     public SelectAssert is() {
-        return new SelectAssert(this);
+        return new SelectAssert(() -> this);
     }
-    public SelectAssert assertThat() {
-        return is();
-    }
-    public SelectAssert has() {
-        return is();
-    }
-    public SelectAssert waitFor() {
-        return is();
-    }
-    public SelectAssert shouldBe() {
-        return is();
-    }
-
 }

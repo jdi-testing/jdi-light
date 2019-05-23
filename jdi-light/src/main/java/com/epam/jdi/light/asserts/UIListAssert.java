@@ -11,12 +11,13 @@ import org.hamcrest.MatcherAssert;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class UIListAssert<T extends Section, E> {
+public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T, E>> {
     List<T> elements;
     JFunc<List<E>> data;
     public String name;
@@ -24,6 +25,7 @@ public class UIListAssert<T extends Section, E> {
     public String failElement;
 
     public UIListAssert(List<T> elements, JFunc<List<E>> data, String name, String failElement) {
+        super($("Not Allowed in UI List"));
         this.elements = elements;
         this.data = data;
         this.name = name;

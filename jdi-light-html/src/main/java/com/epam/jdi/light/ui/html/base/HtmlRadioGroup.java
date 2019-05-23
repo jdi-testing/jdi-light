@@ -1,6 +1,6 @@
 package com.epam.jdi.light.ui.html.base;
 
-import com.epam.jdi.light.asserts.IHasSelectAssert;
+import com.epam.jdi.light.asserts.IHasAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.Selector;
@@ -14,10 +14,9 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static java.util.Arrays.asList;
 import static org.openqa.selenium.By.cssSelector;
 
-public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButtons, IHasSelectAssert {
+public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButtons, IHasAssert<SelectAssert> {
     By radioButton = cssSelector("input[type=radio][id='%s']");
     By label = LABEL_LOCATOR;
     private String getId(String name) { return label(name).getAttribute("for"); }
@@ -40,8 +39,9 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
             throw exception("Please specify RadioButtons locator in order to get all radio buttons");
         return getAll();
     }
+
     /**
-     * Selects radio based on value
+     * Selects a radio based on value
      * @param value String to select
      */
     @Override
@@ -51,7 +51,7 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
     }
 
     /**
-     * Selects radio based on index
+     * Selects a radio based on index
      * @param index int to select
      */
     @JDIAction("Select '{0}' for '{name}'")
@@ -59,7 +59,7 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
         labels().get(index-1).click();
     }
     /**
-     * Gets secleted radio
+     * Gets a selected radio
      * @return String
      */
     @JDIAction("Get '{name}' selected value")
@@ -67,28 +67,48 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
         HtmlElement result = first(radioButtons(), HtmlElement::isSelected);
         return result != null ? result.labelText() : "";
     }
+
+    /**
+     * Checks if a value is selected on a radio
+     * @param value String to select
+     * @return boolean
+     */
     @JDIAction("Is '{0}' selected for '{name}'")
     public boolean selected(String value) {
         return get(value).isSelected();
     }
 
+    /**
+     * Gets a list of text from each values from a radio
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' list values")
     public List<String> values() {
         return map(labels(), HtmlElement::getText);
     }
+
+    /**
+     * Gets a list of innerText from each values from a radio
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' list values")
     public List<String> innerValues() {
         return map(labels(), HtmlElement::innerText);
     }
-    @JDIAction("Get '{name}' checked values")
-    public List<String> checked() {
-        return asList(selected());
-    }
 
+    /**
+     * Gets a list an enabled values of a radio
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
         return ifSelect(radioButtons(), HtmlElement::isEnabled, HtmlElement::labelText);
     }
+
+    /**
+     * Gets a list a disabled values of a radio
+     * @return List<String>
+     */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {
         return ifSelect(radioButtons(), HtmlElement::isDisabled, HtmlElement::labelText);
@@ -103,9 +123,6 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
         return selected();
     }
 
-    public SelectAssert is() {
-        return new SelectAssert(this);
-    }
     public SelectAssert assertThat() {
         return is();
     }
@@ -118,5 +135,4 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
     public SelectAssert shouldBe() {
         return is();
     }
-
 }

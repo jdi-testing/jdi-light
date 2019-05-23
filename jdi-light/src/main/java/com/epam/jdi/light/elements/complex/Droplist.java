@@ -125,7 +125,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
      * @return boolean
      */
     @JDIAction("Is item '{0}' displayed in '{name}'")
-    public boolean isDisplayed(String value) {
+    public boolean isDisplayed(String name) {
         assertLinked(list, "list", "isDisplayed");
         return isExpanded() && list.values().contains(name);
     }
@@ -163,7 +163,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         assertLinked(list, "list", "values");
-        return ((WebList)list.noValidation()).values();
+        return list.values();
     }
 
     /**
@@ -173,7 +173,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
     @JDIAction("Get '{name}' values")
     public List<String> innerValues() {
         assertLinked(list, "list", "values");
-        return ((WebList)list.noValidation()).innerValues();
+        return list.innerValues();
     }
     public List<String> listEnabled() {
         return list.ifSelect(JDIBase::isEnabled, BaseUIElement::getText);
@@ -252,7 +252,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
 
     //region matchers
     public ListAssert<UIElement> is() {
-        return new ListAssert<>(list, this, toError());
+        return new ListAssert<>(() -> { list.refresh(); return list; }, () -> { list.refresh(); return this; }, toError());
     }
     public ListAssert<UIElement> assertThat() {
         return is();

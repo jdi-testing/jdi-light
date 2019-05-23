@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
@@ -71,7 +72,7 @@ public class Line implements IList<String> {
 
     public <D> D asData(Class<D> data) {
         D instance;
-        try { instance = data.newInstance(); }
+        try { instance = create(data); }
         catch (Exception ex) { throw exception("Can't convert row to Data (%s)", data.getSimpleName()); }
         int i = 0;
         for (Field field : data.getDeclaredFields()) {
@@ -86,7 +87,7 @@ public class Line implements IList<String> {
     }
     public <D> D asData(Class<D> data, MapArray<String, String> line) {
         D instance;
-        try { instance = data.newInstance(); }
+        try { instance = create(data); }
         catch (Exception ex) { throw exception("Can't convert row to Entity (%s)", data.getSimpleName()); }
         for (Pair<String, String> cell : line) {
             Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
@@ -103,7 +104,7 @@ public class Line implements IList<String> {
 
     public <T> T asLine(Class<T> cl) {
         T instance;
-        try { instance = cl.newInstance(); }
+        try { instance = create(cl); }
         catch (Exception ex) { throw exception("Can't convert row to Entity (%s)", cl.getSimpleName()); }
         initElements(instance);
         for (int i = 0; i < headers.size(); i++) {

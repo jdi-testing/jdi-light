@@ -24,10 +24,6 @@ public class FormsTests extends TestsInit {
     public void loginTest() {
         shouldBeLoggedOut();
         userIcon.click();
-        MapArray<String, String> attrs = userIcon.attrs();
-        attrs = attrs.filter((k,v) -> isNotBlank(v));
-        assertThat(attrs.size(), is(2));
-        assertThat(attrs.keys(), hasItem("src"));
         loginForm.loginAs(DEFAULT_USER);
         homePage.checkOpened();
     }
@@ -38,5 +34,13 @@ public class FormsTests extends TestsInit {
         contactFormPage.shouldBeOpened();
         main.contactForm.submit(DEFAULT_CONTACT);
         main.contactForm.check(DEFAULT_CONTACT);
+    }
+    @Test
+    public void attrsTest() {
+        shouldBeLoggedOut();
+        MapArray<String, String> attrs = userIcon.attrs();
+        attrs = attrs.filter((k,v) -> isNotBlank(v));
+        assertThat(attrs.size(), is(2));
+        assertThat(attrs.keys(), hasItem("src"));
     }
 }

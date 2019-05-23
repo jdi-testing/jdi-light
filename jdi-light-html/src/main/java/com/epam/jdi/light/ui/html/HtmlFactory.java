@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.complex.Droplist;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import com.epam.jdi.light.ui.html.base.HtmlList;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 /**
  * Created by Roman_Iovlev on 3/28/2018.
@@ -28,8 +29,14 @@ public class HtmlFactory {
     public static HtmlElement $(By locator) {
         return element(locator);
     }
+    public static HtmlElement $(String locator, Object parent) {
+        return element(locator).setParent(parent);
+    }
     public static HtmlElement $(By locator, Object parent) {
         return element(locator).setParent(parent);
+    }
+    public static HtmlElement $(WebElement webElement) {
+        return new HtmlElement(webElement);
     }
 
     public static HtmlList list(String locator) {

@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
@@ -11,6 +12,7 @@ import com.epam.jdi.tools.func.JAction4;
 import com.epam.jdi.tools.func.JFunc3;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -67,7 +69,7 @@ public class Form<T> extends Section {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
-                UIElement element = new UIElement().setName(pair.key);
+                UIElement element = new UIElement().setParent(this).setName(pair.key);
                 fillAction(null, element, pageObject, pair.value);
             }
             return;
@@ -128,7 +130,7 @@ public class Form<T> extends Section {
     protected List<String> verify(MapArray<String, String> map) {
         List<String> compareFalse = new ArrayList<>();
         for (Field field : allFields()) {
-            String fieldValue = map.first((name, value) ->
+            String fieldValue = map.firstValue((name, value) ->
                     namesEqual(name, getElementName(field)));
             if (fieldValue == null) continue;
             String actual = getAction(field, getValueField(field, pageObject), pageObject);
@@ -378,5 +380,21 @@ public class Form<T> extends Section {
         submit(entity, "search");
     }
 
+    @Override
+    public boolean displayed() {
+        try {
+            if (webElement.hasValue())
+                return webElement.get().isDisplayed();
+            if (locator.isEmpty()) {
+                List<Field> fields = getFieldsInterfaceOf(pageObject, SetValue.class);
+                if (fields.isEmpty())
+                    return get().isDisplayed();
+                BaseUIElement first = (BaseUIElement) fields.get(0).get(pageObject);
+                return first.isDisplayed();
+            }
+            List<WebElement> result = getAll();
+            return result.size() == 1 && result.get(0).isDisplayed();
+        } catch (Exception ex) { return false; }
+    }
     //endregion
 }
