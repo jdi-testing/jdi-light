@@ -15,14 +15,13 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -34,11 +33,11 @@ import static com.epam.jdi.light.elements.composite.WebPage.addPage;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
 import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -70,10 +69,10 @@ public class PageFactory {
                 initPageFields(info, pageField);
             } catch (Exception ex) {
                 throw exception("Can't init %s '%s' on '%s'. Exception: %s",
-                        isClass(pageField.getType(), WebPage.class) ? "page" : "element",
-                        pageField.getName(),
-                        site.getSimpleName(),
-                        ex.getMessage());
+                    isClass(pageField.getType(), WebPage.class) ? "page" : "element",
+                    pageField.getName(),
+                    site.getSimpleName(),
+                    ex.getMessage());
             }
         }
     }
@@ -136,40 +135,46 @@ public class PageFactory {
     }
 
     private static void initFieldUsingRules(SiteInfo info) {
-        String ruleName = "";
-        try {
-            if (!info.field.getType().isInterface())
+        if (!info.field.getType().isInterface())
+            try {
                 info.instance = create(info.field.getType());
-            else {
-                for (Pair<String, InitRule> rule : INIT_RULES) {
-                    ruleName = rule.key;
-                    if (rule.value.condition.execute(info.field)) {
-                        ruleName = "Init:" + ruleName;
-                        info.instance = rule.value.func.execute(info);
-                        break;
-                    }
-                }
-                if (!ruleName.contains("Init:")) throw exception("");
+            } catch (Exception ex) {
+                throw exception("Can't create field '%s' instance of type '%s'. %sException: %s",
+                    info.field.getName(), info.field.getType(), LINE_BREAK, ex.getMessage());
             }
-        } catch (Exception ex) {
-            throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'. No init rules found (you can add appropriate rule in InitActions.INIT_RULES).%s Exception: " + ex.getMessage(),
-                    ruleName, info.field.getName(), info.parentName(), LINE_BREAK);
+        else {
+            Pair<String, InitRule> firstRule = INIT_RULES.first((k,r) ->
+                r.condition.execute(info.field));
+            if (firstRule != null)
+                try {
+                    info.instance = firstRule.value.func.execute(info);
+                } catch (Exception ex) {
+                    throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'.%s Exception: %s",
+                        firstRule.key, info.field.getName(), info.parentName(), LINE_BREAK, ex.getMessage());
+                }
+            else
+                throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES).",
+                    info.field.getName());
         }
     }
 
     private static void setupFieldUsingRules(SiteInfo info) {
-        String ruleName = "";
+        MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) ->
+                r.condition.execute(info));
+        if (info.field.getName().equals("search3"))
+            System.out.println("REMOVE");
+        String ruleName = "UNDEFINED";
+        if (isEmpty(setupRules))
+            throw exception("No setup rules found for '%s' (you can add appropriate rule in InitActions.SETUP_RULES).",
+                info.field.getName());
         try {
-            for(Pair<String, SetupRule> rule : SETUP_RULES) {
+            for(Pair<String, SetupRule> rule : setupRules) {
                 ruleName = rule.key;
-                if (rule.value.condition.execute(info)) {
-                    ruleName = "Setup:"+ruleName;
-                    rule.value.action.execute(info);
-                }
+                rule.value.action.execute(info);
             }
         } catch (Exception ex) {
-            throw exception("Setup rule '%s' failed. Can't setup field '%s' on page '%s'. No setup rules found (you can add appropriate rule in InitActions.SETUP_RULES).%s Exception: " + ex.getMessage(),
-                    ruleName, info.field.getName(), info.parentName(), LINE_BREAK);
+            throw exception("Setup rule '%s' failed. Can't setup field '%s' on page '%s'.%sException: %s",
+                ruleName, info.field.getName(), info.parentName(), LINE_BREAK, ex.getMessage());
         }
     }
 

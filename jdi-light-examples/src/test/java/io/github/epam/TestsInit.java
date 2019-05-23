@@ -1,6 +1,5 @@
 package io.github.epam;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import io.github.epam.testng.TestNGListener;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;

@@ -26,11 +26,11 @@ Run test execution automatically and correct tests if any changes in layout happ
 [Features](https://github.com/jdi-testing/jdi-light/labels/feature)
 
 ## Useful Links
-Test site: https://epam.github.io/JDI/
+Test site: https://jdi-testing.github.io/jdi-light/
 
-Login to get access to all pages (Login: epam; Password: 1234)
+Login to get access to all pages (Login: Roman; Password: Jdi1234)
 
-Html Elements examples: https://epam.github.io/JDI/html5.html
+Html Elements examples: https://jdi-testing.github.io/jdi-light/html5.html
 
 Example Html elements tests: https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests
 

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.UIUtils.*;
+import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
@@ -103,6 +103,8 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     }
 
     private T initElement(WebElement el) {
+        if (classType == null)
+            throw exception("Can't init UIList. Class Type is null.");
         try {
             T section = create(classType);
             if (isClass(classType, Section.class)) {

@@ -1,6 +1,5 @@
 package io.github.epam.tests.google;
 
-import com.epam.jdi.light.settings.TimeoutSettings;
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -11,7 +10,6 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.pages.Header.search;
 import static io.github.com.pages.SearchPage.searchS;
-import static io.github.com.pages.SearchPage.searchTitle;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
@@ -53,7 +51,7 @@ public class WaitUIListTests extends StaticTestsInit {
         searchS.is().size(equalTo(8));
     }
     @Test
-    public void sizeNotEmptyTest() {
+    public void sizeGreaterTest() {
         searchS.is().size(greaterThan(7));
     }
 

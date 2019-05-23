@@ -326,9 +326,12 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public Rectangle getRect() {
         return get().getRect();
     }
-    @JDIAction(level = DEBUG)
+    @JDIAction
     public String getCssValue(String s) {
         return get().getCssValue(s);
+    }
+    public String css(String prop) {
+        return getCssValue(prop);
     }
     @JDIAction(level = DEBUG)
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {

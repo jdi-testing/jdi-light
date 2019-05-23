@@ -130,7 +130,7 @@ public class Form<T> extends Section {
     protected List<String> verify(MapArray<String, String> map) {
         List<String> compareFalse = new ArrayList<>();
         for (Field field : allFields()) {
-            String fieldValue = map.first((name, value) ->
+            String fieldValue = map.firstValue((name, value) ->
                     namesEqual(name, getElementName(field)));
             if (fieldValue == null) continue;
             String actual = getAction(field, getValueField(field, pageObject), pageObject);

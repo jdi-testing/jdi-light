@@ -21,7 +21,8 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.any;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 
 /**
@@ -102,7 +103,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
     public String getValue() { return getText(); }
 
     @JDIAction("Is item '{0}' displayed in '{name}'")
-    public boolean isDisplayed(String value) {
+    public boolean isDisplayed(String name) {
         assertLinked(list, "list", "isDisplayed");
         return isExpanded() && list.values().contains(name);
     }
@@ -131,12 +132,12 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         assertLinked(list, "list", "values");
-        return ((WebList)list.noValidation()).values();
+        return list.values();
     }
     @JDIAction("Get '{name}' values")
     public List<String> innerValues() {
         assertLinked(list, "list", "values");
-        return ((WebList)list.noValidation()).innerValues();
+        return list.innerValues();
     }
     public List<String> listEnabled() {
         return list.ifSelect(JDIBase::isEnabled, BaseUIElement::getText);
@@ -207,7 +208,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
 
     //region matchers
     public ListAssert<UIElement> is() {
-        return new ListAssert<>(() -> { list.refresh(); return list; }, () -> { list.refresh(); return list; }, toError());
+        return new ListAssert<>(() -> { list.refresh(); return list; }, () -> { list.refresh(); return this; }, toError());
     }
     public ListAssert<UIElement> assertThat() {
         return is();

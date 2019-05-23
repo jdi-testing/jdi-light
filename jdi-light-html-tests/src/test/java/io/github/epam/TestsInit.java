@@ -1,10 +1,9 @@
 package io.github.epam;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.driver.WebDriverUtils;
 import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
@@ -19,6 +18,7 @@ public class TestsInit {
     public static void setUp() {
         logger.setLogLevel(INFO);
         SMART_SEARCH_LOCATORS.add("[ui=%s]");
+        initElements(PseudoSite.class);
         initElements(StaticSite.class);
         homePage.open();
         logger.toLog("Run Tests");

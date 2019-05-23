@@ -107,6 +107,10 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
      */
     public int maxlength() { return getInt("maxlength", this); }
 
+    /**
+     * Adds text to the next line.
+     * @param line String
+     */
     public void addNewLine(String line) {
         sendKeys("\n" + line);
     }
@@ -216,6 +220,12 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
     public HtmlAssertion shouldBe() {
         return is();
     }
+
+    /**
+     * Create new HtmlElement by WebElement
+     * @param el WebElement
+     * @return HtmlElement
+     */
     @Override
     public HtmlElement newElement(WebElement el) {
         return new HtmlElement(el);
