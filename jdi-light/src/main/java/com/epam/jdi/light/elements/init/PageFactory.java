@@ -161,6 +161,8 @@ public class PageFactory {
     private static void setupFieldUsingRules(SiteInfo info) {
         MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) ->
                 r.condition.execute(info));
+        if (info.field.getName().equals("search3"))
+            System.out.println("REMOVE");
         String ruleName = "UNDEFINED";
         if (isEmpty(setupRules))
             throw exception("No setup rules found for '%s' (you can add appropriate rule in InitActions.SETUP_RULES).",
