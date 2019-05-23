@@ -6,7 +6,6 @@ package com.epam.jdi.light.asserts;
  */
 
 public interface IHasAssert<T> {
-
     T is();
     default T assertThat() {
         return is();
@@ -18,6 +17,9 @@ public interface IHasAssert<T> {
         return is();
     }
     default T shouldBe() {
+        return is();
+    }
+    default T verify() {
         return is();
     }
 }

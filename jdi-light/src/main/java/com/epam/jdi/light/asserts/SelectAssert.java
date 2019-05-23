@@ -13,7 +13,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.*;
 
 public class SelectAssert extends IsAssert<SelectAssert> {
@@ -31,7 +31,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that '{0}' option selected for '{name}'")
     public SelectAssert selected(String option) {
-        assertThat(selector.execute().selected(option), is(true));
+        jdiAssert(selector.execute().selected(option), is(true));
         return this;
     }
     public <TEnum extends Enum> SelectAssert selected(TEnum option) {
@@ -45,7 +45,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that '{name}' selected option {0}")
     public SelectAssert selected(Matcher<? super List<String>> condition) {
-        assertThat(selector.execute().checked(), condition);
+        jdiAssert(selector.execute().checked(), condition);
         return this;
     }
 
@@ -56,7 +56,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that '{name}' values {0}")
     public SelectAssert values(Matcher<? super List<String>> condition) {
-        assertThat(selector.execute().values(), condition);
+        jdiAssert(selector.execute().values(), condition);
         return this;
     }
 
@@ -67,7 +67,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that '{name}' values {0}")
     public SelectAssert innerValues(Matcher<? super List<String>> condition) {
-        assertThat(selector.execute().innerValues(), condition);
+        jdiAssert(selector.execute().innerValues(), condition);
         return this;
     }
 
@@ -78,7 +78,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that '{name}' enabled items {0}")
     public SelectAssert enabled(Matcher<? super List<String>> condition) {
-        assertThat(selector.execute().listEnabled(), condition);
+        jdiAssert(selector.execute().listEnabled(), condition);
         return this;
     }
 
@@ -89,7 +89,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that '{name}' disabled items {0}")
     public SelectAssert disabled(Matcher<? super List<String>> condition) {
-        assertThat(selector.execute().listDisabled(), condition);
+        jdiAssert(selector.execute().listDisabled(), condition);
         return this;
     }
 
@@ -100,7 +100,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that all '{name}' texts {0}")
     public SelectAssert texts(Matcher<Collection<? extends String>> condition) {
-        assertThat(selector.execute().values(), condition);
+        jdiAssert(selector.execute().values(), condition);
         return this;
     }
 
@@ -111,7 +111,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that all '{name}' attributes {0}")
     public SelectAssert attrs(String attrName, Matcher<Collection<? extends String>> condition) {
-        assertThat(selector.execute().getAllAttributes().keys(), condition);
+        jdiAssert(selector.execute().getAllAttributes().keys(), condition);
         return this;
     }
 
@@ -122,7 +122,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that all '{name}' elements css '{0}' {1}")
     public SelectAssert allCss(String css, Matcher<Collection<? extends String>> condition) {
-        assertThat(map(selector.execute().allUI(), el -> el.getCssValue(css)), condition);
+        jdiAssert(map(selector.execute().allUI(), el -> el.getCssValue(css)), condition);
         return this;
     }
 
@@ -133,7 +133,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that all '{name}' tags {0}")
     public SelectAssert allTags(Matcher<Collection<? extends String>> condition) {
-        assertThat(map(selector.execute().allUI(), UIElement::getTagName), condition);
+        jdiAssert(map(selector.execute().allUI(), UIElement::getTagName), condition);
         return this;
     }
 
@@ -154,7 +154,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that all '{name}' css classes {0}")
     public SelectAssert cssClasses(Matcher<Iterable<String>> condition) {
-        assertThat(selector.execute().classes(), condition);
+        jdiAssert(selector.execute().classes(), condition);
         return this;
     }
     private WebList getWebList() {
@@ -170,7 +170,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that all '{name}' elements are displayed")
     public SelectAssert allDisplayed() {
-        assertThat(map(getWebList(), UIElement::isDisplayed), everyItem(is(true)));
+        jdiAssert(map(getWebList(), UIElement::isDisplayed), everyItem(is(true)));
         return this;
     }
 
@@ -180,7 +180,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that all '{name}' elements are hidden")
     public SelectAssert allHidden() {
-        assertThat(map(getWebList(), UIElement::isDisplayed), everyItem(is(false)));
+        jdiAssert(map(getWebList(), UIElement::isDisplayed), everyItem(is(false)));
         return this;
     }
 
@@ -190,7 +190,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that all '{name}' elements are selected")
     public SelectAssert allSelected() {
-        assertThat(map(getWebList(), UIElement::isSelected), everyItem(is(true)));
+        jdiAssert(map(getWebList(), UIElement::isSelected), everyItem(is(true)));
         return this;
     }
 
@@ -200,7 +200,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that all '{name}' elements are enabled")
     public SelectAssert allEnabled() {
-        assertThat(map(getWebList(), UIElement::isEnabled), everyItem(is(true)));
+        jdiAssert(map(getWebList(), UIElement::isEnabled), everyItem(is(true)));
         return this;
     }
 
@@ -210,7 +210,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that '{name}' is empty")
     public SelectAssert empty() {
-        assertThat(selector.execute().isEmpty() ? "list is empty" : "list is not empty", is("list is empty"));
+        jdiAssert(selector.execute().isEmpty() ? "list is empty" : "list is not empty", is("list is empty"));
         return this;
     }
 
@@ -220,7 +220,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that '{name}' is not empty")
     public SelectAssert notEmpty() {
-        assertThat(selector.execute().isEmpty() ? "list is empty" : "list is not empty", is("list is not empty"));
+        jdiAssert(selector.execute().isEmpty() ? "list is empty" : "list is not empty", is("list is not empty"));
         return this;
     }
 
@@ -231,7 +231,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      */
     @JDIAction("Assert that '{name}' size {0}")
     public SelectAssert size(Matcher<Integer> condition) {
-        assertThat(selector.execute().size(), condition);
+        jdiAssert(selector.execute().size(), condition);
         return this;
     }
 
