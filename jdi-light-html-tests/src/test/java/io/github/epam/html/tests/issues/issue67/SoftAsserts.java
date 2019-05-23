@@ -30,8 +30,7 @@ public class SoftAsserts extends TestsInit {
                 .text(is("Big Red *** Button-Input"))
                 .text(containsString("Red Button"))
                 .attr("type", is("button"))
-                .tag(is("input"))
-                .getResults();
+                .tag(is("input"));
     }
 
     @Test
@@ -40,8 +39,7 @@ public class SoftAsserts extends TestsInit {
                 .alt(is("Jdi Logo 777"))
                 .src(containsString("jdi-logo.jpg777"))
                 .height(is(100))
-                .width(is(1000))
-                .getResults();
+                .width(is(1000));
     }
 
     @Test
@@ -50,8 +48,7 @@ public class SoftAsserts extends TestsInit {
                 .deselected()
                 .selected()
                 .disabled()
-                .displayed()
-                .getResults();
+                .displayed();
     }
 
     @Test
@@ -60,7 +57,6 @@ public class SoftAsserts extends TestsInit {
         users.assertThat()
                 .row(d -> d.user.contains("Ivannn"))
                 .allRows(d -> d.user.length() > 4)
-                .atLeast(3).rows(d -> d.type.contains("Userrr"))
-                .getResults();
+                .atLeast(3).rows(d -> d.type.contains("Userrr"));
     }
 }
