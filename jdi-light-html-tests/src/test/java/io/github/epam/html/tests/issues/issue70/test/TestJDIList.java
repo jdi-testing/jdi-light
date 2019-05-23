@@ -6,7 +6,7 @@ import com.epam.jdi.light.ui.html.PageFactory;
 import io.github.epam.html.tests.issues.issue70.po.DashboardPage;
 import org.testng.annotations.Test;
 
-@JSite("https://epam.github.io/JDI/table-with-href/")
+@JSite("https://jdi-testing.github.io/jdi-light/table-with-href/")
 public class TestJDIList {
     @Url("table-with-href.html")
     public static DashboardPage dashboardPage;
