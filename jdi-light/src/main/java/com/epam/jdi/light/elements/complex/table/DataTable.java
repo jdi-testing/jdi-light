@@ -35,12 +35,23 @@ public class DataTable<L extends Section, D> extends Table {
     protected CacheAll<MapArray<String, D>> datas
         = new CacheAll<>(MapArray::new);
 
+    /**
+     * Get table row by the row number
+     * @param rowNum
+     * @return D refers to user data object
+     */
     @JDIAction("Get row '{0}' for '{name}' table")
     public D data(int rowNum) {
         if (!datas.get().has(rowNum+""))
             datas.get().add(rowNum+"", getLineData(row(rowNum)));
         return datas.get().get(rowNum+"");
     }
+
+    /**
+     * Get table row by the row number
+     * @param rowNum
+     * @return L refers to table line object
+     */
     @JDIAction("Get row '{0}' for '{name}' table")
     public L line(int rowNum) {
         if (!lines.get().has(rowNum+""))
@@ -48,33 +59,71 @@ public class DataTable<L extends Section, D> extends Table {
         return lines.get().get(rowNum+"");
     }
 
+    /**
+     * Get table row by the row name
+     * @param rowName
+     * @return D refers to user data object
+     */
     @JDIAction("Get row '{0}' for '{name}' table")
     public D data(String rowName) {
         return data(getRowIndexByName(rowName));
     }
+
+    /**
+     * Get table row by the row name
+     * @param rowName
+     * @return L refers to table line object
+     */
     @JDIAction("Get row '{0}' for '{name}' table")
     public L line(String rowName) {
         return line(getRowIndexByName(rowName));
     }
 
+    /**
+     * Get table row by the row name
+     * @param rowName
+     * @return D refers to user data object
+     */
     @JDIAction("Get row '{0}' for '{name}' table")
     public D data(Enum rowName) {
         return data(getEnumValue(rowName));
     }
+
+    /**
+     * Get table row by the row name
+     * @param rowName
+     * @return L refers to table line object
+     */
     @JDIAction("Get row '{0}' for '{name}' table")
     public L line(Enum rowName) {
         return line(getEnumValue(rowName));
     }
 
+    /**
+     * Get first table row that match criteria
+     * @param matchers to compare
+     * @return D refers to user data object
+     */
     @JDIAction("Get first '{name}' table row that match criteria")
     public D data(TableMatcher... matchers) {
         return getLineData(row(matchers));
     }
+
+    /**
+     * Get first table row that match criteria
+     * @param matchers to compare
+     * @return L refers to table line object
+     */
     @JDIAction("Get first '{name}' table row that match criteria")
     public L line(TableMatcher... matchers) {
         return row(matchers).asLine(lineClass);
     }
 
+    /**
+     * Get first table row that match criteria
+     * @param matcher to compare
+     * @return D refers to user data object
+     */
     @JDIAction("Get first '{name}' table row that match criteria")
     public D data(JFunc1<D, Boolean> matcher) {
         for (int i = 1; i <= count.get(); i++) {
@@ -85,6 +134,11 @@ public class DataTable<L extends Section, D> extends Table {
         return null;
     }
 
+    /**
+     * Get first table row that match criteria
+     * @param matcher to compare
+     * @return L refers to table line object
+     */
     @JDIAction("Get first '{name}' table row that match criteria")
     public L line(JFunc1<D, Boolean> matcher) {
         for (int i = 1; i <= count.get(); i++) {
@@ -94,10 +148,22 @@ public class DataTable<L extends Section, D> extends Table {
         return null;
     }
 
+    /**
+     * Get all table rows that match criteria
+     * @param matcher to compare
+     * @return List
+     */
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<D> datas(JFunc1<D, Boolean> matcher) {
         return filter(allData(), matcher::execute);
     }
+
+    /**
+     * Get at least a specified number of rows of the table that meet the criteria
+     * @param matcher to compare
+     * @param amount
+     * @return List
+     */
     @JDIAction("Get at least {1} '{name}' table rows that match criteria")
     public List<D> datas(JFunc1<D, Boolean> matcher, int amount) {
         List<D> result = new ArrayList<>();
@@ -109,22 +175,43 @@ public class DataTable<L extends Section, D> extends Table {
         }
         return result;
     }
+
+    /**
+     * Get first table row that match criteria
+     * @param matcher to compare
+     * @return List
+     */
     @JDIAction("Get first '{name}' table row that match criteria")
     public List<L> lines(JFunc1<D, Boolean> matcher) {
         return ifSelect(rows(), r -> matcher.execute(getLineData(r)),
                 r -> r.asLine(lineClass));
     }
 
+    /**
+     * Get all table rows that match criteria
+     * @param matchers to compare
+     * @return List
+     */
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<D> datas(TableMatcher... matchers) {
         if (matchers.length == 0) return allData();
         return map(rows(matchers), this::getLineData);
     }
+
+    /**
+     * Get all table rows that match criteria
+     * @param matchers to compare
+     * @return List
+     */
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<L> lines(TableMatcher... matchers) {
         return map(rows(matchers), l -> l.asLine(lineClass));
     }
 
+    /**
+     * Get all table rows
+     * @return List
+     */
     @JDIAction("Get all '{name}' rows")
     public List<D> allData() {
         if (datas.isGotAll()) return datas.get().values();
@@ -134,6 +221,11 @@ public class DataTable<L extends Section, D> extends Table {
         datas.gotAll();
         return datas.set(result).values();
     }
+
+    /**
+     * Get all table rows
+     * @return List
+     */
     @JDIAction("Get all '{name}' rows")
     public List<L> allLines() {
         if (lines.isGotAll()) return lines.get().values();
@@ -144,42 +236,94 @@ public class DataTable<L extends Section, D> extends Table {
         return lines.set(result).values();
     }
 
+    /**
+     * Get table rows that match criteria in column
+     * @param matcher to compare
+     * @param column
+     * @return List
+     */
     @JDIAction("Filter '{name}' table rows that match criteria in column '{1}'")
     public List<D> filterData(Matcher<String> matcher, Column column) {
         return map(filterRows(matcher, column), this::getLineData);
     }
+
+    /**
+     * Get table rows that match criteria in column
+     * @param matcher to compare
+     * @param column
+     * @return List
+     */
     @JDIAction("Filter '{name}' table rows that match criteria in column '{1}'")
     public List<L> filterLines(Matcher<String> matcher, Column column) {
         return map(filterRows(matcher, column), l -> l.asLine(lineClass));
     }
 
+    /**
+     * Get table rows that match criteria in column
+     * @param matchers to compare
+     * @return List
+     */
     @JDIAction("Filter '{name}' table rows that match criteria")
     public List<D> filterDatas(Pair<Matcher<String>, Column>... matchers) {
         return map(filterRows(matchers), this::getLineData);
     }
+
+    /**
+     * Get table rows that match criteria in column
+     * @param matchers to compare
+     * @return List
+     */
     @JDIAction("Filter '{name}' table rows that match criteria")
     public List<L> filterLines(Pair<Matcher<String>, Column>... matchers) {
         return map(filterRows(matchers), l -> l.asLine(lineClass));
     }
 
+    /**
+     * Get table row that match criteria in column
+     * @param matcher to compare
+     * @param column
+     * @return D refers to user data object
+     */
     @JDIAction("Get '{name}' table row that match criteria in column '{1}'")
     public D data(Matcher<String> matcher, Column column) {
         return getLineData(row(matcher, column));
     }
 
+    /**
+     * Get table row that match criteria in column
+     * @param matcher to compare
+     * @param column
+     * @return L refers to table line object
+     */
     @JDIAction("Get '{name}' table row that match criteria in column '{1}'")
     public L line(Matcher<String> matcher, Column column) {
         return row(matcher, column).asLine(lineClass);
     }
+
+    /**
+     * Get table row that match criteria in column
+     * @param matchers to compare
+     * @return D refers to user data object
+     */
     @JDIAction("Get '{name}' table row that match criteria")
     public D data(Pair<Matcher<String>, Column>... matchers) {
         return getLineData(row(matchers));
     }
+
+    /**
+     * Get table row that match criteria in column
+     * @param matchers to compare
+     * @return L refers to table line object
+     */
     @JDIAction("Get '{name}' table row that match criteria")
     public L line(Pair<Matcher<String>, Column>... matchers) {
         return row(matchers).asLine(lineClass);
     }
 
+    /**
+     * Get table value
+     * @return String
+     */
     @Override
     @JDIAction("Get '{name}' table value")
     public String getValue() {

@@ -11,14 +11,16 @@ public class Cookies {
 
     private static WebDriver.Options manage() { return WebDriverFactory.getDriver().manage(); }
     /**
-     *   Get all browser cookies
+     * Get all browser cookies
+     * @return Set
      */
     @JDIAction("Get site cookies")
     public static Set<Cookie> getCookies() {
         return manage().getCookies();
     }
     /**
-     * @param value Get cookie by nam
+     * Get cookie by name
+     * @param value Get cookie by name
      */
     @JDIAction("Get cookie '{0}'")
     public static Cookie getCookie(String value) {

@@ -40,6 +40,10 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
     protected UIElement value;
     protected WebList list;
 
+    /**
+     * Select the specified element by the value
+     * @param value
+     */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
         if (expander != null && list != null) {
@@ -50,6 +54,10 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
     }
     public <TEnum extends Enum> void select(TEnum name) { select(getEnumValue(name));}
 
+    /**
+     * Select the specified element by the index
+     * @param index
+     */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
         if (expander != null && list != null) {
@@ -58,6 +66,11 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
         }
         else getSelectElement(format("select '%s'", index)).selectByIndex(index);
     }
+
+    /**
+     * Get text
+     * @return String text
+     */
     @JDIAction("Get '{name}' text")
     public String getText() {
         if (value != null) {
@@ -78,6 +91,10 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
         throw exception(SELECT_ERROR, action, this);
     }
 
+    /**
+     * Check element is expanded
+     * @return boolean
+     */
     @JDIAction("Is '{name}' expanded")
     public boolean isExpanded() {
         assertLinked(list, "list", "expand");
@@ -102,12 +119,21 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
     }
     public String getValue() { return getText(); }
 
+    /**
+     * Check the element is displayed
+     * @param value
+     * @return boolean
+     */
     @JDIAction("Is item '{0}' displayed in '{name}'")
     public boolean isDisplayed(String name) {
         assertLinked(list, "list", "isDisplayed");
         return isExpanded() && list.values().contains(name);
     }
 
+    /**
+     * Get the element text
+     * @return String text
+     */
     @JDIAction(level = DEBUG)
     public String getSelected() {
         return getText();
@@ -115,6 +141,7 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
 
     /**
      * Waits while Element becomes visible
+     * @return boolean
      */
     @JDIAction("Is '{name}' displayed")
     public boolean isDisplayed() {
@@ -129,11 +156,20 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
         return asList(getSelected());
     }
 
+    /**
+     * Get the elements attribute 'value'
+     * @return List
+     */
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         assertLinked(list, "list", "values");
         return list.values();
     }
+
+    /**
+     * Get the elements attribute 'innerValue'
+     * @return List
+     */
     @JDIAction("Get '{name}' values")
     public List<String> innerValues() {
         assertLinked(list, "list", "values");
@@ -147,11 +183,19 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
         return list.ifSelect(JDIBase::isDisabled, BaseUIElement::getText);
     }
 
+    /**
+     * Click on the item
+     */
     @JDIAction(level = DEBUG)
     public void click() {
         assertLinked(list, "expander", "click");
         expander.click();
     }
+
+    /**
+     * Send specified value as keys
+     * @param charSequence
+     */
     @JDIAction("Input '{0}' in '{name}'")
     public void sendKeys(CharSequence... charSequence) {
         value.sendKeys(charSequence);

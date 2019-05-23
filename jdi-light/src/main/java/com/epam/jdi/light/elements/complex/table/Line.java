@@ -52,6 +52,12 @@ public class Line implements IList<String> {
             data = dataMap.execute();
         return data;
     }
+
+    /**
+     * Create list of specified size
+     * @param minAmount
+     * @return List
+     */
     @JDIAction(level = DEBUG)
     public List<String> elements(int minAmount) {
         return getList(minAmount);

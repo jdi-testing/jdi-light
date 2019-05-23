@@ -27,11 +27,21 @@ public class FileAssert extends BaseAssert {
         file = new File(mergePath(DOWNLOADS_DIR, fileName));
     }
 
+    /**
+     * Check that file is downloaded
+     * @return FileAssert
+     */
     @JDIAction("Assert that file '{name}' is downloaded")
     public FileAssert isDownloaded() {
         assertThat(timer().wait(() -> file.exists()), is(true));
         return this;
     }
+
+    /**
+     * Match passed value with file text
+     * @param text to compare
+     * @return FileAssert
+     */
     @JDIAction("Assert that file '{name}' text {0}")
     public FileAssert text(Matcher<String> text) {
         boolean result = timer().wait(() -> {
@@ -48,6 +58,11 @@ public class FileAssert extends BaseAssert {
         return this;
     }
 
+    /**
+     * Match passed value with file size
+     * @param size to compare
+     * @return FileAssert
+     */
     @JDIAction("Assert file '{name}' size")
     public FileAssert hasSize(Matcher<Long> size) {
         timer().wait(() -> {
