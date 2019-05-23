@@ -21,44 +21,38 @@ public class ActionsWebPageTests extends TestsInit {
     @Test
     public void getUrlTest() {
 
-        Assert.assertEquals(WebPage.getUrl(), "");
+        Assert.assertEquals(WebPage.getUrl(), "https://epam.github.io/JDI/");
     }
 
     @Test
     public void getTitleTest() {
 
-        Assert.assertEquals(WebPage.getTitle(), "");
-    }
-
-    @Test
-    public void openTest() {
-
-        new WebPage().open("");
+        Assert.assertEquals(WebPage.getTitle(), "!here must be title!");
     }
 
     @Test
     public void checkOpenedTest() {
 
-        new WebPage().checkOpened();
+        contactFormPage.checkOpened();
     }
 
 
     @Test
     public void isOpenedTest() {
 
-        Assert.assertTrue(new WebPage().isOpened());
-    }
-
-    @Test
-    public void scrollToTopTest() {
-
-        WebPage.scrollToTop();
+        Assert.assertTrue(contactFormPage.isOpened());
     }
 
     @Test
     public void scrollToBottomTest() {
 
         WebPage.scrollToBottom();
+    }
+
+    @Test
+    public void scrollToTopTest() {
+
+        WebPage.scrollToTop();
     }
 
     @Test
@@ -88,6 +82,6 @@ public class ActionsWebPageTests extends TestsInit {
     @Test
     public void toStringTest() {
 
-        Assert.assertEquals(new WebPage().toString(), "");
+        Assert.assertEquals(new WebPage().toString(), "!here must be WebPage toString() value!");
     }
 }
