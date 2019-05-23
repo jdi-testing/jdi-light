@@ -17,8 +17,6 @@ public class SoftAssert {
         } catch (Throwable error) {
             if (IS_SOFT_ASSERT) {
                 collector.addError(error);
-            } else if (error.getMessage().length() != 0){
-                throw new AssertionError(error);
             }
         }
     }
