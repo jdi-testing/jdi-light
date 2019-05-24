@@ -2,6 +2,8 @@ package io.github.epam.html.tests.issues.issue69;
 
 import com.epam.jdi.light.ui.html.PageFactory;
 import com.epam.jdi.tools.func.JFunc;
+import io.github.com.StaticSite;
+import io.github.epam.html.tests.site.steps.States;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -9,6 +11,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
+import static com.epam.jdi.light.ui.html.PageFactory.initElements;
+import static io.github.com.StaticSite.html5Page;
 import static io.github.epam.html.tests.issues.issue69.JDISite69.issuePage69;
 import static org.testng.Assert.assertEquals;
 

@@ -24,4 +24,5 @@ public interface Checkbox extends BaseFindElement<HtmlElement>, HasLabel, SetVal
     CheckboxAssert has();
     CheckboxAssert waitFor();
     CheckboxAssert shouldBe();
+    CheckboxAssert verify();
 }

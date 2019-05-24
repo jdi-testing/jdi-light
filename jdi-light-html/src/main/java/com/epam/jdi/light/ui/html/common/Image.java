@@ -16,4 +16,5 @@ public interface Image extends BaseFindElement<HtmlElement> {
     ImageAssert has();
     ImageAssert waitFor();
     ImageAssert shouldBe();
+    ImageAssert verify();
 }

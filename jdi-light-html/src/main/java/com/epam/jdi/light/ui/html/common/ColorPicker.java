@@ -17,5 +17,6 @@ public interface ColorPicker extends BaseFindElement<HtmlElement>, HasLabel, Set
     ColorAssert has();
     ColorAssert waitFor();
     ColorAssert shouldBe();
+    ColorAssert verify();
 
 }
