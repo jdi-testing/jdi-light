@@ -97,7 +97,7 @@ public class JList<T extends BaseUIElement> extends JDIBase
         if (getLocator().toString().contains("%s")) {
             WebElement element;
             try {
-                element = super.get(index + "");
+                element = super.get(index);
             } catch (Exception ex) {
                 throw exception("Can't get element with index '%s' for template locator. " +
                     "Maybe locator is wrong or you need to get element by name. Exception: %s",
