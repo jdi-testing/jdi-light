@@ -16,6 +16,7 @@ import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -78,7 +79,9 @@ public class WebSettings {
     public static JFunc1<JDIBase, WebElement> SMART_SEARCH = el -> {
         String locatorName = SMART_SEARCH_NAME.execute(el.name);
         for (String template : SMART_SEARCH_LOCATORS) {
-            UIElement ui = $(String.format(template, locatorName)).setName(el.name);
+            UIElement ui = template.equals("#%s")
+                ? $(String.format(template, locatorName)).setName(el.name)
+                : $(String.format(template, locatorName), el.parent).setName(el.name);
             try {
                 return ui.get();
             } catch (Exception ignore) { }

@@ -39,13 +39,16 @@ public class BaseValidations {
         validateDuration(duration-1, duration, action);
     }
     public static void durationImmediately(JAction action) {
-        validateDuration(0, 1, action);
+        durationMoreThan(0, action);
     }
     public static void validateDuration(int min, int max, JAction action) {
         long start = currentTimeMillis();
-        action.execute();
-        long passedTime = currentTimeMillis()-start;
-        assertThat(passedTime, greaterThan(min*1000L-500));
-        assertThat(passedTime, lessThan(max*1000L+500));
+        try {
+            action.execute();
+        } finally {
+            long passedTime = currentTimeMillis()-start;
+            assertThat(passedTime, greaterThan(min*1000L-500));
+            assertThat(passedTime, lessThan(max*1000L+500));
+        }
     }
 }
