@@ -17,5 +17,8 @@ public interface CommonAssert<T> {
     T deselected();
     T enabled();
     T disabled();
-    //void soft(JFunc<T> isAssert);
+
+    default void assertResults() {
+        SoftAssert.assertResults();
+    }
 }

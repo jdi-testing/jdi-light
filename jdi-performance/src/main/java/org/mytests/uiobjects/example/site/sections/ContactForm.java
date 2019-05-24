@@ -28,7 +28,7 @@ public class ContactForm extends Form<Contacts> {
 	@Override
 	public void fillAction(Field field, Object element, Object parent, String setValue) {
 		if (isInterface(field, TextField.class))
-			((TextField)element).higlight();
+			((TextField)element).highlight();
 		super.fillAction(field, element, parent, setValue);
 	}
 }

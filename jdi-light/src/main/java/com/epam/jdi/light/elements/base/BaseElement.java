@@ -24,8 +24,8 @@ public interface BaseElement  extends JDIElement, HasValue {
     MapArray<String, String> getAllAttributes();
     MapArray<String, String> attrs();
     void setAttribute(String name, String value);
-    void higlight(String color);
-    void higlight();
+    void highlight(String color);
+    void highlight();
     String printHtml();
     void show();
     Select select();
