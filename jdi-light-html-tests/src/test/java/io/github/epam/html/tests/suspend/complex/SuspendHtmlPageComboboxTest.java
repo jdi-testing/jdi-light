@@ -17,6 +17,7 @@ public class SuspendHtmlPageComboboxTest extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         suspendHtml5Page.open();
+        iceCream.select(text);
     }
 
     String text = "Coconut";

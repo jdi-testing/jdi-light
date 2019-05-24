@@ -61,26 +61,6 @@ public class SuspendHtmlPageButtonTest extends TestsInit {
 
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
-    public void vanishButtonTest() {
-        refresh();
-        durationMoreThan(3, () ->
-                ghostButton.is().disappear());
-    }
-
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void isNotAppearTimeoutFailedButtonTest() {
-        refresh();
-        try {
-            durationImmediately(() ->
-                    ghostButton.is().notAppear(2));
-        } catch (Exception ex) {
-            assertThat(ex.getMessage(), containsString("but: was \"displayed\""));
-        }
-    }
-
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
     public void isNotAppearFailedButtonTest() {
         refresh();
         try {
@@ -88,14 +68,6 @@ public class SuspendHtmlPageButtonTest extends TestsInit {
         } catch (Exception ex) {
             assertThat(ex.getMessage(), containsString("but: was \"displayed\""));
         }
-    }
-
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void isNotAppearButtonTest() {
-        ghostButton.is().hidden();
-        TIMEOUT.set(3);
-        durationMoreThan(3, () -> ghostButton.is().notAppear());
     }
 
     //if test fails then run `mvn clean install` in module JDI Light

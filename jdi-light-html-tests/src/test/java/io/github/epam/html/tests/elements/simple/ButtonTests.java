@@ -108,7 +108,7 @@ public class ButtonTests extends TestsInit {
     public void isNotAppearTimeoutFailedButtonTest() {
         refresh();
         try {
-            durationImmediately(() ->
+            durationMoreThan(2, () ->
                 ghostButton.is().notAppear(2));
         } catch (Exception ex) {
             assertThat(ex.getMessage(), containsString("but: was \"displayed\""));

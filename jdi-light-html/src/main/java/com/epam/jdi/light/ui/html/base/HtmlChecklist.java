@@ -53,7 +53,7 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
     }
 
     /**
-     * Select values from parameters
+     * Select particular elements by name
      * @param names String var arg, elements with text to select
      */
     @JDIAction("Select '{0}' for '{name}'")
@@ -70,7 +70,7 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
     }
 
     /**
-     * Selects only particular elements
+     * Selects particular elements by index
      * @param indexes String var arg, elements with text to select
      */
     @JDIAction("Select '{0}' for '{name}'")
@@ -83,18 +83,20 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
     }
 
     /**
-     * Selects only particular elements
+     * Selects only particular elements and unselects others
      * @param names String var arg, elements with text to select
      */
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String... names) {
-        List<String> listNames = asList(names);
-        for (String name : values()) {
-            HtmlElement value = get(name);
-            if (value.isDisabled()) continue;
-            if (isSelected(value) && !listNames.contains(value.labelText().trim())
-                    || !isSelected(value) && listNames.contains(value.labelText().trim()))
-                value.click();
+        if (names.length > 0 && get(names[0]).isDisplayed()) {
+            List<String> listNames = asList(names);
+            for (String name : values()) {
+                HtmlElement value = get(name);
+                if (value.isDisabled()) continue;
+                if (isSelected(value) && !listNames.contains(value.labelText().trim())
+                        || !isSelected(value) && listNames.contains(value.labelText().trim()))
+                    value.click();
+            }
         }
     }
 
@@ -102,18 +104,20 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
         return value.isSelected();
     }
     /**
-     * Unselects only particular elements
+     * Unselects only particular elements and select others
      * @param names String var arg, elements with text to unselect
      */
     @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(String... names) {
-        List<String> listNames = asList(names);
-        for (String name : values()) {
-            HtmlElement value = get(name);
-            if (value.isDisabled()) continue;
-            if (isSelected(value) && listNames.contains(value.labelText().trim())
-                    || !isSelected(value) && !listNames.contains(value.labelText().trim()))
-                value.click();
+        if (names.length > 0 && get(names[0]).isDisplayed()) {
+            List<String> listNames = asList(names);
+            for (String name : values()) {
+                HtmlElement value = get(name);
+                if (value.isDisabled()) continue;
+                if (isSelected(value) && listNames.contains(value.labelText().trim())
+                        || !isSelected(value) && !listNames.contains(value.labelText().trim()))
+                    value.click();
+            }
         }
     }
     public <TEnum extends Enum> void check(TEnum... values) {
@@ -125,18 +129,20 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
     }
 
     /**
-     * Checks particular elements by index
+     * Checks particular elements by index and uncheck others
      * @param indexes int var arg, ids to check
      */
     @JDIAction("Check '{0}' for '{name}'")
     public void check(int... indexes) {
-        List<Integer> listIndexes = toList(indexes);
-        for (int i = 1; i <= values().size(); i++) {
-            HtmlElement value = checkboxes().get(i-1);
-            if (value.isDisabled()) continue;
-            if (isSelected(value) && !listIndexes.contains(i)
-                    || !isSelected(value) && listIndexes.contains(i))
-                value.click();
+        if (indexes.length > 0 && checkboxes().get(indexes[0]-1).isDisplayed()) {
+            List<Integer> listIndexes = toList(indexes);
+            for (int i = 1; i <= values().size(); i++) {
+                HtmlElement value = checkboxes().get(i - 1);
+                if (value.isDisabled()) continue;
+                if (isSelected(value) && !listIndexes.contains(i)
+                        || !isSelected(value) && listIndexes.contains(i))
+                    value.click();
+            }
         }
     }
 
@@ -152,18 +158,20 @@ public class HtmlChecklist extends Selector<HtmlElement> implements Checklist, I
         }
     }
     /**
-     * Unchecks particular elements by index
+     * Unchecks particular elements by index and check others
      * @param indexes int var arg, ids to uncheck
      */
     @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(int... indexes) {
-        List<Integer> listIndexes = toList(indexes);
-        for (int i = 1; i <= values().size(); i++) {
-            HtmlElement value = checkboxes().get(i-1);
-            if (value.isDisabled()) continue;
-            if (isSelected(value) && listIndexes.contains(i)
-                    || !isSelected(value) && !listIndexes.contains(i))
-                value.click();
+        if (indexes.length > 0 && checkboxes().get(indexes[0]-1).isDisplayed()) {
+            List<Integer> listIndexes = toList(indexes);
+            for (int i = 1; i <= values().size(); i++) {
+                HtmlElement value = checkboxes().get(i - 1);
+                if (value.isDisabled()) continue;
+                if (isSelected(value) && listIndexes.contains(i)
+                        || !isSelected(value) && !listIndexes.contains(i))
+                    value.click();
+            }
         }
     }
 

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.suspendHtml5Page;
 import static io.github.com.pages.HtmlElementsPage.acceptConditions;
+import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
@@ -17,6 +18,7 @@ public class SuspendHtmlPageCheckboxTest extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         suspendHtml5Page.open();
+        acceptConditions.check();
     }
 
     @Test
@@ -40,4 +42,8 @@ public class SuspendHtmlPageCheckboxTest extends TestsInit {
         acceptConditions.assertThat().selected();
     }
 
+    @Test
+    public void baseValidationTest() {
+        baseValidation(acceptConditions);
+    }
 }

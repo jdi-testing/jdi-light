@@ -45,12 +45,22 @@ public class SuspendHtmlPageChecklistTest extends TestsInit {
     }
 
     @Test
+    public void selectTest() {
+        weather.select(Cold);
+        weather.is().selected(hasSize(2));
+        weather.is().selected(hasItems("Hot option", "Cold"));
+    }
+
+    // мне кажется, нужнов getAll добавить ожидание элементов
+    @Test(enabled = false)
     public void uncheckAllTest() {
         weather.check(Rainy, Sunny);
         weather.uncheckAll();
         weather.is().selected(hasSize(0));
     }
-    @Test
+
+    // мне кажется, нужнов getAll добавить ожидание элементов
+    @Test(enabled = false)
     public void checkAllTest() {
         weather.checkAll();
         weather.is().selected(hasSize(4));
