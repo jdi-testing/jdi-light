@@ -7,10 +7,10 @@ import com.epam.jdi.tools.func.JFunc1;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.*;
 
 public class DataTableAssert<D> extends TableAssert<DataTableAssert<D>> {

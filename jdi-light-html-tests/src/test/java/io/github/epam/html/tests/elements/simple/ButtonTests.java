@@ -109,7 +109,7 @@ public class ButtonTests extends TestsInit {
         refresh();
         try {
             durationMoreThan(2, () ->
-                ghostButton.is().notAppear(2));
+                suspendButton.is().notAppear(2));
         } catch (Exception ex) {
             assertThat(ex.getMessage(), containsString("but: was \"displayed\""));
         }

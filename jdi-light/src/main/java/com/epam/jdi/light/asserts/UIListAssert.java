@@ -9,6 +9,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 
 import java.util.List;
+
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;

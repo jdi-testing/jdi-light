@@ -10,8 +10,8 @@ import org.openqa.selenium.WebElement;
 import java.util.Collection;
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.Matchers.*;
 
 public class ListAssert<T extends BaseUIElement> extends SelectAssert {
