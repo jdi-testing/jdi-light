@@ -12,6 +12,7 @@ import org.hamcrest.Matcher;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.elements.complex.table.Line.initLine;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -266,7 +267,6 @@ public class Table extends BaseTable<Table> implements ISetup, HasValue {
     public TableAssert waitFor() {
         return is();
     }
-    public TableAssert shouldBe() {
-        return is();
-    }
+    public TableAssert shouldBe() { return is(); }
+    public TableAssert verify() { assertSoft(); return is(); }
 }

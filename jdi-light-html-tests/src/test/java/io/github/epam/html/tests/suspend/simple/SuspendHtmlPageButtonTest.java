@@ -64,7 +64,7 @@ public class SuspendHtmlPageButtonTest extends TestsInit {
     public void isNotAppearFailedButtonTest() {
         refresh();
         try {
-            durationImmediately(() -> ghostButton.is().notAppear());
+            durationMoreThan(3, () -> ghostButton.is().notAppear());
         } catch (Exception ex) {
             assertThat(ex.getMessage(), containsString("but: was \"displayed\""));
         }

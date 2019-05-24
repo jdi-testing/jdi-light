@@ -1,5 +1,7 @@
 package com.epam.jdi.light.asserts;
 
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
+
 /**
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
@@ -20,6 +22,6 @@ public interface IHasAssert<T> {
         return is();
     }
     default T verify() {
-        return is();
+        assertSoft(); return is();
     }
 }
