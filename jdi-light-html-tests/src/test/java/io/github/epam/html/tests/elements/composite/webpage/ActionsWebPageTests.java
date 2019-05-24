@@ -21,13 +21,13 @@ public class ActionsWebPageTests extends TestsInit {
     @Test
     public void getUrlTest() {
 
-        Assert.assertEquals(WebPage.getUrl(), "https://epam.github.io/JDI/");
+        Assert.assertEquals(WebPage.getUrl(), "https://epam.github.io/JDI/contacts.html");
     }
 
     @Test
     public void getTitleTest() {
 
-        Assert.assertEquals(WebPage.getTitle(), "!here must be title!");
+        Assert.assertEquals(WebPage.getTitle(), "Contact Form");
     }
 
     @Test
@@ -82,6 +82,6 @@ public class ActionsWebPageTests extends TestsInit {
     @Test
     public void toStringTest() {
 
-        Assert.assertEquals(new WebPage().toString(), "!here must be WebPage toString() value!");
+        Assert.assertEquals(new WebPage().toString(), " (url=; title=)");
     }
 }
