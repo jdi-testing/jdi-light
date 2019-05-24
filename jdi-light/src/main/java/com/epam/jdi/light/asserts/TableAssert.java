@@ -9,8 +9,8 @@ import org.hamcrest.Matchers;
 import java.util.Collection;
 import java.util.List;
 
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static org.hamcrest.Matchers.*;
 
 public class TableAssert<T extends TableAssert> extends IsAssert<T> {
