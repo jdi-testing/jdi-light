@@ -10,10 +10,6 @@
     <version>1.0.63</version>
     <groupId>com.epam.jdi</groupId>
 
-    <!--parent>
-        <version>1.0.22</version>
-        <artifactId>jdi-2</artifactId>
-    </parent-->
     <properties>
         <aspectj.version>1.9.1</aspectj.version>
         <aspectj.maven>1.11</aspectj.maven>
