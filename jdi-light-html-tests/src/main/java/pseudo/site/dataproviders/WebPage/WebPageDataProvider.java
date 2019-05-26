@@ -13,7 +13,9 @@ public class WebPageDataProvider {
             {pageWithTitle, "https://epam.github.io/JDI/","Page with Title"},
             {pageWithURL, "https://epam.github.io/JDI/pagewithurl.com",""},
             {slashPageWithURL, "https://epam.github.io/JDI/pagewithurl.com",""},
-            {pageWithoutBoth, "https://epam.github.io/JDI/",""}
+            {pageWithoutBoth, "https://epam.github.io/JDI/",""},
+            {pageNotExtendWebPageWithBoth, "",""},
+            {pageNotExtendWebPageWithoutBoth, "",""}
         };
     }
 }

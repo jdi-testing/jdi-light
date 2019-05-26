@@ -30,4 +30,9 @@ public class PseudoSite {
     public static PageWithBoth pageWithBoth;
 
     public static PageWithoutBoth pageWithoutBoth;
+
+    @Url("notextendwebpagewithboth.com") @Title("Page not extend web page with both")
+    public static PageNotExtendWebPageWithBoth pageNotExtendWebPageWithBoth;
+
+    public static PageNotExtendWebPageWithoutBoth pageNotExtendWebPageWithoutBoth;
 }
