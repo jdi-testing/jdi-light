@@ -58,25 +58,25 @@ public class ActionsWebPageTests extends TestsInit {
     @Test
     public void scrollDownTest() {
 
-        WebPage.scrollDown(3);
+        WebPage.scrollDown(30);
     }
 
     @Test
     public void scrollUpTest() {
 
-        WebPage.scrollUp(1);
+        WebPage.scrollUp(20);
     }
 
     @Test
     public void scrollRightTest() {
 
-        WebPage.scrollRight(1);
+        WebPage.scrollRight(10);
     }
 
     @Test
     public void scrollLeftTest() {
 
-        WebPage.scrollLeft(1);
+        WebPage.scrollLeft(5);
     }
 
     @Test
