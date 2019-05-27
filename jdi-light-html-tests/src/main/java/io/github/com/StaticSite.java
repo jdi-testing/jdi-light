@@ -34,6 +34,8 @@ public class StaticSite {
 	public static DatesPage datesPage;
 	@Url("/user-table.html") @Title("User Table")
 	public static UsersPage usersPage;
+	@Url("/different-elements.html") @Title("Different Elements")
+	public static DifferentElementsPage differentElementsPage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;

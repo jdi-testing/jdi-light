@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.section.ExtendedSectionDataProvider;
-import pseudo.site.section.ExtendedSection;
+import pseudo.site.sections.ExtendedSection;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 import static pseudo.site.PseudoSite.extendedSection;

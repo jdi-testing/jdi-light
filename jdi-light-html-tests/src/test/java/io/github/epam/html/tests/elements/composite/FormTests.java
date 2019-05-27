@@ -33,7 +33,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static pseudo.site.PseudoSite.pseudoHeader;
-import static pseudo.site.pages.Header.pseudoFormLight;
+import static pseudo.site.sections.Header.pseudoFormLight;
 
 public class FormTests extends TestsInit {
 
