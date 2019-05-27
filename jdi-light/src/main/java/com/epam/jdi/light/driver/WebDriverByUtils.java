@@ -213,8 +213,8 @@ public final class WebDriverByUtils {
             if (locs.length > 0)
                 result.add(By.cssSelector(locs[0]));
             result.add(m.group("modifier").equals("")
-                ? By.xpath(".//*[text()='" + m.group("text") + "']")
-                : By.xpath(".//*[contains(text(),'" + m.group("text") + "')]"));
+                ? By.xpath(byTextXpath(m.group("text")))
+                : By.xpath(withTextXpath(m.group("text"))));
             loc = locs.length == 2 ?  locs[1] : "";
         }
         if (isNotEmpty(loc))
@@ -248,11 +248,19 @@ public final class WebDriverByUtils {
     }
 
     public static By byText(String text) {
-        return By.xpath(".//*/text()[normalize-space(.) = " +
-                Quotes.escape(text) + "]/parent::*");
+        return By.xpath(byTextXpath(text));
     }
     public static By withText(String text) {
-        return By.xpath(".//*/text()[contains(normalize-space(.), "+
-                Quotes.escape(text)+")]/parent::*");
+        return By.xpath(withTextXpath(text));
+    }
+
+    public static String byTextXpath(String text){
+        return ".//*/text()[normalize-space(.) = " +
+                Quotes.escape(text) + "]/parent::*";
+    }
+
+    private static String withTextXpath(String text){
+        return ".//*/text()[contains(normalize-space(.), "+
+                Quotes.escape(text)+")]/parent::*";
     }
 }

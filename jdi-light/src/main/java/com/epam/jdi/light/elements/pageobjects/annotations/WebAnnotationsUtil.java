@@ -7,7 +7,6 @@ package com.epam.jdi.light.elements.pageobjects.annotations;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Quotes;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -67,8 +66,7 @@ public class WebAnnotationsUtil {
             return By.tagName(frame.tagName());
 
         if (!"".equals(frame.text()))
-            return By.xpath(".//*/text()[normalize-space(.) = " +
-                    Quotes.escape(frame.text()) + "]/parent::*");
+            return By.xpath(byTextXpath(frame.text()));
 
         if (!"".equals(frame.id()))
             return By.id(frame.id());
@@ -116,8 +114,7 @@ public class WebAnnotationsUtil {
             return By.tagName(locator.tagName());
 
         if (!"".equals(locator.text()))
-            return By.xpath(".//*/text()[normalize-space(.) = " +
-                Quotes.escape(locator.text()) + "]/parent::*");
+            return By.xpath(byTextXpath(locator.text()));
 
         if (!"".equals(locator.id()))
             return By.id(locator.id());
