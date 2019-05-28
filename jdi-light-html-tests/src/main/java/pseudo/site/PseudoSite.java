@@ -3,9 +3,13 @@ package pseudo.site;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
-import pseudo.site.pages.*;
-import pseudo.site.section.CustomSection;
-import pseudo.site.section.ExtendedSection;
+import pseudo.site.pages.PageWithBoth;
+import pseudo.site.pages.PageWithTitle;
+import pseudo.site.pages.PageWithURL;
+import pseudo.site.pages.PageWithoutBoth;
+import pseudo.site.sections.CustomSection;
+import pseudo.site.sections.ExtendedSection;
+import pseudo.site.sections.Header;
 
 
 public class PseudoSite {

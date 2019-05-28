@@ -1,4 +1,4 @@
-package pseudo.site.pages;
+package pseudo.site.sections;
 
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.Section;

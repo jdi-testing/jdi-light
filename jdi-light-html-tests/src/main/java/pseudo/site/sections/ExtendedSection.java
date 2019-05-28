@@ -1,4 +1,4 @@
-package pseudo.site.section;
+package pseudo.site.sections;
 
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.Droplist;
@@ -11,6 +11,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import com.epam.jdi.light.ui.html.common.Button;
 import org.openqa.selenium.WebElement;
+import pseudo.site.entities.SomeData;
 
 import java.util.List;
 
