@@ -22,7 +22,7 @@ public class SoftAsserts extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        assertSoft();
+        assertStrict();
     }
     @AfterMethod
     public void after() {
@@ -32,12 +32,13 @@ public class SoftAsserts extends TestsInit {
 
     @Test
     public void noErrorsTest() {
+        assertSoft();
         redButton.is().hidden().displayed().disabled().enabled();
     }
     @Test
     public void buttonSoftAssertTest() {
         try {
-            redButton.assertThat().hidden().displayed()
+            redButton.verify().hidden().displayed()
                 .disabled().enabled()
                 .disappear().cssClass(is("uui-button red"))
                 .text(is("Big Red *** Button-Input"))
@@ -62,6 +63,7 @@ public class SoftAsserts extends TestsInit {
     @Test
     public void multipleValidationsTest() {
         try {
+            assertSoft();
             redButton.is().hidden().displayed().disabled().enabled();
             jdiLogo.is().alt(is("Jdi Logo 777"))
                 .src(containsString("jdi-logo.jpg777"))
@@ -88,7 +90,7 @@ public class SoftAsserts extends TestsInit {
     @Test
     public void imageSoftAssertTest() {
         try {
-            jdiLogo.is()
+            jdiLogo.verify()
                 .alt(is("Jdi Logo 777"))
                 .src(containsString("jdi-logo.jpg777"))
                 .height(is(100))
@@ -110,7 +112,7 @@ public class SoftAsserts extends TestsInit {
     @Test
     public void checkboxSoftAssertTest() {
         try {
-            acceptConditions.is().deselected().selected().disabled().displayed()
+            acceptConditions.verify().deselected().selected().disabled().displayed()
                 .assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
@@ -126,7 +128,7 @@ public class SoftAsserts extends TestsInit {
     public void dataTableSoftAssertTest(){
         try {
             usersPage.open();
-            users.assertThat()
+            users.verify()
                 .row(d -> d.user.contains("Ivannn"))
                 .allRows(d -> d.user.length() > 4)
                 .atLeast(3).rows(d -> d.type.contains("Userrr"))

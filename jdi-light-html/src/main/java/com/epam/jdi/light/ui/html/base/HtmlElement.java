@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.base;
 
+import com.epam.jdi.light.asserts.SoftAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.ui.html.asserts.HtmlAssertion;
@@ -10,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.utils.HtmlUtils.getInt;
@@ -218,6 +220,11 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
     }
     @Override
     public HtmlAssertion shouldBe() {
+        return is();
+    }
+    @Override
+    public HtmlAssertion verify() {
+        assertSoft();
         return is();
     }
 

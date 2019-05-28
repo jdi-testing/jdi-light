@@ -19,4 +19,5 @@ public interface DateTimeSelector extends BaseFindElement<HtmlElement>, HasLabel
     DateTimeAssert has();
     DateTimeAssert waitFor();
     DateTimeAssert shouldBe();
+    DateTimeAssert verify();
 }

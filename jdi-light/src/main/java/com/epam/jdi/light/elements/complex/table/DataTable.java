@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -409,6 +410,10 @@ public class DataTable<L extends Section, D> extends Table {
     }
     @Override
     public DataTableAssert<D> shouldBe() {
+        return is();
+    }
+    public DataTableAssert<D> verify() {
+        assertSoft();
         return is();
     }
 }

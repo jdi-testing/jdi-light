@@ -15,7 +15,9 @@ import static io.github.com.pages.Header.*;
 public class States {
     @Step
     public static void shouldBeLoggedIn() {
-        if (!WebPage.getUrl().contains("https://jdi-testing.github.io/jdi-light/"))
+        String url = WebPage.getUrl();
+        if (!url.contains("https://jdi-testing.github.io/jdi-light/")
+            || url.contains("issue"))
             homePage.open();
         if (userName.isHidden())
             login();

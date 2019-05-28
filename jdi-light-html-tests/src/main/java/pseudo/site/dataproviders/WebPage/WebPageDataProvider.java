@@ -9,11 +9,11 @@ public class WebPageDataProvider {
     @DataProvider
     public Object[][] annotationsWebPageDataProvider() {
         return new Object[][]{
-            {pageWithBoth, "https://epam.github.io/JDI/pagewithboth.com","Page with both"},
-            {pageWithTitle, "https://epam.github.io/JDI/","Page with Title"},
-            {pageWithURL, "https://epam.github.io/JDI/pagewithurl.com",""},
-            {slashPageWithURL, "https://epam.github.io/JDI/pagewithurl.com",""},
-            {pageWithoutBoth, "https://epam.github.io/JDI/",""}
+            {pageWithBoth, "https://jdi-testing.github.io/jdi-light/pagewithboth.com","Page with both"},
+            {pageWithTitle, "https://jdi-testing.github.io/jdi-light/","Page with Title"},
+            {pageWithURL, "https://jdi-testing.github.io/jdi-light/pagewithurl.com",""},
+            {slashPageWithURL, "https://jdi-testing.github.io/jdi-light/pagewithurl.com",""},
+            {pageWithoutBoth, "https://jdi-testing.github.io/jdi-light/",""}
         };
     }
 

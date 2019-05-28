@@ -21,4 +21,5 @@ public interface NumberSelector extends BaseFindElement<HtmlElement>, HasLabel, 
     NumberAssert has();
     NumberAssert waitFor();
     NumberAssert shouldBe();
+    NumberAssert verify();
 }

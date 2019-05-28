@@ -35,6 +35,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static java.lang.String.format;
 
 public class UIList<T extends Section, E> extends JDIBase implements IList<T>, ISetup {
 
@@ -167,6 +168,28 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
         result.setName(value);
         result.setGetFunc(() -> getMap(1).get(value).get());
         return result;
+    }
+
+    /**
+     * @param index
+     */
+    @JDIAction(level = DEBUG)
+    public T get(int index) {
+        String name = format("%s[%s]", getName(), index);
+        if (getLocator().toString().contains("%s")) {
+            WebElement element;
+            try {
+                element = super.get(index);
+            } catch (Exception ex) {
+                throw exception("Can't get element with index '%s' for template locator. " +
+                                "Maybe locator is wrong or you need to get element by name. Exception: %s",
+                        index, ex.getMessage());
+            }
+            return initElement(element).setName(name);
+        }
+        if (index < 0)
+            throw exception("Can't get element with index '%s'. Index should be more than 0", index);
+        return elements(index).get(index).setName(name);
     }
     public static JFunc1<UIList, String> GET_TITLE_FIELD_NAME = list -> {
         Field[] fields = list.classType.getFields();

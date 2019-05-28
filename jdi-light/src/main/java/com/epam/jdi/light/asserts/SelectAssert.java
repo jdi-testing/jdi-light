@@ -10,10 +10,10 @@ import org.hamcrest.Matcher;
 import java.util.Collection;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.*;
 
 public class SelectAssert extends IsAssert<SelectAssert> {

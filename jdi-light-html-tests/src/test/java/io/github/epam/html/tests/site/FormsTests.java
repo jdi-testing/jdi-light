@@ -23,7 +23,7 @@ public class FormsTests extends TestsInit {
     @Test
     public void loginTest() {
         shouldBeLoggedOut();
-        userIcon.click();
+        if(userIcon.isHidden()) userIcon.click();
         loginForm.loginAs(DEFAULT_USER);
         homePage.checkOpened();
     }

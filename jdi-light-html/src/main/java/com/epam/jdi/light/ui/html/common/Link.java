@@ -18,4 +18,5 @@ public interface Link extends BaseFindElement<HtmlElement> {
     LinkAssert has();
     LinkAssert waitFor();
     LinkAssert shouldBe();
+    LinkAssert verify();
 }

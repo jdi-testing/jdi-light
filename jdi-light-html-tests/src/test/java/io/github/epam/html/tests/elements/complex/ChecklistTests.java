@@ -1,6 +1,7 @@
 package io.github.epam.html.tests.elements.complex;
 
 import io.github.epam.TestsInit;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -10,6 +11,7 @@ import static io.github.com.pages.HtmlElementsPage.weatherNoLocator;
 import static io.github.epam.html.tests.elements.complex.enums.Weather.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
@@ -29,20 +31,66 @@ public class ChecklistTests extends TestsInit {
     }
 
     @Test
-    public void selectTest() {
+    public void checkTest() {
         weather.check("Cold", "Hot option");
         assertEquals(weather.checked(), asList("Hot option", "Cold"));
     }
+    @Test
+    public void uncheckTest() {
+        weather.check("Rainy day", "Sunny");
+        weather.uncheck(Rainy, Sunny);
+        weather.is().selected(hasSize(2));
+        weather.is().selected(hasItems("Hot option", "Cold"));
+    }
+    @Test
+    public void selectTest() {
+        weather.select("Cold", "Hot option");
+        assertEquals(weather.checked(), asList("Cold"));
+    }
 
     @Test
-    public void selectEnumTest() {
+    public void checkEnumTest() {
         weather.check(Cold, Rainy);
         assertEquals(weather.checked(), asList("Cold", "Rainy day"));
     }
     @Test
-    public void selectNumTest() {
+    public void uncheckEnumTest() {
+        weather.checkAll();
+        weather.uncheck(Hot, Rainy);
+        weather.is().selected(hasSize(2));
+        weather.is().selected(hasItems("Cold", "Sunny"));
+    }
+    @Test
+    public void selectEnumTest() {
+        weather.select(Cold, Rainy);
+        assertEquals(weather.checked(), asList("Hot option", "Cold", "Rainy day"));
+    }
+    @Test
+    public void checkNumTest() {
         weather.check(1, 4);
         assertEquals(weather.checked(), asList("Hot option", "Sunny"));
+    }
+    @Test
+    public void uncheckNumTest() {
+        weather.checkAll();
+        weather.uncheck(1, 4);
+        weather.is().selected(hasSize(2));
+        weather.is().selected(hasItems("Cold", "Rainy day"));
+    }
+    @Test
+    public void selectNumTest() {
+        weather.select(1, 4);
+        assertEquals(weather.checked(), asList("Sunny"));
+    }
+    @Test
+    public void checkEmptyTest() {
+        try {
+            weather.select();
+            Assert.fail("Select empty should throw an exception");
+        } catch (Exception ex) {
+            assertThat(ex.getMessage(), containsString(
+            "Select for Checklist should have at least one parameter"));
+        }
     }
     @Test
     public void selectedTest() {
@@ -57,7 +105,7 @@ public class ChecklistTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
-        weather.is().selected("Hot option");
+        weather.is().displayed().selected("Hot option");
         weather.is().selected(Hot);
         weather.assertThat().values(hasItem("Sunny"))
             .disabled(hasItem("Disabled"))
@@ -70,14 +118,6 @@ public class ChecklistTests extends TestsInit {
         weather.assertThat().values(containsInAnyOrder(
         "Hot option", "Cold", "Rainy day", "Sunny", "Disabled"));
         weatherNoLocator.assertThat().selected("Hot option");
-    }
-
-    @Test
-    public void uncheckTest() {
-        weather.check("Rainy day", "Sunny");
-        weather.uncheck(Rainy, Sunny);
-        weather.is().selected(hasSize(2));
-        weather.is().selected(hasItems("Hot option", "Cold"));
     }
 
     @Test

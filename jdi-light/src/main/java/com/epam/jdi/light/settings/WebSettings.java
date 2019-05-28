@@ -78,7 +78,9 @@ public class WebSettings {
     public static JFunc1<JDIBase, WebElement> SMART_SEARCH = el -> {
         String locatorName = SMART_SEARCH_NAME.execute(el.name);
         for (String template : SMART_SEARCH_LOCATORS) {
-            UIElement ui = $(String.format(template, locatorName)).setName(el.name);
+            UIElement ui = template.equals("#%s")
+                ? $(String.format(template, locatorName)).setName(el.name)
+                : $(String.format(template, locatorName), el.parent).setName(el.name);
             try {
                 return ui.get();
             } catch (Exception ignore) { }
