@@ -89,7 +89,7 @@ public class InitActions {
             info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class),
             InitActions::defaultSetup)),
-        $("Section", sRule(info -> isClass(info.instance.getClass(), Section.class),
+        $("section", sRule(info -> isClass(info.instance.getClass(), Section.class),
             InitActions::elementSetup)),
         $("PageObject", sRule(info -> isPageObject(info.instance.getClass()),
             PageFactory::initElements))

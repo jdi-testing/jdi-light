@@ -90,7 +90,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
     private boolean isDisplayed(T element) {
         try {
             return element.get().isDisplayed();
-        } catch (Exception ex) { throw exception("Is element Displayed failed. UIList element not a Section. Only Sections can be assert on isDisplayed"); }
+        } catch (Exception ex) { throw exception("Is element Displayed failed. UIList element not a section. Only Sections can be assert on isDisplayed"); }
     }
     @JDIAction("Assert that '{name}' is empty")
     public UIListAssert<T, E> empty() {
