@@ -99,6 +99,32 @@ public class CustomWebPageUIDataProvider {
     }
 
     @DataProvider
+    public Object[][] customWebPageUIUIListQuestionDataProvider() {
+        return new Object[][]{
+                {customWebPageUI.uilistQuestionPublic, "id='uilistQuestionPublic'", customWebPageUI, "Uilist Question Public"},
+                {customWebPageUI.uilistQuestionPublicUI, "css='.uilistQuestionPublicUI'", customWebPageUI, "Uilist Question Public UI"},
+                {customWebPageUI.uilistQuestionPublicXPath, "xpath='//*[@class='uilistQuestionPublicXPath']'", customWebPageUI, "Uilist Question Public X Path"},
+                {customWebPageUI.getUilistQuestionPackage(), "id='uilistQuestionPackage'", customWebPageUI, "Uilist Question Package"},
+                {customWebPageUI.getUilistQuestionPrivate(), "id='uilistQuestionPrivate'", customWebPageUI, "Uilist Question Private"},
+                {customWebPageUI.getUilistQuestionPackageUI(), "css='.uilistQuestionPackageUI'", customWebPageUI, "Uilist Question Package UI"},
+                {customWebPageUI.getUilistQuestionPackageCss(), "css='.uilistQuestionPackageCss'", customWebPageUI, "Uilist Question Package Css"},
+        };
+    }
+
+    @DataProvider
+    public Object[][] customWebPageUIUIListSomedataDataProvider() {
+        return new Object[][]{
+                {customWebPageUI.uilistSomedataPublic, "id='uilistSomedataPublic'", customWebPageUI, "Uilist Somedata Public"},
+                {customWebPageUI.uilistSomedataPublicUI, "css='.uilistSomedataPublicUI'", customWebPageUI, "Uilist Somedata Public UI"},
+                {customWebPageUI.uilistSomedataPublicXPath, "xpath='//*[@class='uilistSomedataPublicXPath']'", customWebPageUI, "Uilist Somedata Public X Path"},
+                {customWebPageUI.getUilistSomedataPackage(), "id='uilistSomedataPackage'", customWebPageUI, "Uilist Somedata Package"},
+                {customWebPageUI.getUilistSomedataPrivate(), "id='uilistSomedataPrivate'", customWebPageUI, "Uilist Somedata Private"},
+                {customWebPageUI.getUilistSomedataPackageUI(), "css='.uilistSomedataPackageUI'", customWebPageUI, "Uilist Somedata Package UI"},
+                {customWebPageUI.getUilistSomedataPackageCss(), "css='.uilistSomedataPackageCss'", customWebPageUI, "Uilist Somedata Package Css"},
+        };
+    }
+
+    @DataProvider
     public Object[][] customWebPageUIDropDownDataProvider() {
         return new Object[][]{
                 {customWebPageUI.getDroplistPackage(), "css='div[ui=droplistPackage'", customWebPageUI, "Droplist Package"},

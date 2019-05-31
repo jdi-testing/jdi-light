@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.Droplist;
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
@@ -123,6 +122,35 @@ public class CustomWebPage extends WebPage {
     @XPath("//*[@class='webListPublicXPath']")
     public WebList webListPublicXPath;
 
+    @FindBy(id = "uilistQuestionPackage")
+    UIList<CustomWebPage, ?> uilistQuestionPackage;
+    @FindBy(id = "uilistQuestionPublic")
+    public UIList<CustomWebPage, ?> uilistQuestionPublic;
+    @FindBy(id = "uilistQuestionPrivate")
+    private UIList<CustomWebPage, ?> uilistQuestionPrivate;
+    @UI(".uilistQuestionPackageUI")
+    UIList<CustomWebPage, ?> uilistQuestionPackageUI;
+    @UI(".uilistQuestionPublicUI")
+    public UIList<CustomWebPage, ?> uilistQuestionPublicUI;
+    @Css(".uilistQuestionPackageCss")
+    UIList<CustomWebPage, ?> uilistQuestionPackageCss;
+    @XPath("//*[@class='uilistQuestionPublicXPath']")
+    public UIList<CustomWebPage, ?> uilistQuestionPublicXPath;
+
+    @FindBy(id = "uilistSomedataPackage")
+    UIList<CustomWebPage, SomeData> uilistSomedataPackage;
+    @FindBy(id = "uilistSomedataPublic")
+    public UIList<CustomWebPage, SomeData> uilistSomedataPublic;
+    @FindBy(id = "uilistSomedataPrivate")
+    private UIList<CustomWebPage, SomeData> uilistSomedataPrivate;
+    @UI(".uilistSomedataPackageUI")
+    UIList<CustomWebPage, SomeData> uilistSomedataPackageUI;
+    @UI(".uilistSomedataPublicUI")
+    public UIList<CustomWebPage, SomeData> uilistSomedataPublicUI;
+    @Css(".uilistSomedataPackageCss")
+    UIList<CustomWebPage, SomeData> uilistSomedataPackageCss;
+    @XPath("//*[@class='uilistSomedataPublicXPath']")
+    public UIList<CustomWebPage, SomeData> uilistSomedataPublicXPath;
 
     @JDropdown(root = "div[ui=droplistPackage", value = "input", list = "li", expand = ".expand")
     Droplist droplistPackage;
@@ -306,6 +334,54 @@ public class CustomWebPage extends WebPage {
         this.webListPackageUI = webListPackageUI;
     }
 
+    public UIList<CustomWebPage, ?> getUilistQuestionPackage() {
+        return uilistQuestionPackage;
+    }
+
+    public void setUilistQuestionPackage(UIList<CustomWebPage, ?> uilistQuestionPackage) {
+        this.uilistQuestionPackage = uilistQuestionPackage;
+    }
+
+    public UIList<CustomWebPage, ?> getUilistQuestionPrivate() {
+        return uilistQuestionPrivate;
+    }
+
+    public void setUilistQuestionPrivate(UIList<CustomWebPage, ?> uilistQuestionPrivate) {
+        this.uilistQuestionPrivate = uilistQuestionPrivate;
+    }
+
+    public UIList<CustomWebPage, ?> getUilistQuestionPackageUI() {
+        return uilistQuestionPackageUI;
+    }
+
+    public void setUilistQuestionPackageUI(UIList<CustomWebPage, ?> uilistQuestionPackageUI) {
+        this.uilistQuestionPackageUI = uilistQuestionPackageUI;
+    }
+
+    public UIList<CustomWebPage, SomeData> getUilistSomedataPackage() {
+        return uilistSomedataPackage;
+    }
+
+    public void setUilistSomedataPackage(UIList<CustomWebPage, SomeData> uilistSomedataPackage) {
+        this.uilistSomedataPackage = uilistSomedataPackage;
+    }
+
+    public UIList<CustomWebPage, SomeData> getUilistSomedataPrivate() {
+        return uilistSomedataPrivate;
+    }
+
+    public void setUilistSomedataPrivate(UIList<CustomWebPage, SomeData> uilistSomedataPrivate) {
+        this.uilistSomedataPrivate = uilistSomedataPrivate;
+    }
+
+    public UIList<CustomWebPage, SomeData> getUilistSomedataPackageUI() {
+        return uilistSomedataPackageUI;
+    }
+
+    public void setUilistSomedataPackageUI(UIList<CustomWebPage, SomeData> uilistSomedataPackageUI) {
+        this.uilistSomedataPackageUI = uilistSomedataPackageUI;
+    }
+
     public Droplist getDroplistPackage() {
         return droplistPackage;
     }
@@ -356,6 +432,14 @@ public class CustomWebPage extends WebPage {
 
     public WebList getWebListPackageCss() {
         return webListPackageCss;
+    }
+
+    public UIList<CustomWebPage, ?> getUilistQuestionPackageCss() {
+        return uilistQuestionPackageCss;
+    }
+
+    public UIList<CustomWebPage, SomeData> getUilistSomedataPackageCss() {
+        return uilistSomedataPackageCss;
     }
 }
 
