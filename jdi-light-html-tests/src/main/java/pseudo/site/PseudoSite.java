@@ -6,6 +6,8 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import pseudo.site.pages.*;
 import pseudo.site.section.CustomSection;
 import pseudo.site.section.ExtendedSection;
+import pseudo.site.webpage.CustomWebPage;
+import pseudo.site.webpage.ExtendedWebPage;
 
 
 public class PseudoSite {
@@ -16,6 +18,13 @@ public class PseudoSite {
     @UI(".extendedSectionUI")
     public static ExtendedSection extendedSectionUI;
     public static ExtendedSection extendedSection;
+
+    @UI(".customWebPageUI")
+    public static CustomWebPage customWebPageUI;
+    public static CustomWebPage customWebPage;
+    @UI(".extendedWebPageUI")
+    public static ExtendedWebPage extendedWebPageUI;
+    public static ExtendedWebPage extendedWebPage;
 
     @Url("pagewithurl.com")
     public static PageWithURL pageWithURL;
