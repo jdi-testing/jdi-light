@@ -1,4 +1,4 @@
-package pseudo.site.dataproviders.WebPage;
+package pseudo.site.dataproviders.webpage;
 
 import org.testng.annotations.DataProvider;
 
