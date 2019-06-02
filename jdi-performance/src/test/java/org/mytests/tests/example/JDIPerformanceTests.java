@@ -25,10 +25,10 @@ public class JDIPerformanceTests extends SimpleTestsInit {
 
     @Test
     public void hugeTableSearchTest() {
-        usersTable.assertThat().rowWithValues(
+        usersTable.assertThat().rowThat(
             containsValue("Meyer", inColumn("Name")),
             containsValue("co.uk", inColumn("Email")));
-        usersTable.assertThat().noRowsWithValues(
+        usersTable.assertThat().no().rows(
             hasValue("NO_NAME", inColumn("Name")),
             hasValue("wrong.email", inColumn("Email")));
 

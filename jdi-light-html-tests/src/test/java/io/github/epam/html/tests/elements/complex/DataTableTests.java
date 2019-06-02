@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.complex;
 
+import com.epam.jdi.light.elements.complex.table.Single;
 import io.github.com.entities.MarvelUserInfo;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -7,6 +8,9 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.users;
 import static io.github.com.pages.UsersPage.usersSetup;
@@ -14,7 +18,6 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.testng.Assert.assertEquals;
@@ -82,20 +85,34 @@ public class DataTableTests extends TestsInit {
         users.assertThat().size(greaterThan(3));
         users.is().notEmpty().size(lessThanOrEqualTo(6));
     }
+    // Compare Matchers
     @Test
     public void rowMatcherTest() {
         users.has().row(d -> d.user.contains("Ivan"));
     }
     @Test
-    public void rowsMatcherTest() {
-        users.assertThat().allRows(d -> d.user.length() > 4);
+    public void rowDataMatcherTest() {
+        users.has().row(SPIDER_MAN);
     }
     @Test
-    public void noRowsMatcherTest() {
-        users.assertThat().noRows(d -> isBlank(d.user));
+    public void rowTableMatcherSingleTest() {
+        users.has().rowThat(Single.hasValue("Sergey Ivan"), inColumn("User"));
     }
     @Test
-    public void atLeastMatcherTest() {
+    public void rowTableMatcherTest() {
+        users.has().rowThat(hasValue("User", inColumn("Type")),
+                containsValue("Ivan", inColumn("User")));
+    }
+    @Test
+    public void rowsAllTest() {
+        users.assertThat().all().rows(d -> d.user.length() > 4);
+    }
+    @Test
+    public void noRowsTest() {
+        users.assertThat().no().rows(d -> isBlank(d.user));
+    }
+    @Test
+    public void atLeastTest() {
         users.assertThat().atLeast(3).rows(d -> d.type.contains("User"));
     }
     @Test
@@ -103,38 +120,22 @@ public class DataTableTests extends TestsInit {
         users.assertThat().exact(2).rows(d -> d.description.contains(":VIP"));
     }
     @Test
-    public void rowDataMatcherTest() {
-        users.has().row(SPIDER_MAN);
-    }
-    @Test
     public void rowDataExactMatcherTest() {
         users.assertThat().exact(1).rows(SPIDER_MAN);
     }
+    //
+
+
     @Test
     public void tableChainTest() {
         users.assertThat()
-            .displayed()
-            .size(6)
-            .size(greaterThan(3))
-            .notEmpty()
+            .displayed().size(6).size(greaterThan(3)).notEmpty()
             .row(d -> d.user.contains("Ivan"))
-            .allRows(d -> d.user.length() > 4)
+            .all().rows(d -> d.user.length() > 4)
+            .no().rows(d -> isBlank(d.user))
             .atLeast(3).rows(d -> d.type.contains("User"))
             .row(SPIDER_MAN)
             .exact(2).rows(d -> d.description.contains(":VIP"))
             .exact(1).rows(SPIDER_MAN);
-    }
-
-    @Test
-    public void rowDataNoOneTest() {
-        users.assertThat().noOne(d-> isBlank(d.user));
-    }
-    @Test
-    public void rowDataOnlyOneTest() {
-        users.assertThat().onlyOne(d -> d.equals(SPIDER_MAN));
-    }
-    @Test
-    public void rowDataEachTest() {
-        users.assertThat().each(d -> isNotBlank(d.description));
     }
 }

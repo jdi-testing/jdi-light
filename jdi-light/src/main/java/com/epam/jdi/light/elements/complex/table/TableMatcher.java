@@ -9,7 +9,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 
 public class TableMatcher {
-    public static JFunc2<Table, TableMatcher[], WebList> TABLE_MATCHER = (table, matchers) -> {
+    public static JFunc2<BaseTable, TableMatcher[], WebList> TABLE_MATCHER = (table, matchers) -> {
         String locator = format("./%s/td", print(map(matchers, m ->
                 m.getLocator(table) + "/.."),""));
         return $$(locator, table);
@@ -23,13 +23,17 @@ public class TableMatcher {
 
     private String locator;
     private Column column;
+    public TableMatcher setColumn(Column column) {
+        this.column = column;
+        return this;
+    }
     private String name;
     TableMatcher(String locator, Column column, String name) {
         this.locator = locator;
         this.column = column;
         this.name = name;
     }
-    public String getLocator(Table table) { return format(locator, column.getIndex(table.header())); }
+    public String getLocator(BaseTable table) { return format(locator, column.getIndex(table.header())); }
     @Override
     public String toString() {
         return name;

@@ -28,7 +28,7 @@ import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.util.Arrays.asList;
 
-public class DataTable<L extends Section, D> extends Table {
+public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>> {
     private Class<L> lineClass;
     private Class<D> dataClass;
 
@@ -396,26 +396,26 @@ public class DataTable<L extends Section, D> extends Table {
     }
 
     @Override
-    public DataTableAssert<D> is() {
+    public DataTableAssert<D>  is() {
         return new DataTableAssert<>(this);
     }
     @Override
-    public DataTableAssert<D> assertThat() {
+    public DataTableAssert<D>  assertThat() {
         return is();
     }
     @Override
-    public DataTableAssert<D> has() {
+    public DataTableAssert<D>  has() {
         return is();
     }
     @Override
-    public DataTableAssert<D> waitFor() {
+    public DataTableAssert<D>  waitFor() {
         return is();
     }
     @Override
-    public DataTableAssert<D> shouldBe() {
+    public DataTableAssert<D>  shouldBe() {
         return is();
     }
-    public DataTableAssert<D> verify() {
+    public DataTableAssert<D>  verify() {
         assertSoft();
         return is();
     }

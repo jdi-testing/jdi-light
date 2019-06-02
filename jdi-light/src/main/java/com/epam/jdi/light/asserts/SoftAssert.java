@@ -23,6 +23,7 @@ public class SoftAssert {
     public static void assertStrict() {
         setAssertType("strict");
     }
+
     public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
         try {
             assertThat(actual, matcher);

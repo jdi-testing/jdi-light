@@ -1,6 +1,0 @@
-[0111/225058.911:ERROR:process_reader_win.cc(182)] ResumeThread: The parameter is incorrect. (0x57)
-[0111/225058.917:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
-[0111/225059.070:ERROR:file_io_win.cc(161)] CreateFile C:\Users\ROMAN_~1\AppData\Local\Temp\scoped_dir24756_20906\Crashpad\settings.dat: The system cannot find the file specified. (0x2)
-[0111/225059.070:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
-[0507/115436.445:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
-[0507/115436.445:ERROR:exception_snapshot_win.cc(98)] thread ID 11172 not found in process

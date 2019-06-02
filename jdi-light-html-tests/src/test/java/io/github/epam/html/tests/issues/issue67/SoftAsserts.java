@@ -130,7 +130,7 @@ public class SoftAsserts extends TestsInit {
             usersPage.open();
             users.verify()
                 .row(d -> d.user.contains("Ivannn"))
-                .allRows(d -> d.user.length() > 4)
+                .all().rows(d -> d.user.length() > 4)
                 .atLeast(3).rows(d -> d.type.contains("Userrr"))
                 .assertResults();
             Assert.fail("Test should throw asserts");
