@@ -6,9 +6,11 @@ import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import io.github.com.custom.MarvelUser;
 import io.github.com.entities.MarvelUserInfo;
+import io.github.com.entities.MarvelUserSimple;
 
 public class UsersPage extends WebPage {
 	@UI("#user-table") public static DataTable<MarvelUser, MarvelUserInfo> users;
+	@UI("#user-table") public static DataTable<?, MarvelUserSimple> users2;
 	@JTable(root = "#user-table", rowHeader = "User")
 	public static DataTable<MarvelUser, MarvelUserInfo> usersSetup;
 

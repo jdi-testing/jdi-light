@@ -5,6 +5,7 @@ package com.epam.jdi.light.elements.complex;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.asserts.DataTableAssert;
 import com.epam.jdi.light.asserts.UIListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.UIUtils;
@@ -26,6 +27,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
@@ -247,11 +249,26 @@ public class UIList<T extends Section, E> extends JDIBase implements IList<T>, I
     public UIListAssert<T, E> shouldBe() {
         return is();
     }
-
+    public UIListAssert<T, E> verify() {
+        assertSoft();
+        return is();
+    }
     public UIListAssert<T, E> assertThat(Matcher<? super List<E>> condition) {
         return is(condition);
     }
-
+    public UIListAssert<T, E> has(Matcher<? super List<E>> condition) {
+        return is(condition);
+    }
+    public UIListAssert<T, E> waitFor(Matcher<? super List<E>> condition) {
+        return is(condition);
+    }
+    public UIListAssert<T, E> shouldBe(Matcher<? super List<E>> condition) {
+        return is(condition);
+    }
+    public UIListAssert<T, E> verify(Matcher<? super List<E>> condition) {
+        assertSoft();
+        return is(condition);
+    }
     public void setup(Field field) {
         try {
             Type[] types = getGenericTypes(field);

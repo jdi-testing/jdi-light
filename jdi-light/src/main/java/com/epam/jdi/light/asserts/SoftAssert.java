@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SoftAssert {
@@ -31,6 +32,11 @@ public class SoftAssert {
             } else
                 throw new AssertionError(error);
         }
+    }
+    public static List<String> getErrors() {
+        List<Throwable> errors = new ArrayList<>(listOfErrors.get());
+        clearResults();
+        return map(errors, Throwable::getMessage);
     }
 
     public static void assertResults() {

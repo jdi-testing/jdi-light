@@ -9,6 +9,7 @@ import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -385,6 +386,8 @@ public class DataTable<L extends Section, D> extends Table {
     }
 
     private D getLineData(Line row) {
+        if (lineClass == null)
+            return row.asData(dataClass);
         L line = row.asLine(lineClass);
         List<Field> fields = getFieldsExact(line.getClass(), f -> isInterface(f, HasValue.class));
         MapArray<String, String> map = new MapArray<>(fields,
@@ -415,5 +418,26 @@ public class DataTable<L extends Section, D> extends Table {
     public DataTableAssert<D> verify() {
         assertSoft();
         return is();
+    }
+
+    public DataTableAssert<D> is(Matcher<? super List<D>> condition) {
+        MatcherAssert.assertThat(allData(), condition);
+        return is();
+    }
+    public DataTableAssert<D> assertThat(Matcher<? super List<D>> condition) {
+        return is(condition);
+    }
+    public DataTableAssert<D> has(Matcher<? super List<D>> condition) {
+        return is(condition);
+    }
+    public DataTableAssert<D> waitFor(Matcher<? super List<D>> condition) {
+        return is(condition);
+    }
+    public DataTableAssert<D> shouldBe(Matcher<? super List<D>> condition) {
+        return is(condition);
+    }
+    public DataTableAssert<D> verify(Matcher<? super List<D>> condition) {
+        assertSoft();
+        return is(condition);
     }
 }

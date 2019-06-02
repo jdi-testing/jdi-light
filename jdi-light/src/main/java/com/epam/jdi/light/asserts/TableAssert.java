@@ -69,7 +69,7 @@ public class TableAssert<T extends TableAssert> extends IsAssert<T> {
      * @param column to compare
      */
     @JDIAction("Assert that '{name}' has column'{0}'")
-    public T hasColumn(String column) {
+    public T column(String column) {
         jdiAssert(table().header(), hasItem(column));
         return (T) this;
     }
@@ -79,9 +79,9 @@ public class TableAssert<T extends TableAssert> extends IsAssert<T> {
      * @param columns to compare
      */
     @JDIAction("Assert that '{name}' has columns '{0}'")
-    public T hasColumns(List<String> columns) {
+    public T columns(List<String> columns) {
         for(String column : columns)
-            hasColumn(column);
+            column(column);
         return (T) this;
     }
 
@@ -112,8 +112,17 @@ public class TableAssert<T extends TableAssert> extends IsAssert<T> {
      * @param matchers to compare
      */
     @JDIAction("Assert that '{name}' has at least one row that {0}}")
-    public T hasRowWithValues(TableMatcher... matchers) {
+    public T rowWithValues(TableMatcher... matchers) {
         jdiAssert(TABLE_MATCHER.execute(table(), matchers), is(not(Matchers.empty())));
+        return (T) this;
+    }
+    /**
+     * Check that the table has at list one specified row
+     * @param matchers to compare
+     */
+    @JDIAction("Assert that '{name}' has no rows that {0}}")
+    public T noRowsWithValues(TableMatcher... matchers) {
+        jdiAssert(TABLE_MATCHER.execute(table(), matchers), is(Matchers.empty()));
         return (T) this;
     }
 }

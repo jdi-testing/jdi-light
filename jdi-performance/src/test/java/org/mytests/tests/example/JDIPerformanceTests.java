@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
 import static org.mytests.tests.states.States.shouldBeLoggedIn;
 import static org.mytests.uiobjects.example.TestData.TABLE_SNAPSHOOT;
 import static org.mytests.uiobjects.example.site.SiteJdi.performancePage;
@@ -24,18 +25,19 @@ public class JDIPerformanceTests extends SimpleTestsInit {
 
     @Test
     public void hugeTableSearchTest() {
-        usersTable.assertThat().hasRowWithValues(
+        usersTable.assertThat().rowWithValues(
             containsValue("Meyer", inColumn("Name")),
             containsValue("co.uk", inColumn("Email")));
-        usersTable.assertThat().hasRowWithValues(
-                containsValue("Meyer", inColumn("Name")),
-                containsValue("co.uk", inColumn("Email")));
+        usersTable.assertThat().noRowsWithValues(
+            hasValue("NO_NAME", inColumn("Name")),
+            hasValue("wrong.email", inColumn("Email")));
 
         StopWatch timer = StopWatch.createStarted();
         Line row = usersTable.row(
             containsValue("Meyer", inColumn("Name")),
             containsValue("co.uk", inColumn("Email")));
         System.out.println("Huge table search test Time: " + timer.getTime());
+
         Assert.assertEquals(row.getValue(),
         "Brian Meyer;(016977) 0358;mollis.nec@seddictumeleifend.co.uk;Houston");
     }

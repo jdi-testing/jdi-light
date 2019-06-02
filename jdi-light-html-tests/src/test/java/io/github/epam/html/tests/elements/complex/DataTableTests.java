@@ -13,6 +13,8 @@ import static io.github.com.pages.UsersPage.usersSetup;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN;
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.testng.Assert.assertEquals;
@@ -89,6 +91,10 @@ public class DataTableTests extends TestsInit {
         users.assertThat().allRows(d -> d.user.length() > 4);
     }
     @Test
+    public void noRowsMatcherTest() {
+        users.assertThat().noRows(d -> isBlank(d.user));
+    }
+    @Test
     public void atLeastMatcherTest() {
         users.assertThat().atLeast(3).rows(d -> d.type.contains("User"));
     }
@@ -117,5 +123,18 @@ public class DataTableTests extends TestsInit {
             .row(SPIDER_MAN)
             .exact(2).rows(d -> d.description.contains(":VIP"))
             .exact(1).rows(SPIDER_MAN);
+    }
+
+    @Test
+    public void rowDataNoOneTest() {
+        users.assertThat().noOne(d-> isBlank(d.user));
+    }
+    @Test
+    public void rowDataOnlyOneTest() {
+        users.assertThat().onlyOne(d -> d.equals(SPIDER_MAN));
+    }
+    @Test
+    public void rowDataEachTest() {
+        users.assertThat().each(d -> isNotBlank(d.description));
     }
 }

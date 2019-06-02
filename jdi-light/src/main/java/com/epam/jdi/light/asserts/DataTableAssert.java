@@ -2,6 +2,7 @@ package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.DataTable;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 
 import java.util.ArrayList;
@@ -9,7 +10,8 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.Matchers.*;
 
@@ -85,6 +87,15 @@ public class DataTableAssert<D> extends TableAssert<DataTableAssert<D>> {
     public Compare atLeast(int count) {
         return new Compare(count, this, false);
     }
+    public Compare no() {
+        return exact(0);
+    }
+    public Compare each() {
+        return exact(100);
+    }
+    public Compare has() {
+        return atLeast(1);
+    }
 
     /**
      * Check that the all table rows meet expected condition
@@ -109,8 +120,52 @@ public class DataTableAssert<D> extends TableAssert<DataTableAssert<D>> {
      * @param condition to compare
      * @return DataTableAssert
      */
-    @JDIAction("Assert that all '{name}' rows meet expected condition")
+    @JDIAction("Assert that no rows in '{name}' meet expected condition")
     public DataTableAssert<D> noRows(JFunc1<D,Boolean> condition) {
         return allRows(d -> !condition.execute(d));
+    }
+
+    /**
+     * Check that all elements meet condition
+     * @param condition to compare
+     * @return UIListAssert
+     */
+    @JDIAction("Assert that each of '{name}' elements meet condition")
+    public DataTableAssert<D> each(JFunc1<D, Boolean> condition) {
+        jdiAssert(all(table().allData(), condition::execute), is(true));
+        return this;
+    }
+
+    /**
+     * Check that at least one element meets condition
+     * @param condition to compare
+     * @return UIListAssert
+     */
+    @JDIAction("Assert that any of '{name}' elements meet condition")
+    public DataTableAssert<D> any(JFunc1<D, Boolean> condition) {
+        jdiAssert(LinqUtils.any(table().allData(), condition::execute), is(true));
+        return this;
+    }
+
+    /**
+     * Check that only one of elements meets condition
+     * @param condition to compare
+     * @return UIListAssert
+     */
+    @JDIAction("Assert that only one of '{name}' elements meet condition")
+    public DataTableAssert<D> onlyOne(JFunc1<D, Boolean> condition) {
+        jdiAssert(single(table().allData(), condition::execute), is(notNullValue()));
+        return this;
+    }
+
+    /**
+     * Check that none of elements meets condition
+     * @param condition to compare
+     * @return UIListAssert
+     */
+    @JDIAction("Assert that none of '{name}' meet condition")
+    public DataTableAssert<D> noOne(JFunc1<D, Boolean> condition) {
+        jdiAssert(first(table().allData(), condition::execute), is(nullValue()));
+        return this;
     }
 }
