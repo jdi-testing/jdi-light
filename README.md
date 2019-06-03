@@ -6,6 +6,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![stackoverflow](https://img.shields.io/badge/stackoverflow-jdi-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/jdi)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light?ref=badge_shield)
+
+## Documentation
+
+Can be found [here](https://jdi-docs.github.io/jdi-light/#common-elements)
+
 ## Introduction
 
 JDI – is the test Framework for UI test automation that helps to makes your tests fast and sustainable and provide obvious and predictable test run result
