@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.elements.complex;
+package io.github.epam.html.tests.elements.complex.table;
 
 import io.github.com.custom.MarvelUser;
 import io.github.epam.TestsInit;

@@ -12,6 +12,7 @@ import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -20,6 +21,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
+import static java.util.Arrays.asList;
 
 public class Line implements IList<String> {
     private JFunc<MapArray<String, String>> dataMap;
@@ -34,8 +36,8 @@ public class Line implements IList<String> {
     }
     public static Line initLine(List<String> list, List<String> headers) {
         Line line = new Line();
-        line.list = list;
-        line.headers = headers;
+        line.list = new ArrayList<>(list);
+        line.headers = new ArrayList<>(headers);
         return line;
     }
     private MapArray<String, String> data;

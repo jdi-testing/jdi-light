@@ -350,12 +350,12 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<Line> rows(TableMatcher... matchers) {
         List<String> lines = TABLE_MATCHER.execute(this, matchers).values();
-        if (lines == null || lines.size() == 0)
+        if (lines == null || lines.size() < header().size())
             return null;
         List<Line> listOfLines = new ArrayList<>();
         List<String> result = new ArrayList<>();
-        for (int i = 0; i <lines.size(); i++) {
-            result.add(lines.get(i));
+        for (String line : lines) {
+            result.add(line);
             if (result.size() == header().size()) {
                 listOfLines.add(initLine(result, header()));
                 result.clear();

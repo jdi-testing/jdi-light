@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.elements.complex;
+package io.github.epam.html.tests.elements.complex.table;
 
 import com.epam.jdi.light.elements.complex.table.Line;
 import io.github.com.entities.MarvelUserSimple;
@@ -43,7 +43,7 @@ public class TableTests extends TestsInit {
     public void previewTest() {
         String value = usersTable.preview();
         assertEquals(value.replaceAll(" ", ""),
-            "NumberTypeUserDesciption" +
+            "NumberTypeUserDescription" +
             "1AdminUserManagerRomanWolverineVip" +
             "2AdminUserManagerSergeyIvanSpiderManVip" +
             "3AdminUserManagerVladzimirPunisherVip" +

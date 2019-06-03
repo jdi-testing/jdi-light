@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.func.JFunc2;
+import org.openqa.selenium.support.ui.Quotes;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -10,15 +11,17 @@ import static java.lang.String.format;
 
 public class TableMatcher {
     public static JFunc2<BaseTable, TableMatcher[], WebList> TABLE_MATCHER = (table, matchers) -> {
-        String locator = format("./%s/td", print(map(matchers, m ->
-                m.getLocator(table) + "/.."),""));
+        String locator = format("./%s/ancestor::*/td", print(map(matchers, m ->
+                m.getLocator(table)),"/ancestor::*"));
         return $$(locator, table);
     };
     public static TableMatcher hasValue(String value, Column column) {
-        return new TableMatcher("/td[%s][text()='"+value+"']", column, "has '"+value +"'");
+        return new TableMatcher("/td[%s]//*/text()[normalize-space(.) = "+ Quotes.escape(value)+"]",
+                column, "has '"+value +"'");
     }
     public static TableMatcher containsValue(String value, Column column) {
-        return new TableMatcher("/td[%s][contains(text(),'"+value+"')]", column, "contains '"+value +"'");
+        return new TableMatcher("/td[%s]//*/text()[contains(normalize-space(.),"+ Quotes.escape(value)+")]",
+                column, "contains '"+value +"'");
     }
 
     private String locator;

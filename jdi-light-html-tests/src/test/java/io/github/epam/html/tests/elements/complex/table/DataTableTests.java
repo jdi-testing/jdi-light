@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.elements.complex;
+package io.github.epam.html.tests.elements.complex.table;
 
 import com.epam.jdi.light.elements.complex.table.Single;
 import io.github.com.entities.MarvelUserInfo;
@@ -45,7 +45,7 @@ public class DataTableTests extends TestsInit {
     public void previewTest() {
         String value = users.preview();
         assertEquals(value.replaceAll(" ", ""),
-            "NumberTypeUserDesciption1AdminUserManagerRomanWolverineVip2AdminUserManagerSergeyIvanSpiderManVip3AdminUserManagerVladzimirPunisherVip4AdminUserManagerHelenBennettCaptainAmericasomedescriptionVip5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
+            "NumberTypeUserDescription1AdminUserManagerRomanWolverineVip2AdminUserManagerSergeyIvanSpiderManVip3AdminUserManagerVladzimirPunisherVip4AdminUserManagerHelenBennettCaptainAmericasomedescriptionVip5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
     }
 
     @Test
