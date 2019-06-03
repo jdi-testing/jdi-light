@@ -35,7 +35,9 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
         jdiAssert(toBaseUIElement("text").getText(), condition);
         return (T) this;
     }
-
+    public T text(String text) {
+        return text(is(text));
+    }
     /**
      * Match passed value with the element attribute
      * @param attrName
@@ -45,6 +47,9 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
     public T attr(String attrName, Matcher<String> condition) {
         jdiAssert(element.getAttribute(attrName), condition);
         return (T) this;
+    }
+    public T attr(String attrName, String value) {
+        return attr(attrName, is(value));
     }
 
     /**
@@ -57,6 +62,9 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
         jdiAssert(element.getCssValue(css), condition);
         return (T) this;
     }
+    public T css(String css, String value) {
+        return css(css, is(value));
+    }
 
     /**
      * Match passed value with the element tag
@@ -66,6 +74,9 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
     public T tag(Matcher<String> condition) {
         jdiAssert(element.getTagName(), condition);
         return (T) this;
+    }
+    public T css(String tagName) {
+        return tag(is(tagName));
     }
 
     /**
@@ -85,6 +96,9 @@ public class IsAssert<T extends IsAssert> extends BaseAssert implements CommonAs
     public T cssClass(Matcher<String> condition) {
         jdiAssert(element.getAttribute("class"), condition);
         return (T) this;
+    }
+    public T cssClass(String className) {
+        return cssClass(is(className));
     }
 
     /**

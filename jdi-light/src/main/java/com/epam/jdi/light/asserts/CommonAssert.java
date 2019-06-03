@@ -1,5 +1,7 @@
 package com.epam.jdi.light.asserts;
 
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 
 public interface CommonAssert<T> {
@@ -19,6 +21,9 @@ public interface CommonAssert<T> {
     T disabled();
 
     default T and() { return (T) this; }
+    default T condition(JFunc1<T, T> t) {
+        return t.execute((T) this);
+    }
 
     default void assertResults() {
         SoftAssert.assertResults();

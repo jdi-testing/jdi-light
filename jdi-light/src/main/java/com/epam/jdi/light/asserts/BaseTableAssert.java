@@ -2,6 +2,7 @@ package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.*;
+import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -114,6 +115,17 @@ public abstract class BaseTableAssert<T extends BaseTable, A extends BaseTableAs
     @JDIAction("Assert that '{name}' has at least one row that {0}}")
     public A rowThat(Single matcher, Column column) {
         jdiAssert(TABLE_MATCHER.execute(table(), new TableMatcher[] {matcher.toTableMatcher(column)}), is(not(Matchers.empty())));
+        return (A) this;
+    }
+
+    /**
+     * Check that the table has rows that meet expected condition
+     * @param matcher to compare
+     * @return Table
+     */
+    @JDIAction("Assert that '{name}' has rows that meet expected condition")
+    public A row(Matcher<String> matcher, Column column) {
+        jdiAssert(table().row(matcher, column), not(nullValue()));
         return (A) this;
     }
 }

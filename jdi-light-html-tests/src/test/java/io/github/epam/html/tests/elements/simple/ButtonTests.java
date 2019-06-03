@@ -64,7 +64,7 @@ public class ButtonTests extends TestsInit {
         redButton.is().text(containsString("Red Button"));
         assertThat(redButton.css("font-size"), is("14px"));
         redButton.assertThat()
-            .text(is(text))
+            .and().text(is(text))
             .css("font-size", is("14px"))
             .cssClass(is("uui-button red"))
             .attr("type", is("button"))
