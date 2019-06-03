@@ -12,6 +12,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import com.epam.jdi.light.ui.html.common.Button;
 import org.openqa.selenium.WebElement;
+import pseudo.site.section.CustomSection;
 import pseudo.site.section.SomeData;
 
 import java.util.List;
@@ -123,34 +124,34 @@ public class CustomWebPage extends WebPage {
     public WebList webListPublicXPath;
 
     @FindBy(id = "uilistQuestionPackage")
-    UIList<CustomWebPage, ?> uilistQuestionPackage;
+    UIList<CustomSection, ?> uilistQuestionPackage;
     @FindBy(id = "uilistQuestionPublic")
-    public UIList<CustomWebPage, ?> uilistQuestionPublic;
+    public UIList<CustomSection, ?> uilistQuestionPublic;
     @FindBy(id = "uilistQuestionPrivate")
-    private UIList<CustomWebPage, ?> uilistQuestionPrivate;
+    private UIList<CustomSection, ?> uilistQuestionPrivate;
     @UI(".uilistQuestionPackageUI")
-    UIList<CustomWebPage, ?> uilistQuestionPackageUI;
+    UIList<CustomSection, ?> uilistQuestionPackageUI;
     @UI(".uilistQuestionPublicUI")
-    public UIList<CustomWebPage, ?> uilistQuestionPublicUI;
+    public UIList<CustomSection, ?> uilistQuestionPublicUI;
     @Css(".uilistQuestionPackageCss")
-    UIList<CustomWebPage, ?> uilistQuestionPackageCss;
+    UIList<CustomSection, ?> uilistQuestionPackageCss;
     @XPath("//*[@class='uilistQuestionPublicXPath']")
-    public UIList<CustomWebPage, ?> uilistQuestionPublicXPath;
+    public UIList<CustomSection, ?> uilistQuestionPublicXPath;
 
     @FindBy(id = "uilistSomedataPackage")
-    UIList<CustomWebPage, SomeData> uilistSomedataPackage;
+    UIList<CustomSection, SomeData> uilistSomedataPackage;
     @FindBy(id = "uilistSomedataPublic")
-    public UIList<CustomWebPage, SomeData> uilistSomedataPublic;
+    public UIList<CustomSection, SomeData> uilistSomedataPublic;
     @FindBy(id = "uilistSomedataPrivate")
-    private UIList<CustomWebPage, SomeData> uilistSomedataPrivate;
+    private UIList<CustomSection, SomeData> uilistSomedataPrivate;
     @UI(".uilistSomedataPackageUI")
-    UIList<CustomWebPage, SomeData> uilistSomedataPackageUI;
+    UIList<CustomSection, SomeData> uilistSomedataPackageUI;
     @UI(".uilistSomedataPublicUI")
-    public UIList<CustomWebPage, SomeData> uilistSomedataPublicUI;
+    public UIList<CustomSection, SomeData> uilistSomedataPublicUI;
     @Css(".uilistSomedataPackageCss")
-    UIList<CustomWebPage, SomeData> uilistSomedataPackageCss;
+    UIList<CustomSection, SomeData> uilistSomedataPackageCss;
     @XPath("//*[@class='uilistSomedataPublicXPath']")
-    public UIList<CustomWebPage, SomeData> uilistSomedataPublicXPath;
+    public UIList<CustomSection, SomeData> uilistSomedataPublicXPath;
 
     @JDropdown(root = "div[ui=droplistPackage", value = "input", list = "li", expand = ".expand")
     Droplist droplistPackage;
@@ -334,51 +335,51 @@ public class CustomWebPage extends WebPage {
         this.webListPackageUI = webListPackageUI;
     }
 
-    public UIList<CustomWebPage, ?> getUilistQuestionPackage() {
+    public UIList<CustomSection, ?> getUilistQuestionPackage() {
         return uilistQuestionPackage;
     }
 
-    public void setUilistQuestionPackage(UIList<CustomWebPage, ?> uilistQuestionPackage) {
+    public void setUilistQuestionPackage(UIList<CustomSection, ?> uilistQuestionPackage) {
         this.uilistQuestionPackage = uilistQuestionPackage;
     }
 
-    public UIList<CustomWebPage, ?> getUilistQuestionPrivate() {
+    public UIList<CustomSection, ?> getUilistQuestionPrivate() {
         return uilistQuestionPrivate;
     }
 
-    public void setUilistQuestionPrivate(UIList<CustomWebPage, ?> uilistQuestionPrivate) {
+    public void setUilistQuestionPrivate(UIList<CustomSection, ?> uilistQuestionPrivate) {
         this.uilistQuestionPrivate = uilistQuestionPrivate;
     }
 
-    public UIList<CustomWebPage, ?> getUilistQuestionPackageUI() {
+    public UIList<CustomSection, ?> getUilistQuestionPackageUI() {
         return uilistQuestionPackageUI;
     }
 
-    public void setUilistQuestionPackageUI(UIList<CustomWebPage, ?> uilistQuestionPackageUI) {
+    public void setUilistQuestionPackageUI(UIList<CustomSection, ?> uilistQuestionPackageUI) {
         this.uilistQuestionPackageUI = uilistQuestionPackageUI;
     }
 
-    public UIList<CustomWebPage, SomeData> getUilistSomedataPackage() {
+    public UIList<CustomSection, SomeData> getUilistSomedataPackage() {
         return uilistSomedataPackage;
     }
 
-    public void setUilistSomedataPackage(UIList<CustomWebPage, SomeData> uilistSomedataPackage) {
+    public void setUilistSomedataPackage(UIList<CustomSection, SomeData> uilistSomedataPackage) {
         this.uilistSomedataPackage = uilistSomedataPackage;
     }
 
-    public UIList<CustomWebPage, SomeData> getUilistSomedataPrivate() {
+    public UIList<CustomSection, SomeData> getUilistSomedataPrivate() {
         return uilistSomedataPrivate;
     }
 
-    public void setUilistSomedataPrivate(UIList<CustomWebPage, SomeData> uilistSomedataPrivate) {
+    public void setUilistSomedataPrivate(UIList<CustomSection, SomeData> uilistSomedataPrivate) {
         this.uilistSomedataPrivate = uilistSomedataPrivate;
     }
 
-    public UIList<CustomWebPage, SomeData> getUilistSomedataPackageUI() {
+    public UIList<CustomSection, SomeData> getUilistSomedataPackageUI() {
         return uilistSomedataPackageUI;
     }
 
-    public void setUilistSomedataPackageUI(UIList<CustomWebPage, SomeData> uilistSomedataPackageUI) {
+    public void setUilistSomedataPackageUI(UIList<CustomSection, SomeData> uilistSomedataPackageUI) {
         this.uilistSomedataPackageUI = uilistSomedataPackageUI;
     }
 
@@ -434,11 +435,11 @@ public class CustomWebPage extends WebPage {
         return webListPackageCss;
     }
 
-    public UIList<CustomWebPage, ?> getUilistQuestionPackageCss() {
+    public UIList<CustomSection, ?> getUilistQuestionPackageCss() {
         return uilistQuestionPackageCss;
     }
 
-    public UIList<CustomWebPage, SomeData> getUilistSomedataPackageCss() {
+    public UIList<CustomSection, SomeData> getUilistSomedataPackageCss() {
         return uilistSomedataPackageCss;
     }
 }
