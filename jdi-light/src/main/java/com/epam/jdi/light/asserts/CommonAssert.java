@@ -18,6 +18,8 @@ public interface CommonAssert<T> {
     T enabled();
     T disabled();
 
+    default T and() { return (T) this; }
+
     default void assertResults() {
         SoftAssert.assertResults();
     }

@@ -134,7 +134,7 @@ public class DataTableTests extends TestsInit {
             .all().rows(d -> d.user.length() > 4)
             .no().rows(d -> isBlank(d.user))
             .atLeast(3).rows(d -> d.type.contains("User"))
-            .row(SPIDER_MAN)
+            .and().row(SPIDER_MAN)
             .exact(2).rows(d -> d.description.contains(":VIP"))
             .exact(1).rows(SPIDER_MAN);
     }

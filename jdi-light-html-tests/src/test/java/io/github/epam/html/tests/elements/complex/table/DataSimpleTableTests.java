@@ -130,7 +130,7 @@ public class DataSimpleTableTests extends TestsInit {
             .all().rows(d -> d.user.length() > 4)
             .no().rows(d -> isBlank(d.user))
             .atLeast(3).rows(d -> d.type.contains("User"))
-            .row(SPIDER_MAN_SIMPLE)
+            .and().row(SPIDER_MAN_SIMPLE)
             .exact(2).rows(d -> d.user.contains("R"))
             .exact(1).rows(SPIDER_MAN_SIMPLE);
     }

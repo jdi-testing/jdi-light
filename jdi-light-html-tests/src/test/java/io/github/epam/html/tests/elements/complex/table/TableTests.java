@@ -118,7 +118,7 @@ public class TableTests extends TestsInit {
     public void tableChainTest() {
         usersTable.assertThat()
             .displayed().size(6).size(greaterThan(3)).notEmpty()
-            .rowThat(containsValue("Ivan", inColumn("User")))
+            .and().rowThat(containsValue("Ivan", inColumn("User")))
             .all().rows(containsValue("Vip", inColumn("Description")))
             .no().rows(containsValue("Alex", inColumn("User")))
             .atLeast(3).rows(containsValue(" ", inColumn("User")))

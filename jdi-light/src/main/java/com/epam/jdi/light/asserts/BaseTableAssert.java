@@ -27,7 +27,6 @@ public abstract class BaseTableAssert<T extends BaseTable, A extends BaseTableAs
         this.table = table;
         this.name = table.toError();
     }
-
     /**
      * Check that the table is empty
      */
