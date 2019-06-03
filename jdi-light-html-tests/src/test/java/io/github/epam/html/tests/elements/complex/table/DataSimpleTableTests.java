@@ -96,8 +96,8 @@ public class DataSimpleTableTests extends TestsInit {
     }
     @Test
     public void rowTableMatcherTest() {
-        usersData.has().rowThat(hasValue("User", inColumn("Type")),
-                containsValue("Ivan", inColumn("User")));
+        usersData.has().rowThat(containsValue("User", inColumn("Type")),
+                hasValue("Sergey Ivan", inColumn("User")));
     }
     @Test
     public void rowsAllTest() {

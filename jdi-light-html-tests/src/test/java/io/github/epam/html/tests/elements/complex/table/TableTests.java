@@ -71,8 +71,8 @@ public class TableTests extends TestsInit {
     }
     @Test
     public void dataFilterTest() {
-        assertEquals(usersTable.row(containsValue("Ivan", inColumn("User")),
-                hasValue("User", inColumn("Type")))
+        assertEquals(usersTable.row(hasValue("Sergey Ivan", inColumn("User")),
+                containsValue("User", inColumn("Type")))
             .asData(MarvelUserSimple.class), SPIDER_MAN_SIMPLE);
     }
     @Test

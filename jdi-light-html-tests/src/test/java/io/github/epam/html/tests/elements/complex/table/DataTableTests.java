@@ -100,8 +100,8 @@ public class DataTableTests extends TestsInit {
     }
     @Test
     public void rowTableMatcherTest() {
-        users.has().rowThat(hasValue("User", inColumn("Type")),
-                containsValue("Ivan", inColumn("User")));
+        users.has().rowThat(containsValue("User", inColumn("Type")),
+                hasValue("Sergey Ivan", inColumn("User")));
     }
     @Test
     public void rowsAllTest() {
