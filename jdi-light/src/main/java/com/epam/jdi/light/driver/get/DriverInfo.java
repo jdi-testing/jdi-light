@@ -6,7 +6,6 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.net.URL;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -14,7 +13,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.isRemote;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
 import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.settings.WebSettings.DRIVER_REMOTE_URL;
+import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Integer.parseInt;
 import static java.lang.System.setProperty;
@@ -35,7 +34,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     }
     private WebDriver setupRemote() {
         try {
-            return new RemoteWebDriver(new URL(DRIVER_REMOTE_URL), capabilities.execute());
+            return new RemoteWebDriver(getRemoteURL(), capabilities.execute());
         } catch (Exception ex) {
             throw exception("Failed to setup remote "+type.name+" driver");
         }
