@@ -12,6 +12,9 @@ public class MetalAndColorsPage extends WebPage {
 	@JDropdown(root = "div[ui=dropdown]", value = ".filter-option",
 			list = "li", expand = ".caret")
 	public static Droplist colors;
+	@JDropdown(root = "//div[@ui='dropdown']", value = "//*[contains(@class, 'filter-option')]",
+			list = "//li", expand = "//*[contains(@class, 'caret')]")
+	public static Droplist colorsXpath;
 	@JDropdown(root = "div[ui=combobox]", value = "input",
 			list = "li", expand = ".caret")
 	public static Droplist metals;

@@ -7,6 +7,8 @@ package com.epam.jdi.light.settings;
 
 import com.epam.jdi.light.asserts.SoftAssert;
 import com.epam.jdi.light.common.Timeout;
+import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.logger.ILogger;
@@ -14,8 +16,10 @@ import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.driver.get.DriverTypes.getByName;
 import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -72,6 +77,15 @@ public class WebSettings {
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static String DRIVER_REMOTE_URL;
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
+    public static String useDriver(JFunc<WebDriver> driver) {
+        return WebDriverFactory.useDriver(driver);
+    }
+    public static String useDriver(String driverName) {
+        return WebDriverFactory.useDriver(driverName);
+    }
+    public static String useDriver(DriverTypes driverType) {
+        return WebDriverFactory.useDriver(driverType);
+    }
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;

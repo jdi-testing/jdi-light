@@ -103,7 +103,7 @@ public final class WebDriverByUtils {
             throw new RuntimeException("Can't get By locator from string empty or null string");
         String[] split = stringLocator.split("(^=)*=.*");
         if (split.length == 1)
-            return By.cssSelector(split[0]);
+            return defineLocator(split[0]);
         switch (split[0]) {
             case "css": return By.cssSelector(split[1]);
             case "xpath": return By.xpath(split[1]);

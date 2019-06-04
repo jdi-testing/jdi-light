@@ -8,8 +8,7 @@ import static com.epam.jdi.light.elements.base.WindowsManager.originalWindow;
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.HomePage.githubLink;
 import static io.github.com.pages.HomePage.jdiText;
-import static io.github.com.pages.MetalAndColorsPage.colors;
-import static io.github.com.pages.MetalAndColorsPage.metals;
+import static io.github.com.pages.MetalAndColorsPage.*;
 import static io.github.epam.enums.ColorsList.Green;
 import static io.github.epam.enums.Metals.Gold;
 import static io.github.epam.enums.Navigation.*;
@@ -31,6 +30,10 @@ public class ComplexElements3Tests extends StaticTestsInit {
         metalAndColorsPageParams.open("?");
         metalAndColorsPageParams.shouldBeOpened("?");
         metalAndColorsPageParams.checkOpened();
+    }
+    @Test
+    public void complexXpathTest() {
+        colorsXpath.select(Green);
     }
     @Test
     public void complexTest() {

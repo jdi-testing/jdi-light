@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -124,10 +125,10 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
      * @param value
      * @return boolean
      */
-    @JDIAction("Is item '{0}' displayed in '{name}'")
-    public boolean isDisplayed(String name) {
+    @JDIAction("Is item '{0}' displayed in '{value}'")
+    public boolean isDisplayed(String value) {
         assertLinked(list, "list", "isDisplayed");
-        return isExpanded() && list.values().contains(name);
+        return isExpanded() && list.values().contains(value);
     }
 
     /**
@@ -210,13 +211,13 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
             return;
         JDropdown j = field.getAnnotation(JDropdown.class);
         By root = isNotBlank(j.root())
-                ? By.cssSelector(j.root()) : null;
+                ? defineLocator(j.root()) : null;
         By valueLocator = isNotBlank(j.value())
-                ? By.cssSelector(j.value()) : null;
+                ? defineLocator(j.value()) : null;
         By listLocator = isNotBlank(j.list())
-                ? By.cssSelector(j.list()) : null;
+                ? defineLocator(j.list()) : null;
         By expandLocator = isNotBlank(j.expand())
-                ? By.cssSelector(j.expand()) : null;
+                ? defineLocator(j.expand()) : null;
         if (root != null)
             setLocator(root);
         if (valueLocator != null) {

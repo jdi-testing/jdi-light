@@ -90,7 +90,7 @@ public abstract class BaseUIElement<T extends BaseUIElement>
         throw exception("Can't find sub element by locator %s for %s", shortBy(by), this);
     }
     public List<T> finds(String by) {
-        return finds(By.cssSelector(by));
+        return finds(defineLocator(by));
     }
     public List<T> finds(By by) {
         return map(get().findElements(by), this::newElement);

@@ -96,8 +96,9 @@ public class DataSimpleTableTests extends TestsInit {
     }
     @Test
     public void rowTableMatcherTest() {
-        usersData.has().rowThat(containsValue("User", inColumn("Type")),
-                hasValue("Sergey Ivan", inColumn("User")));
+        usersData.has().rowThat(
+            containsValue("User", inColumn("Type")),
+            hasValue("Sergey Ivan", inColumn("User")));
     }
     @Test
     public void rowsAllTest() {
@@ -120,7 +121,6 @@ public class DataSimpleTableTests extends TestsInit {
         usersData.assertThat().exact(1).rows(SPIDER_MAN_SIMPLE);
     }
     //
-
 
     @Test
     public void tableChainTest() {

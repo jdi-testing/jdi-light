@@ -4,9 +4,9 @@ import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.driver.get.DriverInfos.FF_INFO;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.ui.html.PageFactory.initElements;
 import static io.github.com.StaticSite.homePage;
