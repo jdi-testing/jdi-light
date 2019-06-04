@@ -16,6 +16,8 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -47,11 +49,14 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
-        if (expander != null && list != null) {
-            expand();
-            list.select(value);
+        if (list == null) {
+            getSelectElement(format("select '%s'", value)).selectByVisibleText(value);
+            return;
         }
-        else getSelectElement(format("select '%s'", value)).selectByVisibleText(value);
+        if (expander == null)
+            click();
+        else expand();
+        list.select(value);
     }
     public <TEnum extends Enum> void select(TEnum name) { select(getEnumValue(name));}
 
@@ -61,11 +66,14 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
-        if (expander != null && list != null) {
-            expand();
-            list.select(index-1);
+        if (list == null) {
+            getSelectElement(format("select '%s'", index)).selectByIndex(index);
+            return;
         }
-        else getSelectElement(format("select '%s'", index)).selectByIndex(index);
+        if (expander == null)
+            click();
+        else expand();
+        list.select(index-1);
     }
 
     /**
@@ -221,26 +229,17 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
         if (root != null)
             setLocator(root);
         if (valueLocator != null) {
-            value = new UIElement();
-            value.name = getName() + " value element";
-            value.setLocator(valueLocator);
-            value.parent = this;
+            value = $(valueLocator, this).setName(getName() + " value element");
             value.driverName = driverName;
             if (expandLocator == null)
                 expander = value;
         }
         if (listLocator != null) {
-            list = new WebList();
-            list.name = getName() + " list element";
-            list.setLocator(listLocator);
-            list.parent = this;
+            list = $$(listLocator, this).setName(getName() + " list element");
             list.driverName = driverName;
         }
         if (expandLocator != null) {
-            expander = new UIElement();
-            expander.name = getName() + " expander element";
-            expander.setLocator(expandLocator);
-            expander.parent = this;
+            expander = $(expandLocator, this).setName(getName() + " expander element");
             expander.driverName = driverName;
             if (valueLocator == null)
                 value = expander;
