@@ -142,4 +142,22 @@ public class SoftAsserts extends TestsInit {
                 "     but: collection size was <0>]"));
         }
     }
+    @Test
+    public void customFailTest(){
+        try {
+            usersPage.open();
+            users.verify().failMessage("Element fail")
+                .row(d -> d.user.contains("Ivannn"))
+                .all().rows(d -> d.user.length() > 4)
+                .atLeast(3).rows(d -> d.type.contains("Userrr"))
+                .assertResults();
+            Assert.fail("Test should throw asserts");
+        } catch (Throwable tr) {
+            assertThat(tr.getMessage(), is("[java.lang.AssertionError: \n" +
+                    "Expected: not null\n" +
+                    "     but: was null, java.lang.AssertionError: \n" +
+                    "Expected: a collection with size <3>\n" +
+                    "     but: collection size was <0>]"));
+        }
+    }
 }
