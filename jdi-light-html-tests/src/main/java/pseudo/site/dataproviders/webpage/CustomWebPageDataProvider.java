@@ -2,6 +2,7 @@ package pseudo.site.dataproviders.webpage;
 
 import org.testng.annotations.DataProvider;
 
+import static pseudo.site.PseudoSite.customSection;
 import static pseudo.site.PseudoSite.customWebPage;
 
 public class CustomWebPageDataProvider {
@@ -95,6 +96,32 @@ public class CustomWebPageDataProvider {
                 {customWebPage.getListButtonPrivate(), "id='listButtonPrivate'", customWebPage, "List Button Private"},
                 {customWebPage.getListButtonPackageUI(), "css='.listButtonPackageUI'", customWebPage, "List Button Package UI"},
                 {customWebPage.getListButtonPackageCss(), "css='.listButtonPackageCss'", customWebPage, "List Button Package Css"},
+        };
+    }
+
+    @DataProvider
+    public Object[][] customWebPageUIListQuestionDataProvider() {
+        return new Object[][]{
+                {customWebPage.uilistQuestionPublic, "id='uilistQuestionPublic'", customWebPage, "Uilist Question Public"},
+                {customWebPage.uilistQuestionPublicUI, "css='.uilistQuestionPublicUI'", customWebPage, "Uilist Question Public UI"},
+                {customWebPage.uilistQuestionPublicXPath, "xpath='//*[@class='uilistQuestionPublicXPath']'", customWebPage, "Uilist Question Public X Path"},
+                {customWebPage.getUilistQuestionPackage(), "id='uilistQuestionPackage'", customWebPage, "Uilist Question Package"},
+                {customWebPage.getUilistQuestionPrivate(), "id='uilistQuestionPrivate'", customWebPage, "Uilist Question Private"},
+                {customWebPage.getUilistQuestionPackageUI(), "css='.uilistQuestionPackageUI'", customWebPage, "Uilist Question Package UI"},
+                {customWebPage.getUilistQuestionPackageCss(), "css='.uilistQuestionPackageCss'", customWebPage, "Uilist Question Package Css"},
+        };
+    }
+
+    @DataProvider
+    public Object[][] customWebPageUIListSomedataDataProvider() {
+        return new Object[][]{
+                {customWebPage.uilistSomedataPublic, "id='uilistSomedataPublic'", customWebPage, "Uilist Somedata Public"},
+                {customWebPage.uilistSomedataPublicUI, "css='.uilistSomedataPublicUI'", customWebPage, "Uilist Somedata Public UI"},
+                {customWebPage.uilistSomedataPublicXPath, "xpath='//*[@class='uilistSomedataPublicXPath']'", customWebPage, "Uilist Somedata Public X Path"},
+                {customWebPage.getUilistSomedataPackage(), "id='uilistSomedataPackage'", customWebPage, "Uilist Somedata Package"},
+                {customWebPage.getUilistSomedataPrivate(), "id='uilistSomedataPrivate'", customWebPage, "Uilist Somedata Private"},
+                {customWebPage.getUilistSomedataPackageUI(), "css='.uilistSomedataPackageUI'", customWebPage, "Uilist Somedata Package UI"},
+                {customWebPage.getUilistSomedataPackageCss(), "css='.uilistSomedataPackageCss'", customWebPage, "Uilist Somedata Package Css"},
         };
     }
 
