@@ -146,7 +146,7 @@ public class SoftAsserts extends TestsInit {
     public void customFailTest(){
         try {
             usersPage.open();
-            users.verify().failMessage("Element fail")
+            users.verify()
                 .row(d -> d.user.contains("Ivannn"))
                 .all().rows(d -> d.user.length() > 4)
                 .atLeast(3).rows(d -> d.type.contains("Userrr"))
