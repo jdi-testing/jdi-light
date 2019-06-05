@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class UIElement extends BaseUIElement<UIElement> {
+public class UIElement extends BaseWebElement<UIElement> {
     public UIElement() { setInitClass(UIElement.class); }
     public UIElement(WebElement el) { this(); webElement.setForce(el); }
     public UIElement(List<WebElement> els) { this(); webElements.setForce(els); }

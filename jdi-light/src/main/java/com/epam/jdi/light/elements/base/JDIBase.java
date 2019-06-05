@@ -1,10 +1,12 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.asserts.IsAssert;
+import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDILocator;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Timer;
@@ -18,6 +20,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.text.MessageFormat;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
@@ -45,7 +48,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class JDIBase extends DriverBase implements BaseElement, INamed {
+public class JDIBase extends DriverBase implements IBaseElement, HasValue {
     public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     public JDILocator locator = new JDILocator();
     public CacheValue<WebElement> webElement = new CacheValue<>();
@@ -63,8 +66,6 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         searchRule.setForce(rule);
         return (T) this;
     }
-
-    public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }
     public UIElement setWebElement(WebElement el) {
         webElement.setForce(el);
         return isClass(getClass(), UIElement.class) ? (UIElement) this : new UIElement();
@@ -575,12 +576,12 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         actions.execute(actionsClass().moveToElement(get())).build().perform();
     }
 
-    public boolean wait(JFunc1<BaseElement, Boolean> condition) {
+    public boolean wait(JFunc1<IBaseElement, Boolean> condition) {
         return new Timer(TIMEOUT.get()).wait(() -> condition.execute(this));
     }
 
     public String getValue() {
-        return get().getText();
+        return getText();
     }
     //endregion
 
@@ -598,6 +599,10 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
         return is();
     }
     public IsAssert shouldBe() {
+        return is();
+    }
+    public IsAssert verify() {
+        assertSoft();
         return is();
     }
     //endregion

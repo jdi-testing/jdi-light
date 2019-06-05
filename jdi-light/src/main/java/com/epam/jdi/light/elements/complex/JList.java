@@ -7,7 +7,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.ListAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
@@ -24,6 +24,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
@@ -34,7 +35,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class JList<T extends BaseUIElement> extends JDIBase
+public class JList<T extends BaseWebElement> extends JDIBase
         implements IList<T>, SetValue, ISetup, ISelector {
     protected CacheValue<List<T>> elements = new CacheValue<>();
 
@@ -119,11 +120,11 @@ public class JList<T extends BaseUIElement> extends JDIBase
 
     /**
      * Select the items by the names
-     * @param names
+     * @param values
      */
     @JDIAction("Select ({0}) for '{name}'")
-    public void select(String... names) {
-        for (String value : names)
+    public void select(String... values) {
+        for (String value : values)
             select(value);
     }
 
@@ -144,11 +145,11 @@ public class JList<T extends BaseUIElement> extends JDIBase
 
     /**
      * Select the items by the values, hover and click on them
-     * @param values
+     * @param value
      */
     @JDIAction("Select ({0}) for '{name}'")
-    public void hoverAndClick(String values) {
-        String[] split = values.split(">");
+    public void hoverAndClick(String value) {
+        String[] split = value.split(">");
         if (split.length == 1)
             select(split[0]);
         else hoverAndClick(split);
@@ -159,11 +160,11 @@ public class JList<T extends BaseUIElement> extends JDIBase
 
     /**
      * Select the items by the names
-     * @param names
+     * @param values
      */
     @JDIAction("Select ({0}) for '{name}'")
-    public <TEnum extends Enum> void select(TEnum... names) {
-        for (TEnum value : names)
+    public <TEnum extends Enum> void select(TEnum... values) {
+        for (TEnum value : values)
             select(value);
     }
 
@@ -193,7 +194,7 @@ public class JList<T extends BaseUIElement> extends JDIBase
     @JDIAction("Get '{name}' selected value")
     public String selected() {
         refresh();
-        T first = logger.logOff(() -> first(BaseUIElement::isSelected) );
+        T first = logger.logOff(() -> first(BaseWebElement::isSelected) );
         return first != null ? first.getText() : "";
     }
 
@@ -242,8 +243,8 @@ public class JList<T extends BaseUIElement> extends JDIBase
 
     @Override
     public List<String> checked() {
-        return ifSelect(BaseUIElement::isSelected,
-                BaseUIElement::getText);
+        return ifSelect(BaseWebElement::isSelected,
+                BaseWebElement::getText);
     }
 
     public List<String> values() {
@@ -261,13 +262,17 @@ public class JList<T extends BaseUIElement> extends JDIBase
     @Override
     public List<String> listEnabled() {
         return ifSelect(JDIBase::isEnabled,
-                BaseUIElement::getText);
+                BaseWebElement::getText);
     }
 
     @Override
     public List<String> listDisabled() {
         return ifSelect(JDIBase::isDisabled,
-                BaseUIElement::getText);
+                BaseWebElement::getText);
+    }
+    @Override
+    public boolean displayed() {
+        return get(0).displayed();
     }
 
     //region matchers
@@ -292,6 +297,10 @@ public class JList<T extends BaseUIElement> extends JDIBase
         return is();
     }
     public ListAssert<T> shouldBe() {
+        return is();
+    }
+    public ListAssert<T> verify() {
+        assertSoft();
         return is();
     }
     //endregion

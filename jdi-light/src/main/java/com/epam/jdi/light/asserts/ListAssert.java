@@ -1,7 +1,7 @@
 package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.tools.func.JFunc;
 import org.hamcrest.Matcher;
@@ -14,7 +14,7 @@ import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.Matchers.*;
 
-public class ListAssert<T extends BaseUIElement> extends SelectAssert {
+public class ListAssert<T extends BaseWebElement> extends SelectAssert {
     JFunc<List<T>> elements;
 
     public ListAssert(JFunc<List<T>> elements, JFunc<ISelector> selector, String name) {
@@ -95,7 +95,7 @@ public class ListAssert<T extends BaseUIElement> extends SelectAssert {
      */
     @JDIAction("Assert that all '{name}' elements are displayed") @Override
     public ListAssert<T> allDisplayed() {
-        jdiAssert(map(elements.execute(), BaseUIElement::isDisplayed), everyItem(is(true)));
+        jdiAssert(map(elements.execute(), BaseWebElement::isDisplayed), everyItem(is(true)));
         return this;
     }
 
@@ -105,7 +105,7 @@ public class ListAssert<T extends BaseUIElement> extends SelectAssert {
      */
     @JDIAction("Assert that at least one '{name}' element is displayed") @Override
     public ListAssert<T> displayed() {
-        jdiAssert(map(elements.execute(), BaseUIElement::isDisplayed), hasItem(true));
+        jdiAssert(map(elements.execute(), BaseWebElement::isDisplayed), hasItem(true));
         return this;
     }
 
@@ -115,7 +115,7 @@ public class ListAssert<T extends BaseUIElement> extends SelectAssert {
      */
     @JDIAction("Assert that all '{name}' elements are hidden") @Override
     public ListAssert<T> allHidden() {
-        jdiAssert(map(elements.execute(), BaseUIElement::isDisplayed), everyItem(is(false)));
+        jdiAssert(map(elements.execute(), BaseWebElement::isDisplayed), everyItem(is(false)));
         return this;
     }
 
@@ -125,7 +125,7 @@ public class ListAssert<T extends BaseUIElement> extends SelectAssert {
      */
     @JDIAction("Assert that all '{name}' elements are selected") @Override
     public ListAssert<T> allSelected() {
-        jdiAssert(map(elements.execute(), BaseUIElement::isSelected), everyItem(is(true)));
+        jdiAssert(map(elements.execute(), BaseWebElement::isSelected), everyItem(is(true)));
         return this;
     }
 
@@ -135,7 +135,7 @@ public class ListAssert<T extends BaseUIElement> extends SelectAssert {
      */
     @JDIAction("Assert that all '{name}' elements are enabled") @Override
     public ListAssert<T> allEnabled() {
-        jdiAssert(map(elements.execute(), BaseUIElement::isEnabled), everyItem(is(true)));
+        jdiAssert(map(elements.execute(), BaseWebElement::isEnabled), everyItem(is(true)));
         return this;
     }
 }

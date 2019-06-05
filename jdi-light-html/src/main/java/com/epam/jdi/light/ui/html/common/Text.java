@@ -1,11 +1,27 @@
 package com.epam.jdi.light.ui.html.common;
 
-import com.epam.jdi.light.asserts.IHasAssert;
-import com.epam.jdi.light.elements.base.BaseFindElement;
-import com.epam.jdi.light.ui.html.asserts.TextAssert;
-import com.epam.jdi.light.ui.html.base.HtmlElement;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.ui.html.aserts.CheckboxAssert;
+import com.epam.jdi.light.ui.html.aserts.TextAssert;
 
-public interface Text extends BaseFindElement<HtmlElement>, IHasAssert<TextAssert> {
-    String getText();
+public class Text<A extends TextAssert> extends UIBaseElement<A> implements HasValue {
+    // region Actions
+    @JDIAction("Get '{name}' text")
+    public String getText() {
+        return element.getText();
+    }
+    // endregion
 
+    // region Set and get value for Forms
+    public String getValue() {
+        return getText();
+    }
+    // endregion
+
+    // region Extend assertions
+    @Override
+    public A is() { return (A) new TextAssert().set(this); }
+    // endregion
 }

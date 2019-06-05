@@ -1,8 +1,8 @@
 package com.epam.jdi.light.ui.html.base;
 
-import com.epam.jdi.light.asserts.SoftAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.BaseWebElement;
+import com.epam.jdi.light.elements.base.Label;
 import com.epam.jdi.light.ui.html.asserts.HtmlAssertion;
 import com.epam.jdi.light.ui.html.common.*;
 import org.openqa.selenium.WebElement;
@@ -21,7 +21,7 @@ import static java.util.Arrays.asList;
 /**
  * Base html element
  */
-public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, Button, FileInput, Icon, Image, Link, TextArea,
+public class HtmlElement extends BaseWebElement<HtmlElement> implements Text, Button, FileInput, Icon, Image, Link, TextArea,
         TextField, Label, Checkbox, ColorPicker, Range, ProgressBar, DateTimeSelector, NumberSelector {
 
     public HtmlElement() { setInitClass(HtmlElement.class); }

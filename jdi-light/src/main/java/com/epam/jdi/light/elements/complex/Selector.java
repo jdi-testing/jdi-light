@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import org.apache.logging.log4j.util.Strings;
 import org.openqa.selenium.By;
@@ -18,7 +18,7 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
-public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
+public class Selector<T extends BaseWebElement> extends BaseWebElement<T>
     implements ISelector {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
 
@@ -139,7 +139,7 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
      * Gets attribute 'placeholder'
      * @return String
      */
-    @JDIAction(level = DEBUG)
+    @JDIAction(value = "Get '{name}' placeholder", level = DEBUG)
     public String placeholder() { return getAttribute("placeholder"); }
 
     /**

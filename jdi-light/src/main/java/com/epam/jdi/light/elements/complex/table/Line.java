@@ -1,7 +1,7 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
@@ -21,7 +21,6 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
-import static java.util.Arrays.asList;
 
 public class Line implements IList<String> {
     private JFunc<MapArray<String, String>> dataMap;
@@ -32,7 +31,7 @@ public class Line implements IList<String> {
     public Line(List<UIElement> elements, List<String> headers) {
         this.elements = elements;
         this.headers = headers;
-        this.dataMap = () -> new MapArray<>(headers, LinqUtils.map(elements, BaseUIElement::getText));
+        this.dataMap = () -> new MapArray<>(headers, LinqUtils.map(elements, BaseWebElement::getText));
     }
     public static Line initLine(List<String> list, List<String> headers) {
         Line line = new Line();

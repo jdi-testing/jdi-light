@@ -1,8 +1,11 @@
 package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.asserts.IsAssert;
+import com.epam.jdi.light.asserts.ListAssert;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.PageObject;
+
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 
 /**
  * Created by Roman Iovlev on 29.03.2018
@@ -25,6 +28,10 @@ public class Section extends JDIBase implements PageObject {
         return is();
     }
     public IsAssert shouldBe() {
+        return is();
+    }
+    public IsAssert verify() {
+        assertSoft();
         return is();
     }
     //endregion

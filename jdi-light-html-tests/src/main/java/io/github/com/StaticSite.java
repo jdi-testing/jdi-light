@@ -11,7 +11,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.JMenu;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import com.epam.jdi.light.ui.html.base.HtmlList;
-import com.epam.jdi.light.ui.html.complex.Menu;
+import com.epam.jdi.light.elements.complex.Menu;
 import io.github.com.custom.MenuItem;
 import io.github.com.pages.*;
 import org.openqa.selenium.WebElement;

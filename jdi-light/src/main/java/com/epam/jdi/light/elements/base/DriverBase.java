@@ -4,17 +4,19 @@ import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.INamed;
+import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-public class DriverBase implements INamed {
+public class DriverBase implements JDIElement {
     public static final String DEFAULT_DRIVER = "chrome";
     public String driverName = DRIVER_NAME;
     public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
@@ -34,6 +36,7 @@ public class DriverBase implements INamed {
         this.parent = parent;
         return (T) this;
     }
+    public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }
 
     public <T> T setName(String name) {
         this.name = name;

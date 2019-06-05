@@ -15,7 +15,7 @@ import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCH
 
 public class Table extends BaseTable<Table> implements ISetup, HasValue {
 
-    public TableAssert  is() {
+    public TableAssert is() {
         return new TableAssert(this);
     }
     public TableAssert assertThat() {

@@ -20,11 +20,11 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static java.lang.Thread.currentThread;
 
-public abstract class BaseUIElement<T extends BaseUIElement>
+public abstract class BaseWebElement<T extends BaseWebElement>
         extends JDIBase implements WebElement, BaseFindElement<T>, SetValue {
-    public BaseUIElement() { }
-    public BaseUIElement(WebElement el) { webElement.setForce(el); }
-    public BaseUIElement(List<WebElement> els) { webElements.setForce(els); }
+    public BaseWebElement() { }
+    public BaseWebElement(WebElement el) { webElement.setForce(el); }
+    public BaseWebElement(List<WebElement> els) { webElements.setForce(els); }
     protected Class<T> initClass;
 
     public T setInitClass(Class<T> listClass) {
@@ -122,8 +122,6 @@ public abstract class BaseUIElement<T extends BaseUIElement>
                 .setLocator(By.cssSelector("[for="+getAttribute("id")+"]"))
                 .setName(getName() + " label");
     }
-    @Override
-    public String getText() { return super.getText(); }
     /**
      * Gets label text
      * @return String text
@@ -132,6 +130,8 @@ public abstract class BaseUIElement<T extends BaseUIElement>
     public String labelText() {
         return label().getText();
     }
+    @Override
+    public String getText() { return super.getText(); }
 
     /**
      * Clear
@@ -252,7 +252,7 @@ public abstract class BaseUIElement<T extends BaseUIElement>
      * Gets attribute 'placeholder'
      * @return String
      */
-    @JDIAction(level = DEBUG)
+    @JDIAction(value = "Get '{name}' placeholder", level = DEBUG)
     public String placeholder() { return getAttribute("placeholder"); }
     /**
      * Gets attribute 'value'

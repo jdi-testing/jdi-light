@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
-public interface BaseFindElement<T> extends BaseElement {
+public interface BaseFindElement<T> extends IBaseElement {
     T find(String by);
     T find(By by);
     List<T> finds(String by);

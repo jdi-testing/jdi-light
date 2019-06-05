@@ -1,22 +1,33 @@
 package com.epam.jdi.light.ui.html.common;
 
-import com.epam.jdi.light.elements.base.BaseFindElement;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.light.ui.html.annotations.FillValue;
-import com.epam.jdi.light.ui.html.annotations.VerifyValue;
-import com.epam.jdi.light.ui.html.asserts.ColorAssert;
-import com.epam.jdi.light.ui.html.base.HasLabel;
-import com.epam.jdi.light.ui.html.base.HtmlElement;
+import com.epam.jdi.light.ui.html.aserts.ColorAssert;
 
-public interface ColorPicker extends BaseFindElement<HtmlElement>, HasLabel, SetValue {
-    @VerifyValue String color();
-    @FillValue void setColor(String color);
+public class ColorPicker extends WithLabel<ColorAssert> implements SetValue {
+    // region Actions
+    @JDIAction("Get '{name}' color")
+    public String color() { return element.attr("value"); }
+    @JDIAction("Set color '{0}' for '{name}'")
+    public void setColor(String color) {
+        element.setAttribute("value", color);
+    }
+    // endregion
 
-    ColorAssert is();
-    ColorAssert assertThat();
-    ColorAssert has();
-    ColorAssert waitFor();
-    ColorAssert shouldBe();
-    ColorAssert verify();
+    // region Set and get value for Forms
+    public void setValue(String value) {
+        setColor(value);
+    }
+    public String getValue() {
+        return color();
+    }
+    // endregion
 
+    // region Extend assertions
+    @Override
+    public ColorAssert is() {
+        return new ColorAssert().set(this);
+    }
+    // endregion
 }

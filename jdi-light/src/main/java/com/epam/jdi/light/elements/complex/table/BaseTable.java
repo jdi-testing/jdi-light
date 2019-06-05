@@ -1,5 +1,7 @@
 package com.epam.jdi.light.elements.complex.table;
 
+import com.epam.jdi.light.asserts.BaseTableAssert;
+import com.epam.jdi.light.asserts.TableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
@@ -21,6 +23,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.complex.table.Line.initLine;
@@ -34,6 +37,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.hamcrest.Matchers.greaterThan;
 
 public abstract class BaseTable<T extends BaseTable> extends JDIBase
         implements ISetup, HasValue, HasCache {
@@ -130,10 +134,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
     public int size() { return size.get(); }
 
     public List<UIElement> webRow(int rowNum) {
-        if (rowNum < 1)
-            throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
-        if (rowNum > count.get())
-            throw exception("Table has %s rows (but requested index is %s)", count.get(), rowNum);
+        validateRowIndex(rowNum);
         if (!rows.get().has(rowNum+"")) {
             List<UIElement> result = cells.isGotAll()
                 ? LinqUtils.select(cells.get(), c -> c.value.get(rowNum+""))
@@ -142,6 +143,13 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         }
         return rows.get().get(rowNum+"");
     }
+    private void validateRowIndex(int rowNum) {
+        if (rowNum < 1)
+            throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
+        if (rowNum > count.get())
+            throw exception("Table has %s rows (but requested index is %s)", count.get(), rowNum);
+        waitFor().size(greaterThan(rowNum));
+    }
     public List<UIElement> webRow(String rowName) {
         return webRow(getRowIndexByName(rowName));
     }
@@ -149,10 +157,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         return webRow(getEnumValue(rowName));
     }
     public List<UIElement> webColumn(int colNum) {
-        if (colNum < 1)
-            throw exception("Columns numeration starts from 1 (but requested index is %s)", colNum);
-        if (colNum > count.get())
-            throw exception("Table has %s columns (but requested index is %s)", size.get(), colNum);
+        validateColumnIndex(colNum) ;
         if (!columns.get().has(colNum+"")) {
             List<UIElement> result = cells.isGotAll()
                 ? cells.get().get(colNum + "").values()
@@ -160,6 +165,12 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
             columns.get().add(colNum + "", result);
         }
         return columns.get().get(colNum+"");
+    }
+    private void validateColumnIndex(int colNum) {
+        if (colNum < 1)
+            throw exception("Columns numeration starts from 1 (but requested index is %s)", colNum);
+        if (colNum > count.get())
+            throw exception("Table has %s columns (but requested index is %s)", size.get(), colNum);
     }
     public List<UIElement> webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
@@ -183,6 +194,8 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         return rowIndex + 1;
     }
     public UIElement webCell(int colNum, int rowNum) {
+        validateColumnIndex(colNum);
+        validateRowIndex(rowNum);
         if (!cells.isGotAll()) {
             if (rows.get().has(rowNum + ""))
                 return rows.get().get(rowNum + "").get(colNum - 1);
@@ -233,7 +246,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
             return columnsMapping[index-1];
         return index;
     }
-    public WebList getColumn(int colNum) {
+    protected WebList getColumn(int colNum) {
         return $$(fillByTemplate(columnLocator, getColumnIndex(colNum)), this).noValidation();
     }
     protected UIElement getCell(int colNum, int rowNum) {
@@ -558,5 +571,20 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
             value += "||" + i + "||" + print(map(row(i), TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         return value;
     }
+
+    public BaseTableAssert is() {
+        return new BaseTableAssert(this);
+    }
+    public BaseTableAssert assertThat() {
+        return is();
+    }
+    public BaseTableAssert has() {
+        return is();
+    }
+    public BaseTableAssert waitFor() {
+        return is();
+    }
+    public BaseTableAssert shouldBe() { return is(); }
+    public BaseTableAssert verify() { assertSoft(); return is(); }
 
 }

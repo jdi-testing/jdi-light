@@ -15,7 +15,7 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public abstract class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> extends IsAssert<A> {
+public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> extends IsAssert<A> {
     protected T table;
     protected String name;
     protected T table() {

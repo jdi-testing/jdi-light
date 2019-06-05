@@ -1,8 +1,9 @@
 package com.epam.jdi.light.elements.complex;
 
+import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.asserts.ListAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
@@ -14,6 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -185,11 +187,11 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
         return list.innerValues();
     }
     public List<String> listEnabled() {
-        return list.ifSelect(JDIBase::isEnabled, BaseUIElement::getText);
+        return list.ifSelect(JDIBase::isEnabled, BaseWebElement::getText);
     }
 
     public List<String> listDisabled() {
-        return list.ifSelect(JDIBase::isDisabled, BaseUIElement::getText);
+        return list.ifSelect(JDIBase::isDisabled, BaseWebElement::getText);
     }
 
     /**
@@ -264,6 +266,10 @@ public class Droplist extends JDIBase implements ISetup, SetValue, ISelector {
         return is();
     }
     public ListAssert<UIElement> shouldBe() {
+        return is();
+    }
+    public ListAssert<UIElement> verify() {
+        assertSoft();
         return is();
     }
     //endregion

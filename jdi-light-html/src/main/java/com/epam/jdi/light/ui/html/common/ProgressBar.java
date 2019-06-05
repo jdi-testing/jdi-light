@@ -1,18 +1,30 @@
 package com.epam.jdi.light.ui.html.common;
 
-import com.epam.jdi.light.elements.base.BaseFindElement;
-import com.epam.jdi.light.ui.html.asserts.ProgressAssert;
-import com.epam.jdi.light.ui.html.base.HasLabel;
-import com.epam.jdi.light.ui.html.base.HtmlElement;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.WithLabel;
+import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.ui.html.aserts.ProgressAssert;
 
-public interface ProgressBar extends BaseFindElement<HtmlElement>, HasLabel {
-    String value();
-    String max();
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
-    ProgressAssert is();
-    ProgressAssert assertThat();
-    ProgressAssert has();
-    ProgressAssert waitFor();
-    ProgressAssert shouldBe();
-    ProgressAssert verify();
+public class ProgressBar extends WithLabel<ProgressAssert> implements HasValue {
+    // region Actions
+    @JDIAction(value = "Get '{name}' max limit", level = DEBUG)
+    public String max() { return element.attr("max"); }
+    @JDIAction("Get '{name}' progress value ")
+    public String value() { return element.attr("value"); }
+    // endregion
+
+    // region Set and get value for Forms
+    public String getValue() {
+        return value()+"";
+    }
+    // endregion
+
+    // region Extend assertions
+    @Override
+    public ProgressAssert is() {
+        return new ProgressAssert().set(this);
+    }
+    // endregion
 }

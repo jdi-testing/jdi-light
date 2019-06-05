@@ -1,6 +1,12 @@
 package com.epam.jdi.light.ui.html.common;
 
-public interface Button extends Text {
-    void click();
+import com.epam.jdi.light.common.JDIAction;
 
+public class Button extends Text {
+    // region Actions
+    @JDIAction("Click on '{name}'")
+    public void click() {
+        element.click();
+    }
+    // endregion
 }

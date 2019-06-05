@@ -5,13 +5,12 @@ package com.epam.jdi.light.ui.html.actions;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.actions.ActionProcessor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
-import static com.epam.jdi.light.actions.ActionProcessor.jdiBeforeAfter;
+import static com.epam.jdi.light.actions.ActionProcessor.JDI_AROUND;
 
 @SuppressWarnings("unused")
 @Aspect
@@ -22,6 +21,6 @@ public class HtmlActions {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        return jdiBeforeAfter(jp);
+        return JDI_AROUND.execute(jp);
     }
 }

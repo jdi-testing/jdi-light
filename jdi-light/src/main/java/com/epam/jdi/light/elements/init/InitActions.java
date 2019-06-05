@@ -77,7 +77,7 @@ public class InitActions {
         $("UIList", iRule(f -> f.getType() == List.class && isPageObject(getGenericType(f)),
             f -> new UIList())),
         $("JList", iRule(f -> f.getType() == List.class &&
-            (isClass(getGenericType(f), BaseUIElement.class) || isInterface(getGenericType(f), BaseFindElement.class)),
+            (isClass(getGenericType(f), BaseWebElement.class) || isInterface(getGenericType(f), BaseFindElement.class)),
             f -> new JList()))
     );
 

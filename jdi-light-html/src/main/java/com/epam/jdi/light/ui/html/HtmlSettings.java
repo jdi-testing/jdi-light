@@ -5,8 +5,10 @@ package com.epam.jdi.light.ui.html;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.BaseWebElement;
+import com.epam.jdi.light.elements.base.Label;
 import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.init.PageFactory;
@@ -71,7 +73,7 @@ public class HtmlSettings {
                     case 0:
                         return GET_DEFAULT_BUTTON.execute(obj, buttonName);
                     case 1:
-                        return (BaseUIElement) getValueField(fields.get(0), obj);
+                        return (BaseWebElement) getValueField(fields.get(0), obj);
                     default:
                         return getButtonByName(fields, obj, buttonName);
                 }

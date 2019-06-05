@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
@@ -105,7 +105,7 @@ public class PageFactory {
             t -> isInterface(t, PageObject.class) &&
                 !asList(WebPage.class, Section.class, Form.class).contains(t) ||
                 !isInterface(t, PageObject.class) &&
-                !asList(UIElement.class, BaseUIElement.class, JDIBase.class, Object.class).contains(t),
+                !asList(UIElement.class, BaseWebElement.class, JDIBase.class, Object.class).contains(t),
             info.instance.getClass(),
             t -> asList(t.getDeclaredFields()));
         List<Field> fields = filter(poFields, f -> isJDIField(f) || isPageObject(f.getType()));

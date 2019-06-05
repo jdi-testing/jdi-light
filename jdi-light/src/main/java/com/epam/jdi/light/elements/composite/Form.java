@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
@@ -389,7 +389,7 @@ public class Form<T> extends Section {
                 List<Field> fields = getFieldsInterfaceOf(pageObject, SetValue.class);
                 if (fields.isEmpty())
                     return get().isDisplayed();
-                BaseUIElement first = (BaseUIElement) fields.get(0).get(pageObject);
+                BaseWebElement first = (BaseWebElement) fields.get(0).get(pageObject);
                 return first.isDisplayed();
             }
             List<WebElement> result = getAll();

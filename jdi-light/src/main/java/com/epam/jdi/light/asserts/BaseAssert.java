@@ -1,18 +1,20 @@
 package com.epam.jdi.light.asserts;
 
-import com.epam.jdi.light.elements.base.BaseElement;
-import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.JDIElement;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.tools.func.JFunc1;
 
-public class BaseAssert {
+public class BaseAssert<E extends DriverBase> {
     public String name;
     public String failElement;
-    public JDIBase element;
-    public static JFunc1<JDIBase, String> PRINT_ASSERT = JDIBase::toString;
+    public E uiElement;
+    public static JFunc1<JDIElement, String> PRINT_ASSERT = JDIElement::toString;
 
-    public BaseAssert(BaseElement element) {
-        this(get(element).getName(), get(element).failElement);
-        this.element = (JDIBase) element;
+    public BaseAssert() { }
+    public BaseAssert(E element) {
+        this(element.getName(), element.failElement);
+        this.uiElement = element;
     }
     public BaseAssert(String name, String failElement) {
         this.name = name;
@@ -25,8 +27,11 @@ public class BaseAssert {
 
     @Override
     public String toString() {
-        return element != null
-            ? PRINT_ASSERT.execute(element) : name;
+        return uiElement != null
+            ? PRINT_ASSERT.execute(uiElement) : name;
     }
-    private static JDIBase get(BaseElement element) { return (JDIBase) element; }
+
+    public void assertResults() {
+        SoftAssert.assertResults();
+    }
 }

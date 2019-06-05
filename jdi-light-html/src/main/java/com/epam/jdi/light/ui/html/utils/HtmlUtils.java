@@ -1,6 +1,5 @@
 package com.epam.jdi.light.ui.html.utils;
 
-import com.epam.jdi.light.ui.html.base.HtmlElement;
 import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -14,11 +13,16 @@ public class HtmlUtils {
      * @param attr String - attribute to find
      * @return int attribute value
      */
-    public static int getInt(String attr, HtmlElement el) {
+    public static int getInt(String attr, WebElement el) {
         String value = el.getAttribute(attr);
         try {
             return parseInt(value);
         } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Integer", attr, value); }
+    }
+    public static int parseInt(String value) {
+        try {
+            return parseInt(value);
+        } catch (Exception ex) { throw exception("Can't parse value %s to Integer", value); }
     }
     /**
      * Gets attribute and casts it to double

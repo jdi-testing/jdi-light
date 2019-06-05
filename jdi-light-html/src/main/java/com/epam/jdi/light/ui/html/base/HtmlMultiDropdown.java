@@ -1,6 +1,7 @@
 package com.epam.jdi.light.ui.html.base;
 
 import com.epam.jdi.light.asserts.IHasAssert;
+import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.Selector;
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
@@ -269,6 +271,10 @@ public class HtmlMultiDropdown extends Selector<HtmlElement>
         return is();
     }
     public SelectAssert shouldBe() {
+        return is();
+    }
+    public SelectAssert verify() {
+        assertSoft();
         return is();
     }
 }

@@ -1,5 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
-public interface JDIElement {
+import com.epam.jdi.light.elements.interfaces.INamed;
+
+public interface JDIElement extends INamed {
 
 }

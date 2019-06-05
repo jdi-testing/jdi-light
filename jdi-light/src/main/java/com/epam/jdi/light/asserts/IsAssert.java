@@ -1,8 +1,8 @@
 package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseElement;
-import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.IBaseElement;
+import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matcher;
 
@@ -15,15 +15,15 @@ import static org.hamcrest.Matchers.is;
 
 public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAssert<A> {
 
-    public IsAssert(BaseElement element) {
+    public IsAssert(IBaseElement element) {
         super(element);
     }
 
-    private BaseUIElement toBaseUIElement(String action) {
-        if (!isClass(element.getClass(), BaseUIElement.class))
-            throw exception("%s not a BaseUIElement. %s assert allowed only for elements that extends BaseUIElement",
-                    element.getName(), action);
-        return (BaseUIElement) element;
+    private BaseWebElement toBaseUIElement(String action) {
+        if (!isClass(uiElement.getClass(), BaseWebElement.class))
+            throw exception("%s not a BaseWebElement. %s assert allowed only for elements that extends BaseWebElement",
+                    uiElement.getName(), action);
+        return (BaseWebElement) uiElement;
     }
 
     /**
@@ -45,7 +45,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' attribute '{0}' {1}")
     public A attr(String attrName, Matcher<String> condition) {
-        jdiAssert(element.getAttribute(attrName), condition);
+        jdiAssert(uiElement.getAttribute(attrName), condition);
         return (A) this;
     }
     public A attr(String attrName, String value) {
@@ -59,7 +59,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' css '{0}' {1}")
     public A css(String css, Matcher<String> condition) {
-        jdiAssert(element.getCssValue(css), condition);
+        jdiAssert(uiElement.getCssValue(css), condition);
         return (A) this;
     }
     public A css(String css, String value) {
@@ -72,7 +72,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' tag {0}")
     public A tag(Matcher<String> condition) {
-        jdiAssert(element.getTagName(), condition);
+        jdiAssert(uiElement.getTagName(), condition);
         return (A) this;
     }
     public A css(String tagName) {
@@ -94,7 +94,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' css class {0}")
     public A cssClass(Matcher<String> condition) {
-        jdiAssert(element.getAttribute("class"), condition);
+        jdiAssert(uiElement.getAttribute("class"), condition);
         return (A) this;
     }
     public A cssClass(String className) {
@@ -106,7 +106,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {
-        jdiAssert(element.displayed() ? "displayed" : "hidden", is("displayed"));
+        jdiAssert(uiElement.displayed() ? "displayed" : "hidden", is("displayed"));
         return (A) this;
     }
 
@@ -115,7 +115,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' is disappear")
     public A disappear() {
-        jdiAssert(element.displayed() ? "displayed" : "disappear", is("disappear"));
+        jdiAssert(uiElement.displayed() ? "displayed" : "disappear", is("disappear"));
         return (A) this;
     }
 
@@ -124,7 +124,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' is hidden")
     public A hidden() {
-        jdiAssert(element.displayed() ? "displayed" : "hidden", is("hidden"));
+        jdiAssert(uiElement.displayed() ? "displayed" : "hidden", is("hidden"));
         return (A) this;
     }
 
@@ -139,7 +139,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
     @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
     public A notAppear(int timeoutSec) {
         boolean result = new Timer(timeoutSec * 1000)
-                .wait(() -> element.displayed());
+                .wait(() -> uiElement.displayed());
         jdiAssert(result ? "displayed" : "hidden", is("hidden"));
         return (A) this;
     }
@@ -167,7 +167,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' is enabled")
     public A enabled() {
-        jdiAssert(element.isEnabled() ? "enabled" : "disabled", is("enabled"));
+        jdiAssert(uiElement.isEnabled() ? "enabled" : "disabled", is("enabled"));
         return (A) this;
     }
 
@@ -176,7 +176,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' is disabled")
     public A disabled() {
-         jdiAssert(element.isEnabled() ? "enabled" : "disabled", is("disabled"));
+         jdiAssert(uiElement.isEnabled() ? "enabled" : "disabled", is("disabled"));
         return (A) this;
     }
 }

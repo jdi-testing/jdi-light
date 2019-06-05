@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.elements;
 
-import com.epam.jdi.light.elements.base.BaseElement;
+import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.tools.func.JAction;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -13,7 +13,7 @@ import static org.testng.Assert.*;
 
 public class BaseValidations {
 
-    public static void baseValidation(BaseElement el) {
+    public static void baseValidation(IBaseElement el) {
         // EXCLUDED el.hover();
         assertTrue(el.isEnabled());
         assertTrue(el.isDisplayed());

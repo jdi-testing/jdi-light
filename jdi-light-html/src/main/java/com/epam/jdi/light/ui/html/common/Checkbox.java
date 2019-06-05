@@ -1,28 +1,48 @@
 package com.epam.jdi.light.ui.html.common;
 
-import com.epam.jdi.light.elements.base.BaseFindElement;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.light.ui.html.annotations.FillValue;
-import com.epam.jdi.light.ui.html.annotations.VerifyValue;
-import com.epam.jdi.light.ui.html.asserts.CheckboxAssert;
-import com.epam.jdi.light.ui.html.base.HasLabel;
-import com.epam.jdi.light.ui.html.base.HtmlElement;
+import com.epam.jdi.light.ui.html.aserts.CheckboxAssert;
 
-public interface Checkbox extends BaseFindElement<HtmlElement>, HasLabel, SetValue {
-    void click();
-    @FillValue default void check(String value) {
+public class Checkbox extends WithLabel<CheckboxAssert> implements SetValue {
+    // region Actions
+    @JDIAction("Click on '{name}'")
+    public void click() {
+        element.click();
+    }
+    public void check(String value) {
         if (value.equalsIgnoreCase("true") || value.equals("1"))
             check();
         else uncheck();
     }
-    void check();
-    void uncheck();
-    @VerifyValue boolean isSelected();
+    @JDIAction("Check '{name}'")
+    public void check() {
+        element.check();
+    }
+    @JDIAction("Uncheck '{name}'")
+    public void uncheck() {
+        element.uncheck();
+    }
+    @JDIAction("Check that '{name}' is selected")
+    public boolean isSelected() {
+        return element.isSelected();
+    }
+    // endregion
 
-    CheckboxAssert is();
-    CheckboxAssert assertThat();
-    CheckboxAssert has();
-    CheckboxAssert waitFor();
-    CheckboxAssert shouldBe();
-    CheckboxAssert verify();
+    // region Set and get value for Forms
+    public void setValue(String value) {
+        check(value);
+    }
+    public String getValue() {
+        return isSelected()+"";
+    }
+    // endregion
+
+    // region Extend assertions
+    @Override
+    public CheckboxAssert is() {
+        return new CheckboxAssert().set(this);
+    }
+    // endregion
 }

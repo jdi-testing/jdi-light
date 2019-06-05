@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
@@ -133,6 +134,10 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
         return is();
     }
     public SelectAssert shouldBe() {
+        return is();
+    }
+    public SelectAssert verify() {
+        assertSoft();
         return is();
     }
 }

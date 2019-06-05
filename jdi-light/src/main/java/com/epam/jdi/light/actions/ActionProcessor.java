@@ -7,6 +7,7 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -40,9 +41,10 @@ public class ActionProcessor {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        return jdiBeforeAfter(jp);
+        return JDI_AROUND.execute(jp);
     }
-    public static Object jdiBeforeAfter(ProceedingJoinPoint jp) {
+
+    public static JFunc1<ProceedingJoinPoint, Object> JDI_AROUND = jp -> {
         try {
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jp);
@@ -51,7 +53,7 @@ public class ActionProcessor {
             Object element = jp.getThis() != null ? jp.getThis() : new Object();
             throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, ex.getMessage()));
         }
-    }
+    };
 
     protected static Object stableAction(ProceedingJoinPoint jp) {
         try {
