@@ -93,9 +93,9 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     public static final String FAILED_TO_FIND_ELEMENT_MESSAGE
             = "Can't find Element '%s' during %s seconds";
     public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
-            = "Find %s elements instead of one for Element '%s' during %s seconds";
+            = "Found %s elements instead of one for Element '%s' during %s seconds";
     public static final String ELEMENTS_FILTERED_MESSAGE
-            = "Found %s elements but no one pass results filtering. Please change locator or filtering rules (WebSettings.SEARCH_CONDITION = el -> ...)" +
+            = "Found %s elements but none pass results filtering. Please change locator or filtering rules (WebSettings.SEARCH_CONDITION = el -> ...)" +
             LINE_BREAK + "Element '%s' search during %s seconds";
 
     public WebElement get() {

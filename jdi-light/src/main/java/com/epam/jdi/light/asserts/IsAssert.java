@@ -21,7 +21,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
 
     private BaseUIElement toBaseUIElement(String action) {
         if (!isClass(element.getClass(), BaseUIElement.class))
-            throw exception("%s not a BaseUIElement. %s assert allowed only for elements that extends BaseUIElement",
+            throw exception("%s is not a BaseUIElement. %s assert is only allowed for elements that extend BaseUIElement",
                     element.getName(), action);
         return (BaseUIElement) element;
     }
@@ -113,7 +113,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
     /**
      * Check that the element is disappeared
      */
-    @JDIAction("Assert that '{name}' is disappear")
+    @JDIAction("Assert that '{name}' is disappeared")
     public A disappear() {
         jdiAssert(element.displayed() ? "displayed" : "disappear", is("disappear"));
         return (A) this;
@@ -163,7 +163,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
     }
 
     /**
-     * Check that the element is enable
+     * Check that the element is enabled
      */
     @JDIAction("Assert that '{name}' is enabled")
     public A enabled() {
@@ -172,7 +172,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
     }
 
     /**
-     * Check that the element is disable
+     * Check that the element is disabled
      */
     @JDIAction("Assert that '{name}' is disabled")
     public A disabled() {
