@@ -1,8 +1,10 @@
 package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.complex.table.*;
-import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.light.elements.complex.table.BaseTable;
+import com.epam.jdi.light.elements.complex.table.Column;
+import com.epam.jdi.light.elements.complex.table.Single;
+import com.epam.jdi.light.elements.complex.table.TableMatcher;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -11,8 +13,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
-import static java.util.Arrays.asList;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> extends IsAssert<A> {
@@ -65,17 +65,13 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
         return size(is(size));
     }
 
-    private List<String> header() {
-        return table().header();
-    }
     /**
      * Check that the table has the specified column
      * @param column to compare
      */
     @JDIAction("Assert that '{name}' has column'{0}'")
     public A column(String column) {
-        assertThat(header(), hasItem(column));
-        //TEST jdiAssert(table().header(), hasItem(column));
+        jdiAssert(table().header(), hasItem(column));
         return (A) this;
     }
 
@@ -96,7 +92,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
      */
     @JDIAction("Assert that '{name}' columns {0}")
     public A columns(Matcher<Collection<? extends String>> condition) {
-        jdiAssert(header(), condition);
+        jdiAssert(table().header(), condition);
         return (A) this;
     }
     /**

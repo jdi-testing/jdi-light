@@ -117,9 +117,9 @@ public abstract class BaseWebElement<T extends BaseWebElement>
             click();
     }
 
-    public T label() {
-        return newElement()
-                .setLocator(By.cssSelector("[for="+getAttribute("id")+"]"))
+    public Label label() {
+        return new Label().element()
+                .setLocator(By.cssSelector("[for="+attr("id")+"]"))
                 .setName(getName() + " label");
     }
     /**

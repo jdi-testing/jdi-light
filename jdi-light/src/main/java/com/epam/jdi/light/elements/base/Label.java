@@ -12,4 +12,8 @@ public class Label extends UIBaseElement<UIAssert> {
     public String getText() {
         return element.getText();
     }
+    @JDIAction("Get '{name}' text")
+    public String innerText() {
+        return element.innerText();
+    }
 }

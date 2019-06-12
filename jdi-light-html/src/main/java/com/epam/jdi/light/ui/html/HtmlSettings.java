@@ -8,41 +8,27 @@ package com.epam.jdi.light.ui.html;
 import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.base.Label;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.UIList;
-import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.init.PageFactory;
-import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.settings.WebSettings;
-import com.epam.jdi.light.ui.html.annotations.FillValue;
-import com.epam.jdi.light.ui.html.annotations.VerifyValue;
-import com.epam.jdi.light.ui.html.base.*;
-import com.epam.jdi.light.ui.html.common.*;
-import com.epam.jdi.light.ui.html.complex.*;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.List;
 
 import static com.epam.jdi.light.common.UIUtils.*;
-import static com.epam.jdi.light.elements.init.InitActions.*;
-import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
-import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
 import static com.epam.jdi.light.settings.WebSettings.initialized;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.pairs.Pair.$;
-import static java.util.Arrays.asList;
+import static com.epam.jdi.tools.ReflectionUtils.getFieldsExact;
+import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 
 public class HtmlSettings {
 
     public static synchronized void init() {
         if (!initialized) {
-            WebSettings.init();
+            WebSettings.init(); /*
             INIT_RULES.update("Selector", iRule(asList(Dropdown.class, MultiSelector.class),
                 info -> new HtmlSelector()));
             INIT_RULES.update("UIElement", iRule(WebElement.class,
@@ -64,7 +50,7 @@ public class HtmlSettings {
             ));
             SETUP_RULES.update("PageObject",
                 sRule(info -> isPageObject(info.instance.getClass()),
-                    PageFactory::initElements));
+                    PageFactory::initElements));*/
             GET_BUTTON = (obj, buttonName) -> {
                 List<Field> fields = getFieldsExact(obj, Button.class);
                 if (fields.size() == 0)
@@ -77,28 +63,6 @@ public class HtmlSettings {
                     default:
                         return getButtonByName(fields, obj, buttonName);
                 }
-            };
-
-            Form.FILL_ACTION = (field, element, parent, setValue) -> {
-                if (field != null) {
-                    Method[] methods = field.getType().getDeclaredMethods();
-                    Method setMethod = first(methods, m -> m.isAnnotationPresent(FillValue.class));
-                    if (setMethod != null) {
-                        setMethod.invoke(element, setValue);
-                        return;
-                    }
-                }
-                ((SetValue) element).setValue(setValue);
-            };
-            Form.GET_ACTION = (field, element, parent) -> {
-                if (field != null) {
-                    Method[] methods = field.getType().getDeclaredMethods();
-                    Method getMethod = first(methods, m -> m.isAnnotationPresent(VerifyValue.class));
-                    if (getMethod != null) {
-                        return getMethod.invoke(element).toString();
-                    }
-                }
-                return ((HasValue) element).getValue().trim();
             };
             UIList.GET_TITLE_FIELD_NAME = list -> {
                 Field[] fields = list.classType.getFields();

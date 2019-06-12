@@ -1,6 +1,7 @@
 package io.github.com;
 
 import com.epam.jdi.light.elements.complex.JList;
+import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
@@ -11,7 +12,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.JMenu;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import com.epam.jdi.light.ui.html.base.HtmlList;
-import com.epam.jdi.light.elements.complex.Menu;
 import io.github.com.custom.MenuItem;
 import io.github.com.pages.*;
 import org.openqa.selenium.WebElement;

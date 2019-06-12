@@ -1,12 +1,10 @@
 package org.mytests.uiobjects.example.site.sections;
 
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.ui.html.common.Checkbox;
-import com.epam.jdi.light.ui.html.common.TextArea;
-import com.epam.jdi.light.ui.html.common.TextField;
-import com.epam.jdi.light.ui.html.complex.Combobox;
-import com.epam.jdi.light.ui.html.complex.Dropdown;
-import com.epam.jdi.light.ui.html.complex.MultiDropdown;
+import com.epam.jdi.light.ui.html.elements.common.Checkbox;
+import com.epam.jdi.light.ui.html.elements.common.TextArea;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
+import com.epam.jdi.light.ui.html.elements.complex.Combobox;
 import org.mytests.uiobjects.example.entities.Contacts;
 
 import java.lang.reflect.Field;

@@ -2,11 +2,11 @@ package com.epam.jdi.light.ui.html.aserts;
 
 import com.epam.jdi.light.asserts.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.ui.html.common.DateTimeSelector;
+import com.epam.jdi.light.ui.html.elements.common.DateTimeSelector;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.ui.html.utils.HtmlUtils.getFloat;
+import static com.epam.jdi.light.ui.html.HtmlUtils.getFloat;
 import static org.hamcrest.Matchers.is;
 
 /**
@@ -51,7 +51,7 @@ public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector> {
 
     @JDIAction("Assert that '{name}' min {0}")
     public DateTimeAssert min(Matcher<Float> min) {
-        jdiAssert(getFloat("min", uiElement.element), min);
+        jdiAssert(getFloat("min", uiElement.element()), min);
         return this;
     }
     public DateTimeAssert min(float min) {
@@ -60,7 +60,7 @@ public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector> {
 
     @JDIAction("Assert that '{name}' max {0}")
     public DateTimeAssert max(Matcher<Float> max) {
-        jdiAssert(getFloat("max", uiElement.element), max);
+        jdiAssert(getFloat("max", uiElement.element()), max);
         return this;
     }
     public DateTimeAssert max(float max) {

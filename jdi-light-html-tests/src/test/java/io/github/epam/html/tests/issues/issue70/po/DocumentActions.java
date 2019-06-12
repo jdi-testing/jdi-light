@@ -2,7 +2,7 @@ package io.github.epam.html.tests.issues.issue70.po;
 
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import com.epam.jdi.light.ui.html.base.HtmlList;
-import com.epam.jdi.light.ui.html.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$$;

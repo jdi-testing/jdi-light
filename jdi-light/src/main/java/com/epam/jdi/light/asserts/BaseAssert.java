@@ -1,11 +1,9 @@
 package com.epam.jdi.light.asserts;
 
-import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIElement;
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.tools.func.JFunc1;
 
-public class BaseAssert<E extends DriverBase> {
+public class BaseAssert<E extends JDIElement> {
     public String name;
     public String failElement;
     public E uiElement;
@@ -13,7 +11,7 @@ public class BaseAssert<E extends DriverBase> {
 
     public BaseAssert() { }
     public BaseAssert(E element) {
-        this(element.getName(), element.failElement);
+        this(element.getName(), element.failElement());
         this.uiElement = element;
     }
     public BaseAssert(String name, String failElement) {

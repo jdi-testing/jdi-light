@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.BaseTableAssert;
-import com.epam.jdi.light.asserts.TableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;

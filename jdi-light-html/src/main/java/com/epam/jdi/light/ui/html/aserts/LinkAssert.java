@@ -2,9 +2,7 @@ package com.epam.jdi.light.ui.html.aserts;
 
 import com.epam.jdi.light.asserts.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.ui.html.asserts.HtmlAssertion;
-import com.epam.jdi.light.ui.html.common.Link;
-import com.epam.jdi.light.ui.html.common.Text;
+import com.epam.jdi.light.ui.html.elements.common.Link;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;

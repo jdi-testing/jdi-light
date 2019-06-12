@@ -1,29 +1,24 @@
 package com.epam.jdi.light.elements.base;
 
-import com.epam.jdi.light.asserts.IHasAssert;
-import com.epam.jdi.light.asserts.UIAssert;
+import com.epam.jdi.light.asserts.HasAssert;
 import com.epam.jdi.light.asserts.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.tools.func.JFunc1;
-import org.apache.logging.log4j.util.Strings;
-import org.openqa.selenium.WebElement;
+import com.epam.jdi.light.elements.interfaces.SetValue;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.ifSelect;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static java.util.Arrays.asList;
 
-public class UISelectBase<A extends UISelectAssert> extends DriverBase implements IHasAssert<A> {
-    public WebList element;
+public abstract class UISelectBase<A extends UISelectAssert> extends DriverBase
+        implements HasAssert<A>, HasUIList, ISelector, SetValue {
+    protected WebList list = new WebList();
+    public WebList element() { return list; }
 
     @JDIAction("Select '{0}' in '{name}'")
-    public void select(String value) { element.select(value); }
+    public void select(String value) { list.select(value); }
 
     @JDIAction("Select '{0}' in '{name}'")
     public <TEnum extends Enum> void select(TEnum value) {
@@ -31,61 +26,59 @@ public class UISelectBase<A extends UISelectAssert> extends DriverBase implement
     }
 
     @JDIAction("Select '{0}' in '{name}'")
-    public void select(int index) { element.select(index);  }
+    public void select(int index) { list.select(index);  }
 
     @JDIAction("Get selected value")
     public String selected() {
-        return element.selected();
+        return list.selected();
     }
 
     @JDIAction("Is '{0}' selected")
     public boolean selected(String value) {
-        return element.selected(value);
+        return list.selected(value);
     }
-    public int size() { return element.size(); }
 
     @JDIAction(level = DEBUG)
     public List<String> listEnabled() {
-        return element.listEnabled();
+        return list.listEnabled();
     }
 
     @JDIAction(level = DEBUG)
     public List<String> listDisabled() {
-        return element.listDisabled();
+        return list.listDisabled();
     }
 
     @JDIAction(level = DEBUG)
     public List<String> values() {
-        return element.values();
+        return list.values();
     }
     @JDIAction(level = DEBUG)
     public List<String> innerValues() {
-        return element.innerValues();
+        return list.innerValues();
     }
 
     public void hover() {
-        element.hover();
+        list.hover();
     }
     public boolean isDisplayed() {
-        return element.isDisplayed();
+        return list.isDisplayed();
     }
     public boolean isHidden() {
-        return element.isHidden();
+        return list.isHidden();
     }
     public void highlight(String color) {
-        element.highlight(color);
+        list.highlight(color);
     }
     public void highlight() {
-        element.highlight();
+        list.highlight();
     }
     public void show() {
-        element.show();
+        list.show();
     }
-    public boolean wait(JFunc1<IBaseElement, Boolean> condition) {
-        return element.wait(condition);
+    public boolean isEnabled() {
+        return list.listEnabled().size() > 0;
     }
 
-    public A is() {
-        return (A) new UISelectAssert().set(this);
-    }
+
+
 }

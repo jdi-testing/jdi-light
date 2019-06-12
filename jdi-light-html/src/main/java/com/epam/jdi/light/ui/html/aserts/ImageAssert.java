@@ -2,13 +2,11 @@ package com.epam.jdi.light.ui.html.aserts;
 
 import com.epam.jdi.light.asserts.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.ui.html.asserts.HtmlAssertion;
-import com.epam.jdi.light.ui.html.common.Image;
-import com.epam.jdi.light.ui.html.common.Text;
+import com.epam.jdi.light.ui.html.elements.common.Image;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.ui.html.utils.HtmlUtils.getInt;
+import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 import static org.hamcrest.Matchers.is;
 
 /**
@@ -33,14 +31,14 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> {
 
     @JDIAction("Assert that '{name}' height {0}")
     public ImageAssert height(Matcher<Integer> condition) {
-        jdiAssert(getInt("height", uiElement.element), condition);
+        jdiAssert(getInt("height", uiElement.element()), condition);
         return this;
     }
     public ImageAssert height(int height) { return height(is(height)); }
 
     @JDIAction("Assert that '{name}' width {0}")
     public ImageAssert width(Matcher<Integer> condition) {
-        jdiAssert(getInt("width", uiElement.element), condition);
+        jdiAssert(getInt("width", uiElement.element()), condition);
         return this;
     }
     public ImageAssert width(int width) { return width(is(width)); }

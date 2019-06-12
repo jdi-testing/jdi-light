@@ -1,13 +1,11 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.asserts.IsAssert;
-import com.epam.jdi.light.asserts.SelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDILocator;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc;
@@ -48,8 +46,13 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class JDIBase extends DriverBase implements IBaseElement, HasValue {
-    public static JFunc1<String, String> STRING_SIMPLIFY = s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+public class JDIBase extends DriverBase implements IBaseElement, HasValue, HasUIBase {
+    public JDIBase element() { return this; }
+    public static JFunc1<String, String> STRING_SIMPLIFY =
+        s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+    public static <T> boolean waitCondition(JFunc1<T, Boolean> condition, T element) {
+        return new Timer(TIMEOUT.get()).wait(() -> condition.execute(element));
+    }
     public JDILocator locator = new JDILocator();
     public CacheValue<WebElement> webElement = new CacheValue<>();
     protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
@@ -163,13 +166,18 @@ public class JDIBase extends DriverBase implements IBaseElement, HasValue {
         return filter(els, el -> searchRule.get().execute(el));
     }
     public List<WebElement> getList(int minAmount) {
+        List<WebElement> result = timer().getResultByCondition(this::tryGetList,
+                els -> els.size() >= minAmount);
+        if (result == null)
+            throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
+        return result;
+    }
+    private List<WebElement> tryGetList() {
         List<WebElement> elements = getAll();
         if (elements == null)
             throw exception("No elements found (%s)", toString());
         if (elements.size() == 1)
             elements = processListTag(elements);
-        if (elements.size() < minAmount)
-            throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
         return elements;
     }
     private List<WebElement> processListTag(List<WebElement> elements) {
@@ -576,10 +584,6 @@ public class JDIBase extends DriverBase implements IBaseElement, HasValue {
         actions.execute(actionsClass().moveToElement(get())).build().perform();
     }
 
-    public boolean wait(JFunc1<IBaseElement, Boolean> condition) {
-        return new Timer(TIMEOUT.get()).wait(() -> condition.execute(this));
-    }
-
     public String getValue() {
         return getText();
     }
@@ -606,4 +610,10 @@ public class JDIBase extends DriverBase implements IBaseElement, HasValue {
         return is();
     }
     //endregion
+
+    public void offCache() {
+        webElement.useCache(false);
+        webElements.useCache(false);
+        searchRule.useCache(false);
+    }
 }

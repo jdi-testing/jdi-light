@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.asserts.IsAssert;
-import com.epam.jdi.light.asserts.ListAssert;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.PageObject;
 

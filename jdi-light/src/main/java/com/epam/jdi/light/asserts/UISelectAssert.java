@@ -1,7 +1,7 @@
 package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UISelectBase;
+import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
@@ -11,44 +11,45 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
-public class UISelectAssert<A extends UISelectAssert, E extends UISelectBase> extends BaseAssert<E> {
+public class UISelectAssert<A extends UISelectAssert, E extends ISelector> extends UIAssert<A, E> {
     @JDIAction("Assert that '{0}' option selected for '{name}'")
-    public UISelectAssert selected(String option) {
-        uiElement.element.assertThat().selected(option);
-        return this;
+    public A selected(String option) {
+        jdiAssert(uiElement.selected(option), is(true));
+        return (A) this;
     }
     public <TEnum extends Enum> UISelectAssert selected(TEnum option) {
         return selected(getEnumValue(option));
     }
 
     @JDIAction("Assert that '{name}' values {0}")
-    public UISelectAssert values(Matcher<? super List<String>> condition) {
-        uiElement.element.assertThat().values(condition);
-        return this;
+    public A values(Matcher<? super List<String>> condition) {
+        jdiAssert(uiElement.values(), condition);
+        return (A) this;
+    }
+    public A values(String... values) {
+        return values(hasItems(values));
     }
     @JDIAction("Assert that '{name}' values {0}")
-    public UISelectAssert innerValues(Matcher<? super List<String>> condition) {
-        uiElement.element.assertThat().innerValues(condition);
-        return this;
+    public A innerValues(Matcher<? super List<String>> condition) {
+        jdiAssert(uiElement.innerValues(), condition);
+        return (A) this;
     }
     @JDIAction("Assert that '{name}' enabled items {0}")
-    public UISelectAssert enabled(Matcher<? super List<String>> condition) {
-        uiElement.element.assertThat().enabled(condition);
-        return this;
+    public A enabled(Matcher<? super List<String>> condition) {
+        jdiAssert(uiElement.listEnabled(), condition);
+        return (A) this;
     }
     @JDIAction("Assert that '{name}' disabled items {0}")
-    public UISelectAssert disabled(Matcher<? super List<String>> condition) {
-        uiElement.element.assertThat().disabled(condition);
-        return this;
+    public A disabled(Matcher<? super List<String>> condition) {
+        jdiAssert(uiElement.listDisabled(), condition);
+        return (A) this;
     }
 
     @JDIAction("Assert that '{name}' size {0}")
     public A size(Matcher<Integer> condition) {
-        uiElement.element.assertThat().size(condition);
+        jdiAssert(uiElement.size(), condition);
         return (A) this;
     }
 
@@ -64,19 +65,18 @@ public class UISelectAssert<A extends UISelectAssert, E extends UISelectBase> ex
 
     @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {
-        uiElement.element.assertThat().displayed();
+        jdiAssert(uiElement.isDisplayed() ? "displayed" : "hidden", is("displayed"));
         return (A) this;
     }
-    @JDIAction("Assert that '{name}' is disappear")
+    @JDIAction("Assert that '{name}' is disappeared")
     public A disappear() {
-        uiElement.element.assertThat().disappear();
+        jdiAssert(uiElement.isHidden() ? "hidden" : "displayed", is("hidden"));
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' is hidden")
     public A hidden() {
-        uiElement.element.assertThat().hidden();
-        return (A) this;
+        return disappear();
     }
     public A notAppear() {
         return notAppear(TIMEOUT.get());
@@ -84,7 +84,9 @@ public class UISelectAssert<A extends UISelectAssert, E extends UISelectBase> ex
 
     @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
     public A notAppear(int timeoutSec) {
-        uiElement.element.assertThat().notAppear(timeoutSec);
+        boolean result = new Timer(timeoutSec * 1000)
+                .wait(() -> uiElement.isDisplayed());
+        jdiAssert(result ? "displayed" : "hidden", is("hidden"));
         return (A) this;
     }
 

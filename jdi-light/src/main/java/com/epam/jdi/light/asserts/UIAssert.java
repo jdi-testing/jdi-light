@@ -2,16 +2,14 @@ package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.IBaseElement;
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static org.hamcrest.Matchers.is;
 
-public class UIAssert<A extends UIAssert, E extends UIBaseElement> extends BaseAssert<E> {
+public class UIAssert<A extends UIAssert, E extends IBaseElement> extends BaseAssert<E> {
     /**
      * Check that the element is displayed
      */
@@ -24,9 +22,9 @@ public class UIAssert<A extends UIAssert, E extends UIBaseElement> extends BaseA
     /**
      * Check that the element is disappeared
      */
-    @JDIAction("Assert that '{name}' is disappear")
+    @JDIAction("Assert that '{name}' is disappeared")
     public A disappear() {
-        jdiAssert(uiElement.isDisplayed() ? "displayed" : "disappear", is("disappear"));
+        jdiAssert(uiElement.isDisplayed() ? "displayed" : "disappeared", is("disappeared"));
         return (A) this;
     }
 

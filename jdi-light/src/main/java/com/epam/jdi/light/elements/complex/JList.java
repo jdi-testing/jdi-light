@@ -13,6 +13,7 @@ import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.func.JFunc1;
 import org.apache.commons.lang3.ArrayUtils;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
@@ -34,6 +35,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.hamcrest.Matchers.greaterThan;
 
 public class JList<T extends BaseWebElement> extends JDIBase
         implements IList<T>, SetValue, ISetup, ISelector {
@@ -84,6 +86,7 @@ public class JList<T extends BaseWebElement> extends JDIBase
         el.setGetFunc(() -> first(e -> e.getText().equals(value)));
         return el;
     }
+
     public T get(Enum name) {
         return get(getEnumValue(name));
     }
@@ -94,7 +97,7 @@ public class JList<T extends BaseWebElement> extends JDIBase
     @JDIAction(level = DEBUG)
     public T get(int index) {
         if (index < 0)
-            throw exception("Can't get element with index '%s'. Index should be more than 0", index);
+            throw exception("Can't get element with index '%s'. Index should be 0 or more", index);
         if (getLocator().toString().contains("%s")) {
             WebElement element;
             try {
@@ -136,6 +139,8 @@ public class JList<T extends BaseWebElement> extends JDIBase
     public void hoverAndClick(String... values) {
         if (ArrayUtils.isEmpty(values))
             throw exception("Nothing to select in %s", getName());
+        if (values.length < 2)
+            throw exception("Hover and click method should have at list 2 parameters");
         int length = values.length;
         for (int i=0; i < length-1;i++) {
             get(values[i]).hover();
@@ -241,7 +246,6 @@ public class JList<T extends BaseWebElement> extends JDIBase
         return get(option).isSelected();
     }
 
-    @Override
     public List<String> checked() {
         return ifSelect(BaseWebElement::isSelected,
                 BaseWebElement::getText);
@@ -272,7 +276,36 @@ public class JList<T extends BaseWebElement> extends JDIBase
     }
     @Override
     public boolean displayed() {
-        return get(0).displayed();
+        return hasAny() && get(0).displayed();
+    }
+
+    @Override @JDIAction(level = DEBUG)
+    public void highlight(String color) {
+        checkAny("highlight");
+        foreach(el -> el.highlight(color));
+    }
+    @Override @JDIAction(level = DEBUG)
+    public void highlight() {
+        checkAny("highlight");
+        foreach(JDIBase::highlight);
+    }
+    @Override @JDIAction(level = DEBUG)
+    public void hover() {
+        checkAny("hover");
+        get(0).hover();
+    }
+    @Override @JDIAction(level = DEBUG)
+    public void show() {
+        checkAny("show");
+        get(0).show();
+    }
+
+    private void checkAny(String action) {
+        try {
+            has().size(greaterThan(0));
+        } catch (Exception ex) {
+            throw exception("Can't find no '%s' elements. Action '%s' failed", getName(), action);
+        }
     }
 
     //region matchers
@@ -333,5 +366,14 @@ public class JList<T extends BaseWebElement> extends JDIBase
             instance.setParent(parent);
             return instance;
         } catch (Exception ex) { throw exception("Can't init new element for list"); }
+    }
+
+    public boolean wait(JFunc1<JList<T>, Boolean> condition) {
+        return waitCondition(condition, this);
+    }
+
+    public void offCache() {
+        super.offCache();
+        elements.useCache(false);
     }
 }

@@ -7,7 +7,6 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -127,7 +126,7 @@ public class ActionProcessor {
     }
 
     @Around("stepPointcut()")
-    public Object stepAround(ProceedingJoinPoint jp) throws Throwable {
+    public Object stepAround(ProceedingJoinPoint jp) {
         try {
             BEFORE_STEP_ACTION.execute(jp);
             Object result = jp.proceed();

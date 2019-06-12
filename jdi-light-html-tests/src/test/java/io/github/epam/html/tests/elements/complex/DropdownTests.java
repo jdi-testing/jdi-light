@@ -4,85 +4,106 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
-import static io.github.com.pages.HtmlElementsPage.dressCode;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static io.github.com.StaticSite.metalAndColorsPage;
+import static io.github.com.pages.LogSidebar.lastLogEntry;
+import static io.github.com.pages.MetalAndColorsPage.colors;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.elements.complex.enums.Dress.Casual;
-import static io.github.epam.html.tests.elements.complex.enums.Dress.Fancy;
+import static io.github.epam.html.tests.elements.complex.enums.Colors.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
+
+/**
+ * Skype: a.filichkin
+ */
 
 public class DropdownTests extends TestsInit {
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        html5Page.shouldBeOpened();
-        dressCode.select(text);
-    }
-    String text = "Casual";
-
-    @Test
-    public void getValueTest() {
-        assertEquals(dressCode.getValue(), text);
+        metalAndColorsPage.shouldBeOpened();
+        colors.select("Colors");
     }
 
     @Test
-    public void selectTest() {
-        dressCode.select("Pirate");
-        assertEquals(dressCode.getValue(), "Pirate");
+    public void selectStringTest() {
+        colors.select("Red");
+        lastLogEntry.assertThat()
+            .text(containsString("Colors: value changed to Red"));
     }
 
     @Test
     public void selectEnumTest() {
-        dressCode.select(Fancy);
-        assertEquals(dressCode.getValue(), "Fancy");
+        colors.select(Green);
+        lastLogEntry.assertThat()
+            .text(containsString("Colors: value changed to Green"));
     }
+
     @Test
-    public void selectNumTest() {
-        dressCode.select(1);
-        assertEquals(dressCode.getValue(), "Fancy");
+    public void selectIndexTest() {
+        colors.select(4);
+        lastLogEntry.assertThat()
+            .text(containsString("Colors: value changed to Blue"));
     }
+
     @Test
     public void selectedTest() {
-        assertEquals(dressCode.selected(), text);
+        colors.select(Yellow);
+        assertThat(colors.getValue(), is("Yellow"));
+        assertThat(colors.selected(), is("Yellow"));
+        assertThat(colors.getText(), is("Yellow"));
     }
 
     @Test
-    public void disabledTest() {
-        if (isFireFox()) return;
+    public void negativeDroplistTest() {
         try {
-            disabledDropdown.select("Pirate");
-        } catch (Exception ignore) {}
-        assertEquals(disabledDropdown.getValue(), "Disabled");
-    }
-
-    @Test
-    public void labelTest() {
-        assertEquals(dressCode.label().getText(), "Dress code:");
-        dressCode.label().is().text(containsString("Dress"));
+            TIMEOUT.set(1);
+            colors.select("GreyBrownCrimson");
+            fail("You have selected color that does not exist in droplist - something went wrong");
+        } catch (Exception ex) {
+            assertThat(ex.getMessage(), containsString("Can't select 'GreyBrownCrimson'. No elements with this name found"));
+        }
     }
 
     @Test
     public void isValidationTest() {
-        dressCode.is().selected("Casual");
-        dressCode.is().selected(Casual);
-        dressCode.is().values(hasItem("Pirate"));
-        dressCode.is().disabled(hasItem("Disabled"));
-        dressCode.is().enabled(not(hasItem("Disabled")));
-        dressCode.is().enabled(hasItems("Pirate", "Fancy"));
+        colors.is().selected("Colors");
+        colors.is().innerValues(hasItem("Yellow"));
     }
 
     @Test
     public void assertValidationTest() {
-        dressCode.assertThat().values(contains("Fancy", "Casual", "Disabled", "Pirate"));
-        disabledDropdown.assertThat().selected("Disabled");
+        colors.assertThat().innerValues(contains("Colors", "Red", "Green", "Blue", "Yellow"));
     }
-
+    @Test
+    public void valuesTests() {
+        colors.select(Blue);
+        assertThat(colors.selected(), is("Blue"));
+        assertThat(colors.getText(), is("Blue"));
+        assertThat(colors.getValue(), is("Blue"));
+        assertThat(colors.checked(), hasItem("Blue"));
+    }
+    @Test
+    public void innerValuesTest() {
+        assertThat(colors.innerValues(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
+    }
+    @Test
+    public void isDisplayedTest() {
+        assertThat(colors.isDisplayed(), is(true));
+    }
+    @Test
+    public void expandTests() {
+        assertThat(colors.isExpanded(), is(false));
+        colors.expand();
+        assertThat(colors.isExpanded(), is(true));
+        assertThat(colors.listEnabled(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
+        assertThat(colors.values(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
+    }
     @Test
     public void baseValidationTest() {
-        baseValidation(dressCode);
+        baseValidation(colors);
     }
 }
+

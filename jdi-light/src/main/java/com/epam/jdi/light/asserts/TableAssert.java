@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.complex.table.TableMatcher;
 
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
 
 public class TableAssert extends BaseTableAssert<Table, TableAssert> {
 

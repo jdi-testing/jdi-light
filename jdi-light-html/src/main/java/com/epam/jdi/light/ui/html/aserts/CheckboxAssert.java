@@ -2,7 +2,7 @@ package com.epam.jdi.light.ui.html.aserts;
 
 import com.epam.jdi.light.asserts.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.ui.html.common.Checkbox;
+import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;

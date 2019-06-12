@@ -6,14 +6,12 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.tools.CacheValue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
 public class WebList extends JList<UIElement> {
-    protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
 
     public WebList() {}
     public WebList(By locator) { super(locator);}

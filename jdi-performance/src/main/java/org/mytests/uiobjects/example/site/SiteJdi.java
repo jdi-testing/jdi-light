@@ -2,10 +2,10 @@ package org.mytests.uiobjects.example.site;
 
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.complex.JList;
+import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
-import com.epam.jdi.light.elements.complex.Menu;
 import org.mytests.uiobjects.example.entities.User;
 import org.mytests.uiobjects.example.site.custom.MenuItem;
 import org.mytests.uiobjects.example.site.pages.*;

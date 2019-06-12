@@ -5,6 +5,7 @@ package com.epam.jdi.light.elements.base;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -16,4 +17,7 @@ public class UIElement extends BaseWebElement<UIElement> {
     public UIElement(List<WebElement> els) { this(); webElements.setForce(els); }
     public UIElement(By locator) { this(); setLocator(locator); }
 
+    public boolean wait(JFunc1<UIElement, Boolean> condition) {
+        return waitCondition(condition, this);
+    }
 }

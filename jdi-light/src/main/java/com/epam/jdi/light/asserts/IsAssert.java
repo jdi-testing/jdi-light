@@ -1,8 +1,8 @@
 package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.BaseWebElement;
+import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matcher;
 
@@ -106,16 +106,16 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {
-        jdiAssert(uiElement.displayed() ? "displayed" : "hidden", is("displayed"));
+        jdiAssert(uiElement.isDisplayed() ? "displayed" : "hidden", is("displayed"));
         return (A) this;
     }
 
     /**
      * Check that the element is disappeared
      */
-    @JDIAction("Assert that '{name}' is disappear")
+    @JDIAction("Assert that '{name}' is disappeared")
     public A disappear() {
-        jdiAssert(uiElement.displayed() ? "displayed" : "disappear", is("disappear"));
+        jdiAssert(uiElement.idHidden() ? "disappeared" : "displayed", is("disappeared"));
         return (A) this;
     }
 
@@ -124,7 +124,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' is hidden")
     public A hidden() {
-        jdiAssert(uiElement.displayed() ? "displayed" : "hidden", is("hidden"));
+        jdiAssert(uiElement.idHidden() ? "hidden" : "displayed", is("hidden"));
         return (A) this;
     }
 

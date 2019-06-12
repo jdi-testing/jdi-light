@@ -1,7 +1,7 @@
 package pseudo.site.section;
 
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.Droplist;
+import com.epam.jdi.light.elements.complex.Dropdown;
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
-import com.epam.jdi.light.ui.html.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -151,16 +151,16 @@ public class ExtendedSection extends CustomSection {
     public UIList<CustomSection, SomeData> uilistSomedataPublicXPath;
 
     @JDropdown(root = "div[ui=droplistPackage", value = "input", list = "li", expand = ".expand")
-    Droplist droplistPackage;
+    Dropdown droplistPackage;
     @JDropdown(root = "div[ui=droplistPublic", value = "input", list = "li", expand = ".expand")
-    public Droplist droplistPublic;
+    public Dropdown droplistPublic;
     @JDropdown(root = "div[ui=droplistPrivate", value = "input", list = "li", expand = ".expand")
-    private Droplist droplistPrivate;
-    private static Droplist droplistPrivateStatic;
+    private Dropdown droplistPrivate;
+    private static Dropdown droplistPrivateStatic;
     @UI(".droplistPackageUI")
-    Droplist droplistPackageUI;
+    Dropdown droplistPackageUI;
     @UI(".droplistPublicUI")
-    public Droplist droplistPublicUI;
+    public Dropdown droplistPublicUI;
 
     public WebElement getWebElementPackage() {
         return webElementPackage;
@@ -381,35 +381,35 @@ public class ExtendedSection extends CustomSection {
         this.uilistSomedataPackageUI = uilistSomedataPackageUI;
     }
 
-    public Droplist getDroplistPackage() {
+    public Dropdown getDroplistPackage() {
         return droplistPackage;
     }
 
-    public void setDroplistPackage(Droplist droplistPackage) {
+    public void setDroplistPackage(Dropdown droplistPackage) {
         this.droplistPackage = droplistPackage;
     }
 
-    public Droplist getDroplistPrivate() {
+    public Dropdown getDroplistPrivate() {
         return droplistPrivate;
     }
 
-    public void setDroplistPrivate(Droplist droplistPrivate) {
+    public void setDroplistPrivate(Dropdown droplistPrivate) {
         this.droplistPrivate = droplistPrivate;
     }
 
-    public static Droplist getDroplistPrivateStatic() {
+    public static Dropdown getDroplistPrivateStatic() {
         return droplistPrivateStatic;
     }
 
-    public static void setDroplistPrivateStatic(Droplist droplistPrivateStatic) {
+    public static void setDroplistPrivateStatic(Dropdown droplistPrivateStatic) {
         ExtendedSection.droplistPrivateStatic = droplistPrivateStatic;
     }
 
-    public Droplist getDroplistPackageUI() {
+    public Dropdown getDroplistPackageUI() {
         return droplistPackageUI;
     }
 
-    public void setDroplistPackageUI(Droplist droplistPackageUI) {
+    public void setDroplistPackageUI(Dropdown droplistPackageUI) {
         this.droplistPackageUI = droplistPackageUI;
     }
 

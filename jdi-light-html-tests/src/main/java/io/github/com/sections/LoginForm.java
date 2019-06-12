@@ -1,8 +1,8 @@
 package io.github.com.sections;
 
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.ui.html.common.Button;
-import com.epam.jdi.light.ui.html.common.TextField;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.entities.User;
 
 import static io.github.com.pages.Header.userIcon;

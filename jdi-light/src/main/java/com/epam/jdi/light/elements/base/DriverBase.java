@@ -3,7 +3,6 @@ package com.epam.jdi.light.elements.base;
 import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -30,6 +29,7 @@ public class DriverBase implements JDIElement {
     public String varName = "";
     public String typeName = "";
     public String failElement = "";
+    public String failElement() { return failElement; }
     public Object parent;
     protected String context;
     public <T extends JDIBase> T setParent(Object parent) {
@@ -64,6 +64,4 @@ public class DriverBase implements JDIElement {
         if (!isClass(parent.getClass(), JDIBase.class)) return null;
         return ((JDIBase)parent).getPage();
     }
-
-
 }
