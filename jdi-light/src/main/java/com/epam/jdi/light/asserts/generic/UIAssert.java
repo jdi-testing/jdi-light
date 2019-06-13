@@ -55,7 +55,7 @@ public class UIAssert<A extends UIAssert, E extends IBaseElement> extends BaseAs
     }
 
     /**
-     * Check that the element is enable
+     * Check that the element is enabled
      */
     @JDIAction("Assert that '{name}' is enabled")
     public A enabled() {
@@ -64,7 +64,7 @@ public class UIAssert<A extends UIAssert, E extends IBaseElement> extends BaseAs
     }
 
     /**
-     * Check that the element is disable
+     * Check that the element is disabled
      */
     @JDIAction("Assert that '{name}' is disabled")
     public A disabled() {

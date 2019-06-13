@@ -24,7 +24,7 @@ public class IsAssert<A extends IsAssert, E extends IWebBaseElement> extends Bas
 
     private BaseWebElement toBaseUIElement(String action) {
         if (!isClass(uiElement.getClass(), BaseWebElement.class))
-            throw exception("%s not a BaseWebElement. %s assert allowed only for elements that extends BaseWebElement",
+            throw exception("%s is not a BaseWebElement. %s assert is only allowed for elements that extend BaseWebElement",
                     uiElement.getName(), action);
         return (BaseWebElement) uiElement;
     }
@@ -166,7 +166,7 @@ public class IsAssert<A extends IsAssert, E extends IWebBaseElement> extends Bas
     }
 
     /**
-     * Check that the element is enable
+     * Check that the element is enabled
      */
     @JDIAction("Assert that '{name}' is enabled")
     public A enabled() {
@@ -175,7 +175,7 @@ public class IsAssert<A extends IsAssert, E extends IWebBaseElement> extends Bas
     }
 
     /**
-     * Check that the element is disable
+     * Check that the element is disabled
      */
     @JDIAction("Assert that '{name}' is disabled")
     public A disabled() {
