@@ -1,6 +1,5 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.complex.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.ByText;

@@ -1,21 +1,24 @@
-package com.epam.jdi.light.asserts;
+package com.epam.jdi.light.asserts.core;
 
+import com.epam.jdi.light.asserts.generic.BaseAssert;
+import com.epam.jdi.light.asserts.generic.CommonAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseWebElement;
-import com.epam.jdi.light.elements.base.IBaseElement;
+import com.epam.jdi.light.elements.base.IWebBaseElement;
 import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matcher;
 
-import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
-public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAssert<A> {
+public class IsAssert<A extends IsAssert, E extends IWebBaseElement> extends BaseAssert<E>
+        implements CommonAssert<A> {
 
-    public IsAssert(IBaseElement element) {
+    public IsAssert(E element) {
         super(element);
     }
 
@@ -115,7 +118,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' is disappeared")
     public A disappear() {
-        jdiAssert(uiElement.idHidden() ? "disappeared" : "displayed", is("disappeared"));
+        jdiAssert(uiElement.isHidden() ? "disappeared" : "displayed", is("disappeared"));
         return (A) this;
     }
 
@@ -124,7 +127,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      */
     @JDIAction("Assert that '{name}' is hidden")
     public A hidden() {
-        jdiAssert(uiElement.idHidden() ? "hidden" : "displayed", is("hidden"));
+        jdiAssert(uiElement.isHidden() ? "hidden" : "displayed", is("hidden"));
         return (A) this;
     }
 
@@ -139,7 +142,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
     @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
     public A notAppear(int timeoutSec) {
         boolean result = new Timer(timeoutSec * 1000)
-                .wait(() -> uiElement.displayed());
+                .wait(() -> uiElement.isDisplayed());
         jdiAssert(result ? "displayed" : "hidden", is("hidden"));
         return (A) this;
     }

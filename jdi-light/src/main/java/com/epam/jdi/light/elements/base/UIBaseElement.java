@@ -1,11 +1,13 @@
 package com.epam.jdi.light.elements.base;
 
-import com.epam.jdi.light.asserts.HasAssert;
-import com.epam.jdi.light.asserts.UIAssert;
+import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.HasCache;
 
 public abstract class UIBaseElement<A extends UIAssert> extends DriverBase
-        implements IBaseElement, HasAssert<A>, HasUIElement {
-    protected UIElement element = new UIElement();
+        implements IBaseElement, HasAssert<A>, HasUIElement, HasCache {
+    protected UIElement element;
     public UIElement element() {
         if (element == null)
             element = new UIElement().setName(getName() + " element");

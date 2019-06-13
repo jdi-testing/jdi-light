@@ -6,8 +6,8 @@ package com.epam.jdi.light.ui.html;
  */
 
 import com.epam.jdi.light.elements.base.BaseWebElement;
-import com.epam.jdi.light.elements.base.Label;
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.settings.WebSettings;

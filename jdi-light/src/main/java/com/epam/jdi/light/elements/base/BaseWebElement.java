@@ -6,6 +6,7 @@ package com.epam.jdi.light.elements.base;
  */
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,10 +22,7 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static java.lang.Thread.currentThread;
 
 public abstract class BaseWebElement<T extends BaseWebElement>
-        extends JDIBase implements WebElement, BaseFindElement<T>, SetValue {
-    public BaseWebElement() { }
-    public BaseWebElement(WebElement el) { webElement.setForce(el); }
-    public BaseWebElement(List<WebElement> els) { webElements.setForce(els); }
+        extends JDIBase implements WebElement, SetValue {
     protected Class<T> initClass;
 
     public T setInitClass(Class<T> listClass) {

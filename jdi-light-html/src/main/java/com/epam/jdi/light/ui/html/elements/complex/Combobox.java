@@ -1,7 +1,7 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.common.UIElement;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 

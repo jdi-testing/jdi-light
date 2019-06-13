@@ -1,15 +1,16 @@
-package com.epam.jdi.light.asserts;
+package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 
-import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static org.hamcrest.Matchers.is;
 
-public class UIAssert<A extends UIAssert, E extends IBaseElement> extends BaseAssert<E> {
+public class UIAssert<A extends UIAssert, E extends IBaseElement> extends BaseAssert<E>
+    implements CommonAssert<A> {
     /**
      * Check that the element is displayed
      */

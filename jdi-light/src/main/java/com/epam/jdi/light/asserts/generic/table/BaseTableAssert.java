@@ -1,5 +1,6 @@
-package com.epam.jdi.light.asserts;
+package com.epam.jdi.light.asserts.generic.table;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.BaseTable;
 import com.epam.jdi.light.elements.complex.table.Column;
@@ -11,21 +12,20 @@ import org.hamcrest.Matchers;
 import java.util.Collection;
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static org.hamcrest.Matchers.*;
 
-public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> extends IsAssert<A> {
-    protected T table;
+public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> extends UIAssert<A, T> {
     protected String name;
     protected T table() {
-        table.refresh();
-        return table;
+        uiElement.refresh();
+        return uiElement;
     }
 
     public BaseTableAssert(T table) {
-        super(table);
-        this.table = table;
+        super();
+        uiElement = table;
         this.name = table.toError();
     }
     /**

@@ -1,13 +1,13 @@
 package io.github.epam.html.tests.issues.issue67;
 
-import com.epam.jdi.light.asserts.SoftAssert;
+import com.epam.jdi.light.asserts.core.SoftAssert;
 import io.github.epam.TestsInit;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.SoftAssert.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.HtmlElementsPage.*;

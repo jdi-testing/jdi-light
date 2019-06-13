@@ -1,11 +1,11 @@
 package com.epam.jdi.light.ui.html.aserts;
 
-import com.epam.jdi.light.asserts.UIAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.Image;
 import org.hamcrest.Matcher;
 
-import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 import static org.hamcrest.Matchers.is;
 

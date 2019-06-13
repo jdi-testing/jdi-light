@@ -1,10 +1,11 @@
-package com.epam.jdi.light.elements.base;
+package com.epam.jdi.light.elements.common;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

@@ -1,9 +1,12 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.light.asserts.BaseTableAssert;
+import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.IHasSize;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.HasCache;
@@ -22,9 +25,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.elements.base.JDIBase.STRING_SIMPLIFY;
 import static com.epam.jdi.light.elements.complex.table.Line.initLine;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -38,8 +41,8 @@ import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThan;
 
-public abstract class BaseTable<T extends BaseTable> extends JDIBase
-        implements ISetup, HasValue, HasCache {
+public abstract class BaseTable<T extends BaseTable> extends UIBaseElement<BaseTableAssert>
+        implements ISetup, HasValue, HasCache, HasAssert<BaseTableAssert>, IHasSize {
     protected By rowLocator = By.xpath("//tr[%s]/td");
     protected By columnLocator = By.xpath("//tr/td[%s]");
     protected By cellLocator = By.xpath("//tr[{1}]/td[{0}]");
@@ -52,11 +55,13 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
 
     protected int getRowHeaderIndex() {
         if (rowHeaderIndex == -1 && isNotBlank(rowHeaderName)) {
-            int index = firstIndex(header(), h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowHeaderName)));
+            int index = firstIndex(header(),
+                h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowHeaderName)));
             if (index > -1)
                 rowHeaderIndex = index + 1;
-            else throw exception("Can't find rowHeader '%s' in 'header' [%s]. Please correct JTable params",
-                    rowHeaderName, print(header()));
+            else throw exception(
+            "Can't find rowHeader '%s' in 'header' [%s]. Please correct JTable params",
+                rowHeaderName, print(header()));
         }
         return rowHeaderIndex;
     }
@@ -270,7 +275,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
         List<String> header = asList(j.header());
 
         if (isNotBlank(j.root()))
-            setLocator(defineLocator(j.root()));
+            element().setLocator(defineLocator(j.root()));
         if (isNotBlank(j.row()))
             this.rowLocator = defineLocator(j.row());
         if (isNotBlank(j.column()))
@@ -555,7 +560,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
      */
     @JDIAction("Preview '{name}' table")
     public String preview() {
-        return TRIM_PREVIEW.execute(get().getText());
+        return TRIM_PREVIEW.execute(element().getText());
     }
 
     /**
@@ -574,16 +579,5 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
     public BaseTableAssert is() {
         return new BaseTableAssert(this);
     }
-    public BaseTableAssert assertThat() {
-        return is();
-    }
-    public BaseTableAssert has() {
-        return is();
-    }
-    public BaseTableAssert waitFor() {
-        return is();
-    }
-    public BaseTableAssert shouldBe() { return is(); }
-    public BaseTableAssert verify() { assertSoft(); return is(); }
 
 }

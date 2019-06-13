@@ -1,4 +1,4 @@
-package com.epam.jdi.light.asserts;
+package com.epam.jdi.light.asserts.core;
 
 import com.epam.jdi.tools.Safe;
 import org.hamcrest.Matcher;

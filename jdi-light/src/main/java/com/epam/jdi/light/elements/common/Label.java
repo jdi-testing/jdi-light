@@ -1,7 +1,8 @@
-package com.epam.jdi.light.elements.base;
+package com.epam.jdi.light.elements.common;
 
-import com.epam.jdi.light.asserts.UIAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 
 public class Label extends UIBaseElement<UIAssert> {
     @JDIAction("Click on '{name}'")

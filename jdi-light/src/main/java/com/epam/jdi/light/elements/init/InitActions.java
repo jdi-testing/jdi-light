@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.*;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.UIList;
@@ -62,7 +63,7 @@ public class InitActions {
             info.instance = create(info.field.getType());
         } catch (Exception ignore) {
             try {
-                info.instance = create(info.field.getType(),getDriver());
+                info.instance = create(info.field.getType(), getDriver());
             } catch (Exception ex) {
                 throw exception("Can't initialize Page Object '%s'. Exception: %s", info.field.getName(), ex.getMessage());
             }
@@ -76,8 +77,7 @@ public class InitActions {
         $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList())),
         $("UIList", iRule(f -> f.getType() == List.class && isPageObject(getGenericType(f)),
             f -> new UIList())),
-        $("JList", iRule(f -> f.getType() == List.class &&
-            (isClass(getGenericType(f), BaseWebElement.class) || isInterface(getGenericType(f), BaseFindElement.class)),
+        $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), IBaseElement.class),
             f -> new JList()))
     );
 

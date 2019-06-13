@@ -11,5 +11,4 @@ public interface ISelector extends IBaseElement, INamed, IHasSize {
     List<String> innerValues();
     List<String> listEnabled();
     List<String> listDisabled();
-    int size();
 }

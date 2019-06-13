@@ -1,5 +1,6 @@
-package com.epam.jdi.light.asserts;
+package com.epam.jdi.light.asserts.core;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.tools.LinqUtils;
@@ -10,22 +11,22 @@ import org.hamcrest.MatcherAssert;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.Matchers.*;
 
-public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T, E>> {
+public class UIListAssert<T extends Section, D> extends UIAssert<UIListAssert<T, D>, T> {
     List<T> elements;
-    JFunc<List<E>> data;
+    JFunc<List<D>> data;
     public String name;
     public String jdi_element;
     public String failElement;
 
-    public UIListAssert(List<T> elements, JFunc<List<E>> data, String name, String failElement) {
-        super($("Not Allowed in UI List"));
+    public UIListAssert(List<T> elements, JFunc<List<D>> data, String name, String failElement) {
+        super();
+        uiElement.setName("Not Allowed in UI List");
         this.elements = elements;
         this.data = data;
         this.name = name;
@@ -39,7 +40,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that each of '{name}' elements meet condition")
-    public UIListAssert<T, E> each(JFunc1<E, Boolean> condition) {
+    public UIListAssert<T, D> each(JFunc1<D, Boolean> condition) {
         jdiAssert(all(data.execute(), condition::execute), is(true));
         return this;
     }
@@ -50,7 +51,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that any of '{name}' elements meet condition")
-    public UIListAssert<T, E> any(JFunc1<E, Boolean> condition) {
+    public UIListAssert<T, D> any(JFunc1<D, Boolean> condition) {
         jdiAssert(LinqUtils.any(data.execute(), condition::execute), is(true));
         return this;
     }
@@ -61,7 +62,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that only one of '{name}' elements meet condition")
-    public UIListAssert<T, E> onlyOne(JFunc1<E, Boolean> condition) {
+    public UIListAssert<T, D> onlyOne(JFunc1<D, Boolean> condition) {
         jdiAssert(single(data.execute(), condition::execute), is(notNullValue()));
         return this;
     }
@@ -72,7 +73,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that none of '{name}' meet condition")
-    public UIListAssert<T, E> noOne(JFunc1<E, Boolean> condition) {
+    public UIListAssert<T, D> noOne(JFunc1<D, Boolean> condition) {
         jdiAssert(first(data.execute(), condition::execute), is(nullValue()));
         return this;
     }
@@ -83,7 +84,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that '{name}' text {0}")
-    public UIListAssert<T, E> value(E item) {
+    public UIListAssert<T, D> value(D item) {
         return and(hasItem(item));
     }
 
@@ -93,7 +94,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that '{name}' text {0}")
-    public UIListAssert<T, E> value(Matcher<String> condition) {
+    public UIListAssert<T, D> value(Matcher<String> condition) {
         jdiAssert(print(data.execute(), Object::toString), condition);
         return this;
     }
@@ -104,7 +105,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that '{name}' text {0}")
-    public UIListAssert<T, E> value(String text) {
+    public UIListAssert<T, D> value(String text) {
         elements.clear();
         jdiAssert(select(data.execute(), Object::toString), hasItem(text));
         return this;
@@ -115,7 +116,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that '{name}' is displayed")
-    public UIListAssert<T, E> allDisplayed() {
+    public UIListAssert<T, D> allDisplayed() {
         elements.clear();
         jdiAssert(map(elements, this::isDisplayed), everyItem(is(true)));
         return this;
@@ -126,7 +127,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that '{name}' has at least one displayed element")
-    public UIListAssert<T, E> displayed() {
+    public UIListAssert<T, D> displayed() {
         elements.clear();
         jdiAssert(map(elements, this::isDisplayed), hasItem(true));
         return this;
@@ -137,7 +138,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that '{name}' is hidden")
-    public UIListAssert<T, E> hidden() {
+    public UIListAssert<T, D> hidden() {
         elements.clear();
         jdiAssert(map(elements, this::isDisplayed), everyItem(is(false)));
         return this;
@@ -153,7 +154,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that '{name}' is empty")
-    public UIListAssert<T, E> empty() {
+    public UIListAssert<T, D> empty() {
         elements.clear();
         jdiAssert(elements.isEmpty() ? "list is empty" : "list is not empty", is("list is empty"));
         return this;
@@ -164,7 +165,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that '{name}' is not empty")
-    public UIListAssert<T, E> notEmpty() {
+    public UIListAssert<T, D> notEmpty() {
         elements.clear();
         jdiAssert(elements.isEmpty() ? "list is empty" : "list is not empty", is("list is not empty"));
         return this;
@@ -176,7 +177,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that '{name}' size {0}")
-    public UIListAssert<T, E> size(Matcher<Integer> condition) {
+    public UIListAssert<T, D> size(Matcher<Integer> condition) {
         elements.clear();
         jdiAssert(elements.size(), condition);
         return this;
@@ -188,7 +189,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that '{name}' size {0}")
-    public UIListAssert<T, E> size(int size) {
+    public UIListAssert<T, D> size(int size) {
         return size(equalTo(size));
     }
 
@@ -198,7 +199,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @return UIListAssert
      */
     @JDIAction("Assert that '{name}' data {0}")
-    public UIListAssert<T, E> and(Matcher<? super List<E>> condition) {
+    public UIListAssert<T, D> and(Matcher<? super List<D>> condition) {
         elements.clear();
         MatcherAssert.assertThat(data.execute(), condition);
         return this;

@@ -1,10 +1,10 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
-import com.epam.jdi.light.asserts.UISelectAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -32,9 +32,11 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBa
     public UIElement element() { return element; }
 
     protected Select getSelect(String action) {
-        if (element().getTagName().contains("select"))
-            return new Select(element());
-        throw exception(SELECT_ERROR, action, this);
+        try {
+            return element().select();
+        } catch (Exception ex) {
+            throw exception(SELECT_ERROR, action, this);
+        }
     }
 
     public DropdownSelect() {}

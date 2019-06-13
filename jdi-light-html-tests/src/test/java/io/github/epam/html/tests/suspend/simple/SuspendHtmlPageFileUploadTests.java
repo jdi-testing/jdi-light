@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static com.epam.jdi.light.asserts.FileAssert.assertThatFile;
-import static com.epam.jdi.light.asserts.FileAssert.cleanupDownloads;
+import static com.epam.jdi.light.asserts.core.FileAssert.assertThatFile;
+import static com.epam.jdi.light.asserts.core.FileAssert.cleanupDownloads;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;

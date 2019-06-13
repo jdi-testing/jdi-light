@@ -1,12 +1,14 @@
 package com.epam.jdi.light.elements.complex;
 
-import com.epam.jdi.light.asserts.SelectAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseWebElement;
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.SetValue;
 import org.apache.logging.log4j.util.Strings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -18,19 +20,16 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
-public class Selector<T extends BaseWebElement> extends BaseWebElement<T>
-    implements ISelector {
+public class Selector extends UIBaseElement<UISelectAssert> implements ISelector, SetValue {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
-
-    public Selector() { }
-    public Selector(WebElement el) { super(el); }
-    public Selector(List<WebElement> els) { super(els); }
+    protected Select select() {
+        return element().select();
+    }
 
     /**
      * Selects the value based on its visible text
      * @param value String to search
      */
-    @Override
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
         select().selectByVisibleText(value);
@@ -130,8 +129,8 @@ public class Selector<T extends BaseWebElement> extends BaseWebElement<T>
     }
     @JDIAction("Is '{0}' selected")
     public boolean selected(String value) {
-        return locator.isTemplate()
-            ? new UIElement(get(value)).isSelected()
+        return element().locator.isTemplate()
+            ? new UIElement(element().get(value)).isSelected()
             : selected().trim().equalsIgnoreCase(value.trim());
     }
 
@@ -140,7 +139,7 @@ public class Selector<T extends BaseWebElement> extends BaseWebElement<T>
      * @return String
      */
     @JDIAction(value = "Get '{name}' placeholder", level = DEBUG)
-    public String placeholder() { return getAttribute("placeholder"); }
+    public String placeholder() { return element().attr("placeholder"); }
 
     /**
      * Get the elements values
@@ -167,7 +166,7 @@ public class Selector<T extends BaseWebElement> extends BaseWebElement<T>
      */
     @JDIAction(level = DEBUG)
     public List<String> listEnabled() {
-        List<UIElement> els = getUI().finds("option");
+        List<UIElement> els = element().finds("option");
         return ifSelect(els, UIElement::isEnabled, UIElement::getText);
     }
 
@@ -177,7 +176,7 @@ public class Selector<T extends BaseWebElement> extends BaseWebElement<T>
      */
     @JDIAction(level = DEBUG)
     public List<String> listDisabled() {
-        return ifSelect(getUI().finds("option"),
+        return ifSelect(element().finds("option"),
             UIElement::isDisabled, UIElement::getText);
     }
 
@@ -190,9 +189,5 @@ public class Selector<T extends BaseWebElement> extends BaseWebElement<T>
     @Override
     public String getValue() {
         return select().isMultiple() ? print(checked(),";") : selected();
-    }
-
-    public SelectAssert is() {
-        return new SelectAssert(() -> this);
     }
 }

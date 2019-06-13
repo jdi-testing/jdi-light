@@ -4,7 +4,7 @@ import io.github.epam.StaticTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.base.WindowsManager.originalWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.HomePage.githubLink;
 import static io.github.com.pages.HomePage.jdiText;

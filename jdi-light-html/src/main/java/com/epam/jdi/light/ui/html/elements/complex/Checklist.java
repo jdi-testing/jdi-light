@@ -1,8 +1,8 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
-import com.epam.jdi.light.asserts.UISelectAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.EnumUtils;
@@ -14,7 +14,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.elements.complex.Selector.LABEL_LOCATOR;
-import static com.epam.jdi.light.ui.html.HtmlFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;

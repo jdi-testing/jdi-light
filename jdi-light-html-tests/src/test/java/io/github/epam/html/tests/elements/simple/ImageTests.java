@@ -5,8 +5,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.base.Alerts.acceptAlert;
-import static com.epam.jdi.light.elements.base.Alerts.getAlertText;
+import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
+import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.jdiLogo;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;

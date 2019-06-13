@@ -1,18 +1,16 @@
 package org.mytests.uiobjects.example.site.custom;
 
-import com.epam.jdi.light.asserts.SelectAssert;
-import com.epam.jdi.light.asserts.UISelectAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;

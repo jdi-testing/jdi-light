@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.base;
 
-import com.epam.jdi.light.asserts.UISelectAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -11,8 +11,8 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 
 public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
-        implements ISelector, SetValue {
-    protected WebList list;
+        implements ISelector, SetValue, HasUIList {
+    private WebList list;
     public WebList list() {
         if (list == null)
             list = $$(element().getLocator(), getName() + " list");

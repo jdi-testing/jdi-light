@@ -1,10 +1,12 @@
 package com.epam.jdi.light.elements.base;
 
-import com.epam.jdi.light.asserts.IsAssert;
+import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDILocator;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.HasCache;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Timer;
@@ -18,7 +20,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.text.MessageFormat;
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
@@ -46,7 +48,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class JDIBase extends DriverBase implements IBaseElement, HasValue, HasUIBase {
+public class JDIBase extends DriverBase implements IWebBaseElement, HasValue, HasUIBase, HasCache {
     public JDIBase element() { return this; }
     public static JFunc1<String, String> STRING_SIMPLIFY =
         s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
@@ -306,6 +308,8 @@ public class JDIBase extends DriverBase implements IBaseElement, HasValue, HasUI
             List<WebElement> els = select.findElements(By.tagName("select"));
             if (els.size() > 0)
                 select = els.get(0);
+            else
+                throw exception("Element should point to <select> tag in order to use Selenium Select");
         }
         return new Select(select);
     }
@@ -362,12 +366,12 @@ public class JDIBase extends DriverBase implements IBaseElement, HasValue, HasUI
 
     /**
      * Get element css value
-     * @param s
+     * @param value
      * @return String
      */
     @JDIAction(level = DEBUG)
-    public String getCssValue(String s) {
-        return get().getCssValue(s);
+    public String getCssValue(String value) {
+        return get().getCssValue(value);
     }
     public String css(String prop) {
         return getCssValue(prop);

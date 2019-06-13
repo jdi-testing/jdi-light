@@ -1,4 +1,4 @@
-package com.epam.jdi.light.elements.pageobjects.annotations.objects;
+package com.epam.jdi.light.ui.html.elements.annotations;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

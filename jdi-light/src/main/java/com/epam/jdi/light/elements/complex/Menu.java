@@ -1,18 +1,16 @@
 package com.epam.jdi.light.elements.complex;
 
-import com.epam.jdi.light.asserts.UISelectAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.tools.func.JFunc1;
 
 import java.util.List;
 
+import static com.epam.jdi.light.elements.base.JDIBase.waitCondition;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 public class Menu extends UIListBase<UISelectAssert> {
-    protected WebList list = new WebList();
-    protected WebList list() { return list; }
-
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) { list().select(value); }
     @JDIAction("Select '{0}' in '{name}'")
@@ -63,30 +61,30 @@ public class Menu extends UIListBase<UISelectAssert> {
 
     @JDIAction("Hover to '{name}'")
     public void hover() {
-        list.hover();
+        list().hover();
     }
     @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {
-        return list.isDisplayed();
+        return list().isDisplayed();
     }
     @JDIAction("Check that '{name}' is hidden")
     public boolean isHidden() {
-        return list.isHidden();
+        return list().isHidden();
     }
     @JDIAction(level = DEBUG)
     public void highlight(String color) {
-        list.highlight(color);
+        list().highlight(color);
     }
     @JDIAction(level = DEBUG)
     public void highlight() {
-        list.highlight();
+        list().highlight();
     }
     @JDIAction(level = DEBUG)
     public void show() {
-        list.show();
+        list().show();
     }
     @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
-        return list.listEnabled().size() > 0;
+        return list().listEnabled().size() > 0;
     }
 }

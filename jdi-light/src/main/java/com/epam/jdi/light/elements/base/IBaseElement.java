@@ -9,6 +9,4 @@ public interface IBaseElement extends JDIElement {
     void highlight(String color);
     void highlight();
     void show();
-
-    void offCache();
 }

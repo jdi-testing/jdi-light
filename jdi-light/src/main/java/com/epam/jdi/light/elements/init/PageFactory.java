@@ -3,7 +3,7 @@ package com.epam.jdi.light.elements.init;
 import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -206,7 +206,7 @@ public class PageFactory {
         T page;
         useDriver(() -> driver);
         try {
-            page = create(pageClassToProxy,driver);
+            page = create(pageClassToProxy, driver);
         } catch (Exception ignore) {
             try {
                 page = create(pageClassToProxy);

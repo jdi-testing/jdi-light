@@ -1,11 +1,11 @@
-package com.epam.jdi.light.asserts;
+package com.epam.jdi.light.asserts.generic.table;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.TableMatcher;
 import com.epam.jdi.tools.func.JFunc1;
 
-import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static org.hamcrest.Matchers.*;
 
@@ -97,7 +97,7 @@ public class DataTableAssert<D>
          */
         @JDIAction("Assert that '{name}' has at least '{0}' rows that {0}")
         public DataTableAssert<D> rows(TableMatcher... matchers) {
-            jdiAssert(TABLE_MATCHER.execute(table, matchers).size(),
+            jdiAssert(TABLE_MATCHER.execute(table(), matchers).size(),
                     greaterThan(table().header().size()*count-1));
             return dtAssert;
         }

@@ -1,10 +1,10 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.light.asserts.TableAssert;
+import com.epam.jdi.light.asserts.generic.table.TableAssert;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 
-import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 
 public class Table extends BaseTable<Table> implements ISetup, HasValue {
 

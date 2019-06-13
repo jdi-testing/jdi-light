@@ -1,5 +1,6 @@
-package com.epam.jdi.light.asserts;
+package com.epam.jdi.light.asserts.core;
 
+import com.epam.jdi.light.asserts.generic.BaseAssert;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matcher;
 

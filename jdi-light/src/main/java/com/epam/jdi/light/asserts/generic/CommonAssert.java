@@ -1,5 +1,6 @@
-package com.epam.jdi.light.asserts;
+package com.epam.jdi.light.asserts.generic;
 
+import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.tools.func.JFunc1;
 
 public interface CommonAssert<A> {

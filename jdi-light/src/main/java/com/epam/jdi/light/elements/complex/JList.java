@@ -5,11 +5,12 @@ package com.epam.jdi.light.elements.complex;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.asserts.ListAssert;
+import com.epam.jdi.light.asserts.core.ListAssert;
+import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
@@ -25,7 +26,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
@@ -38,7 +38,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThan;
 
 public class JList<T extends BaseWebElement> extends JDIBase
-        implements IList<T>, SetValue, ISetup, ISelector {
+        implements IList<T>, SetValue, ISetup, ISelector, HasAssert<ListAssert> {
     protected CacheValue<List<T>> elements = new CacheValue<>();
 
     public JList() {}
@@ -276,7 +276,7 @@ public class JList<T extends BaseWebElement> extends JDIBase
     }
     @Override
     public boolean displayed() {
-        return hasAny() && get(0).displayed();
+        return isEmpty() && get(0).displayed();
     }
 
     @Override @JDIAction(level = DEBUG)
@@ -309,32 +309,16 @@ public class JList<T extends BaseWebElement> extends JDIBase
     }
 
     //region matchers
-    public ListAssert<T> is() {
-        return new ListAssert<>(() -> {refresh(); return this; }, () -> {refresh(); return this; }, toError());
+    public ListAssert is() {
+        return new ListAssert(() -> {refresh(); return this; }, () -> { refresh(); return values(); }, toError());
     }
     @JDIAction("Assert that {name} list meet condition")
-    public ListAssert<T> is(Matcher<? super List<T>> condition) {
+    public ListAssert is(Matcher<? super List<T>> condition) {
         MatcherAssert.assertThat(this, condition);
         return is();
     }
-    public ListAssert<T> assertThat(Matcher<? super List<T>> condition) {
+    public ListAssert assertThat(Matcher<? super List<T>> condition) {
         return is(condition);
-    }
-    public ListAssert<T> assertThat() {
-        return is();
-    }
-    public ListAssert<T> has() {
-        return is();
-    }
-    public ListAssert<T> waitFor() {
-        return is();
-    }
-    public ListAssert<T> shouldBe() {
-        return is();
-    }
-    public ListAssert<T> verify() {
-        assertSoft();
-        return is();
     }
     //endregion
     public void setup(Field field) {

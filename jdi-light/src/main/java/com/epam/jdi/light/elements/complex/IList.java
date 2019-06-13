@@ -71,11 +71,12 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
     default <R> List<R> selectMany(JFunc1<T, List<R>> func) {
         return LinqUtils.selectMany(elements(0), func);
     }
+    @Override
     default int size() {
         return elements(0).size();
     }
+    @Override
     default boolean isEmpty() { return size() == 0; }
-
     // List methods
     @Override
     default boolean contains(Object o) {

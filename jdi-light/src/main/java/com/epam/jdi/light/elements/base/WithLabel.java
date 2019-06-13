@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.Label;
 import org.openqa.selenium.By;
 
 public interface WithLabel extends HasUIBase {
