@@ -9,7 +9,7 @@ import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.pages.Header.search;
-import static io.github.com.pages.SearchPage.searchTitle;
+import static io.github.com.pages.SearchPage.jsearchTitle;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
@@ -27,17 +27,17 @@ public class WaitJListTests extends StaticTestsInit {
 
     @Test
     public void notEmptyTest() {
-        searchTitle.is().notEmpty();
+        jsearchTitle.is().notEmpty();
     }
     @Test
     public void notEmpty2Test() {
-        searchTitle.assertThat(not(empty()));
+        jsearchTitle.assertThat(not(empty()));
     }
     @Test
     public void emptyTest() {
         TIMEOUT.setUp(2);
         try {
-            searchTitle.is().empty();
+            jsearchTitle.is().empty();
             Assert.fail("List should not be empty");
         } catch (Throwable ignored) { }
         finally {
@@ -47,12 +47,12 @@ public class WaitJListTests extends StaticTestsInit {
     }
     @Test
     public void sizeTest() {
-        assertEquals(searchTitle.size(), 6);
-        searchTitle.is().size(equalTo(8));
+        assertEquals(jsearchTitle.size(), 6);
+        jsearchTitle.is().size(equalTo(8));
     }
     @Test
     public void sizeNotEmptyTest() {
-        searchTitle.is().size(greaterThan(7));
+        jsearchTitle.is().size(greaterThan(7));
     }
 
 }

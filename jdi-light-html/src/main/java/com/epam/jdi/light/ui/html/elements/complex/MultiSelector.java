@@ -14,13 +14,13 @@ import static java.util.Arrays.asList;
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
 public class MultiSelector extends Combobox {
     protected Select select() {
-        return element().select();
+        return core().select();
     }
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String... values) {
         select().deselectAll();
         for (String value : values)
-            element().select().selectByVisibleText(value);
+            core().select().selectByVisibleText(value);
     }
     public <TEnum extends Enum> void check(TEnum... values) {
         check(getEnumValues(values));

@@ -8,7 +8,7 @@ package com.epam.jdi.light.ui.html;
 import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.UIList;
+import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.html.elements.common.Button;
@@ -64,7 +64,7 @@ public class HtmlSettings {
                         return getButtonByName(fields, obj, buttonName);
                 }
             };
-            UIList.GET_TITLE_FIELD_NAME = list -> {
+            DataList.GET_TITLE_FIELD_NAME = list -> {
                 Field[] fields = list.classType.getFields();
                 Field expectedField = first(fields, f -> f.isAnnotationPresent(Title.class));
                 if (expectedField != null)

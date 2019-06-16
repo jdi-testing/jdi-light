@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.asserts.core.IsAssert;
+import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDILocator;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -20,7 +21,6 @@ import org.openqa.selenium.support.ui.Select;
 import java.text.MessageFormat;
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
@@ -48,8 +48,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class JDIBase extends DriverBase implements IWebBaseElement, HasValue, HasUIBase, HasCache {
-    public JDIBase element() { return this; }
+public class JDIBase<A extends IsAssert> extends DriverBase
+        implements IWebBaseElement, HasValue, HasCache, HasAssert<A>, IListBase {
     public static JFunc1<String, String> STRING_SIMPLIFY =
         s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     public static <T> boolean waitCondition(JFunc1<T, Boolean> condition, T element) {
@@ -199,7 +199,7 @@ public class JDIBase extends DriverBase implements IWebBaseElement, HasValue, Ha
     }
 
     private SearchContext getSearchContext(Object element) {
-        JDIBase bElement = (JDIBase) element;
+        JDIBase<A> bElement = (JDIBase<A>) element;
         if (bElement.webElement.hasValue())
             return bElement.webElement.get();
         Object parent = bElement.parent;
@@ -285,7 +285,7 @@ public class JDIBase extends DriverBase implements IWebBaseElement, HasValue, Ha
         }
         return asString;
     }
-    public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
+    public static JFunc1<JDIBase<?>, String> PRINT_ELEMENT = element -> {
         if (element.webElement.hasValue())
             return printWebElement(element.webElement.get());
         return Switch(logger.getLogLevel()).get(
@@ -330,6 +330,32 @@ public class JDIBase extends DriverBase implements IWebBaseElement, HasValue, Ha
     @JDIAction("Get '{name}' text")
     public String innerText() {
         return jsExecute("innerText");
+    }
+
+    /**
+     * Check the element is selected
+     * @return boolean
+     */
+    @JDIAction("Check that '{name}' is selected")
+    public boolean isSelected() {
+        return selected();
+    }
+    /**
+     * Check the element is deselected
+     * @return boolean
+     */
+    @JDIAction("Check that '{name}' is deselected")
+    public boolean isDeselected() {
+        return !selected();
+    }
+    /**
+     * Check the element is selected
+     * @return boolean
+     */
+    protected boolean selected() {
+        List<String> cl = classes();
+        return get().isSelected() || cl.contains("checked") || cl.contains("active")||
+                cl.contains("selected") || getAttribute("checked").equals("true");
     }
     public String text() { return getText(); }
     @JDIAction("Get '{name}' text")
@@ -410,10 +436,9 @@ public class JDIBase extends DriverBase implements IWebBaseElement, HasValue, Ha
     public boolean isDisabled() {
         return !enabled();
     }
-    private boolean enabled() {
+    protected boolean enabled() {
         List<String> cls = classes();
-        return cls.contains("active") ||
-                get().isEnabled() && !cls.contains("disabled");
+        return cls.contains("active") || get().isEnabled() && !cls.contains("disabled");
     }
 
     /**
@@ -433,7 +458,7 @@ public class JDIBase extends DriverBase implements IWebBaseElement, HasValue, Ha
     public boolean isHidden() {
         return !displayed();
     }
-    public boolean displayed() {
+    protected boolean displayed() {
         try {
             if (webElement.hasValue())
                 return webElement.get().isDisplayed();
@@ -594,24 +619,8 @@ public class JDIBase extends DriverBase implements IWebBaseElement, HasValue, Ha
     //endregion
 
     //region Asserts
-    public IsAssert is() {
-        return new IsAssert(this);
-    }
-    public IsAssert assertThat() {
-        return is();
-    }
-    public IsAssert has() {
-        return is();
-    }
-    public IsAssert waitFor() {
-        return is();
-    }
-    public IsAssert shouldBe() {
-        return is();
-    }
-    public IsAssert verify() {
-        assertSoft();
-        return is();
+    public A is() {
+        return (A) new IsAssert<>(this);
     }
     //endregion
 

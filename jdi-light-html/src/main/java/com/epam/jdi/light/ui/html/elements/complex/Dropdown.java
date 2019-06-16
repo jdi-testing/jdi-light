@@ -31,7 +31,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBaseElement, WithLabel {
     private DropdownSelect ds() {
-        return new DropdownSelect(element(), SELECT_ERROR);
+        return new DropdownSelect(core(), SELECT_ERROR);
     }
     private static final String SELECT_ERROR =
         "Can't %s element in Dropdown '%s'. Dropdown should have JDropdown annotation or locator to 'select' tag";
@@ -48,7 +48,7 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
         if (list() != null) {
             expand();
             list().select(value);
-            if (list().hasAny(uiElement -> uiElement.displayed() && uiElement.isEnabled()))
+            if (list().hasAny(uiElement -> uiElement.isDisplayed() && uiElement.isEnabled()))
                 click();
         } else {
             ds().select(value);
@@ -57,7 +57,7 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
     protected void click() {
         if (expander != null)
             expander.click();
-        else element().click();
+        else core().click();
     }
     public <TEnum extends Enum> void select(TEnum name) { select(getEnumValue(name));}
 
@@ -72,7 +72,7 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
         if (list() == null) {
             expand();
             list().select(index - 1);
-            if (list().hasAny(JDIBase::displayed))
+            if (list().hasAny(UIElement::isDisplayed))
                 click();
         } else {
             ds().select(index);
@@ -98,7 +98,7 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
     @JDIAction(value = "Is '{name}' expanded", level = DEBUG)
     public boolean isExpanded() {
         assertLinked(list(), "list", "expand");
-        return list().hasAny(JDIBase::displayed);
+        return list().hasAny(UIElement::isDisplayed);
     }
     /**
      * Expanding DropDown
@@ -108,7 +108,7 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
         if (expander != null)
             if (!isExpanded())
                 expander.click();
-        else { try { element().click(); }
+        else { try { core().click(); }
             catch (Throwable ignore) {
                 assertLinked(expander, "expander", "expand");
             }
@@ -123,7 +123,7 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
             if (isExpanded())
                 expander.click();
         }
-        else { try { element().click(); }
+        else { try { core().click(); }
         catch (Throwable ignore) {
                 assertLinked(expander, "expander", "close");
             }
@@ -140,7 +140,7 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
     }
 
     public void hover() {
-        element().hover();
+        core().hover();
     }
     public boolean isEnabled() {
         if (list() == null || expander == null)
@@ -155,13 +155,13 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
     }
 
     public void highlight(String color) {
-        element().highlight(color);
+        core().highlight(color);
     }
     public void highlight() {
-        element().highlight();
+        core().highlight();
     }
     public void show() {
-        element().show();
+        core().show();
     }
 
     public boolean wait(JFunc1<Dropdown, Boolean> condition) {
@@ -175,13 +175,13 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         List<String> result = new ArrayList<>();
-        if (list() == null && element().getTagName().contains("select"))
+        if (list() == null && core().getTagName().contains("select"))
             return ds().values();
         if (list() != null) {
-            if (!list().hasAny(JDIBase::displayed))
+            if (!list().hasAny(UIElement::isDisplayed))
                 click();
             result = list().values();
-            if (list().hasAny(JDIBase::displayed))
+            if (list().hasAny(UIElement::isDisplayed))
                 click();
         }
         return result;
@@ -194,13 +194,13 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
     @JDIAction("Get '{name}' values")
     public List<String> innerValues() {
         List<String> result = new ArrayList<>();
-        if (list() == null && element().getTagName().contains("select"))
+        if (list() == null && core().getTagName().contains("select"))
             return ds().innerValues();
         if (list() != null) {
-            if (!list().hasAny(JDIBase::displayed))
+            if (!list().hasAny(UIElement::isDisplayed))
                 click();
             result = list().innerValues();
-            if (list().hasAny(JDIBase::displayed))
+            if (list().hasAny(UIElement::isDisplayed))
                 click();
         }
         return result;
@@ -234,7 +234,7 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
         By expandLocator = isNotBlank(j.expand())
             ? defineLocator(j.expand()) : null;
         if (root != null)
-            element().setLocator(root);
+            core().setLocator(root);
         if (valueLocator != null) {
             value = $(valueLocator, this).setName(getName() + " value element");
             value.driverName = driverName;

@@ -17,14 +17,14 @@ import static org.hamcrest.Matchers.is;
 public class ProgressAssert extends UIAssert<ProgressAssert, ProgressBar> {
     @JDIAction("Assert that '{name}' max volume {0}")
     public ProgressAssert maxVolume(Matcher<Integer> max) {
-        jdiAssert(getInt("max", uiElement.element()), max);
+        jdiAssert(getInt("max", uiElement.core()), max);
         return this;
     }
     public ProgressAssert maxVolume(int maxVolume) { return maxVolume(is(maxVolume)); }
 
     @JDIAction("Assert that '{name}' volume {0}")
     public ProgressAssert volume(Matcher<Integer> volume) {
-        jdiAssert(getInt("value", uiElement.element()), volume);
+        jdiAssert(getInt("value", uiElement.core()), volume);
         return this;
     }
     public ProgressAssert volume(int volume) { return volume(is(volume)); }

@@ -275,7 +275,7 @@ public abstract class BaseTable<T extends BaseTable> extends UIBaseElement<BaseT
         List<String> header = asList(j.header());
 
         if (isNotBlank(j.root()))
-            element().setLocator(defineLocator(j.root()));
+            core().setLocator(defineLocator(j.root()));
         if (isNotBlank(j.row()))
             this.rowLocator = defineLocator(j.row());
         if (isNotBlank(j.column()))
@@ -560,7 +560,7 @@ public abstract class BaseTable<T extends BaseTable> extends UIBaseElement<BaseT
      */
     @JDIAction("Preview '{name}' table")
     public String preview() {
-        return TRIM_PREVIEW.execute(element().getText());
+        return TRIM_PREVIEW.execute(core().getText());
     }
 
     /**

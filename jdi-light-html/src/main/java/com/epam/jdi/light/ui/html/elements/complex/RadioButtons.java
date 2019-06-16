@@ -40,9 +40,9 @@ public class RadioButtons extends UIListBase<UISelectAssert> {
     List<Label> labels() { return map(getAllElements(), el -> $(el).label()); }
 
     private List<WebElement> getAllElements() {
-        if (list().getLocator() == null)
+        if (list().core().getLocator() == null)
             throw exception("Please specify RadioButtons locator in order to get all radio buttons");
-        return list().getAll();
+        return list().core().getAll();
     }
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) { label(value).click(); }

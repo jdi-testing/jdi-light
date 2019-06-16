@@ -6,13 +6,15 @@ package com.epam.jdi.light.elements.common;
  */
 
 import com.epam.jdi.light.elements.base.BaseWebElement;
+import com.epam.jdi.light.elements.base.HasUIElement;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class UIElement extends BaseWebElement<UIElement> {
+public class UIElement extends BaseWebElement<UIElement> implements HasUIElement {
+    public UIElement core() { return this; }
     public UIElement() { setInitClass(UIElement.class); }
     public UIElement(WebElement el) { this(); webElement.setForce(el); }
     public UIElement(List<WebElement> els) { this(); webElements.setForce(els); }

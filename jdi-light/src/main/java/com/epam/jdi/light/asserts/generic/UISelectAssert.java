@@ -1,6 +1,7 @@
 package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
@@ -14,6 +15,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static org.hamcrest.Matchers.*;
 
 public class UISelectAssert<A extends UISelectAssert, E extends ISelector> extends UIAssert<A, E> {
+
     @JDIAction("Assert that '{0}' option selected for '{name}'")
     public A selected(String option) {
         jdiAssert(uiElement.selected(option), is(true));
@@ -36,15 +38,24 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
         jdiAssert(uiElement.innerValues(), condition);
         return (A) this;
     }
+    public A innerValues(String... innerValues) {
+        return innerValues(hasItems(innerValues));
+    }
     @JDIAction("Assert that '{name}' enabled items {0}")
     public A enabled(Matcher<? super List<String>> condition) {
         jdiAssert(uiElement.listEnabled(), condition);
         return (A) this;
     }
+    public A enabled(String... enabled) {
+        return enabled(hasItems(enabled));
+    }
     @JDIAction("Assert that '{name}' disabled items {0}")
     public A disabled(Matcher<? super List<String>> condition) {
         jdiAssert(uiElement.listDisabled(), condition);
         return (A) this;
+    }
+    public A disabled(String... disabled) {
+        return disabled(hasItems(disabled));
     }
 
     @JDIAction("Assert that '{name}' size {0}")
@@ -63,12 +74,12 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
         return size(equalTo(size));
     }
     @JDIAction("Assert that '{name}' size {0}")
-    public A notEmpty() {
-        return size(greaterThan(0));
-    }
-    @JDIAction("Assert that '{name}' size {0}")
     public A empty() {
         return size(0);
+    }
+    @JDIAction("Assert that '{name}' size {0}")
+    public A notEmpty() {
+        return size(greaterThan(0));
     }
     @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {

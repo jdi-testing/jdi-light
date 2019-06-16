@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements;
 
+import com.epam.jdi.light.elements.base.HasUIElement;
 import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.tools.func.JAction;
 import org.openqa.selenium.Dimension;
@@ -9,28 +10,27 @@ import static java.lang.System.currentTimeMillis;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThan;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class BaseValidations {
 
-    public static void baseValidation(IBaseElement el) {
+    public static void baseValidation(HasUIElement el) {
         // EXCLUDED el.hover();
-        assertTrue(el.isEnabled());
-        assertTrue(el.isDisplayed());
-        assertFalse(el.isDisabled());
-        assertFalse(el.isHidden());
-        Point location = el.getLocation();
+        assertTrue(el.core().isEnabled());
+        assertTrue(el.core().isDisplayed());
+        assertFalse(el.core().isDisabled());
+        assertFalse(el.core().isHidden());
+        Point location = el.core().getLocation();
         assertTrue(location.x > 0 && location.y > 0, "Location: " + location);
-        Dimension size = el.getSize();
+        Dimension size = el.core().getSize();
         assertTrue(size.height > 0 && size.width > 0, "Size: " + location);
         //Rectangle rect = el.getRect();
         //assertTrue(rect.height > 0 && rect.width > 0 && rect.x > 0 && rect.y > 0, "Size: " + location);
-        el.setAttribute("test-jdi", "test-value");
-        assertEquals(el.getAttribute("test-jdi"), "test-value");
-        el.highlight("blue");
-        el.highlight();
-        el.show();
+        el.core().setAttribute("test-jdi", "test-value");
+        assertEquals(el.core().getAttribute("test-jdi"), "test-value");
+        el.core().highlight("blue");
+        el.core().highlight();
+        el.core().show();
     }
 
     public static void durationMoreThan(int duration, JAction action) {

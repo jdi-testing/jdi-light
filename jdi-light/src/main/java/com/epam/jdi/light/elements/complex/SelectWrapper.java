@@ -12,54 +12,54 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 public class SelectWrapper extends UIBaseElement<UISelectAssert> implements ISelect {
 
     public boolean isMultiple() {
-        return element().select().isMultiple();
+        return core().select().isMultiple();
     }
 
     public List<WebElement> getOptions() {
-        return element().select().getOptions();
+        return core().select().getOptions();
     }
 
     public List<WebElement> getAllSelectedOptions() {
-        return element().select().getAllSelectedOptions();
+        return core().select().getAllSelectedOptions();
     }
 
     public WebElement getFirstSelectedOption() {
         is().notEmpty();
-        return element().select().getFirstSelectedOption();
+        return core().select().getFirstSelectedOption();
     }
 
     public void selectByVisibleText(String s) {
         is().notEmpty();
-        element().select().selectByVisibleText(s);
+        core().select().selectByVisibleText(s);
     }
 
     public void selectByIndex(int i) {
         is().size(greaterThanOrEqualTo(i));
-        element().select().selectByIndex(i);
+        core().select().selectByIndex(i);
     }
 
     public void selectByValue(String s) {
         is().notEmpty();
-        element().select().selectByValue(s);
+        core().select().selectByValue(s);
     }
 
     public void deselectAll() {
         is().notEmpty();
-        element().select().deselectAll();
+        core().select().deselectAll();
     }
 
     public void deselectByValue(String s) {
         is().notEmpty();
-        element().select().deselectByValue(s);
+        core().select().deselectByValue(s);
     }
 
     public void deselectByIndex(int i) {
         is().size(greaterThanOrEqualTo(i));
-        element().select().deselectByIndex(i);
+        core().select().deselectByIndex(i);
     }
 
     public void deselectByVisibleText(String s) {
         is().notEmpty();
-        element().select().deselectByVisibleText(s);
+        core().select().deselectByVisibleText(s);
     }
 }

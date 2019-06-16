@@ -29,11 +29,11 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBaseElement {
     protected UIElement element = new UIElement();
-    public UIElement element() { return element; }
+    public UIElement core() { return element; }
 
     protected Select getSelect(String action) {
         try {
-            return element().select();
+            return core().select();
         } catch (Exception ex) {
             throw exception(SELECT_ERROR, action, this);
         }
@@ -86,25 +86,25 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBa
     }
 
     public void hover() {
-        element().hover();
+        core().hover();
     }
     public boolean isEnabled() {
-        return element().isEnabled();
+        return core().isEnabled();
     }
 
     @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {
-        return element().isDisplayed();
+        return core().isDisplayed();
     }
 
     public void highlight(String color) {
-        element().highlight(color);
+        core().highlight(color);
     }
     public void highlight() {
-        element().highlight();
+        core().highlight();
     }
     public void show() {
-        element().show();
+        core().show();
     }
 
     public boolean wait(JFunc1<DropdownSelect, Boolean> condition) {

@@ -15,7 +15,7 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
     private WebList list;
     public WebList list() {
         if (list == null)
-            list = $$(element().getLocator(), getName() + " list");
+            list = $$(core().getLocator(), getName() + " list");
         return list;
     }
     protected void setList(WebList webList) { list = webList; }

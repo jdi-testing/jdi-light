@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
 /**
  * Created by Roman_Iovlev on 3/2/2018.
  */
-public class WaitUIListTests extends StaticTestsInit {
+public class WaitDataListTests extends StaticTestsInit {
     @BeforeMethod
     public void before() {
         homePage.shouldBeOpened();

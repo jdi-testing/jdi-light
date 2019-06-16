@@ -31,14 +31,14 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> {
 
     @JDIAction("Assert that '{name}' height {0}")
     public ImageAssert height(Matcher<Integer> condition) {
-        jdiAssert(getInt("height", uiElement.element()), condition);
+        jdiAssert(getInt("height", uiElement.core()), condition);
         return this;
     }
     public ImageAssert height(int height) { return height(is(height)); }
 
     @JDIAction("Assert that '{name}' width {0}")
     public ImageAssert width(Matcher<Integer> condition) {
-        jdiAssert(getInt("width", uiElement.element()), condition);
+        jdiAssert(getInt("width", uiElement.core()), condition);
         return this;
     }
     public ImageAssert width(int width) { return width(is(width)); }

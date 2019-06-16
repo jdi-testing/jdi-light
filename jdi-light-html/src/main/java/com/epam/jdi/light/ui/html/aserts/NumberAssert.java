@@ -17,21 +17,21 @@ import static org.hamcrest.Matchers.is;
 public class NumberAssert extends UIAssert<NumberAssert, NumberSelector> {
     @JDIAction("Assert that '{name}' minValue {0}")
     public NumberAssert min(Matcher<Double> min) {
-        jdiAssert(getDouble("min", uiElement.element()), min);
+        jdiAssert(getDouble("min", uiElement.core()), min);
         return this;
     }
     public NumberAssert min(double min) { return min(is(min)); }
 
     @JDIAction("Assert that '{name}' maxValue {0}")
     public NumberAssert max(Matcher<Double> max) {
-        jdiAssert(getDouble("max", uiElement.element()), max);
+        jdiAssert(getDouble("max", uiElement.core()), max);
         return this;
     }
     public NumberAssert max(double max) { return max(is(max)); }
 
     @JDIAction("Assert that '{name}' step {0}")
     public NumberAssert step(Matcher<Double> step) {
-        jdiAssert(getDouble("step", uiElement.element()), step);
+        jdiAssert(getDouble("step", uiElement.core()), step);
         return this;
     }
     public NumberAssert step(double step) { return step(is(step)); }
@@ -45,7 +45,7 @@ public class NumberAssert extends UIAssert<NumberAssert, NumberSelector> {
 
     @JDIAction("Assert that '{name}' number {0}")
     public NumberAssert number(Matcher<Double> number) {
-        jdiAssert(getDouble("value", uiElement.element()), number);
+        jdiAssert(getDouble("value", uiElement.core()), number);
         return this;
     }
     public NumberAssert number(double number) { return number(is(number)); }

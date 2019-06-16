@@ -23,7 +23,7 @@ import static java.util.Arrays.asList;
 public class Selector extends UIBaseElement<UISelectAssert> implements ISelector, SetValue {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
     protected Select select() {
-        return element().select();
+        return core().select();
     }
 
     /**
@@ -129,8 +129,8 @@ public class Selector extends UIBaseElement<UISelectAssert> implements ISelector
     }
     @JDIAction("Is '{0}' selected")
     public boolean selected(String value) {
-        return element().locator.isTemplate()
-            ? new UIElement(element().get(value)).isSelected()
+        return core().locator.isTemplate()
+            ? new UIElement(core().get(value)).isSelected()
             : selected().trim().equalsIgnoreCase(value.trim());
     }
 
@@ -139,7 +139,7 @@ public class Selector extends UIBaseElement<UISelectAssert> implements ISelector
      * @return String
      */
     @JDIAction(value = "Get '{name}' placeholder", level = DEBUG)
-    public String placeholder() { return element().attr("placeholder"); }
+    public String placeholder() { return core().attr("placeholder"); }
 
     /**
      * Get the elements values
@@ -166,7 +166,7 @@ public class Selector extends UIBaseElement<UISelectAssert> implements ISelector
      */
     @JDIAction(level = DEBUG)
     public List<String> listEnabled() {
-        List<UIElement> els = element().finds("option");
+        List<UIElement> els = core().finds("option");
         return ifSelect(els, UIElement::isEnabled, UIElement::getText);
     }
 
@@ -176,7 +176,7 @@ public class Selector extends UIBaseElement<UISelectAssert> implements ISelector
      */
     @JDIAction(level = DEBUG)
     public List<String> listDisabled() {
-        return ifSelect(element().finds("option"),
+        return ifSelect(core().finds("option"),
             UIElement::isDisabled, UIElement::getText);
     }
 

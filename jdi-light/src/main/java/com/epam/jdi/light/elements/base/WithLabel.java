@@ -4,11 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.Label;
 import org.openqa.selenium.By;
 
-public interface WithLabel extends HasUIBase {
+public interface WithLabel extends HasUIElement {
     default Label label() {
-        return new Label().element()
-            .setLocator(By.cssSelector("[for="+element().attr("id")+"]"))
-            .setName(element().getName() + " label");
+        return new Label().core()
+            .setLocator(By.cssSelector("[for="+ core().attr("id")+"]"))
+            .setName(core().getName() + " label");
     }
     /**
      * Gets label text

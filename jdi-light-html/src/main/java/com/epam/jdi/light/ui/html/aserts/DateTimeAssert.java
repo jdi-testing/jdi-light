@@ -51,7 +51,7 @@ public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector> {
 
     @JDIAction("Assert that '{name}' min {0}")
     public DateTimeAssert min(Matcher<Float> min) {
-        jdiAssert(getFloat("min", uiElement.element()), min);
+        jdiAssert(getFloat("min", uiElement.core()), min);
         return this;
     }
     public DateTimeAssert min(float min) {
@@ -60,7 +60,7 @@ public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector> {
 
     @JDIAction("Assert that '{name}' max {0}")
     public DateTimeAssert max(Matcher<Float> max) {
-        jdiAssert(getFloat("max", uiElement.element()), max);
+        jdiAssert(getFloat("max", uiElement.core()), max);
         return this;
     }
     public DateTimeAssert max(float max) {

@@ -1,8 +1,7 @@
 package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
-import com.epam.jdi.light.elements.base.IBaseElement;
-import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.base.UIBase;
 import com.epam.jdi.light.elements.interfaces.PageObject;
 
 /**
@@ -10,6 +9,6 @@ import com.epam.jdi.light.elements.interfaces.PageObject;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class Section extends UIBaseElement<UIAssert> implements PageObject {
+public class Section extends UIBase<UIAssert> implements PageObject {
 
 }

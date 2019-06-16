@@ -102,11 +102,11 @@ public class CustomSectionUIDataProvider {
     public Object[][] customSectionUIUIListQuestionDataProvider() {
         return new Object[][]{
                 {customSectionUI.uilistQuestionPublic, "id='uilistQuestionPublic'", customSectionUI, "Uilist Question Public"},
-                {customSectionUI.uilistQuestionPublicUI, "css='.uilistQuestionPublicUI'", customSectionUI, "Uilist Question Public UI"},
+                {customSectionUI.uilistQuestionPublicData, "css='.uilistQuestionPublicData'", customSectionUI, "Uilist Question Public UI"},
                 {customSectionUI.uilistQuestionPublicXPath, "xpath='//*[@class='uilistQuestionPublicXPath']'", customSectionUI, "Uilist Question Public X Path"},
                 {customSectionUI.getUilistQuestionPackage(), "id='uilistQuestionPackage'", customSectionUI, "Uilist Question Package"},
                 {customSectionUI.getUilistQuestionPrivate(), "id='uilistQuestionPrivate'", customSectionUI, "Uilist Question Private"},
-                {customSectionUI.getUilistQuestionPackageUI(), "css='.uilistQuestionPackageUI'", customSectionUI, "Uilist Question Package UI"},
+                {customSectionUI.getUilistQuestionPackageData(), "css='.uilistQuestionPackageUI'", customSectionUI, "Uilist Question Package UI"},
                 {customSectionUI.getUilistQuestionPackageCss(), "css='.uilistQuestionPackageCss'", customSectionUI, "Uilist Question Package Css"},
         };
     }
@@ -115,11 +115,11 @@ public class CustomSectionUIDataProvider {
     public Object[][] customSectionUIUIListSomedataDataProvider() {
         return new Object[][]{
                 {customSectionUI.uilistSomedataPublic, "id='uilistSomedataPublic'", customSectionUI, "Uilist Somedata Public"},
-                {customSectionUI.uilistSomedataPublicUI, "css='.uilistSomedataPublicUI'", customSectionUI, "Uilist Somedata Public UI"},
+                {customSectionUI.uilistSomedataPublicData, "css='.uilistSomedataPublicData'", customSectionUI, "Uilist Somedata Public UI"},
                 {customSectionUI.uilistSomedataPublicXPath, "xpath='//*[@class='uilistSomedataPublicXPath']'", customSectionUI, "Uilist Somedata Public X Path"},
                 {customSectionUI.getUilistSomedataPackage(), "id='uilistSomedataPackage'", customSectionUI, "Uilist Somedata Package"},
                 {customSectionUI.getUilistSomedataPrivate(), "id='uilistSomedataPrivate'", customSectionUI, "Uilist Somedata Private"},
-                {customSectionUI.getUilistSomedataPackageUI(), "css='.uilistSomedataPackageUI'", customSectionUI, "Uilist Somedata Package UI"},
+                {customSectionUI.getUilistSomedataPackageData(), "css='.uilistSomedataPackageUI'", customSectionUI, "Uilist Somedata Package UI"},
                 {customSectionUI.getUilistSomedataPackageCss(), "css='.uilistSomedataPackageCss'", customSectionUI, "Uilist Somedata Package Css"},
         };
     }

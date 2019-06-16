@@ -116,7 +116,7 @@ public abstract class BaseWebElement<T extends BaseWebElement>
     }
 
     public Label label() {
-        return new Label().element()
+        return new Label().core()
                 .setLocator(By.cssSelector("[for="+attr("id")+"]"))
                 .setName(getName() + " label");
     }
@@ -154,35 +154,6 @@ public abstract class BaseWebElement<T extends BaseWebElement>
 
     public WebElement findElement(By by) {
         return findElements(by).get(0);
-    }
-
-    /**
-     * Check the element is selected
-     * @return boolean
-     */
-    @JDIAction("Check that '{name}' is selected")
-    public boolean isSelected() {
-        return selected();
-    }
-
-    /**
-     * Check the element is deselected
-     * @return boolean
-     */
-    @JDIAction("Check that '{name}' is deselected")
-    public boolean isDeselected() {
-        return !selected();
-    }
-
-    /**
-     * Check the element is selected
-     * @return boolean
-     */
-    @JDIAction(level = DEBUG)
-    private boolean selected() {
-        List<String> cl = classes();
-        return get().isSelected() || cl.contains("checked") || cl.contains("active")||
-                cl.contains("selected") || getAttribute("checked").equals("true");
     }
     //endregion
 

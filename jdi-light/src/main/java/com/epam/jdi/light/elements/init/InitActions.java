@@ -1,10 +1,13 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.*;
+import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.IBaseElement;
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.JList;
-import com.epam.jdi.light.elements.complex.UIList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -74,11 +77,11 @@ public class InitActions {
 
     public static MapArray<String, InitRule> INIT_RULES = map(
         $("UIElement", iRule(WebElement.class, info -> new UIElement())),
-        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList())),
-        $("UIList", iRule(f -> f.getType() == List.class && isPageObject(getGenericType(f)),
-            f -> new UIList())),
-        $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), IBaseElement.class),
-            f -> new JList()))
+        $("WebList", iRule(cl -> isList(cl, WebElement.class), info -> new WebList())),
+        $("DataList", iRule(cl -> isList(cl, InitActions::isPageObject),
+            info -> new DataList())),
+        $("JList", iRule(cl -> cl == List.class && isInterface(getGenericType(cl), IBaseElement.class),
+            info -> new JList()))
     );
 
     public static MapArray<String, SetupRule> SETUP_RULES = map(
@@ -113,7 +116,6 @@ public class InitActions {
         );
         DriverBase jdi = (DriverBase) info.instance;
         jdi.setName(info.field, parentName);
-        //jdi.setTypeName(info.instance.getClass().getName());
         jdi.parent = info.parent;
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
         info.instance = jdi;
@@ -154,27 +156,24 @@ public class InitActions {
     public static boolean isJDIField(Field field) {
         return isInterface(field, WebElement.class) ||
             isInterface(field, JDIElement.class) ||
-            isListOf(field, WebElement.class) ||
-            isListOf(field, JDIElement.class) ||
-            isListOf(field, Section.class);
+            isListOf(field.getType(), WebElement.class) ||
+            isListOf(field.getType(), JDIElement.class) ||
+            isListOf(field.getType(), Section.class);
     }
     public static boolean isPageObject(Class<?> type) {
         return isClass(type, Section.class) || isClass(type, WebPage.class) ||
             LinqUtils.any(type.getDeclaredFields(), InitActions::isJDIField);
     }
-    public static boolean isList(Field field, Class<?> type) {
+    public static boolean isList(Class<?> clazz, JFunc1<Class<?>, Boolean> func) {
         try {
-            return field.getType() == List.class
-                && getGenericType(field) == type;
+            return clazz == List.class && func.execute(getGenericType(clazz));
         } catch (Exception ex) { return false; }
     }
-    public static boolean isListOf(Field field, Class<?> type) {
-        try {
-            if (field.getType() != List.class)
-                return false;
-            Class<?> generic = getGenericType(field);
-            return isClass(generic, type) || isInterface(generic, type);
-        } catch (Exception ex) { return false; }
+    public static boolean isList(Class<?> clazz, Class<?> type) {
+        return isList(clazz, g -> g == type);
+    }
+    public static boolean isListOf(Class<?> clazz, Class<?> type) {
+        return isList(clazz, g -> isClass(g, type) || isInterface(g, type));
     }
     public static Type[] getGenericTypes(Field field) {
         try {
@@ -183,11 +182,11 @@ public class InitActions {
             throw exception( "'%s' is List but has no Generic types", field.getName());
         }
     }
-    public static Class<?> getGenericType(Field field) {
+    public static Class<?> getGenericType(Class<?> clazz) {
         try {
-            return (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
+            return (Class<?>) ((ParameterizedType) clazz.getGenericSuperclass()).getActualTypeArguments()[0];
         } catch (Exception ex) {
-            throw exception("'%s' is List but has no Generic type", field.getName());
+            throw exception("'%s' is List but has no Generic type", clazz.getName());
         }
     }
 }

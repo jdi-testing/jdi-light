@@ -32,7 +32,7 @@ public class DriverBase implements JDIElement {
     public String failElement() { return failElement; }
     public Object parent;
     protected String context;
-    public <T extends JDIBase> T setParent(Object parent) {
+    public <T extends JDIElement> T setParent(Object parent) {
         this.parent = parent;
         return (T) this;
     }

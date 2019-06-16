@@ -8,38 +8,38 @@ import com.epam.jdi.light.elements.interfaces.HasCache;
 public abstract class UIBaseElement<A extends UIAssert> extends DriverBase
         implements IBaseElement, HasAssert<A>, HasUIElement, HasCache {
     protected UIElement element;
-    public UIElement element() {
+    public UIElement core() {
         if (element == null)
             element = new UIElement().setName(getName() + " element");
         return element;
     }
     protected void setElement(UIElement uiElement) { element = uiElement; }
 
-    public void hover() { element().hover(); }
+    public void hover() { core().hover(); }
     public boolean isEnabled() {
-        return element().isEnabled();
+        return core().isEnabled();
     }
     public boolean isDisabled() {
-        return element().isDisabled();
+        return core().isDisabled();
     }
     public boolean isDisplayed() {
-        return element().isDisplayed();
+        return core().isDisplayed();
     }
     public boolean isHidden() {
-        return element().isHidden();
+        return core().isHidden();
     }
     public void highlight(String color) {
-        element().highlight(color);
+        core().highlight(color);
     }
     public void highlight() {
-        element().highlight();
+        core().highlight();
     }
     public void show() {
-        element().show();
+        core().show();
     }
 
     public void offCache() {
-        element().offCache();
+        core().offCache();
     }
 
     public A is() {

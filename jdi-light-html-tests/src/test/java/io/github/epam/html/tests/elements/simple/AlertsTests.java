@@ -17,6 +17,7 @@ public class AlertsTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.open();
+
     }
 
     @Test

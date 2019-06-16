@@ -123,6 +123,8 @@ public final class UIUtils {
         return (T) cs.newInstance(params);
     }
     public static <T> T create(Class<?> cs) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        if (cs == null)
+            throw exception("Can't init class. Class Type is null.");
         Constructor<?>[] constructors = cs.getDeclaredConstructors();
         Constructor<?> constructor = first(constructors, c -> c.getParameterCount() == 0);
         if (constructor != null)
@@ -130,6 +132,8 @@ public final class UIUtils {
         throw exception("%s has no empty constructors", cs.getSimpleName());
     }
     public static <T> T create(Class<?> cs, Object... params) {
+        if (cs == null)
+            throw exception("Can't init class. Class Type is null.");
         Constructor<?>[] constructors = cs.getDeclaredConstructors();
         List<Constructor<?>> listConst = filter(constructors, c -> c.getParameterCount() == params.length);
         if (listConst.size() == 0)
