@@ -54,7 +54,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      * @param condition to compare
      * @return SelectAssert
      */
-    @JDIAction("Assert that '{name}' values {0}")
+    @JDIAction("Assert that '{name}' values is {0}")
     public SelectAssert values(Matcher<? super List<String>> condition) {
         jdiAssert(selector.execute().values(), condition);
         return this;
@@ -65,7 +65,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      * @param condition to compare
      * @return SelectAssert
      */
-    @JDIAction("Assert that '{name}' values {0}")
+    @JDIAction("Assert that '{name}' values is {0}")
     public SelectAssert innerValues(Matcher<? super List<String>> condition) {
         jdiAssert(selector.execute().innerValues(), condition);
         return this;
@@ -76,7 +76,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      * @param condition to compare
      * @return SelectAssert
      */
-    @JDIAction("Assert that '{name}' enabled items {0}")
+    @JDIAction("Assert that '{name}' enabled items is {0}")
     public SelectAssert enabled(Matcher<? super List<String>> condition) {
         jdiAssert(selector.execute().listEnabled(), condition);
         return this;
@@ -87,7 +87,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      * @param condition to compare
      * @return SelectAssert
      */
-    @JDIAction("Assert that '{name}' disabled items {0}")
+    @JDIAction("Assert that '{name}' disabled items is {0}")
     public SelectAssert disabled(Matcher<? super List<String>> condition) {
         jdiAssert(selector.execute().listDisabled(), condition);
         return this;
@@ -98,7 +98,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      * @param condition to compare
      * @return SelectAssert
      */
-    @JDIAction("Assert that all '{name}' texts {0}")
+    @JDIAction("Assert that all '{name}' texts is {0}")
     public SelectAssert texts(Matcher<Collection<? extends String>> condition) {
         jdiAssert(selector.execute().values(), condition);
         return this;
@@ -109,7 +109,7 @@ public class SelectAssert extends IsAssert<SelectAssert> {
      * @param condition to compare
      * @return SelectAssert
      */
-    @JDIAction("Assert that all '{name}' attributes {0}")
+    @JDIAction("Assert that all '{name}' attributes is {0}")
     public SelectAssert attrs(String attrName, Matcher<Collection<? extends String>> condition) {
         jdiAssert(selector.execute().getAllAttributes().keys(), condition);
         return this;
