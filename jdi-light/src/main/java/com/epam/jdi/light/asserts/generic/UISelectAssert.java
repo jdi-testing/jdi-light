@@ -67,7 +67,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     /**
      * Check that the list size is given size
      * @param size to compare
-     * @return UIListAssert
+     * @return DataListAssert
      */
     @JDIAction("Assert that '{name}' size {0}")
     public A size(int size) {
@@ -105,16 +105,6 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
         boolean result = new Timer(timeoutSec * 1000)
                 .wait(() -> uiElement.isDisplayed());
         jdiAssert(result ? "displayed" : "hidden", is("hidden"));
-        return (A) this;
-    }
-
-    public A and() { return (A) this; }
-    public A condition(JFunc1<A, A> t) {
-        return t.execute((A) this);
-    }
-
-    public A set(E element) {
-        this.uiElement = element;
         return (A) this;
     }
 }

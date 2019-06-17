@@ -33,4 +33,5 @@ public class BaseAssert<E extends JDIElement> {
     public void assertResults() {
         SoftAssert.assertResults();
     }
+
 }

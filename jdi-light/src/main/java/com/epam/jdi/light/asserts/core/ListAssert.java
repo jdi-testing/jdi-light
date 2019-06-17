@@ -15,11 +15,12 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.Matchers.*;
 
-public class ListAssert extends UISelectAssert<ListAssert, JList> {
-    JFunc<JList> elements;
+public class ListAssert extends UISelectAssert<ListAssert, JList<?>> {
+    JList<?> elements;
 
-    public ListAssert(JFunc<JList> elements, String name) {
-        super(elements.execute().setName(name));
+    public ListAssert(JList<?> elements) {
+        super(elements);
+        //uiElement = elements.execute().setName(name);
         this.elements = elements;
     }
 
@@ -30,7 +31,7 @@ public class ListAssert extends UISelectAssert<ListAssert, JList> {
      */
     @JDIAction("Assert that '{name}' selected option {0}")
     public ListAssert selected(Matcher<? super List<String>> condition) {
-        jdiAssert(elements.execute().checked(), condition);
+        jdiAssert(elements.checked(), condition);
         return this;
     }
 
@@ -41,7 +42,7 @@ public class ListAssert extends UISelectAssert<ListAssert, JList> {
      */
     @JDIAction("Assert that all '{name}' texts {0}")
     public ListAssert texts(Matcher<Collection<? extends String>> condition) {
-        jdiAssert(elements.execute().values(), condition);
+        jdiAssert(elements.values(), condition);
         return this;
     }
 
@@ -52,7 +53,7 @@ public class ListAssert extends UISelectAssert<ListAssert, JList> {
      */
     @JDIAction("Assert that all '{name}' attributes {0}")
     public ListAssert attrs(Matcher<Collection<? extends String>> condition) {
-        jdiAssert(elements.execute().getAllAttributes().keys(), condition);
+        jdiAssert(elements.core().attrs().keys(), condition);
         return this;
     }
 
@@ -63,7 +64,7 @@ public class ListAssert extends UISelectAssert<ListAssert, JList> {
      */
     @JDIAction("Assert that all '{name}' elements css '{0}' {1}")
     public ListAssert allCss(String css, Matcher<Collection<? extends String>> condition) {
-        jdiAssert(map(elements.execute().allUI(), el -> el.getCssValue(css)), condition);
+        jdiAssert(map(elements.core().allUI(), el -> el.getCssValue(css)), condition);
         return this;
     }
 
@@ -74,7 +75,7 @@ public class ListAssert extends UISelectAssert<ListAssert, JList> {
      */
     @JDIAction("Assert that all '{name}' tags {0}")
     public ListAssert allTags(Matcher<Collection<? extends String>> condition) {
-        jdiAssert(map(elements.execute().allUI(), UIElement::getTagName), condition);
+        jdiAssert(map(elements.core().allUI(), UIElement::getTagName), condition);
         return this;
     }
 
@@ -95,7 +96,7 @@ public class ListAssert extends UISelectAssert<ListAssert, JList> {
      */
     @JDIAction("Assert that all '{name}' css classes {0}")
     public ListAssert cssClasses(Matcher<Iterable<String>> condition) {
-        jdiAssert(elements.execute().classes(), condition);
+        jdiAssert(elements.core().classes(), condition);
         return this;
     }
 
@@ -105,7 +106,7 @@ public class ListAssert extends UISelectAssert<ListAssert, JList> {
      */
     @JDIAction("Assert that all '{name}' elements are selected")
     public ListAssert allSelected() {
-        jdiAssert(map(elements.execute().allUI(), UIElement::isSelected), everyItem(is(true)));
+        jdiAssert(map(elements.core().allUI(), UIElement::isSelected), everyItem(is(true)));
         return this;
     }
 
@@ -115,7 +116,7 @@ public class ListAssert extends UISelectAssert<ListAssert, JList> {
      */
     @JDIAction("Assert that all '{name}' elements are enabled")
     public ListAssert allEnabled() {
-        jdiAssert(map(elements.execute().allUI(), UIElement::isEnabled), everyItem(is(true)));
+        jdiAssert(map(elements.core().allUI(), UIElement::isEnabled), everyItem(is(true)));
         return this;
     }
 }

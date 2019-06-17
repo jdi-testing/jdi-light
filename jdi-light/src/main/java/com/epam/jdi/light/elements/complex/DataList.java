@@ -5,17 +5,18 @@ package com.epam.jdi.light.elements.complex;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.asserts.core.UIListAssert;
+import com.epam.jdi.light.asserts.core.DataListAssert;
+import com.epam.jdi.light.asserts.core.ListAssert;
+import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.UIUtils;
-import com.epam.jdi.light.elements.base.IListBase;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.init.SiteInfo;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
+import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
@@ -30,16 +31,23 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
 
-public class DataList<T extends Section, E> extends JList<T> implements ISetup {
+public class DataList<T extends Section, E> extends UIBaseElement<DataListAssert<T, E>>
+        implements IList<T>, SetValue, ISetup, ISelector {
 
     private CacheValue<MapArray<String, T>> map = new CacheValue<>(MapArray::new);
+    public JList<T> list() {
+        JList<T> list = new JList<>(core().getLocator());
+        list.setParent(parent);
+        list.setName(getName() + " list");
+        return list;
+    }
     public Class<E> dataType;
 
     public DataList() {}
@@ -141,8 +149,6 @@ public class DataList<T extends Section, E> extends JList<T> implements ISetup {
      */
     @JDIAction("Scroll to list elements")
     public void showAll() {
-        if (!isClass(initClass, Section.class))
-            throw exception("Show all can be executed only for List of Sections. Please add ' extend Section' to your PageObject class in List");
         int size;
         do {
             size = size();
@@ -164,31 +170,36 @@ public class DataList<T extends Section, E> extends JList<T> implements ISetup {
      * @param condition to compare
      * @return UIListAsserts
      */
-    @JDIAction("Assert that {name} data meet condition")
-    public UIListAssert<T, E> is(Matcher<? super List<E>> condition) {
+    /*@JDIAction("Assert that {name} data meet condition")
+    public DataListAssert<T, E> is(Matcher<? super List<E>> condition) {
         MatcherAssert.assertThat(asData(), condition);
         return is();
-    }
-    public UIListAssert<T, E> is() {
-        return new UIListAssert<>(this, () -> { clear(); return asData(); }, core().toError(), failElement());
-    }
-
-    public UIListAssert<T, E> assertThat(Matcher<? super List<E>> condition) {
+    }*/
+    public UISelectAssert<UISelectAssert, DataList<T,E>> is() {
+        offCache();
+        return new DataListAssert<>(this, () -> { clear(); return asData(); }, core().toError(), failElement()).set(this);
+    }/*
+    @Override
+    public DataListAssert<T, E> is() {
+        return new DataListAssert<>(this, () -> { clear(); return asData(); }, core().toError(), failElement());
+    }*/
+/*
+    public DataListAssert<T, E> assertThat(Matcher<? super List<E>> condition) {
         return is(condition);
     }
-    public UIListAssert<T, E> has(Matcher<? super List<E>> condition) {
+    public DataListAssert<T, E> has(Matcher<? super List<E>> condition) {
         return is(condition);
     }
-    public UIListAssert<T, E> waitFor(Matcher<? super List<E>> condition) {
+    public DataListAssert<T, E> waitFor(Matcher<? super List<E>> condition) {
         return is(condition);
     }
-    public UIListAssert<T, E> shouldBe(Matcher<? super List<E>> condition) {
+    public DataListAssert<T, E> shouldBe(Matcher<? super List<E>> condition) {
         return is(condition);
     }
-    public UIListAssert<T, E> verify(Matcher<? super List<E>> condition) {
+    public DataListAssert<T, E> verify(Matcher<? super List<E>> condition) {
         assertSoft();
         return is(condition);
-    }
+    }*/
     public void setup(Field field) {
         try {
             Type[] types = getGenericTypes(field);

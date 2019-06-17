@@ -10,13 +10,11 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 
-public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
+public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement<A>
         implements ISelector, SetValue, HasUIList {
-    private WebList list;
+    protected WebList list;
     public WebList list() {
-        if (list == null)
-            list = $$(core().getLocator(), getName() + " list");
-        return list;
+        return list != null ? list : $$(core().getLocator(), getName() + " list");
     }
     protected void setList(WebList webList) { list = webList; }
 
@@ -42,6 +40,7 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
     @Override
     public void offCache() { list().offCache(); super.offCache();}
 
+    @Override
     public A is() {
         offCache();
         return (A) new UISelectAssert().set(this);

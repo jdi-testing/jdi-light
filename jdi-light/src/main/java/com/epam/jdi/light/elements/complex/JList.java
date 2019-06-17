@@ -5,7 +5,7 @@ package com.epam.jdi.light.elements.complex;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.asserts.core.ListAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.HasUIElement;
 import com.epam.jdi.light.elements.base.IListBase;
@@ -43,8 +43,8 @@ import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class JList<T extends IListBase & HasUIElement>
-    extends UIBaseElement<ListAssert> implements IList<T>, SetValue, ISetup, ISelector {
+public class JList<T extends IListBase & HasUIElement> extends UIBaseElement<UISelectAssert<UISelectAssert, JList<T>>>
+        implements IList<T>, SetValue, ISetup, ISelector {
     protected CacheValue<List<T>> elements = new CacheValue<>();
 
     public JList() {}
@@ -89,7 +89,7 @@ public class JList<T extends IListBase & HasUIElement>
             return initElement(() -> core().get(value)).setName(value);
         }
         refresh();
-        T el = first(e -> elementTitle(e).equals(value));
+        T el = first(e -> elementTitle(e.core()).equals(value));
         if (el == null)
             throw exception(NO_ELEMENTS_FOUND, value);
         el.setName(value);
@@ -327,19 +327,19 @@ public class JList<T extends IListBase & HasUIElement>
     public void show() {
         get(0).show();
     }
-
-    //region matchers
-    public ListAssert is() {
-        return new ListAssert(() -> {refresh(); return this; }, core().toError());
-    }
+    @Override
+    public UISelectAssert<UISelectAssert, JList<T>> is() {
+        offCache();
+        return new UISelectAssert<>().set(this);
+    }/*
     @JDIAction("Assert that {name} list meet condition")
-    public ListAssert is(Matcher<? super List<T>> condition) {
+    public UISelectAssert<UISelectAssert, JList<T>> is(Matcher<? super List<T>> condition) {
         MatcherAssert.assertThat(this, condition);
         return is();
     }
-    public ListAssert assertThat(Matcher<? super List<T>> condition) {
+    public UISelectAssert<UISelectAssert, JList<T>> assertThat(Matcher<? super List<T>> condition) {
         return is(condition);
-    }
+    }*/
     //endregion
     public void setup(Field field) {
         Type[] types;
