@@ -30,7 +30,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      * Match passed value with the element text
      * @param condition to compare
      */
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction("Assert that '{name}' text is {0}")
     public A text(Matcher<String> condition) {
         jdiAssert(toBaseUIElement("text").getText(), condition);
         return (A) this;
