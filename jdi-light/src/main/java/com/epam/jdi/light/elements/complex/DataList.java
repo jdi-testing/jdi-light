@@ -46,7 +46,7 @@ public class DataList<T extends Section, E> extends UIBaseElement<DataListAssert
         JList<T> list = new JList<>(core().getLocator());
         list.setParent(parent);
         list.setName(getName() + " list");
-        return list;
+        return list; 
     }
     public Class<E> dataType;
 
