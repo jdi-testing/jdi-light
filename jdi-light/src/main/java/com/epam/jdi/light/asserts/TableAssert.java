@@ -48,7 +48,7 @@ public class TableAssert extends BaseTableAssert<Table, TableAssert> {
          * Make sure that the table has at least a certain number of the specified line
          * @param matchers to compare
          */
-        @JDIAction("Assert that '{name}' has at least '{0}' rows that {0}")
+        @JDIAction("Assert that '{name}' has at least '{0}' rows that are {0}")
         public TableAssert rows(TableMatcher... matchers) {
             jdiAssert(TABLE_MATCHER.execute(table, matchers).size(),
                     greaterThan(table().header().size()*count-1));

@@ -43,7 +43,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      * @param attrName
      * @param condition to compare
      */
-    @JDIAction("Assert that '{name}' attribute '{0}' {1}")
+    @JDIAction("Assert that '{name}' attribute '{0}' is {1}")
     public A attr(String attrName, Matcher<String> condition) {
         jdiAssert(element.getAttribute(attrName), condition);
         return (A) this;
@@ -57,7 +57,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      * @param css
      * @param condition to compare
      */
-    @JDIAction("Assert that '{name}' css '{0}' {1}")
+    @JDIAction("Assert that '{name}' css '{0}' is {1}")
     public A css(String css, Matcher<String> condition) {
         jdiAssert(element.getCssValue(css), condition);
         return (A) this;
@@ -70,7 +70,7 @@ public class IsAssert<A extends IsAssert> extends BaseAssert implements CommonAs
      * Match passed value with the element tag
      * @param condition to compare
      */
-    @JDIAction("Assert that '{name}' tag {0}")
+    @JDIAction("Assert that '{name}' tag is {0}")
     public A tag(Matcher<String> condition) {
         jdiAssert(element.getTagName(), condition);
         return (A) this;

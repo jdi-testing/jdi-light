@@ -82,7 +82,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @param item to compare
      * @return UIListAssert
      */
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction("Assert that '{name}' text is {0}")
     public UIListAssert<T, E> value(E item) {
         return and(hasItem(item));
     }
@@ -92,7 +92,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @param condition to compare
      * @return UIListAssert
      */
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction("Assert that '{name}' text is {0}")
     public UIListAssert<T, E> value(Matcher<String> condition) {
         jdiAssert(print(data.execute(), Object::toString), condition);
         return this;
@@ -103,7 +103,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @param text to compare
      * @return UIListAssert
      */
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction("Assert that '{name}' text is {0}")
     public UIListAssert<T, E> value(String text) {
         elements.clear();
         jdiAssert(select(data.execute(), Object::toString), hasItem(text));
@@ -175,7 +175,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @param condition to compare
      * @return UIListAssert
      */
-    @JDIAction("Assert that '{name}' size {0}")
+    @JDIAction("Assert that '{name}' size is {0}")
     public UIListAssert<T, E> size(Matcher<Integer> condition) {
         elements.clear();
         jdiAssert(elements.size(), condition);
@@ -187,7 +187,7 @@ public class UIListAssert<T extends Section, E> extends IsAssert<UIListAssert<T,
      * @param size to compare
      * @return UIListAssert
      */
-    @JDIAction("Assert that '{name}' size {0}")
+    @JDIAction("Assert that '{name}' size is {0}")
     public UIListAssert<T, E> size(int size) {
         return size(equalTo(size));
     }

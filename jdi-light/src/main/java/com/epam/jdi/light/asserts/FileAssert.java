@@ -42,7 +42,7 @@ public class FileAssert extends BaseAssert {
      * @param text to compare
      * @return FileAssert
      */
-    @JDIAction("Assert that file '{name}' text {0}")
+    @JDIAction("Assert that file '{name}' text is {0}")
     public FileAssert text(Matcher<String> text) {
         boolean result = timer().wait(() -> {
             assertThat(readFileToString(file, "UTF-8"), text); return true; }

@@ -27,7 +27,7 @@ public class ListAssert<T extends BaseUIElement> extends SelectAssert {
      * @param condition to compare
      * @return ListAssert
      */
-    @JDIAction("Assert that all '{name}' texts {0}") @Override
+    @JDIAction("Assert that all '{name}' texts are {0}") @Override
     public ListAssert<T> texts(Matcher<Collection<? extends String>> condition) {
         jdiAssert(map(elements.execute(), WebElement::getText), condition);
         return this;
@@ -39,7 +39,7 @@ public class ListAssert<T extends BaseUIElement> extends SelectAssert {
      * @param condition to compare
      * @return ListAssert
      */
-    @JDIAction("Assert that all '{name}' attributes {0}") @Override
+    @JDIAction("Assert that all '{name}' attributes are {0}") @Override
     public ListAssert<T> attrs(String attrName, Matcher<Collection<? extends String>> condition) {
         jdiAssert(map(elements.execute(), el -> el.getAttribute(attrName)), condition);
         return this;
@@ -51,7 +51,7 @@ public class ListAssert<T extends BaseUIElement> extends SelectAssert {
      * @param condition to compare
      * @return ListAssert
      */
-    @JDIAction("Assert that all '{name}' elements css '{0}' {1}") @Override
+    @JDIAction("Assert that all '{name}' elements css '{0}' is {1}") @Override
     public ListAssert<T> allCss(String css, Matcher<Collection<? extends String>> condition) {
         jdiAssert(map(elements.execute(), el -> el.getCssValue(css)), condition);
         return this;
@@ -62,7 +62,7 @@ public class ListAssert<T extends BaseUIElement> extends SelectAssert {
      * @param condition to compare
      * @return ListAssert
      */
-    @JDIAction("Assert that all '{name}' tags {0}") @Override
+    @JDIAction("Assert that all '{name}' tags are {0}") @Override
     public ListAssert<T> allTags(Matcher<Collection<? extends String>> condition) {
         jdiAssert(map(elements.execute(), WebElement::getTagName), condition);
         return this;
