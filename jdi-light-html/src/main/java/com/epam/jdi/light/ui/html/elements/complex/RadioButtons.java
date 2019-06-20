@@ -2,9 +2,9 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

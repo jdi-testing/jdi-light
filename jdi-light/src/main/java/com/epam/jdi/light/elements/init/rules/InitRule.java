@@ -3,7 +3,6 @@ package com.epam.jdi.light.elements.init.rules;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.tools.func.JFunc1;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.any;

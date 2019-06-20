@@ -3,18 +3,15 @@ package com.epam.jdi.light.asserts.generic.table;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.TableMatcher;
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.tools.func.JFunc1;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static org.hamcrest.Matchers.*;
 
-public class DataTableAssert<D>
-        extends BaseTableAssert<DataTable<?, D>, DataTableAssert<D>> {
-
-    public DataTableAssert(DataTable<?, D>  table) {
-        super(table);
-    }
+public class DataTableAssert<L extends Section, D>
+        extends BaseTableAssert<DataTable<L, D>, DataTableAssert<L, D>> {
 
     /**
      * Check that the table has rows that meet expected condition
@@ -22,7 +19,7 @@ public class DataTableAssert<D>
      * @return DataTableAssert
      */
     @JDIAction("Assert that '{name}' has rows that meet expected condition")
-    public DataTableAssert<D> row(JFunc1<D,Boolean> condition) {
+    public DataTableAssert<L, D> row(JFunc1<D,Boolean> condition) {
         jdiAssert(table().data(condition), not(nullValue()));
         return this;
     }
@@ -33,7 +30,7 @@ public class DataTableAssert<D>
      * @return DataTableAssert
      */
     @JDIAction("Assert that '{name}' has {0}")
-    public DataTableAssert<D> row(D data) {
+    public DataTableAssert<L, D> row(D data) {
         return row(d -> d.equals(data));
     }
 
@@ -57,9 +54,9 @@ public class DataTableAssert<D>
         public int count;
         public String name;
         public String type;
-        DataTableAssert<D> dtAssert;
+        DataTableAssert<L, D> dtAssert;
         boolean exact;
-        private Compare(int count, DataTableAssert<D> dtAssert, boolean exact) {
+        private Compare(int count, DataTableAssert<L, D> dtAssert, boolean exact) {
             this.count = count;
             this.dtAssert = dtAssert;
             this.exact = exact;
@@ -73,7 +70,7 @@ public class DataTableAssert<D>
          * @return DataTableAssert
          */
         @JDIAction("Assert that '{name}' has {type} '{count}' rows that meet expected condition")
-        public DataTableAssert<D> rows(JFunc1<D,Boolean> condition) {
+        public DataTableAssert<L, D> rows(JFunc1<D,Boolean> condition) {
             jdiAssert(exact
                 ? table().datas(condition)
                 : table().datas(condition, count),
@@ -87,7 +84,7 @@ public class DataTableAssert<D>
          * @return DataTableAssert
          */
         @JDIAction("Assert that '{name}' has {type} '{count}' '{0}'")
-        public DataTableAssert<D> rows(D data) {
+        public DataTableAssert<L, D> rows(D data) {
             return rows(d -> d.equals(data));
         }
 
@@ -96,7 +93,7 @@ public class DataTableAssert<D>
          * @param matchers to compare
          */
         @JDIAction("Assert that '{name}' has at least '{0}' rows that {0}")
-        public DataTableAssert<D> rows(TableMatcher... matchers) {
+        public DataTableAssert<L, D> rows(TableMatcher... matchers) {
             jdiAssert(TABLE_MATCHER.execute(table(), matchers).size(),
                     greaterThan(table().header().size()*count-1));
             return dtAssert;

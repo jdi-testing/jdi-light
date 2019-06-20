@@ -402,10 +402,7 @@ public class JDIBase<A extends IsAssert> extends DriverBase
     public String css(String prop) {
         return getCssValue(prop);
     }
-    @JDIAction(level = DEBUG)
-    public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-        return get().getScreenshotAs(outputType);
-    }
+
 
     /**
      * Get the attribute value

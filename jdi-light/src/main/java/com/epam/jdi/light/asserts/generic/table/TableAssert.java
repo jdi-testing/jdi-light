@@ -9,11 +9,6 @@ import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCH
 import static org.hamcrest.Matchers.greaterThan;
 
 public class TableAssert extends BaseTableAssert<Table, TableAssert> {
-
-    public TableAssert(Table table) {
-        super(table);
-    }
-
     public Compare exact(int count) {
         return new Compare(count, this, true);
     }

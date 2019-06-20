@@ -5,10 +5,10 @@ import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.ui.html.elements.annotations.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
+import com.epam.jdi.light.ui.html.elements.annotations.JDropdown;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.WebElement;
 

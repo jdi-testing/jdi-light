@@ -27,7 +27,7 @@ import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.util.Arrays.asList;
 
-public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>> {
+public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, DataTableAssert<L, D>> {
     private Class<L> lineClass;
     private Class<D> dataClass;
 
@@ -443,47 +443,18 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>> 
     }
 
     @Override
-    public DataTableAssert<D>  is() {
-        return new DataTableAssert<>(this);
-    }
-    @Override
-    public DataTableAssert<D>  assertThat() {
-        return is();
-    }
-    @Override
-    public DataTableAssert<D>  has() {
-        return is();
-    }
-    @Override
-    public DataTableAssert<D>  waitFor() {
-        return is();
-    }
-    @Override
-    public DataTableAssert<D>  shouldBe() {
-        return is();
-    }
-    public DataTableAssert<D>  verify() {
-        assertSoft();
-        return is();
+    public DataTableAssert<L, D>  is() {
+        return new DataTableAssert<L, D>().set(this);
     }
 
-    public DataTableAssert<D> is(Matcher<? super List<D>> condition) {
+    public DataTableAssert<L, D>  is(Matcher<? super List<D>> condition) {
         MatcherAssert.assertThat(allData(), condition);
         return is();
     }
-    public DataTableAssert<D> assertThat(Matcher<? super List<D>> condition) {
+    public DataTableAssert<L, D> assertThat(Matcher<? super List<D>> condition) {
         return is(condition);
     }
-    public DataTableAssert<D> has(Matcher<? super List<D>> condition) {
-        return is(condition);
-    }
-    public DataTableAssert<D> waitFor(Matcher<? super List<D>> condition) {
-        return is(condition);
-    }
-    public DataTableAssert<D> shouldBe(Matcher<? super List<D>> condition) {
-        return is(condition);
-    }
-    public DataTableAssert<D> verify(Matcher<? super List<D>> condition) {
+    public DataTableAssert<L, D> verify(Matcher<? super List<D>> condition) {
         assertSoft();
         return is(condition);
     }

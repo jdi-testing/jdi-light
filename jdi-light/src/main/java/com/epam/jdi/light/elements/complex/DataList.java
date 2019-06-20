@@ -6,14 +6,10 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.asserts.core.DataListAssert;
-import com.epam.jdi.light.asserts.core.ListAssert;
-import com.epam.jdi.light.asserts.generic.HasAssert;
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.UIUtils;
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.light.elements.base.HasUIElement;
+import com.epam.jdi.light.elements.base.IListBase;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
@@ -28,27 +24,21 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static java.lang.String.format;
 
-public class DataList<T extends Section, E> extends UIBaseElement<DataListAssert<T, E>>
-        implements IList<T>, SetValue, ISetup, ISelector {
+public class DataList<T extends IListBase & HasUIElement, D> extends TListBase<T, DataListAssert<T, D>> {
 
     private CacheValue<MapArray<String, T>> map = new CacheValue<>(MapArray::new);
     public JList<T> list() {
         JList<T> list = new JList<>(core().getLocator());
         list.setParent(parent);
         list.setName(getName() + " list");
-        return list; 
+        return list;
     }
-    public Class<E> dataType;
+    public Class<D> dataType;
 
     public DataList() {}
     public DataList(Class<T> type) { initClass = type; }
@@ -95,17 +85,17 @@ public class DataList<T extends Section, E> extends UIBaseElement<DataListAssert
                 this::initElement));
     }
 
-    public E getData(String name) {
-        return get(name).asEntity(dataType);
+    public D getData(String name) {
+        return UIUtils.asEntity(get(name), dataType);
     }
-    public E getData(Enum name) {
+    public D getData(Enum name) {
         return getData(getEnumValue(name));
     }
-    public E getData(int index) {
-        return get(index).asEntity(dataType);
+    public D getData(int index) {
+        return UIUtils.asEntity(get(index), dataType);
     }
 
-    public List<E> asData() {
+    public List<D> asData() {
         try {
             if (dataType == null) return null;
             return getMap(1).select((k, v) -> UIUtils.asEntity(v, dataType));
@@ -170,36 +160,25 @@ public class DataList<T extends Section, E> extends UIBaseElement<DataListAssert
      * @param condition to compare
      * @return UIListAsserts
      */
-    /*@JDIAction("Assert that {name} data meet condition")
-    public DataListAssert<T, E> is(Matcher<? super List<E>> condition) {
+    @JDIAction("Assert that {name} data meet condition")
+    public DataListAssert<T, D> is(Matcher<? super List<D>> condition) {
         MatcherAssert.assertThat(asData(), condition);
         return is();
-    }*/
-    public UISelectAssert<UISelectAssert, DataList<T,E>> is() {
-        offCache();
-        return new DataListAssert<>(this, () -> { clear(); return asData(); }, core().toError(), failElement()).set(this);
-    }/*
+    }
+
     @Override
-    public DataListAssert<T, E> is() {
-        return new DataListAssert<>(this, () -> { clear(); return asData(); }, core().toError(), failElement());
-    }*/
-/*
-    public DataListAssert<T, E> assertThat(Matcher<? super List<E>> condition) {
+    public DataListAssert<T, D> is() {
+        offCache();
+        return new DataListAssert<T, D>().set(this);
+    }
+
+    public DataListAssert<T, D> assertThat(Matcher<? super List<D>> condition) {
         return is(condition);
     }
-    public DataListAssert<T, E> has(Matcher<? super List<E>> condition) {
-        return is(condition);
-    }
-    public DataListAssert<T, E> waitFor(Matcher<? super List<E>> condition) {
-        return is(condition);
-    }
-    public DataListAssert<T, E> shouldBe(Matcher<? super List<E>> condition) {
-        return is(condition);
-    }
-    public DataListAssert<T, E> verify(Matcher<? super List<E>> condition) {
+    public DataListAssert<T, D> verify(Matcher<? super List<D>> condition) {
         assertSoft();
         return is(condition);
-    }*/
+    }
     public void setup(Field field) {
         try {
             Type[] types = getGenericTypes(field);
@@ -210,11 +189,16 @@ public class DataList<T extends Section, E> extends UIBaseElement<DataListAssert
                 throw exception("Can't setup DataList generic parameters for field '%s'. Actual more than %s but expected 1 or 2",
                         field.getName(), types.length);
             initClass = types[0].toString().equals("?") ? null : (Class<T>)types[0];
-            dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<E>)types[1];
+            dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>)types[1];
         } catch (Exception ex) {
             throw exception("Can't instantiate List<%s, %s> field '%s'", initClass == null
                             ? "?" : initClass.getSimpleName(), dataType == null ? "?" : dataType.getSimpleName(),
                     field.getName());
         }
+    }
+    @Override
+    public void offCache() {
+        super.offCache();
+        map.useCache(false);
     }
 }

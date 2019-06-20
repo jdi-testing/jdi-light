@@ -1,10 +1,8 @@
 package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 
 import java.util.List;

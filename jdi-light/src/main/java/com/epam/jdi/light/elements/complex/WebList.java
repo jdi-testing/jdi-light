@@ -20,4 +20,8 @@ public class WebList extends JList<UIElement> implements HasUIList {
     public WebList(List<WebElement> elements) {
         core().setWebElements(elements);
     }
+    public WebList noValidation() {
+        core().noValidation();
+        return this;
+    }
 }

@@ -9,6 +9,8 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -77,7 +79,10 @@ public abstract class BaseWebElement<T extends BaseWebElement>
             throw exception("Can't do "+methodName+" for disabled element '"+getName()+"'");
         }
     }
-
+    @JDIAction(level = DEBUG)
+    public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
+        return get().getScreenshotAs(outputType);
+    }
     public T find(String by) {
         return find(defineLocator(by));
     }

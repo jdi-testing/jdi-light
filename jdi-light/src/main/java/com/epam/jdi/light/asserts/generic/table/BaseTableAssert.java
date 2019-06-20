@@ -22,12 +22,6 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
         uiElement.refresh();
         return uiElement;
     }
-
-    public BaseTableAssert(T table) {
-        super();
-        uiElement = table;
-        this.name = table.toError();
-    }
     /**
      * Check that the table is empty
      */

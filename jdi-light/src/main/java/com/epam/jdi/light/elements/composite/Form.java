@@ -381,18 +381,18 @@ public class Form<T> extends Section {
     }
 
     @Override
-    public boolean displayed() {
+    public boolean isDisplayed() {
         try {
-            if (webElement.hasValue())
-                return webElement.get().isDisplayed();
-            if (locator.isEmpty()) {
+            if (core().webElement.hasValue())
+                return core().get().isDisplayed();
+            if (core().locator.isEmpty()) {
                 List<Field> fields = getFieldsInterfaceOf(pageObject, SetValue.class);
                 if (fields.isEmpty())
-                    return get().isDisplayed();
+                    return core().get().isDisplayed();
                 BaseWebElement first = (BaseWebElement) fields.get(0).get(pageObject);
                 return first.isDisplayed();
             }
-            List<WebElement> result = getAll();
+            List<WebElement> result = core().getAll();
             return result.size() == 1 && result.get(0).isDisplayed();
         } catch (Exception ex) { return false; }
     }

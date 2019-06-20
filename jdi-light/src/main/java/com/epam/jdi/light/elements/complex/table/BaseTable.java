@@ -41,8 +41,8 @@ import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThan;
 
-public abstract class BaseTable<T extends BaseTable> extends UIBaseElement<BaseTableAssert>
-        implements ISetup, HasValue, HasCache, HasAssert<BaseTableAssert>, IHasSize {
+public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> extends UIBaseElement<A>
+        implements ISetup, HasValue, HasCache, HasAssert<A>, IHasSize {
     protected By rowLocator = By.xpath("//tr[%s]/td");
     protected By columnLocator = By.xpath("//tr/td[%s]");
     protected By cellLocator = By.xpath("//tr[{1}]/td[{0}]");
@@ -304,7 +304,7 @@ public abstract class BaseTable<T extends BaseTable> extends UIBaseElement<BaseT
         if (!cells.isGotAll()) {
             try {
                 List<WebElement> listOfCells = $$(allCellsLocator, parent)
-                    .noValidation().getAll();
+                    .core().noValidation().getAll();
                 cells.set(new MapArray<>());
                 int k = 0;
                 int j = 1;
@@ -574,10 +574,6 @@ public abstract class BaseTable<T extends BaseTable> extends UIBaseElement<BaseT
         for (int i = 1; i <= count.get(); i++)
             value += "||" + i + "||" + print(map(row(i), TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         return value;
-    }
-
-    public BaseTableAssert is() {
-        return new BaseTableAssert(this);
     }
 
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 
 public class SoftAssert {
     private static Safe<List<Throwable>> listOfErrors = new Safe<>(new ArrayList<>());
@@ -23,7 +24,16 @@ public class SoftAssert {
     public static void assertStrict() {
         setAssertType("strict");
     }
-
+    public static <T> void jdiAssert(List<T> actual, Matcher<? super List<T>> matcher) {
+        try {
+            assertThat(actual, matcher);
+        } catch (Throwable error) {
+            if (IS_SOFT_ASSERT) {
+                listOfErrors.get().add(error);
+            } else
+                throw new AssertionError(error);
+        }
+    }
     public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
         try {
             assertThat(actual, matcher);
