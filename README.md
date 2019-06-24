@@ -9,7 +9,7 @@
 
 ## Documentation
 
-Can be found [here](https://jdi-docs.github.io/jdi-light/#common-elements)
+Can be found [here](https://jdi-docs.github.io/jdi-light/#common-elements)</br>
 For fast start you can go through [tutorial](https://jdi-docs.github.io/jdi-light/?java#tutorial)
 
 ## Introduction
