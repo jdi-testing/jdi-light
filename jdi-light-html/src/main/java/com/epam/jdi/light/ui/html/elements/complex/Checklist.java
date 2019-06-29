@@ -2,6 +2,7 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -230,8 +231,8 @@ public class Checklist extends UIListBase<UISelectAssert> {
      * @return List<String>
      */
     @JDIAction("Get '{name}' values")
-    public List<String> innerValues() {
-        return map(labels(), element -> element.innerText().trim());
+    public List<String> values(TextType type) {
+        return map(labels(), element -> element.text(type).trim());
     }
 
     /**

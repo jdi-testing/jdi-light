@@ -16,7 +16,6 @@ import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class DriverBase implements JDIElement {
-    public static final String DEFAULT_DRIVER = "chrome";
     public String driverName = DRIVER_NAME;
     public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
     public JavascriptExecutor js() { return (JavascriptExecutor) driver(); }
@@ -29,7 +28,6 @@ public class DriverBase implements JDIElement {
     public String varName = "";
     public String typeName = "";
     public String failElement = "";
-    public String failElement() { return failElement; }
     public Object parent;
     protected String context;
     public <T extends JDIElement> T setParent(Object parent) {
@@ -61,7 +59,7 @@ public class DriverBase implements JDIElement {
         if (parent == null) return null;
         if (isClass(parent.getClass(), WebPage.class))
             return (WebPage) parent;
-        if (!isClass(parent.getClass(), JDIBase.class)) return null;
-        return ((JDIBase)parent).getPage();
+        if (!isClass(parent.getClass(), DriverBase.class)) return null;
+        return ((DriverBase)parent).getPage();
     }
 }

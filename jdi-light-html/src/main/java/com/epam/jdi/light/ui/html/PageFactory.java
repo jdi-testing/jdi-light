@@ -16,7 +16,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.PRE_INIT;
  */
 
 public class PageFactory {
-
+/* TODO REMOVE
     public static void initSite(Class<?> site, String driverName) {
         PRE_INIT = HtmlSettings::init;
         com.epam.jdi.light.elements.init.PageFactory.initSite(site, driverName);
@@ -56,5 +56,5 @@ public class PageFactory {
     }
     public static void initElements(FieldDecorator decorator, Object page) {
         initElements(page);
-    }
+    }*/
 }

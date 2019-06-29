@@ -2,7 +2,9 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.UIListBase;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.func.JFunc1;
 
 import java.util.List;
@@ -12,9 +14,16 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 public class Menu extends UIListBase<UISelectAssert> {
     @JDIAction("Select '{0}' in '{name}'")
-    public void select(String value) { list().select(value); }
+    public void select(String value) { list().select(value);}
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) { list().select(index);  }
+
+    @JDIAction(level = DEBUG)
+    public UIElement get(String value) { return list().get(value);}
+    @JDIAction(level = DEBUG)
+    public <TEnum extends Enum> UIElement get(TEnum value) { return list().get(value);}
+    @JDIAction(level = DEBUG)
+    public UIElement get(int index) { return list().get(index);  }
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String... values) {
         list().select(values);
@@ -46,8 +55,8 @@ public class Menu extends UIListBase<UISelectAssert> {
         return list().values();
     }
     @JDIAction(level = DEBUG)
-    public List<String> innerValues() {
-        return list().innerValues();
+    public List<String> values(TextType type) {
+        return list().values(type);
     }
     @JDIAction(level = DEBUG)
     public List<String> listEnabled() { return list().listEnabled(); }

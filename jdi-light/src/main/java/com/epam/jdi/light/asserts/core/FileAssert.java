@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
-import static com.epam.jdi.light.elements.base.JDIBase.timer;
+import static com.epam.jdi.light.elements.base.DriverBase.timer;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static java.util.Objects.requireNonNull;

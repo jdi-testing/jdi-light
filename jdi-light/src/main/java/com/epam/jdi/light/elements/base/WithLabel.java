@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 
 public interface WithLabel extends HasUIElement {
     default Label label() {
-        return new Label().core()
+        return new Label().base()
             .setLocator(By.cssSelector("[for="+ core().attr("id")+"]"))
             .setName(core().getName() + " label");
     }

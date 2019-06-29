@@ -2,27 +2,27 @@ package org.mytests.uiobjects.example.site.custom;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.base.WithLabel;
-import com.epam.jdi.light.ui.html.base.HtmlElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.ui.html.HtmlFactory.$;
-import static com.epam.jdi.light.ui.html.HtmlFactory.$$;
+import static com.epam.jdi.tools.EnumUtils.getEnumValues;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static java.util.Arrays.asList;
 import static org.jsoup.helper.StringUtil.isBlank;
 
 public class MultiDropdown extends UIListBase<UISelectAssert>
-        implements IBaseElement, WithLabel { {
-
-    public MultiDropdown() { setInitClass(HtmlElement.class); }
-    public MultiDropdown(WebElement el) { super(el); setInitClass(HtmlElement.class); }
+        implements IBaseElement, WithLabel {
 
     By expandArrow = By.cssSelector(".caret");
     By values = By.tagName("li");
@@ -30,14 +30,14 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
     By value = By.cssSelector("button");
     By valuesConatiner = By.tagName("ul");
 
-    HtmlElement root() { return $(By.xpath(".."),this).setName("root"); }
-    HtmlElement expander() { return root().find(expandArrow).setName("expandArrow"); }
-    HtmlElement valuesList() { return root().find(valuesConatiner).setName("valuesContainer"); }
-    HtmlElement value(String name) {
+    UIElement root() { return $(By.xpath(".."),this).setName("root"); }
+    UIElement expander() { return root().find(expandArrow).setName("expandArrow"); }
+    UIElement valuesList() { return root().find(valuesConatiner).setName("valuesContainer"); }
+    UIElement value(String name) {
         return root().find(fillByTemplate(valueTemplate, name)).setName("valueTemplate");
     }
-    HtmlElement valueText() { return root().find(value).setName("value"); }
-    List<HtmlElement> allValues() { return root().finds(values); }
+    UIElement valueText() { return root().find(value).setName("value"); }
+    List<UIElement> allValues() { return root().finds(values); }
 
     @JDIAction(level = DEBUG)
     private void expand() {
@@ -49,12 +49,11 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
      * Selects values from parameters
      * @param names String var arg, elements with text to select
      */
-    @Override
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String... names) {
         expand();
         for (String name : names) {
-            HtmlElement value = value(name);
+            UIElement value = value(name);
             if (value.isEnabled())
                 value.click();
         }
@@ -68,7 +67,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
     public void select(int... indexes) {
         expand();
         for (int i = 1; i <= indexes.length; i++) {
-            HtmlElement value = $$(values, this).get(indexes[i]);
+            UIElement value = $$(values, this).get(indexes[i]);
             if (value.isEnabled())
                 value.click();
         }
@@ -88,7 +87,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
         expand();
         List<String> listNames = map(names, String::trim);
         for (String name : values()) {
-            HtmlElement value = value(name);
+            UIElement value = value(name);
             if (value.isDisabled()) continue;
             boolean valueSelected = value.find("input").isSelected();
             if (valueSelected && !listNames.contains(name.trim())
@@ -107,7 +106,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
         expand();
         List<String> listNames = asList(names);
         for (String name : values()) {
-            HtmlElement value = value(name);
+            UIElement value = value(name);
             if (value.isDisabled()) continue;
             if (value.isSelected() && listNames.contains(value.getText().trim())
                     || !value.isSelected() && !listNames.contains(value.getText().trim()))
@@ -131,7 +130,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
         expand();
         List<Integer> listIndexes = toList(indexes);
         for (int i = 1; i <= values().size(); i++) {
-            HtmlElement value = allValues().get(i-1);
+            UIElement value = allValues().get(i-1);
             if (value.isDisabled()) continue;
             if (value.isSelected() && !listIndexes.contains(i)
                     || !value.isSelected() && listIndexes.contains(i))
@@ -148,7 +147,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
         expand();
         List<Integer> listIndexes = toList(indexes);
         for (int i = 1; i <= values().size(); i++) {
-            HtmlElement value = allValues().get(i-1);
+            UIElement value = allValues().get(i-1);
             if (value.isDisabled()) continue;
             if (value.isSelected() && listIndexes.contains(i)
                 || !value.isSelected() && !listIndexes.contains(i))
@@ -162,9 +161,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
      */
     @JDIAction("Get '{name}' checked values")
     public List<String> checked() {
-        return ifSelect(allValues(),
-                HtmlElement::isSelected,
-                HtmlElement::getText);
+        return ifSelect(allValues(), UIElement::isSelected, UIElement::getText);
     }
 
     /**
@@ -191,7 +188,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
      */
     @JDIAction("Get '{name}' list values")
     public List<String> values() {
-        return map(allValues(), HtmlElement::getText);
+        return map(allValues(), UIElement::getText);
     }
 
     /**
@@ -199,8 +196,8 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
      * @return List<String>
      */
     @JDIAction("Get '{name}' values")
-    public List<String> innerValues() {
-        return map(allValues(), HtmlElement::innerText);
+    public List<String> values(TextType type) {
+        return map(allValues(), o -> o.text(type));
     }
 
     /**
@@ -209,9 +206,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
      */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
-        return ifSelect(allValues(),
-                HtmlElement::isEnabled,
-                HtmlElement::getText);
+        return ifSelect(allValues(), UIElement::isEnabled, UIElement::getText);
     }
 
     /**
@@ -220,9 +215,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
      */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {
-        return ifSelect(allValues(),
-                HtmlElement::isDisabled,
-                HtmlElement::getText);
+        return ifSelect(allValues(), UIElement::isDisabled, UIElement::getText);
     }
 
     @Override
@@ -253,25 +246,5 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
     @Override
     public String getValue() {
         return selected();
-    }
-
-    public SelectAssert is() {
-        return new SelectAssert(() -> this);
-    }
-    public SelectAssert assertThat() {
-        return is();
-    }
-    public SelectAssert has() {
-        return is();
-    }
-    public SelectAssert waitFor() {
-        return is();
-    }
-    public SelectAssert shouldBe() {
-        return is();
-    }
-    public SelectAssert verify() {
-        assertSoft();
-        return is();
     }
 }

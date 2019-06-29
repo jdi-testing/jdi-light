@@ -4,8 +4,6 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.light.ui.html.annotations.FillValue;
-import com.epam.jdi.light.ui.html.annotations.VerifyValue;
 import com.epam.jdi.tools.func.JAction4;
 import com.epam.jdi.tools.func.JFunc3;
 import io.github.com.custom.FirstTokenCapitalisation;

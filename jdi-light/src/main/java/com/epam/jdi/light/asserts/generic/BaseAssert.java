@@ -12,7 +12,7 @@ public class BaseAssert<E extends JDIElement> {
 
     public BaseAssert() { }
     public BaseAssert(E element) {
-        this(element.getName(), element.failElement());
+        this(element.getName(), element.getName());
         this.uiElement = element;
     }
     public BaseAssert(String name, String failElement) {

@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.TextType.INNER;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
@@ -23,7 +25,7 @@ import static java.util.Arrays.asList;
 public class Selector extends UIBaseElement<UISelectAssert> implements ISelector, SetValue {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
     protected Select select() {
-        return core().select();
+        return core().asSelect();
     }
 
     /**
@@ -129,7 +131,7 @@ public class Selector extends UIBaseElement<UISelectAssert> implements ISelector
     }
     @JDIAction("Is '{0}' selected")
     public boolean selected(String value) {
-        return core().locator.isTemplate()
+        return base().locator.isTemplate()
             ? new UIElement(core().get(value)).isSelected()
             : selected().trim().equalsIgnoreCase(value.trim());
     }
@@ -155,8 +157,8 @@ public class Selector extends UIBaseElement<UISelectAssert> implements ISelector
      * @return List
      */
     @JDIAction(level = DEBUG)
-    public List<String> innerValues() {
-        return map(select().getOptions(), w -> $(w).innerText());
+    public List<String> values(TextType type) {
+        return map(select().getOptions(), w -> $(w).text(INNER));
     }
     public int size() { return select().getOptions().size(); }
 

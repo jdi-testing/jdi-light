@@ -2,6 +2,7 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -121,12 +122,12 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBa
     }
 
     /**
-     * Get the elements attribute 'innerValue'
+     * Get values as text of specific type
      * @return List
      */
     @JDIAction("Get '{name}' values")
-    public List<String> innerValues() {
-        return map(getSelect("values").getOptions(), el -> $(el).innerText());
+    public List<String> values(TextType type) {
+        return map(getSelect("values").getOptions(), el -> $(el).text(type));
     }
     public List<String> listEnabled() {
         return ifSelect(getSelect("listEnabled").getAllSelectedOptions(),

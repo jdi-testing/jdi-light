@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
@@ -31,7 +30,7 @@ public class Line implements IList<String> {
     public Line(List<UIElement> elements, List<String> headers) {
         this.elements = elements;
         this.headers = headers;
-        this.dataMap = () -> new MapArray<>(headers, LinqUtils.map(elements, BaseWebElement::getText));
+        this.dataMap = () -> new MapArray<>(headers, LinqUtils.map(elements, UIElement::getText));
     }
     public static Line initLine(List<String> list, List<String> headers) {
         Line line = new Line();

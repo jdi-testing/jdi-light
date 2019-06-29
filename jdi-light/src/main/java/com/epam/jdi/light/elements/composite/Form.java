@@ -2,7 +2,6 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
@@ -69,7 +68,10 @@ public class Form<T> extends Section {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
-                UIElement element = new UIElement().setParent(this).setName(pair.key);
+                UIElement element = new UIElement(b -> {
+                    b.parent = this;
+                    b.name = pair.key;
+                });
                 fillAction(null, element, pageObject, pair.value);
             }
             return;
@@ -383,16 +385,16 @@ public class Form<T> extends Section {
     @Override
     public boolean isDisplayed() {
         try {
-            if (core().webElement.hasValue())
+            if (base().webElement.hasValue())
                 return core().get().isDisplayed();
-            if (core().locator.isEmpty()) {
+            if (base().locator.isEmpty()) {
                 List<Field> fields = getFieldsInterfaceOf(pageObject, SetValue.class);
                 if (fields.isEmpty())
                     return core().get().isDisplayed();
                 BaseWebElement first = (BaseWebElement) fields.get(0).get(pageObject);
                 return first.isDisplayed();
             }
-            List<WebElement> result = core().getAll();
+            List<WebElement> result = base().getAll();
             return result.size() == 1 && result.get(0).isDisplayed();
         } catch (Exception ex) { return false; }
     }

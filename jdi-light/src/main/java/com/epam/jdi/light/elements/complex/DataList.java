@@ -33,9 +33,9 @@ public class DataList<T extends IListBase & HasUIElement, D> extends TListBase<T
 
     private CacheValue<MapArray<String, T>> map = new CacheValue<>(MapArray::new);
     public JList<T> list() {
-        JList<T> list = new JList<>(core().getLocator());
-        list.setParent(parent);
-        list.setName(getName() + " list");
+        JList<T> list = new JList<>(base().getLocator());
+        list.base().setParent(base().parent);
+        list.base().setName(getName() + " list");
         return list;
     }
     public Class<D> dataType;
@@ -75,7 +75,7 @@ public class DataList<T extends IListBase & HasUIElement, D> extends TListBase<T
     protected MapArray<String, T> getMap(int minAmount) {
         if (actualMapValue())
             return map.get();
-        List<WebElement> els = core().getList(minAmount);
+        List<WebElement> els = base().getList(minAmount);
         return map.set(elements.hasValue()
             ? new MapArray<>(
                 LinqUtils.select(els, this::elementTitle),

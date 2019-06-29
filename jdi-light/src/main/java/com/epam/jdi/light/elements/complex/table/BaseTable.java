@@ -3,7 +3,6 @@ package com.epam.jdi.light.elements.complex.table;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IHasSize;
@@ -85,7 +84,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
 
     public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
     private WebList headerUI() {
-        return $$(headerLocator, this).setName(getName() + " header");
+        return $$(headerLocator, this).core().setName(getName() + " header");
     }
     protected List<String> getHeader() {
         return LinqUtils.select(headerUI(), UIElement::getText);
@@ -116,7 +115,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         if (columns.get().any())
             return columns.get().get(0).value.size();
         WebList firstColumn = $$(fillByTemplate(columnLocator, 1), this)
-            .setName(getName() + " rows header");
+            .core().setName(getName() + " rows header");
         firstColumn.noValidation();
         return firstColumn.size();
     }
@@ -226,7 +225,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
 
     protected List<UIElement> getRow(int rowNum) {
         List<UIElement> elements = getRowByIndex(getRowIndex(rowNum)).elements(size());
-        elements = where(elements, JDIBase::isDisplayed);
+        elements = where(elements, UIElement::isDisplayed);
         List<UIElement> result = new ArrayList<>();
         if (firstColumnIndex > 1 || columnsMapping.length > 0) {
             for (int i = 1; i <= header().size(); i++)
@@ -275,7 +274,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         List<String> header = asList(j.header());
 
         if (isNotBlank(j.root()))
-            core().setLocator(defineLocator(j.root()));
+            base().setLocator(defineLocator(j.root()));
         if (isNotBlank(j.row()))
             this.rowLocator = defineLocator(j.row());
         if (isNotBlank(j.column()))
@@ -303,8 +302,8 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     public T getTable() {
         if (!cells.isGotAll()) {
             try {
-                List<WebElement> listOfCells = $$(allCellsLocator, parent)
-                    .core().noValidation().getAll();
+                List<WebElement> listOfCells = $$(allCellsLocator, core().parent)
+                    .base().noValidation().base().getAll();
                 cells.set(new MapArray<>());
                 int k = 0;
                 int j = 1;

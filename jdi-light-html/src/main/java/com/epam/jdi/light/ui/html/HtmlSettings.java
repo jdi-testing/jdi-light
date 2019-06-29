@@ -5,11 +5,7 @@ package com.epam.jdi.light.ui.html;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.base.BaseWebElement;
-import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.WebElement;
@@ -19,10 +15,8 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.UIUtils.*;
 import static com.epam.jdi.light.settings.WebSettings.initialized;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.ReflectionUtils.getFieldsExact;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 
 public class HtmlSettings {
 
@@ -55,25 +49,19 @@ public class HtmlSettings {
                 List<Field> fields = getFieldsExact(obj, Button.class);
                 if (fields.size() == 0)
                     fields = getFieldsExact(obj, WebElement.class, UIElement.class);
-                switch (fields.size()) {
+                List<UIElement> buttons = select(fields, f -> {
+                    Object value = getValueField(f, obj);
+                    return isClass(value.getClass(), Button.class)
+                        ? ((Button) value).core() : (UIElement) value;
+                });
+                switch (buttons.size()) {
                     case 0:
                         return GET_DEFAULT_BUTTON.execute(obj, buttonName);
                     case 1:
-                        return (BaseWebElement) getValueField(fields.get(0), obj);
+                        return buttons.get(0);
                     default:
-                        return getButtonByName(fields, obj, buttonName);
+                        return getButtonByName(buttons, obj, buttonName);
                 }
-            };
-            DataList.GET_TITLE_FIELD_NAME = list -> {
-                Field[] fields = list.classType.getFields();
-                Field expectedField = first(fields, f -> f.isAnnotationPresent(Title.class));
-                if (expectedField != null)
-                    return expectedField.getName();
-                List<Field> titles = filter(fields,
-                    f -> f.getType() == Label.class);
-                return titles.size() == 1
-                        ? titles.get(0).getName()
-                        : null;
             };
         }
     }

@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 
 public class Label extends UIBaseElement<UIAssert> {
@@ -14,7 +15,7 @@ public class Label extends UIBaseElement<UIAssert> {
         return element.getText();
     }
     @JDIAction("Get '{name}' text")
-    public String innerText() {
-        return element.innerText();
+    public String text(TextType type) {
+        return core().text(type);
     }
 }

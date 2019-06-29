@@ -2,6 +2,7 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.base.WithLabel;
@@ -190,18 +191,18 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
     }
 
     /**
-     * Get the elements attribute 'innerValue'
+     * Get values as text of the specific type
      * @return List
      */
     @JDIAction("Get '{name}' values")
-    public List<String> innerValues() {
+    public List<String> values(TextType type) {
         List<String> result = new ArrayList<>();
         if (list() == null && core().getTagName().contains("select"))
-            return ds().innerValues();
+            return ds().values(type);
         if (list() != null) {
             if (!list().hasAny(UIElement::isDisplayed))
                 click();
-            result = list().innerValues();
+            result = list().values(type);
             if (list().hasAny(UIElement::isDisplayed))
                 click();
         }

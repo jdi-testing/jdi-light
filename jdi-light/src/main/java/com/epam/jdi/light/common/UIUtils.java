@@ -5,7 +5,6 @@ package com.epam.jdi.light.common;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.INamed;
@@ -68,25 +67,24 @@ public final class UIUtils {
 
     public static JFunc2<Object, String, UIElement> GET_DEFAULT_BUTTON = (obj, buttonName) -> $("[type=submit]", obj);
 
-    public static JFunc2<Object, String, BaseWebElement> GET_BUTTON = (obj, buttonName) -> {
+    public static JFunc2<Object, String, UIElement> GET_BUTTON = (obj, buttonName) -> {
         List<Field> fields = getFieldsExact(obj, WebElement.class, UIElement.class);
         switch (fields.size()) {
             case 0:
                 return GET_DEFAULT_BUTTON.execute(obj, buttonName);
             case 1:
-                return (BaseWebElement) getValueField(fields.get(0), obj);
+                return (UIElement) getValueField(fields.get(0), obj);
             default:
-                Collection<BaseWebElement> buttons = select(fields, f -> (BaseWebElement) getValueField(f, obj));
-                BaseWebElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
+                Collection<UIElement> buttons = select(fields, f -> (UIElement) getValueField(f, obj));
+                UIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
                 if (button == null)
                     throw exception("Can't find button '%s' for Element '%s'", buttonName, obj);
                 return button;
         }
     };
 
-    public static BaseWebElement getButtonByName(List<Field> fields, Object obj, String buttonName) {
-        Collection<BaseWebElement> buttons = select(fields, f -> (BaseWebElement) getValueField(f, obj));
-        BaseWebElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
+    public static UIElement getButtonByName(List<UIElement> buttons, Object obj, String buttonName) {
+        UIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
         if (button == null)
             throw exception("Can't find button '%s' for Element '%s'", buttonName, obj);
         return button;

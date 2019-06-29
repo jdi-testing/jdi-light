@@ -1,6 +1,5 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.BaseWebElement;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;

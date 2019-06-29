@@ -18,10 +18,10 @@ public class WebList extends JList<UIElement> implements HasUIList {
     public WebList() {}
     public WebList(By locator) { super(locator);}
     public WebList(List<WebElement> elements) {
-        core().setWebElements(elements);
+        base().setWebElements(elements);
     }
     public WebList noValidation() {
-        core().noValidation();
+        base().noValidation();
         return this;
     }
 }

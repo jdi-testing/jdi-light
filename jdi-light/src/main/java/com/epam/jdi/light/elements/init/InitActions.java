@@ -1,9 +1,6 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.DriverBase;
-import com.epam.jdi.light.elements.base.IBaseElement;
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.JDIElement;
+import com.epam.jdi.light.elements.base.*;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -41,7 +38,6 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
@@ -85,53 +81,50 @@ public class InitActions {
     );
 
     public static MapArray<String, SetupRule> SETUP_RULES = map(
-        $("Element", sRule(info -> isClass(info.instance.getClass(), JDIBase.class),
+        $("Element", sRule(info -> isInterface(info.instance.getClass(), HasUIElement.class),
             InitActions::elementSetup)),
-        $("ISetup", sRule(info -> isInterface(info.instance.getClass(), ISetup.class)
-                || hasSetupValue(info),
-            info -> ((ISetup)info.instance).setup(info.field))),
+        $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class),
             InitActions::defaultSetup)),
-        $("Section", sRule(info -> isClass(info.instance.getClass(), Section.class),
-            InitActions::elementSetup)),
         $("PageObject", sRule(info -> isPageObject(info.instance.getClass()),
             PageFactory::initElements))
     );
 
-    private static boolean hasSetupValue(SiteInfo info) {
+    private static boolean isSetupValue(SiteInfo info) {
         try {
+            if (isInterface(info.instance.getClass(), ISetup.class))
+                return true;
             Object value = info.field.get(info.parent);
             if (value == null) return false;
             return isInterface(value.getClass(), ISetup.class);
         } catch (Exception ex) {return false; }
     }
+    private static DriverBase asUIBase(SiteInfo info) {
+        if (isClass(info.instance.getClass(), DriverBase.class))
+            return (DriverBase) info.instance;
+        if (isInterface(info.instance.getClass(), HasUIElement.class))
+            return  ((HasUIElement) info.instance).core();
+        throw exception("Can't setup '%s'. Instance should implement HasUIElement interface", info.name());
+    }
 
     public static void defaultSetup(SiteInfo info) {
-        String parentName = Switch(info).get(
-            Case(i-> i.parent != null,
-                i -> i.parent.getClass().getSimpleName()),
-            Case(i-> i.parentClass != null,
-                i -> i.parentClass.getSimpleName()),
-            Default(null)
-        );
-        DriverBase jdi = (DriverBase) info.instance;
-        jdi.setName(info.field, parentName);
-        jdi.parent = info.parent;
+        DriverBase jdi = asUIBase(info);
+        jdi.setName(info.field, info.parentName());
+        jdi.setParent(info.parent);
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
-        info.instance = jdi;
     }
-    public static void elementSetup(SiteInfo info) {
-        defaultSetup(info);
-        JDIBase jdi = (JDIBase) info.instance;
+
+    public static HasUIElement elementSetup(SiteInfo info) {
+        HasUIElement jdi = defaultSetup(info);
         By locator = getLocatorFromField(info.field);
-        if (locator != null) {
-            jdi.setLocator(locator);
-        }
+        if (locator != null)
+            jdi.core().setLocator(locator);
         if (info.field.getAnnotation(Root.class) != null)
-            jdi.locator.isRoot = true;
+            jdi.core().locator.isRoot = true;
         if (hasAnnotation(info.field, Frame.class))
-            jdi.setFrame(getFrame(info.field.getAnnotation(Frame.class)));
+            jdi.core().setFrame(getFrame(info.field.getAnnotation(Frame.class)));
         info.instance = jdi;
+        return jdi;
     }
 
     private static By getLocatorFromField(Field field) {

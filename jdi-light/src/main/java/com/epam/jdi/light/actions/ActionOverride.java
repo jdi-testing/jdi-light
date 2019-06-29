@@ -1,5 +1,6 @@
 package com.epam.jdi.light.actions;
 
+import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
@@ -22,7 +23,7 @@ public class ActionOverride {
                 && jp.getSignature().getName().equals(actionName), func);
     }
     private static String getJpTypeName(ProceedingJoinPoint jp) {
-        return ((JDIBase)jp.getThis()).typeName;
+        return ((DriverBase)jp.getThis()).typeName;
     }
     public static void OverrideAction(JFunc1<ProceedingJoinPoint, Boolean> condition, JAction1<JDIBase> action) {
         OverrideFunction(condition, jdi -> { action.execute(jdi); return null; });

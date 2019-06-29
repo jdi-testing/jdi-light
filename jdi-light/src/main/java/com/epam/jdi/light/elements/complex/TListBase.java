@@ -7,9 +7,11 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.HasUIElement;
 import com.epam.jdi.light.elements.base.IListBase;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.interfaces.SetValue;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.TextType.INNER;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.elements.init.PageFactory.initFieldUsingRules;
 import static com.epam.jdi.light.elements.init.PageFactory.setupFieldUsingRules;
@@ -45,7 +48,7 @@ class TListBase<T extends IListBase & HasUIElement, A extends UISelectAssert>
     protected CacheValue<List<T>> elements = new CacheValue<>();
 
     public TListBase() {}
-    public TListBase(By locator) { core().setLocator(locator); }
+    public TListBase(By locator) { base().setLocator(locator); }
     public TListBase(List<WebElement> elements) {
         this.elements.setForce(LinqUtils.map(elements, this::initElement));
     }
@@ -53,7 +56,7 @@ class TListBase<T extends IListBase & HasUIElement, A extends UISelectAssert>
      * @param minAmount
      * @return List
      */
-    protected Class<?> initClass = UIElement.class;
+    public Class<?> initClass = UIElement.class;
     public void setInitClass(Class<T> listClass) {
         initClass = listClass;
     }
@@ -62,14 +65,14 @@ class TListBase<T extends IListBase & HasUIElement, A extends UISelectAssert>
     public List<T> elements(int minAmount) {
         if (elements.hasValue() && isActual() && elements.get().size() >= minAmount)
             return elements.get();
-        if (core().getLocator().toString().contains("%s"))
+        if (base().getLocator().toString().contains("%s"))
             throw exception("You call method that can't be used with template locator. " +
-                    "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(core().getLocator()));
-        int length = core().getList(minAmount).size();
+                    "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(base().getLocator()));
+        int length = base().getList(minAmount).size();
         List<T> result = new ArrayList<>();
         for (int i=0; i < length; i++) {
             int j = i;
-            result.add(initElement(() -> (WebElement) core().getList(minAmount).get(j)));
+            result.add(initElement(() -> (WebElement) base().getList(minAmount).get(j)));
         }
         return this.elements.set(result);
     }
@@ -81,15 +84,15 @@ class TListBase<T extends IListBase & HasUIElement, A extends UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public T get(String value) {
-        if (core().getLocator().toString().contains("%s")) {
-            return initElement(() -> core().get(value)).setName(value);
+        if (base().getLocator().toString().contains("%s")) {
+            return initElement(() -> core().get(value)).base().setName(value);
         }
         refresh();
         T el = first(e -> elementTitle(e.core()).equals(value));
         if (el == null)
             throw exception(NO_ELEMENTS_FOUND, value);
-        el.setName(value);
-        el.core().setGetFunc(() -> first(e -> e.getText().equals(value)));
+        el.base().setName(value);
+        el.base().setGetFunc(() -> first(e -> e.getText().equals(value)).core().get());
         return el;
     }
 
@@ -97,11 +100,14 @@ class TListBase<T extends IListBase & HasUIElement, A extends UISelectAssert>
         return get(getEnumValue(name));
     }
 
-    public static JFunc1<TListBase, String> GET_TITLE_FIELD_NAME = list -> {
-        Field[] fields = list.initClass.getFields();
-        Field expectedFields = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
-        return expectedFields != null
-                ? expectedFields.getName()
+    public static JFunc1<Field[], String> GET_TITLE_FIELD_NAME = fields -> {
+        Field expectedField = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
+        if (expectedField != null)
+            return expectedField.getName();
+        List<Field> titles = LinqUtils.filter(fields,
+                f -> f.getType() == Label.class);
+        return titles.size() == 1
+                ? titles.get(0).getName()
                 : null;
     };
 
@@ -109,7 +115,7 @@ class TListBase<T extends IListBase & HasUIElement, A extends UISelectAssert>
 
     protected String elementTitle(WebElement el) {
         if (titleFieldName == null)
-            titleFieldName = GET_TITLE_FIELD_NAME.execute(this);
+            titleFieldName = GET_TITLE_FIELD_NAME.execute(initClass.getFields());
         return titleFieldName == null
                 ? el.getText()
                 : getElementTitle(el, titleFieldName);
@@ -130,7 +136,7 @@ class TListBase<T extends IListBase & HasUIElement, A extends UISelectAssert>
         if (index < 0)
             throw exception("Can't get element with index '%s'. Index should be 0 or more", index);
         String name = format("%s[%s]", getName(), index);
-        if (core().getLocator().toString().contains("%s")) {
+        if (base().getLocator().toString().contains("%s")) {
             WebElement element;
             try {
                 element = core().get(index);
@@ -139,9 +145,9 @@ class TListBase<T extends IListBase & HasUIElement, A extends UISelectAssert>
                     "Maybe locator is wrong or you need to get element by name. Exception: %s",
                         index, ex.getMessage());
             }
-            return initElement(element).setName(name);
+            return initElement(element).base().setName(name);
         }
-        return elements(index).get(index).setName(name);
+        return elements(index).get(index).base().setName(name);
     }
 
     /**
@@ -284,14 +290,14 @@ class TListBase<T extends IListBase & HasUIElement, A extends UISelectAssert>
 
     public List<String> values() {
         refresh();
-        core().noValidation();
+        base().noValidation();
         return map(T::getText);
     }
 
-    public List<String> innerValues() {
+    public List<String> values(TextType type) {
         refresh();
-        core().noValidation();
-        return map(T::innerText);
+        base().noValidation();
+        return map(t -> t.text(type));
     }
 
     @Override
@@ -364,14 +370,14 @@ class TListBase<T extends IListBase & HasUIElement, A extends UISelectAssert>
     protected T initElement(WebElement webElement) {
         try {
             T result = initElement();
-            result.core().setWebElement(webElement);
+            result.base().setWebElement(webElement);
             return result;
         } catch (Exception ex) { throw exception("Can't init new element for list"); }
     }
     protected T initElement(JFunc<WebElement> func) {
         try {
             T result = initElement();
-            result.core().setGetFunc(func);
+            result.base().setGetFunc(func);
             return result;
         } catch (Exception ex) { throw exception("Can't init new element for list"); }
     }
@@ -379,10 +385,10 @@ class TListBase<T extends IListBase & HasUIElement, A extends UISelectAssert>
         try {
             if (initClass == null)
                 throw exception("Can't init List of UI Elements. Class Type is null");
-            SiteInfo info = new SiteInfo(driverName).set(s -> {
+            SiteInfo info = new SiteInfo(base().driverName).set(s -> {
                 s.cl = initClass;
                 s.name = getName();
-                s.parent = parent;
+                s.parent = base().parent;
             });
             initFieldUsingRules(info);
             if (info.instance != null)

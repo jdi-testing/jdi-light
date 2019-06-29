@@ -1,44 +1,26 @@
 package com.epam.jdi.light.asserts.core;
 
-import com.epam.jdi.light.asserts.generic.BaseAssert;
 import com.epam.jdi.light.asserts.generic.CommonAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseWebElement;
-import com.epam.jdi.light.elements.base.IWebBaseElement;
-import com.epam.jdi.tools.Timer;
+import com.epam.jdi.light.elements.common.UIElement;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
-public class IsAssert<A extends IsAssert, E extends IWebBaseElement> extends BaseAssert<E>
-        implements CommonAssert<A> {
-
-    public IsAssert(E element) {
-        super(element);
-    }
-
-    private BaseWebElement toBaseUIElement(String action) {
-        if (!isClass(uiElement.getClass(), BaseWebElement.class))
-            throw exception("%s is not a BaseWebElement. %s assert is only allowed for elements that extend BaseWebElement",
-                    uiElement.getName(), action);
-        return (BaseWebElement) uiElement;
-    }
-
+public class IsAssert extends UIAssert<IsAssert, UIElement> implements CommonAssert<IsAssert> {
     /**
      * Match passed value with the element text
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' text {0}")
-    public A text(Matcher<String> condition) {
-        jdiAssert(toBaseUIElement("text").getText(), condition);
-        return (A) this;
+    public IsAssert text(Matcher<String> condition) {
+        jdiAssert(uiElement.getText(), condition);
+        return this;
     }
-    public A text(String text) {
+    public IsAssert text(String text) {
         return text(is(text));
     }
     /**
@@ -47,11 +29,11 @@ public class IsAssert<A extends IsAssert, E extends IWebBaseElement> extends Bas
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' attribute '{0}' {1}")
-    public A attr(String attrName, Matcher<String> condition) {
+    public IsAssert attr(String attrName, Matcher<String> condition) {
         jdiAssert(uiElement.getAttribute(attrName), condition);
-        return (A) this;
+        return this;
     }
-    public A attr(String attrName, String value) {
+    public IsAssert attr(String attrName, String value) {
         return attr(attrName, is(value));
     }
 
@@ -61,11 +43,11 @@ public class IsAssert<A extends IsAssert, E extends IWebBaseElement> extends Bas
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' css '{0}' {1}")
-    public A css(String css, Matcher<String> condition) {
+    public IsAssert css(String css, Matcher<String> condition) {
         jdiAssert(uiElement.getCssValue(css), condition);
-        return (A) this;
+        return this;
     }
-    public A css(String css, String value) {
+    public IsAssert css(String css, String value) {
         return css(css, is(value));
     }
 
@@ -74,11 +56,11 @@ public class IsAssert<A extends IsAssert, E extends IWebBaseElement> extends Bas
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' tag {0}")
-    public A tag(Matcher<String> condition) {
+    public IsAssert tag(Matcher<String> condition) {
         jdiAssert(uiElement.getTagName(), condition);
-        return (A) this;
+        return this;
     }
-    public A css(String tagName) {
+    public IsAssert css(String tagName) {
         return tag(is(tagName));
     }
 
@@ -87,7 +69,7 @@ public class IsAssert<A extends IsAssert, E extends IWebBaseElement> extends Bas
      * @param className to compare
      */
     @JDIAction("Assert that '{name}' has css class {0}")
-    public A hasClass(String className) {
+    public IsAssert hasClass(String className) {
         return cssClass(containsString(className));
     }
 
@@ -96,90 +78,31 @@ public class IsAssert<A extends IsAssert, E extends IWebBaseElement> extends Bas
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' css class {0}")
-    public A cssClass(Matcher<String> condition) {
+    public IsAssert cssClass(Matcher<String> condition) {
         jdiAssert(uiElement.getAttribute("class"), condition);
-        return (A) this;
+        return this;
     }
-    public A cssClass(String className) {
+    public IsAssert cssClass(String className) {
         return cssClass(is(className));
     }
 
-    /**
-     * Check that the element is displayed
-     */
-    @JDIAction("Assert that '{name}' is displayed")
-    public A displayed() {
-        jdiAssert(uiElement.isDisplayed() ? "displayed" : "hidden", is("displayed"));
-        return (A) this;
-    }
-
-    /**
-     * Check that the element is disappeared
-     */
-    @JDIAction("Assert that '{name}' is disappeared")
-    public A disappear() {
-        jdiAssert(uiElement.isHidden() ? "disappeared" : "displayed", is("disappeared"));
-        return (A) this;
-    }
-
-    /**
-     * Check that the element is hidden
-     */
-    @JDIAction("Assert that '{name}' is hidden")
-    public A hidden() {
-        jdiAssert(uiElement.isHidden() ? "hidden" : "displayed", is("hidden"));
-        return (A) this;
-    }
-
-    public A notAppear() {
-        return notAppear(TIMEOUT.get());
-    }
-
-    /**
-     * Check that the element doesn't appear for the specified time
-     * @param timeoutSec
-     */
-    @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
-    public A notAppear(int timeoutSec) {
-        boolean result = new Timer(timeoutSec * 1000)
-                .wait(() -> uiElement.isDisplayed());
-        jdiAssert(result ? "displayed" : "hidden", is("hidden"));
-        return (A) this;
-    }
 
     /**
      * Check that the element is selected
      */
     @JDIAction("Assert that '{name}' is selected")
-    public A selected() {
-        jdiAssert(toBaseUIElement("selected").isSelected() ? "selected" : "not selected", is("selected"));
-        return (A) this;
+    public IsAssert selected() {
+        jdiAssert(uiElement.isSelected() ? "selected" : "not selected", is("selected"));
+        return this;
     }
 
     /**
      * Check that the element is deselected
      */
     @JDIAction("Assert that '{name}' is deselected")
-    public A deselected() {
-        jdiAssert(toBaseUIElement("deselected").isSelected() ? "selected" : "not selected", is("not selected"));
-        return (A) this;
+    public IsAssert deselected() {
+        jdiAssert(uiElement.isSelected() ? "selected" : "not selected", is("not selected"));
+        return this;
     }
 
-    /**
-     * Check that the element is enabled
-     */
-    @JDIAction("Assert that '{name}' is enabled")
-    public A enabled() {
-        jdiAssert(uiElement.isEnabled() ? "enabled" : "disabled", is("enabled"));
-        return (A) this;
-    }
-
-    /**
-     * Check that the element is disabled
-     */
-    @JDIAction("Assert that '{name}' is disabled")
-    public A disabled() {
-         jdiAssert(uiElement.isEnabled() ? "enabled" : "disabled", is("disabled"));
-        return (A) this;
-    }
 }
