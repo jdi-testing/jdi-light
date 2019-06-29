@@ -16,6 +16,11 @@ import static org.hamcrest.Matchers.*;
 public class UISelectAssert<A extends UISelectAssert, E extends ISelector> extends UIAssert<A, E> {
 
     @JDIAction("Assert that '{0}' option selected for '{name}'")
+    public A selected(Matcher<String> condition) {
+        jdiAssert(uiElement.selected(), condition);
+        return (A) this;
+    }
+    @JDIAction("Assert that '{0}' option selected for '{name}'")
     public A selected(String option) {
         jdiAssert(uiElement.selected(option), is(true));
         return (A) this;
@@ -23,7 +28,23 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     public <TEnum extends Enum> UISelectAssert selected(TEnum option) {
         return selected(getEnumValue(option));
     }
-
+    public A value(Matcher<String> condition) {
+        return selected(condition);
+    }
+    @Override
+    public A text(Matcher<String> condition) {
+        return selected(condition);
+    }
+    public A value(String condition) {
+        return selected(condition);
+    }
+    @Override
+    public A text(String condition) {
+        return selected(condition);
+    }
+    public <TEnum extends Enum> UISelectAssert value(TEnum option) {
+        return selected(option);
+    }
     @JDIAction("Assert that '{name}' values {0}")
     public A values(Matcher<? super List<String>> condition) {
         jdiAssert(uiElement.values(), condition);

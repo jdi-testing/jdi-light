@@ -31,11 +31,11 @@ public class SuspendHtmlPageButtonTest extends TestsInit {
         redButton.is().enabled();
         redButton.is().text(is(text));
         redButton.is().text(containsString("Red Button"));
-        redButton.is()
-                .text(is(text))
-                .cssClass(is("uui-button red"))
-                .attr("type", is("button"))
-                .tag(is("input"));
+        redButton.is().text(is(text))
+            .core()
+            .cssClass(is("uui-button red"))
+            .attr("type", is("button"))
+            .tag(is("input"));
         blueButton.is().text(containsString("Blue Button".toUpperCase()));
         disabledButton.is().text(containsString("Disabled Button".toUpperCase()));
         disabledButtonInput.is().text(containsString("Disabled Button"));

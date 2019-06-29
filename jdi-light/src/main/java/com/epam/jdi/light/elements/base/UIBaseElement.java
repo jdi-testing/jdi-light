@@ -3,18 +3,14 @@ package com.epam.jdi.light.elements.base;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.HasCache;
 
 public abstract class UIBaseElement<A extends UIAssert>
-        implements IBaseElement, HasAssert<A>, HasUIElement, HasCache {
+        implements IBaseElement, HasAssert<A> {
     protected UIElement element;
     public UIElement core() {
         if (element == null)
             element = new UIElement().setName(getName() + " element");
         return element;
-    }
-    public String getName() {
-        return core().getName();
     }
     protected void setElement(UIElement uiElement) { element = uiElement; }
 
@@ -23,13 +19,13 @@ public abstract class UIBaseElement<A extends UIAssert>
         return core().isEnabled();
     }
     public boolean isDisabled() {
-        return core().isDisabled();
+        return !isEnabled();
     }
     public boolean isDisplayed() {
         return core().isDisplayed();
     }
     public boolean isHidden() {
-        return core().isHidden();
+        return !isDisplayed();
     }
     public void highlight(String color) {
         core().highlight(color);
@@ -39,9 +35,6 @@ public abstract class UIBaseElement<A extends UIAssert>
     }
     public void show() {
         core().show();
-    }
-    public void offCache() {
-        core().offCache();
     }
 
     public A is() {

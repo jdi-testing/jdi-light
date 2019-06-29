@@ -6,7 +6,7 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.elements.base.HasUIElement;
+import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.base.IListBase;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
@@ -16,7 +16,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.elements.base.JDIBase.waitCondition;
 
-public class JList<T extends IListBase & HasUIElement> extends TListBase<T, UISelectAssert<UISelectAssert, JList<T>>> {
+public class JList<T extends IListBase> extends TListBase<T, UISelectAssert<UISelectAssert, JList<T>>> {
     public JList() {}
     public JList(By locator) { super(locator); }
     public JList(List<WebElement> elements) {

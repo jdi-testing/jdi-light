@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.light.ui.html.aserts.CheckboxAssert;
+import com.epam.jdi.light.ui.html.asserts.CheckboxAssert;
 
 public class Checkbox extends UIBaseElement<CheckboxAssert> implements WithLabel, SetValue {
     // region Actions

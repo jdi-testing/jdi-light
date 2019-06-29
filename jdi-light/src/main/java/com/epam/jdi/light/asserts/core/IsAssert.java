@@ -60,7 +60,7 @@ public class IsAssert extends UIAssert<IsAssert, UIElement> implements CommonAss
         jdiAssert(uiElement.getTagName(), condition);
         return this;
     }
-    public IsAssert css(String tagName) {
+    public IsAssert tag(String tagName) {
         return tag(is(tagName));
     }
 

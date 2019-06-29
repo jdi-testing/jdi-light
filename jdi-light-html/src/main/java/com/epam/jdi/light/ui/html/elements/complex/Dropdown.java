@@ -240,17 +240,17 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
             core().setLocator(root);
         if (valueLocator != null) {
             value = $(valueLocator, this).setName(getName() + " value element");
-            value.driverName = driverName;
+            value.driverName = core().driverName;
             if (expandLocator == null)
                 expander = value;
         }
         if (listLocator != null) {
             setList($$(listLocator, this).setName(getName() + " list element"));
-            list().driverName = driverName;
+            list().core().driverName = core().driverName;
         }
         if (expandLocator != null) {
             expander = $(expandLocator, this).setName(getName() + " expander element");
-            expander.driverName = driverName;
+            expander.driverName = core().driverName;
             if (valueLocator == null)
                 value = expander;
         }

@@ -9,11 +9,11 @@ import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
-import com.epam.jdi.light.elements.base.*;
+import com.epam.jdi.light.elements.base.IBaseElement;
+import com.epam.jdi.light.elements.base.IListBase;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.interfaces.HasCache;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.*;
@@ -26,7 +26,6 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextType.SMART;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
-import static com.epam.jdi.light.elements.base.JDIBase.waitCondition;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
@@ -39,9 +38,8 @@ import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class UIElement extends JDIBase
-        implements WebElement, SetValue, IBaseElement, HasUIElement,
-        HasAssert<IsAssert>, HasCache, IListBase {
+public class UIElement extends JDIBase implements WebElement, SetValue, IBaseElement,
+        HasAssert<IsAssert>, IListBase {
     //region Constructors
     public UIElement() { }
     public UIElement(WebElement el) { setWebElement(el); }
@@ -522,7 +520,4 @@ public class UIElement extends JDIBase
         return new IsAssert().set(this);
     }
 
-    public void offCache() {
-        offCache();
-    }
 }

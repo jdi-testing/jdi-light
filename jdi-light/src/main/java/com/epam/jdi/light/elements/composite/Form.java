@@ -2,7 +2,8 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.HasUIElement;
+import com.epam.jdi.light.elements.base.IBaseElement;
+import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.interfaces.SetValue;
@@ -391,7 +392,7 @@ public class Form<T> extends Section {
                 if (fields.isEmpty())
                     return core().get().isDisplayed();
                 Object po = fields.get(0).get(pageObject);
-                return isInterface(po.getClass(), HasUIElement.class) && ((HasUIElement) po).core().isDisplayed();
+                return isInterface(po.getClass(), IBaseElement.class) && ((IBaseElement) po).core().isDisplayed();
             }
             List<WebElement> result = core().getAll();
             return result.size() == 1 && result.get(0).isDisplayed();

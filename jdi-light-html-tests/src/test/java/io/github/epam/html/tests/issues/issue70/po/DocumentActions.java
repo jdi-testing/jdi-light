@@ -1,15 +1,14 @@
 package io.github.epam.html.tests.issues.issue70.po;
 
-import com.epam.jdi.light.ui.html.base.HtmlElement;
-import com.epam.jdi.light.ui.html.base.HtmlList;
-import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 
-import static com.epam.jdi.light.ui.html.HtmlFactory.$;
-import static com.epam.jdi.light.ui.html.HtmlFactory.$$;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
-public class DocumentActions extends HtmlElement {
-    private Button documentActionsBtn = $(".document-actions-btn");
-    private HtmlList actions = $$(".%s-btn");
+public class DocumentActions extends UIElement {
+    private UIElement documentActionsBtn = $(".document-actions-btn");
+    private WebList actions = $$(".%s-btn");
 
     @Override
     public void select(String name) {

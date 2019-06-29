@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.composite.section;
 
+import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
@@ -10,52 +11,52 @@ import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkI
 public class CustomSectionTests extends TestsInit {
 
     @Test(dataProvider = "customSectionWebElementDataProvider", dataProviderClass = CustomSectionDataProvider.class)
-    public void customSectionWebElementTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void customSectionWebElementTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "customSectionListWebElementDataProvider", dataProviderClass = CustomSectionDataProvider.class)
-    public void customSectionListWebElementTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void customSectionListWebElementTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "customSectionUIElementDataProvider", dataProviderClass = CustomSectionDataProvider.class)
-    public void customSectionUIElementTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void customSectionUIElementTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "customSectionButtonDataProvider", dataProviderClass = CustomSectionDataProvider.class)
-    public void customSectionButtonTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void customSectionButtonTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "customSectionWebListDataProvider", dataProviderClass = CustomSectionDataProvider.class)
-    public void customSectionWebListTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void customSectionWebListTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "customSectionListUIElementPublicDataProvider", dataProviderClass = CustomSectionDataProvider.class)
-    public void customSectionListUIElementPublicTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void customSectionListUIElementPublicTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "customSectionListButtonPublicDataProvider", dataProviderClass = CustomSectionDataProvider.class)
-    public void customSectionListButtonPublicTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void customSectionListButtonPublicTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "customSectionUIListQuestionDataProvider", dataProviderClass = CustomSectionDataProvider.class)
-    public void customSectionUIListQuestionTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void customSectionUIListQuestionTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "customSectionUIListSomedataDataProvider", dataProviderClass = CustomSectionDataProvider.class)
-    public void customSectionUIListSomedataTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void customSectionUIListSomedataTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "customSectionDropDownDataProvider", dataProviderClass = CustomSectionDataProvider.class)
-    public void customSectionDropDownTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void customSectionDropDownTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 }

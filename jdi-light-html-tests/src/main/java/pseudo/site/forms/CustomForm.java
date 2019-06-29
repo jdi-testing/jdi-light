@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
 import com.epam.jdi.light.ui.html.elements.annotations.JDropdown;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.complex.Dropdown;
 import org.openqa.selenium.WebElement;
 import pseudo.site.entities.User;
 

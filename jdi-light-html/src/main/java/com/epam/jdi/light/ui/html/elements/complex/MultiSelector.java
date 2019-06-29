@@ -13,27 +13,27 @@ import static java.util.Arrays.asList;
 // Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
 public class MultiSelector extends Combobox {
-    protected Select select() {
-        return core().select();
+    protected Select asSelect() {
+        return core().asSelect();
     }
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String... values) {
-        select().deselectAll();
+        asSelect().deselectAll();
         for (String value : values)
-            core().select().selectByVisibleText(value);
+            asSelect().selectByVisibleText(value);
     }
     public <TEnum extends Enum> void check(TEnum... values) {
         check(getEnumValues(values));
     }
     @JDIAction("Check '{0}' for '{name}'")
     public void check(int... values) {
-        select().deselectAll();
+        asSelect().deselectAll();
         for (int index : values)
             select(index);
     }
     @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(String... values) {
-        for (WebElement opt : select().getOptions()) {
+        for (WebElement opt : asSelect().getOptions()) {
             if (opt.isSelected() && asList(values).contains(opt.getText())
                     || !opt.isSelected() && !asList(values).contains(opt.getText()))
                 opt.click();
@@ -44,7 +44,7 @@ public class MultiSelector extends Combobox {
     }
     @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(int... values) {
-        List<WebElement> options = select().getOptions();
+        List<WebElement> options = asSelect().getOptions();
         for (int i = 0; i < options.size(); i++) {
             WebElement opt = options.get(i);
             if (opt.isSelected() && asList(values).contains(i)
@@ -54,11 +54,11 @@ public class MultiSelector extends Combobox {
     }
     @JDIAction("Get selected value") @Override
     public String selected() {
-        return select().getFirstSelectedOption().getText();
+        return asSelect().getFirstSelectedOption().getText();
     }
     @JDIAction("Get checked elements")
     public List<String> checked() {
-        return map(select().getAllSelectedOptions(), WebElement::getText);
+        return map(asSelect().getAllSelectedOptions(), WebElement::getText);
     }
 
 }

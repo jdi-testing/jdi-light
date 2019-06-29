@@ -2,7 +2,7 @@ package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.ui.html.aserts.ImageAssert;
+import com.epam.jdi.light.ui.html.asserts.ImageAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 

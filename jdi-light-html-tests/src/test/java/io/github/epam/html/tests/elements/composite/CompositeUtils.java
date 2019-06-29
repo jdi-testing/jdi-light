@@ -1,15 +1,15 @@
 package io.github.epam.html.tests.elements.composite;
 
-import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.IBaseElement;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 public class CompositeUtils {
-    public static void checkInitializedElement(JDIBase htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
+    public static void checkInitializedElement(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         assertNotNull(htmlElementToCheck);
-        assertEquals(htmlElementToCheck.locator.toString(), expectedLocator);
-        assertEquals(htmlElementToCheck.parent, expectedParent);
-        assertEquals(htmlElementToCheck.name, expectedName);
+        assertEquals(htmlElementToCheck.core().locator.toString(), expectedLocator);
+        assertEquals(htmlElementToCheck.core().parent, expectedParent);
+        assertEquals(htmlElementToCheck.core().name, expectedName);
     }
 }

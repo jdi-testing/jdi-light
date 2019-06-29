@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.common.TextType.INNER;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
@@ -70,12 +71,12 @@ public class DropdownTests extends TestsInit {
     @Test
     public void isValidationTest() {
         colors.is().selected("Colors");
-        colors.is().innerValues(hasItem("Yellow"));
+        colors.is().values(INNER, hasItem("Yellow"));
     }
 
     @Test
     public void assertValidationTest() {
-        colors.assertThat().innerValues(contains("Colors", "Red", "Green", "Blue", "Yellow"));
+        colors.assertThat().values(INNER, contains("Colors", "Red", "Green", "Blue", "Yellow"));
     }
     @Test
     public void valuesTests() {
@@ -83,11 +84,10 @@ public class DropdownTests extends TestsInit {
         assertThat(colors.selected(), is("Blue"));
         assertThat(colors.getText(), is("Blue"));
         assertThat(colors.getValue(), is("Blue"));
-        assertThat(colors.checked(), hasItem("Blue"));
     }
     @Test
     public void innerValuesTest() {
-        assertThat(colors.innerValues(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
+        assertThat(colors.values(INNER), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
     @Test
     public void isDisplayedTest() {

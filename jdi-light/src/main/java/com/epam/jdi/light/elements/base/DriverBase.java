@@ -15,7 +15,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-public class DriverBase implements JDIElement {
+public abstract class DriverBase implements JDIElement {
     public String driverName = DRIVER_NAME;
     public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
     public JavascriptExecutor js() { return (JavascriptExecutor) driver(); }

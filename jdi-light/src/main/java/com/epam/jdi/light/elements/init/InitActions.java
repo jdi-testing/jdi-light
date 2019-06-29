@@ -81,7 +81,7 @@ public class InitActions {
     );
 
     public static MapArray<String, SetupRule> SETUP_RULES = map(
-        $("Element", sRule(info -> isInterface(info.instance.getClass(), HasUIElement.class),
+        $("Element", sRule(info -> isInterface(info.instance.getClass(), IBaseElement.class),
             InitActions::elementSetup)),
         $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class),
@@ -102,9 +102,9 @@ public class InitActions {
     private static DriverBase asUIBase(SiteInfo info) {
         if (isClass(info.instance.getClass(), DriverBase.class))
             return (DriverBase) info.instance;
-        if (isInterface(info.instance.getClass(), HasUIElement.class))
-            return  ((HasUIElement) info.instance).core();
-        throw exception("Can't setup '%s'. Instance should implement HasUIElement interface", info.name());
+        if (isInterface(info.instance.getClass(), IBaseElement.class))
+            return  ((IBaseElement) info.instance).core();
+        throw exception("Can't setup '%s'. Instance should implement IBaseElement interface", info.name());
     }
 
     public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {
@@ -114,8 +114,8 @@ public class InitActions {
         return jdi;
     }
 
-    public static HasUIElement elementSetup(SiteInfo info) {
-        HasUIElement jdi = (HasUIElement) info.instance;
+    public static IBaseElement elementSetup(SiteInfo info) {
+        IBaseElement jdi = (IBaseElement) info.instance;
         defaultSetup(info, jdi.core());
         By locator = getLocatorFromField(info.field);
         if (locator != null)
@@ -149,9 +149,9 @@ public class InitActions {
     }
     public static boolean isJDIField(Field field) {
         return isInterface(field, WebElement.class) ||
-            isInterface(field, JDIElement.class) ||
+            isInterface(field, IBaseElement.class) ||
             isListOf(field.getType(), WebElement.class) ||
-            isListOf(field.getType(), JDIElement.class) ||
+            isListOf(field.getType(), IBaseElement.class) ||
             isListOf(field.getType(), Section.class);
     }
     public static boolean isPageObject(Class<?> type) {

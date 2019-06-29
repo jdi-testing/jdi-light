@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
@@ -21,6 +22,7 @@ import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
 import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
@@ -46,7 +48,7 @@ public class WebPage extends DriverBase implements PageObject {
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = CheckTypes.NONE;
     public <T> Form<T> asForm() {
-        return new Form<>().setPageObject(this).core().setName(getName()+" Form");
+        return new Form<>().setPageObject(this).setName(getName()+" Form");
     }
 
     private static Safe<String> currentPage = new Safe<>("Undefined Page");

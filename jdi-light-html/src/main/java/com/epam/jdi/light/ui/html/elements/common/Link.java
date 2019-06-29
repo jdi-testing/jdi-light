@@ -3,7 +3,7 @@ package com.epam.jdi.light.ui.html.elements.common;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.light.ui.html.aserts.LinkAssert;
+import com.epam.jdi.light.ui.html.asserts.LinkAssert;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -15,10 +15,6 @@ public class Link extends UIBaseElement<LinkAssert> implements HasValue {
     // region Actions
     @JDIAction("Click on '{name}'")
     public void click() { element.click(); }
-    @JDIAction("Get '{name}' text")
-    public String getText() {
-        return element.getText();
-    }
 
     @JDIAction(value = "Get '{name}' text", level = DEBUG)
     public String ref() { return element.attr("href"); }

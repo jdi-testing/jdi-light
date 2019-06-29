@@ -62,12 +62,13 @@ public class ButtonTests extends TestsInit {
         redButton.is().enabled();
         redButton.is().text(is(text));
         redButton.is().text(containsString("Red Button"));
-        assertThat(redButton.css("font-size"), is("14px"));
+        assertThat(redButton.core().css("font-size"), is("14px"));
         redButton.assertThat()
             .and().text(is(text))
+            .core()
             .css("font-size", is("14px"))
-            .cssClass(is("uui-button red"))
-            .attr("type", is("button"))
+            .cssClass("uui-button red")
+            .attr("type", "button")
             .tag(is("input"));
         blueButton.is().text(containsString("Blue Button".toUpperCase()));
         disabledButton.is().text(containsString("Disabled Button".toUpperCase()));

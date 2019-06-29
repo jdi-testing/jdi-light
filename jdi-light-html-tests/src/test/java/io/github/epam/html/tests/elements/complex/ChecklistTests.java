@@ -39,8 +39,8 @@ public class ChecklistTests extends TestsInit {
     public void uncheckTest() {
         weather.check("Rainy day", "Sunny");
         weather.uncheck(Rainy, Sunny);
-        weather.is().selected(hasSize(2));
-        weather.is().selected(hasItems("Hot option", "Cold"));
+        weather.is().checked(hasSize(2));
+        weather.is().checked(hasItems("Hot option", "Cold"));
     }
     @Test
     public void selectTest() {
@@ -57,8 +57,8 @@ public class ChecklistTests extends TestsInit {
     public void uncheckEnumTest() {
         weather.checkAll();
         weather.uncheck(Hot, Rainy);
-        weather.is().selected(hasSize(2));
-        weather.is().selected(hasItems("Cold", "Sunny"));
+        weather.is().checked(hasSize(2));
+        weather.is().checked(hasItems("Cold", "Sunny"));
     }
     @Test
     public void selectEnumTest() {
@@ -74,23 +74,13 @@ public class ChecklistTests extends TestsInit {
     public void uncheckNumTest() {
         weather.checkAll();
         weather.uncheck(1, 4);
-        weather.is().selected(hasSize(2));
-        weather.is().selected(hasItems("Cold", "Rainy day"));
+        weather.is().checked(hasSize(2));
+        weather.is().checked(hasItems("Cold", "Rainy day"));
     }
     @Test
     public void selectNumTest() {
         weather.select(1, 4);
         assertEquals(weather.checked(), asList("Sunny"));
-    }
-    @Test
-    public void checkEmptyTest() {
-        try {
-            weather.select();
-            Assert.fail("Select empty should throw an exception");
-        } catch (Exception ex) {
-            assertThat(ex.getMessage(), containsString(
-            "Select for Checklist should have at least one parameter"));
-        }
     }
     @Test
     public void selectedTest() {
@@ -124,12 +114,12 @@ public class ChecklistTests extends TestsInit {
     public void uncheckAllTest() {
         weather.check(Rainy, Sunny);
         weather.uncheckAll();
-        weather.is().selected(hasSize(0));
+        weather.is().checked(hasSize(0));
     }
     @Test
     public void checkAllTest() {
         weather.checkAll();
-        weather.is().selected(hasSize(4));
-        weather.is().selected(hasItems("Hot option", "Cold", "Rainy day", "Sunny"));
+        weather.is().checked(hasSize(4));
+        weather.is().checked(hasItems("Hot option", "Cold", "Rainy day", "Sunny"));
     }
 }

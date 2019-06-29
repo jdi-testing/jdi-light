@@ -20,7 +20,6 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.elements.base.DriverBase.timer;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
 import static com.epam.jdi.light.logger.LogLevels.*;
@@ -40,7 +39,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class JDIBase extends DriverBase implements HasCache {
+public abstract class JDIBase extends DriverBase implements HasCache {
     public static JFunc1<String, String> STRING_SIMPLIFY =
         s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     public static <T> boolean waitCondition(JFunc1<T, Boolean> condition, T element) {
@@ -189,13 +188,13 @@ public class JDIBase extends DriverBase implements HasCache {
         }
     }
     public WebList allUI(Object... args) {
-        return new WebList(getAll(args)).core().setName(getName());
+        return new WebList(getAll(args)).setName(getName());
     }
     private JDIBase getBase(Object element) {
         if (isClass(element.getClass(), JDIBase.class))
             return  (JDIBase) element;
-        else { if (isInterface(element.getClass(), HasUIElement.class))
-            return  ((HasUIElement) element).core(); }
+        else { if (isInterface(element.getClass(), IBaseElement.class))
+            return  ((IBaseElement) element).core(); }
         return null;
     }
     private SearchContext getSearchContext(Object element) {
@@ -219,7 +218,7 @@ public class JDIBase extends DriverBase implements HasCache {
     }
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)
-                || !isInterface(parent.getClass(), HasUIElement.class);
+                || !isInterface(parent.getClass(), JDIElement.class);
     }
     private SearchContext getContext(Object parent, JDILocator locator) {
         return locator.isRoot || isRoot(parent)

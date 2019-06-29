@@ -1,24 +1,17 @@
 package io.github.epam.html.tests.elements.composite;
 
+import com.epam.jdi.light.elements.base.IBaseElement;
+import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.tools.func.JAction4;
-import com.epam.jdi.tools.func.JFunc3;
-import io.github.com.custom.FirstTokenCapitalisation;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.FormDataProvider;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.List;
 
 import static com.epam.jdi.light.common.FormFilters.ALL;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.tools.LinqUtils.first;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.*;
 import static io.github.com.pages.ContactFormPage.main;
@@ -36,12 +29,12 @@ import static pseudo.site.pages.Header.pseudoFormLight;
 public class FormTests extends TestsInit {
 
     @Test(dataProvider = "formDataProvider", dataProviderClass = FormDataProvider.class)
-    public void formInitializationTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void formInitializationTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "smartFormDataProvider", dataProviderClass = FormDataProvider.class)
-    public void smartFormInitializationTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void smartFormInitializationTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
@@ -306,62 +299,6 @@ public class FormTests extends TestsInit {
         main.contactFormCustom.onlyOptional().fill(DEFAULT_CONTACT);
         main.contactFormCustom.check(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
         assertEquals(main.contactFormCustom.getFilter(), ALL);
-    }
-
-    @Test
-    public void modifiedLambdaFillActionTest() {
-        shouldContactPageBeOpenedAndRefreshed();
-        JAction4<Field, Object, Object, String> initialFillActionLambda = Form.FILL_ACTION;
-        JAction4<Field, Object, Object, String> newFillActionLambda = (field, element, parent, setValue) -> {
-            if (field != null) {
-                Method[] methods = field.getType().getDeclaredMethods();
-                Method setMethod = first(methods, m -> m.isAnnotationPresent(FillValue.class));
-                if (setMethod != null) {
-                    if (field.isAnnotationPresent(FirstTokenCapitalisation.class)) {
-                        setMethod.invoke(element, (setValue.substring(0, 1).toUpperCase() + setValue.substring(1)));
-                    } else {
-                        setMethod.invoke(element, setValue);
-                    }
-                    return;
-                }
-            }
-            ((SetValue) element).setValue(setValue);
-        };
-        try {
-            Form.FILL_ACTION = newFillActionLambda;
-            main.contactFormCustom.fill(LOWER_CASE_NAME_CONTACT);
-            main.contactFormCustom.check(DEFAULT_CONTACT);
-        } finally {
-            Form.FILL_ACTION = initialFillActionLambda;
-        }
-    }
-
-    @Test
-    public void modifiedLambdaGetActionTest() {
-        shouldContactPageBeOpenedAndRefreshed();
-        JFunc3<Field, Object, Object, String> initialGetActionLambda = Form.GET_ACTION;
-        JFunc3<Field, Object, Object, String> newGetActionLambda = (field, element, parent) -> {
-            if (field != null) {
-                Method[] methods = field.getType().getDeclaredMethods();
-                Method getMethod = first(methods, m -> m.isAnnotationPresent(VerifyValue.class));
-                if (getMethod != null) {
-                    if (field.isAnnotationPresent(FirstTokenCapitalisation.class)) {
-                        String getValue = getMethod.invoke(element).toString();
-                        return (getValue.substring(0, 1).toUpperCase() + getValue.substring(1));
-                    } else {
-                        return getMethod.invoke(element).toString();
-                    }
-                }
-            }
-            return ((HasValue) element).getValue().trim();
-        };
-        try {
-            Form.GET_ACTION = newGetActionLambda;
-            main.contactFormCustom.fill(LOWER_CASE_NAME_CONTACT);
-            main.contactFormCustom.check(DEFAULT_CONTACT);
-        } finally {
-            Form.GET_ACTION = initialGetActionLambda;
-        }
     }
 
     @Test

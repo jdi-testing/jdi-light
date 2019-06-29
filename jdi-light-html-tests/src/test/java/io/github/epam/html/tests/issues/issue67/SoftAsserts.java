@@ -41,9 +41,10 @@ public class SoftAsserts extends TestsInit {
         try {
             redButton.verify().hidden().displayed()
                 .disabled().enabled()
-                .disappear().cssClass(is("uui-button red"))
+                .disappear()
                 .text(is("Big Red *** Button-Input"))
                 .text(containsString("Red Button"))
+                .core().cssClass(is("uui-button red"))
                 .attr("type", is("button"))
                 .tag(is("input"))
 

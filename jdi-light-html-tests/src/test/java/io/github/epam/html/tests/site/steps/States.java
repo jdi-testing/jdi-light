@@ -37,7 +37,7 @@ public class States {
             homePage.open();
         if (userName.isDisplayed())
             logout();
-        if (loginForm.displayed())
+        if (loginForm.isDisplayed())
             userIcon.click();
     }
     @Step

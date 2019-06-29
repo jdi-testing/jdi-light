@@ -33,7 +33,6 @@ import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
-import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;

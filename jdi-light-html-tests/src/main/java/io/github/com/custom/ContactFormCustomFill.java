@@ -7,12 +7,15 @@ import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import com.epam.jdi.light.ui.html.elements.complex.Combobox;
+import com.epam.jdi.light.ui.html.elements.complex.Dropdown;
 import io.github.com.entities.Contacts;
 
 import java.lang.reflect.Field;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
+
 public class ContactFormCustomFill extends Form<Contacts> {
-    @FirstTokenCapitalisation TextField name;
+    TextField name;
     TextField lastName, position, passportNumber, passportSeria;
 
     Dropdown gender;
@@ -25,9 +28,7 @@ public class ContactFormCustomFill extends Form<Contacts> {
 
     @Override
     public void fillAction(Field field, Object element, Object parent, String setValue) {
-        if (field.isAnnotationPresent(FirstTokenCapitalisation.class)) {
-            setValue = setValue.substring(0, 1).toUpperCase() + setValue.substring(1);
-        }
+        logger.info("* Fill " + element.toString());
         super.fillAction(field, element, parent, setValue);
     }
 }

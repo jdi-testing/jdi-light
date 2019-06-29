@@ -32,10 +32,10 @@ public class RadioButtons extends UIListBase<UISelectAssert> {
 
     private String getId(String name) { return label(name).getAttribute("for"); }
     public UIElement get(String value) {
-        return $(fillByTemplate(radioButton, getId(value)), parent).setName(value);
+        return $(fillByTemplate(radioButton, getId(value)), core().parent).setName(value);
     }
     private UIElement label(String value) {
-        return $(fillByTemplate(label, value), parent).setName(getName()+" label");
+        return $(fillByTemplate(label, value), core().parent).setName(getName()+" label");
     }
 
     List<Label> labels() { return map(getAllElements(), el -> $(el).label()); }

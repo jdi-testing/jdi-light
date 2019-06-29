@@ -1,11 +1,8 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.DriverBase;
-import com.epam.jdi.light.elements.base.HasUIElement;
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.base.IBaseElement;
+import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
@@ -100,10 +97,10 @@ public class PageFactory {
 
     public static void initElements(SiteInfo info) {
         List<Field> poFields = recursion(
-            t -> isInterface(t, PageObject.class) &&
-                !asList(WebPage.class, Section.class, Form.class).contains(t) ||
+            t -> isInterface(t, PageObject.class)/* &&
+                !asList(WebPage.class, Section.class, Form.class).contains(t)*/ ||
                 !isInterface(t, PageObject.class) &&
-                !asList(HasUIElement.class, Object.class).contains(t),
+                !asList(IBaseElement.class, Object.class).contains(t),
             info.instance.getClass(),
             t -> asList(t.getDeclaredFields()));
         List<Field> fields = filter(poFields, f -> isJDIField(f) || isPageObject(f.getType()));

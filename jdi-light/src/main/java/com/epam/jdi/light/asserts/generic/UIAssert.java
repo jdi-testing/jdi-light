@@ -1,9 +1,11 @@
 package com.epam.jdi.light.asserts.generic;
 
+import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
+import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
@@ -19,7 +21,18 @@ public class UIAssert<A extends UIAssert, E extends IBaseElement> extends BaseAs
         jdiAssert(uiElement.isDisplayed() ? "displayed" : "hidden", is("displayed"));
         return (A) this;
     }
-
+    /**
+     * Match passed value with the element text
+     * @param condition to compare
+     */
+    @JDIAction("Assert that '{name}' text {0}")
+    public A text(Matcher<String> condition) {
+        jdiAssert(uiElement.getText(), condition);
+        return (A) this;
+    }
+    public A text(String text) {
+        return text(is(text));
+    }
     /**
      * Check that the element is disappeared
      */
@@ -73,6 +86,7 @@ public class UIAssert<A extends UIAssert, E extends IBaseElement> extends BaseAs
     }
 
     public A and() { return (A) this; }
+    public IsAssert core() { return uiElement.core().is(); }
     public A condition(JFunc1<A, A> t) {
         return t.execute((A) this);
     }

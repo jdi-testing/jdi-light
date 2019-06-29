@@ -23,9 +23,9 @@ public class SuspendHtmlPageNumberSelectorTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
-        height.assertThat().minValue(is(0.3));
-        height.assertThat().maxValue(is(2.5));
-        height.assertThat().stepValue(is(0.2));
+        height.assertThat().min(is(0.3));
+        height.assertThat().max(is(2.5));
+        height.assertThat().step(is(0.2));
         height.is().placeholder(containsString("20 cm increments"));
         height.is().number(greaterThanOrEqualTo(0.3));
         height.is().number(lessThanOrEqualTo(2.5));

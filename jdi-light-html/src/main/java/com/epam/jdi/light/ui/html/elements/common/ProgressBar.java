@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.light.ui.html.aserts.ProgressAssert;
+import com.epam.jdi.light.ui.html.asserts.ProgressAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 

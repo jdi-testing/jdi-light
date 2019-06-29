@@ -8,7 +8,7 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.core.DataListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.UIUtils;
-import com.epam.jdi.light.elements.base.HasUIElement;
+import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.base.IListBase;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
@@ -29,13 +29,13 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 
-public class DataList<T extends IListBase & HasUIElement, D> extends TListBase<T, DataListAssert<T, D>> {
+public class DataList<T extends IListBase, D> extends TListBase<T, DataListAssert<T, D>> {
 
     private CacheValue<MapArray<String, T>> map = new CacheValue<>(MapArray::new);
     public JList<T> list() {
-        JList<T> list = new JList<>(base().getLocator());
-        list.base().setParent(base().parent);
-        list.base().setName(getName() + " list");
+        JList<T> list = new JList<>(core().getLocator());
+        list.core().setParent(core().parent);
+        list.setName(getName() + " list");
         return list;
     }
     public Class<D> dataType;
@@ -75,7 +75,7 @@ public class DataList<T extends IListBase & HasUIElement, D> extends TListBase<T
     protected MapArray<String, T> getMap(int minAmount) {
         if (actualMapValue())
             return map.get();
-        List<WebElement> els = base().getList(minAmount);
+        List<WebElement> els = core().getList(minAmount);
         return map.set(elements.hasValue()
             ? new MapArray<>(
                 LinqUtils.select(els, this::elementTitle),

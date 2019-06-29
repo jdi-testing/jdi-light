@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.elements.complex;
 
-import com.epam.jdi.light.ui.html.base.HtmlElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -36,7 +36,7 @@ public class MenuTests extends TestsInit {
     }
     @Test
     public void getTestList() {
-        HtmlElement item = leftMenuList.get("Contact form");
+        UIElement item = leftMenuList.get("Contact form");
         item.show();
         item.is().deselected();
         item.click();

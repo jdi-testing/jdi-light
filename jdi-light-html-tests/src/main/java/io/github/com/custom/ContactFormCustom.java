@@ -8,10 +8,11 @@ import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import com.epam.jdi.light.ui.html.elements.complex.Combobox;
+import com.epam.jdi.light.ui.html.elements.complex.Dropdown;
 import io.github.com.entities.Contacts;
 
 public class ContactFormCustom extends Form<Contacts> {
-    @Mandatory @FirstTokenCapitalisation TextField name;
+    @Mandatory TextField name;
     TextField lastName, position, passportNumber, passportSeria;
 
     Dropdown gender;

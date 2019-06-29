@@ -1,11 +1,11 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.ui.html.asserts.ChecklistAssert;
 import com.epam.jdi.tools.EnumUtils;
 import org.openqa.selenium.By;
 
@@ -22,7 +22,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 import static org.openqa.selenium.By.cssSelector;
 
-public class Checklist extends UIListBase<UISelectAssert> {
+public class Checklist extends UIListBase<ChecklistAssert> {
     By checkbox = cssSelector("input[type=checkbox][id='%s']");
     By label = LABEL_LOCATOR;
     public void setLabelLocator(String locator) {
@@ -36,10 +36,10 @@ public class Checklist extends UIListBase<UISelectAssert> {
      * @return UIElement
      */
     public UIElement get(String value) {
-        return $(fillByTemplate(checkbox, getId(value)), parent).setName(value);
+        return $(fillByTemplate(checkbox, getId(value)), core().parent).setName(value);
     }
     private UIElement label(String value) {
-        return $(fillByTemplate(label, value), parent).setName("label");
+        return $(fillByTemplate(label, value), core().parent).setName("label");
     }
 
     WebList labels() {

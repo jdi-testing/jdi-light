@@ -34,7 +34,7 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBa
 
     protected Select getSelect(String action) {
         try {
-            return core().select();
+            return core().asSelect();
         } catch (Exception ex) {
             throw exception(SELECT_ERROR, action, this);
         }

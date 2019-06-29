@@ -14,7 +14,7 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
         implements ISelector, SetValue, HasUIList {
     protected WebList list;
     public WebList list() {
-        return list != null ? list : $$(base().getLocator(), getName() + " list");
+        return list != null ? list : $$(core().getLocator(), getName() + " list");
     }
     protected void setList(WebList webList) { list = webList; }
 

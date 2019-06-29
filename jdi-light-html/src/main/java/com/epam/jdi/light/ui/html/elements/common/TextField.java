@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.light.ui.html.aserts.TextAssert;
+import com.epam.jdi.light.ui.html.asserts.TextAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
@@ -26,10 +26,7 @@ public class TextField extends UIBaseElement<TextAssert> implements WithLabel, S
     public void focus(){ sendKeys(""); }
     @JDIAction(value = "Get '{name}' placeholder", level = DEBUG)
     public String placeholder() { return element.placeholder(); }
-    @JDIAction("Get '{name}' text")
-    public String getText() {
-        return element.getText();
-    }
+
     // endregion
 
     // region Set and get value for Forms
