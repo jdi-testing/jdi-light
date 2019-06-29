@@ -40,9 +40,8 @@ public abstract class UIBaseElement<A extends UIAssert>
     public void show() {
         core().show();
     }
-
     public void offCache() {
-        core().base().offCache();
+        core().offCache();
     }
 
     public A is() {

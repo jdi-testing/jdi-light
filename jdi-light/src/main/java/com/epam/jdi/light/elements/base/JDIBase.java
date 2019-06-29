@@ -28,6 +28,7 @@ import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
@@ -63,24 +64,24 @@ public class JDIBase extends DriverBase implements HasCache {
         searchRule.setForce(rule);
         return this;
     }
-    public UIElement setWebElement(WebElement el) {
+    public JDIBase setWebElement(WebElement el) {
         webElement.setForce(el);
-        return instance;
+        return this;
     }
-    public UIElement setWebElements(List<WebElement> els) {
+    public JDIBase setWebElements(List<WebElement> els) {
         webElements.setForce(els);
-        return instance;
+        return this;
     }
 
-    public UIElement setLocator(By locator) {
-        if (instance.name.isEmpty()) instance.name = shortBy(locator);
-        this.locator = new JDILocator(locator, instance);
-        return instance;
+    public JDIBase setLocator(By locator) {
+        if (name.isEmpty()) name = shortBy(locator);
+        this.locator = new JDILocator(locator, this);
+        return this;
     }
-    public UIElement setFrame(By locator) {
-        if (instance.name.isEmpty()) instance.name = shortBy(locator);
-        this.locator = new JDILocator(locator, FRAME, instance);
-        return instance;
+    public JDIBase setFrame(By locator) {
+        if (name.isEmpty()) name = shortBy(locator);
+        this.locator = new JDILocator(locator, FRAME, this);
+        return this;
     }
     public By getLocator(Object... args) {
         initContext();
@@ -156,7 +157,7 @@ public class JDIBase extends DriverBase implements HasCache {
         }
         if (locator.isEmpty())
             return asList(SMART_SEARCH.execute(this));
-        SearchContext searchContext = getContext(instance.parent, locator);
+        SearchContext searchContext = getContext(parent, locator);
         List<WebElement> els = uiSearch(searchContext, correctLocator(getLocator(args)));
         return filter(els, el -> searchRule.get().execute(el));
     }
@@ -188,14 +189,22 @@ public class JDIBase extends DriverBase implements HasCache {
         }
     }
     public WebList allUI(Object... args) {
-        return new WebList(getAll(args)).core().setName(instance.getName());
+        return new WebList(getAll(args)).core().setName(getName());
     }
-
+    private JDIBase getBase(Object element) {
+        if (isClass(element.getClass(), JDIBase.class))
+            return  (JDIBase) element;
+        else { if (isInterface(element.getClass(), HasUIElement.class))
+            return  ((HasUIElement) element).core(); }
+        return null;
+    }
     private SearchContext getSearchContext(Object element) {
-        JDIBase bElement = ((HasUIElement) element).base();
+        JDIBase bElement = getBase(element);
+        if (bElement == null)
+            return getDefaultContext();
         if (bElement.webElement.hasValue())
             return bElement.webElement.get();
-        Object parent = bElement.instance.parent;
+        Object parent = bElement.parent;
         By locator = bElement.getLocator();
         By frame = bElement.getFrame();
         SearchContext searchContext = frame != null
@@ -210,7 +219,7 @@ public class JDIBase extends DriverBase implements HasCache {
     }
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)
-                || !isClass(parent.getClass(), JDIBase.class);
+                || !isInterface(parent.getClass(), HasUIElement.class);
     }
     private SearchContext getContext(Object parent, JDILocator locator) {
         return locator.isRoot || isRoot(parent)
@@ -218,10 +227,10 @@ public class JDIBase extends DriverBase implements HasCache {
                 : getSearchContext(parent);
     }
     private SearchContext getFrameContext(By frame) {
-        return instance.driver().switchTo().frame(uiSearch(instance.driver(),frame).get(0));
+        return driver().switchTo().frame(uiSearch(driver(),frame).get(0));
     }
     private SearchContext getDefaultContext() {
-        return instance.driver().switchTo().defaultContent();
+        return driver().switchTo().defaultContent();
     }
     private By correctLocator(By locator) {
         if (locator == null) return null;
@@ -229,24 +238,23 @@ public class JDIBase extends DriverBase implements HasCache {
     }
 
     public String printContext() {
-        if (!isClass(instance.parent.getClass(), HasUIElement.class))
-            return "";
-        JDIBase jdiBase = ((HasUIElement)instance.parent).base();
+        JDIBase jdiBase = getBase(parent);
+        if (jdiBase == null) return "";
         String locator = jdiBase.getLocator() == null ? "" : jdiBase.locator.toString();
-        if (jdiBase.instance.parent == null)
+        if (jdiBase.parent == null)
             return locator;
         if (isBlank(locator))
             return jdiBase.printContext();
         return jdiBase.printContext() + ">" + locator;
     }
     public String printFullLocator() {
-        return instance.parent == null || isBlank(printContext())
+        return parent == null || isBlank(printContext())
                 ? locator.toString()
                 : printContext() + ">" + locator.toString();
     }
     private void initContext() {
-        if (instance.context == null)
-            instance.context = printFullLocator();
+        if (context == null)
+            context = printFullLocator();
     }
 
     @Override
@@ -301,7 +309,7 @@ public class JDIBase extends DriverBase implements HasCache {
     private Actions actions = null;
     private Actions actionsClass() {
         if (actions == null)
-            actions = new Actions(instance.driver());
+            actions = new Actions(driver());
         return actions;
     }
 

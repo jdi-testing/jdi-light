@@ -16,8 +16,8 @@ public abstract class UIBase<A extends UIAssert> extends UIBaseElement<A> implem
         return core().getText();
     }
     @JDIAction("Get '{name}' text")
-    public String innerText() {
-        return core().text(INNER);
+    public String text(TextType type) {
+        return core().text(type);
     }
     @JDIAction("Check that '{name}' is selected")
     public boolean isSelected() {

@@ -5,7 +5,4 @@ import com.epam.jdi.tools.func.JAction1;
 
 public interface HasUIElement {
     UIElement core();
-    default JDIBase base() {
-        return core().base();
-    }
 }

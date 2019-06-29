@@ -1,6 +1,6 @@
 package com.epam.jdi.light.common;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.base.JDIBase;
 import org.openqa.selenium.By;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -18,7 +18,7 @@ public class JDILocator {
     private LocatorType locatorType = DEFAULT;
     private By byLocator;
     public boolean isRoot = false;
-    private UIElement element;
+    private JDIBase element;
     private Object[] args = new Object[]{};
 
     public By getLocator() { return byLocator; }
@@ -44,10 +44,10 @@ public class JDILocator {
 
     public JDILocator() {
     }
-    public JDILocator(By locator, UIElement element) {
+    public JDILocator(By locator, JDIBase element) {
         this(locator, DEFAULT, element);
     }
-    public JDILocator(By locator, LocatorType type, UIElement element) {
+    public JDILocator(By locator, LocatorType type, JDIBase element) {
         locatorType = type;
         byLocator = setRootLocator(locator)
                 ? trimRoot(locator)

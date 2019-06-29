@@ -4,62 +4,65 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ISelect;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 public class SelectWrapper extends UIBaseElement<UISelectAssert> implements ISelect {
-
+    private Select getSelect() {
+        return core().asSelect();
+    }
     public boolean isMultiple() {
-        return core().select().isMultiple();
+        return getSelect().isMultiple();
     }
 
     public List<WebElement> getOptions() {
-        return core().select().getOptions();
+        return getSelect().getOptions();
     }
 
     public List<WebElement> getAllSelectedOptions() {
-        return core().select().getAllSelectedOptions();
+        return getSelect().getAllSelectedOptions();
     }
 
     public WebElement getFirstSelectedOption() {
         is().notEmpty();
-        return core().select().getFirstSelectedOption();
+        return getSelect().getFirstSelectedOption();
     }
 
     public void selectByVisibleText(String s) {
         is().notEmpty();
-        core().select().selectByVisibleText(s);
+        getSelect().selectByVisibleText(s);
     }
 
     public void selectByIndex(int i) {
         is().size(greaterThanOrEqualTo(i));
-        core().select().selectByIndex(i);
+        getSelect().selectByIndex(i);
     }
 
     public void selectByValue(String s) {
         is().notEmpty();
-        core().select().selectByValue(s);
+        getSelect().selectByValue(s);
     }
 
     public void deselectAll() {
         is().notEmpty();
-        core().select().deselectAll();
+        getSelect().deselectAll();
     }
 
     public void deselectByValue(String s) {
         is().notEmpty();
-        core().select().deselectByValue(s);
+        getSelect().deselectByValue(s);
     }
 
     public void deselectByIndex(int i) {
         is().size(greaterThanOrEqualTo(i));
-        core().select().deselectByIndex(i);
+        getSelect().deselectByIndex(i);
     }
 
     public void deselectByVisibleText(String s) {
         is().notEmpty();
-        core().select().deselectByVisibleText(s);
+        getSelect().deselectByVisibleText(s);
     }
 }

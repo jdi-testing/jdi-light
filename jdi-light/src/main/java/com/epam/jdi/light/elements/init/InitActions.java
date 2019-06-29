@@ -85,7 +85,7 @@ public class InitActions {
             InitActions::elementSetup)),
         $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class),
-            InitActions::defaultSetup)),
+                info -> defaultSetup(info, (WebPage) info.instance))),
         $("PageObject", sRule(info -> isPageObject(info.instance.getClass()),
             PageFactory::initElements))
     );
@@ -107,15 +107,16 @@ public class InitActions {
         throw exception("Can't setup '%s'. Instance should implement HasUIElement interface", info.name());
     }
 
-    public static void defaultSetup(SiteInfo info) {
-        DriverBase jdi = asUIBase(info);
+    public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {
         jdi.setName(info.field, info.parentName());
         jdi.setParent(info.parent);
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
+        return jdi;
     }
 
     public static HasUIElement elementSetup(SiteInfo info) {
-        HasUIElement jdi = defaultSetup(info);
+        HasUIElement jdi = (HasUIElement) info.instance;
+        defaultSetup(info, jdi.core());
         By locator = getLocatorFromField(info.field);
         if (locator != null)
             jdi.core().setLocator(locator);

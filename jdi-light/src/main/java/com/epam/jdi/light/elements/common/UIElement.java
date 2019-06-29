@@ -43,21 +43,14 @@ public class UIElement extends JDIBase
         implements WebElement, SetValue, IBaseElement, HasUIElement,
         HasAssert<IsAssert>, HasCache, IListBase {
     //region Constructors
-    public UIElement() { base = new JDIBase(this); }
-    public UIElement(WebElement el) { base().setWebElement(el); }
-    public UIElement(List<WebElement> els) { base().setWebElements(els); }
-    public UIElement(By locator) { base().setLocator(locator); }
-    public UIElement(JAction1<JDIBase> setup) { setup.execute(base()); }
+    public UIElement() { }
+    public UIElement(WebElement el) { setWebElement(el); }
+    public UIElement(List<WebElement> els) { setWebElements(els); }
+    public UIElement(By locator) { setLocator(locator); }
     //endregion
 
     //region Core
     public UIElement core() { return this; }
-    public WebElement get() {
-        return get(new Object[]{});
-    }
-    public WebElement get(Object... args) {
-        return base().get(args);
-    }
 
     //endregion
 
@@ -169,9 +162,9 @@ public class UIElement extends JDIBase
     }
 
     @JDIAction(level = DEBUG)
-    public WebElement findElement(By locator) { return $(locator, this).base().get(); }
+    public WebElement findElement(By locator) { return $(locator, this).get(); }
     @JDIAction(level = DEBUG)
-    public List<WebElement> findElements(By locator) { return $(locator, this).base().getAll(); }
+    public List<WebElement> findElements(By locator) { return $(locator, this).getAll(); }
 
     /** Get screen screen shot */
     @JDIAction(level = DEBUG)
@@ -365,14 +358,14 @@ public class UIElement extends JDIBase
      */
     @JDIAction("DoubleClick on '{name}'")
     public void doubleClick() {
-        base().actionsWitElement(Actions::doubleClick);
+        actionsWitElement(Actions::doubleClick);
     }
     /**
      * Right click on the element
      */
     @JDIAction("RightClick on '{name}'")
     public void rightClick() {
-        base().actionsWitElement(Actions::contextClick);
+        actionsWitElement(Actions::contextClick);
     }
 
     /**
@@ -380,7 +373,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction("Hover to '{name}'")
     public void hover() {
-        base().actions(Actions::moveToElement);
+        actions(Actions::moveToElement);
     }
 
     /**
@@ -389,7 +382,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction("Drag '{name}' and drop it to '{0}'")
     public void dragAndDropTo(UIElement to) {
-        base().actions((a,from) -> a.clickAndHold(from).moveToElement(to).release(to));
+        actions((a,from) -> a.clickAndHold(from).moveToElement(to).release(to));
     }
 
     /**
@@ -399,7 +392,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction("Drag '{name}' and drop it to ({0},{1})")
     public void dragAndDropTo(int x, int y) {
-        base().actions((a,e) -> a.dragAndDropBy(e, x, y));
+        actions((a,e) -> a.dragAndDropBy(e, x, y));
     }
 
     /**
@@ -428,7 +421,7 @@ public class UIElement extends JDIBase
     }
 
     public Label label() {
-        return new Label().base()
+        return new Label().core()
                 .setLocator(By.cssSelector("[for="+attr("id")+"]"))
                 .setName(getName() + " label");
     }
@@ -510,13 +503,13 @@ public class UIElement extends JDIBase
     }
     protected boolean displayed() {
         try {
-            if (base().webElement.hasValue())
-                return base().webElement.get().isDisplayed();
-            if (base().locator.isEmpty()) {
-                WebElement element = SMART_SEARCH.execute(base());
+            if (webElement.hasValue())
+                return webElement.get().isDisplayed();
+            if (locator.isEmpty()) {
+                WebElement element = SMART_SEARCH.execute(this);
                 return element != null && element.isDisplayed();
             }
-            List<WebElement> result = base().getAll();
+            List<WebElement> result = getAll();
             return result.size() == 1 && result.get(0).isDisplayed();
         } catch (Exception ex) { return false; }
     }
@@ -530,6 +523,6 @@ public class UIElement extends JDIBase
     }
 
     public void offCache() {
-        base().offCache();
+        offCache();
     }
 }

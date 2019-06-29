@@ -42,19 +42,19 @@ public class UIFactory {
         return new WebList(byLocator);
     }
     public static WebList list(List<WebElement> els, String name) {
-        return new WebList(els).setName(name);
+        return new WebList(els).core().setName(name);
     }
     public static WebList $$(String locator) {
         return list(locator);
     }
     public static WebList $$(String locator, Object parent) {
-        return list(locator).setParent(parent);
+        return list(locator).core().setParent(parent);
     }
     public static WebList $$(By locator) {
         return list(locator);
     }
     public static WebList $$(By locator, Object parent) {
-        return list(locator).setParent(parent);
+        return list(locator).core().setParent(parent);
     }
     public static WebList $$(List<WebElement> els, String name) {
         return list(els, name);
