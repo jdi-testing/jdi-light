@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeSuite;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.driver.get.DriverInfos.FF_INFO;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.settings.WebSettings.useDriver;
 import static io.github.com.StaticSite.homePage;
@@ -16,7 +17,7 @@ public class CustomDriverTestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         useDriver(() -> FF_INFO.getDriver() );
-        initElements(StaticSite.class);
+        initSite(StaticSite.class);
         homePage.open();
         logger.toLog("Run Tests");
     }

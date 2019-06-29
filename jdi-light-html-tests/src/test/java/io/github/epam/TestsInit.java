@@ -8,6 +8,7 @@ import pseudo.site.PseudoSite;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -18,8 +19,8 @@ public class TestsInit {
     public static void setUp() {
         logger.setLogLevel(INFO);
         SMART_SEARCH_LOCATORS.add("[ui=%s]");
-        initElements(PseudoSite.class);
-        initElements(StaticSite.class);
+        initSite(PseudoSite.class);
+        initSite(StaticSite.class);
         homePage.open();
         logger.toLog("Run Tests");
     }

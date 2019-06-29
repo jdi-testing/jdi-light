@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeSuite;
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
@@ -23,7 +24,7 @@ public class SimpleTestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         logger.setLogLevel(STEP);
-        initElements(SiteJdi.class);
+        initSite(SiteJdi.class);
 
         assertThat(TIMEOUT.get(), is(5));
         assertThat(PAGE_TIMEOUT.get(), is(25));

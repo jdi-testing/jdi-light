@@ -14,7 +14,7 @@ public class TestJDIList {
 
     @Test(enabled = false)
     public void issue70() {
-        initElements(TestJDIList.class);
+        initSite(TestJDIList.class);
         dashboardPage.open();
         dashboardPage.documents.get("foo").is().displayed();
         dashboardPage.documents.get("bar").is().displayed();

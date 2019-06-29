@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.init.PageFactory;
 import com.epam.jdi.light.elements.interfaces.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
@@ -57,8 +58,11 @@ public class WebPage extends DriverBase implements PageObject {
         currentPage.set(page.getName());
     }
 
-    public WebPage() { }
+    public WebPage() {
+        PageFactory.initElements(this);
+    }
     public WebPage(String url) { this.url = url; }
+    public WebPage(String url, String title) { this.url = url; this.title = title; }
     public static void openUrl(String url) {
         new WebPage(url).open();
     }

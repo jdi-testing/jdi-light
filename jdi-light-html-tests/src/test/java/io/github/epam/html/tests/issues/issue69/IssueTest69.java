@@ -18,7 +18,7 @@ public class IssueTest69 {
     @BeforeMethod
     public void before() {
         if (first) {
-            initElements(JDISite69.class);
+            initSite(JDISite69.class);
             SMART_SEARCH_LOCATORS.add("[ui=%s]");
             first = false;
         }
