@@ -46,6 +46,16 @@ public class InitActions {
         info.instance = initElement(info);
         return info.instance;
     };
+    private static void webPageSetup(SiteInfo info) {
+        WebPage page = (WebPage) info.instance;
+        defaultSetup(info, page);
+        page.updatePageData(
+                valueOrDefault(getAnnotation(info.field, Url.class),
+                        page.getClass().getAnnotation(Url.class)),
+                valueOrDefault(getAnnotation(info.field, Title.class),
+                        page.getClass().getAnnotation(Title.class))
+        );
+    }
     public static JFunc1<SiteInfo, WebPage> SETUP_WEBPAGE_ON_SITE = info -> {
         WebPage page = (WebPage) SETUP_SECTION_ON_SITE.execute(info);
         page.updatePageData(
@@ -84,8 +94,7 @@ public class InitActions {
         $("Element", sRule(info -> isInterface(info.instance.getClass(), IBaseElement.class),
             InitActions::elementSetup)),
         $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
-        $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class),
-                info -> defaultSetup(info, (WebPage) info.instance))),
+        $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
         $("PageObject", sRule(info -> isPageObject(info.instance.getClass()),
             PageFactory::initElements))
     );
@@ -108,7 +117,7 @@ public class InitActions {
     }
 
     public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {
-        jdi.setName(info.field, info.parentName());
+        jdi.setName(info);
         jdi.setParent(info.parent);
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
         return jdi;
@@ -117,13 +126,15 @@ public class InitActions {
     public static IBaseElement elementSetup(SiteInfo info) {
         IBaseElement jdi = (IBaseElement) info.instance;
         defaultSetup(info, jdi.core());
-        By locator = getLocatorFromField(info.field);
-        if (locator != null)
-            jdi.core().setLocator(locator);
-        if (info.field.getAnnotation(Root.class) != null)
-            jdi.core().locator.isRoot = true;
-        if (hasAnnotation(info.field, Frame.class))
-            jdi.core().setFrame(getFrame(info.field.getAnnotation(Frame.class)));
+        if (info.field != null) {
+            By locator = getLocatorFromField(info.field);
+            if (locator != null)
+                jdi.core().setLocator(locator);
+            if (info.field.getAnnotation(Root.class) != null)
+                jdi.core().locator.isRoot = true;
+            if (hasAnnotation(info.field, Frame.class))
+                jdi.core().setFrame(getFrame(info.field.getAnnotation(Frame.class)));
+        }
         info.instance = jdi;
         return jdi;
     }

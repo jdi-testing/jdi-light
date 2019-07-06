@@ -25,10 +25,8 @@ public class SimpleTestsInit {
     public static void setUp() {
         logger.setLogLevel(STEP);
         initSite(SiteJdi.class);
-
         assertThat(TIMEOUT.get(), is(5));
         assertThat(PAGE_TIMEOUT.get(), is(25));
-
         BEFORE_JDI_ACTION = jp -> {
             BEFORE_STEP_ACTION.execute(jp);
             processNewPage(jp);

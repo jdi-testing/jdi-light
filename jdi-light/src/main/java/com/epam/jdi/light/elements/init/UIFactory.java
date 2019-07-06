@@ -48,13 +48,17 @@ public class UIFactory {
         return list(locator);
     }
     public static WebList $$(String locator, Object parent) {
-        return list(locator).core().setParent(parent);
+        WebList list = list(locator);
+        list.core().setParent(parent);
+        return list;
     }
     public static WebList $$(By locator) {
         return list(locator);
     }
     public static WebList $$(By locator, Object parent) {
-        return list(locator).core().setParent(parent);
+        WebList list = list(locator);
+        list.core().setParent(parent);
+        return list;
     }
     public static WebList $$(List<WebElement> els, String name) {
         return list(els, name);

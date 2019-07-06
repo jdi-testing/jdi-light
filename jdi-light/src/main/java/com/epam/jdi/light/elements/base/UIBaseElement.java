@@ -9,9 +9,10 @@ public abstract class UIBaseElement<A extends UIAssert>
     protected UIElement element;
     public UIElement core() {
         if (element == null)
-            element = new UIElement().setName(getName() + " element");
+            element = new UIElement();
         return element;
     }
+
     protected void setElement(UIElement uiElement) { element = uiElement; }
 
     public void hover() { core().hover(); }

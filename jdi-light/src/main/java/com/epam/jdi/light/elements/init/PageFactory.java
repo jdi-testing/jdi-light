@@ -50,6 +50,7 @@ public class PageFactory {
     // region initSite
     public static JAction PRE_INIT = WebSettings::init;
     public static void initSite(Class<?> site) {
+        PRE_INIT.execute();
         initSite(site, DRIVER_NAME);
     }
     public static void initSite(Class<?> site, String driverName) {
@@ -68,25 +69,13 @@ public class PageFactory {
             } catch (Exception ex) {
                 throw exception("Can't init %s '%s' on '%s'. Exception: %s",
                     isClass(pageField.getType(), WebPage.class) ? "page" : "element",
-                    pageField.getName(),
-                    site.getSimpleName(),
-                    ex.getMessage());
+                    pageField.getName(), site.getSimpleName(), ex.getMessage());
             }
         }
     }
     private static void initPageFields(SiteInfo info, Field pageField) throws IllegalAccessException {
         info.field = pageField;
-        Object instance = null;
-        if (isClass(info.type(), WebPage.class))
-            instance = SETUP_WEBPAGE_ON_SITE.execute(info);
-        else {
-            if (isPageObject(info.type()))
-                instance = isClass(info.type(), DriverBase.class)
-                    ? SETUP_SECTION_ON_SITE.execute(info)
-                    : SETUP_PAGE_OBJECT_ON_SITE.execute(info);
-            else if(isJDIField(pageField))
-                instance = PageFactory.initElement(info);
-        }
+        Object instance = initElement(info);
         if (instance != null)
             pageField.set(null, instance);
     }
@@ -99,6 +88,7 @@ public class PageFactory {
         Object.class, WebPage.class, Section.class, UIElement.class,
             UIBase.class, UIBaseElement.class, UIListBase.class,
             DataList.class, JList.class, WebList.class);
+
     public static void initElements(SiteInfo info) {
         List<Field> poFields = recursion(info.instance.getClass(),
             t -> !STOP_INIT_CLASSES.contains(t),
@@ -116,10 +106,10 @@ public class PageFactory {
             field.set(obj, initElement(pageInfo));
         } catch (Exception ex) {
             throw exception("Can't init %s '%s' on '%s'. Exception: %s",
-                    isClass(pageInfo.field.getType(), WebPage.class) ? "page" : "element",
-                    pageInfo.field.getName(),
-                    info.field.getType().getSimpleName(),
-                    ex.getMessage());
+                isClass(pageInfo.field.getType(), WebPage.class) ? "page" : "element",
+                pageInfo.field.getName(),
+                info.field.getType().getSimpleName(),
+                ex.getMessage());
         }
 
     }
@@ -175,19 +165,19 @@ public class PageFactory {
     }
     //endregion
 
-    private static void initPage(Object page) {
+    public static void initPage(Object page) {
         SiteInfo info = new SiteInfo(DRIVER_NAME);
         info.instance = page;
-        if (isClass(page.getClass(), WebPage.class)) {
-            WebPage webPage = (WebPage) page;
-            webPage.driverName = DRIVER_NAME;
-            webPage.updatePageData(webPage.getClass().getAnnotation(Url.class),
-                    webPage.getClass().getAnnotation(Title.class));
-            addPage(webPage);
-        }
+        if (isClass(page.getClass(), WebPage.class))
+            initWebPage((WebPage) page);
         initElements(info);
     }
-
+    private static void initWebPage(WebPage webPage) {
+        webPage.driverName = DRIVER_NAME;
+        webPage.updatePageData(webPage.getClass().getAnnotation(Url.class),
+                webPage.getClass().getAnnotation(Title.class));
+        addPage(webPage);
+    }
     private static <T> T getPageObject(WebDriver driver, Class<T> pageClassToProxy) {
         useDriver(() -> driver);
         try {
@@ -213,7 +203,7 @@ public class PageFactory {
 
     public static void initElements(Class<?>... pages) {
         List<Object> pageList = map(asList(pages), p -> getPageObject(getDriver(), p));
-        initElements(pageList.toArray(new String[pageList.size()]));
+        initElements(pageList.toArray(new Object[pageList.size()]));
     }
     public static <T> T initElements(WebDriver driver, Class<T> pageClassToProxy) {
         T page = getPageObject(driver, pageClassToProxy);

@@ -7,10 +7,13 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.JDIElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.PrintUtils;
+import com.epam.jdi.tools.ReflectionUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -72,8 +75,9 @@ public class ActionHelper {
             if (template.contains("{")) {
                 MapArray<String, Object> obj = toMap(() -> new MapArray<>("this", getElementName(jp)));
                 MapArray<String, Object> args = methodArgs(jp, method);
+                MapArray<String, Object> core = core(jp);
                 MapArray<String, Object> fields = classFields(jp);
-                return getActionNameFromTemplate(method, template, obj, args, fields);
+                return getActionNameFromTemplate(method, template, obj, args, core, fields);
             }
             return template;
         } catch (Exception ex) { throw new RuntimeException("Can't fill JDIAction template: " + template + "for method: " + method.getName()); }
@@ -156,7 +160,6 @@ public class ActionHelper {
     static String methodNameTemplate(MethodSignature method) {
         try {
             Method m = method.getMethod();
-            String result;
             if (m.isAnnotationPresent(JDIAction.class)) {
                 return m.getAnnotation(JDIAction.class).value();
             }
@@ -213,8 +216,17 @@ public class ActionHelper {
         return result;
     }
 
+
+    static MapArray<String, Object> core(JoinPoint joinPoint) {
+        Class cl = joinPoint.getSignature().getDeclaringType();
+        if (isInterface(cl, IBaseElement.class)) {
+            UIElement el = ((IBaseElement) joinPoint.getThis()).core();
+            return getAllFields(el);
+        }
+        return new MapArray<>();
+    }
     static MapArray<String, Object> classFields(JoinPoint joinPoint) {
-        return toMap(()->new MapArray<>(getThisFields(joinPoint), Field::getName, value -> getValueField(value, joinPoint.getThis())));
+        return getAllFields(joinPoint.getThis());
     }
 
     static String getElementName(JoinPoint jp) {
@@ -226,12 +238,6 @@ public class ActionHelper {
                 //obj.toString().matches(".*\\.\\w++@\\w+")
                 : jp.getSignature().getDeclaringType().getSimpleName();
 
-    }
-    static List<Field> getThisFields(JoinPoint joinPoint) {
-        Object obj = joinPoint.getThis();
-        return /*obj != null
-                ? getFieldsDeep(obj)
-                : */asList(joinPoint.getSignature().getDeclaringType().getFields());
     }
     static String getActionNameFromTemplate(MethodSignature method, String value,
                                             MapArray<String, Object>... args) {

@@ -7,6 +7,7 @@ package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.IBaseElement;
@@ -23,16 +24,19 @@ import org.openqa.selenium.support.ui.Select;
 import java.text.MessageFormat;
 import java.util.List;
 
+import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.TextType.SMART;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.Case;
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
@@ -56,7 +60,7 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
     /** Click on element */
     @JDIAction("Click on '{name}'")
     public void click() {
-        get().click();
+        click(clickAreaType);
     }
 
     /** Submit form*/
@@ -110,7 +114,7 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
 
     @JDIAction("Get '{name}' text")
     public String getText() {
-        return text(SMART);
+        return text(textType);
     }
 
     /**
@@ -209,6 +213,48 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
     @JDIAction("Set '{0}' in '{name}'")
     public void setText(String value) {
         jsExecute("value='"+value+"'");
+    }
+
+    public void click(int x, int y) {
+        actionsWitElement((a, e) -> a.moveByOffset(x, y).click());
+    }
+    public void click(ElementArea area) {
+        switch (area) {
+            case TOP_LEFT:
+                click(1,1);
+                logger.debug("Click Top Left");
+                break;
+            case TOP_RIGHT:
+                click(getRect().getWidth()-1,1);
+                logger.debug("Click Top Right");
+                break;
+            case BOTTOM_LEFT:
+                click(1,getRect().getHeight()-1);
+                logger.debug("Click Bottom Left");
+                break;
+            case BOTTOM_RIGHT:
+                click(getRect().getWidth()-1,getRect().getHeight()-1);
+                logger.debug("Click Bottom Right");
+                break;
+            case CENTER:
+                get().click();
+                break;
+            case SMART_CLICK:
+                if (isHidden())
+                    show();
+                ElementArea a = Switch().get(
+                Case(t -> isClickable(),
+                    t-> CENTER),
+                Case(t -> isClickable(1, 1),
+                    t-> TOP_LEFT),
+                Case(t -> isClickable(getRect().getWidth()-1,1),
+                    t-> TOP_RIGHT),
+                Case(t -> isClickable(1,getRect().getHeight()-1),
+                    t-> BOTTOM_LEFT),
+                Case(t -> isClickable(getRect().getWidth()-1,getRect().getHeight()-1),
+                    t-> BOTTOM_RIGHT));
+                click(a);
+        }
     }
 
     /**
@@ -441,6 +487,7 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
                 return attr("value");
             case INNER:
                 return jsExecute("innerText");
+            case SMART:
             default:
                 WebElement el = get();
                 String text = el.getText();
@@ -508,8 +555,24 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
                 return element != null && element.isDisplayed();
             }
             List<WebElement> result = getAll();
-            return result.size() == 1 && result.get(0).isDisplayed();
+            return result.size() == 1 && result.get(0).isDisplayed() && isClickable();
         } catch (Exception ex) { return false; }
+    }
+
+    public boolean isClickable() {
+        return isClickable(getRect().getWidth()/2, getRect().getHeight()/2-1);
+    }
+    public boolean isClickable(int x, int y) {
+        return (Boolean) js().executeScript("var elem = arguments[0],    " +
+                "  rect = elem.getBoundingClientRect(),    " +
+                "  cx = rect.left + arguments[1],        " +
+                "  cy = rect.top + arguments[2],        " +
+                "  e = document.elementFromPoint(cx, cy); " +
+                "for (; e; e = e.parentElement) {         " +
+                "  if (e === elem)                        " +
+                "    return true;                         " +
+                "}                                        " +
+                "return false;                            ", get(), x, y);
     }
     //endregion
     public boolean wait(JFunc1<UIElement, Boolean> condition) {

@@ -101,7 +101,7 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
     @JDIAction(value = "Is '{name}' expanded", level = DEBUG)
     public boolean isExpanded() {
         assertLinked(list(), "list", "expand");
-        return list().hasAny(UIElement::isDisplayed);
+        return list().isDisplayed();
     }
     /**
      * Expanding DropDown

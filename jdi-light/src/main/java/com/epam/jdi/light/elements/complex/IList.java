@@ -6,15 +6,15 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.settings.TimeoutSettings;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
+
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 
 public interface IList<T> extends List<T>, HasValue, IHasSize {
     /**
@@ -73,7 +73,7 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
     }
     @Override
     default int size() {
-        return elements(0).size();
+        return TIMEOUT.immediately(() -> elements(0).size());
     }
     @Override
     default boolean isEmpty() { return size() == 0; }

@@ -37,7 +37,9 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
         return root().find(fillByTemplate(valueTemplate, name)).setName("valueTemplate");
     }
     UIElement valueText() { return root().find(value).setName("value"); }
-    List<UIElement> allValues() { return root().finds(values); }
+    List<UIElement> allValues() {
+        return root().finds(values);
+    }
 
     @JDIAction(level = DEBUG)
     private void expand() {

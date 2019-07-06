@@ -1,6 +1,8 @@
 package com.epam.jdi.light.elements.base;
 
+import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDILocator;
+import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -17,8 +19,11 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.ElementArea.CENTER;
+import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
+import static com.epam.jdi.light.common.TextType.SMART;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
@@ -311,6 +316,10 @@ public abstract class JDIBase extends DriverBase implements HasCache {
             actions = new Actions(driver());
         return actions;
     }
+    protected ElementArea clickAreaType = SMART_CLICK;
+    public void setClickArea(ElementArea area) { clickAreaType = area; }
+    protected TextType textType = SMART;
+    public void setTextType(TextType type) { textType = type; }
 
     public void offCache() {
         webElement.useCache(false);

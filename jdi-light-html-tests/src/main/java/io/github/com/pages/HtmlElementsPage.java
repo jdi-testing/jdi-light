@@ -77,7 +77,7 @@ public class HtmlElementsPage extends WebPage {
 
     public static Combobox iceCream;
     // @UI("#ice-cream") public static HtmlCombobox iceCream;
-    @UI("#ice-cream") public static DataList iceCreamDataList;
+    @UI("#ice-cream") public static DataListOptions iceCreamDataList;
 
     public static Checkbox acceptConditions;
     // @UI("#accept-conditions") public static Checkbox acceptConditions;

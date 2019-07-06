@@ -5,7 +5,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -28,9 +30,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBaseElement {
-    protected UIElement element = new UIElement();
-    public UIElement core() { return element; }
+public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBaseElement,
+        WithLabel, SetValue {
 
     protected Select getSelect(String action) {
         try {
@@ -139,4 +140,12 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBa
                 webElement -> !webElement.isEnabled(), WebElement::getText);
     }
 
+    @Override
+    public void setValue(String value) {
+        select(value);
+    }
+
+    public String getValue() {
+        return selected();
+    }
 }

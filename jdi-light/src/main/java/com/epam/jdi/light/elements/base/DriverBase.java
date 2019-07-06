@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.base;
 import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +24,6 @@ public abstract class DriverBase implements JDIElement {
     public <T> T asEntity(Class<T> entityClass) {
         return UIUtils.asEntity(this, entityClass);
     }
-
     public String name = "";
     public String varName = "";
     public String typeName = "";
@@ -36,6 +36,14 @@ public abstract class DriverBase implements JDIElement {
     }
     public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }
 
+    public void setName(SiteInfo info) {
+        if (info.field != null)
+            setName(info.field, info.parentName());
+        else {
+            setName(info.name());
+            setTypeName(info.type().getSimpleName());
+        }
+    }
     public <T> T setName(String name) {
         this.name = name;
         this.varName = name;

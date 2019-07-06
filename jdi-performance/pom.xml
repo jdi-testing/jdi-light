@@ -10,7 +10,8 @@
     <name>JDI Performance</name>
 
     <properties>
-        <driver>firefox</driver>
+        <driver>chrome</driver>
+        <!--driver>firefox</driver-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <aspectj.version>1.9.1</aspectj.version>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>

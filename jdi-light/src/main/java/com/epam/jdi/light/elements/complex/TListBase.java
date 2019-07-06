@@ -20,6 +20,8 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import org.apache.commons.lang3.ArrayUtils;
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -66,11 +68,12 @@ class TListBase<T extends IListBase, A extends UISelectAssert>
         if (core().getLocator().toString().contains("%s"))
             throw exception("You call method that can't be used with template locator. " +
                     "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(core().getLocator()));
-        int length = core().getList(minAmount).size();
+        List<WebElement> webElements = core().getList(minAmount);
+        int length = webElements.size();
         List<T> result = new ArrayList<>();
         for (int i=0; i < length; i++) {
             int j = i;
-            result.add(initElement(() -> (WebElement) core().getList(minAmount).get(j)));
+            result.add(initElement(() -> webElements.get(j)));
         }
         return this.elements.set(result);
     }
@@ -307,10 +310,10 @@ class TListBase<T extends IListBase, A extends UISelectAssert>
     public List<String> listDisabled() {
         return ifSelect(IListBase::isDisabled, IListBase::getText);
     }
-    public boolean displayed() {
+    @Override
+    public boolean isDisplayed() {
         return isNotEmpty() && get(0).isDisplayed();
     }
-
     @Override @JDIAction(level = DEBUG)
     public void highlight(String color) {
         foreach(el -> el.highlight(color));
@@ -331,15 +334,15 @@ class TListBase<T extends IListBase, A extends UISelectAssert>
     public A is() {
         offCache();
         return (A) new UISelectAssert<>().set(this);
-    }/*
+    }
     @JDIAction("Assert that {name} list meet condition")
-    public UISelectAssert<UISelectAssert, JList<T>> is(Matcher<? super List<T>> condition) {
+    public A is(Matcher<? super List<T>> condition) {
         MatcherAssert.assertThat(this, condition);
         return is();
     }
-    public UISelectAssert<UISelectAssert, JList<T>> assertThat(Matcher<? super List<T>> condition) {
+    public A assertThat(Matcher<? super List<T>> condition) {
         return is(condition);
-    }*/
+    }
     //endregion
     public void setup(Field field) {
         Type[] types;
@@ -377,7 +380,7 @@ class TListBase<T extends IListBase, A extends UISelectAssert>
             T result = initElement();
             result.core().setGetFunc(func);
             return result;
-        } catch (Exception ex) { throw exception("Can't init new element for list"); }
+        } catch (Exception ex) { throw exception("Can't init func new element for list"); }
     }
     protected T initElement() {
         try {

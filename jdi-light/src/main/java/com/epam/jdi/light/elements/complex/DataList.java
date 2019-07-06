@@ -154,30 +154,28 @@ public class DataList<T extends IListBase, D> extends TListBase<T, DataListAsser
     public String getValue() {
         return PrintUtils.print(LinqUtils.map(asData(), Object::toString));
     }
-
+    @Override
+    public DataListAssert<T, D> is() {
+        offCache();
+        return new DataListAssert<T, D>().set(this);
+    }
     /**
      * Match passed value with elements
      * @param condition to compare
      * @return UIListAsserts
      */
     @JDIAction("Assert that {name} data meet condition")
-    public DataListAssert<T, D> is(Matcher<? super List<D>> condition) {
+    public DataListAssert<T, D> isData(Matcher<? super List<D>> condition) {
         MatcherAssert.assertThat(asData(), condition);
         return is();
     }
-
-    @Override
-    public DataListAssert<T, D> is() {
-        offCache();
-        return new DataListAssert<T, D>().set(this);
+    @JDIAction("Assert that {name} data meet condition")
+    public DataListAssert<T, D> assertThatData(Matcher<? super List<D>> condition) {
+        return isData(condition);
     }
-
-    public DataListAssert<T, D> assertThat(Matcher<? super List<D>> condition) {
-        return is(condition);
-    }
-    public DataListAssert<T, D> verify(Matcher<? super List<D>> condition) {
+    public DataListAssert<T, D> verifyData(Matcher<? super List<D>> condition) {
         assertSoft();
-        return is(condition);
+        return isData(condition);
     }
     public void setup(Field field) {
         try {

@@ -12,7 +12,7 @@ import static com.epam.jdi.tools.LinqUtils.ifSelect;
 
 // Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
-public class DataList extends Combobox {
+public class DataListOptions extends Combobox {
 
     @Override
     public WebList list() {
