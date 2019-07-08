@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.interfaces.HasValue;
 public class Label extends UIBaseElement<UIAssert> implements HasValue {
     @JDIAction("Click on '{name}'")
     public void click() {
-        element.click();
+        core().click();
     }
     @JDIAction("Get '{name}' text")
     public String text(TextType type) {

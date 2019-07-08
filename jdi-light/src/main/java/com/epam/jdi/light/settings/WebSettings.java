@@ -91,8 +91,8 @@ public class WebSettings {
         String locatorName = SMART_SEARCH_NAME.execute(el.name);
         for (String template : SMART_SEARCH_LOCATORS) {
             UIElement ui = template.equals("#%s")
-                ? $(String.format(template, locatorName)).setName(el.name)
-                : $(String.format(template, locatorName), el.parent).setName(el.name);
+                ? $(String.format(template, locatorName)).setup(e->e.setName(el.name))
+                : $(String.format(template, locatorName), el.parent).setup(e->e.setName(el.name));
             try {
                 return ui.get();
             } catch (Exception ignore) { }

@@ -50,11 +50,33 @@ public abstract class JDIBase extends DriverBase implements HasCache {
     public static <T> boolean waitCondition(JFunc1<T, Boolean> condition, T element) {
         return new Timer(TIMEOUT.get()).wait(() -> condition.execute(element));
     }
+    public JDIBase base() {
+        return this;
+    }
+    public JDIBase() { }
+    public JDIBase(JDIBase base) {
+        setCore(base);
+    }
+    public void setCore(JDIBase base) {
+        locator = base.locator;
+        name = base.name;
+        parent = base.parent;
+        name = base.name;
+        varName = base.varName;
+        typeName = base.typeName;
+        failElement = base.failElement;
+        parent = base.parent;
+        driverName = base.driverName;
+        context = base.printFullLocator();
+        webElement = base.webElement;
+        webElements = base.webElements;
+        searchRule = base.searchRule;
+    }
     public JDILocator locator = new JDILocator();
 
     public CacheValue<WebElement> webElement = new CacheValue<>();
-    protected CacheValue<List<WebElement>> webElements = new CacheValue<>();
-    protected CacheValue<JFunc1<WebElement, Boolean>> searchRule =
+    public CacheValue<List<WebElement>> webElements = new CacheValue<>();
+    public CacheValue<JFunc1<WebElement, Boolean>> searchRule =
             new CacheValue<>(() -> SEARCH_CONDITION);
 
     public JDIBase noValidation() {
@@ -151,7 +173,6 @@ public abstract class JDIBase extends DriverBase implements HasCache {
     }
 
     public List<WebElement> getAll(Object... args) {
-        //TODO rethink SMART SEARCH
         if (webElements.hasValue()) {
             List<WebElement> elements = webElements.get();
             try {
@@ -193,7 +214,7 @@ public abstract class JDIBase extends DriverBase implements HasCache {
         }
     }
     public WebList allUI(Object... args) {
-        return new WebList(getAll(args)).setName(getName());
+        return new WebList(getAll(args)).setup(e-> e.setName(getName()));
     }
     private JDIBase getBase(Object element) {
         if (isClass(element.getClass(), JDIBase.class))

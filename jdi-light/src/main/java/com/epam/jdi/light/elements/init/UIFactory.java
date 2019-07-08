@@ -42,7 +42,7 @@ public class UIFactory {
         return new WebList(byLocator);
     }
     public static WebList list(List<WebElement> els, String name) {
-        return new WebList(els).setName(name);
+        return new WebList(els).setup(e->e.setName(name));
     }
     public static WebList $$(String locator) {
         return list(locator);

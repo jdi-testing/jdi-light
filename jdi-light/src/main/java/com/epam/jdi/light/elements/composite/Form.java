@@ -70,8 +70,9 @@ public class Form<T> extends Section {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
-                UIElement element = new UIElement().setName(pair.key);
-                element.setParent(this);
+                UIElement element = new UIElement().setup(e->e
+                    .setName(pair.key)
+                    .setParent(this));
                 fillAction(null, element, pageObject, pair.value);
             }
             return;

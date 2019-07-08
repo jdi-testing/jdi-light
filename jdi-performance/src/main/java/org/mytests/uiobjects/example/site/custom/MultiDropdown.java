@@ -4,11 +4,11 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.IBaseElement;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.elements.common.UIElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
 
     By expandArrow = By.cssSelector(".caret");
     By values = By.tagName("li");
-    By valueTemplate = By.xpath(".//label[text()='%s']/../..");
+    By valueTemplate = By.xpath(".//a[label[text()='%s']]");
     By value = By.cssSelector("button");
     By valuesConatiner = By.tagName("ul");
 
@@ -91,7 +91,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
         for (String name : values()) {
             UIElement value = value(name);
             if (value.isDisabled()) continue;
-            boolean valueSelected = value.find("input").isSelected();
+            boolean valueSelected = value.find("input").setup(JDIBase::noValidation).isSelected();
             if (valueSelected && !listNames.contains(name.trim())
                     || !valueSelected && listNames.contains(name.trim()))
                 value.click();

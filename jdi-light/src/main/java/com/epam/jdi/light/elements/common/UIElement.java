@@ -15,6 +15,7 @@ import com.epam.jdi.light.elements.base.IListBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.*;
@@ -49,10 +50,21 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
     public UIElement(WebElement el) { setWebElement(el); }
     public UIElement(List<WebElement> els) { setWebElements(els); }
     public UIElement(By locator) { setLocator(locator); }
+    public UIElement(JDIBase base) {
+        super(base);
+    }
     //endregion
 
     //region Core
     public UIElement core() { return this; }
+    public UIElement setup(JAction1<JDIBase> setup) {
+        return setup(UIElement.class, setup);
+    }
+    @Override
+    public UIElement setName(String name) {
+        super.setName(name);
+        return this;
+    }
 
     //endregion
 
@@ -465,9 +477,9 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
     }
 
     public Label label() {
-        return new Label().core()
+        return new Label().setup(Label.class, e->e
                 .setLocator(By.cssSelector("[for="+attr("id")+"]"))
-                .setName(getName() + " label");
+                .setName(getName() + " label"));
     }
 
     /**

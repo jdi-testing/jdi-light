@@ -9,6 +9,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
@@ -29,10 +31,19 @@ public abstract class DriverBase implements JDIElement {
     public String typeName = "";
     public String failElement = "";
     public Object parent;
+    public List<Object> parents() {
+        List<Object> parents = new ArrayList<>();
+        Object p = parent;
+        while (p != null) {
+            parents.add(p);
+            p = isClass(p.getClass(), DriverBase.class) ? ((DriverBase)p).parent : null;
+        }
+        return parents;
+    }
     protected String context;
-    public <T extends JDIElement> T setParent(Object parent) {
+    public DriverBase setParent(Object parent) {
         this.parent = parent;
-        return (T) this;
+        return this;
     }
     public static Timer timer() { return new Timer(TIMEOUT.get()*1000); }
 
@@ -44,11 +55,11 @@ public abstract class DriverBase implements JDIElement {
             setTypeName(info.type().getSimpleName());
         }
     }
-    public <T> T setName(String name) {
+    public DriverBase setName(String name) {
         this.name = name;
         this.varName = name;
         this.failElement = name;
-        return (T) this;
+        return this;
     }
     public void setName(Field field, String className) {
         this.name = splitCamelCase(field.getName());

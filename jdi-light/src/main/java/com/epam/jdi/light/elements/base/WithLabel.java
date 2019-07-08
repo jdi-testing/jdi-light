@@ -6,9 +6,9 @@ import org.openqa.selenium.By;
 
 public interface WithLabel extends IBaseElement {
     default Label label() {
-        return new Label().core()
+        return new Label().setup(Label.class, j->j
             .setLocator(By.cssSelector("[for="+ core().attr("id")+"]"))
-            .setName(core().getName() + " label");
+            .setName(core().getName() + " label"));
     }
     /**
      * Gets label text

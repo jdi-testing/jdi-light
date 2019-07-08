@@ -117,8 +117,7 @@ public class InitActions {
     }
 
     public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {
-        jdi.setName(info);
-        jdi.setParent(info.parent);
+        jdi.setParent(info.parent).setName(info);
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
         return jdi;
     }

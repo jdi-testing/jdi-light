@@ -16,8 +16,8 @@ public class DataListOptions extends Combobox {
 
     @Override
     public WebList list() {
-        return $$("#"+element.attr("list")+" option")
-                .noValidation().setName("list");
+        return $$("#"+element.attr("list")+" option").setup(e->e
+            .noValidation().setName("list"));
     }
     /*List<String> list() {
         return dataList().values();
