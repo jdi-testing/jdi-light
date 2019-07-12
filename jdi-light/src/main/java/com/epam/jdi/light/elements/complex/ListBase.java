@@ -18,6 +18,7 @@ import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
@@ -57,8 +58,8 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
      */
 
     @JDIAction(level = DEBUG)
-    public List<T> elements(int minAmount) {
-        return LinqUtils.map(list().elements(minAmount), this::toT);
+    public MapArray<String, T> elements(int minAmount) {
+        return list().elements(minAmount).toMapArray(this::toT);
     }
 
     /**

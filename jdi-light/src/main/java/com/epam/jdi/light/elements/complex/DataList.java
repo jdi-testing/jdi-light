@@ -6,6 +6,7 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.elements.base.IListBase;
+import com.epam.jdi.tools.map.MapArray;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class DataList<D, T extends IListBase> implements IList<D> {
         return list;
     }
 
-    public List<D> elements(int minAmount) {
+    public MapArray<String, D> elements(int minAmount) {
         return null;
     }
 

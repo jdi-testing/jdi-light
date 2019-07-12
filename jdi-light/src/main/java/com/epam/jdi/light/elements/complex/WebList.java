@@ -9,45 +9,31 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
-import com.epam.jdi.light.driver.WebDriverByUtils;
-import com.epam.jdi.light.driver.WebDriverUtils;
 import com.epam.jdi.light.elements.base.HasUIList;
 import com.epam.jdi.light.elements.base.IListBase;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.map.MapArray;
 import org.apache.commons.lang3.ArrayUtils;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
-import static com.epam.jdi.light.elements.init.PageFactory.initFieldUsingRules;
-import static com.epam.jdi.light.elements.init.PageFactory.setupFieldUsingRules;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -71,14 +57,14 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         super.setName(name);
         return this;
     }
-    protected CacheValue<List<UIElement>> elements = new CacheValue<>();
+    protected CacheValue<MapArray<String, UIElement>> elements = new CacheValue<>();
 
     private String elementName(int i) {
         return format("%s[%s]", getName(), i);
     }
 
     @JDIAction(level = DEBUG)
-    public List<UIElement> elements(int minAmount) {
+    public MapArray<String, UIElement> elements(int minAmount) {
         if (elements.hasValue() && isActual() && elements.get().size() >= minAmount)
             return elements.get();
         if (getLocator().toString().contains("%s"))
@@ -86,12 +72,15 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
                     "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator()));
         List<WebElement> webElements = getList(minAmount);
         int length = webElements.size();
-        List<UIElement> result = new ArrayList<>();
+        elements.get().clear();
         for (int i=0; i < length; i++) {
             int j = i;
-            result.add(initElement(() -> getList(minAmount).get(j), j));
+            addElement(initElement(() -> getList(minAmount).get(j), j));
         }
-        return elements.set(result);
+        return elements.get();
+    }
+    private void addElement(UIElement el) {
+        elements.get().add(el.getName(), el);
     }
 
     private String NO_ELEMENTS_FOUND = "Can't select '%s'. No elements with this name found";
@@ -101,10 +90,13 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction(level = DEBUG)
     public UIElement get(String value) {
-        return (getLocator().toString().contains("%s")
-            ? $(getLocator(value), parent)
-            : nameToUIElement(value))
-        .setName(getName()+":"+value);
+        if (!elements.get().keys().contains(value)) {
+            addElement((getLocator().toString().contains("%s")
+                ? $(getLocator(value), parent)
+                : nameToUIElement(value))
+            .setName(getName() + ":" + value));
+        }
+        return elements.get().get(value);
     }
     private UIElement nameToUIElement(String value) {
         refresh();
@@ -132,7 +124,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             throw exception("Can't get element with index '%s'. Index should be 0 or more", index);
         return (getLocator().toString().contains("%s")
             ? tryGetByIndex(index)
-            : elements(index).get(index))
+            : elements(index).get(index).value)
         .setName(elementName(index));
     }
     private UIElement tryGetByIndex(int index) {
@@ -350,7 +342,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     protected boolean isActual() {
         try {
-            return elements.get().size() > 0 && isActual(elements.get().get(0));
+            return elements.get().size() > 0 && isActual(elements.get().get(0).value);
         } catch (Exception ex) { return false; }
     }
 
