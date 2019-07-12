@@ -8,9 +8,15 @@
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light?ref=badge_shield)
 
 ## Documentation
+For fast start you can go through [tutorial](https://jdi-docs.github.io/jdi-light/?java#tutorial) </br>
 
-Can be found [here](https://jdi-docs.github.io/jdi-light/#common-elements)</br>
-For fast start you can go through [tutorial](https://jdi-docs.github.io/jdi-light/?java#tutorial)
+More links: </br>
+Documentation: https://jdi-docs.github.io/jdi-light/?java - different types of documentation from introduction and tutorial to technical methods documentation </br>
+Tutorial: https://jdi-docs.github.io/jdi-light/?java#tutorial - helps to get main ideas on practice </br>
+Tutorial repo:  https://github.com/jdi-tutorials </br>
+Project templates: https://github.com/jdi-templates - for fast projects start </br>
+Examples: https://github.com/jdi-examples </br>
+**Note: JDI Light natively work with JDK 8. Some problems identified with JDK 12 so it is not recommended** </br>
 
 ## Introduction
 
