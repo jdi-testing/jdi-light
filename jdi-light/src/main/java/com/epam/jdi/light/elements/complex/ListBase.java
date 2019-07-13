@@ -32,7 +32,6 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.PageFactory.initFieldUsingRules;
 import static com.epam.jdi.light.elements.init.PageFactory.setupFieldUsingRules;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 
 abstract class ListBase<T extends IListBase, A extends UISelectAssert>
@@ -49,7 +48,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     public ListBase() {}
     public ListBase(By locator) { list = new WebList(locator); }
     public ListBase(List<WebElement> elements) { list = new WebList(elements); }
-    public Class<?> initClass = UIElement.class;
+    Class<?> initClass = UIElement.class;
 
     /**
      * @param minAmount
@@ -67,10 +66,6 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     @JDIAction(level = DEBUG)
     public T get(String value) {
         return toT(list().get(value));
-    }
-
-    public T get(Enum name) {
-        return get(getEnumValue(name));
     }
     /**
      * @param index

@@ -120,13 +120,10 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         UIELEMENT_NAME = func;
     }
 
-    public UIElement get(Enum name) {
-        return get(getEnumValue(name));
-    }
     /**
      * @param index
      */
-    @JDIAction(level = DEBUG)
+    @JDIAction(level = DEBUG) @Override
     public UIElement get(int index) {
         if (index < 0)
             throw exception("Can't get element with index '%s'. Index should be 0 or more", index);

@@ -15,6 +15,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.*;
 
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 
 public interface IList<T> extends List<T>, HasValue, IHasSize {
     /**
@@ -22,6 +23,8 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
      *  */
     List<T> elements(int minAmount);
     T get(String value);
+
+    default T get(Enum name) { return get(getEnumValue(name)); }
     default T last() {
         return elements(1).get(size()-1);
     }
