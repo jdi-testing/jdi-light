@@ -23,7 +23,7 @@ public class UIFactory {
         return element(locator);
     }
     public static UIElement $(String locator, Object parent) {
-        return element(locator).setParent(parent);
+        return element(locator).setup(j->j.setParent(parent));
     }
     public static UIElement $(By locator) {
         return element(locator);
@@ -32,7 +32,7 @@ public class UIFactory {
         return new UIElement(webElement);
     }
     public static UIElement $(By locator, Object parent) {
-        return element(locator).setParent(parent);
+        return element(locator).setup(j->j.setParent(parent));
     }
 
     public static WebList list(String locator) {
@@ -48,17 +48,13 @@ public class UIFactory {
         return list(locator);
     }
     public static WebList $$(String locator, Object parent) {
-        WebList list = list(locator);
-        list.core().setParent(parent);
-        return list;
+        return list(locator).setup(j->j.setParent(parent));
     }
     public static WebList $$(By locator) {
         return list(locator);
     }
     public static WebList $$(By locator, Object parent) {
-        WebList list = list(locator);
-        list.core().setParent(parent);
-        return list;
+        return list(locator).setup(j->j.setParent(parent));
     }
     public static WebList $$(List<WebElement> els, String name) {
         return list(els, name);

@@ -8,4 +8,5 @@ public interface IListBase extends IBaseElement {
     String text(TextType type);
     boolean isSelected();
     boolean isDisplayed();
+    String getTagName();
 }

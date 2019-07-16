@@ -27,4 +27,8 @@ public abstract class UIBase<A extends UIAssert> extends UIBaseElement<A> implem
     public boolean isDisplayed() {
         return core().isDisplayed();
     }
+    @JDIAction("Click on '{name}'")
+    public String getTagName() {
+        return core().getTagName();
+    }
 }

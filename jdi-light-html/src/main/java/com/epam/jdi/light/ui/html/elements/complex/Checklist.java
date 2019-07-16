@@ -3,6 +3,7 @@ package com.epam.jdi.light.ui.html.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.UIListBase;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.asserts.ChecklistAssert;
@@ -43,7 +44,8 @@ public class Checklist extends UIListBase<ChecklistAssert> {
     }
 
     WebList labels() {
-        return new WebList(list().map(el -> new UIElement(el).label().setName(getName()+ " label"))).setName(getName() + " labels");
+        return new WebList(list().map(el -> el.label().core().setName(getName()+ " label")))
+                .setName(getName() + " labels");
     }
 
     /**

@@ -16,6 +16,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
+import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
@@ -47,10 +48,21 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
         return list;
     }
 
-    public ListBase() {}
-    public ListBase(By locator) { list = new WebList(locator); }
-    public ListBase(List<WebElement> elements) { list = new WebList(elements); }
-    public Class<?> initClass = UIElement.class;
+    ListBase() {}
+    ListBase(By locator) { list = new WebList(locator); }
+    ListBase(List<WebElement> elements) { list = new WebList(elements); }
+    Class<?> initClass = UIElement.class;
+
+    private boolean actualMapValue() {
+        return map.hasValue() && map.get().size() > 0 && isActual(map.get().get(0).value);
+    }
+    protected CacheValue<MapArray<String, T>> map;
+    private boolean isActual(T element) {
+        try {
+            element.getTagName();
+            return true;
+        } catch (Exception ex) { return false; }
+    }
 
     /**
      * @param minAmount
@@ -59,6 +71,8 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
 
     @JDIAction(level = DEBUG)
     public MapArray<String, T> elements(int minAmount) {
+        if (actualMapValue())
+            return map.get();
         return list().elements(minAmount).toMapArray(this::toT);
     }
 
@@ -161,7 +175,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public void refresh() {
-        list().refresh();
+        clear();
     }
 
     /**
@@ -170,6 +184,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     @JDIAction(level = DEBUG)
     public void clear() {
         list().clear();
+        map.clear();
     }
 
     public void setValue(String value) {

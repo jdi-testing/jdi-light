@@ -2,7 +2,6 @@ package com.epam.jdi.light.asserts.core;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.base.IListBase;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.tools.LinqUtils;

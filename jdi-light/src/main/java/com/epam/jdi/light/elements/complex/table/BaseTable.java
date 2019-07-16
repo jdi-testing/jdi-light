@@ -223,7 +223,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     }
 
     protected List<UIElement> getRow(int rowNum) {
-        List<UIElement> elements = getRowByIndex(getRowIndex(rowNum)).elements(size());
+        List<UIElement> elements = getRowByIndex(getRowIndex(rowNum)).elements(size()).values();
         elements = where(elements, UIElement::isDisplayed);
         List<UIElement> result = new ArrayList<>();
         if (firstColumnIndex > 1 || columnsMapping.length > 0) {
