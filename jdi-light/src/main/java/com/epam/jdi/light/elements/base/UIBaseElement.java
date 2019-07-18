@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 public abstract class UIBaseElement<A extends UIAssert>
         implements IBaseElement, HasAssert<A> {
     protected UIElement element;
+    public JDIBase base() { return core().base(); }
     public UIElement core() {
         if (element == null)
             element = new UIElement();

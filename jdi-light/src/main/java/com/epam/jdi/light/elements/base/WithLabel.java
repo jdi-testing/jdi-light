@@ -8,7 +8,7 @@ public interface WithLabel extends IBaseElement {
     default Label label() {
         return new Label().setup(Label.class, j->j
             .setLocator(By.cssSelector("[for="+ core().attr("id")+"]"))
-            .setName(core().getName() + " label"));
+            .setName(getName() + " label"));
     }
     /**
      * Gets label text

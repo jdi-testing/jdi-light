@@ -44,7 +44,7 @@ public class HtmlSettings {
             ));
             SETUP_RULES.update("PageObject",
                 sRule(info -> isPageObject(info.instance.getClass()),
-                    PageFactory::initElements));*/
+                    PageFactory::initElements));
             GET_BUTTON = (obj, buttonName) -> {
                 List<Field> fields = getFieldsExact(obj, Button.class);
                 if (fields.size() == 0)
@@ -62,7 +62,7 @@ public class HtmlSettings {
                     default:
                         return getButtonByName(buttons, obj, buttonName);
                 }
-            };
+            };*/
         }
     }
 }

@@ -42,8 +42,8 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     protected WebList list;
     public WebList list() {
         if (list == null) {
-            list = new WebList();
-            list.setUIElementName(this::elementTitle);
+            list = new WebList(core()).setUIElementName(this::elementTitle)
+                    .setName(getName());
         }
         return list;
     }

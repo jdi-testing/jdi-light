@@ -34,7 +34,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBaseElement, WithLabel {
     private DropdownSelect ds() {
-        return new DropdownSelect(core(), SELECT_ERROR);
+        return new DropdownSelect(core(), SELECT_ERROR).setup(DropdownSelect.class, j->j.setName(getName() + " DropDown"));
     }
     private static final String SELECT_ERROR =
         "Can't %s element in Dropdown '%s'. Dropdown should have JDropdown annotation or locator to 'select' tag";
@@ -239,7 +239,7 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
         if (root != null)
             core().setLocator(root);
         if (valueLocator != null) {
-            value = $(valueLocator, this).setName(getName() + " value element");
+            value = $(valueLocator, this).setName(getName());
             value.driverName = core().driverName;
             if (expandLocator == null)
                 expander = value;

@@ -17,9 +17,10 @@ public interface IBaseElement extends JDIElement, HasCache {
     void highlight();
     void show();
 
+    JDIBase base();
     UIElement core();
     default <T> T setup(Class<T> cl, JAction1<JDIBase> setup) {
-        setup.execute(core());
+        setup.execute(base());
         return (T)this;
     }
     default DriverBase setName(String name) {

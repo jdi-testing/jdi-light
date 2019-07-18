@@ -83,7 +83,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
 
     public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
     private WebList headerUI() {
-        return $$(headerLocator, this).setup(e->e.setName(getName() + " header"));
+        return $$(headerLocator, this).setName(getName() + " header");
     }
     protected List<String> getHeader() {
         return LinqUtils.select(headerUI(), UIElement::getText);

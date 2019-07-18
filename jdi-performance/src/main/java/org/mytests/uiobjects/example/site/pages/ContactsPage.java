@@ -9,16 +9,17 @@ import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import com.epam.jdi.light.ui.html.elements.complex.Combobox;
+import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import com.epam.jdi.light.ui.html.elements.complex.Dropdown;
+import com.epam.jdi.light.ui.html.elements.complex.DropdownSelect;
 import org.mytests.uiobjects.example.site.custom.MultiDropdown;
 
 @Url("/contacts.html") @Title("Contact Form")
 public class ContactsPage extends WebPage {
 	TextField name, lastName, position, passportNumber, passportSeria;
 
-	Dropdown gender;
-	Combobox religion;
-	// MultiDropdown
+	DropdownSelect gender;
+	DataListOptions religion;
 	MultiDropdown weather;
 
 	Checkbox passport, acceptConditions;

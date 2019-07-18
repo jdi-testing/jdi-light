@@ -25,6 +25,7 @@ import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -34,19 +35,26 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList, HasAssert<UISelectAssert<UISelectAssert, WebList>> {
+    @Override
     public WebList list() { return this; }
-    public UIElement core() { return new UIElement(this); }
+    public UIElement core() {
+        return new UIElement(base()).setName(getName());
+    }
     public WebList setup(JAction1<JDIBase> setup) {
         return setup(WebList.class, setup);
     }
-    public WebList() {}
-    public WebList(By locator) { setLocator(locator);}
+    public WebList() { elements.set( new MapArray<>()); }
+    public WebList(By locator) { this(); setLocator(locator);}
     public WebList(List<WebElement> elements) {
-        setWebElements(elements);
+        this(); setWebElements(elements);
+    }
+    public WebList(JDIBase base) {
+        super(base);
     }
     public WebList noValidation() {
         super.noValidation();
@@ -67,49 +75,65 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public MapArray<String, UIElement> elements(int minAmount) {
         if (elements.hasValue() && isActual() && elements.get().size() >= minAmount)
             return elements.get();
-        if (getLocator().toString().contains("%s"))
+        if (locator.isTemplate())
             throw exception("You call method that can't be used with template locator. " +
                     "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator()));
         List<WebElement> webElements = getList(minAmount);
         int length = webElements.size();
-        elements.get().clear();
+        elements.set(new MapArray<>());
         for (int i=0; i < length; i++) {
             int j = i;
-            addElement(initElement(() -> getList(minAmount).get(j), j));
+            UIElement element = initElement(webElements.get(j), () -> getList(minAmount).get(j), j);
+            addElement(element, UIELEMENT_NAME.execute(element));
         }
         return elements.get();
     }
-    private void addElement(UIElement el) {
-        elements.get().add(el.getName(), el);
+    private void addElement(UIElement el, String name) {
+        elements.get().add(name, el);
     }
 
     private String NO_ELEMENTS_FOUND = "Can't select '%s'. No elements with this name found";
-
+    public boolean hasKey(String value) {
+        if (elements.get() == null)
+            elements.set(new MapArray<>());
+        return hasKey(elements.get(), value);
+    }
+    public boolean hasKey(MapArray<String, UIElement> map, String value) {
+        List<String> keys = map.keys();
+        if (keys.isEmpty())
+            return false;
+        for (String key : keys)
+            if (namesEqual(key, value))
+                return true;
+        return false;
+    }
+    public boolean hasNoKey(String value) {
+        return !hasKey(value);
+    }
     /**
      * @param value
      */
     @JDIAction(level = DEBUG)
     public UIElement get(String value) {
-        if (!elements.get().keys().contains(value)) {
-            addElement((getLocator().toString().contains("%s")
-                ? $(getLocator(value), parent)
-                : nameToUIElement(value))
-            .setName(getName() + ":" + value));
+        if (hasNoKey(value)) {
+            if (locator.isTemplate()) {
+                addElement($(getLocator(value), parent)
+                        .setName(getName() + ":" + value), value);
+            }
+            else {
+                refresh();
+                timer().wait(() -> hasKey(elements(1), value));
+            }
+            if (hasNoKey(value))
+                throw exception(NO_ELEMENTS_FOUND, value);
         }
         return elements.get().get(value);
     }
-    private UIElement nameToUIElement(String value) {
-        refresh();
-        UIElement el = first(e -> UIELEMENT_NAME.execute(e).equals(value));
-        if (el == null)
-            throw exception(NO_ELEMENTS_FOUND, value);
-        el.setGetFunc(() -> first(e -> UIELEMENT_NAME.execute(e).equals(value)).get());
-        return el;
-
-    }
     private JFunc1<UIElement, String> UIELEMENT_NAME = UIElement::getText;
-    public void setUIElementName(JFunc1<UIElement, String> func) {
+
+    public WebList setUIElementName(JFunc1<UIElement, String> func) {
         UIELEMENT_NAME = func;
+        return this;
     }
 
     public UIElement get(Enum name) {
@@ -122,7 +146,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public UIElement get(int index) {
         if (index < 0)
             throw exception("Can't get element with index '%s'. Index should be 0 or more", index);
-        return (getLocator().toString().contains("%s")
+        return (locator.isTemplate()
             ? tryGetByIndex(index)
             : elements(index).get(index).value)
         .setName(elementName(index));
@@ -351,18 +375,16 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             return isNotBlank(element.core().get().getTagName());
         } catch (Exception ex) { return false; }
     }
-    protected UIElement initElement(JFunc<WebElement> func) {
+    protected UIElement initElement(WebElement el, JFunc<WebElement> func) {
         try {
-            UIElement result = core();
-            result.setWebElement(func.execute()).setGetFunc(func);
-            return result;
+            return $(el).setup(j->j.setWebElement(el).setGetFunc(func).setParent(this));
         } catch (Exception ex) { throw exception("Can't init func new element for list"); }
     }
-    private UIElement initElement(JFunc<WebElement> func, int i) {
-        return initElement(func, elementName(i));
+    private UIElement initElement(WebElement el, JFunc<WebElement> func, int i) {
+        return initElement(el, func, elementName(i));
     }
-    private UIElement initElement(JFunc<WebElement> func, String name) {
-        return initElement(func).setName(name);
+    private UIElement initElement(WebElement el, JFunc<WebElement> func, String name) {
+        return initElement(el, func).setName(name);
     }
 
     public void offCache() {

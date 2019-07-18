@@ -14,6 +14,7 @@ import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.IListBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.IClickable;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
@@ -24,6 +25,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.Objects;
 
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -44,7 +46,7 @@ import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class UIElement extends JDIBase implements WebElement, SetValue, IBaseElement,
-        HasAssert<IsAssert>, IListBase {
+        HasAssert<IsAssert>, IListBase, IClickable {
     //region Constructors
     public UIElement() { }
     public UIElement(WebElement el) { setWebElement(el); }
@@ -137,7 +139,6 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
     public boolean isDisplayed() {
         return displayed();
     }
-
     /**
      * Get element location as Point
      * @return Point
@@ -252,21 +253,25 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
                 get().click();
                 break;
             case SMART_CLICK:
-                if (isHidden())
+                if (isHidden() || !isClickable())
                     show();
-                ElementArea a = Switch().get(
-                Case(t -> isClickable(),
-                    t-> CENTER),
-                Case(t -> isClickable(1, 1),
-                    t-> TOP_LEFT),
-                Case(t -> isClickable(getRect().getWidth()-1,1),
-                    t-> TOP_RIGHT),
-                Case(t -> isClickable(1,getRect().getHeight()-1),
-                    t-> BOTTOM_LEFT),
-                Case(t -> isClickable(getRect().getWidth()-1,getRect().getHeight()-1),
-                    t-> BOTTOM_RIGHT));
-                click(a);
+                ElementArea clArea = timer().getResultByCondition(
+                    this::getElementClickableArea, Objects::nonNull);
+                if (clArea == null)
+                    throw exception("%s is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong", getName());
+                click(clArea);
         }
+    }
+    private ElementArea getElementClickableArea() {
+        return Switch().get(
+            Case(t -> isClickable(), t-> CENTER),
+            Case(t -> isClickable(1, 1), t-> TOP_LEFT),
+            Case(t -> isClickable(getRect().getWidth()-1,1),
+                t-> TOP_RIGHT),
+            Case(t -> isClickable(1,getRect().getHeight()-1),
+                t-> BOTTOM_LEFT),
+            Case(t -> isClickable(getRect().getWidth()-1,getRect().getHeight()-1),
+                t-> BOTTOM_RIGHT));
     }
 
     /**
@@ -567,7 +572,7 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
                 return element != null && element.isDisplayed();
             }
             List<WebElement> result = getAll();
-            return result.size() == 1 && result.get(0).isDisplayed() && isClickable();
+            return result.size() == 1 && result.get(0).isDisplayed();
         } catch (Exception ex) { return false; }
     }
 

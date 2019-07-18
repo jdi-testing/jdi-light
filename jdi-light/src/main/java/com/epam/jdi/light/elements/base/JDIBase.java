@@ -128,7 +128,10 @@ public abstract class JDIBase extends DriverBase implements HasCache {
         return get(new Object[]{});
     }
     protected JFunc<WebElement> getElementFunc = null;
-    public void setGetFunc(JFunc<WebElement> func) { getElementFunc = func; }
+    public JDIBase setGetFunc(JFunc<WebElement> func) {
+        getElementFunc = func;
+        return this;
+    }
     public WebElement get(Object... args) {
         if (webElement.hasValue()) {
             WebElement element = webElement.get();
@@ -213,8 +216,8 @@ public abstract class JDIBase extends DriverBase implements HasCache {
                 return elements;
         }
     }
-    public WebList allUI(Object... args) {
-        return new WebList(getAll(args)).setup(e-> e.setName(getName()));
+    public WebList list(Object... args) {
+        return new WebList(getAll(args)).setName(getName());
     }
     private JDIBase getBase(Object element) {
         if (isClass(element.getClass(), JDIBase.class))
