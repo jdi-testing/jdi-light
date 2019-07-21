@@ -1,7 +1,6 @@
 package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.asserts.generic.TextAssert;
-import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.HasLabel;
@@ -12,10 +11,10 @@ public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, Ha
     // region Actions
     @JDIAction("Upload file '{0}' for '{name}'")
     public void uploadFile(String path) {
-        element.sendKeys(path);
+        uiElement.sendKeys(path);
     }
     @JDIAction("Get '{name}' file name ")
-    public String value() { return element.attr("value"); }
+    public String value() { return uiElement.attr("value"); }
     // endregion
 
     // region Set and get value for Forms
@@ -26,4 +25,6 @@ public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, Ha
         return value();
     }
     // endregion
+    @Override
+    public TextAssert is() { return new TextAssert().set(this); }
 }

@@ -14,13 +14,13 @@ public class NumberSelector extends UIBaseElement<NumberAssert>
     // region Actions
 
     @JDIAction(value = "Get '{name}' min value", level = DEBUG)
-    public String min() { return element.attr("min"); }
+    public String min() { return uiElement.attr("min"); }
     @JDIAction(value = "Get '{name}' max value", level = DEBUG)
-    public String max() { return element.attr("max"); }
+    public String max() { return uiElement.attr("max"); }
     @JDIAction(value = "Get '{name}' value", level = DEBUG)
-    public String value() { return element.attr("value"); }
+    public String value() { return uiElement.attr("value"); }
     @JDIAction(value = "Get '{name}' step size", level = DEBUG)
-    public String step() { return element.attr("step"); }
+    public String step() { return uiElement.attr("step"); }
     @JDIAction("Select number '{0}' for '{name}'")
     public void setNumber(String number) {
         setValue(number);

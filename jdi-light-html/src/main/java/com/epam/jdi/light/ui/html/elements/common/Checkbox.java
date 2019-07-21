@@ -17,15 +17,15 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
     }
     @JDIAction("Check '{name}'")
     public void check() {
-        element.check();
+        uiElement.check();
     }
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
-        element.uncheck();
+        uiElement.uncheck();
     }
     @JDIAction("Check that '{name}' is selected")
     public boolean isSelected() {
-        return element.isSelected();
+        return uiElement.isSelected();
     }
     // endregion
 

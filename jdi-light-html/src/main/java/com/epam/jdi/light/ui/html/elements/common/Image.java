@@ -7,18 +7,19 @@ import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.ui.html.asserts.ImageAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 
 public class Image extends UIBaseElement<ImageAssert>
         implements HasClick, HasValue {
     // region Actions
     @JDIAction(value = "Get '{name}' image source path", level = DEBUG)
-    public String src() { return element.attr("src"); }
+    public String src() { return uiElement.attr("src"); }
     @JDIAction(value = "Get '{name}' image height", level = DEBUG)
-    public String height() { return element.attr("height"); }
+    public int height() { return getInt("height", uiElement); }
     @JDIAction(value = "Get '{name}' image width", level = DEBUG)
-    public String width() { return element.attr("width"); }
+    public int width() { return getInt("width", uiElement); }
     @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
-    public String alt() { return element.attr("alt"); }
+    public String alt() { return uiElement.attr("alt"); }
     // endregion
 
     // region Extend assertions

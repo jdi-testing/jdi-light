@@ -35,9 +35,8 @@ public class ColorPickerTests extends TestsInit {
     public void setColorTest() {
         colorPicker.setColor("#432376");
         assertEquals(colorPicker.color(), "#432376");
-        try { disabledPicker.setColor("#432376");
-        } catch (Exception ignore) {}
-        assertEquals(disabledPicker.color(), color);
+        disabledPicker.setColor("#432376");
+        assertEquals(disabledPicker.color(), "#432376");
     }
 
     @Test

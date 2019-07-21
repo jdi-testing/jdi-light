@@ -15,20 +15,20 @@ import static org.hamcrest.Matchers.is;
 public class LinkAssert extends UIAssert<LinkAssert, Link> {
     @JDIAction("Assert that '{name}' text {0}")
     public LinkAssert text(Matcher<String> condition) {
-        jdiAssert(uiElement.getText(), condition);
+        jdiAssert(element.getText(), condition);
         return this;
     }
     public LinkAssert text(String text) { return text(is(text)); }
     @JDIAction("Assert that '{name}' alt {0}")
     public LinkAssert alt(Matcher<String> condition) {
-        jdiAssert(uiElement.alt(), condition);
+        jdiAssert(element.alt(), condition);
         return this;
     }
     public LinkAssert alt(String alt) { return alt(is(alt)); }
 
     @JDIAction("Assert that '{name}' ref {0}")
     public LinkAssert ref(Matcher<String> condition) {
-        jdiAssert(uiElement.ref(), condition);
+        jdiAssert(element.ref(), condition);
         return this;
     }
     public LinkAssert ref(String ref) { return ref(is(ref)); }

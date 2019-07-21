@@ -17,12 +17,12 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
 
     @JDIAction("Assert that '{0}' option selected for '{name}'")
     public A selected(Matcher<String> condition) {
-        jdiAssert(uiElement.selected(), condition);
+        jdiAssert(element.selected(), condition);
         return (A) this;
     }
     @JDIAction("Assert that '{0}' option selected for '{name}'")
     public A selected(String option) {
-        jdiAssert(uiElement.selected(option), is(true));
+        jdiAssert(element.selected(option), is(true));
         return (A) this;
     }
     public <TEnum extends Enum> UISelectAssert selected(TEnum option) {
@@ -45,7 +45,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     }
     @JDIAction("Assert that '{name}' values {0}")
     public A values(Matcher<? super List<String>> condition) {
-        jdiAssert(uiElement.values(), condition);
+        jdiAssert(element.values(), condition);
         return (A) this;
     }
     public A values(String... values) {
@@ -53,7 +53,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     }
     @JDIAction("Assert that '{name}' values {0}")
     public A values(TextType type, Matcher<? super List<String>> condition) {
-        jdiAssert(uiElement.values(type), condition);
+        jdiAssert(element.values(type), condition);
         return (A) this;
     }
     public A values(TextType type, String... values) {
@@ -61,7 +61,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     }
     @JDIAction("Assert that '{name}' enabled items {0}")
     public A enabled(Matcher<? super List<String>> condition) {
-        jdiAssert(uiElement.listEnabled(), condition);
+        jdiAssert(element.listEnabled(), condition);
         return (A) this;
     }
     public A enabled(String... enabled) {
@@ -69,7 +69,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     }
     @JDIAction("Assert that '{name}' disabled items {0}")
     public A disabled(Matcher<? super List<String>> condition) {
-        jdiAssert(uiElement.listDisabled(), condition);
+        jdiAssert(element.listDisabled(), condition);
         return (A) this;
     }
     public A disabled(String... disabled) {
@@ -78,7 +78,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
 
     @JDIAction("Assert that '{name}' size {0}")
     public A size(Matcher<Integer> condition) {
-        jdiAssert(uiElement.size(), condition);
+        jdiAssert(element.size(), condition);
         return (A) this;
     }
 
@@ -101,12 +101,12 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     }
     @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {
-        jdiAssert(uiElement.isDisplayed() ? "displayed" : "hidden", is("displayed"));
+        jdiAssert(element.isDisplayed() ? "displayed" : "hidden", is("displayed"));
         return (A) this;
     }
     @JDIAction("Assert that '{name}' is disappeared")
     public A disappear() {
-        jdiAssert(uiElement.isHidden() ? "hidden" : "displayed", is("hidden"));
+        jdiAssert(element.isHidden() ? "hidden" : "displayed", is("hidden"));
         return (A) this;
     }
 
@@ -121,7 +121,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
     public A notAppear(int timeoutSec) {
         boolean result = new Timer(timeoutSec * 1000)
-                .wait(() -> uiElement.isDisplayed());
+                .wait(() -> element.isDisplayed());
         jdiAssert(result ? "displayed" : "hidden", is("hidden"));
         return (A) this;
     }

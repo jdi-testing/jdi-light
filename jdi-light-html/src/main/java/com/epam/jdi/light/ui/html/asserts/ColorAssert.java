@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.is;
 public class ColorAssert extends UIAssert<ColorAssert, ColorPicker> {
     @JDIAction("Assert that '{name}' color is {0}")
     public ColorAssert color(String color) {
-        jdiAssert(uiElement.color(), is(color));
+        jdiAssert(element.color(), is(color));
         return this;
     }
 }

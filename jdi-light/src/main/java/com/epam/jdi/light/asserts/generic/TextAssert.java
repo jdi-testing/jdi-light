@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.is;
 public class TextAssert extends UIAssert<TextAssert, HasText> {
     @JDIAction("Assert that '{name}' text {0}")
     public TextAssert text(Matcher<String> condition) {
-        jdiAssert(uiElement.getText(), condition);
+        jdiAssert(element.getText(), condition);
         return this;
     }
     public TextAssert text(String text) { return text(is(text)); }

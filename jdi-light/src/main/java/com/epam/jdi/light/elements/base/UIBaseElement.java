@@ -7,15 +7,15 @@ import com.epam.jdi.light.elements.interfaces.IBaseElement;
 
 public abstract class UIBaseElement<A extends UIAssert>
         implements IBaseElement, HasAssert<A> {
-    protected UIElement element;
+    protected UIElement uiElement;
     public JDIBase base() { return core().base(); }
     public UIElement core() {
-        if (element == null)
-            element = new UIElement();
-        return element;
+        if (uiElement == null)
+            uiElement = new UIElement();
+        return uiElement;
     }
 
-    protected void setElement(UIElement uiElement) { element = uiElement; }
+    protected void setElement(UIElement uiElement) { this.uiElement = uiElement; }
 
     public void hover() { core().hover(); }
     public boolean isEnabled() {

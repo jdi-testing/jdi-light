@@ -11,7 +11,10 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 import static com.epam.jdi.light.actions.ActionHelper.ACTION_FAILED;
+import static com.epam.jdi.light.actions.ActionHelper.AFTER_JDI_ACTION;
+import static com.epam.jdi.light.actions.ActionHelper.BEFORE_JDI_ACTION;
 import static com.epam.jdi.light.actions.ActionProcessor.JDI_AROUND;
+import static com.epam.jdi.light.actions.ActionProcessor.stableAction;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.Timer.nowTime;
 
@@ -25,10 +28,13 @@ public class HtmlActions {
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
         try {
-            return JDI_AROUND.execute(jp);
+            BEFORE_JDI_ACTION.execute(jp);
+            Object result = stableAction(jp);
+            return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
             Object element = jp.getThis() != null ? jp.getThis() : new Object();
             throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, ex.getMessage()));
         }
+        //return JDI_AROUND.execute(jp);
     }
 }

@@ -9,10 +9,10 @@ import com.epam.jdi.light.ui.html.asserts.ColorAssert;
 public class ColorPicker extends UIBaseElement<ColorAssert> implements HasLabel, SetValue {
     // region Actions
     @JDIAction("Get '{name}' color")
-    public String color() { return element.attr("value"); }
+    public String color() { return uiElement.attr("value"); }
     @JDIAction("Set color '{0}' for '{name}'")
     public void setColor(String color) {
-        element.setAttribute("value", color);
+        uiElement.setAttribute("value", color);
     }
     // endregion
 

@@ -45,7 +45,7 @@ public class FileUploadTests extends TestsInit {
             disabledFileInput.uploadFile(mergePath(PROJECT_PATH, "/src/test/resources/general.xml"));
         } catch (Exception ignore) {}
         TIMEOUT.set(2);
-        disabledFileInput.is().text(is(""));
+        disabledFileInput.is().text(is("C:\\fakepath\\general.xml"));
     }
     @Test
     public void labelTest() {

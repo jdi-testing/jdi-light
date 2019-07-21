@@ -46,7 +46,7 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBa
     public DropdownSelect(UIElement element, String errorMsg) {
         if (isNotBlank(errorMsg))
             SELECT_ERROR = errorMsg;
-        this.element = element;
+        this.uiElement = element;
     }
     private static String SELECT_ERROR =
         "Can't %s element in DropdownSelect '%s'. DropdownSelect locator should point to select tag";

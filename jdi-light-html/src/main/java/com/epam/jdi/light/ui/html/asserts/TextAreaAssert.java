@@ -15,34 +15,34 @@ import static org.hamcrest.Matchers.is;
 public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> {
     @JDIAction("Assert that '{name}' text {0}")
     public TextAreaAssert text(Matcher<String> condition) {
-        jdiAssert(uiElement.getText(), condition);
+        jdiAssert(element.getText(), condition);
         return this;
     }
     public TextAreaAssert text(String text) { return text(is(text)); }
     @JDIAction("Assert that '{name}' rows count {0}")
     public TextAreaAssert rowsCount(Matcher<Integer> condition) {
-        jdiAssert(uiElement.rows(), condition);
+        jdiAssert(element.rows(), condition);
         return this;
     }
     public TextAreaAssert rowsCount(int rowsCount) { return rowsCount(is(rowsCount)); }
 
     @JDIAction("Assert that '{name}' columns count {0}")
     public TextAreaAssert colsCount(Matcher<Integer> condition) {
-        jdiAssert(uiElement.cols(), condition);
+        jdiAssert(element.cols(), condition);
         return this;
     }
     public TextAreaAssert colsCount(int colsCount) { return colsCount(is(colsCount)); }
 
     @JDIAction("Assert that '{name}' minlength {0}")
     public TextAreaAssert minlength(Matcher<Integer> condition) {
-        jdiAssert(uiElement.minlength(), condition);
+        jdiAssert(element.minlength(), condition);
         return this;
     }
     public TextAreaAssert minlength(int minlength) { return minlength(is(minlength)); }
 
     @JDIAction("Assert that '{name}' maxlength {0}")
     public TextAreaAssert maxlength(Matcher<Integer> condition) {
-        jdiAssert(uiElement.maxlength(), condition);
+        jdiAssert(element.maxlength(), condition);
         return this;
     }
     public TextAreaAssert maxlength(int maxlength) { return maxlength(is(maxlength)); }

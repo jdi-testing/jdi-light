@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
 import static java.lang.Float.parseFloat;
 
 public class HtmlUtils {
@@ -18,7 +19,7 @@ public class HtmlUtils {
             return parseInt(value);
         } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Integer", attr, value); }
     }
-    public static int parseInt(String value) {
+    public static int asInt(String value) {
         try {
             return parseInt(value);
         } catch (Exception ex) { throw exception("Can't parse value %s to Integer", value); }

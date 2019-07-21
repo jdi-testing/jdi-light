@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.*;
 
 public class DataListAssert<T extends IListBase, D>
         extends UISelectAssert<DataListAssert, DataList<T, D>> {
-    public List<D> data() { return uiElement.asData(); }
+    public List<D> data() { return element.asData(); }
 
     /**
      * Check that all elements meet condition
@@ -104,7 +104,7 @@ public class DataListAssert<T extends IListBase, D>
     @JDIAction("Assert that '{name}' elements [{0}] are displayed")
     public DataListAssert<T, D> displayed(String... names) {
         for (String name : names)
-            jdiAssert(uiElement.get(name).isDisplayed() ? name + "displayed" : "hidden", is(name + "displayed"));
+            jdiAssert(element.get(name).isDisplayed() ? name + "displayed" : "hidden", is(name + "displayed"));
         return this;
     }
 
@@ -114,7 +114,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that '{name}' has at least one displayed element")
     public DataListAssert<T, D> displayed() {
-        jdiAssert(uiElement.isDisplayed() ? "displayed" : "hidden", is("displayed"));
+        jdiAssert(element.isDisplayed() ? "displayed" : "hidden", is("displayed"));
         return this;
     }
 
@@ -124,7 +124,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that '{name}' is hidden")
     public DataListAssert<T, D> hidden() {
-        jdiAssert(map(uiElement, this::isDisplayed), everyItem(is(false)));
+        jdiAssert(map(element, this::isDisplayed), everyItem(is(false)));
         return this;
     }
     private boolean isDisplayed(T element) {
@@ -139,7 +139,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that '{name}' is empty")
     public DataListAssert<T, D> empty() {
-        jdiAssert(uiElement.isEmpty() ? "list is empty" : "list is not empty", is("list is empty"));
+        jdiAssert(element.isEmpty() ? "list is empty" : "list is not empty", is("list is empty"));
         return this;
     }
 
@@ -149,7 +149,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that '{name}' is not empty")
     public DataListAssert<T, D> notEmpty() {
-        jdiAssert(uiElement.isEmpty() ? "list is empty" : "list is not empty", is("list is not empty"));
+        jdiAssert(element.isEmpty() ? "list is empty" : "list is not empty", is("list is not empty"));
         return this;
     }
 
@@ -160,7 +160,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that '{name}' size {0}")
     public DataListAssert<T, D> size(Matcher<Integer> condition) {
-        jdiAssert(uiElement.size(), condition);
+        jdiAssert(element.size(), condition);
         return this;
     }
 

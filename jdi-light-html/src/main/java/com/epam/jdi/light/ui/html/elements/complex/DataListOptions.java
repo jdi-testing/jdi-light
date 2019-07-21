@@ -16,7 +16,7 @@ public class DataListOptions extends Combobox {
 
     @Override
     public WebList list() {
-        return $$("#"+element.attr("list")+" option").setup(e->e
+        return $$("#"+ uiElement.attr("list")+" option").setup(e->e
             .noValidation().setName(getName() + "list"));
     }
     /*List<String> list() {
@@ -48,7 +48,7 @@ public class DataListOptions extends Combobox {
      */
     @JDIAction("Get selected in '{name}' option")
     public String selected() {
-        return element.attr("value");
+        return uiElement.attr("value");
     }
 
     /**

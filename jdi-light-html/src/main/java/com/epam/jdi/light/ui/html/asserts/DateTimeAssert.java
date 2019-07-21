@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.is;
 public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector> {
     @JDIAction("Assert that '{name}' date {0}")
     public DateTimeAssert date(Matcher<String> date) {
-        jdiAssert(uiElement.value(), date);
+        jdiAssert(element.value(), date);
         return this;
     }
     public DateTimeAssert date(String date) {
@@ -26,7 +26,7 @@ public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector> {
 
     @JDIAction("Assert that '{name}' month {0}")
     public DateTimeAssert month(Matcher<String> month) {
-        jdiAssert(uiElement.value(), month);
+        jdiAssert(element.value(), month);
         return this;
     }
     public DateTimeAssert month(String month) {
@@ -35,7 +35,7 @@ public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector> {
 
     @JDIAction("Assert that '{name}' week {0}")
     public DateTimeAssert week(Matcher<String> week) {
-        jdiAssert(uiElement.value(), week);
+        jdiAssert(element.value(), week);
         return this;
     }
     public DateTimeAssert week(String week) {
@@ -44,14 +44,14 @@ public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector> {
 
     @JDIAction("Assert that '{name}' time {0}")
     public DateTimeAssert time(Matcher<String> time) {
-        jdiAssert(uiElement.value(), time);
+        jdiAssert(element.value(), time);
         return this;
     }
     public DateTimeAssert time(String time) { return time(is(time)); }
 
     @JDIAction("Assert that '{name}' min {0}")
     public DateTimeAssert min(Matcher<Float> min) {
-        jdiAssert(getFloat("min", uiElement.core()), min);
+        jdiAssert(getFloat("min", element.core()), min);
         return this;
     }
     public DateTimeAssert min(float min) {
@@ -60,7 +60,7 @@ public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector> {
 
     @JDIAction("Assert that '{name}' max {0}")
     public DateTimeAssert max(Matcher<Float> max) {
-        jdiAssert(getFloat("max", uiElement.core()), max);
+        jdiAssert(getFloat("max", element.core()), max);
         return this;
     }
     public DateTimeAssert max(float max) {

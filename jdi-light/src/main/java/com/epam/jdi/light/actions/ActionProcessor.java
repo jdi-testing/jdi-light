@@ -28,6 +28,7 @@ import static com.epam.jdi.tools.Timer.nowTime;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static java.lang.System.currentTimeMillis;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @SuppressWarnings("unused")
 @Aspect
@@ -40,20 +41,28 @@ public class ActionProcessor {
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
         try {
-            return JDI_AROUND.execute(jp);
+            BEFORE_JDI_ACTION.execute(jp);
+            Object result = stableAction(jp);
+            return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
             Object element = jp.getThis() != null ? jp.getThis() : new Object();
             throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, ex.getMessage()));
         }
+        //return JDI_AROUND.execute(jp);
     }
 
     public static JFunc1<ProceedingJoinPoint, Object> JDI_AROUND = jp -> {
-        BEFORE_JDI_ACTION.execute(jp);
-        Object result = stableAction(jp);
-        return AFTER_JDI_ACTION.execute(jp, result);
+        try {
+            BEFORE_JDI_ACTION.execute(jp);
+            Object result = stableAction(jp);
+            return AFTER_JDI_ACTION.execute(jp, result);
+        } catch (Throwable ex) {
+            Object element = jp.getThis() != null ? jp.getThis() : new Object();
+            throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, ex.getMessage()));
+        }
     };
 
-    protected static Object stableAction(ProceedingJoinPoint jp) {
+    public static Object stableAction(ProceedingJoinPoint jp) {
         try {
             logger.logOff();
             TIMEOUT.freeze();
@@ -79,6 +88,8 @@ public class ActionProcessor {
                 } catch (Throwable ex) {
                     try {
                         exception = ex.getMessage();
+                        if (isBlank(exception))
+                            exception = ex.toString();
                         Thread.sleep(200);
                     } catch (Exception ignore) {
                     }

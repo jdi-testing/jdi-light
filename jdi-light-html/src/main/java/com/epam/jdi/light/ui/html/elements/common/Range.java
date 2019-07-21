@@ -7,25 +7,25 @@ import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.ui.html.asserts.RangeAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.ui.html.HtmlUtils.asInt;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
-import static com.epam.jdi.light.ui.html.HtmlUtils.parseInt;
 
 public class Range extends UIBaseElement<RangeAssert> implements HasLabel, SetValue {
 
     // region Actions
     @JDIAction(value = "Get '{name}' volume", level = DEBUG)
     public int volume() {
-        return getInt("value", element);
+        return getInt("value", uiElement);
     }
 
     @JDIAction(value = "Get '{name}' min limit", level = DEBUG)
-    public String min() { return element.attr("min"); }
+    public String min() { return uiElement.attr("min"); }
 
     @JDIAction(value = "Get '{name}' max limit", level = DEBUG)
-    public String max() { return element.attr("max"); }
+    public String max() { return uiElement.attr("max"); }
 
     @JDIAction(value = "Get '{name}' step size", level = DEBUG)
-    public String step() { return element.attr("step"); }
+    public String step() { return uiElement.attr("step"); }
 
     @JDIAction(value = "Set volume '{0}' for '{name}'", level = DEBUG)
     public void setVolume(int volume) {
@@ -35,7 +35,7 @@ public class Range extends UIBaseElement<RangeAssert> implements HasLabel, SetVa
 
     // region Set and get value for Forms
     public void setValue(String value) {
-        setVolume(parseInt(value));
+        setVolume(asInt(value));
     }
     public String getValue() {
         return volume()+"";
