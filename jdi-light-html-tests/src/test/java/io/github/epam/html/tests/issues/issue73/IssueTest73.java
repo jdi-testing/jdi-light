@@ -2,7 +2,6 @@ package io.github.epam.html.tests.issues.issue73;
 
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static io.github.epam.html.tests.issues.issue73.JDISite73.issuePage73;
 

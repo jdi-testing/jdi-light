@@ -3,14 +3,16 @@ package org.mytests.uiobjects.example.site.custom;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
-import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.HasLabel;
+import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import org.apache.commons.lang3.time.StopWatch;
 import org.openqa.selenium.By;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -22,7 +24,7 @@ import static java.util.Arrays.asList;
 import static org.jsoup.helper.StringUtil.isBlank;
 
 public class MultiDropdown extends UIListBase<UISelectAssert>
-        implements IBaseElement, WithLabel {
+        implements IBaseElement, HasLabel {
 
     By expandArrow = By.cssSelector(".caret");
     By values = By.tagName("li");
@@ -43,7 +45,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
 
     @JDIAction(level = DEBUG)
     private void expand() {
-        if (valuesList().isHidden())
+        if (valuesList().setup(JDIBase::noValidation).isHidden())
             expander().click();
     }
 
@@ -90,13 +92,18 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
         List<String> listNames = map(names, String::trim);
         for (String name : values()) {
             UIElement value = value(name);
-            if (value.isDisabled()) continue;
-            boolean valueSelected = value.find("input").setup(JDIBase::noValidation).isSelected();
+            boolean valueSelected = value.find("input").setup(JDIBase::noValidation)
+                .isSelected();
             if (valueSelected && !listNames.contains(name.trim())
                     || !valueSelected && listNames.contains(name.trim()))
                 value.click();
         }
         label().click();
+    }
+    private long getTime(StopWatch s) {
+        long result = s.getTime(TimeUnit.MILLISECONDS);
+        s.reset(); s.start();
+        return result;
     }
 
     /**

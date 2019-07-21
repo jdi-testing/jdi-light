@@ -5,47 +5,93 @@ package com.epam.jdi.light.elements.complex;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.common.UIUtils;
-import com.epam.jdi.light.elements.base.IListBase;
+import com.epam.jdi.light.asserts.core.DataListAssert;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.interfaces.IListBase;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.asEntity;
+import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 
-public class DataList<D, T extends IListBase> implements IList<D> {
-    JList<T> list;
-    Class<D> dataType;
+public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert> {
+    public Class<D> dataType;
 
-    public DataList(Class<D> dataType, JList<T> list) {
-        this.dataType = dataType;
-        this.list = list;
+    public DataList() {}
+    public DataList(Class<T> type) { initClass = type; }
+
+    public D getData(String name) {
+        return asEntity(get(name), dataType);
+    }
+    public D getData(Enum name) {
+        return getData(getEnumValue(name));
+    }
+    public D getData(int index) {
+        return asEntity(get(index), dataType);
     }
 
-    public List<D> elements(int minAmount) {
+    public List<D> asData() {
         try {
-            return LinqUtils.map(list.elements(minAmount), el -> asEntity(el, dataType));
+            if (dataType == null) return null;
+            return elements(1).select((k, v) -> asEntity(v, dataType));
         } catch (Exception ex) {
             throw exception("Can't get DataList data" + LINE_BREAK + ex.getMessage());
         }
     }
-
-    public D get(String value) {
-        return asEntity(list.get(value), dataType);
-    }
-
-    public List<String> values() {
-
-    }
+    @Override
     public String getValue() {
-        return list.getValue();
+        return PrintUtils.print(LinqUtils.map(asData(), Object::toString));
     }
-
-    public void clear() {
-
+    
+    @Override
+    public DataListAssert<T, D> is() {
+        offCache();
+        return new DataListAssert<T, D>().set(this);
+    }
+    /**
+     * Match passed value with elements
+     * @param condition to compare
+     * @return UIListAsserts
+     */
+    @JDIAction("Assert that {name} data meet condition")
+    public DataListAssert<T, D> isData(Matcher<? super List<D>> condition) {
+        MatcherAssert.assertThat(asData(), condition);
+        return is();
+    }
+    @JDIAction("Assert that {name} data meet condition")
+    public DataListAssert<T, D> assertThatData(Matcher<? super List<D>> condition) {
+        return isData(condition);
+    }
+    public DataListAssert<T, D> verifyData(Matcher<? super List<D>> condition) {
+        assertSoft();
+        return isData(condition);
+    }
+    public void setup(Field field) {
+        try {
+            Type[] types = getGenericTypes(field);
+            if (types.length == 0)
+                throw exception("Can't setup DataList generic parameters for field '%s'. Actual 0 but expected 1 or 2",
+                        field.getName());
+            if (types.length > 2)
+                throw exception("Can't setup DataList generic parameters for field '%s'. Actual more than %s but expected 1 or 2",
+                        field.getName(), types.length);
+            initClass = types[0].toString().equals("?") ? null : (Class<T>)types[0];
+            dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>)types[1];
+        } catch (Exception ex) {
+            throw exception("Can't instantiate List<%s, %s> field '%s'", initClass == null
+                            ? "?" : initClass.getSimpleName(), dataType == null ? "?" : dataType.getSimpleName(),
+                    field.getName());
+        }
     }
 
 }

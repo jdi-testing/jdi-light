@@ -2,23 +2,9 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
-
-import static com.epam.jdi.light.common.TextType.INNER;
+import com.epam.jdi.light.elements.interfaces.IListBase;
 
 public abstract class UIBase<A extends UIAssert> extends UIBaseElement<A> implements IListBase {
-    @JDIAction("Click on '{name}'")
-    public void click() {
-        core().click();
-    }
-    @JDIAction("Get '{name}' text")
-    public String getText() {
-        return core().getText();
-    }
-    @JDIAction("Get '{name}' text")
-    public String text(TextType type) {
-        return core().text(type);
-    }
     @JDIAction("Check that '{name}' is selected")
     public boolean isSelected() {
         return core().isSelected();
@@ -26,5 +12,9 @@ public abstract class UIBase<A extends UIAssert> extends UIBaseElement<A> implem
     @JDIAction("Check that '{name}' is selected")
     public boolean isDisplayed() {
         return core().isDisplayed();
+    }
+    @JDIAction("Click on '{name}'")
+    public String getTagName() {
+        return core().getTagName();
     }
 }

@@ -48,13 +48,25 @@ public class ButtonTests extends TestsInit {
         blueButton.click();
         assertEquals(getAlertText(), "Blue button");
         acceptAlert();
-
-        disabledButton.click();
+    }
+    @Test
+    public void disableButtonTest() {
         try {
-            TIMEOUT.set(1);
-            acceptAlert();
+            disabledButton.click();
             fail("Disabled button should not work, but work");
-        } catch (Exception ignore) { }
+        } catch (Exception ex) { assertThat(ex.getMessage(), containsString("Can't perform click. Element is disabled"));}
+    }
+    @Test
+    public void doubleClickTest() {
+        dblClickButton.doubleClick();
+        assertEquals(getAlertText(), "Double Click");
+        acceptAlert();
+    }
+    @Test
+    public void rightClickTest() {
+        rightClickButton.rightClick();
+        assertEquals(getAlertText(), "Right Click");
+        acceptAlert();
     }
     @Test
     public void isValidationTest() {
@@ -63,7 +75,7 @@ public class ButtonTests extends TestsInit {
         redButton.is().text(is(text));
         redButton.is().text(containsString("Red Button"));
         assertThat(redButton.core().css("font-size"), is("14px"));
-        redButton.assertThat()
+        redButton.assertThat().displayed()
             .and().text(is(text))
             .core()
             .css("font-size", is("14px"))

@@ -7,6 +7,8 @@ package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.elements.interfaces.IButton;
+import com.epam.jdi.light.elements.interfaces.IClickable;
 import com.epam.jdi.light.elements.interfaces.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.epam.jdi.tools.func.JFunc2;
@@ -65,15 +67,17 @@ public final class UIUtils {
         return print(elements);
     }
 
-    public static JFunc2<Object, String, UIElement> GET_DEFAULT_BUTTON = (obj, buttonName) -> $("[type=submit]", obj);
+    public static JFunc2<Object, String, IClickable> GET_DEFAULT_BUTTON = (obj, buttonName) -> $("[type=submit]", obj);
 
-    public static JFunc2<Object, String, UIElement> GET_BUTTON = (obj, buttonName) -> {
-        List<Field> fields = getFieldsExact(obj, WebElement.class, UIElement.class);
+    public static JFunc2<Object, String, IClickable> GET_BUTTON = (obj, buttonName) -> {
+        List<Field> fields = getFields(obj, IButton.class);
+        if (fields.size() == 0)
+            fields = getFieldsExact(obj, WebElement.class, UIElement.class);
         switch (fields.size()) {
             case 0:
                 return GET_DEFAULT_BUTTON.execute(obj, buttonName);
             case 1:
-                return (UIElement) getValueField(fields.get(0), obj);
+                return (IClickable) getValueField(fields.get(0), obj);
             default:
                 Collection<UIElement> buttons = select(fields, f -> (UIElement) getValueField(f, obj));
                 UIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
@@ -83,12 +87,6 @@ public final class UIUtils {
         }
     };
 
-    public static UIElement getButtonByName(List<UIElement> buttons, Object obj, String buttonName) {
-        UIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
-        if (button == null)
-            throw exception("Can't find button '%s' for Element '%s'", buttonName, obj);
-        return button;
-    }
     private static String toButton(String buttonName) {
         return buttonName.toLowerCase().contains("button") ? buttonName : buttonName + "button";
     }

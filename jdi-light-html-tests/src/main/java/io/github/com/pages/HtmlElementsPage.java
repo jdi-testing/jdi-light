@@ -18,7 +18,8 @@ public class HtmlElementsPage extends WebPage {
     // @UI("input[type=button].red") public static Button redButton;
     @UI("[value*='Disabled Button']") public static Button disabledButtonInput;
     // @UI("input[type=button][disabled]") public static Button disabledButtonInput;
-    public static Button blueButton, disabledButton, suspendButton, ghostButton;
+    public static Button blueButton, disabledButton, suspendButton,
+            ghostButton, dblClickButton, rightClickButton;
     // @UI("#blue-button") public static Button blueButton;
     // @UI("#disabled-button") public static Button disabledButton;
 

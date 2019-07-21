@@ -8,7 +8,6 @@ import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
 
 public class SoftAssert {
     private static Safe<List<Throwable>> listOfErrors = new Safe<>(new ArrayList<>());

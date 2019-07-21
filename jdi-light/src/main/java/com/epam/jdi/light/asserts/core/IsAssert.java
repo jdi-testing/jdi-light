@@ -1,6 +1,5 @@
 package com.epam.jdi.light.asserts.core;
 
-import com.epam.jdi.light.asserts.generic.CommonAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -10,19 +9,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
-public class IsAssert extends UIAssert<IsAssert, UIElement> implements CommonAssert<IsAssert> {
-    /**
-     * Match passed value with the element text
-     * @param condition to compare
-     */
+public class IsAssert extends UIAssert<IsAssert, UIElement> {
     @JDIAction("Assert that '{name}' text {0}")
     public IsAssert text(Matcher<String> condition) {
         jdiAssert(uiElement.getText(), condition);
         return this;
     }
-    public IsAssert text(String text) {
-        return text(is(text));
-    }
+    public IsAssert text(String text) { return text(is(text)); }
     /**
      * Match passed value with the element attribute
      * @param attrName

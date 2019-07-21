@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import org.apache.logging.log4j.util.Strings;
 import org.openqa.selenium.By;
@@ -22,7 +23,8 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
-public class Selector extends UIBaseElement<UISelectAssert> implements ISelector, SetValue {
+public class Selector extends UIBaseElement<UISelectAssert>
+        implements ISelector, SetValue, HasPlaceholder {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
     protected Select select() {
         return core().asSelect();
@@ -135,13 +137,6 @@ public class Selector extends UIBaseElement<UISelectAssert> implements ISelector
             ? new UIElement(core().get(value)).isSelected()
             : selected().trim().equalsIgnoreCase(value.trim());
     }
-
-    /**
-     * Gets attribute 'placeholder'
-     * @return String
-     */
-    @JDIAction(value = "Get '{name}' placeholder", level = DEBUG)
-    public String placeholder() { return core().attr("placeholder"); }
 
     /**
      * Get the elements values

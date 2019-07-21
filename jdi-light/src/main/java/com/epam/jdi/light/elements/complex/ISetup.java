@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.complex;
 
-import com.epam.jdi.light.elements.base.JDIElement;
+import com.epam.jdi.light.elements.interfaces.JDIElement;
 
 import java.lang.reflect.Field;
 

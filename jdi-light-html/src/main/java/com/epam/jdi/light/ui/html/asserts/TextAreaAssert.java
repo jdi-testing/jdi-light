@@ -19,7 +19,6 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> {
         return this;
     }
     public TextAreaAssert text(String text) { return text(is(text)); }
-
     @JDIAction("Assert that '{name}' rows count {0}")
     public TextAreaAssert rowsCount(Matcher<Integer> condition) {
         jdiAssert(uiElement.rows(), condition);

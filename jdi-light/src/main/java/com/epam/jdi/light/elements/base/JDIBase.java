@@ -7,6 +7,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.HasCache;
+import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.JDIElement;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc;
@@ -19,7 +21,6 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
@@ -128,7 +129,10 @@ public abstract class JDIBase extends DriverBase implements HasCache {
         return get(new Object[]{});
     }
     protected JFunc<WebElement> getElementFunc = null;
-    public void setGetFunc(JFunc<WebElement> func) { getElementFunc = func; }
+    public JDIBase setGetFunc(JFunc<WebElement> func) {
+        getElementFunc = func;
+        return this;
+    }
     public WebElement get(Object... args) {
         if (webElement.hasValue()) {
             WebElement element = webElement.get();
@@ -213,8 +217,8 @@ public abstract class JDIBase extends DriverBase implements HasCache {
                 return elements;
         }
     }
-    public WebList allUI(Object... args) {
-        return new WebList(getAll(args)).setup(e-> e.setName(getName()));
+    public WebList list(Object... args) {
+        return new WebList(getAll(args)).setName(getName());
     }
     private JDIBase getBase(Object element) {
         if (isClass(element.getClass(), JDIBase.class))

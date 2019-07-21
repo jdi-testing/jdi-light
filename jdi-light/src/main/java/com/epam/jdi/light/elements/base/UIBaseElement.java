@@ -3,10 +3,12 @@ package com.epam.jdi.light.elements.base;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.IBaseElement;
 
 public abstract class UIBaseElement<A extends UIAssert>
         implements IBaseElement, HasAssert<A> {
     protected UIElement element;
+    public JDIBase base() { return core().base(); }
     public UIElement core() {
         if (element == null)
             element = new UIElement();

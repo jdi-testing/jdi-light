@@ -7,13 +7,12 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.DriverBase;
-import com.epam.jdi.light.elements.base.IBaseElement;
-import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.JDIElement;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.ReflectionUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -24,7 +23,6 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
@@ -43,7 +41,6 @@ import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.Character.toUpperCase;
 import static java.lang.String.format;
-import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class ActionHelper {

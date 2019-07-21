@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.HasUIList;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
@@ -14,7 +15,9 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
         implements ISelector, SetValue, HasUIList {
     protected WebList list;
     public WebList list() {
-        return list != null ? list : $$(core().getLocator(), getName() + " list");
+        if (list == null)
+            list = $$(core().getLocator()).setName(getName());
+        return list;
     }
     protected void setList(WebList webList) { list = webList; }
 

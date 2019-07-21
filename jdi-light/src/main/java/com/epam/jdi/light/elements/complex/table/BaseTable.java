@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IHasSize;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.HasText;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
 import com.epam.jdi.tools.CacheValue;
@@ -40,7 +41,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThan;
 
 public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> extends UIBaseElement<A>
-        implements ISetup, HasValue, HasAssert<A>, IHasSize {
+        implements ISetup, HasValue, HasAssert<A>, IHasSize, HasText {
     protected By rowLocator = By.xpath("//tr[%s]/td");
     protected By columnLocator = By.xpath("//tr/td[%s]");
     protected By cellLocator = By.xpath("//tr[{1}]/td[{0}]");
@@ -83,7 +84,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
 
     public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
     private WebList headerUI() {
-        return $$(headerLocator, this).setup(e->e.setName(getName() + " header"));
+        return $$(headerLocator, this).setName(getName() + " header");
     }
     protected List<String> getHeader() {
         return LinqUtils.select(headerUI(), UIElement::getText);
@@ -223,7 +224,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     }
 
     protected List<UIElement> getRow(int rowNum) {
-        List<UIElement> elements = getRowByIndex(getRowIndex(rowNum)).elements(size());
+        List<UIElement> elements = getRowByIndex(getRowIndex(rowNum)).elements(size()).values();
         elements = where(elements, UIElement::isDisplayed);
         List<UIElement> result = new ArrayList<>();
         if (firstColumnIndex > 1 || columnsMapping.length > 0) {

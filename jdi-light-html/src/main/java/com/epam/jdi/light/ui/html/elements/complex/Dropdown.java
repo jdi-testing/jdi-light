@@ -3,11 +3,12 @@ package com.epam.jdi.light.ui.html.elements.complex;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
-import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.interfaces.HasLabel;
+import com.epam.jdi.light.elements.interfaces.HasText;
+import com.epam.jdi.light.elements.interfaces.IBaseElement;
 import com.epam.jdi.light.ui.html.elements.annotations.JDropdown;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
@@ -32,9 +33,10 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBaseElement, WithLabel {
+public class Dropdown extends UIListBase<UISelectAssert>
+        implements ISetup, IBaseElement, HasLabel, HasText {
     private DropdownSelect ds() {
-        return new DropdownSelect(core(), SELECT_ERROR);
+        return new DropdownSelect(core(), SELECT_ERROR).setup(DropdownSelect.class, j->j.setName(getName() + " DropDown"));
     }
     private static final String SELECT_ERROR =
         "Can't %s element in Dropdown '%s'. Dropdown should have JDropdown annotation or locator to 'select' tag";
@@ -86,12 +88,20 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
      * Get text
      * @return String text
      */
-    @JDIAction("Get '{name}' text")
+    @JDIAction("Get '{name}' text") @Override
     public String getText() {
-        return value != null
-            ? value.getText()
-            : ds().getText();
-
+        return getTextElement().getText();
+    }
+    @JDIAction("Get '{name}' text") @Override
+    public String text() {
+        return getTextElement().text();
+    }
+    @JDIAction("Get '{name}' text") @Override
+    public String text(TextType type) {
+        return getTextElement().text(type);
+    }
+    private HasText getTextElement() {
+        return value != null ? value : ds();
     }
 
     /**
@@ -239,7 +249,7 @@ public class Dropdown extends UIListBase<UISelectAssert> implements ISetup, IBas
         if (root != null)
             core().setLocator(root);
         if (valueLocator != null) {
-            value = $(valueLocator, this).setName(getName() + " value element");
+            value = $(valueLocator, this).setName(getName());
             value.driverName = core().driverName;
             if (expandLocator == null)
                 expander = value;

@@ -3,10 +3,11 @@ package com.epam.jdi.light.ui.html.elements.complex;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
-import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.HasLabel;
+import com.epam.jdi.light.elements.interfaces.HasText;
+import com.epam.jdi.light.elements.interfaces.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.WebElement;
@@ -31,7 +32,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 
 public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBaseElement,
-        WithLabel, SetValue {
+        HasLabel, SetValue, HasText {
 
     protected Select getSelect(String action) {
         try {
@@ -73,10 +74,14 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBa
      * Get text
      * @return String text
      */
-    @JDIAction("Get '{name}' text")
+    @JDIAction("Get '{name}' text") @Override
     public String getText() {
         return getSelect("getText").getFirstSelectedOption().getText();
     }
+    @JDIAction("Get '{name}' text") @Override
+    public String text() { return getText(); }
+    @JDIAction("Get '{name}' text") @Override
+    public String text(TextType type) { return getText(); }
 
     /**
      * Get the element text

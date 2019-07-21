@@ -6,13 +6,16 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.light.settings.TimeoutSettings;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.map.MapArray;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -21,58 +24,56 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
     /**
      *  Get all application elements
      *  */
-    List<T> elements(int minAmount);
+    MapArray<String, T> elements(int minAmount);
     T get(String value);
 
     default T get(Enum name) { return get(getEnumValue(name)); }
     default T last() {
-        return elements(1).get(size()-1);
+        return elements(1).values().get(size()-1);
     }
-    default T first() {
-        return elements(1).get(0);
-    }
+    default T first() { return elements(1).values().get(0); }
     default List<T> where(JFunc1<T, Boolean> condition) {
-        return LinqUtils.where(elements(0),condition);
+        return LinqUtils.where(elements(0).values(),condition);
     }
     default List<T> filter(JFunc1<T, Boolean> condition) {
         return where(condition);
     }
     default <R> List<R> select(JFunc1<T, R> transform) {
-        return LinqUtils.select(elements(0), transform);
+        return LinqUtils.select(elements(0).values(), transform);
     }
     default <R> List<R> map(JFunc1<T, R> transform) {
         return select(transform);
     }
     default T first(JFunc1<T, Boolean> condition) {
-        return LinqUtils.first(elements(1), condition);
+        return LinqUtils.first(elements(1).values(), condition);
     }
     default T last(JFunc1<T, Boolean> condition) {
-        return LinqUtils.last(elements(1), condition);
+        return LinqUtils.last(elements(1).values(), condition);
     }
     default void ifDo(JFunc1<T, Boolean> condition, JAction1<T> action) {
-        LinqUtils.ifDo(elements(1), condition, action);
+        LinqUtils.ifDo(elements(1).values(), condition, action);
     }
     default <R> List<R> ifSelect(JFunc1<T, Boolean> condition, JFunc1<T, R> transform) {
-        return LinqUtils.ifSelect(elements(0), condition, transform);
+        return LinqUtils.ifSelect(elements(0).values(), condition, transform);
     }
     default void foreach(JAction1<T> action) {
-        LinqUtils.foreach(elements(0), action);
+        LinqUtils.foreach(elements(0).values(), action);
     }
     default boolean hasAny(JFunc1<T, Boolean> condition) {
-        return LinqUtils.any(elements(0), condition);
+        return elements(0).any(condition);
     }
     default boolean all(JFunc1<T, Boolean> condition) {
-        return LinqUtils.all(elements(0), condition);
+        return LinqUtils.all(elements(0).values(), condition);
     }
     default List<T> slice(int from) {
         return slice(from, elements(from).size() - 1);
     }
     default void refresh() { clear(); }
     default List<T> slice(int from, int to) {
-        return LinqUtils.listCopy(elements(to), from, to);
+        return LinqUtils.listCopy(elements(to).values(), from, to);
     }
     default <R> List<R> selectMany(JFunc1<T, List<R>> func) {
-        return LinqUtils.selectMany(elements(0), func);
+        return LinqUtils.selectMany(elements(0).values(), func);
     }
     @Override
     default int size() {
@@ -87,7 +88,7 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
     }
     @Override
     default Iterator<T> iterator() {
-        return elements(0).iterator();
+        return elements(0).values().iterator();
     }
     @Override
     default Object[] toArray() {
@@ -127,7 +128,7 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
     }
     @Override
     default T get(int index) {
-        return elements(index).get(index);
+        return elements(index).values().get(index);
     }
     @Override
     default T set(int index, T element) {
@@ -139,23 +140,26 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
     }
     @Override
     default T remove(int index) {
-        return elements(index).remove(index);
+        MapArray<String, T> els = elements(index);
+        T element = els.values().get(index);
+        els.remove(index);
+        return element;
     }
     @Override
     default int indexOf(Object o) {
-        return elements(0).indexOf(o);
+        return elements(0).values().indexOf(o);
     }
     @Override
     default int lastIndexOf(Object o) {
-        return elements(0).lastIndexOf(o);
+        return elements(0).values().lastIndexOf(o);
     }
     @Override
     default ListIterator<T> listIterator() {
-        return elements(0).listIterator();
+        return elements(0).values().listIterator();
     }
     @Override
     default ListIterator<T> listIterator(int index) {
-        return elements(0).listIterator(index);
+        return elements(0).values().listIterator(index);
     }
     @Override
     default List<T> subList(int fromIndex, int toIndex) {

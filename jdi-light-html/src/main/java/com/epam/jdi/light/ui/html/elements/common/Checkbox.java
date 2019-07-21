@@ -2,16 +2,14 @@ package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.base.WithLabel;
+import com.epam.jdi.light.elements.interfaces.HasClick;
+import com.epam.jdi.light.elements.interfaces.HasLabel;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.ui.html.asserts.CheckboxAssert;
 
-public class Checkbox extends UIBaseElement<CheckboxAssert> implements WithLabel, SetValue {
+public class Checkbox extends UIBaseElement<CheckboxAssert>
+    implements HasLabel, SetValue, HasClick {
     // region Actions
-    @JDIAction("Click on '{name}'")
-    public void click() {
-        element.click();
-    }
     public void check(String value) {
         if (value.equalsIgnoreCase("true") || value.equals("1"))
             check();

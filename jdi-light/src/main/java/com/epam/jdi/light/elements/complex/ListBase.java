@@ -8,18 +8,18 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
-import com.epam.jdi.light.elements.base.HasUIList;
-import com.epam.jdi.light.elements.base.IListBase;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.init.SiteInfo;
+import com.epam.jdi.light.elements.interfaces.HasUIList;
+import com.epam.jdi.light.elements.interfaces.IListBase;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
+import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
-import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
+import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -39,16 +39,27 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     protected WebList list;
     public WebList list() {
         if (list == null) {
-            list = new WebList();
-            list.setUIElementName(this::elementTitle);
+            list = new WebList(core()).setUIElementName(this::elementTitle)
+                    .setName(getName());
         }
         return list;
     }
 
-    public ListBase() {}
-    public ListBase(By locator) { list = new WebList(locator); }
-    public ListBase(List<WebElement> elements) { list = new WebList(elements); }
+    ListBase() {}
+    ListBase(By locator) { list = new WebList(locator); }
+    ListBase(List<WebElement> elements) { list = new WebList(elements); }
     Class<?> initClass = UIElement.class;
+
+    private boolean actualMapValue() {
+        return map.hasValue() && map.get().size() > 0 && isActual(map.get().get(0).value);
+    }
+    protected CacheValue<MapArray<String, T>> map;
+    private boolean isActual(T element) {
+        try {
+            element.getTagName();
+            return true;
+        } catch (Exception ex) { return false; }
+    }
 
     /**
      * @param minAmount
@@ -56,8 +67,10 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
      */
 
     @JDIAction(level = DEBUG)
-    public List<T> elements(int minAmount) {
-        return LinqUtils.map(list().elements(minAmount), this::toT);
+    public MapArray<String, T> elements(int minAmount) {
+        if (actualMapValue())
+            return map.get();
+        return list().elements(minAmount).toMapArray(this::toT);
     }
 
     /**
@@ -155,7 +168,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public void refresh() {
-        list().refresh();
+        clear();
     }
 
     /**
@@ -164,6 +177,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     @JDIAction(level = DEBUG)
     public void clear() {
         list().clear();
+        map.clear();
     }
 
     public void setValue(String value) {

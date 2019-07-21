@@ -59,8 +59,8 @@ public class Line implements IList<String> {
      * @return List
      */
     @JDIAction(level = DEBUG)
-    public List<String> elements(int minAmount) {
-        return getList(minAmount);
+    public MapArray<String, String> elements(int minAmount) {
+        return getData(minAmount);
     }
 
     public String getValue() {

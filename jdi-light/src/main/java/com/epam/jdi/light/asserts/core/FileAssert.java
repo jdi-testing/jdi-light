@@ -58,6 +58,7 @@ public class FileAssert extends BaseAssert {
         assertThat(fileText, text);
         return this;
     }
+    public FileAssert text(String text) { return text(is(text)); }
 
     /**
      * Match passed value with file size
