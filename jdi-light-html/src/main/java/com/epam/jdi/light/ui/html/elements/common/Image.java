@@ -2,16 +2,15 @@ package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.HasClick;
+import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.light.ui.html.asserts.ImageAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
-public class Image extends UIBaseElement<ImageAssert> {
+public class Image extends UIBaseElement<ImageAssert>
+        implements HasClick, HasValue {
     // region Actions
-    @JDIAction("Click on '{name}'")
-    public void click() {
-        element.click();
-    }
     @JDIAction(value = "Get '{name}' image source path", level = DEBUG)
     public String src() { return element.attr("src"); }
     @JDIAction(value = "Get '{name}' image height", level = DEBUG)
@@ -25,6 +24,10 @@ public class Image extends UIBaseElement<ImageAssert> {
     // region Extend assertions
     public ImageAssert is() {
         return new ImageAssert().set(this);
+    }
+
+    public String getValue() {
+        return src();
     }
     // endregion
 }

@@ -9,10 +9,11 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
-import com.epam.jdi.light.elements.base.HasUIList;
-import com.epam.jdi.light.elements.base.IListBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.HasText;
+import com.epam.jdi.light.elements.interfaces.HasUIList;
+import com.epam.jdi.light.elements.interfaces.IListBase;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JAction1;
@@ -25,7 +26,6 @@ import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -295,7 +295,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
 
     public List<String> checked() {
-        return ifSelect(IListBase::isSelected, IListBase::getText);
+        return ifSelect(IListBase::isSelected, HasText::getText);
     }
 
     public List<String> values() {

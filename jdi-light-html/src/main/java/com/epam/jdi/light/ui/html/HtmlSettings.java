@@ -5,18 +5,9 @@ package com.epam.jdi.light.ui.html;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.settings.WebSettings;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import org.openqa.selenium.WebElement;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
-import static com.epam.jdi.light.common.UIUtils.*;
 import static com.epam.jdi.light.settings.WebSettings.initialized;
-import static com.epam.jdi.tools.LinqUtils.select;
-import static com.epam.jdi.tools.ReflectionUtils.*;
 
 public class HtmlSettings {
 

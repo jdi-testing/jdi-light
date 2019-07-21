@@ -7,11 +7,9 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.core.DataListAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.UIUtils;
-import com.epam.jdi.light.elements.base.IListBase;
+import com.epam.jdi.light.elements.interfaces.IListBase;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 
@@ -21,9 +19,8 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.UIUtils.*;
+import static com.epam.jdi.light.common.UIUtils.asEntity;
 import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 

@@ -31,14 +31,12 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     public A value(Matcher<String> condition) {
         return selected(condition);
     }
-    @Override
     public A text(Matcher<String> condition) {
         return selected(condition);
     }
     public A value(String condition) {
         return selected(condition);
     }
-    @Override
     public A text(String condition) {
         return selected(condition);
     }

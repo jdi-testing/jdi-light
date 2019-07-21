@@ -7,6 +7,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.HasCache;
+import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.JDIElement;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc;
@@ -19,7 +21,6 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.FRAME;

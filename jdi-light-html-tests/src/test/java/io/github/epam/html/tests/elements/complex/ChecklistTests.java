@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.elements.complex;
 
 import io.github.epam.TestsInit;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -11,7 +10,6 @@ import static io.github.com.pages.HtmlElementsPage.weatherNoLocator;
 import static io.github.epam.html.tests.elements.complex.enums.Weather.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 

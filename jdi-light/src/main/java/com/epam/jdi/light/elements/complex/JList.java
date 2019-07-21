@@ -7,7 +7,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.IListBase;
+import com.epam.jdi.light.elements.interfaces.IListBase;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;

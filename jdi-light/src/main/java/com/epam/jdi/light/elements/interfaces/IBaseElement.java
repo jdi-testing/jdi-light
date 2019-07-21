@@ -1,13 +1,11 @@
-package com.epam.jdi.light.elements.base;
+package com.epam.jdi.light.elements.interfaces;
 
-import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.HasCache;
 import com.epam.jdi.tools.func.JAction1;
 
 public interface IBaseElement extends JDIElement, HasCache {
-    @JDIAction("Get '{name}' text")
-    default String getText() { return core().getText(); }
     void hover();
     boolean isEnabled();
     boolean isDisabled();

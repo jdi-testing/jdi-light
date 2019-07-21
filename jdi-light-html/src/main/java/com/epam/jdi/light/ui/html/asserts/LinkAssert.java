@@ -19,7 +19,6 @@ public class LinkAssert extends UIAssert<LinkAssert, Link> {
         return this;
     }
     public LinkAssert text(String text) { return text(is(text)); }
-
     @JDIAction("Assert that '{name}' alt {0}")
     public LinkAssert alt(Matcher<String> condition) {
         jdiAssert(uiElement.alt(), condition);

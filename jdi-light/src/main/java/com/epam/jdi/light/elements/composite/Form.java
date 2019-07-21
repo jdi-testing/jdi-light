@@ -2,10 +2,9 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.IBaseElement;
-import com.epam.jdi.light.elements.base.JDIElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.elements.interfaces.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.tools.LinqUtils;

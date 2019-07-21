@@ -10,12 +10,9 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
-import com.epam.jdi.light.elements.base.IBaseElement;
-import com.epam.jdi.light.elements.base.IListBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.interfaces.IClickable;
-import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.light.elements.interfaces.*;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
@@ -38,15 +35,17 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.Case;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class UIElement extends JDIBase implements WebElement, SetValue, IBaseElement,
-        HasAssert<IsAssert>, IListBase, IClickable {
+public class UIElement extends JDIBase
+        implements WebElement, SetValue, IBaseElement,
+        HasAssert<IsAssert>, IListBase, IClickable, HasClick, HasText,
+        HasLabel, HasPlaceholder, HasInput {
     //region Constructors
     public UIElement() { }
     public UIElement(WebElement el) { setWebElement(el); }
@@ -72,7 +71,7 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
 
     //region WebElement
     /** Click on element */
-    @JDIAction("Click on '{name}'")
+    @JDIAction("Click on '{name}'") @Override
     public void click() {
         click(clickAreaType);
     }
@@ -85,8 +84,9 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
      * Send specified value as keys
      * @param value
      */
-    @JDIAction("Input '{0}' in '{name}'")
+    @JDIAction("Input '{0}' in '{name}'") @Override
     public void sendKeys(CharSequence... value) { get().sendKeys(value);}
+    @Override
     public void clear() { get().clear();}
 
     /**
@@ -126,7 +126,7 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
         return enabled();
     }
 
-    @JDIAction("Get '{name}' text")
+    @JDIAction("Get '{name}' text") @Override
     public String getText() {
         return text(textType);
     }
@@ -200,7 +200,7 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
     /**
      * Сlick on the element
      */
-    @JDIAction("Click on '{name}'")
+    @JDIAction("Click on '{name}'") @Override
     public void jsClick() {
         jsExecute("click()");
     }
@@ -209,7 +209,7 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
      * Input specified value as keys
      * @param value
      */
-    @JDIAction("Input '{0}' in '{name}'")
+    @JDIAction("Input '{0}' in '{name}'") @Override
     public void input(String value) {
         clear();
         setText(value);
@@ -217,13 +217,13 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
     /**
      * Focus
      */
-    @JDIAction(level = DEBUG)
+    @JDIAction(level = DEBUG) @Override
     public void focus(){ sendKeys(""); }
     /**
      * Set the text in the attribute "value"
      * @param value
      */
-    @JDIAction("Set '{0}' in '{name}'")
+    @JDIAction("Set '{0}' in '{name}'") @Override
     public void setText(String value) {
         jsExecute("value='"+value+"'");
     }
@@ -232,6 +232,9 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
         actionsWitElement((a, e) -> a.moveByOffset(x, y).click());
     }
     public void click(ElementArea area) {
+        if (isDisabled())
+            throw exception("Can't perform click. Element is disabled");
+        show();
         switch (area) {
             case TOP_LEFT:
                 click(1,1);
@@ -253,8 +256,6 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
                 get().click();
                 break;
             case SMART_CLICK:
-                if (isHidden() || !isClickable())
-                    show();
                 ElementArea clArea = timer().getResultByCondition(
                     this::getElementClickableArea, Objects::nonNull);
                 if (clArea == null)
@@ -376,7 +377,7 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
      * Gets attribute 'placeholder'
      * @return String
      */
-    @JDIAction(value = "Get '{name}' placeholder", level = DEBUG)
+    @JDIAction(value = "Get '{name}' placeholder", level = DEBUG) @Override
     public String placeholder() { return getAttribute("placeholder"); }
 
     /**
@@ -417,14 +418,14 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
     /**
      * Double click on the element
      */
-    @JDIAction("DoubleClick on '{name}'")
+    @JDIAction("DoubleClick on '{name}'") @Override
     public void doubleClick() {
         actionsWitElement(Actions::doubleClick);
     }
     /**
      * Right click on the element
      */
-    @JDIAction("RightClick on '{name}'")
+    @JDIAction("RightClick on '{name}'") @Override
     public void rightClick() {
         actionsWitElement(Actions::contextClick);
     }
@@ -480,11 +481,11 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
         if (isSelected())
             click();
     }
-
+    @Override
     public Label label() {
-        return new Label().setup(Label.class, e->e
-                .setLocator(By.cssSelector("[for="+attr("id")+"]"))
-                .setName(getName() + " label"));
+        return new Label().setup(Label.class, j->j
+            .setLocator(By.cssSelector("[for="+ core().attr("id")+"]"))
+            .setName(getName() + " label"));
     }
 
     /**
@@ -495,7 +496,7 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
     public String labelText() {
         return label().getText();
     }
-
+    @Override
     public String text(TextType type) {
         switch (type) {
             case TEXT:
@@ -536,8 +537,8 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
     public MapArray<String, String> attrs() { return getAllAttributes(); }
     /** getAttribute alias */
     public String attr(String value) { return getAttribute(value); }
-    /** getText alias */
-    public String text() { return getText(); }
+    /** getText alias */ @Override
+    public String text() { return text(textType); }
     /** getCssValue alias */
     public String css(String prop) {
         return getCssValue(prop);
@@ -555,8 +556,10 @@ public class UIElement extends JDIBase implements WebElement, SetValue, IBaseEle
 
     //region Protected and private
     protected boolean selected() {
+        if (get().isSelected())
+            return true;
         List<String> cl = classes();
-        return get().isSelected() || cl.contains("checked") || cl.contains("active")||
+        return cl.contains("checked") || cl.contains("active")||
                 cl.contains("selected") || getAttribute("checked").equals("true");
     }
     protected boolean enabled() {

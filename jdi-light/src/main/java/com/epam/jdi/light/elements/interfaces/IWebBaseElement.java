@@ -1,4 +1,4 @@
-package com.epam.jdi.light.elements.base;
+package com.epam.jdi.light.elements.interfaces;
 
 public interface IWebBaseElement extends IBaseElement {
     String getAttribute(String value);

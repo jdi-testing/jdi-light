@@ -37,21 +37,20 @@ public class ActionProcessor {
     protected void jdiPointcut() { }
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() { }
-
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        return JDI_AROUND.execute(jp);
-    }
-
-    public static JFunc1<ProceedingJoinPoint, Object> JDI_AROUND = jp -> {
         try {
-            BEFORE_JDI_ACTION.execute(jp);
-            Object result = stableAction(jp);
-            return AFTER_JDI_ACTION.execute(jp, result);
+            return JDI_AROUND.execute(jp);
         } catch (Throwable ex) {
             Object element = jp.getThis() != null ? jp.getThis() : new Object();
             throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, ex.getMessage()));
         }
+    }
+
+    public static JFunc1<ProceedingJoinPoint, Object> JDI_AROUND = jp -> {
+        BEFORE_JDI_ACTION.execute(jp);
+        Object result = stableAction(jp);
+        return AFTER_JDI_ACTION.execute(jp, result);
     };
 
     protected static Object stableAction(ProceedingJoinPoint jp) {
@@ -61,8 +60,7 @@ public class ActionProcessor {
             String exception = "";
             JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
             int timeout = ja != null && ja.timeout() != -1
-                    ? ja.timeout()
-                    : TIMEOUT.get();
+                    ? ja.timeout() : TIMEOUT.get();
             JFunc1<JDIBase, Object> overrideAction = null;
             boolean replace = false;
             JDIBase obj = null;

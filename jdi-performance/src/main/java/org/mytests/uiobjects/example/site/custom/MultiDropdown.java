@@ -3,11 +3,11 @@ package org.mytests.uiobjects.example.site.custom;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextType;
-import com.epam.jdi.light.elements.base.IBaseElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.base.WithLabel;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.HasLabel;
+import com.epam.jdi.light.elements.interfaces.IBaseElement;
 import org.apache.commons.lang3.time.StopWatch;
 import org.openqa.selenium.By;
 
@@ -24,7 +24,7 @@ import static java.util.Arrays.asList;
 import static org.jsoup.helper.StringUtil.isBlank;
 
 public class MultiDropdown extends UIListBase<UISelectAssert>
-        implements IBaseElement, WithLabel {
+        implements IBaseElement, HasLabel {
 
     By expandArrow = By.cssSelector(".caret");
     By values = By.tagName("li");
@@ -93,7 +93,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
         for (String name : values()) {
             UIElement value = value(name);
             boolean valueSelected = value.find("input").setup(JDIBase::noValidation)
-                .get().isSelected();
+                .isSelected();
             if (valueSelected && !listNames.contains(name.trim())
                     || !valueSelected && listNames.contains(name.trim()))
                 value.click();

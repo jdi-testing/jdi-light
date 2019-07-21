@@ -1,12 +1,14 @@
 package com.epam.jdi.light.ui.html.elements.common;
 
+import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.base.WithLabel;
+import com.epam.jdi.light.elements.interfaces.HasLabel;
+import com.epam.jdi.light.elements.interfaces.HasText;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 
-public class FileInput extends UIBaseElement<UIAssert> implements WithLabel, SetValue {
+public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, HasText, SetValue {
     // region Actions
     @JDIAction("Upload file '{0}' for '{name}'")
     public void uploadFile(String path) {

@@ -1,7 +1,7 @@
 package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
-import com.epam.jdi.light.elements.base.JDIElement;
+import com.epam.jdi.light.elements.interfaces.JDIElement;
 import com.epam.jdi.tools.func.JFunc1;
 
 public class BaseAssert<E extends JDIElement> {

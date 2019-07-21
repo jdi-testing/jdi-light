@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.SiteInfo;
+import com.epam.jdi.light.elements.interfaces.JDIElement;
 import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

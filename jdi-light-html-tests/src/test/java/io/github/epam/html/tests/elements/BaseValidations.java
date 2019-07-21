@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.elements;
 
-import com.epam.jdi.light.elements.base.IBaseElement;
-import com.epam.jdi.light.elements.base.JDIElement;
+import com.epam.jdi.light.elements.interfaces.IBaseElement;
 import com.epam.jdi.tools.func.JAction;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;

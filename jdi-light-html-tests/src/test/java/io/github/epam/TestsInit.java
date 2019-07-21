@@ -7,7 +7,6 @@ import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;

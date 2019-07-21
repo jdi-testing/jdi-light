@@ -5,7 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import page.objects.jdi.HomePageWeb;
 import page.objects.jdi.HomePageWebEx;
-import page.objects.selenium.*;
+import page.objects.selenium.HomePage;
+import page.objects.selenium.HomePageEx;
 
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
