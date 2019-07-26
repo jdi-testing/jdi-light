@@ -16,6 +16,8 @@ Tutorial: https://jdi-docs.github.io/jdi-light/?java#tutorial - helps to get mai
 Tutorial repo:  https://github.com/jdi-tutorials </br>
 Project templates: https://github.com/jdi-templates - for fast projects start </br>
 Examples: https://github.com/jdi-examples </br>
+How to use [UI Elements examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests/src/test/java/io/github/epam/html/tests/elements) </br>
+Increase test [performance examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-performance) </br>
  </br>
 **Note: JDI Light natively work with JDK 8. Some problems identified with JDK 12 so it is not recommended** </br>
 
