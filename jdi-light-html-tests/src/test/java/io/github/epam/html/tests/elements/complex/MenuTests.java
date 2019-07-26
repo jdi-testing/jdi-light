@@ -5,6 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.driver.get.DriverData.CHROME_OPTIONS;
 import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;

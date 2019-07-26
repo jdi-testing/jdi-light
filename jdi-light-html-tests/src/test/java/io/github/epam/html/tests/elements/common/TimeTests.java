@@ -1,71 +1,70 @@
-package io.github.epam.html.tests.elements.simple;
+package io.github.epam.html.tests.elements.common;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.autumnWeek;
+import static io.github.com.pages.HtmlElementsPage.bookingTime;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
-public class WeekTests extends TestsInit {
+public class TimeTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        autumnWeek.setDateTime("2018-W40");
     }
 
     @Test
     public void getDateTest() {
-        assertEquals(autumnWeek.value(), "2018-W40");
+        assertEquals(bookingTime.value(), "11:00");
     }
 
     @Test
     public void getLabelTextTest() {
-        assertEquals(autumnWeek.labelText(), "Autumn");
+        assertEquals(bookingTime.labelText(), "Booking Time:");
     }
 
     @Test
     public void minTest() {
-        assertEquals(autumnWeek.min(), "2018-W35");
+        assertEquals(bookingTime.min(), "9:00");
     }
 
     @Test
     public void maxTest() {
-        assertEquals(autumnWeek.max(), "2018-W48");
+        assertEquals(bookingTime.max(), "18:00");
     }
 
     @Test
     public void setDateTimeTest() {
-        autumnWeek.setDateTime("2018-W12");
-        autumnWeek.show();
-        assertEquals(autumnWeek.value(), "2018-W12");
+        bookingTime.setDateTime("05:00");
+        bookingTime.show();
+        assertEquals(bookingTime.value(), "05:00");
     }
 
     @Test
     public void isValidationTest() {
-        autumnWeek.is().enabled();
-        autumnWeek.assertThat().week(is("2018-W40"));
+        bookingTime.is().enabled();
+        bookingTime.assertThat().time(is("11:00"));
     }
 
     @Test
     public void labelTest() {
-        autumnWeek.label().assertThat().text(is("Autumn"));
-        autumnWeek.label().is().text(equalToIgnoringCase("autumn"));
+        assertEquals(bookingTime.label().getText(), "Booking Time:");
+        bookingTime.label().is().text(equalToIgnoringCase("booking Time:"));
     }
 
     @Test
     public void assertValidationTest() {
-        autumnWeek.assertThat().date(containsString("W40"));
+        bookingTime.assertThat().date(containsString("11"));
     }
 
     @Test
     public void baseValidationTest() {
-        baseValidation(autumnWeek);
+        baseValidation(bookingTime);
     }
 }

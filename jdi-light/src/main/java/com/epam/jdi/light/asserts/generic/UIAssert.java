@@ -80,7 +80,8 @@ public class UIAssert<A extends UIAssert, E extends IBaseElement> extends BaseAs
 
     public A set(E element) {
         this.element = element;
-        failElement = element.getName();
+        name = element.getName();
+        failElement = element.core().printFullLocator();
         return (A) this;
     }
 }

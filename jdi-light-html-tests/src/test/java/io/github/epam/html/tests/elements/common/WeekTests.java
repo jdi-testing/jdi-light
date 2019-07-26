@@ -1,70 +1,71 @@
-package io.github.epam.html.tests.elements.simple;
+package io.github.epam.html.tests.elements.common;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.birthDate;
+import static io.github.com.pages.HtmlElementsPage.autumnWeek;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
-public class DateTests extends TestsInit {
+public class WeekTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
+        autumnWeek.setDateTime("2018-W40");
     }
 
     @Test
     public void getDateTest() {
-        assertEquals(birthDate.value(), "1985-06-18");
+        assertEquals(autumnWeek.value(), "2018-W40");
     }
 
     @Test
     public void getLabelTextTest() {
-        assertEquals(birthDate.labelText(), "Birth date");
+        assertEquals(autumnWeek.labelText(), "Autumn");
     }
 
     @Test
     public void minTest() {
-        assertEquals(birthDate.min(), "1970-01-01");
+        assertEquals(autumnWeek.min(), "2018-W35");
     }
 
     @Test
     public void maxTest() {
-        assertEquals(birthDate.max(), "2030-12-31");
+        assertEquals(autumnWeek.max(), "2018-W48");
     }
 
     @Test
     public void setDateTimeTest() {
-        birthDate.setDateTime("2018-11-13");
-        assertEquals(birthDate.value(), "2018-11-13");
+        autumnWeek.setDateTime("2018-W12");
+        autumnWeek.show();
+        assertEquals(autumnWeek.value(), "2018-W12");
     }
 
     @Test
     public void isValidationTest() {
-        birthDate.is().date(is("1985-06-18"));
-        birthDate.is().enabled();
+        autumnWeek.is().enabled();
+        autumnWeek.assertThat().week(is("2018-W40"));
     }
 
     @Test
     public void labelTest() {
-        assertEquals(birthDate.label().getText(), "Birth date");
-        birthDate.label().is().text(containsString("Birth"));
+        autumnWeek.label().assertThat().text(is("Autumn"));
+        autumnWeek.label().is().text(equalToIgnoringCase("autumn"));
     }
 
     @Test
     public void assertValidationTest() {
-        birthDate.assertThat().date(containsString("1985"));
+        autumnWeek.assertThat().date(containsString("W40"));
     }
 
     @Test
     public void baseValidationTest() {
-        baseValidation(birthDate);
+        baseValidation(autumnWeek);
     }
 }

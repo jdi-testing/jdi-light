@@ -7,7 +7,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -209,7 +209,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
         return list().values();
     }
 
-    public List<String> values(TextType type) {
+    public List<String> values(TextTypes type) {
         return list().values(type);
     }
 

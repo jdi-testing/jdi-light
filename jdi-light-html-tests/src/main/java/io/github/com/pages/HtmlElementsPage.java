@@ -67,8 +67,8 @@ public class HtmlElementsPage extends WebPage {
     //region Complex Elements
     // TODO add Enum
 
-    public static Dropdown dressCode;
-    // @UI("#dress-code") public static Droplist dressCode;
+    public static DropdownSelect dressCode;
+    // @UI("#dress-code") public static Dropdown dressCode;
     @UI("#disabled-dropdown") public static Dropdown disabledDropdown;
 
     public static MultiSelector ages;
@@ -76,8 +76,8 @@ public class HtmlElementsPage extends WebPage {
     public static MultiSelector multiDropdown;
     // @UI("#multi-dropdown") public static MultiSelector multiDropdown;
 
-    public static Combobox iceCream;
-    // @UI("#ice-cream") public static HtmlCombobox iceCream;
+    public static DataListOptions iceCream;
+    // @UI("#ice-cream") public static DataListOptions iceCream;
     @UI("#ice-cream") public static DataListOptions iceCreamDataList;
 
     public static Checkbox acceptConditions;

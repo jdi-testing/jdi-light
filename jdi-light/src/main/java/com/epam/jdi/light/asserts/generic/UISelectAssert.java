@@ -1,7 +1,7 @@
 package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matcher;
@@ -52,11 +52,11 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
         return values(hasItems(values));
     }
     @JDIAction("Assert that '{name}' values {0}")
-    public A values(TextType type, Matcher<? super List<String>> condition) {
+    public A values(TextTypes type, Matcher<? super List<String>> condition) {
         jdiAssert(element.values(type), condition);
         return (A) this;
     }
-    public A values(TextType type, String... values) {
+    public A values(TextTypes type, String... values) {
         return values(type, hasItems(values));
     }
     @JDIAction("Assert that '{name}' enabled items {0}")

@@ -29,7 +29,7 @@ public class Range extends UIBaseElement<RangeAssert> implements HasLabel, SetVa
 
     @JDIAction(value = "Set volume '{0}' for '{name}'", level = DEBUG)
     public void setVolume(int volume) {
-        setValue(volume+"");
+        uiElement.setAttribute("value", volume+"");
     }
     // endregion
 

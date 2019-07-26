@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.func.JFunc1;
@@ -55,7 +55,7 @@ public class Menu extends UIListBase<UISelectAssert> {
         return list().values();
     }
     @JDIAction(level = DEBUG)
-    public List<String> values(TextType type) {
+    public List<String> values(TextTypes type) {
         return list().values(type);
     }
     @JDIAction(level = DEBUG)

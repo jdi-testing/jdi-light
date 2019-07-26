@@ -2,13 +2,14 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.HasLabel;
 import com.epam.jdi.light.elements.interfaces.HasText;
 import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import com.epam.jdi.light.ui.html.asserts.ChecklistAssert;
 import com.epam.jdi.light.ui.html.elements.annotations.JDropdown;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
@@ -36,7 +37,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class Dropdown extends UIListBase<UISelectAssert>
         implements ISetup, IBaseElement, HasLabel, HasText {
     private DropdownSelect ds() {
-        return new DropdownSelect(core(), SELECT_ERROR).setup(DropdownSelect.class, j->j.setName(getName() + " DropDown"));
+        return new DropdownSelect(core(), SELECT_ERROR).setup(DropdownSelect.class, j->j.setName(getName()));
     }
     private static final String SELECT_ERROR =
         "Can't %s element in Dropdown '%s'. Dropdown should have JDropdown annotation or locator to 'select' tag";
@@ -74,7 +75,7 @@ public class Dropdown extends UIListBase<UISelectAssert>
     public void select(int index) {
         if (index < 1)
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
-        if (list() == null) {
+        if (list() != null) {
             expand();
             list().select(index - 1);
             if (list().hasAny(UIElement::isDisplayed))
@@ -97,7 +98,7 @@ public class Dropdown extends UIListBase<UISelectAssert>
         return getTextElement().text();
     }
     @JDIAction("Get '{name}' text") @Override
-    public String text(TextType type) {
+    public String text(TextTypes type) {
         return getTextElement().text(type);
     }
     private HasText getTextElement() {
@@ -118,10 +119,12 @@ public class Dropdown extends UIListBase<UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public void expand() {
-        if (expander != null)
+        if (expander != null) {
             if (!isExpanded())
                 expander.click();
-        else { try { core().click(); }
+        }
+        else {
+            try { core().click(); }
             catch (Throwable ignore) {
                 assertLinked(expander, "expander", "expand");
             }
@@ -155,6 +158,7 @@ public class Dropdown extends UIListBase<UISelectAssert>
     public void hover() {
         core().hover();
     }
+    @Override
     public boolean isEnabled() {
         if (list() == null || expander == null)
             return ds().isEnabled();
@@ -205,7 +209,7 @@ public class Dropdown extends UIListBase<UISelectAssert>
      * @return List
      */
     @JDIAction("Get '{name}' values")
-    public List<String> values(TextType type) {
+    public List<String> values(TextTypes type) {
         List<String> result = new ArrayList<>();
         if (list() == null && core().getTagName().contains("select"))
             return ds().values(type);
@@ -264,6 +268,10 @@ public class Dropdown extends UIListBase<UISelectAssert>
             if (valueLocator == null)
                 value = expander;
         }
+    }
+    @Override
+    public UISelectAssert is() {
+        return new UISelectAssert<>().set(this);
     }
 
 }

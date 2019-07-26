@@ -2,7 +2,7 @@ package org.mytests.uiobjects.example.site.custom;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -205,7 +205,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
      * @return List<String>
      */
     @JDIAction("Get '{name}' values")
-    public List<String> values(TextType type) {
+    public List<String> values(TextTypes type) {
         return map(allValues(), o -> o.text(type));
     }
 

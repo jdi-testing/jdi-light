@@ -2,8 +2,9 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasLabel;
 import com.epam.jdi.light.elements.interfaces.HasText;
@@ -31,14 +32,14 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBaseElement,
+public class DropdownSelect extends UIListBase<UISelectAssert> implements IBaseElement,
         HasLabel, SetValue, HasText {
 
     protected Select getSelect(String action) {
         try {
             return core().asSelect();
         } catch (Exception ex) {
-            throw exception(SELECT_ERROR, action, this);
+            throw exception(SELECT_ERROR, action, this, ex.getMessage());
         }
     }
 
@@ -49,7 +50,7 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBa
         this.uiElement = element;
     }
     private static String SELECT_ERROR =
-        "Can't %s element in DropdownSelect '%s'. DropdownSelect locator should point to select tag";
+        "Can't %s element in DropdownSelect '%s'. DropdownSelect locator should point to select tag: %s";
 
     /**
      * Select the specified element by the value
@@ -81,7 +82,7 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBa
     @JDIAction("Get '{name}' text") @Override
     public String text() { return getText(); }
     @JDIAction("Get '{name}' text") @Override
-    public String text(TextType type) { return getText(); }
+    public String text(TextTypes type) { return getText(); }
 
     /**
      * Get the element text
@@ -132,7 +133,7 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBa
      * @return List
      */
     @JDIAction("Get '{name}' values")
-    public List<String> values(TextType type) {
+    public List<String> values(TextTypes type) {
         return map(getSelect("values").getOptions(), el -> $(el).text(type));
     }
     public List<String> listEnabled() {
@@ -152,5 +153,9 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IBa
 
     public String getValue() {
         return selected();
+    }
+    @Override
+    public UISelectAssert is() {
+        return new UISelectAssert<>().set(this);
     }
 }

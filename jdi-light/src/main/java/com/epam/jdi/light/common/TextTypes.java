@@ -1,5 +1,5 @@
 package com.epam.jdi.light.common;
 
-public enum TextType {
+public enum TextTypes {
     SMART, TEXT, VALUE, INNER
 }

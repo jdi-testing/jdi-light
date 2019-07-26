@@ -9,7 +9,7 @@ import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.*;
@@ -372,6 +372,9 @@ public class UIElement extends JDIBase
     public boolean hasClass(String className) {
         return classes().contains(className);
     }
+    public boolean hasAttribute(String attrName) {
+        return isNotBlank(attr(attrName));
+    }
 
     /**
      * Gets attribute 'placeholder'
@@ -497,7 +500,7 @@ public class UIElement extends JDIBase
         return label().getText();
     }
     @Override
-    public String text(TextType type) {
+    public String text(TextTypes type) {
         switch (type) {
             case TEXT:
                 return get().getText();
@@ -564,7 +567,7 @@ public class UIElement extends JDIBase
     }
     protected boolean enabled() {
         List<String> cls = classes();
-        return cls.contains("active") || get().isEnabled() && !cls.contains("disabled");
+        return cls.contains("active") || !hasAttribute("disabled") || get().isEnabled() && !cls.contains("disabled");
     }
     protected boolean displayed() {
         try {

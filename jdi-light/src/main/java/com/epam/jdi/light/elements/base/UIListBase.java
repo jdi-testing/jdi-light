@@ -16,7 +16,7 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
     protected WebList list;
     public WebList list() {
         if (list == null)
-            list = $$(core().getLocator()).setName(getName());
+            list = $$(core().getLocator(), core().parent).setName(getName());
         return list;
     }
     protected void setList(WebList webList) { list = webList; }
@@ -28,11 +28,11 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
     public <TEnum extends Enum> void select(TEnum value) {
         select(getEnumValue(value));
     }
-    @JDIAction("Check that '{name}' is hidden")
+    @JDIAction("Check that '{name}' is hidden") @Override
+    public boolean isDisplayed() { return list().isDisplayed(); }
     @Override
     public boolean isHidden() { return !isDisplayed(); }
-    @JDIAction(level = DEBUG)
-    @Override
+    @JDIAction(level = DEBUG) @Override
     public boolean isDisabled() {
         return !isEnabled();
     }

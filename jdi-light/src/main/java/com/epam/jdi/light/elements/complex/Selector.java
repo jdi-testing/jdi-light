@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasPlaceholder;
@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.TextType.INNER;
+import static com.epam.jdi.light.common.TextTypes.INNER;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
@@ -152,7 +152,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      * @return List
      */
     @JDIAction(level = DEBUG)
-    public List<String> values(TextType type) {
+    public List<String> values(TextTypes type) {
         return map(select().getOptions(), w -> $(w).text(INNER));
     }
     public int size() { return select().getOptions().size(); }

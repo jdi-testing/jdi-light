@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.init;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.UIBase;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
@@ -132,7 +133,7 @@ public class PageFactory {
             }
         else {
             Pair<String, InitRule> firstRule = INIT_RULES.first((k,r) ->
-                    r.condition.execute(info.field));
+                r.condition.execute(info.field));
             if (firstRule != null)
                 try {
                     return (T)(info.instance = firstRule.value.func.execute(info));
@@ -150,9 +151,6 @@ public class PageFactory {
         MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) ->
                 r.condition.execute(info));
         String ruleName = "UNDEFINED";
-        /*if (isEmpty(setupRules))
-            throw exception("No setup rules found for '%s' (you can add appropriate rule in InitActions.SETUP_RULES).",
-                info.name());*/
         try {
             for(Pair<String, SetupRule> rule : setupRules) {
                 ruleName = rule.key;
@@ -175,11 +173,10 @@ public class PageFactory {
     private static void initWebPage(WebPage webPage) {
         webPage.driverName = DRIVER_NAME;
         webPage.updatePageData(webPage.getClass().getAnnotation(Url.class),
-                webPage.getClass().getAnnotation(Title.class));
+            webPage.getClass().getAnnotation(Title.class));
         addPage(webPage);
     }
     private static <T> T getPageObject(WebDriver driver, Class<T> pageClassToProxy) {
-        useDriver(() -> driver);
         try {
             return create(pageClassToProxy, driver);
         } catch (Exception ignore) {
@@ -207,10 +204,11 @@ public class PageFactory {
     }
     public static <T> T initElements(WebDriver driver, Class<T> pageClassToProxy) {
         T page = getPageObject(driver, pageClassToProxy);
-        initElements(page);
+        initElements(driver, page);
         return page;
     }
     public static void initElements(WebDriver driver, Object page) {
+        useDriver(() -> driver);
         initElements(page);
     }
     public static void initElements(ElementLocatorFactory factory, Object page) {

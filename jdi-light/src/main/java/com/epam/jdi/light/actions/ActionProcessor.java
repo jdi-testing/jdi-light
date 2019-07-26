@@ -48,19 +48,7 @@ public class ActionProcessor {
             Object element = jp.getThis() != null ? jp.getThis() : new Object();
             throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, ex.getMessage()));
         }
-        //return JDI_AROUND.execute(jp);
     }
-
-    public static JFunc1<ProceedingJoinPoint, Object> JDI_AROUND = jp -> {
-        try {
-            BEFORE_JDI_ACTION.execute(jp);
-            Object result = stableAction(jp);
-            return AFTER_JDI_ACTION.execute(jp, result);
-        } catch (Throwable ex) {
-            Object element = jp.getThis() != null ? jp.getThis() : new Object();
-            throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, ex.getMessage()));
-        }
-    };
 
     public static Object stableAction(ProceedingJoinPoint jp) {
         try {

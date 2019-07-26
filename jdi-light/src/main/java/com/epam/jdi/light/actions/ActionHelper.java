@@ -74,7 +74,9 @@ public class ActionHelper {
                 MapArray<String, Object> args = methodArgs(jp, method);
                 MapArray<String, Object> core = core(jp);
                 MapArray<String, Object> fields = classFields(jp);
-                return getActionNameFromTemplate(method, template, obj, args, core, fields);
+                template = getActionNameFromTemplate(method, template, obj, args, core, fields);
+                if (template.contains("{{VALUE}}") && args.size() > 0)
+                    template = template.replaceAll("\\{\\{VALUE\\}\\}", args.get(0).toString());
             }
             return template;
         } catch (Exception ex) { throw new RuntimeException("Can't fill JDIAction template: " + template + "for method: " + method.getName()); }
@@ -212,7 +214,6 @@ public class ActionHelper {
                 Default(arg -> arg));
         return result;
     }
-
 
     static MapArray<String, Object> core(JoinPoint joinPoint) {
         Class cl = joinPoint.getSignature().getDeclaringType();

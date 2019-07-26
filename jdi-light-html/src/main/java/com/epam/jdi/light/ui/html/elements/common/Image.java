@@ -20,15 +20,16 @@ public class Image extends UIBaseElement<ImageAssert>
     public int width() { return getInt("width", uiElement); }
     @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
     public String alt() { return uiElement.attr("alt"); }
-    // endregion
-
-    // region Extend assertions
-    public ImageAssert is() {
-        return new ImageAssert().set(this);
-    }
 
     public String getValue() {
         return src();
+    }
+    // endregion
+
+    // region Extend assertions
+    @Override
+    public ImageAssert is() {
+        return new ImageAssert().set(this);
     }
     // endregion
 }

@@ -2,7 +2,7 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -58,7 +58,7 @@ public class RadioButtons extends UIListBase<UISelectAssert> {
     }
 
     @JDIAction("Get '{name}' list values")
-    public List<String> values(TextType type) {
+    public List<String> values(TextTypes type) {
         return map(labels(), l -> l.text(type));
     }
     public boolean wait(JFunc1<RadioButtons, Boolean> condition) {
@@ -123,5 +123,9 @@ public class RadioButtons extends UIListBase<UISelectAssert> {
     @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return list().listEnabled().size() > 0;
+    }
+    @Override
+    public UISelectAssert is() {
+        return new UISelectAssert<>().set(this);
     }
 }

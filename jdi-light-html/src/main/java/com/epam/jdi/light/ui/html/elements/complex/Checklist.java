@@ -1,7 +1,8 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
+import com.epam.jdi.light.common.ListElementNameTypes;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -12,10 +13,12 @@ import org.openqa.selenium.By;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.ListElementNameTypes.LABEL;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.elements.complex.Selector.LABEL_LOCATOR;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -42,17 +45,13 @@ public class Checklist extends UIListBase<ChecklistAssert> {
         return $(fillByTemplate(label, value), core().parent).setName("label");
     }
 
-    WebList labels() {
-        return new WebList(list().map(el -> el.label().core().setName(getName()+ " label")))
-                .setName(getName() + " labels");
-    }
-
     /**
      * Select particular elements by name
      * @param names String var arg, elements with text to select
      */
     @JDIAction("Select '{0}' checkboxes in '{name}' checklist")
     public void select(String... names) {
+        shouldBeVisible("select");
         for (String name : names) {
             UIElement value = get(name);
             if (value.isEnabled())
@@ -152,7 +151,7 @@ public class Checklist extends UIListBase<ChecklistAssert> {
      */
     @JDIAction("Check all '{name}' unchecked options")
     public void checkAll() {
-        shouldBeVisible("check");
+        shouldBeVisible("checkAll");
         for (UIElement checkbox : list()) {
             if (checkbox.isEnabled() && !selected(checkbox)) {
                 checkbox.click();
@@ -183,7 +182,7 @@ public class Checklist extends UIListBase<ChecklistAssert> {
      */
     @JDIAction("Uncheck all '{name}' checked options")
     public void uncheckAll() {
-        shouldBeVisible("uncheck");
+        shouldBeVisible("uncheckAll");
         for (UIElement checkbox : list()) {
             if (checkbox.isEnabled() && selected(checkbox)) {
                 checkbox.click();
@@ -224,7 +223,7 @@ public class Checklist extends UIListBase<ChecklistAssert> {
      */
     @JDIAction("Get '{name}' values")
     public List<String> values() {
-        return map(labels(), element -> element.getText().trim());
+        return list().values();
     }
 
     /**
@@ -232,8 +231,8 @@ public class Checklist extends UIListBase<ChecklistAssert> {
      * @return List<String>
      */
     @JDIAction("Get '{name}' values")
-    public List<String> values(TextType type) {
-        return map(labels(), element -> element.text(type).trim());
+    public List<String> values(TextTypes type) {
+        return map(list(), element -> element.text(type).trim());
     }
 
     /**
@@ -282,4 +281,10 @@ public class Checklist extends UIListBase<ChecklistAssert> {
     public boolean selected(String value) {
         return get(value).isSelected();
     }
+
+    @Override
+    public ChecklistAssert is() {
+        return new ChecklistAssert().set(this);
+    }
+
 }

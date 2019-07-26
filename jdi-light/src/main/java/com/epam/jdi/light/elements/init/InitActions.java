@@ -43,10 +43,6 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
     public static void init() {}
-    public static JFunc1<SiteInfo, Object> SETUP_SECTION_ON_SITE = info -> {
-        info.instance = initElement(info);
-        return info.instance;
-    };
     private static void webPageSetup(SiteInfo info) {
         WebPage page = (WebPage) info.instance;
         defaultSetup(info, page);
@@ -57,38 +53,17 @@ public class InitActions {
                         page.getClass().getAnnotation(Title.class))
         );
     }
-    public static JFunc1<SiteInfo, WebPage> SETUP_WEBPAGE_ON_SITE = info -> {
-        WebPage page = (WebPage) SETUP_SECTION_ON_SITE.execute(info);
-        page.updatePageData(
-            valueOrDefault(getAnnotation(info.field, Url.class),
-                page.getClass().getAnnotation(Url.class)),
-            valueOrDefault(getAnnotation(info.field, Title.class),
-                page.getClass().getAnnotation(Title.class))
-        );
-        return page;
-    };
 
-    public static JFunc1<SiteInfo, Object> SETUP_PAGE_OBJECT_ON_SITE = info -> {
-        try {
-            info.instance = create(info.field.getType());
-        } catch (Exception ignore) {
-            try {
-                info.instance = create(info.field.getType(), getDriver());
-            } catch (Exception ex) {
-                throw exception("Can't initialize Page Object '%s'. Exception: %s", info.field.getName(), ex.getMessage());
-            }
-        }
-        initElements(info);
-        return info.instance;
-    };
-
+    public static MapArray<Class<?>, Class<?>> INTERFACES = new MapArray<>();
     public static MapArray<String, InitRule> INIT_RULES = map(
         $("UIElement", iRule(WebElement.class, info -> new UIElement())),
         $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList())),
         $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
             info -> new DataList())),
         $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), IBaseElement.class),
-            info -> new JList()))
+            info -> new JList())),
+        $("Interface", iRule(f -> INTERFACES.keys().contains(f.getType()),
+            info -> INTERFACES.get(info.field.getType())))
     );
 
     public static MapArray<String, SetupRule> SETUP_RULES = map(
@@ -109,13 +84,6 @@ public class InitActions {
             return isInterface(value.getClass(), ISetup.class);
         } catch (Exception ex) {return false; }
     }
-    private static DriverBase asUIBase(SiteInfo info) {
-        if (isClass(info.instance.getClass(), DriverBase.class))
-            return (DriverBase) info.instance;
-        if (isInterface(info.instance.getClass(), IBaseElement.class))
-            return  ((IBaseElement) info.instance).core();
-        throw exception("Can't setup '%s'. Instance should implement IBaseElement interface", info.name());
-    }
 
     public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {
         jdi.setParent(info.parent).setName(info);
@@ -125,15 +93,15 @@ public class InitActions {
 
     public static IBaseElement elementSetup(SiteInfo info) {
         IBaseElement jdi = (IBaseElement) info.instance;
-        defaultSetup(info, jdi.core());
+        defaultSetup(info, jdi.base());
         if (info.field != null) {
             By locator = getLocatorFromField(info.field);
             if (locator != null)
-                jdi.core().setLocator(locator);
+                jdi.base().setLocator(locator);
             if (info.field.getAnnotation(Root.class) != null)
-                jdi.core().locator.isRoot = true;
+                jdi.base().locator.isRoot = true;
             if (hasAnnotation(info.field, Frame.class))
-                jdi.core().setFrame(getFrame(info.field.getAnnotation(Frame.class)));
+                jdi.base().setFrame(getFrame(info.field.getAnnotation(Frame.class)));
         }
         info.instance = jdi;
         return jdi;

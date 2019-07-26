@@ -35,6 +35,7 @@ public class Link extends UIBaseElement<LinkAssert>
     // endregion
 
     // region Extend assertions
+    @Override
     public LinkAssert is() {
         return new LinkAssert().set(this);
     }

@@ -23,7 +23,7 @@ public class NumberSelector extends UIBaseElement<NumberAssert>
     public String step() { return uiElement.attr("step"); }
     @JDIAction("Select number '{0}' for '{name}'")
     public void setNumber(String number) {
-        setValue(number);
+        uiElement.setAttribute("value", number);
     }
     // endregion
 

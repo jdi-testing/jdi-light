@@ -8,7 +8,8 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextType;
+import com.epam.jdi.light.common.ListElementNameTypes;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasText;
@@ -29,6 +30,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.ListElementNameTypes.INDEX;
+import static com.epam.jdi.light.common.ListElementNameTypes.SMART;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
@@ -37,6 +40,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList, HasAssert<UISelectAssert<UISelectAssert, WebList>> {
@@ -65,7 +69,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         super.setName(name);
         return this;
     }
-    protected CacheValue<MapArray<String, UIElement>> elements = new CacheValue<>();
+    protected CacheValue<MapArray<String, UIElement>> elements =
+            new CacheValue<>(MapArray::new);
 
     private String elementName(int i) {
         return format("%s[%s]", getName(), i);
@@ -73,26 +78,45 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     @JDIAction(level = DEBUG)
     public MapArray<String, UIElement> elements(int minAmount) {
-        if (elements.hasValue() && isActual() && elements.get().size() >= minAmount)
+        if (elements.isUseCache() && elements.hasValue() && isActual() && elements.get().size() >= minAmount)
             return elements.get();
         if (locator.isTemplate())
             throw exception("You call method that can't be used with template locator. " +
                     "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator()));
+        MapArray<String, UIElement> result = getListElements(minAmount);
+        if (elements.isUseCache())
+            elements.set(result);
+        return result;
+    }
+    private MapArray<String, UIElement> getListElements(int minAmount) {
+        MapArray<String, UIElement> result = new MapArray<>();
         List<WebElement> webElements = getList(minAmount);
         int length = webElements.size();
-        elements.set(new MapArray<>());
         for (int i=0; i < length; i++) {
             int j = i;
             UIElement element = initElement(webElements.get(j), () -> getList(minAmount).get(j), j);
-            addElement(element, UIELEMENT_NAME.execute(element));
+            String name;
+            if (nameIndex)
+                name = nameFromIndex(i);
+            else {
+                name = getElementName(element);
+                if (isBlank(name))
+                    name = nameFromIndex(i);
+            }
+            result.add(name, element);
         }
-        return elements.get();
+        return result;
     }
-    private void addElement(UIElement el, String name) {
-        elements.get().add(name, el);
+    private String nameFromIndex(int index) {
+        return format("%s[%s]", getName(), index+1);
     }
-
-    private String NO_ELEMENTS_FOUND = "Can't select '%s'. No elements with this name found";
+    private String getElementName(UIElement element) {
+        try {
+            return UIELEMENT_NAME.execute(element);
+        } catch (Exception ex) {
+            return "";
+        }
+    }
     public boolean hasKey(String value) {
         if (elements.get() == null)
             elements.set(new MapArray<>());
@@ -107,33 +131,43 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
                 return true;
         return false;
     }
-    public boolean hasNoKey(String value) {
-        return !hasKey(value);
-    }
     /**
      * @param value
      */
     @JDIAction(level = DEBUG)
     public UIElement get(String value) {
-        if (hasNoKey(value)) {
-            if (locator.isTemplate()) {
-                addElement($(getLocator(value), parent)
-                        .setName(getName() + ":" + value), value);
-            }
-            else {
-                refresh();
-                timer().wait(() -> hasKey(elements(1), value));
-            }
-            if (hasNoKey(value))
-                throw exception(NO_ELEMENTS_FOUND, value);
-        }
-        return elements.get().get(value);
+        if (elements.isUseCache() && hasKey(value))
+            return elements.get().get(value);
+        UIElement result = getUIElement(value);
+        if (elements.isUseCache())
+            elements.get().add(value, result);
+        return result;
     }
-    private JFunc1<UIElement, String> UIELEMENT_NAME = UIElement::getText;
+    private UIElement getUIElement(String value) {
+        if (locator.isTemplate())
+            return $(getLocator(value), parent) .setName(getName() + ":" + value);
+        else {
+            refresh();
+            timer().wait(() -> hasKey(elements(1), value));
+            if (hasKey(value))
+                return elements.get().get(value);
+            else
+                throw exception("Can't select '%s'. No elements with this name found", value);
+        }
+    }
+    private JFunc1<UIElement, String> UIELEMENT_NAME = SMART.func;
+    private boolean nameIndex = false;
 
     public WebList setUIElementName(JFunc1<UIElement, String> func) {
         UIELEMENT_NAME = func;
         return this;
+    }
+    public WebList setUIElementName(ListElementNameTypes type) {
+        if (type.equals(INDEX)) {
+            nameIndex = true;
+            return this;
+        }
+        return setUIElementName(type.func);
     }
 
     /**
@@ -298,13 +332,12 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public List<String> values() {
         refresh();
         core().noValidation();
-        return map(UIElement::getText);
+        return elements(0).keys();
     }
 
-    public List<String> values(TextType type) {
-        refresh();
-        core().noValidation();
-        return map(t -> t.text(type));
+    public List<String> values(TextTypes type) {
+        setUIElementName(ListElementNameTypes.get(type));
+        return values();
     }
 
     public List<String> listEnabled() {

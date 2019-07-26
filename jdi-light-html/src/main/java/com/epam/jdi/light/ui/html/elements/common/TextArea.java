@@ -48,12 +48,14 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     public String getValue() {
         return getText();
     }
+    @Override
+    public String getText() {
+        return core().attr("value");
+    }
     // endregion
-
-    // region Extend assertions
+    @Override
     public TextAreaAssert is() {
         return new TextAreaAssert().set(this);
     }
-    // endregion
 
 }
