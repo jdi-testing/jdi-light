@@ -12,6 +12,7 @@ For fast start you can go through [tutorial](https://jdi-docs.github.io/jdi-ligh
 
 More links: </br>
 Documentation: https://jdi-docs.github.io/jdi-light/?java - different types of documentation from introduction and tutorial to technical methods documentation </br>
+Introduction + fast start example: https://jdi-docs.github.io/jdi-light/?java#introduction
 Tutorial: https://jdi-docs.github.io/jdi-light/?java#tutorial - helps to get main ideas on practice </br>
 Tutorial repo:  https://github.com/jdi-tutorials </br>
 Project templates: https://github.com/jdi-templates - for fast projects start </br>
