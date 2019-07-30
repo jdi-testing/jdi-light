@@ -10,7 +10,7 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
-import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import com.epam.jdi.tools.LinqUtils;
@@ -25,11 +25,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.UIUtils.create;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.elements.init.PageFactory.initElement;
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
@@ -60,14 +56,14 @@ public class InitActions {
         $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList())),
         $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
             info -> new DataList())),
-        $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), IBaseElement.class),
+        $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), ICoreElement.class),
             info -> new JList())),
         $("Interface", iRule(f -> INTERFACES.keys().contains(f.getType()),
             info -> INTERFACES.get(info.field.getType())))
     );
 
     public static MapArray<String, SetupRule> SETUP_RULES = map(
-        $("Element", sRule(info -> isInterface(info.instance.getClass(), IBaseElement.class),
+        $("Element", sRule(info -> isInterface(info.instance.getClass(), ICoreElement.class),
             InitActions::elementSetup)),
         $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
@@ -91,8 +87,8 @@ public class InitActions {
         return jdi;
     }
 
-    public static IBaseElement elementSetup(SiteInfo info) {
-        IBaseElement jdi = (IBaseElement) info.instance;
+    public static ICoreElement elementSetup(SiteInfo info) {
+        ICoreElement jdi = (ICoreElement) info.instance;
         defaultSetup(info, jdi.base());
         if (info.field != null) {
             By locator = getLocatorFromField(info.field);
@@ -128,9 +124,9 @@ public class InitActions {
     }
     public static boolean isJDIField(Field field) {
         return isInterface(field, WebElement.class) ||
-            isInterface(field, IBaseElement.class) ||
+            isInterface(field, ICoreElement.class) ||
             isListOf(field, WebElement.class) ||
-            isListOf(field, IBaseElement.class) ||
+            isListOf(field, ICoreElement.class) ||
             isListOf(field, Section.class);
     }
     public static boolean isPageObject(Class<?> type) {

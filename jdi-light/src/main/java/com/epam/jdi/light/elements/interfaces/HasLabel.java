@@ -3,7 +3,7 @@ package com.epam.jdi.light.elements.interfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.Label;
 
-public interface HasLabel extends IBaseElement {
+public interface HasLabel extends ICoreElement {
     default Label label() {
         return core().label();
     }

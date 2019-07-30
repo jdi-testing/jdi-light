@@ -1,15 +1,13 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.ListElementNameTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.ListElementNameTypes.*;
+import static com.epam.jdi.light.common.ListElementNameTypes.VALUE;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 
 // Implements TextField + Droplist

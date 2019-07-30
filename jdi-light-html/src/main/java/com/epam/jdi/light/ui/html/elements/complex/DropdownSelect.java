@@ -3,12 +3,11 @@ package com.epam.jdi.light.ui.html.elements.complex;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasLabel;
 import com.epam.jdi.light.elements.interfaces.HasText;
-import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.SetValue;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.WebElement;
@@ -32,7 +31,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class DropdownSelect extends UIListBase<UISelectAssert> implements IBaseElement,
+public class DropdownSelect extends UIListBase<UISelectAssert> implements ICoreElement,
         HasLabel, SetValue, HasText {
 
     protected Select getSelect(String action) {
@@ -93,26 +92,9 @@ public class DropdownSelect extends UIListBase<UISelectAssert> implements IBaseE
         return getText();
     }
 
-    public void hover() {
-        core().hover();
-    }
-    public boolean isEnabled() {
-        return core().isEnabled();
-    }
-
-    @JDIAction("Check that '{name}' is displayed")
+    @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() {
         return core().isDisplayed();
-    }
-
-    public void highlight(String color) {
-        core().highlight(color);
-    }
-    public void highlight() {
-        core().highlight();
-    }
-    public void show() {
-        core().show();
     }
 
     public boolean wait(JFunc1<DropdownSelect, Boolean> condition) {
@@ -137,13 +119,11 @@ public class DropdownSelect extends UIListBase<UISelectAssert> implements IBaseE
         return map(getSelect("values").getOptions(), el -> $(el).text(type));
     }
     public List<String> listEnabled() {
-        return ifSelect(getSelect("listEnabled").getAllSelectedOptions(),
-            WebElement::isEnabled, WebElement::getText);
+        return ifSelect(list(), UIElement::isEnabled, UIElement::getText);
     }
 
     public List<String> listDisabled() {
-        return ifSelect(getSelect("listDisabled").getAllSelectedOptions(),
-                webElement -> !webElement.isEnabled(), WebElement::getText);
+        return ifSelect(list(), UIElement::isDisabled, UIElement::getText);
     }
 
     @Override

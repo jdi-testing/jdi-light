@@ -9,7 +9,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.JDIElement;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.PrintUtils;
@@ -217,8 +217,8 @@ public class ActionHelper {
 
     static MapArray<String, Object> core(JoinPoint joinPoint) {
         Class cl = joinPoint.getSignature().getDeclaringType();
-        if (isInterface(cl, IBaseElement.class)) {
-            UIElement el = ((IBaseElement) joinPoint.getThis()).core();
+        if (isInterface(cl, ICoreElement.class)) {
+            UIElement el = ((ICoreElement) joinPoint.getThis()).core();
             return getAllFields(el);
         }
         return new MapArray<>();
@@ -228,14 +228,20 @@ public class ActionHelper {
     }
 
     static String getElementName(JoinPoint jp) {
-        if (classFields(jp).keys().contains("jdi_element"))
-            return classFields(jp).get("jdi_element").toString();
+        if (isInterface(jp.getThis().getClass(), ICoreElement.class))
+            return ((ICoreElement)jp.getThis()).base().getName();
+        MapArray<String, Object> fields = classFields(jp);
+        if (fields.keys().contains("element")) {
+            Object element = fields.get("element");
+            if (isInterface(fields.get("element").getClass(), ICoreElement.class))
+                return ((ICoreElement)element).base().toString();
+        }
+        if (fields.keys().contains("name"))
+            return fields.get("name").toString();
         Object obj = jp.getThis();
         return obj != null
                 ? obj.toString()
-                //obj.toString().matches(".*\\.\\w++@\\w+")
                 : jp.getSignature().getDeclaringType().getSimpleName();
-
     }
     static String getActionNameFromTemplate(MethodSignature method, String value,
                                             MapArray<String, Object>... args) {

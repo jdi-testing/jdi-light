@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.elements;
 
-import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.ICoreElement;
 import com.epam.jdi.tools.func.JAction;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -13,12 +13,12 @@ import static org.testng.Assert.*;
 
 public class BaseValidations {
 
-    public static void baseValidation(IBaseElement el) {
+    public static void baseValidation(ICoreElement el) {
         // EXCLUDED el.hover();
-        assertTrue(el.core().isEnabled());
-        assertTrue(el.core().isDisplayed());
-        assertFalse(el.core().isDisabled());
-        assertFalse(el.core().isHidden());
+        assertTrue(el.isEnabled());
+        assertTrue(el.isDisplayed());
+        assertFalse(el.isDisabled());
+        assertFalse(el.isHidden());
         Point location = el.core().getLocation();
         assertTrue(location.x > 0 && location.y > 0, "Location: " + location);
         Dimension size = el.core().getSize();
@@ -26,10 +26,10 @@ public class BaseValidations {
         //Rectangle rect = el.getRect();
         //assertTrue(rect.height > 0 && rect.width > 0 && rect.x > 0 && rect.y > 0, "Size: " + location);
         el.core().setAttribute("test-jdi", "test-value");
-        assertEquals(el.core().getAttribute("test-jdi"), "test-value");
-        el.core().highlight("blue");
-        el.core().highlight();
-        el.core().show();
+        assertEquals(el.attr("test-jdi"), "test-value");
+        el.highlight("blue");
+        el.highlight();
+        el.show();
     }
 
     public static void durationMoreThan(int duration, JAction action) {

@@ -29,7 +29,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.PageFactory.initFieldUsingRules;
+import static com.epam.jdi.light.elements.init.PageFactory.initJdiField;
 import static com.epam.jdi.light.elements.init.PageFactory.setupFieldUsingRules;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
@@ -264,7 +264,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
                 s.name = el.getName();
                 s.parent = el.parent;
             });
-            initFieldUsingRules(info);
+            initJdiField(info);
             if (info.instance != null)
                 setupFieldUsingRules(info);
             T t = (T) info.instance;

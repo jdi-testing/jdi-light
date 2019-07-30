@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.interfaces;
 
 import com.epam.jdi.light.common.ElementArea;
 
-public interface HasClick extends IBaseElement, IClickable {
+public interface HasClick extends ICoreElement, IClickable {
     default void click() {
         core().click();
     }

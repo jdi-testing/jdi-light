@@ -1,7 +1,7 @@
 package io.github.epam.html.tests.elements.composite;
 
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.ICoreElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.FormDataProvider;
@@ -28,12 +28,12 @@ import static pseudo.site.pages.Header.pseudoFormLight;
 public class FormTests extends TestsInit {
 
     @Test(dataProvider = "formDataProvider", dataProviderClass = FormDataProvider.class)
-    public void formInitializationTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void formInitializationTest(ICoreElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "smartFormDataProvider", dataProviderClass = FormDataProvider.class)
-    public void smartFormInitializationTest(IBaseElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void smartFormInitializationTest(ICoreElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 

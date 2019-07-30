@@ -136,7 +136,7 @@ public final class UIUtils {
             throw exception("%s has no appropriate constructors", cs.getSimpleName());
         for(Constructor<?> cnst : listConst) {
             try {
-                return csInit(cnst);
+                return csInit(cnst, params);
             } catch (Exception ignore) { }
         }
         throw exception("%s has no appropriate constructors", cs.getSimpleName());

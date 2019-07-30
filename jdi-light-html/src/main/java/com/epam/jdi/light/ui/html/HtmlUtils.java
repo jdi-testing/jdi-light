@@ -4,8 +4,8 @@ import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static java.lang.Double.parseDouble;
-import static java.lang.Integer.parseInt;
 import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
 
 public class HtmlUtils {
     /**

@@ -71,16 +71,17 @@ public class MultiDropdownTests extends TestsInit {
     public void isValidationTest() {
         multiDropdown.is().selected("Steam");
         multiDropdown.is().selected(Steam);
-        multiDropdown.is().values(hasItem("Wood"));
-        multiDropdown.is().disabled(hasItem("Disabled"));
-        multiDropdown.is().enabled(not(hasItem("Disabled")));
-        multiDropdown.is().enabled(hasItems("Electro", "Metalic"));
+        multiDropdown.assertThat().values(hasItem("Wood"));
+        multiDropdown.assertThat().disabled(hasItem("Disabled"))
+            .enabled(not(hasItem("Disabled")))
+            .enabled(hasItems("Electro", "Metalic"));
     }
 
     @Test
     public void assertValidationTest() {
-        multiDropdown.assertThat().values(containsInAnyOrder("Disabled", "Electro", "Metalic", "Wood", "Steam"));
-        multiDropdown.assertThat().selected(Steam);
+        multiDropdown.assertThat()
+            .values(containsInAnyOrder("Disabled", "Electro", "Metalic", "Wood", "Steam"))
+            .selected(Steam);
     }
 
     @Test

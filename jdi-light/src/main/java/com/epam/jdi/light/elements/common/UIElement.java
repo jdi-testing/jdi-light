@@ -43,7 +43,7 @@ import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class UIElement extends JDIBase
-        implements WebElement, SetValue, IBaseElement,
+        implements WebElement, SetValue, ICoreElement,
         HasAssert<IsAssert>, IListBase, IClickable, HasClick, HasText,
         HasLabel, HasPlaceholder, HasInput {
     //region Constructors

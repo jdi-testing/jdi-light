@@ -163,8 +163,8 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public List<String> listEnabled() {
-        List<UIElement> els = core().finds("option");
-        return ifSelect(els, UIElement::isEnabled, UIElement::getText);
+        List<WebElement> els = select().getOptions();
+        return ifSelect(els, WebElement::isEnabled, WebElement::getText);
     }
 
     /**
@@ -173,8 +173,8 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public List<String> listDisabled() {
-        return ifSelect(core().finds("option"),
-            UIElement::isDisabled, UIElement::getText);
+        List<WebElement> els = select().getOptions();
+        return ifSelect(els, WebElement::isDisplayed, WebElement::getText);
     }
 
     @Override

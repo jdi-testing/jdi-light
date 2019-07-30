@@ -21,7 +21,7 @@ import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
 import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
-import static com.epam.jdi.light.elements.init.PageFactory.initPage;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
@@ -57,7 +57,7 @@ public class WebPage extends DriverBase implements PageObject {
     }
 
     public WebPage() {
-        initPage(this);
+        initElements(this);
     }
     public WebPage(String url) { this.url = url; }
     public WebPage(String url, String title) { this.url = url; this.title = title; }

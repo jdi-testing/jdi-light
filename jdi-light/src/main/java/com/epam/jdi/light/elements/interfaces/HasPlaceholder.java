@@ -1,5 +1,5 @@
 package com.epam.jdi.light.elements.interfaces;
 
-public interface HasPlaceholder extends IBaseElement {
+public interface HasPlaceholder extends ICoreElement {
     default String placeholder() { return core().placeholder(); }
 }

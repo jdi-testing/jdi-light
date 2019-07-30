@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.HasLabel;
-import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.ICoreElement;
 import org.apache.commons.lang3.time.StopWatch;
 import org.openqa.selenium.By;
 
@@ -24,7 +24,7 @@ import static java.util.Arrays.asList;
 import static org.jsoup.helper.StringUtil.isBlank;
 
 public class MultiDropdown extends UIListBase<UISelectAssert>
-        implements IBaseElement, HasLabel {
+        implements ICoreElement, HasLabel {
 
     By expandArrow = By.cssSelector(".caret");
     By values = By.tagName("li");

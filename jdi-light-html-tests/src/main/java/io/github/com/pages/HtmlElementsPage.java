@@ -69,7 +69,7 @@ public class HtmlElementsPage extends WebPage {
 
     public static DropdownSelect dressCode;
     // @UI("#dress-code") public static Dropdown dressCode;
-    @UI("#disabled-dropdown") public static Dropdown disabledDropdown;
+    @UI("#disabled-dropdown") public static DropdownSelect disabledDropdown;
 
     public static MultiSelector ages;
     //@UI("#ages") public static MultiSelector ages;

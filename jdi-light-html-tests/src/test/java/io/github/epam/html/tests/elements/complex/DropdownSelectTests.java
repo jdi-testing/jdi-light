@@ -69,10 +69,11 @@ public class DropdownSelectTests extends TestsInit {
     public void isValidationTest() {
         dressCode.is().selected("Casual");
         dressCode.is().selected(Casual);
-        dressCode.is().values(hasItem("Pirate"));
-        dressCode.is().disabled(hasItem("Disabled"));
-        dressCode.is().enabled(not(hasItem("Disabled")));
-        dressCode.is().enabled(hasItems("Pirate", "Fancy"));
+        dressCode.assertThat().values(hasItem("Pirate"));
+        dressCode.assertThat()
+            .disabled(hasItem("Disabled"))
+            .enabled(not(hasItem("Disabled")))
+            .enabled(hasItems("Pirate", "Fancy"));
     }
 
     @Test

@@ -8,8 +8,18 @@ public class SiteInfo extends DataClass<SiteInfo> {
     public Field field;
     public Class<?> cl;
     public String name;
-    public Class<?> type() { return cl != null ? cl : field.getType(); }
-    public String name() { return name != null ? name : field.getName(); }
+    public Class<?> type() {
+        return cl != null
+            ? cl : (field != null
+                ? field.getType()
+                : null);
+    }
+    public String name() {
+        return name != null
+            ? name : ( field != null
+                ? field.getName()
+                : "Undefined element");
+    }
     public Class<?> parentClass;
     public Object parent;
     public String parentName() {

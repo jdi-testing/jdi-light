@@ -8,8 +8,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.HasLabel;
 import com.epam.jdi.light.elements.interfaces.HasText;
-import com.epam.jdi.light.elements.interfaces.IBaseElement;
-import com.epam.jdi.light.ui.html.asserts.ChecklistAssert;
+import com.epam.jdi.light.elements.interfaces.ICoreElement;
 import com.epam.jdi.light.ui.html.elements.annotations.JDropdown;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
@@ -35,7 +34,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 
 public class Dropdown extends UIListBase<UISelectAssert>
-        implements ISetup, IBaseElement, HasLabel, HasText {
+        implements ISetup, ICoreElement, HasLabel, HasText {
     private DropdownSelect ds() {
         return new DropdownSelect(core(), SELECT_ERROR).setup(DropdownSelect.class, j->j.setName(getName()));
     }
@@ -155,9 +154,6 @@ public class Dropdown extends UIListBase<UISelectAssert>
         return getText();
     }
 
-    public void hover() {
-        core().hover();
-    }
     @Override
     public boolean isEnabled() {
         if (list() == null || expander == null)

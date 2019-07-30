@@ -60,5 +60,9 @@ public class MultiSelector extends Combobox {
     public List<String> checked() {
         return map(asSelect().getAllSelectedOptions(), WebElement::getText);
     }
+    @Override
+    public void select(String value) {
+        list().select(value);
+    }
 
 }

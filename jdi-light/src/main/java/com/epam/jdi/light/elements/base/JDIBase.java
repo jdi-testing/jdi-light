@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.HasCache;
-import com.epam.jdi.light.elements.interfaces.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.JDIElement;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Timer;
@@ -223,8 +223,8 @@ public abstract class JDIBase extends DriverBase implements HasCache {
     private JDIBase getBase(Object element) {
         if (isClass(element.getClass(), JDIBase.class))
             return  (JDIBase) element;
-        else { if (isInterface(element.getClass(), IBaseElement.class))
-            return  ((IBaseElement) element).core(); }
+        else { if (isInterface(element.getClass(), ICoreElement.class))
+            return  ((ICoreElement) element).core(); }
         return null;
     }
     private SearchContext getSearchContext(Object element) {
