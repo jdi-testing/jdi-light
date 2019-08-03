@@ -28,12 +28,12 @@ import static pseudo.site.pages.Header.pseudoFormLight;
 public class FormTests extends TestsInit {
 
     @Test(dataProvider = "formDataProvider", dataProviderClass = FormDataProvider.class)
-    public void formInitializationTest(ICoreElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void formInitializationTest(ICoreElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "smartFormDataProvider", dataProviderClass = FormDataProvider.class)
-    public void smartFormInitializationTest(ICoreElement htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
+    public void smartFormInitializationTest(ICoreElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 

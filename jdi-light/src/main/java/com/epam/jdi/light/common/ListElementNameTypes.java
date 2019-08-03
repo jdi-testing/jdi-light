@@ -14,7 +14,7 @@ public enum ListElementNameTypes {
     }),
     TEXT(el -> el.text(TextTypes.TEXT)),
     VALUE(el -> el.text(TextTypes.VALUE)),
-    INNER(el -> el.text(TextTypes.INNER)),
+    INNER(el -> el.text(TextTypes.INNER_TEXT)),
     LABEL(UIElement::labelText),
     INDEX();
 
@@ -24,7 +24,7 @@ public enum ListElementNameTypes {
                 return TEXT;
             case VALUE:
                 return VALUE;
-            case INNER:
+            case INNER_TEXT:
                 return INNER;
             default:
                 return SMART;

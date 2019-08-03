@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
-import static com.epam.jdi.light.elements.base.DriverBase.timer;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static java.util.Objects.requireNonNull;
@@ -34,7 +33,7 @@ public class FileAssert extends BaseAssert {
      */
     @JDIAction("Assert that file '{name}' is downloaded")
     public FileAssert isDownloaded() {
-        assertThat(timer().wait(() -> file.exists()), is(true));
+        assertThat(element.base().timer().wait(() -> file.exists()), is(true));
         return this;
     }
 
@@ -45,7 +44,7 @@ public class FileAssert extends BaseAssert {
      */
     @JDIAction("Assert that file '{name}' text {0}")
     public FileAssert text(Matcher<String> text) {
-        boolean result = timer().wait(() -> {
+        boolean result = element.base().timer().wait(() -> {
             assertThat(readFileToString(file, "UTF-8"), text); return true; }
         );
         if (result) return this;
@@ -67,7 +66,7 @@ public class FileAssert extends BaseAssert {
      */
     @JDIAction("Assert file '{name}' size")
     public FileAssert hasSize(Matcher<Long> size) {
-        timer().wait(() -> {
+        element.base().timer().wait(() -> {
             assertThat(file.length(), size);
             return true;
         });

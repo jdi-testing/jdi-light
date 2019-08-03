@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.TextTypes.INNER;
+import static com.epam.jdi.light.common.TextTypes.INNER_TEXT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
@@ -71,12 +71,12 @@ public class DropdownTests extends TestsInit {
     @Test
     public void isValidationTest() {
         colors.is().selected("Colors");
-        colors.is().values(INNER, hasItem("Yellow"));
+        colors.is().values(INNER_TEXT, hasItem("Yellow"));
     }
 
     @Test
     public void assertValidationTest() {
-        colors.assertThat().values(INNER, contains("Colors", "Red", "Green", "Blue", "Yellow"));
+        colors.assertThat().values(INNER_TEXT, contains("Colors", "Red", "Green", "Blue", "Yellow"));
     }
     @Test
     public void valuesTests() {
@@ -87,7 +87,7 @@ public class DropdownTests extends TestsInit {
     }
     @Test
     public void innerValuesTest() {
-        assertThat(colors.values(INNER), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
+        assertThat(colors.values(INNER_TEXT), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
     @Test
     public void isDisplayedTest() {

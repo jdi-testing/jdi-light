@@ -15,7 +15,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
-import static com.epam.jdi.light.elements.base.JDIBase.waitCondition;
+
 import static com.epam.jdi.light.elements.complex.Selector.LABEL_LOCATOR;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
@@ -62,7 +62,7 @@ public class RadioButtons extends UIListBase<UISelectAssert> {
         return map(labels(), l -> l.text(type));
     }
     public boolean wait(JFunc1<RadioButtons, Boolean> condition) {
-        return waitCondition(condition, this);
+        return base().timer().wait(() -> condition.execute(this));
     }
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) { list().select(index);  }

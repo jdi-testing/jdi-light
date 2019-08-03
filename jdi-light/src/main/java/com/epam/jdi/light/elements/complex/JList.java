@@ -16,7 +16,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.base.JDIBase.waitCondition;
+
 
 public class JList<T extends IListBase> extends ListBase<T, UISelectAssert<UISelectAssert, JList<T>>> {
     public JList() {}
@@ -40,6 +40,6 @@ public class JList<T extends IListBase> extends ListBase<T, UISelectAssert<UISel
     }
 
     public boolean wait(JFunc1<JList<T>, Boolean> condition) {
-        return waitCondition(condition, this);
+        return base().timer().wait(() -> condition.execute(this));
     }
 }

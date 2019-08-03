@@ -234,7 +234,6 @@ public class UIElement extends JDIBase
     public void click(ElementArea area) {
         if (isDisabled())
             throw exception("Can't perform click. Element is disabled");
-        show();
         switch (area) {
             case TOP_LEFT:
                 click(1,1);
@@ -399,7 +398,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction
     public void show() {
-        jsExecute("scrollIntoView(true)");
+        jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
     }
 
     /**
@@ -446,7 +445,7 @@ public class UIElement extends JDIBase
      * @param to
      */
     @JDIAction("Drag '{name}' and drop it to '{0}'")
-    public void dragAndDropTo(UIElement to) {
+    public void dragAndDropTo(WebElement to) {
         actions((a,from) -> a.clickAndHold(from).moveToElement(to).release(to));
     }
 
@@ -506,7 +505,7 @@ public class UIElement extends JDIBase
                 return get().getText();
             case VALUE:
                 return attr("value");
-            case INNER:
+            case INNER_TEXT:
                 return jsExecute("innerText");
             case SMART:
             default:
@@ -599,7 +598,7 @@ public class UIElement extends JDIBase
     }
     //endregion
     public boolean wait(JFunc1<UIElement, Boolean> condition) {
-        return waitCondition(condition, this);
+        return timer().wait(() -> condition.execute(this));
     }
 
     public IsAssert is() {

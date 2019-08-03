@@ -53,6 +53,14 @@ public class WebSettings {
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
         el != null && el.isDisplayed() && el.isEnabled();
+    public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el -> {
+            if (el == null || !el.isDisplayed())
+                return false;
+            UIElement ui = $(el);
+            if (!ui.isClickable())
+                ui.show();
+            return ui.isClickable();
+        };
     public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = VISIBLE_ELEMENT;
     public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
         SEARCH_CONDITION = rule;
@@ -63,9 +71,10 @@ public class WebSettings {
     public static void onlyVisible() {
         SEARCH_CONDITION = VISIBLE_ELEMENT;
     }
-    public static void enabledElement() {
+    public static void visibleEnabled() {
         SEARCH_CONDITION = ENABLED_ELEMENT;
     }
+    public static void inView() { SEARCH_CONDITION = VISIBLE_ELEMENT; }
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
         return DOMAIN != null && DOMAIN.contains("://");
@@ -158,6 +167,10 @@ public class WebSettings {
                 onlyVisible();
             if (params.contains("any") || params.contains("all"))
                 noValidation();
+            if (params.contains("enabled"))
+                visibleEnabled();
+            if (params.contains("inView"))
+                inView();
             if (params.contains("single"))
                 STRICT_SEARCH = true;
             if (params.contains("multiple"))

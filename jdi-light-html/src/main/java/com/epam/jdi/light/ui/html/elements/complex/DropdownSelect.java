@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.base.JDIBase.waitCondition;
+
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -98,7 +98,7 @@ public class DropdownSelect extends UIListBase<UISelectAssert> implements ICoreE
     }
 
     public boolean wait(JFunc1<DropdownSelect, Boolean> condition) {
-        return waitCondition(condition, this);
+        return base().timer().wait(() -> condition.execute(this));
     }
 
     public boolean selected(String option) {

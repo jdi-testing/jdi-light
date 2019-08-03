@@ -8,27 +8,33 @@ import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.init.rules.AnnotationRule;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
+import com.epam.jdi.light.elements.interfaces.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
-import org.openqa.selenium.By;
+import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
+import static com.epam.jdi.light.settings.WebSettings.ELEMENT_IN_VIEW;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
@@ -43,27 +49,28 @@ public class InitActions {
         WebPage page = (WebPage) info.instance;
         defaultSetup(info, page);
         page.updatePageData(
-                valueOrDefault(getAnnotation(info.field, Url.class),
-                        page.getClass().getAnnotation(Url.class)),
-                valueOrDefault(getAnnotation(info.field, Title.class),
-                        page.getClass().getAnnotation(Title.class))
+            valueOrDefault(getAnnotation(info.field, Url.class),
+                page.getClass().getAnnotation(Url.class)),
+            valueOrDefault(getAnnotation(info.field, Title.class),
+                page.getClass().getAnnotation(Title.class))
         );
     }
 
-    public static MapArray<Class<?>, Class<?>> INTERFACES = new MapArray<>();
+    public static MapArray<Class<?>, Class<?>> INTERFACES = map(
+        $(WebElement.class, UIElement.class)
+    );
     public static MapArray<String, InitRule> INIT_RULES = map(
-        $("UIElement", iRule(WebElement.class, info -> new UIElement())),
         $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList())),
         $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
             info -> new DataList())),
         $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), ICoreElement.class),
             info -> new JList())),
         $("Interface", iRule(f -> INTERFACES.keys().contains(f.getType()),
-            info -> INTERFACES.get(info.field.getType())))
+            info -> create(INTERFACES.get(info.field.getType()))))
     );
 
     public static MapArray<String, SetupRule> SETUP_RULES = map(
-        $("Element", sRule(info -> isInterface(info.instance.getClass(), ICoreElement.class),
+        $("Element", sRule(info -> isInterface(info.instance.getClass(), IBaseElement.class),
             InitActions::elementSetup)),
         $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
@@ -86,23 +93,7 @@ public class InitActions {
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
         return jdi;
     }
-
-    public static ICoreElement elementSetup(SiteInfo info) {
-        ICoreElement jdi = (ICoreElement) info.instance;
-        defaultSetup(info, jdi.base());
-        if (info.field != null) {
-            By locator = getLocatorFromField(info.field);
-            if (locator != null)
-                jdi.base().setLocator(locator);
-            if (info.field.getAnnotation(Root.class) != null)
-                jdi.base().locator.isRoot = true;
-            if (hasAnnotation(info.field, Frame.class))
-                jdi.base().setFrame(getFrame(info.field.getAnnotation(Frame.class)));
-        }
-        info.instance = jdi;
-        return jdi;
-    }
-
+    /*
     private static By getLocatorFromField(Field field) {
         if (hasAnnotation(field, org.openqa.selenium.support.FindBy.class))
             return findByToBy(field.getAnnotation(org.openqa.selenium.support.FindBy.class));
@@ -121,6 +112,56 @@ public class InitActions {
         if (hasAnnotation(field, WithText.class))
             return findByToBy(field.getAnnotation(WithText.class));
         return null;
+    } */
+    public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
+        $("UI", aRule(UI.class, (e,a)-> e.locator.isRoot = true)),
+        $("Root", aRule(Root.class, (e,a)-> e.locator.isRoot = true)),
+        $("Frame", aRule(Frame.class, (e,a)-> e.setFrame(getFrame(a)))),
+        $("FindbySelenium", aRule(org.openqa.selenium.support.FindBy.class,
+            (e,a)-> e.setLocator(findByToBy(a)))),
+        $("Css", aRule(Css.class, (e,a)-> e.setLocator(findByToBy(a)))),
+        $("XPath", aRule(XPath.class, (e,a)-> e.setLocator(findByToBy(a)))),
+        $("ByText", aRule(ByText.class, (e,a)-> e.setLocator(findByToBy(a)))),
+        $("WithText", aRule(WithText.class, (e,a)-> e.setLocator(findByToBy(a)))),
+        $("ClickArea", aRule(ClickArea.class, (e,a)-> e.setClickArea(a.value()))),
+        $("GetTextAs", aRule(GetTextAs.class, (e,a)-> e.setTextType(a.value()))),
+        $("NoCache", aRule(NoCache.class, (e,a)-> e.offCache())),
+
+        $("Timeout", aRule(WaitTimeout.class, (e,a)-> e.setTimeout(a.value()))),
+        $("Name", aRule(Name.class, (e,a)-> e.setName(a.value()))),
+        $("GetAny", aRule(GetAny.class, (e, a)-> e.noValidation())),
+        $("GetVisible", aRule(GetVisible.class, (e, a)-> e.searchVisible())),
+        $("GetVisibleEnabled", aRule(GetVisibleEnabled.class, (e, a)-> e.visibleEnabled())),
+        $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.inView())),
+
+        $("ListUI", aRule(UI.class, (e,a,f)-> {
+            UI[] uis = f.getAnnotationsByType(UI.class);
+            if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
+                e.setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
+            })),
+        $("FindByUI", aRule(UI.class, (e,a,f)-> {
+            FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
+            if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
+                e.setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
+            }))
+    );
+
+    public static IBaseElement elementSetup(SiteInfo info) {
+        IBaseElement jdi = (IBaseElement) info.instance;
+        defaultSetup(info, jdi.base());
+        if (info.field != null) {
+            for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
+                try {
+                    Class<? extends Annotation> annotation = aRule.value.annotation;
+                    if (hasAnnotation(info.field, annotation))
+                        aRule.value.action.execute(jdi.base(), info.field.getAnnotation(annotation), info.field);
+                } catch (Exception ex) {
+                    throw exception("Setup element '%s' with Annotation '%s' failed", info.name(), aRule.key);
+                }
+            }
+        }
+        info.instance = jdi;
+        return jdi;
     }
     public static boolean isJDIField(Field field) {
         return isInterface(field, WebElement.class) ||

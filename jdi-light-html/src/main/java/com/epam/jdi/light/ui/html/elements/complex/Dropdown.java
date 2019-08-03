@@ -19,7 +19,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
-import static com.epam.jdi.light.elements.base.JDIBase.waitCondition;
+
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -178,7 +178,7 @@ public class Dropdown extends UIListBase<UISelectAssert>
     }
 
     public boolean wait(JFunc1<Dropdown, Boolean> condition) {
-        return waitCondition(condition, this);
+        return base().timer().wait(() -> condition.execute(this));
     }
 
     public boolean selected(String option) {

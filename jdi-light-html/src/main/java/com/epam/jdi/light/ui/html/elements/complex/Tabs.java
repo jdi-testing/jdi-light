@@ -9,7 +9,7 @@ import com.epam.jdi.tools.func.JFunc1;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.base.JDIBase.waitCondition;
+
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 public class Tabs extends UIListBase<UISelectAssert> {
@@ -45,7 +45,7 @@ public class Tabs extends UIListBase<UISelectAssert> {
     public List<String> listDisabled() { return list().listDisabled();
     }
     public boolean wait(JFunc1<Tabs, Boolean> condition) {
-        return waitCondition(condition, this);
+        return base().timer().wait(() -> condition.execute(this));
     }
 
     @JDIAction("Hover to '{name}'")
