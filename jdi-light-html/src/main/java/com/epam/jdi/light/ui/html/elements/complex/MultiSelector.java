@@ -31,6 +31,10 @@ public class MultiSelector extends Combobox {
         for (int index : values)
             select(index);
     }
+    @JDIAction("Select '{0}' in '{name}'") @Override
+    public void select(int index) {
+        ds().select(index);
+    }
     @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(String... values) {
         for (WebElement opt : asSelect().getOptions()) {
@@ -52,9 +56,9 @@ public class MultiSelector extends Combobox {
                 opt.click();
         }
     }
-    @JDIAction("Get selected value") @Override
+    @Override
     public String selected() {
-        return asSelect().getFirstSelectedOption().getText();
+        return ds().selected();
     }
     @JDIAction("Get checked elements")
     public List<String> checked() {
@@ -62,7 +66,11 @@ public class MultiSelector extends Combobox {
     }
     @Override
     public void select(String value) {
-        list().select(value);
+        ds().select(value);
+    }
+    @Override
+    public List<String> values() {
+        return ds().values();
     }
 
 }

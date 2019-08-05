@@ -142,7 +142,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
             List<UIElement> result = cells.isGotAll()
                 ? LinqUtils.select(cells.get(), c -> c.value.get(rowNum+""))
                 : getRow(rowNum);
-            rows.get().add(rowNum+"", result);
+            rows.get().update(rowNum+"", result);
         }
         return rows.get().get(rowNum+"");
     }
@@ -165,7 +165,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
             List<UIElement> result = cells.isGotAll()
                 ? cells.get().get(colNum + "").values()
                 : getColumn(colNum);
-            columns.get().add(colNum + "", result);
+            columns.get().update(colNum + "", result);
         }
         return columns.get().get(colNum+"");
     }
@@ -205,9 +205,9 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
             if (columns.get().has(colNum + ""))
                 return columns.get().get(colNum + "").get(rowNum - 1);
             if (!cells.get().has(colNum + ""))
-                cells.get().add(colNum + "", new MapArray<>(rowNum + "", getCell(colNum, rowNum)));
+                cells.get().update(colNum + "", new MapArray<>(rowNum + "", getCell(colNum, rowNum)));
             else if (!cells.get().get(colNum + "").has(rowNum + ""))
-                cells.get().get(colNum + "").add(rowNum + "", getCell(colNum, rowNum));
+                cells.get().get(colNum + "").update(rowNum + "", getCell(colNum, rowNum));
         }
         return cells.get().get(colNum+"").get(rowNum+"");
     }
@@ -308,10 +308,10 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
                 int k = 0;
                 int j = 1;
                 for (int i = 1; i <= size.get(); i++)
-                    cells.get().add(i+"", new MapArray<>());
+                    cells.get().update(i+"", new MapArray<>());
                 while (k < listOfCells.size()) {
                     for (int i = 1; i <= size.get(); i++)
-                        cells.get().get(i+"").add(j+"", new UIElement(listOfCells.get(k++)));
+                        cells.get().get(i+"").update(j+"", new UIElement(listOfCells.get(k++)));
                     j++;
                 }
                 cells.gotAll();

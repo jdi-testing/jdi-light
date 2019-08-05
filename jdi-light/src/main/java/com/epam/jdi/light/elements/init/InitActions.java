@@ -93,26 +93,6 @@ public class InitActions {
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
         return jdi;
     }
-    /*
-    private static By getLocatorFromField(Field field) {
-        if (hasAnnotation(field, org.openqa.selenium.support.FindBy.class))
-            return findByToBy(field.getAnnotation(org.openqa.selenium.support.FindBy.class));
-        UI[] uis = field.getAnnotationsByType(UI.class);
-        if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
-            return findByToBy(first(uis, j -> j.group().equals(TEST_GROUP)));
-        FindBy[] jfindbys = field.getAnnotationsByType(FindBy.class);
-        if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
-            return findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP)));
-        if (hasAnnotation(field, Css.class))
-            return findByToBy(field.getAnnotation(Css.class));
-        if (hasAnnotation(field, XPath.class))
-            return findByToBy(field.getAnnotation(XPath.class));
-        if (hasAnnotation(field, ByText.class))
-            return findByToBy(field.getAnnotation(ByText.class));
-        if (hasAnnotation(field, WithText.class))
-            return findByToBy(field.getAnnotation(WithText.class));
-        return null;
-    } */
     public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
         $("UI", aRule(UI.class, (e,a)-> e.locator.isRoot = true)),
         $("Root", aRule(Root.class, (e,a)-> e.locator.isRoot = true)),
@@ -183,9 +163,6 @@ public class InitActions {
         try {
             return clazz == List.class && func.execute(getGenericType(clazz));
         } catch (Exception ex) { return false; }
-    }
-    public static boolean isList(Class<?> clazz, Class<?> type) {
-        return isList(clazz, g -> g == type);
     }
     public static boolean isList(Field f, Class<?> type) {
         return isList(f, g -> g == type);

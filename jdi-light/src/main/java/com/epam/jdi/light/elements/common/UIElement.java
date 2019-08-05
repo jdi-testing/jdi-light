@@ -197,19 +197,12 @@ public class UIElement extends JDIBase
     public String jsExecute(String jsCode) {
         return valueOf(js().executeScript("return arguments[0]."+jsCode+";", get()));
     }
-    /**
-     * Сlick on the element
-     */
-    @JDIAction("Click on '{name}'") @Override
-    public void jsClick() {
-        jsExecute("click()");
-    }
 
     /**
      * Input specified value as keys
      * @param value
      */
-    @JDIAction("Input '{0}' in '{name}'") @Override
+    @JDIAction("Input '{0}' in '{name}'")
     public void input(String value) {
         clear();
         setText(value);
@@ -254,7 +247,11 @@ public class UIElement extends JDIBase
             case CENTER:
                 get().click();
                 break;
+            case JS:
+                jsExecute("click()");
+                break;
             case SMART_CLICK:
+                show();
                 ElementArea clArea = timer().getResultByCondition(
                     this::getElementClickableArea, Objects::nonNull);
                 if (clArea == null)

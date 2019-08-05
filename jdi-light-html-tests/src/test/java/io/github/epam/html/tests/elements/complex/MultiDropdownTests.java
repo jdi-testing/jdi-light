@@ -13,6 +13,7 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 public class MultiDropdownTests extends TestsInit {
 
@@ -57,8 +58,13 @@ public class MultiDropdownTests extends TestsInit {
     @Test
     public void disabledTest() {
         if (isFireFox()) return;
-        multiDropdown.select("Disabled");
-        assertEquals(multiDropdown.selected(), "Steam");
+        try {
+            multiDropdown.select("Disabled");
+            fail("Click on disabled element should throw exception");
+        } catch (Exception ex) {
+            assertEquals(ex.getMessage(), "\nCan't perform click. Element is disabled");
+            assertEquals(multiDropdown.selected(), "Steam");
+        }
     }
 
     @Test

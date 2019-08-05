@@ -134,7 +134,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
     @JDIAction("Is '{0}' selected")
     public boolean selected(String value) {
         return core().locator.isTemplate()
-            ? new UIElement(core().get(value)).isSelected()
+            ? new UIElement(base().get(value)).isSelected()
             : selected().trim().equalsIgnoreCase(value.trim());
     }
 

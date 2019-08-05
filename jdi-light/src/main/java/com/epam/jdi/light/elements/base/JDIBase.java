@@ -60,11 +60,9 @@ public abstract class JDIBase extends DriverBase implements HasCache {
         locator = base.locator;
         name = base.name;
         parent = base.parent;
-        name = base.name;
         varName = base.varName;
         typeName = base.typeName;
         failElement = base.failElement;
-        parent = base.parent;
         driverName = base.driverName;
         context = base.printFullLocator();
         webElement = base.webElement;
@@ -158,24 +156,17 @@ public abstract class JDIBase extends DriverBase implements HasCache {
             return getSmart();
         if (locator.isTemplate() && args.length == 0)
             throw exception("Can't get element with template locator '%s' without arguments", getLocator());
-        List<WebElement> result = getAllElements(args);
-        if (result.size() == 0)
-            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
+        List<WebElement> result = getAll(args);
         if (result.size() == 1)
             return result.get(0);
+        if (result.size() == 0)
+            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
         List<WebElement> filtered = filterElements(result);
         if (filtered.size() == 1)
             return filtered.get(0);
-        if (filtered.size() == 0) {
-            if (STRICT_SEARCH)
-                throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get());
-            else
-                return result.get(0);
-        }
         if (STRICT_SEARCH)
-            throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, filtered.size(), toString(), TIMEOUT.get());
-        else
-            return filtered.get(0);
+            throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get());
+        return (filtered.size() > 1 ? filtered : result).get(0);
     }
     private List<WebElement> filterElements(List<WebElement> elements) {
         List<WebElement> result = elements;
@@ -197,10 +188,6 @@ public abstract class JDIBase extends DriverBase implements HasCache {
     }
 
     public List<WebElement> getAll(Object... args) {
-        return filterElements(getAllElements(args));
-    }
-
-    private List<WebElement> getAllElements(Object... args) {
         if (webElements.hasValue()) {
             List<WebElement> elements = webElements.get();
             try {

@@ -17,7 +17,6 @@ import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCH
 import static org.hamcrest.Matchers.*;
 
 public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> extends UIAssert<A, T> {
-    protected String name;
     protected T table() {
         element.refresh();
         return element;

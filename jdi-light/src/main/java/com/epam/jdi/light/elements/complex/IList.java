@@ -77,7 +77,9 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
     }
     @Override
     default int size() {
-        return TIMEOUT.immediately(() -> elements(0).size());
+        try {
+            return TIMEOUT.immediately(() -> elements(0).size());
+        } catch (Exception ignore) { return 0; }
     }
     @Override
     default boolean isEmpty() { return size() == 0; }

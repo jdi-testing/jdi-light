@@ -79,7 +79,7 @@ public class ActionHelper {
                     template = template.replaceAll("\\{\\{VALUE\\}\\}", args.get(0).toString());
             }
             return template;
-        } catch (Exception ex) { throw new RuntimeException("Can't fill JDIAction template: " + template + "for method: " + method.getName()); }
+        } catch (Exception ex) { throw new RuntimeException("Can't fill JDIAction template: " + template + " for method: " + method.getName()); }
     }
 
     public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
@@ -233,7 +233,7 @@ public class ActionHelper {
         MapArray<String, Object> fields = classFields(jp);
         if (fields.keys().contains("element")) {
             Object element = fields.get("element");
-            if (isInterface(fields.get("element").getClass(), ICoreElement.class))
+            if (element != null && isInterface(element.getClass(), ICoreElement.class))
                 return ((ICoreElement)element).base().toString();
         }
         if (fields.keys().contains("name"))

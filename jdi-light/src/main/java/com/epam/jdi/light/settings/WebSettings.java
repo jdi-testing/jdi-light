@@ -74,7 +74,7 @@ public class WebSettings {
     public static void visibleEnabled() {
         SEARCH_CONDITION = ENABLED_ELEMENT;
     }
-    public static void inView() { SEARCH_CONDITION = VISIBLE_ELEMENT; }
+    public static void inView() { SEARCH_CONDITION = ELEMENT_IN_VIEW; }
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
         return DOMAIN != null && DOMAIN.contains("://");
@@ -169,7 +169,7 @@ public class WebSettings {
                 noValidation();
             if (params.contains("enabled"))
                 visibleEnabled();
-            if (params.contains("inView"))
+            if (params.contains("inview"))
                 inView();
             if (params.contains("single"))
                 STRICT_SEARCH = true;

@@ -35,7 +35,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class Dropdown extends UIListBase<UISelectAssert>
         implements ISetup, ICoreElement, HasLabel, HasText {
-    private DropdownSelect ds() {
+    protected DropdownSelect ds() {
         return new DropdownSelect(core(), SELECT_ERROR).setup(DropdownSelect.class, j->j.setName(getName()));
     }
     private static final String SELECT_ERROR =
@@ -187,16 +187,15 @@ public class Dropdown extends UIListBase<UISelectAssert>
 
     @JDIAction("Get '{name}' values")
     public List<String> values() {
-        List<String> result = new ArrayList<>();
+        if (list() != null && list().size() > 0)
+            return list().values();
         if (list() == null && core().getTagName().contains("select"))
             return ds().values();
-        if (list() != null) {
-            if (!list().hasAny(UIElement::isDisplayed))
-                click();
-            result = list().values();
-            if (list().hasAny(UIElement::isDisplayed))
-                click();
-        }
+        if (!list().hasAny(UIElement::isDisplayed))
+            click();
+        List<String> result = list().values();
+        if (list().hasAny(UIElement::isDisplayed))
+            click();
         return result;
     }
 

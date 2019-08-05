@@ -8,6 +8,7 @@ import com.epam.jdi.tools.func.JFunc1;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.tools.StringUtils.format;
 import static org.hamcrest.Matchers.is;
 
 public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAssert<E>
@@ -81,7 +82,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
     public A set(E element) {
         this.element = element;
         name = element.getName();
-        failElement = element.core().printFullLocator();
+        failElement = format("%s(%s)", name, element.core().printFullLocator());
         return (A) this;
     }
 }

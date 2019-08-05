@@ -385,12 +385,12 @@ public class Form<T> extends Section {
     @Override
     public boolean isDisplayed() {
         try {
-            if (core().webElement.hasValue())
-                return core().get().isDisplayed();
-            if (core().locator.isEmpty()) {
+            if (base().webElement.hasValue())
+                return core().isDisplayed();
+            if (base().locator.isEmpty()) {
                 List<Field> fields = getFieldsInterfaceOf(pageObject, SetValue.class);
                 if (fields.isEmpty())
-                    return core().get().isDisplayed();
+                    return core().isDisplayed();
                 Object po = fields.get(0).get(pageObject);
                 return isInterface(po.getClass(), ICoreElement.class) && ((ICoreElement) po).core().isDisplayed();
             }

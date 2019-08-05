@@ -53,7 +53,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     public D data(int rowNum) {
         hasDataClass();
         if (!datas.get().has(rowNum+""))
-            datas.get().add(rowNum+"", getLineData(row(rowNum)));
+            datas.get().update(rowNum+"", getLineData(row(rowNum)));
         return datas.get().get(rowNum+"");
     }
 
@@ -66,7 +66,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     public L line(int rowNum) {
         hasLineClass();
         if (!lines.get().has(rowNum+""))
-            lines.get().add(rowNum+"", row(rowNum).asLine(lineClass));
+            lines.get().update(rowNum+"", row(rowNum).asLine(lineClass));
         return lines.get().get(rowNum+"");
     }
 
@@ -242,7 +242,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
         if (datas.isGotAll()) return datas.get().values();
         MapArray<String, D> result = new MapArray<>();
         for (int i = 1; i <= count.get(); i++)
-            result.add(i+"", data(i));
+            result.update(i+"", data(i));
         datas.gotAll();
         return datas.set(result).values();
     }

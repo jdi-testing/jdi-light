@@ -2,6 +2,9 @@ package com.epam.jdi.light.asserts.core;
 
 import com.epam.jdi.light.asserts.generic.BaseAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.Timeout;
+import com.epam.jdi.light.settings.TimeoutSettings;
+import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matcher;
 
 import java.io.File;
@@ -9,6 +12,7 @@ import java.io.IOException;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
+import static com.epam.jdi.light.settings.TimeoutSettings.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static java.util.Objects.requireNonNull;
@@ -26,6 +30,9 @@ public class FileAssert extends BaseAssert {
         super(fileName);
         file = new File(mergePath(DOWNLOADS_DIR, fileName));
     }
+    private Timer timer() {
+        return new Timer(TIMEOUT.get()*1000);
+    }
 
     /**
      * Check that file is downloaded
@@ -33,7 +40,7 @@ public class FileAssert extends BaseAssert {
      */
     @JDIAction("Assert that file '{name}' is downloaded")
     public FileAssert isDownloaded() {
-        assertThat(element.base().timer().wait(() -> file.exists()), is(true));
+        assertThat(timer().wait(() -> file.exists()), is(true));
         return this;
     }
 
@@ -44,7 +51,7 @@ public class FileAssert extends BaseAssert {
      */
     @JDIAction("Assert that file '{name}' text {0}")
     public FileAssert text(Matcher<String> text) {
-        boolean result = element.base().timer().wait(() -> {
+        boolean result = timer().wait(() -> {
             assertThat(readFileToString(file, "UTF-8"), text); return true; }
         );
         if (result) return this;
@@ -66,7 +73,7 @@ public class FileAssert extends BaseAssert {
      */
     @JDIAction("Assert file '{name}' size")
     public FileAssert hasSize(Matcher<Long> size) {
-        element.base().timer().wait(() -> {
+        timer().wait(() -> {
             assertThat(file.length(), size);
             return true;
         });

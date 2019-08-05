@@ -103,7 +103,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
                 if (isBlank(name))
                     name = nameFromIndex(i);
             }
-            result.add(name, element);
+            result.update(name, element);
         }
         return result;
     }
@@ -140,7 +140,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             return elements.get().get(value);
         UIElement result = getUIElement(value);
         if (elements.isUseCache())
-            elements.get().add(value, result);
+            elements.get().update(value, result);
         return result;
     }
     private UIElement getUIElement(String value) {
@@ -402,7 +402,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     protected boolean isActual(UIElement element) {
         try {
-            return isNotBlank(element.core().get().getTagName());
+            return isNotBlank(element.base().get().getTagName());
         } catch (Exception ex) { return false; }
     }
     protected UIElement initElement(WebElement el, JFunc<WebElement> func) {
