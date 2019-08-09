@@ -5,8 +5,8 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.HasPlaceholder;
-import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import org.apache.logging.log4j.util.Strings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,6 +16,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.TextTypes.INNER_TEXT;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
@@ -26,17 +27,19 @@ import static java.util.Arrays.asList;
 public class Selector extends UIBaseElement<UISelectAssert>
         implements ISelector, SetValue, HasPlaceholder {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
-    protected Select select() {
+    protected Select asSelect() {
         return core().asSelect();
     }
-
+    public WebList list() {
+        return $$(asSelect().getOptions(), getName());
+    }
     /**
      * Selects the value based on its visible text
      * @param value String to search
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
-        select().selectByVisibleText(value);
+        asSelect().selectByVisibleText(value);
     }
 
     /**
@@ -45,7 +48,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
-        select().selectByIndex(index-1);
+        asSelect().selectByIndex(index-1);
     }
 
     /**
@@ -54,9 +57,9 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String... values) {
-        select().deselectAll();
+        asSelect().deselectAll();
         for (String value : values)
-            select().selectByVisibleText(value);
+            asSelect().selectByVisibleText(value);
     }
 
     /**
@@ -75,7 +78,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(String... values) {
-        for (WebElement opt : select().getOptions()) {
+        for (WebElement opt : asSelect().getOptions()) {
             if (opt.isSelected() && asList(values).contains(opt.getText())
                 || !opt.isSelected() && !asList(values).contains(opt.getText()))
                 opt.click();
@@ -94,7 +97,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Check '{0}' for '{name}'")
     public void check(int... values) {
-        select().deselectAll();
+        asSelect().deselectAll();
         for (int index : values)
             select(index);
     }
@@ -105,7 +108,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(int... values) {
-        List<WebElement> options = select().getOptions();
+        List<WebElement> options = asSelect().getOptions();
         for (int i = 0; i < options.size(); i++) {
             WebElement opt = options.get(i);
             if (opt.isSelected() && asList(values).contains(i)
@@ -120,7 +123,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Get checked elements")
     public List<String> checked() {
-        return map(select().getAllSelectedOptions(), WebElement::getText);
+        return map(asSelect().getAllSelectedOptions(), WebElement::getText);
     }
 
     /**
@@ -129,7 +132,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Get selected value")
     public String selected() {
-        return select().getFirstSelectedOption().getText();
+        return asSelect().getFirstSelectedOption().getText();
     }
     @JDIAction("Is '{0}' selected")
     public boolean selected(String value) {
@@ -144,7 +147,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public List<String> values() {
-        return map(select().getOptions(), WebElement::getText);
+        return map(asSelect().getOptions(), WebElement::getText);
     }
 
     /**
@@ -153,9 +156,9 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public List<String> values(TextTypes type) {
-        return map(select().getOptions(), w -> $(w).text(INNER_TEXT));
+        return map(asSelect().getOptions(), w -> $(w).text(INNER_TEXT));
     }
-    public int size() { return select().getOptions().size(); }
+    public int size() { return asSelect().getOptions().size(); }
 
     /**
      * Get the list of enabled elements
@@ -163,7 +166,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public List<String> listEnabled() {
-        List<WebElement> els = select().getOptions();
+        List<WebElement> els = asSelect().getOptions();
         return ifSelect(els, WebElement::isEnabled, WebElement::getText);
     }
 
@@ -173,18 +176,18 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public List<String> listDisabled() {
-        List<WebElement> els = select().getOptions();
+        List<WebElement> els = asSelect().getOptions();
         return ifSelect(els, WebElement::isDisplayed, WebElement::getText);
     }
 
     @Override
     public void setValue(String value) {
-        if (select().isMultiple())
+        if (asSelect().isMultiple())
             check(value.split(";"));
         else select(value);
     }
     @Override
     public String getValue() {
-        return select().isMultiple() ? print(checked(),";") : selected();
+        return asSelect().isMultiple() ? print(checked(),";") : selected();
     }
 }

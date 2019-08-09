@@ -6,10 +6,10 @@ package com.epam.jdi.light.common;
  */
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.light.elements.interfaces.IButton;
-import com.epam.jdi.light.elements.interfaces.IClickable;
-import com.epam.jdi.light.elements.interfaces.INamed;
+import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.common.IsButton;
+import com.epam.jdi.light.elements.interfaces.base.IClickable;
+import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
@@ -70,7 +70,7 @@ public final class UIUtils {
     public static JFunc2<Object, String, IClickable> GET_DEFAULT_BUTTON = (obj, buttonName) -> $("[type=submit]", obj);
 
     public static JFunc2<Object, String, IClickable> GET_BUTTON = (obj, buttonName) -> {
-        List<Field> fields = getFields(obj, IButton.class);
+        List<Field> fields = getFields(obj, IsButton.class);
         if (fields.size() == 0)
             fields = getFieldsExact(obj, WebElement.class, UIElement.class);
         switch (fields.size()) {

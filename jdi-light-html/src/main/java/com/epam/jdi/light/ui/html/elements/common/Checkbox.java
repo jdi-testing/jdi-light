@@ -2,9 +2,9 @@ package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.HasClick;
-import com.epam.jdi.light.elements.interfaces.HasLabel;
-import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.ui.html.asserts.CheckboxAssert;
 
 public class Checkbox extends UIBaseElement<CheckboxAssert>

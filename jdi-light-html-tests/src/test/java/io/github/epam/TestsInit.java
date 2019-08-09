@@ -1,6 +1,7 @@
 package io.github.epam;
 
 import io.github.com.StaticSite;
+import io.github.com.pages.MetalAndColorsPage;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pseudo.site.PseudoSite;
@@ -12,6 +13,8 @@ import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
+import static io.github.com.StaticSite.metalAndColorsPage;
+import static io.github.com.pages.MetalAndColorsPage.*;
 
 public class TestsInit {
     @BeforeSuite(alwaysRun = true)

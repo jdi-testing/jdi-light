@@ -1,7 +1,7 @@
 package io.github.com.custom;
 
 import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Image;

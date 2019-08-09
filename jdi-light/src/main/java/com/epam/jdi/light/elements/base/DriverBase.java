@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.SiteInfo;
-import com.epam.jdi.light.elements.interfaces.JDIElement;
+import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -50,7 +50,7 @@ public abstract class DriverBase implements JDIElement {
     public void setTimeout(int sec) {
         timeout = sec;
     }
-    private int getTimeout() {
+    protected int getTimeout() {
         return timeout >= 0 ? timeout : TIMEOUT.get();
     }
     public Timer timer() { return new Timer(getTimeout()*1000); }

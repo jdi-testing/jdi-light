@@ -4,6 +4,8 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.JFunc;
@@ -21,13 +23,16 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
 
-public class Line implements IList<String> {
+public class Line implements IList<String>, IBaseElement {
     private JFunc<MapArray<String, String>> dataMap;
-    private List<UIElement> elements;
+    private WebList elements;
     private List<String> headers;
+    public JDIBase base() {
+        return elements.base();
+    }
 
     public Line() {}
-    public Line(List<UIElement> elements, List<String> headers) {
+    public Line(WebList elements, List<String> headers) {
         this.elements = elements;
         this.headers = headers;
         this.dataMap = () -> new MapArray<>(headers, LinqUtils.map(elements, UIElement::getText));

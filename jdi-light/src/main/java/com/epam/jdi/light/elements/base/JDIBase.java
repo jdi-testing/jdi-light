@@ -6,10 +6,12 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.HasCache;
-import com.epam.jdi.light.elements.interfaces.ICoreElement;
-import com.epam.jdi.light.elements.interfaces.JDIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasCache;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
@@ -20,6 +22,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -28,6 +31,7 @@ import static com.epam.jdi.light.common.TextTypes.SMART;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
@@ -45,7 +49,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public abstract class JDIBase extends DriverBase implements HasCache {
+public abstract class JDIBase extends DriverBase implements IBaseElement, HasCache {
     public static JFunc1<String, String> STRING_SIMPLIFY =
         s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
 
@@ -68,18 +72,31 @@ public abstract class JDIBase extends DriverBase implements HasCache {
         webElement = base.webElement;
         webElements = base.webElements;
         searchRules = base.searchRules;
+        beforeSearch = base.beforeSearch;
     }
     public JDILocator locator = new JDILocator();
 
     public CacheValue<WebElement> webElement = new CacheValue<>();
     public CacheValue<List<WebElement>> webElements = new CacheValue<>();
-    public CacheValue<List<JFunc1<WebElement, Boolean>>> searchRules =
-        new CacheValue<>(() -> {
+    public List<JFunc1<WebElement, Boolean>> searchRules = new ArrayList<>();
+    private List<JFunc1<WebElement, Boolean>> searchRules() {
+        if (searchRules.size() == 0) {
             List<JFunc1<WebElement, Boolean>> result = new ArrayList<>();
             result.add(SEARCH_CONDITION);
             return result;
-        });
+        }
+        return searchRules;
+    }
+    public JAction1<UIElement> beforeSearch = null;
+    public JAction1<UIElement> beforeSearch() {
+        if (beforeSearch == null) {
+            return BEFORE_SEARCH;
+        }
+        return beforeSearch;
+    }
 
+    public JDIBase doBefore(JAction1<UIElement> action) { beforeSearch = action; return this; }
+    public JDIBase showBefore() { beforeSearch = UIElement::show; return this; }
     public JDIBase noValidation() {
         return setSearchRule(ANY_ELEMENT);
     }
@@ -87,13 +104,17 @@ public abstract class JDIBase extends DriverBase implements HasCache {
         return setSearchRule(VISIBLE_ELEMENT);
     }
     public JDIBase visibleEnabled() { return setSearchRule(ENABLED_ELEMENT); }
-    public JDIBase inView() { return setSearchRule(ELEMENT_IN_VIEW); }
+    public JDIBase inView() {
+        showBefore();
+        return setSearchRule(ELEMENT_IN_VIEW);
+    }
     public JDIBase addSearchRule(JFunc1<WebElement, Boolean> rule) {
-        searchRules.get().add(rule);
+        searchRules.add(rule);
         return this;
     }
     public JDIBase setSearchRule(JFunc1<WebElement, Boolean> rule) {
-        searchRules.setForce(asList(rule));
+        searchRules.clear();
+        searchRules.add(rule);
         return this;
     }
     public JDIBase setWebElement(WebElement el) {
@@ -139,6 +160,7 @@ public abstract class JDIBase extends DriverBase implements HasCache {
         return this;
     }
     public WebElement get(Object... args) {
+        beforeSearch().execute(new UIElement(this));
         if (webElement.hasValue()) {
             WebElement element = webElement.get();
             try {
@@ -156,7 +178,7 @@ public abstract class JDIBase extends DriverBase implements HasCache {
             return getSmart();
         if (locator.isTemplate() && args.length == 0)
             throw exception("Can't get element with template locator '%s' without arguments", getLocator());
-        List<WebElement> result = getAll(args);
+        List<WebElement> result = getAllElements(args);
         if (result.size() == 1)
             return result.get(0);
         if (result.size() == 0)
@@ -170,7 +192,7 @@ public abstract class JDIBase extends DriverBase implements HasCache {
     }
     private List<WebElement> filterElements(List<WebElement> elements) {
         List<WebElement> result = elements;
-        for (JFunc1<WebElement, Boolean> rule : searchRules.get())
+        for (JFunc1<WebElement, Boolean> rule : searchRules())
             result = filter(result, rule::execute);
         if (result.size() == 0)
             throw exception(ELEMENTS_FILTERED_MESSAGE, elements.size(), toString(), TIMEOUT.get());
@@ -188,6 +210,10 @@ public abstract class JDIBase extends DriverBase implements HasCache {
     }
 
     public List<WebElement> getAll(Object... args) {
+        beforeSearch().execute(new UIElement(this));
+        return getAllElements(args);
+    }
+    public List<WebElement> getAllElements(Object... args) {
         if (webElements.hasValue()) {
             List<WebElement> elements = webElements.get();
             try {
@@ -201,6 +227,7 @@ public abstract class JDIBase extends DriverBase implements HasCache {
         return uiSearch(searchContext, correctLocator(getLocator(args)));
     }
     public List<WebElement> getList(int minAmount) {
+        beforeSearch().execute(new UIElement(this));
         List<WebElement> result = timer().getResultByCondition(this::tryGetList,
                 els -> els.size() >= minAmount);
         if (result == null)
@@ -208,7 +235,7 @@ public abstract class JDIBase extends DriverBase implements HasCache {
         return result;
     }
     private List<WebElement> tryGetList() {
-        List<WebElement> elements = getAll();
+        List<WebElement> elements = getAllElements();
         if (elements == null)
             throw exception("No elements found (%s)", toString());
         if (elements.size() == 1)
@@ -228,8 +255,30 @@ public abstract class JDIBase extends DriverBase implements HasCache {
         }
     }
     public WebList list(Object... args) {
-        return new WebList(getAll(args)).setName(getName());
+        return $$(getAll(args), getName());
     }
+    public <T> T noWait(JFunc<T> action) {
+        int temp = getTimeout();
+        int tempGlobal = TIMEOUT.get();
+        driver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        setTimeout(0);
+        T result = action.execute();
+        setTimeout(temp);
+        driver().manage().timeouts().implicitlyWait(tempGlobal, TimeUnit.SECONDS);
+        return result;
+    }
+
+    public <TE extends IBaseElement, TR> TR noWait(JFunc1<TE, TR> action, Class<TE> type) {
+        int temp = getTimeout();
+        int tempGlobal = TIMEOUT.get();
+        driver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        setTimeout(0);
+        TR result = action.execute((TE)this);
+        setTimeout(temp);
+        driver().manage().timeouts().implicitlyWait(tempGlobal, TimeUnit.SECONDS);
+        return result;
+    }
+
     private JDIBase getBase(Object element) {
         if (isClass(element.getClass(), JDIBase.class))
             return  (JDIBase) element;
@@ -253,8 +302,8 @@ public abstract class JDIBase extends DriverBase implements HasCache {
         return locator != null
                 ? uiSearch(searchContext, correctLocator(locator)).get(0)
                 : isPageObject(bElement.getClass())
-                ? searchContext
-                : SMART_SEARCH.execute(bElement);
+                    ? searchContext
+                    : SMART_SEARCH.execute(bElement);
     }
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)
@@ -292,8 +341,7 @@ public abstract class JDIBase extends DriverBase implements HasCache {
                 : printContext() + ">" + locator.toString();
     }
     private void initContext() {
-        if (context == null)
-            context = printFullLocator();
+        context = printFullLocator();
     }
 
     @Override
@@ -347,6 +395,5 @@ public abstract class JDIBase extends DriverBase implements HasCache {
     public void offCache() {
         webElement.useCache(false);
         webElements.useCache(false);
-        searchRules.useCache(false);
     }
 }

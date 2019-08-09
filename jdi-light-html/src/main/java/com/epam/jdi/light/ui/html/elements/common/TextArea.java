@@ -2,10 +2,10 @@ package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.HasInput;
-import com.epam.jdi.light.elements.interfaces.HasLabel;
-import com.epam.jdi.light.elements.interfaces.HasPlaceholder;
-import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.light.elements.interfaces.common.IsInput;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.ui.html.asserts.TextAreaAssert;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
 public class TextArea extends UIBaseElement<TextAreaAssert>
-        implements HasLabel, SetValue, HasPlaceholder, HasInput {
+        implements HasLabel, SetValue, HasPlaceholder, IsInput {
     // region Actions
     @JDIAction("Set lines '{0}' in '{name}'")
     public void setLines(String... lines) {

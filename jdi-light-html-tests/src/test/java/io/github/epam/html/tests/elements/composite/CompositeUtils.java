@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.elements.composite;
 
-import com.epam.jdi.light.elements.interfaces.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;

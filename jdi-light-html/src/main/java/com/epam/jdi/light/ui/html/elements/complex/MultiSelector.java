@@ -20,7 +20,11 @@ public class MultiSelector extends Combobox {
     public void check(String... values) {
         asSelect().deselectAll();
         for (String value : values)
-            asSelect().selectByVisibleText(value);
+            select(value);
+    }
+    @Override
+    public void select(String value) {
+        ds().select(value);
     }
     public <TEnum extends Enum> void check(TEnum... values) {
         check(getEnumValues(values));
@@ -31,7 +35,8 @@ public class MultiSelector extends Combobox {
         for (int index : values)
             select(index);
     }
-    @JDIAction("Select '{0}' in '{name}'") @Override
+
+    @Override
     public void select(int index) {
         ds().select(index);
     }
@@ -56,21 +61,9 @@ public class MultiSelector extends Combobox {
                 opt.click();
         }
     }
-    @Override
-    public String selected() {
-        return ds().selected();
-    }
     @JDIAction("Get checked elements")
     public List<String> checked() {
         return map(asSelect().getAllSelectedOptions(), WebElement::getText);
-    }
-    @Override
-    public void select(String value) {
-        ds().select(value);
-    }
-    @Override
-    public List<String> values() {
-        return ds().values();
     }
 
 }

@@ -5,7 +5,8 @@ package com.epam.jdi.light.elements.complex;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
@@ -20,7 +21,7 @@ import java.util.ListIterator;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 
-public interface IList<T> extends List<T>, HasValue, IHasSize {
+public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
     /**
      *  Get all application elements
      *  */
@@ -78,7 +79,7 @@ public interface IList<T> extends List<T>, HasValue, IHasSize {
     @Override
     default int size() {
         try {
-            return TIMEOUT.immediately(() -> elements(0).size());
+            return base().noWait(() -> elements(0).size());
         } catch (Exception ignore) { return 0; }
     }
     @Override

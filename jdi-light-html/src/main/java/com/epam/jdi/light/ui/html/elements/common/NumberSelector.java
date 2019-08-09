@@ -2,9 +2,9 @@ package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.HasLabel;
-import com.epam.jdi.light.elements.interfaces.HasPlaceholder;
-import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
+import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.ui.html.asserts.NumberAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;

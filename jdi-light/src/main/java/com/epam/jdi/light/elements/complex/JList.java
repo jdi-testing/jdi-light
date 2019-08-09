@@ -7,7 +7,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.IListBase;
+import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
@@ -27,7 +27,7 @@ public class JList<T extends IListBase> extends ListBase<T, UISelectAssert<UISel
 
     @Override
     public UISelectAssert<UISelectAssert, JList<T>> is() {
-        offCache();
+        refresh();
         return new UISelectAssert<>().set(this);
     }
     @JDIAction("Assert that {name} list meet condition")

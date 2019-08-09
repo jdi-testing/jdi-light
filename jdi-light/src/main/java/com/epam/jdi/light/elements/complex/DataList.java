@@ -7,7 +7,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.core.DataListAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.IListBase;
+import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
 import org.hamcrest.Matcher;
@@ -55,7 +55,7 @@ public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert
     
     @Override
     public DataListAssert<T, D> is() {
-        offCache();
+        refresh();
         return new DataListAssert<T, D>().set(this);
     }
     /**

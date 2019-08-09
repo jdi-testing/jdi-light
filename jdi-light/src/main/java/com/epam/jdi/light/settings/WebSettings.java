@@ -11,6 +11,7 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
@@ -53,15 +54,10 @@ public class WebSettings {
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
         el != null && el.isDisplayed() && el.isEnabled();
-    public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el -> {
-            if (el == null || !el.isDisplayed())
-                return false;
-            UIElement ui = $(el);
-            if (!ui.isClickable())
-                ui.show();
-            return ui.isClickable();
-        };
+    public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
+        el != null && !el.isDisplayed() && $(el).isClickable();
     public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = VISIBLE_ELEMENT;
+    public static JAction1<UIElement> BEFORE_SEARCH = b -> {};
     public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
         SEARCH_CONDITION = rule;
     }
@@ -74,7 +70,10 @@ public class WebSettings {
     public static void visibleEnabled() {
         SEARCH_CONDITION = ENABLED_ELEMENT;
     }
-    public static void inView() { SEARCH_CONDITION = ELEMENT_IN_VIEW; }
+    public static void inView() {
+        SEARCH_CONDITION = ELEMENT_IN_VIEW;
+        BEFORE_SEARCH = UIElement::show;
+    }
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
         return DOMAIN != null && DOMAIN.contains("://");

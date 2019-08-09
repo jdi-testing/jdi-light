@@ -53,9 +53,7 @@ public class DropdownSelectTests extends TestsInit {
     @Test
     public void disabledTest() {
         if (isFireFox()) return;
-        try {
-            disabledDropdown.select("Pirate");
-        } catch (Exception ignore) {}
+        disabledDropdown.select("Pirate");
         assertEquals(disabledDropdown.getValue(), "Disabled");
     }
 

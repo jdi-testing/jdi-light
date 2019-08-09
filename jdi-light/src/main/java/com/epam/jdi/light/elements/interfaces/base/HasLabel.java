@@ -1,7 +1,8 @@
-package com.epam.jdi.light.elements.interfaces;
+package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
 public interface HasLabel extends ICoreElement {
     default Label label() {

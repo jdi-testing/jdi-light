@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.IListBase;
+import com.epam.jdi.light.elements.interfaces.base.IListBase;
 
 public abstract class UIBase<A extends UIAssert> extends UIBaseElement<A> implements IListBase {
     @JDIAction("Check that '{name}' is selected")

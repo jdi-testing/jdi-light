@@ -1,7 +1,7 @@
 package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.HasText;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.is;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class TextAssert extends UIAssert<TextAssert, HasText> {
+public class TextAssert extends UIAssert<TextAssert, IsText> {
     @JDIAction("Assert that '{name}' text {0}")
     public TextAssert text(Matcher<String> condition) {
         jdiAssert(element.getText(), condition);

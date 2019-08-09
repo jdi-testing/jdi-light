@@ -1,6 +1,6 @@
-package com.epam.jdi.light.elements.interfaces;
+package com.epam.jdi.light.elements.interfaces.common;
 
-public interface HasInput extends HasText {
+public interface IsInput extends IsText {
     default void sendKeys(CharSequence... value) { core().sendKeys(value); }
     default void setText(String value) {
         core().setText(value);

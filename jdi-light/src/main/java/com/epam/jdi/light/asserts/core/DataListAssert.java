@@ -3,7 +3,7 @@ package com.epam.jdi.light.asserts.core;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.light.elements.interfaces.IListBase;
+import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;

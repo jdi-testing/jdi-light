@@ -11,8 +11,8 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.AnnotationRule;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
-import com.epam.jdi.light.elements.interfaces.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
 import com.epam.jdi.tools.LinqUtils;
@@ -34,7 +34,6 @@ import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
-import static com.epam.jdi.light.settings.WebSettings.ELEMENT_IN_VIEW;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
@@ -74,7 +73,8 @@ public class InitActions {
             InitActions::elementSetup)),
         $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
-        $("PageObject", sRule(info -> isPageObject(info.instance.getClass()),
+        $("PageObject", sRule(info -> !isClass(info.type(), WebPage.class, Section.class)
+                && isPageObject(info.instance.getClass()),
             PageFactory::initElements))
     );
 
@@ -89,7 +89,10 @@ public class InitActions {
     }
 
     public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {
-        jdi.setParent(info.parent).setName(info);
+        if (jdi.parent == null)
+            jdi.setParent(info.parent);
+        if (isBlank(jdi.name))
+            jdi.setName(info);
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
         return jdi;
     }

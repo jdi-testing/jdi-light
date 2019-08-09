@@ -1,9 +1,13 @@
 package com.epam.jdi.light.common;
 
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class Timeout {
@@ -51,12 +55,5 @@ public class Timeout {
         freeze.set(0);
         current.set(INITIAL);
         DEFAULT.set(INITIAL);
-    }
-    public <T> T immediately(JFunc<T> action) {
-        int temp = current.get();
-        current.set(0);
-        T result = action.execute();
-        current.set(temp);
-        return result;
     }
 }

@@ -1,68 +1,45 @@
-package com.epam.jdi.light.ui.html.elements.complex;
+package io.github.com.custom;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.light.ui.html.elements.annotations.JDropdown;
+import com.epam.jdi.light.ui.html.elements.complex.Dropdown;
 import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.By;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
-
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-/**
- * Created by Roman Iovlev on 02.03.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
-public class Dropdown extends UIListBase<UISelectAssert>
-        implements ISetup, ICoreElement, HasLabel, IsText {
-    protected DropdownSelect ds() {
-        return new DropdownSelect(core(), SELECT_ERROR).setup(DropdownSelect.class, j->j.setName(getName()));
+public class MultiDropdown extends Dropdown {
+    public MultiDropdown() {
+        expander = $(".caret");
+        value = $("button");
     }
-    private static final String SELECT_ERROR =
-        "Can't %s element in Dropdown '%s'. Dropdown should have JDropdown annotation or locator to 'select' tag";
+    /*
+    By values = By.tagName("li");
+    By valueTemplate = By.xpath(".//label[text()='%s']/../..");
+    By valuesConatiner = By.tagName("ul");
+    */
 
-    protected UIElement expander;
-    protected UIElement value;
-
-    /**
-     * Select the specified element by the value
-     * @param value
-     */
-    @JDIAction("Select '{0}' in '{name}'")
+    @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(String value) {
-        if (list() != null) {
-            expand();
-            list().select(value);
-            if (list().hasAny(uiElement -> uiElement.isDisplayed() && uiElement.isEnabled()))
-                click();
-        } else {
-            ds().select(value);
-        }
+        expand();
+        list().select(value);
     }
+
     protected void click() {
         if (expander != null)
             expander.click();
         else core().click();
     }
+    public <TEnum extends Enum> void select(TEnum name) { select(getEnumValue(name));}
+
     /**
      * Select the specified element by the index
      * @param index
@@ -137,8 +114,8 @@ public class Dropdown extends UIListBase<UISelectAssert>
         }
         else { try { core().click(); }
         catch (Throwable ignore) {
-                assertLinked(expander, "expander", "close");
-            }
+            assertLinked(expander, "expander", "close");
+        }
         }
     }
 
@@ -216,8 +193,8 @@ public class Dropdown extends UIListBase<UISelectAssert>
     }
     public List<String> listEnabled() {
         return list() != null
-            ? list().listEnabled()
-            : ds().listEnabled();
+                ? list().listEnabled()
+                : ds().listEnabled();
     }
 
     public List<String> listDisabled() {
@@ -229,41 +206,6 @@ public class Dropdown extends UIListBase<UISelectAssert>
     protected void assertLinked(Object element, String name, String actionName) {
         if (element == null)
             throw exception(format("You must specify '%s' in Dropdown annotation in order to perform %s action", name ,actionName));
-    }
-    public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDropdown.class, Dropdown.class))
-            return;
-        JDropdown j = field.getAnnotation(JDropdown.class);
-        By root = isNotBlank(j.root())
-            ? defineLocator(j.root()) : null;
-        By valueLocator = isNotBlank(j.value())
-            ? defineLocator(j.value()) : null;
-        By listLocator = isNotBlank(j.list())
-            ? defineLocator(j.list()) : null;
-        By expandLocator = isNotBlank(j.expand())
-            ? defineLocator(j.expand()) : null;
-        if (root != null)
-            core().setLocator(root);
-        if (valueLocator != null) {
-            value = $(valueLocator, this).setName(getName());
-            value.driverName = core().driverName;
-            if (expandLocator == null)
-                expander = value;
-        }
-        if (listLocator != null) {
-            setList($$(listLocator, this).setName(getName() + " list element"));
-            list().core().driverName = core().driverName;
-        }
-        if (expandLocator != null) {
-            expander = $(expandLocator, this).setName(getName() + " expander element");
-            expander.driverName = core().driverName;
-            if (valueLocator == null)
-                value = expander;
-        }
-    }
-    @Override
-    public UISelectAssert is() {
-        return new UISelectAssert<>().set(this);
     }
 
 }

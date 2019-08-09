@@ -12,10 +12,10 @@ import com.epam.jdi.light.common.ListElementNameTypes;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.HasText;
-import com.epam.jdi.light.elements.interfaces.HasUIList;
-import com.epam.jdi.light.elements.interfaces.IListBase;
-import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
+import com.epam.jdi.light.elements.interfaces.base.HasUIList;
+import com.epam.jdi.light.elements.interfaces.base.IListBase;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
@@ -52,13 +52,14 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public WebList setup(JAction1<JDIBase> setup) {
         return setup(WebList.class, setup);
     }
-    public WebList() { elements.set( new MapArray<>()); }
+    public WebList() { elements.useCache(false); }
     public WebList(By locator) { this(); setLocator(locator);}
     public WebList(List<WebElement> elements) {
         this(); setWebElements(elements);
     }
     public WebList(JDIBase base) {
         super(base);
+        elements.useCache(false);
     }
     public WebList noValidation() {
         super.noValidation();
@@ -138,19 +139,18 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public UIElement get(String value) {
         if (elements.isUseCache() && hasKey(value))
             return elements.get().get(value);
-        UIElement result = getUIElement(value);
-        if (elements.isUseCache())
-            elements.get().update(value, result);
-        return result;
+        return getUIElement(value);
     }
     private UIElement getUIElement(String value) {
         if (locator.isTemplate())
             return $(getLocator(value), parent) .setName(getName() + ":" + value);
         else {
             refresh();
-            timer().wait(() -> hasKey(elements(1), value));
-            if (hasKey(value))
-                return elements.get().get(value);
+            MapArray<String, UIElement> result = timer().getResultByCondition(
+                () -> elements(1),
+                els -> hasKey(els, value));
+            if (result.has(value))
+                return result.get(value);
             else
                 throw exception("Can't select '%s'. No elements with this name found", value);
         }
@@ -320,37 +320,44 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         } while (size < size());
     }
 
-
+    @JDIAction("Check that '{option}' is selected in '{name}'")
     public boolean selected(String option) {
         return get(option).isSelected();
     }
 
+    @JDIAction("Get '{name}' checked values")
     public List<String> checked() {
-        return ifSelect(IListBase::isSelected, HasText::getText);
+        return ifSelect(IListBase::isSelected, IsText::getText);
     }
 
+    @JDIAction("Get '{name}' values")
     public List<String> values() {
         refresh();
         core().noValidation();
         return elements(0).keys();
     }
 
+    @JDIAction("Get '{name}' values")
     public List<String> values(TextTypes type) {
         setUIElementName(ListElementNameTypes.get(type));
         return values();
     }
 
+    @JDIAction("Get list of enabled values for '{name}'")
     public List<String> listEnabled() {
         return ifSelect(IListBase::isEnabled, IListBase::getText);
     }
 
+    @JDIAction("Get list of disabled values for '{name}'")
     public List<String> listDisabled() {
         return ifSelect(IListBase::isDisabled, IListBase::getText);
     }
+    @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {
         return isNotEmpty() && get(0).isDisplayed();
     }
 
+    @JDIAction("Check that '{name}' is hidden")
     public boolean isHidden() {
         return !isDisplayed();
     }
@@ -368,10 +375,12 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         get(0).hover();
     }
 
+    @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return isNotEmpty() && get(0).isEnabled();
     }
 
+    @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
         return !isEnabled();
     }
@@ -381,7 +390,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         get(0).show();
     }
     public UISelectAssert<UISelectAssert, WebList> is() {
-        offCache();
+        refresh();
         return new UISelectAssert<>().set(this);
     }
     @JDIAction("Assert that {name} list meet condition")

@@ -1,4 +1,4 @@
-package com.epam.jdi.light.elements.interfaces;
+package com.epam.jdi.light.elements.interfaces.base;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

@@ -6,8 +6,8 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.HasLabel;
-import com.epam.jdi.light.elements.interfaces.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import org.apache.commons.lang3.time.StopWatch;
 import org.openqa.selenium.By;
 

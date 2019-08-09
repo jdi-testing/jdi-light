@@ -12,7 +12,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.interfaces.*;
+import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.common.IsInput;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
@@ -44,8 +46,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class UIElement extends JDIBase
         implements WebElement, SetValue, ICoreElement,
-        HasAssert<IsAssert>, IListBase, IClickable, HasClick, HasText,
-        HasLabel, HasPlaceholder, HasInput {
+        HasAssert<IsAssert>, IListBase, IClickable, HasClick, IsText,
+        HasLabel, HasPlaceholder, IsInput {
     //region Constructors
     public UIElement() { }
     public UIElement(WebElement el) { setWebElement(el); }
@@ -567,15 +569,13 @@ public class UIElement extends JDIBase
     }
     protected boolean displayed() {
         try {
-            if (webElement.hasValue())
-                return webElement.get().isDisplayed();
-            if (locator.isEmpty()) {
-                WebElement element = SMART_SEARCH.execute(this);
-                return element != null && element.isDisplayed();
-            }
-            List<WebElement> result = getAll();
+            if (get().isDisplayed())
+                return true;
+        } catch (Exception ex) {
+            List<WebElement> result = getAllElements();
             return result.size() == 1 && result.get(0).isDisplayed();
-        } catch (Exception ex) { return false; }
+        }
+        return false;
     }
 
     public boolean isClickable() {
