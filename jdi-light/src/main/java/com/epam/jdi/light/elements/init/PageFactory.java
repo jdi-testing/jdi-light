@@ -218,6 +218,7 @@ public class PageFactory {
 
     // region Selenium PageFactory
     public static void initElements(JFunc<WebDriver> driver, Object... pages) {
+        preInit();
         useDriver(driver);
         initElements(pages);
     }

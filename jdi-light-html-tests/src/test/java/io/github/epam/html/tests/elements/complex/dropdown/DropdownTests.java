@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.elements.complex;
+package io.github.epam.html.tests.elements.complex.dropdown;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;

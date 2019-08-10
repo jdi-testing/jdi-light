@@ -26,6 +26,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -35,46 +36,81 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class DropdownExpand extends UIListBase<UISelectAssert>
         implements IsDropdown, ISetup {
-    private UIElement expander;
+    protected String expandLocator = ".caret";
     public UIElement expander() {
-        if (expander == null)
-            expander = core();
-        return expander;
+        return linked(expandLocator, "expand");
     }
+
+    protected String valueLocator = "input";
+    public UIElement value() { return linked(valueLocator, "value"); }
+
+    protected String listLocator = "li";
     @Override
+    public WebList list() {
+        return linkedList(listLocator, "list");
+    }
+
     public void toggle() {
         expander().click();
     }
+    @JDIAction(value = "Is '{name}' expanded", level = DEBUG)
+    public boolean isExpanded() {
+        return list().noWait(WebList::isDisplayed, WebList.class);
+    }
+    @JDIAction(level = DEBUG)
+    public void expand() {
+        if (!isExpanded())
+            toggle();
+    }
+    @JDIAction(level = DEBUG)
+    public void close() {
+        if (isExpanded())
+            toggle();
+    }
+    @JDIAction("Select '{0}' in '{name}'") @Override
+    public void select(String value) {
+        expand();
+        list().select(value);
+        close();
+    }
+    @JDIAction("Select '{0}' in '{name}'") @Override
+    public void select(int index) {
+        if (index < 1)
+            throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
+        expand();
+        list().select(index-1);
+        close();
+    }
+    @JDIAction("Get selected value") @Override
+    public String selected() {
+        expand();
+        return list().selected();
+    }
+    @JDIAction("Is '{0}' selected") @Override
+    public boolean selected(String value) {
+        expand();
+        return list().selected(value);
+    }
+    public boolean wait(JFunc1<IsDropdown, Boolean> condition) {
+        return base().timer().wait(() -> condition.execute(this));
+    }
 
+    protected boolean setupDone = false;
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDropdown.class, DropdownExpand.class))
             return;
         JDropdown j = field.getAnnotation(JDropdown.class);
-        By root = isNotBlank(j.root())
-            ? defineLocator(j.root()) : null;
-        By valueLocator = isNotBlank(j.value())
-            ? defineLocator(j.value()) : null;
-        By listLocator = isNotBlank(j.list())
-            ? defineLocator(j.list()) : null;
-        By expandLocator = isNotBlank(j.expand())
-            ? defineLocator(j.expand()) : null;
-        if (valueLocator != null)
-            uiElement.setLocator(valueLocator);
-        if (listLocator != null)
-            list().setLocator(listLocator);
-        if (expandLocator != null) {
-            expander = $(expandLocator, base().parent).setName(getName() + " expand element");
-            expander.driverName = base().driverName;
-            if (valueLocator == null)
-                uiElement = expander;
-        }
-        if (root != null) {
-            UIElement parent = $(root, base().parent).setName(getName());
-            uiElement.setParent(parent);
-            expander.setParent(parent);
-            list.setParent(parent);
-        }
-
+        if (isNotBlank(j.root()))
+            base().setLocator(j.root());
+        if (isNotBlank(j.value())) {
+            valueLocator = j.value();
+            expandLocator = isNotBlank(j.expand())
+                ? j.expand() : j.value();
+        } else if (isNotBlank(j.expand()))
+            expandLocator = j.expand();
+        if (isNotBlank(j.list()))
+            listLocator = j.list();
+        setupDone = true;
     }
 
 }

@@ -52,6 +52,11 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public WebList setup(JAction1<JDIBase> setup) {
         return setup(WebList.class, setup);
     }
+    @Override
+    public WebList setCore(JDIBase base) {
+        super.setCore(base);
+        return this;
+    }
     public WebList() { elements.useCache(false); }
     public WebList(By locator) { this(); setLocator(locator);}
     public WebList(List<WebElement> elements) {

@@ -64,6 +64,11 @@ public class UIElement extends JDIBase
         return setup(UIElement.class, setup);
     }
     @Override
+    public UIElement setCore(JDIBase base) {
+        super.setCore(base);
+        return this;
+    }
+    @Override
     public UIElement setName(String name) {
         super.setName(name);
         return this;

@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.Selector;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
@@ -36,34 +37,11 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class DropdownSelect extends UIBaseElement<UISelectAssert>
-        implements ISelector, SetValue, HasLabel {
-    protected Selector selector;
+public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IsDropdown {
     protected Selector selector() {
-        if (selector == null) {
-            selector = new Selector();
-            selector.base().setCore(base());
-        }
-        return selector;
+        return new Selector().setCore(Selector.class, base());
     }
-    protected Select getSelect(String action) {
-        try {
-            return core().asSelect();
-        } catch (Exception ex) {
-            throw exception(SELECT_ERROR, action, this, ex.getMessage());
-        }
-    }
-
-    public DropdownSelect() {}
-    public DropdownSelect(UIElement element, String errorMsg) {
-        if (isNotBlank(errorMsg))
-            SELECT_ERROR = errorMsg;
-        selector = new Selector();
-        selector.base().setCore(element.base());
-        this.uiElement = element;
-    }
-    private static String SELECT_ERROR =
-        "Can't %s element in DropdownSelect '%s'. DropdownSelect locator should point to select tag: %s";
+    public WebList list() { throw exception("not used for Selector"); }
 
     /**
      * Select the specified element by the value
@@ -71,7 +49,7 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(String value) {
-        getSelect(format("Select '%s'", value)).selectByVisibleText(value);
+        selector().select(value);
     }
 
     /**
@@ -80,29 +58,12 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(int index) {
-        if (index < 1)
-            throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
-        getSelect(format("Select '%s'", index)).selectByIndex(index-1);
+        selector().select(index);
     }
 
-    /**
-     * Get text
-     * @return String text
-     */
-    @JDIAction("Get '{name}' text") @Override
-    public String getText() {
-        return getSelect("getText").getFirstSelectedOption().getText();
-    }
-    @JDIAction("Get '{name}' text") @Override
-    public String text(TextTypes type) { return getText(); }
-
-    @JDIAction("Check that '{name}' is displayed")
-    public boolean isDisplayed() {
-        return core().isDisplayed();
-    }
     @JDIAction("Check that '{name}' is displayed") @Override
-    public String selected() { return getText(); }
-    public boolean wait(JFunc1<DropdownSelect, Boolean> condition) {
+    public String selected() { return selector().selected(); }
+    public boolean wait(JFunc1<IsDropdown, Boolean> condition) {
         return base().timer().wait(() -> condition.execute(this));
     }
     @Override
@@ -112,22 +73,13 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert>
 
     @JDIAction("Get '{name}' values")
     public List<String> values() {
-        return map(getSelect("values").getOptions(), WebElement::getText);
-    }
-
-    /**
-     * Get values as text of specific type
-     * @return List
-     */
-    @JDIAction("Get '{name}' values")
-    public List<String> values(TextTypes type) {
-        return map(getSelect("values").getOptions(), el -> $(el).text(type));
+        return selector().values();
     }
 
     public String getValue() { return selected(); }
     public void setValue(String value) { select(value); }
     @JDIAction(level = DEBUG)
-    public int size() { return values().size(); }
+    public int size() { return selector().size(); }
 
     @Override
     public UISelectAssert is() {

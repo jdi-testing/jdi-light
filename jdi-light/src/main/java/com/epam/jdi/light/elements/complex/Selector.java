@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.INNER_TEXT;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
@@ -48,6 +49,8 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
+        if (index < 1)
+            throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
         asSelect().selectByIndex(index-1);
     }
 
@@ -156,7 +159,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public List<String> values(TextTypes type) {
-        return map(asSelect().getOptions(), w -> $(w).text(INNER_TEXT));
+        return map(asSelect().getOptions(), w -> $(w).text(type));
     }
     public int size() { return asSelect().getOptions().size(); }
 

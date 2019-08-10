@@ -10,6 +10,10 @@ public interface IBaseElement extends JDIElement, HasCache {
         setup.execute(base());
         return (T)this;
     }
+    default <T> T setCore(Class<T> cl, JDIBase core) {
+        base().setCore(core);
+        return (T)this;
+    }
     default DriverBase setName(String name) {
         return base().setName(name);
     }

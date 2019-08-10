@@ -10,8 +10,6 @@ public class Combobox extends Dropdown
         implements HasPlaceholder, IsInput {
     @Override
     public UIElement core() {
-        if (value != null)
-            return value;
-        return super.core();
+        return value();
     }
 }

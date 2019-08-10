@@ -60,7 +60,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public JDIBase(JDIBase base) {
         setCore(base);
     }
-    public void setCore(JDIBase base) {
+    public JDIBase setCore(JDIBase base) {
         locator = base.locator;
         name = base.name;
         parent = base.parent;
@@ -73,6 +73,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         webElements = base.webElements;
         searchRules = base.searchRules;
         beforeSearch = base.beforeSearch;
+        return this;
     }
     public JDILocator locator = new JDILocator();
 
@@ -126,6 +127,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return this;
     }
 
+    public JDIBase setLocator(String locator) {
+        return setLocator(defineLocator(locator));
+    }
     public JDIBase setLocator(By locator) {
         if (name.isEmpty()) name = shortBy(locator);
         this.locator = new JDILocator(locator, this);
