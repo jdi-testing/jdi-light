@@ -1,4 +1,4 @@
-package pseudo.site.dataproviders.WebPage;
+package pseudo.site.dataproviders.webpage;
 
 import org.testng.annotations.DataProvider;
 
@@ -13,15 +13,9 @@ public class WebPageDataProvider {
             {pageWithTitle, "https://jdi-testing.github.io/jdi-light/","Page with Title"},
             {pageWithURL, "https://jdi-testing.github.io/jdi-light/pagewithurl.com",""},
             {slashPageWithURL, "https://jdi-testing.github.io/jdi-light/pagewithurl.com",""},
-            {pageWithoutBoth, "https://jdi-testing.github.io/jdi-light/",""}
-        };
-    }
-
-    @DataProvider
-    public Object[][] actionsWebPageDataProvider() {
-        return new Object[][]{
-
-
+            {pageWithoutBoth, "https://jdi-testing.github.io/jdi-light/",""},
+            {pageNotExtendWebPageWithBoth, "",""},
+            {pageNotExtendWebPageWithoutBoth, "",""}
         };
     }
 }
