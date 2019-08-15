@@ -13,6 +13,7 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
 
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
@@ -48,6 +49,9 @@ public class WebPage extends DriverBase implements PageObject {
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this).setName(getName()+" Form");
     }
+
+    public static MapArray<String, WebPage> PAGES = new MapArray<>();
+    public static MapArray<String, List<Object>> ELEMENTS = new MapArray<>();
 
     private static Safe<String> currentPage = new Safe<>("Undefined Page");
     public static String getCurrentPage() { return currentPage.get(); }

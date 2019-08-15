@@ -61,6 +61,11 @@ public class DriverBase implements INamed {
         if (!isClass(parent.getClass(), JDIBase.class)) return null;
         return ((JDIBase)parent).getPage();
     }
-
-
+    public boolean hasParent(String name) {
+        if (parent == null) return false;
+        if (isClass(parent.getClass(), WebPage.class))
+            return ((WebPage) parent).getName().equals(name);
+        if (!isClass(parent.getClass(), JDIBase.class)) return false;
+        return ((JDIBase)parent).hasParent(name);
+    }
 }

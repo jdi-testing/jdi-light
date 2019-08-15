@@ -1,10 +1,35 @@
 package com.epam.jdi.bdd;
 
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.UIElement;
+
+import java.util.List;
+
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+
 /**
  * Created by Dmitry_Lebedev1 on 1/13/2016.
  */
 public final class Utils {
     private Utils() {
+    }
+    public static UIElement getUI(String name) {
+        if (ELEMENTS.has(name))
+            return (UIElement) ELEMENTS.get(name).get(0);
+        throw exception("Can't find %s element", name);
+    }
+    public static UIElement getUI(String name, String section) {
+        if (ELEMENTS.has(name)) {
+            List<Object> els = ELEMENTS.get(name);
+            Object result = first(els, el -> isClass(el.getClass(), JDIBase.class) && ((JDIBase) el).hasParent(section));
+            if (result == null)
+                throw exception("Can't find %s element at %s", name, section);
+            return (UIElement) result;
+        }
+        throw exception("Can't find %s element", name);
     }
 /*
     public static Object getClassField(Class container, String fieldName) {

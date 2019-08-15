@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "classpath:features",
-        glue = {"com.epam.jdi.cucumber.stepdefs.en", "cucmberTests"}
+        glue = {"com.epam.jdi.bdd", "cucmberTests"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
 

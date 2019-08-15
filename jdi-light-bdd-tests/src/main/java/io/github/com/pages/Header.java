@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
@@ -17,6 +18,6 @@ public class Header extends Section {
 	public static Form<User> loginFormLight;
 	@Css(".fa-sign-out") public static Button logout;
 	public static Image epamLogo;
-	public static Icon userIcon;
+	public static UIElement userIcon;
 	public static Icon userName;
 }

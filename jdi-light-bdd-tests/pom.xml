@@ -6,11 +6,15 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-bdd-tests</artifactId>
-    <version>1.0.65</version>
+    <version>1.0.0</version>
     <name>JDI BDD Tests</name>
 
     <properties>
+        <driver>chrome</driver>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jetty.version>9.4.12.RC2</jetty.version>
+        <aspectj.version>1.9.1</aspectj.version>
+        <allure.maven>2.9</allure.maven>
     </properties>
 
     <dependencies>
@@ -18,7 +22,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-bdd</artifactId>
-            <version>1.0.65</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

@@ -20,12 +20,14 @@ import org.openqa.selenium.WebElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.elements.init.PageFactory.initElement;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
@@ -48,6 +50,7 @@ public class InitActions {
     };
     public static JFunc1<SiteInfo, WebPage> SETUP_WEBPAGE_ON_SITE = info -> {
         WebPage page = (WebPage) SETUP_SECTION_ON_SITE.execute(info);
+        PAGES.add(page.getName(), page);
         page.updatePageData(
             valueOrDefault(getAnnotation(info.field, Url.class),
                 page.getClass().getAnnotation(Url.class)),
@@ -116,6 +119,13 @@ public class InitActions {
         //jdi.setTypeName(info.instance.getClass().getName());
         jdi.parent = info.parent;
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
+        if (ELEMENTS.has(jdi.getName()))
+            ELEMENTS.get(jdi.getName()).add(jdi);
+        else {
+            List<Object> newList = new ArrayList<>();
+            newList.add(jdi);
+            ELEMENTS.add(jdi.getName(), newList);
+        }
         info.instance = jdi;
     }
     public static void elementSetup(SiteInfo info) {
