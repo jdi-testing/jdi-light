@@ -51,9 +51,11 @@
 
     <modules>
         <module>jdi-light</module>
+        <module>jdi-light-html</module>
+        <module>jdi-light-bdd</module>
         <module>jdi-light-examples</module>
         <module>jdi-light-html-tests</module>
-        <module>jdi-light-html</module>
+        <module>jdi-light-bdd-tests</module>
         <module>jdi-performance</module>
     </modules>
 </project>
