@@ -32,4 +32,9 @@ public class JDISteps {
         UIElement el = getUI(name, section);
         el.click();
     }
+
+    @Given("^I refresh webpage$")
+    public void iRefreshWebpage() {
+        WebPage.refresh();
+    }
 }

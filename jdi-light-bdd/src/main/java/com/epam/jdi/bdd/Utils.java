@@ -2,6 +2,7 @@ package com.epam.jdi.bdd;
 
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.ui.html.common.Image;
 
 import java.util.List;
 
@@ -31,6 +32,12 @@ public final class Utils {
         }
         throw exception("Can't find %s element", name);
     }
+    public static Image getImage(String name) {//todo probably can change getUI output on Object
+        if (ELEMENTS.has(name))
+            return (Image) ELEMENTS.get(name).get(0);
+        throw exception("Can't find %s element", name);
+    }
+
 /*
     public static Object getClassField(Class container, String fieldName) {
         Object result;
