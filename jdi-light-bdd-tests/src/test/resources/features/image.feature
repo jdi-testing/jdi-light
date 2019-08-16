@@ -21,26 +21,10 @@ Scenario: Image validation test
   And image "Jdi Logo" height is 100
   And image "Jdi Logo" width is 101
 
-Scenario: Check
+Scenario: Check image alt
   Given I open "Html5 Page"
   Then "Jdi Logo" alt is "Jdi Logo 2"
 
 Scenario: Do base validation
   Given I open "Html5 Page"
   Then do "Jdi Logo" base validation
-
-
-
-public void baseValidationTest() {
-baseValidation(jdiLogo);
-}
-
-
-
-#click()	click on the image	void
-##src()	get value of src attribute	String
-##height()	get value of height attribute	String
-##width()	get value of width attribute	String
-##alt()	get value of alt attribute	String
-##is()	method for building assertions	ImageAssert
-##assertThat()
