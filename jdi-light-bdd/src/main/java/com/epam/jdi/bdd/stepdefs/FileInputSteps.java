@@ -1,4 +1,4 @@
-package com.epam.jdi.bdd;
+package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.common.FileInput;
 import cucumber.api.PendingException;
