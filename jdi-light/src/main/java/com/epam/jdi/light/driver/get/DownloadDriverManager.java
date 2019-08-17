@@ -1,7 +1,9 @@
 package com.epam.jdi.light.driver.get;
 
+import com.epam.jdi.light.common.Exceptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
@@ -64,7 +66,7 @@ public class DownloadDriverManager {
             logger.info("Download driver: '" +  driverName + "' successfully");
         } catch (Exception ex) {
             throw exception("Can't download latest driver for " + driverType
-                    + ". Exception " + ex.getMessage());
+                    + ". Exception " + safeException(ex));
         }
     }
 }

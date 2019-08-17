@@ -1,10 +1,12 @@
 package io.github.epam.html.tests.elements.common;
 
+import com.epam.jdi.light.common.Exceptions;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
 import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
@@ -54,7 +56,7 @@ public class ButtonTests extends TestsInit {
         try {
             disabledButton.click();
             fail("Disabled button should not work, but work");
-        } catch (Exception ex) { assertThat(ex.getMessage(), containsString("Can't perform click. Element is disabled"));}
+        } catch (Exception ex) { assertThat(safeException(ex), containsString("Can't perform click. Element is disabled"));}
     }
     @Test
     public void doubleClickTest() {
@@ -124,7 +126,7 @@ public class ButtonTests extends TestsInit {
             durationMoreThan(2, () ->
                 suspendButton.is().notAppear(2));
         } catch (Exception ex) {
-            assertThat(ex.getMessage(), containsString("but: was \"displayed\""));
+            assertThat(safeException(ex), containsString("but: was \"displayed\""));
         }
     }
 
@@ -135,7 +137,7 @@ public class ButtonTests extends TestsInit {
         try {
             durationImmediately(() -> ghostButton.is().notAppear());
         } catch (Exception ex) {
-            assertThat(ex.getMessage(), containsString("but: was \"displayed\""));
+            assertThat(safeException(ex), containsString("but: was \"displayed\""));
         }
     }
 

@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.composite;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -18,6 +19,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.FormFilters.*;
 import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
@@ -84,7 +86,7 @@ public class Form<T> extends Section {
                     continue;
                 fillAction(setField, getValueField(setField, pageObject), pageObject, pair.value);
             } catch (Exception ex) { throw exception("Can't fill element '%s'. Exception: %s",
-                    setField != null ? setField.getName() : "UNKNOWN FIELD", ex.getMessage()); }
+                    setField != null ? setField.getName() : "UNKNOWN FIELD", safeException(ex)); }
         setFilterAll();
     }
     private Object pageObject = this;

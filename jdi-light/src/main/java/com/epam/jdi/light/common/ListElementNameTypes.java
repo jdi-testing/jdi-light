@@ -1,16 +1,31 @@
 package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
+import org.openqa.selenium.By;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public enum ListElementNameTypes {
     SMART(el -> {
         String text = el.text(TextTypes.TEXT);
-        if (isBlank(text))
-            text = el.labelText();
-        return text;
+        if (isNotBlank(text))
+            return text;
+        text = el.text(TextTypes.INNER_TEXT);
+        if (isNotBlank(text))
+            return text;
+        String id = el.attr("id");
+        if (isNotBlank(id)) {
+            UIElement label = $(By.cssSelector("[for=" + id + "]"));
+            label.setTimeout(0);
+            try {
+                text = label.getText();
+            } catch (Throwable ignore) { }
+        }
+        return isNotBlank(text) ? text : "";
     }),
     TEXT(el -> el.text(TextTypes.TEXT)),
     VALUE(el -> el.text(TextTypes.VALUE)),

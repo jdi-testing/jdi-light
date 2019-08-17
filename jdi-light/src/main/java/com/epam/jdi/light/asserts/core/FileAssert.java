@@ -1,6 +1,7 @@
 package com.epam.jdi.light.asserts.core;
 
 import com.epam.jdi.light.asserts.generic.BaseAssert;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.settings.TimeoutSettings;
@@ -10,6 +11,7 @@ import org.hamcrest.Matcher;
 import java.io.File;
 import java.io.IOException;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
 import static com.epam.jdi.light.settings.TimeoutSettings.*;
@@ -59,7 +61,7 @@ public class FileAssert extends BaseAssert {
         try {
             fileText = readFileToString(file, "UTF-8");
         } catch (IOException ex) {
-            throw exception("Can't read File: " + ex.getMessage());
+            throw exception("Can't read File: " + safeException(ex));
         }
         assertThat(fileText, text);
         return this;

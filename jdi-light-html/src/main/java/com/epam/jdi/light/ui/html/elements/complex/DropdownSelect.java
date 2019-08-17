@@ -41,7 +41,7 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IsD
     protected Selector selector() {
         return new Selector().setCore(Selector.class, base());
     }
-    public WebList list() { throw exception("not used for Selector"); }
+    public WebList list() { return selector().list(); }
 
     /**
      * Select the specified element by the value
@@ -68,21 +68,23 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IsD
     }
     @Override
     public boolean selected(String option) {
-        return selected().equals(option);
+        return selector().selected(option);
     }
-
-    @JDIAction("Get '{name}' values")
-    public List<String> values() {
-        return selector().values();
-    }
-
-    public String getValue() { return selected(); }
-    public void setValue(String value) { select(value); }
-    @JDIAction(level = DEBUG)
-    public int size() { return selector().size(); }
+    @Override
+    public List<String> values() { return selector().values(); }
+    @Override
+    public List<String> values(TextTypes type) { return selector().values(); }
 
     @Override
     public UISelectAssert is() {
         return new UISelectAssert<>().set(this);
     }
+    @Override
+    public boolean isEnabled() { return list().isEnabled(); }
+    @Override
+    public boolean isDisabled() { return !isEnabled(); }
+    @Override
+    public boolean isDisplayed() { return list().isDisplayed(); }
+    @Override
+    public boolean isHidden() { return !isDisplayed(); }
 }

@@ -30,8 +30,6 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
     }
     public String getValue() { return selected(); }
     public void setValue(String value) { select(value); }
-    @JDIAction(level = DEBUG)
-    public int size() { return values().size(); }
     @Override
     public void offCache() { list().offCache(); super.offCache();}
 

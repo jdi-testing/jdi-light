@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -25,6 +26,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.JDIBase.STRING_SIMPLIFY;
@@ -84,7 +86,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     }
 
     public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
-    private WebList headerUI() {
+    public WebList headerUI() {
         return $$(headerLocator, this).setName(getName() + " header");
     }
     protected List<String> getHeader() {
@@ -316,7 +318,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
                     j++;
                 }
                 cells.gotAll();
-            } catch (Exception ex) {throw exception("Can't get all cells. " + ex.getMessage()); }
+            } catch (Exception ex) {throw exception("Can't get all cells. " + safeException(ex)); }
         }
         return (T) this;
     }

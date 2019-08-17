@@ -1,5 +1,6 @@
 package com.epam.jdi.light.driver.get;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.tools.DataClass;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.Capabilities;
@@ -8,6 +9,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.isRemote;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
@@ -58,7 +60,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                         return getDriver.execute();
                     } catch (Exception ex2) { throw exception("Failed to download driver: " + ex2.getMessage()); }
                 }
-                throw exception(ex.getMessage());
+                throw exception(safeException(ex));
             } catch (Exception ex2) {
                 throw exception("Failed to setup local driver: " + ex2.getMessage());
             }

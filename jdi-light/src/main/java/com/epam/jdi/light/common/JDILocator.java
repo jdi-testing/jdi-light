@@ -3,6 +3,7 @@ package com.epam.jdi.light.common;
 import com.epam.jdi.light.elements.base.JDIBase;
 import org.openqa.selenium.By;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.LocatorType.DEFAULT;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
@@ -85,6 +86,6 @@ public class JDILocator {
                     ? shortBy(locator)
                     : print(select(SMART_SEARCH_LOCATORS, l -> format(l, splitHyphen(element.name))), " or ");
             return isFrame + shortLocator.replaceAll("%s", "{{VALUE}}");
-        } catch (Exception ex) { throw exception("Can't print locator: " + ex.getMessage()); }
+        } catch (Exception ex) { throw exception("Can't print locator: " + safeException(ex)); }
     }
 }

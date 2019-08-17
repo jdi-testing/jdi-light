@@ -11,7 +11,6 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
-import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.settings.WebSettings;
@@ -27,6 +26,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
@@ -41,7 +41,6 @@ import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -50,17 +49,24 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class PageFactory {
     // region initSite
-    public static JAction PRE_INIT = WebSettings::init;
+    public static MapArray<String, JAction> PRE_INIT =
+        new MapArray<>("WebSettings", WebSettings::init);
+    public static boolean initialized = false;
+    private static void preInit() {
+        if (PRE_INIT == null) return;
+        if (!initialized) {
+            for (Pair<String, JAction> action : PRE_INIT)
+                try {
+                    action.value.execute();
+                } catch (Exception ex) {
+                    throw exception("Preinit '%s' failed. Please correct PageFactory.PRE_INIT function. Exception: %s", action.key, safeException(ex));
+                }
+            initialized = true;
+        }
+    }
     public static void initSite(Class<?> site) {
         preInit();
         initSite(site, DRIVER_NAME);
-    }
-    private static void preInit() {
-        try {
-            PRE_INIT.execute();
-        } catch (Exception ex) {
-            throw exception("Preinit failed. Please correct PageFactory.PRE_INIT function");
-        }
     }
     public static void initSite(Class<?> site, String driverName) {
         preInit();
@@ -95,7 +101,7 @@ public class PageFactory {
 
     public static void initJdiField(SiteInfo info) {
         if (!info.type().isInterface())
-            initUsingConstructor(info);
+            initWithConstructor(info);
         else
             initUsingRules(info);
     }
@@ -112,7 +118,7 @@ public class PageFactory {
             }
         } catch (Exception ex) {
             throw exception("Setup rule '%s' failed. Can't setup field '%s' on page '%s'.%sException: %s",
-                    ruleName, info.name(), info.parentName(), LINE_BREAK, getException(ex));
+                    ruleName, info.name(), info.parentName(), LINE_BREAK, safeException(ex));
         }
     }
     // endregion
@@ -122,19 +128,14 @@ public class PageFactory {
         return format("Can't init '%s' '%s' on '%s'. Exception: %s",
             getSafe(() -> isClass(field.getType(), WebPage.class) ? "page" : "element",
                 "Element Type"),
-            getSafe(field::getName, "Field Name"),
-            getSafe(parent::getSimpleName, "Parent Type"),
-            getException(ex));
+            getSafe(() -> field.getName(), "Field Name"),
+            getSafe(() -> parent.getSimpleName(), "Parent Type"),
+            safeException(ex));
     }
     private static String getSafe(JFunc<String> value, String defaultValue) {
         try {
             return value.execute();
         } catch (Exception ignore) { return "Error " + defaultValue; }
-    }
-    private static String getException(Exception ex) {
-        return isNotBlank(getException(ex))
-                ? ex.getMessage()
-                : ex.toString();
     }
     private static List<Field> getSiteFields(Class<?> site) {
         Field[] pages = site.getDeclaredFields();
@@ -146,10 +147,10 @@ public class PageFactory {
             Object obj = isStatic(field.getModifiers()) ? null : info.instance;
             setFieldWithInstance(pageInfo, obj);
         } catch (Exception ex) {
-            throw exception(initException(pageInfo.field, info.field.getType(), ex));
+            throw exception(initException(pageInfo.field, info.type(), ex));
         }
     }
-    private static void initUsingConstructor(SiteInfo info) {
+    private static void initWithConstructor(SiteInfo info) {
         try {
             info.instance = create(info.type());
         } catch (Exception ignore) {
@@ -157,7 +158,7 @@ public class PageFactory {
                 info.instance = create(info.type(), getDriver(info.driverName));
             } catch (Exception ex) {
                 throw exception("Can't create field '%s' instance of type '%s'. %sException: %s",
-                        info.name(), info.type(), LINE_BREAK, getException(ex));
+                        info.name(), info.type(), LINE_BREAK, safeException(ex));
             }
         }
     }
@@ -169,7 +170,7 @@ public class PageFactory {
                 return (T)(info.instance = firstRule.value.func.execute(info));
             } catch (Exception ex) {
                 throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'.%s Exception: %s",
-                        firstRule.key, info.name(), info.parentName(), LINE_BREAK, getException(ex));
+                        firstRule.key, info.name(), info.parentName(), LINE_BREAK, safeException(ex));
             }
         else
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES).",

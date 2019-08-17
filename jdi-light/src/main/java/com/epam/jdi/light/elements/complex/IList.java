@@ -79,7 +79,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
     @Override
     default int size() {
         try {
-            return base().noWait(() -> elements(0).size());
+            return base().noWait(() -> base().getList(0).size());
         } catch (Exception ignore) { return 0; }
     }
     @Override

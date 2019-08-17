@@ -5,18 +5,19 @@ package com.epam.jdi.light.ui.html.actions;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
-import com.epam.jdi.light.ui.html.elements.complex.Dropdown;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.epam.jdi.light.actions.ActionHelper.*;
-import static com.epam.jdi.light.actions.ActionProcessor.stableAction;
+import static com.epam.jdi.light.actions.ActionProcessor.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.Timer.nowTime;
 
 @SuppressWarnings("unused")
@@ -29,16 +30,17 @@ public class HtmlActions {
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
         try {
+            if (aroundCount() > 1)
+                return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jp);
+            if (aroundCount() == 1)
+                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
             Object element = jp.getThis() != null ? jp.getThis() : new Object();
-            throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, ex.getMessage()));
+            throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, safeException(ex)));
         }
     }
-    @Before("execution(* com.epam.jdi.light.elements.init.preInit())")
-    public void before() {
-        INTERFACES.add(IsDropdown.class, Dropdown.class);
-    }
+
 }

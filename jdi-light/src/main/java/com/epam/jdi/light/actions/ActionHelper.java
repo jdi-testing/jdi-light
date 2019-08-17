@@ -5,6 +5,7 @@ package com.epam.jdi.light.actions;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -27,6 +28,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.OutputTemplates.STEP_TEMPLATE;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
@@ -57,7 +59,7 @@ public class ActionHelper {
                 : fillTemplate(template, jp, method);
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: " +
-                    "Can't get action name: " + ex.getMessage());
+                    "Can't get action name: " + safeException(ex));
         }
     };
     public static String fillTemplate(String template,
@@ -168,7 +170,7 @@ public class ActionHelper {
             return null;
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: " +
-                    "Can't get method name template: " + ex.getMessage());
+                    "Can't get method name template: " + safeException(ex));
         }
     }
     private static LogLevels logLevel(JoinPoint joinPoint) {
@@ -259,7 +261,7 @@ public class ActionHelper {
             return result;
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: " +
-                    "Can't get action name: " + ex.getMessage());
+                    "Can't get action name: " + safeException(ex));
         }
     }
     //endregion

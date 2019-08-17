@@ -67,6 +67,7 @@ public class DropdownSelectTests extends TestsInit {
     public void isValidationTest() {
         dressCode.is().selected("Casual");
         dressCode.is().selected(Casual);
+        dressCode.values();
         dressCode.assertThat().values(hasItem("Pirate"));
         dressCode.assertThat()
             .disabled(hasItem("Disabled"))

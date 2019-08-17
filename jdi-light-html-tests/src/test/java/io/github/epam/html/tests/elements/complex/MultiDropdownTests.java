@@ -1,9 +1,11 @@
 package io.github.epam.html.tests.elements.complex;
 
+import com.epam.jdi.light.common.Exceptions;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.multiDropdown;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
@@ -62,7 +64,7 @@ public class MultiDropdownTests extends TestsInit {
             multiDropdown.select("Disabled");
             fail("Click on disabled element should throw exception");
         } catch (Exception ex) {
-            assertEquals(ex.getMessage(), "\nCan't perform click. Element is disabled");
+            assertEquals(safeException(ex), "\nCan't perform click. Element is disabled");
             assertEquals(multiDropdown.selected(), "Steam");
         }
     }

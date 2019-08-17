@@ -5,6 +5,7 @@ package com.epam.jdi.light.driver;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc;
@@ -16,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverInfos.*;
@@ -104,7 +106,7 @@ public class WebDriverFactory {
             useDriver(CHROME);
             return getDriver(CHROME.name);
         } catch (Exception ex) {
-            throw exception("Can't get WebDriver. " + LINE_BREAK + ex.getMessage());
+            throw exception("Can't get WebDriver. " + LINE_BREAK + safeException(ex));
         }
     }
 
@@ -145,7 +147,7 @@ public class WebDriverFactory {
         } catch (Exception ex) {
             throw exception("Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
                     format("Drivers: %s; Run: %s", DRIVERS, RUN_DRIVERS.get()) +
-                    "Exception: " + ex.getMessage());
+                    "Exception: " + safeException(ex));
         }
     }
 

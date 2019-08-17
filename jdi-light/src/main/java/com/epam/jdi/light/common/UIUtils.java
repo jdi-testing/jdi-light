@@ -133,7 +133,7 @@ public final class UIUtils {
         Constructor<?>[] constructors = cs.getDeclaredConstructors();
         List<Constructor<?>> listConst = filter(constructors, c -> c.getParameterCount() == params.length);
         if (listConst.size() == 0)
-            throw exception("%s has no appropriate constructors", cs.getSimpleName());
+            throw exception("%s has no constructor with %s params", cs.getSimpleName(), params.length);
         for(Constructor<?> cnst : listConst) {
             try {
                 return csInit(cnst, params);

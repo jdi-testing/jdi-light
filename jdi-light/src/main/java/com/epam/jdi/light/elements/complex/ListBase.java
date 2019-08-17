@@ -136,6 +136,8 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
         list().select(values);
     }
 
+    @Override
+    public int size() { return list().size(); }
     /**
      * Select the item by the index
      * @param index

@@ -5,10 +5,12 @@ package com.epam.jdi.light.driver;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.common.Exceptions;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
@@ -56,7 +58,7 @@ public class ScreenshotMaker {
         try {
             copyFile(screensFile, new File(screensFilePath));
         } catch (Exception ex) {
-            throw exception("Failed to do screenshot: " + ex.getMessage());
+            throw exception("Failed to do screenshot: " + safeException(ex));
         }
         logger.info("Screenshot: " + screensFilePath);
         return screensFilePath;

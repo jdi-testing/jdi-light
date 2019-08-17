@@ -161,7 +161,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
     public List<String> values(TextTypes type) {
         return map(asSelect().getOptions(), w -> $(w).text(type));
     }
-    public int size() { return asSelect().getOptions().size(); }
+
 
     /**
      * Get the list of enabled elements

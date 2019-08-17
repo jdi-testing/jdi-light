@@ -1,10 +1,12 @@
 package io.github.epam.html.tests.elements;
 
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.func.JAction;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.System.currentTimeMillis;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
@@ -15,20 +17,29 @@ public class BaseValidations {
 
     public static void baseValidation(ICoreElement el) {
         // EXCLUDED el.hover();
+        logger.info("Check enabled");
         assertTrue(el.isEnabled());
+        logger.info("Check displayed");
         assertTrue(el.isDisplayed());
+        logger.info("Check disabled");
         assertFalse(el.isDisabled());
+        logger.info("Check hidden");
         assertFalse(el.isHidden());
+        logger.info("Check getLocation");
         Point location = el.core().getLocation();
         assertTrue(location.x > 0 && location.y > 0, "Location: " + location);
+        logger.info("Check getSize");
         Dimension size = el.core().getSize();
         assertTrue(size.height > 0 && size.width > 0, "Size: " + location);
         //Rectangle rect = el.getRect();
         //assertTrue(rect.height > 0 && rect.width > 0 && rect.x > 0 && rect.y > 0, "Size: " + location);
+        logger.info("Check setAttribute");
         el.core().setAttribute("test-jdi", "test-value");
         assertEquals(el.attr("test-jdi"), "test-value");
+        logger.info("Check highlight");
         el.highlight("blue");
         el.highlight();
+        logger.info("Check show");
         el.show();
     }
 

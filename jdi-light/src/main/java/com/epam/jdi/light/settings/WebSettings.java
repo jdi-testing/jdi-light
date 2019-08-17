@@ -78,7 +78,6 @@ public class WebSettings {
     public static boolean hasDomain() {
         return DOMAIN != null && DOMAIN.contains("://");
     }
-    public static boolean initialized = false;
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
@@ -97,52 +96,53 @@ public class WebSettings {
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
     public static JFunc1<JDIBase, WebElement> SMART_SEARCH = el -> {
         String locatorName = SMART_SEARCH_NAME.execute(el.name);
-        for (String template : SMART_SEARCH_LOCATORS) {
-            UIElement ui = template.equals("#%s")
-                ? $(String.format(template, locatorName)).setup(e->e.setName(el.name))
-                : $(String.format(template, locatorName), el.parent).setup(e->e.setName(el.name));
-            try {
-                return ui.get();
-            } catch (Exception ignore) { }
-        }
-        throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.name);
+        return el.timer().getResult(() -> {
+            for (String template : SMART_SEARCH_LOCATORS) {
+                UIElement ui = (template.equals("#%s")
+                    ? $(String.format(template, locatorName))
+                    : $(String.format(template, locatorName), el.parent))
+                        .setup(e -> e.setName(el.name).setTimeout(0));
+                try {
+                    return ui.get();
+                } catch (Exception ignore) {
+                }
+            }
+            throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.name);
+        });
     };
 
     public static synchronized void init() {
-        if (!initialized) {
-            getProperties(TEST_PROPERTIES_PATH);
-            fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
-            fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
-            fillAction(p -> DOMAIN = p, "domain");
-            if (DRIVER_NAME.equals(DEFAULT_DRIVER))
-                fillAction(p -> DRIVER_NAME = p, "driver");
-            fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
-                    ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
-                        ? PRELATEST_VERSION : p, "driver.version");
-            fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
-            fillAction(p -> SCREEN_PATH = p, "screens.folder");
-            // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
-            fillAction(p -> KILL_BROWSER = p, "browser.kill");
-            fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
-            fillAction(p -> BROWSER_SIZE = p, "browser.size");
-            fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
-            fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
-            fillAction(SoftAssert::setAssertType, "assert.type");
+        getProperties(TEST_PROPERTIES_PATH);
+        fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
+        fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
+        fillAction(p -> DOMAIN = p, "domain");
+        if (DRIVER_NAME.equals(DEFAULT_DRIVER))
+            fillAction(p -> DRIVER_NAME = p, "driver");
+        fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
+                ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
+                    ? PRELATEST_VERSION : p, "driver.version");
+        fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
+        fillAction(p -> SCREEN_PATH = p, "screens.folder");
+        // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
+        fillAction(p -> KILL_BROWSER = p, "browser.kill");
+        fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
+        fillAction(p -> BROWSER_SIZE = p, "browser.size");
+        fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
+        fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
+        fillAction(SoftAssert::setAssertType, "assert.type");
 
-            // RemoteWebDriver properties
-            fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
+        // RemoteWebDriver properties
+        fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
 
-            loadCapabilities("chrome.capabilities.path",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
-            loadCapabilities("ff.capabilities.path",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
-            loadCapabilities("ie.capabilities.path",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
+        loadCapabilities("chrome.capabilities.path",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
+        loadCapabilities("ff.capabilities.path",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
+        loadCapabilities("ie.capabilities.path",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
 
-            INIT_THREAD_ID = Thread.currentThread().getId();
-            SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
-            initialized = true;
-        }
+        INIT_THREAD_ID = Thread.currentThread().getId();
+        SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
     }
 
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {

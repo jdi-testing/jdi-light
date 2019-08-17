@@ -16,6 +16,7 @@ import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.*;
@@ -23,6 +24,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,6 +57,22 @@ public class UIElement extends JDIBase
     public UIElement(By locator) { setLocator(locator); }
     public UIElement(JDIBase base) {
         super(base);
+    }
+    public UIElement(JDIBase base, String locator, String name, Object parent) {
+        super(base);
+        setLocator(locator);
+        setName(name);
+        setParent(parent);
+    }
+    public UIElement(JDIBase base, By locator, String name) {
+        super(base);
+        setLocator(locator);
+        setName(name);
+    }
+    public UIElement(JDIBase base, WebElement el, JFunc<WebElement> func) {
+        super(base);
+        setWebElement(el);
+        setGetFunc(func);
     }
     //endregion
 
@@ -367,7 +385,10 @@ public class UIElement extends JDIBase
      */
     @JDIAction(value = "Execute javascript '{0}' for '{name}'", level = DEBUG)
     public List<String> classes() {
-        return asList(attr("class").split(" "));
+        String cl = attr("class");
+        return cl.length() > 0
+            ? asList(attr("class").split(" "))
+            : new ArrayList<>();
     }
 
     /** return true if element has expected class */

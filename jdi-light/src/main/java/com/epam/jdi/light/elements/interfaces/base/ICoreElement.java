@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.interfaces.base;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.map.MapArray;
@@ -10,10 +11,15 @@ import java.util.List;
 public interface ICoreElement extends IBaseElement {
     UIElement core();
 
+    @JDIAction("Hover to '{name}'")
     default void hover() { core().hover(); }
+    @JDIAction("Check that '{name}' is enabled")
     default boolean isEnabled() { return core().isEnabled(); }
+    @JDIAction("Check that '{name}' is disabled")
     default boolean isDisabled() { return !isEnabled(); }
+    @JDIAction("Check that '{name}' is displayed")
     default boolean isDisplayed() { return core().isDisplayed(); }
+    @JDIAction("Check that '{name}' is hidden")
     default boolean isHidden() { return !isDisplayed(); }
     default void highlight(String color) { core().highlight(); }
     default void highlight() { core().highlight(); }

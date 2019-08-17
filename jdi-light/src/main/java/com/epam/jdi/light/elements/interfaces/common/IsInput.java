@@ -1,6 +1,8 @@
 package com.epam.jdi.light.elements.interfaces.common;
 
-public interface IsInput extends IsText {
+import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
+
+public interface IsInput extends IsText, HasPlaceholder {
     default void sendKeys(CharSequence... value) { core().sendKeys(value); }
     default void setText(String value) {
         core().setText(value);

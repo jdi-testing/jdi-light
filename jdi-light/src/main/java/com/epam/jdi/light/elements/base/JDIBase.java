@@ -11,10 +11,7 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
+import com.epam.jdi.tools.func.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
@@ -26,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.common.TextTypes.SMART;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
@@ -69,10 +67,11 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         failElement = base.failElement;
         driverName = base.driverName;
         context = base.printFullLocator();
-        webElement = base.webElement;
-        webElements = base.webElements;
+        webElement = new CacheValue<>(base.webElement);
+        webElements = new CacheValue<>(base.webElements);
         searchRules = base.searchRules;
         beforeSearch = base.beforeSearch;
+        timeout = base.timeout;
         return this;
     }
     public JDILocator locator = new JDILocator();
@@ -89,11 +88,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return searchRules;
     }
     public JAction1<UIElement> beforeSearch = null;
-    public JAction1<UIElement> beforeSearch() {
-        if (beforeSearch == null) {
-            return BEFORE_SEARCH;
-        }
-        return beforeSearch;
+    public WebElement beforeSearch(WebElement el) {
+        (beforeSearch == null ? BEFORE_SEARCH : beforeSearch).execute(new UIElement(el));
+        return el;
     }
 
     public JDIBase doBefore(JAction1<UIElement> action) { beforeSearch = action; return this; }
@@ -164,42 +161,42 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return this;
     }
     public WebElement get(Object... args) {
-        beforeSearch().execute(new UIElement(this));
+        manageTimeout();
         if (webElement.hasValue()) {
             WebElement element = webElement.get();
             try {
                 element.getTagName();
-                return element;
+                return beforeSearch(element);
             } catch (Exception ignore) {
                 if (getElementFunc == null)
                     webElement.clear();
                 else {
-                    return webElement.set(getElementFunc.execute());
+                    return beforeSearch(webElement.set(getElementFunc.execute()));
                 }
             }
         }
         if (locator.isEmpty())
-            return getSmart();
+            return beforeSearch(getSmart());
         if (locator.isTemplate() && args.length == 0)
             throw exception("Can't get element with template locator '%s' without arguments", getLocator());
-        List<WebElement> result = getAllElements(args);
-        if (result.size() == 1)
-            return result.get(0);
-        if (result.size() == 0)
-            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
-        List<WebElement> filtered = filterElements(result);
+        List<WebElement> els = getAllElements(args);
+        if (els.size() == 1)
+            return els.get(0);
+        if (els.size() == 0)
+            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
+        List<WebElement> filtered = filterElements(els);
         if (filtered.size() == 1)
             return filtered.get(0);
         if (STRICT_SEARCH)
-            throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, result.size(), toString(), TIMEOUT.get());
-        return (filtered.size() > 1 ? filtered : result).get(0);
+            throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, els.size(), toString(), getTimeout());
+        return (filtered.size() > 1 ? filtered : els).get(0);
     }
     private List<WebElement> filterElements(List<WebElement> elements) {
         List<WebElement> result = elements;
         for (JFunc1<WebElement, Boolean> rule : searchRules())
             result = filter(result, rule::execute);
         if (result.size() == 0)
-            throw exception(ELEMENTS_FILTERED_MESSAGE, elements.size(), toString(), TIMEOUT.get());
+            throw exception(ELEMENTS_FILTERED_MESSAGE, elements.size(), toString(), getTimeout());
         return result;
     }
     private WebElement getSmart() {
@@ -209,44 +206,46 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 return element;
             throw exception("");
         } catch (Exception ex) {
-            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), TIMEOUT.get());
+            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
         }
     }
 
     public List<WebElement> getAll(Object... args) {
-        beforeSearch().execute(new UIElement(this));
+        manageTimeout();
         return getAllElements(args);
     }
     public List<WebElement> getAllElements(Object... args) {
         if (webElements.hasValue()) {
             List<WebElement> elements = webElements.get();
             try {
-                elements.get(0).getTagName();
+                beforeSearch(elements.get(0)).getTagName();
                 return elements;
             } catch (Exception ignore) { webElements.clear(); }
         }
         if (locator.isEmpty())
-            return asList(SMART_SEARCH.execute(this));
+            return asList(beforeSearch(SMART_SEARCH.execute(this)));
         SearchContext searchContext = getContext(parent, locator);
-        return uiSearch(searchContext, correctLocator(getLocator(args)));
+        List<WebElement> result = uiSearch(searchContext, correctLocator(getLocator(args)));
+        if (result.size() > 0)
+            beforeSearch(result.get(0));
+        return result;
     }
     public List<WebElement> getList(int minAmount) {
-        beforeSearch().execute(new UIElement(this));
         List<WebElement> result = timer().getResultByCondition(this::tryGetList,
                 els -> els.size() >= minAmount);
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
         return result;
     }
-    private List<WebElement> tryGetList() {
-        List<WebElement> elements = getAllElements();
+    protected List<WebElement> tryGetList() {
+        List<WebElement> elements = getAll();
         if (elements == null)
             throw exception("No elements found (%s)", toString());
         if (elements.size() == 1)
             elements = processListTag(elements);
         return elements;
     }
-    private List<WebElement> processListTag(List<WebElement> elements) {
+    protected List<WebElement> processListTag(List<WebElement> elements) {
         WebElement element = elements.get(0);
         String tagName = element.getTagName();
         switch (tagName) {
@@ -261,33 +260,43 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public WebList list(Object... args) {
         return $$(getAll(args), getName());
     }
-    public <T> T noWait(JFunc<T> action) {
-        int temp = getTimeout();
-        int tempGlobal = TIMEOUT.get();
-        driver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        setTimeout(0);
-        T result = action.execute();
-        setTimeout(temp);
-        driver().manage().timeouts().implicitlyWait(tempGlobal, TimeUnit.SECONDS);
-        return result;
+    public <TE extends IBaseElement> void waitAction(int sec, JAction1<TE> action, Class<TE> type) {
+        waitFunc(sec, j -> { action.execute(j); return this; }, type);
     }
-
-    public <TE extends IBaseElement, TR> TR noWait(JFunc1<TE, TR> action, Class<TE> type) {
+    public <TE extends IBaseElement, TR> TR waitFunc(int sec, JFunc1<TE, TR> action, Class<TE> type) {
         int temp = getTimeout();
-        int tempGlobal = TIMEOUT.get();
-        driver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        setTimeout(0);
+        setTimeout(sec);
+        manageTimeout(sec);
         TR result = action.execute((TE)this);
         setTimeout(temp);
-        driver().manage().timeouts().implicitlyWait(tempGlobal, TimeUnit.SECONDS);
+        dropToGlobalTimeout();
         return result;
+    }
+    public <T> T waitFunc(int sec, JFunc<T> func) {
+        return waitFunc(sec, j -> func.execute(), IBaseElement.class);
+    }
+    public <T> T noWait(JFunc<T> func) {
+        return waitFunc(0, func);
+    }
+    public <TE extends IBaseElement, TR> TR noWait(JFunc1<TE, TR> action, Class<TE> type) {
+        return waitFunc(0, action, type);
+    }
+    public void manageTimeout() {
+        if (timeout > -1)
+            manageTimeout(timeout);
+    }
+    public void dropToGlobalTimeout() {
+        manageTimeout(TIMEOUT.get());
+    }
+    protected void manageTimeout(int time) {
+        driver().manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
     }
 
     private JDIBase getBase(Object element) {
         if (isClass(element.getClass(), JDIBase.class))
             return  (JDIBase) element;
-        else { if (isInterface(element.getClass(), ICoreElement.class))
-            return  ((ICoreElement) element).core(); }
+        else { if (isInterface(element.getClass(), IBaseElement.class))
+            return  ((IBaseElement) element).base(); }
         return null;
     }
     private SearchContext getSearchContext(Object element) {
@@ -353,7 +362,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         initContext();
         try {
             return PRINT_ELEMENT.execute(this);
-        } catch (Exception ex) { throw exception("Can't print element: " + ex.getMessage()); }
+        } catch (Exception ex) { throw exception("Can't print element: " + safeException(ex)); }
     }
     private static String printWebElement(WebElement element) {
         String asString = element.toString().replaceAll("css selector", "css");

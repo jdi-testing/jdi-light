@@ -5,6 +5,7 @@ package com.epam.jdi.light.driver.get;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.Dimension;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.driver.get.Platform.X32;
@@ -105,7 +107,7 @@ public class DriverData {
             driver.manage().window().setSize(maximizedScreenSize);
             return driver;
         } catch (Exception ex) {
-            logger.error("Failed to Maximize screen: " + ex.getMessage());
+            logger.error("Failed to Maximize screen: " + safeException(ex));
             throw ex;
         }
     }
@@ -130,7 +132,7 @@ public class DriverData {
             CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
             return cap;
         } catch (Exception ex) {
-            throw exception("Failed Init Chrome Driver settings: " + ex.getMessage());
+            throw exception("Failed Init Chrome Driver settings: " + safeException(ex));
         }
     };
 
@@ -159,7 +161,7 @@ public class DriverData {
             CAPABILITIES_FOR_FF.forEach(cap::setCapability);
             return cap;
         } catch (Exception ex) {
-            throw exception("Failed Init Firefox Driver settings: " + ex.getMessage());
+            throw exception("Failed Init Firefox Driver settings: " + safeException(ex));
         }
     };
 
@@ -184,7 +186,7 @@ public class DriverData {
     //        cap.setCapability("password", WebSettings.DRIVER_REMOTE_USER_PASSWORD);
             return cap;
         } catch (Exception ex) {
-            throw exception("Failed Init Internet Explorer Driver settings: " + ex.getMessage());
+            throw exception("Failed Init Internet Explorer Driver settings: " + safeException(ex));
         }
     };
 

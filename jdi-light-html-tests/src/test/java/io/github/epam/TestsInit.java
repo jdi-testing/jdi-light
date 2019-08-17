@@ -1,5 +1,6 @@
 package io.github.epam;
 
+import com.epam.jdi.light.ui.html.HtmlSettings;
 import io.github.com.StaticSite;
 import io.github.com.pages.MetalAndColorsPage;
 import org.testng.annotations.AfterSuite;
@@ -13,16 +14,15 @@ import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
-import static io.github.com.StaticSite.metalAndColorsPage;
-import static io.github.com.pages.MetalAndColorsPage.*;
 
 public class TestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         logger.setLogLevel(INFO);
-        SMART_SEARCH_LOCATORS.add("[ui=%s]");
-        initSite(PseudoSite.class);
+        HtmlSettings.init();
         initSite(StaticSite.class);
+        initSite(PseudoSite.class);
+        SMART_SEARCH_LOCATORS.add("[ui=%s]");
         homePage.open();
         logger.toLog("Run Tests");
     }

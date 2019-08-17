@@ -40,5 +40,6 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     default void setValue(String value) { select(value); }
     @JDIAction("Check that '{name}' is displayed")
     default boolean isDisplayed() { return list().isDisplayed(); }
+    default int size() { return list().size(); }
 
 }

@@ -2,6 +2,7 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.ListElementNameTypes;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.ListElementNameTypes.INNER;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
@@ -47,7 +49,7 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     protected String listLocator = "li";
     @Override
     public WebList list() {
-        return linkedList(listLocator, "list");
+        return linkedList(listLocator, "list").setUIElementName(INNER);
     }
 
     public void toggle() {
@@ -111,6 +113,10 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
         if (isNotBlank(j.list()))
             listLocator = j.list();
         setupDone = true;
+    }
+    @JDIAction("Check that '{name}' is displayed") @Override
+    public boolean isDisplayed() {
+        return value().isDisplayed();
     }
 
 }

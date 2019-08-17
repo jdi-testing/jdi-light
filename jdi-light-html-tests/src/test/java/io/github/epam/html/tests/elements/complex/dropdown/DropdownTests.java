@@ -1,9 +1,21 @@
 package io.github.epam.html.tests.elements.complex.dropdown;
 
+import com.epam.jdi.light.common.Exceptions;
+import com.epam.jdi.light.common.UIUtils;
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.ui.html.elements.complex.DropdownExpand;
+import com.epam.jdi.tools.Timer;
+import com.epam.jdi.tools.map.MapArray;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.TextTypes.INNER_TEXT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.metalAndColorsPage;
@@ -60,11 +72,12 @@ public class DropdownTests extends TestsInit {
     @Test
     public void negativeDroplistTest() {
         try {
-            TIMEOUT.set(1);
+            colors.base().setTimeout(1);
             colors.select("GreyBrownCrimson");
+            //colors.base().waitAction(1, j -> j.select("GreyBrownCrimson"), DropdownExpand.class);
             fail("You have selected color that does not exist in droplist - something went wrong");
         } catch (Exception ex) {
-            assertThat(ex.getMessage(), containsString("Can't select 'GreyBrownCrimson'. No elements with this name found"));
+            assertThat(safeException(ex), containsString("Can't get 'GreyBrownCrimson'. No elements with this name found"));
         }
     }
 
@@ -88,10 +101,6 @@ public class DropdownTests extends TestsInit {
     @Test
     public void innerValuesTest() {
         assertThat(colors.values(INNER_TEXT), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
-    }
-    @Test
-    public void isDisplayedTest() {
-        assertThat(colors.isDisplayed(), is(true));
     }
     @Test
     public void expandTests() {
