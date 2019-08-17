@@ -9,6 +9,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.light.logger.LogLevels;
@@ -27,6 +28,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.OutputTemplates.STEP_TEMPLATE;
@@ -46,7 +48,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class ActionHelper {
 
-    private static String getTemplate(LogLevels level) {
+    static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
     }
     public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = jp -> {
@@ -74,13 +76,18 @@ public class ActionHelper {
                 MapArray<String, Object> obj = toMap(() -> new MapArray<>("this", getElementName(jp)));
                 MapArray<String, Object> args = methodArgs(jp, method);
                 MapArray<String, Object> core = core(jp);
-                MapArray<String, Object> fields = classFields(jp);
+                MapArray<String, Object> fields = classFields(jp.getThis());
                 template = getActionNameFromTemplate(method, template, obj, args, core, fields);
                 if (template.contains("{{VALUE}}") && args.size() > 0)
-                    template = template.replaceAll("\\{\\{VALUE\\}\\}", args.get(0).toString());
+                    template = template.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
+                if (template.contains("{failElement}"))
+                    template = template.replaceAll("\\{failElement}", obj.get(0).value.toString());
             }
             return template;
-        } catch (Exception ex) { throw new RuntimeException("Can't fill JDIAction template: " + template + " for method: " + method.getName()); }
+        } catch (Exception ex) {
+            throw new RuntimeException("Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName() +
+            LINE_BREAK + " Exception: " + safeException(ex));
+        }
     }
 
     public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
@@ -104,13 +111,13 @@ public class ActionHelper {
             logger.debug("Done");
         return result;
     };
-    private static boolean logResult(ProceedingJoinPoint jp) {
+    static boolean logResult(ProceedingJoinPoint jp) {
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class)) return false;
         JDIAction ja = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
         return ja != null && ja.logResult();
     }
-    static Class<?> getJpClass(ProceedingJoinPoint jp) {
+    static Class<?> getJpClass(JoinPoint jp) {
         return jp.getThis() != null
                 ? jp.getThis().getClass()
                 : jp.getSignature().getDeclaringType();
@@ -120,7 +127,7 @@ public class ActionHelper {
         (jp, result) -> AFTER_STEP_ACTION.execute(jp, result);
 
     //region Private
-    private static String getBeforeLogString(ProceedingJoinPoint jp) {
+    static String getBeforeLogString(ProceedingJoinPoint jp) {
         String actionName = GET_ACTION_NAME.execute(jp);
         String logString = jp.getThis() == null
             ? actionName
@@ -130,9 +137,9 @@ public class ActionHelper {
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
 
-    public static void processNewPage(JoinPoint joinPoint) {
+    public static void processNewPage(JoinPoint jp) {
         getWindows();
-        Object element = joinPoint.getThis();
+        Object element = jp.getThis();
         if (element != null) { // TODO support static pages
             WebPage page = getPage(element);
             String currentPage = getCurrentPage();
@@ -147,7 +154,7 @@ public class ActionHelper {
     }
 
     public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
-    private static WebPage getPage(Object element) {
+    static WebPage getPage(Object element) {
         if (isClass(element.getClass(), DriverBase.class) &&
             !isClass(element.getClass(), WebPage.class))
             return ((DriverBase) element).getPage();
@@ -172,14 +179,14 @@ public class ActionHelper {
                     "Can't get method name template: " + safeException(ex));
         }
     }
-    private static LogLevels logLevel(JoinPoint joinPoint) {
+    static LogLevels logLevel(JoinPoint joinPoint) {
         Method m = getJpMethod(joinPoint).getMethod();
         return m.isAnnotationPresent(JDIAction.class)
                 ? m.getAnnotation(JDIAction.class).level()
                 : STEP;
     }
 
-    private static String getDefaultName(String method, MapArray<String, Object> args) {
+    static String getDefaultName(String method, MapArray<String, Object> args) {
         if (args.size() == 1 && args.get(0).value.getClass().isArray())
             return format("%s(%s)", method, arrayToString(args.get(0).value));
         MapArray<String, String> methodArgs = args.toMapArray(Object::toString);
@@ -216,33 +223,39 @@ public class ActionHelper {
         return result;
     }
 
-    static MapArray<String, Object> core(JoinPoint joinPoint) {
-        Class cl = joinPoint.getSignature().getDeclaringType();
-        if (isInterface(cl, ICoreElement.class)) {
-            UIElement el = ((ICoreElement) joinPoint.getThis()).core();
+    static MapArray<String, Object> core(JoinPoint jp) {
+        Class cl = jp.getSignature().getDeclaringType();
+        if (jp.getThis() != null && isInterface(cl, ICoreElement.class)) {
+            UIElement el = ((ICoreElement) jp.getThis()).core();
             return getAllFields(el);
         }
         return new MapArray<>();
     }
-    static MapArray<String, Object> classFields(JoinPoint joinPoint) {
-        return getAllFields(joinPoint.getThis());
+    static MapArray<String, Object> classFields(Object obj) {
+        return obj != null ? getAllFields(obj) : new MapArray<>();
     }
 
     static String getElementName(JoinPoint jp) {
-        if (isInterface(jp.getThis().getClass(), ICoreElement.class))
-            return ((ICoreElement)jp.getThis()).base().getName();
-        MapArray<String, Object> fields = classFields(jp);
-        if (fields.keys().contains("element")) {
-            Object element = fields.get("element");
-            if (element != null && isInterface(element.getClass(), ICoreElement.class))
-                return ((ICoreElement)element).base().toString();
+        try {
+            Object obj = jp.getThis();
+            if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
+            if (isInterface(getJpClass(jp), IBaseElement.class))
+                return ((IBaseElement) obj).base().getName();
+            MapArray<String, Object> fields = classFields(obj);
+            if (fields.keys().contains("element")) {
+                Object element = fields.get("element");
+                if (element != null && isInterface(element.getClass(), IBaseElement.class))
+                    return ((IBaseElement) element).base().toString();
+            }
+            if (fields.keys().contains("name")) {
+                Object name = fields.get("name");
+                if (name != null)
+                    return name.toString();
+            }
+            return obj.toString();
+        } catch (Exception ex) {
+            throw exception("Can't get element name");
         }
-        if (fields.keys().contains("name"))
-            return fields.get("name").toString();
-        Object obj = jp.getThis();
-        return obj != null
-                ? obj.toString()
-                : jp.getSignature().getDeclaringType().getSimpleName();
     }
     static String getActionNameFromTemplate(MethodSignature method, String value,
                                             MapArray<String, Object>... args) {

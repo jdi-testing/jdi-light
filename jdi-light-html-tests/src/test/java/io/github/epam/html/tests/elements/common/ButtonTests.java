@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.common.ElementArea.BOTTOM_RIGHT;
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
@@ -104,8 +105,8 @@ public class ButtonTests extends TestsInit {
     @Test
     public void suspendButtonTest() {
         refresh();
-        durationMoreThan(3,
-            () -> suspendButton.click());
+        //suspendButton.click();
+        durationMoreThan(3, () -> suspendButton.click(BOTTOM_RIGHT));
         assertEquals(getAlertText(), "Suspend button");
         acceptAlert();
     }

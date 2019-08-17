@@ -9,7 +9,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 public class Exceptions {
     public static RuntimeException exception(String msg, Object... args) {
-        String message = format(msg, args);
+        String message = args.length == 0 ? msg : format(msg, args);
         return new RuntimeException(LINE_BREAK + message);
     }
 

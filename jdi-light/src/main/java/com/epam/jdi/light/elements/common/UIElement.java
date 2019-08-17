@@ -15,6 +15,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
+import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -247,7 +248,7 @@ public class UIElement extends JDIBase
     }
 
     public void click(int x, int y) {
-        actionsWitElement((a, e) -> a.moveByOffset(x, y).click());
+        actionsWitElement((a, e) -> a.moveByOffset(x-getRect().width/2, y-getRect().height/2).click());
     }
     public void click(ElementArea area) {
         if (isDisabled())
@@ -280,9 +281,19 @@ public class UIElement extends JDIBase
                 ElementArea clArea = timer().getResultByCondition(
                     this::getElementClickableArea, Objects::nonNull);
                 if (clArea == null)
-                    throw exception("%s is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong", getName());
+                    throw getNotClickableException();
+                if (clArea != CENTER) {
+                    Timer.sleep(200);
+                    clArea = timer().getResultByCondition(
+                        this::getElementClickableArea, Objects::nonNull);
+                }
+                if (clArea == null)
+                    throw getNotClickableException();
                 click(clArea);
         }
+    }
+    private RuntimeException getNotClickableException() {
+        return exception("%s is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong", getName());
     }
     private ElementArea getElementClickableArea() {
         return Switch().get(

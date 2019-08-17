@@ -72,7 +72,7 @@ public class ActionProcessor {
                 ? overrideAction.execute(obj) : jp.proceed();
     }
     public static JDIBase getJdi(ProceedingJoinPoint jp) {
-        return jp.getThis() != null && isInterface(jp.getThis().getClass(), IBaseElement.class)
+        return jp.getThis() != null && isInterface(getJpClass(jp), IBaseElement.class)
             ? ((IBaseElement) jp.getThis()).base() : null;
     }
     public static Object stableAction(ProceedingJoinPoint jp) {
@@ -81,7 +81,7 @@ public class ActionProcessor {
             //logger.logOff();
             //TIMEOUT.freeze();
             String exception = "";
-            if (jp.getThis() != null && isInterface(jp.getThis().getClass(), IBaseElement.class))
+            if (jp.getThis() != null && isInterface(getJpClass(jp), IBaseElement.class))
                 obj = ((IBaseElement) jp.getThis()).base();
             JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
             JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
