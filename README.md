@@ -1,15 +1,25 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/49c13734696f4baaacc3dde33926b6a1)](https://www.codacy.com/app/jdi-testing/jdi-light?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jdi-testing/jdi-light&amp;utm_campaign=Badge_Grade)
-[![Build Status](https://travis-ci.org/jdi-testing/jdi-light.svg?branch=master)](https://travis-ci.org/jdi-testing/jdi-light)
 
 # JDI Light Test Automation Framework
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![stackoverflow](https://img.shields.io/badge/stackoverflow-jdi-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/jdi)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/angular/angular.js/blob/master/LICENSE)
+[![stackoverflow](https://img.shields.io/badge/stackoverflow-jdi-blue.svg?style=flat)](http://stackoverflow.com/questions/tagged/jdi)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light?ref=badge_shield)
 
 ## Documentation
+For fast start you can go through [tutorial](https://jdi-docs.github.io/jdi-light/?java#tutorial) </br>
 
-Can be found [here](https://jdi-docs.github.io/jdi-light/#common-elements)
+More links: </br>
+Documentation: https://jdi-docs.github.io/jdi-light/?java - different types of documentation from introduction and tutorial to technical methods documentation </br>
+Introduction + fast start example: https://jdi-docs.github.io/jdi-light/?java#introduction </br>
+Tutorial: https://jdi-docs.github.io/jdi-light/?java#tutorial - helps to get main ideas on practice </br>
+Tutorial repo:  https://github.com/jdi-tutorials </br>
+Project templates: https://github.com/jdi-templates - for fast projects start </br>
+Examples: https://github.com/jdi-examples </br>
+How to use [UI Elements examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests/src/test/java/io/github/epam/html/tests/elements) </br>
+Increase test [performance examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-performance) </br>
+ </br>
+**Note: JDI Light natively work with JDK 8. Some problems identified with JDK 12 so it is not recommended** </br>
 
 ## Introduction
 

@@ -63,7 +63,7 @@ public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert
     /**
      * Match passed value with elements
      * @param condition to compare
-     * @return UIListAsserts
+     * @return DataListAssert
      */
     @JDIAction("Assert that {name} data meet condition")
     public DataListAssert<T, D> isData(Matcher<? super List<D>> condition) {
