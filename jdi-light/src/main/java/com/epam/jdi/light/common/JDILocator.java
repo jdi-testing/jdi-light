@@ -3,8 +3,8 @@ package com.epam.jdi.light.common;
 import com.epam.jdi.light.elements.base.JDIBase;
 import org.openqa.selenium.By;
 
-import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.LocatorType.DEFAULT;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;

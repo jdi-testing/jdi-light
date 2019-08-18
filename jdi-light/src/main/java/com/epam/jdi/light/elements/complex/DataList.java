@@ -6,7 +6,6 @@ package com.epam.jdi.light.elements.complex;
  */
 
 import com.epam.jdi.light.asserts.core.DataListAssert;
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.tools.LinqUtils;
@@ -19,8 +18,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
-import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.UIUtils.asEntity;
 import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;

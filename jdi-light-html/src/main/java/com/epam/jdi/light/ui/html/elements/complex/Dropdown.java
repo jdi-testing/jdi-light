@@ -2,7 +2,6 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 
 import java.util.List;
 

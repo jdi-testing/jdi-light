@@ -8,7 +8,6 @@ package com.epam.jdi.light.elements.pageobjects.annotations.objects;
 import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class FillFromAnnotationRules {

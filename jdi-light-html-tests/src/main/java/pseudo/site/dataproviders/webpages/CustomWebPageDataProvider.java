@@ -2,7 +2,6 @@ package pseudo.site.dataproviders.webpages;
 
 import org.testng.annotations.DataProvider;
 
-import static pseudo.site.PseudoSite.customSection;
 import static pseudo.site.PseudoSite.customWebPage;
 
 public class CustomWebPageDataProvider {

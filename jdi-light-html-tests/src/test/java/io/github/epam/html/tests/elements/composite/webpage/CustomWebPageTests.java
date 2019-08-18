@@ -1,7 +1,5 @@
 package io.github.epam.html.tests.elements.composite.webpage;
 
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;

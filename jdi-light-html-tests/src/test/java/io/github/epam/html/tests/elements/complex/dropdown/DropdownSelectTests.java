@@ -8,18 +8,21 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.dressCode;
 import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
+import static io.github.com.pages.HtmlElementsPage.dressCode;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.elements.complex.enums.Dress.Casual;
-import static io.github.epam.html.tests.elements.complex.enums.Dress.Fancy;
-import static io.github.epam.html.tests.elements.complex.enums.Dress.Pirate;
+import static io.github.epam.html.tests.elements.complex.enums.Dress.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
+
+/**
+ * Created by Roman Iovlev on 19.08.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 
 public class DropdownSelectTests extends TestsInit {
 

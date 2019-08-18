@@ -7,11 +7,11 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.TextTypes.INNER_TEXT;
 import static io.github.com.StaticSite.metalAndColorsPage;
-import static io.github.com.pages.HtmlElementsPage.dressCode3;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.com.pages.MetalAndColorsPage.colors;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.elements.complex.enums.Colors.*;
+import static io.github.epam.html.tests.elements.complex.enums.Colors.Green;
+import static io.github.epam.html.tests.elements.complex.enums.Colors.Yellow;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -19,7 +19,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 /**
- * Skype: a.filichkin
+ * Created by Roman Iovlev on 19.08.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
 public class DropdownExTests extends TestsInit {

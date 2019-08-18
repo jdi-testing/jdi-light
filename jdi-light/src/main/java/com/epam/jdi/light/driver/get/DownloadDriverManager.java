@@ -1,10 +1,9 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.light.common.Exceptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.DriverInfo.getBelowVersion;

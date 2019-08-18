@@ -12,6 +12,11 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Created by Roman Iovlev on 19.08.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
+
 public class MonthTests extends TestsInit {
 
     @BeforeMethod

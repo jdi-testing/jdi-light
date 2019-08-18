@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.suspend.simple;
 
-import com.epam.jdi.light.common.Exceptions;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

@@ -1,13 +1,11 @@
 package io.github.epam.html.tests.elements.common;
 
-import com.epam.jdi.light.common.Exceptions;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.ElementArea.BOTTOM_RIGHT;
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
 import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
@@ -22,6 +20,11 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
+
+/**
+ * Created by Roman Iovlev on 19.08.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 
 public class ButtonTests extends TestsInit {
 
@@ -105,8 +108,7 @@ public class ButtonTests extends TestsInit {
     @Test
     public void suspendButtonTest() {
         refresh();
-        //suspendButton.click();
-        durationMoreThan(3, () -> suspendButton.click(BOTTOM_RIGHT));
+        durationMoreThan(3, () -> suspendButton.click());
         assertEquals(getAlertText(), "Suspend button");
         acceptAlert();
     }

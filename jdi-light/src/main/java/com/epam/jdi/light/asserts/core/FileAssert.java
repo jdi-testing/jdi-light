@@ -1,20 +1,17 @@
 package com.epam.jdi.light.asserts.core;
 
 import com.epam.jdi.light.asserts.generic.BaseAssert;
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.Timeout;
-import com.epam.jdi.light.settings.TimeoutSettings;
 import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matcher;
 
 import java.io.File;
 import java.io.IOException;
 
-import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
-import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static java.util.Objects.requireNonNull;

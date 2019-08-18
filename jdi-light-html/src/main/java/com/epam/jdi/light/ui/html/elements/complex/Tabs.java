@@ -9,7 +9,6 @@ import com.epam.jdi.tools.func.JFunc1;
 
 import java.util.List;
 
-
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 public class Tabs extends UIListBase<UISelectAssert> {

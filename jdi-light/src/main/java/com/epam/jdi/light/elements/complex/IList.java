@@ -20,7 +20,6 @@ import java.util.ListIterator;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 
 public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {

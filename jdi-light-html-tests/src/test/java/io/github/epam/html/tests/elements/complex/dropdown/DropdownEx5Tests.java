@@ -1,7 +1,5 @@
 package io.github.epam.html.tests.elements.complex.dropdown;
 
-import com.epam.jdi.light.ui.html.elements.complex.Dropdown;
-import com.epam.jdi.light.ui.html.elements.complex.DropdownExpand;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,7 +19,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 /**
- * Skype: a.filichkin
+ * Created by Roman Iovlev on 19.08.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
 public class DropdownEx5Tests extends TestsInit {
@@ -29,7 +28,6 @@ public class DropdownEx5Tests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
-        colors5.valueLocator = ".filter-option";
         colors5.select(text);
     }
     String text = "Colors";

@@ -1,20 +1,6 @@
 package io.github.com.custom;
 
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.elements.complex.Dropdown;
-import com.epam.jdi.tools.func.JFunc1;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static java.lang.String.format;
 
 public class MultiDropdown extends Dropdown {
 //

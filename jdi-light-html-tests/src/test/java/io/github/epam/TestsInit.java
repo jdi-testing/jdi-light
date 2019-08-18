@@ -2,7 +2,6 @@ package io.github.epam;
 
 import com.epam.jdi.light.ui.html.HtmlSettings;
 import io.github.com.StaticSite;
-import io.github.com.pages.MetalAndColorsPage;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pseudo.site.PseudoSite;

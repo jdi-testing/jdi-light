@@ -1,6 +1,5 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.tools.DataClass;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.Capabilities;
@@ -9,8 +8,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.isRemote;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;

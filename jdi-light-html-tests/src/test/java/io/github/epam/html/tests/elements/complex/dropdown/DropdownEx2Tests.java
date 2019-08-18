@@ -19,7 +19,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 /**
- * Skype: a.filichkin
+ * Created by Roman Iovlev on 19.08.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
 public class DropdownEx2Tests extends TestsInit {
