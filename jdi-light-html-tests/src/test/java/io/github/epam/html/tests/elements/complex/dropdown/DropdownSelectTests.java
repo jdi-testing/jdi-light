@@ -4,13 +4,17 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
+import static io.github.com.pages.HtmlElementsPage.dressCode;
 import static io.github.com.pages.HtmlElementsPage.dressCode;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.Casual;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.Fancy;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
@@ -51,6 +55,10 @@ public class DropdownSelectTests extends TestsInit {
     }
 
     @Test
+    public void sizeTest() {
+        assertEquals(dressCode.size(), 4);
+    }
+    @Test
     public void disabledTest() {
         if (isFireFox()) return;
         disabledDropdown.select("Pirate");
@@ -67,14 +75,39 @@ public class DropdownSelectTests extends TestsInit {
     public void isValidationTest() {
         dressCode.is().selected("Casual");
         dressCode.is().selected(Casual);
-        dressCode.values();
-        dressCode.assertThat().values(hasItem("Pirate"));
-        dressCode.assertThat()
-            .disabled(hasItem("Disabled"))
-            .enabled(not(hasItem("Disabled")))
-            .enabled(hasItems("Pirate", "Fancy"));
     }
 
+    @Test
+    public void valuesTest() {
+        List<String> values = dressCode.values();
+        assertEquals(values, asList("Fancy", "Casual", "Disabled", "Pirate"));
+    }
+
+    @Test
+    public void assertValuesTest() {
+        dressCode.assertThat().values(hasItem("Pirate"));
+        dressCode.assertThat().values(hasItems("Fancy", "Pirate", "Casual", "Disabled"));
+        dressCode.assertThat()
+                .disabled(hasItem("Disabled"))
+                .enabled(not(hasItem("Disabled")))
+                .enabled(hasItems("Pirate", "Fancy"));
+    }
+
+    @Test
+    public void listEnabledTest() {
+        assertEquals(dressCode.listEnabled(), asList("Fancy", "Casual", "Pirate"));
+        dressCode.is()
+                .enabled(hasItems("Fancy", "Pirate", "Casual"))
+                .enabled(not(hasItem("Disabled")));
+    }
+
+    @Test
+    public void listDisabledTest() {
+        assertEquals(dressCode.listDisabled(), asList("Disabled"));
+        dressCode.is()
+                .disabled(hasItems("Disabled"))
+                .disabled(not(hasItems("Fancy", "Pirate", "Casual")));
+    }
     @Test
     public void assertValidationTest() {
         dressCode.assertThat().values(contains("Fancy", "Casual", "Disabled", "Pirate"));

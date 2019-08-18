@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.ui.html.elements.common.*;
 import com.epam.jdi.light.ui.html.elements.complex.*;
@@ -69,6 +70,7 @@ public class HtmlElementsPage extends WebPage {
 
     public static DropdownSelect dressCode;
     @UI("#dress-code") public static Dropdown dressCode2;
+    @UI("#dress-code") public static IsDropdown dressCode3;
     // @UI("#dress-code") public static Dropdown dressCode;
     @UI("#disabled-dropdown") public static DropdownSelect disabledDropdown;
 

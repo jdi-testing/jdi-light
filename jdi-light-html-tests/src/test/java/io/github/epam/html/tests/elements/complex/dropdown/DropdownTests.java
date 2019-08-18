@@ -1,23 +1,11 @@
 package io.github.epam.html.tests.elements.complex.dropdown;
 
-import com.epam.jdi.light.common.Exceptions;
-import com.epam.jdi.light.common.UIUtils;
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.ui.html.elements.complex.DropdownExpand;
-import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.map.MapArray;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.TextTypes.INNER_TEXT;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.com.pages.MetalAndColorsPage.colors;

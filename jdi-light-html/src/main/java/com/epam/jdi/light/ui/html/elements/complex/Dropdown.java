@@ -1,6 +1,7 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 
 import java.util.List;
@@ -17,7 +18,9 @@ public class Dropdown extends DropdownExpand {
     protected IsDropdown dropdown() {
         return setupDone ? this : ds();
     }
-
+    @Override public WebList list() {
+        return dropdown().list();
+    }
     /**
      * Select the specified element by the value
      * @param value
@@ -53,4 +56,8 @@ public class Dropdown extends DropdownExpand {
     public void setValue(String value) { dropdown().setValue(value); }
     public int size() { return dropdown().size(); }
 
+    @JDIAction("Check that '{name}' is displayed") @Override
+    public boolean isDisplayed() {
+        return dropdown().isDisplayed();
+    }
 }
