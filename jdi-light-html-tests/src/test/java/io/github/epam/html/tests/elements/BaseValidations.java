@@ -58,7 +58,6 @@ public class BaseValidations {
             action.execute();
         } finally {
             long passedTime = currentTimeMillis()-start;
-            System.out.println(passedTime);
             assertThat(passedTime, greaterThan(min*1000L-500));
             assertThat(passedTime, lessThan(max*1000L+500));
         }

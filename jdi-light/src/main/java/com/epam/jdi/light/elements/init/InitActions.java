@@ -100,7 +100,7 @@ public class InitActions {
         $("UI", aRule(UI.class, (e,a)-> e.locator.isRoot = true)),
         $("Root", aRule(Root.class, (e,a)-> e.locator.isRoot = true)),
         $("Frame", aRule(Frame.class, (e,a)-> e.setFrame(getFrame(a)))),
-        $("FindbySelenium", aRule(org.openqa.selenium.support.FindBy.class,
+        $("FindBySelenium", aRule(org.openqa.selenium.support.FindBy.class,
             (e,a)-> e.setLocator(findByToBy(a)))),
         $("Css", aRule(Css.class, (e,a)-> e.setLocator(findByToBy(a)))),
         $("XPath", aRule(XPath.class, (e,a)-> e.setLocator(findByToBy(a)))),

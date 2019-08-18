@@ -31,6 +31,7 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.TextTypes.TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
@@ -545,14 +546,19 @@ public class UIElement extends JDIBase
                 return jsExecute("innerText");
             case SMART:
             default:
-                WebElement el = get();
-                String text = el.getText();
-                if (isNotBlank(text))
-                    return text;
-                String value = el.getAttribute("value");
-                return isNotBlank(value) ? value : "";
+                return SMART_GET_TEXT.execute(this);
         }
     }
+    public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
+        String text = ui.get().getText();
+        if (isNotBlank(text))
+            return text;
+        text = ui.jsExecute("innerText");
+        if (isNotBlank(text))
+            return text;
+        text = ui.attr("value");
+        return isNotBlank(text) ? text : "";
+    };
 
     public UIElement find(String by) {
         return $(by, this);

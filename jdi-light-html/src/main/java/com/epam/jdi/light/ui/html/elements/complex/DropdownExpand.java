@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.ListElementNameTypes;
 import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -38,15 +39,15 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class DropdownExpand extends UIListBase<UISelectAssert>
         implements IsDropdown, ISetup {
-    protected String expandLocator = ".caret";
+    public String expandLocator = ".caret";
     public UIElement expander() {
         return linked(expandLocator, "expand");
     }
 
-    protected String valueLocator = "input";
+    public String valueLocator = "input";
     public UIElement value() { return linked(valueLocator, "value"); }
 
-    protected String listLocator = "li";
+    public String listLocator = "li";
     @Override
     public WebList list() {
         return linkedList(listLocator, "list").setUIElementName(INNER);
@@ -93,17 +94,18 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
         expand();
         return list().selected(value);
     }
-    public boolean wait(JFunc1<IsDropdown, Boolean> condition) {
-        return base().timer().wait(() -> condition.execute(this));
-    }
 
     protected boolean setupDone = false;
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDropdown.class, DropdownExpand.class))
+        if (!fieldHasAnnotation(field, JDropdown.class, IsDropdown.class))
             return;
         JDropdown j = field.getAnnotation(JDropdown.class);
         if (isNotBlank(j.root()))
             base().setLocator(j.root());
+        else if (isNotBlank(j.value())) {
+            base().setLocator(j.value());
+            thisParent = true;
+        }
         if (isNotBlank(j.value())) {
             valueLocator = j.value();
             expandLocator = isNotBlank(j.expand())
@@ -117,6 +119,10 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() {
         return value().isDisplayed();
+    }
+    @JDIAction("Check that '{name}' is displayed") @Override
+    public boolean isEnabled() {
+        return value().isEnabled();
     }
 
 }

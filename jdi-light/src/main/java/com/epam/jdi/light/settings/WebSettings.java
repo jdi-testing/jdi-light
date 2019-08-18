@@ -94,20 +94,19 @@ public class WebSettings {
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
-    public static JFunc1<JDIBase, WebElement> SMART_SEARCH = el -> {
-        String locatorName = SMART_SEARCH_NAME.execute(el.name);
-        return el.timer().getResult(() -> {
+    public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
+        String locatorName = SMART_SEARCH_NAME.execute(el.getName());
+        return el.base().timer().getResult(() -> {
             for (String template : SMART_SEARCH_LOCATORS) {
                 UIElement ui = (template.equals("#%s")
                     ? $(String.format(template, locatorName))
-                    : $(String.format(template, locatorName), el.parent))
-                        .setup(e -> e.setName(el.name).setTimeout(0));
+                    : $(String.format(template, locatorName), el.base().parent))
+                        .setup(e -> e.setName(el.getName()).setTimeout(0));
                 try {
                     return ui.get();
-                } catch (Exception ignore) {
-                }
+                } catch (Exception ignore) { }
             }
-            throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.name);
+            throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
         });
     };
 

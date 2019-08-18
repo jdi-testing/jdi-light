@@ -18,7 +18,7 @@ public class MetalAndColorsPage extends WebPage {
 	@Css(".uui-side-bar[name='log-sidebar']") public static LogSidebar logSidebar;
 
 	@JDropdown(root = "div[ui=dropdown]", value = ".filter-option",
-			   list = "li", expand = ".caret")
+	   list = "li", expand = ".caret")
 	public static DropdownExpand colors;
 
 	@JDropdown(root = "div[ui=dropdown]", value = ".filter-option",
@@ -29,11 +29,12 @@ public class MetalAndColorsPage extends WebPage {
 		list = "li", expand = ".caret")
 	public static IsDropdown colors3;
 
-	@JDropdown(value = "div[ui=dropdown] .filter-option")
+	@JDropdown(value = "div[ui=dropdown] .filter-option",
+			   list = "div[ui=dropdown] li")
 	public static IsDropdown colors4;
 
-	@UI("div[ui=dropdown] .filter-option")
-	public static IsDropdown colors5;
+	@UI("div[ui=dropdown]")
+	public static DropdownExpand colors5;
 
 	@UI("div[ui=dropdown]")
 	public static CustomDropdown colorsCustom;

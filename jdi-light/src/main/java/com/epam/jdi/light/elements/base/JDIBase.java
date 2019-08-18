@@ -8,9 +8,9 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.HasCache;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -142,6 +142,24 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public By getFrame() { return locator.getFrame(); }
 
+    protected int timeout = -1;
+    public IBaseElement setTimeout(int sec) {
+        timeout = sec;
+        return this;
+    }
+    public int getTimeout() {
+        return timeout > -1 ? timeout : TIMEOUT.get();
+    }
+    public Timer timer() { return new Timer(getTimeout()*1000); }
+
+    @Override
+    public JDIBase setName(String name) {
+        this.name = name;
+        this.varName = name;
+        this.failElement = name;
+        return this;
+    }
+
     public static final String FAILED_TO_FIND_ELEMENT_MESSAGE
             = "Can't find Element '%s' during %s seconds";
     public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
@@ -263,11 +281,16 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public <TE extends IBaseElement, TR> TR waitFunc(int sec, JFunc1<TE, TR> action, Class<TE> type) {
         int temp = getTimeout();
-        setTimeout(sec);
-        manageTimeout(sec);
-        TR result = action.execute((TE)this);
-        setTimeout(temp);
-        dropToGlobalTimeout();
+        TR result;
+        try {
+            setTimeout(sec);
+            manageTimeout(sec);
+            result = action.execute((TE) this);
+        }
+        finally {
+            setTimeout(temp);
+            dropToGlobalTimeout();
+        }
         return result;
     }
     public <T> T waitFunc(int sec, JFunc<T> func) {
@@ -314,7 +337,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 ? uiSearch(searchContext, correctLocator(locator)).get(0)
                 : isPageObject(bElement.getClass())
                     ? searchContext
-                    : SMART_SEARCH.execute(bElement);
+                    : SMART_SEARCH.execute(bElement.setTimeout(getTimeout()));
     }
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)

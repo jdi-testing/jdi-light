@@ -335,7 +335,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public int size() {
         try {
             return noWait(() -> getList(0).size());
-        } catch (Exception ignore) { return 0; }
+        } catch (Exception ex) {
+            throw exception("Get size failed: "+ safeException(ex));
+        }
     }
 
     @JDIAction("Check that '{option}' is selected in '{name}'")

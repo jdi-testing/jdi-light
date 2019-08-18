@@ -6,18 +6,20 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
 import static io.github.com.pages.HtmlElementsPage.dressCode2;
-import static io.github.com.pages.MetalAndColorsPage.colors;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.Casual;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.Fancy;
+import static io.github.epam.html.tests.elements.complex.enums.Dress.Pirate;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 public class DropdownDressTests extends TestsInit {
 
@@ -28,11 +30,6 @@ public class DropdownDressTests extends TestsInit {
         dressCode2.select(text);
     }
     String text = "Casual";
-
-    @Test
-    public void getValueTest() {
-        assertEquals(dressCode2.getValue(), text);
-    }
 
     @Test
     public void selectTest() {
@@ -52,7 +49,21 @@ public class DropdownDressTests extends TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(dressCode2.selected(), text);
+        dressCode2.select(Pirate);
+        assertEquals(dressCode2.selected(), "Pirate");
+        assertEquals(dressCode2.getValue(), "Pirate");
+        assertEquals(dressCode2.getText(), "Pirate");
+    }
+
+    @Test
+    public void negativeDropdownTest() {
+        try {
+            dressCode2.base().setTimeout(1);
+            dressCode2.select("Unknown");
+            fail("You have selected dressCode that does not exist in dropdown - something went wrong");
+        } catch (Exception ex) {
+            assertThat(safeException(ex), containsString("Cannot locate option with text: Unknown"));
+        }
     }
 
     @Test

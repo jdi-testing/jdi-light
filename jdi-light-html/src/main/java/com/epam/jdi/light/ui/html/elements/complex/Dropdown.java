@@ -15,11 +15,10 @@ public class Dropdown extends DropdownExpand {
     protected DropdownSelect ds() {
         return new DropdownSelect().setCore(DropdownSelect.class, base());
     }
-    protected IsDropdown dropdown() {
-        return setupDone ? this : ds();
-    }
-    @Override public WebList list() {
-        return dropdown().list();
+
+    @Override
+    public WebList list() {
+        return setupDone ? super.list() : ds().list();
     }
     /**
      * Select the specified element by the value
@@ -27,7 +26,9 @@ public class Dropdown extends DropdownExpand {
      */
     @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(String value) {
-        dropdown().select(value);
+        if (setupDone)
+            super.select(value);
+        else ds().select(value);
     }
 
     /**
@@ -36,28 +37,47 @@ public class Dropdown extends DropdownExpand {
      */
     @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(int index) {
-        dropdown().select(index);
+        if (setupDone)
+            super.select(index);
+        else ds().select(index);
     }
 
     @JDIAction("Check that '{name}' is displayed") @Override
-    public String selected() { return dropdown().selected(); }
+    public String selected() {
+        return setupDone ? super.selected() : ds().selected();
+    }
+
+    @JDIAction("Is '{0}' selected") @Override
+    public boolean selected(String option) {
+        return setupDone ? super.selected(option) : ds().selected(option);
+    }
+
+    @JDIAction("Get '{name}' values") @Override
+    public List<String> values() {
+        return setupDone ? super.values() : ds().values();
+    }
 
     @Override
-    public boolean selected(String option) {
-        return dropdown().selected(option);
+    public String getValue() {
+        return setupDone ? super.getValue() : ds().getValue();
     }
-
-    @JDIAction("Get '{name}' values")
-    public List<String> values() {
-        return dropdown().values();
+    @Override
+    public void setValue(String value) {
+        if (setupDone)
+            super.setValue(value);
+        else ds().setValue(value);
     }
-
-    public String getValue() { return dropdown().getValue(); }
-    public void setValue(String value) { dropdown().setValue(value); }
-    public int size() { return dropdown().size(); }
+    @Override
+    public int size() {
+        return setupDone ? super.size() : ds().size();
+    }
 
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() {
-        return dropdown().isDisplayed();
+        return setupDone ? super.isDisplayed() : ds().isDisplayed();
+    }
+    @JDIAction("Check that '{name}' is displayed") @Override
+    public boolean isEnabled() {
+        return setupDone ? super.isEnabled() : ds().isEnabled();
     }
 }

@@ -14,11 +14,23 @@ public abstract class UIBaseElement<A extends UIAssert> implements ICoreElement,
             uiElement = new UIElement();
         return uiElement;
     }
+    protected Boolean thisParent = null;
+    protected boolean thisParent() {
+        if (thisParent == null)
+            return base().locator.isEmpty();
+        return thisParent;
+    }
     protected UIElement linked(String locator, String name) {
-        return new UIElement(base(), locator, getName() + " " + name, this);
+        UIElement el = new UIElement(base(), locator, getName() + " " + name, this);
+        if (thisParent())
+            el.setParent(base().parent);
+        return el;
     }
     protected WebList linkedList(String locator, String name) {
-        return new WebList(base(), locator, getName() + " " + name, this);
+        WebList list = new WebList(base(), locator, getName() + " " + name, this);
+        if (thisParent())
+            list.setParent(base().parent);
+        return list;
     }
 
     protected void setElement(UIElement uiElement) { this.uiElement = uiElement; }

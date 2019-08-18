@@ -46,14 +46,6 @@ public abstract class DriverBase implements JDIElement {
         this.parent = parent;
         return this;
     }
-    protected int timeout = -1;
-    public void setTimeout(int sec) {
-        timeout = sec;
-    }
-    public int getTimeout() {
-        return timeout > -1 ? timeout : TIMEOUT.get();
-    }
-    public Timer timer() { return new Timer(getTimeout()*1000); }
 
     public void setName(SiteInfo info) {
         if (info.field != null)

@@ -18,6 +18,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 
@@ -80,7 +82,9 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
     default int size() {
         try {
             return base().noWait(() -> base().getList(0).size());
-        } catch (Exception ignore) { return 0; }
+        } catch (Exception ex) {
+            throw exception("Get size failed: "+ safeException(ex));
+        }
     }
     @Override
     default boolean isEmpty() { return size() == 0; }

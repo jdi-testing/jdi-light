@@ -1,12 +1,10 @@
 package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public enum ListElementNameTypes {

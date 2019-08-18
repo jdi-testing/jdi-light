@@ -6,17 +6,20 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static io.github.com.StaticSite.html5Page;
+import static io.github.com.pages.HtmlElementsPage.dressCode;
 import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
-import static io.github.com.pages.HtmlElementsPage.dressCode;
-import static io.github.com.pages.HtmlElementsPage.dressCode;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.Casual;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.Fancy;
+import static io.github.epam.html.tests.elements.complex.enums.Dress.Pirate;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 public class DropdownSelectTests extends TestsInit {
 
@@ -27,11 +30,6 @@ public class DropdownSelectTests extends TestsInit {
         dressCode.select(text);
     }
     String text = "Casual";
-
-    @Test
-    public void getValueTest() {
-        assertEquals(dressCode.getValue(), text);
-    }
 
     @Test
     public void selectTest() {
@@ -51,9 +49,22 @@ public class DropdownSelectTests extends TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(dressCode.selected(), text);
+        dressCode.select(Pirate);
+        assertEquals(dressCode.selected(), "Pirate");
+        assertEquals(dressCode.getValue(), "Pirate");
+        assertEquals(dressCode.getText(), "Pirate");
     }
 
+    @Test
+    public void negativeDropdownTest() {
+        try {
+            dressCode.base().setTimeout(1);
+            dressCode.select("Unknown");
+            fail("You have selected dressCode that does not exist in dropdown - something went wrong");
+        } catch (Exception ex) {
+            assertThat(safeException(ex), containsString("Cannot locate option with text: Unknown"));
+        }
+    }
     @Test
     public void sizeTest() {
         assertEquals(dressCode.size(), 4);
