@@ -47,6 +47,12 @@ public class FileInputSteps {
     @Then("^\"([^\"]*)\" file input element text equals \"([^\"]*)\"$")
     public void fileInputElementTextEquals(String elementName, String text) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
+        assertEquals(fileInput.getText(), text);
+    }
+
+    @Then("^\"([^\"]*)\" file input element text contains \"([^\"]*)\"$")
+    public void fileInputElementTextContains(String elementName, String text) {
+        FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         fileInput.is().text(containsString(text));
     }
 
@@ -54,5 +60,12 @@ public class FileInputSteps {
     public void fileInputElementValueEquals(String elementName, String value) throws Throwable {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         assertEquals(fileInput.value(), value);
+    }
+
+    @And("^\"([^\"]*)\" file input element value contains \"([^\"]*)\"$")
+    public void fileInputElementValueContains(String elementName, String value) throws Throwable {
+        FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
+        // contains
+//        assertEquals(fileInput.value(), value);
     }
 }
