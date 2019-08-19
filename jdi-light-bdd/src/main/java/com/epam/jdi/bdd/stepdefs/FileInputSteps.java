@@ -33,8 +33,8 @@ public class FileInputSteps {
         }
     }
 
-    @Then("^\"([^\"]*)\" file input element label text equals \"([^\"]*)\"$")
-    public void fileInputElementHasLabelText(String elementName, String labelText) {
+    @Then("^\"([^\"]*)\" file input element label text is \"([^\"]*)\"$")
+    public void fileInputElementLabelIs(String elementName, String labelText) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         fileInput.label().is().text(labelText);
     }
@@ -45,8 +45,8 @@ public class FileInputSteps {
         fileInput.label().is().text(containsString(labelText));
     }
 
-    @Then("^\"([^\"]*)\" file input element text equals \"([^\"]*)\"$")
-    public void fileInputElementTextEquals(String elementName, String text) {
+    @Then("^\"([^\"]*)\" file input element text is \"([^\"]*)\"$")
+    public void fileInputElementTextIs(String elementName, String text) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         fileInput.is().text(is(text));
     }
@@ -57,8 +57,8 @@ public class FileInputSteps {
         fileInput.is().text(containsString(text));
     }
 
-    @And("^\"([^\"]*)\" file input element value equals \"([^\"]*)\"$")
-    public void fileInputElementValueEquals(String elementName, String value) {
+    @And("^\"([^\"]*)\" file input element value is \"([^\"]*)\"$")
+    public void fileInputElementValueIs(String elementName, String value) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         assertEquals(fileInput.value(), value);
     }
