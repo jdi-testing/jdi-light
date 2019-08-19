@@ -47,7 +47,7 @@ public class UserStepdefs {
 
     }
 
-    @Then("^Base validation of \"(.*?)\"$")
+    @Then("^\"(.*?)\" is basically valid$")
     public void baseValidation(String name) {
         BaseUIElement el = getBaseUIElement(name);
         assertTrue(el.isEnabled());

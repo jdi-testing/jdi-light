@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
+import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.ui.html.PageFactory.initElements;
 import static io.github.com.StaticSite.homePage;
@@ -29,6 +30,7 @@ public class Runner extends AbstractTestNGCucumberTests {
 
     @BeforeClass
     public static void beforeClass() {
+        SMART_SEARCH_LOCATORS.add("[ui=%s]");
         logger.setLogLevel(INFO);
         initElements(io.github.com.StaticSite.class);
         homePage.open();

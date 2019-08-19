@@ -2,10 +2,8 @@ package cucmberTests.stepdefs;
 
 import cucumber.api.java.en.Then;
 
-import static io.github.com.pages.HomePage.githubLink;
+import static io.github.com.pages.HtmlElementsPage.githubLink;
 import static org.hamcrest.Matchers.*;
-
-//import static io.github.com.pages.HtmlElementsPage.githubLink;
 
 /**
  * Created by Ekaterina Vasilkova on 19.08.2019
