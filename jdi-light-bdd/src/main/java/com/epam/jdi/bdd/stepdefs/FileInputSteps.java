@@ -1,6 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.common.FileInput;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -47,5 +48,11 @@ public class FileInputSteps {
     public void fileInputElementTextEquals(String elementName, String text) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         fileInput.is().text(containsString(text));
+    }
+
+    @And("^\"([^\"]*)\" file input element value equals \"([^\"]*)\"$")
+    public void fileInputElementValueEquals(String elementName, String value) throws Throwable {
+        FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
+        assertEquals(fileInput.value(), value);
     }
 }
