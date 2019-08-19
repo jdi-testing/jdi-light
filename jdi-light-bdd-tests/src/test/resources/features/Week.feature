@@ -29,7 +29,7 @@ Feature: DateTimeSelector, INPUT TYPE WEEK
 
   Scenario: Base validation test
     Given I open "Html5 Page"
-    Then I make base validation "Autumn Week" input
+    Then I make base validation "Autumn Week" element
 
   Scenario: Set date
     Given I open "Html5 Page"

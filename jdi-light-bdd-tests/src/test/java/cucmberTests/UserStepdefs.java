@@ -1,7 +1,6 @@
 package cucmberTests;
 
 import com.epam.jdi.light.elements.base.BaseElement;
-import com.epam.jdi.light.ui.html.common.DateTimeSelector;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -10,7 +9,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
 import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
-import static io.github.com.pages.HtmlElementsPage.jdiTitle;
 import static org.testng.Assert.*;
 import static org.testng.Assert.assertTrue;
 
@@ -49,9 +47,9 @@ public class UserStepdefs {
 
     }
 
-    @Then("^I make base validation \"([^\"]*)\" input$")
-    public void iMakeBaseValidationInput(String element_name){
-        BaseElement el  = (DateTimeSelector) ELEMENTS.get(element_name).get(0);
+    @Then("^I make base validation \"([^\"]*)\" element$")
+    public void iMakeBaseValidationElement(String element_name) {
+        BaseElement el = (BaseElement) ELEMENTS.get(element_name).get(0);
         assertTrue(el.isEnabled());
         assertTrue(el.isDisplayed());
         assertFalse(el.isDisabled());

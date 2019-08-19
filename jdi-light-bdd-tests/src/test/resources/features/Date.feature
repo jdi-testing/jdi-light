@@ -13,7 +13,7 @@ Feature: DateTimeSelector, INPUT TYPE DATE
     Then "Birth Date" min is "1970-01-01"
     And  "Birth Date" max is "2030-12-31"
 
-  Scenario: Date validation test with ignoring case test
+  Scenario: Date validation test
     Given I open "Html5 Page"
     And "Birth Date" is enabled
     And "Birth Date" date is "1985-06-18"
@@ -29,7 +29,7 @@ Feature: DateTimeSelector, INPUT TYPE DATE
 
   Scenario: Base validation test
     Given I open "Html5 Page"
-    Then I make base validation "Birth Date" input
+    Then I make base validation "Birth Date" element
 
   Scenario: Set date
     Given I open "Html5 Page"

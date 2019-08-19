@@ -13,7 +13,7 @@ Feature: DateTimeSelector, INPUT TYPE MONTH
     Then "Month Date" min is "2015-03"
     And  "Month Date" max is "2020-12"
 
-  Scenario: Date validation test with ignoring case test
+  Scenario: Date validation test
     Given I open "Html5 Page"
     And "Month Date" is enabled
     And "Month Date" contains "05" value
@@ -29,7 +29,7 @@ Feature: DateTimeSelector, INPUT TYPE MONTH
 
   Scenario: Base validation test
     Given I open "Html5 Page"
-    Then I make base validation "Month Date" input
+    Then I make base validation "Month Date" element
 
   Scenario: Set date
     Given I open "Html5 Page"

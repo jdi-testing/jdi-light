@@ -13,7 +13,7 @@ Feature: DateTimeSelector, INPUT TYPE TIME
     Then "Booking Time" min is "9:00"
     And  "Booking Time" max is "18:00"
 
-  Scenario: Date validation test with ignoring case test
+  Scenario: Date validation test
     Given I open "Html5 Page"
     And "Booking Time" is enabled
     And "Booking Time" date is "11:00"
@@ -29,7 +29,7 @@ Feature: DateTimeSelector, INPUT TYPE TIME
 
   Scenario: Base validation test
     Given I open "Html5 Page"
-    Then I make base validation "Booking Time" input
+    Then I make base validation "Booking Time" element
 
   Scenario: Set date
     Given I open "Html5 Page"

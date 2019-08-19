@@ -29,7 +29,7 @@ Scenario: Date assertion input type datetime contains year test
 
 Scenario: Base validation test
   Given I open "Html5 Page"
-  Then I make base validation "Party Time" input
+  Then I make base validation "Party Time" element
 
 Scenario: Set date
   Given I open "Html5 Page"
