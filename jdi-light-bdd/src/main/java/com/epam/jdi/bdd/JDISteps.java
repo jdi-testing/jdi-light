@@ -1,5 +1,8 @@
 package com.epam.jdi.bdd;
 
+import static com.epam.jdi.light.elements.base.Alerts.acceptAlert;
+import static com.epam.jdi.light.elements.base.Alerts.getAlertText;
+
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import cucumber.api.java.en.Given;
@@ -8,6 +11,7 @@ import cucumber.api.java.en.When;
 
 import static com.epam.jdi.bdd.Utils.getUI;
 import static com.epam.jdi.light.elements.composite.WebPage.PAGES;
+import static org.junit.Assert.assertEquals;
 
 public class JDISteps {
     @Given("^I open \"(.*?)\"$")
@@ -31,5 +35,11 @@ public class JDISteps {
     public void iMClickOnLinkFrom(String name, String section) {
         UIElement el = getUI(name, section);
         el.click();
+    }
+    
+    @Then("^Alert text equals \"([^\"]*)\"$")
+    public void iCheckAlertText(String alertText) {
+    	assertEquals(alertText, getAlertText());
+    	acceptAlert();
     }
 }
