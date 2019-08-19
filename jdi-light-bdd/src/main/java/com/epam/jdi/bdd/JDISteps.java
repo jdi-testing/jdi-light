@@ -2,16 +2,12 @@ package com.epam.jdi.bdd;
 
 import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
-import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import static com.epam.jdi.bdd.Utils.getUI;
 import static com.epam.jdi.light.elements.composite.WebPage.PAGES;
-import static io.github.com.pages.HtmlElementsPage.partyTime;
-import static org.testng.Assert.assertEquals;
 
 public class JDISteps {
     @Given("^I open \"(.*?)\"$")
