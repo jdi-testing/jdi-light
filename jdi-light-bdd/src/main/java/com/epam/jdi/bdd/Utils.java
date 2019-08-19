@@ -1,12 +1,15 @@
 package com.epam.jdi.bdd;
 
+import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.composite.WebPage;
 
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
+import static com.epam.jdi.light.elements.composite.WebPage.PAGES;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 
@@ -14,13 +17,16 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
  * Created by Dmitry_Lebedev1 on 1/13/2016.
  */
 public final class Utils {
+
     private Utils() {
     }
+
     public static UIElement getUI(String name) {
         if (ELEMENTS.has(name))
             return (UIElement) ELEMENTS.get(name).get(0);
         throw exception("Can't find %s element", name);
     }
+
     public static UIElement getUI(String name, String section) {
         if (ELEMENTS.has(name)) {
             List<Object> els = ELEMENTS.get(name);
@@ -31,6 +37,23 @@ public final class Utils {
         }
         throw exception("Can't find %s element", name);
     }
+
+    public static BaseUIElement getBaseUIElement(String name) {
+        if (ELEMENTS.has(name)) {
+            for (Object o : ELEMENTS.get(name)) {
+                if (o instanceof BaseUIElement
+                        && (((BaseUIElement) o).parent instanceof WebPage
+                        && ((BaseUIElement) o).parent.getClass().getSimpleName().equals(PAGES.get(WebPage.getCurrentPage()).typeName)
+                        || ((BaseUIElement) o).parent.getClass().getSimpleName().equals("Header")
+                        || ((BaseUIElement) o).parent.getClass().getSimpleName().equals("Footer"))
+                ) {
+                    return (BaseUIElement) o;
+                }
+            }
+        }
+        throw exception("Can't find %s element", name);
+    }
+
 /*
     public static Object getClassField(Class container, String fieldName) {
         Object result;
