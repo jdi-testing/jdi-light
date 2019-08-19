@@ -2,8 +2,8 @@ Feature: File Input element functionality
 
   Scenario: Upload file by enabled file input element
     Given I open "Html5 Page"
-    Then "Avatar" file input element label text is "Profile picture:"
-    And "Avatar" file input element label text contains "picture"
+    Then "Avatar" file input element label is "Profile picture:"
+    And "Avatar" file input element label contains "picture"
     When I upload file "/src/test/resources/general.xml" by "Avatar" file input element
     Then "Avatar" file input element text is "C:\fakepath\general.xml"
     And "Avatar" file input element text contains "general.xml"

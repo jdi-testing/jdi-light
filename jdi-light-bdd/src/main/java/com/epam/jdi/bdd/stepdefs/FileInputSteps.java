@@ -33,14 +33,14 @@ public class FileInputSteps {
         }
     }
 
-    @Then("^\"([^\"]*)\" file input element label text is \"([^\"]*)\"$")
+    @Then("^\"([^\"]*)\" file input element label is \"([^\"]*)\"$")
     public void fileInputElementLabelIs(String elementName, String labelText) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         fileInput.label().is().text(labelText);
     }
 
-    @And("^\"([^\"]*)\" file input element label text contains \"([^\"]*)\"$")
-    public void fileInputElementLabelTextContains(String elementName, String labelText) {
+    @Then("^\"([^\"]*)\" file input element label contains \"([^\"]*)\"$")
+    public void fileInputElementLabelContains(String elementName, String labelText) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         fileInput.label().is().text(containsString(labelText));
     }
