@@ -40,6 +40,12 @@
             <artifactId>junit</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html-tests</artifactId>
+            <version>1.0.65</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

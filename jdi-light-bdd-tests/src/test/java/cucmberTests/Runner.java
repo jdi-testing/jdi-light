@@ -37,8 +37,6 @@ public class Runner extends AbstractTestNGCucumberTests {
         logger.toLog("Run Tests");
         userIcon.click();
         loginForm.loginAs(DEFAULT_USER);
-        html5Page.open();
-        html5Page.checkOpened();
     }
 
     @AfterClass

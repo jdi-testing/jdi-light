@@ -1,15 +1,42 @@
 Feature: DateTimeSelector, INPUT TYPE DATE
 
-Scenario: input type date test
-  Given I see "partyTime" input type date on the page
-  Given I see year "1985-06-18" in input type date
-  And label is "Birth date" in input type date
-  And I get min attribute "1970-01-01" in input type date
-  And I get max attribute "2030-12-31" in input type date
-  And I validate year "1985-06-18" in input type date
-  And I find date label by "Birth date" or "Birth" in input type date
-  And I check that year is "1985" in input type date
-  Then I set year "2018-11-13" in input type date
+  Scenario: Get date value test
+    Given I open "Html5 Page"
+    Then "Birth Date" value is "1985-06-18"
+
+  Scenario: Get label of input type datetime test
+    Given I open "Html5 Page"
+    Then "Birth Date" label is "Birth date"
+
+  Scenario: Get attribute "min" and "max" of input type datetime test
+    Given I open "Html5 Page"
+    Then "Birth Date" min is "1970-01-01"
+    And  "Birth Date" max is "2030-12-31"
+
+  Scenario: Date validation test with ignoring case test
+    Given I open "Html5 Page"
+    And "Birth Date" is enabled
+    And "Birth Date" date is "1985-06-18"
+
+  Scenario: Label validation test
+    Given I open "Html5 Page"
+    Then "Birth Date" label is "Birth date"
+    And "Birth Date" label contains "Birth"
+
+  Scenario: Date assertion input type datetime contains year test
+    Given I open "Html5 Page"
+    Then "Birth Date" contains "1985" value
+
+  Scenario: Base validation test
+    Given I open "Html5 Page"
+    Then I make base validation "Birth Date" input
+
+  Scenario: Set date
+    Given I open "Html5 Page"
+    Then "Birth Date" value is "1985-06-18"
+    Then I set date "2018-11-13" in "Birth Date"
+    Then "Birth Date" value is "2018-11-13"
+
 
 
 

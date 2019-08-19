@@ -1,15 +1,41 @@
 Feature: DateTimeSelector, INPUT TYPE MONTH
 
-Scenario: input type month test
-  Given I see input type week on the page
-  Given I see date in input type week "2018-05"
-  And label of input type week is "Month of Holidays"
-  And I get min attribute of input type week "2015-03"
-  And I get max attribute of input type week "2020-12"
-  And I validate date "-05" in input type week
-  And I find label by "Holidays" or "month of holidays" for input type week
-  And I check that date is "05" in input type week
-  Then I set date "2018-10" in input type week
+  Scenario: Get date value test
+    Given I open "Html5 Page"
+    Then "Month Date" value is "2018-05"
+
+  Scenario: Get label of input type datetime test
+    Given I open "Html5 Page"
+    Then "Month Date" label is "Month of Holidays"
+
+  Scenario: Get attribute "min" and "max" of input type datetime test
+    Given I open "Html5 Page"
+    Then "Month Date" min is "2015-03"
+    And  "Month Date" max is "2020-12"
+
+  Scenario: Date validation test with ignoring case test
+    Given I open "Html5 Page"
+    And "Month Date" is enabled
+    And "Month Date" contains "05" value
+
+  Scenario: Label validation test
+    Given I open "Html5 Page"
+    Then "Month Date" label contains "Holidays"
+    And "Month Date" label ignoring case is "month of holidays"
+
+  Scenario: Date assertion input type datetime contains year test
+    Given I open "Html5 Page"
+    Then "Month Date" contains "2018" value
+
+  Scenario: Base validation test
+    Given I open "Html5 Page"
+    Then I make base validation "Month Date" input
+
+  Scenario: Set date
+    Given I open "Html5 Page"
+    Then "Month Date" value is "2018-05"
+    Then I set date "2018-10" in "Month Date"
+    Then "Month Date" value is "2018-10"
 
 
 
