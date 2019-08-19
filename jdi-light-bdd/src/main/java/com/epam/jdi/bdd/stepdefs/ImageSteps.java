@@ -7,6 +7,7 @@ import com.epam.jdi.light.ui.html.base.HtmlElement;
 import com.epam.jdi.light.ui.html.common.Image;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.hamcrest.Matchers;
@@ -30,8 +31,6 @@ public class ImageSteps {
     public void imageAltAttributeIs(String imageName, String altAttributeText){
         Image image = getImage(imageName);
         image.is().alt(Matchers.is(altAttributeText));
-        image.is().src(containsString(altAttributeText));
-        //assertEquals(image.alt(), altAttributeText);
     }
 
     @When("^click at image \"([^\"]*)\"$")
