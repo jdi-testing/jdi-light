@@ -8,7 +8,7 @@ Feature: File Input element functionality
     Then "Avatar" file input element text equals "C:\fakepath\general.xml"
     And "Avatar" file input element text contains "general.xml"
     And "Avatar" file input element value equals "C:\fakepath\general.xml"
-    And "Avatar" file input element value contains "C:\fakepath\general.xml"
+    And "Avatar" file input element value contains "general.xml"
 
   Scenario: Upload file by disabled file input element
     Given I open "Html5 Page"
