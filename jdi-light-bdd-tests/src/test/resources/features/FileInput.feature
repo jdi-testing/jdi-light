@@ -8,8 +8,8 @@ Feature: File Input element functionality
     Then "Avatar" file input element text equals "general.xml"
 
   Scenario: Upload file by disabled file input element
-  Given I open "Html5 Page"
-  When I try to upload file "/jdi-light-bdd-tests/src/test/resources/general.xml" by "Disabled File Input" file input element
-  Then "Disabled File Input" file input element text equals ""
+    Given I open "Html5 Page"
+    When I try to upload file "/jdi-light-bdd-tests/src/test/resources/general.xml" by "Disabled File Input" file input element
+    Then "Disabled File Input" file input element text equals ""
 
 
