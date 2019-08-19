@@ -12,7 +12,7 @@ Scenario: Click at image and accept Alert
   Given I open "Html5 Page"
   When click at image "Jdi Logo"
   Then check Alert text is "JDI Logo"
-  Then accept Alert
+  And accept Alert
 
 Scenario: Image validation test
   Given I refresh webpage
