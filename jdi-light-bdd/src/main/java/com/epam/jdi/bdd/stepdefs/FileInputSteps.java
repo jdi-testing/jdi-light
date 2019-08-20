@@ -33,38 +33,38 @@ public class FileInputSteps {
         }
     }
 
-    @Then("^Assert that \"([^\"]*)\" file input element label equals to \"([^\"]*)\"$")
-    public void assertThatFileInputElementLabelEqualsTo(String elementName, String labelText) {
+    @Then("^\"([^\"]*)\" file input element label equals to \"([^\"]*)\"$")
+    public void fileInputElementLabelEqualsTo(String elementName, String labelText) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         fileInput.label().is().text(labelText);
     }
 
-    @Then("^Assert that \"([^\"]*)\" file input element label contains \"([^\"]*)\"$")
-    public void assertThatFileInputElementLabelContains(String elementName, String labelText) {
+    @Then("^\"([^\"]*)\" file input element label contains \"([^\"]*)\"$")
+    public void fileInputElementLabelContains(String elementName, String labelText) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         fileInput.label().is().text(containsString(labelText));
     }
 
-    @Then("^Assert that \"([^\"]*)\" file input element text equals to \"([^\"]*)\"$")
-    public void assertThatFileInputElementTextEqualsTo(String elementName, String text) {
+    @Then("^\"([^\"]*)\" file input element text equals to \"([^\"]*)\"$")
+    public void fileInputElementTextEqualsTo(String elementName, String text) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         fileInput.is().text(is(text));
     }
 
-    @Then("^Assert that \"([^\"]*)\" file input element text contains \"([^\"]*)\"$")
-    public void assertThatFileInputElementTextContains(String elementName, String text) {
+    @Then("^\"([^\"]*)\" file input element text contains \"([^\"]*)\"$")
+    public void fileInputElementTextContains(String elementName, String text) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         fileInput.is().text(containsString(text));
     }
 
-    @And("^Assert that \"([^\"]*)\" file input element value equals to \"([^\"]*)\"$")
-    public void assertThatFileInputElementValueEqualsTo(String elementName, String value) {
+    @And("^\"([^\"]*)\" file input element value equals to \"([^\"]*)\"$")
+    public void fileInputElementValueEqualsTo(String elementName, String value) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         assertEquals(fileInput.value(), value);
     }
 
-    @And("^Assert that \"([^\"]*)\" file input element value contains \"([^\"]*)\"$")
-    public void assertThatFileInputElementValueContains(String elementName, String value) {
+    @And("^\"([^\"]*)\" file input element value contains \"([^\"]*)\"$")
+    public void fileInputElementValueContains(String elementName, String value) {
         FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
         MatcherAssert.assertThat(fileInput.value(), CoreMatchers.containsString(value));
     }
