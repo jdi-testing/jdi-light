@@ -1,19 +1,25 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import cucumber.api.PendingException;
-import cucumber.api.java.en.Then;
-
-import static com.epam.jdi.light.elements.base.Alerts.acceptAlert;
 import static com.epam.jdi.light.elements.base.Alerts.getAlertText;
-import static org.testng.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 public class AlertSteps {
-    @Then("^alert text is equal to \"([^\"]*)\"$")
-    public void checkAlertTextIs(String text) {
-        assertEquals(getAlertText(), text);
+	@Then("^Alert text equals to \"([^\"]*)\"$")
+    public void alertTextEquals(String alertText) {
+    	assertEquals(alertText, getAlertText());
     }
-    @Then("^accept Alert$")
-    public void acceptAlertAtScreen() {
-        acceptAlert();
+	
+	@Then("^Alert text contains \"([^\"]*)\"$")
+    public void alertTextContains(String alertText) {
+    	assertTrue(getAlertText().contains(alertText));
     }
+	
+	@When("^Accept alert")
+	public void acceptAlert() {
+		acceptAlert();
+	}
 }
