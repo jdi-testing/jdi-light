@@ -18,7 +18,12 @@ public class JDISteps {
         WebPage page = PAGES.get(pageName);
         page.open();
     }
-
+    
+    @Given("^Refresh webpage$")
+    public void refreshWebpage() {
+        WebPage.refresh();
+    }
+   
     @Then("^I'm on \"(.*?)\"$")
     public void iMOn(String pageName) {
         WebPage page = PAGES.get(pageName);
