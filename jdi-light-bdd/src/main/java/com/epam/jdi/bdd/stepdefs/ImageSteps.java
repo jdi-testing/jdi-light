@@ -21,13 +21,13 @@ import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 
 public class ImageSteps {
-    @Then("^source of image \"([^\"]*)\" is \"([^\"]*)\"$")
-    public void sourceOfImageIs(String imageName, String source) {
+    @Then("^image \"([^\"]*)\" src is equals to \"([^\"]*)\"$")
+    public void imageSrcIsEqualsTo(String imageName, String source) {
         Image image = getImage(imageName);
         assertEquals(image.src(), source);
     }
 
-    @Then("^image \"([^\"]*)\" alt attribute is \"([^\"]*)\"$")
+    @Then("^image \"([^\"]*)\" alt attribute is equal to \"([^\"]*)\"$")
     public void imageAltAttributeIs(String imageName, String altAttributeText){
         Image image = getImage(imageName);
         image.is().alt(Matchers.is(altAttributeText));
@@ -38,8 +38,8 @@ public class ImageSteps {
         getImage(imageName).click();
     }
 
-    @Then("^image source of \"([^\"]*)\" contains \"([^\"]*)\"$")
-    public void imageSourceOfContains(String imageName, String text) {
+    @Then("^image \"([^\"]*)\" scr contains \"([^\"]*)\"$")
+    public void assertThatImageScrContains(String imageName, String text) {
         getImage(imageName).is().src(containsString(text));
     }
 
@@ -49,22 +49,16 @@ public class ImageSteps {
         assertEquals(getAlertText(), "JDI Logo");
     }
 
-
-    @And("^image \"([^\"]*)\" height is (\\d+)$")
-    public void imageHeightIs(String imageName, int height) {
+    @And("^image \"([^\"]*)\" height is equal to (\\d+)$")
+    public void assertThatImageHeightIs(String imageName, int height) {
         Image image = getImage(imageName);
         assertEquals(image.height(), Integer.toString(height));
     }
 
-    @And("^image \"([^\"]*)\" width is (\\d+)$")
-    public void imageWidthIs(String imageName, int width) {
+    @And("^image \"([^\"]*)\" width is equal to (\\d+)$")
+    public void assertThatImageWidthIs(String imageName, int width) {
         Image image = getImage(imageName);
         assertEquals(image.width(), Integer.toString(width));
     }
 
-    @Then("^\"([^\"]*)\" alt is \"([^\"]*)\"$")
-    public void altIs(String imageName, String altAttributeText) {
-        Image image = getImage(imageName);
-        image.assertThat().alt(Matchers.is(altAttributeText));
-    }
 }

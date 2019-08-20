@@ -8,7 +8,7 @@ import static com.epam.jdi.light.elements.base.Alerts.getAlertText;
 import static org.testng.Assert.assertEquals;
 
 public class AlertSteps {
-    @Then("^check Alert text is \"([^\"]*)\"$")
+    @Then("^alert text is equal to \"([^\"]*)\"$")
     public void checkAlertTextIs(String text) {
         assertEquals(getAlertText(), text);
     }
