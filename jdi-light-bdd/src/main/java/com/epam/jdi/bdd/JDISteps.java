@@ -14,13 +14,17 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class JDISteps {
-    @Given("^I open \"(.*?)\"$")
+    @Given("^I open \"([^\"]*)\"(?: page|)$")
     public void iMOpen(String pageName) {
         WebPage page = PAGES.get(pageName);
-        page.open();
+        page.shouldBeOpened();
     }
-    
-    @Given("^Refresh webpage$")
+	@Given("^I open \"([^\"]*)\"(?: page|) with \"([^\"]*)\"$")
+	public void iMOpenParams(String pageName) {
+		WebPage page = PAGES.get(pageName);
+		page.shouldBeOpened();
+	}
+    @When("^Refresh webpage$")
     public void refreshWebpage() {
         WebPage.refresh();
     }
@@ -124,7 +128,7 @@ public class JDISteps {
 	//#endregion
 	//#region Then
 
-	@Then("^\"(.*?)\" (?:page |)is opened$")
+	@Then("^\"([^\"]*)\" (?:page |)is opened$")
 	public void iMOn(String pageName) {
 		WebPage page = PAGES.get(pageName);
 		page.shouldBeOpened();
