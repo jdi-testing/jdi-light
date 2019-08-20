@@ -171,7 +171,7 @@ public class JDISteps {
 		assertEquals(value, el.text());
 	}
 	
-	@Then("^\"([^\"]*)\" text contains to \"([^\"]*)\"$")
+	@Then("^\"([^\"]*)\" text contains \"([^\"]*)\"$")
 	public void textContains(String name, String value) {
 		BaseUIElement el = getBaseUI(name);
 		assertTrue(el.text().contains(value));
