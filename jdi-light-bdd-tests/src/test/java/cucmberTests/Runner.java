@@ -7,6 +7,7 @@ package cucmberTests;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
+import io.github.com.StaticSite;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -27,16 +28,15 @@ import static io.github.com.pages.Header.userIcon;
         glue = {"com.epam.jdi.bdd", "cucmberTests"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
-
     @BeforeClass
     public static void beforeClass() {
-        SMART_SEARCH_LOCATORS.add("[ui=%s]");
         logger.setLogLevel(INFO);
-        initElements(io.github.com.StaticSite.class);
+        initElements(StaticSite.class);
         homePage.open();
         logger.toLog("Run Tests");
         userIcon.click();
         loginForm.loginAs(DEFAULT_USER);
+        homePage.checkOpened();
     }
 
     @AfterClass
