@@ -1,17 +1,5 @@
 package cucmberTests;
 
-/**
- * Created by Dmitry_Lebedev1 on 1/22/2016.
- */
-
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import cucumber.api.testng.AbstractTestNGCucumberTests;
-import io.github.com.StaticSite;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -21,6 +9,19 @@ import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.userIcon;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+
+/**
+ * Created by Dmitry_Lebedev1 on 1/22/2016.
+ */
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
+import io.github.com.StaticSite;
+
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "classpath:features",
@@ -28,7 +29,7 @@ import static io.github.com.pages.Header.userIcon;
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass
-    public static void setUp() {
+    public static void setUp() {    
         logger.setLogLevel(INFO);
         initElements(StaticSite.class);
         homePage.open();
