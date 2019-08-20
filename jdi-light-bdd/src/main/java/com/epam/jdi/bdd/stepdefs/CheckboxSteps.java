@@ -8,21 +8,51 @@ import org.junit.Assert;
 import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
 
 public class CheckboxSteps {
-    @When("^Set \"([^\"]*)\" checkbox to \"([^\"]*)\"$")
-    public void iSetCheckboxTo(String checkboxName, String value) {
+    @When("^Check \"([^\"]*)\" checkbox$")
+    public void iCheckCheckbox(String checkboxName) {
         Checkbox checkbox = (Checkbox) ELEMENTS.get(checkboxName).get(0);
-        boolean cond = (value.equalsIgnoreCase("true") || value.equals("1")) ? true : false;
-        if (cond && (!checkbox.isSelected())) {
-            checkbox.check();
-        } else if ((!cond) && (checkbox.isSelected())) {
-            checkbox.uncheck();
-        }
+        checkbox.check();
     }
 
-    @Then("^\"([^\"]*)\" checkbox is \"([^\"]*)\"$")
-    public void iAssertCheckbox(String checkboxName, String value) {
+    @When("^Uncheck \"([^\"]*)\" checkbox$")
+    public void iUncheckCheckbox(String checkboxName) {
         Checkbox checkbox = (Checkbox) ELEMENTS.get(checkboxName).get(0);
-        boolean cond = (value.equalsIgnoreCase("true") || value.equals("1")) ? true : false;
-        Assert.assertTrue(cond == checkbox.isSelected());
+        checkbox.uncheck();
+    }
+
+    @When("^Click \"([^\"]*)\" checkbox$")
+    public void iClickCheckbox(String checkboxName) {
+        Checkbox checkbox = (Checkbox) ELEMENTS.get(checkboxName).get(0);
+        checkbox.click();
+    }
+
+    @Then("^\"([^\"]*)\" checkbox is selected$")
+    public void iAssertCheckboxIsSelected(String checkboxName) {
+        Checkbox checkbox = (Checkbox) ELEMENTS.get(checkboxName).get(0);
+        Assert.assertTrue(checkbox.isSelected());
+    }
+
+    @Then("^\"([^\"]*)\" checkbox is deselected$")
+    public void iAssertCheckboxIsDeselected(String checkboxName) {
+        Checkbox checkbox = (Checkbox) ELEMENTS.get(checkboxName).get(0);
+        Assert.assertFalse(checkbox.isSelected());
+    }
+
+    @Then("^\"([^\"]*)\" checkbox label text equals to \"([^\"]*)\"$")
+    public void iAssertCheckboxLabelTextEquals(String checkboxName, String value) {
+        Checkbox checkbox = (Checkbox) ELEMENTS.get(checkboxName).get(0);
+        Assert.assertEquals(value, checkbox.labelText());
+    }
+
+    @Then("^\"([^\"]*)\" checkbox label text equals to \"([^\"]*)\" ignoring case$")
+    public void iAssertCheckboxLabelTextEqualsIgnoringCase(String checkboxName, String value) {
+        Checkbox checkbox = (Checkbox) ELEMENTS.get(checkboxName).get(0);
+        Assert.assertTrue(value.equalsIgnoreCase(checkbox.labelText()));
+    }
+
+    @Then("^\"([^\"]*)\" checkbox label text contains \"([^\"]*)\"$")
+    public void iAssertCheckboxLabelTextContains(String checkboxName, String value) {
+        Checkbox checkbox = (Checkbox) ELEMENTS.get(checkboxName).get(0);
+        Assert.assertTrue(checkbox.labelText().contains(value));
     }
 }

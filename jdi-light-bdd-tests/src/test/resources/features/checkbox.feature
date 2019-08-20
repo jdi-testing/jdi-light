@@ -1,15 +1,41 @@
 Feature: Checkbox
 
-  Scenario: Set and get checkbox values
-    Given I open "Contact Form Page"
+  Scenario: Get Label Text Test
+    Given I open "Html5 Page"
+    When Check "Accept Conditions" checkbox
+    Then "Accept Conditions" checkbox label text equals to "Accept terms and conditions"
 
-    When Set "Passport" checkbox to "true"
-    Then "Passport" checkbox is "1"
+  Scenario: Check Test
+    Given I open "Html5 Page"
+    When Check "Accept Conditions" checkbox
+    When Check "Accept Conditions" checkbox
+    Then "Accept Conditions" checkbox is selected
 
-    When Set "Passport" checkbox to "0"
-    Then "Passport" checkbox is "false"
+  Scenario: Uncheck Test
+    Given I open "Html5 Page"
+    When Check "Accept Conditions" checkbox
+    When Uncheck "Accept Conditions" checkbox
+    Then "Accept Conditions" checkbox is deselected
 
-    And "Accept Conditions" checkbox is "0"
+  Scenario: Click Test
+    Given I open "Html5 Page"
+    When Check "Accept Conditions" checkbox
+    Then "Accept Conditions" checkbox is selected
+    When Click "Accept Conditions" checkbox
+    Then "Accept Conditions" checkbox is deselected
 
-    When Set "Accept Conditions" checkbox to "1"
-    Then "Accept Conditions" checkbox is "1"
+  Scenario: Is Validation Test
+#    TODO (Waiting for common methods enabled() and displayed() in BDD branch)
+
+  Scenario: Label Test
+    Given I open "Html5 Page"
+    When Check "Accept Conditions" checkbox
+    Then "Accept Conditions" checkbox label text equals to "Accept terms and conditions"
+    Then "Accept Conditions" checkbox label text contains "terms and conditions"
+    Then "Accept Conditions" checkbox label text equals to "accept terms and conditions" ignoring case
+
+#  The same as part of the Click Test
+#  Scenario: Assert Validation Test
+#    Given I open "Html5 Page"
+#    When Check "Accept Conditions" checkbox
+#    Then "Accept Conditions" checkbox is selected
