@@ -8,6 +8,7 @@ import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.userIcon;
+import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -30,13 +31,13 @@ import io.github.com.StaticSite;
 public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass
     public static void setUp() {    
+    	SMART_SEARCH_LOCATORS.add("[ui=%s]");
         logger.setLogLevel(INFO);
         initElements(StaticSite.class);
         homePage.open();
         logger.toLog("Run Tests");
         userIcon.click();
         loginForm.loginAs(DEFAULT_USER);
-        homePage.checkOpened();
     }
 
     @AfterClass
