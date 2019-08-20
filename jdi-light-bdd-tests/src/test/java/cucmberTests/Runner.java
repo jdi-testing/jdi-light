@@ -25,8 +25,9 @@ import io.github.com.StaticSite;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "classpath:features",
-        glue = {"com.epam.jdi.bdd", "cucmberTests"}
+        features = "classpath:features"
+        ,glue = {"com.epam.jdi.bdd", "cucmberTests"}
+        //,tags = "@test"
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass
