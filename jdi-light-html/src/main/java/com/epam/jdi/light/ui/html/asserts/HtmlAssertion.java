@@ -5,9 +5,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import org.hamcrest.Matcher;
 
+import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.ui.html.utils.HtmlUtils.*;
 import static org.hamcrest.Matchers.is;
-import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 
 public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAssert, TextAssert,
         LinkAssert, TextAreaAssert, ColorAssert, CheckboxAssert, DateTimeAssert,
@@ -186,9 +186,16 @@ public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAsser
         jdiAssert(html.value(), week);
         return this;
     }
+
     @JDIAction("Assert that '{name}' time {0}")
     public HtmlAssertion time(Matcher<String> time) {
         jdiAssert(html.value(), time);
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' url path {0}")
+    public HtmlAssertion urlPath(Matcher<String> condition) {
+        jdiAssert(html.url().getPath(), condition);
         return this;
     }
 }

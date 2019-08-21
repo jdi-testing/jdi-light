@@ -38,7 +38,7 @@ public final class Utils {
         throw exception("Can't find %s element", name);
     }
 
-    public static BaseUIElement getBaseUI(String name) {
+    public static BaseUIElement getBaseUIElement(String name) {
         if (ELEMENTS.has(name)) {
             for (Object o : ELEMENTS.get(name)) {
                 if (o instanceof BaseUIElement
@@ -54,13 +54,6 @@ public final class Utils {
         throw exception("Can't find %s element", name);
     }
 
-
-    public static BaseUIElement getBaseUI(String name) {
-        if (ELEMENTS.has(name))
-            return (BaseUIElement) ELEMENTS.get(name).get(0);
-        throw exception("Can't find %s element", name);
-    }
-
     public static BaseUIElement getBaseUI(String name, String section) {
         if (ELEMENTS.has(name)) {
             List<Object> els = ELEMENTS.get(name);
@@ -71,6 +64,7 @@ public final class Utils {
         }
         throw exception("Can't find %s element", name);
     }
+
 /*
     public static Object getClassField(Class container, String fieldName) {
         Object result;
@@ -237,3 +231,4 @@ public final class Utils {
     }
 */
 }
+

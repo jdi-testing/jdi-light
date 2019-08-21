@@ -1,9 +1,11 @@
 package cucmberTests.stepdefs;
 
+import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
 import cucumber.api.java.en.Then;
 
-import static io.github.com.pages.HtmlElementsPage.githubLink;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.bdd.Utils.getBaseUIElement;
+import static org.hamcrest.Matchers.equalTo;
 
 /**
  * Created by Ekaterina Vasilkova on 19.08.2019
@@ -11,34 +13,14 @@ import static org.hamcrest.Matchers.*;
 
 public class LinkStepdefs {
 
-    @Then("^Link text is \"([^\"]*)\"$")
-    public void linkTextIs(String expectedText) {
-        githubLink.is().text(is(expectedText));
-    }
-
-    @Then("^Link text ignoring case is \"([^\"]*)\"$")
-    public void linkTextIgnorCaseIs(String expectedText) {
-        githubLink.is().text(equalToIgnoringCase(expectedText));
-    }
-
-    @Then("^Link is enabled$")
-    public void linkIsEnabled() {
-        githubLink.is().enabled();
-    }
-
-    @Then("^Link alt contains \"([^\"]*)\"$")
-    public void linkAltIs(String expectedText) {
-        githubLink.is().alt(containsString(expectedText));
-    }
-
-    @Then("^Link ref contains \"([^\"]*)\"$")
-    public void linkRefIs(String expectedText) {
-        githubLink.is().ref(containsString(expectedText));
-    }
-
-    @Then("^Link asserts that link text is \"([^\"]*)\"$")
-    public void linkAssertTextIs(String expectedText) {
-        githubLink.assertThat().text(is(expectedText));
+    @Then("^\"([^\"]*)\" URL path equals to \"([^\"]*)\"$")
+    public void urlPathEquals(String name, String expectedText) {
+        BaseUIElement el = getBaseUIElement(name);
+        try {
+            ((HtmlElement) el).is().urlPath(equalTo(expectedText));
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+        }
     }
 
 }
