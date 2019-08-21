@@ -24,12 +24,13 @@ import static io.github.com.pages.Header.userIcon;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "classpath:features",
-        glue = {"com.epam.jdi.bdd", "cucmberTests"}
+        features = "classpath:features"
+        ,glue = {"com.epam.jdi.bdd", "cucmberTests"}
+        //,tags = {"test"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass
-    public static void beforeClass() {
+    public static void setup() {
         SMART_SEARCH_LOCATORS.add("[ui=%s]");
         logger.setLogLevel(INFO);
         initElements(StaticSite.class);
@@ -40,7 +41,7 @@ public class Runner extends AbstractTestNGCucumberTests {
     }
 
     @AfterClass
-    public static void afterClass() {
+    public static void teardown() {
         killAllSeleniumDrivers();
     }
 

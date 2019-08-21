@@ -2,24 +2,18 @@ package com.epam.jdi.bdd;
 
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.ui.html.base.HtmlElement;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.testng.Assert;
 
 import static com.epam.jdi.bdd.Utils.getUI;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
 public class JDISteps {
 
-    @Given("^I open \"(.*?)\"$")
+	@Given("^I open \"([^\"]*)\"(?: page|)$")
     public void iMOpen(String pageName) {
         WebPage page = PAGES.get(pageName);
         page.shouldBeOpened();

@@ -193,9 +193,4 @@ public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAsser
         return this;
     }
 
-    @JDIAction("Assert that '{name}' url path {0}")
-    public HtmlAssertion urlPath(Matcher<String> condition) {
-        jdiAssert(html.url().getPath(), condition);
-        return this;
-    }
 }
