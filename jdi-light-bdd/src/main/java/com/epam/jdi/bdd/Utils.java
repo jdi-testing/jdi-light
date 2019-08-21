@@ -10,7 +10,6 @@ import java.util.List;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.ui.html.common.Image;
 
 /**
  * Created by Dmitry_Lebedev1 on 1/13/2016.
