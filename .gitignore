@@ -9,3 +9,6 @@ target/
 allure-results/
 downloads/
 *.log
+.settings/
+.project
+.classpath
