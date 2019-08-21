@@ -24,24 +24,19 @@ public class ColorPickerSteps {
         getColorPicker(colorPickerName).setColor(color);
     }
 
-    @Then("^\"([^\"]*)\" have \"([^\"]*)\" color$")
+    @Then("^\"([^\"]*)\" color equals to \"([^\"]*)\"$")
     public void haveColor(String colorPickerName, String expectedColor) {
         getColorPicker(colorPickerName).is().color(expectedColor);
     }
 
-    @Then("^is validation for \"([^\"]*)\" is successful with color \"([^\"]*)\"$")
+    @Then("^is validation for \"([^\"]*)\" is successful for color \"([^\"]*)\"$")
     public void isValidation(String colorPickerName, String color) {
         colorPicker = getColorPicker(colorPickerName);
         colorPicker.is().enabled();
         colorPicker.is().color(color);
     }
 
-    @Then("^\"([^\"]*)\" label has \"([^\"]*)\" text$")
-    public void labelText(String colorPickerName, String labelText) {
-        assertEquals(getColorPicker(colorPickerName).labelText(), labelText);
-    }
-
-    @Then("^\"([^\"]*)\" has \"([^\"]*)\" color$")
+    @Then("^assertThat for \"([^\"]*)\" is successful for color \"([^\"]*)\"$")
     public void assertThatColor(String colorPickerName, String color) {
         getColorPicker(colorPickerName).assertThat().color(color);
     }
