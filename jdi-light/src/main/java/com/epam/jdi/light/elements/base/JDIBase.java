@@ -196,8 +196,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         }
         if (locator.isEmpty())
             return beforeSearch(getSmart());
-        if (locator.isTemplate() && args.length == 0)
-            throw exception("Can't get element with template locator '%s' without arguments", getLocator());
+        if (locator.argsCount() != args.length)
+            throw exception("Can't get element with template locator '%s'. Expected %s arguments but found %s", getLocator(), locator.argsCount(), args.length);
         List<WebElement> els = getAllElements(args);
         if (els.size() == 1)
             return els.get(0);

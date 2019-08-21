@@ -1,6 +1,7 @@
 package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.tools.StringUtils;
 import org.openqa.selenium.By;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -57,6 +58,11 @@ public class JDILocator {
     }
     public boolean isTemplate() {
         return byLocator != null && byLocator.toString().contains("%s");
+    }
+    public int argsCount() {
+        return byLocator != null
+            ? org.apache.commons.lang3.StringUtils.countMatches(byLocator.toString(), "%s")
+            : 0;
     }
     private boolean setRootLocator(By locator) {
         if (containsRoot(locator))

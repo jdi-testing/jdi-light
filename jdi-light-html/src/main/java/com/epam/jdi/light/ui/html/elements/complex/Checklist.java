@@ -70,13 +70,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      */
     @JDIAction("Check '{0}' checkboxes in '{name}' checklist")
     public void check(String... names) {
-        List<String> listNames = asList(names);
-        for (UIElement value : list()) {
-            if (value.isDisabled()) continue;
-            if (selected(value) && !listNames.contains(value.labelText().trim())
-                    || !selected(value) && listNames.contains(value.labelText().trim()))
-                value.click();
-        }
+        list().check(names);
     }
 
 
@@ -89,22 +83,15 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      */
     @JDIAction("Uncheck '{0}' checkboxes in '{name}' checklist")
     public void uncheck(String... names) {
-        List<String> listNames = asList(names);
-        for (UIElement value : list()) {
-            if (value.isDisabled()) continue;
-            if (selected(value) && listNames.contains(value.labelText().trim())
-                    || !selected(value) && !listNames.contains(value.labelText().trim()))
-                value.click();
-        }
+        list().uncheck(names);
     }
 
     public <TEnum extends Enum> void check(TEnum value) {
         check(getEnumValue(value));
     }
     public <TEnum extends Enum> void check(TEnum... values) {
-        check(getEnumValues(values));
+        list().check(values);
     }
-
 
     public <TEnum extends Enum> void uncheck(TEnum value) {
         uncheck(getEnumValue(value));
@@ -122,14 +109,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      */
     @JDIAction("Check '{0}' checkboxes in '{name}' checklist")
     public void check(int... indexes) {
-        List<Integer> listIndexes = toList(indexes);
-        for (int i = 0; i < values().size(); i++) {
-            UIElement value = list().get(i);
-            if (value.isDisabled()) continue;
-            if (selected(value) && !listIndexes.contains(i+1)
-                    || !selected(value) && listIndexes.contains(i+1))
-                value.click();
-        }
+        list().check(indexes);
     }
     @Override
     public boolean isDisplayed() {
@@ -141,11 +121,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      */
     @JDIAction("Check all '{name}' unchecked options")
     public void checkAll() {
-        for (UIElement checkbox : list()) {
-            if (checkbox.isEnabled() && !selected(checkbox)) {
-                checkbox.click();
-            }
-        }
+        list().checkAll();
     }
     public void uncheck(int index) {
         uncheck(new int[]{index});
@@ -156,16 +132,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      */
     @JDIAction("Uncheck '{0}' checkboxes in  '{name}' checklist")
     public void uncheck(int... indexes) {
-        if (indexes.length > 0 && list().get(indexes[0]-1).isDisplayed()) {
-            List<Integer> listIndexes = toList(indexes);
-            for (int i = 0; i < values().size(); i++) {
-                UIElement value = list().get(i);
-                if (value.isDisabled()) continue;
-                if (selected(value) && listIndexes.contains(i+1)
-                        || !selected(value) && !listIndexes.contains(i+1))
-                    value.click();
-            }
-        }
+        list().uncheck(indexes);
     }
 
     /**
@@ -173,11 +140,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      */
     @JDIAction("Uncheck all '{name}' checked options")
     public void uncheckAll() {
-        for (UIElement checkbox : list()) {
-            if (checkbox.isEnabled() && selected(checkbox)) {
-                checkbox.click();
-            }
-        }
+        list().uncheckAll();
     }
 
     /**

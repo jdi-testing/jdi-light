@@ -38,9 +38,12 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.EnumUtils.getEnumValues;
+import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList, HasAssert<UISelectAssert<UISelectAssert, WebList>> {
@@ -149,9 +152,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction(level = DEBUG)
     public UIElement get(String value) {
-        if (elements.isUseCache() && hasKey(value))
-            return elements.get().get(value);
-        return getUIElement(value);
+        return elements.isUseCache() && hasKey(value)
+            ? elements.get().get(value)
+            : getUIElement(value);
     }
     protected UIElement getUIElement(String value) {
         if (locator.isTemplate())
@@ -222,7 +225,76 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         for (String value : values)
             select(value);
     }
+    @JDIAction("Check all '{name}' unchecked options")
+    public void checkAll() {
+        for (UIElement checkbox : elements(0).values()) {
+            if (checkbox.isEnabled() && !selected(checkbox)) {
+                checkbox.click();
+            }
+        }
+    }
+    @JDIAction("Uncheck all '{name}' checked options")
+    public void uncheckAll() {
+        for (UIElement checkbox : elements(0).values()) {
+            if (checkbox.isEnabled() && selected(checkbox)) {
+                checkbox.click();
+            }
+        }
+    }
+    @JDIAction("Check only '{0}' in '{name}' list")
+    public void check(String... names) {
+        List<String> listNames = asList(names);
+        for (UIElement value : elements(names.length).values()) {
+            if (value.isDisabled()) continue;
+            if (selected(value) && !listNames.contains(value.labelText().trim())
+                    || !selected(value) && listNames.contains(value.labelText().trim()))
+                value.click();
+        }
+    }
+    @JDIAction("Uncheck '{0}' checkboxes in '{name}' checklist")
+    public void uncheck(String... names) {
+        List<String> listNames = asList(names);
+        for (UIElement value : elements(names.length).values()) {
+            if (value.isDisabled()) continue;
+            if (selected(value) && listNames.contains(value.labelText().trim())
+                    || !selected(value) && !listNames.contains(value.labelText().trim()))
+                value.click();
+        }
+    }
+    @JDIAction("Check '{0}' checkboxes in '{name}' checklist")
+    public void check(int... indexes) {
+        List<Integer> listIndexes = toList(indexes);
+        for (int i = 0; i < values().size(); i++) {
+            UIElement value = get(i);
+            if (value.isDisabled()) continue;
+            if (selected(value) && !listIndexes.contains(i+1)
+                    || !selected(value) && listIndexes.contains(i+1))
+                value.click();
+        }
+    }
+    @JDIAction("Uncheck '{0}' checkboxes in  '{name}' checklist")
+    public void uncheck(int... indexes) {
+        if (indexes.length > 0 && list().get(indexes[0]-1).isDisplayed()) {
+            List<Integer> listIndexes = toList(indexes);
+            for (int i = 0; i < values().size(); i++) {
+                UIElement value = get(i);
+                if (value.isDisabled()) continue;
+                if (selected(value) && listIndexes.contains(i+1)
+                        || !selected(value) && !listIndexes.contains(i+1))
+                    value.click();
+            }
+        }
+    }
+    public <TEnum extends Enum> void check(TEnum... values) {
+        check(getEnumValues(values));
+    }
+    public <TEnum extends Enum> void uncheck(TEnum... values) {
+        uncheck(getEnumValues(values));
+    }
 
+    protected boolean selected(UIElement value) {
+        return value.isSelected();
+    }
     /**
      * Select the items by the values, hover and click on them
      * @param values
