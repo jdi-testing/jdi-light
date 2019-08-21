@@ -24,7 +24,8 @@ import static io.github.com.pages.Header.userIcon;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "classpath:features"
+//        features = "classpath:features"
+        features = "src/test/resources/features/FileInput.feature"
         ,glue = {"com.epam.jdi.bdd", "cucmberTests"}
         //,tags = {"test"}
 )
