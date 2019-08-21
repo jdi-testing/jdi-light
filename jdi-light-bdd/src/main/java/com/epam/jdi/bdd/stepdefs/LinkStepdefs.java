@@ -10,7 +10,8 @@ import static org.hamcrest.Matchers.*;
  * Created by Ekaterina Vasilkova on 19.08.2019
  */
 
-public class LinkStep {
+public class LinkStepdefs {
+
     @Then("^\"([^\"]*)\" reference equals to \"([^\"]*)\"$")
     public void refEquals(String name, String expectedText) {
         Link link = getUI(name, Link.class);
@@ -29,21 +30,22 @@ public class LinkStep {
         link.is().ref(matchesPattern(regex));
     }
 
-    @Then("^\"([^\"]*)\" alt text equals to \"([^\"]*)\"$")
+    @Then("^\"([^\"]*)\" alternative text equals to \"([^\"]*)\"$")
     public void altEquals(String name, String expectedText) {
         Link link = getUI(name, Link.class);
         link.is().alt(equalTo(expectedText));
     }
 
-    @Then("^\"([^\"]*)\" alt text contains \"([^\"]*)\"$")
+    @Then("^\"([^\"]*)\" alternative text contains \"([^\"]*)\"$")
     public void altContains(String name, String expectedText) {
         Link link = getUI(name, Link.class);
         link.is().alt(containsString(expectedText));
     }
 
-    @Then("^\"([^\"]*)\" alt text match to \"([^\"]*)\"$")
+    @Then("^\"([^\"]*)\" alternative text match to \"([^\"]*)\"$")
     public void altMatchRegex(String name, String regex) {
         Link link = getUI(name, Link.class);
         link.is().alt(matchesPattern(regex));
     }
+
 }

@@ -16,26 +16,22 @@ Feature: link
     Given I open "Html5 Page"
     Then "Github Link" reference contains "github"
 
-  Scenario: Link URL path test
+  Scenario: Link alternative text equivalence test
     Given I open "Html5 Page"
-    Then "Github Link" reference equals to "https://github.com/jdi-testing"
+    Then "Github Link" alternative text equals to "Github JDI Link"
 
-  Scenario: Link alt text equivalence test
+  Scenario: Link alternative text matching to RegExp
     Given I open "Html5 Page"
-    Then "Github Link" alt text equals to "Github JDI Link"
+    Then "Github Link" alternative text match to "Git.* JE*DI Link"
 
-  Scenario: Link alt text matching to RegExp
+  Scenario: Link alternative text likeness test
     Given I open "Html5 Page"
-    Then "Github Link" alt text match to "Git.* JE*DI Link"
-
-  Scenario: Link alt text likeness test
-    Given I open "Html5 Page"
-    Then "Github Link" alt text contains "JDI"
+    Then "Github Link" alternative text contains "JDI"
 
   Scenario: Click link test
     Given I open "Html5 Page"
     When Click on "Github Link"
-    Then Current page URL is "https://github.com/jdi-testing"
+    Then Current URL is "https://github.com/jdi-testing"
 
   Scenario: Link activity validation test
     Given I open "Html5 Page"
