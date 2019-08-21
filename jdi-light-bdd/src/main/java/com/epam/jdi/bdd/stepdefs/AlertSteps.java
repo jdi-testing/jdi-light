@@ -4,6 +4,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import static com.epam.jdi.light.elements.base.Alerts.getAlertText;
+import static com.epam.jdi.light.elements.base.Alerts.acceptAlert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -19,7 +20,7 @@ public class AlertSteps {
     }
 	
 	@When("^Accept alert")
-	public void acceptAlert() {
+	public void accept() {
 		acceptAlert();
 	}
 }

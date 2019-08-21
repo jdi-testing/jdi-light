@@ -118,7 +118,7 @@ public class JDISteps {
 		el.show();
 	}
 	
-	@When("^(?:I |)Set \"([^\"]*)\" attribute \"([^\"]*)\" with vlaue \"([^\"]*)\" element$")
+	@When("^(?:I |)Set \"([^\"]*)\" attribute \"([^\"]*)\" with vlaue \"([^\"]*)\"$")
 	public void setAttribute(String name, String attrName, String attrValue) {
 		BaseUIElement el = Utils.getUI(name);
 		el.setAttribute(attrName, attrValue);
