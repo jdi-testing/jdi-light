@@ -14,15 +14,4 @@ public class FileInputSteps {
         FileInput fileInput = Utils.getUI(elementName, FileInput.class);
         fileInput.uploadFile(mergePath(PROJECT_PATH, pathToFile));
     }
-
-    @When("^I try to upload file \"([^\"]*)\" by \"([^\"]*)\" file input element$")
-    public void iTryToUploadFileByFileInputElement(String pathToFile, String elementName) {
-        FileInput fileInput = Utils.getUI(elementName, FileInput.class);
-        try {
-            fileInput.uploadFile(mergePath(PROJECT_PATH, pathToFile));
-        } catch (Exception e) {
-            assertEquals(
-                    String.format("\r\nCan't do uploadFile for disabled element '%s'", elementName),e.getMessage());
-        }
-    }
 }
