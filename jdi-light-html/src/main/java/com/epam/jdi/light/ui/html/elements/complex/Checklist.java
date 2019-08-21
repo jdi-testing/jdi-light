@@ -1,80 +1,67 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
+import com.epam.jdi.light.asserts.complex.ChecklistAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.ui.html.asserts.ChecklistAssert;
-import com.epam.jdi.tools.EnumUtils;
-import org.openqa.selenium.By;
+import com.epam.jdi.light.elements.interfaces.base.IListBase;
+import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
-import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
-import static com.epam.jdi.light.elements.complex.Selector.LABEL_LOCATOR;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.ifSelect;
+import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
-import static org.openqa.selenium.By.cssSelector;
 
-public class Checklist extends UIListBase<ChecklistAssert> {
-    By checkbox = cssSelector("input[type=checkbox][id='%s']");
-    By label = LABEL_LOCATOR;
-    public void setLabelLocator(String locator) {
-        label = defineLocator(locator);
+public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklist {
+    public Checklist() {
+        base().setLocator("input[type=checkbox]");
     }
-    private String getId(String name) { return label(name).getAttribute("for"); }
-
     /**
-     * Gets a value
-     * @param value String
-     * @return UIElement
+     * Selects a value in checklist
+     * @param value String var arg
      */
-    public UIElement get(String value) {
-        return $(fillByTemplate(checkbox, getId(value)), core().parent).setName(value);
+    @JDIAction("Select '{0}' for '{name}'")
+    public void select(String value) {
+        list().select(value);
     }
-    private UIElement label(String value) {
-        return $(fillByTemplate(label, value), core().parent).setName("label");
-    }
-
     /**
      * Select particular elements by name
-     * @param names String var arg, elements with text to select
+     * @param values String var arg, elements with text to select
      */
     @JDIAction("Select '{0}' checkboxes in '{name}' checklist")
-    public void select(String... names) {
-        shouldBeVisible("select");
-        for (String name : names) {
-            UIElement value = get(name);
-            if (value.isEnabled())
-                value.click();
-        }
+    public void select(String... values) {
+        list().select(values);
     }
 
-    public <TEnum extends Enum> void select(TEnum... value) {
-        select(toStringArray(map(value, EnumUtils::getEnumValue)));
+    public <TEnum extends Enum> void select(TEnum value) {
+        list().select(value);
     }
 
+    public <TEnum extends Enum> void select(TEnum... values) {
+        list().select(values);
+    }
+
+
+    /**
+     * Selects a value with index in checklist
+     * @param index int var arg
+     */
+    @JDIAction("Select '{0}' for '{name}'")
+    public void select(int index) {
+        list().select(index-1);
+    }
     /**
      * Selects particular elements by index
      * @param indexes String var arg, elements with text to select
      */
     @JDIAction("Select '{0}' checkboxes in '{name}' checklist")
     public void select(int... indexes) {
-        shouldBeVisible("select");
-        for (int index : indexes) {
-            UIElement value = list().get(index - 1);
-            if (value.isEnabled())
-                value.click();
-        }
-    }
-    private void shouldBeVisible(String action) {
-        if (isHidden())
-            throw exception("Checklist should have at least one element visible. Failed to do '%s'", action);
+        for (int index : indexes)
+            select(index);
     }
 
     /**
@@ -83,16 +70,15 @@ public class Checklist extends UIListBase<ChecklistAssert> {
      */
     @JDIAction("Check '{0}' checkboxes in '{name}' checklist")
     public void check(String... names) {
-        shouldBeVisible("check");
         List<String> listNames = asList(names);
-        for (String name : values()) {
-            UIElement value = get(name);
+        for (UIElement value : list()) {
             if (value.isDisabled()) continue;
             if (selected(value) && !listNames.contains(value.labelText().trim())
                     || !selected(value) && listNames.contains(value.labelText().trim()))
                 value.click();
         }
     }
+
 
     protected boolean selected(UIElement value) {
         return value.isSelected();
@@ -103,37 +89,45 @@ public class Checklist extends UIListBase<ChecklistAssert> {
      */
     @JDIAction("Uncheck '{0}' checkboxes in '{name}' checklist")
     public void uncheck(String... names) {
-        shouldBeVisible("uncheck");
         List<String> listNames = asList(names);
-        for (String name : values()) {
-            UIElement value = get(name);
+        for (UIElement value : list()) {
             if (value.isDisabled()) continue;
             if (selected(value) && listNames.contains(value.labelText().trim())
                     || !selected(value) && !listNames.contains(value.labelText().trim()))
                 value.click();
         }
     }
+
+    public <TEnum extends Enum> void check(TEnum value) {
+        check(getEnumValue(value));
+    }
     public <TEnum extends Enum> void check(TEnum... values) {
         check(getEnumValues(values));
     }
 
+
+    public <TEnum extends Enum> void uncheck(TEnum value) {
+        uncheck(getEnumValue(value));
+    }
     public <TEnum extends Enum> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
 
+    public void check(int index) {
+        check(new int[]{index});
+    }
     /**
      * Checks particular elements by index and uncheck others
      * @param indexes int var arg, ids to check
      */
     @JDIAction("Check '{0}' checkboxes in '{name}' checklist")
     public void check(int... indexes) {
-        shouldBeVisible("check");
         List<Integer> listIndexes = toList(indexes);
-        for (int i = 1; i <= values().size(); i++) {
-            UIElement value = list().get(i - 1);
+        for (int i = 0; i < values().size(); i++) {
+            UIElement value = list().get(i);
             if (value.isDisabled()) continue;
-            if (selected(value) && !listIndexes.contains(i)
-                    || !selected(value) && listIndexes.contains(i))
+            if (selected(value) && !listIndexes.contains(i+1)
+                    || !selected(value) && listIndexes.contains(i+1))
                 value.click();
         }
     }
@@ -147,12 +141,14 @@ public class Checklist extends UIListBase<ChecklistAssert> {
      */
     @JDIAction("Check all '{name}' unchecked options")
     public void checkAll() {
-        shouldBeVisible("checkAll");
         for (UIElement checkbox : list()) {
             if (checkbox.isEnabled() && !selected(checkbox)) {
                 checkbox.click();
             }
         }
+    }
+    public void uncheck(int index) {
+        uncheck(new int[]{index});
     }
     /**
      * Unchecks particular elements by index and check others
@@ -160,14 +156,13 @@ public class Checklist extends UIListBase<ChecklistAssert> {
      */
     @JDIAction("Uncheck '{0}' checkboxes in  '{name}' checklist")
     public void uncheck(int... indexes) {
-        shouldBeVisible("uncheck");
         if (indexes.length > 0 && list().get(indexes[0]-1).isDisplayed()) {
             List<Integer> listIndexes = toList(indexes);
-            for (int i = 1; i <= values().size(); i++) {
-                UIElement value = list().get(i - 1);
+            for (int i = 0; i < values().size(); i++) {
+                UIElement value = list().get(i);
                 if (value.isDisabled()) continue;
-                if (selected(value) && listIndexes.contains(i)
-                        || !selected(value) && !listIndexes.contains(i))
+                if (selected(value) && listIndexes.contains(i+1)
+                        || !selected(value) && !listIndexes.contains(i+1))
                     value.click();
             }
         }
@@ -178,7 +173,6 @@ public class Checklist extends UIListBase<ChecklistAssert> {
      */
     @JDIAction("Uncheck all '{name}' checked options")
     public void uncheckAll() {
-        shouldBeVisible("uncheckAll");
         for (UIElement checkbox : list()) {
             if (checkbox.isEnabled() && selected(checkbox)) {
                 checkbox.click();
@@ -193,60 +187,6 @@ public class Checklist extends UIListBase<ChecklistAssert> {
     @JDIAction("Get '{name}' checked options")
     public List<String> checked() {
         return ifSelect(list(), UIElement::isSelected, UIElement::labelText);
-    }
-
-    /**
-     * Selects a value in checklist
-     * @param value String var arg
-     */
-    @JDIAction("Select '{0}' for '{name}'")
-    public void select(String value) {
-        select(new String[]{value});
-    }
-
-    /**
-     * Selects a value with index in checklist
-     * @param index int var arg
-     */
-    @JDIAction("Select '{0}' for '{name}'")
-    public void select(int index) {
-        select(new int[]{index});
-    }
-
-    /**
-     * Gets a list of text from each values from checklist
-     * @return List<String>
-     */
-    @JDIAction("Get '{name}' values")
-    public List<String> values() {
-        return list().values();
-    }
-
-    /**
-     * Gets a list of innerText from each values from checklist
-     * @return List<String>
-     */
-    @JDIAction("Get '{name}' values")
-    public List<String> values(TextTypes type) {
-        return map(list(), element -> element.text(type).trim());
-    }
-
-    /**
-     * Gets enabled values from checklist
-     * @return List<String>
-     */
-    @JDIAction("Get '{name}' enabled options")
-    public List<String> listEnabled() {
-        return list().ifSelect(UIElement::isEnabled, UIElement::labelText);
-    }
-
-    /**
-     * Gets disabled values from checklist
-     * @return List<String>
-     */
-    @JDIAction("Get '{name}' disabled options")
-    public List<String> listDisabled() {
-        return list().ifSelect(UIElement::isDisabled, UIElement::labelText);
     }
 
     /**
@@ -275,7 +215,15 @@ public class Checklist extends UIListBase<ChecklistAssert> {
      */
     @JDIAction("Is '{0}' selected in '{name}'")
     public boolean selected(String value) {
-        return get(value).isSelected();
+        return list().get(value).isSelected();
+    }
+    @Override
+    public List<String> listEnabled() {
+        return list().ifSelect(IListBase::isEnabled, UIElement::labelText);
+    }
+    @Override
+    public List<String> listDisabled() {
+        return list().ifSelect(IListBase::isDisabled, UIElement::labelText);
     }
 
     @Override

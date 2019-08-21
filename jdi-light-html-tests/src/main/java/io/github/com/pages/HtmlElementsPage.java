@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.ui.html.elements.common.*;
@@ -88,6 +89,8 @@ public class HtmlElementsPage extends WebPage {
 
     @UI("[name=checks-group]")
     public static Checklist weather;
+    @UI("[name=checks-group]")
+    public static IsChecklist isWeather;
     public static Checklist weatherNoLocator;
 
     @UI("[name=colors]")
