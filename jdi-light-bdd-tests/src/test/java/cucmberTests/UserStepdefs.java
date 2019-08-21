@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
-import static com.epam.jdi.bdd.Utils.getBaseUIElement;
+import static com.epam.jdi.bdd.Utils.getBaseUI;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
@@ -56,7 +56,7 @@ public class UserStepdefs {
 
     @Then("^Base validation of \"([^\"]*)\"$")
     public void baseValidation(String name) {
-        BaseUIElement el = getBaseUIElement(name);
+        BaseUIElement el = getBaseUI(name);
         assertTrue(el.isEnabled());
         assertTrue(el.isDisplayed());
         assertFalse(el.isDisabled());
