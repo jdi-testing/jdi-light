@@ -15,7 +15,7 @@ Feature: File Input element functionality
 
   Scenario: Upload file by disabled file input element
     Given I open "Html5 Page"
-    And "Disabled File Input" is disabled
+    Then "Disabled File Input" is disabled
     When I try to upload file "/jdi-light-bdd-tests/src/test/resources/general.xml" by "Disabled File Input" file input element
     Then "Disabled File Input" text equals to ""
     And "Disabled File Input" file input element value equals to ""
