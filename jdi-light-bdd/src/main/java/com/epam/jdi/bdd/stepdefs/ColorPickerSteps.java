@@ -8,25 +8,22 @@ import cucumber.api.java.en.When;
 import static com.epam.jdi.bdd.Utils.getUI;
 
 public class ColorPickerSteps {
-    private ColorPicker colorPicker;
-
-    private ColorPicker getColorPicker(String name) {
-        return (ColorPicker) getUI(name, ColorPicker.class);
-    }
-
     @Given("^\"([^\"]*)\" was set to \"([^\"]*)\" color$")
     @When("^I set \"([^\"]*)\" to \"([^\"]*)\" color$")
-    public void preSetColor(String colorPickerName, String color){
-        getColorPicker(colorPickerName).setColor(color);
+    public void preSetColor(String name, String color){
+        ColorPicker colorPicker = getUI(name, ColorPicker.class);
+        colorPicker.setColor(color);
     }
 
     @Then("^\"([^\"]*)\" color equals to \"([^\"]*)\"$")
-    public void haveColor(String colorPickerName, String expectedColor) {
-        getColorPicker(colorPickerName).is().color(expectedColor);
+    public void haveColor(String name, String expectedColor) {
+        ColorPicker colorPicker = getUI(name, ColorPicker.class);
+        colorPicker.is().color(expectedColor);
     }
 
     @Then("^\"([^\"]*)\" color is \"([^\"]*)\"$")
-    public void assertThatColor(String colorPickerName, String color) {
-        getColorPicker(colorPickerName).assertThat().color(color);
+    public void assertThatColor(String name, String color) {
+        ColorPicker colorPicker = getUI(name, ColorPicker.class);
+        colorPicker.is().color(color);
     }
 }
