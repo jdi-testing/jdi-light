@@ -6,9 +6,6 @@ import com.epam.jdi.light.ui.html.base.HtmlElement;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.testng.Assert;
 
 import static com.epam.jdi.bdd.Utils.getBaseUI;
 import static com.epam.jdi.light.elements.composite.WebPage.PAGES;
@@ -21,7 +18,7 @@ import static org.testng.Assert.assertTrue;
 
 public class JDISteps {
 
-    @Given("^I open \"(.*?)\"$")
+    @Given("^I open \"([^\"]*)\"(?: page|)$")
     public void iMOpen(String pageName) {
         WebPage page = PAGES.get(pageName);
         page.shouldBeOpened();
@@ -30,7 +27,7 @@ public class JDISteps {
     @Given("^I open \"([^\"]*)\"(?: page|) with params \"([^\"]*)\"$")
     public void iMOpenParams(String pageName, Object params) {
         WebPage page = PAGES.get(pageName);
-        page.shouldBeOpened();
+        page.shouldBeOpened(params);
     }
 
     //#region When
@@ -236,19 +233,19 @@ public class JDISteps {
 
     @Then("^\"([^\"]*)\" css \"([^\"]*)\" equals to \"([^\"]*)\"$")
     public void cssEquals(String name, String attrName, String cssValue) {
-        BaseUIElement el = Utils.getUI(name);
+        BaseUIElement el = getBaseUI(name);
         el.is().css(attrName, cssValue);
     }
 
     @Then("^\"([^\"]*)\" css \"([^\"]*)\" contains \"([^\"]*)\"$")
     public void cssContains(String name, String css, String cssValue) {
-        BaseUIElement el = Utils.getUI(name);
+        BaseUIElement el = getBaseUI(name);
         el.is().css(css, containsString(cssValue));
     }
 
     @Then("^\"([^\"]*)\" css \"([^\"]*)\" match to \"([^\"]*)\"$")
     public void cssMatchRegex(String name, String css, String regex) {
-        BaseUIElement el = Utils.getUI(name);
+        BaseUIElement el = getBaseUI(name);
         el.is().css(css, matchesPattern(regex));
     }
 
@@ -278,7 +275,7 @@ public class JDISteps {
 
     @Then("^\"([^\"]*)\" disappear$")
     public void isDisappear(String name) {
-        BaseUIElement el = Utils.getUI(name);
+        BaseUIElement el = getBaseUI(name);
         el.is().disappear();
     }
 
@@ -382,6 +379,11 @@ public class JDISteps {
     @Then("^Current URL is \"(.*?)\"$")
     public void currentUrlIs(String expectedUrl) {
         assertEquals(getUrl(), expectedUrl);
+    }
+
+    @Then("^Current page Title is \"(.*?)\"$")
+    public void titleIs(String expectedUrl) {
+        assertEquals(getTitle(), expectedUrl);
     }
 
 }

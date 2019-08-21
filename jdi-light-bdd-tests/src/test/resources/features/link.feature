@@ -6,7 +6,7 @@ Feature: link
 
   Scenario: Link text equivalence ignoring case test
     Given I open "Html5 Page"
-    Then "Github Link" text ignoring case equals to "Github jdi"
+    Then "Github Link" text contains "Github"
 
   Scenario: Link reference equivalence test
     Given I open "Html5 Page"
@@ -18,24 +18,24 @@ Feature: link
 
   Scenario: Link URL path test
     Given I open "Html5 Page"
-    Then "Github Link" URL path equals to "/jdi-testing"
+    Then "Github Link" reference equals to "https://github.com/jdi-testing"
 
-  Scenario: Link alternative text equivalence test
+  Scenario: Link alt text equivalence test
     Given I open "Html5 Page"
-    Then "Github Link" alternative text equals to "Github JDI Link"
+    Then "Github Link" alt text equals to "Github JDI Link"
 
-  Scenario: Link alternative text matching to RegExp
+  Scenario: Link alt text matching to RegExp
     Given I open "Html5 Page"
-    Then "Github Link" alternative text match to "Git.* JE*DI Link"
+    Then "Github Link" alt text match to "Git.* JE*DI Link"
 
-  Scenario: Link alternative text likeness test
+  Scenario: Link alt text likeness test
     Given I open "Html5 Page"
-    Then "Github Link" alternative text contains "JDI"
+    Then "Github Link" alt text contains "JDI"
 
   Scenario: Click link test
     Given I open "Html5 Page"
     When Click on "Github Link"
-    Then Current URL is "https://github.com/jdi-testing"
+    Then Current page URL is "https://github.com/jdi-testing"
 
   Scenario: Link activity validation test
     Given I open "Html5 Page"

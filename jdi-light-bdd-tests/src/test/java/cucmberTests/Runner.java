@@ -30,7 +30,7 @@ import static io.github.com.pages.Header.userIcon;
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass
-    public static void setUp() {    
+    public static void setUp() {
     	SMART_SEARCH_LOCATORS.add("[ui=%s]");
         logger.setLogLevel(INFO);
         initElements(StaticSite.class);

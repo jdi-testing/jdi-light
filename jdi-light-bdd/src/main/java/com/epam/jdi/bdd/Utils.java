@@ -22,29 +22,40 @@ public final class Utils {
     }
 
     public static BaseUIElement getBaseUI(String name) {
-        if (ELEMENTS.has(name)) {
-            List<Object> elements = ELEMENTS.get(name);
-            if (elements.size() == 1)
-                return (BaseUIElement) elements.get(0);
-            BaseUIElement element = (BaseUIElement) LinqUtils.first(elements,
-                    el -> {
-                        WebPage page = ((BaseUIElement) el).getPage();
-                        return page != null && page.getName().equals(getCurrentPage());
-                    });
-            if (element != null)
-                return element;
+
+        public static <T > T getBaseUI(String name, Class < T > type) {
+            try {
+                return (T) getBseUI(name);
+            } catch (Exception ex) {
+                throw exception("Can't convert element to %s", type.getSimpleName());
+            }
         }
-        throw exception("Can't find %s element", name);
+        public static BaseUIElement getBaseUI (String name){
+            if (ELEMENTS.has(name)) {
+                List<Object> elements = ELEMENTS.get(name);
+                if (elements.size() == 1)
+                    return (BaseUIElement) elements.get(0);
+                BaseUIElement element = (BaseUIElement) LinqUtils.first(elements,
+                        el -> {
+                            WebPage page = ((BaseUIElement) el).getPage();
+                            return page != null && page.getName().equals(getCurrentPage());
+                        });
+                if (element != null)
+                    return element;
+            }
+            throw exception("Can't find %s element", name);
+        }
+
+        public static BaseUIElement getBaseUI (String name, String section){
+            if (ELEMENTS.has(name)) {
+                List<Object> els = ELEMENTS.get(name);
+                Object result = first(els, el -> isClass(el.getClass(), JDIBase.class) && ((JDIBase) el).hasParent(section));
+                if (result == null)
+                    throw exception("Can't find %s element at %s", name, section);
+                return (BaseUIElement) result;
+            }
+            throw exception("Can't find %s element", name);
+        }
     }
 
-    public static BaseUIElement getUI(String name, String section) {
-        if (ELEMENTS.has(name)) {
-            List<Object> els = ELEMENTS.get(name);
-            Object result = first(els, el -> isClass(el.getClass(), JDIBase.class) && ((JDIBase) el).hasParent(section));
-            if (result == null)
-                throw exception("Can't find %s element at %s", name, section);
-            return (BaseUIElement) result;
-        }
-        throw exception("Can't find %s element", name);
-    }
 }
