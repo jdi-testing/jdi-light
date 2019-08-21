@@ -2,7 +2,9 @@ package cucmberTests.stepdefs;
 
 
 import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.composite.WebPage;
 import cucumber.api.PendingException;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
@@ -10,6 +12,11 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
 import static com.epam.jdi.bdd.Utils.getUI;
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.entities.Users.DEFAULT_USER;
+import static io.github.com.pages.Header.*;
+import static io.github.com.pages.Header.loginForm;
+import static io.github.com.pages.Header.userIcon;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -64,5 +71,19 @@ public class UserStepdefs {
         el.highlight("blue");
         el.highlight();
         el.show();
+    }
+    @Given("^I should be logged in$")
+    public void iShouldBeLogin() {
+        String url = WebPage.getUrl();
+        if (!url.contains("https://jdi-testing.github.io/jdi-light/")
+                || url.contains("issue")) {
+            homePage.open();
+        }
+        if (userName.isHidden()) {
+            if (loginForm.isHidden()) {
+                userIcon.click();
+            }
+            loginForm.submit(DEFAULT_USER);
+        }
     }
 }

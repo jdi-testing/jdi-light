@@ -10,11 +10,11 @@ Feature: DateTimeSelector, INPUT TYPE TIME
 
   Scenario: Get attribute "min" of input type datetime test
     Given I open "Html5 Page"
-    Then "Booking Time" attribute min equals to "9:00"
+    Then "Booking Time" min equals to "9:00"
 
   Scenario: Get attribute "max" of input type datetime test
     Given I open "Html5 Page"
-    Then  "Booking Time" attribute max equals to "18:00"
+    Then  "Booking Time" max equals to "18:00"
 
   Scenario: Date validation test
     Given I open "Html5 Page"
