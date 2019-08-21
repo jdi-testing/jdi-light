@@ -33,13 +33,13 @@ public class FileInputSteps {
 
     @And("^\"([^\"]*)\" file input element value equals to \"([^\"]*)\"$")
     public void fileInputElementValueEqualsTo(String elementName, String value) {
-        FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
+        FileInput fileInput = (FileInput) Utils.getUI(elementName);
         assertEquals(fileInput.value(), value);
     }
 
     @And("^\"([^\"]*)\" file input element value contains \"([^\"]*)\"$")
     public void fileInputElementValueContains(String elementName, String value) {
-        FileInput fileInput = (FileInput) ELEMENTS.get(elementName).get(0);
+        FileInput fileInput = (FileInput) Utils.getUI(elementName);
         MatcherAssert.assertThat(fileInput.value(), CoreMatchers.containsString(value));
     }
 }
