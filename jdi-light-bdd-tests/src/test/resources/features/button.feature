@@ -27,28 +27,3 @@ Feature: button
   Scenario:Basic validation
     Given I open "Html5 Page" page
     Then "Red Button" is basically valid
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
