@@ -1,41 +1,45 @@
 Feature: Checkbox
 
-  Scenario: Get Label Text Test
+  Scenario: Get label text test
     Given I open "Html5 Page"
-    When Check "Accept Conditions" checkbox
-    Then "Accept Conditions" checkbox label text equals to "Accept terms and conditions"
+    When I Check "Accept Conditions"
+    Then "Accept Conditions" label text equals to "Accept terms and conditions"
 
-  Scenario: Check Test
+  Scenario: Check test
     Given I open "Html5 Page"
-    When Check "Accept Conditions" checkbox
-    When Check "Accept Conditions" checkbox
-    Then "Accept Conditions" checkbox is selected
+    When I Check "Accept Conditions"
+    When I Check "Accept Conditions"
+    Then "Accept Conditions" is selected
 
-  Scenario: Uncheck Test
+  Scenario: Uncheck test
     Given I open "Html5 Page"
-    When Check "Accept Conditions" checkbox
-    When Uncheck "Accept Conditions" checkbox
-    Then "Accept Conditions" checkbox is deselected
+    When I Check "Accept Conditions"
+    When I Uncheck "Accept Conditions"
+    Then "Accept Conditions" is deselected
 
-  Scenario: Click Test
+  Scenario: Click test
     Given I open "Html5 Page"
-    When Check "Accept Conditions" checkbox
-    Then "Accept Conditions" checkbox is selected
-    When Click "Accept Conditions" checkbox
-    Then "Accept Conditions" checkbox is deselected
+    When I Check "Accept Conditions"
+    Then "Accept Conditions" is selected
+    When I Click on "Accept Conditions"
+    Then "Accept Conditions" is deselected
 
-  Scenario: Is Validation Test
-#    TODO (Waiting for common methods enabled() and displayed() in BDD branch)
-
-  Scenario: Label Test
+  Scenario: Is validation test
     Given I open "Html5 Page"
-    When Check "Accept Conditions" checkbox
-    Then "Accept Conditions" checkbox label text equals to "Accept terms and conditions"
-    Then "Accept Conditions" checkbox label text contains "terms and conditions"
-    Then "Accept Conditions" checkbox label text equals to "accept terms and conditions" ignoring case
+    When I Check "Accept Conditions"
+    Then "Accept Conditions" is selected
+    When I Click on "Accept Conditions"
+    Then "Accept Conditions" is deselected
+    Then "Accept Conditions" is enabled
+    Then "Accept Conditions" is displayed
 
-#  The same as part of the Click Test
-#  Scenario: Assert Validation Test
-#    Given I open "Html5 Page"
-#    When Check "Accept Conditions" checkbox
-#    Then "Accept Conditions" checkbox is selected
+  Scenario: Label test
+    Given I open "Html5 Page"
+    When I Check "Accept Conditions"
+    Then "Accept Conditions" label text equals to "Accept terms and conditions"
+    Then "Accept Conditions" label text contains "terms and conditions"
+
+  Scenario: Assert validation test
+    Given I open "Html5 Page"
+    When I Check "Accept Conditions"
+    Then "Accept Conditions" is basically valid
