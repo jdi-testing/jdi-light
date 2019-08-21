@@ -1,17 +1,14 @@
 package com.epam.jdi.bdd;
 
-import static com.epam.jdi.bdd.Utils.getUI;
-import static com.epam.jdi.light.elements.composite.WebPage.PAGES;
-//import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertTrue;
-import static org.hamcrest.Matchers.*;
-
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
+import static com.epam.jdi.light.elements.composite.WebPage.PAGES;
+import static org.hamcrest.Matchers.*;
+
 
 public class JDISteps {
     @Given("^I open \"([^\"]*)\"(?: page|)$")
@@ -24,12 +21,13 @@ public class JDISteps {
 		WebPage page = PAGES.get(pageName);
 		page.shouldBeOpened(params);
 	}
+
+	//#region When
     @When("^Refresh webpage$")
     public void refreshWebpage() {
         WebPage.refresh();
     }
 
-	//#region When
     /*BaseUIElement methods*/
 	@When("^(?:I |)Click on \"([^\"]*)\"$")
     public void click(String name) {
@@ -257,6 +255,11 @@ public class JDISteps {
 	public void isHidden(String name) {
 		BaseUIElement el = Utils.getUI(name);
 		el.is().hidden();
+	}
+	@Then("^\"([^\"]*)\" disappear$")
+	public void isDisappear(String name) {
+		BaseUIElement el = Utils.getUI(name);
+		el.is().disappear();
 	}
 	@Then("^\"([^\"]*)\" is not appear$")
 	public void isNotAppear(String name) {

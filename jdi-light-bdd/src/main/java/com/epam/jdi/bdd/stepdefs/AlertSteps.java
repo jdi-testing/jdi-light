@@ -1,11 +1,11 @@
 package com.epam.jdi.bdd.stepdefs;
 
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
 import static com.epam.jdi.light.elements.base.Alerts.getAlertText;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 public class AlertSteps {
 	@Then("^Alert text equals to \"([^\"]*)\"$")
