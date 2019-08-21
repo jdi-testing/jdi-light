@@ -8,9 +8,12 @@ Feature: DateTimeSelector, INPUT TYPE MONTH
     Given I open "Html5 Page"
     Then "Month Date" label text equals to "Month of Holidays"
 
-  Scenario: Get attribute "min" and "max" of input type datetime test
+  Scenario: Get attribute "min" of input type datetime test
     Given I open "Html5 Page"
     Then "Month Date" attribute min equals to "2015-03"
+
+  Scenario: Get attribute "max" of input type datetime test
+    Given I open "Html5 Page"
     And  "Month Date" attribute max equals to "2020-12"
 
   Scenario: Date validation test

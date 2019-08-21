@@ -8,10 +8,14 @@ Feature: DateTimeSelector, INPUT TYPE DATETIME-LOCAL
     Given I open "Html5 Page"
     Then "Party Time" label text equals to "Date/time:"
 
-  Scenario: Get attribute "min" and "max" of input type datetime test
+  Scenario: Get attribute "min" of input type datetime test
     Given I open "Html5 Page"
     Then "Party Time" attribute min equals to "2018-05-07T00:00"
-    And  "Party Time" attribute max equals to "2018-06-14T00:00"
+    Then "Party Time" attribute max equals to "2018-06-14T00:00"
+
+  Scenario: Get attribute "max" of input type datetime test
+    Given I open "Html5 Page"
+    Then  "Party Time" attribute max equals to "2018-06-14T00:00"
 
   Scenario: Date validation test
     Given I open "Html5 Page"

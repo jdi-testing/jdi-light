@@ -8,14 +8,17 @@ Feature: DateTimeSelector, INPUT TYPE TIME
     Given I open "Html5 Page"
     Then "Booking Time" label text equals to "Booking Time:"
 
-  Scenario: Get attribute "min" and "max" of input type datetime test
+  Scenario: Get attribute "min" of input type datetime test
     Given I open "Html5 Page"
     Then "Booking Time" attribute min equals to "9:00"
-    And  "Booking Time" attribute max equals to "18:00"
+
+  Scenario: Get attribute "max" of input type datetime test
+    Given I open "Html5 Page"
+    Then  "Booking Time" attribute max equals to "18:00"
 
   Scenario: Date validation test
     Given I open "Html5 Page"
-    And "Booking Time" is enabled
+    Then "Booking Time" is enabled
     And "Booking Time" text equals to "11:00"
 
   Scenario: Label validation test

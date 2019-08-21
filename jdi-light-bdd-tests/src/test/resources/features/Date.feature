@@ -8,9 +8,12 @@ Feature: DateTimeSelector, INPUT TYPE DATE
     Given I open "Html5 Page"
     Then "Birth Date" label text equals to "Birth date"
 
-  Scenario: Get attribute "min" and "max" of input type datetime test
+  Scenario: Get attribute "min" of input type datetime test
     Given I open "Html5 Page"
     Then "Birth Date" attribute min equals to "1970-01-01"
+
+  Scenario: Get attribute "max" of input type datetime test
+    Given I open "Html5 Page"
     Then  "Birth Date" attribute max equals to "2030-12-31"
 
   Scenario: Date validation test
