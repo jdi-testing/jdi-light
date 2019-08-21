@@ -4,7 +4,7 @@ Feature: link
     Given I open "Html5 Page"
     Then "Github Link" text equals to "Github JDI"
 
-  Scenario: Link text likeness ignoring case test
+  Scenario: Link text likeness test
     Given I open "Html5 Page"
     Then "Github Link" text contains "Github"
 
