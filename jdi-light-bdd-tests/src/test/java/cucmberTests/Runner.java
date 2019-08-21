@@ -1,9 +1,5 @@
 package cucmberTests;
 
-/**
- * Created by Dmitry_Lebedev1 on 1/22/2016.
- */
-
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
@@ -22,15 +18,20 @@ import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.userIcon;
 
+/**
+ * Created by Dmitry_Lebedev1 on 1/22/2016.
+ */
+
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "classpath:features",
         glue = {"com.epam.jdi.bdd", "cucmberTests"}
+        //,tags = "@test"
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass
-    public static void beforeClass() {
-        SMART_SEARCH_LOCATORS.add("[ui=%s]");
+    public static void setUp() {    
+    	SMART_SEARCH_LOCATORS.add("[ui=%s]");
         logger.setLogLevel(INFO);
         initElements(StaticSite.class);
         homePage.open();
@@ -40,7 +41,7 @@ public class Runner extends AbstractTestNGCucumberTests {
     }
 
     @AfterClass
-    public static void afterClass() {
+    public static void shutDown() {
         killAllSeleniumDrivers();
     }
 
