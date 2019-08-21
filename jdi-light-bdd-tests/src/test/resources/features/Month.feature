@@ -10,15 +10,15 @@ Feature: DateTimeSelector, INPUT TYPE MONTH
 
   Scenario: Get attribute "min" of input type datetime test
     Given I open "Html5 Page"
-    Then "Month Date" attribute min equals to "2015-03"
+    Then "Month Date" min equals to "2015-03"
 
   Scenario: Get attribute "max" of input type datetime test
     Given I open "Html5 Page"
-    And  "Month Date" attribute max equals to "2020-12"
+    Then  "Month Date" max equals to "2020-12"
 
   Scenario: Date validation test
     Given I open "Html5 Page"
-    And "Month Date" is enabled
+    Then "Month Date" is enabled
     And "Month Date" text contains "05"
 
   Scenario: Label validation test
@@ -33,7 +33,7 @@ Feature: DateTimeSelector, INPUT TYPE MONTH
   Scenario: Set date
     Given I open "Html5 Page"
     Then "Month Date" text equals to "2018-05"
-    Then I Set date "2018-10" in "Month Date"
+    When I Set date "2018-10" in "Month Date"
     Then "Month Date" text equals to "2018-10"
 
   Scenario: Base validation test
