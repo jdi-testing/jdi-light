@@ -1,6 +1,7 @@
-package cucmberTests;
+package cucmberTests.stepdefs;
 
-import com.epam.jdi.light.elements.base.BaseElement;
+
+import com.epam.jdi.light.elements.base.BaseUIElement;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -8,8 +9,8 @@ import org.junit.Assert;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
-import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
-import static org.testng.Assert.*;
+import static com.epam.jdi.bdd.Utils.getUI;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -47,9 +48,9 @@ public class UserStepdefs {
 
     }
 
-    @Then("^I make base validation \"([^\"]*)\" element$")
-    public void iMakeBaseValidationElement(String element_name) {
-        BaseElement el = (BaseElement) ELEMENTS.get(element_name).get(0);
+    @Then("^\"([^\"]*)\" is basically valid$")
+    public void baseValidation(String name) {
+        BaseUIElement el = getUI(name);
         assertTrue(el.isEnabled());
         assertTrue(el.isDisplayed());
         assertFalse(el.isDisabled());
@@ -59,7 +60,7 @@ public class UserStepdefs {
         Dimension size = el.getSize();
         assertTrue(size.height > 0 && size.width > 0, "Size: " + location);
         el.setAttribute("test-jdi", "test-value");
-        assertEquals(el.getAttribute("test-jdi"), "test-value");
+        org.testng.Assert.assertEquals(el.getAttribute("test-jdi"), "test-value");
         el.highlight("blue");
         el.highlight();
         el.show();
