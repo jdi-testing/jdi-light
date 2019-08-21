@@ -1,7 +1,7 @@
 Feature: image
 
 Background:
-  Given I should be login
+  Given I should be logged in
 
 Scenario: Check image source
   Given I open "Html5 Page"
