@@ -17,9 +17,17 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
  * Created by Dmitry_Lebedev1 on 1/13/2016.
  */
 public final class Utils {
+
     private Utils() {
     }
-    
+
+    public static <T> T getUI(String name, Class<T> type) {
+        try {
+            return (T) getUI(name);
+        } catch (Exception ex) {
+            throw exception("Can't convert element to %s", type.getSimpleName());
+        }
+    }
     public static BaseUIElement getUI(String name) {
         if (ELEMENTS.has(name)) {
             List<Object> elements = ELEMENTS.get(name);
