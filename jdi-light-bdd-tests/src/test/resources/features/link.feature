@@ -4,7 +4,7 @@ Feature: link
     Given I open "Html5 Page"
     Then "Github Link" text equals to "Github JDI"
 
-  Scenario: Link text likeness test
+  Scenario: Link text contains test
     Given I open "Html5 Page"
     Then "Github Link" text contains "Github"
 
@@ -12,7 +12,7 @@ Feature: link
     Given I open "Html5 Page"
     Then "Github Link" reference equals to "https://github.com/jdi-testing"
 
-  Scenario: Link reference likeness test
+  Scenario: Link reference contains test
     Given I open "Html5 Page"
     Then "Github Link" reference contains "github"
 
@@ -24,7 +24,7 @@ Feature: link
     Given I open "Html5 Page"
     Then "Github Link" alternative text match to "Git.* JE*DI Link"
 
-  Scenario: Link alternative text likeness test
+  Scenario: Link alternative text contains test
     Given I open "Html5 Page"
     Then "Github Link" alternative text contains "JDI"
 
