@@ -5,6 +5,8 @@ Feature: File Input element functionality
     Then "Avatar" label text equals to "Profile picture:"
     And "Avatar" label text contains "picture"
     And "Avatar" is enabled
+    And "Avatar" is displayed
+    And "Avatar" attribute "id" equals to "avatar"
     When I upload file "/src/test/resources/general.xml" by "Avatar" file input element
     Then "Avatar" text equals to "C:\fakepath\general.xml"
     And "Avatar" text contains "general.xml"
