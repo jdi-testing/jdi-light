@@ -1,4 +1,4 @@
-package cucmberTests;
+package cucmberTests.stepdefs;
 
 
 import com.epam.jdi.light.elements.base.BaseUIElement;
@@ -11,13 +11,13 @@ import org.junit.Assert;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
-import static com.epam.jdi.bdd.Utils.getBaseUI;
+import static com.epam.jdi.bdd.Utils.getUI;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
-import static org.testng.Assert.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
+import static io.github.com.pages.Header.loginForm;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Dmitry_Lebedev1 on 1/12/2016.
@@ -54,19 +54,19 @@ public class UserStepdefs {
 
     }
 
-    @Then("^Base validation of \"([^\"]*)\"$")
+    @Then("^\"([^\"]*)\" is basically valid$")
     public void baseValidation(String name) {
-        BaseUIElement el = getBaseUI(name);
+        BaseUIElement el = getUI(name);
         assertTrue(el.isEnabled());
         assertTrue(el.isDisplayed());
         assertFalse(el.isDisabled());
         assertFalse(el.isHidden());
         Point location = el.getLocation();
-        assertTrue("Location: " + location, location.x > 0 && location.y > 0);
+        assertTrue(location.x > 0 && location.y > 0, "Location: " + location);
         Dimension size = el.getSize();
-        assertTrue("Size: " + location, size.height > 0 && size.width > 0);
+        assertTrue(size.height > 0 && size.width > 0, "Size: " + location);
         el.setAttribute("test-jdi", "test-value");
-        assertEquals(el.getAttribute("test-jdi"), "test-value");
+        org.testng.Assert.assertEquals(el.getAttribute("test-jdi"), "test-value");
         el.highlight("blue");
         el.highlight();
         el.show();

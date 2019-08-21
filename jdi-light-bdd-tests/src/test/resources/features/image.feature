@@ -26,4 +26,4 @@ Scenario: Check image source
 
   Scenario: Do base validation
     Given I open "Html5 Page"
-    Then Base validation of "Jdi Logo"
+    Then "Jdi Logo" is basically valid
