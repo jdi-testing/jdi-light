@@ -16,6 +16,7 @@ import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
 import static io.github.com.pages.Header.loginForm;
+import static io.github.com.pages.Header.userIcon;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -71,8 +72,7 @@ public class UserStepdefs {
         el.highlight();
         el.show();
     }
-
-    @Given("^I should be login$")
+    @Given("^I should be logged in$")
     public void iShouldBeLogin() {
         String url = WebPage.getUrl();
         if (!url.contains("https://jdi-testing.github.io/jdi-light/")

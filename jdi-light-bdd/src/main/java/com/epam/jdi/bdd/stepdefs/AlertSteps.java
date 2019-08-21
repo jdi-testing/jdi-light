@@ -5,13 +5,15 @@ import cucumber.api.java.en.When;
 
 import static com.epam.jdi.light.elements.base.Alerts.acceptAlert;
 import static com.epam.jdi.light.elements.base.Alerts.getAlertText;
+import static com.epam.jdi.light.elements.base.Alerts.validateAlert;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AlertSteps {
 	@Then("^Alert text equals to \"([^\"]*)\"$")
     public void alertTextEquals(String alertText) {
-    	assertEquals(alertText, getAlertText());
+		validateAlert(is(alertText));
     }
 	
 	@Then("^Alert text contains \"([^\"]*)\"$")
