@@ -10,7 +10,8 @@ import static org.hamcrest.Matchers.*;
  * Created by Ekaterina Vasilkova on 19.08.2019
  */
 
-public class LinkStep {
+public class LinkSteps {
+
     @Then("^\"([^\"]*)\" reference equals to \"([^\"]*)\"$")
     public void refEquals(String name, String expectedText) {
         Link link = getUI(name, Link.class);
@@ -46,4 +47,5 @@ public class LinkStep {
         Link link = getUI(name, Link.class);
         link.is().alt(matchesPattern(regex));
     }
+
 }
