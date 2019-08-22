@@ -1,3 +1,4 @@
+@DateTimeSelector
 Feature: DateTimeSelector, INPUT TYPE WEEK
 
   Scenario: Get date value test
