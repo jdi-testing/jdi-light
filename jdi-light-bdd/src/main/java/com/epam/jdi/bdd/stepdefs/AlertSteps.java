@@ -3,6 +3,7 @@ package com.epam.jdi.bdd.stepdefs;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import static com.epam.jdi.light.elements.base.Alerts.acceptAlert;
 import static com.epam.jdi.light.elements.base.Alerts.getAlertText;
 import static com.epam.jdi.light.elements.base.Alerts.validateAlert;
 import static org.hamcrest.Matchers.is;
@@ -21,7 +22,7 @@ public class AlertSteps {
     }
 	
 	@When("^Accept alert")
-	public void acceptAlert() {
+	public void iAcceptAlert() {
 		acceptAlert();
 	}
 }
