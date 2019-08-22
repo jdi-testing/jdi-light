@@ -24,7 +24,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
     /**
      * Check that the element is disappeared
      */
-    @JDIAction("Assert that '{name}' is disappeared")
+    @JDIAction("Assert that '{name}' disappeared")
     public A disappear() {
         jdiAssert(element.isDisplayed() ? "displayed" : "disappeared", is("disappeared"));
         return (A) this;
