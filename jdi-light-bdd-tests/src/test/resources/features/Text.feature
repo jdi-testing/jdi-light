@@ -8,7 +8,7 @@ Feature: Text
   Scenario: Text validation test
     Given I open "Html5 Page"
     Then "Jdi Text" is enabled
-    And "Jdi Text" text contains "Powerful Framework for UI"
+    Then "Jdi Text" text contains "Powerful Framework for UI"
 
   Scenario: Base validation test
     Given I open "Html5 Page"
