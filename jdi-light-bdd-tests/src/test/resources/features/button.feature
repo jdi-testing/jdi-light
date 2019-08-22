@@ -24,6 +24,6 @@ Feature: button
     And "Blue Button" text contains "BLUE BUTTON"
     And "Disabled Button" is disabled
 
-  Scenario:Basic validation
+  Scenario: Basic validation
     Given I open "Html5 Page" page
     Then "Red Button" is basically valid
