@@ -8,7 +8,6 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.ListElementNameTypes;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -31,9 +30,9 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.common.ListElementNameTypes.INDEX;
-import static com.epam.jdi.light.common.ListElementNameTypes.SMART;
+import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
+import static com.epam.jdi.light.elements.common.UIElement.SMART_LIST_TEXT;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -170,14 +169,14 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
                 throw exception("Can't get '%s'. No elements with this name found", value);
         }
     }
-    private JFunc1<UIElement, String> UIELEMENT_NAME = SMART.func;
+    private JFunc1<UIElement, String> UIELEMENT_NAME = SMART_LIST_TEXT;
     private boolean nameIndex = false;
 
     public WebList setUIElementName(JFunc1<UIElement, String> func) {
         UIELEMENT_NAME = func;
         return this;
     }
-    public WebList setUIElementName(ListElementNameTypes type) {
+    public WebList setUIElementName(TextTypes type) {
         if (type.equals(INDEX)) {
             nameIndex = true;
             return this;
@@ -364,7 +363,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public String selected() {
         refresh();
         UIElement first = logger.logOff(() -> first(UIElement::isSelected) );
-        return first != null ? first.getText() : "";
+        return first != null ? getElementName(first) : "";
     }
 
     /**
@@ -419,7 +418,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     @JDIAction("Get '{name}' checked values")
     public List<String> checked() {
-        return ifSelect(IListBase::isSelected, IsText::getText);
+        return ifSelect(IListBase::isSelected, this::getElementName);
     }
 
     @JDIAction("Get '{name}' values")
@@ -431,18 +430,18 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     @JDIAction("Get '{name}' values")
     public List<String> values(TextTypes type) {
-        setUIElementName(ListElementNameTypes.get(type));
+        setUIElementName(type);
         return values();
     }
 
     @JDIAction("Get list of enabled values for '{name}'")
     public List<String> listEnabled() {
-        return ifSelect(IListBase::isEnabled, IListBase::getText);
+        return ifSelect(IListBase::isEnabled, this::getElementName);
     }
 
     @JDIAction("Get list of disabled values for '{name}'")
     public List<String> listDisabled() {
-        return ifSelect(IListBase::isDisabled, IListBase::getText);
+        return ifSelect(IListBase::isDisabled, this::getElementName);
     }
     @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {

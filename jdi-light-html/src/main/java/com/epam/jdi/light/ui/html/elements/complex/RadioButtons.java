@@ -23,6 +23,9 @@ import static org.openqa.selenium.By.cssSelector;
 
 public class RadioButtons extends UIListBase<UISelectAssert> {
 
+    public RadioButtons() {
+        base().setLocator("input[type=radio]");
+    }/*
     By radioButton = cssSelector("input[type=radio][id='%s']");
     By label = LABEL_LOCATOR;
     public void setLabelLocator(String locator) {
@@ -38,6 +41,7 @@ public class RadioButtons extends UIListBase<UISelectAssert> {
     }
 
     List<Label> labels() { return map(getAllElements(), el -> $(el).label()); }
+
 
     private List<WebElement> getAllElements() {
         if (list().core().getLocator() == null)
@@ -126,5 +130,5 @@ public class RadioButtons extends UIListBase<UISelectAssert> {
     @Override
     public UISelectAssert is() {
         return new UISelectAssert<>().set(this);
-    }
+    }*/
 }

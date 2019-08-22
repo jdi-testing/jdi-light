@@ -16,7 +16,7 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     @JDIAction("Select '{0}' in '{name}'")
     default void select(String value) { list().select(value); }
     @JDIAction("Select '{0}' in '{name}'")
-    default void select(int index) { list().select(index); }
+    default void select(int index) { list().select(index-1); }
     @JDIAction("Select '{0}' in '{name}'")
     default <TEnum extends Enum> void select(TEnum value) {
         select(getEnumValue(value));

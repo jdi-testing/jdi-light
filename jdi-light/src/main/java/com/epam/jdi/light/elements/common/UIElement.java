@@ -31,6 +31,9 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.TextTypes.INNER;
+import static com.epam.jdi.light.common.TextTypes.TEXT;
+import static com.epam.jdi.light.common.TextTypes.VALUE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
@@ -535,29 +538,45 @@ public class UIElement extends JDIBase
     }
     @Override
     public String text(TextTypes type) {
-        switch (type) {
-            case TEXT:
-                return get().getText();
-            case VALUE:
-                return attr("value");
-            case INNER_TEXT:
-                return jsExecute("innerText");
-            case SMART:
-            default:
-                return SMART_GET_TEXT.execute(this);
-        }
+        return type.func.execute(this);
     }
     public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
-        String text = ui.get().getText();
+        String text = ui.text(TEXT);
         if (isNotBlank(text))
             return text;
-        text = ui.jsExecute("innerText");
+        text = ui.text(INNER);
         if (isNotBlank(text))
             return text;
-        text = ui.attr("value");
+        text = ui.text(VALUE);
+        if (isNotBlank(text))
+            return text;
+        String id = ui.attr("id");
+        if (isNotBlank(id)) {
+            UIElement label = $(By.cssSelector("[for=" + id + "]"));
+            label.setTimeout(0);
+            try {
+                text = label.getText();
+            } catch (Throwable ignore) { }
+        }
         return isNotBlank(text) ? text : "";
     };
-
+    public static JFunc1<UIElement, String> SMART_LIST_TEXT = ui -> {
+        String text = ui.text(TEXT);
+        if (isNotBlank(text))
+            return text;
+        text = ui.text(INNER);
+        if (isNotBlank(text))
+            return text;
+        String id = ui.attr("id");
+        if (isNotBlank(id)) {
+            UIElement label = $(By.cssSelector("[for=" + id + "]"));
+            label.setTimeout(0);
+            try {
+                text = label.getText();
+            } catch (Throwable ignore) { }
+        }
+        return isNotBlank(text) ? text : ui.text(VALUE);
+    };
     public UIElement find(String by) {
         return $(by, this);
     }

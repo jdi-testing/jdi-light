@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.common.TextTypes.INNER_TEXT;
+import static com.epam.jdi.light.common.TextTypes.INNER;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.com.pages.MetalAndColorsPage.colors3;
@@ -79,16 +79,16 @@ public class DropdownEx3Tests extends TestsInit {
     @Test
     public void isValidationTest() {
         colors3.is().selected("Colors");
-        colors3.is().values(INNER_TEXT, hasItem("Yellow"));
+        colors3.is().values(INNER, hasItem("Yellow"));
     }
 
     @Test
     public void assertValidationTest() {
-        colors3.assertThat().values(INNER_TEXT, contains("Colors", "Red", "Green", "Blue", "Yellow"));
+        colors3.assertThat().values(INNER, contains("Colors", "Red", "Green", "Blue", "Yellow"));
     }
     @Test
     public void innerValuesTest() {
-        assertThat(colors3.values(INNER_TEXT), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
+        assertThat(colors3.values(INNER), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
     @Test
     public void expandTests() {
