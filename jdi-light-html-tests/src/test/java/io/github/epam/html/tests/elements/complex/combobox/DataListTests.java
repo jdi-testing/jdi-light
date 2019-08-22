@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.elements.complex;
+package io.github.epam.html.tests.elements.complex.combobox;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
-public class ComboboxTests extends TestsInit {
+public class DataListTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -29,6 +29,38 @@ public class ComboboxTests extends TestsInit {
         assertEquals(iceCream.getValue(), text);
     }
 
+    @Test
+    public void getTextTest() {
+        assertEquals(iceCream.getText(), text);
+    }
+
+    @Test
+    public void inputTest() {
+        iceCream.input("New text");
+        assertEquals(iceCream.getText(), "New text");
+    }
+
+    @Test
+    public void clearTest() {
+        iceCream.clear();
+        assertEquals(iceCream.getText(), "");
+    }
+
+    @Test
+    public void placeholderTest() {
+        assertEquals(iceCream.placeholder(), "Ice cream");
+    }
+
+    @Test
+    public void focusTest() {
+        iceCream.focus();
+    }
+
+    @Test
+    public void sendKeysTest() {
+        iceCream.sendKeys("Test");
+        assertEquals(iceCream.getValue(), text+"Test");
+    }
     @Test
     public void selectTest() {
         iceCream.select("Chocolate");

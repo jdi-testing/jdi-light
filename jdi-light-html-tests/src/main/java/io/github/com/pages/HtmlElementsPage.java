@@ -3,6 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
+import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.ui.html.elements.common.*;
@@ -81,8 +82,8 @@ public class HtmlElementsPage extends WebPage {
     // @UI("#multi-dropdown") public static MultiSelector multiDropdown;
 
     public static DataListOptions iceCream;
-    // @UI("#ice-cream") public static DataListOptions iceCream;
-    @UI("#ice-cream") public static DataListOptions iceCreamDataList;
+    @UI("#ice-cream")
+    public static IsCombobox iceCreamIs;
 
     public static Checkbox acceptConditions;
     // @UI("#accept-conditions") public static Checkbox acceptConditions;

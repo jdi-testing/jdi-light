@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.composite.page.init;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -13,19 +14,25 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static page.objects.selenium.PageBase.JDI_DOMAIN;
 
 public class PageInitTests {
-    public static String expecterdUrl(String url) {
+    static String expecterdUrl(String url) {
         return JDI_DOMAIN + url;
     }
+    boolean first = true;
     @BeforeMethod
     public void before() {
-        openUrl(JDI_DOMAIN);
+        if (first) {
+            openUrl(JDI_DOMAIN);
+            $("#user-icon").click();
+            first = false;
+        } else {
+            $(".fa-sign-out").click();
+        }
     }
     @Test
     public void loginPageExTest() {
         HomePageEx page = new HomePageEx();
         Assert.assertEquals(page.url, expecterdUrl("/index.html"));
         Assert.assertEquals(page.title, "Home");
-        $("#user-icon").click();
         page.userName.sendKeys("Rom");
         page.userNameUI.sendKeys("an");
         page.password.sendKeys("Jdi");
@@ -37,7 +44,6 @@ public class PageInitTests {
     @Test
     public void loginPageTest() {
         HomePage page = new HomePage();
-        $("#user-icon").click();
         page.userName.sendKeys("Rom");
         page.userNameUI.sendKeys("an");
         page.password.sendKeys("Jdi");
@@ -49,7 +55,6 @@ public class PageInitTests {
     @Test
     public void loginPageUITest() {
         HomePageWeb page = new HomePageWeb();
-        $("#user-icon").click();
         page.userName.sendKeys("Rom");
         page.userNameUI.sendKeys("an");
         page.password.sendKeys("Jdi");
@@ -62,7 +67,6 @@ public class PageInitTests {
     @Test
     public void loginPageUIExTest() {
         HomePageWebEx page = new HomePageWebEx();
-        $("#user-icon").click();
         page.userName.sendKeys("Rom");
         page.userNameUI.sendKeys("an");
         page.password.sendKeys("Jdi");

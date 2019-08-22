@@ -59,13 +59,8 @@ public class MultiDropdownTests extends TestsInit {
     @Test
     public void disabledTest() {
         if (isFireFox()) return;
-        try {
-            multiDropdown.select("Disabled");
-            fail("Click on disabled element should throw exception");
-        } catch (Exception ex) {
-            assertEquals(safeException(ex), "\nCan't perform click. Element is disabled");
-            assertEquals(multiDropdown.selected(), "Steam");
-        }
+        multiDropdown.select("Disabled");
+        assertEquals(multiDropdown.selected(), "Steam");
     }
 
     @Test

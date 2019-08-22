@@ -18,6 +18,7 @@ public class TextField extends UIBaseElement<TextAssert>
     public String getValue() {
         return getText();
     }
+    @Override
     public String getText() { return core().text(VALUE); }
     // endregion
 

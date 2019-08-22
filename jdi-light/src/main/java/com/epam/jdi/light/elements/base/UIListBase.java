@@ -17,7 +17,7 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
         return list;
     }
     protected void setList(WebList webList) { list = webList; }
-    @JDIAction("Check that '{name}' is hidden") @Override
+    @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() { return list().isDisplayed(); }
     @Override
     public boolean isHidden() { return !isDisplayed(); }

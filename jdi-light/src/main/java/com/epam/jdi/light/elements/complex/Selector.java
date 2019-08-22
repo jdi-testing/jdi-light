@@ -59,7 +59,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String... values) {
-        asSelect().deselectAll();
+        unckeckAll();
         for (String value : values)
             asSelect().selectByVisibleText(value);
     }
@@ -99,7 +99,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
      */
     @JDIAction("Check '{0}' for '{name}'")
     public void check(int... values) {
-        asSelect().deselectAll();
+        unckeckAll();
         for (int index : values)
             select(index);
     }
@@ -118,7 +118,9 @@ public class Selector extends UIBaseElement<UISelectAssert>
                 opt.click();
         }
     }
-
+    public void unckeckAll() {
+        asSelect().deselectAll();
+    }
     /**
      * Get checked elements
      * @return List
@@ -191,5 +193,9 @@ public class Selector extends UIBaseElement<UISelectAssert>
     @Override
     public String getValue() {
         return asSelect().isMultiple() ? print(checked(),";") : selected();
+    }
+    @Override
+    public UISelectAssert is() {
+        return new UISelectAssert<>().set(this);
     }
 }
