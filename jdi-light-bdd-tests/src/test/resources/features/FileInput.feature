@@ -1,3 +1,4 @@
+@FileInput
 Feature: File Input element functionality
 
   Scenario: Label text of file input element
