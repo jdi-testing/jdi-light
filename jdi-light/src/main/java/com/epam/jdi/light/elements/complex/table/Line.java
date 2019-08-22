@@ -117,7 +117,8 @@ public class Line implements IList<String>, IBaseElement {
             Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
                 f -> namesEqual(getElementName(f), header));
             try {
-                ((JDIBase)field.get(instance)).setWebElement(elements.get(i));
+                IBaseElement ui = ((IBaseElement)field.get(instance));
+                ui.base().setWebElement(elements.get(i));
             } catch (Exception ex) {
                 throw exception("Can't set table entity to field '%s'", field.getName());
             }

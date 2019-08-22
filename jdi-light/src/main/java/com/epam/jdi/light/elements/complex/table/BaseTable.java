@@ -41,6 +41,7 @@ import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> extends UIBaseElement<A>
         implements ISetup, HasValue, HasAssert<A>, IHasSize, IsText {
@@ -153,7 +154,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
             throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
         if (rowNum > count.get())
             throw exception("Table has %s rows (but requested index is %s)", count.get(), rowNum);
-        waitFor().size(greaterThan(rowNum));
+        waitFor().size(greaterThanOrEqualTo(rowNum));
     }
     public WebList webRow(String rowName) {
         return webRow(getRowIndexByName(rowName));
