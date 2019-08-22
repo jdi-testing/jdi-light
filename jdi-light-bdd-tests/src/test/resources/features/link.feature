@@ -4,7 +4,7 @@ Feature: link
     Given I open "Html5 Page"
     Then "Github Link" text equals to "Github JDI"
 
-  Scenario: Link text equivalence ignoring case test
+  Scenario: Link text contains test
     Given I open "Html5 Page"
     Then "Github Link" text contains "Github"
 
@@ -12,13 +12,9 @@ Feature: link
     Given I open "Html5 Page"
     Then "Github Link" reference equals to "https://github.com/jdi-testing"
 
-  Scenario: Link reference likeness test
+  Scenario: Link reference contains test
     Given I open "Html5 Page"
     Then "Github Link" reference contains "github"
-
-  Scenario: Link URL path test
-    Given I open "Html5 Page"
-    Then "Github Link" reference equals to "https://github.com/jdi-testing"
 
   Scenario: Link alt text equivalence test
     Given I open "Html5 Page"
@@ -28,7 +24,7 @@ Feature: link
     Given I open "Html5 Page"
     Then "Github Link" alt text match to "Git.* JE*DI Link"
 
-  Scenario: Link alt text likeness test
+  Scenario: Link alt text contains test
     Given I open "Html5 Page"
     Then "Github Link" alt text contains "JDI"
 
@@ -41,6 +37,6 @@ Feature: link
     Given I open "Html5 Page"
     Then "Github Link" is enabled
 
-  Scenario: Base link validation test
+  Scenario: Basic link validation test
     Given I open "Html5 Page"
     Then "Github Link" is basically valid
