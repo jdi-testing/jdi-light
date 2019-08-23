@@ -6,7 +6,7 @@
 	When <I> Click with JS on "<ELEMENT NAME>"	
 	When <I> Input "<TEXT>" in "<ELEMENT NAME>"	
 	When <I> Select "<FIELD NAME>" field from "<ELEMENT NAME>"	
-	When <I> Select "<FIELDS NAME>" fields from "<ELEMENT NAME>"  
+	When <I> Select "<FIELDS NAME>" fields from "<ELEMENT NAME>"
 	When <I> Focus on "<ELEMENT NAME>"
 	When <I> Set text "<TEXT>" in "<ELEMENT NAME>"	
 	When <I> Double click on "<ELEMENT NAME>"	
@@ -36,4 +36,5 @@
 	Then the "<ELEMENT NAME>" disappear
 	Then the "<ELEMENT NAME>" does not appear
 	Then the "<ELEMENT NAME>" does not appear during "<TIME>" seconds
+	Then the "<ELEMENT NAME>" selected value is "<VALUE>"
 	

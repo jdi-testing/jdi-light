@@ -7,22 +7,22 @@ Feature: Combobox
     When Select "Coconut" field from "Ice Cream"
 
   Scenario: Get combobox value test
-    Then "Coconut" is selected in "Ice Cream"
+    Then the "Ice Cream" selected value is "Coconut"
 
   Scenario: Select combobox value test
     When Select "Chocolate" field from "Ice Cream"
-    Then "Chocolate" is selected in "Ice Cream"
+    Then the "Ice Cream" selected value is "Chocolate"
 
   Scenario: Select enum combobox value test
     When  Select ice cream "Strawberry" in combobox "Ice Cream"
-    Then "Strawberry" is selected in "Ice Cream"
+    Then the "Ice Cream" selected value is "Strawberry"
 
   Scenario: Select num combobox value test
     When Select value 5 in combobox "Ice Cream"
-    Then "Vanilla" is selected in "Ice Cream"
+    Then the "Ice Cream" selected value is "Vanilla"
 
   Scenario: Selected combobox value test
-    Then "Coconut" is selected in "Ice Cream"
+    Then the "Ice Cream" selected value is "Coconut"
 
   Scenario: Combobox label test
     Then the "Ice Cream" label text equals to "Choose your lovely icecream"

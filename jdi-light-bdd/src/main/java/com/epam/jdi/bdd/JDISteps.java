@@ -86,8 +86,8 @@ public class JDISteps {
         el.select(values.split(";"));
     }
 
-    @Then("^\"([^\"]*)\" is selected in \"([^\"]*)\"$")
-    public void valueSelected(String value, String name) {
+    @Then("^the \"([^\"]*)\" selected value is \"([^\"]*)\"$")
+    public void valueSelected(String name, String value) {
         BaseUIElement el = getUI(name);
         assertEquals(el.getValue(), value);
     }
