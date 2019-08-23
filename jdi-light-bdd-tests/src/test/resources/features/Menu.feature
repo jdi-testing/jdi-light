@@ -6,7 +6,7 @@ Feature: Menu
     When I Select "Contact form" in "Left Menu" menu
     Then the "Contact Form Page" page is opened
 
-  Scenario: Select test
+  Scenario: Get list test
     Given I open "Html5 Page"
     When I Check "Accept Conditions"
     When I Show "Contact form" in "Left Menu" menu
