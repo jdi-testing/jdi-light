@@ -18,7 +18,7 @@ Feature: Combobox
     Then the "Ice Cream" selected value is "Strawberry"
 
   Scenario: Select num combobox value test
-    When Select value 5 in combobox "Ice Cream"
+    When Select value 5 in "Ice Cream"
     Then the "Ice Cream" selected value is "Vanilla"
 
   Scenario: Selected combobox value test
