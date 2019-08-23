@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 public class RangeSteps {
-    @When("^install \"([^\"]*)\" value to (\\d+)$")
+    @When("^(?:I |)install \"([^\"]*)\" value to (\\d+)$")
     public void installTo(String elementName, int value) {
         Range el = (Range) getUI(elementName);
         el.setVolume(value);
