@@ -10,7 +10,6 @@ public class ComboboxSteps {
     @When("^Select value (\\d+) in combobox \"([^\"]*)\"$")
     public void comboBoxHasValue(int index, String name) {
         Combobox combobox = getUI(name, Combobox.class);
-        combobox.clear();
         combobox.select(index);
     }
 }
