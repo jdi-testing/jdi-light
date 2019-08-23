@@ -14,7 +14,7 @@ public class MenuSteps {
     }
 
     @When("^(?:I |)Select \"([^\"]*)\" items in \"([^\"]*)\" menu$")
-    public void selectList(String value, String name) {
+    public void selectItems(String value, String name) {
         JList list = getUIList(name);
         String[] items = value.split(";");
         for (String item : items)
