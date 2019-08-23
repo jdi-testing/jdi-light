@@ -18,5 +18,5 @@ Feature: Alert
   Scenario: alert text matches
     Given I open "Html5 Page"
     When Click on "Red Button"
-    Then Alert text match to "\w{3} \w{6}"
+    Then Alert text matches to "\w{3} \w{6}"
     

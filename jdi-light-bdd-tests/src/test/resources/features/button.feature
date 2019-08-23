@@ -3,7 +3,7 @@ Feature: button
 
   Scenario:
     Given I open "Html5 Page" page
-    Then "Red Button" text equals to "Big Red Button-Input"
+    Then the "Red Button" text equals to "Big Red Button-Input"
 
 
   Scenario: Click and alert
@@ -15,15 +15,15 @@ Feature: button
 
   Scenario: Validation
     Given I open "Html5 Page" page
-    Then "Red Button" is displayed
-    And "Red Button" is enabled
-    And "Red Button" text equals to "Big Red Button-Input"
-    And "Red Button" text contains "Red Button"
-    And "Red Button" css "font-size" equals to "14px"
-    And "Red Button" attribute "type" equals to "button"
-    And "Blue Button" text contains "BLUE BUTTON"
-    And "Disabled Button" is disabled
+    Then the "Red Button" is displayed
+    And the "Red Button" is enabled
+    And the "Red Button" text equals to "Big Red Button-Input"
+    And the "Red Button" text contains "Red Button"
+    And the "Red Button" css "font-size" equals to "14px"
+    And the "Red Button" attribute "type" equals to "button"
+    And the "Blue Button" text contains "BLUE BUTTON"
+    And the "Disabled Button" is disabled
 
   Scenario: Basic validation
     Given I open "Html5 Page" page
-    Then "Red Button" is basically valid
+    Then the "Red Button" is basically valid

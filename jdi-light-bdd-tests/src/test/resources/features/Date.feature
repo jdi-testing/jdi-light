@@ -1,12 +1,13 @@
+@Date
 Feature: DateTimeSelector, INPUT TYPE DATE
 
   Scenario: Get date value test
     Given I open "Html5 Page"
-    Then "Birth Date" text equals to "1985-06-18"
+    Then the "Birth Date" text equals to "1985-06-18"
 
   Scenario: Get label of input type datetime test
     Given I open "Html5 Page"
-    Then "Birth Date" label text equals to "Birth date"
+    Then the "Birth Date" label text equals to "Birth date"
 
   Scenario: Get attribute "min" of input type datetime test
     Given I open "Html5 Page"
@@ -18,29 +19,24 @@ Feature: DateTimeSelector, INPUT TYPE DATE
 
   Scenario: Date validation test
     Given I open "Html5 Page"
-    Then "Birth Date" is enabled
-    And "Birth Date" text equals to "1985-06-18"
+    Then the "Birth Date" is enabled
+    And the "Birth Date" text equals to "1985-06-18"
 
   Scenario: Label validation test
     Given I open "Html5 Page"
-    Then "Birth Date" label text equals to "Birth date"
-    And "Birth Date" label text contains "Birth"
+    Then the "Birth Date" label text equals to "Birth date"
+    And the "Birth Date" label text contains "Birth"
 
   Scenario: Date contains year test
     Given I open "Html5 Page"
-    Then "Birth Date" text contains "1985"
+    Then the "Birth Date" text contains "1985"
 
   Scenario: Set date
     Given I open "Html5 Page"
-    Then "Birth Date" text equals to "1985-06-18"
+    Then the "Birth Date" text equals to "1985-06-18"
     When I Set date "2018-11-13" in "Birth Date"
-    Then "Birth Date" text equals to "2018-11-13"
+    Then the "Birth Date" text equals to "2018-11-13"
 
   Scenario: Base validation test
     Given I open "Html5 Page"
-    Then "Birth Date" is basically valid
-
-
-
-
-
+    Then the "Birth Date" is basically valid
