@@ -1,20 +1,24 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import static com.epam.jdi.bdd.Utils.getUI;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 import com.epam.jdi.light.ui.html.common.NumberSelector;
 
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 public class NumberSelectorSteps {
-	
+	/*
 	@When("^(?:I |)Set number \"([^\"]*)\" in \"([^\"]*)\" number selector$")
 	public void setNumber(String value, String name) {
 		NumberSelector el = (NumberSelector) getUI(name);
 		el.setNumber(value);
 	}
+	*/
 	
 	@Then("^\"([^\"]*)\" number selector value equals to \"([^\"]*)\"$")
 	public void getValue(String name, String value) {
