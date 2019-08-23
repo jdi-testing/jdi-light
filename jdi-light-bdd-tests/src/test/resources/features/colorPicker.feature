@@ -1,3 +1,4 @@
+@ColorPicker
 Feature: ColorPicker
 
   Scenario: Color picker get color test
@@ -12,9 +13,9 @@ Feature: ColorPicker
 
   Scenario: Color picker label assertion test
     Given I open "Html5 Page"
-    Then "Color Picker" label text equals to "Select a color"
-    Then "Color Picker" label text contains "color"
-    Then "Color Picker" label text match to "\w{6} a color"
+    Then the "Color Picker" label text equals to "Select a color"
+    Then the "Color Picker" label text contains "color"
+    Then the "Color Picker" label text matches to "\w{6} a color"
 
   Scenario: Color picker assertThat validation test
     Given I open "Html5 Page"
@@ -23,4 +24,4 @@ Feature: ColorPicker
 
   Scenario: baseValidation
     Given I open "Html5 Page"
-    Then "Color Picker" is basically valid
+    Then the "Color Picker" is basically valid

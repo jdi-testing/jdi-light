@@ -1,8 +1,10 @@
 package cucmberTests.stepdefs;
 
 
+import com.epam.jdi.bdd.Utils;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.ui.html.common.FileInput;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,11 +14,14 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
 import static com.epam.jdi.bdd.Utils.getUI;
+import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
+import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
 import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.userIcon;
+import static org.junit.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -55,7 +60,7 @@ public class UserStepdefs {
 
     }
 
-    @Then("^\"([^\"]*)\" is basically valid$")
+    @Then("^the \"([^\"]*)\" is basically valid$")
     public void baseValidation(String name) {
         BaseUIElement el = getUI(name);
         assertTrue(el.isEnabled());
@@ -84,6 +89,17 @@ public class UserStepdefs {
                 userIcon.click();
             }
             loginForm.submit(DEFAULT_USER);
+        }
+    }
+
+    @When("^I try to upload file \"([^\"]*)\" by \"([^\"]*)\" file input element$")
+    public void iTryToUploadFileByFileInputElement(String pathToFile, String elementName) {
+        FileInput fileInput = Utils.getUI(elementName, FileInput.class);
+        try {
+            fileInput.uploadFile(mergePath(PROJECT_PATH, pathToFile));
+        } catch (Exception e) {
+            assertEquals(
+                    String.format("\r\nCan't do uploadFile for disabled element '%s'", elementName),e.getMessage());
         }
     }
 }

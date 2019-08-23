@@ -1,3 +1,4 @@
+@BaseUIElement
 Feature: BaseUIElement
 
 Scenario: click 
@@ -6,94 +7,93 @@ Scenario: click
 	Then Alert text equals to "Red button" 
 	
 Scenario: jsClick 
-	Given "Html5 Page" page is opened
+	Given I open "Html5 Page"
 	When Click with JS on "Red Button" 
 	Then Alert text equals to "Red button" 
 	
 Scenario: value 
 	Given I open "Html5 Page" 
-	Then "Red Button" text equals to "Big Red Button-Input"
+	Then the "Red Button" text equals to "Big Red Button-Input"
 	
 Scenario: labelText 
 	Given I open "Html5 Page" 
-	Then "Name" label text equals to "Your name:"
+	Then the "Name" label text equals to "Your name:"
 
 Scenario: sendKeys 
 	Given I open "Html5 Page" 
 	When I Send keys "simple 1234" to "Name"
-	Then "Name" text match to "\w{6} \d{4}"
+	Then the "Name" text matches to "\w{6} \d{4}"
 	
 Scenario: check 
 	Given I open "Html5 Page" 
 	When Check "Accept Conditions" 
-	Then "Accept Conditions" is selected 
+	Then the "Accept Conditions" is selected 
 	
 Scenario: uncheck 
 	Given I open "Html5 Page" 
 	When Uncheck "Accept Conditions" 
-	Then "Accept Conditions" is deselected 
+	Then the "Accept Conditions" is deselected 
 	
 Scenario: clear 
 	Given I open "Html5 Page"
     When Clear "Name"
 	When Send keys "simple text" to "Name" 
-	Then "Name" text equals to "simple text"
+	Then the "Name" text equals to "simple text"
 	When I Clear "Name"
-	Then "Name" text equals to ""
+	Then the "Name" text equals to ""
 
-@test
 Scenario: css
 	Given I open "Html5 Page"
-	Then "Name" css "font-size" equals to "14px"
+	Then the "Name" css "font-size" equals to "14px"
 
 Scenario: input 
 	Given I open "Html5 Page"
     When Clear "Name"
     When Send keys "simple text" to "Name"
-	Then "Name" text equals to "simple text"
+	Then the "Name" text equals to "simple text"
 	When Input "Input text" in "Name" 
-	Then "Name" text equals to "Input text"
+	Then the "Name" text equals to "Input text"
 	
 Scenario: placeholder 
 	Given I open "Html5 Page" 
-	Then "Name" placeholder equals to "Input name"
+	Then the "Name" placeholder equals to "Input name"
 	
 Scenario: getValue 
 	Given I open "Html5 Page" 
 	When Input "simple text" in "Name"
-	Then "Name" text equals to "simple text"
+	Then the "Name" text equals to "simple text"
 	
 Scenario: getText 
 	Given I open "Html5 Page" 	
-	Then "Blue Button" text equals to "BIG BLUE BUTTON"
+	Then the "Blue Button" text equals to "BIG BLUE BUTTON"
 	
 Scenario: getAttribute
 	Given I open "Html5 Page" 	
-	Then "Disabled Name" attribute "id" equals to "disabled-name"
+	Then the "Disabled Name" attribute "id" equals to "disabled-name"
 	
 Scenario: isEnabled
 	Given I open "Html5 Page" 	
-	Then "Name" is enabled
+	Then the "Name" is enabled
 	
 Scenario: isDisabled
 	Given I open "Html5 Page" 	
-	Then "Disabled Name" is disabled
+	Then the "Disabled Name" is disabled
 	
 Scenario: isHidden
 	Given I open "Html5 Page" 	
-	Then "Logout" is hidden
+	Then the "Logout" is hidden
 
 Scenario: isHidden
 	Given I open "Html5 Page"
-	Then "Logout" is not appear
+	Then the "Logout" does not appear
 
 Scenario: isDisplayed
 	Given I open "Html5 Page" 	
-	Then "Name" is displayed
+	Then the "Name" is displayed
 	
 Scenario: setText 
 	Given I open "Html5 Page" 
 	When Input "simple text" in "Name"
-	Then "Name" text equals to "simple text"
+	Then the "Name" text equals to "simple text"
 	When Set text "Input text" in "Name" 
-	Then "Name" text equals to "Input text"
+	Then the "Name" text equals to "Input text"
