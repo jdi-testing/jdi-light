@@ -4,7 +4,7 @@ Feature: Menu
     Given I open "Html5 Page"
     When I Check "Accept Conditions"
     When I Select "Contact form" in "Left Menu" menu
-    Then "Contact Form Page" page is opened
+    Then the "Contact Form Page" page is opened
 
   Scenario: Select test
     Given I open "Html5 Page"
@@ -13,13 +13,13 @@ Feature: Menu
     Then the "Contact form" in "Left Menu" menu is deselected
     When I Select "Contact form" in "Left Menu" menu
     Then the "Contact form" in "Left Menu" menu is selected
-    Then "Contact Form Page" page is opened
+    Then the "Contact Form Page" page is opened
 
   Scenario: Select items test
     Given I open "Html5 Page"
     When I Check "Accept Conditions"
     When I Select "Service;Dates" items in "Left Menu" menu
-    Then "Dates Page" page is opened
+    Then the "Dates Page" page is opened
 
   Scenario: Is validation test
     Given I open "Html5 Page"
