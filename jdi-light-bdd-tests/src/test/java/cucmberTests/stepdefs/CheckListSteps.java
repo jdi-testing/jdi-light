@@ -18,37 +18,37 @@ import static org.testng.Assert.assertEquals;
 
 public class CheckListSteps {
 
-    @When("I check in \"([^\"]*)\" checklist:$")
+    @When("I check elements in \"([^\"]*)\" checklist:$")
     public void iCheckCheckbox(String name, List<String> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.check(values.toArray(new String[0]));
     }
 
-    @When("I select in \"([^\"]*)\" checklist:$")
+    @When("I select in \"([^\"]*)\" checklist elements:$")
     public void iSelectCheckbox(String name, List<String> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.select(values.toArray(new String[0]));
     }
 
-    @When("I uncheck in \"([^\"]*)\" checklist:$")
+    @When("I uncheck in \"([^\"]*)\" checklist elements:$")
     public void uncheckElement(String name, List<String> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.uncheck(values.toArray(new String[0]));
     }
 
-    @When("I check in \"([^\"]*)\" checklist via enum:$")
+    @When("I check in \"([^\"]*)\" checklist elements via enum:$")
     public void iCheckViaEnum(String name, List<Weather> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.check(values.toArray(new Weather[0]));
     }
 
-    @When("I check all in \"([^\"]*)\" checklist")
+    @When("I check all elements in \"([^\"]*)\" checklist")
     public void iCheckAll(String name) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.checkAll();
     }
 
-    @When("I uncheck in \"([^\"]*)\" checklist labels via enum:$")
+    @When("I uncheck in \"([^\"]*)\" checklist elements via enum:$")
     public void uncheckElementViaEnum(String name, List<Weather> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.uncheck(values.toArray(new Weather[0]));
@@ -66,31 +66,31 @@ public class CheckListSteps {
         checklist.select(value);
     }
 
-    @When("^I select in \"([^\"]*)\" checklist via enum:$")
+    @When("^I select in \"([^\"]*)\" checklist elements via enum:$")
     public void iSelectInViaEnum(String name, List<Weather> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.select(values.toArray(new Weather[0]));
     }
 
-    @When("^I check in \"([^\"]*)\" checklist via numbers:$")
+    @When("^I check in \"([^\"]*)\" checklist elements via numbers:$")
     public void iCheckInViaNumbers(String name, List<Integer> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.check(getIntArrayFromIntegerList(values));
     }
 
-    @When("^I uncheck in \"([^\"]*)\" checklist via numbers:$")
+    @When("^I uncheck in \"([^\"]*)\" checklist elements via numbers:$")
     public void iUncheckInViaNumbers(String name, List<Integer> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.uncheck(getIntArrayFromIntegerList(values));
     }
 
-    @When("^I select checkbox in \"([^\"]*)\" checklist via numbers:$")
+    @When("^I select elements in \"([^\"]*)\" checklist via numbers:$")
     public void iSelectInViaNumbers(String name, List<Integer> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.select(getIntArrayFromIntegerList(values));
     }
 
-    @When("^I select nothing in \"([^\"]*)\" checklist should be exception$")
+    @When("^I select nothing in \"([^\"]*)\" checklist and should be exception$")
     public void iSelectNothingIn(String name) {
         Checklist checklist = (Checklist) getUI(name);
         try {
@@ -113,7 +113,7 @@ public class CheckListSteps {
         checklist.is().selected(value);
     }
 
-    @Then("Count of selected checkboxes in \"([^\"]*)\" checklist is \"([^\"]*)\"")
+    @Then("Count of selected elements in \"([^\"]*)\" checklist is \"([^\"]*)\"")
     public void countOfSelected(String name, int count) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.is().selected(hasSize(count));
