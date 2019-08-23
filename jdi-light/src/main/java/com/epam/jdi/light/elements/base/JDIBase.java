@@ -70,6 +70,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         failElement = base.failElement;
         driverName = base.driverName;
         context = base.printFullLocator();
+        webElement = new CacheValue<>(base.webElement);
+        webElements = new CacheValue<>(base.webElements);
         searchRules = base.searchRules;
         beforeSearch = base.beforeSearch;
         timeout = base.timeout;

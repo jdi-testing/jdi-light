@@ -28,7 +28,9 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
     public String getValue() { return selected(); }
     public void setValue(String value) { select(value); }
     @Override
-    public void offCache() { list().offCache(); super.offCache();}
+    public void offCache() { list().offCache(); super.offCache(); }
+    public boolean isEmpty() { return size() == 0; }
+    public boolean isNotEmpty() { return size() > 0; }
 
     @Override
     public A is() {

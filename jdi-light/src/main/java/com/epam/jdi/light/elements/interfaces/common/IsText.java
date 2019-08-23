@@ -8,4 +8,6 @@ public interface IsText extends ICoreElement {
     default String text() { return getText(); }
     default String text(TextTypes type) { return core().text(type); }
     default String getValue() { return getText(); }
+    default boolean isEmpty() { return getText().isEmpty(); }
+    default boolean isNotEmpty() { return !isEmpty(); }
 }

@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -65,8 +66,10 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Get row '{0}' for '{name}' table")
     public L line(int rowNum) {
         hasLineClass();
-        if (!lines.get().has(rowNum+""))
-            lines.get().update(rowNum+"", row(rowNum).asLine(lineClass));
+        if (!lines.get().has(rowNum+"")) {
+            L value = row(rowNum).asLine(lineClass);
+            lines.get().update(rowNum + "", value);
+        }
         return lines.get().get(rowNum+"");
     }
 
@@ -438,8 +441,19 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     private MapArray<String, String> getLineMap(Line row) {
         L line = row.asLine(lineClass);
         List<Field> fields = getFieldsExact(line.getClass(), f -> isInterface(f, HasValue.class));
-        return new MapArray<>(fields,
-                Field::getName, f -> ((HasValue)f.get(line)).getValue());
+        MapArray<String, String> result = new MapArray<>();
+        for (Field field : fields) {
+            String name = "", value = "";
+            try {
+                name = field.getName();
+                value = ((HasValue) field.get(line)).getValue();
+                result.add(name, value);
+            } catch (Exception ex) {
+                throw exception("Can't get '%s' Line Map(name=%s;value=%s).%sException: %s",
+                        getName(), name, value, LINE_BREAK, safeException(ex));
+            }
+        }
+        return result;
     }
 
     @Override

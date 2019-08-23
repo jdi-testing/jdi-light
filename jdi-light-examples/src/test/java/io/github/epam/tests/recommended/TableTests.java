@@ -76,9 +76,9 @@ public class TableTests extends StaticTestsInit {
         logTime("Preview");
         /*value = table.getValue();
         assertEquals(value.substring(0,228),
-            "||X||Name|Phone|Email|City||\r\n" +
-            "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||\r\n" +
-            "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||\r\n" +
+            "||X||Name|Phone|Email|City||" + LINE_BREAK +
+            "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||" + LINE_BREAK +
+            "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||" + LINE_BREAK +
             "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||");
         logTime("Get value");*/
     }

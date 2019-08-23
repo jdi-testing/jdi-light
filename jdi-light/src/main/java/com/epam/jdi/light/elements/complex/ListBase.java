@@ -35,7 +35,7 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 
 abstract class ListBase<T extends IListBase, A extends UISelectAssert>
-    extends UIBaseElement<A> implements IList<T>, SetValue, ISetup, ISelector, HasUIList {
+    extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
     protected WebList list;
     public WebList list() {
         if (list == null) {
@@ -300,4 +300,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
         } catch (Exception ignore) { /* if field name identified it is always exist */ }
         return ((WebElement) getValueField(field, element)).getText();
     }
+    public boolean isEmpty() { return size() == 0; }
+    public boolean isNotEmpty() { return size() > 0; }
+
 }

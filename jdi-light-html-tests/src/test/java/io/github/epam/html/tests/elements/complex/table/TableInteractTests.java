@@ -16,6 +16,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.users;
 import static io.github.com.pages.UsersPage.usersRow;
@@ -79,18 +80,17 @@ public class TableInteractTests extends TestsInit {
             "5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip" +
             "6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
     }
-
     @Test
     public void valueTest() {
         String value = usersRow.getValue();
         assertEquals(value,
-        "||X||Number|Type|User|Description||\r\n" +
-            "||1||1|Admin|Roman|Wolverine:VIP||\r\n" +
-            "||2||2|User|Sergey Ivan|Spider Man:Dude||\r\n" +
-            "||3||3|Manager|Vladzimir|Punisher:VIP||\r\n" +
-            "||4||4|User|Helen Bennett|Captain America\\nsome description:Dude||\r\n" +
-            "||5||5|User|Yoshi Tannamuri|Cyclope\\nsome description:Dude||\r\n" +
-            "||6||6|User|Giovanni Rovelli|Hulk\\nsome description:Dude||\r\n");
+        "||X||Number|Type|User|Description||" + LINE_BREAK +
+            "||1||1|Admin|Roman|Wolverine:VIP||" + LINE_BREAK +
+            "||2||2|User|Sergey Ivan|Spider Man:Dude||" + LINE_BREAK +
+            "||3||3|Manager|Vladzimir|Punisher:VIP||" + LINE_BREAK +
+            "||4||4|User|Helen Bennett|Captain America\\nsome description:Dude||" + LINE_BREAK +
+            "||5||5|User|Yoshi Tannamuri|Cyclope\\nsome description:Dude||" + LINE_BREAK +
+            "||6||6|User|Giovanni Rovelli|Hulk\\nsome description:Dude||" + LINE_BREAK);
     }
     @Test
     public void dataColumnTestIndex() {

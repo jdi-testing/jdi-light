@@ -519,6 +519,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     private UIElement initElement(WebElement el, JFunc<WebElement> func, String name) {
         return initElement(el, func).setName(name);
     }
+    public boolean isEmpty() { return size() == 0; }
+    public boolean isNotEmpty() { return size() > 0; }
+
 
     public void offCache() {
         super.offCache();
