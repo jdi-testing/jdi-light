@@ -200,7 +200,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             return new UIElement(base(), getLocator(index), nameFromIndex(index));
         } catch (Exception ex) {
             throw exception("Can't get element with index '%s' for template locator. " +
-                            "Maybe locator is wrong or you need to get element by name. Exception: %s",
+                            "Maybe locator is wrong or you need to get element by name. %s",
                     index, safeException(ex));
         }
     }

@@ -86,7 +86,7 @@ public class ActionHelper {
             return template;
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName() +
-            LINE_BREAK + " Exception: " + safeException(ex));
+            LINE_BREAK + "" + safeException(ex));
         }
     }
 

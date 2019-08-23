@@ -59,7 +59,7 @@ public class PageFactory {
                 try {
                     action.value.execute();
                 } catch (Exception ex) {
-                    throw exception("Preinit '%s' failed. Please correct PageFactory.PRE_INIT function. Exception: %s", action.key, safeException(ex));
+                    throw exception("Preinit '%s' failed. Please correct PageFactory.PRE_INIT function. %s", action.key, safeException(ex));
                 }
             initialized = true;
         }
@@ -125,7 +125,7 @@ public class PageFactory {
 
     // region Private local methods
     private static String initException(Field field, Class<?> parent, Exception ex) {
-        return format("Can't init '%s' '%s' on '%s'. Exception: %s",
+        return format("Can't init '%s' '%s' on '%s'. %s",
             getSafe(() -> isClass(field.getType(), WebPage.class) ? "page" : "element",
                 "Element Type"),
             getSafe(() -> field.getName(), "Field Name"),
@@ -169,7 +169,7 @@ public class PageFactory {
             try {
                 return (T)(info.instance = firstRule.value.func.execute(info));
             } catch (Exception ex) {
-                throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'.%s Exception: %s",
+                throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'.%s %s",
                         firstRule.key, info.name(), info.parentName(), LINE_BREAK, safeException(ex));
             }
         else

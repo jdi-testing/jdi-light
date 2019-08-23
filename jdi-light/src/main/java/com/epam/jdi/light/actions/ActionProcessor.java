@@ -28,6 +28,7 @@ import static com.epam.jdi.light.elements.base.OutputTemplates.FAILED_ACTION_TEM
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.LinqUtils.where;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.Timer.nowTime;
 import static com.epam.jdi.tools.map.MapArray.map;
@@ -54,9 +55,18 @@ public class ActionProcessor {
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            Object element = jp.getThis() != null ? jp.getThis() : new Object();
-            throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, safeException(ex)));
+            throw exception(ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
         }
+    }
+    public static Object getObjAround(ProceedingJoinPoint jp) { return jp.getThis() != null ? jp.getThis() : new Object(); }
+    public static String getExceptionAround(Throwable ex, boolean time) {
+        String result = safeException(ex);
+        while (result.contains("\n\n"))
+            result = result.replaceFirst("\\n\\n", LINE_BREAK);
+        result = result.replace("java.lang.RuntimeException:", "");
+        if (aroundCount() == 1)
+            result = "["+nowTime("mm:ss.S")+"] " + result.replaceFirst("\n", "");
+        return result;
     }
 
     public static int aroundCount() {
