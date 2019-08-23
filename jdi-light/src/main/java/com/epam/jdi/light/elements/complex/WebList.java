@@ -14,7 +14,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
-import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
@@ -30,7 +29,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.common.TextTypes.INDEX;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.elements.common.UIElement.SMART_LIST_TEXT;
 import static com.epam.jdi.light.elements.init.UIFactory.$;

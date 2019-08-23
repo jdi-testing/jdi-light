@@ -1,7 +1,6 @@
 package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.tools.StringUtils;
 import org.openqa.selenium.By;
 
 import static com.epam.jdi.light.common.Exceptions.exception;

@@ -100,6 +100,18 @@ public class TextFieldTests extends TestsInit {
         name.assertThat().text(is(text));
     }
 
+    final String symbols = "`!@#$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
+    @Test
+    public void inputSymbolsTest() {
+        name.input(symbols);
+        assertEquals(name.getText(), symbols);
+    }
+    @Test
+    public void setTextSymbolsTest() {
+        name.setText(symbols);
+        assertEquals(name.getText(), symbols);
+    }
+
     @Test
     public void baseValidationTest() {
         baseValidation(name);

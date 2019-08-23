@@ -9,8 +9,6 @@ import com.epam.jdi.light.ui.html.elements.complex.Dropdown;
 
 import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.light.elements.init.PageFactory.PRE_INIT;
-import static com.epam.jdi.tools.pairs.Pair.$;
-import static java.util.Arrays.asList;
 
 public class HtmlSettings {
     public static void init() {

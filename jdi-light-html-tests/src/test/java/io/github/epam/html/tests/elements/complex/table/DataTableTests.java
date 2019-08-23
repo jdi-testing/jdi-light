@@ -59,7 +59,7 @@ public class DataTableTests extends TestsInit {
             "||3||3|Manager|Vladzimir|Punisher:VIP||" + LINE_BREAK +
             "||4||4|User|Helen Bennett|Captain America\\nsome description:Dude||" + LINE_BREAK +
             "||5||5|User|Yoshi Tannamuri|Cyclope\\nsome description:Dude||" + LINE_BREAK +
-            "||6||6|User|Giovanni Rovelli|Hulk\\nsome description:Dude||\r\n");
+            "||6||6|User|Giovanni Rovelli|Hulk\\nsome description:Dude||" + LINE_BREAK);
     }
     @Test
     public void dataColumnTestIndex() {

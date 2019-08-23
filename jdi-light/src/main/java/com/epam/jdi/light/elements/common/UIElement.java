@@ -31,9 +31,7 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.TextTypes.INNER;
-import static com.epam.jdi.light.common.TextTypes.TEXT;
-import static com.epam.jdi.light.common.TextTypes.VALUE;
+import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;

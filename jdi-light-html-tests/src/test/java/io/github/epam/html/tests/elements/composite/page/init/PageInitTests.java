@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.composite.page.init;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

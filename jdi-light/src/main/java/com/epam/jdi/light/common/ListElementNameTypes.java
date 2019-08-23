@@ -3,8 +3,6 @@ package com.epam.jdi.light.common;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.func.JFunc1;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-
 public enum ListElementNameTypes {
     SMART(UIElement::text),
     TEXT(el -> el.text(TextTypes.TEXT)),

@@ -4,7 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.multiDropdown;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
@@ -14,7 +13,6 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
 
 public class MultiDropdownTests extends TestsInit {
 

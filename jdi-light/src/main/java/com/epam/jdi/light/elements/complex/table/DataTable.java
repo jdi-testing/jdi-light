@@ -53,8 +53,11 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Get row '{0}' for '{name}' table")
     public D data(int rowNum) {
         hasDataClass();
-        if (!datas.get().has(rowNum+""))
-            datas.get().update(rowNum+"", getLineData(row(rowNum)));
+        if (!datas.get().has(rowNum+"")) {
+            Line line = row(rowNum);
+            D data = getLineData(line);
+            datas.get().update(rowNum + "", data);
+        }
         return datas.get().get(rowNum+"");
     }
 

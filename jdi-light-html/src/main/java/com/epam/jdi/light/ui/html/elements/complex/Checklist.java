@@ -2,7 +2,6 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.asserts.complex.ChecklistAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -15,9 +14,7 @@ import static com.epam.jdi.light.common.TextTypes.LABEL;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
-import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static java.util.Arrays.asList;
 
 public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklist {
     @Override

@@ -2,7 +2,6 @@ package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
