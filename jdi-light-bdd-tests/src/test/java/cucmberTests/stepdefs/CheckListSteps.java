@@ -101,7 +101,7 @@ public class CheckListSteps {
         }
     }
 
-    @When("^I uncheck All in \"([^\"]*)\" checklist$")
+    @When("^I uncheck all elements in \"([^\"]*)\" checklist$")
     public void iUncheckAll(String name) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.uncheckAll();

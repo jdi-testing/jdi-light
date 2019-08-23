@@ -97,7 +97,7 @@ Feature: CheckList
     When I check in "Weather" checklist elements via enum:
       | Rainy |
       | Sunny |
-    And I uncheck All in "Weather" checklist
+    And I uncheck all elements in "Weather" checklist
     Then Count of selected elements in "Weather" checklist is "0"
 
   Scenario: Check All test
