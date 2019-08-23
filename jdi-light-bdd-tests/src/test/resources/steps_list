@@ -35,5 +35,5 @@
 	Then the "<ELEMENT NAME>" is hidden
 	Then the "<ELEMENT NAME>" disappear
 	Then the "<ELEMENT NAME>" does not appear
-	Then the "<ELEMENT NAME>" does not appear during "<ELEMENT NAME>"
+	Then the "<ELEMENT NAME>" does not appear during "<TIME>" seconds
 	
