@@ -1,12 +1,13 @@
+@Link
 Feature: link
 
   Scenario: Link text equivalence test
     Given I open "Html5 Page"
-    Then "Github Link" text equals to "Github JDI"
+    Then the "Github Link" text equals to "Github JDI"
 
   Scenario: Link text contains test
     Given I open "Html5 Page"
-    Then "Github Link" text contains "Github"
+    Then the "Github Link" text contains "Github"
 
   Scenario: Link reference equivalence test
     Given I open "Html5 Page"
@@ -35,8 +36,8 @@ Feature: link
 
   Scenario: Link activity validation test
     Given I open "Html5 Page"
-    Then "Github Link" is enabled
+    Then the "Github Link" is enabled
 
   Scenario: Basic link validation test
     Given I open "Html5 Page"
-    Then "Github Link" is basically valid
+    Then the "Github Link" is basically valid
