@@ -1,3 +1,4 @@
+@ProgressBar
 Feature: ProgressBar
 
 Background:
@@ -14,8 +15,8 @@ Scenario: check max value of progress bar
 Scenario: progress bar validation
   Given I open "Html5 Page" page
   Then "Progress" attribute "max" equals to "100"
-  And "Progress" progress volume greater or equal to 10
-  And "Progress" progress volume less or equal to 100
+  And "Progress" attribute "value" greater or equal to 10
+  And "Progress" attribute "value" less or equal to 100
   And "Progress" attribute "value" equals to "70"
   And "Progress" is enabled
 

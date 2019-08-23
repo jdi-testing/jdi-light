@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 
 import static org.junit.Assert.assertEquals;
 
+import com.epam.jdi.light.ui.html.common.ProgressBar;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -220,6 +221,18 @@ public class JDISteps {
 	public void attributeMatchRegex(String name, String attrName, String regex) {
 		BaseUIElement el = getUI(name);
 		el.is().attr(attrName, matchesPattern(regex));
+	}
+
+	@Then("^\"([^\"]*)\" attribute \"([^\"]*)\" less or equal to (\\d+)$")
+	public void attributeLessOrEqualTo(String name, String attrName, String attrValue) {
+		BaseUIElement el = getUI(name);
+		el.is().attr(attrName, greaterThanOrEqualTo(attrValue));
+	}
+
+	@Then("^\"([^\"]*)\" attribute \"([^\"]*)\" greater or equal to (\\d+)$")
+	public void attributeGreaterOrEqualTo(String name, String attrName, String attrValue) {
+		BaseUIElement el = getUI(name);
+		el.is().attr(attrName, greaterThanOrEqualTo(attrValue));
 	}
 
 	@Then("^\"([^\"]*)\" css \"([^\"]*)\" equals to \"([^\"]*)\"$")

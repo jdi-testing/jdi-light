@@ -1,4 +1,5 @@
-Feature: image
+@Image
+Feature: Image
 
 Background:
   Given I should be logged in
