@@ -7,6 +7,7 @@ package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
@@ -79,8 +80,11 @@ public final class UIUtils {
             case 1:
                 return (IClickable) getValueField(fields.get(0), obj);
             default:
-                Collection<UIElement> buttons = select(fields, f -> (UIElement) getValueField(f, obj));
-                UIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
+                List<Field> clickable = filter(fields,
+                    f -> isInterface(f, IClickable.class) && isInterface(f, INamed.class));
+                Collection<IClickable> buttons = select(clickable,
+                    f -> (IClickable) getValueField(f, obj));
+                IClickable button = first(buttons, b -> namesEqual(toButton(((INamed)b).getName()), toButton(buttonName)));
                 if (button == null)
                     throw exception("Can't find button '%s' for Element '%s'", buttonName, obj);
                 return button;

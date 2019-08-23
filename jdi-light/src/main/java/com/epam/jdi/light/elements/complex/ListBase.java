@@ -38,7 +38,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     public WebList list() {
         if (list == null) {
             list = new WebList(core()).setUIElementName(this::elementTitle)
-                    .setName(getName());
+                .setName(getName());
         }
         return list;
     }
@@ -51,7 +51,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     private boolean actualMapValue() {
         return map.hasValue() && map.get().size() > 0 && isActual(map.get().get(0).value);
     }
-    protected CacheValue<MapArray<String, T>> map;
+    protected CacheValue<MapArray<String, T>> map = new CacheValue<>(MapArray::new);
     private boolean isActual(T element) {
         try {
             element.getTagName();
@@ -92,7 +92,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
-        list().select(value);
+        get(value).click();
     }
 
     /**
@@ -101,7 +101,8 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
      */
     @JDIAction("Select ({0}) for '{name}'")
     public void select(String... values) {
-        list().select(values);
+        for (String value : values)
+            select(value);
     }
 
     /**

@@ -254,6 +254,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public List<WebElement> getList(int minAmount) {
         List<WebElement> result = timer().getResultByCondition(this::tryGetList,
                 els -> els.size() >= minAmount);
+        result = filter(result, el -> SEARCH_CONDITION.execute(el));
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
         return result;
@@ -327,7 +328,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     private SearchContext getSearchContext(Object element) {
         JDIBase bElement = getBase(element);
-        if (bElement == null)
+        if (bElement == null || bElement.locator.isRoot())
             return getDefaultContext();
         if (bElement.webElement.hasValue())
             return bElement.webElement.get();
@@ -335,14 +336,14 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         By locator = bElement.getLocator();
         By frame = bElement.getFrame();
         SearchContext searchContext = frame != null
-                ? getFrameContext(frame)
-                : getContext(parent, bElement.locator);
+            ? getFrameContext(frame)
+            : getContext(parent, bElement.locator);
         //TODO rethink SMART SEARCH
         return locator != null
-                ? uiSearch(searchContext, correctLocator(locator)).get(0)
-                : isPageObject(bElement.getClass())
-                    ? searchContext
-                    : SMART_SEARCH.execute(bElement.setTimeout(getTimeout()));
+            ? uiSearch(searchContext, correctLocator(locator)).get(0)
+            : isPageObject(bElement.getClass())
+                ? searchContext
+                : SMART_SEARCH.execute(bElement.setTimeout(getTimeout()));
     }
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)
@@ -426,9 +427,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             actions = new Actions(driver());
         return actions;
     }
-    protected ElementArea clickAreaType = SMART_CLICK;
+    public ElementArea clickAreaType = SMART_CLICK;
     public void setClickArea(ElementArea area) { clickAreaType = area; }
-    protected TextTypes textType = SMART;
+    public TextTypes textType = SMART;
     public void setTextType(TextTypes type) { textType = type; }
 
     public void offCache() {

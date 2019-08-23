@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -40,6 +41,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
+import static java.lang.reflect.Modifier.isStatic;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
@@ -122,7 +124,7 @@ public class InitActions {
             if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
                 e.setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
             })),
-        $("FindByUI", aRule(UI.class, (e,a,f)-> {
+        $("FindByUI", aRule(FindBy.class, (e,a,f)-> {
             FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
             if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
                 e.setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
@@ -132,6 +134,8 @@ public class InitActions {
     public static IBaseElement elementSetup(SiteInfo info) {
         IBaseElement jdi = (IBaseElement) info.instance;
         defaultSetup(info, jdi.base());
+        if (isStatic(info.field.getModifiers()))
+            jdi.base().locator.isRoot = true;
         if (info.field != null) {
             for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
                 try {

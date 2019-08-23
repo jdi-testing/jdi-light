@@ -34,7 +34,13 @@ public abstract class UIBaseElement<A extends UIAssert> implements ICoreElement,
     }
 
     protected void setElement(UIElement uiElement) { this.uiElement = uiElement; }
+
     public A is() {
         return (A) new UIAssert().set(this);
+    }
+
+    @Override
+    public String toString() {
+        return base().toString();
     }
 }

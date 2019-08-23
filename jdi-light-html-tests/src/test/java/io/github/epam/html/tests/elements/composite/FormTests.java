@@ -93,7 +93,7 @@ public class FormTests extends TestsInit {
     @Test
     public void submitTextToContactFormTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        main.contactForm.submit(defaultName);
+        main.contactForm.submit("Roman");
         main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
         checkContactFormSubmitted();
     }
@@ -109,7 +109,7 @@ public class FormTests extends TestsInit {
     @Test
     public void submitTextToContactFormUsingCustomButtonTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        main.contactForm.submit(defaultName, "custom");
+        main.contactForm.submit("Roman", "custom");
         main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
     }
 
@@ -117,7 +117,7 @@ public class FormTests extends TestsInit {
     public void submitTextToContactFormUsingNonExistentButtonTest() {
         shouldContactPageBeOpenedAndRefreshed();
         TIMEOUT.set(1);
-        main.contactFormCustom.submit(defaultName, "nonExistent");
+        main.contactFormCustom.submit("Roman", "nonExistent");
     }
 
     @Test
@@ -167,7 +167,7 @@ public class FormTests extends TestsInit {
         main.contactForm.fill(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
         List<String> verified = main.contactForm.verify(DEFAULT_CONTACT);
         assertEquals(verified.size(), 1);
-        assertTrue(verified.get(0).contains(defaultName));
+        assertTrue(verified.get(0).contains("Roman"));
     }
 
     @Test
@@ -302,19 +302,19 @@ public class FormTests extends TestsInit {
     @Test
     public void overriddenFillActionTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        main.contactFormCustomFill.fill(LOWER_CASE_NAME_CONTACT);
-        main.contactFormCustomFill.check(DEFAULT_CONTACT);
+        main.contactFormCustomFill.fill(DEFAULT_CONTACT);
+        main.contactFormCustomFill.check(UPPER_CASE_NAME_CONTACT);
     }
 
     @Test
     public void overriddenGetActionTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        main.contactFormCustomGet.fill(LOWER_CASE_NAME_CONTACT);
-        main.contactFormCustomGet.check(DEFAULT_CONTACT);
+        main.contactFormCustomGet.fill(DEFAULT_CONTACT);
+        main.contactFormCustomGet.check(LOWER_CASE_NAME_CONTACT);
     }
 
     private void checkContactFormSubmitted() {
         lastLogEntry.assertThat()
-                .text(containsString("submit:button clicked"));
+            .text(containsString("submit:button clicked"));
     }
 }
