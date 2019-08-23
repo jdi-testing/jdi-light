@@ -57,7 +57,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public JDIBase base() {
         return this;
     }
-    public JDIBase() { }
+    public JDIBase() {
+        searchRules.add(SEARCH_CONDITION);
+    }
     public JDIBase(JDIBase base) {
         setCore(base);
     }
@@ -83,11 +85,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public CacheValue<List<WebElement>> webElements = new CacheValue<>();
     public List<JFunc1<WebElement, Boolean>> searchRules = new ArrayList<>();
     private List<JFunc1<WebElement, Boolean>> searchRules() {
-        if (searchRules.size() == 0) {
-            List<JFunc1<WebElement, Boolean>> result = new ArrayList<>();
-            result.add(SEARCH_CONDITION);
-            return result;
-        }
         return searchRules;
     }
     public JAction1<UIElement> beforeSearch = null;
@@ -100,6 +97,13 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public JDIBase showBefore() { beforeSearch = UIElement::show; return this; }
     public JDIBase noValidation() {
         return setSearchRule(ANY_ELEMENT);
+    }
+    public <T> T noValidation(JFunc<T> func) {
+        List<JFunc1<WebElement, Boolean>> rules = new ArrayList<>(searchRules);
+        searchRules.clear();
+        T result = func.execute();
+        searchRules = rules;
+        return result;
     }
     public JDIBase searchVisible() {
         return setSearchRule(VISIBLE_ELEMENT);
@@ -212,6 +216,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, els.size(), toString(), getTimeout());
         return (filtered.size() > 1 ? filtered : els).get(0);
     }
+
     private List<WebElement> filterElements(List<WebElement> elements) {
         List<WebElement> result = elements;
         for (JFunc1<WebElement, Boolean> rule : searchRules())
@@ -254,7 +259,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public List<WebElement> getList(int minAmount) {
         List<WebElement> result = timer().getResultByCondition(this::tryGetList,
                 els -> els.size() >= minAmount);
-        result = filter(result, el -> SEARCH_CONDITION.execute(el));
+        result = filterElements(result);
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
         return result;

@@ -28,7 +28,6 @@ public class DropdownCustomTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
-        colorsCustom.valueLocator = ".filter-option";
         colorsCustom.select(text);
     }
     String text = "Colors";

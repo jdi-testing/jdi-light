@@ -32,8 +32,6 @@ import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.TextTypes.INDEX;
 import static com.epam.jdi.light.common.TextTypes.SMART_LIST;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
-import static com.epam.jdi.light.elements.common.UIElement.SMART_LIST_TEXT;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -59,7 +57,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         super.setCore(base);
         return this;
     }
-    public WebList() { elements.useCache(false); setTextType(SMART_LIST);}
+    public WebList() { elements.useCache(false); setTextType(SMART_LIST); noValidation(); }
     public WebList(By locator) { this(); setLocator(locator);}
     public WebList(List<WebElement> elements) {
         this(); setWebElements(elements);
@@ -411,7 +409,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         try {
             return noWait(() -> getList(0).size());
         } catch (Exception ex) {
-            throw exception("Get size failed: "+ safeException(ex));
+            return 0;
         }
     }
 ////
@@ -428,8 +426,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         refresh();
-        core().noValidation();
-        return elements(0).keys();
+        return noValidation(() -> elements(0).keys());
     }
 
     @JDIAction("Get '{name}' values")
@@ -440,17 +437,18 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     @JDIAction("Get list of enabled values for '{name}'")
     public List<String> listEnabled() {
-        return ifSelect(IListBase::isEnabled, this::getElementName);
+        return noValidation(() -> ifSelect(IListBase::isEnabled, this::getElementName));
     }
 
     @JDIAction("Get list of disabled values for '{name}'")
     public List<String> listDisabled() {
-        return ifSelect(IListBase::isDisabled, this::getElementName);
+        return noValidation(() -> ifSelect(IListBase::isDisabled, this::getElementName));
     }
 
     @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {
-        return isNotEmpty() && $(getList(1).get(0)).isDisplayed();
+        refresh();
+        return isNotEmpty();
     }
 
     @JDIAction("Check that '{name}' is hidden")

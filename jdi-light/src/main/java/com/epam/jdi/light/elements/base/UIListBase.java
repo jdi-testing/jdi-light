@@ -12,9 +12,7 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
         implements ISelector, SetValue {
     protected WebList list;
     public WebList list() {
-        if (list == null)
-            return new WebList().setCore(base());
-        return list;
+        return new WebList(base()).setup(JDIBase::searchVisible);
     }
     protected void setList(WebList webList) { list = webList; }
     @JDIAction("Check that '{name}' is displayed") @Override

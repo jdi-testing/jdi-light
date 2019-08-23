@@ -28,6 +28,7 @@ public abstract class UIBaseElement<A extends UIAssert> implements ICoreElement,
     }
     protected WebList linkedList(String locator, String name) {
         WebList list = new WebList(base(), locator, getName() + " " + name, this);
+        list.searchVisible();
         if (thisParent())
             list.setParent(base().parent);
         return list;
