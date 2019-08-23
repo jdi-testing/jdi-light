@@ -4,106 +4,106 @@ Feature: CheckList
   Background:
     Given I should be logged in
     And I open "Html5 Page"
-    And I check element "Hot option" in "Weather"
+    And I check element "Hot option" in "Weather" checklist
 
   Scenario: Check text test:
-    Then "Weather" Checklist text is "Hot option"
+    Then The "Weather" checklist text is "Hot option"
 
   Scenario: Check elements test
-    When I check in "Weather":
+    When I check in "Weather" checklist:
       | Hot option |
       | Cold       |
-    Then In "Weather" checked element is "Cold"
+    Then In "Weather" checklist checked element is "Cold"
 
   Scenario: Uncheck elements test
-    When I check in "Weather":
+    When I check in "Weather" checklist:
       | Rainy day |
       | Sunny     |
-    And I uncheck in "Weather":
+    And I uncheck in "Weather" checklist:
       | Rainy day |
       | Sunny     |
-    Then Count of selected checkboxes in "Weather" is "2"
-    Then In "Weather" checked elements are:
+    Then Count of selected checkboxes in "Weather" checklist is "2"
+    Then In the "Weather" checklist checked elements are:
       | Hot option |
       | Cold       |
 
   Scenario: Select checkbox test
-    When I select in "Weather":
+    When I select in "Weather" checklist:
       | Cold       |
       | Hot option |
-    Then In "Weather" checked element is "Cold"
+    Then In "Weather" checklist checked element is "Cold"
 
   Scenario: Check element via enum test
-    When I check in "Weather" via enum:
+    When I check in "Weather" checklist via enum:
       | Cold  |
       | Rainy |
-    Then In "Weather" checked elements are:
+    Then In the "Weather" checklist checked elements are:
       | Cold      |
       | Rainy day |
 
   Scenario: Uncheck element via enum test
-    When I check all in "Weather"
-    And I uncheck in "Weather" labels via enum:
+    When I check all in "Weather" checklist
+    And I uncheck in "Weather" checklist labels via enum:
       | Hot   |
       | Rainy |
-    Then Count of selected checkboxes in "Weather" is "2"
-    And In "Weather" checked elements are:
+    Then Count of selected checkboxes in "Weather" checklist is "2"
+    And In the "Weather" checklist checked elements are:
       | Cold  |
       | Sunny |
 
   Scenario: Select checkbox enum test
-    When I select in "Weather" via enum:
+    When I select in "Weather" checklist via enum:
       | Cold  |
       | Rainy |
-    Then In "Weather" checked elements are:
+    Then In the "Weather" checklist checked elements are:
       | Hot option |
       | Cold       |
       | Rainy day  |
 
   Scenario: Check element via numbers test
-    When I check in "Weather" via numbers:
+    When I check in "Weather" checklist via numbers:
       | 1 |
       | 4 |
-    Then In "Weather" checked elements are:
+    Then In the "Weather" checklist checked elements are:
       | Hot option |
       | Sunny      |
 
   Scenario: Uncheck element via number test
-    When I check all in "Weather"
-    And I uncheck in "Weather" via numbers:
+    When I check all in "Weather" checklist
+    And I uncheck in "Weather" checklist via numbers:
       | 1 |
       | 4 |
-    Then In "Weather" checked elements are:
+    Then In the "Weather" checklist checked elements are:
       | Cold      |
       | Rainy day |
 
   Scenario: Select checkbox via numbers
-    When I select checkbox in "Weather" via numbers:
+    When I select checkbox in "Weather" checklist via numbers:
       | 1 |
       | 4 |
-    Then In "Weather" checked element is "Sunny"
+    Then In "Weather" checklist checked element is "Sunny"
 
   Scenario: Empty choice test
-    When I select nothing in "Weather" should be exception
+    When I select nothing in "Weather" checklist should be exception
 
   Scenario: Disable element test
-    When I select element "Disabled" in "Weather"
-    Then "Weather" Checklist text is "Hot option"
+    When I select element "Disabled" in "Weather" checklist
+    Then The "Weather" checklist text is "Hot option"
 
   Scenario: Validation test
     Then CheckList "Weather" is basically valid
 
   Scenario: Uncheck All test
-    When I check in "Weather" via enum:
+    When I check in "Weather" checklist via enum:
       | Rainy |
       | Sunny |
-    And I uncheck All in "Weather"
-    Then Count of selected checkboxes in "Weather" is "0"
+    And I uncheck All in "Weather" checklist
+    Then Count of selected checkboxes in "Weather" checklist is "0"
 
   Scenario: Check All test
-    When I check all in "Weather"
-    Then Count of selected checkboxes in "Weather" is "4"
-    And In "Weather" checked elements are:
+    When I check all in "Weather" checklist
+    Then Count of selected checkboxes in "Weather" checklist is "4"
+    And In the "Weather" checklist checked elements are:
       | Hot option |
       | Cold       |
       | Rainy day  |

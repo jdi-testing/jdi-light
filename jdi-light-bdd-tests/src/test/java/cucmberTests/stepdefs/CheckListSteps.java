@@ -18,79 +18,79 @@ import static org.testng.Assert.assertEquals;
 
 public class CheckListSteps {
 
-    @When("I check in \"([^\"]*)\":$")
+    @When("I check in \"([^\"]*)\" checklist:$")
     public void iCheckCheckbox(String name, List<String> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.check(values.toArray(new String[0]));
     }
 
-    @When("I select in \"([^\"]*)\":$")
+    @When("I select in \"([^\"]*)\" checklist:$")
     public void iSelectCheckbox(String name, List<String> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.select(values.toArray(new String[0]));
     }
 
-    @When("I uncheck in \"([^\"]*)\":$")
+    @When("I uncheck in \"([^\"]*)\" checklist:$")
     public void uncheckElement(String name, List<String> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.uncheck(values.toArray(new String[0]));
     }
 
-    @When("I check in \"([^\"]*)\" via enum:$")
+    @When("I check in \"([^\"]*)\" checklist via enum:$")
     public void iCheckViaEnum(String name, List<Weather> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.check(values.toArray(new Weather[0]));
     }
 
-    @When("I check all in \"([^\"]*)\"")
+    @When("I check all in \"([^\"]*)\" checklist")
     public void iCheckAll(String name) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.checkAll();
     }
 
-    @When("I uncheck in \"([^\"]*)\" labels via enum:$")
+    @When("I uncheck in \"([^\"]*)\" checklist labels via enum:$")
     public void uncheckElementViaEnum(String name, List<Weather> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.uncheck(values.toArray(new Weather[0]));
     }
 
-    @When("^I check element \"([^\"]*)\" in \"([^\"]*)\"$")
+    @When("^I check element \"([^\"]*)\" in \"([^\"]*)\" checklist$")
     public void iCheckLabelIn(String value, String name) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.check(value);
     }
 
-    @When("^I select element \"([^\"]*)\" in \"([^\"]*)\"$")
+    @When("^I select element \"([^\"]*)\" in \"([^\"]*)\" checklist$")
     public void iSelectElement(String value, String name) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.select(value);
     }
 
-    @When("^I select in \"([^\"]*)\" via enum:$")
+    @When("^I select in \"([^\"]*)\" checklist via enum:$")
     public void iSelectInViaEnum(String name, List<Weather> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.select(values.toArray(new Weather[0]));
     }
 
-    @When("^I check in \"([^\"]*)\" via numbers:$")
+    @When("^I check in \"([^\"]*)\" checklist via numbers:$")
     public void iCheckInViaNumbers(String name, List<Integer> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.check(getIntArrayFromIntegerList(values));
     }
 
-    @When("^I uncheck in \"([^\"]*)\" via numbers:$")
+    @When("^I uncheck in \"([^\"]*)\" checklist via numbers:$")
     public void iUncheckInViaNumbers(String name, List<Integer> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.uncheck(getIntArrayFromIntegerList(values));
     }
 
-    @When("^I select checkbox in \"([^\"]*)\" via numbers:$")
+    @When("^I select checkbox in \"([^\"]*)\" checklist via numbers:$")
     public void iSelectInViaNumbers(String name, List<Integer> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.select(getIntArrayFromIntegerList(values));
     }
 
-    @When("^I select nothing in \"([^\"]*)\" should be exception$")
+    @When("^I select nothing in \"([^\"]*)\" checklist should be exception$")
     public void iSelectNothingIn(String name) {
         Checklist checklist = (Checklist) getUI(name);
         try {
@@ -101,25 +101,25 @@ public class CheckListSteps {
         }
     }
 
-    @When("^I uncheck All in \"([^\"]*)\"$")
+    @When("^I uncheck All in \"([^\"]*)\" checklist$")
     public void iUncheckAll(String name) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.uncheckAll();
     }
 
-    @Then("^In \"([^\"]*)\" checked element is \"([^\"]*)\"$")
+    @Then("^In \"([^\"]*)\" checklist checked element is \"([^\"]*)\"$")
     public void inCheckedLabelsIs(String name, String value) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.is().selected(value);
     }
 
-    @Then("Count of selected checkboxes in \"([^\"]*)\" is \"([^\"]*)\"")
+    @Then("Count of selected checkboxes in \"([^\"]*)\" checklist is \"([^\"]*)\"")
     public void countOfSelected(String name, int count) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.is().selected(hasSize(count));
     }
 
-    @Then("In \"([^\"]*)\" checked elements are:$")
+    @Then("In the \"([^\"]*)\" checklist checked elements are:$")
     public void isChecked(String name, List<String> values) {
         Checklist checklist = (Checklist) getUI(name);
         assertEquals(checklist.checked(), values);
@@ -136,7 +136,7 @@ public class CheckListSteps {
                 .enabled(hasItems("Cold", "Sunny"));
     }
 
-    @Then("\"([^\"]*)\" Checklist text is \"([^\"]*)\"$")
+    @Then("The \"([^\"]*)\" checklist text is \"([^\"]*)\"$")
     public void checkListTextIs(String name, String text) {
         Checklist checklist = (Checklist) getUI(name);
         assertEquals(checklist.getValue(), text);
