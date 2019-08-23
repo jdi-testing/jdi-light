@@ -16,4 +16,16 @@ public class RangeSteps {
         Range el = (Range) getUI(elementName);
         el.setVolume(value);
     }
+
+    @Then("^the \"([^\"]*)\" range volume less or equal to (\\d+)$")
+    public void rangeLessOrEqualTo(String elementName, int value) {
+        Range el = (Range) getUI(elementName);
+        el.is().volume(lessThanOrEqualTo(value));
+    }
+
+    @Then("^the \"([^\"]*)\" range volume greater or equal to (\\d+)$")
+    public void rangeGreaterOrEqualTo(String elementName, int value) {
+        Range el = (Range) getUI(elementName);
+        el.is().volume(lessThanOrEqualTo(value));
+    }
 }
