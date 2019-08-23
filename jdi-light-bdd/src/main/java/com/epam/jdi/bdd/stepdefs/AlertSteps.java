@@ -30,7 +30,7 @@ public class AlertSteps {
     	validateAlert(containsString(alertText));
     }
 
-	@Then("^Alert text match to \"([^\"]*)\"$")
+	@Then("^Alert text matches to \"([^\"]*)\"$")
     public void alertTextMatches(String alertText) {
     	validateAlert(matchesPattern(alertText));
     }
