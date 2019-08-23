@@ -60,7 +60,7 @@ public class UserStepdefs {
 
     }
 
-    @Then("^\"([^\"]*)\" is basically valid$")
+    @Then("^the \"([^\"]*)\" is basically valid$")
     public void baseValidation(String name) {
         BaseUIElement el = getUI(name);
         assertTrue(el.isEnabled());
