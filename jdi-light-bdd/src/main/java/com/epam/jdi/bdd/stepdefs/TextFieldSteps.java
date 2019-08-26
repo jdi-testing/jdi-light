@@ -13,13 +13,7 @@ public class TextFieldSteps {
     private String text;
     private String value;
 
-    @Then("^\"([^\"]*)\" value equals \"([^\"]*)\"$")
-    public void valueEquals(String name, String value) {
-        TextField textField = (TextField) getUI(name);
-        textField.is().text(equalTo(value));
-    }
-
-    @And("^\"([^\"]*)\" have \"([^\"]*)\" value$")
+    @And("^the \"([^\"]*)\" have \"([^\"]*)\" value$")
     public void haveValue(String name, String value) {
         TextField textField = (TextField) getUI(name);
         textField.setText(value);
@@ -37,13 +31,19 @@ public class TextFieldSteps {
         value = textField.getValue();
     }
 
-    @Then("^\"([^\"]*)\" value equals to \"([^\"]*)\"$")
+    @Then("^the \"([^\"]*)\" value equals \"([^\"]*)\"$")
+    public void valueEquals(String name, String value) {
+        TextField textField = (TextField) getUI(name);
+        textField.is().text(equalTo(value));
+    }
+
+    @Then("^the \"([^\"]*)\" value equals to \"([^\"]*)\"$")
     public void valueEqualsTo(String name, String value) {
         TextField textField = (TextField) getUI(name);
         assertEquals(value, textField.getValue());
     }
 
-    @Then("^\"([^\"]*)\" text is \"([^\"]*)\"$")
+    @Then("^the \"([^\"]*)\" text is \"([^\"]*)\"$")
     public void textIs(String name, String value) throws Throwable {
         TextField textField = (TextField) getUI(name);
         textField.assertThat().text(equalTo(value));
