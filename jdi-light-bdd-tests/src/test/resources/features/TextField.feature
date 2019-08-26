@@ -1,52 +1,48 @@
+@TextField
 Feature: TextField
 
   Scenario: sendKeys test
     Given I open "Html5 Page"
-    When I Send keys "Lorem" to "Text Field"
-    Then "Text field" value equals "Lorem"
+    When I Send keys "Lorem" to "Name"
+    Then "Name" value equals "Lorem"
 
   Scenario: setText test
     Given I open "Html5 Page"
-    When I Set text "Lorem" in "Text Field"
-    Then "Text field" value equals "Lorem"
+    When I Set text "Lorem" in "Name"
+    Then "Name" value equals "Lorem"
 
   Scenario: clear test
     Given I open "Html5 Page"
-    And "Text Field" have "Lorem" value
-    When I Clear "Text Field"
-    Then "Text field" value equals ""
+    And "Name" have "Lorem" value
+    When I Clear "Name"
+    Then "Name" value equals ""
 
   Scenario: input test
     Given I open "Html5 Page"
-    When I Input "Lorem" in "Text Field"
-    Then "Text field" value equals "Lorem"
-
-  Scenario: focus test
-    Given I open "Html5 Page"
-    When I Focus on "Text Field"
-    Then "Text Field" is focused
+    When I Input "Lorem" in "Name"
+    Then "Name" value equals "Lorem"
 
   Scenario: placeholder test
     Given I open "Html5 Page"
-    Then "Text Field" placeholder equals to "Input name"
+    Then "Name" placeholder equals to "Input name"
 
   Scenario: getText test
     Given I open "Html5 Page"
-    And "Text Field" have "Lorem" value
-    When I get text from "Text Field"
-    Then "Text Field" text equals to "Lorem"
+    And "Name" have "Lorem" value
+    When I get text from "Name"
+    Then "Name" text equals to "Lorem"
 
    Scenario: getValue test
     Given I open "Html5 Page"
-    And "Text Field" have "Lorem" value
-    When I get value from "Text Field"
-    Then "Text Field" value equals to "Lorem"
+    And "Name" have "Lorem" value
+    When I get value from "Name"
+    Then "Name" value equals to "Lorem"
 
   Scenario: assertThat validation test
     Given I open "Html5 Page"
-    And "Text Field" have "Lorem" value
-    Then "Text Field" text is "Lorem"
+    And "Name" have "Lorem" value
+    Then "Name" text is "Lorem"
 
   Scenario: base validation test
     Given I open "Html5 Page"
-    Then "Text Field" is basically valid
+    Then "Name" is basically valid
