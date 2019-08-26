@@ -85,7 +85,6 @@ public class JDISteps {
         BaseUIElement el = getUI(name);
         el.select(values.split(";"));
     }
-	
 	@When("^(?:I |)Focus on \"([^\"]*)\"$")
 	public void focusOn(String name) {
 		BaseUIElement el = getUI(name);
