@@ -36,12 +36,12 @@ Scenario: Validation Volume element test
 
 Scenario: Label Test
   Then the "Volume" label text equals to "Volume"
-  Then the "Volume" label text contains "lume"
+  And the "Volume" label text contains "lume"
 
 Scenario: Validation Test
-  And the "Volume" range volume greater or equal to 0
+  Then the "Volume" range volume greater or equal to 0
   And the "Volume" range volume less or equal to 100
-  Then the "Disabled Range" attribute "value" equals to "50"
+  And the "Disabled Range" attribute "value" equals to "50"
 
 Scenario: Base validation
   Then the "Volume" is basically valid
