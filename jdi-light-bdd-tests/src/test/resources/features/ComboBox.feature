@@ -55,4 +55,4 @@ Scenario: Check placeholder
   And the "Ice Cream" placeholder matches to "(.*)cream"
 
 Scenario: Focus
-  Then I Focus on "Ice Cream"
+  When I Focus on "Ice Cream"
