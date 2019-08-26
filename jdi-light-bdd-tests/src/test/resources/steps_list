@@ -6,33 +6,34 @@
 	When <I> Click with JS on "<ELEMENT NAME>"	
 	When <I> Input "<TEXT>" in "<ELEMENT NAME>"	
 	When <I> Select "<FIELD NAME>" field from "<ELEMENT NAME>"	
-	When <I> Select "<FIELDS NAME>" fields from "<ELEMENT NAME>"  
+	When <I> Select "<FIELDS NAME>" fields from "<ELEMENT NAME>"
 	When <I> Focus on "<ELEMENT NAME>"
 	When <I> Set text "<TEXT>" in "<ELEMENT NAME>"	
 	When <I> Double click on "<ELEMENT NAME>"	
 	When <I> Right click on "<ELEMENT NAME>"	
 	When <I> Highlight "<ELEMENT NAME>"	
 	When <I> Show "<ELEMENT NAME>"	
-	When <I> Set "<ELEMENT NAME>" attribute "<ATTRIBUTE NAME>" with vlaue "<ATTRIBUTE VALUE>"
-	Then "<ELEMENT NAME>" <page> is opened
-	Then "<ELEMENT NAME>" label text equals to "<LABEL TEXT>"
-	Then "<ELEMENT NAME>" label text contains "<LABEL TEXT>"
-	Then "<ELEMENT NAME>" label text match to "<LABEL TEXT>"
-	Then "<ELEMENT NAME>" is selected
-	Then "<ELEMENT NAME>" is deselected	
-	Then "<ELEMENT NAME>" placeholder equals to "<PLACEHOLDER TEXT>"
-	Then "<ELEMENT NAME>" placeholder contains "<PLACEHOLDER TEXT>"	
-	Then "<ELEMENT NAME>" placeholder match to "<PLACEHOLDER TEXT>"
-	Then "<ELEMENT NAME>" text equals to "<TEXT>"	
-	Then "<ELEMENT NAME>" text contains "<TEXT>"	
-	Then "<ELEMENT NAME>" text match to "<TEXT>"
-	Then "<ELEMENT NAME>" attribute "<ELEMENT NAME>" equals to "<ATTRIBUTE TEXT>"
-	Then "<ELEMENT NAME>" attribute "<ELEMENT NAME>" contains "<ATTRIBUTE TEXT>"
-	Then "<ELEMENT NAME>" attribute "<ELEMENT NAME>" match to "<ATTRIBUTE TEXT>"	
-	Then "<ELEMENT NAME>" is enabled
-	Then "<ELEMENT NAME>" is disabled
-	Then "<ELEMENT NAME>" is displayed
-	Then "<ELEMENT NAME>" is hidden	
-	Then "<ELEMENT NAME>" is not appear	
-	Then "<ELEMENT NAME>" is not appear during "<ELEMENT NAME>"
+	When <I> Set "<ELEMENT NAME>" attribute "<ATTRIBUTE NAME>" with value "<ATTRIBUTE VALUE>"
+	Then the "<ELEMENT NAME>" <page> is opened
+	Then the "<ELEMENT NAME>" label text equals to "<LABEL TEXT>"
+	Then the "<ELEMENT NAME>" label text contains "<LABEL TEXT>"
+	Then the "<ELEMENT NAME>" label text matches to "<LABEL TEXT>"
+	Then the "<ELEMENT NAME>" is selected
+	Then the "<ELEMENT NAME>" is deselected
+	Then the "<ELEMENT NAME>" placeholder equals to "<PLACEHOLDER TEXT>"
+	Then the "<ELEMENT NAME>" placeholder contains "<PLACEHOLDER TEXT>"
+	Then the "<ELEMENT NAME>" placeholder matches to "<PLACEHOLDER TEXT>"
+	Then the "<ELEMENT NAME>" text equals to "<TEXT>"
+	Then the "<ELEMENT NAME>" text contains "<TEXT>"
+	Then the "<ELEMENT NAME>" text matches to "<TEXT>"
+	Then the "<ELEMENT NAME>" attribute "<ELEMENT NAME>" equals to "<ATTRIBUTE TEXT>"
+	Then the "<ELEMENT NAME>" attribute "<ELEMENT NAME>" contains "<ATTRIBUTE TEXT>"
+	Then the "<ELEMENT NAME>" attribute "<ELEMENT NAME>" matches to "<ATTRIBUTE TEXT>"
+	Then the "<ELEMENT NAME>" is enabled
+	Then the "<ELEMENT NAME>" is disabled
+	Then the "<ELEMENT NAME>" is displayed
+	Then the "<ELEMENT NAME>" is hidden
+	Then the "<ELEMENT NAME>" disappear
+	Then the "<ELEMENT NAME>" does not appear
+	Then the "<ELEMENT NAME>" does not appear during "<TIME>" seconds
 	
