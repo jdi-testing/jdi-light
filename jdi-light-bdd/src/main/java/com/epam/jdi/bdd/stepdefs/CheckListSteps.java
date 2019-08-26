@@ -109,10 +109,6 @@ public class CheckListSteps {
     }
 
     private int[] getIntArrayFromIntegerList(List<Integer> inputList) {
-        int[] intBasedArray = new int[inputList.size()];
-        for (int i = 0; i < inputList.size(); i++) {
-            intBasedArray[i] = inputList.get(i);
-        }
-        return intBasedArray;
+        return inputList.stream().mapToInt(i -> i).toArray();
     }
 }
