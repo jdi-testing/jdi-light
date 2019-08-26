@@ -4,7 +4,7 @@ Feature: Range
 Background: 
   Given I should be logged in
   And I open "Html5 Page" page
-  And install "Volume" value to 90
+  And set "Volume" value to 90
   
 Scenario: Check label text
   Then the "Volume" label text equals to "Volume"
@@ -22,7 +22,7 @@ Scenario: Validate step value
   Then the "Volume" attribute "step" equals to "5"
 
 Scenario: Change Volume value
-  When install "Volume" value to 5
+  When set "Volume" value to 5
   Then the "Volume" attribute "value" equals to "10"
 
 Scenario: Validation Volume element test
