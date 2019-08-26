@@ -12,12 +12,11 @@ public class LoginForm extends Form<User> {
 	Button loginButton;
 
 	public void shouldBeOpened() {
-		if (isHidden()) {
+		if (isHidden())
 			userIcon.click();
-		}
 	}
-
-	public boolean isHidden() {
-		return name.isHidden();
+	@Override
+	public boolean displayed() {
+		return name.isDisplayed();
 	}
 }

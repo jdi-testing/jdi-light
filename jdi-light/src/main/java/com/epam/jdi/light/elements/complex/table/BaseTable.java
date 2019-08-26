@@ -76,7 +76,7 @@ public abstract class BaseTable<T extends BaseTable> extends JDIBase
     }
 
     public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
-    private WebList headerUI() {
+    public WebList headerUI() {
         return $$(headerLocator, this).setName(getName() + " header");
     }
     protected List<String> getHeader() {
