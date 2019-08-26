@@ -12,6 +12,7 @@ Scenario: Check image source
     Given I open "Html5 Page"
     Then the "Jdi Logo" attribute "alt" equals to "Jdi Logo 2"
 
+@fail
   Scenario: Click at image and accept Alert
     Given I open "Html5 Page"
     When Click on "Jdi Logo"

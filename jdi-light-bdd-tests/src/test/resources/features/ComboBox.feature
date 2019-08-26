@@ -13,10 +13,6 @@ Feature: Combobox
     When Select "Chocolate" field from "Ice Cream"
     Then the "Ice Cream" selected value is "Chocolate"
 
-  Scenario: Select enum combobox value test
-    When  Select ice cream "Strawberry" in combobox "Ice Cream"
-    Then the "Ice Cream" selected value is "Strawberry"
-
   Scenario: Select num combobox value test
     When Select value 5 in "Ice Cream"
     Then the "Ice Cream" selected value is "Vanilla"
