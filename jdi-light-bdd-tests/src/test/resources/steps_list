@@ -36,5 +36,4 @@
 	Then the "<ELEMENT NAME>" disappear
 	Then the "<ELEMENT NAME>" does not appear
 	Then the "<ELEMENT NAME>" does not appear during "<TIME>" seconds
-	Then the "<ELEMENT NAME>" selected value is "<VALUE>"
 	

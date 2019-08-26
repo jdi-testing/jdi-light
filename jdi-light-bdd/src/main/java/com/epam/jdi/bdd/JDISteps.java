@@ -85,13 +85,6 @@ public class JDISteps {
         BaseUIElement el = getUI(name);
         el.select(values.split(";"));
     }
-/*
-    @Then("^the \"([^\"]*)\" selected value is \"([^\"]*)\"$")
-    public void valueSelected(String name, String value) {
-        BaseUIElement el = getUI(name);
-        assertEquals(el.getValue(), value);
-    }
-*/
 	@When("^(?:I |)Focus on \"([^\"]*)\"$")
 	public void focusOn(String name) {
 		BaseUIElement el = getUI(name);
