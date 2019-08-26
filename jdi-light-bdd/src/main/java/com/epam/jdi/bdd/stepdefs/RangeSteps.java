@@ -26,6 +26,6 @@ public class RangeSteps {
     @Then("^the \"([^\"]*)\" range volume greater or equal to (\\d+)$")
     public void rangeGreaterOrEqualTo(String elementName, int value) {
         Range el = (Range) getUI(elementName);
-        el.is().volume(lessThanOrEqualTo(value));
+        el.is().volume(greaterThanOrEqualTo(value));
     }
 }
