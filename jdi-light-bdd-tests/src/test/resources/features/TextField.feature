@@ -4,23 +4,23 @@ Feature: TextField
   Scenario: sendKeys test
     Given I open "Html5 Page"
     When I Send keys "Lorem" to "Name"
-    Then the "Name" value equals "Lorem"
+    Then the "Name" value equals to "Lorem"
 
   Scenario: setText test
     Given I open "Html5 Page"
     When I Set text "Lorem" in "Name"
-    Then the "Name" value equals "Lorem"
+    Then the "Name" text equals to "Lorem"
 
   Scenario: clear test
     Given I open "Html5 Page"
     And the "Name" have "Lorem" value
     When I Clear "Name"
-    Then the "Name" value equals ""
+    Then the "Name" value equals to ""
 
   Scenario: input test
     Given I open "Html5 Page"
     When I Input "Lorem" in "Name"
-    Then the "Name" value equals "Lorem"
+    Then the "Name" value equals to "Lorem"
 
   Scenario: placeholder test
     Given I open "Html5 Page"

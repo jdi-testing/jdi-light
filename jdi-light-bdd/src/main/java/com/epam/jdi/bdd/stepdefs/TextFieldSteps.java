@@ -31,12 +31,6 @@ public class TextFieldSteps {
         value = textField.getValue();
     }
 
-    @Then("^the \"([^\"]*)\" value equals \"([^\"]*)\"$")
-    public void valueEquals(String name, String value) {
-        TextField textField = (TextField) getUI(name);
-        textField.is().text(equalTo(value));
-    }
-
     @Then("^the \"([^\"]*)\" value equals to \"([^\"]*)\"$")
     public void valueEqualsTo(String name, String value) {
         TextField textField = (TextField) getUI(name);
