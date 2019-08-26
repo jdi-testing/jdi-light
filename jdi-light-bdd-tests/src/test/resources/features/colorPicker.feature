@@ -15,7 +15,7 @@ Feature: ColorPicker
     Given I open "Html5 Page"
     Then the "Color Picker" label text equals to "Select a color"
     Then the "Color Picker" label text contains "color"
-    Then the "Color Picker" label text match to "\w{6} a color"
+    Then the "Color Picker" label text matches to "\w{6} a color"
 
   Scenario: Color picker assertThat validation test
     Given I open "Html5 Page"
