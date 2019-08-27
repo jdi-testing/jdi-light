@@ -6,6 +6,7 @@ import cucumber.api.java.en.When;
 
 import java.util.List;
 
+import static com.epam.jdi.bdd.Utils.getIntArrayFromIntegerList;
 import static com.epam.jdi.bdd.Utils.getUI;
 import static org.hamcrest.Matchers.hasSize;
 import static org.testng.Assert.assertEquals;
@@ -106,9 +107,5 @@ public class CheckListSteps {
     public void checkListTextIs(String name, String text) {
         Checklist checklist = (Checklist) getUI(name);
         assertEquals(checklist.getValue(), text);
-    }
-
-    private int[] getIntArrayFromIntegerList(List<Integer> inputList) {
-        return inputList.stream().mapToInt(i -> i).toArray();
     }
 }

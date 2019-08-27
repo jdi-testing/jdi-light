@@ -28,22 +28,23 @@ public final class Utils {
             throw exception("Can't convert element to %s", type.getSimpleName());
         }
     }
+
     public static BaseUIElement getUI(String name) {
         if (ELEMENTS.has(name)) {
             List<Object> elements = ELEMENTS.get(name);
             if (elements.size() == 1)
                 return (BaseUIElement) elements.get(0);
             BaseUIElement element = (BaseUIElement) LinqUtils.first(elements,
-                el -> {
-                    WebPage page = ((BaseUIElement) el).getPage();
-                    return page != null && page.getName().equals(getCurrentPage());
-                });
+                    el -> {
+                        WebPage page = ((BaseUIElement) el).getPage();
+                        return page != null && page.getName().equals(getCurrentPage());
+                    });
             if (element != null)
                 return element;
         }
         throw exception("Can't find %s element", name);
     }
-    
+
     public static BaseUIElement getUI(String name, String section) {
         if (ELEMENTS.has(name)) {
             List<Object> els = ELEMENTS.get(name);
@@ -53,5 +54,8 @@ public final class Utils {
             return (BaseUIElement) result;
         }
         throw exception("Can't find %s element", name);
+    }
+    public static int[] getIntArrayFromIntegerList(List<Integer> inputList) {
+        return inputList.stream().mapToInt(i -> i).toArray();
     }
 }
