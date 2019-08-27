@@ -4,6 +4,8 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 
 import static io.github.com.StaticSite.homePage;
+import static io.github.com.pages.Header.*;
+import static io.github.com.pages.Header.logout;
 import static io.github.epam.EpamGithubSite.header;
 import static io.github.epam.entities.Users.DEFAULT_USER;
 
@@ -27,12 +29,15 @@ public class Preconditions {
     public static void shouldBeLoggedOut() {
         if (!WebPage.getUrl().contains("https://jdi-testing.github.io/jdi-light/"))
             homePage.open();
-        if (header.userName.isDisplayed())
+        if (userName.isDisplayed())
             logout();
+        if (loginForm.displayed())
+            userIcon.click();
     }
     @Step
     public static void logout() {
-        header.userIcon.click();
-        header.logout.click();
+        if (!logout.isDisplayed())
+            userIcon.click();
+        logout.click();
     }
 }

@@ -33,17 +33,17 @@ public class States {
 
     @Step
     public static void shouldBeLoggedOut() {
-        if (!WebPage.getUrl().contains("https://epam.github.io/JDI/"))
+        if (!WebPage.getUrl().contains("https://jdi-testing.github.io/jdi-light/"))
             homePage.open();
         if (userName.isDisplayed())
             logout();
+        if (loginForm.displayed())
+            userIcon.click();
     }
-
     @Step
     public static void logout() {
-        if (!logout.isDisplayed()) {
+        if (!logout.isDisplayed())
             userIcon.click();
-        }
         logout.click();
     }
 

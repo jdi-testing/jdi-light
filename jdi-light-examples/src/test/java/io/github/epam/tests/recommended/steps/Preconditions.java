@@ -29,6 +29,8 @@ public class Preconditions {
             homePage.open();
         if (userName.isDisplayed())
             logout();
+        if (loginForm.displayed())
+            userIcon.click();
     }
     @Step
     public static void logout() {

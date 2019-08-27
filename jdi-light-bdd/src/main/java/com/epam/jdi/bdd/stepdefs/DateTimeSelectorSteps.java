@@ -9,24 +9,21 @@ import static org.testng.Assert.assertEquals;
 
 public class DateTimeSelectorSteps {
 
-    @Then("^\"([^\"]*)\" min equals to \"([^\"]*)\"$")
+    @Then("^the \"([^\"]*)\" min equals to \"([^\"]*)\"$")
     public void attributeMinEquals(String name, String date) {
         DateTimeSelector dateTimeSelector = (DateTimeSelector)getUI(name);
-      //  DateTimeSelector dateTimeSelector = (DateTimeSelector) ELEMENTS.get(element_name).get(0);
         assertEquals(dateTimeSelector.min(), date);
     }
 
-    @Then("^\"([^\"]*)\" max equals to \"([^\"]*)\"$")
+    @Then("^the \"([^\"]*)\" max equals to \"([^\"]*)\"$")
     public void attributeMaxEquals(String name, String date) {
         DateTimeSelector dateTimeSelector = (DateTimeSelector)getUI(name);
-       // DateTimeSelector dateTimeSelector = (DateTimeSelector) ELEMENTS.get(element_name).get(0);
         assertEquals(dateTimeSelector.max(), date);
     }
 
-    @When("^(?:I |)Set date \"([^\"]*)\" in \"([^\"]*)\"$")
+    @When("^(?:I |)Set date \"([^\"]*)\" in the \"([^\"]*)\"$")
     public void iSetDate(String date, String name) {
         DateTimeSelector dateTimeSelector = (DateTimeSelector)getUI(name);
-       // DateTimeSelector dateTimeSelector = (DateTimeSelector) ELEMENTS.get(element_name).get(0);
         dateTimeSelector.setDateTime(date);
     }
 

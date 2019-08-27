@@ -6,7 +6,7 @@
 	When <I> Click with JS on "<ELEMENT NAME>"	
 	When <I> Input "<TEXT>" in "<ELEMENT NAME>"	
 	When <I> Select "<FIELD NAME>" field from "<ELEMENT NAME>"	
-	When <I> Select "<FIELDS NAME>" fields from "<ELEMENT NAME>"  
+	When <I> Select "<FIELDS NAME>" fields from "<ELEMENT NAME>"
 	When <I> Focus on "<ELEMENT NAME>"
 	When <I> Set text "<TEXT>" in "<ELEMENT NAME>"	
 	When <I> Double click on "<ELEMENT NAME>"	
