@@ -18,25 +18,25 @@ import static org.hamcrest.Matchers.not;
 
 public class CheckListSteps {
 
-    @When("I check in \"([^\"]*)\" checklist elements by enum:$")
+    @When("^(?:I |)check in \"([^\"]*)\" checklist elements by enum:$")
     public void iCheckViaEnum(String name, List<Weather> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.check(values.toArray(new Weather[0]));
     }
 
-    @When("I uncheck in \"([^\"]*)\" checklist elements by enum:$")
+    @When("^(?:I |)uncheck in \"([^\"]*)\" checklist elements by enum:$")
     public void uncheckElementViaEnum(String name, List<Weather> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.uncheck(values.toArray(new Weather[0]));
     }
 
-    @When("^I select in \"([^\"]*)\" checklist elements by enum:$")
+    @When("^(?:I |)select in \"([^\"]*)\" checklist elements by enum:$")
     public void iSelectInViaEnum(String name, List<Weather> values) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.select(values.toArray(new Weather[0]));
     }
 
-    @When("^I select nothing in \"([^\"]*)\" checklist and should be exception$")
+    @When("^(?:I |)select nothing in \"([^\"]*)\" checklist and should be exception$")
     public void iSelectNothingIn(String name) {
         Checklist checklist = (Checklist) getUI(name);
         try {
