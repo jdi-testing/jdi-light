@@ -11,16 +11,16 @@ Feature: DateTimeSelector, INPUT TYPE WEEK
 
   Scenario: Get attribute "min" of input type datetime test
     Given I open "Html5 Page"
-    Then "Autumn Week" min equals to "2018-W35"
+    Then the "Autumn Week" min equals to "2018-W35"
 
   Scenario: Get attribute "max" of input type datetime test
     Given I open "Html5 Page"
-    Then  "Autumn Week" max equals to "2018-W48"
+    Then the "Autumn Week" max equals to "2018-W48"
 
   Scenario: Date validation test
     Given I open "Html5 Page"
     Then the "Autumn Week" is enabled
-    And the "Autumn Week" text equals to "2018-W40"
+    Then the "Autumn Week" text equals to "2018-W40"
 
   Scenario: Label validation test
     Given I open "Html5 Page"
@@ -33,7 +33,7 @@ Feature: DateTimeSelector, INPUT TYPE WEEK
   Scenario: Set date
     Given I open "Html5 Page"
     Then the "Autumn Week" text equals to "2018-W40"
-    When I Set date "2018-W12" in "Autumn Week"
+    When I Set date "2018-W12" in the "Autumn Week"
     Then the "Autumn Week" text equals to "2018-W12"
 
   Scenario: Base validation test
