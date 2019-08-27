@@ -27,7 +27,7 @@ import io.github.com.StaticSite;
 @CucumberOptions(
         features = "classpath:features"
         ,glue = {"com.epam.jdi.bdd", "cucmberTests"}
-        ,tags = "@TextField"
+        //,tags = "@test"
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass
