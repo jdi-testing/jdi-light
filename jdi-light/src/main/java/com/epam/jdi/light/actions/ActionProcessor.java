@@ -40,6 +40,9 @@ public class ActionProcessor {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
+        return jdiBeforeAfter(jp);
+    }
+    public static Object jdiBeforeAfter(ProceedingJoinPoint jp) {
         try {
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jp);
@@ -50,12 +53,12 @@ public class ActionProcessor {
         }
     }
 
-    private static Object stableAction(ProceedingJoinPoint jp) {
+    protected static Object stableAction(ProceedingJoinPoint jp) {
         try {
             logger.logOff();
             TIMEOUT.freeze();
             String exception = "";
-            JDIAction ja = getMethod(jp).getMethod().getAnnotation(JDIAction.class);
+            JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
             int timeout = ja != null && ja.timeout() != -1
                     ? ja.timeout()
                     : TIMEOUT.get();
@@ -89,7 +92,7 @@ public class ActionProcessor {
         }
     }
     private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
-        MethodSignature method = getMethod(jp);
+        MethodSignature method = getJpMethod(jp);
         try {
             String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
                 $("exception", exception),
