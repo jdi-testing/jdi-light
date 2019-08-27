@@ -13,7 +13,7 @@ Feature: TextField
 
   Scenario: clear test
     Given I open "Html5 Page"
-    And the "Name" have "Lorem" value
+    And I Set text "Lorem" in "Name"
     When I Clear "Name"
     Then the "Name" text equals to ""
 
@@ -28,13 +28,8 @@ Feature: TextField
 
   Scenario: getText test
     Given I open "Html5 Page"
-    And the "Name" have "Lorem" value
+    And I Set text "Lorem" in "Name"
     Then the "Name" text equals to "Lorem"
-
-  Scenario: assertThat validation test
-    Given I open "Html5 Page"
-    And the "Name" have "Lorem" value
-    Then the "Name" text is "Lorem"
 
   Scenario: base validation test
     Given I open "Html5 Page"
