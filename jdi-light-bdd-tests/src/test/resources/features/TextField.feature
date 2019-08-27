@@ -4,7 +4,7 @@ Feature: TextField
   Scenario: sendKeys test
     Given I open "Html5 Page"
     When I Send keys "Lorem" to "Name"
-    Then the "Name" value equals to "Lorem"
+    Then the "Name" text equals to "Lorem"
 
   Scenario: setText test
     Given I open "Html5 Page"
@@ -15,12 +15,12 @@ Feature: TextField
     Given I open "Html5 Page"
     And the "Name" have "Lorem" value
     When I Clear "Name"
-    Then the "Name" value equals to ""
+    Then the "Name" text equals to ""
 
   Scenario: input test
     Given I open "Html5 Page"
     When I Input "Lorem" in "Name"
-    Then the "Name" value equals to "Lorem"
+    Then the "Name" text equals to "Lorem"
 
   Scenario: placeholder test
     Given I open "Html5 Page"
@@ -29,14 +29,7 @@ Feature: TextField
   Scenario: getText test
     Given I open "Html5 Page"
     And the "Name" have "Lorem" value
-    When I get text from "Name"
     Then the "Name" text equals to "Lorem"
-
-   Scenario: getValue test
-    Given I open "Html5 Page"
-    And the "Name" have "Lorem" value
-    When I get value from "Name"
-    Then the "Name" value equals to "Lorem"
 
   Scenario: assertThat validation test
     Given I open "Html5 Page"

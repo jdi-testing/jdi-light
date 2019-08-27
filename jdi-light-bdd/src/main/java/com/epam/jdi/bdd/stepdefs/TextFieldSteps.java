@@ -25,18 +25,6 @@ public class TextFieldSteps {
         text = textField.getText();
     }
 
-    @When("^I get value from \"([^\"]*)\"$")
-    public void iGetValueFrom(String name) {
-        TextField textField = (TextField) getUI(name);
-        value = textField.getValue();
-    }
-
-    @Then("^the \"([^\"]*)\" value equals to \"([^\"]*)\"$")
-    public void valueEqualsTo(String name, String value) {
-        TextField textField = (TextField) getUI(name);
-        assertEquals(value, textField.getValue());
-    }
-
     @Then("^the \"([^\"]*)\" text is \"([^\"]*)\"$")
     public void textIs(String name, String value) throws Throwable {
         TextField textField = (TextField) getUI(name);
