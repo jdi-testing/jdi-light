@@ -1,4 +1,4 @@
-@TextField
+@textfield
 Feature: TextField
 
   Scenario: sendKeys test
