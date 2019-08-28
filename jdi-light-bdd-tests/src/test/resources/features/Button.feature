@@ -1,5 +1,5 @@
-Feature: button
-
+@button
+Feature: Button
 
   Scenario:
     Given I open "Html5 Page" page

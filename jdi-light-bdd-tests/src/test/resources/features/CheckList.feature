@@ -1,4 +1,4 @@
-@CheckList
+@checklist
 Feature: CheckList
 
   Background:

@@ -1,13 +1,14 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.complex.Checklist;
+import com.epam.jdi.tools.LinqUtils;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static com.epam.jdi.bdd.Utils.getIntArrayFromIntegerList;
 import static com.epam.jdi.bdd.Utils.getUI;
+import static com.epam.jdi.tools.LinqUtils.toIntArray;
 import static org.hamcrest.Matchers.hasSize;
 import static org.testng.Assert.assertEquals;
 
@@ -40,7 +41,7 @@ public class CheckListSteps {
     @When("^(?:I |)check in \"([^\"]*)\" checklist elements by numbers:$")
     public void iCheckElementsByNumbers(String name, List<Integer> values) {
         Checklist checklist = (Checklist) getUI(name);
-        checklist.check(getIntArrayFromIntegerList(values));
+        checklist.check(toIntArray(values));
     }
 
     @When("^(?:I |)check in \"([^\"]*)\" checklist element by numbers (\\d+)$")
@@ -52,7 +53,7 @@ public class CheckListSteps {
     @When("^(?:I |)uncheck in \"([^\"]*)\" checklist elements by numbers:$")
     public void iUncheckCheckBoxesByNumbers(String name, List<Integer> values) {
         Checklist checklist = (Checklist) getUI(name);
-        checklist.uncheck(getIntArrayFromIntegerList(values));
+        checklist.uncheck(toIntArray(values));
     }
 
     @When("^(?:I |)uncheck in \"([^\"]*)\" checklist element by numbers (\\d+)$")
@@ -64,7 +65,7 @@ public class CheckListSteps {
     @When("^(?:I |)select elements in \"([^\"]*)\" checklist by numbers:$")
     public void iSelectCheckBoxesByNumbers(String name, List<Integer> values) {
         Checklist checklist = (Checklist) getUI(name);
-        checklist.select(getIntArrayFromIntegerList(values));
+        checklist.select(toIntArray(values));
     }
 
     @When("^(?:I |)select element in \"([^\"]*)\" checklist by number (\\d+)$")
