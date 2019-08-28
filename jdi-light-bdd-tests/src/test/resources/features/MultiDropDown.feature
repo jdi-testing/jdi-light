@@ -1,21 +1,41 @@
 @MultiDropDown
+
 Feature: MultiDropDown
 
-  Scenario: Select test
+  Scenario: Check one value test
     Given I open "Html5 Page"
+    When I check value "Steam" in the "Multi Dropdown"
+    Then the "Multi Dropdown" selected value is "Steam"
+
+  Scenario: Assert validation test
+    Given I open "Html5 Page"
+    Then the "Multi Dropdown" contains items:
+      | Disabled | Wood | Steam | Electro | Metalic |
+
+  Scenario: Check disabled element value
+    When I select in the "Multi Dropdown" value "Disabled"
+    Then the "Multi Dropdown" selected value is "Steam"
+
+  Scenario: Validation test
+    Given I open "Html5 Page"
+    Then the "Multi Dropdown" selected value is "Steam"
+    Then the "Multi Dropdown" values has item "Wood"
+    Then the "Multi Dropdown" has disabled item "Disabled"
+    Then the "Multi Dropdown" hasn't have enabled item "Disabled"
+    Then the "Multi Dropdown" has enabled items:
+      | Electro | Metalic |
+
+  Scenario: Check  values test
     When I check in the "Multi Dropdown" values:
-    | Electro | Metalic |
+      | Electro | Metalic |
     Then the "Multi Dropdown" selected values:
-    | Electro | Metalic |
+      | Electro | Metalic |
+
+  Scenario: Check values by number test
     When I check in the "Multi Dropdown" values by number:
       | 1 | 5 |
     Then the "Multi Dropdown" selected values:
       | Electro | Wood |
-    When I check in the "Multi Dropdown" values by enum:
-      | Wood  | Steam |
-    Then the "Multi Dropdown" selected values:
-      | Steam | Wood |
-
 
   Scenario: Get label text tests
     Given I open "Html5 Page"
@@ -28,3 +48,7 @@ Feature: MultiDropDown
     Then the "Multi Dropdown" css "font-size" equals to "14px"
     Then the "Multi Dropdown" css "font-family" contains "Source Sans Pro"
     Then the "Multi Dropdown" css "font-family" matches to "(.*)sans-serif"
+
+  Scenario: Base validation test
+    Given I open "Html5 Page"
+    Then the "Multi Dropdown" is basically valid

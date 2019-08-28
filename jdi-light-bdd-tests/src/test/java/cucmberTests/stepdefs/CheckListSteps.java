@@ -5,7 +5,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import static com.epam.jdi.bdd.Utils.getUI;
-import static io.github.com.enums.Weather.Hot;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,7 +29,6 @@ public class CheckListSteps {
     public void checkboxIsBasicallyValid(String name) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.is().displayed().selected("Hot option");
-        checklist.is().selected(Hot);
         checklist.assertThat().values(hasItem("Sunny"))
                 .disabled(hasItem("Disabled"))
                 .enabled(not(hasItem("Disabled")))
