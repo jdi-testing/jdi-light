@@ -19,7 +19,6 @@ import com.epam.jdi.tools.map.MapArray;
 import io.qameta.allure.Step;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Field;
@@ -44,8 +43,6 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-@SuppressWarnings("unused")
-@Aspect
 public class ActionHelper {
 
     private static String getTemplate(LogLevels level) {
@@ -53,7 +50,7 @@ public class ActionHelper {
     }
     public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = jp -> {
         try {
-            MethodSignature method = getMethod(jp);
+            MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
             return isBlank(template)
                 ? getDefaultName(method.getName(), methodArgs(jp, method))
@@ -152,7 +149,7 @@ public class ActionHelper {
             return ((DriverBase) element).getPage();
         return null;
     }
-    static MethodSignature getMethod(JoinPoint joinPoint) {
+    public static MethodSignature getJpMethod(JoinPoint joinPoint) {
         return (MethodSignature) joinPoint.getSignature();
     }
 
@@ -173,7 +170,7 @@ public class ActionHelper {
         }
     }
     private static LogLevels logLevel(JoinPoint joinPoint) {
-        Method m = getMethod(joinPoint).getMethod();
+        Method m = getJpMethod(joinPoint).getMethod();
         return m.isAnnotationPresent(JDIAction.class)
                 ? m.getAnnotation(JDIAction.class).level()
                 : STEP;

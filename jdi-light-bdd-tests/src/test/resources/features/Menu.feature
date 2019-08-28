@@ -1,3 +1,4 @@
+@menu
 Feature: Menu
 
   Scenario: Select test

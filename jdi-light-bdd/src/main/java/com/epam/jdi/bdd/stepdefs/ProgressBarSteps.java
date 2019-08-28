@@ -12,13 +12,13 @@ import static org.hamcrest.Matchers.*;
 
 public class ProgressBarSteps {
 
-    @Then("^\"([^\"]*)\" progress volume greater or equal to (\\d+)$")
+    @Then("^the \"([^\"]*)\" progress volume greater or equal to (\\d+)$")
     public void volumeGreaterOrEqualTo(String elementName, int value) {
         ProgressBar el = (ProgressBar) getUI(elementName);
         el.is().volume(greaterThanOrEqualTo(value));
     }
 
-    @Then("^\"([^\"]*)\" progress volume less or equal to (\\d+)$")
+    @Then("^the \"([^\"]*)\" progress volume less or equal to (\\d+)$")
     public void volumeLessOrEqualTo(String elementName, int value) {
         ProgressBar el = (ProgressBar) getUI(elementName);
         el.is().volume(lessThanOrEqualTo(value));

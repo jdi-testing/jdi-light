@@ -1,3 +1,4 @@
+@button
 Feature: button
 
 
@@ -9,9 +10,9 @@ Feature: button
   Scenario: Click and alert
     Given I open "Html5 Page" page
     When Click on "Red Button"
-    Then Alert text equals to "Red button"
+    Then the Alert text equals to "Red button"
     When Click on "Blue Button"
-    Then Alert text equals to "Blue button"
+    Then the Alert text equals to "Blue button"
 
   Scenario: Validation
     Given I open "Html5 Page" page

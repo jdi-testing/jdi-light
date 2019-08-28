@@ -1,3 +1,4 @@
+@checkbox
 Feature: Checkbox
 
   Scenario: Get label text test

@@ -1,4 +1,4 @@
-@Link
+@link
 Feature: link
 
   Scenario: Link text equivalence test
@@ -11,23 +11,23 @@ Feature: link
 
   Scenario: Link reference equivalence test
     Given I open "Html5 Page"
-    Then "Github Link" reference equals to "https://github.com/jdi-testing"
+    Then The "Github Link" reference equals to "https://github.com/jdi-testing"
 
   Scenario: Link reference contains test
     Given I open "Html5 Page"
-    Then "Github Link" reference contains "github"
+    Then The "Github Link" reference contains "github"
 
   Scenario: Link alt text equivalence test
     Given I open "Html5 Page"
-    Then "Github Link" alt text equals to "Github JDI Link"
+    Then The "Github Link" alt text equals to "Github JDI Link"
 
   Scenario: Link alt text matching to RegExp
     Given I open "Html5 Page"
-    Then "Github Link" alt text match to "Git.* JE*DI Link"
+    Then The "Github Link" alt text match to "Git.* JE*DI Link"
 
   Scenario: Link alt text contains test
     Given I open "Html5 Page"
-    Then "Github Link" alt text contains "JDI"
+    Then The "Github Link" alt text contains "JDI"
 
   Scenario: Click link test
     Given I open "Html5 Page"

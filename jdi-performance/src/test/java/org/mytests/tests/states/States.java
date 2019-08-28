@@ -28,10 +28,13 @@ public class States {
             homePage.open();
         if (userName.isDisplayed())
             logout();
+        if (loginForm.displayed())
+            userIcon.click();
     }
     @Step
     public static void logout() {
-        userIcon.click();
+        if (!logout.isDisplayed())
+            userIcon.click();
         logout.click();
     }
 }
