@@ -1,6 +1,15 @@
 @Multiselector
 Feature: Multiselector
 
+  Scenario: Multiselector validation
+    Given I open "Html5 Page"
+    Then I check the "Steam" value is selected in "Ages" multiselector
+    And I check the "Ages" multiselector contains "Wood" value
+    And I check the "Ages" multiselector in disabled state has "Disabled" item
+    And I check the "Ages" multiselector in enabled state has not "Disabled" item
+    And I check the "Ages" multiselector in enabled contains next values:
+      | Electro | Metalic |
+
   Scenario: Select value in multiselector
     Given I open "Html5 Page"
     When I select "Ages" with value "Steam"
@@ -9,7 +18,7 @@ Feature: Multiselector
   Scenario: Validate multiselector list of values
     Given I open "Html5 Page"
     Then I check the "Ages" multiselector contains next values:
-    |Electro| Steam| Metalic| Disabled| Wood|
+    | Electro | Steam| Metalic | Disabled | Wood |
 
   Scenario: Multiple selection in multiselector
     Given I open "Html5 Page"
