@@ -177,6 +177,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             = "Found %s elements but none pass results filtering. Please change locator or filtering rules (WebSettings.SEARCH_CONDITION = el -> ...)" +
             LINE_BREAK + "Element '%s' search during %s seconds";
 
+    public WebElement getWebElement() {
+        return noValidation(this::get);
+    }
     public WebElement get() {
         return get(new Object[]{});
     }
@@ -235,7 +238,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
         }
     }
-
+    public List<WebElement> getWebElements(Object... args) {
+        return noValidation(() -> getAll(args));
+    }
     public List<WebElement> getAll(Object... args) {
         manageTimeout();
         return getAllElements(args);
