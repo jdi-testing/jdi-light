@@ -7,10 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SoftAssert {
-    private static Safe<List<Throwable>> listOfErrors = new Safe<>(new ArrayList<>());
+    private static Safe<List<String>> listOfErrors = new Safe<>(new ArrayList<>());
     private static boolean IS_SOFT_ASSERT = false;
 
     public static void setAssertType(String type) {
@@ -28,7 +29,7 @@ public class SoftAssert {
             assertThat(actual, matcher);
         } catch (Throwable error) {
             if (IS_SOFT_ASSERT) {
-                listOfErrors.get().add(error);
+                addError(error);
             } else
                 throw new AssertionError(error);
         }
@@ -38,22 +39,25 @@ public class SoftAssert {
             assertThat(actual, matcher);
         } catch (Throwable error) {
             if (IS_SOFT_ASSERT) {
-                listOfErrors.get().add(error);
+                addError(error);
             } else
                 throw new AssertionError(error);
         }
     }
+    private static void addError(Throwable error) {
+        listOfErrors.get().add(error.getMessage().replace("java.lang.AssertionError: ", ""));
+    }
     public static List<String> getErrors() {
-        List<Throwable> errors = new ArrayList<>(listOfErrors.get());
+        List<String> errors = new ArrayList<>(listOfErrors.get());
         clearResults();
-        return map(errors, Throwable::getMessage);
+        return errors;
     }
 
     public static void assertResults() {
-        List<Throwable> errors = new ArrayList<>(listOfErrors.get());
+        List<String> errors = new ArrayList<>(listOfErrors.get());
         clearResults();
         if (!errors.isEmpty())
-            throw new AssertionError(errors);
+            throw new AssertionError(print(errors));
     }
 
     public static void clearResults(){

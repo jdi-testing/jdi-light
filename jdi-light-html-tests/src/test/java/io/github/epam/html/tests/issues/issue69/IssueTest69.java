@@ -26,6 +26,7 @@ public class IssueTest69 {
     public static JFunc<List<Paragraph>> func(JFunc<List<Paragraph>> p) {
         return p;
     }
+
     @DataProvider(name = "paragraphs")
     public static Object[][] paragraphs() {
         return new Object[][] {

@@ -128,6 +128,7 @@ public class PageFactory {
         return format("Can't init '%s' '%s' on '%s'. %s",
             getSafe(() -> isClass(field.getType(), WebPage.class) ? "page" : "element",
                 "Element Type"),
+            // DO NOT REPLACE LAMBDAS BELOW
             getSafe(() -> field.getName(), "Field Name"),
             getSafe(() -> parent.getSimpleName(), "Parent Type"),
             safeException(ex));
@@ -147,7 +148,7 @@ public class PageFactory {
             Object obj = isStatic(field.getModifiers()) ? null : info.instance;
             setFieldWithInstance(pageInfo, obj);
         } catch (Exception ex) {
-            throw exception(initException(pageInfo.field, info.type(), ex));
+            throw exception(initException(field, info.type(), ex));
         }
     }
     private static void initWithConstructor(SiteInfo info) {

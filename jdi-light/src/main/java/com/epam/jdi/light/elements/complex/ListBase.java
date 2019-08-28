@@ -269,7 +269,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
             if (info.instance != null)
                 setupFieldUsingRules(info);
             T t = (T) info.instance;
-            t.core().setCore(el);
+            t.base().setCore(el);
             return t;
         } catch (Exception ex) { throw exception("Can't init new element for list"); }
     }

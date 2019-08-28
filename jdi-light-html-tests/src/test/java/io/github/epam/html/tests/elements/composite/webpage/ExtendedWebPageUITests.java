@@ -10,52 +10,52 @@ import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkI
 public class ExtendedWebPageUITests extends TestsInit {
 
     @Test(dataProvider = "extendedWebPageUIWebElementDataProvider", dataProviderClass = ExtendedWebPageUIDataProvider.class)
-    public void extendedWebPageUIWebElementTest(IBaseElement htmlElementToCheck, String expectedLocator, IBaseElement expectedParent, String expectedName) {
+    public void extendedWebPageUIWebElementTest(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "extendedWebPageUIListWebElementDataProvider", dataProviderClass = ExtendedWebPageUIDataProvider.class)
-    public void extendedWebPageUIListWebElementTest(IBaseElement htmlElementToCheck, String expectedLocator, IBaseElement expectedParent, String expectedName) {
+    public void extendedWebPageUIListWebElementTest(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "extendedWebPageUIUIElementDataProvider", dataProviderClass = ExtendedWebPageUIDataProvider.class)
-    public void extendedWebPageUIUIElementTest(IBaseElement htmlElementToCheck, String expectedLocator, IBaseElement expectedParent, String expectedName) {
+    public void extendedWebPageUIUIElementTest(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "extendedWebPageUIButtonDataProvider", dataProviderClass = ExtendedWebPageUIDataProvider.class)
-    public void extendedWebPageUIButtonTest(IBaseElement htmlElementToCheck, String expectedLocator, IBaseElement expectedParent, String expectedName) {
+    public void extendedWebPageUIButtonTest(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "extendedWebPageUIWebListDataProvider", dataProviderClass = ExtendedWebPageUIDataProvider.class)
-    public void extendedWebPageUIWebListTest(IBaseElement htmlElementToCheck, String expectedLocator, IBaseElement expectedParent, String expectedName) {
+    public void extendedWebPageUIWebListTest(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "extendedWebPageUIListUIElementPublicDataProvider", dataProviderClass = ExtendedWebPageUIDataProvider.class)
-    public void extendedWebPageUIListUIElementPublicTest(IBaseElement htmlElementToCheck, String expectedLocator, IBaseElement expectedParent, String expectedName) {
+    public void extendedWebPageUIListUIElementPublicTest(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "extendedWebPageUIListButtonPublicDataProvider", dataProviderClass = ExtendedWebPageUIDataProvider.class)
-    public void extendedWebPageUIListButtonPublicTest(IBaseElement htmlElementToCheck, String expectedLocator, IBaseElement expectedParent, String expectedName) {
+    public void extendedWebPageUIListButtonPublicTest(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "extendedWebPageUIUIListQuestionDataProvider", dataProviderClass = ExtendedWebPageUIDataProvider.class)
-    public void extendedWebPageUIUIListQuestionTest(IBaseElement htmlElementToCheck, String expectedLocator, IBaseElement expectedParent, String expectedName) {
+    public void extendedWebPageUIUIListQuestionTest(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "extendedWebPageUIUIListSomedataDataProvider", dataProviderClass = ExtendedWebPageUIDataProvider.class)
-    public void extendedWebPageUIUIListSomedataTest(IBaseElement htmlElementToCheck, String expectedLocator, IBaseElement expectedParent, String expectedName) {
+    public void extendedWebPageUIUIListSomedataTest(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 
     @Test(dataProvider = "extendedWebPageUIDropDownDataProvider", dataProviderClass = ExtendedWebPageUIDataProvider.class)
-    public void extendedWebPageUIDropDownTest(IBaseElement htmlElementToCheck, String expectedLocator, IBaseElement expectedParent, String expectedName) {
+    public void extendedWebPageUIDropDownTest(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 }

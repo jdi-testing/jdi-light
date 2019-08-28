@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.HtmlElementsPage.*;
@@ -51,15 +52,15 @@ public class SoftAsserts extends TestsInit {
                 .assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
-            assertThat(tr.getMessage(), is("[java.lang.AssertionError: \n" +
-                "Expected: is \"hidden\"\n" +
-                "     but: was \"displayed\", java.lang.AssertionError: \n" +
-                "Expected: is \"disabled\"\n" +
-                "     but: was \"enabled\", java.lang.AssertionError: \n" +
-                "Expected: is \"disappear\"\n" +
-                "     but: was \"displayed\", java.lang.AssertionError: \n" +
-                "Expected: is \"Big Red *** Button-Input\"\n" +
-                "     but: was \"Big Red Button-Input\"]"));
+            assertThat(tr.getMessage().replaceAll("\r\n", "").replace("\n", ""),
+                is("Expected: is \"hidden\"     " +
+                            "but: was \"displayed\"," +
+                        "Expected: is \"disabled\"     " +
+                            "but: was \"enabled\"," +
+                        "Expected: is \"disappeared\"     " +
+                            "but: was \"displayed\"," +
+                        "Expected: is \"Big Red *** Button-Input\"     " +
+                            "but: was \"Big Red Button-Input\""));
         }
     }
     @Test
@@ -75,16 +76,16 @@ public class SoftAsserts extends TestsInit {
             SoftAssert.assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
-            assertThat(tr.getMessage(), is("[java.lang.AssertionError: \n" +
-                "Expected: is \"hidden\"\n" +
-                "     but: was \"displayed\", java.lang.AssertionError: \n" +
-                "Expected: is \"disabled\"\n" +
-                "     but: was \"enabled\", java.lang.AssertionError: \n" +
-                "Expected: is \"Jdi Logo 777\"\n" +
-                "     but: was \"Jdi Logo 2\", java.lang.AssertionError: \n" +
-                "Expected: a string containing \"jdi-logo.jpg777\"\n" +
-                "     but: was \"https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg\", java.lang.AssertionError: \n" +
-                "Expected: is <1000>\n" +
+            assertThat(tr.getMessage(), is("[java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: is \"hidden\"" + LINE_BREAK +
+                "     but: was \"displayed\", java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: is \"disabled\"" + LINE_BREAK +
+                "     but: was \"enabled\", java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: is \"Jdi Logo 777\"" + LINE_BREAK +
+                "     but: was \"Jdi Logo 2\", java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: a string containing \"jdi-logo.jpg777\"" + LINE_BREAK +
+                "     but: was \"https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg\", java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: is <1000>" + LINE_BREAK +
                 "     but: was <101>]"));
         }
     }
@@ -101,12 +102,12 @@ public class SoftAsserts extends TestsInit {
                 .assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
-            assertThat(tr.getMessage(), is("[java.lang.AssertionError: \n" +
-                "Expected: is \"Jdi Logo 777\"\n" +
-                "     but: was \"Jdi Logo 2\", java.lang.AssertionError: \n" +
-                "Expected: a string containing \"jdi-logo.jpg777\"\n" +
-                "     but: was \"https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg\", java.lang.AssertionError: \n" +
-                "Expected: is <1000>\n" +
+            assertThat(tr.getMessage(), is("[java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: is \"Jdi Logo 777\"" + LINE_BREAK +
+                "     but: was \"Jdi Logo 2\", java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: a string containing \"jdi-logo.jpg777\"" + LINE_BREAK +
+                "     but: was \"https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg\", java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: is <1000>" + LINE_BREAK +
                 "     but: was <101>]"));
         }
     }
@@ -118,10 +119,10 @@ public class SoftAsserts extends TestsInit {
                 .assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
-            assertThat(tr.getMessage(), is("[java.lang.AssertionError: \n" +
-                "Expected: is \"not selected\"\n" +
-                "     but: was \"selected\", java.lang.AssertionError: \n" +
-                "Expected: is \"disabled\"\n" +
+            assertThat(tr.getMessage(), is("[java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: is \"not selected\"" + LINE_BREAK +
+                "     but: was \"selected\", java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: is \"disabled\"" + LINE_BREAK +
                 "     but: was \"enabled\"]"));
         }
     }
@@ -137,10 +138,10 @@ public class SoftAsserts extends TestsInit {
                 .assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
-            assertThat(tr.getMessage(), is("[java.lang.AssertionError: \n" +
-                "Expected: not null\n" +
-                "     but: was null, java.lang.AssertionError: \n" +
-                "Expected: a collection with size <3>\n" +
+            assertThat(tr.getMessage(), is("[java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: not null" + LINE_BREAK +
+                "     but: was null, java.lang.AssertionError: " + LINE_BREAK +
+                "Expected: a collection with size <3>" + LINE_BREAK +
                 "     but: collection size was <0>]"));
         }
     }
@@ -155,10 +156,10 @@ public class SoftAsserts extends TestsInit {
                 .assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
-            assertThat(tr.getMessage(), is("[java.lang.AssertionError: \n" +
-                    "Expected: not null\n" +
-                    "     but: was null, java.lang.AssertionError: \n" +
-                    "Expected: a collection with size <3>\n" +
+            assertThat(tr.getMessage(), is("[java.lang.AssertionError: " + LINE_BREAK +
+                    "Expected: not null" + LINE_BREAK +
+                    "     but: was null, java.lang.AssertionError: " + LINE_BREAK +
+                    "Expected: a collection with size <3>" + LINE_BREAK +
                     "     but: collection size was <0>]"));
         }
     }

@@ -75,8 +75,8 @@ public class InitActions {
             InitActions::elementSetup)),
         $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
-        $("PageObject", sRule(info -> !isClass(info.type(), WebPage.class, Section.class)
-                && isPageObject(info.instance.getClass()),
+        $("PageObject", sRule(info -> //!isClass(info.type(), WebPage.class, Section.class &&
+                isPageObject(info.instance.getClass()),
             PageFactory::initElements))
     );
 
@@ -134,9 +134,9 @@ public class InitActions {
     public static IBaseElement elementSetup(SiteInfo info) {
         IBaseElement jdi = (IBaseElement) info.instance;
         defaultSetup(info, jdi.base());
-        if (isStatic(info.field.getModifiers()))
-            jdi.base().locator.isRoot = true;
         if (info.field != null) {
+            if (isStatic(info.field.getModifiers()))
+                jdi.base().locator.isRoot = true;
             for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
                 try {
                     Class<? extends Annotation> annotation = aRule.value.annotation;

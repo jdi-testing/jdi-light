@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class ExtendedSection extends CustomSection {
+public class ExtendedSection extends ExtendSection {
     @FindBy(id = "webElementPackage")
     WebElement webElementPackage;
     @FindBy(id = "webElementPublic")

@@ -259,9 +259,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public List<WebElement> getList(int minAmount) {
         List<WebElement> result = timer().getResultByCondition(this::tryGetList,
                 els -> els.size() >= minAmount);
-        result = filterElements(result);
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
+        result = filterElements(result);
         return result;
     }
     protected List<WebElement> tryGetList() {

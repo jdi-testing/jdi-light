@@ -16,7 +16,7 @@ import pseudo.site.section.SomeData;
 
 import java.util.List;
 
-public class ExtendedWebPage extends CustomSection {
+public class ExtendedWebPage extends ExtendWebPage {
     @FindBy(id = "webElementPackage")
     WebElement webElementPackage;
     @FindBy(id = "webElementPublic")
@@ -383,7 +383,7 @@ public class ExtendedWebPage extends CustomSection {
         this.uilistSomedataPackageUI = uilistSomedataPackageUI;
     }
 
-    public DropdownExpand getDropdownExpandPackage() {
+    public DropdownExpand getDroplistPackage() {
         return droplistPackage;
     }
 
@@ -391,7 +391,7 @@ public class ExtendedWebPage extends CustomSection {
         this.droplistPackage = droplistPackage;
     }
 
-    public DropdownExpand getDropdownExpandPrivate() {
+    public DropdownExpand getDroplistPrivate() {
         return droplistPrivate;
     }
 
@@ -407,7 +407,7 @@ public class ExtendedWebPage extends CustomSection {
         ExtendedWebPage.droplistPrivateStatic = droplistPrivateStatic;
     }
 
-    public DropdownExpand getDropdownExpandPackageUI() {
+    public DropdownExpand getDroplistPackageUI() {
         return droplistPackageUI;
     }
 

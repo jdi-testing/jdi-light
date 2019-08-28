@@ -14,6 +14,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -127,7 +128,9 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
      * @return int
      */
     @JDIAction("Get {name} rows count")
-    public int count() { return count.get(); }
+    public int count() {
+        return count.get();
+    }
 
     protected int getTableSize() {
         if (header.hasValue())
@@ -151,9 +154,14 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     private void validateRowIndex(int rowNum) {
         if (rowNum < 1)
             throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
-        if (rowNum > count.get())
-            throw exception("Table has %s rows (but requested index is %s)", count.get(), rowNum);
-        waitFor().size(greaterThanOrEqualTo(rowNum));
+        if (rowNum > count.get()) {
+            boolean gotAll = cells.isGotAll();
+            waitFor().size(greaterThanOrEqualTo(rowNum));
+            if (rowNum > count.get())
+                throw exception("Table has %s rows (but requested index is %s)", count.get(), rowNum);
+            if (gotAll)
+                getTable();
+        }
     }
     public WebList webRow(String rowName) {
         return webRow(getRowIndexByName(rowName));
@@ -261,7 +269,10 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     protected Boolean headerIsRow = null;
     protected int getRowIndex(int rowNum) {
         if (headerIsRow == null) {
-            List<String> firstRow = getRowByIndex(1).values();
+            List<String> firstRow = new ArrayList<>();
+            //TODO optimize with threads get 1st and 2nd row
+            try { firstRow = getRowByIndex(1).noWait(WebList::values, WebList.class); }
+            catch (Exception ignore) { }
             headerIsRow = firstRow.isEmpty() || any(header(), firstRow::contains);
         }
         return headerIsRow ? rowNum + 1 : rowNum;
