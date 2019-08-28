@@ -1,5 +1,5 @@
 @Image
-Feature: image
+Feature: Image
 
 Background:
   Given I should be logged in
@@ -17,7 +17,6 @@ Scenario: Check image source
     Given I open "Html5 Page"
     When Click on "Jdi Logo"
     Then Alert text equals to "JDI Logo"
-    And Accept alert
 
   Scenario: Image validation test
     Given I open "Html5 Page"
