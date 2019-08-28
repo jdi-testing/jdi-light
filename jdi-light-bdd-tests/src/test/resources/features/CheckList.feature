@@ -31,33 +31,6 @@ Feature: CheckList
     When I Select "Cold;Hot option" fields from "Weather"
     Then In "Weather" checklist checked element is "Cold"
 
-  Scenario: Check element via enum test
-    When I check in "Weather" checklist elements by enum:
-      | Cold  |
-      | Rainy |
-    Then In the "Weather" checklist checked elements are:
-      | Cold      |
-      | Rainy day |
-
-  Scenario: Uncheck element via enum test
-    When I check all elements in "Weather" checklist
-    And I uncheck in "Weather" checklist elements by enum:
-      | Hot   |
-      | Rainy |
-    Then Count of selected elements in "Weather" checklist is 2
-    And In the "Weather" checklist checked elements are:
-      | Cold  |
-      | Sunny |
-
-  Scenario: Select checkbox enum test
-    When I select in "Weather" checklist elements by enum:
-      | Cold  |
-      | Rainy |
-    Then In the "Weather" checklist checked elements are:
-      | Hot option |
-      | Cold       |
-      | Rainy day  |
-
   Scenario: Check element via numbers test
     When I check in "Weather" checklist elements by numbers:
       | 1 |
@@ -92,9 +65,9 @@ Feature: CheckList
     Then CheckList "Weather" is basically valid
 
   Scenario: Uncheck All test
-    When I check in "Weather" checklist elements by enum:
-      | Rainy |
-      | Sunny |
+    When I check elements in "Weather" checklist:
+      | Rainy day |
+      | Sunny     |
     And I uncheck all elements in "Weather" checklist
     Then Count of selected elements in "Weather" checklist is 0
 
