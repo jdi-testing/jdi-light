@@ -9,6 +9,10 @@ import org.openqa.selenium.WebElement;
 public class HtmlSelector extends Selector<HtmlElement> implements Dropdown, MultiSelector {
     public HtmlSelector() { setInitClass(HtmlElement.class); }
     public HtmlSelector(WebElement el) { super(el); setInitClass(HtmlElement.class); }
+    @Override
+    public String getText() {
+        return select().getFirstSelectedOption().getText();
+    }
 
     public SelectAssert assertThat() {
         return is();

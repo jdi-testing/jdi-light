@@ -1,4 +1,4 @@
-@Label
+@label
 Feature: Label
 
   Scenario: Text equals
