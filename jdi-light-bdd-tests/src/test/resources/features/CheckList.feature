@@ -7,13 +7,13 @@ Feature: CheckList
     And I check element "Hot option" in "Weather" checklist
 
   Scenario: Check text test:
-    Then The "Weather" checklist value is "Hot option"
+    Then the "Weather" checklist value is "Hot option"
 
   Scenario: Check elements test
     When I check elements in "Weather" checklist:
       | Hot option |
       | Cold       |
-    Then In "Weather" checklist checked element is "Cold"
+    Then in "Weather" checklist checked element is "Cold"
 
   Scenario: Uncheck elements test
     When I check elements in "Weather" checklist:
@@ -22,20 +22,20 @@ Feature: CheckList
     And I uncheck in "Weather" checklist elements:
       | Rainy day |
       | Sunny     |
-    Then Count of selected elements in "Weather" checklist is 2
-    Then In the "Weather" checklist checked elements are:
+    Then count of selected elements in "Weather" checklist is 2
+    Then in the "Weather" checklist checked elements are:
       | Hot option |
       | Cold       |
 
   Scenario: Select checkbox test
     When I Select "Cold;Hot option" fields from "Weather"
-    Then In "Weather" checklist checked element is "Cold"
+    Then in "Weather" checklist checked element is "Cold"
 
   Scenario: Check element via numbers test
     When I check in "Weather" checklist elements by numbers:
       | 1 |
       | 4 |
-    Then In the "Weather" checklist checked elements are:
+    Then in the "Weather" checklist checked elements are:
       | Hot option |
       | Sunny      |
 
@@ -44,7 +44,7 @@ Feature: CheckList
     And I uncheck in "Weather" checklist elements by numbers:
       | 1 |
       | 4 |
-    Then In the "Weather" checklist checked elements are:
+    Then in the "Weather" checklist checked elements are:
       | Cold      |
       | Rainy day |
 
@@ -52,14 +52,14 @@ Feature: CheckList
     When I select elements in "Weather" checklist by numbers:
       | 1 |
       | 4 |
-    Then In "Weather" checklist checked element is "Sunny"
+    Then in "Weather" checklist checked element is "Sunny"
 
   Scenario: Empty choice test
     When I select nothing in "Weather" checklist and should be exception
 
   Scenario: Disable element test
     When I Select "Disabled" fields from "Weather"
-    Then The "Weather" checklist value is "Hot option"
+    Then the "Weather" checklist value is "Hot option"
 
   Scenario: Validation test
     Then CheckList "Weather" is basically valid
@@ -69,12 +69,12 @@ Feature: CheckList
       | Rainy day |
       | Sunny     |
     And I uncheck all elements in "Weather" checklist
-    Then Count of selected elements in "Weather" checklist is 0
+    Then count of selected elements in "Weather" checklist is 0
 
   Scenario: Check All test
     When I check all elements in "Weather" checklist
-    Then Count of selected elements in "Weather" checklist is 4
-    And In the "Weather" checklist checked elements are:
+    Then count of selected elements in "Weather" checklist is 4
+    And in the "Weather" checklist checked elements are:
       | Hot option |
       | Cold       |
       | Rainy day  |

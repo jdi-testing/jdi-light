@@ -85,25 +85,25 @@ public class CheckListSteps {
         checklist.uncheckAll();
     }
 
-    @Then("^In \"([^\"]*)\" checklist checked element is \"([^\"]*)\"$")
+    @Then("^in \"([^\"]*)\" checklist checked element is \"([^\"]*)\"$")
     public void isCheckBoxChecked(String name, String value) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.is().selected(value);
     }
 
-    @Then("Count of selected elements in \"([^\"]*)\" checklist is (\\d+)")
+    @Then("count of selected elements in \"([^\"]*)\" checklist is (\\d+)")
     public void countOfSelectedCheckBoxes(String name, int count) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.is().selected(hasSize(count));
     }
 
-    @Then("In the \"([^\"]*)\" checklist checked elements are:$")
+    @Then("in the \"([^\"]*)\" checklist checked elements are:$")
     public void isCheckBoxesChecked(String name, List<String> values) {
         Checklist checklist = (Checklist) getUI(name);
         assertEquals(checklist.checked(), values);
     }
 
-    @Then("The \"([^\"]*)\" checklist value is \"([^\"]*)\"$")
+    @Then("the \"([^\"]*)\" checklist value is \"([^\"]*)\"$")
     public void checkListTextIs(String name, String text) {
         Checklist checklist = (Checklist) getUI(name);
         assertEquals(checklist.getValue(), text);
