@@ -97,12 +97,12 @@ Feature: BaseUIElement
 	Then the "Name" text equals to "simple text"
 	When Set text "Input text" in "Name" 
 	Then the "Name" text equals to "Input text"
-	
+
   Scenario: select
     Given I open "Html5 Page"
     When Select "Pirate" field from "Dress Code"
     Then the "Dress Code" text equals to "Pirate"
-    
+@failed
   Scenario: multi select
     Given I open "Html5 Page"
     When Select "Steam;Wood" fields from "Multi Dropdown"

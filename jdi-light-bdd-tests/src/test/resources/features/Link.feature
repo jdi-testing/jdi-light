@@ -1,5 +1,5 @@
 @link
-Feature: link
+Feature: Link
 
   Scenario: Link text equivalence test
     Given I open "Html5 Page"
