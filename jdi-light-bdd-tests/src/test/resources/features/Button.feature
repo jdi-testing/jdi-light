@@ -27,3 +27,4 @@ Feature: button
   Scenario: Basic validation
     Given I open "Html5 Page" page
     Then the "Red Button" is basically valid
+    \
