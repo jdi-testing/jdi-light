@@ -1,4 +1,4 @@
-@Range
+@range
 Feature: Range
   
 Background: 

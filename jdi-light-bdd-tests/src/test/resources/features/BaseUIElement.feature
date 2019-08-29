@@ -1,15 +1,15 @@
-@BaseUIElement
+@base
 Feature: BaseUIElement
 
   Scenario: click 
 	Given I open "Html5 Page"
 	When I Click on "Red Button" 
-	Then Alert text equals to "Red button" 
+	Then the Alert text equals to "Red button"
 	
   Scenario: jsClick 
 	Given I open "Html5 Page"
 	When Click with JS on "Red Button" 
-	Then Alert text equals to "Red button" 
+	Then the Alert text equals to "Red button"
 	
   Scenario: value 
 	Given I open "Html5 Page" 
@@ -97,12 +97,12 @@ Feature: BaseUIElement
 	Then the "Name" text equals to "simple text"
 	When Set text "Input text" in "Name" 
 	Then the "Name" text equals to "Input text"
-	
+
   Scenario: select
     Given I open "Html5 Page"
     When Select "Pirate" field from "Dress Code"
     Then the "Dress Code" text equals to "Pirate"
-    
+@failed
   Scenario: multi select
     Given I open "Html5 Page"
     When Select "Steam;Wood" fields from "Multi Dropdown"

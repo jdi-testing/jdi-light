@@ -23,6 +23,20 @@ public class TextFieldTests extends TestsInit {
     }
     String text = "TextField";
 
+    private final String symbols = "`!@#$%ˆ*()_+˜@[\"№;:?-=]{}'/|<>";
+
+    @Test
+    public void inputSymbolsTest() {
+        name.input(symbols);
+        assertEquals(name.getText(), symbols);
+    }
+
+    @Test
+    public void setTextSymbolsTest() {
+        name.setText(symbols);
+        assertEquals(name.getText(), symbols);
+    }
+
     @Test
     public void getTextTest() {
         assertEquals(name.getText(), text);

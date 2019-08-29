@@ -22,7 +22,22 @@ public class TextAreaTests extends TestsInit {
         html5Page.shouldBeOpened();
         textArea.clear();
     }
+
     String text = "TextArea";
+
+    private final String symbols = "`!@#$%ˆ*()_+˜@[\"№;:?-=]{}'/|<>";
+
+    @Test
+    public void inputSymbolsTest() {
+        textArea.input(symbols);
+        assertEquals(textArea.getText(), symbols);
+    }
+
+    @Test
+    public void setTextSymbolsTest() {
+        textArea.setText(symbols);
+        assertEquals(textArea.getText(), symbols);
+    }
 
     @Test
     public void getTextTest() {
@@ -42,6 +57,7 @@ public class TextAreaTests extends TestsInit {
         textArea.sendKeys("Test");
         assertEquals(textArea.getValue(), text+"Test");
     }
+
     @Test
     public void inputTest() {
         textArea.setText(text);
@@ -75,9 +91,11 @@ public class TextAreaTests extends TestsInit {
 
     @Test
     public void addNewLineTest(){
-        textArea.setLines("line1", "line2");
-        textArea.addNewLine("line3");
-        assertEquals(textArea.getText(), "line1\nline2\nline3");
+        textArea.clear();
+        textArea.addNewLine("line1");
+        textArea.addNewLine("");
+        textArea.addNewLine("line2");
+        assertEquals(textArea.getText(), "line1\n\nline2");
     }
 
     @Test

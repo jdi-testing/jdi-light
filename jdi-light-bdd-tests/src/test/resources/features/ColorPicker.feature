@@ -1,4 +1,4 @@
-@ColorPicker
+@colorpicker
 Feature: ColorPicker
 
   Scenario: Color picker get color test
