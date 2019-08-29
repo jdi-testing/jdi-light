@@ -1,4 +1,4 @@
-@ProgressBar
+@progressbar
 Feature: ProgressBar
 
 Background:

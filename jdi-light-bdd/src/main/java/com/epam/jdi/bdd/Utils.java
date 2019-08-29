@@ -2,6 +2,7 @@ package com.epam.jdi.bdd;
 
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.tools.LinqUtils;
 
@@ -30,6 +31,9 @@ public final class Utils {
     }
 
     public static BaseUIElement getUI(String name) {
+        String[] split = name.split("\\.");
+        if (split.length == 2)
+            return getUI(split[1], split[0]);
         if (ELEMENTS.has(name)) {
             List<Object> elements = ELEMENTS.get(name);
             if (elements.size() == 1)
@@ -55,7 +59,19 @@ public final class Utils {
         }
         throw exception("Can't find %s element", name);
     }
-    public static int[] getIntArrayFromIntegerList(List<Integer> inputList) {
-        return inputList.stream().mapToInt(i -> i).toArray();
+    public static JList getUIList(String name) {
+        if (ELEMENTS.has(name)) {
+            List<Object> elements = ELEMENTS.get(name);
+            if (elements.size() == 1)
+                return (JList) elements.get(0);
+            JList element = (JList) LinqUtils.first(elements,
+                    el -> {
+                        WebPage page = ((BaseUIElement) el).getPage();
+                        return page != null && page.getName().equals(getCurrentPage());
+                    });
+            if (element != null)
+                return element;
+        }
+        throw exception("Can't find %s element", name);
     }
 }

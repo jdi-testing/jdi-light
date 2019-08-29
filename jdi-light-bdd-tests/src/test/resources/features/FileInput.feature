@@ -1,4 +1,4 @@
-@FileInput
+@fileinput
 Feature: File Input element functionality
 
   Scenario: Label text of file input element
@@ -24,7 +24,7 @@ Feature: File Input element functionality
     Given I open "Html5 Page"
     Then the "Disabled File Input" is disabled
 
-@fail
+@failed
   Scenario: Upload file by disabled file input element
     Given I open "Html5 Page"
     When I try to upload file "/jdi-light-bdd-tests/src/test/resources/general.xml" by "Disabled File Input" file input element

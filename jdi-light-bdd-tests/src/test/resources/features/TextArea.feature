@@ -1,5 +1,5 @@
 @textarea
-Feature: text area
+Feature: Textarea
 
   Scenario: Text equivalence test
     Given I open "Html5 Page"
