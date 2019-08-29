@@ -121,7 +121,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction(level = DEBUG)
     public String getTagName() {
-        return get().getTagName();
+        return getWebElement().getTagName();
     }
 
     /**
@@ -131,7 +131,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction(value = "Get '{name}' attribute '{0}'", level = DEBUG)
     public String getAttribute(String value) {
-        return valueOrDefault(get().getAttribute(value), "");
+        return valueOrDefault(getWebElement().getAttribute(value), "");
     }
 
     /**
@@ -171,7 +171,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction(level = DEBUG)
     public Point getLocation() {
-        return get().getLocation();
+        return getWebElement().getLocation();
     }
 
     /**
@@ -180,7 +180,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction(level = DEBUG)
     public Dimension getSize() {
-        return get().getSize();
+        return getWebElement().getSize();
     }
 
     /**
@@ -189,7 +189,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction(level = DEBUG)
     public Rectangle getRect() {
-        return get().getRect();
+        return getWebElement().getRect();
     }
 
     /**
@@ -199,18 +199,18 @@ public class UIElement extends JDIBase
      */
     @JDIAction(level = DEBUG)
     public String getCssValue(String value) {
-        return get().getCssValue(value);
+        return getWebElement().getCssValue(value);
     }
 
     @JDIAction(level = DEBUG)
-    public WebElement findElement(By locator) { return $(locator, this).get(); }
+    public WebElement findElement(By locator) { return $(locator, this).getWebElement(); }
     @JDIAction(level = DEBUG)
-    public List<WebElement> findElements(By locator) { return $(locator, this).getAll(); }
+    public List<WebElement> findElements(By locator) { return $(locator, this).getWebElements(); }
 
     /** Get screen screen shot */
     @JDIAction(level = DEBUG)
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-        return get().getScreenshotAs(outputType);
+        return getWebElement().getScreenshotAs(outputType);
     }
     //endregion
 
@@ -221,7 +221,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction(value = "Execute javascript '{0}' for '{name}'", level = DEBUG)
     public String jsExecute(String jsCode) {
-        return valueOf(js().executeScript("return arguments[0]."+jsCode+";", get()));
+        return valueOf(js().executeScript("return arguments[0]."+jsCode+";", getWebElement()));
     }
 
     /**
@@ -330,7 +330,7 @@ public class UIElement extends JDIBase
     }
 
     public Select asSelect() {
-        WebElement select = get();
+        WebElement select = getWebElement();
         if (!select.getTagName().equals("select")) {
             List<WebElement> els = select.findElements(By.tagName("select"));
             if (els.size() > 0)
@@ -358,7 +358,7 @@ public class UIElement extends JDIBase
     public MapArray<String, String> getAllAttributes() {
         List<String> jsList;
         try {
-            jsList = (List<String>) js().executeScript("var s = []; var attrs = arguments[0].attributes; for (var l = 0; l < attrs.length; ++l) { var a = attrs[l]; s.push(a.name + '=\"' + a.value + '\"'); } ; return s;", get());
+            jsList = (List<String>) js().executeScript("var s = []; var attrs = arguments[0].attributes; for (var l = 0; l < attrs.length; ++l) { var a = attrs[l]; s.push(a.name + '=\"' + a.value + '\"'); } ; return s;", getWebElement());
             return new MapArray<>(jsList, r -> r.split("=")[0], r -> r.split("=")[1].replace("\"", ""));
         } catch (Exception ignore) { return new MapArray<>(); }
     }
@@ -615,19 +615,19 @@ public class UIElement extends JDIBase
 
     //region Protected and private
     protected boolean selected() {
-        if (get().isSelected())
+        if (getWebElement().isSelected())
             return true;
         List<String> cl = classes();
         return cl.contains("checked") || cl.contains("active")||
-                cl.contains("selected") || getAttribute("checked").equals("true");
+            cl.contains("selected") || getAttribute("checked").equals("true");
     }
     protected boolean enabled() {
         List<String> cls = classes();
-        return cls.contains("active") || !hasAttribute("disabled") || get().isEnabled() && !cls.contains("disabled");
+        return cls.contains("active") || !hasAttribute("disabled") || getWebElement().isEnabled() && !cls.contains("disabled");
     }
     protected boolean displayed() {
         try {
-            if (get().isDisplayed())
+            if (getWebElement().isDisplayed())
                 return true;
         } catch (Exception ex) {
             List<WebElement> result = getAllElements();
@@ -649,7 +649,7 @@ public class UIElement extends JDIBase
                 "  if (e === elem)                        " +
                 "    return true;                         " +
                 "}                                        " +
-                "return false;                            ", get(), x, y);
+                "return false;                            ", getWebElement(), x, y);
     }
     //endregion
     public boolean wait(JFunc1<UIElement, Boolean> condition) {
