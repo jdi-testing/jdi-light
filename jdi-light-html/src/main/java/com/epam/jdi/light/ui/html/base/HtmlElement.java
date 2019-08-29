@@ -1,6 +1,5 @@
 package com.epam.jdi.light.ui.html.base;
 
-import com.epam.jdi.light.asserts.SoftAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.ui.html.asserts.HtmlAssertion;
@@ -114,7 +113,9 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
      * @param line String
      */
     public void addNewLine(String line) {
-        sendKeys("\n" + line);
+        if (getText().length() != 0) {
+            sendKeys("\n" + line);
+        } else sendKeys(line);
     }
 
     /**
