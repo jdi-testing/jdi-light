@@ -30,6 +30,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.PageFactory.initJdiField;
 import static com.epam.jdi.light.elements.init.PageFactory.setupFieldUsingRules;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 
 abstract class ListBase<T extends IListBase, A extends UISelectAssert>
@@ -161,7 +162,9 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
      */
     @JDIAction("Get '{name}' selected value")
     public String selected() {
-        return list().selected();
+        refresh();
+        T first = logger.logOff(() -> first(IListBase::isSelected) );
+        return first != null ? first.getText() : "";
     }
 
     /**
