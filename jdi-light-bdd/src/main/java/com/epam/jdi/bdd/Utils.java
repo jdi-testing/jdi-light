@@ -1,17 +1,20 @@
 package com.epam.jdi.bdd;
 
-import com.epam.jdi.light.elements.base.BaseUIElement;
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.tools.LinqUtils;
-
-import java.util.List;
-
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
+
+import java.util.List;
+
+import com.epam.jdi.light.elements.base.BaseUIElement;
+import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.pairs.Pair;
 
 /**
  * Created by Dmitry_Lebedev1 on 1/13/2016.
@@ -55,6 +58,15 @@ public final class Utils {
         }
         throw exception("Can't find %s element", name);
     }
+    
+    public static Form getForm(String name) {
+    	if (ELEMENTS.has(name)) {
+        	List<Object> elements = ELEMENTS.get(name);
+            return (Form) elements.get(0);
+        }
+        throw exception("Can't find %s element", name);
+    }
+    
     public static int[] getIntArrayFromIntegerList(List<Integer> inputList) {
         return inputList.stream().mapToInt(i -> i).toArray();
     }

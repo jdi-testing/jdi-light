@@ -65,7 +65,7 @@ public class Form<T> extends Section {
      * @param map Specify entity as map
      *            Fills all elements on the form which implements SetValue interface and can be matched with fields in input entity
      */
-    protected void fill(MapArray<String, String> map) {
+    public void fill(MapArray<String, String> map) {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
@@ -153,7 +153,7 @@ public class Form<T> extends Section {
      * @param map Specify entity as mapArray
      *            Verify that form filled correctly. If not throws error
      */
-    protected void check(MapArray<String, String> map) {
+    public void check(MapArray<String, String> map) {
         List<String> result = verify(map);
         if (result.size() != 0)
             throw exception( "Check form failed:" + LINE_BREAK + print(result, LINE_BREAK));
