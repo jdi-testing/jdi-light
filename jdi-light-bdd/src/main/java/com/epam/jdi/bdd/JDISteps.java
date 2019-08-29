@@ -39,12 +39,6 @@ public class JDISteps {
         el.click();
     }
 	
-	@When("^(?:I |)Click on \"([^\"]*)\" on the \"([^\"]*)\" section$")
-    public void click(String name, String section) {
-        BaseUIElement el = getUI(name, section);
-        el.click();
-    }
-	
 	@When("^(?:I |)Send keys \"([^\"]*)\" to \"([^\"]*)\"$")
 	public void sendKeys(String value, String name) {
 		BaseUIElement el = getUI(name);
