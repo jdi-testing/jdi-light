@@ -7,7 +7,6 @@ package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;

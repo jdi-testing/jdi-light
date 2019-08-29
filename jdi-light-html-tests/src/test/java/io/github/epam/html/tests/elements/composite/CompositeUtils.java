@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.elements.composite;
 
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static org.testng.Assert.assertEquals;

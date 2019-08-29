@@ -15,11 +15,8 @@ import java.util.concurrent.TimeUnit;
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionProcessor.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.Timer.nowTime;
 
 @SuppressWarnings("unused")
 @Aspect

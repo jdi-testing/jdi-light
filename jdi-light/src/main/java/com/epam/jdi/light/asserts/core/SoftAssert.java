@@ -6,7 +6,6 @@ import org.hamcrest.Matcher;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.MatcherAssert.assertThat;
 
