@@ -31,6 +31,9 @@ public final class Utils {
     }
 
     public static BaseUIElement getUI(String name) {
+        String[] split = name.split("\\.");
+        if (split.length == 2)
+            return getUI(split[1], split[0]);
         if (ELEMENTS.has(name)) {
             List<Object> elements = ELEMENTS.get(name);
             if (elements.size() == 1)
