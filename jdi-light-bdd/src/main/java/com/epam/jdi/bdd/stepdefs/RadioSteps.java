@@ -3,6 +3,7 @@ package com.epam.jdi.bdd.stepdefs;
 import com.epam.jdi.light.ui.html.complex.RadioButtons;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
@@ -55,5 +56,3 @@ public class RadioSteps {
     }
     //#endregion
 }
-
-

@@ -23,11 +23,3 @@ Feature: Radio
     And the "Html5 Page.Colors" does not contain "Yellow" enabled radio button
     And the "Html5 Page.Colors" contains next enabled values:
       | Green | Blue |
-
-
-
-
-
-
-
-

@@ -1,7 +1,6 @@
 @button
 Feature: button
 
-
   Scenario:
     Given I open "Html5 Page" page
     Then the "Red Button" text equals to "Big Red Button-Input"
