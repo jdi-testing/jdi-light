@@ -1,5 +1,6 @@
 package org.mytests.tests;
 
+import com.epam.jdi.light.ui.html.HtmlSettings;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
 import org.mytests.uiobjects.example.site.SiteJdi;
@@ -19,10 +20,11 @@ import static org.mytests.tests.PerfStatistic.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
 
 public class SimpleTestsInit {
-    public static Safe<Timer> TIMER = new Safe<>(null);
+    public static Safe<Timer> TIMER = new Safe<>();
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         logger.setLogLevel(STEP);
+        HtmlSettings.init();
         initSite(SiteJdi.class);
         assertThat(TIMEOUT.get(), is(5));
         assertThat(PAGE_TIMEOUT.get(), is(25));

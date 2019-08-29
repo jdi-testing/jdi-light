@@ -1,6 +1,6 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.interfaces.PageObject;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import org.openqa.selenium.WebElement;
 
