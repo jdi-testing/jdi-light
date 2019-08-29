@@ -1,4 +1,4 @@
-@DateTime
+@datetime
 Feature: DateTimeSelector, INPUT TYPE DATETIME-LOCAL
 
   Scenario: Get date value test

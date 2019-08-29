@@ -1,4 +1,4 @@
-@Alert
+@alert
 Feature: Alert
 
   Scenario: alert text equals
