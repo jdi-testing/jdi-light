@@ -440,7 +440,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     @JDIAction("Set '{0}' in '{name}'")
     public void setText(String value) {
         //setAttribute("value", value);
-        jsExecute("value='"+value+"'");
+        jsExecute("value='"+value.replace("'", "\\u0027")+"'");
     }
 
     /**
