@@ -65,7 +65,11 @@ public class ActionHelper {
         try {
             if (template.contains("{0")) {
                 Object[] args = getArgs(jp);
-                template = msgFormat(template, args);
+                for (int i = 0; i < args.length; ++i) {
+                    if (template.contains("{" + i + "}")) {
+                        template = template.replaceAll("\\{" + i + "}", args[i].toString().replace("$", "\\$"));
+                    }
+                }
             } else if (template.contains("%s")) {
                 template = format(template, getArgs(jp));
             }
