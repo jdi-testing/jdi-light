@@ -11,13 +11,13 @@ import static com.epam.jdi.bdd.Utils.getUIComplex;
 public class MenuSteps {
     @When("^(?:I |)select \"([^\"]*)\" in \"([^\"]*)\" menu$")
     public void select(String value, String name) {
-        JList list = getUIComplex(name, JList.class);
+        JList list = getUIComplex(name);
         list.get(value).click();
     }
 
     @When("^(?:I |)select items in \"([^\"]*)\" menu:$")
     public void selectItems(String name, List<String> values) {
-        JList list = getUIComplex(name, JList.class);
+        JList list = getUIComplex(name);
         String[] items = values.toArray(new String[0]);
         for (String item : items)
             list.get(item).click();
@@ -25,19 +25,19 @@ public class MenuSteps {
 
     @When("^(?:I |)show \"([^\"]*)\" in \"([^\"]*)\" menu$")
     public void show(String value, String name) {
-        JList list = getUIComplex(name, JList.class);
+        JList list = getUIComplex(name);
         list.get(value).show();
     }
 
     @Then("^the \"([^\"]*)\" in \"([^\"]*)\" menu is selected$")
     public void isSelected(String value, String name) {
-        JList list = getUIComplex(name, JList.class);
+        JList list = getUIComplex(name);
         list.get(value).is().selected();
     }
 
     @Then("^the \"([^\"]*)\" in \"([^\"]*)\" menu is deselected$")
     public void isDeselected(String value, String name) {
-        JList list = getUIComplex(name, JList.class);
+        JList list = getUIComplex(name);
         list.get(value).is().deselected();
     }
 }

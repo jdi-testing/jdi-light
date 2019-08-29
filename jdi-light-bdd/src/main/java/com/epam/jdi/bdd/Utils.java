@@ -59,7 +59,7 @@ public final class Utils {
         throw exception("Can't find %s element", name);
     }
 
-    public static <T> T getUIComplex(String name, Class<T> type) {
+    public static <T> T getUIComplex(String name) {
         if (ELEMENTS.has(name)) {
             List<Object> elements = ELEMENTS.get(name);
             if (elements.size() == 1)
