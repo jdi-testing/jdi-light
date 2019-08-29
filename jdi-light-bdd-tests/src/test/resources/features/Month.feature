@@ -1,4 +1,4 @@
-@Month
+@month
 Feature: DateTimeSelector, INPUT TYPE MONTH
 
   Scenario: Get date value test

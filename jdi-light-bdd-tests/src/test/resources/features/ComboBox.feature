@@ -1,4 +1,4 @@
-@Combobox
+@combobox
 Feature: Combobox
 
 Background:

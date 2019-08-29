@@ -1,4 +1,4 @@
-@NumberSelector
+@numberselector
 Feature: NumberSelector
 
   Scenario: Get label text

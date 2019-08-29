@@ -1,4 +1,4 @@
-@Text
+@text
 Feature: Text
 
   Scenario: Get text test
