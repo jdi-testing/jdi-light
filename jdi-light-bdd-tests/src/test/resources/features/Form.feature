@@ -3,7 +3,7 @@ Feature: Form
   
   Scenario: fillContactForm
     Given I open "Contact Form Page"
-    When fill form "Contact Form" with data
+    When fill form "Contact Form" with data:
     |name|Roman|
     |lastName|Iovlev|
     |position|ChiefQA|
@@ -14,7 +14,7 @@ Feature: Form
     |gender|Female|
     |religion|Other|
     And I submit form "Contact Form"
-    Then the form "Contact Form" data equals
+    Then the form "Contact Form" data equals to:
     |name|Roman|
     |lastName|Iovlev|
     |position|ChiefQA|
@@ -25,9 +25,9 @@ Feature: Form
     |gender|Female|
     |religion|Other|
     
-Scenario: fillContactFormCustom
+  Scenario: fillContactFormCustom
     Given I open "Contact Form Page"
-    When fill form "Contact Form Custom" with data
+    When fill form "Contact Form Custom" with data:
     |name|Roman|
     |lastName|Iovlev|
     |position|ChiefQA|
@@ -38,7 +38,7 @@ Scenario: fillContactFormCustom
     |gender|Female|
     |religion|Other|
     And I submit form "Contact Form Custom"
-    Then the form "Contact Form Custom" data equals
+    Then the form "Contact Form Custom" data equals to:
     |name|Roman|
     |lastName|Iovlev|
     |position|ChiefQA|
@@ -49,7 +49,9 @@ Scenario: fillContactFormCustom
     |gender|Female|
     |religion|Other|
     
-    
+  Scenario: is displayed
+    Given I open "Contact Form Page"
+    Then the form "Contact Form" is displayed
     
 
     
