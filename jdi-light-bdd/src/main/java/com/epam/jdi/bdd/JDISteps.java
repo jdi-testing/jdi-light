@@ -1,19 +1,15 @@
 package com.epam.jdi.bdd;
 
-import static com.epam.jdi.light.elements.composite.WebPage.PAGES;
-import static org.hamcrest.Matchers.*;
-
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
-
-import static org.junit.Assert.assertEquals;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import static com.epam.jdi.bdd.Utils.getUI;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertEquals;
 
 public class JDISteps {
 
@@ -126,6 +122,17 @@ public class JDISteps {
 		BaseUIElement el = getUI(name);
 		el.setAttribute(attrName, attrValue);
 	}
+
+	@When("I go forward")
+	public void goForward() {
+		WebPage.forward();
+	}
+
+	@When("I go back")
+	public void goBack() {
+		WebPage.back();
+	}
+
 	//#endregion
 	//#region Then
 	@Then("^the \"([^\"]*)\" (?:page |)is opened$")
@@ -287,4 +294,5 @@ public class JDISteps {
 	public void titleIs(String expectedUrl) {
 		assertEquals(getTitle(), expectedUrl);
 	}
+
 }
