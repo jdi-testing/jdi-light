@@ -14,7 +14,7 @@ import gherkin.formatter.model.DataTableRow;
 
 public class FormSteps {
 	
-	@When("^(?:I |)fill form \"([^\"]*)\" with data:")
+	@When("^(?:I |)fill form \"([^\"]*)\" with data:$")
 	public void fillForm(String name, DataTable data) throws Throwable {
 		Form fm = getForm(name);
 		MapArray<String, String> fieldsMap = new MapArray<String, String>();
