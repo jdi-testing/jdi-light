@@ -526,9 +526,6 @@ function includeSideBar() {
                     <li ui="label" index="2"><a href="bootstrap.html">\
                         <span>Bootstrap</span>\
                     </a></li>\
-                    <li ui="label" index="3"><a>\
-                        <span>Bootstrap</span>\
-                    </a></li>\
                 </ul>\
             </li>\
         </ul>\
