@@ -123,6 +123,11 @@ public class HtmlRadioGroup extends Selector<HtmlElement> implements RadioButton
         return selected();
     }
 
+    @Override
+    public String getText() {
+        return selected();
+    }
+
     public SelectAssert assertThat() {
         return is();
     }
