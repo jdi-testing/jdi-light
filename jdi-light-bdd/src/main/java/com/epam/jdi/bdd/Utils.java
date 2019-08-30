@@ -10,10 +10,10 @@ import java.util.List;
 
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.tools.LinqUtils;
+
 
 /**
  * Created by Dmitry_Lebedev1 on 1/13/2016.
@@ -60,12 +60,13 @@ public final class Utils {
         }
         throw exception("Can't find %s element", name);
     }
-    public static JList getUIList(String name) {
+
+    public static <T> T getUIComplex(String name) {
         if (ELEMENTS.has(name)) {
             List<Object> elements = ELEMENTS.get(name);
             if (elements.size() == 1)
-                return (JList) elements.get(0);
-            JList element = (JList) LinqUtils.first(elements,
+                return (T) elements.get(0);
+            T element = (T) LinqUtils.first(elements,
                     el -> {
                         WebPage page = ((BaseUIElement) el).getPage();
                         return page != null && page.getName().equals(getCurrentPage());
