@@ -13,16 +13,16 @@ Feature: MultiDropDown
       | Disabled | Wood | Steam | Electro | Metalic |
 
   Scenario: Check disabled element value
-    When I select in the "Multi Dropdown" value "Disabled"
+    When I Select "Disabled" field from "Multi Dropdown"
     Then the "Multi Dropdown" selected value is "Steam"
 
   Scenario: Validation test
     Given I open "Html5 Page"
     Then the "Multi Dropdown" selected value is "Steam"
-    Then the "Multi Dropdown" values has item "Wood"
-    Then the "Multi Dropdown" has disabled item "Disabled"
-    Then the "Multi Dropdown" hasn't have enabled item "Disabled"
-    Then the "Multi Dropdown" has enabled items:
+    And the "Multi Dropdown" values has item "Wood"
+    And  the "Multi Dropdown" has disabled item "Disabled"
+    And the "Multi Dropdown" hasn't have enabled item "Disabled"
+    And the "Multi Dropdown" has enabled items:
       | Electro | Metalic |
 
   Scenario: Check  values test
@@ -40,14 +40,14 @@ Feature: MultiDropDown
   Scenario: Get label text tests
     Given I open "Html5 Page"
     Then the "Multi Dropdown" label text equals to "Multi dropdown:"
-    Then the "Multi Dropdown" label text contains "dropdown:"
-    Then the "Multi Dropdown" label text matches to "(.*)dropdown:"
+    And the "Multi Dropdown" label text contains "dropdown:"
+    And the "Multi Dropdown" label text matches to "(.*)dropdown:"
 
   Scenario: Get css tests
     Given I open "Html5 Page"
     Then the "Multi Dropdown" css "font-size" equals to "14px"
-    Then the "Multi Dropdown" css "font-family" contains "Source Sans Pro"
-    Then the "Multi Dropdown" css "font-family" matches to "(.*)sans-serif"
+    And the "Multi Dropdown" css "font-family" contains "Source Sans Pro"
+    And the "Multi Dropdown" css "font-family" matches to "(.*)sans-serif"
 
   Scenario: Base validation test
     Given I open "Html5 Page"

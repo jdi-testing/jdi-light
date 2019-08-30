@@ -46,12 +46,6 @@ public class MultiDropDownSteps {
         assertEquals(multiDropdown.selected(), value);
     }
 
-    @When("^(?:I |)select in the \"([^\"]*)\" value \"([^\"]*)\"$")
-    public void iSelectInTheValue(String name, String value) {
-        MultiSelector multiDropdown = getUI(name, MultiSelector.class);
-        multiDropdown.select(value);
-    }
-
     @Then("^the \"([^\"]*)\" values has item \"([^\"]*)\"$")
     public void theValuesHasItem(String name, String value) {
         MultiSelector multiDropdown = getUI(name, MultiSelector.class);
