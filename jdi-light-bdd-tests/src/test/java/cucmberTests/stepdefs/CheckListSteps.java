@@ -29,6 +29,7 @@ public class CheckListSteps {
     public void checkboxIsBasicallyValid(String name) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.is().displayed().selected("Hot option");
+        checklist.is().selected("Hot option");
         checklist.assertThat().values(hasItem("Sunny"))
                 .disabled(hasItem("Disabled"))
                 .enabled(not(hasItem("Disabled")))

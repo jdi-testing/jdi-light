@@ -113,7 +113,9 @@ public class HtmlElement extends BaseUIElement<HtmlElement> implements Text, But
      * @param line String
      */
     public void addNewLine(String line) {
-        sendKeys("\n" + line);
+        if (getText().length() != 0) {
+            sendKeys("\n" + line);
+        } else sendKeys(line);
     }
 
     /**
