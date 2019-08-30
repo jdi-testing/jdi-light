@@ -1,19 +1,22 @@
 package com.epam.jdi.bdd;
 
+import static com.epam.jdi.bdd.Utils.getUI;
 import static com.epam.jdi.light.elements.composite.WebPage.PAGES;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
+import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.matchesPattern;
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
 
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 
-import static org.junit.Assert.assertEquals;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
-import static com.epam.jdi.bdd.Utils.getUI;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
 
 public class JDISteps {
 
@@ -81,10 +84,10 @@ public class JDISteps {
         el.select(value);
     }
 
-	@When("^(?:I |)Select \"([^\"]*)\" fields from \"([^\"]*)\"$")
-    public void multiSelect(String values, String name) {
+	@When("^(?:I |)Select fields from \"([^\"]*)\":$")
+    public void multiSelect(String name, List<String> values) {
         BaseUIElement el = getUI(name);
-        el.select(values.split(";"));
+        el.select(values.toArray(new String[0]));
     }
 	@When("^(?:I |)Focus on \"([^\"]*)\"$")
 	public void focusOn(String name) {
