@@ -1,7 +1,13 @@
 @Form
 Feature: Form
+
+  Scenario: fill Contact Form from json
+    Given I open "Contact Form Page"
+    When fill form "Contact Form" with "Roman Contacts"
+    And submit form "Contact Form" with "Roman Contacts"
+    Then the form "Contact Form" data equals to "Roman Contacts"
   
-  Scenario: fillContactForm
+  Scenario: fill Contact Form
     Given I open "Contact Form Page"
     When submit form "Contact Form" with data:
       |name|Roman|
@@ -24,7 +30,7 @@ Feature: Form
       |gender|Female|
       |religion|Other|
     
-  Scenario: fillContactFormCustom
+  Scenario: fill Contact Form Custom
     Given I open "Contact Form Page"
     When fill form "Contact Form" with data:
       |name|Roman|

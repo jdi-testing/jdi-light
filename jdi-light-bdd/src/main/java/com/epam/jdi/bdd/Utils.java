@@ -12,7 +12,16 @@ import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * Created by Dmitry_Lebedev1 on 1/13/2016.
@@ -65,5 +74,36 @@ public final class Utils {
 
     public static <T extends HasPage> T getUIComplex(String name) {
         return getUI(name);
+    }
+    
+	public static Map<String, String> deserializeJsonToMap(String jsonName) {	
+		Gson gson = (new GsonBuilder()).create();
+		Map<String, String> map = new HashMap<String, String>();
+		String json = readFileData(getProperty("jsonTestDataFolder") + jsonName + ".json");
+		map = (Map<String, String>) gson.fromJson(json, map.getClass());
+		return map;
+    }
+
+    public static String readFileData(String filePath) {
+        String data = null;
+	    try(InputStream inputStream = Utils.class.getResourceAsStream(filePath)) {
+		    data = readFromInputStream(inputStream);
+	    } catch (IOException e) {
+	    	throw exception("Can't read from stream!");
+	    } catch(NullPointerException npe) {
+	    	throw exception("Can't find file by path %s !", filePath);
+	    }
+	    return data;	 
+    }
+
+    private static String readFromInputStream(InputStream inputStream) throws IOException {
+	    StringBuilder resultStringBuilder = new StringBuilder();
+	    try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+			    resultStringBuilder.append(line).append("\n");
+		    }
+	    }
+	    return resultStringBuilder.toString();
     }
 }
