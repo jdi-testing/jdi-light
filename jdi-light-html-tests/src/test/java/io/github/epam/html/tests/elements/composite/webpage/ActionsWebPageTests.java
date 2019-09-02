@@ -62,40 +62,51 @@ public class ActionsWebPageTests extends TestsInit {
     }
 
     @Test
-    public void scrollDownTest() {
+    public void scrollDownTest() throws InterruptedException {
         WebPage.scrollDown(30);
-        boolean execResult = jsExecute("if (window.scrollY == 30) {return true;}");
+        jsExecute("console.log(window.scrollY)");
+        Thread.sleep(3000);
+        boolean execResult = jsExecute("var x = window.scrollY; if (window.scrollY == 30) {return true;}");
         Assert.assertEquals(execResult, true);
     }
 
     @Test
-    public void scrollUpTest() {
+    public void scrollUpTest() throws InterruptedException {
         WebPage.scrollUp(20);
-        boolean execResult = jsExecute("if (window.scrollY == 0) {return true;}");
+        jsExecute("console.log(window.scrollY)");
+        Thread.sleep(3000);
+        boolean execResult = jsExecute("var x = window.scrollY; if (window.scrollY == 0) {return true;}");
         Assert.assertEquals(execResult, true);
     }
 
     @Test
-    public void scrollRightTest() {
+    public void scrollRightTest() throws InterruptedException {
         WebPage.scrollRight(10);
+        jsExecute("console.log(Math.ceil(window.scrollX))");
+        Thread.sleep(3000);
         boolean execResult = jsExecute("console.log(window.scrollX);" +
                 "if (window.scrollX == 10) {return true;}");
         Assert.assertEquals(execResult, true);
     }
 
     @Test
-    public void scrollLeftTest() {
+    public void scrollLeftTest() throws InterruptedException {
         WebPage.scrollLeft(5);
+        jsExecute("console.log(Math.ceil(window.scrollX))");
+        Thread.sleep(3000);
         boolean execResult = jsExecute("if (window.scrollX == 0) {return true;}");
         Assert.assertEquals(execResult, true);
     }
 
     @Test
-    public void zoomInTest() {
+    public void zoomTest() throws InterruptedException {
         WebPage.zoom(2);
+        jsExecute("var genderDropdownWidth = document.getElementById('gender').offsetWidth; " +
+                "console.log(genderDropdownWidth);");
+        Thread.sleep(3000);
         boolean execResult = jsExecute(
                 "console.log('zoomed 2x');" +
-                        "const genderDropdownWidth = document.getElementById('gender').offsetWidth;" +
+                        "var genderDropdownWidth = document.getElementById('gender').offsetWidth;" +
                         "if (genderDropdownWidth == 546) {return true;}"
         );
         Assert.assertEquals(execResult, true);

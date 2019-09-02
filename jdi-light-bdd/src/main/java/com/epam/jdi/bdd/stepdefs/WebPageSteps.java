@@ -21,18 +21,20 @@ public class WebPageSteps {
     }
 
     @When("I scroll \"(\\d+)\" px down")
-    public void scrollNPxDown(int numPx) {
-        WebPage.scrollDown(numPx);
+    public void scrollNPxDownAndNPxUp(int numPxDown) throws InterruptedException {
+        WebPage.scrollDown(numPxDown);
+        Thread.sleep(3000);
     }
 
     @When("I scroll \"(\\d+)\" px up")
-    public void scrollNPxUp(int numPx) {
-        WebPage.scrollUp(numPx);
+    public void scrollNPxUp(int numPxUp) throws InterruptedException {
+        WebPage.scrollUp(numPxUp);
+        Thread.sleep(3000);
     }
 
     @When("I scroll \"(\\d+)\" px right")
-    public void scrollNPxRight(int numPx) throws InterruptedException {
-        WebPage.scrollRight(numPx);
+    public void scrollNPxRight(int numPxRight) throws InterruptedException {
+        WebPage.scrollRight(numPxRight);
         Thread.sleep(3000);
     }
 
@@ -67,33 +69,39 @@ public class WebPageSteps {
     }
 
     @Then("The page is scrolled \"(\\d+)\" px down")
-    public void pageScrolledNPxDown(int numPx) {
-        boolean execResult = jsExecute("if (window.scrollY == " + numPx + ") {return true;}");
+    public void pageScrolledNPxDown(int numPxDown) {
+        boolean execResult = jsExecute("console.log(window.scrollY); " +
+                "if (window.scrollY == " + numPxDown + ") {return true;}");
         Assert.assertEquals(execResult, true);
     }
 
     @Then("The page is scrolled \"(\\d+)\" px up")
     public void pageScrolledNPxUp(int numPx) {
-        boolean execResult = jsExecute("if (window.scrollY == 10) {return true;}");
+        boolean execResult = jsExecute("console.log(window.scrollY); " +
+                "if (window.scrollY == 10) {return true;}");
         Assert.assertEquals(execResult, true);
     }
 
     @Then("The page is scrolled \"(\\d+)\" px right")
     public void pageScrolledNPxRight(int numPx) {
-        boolean execResult = jsExecute("if (Math.ceil(window.scrollX) == "+ numPx + ") {return true;}");
+        jsExecute("console.log(Math.ceil(window.scrollX))");
+        boolean execResult = jsExecute("if (Math.ceil(window.scrollX) == " + numPx + ") {return true;}");
         Assert.assertEquals(execResult, true);
     }
 
     @Then("The page is scrolled \"(\\d+)\" px left")
     public void pageScrolledNPxLeft(int numPx) {
+        jsExecute("console.log(Math.ceil(window.scrollX))");
         boolean execResult = jsExecute("if (Math.ceil(window.scrollX) == 5) {return true;}");
         Assert.assertEquals(execResult, true);
     }
 
     @Then("The page is zoomed")
     public void pageIsZoomed() {
+        jsExecute("var genderDropdownWidth = document.getElementById('gender').offsetWidth; " +
+                "console.log(genderDropdownWidth);");
         boolean execResult = jsExecute(
-                "const genderDropdownWidth = document.getElementById('gender').offsetWidth;" +
+                "var genderDropdownWidth = document.getElementById('gender').offsetWidth;" +
                         "if (genderDropdownWidth == 546) {return true;}"
         );
         Assert.assertEquals(execResult, true);
