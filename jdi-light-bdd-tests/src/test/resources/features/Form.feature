@@ -3,7 +3,7 @@ Feature: Form
 
   Scenario: fillContactForm
     Given I open "Contact Form Page"
-    When fill form "Contact Form" with "Roman Contact"
+    When fill form "Contact Form" with "Roman Contacts"
   
 #  Scenario: fillContactForm
 #    Given I open "Contact Form Page"

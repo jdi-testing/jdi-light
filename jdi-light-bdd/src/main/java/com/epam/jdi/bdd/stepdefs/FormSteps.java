@@ -1,6 +1,8 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import static com.epam.jdi.bdd.Utils.getForm;
+import static com.epam.jdi.bdd.JsonHelper.deserializeJsonToMap;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
 
 import java.util.Map;
 
@@ -27,7 +29,7 @@ public class FormSteps {
 			"}";
 	
 	@When("^(?:I |)fill form \"([^\"]*)\" with data:$")
-	public void fillForm(String name, DataTable data) throws Throwable {
+	public void fillForm(String name, DataTable data) {
 		Form fm = getForm(name);
 		MapArray<String, String> fieldsMap = new MapArray<String, String>();
 		for (DataTableRow row : data.getGherkinRows()) {
@@ -37,9 +39,10 @@ public class FormSteps {
 	}
 	
 	@When("^(?:I |)fill form \"([^\"]*)\" with \"([^\"]*)\"$")
-	public void fillForm(String name, String data) throws Throwable {
+	public void fillForm(String name, String jsonName) {
 		Form fm = getForm(name);		
-		Map<String, String> map = JsonHelper.deserializeJsonToMap(json);
+		System.out.println(getProperty("jsonTestDataResourcePath"));
+		Map<String, String> map = deserializeJsonToMap(jsonName);
 		fm.fill(MapArray.toMapArray(map));
 	}
 	
@@ -87,19 +90,5 @@ public class FormSteps {
 	public void disappear(String name) {
 		Form fm = getForm(name);
 		fm.is().disappear();
-	}
-	
-	public class Contacts extends DataClass<Contacts> {
-	    public String name;
-	    public String lastName;
-	    //public boolean passport;
-	    public String acceptConditions;
-	    public String position;
-	    public String passportNumber;
-	    public String passportSeria;
-	    public String description;
-	    public String gender;
-	    public String religion;
-	    public String weather;
 	}
 }
