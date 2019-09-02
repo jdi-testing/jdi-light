@@ -2,6 +2,7 @@ package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.elements.complex.table.Table;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.testng.Assert;
 
 import java.util.List;
@@ -100,5 +101,23 @@ public class TableSteps {
     public void assertExactRowsHaveValue(String elementName, int rows, String value, String column) {
         Table table = getUIComplex(elementName);
         table.assertThat().exact(rows).rows(hasValue(value, inColumn(column)));
+    }
+
+    @When("^(?:I |)click the cell in row \"([^\"]*)\" in column \"([^\"]*)\" of the table \"([^\"]*)\"$")
+    public void selectCell(int row, int column, String elementName) {
+        Table table = getUIComplex(elementName);
+        table.webCell(column, row).click();
+    }
+
+    @Then("^the cell in row \"([^\"]*)\" in column \"([^\"]*)\" of the table \"([^\"]*)\" is selected$")
+    public void isCellSelected(int row, int column, String elementName) {
+        Table table = getUIComplex(elementName);
+        assertTrue(table.webCell(column, row).isSelected());
+    }
+
+    @Then("^the cell in row \"([^\"]*)\" in column \"([^\"]*)\" of the table \"([^\"]*)\" is deselected$")
+    public void isCellDeselected(int row, int column, String elementName) {
+        Table table = getUIComplex(elementName);
+        assertTrue(table.webCell(column, row).isDeselected());
     }
 }
