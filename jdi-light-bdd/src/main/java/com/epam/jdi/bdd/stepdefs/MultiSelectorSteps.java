@@ -19,13 +19,13 @@ public class MultiSelectorSteps {
         multiSelector.check(LinqUtils.toStringArray(values));
     }
 
-    @Then("^I check the \"([^\"]*)\" multiselector text is equals to \"([^\"]*)\"$")
+    @Then("^the \"([^\"]*)\" multiselector text is equals to \"([^\"]*)\"$")
     public void checkMultiselectorText(String name, List<String> values) {
         MultiSelector multiSelector = getUI(name, MultiSelector.class);
         assertEquals(multiSelector.checked(), values);
     }
 
-    @Then("^I check the \"([^\"]*)\" multiselector contains next values:$")
+    @Then("^the \"([^\"]*)\" multiselector contains next values:$")
     public void assertMultiselectorValues(String name, List<String> values) {
         MultiSelector multiSelector = getUI(name, MultiSelector.class);
         multiSelector.assertThat().values(containsInAnyOrder(LinqUtils.toStringArray(values)));
@@ -37,31 +37,31 @@ public class MultiSelectorSteps {
         multiSelector.check(LinqUtils.toIntArray(values));
     }
 
-    @Then("^I check the \"([^\"]*)\" value is selected in \"([^\"]*)\" multiselector")
+    @Then("^the \"([^\"]*)\" value is selected in \"([^\"]*)\" multiselector$")
     public void isMultiselectorValueSelected(String value, String name) {
         MultiSelector multiSelector = getUI(name, MultiSelector.class);
         multiSelector.is().selected(value);
     }
 
-    @Then("^I check the \"([^\"]*)\" multiselector contains \"([^\"]*)\" value$")
+    @Then("^the \"([^\"]*)\" multiselector contains \"([^\"]*)\" value$")
     public void assertMultiselectorValue(String name, String value) {
         MultiSelector multiSelector = getUI(name, MultiSelector.class);
         multiSelector.is().values(hasItem(value));
     }
 
-    @Then("^I check the \"([^\"]*)\" multiselector in disabled state has \"([^\"]*)\" item$")
+    @Then("^the \"([^\"]*)\" multiselector in disabled state has \"([^\"]*)\" item$")
     public void checkStateHasItem(String name, String item) {
         MultiSelector multiSelector = getUI(name, MultiSelector.class);
         multiSelector.is().disabled(hasItem(item));
     }
 
-    @Then("^I check the \"([^\"]*)\" multiselector in enabled state has not \"([^\"]*)\" item$")
+    @Then("^the \"([^\"]*)\" multiselector in enabled state has not \"([^\"]*)\" item$")
     public void checkStateHasNotItem(String name, String item) {
         MultiSelector multiSelector = getUI(name, MultiSelector.class);
         multiSelector.is().enabled(not(hasItem(item)));
     }
 
-    @Then("^I check the \"([^\"]*)\" multiselector in enabled contains next values:$")
+    @Then("^the \"([^\"]*)\" multiselector in enabled contains next values:$")
     public void assertMultiselectorValuesInEnabledState(String name, List<String> values) {
         MultiSelector multiSelector = getUI(name, MultiSelector.class);
         multiSelector.is().enabled(hasItems(LinqUtils.toStringArray(values)));
