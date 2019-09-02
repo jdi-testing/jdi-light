@@ -4,6 +4,8 @@ Feature: Form
   Scenario: fillContactForm
     Given I open "Contact Form Page"
     When fill form "Contact Form" with "Roman Contacts"
+    And submit form "Contact Form" with "Roman Contacts"
+    Then the form "Contact Form" data equals to "Roman Contacts"
   
 #  Scenario: fillContactForm
 #    Given I open "Contact Form Page"

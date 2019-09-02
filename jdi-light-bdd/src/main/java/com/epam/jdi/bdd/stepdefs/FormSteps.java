@@ -1,14 +1,11 @@
 package com.epam.jdi.bdd.stepdefs;
 
+import static com.epam.jdi.bdd.Utils.deserializeJsonToMap;
 import static com.epam.jdi.bdd.Utils.getForm;
-import static com.epam.jdi.bdd.JsonHelper.deserializeJsonToMap;
-import static com.epam.jdi.tools.PropertyReader.getProperty;
 
 import java.util.Map;
 
-import com.epam.jdi.bdd.JsonHelper;
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.tools.DataClass;
 import com.epam.jdi.tools.map.MapArray;
 
 import cucumber.api.DataTable;
@@ -17,17 +14,6 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 
 public class FormSteps {
-	String json = "{\"name\": \"Roman\", \r\n" + 
-			"  \"lastName\": \"Iovlev\", \r\n" + 
-			"  \"position\": \"ChiefQA\", \r\n" + 
-			"  \"number\": \"654321\",\r\n" + 
-			"  \"passportSeria\": \"1234\", \r\n" + 
-			"  \"description\": \"JDI - awesome UI automation tool\", \r\n" + 
-			"  \"acceptConditions\": \"true\", \r\n" + 
-			"  \"gender\": \"Female\", \r\n" + 
-			"  \"religion\": \"Other\"\r\n" + 
-			"}";
-	
 	@When("^(?:I |)fill form \"([^\"]*)\" with data:$")
 	public void fillForm(String name, DataTable data) {
 		Form fm = getForm(name);
@@ -41,7 +27,6 @@ public class FormSteps {
 	@When("^(?:I |)fill form \"([^\"]*)\" with \"([^\"]*)\"$")
 	public void fillForm(String name, String jsonName) {
 		Form fm = getForm(name);		
-		System.out.println(getProperty("jsonTestDataResourcePath"));
 		Map<String, String> map = deserializeJsonToMap(jsonName);
 		fm.fill(MapArray.toMapArray(map));
 	}
@@ -52,6 +37,13 @@ public class FormSteps {
 		fm.submit();
 	}
 	
+	@When("^(?:I |)submit form \"([^\"]*)\" with \"([^\"]*)\"$")
+	public void submitForm(String name, String jsonName) {
+		Form fm = getForm(name);
+		Map<String, String> map = deserializeJsonToMap(jsonName);
+		fm.submit(MapArray.toMapArray(map));
+	}
+	
 	@Then("^the form \"([^\"]*)\" data equals to:$")
     public void dataEquals(String name, DataTable data) {
 		Form fm = getForm(name);
@@ -60,6 +52,13 @@ public class FormSteps {
 			fieldsMap.add(row.getCells().get(0), row.getCells().get(1));
 		}
         fm.check(fieldsMap);        
+    }
+	
+	@Then("^the form \"([^\"]*)\" data equals to \"([^\"]*)\"$")
+    public void dataEquals(String name, String jsonName) {
+		Form fm = getForm(name);
+		Map<String, String> map = deserializeJsonToMap(jsonName);
+        fm.check(map);        
     }
 	
 	@Then("^the form \"([^\"]*)\" is displayed$")

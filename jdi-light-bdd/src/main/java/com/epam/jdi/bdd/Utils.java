@@ -5,14 +5,23 @@ import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.tools.LinqUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 /**
@@ -83,5 +92,35 @@ public final class Utils {
             return (Form) elements.get(0);
         }
         throw exception("Can't find %s element", name);
+    }
+    
+	public static Map<String, String> deserializeJsonToMap(String jsonName) {	
+		Gson gson = (new GsonBuilder()).create();
+		Map<String, String> map = new HashMap<String, String>();
+		String json = readFileData(getProperty("jsonTestDataFolder") + jsonName + ".json");
+		map = (Map<String, String>) gson.fromJson(json, map.getClass());
+		return map;
+    }
+
+    public static String readFileData(String filePath) {
+        InputStream inputStream = Utils.class.getResourceAsStream(filePath);
+        String data = null;
+	    try {
+		    data = readFromInputStream(inputStream);
+	    } catch (IOException e) {
+		    e.printStackTrace();
+	    }
+	    return data;	 
+    }
+
+    private static String readFromInputStream(InputStream inputStream) throws IOException {
+	    StringBuilder resultStringBuilder = new StringBuilder();
+	    try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+			    resultStringBuilder.append(line).append("\n");
+		    }
+	    }
+	    return resultStringBuilder.toString();
     }
 }

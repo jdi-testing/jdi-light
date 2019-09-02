@@ -238,7 +238,7 @@ public class Form<T> extends Section {
      * e.g. if you call "submit(user, "Publish") then you should have Element 'publishButton'. <br>
      * * Letters case in button name  no matters
      */
-    protected void submit(MapArray<String, String> objStrings) {
+    public void submit(MapArray<String, String> objStrings) {
         submit(objStrings, "submit");
     }
 
