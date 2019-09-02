@@ -2,6 +2,8 @@ package com.epam.jdi.bdd.stepdefs;
 
 import static com.epam.jdi.bdd.Utils.getForm;
 
+import java.util.Map;
+
 import com.epam.jdi.bdd.JsonHelper;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.tools.DataClass;
@@ -13,8 +15,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 
 public class FormSteps {
-	String json = "{\r\n" + 
-			"  \"name\": \"Roman\", \r\n" + 
+	String json = "{\"name\": \"Roman\", \r\n" + 
 			"  \"lastName\": \"Iovlev\", \r\n" + 
 			"  \"position\": \"ChiefQA\", \r\n" + 
 			"  \"number\": \"654321\",\r\n" + 
@@ -23,7 +24,7 @@ public class FormSteps {
 			"  \"acceptConditions\": \"true\", \r\n" + 
 			"  \"gender\": \"Female\", \r\n" + 
 			"  \"religion\": \"Other\"\r\n" + 
-			"} ";
+			"}";
 	
 	@When("^(?:I |)fill form \"([^\"]*)\" with data:$")
 	public void fillForm(String name, DataTable data) throws Throwable {
@@ -37,9 +38,9 @@ public class FormSteps {
 	
 	@When("^(?:I |)fill form \"([^\"]*)\" with \"([^\"]*)\"$")
 	public void fillForm(String name, String data) throws Throwable {
-		Form fm = getForm(name);
-		Contacts c = JsonHelper.deserializeJson(Contacts.class, json);
-		fm.fill(c);
+		Form fm = getForm(name);		
+		Map<String, String> map = JsonHelper.deserializeJsonToMap(json);
+		fm.fill(MapArray.toMapArray(map));
 	}
 	
 	@When("^(?:I |)submit form \"([^\"]*)\"$")
