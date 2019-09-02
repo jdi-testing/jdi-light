@@ -58,8 +58,8 @@ public class MultiDropDownSteps {
         multiDropdown.is().disabled(hasItem(value));
     }
 
-    @Then("^the \"([^\"]*)\" hasn't have enabled item \"([^\"]*)\"$")
-    public void theHasnTHaveEnabledItem(String name, String value) {
+    @Then("^the \"([^\"]*)\" has no enabled item \"([^\"]*)\"$")
+    public void theHasNotEnabledItem(String name, String value) {
         MultiSelector multiDropdown = (MultiSelector) getUI(name);
         multiDropdown.is().enabled(not(hasItem(value)));
     }
