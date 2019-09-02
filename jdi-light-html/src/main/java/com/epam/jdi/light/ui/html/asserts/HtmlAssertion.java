@@ -5,9 +5,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import org.hamcrest.Matcher;
 
+import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.ui.html.utils.HtmlUtils.*;
 import static org.hamcrest.Matchers.is;
-import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 
 public class HtmlAssertion extends IsAssert<HtmlAssertion> implements ImageAssert, TextAssert,
         LinkAssert, TextAreaAssert, ColorAssert, CheckboxAssert, DateTimeAssert,

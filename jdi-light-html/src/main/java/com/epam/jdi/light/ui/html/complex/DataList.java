@@ -1,7 +1,5 @@
 package com.epam.jdi.light.ui.html.complex;
 
-import com.epam.jdi.light.asserts.IHasAssert;
-import com.epam.jdi.light.ui.html.asserts.ComboboxAssert;
 import com.epam.jdi.light.ui.html.common.TextField;
 
 import java.util.List;

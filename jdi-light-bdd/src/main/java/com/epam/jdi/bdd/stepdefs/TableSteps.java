@@ -40,6 +40,7 @@ public class TableSteps {
         String tableValues = String.join(", ", table.preview().replaceAll(" ", ""));
         String expectedValue = String.join(", ", values).replaceAll(", ", "");
         Assert.assertEquals(tableValues, expectedValue);
+
     }
 
     @Then("^the \"([^\"]*)\" table is not empty$")

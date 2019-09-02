@@ -4,13 +4,11 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.html5Page;
 import static io.github.com.StaticSite.suspendHtml5Page;
 import static io.github.com.pages.HtmlElementsPage.partyTime;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
 
 public class SuspendHtmlPageDateTimeTests extends TestsInit {
 
