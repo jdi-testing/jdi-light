@@ -4,8 +4,6 @@ import com.epam.jdi.light.ui.html.complex.Dropdown;
 import cucumber.api.java.en.Then;
 
 import static com.epam.jdi.bdd.Utils.getUI;
-import static junit.framework.TestCase.assertTrue;
-import static org.testng.Assert.assertEquals;
 
 public class DropDownSteps {
     /*

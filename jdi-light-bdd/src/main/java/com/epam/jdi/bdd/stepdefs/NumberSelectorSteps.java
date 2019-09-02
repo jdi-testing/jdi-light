@@ -1,15 +1,10 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import static com.epam.jdi.bdd.Utils.getUI;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.lessThan;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
-
 import com.epam.jdi.light.ui.html.common.NumberSelector;
-
 import cucumber.api.java.en.Then;
+
+import static com.epam.jdi.bdd.Utils.getUI;
+import static org.hamcrest.Matchers.*;
 
 public class NumberSelectorSteps {
 	/*

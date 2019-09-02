@@ -5,7 +5,9 @@ import io.github.epam.TestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static io.github.com.StaticSite.*;
+
+import static io.github.com.StaticSite.contactFormPage;
+import static io.github.com.StaticSite.leftMenu;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 
 

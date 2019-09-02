@@ -1,7 +1,5 @@
 package com.epam.jdi.light.elements.base;
 
-import com.epam.jdi.light.asserts.IHasAssert;
-import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.elements.interfaces.HasValue;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
