@@ -24,7 +24,6 @@ Feature: File Input element functionality
     Given I open "Html5 Page"
     Then the "Disabled File Input" is disabled
 
-@failed
   Scenario: Upload file by disabled file input element
     Given I open "Html5 Page"
     When I try to upload file "/jdi-light-bdd-tests/src/test/resources/general.xml" by "Disabled File Input" file input element
