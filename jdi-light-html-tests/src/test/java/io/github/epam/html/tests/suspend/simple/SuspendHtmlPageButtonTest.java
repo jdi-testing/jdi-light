@@ -6,10 +6,8 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.base.Alerts.acceptAlert;
 import static com.epam.jdi.light.elements.base.Alerts.getAlertText;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.suspendHtml5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
-import static io.github.epam.html.tests.elements.BaseValidations.durationImmediately;
 import static io.github.epam.html.tests.elements.BaseValidations.durationMoreThan;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;

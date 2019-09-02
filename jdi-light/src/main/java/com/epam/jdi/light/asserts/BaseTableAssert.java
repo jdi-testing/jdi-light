@@ -1,8 +1,10 @@
 package com.epam.jdi.light.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.complex.table.*;
-import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.light.elements.complex.table.BaseTable;
+import com.epam.jdi.light.elements.complex.table.Column;
+import com.epam.jdi.light.elements.complex.table.Single;
+import com.epam.jdi.light.elements.complex.table.TableMatcher;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -11,7 +13,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
-import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 

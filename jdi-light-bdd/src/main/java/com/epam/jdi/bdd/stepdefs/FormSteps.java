@@ -1,72 +1,46 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import static com.epam.jdi.bdd.Utils.getForm;
-import static com.epam.jdi.bdd.Utils.getUI;
-
-import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.map.MapArray;
-
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
+
+import static com.epam.jdi.bdd.Utils.getUI;
 
 public class FormSteps {
-	
+	public static Safe<String> lastForm = new Safe<>(() -> null);
 	@When("^(?:I |)fill form \"([^\"]*)\" with data:$")
-	public void fillForm(String name, DataTable data) throws Throwable {
+	public void fillForm(String name, DataTable data) {
 		Form fm = getForm(name);
-		MapArray<String, String> fieldsMap = new MapArray<String, String>();
-		for (DataTableRow row : data.getGherkinRows()) {
-			fieldsMap.add(row.getCells().get(0), row.getCells().get(1));
-		}
-		fm.fill(fieldsMap);
+		fm.fill(getMapFromTable(data));
 	}
-	
-	@When("^(?:I |)submit form \"([^\"]*)\"$")
-	public void submitForm(String name) {
+
+	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) " +
+			"form \"([^\"]*)\" with data:$")
+	public void submitDataForm(String name, DataTable data) {
 		Form fm = getForm(name);
-		fm.submit();
+		fm.submit(getMapFromTable(data));
 	}
-	
+	@When("^(?:I |)((?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search)) form$")
+	public void submitForm(String buttonName) {
+		Form fm = getForm(lastForm.get());
+		fm.pressButton(buttonName);
+	}
 	@Then("^the form \"([^\"]*)\" data equals to:$")
     public void dataEquals(String name, DataTable data) {
 		Form fm = getForm(name);
-        MapArray<String, String> fieldsMap = new MapArray<String, String>();
-		for (DataTableRow row : data.getGherkinRows()) {
-			fieldsMap.add(row.getCells().get(0), row.getCells().get(1));
-		}
-        fm.check(fieldsMap);        
+        fm.check(getMapFromTable(data));
     }
-	
-	@Then("^the form \"([^\"]*)\" is displayed$")
-	public void isDisplayed(String name) {
-		Form fm = getForm(name);
-		fm.is().displayed();
-	}
-	
-	@Then("^the form \"([^\"]*)\" is hidden$")
-	public void isHidden(String name) {
-		Form fm = getForm(name);
-		fm.is().hidden();
-	}
-	
-	@Then("^the form \"([^\"]*)\" does not appear$")
-	public void isNotAppear(String name) {
-		Form fm = getForm(name);
-		fm.is().notAppear();
-	}
 
-	@Then("^the form \"([^\"]*)\" does not appear during \"([^\"]*)\"$")
-	public void isNotAppear(String name, int seconds) {
-		Form fm = getForm(name);
-		fm.is().notAppear(seconds);
+	private MapArray<String, String> getMapFromTable(DataTable table) {
+		return new MapArray<>(table.getGherkinRows(),
+				r -> r.getCells().get(0), r -> r.getCells().get(1));
 	}
-	
-	@Then("^the form \"([^\"]*)\" disappear$")
-	public void disappear(String name) {
-		Form fm = getForm(name);
-		fm.is().disappear();
+	private static Form getForm(String name) {
+		Form form = getUI(name, Form.class);
+		lastForm.set(name);
+		return form;
 	}
 }
