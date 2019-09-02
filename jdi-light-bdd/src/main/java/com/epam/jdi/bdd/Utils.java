@@ -1,24 +1,25 @@
 package com.epam.jdi.bdd;
 
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.HasPage;
+import com.epam.jdi.tools.LinqUtils;
+
+import java.util.List;
+
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
 import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-
+import static com.epam.jdi.tools.PropertyReader.getProperty;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.HasPage;
-import com.epam.jdi.tools.LinqUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
