@@ -2,7 +2,6 @@ package io.github.epam.html.tests.issues.issue69;
 
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.ui.html.common.Button;
-import com.epam.jdi.tools.PrintUtils;
 
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;

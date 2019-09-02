@@ -19,8 +19,6 @@ import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
-import static io.github.com.pages.Header.loginForm;
-import static io.github.com.pages.Header.userIcon;
 import static org.junit.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;

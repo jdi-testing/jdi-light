@@ -14,7 +14,8 @@ import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.com.pages.UsersPage.users;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 
 
 public class SoftAsserts extends TestsInit {
