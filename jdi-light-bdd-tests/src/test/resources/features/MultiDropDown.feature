@@ -21,7 +21,7 @@ Feature: MultiDropDown
     Then the "Multi Dropdown" selected value is "Steam"
     And the "Multi Dropdown" values has item "Wood"
     And  the "Multi Dropdown" has disabled item "Disabled"
-    And the "Multi Dropdown" has not enabled item "Disabled"
+    And the "Multi Dropdown" has no enabled item "Disabled"
     And the "Multi Dropdown" has enabled items:
       | Electro | Metalic |
 
