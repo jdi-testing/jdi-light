@@ -14,7 +14,7 @@ Scenario: Select combobox value test
   Then the "Ice Cream" combobox selected value is "Chocolate"
 
 Scenario: Select num combobox value test
-  When Select index 5 in "Ice Cream"
+  When select index 5 in "Ice Cream"
   Then the "Ice Cream" combobox selected value is "Vanilla"
 
 Scenario: Selected combobox value test
