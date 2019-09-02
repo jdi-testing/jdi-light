@@ -56,10 +56,10 @@ Feature: Table
   Scenario: Line by index test
     Given I open "Simple Page"
     Then the cell in row "1" in column "3" of the table "Simple Table" is deselected
-    Then the cell in row "2" in column "2" of the table "Simple Table" is deselected
+    And the cell in row "2" in column "2" of the table "Simple Table" is deselected
     When I click the cell in row "1" in column "3" of the table "Simple Table"
     Then the cell in row "1" in column "3" of the table "Simple Table" is selected
-    Then the cell in row "2" in column "2" of the table "Simple Table" is deselected
+    And the cell in row "2" in column "2" of the table "Simple Table" is deselected
     When I click the cell in row "2" in column "2" of the table "Simple Table"
     Then the cell in row "1" in column "3" of the table "Simple Table" is deselected
-    Then the cell in row "2" in column "2" of the table "Simple Table" is selected
+    And the cell in row "2" in column "2" of the table "Simple Table" is selected
