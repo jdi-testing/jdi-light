@@ -6,6 +6,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
+import static org.apache.commons.io.FileUtils.readFileToString;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -103,12 +104,13 @@ public final class Utils {
     }
 
     public static String readFileData(String filePath) {
-        InputStream inputStream = Utils.class.getResourceAsStream(filePath);
         String data = null;
-	    try {
+	    try(InputStream inputStream = Utils.class.getResourceAsStream(filePath)) {
 		    data = readFromInputStream(inputStream);
 	    } catch (IOException e) {
-		    e.printStackTrace();
+	    	throw exception("Can't read from stream!");
+	    } catch(NullPointerException npe) {
+	    	throw exception("Can't find file by path %s !", filePath);
 	    }
 	    return data;	 
     }
