@@ -10,7 +10,7 @@ import static org.hamcrest.core.Is.is;
 
 public class ComboboxSteps {
 
-    @When("^Select index (\\d+) in \"([^\"]*)\"$")
+    @When("^select index (\\d+) in \"([^\"]*)\"$")
     public void comboboxSelect(int index, String name) {
         Combobox combobox = getUI(name, Combobox.class);
         combobox.select(index);
