@@ -101,8 +101,8 @@ Feature: BaseUIElement
   Scenario: select
     Given I open "Html5 Page"
     When Select "Pirate" field from "Dress Code"
-    Then the "Dress Code" text equals to "Pirate"
-@failed
+	Then the "Dress Code" text equals to "Pirate"
+
   Scenario: multi select
     Given I open "Html5 Page"
     When Select fields from "Multi Dropdown":
