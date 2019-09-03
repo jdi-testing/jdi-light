@@ -7,8 +7,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import java.util.List;
-
 import static com.epam.jdi.bdd.Utils.getUI;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static org.hamcrest.Matchers.*;
@@ -80,11 +78,6 @@ public class JDISteps {
         el.select(value);
     }
 
-	@When("^(?:I |)Select fields from \"([^\"]*)\":$")
-    public void multiSelect(String name, List<String> values) {
-        BaseUIElement el = getUI(name);
-        el.select(values.toArray(new String[0]));
-    }
 	@When("^(?:I |)Focus on \"([^\"]*)\"$")
 	public void focusOn(String name) {
 		BaseUIElement el = getUI(name);
