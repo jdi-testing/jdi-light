@@ -142,13 +142,15 @@
                             <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/breadcrumb/"
                                              target="_blank">https://getbootstrap.com/docs/4.3/components/breadcrumb/</a>
                             </p>
-                            <p>click(int index) - click on item of breadcrumb with target index <br> Index starts at 1  </p>
-                            <p>click(String nameItem) - click on item of breadcrumb with target name</p>
-                            <p>getValues() - return all pairs: URL and index </p>
-                            <p>getValue(int index) - return URL of breadcrumb's item with target index </p>
-                            <p>getTexts() - return all pairs: name and index </p>
-                            <p>getText(int index) - return name of breadcrumb's item with target index  </p>
-                            <p>getCurrentPageName() - return name of breadcrumb's item with aria-current="page"</p>
+                            Index starts at 1 <br><br>
+                            click(int index) - click on item of breadcrumb with target index <br>
+                            click(String nameItem) - click on item of breadcrumb with target name <br>
+                            getValues() - return ? all pairs: URL and index <br>
+                            getValue(int index) - return String: URL of breadcrumb's item with target index <br>
+                            getTexts() - return ? all pairs: name and index <br>
+                            getText(int index) - return String: name of breadcrumb's item with target index <br>
+                            getCurrentPageName() - return String: name of breadcrumb's item with aria-current="page"
+                            </p>
 
 
                         </div>
@@ -177,11 +179,13 @@
 
                             <p>
                                 <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1"
-                                   role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle
-                                    first element</a>
+                                   role="button" aria-expanded="false" aria-controls="multiCollapseExample1"
+                                   style="margin-bottom: 5px;">Toggle
+                                    first element </a>
                                 <button class="btn btn-primary" type="button" data-toggle="collapse"
                                         data-target="#multiCollapseExample2" aria-expanded="false"
-                                        aria-controls="multiCollapseExample2">Toggle second element
+                                        aria-controls="multiCollapseExample2" style="margin-bottom: 5px;">Toggle second
+                                    element
                                 </button>
                                 <button class="btn btn-primary" type="button" data-toggle="collapse"
                                         data-target=".multi-collapse" aria-expanded="false"
@@ -273,7 +277,25 @@
                             <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/buttons/"
                                              target="_blank">https://getbootstrap.com/docs/4.3/components/collapse/</a>
                             </p>
-                            <p>click() - Click on link</p>
+                            <ul>
+                                <li> for all
+                                    <ul>
+                                        <li> click(String nameItem) - click on item of collapse with target name </li>
+                                        <li> getText(String nameItem) - return String: text content of collapse's item with target name </li>
+                                        <li> getURL(String nameItem) - return String: URL of collapse's link item with target name </li>
+                                        <li> getName() - return String: inscription of collapse's item </li>
+                                        <li> getShowed() - return String: name of collapse's item that content is showed</li>
+                                     </ul>
+                                </li>
+                                <br>
+                                <li> for Group only
+                                    <ul>
+                                        <li> getNames() - return List&lt;String&gt;: list of items inscription</li>
+                                        <li> getTexts() - return List&lt;String&gt;: list of items text content  </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
                         </div>
                     </div>
 
@@ -474,6 +496,7 @@
 
 
 
+
 </script>
 <script>
     const volumeSpan = $('#volume-value')[0];
@@ -481,6 +504,7 @@
     function showVal(val) {
         volumeSpan.value = val;
     }
+
 
 
 
@@ -494,9 +518,11 @@
 
 
 
+
 </script>
 <Script language="JavaScript">
     UUI.Vertical_Menu.init({"open":true});
+
 
 
 
@@ -510,10 +536,12 @@
 
 
 
+
 </script>
 <script>
 		includeSideBar();
 		activateTopElement(5,1);
+
 
 
 
