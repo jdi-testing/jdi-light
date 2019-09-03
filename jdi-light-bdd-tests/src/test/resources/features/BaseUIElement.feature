@@ -105,7 +105,7 @@ Feature: BaseUIElement
 
   Scenario: multi select
     Given I open "Html5 Page"
-	  When I check in the "Multi Dropdown" values:
-		  | Steam | Wood |
-	  Then the "Multi Dropdown" selected values:
-		  | Steam | Wood |
+	When I check in the "Multi Dropdown" values:
+		| Steam | Wood |
+	Then the "Multi Dropdown" selected values:
+		| Steam | Wood |
