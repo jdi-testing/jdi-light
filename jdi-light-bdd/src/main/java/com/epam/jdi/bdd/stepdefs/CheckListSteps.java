@@ -1,5 +1,6 @@
 package com.epam.jdi.bdd.stepdefs;
 
+import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.ui.html.complex.Checklist;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -107,5 +108,11 @@ public class CheckListSteps {
     public void checkListTextIs(String name, String text) {
         Checklist checklist = (Checklist) getUI(name);
         assertEquals(checklist.getValue(), text);
+    }
+
+    @When("^(?:I |)Select fields from \"([^\"]*)\":$")
+    public void multiSelect(String name, List<String> values) {
+        BaseUIElement el = getUI(name);
+        el.select(values.toArray(new String[0]));
     }
 }
