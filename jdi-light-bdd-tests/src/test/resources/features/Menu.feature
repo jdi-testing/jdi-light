@@ -3,13 +3,13 @@ Feature: Menu
 
   Scenario: Select test
     Given I open "Html5 Page"
-    When I Check "Accept Conditions"
+    When I check "Accept Conditions"
     And I select "Contact form" in "Left Menu" menu
     Then the "Contact Form Page" page is opened
 
   Scenario: Get list test
     Given I open "Html5 Page"
-    When I Check "Accept Conditions"
+    When I check "Accept Conditions"
     And I show "Contact form" in "Left Menu" menu
     Then the "Contact form" in "Left Menu" menu is deselected
     When I select "Contact form" in "Left Menu" menu
@@ -18,7 +18,7 @@ Feature: Menu
 
   Scenario: Select items test
     Given I open "Html5 Page"
-    When I Check "Accept Conditions"
+    When I check "Accept Conditions"
     And I select items in "Left Menu" menu:
       | Service |
       | Dates   |
@@ -26,5 +26,5 @@ Feature: Menu
 
   Scenario: Is validation test
     Given I open "Html5 Page"
-    When I Check "Accept Conditions"
+    When I check "Accept Conditions"
     Then the "HTML 5" in "Left Menu" menu is selected

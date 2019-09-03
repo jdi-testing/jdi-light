@@ -8,7 +8,7 @@ Feature: NumberSelector
     
   Scenario: Set number 
     Given I open "Html5 Page"
-    When I Set text "2.1" in "Height"
+    When I set text "2.1" in "Height"
     Then the "Height" text equals to "2.1"
     
   Scenario: Get minValue

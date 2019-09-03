@@ -21,7 +21,7 @@ public class DateTimeSelectorSteps {
         assertEquals(dateTimeSelector.max(), date);
     }
 
-    @When("^(?:I |)Set date \"([^\"]*)\" in the \"([^\"]*)\"$")
+    @When("^(?:I |)set date \"([^\"]*)\" in the \"([^\"]*)\"$")
     public void iSetDate(String date, String name) {
         DateTimeSelector dateTimeSelector = (DateTimeSelector)getUI(name);
         dateTimeSelector.setDateTime(date);

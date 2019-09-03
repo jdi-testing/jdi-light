@@ -8,12 +8,12 @@ import static org.hamcrest.Matchers.*;
 
 public class AlertSteps {
 	
-	@When("^(?:I |)Accept alert")
+	@When("^(?:I |)accept alert")
 	public void accept() {
 		acceptAlert();
 	}
 	
-	@When("^(?:I |)Dismiss alert")
+	@When("^(?:I |)dismiss alert")
 	public void dismiss() {
 		dismissAlert();
 	}

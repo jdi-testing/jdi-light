@@ -12,7 +12,7 @@ Feature: MultiDropDown
       | Disabled | Wood | Steam | Electro | Metalic |
 
   Scenario: Check disabled element value
-    When I Select "Disabled" field from "Multi Dropdown"
+    When I select "Disabled" field from "Multi Dropdown"
     Then the "Multi Dropdown" selected value is "Steam"
 
   Scenario: Validation test

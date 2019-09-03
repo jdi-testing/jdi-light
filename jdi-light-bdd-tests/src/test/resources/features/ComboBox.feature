@@ -4,16 +4,16 @@ Feature: Combobox
 Background:
   Given I should be logged in
   And I open "Html5 Page"
-  When Select "Coconut" field from "Ice Cream"
+  When select "Coconut" field from "Ice Cream"
 
 Scenario: Get combobox value test
   Then the "Ice Cream" combobox selected value is "Coconut"
 
-Scenario: Select combobox value test
-  When Select "Chocolate" field from "Ice Cream"
+Scenario: select combobox value test
+  When select "Chocolate" field from "Ice Cream"
   Then the "Ice Cream" combobox selected value is "Chocolate"
 
-Scenario: Select num combobox value test
+Scenario: select num combobox value test
   When select index 5 in "Ice Cream"
   Then the "Ice Cream" combobox selected value is "Vanilla"
 
@@ -27,7 +27,7 @@ Scenario: Combobox label test
 Scenario: Combobox is validation test
   Then the "Ice Cream" is enabled
   And the "Ice Cream" text equals to "Coconut"
-  When Select "Vanilla" field from "Ice Cream"
+  When select "Vanilla" field from "Ice Cream"
   Then the "Ice Cream" text contains "Van"
 
 Scenario: Assert validation test
@@ -37,16 +37,16 @@ Scenario: Base validation test
   Then the "Ice Cream" is basically valid
 
 Scenario: Send keys test
-  When Select "Chocolate" field from "Ice Cream"
-  When I Send keys "Test" to "Ice Cream"
+  When select "Chocolate" field from "Ice Cream"
+  When I send keys "Test" to "Ice Cream"
   Then the "Ice Cream" text equals to "ChocolateTest"
 
 Scenario: Input test
-  When I Input "New text" in "Ice Cream"
+  When I input "New text" in "Ice Cream"
   Then the "Ice Cream" text equals to "New text"
 
 Scenario: Clear text
-  When I Clear "Ice Cream"
+  When I clear "Ice Cream"
   Then the "Ice Cream" text equals to ""
 
 Scenario: Check placeholder
@@ -55,4 +55,4 @@ Scenario: Check placeholder
   And the "Ice Cream" placeholder matches to "(.*)cream"
 
 Scenario: Focus
-  When I Focus on "Ice Cream"
+  When I focus on "Ice Cream"

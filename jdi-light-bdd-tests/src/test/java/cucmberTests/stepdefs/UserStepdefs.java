@@ -31,7 +31,7 @@ public class UserStepdefs {
     public void iMWaitSeconds(int arg0) {
     }
 
-    @Then("^Log contains \"([^\"]*)\"$")
+    @Then("^log contains \"([^\"]*)\"$")
     public void logContains(String arg0) {
         Assert.assertTrue(true);
     }
@@ -42,18 +42,18 @@ public class UserStepdefs {
         throw new PendingException();
     }
 
-    @Then("^Result contains \"([^\"]*)\"$")
+    @Then("^result contains \"([^\"]*)\"$")
     public void resultContains(String arg0) {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
 
-    @Then("^Url is \"([^\"]*)\"$")
+    @Then("^url is \"([^\"]*)\"$")
     public void urlIs(String arg0) {
 
     }
 
-    @Then("^Log is empty$")
+    @Then("^log is empty$")
     public void logIsEmpty() {
 
     }
@@ -96,8 +96,7 @@ public class UserStepdefs {
         try {
             fileInput.uploadFile(mergePath(PROJECT_PATH, pathToFile));
         } catch (Exception e) {
-            assertEquals(
-                    String.format("\r\nCan't do uploadFile for disabled element '%s'", elementName),e.getMessage());
+            assertTrue(e.getLocalizedMessage().contains("Failed to execute 'uploadFile' for element"));
         }
     }
 }

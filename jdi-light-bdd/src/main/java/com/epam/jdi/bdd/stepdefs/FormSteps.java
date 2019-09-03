@@ -27,12 +27,20 @@ public class FormSteps {
 	}
 
 	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) " +
+			"form$")
+	public void submitDataForm() {
+		Form fm = getForm(lastForm.get());
+		fm.submit();
+	}
+	
+	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) " +
 			"form \"([^\"]*)\" with data:$")
 	public void submitDataForm(String name, DataTable data) {
 		Form fm = getForm(name);
 		fm.submit(getMapFromTable(data));
 	}
-	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) form$")
+	
+	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) form using button \"([^\"]*)\"$")
 	public void submitForm(String buttonName) {
 		Form fm = getForm(lastForm.get());
 		fm.pressButton(buttonName);

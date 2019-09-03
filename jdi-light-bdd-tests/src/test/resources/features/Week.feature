@@ -33,7 +33,7 @@ Feature: DateTimeSelector, INPUT TYPE WEEK
   Scenario: Set date
     Given I open "Html5 Page"
     Then the "Autumn Week" text equals to "2018-W40"
-    When I Set date "2018-W12" in the "Autumn Week"
+    When I set date "2018-W12" in the "Autumn Week"
     Then the "Autumn Week" text equals to "2018-W12"
 
   Scenario: Base validation test
