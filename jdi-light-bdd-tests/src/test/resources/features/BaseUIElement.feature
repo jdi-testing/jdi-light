@@ -102,10 +102,10 @@ Feature: BaseUIElement
     Given I open "Html5 Page"
     When Select "Pirate" field from "Dress Code"
     Then the "Dress Code" text equals to "Pirate"
-
+@failed
   Scenario: multi select
     Given I open "Html5 Page"
-	When I check in the "Multi Dropdown" values:
-			| Steam | Wood |
-		Then the "Multi Dropdown" selected values:
-			| Steam | Wood |
+    When Select fields from "Multi Dropdown":
+    |Steam|
+    |Wood|
+    Then the "Multi Dropdown" text equals to "Steam;Wood"
