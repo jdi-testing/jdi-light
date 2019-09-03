@@ -1,8 +1,6 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.ui.html.common.ProgressBar;
 import com.epam.jdi.light.ui.html.common.Range;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 

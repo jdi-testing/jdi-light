@@ -4,9 +4,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import static com.epam.jdi.light.elements.base.Alerts.*;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.matchesPattern;
+import static org.hamcrest.Matchers.*;
 
 public class AlertSteps {
 	

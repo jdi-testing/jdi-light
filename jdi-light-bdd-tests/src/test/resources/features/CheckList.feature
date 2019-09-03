@@ -28,7 +28,9 @@ Feature: CheckList
       | Cold       |
 
   Scenario: Select checkbox test
-    When I Select "Cold;Hot option" fields from "Weather"
+    When I Select fields from "Weather":
+    |Cold|
+    |Hot option|
     Then in "Weather" checklist checked element is "Cold"
 
   Scenario: Check element via numbers test
@@ -58,7 +60,8 @@ Feature: CheckList
     When I select nothing in "Weather" checklist and should be exception
 
   Scenario: Disable element test
-    When I Select "Disabled" fields from "Weather"
+    When I Select fields from "Weather":
+    |Disabled|
     Then the "Weather" checklist value is "Hot option"
 
   Scenario: Validation test

@@ -1,5 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
-public interface JDIElement {
+import com.epam.jdi.light.elements.interfaces.HasPage;
+
+public interface JDIElement extends HasPage {
 
 }

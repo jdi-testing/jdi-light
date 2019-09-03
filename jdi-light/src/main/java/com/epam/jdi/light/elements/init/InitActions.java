@@ -27,7 +27,8 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
+import static com.epam.jdi.light.elements.composite.WebPage.PAGES;
 import static com.epam.jdi.light.elements.init.PageFactory.initElement;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
@@ -119,6 +120,7 @@ public class InitActions {
         //jdi.setTypeName(info.instance.getClass().getName());
         jdi.parent = info.parent;
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
+
         if (ELEMENTS.has(jdi.getName()))
             ELEMENTS.get(jdi.getName()).add(jdi);
         else {

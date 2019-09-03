@@ -105,5 +105,7 @@ Feature: BaseUIElement
 @failed
   Scenario: multi select
     Given I open "Html5 Page"
-    When Select "Steam;Wood" fields from "Multi Dropdown"
+    When Select fields from "Multi Dropdown":
+    |Steam|
+    |Wood|
     Then the "Multi Dropdown" text equals to "Steam;Wood"

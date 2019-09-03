@@ -18,8 +18,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
-
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 	@Url("/index.html") public static HomePage homePage;
@@ -32,6 +30,8 @@ public class StaticSite {
 	public static DatesPage datesPage;
 	@Url("/user-table.html") @Title("User Table")
 	public static UsersPage usersPage;
+	@Url("/simple-table.html") @Title("Simple Table")
+	public static SimplePage simplePage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;

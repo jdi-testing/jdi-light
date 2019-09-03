@@ -6,10 +6,10 @@ import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.bdd.Utils.getUI;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
 import static org.testng.Assert.assertEquals;
-import static com.epam.jdi.bdd.Utils.getUI;
 
 public class RadioSteps {
 
