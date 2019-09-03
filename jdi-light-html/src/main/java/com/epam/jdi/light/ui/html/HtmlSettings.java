@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.ui.html.elements.complex.Checklist;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
-import com.epam.jdi.light.ui.html.elements.complex.Dropdown;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 
 import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.light.elements.init.PageFactory.PRE_INIT;

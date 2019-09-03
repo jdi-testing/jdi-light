@@ -35,7 +35,8 @@ public class Line implements IList<String>, IBaseElement {
     public Line(WebList elements, List<String> headers) {
         this.elements = elements;
         this.headers = headers;
-        this.dataMap = () -> new MapArray<>(headers, LinqUtils.map(elements, UIElement::getText));
+        List<String> values = LinqUtils.map(elements, UIElement::getText);
+        this.dataMap = () -> new MapArray<>(headers, values);
     }
     public static Line initLine(List<String> list, List<String> headers) {
         Line line = new Line();

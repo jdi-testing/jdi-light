@@ -6,8 +6,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import io.github.com.pages.*;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -32,8 +33,10 @@ public class StaticSite {
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;
-	@UI("[ui=label][*'%s']") public static WebList navigationS;
-	@UI("[ui=label][*'%s']") public static UIElement menu;
+	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList navigationS;
+	// TODO fix slow @UI("[ui=label][*'%s']") public static WebList navigationS;
+	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static UIElement menu;
+	// TODO fix slow @UI("[ui=label][*'%s']") public static UIElement menu;
 
 	@Css("header") public static Header header;
 	@Css("footer") public static Footer footer;

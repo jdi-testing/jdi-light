@@ -55,22 +55,22 @@ public class WebSettings {
         el != null && el.isDisplayed() && el.isEnabled();
     public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
         el != null && !el.isDisplayed() && $(el).isClickable();
-    public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = VISIBLE_ELEMENT;
+    public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
     public static JAction1<UIElement> BEFORE_SEARCH = b -> {};
     public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
-        SEARCH_CONDITION = rule;
+        SEARCH_RULES = rule;
     }
     public static void noValidation() {
-        SEARCH_CONDITION = ANY_ELEMENT;
+        SEARCH_RULES = ANY_ELEMENT;
     }
     public static void onlyVisible() {
-        SEARCH_CONDITION = VISIBLE_ELEMENT;
+        SEARCH_RULES = VISIBLE_ELEMENT;
     }
     public static void visibleEnabled() {
-        SEARCH_CONDITION = ENABLED_ELEMENT;
+        SEARCH_RULES = ENABLED_ELEMENT;
     }
     public static void inView() {
-        SEARCH_CONDITION = ELEMENT_IN_VIEW;
+        SEARCH_RULES = ELEMENT_IN_VIEW;
         BEFORE_SEARCH = UIElement::show;
     }
     public static boolean STRICT_SEARCH = true;

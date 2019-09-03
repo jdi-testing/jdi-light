@@ -16,6 +16,16 @@ import static com.epam.jdi.tools.StringUtils.splitHyphen;
 import static java.lang.String.format;
 
 public class JDILocator {
+    public JDILocator() {}
+    public JDILocator copy() {
+        JDILocator locator = new JDILocator();
+        locator.locatorType = locatorType;
+        locator.byLocator = byLocator;
+        locator.isRoot = isRoot;
+        locator.element = element;
+        return locator;
+    }
+
     private LocatorType locatorType = DEFAULT;
     private By byLocator;
     public boolean isRoot = false;
@@ -43,12 +53,10 @@ public class JDILocator {
         return isRoot;
     }
 
-    public JDILocator() {
+    public void add(By locator, JDIBase element) {
+        add(locator, DEFAULT, element);
     }
-    public JDILocator(By locator, JDIBase element) {
-        this(locator, DEFAULT, element);
-    }
-    public JDILocator(By locator, LocatorType type, JDIBase element) {
+    public void add(By locator, LocatorType type, JDIBase element) {
         locatorType = type;
         byLocator = setRootLocator(locator)
                 ? trimRoot(locator)

@@ -3,7 +3,7 @@ package page.objects.jdi;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

@@ -1,4 +1,4 @@
-package com.epam.jdi.light.elements.pageobjects.annotations.simple;
+package com.epam.jdi.light.elements.pageobjects.annotations.locators;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface ByText {
+public @interface Css {
     String value();
-}
 
+}

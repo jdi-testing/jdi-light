@@ -37,6 +37,7 @@ import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
@@ -58,13 +59,13 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return this;
     }
     public JDIBase() {
-        searchRules.add(SEARCH_CONDITION);
+        searchRules.add(SEARCH_RULES);
     }
     public JDIBase(JDIBase base) {
         setCore(base);
     }
     public JDIBase setCore(JDIBase base) {
-        locator = base.locator;
+        locator = base.locator.copy();
         name = base.name;
         parent = base.parent;
         varName = base.varName;
@@ -136,12 +137,12 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public JDIBase setLocator(By locator) {
         if (name.isEmpty()) name = shortBy(locator);
-        this.locator = new JDILocator(locator, this);
+        this.locator.add(locator, this);
         return this;
     }
     public JDIBase setFrame(By locator) {
         if (name.isEmpty()) name = shortBy(locator);
-        this.locator = new JDILocator(locator, FRAME, this);
+        this.locator.add(locator, FRAME, this);
         return this;
     }
     public By getLocator(Object... args) {
@@ -174,24 +175,34 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
             = "Found %s elements instead of one for Element '%s' during %s seconds";
     public static final String ELEMENTS_FILTERED_MESSAGE
-            = "Found %s elements but none pass results filtering. Please change locator or filtering rules (WebSettings.SEARCH_CONDITION = el -> ...)" +
+            = "Found %s elements but none pass results filtering. Please change locator or filtering rules (WebSettings.SEARCH_RULES = el -> ...)" +
             LINE_BREAK + "Element '%s' search during %s seconds";
 
     public WebElement getWebElement() {
-        return noValidation(this::get);
+        return get(new Object[]{});
     }
     public WebElement get() {
-        return get(new Object[]{});
+        WebElement element = get(new Object[]{});
+        for (JFunc1<WebElement, Boolean> rule : searchRules())
+            if (!rule.execute(element))
+                throw exception("Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)");
+        return element;
+
     }
     protected JFunc<WebElement> getElementFunc = null;
     public JDIBase setGetFunc(JFunc<WebElement> func) {
         getElementFunc = func;
         return this;
     }
+    private WebElement purify(WebElement element) {
+        return isInterface(element.getClass(), IBaseElement.class)
+            ? ((IBaseElement)element).base().get()
+            : element;
+    }
     public WebElement get(Object... args) {
         manageTimeout();
         if (webElement.hasValue()) {
-            WebElement element = webElement.get();
+            WebElement element = purify(webElement.get());
             try {
                 element.getTagName();
                 return beforeSearch(element);
@@ -199,7 +210,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 if (getElementFunc == null)
                     webElement.clear();
                 else {
-                    return beforeSearch(webElement.set(getElementFunc.execute()));
+                    return beforeSearch(webElement.set(purify(getElementFunc.execute())));
                 }
             }
         }
@@ -246,8 +257,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return getAllElements(args);
     }
     public List<WebElement> getAllElements(Object... args) {
+        getDefaultContext();
         if (webElements.hasValue()) {
-            List<WebElement> elements = webElements.get();
+            List<WebElement> elements = map(webElements.get(), this::purify);
             try {
                 beforeSearch(elements.get(0)).getTagName();
                 return elements;
@@ -338,16 +350,18 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     private SearchContext getSearchContext(Object element) {
         JDIBase bElement = getBase(element);
-        if (bElement == null || bElement.locator.isRoot())
+        if (bElement == null)
             return getDefaultContext();
         if (bElement.webElement.hasValue())
             return bElement.webElement.get();
+        if (bElement.locator.isRoot())
+            return getDefaultContext();
+        By frame = bElement.getFrame();
+        if (frame != null)
+            return getFrameContext(frame);
         Object parent = bElement.parent;
         By locator = bElement.getLocator();
-        By frame = bElement.getFrame();
-        SearchContext searchContext = frame != null
-            ? getFrameContext(frame)
-            : getContext(parent, bElement.locator);
+        SearchContext searchContext = getContext(parent, bElement.locator);
         //TODO rethink SMART SEARCH
         return locator != null
             ? uiSearch(searchContext, correctLocator(locator)).get(0)

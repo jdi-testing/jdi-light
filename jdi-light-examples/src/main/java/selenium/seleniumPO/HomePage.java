@@ -1,7 +1,7 @@
 package selenium.seleniumPO;
 
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;

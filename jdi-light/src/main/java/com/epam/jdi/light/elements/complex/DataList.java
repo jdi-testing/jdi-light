@@ -25,7 +25,7 @@ import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 
-public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert> {
+public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert<T,D>> {
     public Class<D> dataType;
 
     public DataList() {}
@@ -70,10 +70,10 @@ public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert
         return is();
     }
     @JDIAction("Assert that {name} data meet condition")
-    public DataListAssert<T, D> assertThatData(Matcher<? super List<D>> condition) {
+    public DataListAssert<T, D> assertThat(Matcher<? super List<D>> condition) {
         return isData(condition);
     }
-    public DataListAssert<T, D> verifyData(Matcher<? super List<D>> condition) {
+    public DataListAssert<T, D> verify(Matcher<? super List<D>> condition) {
         assertSoft();
         return isData(condition);
     }

@@ -11,7 +11,7 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.light.elements.pageobjects.annotations.objects.JTable;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;

@@ -11,6 +11,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.epam.EpamGithubSite.homePage;
 
 public class TestsInit extends TestNGListener {
+
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         logger.setLogLevel(STEP);

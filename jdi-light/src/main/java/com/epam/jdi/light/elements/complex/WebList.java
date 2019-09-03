@@ -8,6 +8,7 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.JDILocator;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -513,7 +514,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     protected UIElement initElement(WebElement el, JFunc<WebElement> func) {
         try {
-            return new UIElement(base(), el, func);
+            UIElement element = new UIElement(base(), el, func);
+            element.locator = new JDILocator();
+            return element;
         } catch (Exception ex) { throw exception("Can't init func new element for list"); }
     }// TODO to private
     public UIElement initElement(WebElement el, JFunc<WebElement> func, int i) {

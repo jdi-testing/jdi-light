@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
@@ -232,7 +233,8 @@ public class Form<T> extends Section {
 
     protected void submit(MapArray<String, String> objStrings, String name) {
         fill(objStrings);
-        GET_BUTTON.execute(pageObject, name).click();
+        IClickable button = GET_BUTTON.execute(pageObject, name);
+        button.click();
     }
     /**
      * @param objStrings Fill all SetValue elements and click on Button specified button e.g. "Publish" or "Save" <br>

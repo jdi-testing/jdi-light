@@ -263,7 +263,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
         try {
             if (initClass == null)
                 throw exception("Can't init List of UI Elements. Class Type is null");
-            SiteInfo info = new SiteInfo(core().driverName).set(s -> {
+            SiteInfo info = new SiteInfo(base().driverName).set(s -> {
                 s.cl = initClass;
                 s.name = el.getName();
                 s.parent = el.parent;

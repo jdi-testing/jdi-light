@@ -1,4 +1,4 @@
-package com.epam.jdi.light.elements.pageobjects.annotations.simple;
+package com.epam.jdi.light.elements.pageobjects.annotations.locators;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -10,10 +10,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-//TODO REMOVE
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface JMenu {
-    String[] value();
-    String group() default "";
+public @interface XPath {
+    String value();
 }

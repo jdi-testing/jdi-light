@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.html.elements.complex;
+package com.epam.jdi.light.elements.complex.dropdown;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
-import com.epam.jdi.light.ui.html.elements.annotations.JDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 
 import java.lang.reflect.Field;
 

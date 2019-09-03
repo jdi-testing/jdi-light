@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.html.elements.annotations;
+package com.epam.jdi.light.elements.pageobjects.annotations.locators;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -12,10 +12,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface JDropdown {
-    String root() default "";
-    String value() default "";
-    String list() default "";
-    String expand() default "";
-
+public @interface WithText {
+    String value();
 }
+

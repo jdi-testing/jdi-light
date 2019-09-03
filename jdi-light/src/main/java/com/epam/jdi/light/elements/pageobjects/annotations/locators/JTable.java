@@ -1,4 +1,4 @@
-package com.epam.jdi.light.elements.pageobjects.annotations.objects;
+package com.epam.jdi.light.elements.pageobjects.annotations.locators;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

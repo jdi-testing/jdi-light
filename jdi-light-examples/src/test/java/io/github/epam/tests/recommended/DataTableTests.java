@@ -53,11 +53,12 @@ public class DataTableTests extends StaticTestsInit {
         assertEquals(usersData.data(d -> d.name.contains("Brock")), GRADY_BROCK);
         usersData.assertThat().row(d -> d.equals(GRADY_BROCK));
         usersData.has().row(GRADY_BROCK);
-        /*
-        List<UserInfo> filteredData = usersData.datas(d -> d.name.contains("Brock"));
-        assertEquals(filteredData.size(), 1);
-        assertEquals(filteredData.get(0), GRADY_BROCK);
-        */
+        // This is just useful example for small tables.
+        // Execution takes too much time in case of 400 rows
+        //
+        //List<UserInfo> filteredData = usersData.datas(d -> d.name.contains("Brock"));
+        //assertEquals(filteredData.size(), 1);
+        //assertEquals(filteredData.get(0), GRADY_BROCK);
     }
 
     @Test
@@ -68,11 +69,12 @@ public class DataTableTests extends StaticTestsInit {
         validateUserRow(line);
         line =  usersData.line(d -> d.name.contains("Brock"));
         validateUserRow(line);
-        /*
-        List<UserRow> filteredData = usersData.lines(d -> d.name.contains("Brock"));
-        assertEquals(filteredData.size(), 1);
-        validateUserRow(filteredData.get(0));
-        */
+        // This is just useful example for small tables.
+        // Execution takes too much time in case of 400 rows
+        //
+        //List<UserRow> filteredData = usersData.lines(d -> d.name.contains("Brock"));
+        //assertEquals(filteredData.size(), 1);
+        //validateUserRow(filteredData.get(0));
     }
 
     private void validateUserRow(UserRow line) {

@@ -14,7 +14,7 @@ import com.epam.jdi.light.elements.init.rules.SetupRule;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
@@ -134,8 +134,9 @@ public class InitActions {
         IBaseElement jdi = (IBaseElement) info.instance;
         defaultSetup(info, jdi.base());
         if (info.field != null) {
-            if (isStatic(info.field.getModifiers()))
-                jdi.base().locator.isRoot = true;
+            // TODO remove
+            //if (isStatic(info.field.getModifiers()))
+            //    jdi.base().locator.isRoot = true;
             for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
                 try {
                     Class<? extends Annotation> annotation = aRule.value.annotation;

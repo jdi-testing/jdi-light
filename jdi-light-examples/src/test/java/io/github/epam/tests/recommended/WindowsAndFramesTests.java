@@ -32,7 +32,7 @@ public class WindowsAndFramesTests extends StaticTestsInit {
         originalWindow(); // open original (first) window
         switchToWindow(2); // open second window
         assertEquals(repoDescription.getText(),
-        "JDI is the test Framework for UI test automation");
+        "Try JDI Light https://github.com/jdi-testing/jdi-light");
         setWindowName("Github");
         switchToWindow(1); // open first (original) window
 
@@ -40,7 +40,7 @@ public class WindowsAndFramesTests extends StaticTestsInit {
             containsString("QUIS NOSTRUD EXERCITATION"));
         switchToWindow("Github");
         assertEquals(repoDescription.getText(),
-                "JDI is the test Framework for UI test automation");
+                "Try JDI Light https://github.com/jdi-testing/jdi-light");
         closeWindow();
     }
 

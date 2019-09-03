@@ -1,6 +1,6 @@
 package io.github.com.custom;
 
-import com.epam.jdi.light.ui.html.elements.complex.Dropdown;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 
 public class MultiDropdown extends Dropdown {
 //

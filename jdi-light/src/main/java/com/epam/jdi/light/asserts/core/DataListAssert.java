@@ -18,7 +18,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.Matchers.*;
 
 public class DataListAssert<T extends IListBase, D>
-        extends UISelectAssert<DataListAssert, DataList<T, D>> {
+        extends UISelectAssert<DataListAssert<T, D>, DataList<T, D>> {
     public List<D> data() { return element.asData(); }
 
     /**

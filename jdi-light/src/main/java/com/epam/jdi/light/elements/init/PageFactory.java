@@ -224,6 +224,9 @@ public class PageFactory {
         useDriver(driver);
         initElements(pages);
     }
+    public static void initElements(Class<?> site) {
+        initSite(site);
+    }
     public static void initElements(Object page) {
         preInit();
         initPage(page);

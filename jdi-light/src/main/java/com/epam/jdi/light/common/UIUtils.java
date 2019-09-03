@@ -45,7 +45,7 @@ public final class UIUtils {
         return new MapArray<>(notNullFields, UIUtils::getElementName,
             field -> {
                 Object value = getValueField(field, obj);
-                if (isClass(value.getClass(), String.class, Integer.class, Boolean.class))
+                if (isClassOr(value.getClass(), String.class, Integer.class, Boolean.class))
                     return value.toString();
                 if (isClass(value.getClass(), Enum.class))
                     return getEnumValue((Enum) value);
@@ -73,21 +73,24 @@ public final class UIUtils {
         List<Field> fields = getFields(obj, IsButton.class);
         if (fields.size() == 0)
             fields = getFieldsExact(obj, WebElement.class, UIElement.class);
-        switch (fields.size()) {
-            case 0:
-                return GET_DEFAULT_BUTTON.execute(obj, buttonName);
-            case 1:
-                return (IClickable) getValueField(fields.get(0), obj);
-            default:
-                List<Field> clickable = filter(fields,
-                    f -> isInterface(f, IClickable.class) && isInterface(f, INamed.class));
-                Collection<IClickable> buttons = select(clickable,
+        if (fields.size() > 1) {
+            fields = filter(fields, f ->
+                isInterfaceAnd(getValueField(f, obj).getClass(), IClickable.class, INamed.class));
+            if (fields.size() >= 1) {
+                Collection<IClickable> buttons = select(fields,
                     f -> (IClickable) getValueField(f, obj));
-                IClickable button = first(buttons, b -> namesEqual(toButton(((INamed)b).getName()), toButton(buttonName)));
-                if (button == null)
-                    throw exception("Can't find button '%s' for Element '%s'", buttonName, obj);
-                return button;
+                IClickable button = first(buttons, b -> namesEqual(toButton(((INamed) b).getName()), toButton(buttonName)));
+                if (button != null)
+                    return button;
+            }
         }
+        if (fields.size() == 1) {
+            Field field = fields.get(0);
+            Object btnObj = getValueField(field, obj);
+            if (isInterface(btnObj.getClass(), IClickable.class))
+                return (IClickable) btnObj;
+        }
+        return GET_DEFAULT_BUTTON.execute(obj, buttonName);
     };
 
     private static String toButton(String buttonName) {

@@ -1,6 +1,6 @@
 package io.github.com.custom;
 
-import com.epam.jdi.light.ui.html.elements.complex.DropdownExpand;
+import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
 
 public class CustomDropdown extends DropdownExpand {
     public CustomDropdown() {
