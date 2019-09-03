@@ -99,12 +99,12 @@ Feature: BaseUIElement
 	Then the "Name" text equals to "Input text"
 
   Scenario: select
-    Given I open "Html5 Page"
-    When Select "Pirate" field from "Dress Code"
+	Given I open "Html5 Page"
+	When Select "Pirate" field from "Dress Code"
 	Then the "Dress Code" text equals to "Pirate"
 
   Scenario: multi select
-    Given I open "Html5 Page"
+	Given I open "Html5 Page"
 	When I check in the "Multi Dropdown" values:
 		| Steam | Wood |
 	Then the "Multi Dropdown" selected values:
