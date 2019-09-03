@@ -60,6 +60,34 @@
 
                     <div class="doc-space line">
                         <div class="html-left">
+                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                <button type="button" class="btn btn-danger" onclick="alert('Red button');">Red button</button>
+                                <button type="button" class="btn btn-success" onclick="alert('Green button');">Green button</button>
+
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dropdown
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <a class="dropdown-item" href="https://github.com/jdi-testing">JDI</a>
+                                        <a class="dropdown-item" href="https://jdi-docs.github.io/jdi-light/#jdi-light-framework">JDI documentation</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Button group</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/button-group/" target="_blank">https://getbootstrap.com/docs/4.3/components/button-group/</a></p>
+                            <p>click() - Click on link</p>
+                            <p>getText() - Get link's text</p>
+                            <p>getRef() - Get link's "ref" attribute</p>
+                            <p>getUrl() - Get link's "ref" attribute as URL</p>
+                            <p>getAlt() - Get link's "alt" attribute</p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
                             <div class="alert alert-success" role="alert">
                                 Alert with <a href="https://jdi-testing.github.io/jdi-light/index.html" class="alert-link">index page link</a>.
                             </div>
