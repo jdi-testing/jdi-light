@@ -3,29 +3,32 @@ Feature: Multiselector
 
   Scenario: Multiselector validation
     Given I open "Html5 Page"
-    Then the "Steam" value is selected in "Ages" multiselector
-    And the "Ages" multiselector contains "Wood" value
-    And the "Ages" multiselector in disabled state has "Disabled" item
-    And the "Ages" multiselector in enabled state has not "Disabled" item
-    And the "Ages" multiselector in enabled contains next values:
+    Then the "Ages" selected value is "Steam"
+    And the "Ages" values has item "Wood"
+    And  the "Ages" has disabled item "Disabled"
+    And the "Ages" has no enabled item "Disabled"
+    And the "Ages" has enabled items:
       | Electro | Metalic |
 
   Scenario: Select value in multiselector
     Given I open "Html5 Page"
-    When I select "Ages" with value "Steam"
-    Then the "Ages" multiselector text is equals to "Steam"
+    When I check value "Steam" in the "Ages"
+    Then the "Ages" selected value is "Steam"
 
   Scenario: Validate multiselector list of values
     Given I open "Html5 Page"
-    Then the "Ages" multiselector contains next values:
+    Then the "Ages" contains items:
     | Electro | Steam| Metalic | Disabled | Wood |
 
   Scenario: Multiple selection in multiselector
-    Given I open "Html5 Page"
-    When I select "Ages" with value "Electro, Metalic"
-    Then the "Ages" multiselector text is equals to "Electro, Metalic"
+    When I check in the "Multi Dropdown" values:
+      | Electro | Metalic |
+    Then the "Multi Dropdown" selected values:
+      | Electro | Metalic |
 
   Scenario: Select values by number in multiselector
     Given I open "Html5 Page"
-    When I select 1, 5 numbers in "Ages" multiselector
-    Then the "Ages" multiselector text is equals to "Electro, Wood"
+    When I check in the "Multi Dropdown" values by number:
+      | 1 | 5 |
+    Then the "Multi Dropdown" selected values:
+      | Electro | Wood |
