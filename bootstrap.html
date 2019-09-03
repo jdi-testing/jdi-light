@@ -142,7 +142,15 @@
                             <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/breadcrumb/"
                                              target="_blank">https://getbootstrap.com/docs/4.3/components/breadcrumb/</a>
                             </p>
-                            <p>click() - Click on link</p>
+                            <p>click(int index) - click on item of breadcrumb with target index <br> Index starts at 1  </p>
+                            <p>click(String nameItem) - click on item of breadcrumb with target name</p>
+                            <p>getValues() - return all pairs: URL and index </p>
+                            <p>getValue(int index) - return URL of breadcrumb's item with target index </p>
+                            <p>getTexts() - return all pairs: name and index </p>
+                            <p>getText(int index) - return name of breadcrumb's item with target index  </p>
+                            <p>getCurrentPageName() - return name of breadcrumb's item with aria-current="page"</p>
+
+
                         </div>
                     </div>
 
@@ -153,12 +161,12 @@
                             <p>
                                 <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
                                    aria-expanded="false" aria-controls="collapseExample">
-                                    Link with href
+                                    Link
                                 </a>
                                 <button class="btn btn-primary" type="button" data-toggle="collapse"
                                         data-target="#collapseExample" aria-expanded="false"
                                         aria-controls="collapseExample">
-                                    Button with data-target
+                                    Data-target
                                 </button>
                             </p>
                             <div class="collapse" id="collapseExample">
