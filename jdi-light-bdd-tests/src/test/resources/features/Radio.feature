@@ -1,5 +1,4 @@
 @radio
-
 Feature: Radio
 
   Scenario: Select

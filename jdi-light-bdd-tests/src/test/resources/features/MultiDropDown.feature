@@ -1,5 +1,4 @@
-@MultiDropDown
-
+@multidropdown
 Feature: MultiDropDown
 
   Scenario: Check one value test
