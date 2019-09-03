@@ -25,7 +25,7 @@ public class CheckListSteps {
         }
     }
 
-    @Then("^CheckList \"([^\"]*)\" is basically valid$")
+    @Then("^checkList \"([^\"]*)\" is basically valid$")
     public void checkboxIsBasicallyValid(String name) {
         Checklist checklist = (Checklist) getUI(name);
         checklist.is().displayed().selected("Hot option");

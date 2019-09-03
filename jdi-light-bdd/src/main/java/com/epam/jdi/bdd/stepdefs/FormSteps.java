@@ -1,17 +1,15 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import static com.epam.jdi.bdd.Utils.deserializeJsonToMap;
-
-import java.util.Map;
+import static com.epam.jdi.bdd.Utils.getMapFromJson;
+import static com.epam.jdi.bdd.Utils.getMapFromTable;
+import static com.epam.jdi.bdd.Utils.getUI;
 
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.map.MapArray;
+
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
-import static com.epam.jdi.bdd.Utils.getUI;
 
 public class FormSteps {
 	public static Safe<String> lastForm = new Safe<>(() -> null);
@@ -29,18 +27,27 @@ public class FormSteps {
 	}
 
 	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) " +
+			"form$")
+	public void submitDataForm() {
+		Form fm = getForm(lastForm.get());
+		fm.submit();
+	}
+	
+	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) " +
 			"form \"([^\"]*)\" with data:$")
 	public void submitDataForm(String name, DataTable data) {
 		Form fm = getForm(name);
 		fm.submit(getMapFromTable(data));
 	}
-	@When("^(?:I |)((?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search)) form$")
+	
+	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) form using button \"([^\"]*)\"$")
 	public void submitForm(String buttonName) {
 		Form fm = getForm(lastForm.get());
 		fm.pressButton(buttonName);
 	}
 	
-	@When("^(?:I |)submit form \"([^\"]*)\" with \"([^\"]*)\"$")
+	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) "
+			+ "form \"([^\"]*)\" with \"([^\"]*)\"$")
 	public void submitForm(String name, String jsonName) {
 		Form fm = getForm(name);
 		fm.submit(getMapFromJson(jsonName));
@@ -58,13 +65,6 @@ public class FormSteps {
         fm.check(getMapFromJson(jsonName));
     }
 
-	private MapArray<String, String> getMapFromTable(DataTable table) {
-		return new MapArray<>(table.getGherkinRows(),
-				r -> r.getCells().get(0), r -> r.getCells().get(1));
-	}
-	private MapArray<String, String> getMapFromJson(String jsonName) {
-		return MapArray.toMapArray(deserializeJsonToMap(jsonName));
-	}
 	private static Form getForm(String name) {
 		Form form = getUI(name, Form.class);
 		lastForm.set(name);

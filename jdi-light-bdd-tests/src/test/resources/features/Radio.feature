@@ -1,10 +1,9 @@
 @radio
-
 Feature: Radio
 
   Scenario: Select
     Given I open "Html5 Page" page
-    And I Select "Blue" field from "Html5 Page.Colors"
+    And I select "Blue" field from "Html5 Page.Colors"
     Then the "Html5 Page.Colors" text equals to "Blue"
     When I select the radio button with "1" index from "Html5 Page.Colors"
     Then the "Html5 Page.Colors" text equals to "Red"
@@ -16,7 +15,7 @@ Feature: Radio
 
   Scenario: Validate
     Given I open "Html5 Page" page
-    And I Select "Blue" field from "Html5 Page.Colors"
+    And I select "Blue" field from "Html5 Page.Colors"
     Then the "Html5 Page.Colors" text equals to "Blue"
     And the "Html5 Page.Colors" contains "Yellow" radio button
     And the "Html5 Page.Colors" contains "Yellow" disabled radio button

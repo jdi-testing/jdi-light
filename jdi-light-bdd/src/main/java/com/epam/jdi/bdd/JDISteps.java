@@ -26,95 +26,95 @@ public class JDISteps {
 	}
 
 	//#region When
-    @When("^Refresh webpage$")
+    @When("^(?:I |)refresh webpage$")
     public void refreshWebpage() {
         WebPage.refresh();
     }
-	@When("^(?:I |)Click on \"([^\"]*)\"$")
+	@When("^(?:I |)click on \"([^\"]*)\"$")
     public void click(String name) {
 		JDIBase el = getUI(name);
         el.click();
     }
 	
-	@When("^(?:I |)Send keys \"([^\"]*)\" to \"([^\"]*)\"$")
+	@When("^(?:I |)send keys \"([^\"]*)\" to \"([^\"]*)\"$")
 	public void sendKeys(String value, String name) {
 		BaseUIElement el = getUI(name);
 		el.sendKeys(value);
 	}
 
-	@When("^(?:I |)Check \"([^\"]*)\"$")
+	@When("^(?:I |)check \"([^\"]*)\"$")
 	public void check(String name) {
 		BaseUIElement el = getUI(name);
 		el.check();
 	}
 
-	@When("^(?:I |)Uncheck \"([^\"]*)\"$")
+	@When("^(?:I |)uncheck \"([^\"]*)\"$")
 	public void uncheck(String name) {
 		BaseUIElement el = getUI(name);
 		el.uncheck();
 	}
 
-	@When("^(?:I |)Clear \"([^\"]*)\"$")
+	@When("^(?:I |)clear \"([^\"]*)\"$")
 	public void clear(String name) {
 		BaseUIElement el = getUI(name);
 		el.clear();
 	}
 
-	@When("^(?:I |)Click with JS on \"([^\"]*)\"$")
+	@When("^(?:I |)click with JS on \"([^\"]*)\"$")
 	public void jsClick(String name) {
 		BaseUIElement el = getUI(name);
 		el.jsClick();
 	}
 
-	@When("^(?:I |)Input \"([^\"]*)\" in \"([^\"]*)\"$")
+	@When("^(?:I |)input \"([^\"]*)\" in \"([^\"]*)\"$")
 	public void input(String value, String name) {
 		BaseUIElement el = getUI(name);
 		el.input(value);
 	}
 
-	@When("^(?:I |)Select \"([^\"]*)\" field from \"([^\"]*)\"$")
+	@When("^(?:I |)select \"([^\"]*)\" field from \"([^\"]*)\"$")
     public void select(String value, String name) {
         BaseUIElement el = getUI(name);
         el.select(value);
     }
 
-	@When("^(?:I |)Focus on \"([^\"]*)\"$")
+	@When("^(?:I |)focus on \"([^\"]*)\"$")
 	public void focusOn(String name) {
 		BaseUIElement el = getUI(name);
 		el.focus();
 	}
 
-	@When("^(?:I |)Set text \"([^\"]*)\" in \"([^\"]*)\"$")
+	@When("^(?:I |)set text \"([^\"]*)\" in \"([^\"]*)\"$")
 	public void setText(String value, String name) {
 		JDIBase el = getUI(name);
 		el.setText(value);
 	}
 
-	@When("^(?:I |)Double click on \"([^\"]*)\"$")
+	@When("^(?:I |)double click on \"([^\"]*)\"$")
 	public void doubleClick(String name) {
 		JDIBase el = getUI(name);
 		el.doubleClick();
 	}
 
-	@When("^(?:I |)Right click on \"([^\"]*)\"$")
+	@When("^(?:I |)right click on \"([^\"]*)\"$")
 	public void rightClick(String name) {
 		JDIBase el = getUI(name);
 		el.rightClick();
 	}
 
-	@When("^(?:I |)Highlight \"([^\"]*)\"$")
+	@When("^(?:I |)highlight \"([^\"]*)\"$")
 	public void highlight(String name) {
 		JDIBase el = getUI(name);
 		el.highlight();
 	}
 
-	@When("^(?:I |)Show \"([^\"]*)\"$")
+	@When("^(?:I |)show \"([^\"]*)\"$")
 	public void show(String name) {
 		JDIBase el = getUI(name);
 		el.show();
 	}
 
-    @When("^(?:I |)Set \"([^\"]*)\" attribute \"([^\"]*)\" with value \"([^\"]*)\" element$")
+    @When("^(?:I |)set \"([^\"]*)\" attribute \"([^\"]*)\" with value \"([^\"]*)\" element$")
 	public void setAttribute(String name, String attrName, String attrValue) {
 		JDIBase el = getUI(name);
 		el.setAttribute(attrName, attrValue);
@@ -272,11 +272,11 @@ public class JDISteps {
 	}
 	//#endregion
 
-    @Then("^Current page URL is \"(.*?)\"$")
+    @Then("^the current page URL is \"(.*?)\"$")
     public void urlIs(String expectedUrl) {
         assertEquals(getUrl(), expectedUrl);
     }
-	@Then("^Current page Title is \"(.*?)\"$")
+	@Then("^the current page Title is \"(.*?)\"$")
 	public void titleIs(String expectedUrl) {
 		assertEquals(getTitle(), expectedUrl);
 	}

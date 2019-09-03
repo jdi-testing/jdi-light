@@ -1,4 +1,4 @@
-@Form
+@form
 Feature: Form
 
   Scenario: fill Contact Form from json

@@ -12,37 +12,37 @@ import static org.hamcrest.Matchers.*;
 
 public class LinkSteps {
 
-    @Then("^The \"([^\"]*)\" reference equals to \"([^\"]*)\"$")
+    @Then("^the \"([^\"]*)\" reference equals to \"([^\"]*)\"$")
     public void refEquals(String name, String expectedText) {
         Link link = getUI(name, Link.class);
         link.is().ref(equalTo(expectedText));
     }
 
-    @Then("^The \"([^\"]*)\" reference contains \"([^\"]*)\"$")
+    @Then("^the \"([^\"]*)\" reference contains \"([^\"]*)\"$")
     public void refContains(String name, String expectedText) {
         Link link = getUI(name, Link.class);
         link.is().ref(containsString(expectedText));
     }
 
-    @Then("^The \"([^\"]*)\" reference match to \"([^\"]*)\"$")
+    @Then("^the \"([^\"]*)\" reference match to \"([^\"]*)\"$")
     public void refMatchRegex(String name, String regex) {
         Link link = getUI(name, Link.class);
         link.is().ref(matchesPattern(regex));
     }
 
-    @Then("^The \"([^\"]*)\" alt text equals to \"([^\"]*)\"$")
+    @Then("^the \"([^\"]*)\" alt text equals to \"([^\"]*)\"$")
     public void altEquals(String name, String expectedText) {
         Link link = getUI(name, Link.class);
         link.is().alt(equalTo(expectedText));
     }
 
-    @Then("^The \"([^\"]*)\" alt text contains \"([^\"]*)\"$")
+    @Then("^the \"([^\"]*)\" alt text contains \"([^\"]*)\"$")
     public void altContains(String name, String expectedText) {
         Link link = getUI(name, Link.class);
         link.is().alt(containsString(expectedText));
     }
 
-    @Then("^The \"([^\"]*)\" alt text match to \"([^\"]*)\"$")
+    @Then("^the \"([^\"]*)\" alt text match to \"([^\"]*)\"$")
     public void altMatchRegex(String name, String regex) {
         Link link = getUI(name, Link.class);
         link.is().alt(matchesPattern(regex));

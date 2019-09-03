@@ -65,7 +65,7 @@ Feature: CheckList
     Then the "Weather" checklist value is "Hot option"
 
   Scenario: Validation test
-    Then CheckList "Weather" is basically valid
+    Then checkList "Weather" is basically valid
 
   Scenario: Uncheck All test
     When I check elements in "Weather" checklist:

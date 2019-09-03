@@ -4,9 +4,11 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.HasPage;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.map.MapArray;
 
 import java.util.List;
 
+import static com.epam.jdi.bdd.Utils.deserializeJsonToMap;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
@@ -22,6 +24,8 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import cucumber.api.DataTable;
 
 /**
  * Created by Dmitry_Lebedev1 on 1/13/2016.
@@ -72,10 +76,6 @@ public final class Utils {
         throw exception("Can't find %s element", name);
     }
 
-    public static <T extends HasPage> T getUIComplex(String name) {
-        return getUI(name);
-    }
-    
 	public static Map<String, String> deserializeJsonToMap(String jsonName) {	
 		Gson gson = (new GsonBuilder()).create();
 		Map<String, String> map = new HashMap<String, String>();
@@ -106,4 +106,13 @@ public final class Utils {
 	    }
 	    return resultStringBuilder.toString();
     }
+    
+    public static MapArray<String, String> getMapFromTable(DataTable table) {
+		return new MapArray<>(table.getGherkinRows(),
+				r -> r.getCells().get(0), r -> r.getCells().get(1));
+	}
+	
+	public static MapArray<String, String> getMapFromJson(String jsonName) {
+		return MapArray.toMapArray(deserializeJsonToMap(jsonName));
+	}
 }
