@@ -1,34 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>HTML 5</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/uui-all.css" />
-    <link rel="stylesheet" href="css/custom-styles.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-4.3.min.css"/>
+    <link rel="stylesheet" href="css/uui-all.css"/>
+    <link rel="stylesheet" href="css/custom-styles.css"/>
     <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/lib/components/awesome-bootstrap-checkbox.css" />
-    <link rel="stylesheet" href="css/lib/components/datepicker3.css" />
-    <link rel="stylesheet" href="css/lib/components/bootstrap-timepicker.css" />
-    <link rel="stylesheet" href="css/lib/components/bootstrap-select.min.css" />
-    <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css" />
-    <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css" />
+    <link rel="stylesheet" href="css/lib/components/datepicker3.css"/>
+    <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css"/>
+    <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
+    <link rel="stylesheet" href="css/fix-bootstrap4.3.css"/>
     <script src="js/lib/jquery-1.11.1.min.js"></script>
     <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/lib/jquery.cookie.js"></script>
     <script src="jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap-4.3.min.js"></script>
     <script src="js/uui-core.min.js" type="text/javascript"></script>
-    <script src="js/lib/components/bootstrap-datepicker.js"></script>
-    <script src="js/lib/components/bootstrap-timepicker.min.js"></script>
-    <script src="js/lib/components/bootstrap-select.min.js"></script>
     <script src="js/utils.js" type="text/javascript"></script>
-
-    <!-- Include the plugin's CSS and JS: -->
-    <script type="text/javascript" src="bootstrap/js/bootstrap-multiselect.js"></script>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap-multiselect.css" type="text/css"/>
 
 </head>
 <body>
@@ -47,11 +38,14 @@
                     <div class="support-title"><i class="fa fa-comments-o"></i>Bootstrap Elements</div>
                     <div class="doc-space line">
                         <div class="html-left">
-							<button type="button" class="btn btn-danger" onclick="alert('Red button');">Red button</button>
+                            <button type="button" class="btn btn-danger" onclick="alert('Red button');">Red button
+                            </button>
                         </div>
                         <div class="html-right">
                             <h4>Button</h4>
-                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/buttons/" target="_blank">https://getbootstrap.com/docs/4.3/components/buttons/</a></p>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/buttons/"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/buttons/</a>
+                            </p>
                             <p>click() - Click on link</p>
                             <p>getText() - Get link's text</p>
                             <p>getRef() - Get link's "ref" attribute</p>
@@ -59,43 +53,104 @@
                             <p>getAlt() - Get link's "alt" attribute</p>
                         </div>
                     </div>
-					
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                <button type="button" class="btn btn-danger" onclick="alert('Red button');">Red button
+                                </button>
+                                <button type="button" class="btn btn-success" onclick="alert('Green button');">Green
+                                    button
+                                </button>
+
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dropdown
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <a class="dropdown-item" href="https://github.com/jdi-testing">JDI</a>
+                                        <a class="dropdown-item"
+                                           href="https://jdi-docs.github.io/jdi-light/#jdi-light-framework">JDI
+                                            documentation</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Button group</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/button-group/"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/button-group/</a>
+                            </p>
+                            <p>click() - Click on link</p>
+                            <p>getText() - Get link's text</p>
+                            <p>getRef() - Get link's "ref" attribute</p>
+                            <p>getUrl() - Get link's "ref" attribute as URL</p>
+                            <p>getAlt() - Get link's "alt" attribute</p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <div class="alert alert-success" role="alert">
+                                Alert with <a href="https://jdi-testing.github.io/jdi-light/index.html"
+                                              class="alert-link">index page link</a>.
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Alert</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/alerts/"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/alerts/</a>
+                            </p>
+                            <p>acceptAlert() - Accept alert</p>
+                            <p>dismissAlert() - Dismiss alert</p>
+                            <p>getAlertText() - Get alert text</p>
+                            <p>validateAlert(Matcher text) - Validate alert by matching passed value with alert text</p>
+                            <p>inputAndAcceptAlert(String text) - Input the specified text in the alert and accept
+                                it</p>
+                        </div>
+                    </div>
+
 
                     <div class="doc-space line">
                         <div class="html-left">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Bootstrap</li>
                                 </ol>
                             </nav>
 
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                    <li class="breadcrumb-item"><a
+                                            href="https://jdi-testing.github.io/jdi-light/index.html">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Bootstrap</li>
                                 </ol>
                             </nav>
-
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Library</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Data</li>
+                                    <li class="breadcrumb-item"><a
+                                            href="https://jdi-testing.github.io/jdi-light/index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a
+                                            href="https://jdi-testing.github.io/jdi-light/html5.html">HTML 5</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Bootstrap</li>
                                 </ol>
                             </nav>
                         </div>
                         <div class="html-right">
                             <h4>Breadcrumb</h4>
-                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/breadcrumb/" target="_blank">https://getbootstrap.com/docs/4.3/components/breadcrumb/</a></p>
-                            <p>click() - Click on link??</p>
-
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/breadcrumb/"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/breadcrumb/</a>
+                            </p>
+                            <p>click() - Click on link</p>
                         </div>
                     </div>
 
                     <div class="doc-space line">
                         <div class="html-left">
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Dropdown button
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -124,14 +179,57 @@
                     </div>
 
                     <div class="doc-space line"/>
+                    <div class="html-left">
+                        <h5>Heading <span class="badge badge-secondary">Badge</span></h5>
+                    </div>
+                    <div class="html-right">
+                        <h4>Badge</h4>
+                        <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/badge/" target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
+                        </p>
+                        <p>GetText() - returns text</p>
+                        <p>GetValue() - returns text</p>
+                        <p>Is - Gets text assert</p>
+                        <p>AssertThat - Gets text assert</p>
+                        <p>WaitFor - Gets text assert</p>
+                    </div>
+
+                    <div class="doc-space line"/>
+                    <div class="html-left">
+                        <button type="button" class="btn btn-primary" onclick="alert('Button with badge');">
+                            Profile <span class="badge badge-light">9</span>
+                            <span class="sr-only">unread messages</span>
+                        </button>
+                    </div>
+                    <div class="html-right">
+                        <h4>Badge as part of button</h4>
+                        <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/badge/" target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
+                        </p>
+                        <p>click() - Click the button</p>
+                        <p>getText() - Get button text</p>
+                        <p>is() - Assert action</p>
+                        <p>assertThat() - Assert action</p>
+                    </div>
+
+                    <div class="doc-space line"/>
+                    <div class="html-left">
+                        <a href="https://github.com/jdi-testing" class="badge badge-success" alt="Github JDI Link">Github
+                            JDI</a>
+                    </div>
+                    <div class="html-right">
+                        <h4>Badge as part of link</h4>
+                        <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/badge/" target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
+                        </p>
+                        <p>click() - Follow the link</p>
+                        <p>getText() - Returns the link text </p>
+                        <p>ref() - Returns the reference</p>
+                        <p>url() - Returns the URL</p>
+                        <p>alt() - Returns the alternate text</p>
+                        <p>is() - Returns object for work with assertions</p>
+                        <p>assertThat() - Returns object for work with assertions </p>
+                    </div>
 
 
-
-
-
-
-
-				</div>
+                </div>
             </div>
         </main>
     </div>
@@ -146,6 +244,10 @@
 		$('.invisible')[0].classList.remove("invisible");
 		$('#ghost-button')[0].classList.add("invisible");
 	}, 3000);
+
+
+
+
 </script>
 <script>
     const volumeSpan = $('#volume-value')[0];
@@ -153,19 +255,40 @@
     function showVal(val) {
         volumeSpan.value = val;
     }
+
+
+
+
 </script>
 <script type="text/javascript">
     $('#multi-dropdown').multiselect();
+
+
+
+
 </script>
 <Script language="JavaScript">
     UUI.Vertical_Menu.init({"open":true});
+
+
+
+
 </script>
 <script>
     $('.selectpicker').selectpicker();
+
+
+
+
 </script>
 <script>
 		includeSideBar();
 		activateTopElement(5,1);
-	</script>
+
+
+
+
+</script>
 </body>
 </html>
+
