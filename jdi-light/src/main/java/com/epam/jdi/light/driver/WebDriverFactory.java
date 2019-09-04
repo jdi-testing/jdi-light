@@ -95,8 +95,8 @@ public class WebDriverFactory {
         return driverName;
     }
 
-    public static void jsExecute(String script, Object... args) {
-        ((JavascriptExecutor) getDriver()).executeScript(script, args);
+    public static <T> T jsExecute(String script, Object... args) {
+        return (T) ((JavascriptExecutor) getDriver()).executeScript(script, args);
     }
 
     public static WebDriver getDriver() {
