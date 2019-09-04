@@ -12,13 +12,18 @@ import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static org.hamcrest.Matchers.matchesPattern;
 
 public class JDILocatorSteps {
+    private static boolean sLoggedIn = false;
+
     @Given("^(?:I |)logged in with name \"([^\"]*)\" and password \"([^\"]*)\"$")
     public void iLoggedIn(String name, String password) {
-        WebPage.openUrl("https://jdi-testing.github.io/jdi-light/");
-        $("img#user-icon").click();
-        $("form #name").sendKeys(name);
-        $("form #password").sendKeys(password);
-        $("form [type=submit]").click();
+        if (!sLoggedIn) {
+            WebPage.openUrl("https://jdi-testing.github.io/jdi-light/");
+            $("img#user-icon").click();
+            $("form #name").sendKeys(name);
+            $("form #password").sendKeys(password);
+            $("form [type=submit]").click();
+            sLoggedIn = true;
+        }
     }
 
     @Given("^(?:I |)open page by url \"([^\"]*)\"$")
