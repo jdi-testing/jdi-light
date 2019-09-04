@@ -16,11 +16,11 @@
     <script src="js/lib/jquery-1.11.1.min.js"></script>
     <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/lib/jquery.cookie.js"></script>
+    <script src="js/lib/popper.min.js"></script>
     <script src="jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
     <script src="bootstrap/js/bootstrap-4.3.min.js"></script>
     <script src="js/uui-core.min.js" type="text/javascript"></script>
     <script src="js/utils.js" type="text/javascript"></script>
-
 </head>
 <body>
 <header>
@@ -142,9 +142,196 @@
                             <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/breadcrumb/"
                                              target="_blank">https://getbootstrap.com/docs/4.3/components/breadcrumb/</a>
                             </p>
-                            <p>click() - Click on link</p>
+                            Index starts at 1 <br><br>
+                            click(int index) - click on item of breadcrumb with target index <br>
+                            click(String nameItem) - click on item of breadcrumb with target name <br>
+                            getValues() - return ? all pairs: URL and index <br>
+                            getValue(int index) - return String: URL of breadcrumb's item with target index <br>
+                            getTexts() - return ? all pairs: name and index <br>
+                            getText(int index) - return String: name of breadcrumb's item with target index <br>
+                            getCurrentPageName() - return String: name of breadcrumb's item with aria-current="page"
+                            </p>
+
+
                         </div>
                     </div>
+
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+
+                            <div class="jumbotron jumbotron-fluid">
+                                <div class="container">
+                                    <h1 class="display-4">Fluid jumbotron</h1>
+                                    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                                </div>
+                            </div>
+
+
+                            <div class="jumbotron">
+                                <h1 class="display-4">Hello, world!</h1>
+                                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                                <hr class="my-4">
+                                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                                <a class="btn btn-primary btn-lg" href="https://getbootstrap.com/docs/4.3/components/jumbotron/"
+                                   target="_blank" role="button">Learn more</a>
+                            </div>
+
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Jumbotron</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/jumbotron/"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/buttons/</a>
+                            </p>
+                            <p>click() - Click on link</p>
+
+                        </div>
+                    </div>
+
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+
+                            <p>
+                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
+                                   aria-expanded="false" aria-controls="collapseExample">
+                                    Link
+                                </a>
+                                <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                        data-target="#collapseExample" aria-expanded="false"
+                                        aria-controls="collapseExample">
+                                    Data-target
+                                </button>
+                            </p>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body" style="margin-bottom: 16px;">
+                                    Anim pariatur cliche reprehenderit.
+                                </div>
+                            </div>
+
+                            <p>
+                                <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1"
+                                   role="button" aria-expanded="false" aria-controls="multiCollapseExample1"
+                                   style="margin-bottom: 5px;">Toggle
+                                    first element </a>
+                                <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                        data-target="#multiCollapseExample2" aria-expanded="false"
+                                        aria-controls="multiCollapseExample2" style="margin-bottom: 5px;">Toggle second
+                                    element
+                                </button>
+                                <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                        data-target=".multi-collapse" aria-expanded="false"
+                                        aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements
+                                </button>
+                            </p>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                        <div class="card card-body" style="margin-bottom: 16px;">
+                                            Craft beer labore wes
+                                            anderson cred nesciunt sapiente ea proident.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="collapse multi-collapse" id="multiCollapseExample2">
+                                        <div class="card card-body" style="margin-bottom: 16px;">
+                                            High life accusamus terry
+                                            richardson ad squid. Nihil anim.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                    data-target="#collapseOne" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                Collapsible Group Item #1
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            You probably haven't heard of them accusamus labore
+                                            sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                    data-target="#collapseTwo" aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                Collapsible Group Item #2
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            Nihil anim keffiyeh helvetica, craft beer labore.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                    data-target="#collapseThree" aria-expanded="false"
+                                                    aria-controls="collapseThree">
+                                                Collapsible Group Item #3
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch.
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Collapse</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/buttons/"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/collapse/</a>
+                            </p>
+                            <ul>
+                                <li> for all
+                                    <ul>
+                                        <li> click(String nameItem) - click on item of collapse with target name </li>
+                                        <li> getText(String nameItem) - return String: text content of collapse's item with target name </li>
+                                        <li> getURL(String nameItem) - return String: URL of collapse's link item with target name </li>
+                                        <li> getName() - return String: inscription of collapse's item </li>
+                                        <li> getShowed() - return String: name of collapse's item that content is showed</li>
+                                     </ul>
+                                </li>
+                                <br>
+                                <li> for Group only
+                                    <ul>
+                                        <li> getNames() - return List&lt;String&gt;: list of items inscription</li>
+                                        <li> getTexts() - return List&lt;String&gt;: list of items text content  </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
 
                     <div class="doc-space line">
                         <div class="html-left">
@@ -164,12 +351,14 @@
                         </div>
                         <div class="html-right">
                             <h4>Dropdown</h4>
-                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/dropdowns/" target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/</a></p>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/dropdowns/"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/</a>
+                            </p>
                             <p>getValue()/getText()/getSelected() - Return selected dropdown value</p>
                             <p>selected(String option) - Check if option has been selected</p>
                             <p>isExpanded() - Show that dropdown element expanded</p>
                             <p>isDisplayed() - Show\wait that dropdown element displayed on the screen</p>
-                            <p>expand() - 	Expand dropdown list</p>
+                            <p>expand() - Expand dropdown list</p>
                             <p>close() - Close expanded before dropdown list</p>
                             <p>size() - Return amount of elements in the list</p>
                             <p>setup(Field field) - Setup the dropdown using specified fields</p>
@@ -266,6 +455,83 @@
                         </div>
                     </div>
 
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Card</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/card/"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/card/</a>
+                            </p>
+                            <p>click() - follow the card link</p>
+                            <p>getText() - returns text</p>
+                            <p>getValue() - returns text</p>
+                            <p>is() - asserts text</p>
+                            <p>assertThat() - asserts text</p>
+                            <p>waitFor() - asserts text presence</p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    Featured
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Cras justo odio</li>
+                                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                                    <li class="list-group-item">Vestibulum at eros</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Card as a List Group</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/card/#list-groups"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/card/#list-groups</a>
+                            </p>
+                            <p>getText() - returns text</p>
+                            <p>getValue() - returns text</p>
+                            <p>is() - asserts text</p>
+                            <p>assertThat() - asserts text</p>
+                            <p>waitFor() - asserts text presence</p>
+                        </div>
+                    </div>
+
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <div class="list-group">
+                                <button type="button" class="btn btn-danger" onclick="alert('Red button');">Red button</button>
+                                <a href="https://github.com/jdi-testing" class="list-group-item list-group-item-info">JDI - testing tool</a>
+                                <button type="button" class="btn btn-light" onclick="alert('Button with badge');">
+                                    Profile <span class="badge badge-primary badge-pill">9</span>
+                                    <span class="sr-only">unread messages</span>
+                                </button>
+                                <a href="https://jdi-testing.github.io/jdi-light/index.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">JDI website</a>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>JDI</button>
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>List group</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/list-group/" target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/</a></p>
+                            <p>click() - Click on link</p>
+                            <p>getText() - Get link's text</p>
+                            <p>getRef() - Get link's "ref" attribute</p>
+                            <p>getUrl() - Get link's "ref" attribute as URL</p>
+                            <p>getAlt() - Get link's "alt" attribute</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </main>
@@ -285,6 +551,8 @@
 
 
 
+
+
 </script>
 <script>
     const volumeSpan = $('#volume-value')[0];
@@ -296,9 +564,13 @@
 
 
 
+
+
 </script>
 <script type="text/javascript">
     $('#multi-dropdown').multiselect();
+
+
 
 
 
@@ -310,9 +582,13 @@
 
 
 
+
+
 </script>
 <script>
     $('.selectpicker').selectpicker();
+
+
 
 
 
@@ -321,6 +597,8 @@
 <script>
 		includeSideBar();
 		activateTopElement(5,1);
+
+
 
 
 
