@@ -1,15 +1,15 @@
-@BaseUIElement
+@base
 Feature: BaseUIElement
 
   Scenario: click 
 	Given I open "Html5 Page"
-	When I Click on "Red Button" 
-	Then Alert text equals to "Red button" 
+	When I click on "Red Button" 
+	Then the Alert text equals to "Red button"
 	
-  Scenario: jsClick 
+  Scenario: jsclick 
 	Given I open "Html5 Page"
-	When Click with JS on "Red Button" 
-	Then Alert text equals to "Red button" 
+	When click with JS on "Red Button" 
+	Then the Alert text equals to "Red button"
 	
   Scenario: value 
 	Given I open "Html5 Page" 
@@ -21,25 +21,25 @@ Feature: BaseUIElement
 
   Scenario: sendKeys 
 	Given I open "Html5 Page" 
-	When I Send keys "simple 1234" to "Name"
+	When I send keys "simple 1234" to "Name"
 	Then the "Name" text matches to "\w{6} \d{4}"
 	
   Scenario: check 
 	Given I open "Html5 Page" 
-	When Check "Accept Conditions" 
+	When check "Accept Conditions" 
 	Then the "Accept Conditions" is selected 
 	
   Scenario: uncheck 
 	Given I open "Html5 Page" 
-	When Uncheck "Accept Conditions" 
+	When uncheck "Accept Conditions" 
 	Then the "Accept Conditions" is deselected 
 	
   Scenario: clear 
 	Given I open "Html5 Page"
-    When Clear "Name"
-	When Send keys "simple text" to "Name" 
+    When clear "Name"
+	When send keys "simple text" to "Name" 
 	Then the "Name" text equals to "simple text"
-	When I Clear "Name"
+	When I clear "Name"
 	Then the "Name" text equals to ""
 
   Scenario: css
@@ -48,10 +48,10 @@ Feature: BaseUIElement
 
   Scenario: input 
 	Given I open "Html5 Page"
-    When Clear "Name"
-    When Send keys "simple text" to "Name"
+    When clear "Name"
+    When send keys "simple text" to "Name"
 	Then the "Name" text equals to "simple text"
-	When Input "Input text" in "Name" 
+	When input "Input text" in "Name" 
 	Then the "Name" text equals to "Input text"
 	
   Scenario: placeholder 
@@ -60,7 +60,7 @@ Feature: BaseUIElement
 	
   Scenario: getValue 
 	Given I open "Html5 Page" 
-	When Input "simple text" in "Name"
+	When input "simple text" in "Name"
 	Then the "Name" text equals to "simple text"
 	
   Scenario: getText 
@@ -93,17 +93,12 @@ Feature: BaseUIElement
 	
   Scenario: setText 
 	Given I open "Html5 Page" 
-	When Input "simple text" in "Name"
+	When input "simple text" in "Name"
 	Then the "Name" text equals to "simple text"
-	When Set text "Input text" in "Name" 
+	When set text "Input text" in "Name" 
 	Then the "Name" text equals to "Input text"
-	
+
   Scenario: select
     Given I open "Html5 Page"
-    When Select "Pirate" field from "Dress Code"
+    When select "Pirate" field from "Dress Code"
     Then the "Dress Code" text equals to "Pirate"
-    
-  Scenario: multi select
-    Given I open "Html5 Page"
-    When Select "Steam;Wood" fields from "Multi Dropdown"
-    Then the "Multi Dropdown" text equals to "Steam;Wood"

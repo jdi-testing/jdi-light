@@ -5,7 +5,6 @@ import io.github.epam.TestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.StaticSite.leftMenu;

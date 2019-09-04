@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.elements.complex.table;
 
 import com.epam.jdi.light.elements.complex.table.Single;
-import io.github.com.entities.MarvelUserInfo;
 import io.github.com.entities.MarvelUserSimple;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -13,7 +12,7 @@ import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
 import static io.github.com.StaticSite.usersPage;
-import static io.github.com.pages.UsersPage.*;
+import static io.github.com.pages.UsersPage.usersData;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN_SIMPLE;
 import static java.util.Arrays.asList;

@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.asserts.IsAssert;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.interfaces.HasPage;
 import com.epam.jdi.light.elements.interfaces.PageObject;
 
 /**
@@ -9,7 +10,7 @@ import com.epam.jdi.light.elements.interfaces.PageObject;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class Section extends JDIBase implements PageObject {
+public class Section extends JDIBase implements PageObject, HasPage {
 
     //region Asserts
     public IsAssert is() {

@@ -1,14 +1,11 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.elements.base.BaseUIElement;
-import com.epam.jdi.light.ui.html.common.Link;
 import com.epam.jdi.light.ui.html.common.ProgressBar;
-import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
 import static com.epam.jdi.bdd.Utils.getUI;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 public class ProgressBarSteps {
 
