@@ -283,11 +283,11 @@ public class JDISteps {
 	}
 	//#endregion
 
-    @Then("^the current page URL is \"(.*?)\"$")
+    @Then("^current page url is \"(.*?)\"$")
     public void urlIs(String expectedUrl) {
         assertEquals(getUrl(), expectedUrl);
     }
-	@Then("^the current page Title is \"(.*?)\"$")
+	@Then("^current page title is \"(.*?)\"$")
 	public void titleIs(String expectedUrl) {
 		assertEquals(getTitle(), expectedUrl);
 	}
