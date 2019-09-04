@@ -8,10 +8,6 @@ import org.junit.runner.RunWith;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 
-/**
- * Created by Dmitry_Lebedev1 on 1/22/2016.
- */
-
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "classpath:features"
@@ -19,17 +15,6 @@ import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
         , tags = {"@baselocator"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
-//    @BeforeClass
-//    public static void setUp() {
-//    	SMART_SEARCH_LOCATORS.add("[ui=%s]");
-//        logger.setLogLevel(INFO);
-//        initElements(StaticSite.class);
-//        homePage.open();
-//        logger.toLog("Run Tests");
-//        userIcon.click();
-//        loginForm.loginAs(DEFAULT_USER);
-//    }
-
     @AfterClass
     public static void shutDown() {
         killAllSeleniumDrivers();
