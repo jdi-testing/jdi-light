@@ -17,8 +17,8 @@ Feature: BaseUIElementLocator
 
   Scenario: sendKeys element
     Given I open "Html5 Page"
-    When I send keys "simple 1234" to "input[id='name'][placeholder='Input name']" element
-    Then the "input[id='name'][placeholder='Input name']" element text matches to "\w{6} \d{4}"
+    When I send keys "simple 1234" to "#name[placeholder='Input name']" element
+    Then the "#name[placeholder='Input name']" element text matches to "\w{6} \d{4}"
 
   Scenario: check element
     Given I open "Html5 Page"
@@ -32,32 +32,32 @@ Feature: BaseUIElementLocator
 
   Scenario: clear element
     Given I open "Html5 Page"
-    When clear "input[id='name'][placeholder='Input name']" element
-    When send keys "simple text" to "input[id='name'][placeholder='Input name']" element
-    Then the "input[id='name'][placeholder='Input name']" element text equals to "simple text"
-    When I clear "input[id='name'][placeholder='Input name']" element
-    Then the "input[id='name'][placeholder='Input name']" element text equals to ""
+    When clear "#name[placeholder='Input name']" element
+    When send keys "simple text" to "#name[placeholder='Input name']" element
+    Then the "#name[placeholder='Input name']" element text equals to "simple text"
+    When I clear "#name[placeholder='Input name']" element
+    Then the "#name[placeholder='Input name']" element text equals to ""
 
   Scenario: css element
     Given I open "Html5 Page"
-    Then the "input[id='name'][placeholder='Input name']" element css "font-size" equals to "14px"
+    Then the "#name[placeholder='Input name']" element css "font-size" equals to "14px"
 
   Scenario: input element
     Given I open "Html5 Page"
-    When clear "input[id='name'][placeholder='Input name']" element
-    When send keys "simple text" to "input[id='name'][placeholder='Input name']" element
-    Then the "input[id='name'][placeholder='Input name']" element text equals to "simple text"
-    When input "Input text" in "input[id='name'][placeholder='Input name']" element
-    Then the "input[id='name'][placeholder='Input name']" element text equals to "Input text"
+    When clear "#name[placeholder='Input name']" element
+    When send keys "simple text" to "#name[placeholder='Input name']" element
+    Then the "#name[placeholder='Input name']" element text equals to "simple text"
+    When input "Input text" in "#name[placeholder='Input name']" element
+    Then the "#name[placeholder='Input name']" element text equals to "Input text"
 
   Scenario: placeholder element
     Given I open "Html5 Page"
-    Then the "input[id='name'][placeholder='Input name']" element placeholder equals to "Input name"
+    Then the "#name[placeholder='Input name']" element placeholder equals to "Input name"
 
   Scenario: getValue element
     Given I open "Html5 Page"
-    When input "simple text" in "input[id='name'][placeholder='Input name']" element
-    Then the "input[id='name'][placeholder='Input name']" element text equals to "simple text"
+    When input "simple text" in "#name[placeholder='Input name']" element
+    Then the "#name[placeholder='Input name']" element text equals to "simple text"
 
   Scenario: getText element
     Given I open "Html5 Page"
@@ -69,7 +69,7 @@ Feature: BaseUIElementLocator
 
   Scenario: isEnabled element
     Given I open "Html5 Page"
-    Then the "input[id='name'][placeholder='Input name']" element is enabled
+    Then the "#name[placeholder='Input name']" element is enabled
 
   Scenario: isDisabled element
     Given I open "Html5 Page"
@@ -85,14 +85,14 @@ Feature: BaseUIElementLocator
 
   Scenario: isDisplayed element
     Given I open "Html5 Page"
-    Then the "input[id='name'][placeholder='Input name']" element is displayed
+    Then the "#name[placeholder='Input name']" element is displayed
 
   Scenario: setText element
     Given I open "Html5 Page"
-    When input "simple text" in "input[id='name'][placeholder='Input name']" element
-    Then the "input[id='name'][placeholder='Input name']" element text equals to "simple text"
-    When set text "Input text" in "input[id='name'][placeholder='Input name']" element
-    Then the "input[id='name'][placeholder='Input name']" element text equals to "Input text"
+    When input "simple text" in "#name[placeholder='Input name']" element
+    Then the "#name[placeholder='Input name']" element text equals to "simple text"
+    When set text "Input text" in "#name[placeholder='Input name']" element
+    Then the "#name[placeholder='Input name']" element text equals to "Input text"
 #@fail
 #  Scenario: select element
 #    Given I open "Html5 Page"
