@@ -2,6 +2,7 @@
 Feature: BaseUIElementLocator
 
   Scenario: click element
+    Given I logged in
     Given I open "Html5 Page"
     When I Click on "[value*='Red Button']" element
     Then the Alert text equals to "Red button"

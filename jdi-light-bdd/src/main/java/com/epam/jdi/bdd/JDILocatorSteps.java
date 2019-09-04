@@ -2,6 +2,8 @@ package com.epam.jdi.bdd;
 
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.composite.WebPage;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.WebElement;
@@ -10,6 +12,15 @@ import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static org.hamcrest.Matchers.matchesPattern;
 
 public class JDILocatorSteps {
+    @Given("^I logged in$")
+    public void iLoggedIn(String pageName) {
+        WebPage.openUrl("https://jdi-testing.github.io/jdi-light/index.html");
+        $("img#user-icon").click();
+        $("form #name").sendKeys("Roman");
+        $("form #password").sendKeys("Jdi1234");
+        $("form [type=submit]").click();
+    }
+
     @When("^(?:I |)Click on \"([^\"]*)\" element$")
     public void click(String locator) {
         WebElement el = $(locator);
