@@ -123,12 +123,12 @@ public class JDISteps {
 		el.setAttribute(attrName, attrValue);
 	}
 
-	@When("I go forward")
+	@When("^(?:I |)go forward$")
 	public void goForward() {
 		WebPage.forward();
 	}
 
-	@When("I go back")
+	@When("^(?:I |)go back$")
 	public void goBack() {
 		WebPage.back();
 	}
