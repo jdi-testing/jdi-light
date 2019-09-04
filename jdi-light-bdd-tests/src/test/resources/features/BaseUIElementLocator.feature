@@ -97,4 +97,4 @@ Feature: BaseUIElementLocator
 #  Scenario: select element
 #    Given I open "Html5 Page"
 #    When select "Pirate" field from "#dress-code" element
-#    Then the "Dress Code" text equals to "Pirate"
+#    Then the "#dress-code" element text equals to "Pirate"
