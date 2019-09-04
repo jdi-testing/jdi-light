@@ -6,6 +6,7 @@ package com.epam.jdi.light.actions;
  */
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.ScreenshotMaker;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
@@ -22,16 +23,19 @@ import static com.epam.jdi.light.actions.ActionOverride.GetOverrideAction;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.base.OutputTemplates.FAILED_ACTION_TEMPLATE;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.Timer.nowTime;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
+import static java.lang.String.format;
 import static java.lang.System.currentTimeMillis;
 
 @SuppressWarnings("unused")
 @Aspect
 public class ActionProcessor {
+
+    public static JDIBase jdiBaseLastProcessed = null;
 
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { }
@@ -42,14 +46,17 @@ public class ActionProcessor {
     public Object jdiAround(ProceedingJoinPoint jp) {
         return jdiBeforeAfter(jp);
     }
+
     public static Object jdiBeforeAfter(ProceedingJoinPoint jp) {
         try {
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jp);
             return AFTER_JDI_ACTION.execute(jp, result);
-        } catch (Throwable ex) {
-            Object element = jp.getThis() != null ? jp.getThis() : new Object();
-            throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, ex.getMessage()));
+        } catch (Throwable exception) {
+            if (!(exception instanceof RuntimeException)) {
+                provideExtraInfoOnFail(jp.getSignature().toShortString());
+            }
+            throw exception("[" + nowTime("mm:ss.S") + "] " + ACTION_FAILED.execute(jdiBaseLastProcessed, exception.getMessage()));
         }
     }
 
@@ -64,17 +71,15 @@ public class ActionProcessor {
                     : TIMEOUT.get();
             JFunc1<JDIBase, Object> overrideAction = null;
             boolean replace = false;
-            JDIBase obj = null;
             if (jp.getThis() != null && JDIBase.class.isAssignableFrom(jp.getThis().getClass())) {
+                jdiBaseLastProcessed = (JDIBase) jp.getThis();
                 overrideAction = GetOverrideAction(jp);
                 replace = overrideAction != null;
-                if (replace)
-                    obj = (JDIBase) jp.getThis();
             }
             long start = currentTimeMillis();
             do {
                 try {
-                    Object result = replace ? overrideAction.execute(obj) : jp.proceed();
+                    Object result = replace ? overrideAction.execute(jdiBaseLastProcessed) : jp.proceed();
                     if (!condition(jp)) continue;
                     return result;
                 } catch (Throwable ex) {
@@ -91,6 +96,7 @@ public class ActionProcessor {
             TIMEOUT.unfreeze();
         }
     }
+
     private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
         MethodSignature method = getJpMethod(jp);
         try {
@@ -110,18 +116,48 @@ public class ActionProcessor {
         JDIAction ja = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
         return ja != null ? ja.condition() : "";
     }
-    public static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
+
+    private static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
         $("", result -> true),
         $("true", result -> result instanceof Boolean && (Boolean)result),
         $("false", result -> result instanceof Boolean && !(Boolean)result),
-        $("not empty", result -> result instanceof List && ((List)result).size() > 0),
-        $("empty", result -> result instanceof List && ((List)result).size() == 0)
+        $("not empty", result -> result instanceof List && !((List) result).isEmpty()),
+        $("empty", result -> result instanceof List && ((List) result).isEmpty())
     );
+
     private static boolean condition(ProceedingJoinPoint jp) {
         String conditionName = getConditionName(jp);
         return CONDITIONS.has(conditionName)
             ? CONDITIONS.get(conditionName).execute(jp)
             : true;
+    }
+
+    public static void provideExtraInfoOnFail(String method) {
+        if (jdiBaseLastProcessed == null) {
+            return;
+        }
+
+        boolean screenOnFail = SCREENSHOT_STRATEGY.equals("on fail");
+        boolean htmlCodeLogOnFail = HTML_CODE_LOGGING.equals("on fail");
+
+        if (htmlCodeLogOnFail || screenOnFail) {
+            logger.step(format("Method \"%s\" failure details:", method));
+        }
+        if (htmlCodeLogOnFail) {
+            try {
+                logger.step(format("Last processed element's html code: %s", jdiBaseLastProcessed.printHtml()));
+            } catch (Exception e) {
+                logger.step("Can't get element's html code.");
+            }
+        }
+        if (screenOnFail) {
+            try {
+                jdiBaseLastProcessed.highlight();
+            } catch (Exception e) {
+                logger.step("Can't highlight element.");
+            }
+            new ScreenshotMaker().takeScreenshot(format("Method_%s_failed_at_", method), "dd-MM-yyyy_HH-mm-ss");
+        }
     }
 
     @Around("stepPointcut()")
@@ -135,4 +171,5 @@ public class ActionProcessor {
             throw exception(ACTION_FAILED.execute(element, ex.getMessage()));
         }
     }
+
 }

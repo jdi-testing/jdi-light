@@ -39,6 +39,7 @@
             <version>7.0.0-beta1</version>
             <!--version>6.14.3</version-->
         </dependency>
+
     </dependencies>
 
     <build>
@@ -49,6 +50,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -85,7 +87,6 @@
                         <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
-
             </plugin>
 
             <plugin>
@@ -93,7 +94,6 @@
                 <artifactId>allure-maven</artifactId>
                 <version>${allure.maven}</version>
             </plugin>
-
 
             <!-- From general pom -->
             <plugin>
@@ -105,6 +105,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -119,6 +120,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>

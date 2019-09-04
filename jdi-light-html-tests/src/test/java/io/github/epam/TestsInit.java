@@ -1,8 +1,10 @@
 package io.github.epam;
 
 import io.github.com.StaticSite;
+import io.github.epam.testng.TestNGListener;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
@@ -13,6 +15,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.ui.html.PageFactory.initElements;
 import static io.github.com.StaticSite.homePage;
 
+@Listeners({TestNGListener.class})
 public class TestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {

@@ -85,6 +85,8 @@ public class WebSettings {
     public static String useDriver(DriverTypes driverType) {
         return WebDriverFactory.useDriver(driverType);
     }
+    public static String SCREENSHOT_STRATEGY = "off";
+    public static String HTML_CODE_LOGGING = "off";
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
@@ -114,7 +116,8 @@ public class WebSettings {
                         ? PRELATEST_VERSION : p, "driver.version");
             fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
             fillAction(p -> SCREEN_PATH = p, "screens.folder");
-            // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
+            fillAction(p -> SCREENSHOT_STRATEGY = p, "screenshot.strategy");
+            fillAction(p -> HTML_CODE_LOGGING = p, "html.code.logging");
             fillAction(p -> KILL_BROWSER = p, "browser.kill");
             fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
             fillAction(p -> BROWSER_SIZE = p, "browser.size");
