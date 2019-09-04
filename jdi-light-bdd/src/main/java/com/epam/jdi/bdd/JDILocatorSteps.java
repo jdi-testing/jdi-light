@@ -48,9 +48,93 @@ public class JDILocatorSteps {
         el.check();
     }
 
+    @When("^(?:I |)uncheck \"([^\"]*)\" element$")
+    public void uncheck(String locator) {
+        BaseUIElement el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.uncheck();
+    }
+
     @Then("^the \"([^\"]*)\" element is selected$")
     public void isSelected(String locator) {
         JDIBase el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
         el.is().selected();
+    }
+
+    @Then("^the \"([^\"]*)\" element is deselected$")
+    public void isDeselected(String locator) {
+        JDIBase el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.is().deselected();
+    }
+
+    @When("^(?:I |)clear \"([^\"]*)\" element$")
+    public void clear(String locator) {
+        BaseUIElement el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.clear();
+    }
+
+    @Then("^the \"([^\"]*)\" element css \"([^\"]*)\" equals to \"([^\"]*)\"$")
+    public void cssEquals(String locator, String attrName, String cssValue) {
+        JDIBase el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.is().css(attrName, cssValue);
+    }
+
+    @When("^(?:I |)input \"([^\"]*)\" in \"([^\"]*)\" element$")
+    public void input(String value, String locator) {
+        BaseUIElement el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.input(value);
+    }
+
+    @Then("^the \"([^\"]*)\" element placeholder equals to \"([^\"]*)\"$")
+    public void placeholderEquals(String locator, String placeholder) {
+        JDIBase el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.is().attr("placeholder", placeholder);
+    }
+
+    @Then("^the \"([^\"]*)\" element attribute \"([^\"]*)\" equals to \"([^\"]*)\"$")
+    public void attributeEquals(String locator, String attrName, String attrValue) {
+        JDIBase el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.is().attr(attrName, attrValue);
+    }
+
+    @Then("^the \"([^\"]*)\" element is enabled$")
+    public void isEnabled(String locator) {
+        JDIBase el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.is().enabled();
+    }
+
+    @Then("^the \"([^\"]*)\" element is disabled$")
+    public void isDisabled(String locator) {
+        JDIBase el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.is().disabled();
+    }
+
+    @Then("^the \"([^\"]*)\" element is hidden$")
+    public void isHidden(String locator) {
+        JDIBase el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.is().hidden();
+    }
+
+    @Then("^the \"([^\"]*)\" element does not appear$")
+    public void isNotAppear(String locator) {
+        JDIBase el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.is().notAppear();
+    }
+
+    @Then("^the \"([^\"]*)\" element is displayed$")
+    public void isDisplayed(String locator) {
+        JDIBase el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.is().displayed();
+    }
+
+    @When("^(?:I |)set text \"([^\"]*)\" in \"([^\"]*)\" element$")
+    public void setText(String value, String locator) {
+        JDIBase el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.setText(value);
+    }
+
+    @When("^(?:I |)select \"([^\"]*)\" field from \"([^\"]*)\" element$")
+    public void select(String value, String locator) {
+        BaseUIElement el = new UIElement(getDriver().findElement(By.cssSelector(locator)));
+        el.select(value);
     }
 }
