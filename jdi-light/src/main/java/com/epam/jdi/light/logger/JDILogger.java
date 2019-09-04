@@ -113,8 +113,10 @@ public class JDILogger implements ILogger {
         if (!writeToAllure) return;
         final String uuid = UUID.randomUUID().toString();
         StepResult step = new StepResult().withName(message).withStatus(PASSED);
-        getLifecycle().startStep(uuid, step);
-        getLifecycle().stopStep(uuid);
+        if (getLifecycle().getCurrentTestCase().isPresent()) {
+            getLifecycle().startStep(uuid, step);
+            getLifecycle().stopStep(uuid);
+        }
     }
 
     public void step(String s, Object... args) {
