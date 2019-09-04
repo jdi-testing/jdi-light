@@ -1,7 +1,9 @@
 package io.github.epam.html.tests.elements.composite.webpage;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.Dimension;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,6 +17,9 @@ public class ActionsWebPageTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
+        // We have to set browser size first. Otherwise the scroll and zoom tests won't work
+        Dimension dimension = new Dimension(700, 500);
+        WebDriverFactory.getDriver().manage().window().setSize(dimension);
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
         leftMenu.select("Contact form");
@@ -44,72 +49,56 @@ public class ActionsWebPageTests extends TestsInit {
     @Test
     public void scrollToBottomTest() {
         WebPage.scrollToBottom();
-        boolean execResult = jsExecute("if (" +
-                "(document.documentElement.textContent || document.documentElement.innerText).indexOf(" +
-                "'Powered by EPAM') > -1" +
-                ") { return true; }");
+        String text = "Powered by EPAM";
+        boolean execResult = jsExecute("return (document.documentElement.textContent " +
+                " || document.documentElement.innerText).indexOf(" +
+                "'" + text + "') > -1;");
         Assert.assertEquals(execResult, true);
     }
 
     @Test
     public void scrollToTopTest() {
         WebPage.scrollToTop();
-        boolean execResult = jsExecute("if (window.scrollY == 0 && window.scrollX == 0){\n" +
-                "return true;\n" +
-                "}");
+        boolean execResult = jsExecute("return (window.scrollX == 0 && window.scrollY == 0);");
         Assert.assertEquals(execResult, true);
     }
 
-//    @Test
-//    public void scrollDownTest() throws InterruptedException {
-//        WebPage.scrollDown(30);
-//        jsExecute("console.log(window.scrollY)");
-//        Thread.sleep(3000);
-//        boolean execResult = jsExecute("var x = window.scrollY; if (window.scrollY == 30) {return true;}");
-//        Assert.assertEquals(execResult, true);
-//    }
+    @Test
+    public void scrollDownTest() throws InterruptedException {
+        WebPage.scrollDown(30);
+        long execResult = jsExecute("return window.scrollY;");
+        Assert.assertEquals(execResult, 30);
+    }
 
-//    @Test
-//    public void scrollUpTest() throws InterruptedException {
-//        WebPage.scrollUp(20);
-//        jsExecute("console.log(window.scrollY)");
-//        Thread.sleep(3000);
-//        boolean execResult = jsExecute("var x = window.scrollY; if (window.scrollY == 0) {return true;}");
-//        Assert.assertEquals(execResult, true);
-//    }
-//
-//    @Test
-//    public void scrollRightTest() throws InterruptedException {
-//        WebPage.scrollRight(10);
-//        jsExecute("console.log(Math.ceil(window.scrollX))");
-//        Thread.sleep(3000);
-//        boolean execResult = jsExecute("console.log(window.scrollX);" +
-//                "if (window.scrollX == 10) {return true;}");
-//        Assert.assertEquals(execResult, true);
-//    }
-//
-//    @Test
-//    public void scrollLeftTest() throws InterruptedException {
-//        WebPage.scrollLeft(5);
-//        jsExecute("console.log(Math.ceil(window.scrollX))");
-//        Thread.sleep(3000);
-//        boolean execResult = jsExecute("if (window.scrollX == 0) {return true;}");
-//        Assert.assertEquals(execResult, true);
-//    }
+    @Test
+    public void scrollUpTest() throws InterruptedException {
+        WebPage.scrollUp(20);
+        long execResult = jsExecute("return window.scrollY;");
+        Assert.assertEquals(execResult, 0);
+    }
 
-//    @Test
-//    public void zoomTest() throws InterruptedException {
-//        WebPage.zoom(2);
-//        jsExecute("var genderDropdownWidth = document.getElementById('gender').offsetWidth; " +
-//                "console.log(genderDropdownWidth);");
-//        Thread.sleep(3000);
-//        boolean execResult = jsExecute(
-//                "console.log('zoomed 2x');" +
-//                        "var genderDropdownWidth = document.getElementById('gender').offsetWidth;" +
-//                        "if (genderDropdownWidth == 546) {return true;}"
-//        );
-//        Assert.assertEquals(execResult, true);
-//    }
+    @Test
+    public void scrollRightTest() throws InterruptedException {
+        WebPage.scrollRight(10);
+        long execResult = jsExecute("return Math.ceil(window.scrollX);");
+        Assert.assertEquals(execResult, 10);
+    }
+
+    @Test
+    public void scrollLeftTest() throws InterruptedException {
+        WebPage.scrollLeft(5);
+        long execResult = jsExecute("return Math.ceil(window.scrollX);");
+        Assert.assertEquals(execResult, 0);
+    }
+
+    @Test
+    public void zoomTest() throws InterruptedException {
+        WebPage.zoom(2);
+        jsExecute("var genderDropdownWidth = document.getElementById('gender').offsetWidth; " +
+                "console.log(genderDropdownWidth);");
+        boolean execResult = jsExecute("return document.getElementById('gender').offsetWidth == 546;");
+        Assert.assertEquals(execResult, true);
+    }
 
     @Test
     public void goBackTest() {

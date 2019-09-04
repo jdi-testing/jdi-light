@@ -56,48 +56,37 @@ public class WebPageSteps {
 
     @Then("^the top of the page is reached$")
     public void topOfPageReached() {
-        boolean execResult = jsExecute("if (window.scrollY == 0 && window.scrollX == 0){\n" +
-                "return true;\n" +
-                "}");
+        boolean execResult = jsExecute("return window.scrollX == window.scrollY;");
         Assert.assertEquals(execResult, true);
     }
 
     @Then("^the page is scrolled \"(\\d+)\" px down$")
     public void pageScrolledNPxDown(int x) {
-        boolean execResult = jsExecute("console.log(window.scrollY); " +
-                "if (window.scrollY == " + x + ") {return true;}");
-        Assert.assertEquals(execResult, true);
+        long execResult = jsExecute("return window.scrollY;");
+        Assert.assertEquals(execResult, x);
     }
 
     @Then("^the page is scrolled \"(\\d+)\" px up$")
     public void pageScrolledNPxUp(int x) {
-        boolean execResult = jsExecute("console.log(window.scrollY); " +
-                "if (window.scrollY == 10) {return true;}");
-        Assert.assertEquals(execResult, true);
+        long execResult = jsExecute("return window.scrollY;");
+        Assert.assertEquals(execResult, 10);
     }
 
     @Then("^the page is scrolled \"(\\d+)\" px right$")
     public void pageScrolledNPxRight(int x) {
-        jsExecute("console.log(Math.ceil(window.scrollX))");
-        boolean execResult = jsExecute("if (Math.ceil(window.scrollX) == " + x + ") {return true;}");
-        Assert.assertEquals(execResult, true);
+        long execResult = jsExecute("return Math.ceil(window.scrollX);");
+        Assert.assertEquals(execResult, x);
     }
 
     @Then("^the page is scrolled \"(\\d+)\" px left$")
     public void pageScrolledNPxLeft(int x) {
-        jsExecute("console.log(Math.ceil(window.scrollX))");
-        boolean execResult = jsExecute("if (Math.ceil(window.scrollX) == 5) {return true;}");
-        Assert.assertEquals(execResult, true);
+        long execResult = jsExecute("return Math.ceil(window.scrollX);");
+        Assert.assertEquals(execResult, 5);
     }
 
     @Then("^the page is zoomed$")
     public void pageIsZoomed() {
-        jsExecute("var genderDropdownWidth = document.getElementById('gender').offsetWidth; " +
-                "console.log(genderDropdownWidth);");
-        boolean execResult = jsExecute(
-                "var genderDropdownWidth = document.getElementById('gender').offsetWidth;" +
-                        "if (genderDropdownWidth == 546) {return true;}"
-        );
+        boolean execResult = jsExecute("return document.getElementById('gender').offsetWidth == 546;");
         Assert.assertEquals(execResult, true);
     }
 }
