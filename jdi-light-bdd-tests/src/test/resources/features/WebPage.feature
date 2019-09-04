@@ -9,7 +9,7 @@ Feature: Checking Basic WebPage Actions
     Then current page url is "https://jdi-testing.github.io/jdi-light/contacts.html"
 
   Scenario: check page title
-    And current page title is "Contact Form"
+    And the current page title is "Contact Form"
     And the "Contact Form Page" is opened
 
   Scenario: scroll to bottom test
@@ -42,12 +42,12 @@ Feature: Checking Basic WebPage Actions
 
   Scenario: go back test
     When I go back
-    Then current page title is "Home Page"
+    Then the current page title is "Home Page"
 
   Scenario: go forward test
     When I go forward
-    Then current page title is "Contact Form"
+    Then the current page title is "Contact Form"
 
   Scenario: page refresh test
     When refresh webpage
-    Then current page title is "Contact Form"
+    Then the current page title is "Contact Form"
