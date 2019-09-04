@@ -287,7 +287,7 @@ public class JDISteps {
     public void urlIs(String expectedUrl) {
         assertEquals(getUrl(), expectedUrl);
     }
-	@Then("^the current page title is \"(.*?)\"$")
+	@Then("^the current page title is \"([^\"]*)\"$")
 	public void titleIs(String expectedUrl) {
 		assertEquals(getTitle(), expectedUrl);
 	}
