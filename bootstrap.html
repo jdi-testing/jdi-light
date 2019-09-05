@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>HTML 5</title>
+    <title>Bootstrap</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="bootstrap/css/bootstrap-4.3.min.css"/>
@@ -151,10 +151,62 @@
                             getText(int index) - return String: name of breadcrumb's item with target index <br>
                             getCurrentPageName() - return String: name of breadcrumb's item with aria-current="page"
                             </p>
+                        </div>
+                    </div>
 
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Base</a>
+                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Vertical pills</a>
+                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Other</a>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <nav class="nav">
+                                        <a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/bootstrap.html">Bootstrap</a>
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/index.html">Home</a>
+                                        <a class="nav-link disabled" href="https://jdi-testing.github.io/jdi-light/index.html" tabindex="-1" aria-disabled="true">Disabled</a>
+                                    </nav>
+                                </div>
+
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                    <ul class="nav nav-pills flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/bootstrap.html">Bootstrap</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/html5.html">HTML 5</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/index.html">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Navs</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navs/"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/navs/</a>
+                            </p>
+
+                            <p>click() </p>
+                            <p>getValues()</p>
 
                         </div>
                     </div>
+
+
 
 
                     <div class="doc-space line">
@@ -176,13 +228,11 @@
                                 <a class="btn btn-primary btn-lg" href="https://getbootstrap.com/docs/4.3/components/jumbotron/"
                                    target="_blank" role="button">Learn more</a>
                             </div>
-
-
                         </div>
                         <div class="html-right">
                             <h4>Jumbotron</h4>
                             <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/jumbotron/"
-                                             target="_blank">https://getbootstrap.com/docs/4.3/components/buttons/</a>
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/jumbotron/</a>
                             </p>
                             <p>click() - Click on link</p>
 
@@ -307,7 +357,7 @@
                         </div>
                         <div class="html-right">
                             <h4>Collapse</h4>
-                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/buttons/"
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/collapse/"
                                              target="_blank">https://getbootstrap.com/docs/4.3/components/collapse/</a>
                             </p>
                             <ul>
@@ -418,6 +468,19 @@
 
                     <div class="doc-space line">
                         <div class="html-left">
+                            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="images/wolverin.jpg" class="d-block w-100" alt="wolverin">
+                                    </div>
+                                    <div class="carousel-item active">
+                                        <img src="images/spider-man.jpg" class="d-block w-100" alt="spider-man">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="images/punisher.jpg" class="d-block w-100" alt="punisher">
+                                    </div>
+                                </div>
+                            </div>
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class=""></li>
@@ -443,6 +506,88 @@
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
+                                <style>
+                                    .carousel-control-prev-icon {
+                                        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f000000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+                                    }
+
+                                    .carousel-control-next-icon {
+                                        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f000000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+                                    }
+
+                                    .carousel .carousel-item{
+                                        height: 210px;
+                                    }
+
+                                    .item img {
+                                        position: absolute;
+                                        object-fit:cover;
+                                        top: 0;
+                                        left: 50;
+                                        min-height: 500px;
+                                    }
+                                </style>
+                            </div>
+                            <div class="bd-example">
+                                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="images/wolverin.jpg" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>First slide label</h5>
+                                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="images/spider-man.jpg" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>Second slide label</h5>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="images/punisher.jpg" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>Third slide label</h5>
+                                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                    <style>
+                                    .carousel-control-prev-icon {
+                                        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f000000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+                                    }
+
+                                    .carousel-control-next-icon {
+                                        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f000000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+                                    }
+
+                                    .carousel .carousel-item{
+                                        height: 210px;
+                                    }
+
+                                    .item img {
+                                        position: absolute;
+                                        object-fit:cover;
+                                        top: 0;
+                                        left: 50;
+                                        min-height: 500px;
+                                    }
+                                </style>
+                                </div>
                             </div>
                         </div>
                         <div class="html-right">
@@ -532,6 +677,49 @@
                         </div>
                     </div>
 
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <ul class="list-unstyled">
+                                <li class="media">
+                                    <img src="..." class="mr-3" alt="...">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">List-based media object</h5>
+                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                    </div>
+                                </li>
+                                <li class="media my-4">
+                                    <img src="..." class="mr-3" alt="...">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">List-based media object</h5>
+                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                    </div>
+                                </li>
+                                <li class="media">
+                                    <img src="..." class="mr-3" alt="...">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">List-based media object</h5>
+                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+
+                                        <div class="media mt-3">
+                                            <a class="mr-3" href="#">
+                                                <img src="..." class="mr-3" alt="...">
+                                            </a>
+                                            <div class="media-body">
+                                                <h5 class="mt-0">Media heading</h5>
+                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="html-right">
+                            <h4>Media object</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/media-object/" target="_blank">https://getbootstrap.com/docs/4.3/components/media-object/</a></p>
+                            <p>click() - Click on link</p>
+                            <p>getText() - Get block text</p>
+                        </div>
+                    </div>
 					<div class="doc-space line">
 						<div class="html-left">
 							<nav id="navbar-scrollspy" class="navbar navbar-light bg-light">
@@ -581,6 +769,9 @@ Keytar twee blog, culpa messenger bag marfa whatever delectus food truck. Sapien
 					</div>
 
 				</div>
+
+                </div>
+
             </div>
         </main>
     </div>
