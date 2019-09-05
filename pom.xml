@@ -56,6 +56,7 @@
         <module>jdi-light-examples</module>
         <module>jdi-light-html-tests</module>
         <module>jdi-light-bdd-tests</module>
+        <module>jdi-light-bdd-no-po-tests</module>
         <module>jdi-performance</module>
     </modules>
 </project>

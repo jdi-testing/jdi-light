@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.jdi</groupId>
-    <artifactId>jdi-light-bdd-tests</artifactId>
+    <artifactId>jdi-light-bdd-no-po-tests</artifactId>
     <version>1.0.0</version>
-    <name>JDI BDD Tests</name>
+    <name>JDI BDD no Page Objects Tests</name>
 
     <properties>
         <driver>chrome</driver>
