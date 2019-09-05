@@ -417,22 +417,32 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
-							<div class="dropdown">
-								<button class="btn btn-primary dropdown-toggle" type="button"
-									id="dropdownMenuButton" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false">Dropdown</button>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<button class="dropdown-item" type="button"
-										onclick="alert('Action');">Action</button>
-									<a class="dropdown-item"
-										href="https://getbootstrap.com/docs/4.0/components/dropdowns/"
-										target="_blank">Another action</a> <a
-										class="dropdown-item disabled" href="#" tabindex="-1"
-										aria-disabled="true">Disabled link</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item"
-										href="https://getbootstrap.com/docs/4.3/getting-started/introduction/"
-										target="_blank">Separated link</a>
+							<div class="d-flex">
+								<div class="dropdown">
+									<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Dropdown
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
+										<button class="dropdown-item" type="button" onclick="alert('Action');">Action</button>
+										<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+										<a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">Disabled link</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Separated link</a>
+									</div>
+								</div>
+								<div class="btn-group">
+									<button type="button" class="btn btn-success">Split Button</button>
+									<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
+										<span class="sr-only">Toggle Dropdown</span>
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuReference" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
+										<h6 class="dropdown-header">Dropdown header</h6>
+										<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Regular link</a>
+										<a class="dropdown-item active" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Active link</a>
+										<span class="dropdown-item-text">Item text</span>
+										<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/examples/" target="_blank">Another link</a>
+
+									</div>
 								</div>
 							</div>
 						</div>
@@ -480,6 +490,71 @@
 						</div>
 					</div>
 
+					<div class="doc-space line">
+						<div class="html-left">
+						<div class="input-group input-group-sm mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+							</div>
+							<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+						</div>
+
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+							</div>
+							<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						</div>
+
+						<div class="input-group input-group-lg">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="inputGroup-sizing-lg">Large</span>
+							</div>
+							<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+						</div>
+						</div>
+						<div class="html-right">
+							<h4>Sizing(Input group)</h4>
+							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
+											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
+							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="checkbox" aria-label="Checkbox for following text input">
+								</div>
+							</div>
+							<input type="text" class="form-control" aria-label="Text input with checkbox">
+						</div>
+
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="radio" aria-label="Radio button for following text input">
+								</div>
+							</div>
+							<input type="text" class="form-control" aria-label="Text input with radio button">
+						</div>
+						</div>
+						<div class="html-right">
+							<h4>Checkboxes and radios(Input group)</h4>
+							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
+											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
+							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+							<p>selected(String option) - Check if option has been selected</p>
+						</div>
+					</div>
 
 					<div class="doc-space line" />
 					<div class="html-left">
@@ -767,7 +842,7 @@
 							<div class="list-group">
 								<button type="button" class="btn btn-danger"
 									onclick="alert('Red button');">Red button</button>
-								<a href="https://github.com/jdi-testing"
+								<a href="https://github.com/jdi-testing" target="_blank"
 									class="list-group-item list-group-item-info">JDI - testing
 									tool</a>
 								<button type="button" class="btn btn-light"
@@ -775,7 +850,7 @@
 									Profile <span class="badge badge-primary badge-pill">9</span> <span
 										class="sr-only">unread messages</span>
 								</button>
-								<a href="https://jdi-testing.github.io/jdi-light/index.html"
+								<a href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank"
 									class="btn btn-primary btn-lg active" role="button"
 									aria-pressed="true">JDI website</a>
 								<button type="button"
