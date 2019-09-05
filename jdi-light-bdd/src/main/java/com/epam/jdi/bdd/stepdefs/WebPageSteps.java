@@ -46,11 +46,10 @@ public class WebPageSteps {
     }
 
     //    ASSERTIONS
-    @Then("^the \"([^\"]*)\" text is visible$")
-    public void bottomOfPageReached(String text) {
-        boolean execResult = jsExecute("return (document.documentElement.textContent " +
-                " || document.documentElement.innerText).indexOf(" +
-                "'" + text + "') > -1;");
+    @Then("^the bottom of the page is reached$")
+    public void bottomOfPageReached() {
+        boolean execResult = jsExecute("return (" +
+                "(window.innerHeight + window.scrollY) >= document.body.scrollHeight);");
         Assert.assertEquals(execResult, true);
     }
 
@@ -86,7 +85,7 @@ public class WebPageSteps {
 
     @Then("^the page is zoomed$")
     public void pageIsZoomed() {
-        boolean execResult = jsExecute("return document.getElementById('gender').offsetWidth == 546;");
-        Assert.assertEquals(execResult, true);
+        long execResult = jsExecute("return document.getElementById('dog').offsetWidth;");
+        Assert.assertEquals(execResult, 546);
     }
 }

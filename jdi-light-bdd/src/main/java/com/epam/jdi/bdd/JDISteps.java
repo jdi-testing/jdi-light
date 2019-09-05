@@ -138,6 +138,11 @@ public class JDISteps {
 		WebDriverFactory.getDriver().manage().window().setSize(dimension);
 	}
 
+	@When("^(?:I |)open url \"([^\"]*)\"$")
+	public void openUrl(String url) {
+		WebPage.openUrl(url);
+	}
+
 	//#endregion
 	//#region Then
 	@Then("^the \"([^\"]*)\" (?:page |)is opened$")

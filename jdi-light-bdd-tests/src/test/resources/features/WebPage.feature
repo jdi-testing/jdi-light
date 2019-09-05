@@ -2,40 +2,37 @@
 Feature: Checking Basic WebPage Actions
 
   Background:
-    Given I should be logged in
-    When I set browser size to "700"px width and "500"px height
-    And I open "Contact Form Page"
+#    Given I should be logged in
+#    When I set browser size to "700"px width and "500"px height
+    Given I open url "https://jdi-testing.github.io/jdi-light/superpage.html"
 
   Scenario: check URL
-    Then current page url is "https://jdi-testing.github.io/jdi-light/contacts.html"
+    Then current page url is "https://jdi-testing.github.io/jdi-light/superpage.html"
 
   Scenario: check page title
-    And the current page title is "Contact Form"
-    And the "Contact Form Page" is opened
+    Then the current page title is "Superpage"
 
   Scenario: scroll to bottom test
     When I scroll to the bottom of the page
-    Then the "Powered by EPAM" text is visible
+    Then the bottom of the page is reached
 
   Scenario: scroll to top test
     When I scroll to the top of the page
     Then the top of the page is reached
 
-  Scenario: scroll down test
+  Scenario: scroll down and up test
     When I scroll "30" px down
-    Then the page is scrolled "30" px down
+    And I scroll "20" px up
+    Then the page is scrolled "10" px down
 
-  Scenario: scroll up test
-    When I scroll "20" px up
-    Then the page is scrolled "20" px up
-
-  Scenario: scroll right test
+  Scenario: scroll right and left test
     When I scroll "10" px right
-    Then the page is scrolled "10" px right
+    And I scroll "5" px left
+    Then the page is scrolled "5" px right
 
-  Scenario: scroll left test
-    When I scroll "5" px left
-    Then the page is scrolled "5" px left
+#  Scenario: scroll left test
+#    When I scroll "5" px left
+#    Then the page is scrolled "5" px left
 
   Scenario: zoom test
     When I zoom in
@@ -47,8 +44,8 @@ Feature: Checking Basic WebPage Actions
 
   Scenario: go forward test
     When I go forward
-    Then the current page title is "Contact Form"
+    Then the current page title is "Superpage"
 
   Scenario: page refresh test
     When refresh webpage
-    Then the current page title is "Contact Form"
+    Then the current page title is "Superpage"

@@ -15,44 +15,47 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 
 public class ActionsWebPageTests extends TestsInit {
 
+    private final int ZOOM_FACTOR = 2;
+
     @BeforeMethod
     public void before() {
         // We have to set browser size first. Otherwise the scroll and zoom tests won't work
-        Dimension dimension = new Dimension(700, 500);
-        WebDriverFactory.getDriver().manage().window().setSize(dimension);
-        shouldBeLoggedIn();
-        contactFormPage.shouldBeOpened();
-        leftMenu.select("Contact form");
+//        Dimension dimension = new Dimension(700, 500);
+//        WebDriverFactory.getDriver().manage().window().setSize(dimension);
+//        shouldBeLoggedIn();
+//        contactFormPage.shouldBeOpened();
+//        leftMenu.select("Contact form");
+        WebPage.openUrl("https://jdi-testing.github.io/jdi-light/superpage.html");
     }
 
     @Test
     public void getUrlTest() {
-        Assert.assertEquals(WebPage.getUrl(), "https://jdi-testing.github.io/jdi-light/contacts.html");
+//        Assert.assertEquals(WebPage.getUrl(), "https://jdi-testing.github.io/jdi-light/contacts.html");
+        Assert.assertEquals(WebPage.getUrl(), "https://jdi-testing.github.io/jdi-light/superpage.html");
     }
 
     @Test
     public void getTitleTest() {
-        Assert.assertEquals(WebPage.getTitle(), "Contact Form");
+//        Assert.assertEquals(WebPage.getTitle(), "Contact Form");
+        Assert.assertEquals(WebPage.getTitle(), "Superpage");
     }
 
-    @Test
-    public void checkOpenedTest() {
-        contactFormPage.checkOpened();
-    }
+//    @Test
+//    public void checkOpenedTest() {
+//        contactFormPage.checkOpened();
+//    }
 
 
-    @Test
-    public void isOpenedTest() {
-        Assert.assertTrue(contactFormPage.isOpened());
-    }
+//    @Test
+//    public void isOpenedTest() {
+//        Assert.assertTrue(contactFormPage.isOpened());
+//    }
 
     @Test
     public void scrollToBottomTest() {
         WebPage.scrollToBottom();
-        String text = "Powered by EPAM";
-        boolean execResult = jsExecute("return (document.documentElement.textContent " +
-                " || document.documentElement.innerText).indexOf(" +
-                "'" + text + "') > -1;");
+        boolean execResult = jsExecute("return (" +
+                "(window.innerHeight + window.scrollY) >= document.body.scrollHeight);");
         Assert.assertEquals(execResult, true);
     }
 
@@ -64,40 +67,40 @@ public class ActionsWebPageTests extends TestsInit {
     }
 
     @Test
-    public void scrollDownTest() throws InterruptedException {
+    public void scrollDownTest() {
         WebPage.scrollDown(30);
         long execResult = jsExecute("return window.scrollY;");
         Assert.assertEquals(execResult, 30);
     }
 
     @Test
-    public void scrollUpTest() throws InterruptedException {
+    public void scrollUpTest() {
         WebPage.scrollUp(20);
         long execResult = jsExecute("return window.scrollY;");
         Assert.assertEquals(execResult, 0);
     }
 
     @Test
-    public void scrollRightTest() throws InterruptedException {
+    public void scrollRightTest() {
         WebPage.scrollRight(10);
         long execResult = jsExecute("return Math.ceil(window.scrollX);");
         Assert.assertEquals(execResult, 10);
     }
 
     @Test
-    public void scrollLeftTest() throws InterruptedException {
+    public void scrollLeftTest() {
         WebPage.scrollLeft(5);
         long execResult = jsExecute("return Math.ceil(window.scrollX);");
         Assert.assertEquals(execResult, 0);
     }
 
     @Test
-    public void zoomTest() throws InterruptedException {
-        WebPage.zoom(2);
-        jsExecute("var genderDropdownWidth = document.getElementById('gender').offsetWidth; " +
-                "console.log(genderDropdownWidth);");
-        boolean execResult = jsExecute("return document.getElementById('gender').offsetWidth == 546;");
-        Assert.assertEquals(execResult, true);
+    public void zoomTest() {
+        long initZoom = jsExecute("return Math.round(window.devicePixelRatio * 100);");
+        WebPage.zoom(ZOOM_FACTOR);
+        long finalZoom = jsExecute("return Math.round(window.devicePixelRatio * 100);");
+        long zoomToCheck = finalZoom / ZOOM_FACTOR;
+        Assert.assertEquals(zoomToCheck, initZoom);
     }
 
     @Test
@@ -109,13 +112,13 @@ public class ActionsWebPageTests extends TestsInit {
     @Test
     public void goForwardTest() {
         WebPage.forward();
-        Assert.assertEquals(WebPage.getTitle(), "Contact Form");
+        Assert.assertEquals(WebPage.getTitle(), "Superpage");
     }
 
     @Test
     public void pageRefreshTest() {
         WebPage.refresh();
-        Assert.assertEquals(WebPage.getTitle(), "Contact Form");
+        Assert.assertEquals(WebPage.getTitle(), "Superpage");
     }
 
     @Test
