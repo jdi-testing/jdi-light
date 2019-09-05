@@ -134,17 +134,19 @@
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a
-										href="https://jdi-testing.github.io/jdi-light/index.html">Home</a></li>
+											href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home</a>
+									</li>
 									<li class="breadcrumb-item active" aria-current="page">Bootstrap</li>
 								</ol>
 							</nav>
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a
-										href="https://jdi-testing.github.io/jdi-light/index.html">Home</a></li>
+											href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home</a>
+									</li>
 									<li class="breadcrumb-item"><a
-										href="https://jdi-testing.github.io/jdi-light/html5.html">HTML
-											5</a></li>
+											href="https://jdi-testing.github.io/jdi-light/html5.html" target="_blank">HTML
+										5</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Bootstrap</li>
 								</ol>
 							</nav>
@@ -176,50 +178,85 @@
 							<nav>
 								<div class="nav nav-tabs" id="nav-tab" role="tablist">
 									<a class="nav-item nav-link active" id="nav-home-tab"
-										data-toggle="tab" href="#nav-home" role="tab"
-										aria-controls="nav-home" aria-selected="true">Base</a> <a
-										class="nav-item nav-link" id="nav-profile-tab"
-										data-toggle="tab" href="#nav-profile" role="tab"
-										aria-controls="nav-profile" aria-selected="false">Vertical
-										pills</a> <a class="nav-item nav-link" id="nav-contact-tab"
-										data-toggle="tab" href="#nav-contact" role="tab"
-										aria-controls="nav-contact" aria-selected="false">Other</a>
+									   data-toggle="tab" href="#nav-base" role="tab"
+									   aria-controls="nav-home" aria-selected="true">Base</a>
+									<a class="nav-item nav-link" id="nav-profile-tab"
+									   data-toggle="tab" href="#nav-vertical-pills" role="tab"
+									   aria-controls="nav-profile" aria-selected="false">Vertical pills</a>
+									<a class="nav-item nav-link" id="nav-contact-tab"
+									   data-toggle="tab" href="#nav-other" role="tab"
+									   aria-controls="nav-contact" aria-selected="false">Other</a>
 								</div>
 							</nav>
 							<div class="tab-content" id="nav-tabContent">
 
-								<div class="tab-pane fade show active" id="nav-home"
-									role="tabpanel" aria-labelledby="nav-home-tab">
+								<div class="tab-pane fade show active" id="nav-base"
+									 role="tabpanel" aria-labelledby="nav-home-tab">
 									<nav class="nav">
 										<a class="nav-link active"
-											href="https://jdi-testing.github.io/jdi-light/bootstrap.html">Bootstrap</a>
+										   href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
+										   target="_blank">Bootstrap</a>
 										<a class="nav-link"
-											href="https://jdi-testing.github.io/jdi-light/index.html">Home</a>
+										   href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home</a>
 										<a class="nav-link disabled"
-											href="https://jdi-testing.github.io/jdi-light/index.html"
-											tabindex="-1" aria-disabled="true">Disabled</a>
+										   href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank"
+										   tabindex="-1" aria-disabled="true">Disabled</a>
 									</nav>
 								</div>
 
-								<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-									aria-labelledby="nav-profile-tab">
+								<div class="tab-pane fade" id="nav-vertical-pills" role="tabpanel"
+									 aria-labelledby="nav-profile-tab">
 									<ul class="nav nav-pills flex-column">
 										<li class="nav-item"><a class="nav-link active"
-											href="https://jdi-testing.github.io/jdi-light/bootstrap.html">Bootstrap</a>
+																href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
+																target="_blank">Bootstrap</a>
 										</li>
 										<li class="nav-item"><a class="nav-link"
-											href="https://jdi-testing.github.io/jdi-light/html5.html">HTML
-												5</a></li>
+																href="https://jdi-testing.github.io/jdi-light/html5.html"
+																target="_blank">HTML
+											5</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="https://jdi-testing.github.io/jdi-light/index.html">Home</a>
+																href="https://jdi-testing.github.io/jdi-light/index.html"
+																target="_blank">Home</a>
 										</li>
 										<li class="nav-item"><a class="nav-link disabled"
-											href="#" tabindex="-1" aria-disabled="true">Disabled</a></li>
+																href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
+																tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+										</li>
 									</ul>
 								</div>
 
-								<div class="tab-pane fade" id="nav-contact" role="tabpanel"
-									aria-labelledby="nav-contact-tab">...</div>
+								<div class="tab-pane fade" id="nav-other" role="tabpanel"
+									 aria-labelledby="nav-contact-tab">
+									Classes are used throughout, so your markup can be super flexible. Use &lt;ul&gt;s like above, &lt;ol&gt; if the order of your items is important, or roll your own with a &lt;nav&gt; element.
+									<br><br>
+									<center><b>Horizontal alignment</b></center><br>
+									- Centered with .justify-content-center<br>
+									- Right-aligned with .justify-content-end<br><br>
+									<center><b>Fill and justify</b></center><br>
+									Force your .nav’s contents to extend the full available width one of two modifier classes. To proportionately fill all available space with your .nav-items, use .nav-fill.<br><br>
+									<center><b>Using dropdowns:</b><center/><br>
+										<ul class="nav nav-tabs">
+											<li class="nav-item">
+												<a class="nav-link active" href="#">Active</a>
+											</li>
+											<li class="nav-item dropdown">
+												<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+												<div class="dropdown-menu">
+													<a class="dropdown-item" href="#">Action</a>
+													<a class="dropdown-item" href="#">Another action</a>
+													<a class="dropdown-item" href="#">Something else here</a>
+													<div class="dropdown-divider"></div>
+													<a class="dropdown-item" href="#">Separated link</a>
+												</div>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="#">Link</a>
+											</li>
+										</ul>
+										<br><br>
+
+								</div>
 							</div>
 						</div>
 						<div class="html-right">
@@ -233,6 +270,136 @@
 							<p>click()</p>
 							<p>getValues()</p>
 
+						</div>
+					</div>
+
+
+					<div class="doc-space line">
+						<div class="html-left">
+
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+									<li class="page-item"><a class="page-link" href="#">1</a></li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item"><a class="page-link" href="#">Next</a></li>
+								</ul>
+							</nav>
+
+							<p>with icons:</p>
+
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<li class="page-item">
+										<a class="page-link" href="#" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<li class="page-item"><a class="page-link" href="#">1</a></li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item">
+										<a class="page-link" href="#" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+
+							<p>disabled and active states:</p>
+
+							<nav aria-label="...">
+								<ul class="pagination">
+									<li class="page-item disabled">
+										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+									</li>
+									<li class="page-item"><a class="page-link" href="#">1</a></li>
+									<li class="page-item active" aria-current="page">
+										<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+									</li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item">
+										<a class="page-link" href="#">Next</a>
+									</li>
+								</ul>
+							</nav>
+
+							<p>large:</p>
+
+							<nav aria-label="...">
+								<ul class="pagination pagination-lg">
+									<li class="page-item active" aria-current="page">
+      									<span class="page-link">1
+       										 <span class="sr-only">(current)</span>
+										</span>
+									</li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+								</ul>
+							</nav>
+
+							<p>small:</p>
+
+
+							<nav aria-label="...">
+								<ul class="pagination pagination-sm">
+									<li class="page-item active" aria-current="page">
+     									 <span class="page-link">1
+											 <span class="sr-only">(current)</span>
+										 </span>
+									</li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+								</ul>
+							</nav>
+
+
+							<p> alignment  .justify-content-center</p>
+
+
+							<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center">
+									<li class="page-item disabled">
+										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+									</li>
+									<li class="page-item"><a class="page-link" href="#">1</a></li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item">
+										<a class="page-link" href="#">Next</a>
+									</li>
+								</ul>
+							</nav>
+
+							<p> alignment  .justify-content-end</p>
+
+							<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-end">
+									<li class="page-item disabled">
+										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+									</li>
+									<li class="page-item"><a class="page-link" href="#">1</a></li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item">
+										<a class="page-link" href="#">Next</a>
+									</li>
+								</ul>
+							</nav>
+
+
+
+
+						</div>
+						<div class="html-right">
+							<h4>Pagination</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/pagination/"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/pagination/</a>
+							</p>
+							<p>click() - Click on page</p>
 						</div>
 					</div>
 
