@@ -40,9 +40,9 @@ public class WebPageSteps {
         WebPage.scrollLeft(x);
     }
 
-    @When("^(?:I |)zoom in$")
-    public void zoomIn() {
-        WebPage.zoom(2);
+    @When("^(?:I |)zoom in \"(\\d+)\" times$")
+    public void zoomIn(int x) {
+        WebPage.zoom(x);
     }
 
     //    ASSERTIONS
@@ -83,9 +83,10 @@ public class WebPageSteps {
         Assert.assertEquals(execResult, 5);
     }
 
-    @Then("^the page is zoomed$")
-    public void pageIsZoomed() {
-        long execResult = jsExecute("return document.getElementById('dog').offsetWidth;");
-        Assert.assertEquals(execResult, 546);
+    @Then("^the page is zoomed \"(\\d+)\" times$")
+    public void pageIsZoomed(int x) {
+        long initZoom = jsExecute("return Math.round(window.devicePixelRatio * 100);");
+        long finalZoom = jsExecute("return (Math.round(window.devicePixelRatio * 100) * " + x + ");");
+        Assert.assertEquals((finalZoom / 2), initZoom);
     }
 }

@@ -97,10 +97,8 @@ public class ActionsWebPageTests extends TestsInit {
     @Test
     public void zoomTest() {
         long initZoom = jsExecute("return Math.round(window.devicePixelRatio * 100);");
-        WebPage.zoom(ZOOM_FACTOR);
-        long finalZoom = jsExecute("return Math.round(window.devicePixelRatio * 100);");
-        long zoomToCheck = finalZoom / ZOOM_FACTOR;
-        Assert.assertEquals(zoomToCheck, initZoom);
+        long finalZoom = jsExecute("return (Math.round(window.devicePixelRatio * 100) * " + ZOOM_FACTOR + ");");
+        Assert.assertEquals((finalZoom / ZOOM_FACTOR), initZoom);
     }
 
     @Test

@@ -30,13 +30,9 @@ Feature: Checking Basic WebPage Actions
     And I scroll "5" px left
     Then the page is scrolled "5" px right
 
-#  Scenario: scroll left test
-#    When I scroll "5" px left
-#    Then the page is scrolled "5" px left
-
   Scenario: zoom test
-    When I zoom in
-    Then the page is zoomed
+    When I zoom in "2" times
+    Then the page is zoomed "2" times
 
   Scenario: go back test
     When I go back
