@@ -417,35 +417,219 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
-							<div class="d-flex">
-								<div class="dropdown">
-									<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Dropdown
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									Dropdown
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
+									<a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Separated link</a>
+								</div>
+							</div>
+							<div class="dropdown show">
+								<a class="btn btn-primary dropdown-toggle" href="https://getbootstrap.com/" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									Dropdown link
+								</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<!-- Example split danger button -->
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary" style="margin-bottom: 5px;">Action</button>
+								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<br>
+							<!-- Large button groups (default and split) -->
+							<div class="btn-group">
+								<button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									Large button
+								</button>
+								<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 48px, 0px); top: 0px; left: 0px; will-change: transform;">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<div class="btn-group">
+								<button class="btn btn-primary btn-lg" type="button" style="margin-bottom: 5px;">
+									Large split button
+								</button>
+								<button type="button" class="btn btn-lg btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<!-- Small button groups (default and split) -->
+							<div class="btn-group">
+								<button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									Small button
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<div class="btn-group">
+								<button class="btn btn-primary btn-sm" type="button" style="margin-bottom: 5px;">
+									Small split button
+								</button>
+								<button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<!-- Default dropup button -->
+							<div class="btn-group dropup">
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									Dropup
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<!-- Split dropup button -->
+							<div class="btn-group dropup">
+								<button type="button" class="btn btn-primary" style="margin-bottom: 5px;">
+									Split dropup
+								</button>
+								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<!-- Default dropright button -->
+							<div class="btn-group dropright">
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									Dropright
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<!-- Split dropright button -->
+							<div class="btn-group dropright">
+								<button type="button" class="btn btn-primary" style="margin-bottom: 5px;">
+									Split dropright
+								</button>
+								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									<span class="sr-only">Toggle Dropright</span>
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<!-- Default dropleft button -->
+							<div class="btn-group dropleft">
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									Dropleft
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<!-- Split dropleft button -->
+							<div class="btn-group">
+								<div class="btn-group dropleft" role="group">
+									<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+										<span class="sr-only">Toggle Dropleft</span>
 									</button>
-									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
-										<button class="dropdown-item" type="button" onclick="alert('Action');">Action</button>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
 										<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
-										<a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">Disabled link</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Separated link</a>
+										<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
 									</div>
 								</div>
-								<div class="btn-group">
-									<button type="button" class="btn btn-success">Split Button</button>
-									<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-										<span class="sr-only">Toggle Dropdown</span>
-									</button>
-									<div class="dropdown-menu" aria-labelledby="dropdownMenuReference" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
-										<h6 class="dropdown-header">Dropdown header</h6>
-										<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Regular link</a>
-										<a class="dropdown-item active" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Active link</a>
-										<span class="dropdown-item-text">Item text</span>
-										<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/examples/" target="_blank">Another link</a>
-
+								<button type="button" class="btn btn-primary" style="margin-bottom: 5px;">
+									Split dropleft
+								</button>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+									Menu items
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+									<button class="dropdown-item" type="button" onclick="alert('Action');">Action</button>
+									<button class="dropdown-item" type="button" onclick="alert('Another action');">Another action</button>
+									<button class="dropdown-item" type="button" onclick="alert('One more action');">Something else here</button>
+								</div>
+							</div>
+							<div class="bd-example">
+								<div class="dropdown-menu">
+									<form class="px-4 py-3">
+										<div class="form-group">
+											<label for="exampleDropdownFormEmail1">Email address</label>
+											<input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+										</div>
+										<div class="form-group">
+											<label for="exampleDropdownFormPassword1">Password</label>
+											<input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+										</div>
+										<div class="form-check">
+											<input type="checkbox" class="form-check-input" id="dropdownCheck">
+											<label class="form-check-label" for="dropdownCheck">
+												Remember me
+											</label>
+										</div>
+										<button type="submit" class="btn btn-primary">Sign in</button>
+									</form>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="https://jdi-testing.github.io/jdi-light/index.html">New around here? Sign up</a>
+									<a class="dropdown-item" href="https://jdi-testing.github.io/jdi-light/index.html">Forgot password?</a>
+								</div>
+								<div class="bd-example">
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="#">Regular link</a>
+										<a class="dropdown-item active" href="#">Active link</a>
+										<a class="dropdown-item" href="#">Another link</a>
 									</div>
 								</div>
 							</div>
+							<div class="bd-example">
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+									<a class="dropdown-item active" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+								</div>
+							</div>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Regular link</a>
+								<a class="dropdown-item disabled" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Disabled link</a>
+								<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Another link</a>
+							</div>
 						</div>
+
 						<div class="html-right">
 							<h4>Dropdown</h4>
 							<p>
@@ -932,84 +1116,82 @@
 					</div>
 					<div class="doc-space line">
 						<div class="html-left">
-							<div class="bd-example">
-								<nav id="navbar-example2" class="navbar navbar-light bg-light">
-									<a class="navbar-brand" href="#">Navbar</a>
-									<ul class="nav nav-pills">
-										<li class="nav-item"><a class="nav-link" href="#fat">@fat</a>
-										</li>
-										<li class="nav-item"><a class="nav-link" href="#mdo">@mdo</a>
-										</li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" data-toggle="dropdown"
-											href="#" role="button" aria-haspopup="true"
-											aria-expanded="false">Dropdown</a>
-											<div class="dropdown-menu">
-												<a class="dropdown-item" href="#one">one</a> <a
-													class="dropdown-item" href="#two">two</a>
-												<div role="separator" class="dropdown-divider"></div>
-												<a class="dropdown-item" href="#three">three</a>
-											</div></li>
-									</ul>
-								</nav>
-								<div data-spy="scroll" data-target="#navbar-example2"
-									data-offset="0">
-									<h4 id="fat">@fat</h4>
-									<p>Ad leggings keytar, brunch id art party dolor labore.
-										Pitchfork yr enim lo-fi before they sold out qui. Tumblr
-										farm-to-table bicycle rights whatever. Anim keffiyeh carles
-										cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon
-										irure. Cosby sweater lomo jean shorts, williamsburg hoodie
-										minim qui you probably haven't heard of them et cardigan trust
-										fund culpa biodiesel wes anderson aesthetic. Nihil tattooed
-										accusamus, cred irony biodiesel keffiyeh artisan ullamco
-										consequat.</p>
-									<h4 id="mdo">@mdo</h4>
-									<p>Veniam marfa mustache skateboard, adipisicing fugiat
-										velit pitchfork beard. Freegan beard aliqua cupidatat
-										mcsweeney's vero. Cupidatat four loko nisi, ea helvetica nulla
-										carles. Tattooed cosby sweater food truck, mcsweeney's quis
-										non freegan vinyl. Lo-fi wes anderson +1 sartorial. Carles non
-										aesthetic exercitation quis gentrify. Brooklyn adipisicing
-										craft beer vice keytar deserunt.</p>
-									<h4 id="one">one</h4>
-									<p>Occaecat commodo aliqua delectus. Fap craft beer
-										deserunt skateboard ea. Lomo bicycle rights adipisicing banh
-										mi, velit ea sunt next level locavore single-origin coffee in
-										magna veniam. High life id vinyl, echo park consequat quis
-										aliquip banh mi pitchfork. Vero VHS est adipisicing.
-										Consectetur nisi DIY minim messenger bag. Cred ex in,
-										sustainable delectus consectetur fanny pack iphone.</p>
-									<h4 id="two">two</h4>
-									<p>In incididunt echo park, officia deserunt mcsweeney's
-										proident master cleanse thundercats sapiente veniam. Excepteur
-										VHS elit, proident shoreditch +1 biodiesel laborum craft beer.
-										Single-origin coffee wayfarers irure four loko, cupidatat
-										terry richardson master cleanse. Assumenda you probably
-										haven't heard of them art party fanny pack, tattooed nulla
-										cardigan tempor ad. Proident wolf nesciunt sartorial keffiyeh
-										eu banh mi sustainable. Elit wolf voluptate, lo-fi ea portland
-										before they sold out four loko. Locavore enim nostrud mlkshk
-										brooklyn nesciunt.</p>
-									<h4 id="three">three</h4>
-									<p>Ad leggings keytar, brunch id art party dolor labore.
-										Pitchfork yr enim lo-fi before they sold out qui. Tumblr
-										farm-to-table bicycle rights whatever. Anim keffiyeh carles
-										cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon
-										irure. Cosby sweater lomo jean shorts, williamsburg hoodie
-										minim qui you probably haven't heard of them et cardigan trust
-										fund culpa biodiesel wes anderson aesthetic. Nihil tattooed
-										accusamus, cred irony biodiesel keffiyeh artisan ullamco
-										consequat. Keytar twee blog, culpa messenger bag marfa
-										whatever delectus food truck. Sapiente synth id assumenda.
-										Locavore sed helvetica cliche irony, thundercats you probably
-										haven't heard of them consequat hoodie gluten-free lo-fi fap
-										aliquip. Labore elit placeat before they sold out, terry
-										richardson proident brunch nesciunt quis cosby sweater
-										pariatur keffiyeh ut helvetica artisan. Cardigan craft beer
-										seitan readymade velit. VHS chambray laboris tempor veniam.
-										Anim mollit minim commodo ullamco thundercats.</p>
-								</div>
+							<nav id="navbar-example2" class="navbar navbar-light bg-light">
+								<a class="navbar-brand" href="#">Navbar</a>
+								<ul class="nav nav-pills">
+									<li class="nav-item"><a class="nav-link" href="#fat">@fat</a>
+									</li>
+									<li class="nav-item"><a class="nav-link" href="#mdo">@mdo</a>
+									</li>
+									<li class="nav-item dropdown"><a
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										href="#" role="button" aria-haspopup="true"
+										aria-expanded="false">Dropdown</a>
+										<div class="dropdown-menu">
+											<a class="dropdown-item" href="#one">one</a> <a
+												class="dropdown-item" href="#two">two</a>
+											<div role="separator" class="dropdown-divider"></div>
+											<a class="dropdown-item" href="#three">three</a>
+										</div></li>
+								</ul>
+							</nav>
+							<div data-spy="scroll" data-target="#navbar-example2"
+								data-offset="0" class="scrollspy-example">
+								<h4 id="fat">@fat</h4>
+								<p>Ad leggings keytar, brunch id art party dolor labore.
+									Pitchfork yr enim lo-fi before they sold out qui. Tumblr
+									farm-to-table bicycle rights whatever. Anim keffiyeh carles
+									cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon
+									irure. Cosby sweater lomo jean shorts, williamsburg hoodie
+									minim qui you probably haven't heard of them et cardigan trust
+									fund culpa biodiesel wes anderson aesthetic. Nihil tattooed
+									accusamus, cred irony biodiesel keffiyeh artisan ullamco
+									consequat.</p>
+								<h4 id="mdo">@mdo</h4>
+								<p>Veniam marfa mustache skateboard, adipisicing fugiat
+									velit pitchfork beard. Freegan beard aliqua cupidatat
+									mcsweeney's vero. Cupidatat four loko nisi, ea helvetica nulla
+									carles. Tattooed cosby sweater food truck, mcsweeney's quis non
+									freegan vinyl. Lo-fi wes anderson +1 sartorial. Carles non
+									aesthetic exercitation quis gentrify. Brooklyn adipisicing
+									craft beer vice keytar deserunt.</p>
+								<h4 id="one">one</h4>
+								<p>Occaecat commodo aliqua delectus. Fap craft beer deserunt
+									skateboard ea. Lomo bicycle rights adipisicing banh mi, velit
+									ea sunt next level locavore single-origin coffee in magna
+									veniam. High life id vinyl, echo park consequat quis aliquip
+									banh mi pitchfork. Vero VHS est adipisicing. Consectetur nisi
+									DIY minim messenger bag. Cred ex in, sustainable delectus
+									consectetur fanny pack iphone.</p>
+								<h4 id="two">two</h4>
+								<p>In incididunt echo park, officia deserunt mcsweeney's
+									proident master cleanse thundercats sapiente veniam. Excepteur
+									VHS elit, proident shoreditch +1 biodiesel laborum craft beer.
+									Single-origin coffee wayfarers irure four loko, cupidatat terry
+									richardson master cleanse. Assumenda you probably haven't heard
+									of them art party fanny pack, tattooed nulla cardigan tempor
+									ad. Proident wolf nesciunt sartorial keffiyeh eu banh mi
+									sustainable. Elit wolf voluptate, lo-fi ea portland before they
+									sold out four loko. Locavore enim nostrud mlkshk brooklyn
+									nesciunt.</p>
+								<h4 id="three">three</h4>
+								<p>Ad leggings keytar, brunch id art party dolor labore.
+									Pitchfork yr enim lo-fi before they sold out qui. Tumblr
+									farm-to-table bicycle rights whatever. Anim keffiyeh carles
+									cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon
+									irure. Cosby sweater lomo jean shorts, williamsburg hoodie
+									minim qui you probably haven't heard of them et cardigan trust
+									fund culpa biodiesel wes anderson aesthetic. Nihil tattooed
+									accusamus, cred irony biodiesel keffiyeh artisan ullamco
+									consequat. Keytar twee blog, culpa messenger bag marfa whatever
+									delectus food truck. Sapiente synth id assumenda. Locavore sed
+									helvetica cliche irony, thundercats you probably haven't heard
+									of them consequat hoodie gluten-free lo-fi fap aliquip. Labore
+									elit placeat before they sold out, terry richardson proident
+									brunch nesciunt quis cosby sweater pariatur keffiyeh ut
+									helvetica artisan. Cardigan craft beer seitan readymade velit.
+									VHS chambray laboris tempor veniam. Anim mollit minim commodo
+									ullamco thundercats.</p>
 							</div>
 						</div>
 						<div class="html-right">
@@ -1025,8 +1207,7 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
-							<nav id="#navbar-with-nested-nav"
-								class="navbar navbar-light bg-light">
+							<nav id="navbar-example3" class="navbar navbar-light bg-light">
 								<a class="navbar-brand" href="#">Navbar</a>
 								<nav class="nav nav-pills flex-column">
 									<a class="nav-link" href="#item-1">Item 1</a>
@@ -1043,8 +1224,8 @@
 								</nav>
 							</nav>
 
-							<div data-spy="scroll" data-target="#navbar-with-nested-nav"
-								data-offset="0">
+							<div data-spy="scroll" data-target="#navbar-example3"
+								data-offset="0" class="scrollspy-example-2">
 								<h4 id="item-1">Item 1</h4>
 								<p>Ex consequat commodo adipisicing exercitation aute
 									excepteur occaecat ullamco duis aliqua id magna ullamco eu. Do
@@ -1176,6 +1357,8 @@
 									reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim
 									proident occaecat excepteur aliquip culpa aute tempor
 									reprehenderit. Deserunt tempor mollit elit ex pariatur dolore
+									velit fugiat mollit culpa irure ullamco est ex ullamco
+									excepteur.. Deserunt tempor mollit elit ex pariatur dolore
 									velit fugiat mollit culpa irure ullamco est ex ullamco
 									excepteur.</p>
 							</div>

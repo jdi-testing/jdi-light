@@ -1,34 +1,17 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box; // 1
-}
-
-.bd-example {
-    position: relative;
-    padding: 1rem;
-    margin: 1rem -15px 0;
-    border: solid #f8f9fa;
-    border-width: .2rem 0 0;
-}
-
 .scrollspy-example {
     position: relative;
     height: 200px;
     margin-top: .5rem;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: scroll;
+    display: block;
 }
 
-
-.navbar {
+.scrollspy-example-2 {
     position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: .5rem 1rem;
+    height: 350px;
+    overflow-x: auto;
+    overflow-y: scroll;
+    display: block;
 }
+
