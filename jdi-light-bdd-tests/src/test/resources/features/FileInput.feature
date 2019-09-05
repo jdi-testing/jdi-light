@@ -16,9 +16,9 @@ Feature: File Input element functionality
 
   Scenario: Upload file by enabled file input element
     Given I open "Html5 Page"
-    When I upload file "/src/test/resources/general.xml" by "Avatar" file input element
-    Then the "Avatar" text equals to "C:\fakepath\general.xml"
-    And the "Avatar" text contains "general.xml"
+    When I upload file "/src/test/resources/steps_list" by "Avatar" file input element
+    Then the "Avatar" text equals to "C:\fakepath\steps_list"
+    And the "Avatar" text contains "steps_list"
 
   Scenario: Disabled file input element
     Given I open "Html5 Page"
