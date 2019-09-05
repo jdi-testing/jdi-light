@@ -23,6 +23,7 @@ import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
 import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
+import static com.epam.jdi.light.settings.WebSettings.init;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
@@ -115,6 +116,7 @@ public class WebDriverFactory {
     public static WebDriver INIT_DRIVER;
 
     public static WebDriver getDriver(String driverName) {
+        init();
         if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
             RUN_DRIVERS.set(map($(driverName, INIT_DRIVER)));
             SWITCH_THREAD = true;
