@@ -15,6 +15,9 @@ Feature: BaseUIElementLocator
   Scenario: value element
     Then the "[value*='Red Button']" element text equals to "Big Red Button-Input"
 
+  Scenario: labelText
+    Then the "#name[placeholder='Input name']" element label text equals to "Your name:"
+
   Scenario: sendKeys element
     When I send keys "simple 1234" to "#name[placeholder='Input name']" element
     Then the "#name[placeholder='Input name']" element text matches to "\w{6} \d{4}"
