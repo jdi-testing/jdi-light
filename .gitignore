@@ -12,3 +12,4 @@ downloads/
 .settings/
 .project
 .classpath
+.allure
