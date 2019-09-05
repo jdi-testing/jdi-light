@@ -23,12 +23,12 @@ public class JDILocatorSteps {
         WebPage.openUrl(url);
     }
 
-    @When("^(?:I |)Click on \"([^\"]*)\" element$")
+    @When("^(?:I |)click on \"([^\"]*)\" element$")
     public void click(String locator) {
         element(locator).click();
     }
 
-    @When("^(?:I |)Click with JS on \"([^\"]*)\" element$")
+    @When("^(?:I |)click with JS on \"([^\"]*)\" element$")
     public void jsClick(String locator) {
         element(locator).jsClick();
     }

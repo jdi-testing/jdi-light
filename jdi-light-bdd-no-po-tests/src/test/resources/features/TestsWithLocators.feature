@@ -5,11 +5,11 @@ Feature: TestsWithLocators
     And I open page by url "https://jdi-testing.github.io/jdi-light/html5.html"
 
   Scenario: click element
-    When I Click on "[value*='Red Button']" element
+    When I click on "[value*='Red Button']" element
     Then the Alert text equals to "Red button"
 
   Scenario: jsClick element
-    When Click with JS on "[value*='Red Button']" element
+    When click with JS on "[value*='Red Button']" element
     Then the Alert text equals to "Red button"
 
   Scenario: value element
