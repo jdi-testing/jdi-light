@@ -42,6 +42,7 @@ import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
+import static java.lang.String.*;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.openqa.selenium.PageLoadStrategy.*;
@@ -91,9 +92,10 @@ public class WebSettings {
     public static JFunc1<JDIBase, WebElement> SMART_SEARCH = el -> {
         String locatorName = SMART_SEARCH_NAME.execute(el.name);
         for (String template : SMART_SEARCH_LOCATORS) {
-            UIElement ui = template.equals("#%s")
-                ? $(String.format(template, locatorName)).setName(el.name)
-                : $(String.format(template, locatorName), el.parent).setName(el.name);
+            String locator = format(template, locatorName);
+            UIElement ui = (template.equals("#%s")
+                ? $(locator) : $(locator, el.parent))
+                    .setName(el.name);
             try {
                 return ui.get();
             } catch (Exception ignore) { }

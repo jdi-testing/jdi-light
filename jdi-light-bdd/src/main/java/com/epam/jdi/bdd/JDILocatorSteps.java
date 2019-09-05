@@ -1,6 +1,5 @@
 package com.epam.jdi.bdd;
 
-import com.epam.jdi.light.elements.base.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
 import cucumber.api.java.en.Given;
@@ -12,10 +11,11 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesPattern;
 
 public class JDILocatorSteps {
+
     static HtmlElement element(String locatorName) {
-        return locatorName.matches("[A-Z]")
-                ? new UIElement().setName(locatorName)
-                : $(locatorName);
+        return locatorName.matches("[A-Z].*")
+            ? new HtmlElement().setName(locatorName)
+            : $(locatorName);
     }
 
     @Given("^(?:I |)open page by url \"([^\"]*)\"$")
