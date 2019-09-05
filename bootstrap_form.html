@@ -5,22 +5,22 @@
     <title>Bootstrap Form</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap-4.3.min.css"/>
-	<link rel="stylesheet" href="css/uui-all.css"/>
-	<link rel="stylesheet" href="css/custom-styles.css"/>
-	<link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/lib/components/datepicker3.css"/>
-	<link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css"/>
-	<link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
-	<link rel="stylesheet" href="css/fix-bootstrap4.3.css"/>
-	<script src="js/lib/jquery-1.11.1.min.js"></script>
-	<script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="js/lib/jquery.cookie.js"></script>
-	<script src="js/lib/popper.min.js"></script>
-	<script src="jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
-	<script src="bootstrap/js/bootstrap-4.3.min.js"></script>
-	<script src="js/uui-core.min.js" type="text/javascript"></script>
-	<script src="js/utils.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-4.3.min.css"/>
+    <link rel="stylesheet" href="css/uui-all.css"/>
+    <link rel="stylesheet" href="css/custom-styles.css"/>
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/lib/components/datepicker3.css"/>
+    <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css"/>
+    <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
+    <link rel="stylesheet" href="css/fix-bootstrap4.3.css"/>
+    <script src="js/lib/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="js/lib/popper.min.js"></script>
+    <script src="jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="bootstrap/js/bootstrap-4.3.min.js"></script>
+    <script src="js/uui-core.min.js" type="text/javascript"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
     <!-- IE9- support of HTML5 -->
     <!--[if lt IE 9]>
     <script src="js/lib/html5shiv.js"></script>
@@ -38,97 +38,161 @@
             <div class="pattern-top"></div>
             <div class="main-content">
                 <div class="main-content-hg">
-					<form id="bootstrap-form">
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Email address</label>
-							<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-						</div>
-						<div class="form-group">
-							<label for="staticEmail">Email readonly</label>
-							<div class="form-group">
-								<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="exampleFormControlSelect1">Example select</label>
-							<select class="form-control" id="exampleFormControlSelect1">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="exampleFormControlSelect2">Example multiple select</label>
-							<select multiple class="form-control" id="exampleFormControlSelect2">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="exampleFormControlTextarea1">Example textarea</label>
-							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="exampleFormControlFile1">Example file input</label>
-							<input type="file" class="form-control-file" id="exampleFormControlFile1">
-						</div>
-						<div class="form-group">
-						<input class="form-control" type="text" placeholder="Readonly input here..." readonly>
-						</div>
-						<div class="form-group">
-							<label for="formControlRange">Example Range input</label>
-							<input type="range" class="form-control-range" id="formControlRange">
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-							<label class="form-check-label" for="defaultCheck1">
-								Default checkbox
-							</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-							<label class="form-check-label" for="defaultCheck2">
-								Disabled checkbox
-							</label>
-						</div>
-						<br>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-							<label class="form-check-label" for="exampleRadios1">
-								Default radio
-							</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-							<label class="form-check-label" for="exampleRadios2">
-								Second default radio
-							</label>
-						</div>
-						<div class="form-check form-group">
-							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
-							<label class="form-check-label" for="exampleRadios3">
-								Disabled radio
-							</label>
-						</div>
-						<fieldset disabled>
-							<div class="form-group">
-								<label for="disabledTextInput">Disabled input</label>
-								<input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
-							</div>
-							<div class="form-group">
-								<label for="disabledSelect">Disabled select menu</label>
-								<select id="disabledSelect" class="form-control">
-									<option>Disabled select</option>
-								</select>
-							</div>
-						</fieldset>
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
+                    <h4>Simple Form </h4>
+                    <form>
+                        <div class="form-group">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control form-control-sm" id="inputEmail3"
+                                           placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control form-control-sm" id="inputPassword3"
+                                           placeholder="Password">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                    <h4 class="line">Form with diverse controls</h4>
+                    <form id="bootstrap-form">
+                        <div class="row">
+                            <div class="col">
+                                <label for="exampleFormControlInput1">Email address</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput1"
+                                       placeholder="name@example.com">
+                            </div>
+                            <div class="col">
+                                <label for="staticEmail">Email readonly</label>
+                                <div class="form-group">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                                           value="email@example.com">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input class="form-control" type="text" placeholder="Readonly input here..." readonly>
+                            </div>
+                            <div class="col">
+                                <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">@</div>
+                                    </div>
+                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername"
+                                           placeholder="Username">
+                                </div>
+
+                            </div>
+                        </div>
+                        <br/><br/>
+                        <div class="form-group row">
+                            <label for="exampleFormControlSelect1" class="col-form-label col">Example select</label>
+                            <div class="col">
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlSelect2" class="col-form-label col">Example multiple
+                                select</label>
+                            <div class="col">
+                                <select multiple class="form-control" id="exampleFormControlSelect2">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlTextarea1" class="col-form-label col">Example textarea</label>
+                            <div class="col">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlFile1" class="col-form-label col">Example file input</label>
+                            <div class="col">
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col">
+                                <label for="formControlRange">Example Range input</label>
+                                <input type="range" class="form-control-range" id="formControlRange">
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Default checkbox
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2"
+                                           disabled>
+                                    <label class="form-check-label" for="defaultCheck2">
+                                        Disabled checkbox
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios"
+                                           id="exampleRadios1" value="option1" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        Default radio
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios"
+                                           id="exampleRadios2" value="option2">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        Second default radio
+                                    </label>
+                                </div>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" type="radio" name="exampleRadios"
+                                           id="exampleRadios3" value="option3" disabled>
+                                    <label class="form-check-label" for="exampleRadios3">
+                                        Disabled radio
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <h5 class="line">Disabled fieldset</h5>
+                        <fieldset disabled>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="disabledTextInput">Disabled input</label>
+                                    <input type="text" id="disabledTextInput" class="form-control"
+                                           placeholder="Disabled input">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="disabledSelect">Disabled select menu</label>
+                                    <select id="disabledSelect" class="form-control">
+                                        <option>Disabled select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="line"></div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
 
                 </div>
             </div>
@@ -140,9 +204,10 @@
     <div class="replace footer">replace</div>
 </footer>
 
-	<script>
+<script>
 		includeSideBar();
 		activateTopElement(6);
-	</script>
+
+</script>
 </body>
 </html>
