@@ -119,6 +119,17 @@ public class JDISteps {
 		JDIBase el = getUI(name);
 		el.setAttribute(attrName, attrValue);
 	}
+
+	@When("^(?:I |)go forward$")
+	public void goForward() {
+		WebPage.forward();
+	}
+
+	@When("^(?:I |)go back$")
+	public void goBack() {
+		WebPage.back();
+	}
+
 	//#endregion
 	//#region Then
 	@Then("^the \"([^\"]*)\" (?:page |)is opened$")
@@ -272,12 +283,13 @@ public class JDISteps {
 	}
 	//#endregion
 
-    @Then("^the current page URL is \"(.*?)\"$")
+    @Then("^current page url is \"(.*?)\"$")
     public void urlIs(String expectedUrl) {
         assertEquals(getUrl(), expectedUrl);
     }
-	@Then("^the current page Title is \"(.*?)\"$")
+	@Then("^the current page title is \"([^\"]*)\"$")
 	public void titleIs(String expectedUrl) {
 		assertEquals(getTitle(), expectedUrl);
 	}
+
 }
