@@ -10,9 +10,9 @@ import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "classpath:features"
-        , glue = {"com.epam.jdi.bdd", "cucmberTests"}
-        //, tags = {"@baselocator"}
+    features = "classpath:features"
+    , glue = {"com.epam.jdi.bdd", "cucmberTests"}
+    //, tags = {"@names"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @AfterClass
