@@ -16,9 +16,9 @@ Feature: File Input element functionality
 
   Scenario: Upload file by enabled file input element
     Given I open "Html5 Page"
-    When I upload file "/src/test/resources/general.xml" by "Avatar" file input element
-    Then the "Avatar" text equals to "C:\fakepath\general.xml"
-    And the "Avatar" text contains "general.xml"
+    When I upload file "/src/test/resources/steps_list" by "Avatar" file input element
+    Then the "Avatar" text equals to "C:\fakepath\steps_list"
+    And the "Avatar" text contains "steps_list"
 
   Scenario: Disabled file input element
     Given I open "Html5 Page"
@@ -26,6 +26,6 @@ Feature: File Input element functionality
 
   Scenario: Upload file by disabled file input element
     Given I open "Html5 Page"
-    When I try to upload file "/jdi-light-bdd-tests/src/test/resources/general.xml" by "Disabled File Input" file input element
+    When I try to upload file "/jdi-light-bdd-tests/src/test/resources/steps_list" by "Disabled File Input" file input element
     Then the "Disabled File Input" text equals to ""
 
