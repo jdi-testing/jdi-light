@@ -1099,60 +1099,84 @@
 						</div>
 					</div>
 
+					<!-- CARD BEGINNING -->
 					<div class="doc-space line">
 						<div class="html-left">
-							<div class="card" style="width: 18rem;">
+							<div class="card mb-3" style="width: 18rem;">
+								<img style="width: 30%; margin: 0 auto;" src="https://jdi-testing.github.io/jdi-light/images/wolverin.jpg" class="card-img-top" alt="image">
 								<div class="card-body">
 									<h5 class="card-title">Card title</h5>
-									<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="card-link">Card link</a> <a href="#"
-										class="card-link">Another link</a>
+									<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+									<a href="#" class="btn btn-primary" onclick="alert('Card Button Clicked!')">Go somewhere</a>
 								</div>
 							</div>
 						</div>
 						<div class="html-right">
 							<h4>Card</h4>
 							<p>
-								Bootstrap: <a
-									href="https://getbootstrap.com/docs/4.3/components/card/"
-									target="_blank">https://getbootstrap.com/docs/4.3/components/card/</a>
+								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/card/#example" target="_blank">https://getbootstrap.com/docs/4.3/components/card/#example</a>
 							</p>
-							<p>click() - follow the card link</p>
+							<p>click() - follow card link</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert image / text presence</p>
+							<p>alt() - get value of the image alt attribute</p>
+							<p>url() - return button url</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="card">
+								<div class="card-body">
+									This is some text within a card body.
+								</div>
+							</div>
+						</div>
+						<div class="html-right">
+							<h4>Card Body</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/card/#body"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/card/#body</a>
+							</p>
 							<p>getText() - returns text</p>
-							<p>getValue() - returns text</p>
 							<p>is() - asserts text</p>
-							<p>assertThat() - asserts text</p>
-							<p>waitFor() - asserts text presence</p>
+							<p>assertThat() - assert text presence</p>
 						</div>
 					</div>
 
 					<div class="doc-space line">
 						<div class="html-left">
 							<div class="card" style="width: 18rem;">
-								<div class="card-header">Featured</div>
-								<ul class="list-group list-group-flush">
-									<li class="list-group-item">Cras justo odio</li>
-									<li class="list-group-item">Dapibus ac facilisis in</li>
-									<li class="list-group-item">Vestibulum at eros</li>
-								</ul>
+								<div class="card-body">
+									<h5 class="card-title">Card title</h5>
+									<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+									<p class="card-text">Some quick example text to build on the card title and
+										make up the bulk of the card's content.</p>
+									<a href="https://github.com/jdi-testing/jdi-light"
+									   target="_blank" class="card-link">JDI Light Github</a>
+									<a href="https://jdi-testing.github.io/jdi-light/index.html"
+									   target="_blank" class="card-link">JDI Website</a>
+								</div>
 							</div>
 						</div>
 						<div class="html-right">
-							<h4>Card as a List Group</h4>
+							<h4>Card with subtitle and links</h4>
 							<p>
 								Bootstrap: <a
-									href="https://getbootstrap.com/docs/4.3/components/card/#list-groups"
-									target="_blank">https://getbootstrap.com/docs/4.3/components/card/#list-groups</a>
+									href="https://getbootstrap.com/docs/4.3/components/card/#titles-text-and-links"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/
+								card/#titles-text-and-links</a>
 							</p>
-							<p>getText() - returns text</p>
-							<p>getValue() - returns text</p>
-							<p>is() - asserts text</p>
-							<p>assertThat() - asserts text</p>
-							<p>waitFor() - asserts text presence</p>
+							<p>click() - follow card link</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert text presence</p>
+							<p>url() - return link url</p>
 						</div>
 					</div>
+					<!-- CARD END -->
 
 
 					<div class="doc-space line">
