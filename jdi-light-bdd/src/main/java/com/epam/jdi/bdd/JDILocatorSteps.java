@@ -2,9 +2,14 @@ package com.epam.jdi.bdd;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.base.HtmlElement;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static org.hamcrest.Matchers.equalTo;
@@ -13,9 +18,17 @@ import static org.hamcrest.Matchers.matchesPattern;
 public class JDILocatorSteps {
 
     static HtmlElement element(String locatorName) {
-        return locatorName.matches("[A-Z].*")
-            ? new HtmlElement().setName(locatorName)
-            : $(locatorName);
+        String filePath = System.getProperty("user.dir") + "/src/test/resources/html5page.json";
+        HashMap<String, String> result = new HashMap<>();
+        try {
+            result = new ObjectMapper().readValue(new File(filePath), HashMap.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result.get(locatorName) != null ? $(result.get(locatorName)) :
+                locatorName.matches("[A-Z].*")
+                ? new HtmlElement().setName(locatorName)
+                : $(locatorName);
     }
 
     @Given("^(?:I |)open page by url \"([^\"]*)\"$")
@@ -40,7 +53,8 @@ public class JDILocatorSteps {
 
     @Then("^the \"([^\"]*)\" element label text equals to \"([^\"]*)\"$")
     public void labelTextEquals(String locator, String value) {
-        element(locator).label().has().text(equalTo(value));;
+        element(locator).label().has().text(equalTo(value));
+        ;
     }
 
     @When("^(?:I |)send keys \"([^\"]*)\" to \"([^\"]*)\" element$")
