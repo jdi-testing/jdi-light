@@ -6,7 +6,7 @@ Feature: Checking Basic WebPage Actions
     And I open url "https://jdi-testing.github.io/jdi-light/superpage.html"
 
   Scenario: check URL
-    Then current page url is "https://jdi-testing.github.io/jdi-light/superpage.html"
+    Then the current page url is "https://jdi-testing.github.io/jdi-light/superpage.html"
 
   Scenario: check page title
     Then the current page title is "Superpage"

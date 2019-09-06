@@ -32,7 +32,7 @@ Feature: Link
   Scenario: Click link test
     Given I open "Html5 Page"
     When click on "Github Link"
-    Then the current page URL is "https://github.com/jdi-testing"
+    Then the current page url is "https://github.com/jdi-testing"
 
   Scenario: Link activity validation test
     Given I open "Html5 Page"
