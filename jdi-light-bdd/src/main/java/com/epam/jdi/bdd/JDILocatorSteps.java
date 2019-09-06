@@ -16,12 +16,13 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesPattern;
 
 public class JDILocatorSteps {
+    public static final String HTML5_PAGE_FOLDER =
+            System.getProperty("user.dir") + "/src/test/resources/html5page.json";
 
     static HtmlElement element(String locatorName) {
-        String filePath = System.getProperty("user.dir") + "/src/test/resources/html5page.json";
         HashMap<String, String> result = new HashMap<>();
         try {
-            result = new ObjectMapper().readValue(new File(filePath), HashMap.class);
+            result = new ObjectMapper().readValue(new File(HTML5_PAGE_FOLDER), HashMap.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
