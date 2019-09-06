@@ -1,11 +1,13 @@
 package com.epam.jdi.bdd;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.composite.WebPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.Dimension;
 
 import static com.epam.jdi.bdd.Utils.getUI;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
@@ -128,6 +130,17 @@ public class JDISteps {
 	@When("^(?:I |)go back$")
 	public void goBack() {
 		WebPage.back();
+	}
+
+	@When("^(?:I |)set browser size to \"(\\d+)\"px width and \"(\\d+)\"px height$")
+	public void setBrowserSize(int width, int height) {
+		Dimension dimension = new Dimension(width, height);
+		WebDriverFactory.getDriver().manage().window().setSize(dimension);
+	}
+
+	@When("^(?:I |)open url \"([^\"]*)\"$")
+	public void openUrl(String url) {
+		WebPage.openUrl(url);
 	}
 
 	//#endregion
@@ -285,11 +298,11 @@ public class JDISteps {
 
     @Then("^current page url is \"(.*?)\"$")
     public void urlIs(String expectedUrl) {
-        assertEquals(getUrl(), expectedUrl);
+        assertEquals(expectedUrl, getUrl());
     }
 	@Then("^the current page title is \"([^\"]*)\"$")
 	public void titleIs(String expectedUrl) {
-		assertEquals(getTitle(), expectedUrl);
+		assertEquals(expectedUrl, getTitle());
 	}
 
 }
