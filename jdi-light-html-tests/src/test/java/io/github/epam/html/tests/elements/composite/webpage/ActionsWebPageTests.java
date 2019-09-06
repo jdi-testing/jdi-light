@@ -8,8 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
-import static io.github.com.StaticSite.contactFormPage;
-import static io.github.com.StaticSite.leftMenu;
+import static io.github.com.StaticSite.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 
 
@@ -40,16 +39,18 @@ public class ActionsWebPageTests extends TestsInit {
         Assert.assertEquals(WebPage.getTitle(), "Superpage");
     }
 
-//    @Test
-//    public void checkOpenedTest() {
-//        contactFormPage.checkOpened();
-//    }
+    @Test
+    public void checkOpenedTest() {
+        WebPage.openUrl("https://jdi-testing.github.io/jdi-light/index.html");
+        homePage.checkOpened();
+    }
 
 
-//    @Test
-//    public void isOpenedTest() {
-//        Assert.assertTrue(contactFormPage.isOpened());
-//    }
+    @Test
+    public void isOpenedTest() {
+        WebPage.openUrl("https://jdi-testing.github.io/jdi-light/index.html");
+        Assert.assertTrue(homePage.isOpened());
+    }
 
     @Test
     public void scrollToBottomTest() {

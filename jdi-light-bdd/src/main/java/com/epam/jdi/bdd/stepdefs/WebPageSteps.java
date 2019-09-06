@@ -9,6 +9,9 @@ import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 public class WebPageSteps {
 
+    private final int SCROLLY = 0;
+    private final int SCROLLX = 0;
+
     //    ACTIONS
     @When("^(?:I |)scroll to the bottom of the page$")
     public void scrollToBottomOfPage() {
@@ -62,25 +65,25 @@ public class WebPageSteps {
     @Then("^the page is scrolled \"(\\d+)\" px down$")
     public void pageScrolledNPxDown(int x) {
         long execResult = jsExecute("return window.scrollY;");
-        Assert.assertEquals(execResult, x);
+        Assert.assertEquals(execResult, SCROLLY + x);
     }
 
     @Then("^the page is scrolled \"(\\d+)\" px up$")
     public void pageScrolledNPxUp(int x) {
         long execResult = jsExecute("return window.scrollY;");
-        Assert.assertEquals(execResult, 10);
+        Assert.assertEquals(execResult, SCROLLY - x);
     }
 
     @Then("^the page is scrolled \"(\\d+)\" px right$")
     public void pageScrolledNPxRight(int x) {
         long execResult = jsExecute("return Math.ceil(window.scrollX);");
-        Assert.assertEquals(execResult, x);
+        Assert.assertEquals(execResult, SCROLLX + x);
     }
 
     @Then("^the page is scrolled \"(\\d+)\" px left$")
     public void pageScrolledNPxLeft(int x) {
         long execResult = jsExecute("return Math.ceil(window.scrollX);");
-        Assert.assertEquals(execResult, 5);
+        Assert.assertEquals(execResult, SCROLLX - x);
     }
 
     @Then("^the page is zoomed \"(\\d+)\" times$")

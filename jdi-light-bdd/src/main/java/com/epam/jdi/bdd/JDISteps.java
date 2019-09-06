@@ -298,11 +298,11 @@ public class JDISteps {
 
     @Then("^current page url is \"(.*?)\"$")
     public void urlIs(String expectedUrl) {
-        assertEquals(getUrl(), expectedUrl);
+        assertEquals(expectedUrl, getUrl());
     }
 	@Then("^the current page title is \"([^\"]*)\"$")
 	public void titleIs(String expectedUrl) {
-		assertEquals(getTitle(), expectedUrl);
+		assertEquals(expectedUrl, getTitle());
 	}
 
 }

@@ -36,7 +36,7 @@ Feature: Checking Basic WebPage Actions
 
   Scenario: go back test
     When I go back
-    Then the current page title is "Home Page"
+    Then the current page title is "HTML 5"
 
   Scenario: go forward test
     When I go forward
