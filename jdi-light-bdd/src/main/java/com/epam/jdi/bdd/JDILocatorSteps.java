@@ -55,7 +55,6 @@ public class JDILocatorSteps {
     @Then("^the \"([^\"]*)\" element label text equals to \"([^\"]*)\"$")
     public void labelTextEquals(String locator, String value) {
         element(locator).label().has().text(equalTo(value));
-        ;
     }
 
     @When("^(?:I |)send keys \"([^\"]*)\" to \"([^\"]*)\" element$")
