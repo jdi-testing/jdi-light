@@ -2,9 +2,8 @@
 Feature: Checking Basic WebPage Actions
 
   Background:
-#    Given I should be logged in
-#    When I set browser size to "700"px width and "500"px height
-    Given I open url "https://jdi-testing.github.io/jdi-light/superpage.html"
+    Given I open "Home Page" page
+    And I open url "https://jdi-testing.github.io/jdi-light/superpage.html"
 
   Scenario: check URL
     Then current page url is "https://jdi-testing.github.io/jdi-light/superpage.html"
@@ -36,7 +35,7 @@ Feature: Checking Basic WebPage Actions
 
   Scenario: go back test
     When I go back
-    Then the current page title is "HTML 5"
+    Then the current page title is "Home Page"
 
   Scenario: go forward test
     When I go forward

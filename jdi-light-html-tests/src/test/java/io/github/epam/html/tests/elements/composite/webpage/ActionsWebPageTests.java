@@ -1,15 +1,13 @@
 package io.github.epam.html.tests.elements.composite.webpage;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.Dimension;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
-import static io.github.com.StaticSite.*;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static io.github.com.StaticSite.homePage;
 
 
 public class ActionsWebPageTests extends TestsInit {
@@ -18,9 +16,6 @@ public class ActionsWebPageTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        // We have to set browser size first. Otherwise the scroll and zoom tests won't work
-//        Dimension dimension = new Dimension(700, 500);
-//        WebDriverFactory.getDriver().manage().window().setSize(dimension);
 //        shouldBeLoggedIn();
 //        contactFormPage.shouldBeOpened();
 //        leftMenu.select("Contact form");
@@ -29,13 +24,11 @@ public class ActionsWebPageTests extends TestsInit {
 
     @Test
     public void getUrlTest() {
-//        Assert.assertEquals(WebPage.getUrl(), "https://jdi-testing.github.io/jdi-light/contacts.html");
         Assert.assertEquals(WebPage.getUrl(), "https://jdi-testing.github.io/jdi-light/superpage.html");
     }
 
     @Test
     public void getTitleTest() {
-//        Assert.assertEquals(WebPage.getTitle(), "Contact Form");
         Assert.assertEquals(WebPage.getTitle(), "Superpage");
     }
 
