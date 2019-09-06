@@ -27,8 +27,7 @@ public class JDILocatorSteps {
             e.printStackTrace();
         }
         return result.get(locatorName) != null ? $(result.get(locatorName)) :
-                locatorName.matches("[A-Z].*")
-                ? new HtmlElement().setName(locatorName)
+                locatorName.matches("[A-Z].*") ? new HtmlElement().setName(locatorName)
                 : $(locatorName);
     }
 
