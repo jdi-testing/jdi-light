@@ -40,7 +40,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
     }
 
     public A notAppear() {
-        return notAppear(TIMEOUT.get());
+        return notAppear(element.base().getTimeout());
     }
 
     /**

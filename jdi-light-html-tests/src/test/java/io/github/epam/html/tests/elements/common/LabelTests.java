@@ -27,16 +27,19 @@ public class LabelTests extends TestsInit {
     }
     String text = "JDI TESTING PLATFORM";
 
+    //TODO Performance issue
     @Test
     public void getTextTest() {
         assertEquals(jdiTitle.getText(), text);
     }
 
+    //TODO Performance issue
     @Test
     public void getValueTest() {
         assertEquals(jdiTitle.getValue(), text);
     }
 
+    //TODO Performance issue
     @Test
     public void clickTest() {
         jdiTitle.click();
@@ -44,6 +47,7 @@ public class LabelTests extends TestsInit {
         acceptAlert();
     }
 
+    //TODO Performance issue
     @Test
     public void isValidationTest() {
         jdiTitle.is().enabled();
@@ -52,11 +56,13 @@ public class LabelTests extends TestsInit {
         jdiTitle.is().text(equalToIgnoringCase("jdi TESTING platform"));
     }
 
+    //TODO Performance issue
     @Test
     public void assertValidationTest() {
         jdiTitle.assertThat().text(is(text));
     }
 
+    //TODO Performance issue
     @Test
     public void baseValidationTest() {
         baseValidation(jdiTitle);

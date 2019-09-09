@@ -61,14 +61,13 @@ public class TextFieldTests extends TestsInit {
         assertEquals(name.placeholder(), "Input name");
     }
 
+    //TODO Performance issue
     @Test
     public void disabledTest() {
-        TIMEOUT.set(2);
         try {
             disabledName.sendKeys(text);
         } catch (Exception ignore) {}
         assertEquals(disabledName.getText(), "");
-        TIMEOUT.set(2);
         try {
             disabledName.input(text);
         } catch (Exception ignore) {}
@@ -101,11 +100,14 @@ public class TextFieldTests extends TestsInit {
     }
 
     final String symbols = "`!@#$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
+
+    //TODO failed
     @Test
     public void inputSymbolsTest() {
         name.input(symbols);
         assertEquals(name.getText(), symbols);
     }
+    //TODO failed
     @Test
     public void setTextSymbolsTest() {
         name.setText(symbols);

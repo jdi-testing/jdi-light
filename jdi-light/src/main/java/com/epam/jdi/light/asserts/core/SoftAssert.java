@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -36,6 +37,7 @@ public class SoftAssert {
     public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
         try {
             assertThat(actual, matcher);
+            logger.debug(">>> " + actual);
         } catch (Throwable error) {
             if (IS_SOFT_ASSERT) {
                 addError(error);

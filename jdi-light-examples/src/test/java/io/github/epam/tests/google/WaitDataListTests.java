@@ -35,15 +35,12 @@ public class WaitDataListTests extends StaticTestsInit {
     }
     @Test
     public void emptyTest() {
-        TIMEOUT.setUp(2);
+
         try {
             searchS.is().empty();
             Assert.fail("List should not be empty");
         } catch (Throwable ignored) { }
-        finally {
-            TIMEOUT.drop();
-        }
-        logger.info("Done");
+        searchS.is().notEmpty();
     }
     @Test
     public void sizeTest() {

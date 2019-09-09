@@ -6,6 +6,8 @@ package com.epam.jdi.light.settings;
  */
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
+import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
@@ -27,8 +29,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
+import static com.epam.jdi.light.common.ElementArea.CENTER;
+import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
+import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
@@ -62,6 +67,7 @@ public class WebSettings {
     }
     public static void noValidation() {
         SEARCH_RULES = ANY_ELEMENT;
+        CLICK_TYPE = CENTER;
     }
     public static void onlyVisible() {
         SEARCH_RULES = VISIBLE_ELEMENT;
@@ -73,6 +79,9 @@ public class WebSettings {
         SEARCH_RULES = ELEMENT_IN_VIEW;
         BEFORE_SEARCH = UIElement::show;
     }
+
+    public static ElementArea CLICK_TYPE = SMART_CLICK;
+    public static TextTypes TEXT_TYPE = SMART_TEXT;
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
         return DOMAIN != null && DOMAIN.contains("://");
@@ -100,9 +109,9 @@ public class WebSettings {
                 UIElement ui = (template.equals("#%s")
                     ? $(String.format(template, locatorName))
                     : $(String.format(template, locatorName), el.base().parent))
-                        .setup(e -> e.setName(el.getName()).setTimeout(0));
+                        .setup(e -> e.setName(el.getName()).noWait());
                 try {
-                    return ui.get();
+                    return ui.getWebElement();
                 } catch (Exception ignore) { }
             }
             throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());

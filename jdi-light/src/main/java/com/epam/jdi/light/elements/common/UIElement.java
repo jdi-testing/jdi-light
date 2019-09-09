@@ -15,7 +15,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -99,7 +98,7 @@ public class UIElement extends JDIBase
     /** Click on element */
     @JDIAction("Click on '{name}'") @Override
     public void click() {
-        click(clickAreaType);
+        click(getClickType());
     }
 
     /** Submit form*/
@@ -154,7 +153,7 @@ public class UIElement extends JDIBase
 
     @JDIAction("Get '{name}' text") @Override
     public String getText() {
-        return text(textType);
+        return text(getTextType());
     }
 
     /**
@@ -280,16 +279,13 @@ public class UIElement extends JDIBase
                 show();
                 ElementArea clArea = timer().getResultByCondition(
                     this::getElementClickableArea, Objects::nonNull);
-                if (clArea == null)
-                    throw getNotClickableException();
-                if (clArea != CENTER) {
-                    Timer.sleep(200);
-                    clArea = timer().getResultByCondition(
-                        this::getElementClickableArea, Objects::nonNull);
-                }
-                if (clArea == null)
-                    throw getNotClickableException();
-                click(clArea);
+                if (clArea == null || clArea == CENTER) {
+                    try {
+                        get().click();
+                    } catch (Exception ex) {
+                        throw getNotClickableException();
+                    }
+                } else click(clArea);
         }
     }
     private RuntimeException getNotClickableException() {
@@ -536,7 +532,7 @@ public class UIElement extends JDIBase
     }
     @Override
     public String text(TextTypes type) {
-        return type.func.execute(this);
+        return timer().getResult(() -> noWait(() -> type.func.execute(this)));
     }
     public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
         String text = ui.text(TEXT);
@@ -551,7 +547,7 @@ public class UIElement extends JDIBase
         String id = ui.attr("id");
         if (isNotBlank(id)) {
             UIElement label = $(By.cssSelector("[for=" + id + "]"));
-            label.setTimeout(0);
+            label.waitSec(0);
             try {
                 text = label.getText();
             } catch (Throwable ignore) { }
@@ -568,7 +564,7 @@ public class UIElement extends JDIBase
         String id = ui.attr("id");
         if (isNotBlank(id)) {
             UIElement label = $(By.cssSelector("[for=" + id + "]"));
-            label.setTimeout(0);
+            label.waitSec(0);
             try {
                 text = label.getText();
             } catch (Throwable ignore) { }
@@ -597,7 +593,7 @@ public class UIElement extends JDIBase
     /** getAttribute alias */
     public String attr(String value) { return getAttribute(value); }
     /** getText alias */ @Override
-    public String text() { return text(textType); }
+    public String text() { return text(getTextType()); }
     /** getCssValue alias */
     public String css(String prop) {
         return getCssValue(prop);

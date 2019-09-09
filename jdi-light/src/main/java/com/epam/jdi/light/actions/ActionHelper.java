@@ -11,6 +11,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.PrintUtils;
@@ -86,7 +87,7 @@ public class ActionHelper {
             return template;
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName() +
-            LINE_BREAK + "" + safeException(ex));
+                LINE_BREAK + "" + safeException(ex));
         }
     }
 
@@ -239,20 +240,9 @@ public class ActionHelper {
         try {
             Object obj = jp.getThis();
             if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
-            if (isInterface(getJpClass(jp), IBaseElement.class))
-                return ((IBaseElement) obj).base().getName();
-            MapArray<String, Object> fields = classFields(obj);
-            if (fields.keys().contains("element")) {
-                Object element = fields.get("element");
-                if (element != null && isInterface(element.getClass(), IBaseElement.class))
-                    return ((IBaseElement) element).base().toString();
-            }
-            if (fields.keys().contains("name")) {
-                Object name = fields.get("name");
-                if (name != null)
-                    return name.toString();
-            }
-            return obj.toString();
+            return isInterface(getJpClass(jp), INamed.class)
+                ? ((INamed) obj).getName()
+                : obj.toString();
         } catch (Exception ex) {
             throw exception("Can't get element name");
         }

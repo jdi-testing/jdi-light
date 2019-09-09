@@ -24,11 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
-import static com.epam.jdi.light.common.TextTypes.SMART;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
@@ -153,7 +151,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public By getFrame() { return locator.getFrame(); }
 
     protected int timeout = -1;
-    public IBaseElement setTimeout(int sec) {
+    public IBaseElement waitSec(int sec) {
         timeout = sec;
         return this;
     }
@@ -311,12 +309,12 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         int temp = getTimeout();
         TR result;
         try {
-            setTimeout(sec);
+            waitSec(sec);
             manageTimeout(sec);
             result = action.execute((TE) this);
         }
         finally {
-            setTimeout(temp);
+            waitSec(temp);
             dropToGlobalTimeout();
         }
         return result;
@@ -326,6 +324,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public <T> T noWait(JFunc<T> func) {
         return waitFunc(0, func);
+    }
+    public <T> T noWait() {
+        return (T) waitSec(0);
     }
     public <TE extends IBaseElement, TR> TR noWait(JFunc1<TE, TR> action, Class<TE> type) {
         return waitFunc(0, action, type);
@@ -367,7 +368,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             ? uiSearch(searchContext, correctLocator(locator)).get(0)
             : isPageObject(bElement.getClass())
                 ? searchContext
-                : SMART_SEARCH.execute(bElement.setTimeout(getTimeout()));
+                : SMART_SEARCH.execute(bElement.waitSec(getTimeout()));
     }
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)
@@ -451,9 +452,15 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             actions = new Actions(driver());
         return actions;
     }
-    public ElementArea clickAreaType = SMART_CLICK;
+    private ElementArea clickAreaType;
+    public ElementArea getClickType() {
+        return clickAreaType != null ? clickAreaType : CLICK_TYPE;
+    }
     public void setClickArea(ElementArea area) { clickAreaType = area; }
-    public TextTypes textType = SMART;
+    private TextTypes textType;
+    public TextTypes getTextType() {
+        return textType != null ? textType : TEXT_TYPE;
+    }
     public void setTextType(TextTypes type) { textType = type; }
 
     public void offCache() {

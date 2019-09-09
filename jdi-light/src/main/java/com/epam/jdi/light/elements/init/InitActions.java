@@ -40,7 +40,6 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
-import static java.lang.reflect.Modifier.isStatic;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
@@ -111,7 +110,8 @@ public class InitActions {
         $("GetTextAs", aRule(GetTextAs.class, (e,a)-> e.setTextType(a.value()))),
         $("NoCache", aRule(NoCache.class, (e,a)-> e.offCache())),
 
-        $("Timeout", aRule(WaitTimeout.class, (e,a)-> e.setTimeout(a.value()))),
+        $("Timeout", aRule(WaitTimeout.class, (e,a)-> e.waitSec(a.value()))),
+        $("NoWait", aRule(NoWait.class, (e,a)-> e.waitSec(0))),
         $("Name", aRule(Name.class, (e,a)-> e.setName(a.value()))),
         $("GetAny", aRule(GetAny.class, (e, a)-> e.noValidation())),
         $("GetVisible", aRule(GetVisible.class, (e, a)-> e.searchVisible())),
@@ -134,9 +134,6 @@ public class InitActions {
         IBaseElement jdi = (IBaseElement) info.instance;
         defaultSetup(info, jdi.base());
         if (info.field != null) {
-            // TODO remove
-            //if (isStatic(info.field.getModifiers()))
-            //    jdi.base().locator.isRoot = true;
             for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
                 try {
                     Class<? extends Annotation> annotation = aRule.value.annotation;

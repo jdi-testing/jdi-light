@@ -1,16 +1,14 @@
 package io.github.epam.html.tests.elements.common;
 
+import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
 import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.*;
@@ -60,7 +58,10 @@ public class ButtonTests extends TestsInit {
         try {
             disabledButton.click();
             fail("Disabled button should not work, but work");
-        } catch (Exception ex) { assertThat(safeException(ex), containsString("Can't perform click. Element is disabled"));}
+        } catch (Exception ex) {
+            assertThat(safeException(ex),
+                containsString("Can't perform click. Element is disabled"));
+        }
     }
     @Test
     public void doubleClickTest() {
@@ -107,7 +108,7 @@ public class ButtonTests extends TestsInit {
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void suspendButtonTest() {
-        refresh();
+        WebPage.reload();
         durationMoreThan(3, () -> suspendButton.click());
         assertEquals(getAlertText(), "Suspend button");
         acceptAlert();
@@ -116,7 +117,7 @@ public class ButtonTests extends TestsInit {
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void vanishButtonTest() {
-        refresh();
+        WebPage.reload();
         durationMoreThan(3, () ->
             ghostButton.is().disappear());
     }
@@ -124,21 +125,19 @@ public class ButtonTests extends TestsInit {
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void isNotAppearTimeoutFailedButtonTest() {
-        refresh();
-        try {
-            durationMoreThan(2, () ->
-                suspendButton.is().notAppear(2));
-        } catch (Exception ex) {
-            assertThat(safeException(ex), containsString("but: was \"displayed\""));
-        }
+        WebPage.reload();
+        durationMoreThan(2, () ->
+            suspendButton.is().notAppear(2));
     }
 
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void isNotAppearFailedButtonTest() {
-        refresh();
+        WebPage.reload();
         try {
-            durationImmediately(() -> ghostButton.is().notAppear());
+            durationImmediately(() ->
+                ghostButton.is().notAppear());
+            fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
         } catch (Exception ex) {
             assertThat(safeException(ex), containsString("but: was \"displayed\""));
         }
@@ -148,7 +147,6 @@ public class ButtonTests extends TestsInit {
     @Test
     public void isNotAppearButtonTest() {
         ghostButton.is().hidden();
-        TIMEOUT.set(3);
         durationMoreThan(3, () -> ghostButton.is().notAppear());
     }
 
@@ -160,12 +158,4 @@ public class ButtonTests extends TestsInit {
             ghostButton.is().notAppear(2));
     }
 
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void seleniumButtonTest() throws InterruptedException {
-        refresh();
-        Thread.sleep(4000); // comment to fail selenium test
-        getDriver().findElement(By.id("suspend-button")).click();
-        acceptAlert();
-    }
 }

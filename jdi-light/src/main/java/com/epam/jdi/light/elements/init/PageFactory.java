@@ -1,6 +1,5 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.UIBase;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -196,7 +195,7 @@ public class PageFactory {
 
     public static List<Class<?>> STOP_INIT_CLASSES = asList(
         Object.class, WebPage.class, Section.class, UIElement.class,
-            UIBase.class, UIBaseElement.class, UIListBase.class,
+            UIBaseElement.class, UIListBase.class,
             DataList.class, JList.class, WebList.class);
 
     public static void initElements(SiteInfo info) {

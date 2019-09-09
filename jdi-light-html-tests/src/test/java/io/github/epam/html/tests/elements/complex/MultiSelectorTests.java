@@ -56,7 +56,6 @@ public class MultiSelectorTests extends TestsInit {
     @Test
     public void disabledTest() {
         try {
-            TIMEOUT.set(1);
             ages.select("Disabled");
         } catch (Exception ex) {
             assertThat(safeException(ex), containsString("Can't perform click. Element is disabled"));

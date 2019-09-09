@@ -128,7 +128,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         try {
             return (UIELEMENT_NAME != null
                 ? UIELEMENT_NAME
-                : textType.func).execute(element);
+                : getTextType().func).execute(element);
         } catch (Exception ex) {
             return "";
         }

@@ -45,11 +45,9 @@ public class FileUploadTests extends TestsInit {
 
     @Test
     public void disabledUploadTest() {
-        TIMEOUT.set(2);
         try {
             disabledFileInput.uploadFile(mergePath(PROJECT_PATH, "/src/test/resources/general.xml"));
         } catch (Exception ignore) {}
-        TIMEOUT.set(2);
         disabledFileInput.is().text(is("C:\\fakepath\\general.xml"));
     }
     @Test
@@ -79,7 +77,7 @@ public class FileUploadTests extends TestsInit {
         cleanupDownloads();
         String fileName = "gandhi.txt";
         createTextFile(fileName);
-        // Validate file in DOWNLOADS_DIR folder
+        // Validate file in DOWNLOADS_DFIR folder
         assertThatFile(fileName).text(containsString("enough to satisfy"));
     }
     @Test

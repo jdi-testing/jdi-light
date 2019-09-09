@@ -37,5 +37,7 @@ public class HomePage {
     @FindBy(css = ".profile-photo") WebElement profilePhoto;
     @FindBy(css = ".profile-photo [ui=label]") WebElement userName;
 
-    @UI("[ui=label][*'%s']") public static WebList leftNavigation;
+    // TODO fix performance
+    @UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList leftNavigation;
+    //@UI("[ui=label][*'%s']") public static WebList leftNavigation;
 }

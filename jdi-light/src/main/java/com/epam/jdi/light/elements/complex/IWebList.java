@@ -60,7 +60,7 @@ public interface IWebList<T extends IListBase> extends IList<T> {
         List<String> listNames = asList(names);
         for (T value : elements(names.length).values()) {
             if (value.isDisabled()) continue;
-            if (value.isSelected() && !listNames.contains(value.text(base().textType).trim())
+            if (value.isSelected() && !listNames.contains(value.text(base().getTextType()).trim())
                     || !value.isSelected() && listNames.contains(value.getText().trim()))
                 value.click();
         }
@@ -70,8 +70,8 @@ public interface IWebList<T extends IListBase> extends IList<T> {
         List<String> listNames = asList(names);
         for (T value : elements(names.length).values()) {
             if (value.isDisabled()) continue;
-            if (value.isSelected() && listNames.contains(value.text(base().textType).trim())
-                    || !value.isSelected() && !listNames.contains(value.text(base().textType).trim()))
+            if (value.isSelected() && listNames.contains(value.text(base().getTextType()).trim())
+                    || !value.isSelected() && !listNames.contains(value.text(base().getTextType()).trim()))
                 value.click();
         }
     }

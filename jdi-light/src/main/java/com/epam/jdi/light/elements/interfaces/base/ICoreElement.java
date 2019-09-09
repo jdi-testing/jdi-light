@@ -1,8 +1,10 @@
 package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 
@@ -45,5 +47,8 @@ public interface ICoreElement extends IBaseElement {
     default WebList finds(By by) { return core().finds(by); }
     default UIElement firstChild() { return core().firstChild(); }
     default WebList childs() { return core().childs(); }
+    default String getTagName() {
+        return core().getTagName();
+    }
 
 }

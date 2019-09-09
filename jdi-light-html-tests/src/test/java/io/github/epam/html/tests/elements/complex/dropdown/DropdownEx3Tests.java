@@ -68,7 +68,7 @@ public class DropdownEx3Tests extends TestsInit {
     @Test
     public void negativeDropdownTest() {
         try {
-            colors3.base().setTimeout(1);
+            colors3.base().waitSec(1);
             colors3.select("GreyBrownCrimson");
             fail("You have selected color that does not exist in dropdown - something went wrong");
         } catch (Exception ex) {

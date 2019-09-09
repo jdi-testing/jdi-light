@@ -26,16 +26,19 @@ public class TextTests extends TestsInit {
     }
     String text = "Powerful Framework for UI Tests Automation. Suitable for any UI project: Web(Html5, Angular, React...), Mobile(Android IOs), Desktop(Win app) etc.";
 
+    //TODO Performance issue
     @Test
     public void getTextTest() {
         assertEquals(jdiText.getText(), text);
     }
 
+    //TODO Performance issue
     @Test
     public void getValueTest() {
         assertEquals(jdiText.getValue(), text);
     }
 
+    //TODO Performance issue
     @Test
     public void isValidationTest() {
         jdiText.is().enabled();
@@ -43,11 +46,13 @@ public class TextTests extends TestsInit {
         jdiText.is().text(containsString("Powerful Framework for UI"));
     }
 
+    //TODO Performance issue
     @Test
     public void assertValidationTest() {
         jdiText.assertThat().text(is(text));
     }
 
+    //TODO Performance issue
     @Test
     public void baseValidationTest() {
         baseValidation(jdiText);

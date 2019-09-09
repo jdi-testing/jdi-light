@@ -82,18 +82,16 @@ public class ActionProcessor {
                 ? overrideAction.execute(obj) : jp.proceed();
     }
     public static JDIBase getJdi(ProceedingJoinPoint jp) {
-        return jp.getThis() != null && isInterface(getJpClass(jp), IBaseElement.class)
-            ? ((IBaseElement) jp.getThis()).base() : null;
+        try {
+            return jp.getThis() != null && isInterface(getJpClass(jp), IBaseElement.class)
+                ? ((IBaseElement) jp.getThis()).base() : null;
+        } catch (Exception ex) { return null; }
     }
     public static Object stableAction(ProceedingJoinPoint jp) {
-        JDIBase obj = null;
         try {
-            //logger.logOff();
-            //TIMEOUT.freeze();
             String exception = "";
-            if (jp.getThis() != null && isInterface(getJpClass(jp), IBaseElement.class))
-                obj = ((IBaseElement) jp.getThis()).base();
             JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
+            JDIBase obj = getJdi(jp);
             JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
             int timeout = getTimeout(ja, obj);
             long start = currentTimeMillis();
@@ -107,34 +105,30 @@ public class ActionProcessor {
                     try {
                         exception = safeException(ex);
                         Thread.sleep(200);
-                    } catch (Exception ignore) {
-                    }
+                    } catch (Exception ignore) { }
                 }
             } while (currentTimeMillis() - start < timeout * 1000);
             throw exception(getFailedMessage(jp, exception));
-        } finally {
-            /*if (obj != null)
-                obj.dropToGlobalTimeout();
-            logger.logOn();
-            TIMEOUT.unfreeze();*/
-        }
+        } finally { }
     }
+
     private static JFunc1<JDIBase, Object> getOverride(ProceedingJoinPoint jp, JDIBase obj) {
         return obj != null ? GetOverrideAction(jp) : null;
     }
+
     private static int getTimeout(JDIAction ja, IBaseElement obj) {
-        if (ja != null && ja.timeout() != -1)
-            return ja.timeout();
-        if (obj != null && obj.base().getTimeout() != -1)
-            return obj.base().getTimeout();
-        return TIMEOUT.get();
+        return ja != null && ja.timeout() != -1
+            ? ja.timeout()
+            : obj != null
+                ? obj.base().getTimeout()
+                : TIMEOUT.get();
     }
     private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
         MethodSignature method = getJpMethod(jp);
         try {
             String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
                 $("exception", exception),
-                $("timeout", TIMEOUT.get()),
+                $("timeout", getTimeout(jp)),
                 $("action", method.getMethod().getName())
             ));
             return fillTemplate(result, jp, method);
@@ -142,6 +136,9 @@ public class ActionProcessor {
             throw new RuntimeException("Surround method issue: " +
                     "Can't get failed message: " + safeException(ex));
         }
+    }
+    private static int getTimeout(ProceedingJoinPoint jp) {
+        return getTimeout(null, getJdi(jp));
     }
 
     private static String getConditionName(ProceedingJoinPoint jp) {

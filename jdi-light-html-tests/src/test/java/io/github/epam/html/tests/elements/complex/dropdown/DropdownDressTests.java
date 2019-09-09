@@ -61,7 +61,7 @@ public class DropdownDressTests extends TestsInit {
     @Test
     public void negativeDropdownTest() {
         try {
-            dressCode2.base().setTimeout(1);
+            dressCode2.base().waitSec(1);
             dressCode2.select("Unknown");
             fail("You have selected dressCode that does not exist in dropdown - something went wrong");
         } catch (Exception ex) {

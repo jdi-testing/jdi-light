@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration monitorInterval="30" status="warn">
+<Configuration monitorInterval="30" status="debug">
 
 
   <Properties>
@@ -59,7 +59,7 @@
 
   <Loggers>
     <!-- Every configuration must have a root logger. If one is not configured the default root LoggerConfig is ERROR with Console appender attached. -->
-    <Root level="INFO">
+    <Root level="DEBUG">
       <!--<AppenderRef ref="SOUT"/>-->
       <!--<AppenderRef ref="SERR"/>-->
       <AppenderRef ref="fileAppender"/>
@@ -68,7 +68,7 @@
     </Root>
 
     <!-- additivity means, that parent-logger (in every case the root-logger) will also get the chance to log this stuff -->
-    <Logger name="JDI" additivity="TRUE" level="INFO">
+    <Logger name="JDI" additivity="TRUE" level="DEBUG">
       <AppenderRef ref="fileAppender"/>
       <AppenderRef ref="htmlFileLogger"/>
     </Logger>

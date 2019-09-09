@@ -7,6 +7,8 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.NoWait;
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.*;
 import com.epam.jdi.light.ui.html.elements.complex.*;
@@ -23,15 +25,19 @@ public class HtmlElementsPage extends WebPage {
     // @UI("input[type=button].red") public static Button redButton;
     @UI("[value*='Disabled Button']") public static Button disabledButtonInput;
     // @UI("input[type=button][disabled]") public static Button disabledButtonInput;
-    public static Button blueButton, disabledButton, suspendButton,
-            ghostButton, dblClickButton, rightClickButton;
+    public static Button blueButton, dblClickButton, rightClickButton;
+    @WaitTimeout(4)
+    public static Button ghostButton, suspendButton;
+    @NoWait
+    public static Button disabledButton;
     // @UI("#blue-button") public static Button blueButton;
     // @UI("#disabled-button") public static Button disabledButton;
 
     public static Link githubLink;
     // @UI("[ui=github-link]") public static Link gitHubLink;
 
-    public static TextField name, disabledName;
+    public static TextField name;
+    @WaitTimeout(2) public static TextField disabledName;
     // @UI("#name") public static TextField name;
     // @UI("#disabled-name") public static TextField disabledName;
 
@@ -41,7 +47,8 @@ public class HtmlElementsPage extends WebPage {
 
     public static FileInput avatar;
     // @UI("#avatar") public static FileInput avatar;
-    @UI("input[type=file][disabled]") public static FileInput disabledFileInput;
+    @UI("input[type=file][disabled]")
+    public static FileInput disabledFileInput;
     @UI("[download]") public static Link downloadJdiLogo;
 
     public static Image jdiLogo;
