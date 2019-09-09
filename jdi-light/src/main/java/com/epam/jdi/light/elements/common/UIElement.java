@@ -220,7 +220,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction(value = "Execute javascript '{0}' for '{name}'", level = DEBUG)
     public String jsExecute(String jsCode) {
-        return valueOf(js().executeScript("return arguments[0]."+jsCode+";", getWebElement()));
+        return valueOf(js().executeScript("return arguments[0]."+ jsCode +";", getWebElement()));
     }
 
     /**
@@ -243,7 +243,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction("Set '{0}' in '{name}'") @Override
     public void setText(String value) {
-        jsExecute("value='"+value+"'");
+        jsExecute("value='"+value.replace("'", "\\'")+"'");
     }
 
     public void click(int x, int y) {

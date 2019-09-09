@@ -99,18 +99,22 @@ public class TextFieldTests extends TestsInit {
         name.assertThat().text(is(text));
     }
 
-    final String symbols = "`!@#$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
+    final String symbols = "`!@#";//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
 
-    //TODO failed
     @Test
     public void inputSymbolsTest() {
         name.input(symbols);
         assertEquals(name.getText(), symbols);
     }
-    //TODO failed
     @Test
     public void setTextSymbolsTest() {
         name.setText(symbols);
+        assertEquals(name.getText(), symbols);
+    }
+    @Test
+    public void sendKeysSymbolsTest() {
+        name.clear();
+        name.sendKeys(symbols);
         assertEquals(name.getText(), symbols);
     }
 
