@@ -1677,11 +1677,229 @@
 							<p>click(String value) - Click on element</p>
 						</div>
 					</div>
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="toast-example">
+							<button type="button" onclick=show_toast('#simpleToast') class="btn btn-sm btn-info" id="linkSimpleToastExample">Simple Toast</button>
+							<br /><br />
+							<div aria-live="polite" aria-atomic="true" style="min-height: 200px;background-color: grey;">
+							<div class="toast" role="alert"  data-animation="false" aria-live="assertive" aria-atomic="true" id="simpleToast">
+								<div class="toast-header">
+									<img src="..." class="rounded mr-2" alt="...">
+									<strong class="mr-auto">Bootstrap</strong>
+									<small class="text-muted">11 mins ago</small>
+									<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="toast-body">
+									Hello, world! This is a toast message.
+								</div>
+							</div>
+						   </div>
+							</div>
+							<br />
+							<div class="toast-example">
+							<button type="button" class="btn btn-sm btn-info"  onclick=show_toast('.toast.several') id="multipleToast">Several Toasts</button>
+							<br /><br />
+							<div aria-live="polite" aria-atomic="true" style="min-height: 200px;background-color: grey;">
+							<div class="toast several" role="alert" aria-live="assertive" aria-atomic="true">
+								<div class="toast-header">
+									<img src="..." class="rounded mr-2" alt="...">
+									<strong class="mr-auto">Bootstrap</strong>
+									<small class="text-muted">just now</small>
+									<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="toast-body">
+									See? Just like this.
+								</div>
+							</div>
+							<div class="toast several" role="alert" aria-live="assertive" aria-atomic="true">
+								<div class="toast-header">
+									<img src="..." class="rounded mr-2" alt="...">
+									<strong class="mr-auto">Bootstrap</strong>
+									<small class="text-muted">2 seconds ago</small>
+									<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="toast-body">
+									Heads up, toasts will stack automatically
+								</div>
+							</div>
+						</div>
+							</div>
+							<div class="toast-example">
+                           <br />
+							<button type="button" class="btn btn-sm btn-info" onclick="show_toast('#toastRightTop')" id="linkToastRightTop">Toast with top align</button>
+							<br /><br />
+							<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;background-color: grey;">
+								<div class="toast" id="toastRightTop" style="position: absolute; top: 0; right: 0;">
+									<div class="toast-header">
+										<img src="..." class="rounded mr-2" alt="...">
+										<strong class="mr-auto">Bootstrap</strong>
+										<small>11 mins ago</small>
+										<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="toast-body">
+										Hello, world! This is a toast message.
+									</div>
+								</div>
+							</div>
+                            <br />
+							</div>
+							<div class="toast-example">
+							<button type="button" class="btn btn-sm btn-info" id="linkStackAlign" onclick=show_toast('.toast.severalWithPosition')>Stack of toasts with top align</button>
+							<br /><br />
+							<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px; background-color: grey;">
+								<!-- Position it -->
+								<div style="position: absolute; top: 0; right: 0;">
+
+									<!-- Then put toasts within -->
+									<div class="toast severalWithPosition" role="alert" aria-live="assertive" aria-atomic="true">
+										<div class="toast-header">
+											<img src="..." class="rounded mr-2" alt="...">
+											<strong class="mr-auto">Bootstrap</strong>
+											<small class="text-muted">just now</small>
+											<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="toast-body">
+											See? Just like this.
+										</div>
+									</div>
+
+									<div class="toast severalWithPosition" role="alert" aria-live="assertive" aria-atomic="true">
+										<div class="toast-header">
+											<img src="..." class="rounded mr-2" alt="...">
+											<strong class="mr-auto">Bootstrap</strong>
+											<small class="text-muted">2 seconds ago</small>
+											<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="toast-body">
+											Heads up, toasts will stack automatically
+										</div>
+									</div>
+								</div>
+							</div>
+							<br />
+							</div>
+							<div class="toast-example">
+							<button type="button" class="btn btn-sm btn-info" id="linkToastCenterTop" onclick=show_toast('#toastCenterTop')>Toast with center align</button>
+							<br /><br />
+							<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="min-height: 200px;background-color: grey;">
+
+								<!-- Then put toasts within -->
+								<div class="toast" role="alert" id="toastCenterTop" aria-live="assertive" aria-atomic="true">
+									<div class="toast-header">
+										<img src="..." class="rounded mr-2" alt="...">
+										<strong class="mr-auto">Bootstrap</strong>
+										<small>11 mins ago</small>
+										<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="toast-body">
+										Hello, world! This is a toast message.
+									</div>
+								</div>
+							</div>
+							</div>
+							<h4 class="line">Options</h4>
+
+							<button type="button" class="btn btn-sm btn-info" onclick="show_toast('#toastTestOptionAnimation')" id="testOptionAnimation"><b>Animation</b>(toast with animation false)</button>
+							<br /><br />
+							<button type="button" class="btn btn-sm btn-info" onclick="show_toast('#toastTestOptionAutohide')"  id="testOptionAutohide"><b>Autohide</b>(toast with autohide false)</button>
+							<br /><br />
+							<button type="button" class="btn btn-sm btn-info" onclick="show_toast('#toastTestOptionDelay')" id="testOptionDelay"><b>Delay</b>(toast with delay 1000)</button>
+							<br /><br />
+							<div aria-live="polite" id="events" aria-atomic="true" style="position: relative; min-height: 200px;background-color: grey;">
+								<div class="toast"  id="toastTestOptionAnimation" data-animation="false" style="position: absolute; top: 0; right: 0;">
+									<div class="toast-header">
+										<img src="..." class="rounded mr-2" alt="...">
+										<strong class="mr-auto">Bootstrap</strong>
+										<small>11 mins ago</small>
+										<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="toast-body">
+										Hello, world! This is a toast message.
+									</div>
+								</div>
+								<div class="toast"  data-autohide="false" id="toastTestOptionAutohide" style="position: absolute; top: 0; right: 0;">
+									<div class="toast-header">
+										<img src="..." class="rounded mr-2" alt="...">
+										<strong class="mr-auto">Bootstrap</strong>
+										<small>11 mins ago</small>
+										<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="toast-body">
+										Hello, world! This is a toast message.
+									</div>
+								</div>
+								<div class="toast" data-delay="1000" id="toastTestOptionDelay" style="position: absolute; top: 0; right: 0;">
+									<div class="toast-header">
+										<img src="..." class="rounded mr-2" alt="...">
+										<strong class="mr-auto">Bootstrap</strong>
+										<small>11 mins ago</small>
+										<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="toast-body">
+										Hello, world! This is a toast message.
+									</div>
+								</div>
+							</div>
+							<h4 class="line">Events</h4>
+							<div id="eventsBlock"></div>
+							<button type="button" class="btn btn-sm btn-info" id="show" onclick="show_toast('#toastEventsTest')">Test events</button>
+							<div aria-live="polite" class="eventsBlock" aria-atomic="true" style="position: relative; min-height: 200px;background-color: grey;">
+
+								<div class="toast"  id="toastEventsTest"  style="position: absolute; top: 0; right: 0;">
+									<div class="toast-header">
+										<img src="..." class="rounded mr-2" alt="...">
+										<strong class="mr-auto">Bootstrap</strong>
+										<small>11 mins ago</small>
+										<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="toast-body">
+										Hello, world! This is a toast message.
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="html-right">
+							<h4>Toast</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/toasts/"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/toasts/</a>
+							</p>
+							<p>getText() - Get toasts text</p>
+							<p>getCountsToasts() - Get toasts count</p>
+							<p>close() - Close toast</p>
+							<p>getPosition() - Get toast position</p>
+						</div>
+					</div>
+
 
 				</div>
 
 			</div>
-		</div>
+
 		</main>
 	</div>
 	<!--<div class="replace right-side-bar">replace</div>-->
@@ -1689,7 +1907,30 @@
 <footer>
     <div class="replace footer">replace</div>
 </footer>
+<script>
+ function show_toast(locator) {
+   $(locator).toast('show');
+}
+show_desc =  "<p>1) <strong>show.bs.toast</strong>	- this text was printed when the show instance method was called.</p>"
+shown_desc = "<p>2) <strong>shown.bs.toast</strong>- this text was printed when the toast had been made visible to the user.</p>"
+hide_desc="<p>3) <strong>hide.bs.toast</strong>	- this text was printed immediately when the hide instance method had been called.</p>"
+hidden_desc ="<p>4) <strong>hidden.bs.toast</strong>-this text was printed  when the toast has finished being hidden from the user.</p>"
 
+function add_text_about_toast_event(text){
+    $('#eventsBlock').append(text);
+}
+
+$('#toastEventsTest').on('show.bs.toast', function () {
+  $('#eventsBlock').empty();
+  add_text_about_toast_event(show_desc);
+}).on('shown.bs.toast', function () {
+  add_text_about_toast_event(shown_desc);
+}).on('hide.bs.toast', function () {
+   add_text_about_toast_event(hide_desc);
+}).on('hidden.bs.toast', function () {
+   add_text_about_toast_event(hidden_desc);
+});
+</script>
 <script>
     setTimeout(function() {
 		$('.invisible')[0].classList.remove("invisible");
