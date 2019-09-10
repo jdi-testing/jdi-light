@@ -276,40 +276,6 @@
   margin-bottom: .5rem;
 }
 
-// Example modals
-.modal {
-  z-index: 1072;
-
-  .tooltip,
-  .popover {
-    z-index: 1073;
-  }
-}
-
-.modal-backdrop {
-  z-index: 1071;
-}
-
-.bd-example-modal {
-  background-color: #fafafa;
-
-  .modal {
-    position: relative;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: auto;
-    z-index: 1;
-    display: block;
-  }
-
-  .modal-dialog {
-    left: auto;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
-
 // Example tabbable tabs
 .bd-example-tabs .nav-tabs {
   margin-bottom: 1rem;
@@ -339,6 +305,7 @@
   display: inline-block;
   margin: 10px 20px;
   opacity: 1;
+  background-color:#dc3545;
 }
 
 // Scrollspy demo on fixed height div
