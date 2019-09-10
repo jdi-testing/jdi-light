@@ -67,6 +67,7 @@ public class ScreenshotMaker {
             throw exception("Failed to do screenshot: " + ex.getMessage());
         }
         logger.info("Screenshot: " + screensFilePath);
+        //TODO: think about static addScreenShotToAllure()
         addScreenShotToAllure(screensFilePath);
         return screensFilePath;
     }

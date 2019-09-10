@@ -8,6 +8,7 @@ package com.epam.jdi.light.actions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.ScreenshotMaker;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -35,10 +36,11 @@ import static java.lang.System.currentTimeMillis;
 @Aspect
 public class ActionProcessor {
 
-    public static JDIBase jdiBaseLastProcessed = null;
+    public static Safe<JDIBase> jdiBaseLastProcessed = new Safe<>(() -> null);
 
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { }
+
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() { }
 
@@ -72,14 +74,14 @@ public class ActionProcessor {
             JFunc1<JDIBase, Object> overrideAction = null;
             boolean replace = false;
             if (jp.getThis() != null && JDIBase.class.isAssignableFrom(jp.getThis().getClass())) {
-                jdiBaseLastProcessed = (JDIBase) jp.getThis();
+                jdiBaseLastProcessed.set((JDIBase) jp.getThis());
                 overrideAction = GetOverrideAction(jp);
                 replace = overrideAction != null;
             }
             long start = currentTimeMillis();
             do {
                 try {
-                    Object result = replace ? overrideAction.execute(jdiBaseLastProcessed) : jp.proceed();
+                    Object result = replace ? overrideAction.execute(jdiBaseLastProcessed.get()) : jp.proceed();
                     if (!condition(jp)) continue;
                     return result;
                 } catch (Throwable ex) {
@@ -145,18 +147,22 @@ public class ActionProcessor {
         }
         if (htmlCodeLogOnFail) {
             try {
-                logger.step(format("Last processed element's html code: %s", jdiBaseLastProcessed.printHtml()));
+                logger.step(format("Last processed element's html code: %s", jdiBaseLastProcessed.get().printHtml()));
             } catch (Exception e) {
                 logger.step("Can't get element's html code.");
             }
         }
         if (screenOnFail) {
             try {
-                jdiBaseLastProcessed.highlight();
+                jdiBaseLastProcessed.get().highlight();
             } catch (Exception e) {
                 logger.step("Can't highlight element.");
             }
-            new ScreenshotMaker().takeScreenshot(format("Method_%s_failed_at_", method), "dd-MM-yyyy_HH-mm-ss");
+            try {
+                new ScreenshotMaker().takeScreenshot(format("Method_%s_failed_at_", method), "dd-MM-yyyy_HH-mm-ss");
+            } catch (Exception e) {
+                logger.step("Can't take page screenshot.");
+            }
         }
     }
 

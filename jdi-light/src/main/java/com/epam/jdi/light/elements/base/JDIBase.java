@@ -514,7 +514,7 @@ public class JDIBase extends DriverBase implements BaseElement, INamed {
     /**
      * Show all items
      */
-    @JDIAction
+    @JDIAction(level = DEBUG)
     public void show() {
         jsExecute("scrollIntoView(true)");
     }
