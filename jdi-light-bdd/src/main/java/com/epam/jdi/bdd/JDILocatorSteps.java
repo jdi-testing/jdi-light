@@ -1,35 +1,15 @@
 package com.epam.jdi.bdd;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.ui.html.base.HtmlElement;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-
-import static com.epam.jdi.light.ui.html.HtmlFactory.$;
+import static com.epam.jdi.bdd.Utils.element;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesPattern;
 
 public class JDILocatorSteps {
-    public static final String HTML5_PAGE_FOLDER =
-            System.getProperty("user.dir") + "/src/test/resources/html5page.json";
-
-    static HtmlElement element(String locatorName) {
-        HashMap<String, String> result = new HashMap<>();
-        try {
-            result = new ObjectMapper().readValue(new File(HTML5_PAGE_FOLDER), HashMap.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result.get(locatorName) != null ? $(result.get(locatorName)) :
-                locatorName.matches("[A-Z].*") ? new HtmlElement().setName(locatorName)
-                : $(locatorName);
-    }
 
     @Given("^(?:I |)open page by url \"([^\"]*)\"$")
     public void openPageByUrl(String url) {
