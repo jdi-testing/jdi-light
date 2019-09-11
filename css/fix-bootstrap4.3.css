@@ -2,19 +2,12 @@
     float: right !important;
 }
 
-<<<<<<< HEAD
 .modal-dialog {
   pointer-events: none;
 }
 
 .modal-backdrop {
   z-index: 499;
-}
-
-.tooltip-inner {
-  border-radius: 5px;
-  background: #343a40;
-  color: #FFF;
 }
 
 .navbar-flex {
@@ -29,4 +22,10 @@
     display: block;
     margin-bottom: 5px;
     position: static;
+}
+
+.tooltip-inner {
+  border-radius: 5px;
+  background: #343a40;
+  color: #FFF;
 }
