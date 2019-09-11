@@ -1028,6 +1028,7 @@
 						</div>
 					</div>
 
+                    <!-- DROPDOWN START -->
 					<div class="doc-space line">
 						<div class="html-left">
 							<div class="dropdown">
@@ -1050,19 +1051,52 @@
 									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
 								</div>
 							</div>
-							<!-- Example split danger button -->
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary" style="margin-bottom: 5px;">Action</button>
-								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
-									<span class="sr-only">Toggle Dropdown</span>
-								</button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
-									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
-									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
-								</div>
-							</div>
-							<br>
+                            <div class="bd-example">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">Primary</button>
+                                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                        <a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
+                                        <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+                                        <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+                                    </div>
+                                </div><!-- /btn-group -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">Success</button>
+                                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                        <a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
+                                        <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+                                        <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+                                    </div>
+                                </div><!-- /btn-group -->
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary" style="margin-bottom: 5px;">Action</button>
+                                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+                                    <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+                                    <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Dropdown - examples</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#examples"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#examples</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
+                    </div>
+                    <div class="doc-space line">
+                        <div class="html-left">
 							<!-- Large button groups (default and split) -->
 							<div class="btn-group">
 								<button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
@@ -1111,6 +1145,23 @@
 									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
 								</div>
 							</div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Dropdown - Sizing</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#sizing"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#sizing</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
+                    </div>
+                    <div class="doc-space line">
+                        <div class="html-left">
 							<!-- Default dropup button -->
 							<div class="btn-group dropup">
 								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
@@ -1188,6 +1239,23 @@
 									Split dropleft
 								</button>
 							</div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Dropdown - Directions</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#directions"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#directions</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
+                    </div>
+                    <div class="doc-space line">
+                        <div class="html-left">
 							<div class="dropdown">
 								<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
 									Menu items
@@ -1213,6 +1281,23 @@
                                 <a class="dropdown-item disabled" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Disabled link</a>
                                 <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Another link</a>
                             </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Dropdown - Menu items</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-items"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-items</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
+                    </div>
+                    <div class="doc-space line">
+                        <div class="html-left">
 							<div class="btn-group">
 								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
 									Right-aligned menu example
@@ -1243,6 +1328,23 @@
 									<button class="dropdown-item" type="button" onclick="alert('One more action');">Something else here</button>
 								</div>
 							</div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Dropdown - Menu alignment</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-alignment"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-alignment</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
+                    </div>
+                    <div class="doc-space line">
+                        <div class="html-left">
 							<div class="dropdown-menu dropdown-static">
 								<h6 class="dropdown-header">Dropdown header</h6>
 								<a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
@@ -1287,30 +1389,21 @@
                                 <a class="dropdown-item" href="https://jdi-testing.github.io/jdi-light/index.html">Forgot password?</a>
                             </div>
 						</div>
-
-						<div class="html-right">
-							<h4>Dropdown</h4>
-							<p>
-								Bootstrap: <a
-									href="https://getbootstrap.com/docs/4.3/components/dropdowns/"
-									target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/</a>
-							</p>
-							<p>getValue()/getText()/getSelected() - Return selected
-								dropdown value</p>
-							<p>selected(String option) - Check if option has been
-								selected</p>
-							<p>isExpanded() - Show that dropdown element expanded</p>
-							<p>isDisplayed() - Show\wait that dropdown element displayed
-								on the screen</p>
-							<p>expand() - Expand dropdown list</p>
-							<p>close() - Close expanded before dropdown list</p>
-							<p>size() - Return amount of elements in the list</p>
-							<p>setup(Field field) - Setup the dropdown using specified
-								fields</p>
-							<p>sendKeys(CharSequence... charSequence) - Send specific
-								keys</p>
-						</div>
+                        <div class="html-right">
+                            <h4>Dropdown - Menu content</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-content
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-content</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
 					</div>
+                    <!-- DROPDOWN END -->
 
 					<div class="doc-space line">
 						<div class="html-left">
