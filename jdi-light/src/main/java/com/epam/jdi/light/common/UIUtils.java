@@ -68,7 +68,7 @@ public final class UIUtils {
     }
 
     public static JFunc2<Object, String, IClickable> GET_DEFAULT_BUTTON =
-        (obj, buttonName) -> $("[type=submit]", obj);
+        (obj, buttonName) -> $("[type=submit]", obj).setName(buttonName);
 
     public static JFunc2<Object, String, IClickable> GET_BUTTON = (obj, buttonName) -> {
         List<Field> fields = getFields(obj, IsButton.class);

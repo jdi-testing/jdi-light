@@ -370,7 +370,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         //TODO rethink SMART SEARCH
         return locator != null
             ? uiSearch(searchContext, correctLocator(locator)).get(0)
-            : isPageObject(bElement.getClass())
+            : isPageObject(element.getClass())
                 ? searchContext
                 : SMART_SEARCH.execute(bElement.waitSec(getTimeout()));
     }

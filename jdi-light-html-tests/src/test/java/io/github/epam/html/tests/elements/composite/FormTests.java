@@ -122,10 +122,9 @@ public class FormTests extends TestsInit {
         main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
     }
 
-    @Test(expectedExceptions = RuntimeException.class)
+    @Test
     public void submitTextToContactFormUsingNonExistentButtonTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        TIMEOUT.set(1);
         main.contactFormCustom.submit("Roman", "nonExistent");
     }
 
@@ -137,10 +136,9 @@ public class FormTests extends TestsInit {
         checkContactFormSubmitted();
     }
 
-    @Test(expectedExceptions = RuntimeException.class)
+    @Test
     public void submitEntityToContactFormUsingNonExistentButtonTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        TIMEOUT.set(1);
         main.contactFormCustom.submit(DEFAULT_CONTACT, "nonExistent");
     }
 
