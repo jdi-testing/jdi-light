@@ -2,6 +2,7 @@
     float: right !important;
 }
 
+<<<<<<< HEAD
 .modal-dialog {
   pointer-events: none;
 }
@@ -14,6 +15,14 @@
   border-radius: 5px;
   background: #343a40;
   color: #FFF;
+}
+
+.navbar-flex {
+    flex-wrap: wrap;
+}
+
+.input-full-width {
+    width: 100% !important;
 }
 
 .dropdown-static {
