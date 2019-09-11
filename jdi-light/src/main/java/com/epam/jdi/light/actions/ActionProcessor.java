@@ -63,7 +63,7 @@ public class ActionProcessor {
         String result = safeException(ex);
         while (result.contains("\n\n"))
             result = result.replaceFirst("\\n\\n", LINE_BREAK);
-        result = result.replace("java.lang.RuntimeException:", "");
+        result = result.replace("java.lang.RuntimeException:", "").trim();
         if (aroundCount() == 1)
             result = "["+nowTime("mm:ss.S")+"] " + result.replaceFirst("\n", "");
         return result;

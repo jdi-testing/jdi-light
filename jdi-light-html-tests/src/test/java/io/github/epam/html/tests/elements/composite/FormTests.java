@@ -67,6 +67,15 @@ public class FormTests extends TestsInit {
     }
 
     @Test
+    public void loginWithUserToLightLocatorFormTest() {
+        shouldBeLoggedOut();
+        refresh();
+        userIcon.click();
+        loginFormLightLocator.login(DEFAULT_USER);
+        homePage.checkOpened();
+    }
+
+    @Test
     public void loginAsUserTest() {
         shouldBeLoggedOut();
         loginForm.shouldBeOpened();

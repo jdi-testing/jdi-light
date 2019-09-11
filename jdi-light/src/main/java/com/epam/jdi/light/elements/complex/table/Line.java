@@ -112,7 +112,6 @@ public class Line implements IList<String>, IBaseElement {
         T instance;
         try { instance = create(cl); }
         catch (Exception ex) { throw exception("Can't convert row to Entity (%s)", cl.getSimpleName()); }
-        initElements(instance);
         for (int i = 0; i < headers.size(); i++) {
             String header = headers.get(i);
             Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),

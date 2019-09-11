@@ -452,8 +452,8 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
                 value = ((HasValue) field.get(line)).getValue();
                 result.add(name, value);
             } catch (Exception ex) {
-                throw exception("Can't get '%s' Line Map(name=%s;value=%s).%sException: %s",
-                        getName(), name, value, LINE_BREAK, safeException(ex));
+                throw exception("Can't get '%s' Line Map. Failed to execute getValue() method in class '%s'(name=%s;value=%s).%sException: %s",
+                        getName(), field.getType().getSimpleName(), name, value, LINE_BREAK, safeException(ex));
             }
         }
         return result;

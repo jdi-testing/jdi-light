@@ -8,18 +8,18 @@ import java.util.List;
 
 class IssuePage69 extends WebPage {
     @UI("[qa-item=template] [value=element_%s]")
-    DataList<Paragraph, ?> template;
+    static DataList<Paragraph, ?> template;
     @UI("[qa-item=paragraph]>div")
-    DataList<Paragraph, ?> paragraphs;
+    static DataList<Paragraph, ?> paragraphs;
 
 
     @UI("[qa-item=template] [value=element_%s]")
-    List<Paragraph> templateList;
+    static List<Paragraph> templateList;
     @UI("[qa-item=paragraph]>div")
-    List<Paragraph> paragraphsList;
+    static List<Paragraph> paragraphsList;
 
     @UI("[qa-item=template] [value=element_%s]")
-    DataList<Paragraph, ParagraphData> templateData;
+    static DataList<Paragraph, ParagraphData> templateData;
     @UI("[qa-item=paragraph]>div")
-    DataList<Paragraph, ParagraphData> paragraphsData;
+    static DataList<Paragraph, ParagraphData> paragraphsData;
 }

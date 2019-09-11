@@ -97,7 +97,6 @@ public class InitActions {
         return jdi;
     }
     public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
-        $("UI", aRule(UI.class, (e,a)-> e.locator.isRoot = true)),
         $("Root", aRule(Root.class, (e,a)-> e.locator.isRoot = true)),
         $("Frame", aRule(Frame.class, (e,a)-> e.setFrame(getFrame(a)))),
         $("FindBySelenium", aRule(org.openqa.selenium.support.FindBy.class,

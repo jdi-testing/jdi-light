@@ -3,6 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
 import com.epam.jdi.light.ui.html.elements.common.Image;
@@ -15,6 +16,7 @@ public class Header extends Section {
 	public static LoginForm loginForm;
 	public static LoginFormSmart loginFormSmart;
 	public static Form<User> loginFormLight;
+	@UI("#login-form") public static Form<User> loginFormLightLocator;
 	@Css(".fa-sign-out") public static Button logout;
 	public static Image epamLogo;
 	public static Icon userIcon;

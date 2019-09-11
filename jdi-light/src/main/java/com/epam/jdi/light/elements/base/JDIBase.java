@@ -79,7 +79,11 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return this;
     }
     public JDILocator locator = new JDILocator();
-
+    @Override
+    public DriverBase setParent(Object parent) {
+        this.locator.isRoot = false;
+        return super.setParent(parent);
+    }
     public CacheValue<WebElement> webElement = new CacheValue<>();
     public CacheValue<List<WebElement>> webElements = new CacheValue<>();
     public List<JFunc1<WebElement, Boolean>> searchRules = new ArrayList<>();
@@ -355,7 +359,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             return getDefaultContext();
         if (bElement.webElement.hasValue())
             return bElement.webElement.get();
-        if (bElement.locator.isRoot())
+        if (bElement.locator.isEmpty() && bElement.locator.isRoot())
             return getDefaultContext();
         By frame = bElement.getFrame();
         if (frame != null)
