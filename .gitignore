@@ -13,3 +13,4 @@ downloads/
 .project
 .classpath
 .allure/
+test-output/
