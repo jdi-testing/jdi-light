@@ -1026,3 +1026,10 @@ input[type=range].range {
 	border: 1px solid;
 	width: 400px;
 }
+
+
+/* Cards styles */
+
+.jdi-cards .card-columns {
+    column-count: 2;
+}
