@@ -3,34 +3,33 @@ package com.epam.jdi.bdd;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.HasPage;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import cucumber.api.DataTable;
 
+import java.io.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static com.epam.jdi.bdd.Utils.deserializeJsonToMap;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.ELEMENTS;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
+import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import cucumber.api.DataTable;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 
 /**
  * Created by Dmitry_Lebedev1 on 1/13/2016.
  */
 public final class Utils {
+    public static final String HTML5_PAGE_FOLDER =
+            System.getProperty("user.dir") + "/src/test/resources/html5page.json";
 
     private Utils() {
     }
@@ -115,4 +114,16 @@ public final class Utils {
 	public static MapArray<String, String> getMapFromJson(String jsonName) {
 		return MapArray.toMapArray(deserializeJsonToMap(jsonName));
 	}
+
+    static HtmlElement element(String locatorName) {
+        HashMap<String, String> result = new HashMap<>();
+        try {
+            result = new ObjectMapper().readValue(new File(HTML5_PAGE_FOLDER), HashMap.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result.get(locatorName) != null ? $(result.get(locatorName)) :
+                locatorName.matches("[A-Z].*") ? new HtmlElement().setName(locatorName)
+                        : $(locatorName);
+    }
 }
