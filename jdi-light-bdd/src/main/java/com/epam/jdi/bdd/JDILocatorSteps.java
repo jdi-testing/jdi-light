@@ -1,22 +1,15 @@
 package com.epam.jdi.bdd;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.ui.html.base.HtmlElement;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static com.epam.jdi.light.ui.html.HtmlFactory.$;
+import static com.epam.jdi.bdd.Utils.element;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesPattern;
 
 public class JDILocatorSteps {
-
-    static HtmlElement element(String locatorName) {
-        return locatorName.matches("[A-Z].*")
-            ? new HtmlElement().setName(locatorName)
-            : $(locatorName);
-    }
 
     @Given("^(?:I |)open page by url \"([^\"]*)\"$")
     public void openPageByUrl(String url) {
@@ -40,7 +33,7 @@ public class JDILocatorSteps {
 
     @Then("^the \"([^\"]*)\" element label text equals to \"([^\"]*)\"$")
     public void labelTextEquals(String locator, String value) {
-        element(locator).label().has().text(equalTo(value));;
+        element(locator).label().has().text(equalTo(value));
     }
 
     @When("^(?:I |)send keys \"([^\"]*)\" to \"([^\"]*)\" element$")
