@@ -2,14 +2,6 @@
     float: right !important;
 }
 
-.navbar-flex {
-    flex-wrap: wrap;
-}
-
-.input-full-width {
-    width: 100% !important;
-}
-
 .dropdown-static {
     display: block;
     margin-bottom: 5px;

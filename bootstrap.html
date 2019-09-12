@@ -283,117 +283,84 @@
 					<!-- NAVBAR BEGINNING -->
 
 					<div class="doc-space line">
-						<div class="html-left">
-							<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-flex">
-								<a class="navbar-brand" href="#">Navbar brand</a>
-								<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
+						<div class="html-left"></div>
 
-								<div class="navbar-collapse collapse" id="navbarSupportedContent">
-									<ul class="navbar-nav mr-auto navbar-flex">
-										<li class="nav-item active">
-											<a class="nav-link" href="#">Active link <span class="sr-only">(current)</span></a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="#">Link</a>
-										</li>
-										<li class="nav-item dropdown">
-											<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-												Dropdown
-											</a>
-											<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-												<a class="dropdown-item" href="#">Link</a>
-												<a class="dropdown-item" href="#">Another Link</a>
-												<div class="dropdown-divider"></div>
-												<a class="dropdown-item" href="#">One more link</a>
-											</div>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled link</a>
-										</li>
-									</ul>
-									<form class="form-inline my-2 my-lg-0">
-										<input class="form-control mr-sm-2 input-full-width" type="search" placeholder="Search" aria-label="Search">
-										<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-									</form>
-								</div>
-							</nav>
-						</div>
+						<nav class="navbar navbar-expand-lg navbar-light bg-light">
+							<a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav">Navbar brand</a>
+							<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+
+							<div class="navbar-collapse collapse" id="navbarSupportedContent">
+								<ul class="navbar-nav mr-auto">
+									<li class="nav-item active">
+										<a class="nav-link" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav">Active link <span class="sr-only">(current)</span></a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav">Link</a>
+									</li>
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Dropdown
+										</a>
+										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+											<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav" onclick="alert('Action Clicked!');">Action</a>
+											<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav" onclick="alert('Another action Clicked!');">Another action</a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav" onclick="alert('Something else happened!');">Something else here</a>
+										</div>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled link</a>
+									</li>
+								</ul>
+								<form class="form-inline my-2 my-lg-0">
+									<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+									<button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="alert('Search Button Clicked!');">Search</button>
+								</form>
+							</div>
+						</nav>
+
 						<div class="html-right">
 							<h4>Navbar - Supported content</h4>
 							<p>
 								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navbar/#supported-content" target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#supported-content</a>
 							</p>
-							<p>click(int index) - Click on link</p>
-							<p>click(String nameItem) - Click on link</p>
-							<p>getText(int index) - Get link's text</p>
-							<p>getRef(int index) - Get link's "ref" attribute</p>
-							<p>getValues() - return all pairs: ref and index</p>
-							<p>isDisabled(int index) - Show\wait that element displayed on the screen</p>
-							<p>sendKeys(CharSequence... charSequence, int index) - Send specific keys</p>
-							<p>submit(int index) - sumbit the ? button</p>
-							<p>getElement(int index) - get source element</p>
+							<p>click() - Click on element</p>
+							<p>getText() - Get element's text</p>
+							<p>isDisabled() - Show\wait that element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Send specific keys</p>
+							<p>submit() - sumbit the ? button</p>
 						</div>
 					</div>
 
 					<div class="doc-space line">
 						<div class="html-left">
+							<p>Navbar - Brand as link</p>
 							<nav class="navbar navbar-light bg-light">
-								<a class="navbar-brand" href="#">Brand link</a>
+								<a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav">Brand link</a>
 							</nav>
-						</div>
-						<div class="html-right">
-							<h4>Navbar - Brand as link</h4>
-							<p>
-								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navbar/#brand" target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#brand</a>
-							</p>
-							<p>click() - Click on link</p>
-							<p>getText() - Get text</p>
-						</div>
-					</div>
-
-					<div class="doc-space line">
-						<div class="html-left">
+							<br>
+							<p>Navbar - Brand as heading</p>
 							<nav class="navbar navbar-light bg-light">
 								<span class="navbar-brand mb-0 h1">Brand heading</span>
 							</nav>
-						</div>
-						<div class="html-right">
-							<h4>Navbar - Brand as heading</h4>
-							<p>
-								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navbar/#brand" target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#brand</a>
-							</p>
-							<p>getText() - Get text</p>
-						</div>
-					</div>
-
-					<div class="doc-space line">
-						<div class="html-left">
+							<br>
+							<p>Navbar - Brand as image</p>
 							<nav class="navbar navbar-light bg-light">
-								<a class="navbar-brand" href="#">
+								<a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav">
 									<img src="images/wolverin.jpg" width="20" height="30" alt="">
 								</a>
 							</nav>
-						</div>
-						<div class="html-right">
-							<h4>Navbar - Brand as image</h4>
-							<p>
-								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navbar/#brand" target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#brand</a>
-							</p>
-							<p>click() - Click on link</p>
-						</div>
-					</div>
-
-					<div class="doc-space line">
-						<div class="html-left">
+							<br>
+							<p>Navbar - Brand as image and link</p>
 							<nav class="navbar navbar-light bg-light">
-								<a class="navbar-brand" href="#">
+								<a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav">
 									<img src="images/wolverin.jpg" width="20" height="30" class="d-inline-block align-top" alt="">Brand link</a>
 							</nav>
 						</div>
 						<div class="html-right">
-							<h4>Navbar - Brand as image and link</h4>
+							<h4>Navbar - Brand</h4>
 							<p>
 								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navbar/#brand" target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#brand</a>
 							</p>
@@ -401,7 +368,7 @@
 							<p>getText() - Get text</p>
 						</div>
 					</div>
-					
+
 					<div class="doc-space line">
 						<div class="html-left">
 
