@@ -4,20 +4,32 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import static com.epam.jdi.light.elements.common.Alerts.*;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.*;
 
 public class AlertSteps {
-	@Then("^Alert text equals to \"([^\"]*)\"$")
+	
+	@When("^(?:I |)accept alert")
+	public void accept() {
+		acceptAlert();
+	}
+	
+	@When("^(?:I |)dismiss alert")
+	public void dismiss() {
+		dismissAlert();
+	}
+	
+	@Then("^the Alert text equals to \"([^\"]*)\"$")
     public void alertTextEquals(String alertText) {
 		validateAlert(is(alertText));
     }
-	@Then("^Alert text contains \"([^\"]*)\"$")
+	
+	@Then("^the Alert text contains \"([^\"]*)\"$")
     public void alertTextContains(String alertText) {
-    	assertTrue(getAlertText().contains(alertText));
+    	validateAlert(containsString(alertText));
     }
-	@When("^Accept alert")
-	public void acceptAlert() {
-		acceptAlert();
-	}
+
+	@Then("^the Alert text matches to \"([^\"]*)\"$")
+    public void alertTextMatches(String alertText) {
+    	validateAlert(matchesPattern(alertText));
+    }
 }

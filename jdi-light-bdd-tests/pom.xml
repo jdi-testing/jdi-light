@@ -15,6 +15,7 @@
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.1</aspectj.version>
         <allure.maven>2.9</allure.maven>
+        <allure.cucumber.jvm>2.12.1</allure.cucumber.jvm>
     </properties>
 
     <dependencies>
@@ -23,6 +24,12 @@
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-bdd</artifactId>
             <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber-jvm</artifactId>
+            <version>${allure.cucumber.jvm}</version>
         </dependency>
     </dependencies>
 
@@ -45,6 +52,7 @@
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"
                     </argLine>
                     <properties>
                         <property>

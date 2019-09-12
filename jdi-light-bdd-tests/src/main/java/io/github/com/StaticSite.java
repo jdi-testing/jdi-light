@@ -1,19 +1,49 @@
 package io.github.com;
 
-import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.light.elements.complex.JList;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Text;
-import io.github.com.entities.User;
+import com.epam.jdi.light.elements.pageobjects.annotations.Title;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.JMenu;
+import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
+import com.epam.jdi.light.ui.html.base.HtmlList;
+import com.epam.jdi.light.ui.html.complex.Menu;
+import io.github.com.custom.MenuItem;
+import io.github.com.pages.*;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
-	@UI("#login-form")
-	public static Form<User> loginForm;
+	@Url("/index.html") public static HomePage homePage;
+	@Url("/metals-colors.html") @Title("Metal and Colors")
+	public static MetalAndColorsPage metalAndColorsPage;
+	@Url("/contacts.html") @Title("Contact Form")
+	public static ContactFormPage contactFormPage;
+	@Url("/html5.html") public static HtmlElementsPage html5Page;
+	@Url("/dates.html") @Title("Dates")
+	public static DatesPage datesPage;
+	@Url("/user-table.html") @Title("User Table")
+	public static UsersPage usersPage;
+	@Url("/simple-table.html") @Title("Simple Table")
+	public static SimplePage simplePage;
 
-	@Css(".fa-sign-out") public static Button logout;
-	public static Button userIcon;
-	public static Text userName;
+	@Css("[ui=label]") public static List<WebElement> navigation;
+	@Css("[ui=label]") public static WebList navigationL;
+	@UI("[ui=label][*'%s']") public static HtmlList navigationS;
+	@UI(".sidebar-menu span<[*'%s']<<") public static Menu leftMenu;
+	@UI(".sidebar-menu span<[*'%s']<<") public static JList<HtmlElement> leftMenuList;
+	@UI(".sidebar-menu span") public static JList<MenuItem> menu;
+	@JMenu({"[ui=label][*'%s']", "[ui=label][*'%s']"}) public static Menu leftMenu2D;
+
+	@Css("header") public static Header header;
+	@Css("footer") public static Footer footer;
+
+	@Frame("iframe") public static HomePageFrame iframe;
+	public static GithubPage githubPage;
 }
