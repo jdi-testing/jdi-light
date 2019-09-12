@@ -1,5 +1,44 @@
 package com.epam.jdi.light.elements.init;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.create;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.elements.composite.WebPage.addPage;
+import static com.epam.jdi.light.elements.init.InitActions.INIT_RULES;
+import static com.epam.jdi.light.elements.init.InitActions.SETUP_PAGE_OBJECT_ON_SITE;
+import static com.epam.jdi.light.elements.init.InitActions.SETUP_RULES;
+import static com.epam.jdi.light.elements.init.InitActions.SETUP_SECTION_ON_SITE;
+import static com.epam.jdi.light.elements.init.InitActions.SETUP_WEBPAGE_ON_SITE;
+import static com.epam.jdi.light.elements.init.InitActions.isJDIField;
+import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
+import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.tools.ReflectionUtils.recursion;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static java.lang.reflect.Modifier.isStatic;
+import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
+import static com.epam.jdi.light.settings.WebSettings.PAGE_OBJECT_CLASSES_PATH;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
+import org.openqa.selenium.support.pagefactory.FieldDecorator;
+
 import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
@@ -17,27 +56,6 @@ import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
-import org.openqa.selenium.support.pagefactory.FieldDecorator;
-
-import java.lang.reflect.Field;
-import java.util.List;
-
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.UIUtils.create;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.elements.composite.WebPage.addPage;
-import static com.epam.jdi.light.elements.init.InitActions.*;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static java.lang.reflect.Modifier.isStatic;
-import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -117,7 +135,7 @@ public class PageFactory {
                 Object obj = isStatic(field.getModifiers()) ? null : info.instance;
                 field.set(obj, initElement(pageInfo));
             } catch (Exception ex) {
-                throw exception("Can't init %s '%s' on '%s'. Exception: %s",
+                throw exception("Can't init %s '%s' on . Exception: %s",
                     isClass(pageInfo.field.getType(), WebPage.class) ? "page" : "element",
                     pageInfo.field.getName(),
                     info.field.getType().getSimpleName(),
@@ -184,6 +202,15 @@ public class PageFactory {
             initElements(getDriver(), page);
         }
     }
+    
+    public static void initElements() {
+    	PRE_INIT.execute();
+        Class<?>[] pages = getClassesWithPages(PAGE_OBJECT_CLASSES_PATH);
+        for (Class<?> page : pages) {
+            initElements(getDriver(), page);
+        }
+    }
+    
     public static void initElements(Object... pages) {
         PRE_INIT.execute();
         for (Object obj : pages) {
@@ -224,4 +251,34 @@ public class PageFactory {
     public static void initElements(FieldDecorator decorator, Object page) {
         initElements(page);
     }
+    
+    public static Class<?>[] getClassesWithPages(String pathToPages) {
+		List<Path> pathsList = new ArrayList<Path>();
+		try (Stream<Path> paths = Files.walk(Paths.get("src/main/java/io/github/com"))) {
+			pathsList = paths.filter(Files::isRegularFile).filter(p -> {
+				long entryCount = 0;
+				try {
+					entryCount = Files.lines(p)
+							.filter(line -> line.contains("extends WebPage") || line.contains("extends Section"))
+							.count();
+				} catch (IOException e) {
+					throw exception("Can't read from file!");
+				}
+				return entryCount > 0;
+			}).collect(Collectors.toList());
+		} catch (IOException e) {
+			throw exception("Can't read from file!");
+		}
+		Class<?>[] pages = new Class<?>[pathsList.size()];
+		for (int i = 0; i < pathsList.size(); ++i) {
+			String className = pathsList.get(i).toString().substring(14).replace("\\", ".").replace(".java", "");
+			try {
+				Class<?> page = Class.forName(className);
+				pages[i] = page;
+			} catch (ClassNotFoundException e) {
+				throw exception("Can't find class with name %s", className);
+			}
+		}
+		return pages;
+	}
 }

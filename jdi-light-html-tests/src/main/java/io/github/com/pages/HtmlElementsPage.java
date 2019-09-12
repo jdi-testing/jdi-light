@@ -1,5 +1,7 @@
 package io.github.com.pages;
 
+import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
+
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
 import com.epam.jdi.light.ui.html.common.*;
@@ -90,5 +92,7 @@ public class HtmlElementsPage extends WebPage {
     public static RadioButtons colorsNoLocator;
 
     //endregion
-
+    public static void open() {
+		WebPage.openUrl(DOMAIN + "/html5.html");
+	}
 }

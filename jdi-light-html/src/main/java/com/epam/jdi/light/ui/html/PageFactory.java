@@ -6,7 +6,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.PageFactory.PRE_INIT;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -56,5 +66,11 @@ public class PageFactory {
     }
     public static void initElements(FieldDecorator decorator, Object page) {
         initElements(page);
+    }
+    
+    // init pages without site
+    public static void initElements() {
+    	PRE_INIT = HtmlSettings::init;
+    	com.epam.jdi.light.elements.init.PageFactory.initElements();
     }
 }

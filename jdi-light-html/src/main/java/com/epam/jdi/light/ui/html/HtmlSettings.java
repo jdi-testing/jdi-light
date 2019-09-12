@@ -1,5 +1,29 @@
 package com.epam.jdi.light.ui.html;
 
+import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
+import static com.epam.jdi.light.common.UIUtils.GET_DEFAULT_BUTTON;
+import static com.epam.jdi.light.common.UIUtils.getButtonByName;
+import static com.epam.jdi.light.elements.init.InitActions.INIT_RULES;
+import static com.epam.jdi.light.elements.init.InitActions.SETUP_RULES;
+import static com.epam.jdi.light.elements.init.InitActions.isList;
+import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
+import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
+import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
+import static com.epam.jdi.light.settings.WebSettings.initialized;
+import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.ReflectionUtils.getFieldsExact;
+import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.tools.pairs.Pair.$;
+import static java.util.Arrays.asList;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+
 /**
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
@@ -16,25 +40,36 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.html.annotations.FillValue;
 import com.epam.jdi.light.ui.html.annotations.VerifyValue;
-import com.epam.jdi.light.ui.html.base.*;
-import com.epam.jdi.light.ui.html.common.*;
-import com.epam.jdi.light.ui.html.complex.*;
-import org.openqa.selenium.WebElement;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.List;
-
-import static com.epam.jdi.light.common.UIUtils.*;
-import static com.epam.jdi.light.elements.init.InitActions.*;
-import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
-import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
-import static com.epam.jdi.light.settings.WebSettings.initialized;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.pairs.Pair.$;
-import static java.util.Arrays.asList;
+import com.epam.jdi.light.ui.html.base.HtmlChecklist;
+import com.epam.jdi.light.ui.html.base.HtmlCombobox;
+import com.epam.jdi.light.ui.html.base.HtmlElement;
+import com.epam.jdi.light.ui.html.base.HtmlList;
+import com.epam.jdi.light.ui.html.base.HtmlMultiDropdown;
+import com.epam.jdi.light.ui.html.base.HtmlRadioGroup;
+import com.epam.jdi.light.ui.html.base.HtmlSelector;
+import com.epam.jdi.light.ui.html.base.TextAreaElement;
+import com.epam.jdi.light.ui.html.common.Button;
+import com.epam.jdi.light.ui.html.common.Checkbox;
+import com.epam.jdi.light.ui.html.common.ColorPicker;
+import com.epam.jdi.light.ui.html.common.DateTimeSelector;
+import com.epam.jdi.light.ui.html.common.FileInput;
+import com.epam.jdi.light.ui.html.common.Icon;
+import com.epam.jdi.light.ui.html.common.Image;
+import com.epam.jdi.light.ui.html.common.Label;
+import com.epam.jdi.light.ui.html.common.Link;
+import com.epam.jdi.light.ui.html.common.NumberSelector;
+import com.epam.jdi.light.ui.html.common.ProgressBar;
+import com.epam.jdi.light.ui.html.common.Range;
+import com.epam.jdi.light.ui.html.common.Text;
+import com.epam.jdi.light.ui.html.common.TextArea;
+import com.epam.jdi.light.ui.html.common.TextField;
+import com.epam.jdi.light.ui.html.complex.Checklist;
+import com.epam.jdi.light.ui.html.complex.DataList;
+import com.epam.jdi.light.ui.html.complex.Dropdown;
+import com.epam.jdi.light.ui.html.complex.Menu;
+import com.epam.jdi.light.ui.html.complex.MultiDropdown;
+import com.epam.jdi.light.ui.html.complex.MultiSelector;
+import com.epam.jdi.light.ui.html.complex.RadioButtons;
 
 public class HtmlSettings {
 

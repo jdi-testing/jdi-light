@@ -72,6 +72,7 @@ public class WebSettings {
     public static boolean hasDomain() {
         return DOMAIN != null && DOMAIN.contains("://");
     }
+    public static String PAGE_OBJECT_CLASSES_PATH;
     public static boolean initialized = false;
     public static String TEST_GROUP = "";
     // TODO multi properties example
@@ -122,6 +123,7 @@ public class WebSettings {
             fillAction(p -> BROWSER_SIZE = p, "browser.size");
             fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
             fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
+            fillAction(p -> PAGE_OBJECT_CLASSES_PATH = p, "page.init.path");
             fillAction(SoftAssert::setAssertType, "assert.type");
 
             // RemoteWebDriver properties
