@@ -542,17 +542,9 @@ public class UIElement extends JDIBase
         if (isNotBlank(text))
             return text;
         text = ui.text(VALUE);
-        if (isNotBlank(text))
-            return text;
-        String id = ui.attr("id");
-        if (isNotBlank(id)) {
-            UIElement label = $(By.cssSelector("[for=" + id + "]"));
-            label.waitSec(0);
-            try {
-                text = label.getText();
-            } catch (Throwable ignore) { }
-        }
-        return isNotBlank(text) ? text : "";
+        return isNotBlank(text)
+            ? text
+            : isNotBlank(text) ? text : "";
     };
     public static JFunc1<UIElement, String> SMART_LIST_TEXT = ui -> {
         String text = ui.text(TEXT);

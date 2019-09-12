@@ -15,38 +15,26 @@ public class LinkSteps {
 
     @Then("^the \"([^\"]*)\" reference equals to \"([^\"]*)\"$")
     public void refEquals(String name, String expectedText) {
-        Link link = getUI(name, Link.class);
-        link.is().ref(equalTo(expectedText));
+        link(name).is().ref(equalTo(expectedText));
     }
-
     @Then("^the \"([^\"]*)\" reference contains \"([^\"]*)\"$")
     public void refContains(String name, String expectedText) {
-        Link link = getUI(name, Link.class);
-        link.is().ref(containsString(expectedText));
+        link(name).is().ref(containsString(expectedText));
     }
-
     @Then("^the \"([^\"]*)\" reference match to \"([^\"]*)\"$")
     public void refMatchRegex(String name, String regex) {
-        Link link = getUI(name, Link.class);
-        link.is().ref(matchesPattern(regex));
+        link(name).is().ref(matchesPattern(regex));
     }
-
     @Then("^the \"([^\"]*)\" alt text equals to \"([^\"]*)\"$")
     public void altEquals(String name, String expectedText) {
-        Link link = getUI(name, Link.class);
-        link.is().alt(equalTo(expectedText));
+        link(name).is().alt(equalTo(expectedText));
     }
-
     @Then("^the \"([^\"]*)\" alt text contains \"([^\"]*)\"$")
     public void altContains(String name, String expectedText) {
-        Link link = getUI(name, Link.class);
-        link.is().alt(containsString(expectedText));
+        link(name).is().alt(containsString(expectedText));
     }
-
     @Then("^the \"([^\"]*)\" alt text match to \"([^\"]*)\"$")
     public void altMatchRegex(String name, String regex) {
-        Link link = getUI(name, Link.class);
-        link.is().alt(matchesPattern(regex));
+        link(name).is().alt(matchesPattern(regex));
     }
-
 }

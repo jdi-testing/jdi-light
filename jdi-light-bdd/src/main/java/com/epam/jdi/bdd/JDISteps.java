@@ -8,6 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.Dimension;
 
+import static com.epam.jdi.light.common.ElementArea.JS;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.PAGES;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
@@ -53,7 +54,7 @@ public class JDISteps {
 	}
 	@When("^(?:I |)click with JS on \"([^\"]*)\"$")
 	public void jsClick(String name) {
-		getUI(name).jsClick();
+		getUI(name).click(JS);
 	}
 	@When("^(?:I |)input \"([^\"]*)\" in \"([^\"]*)\"$")
 	public void input(String value, String name) {

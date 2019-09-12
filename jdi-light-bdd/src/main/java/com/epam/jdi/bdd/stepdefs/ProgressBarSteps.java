@@ -14,7 +14,6 @@ public class ProgressBarSteps {
     public void volumeGreaterOrEqualTo(String name, int value) {
         progressBar(name).is().volume(greaterThanOrEqualTo(value));
     }
-
     @Then("^the \"([^\"]*)\" progress volume less or equal to (\\d+)$")
     public void volumeLessOrEqualTo(String name, int value) {
         progressBar(name).is().volume(lessThanOrEqualTo(value));

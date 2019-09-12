@@ -14,15 +14,12 @@ public class DateTimeSelectorSteps {
     public void attributeMinEquals(String name, String date) {
         assertEquals(dateTimeSelector(name).min(), date);
     }
-
     @Then("^the \"([^\"]*)\" max equals to \"([^\"]*)\"$")
     public void attributeMaxEquals(String name, String date) {
         assertEquals(dateTimeSelector(name).max(), date);
     }
-
     @When("^(?:I |)set date \"([^\"]*)\" in the \"([^\"]*)\"$")
     public void iSetDate(String date, String name) {
         dateTimeSelector(name).setDateTime(date);
     }
-
 }

@@ -15,12 +15,10 @@ public class RangeSteps {
     public void installTo(String name, int value) {
         range(name).setVolume(value);
     }
-
     @Then("^the \"([^\"]*)\" range volume less or equal to (\\d+)$")
     public void rangeLessOrEqualTo(String name, int value) {
         range(name).is().volume(lessThanOrEqualTo(value));
     }
-
     @Then("^the \"([^\"]*)\" range volume greater or equal to (\\d+)$")
     public void rangeGreaterOrEqualTo(String name, int value) {
         range(name).is().volume(greaterThanOrEqualTo(value));

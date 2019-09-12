@@ -12,9 +12,6 @@ public interface HasClick extends ICoreElement, IClickable {
     default void rightClick() {
         core().rightClick();
     }
-    default void jsClick() {
-        core().jsClick();
-    }
     default void click(ElementArea area) {
         core().click(area);
     }
