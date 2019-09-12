@@ -1,9 +1,15 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.complex.DataList;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
-import com.epam.jdi.light.ui.html.common.*;
-import com.epam.jdi.light.ui.html.complex.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.*;
+import com.epam.jdi.light.ui.html.elements.complex.Checklist;
+import com.epam.jdi.light.ui.html.elements.complex.Combobox;
+import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
+import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 
 public class HtmlElementsPage extends WebPage {
     //region Simple Elements
