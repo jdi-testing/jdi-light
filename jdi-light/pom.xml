@@ -50,22 +50,25 @@
             <version>${log4j2.version}</version>
         </dependency>
 
-      <!--adapter for log4j 1 -->
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-1.2-api</artifactId>
-        <version>${log4j2.version}</version>
-      </dependency>
+        <!--adapter for log4j 1 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>net.lingala.zip4j</groupId>
             <artifactId>zip4j</artifactId>
             <version>RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
@@ -90,6 +93,12 @@
             <artifactId>commons-lang3</artifactId>
             <version>RELEASE</version>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>ru.yandex.qatools.ashot</groupId>-->
+<!--            <artifactId>ashot</artifactId>-->
+<!--            <version>1.5.2</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
