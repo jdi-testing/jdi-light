@@ -980,29 +980,29 @@
 						<div class="html-left">
 
 							<p>
-								<a class="btn btn-primary" data-toggle="collapse"
-									href="#collapseExample" role="button" aria-expanded="false"
+								<a id="bs-collapse-link" class="btn btn-primary" data-toggle="collapse"
+									href="#bs-collapse-one" role="button" aria-expanded="false"
 									aria-controls="collapseExample"> Link </a>
-								<button class="btn btn-primary" type="button"
-									data-toggle="collapse" data-target="#collapseExample"
+								<button id="bs-collapse-btn" class="btn btn-primary" type="button"
+									data-toggle="collapse" data-target="#bs-collapse-one"
 									aria-expanded="false" aria-controls="collapseExample">
 									Data-target</button>
 							</p>
-							<div class="collapse" id="collapseExample">
+							<div class="collapse" id="bs-collapse-one">
 								<div class="card card-body" style="margin-bottom: 16px;">
 									Anim pariatur cliche reprehenderit.</div>
 							</div>
 
 							<p>
-								<a class="btn btn-primary" data-toggle="collapse"
-									href="#multiCollapseExample1" role="button"
+								<a id="bs-multi-toggle-one" class="btn btn-primary" data-toggle="collapse"
+									href="#bs-multi-one" role="button"
 									aria-expanded="false" aria-controls="multiCollapseExample1"
 									style="margin-bottom: 5px;">Toggle first element </a>
-								<button class="btn btn-primary" type="button"
-									data-toggle="collapse" data-target="#multiCollapseExample2"
+								<button id="bs-multi-toggle-two" class="btn btn-primary" type="button"
+									data-toggle="collapse" data-target="#bs-multi-two"
 									aria-expanded="false" aria-controls="multiCollapseExample2"
 									style="margin-bottom: 5px;">Toggle second element</button>
-								<button class="btn btn-primary" type="button"
+								<button id="bs-multi-three" class="btn btn-primary" type="button"
 									data-toggle="collapse" data-target=".multi-collapse"
 									aria-expanded="false"
 									aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle
@@ -1010,14 +1010,14 @@
 							</p>
 							<div class="row">
 								<div class="col">
-									<div class="collapse multi-collapse" id="multiCollapseExample1">
+									<div class="collapse multi-collapse" id="bs-multi-one">
 										<div class="card card-body" style="margin-bottom: 16px;">
 											Craft beer labore wes anderson cred nesciunt sapiente ea
 											proident.</div>
 									</div>
 								</div>
 								<div class="col">
-									<div class="collapse multi-collapse" id="multiCollapseExample2">
+									<div class="collapse multi-collapse" id="bs-multi-two">
 										<div class="card card-body" style="margin-bottom: 16px;">
 											High life accusamus terry richardson ad squid. Nihil anim.</div>
 									</div>
@@ -1025,18 +1025,18 @@
 							</div>
 
 
-							<div class="accordion" id="accordionExample">
+							<div class="accordion mb-3" id="accordionExample">
 								<div class="card">
 									<div class="card-header" id="headingOne">
 										<h2 class="mb-0">
-											<button class="btn btn-link" type="button"
-												data-toggle="collapse" data-target="#collapseOne"
+											<button id="bs-group-toggle-one" class="btn btn-link" type="button"
+												data-toggle="collapse" data-target="#bs-group-one"
 												aria-expanded="true" aria-controls="collapseOne">
 												Collapsible Group Item #1</button>
 										</h2>
 									</div>
 
-									<div id="collapseOne" class="collapse show"
+									<div id="bs-group-one" class="collapse show"
 										aria-labelledby="headingOne" data-parent="#accordionExample">
 										<div class="card-body">You probably haven't heard of
 											them accusamus labore sustainable VHS.</div>
@@ -1045,13 +1045,13 @@
 								<div class="card">
 									<div class="card-header" id="headingTwo">
 										<h2 class="mb-0">
-											<button class="btn btn-link collapsed" type="button"
-												data-toggle="collapse" data-target="#collapseTwo"
+											<button id="bs-group-toggle-two" class="btn btn-link collapsed" type="button"
+												data-toggle="collapse" data-target="#bs-group-two"
 												aria-expanded="false" aria-controls="collapseTwo">
 												Collapsible Group Item #2</button>
 										</h2>
 									</div>
-									<div id="collapseTwo" class="collapse"
+									<div id="bs-group-two" class="collapse"
 										aria-labelledby="headingTwo" data-parent="#accordionExample">
 										<div class="card-body">Nihil anim keffiyeh helvetica,
 											craft beer labore.</div>
@@ -1060,13 +1060,13 @@
 								<div class="card">
 									<div class="card-header" id="headingThree">
 										<h2 class="mb-0">
-											<button class="btn btn-link collapsed" type="button"
-												data-toggle="collapse" data-target="#collapseThree"
+											<button id="bs-group-toggle-three" class="btn btn-link collapsed" type="button"
+												data-toggle="collapse" data-target="#bs-group-three"
 												aria-expanded="false" aria-controls="collapseThree">
 												Collapsible Group Item #3</button>
 										</h2>
 									</div>
-									<div id="collapseThree" class="collapse"
+									<div id="bs-group-three" class="collapse"
 										aria-labelledby="headingThree" data-parent="#accordionExample">
 										<div class="card-body">3 wolf moon officia aute, non
 											cupidatat skateboard dolor brunch.</div>
