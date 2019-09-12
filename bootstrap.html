@@ -35,7 +35,6 @@
 			<div class="main-content">
 				<div class="main-content-hg">
 
-
 					<div class="support-title">
 						<i class="fa fa-comments-o"></i>Bootstrap Elements
 					</div>
@@ -122,7 +121,6 @@
 						</div>
 					</div>
 
-
 					<div class="doc-space line">
 						<div class="html-left">
 							<nav aria-label="breadcrumb">
@@ -171,7 +169,6 @@
 							</p>
 						</div>
 					</div>
-
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -280,7 +277,73 @@
 						</div>
 					</div>
 
-					<!-- NAVBAR BEGINNING -->
+					<!-- NAVBAR BEGINNING   -->
+
+                    <div class="doc-space line">
+
+                        <div class="html-left">
+                            <br>
+                        </div>
+
+                        <br>
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav" target="_blank">Navbar</a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                                <div class="navbar-nav">
+                                    <a class="nav-item nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home <span class="sr-only">(current)</span></a>
+                                    <a class="nav-item nav-link" href="https://jdi-testing.github.io/jdi-light/html5.html" target="_blank">HTML 5</a>
+                                    <a class="nav-item nav-link" href="https://jdi-testing.github.io/jdi-light/bootstrap.html" target="_blank">Bootstrap</a>
+                                    <a class="nav-item nav-link disabled" href="https://jdi-testing.github.io/jdi-light/bootstrap.html" tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+                                </div>
+                            </div>
+                        </nav>
+                        <br>
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav" target="_blank">Navbar</a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/html5.html" target="_blank">HTML 5</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/bootstrap.html" target="_blank">Bootstrap</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="https://getbootstrap.com/docs/4.3/components/navbar/" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" target="_blank">
+                                            Navbar
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/components/navbar/#brand" target="_blank">Brand</a>
+                                            <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav" target="_blank">Nav</a>
+                                            <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/components/navbar/#forms" target="_blank">Forms</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <br>
+                        <div class="html-right">
+                            <h4>Navbar - Nav</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/navbar/#nav"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#nav</a>
+                            </p>
+                            <p>getText() - returns text from the text field </p>
+                            <p>getValue() - returns text from the text field </p>
+                        </div>
+
+
+                    </div>
 
 					<div class="doc-space line">
 						<div class="html-left"></div>
@@ -374,19 +437,23 @@
 
 							<nav class="navbar navbar-light bg-light">
 								<form class="form-inline">
-									<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-									<button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="alert('Search Button Clicked!');">Search</button>
+									<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 135px">
+									<button class="btn btn-outline-success my-2 my-sm-0"
+											type="submit"
+											onclick="alert('Search Main Button Clicked!');">Search</button>
 								</form>
 							</nav>
-
+							<br>
 							<nav class="navbar navbar-light bg-light">
 								<a class="navbar-brand">Navbar</a>
 								<form class="form-inline">
-									<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-									<button class="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="submit" onclick="alert('Search Button Clicked!');">Search</button>
+									<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 135px">
+									<button class="btn btn-sm btn-outline-secondary my-2 my-sm-0"
+											type="submit"
+											onclick="alert('Search Smaller Button Clicked!');">Search</button>
 								</form>
 							</nav>
-
+							<br>
 							<nav class="navbar navbar-light bg-light">
 								<form class="form-inline">
 									<div class="input-group">
@@ -397,17 +464,10 @@
 									</div>
 								</form>
 							</nav>
-
-							<nav class="navbar navbar-light bg-light">
-								<form class="form-inline">
-									<button class="btn btn-outline-success" type="button" onclick="alert('Main Button Clicked!');">Main button</button>
-									<button class="btn btn-sm btn-outline-secondary" type="button" onclick="alert('Smaller Button Clicked!');">Smaller button</button>
-								</form>
-							</nav>
-
+							<br>
 						</div>
 						<div class="html-right">
-							<h4>Navbar Forms</h4>
+							<h4>Navbar - Forms</h4>
 							<p>
 								Bootstrap: <a
 									href="https://getbootstrap.com/docs/4.3/components/navbar/#forms"
@@ -422,6 +482,285 @@
 							<p>placeholder() - returns value of the placeholder attribute </p>
 							<p>getText() - returns text from the text field </p>
 							<p>getValue() - returns text from the text field </p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<nav class="navbar navbar-light bg-light">
+						   <span class="navbar-text">
+							   Navbar text with an inline element
+							</span>
+						</nav>
+						<br>
+						<nav class="navbar navbar-expand-lg navbar-light bg-light">
+							<a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav" target="_blank">Navbar w/ text</a>
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+									aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse" id="navbarText">
+								<ul class="navbar-nav mr-auto">
+									<li class="nav-item active">
+										<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home <span class="sr-only">(current)</span></a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/html5.html" target="_blank">HTML 5</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/bootstrap.html" target="_blank">Bootstrap</a>
+									</li>
+								</ul>
+								<span class="navbar-text">
+								  Navbar text with an inline element
+								</span>
+							</div>
+						</nav>
+						<br>
+						<div class="html-right">
+							<h4>Navbar - Text</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/navbar/#text"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#text</a>
+							</p>
+							<p>click() - Click the button </p>
+							<p>getText() - returns text from the text field </p>
+							<p>ref() - Returns the reference </p>
+							<p>url() - Returns the URL </p>
+							<p>alt() - Returns the alternate text </p>
+							<p>is() - Returns object for work with assertions </p>
+							<p>assertThat() - Returns object for work with assertions </p>
+						</div>
+					</div>
+
+                    <div class="doc-space line">
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1">
+                            <a class="navbar-brand" href="https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes" target="_blank">Navbar</a>
+                            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="navbar-collapse collapse" id="navbarColor01" style="">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/contacts.html" target="_blank">Contact form</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/metals-colors.html" target="_blank">Metals & Colors</a>
+                                    </li>
+                                </ul>
+                                <form class="form-inline">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                    <button class="btn btn-outline-info my-2 my-sm-0" type="button" onclick="alert('Search');">Search</button>
+                                </form>
+                            </div>
+                        </nav>
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-1">
+                            <a class="navbar-brand" href="https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes" target="_blank">Navbar</a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarColor02">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/contacts.html" target="_blank">Contact form</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/metals-colors.html" target="_blank">Metals & Colors</a>
+                                    </li>
+                                </ul>
+                                <form class="form-inline">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                    <button class="btn btn-outline-light my-2 my-sm-0" type="button" onclick="alert('Search');">Search</button>
+                                </form>
+                            </div>
+                        </nav>
+                        <nav class="navbar navbar-expand-lg navbar-light mb-1" style="background-color: #e3f2fd;">
+                            <a class="navbar-brand" href="https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes" target="_blank">Navbar</a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarColor03">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/contacts.html" target="_blank">Contact form</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="https://jdi-testing.github.io/jdi-light/metals-colors.html" target="_blank">Metals & Colors</a>
+                                    </li>
+                                </ul>
+                                <form class="form-inline">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                    <button class="btn btn-outline-primary my-2 my-sm-0" type="button" onclick="alert('Search');">Search</button>
+                                </form>
+                            </div>
+                        </nav>
+                        <div class="html-right">
+                            <h4>Navbar - Color schemes</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes</a>
+                            </p>
+                            <p>click() - Click on link</p>
+                            <p>getText() - Get link's text</p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <div class="container">
+                                <nav class="navbar navbar-expand-lg navbar-light bg-light mb-1">
+                                    <a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#containers" target="_blank">Navbar</a>
+                                </nav>
+                            </div>
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+                                <div class="container">
+                                    <a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#containers" target="_blank">Navbar</a>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="html-right">
+                            <h4>Navbar - Containers</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/navbar/#containers"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#containers</a>
+                            </p>
+                            <p>click() - Click on link</p>
+                            <p>getText() - Get link's text</p>
+                        </div>
+                    </div>
+
+					<!-- RESPONSIVE BEHAVIORS -->
+					<div class="doc-space line">
+
+						<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-2">
+							<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="navbar-collapse collapse" id="navbarTogglerDemo01" style="">
+								<a class="navbar-brand" href="javascript:void();">Hidden brand</a>
+								<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+									<li class="nav-item active">
+										<a class="nav-link" href="https://github.com/jdi-testing/jdi-light" target="_blank">JDI <span class="sr-only">(current)</span></a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="https://jdi-docs.github.io/jdi-light/#navbar" target="_blank">JDI Docs</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+									</li>
+								</ul>
+								<form class="form-inline my-2 my-lg-0">
+									<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+									<button class="btn btn-outline-light my-2 my-sm-0" type="submit" onclick="alert('Search Button Clicked!');">Search</button>
+								</form>
+							</div>
+						</nav>
+
+
+						<nav class="navbar navbar-expand-lg navbar-dark bg-success mb-2">
+							<a class="navbar-brand" href="javascript:void();">Navbar</a>
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+
+							<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+								<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+									<li class="nav-item active">
+										<a class="nav-link" href="https://github.com/jdi-testing/jdi-light" target="_blank">JDI <span class="sr-only">(current)</span></a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="https://jdi-docs.github.io/jdi-light/#navbar" target="_blank">JDI Docs</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+									</li>
+								</ul>
+								<form class="form-inline my-2 my-lg-0">
+									<input class="form-control mr-sm-2" type="search" placeholder="Search">
+									<button class="btn btn-outline-light my-2 my-sm-0" type="submit" onclick="alert('Search Button Clicked!');">Search</button>
+								</form>
+							</div>
+						</nav>
+
+
+						<nav class="navbar navbar-expand-lg navbar-dark mb-3 bg-dark">
+							<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<a class="navbar-brand" href="javascript:void();">Navbar</a>
+
+							<div class="navbar-collapse collapse" id="navbarTogglerDemo03" style="">
+								<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+									<li class="nav-item active">
+										<a class="nav-link" href="https://github.com/jdi-testing/jdi-light" target="_blank">JDI <span class="sr-only">(current)</span></a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="https://jdi-docs.github.io/jdi-light/#navbar" target="_blank">JDI Docs</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+									</li>
+								</ul>
+								<form class="form-inline my-2 my-lg-0">
+									<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+									<button class="btn btn-outline-light my-2 my-sm-0" type="submit" onclick="alert('Search Button Clicked!');">Search</button>
+								</form>
+							</div>
+						</nav>
+
+						<div class="html-right">
+							<h4>Navbar - Toggler</h4>
+							<p>
+								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navbar/#toggler" target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#toggler</a>
+							</p>
+							<p>click() - Click the button / link</p>
+							<p>sendKeys(CharSequence... value) - adds text to the field</p>
+							<p>setText(String value) - sets new text</p>
+							<p>clear() - clears the text field</p>
+							<p>input(String value) - sets new text</p>
+							<p>focus() - places cursor within the text field</p>
+							<p>placeholder() - returns value of the placeholder attribute</p>
+							<p>getText() - returns text from the text field</p>
+							<p>getValue() - returns text from the text field</p>
+						</div>
+					</div>
+
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="pos-f-t">
+								<div class="collapse" id="navbarToggleExternalContent">
+									<div class="bg-dark p-4">
+										<h5 class="text-white h4">Collapsed content</h5>
+										<span class="text-muted">Toggleable via the navbar brand.</span>
+									</div>
+								</div>
+								<nav class="navbar navbar-dark bg-dark">
+									<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+										<span class="navbar-toggler-icon"></span>
+									</button>
+								</nav>
+							</div>
+
+						</div>
+						<div class="html-right">
+							<h4>Navbar - External content</h4>
+							<p>
+								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navbar/#external-content" target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#external-content</a>
+							</p>
+							<p>click()</p>
+							<p>getText() - Get text</p>
 						</div>
 					</div>
 
@@ -498,7 +837,6 @@
 							<p>click() - Click on page</p>
 						</div>
 					</div>
-
 
                     <div class="doc-space line">
                         <div class="html-left">
@@ -580,8 +918,6 @@
                         </div>
                     </div>
 
-
-
 					<div class="doc-space line">
 						<div class="html-left">
 
@@ -618,7 +954,6 @@
 
 						</div>
 					</div>
-
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -757,7 +1092,7 @@
 						</div>
 					</div>
 
-
+                    <!-- DROPDOWN START -->
 					<div class="doc-space line">
 						<div class="html-left">
 							<div class="dropdown">
@@ -780,19 +1115,60 @@
 									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
 								</div>
 							</div>
-							<!-- Example split danger button -->
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary" style="margin-bottom: 5px;">Action</button>
-								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
-									<span class="sr-only">Toggle Dropdown</span>
-								</button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
-									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
-									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
-								</div>
-							</div>
-							<br>
+                            <div class="bd-example">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">Primary</button>
+                                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                        <a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
+                                        <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+                                        <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+                                    </div>
+                                </div><!-- /btn-group -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">Success</button>
+                                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                        <a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
+                                        <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+                                        <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+                                    </div>
+                                </div><!-- /btn-group -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">Info</button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
+                                        <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+                                        <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary" style="margin-bottom: 5px;">Action</button>
+                                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+                                    <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Another action</a>
+                                    <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Dropdown - examples</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#examples"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#examples</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
+                    </div>
+                    <div class="doc-space line">
+                        <div class="html-left">
 							<!-- Large button groups (default and split) -->
 							<div class="btn-group">
 								<button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
@@ -841,6 +1217,23 @@
 									<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Something else here</a>
 								</div>
 							</div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Dropdown - Sizing</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#sizing"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#sizing</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
+                    </div>
+                    <div class="doc-space line">
+                        <div class="html-left">
 							<!-- Default dropup button -->
 							<div class="btn-group dropup">
 								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
@@ -918,6 +1311,23 @@
 									Split dropleft
 								</button>
 							</div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Dropdown - Directions</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#directions"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#directions</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
+                    </div>
+                    <div class="doc-space line">
+                        <div class="html-left">
 							<div class="dropdown">
 								<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
 									Menu items
@@ -930,8 +1340,8 @@
 							</div>
                             <div class="dropdown-menu dropdown-static">
                                 <span class="dropdown-item-text">Dropdown item text</span>
-                                <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/">Action</a>
-                                <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/">Another action</a>
+                                <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
+                                <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Another action</a>
                             </div>
                             <div class="dropdown-menu dropdown-static">
                                 <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Action</a>
@@ -943,6 +1353,23 @@
                                 <a class="dropdown-item disabled" href="https://getbootstrap.com/docs/4.0/components/dropdowns/" target="_blank">Disabled link</a>
                                 <a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" target="_blank">Another link</a>
                             </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Dropdown - Menu items</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-items"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-items</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
+                    </div>
+                    <div class="doc-space line">
+                        <div class="html-left">
 							<div class="btn-group">
 								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
 									Right-aligned menu example
@@ -955,7 +1382,7 @@
 							</div>
 							<div class="btn-group">
 								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
-									Left-aligned but right aligned when large screen
+									Right aligned when large screen
 								</button>
 								<div class="dropdown-menu dropdown-menu-lg-right">
 									<button class="dropdown-item" type="button" onclick="alert('Action');">Action</button>
@@ -965,7 +1392,7 @@
 							</div>
 							<div class="btn-group">
 								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 5px;">
-									Right-aligned but left aligned when large screen
+									Left aligned when large screen
 								</button>
 								<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
 									<button class="dropdown-item" type="button" onclick="alert('Action');">Action</button>
@@ -973,6 +1400,23 @@
 									<button class="dropdown-item" type="button" onclick="alert('One more action');">Something else here</button>
 								</div>
 							</div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Dropdown - Menu alignment</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-alignment"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-alignment</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
+                    </div>
+                    <div class="doc-space line">
+                        <div class="html-left">
 							<div class="dropdown-menu dropdown-static">
 								<h6 class="dropdown-header">Dropdown header</h6>
 								<a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
@@ -1010,37 +1454,28 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                    <button type="button" class="btn btn-primary" onclick="alert('Sign in');">Sign in</button>
                                 </form>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="https://jdi-testing.github.io/jdi-light/index.html">New around here? Sign up</a>
                                 <a class="dropdown-item" href="https://jdi-testing.github.io/jdi-light/index.html">Forgot password?</a>
                             </div>
 						</div>
-
-						<div class="html-right">
-							<h4>Dropdown</h4>
-							<p>
-								Bootstrap: <a
-									href="https://getbootstrap.com/docs/4.3/components/dropdowns/"
-									target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/</a>
-							</p>
-							<p>getValue()/getText()/getSelected() - Return selected
-								dropdown value</p>
-							<p>selected(String option) - Check if option has been
-								selected</p>
-							<p>isExpanded() - Show that dropdown element expanded</p>
-							<p>isDisplayed() - Show\wait that dropdown element displayed
-								on the screen</p>
-							<p>expand() - Expand dropdown list</p>
-							<p>close() - Close expanded before dropdown list</p>
-							<p>size() - Return amount of elements in the list</p>
-							<p>setup(Field field) - Setup the dropdown using specified
-								fields</p>
-							<p>sendKeys(CharSequence... charSequence) - Send specific
-								keys</p>
-						</div>
+                        <div class="html-right">
+                            <h4>Dropdown - Menu content</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-content
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-content</a>
+                            </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
+                        </div>
 					</div>
+                    <!-- DROPDOWN END -->
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -1209,6 +1644,7 @@
 									<button class="btn btn-outline-secondary" type="button">Button</button>
 								</div>
 							</div>
+							</p>
 						</div>
 						<div class="html-right">
 							<h4>Button addons(Input group)</h4>
@@ -1219,6 +1655,158 @@
 							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
 							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
 							<p>click() - Click on link</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="#">Action</a>
+										<a class="dropdown-item" href="#">Another action</a>
+										<a class="dropdown-item" href="#">Something else here</a>
+										<div role="separator" class="dropdown-divider"></div>
+										<a class="dropdown-item" href="#">Separated link</a>
+									</div>
+								</div>
+								<input type="text" class="form-control" aria-label="Text input with dropdown button">
+							</div>
+							</div>
+						<div class="html-right">
+							<h4>Buttons with dropdowns(Input group)</h4>
+							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
+											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
+							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+							<p>selected(String option) - Check if option has been
+								selected</p>
+							<p>isExpanded() - Show that dropdown element expanded</p>
+							<p>isDisplayed() - Show\wait that dropdown element displayed
+								on the screen</p>
+							<p>expand() - Expand dropdown list</p>
+							<p>close() - Close expanded before dropdown list</p>
+							<p>size() - Return amount of elements in the list</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<button type="button" class="btn btn-outline-secondary">Action</button>
+									<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span class="sr-only">Toggle Dropdown</span>
+									</button>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="#">Action</a>
+										<a class="dropdown-item" href="#">Another action</a>
+										<a class="dropdown-item" href="#">Something else here</a>
+										<div role="separator" class="dropdown-divider"></div>
+										<a class="dropdown-item" href="#">Separated link</a>
+									</div>
+								</div>
+								<input type="text" class="form-control" aria-label="Text input with segmented dropdown button">
+							</div>
+						</div>
+						<div class="html-right">
+							<h4>Segmented buttons (Input group)</h4>
+							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
+											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
+							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+							<p>selected(String option) - Check if option has been
+								selected</p>
+							<p>isExpanded() - Show that dropdown element expanded</p>
+							<p>isDisplayed() - Show\wait that dropdown element displayed
+								on the screen</p>
+							<p>expand() - Expand dropdown list</p>
+							<p>close() - Close expanded before dropdown list</p>
+							<p>size() - Return amount of elements in the list</p>
+							<p>click() - Click on button</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect01">Options</label>
+								</div>
+								<select class="custom-select" id="inputGroupSelect01">
+									<option selected>Choose...</option>
+									<option value="1">One</option>
+									<option value="2">Two</option>
+									<option value="3">Three</option>
+								</select>
+							</div>
+
+							<div class="input-group mb-3">
+								<select class="custom-select" id="inputGroupSelect02">
+									<option selected>Choose...</option>
+									<option value="1">One</option>
+									<option value="2">Two</option>
+									<option value="3">Three</option>
+								</select>
+								<div class="input-group-append">
+									<label class="input-group-text" for="inputGroupSelect02">Options</label>
+								</div>
+							</div>
+						</div>
+						<div class="html-right">
+							<h4>Custom select (Input group)</h4>
+							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
+											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
+							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+							<p>selected(String option) - Check if option has been
+								selected</p>
+							<p>isExpanded() - Show that dropdown element expanded</p>
+							<p>isDisplayed() - Show\wait that dropdown element displayed
+								on the screen</p>
+							<p>expand() - Expand dropdown list</p>
+							<p>close() - Close expanded before dropdown list</p>
+							<p>size() - Return amount of elements in the list</p>
+							<p>click() - Click on button</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+								</div>
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+									<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+								</div>
+							</div>
+							<div class="input-group mb-3">
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" id="inputGroupFile02">
+									<label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+								</div>
+								<div class="input-group-append">
+									<span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+								</div>
+							</div>
+						</div>
+						<div class="html-right">
+							<h4>Custom file input (Input group)</h4>
+							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
+											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
+							</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+							<p>click() - Click on button</p>
 						</div>
 					</div>
 
@@ -1529,7 +2117,6 @@
 						</div>
 					</div>
 
-
 					<div class="doc-space line">
 						<div class="html-left">
 							<div class="card mb-3" style="width: 18rem;">
@@ -1555,7 +2142,6 @@
 							<p>assertThat() - assert text presence</p>
 						</div>
 					</div>
-
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -1591,7 +2177,6 @@
 							<p>url() - return link url</p>
 						</div>
 					</div>
-
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -1650,6 +2235,66 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
+							<div class="row mb-3">
+								<div class="col-sm-6">
+									<div class="card">
+										<div class="card-body">
+											<h5 class="card-title">Title</h5>
+											<p class="card-text">1st row 1st cell</p>
+											<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="card">
+										<div class="card-body">
+											<h5 class="card-title">Title</h5>
+											<p class="card-text">1st row 2nd cell</p>
+											<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-6">
+									<div class="card">
+										<div class="card-body">
+											<h5 class="card-title">Title</h5>
+											<p class="card-text">2nd row 1st cell</p>
+											<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="card">
+										<div class="card-body">
+											<h5 class="card-title">Title</h5>
+											<p class="card-text">2nd row 2nd cell</p>
+											<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="html-right">
+							<h4>Card with grid markup</h4>
+							<p>
+								Bootstrap:
+								<a href="https://getbootstrap.com/docs/4.3/components/card/#using-grid-markup"
+								   target="_blank">https://getbootstrap.com/docs/4.3/components/card/#using-grid-markup</a>
+							</p>
+							<p>click() - click button</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert text presence</p>
+							<p>url() - return link url</p>
+						</div>
+					</div>
+
+
+					<div class="doc-space line">
+						<div class="html-left">
 
 							<div class="card mb-2" style="width: 18rem;">
 								<div class="card-body">
@@ -1689,8 +2334,6 @@
 							<p>url() - return button link url</p>
 						</div>
 					</div>
-
-
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -1732,8 +2375,6 @@
 						</div>
 					</div>
 
-
-
 					<div class="doc-space line">
 						<div class="html-left">
 
@@ -1770,8 +2411,6 @@
 						</div>
 					</div>
 
-
-
 					<div class="doc-space line">
 						<div class="html-left">
 							<div class="card bg-dark text-dark mb-3">
@@ -1799,8 +2438,6 @@
 							<p>alt() - get value of the image alt attribute</p>
 						</div>
 					</div>
-
-
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -1881,7 +2518,7 @@
 					<div class="doc-space line">
 						<div class="html-left">
 
-							<div class="spinner-border ml" role="status">
+							<div class="spinner-border" role="status">
 								<span class="sr-only">Loading...</span>
 							</div>
 
@@ -1897,7 +2534,6 @@
 							<p>assertThat() - return object for work with assertions</p>
 						</div>
 					</div>
-
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -1940,6 +2576,161 @@
 						</div>
 					</div>
 
+					<div class="doc-space line">
+						<div class="html-left">
+
+							<div class="spinner-grow text-primary" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+							<div class="spinner-grow text-secondary" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+							<div class="spinner-grow text-success" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+							<div class="spinner-grow text-danger" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+							<div class="spinner-grow text-warning" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+							<div class="spinner-grow text-info" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+							<div class="spinner-grow text-light" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+							<div class="spinner-grow text-dark" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+
+						</div>
+						<div class="html-right">
+							<h4>Growing Spinners</h4>
+							<p>
+								Bootstrap:
+								<a href="https://getbootstrap.com/docs/4.3/components/spinners/#growing-spinner"
+								   target="_blank">https://getbootstrap.com/docs/4.3/components/spinners/#growing-spinner</a>
+							</p>
+							<p>is() - assert spinner</p>
+							<p>assertThat() - return object for work with assertions</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+
+							<div class="border mb-3 p-3">
+								<div class="spinner-border" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+							</div>
+
+							<div class="d-flex justify-content-center border mb-3 p-3">
+								<div class="spinner-border" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+							</div>
+
+							<div class="d-flex align-items-center border mb-3 p-3">
+								<strong>Loading...</strong>
+								<div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+							</div>
+
+							<div class="clearfix border mb-3 p-3">
+								<div class="spinner-border float-right" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+							</div>
+
+							<div class="text-center mb-3 border p-3">
+								<div class="spinner-border" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+							</div>
+
+						</div>
+						<div class="html-right">
+							<h4>Spinner Alignment</h4>
+							<p>
+								Bootstrap:
+								<a href="https://getbootstrap.com/docs/4.3/components/spinners/#alignment" target="_blank">https://getbootstrap.com/docs/4.3/components/spinners/#alignment</a>
+							</p>
+							<p>is() - assert spinner</p>
+							<p>assertThat() - return object for work with assertions</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+
+							<div class="border mb-3 p-3 text-center">
+								<div class="spinner-border spinner-border-sm" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+								<div class="spinner-grow spinner-grow-sm" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+							</div>
+
+							<div class="border mb-3 p-3 text-center">
+								<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+								<div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+							</div>
+
+						</div>
+						<div class="html-right">
+							<h4>Spinner Size</h4>
+							<p>
+								Bootstrap:
+								<a href="https://getbootstrap.com/docs/4.3/components/spinners/#size" target="_blank">https://getbootstrap.com/docs/4.3/components/spinners/#size</a>
+							</p>
+							<p>is() - assert spinner</p>
+							<p>assertThat() - return object for work with assertions</p>
+						</div>
+					</div>
+
+
+					<div class="doc-space line">
+						<div class="html-left">
+
+							<div class="border text-center p-3 mb-3">
+								<button class="btn btn-primary" type="button" disabled="">
+									<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+									<span class="sr-only">Loading...</span>
+								</button>
+								<button class="btn btn-primary" type="button" disabled="">
+									<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+									Loading...
+								</button>
+							</div>
+
+							<div class="border text-center p-3 mb-3">
+								<button class="btn btn-primary" type="button" disabled="">
+									<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+									<span class="sr-only">Loading...</span>
+								</button>
+								<button class="btn btn-primary" type="button" disabled="">
+									<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+									Loading...
+								</button>
+							</div>
+
+						</div>
+						<div class="html-right">
+							<h4>Spinner Buttons</h4>
+							<p>
+								Bootstrap:
+								<a href="https://getbootstrap.com/docs/4.3/components/spinners/#buttons" target="_blank">https://getbootstrap.com/docs/4.3/components/spinners/#buttons</a>
+							</p>
+							<p>is() - assert spinner</p>
+							<p>assertThat() - return object for work with assertions</p>
+						</div>
+					</div>
 
                     <div class="doc-space line">
                         <div class="html-left">
@@ -2003,7 +2794,6 @@
                             <p>url() - return link url</p>
                         </div>
                     </div>
-
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -2267,8 +3057,6 @@
                         </div>
                     </div>
 
-
-
                     <div class="doc-space line">
                         <div class="html-left">
                             <div class="card" style="width: 13rem; margin-bottom: 10px;">
@@ -2304,14 +3092,33 @@
                         </div>
                     </div>
 
-
-
-
-
-
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="card mb-3" style="max-width: 540px;">
+								<div class="row no-gutters">
+									<div class="col-md-4">
+										<img src="images/wolverin.jpg" class="card-img" title="Wolverine icon">
+									</div>
+									<div class="col-md-8">
+										<div class="card-body">
+											<h5 class="card-title">Wolverine</h5>
+											<p class="card-text">Wolverine is a fictional character appearing in American comic books published by Marvel Comics, mostly in association with the X-Men. He is a mutant who possesses animal-keen senses, enhanced physical capabilities, powerful regenerative ability known as a healing factor, and three retractable claws in each hand. Wolverine has been depicted variously as a member of the X-Men, Alpha Flight, and the Avengers.</p>
+											<p class="card-text"><small class="text-muted">The character appeared in #180 (1974)</small></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="html-right">
+						<h4>Horizontal Card</h4>
+						<p>Bootstrap: <a
+								href="https://getbootstrap.com/docs/4.3/components/card/#horizontal"
+								target="_blank">https://getbootstrap.com/docs/4.3/components/card/#horizontal</a>
+						</p>
+						</div>
+					</div>
 
 					<!-- CARD END -->
-
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -2655,7 +3462,7 @@
 						<div class="html-left">
 							<div id="list-example" class="list-group">
 								<a class="list-group-item list-group-item-action"
-									href="#list-item-1">Item 1</a> <a
+								   href="#list-item-1">Item 1</a> <a
 									class="list-group-item list-group-item-action"
 									href="#list-item-2">Item 2</a> <a
 									class="list-group-item list-group-item-action"
@@ -2664,7 +3471,7 @@
 									href="#list-item-4">Item 4</a>
 							</div>
 							<div data-spy="scroll" data-target="#list-example"
-								data-offset="0" class="scrollspy-example">
+								 data-offset="0" class="scrollspy-example">
 								<h4 id="list-item-1">Item 1</h4>
 								<p>Ex consequat commodo adipisicing exercitation aute
 									excepteur occaecat ullamco duis aliqua id magna ullamco eu. Do
@@ -2712,17 +3519,333 @@
 									href="https://getbootstrap.com/docs/4.3/components/scrollspy/#example-with-list-group"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/scrollspy</a>
 							</p>
-						    <p>scrollUp() - Scroll up</p>
+							<p>scrollUp() - Scroll up</p>
 							<p>scrollDown() - Scroll down</p>
 							<p>isSelected(String value) - Check if corresponding element selected</p>
 							<p>click(String value) - Click on element</p>
 						</div>
 					</div>
+
+					<!-- MODAL START -->
+					<div class="doc-space line">
+						<div class="html-left">
+							<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalLong">Open Scrolled Modal 1</button>
+							<hr>
+							<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalScrollable">Open Scrolled Modal 2</button>
+							<hr>
+							<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">Open Centered Modal</button>
+							<hr>
+							<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalWithElements">Open Modal Composite</button>
+							<br>&nbsp;
+						</div>
+
+						<div class="html-right">
+							<h4>Modal</h4>
+							<p>Bootstrap:
+								<a href="https://getbootstrap.com/docs/4.3/components/modal/" target="_blank">https://getbootstrap.com/docs/4.3/components/modal/</a>
+							</p>
+
+						</div>
+
+						<div class="modal fade" id="exampleModalWithElements" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Composite Modal</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="modal-body">
+											<h5>Popover in a modal</h5>
+											<p>This <a href="#" role="button" class="btn btn-primary" data-toggle="popover" title="Popover title" data-content="Popover body content is set in this attribute.">button</a> triggers a popover on click.</p>
+											<hr>
+											<h5>Tooltips in a modal</h5>
+											<p><a href="#" data-toggle="tooltip" title="Tooltip">This link</a> and <a href="#" data-toggle="tooltip" title="Tooltip">that link</a> have tooltips on hover.</p>
+										</div>
+										<hr>
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-md-4">.col-md-4</div>
+												<div class="col-md-4 ml-auto">.col-md-4 .ml-auto</div>
+											</div>
+											<div class="row">
+												<div class="col-md-3 ml-auto">.col-md-3 .ml-auto</div>
+												<div class="col-md-2 ml-auto">.col-md-2 .ml-auto</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6 ml-auto">.col-md-6 .ml-auto</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-9">
+													Level 1: .col-sm-9
+													<div class="row">
+														<div class="col-8 col-sm-6">
+															Level 2: .col-8 .col-sm-6
+														</div>
+														<div class="col-4 col-sm-6">
+															Level 2: .col-4 .col-sm-6
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+										<button type="button" class="btn btn-primary">OK</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLongTitle">Scrollable Modal 1</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										This modal is scrolled independent of the page<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+										<button type="button" class="btn btn-primary">OK</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-scrollable" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalScrollableTitle">Scrollable Modal 2</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										The modal allows to scroll its body<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+										dfshfgs<br>
+										fghdgdfg<br>
+										dgdfgfdg<br>
+										dgdgdg<br>
+										dgdgdgdg<br>
+										<br>
+										rgtregerger<br>
+										gregergeg<br>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+										<button type="button" class="btn btn-primary">OK</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalCenterTitle">Centered Modal</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										This is the vertically centered modal
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+										<button type="button" class="btn btn-primary">OK</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- MODAL END -->
+
+					<!-- POPOVER START -->
+					<div class="doc-space line">
+						<div class="html-left">
+							<button type="button" class="btn btn-success btn-block" data-toggle="popover"
+									title="Popover title"
+									data-content="And here's some amazing content. It's very engaging. Right?">Popover with title</button>
+							<hr>
+							<button type="button" class="btn btn-success btn-block" data-container="body" data-toggle="popover"
+									data-placement="top"
+									data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on top</button>
+							<hr>
+							<button type="button" class="btn btn-success btn-block" data-container="body" data-toggle="popover"
+									data-placement="right"
+									data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on right</button>
+							<hr>
+							<button type="button" class="btn btn-success btn-block" data-container="body" data-toggle="popover"
+									data-placement="bottom"
+									data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on bottom</button>
+							<hr>
+							<button type="button" class="btn btn-success btn-block" data-container="body" data-toggle="popover"
+									data-placement="left"
+									data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on left</button>
+							<hr>
+							<span class="d-inline-block" data-toggle="popover" data-content="Disabled popover">
+								<button class="btn btn-success btn-block" style="pointer-events: none;" type="button" disabled>Disabled button</button>
+							</span>
+							<br>&nbsp;
+						</div>
+
+						<div class="html-right">
+							<h4>Popovers</h4>
+							<p>Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/popovers/"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/popovers/</a>
+							</p>
+						</div>
+					</div>
+					<!-- POPOVER END -->
+
+					<!-- TOOLTIP START -->
+					<div class="doc-space line">
+						<div class="html-left">
+							<button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+							<hr>
+							<button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+							<hr>
+							<button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+							<hr>
+							<button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+							<hr>
+							<button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Tooltip with HTML</button>
+							<hr>
+							<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Disabled tooltip">
+  								<button class="btn btn-info btn-block" style="pointer-events: none;" type="button" disabled>Disabled button</button>
+							</span>
+							<br>&nbsp;
+						</div>
+
+						<div class="html-right">
+							<h4>Tooltips</h4>
+							<p>Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/tooltips/"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/tooltips/</a>
+							</p>
+						</div>
+					</div>
+					<!-- TOOLTIP END -->
+
 					<div class="doc-space line">
 						<div class="html-left">
 							<div class="toast-example">
 							<button type="button" onclick=show_toast('#simpleToast') class="btn btn-sm btn-info" id="linkSimpleToastExample">Simple Toast</button>
-							<br /><br />
+								<p class="small"> With option data-animation false</p>
 							<div aria-live="polite" aria-atomic="true" style="min-height: 200px;background-color: grey;">
 							<div class="toast" role="alert"  data-animation="false" aria-live="assertive" aria-atomic="true" id="simpleToast">
 								<div class="toast-header">
@@ -2741,7 +3864,7 @@
 							</div>
 							<br />
 							<div class="toast-example">
-							<button type="button" class="btn btn-sm btn-info"  onclick=show_toast('.toast.several') id="multipleToast">Several Toasts</button>
+							<button type="button" class="btn btn-sm btn-info"  onclick=show_toast('.toast.several') id="multipleToast">Stack of Toasts</button>
 							<br /><br />
 							<div aria-live="polite" aria-atomic="true" style="min-height: 200px;background-color: grey;">
 							<div class="toast several" role="alert" aria-live="assertive" aria-atomic="true">
@@ -2775,9 +3898,9 @@
 							<div class="toast-example">
                            <br />
 							<button type="button" class="btn btn-sm btn-info" onclick="show_toast('#toastRightTop')" id="linkToastRightTop">Toast with top align</button>
-							<br /><br />
+								<p class="small"> With option data-autohide false</p>
 							<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;background-color: grey;">
-								<div class="toast" id="toastRightTop" style="position: absolute; top: 0; right: 0;">
+								<div class="toast" id="toastRightTop" style="position: absolute; top: 0; right: 0;" data-autohide="false">
 									<div class="toast-header">
 										<img src="images/range-circle.png" class="rounded mr-2" alt="...">
 										<strong class="mr-auto">Bootstrap</strong>
@@ -2834,11 +3957,12 @@
 							</div>
 							<div class="toast-example">
 							<button type="button" class="btn btn-sm btn-info" id="linkToastCenterTop" onclick=show_toast('#toastCenterTop')>Toast with center align</button>
-							<br /><br />
+								<p class="small"> With option data-delay 3000</p>
+
 							<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="min-height: 200px;background-color: grey;">
 
 								<!-- Then put toasts within -->
-								<div class="toast" role="alert" id="toastCenterTop" aria-live="assertive" aria-atomic="true">
+								<div class="toast" role="alert" id="toastCenterTop" aria-live="assertive" aria-atomic="true" data-delay="3000">
 									<div class="toast-header">
 										<img src="images/range-circle.png" class="rounded mr-2" alt="...">
 										<strong class="mr-auto">Bootstrap</strong>
@@ -2852,59 +3976,11 @@
 									</div>
 								</div>
 							</div>
-							</div>
-							<h4 class="line">Options</h4>
-
-							<button type="button" class="btn btn-sm btn-info" onclick="show_toast('#toastTestOptionAnimation')" id="testOptionAnimation"><b>Animation</b>(toast with animation false)</button>
-							<br /><br />
-							<button type="button" class="btn btn-sm btn-info" onclick="show_toast('#toastTestOptionAutohide')"  id="testOptionAutohide"><b>Autohide</b>(toast with autohide false)</button>
-							<br /><br />
-							<button type="button" class="btn btn-sm btn-info" onclick="show_toast('#toastTestOptionDelay')" id="testOptionDelay"><b>Delay</b>(toast with delay 1000)</button>
-							<br /><br />
-							<div aria-live="polite" id="events" aria-atomic="true" style="position: relative; min-height: 200px;background-color: grey;">
-								<div class="toast"  id="toastTestOptionAnimation" data-animation="false" style="position: absolute; top: 0; right: 0;">
-									<div class="toast-header">
-										<img src="images/range-circle.png" class="rounded mr-2" alt="...">
-										<strong class="mr-auto">Bootstrap</strong>
-										<small>11 mins ago</small>
-										<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="toast-body">
-										Hello, world! This is a toast message.
-									</div>
-								</div>
-								<div class="toast"  data-autohide="false" id="toastTestOptionAutohide" style="position: absolute; top: 0; right: 0;">
-									<div class="toast-header">
-										<img src="images/range-circle.png" class="rounded mr-2" alt="...">
-										<strong class="mr-auto">Bootstrap</strong>
-										<small>11 mins ago</small>
-										<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="toast-body">
-										Hello, world! This is a toast message.
-									</div>
-								</div>
-								<div class="toast" data-delay="1000" id="toastTestOptionDelay" style="position: absolute; top: 0; right: 0;">
-									<div class="toast-header">
-										<img src="images/range-circle.png" class="rounded mr-2" alt="...">
-										<strong class="mr-auto">Bootstrap</strong>
-										<small>11 mins ago</small>
-										<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="toast-body">
-										Hello, world! This is a toast message.
-									</div>
-								</div>
 							</div>
 							<h4 class="line">Events</h4>
 							<div id="eventsBlock"></div>
 							<button type="button" class="btn btn-sm btn-info" id="show" onclick="show_toast('#toastEventsTest')">Test events</button>
+							<br /><br>
 							<div aria-live="polite" class="eventsBlock" aria-atomic="true" style="position: relative; min-height: 200px;background-color: grey;">
 
 								<div class="toast"  id="toastEventsTest"  style="position: absolute; top: 0; right: 0;">
@@ -2921,6 +3997,7 @@
 									</div>
 								</div>
 							</div>
+							<br />
 						</div>
 						<div class="html-right">
 							<h4>Toast</h4>
@@ -2936,100 +4013,21 @@
 						</div>
 					</div>
 
-					<div class="doc-space line">
-						<div class="html-left">
-							<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1">
-								<a class="navbar-brand" href="https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes" target="_blank">Navbar</a>
-								<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="navbar-collapse collapse" id="navbarColor01" style="">
-									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active">
-											<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home <span class="sr-only">(current)</span></a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/contacts.html" target="_blank">Contact form</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/metals-colors.html" target="_blank">Metals & Colors</a>
-										</li>
-									</ul>
-								</div>
-							</nav>
-							<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-1">
-								<a class="navbar-brand" href="https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes" target="_blank">Navbar</a>
-								<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse" id="navbarColor02">
-									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active">
-											<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home <span class="sr-only">(current)</span></a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/contacts.html" target="_blank">Contact form</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/metals-colors.html" target="_blank">Metals & Colors</a>
-										</li>
-									</ul>
-								</div>
-							</nav>
-							<nav class="navbar navbar-expand-lg navbar-light mb-1" style="background-color: #e3f2fd;">
-								<a class="navbar-brand" href="https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes" target="_blank">Navbar</a>
-								<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse" id="navbarColor03">
-									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active">
-											<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home <span class="sr-only">(current)</span></a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/contacts.html" target="_blank">Contact form</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="https://jdi-testing.github.io/jdi-light/metals-colors.html" target="_blank">Metals & Colors</a>
-										</li>
-									</ul>
-								</div>
-							</nav>
-						</div>
-						<div class="html-right">
-							<h4>Color schemes</h4>
-							<p>
-								Bootstrap: <a
-									href="https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes"
-									target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes</a>
-							</p>
-							<p>click() - Click on link</p>
-							<p>getText() - Get link's text</p>
-							<p>getRef() - Get link's "ref" attribute</p>
-							<p>getUrl() - Get link's "ref" attribute as URL</p>
-							<p>getAlt() - Get link's "alt" attribute</p>
-						</div>
-					</div>
-
                     <div class="doc-space line">
                         <div class="html-left">
-                            <div class="container">
-                                <nav class="navbar navbar-expand-lg navbar-light bg-light mb-1">
-                                    <a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#containers" target="_blank">Navbar</a>
-                                </nav>
-                            </div>
-                            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-                                <div class="container">
-                                    <a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#containers" target="_blank">Navbar</a>
-                                </div>
+                            <nav class="navbar navbar-light bg-light">
+                                    <a class="navbar-brand" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Default</a>
+                            </nav>
+                            <nav class="navbar sticky-top navbar-light bg-light">
+                                    <a class="navbar-brand" href="#">Sticky top</a>
                             </nav>
                         </div>
                         <div class="html-right">
-                            <h4>Container</h4>
+                            <h4>Placement</h4>
                             <p>
                                 Bootstrap: <a
-                                    href="https://getbootstrap.com/docs/4.3/components/navbar/#containers"
-                                    target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#containers</a>
+                                    href="https://getbootstrap.com/docs/4.3/components/navbar/#placement"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#placement</a>
                             </p>
                             <p>click() - Click on link</p>
                             <p>getText() - Get link's text</p>
@@ -3039,11 +4037,11 @@
 				</div>
 
 			</div>
+			</main>
+		</div>
 
-		</main>
 	</div>
-	<!--<div class="replace right-side-bar">replace</div>-->
-</div>
+
 <footer>
     <div class="replace footer">replace</div>
 </footer>
@@ -3122,6 +4120,12 @@ $('#toastEventsTest').on('show.bs.toast', function () {
 
 
 
+</script>
+<script>
+$(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="popover"]').popover()
+})
 </script>
 <script>
 		includeSideBar();

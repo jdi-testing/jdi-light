@@ -2,8 +2,22 @@
     float: right !important;
 }
 
+.modal-dialog {
+  pointer-events: none;
+}
+
+.modal-backdrop {
+  z-index: 499;
+}
+
 .dropdown-static {
     display: block;
     margin-bottom: 5px;
     position: static;
+}
+
+.tooltip-inner {
+  border-radius: 5px;
+  background: #343a40;
+  color: #FFF;
 }
