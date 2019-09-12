@@ -1,3 +1,4 @@
+@time
 Feature: DateTimeSelector, INPUT TYPE TIME
 
   Scenario: Get date value test

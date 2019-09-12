@@ -1,3 +1,4 @@
+@button
 Feature: button
   Scenario:
     Given I open "Html5 Page" page

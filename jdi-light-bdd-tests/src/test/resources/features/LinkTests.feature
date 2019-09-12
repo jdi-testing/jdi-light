@@ -1,3 +1,4 @@
+@link
 Feature: link
 
   Scenario: Link text equivalence test

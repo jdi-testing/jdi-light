@@ -1,3 +1,4 @@
+@base
 Feature: BaseUIElement
 
 Scenario: click 

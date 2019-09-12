@@ -1,3 +1,4 @@
+@image
 Feature: image
 
   Background:
