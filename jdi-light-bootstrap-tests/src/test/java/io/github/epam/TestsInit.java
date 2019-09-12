@@ -21,7 +21,6 @@ public class TestsInit {
         logger.toLog("Run Tests");
     }
 
-
     @AfterSuite(alwaysRun = true)
     public static void tearDown() {
         killAllSeleniumDrivers();

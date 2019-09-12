@@ -8,6 +8,8 @@ import static com.epam.jdi.light.common.TextTypes.TEXT;
 
 public class Button extends UIBaseElement<TextAssert> implements IsButton {
     public String getText() { return text(TEXT); }
+
     @Override
     public TextAssert is() { return new TextAssert().set(this); }
+
 }
