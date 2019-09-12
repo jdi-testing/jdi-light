@@ -2,9 +2,9 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.ByText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import org.openqa.selenium.WebElement;
 
 public class MetalAndColorsPage extends WebPage {

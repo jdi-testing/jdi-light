@@ -1,7 +1,6 @@
 package io.github.epam.tests.google;
 
 import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.tools.map.MapArray;
 import io.github.com.custom.SearchResult;
 import io.github.epam.StaticTestsInit;
 import org.testng.annotations.BeforeMethod;

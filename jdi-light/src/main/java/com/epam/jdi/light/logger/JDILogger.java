@@ -26,7 +26,8 @@ import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
 import static io.qameta.allure.model.Status.PASSED;
 import static java.lang.Thread.currentThread;
 import static org.apache.logging.log4j.LogManager.getLogger;
-import static org.apache.logging.log4j.core.config.Configurator.*;
+import static org.apache.logging.log4j.core.config.Configurator.setLevel;
+import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
 
 public class JDILogger implements ILogger {
     private static MapArray<String, JDILogger> loggers = new MapArray<>();

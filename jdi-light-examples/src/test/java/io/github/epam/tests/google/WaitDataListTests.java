@@ -5,8 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.pages.Header.search;
 import static io.github.com.pages.SearchPage.searchS;

@@ -13,6 +13,7 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
 
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
@@ -46,6 +47,7 @@ public class WebPage extends DriverBase implements PageObject {
     public String checkUrl;
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = CheckTypes.NONE;
+
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this).setup(Form.class,e->e.setName(getName()+" Form"));
     }

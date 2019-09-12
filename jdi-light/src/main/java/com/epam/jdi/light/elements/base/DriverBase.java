@@ -79,4 +79,11 @@ public abstract class DriverBase implements JDIElement {
         if (!isClass(parent.getClass(), DriverBase.class)) return null;
         return ((DriverBase)parent).getPage();
     }
+    public boolean hasParent(String name) {
+        if (parent == null) return false;
+        if (isClass(parent.getClass(), WebPage.class))
+            return ((WebPage) parent).getName().equals(name);
+        if (!isClass(parent.getClass(), JDIBase.class)) return false;
+        return ((JDIBase)parent).hasParent(name);
+    }
 }

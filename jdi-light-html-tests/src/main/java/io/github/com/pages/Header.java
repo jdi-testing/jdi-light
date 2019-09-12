@@ -18,7 +18,7 @@ public class Header extends Section {
 	public static Form<User> loginFormLight;
 	@UI("#login-form") public static Form<User> loginFormLightLocator;
 	@Css(".fa-sign-out") public static Button logout;
-	public static Image epamLogo;
 	public static Icon userIcon;
 	public static Icon userName;
+	public static Image epamLogo;
 }

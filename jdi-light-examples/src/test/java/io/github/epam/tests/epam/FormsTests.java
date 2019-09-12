@@ -1,7 +1,6 @@
 package io.github.epam.tests.epam;
 
 import io.github.epam.StaticTestsInit;
-import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
 import static io.github.epam.EpamGithubSite.*;

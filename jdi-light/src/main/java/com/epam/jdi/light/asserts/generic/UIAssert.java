@@ -7,7 +7,6 @@ import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.StringUtils.format;
 import static org.hamcrest.Matchers.is;
 

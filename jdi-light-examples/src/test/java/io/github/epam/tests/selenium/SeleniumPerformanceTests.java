@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import selenium.entities.User;
 
-import static com.epam.jdi.light.settings.WebSettings.noValidation;
 import static selenium.seleniumPO.SiteSelenium.*;
 
 

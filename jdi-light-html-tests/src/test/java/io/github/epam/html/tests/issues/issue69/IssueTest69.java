@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.issues.issue69;
 
-import com.epam.jdi.tools.func.JFunc;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.HtmlElementsPage.*;

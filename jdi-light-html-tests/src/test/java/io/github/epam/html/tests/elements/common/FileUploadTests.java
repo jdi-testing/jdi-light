@@ -11,7 +11,6 @@ import static com.epam.jdi.light.asserts.core.FileAssert.assertThatFile;
 import static com.epam.jdi.light.asserts.core.FileAssert.cleanupDownloads;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;

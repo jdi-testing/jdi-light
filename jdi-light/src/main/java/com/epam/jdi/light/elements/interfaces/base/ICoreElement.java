@@ -1,10 +1,8 @@
 package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 
