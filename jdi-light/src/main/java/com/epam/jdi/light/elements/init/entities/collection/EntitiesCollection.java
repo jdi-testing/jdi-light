@@ -12,6 +12,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
 import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 
 public class EntitiesCollection {
@@ -20,6 +21,18 @@ public class EntitiesCollection {
 
     private EntitiesCollection() { }
 
+    public static void addPage(WebPage page) {
+        PAGES.update(page.getName(), page);
+    }
+    public static WebPage getPage(String pageName) {
+        WebPage page = PAGES.get(pageName);
+        if (page == null)
+            page = PAGES.get(pageName + " Page");
+        if (page == null)
+            throw exception("Can't find page with name %s. Available pages: %s", pageName,
+                    print(PAGES.keys()));
+        return page;
+    }
     public static <T> T getUI(String name, Class<T> type) {
         try {
             return (T) getUI(name);

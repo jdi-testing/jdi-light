@@ -1,7 +1,6 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -81,8 +80,6 @@ public class HtmlElementsPage extends WebPage {
     // @UI("#multi-dropdown") public static MultiSelector multiDropdown;
 
     public static Combobox iceCream;
-    // @UI("#ice-cream") public static HtmlCombobox iceCream;
-    @UI("#ice-cream") public static DataList iceCreamDataList;
 
     public static Checkbox acceptConditions;
     // @UI("#accept-conditions") public static Checkbox acceptConditions;

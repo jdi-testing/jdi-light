@@ -311,15 +311,6 @@ public class WebPage extends DriverBase implements PageObject {
         scroll(-value,0);
     }
 
-    private static MapArray<String, WebPage> pages = new MapArray<>();
-    public static void addPage(WebPage page) {
-        pages.update(page.getName(), page);
-    }
-    public static <T extends WebPage> T getPage(String value) {
-        WebPage page = pages.get(value);
-        return (T) (page == null ? pages.get(value + " Page") : page);
-    }
-
     @Override
     public String toString() {
         return Switch(logger.getLogLevel()).get(

@@ -30,6 +30,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.addPage;
 import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
@@ -44,7 +45,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
     public static void init() {}
-    private static void webPageSetup(SiteInfo info) {
+    static void webPageSetup(SiteInfo info) {
         WebPage page = (WebPage) info.instance;
         defaultSetup(info, page);
         page.updatePageData(
@@ -53,6 +54,7 @@ public class InitActions {
             valueOrDefault(getAnnotation(info.field, Title.class),
                 page.getClass().getAnnotation(Title.class))
         );
+        addPage(page);
     }
 
     public static MapArray<Class<?>, Class<?>> INTERFACES = map(

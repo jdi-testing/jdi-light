@@ -10,21 +10,18 @@ import org.openqa.selenium.Dimension;
 
 import static com.epam.jdi.light.common.ElementArea.JS;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.PAGES;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 
 public class JDISteps {
 	@Given("^I open \"([^\"]*)\"(?: page|)$")
     public void iMOpen(String pageName) {
-        WebPage page = PAGES.get(pageName);
-        page.shouldBeOpened();
+        getPage(pageName).shouldBeOpened();
     }
 	@Given("^I open \"([^\"]*)\"(?: page|) with params \"([^\"]*)\"$")
 	public void iMOpenParams(String pageName, Object params) {
-		WebPage page = PAGES.get(pageName);
-		page.shouldBeOpened(params);
+		getPage(pageName).shouldBeOpened(params);
 	}
 
 	//#region When
@@ -121,13 +118,11 @@ public class JDISteps {
 	//#region Then
 	@Then("^the \"([^\"]*)\" (?:page |)is opened$")
 	public void iMOn(String pageName) {
-		WebPage page = PAGES.get(pageName);
-		page.shouldBeOpened();
+		getPage(pageName).shouldBeOpened();
 	}
 	@Then("^the \"([^\"]*)\" (?:page |)is opened with params \"([^\"]*)\"$")
 	public void pageOpenedParams(String pageName, Object params) {
-		WebPage page = PAGES.get(pageName);
-		page.shouldBeOpened(params);
+		getPage(pageName).shouldBeOpened(params);
 	}
 	@Then("^the \"([^\"]*)\" label text equals to \"([^\"]*)\"$")
 	public void labelTextEquals(String name, String value) {

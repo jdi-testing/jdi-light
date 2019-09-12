@@ -30,8 +30,8 @@ import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.elements.composite.WebPage.addPage;
 import static com.epam.jdi.light.elements.init.InitActions.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.addPage;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -153,9 +153,13 @@ public class PageFactory {
     private static void initWithConstructor(SiteInfo info) {
         try {
             info.instance = create(info.type());
-        } catch (Exception ignore) {
+        } catch (Exception exception) {
             try {
-                info.instance = create(info.type(), getDriver(info.driverName));
+                String msg = exception.getMessage();
+                if (msg.contains("has no empty constructors")
+                    || msg.contains("Can't init class. Class Type is null"))
+                    info.instance = create(info.type(), getDriver(info.driverName));
+                throw exception(msg);
             } catch (Exception ex) {
                 throw exception("Can't create field '%s' instance of type '%s'. %sException: %s",
                         info.name(), info.type(), LINE_BREAK, safeException(ex));
@@ -170,18 +174,18 @@ public class PageFactory {
                 return (T)(info.instance = firstRule.value.func.execute(info));
             } catch (Exception ex) {
                 throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'.%s %s",
-                        firstRule.key, info.name(), info.parentName(), LINE_BREAK, safeException(ex));
+                    firstRule.key, info.name(), info.parentName(), LINE_BREAK, safeException(ex));
             }
         else
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES).",
-                    info.name());
+                info.name());
     }
+    /*
     private static void initWebPage(WebPage webPage) {
         webPage.driverName = DRIVER_NAME;
         webPage.updatePageData(webPage.getClass().getAnnotation(Url.class),
                 webPage.getClass().getAnnotation(Title.class));
-        addPage(webPage);
-    }
+    }*/
     private static <T> T getPageObject(WebDriver driver, Class<T> pageClassToProxy) {
         try {
             return create(pageClassToProxy, driver);
@@ -210,11 +214,12 @@ public class PageFactory {
     }
 
     private static void initPage(Object page) {
-        SiteInfo info = new SiteInfo(DRIVER_NAME)
-            .set(s->s.instance = page);
-        if (isClass(page.getClass(), WebPage.class))
+        SiteInfo info = new SiteInfo(DRIVER_NAME, page);
+        SETUP_RULES.get("Page").action.execute(info);
+        SETUP_RULES.get("PageObject").action.execute(info);
+        /*if (isClass(page.getClass(), WebPage.class))
             initWebPage((WebPage) page);
-        initElements(info);
+        initElements(info);*/
     }
 
     // region Selenium PageFactory
