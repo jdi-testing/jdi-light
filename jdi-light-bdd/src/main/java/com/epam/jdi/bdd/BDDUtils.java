@@ -8,20 +8,28 @@ import com.google.gson.GsonBuilder;
 import cucumber.api.DataTable;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 
 /**
  * Created by Dmitry_Lebedev1 on 1/13/2016.
  */
-public final class Utils {
-    public static final String HTML5_PAGE_FOLDER =
-            System.getProperty("user.dir") + "/src/test/resources/html5page.json";
-    private Utils() { }
+public final class BDDUtils {
+    public static final String PAGE_OBGECTS_DIR =
+		System.getProperty("user.dir") + "/src/test/resources/page/objects";
+    private BDDUtils() { }
 
 	public static Map<String, String> deserializeJsonToMap(String jsonName) {	
 		Gson gson = (new GsonBuilder()).create();
@@ -33,7 +41,7 @@ public final class Utils {
 
     public static String readFileData(String filePath) {
         String data;
-	    try(InputStream inputStream = Utils.class.getResourceAsStream(filePath)) {
+	    try(InputStream inputStream = BDDUtils.class.getResourceAsStream(filePath)) {
 		    data = readFromInputStream(inputStream);
 	    } catch (IOException e) {
 	    	throw exception("Can't read from stream!");
@@ -63,15 +71,36 @@ public final class Utils {
 		return MapArray.toMapArray(deserializeJsonToMap(jsonName));
 	}
 
+	static List<String> scanFolder(String folderName) {
+    	try {
+			return Files.walk(Paths.get(folderName))
+					.filter(Files::isRegularFile)
+					.map(f -> f.toAbsolutePath().toString())
+					.collect(Collectors.toList());
+		} catch (Exception ex) { throw exception("Can't get element: " + safeException(ex)); }
+	}
+	static MapArray<String, String> elements = new MapArray<>();
+    static void getElements() {
+		List<String> filePaths = scanFolder(PAGE_OBGECTS_DIR);
+		elements = new MapArray<>();
+		for (String filePath : filePaths)
+			try {
+				elements.addAll(new ObjectMapper().readValue(new File(filePath), HashMap.class));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
+
     static UIElement element(String locatorName) {
-        HashMap<String, String> result = new HashMap<>();
-        try {
-            result = new ObjectMapper().readValue(new File(HTML5_PAGE_FOLDER), HashMap.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result.get(locatorName) != null ? $(result.get(locatorName)) :
-                locatorName.matches("[A-Z].*")
-                    ? new UIElement().setName(locatorName) : $(locatorName);
+    	if (!locatorName.matches("[A-Z].*"))
+    		return $(locatorName);
+		if (elements.size() == 0)
+			getElements();
+		return elements.keys().contains(locatorName)
+			? $(elements.get(locatorName))
+			: new UIElement().setName(locatorName);
     }
+
+
+
 }

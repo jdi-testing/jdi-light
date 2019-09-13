@@ -24,6 +24,12 @@ public class EntitiesCollection {
     public static void addPage(WebPage page) {
         PAGES.update(page.getName(), page);
     }
+    public static void updatePage(WebPage page) {
+        String className = page.getClass().getSimpleName();
+        if (PAGES.keys().contains(className))
+            PAGES.removeByKey(className);
+        PAGES.update(page.getName(), page);
+    }
     public static WebPage getPage(String pageName) {
         WebPage page = PAGES.get(pageName);
         if (page == null)

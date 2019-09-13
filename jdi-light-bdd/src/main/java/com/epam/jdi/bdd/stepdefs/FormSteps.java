@@ -6,8 +6,8 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static com.epam.jdi.bdd.Utils.getMapFromJson;
-import static com.epam.jdi.bdd.Utils.getMapFromTable;
+import static com.epam.jdi.bdd.BDDUtils.getMapFromJson;
+import static com.epam.jdi.bdd.BDDUtils.getMapFromTable;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
 public class FormSteps {

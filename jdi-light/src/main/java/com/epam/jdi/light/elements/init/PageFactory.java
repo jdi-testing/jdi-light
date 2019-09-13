@@ -180,12 +180,12 @@ public class PageFactory {
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES).",
                 info.name());
     }
-    /*
     private static void initWebPage(WebPage webPage) {
         webPage.driverName = DRIVER_NAME;
         webPage.updatePageData(webPage.getClass().getAnnotation(Url.class),
                 webPage.getClass().getAnnotation(Title.class));
-    }*/
+        addPage(webPage);
+    }
     private static <T> T getPageObject(WebDriver driver, Class<T> pageClassToProxy) {
         try {
             return create(pageClassToProxy, driver);
@@ -215,11 +215,9 @@ public class PageFactory {
 
     private static void initPage(Object page) {
         SiteInfo info = new SiteInfo(DRIVER_NAME, page);
-        SETUP_RULES.get("Page").action.execute(info);
-        SETUP_RULES.get("PageObject").action.execute(info);
-        /*if (isClass(page.getClass(), WebPage.class))
+        if (isClass(page.getClass(), WebPage.class))
             initWebPage((WebPage) page);
-        initElements(info);*/
+        initElements(info);
     }
 
     // region Selenium PageFactory
