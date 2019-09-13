@@ -2,6 +2,7 @@ package io.github.epam.bootstrap.tests.common;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -47,8 +48,11 @@ public class JumbotronTests extends TestsInit {
     public void clickTest() {
         learnMoreBtn.click();
         ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
-        WebDriverFactory.getDriver().switchTo().window(tabs.get(1));
+        WebDriver driver = WebDriverFactory.getDriver();
+        driver.switchTo().window(tabs.get(1));
         assertEquals("https://getbootstrap.com/docs/4.3/components/jumbotron/", getUrl());
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
     }
 
     @Test
