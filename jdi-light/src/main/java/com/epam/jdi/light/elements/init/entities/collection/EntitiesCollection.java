@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -14,6 +15,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class EntitiesCollection {
     public static MapArray<String, WebPage> PAGES = new MapArray<>();
@@ -39,27 +41,48 @@ public class EntitiesCollection {
                     print(PAGES.keys()));
         return page;
     }
-    public static <T> T getUI(String name, Class<T> type) {
-        try {
-            return (T) getUI(name);
-        } catch (Exception ex) {
-            throw exception("Can't convert element to %s", type.getSimpleName());
+    public static void addElement(Object jdi) {
+        if (isInterface(jdi.getClass(), ICoreElement.class)) {
+            ICoreElement element = (ICoreElement) jdi;
+            if (ELEMENTS.has(element.getName()))
+                ELEMENTS.get(element.getName()).add(jdi);
+            else {
+                List<Object> newList = new ArrayList<>();
+                newList.add(element);
+                ELEMENTS.add(element.getName(), newList);
+            }
         }
     }
-    public static UIElement getUI(String name) {
+
+    public static <T> T getUI(String name, Class<T> type) {
         if (ELEMENTS.has(name)) {
             List<Object> elements = ELEMENTS.get(name);
             if (elements.size() == 1)
-                return ((ICoreElement) elements.get(0)).core();
+                return (T) elements.get(0);
             ICoreElement element = (ICoreElement) LinqUtils.first(elements,
-                    el -> {
-                        WebPage page = ((ICoreElement) el).base().getPage();
-                        return page != null && page.getName().equals(getCurrentPage());
-                    });
+                el -> {
+                    WebPage page = ((ICoreElement) el).base().getPage();
+                    return page != null && page.getName().equals(getCurrentPage());
+                });
             if (element != null)
-                return element.core();
+                return (T)element;
         }
-        throw exception("Can't find %s element", name);
+        throw exception("Can't find '%s' element", name);
+    }
+    public static ICoreElement getUI(String name) {
+        if (ELEMENTS.has(name)) {
+            List<Object> elements = ELEMENTS.get(name);
+            if (elements.size() == 1)
+                return ((ICoreElement) elements.get(0));
+            ICoreElement element = (ICoreElement) LinqUtils.first(elements,
+                el -> {
+                    WebPage page = ((ICoreElement) el).base().getPage();
+                    return page != null && page.getName().equals(getCurrentPage());
+                });
+            if (element != null)
+                return element;
+        }
+        throw exception("Can't find '%s' element", name);
     }
 
     public static UIElement getUI(String name, String section) {

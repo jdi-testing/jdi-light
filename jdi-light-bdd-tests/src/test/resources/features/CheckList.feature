@@ -57,8 +57,7 @@ Feature: CheckList
     Then in "Weather" checklist checked element is "Sunny"
 
   Scenario: Disable element test
-    When I Select fields from "Weather":
-    |Disabled|
+    When I select "Weather" disabled option "Disabled"
     Then the "Weather" checklist value is "Hot option"
 
   Scenario: Validation test

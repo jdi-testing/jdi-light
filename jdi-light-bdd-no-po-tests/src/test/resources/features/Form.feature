@@ -1,13 +1,15 @@
 @form
 Feature: Form
 
+  Background:
+    Given I logged in with name "Roman" and password "Jdi1234"
+    And I open page by url "https://jdi-testing.github.io/jdi-light/contacts.html"
+
   Scenario: fill Contact Form from json
-    Given I open "Contact Form Page"
     When submit form "Contact Form" with "Roman Contacts"
     Then the form "Contact Form" data equals to "Roman Contacts"
   
   Scenario: fill Contact Form
-    Given I open "Contact Form Page"
     When submit form "Contact Form" with data:
       |name|Roman|
       |lastName|Iovlev|

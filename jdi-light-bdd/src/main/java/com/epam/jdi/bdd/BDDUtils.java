@@ -1,6 +1,14 @@
 package com.epam.jdi.bdd;
 
+import com.epam.jdi.light.asserts.core.IsAssert;
+import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.asserts.generic.ITextAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.tools.map.MapArray;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -21,6 +29,7 @@ import java.util.stream.Stream;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 
 /**
@@ -101,6 +110,24 @@ public final class BDDUtils {
 			: new UIElement().setName(locatorName);
     }
 
+    public static UIElement core(String name) {
+		return getUI(name).core();
+	}
+	public static IsAssert isAssert(String name) {
+		return ((HasAssert<IsAssert>)getUI(name, HasAssert.class)).is();
+	}
+	public static UIAssert uiAssert(String name) {
+		return ((HasAssert<UIAssert>)getUI(name, HasAssert.class)).is();
+	}
+	public static IsInput input(String name) {
+		return getUI(name, IsInput.class);
+	}
+	public static Label label(String name) {
+		return getUI(name, HasLabel.class).label();
+	}
+    public static ITextAssert textAssert(String name) {
+		return (ITextAssert)getUI(name, HasAssert.class).is();
+	}
 
 
 }

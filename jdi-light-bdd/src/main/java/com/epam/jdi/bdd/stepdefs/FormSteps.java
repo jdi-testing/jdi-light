@@ -8,14 +8,25 @@ import cucumber.api.java.en.When;
 
 import static com.epam.jdi.bdd.BDDUtils.getMapFromJson;
 import static com.epam.jdi.bdd.BDDUtils.getMapFromTable;
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
 public class FormSteps {
-	public static Safe<String> lastForm = new Safe<>(() -> null);
-	private static Form getForm(String name) {
-		Form form = getUI(name, Form.class);
-		lastForm.set(name);
+	public static Safe<Form> lastForm = new Safe<>(() -> null);
+	static Form getForm(String name) {
+		Form form = null;
+		try {
+			form = getUI(name, Form.class);
+		} catch (Exception ignore) { }
+		if (form == null)
+			form = new Form<>().setup(Form.class, cl->cl.setName(name));
+		lastForm.set(form);
 		return form;
+	}
+	static Form getLastForm() {
+		if (lastForm.get() != null)
+			return lastForm.get();
+		throw exception("You should execute form action with name before steps without form name");
 	}
 
 	@When("^(?:I |)fill form \"([^\"]*)\" with data:$")
@@ -29,7 +40,7 @@ public class FormSteps {
 	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) " +
 			"form$")
 	public void submitDataForm() {
-		getForm(lastForm.get()).submit();
+		getLastForm().submit();
 	}
 	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) " +
 			"form \"([^\"]*)\" with data:$")
@@ -38,7 +49,7 @@ public class FormSteps {
 	}
 	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) form using button \"([^\"]*)\"$")
 	public void submitForm(String buttonName) {
-		getForm(lastForm.get()).pressButton(buttonName);
+		getLastForm().pressButton(buttonName);
 	}
 	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) "
 			+ "form \"([^\"]*)\" with \"([^\"]*)\"$")

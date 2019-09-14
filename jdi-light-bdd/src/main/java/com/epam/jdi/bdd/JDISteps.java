@@ -1,16 +1,24 @@
 package com.epam.jdi.bdd;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.base.HasCheck;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.IClickable;
+import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.Dimension;
 
+import static com.epam.jdi.bdd.BDDUtils.*;
 import static com.epam.jdi.light.common.ElementArea.JS;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
+import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 
@@ -31,51 +39,51 @@ public class JDISteps {
     }
 	@When("^(?:I |)click on \"([^\"]*)\"$")
     public void click(String name) {
-		getUI(name).click();
+		getUI(name, IClickable.class).click();
     }
 	@When("^(?:I |)send keys \"([^\"]*)\" to \"([^\"]*)\"$")
 	public void sendKeys(String value, String name) {
-		getUI(name).sendKeys(value);
+		input(name).sendKeys(value);
 	}
 	@When("^(?:I |)check \"([^\"]*)\"$")
 	public void check(String name) {
-		getUI(name).check();
+		getUI(name, HasCheck.class).check();
 	}
 	@When("^(?:I |)uncheck \"([^\"]*)\"$")
 	public void uncheck(String name) {
-		getUI(name).uncheck();
+		getUI(name, HasCheck.class).uncheck();
 	}
 	@When("^(?:I |)clear \"([^\"]*)\"$")
 	public void clear(String name) {
-		getUI(name).clear();
+		input(name).clear();
 	}
 	@When("^(?:I |)click with JS on \"([^\"]*)\"$")
 	public void jsClick(String name) {
-		getUI(name).click(JS);
+		getUI(name, HasClick.class).click(JS);
 	}
 	@When("^(?:I |)input \"([^\"]*)\" in \"([^\"]*)\"$")
-	public void input(String value, String name) {
-		getUI(name).input(value);
+	public void inputText(String value, String name) {
+		input(name).input(value);
 	}
 	@When("^(?:I |)select \"([^\"]*)\" field from \"([^\"]*)\"$")
     public void select(String value, String name) {
-        getUI(name).select(value);
+        getUI(name, ISelector.class).select(value);
     }
 	@When("^(?:I |)focus on \"([^\"]*)\"$")
 	public void focusOn(String name) {
-		getUI(name).focus();
+		input(name).focus();
 	}
 	@When("^(?:I |)set text \"([^\"]*)\" in \"([^\"]*)\"$")
 	public void setText(String value, String name) {
-		getUI(name).setText(value);
+		input(name).setText(value);
 	}
 	@When("^(?:I |)double click on \"([^\"]*)\"$")
 	public void doubleClick(String name) {
-		getUI(name).doubleClick();
+		getUI(name, HasClick.class).doubleClick();
 	}
 	@When("^(?:I |)right click on \"([^\"]*)\"$")
 	public void rightClick(String name) {
-		getUI(name).rightClick();
+		getUI(name, HasClick.class).rightClick();
 	}
 
 	@When("^(?:I |)highlight \"([^\"]*)\"$")
@@ -90,7 +98,7 @@ public class JDISteps {
 
     @When("^(?:I |)set \"([^\"]*)\" attribute \"([^\"]*)\" with value \"([^\"]*)\" element$")
 	public void setAttribute(String name, String attrName, String attrValue) {
-		getUI(name).setAttribute(attrName, attrValue);
+		core(name).setAttribute(attrName, attrValue);
 	}
 
 	@When("^(?:I |)go forward$")
@@ -126,118 +134,118 @@ public class JDISteps {
 	}
 	@Then("^the \"([^\"]*)\" label text equals to \"([^\"]*)\"$")
 	public void labelTextEquals(String name, String value) {
-		getUI(name).label().has().text(equalTo(value));
+		getUI(name, HasLabel.class).label().has().text(equalTo(value));
 	}
 
 	@Then("^the \"([^\"]*)\" label text contains \"([^\"]*)\"$")
 	public void labelTextContains(String name, String value) {
-		getUI(name).label().has().text(containsString(value));
+		label(name).has().text(containsString(value));
 	}
 
 	@Then("^the \"([^\"]*)\" label text matches to \"([^\"]*)\"$")
 	public void labelTextMatchRegex(String name, String regex) {
-		getUI(name).label().has().text(matchesPattern(regex));
+		label(name).has().text(matchesPattern(regex));
 	}
 
 	@Then("^the \"([^\"]*)\" is selected$")
 	public void isSelected(String name) {
-		getUI(name).is().selected();
+		isAssert(name).selected();
 	}
 
 	@Then("^the \"([^\"]*)\" is deselected$")
 	public void isDeselected(String name) {
-		getUI(name).is().deselected();
+		isAssert(name).deselected();
 	}
 
 	@Then("^the \"([^\"]*)\" placeholder equals to \"([^\"]*)\"$")
 	public void placeholderEquals(String name, String placeholder) {
-		getUI(name).is().attr("placeholder", placeholder);
+		isAssert(name).attr("placeholder", placeholder);
 	}
 
 	@Then("^the \"([^\"]*)\" placeholder contains \"([^\"]*)\"$")
 	public void placeholderContains(String name, String placeholder) {
-		getUI(name).is().attr("placeholder", containsString(placeholder));
+		isAssert(name).attr("placeholder", containsString(placeholder));
 	}
 
 	@Then("^the \"([^\"]*)\" placeholder matches to \"([^\"]*)\"$")
 	public void placeholderMatchRegex(String name, String regex) {
-		getUI(name).is().attr("placeholder", matchesPattern(regex));
+		isAssert(name).attr("placeholder", matchesPattern(regex));
 	}
 
 	@Then("^the \"([^\"]*)\" text equals to \"([^\"]*)\"$")
 	public void textEquals(String name, String value) {
-		getUI(name).is().text(value);
+		textAssert(name).text(value);
 	}
 
 	@Then("^the \"([^\"]*)\" text contains \"([^\"]*)\"$")
 	public void textContains(String name, String value) {
-		getUI(name).is().text(containsString(value));
+		textAssert(name).text(containsString(value));
 	}
 
 	@Then("^the \"([^\"]*)\" text matches to \"([^\"]*)\"$")
 	public void textMatchRegex(String name, String regex) {
-		getUI(name).is().text(matchesPattern(regex));
+		textAssert(name).text(matchesPattern(regex));
 	}
 
 	@Then("^the \"([^\"]*)\" attribute \"([^\"]*)\" equals to \"([^\"]*)\"$")
 	public void attributeEquals(String name, String attrName, String attrValue) {
-		getUI(name).is().attr(attrName, attrValue);
+		isAssert(name).attr(attrName, attrValue);
 	}
 
 	@Then("^the \"([^\"]*)\" attribute \"([^\"]*)\" contains \"([^\"]*)\"$")
 	public void attributeContains(String name, String attrName, String attrValue) {
-		getUI(name).is().attr(attrName, containsString(attrValue));
+		isAssert(name).attr(attrName, containsString(attrValue));
 	}
 
 	@Then("^the \"([^\"]*)\" attribute \"([^\"]*)\" matches to \"([^\"]*)\"$")
 	public void attributeMatchRegex(String name, String attrName, String regex) {
-		getUI(name).is().attr(attrName, matchesPattern(regex));
+		isAssert(name).attr(attrName, matchesPattern(regex));
 	}
 
 	@Then("^the \"([^\"]*)\" css \"([^\"]*)\" equals to \"([^\"]*)\"$")
 	public void cssEquals(String name, String attrName, String cssValue) {
-		getUI(name).is().css(attrName, cssValue);
+		isAssert(name).css(attrName, cssValue);
 	}
 	@Then("^the \"([^\"]*)\" css \"([^\"]*)\" contains \"([^\"]*)\"$")
 	public void cssContains(String name, String css, String cssValue) {
-		getUI(name).is().css(css, containsString(cssValue));
+		isAssert(name).css(css, containsString(cssValue));
 	}
 
 	@Then("^the \"([^\"]*)\" css \"([^\"]*)\" matches to \"([^\"]*)\"$")
 	public void cssMatchRegex(String name, String css, String regex) {
-		getUI(name).is().css(css, matchesPattern(regex));
+		isAssert(name).css(css, matchesPattern(regex));
 	}
 	@Then("^the \"([^\"]*)\" is enabled$")
 	public void isEnabled(String name) {
-		getUI(name).is().enabled();
+		uiAssert(name).enabled();
 	}
 
 	@Then("^the \"([^\"]*)\" is disabled$")
 	public void isDisabled(String name) {
-		getUI(name).is().disabled();
+		uiAssert(name).disabled();
 	}
 
 	@Then("^the \"([^\"]*)\" is displayed$")
 	public void isDisplayed(String name) {
-		getUI(name).is().displayed();
+		uiAssert(name).displayed();
 	}
 
 	@Then("^the \"([^\"]*)\" is hidden$")
 	public void isHidden(String name) {
-		getUI(name).is().hidden();
+		uiAssert(name).hidden();
 	}
 	@Then("^the \"([^\"]*)\" disappear$")
 	public void isDisappear(String name) {
-		getUI(name).is().disappear();
+		uiAssert(name).disappear();
 	}
 	@Then("^the \"([^\"]*)\" does not appear$")
 	public void isNotAppear(String name) {
-		getUI(name).is().notAppear();
+		uiAssert(name).notAppear();
 	}
 
 	@Then("^the \"([^\"]*)\" does not appear during \"([^\"]*)\"$")
 	public void isNotAppear(String name, int seconds) {
-		getUI(name).is().notAppear(seconds);
+		uiAssert(name).notAppear(seconds);
 	}
 	//#endregion
 

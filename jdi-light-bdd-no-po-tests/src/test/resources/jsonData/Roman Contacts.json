@@ -1,11 +1,11 @@
 {
-  "name": "Roman", 
-  "lastName": "Iovlev", 
-  "position": "ChiefQA", 
-  "number": "654321",
-  "passportSeria": "1234", 
-  "description": "JDI - awesome UI automation tool", 
-  "acceptConditions": "true", 
-  "gender": "Female", 
-  "religion": "Other"
+  "Name": "Roman",
+  "Last Name": "Iovlev",
+  "Position": "ChiefQA",
+  "Passport Number": "654321",
+  "Passport Seria": "1234",
+  "Description": "JDI - awesome UI automation tool",
+  "Accept Conditions": "true",
+  "Gender": "Female",
+  "Religion": "Other"
 } 

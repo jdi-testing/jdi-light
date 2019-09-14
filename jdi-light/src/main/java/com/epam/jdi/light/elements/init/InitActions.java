@@ -30,8 +30,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.addPage;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.updatePage;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
@@ -93,7 +92,7 @@ public class InitActions {
     public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {
         if (jdi.parent == null)
             jdi.setParent(info.parent);
-        if (isBlank(jdi.name))
+        if (!jdi.name.matches("[A-Z].*]"))
             jdi.setName(info);
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
         return jdi;

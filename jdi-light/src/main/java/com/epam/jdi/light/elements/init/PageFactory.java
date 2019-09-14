@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
+import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.settings.WebSettings;
@@ -31,6 +32,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.init.InitActions.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.addElement;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.addPage;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
 import static com.epam.jdi.tools.LinqUtils.filter;
@@ -86,8 +88,10 @@ public class PageFactory {
     }
     private static void setFieldWithInstance(SiteInfo info, Object obj) throws IllegalAccessException {
         Object instance = getElementInstance(info);
-        if (instance != null)
+        if (instance != null) {
+            addElement(instance);
             info.field.set(obj, instance);
+        }
     }
     private static Object getElementInstance(SiteInfo info) {
         info.instance = getValueField(info.field, info.parent);
