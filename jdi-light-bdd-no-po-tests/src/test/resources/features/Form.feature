@@ -6,59 +6,27 @@ Feature: Form
     And I open page by url "https://jdi-testing.github.io/jdi-light/contacts.html"
 
   Scenario: fill Contact Form from json
-    When submit form "Contact Form" with "Roman Contacts"
+    When fill form "Contact Form" with "Roman Contacts"
+     And I click on "Submit Button" element
     Then the form "Contact Form" data equals to "Roman Contacts"
-  
-  Scenario: fill Contact Form
-    When submit form "Contact Form" with data:
-      |name|Roman|
-      |lastName|Iovlev|
-      |position|ChiefQA|
-      |passportNumber|654321|
-      |passportSeria|1234|
-      |description|JDI - awesome UI automation tool|
-      |acceptConditions|true|
-      |gender|Female|
-      |religion|Other|
-    Then the form "Contact Form" data equals to:
-      |name|Roman|
-      |lastName|Iovlev|
-      |position|ChiefQA|
-      |passportNumber|654321|
-      |passportSeria|1234|
-      |description|JDI - awesome UI automation tool|
-      |acceptConditions|true|
-      |gender|Female|
-      |religion|Other|
-    
-  Scenario: fill Contact Form Custom
-    Given I open "Contact Form Page"
-    When fill form "Contact Form" with data:
-      |name|Roman|
-      |lastName|Iovlev|
-      |position|ChiefQA|
-      |passportNumber|654321|
-      |passportSeria|1234|
-      |description|JDI - awesome UI automation tool|
-      |acceptConditions|true|
-      |gender|Female|
-      |religion|Other|
-    And submit form
-    Then the form "Contact Form" data equals to:
-      |name|Roman|
-      |lastName|Iovlev|
-      |position|ChiefQA|
-      |passportNumber|654321|
-      |passportSeria|1234|
-      |description|JDI - awesome UI automation tool|
-      |acceptConditions|true|
-      |gender|Female|
-      |religion|Other|
-    
-  Scenario: is displayed
-    Given I open "Contact Form Page"
-    Then the "Contact Form" is displayed
-    
 
-    
-  
+  Scenario: fill Contact Form Custom
+    When fill form "Contact Form" with data:
+      | Name              | Roman |
+      | Last Name         | Iovlev |
+      | Position          | ChiefQA |
+      | Passport Number   | 654321 |
+      | Passport Seria    | 1234 |
+      | Description       | JDI - awesome UI automation tool |
+      | Gender            | Female |
+      | Religion          | Other |
+    And I click on "Submit Button" element
+    Then the form "Contact Form" data equals to:
+      | Name              | Roman |
+      | Last Name         | Iovlev |
+      | Position          | ChiefQA |
+      | Passport Number   | 654321 |
+      | Passport Seria    | 1234 |
+      | Description       | JDI - awesome UI automation tool |
+      | Gender            | Female |
+      | Religion          | Other |
