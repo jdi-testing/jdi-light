@@ -81,9 +81,9 @@ public final class BDDUtils {
 	static List<String> scanFolder(String folderName) {
     	try {
 			return Files.walk(Paths.get(folderName))
-					.filter(Files::isRegularFile)
-					.map(f -> f.toAbsolutePath().toString())
-					.collect(Collectors.toList());
+				.filter(Files::isRegularFile)
+				.map(f -> f.toAbsolutePath().toString())
+				.collect(Collectors.toList());
 		} catch (Exception ex) { throw exception("Can't get element: " + safeException(ex)); }
 	}
 	static MapArray<String, String> elements = new MapArray<>();
