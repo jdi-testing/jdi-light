@@ -1,9 +1,7 @@
 package com.epam.jdi.bdd;
 
 import com.epam.jdi.light.asserts.core.IsAssert;
-import com.epam.jdi.light.asserts.generic.HasAssert;
-import com.epam.jdi.light.asserts.generic.ITextAssert;
-import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.asserts.generic.*;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
@@ -114,10 +112,16 @@ public final class BDDUtils {
 		return getUI(name).core();
 	}
 	public static IsAssert isAssert(String name) {
-		return ((HasAssert<IsAssert>)getUI(name, HasAssert.class)).is();
+		return getUI(name).core().is();
 	}
-	public static UIAssert uiAssert(String name) {
-		return ((HasAssert<UIAssert>)getUI(name, HasAssert.class)).is();
+	public static SelectedAssert selectedAssert(String name) {
+		return ((HasAssert<SelectedAssert>)getUI(name, SelectedAssert.class)).is();
+	}
+	public static CommonAssert uiAssert(String name) {
+		return ((HasAssert<CommonAssert>)getUI(name, HasAssert.class)).is();
+	}
+	public static UISelectAssert selectAssert(String name) {
+		return ((HasAssert<UISelectAssert>)getUI(name, HasAssert.class)).is();
 	}
 	public static IsInput input(String name) {
 		return getUI(name, IsInput.class);

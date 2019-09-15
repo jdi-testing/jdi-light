@@ -149,12 +149,12 @@ public class JDISteps {
 
 	@Then("^the \"([^\"]*)\" is selected$")
 	public void isSelected(String name) {
-		isAssert(name).selected();
+		selectedAssert(name).selected();
 	}
 
 	@Then("^the \"([^\"]*)\" is deselected$")
 	public void isDeselected(String name) {
-		isAssert(name).deselected();
+		selectedAssert(name).deselected();
 	}
 
 	@Then("^the \"([^\"]*)\" placeholder equals to \"([^\"]*)\"$")

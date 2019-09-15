@@ -6,6 +6,7 @@ import cucumber.api.java.en.When;
 
 import java.util.List;
 
+import static com.epam.jdi.bdd.BDDUtils.selectAssert;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.tools.LinqUtils.toIntArray;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -35,27 +36,27 @@ public class MultiDropDownSteps {
     }
     @Then("^the \"([^\"]*)\" selected value is \"([^\"]*)\"$")
     public void theSelectedValueIs(String name, String value) {
-        assertEquals(multiDropDown(name).selected(), value);
+        selectAssert(name).selected(value);
     }
     @Then("^the \"([^\"]*)\" values has item \"([^\"]*)\"$")
     public void theValuesHasItem(String name, String value) {
-        multiDropDown(name).is().values(hasItem(value));
+        selectAssert(name).values(hasItem(value));
     }
 
     @Then("^the \"([^\"]*)\" has disabled item \"([^\"]*)\"$")
     public void theHasDisabledItem(String name, String value) {
-        multiDropDown(name).is().disabled(hasItem(value));
+        selectAssert(name).disabled(hasItem(value));
     }
     @Then("^the \"([^\"]*)\" has no enabled item \"([^\"]*)\"$")
     public void theHasNotEnabledItem(String name, String value) {
-        multiDropDown(name).is().enabled(not(hasItem(value)));
+        selectAssert(name).enabled(not(hasItem(value)));
     }
     @Then("^the \"([^\"]*)\" has enabled items:$")
     public void theHasEnabledItems(String name, List<String> values) {
-        multiDropDown(name).is().enabled(hasItems(values.toArray(new String[0])));
+        selectAssert(name).enabled(hasItems(values.toArray(new String[0])));
     }
     @Then("^the \"([^\"]*)\" contains items:$")
     public void theContainsItems(String name, List<String> values) {
-        multiDropDown(name).assertThat().values(containsInAnyOrder(values.toArray(new String[0])));
+        selectAssert(name).values(containsInAnyOrder(values.toArray(new String[0])));
     }
 }
