@@ -526,9 +526,12 @@ function includeSideBar() {
                     <li ui="label" index="2"><a href="bootstrap.html">\
                         <span>Bootstrap</span>\
                     </a></li>\
-					<li ui="label" index="3"><a href="bootstrap_form.html">\
-						<span>Bootstrap form</span>\
-					</a></li>\
+					          <li ui="label" index="3"><a href="bootstrap_form.html">\
+						            <span>Bootstrap form</span>\
+					          </a></li>\
+					          <li ui="label" index="4"><a href="react-ant.html">\
+		                    <span>React Ant</span>\
+                    </a></li>\
                 </ul>\
             </li>\
         </ul>\
@@ -596,7 +599,7 @@ function includePagination() {
 		paginator += '<li' + str + '><a href="' + pages[i] + '">' + (i+1) + '</a></li>'
 	}
 	paginator += '<li class="last'+disable_last+'"><a href="'+last+'">Last</a></li> <li class="next'+disable_last+'"><a href="'+next+'"><i class="fa fa-long-arrow-right"></i></a></li> </ul>'
-	$('div.pagination').replaceWith(paginator);		
+	$('div.pagination').replaceWith(paginator);
 
 }
 
