@@ -5,7 +5,7 @@ import cucumber.api.java.en.Then;
 
 import static com.epam.jdi.bdd.Utils.getUI;
 
-public class DropDownSteps {
+public class DropdownSteps {
     /*
     TODO: Step for Expand, Close, Size and other functionality
      */
