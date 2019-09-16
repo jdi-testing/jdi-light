@@ -2,13 +2,19 @@ package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.NumberSelector;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.hamcrest.Matchers.*;
 
 public class NumberSelectorSteps {
 	public static NumberSelector numberSelector(String name) { return getUI(name, NumberSelector.class); }
-	
+
+	@When("^(?:I |)set number \"([^\"]*)\" in \"([^\"]*)\"$")
+	public void setNumber(String value, String name) {
+		numberSelector(name).setNumber(value);
+	}
+
 	@Then("^the \"([^\"]*)\" number selector value equals to \"([^\"]*)\"$")
 	public void getValue(String name, String value) {
 		numberSelector(name).has().number(is(Double.valueOf((value))));

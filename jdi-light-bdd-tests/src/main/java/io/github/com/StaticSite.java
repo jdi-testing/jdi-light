@@ -1,7 +1,10 @@
 package io.github.com;
 
+import com.epam.jdi.light.elements.complex.JList;
+import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import io.github.com.custom.MenuItem;
 import io.github.com.pages.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
@@ -21,6 +24,7 @@ public class StaticSite {
 
 	@UI("header") public static Header header;
 	@UI("footer") public static Footer footer;
+	@UI(".sidebar-menu span") public static Menu menu;
 
 	@Frame("iframe") public static HomePageFrame iframe;
 	public static GithubPage githubPage;

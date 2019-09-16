@@ -16,8 +16,4 @@ public class ComboboxSteps {
     public void comboboxSelect(int index, String name) {
         combobox(name).select(index);
     }
-    @Then("^the \"([^\"]*)\" combobox selected value is \"([^\"]*)\"$")
-    public void comboboxSelectedValue(String name, String value) {
-        assertThat(combobox(name).selected(), is(value));
-    }
 }
