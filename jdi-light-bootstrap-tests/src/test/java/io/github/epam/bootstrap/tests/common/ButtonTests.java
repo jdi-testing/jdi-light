@@ -45,11 +45,11 @@ public class ButtonTests extends TestsInit {
         redButton.click();
         validateAlert(is("Red button"));
     }
-    @Test(enabled = false)
+
+    @Test
     public void disableButtonTest() {
         try {
-            // TODO add disabled BS button on site
-            //  disabledButton.click();
+            disabledButton.click();
             fail("Disabled button should not work, but work");
         } catch (Exception ex) {
             assertThat(safeException(ex),
@@ -80,7 +80,6 @@ public class ButtonTests extends TestsInit {
             .cssClass("btn btn-danger")
             .attr("type", "button")
             .tag(is("button"));
-        // TODO add disabled BS button on site
         disabledButton.is().text(containsString("Disabled button"));
         // disabledButtonInput.is().text(containsString("Disabled Button"));
         disabledButton.is().disabled();
