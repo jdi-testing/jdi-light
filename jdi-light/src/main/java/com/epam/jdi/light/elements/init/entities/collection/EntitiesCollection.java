@@ -46,10 +46,11 @@ public class EntitiesCollection {
         if (page == null)
             page = PAGES.get(pageName + " Page");
         if (page == null) {
-            if (getMapFromJson("pages").get(pageName) == null) {
+            MapArray<String, String> elements = getMapFromJson("pages");
+            if (elements.get(pageName) == null) {
                 throw exception("Can't find page with name %s. Available pages: %s", pageName,
                         print(PAGES.keys()));
-            } else page = new WebPage(DOMAIN + getMapFromJson("pages").get(pageName));
+            } else page = new WebPage(DOMAIN + elements.get(pageName));
         }
         return page;
     }
