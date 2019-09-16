@@ -1,73 +1,67 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import static com.epam.jdi.bdd.Utils.getMapFromJson;
-import static com.epam.jdi.bdd.Utils.getMapFromTable;
-import static com.epam.jdi.bdd.Utils.getUI;
-
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.tools.Safe;
-
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import static com.epam.jdi.bdd.BDDUtils.getMapFromJson;
+import static com.epam.jdi.bdd.BDDUtils.getMapFromTable;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+
 public class FormSteps {
-	public static Safe<String> lastForm = new Safe<>(() -> null);
+	public static Safe<Form> lastForm = new Safe<>(() -> null);
+	static Form getForm(String name) {
+		Form form = null;
+		try {
+			form = getUI(name, Form.class);
+		} catch (Exception ignore) { }
+		if (form == null)
+			form = new Form<>().setup(Form.class, cl->cl.setName(name));
+		lastForm.set(form);
+		return form;
+	}
+	static Form getLastForm() {
+		if (lastForm.get() != null)
+			return lastForm.get();
+		throw exception("You should execute form action with name before steps without form name");
+	}
 
 	@When("^(?:I |)fill form \"([^\"]*)\" with data:$")
 	public void fillForm(String name, DataTable data) {
-		Form fm = getForm(name);
-		fm.fill(getMapFromTable(data));
+		getForm(name).fill(getMapFromTable(data));
 	}
-	
 	@When("^(?:I |)fill form \"([^\"]*)\" with \"([^\"]*)\"$")
 	public void fillForm(String name, String jsonName) {
-		Form fm = getForm(name);
-		fm.fill(getMapFromJson(jsonName));
+		getForm(name).fill(getMapFromJson(jsonName));
 	}
-
 	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) " +
 			"form$")
 	public void submitDataForm() {
-		Form fm = getForm(lastForm.get());
-		fm.submit();
+		getLastForm().submit();
 	}
-	
 	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) " +
 			"form \"([^\"]*)\" with data:$")
 	public void submitDataForm(String name, DataTable data) {
-		Form fm = getForm(name);
-		fm.submit(getMapFromTable(data));
+		getForm(name).submit(getMapFromTable(data));
 	}
-	
 	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) form using button \"([^\"]*)\"$")
 	public void submitForm(String buttonName) {
-		Form fm = getForm(lastForm.get());
-		fm.pressButton(buttonName);
+		getLastForm().pressButton(buttonName);
 	}
-	
 	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) "
 			+ "form \"([^\"]*)\" with \"([^\"]*)\"$")
 	public void submitForm(String name, String jsonName) {
-		Form fm = getForm(name);
-		fm.submit(getMapFromJson(jsonName));
+		getForm(name).submit(getMapFromJson(jsonName));
 	}
-
 	@Then("^the form \"([^\"]*)\" data equals to:$")
     public void dataEquals(String name, DataTable data) {
-		Form fm = getForm(name);
-        fm.check(getMapFromTable(data));
+		getForm(name).check(getMapFromTable(data));
     }
-	
 	@Then("^the form \"([^\"]*)\" data equals to \"([^\"]*)\"$")
     public void dataEquals(String name, String jsonName) {
-		Form fm = getForm(name);
-        fm.check(getMapFromJson(jsonName));
+		getForm(name).check(getMapFromJson(jsonName));
     }
-
-	private static Form getForm(String name) {
-		Form form = getUI(name, Form.class);
-		lastForm.set(name);
-		return form;
-	}
 }

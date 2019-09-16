@@ -42,7 +42,9 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IsD
     }
 
     @JDIAction("Check that '{name}' is displayed") @Override
-    public String selected() { return selector().selected(); }
+    public String selected() {
+        return selector().selected();
+    }
     public boolean wait(JFunc1<IsDropdown, Boolean> condition) {
         return base().timer().wait(() -> condition.execute(this));
     }
