@@ -58,6 +58,7 @@
         <module>jdi-light-bootstrap-tests</module>
         <module>jdi-light-bdd</module>
         <module>jdi-light-bdd-tests</module>
+        <module>jdi-light-bdd-no-po-tests</module>
         <module>jdi-performance</module>
     </modules>
 </project>

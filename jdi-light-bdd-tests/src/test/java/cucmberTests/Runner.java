@@ -9,38 +9,39 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static io.github.com.StaticSite.loginForm;
-import static io.github.com.StaticSite.userIcon;
+import static com.epam.jdi.light.logger.LogLevels.INFO;
+import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
+import static io.github.com.pages.Header.loginForm;
+import static io.github.com.pages.Header.userIcon;
 
 /**
- * Created by Roman Iovlev on 12.09.2019
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ * Created by Dmitry_Lebedev1 on 1/22/2016.
  */
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "classpath:features"
-        ,glue = {"com.epam.jdi.bdd", "cucmberTests"}
-        //,tags = {"test"}
+        , glue = {"com.epam.jdi.bdd", "cucmberTests"}
+//        , tags = {"@webpage"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass
-    public static void setup() {
-        SMART_SEARCH_LOCATORS.add("[ui=%s]");
+    public static void setUp() {
+    	SMART_SEARCH_LOCATORS.add("[ui=%s]");
+        logger.setLogLevel(INFO);
         initElements(StaticSite.class);
-        openUrl(DOMAIN);
+        homePage.open();
         logger.toLog("Run Tests");
         userIcon.click();
         loginForm.loginAs(DEFAULT_USER);
     }
 
     @AfterClass
-    public static void teardown() {
+    public static void shutDown() {
         killAllSeleniumDrivers();
     }
-
 }
