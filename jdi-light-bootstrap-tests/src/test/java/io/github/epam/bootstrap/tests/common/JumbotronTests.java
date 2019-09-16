@@ -10,18 +10,22 @@ import java.util.ArrayList;
 
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.jumbotronFluid;
+import static io.github.com.pages.BootstrapPage.jumbotron;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class JumbotronTests extends TestsInit {
-    private String mFluidJombotron = "FLUID JUMBOTRON\n" +
+    private String mFluidJumbotronTitle = "FLUID JUMBOTRON";
+    private String mFluidJumbotronDescription = "This is a modified jumbotron that occupies the entire horizontal space of its parent.";
+    private String mFluidJumbotron = "FLUID JUMBOTRON\n" +
             "This is a modified jumbotron that occupies the entire horizontal space of its parent.";
-    private String mHelloWorld = "HELLO, WORLD!\n" +
+    private String mJumbotronWithButtonTitle = "HELLO, WORLD!";
+    private String mJumbotronWithButtonDescription = "This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.";
+    private String mJumbotronWithButton = "HELLO, WORLD!\n" +
             "This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.\n" +
             "It uses utility classes for typography and spacing to space content out within the larger container.\n" +
             "Learn more";
@@ -34,19 +38,19 @@ public class JumbotronTests extends TestsInit {
 
     @Test
     public void getTextTest() {
-        assertEquals(jumbotronFluid.getText(), mFluidJombotron);
-        assertEquals(jumbotron.getText(), mHelloWorld);
+        assertEquals(jumbotronFluid.getText(), mFluidJumbotron);
+        assertEquals(jumbotron.getText(), mJumbotronWithButton);
     }
 
     @Test
     public void getValueTest() {
-        assertEquals(jumbotronFluid.getValue(), mFluidJombotron);
-        assertEquals(jumbotron.getValue(), mHelloWorld);
+        assertEquals(jumbotronFluid.getValue(), mFluidJumbotron);
+        assertEquals(jumbotron.getValue(), mJumbotronWithButton);
     }
 
     @Test
     public void clickTest() {
-        learnMoreBtn.click();
+        jumbotron.learnMoreBtn.click();
         ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
         WebDriver driver = WebDriverFactory.getDriver();
         driver.switchTo().window(tabs.get(1));
@@ -59,11 +63,10 @@ public class JumbotronTests extends TestsInit {
     public void isValidationTest() {
         jumbotronFluid.is().displayed();
         jumbotronFluid.is().enabled();
-        jumbotronFluid.is().text(is(mFluidJombotron));
-        jumbotronFluid.is().text(containsString("FLUID"));
+        jumbotronFluid.title.is().text(mFluidJumbotronTitle);
+        jumbotronFluid.description.is().text(mFluidJumbotronDescription);
         assertThat(jumbotronFluid.core().css("font-size"), is("14px"));
         jumbotronFluid.assertThat().displayed()
-                .and().text(is(mFluidJombotron))
                 .core()
                 .css("font-size", is("14px"))
                 .cssClass("jumbotron jumbotron-fluid")
@@ -71,21 +74,14 @@ public class JumbotronTests extends TestsInit {
 
         jumbotron.is().displayed();
         jumbotron.is().enabled();
-        jumbotron.is().text(is(mHelloWorld));
-        jumbotron.is().text(containsString("HELLO, WORLD!"));
+        jumbotron.title.is().text(mJumbotronWithButtonTitle);
+        jumbotron.description.is().text(mJumbotronWithButtonDescription);
         assertThat(jumbotron.core().css("font-size"), is("14px"));
         jumbotron.assertThat().displayed()
-                .and().text(is(mHelloWorld))
                 .core()
                 .css("font-size", is("14px"))
                 .cssClass("jumbotron")
                 .tag(is("div"));
-    }
-
-    @Test
-    public void assertValidationTest() {
-        jumbotronFluid.assertThat().text(is(mFluidJombotron));
-        jumbotron.assertThat().text(is(mHelloWorld));
     }
 
     @Test
