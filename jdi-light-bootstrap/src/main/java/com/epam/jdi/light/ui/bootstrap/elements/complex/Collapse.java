@@ -4,7 +4,5 @@ import com.epam.jdi.light.ui.bootstrap.custom.CustomDropdown;
 
 public class Collapse extends CustomDropdown {
 
-    public Collapse(String expLoc, String listLoc) {
-        super(expLoc, listLoc);
-    }
+
 }
