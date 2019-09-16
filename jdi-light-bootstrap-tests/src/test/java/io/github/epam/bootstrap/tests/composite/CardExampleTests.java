@@ -26,44 +26,48 @@ public class CardExampleTests extends TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-    private String title = "CARD TITLE";
-    private String text = "Some quick example text to build" +
+
+    private String titleText = "CARD TITLE";
+    private String mainText = "Some quick example text to build" +
             " on the card title and make up the bulk of the card's content.";
-    private String button = "Card Button Clicked!";
+    private String alertText = "Card Button Clicked!";
     private String imageLink = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
 
     @Test
     public void getTitleTextTest() {
-        assertEquals(cardExampleTitle.getText(), title);
+        assertEquals(cardExampleTitle.getText(), titleText);
     }
 
     @Test
     public void getMainTextText() {
-        assertEquals(cardExampleMainText.getText(), text);
+        assertEquals(cardExampleMainText.getText(), mainText);
     }
 
     @Test
     public void clickTest() {
         cardExampleButton.click();
-        Alerts.validateAlert(is(button));
+        Alerts.validateAlert(is(alertText));
     }
 
     @Test
-    public void imageTest() {
+    public void getSrcTest() {
         assertEquals(cardExampleImage.src(), imageLink);
-        cardExampleImage.is().src(containsString("wolverin.jpg"));
-        cardExampleImage.is().alt(is("image"));
-        cardExampleImage.assertThat().height(is(137));
-        cardExampleImage.assertThat().width(is(86));
+    }
+    @Test
+    public void getAltTest() {
+        assertEquals(cardExampleImage.alt(), "image");
     }
 
     @Test
     public void isValidationTest() {
-        cardExampleTitle.isDisplayed();
-        cardExampleMainText.isDisplayed();
-        cardExampleImage.isDisplayed();
-        cardExampleButton.isDisplayed();
-        cardExampleButton.isEnabled();
+        cardExampleImage.is().src(containsString("wolverin.jpg"));
+        cardExampleImage.is().alt(is("image"));
+        cardExampleImage.assertThat().height(is(137));
+        cardExampleImage.assertThat().width(is(86));
+        cardExampleTitle.is().text(is(titleText));
+        cardExampleMainText.is().text(is(mainText));
+        cardExampleButton.is().displayed();
+        cardExampleButton.is().enabled();
     }
 
     @Test
@@ -71,5 +75,6 @@ public class CardExampleTests extends TestsInit {
         baseValidation(cardExampleTitle);
         baseValidation(cardExampleMainText);
         baseValidation(cardExampleButton);
+        baseValidation(cardExampleImage);
     }
 }
