@@ -11,10 +11,9 @@ import static com.epam.jdi.light.elements.common.WindowsManager.windowsCount;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class AlertTests extends TestsInit {
 
