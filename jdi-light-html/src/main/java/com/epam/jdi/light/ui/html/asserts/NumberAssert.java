@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.is;
  */
 
 public class NumberAssert extends UIAssert<NumberAssert, NumberSelector> {
+
     @JDIAction("Assert that '{name}' minValue {0}")
     public NumberAssert min(Matcher<Double> min) {
         jdiAssert(getDouble("min", element.core()), min);
