@@ -66,7 +66,7 @@ public class Form<T> extends Section {
      * @param map Specify entity as map
      *            Fills all elements on the form which implements SetValue interface and can be matched with fields in input entity
      */
-    protected void fill(MapArray<String, String> map) {
+    public void fill(MapArray<String, String> map) {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
@@ -156,7 +156,8 @@ public class Form<T> extends Section {
      * @param map Specify entity as mapArray
      *            Verify that form filled correctly. If not throws error
      */
-    protected void check(MapArray<String, String> map) {
+    @JDIAction("Check that '{name}' values are: {0}")
+    public void check(MapArray<String, String> map) {
         List<String> result = verify(map);
         if (result.size() != 0)
             throw exception( "Check form failed:" + LINE_BREAK + print(result, LINE_BREAK));
@@ -242,7 +243,8 @@ public class Form<T> extends Section {
      * e.g. if you call "submit(user, "Publish") then you should have Element 'publishButton'. <br>
      * * Letters case in button name  no matters
      */
-    protected void submit(MapArray<String, String> objStrings) {
+    @JDIAction("Submit '{name}' with {0}")
+    public void submit(MapArray<String, String> objStrings) {
         submit(objStrings, "submit");
     }
 
