@@ -94,11 +94,11 @@ public class AlertTests extends TestsInit {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        dismissibleAlert.is().displayed();
+        dismissibleAlert.is().hidden();
     }
 
     @Test (priority = 2)
-    public void clickableTest() {
+    public void simpleAlertLinkClickableTest() {
         simpleAlert.click();
         assertEquals(windowsCount(), 2);
         switchToWindow(2);
