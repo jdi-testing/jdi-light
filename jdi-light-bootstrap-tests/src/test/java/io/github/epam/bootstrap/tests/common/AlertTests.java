@@ -6,8 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.switchToWindow;
-import static com.epam.jdi.light.elements.common.WindowsManager.windowsCount;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -97,11 +96,11 @@ public class AlertTests extends TestsInit {
         dismissibleAlert.is().hidden();
     }
 
-    @Test (priority = 2)
+    @Test
     public void simpleAlertLinkClickableTest() {
         simpleAlert.click();
-        assertEquals(windowsCount(), 2);
-        switchToWindow(2);
+        switchToNewWindow();
         assertEquals(getTitle(), pageTitle);
+        closeWindow();
     }
 }

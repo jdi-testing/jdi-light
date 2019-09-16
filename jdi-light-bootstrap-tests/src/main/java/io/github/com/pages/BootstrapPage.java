@@ -8,9 +8,9 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 public class BootstrapPage extends WebPage {
     //region Simple Elements
     public static Button redButton, doubleButton;
-    @Css("#simple_alert") public static Alert simpleAlert;
-    @Css("#dismissible_alert") public static Alert dismissibleAlert;
-    @Css(".close") public static Button alertButton;
+    @Css("#simple-alert") public static Alert simpleAlert;
+    @Css("#dismissible-alert") public static Alert dismissibleAlert;
+    @Css("#dismissible-alert-close-button") public static Button alertButton;
 
     //endregion
 
