@@ -5,14 +5,24 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
+import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
@@ -35,9 +45,12 @@ public class EntitiesCollection {
         WebPage page = PAGES.get(pageName);
         if (page == null)
             page = PAGES.get(pageName + " Page");
-        if (page == null)
-            throw exception("Can't find page with name %s. Available pages: %s", pageName,
-                    print(PAGES.keys()));
+        if (page == null) {
+            if (getMapFromJson("pages").get(pageName) == null) {
+                throw exception("Can't find page with name %s. Available pages: %s", pageName,
+                        print(PAGES.keys()));
+            } else page = new WebPage(DOMAIN + getMapFromJson("pages").get(pageName));
+        }
         return page;
     }
     public static void addElement(Object jdi) {
@@ -90,6 +103,41 @@ public class EntitiesCollection {
             return result;
         }
         throw exception("Can't find '%s' element", name);
+    }
+
+    public static MapArray<String, String> getMapFromJson(String jsonName) {
+        return MapArray.toMapArray(deserializeJsonToMap(jsonName));
+    }
+
+    public static Map<String, String> deserializeJsonToMap(String jsonName) {
+        Gson gson = (new GsonBuilder()).create();
+        Map<String, String> map = new HashMap<String, String>();
+        String json = readFileData(getProperty("jsonTestDataFolder") + jsonName + ".json");
+        map = gson.fromJson(json, map.getClass());
+        return map;
+    }
+
+    public static String readFileData(String filePath) {
+        String data;
+        try(InputStream inputStream = EntitiesCollection.class.getResourceAsStream(filePath)) {
+            data = readFromInputStream(inputStream);
+        } catch (IOException e) {
+            throw exception("Can't read from stream!");
+        } catch(NullPointerException npe) {
+            throw exception("Can't find file by path %s !", filePath);
+        }
+        return data;
+    }
+
+    private static String readFromInputStream(InputStream inputStream) throws IOException {
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
+        }
+        return resultStringBuilder.toString();
     }
 
 }
