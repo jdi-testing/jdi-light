@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
+import static io.github.com.pages.BootstrapPage.mediaObjectNesting;
 import static io.github.com.pages.BootstrapPage.mediaObjectSample;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,7 +15,7 @@ import static org.hamcrest.Matchers.is;
 public class MediaObjectTest extends TestsInit {
 
     private static String  bodyTextOfMediaObjectSample = "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.";
-
+    private static String  bodyTextOfMediaObjectNesting = "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.";
 
     @BeforeMethod
     public void before() {
@@ -23,7 +24,7 @@ public class MediaObjectTest extends TestsInit {
     }
 
     @Test
-    public void isValidationTest() {
+    public void isValidationTestSample() {
         mediaObjectSample.is().displayed();
         mediaObjectSample.is().enabled();
         mediaObjectSample.bodyOfMediaObject.is().text(is(bodyTextOfMediaObjectSample));
@@ -37,6 +38,24 @@ public class MediaObjectTest extends TestsInit {
                // .cssClass("media-body")
               //  .attr("type", "button")
              //   .tag(is("button"))
+        ;
+
+    }
+    @Test
+    public void isValidationTestNesting() {
+        mediaObjectNesting.is().displayed();
+        mediaObjectNesting.is().enabled();
+        mediaObjectNesting.bodyOfMediaObject.is().text(is(bodyTextOfMediaObjectNesting));
+        mediaObjectNesting.bodyOfMediaObject.is().text(containsString("sit amet nibh libero,"));
+        assertThat(mediaObjectSample.mediaHeading.core().css("font-size"), is("20px"));
+        assertThat(mediaObjectSample.bodyOfMediaObject.core().css("font-size"), is("14px"));
+        mediaObjectNesting.bodyOfMediaObject.assertThat().displayed()
+                .and().text(is(bodyTextOfMediaObjectNesting))
+                .core()
+        //.css("font-size", is("16px"))
+        // .cssClass("media-body")
+        //  .attr("type", "button")
+        //   .tag(is("button"))
         ;
 
     }
