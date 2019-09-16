@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.asserts;
 
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.NumberSelector;
@@ -14,7 +15,14 @@ import static org.hamcrest.Matchers.is;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class NumberAssert extends UIAssert<NumberAssert, NumberSelector> {
+public class NumberAssert extends UIAssert<NumberAssert, NumberSelector>
+    implements ITextAssert<NumberAssert> {
+
+    @JDIAction("Assert that '{name}' text {0}")
+    public NumberAssert text(Matcher<String> condition) {
+        jdiAssert(element.attr("value"), condition);
+        return this;
+    }
     @JDIAction("Assert that '{name}' minValue {0}")
     public NumberAssert min(Matcher<Double> min) {
         jdiAssert(getDouble("min", element.core()), min);

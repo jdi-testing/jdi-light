@@ -1,5 +1,5 @@
 @names
-Feature: TestsWithLocators
+Feature: TestsWithName
   Background:
     Given I logged in with name "Roman" and password "Jdi1234"
     And I open page by url "https://jdi-testing.github.io/jdi-light/html5.html"

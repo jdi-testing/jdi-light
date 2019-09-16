@@ -10,8 +10,6 @@ Feature: Menu
   Scenario: Get list test
     Given I open "Html5 Page"
     When I check "Accept Conditions"
-    And I show "Contact form" in "Left Menu" menu
-    Then the "Contact form" in "Left Menu" menu is deselected
     When I select "Contact form" in "Left Menu" menu
     Then the "Contact form" in "Left Menu" menu is selected
     And the "Contact Form Page" page is opened
