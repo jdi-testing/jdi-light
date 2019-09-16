@@ -7,4 +7,4 @@ Feature: Datalist
     When select "Coconut" field from "Ice Cream"
 
   Scenario: Get datalist value test
-    Then the "Ice Cream" datalist selected value is "Coconut"
+    Then the "Ice Cream" selected value is "Coconut"

@@ -19,6 +19,10 @@ Feature: CheckList
     When I check elements in "Weather" checklist:
       | Rainy day |
       | Sunny     |
+    Then count of selected elements in "Weather" checklist is 2
+    Then in the "Weather" checklist checked elements are:
+        | Rainy day |
+        | Sunny       |
     And I uncheck in "Weather" checklist elements:
       | Rainy day |
       | Sunny     |
@@ -57,8 +61,7 @@ Feature: CheckList
     Then in "Weather" checklist checked element is "Sunny"
 
   Scenario: Disable element test
-    When I Select fields from "Weather":
-    |Disabled|
+    When I select "Weather" disabled option "Disabled"
     Then the "Weather" checklist value is "Hot option"
 
   Scenario: Validation test
