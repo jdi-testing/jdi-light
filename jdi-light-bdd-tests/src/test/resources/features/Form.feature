@@ -3,8 +3,7 @@ Feature: Form
 
   Scenario: fill Contact Form from json
     Given I open "Contact Form Page"
-    When fill form "Contact Form" with "Roman Contacts"
-    And submit form "Contact Form" with "Roman Contacts"
+    When submit form "Contact Form" with "Roman Contacts"
     Then the form "Contact Form" data equals to "Roman Contacts"
   
   Scenario: fill Contact Form

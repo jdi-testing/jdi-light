@@ -7,18 +7,18 @@ Background:
   When select "Coconut" field from "Ice Cream"
 
 Scenario: Get combobox value test
-  Then the "Ice Cream" combobox selected value is "Coconut"
+  Then the "Ice Cream" selected value is "Coconut"
 
 Scenario: select combobox value test
   When select "Chocolate" field from "Ice Cream"
-  Then the "Ice Cream" combobox selected value is "Chocolate"
+  Then the "Ice Cream" selected value is "Chocolate"
 
 Scenario: select num combobox value test
   When select index 5 in "Ice Cream"
-  Then the "Ice Cream" combobox selected value is "Vanilla"
+  Then the "Ice Cream" selected value is "Vanilla"
 
 Scenario: Selected combobox value test
-  Then the "Ice Cream" combobox selected value is "Coconut"
+  Then the "Ice Cream" selected value is "Coconut"
 
 Scenario: Combobox label test
   Then the "Ice Cream" label text equals to "Choose your lovely icecream"
