@@ -1,6 +1,5 @@
 package com.epam.jdi.light.elements.init.entities.collection;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
@@ -55,45 +54,42 @@ public class EntitiesCollection {
     }
 
     public static <T> T getUI(String name, Class<T> type) {
-        if (ELEMENTS.has(name)) {
-            List<Object> elements = ELEMENTS.get(name);
-            if (elements.size() == 1)
-                return (T) elements.get(0);
-            ICoreElement element = (ICoreElement) LinqUtils.first(elements,
-                el -> {
-                    WebPage page = ((ICoreElement) el).base().getPage();
-                    return page != null && page.getName().equals(getCurrentPage());
-                });
-            if (element != null)
-                return (T)element;
-        }
-        throw exception("Can't find '%s' element", name);
+        Object element = getElement(name);
+        if (isClass(element.getClass(), type))
+            return (T) element;
+        throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
     }
     public static ICoreElement getUI(String name) {
+        Object element = getElement(name);
+        if (element != null && isInterface(element.getClass(), ICoreElement.class))
+            return ((ICoreElement) element);
+        throw exception("Can't find '%s' element", name);
+    }
+    static Object getElement(String name) {
+        String[] split = name.split("\\.");
+        if (split.length == 2)
+            return getElementInSection(split[1], split[0]);
         if (ELEMENTS.has(name)) {
             List<Object> elements = ELEMENTS.get(name);
-            if (elements.size() == 1)
-                return ((ICoreElement) elements.get(0));
-            ICoreElement element = (ICoreElement) LinqUtils.first(elements,
-                el -> {
-                    WebPage page = ((ICoreElement) el).base().getPage();
-                    return page != null && page.getName().equals(getCurrentPage());
-                });
-            if (element != null)
-                return element;
+            return elements.size() == 1
+                    ? elements.get(0)
+                    : LinqUtils.first(elements, el -> {
+                WebPage page = ((ICoreElement) el).base().getPage();
+                return page != null && page.getName().equals(getCurrentPage());
+            });
         }
         throw exception("Can't find '%s' element", name);
     }
 
-    public static UIElement getUI(String name, String section) {
+    static Object getElementInSection(String name, String section) {
         if (ELEMENTS.has(name)) {
             List<Object> els = ELEMENTS.get(name);
-            Object result = first(els, el -> isClass(el.getClass(), IBaseElement.class) && ((IBaseElement) el).base().hasParent(section));
+            Object result = first(els, el -> isInterface(el.getClass(), IBaseElement.class) && ((IBaseElement) el).base().hasParent(section));
             if (result == null)
-                throw exception("Can't find %s element at %s", name, section);
-            return ((ICoreElement) result).core();
+                throw exception("Can't find '%s' element at '%s'", name, section);
+            return result;
         }
-        throw exception("Can't find %s element", name);
+        throw exception("Can't find '%s' element", name);
     }
 
 }

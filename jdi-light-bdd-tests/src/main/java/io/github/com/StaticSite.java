@@ -24,7 +24,7 @@ public class StaticSite {
 
 	@UI("header") public static Header header;
 	@UI("footer") public static Footer footer;
-	@UI(".sidebar-menu span") public static Menu menu;
+	@UI(".sidebar-menu span") public static Menu leftMenu;
 
 	@Frame("iframe") public static HomePageFrame iframe;
 	public static GithubPage githubPage;
