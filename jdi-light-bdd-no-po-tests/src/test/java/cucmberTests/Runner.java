@@ -12,7 +12,7 @@ import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 @CucumberOptions(
     features = "classpath:features"
     , glue = {"com.epam.jdi.bdd", "cucmberTests"}
-    //, tags = {"@names"}
+    //, tags = {"@form"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @AfterClass

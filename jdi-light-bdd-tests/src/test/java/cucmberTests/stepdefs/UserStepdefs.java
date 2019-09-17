@@ -8,13 +8,18 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
+import org.testng.Assert;
 
+import static com.epam.jdi.bdd.BDDUtils.core;
+import static com.epam.jdi.bdd.stepdefs.CheckListSteps.multiSelect;
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
+import static java.util.Arrays.asList;
+import static org.testng.Assert.*;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -25,7 +30,7 @@ public class UserStepdefs {
 
     @Then("^the \"([^\"]*)\" is basically valid$")
     public void baseValidation(String name) {
-        UIElement el = getUI(name);
+        UIElement el = core(name);
         assertTrue(el.isEnabled());
         assertTrue(el.isDisplayed());
         assertFalse(el.isDisabled());
@@ -35,7 +40,7 @@ public class UserStepdefs {
         Dimension size = el.getSize();
         assertTrue(size.height > 0 && size.width > 0, "Size: " + location);
         el.setAttribute("test-jdi", "test-value");
-        org.testng.Assert.assertEquals(el.getAttribute("test-jdi"), "test-value");
+        assertEquals(el.getAttribute("test-jdi"), "test-value");
         el.highlight("blue");
         el.highlight();
         el.show();
@@ -63,5 +68,12 @@ public class UserStepdefs {
         } catch (Exception e) {
             assertTrue(e.getLocalizedMessage().contains("Failed to execute 'uploadFile' for element"));
         }
+    }
+    @When("^I select \"([^\"]*)\" disabled option \"([^\"]*)\"")
+    public void iSelectDisabled(String name, String option) {
+        try {
+            multiSelect(name, asList(option));
+            fail("Select disabled should throw exception");
+        } catch (Exception ignore) {}
     }
 }

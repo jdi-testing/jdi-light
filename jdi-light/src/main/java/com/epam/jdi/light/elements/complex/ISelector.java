@@ -46,7 +46,9 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     @JDIAction(level = DEBUG)
     default List<String> listDisabled() { return list().listDisabled(); }
     @Override
-    default String getText() { return selected(); }
+    default String getText() {
+        return selected();
+    }
     default String getValue() { return selected(); }
     default void setValue(String value) { select(value); }
     @JDIAction("Check that '{name}' is displayed")

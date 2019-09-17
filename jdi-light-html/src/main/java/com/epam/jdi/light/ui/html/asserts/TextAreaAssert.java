@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.asserts;
 
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
@@ -12,13 +13,12 @@ import static org.hamcrest.Matchers.is;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> {
+public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implements ITextAssert<TextAreaAssert> {
     @JDIAction("Assert that '{name}' text {0}")
     public TextAreaAssert text(Matcher<String> condition) {
         jdiAssert(element.getText(), condition);
         return this;
     }
-    public TextAreaAssert text(String text) { return text(is(text)); }
     @JDIAction("Assert that '{name}' rows count {0}")
     public TextAreaAssert rowsCount(Matcher<Integer> condition) {
         jdiAssert(element.rows(), condition);

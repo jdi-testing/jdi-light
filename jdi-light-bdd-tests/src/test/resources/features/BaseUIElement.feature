@@ -69,7 +69,7 @@ Feature: BaseUIElement
 	
   Scenario: getAttribute
 	Given I open "Html5 Page" 	
-	Then the "Disabled Name" attribute "id" equals to "disabled-name"
+	Then the "Red Button" attribute "value" contains "Red"
 	
   Scenario: isEnabled
 	Given I open "Html5 Page" 	
@@ -77,7 +77,7 @@ Feature: BaseUIElement
 	
   Scenario: isDisabled
 	Given I open "Html5 Page" 	
-	Then the "Disabled Name" is disabled
+	Then the "Disabled Button" is disabled
 	
   Scenario: isHidden
 	Given I open "Html5 Page" 	
