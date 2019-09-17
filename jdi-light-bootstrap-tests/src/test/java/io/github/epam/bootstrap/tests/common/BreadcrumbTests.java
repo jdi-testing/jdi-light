@@ -1,20 +1,26 @@
 package io.github.epam.bootstrap.tests.common;
 
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.github.com.StaticSite.bsPage;
+import static io.github.com.StaticSite.*;
 import static io.github.com.pages.BootstrapPage.breadcrumb;
+import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class BreadcrumbTests extends TestsInit {
     @BeforeMethod
@@ -25,15 +31,15 @@ public class BreadcrumbTests extends TestsInit {
     private static final String HOME = "Home";
     private static final String HTML5 = "HTML 5";
     private static final String BOOTSTRAP = "Bootstrap";
-
     private static final List<String> ANCESTOR_VALUES = Arrays.asList(HOME, HTML5);
+
 
     @Test
     public void getTextTest() {
-        List<String> ancestorValues = breadcrumb.ancestorList.stream().map(UIElement::getText).collect(Collectors.toList());
+        List<String> ancestorTexts = breadcrumb.ancestorList.stream().map(UIElement::getText).collect(Collectors.toList());
 
         assertThat(breadcrumb.currentItem.getText(), is(BOOTSTRAP));
-        assertThat(ancestorValues, is(ANCESTOR_VALUES));
+        assertThat(ancestorTexts, is(ANCESTOR_VALUES));
     }
 
     @Test
@@ -44,11 +50,82 @@ public class BreadcrumbTests extends TestsInit {
         assertThat(ancestorValues, is(ANCESTOR_VALUES));
     }
 
-/*        String bsPageT = bsPage.getTitle();
+    @Test
+    public void clickByNameTest() {
+        breadcrumb.ancestorList.get(HOME).click();
 
-        homePage.shouldBeOpened();
-        String homePageT = homePage.getTitle();
+        ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
+        WebDriver driver = WebDriverFactory.getDriver();
+        driver.switchTo().window(tabs.get(1));
 
-        html5Page.shouldBeOpened();
-        String html5PageT = html5Page.getTitle();*/
+        assertTrue(homePage.getTitle().contains(HOME));
+
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
+    }
+
+    @Test
+    public void clickByIDTest() {
+        breadcrumb.ancestorList.get(1).click();
+
+        ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
+        WebDriver driver = WebDriverFactory.getDriver();
+        driver.switchTo().window(tabs.get(1));
+
+        assertEquals(HTML5, html5Page.getTitle());
+
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
+    }
+
+    @Test
+    public void isValdidationTest() {
+
+        breadcrumb.is().displayed();
+        breadcrumb.is().enabled();
+        assertThat( breadcrumb.core().css("font-size"), is("14px"));
+        breadcrumb.assertThat().displayed()
+                .core()
+                .cssClass("breadcrumb")
+                .tag(is("ol"))
+                .css("display", is("flex"))
+                .css("flex-wrap", is("wrap"))
+                .css("padding", is(".75rem 1rem"))
+                .css("margin-bottom", is("1rem"))
+                .css("list-style", is("none"))
+                .css("background-color", is("#e9ecef"))
+                .css("border-radius", is(".25rem"))
+                .css("color", is("#666"));
+
+        breadcrumb.currentItem.is().text(bsPage.getTitle());
+        breadcrumb.currentItem.assertThat().displayed()
+                .core()
+                .attr("aria-current", "page")
+                .cssClass("breadcrumb-item active")
+                .tag(is("li"))
+                .css("color", is("#6c757d"));
+
+
+        breadcrumb.ancestorList.get(HOME).is().displayed();
+        breadcrumb.ancestorList.get(HOME).is().enabled();
+        breadcrumb.ancestorList.get(HOME).assertThat().displayed()
+                .core()
+                .cssClass("breadcrumb-item")
+                .css("text-decoration", is("#39c2d7"))
+                .css("color", is("#39c2d7"));
+
+        breadcrumb.ancestorList.get(HTML5).is().displayed();
+        breadcrumb.ancestorList.get(HTML5).is().enabled();
+        breadcrumb.ancestorList.get(HTML5).assertThat().displayed()
+                .core()
+                .cssClass("breadcrumb-item")
+                .css("text-decoration", is("#39c2d7"))
+                .css("color", is("#39c2d7"));
+    }
+
+    @Test
+    public void baseValidationTest() {
+        baseValidation(breadcrumb);
+    }
+
 }
