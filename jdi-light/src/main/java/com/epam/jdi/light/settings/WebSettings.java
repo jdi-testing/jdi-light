@@ -43,6 +43,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;

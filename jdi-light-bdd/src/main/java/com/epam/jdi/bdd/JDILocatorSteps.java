@@ -1,19 +1,14 @@
 package com.epam.jdi.bdd;
 
-import com.epam.jdi.light.elements.composite.WebPage;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-
-import static com.epam.jdi.bdd.BDDUtils.element;
-import static com.epam.jdi.light.common.ElementArea.*;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.matchesPattern;
 
 public class JDILocatorSteps {
-
+/*
     @Given("^(?:I |)open page by url \"([^\"]*)\"$")
     public void openPageByUrl(String url) {
+        WebPage.openUrl(url);
+    }
+    @Given("^(?:I'm |) on \"([^\"]*)\"() $")
+    public void iMOnPage(String url) {
         WebPage.openUrl(url);
     }
 
@@ -125,5 +120,5 @@ public class JDILocatorSteps {
     @When("^(?:I |)select \"([^\"]*)\" field from \"([^\"]*)\" element$")
     public void select(String value, String locator) {
         element(locator).select(value);
-    }
+    }*/
 }
