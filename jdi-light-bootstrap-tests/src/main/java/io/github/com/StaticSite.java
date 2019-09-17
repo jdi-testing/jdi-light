@@ -9,16 +9,11 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 import io.github.com.entities.User;
 import io.github.com.pages.BootstrapPage;
-import io.github.com.pages.HomePage;
-import io.github.com.pages.HtmlElementsPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 	@Url("/bootstrap.html")
 	public static BootstrapPage bsPage;
-	@Url("/index.html") public static HomePage homePage;
-	@Url("/html5.html") public static HtmlElementsPage html5Page;
-
 	@UI("#login-form")
 	public static Form<User> loginForm;
 
