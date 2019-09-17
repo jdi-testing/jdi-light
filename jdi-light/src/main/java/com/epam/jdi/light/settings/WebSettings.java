@@ -41,12 +41,15 @@ import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
+import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
@@ -140,6 +143,9 @@ public class WebSettings {
 
         // RemoteWebDriver properties
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
+        fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
+        fillAction(p -> SMART_SEARCH_LOCATORS =
+            filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
 
         loadCapabilities("chrome.capabilities.path",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));

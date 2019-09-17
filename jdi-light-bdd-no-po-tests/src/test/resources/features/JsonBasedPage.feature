@@ -1,7 +1,5 @@
 @jsonpages
 Feature: JsonBasedPage
-  Background:
-    Given I logged in with name "Roman" and password "Jdi1234"
 
   Scenario: json based bootstrap page
     When I open "Bootstrap Page" page
