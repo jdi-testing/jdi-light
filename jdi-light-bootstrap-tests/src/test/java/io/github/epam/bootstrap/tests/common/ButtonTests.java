@@ -7,8 +7,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.doubleButton;
-import static io.github.com.pages.BootstrapPage.redButton;
+import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -46,11 +45,11 @@ public class ButtonTests extends TestsInit {
         redButton.click();
         validateAlert(is("Red button"));
     }
-    @Test(enabled = false)
+
+    @Test
     public void disableButtonTest() {
         try {
-            // TODO add disabled BS button on site
-            //  disabledButton.click();
+            disabledButton.click();
             fail("Disabled button should not work, but work");
         } catch (Exception ex) {
             assertThat(safeException(ex),
@@ -81,10 +80,9 @@ public class ButtonTests extends TestsInit {
             .cssClass("btn btn-danger")
             .attr("type", "button")
             .tag(is("button"));
-        // TODO add disabled BS button on site
-        // disabledButton.is().text(containsString("Disabled Button".toUpperCase()));
+        disabledButton.is().text(containsString("Disabled button"));
         // disabledButtonInput.is().text(containsString("Disabled Button"));
-        // disabledButton.is().disabled();
+        disabledButton.is().disabled();
     }
 
     @Test
