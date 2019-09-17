@@ -32,7 +32,7 @@ public class CollapseTests extends TestsInit {
     }
 
     @Test(priority = 1)
-    public void collapseLinkTest() throws InterruptedException {
+    public void collapseLinkTest() {
         collapseLink.highlight();
         collapseLink.toggle();
         assertTrue(collapseLink.isExpanded());
@@ -43,7 +43,7 @@ public class CollapseTests extends TestsInit {
     }
 
     @Test(priority = 2)
-    public void collapseButtonTest() throws InterruptedException {
+    public void collapseButtonTest() {
         collapseDataTarget.highlight();
         collapseDataTarget.toggle();
         assertTrue(collapseDataTarget.isExpanded());
@@ -54,7 +54,7 @@ public class CollapseTests extends TestsInit {
     }
 
     @Test(priority = 3)
-    public void collapseToggleOneTest() throws InterruptedException {
+    public void collapseToggleOneTest() {
         collapseToggleOne.highlight();
         collapseToggleOne.toggle();
         assertTrue(collapseToggleOne.isExpanded());
@@ -65,7 +65,7 @@ public class CollapseTests extends TestsInit {
     }
 
     @Test(priority = 4)
-    public void collapseToggleTwoTest() throws InterruptedException {
+    public void collapseToggleTwoTest() {
         collapseToggleTwo.highlight();
         collapseToggleTwo.toggle();
         assertTrue(collapseToggleTwo.isExpanded());
@@ -76,7 +76,7 @@ public class CollapseTests extends TestsInit {
     }
 
     @Test(priority = 5)
-    public void collapseToggleBothTest() throws InterruptedException {
+    public void collapseToggleBothTest() {
         collapseToggleBoth.highlight();
         collapseToggleBoth.toggle();
         collapseToggleTwo.highlight();
@@ -91,7 +91,7 @@ public class CollapseTests extends TestsInit {
     }
 
     @Test(priority = 6)
-    public void collapseGroupOneTest() throws InterruptedException {
+    public void collapseGroupOneTest() {
         collapseGroupOne.highlight();
         collapseGroupOne.toggle();
         assertTrue(collapseGroupOne.isExpanded());
@@ -102,7 +102,7 @@ public class CollapseTests extends TestsInit {
     }
 
     @Test(priority = 7)
-    public void collapseGroupTwoTest() throws InterruptedException {
+    public void collapseGroupTwoTest() {
         collapseGroupTwo.highlight();
         collapseGroupTwo.toggle();
         assertTrue(collapseGroupTwo.isExpanded());
@@ -113,7 +113,7 @@ public class CollapseTests extends TestsInit {
     }
 
     @Test(priority = 8)
-    public void collapseGroupThreeTest() throws InterruptedException {
+    public void collapseGroupThreeTest() {
         collapseGroupThree.highlight();
         collapseGroupThree.toggle();
         assertTrue(collapseGroupThree.isExpanded());
