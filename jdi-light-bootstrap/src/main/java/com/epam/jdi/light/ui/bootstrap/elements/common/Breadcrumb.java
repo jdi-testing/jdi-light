@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.bootstrap.elements.common;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
@@ -7,11 +8,10 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.ui.bootstrap.asserts.ImageAssert;
 import com.epam.jdi.tools.map.MapArray;
 
 
-public class Breadcrumb extends UIBaseElement<ImageAssert> implements IList<UIElement>, HasUIList, IClickable {
+public class Breadcrumb extends UIBaseElement<UIAssert> implements IList<UIElement>, HasUIList, IClickable {
     @Css(".breadcrumb-item a") public WebList ancestorList;
     @Css(".breadcrumb-item.active") public UIElement currentItem;
 

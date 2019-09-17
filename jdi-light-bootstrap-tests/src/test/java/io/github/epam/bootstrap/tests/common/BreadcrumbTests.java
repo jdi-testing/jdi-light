@@ -1,6 +1,5 @@
 package io.github.epam.bootstrap.tests.common;
 
-
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
@@ -32,7 +31,6 @@ public class BreadcrumbTests extends TestsInit {
     private static final String HTML5 = "HTML 5";
     private static final String BOOTSTRAP = "Bootstrap";
     private static final List<String> ANCESTOR_VALUES = Arrays.asList(HOME, HTML5);
-
 
     @Test
     public void getTextTest() {
@@ -80,9 +78,8 @@ public class BreadcrumbTests extends TestsInit {
 
     @Test
     public void isValdidationTest() {
-
-        breadcrumb.is().displayed();
-        breadcrumb.is().enabled();
+        breadcrumb.assertThat().displayed();
+        breadcrumb.assertThat().enabled();
         assertThat( breadcrumb.core().css("font-size"), is("14px"));
         breadcrumb.assertThat().displayed()
                 .core()
@@ -90,12 +87,8 @@ public class BreadcrumbTests extends TestsInit {
                 .tag(is("ol"))
                 .css("display", is("flex"))
                 .css("flex-wrap", is("wrap"))
-                .css("padding", is(".75rem 1rem"))
-                .css("margin-bottom", is("1rem"))
-                .css("list-style", is("none"))
-                .css("background-color", is("#e9ecef"))
-                .css("border-radius", is(".25rem"))
-                .css("color", is("#666"));
+                .css("background-color", is("rgba(233, 236, 239, 1)")) //#e9ecef Color Hex
+                .css("color", is("rgba(102, 102, 102, 1)")); //#666 Color Hex
 
         breadcrumb.currentItem.is().text(bsPage.getTitle());
         breadcrumb.currentItem.assertThat().displayed()
@@ -103,24 +96,15 @@ public class BreadcrumbTests extends TestsInit {
                 .attr("aria-current", "page")
                 .cssClass("breadcrumb-item active")
                 .tag(is("li"))
-                .css("color", is("#6c757d"));
+                .css("color", is("rgba(108, 117, 125, 1)")); //#6c757d Color Hex
 
-
-        breadcrumb.ancestorList.get(HOME).is().displayed();
-        breadcrumb.ancestorList.get(HOME).is().enabled();
-        breadcrumb.ancestorList.get(HOME).assertThat().displayed()
-                .core()
-                .cssClass("breadcrumb-item")
-                .css("text-decoration", is("#39c2d7"))
-                .css("color", is("#39c2d7"));
-
-        breadcrumb.ancestorList.get(HTML5).is().displayed();
-        breadcrumb.ancestorList.get(HTML5).is().enabled();
-        breadcrumb.ancestorList.get(HTML5).assertThat().displayed()
-                .core()
-                .cssClass("breadcrumb-item")
-                .css("text-decoration", is("#39c2d7"))
-                .css("color", is("#39c2d7"));
+        for (UIElement item: breadcrumb.ancestorList) {
+            item.is().displayed();
+            item.is().enabled();
+            item.assertThat().displayed()
+                    .core()
+                    .css("color", is("rgba(57, 194, 215, 1)")); //#39c2d7 Color Hex
+        }
     }
 
     @Test
