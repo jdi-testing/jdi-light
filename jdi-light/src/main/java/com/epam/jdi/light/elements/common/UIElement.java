@@ -47,9 +47,8 @@ import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class UIElement extends JDIBase
-        implements WebElement, SetValue, ICoreElement,
-        HasAssert<IsAssert>, IListBase, IClickable, HasClick, IsText,
-        HasLabel, HasPlaceholder, IsInput {
+        implements WebElement, SetValue, HasAssert<IsAssert>, IListBase,
+        HasClick, IsText, HasLabel, HasPlaceholder, IsInput, HasCheck {
     //region Constructors
     public UIElement() { }
     public UIElement(WebElement el) { setWebElement(el); }
@@ -542,17 +541,9 @@ public class UIElement extends JDIBase
         if (isNotBlank(text))
             return text;
         text = ui.text(VALUE);
-        if (isNotBlank(text))
-            return text;
-        String id = ui.attr("id");
-        if (isNotBlank(id)) {
-            UIElement label = $(By.cssSelector("[for=" + id + "]"));
-            label.waitSec(0);
-            try {
-                text = label.getText();
-            } catch (Throwable ignore) { }
-        }
-        return isNotBlank(text) ? text : "";
+        return isNotBlank(text)
+            ? text
+            : isNotBlank(text) ? text : "";
     };
     public static JFunc1<UIElement, String> SMART_LIST_TEXT = ui -> {
         String text = ui.text(TEXT);

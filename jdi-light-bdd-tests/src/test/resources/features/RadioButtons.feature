@@ -1,5 +1,5 @@
 @radio
-Feature: Radio
+Feature: RadioButtons
 
   Scenario: Select
     Given I open "Html5 Page" page
