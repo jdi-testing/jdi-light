@@ -2,6 +2,7 @@ package io.github.epam.bootstrap.tests.complex;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -37,7 +38,7 @@ public class CollapseTests extends TestsInit {
         assertTrue(collapseLink.isExpanded());
         assertTrue(collapseLink.value().getText().contains(cardOneText));
         collapseLink.toggle();
-        Thread.sleep(500);
+        wait.until(ExpectedConditions.invisibilityOf(collapseLink.value()));
         assertFalse(collapseLink.isExpanded());
     }
 
@@ -48,7 +49,7 @@ public class CollapseTests extends TestsInit {
         assertTrue(collapseDataTarget.isExpanded());
         assertTrue(collapseDataTarget.value().getText().contains(cardOneText));
         collapseDataTarget.toggle();
-        Thread.sleep(500);
+        wait.until(ExpectedConditions.invisibilityOf(collapseDataTarget.value()));
         assertFalse(collapseDataTarget.isExpanded());
     }
 
@@ -59,7 +60,7 @@ public class CollapseTests extends TestsInit {
         assertTrue(collapseToggleOne.isExpanded());
         assertTrue(collapseToggleOne.value().getText().contains(cardTwoText));
         collapseToggleOne.toggle();
-        Thread.sleep(500);
+        wait.until(ExpectedConditions.invisibilityOf(collapseToggleOne.value()));
         assertFalse(collapseToggleOne.isExpanded());
     }
 
@@ -70,7 +71,7 @@ public class CollapseTests extends TestsInit {
         assertTrue(collapseToggleTwo.isExpanded());
         assertTrue(collapseToggleTwo.value().getText().contains(cardThreeText));
         collapseToggleTwo.toggle();
-        Thread.sleep(500);
+        wait.until(ExpectedConditions.invisibilityOf(collapseToggleTwo.value()));
         assertFalse(collapseToggleTwo.isExpanded());
     }
 
@@ -83,7 +84,8 @@ public class CollapseTests extends TestsInit {
         assertTrue(collapseToggleBoth.value().getText().contains(cardTwoText));
         assertTrue(collapseToggleTwo.value().getText().contains(cardThreeText));
         collapseToggleBoth.toggle();
-        Thread.sleep(500);
+        wait.until(ExpectedConditions.invisibilityOf(collapseToggleBoth.value()));
+        wait.until(ExpectedConditions.invisibilityOf(collapseToggleTwo.value()));
         assertFalse(collapseToggleBoth.isExpanded());
         assertFalse(collapseToggleTwo.isExpanded());
     }
@@ -95,7 +97,7 @@ public class CollapseTests extends TestsInit {
         assertTrue(collapseGroupOne.isExpanded());
         assertTrue(collapseGroupOne.value().getText().contains(groupOneText));
         collapseGroupOne.toggle();
-        Thread.sleep(500);
+        wait.until(ExpectedConditions.invisibilityOf(collapseGroupOne.value()));
         assertFalse(collapseGroupOne.isExpanded());
     }
 
@@ -106,7 +108,7 @@ public class CollapseTests extends TestsInit {
         assertTrue(collapseGroupTwo.isExpanded());
         assertTrue(collapseGroupTwo.value().getText().contains(groupTwoText));
         collapseGroupTwo.toggle();
-        Thread.sleep(500);
+        wait.until(ExpectedConditions.invisibilityOf(collapseGroupTwo.value()));
         assertFalse(collapseGroupTwo.isExpanded());
     }
 
@@ -117,7 +119,7 @@ public class CollapseTests extends TestsInit {
         assertTrue(collapseGroupThree.isExpanded());
         assertTrue(collapseGroupThree.value().getText().contains(groupThreeText));
         collapseGroupThree.toggle();
-        Thread.sleep(500);
+        wait.until(ExpectedConditions.invisibilityOf(collapseGroupThree.value()));
         assertFalse(collapseGroupThree.isExpanded());
     }
 }
