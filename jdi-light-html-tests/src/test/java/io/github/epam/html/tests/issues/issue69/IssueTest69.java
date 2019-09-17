@@ -19,7 +19,6 @@ public class IssueTest69 {
     public void before() {
         if (first) {
             initSite(JDISite69.class);
-            SMART_SEARCH_LOCATORS.add("[ui=%s]");
             first = false;
         }
         issuePage69.shouldBeOpened();

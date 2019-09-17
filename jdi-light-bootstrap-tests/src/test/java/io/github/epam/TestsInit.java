@@ -15,7 +15,6 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 public class TestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        logger.setLogLevel(STEP);
         initSite(StaticSite.class);
         openUrl(DOMAIN);
         logger.toLog("Run Tests");

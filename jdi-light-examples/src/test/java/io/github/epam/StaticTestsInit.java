@@ -14,7 +14,6 @@ public class StaticTestsInit {
 
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        logger.setLogLevel(STEP);
         initElements(StaticSite.class);
         homePage.open();
         logger.toLog("Run Tests");

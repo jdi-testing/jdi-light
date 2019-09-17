@@ -17,11 +17,9 @@ import static io.github.com.StaticSite.homePage;
 public class TestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        logger.setLogLevel(STEP);
         HtmlSettings.init();
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
-        SMART_SEARCH_LOCATORS.add("[ui=%s]");
         homePage.open();
         logger.toLog("Run Tests");
     }
