@@ -16,3 +16,4 @@ downloads/
 .settings/
 .project
 .classpath
+test-output/
