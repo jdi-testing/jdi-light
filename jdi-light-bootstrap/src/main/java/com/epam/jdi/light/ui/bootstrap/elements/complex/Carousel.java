@@ -1,19 +1,16 @@
 package com.epam.jdi.light.ui.bootstrap.elements.complex;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
+import static com.epam.jdi.light.common.TextTypes.TEXT;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.UIListBase;
+import com.epam.jdi.light.asserts.generic.TextAssert;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.settings.WebSettings;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 
-import static com.epam.jdi.light.settings.WebSettings.*;
-
-public class Carousel extends UIListBase<UISelectAssert> {
+public class Carousel extends UIBaseElement<TextAssert> implements HasLabel{
 	public String getText() { return currentSlide().text(TEXT); }
 	
     public String currentSlideLocator = "//div[contains(@class,'carousel-item active')]";
@@ -28,7 +25,7 @@ public class Carousel extends UIListBase<UISelectAssert> {
         return linked(nextLocator, "next");
     }
 	
-	public void nextSlide() {
+	public void next() {
 		nextControl().click();
 	}
 	
@@ -38,18 +35,28 @@ public class Carousel extends UIListBase<UISelectAssert> {
         return linked(prevLocator, "prev");
     }
 	
-	public void prevSlide() {
+	public void prev() {
 		prevControl().click();
 	}
 	
 	public String indicatorsLocator = "li";
 		
-    @Override
     public WebList list() {
-        return linkedList(indicatorsLocator, "slidesList").setUIElementName(TEXT);
+        return linkedList(indicatorsLocator, "slidesList").setUIElementName(SMART_TEXT);
     }
-	
-    @Override
+    
+    /*
+    public String selectedIndicatorLocator = "//li[@class='active']";
+    
+    public UIElement selectedIndicator() {
+        return linked(selectedIndicatorLocator, "selected indicator");
+    }
+    
+    public int getSelectedIndicatorIndex() {
+    	return Integer.valueOf(selectedIndicator().getAttribute("data-slide-to"));
+    }
+    */
+    
     public void select(int index) {
         if (index < 1)
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
@@ -60,7 +67,7 @@ public class Carousel extends UIListBase<UISelectAssert> {
         return list().selected();
     }
     
-    public int getInterval() {
+    public int interval() {
     	return Integer.valueOf(currentSlide().getAttribute("data-interval"));
     }
 }
