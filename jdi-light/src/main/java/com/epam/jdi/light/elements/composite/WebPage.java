@@ -10,10 +10,8 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.map.MapArray;
 
 import java.text.MessageFormat;
-import java.util.List;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;

@@ -11,12 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.logger.LogLevels.INFO;
-import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.light.ui.html.HtmlSettings.init;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(

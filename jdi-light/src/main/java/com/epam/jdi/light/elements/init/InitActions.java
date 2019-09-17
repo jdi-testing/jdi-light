@@ -30,7 +30,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.updatePage;
 import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
