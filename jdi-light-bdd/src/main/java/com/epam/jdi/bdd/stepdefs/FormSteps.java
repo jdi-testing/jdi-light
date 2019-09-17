@@ -6,10 +6,10 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static com.epam.jdi.bdd.BDDUtils.getMapFromJson;
 import static com.epam.jdi.bdd.BDDUtils.getMapFromTable;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.tools.JsonUtils.getMapFromJson;
 
 public class FormSteps {
 	public static Safe<Form> lastForm = new Safe<>(() -> null);
@@ -28,6 +28,10 @@ public class FormSteps {
 			return lastForm.get();
 		throw exception("You should execute form action with name before steps without form name");
 	}
+	@When("^I login as \"([^\"]*)\"$")
+	public void loginAsForm(String jsonName) {
+		getForm("Login form").submit(getMapFromJson(jsonName, "json.test.data"));
+	}
 
 	@When("^(?:I |)fill form \"([^\"]*)\" with data:$")
 	public void fillForm(String name, DataTable data) {
@@ -35,26 +39,26 @@ public class FormSteps {
 	}
 	@When("^(?:I |)fill form \"([^\"]*)\" with \"([^\"]*)\"$")
 	public void fillForm(String name, String jsonName) {
-		getForm(name).fill(getMapFromJson(jsonName));
+		getForm(name).fill(getMapFromJson(jsonName, "json.test.data"));
 	}
-	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) " +
+	@When("^(?:I |)(?:submit|send|add|publich|save|update|cancel|close|back|select|next|search) " +
 			"form$")
 	public void submitDataForm() {
 		getLastForm().submit();
 	}
-	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) " +
+	@When("^(?:I |)(?:submit|send|add|publich|save|update|cancel|close|back|select|next|search) " +
 			"form \"([^\"]*)\" with data:$")
 	public void submitDataForm(String name, DataTable data) {
 		getForm(name).submit(getMapFromTable(data));
 	}
-	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) form using button \"([^\"]*)\"$")
+	@When("^(?:I |)(?:submit|send|add|publich|save|update|cancel|close|back|select|next|search) form using button \"([^\"]*)\"$")
 	public void submitForm(String buttonName) {
 		getLastForm().pressButton(buttonName);
 	}
-	@When("^(?:I |)(?:submit|login as|send|add|publich|save|update|cancel|close|back|select|next|search) "
+	@When("^(?:I |)(?:submit|send|add|publich|save|update|cancel|close|back|select|next|search) "
 			+ "form \"([^\"]*)\" with \"([^\"]*)\"$")
 	public void submitForm(String name, String jsonName) {
-		getForm(name).submit(getMapFromJson(jsonName));
+		getForm(name).submit(getMapFromJson(jsonName, "json.test.data"));
 	}
 	@Then("^the form \"([^\"]*)\" data equals to:$")
     public void dataEquals(String name, DataTable data) {
@@ -62,6 +66,6 @@ public class FormSteps {
     }
 	@Then("^the form \"([^\"]*)\" data equals to \"([^\"]*)\"$")
     public void dataEquals(String name, String jsonName) {
-		getForm(name).check(getMapFromJson(jsonName));
+		getForm(name).check(getMapFromJson(jsonName, "json.test.data"));
     }
 }

@@ -2,7 +2,6 @@ package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.tools.func.JAction1;
 
 public interface IBaseElement extends JDIElement, HasCache {
