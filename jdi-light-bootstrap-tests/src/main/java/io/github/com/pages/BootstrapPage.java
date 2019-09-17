@@ -18,6 +18,9 @@ public class BootstrapPage extends WebPage {
     @UI("#carouselExampleSlidesOnly") public static Carousel carouselSlidesOnly;
     @UI("#carouselExampleControls") public static Carousel carouselControls;
     @UI("#carouselExampleIndicators") public static Carousel carouselIndicators;
+    @UI("#carouselExampleCaptions") public static Carousel carouselCaptions;
+    @UI("#carouselExampleFade") public static Carousel carouselFade;
+    @UI("#carouselExampleInterval") public static Carousel carouselInterval;
     //endregion
 
 }
