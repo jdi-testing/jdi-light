@@ -1,6 +1,8 @@
 package io.github.epam.bootstrap.tests.complex;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
