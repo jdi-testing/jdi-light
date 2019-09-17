@@ -22,14 +22,12 @@ public class BootstrapPage extends WebPage {
     //endregion
 
     //region Complex Elements
-    @Css("#carouselExampleSlidesOnly") public static Carousel carouselSlidesOnly;
-    @Css("#carouselExampleControls") public static Carousel carouselControls;
-    @Css("#carouselExampleIndicators") public static Carousel carouselIndicators;
-    @Css("#carouselExampleCaptions") public static Carousel carouselCaptions;
-    @Css("#carouselExampleFade") public static Carousel carouselFade;
-    @Css("#carouselExampleInterval") public static Carousel carouselInterval;
+    @Css("#carousel-example-slides-only") public static Carousel carouselSlidesOnly;
+    @Css("#carousel-example-controls") public static Carousel carouselControls;
+    @Css("#carousel-example-indicators") public static Carousel carouselIndicators;
+    @Css("#carousel-example-captions") public static Carousel carouselCaptions;
+    @Css("#carousel-example-fade") public static Carousel carouselFade;
+    @Css("#carousel-example-interval") public static Carousel carouselInterval;
     @Css("#card-example") public static CardExample cardExample;
-
->>>>>>> 5926c91d93f79e2b59ebac3cd170b74eea5f161c
     //endregion
 }

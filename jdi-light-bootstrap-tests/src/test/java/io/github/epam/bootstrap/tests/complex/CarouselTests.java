@@ -35,7 +35,12 @@ public class CarouselTests extends TestsInit {
 		
 		carouselIndicators.select(3);	
 		carouselIndicators.base().waitSec(2);
+		System.out.println("SIZE: " + carouselIndicators.list().size());
+		System.out.println("GET 1 " + carouselIndicators.list().get(1).isSelected());
+		System.out.println("GET 2 " + carouselIndicators.list().get(2).isSelected());
 		System.out.println(carouselIndicators.getText());
+		System.out.println("SELECTED VALUE: " + carouselIndicators.selected());
+		
 		carouselIndicators.select(1);
 		carouselIndicators.base().waitSec(2);
 		System.out.println(carouselIndicators.getText());

@@ -46,7 +46,7 @@ public class Carousel extends UIListBase<UISelectAssert> {
 		
     @Override
     public WebList list() {
-        return linkedList(indicatorsLocator, "slidesList");
+        return linkedList(indicatorsLocator, "slidesList").setUIElementName(TEXT);
     }
 	
     @Override
