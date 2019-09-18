@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasCache;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
@@ -444,18 +445,14 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         );
     };
 
-    public void actions(JFunc2<Actions, WebElement, Actions> actions) {
-        actions.execute(actionsClass(), get()).build().perform();
+    public void actions(JFunc2<Actions, WebElement, Actions> action) {
+        action.execute(actions.get(), get()).build().perform();
     }
-    public void actionsWitElement(JFunc2<Actions, WebElement, Actions> actions) {
-        actions.execute(actionsClass().moveToElement(get()), get()).build().perform();
+    public void actionsWitElement(JFunc2<Actions, WebElement, Actions> action) {
+        action.execute(actions.get().moveToElement(get()), get()).build().perform();
     }
-    private Actions actions = null;
-    private Actions actionsClass() {
-        if (actions == null)
-            actions = new Actions(driver());
-        return actions;
-    }
+    private Safe<Actions> actions = new Safe<>(() -> new Actions(driver()));
+
     private ElementArea clickAreaType;
     public ElementArea getClickType() {
         return clickAreaType != null ? clickAreaType : CLICK_TYPE;
