@@ -1,16 +1,17 @@
 package com.epam.jdi.light.ui.bootstrap.elements.complex;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.common.TextTypes.TEXT;
 
 import com.epam.jdi.light.asserts.generic.TextAssert;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 
-public class Carousel extends UIBaseElement<TextAssert> implements IsText{
+public class Carousel extends UIBaseElement<TextAssert> implements IsText, IsButton{
 	public String getText() { return text(TEXT); }
 	
     public String currentSlideLocator = "//div[contains(@class,'carousel-item active')]";
@@ -25,6 +26,7 @@ public class Carousel extends UIBaseElement<TextAssert> implements IsText{
         return linked(nextLocator, "next");
     }
 	
+	@JDIAction("Click 'next control' in '{name}'")
 	public void next() {
 		nextControl().click();
 	}
@@ -35,6 +37,7 @@ public class Carousel extends UIBaseElement<TextAssert> implements IsText{
         return linked(prevLocator, "prev");
     }
 	
+	@JDIAction("Click 'prev control' in '{name}'")
 	public void prev() {
 		prevControl().click();
 	}
@@ -42,7 +45,7 @@ public class Carousel extends UIBaseElement<TextAssert> implements IsText{
 	public String indicatorsLocator = "li";
 		
     public WebList list() {
-        return linkedList(indicatorsLocator, "slidesList").setUIElementName(SMART_TEXT);
+        return linkedList(indicatorsLocator, "slidesList");
     }
     
     /*
@@ -63,6 +66,7 @@ public class Carousel extends UIBaseElement<TextAssert> implements IsText{
         list().select(index - 1);
     }
     
+    @JDIAction("Current slide interval in '{name}'")
     public int interval() {
     	return Integer.valueOf(currentSlide().getAttribute("data-interval"));
     }
