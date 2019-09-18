@@ -12,6 +12,11 @@ public class BootstrapPage extends WebPage {
     @Css("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
     @Css("#jumbotron") public static Jumbotron jumbotron;
 
+
+    @Css("#media-object-sample") public static MediaObject mediaObjectSample;
+    @Css("#media-object-nesting") public static MediaObject mediaObjectNesting;
+    @Css("#media-object-list") public static MediaObject mediaObjectList;
+
     @Css("#input-group-username") public static InputGroupInputWithText inputGroupUsername;
     @Css("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
     @Css("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
