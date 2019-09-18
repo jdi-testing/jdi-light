@@ -8,12 +8,12 @@ package com.epam.jdi.light.elements.pageobjects.annotations.objects;
 import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class FillFromAnnotationRules {
 
     public static boolean fieldHasAnnotation(Field field, Class annotationClass, Class interfaceClass) {
         boolean isAnnotation = hasAnnotation(field, annotationClass);
-        return isAnnotation && isClass(field, interfaceClass);
+        return isAnnotation && isInterface(field, interfaceClass);
     }
 }

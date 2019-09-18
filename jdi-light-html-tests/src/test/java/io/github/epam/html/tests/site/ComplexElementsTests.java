@@ -5,7 +5,7 @@ import io.github.epam.html.tests.site.steps.States;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.base.WindowsManager.originalWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
 import static io.github.com.StaticSite.*;
 import static io.github.com.enums.ColorsList.Green;
 import static io.github.com.enums.Metals.Gold;
@@ -61,7 +61,6 @@ public class ComplexElementsTests extends TestsInit {
     @Test
     public void navigationMenuSTest() {
         navigationS.select(ContactForm);
-        //navigationL.select("Contact form");
         contactFormPage.checkOpened();
         navigationS.select(Home);
         homePage.checkOpened();

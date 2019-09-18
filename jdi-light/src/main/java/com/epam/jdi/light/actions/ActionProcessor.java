@@ -7,6 +7,7 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -16,18 +17,24 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.GetOverrideAction;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.base.OutputTemplates.FAILED_ACTION_TEMPLATE;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.LinqUtils.where;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.Timer.nowTime;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static java.lang.System.currentTimeMillis;
+import static java.lang.Thread.currentThread;
 
 @SuppressWarnings("unused")
 @Aspect
@@ -37,73 +44,101 @@ public class ActionProcessor {
     protected void jdiPointcut() { }
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() { }
-
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        return jdiBeforeAfter(jp);
-    }
-    public static Object jdiBeforeAfter(ProceedingJoinPoint jp) {
         try {
+            if (aroundCount() > 1)
+                return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jp);
+            if (aroundCount() == 1)
+                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            Object element = jp.getThis() != null ? jp.getThis() : new Object();
-            throw exception("["+nowTime("mm:ss.S")+"] " + ACTION_FAILED.execute(element, ex.getMessage()));
+            throw exception(ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
         }
     }
+    public static Object getObjAround(ProceedingJoinPoint jp) { return jp.getThis() != null ? jp.getThis() : new Object(); }
+    public static String getExceptionAround(Throwable ex, boolean time) {
+        String result = safeException(ex);
+        while (result.contains("\n\n"))
+            result = result.replaceFirst("\\n\\n", LINE_BREAK);
+        result = result.replace("java.lang.RuntimeException:", "").trim();
+        if (aroundCount() == 1)
+            result = "["+nowTime("mm:ss.S")+"] " + result.replaceFirst("\n", "");
+        return result;
+    }
 
-    protected static Object stableAction(ProceedingJoinPoint jp) {
+    public static int aroundCount() {
+        return where(currentThread().getStackTrace(),
+                s -> s.getMethodName().equals("jdiAround")/* ||
+                s.getClassName().equals("io.qameta.allure.aspects.StepsAspects")*/)
+                .size();
+    }
+    public static Object defaultAction(ProceedingJoinPoint jp) throws Throwable {
+        JDIBase obj = getJdi(jp);
+        JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
+        return overrideAction != null
+                ? overrideAction.execute(obj) : jp.proceed();
+    }
+    public static JDIBase getJdi(ProceedingJoinPoint jp) {
         try {
-            logger.logOff();
-            TIMEOUT.freeze();
+            return jp.getThis() != null && isInterface(getJpClass(jp), IBaseElement.class)
+                ? ((IBaseElement) jp.getThis()).base() : null;
+        } catch (Exception ex) { return null; }
+    }
+    public static Object stableAction(ProceedingJoinPoint jp) {
+        try {
             String exception = "";
             JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
-            int timeout = ja != null && ja.timeout() != -1
-                    ? ja.timeout()
-                    : TIMEOUT.get();
-            JFunc1<JDIBase, Object> overrideAction = null;
-            boolean replace = false;
-            JDIBase obj = null;
-            if (jp.getThis() != null && JDIBase.class.isAssignableFrom(jp.getThis().getClass())) {
-                overrideAction = GetOverrideAction(jp);
-                replace = overrideAction != null;
-                if (replace)
-                    obj = (JDIBase) jp.getThis();
-            }
+            JDIBase obj = getJdi(jp);
+            JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
+            int timeout = getTimeout(ja, obj);
             long start = currentTimeMillis();
             do {
                 try {
-                    Object result = replace ? overrideAction.execute(obj) : jp.proceed();
+                    Object result = overrideAction != null
+                        ? overrideAction.execute(obj) : jp.proceed();
                     if (!condition(jp)) continue;
                     return result;
                 } catch (Throwable ex) {
                     try {
-                        exception = ex.getMessage();
+                        exception = safeException(ex);
                         Thread.sleep(200);
-                    } catch (Exception ignore) {
-                    }
+                    } catch (Exception ignore) { }
                 }
             } while (currentTimeMillis() - start < timeout * 1000);
             throw exception(getFailedMessage(jp, exception));
-        } finally {
-            logger.logOn();
-            TIMEOUT.unfreeze();
-        }
+        } finally { }
+    }
+
+    private static JFunc1<JDIBase, Object> getOverride(ProceedingJoinPoint jp, JDIBase obj) {
+        return obj != null ? GetOverrideAction(jp) : null;
+    }
+
+    private static int getTimeout(JDIAction ja, IBaseElement obj) {
+        return ja != null && ja.timeout() != -1
+            ? ja.timeout()
+            : obj != null
+                ? obj.base().getTimeout()
+                : TIMEOUT.get();
     }
     private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
         MethodSignature method = getJpMethod(jp);
         try {
             String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
                 $("exception", exception),
-                $("timeout", TIMEOUT.get()),
+                $("timeout", getTimeout(jp)),
                 $("action", method.getMethod().getName())
             ));
             return fillTemplate(result, jp, method);
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: " +
-                    "Can't get failed message: " + ex.getMessage());
+                    "Can't get failed message: " + safeException(ex));
         }
+    }
+    private static int getTimeout(ProceedingJoinPoint jp) {
+        return getTimeout(null, getJdi(jp));
     }
 
     private static String getConditionName(ProceedingJoinPoint jp) {
@@ -125,14 +160,14 @@ public class ActionProcessor {
     }
 
     @Around("stepPointcut()")
-    public Object stepAround(ProceedingJoinPoint jp) throws Throwable {
+    public Object stepAround(ProceedingJoinPoint jp) {
         try {
             BEFORE_STEP_ACTION.execute(jp);
             Object result = jp.proceed();
             return AFTER_STEP_ACTION.execute(jp, result);
         } catch (Throwable ex) {
             Object element = jp.getThis() != null ? jp.getThis() : new Object();
-            throw exception(ACTION_FAILED.execute(element, ex.getMessage()));
+            throw exception(ACTION_FAILED.execute(element, safeException(ex)));
         }
     }
 }

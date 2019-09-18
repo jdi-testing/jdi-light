@@ -9,11 +9,12 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.isRemote;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
 import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.RemoteDriver.*;
+import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Integer.parseInt;
 import static java.lang.System.setProperty;
@@ -23,8 +24,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class DriverInfo extends DataClass<DriverInfo> {
     public DriverTypes type;
     public JFunc<Capabilities> capabilities;
-    public String properties;
-    public String path;
+    public String properties, path;
     public JFunc<WebDriver> getDriver;
 
     public WebDriver getDriver() {
@@ -59,7 +59,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                         return getDriver.execute();
                     } catch (Exception ex2) { throw exception("Failed to download driver: " + ex2.getMessage()); }
                 }
-                throw exception(ex.getMessage());
+                throw exception(safeException(ex));
             } catch (Exception ex2) {
                 throw exception("Failed to setup local driver: " + ex2.getMessage());
             }

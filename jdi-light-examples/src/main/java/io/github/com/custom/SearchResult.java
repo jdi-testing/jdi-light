@@ -1,9 +1,9 @@
 package io.github.com.custom;
 
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.String.format;

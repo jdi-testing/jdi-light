@@ -26,14 +26,14 @@ public class Timeout {
         freeze.update(v->v+1);
     }
     public void unfreeze() {
-        freeze.update(v->v-1);
+        if (freeze.get() > 0)
+            freeze.update(v->v-1);
         reset();
     }
     public void setUp(int seconds) {
         DEFAULT.set(seconds);
         current.set(seconds);
         logger.info("Setup timeout " + seconds + " seconds");
-        freeze.set(0);
     }
     public void set(int seconds) {
         if (freeze.get() > 0) return;

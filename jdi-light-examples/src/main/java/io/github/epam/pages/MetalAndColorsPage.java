@@ -1,10 +1,10 @@
 package io.github.epam.pages;
 
-import com.epam.jdi.light.elements.complex.Droplist;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.epam.sections.LogSidebar;
 import org.openqa.selenium.WebElement;
 
@@ -12,10 +12,10 @@ public class MetalAndColorsPage extends WebPage {
 	@Css(".uui-side-bar[name='log-sidebar']") public LogSidebar logSidebar;
 	@JDropdown(root = "div[ui=dropdown]", value = ".filter-option",
 			list = "li", expand = ".caret")
-	public Droplist colors;
+	public Dropdown colors;
 	@JDropdown(root = "div[ui=combobox]", value = "input",
 			list = "li", expand = ".caret")
-	public Droplist metals;
+	public Dropdown metals;
 	/*@JDropdown(root = @FindBy(css ="div[ui=droplist]"),
 			value = @FindBy(css ="button"),
 			list = @FindBy(css ="li"),

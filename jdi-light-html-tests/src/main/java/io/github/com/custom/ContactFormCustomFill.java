@@ -1,23 +1,23 @@
 package io.github.com.custom;
 
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
-import com.epam.jdi.light.ui.html.common.Button;
-import com.epam.jdi.light.ui.html.common.Checkbox;
-import com.epam.jdi.light.ui.html.common.TextArea;
-import com.epam.jdi.light.ui.html.common.TextField;
-import com.epam.jdi.light.ui.html.complex.Combobox;
-import com.epam.jdi.light.ui.html.complex.Dropdown;
+import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Checkbox;
+import com.epam.jdi.light.ui.html.elements.common.TextArea;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.entities.Contacts;
 
 import java.lang.reflect.Field;
 
 public class ContactFormCustomFill extends Form<Contacts> {
-    @FirstTokenCapitalisation TextField name;
+    TextField name;
     TextField lastName, position, passportNumber, passportSeria;
 
     Dropdown gender;
-    Combobox religion;
+    IsCombobox religion;
 
     Checkbox passport, acceptConditions;
     TextArea description;
@@ -26,9 +26,9 @@ public class ContactFormCustomFill extends Form<Contacts> {
 
     @Override
     public void fillAction(Field field, Object element, Object parent, String setValue) {
-        if (field.isAnnotationPresent(FirstTokenCapitalisation.class)) {
-            setValue = setValue.substring(0, 1).toUpperCase() + setValue.substring(1);
-        }
-        super.fillAction(field, element, parent, setValue);
+        String value = setValue;
+        if (field.getName().equals("name"))
+            value = setValue.toUpperCase();
+        super.fillAction(field, element, parent, value);
     }
 }

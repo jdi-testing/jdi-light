@@ -23,7 +23,7 @@ public class FormsTests extends TestsInit {
     @Test
     public void loginTest() {
         shouldBeLoggedOut();
-        if(userIcon.isHidden()) userIcon.click();
+        loginForm.shouldBeOpened();
         loginForm.loginAs(DEFAULT_USER);
         homePage.checkOpened();
     }
@@ -38,7 +38,7 @@ public class FormsTests extends TestsInit {
     @Test
     public void attrsTest() {
         shouldBeLoggedOut();
-        MapArray<String, String> attrs = userIcon.attrs();
+        MapArray<String, String> attrs = userIcon.core().attrs();
         attrs = attrs.filter((k,v) -> isNotBlank(v));
         assertThat(attrs.size(), is(2));
         assertThat(attrs.keys(), hasItem("src"));

@@ -25,9 +25,8 @@ public class States {
 
     @Step
     public static void login() {
-        if (loginForm.isHidden()) {
+        if (loginForm.isHidden())
             userIcon.click();
-        }
         loginForm.submit(DEFAULT_USER);
     }
 
@@ -37,7 +36,7 @@ public class States {
             homePage.open();
         if (userName.isDisplayed())
             logout();
-        if (loginForm.displayed())
+        if (loginForm.isDisplayed())
             userIcon.click();
     }
     @Step

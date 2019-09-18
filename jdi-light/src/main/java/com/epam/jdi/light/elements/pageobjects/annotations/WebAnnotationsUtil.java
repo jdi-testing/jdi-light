@@ -5,7 +5,7 @@ package com.epam.jdi.light.elements.pageobjects.annotations;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Quotes;
 

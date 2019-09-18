@@ -1,9 +1,9 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import io.github.com.sections.LoginForm;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +12,7 @@ public class Header extends Section {
 	@Css(".fa-sign-out") public static WebElement logout;
 	@Css("#epam_logo") public static WebElement epamLogo;
 	public static WebElement userIcon;
-	@XPath(".//*[@ui='label']") public static UIElement userName;
+	@XPath("//*[@ui='label']") public static UIElement userName;
 
 	@Css(".search-field input") static UIElement searchInput;
 	@Css(".icon-search") static WebElement searchIcon;

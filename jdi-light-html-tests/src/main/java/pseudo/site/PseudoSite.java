@@ -2,7 +2,7 @@ package pseudo.site;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import pseudo.site.pages.*;
 import pseudo.site.section.CustomSection;
 import pseudo.site.section.ExtendedSection;

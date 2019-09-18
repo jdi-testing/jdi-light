@@ -5,10 +5,11 @@ package com.epam.jdi.light.common;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.base.BaseUIElement;
-import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.light.elements.interfaces.INamed;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.IClickable;
+import com.epam.jdi.light.elements.interfaces.base.INamed;
+import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
@@ -44,7 +45,7 @@ public final class UIUtils {
         return new MapArray<>(notNullFields, UIUtils::getElementName,
             field -> {
                 Object value = getValueField(field, obj);
-                if (isClass(value.getClass(), String.class, Integer.class, Boolean.class))
+                if (isClassOr(value.getClass(), String.class, Integer.class, Boolean.class))
                     return value.toString();
                 if (isClass(value.getClass(), Enum.class))
                     return getEnumValue((Enum) value);
@@ -66,31 +67,33 @@ public final class UIUtils {
         return print(elements);
     }
 
-    public static JFunc2<Object, String, UIElement> GET_DEFAULT_BUTTON = (obj, buttonName) -> $("[type=submit]", obj);
+    public static JFunc2<Object, String, IClickable> GET_DEFAULT_BUTTON =
+        (obj, buttonName) -> $("[type=submit]", obj).setName(buttonName);
 
-    public static JFunc2<Object, String, BaseUIElement> GET_BUTTON = (obj, buttonName) -> {
-        List<Field> fields = getFieldsExact(obj, WebElement.class, UIElement.class);
-        switch (fields.size()) {
-            case 0:
-                return GET_DEFAULT_BUTTON.execute(obj, buttonName);
-            case 1:
-                return (BaseUIElement) getValueField(fields.get(0), obj);
-            default:
-                Collection<BaseUIElement> buttons = select(fields, f -> (BaseUIElement) getValueField(f, obj));
-                BaseUIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
-                if (button == null)
-                    throw exception("Can't find button '%s' for Element '%s'", buttonName, obj);
-                return button;
+    public static JFunc2<Object, String, IClickable> GET_BUTTON = (obj, buttonName) -> {
+        List<Field> fields = getFields(obj, IsButton.class);
+        if (fields.size() == 0)
+            fields = getFieldsExact(obj, WebElement.class, UIElement.class);
+        if (fields.size() > 1) {
+            fields = filter(fields, f ->
+                isInterfaceAnd(getValueField(f, obj).getClass(), IClickable.class, INamed.class));
+            if (fields.size() >= 1) {
+                Collection<IClickable> buttons = select(fields,
+                    f -> (IClickable) getValueField(f, obj));
+                IClickable button = first(buttons, b -> namesEqual(toButton(((INamed) b).getName()), toButton(buttonName)));
+                if (button != null)
+                    return button;
+            }
         }
+        if (fields.size() == 1) {
+            Field field = fields.get(0);
+            Object btnObj = getValueField(field, obj);
+            if (isInterface(btnObj.getClass(), IClickable.class))
+                return (IClickable) btnObj;
+        }
+        return GET_DEFAULT_BUTTON.execute(obj, buttonName);
     };
 
-    public static BaseUIElement getButtonByName(List<Field> fields, Object obj, String buttonName) {
-        Collection<BaseUIElement> buttons = select(fields, f -> (BaseUIElement) getValueField(f, obj));
-        BaseUIElement button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
-        if (button == null)
-            throw exception("Can't find button '%s' for Element '%s'", buttonName, obj);
-        return button;
-    }
     private static String toButton(String buttonName) {
         return buttonName.toLowerCase().contains("button") ? buttonName : buttonName + "button";
     }
@@ -123,6 +126,8 @@ public final class UIUtils {
         return (T) cs.newInstance(params);
     }
     public static <T> T create(Class<?> cs) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        if (cs == null)
+            throw exception("Can't init class. Class Type is null.");
         Constructor<?>[] constructors = cs.getDeclaredConstructors();
         Constructor<?> constructor = first(constructors, c -> c.getParameterCount() == 0);
         if (constructor != null)
@@ -130,13 +135,15 @@ public final class UIUtils {
         throw exception("%s has no empty constructors", cs.getSimpleName());
     }
     public static <T> T create(Class<?> cs, Object... params) {
+        if (cs == null)
+            throw exception("Can't init class. Class Type is null.");
         Constructor<?>[] constructors = cs.getDeclaredConstructors();
         List<Constructor<?>> listConst = filter(constructors, c -> c.getParameterCount() == params.length);
         if (listConst.size() == 0)
-            throw exception("%s has no appropriate constructors", cs.getSimpleName());
+            throw exception("%s has no constructor with %s params", cs.getSimpleName(), params.length);
         for(Constructor<?> cnst : listConst) {
             try {
-                return csInit(cnst);
+                return csInit(cnst, params);
             } catch (Exception ignore) { }
         }
         throw exception("%s has no appropriate constructors", cs.getSimpleName());

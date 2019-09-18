@@ -1,10 +1,11 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseUIElement;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.JFunc;
@@ -17,22 +18,24 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
-import static java.util.Arrays.asList;
 
-public class Line implements IList<String> {
+public class Line implements IList<String>, IBaseElement {
     private JFunc<MapArray<String, String>> dataMap;
-    private List<UIElement> elements;
+    private WebList elements;
     private List<String> headers;
+    public JDIBase base() {
+        return elements.base();
+    }
 
     public Line() {}
-    public Line(List<UIElement> elements, List<String> headers) {
+    public Line(WebList elements, List<String> headers) {
         this.elements = elements;
         this.headers = headers;
-        this.dataMap = () -> new MapArray<>(headers, LinqUtils.map(elements, BaseUIElement::getText));
+        List<String> values = LinqUtils.map(elements, UIElement::getText);
+        this.dataMap = () -> new MapArray<>(headers, values);
     }
     public static Line initLine(List<String> list, List<String> headers) {
         Line line = new Line();
@@ -61,8 +64,8 @@ public class Line implements IList<String> {
      * @return List
      */
     @JDIAction(level = DEBUG)
-    public List<String> elements(int minAmount) {
-        return getList(minAmount);
+    public MapArray<String, String> elements(int minAmount) {
+        return getData(minAmount);
     }
 
     public String getValue() {
@@ -108,13 +111,13 @@ public class Line implements IList<String> {
         T instance;
         try { instance = create(cl); }
         catch (Exception ex) { throw exception("Can't convert row to Entity (%s)", cl.getSimpleName()); }
-        initElements(instance);
         for (int i = 0; i < headers.size(); i++) {
             String header = headers.get(i);
             Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
                 f -> namesEqual(getElementName(f), header));
             try {
-                ((JDIBase)field.get(instance)).setWebElement(elements.get(i));
+                IBaseElement ui = ((IBaseElement)field.get(instance));
+                ui.base().setWebElement(elements.get(i));
             } catch (Exception ex) {
                 throw exception("Can't set table entity to field '%s'", field.getName());
             }

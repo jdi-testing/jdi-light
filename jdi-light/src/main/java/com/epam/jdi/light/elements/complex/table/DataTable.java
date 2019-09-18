@@ -1,10 +1,10 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.light.asserts.DataTableAssert;
+import com.epam.jdi.light.asserts.generic.table.DataTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.InitActions;
-import com.epam.jdi.light.elements.interfaces.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -17,8 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.asserts.SoftAssert.assertSoft;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -27,7 +28,7 @@ import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.util.Arrays.asList;
 
-public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>> {
+public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, DataTableAssert<L, D>> {
     private Class<L> lineClass;
     private Class<D> dataClass;
 
@@ -52,8 +53,11 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>> 
     @JDIAction("Get row '{0}' for '{name}' table")
     public D data(int rowNum) {
         hasDataClass();
-        if (!datas.get().has(rowNum+""))
-            datas.get().add(rowNum+"", getLineData(row(rowNum)));
+        if (!datas.get().has(rowNum+"")) {
+            Line line = row(rowNum);
+            D data = getLineData(line);
+            datas.get().update(rowNum + "", data);
+        }
         return datas.get().get(rowNum+"");
     }
 
@@ -65,8 +69,10 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>> 
     @JDIAction("Get row '{0}' for '{name}' table")
     public L line(int rowNum) {
         hasLineClass();
-        if (!lines.get().has(rowNum+""))
-            lines.get().add(rowNum+"", row(rowNum).asLine(lineClass));
+        if (!lines.get().has(rowNum+"")) {
+            L value = row(rowNum).asLine(lineClass);
+            lines.get().update(rowNum + "", value);
+        }
         return lines.get().get(rowNum+"");
     }
 
@@ -242,7 +248,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>> 
         if (datas.isGotAll()) return datas.get().values();
         MapArray<String, D> result = new MapArray<>();
         for (int i = 1; i <= count.get(); i++)
-            result.add(i+"", data(i));
+            result.update(i+"", data(i));
         datas.gotAll();
         return datas.set(result).values();
     }
@@ -438,52 +444,34 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>> 
     private MapArray<String, String> getLineMap(Line row) {
         L line = row.asLine(lineClass);
         List<Field> fields = getFieldsExact(line.getClass(), f -> isInterface(f, HasValue.class));
-        return new MapArray<>(fields,
-                Field::getName, f -> ((HasValue)f.get(line)).getValue());
+        MapArray<String, String> result = new MapArray<>();
+        for (Field field : fields) {
+            String name = "", value = "";
+            try {
+                name = field.getName();
+                value = ((HasValue) field.get(line)).getValue();
+                result.add(name, value);
+            } catch (Exception ex) {
+                throw exception("Can't get '%s' Line Map. Failed to execute getValue() method in class '%s'(name=%s;value=%s).%sException: %s",
+                        getName(), field.getType().getSimpleName(), name, value, LINE_BREAK, safeException(ex));
+            }
+        }
+        return result;
     }
 
     @Override
-    public DataTableAssert<D>  is() {
-        return new DataTableAssert<>(this);
-    }
-    @Override
-    public DataTableAssert<D>  assertThat() {
-        return is();
-    }
-    @Override
-    public DataTableAssert<D>  has() {
-        return is();
-    }
-    @Override
-    public DataTableAssert<D>  waitFor() {
-        return is();
-    }
-    @Override
-    public DataTableAssert<D>  shouldBe() {
-        return is();
-    }
-    public DataTableAssert<D>  verify() {
-        assertSoft();
-        return is();
+    public DataTableAssert<L, D>  is() {
+        return new DataTableAssert<L, D>().set(this);
     }
 
-    public DataTableAssert<D> is(Matcher<? super List<D>> condition) {
+    public DataTableAssert<L, D>  is(Matcher<? super List<D>> condition) {
         MatcherAssert.assertThat(allData(), condition);
         return is();
     }
-    public DataTableAssert<D> assertThat(Matcher<? super List<D>> condition) {
+    public DataTableAssert<L, D> assertThat(Matcher<? super List<D>> condition) {
         return is(condition);
     }
-    public DataTableAssert<D> has(Matcher<? super List<D>> condition) {
-        return is(condition);
-    }
-    public DataTableAssert<D> waitFor(Matcher<? super List<D>> condition) {
-        return is(condition);
-    }
-    public DataTableAssert<D> shouldBe(Matcher<? super List<D>> condition) {
-        return is(condition);
-    }
-    public DataTableAssert<D> verify(Matcher<? super List<D>> condition) {
+    public DataTableAssert<L, D> verify(Matcher<? super List<D>> condition) {
         assertSoft();
         return is(condition);
     }

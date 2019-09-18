@@ -1,56 +1,25 @@
 package io.github.epam.html.tests.elements.composite;
 
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.light.elements.interfaces.SetValue;
-import com.epam.jdi.light.ui.html.annotations.FillValue;
-import com.epam.jdi.light.ui.html.annotations.VerifyValue;
-import com.epam.jdi.tools.func.JAction4;
-import com.epam.jdi.tools.func.JFunc3;
-import io.github.com.custom.FirstTokenCapitalisation;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
-import pseudo.site.dataproviders.FormDataProvider;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.List;
 
 import static com.epam.jdi.light.common.FormFilters.ALL;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.tools.LinqUtils.first;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.*;
 import static io.github.com.pages.ContactFormPage.main;
 import static io.github.com.pages.Header.*;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
-import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedOut;
 import static io.github.epam.html.tests.site.steps.States.shouldContactPageBeOpenedAndRefreshed;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import static pseudo.site.PseudoSite.pseudoHeader;
-import static pseudo.site.pages.Header.pseudoFormLight;
 
 public class FormTests extends TestsInit {
-
-    @Test(dataProvider = "formDataProvider", dataProviderClass = FormDataProvider.class)
-    public void formInitializationTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
-        checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
-    }
-
-    @Test(dataProvider = "smartFormDataProvider", dataProviderClass = FormDataProvider.class)
-    public void smartFormInitializationTest(JDIBase htmlElementToCheck, String expectedLocator, JDIBase expectedParent, String expectedName) {
-        checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
-    }
-
-    @Test
-    public void lightFormInitializationTest() {
-        checkInitializedElement(pseudoFormLight, "", pseudoHeader, "Pseudo Form Light");
-    }
 
     @Test
     public void loginWithUserTest() {
@@ -74,6 +43,15 @@ public class FormTests extends TestsInit {
         refresh();
         userIcon.click();
         loginFormLight.login(DEFAULT_USER);
+        homePage.checkOpened();
+    }
+
+    @Test
+    public void loginWithUserToLightLocatorFormTest() {
+        shouldBeLoggedOut();
+        refresh();
+        userIcon.click();
+        loginFormLightLocator.login(DEFAULT_USER);
         homePage.checkOpened();
     }
 
@@ -104,7 +82,7 @@ public class FormTests extends TestsInit {
     @Test
     public void submitTextToContactFormTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        main.contactForm.submit(defaultName);
+        main.contactForm.submit("Roman");
         main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
         checkContactFormSubmitted();
     }
@@ -120,15 +98,14 @@ public class FormTests extends TestsInit {
     @Test
     public void submitTextToContactFormUsingCustomButtonTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        main.contactForm.submit(defaultName, "custom");
+        main.contactForm.submit("Roman", "custom");
         main.contactForm.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
     }
 
-    @Test(expectedExceptions = RuntimeException.class)
+    @Test
     public void submitTextToContactFormUsingNonExistentButtonTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        TIMEOUT.set(1);
-        main.contactFormCustom.submit(defaultName, "nonExistent");
+        main.contactFormCustom.submit("Roman", "nonExistent");
     }
 
     @Test
@@ -139,10 +116,9 @@ public class FormTests extends TestsInit {
         checkContactFormSubmitted();
     }
 
-    @Test(expectedExceptions = RuntimeException.class)
+    @Test
     public void submitEntityToContactFormUsingNonExistentButtonTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        TIMEOUT.set(1);
         main.contactFormCustom.submit(DEFAULT_CONTACT, "nonExistent");
     }
 
@@ -178,7 +154,7 @@ public class FormTests extends TestsInit {
         main.contactForm.fill(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
         List<String> verified = main.contactForm.verify(DEFAULT_CONTACT);
         assertEquals(verified.size(), 1);
-        assertTrue(verified.get(0).contains(defaultName));
+        assertTrue(verified.get(0).contains("Roman"));
     }
 
     @Test
@@ -311,77 +287,21 @@ public class FormTests extends TestsInit {
     }
 
     @Test
-    public void modifiedLambdaFillActionTest() {
-        shouldContactPageBeOpenedAndRefreshed();
-        JAction4<Field, Object, Object, String> initialFillActionLambda = Form.FILL_ACTION;
-        JAction4<Field, Object, Object, String> newFillActionLambda = (field, element, parent, setValue) -> {
-            if (field != null) {
-                Method[] methods = field.getType().getDeclaredMethods();
-                Method setMethod = first(methods, m -> m.isAnnotationPresent(FillValue.class));
-                if (setMethod != null) {
-                    if (field.isAnnotationPresent(FirstTokenCapitalisation.class)) {
-                        setMethod.invoke(element, (setValue.substring(0, 1).toUpperCase() + setValue.substring(1)));
-                    } else {
-                        setMethod.invoke(element, setValue);
-                    }
-                    return;
-                }
-            }
-            ((SetValue) element).setValue(setValue);
-        };
-        try {
-            Form.FILL_ACTION = newFillActionLambda;
-            main.contactFormCustom.fill(LOWER_CASE_NAME_CONTACT);
-            main.contactFormCustom.check(DEFAULT_CONTACT);
-        } finally {
-            Form.FILL_ACTION = initialFillActionLambda;
-        }
-    }
-
-    @Test
-    public void modifiedLambdaGetActionTest() {
-        shouldContactPageBeOpenedAndRefreshed();
-        JFunc3<Field, Object, Object, String> initialGetActionLambda = Form.GET_ACTION;
-        JFunc3<Field, Object, Object, String> newGetActionLambda = (field, element, parent) -> {
-            if (field != null) {
-                Method[] methods = field.getType().getDeclaredMethods();
-                Method getMethod = first(methods, m -> m.isAnnotationPresent(VerifyValue.class));
-                if (getMethod != null) {
-                    if (field.isAnnotationPresent(FirstTokenCapitalisation.class)) {
-                        String getValue = getMethod.invoke(element).toString();
-                        return (getValue.substring(0, 1).toUpperCase() + getValue.substring(1));
-                    } else {
-                        return getMethod.invoke(element).toString();
-                    }
-                }
-            }
-            return ((HasValue) element).getValue().trim();
-        };
-        try {
-            Form.GET_ACTION = newGetActionLambda;
-            main.contactFormCustom.fill(LOWER_CASE_NAME_CONTACT);
-            main.contactFormCustom.check(DEFAULT_CONTACT);
-        } finally {
-            Form.GET_ACTION = initialGetActionLambda;
-        }
-    }
-
-    @Test
     public void overriddenFillActionTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        main.contactFormCustomFill.fill(LOWER_CASE_NAME_CONTACT);
-        main.contactFormCustomFill.check(DEFAULT_CONTACT);
+        main.contactFormCustomFill.fill(DEFAULT_CONTACT);
+        main.contactFormCustomFill.check(UPPER_CASE_NAME_CONTACT);
     }
 
     @Test
     public void overriddenGetActionTest() {
         shouldContactPageBeOpenedAndRefreshed();
-        main.contactFormCustomGet.fill(LOWER_CASE_NAME_CONTACT);
-        main.contactFormCustomGet.check(DEFAULT_CONTACT);
+        main.contactFormCustomGet.fill(DEFAULT_CONTACT);
+        main.contactFormCustomGet.check(LOWER_CASE_NAME_CONTACT);
     }
 
     private void checkContactFormSubmitted() {
         lastLogEntry.assertThat()
-                .text(containsString("submit:button clicked"));
+            .text(containsString("submit:button clicked"));
     }
 }

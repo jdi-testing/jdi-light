@@ -2,23 +2,24 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseUIElement;
-import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.interfaces.HasValue;
-import com.epam.jdi.light.elements.interfaces.SetValue;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.IClickable;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction4;
 import com.epam.jdi.tools.func.JFunc3;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.FormFilters.*;
 import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
@@ -65,11 +66,13 @@ public class Form<T> extends Section {
      * @param map Specify entity as map
      *            Fills all elements on the form which implements SetValue interface and can be matched with fields in input entity
      */
-    protected void fill(MapArray<String, String> map) {
+    public void fill(MapArray<String, String> map) {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
-                UIElement element = new UIElement().setParent(this).setName(pair.key);
+                UIElement element = new UIElement().setup(e->e
+                    .setName(pair.key)
+                    .setParent(this));
                 fillAction(null, element, pageObject, pair.value);
             }
             return;
@@ -81,8 +84,8 @@ public class Form<T> extends Section {
                 if (setField == null)
                     continue;
                 fillAction(setField, getValueField(setField, pageObject), pageObject, pair.value);
-            } catch (Exception ex) { throw exception("Can't fill element '%s'. Exception: %s",
-                    setField != null ? setField.getName() : "UNKNOWN FIELD", ex.getMessage()); }
+            } catch (Exception ex) { throw exception("Can't fill element '%s'. %s",
+                    setField != null ? setField.getName() : "UNKNOWN FIELD", safeException(ex)); }
         setFilterAll();
     }
     private Object pageObject = this;
@@ -153,7 +156,8 @@ public class Form<T> extends Section {
      * @param map Specify entity as mapArray
      *            Verify that form filled correctly. If not throws error
      */
-    protected void check(MapArray<String, String> map) {
+    @JDIAction("Check that '{name}' values are: {0}")
+    public void check(MapArray<String, String> map) {
         List<String> result = verify(map);
         if (result.size() != 0)
             throw exception( "Check form failed:" + LINE_BREAK + print(result, LINE_BREAK));
@@ -170,7 +174,7 @@ public class Form<T> extends Section {
     /**
      * @param text Specify text
      *             Fill first setable field with value and click on Button “submit” <br>
-     * @apiNote To use this option Form pageObject should have at least one SetValue element and only one IButton Element
+     * @apiNote To use this option Form pageObject should have at least one SetValue element and only one IsButton Element
      */
     @JDIAction("Submit '{name}' with value '{0}'")
     public void submit(String text) {
@@ -207,7 +211,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “submit” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Submit '{name}' with {0}")
     public void submit(T entity) {
@@ -230,7 +234,8 @@ public class Form<T> extends Section {
 
     protected void submit(MapArray<String, String> objStrings, String name) {
         fill(objStrings);
-        GET_BUTTON.execute(pageObject, name).click();
+        IClickable button = GET_BUTTON.execute(pageObject, name);
+        button.click();
     }
     /**
      * @param objStrings Fill all SetValue elements and click on Button specified button e.g. "Publish" or "Save" <br>
@@ -238,7 +243,8 @@ public class Form<T> extends Section {
      * e.g. if you call "submit(user, "Publish") then you should have Element 'publishButton'. <br>
      * * Letters case in button name  no matters
      */
-    protected void submit(MapArray<String, String> objStrings) {
+    @JDIAction("Submit '{name}' with {0}")
+    public void submit(MapArray<String, String> objStrings) {
         submit(objStrings, "submit");
     }
 
@@ -246,7 +252,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “login” or ”loginButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Login as {0}")
     public void login(T entity) {
@@ -259,7 +265,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “login” or ”loginButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Login as {0}")
     public void loginAs(T entity) {
@@ -269,7 +275,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “send” or ”sendButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Send {0} in '{name}'")
     public void send(T entity) {
@@ -283,7 +289,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “add” or ”addButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Add {0} in '{name}'")
     public void add(T entity) {
@@ -293,7 +299,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “publish” or ”publishButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Publish {0} for '{name}'")
     public void publish(T entity) {
@@ -303,7 +309,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “save” or ”saveButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Save {0} in '{name}'")
     public void save(T entity) {
@@ -313,7 +319,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “update” or ”updateButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Update {0} in '{name}'")
     public void update(T entity) {
@@ -323,7 +329,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “cancel” or ”cancelButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Fill {0} and cancel '{name}'")
     public void cancel(T entity) {
@@ -333,7 +339,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “close” or ”closeButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Fill {0} and close '{name}'")
     public void close(T entity) {
@@ -343,7 +349,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “back” or ”backButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Fill '{name}' with {0} and go back")
     public void back(T entity) {
@@ -353,7 +359,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “select” or ”selectButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Select {0} for '{name}'")
     public void select(T entity) {
@@ -363,7 +369,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “next” or ”nextButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Fill '{name}' with {0} and go to next")
     public void next(T entity) {
@@ -373,7 +379,7 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “search” or ”searchButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IButton Element
+     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Search for {0} in '{name}'")
     public void search(T entity) {
@@ -381,20 +387,20 @@ public class Form<T> extends Section {
     }
 
     @Override
-    public boolean displayed() {
+    public boolean isDisplayed() {
         try {
-            if (webElement.hasValue())
-                return webElement.get().isDisplayed();
-            if (locator.isEmpty()) {
-                List<Field> fields = getFieldsInterfaceOf(pageObject, SetValue.class);
-                if (fields.isEmpty())
-                    return get().isDisplayed();
-                BaseUIElement first = (BaseUIElement) fields.get(0).get(pageObject);
-                return first.isDisplayed();
+            if (core().isDisplayed())
+                return true;
+            if (base().locator.isEmpty()) {
+                List<Field> fields = getFieldsInterfaceOf(pageObject, HasValue.class);
+                if (fields.isEmpty() && core().isDisplayed())
+                    return true;
+                Object po = fields.get(0).get(pageObject);
+                if (isInterface(po.getClass(), ICoreElement.class) && ((ICoreElement) po).core().isDisplayed())
+                    return true;
             }
-            List<WebElement> result = getAll();
-            return result.size() == 1 && result.get(0).isDisplayed();
-        } catch (Exception ex) { return false; }
+        } catch (Exception ignore) { }
+        return false;
     }
     //endregion
 }

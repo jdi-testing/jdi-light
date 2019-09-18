@@ -5,7 +5,6 @@ import io.qameta.allure.Step;
 
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.pages.Header.*;
-import static io.github.com.pages.Header.logout;
 import static io.github.epam.EpamGithubSite.header;
 import static io.github.epam.entities.Users.DEFAULT_USER;
 
@@ -31,7 +30,7 @@ public class Preconditions {
             homePage.open();
         if (userName.isDisplayed())
             logout();
-        if (loginForm.displayed())
+        if (loginForm.isDisplayed())
             userIcon.click();
     }
     @Step

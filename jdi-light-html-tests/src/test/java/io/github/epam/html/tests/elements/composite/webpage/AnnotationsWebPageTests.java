@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pseudo.site.dataproviders.webpage.WebPageDataProvider;
+import pseudo.site.dataproviders.webpages.WebPageDataProvider;
 
 
 public class AnnotationsWebPageTests extends TestsInit {

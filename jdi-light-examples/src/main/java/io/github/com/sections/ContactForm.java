@@ -2,7 +2,7 @@ package io.github.com.sections;
 
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.epam.entities.User;
 import org.openqa.selenium.WebElement;
 

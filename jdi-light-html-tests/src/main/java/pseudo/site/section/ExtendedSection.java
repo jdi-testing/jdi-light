@@ -1,20 +1,20 @@
 package pseudo.site.section;
 
-import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.Droplist;
-import com.epam.jdi.light.elements.complex.UIList;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
-import com.epam.jdi.light.ui.html.common.Button;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class ExtendedSection extends CustomSection {
+public class ExtendedSection extends ExtendSection {
     @FindBy(id = "webElementPackage")
     WebElement webElementPackage;
     @FindBy(id = "webElementPublic")
@@ -121,46 +121,46 @@ public class ExtendedSection extends CustomSection {
     public WebList webListPublicXPath;
 
     @FindBy(id = "uilistQuestionPackage")
-    UIList<CustomSection, ?> uilistQuestionPackage;
+    DataList<CustomSection, ?> uilistQuestionPackage;
     @FindBy(id = "uilistQuestionPublic")
-    public UIList<CustomSection, ?> uilistQuestionPublic;
+    public DataList<CustomSection, ?> uilistQuestionPublic;
     @FindBy(id = "uilistQuestionPrivate")
-    private UIList<CustomSection, ?> uilistQuestionPrivate;
-    @UI(".uilistQuestionPackageUI")
-    UIList<CustomSection, ?> uilistQuestionPackageUI;
-    @UI(".uilistQuestionPublicUI")
-    public UIList<CustomSection, ?> uilistQuestionPublicUI;
+    private DataList<CustomSection, ?> uilistQuestionPrivate;
+    @UI(".uilistQuestionPackageData")
+    DataList<CustomSection, ?> uilistQuestionPackageData;
+    @UI(".uilistQuestionPublicData")
+    public DataList<CustomSection, ?> uilistQuestionPublicData;
     @Css(".uilistQuestionPackageCss")
-    UIList<CustomSection, ?> uilistQuestionPackageCss;
+    DataList<CustomSection, ?> uilistQuestionPackageCss;
     @XPath("//*[@class='uilistQuestionPublicXPath']")
-    public UIList<CustomSection, ?> uilistQuestionPublicXPath;
+    public DataList<CustomSection, ?> uilistQuestionPublicXPath;
 
     @FindBy(id = "uilistSomedataPackage")
-    UIList<CustomSection, SomeData> uilistSomedataPackage;
+    DataList<CustomSection, SomeData> uilistSomedataPackage;
     @FindBy(id = "uilistSomedataPublic")
-    public UIList<CustomSection, SomeData> uilistSomedataPublic;
+    public DataList<CustomSection, SomeData> uilistSomedataPublic;
     @FindBy(id = "uilistSomedataPrivate")
-    private UIList<CustomSection, SomeData> uilistSomedataPrivate;
-    @UI(".uilistSomedataPackageUI")
-    UIList<CustomSection, SomeData> uilistSomedataPackageUI;
-    @UI(".uilistSomedataPublicUI")
-    public UIList<CustomSection, SomeData> uilistSomedataPublicUI;
+    private DataList<CustomSection, SomeData> uilistSomedataPrivate;
+    @UI(".uilistSomedataPackageData")
+    DataList<CustomSection, SomeData> uilistSomedataPackageData;
+    @UI(".uilistSomedataPublicData")
+    public DataList<CustomSection, SomeData> uilistSomedataPublicData;
     @Css(".uilistSomedataPackageCss")
-    UIList<CustomSection, SomeData> uilistSomedataPackageCss;
+    DataList<CustomSection, SomeData> uilistSomedataPackageCss;
     @XPath("//*[@class='uilistSomedataPublicXPath']")
-    public UIList<CustomSection, SomeData> uilistSomedataPublicXPath;
+    public DataList<CustomSection, SomeData> uilistSomedataPublicXPath;
 
     @JDropdown(root = "div[ui=droplistPackage", value = "input", list = "li", expand = ".expand")
-    Droplist droplistPackage;
+    Dropdown droplistPackage;
     @JDropdown(root = "div[ui=droplistPublic", value = "input", list = "li", expand = ".expand")
-    public Droplist droplistPublic;
+    public Dropdown droplistPublic;
     @JDropdown(root = "div[ui=droplistPrivate", value = "input", list = "li", expand = ".expand")
-    private Droplist droplistPrivate;
-    private static Droplist droplistPrivateStatic;
+    private Dropdown droplistPrivate;
+    private static Dropdown droplistPrivateStatic;
     @UI(".droplistPackageUI")
-    Droplist droplistPackageUI;
+    Dropdown droplistPackageUI;
     @UI(".droplistPublicUI")
-    public Droplist droplistPublicUI;
+    public Dropdown droplistPublicUI;
 
     public WebElement getWebElementPackage() {
         return webElementPackage;
@@ -332,84 +332,84 @@ public class ExtendedSection extends CustomSection {
         this.webListPackageUI = webListPackageUI;
     }
 
-    public UIList<CustomSection, ?> getUilistQuestionPackage() {
+    public DataList<CustomSection, ?> getUilistQuestionPackage() {
         return uilistQuestionPackage;
     }
 
-    public void setUilistQuestionPackage(UIList<CustomSection, ?> uilistQuestionPackage) {
+    public void setUilistQuestionPackage(DataList<CustomSection, ?> uilistQuestionPackage) {
         this.uilistQuestionPackage = uilistQuestionPackage;
     }
 
-    public UIList<CustomSection, ?> getUilistQuestionPrivate() {
+    public DataList<CustomSection, ?> getUilistQuestionPrivate() {
         return uilistQuestionPrivate;
     }
 
-    public void setUilistQuestionPrivate(UIList<CustomSection, ?> uilistQuestionPrivate) {
+    public void setUilistQuestionPrivate(DataList<CustomSection, ?> uilistQuestionPrivate) {
         this.uilistQuestionPrivate = uilistQuestionPrivate;
     }
 
 
-    public UIList<CustomSection, ?> getUilistQuestionPackageUI() {
-        return uilistQuestionPackageUI;
+    public DataList<CustomSection, ?> getUilistQuestionPackageData() {
+        return uilistQuestionPackageData;
     }
 
-    public void setUilistQuestionPackageUI(UIList<CustomSection, ?> uilistQuestionPackageUI) {
-        this.uilistQuestionPackageUI = uilistQuestionPackageUI;
+    public void setUilistQuestionPackageData(DataList<CustomSection, ?> uilistQuestionPackageData) {
+        this.uilistQuestionPackageData = uilistQuestionPackageData;
     }
 
-    public UIList<CustomSection, SomeData> getUilistSomedataPackage() {
+    public DataList<CustomSection, SomeData> getUilistSomedataPackage() {
         return uilistSomedataPackage;
     }
 
-    public void setUilistSomedataPackage(UIList<CustomSection, SomeData> uilistSomedataPackage) {
+    public void setUilistSomedataPackage(DataList<CustomSection, SomeData> uilistSomedataPackage) {
         this.uilistSomedataPackage = uilistSomedataPackage;
     }
 
-    public UIList<CustomSection, SomeData> getUilistSomedataPrivate() {
+    public DataList<CustomSection, SomeData> getUilistSomedataPrivate() {
         return uilistSomedataPrivate;
     }
 
-    public void setUilistSomedataPrivate(UIList<CustomSection, SomeData> uilistSomedataPrivate) {
+    public void setUilistSomedataPrivate(DataList<CustomSection, SomeData> uilistSomedataPrivate) {
         this.uilistSomedataPrivate = uilistSomedataPrivate;
     }
 
-    public UIList<CustomSection, SomeData> getUilistSomedataPackageUI() {
-        return uilistSomedataPackageUI;
+    public DataList<CustomSection, SomeData> getUilistSomedataPackageData() {
+        return uilistSomedataPackageData;
     }
 
-    public void setUilistSomedataPackageUI(UIList<CustomSection, SomeData> uilistSomedataPackageUI) {
-        this.uilistSomedataPackageUI = uilistSomedataPackageUI;
+    public void setUilistSomedataPackageData(DataList<CustomSection, SomeData> uilistSomedataPackageData) {
+        this.uilistSomedataPackageData = uilistSomedataPackageData;
     }
 
-    public Droplist getDroplistPackage() {
+    public Dropdown getDroplistPackage() {
         return droplistPackage;
     }
 
-    public void setDroplistPackage(Droplist droplistPackage) {
+    public void setDroplistPackage(Dropdown droplistPackage) {
         this.droplistPackage = droplistPackage;
     }
 
-    public Droplist getDroplistPrivate() {
+    public Dropdown getDroplistPrivate() {
         return droplistPrivate;
     }
 
-    public void setDroplistPrivate(Droplist droplistPrivate) {
+    public void setDroplistPrivate(Dropdown droplistPrivate) {
         this.droplistPrivate = droplistPrivate;
     }
 
-    public static Droplist getDroplistPrivateStatic() {
+    public static Dropdown getDroplistPrivateStatic() {
         return droplistPrivateStatic;
     }
 
-    public static void setDroplistPrivateStatic(Droplist droplistPrivateStatic) {
+    public static void setDroplistPrivateStatic(Dropdown droplistPrivateStatic) {
         ExtendedSection.droplistPrivateStatic = droplistPrivateStatic;
     }
 
-    public Droplist getDroplistPackageUI() {
+    public Dropdown getDroplistPackageUI() {
         return droplistPackageUI;
     }
 
-    public void setDroplistPackageUI(Droplist droplistPackageUI) {
+    public void setDroplistPackageUI(Dropdown droplistPackageUI) {
         this.droplistPackageUI = droplistPackageUI;
     }
 
@@ -441,11 +441,11 @@ public class ExtendedSection extends CustomSection {
         return webListPackageCss;
     }
 
-    public UIList<CustomSection, ?> getUilistQuestionPackageCss() {
+    public DataList<CustomSection, ?> getUilistQuestionPackageCss() {
         return uilistQuestionPackageCss;
     }
 
-    public UIList<CustomSection, SomeData> getUilistSomedataPackageCss() {
+    public DataList<CustomSection, SomeData> getUilistSomedataPackageCss() {
         return uilistSomedataPackageCss;
     }
 }

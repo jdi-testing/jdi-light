@@ -8,7 +8,7 @@ public class Defaults {
         c.name = "Roman";
         c.lastName = "Iovlev";
         c.position = "ChiefQA";
-        //c.passport = true;
+        c.passport = true;
         c.passportNumber = "4321";
         c.passportSeria = "123456";
         c.description = "JDI - awesome UI automation tool";

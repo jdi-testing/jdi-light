@@ -1,16 +1,22 @@
 package com.epam.jdi.light.elements.complex;
 
-import com.epam.jdi.light.asserts.SelectAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.BaseUIElement;
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import org.apache.logging.log4j.util.Strings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
@@ -18,22 +24,22 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
-public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
-    implements ISelector {
+public class Selector extends UIBaseElement<UISelectAssert>
+        implements ISelector, SetValue, HasPlaceholder {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
-
-    public Selector() { }
-    public Selector(WebElement el) { super(el); }
-    public Selector(List<WebElement> els) { super(els); }
-
+    protected Select asSelect() {
+        return core().asSelect();
+    }
+    public WebList list() {
+        return $$(asSelect().getOptions(), getName());
+    }
     /**
      * Selects the value based on its visible text
      * @param value String to search
      */
-    @Override
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
-        select().selectByVisibleText(value);
+        asSelect().selectByVisibleText(value);
     }
 
     /**
@@ -42,7 +48,9 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
-        select().selectByIndex(index-1);
+        if (index < 1)
+            throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
+        asSelect().selectByIndex(index-1);
     }
 
     /**
@@ -51,9 +59,9 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
      */
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String... values) {
-        select().deselectAll();
+        unckeckAll();
         for (String value : values)
-            select().selectByVisibleText(value);
+            asSelect().selectByVisibleText(value);
     }
 
     /**
@@ -72,7 +80,7 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
      */
     @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(String... values) {
-        for (WebElement opt : select().getOptions()) {
+        for (WebElement opt : asSelect().getOptions()) {
             if (opt.isSelected() && asList(values).contains(opt.getText())
                 || !opt.isSelected() && !asList(values).contains(opt.getText()))
                 opt.click();
@@ -91,7 +99,7 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
      */
     @JDIAction("Check '{0}' for '{name}'")
     public void check(int... values) {
-        select().deselectAll();
+        unckeckAll();
         for (int index : values)
             select(index);
     }
@@ -102,7 +110,7 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
      */
     @JDIAction("Uncheck '{0}' for '{name}'")
     public void uncheck(int... values) {
-        List<WebElement> options = select().getOptions();
+        List<WebElement> options = asSelect().getOptions();
         for (int i = 0; i < options.size(); i++) {
             WebElement opt = options.get(i);
             if (opt.isSelected() && asList(values).contains(i)
@@ -110,14 +118,16 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
                 opt.click();
         }
     }
-
+    public void unckeckAll() {
+        asSelect().deselectAll();
+    }
     /**
      * Get checked elements
      * @return List
      */
     @JDIAction("Get checked elements")
     public List<String> checked() {
-        return map(select().getAllSelectedOptions(), WebElement::getText);
+        return map(asSelect().getAllSelectedOptions(), WebElement::getText);
     }
 
     /**
@@ -126,21 +136,14 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
      */
     @JDIAction("Get selected value")
     public String selected() {
-        return select().getFirstSelectedOption().getText();
+        return asSelect().getFirstSelectedOption().getText();
     }
     @JDIAction("Is '{0}' selected")
     public boolean selected(String value) {
-        return locator.isTemplate()
-            ? new UIElement(get(value)).isSelected()
+        return core().locator.isTemplate()
+            ? new UIElement(base().get(value)).isSelected()
             : selected().trim().equalsIgnoreCase(value.trim());
     }
-
-    /**
-     * Gets attribute 'placeholder'
-     * @return String
-     */
-    @JDIAction(level = DEBUG)
-    public String placeholder() { return getAttribute("placeholder"); }
 
     /**
      * Get the elements values
@@ -148,7 +151,7 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
      */
     @JDIAction(level = DEBUG)
     public List<String> values() {
-        return map(select().getOptions(), WebElement::getText);
+        return map(asSelect().getOptions(), WebElement::getText);
     }
 
     /**
@@ -156,10 +159,10 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
      * @return List
      */
     @JDIAction(level = DEBUG)
-    public List<String> innerValues() {
-        return map(select().getOptions(), w -> $(w).innerText());
+    public List<String> values(TextTypes type) {
+        return map(asSelect().getOptions(), w -> $(w).text(type));
     }
-    public int size() { return select().getOptions().size(); }
+
 
     /**
      * Get the list of enabled elements
@@ -167,8 +170,8 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
      */
     @JDIAction(level = DEBUG)
     public List<String> listEnabled() {
-        List<UIElement> els = getUI().finds("option");
-        return ifSelect(els, UIElement::isEnabled, UIElement::getText);
+        List<WebElement> els = asSelect().getOptions();
+        return ifSelect(els, WebElement::isEnabled, WebElement::getText);
     }
 
     /**
@@ -177,22 +180,22 @@ public class Selector<T extends BaseUIElement> extends BaseUIElement<T>
      */
     @JDIAction(level = DEBUG)
     public List<String> listDisabled() {
-        return ifSelect(getUI().finds("option"),
-            UIElement::isDisabled, UIElement::getText);
+        List<WebElement> els = asSelect().getOptions();
+        return ifSelect(els, WebElement::isDisplayed, WebElement::getText);
     }
 
     @Override
     public void setValue(String value) {
-        if (select().isMultiple())
+        if (asSelect().isMultiple())
             check(value.split(";"));
         else select(value);
     }
     @Override
     public String getValue() {
-        return select().isMultiple() ? print(checked(),";") : selected();
+        return asSelect().isMultiple() ? print(checked(),";") : selected();
     }
-
-    public SelectAssert is() {
-        return new SelectAssert(() -> this);
+    @Override
+    public UISelectAssert is() {
+        return new UISelectAssert<>().set(this);
     }
 }

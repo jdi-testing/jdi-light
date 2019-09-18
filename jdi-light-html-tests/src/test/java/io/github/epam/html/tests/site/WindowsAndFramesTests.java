@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.base.WindowsManager.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.StaticSite.iframe;
 import static io.github.com.pages.GithubPage.repoDescription;
@@ -29,7 +29,7 @@ public class WindowsAndFramesTests extends TestsInit {
         originalWindow(); // open original (first) window
         switchToWindow(2); // open second window
         assertEquals(repoDescription.getText(),
-        "JDI is the test Framework for UI test automation");
+        "Try JDI Light https://github.com/jdi-testing/jdi-light");
         setWindowName("Github 2");
         switchToWindow(1); // open first (original) window
 
@@ -37,7 +37,7 @@ public class WindowsAndFramesTests extends TestsInit {
             containsString("QUIS NOSTRUD EXERCITATION"));
         switchToWindow("Github 2");
         assertEquals(repoDescription.getText(),
-                "JDI is the test Framework for UI test automation");
+                "Try JDI Light https://github.com/jdi-testing/jdi-light");
         closeWindow();
     }
 

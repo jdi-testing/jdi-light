@@ -1,12 +1,12 @@
 package org.mytests.uiobjects.example.site.custom;
 
-import com.epam.jdi.light.ui.html.base.HtmlChecklist;
-import com.epam.jdi.light.ui.html.base.HtmlElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.ui.html.elements.complex.Checklist;
 
-public class Checklist extends HtmlChecklist {
+public class CheckList extends Checklist {
     @Override
-    public boolean isSelected(HtmlElement value) {
-        return hasClass("active")
-            && attr("ui").equals("label");
+    public boolean selected(UIElement value) {
+        return value.hasClass("active")
+            && value.attr("ui").equals("label");
     }
 }

@@ -5,15 +5,17 @@
         <listener class-name="io.github.epam.testng.TestNGListener" />
     </listeners>
     <test name="Tests">
-        <!--classes>
-            <class name="io.github.epam.tests.recommended.ComplexElements3Tests"/>
-        </classes-->
         <packages>
-            <package name="io.github.epam.tests.recommended"/>
-            <package name="io.github.epam.tests.selenium"/>
             <package name="io.github.epam.tests.epam"/>
             <package name="io.github.epam.tests.google"/>
+            <package name="io.github.epam.tests.recommended"/>
+            <package name="io.github.epam.tests.selenium"/>
             <package name="io.github.epam.tests.smart.path"/>
         </packages>
+    </test>
+    <test name="Root">
+        <classes>
+            <class name="io.github.epam.tests.RootTests"/>
+        </classes>
     </test>
 </suite>

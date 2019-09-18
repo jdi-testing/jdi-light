@@ -17,12 +17,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_SETTINGS;
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
-import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
@@ -95,8 +94,8 @@ public class WebDriverFactory {
         return driverName;
     }
 
-    public static void jsExecute(String script, Object... args) {
-        ((JavascriptExecutor) getDriver()).executeScript(script, args);
+    public static <T> T jsExecute(String script, Object... args) {
+        return (T)((JavascriptExecutor) getDriver()).executeScript(script, args);
     }
 
     public static WebDriver getDriver() {
@@ -106,7 +105,7 @@ public class WebDriverFactory {
             useDriver(CHROME);
             return getDriver(CHROME.name);
         } catch (Exception ex) {
-            throw exception("Can't get WebDriver. " + LINE_BREAK + ex.getMessage());
+            throw exception("Can't get WebDriver. " + LINE_BREAK + safeException(ex));
         }
     }
 
@@ -147,7 +146,7 @@ public class WebDriverFactory {
         } catch (Exception ex) {
             throw exception("Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
                     format("Drivers: %s; Run: %s", DRIVERS, RUN_DRIVERS.get()) +
-                    "Exception: " + ex.getMessage());
+                    "Exception: " + safeException(ex));
         }
     }
 

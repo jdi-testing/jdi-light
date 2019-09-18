@@ -1,6 +1,6 @@
 package selenium.site.pages;
 
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.WebPage;

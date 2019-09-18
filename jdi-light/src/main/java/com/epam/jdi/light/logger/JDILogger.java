@@ -26,6 +26,7 @@ import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
 import static io.qameta.allure.model.Status.PASSED;
 import static java.lang.Thread.currentThread;
 import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.apache.logging.log4j.core.config.Configurator.setLevel;
 import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
 
 public class JDILogger implements ILogger {
@@ -58,6 +59,7 @@ public class JDILogger implements ILogger {
     public void setLogLevel(LogLevels level) {
         logLevel = new Safe<>(level);
         setRootLevel(getLog4j2Level(level));
+        setLevel(name, getLog4j2Level(level));
     }
     private Safe<Integer> logOffDeepness = new Safe<>(0);
 

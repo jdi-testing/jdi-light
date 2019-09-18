@@ -1,6 +1,6 @@
 package io.github.epam.tests.google;
 
-import com.epam.jdi.light.elements.complex.UIList;
+import com.epam.jdi.light.elements.complex.DataList;
 import io.github.com.custom.Result;
 import io.github.com.custom.SearchResult;
 import io.github.epam.StaticTestsInit;
@@ -28,7 +28,7 @@ public class ElementsGoogleTests extends StaticTestsInit {
     }
     @Test
     public void validateEntitiesTests() {
-        UIList<SearchResult, Result> jobs = searchPage.search;
+        DataList<SearchResult, Result> jobs = searchPage.search;
 
         jobs.assertThat(not(empty()))
             .and(hasSize(greaterThan(2)))
@@ -39,7 +39,7 @@ public class ElementsGoogleTests extends StaticTestsInit {
     }
     @Test
     public void validateEntities2Tests() {
-        UIList<SearchResult, ?> jobs = searchPage.search2;
+        DataList<SearchResult, ?> jobs = searchPage.search2;
         assertEquals(jobs.get(0).name.getText(),"JDI SKYPE");
         assertEquals(jobs.get(1).name.getText(),"JDI OWNER CONTACT");
         try {
@@ -52,7 +52,7 @@ public class ElementsGoogleTests extends StaticTestsInit {
 
     @Test
     public void validateFilterTests() {
-        UIList<SearchResult, Result> jobs = searchPage.search;
+        DataList<SearchResult, Result> jobs = searchPage.search;
 
         jobs.assertThat().value(containsString(
             "name:JDI FACEBOOK GROUP; description:English Community Facebook group"))

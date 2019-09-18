@@ -5,13 +5,14 @@ package com.epam.jdi.light.settings;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.asserts.SoftAssert;
+import com.epam.jdi.light.asserts.core.SoftAssert;
+import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
-import com.epam.jdi.light.driver.get.RemoteDriver;
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.UIElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
@@ -28,23 +29,27 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
+import static com.epam.jdi.light.common.ElementArea.CENTER;
+import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
+import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.DriverTypes.getByName;
-import static com.epam.jdi.light.driver.get.RemoteDriver.*;
-import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
+import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
+import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
@@ -56,24 +61,34 @@ public class WebSettings {
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
         el != null && el.isDisplayed() && el.isEnabled();
-    public static JFunc1<WebElement, Boolean> SEARCH_CONDITION = VISIBLE_ELEMENT;
+    public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
+        el != null && !el.isDisplayed() && $(el).isClickable();
+    public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
+    public static JAction1<UIElement> BEFORE_SEARCH = b -> {};
     public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
-        SEARCH_CONDITION = rule;
+        SEARCH_RULES = rule;
     }
     public static void noValidation() {
-        SEARCH_CONDITION = ANY_ELEMENT;
+        SEARCH_RULES = ANY_ELEMENT;
+        CLICK_TYPE = CENTER;
     }
     public static void onlyVisible() {
-        SEARCH_CONDITION = VISIBLE_ELEMENT;
+        SEARCH_RULES = VISIBLE_ELEMENT;
     }
-    public static void enabledElement() {
-        SEARCH_CONDITION = ENABLED_ELEMENT;
+    public static void visibleEnabled() {
+        SEARCH_RULES = ENABLED_ELEMENT;
     }
+    public static void inView() {
+        SEARCH_RULES = ELEMENT_IN_VIEW;
+        BEFORE_SEARCH = UIElement::show;
+    }
+
+    public static ElementArea CLICK_TYPE = SMART_CLICK;
+    public static TextTypes TEXT_TYPE = SMART_TEXT;
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
         return DOMAIN != null && DOMAIN.contains("://");
     }
-    public static boolean initialized = false;
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
@@ -90,54 +105,57 @@ public class WebSettings {
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
-    public static JFunc1<JDIBase, WebElement> SMART_SEARCH = el -> {
-        String locatorName = SMART_SEARCH_NAME.execute(el.name);
-        for (String template : SMART_SEARCH_LOCATORS) {
-            UIElement ui = template.equals("#%s")
-                ? $(String.format(template, locatorName)).setName(el.name)
-                : $(String.format(template, locatorName), el.parent).setName(el.name);
-            try {
-                return ui.get();
-            } catch (Exception ignore) { }
-        }
-        throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.name);
+    public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
+        String locatorName = SMART_SEARCH_NAME.execute(el.getName());
+        return el.base().timer().getResult(() -> {
+            for (String template : SMART_SEARCH_LOCATORS) {
+                UIElement ui = (template.equals("#%s")
+                    ? $(String.format(template, locatorName))
+                    : $(String.format(template, locatorName), el.base().parent))
+                        .setup(e -> e.setName(el.getName()).noWait());
+                try {
+                    return ui.getWebElement();
+                } catch (Exception ignore) { }
+            }
+            throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
+        });
     };
 
     public static synchronized void init() {
-        if (!initialized) {
-            getProperties(TEST_PROPERTIES_PATH);
-            fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
-            fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
-            fillAction(p -> DOMAIN = p, "domain");
-            if (DRIVER_NAME.equals(DEFAULT_DRIVER))
-                fillAction(p -> DRIVER_NAME = p, "driver");
-            fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
-                    ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
-                        ? PRELATEST_VERSION : p, "driver.version");
-            fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
-            fillAction(p -> SCREEN_PATH = p, "screens.folder");
-            // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
-            fillAction(p -> KILL_BROWSER = p, "browser.kill");
-            fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
-            fillAction(p -> BROWSER_SIZE = p, "browser.size");
-            fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
-            fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
-            fillAction(SoftAssert::setAssertType, "assert.type");
+        getProperties(TEST_PROPERTIES_PATH);
+        fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
+        fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
+        fillAction(p -> DOMAIN = p, "domain");
+        if (DRIVER_NAME.equals(DEFAULT_DRIVER))
+            fillAction(p -> DRIVER_NAME = p, "driver");
+        fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
+                ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
+                    ? PRELATEST_VERSION : p, "driver.version");
+        fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
+        fillAction(p -> SCREEN_PATH = p, "screens.folder");
+        // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
+        fillAction(p -> KILL_BROWSER = p, "browser.kill");
+        fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
+        fillAction(p -> BROWSER_SIZE = p, "browser.size");
+        fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
+        fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
+        fillAction(SoftAssert::setAssertType, "assert.type");
 
-            // RemoteWebDriver properties
-            fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
+        // RemoteWebDriver properties
+        fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
+        fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
+        fillAction(p -> SMART_SEARCH_LOCATORS =
+            filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
 
-            loadCapabilities("chrome.capabilities.path",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
-            loadCapabilities("ff.capabilities.path",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
-            loadCapabilities("ie.capabilities.path",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
+        loadCapabilities("chrome.capabilities.path",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
+        loadCapabilities("ff.capabilities.path",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
+        loadCapabilities("ie.capabilities.path",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
 
-            INIT_THREAD_ID = Thread.currentThread().getId();
-            SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
-            initialized = true;
-        }
+        INIT_THREAD_ID = Thread.currentThread().getId();
+        SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
     }
 
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {
@@ -161,6 +179,10 @@ public class WebSettings {
                 onlyVisible();
             if (params.contains("any") || params.contains("all"))
                 noValidation();
+            if (params.contains("enabled"))
+                visibleEnabled();
+            if (params.contains("inview"))
+                inView();
             if (params.contains("single"))
                 STRICT_SEARCH = true;
             if (params.contains("multiple"))

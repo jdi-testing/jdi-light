@@ -1,15 +1,15 @@
 package pseudo.site.forms;
 
-import com.epam.jdi.light.elements.base.UIElement;
-import com.epam.jdi.light.elements.complex.Droplist;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.UI;
-import com.epam.jdi.light.elements.pageobjects.annotations.simple.XPath;
-import com.epam.jdi.light.ui.html.common.Button;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.WebElement;
 import pseudo.site.entities.User;
 
@@ -72,9 +72,10 @@ public class CustomForm extends Form<User> {
     @Css("#cssWebList-id") WebList cssWebList;
     @XPath("//*[@id='xpathPublicWebList-id']") public WebList xpathPublicWebList;
 
-    @JDropdown(root = "div[ui=dropList]", value = "input", list = "li", expand = ".expand") Droplist dropList;
-    @JDropdown(root = "div[ui=publicDropList]", value = "input", list = "li", expand = ".expand") public Droplist publicDropList;
-    @JDropdown(root = "div[ui=privateDropList]", value = "input", list = "li", expand = ".expand") private Droplist privateDropList;
+    @JDropdown(root = "div[ui=dropList]", value = "input", list = "li", expand = ".expand")
+    Dropdown dropList;
+    @JDropdown(root = "div[ui=publicDropList]", value = "input", list = "li", expand = ".expand") public Dropdown publicDropList;
+    @JDropdown(root = "div[ui=privateDropList]", value = "input", list = "li", expand = ".expand") private Dropdown privateDropList;
 
     public WebElement getFbWebElement() {
         return fbWebElement;
@@ -216,15 +217,15 @@ public class CustomForm extends Form<User> {
         return uiPublicWebList;
     }
 
-    public Droplist getDropList() {
+    public Dropdown getDropList() {
         return dropList;
     }
 
-    public Droplist getPublicDropList() {
+    public Dropdown getPublicDropList() {
         return publicDropList;
     }
 
-    public Droplist getPrivateDropList() {
+    public Dropdown getPrivateDropList() {
         return privateDropList;
     }
 

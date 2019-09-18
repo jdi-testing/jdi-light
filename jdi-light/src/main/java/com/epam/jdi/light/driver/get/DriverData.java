@@ -22,9 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.driver.get.Platform.X32;
-import static com.epam.jdi.light.elements.base.DriverBase.DEFAULT_DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
@@ -50,6 +50,7 @@ public class DriverData {
     public static String DOWNLOADS_DIR = mergePath(TEST_PATH, "resources", "downloads");
     public static PageLoadStrategy PAGE_LOAD_STRATEGY = NORMAL;
     public static String BROWSER_SIZE = "MAXIMIZE";
+    public static final String DEFAULT_DRIVER = "chrome";
     public static String DRIVER_NAME = DEFAULT_DRIVER;
 
     public static Map<String,String> CAPABILITIES_FOR_IE = new HashMap<>();
@@ -105,7 +106,7 @@ public class DriverData {
             driver.manage().window().setSize(maximizedScreenSize);
             return driver;
         } catch (Exception ex) {
-            logger.error("Failed to Maximize screen: " + ex.getMessage());
+            logger.error("Failed to Maximize screen: " + safeException(ex));
             throw ex;
         }
     }
@@ -130,7 +131,7 @@ public class DriverData {
             CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
             return cap;
         } catch (Exception ex) {
-            throw exception("Failed Init Chrome Driver settings: " + ex.getMessage());
+            throw exception("Failed Init Chrome Driver settings: " + safeException(ex));
         }
     };
 
@@ -159,7 +160,7 @@ public class DriverData {
             CAPABILITIES_FOR_FF.forEach(cap::setCapability);
             return cap;
         } catch (Exception ex) {
-            throw exception("Failed Init Firefox Driver settings: " + ex.getMessage());
+            throw exception("Failed Init Firefox Driver settings: " + safeException(ex));
         }
     };
 
@@ -184,7 +185,7 @@ public class DriverData {
     //        cap.setCapability("password", WebSettings.DRIVER_REMOTE_USER_PASSWORD);
             return cap;
         } catch (Exception ex) {
-            throw exception("Failed Init Internet Explorer Driver settings: " + ex.getMessage());
+            throw exception("Failed Init Internet Explorer Driver settings: " + safeException(ex));
         }
     };
 

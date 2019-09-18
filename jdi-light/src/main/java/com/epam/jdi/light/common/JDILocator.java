@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import org.openqa.selenium.By;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.LocatorType.DEFAULT;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
@@ -15,6 +16,16 @@ import static com.epam.jdi.tools.StringUtils.splitHyphen;
 import static java.lang.String.format;
 
 public class JDILocator {
+    public JDILocator() {}
+    public JDILocator copy() {
+        JDILocator locator = new JDILocator();
+        locator.locatorType = locatorType;
+        locator.byLocator = byLocator;
+        locator.isRoot = isRoot;
+        locator.element = element;
+        return locator;
+    }
+
     private LocatorType locatorType = DEFAULT;
     private By byLocator;
     public boolean isRoot = false;
@@ -42,12 +53,10 @@ public class JDILocator {
         return isRoot;
     }
 
-    public JDILocator() {
+    public void add(By locator, JDIBase element) {
+        add(locator, DEFAULT, element);
     }
-    public JDILocator(By locator, JDIBase element) {
-        this(locator, DEFAULT, element);
-    }
-    public JDILocator(By locator, LocatorType type, JDIBase element) {
+    public void add(By locator, LocatorType type, JDIBase element) {
         locatorType = type;
         byLocator = setRootLocator(locator)
                 ? trimRoot(locator)
@@ -56,6 +65,11 @@ public class JDILocator {
     }
     public boolean isTemplate() {
         return byLocator != null && byLocator.toString().contains("%s");
+    }
+    public int argsCount() {
+        return byLocator != null
+            ? org.apache.commons.lang3.StringUtils.countMatches(byLocator.toString(), "%s")
+            : 0;
     }
     private boolean setRootLocator(By locator) {
         if (containsRoot(locator))
@@ -84,7 +98,7 @@ public class JDILocator {
             String shortLocator = locator != null
                     ? shortBy(locator)
                     : print(select(SMART_SEARCH_LOCATORS, l -> format(l, splitHyphen(element.name))), " or ");
-            return isFrame + shortLocator.replaceAll("%s", "VALUE");
-        } catch (Exception ex) { throw exception("Can't print locator: " + ex.getMessage()); }
+            return isFrame + shortLocator.replaceAll("%s", "{{VALUE}}");
+        } catch (Exception ex) { throw exception("Can't print locator: " + safeException(ex)); }
     }
 }

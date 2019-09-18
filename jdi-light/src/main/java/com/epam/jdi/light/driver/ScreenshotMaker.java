@@ -10,6 +10,7 @@ import org.openqa.selenium.TakesScreenshot;
 import java.io.File;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.LOGS_PATH;
@@ -56,7 +57,7 @@ public class ScreenshotMaker {
         try {
             copyFile(screensFile, new File(screensFilePath));
         } catch (Exception ex) {
-            throw exception("Failed to do screenshot: " + ex.getMessage());
+            throw exception("Failed to do screenshot: " + safeException(ex));
         }
         logger.info("Screenshot: " + screensFilePath);
         return screensFilePath;
