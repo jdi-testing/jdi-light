@@ -47,7 +47,7 @@ public class FileUploadTests extends TestsInit {
         try {
             disabledFileInput.uploadFile(mergePath(PROJECT_PATH, "/src/test/resources/general.xml"));
         } catch (Exception ignore) {}
-        disabledFileInput.is().text(is("C:\\fakepath\\general.xml"));
+        disabledFileInput.is().text(is(""));
     }
     @Test
     public void labelTest() {
