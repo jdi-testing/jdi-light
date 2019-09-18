@@ -2,6 +2,7 @@ package io.github.epam.bootstrap.tests.common;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.github.com.StaticSite.*;
+import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.breadcrumb;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -56,7 +57,7 @@ public class BreadcrumbTests extends TestsInit {
         WebDriver driver = WebDriverFactory.getDriver();
         driver.switchTo().window(tabs.get(1));
 
-        assertTrue(homePage.getTitle().contains(HOME));
+        assertTrue(WebPage.getTitle().contains(HOME));
 
         driver.close();
         driver.switchTo().window(tabs.get(0));
@@ -70,7 +71,7 @@ public class BreadcrumbTests extends TestsInit {
         WebDriver driver = WebDriverFactory.getDriver();
         driver.switchTo().window(tabs.get(1));
 
-        assertEquals(HTML5, html5Page.getTitle());
+        assertEquals(HTML5, WebPage.getTitle());
 
         driver.close();
         driver.switchTo().window(tabs.get(0));
@@ -80,7 +81,6 @@ public class BreadcrumbTests extends TestsInit {
     public void isValdidationTest() {
         breadcrumb.assertThat().displayed();
         breadcrumb.assertThat().enabled();
-        assertThat( breadcrumb.core().css("font-size"), is("14px"));
         breadcrumb.assertThat().displayed()
                 .core()
                 .cssClass("breadcrumb")
@@ -88,9 +88,10 @@ public class BreadcrumbTests extends TestsInit {
                 .css("display", is("flex"))
                 .css("flex-wrap", is("wrap"))
                 .css("background-color", is("rgba(233, 236, 239, 1)")) //#e9ecef Color Hex
-                .css("color", is("rgba(102, 102, 102, 1)")); //#666 Color Hex
+                .css("color", is("rgba(102, 102, 102, 1)")) //#666 Color Hex
+                .css("font-size", is("14px"));
 
-        breadcrumb.currentItem.is().text(bsPage.getTitle());
+        breadcrumb.currentItem.is().text(WebPage.getTitle());
         breadcrumb.currentItem.assertThat().displayed()
                 .core()
                 .attr("aria-current", "page")
@@ -111,5 +112,4 @@ public class BreadcrumbTests extends TestsInit {
     public void baseValidationTest() {
         baseValidation(breadcrumb);
     }
-
 }
