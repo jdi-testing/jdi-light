@@ -14,7 +14,9 @@ import org.openqa.selenium.Dimension;
 
 import static com.epam.jdi.bdd.BDDUtils.*;
 import static com.epam.jdi.light.common.ElementArea.JS;
+import static com.epam.jdi.light.driver.WebDriverByUtils.byText;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
@@ -259,8 +261,11 @@ public class JDISteps {
 	public void isNotAppear(String name, int seconds) {
 		uiAssert(name).notAppear(seconds);
 	}
-	//#endregion
 
+	@Then("^the \"(.*?)\" text is on page$")
+	public void textOnPage(String text) {
+		$(byText(text)).is().displayed();
+	}
     @Then("^the current page url is \"(.*?)\"$")
     public void urlIs(String expectedUrl) {
         assertEquals(expectedUrl, getUrl());
@@ -269,5 +274,6 @@ public class JDISteps {
 	public void titleIs(String expectedUrl) {
 		assertEquals(expectedUrl, getTitle());
 	}
+	//#endregion
 
 }
