@@ -6,8 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
-import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
+import static com.epam.jdi.light.elements.common.Alerts.*;
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.*;
@@ -32,6 +32,22 @@ public class ButtonTests extends TestsInit {
     }
     String text = "Big Red Button-Input";
 
+    @Test(invocationCount = 4, threadPoolSize = 4)
+    public void multiTest() {
+        rightClickButton.rightClick();
+        validateAlert(is("Right Click"));
+        dblClickButton.doubleClick();
+        validateAlert(is("Double Click"));
+        rightClickButton.rightClick();
+        rightClickButton.rightClick();
+        rightClickButton.rightClick();
+        validateAlert(is("Right Click"));
+        dblClickButton.doubleClick();
+        dblClickButton.doubleClick();
+        dblClickButton.doubleClick();
+        validateAlert(is("Double Click"));
+//        disabledButton.click();
+    }
     @Test
     public void getTextTest() {
         assertEquals(redButton.getText(), text);
