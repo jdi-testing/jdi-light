@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
@@ -21,6 +22,11 @@ public class BootstrapPage extends WebPage {
     //endregion
 
     //region Complex Elements
+
+    @Css("#media-object-sample") public static MediaObject mediaObjectSample;
+    @Css("#media-object-nesting") public static MediaObject mediaObjectNesting;
+    @Css("#media-object-list") public static MediaObject mediaObjectList;
+
     // COLLAPSE
     @JDropdown(expand = "#bs-collapse-link",
             value = "#bs-collapse-one",
