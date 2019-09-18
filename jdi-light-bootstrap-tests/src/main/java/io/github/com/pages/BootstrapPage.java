@@ -2,8 +2,8 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import io.github.com.sections.*;
 
 
