@@ -20,6 +20,7 @@ public class CarouselTests extends TestsInit {
 		bsPage.shouldBeOpened();
 		refresh();
 	}
+	
 	private String nextText = "Next";
 	private String prevText = "Previous";
 	private String firstSlideText = "First slide";
