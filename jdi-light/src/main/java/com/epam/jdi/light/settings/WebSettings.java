@@ -25,9 +25,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.stream.Stream;
 
 import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
@@ -146,6 +149,13 @@ public class WebSettings {
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> SMART_SEARCH_LOCATORS =
             filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
+
+        // Sauce Lab properties
+        Map<String, String> sauceCapabilities = new HashMap<String, String>();
+        loadCapabilities("saucelabs.path",
+                p -> p.forEach((key,value) -> sauceCapabilities.put(key.toString(),value.toString())));
+        Stream.of(CAPABILITIES_FOR_CHROME, CAPABILITIES_FOR_FF, CAPABILITIES_FOR_IE)
+                .forEach(cap -> cap.putAll(sauceCapabilities));
 
         loadCapabilities("chrome.capabilities.path",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
