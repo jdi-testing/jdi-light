@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite;
+package io.github.epam.bootstrap.tests.composite.section.card;
 
 import com.epam.jdi.light.elements.common.Alerts;
 import io.github.epam.TestsInit;
@@ -6,11 +6,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-
 import static io.github.com.pages.BootstrapPage.cardExample;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static io.github.epam.states.States.shouldBeLoggedOut;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.testng.Assert.assertEquals;
