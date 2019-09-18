@@ -23,12 +23,7 @@ public class ButtonWithDropdownTests extends TestsInit {
     String anotherAction = "Another action";
     String somethingElseHere = "Something else here";
     String separatedLink = "Separated link";
-
-    @Test
-    public void textInputAreaIsValidationTests() {
-        buttonWithDropdown.textInputArea.is().displayed();
-        buttonWithDropdown.textInputArea.is().enabled();
-    }
+    String dropdownButton = "Dropdown";
 
     @Test
     public void dropdownMenuIsValidationTests() {
@@ -48,11 +43,12 @@ public class ButtonWithDropdownTests extends TestsInit {
     public void dropdownMenuTests() {
         buttonWithDropdown.dropdownMenu.expand();
         assertTrue(buttonWithDropdown.dropdownMenu.isExpanded());
-        assertEquals(buttonWithDropdown.dropdownMenu.listEnabled().size(), 4);
-        assertEquals(buttonWithDropdown.dropdownMenu.list().get(0).getText(), action);
-        assertEquals(buttonWithDropdown.dropdownMenu.list().get(1).getText(), anotherAction);
-        assertEquals(buttonWithDropdown.dropdownMenu.list().get(2).getText(), somethingElseHere);
-        assertEquals(buttonWithDropdown.dropdownMenu.list().get(3).getText(), separatedLink);
+        assertEquals(buttonWithDropdown.dropdownMenu.list().size(), 4);
+        buttonWithDropdown.dropdownMenu.list().get(0).is().text(action);
+        buttonWithDropdown.dropdownMenu.list().get(1).is().text(anotherAction);
+        buttonWithDropdown.dropdownMenu.list().get(2).is().text(somethingElseHere);
+        buttonWithDropdown.dropdownMenu.list().get(3).is().text(separatedLink);
+        buttonWithDropdown.dropdownMenu.highlight();
         buttonWithDropdown.dropdownMenu.select(action);
         buttonWithDropdown.dropdownMenu.select(anotherAction);
         buttonWithDropdown.dropdownMenu.select(somethingElseHere);
@@ -63,10 +59,35 @@ public class ButtonWithDropdownTests extends TestsInit {
     public void dropdownButtonTests() {
         buttonWithDropdown.dropdownButton.is().displayed();
         buttonWithDropdown.dropdownButton.is().enabled();
-        assertTrue(buttonWithDropdown.dropdownButton.core().isClickable());
-        buttonWithDropdown.dropdownButton.is().text("Dropdown");
-        buttonWithDropdown.click();
+        buttonWithDropdown.dropdownButton.is().text(dropdownButton);
+        buttonWithDropdown.dropdownButton.click();
+        buttonWithDropdown.dropdownButton.is()
+                .core()
+                .attr("aria-expanded", "true");
     }
 
+    @Test
+    public void dropdownButtonIsValidationTests() {
+        buttonWithDropdown.dropdownButton.is()
+                .core()
+                .attr("type", "button")
+                .attr("data-toggle", "dropdown")
+                .attr("aria-haspopup", "true")
+                .attr("aria-expanded", "false")
+                .tag("button");
+    }
+
+    @Test
+    public void textInputAreaIsValidationTests() {
+        buttonWithDropdown.textInputArea.is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("form-control")
+                .css("font-size", "16px")
+                .attr("type", "text")
+                .attr("aria-label", "Text input with dropdown button")
+                .tag("input");
+    }
 
 }
