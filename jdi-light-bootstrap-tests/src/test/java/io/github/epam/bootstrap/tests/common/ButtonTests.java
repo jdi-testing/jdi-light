@@ -61,10 +61,21 @@ public class ButtonTests extends TestsInit {
         doubleButton.doubleClick();
         validateAlert(is("Double Click"));
     }
-    @Test
+    @Test(invocationCount = 2, threadPoolSize = 2)
     public void rightClickTest() {
         redButton.rightClick();
         validateAlert(is("Right Click"));
+        doubleButton.doubleClick();
+        validateAlert(is("Double Click"));
+        redButton.rightClick();
+        redButton.rightClick();
+        redButton.rightClick();
+        validateAlert(is("Right Click"));
+        doubleButton.doubleClick();
+        doubleButton.doubleClick();
+        doubleButton.doubleClick();
+        validateAlert(is("Double Click"));
+//        disabledButton.click();
     }
     @Test
     public void isValidationTest() {
