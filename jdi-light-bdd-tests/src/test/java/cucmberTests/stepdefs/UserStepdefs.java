@@ -62,8 +62,9 @@ public class UserStepdefs {
         FileInput fileInput = getUI(elementName, FileInput.class);
         try {
             fileInput.uploadFile(mergePath(PROJECT_PATH, pathToFile));
-        } catch (Exception e) {
-            assertTrue(e.getLocalizedMessage().contains("Failed to execute 'uploadFile' for element"));
+            fail("Can't upload file in disabled FileInput");
+        } catch (Exception ex) {
+            assertTrue(ex.getLocalizedMessage().contains("FileInput 'Disabled File Input' is disabled. Can't upload file"));
         }
     }
     @When("^I select \"([^\"]*)\" disabled option \"([^\"]*)\"")

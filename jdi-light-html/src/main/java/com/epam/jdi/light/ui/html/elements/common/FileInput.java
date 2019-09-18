@@ -7,12 +7,15 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 
 public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, IsText, SetValue {
     // region Actions
     @JDIAction("Upload file '{0}' for '{name}'")
     public void uploadFile(String path) {
+        if (isDisabled())
+            throw exception("FileInput '%s' is disabled. Can't upload file", getName());
         uiElement.sendKeys(path);
     }
     // endregion
