@@ -1,17 +1,17 @@
 package com.epam.jdi.light.ui.bootstrap.elements.complex;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
-import static com.epam.jdi.light.common.TextTypes.TEXT;
+import static com.epam.jdi.light.common.TextTypes.*;
 
 import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 
-public class Carousel extends UIBaseElement<TextAssert> implements HasLabel{
-	public String getText() { return currentSlide().text(TEXT); }
+public class Carousel extends UIBaseElement<TextAssert> implements IsText{
+	public String getText() { return text(TEXT); }
 	
     public String currentSlideLocator = "//div[contains(@class,'carousel-item active')]";
 	
@@ -63,11 +63,10 @@ public class Carousel extends UIBaseElement<TextAssert> implements HasLabel{
         list().select(index - 1);
     }
     
-    public String selected() {
-        return list().selected();
-    }
-    
     public int interval() {
     	return Integer.valueOf(currentSlide().getAttribute("data-interval"));
     }
+    
+    @Override
+    public TextAssert is() { return new TextAssert().set(this); }
 }

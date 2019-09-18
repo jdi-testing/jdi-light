@@ -18,24 +18,29 @@ public class CarouselTests extends TestsInit {
 	public void before() {
 		shouldBeLoggedIn();
 		bsPage.shouldBeOpened();
+		refresh();
 	}
-
+	private String nextText = "Next";
+	private String prevText = "Previous";
 	private String firstSlideText = "First slide";
 	private String secondSlideText = "Second slide";
 	private String thirdSlideText = "Third slide";
+	private String firstSlideFullText = firstSlideText + "\n" + prevText + "\n" + nextText;
+	private String secondSlideFullText = secondSlideText + "\n" + prevText + "\n" + nextText;
+	private String thirdSlideFullText = thirdSlideText + "\n" + prevText + "\n" + nextText;
 	
-	private String nextText = "Next";
-	private String prevText = "Previous";
-	
-	private String firstSlideWithLabelText = "First slide\n" +
+	private String firstSlideWithLabelText = firstSlideText + "\n" +
 	                                 "FIRST SLIDE LABEL\n" +
-			                         "Nulla vitae elit libero, a pharetra augue mollis interdum.";
-	private String secondSlideWithLabelText = "Second slide\n" + 
+			                         "Nulla vitae elit libero, a pharetra augue mollis interdum.\n" + 
+	                                 prevText + "\n" + nextText;
+	private String secondSlideWithLabelText = secondSlideText + "\n" + 
 			                          "SECOND SLIDE LABEL\n" + 
-			                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-	private String thirdSlideWithLabelText = "Third slide\n" + 
+			                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n" + 
+			                          prevText + "\n" + nextText;
+	private String thirdSlideWithLabelText = thirdSlideText + "\n" + 
 			                          "THIRD SLIDE LABEL\n" + 
-			                          "Praesent commodo cursus magna, vel scelerisque nisl consectetur.";
+			                          "Praesent commodo cursus magna, vel scelerisque nisl consectetur.\n" + 
+			                          prevText + "\n" + nextText;
 
 	//Carousel slides only tests
 	@Test
@@ -53,12 +58,13 @@ public class CarouselTests extends TestsInit {
 		carouselControls.prev();	
 		//carouselControls.base().waitSec(1);
 		delay(1000);
-		assertEquals(carouselControls.getText(), secondSlideText);
+		carouselControls.is().text(secondSlideFullText);
+		assertEquals(carouselControls.getText(), secondSlideFullText);
 		
 		carouselControls.prev();	
 		//carouselControls.base().waitSec(1);
 		delay(1000);
-		assertEquals(carouselControls.getText(), firstSlideText);
+		assertEquals(carouselControls.getText(), firstSlideFullText);
 		
 		assertEquals(carouselControls.prevControl().getText(), prevText);
 	}
@@ -68,12 +74,12 @@ public class CarouselTests extends TestsInit {
 		carouselControls.next();	
 		//carouselControls.base().waitSec(1);
 		delay(1000);
-		assertEquals(carouselControls.getText(), firstSlideText);
+		assertEquals(carouselControls.getText(), firstSlideFullText);
 		
 		carouselControls.next();	
 		//carouselControls.base().waitSec(1);
 		delay(1000);
-		assertEquals(carouselControls.getText(), secondSlideText);
+		assertEquals(carouselControls.getText(), secondSlideFullText);
 		
 		assertEquals(carouselControls.nextControl().getText(), nextText);
 	}
@@ -84,42 +90,24 @@ public class CarouselTests extends TestsInit {
 		carouselIndicators.select(1);	
 		//carouselIndicators.base().waitSec(1);
 		delay(1000);
-		assertEquals(carouselIndicators.getText(), firstSlideText);
+		assertEquals(carouselIndicators.getText(), firstSlideFullText);
 		assertTrue(carouselIndicators.list().get(0).isSelected());
 		assertFalse(carouselIndicators.list().get(1).isSelected());
 		
 		carouselIndicators.select(3);	
 		//carouselIndicators.base().waitSec(1);
 		delay(1000);
-		assertEquals(carouselIndicators.getText(), thirdSlideText);
+		assertEquals(carouselIndicators.getText(), thirdSlideFullText);
 		assertTrue(carouselIndicators.list().get(2).isSelected());
 		assertFalse(carouselIndicators.list().get(0).isSelected());
 		
 		carouselIndicators.select(2);	
 		//carouselIndicators.base().waitSec(1);
 		delay(1000);
-		assertEquals(carouselIndicators.getText(), secondSlideText);
+		assertEquals(carouselIndicators.getText(), secondSlideFullText);
 		assertTrue(carouselIndicators.list().get(1).isSelected());
 		assertFalse(carouselIndicators.list().get(2).isSelected());
     }
-	
-	@Test(enabled = false)
-	public void selected() {
-		carouselIndicators.select(1);	
-		//carouselIndicators.base().waitSec(1);
-		delay(1000);
-		System.out.println(carouselIndicators.selected());
-		
-		carouselIndicators.select(2);	
-		//carouselIndicators.base().waitSec(1);
-		delay(1000);
-		System.out.println(carouselIndicators.selected());
-		
-		carouselIndicators.select(3);	
-		//carouselIndicators.base().waitSec(1);
-		delay(1000);
-		System.out.println(carouselIndicators.selected());
-	}
 	
 	//Carousel with captions tests
 	@Test
@@ -143,33 +131,16 @@ public class CarouselTests extends TestsInit {
 	
 	// Carousel fade tests
 	@Test
-	public void fadeSelectTest() {
-		carouselFade.select(1);	
-		//carouselFade.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselFade.getText(), firstSlideText);
-		assertTrue(carouselFade.list().get(0).isSelected());
-		assertFalse(carouselFade.list().get(1).isSelected());
-		
-		carouselFade.select(3);	
-		//carouselFade.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselFade.getText(), thirdSlideText);
-		assertTrue(carouselFade.list().get(2).isSelected());
-		assertFalse(carouselFade.list().get(0).isSelected());
-	}
-	
-	@Test
 	public void fadePrevTest() {
 		carouselFade.prev();	
 		//carouselFade.base().waitSec(1);
 		delay(1000);
-		assertEquals(carouselFade.getText(), thirdSlideText);
+		assertEquals(carouselFade.getText(), thirdSlideFullText);
 		
 		carouselFade.prev();	
 		//carouselFade.base().waitSec(1);
 		delay(1000);
-		assertEquals(carouselFade.getText(), secondSlideText);
+		assertEquals(carouselFade.getText(), secondSlideFullText);
 		
 		assertEquals(carouselFade.prevControl().getText(), prevText);
 	}
@@ -179,12 +150,12 @@ public class CarouselTests extends TestsInit {
 		carouselFade.next();	
 		//carouselFade.base().waitSec(1);
 		delay(1000);
-		assertEquals(carouselFade.getText(), secondSlideText);
+		assertEquals(carouselFade.getText(), secondSlideFullText);
 		
 		carouselFade.next();	
 		//carouselFade.base().waitSec(1);
 		delay(1000);
-		assertEquals(carouselFade.getText(), thirdSlideText);
+		assertEquals(carouselFade.getText(), thirdSlideFullText);
 		
 		assertEquals(carouselFade.nextControl().getText(), nextText);
 	}
@@ -195,15 +166,15 @@ public class CarouselTests extends TestsInit {
 	public void intervalTest() {
 		//carouselInterval.base().waitSec(1);
 		delay(carouselInterval.interval());
-		assertEquals(carouselInterval.getText(), firstSlideText);
+		assertEquals(carouselInterval.getText(), firstSlideFullText);
 		
 		//carouselInterval.base().waitSec(1);
 		delay(carouselInterval.interval());
-		assertEquals(carouselInterval.getText(), secondSlideText);
+		assertEquals(carouselInterval.getText(), secondSlideFullText);
 		
 		//carouselInterval.base().waitSec(1);
 		delay(carouselInterval.interval());
-		assertEquals(carouselInterval.getText(), thirdSlideText);
+		assertEquals(carouselInterval.getText(), thirdSlideFullText);
 	}
 
 	public void delay(long ms) {
