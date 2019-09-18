@@ -13,7 +13,6 @@ public interface SimpleTestsInit {
 
     @BeforeSuite(alwaysRun = true)
     static void setUp() {
-        logger.setLogLevel(STEP);
         initElements(SiteJdi.class);
         logger.info("Run Tests");
     }

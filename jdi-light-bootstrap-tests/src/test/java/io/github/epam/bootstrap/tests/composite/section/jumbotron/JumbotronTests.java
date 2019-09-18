@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.common;
+package io.github.epam.bootstrap.tests.composite.section.jumbotron;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import io.github.epam.TestsInit;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.jumbotronFluid;
 import static io.github.com.pages.BootstrapPage.jumbotron;
+import static io.github.com.pages.BootstrapPage.jumbotronFluid;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -29,6 +29,7 @@ public class JumbotronTests extends TestsInit {
             "This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.\n" +
             "It uses utility classes for typography and spacing to space content out within the larger container.\n" +
             "Learn more";
+    private String mJumbotronUrl = "https://getbootstrap.com/docs/4.3/components/jumbotron/";
 
     @BeforeMethod
     public void before() {
@@ -54,7 +55,7 @@ public class JumbotronTests extends TestsInit {
         ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
         WebDriver driver = WebDriverFactory.getDriver();
         driver.switchTo().window(tabs.get(1));
-        assertEquals("https://getbootstrap.com/docs/4.3/components/jumbotron/", getUrl());
+        assertEquals(getUrl(), mJumbotronUrl);
         driver.close();
         driver.switchTo().window(tabs.get(0));
     }
