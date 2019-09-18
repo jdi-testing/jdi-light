@@ -8,7 +8,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
-import org.testng.Assert;
 
 import static com.epam.jdi.bdd.BDDUtils.core;
 import static com.epam.jdi.bdd.stepdefs.CheckListSteps.multiSelect;
@@ -20,8 +19,6 @@ import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.*;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Dmitry_Lebedev1 on 1/12/2016.
@@ -65,8 +62,9 @@ public class UserStepdefs {
         FileInput fileInput = getUI(elementName, FileInput.class);
         try {
             fileInput.uploadFile(mergePath(PROJECT_PATH, pathToFile));
-        } catch (Exception e) {
-            assertTrue(e.getLocalizedMessage().contains("Failed to execute 'uploadFile' for element"));
+            fail("Can't upload file in disabled FileInput");
+        } catch (Exception ex) {
+            assertTrue(ex.getLocalizedMessage().contains("FileInput 'Disabled File Input' is disabled. Can't upload file"));
         }
     }
     @When("^I select \"([^\"]*)\" disabled option \"([^\"]*)\"")

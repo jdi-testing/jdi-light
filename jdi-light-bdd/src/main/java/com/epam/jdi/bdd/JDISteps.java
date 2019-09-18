@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
-import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -15,18 +14,32 @@ import org.openqa.selenium.Dimension;
 
 import static com.epam.jdi.bdd.BDDUtils.*;
 import static com.epam.jdi.light.common.ElementArea.JS;
-import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
-import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
+import static com.epam.jdi.light.driver.WebDriverByUtils.byText;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
+import static com.epam.jdi.light.settings.WebSettings.init;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 
 public class JDISteps {
+	@Given("^I open application$")
+	public void iMOpenSite() {
+		init();
+		openUrl(DOMAIN);
+	}
 	@Given("^I open \"([^\"]*)\"(?: page|)$")
-    public void iMOpen(String pageName) {
-        getPage(pageName).shouldBeOpened();
+    public void iOpen(String pageName) {
+        if (pageName.startsWith("http"))
+			WebPage.openUrl(pageName);
+		getPage(pageName).shouldBeOpened();
     }
+	@Given("^I'm on \"([^\"]*)\"(?: page|)$")
+	public void iMOpen(String pageName) {
+		iOpen(pageName);
+	}
 	@Given("^I open \"([^\"]*)\"(?: page|) with params \"([^\"]*)\"$")
 	public void iMOpenParams(String pageName, Object params) {
 		getPage(pageName).shouldBeOpened(params);
@@ -117,9 +130,10 @@ public class JDISteps {
 		WebDriverFactory.getDriver().manage().window().setSize(dimension);
 	}
 
+	@Given("Page with url \"([^\"]*)\" openned$")
 	@When("^(?:I |)open url \"([^\"]*)\"$")
-	public void openUrl(String url) {
-		WebPage.openUrl(url);
+	public void iOpenUrl(String url) {
+		openUrl(url);
 	}
 
 	//#endregion
@@ -247,8 +261,11 @@ public class JDISteps {
 	public void isNotAppear(String name, int seconds) {
 		uiAssert(name).notAppear(seconds);
 	}
-	//#endregion
 
+	@Then("^the \"(.*?)\" text is on page$")
+	public void textOnPage(String text) {
+		$(byText(text)).is().displayed();
+	}
     @Then("^the current page url is \"(.*?)\"$")
     public void urlIs(String expectedUrl) {
         assertEquals(expectedUrl, getUrl());
@@ -257,5 +274,6 @@ public class JDISteps {
 	public void titleIs(String expectedUrl) {
 		assertEquals(expectedUrl, getTitle());
 	}
+	//#endregion
 
 }

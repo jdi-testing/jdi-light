@@ -1,25 +1,24 @@
 package com.epam.jdi.light.elements.init.entities.collection;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
-import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.tools.JsonUtils.getMapFromJson;
+import static com.epam.jdi.tools.JsonUtils.scanFolder;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
@@ -29,6 +28,9 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 public class EntitiesCollection {
     public static MapArray<String, WebPage> PAGES = new MapArray<>();
     public static MapArray<String, List<Object>> ELEMENTS = new MapArray<>();
+
+    static MapArray<String, String> jsonPages;
+    static MapArray<String, String> jsonElements;
 
     private EntitiesCollection() { }
 
@@ -41,16 +43,20 @@ public class EntitiesCollection {
             PAGES.removeByKey(className);
         PAGES.update(page.getName(), page);
     }
+    static void readPagesFromJson() {
+        jsonPages = getMapFromJson("pages", "json.page.objects");
+    }
     public static WebPage getPage(String pageName) {
         WebPage page = PAGES.get(pageName);
         if (page == null)
             page = PAGES.get(pageName + " Page");
         if (page == null) {
-            MapArray<String, String> elements = getMapFromJson("pages");
-            if (elements.get(pageName) == null) {
+            if (jsonPages == null)
+                readPagesFromJson();
+            if (jsonPages == null) {
                 throw exception("Can't find page with name %s. Available pages: %s", pageName,
                         print(PAGES.keys()));
-            } else page = new WebPage(DOMAIN + elements.get(pageName));
+            } else page = new WebPage(jsonPages.get(pageName));
         }
         return page;
     }
@@ -79,7 +85,20 @@ public class EntitiesCollection {
             return ((ICoreElement) element);
         throw exception("Can't find '%s' element", name);
     }
+    static void readElementsFromJson() {
+        List<String> filePaths = scanFolder("src/test/resources"+getProperty("json.page.objects"));
+        jsonElements = new MapArray<>();
+        for (String filePath : filePaths)
+            try {
+                jsonElements.addAll(new ObjectMapper().readValue(new File(filePath), HashMap.class));
+            } catch (IOException e) {
+                throw new RuntimeException("Can't read elements from json");
+            }
+    }
+
     static Object getElement(String name) {
+        if (!name.matches("[A-Z].*"))
+            return $(name);
         String[] split = name.split("\\.");
         if (split.length == 2)
             return getElementInSection(split[1], split[0]);
@@ -92,7 +111,11 @@ public class EntitiesCollection {
                 return page != null && page.getName().equals(getCurrentPage());
             });
         }
-        throw exception("Can't find '%s' element", name);
+        if (jsonElements == null)
+            readElementsFromJson();
+        return jsonElements.keys().contains(name)
+                ? $(jsonElements.get(name))
+                : new UIElement().setName(name);
     }
 
     static Object getElementInSection(String name, String section) {
@@ -104,41 +127,6 @@ public class EntitiesCollection {
             return result;
         }
         throw exception("Can't find '%s' element", name);
-    }
-
-    public static MapArray<String, String> getMapFromJson(String jsonName) {
-        return MapArray.toMapArray(deserializeJsonToMap(jsonName));
-    }
-
-    public static Map<String, String> deserializeJsonToMap(String jsonName) {
-        Gson gson = (new GsonBuilder()).create();
-        Map<String, String> map = new HashMap<String, String>();
-        String json = readFileData(getProperty("jsonTestDataFolder") + jsonName + ".json");
-        map = gson.fromJson(json, map.getClass());
-        return map;
-    }
-
-    public static String readFileData(String filePath) {
-        String data;
-        try(InputStream inputStream = EntitiesCollection.class.getResourceAsStream(filePath)) {
-            data = readFromInputStream(inputStream);
-        } catch (IOException e) {
-            throw exception("Can't read from stream!");
-        } catch(NullPointerException npe) {
-            throw exception("Can't find file by path %s !", filePath);
-        }
-        return data;
-    }
-
-    private static String readFromInputStream(InputStream inputStream) throws IOException {
-        StringBuilder resultStringBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                resultStringBuilder.append(line).append("\n");
-            }
-        }
-        return resultStringBuilder.toString();
     }
 
 }
