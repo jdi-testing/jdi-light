@@ -62,7 +62,7 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
-							<div class="btn-group" role="group"
+							<div class="btn-group" id="button-group1" role="group"
 								aria-label="Button group with nested dropdown">
 								<button type="button" class="btn btn-danger"
 									onclick="alert('Red button');">Red button</button>
@@ -81,6 +81,11 @@
 											documentation</a>
 									</div>
 								</div>
+							</div>
+							<hr>
+							<div class="btn-group" id="button-group2" role="group" aria-label="Button group with nested dropdown">
+								<button type="button" class="btn btn-info" ondblclick="alert('Double click');" oncontextmenu="alert('Context Click');">On Action</button>
+								<button type="button" class="btn btn-primary" disabled="">Disabled</button>
 							</div>
 						</div>
 						<div class="html-right">
