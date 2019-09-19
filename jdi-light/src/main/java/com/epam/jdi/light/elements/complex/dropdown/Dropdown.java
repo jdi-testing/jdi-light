@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Roman Iovlev on 02.03.2018
@@ -11,6 +12,10 @@ import java.util.List;
  */
 
 public class Dropdown extends DropdownExpand {
+
+    private static final String SPACES_REGEX = "[\\s]+";
+    private static final String SPACE = " ";
+
     protected DropdownSelect ds() {
         return new DropdownSelect().setCore(DropdownSelect.class, base());
     }
@@ -54,6 +59,14 @@ public class Dropdown extends DropdownExpand {
     @JDIAction("Get '{name}' values") @Override
     public List<String> values() {
         return setupDone ? super.values() : ds().values();
+    }
+
+    /**
+     * Method to get values without any additional white space including new line
+     * @return List<String> of available options from dropdown
+     */
+    public List<String> cleanValues() {
+        return values().stream().map(v -> v.replaceAll(SPACES_REGEX, SPACE)).collect(Collectors.toList());
     }
 
     @Override
