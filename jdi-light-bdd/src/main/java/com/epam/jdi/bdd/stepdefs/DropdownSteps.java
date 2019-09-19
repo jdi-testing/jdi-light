@@ -5,7 +5,7 @@ import cucumber.api.java.en.Then;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
-public class DropDownSteps {
+public class DropdownSteps {
     public static Dropdown dropdown(String name) { return getUI(name, Dropdown.class); }
 
     @Then("^the \"([^\"]*)\" in \"([^\"]*)\" is selected$")
