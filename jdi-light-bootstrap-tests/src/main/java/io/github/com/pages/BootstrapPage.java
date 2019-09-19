@@ -15,6 +15,10 @@ public class BootstrapPage extends WebPage {
     @Css("#input-group-username") public static InputGroupInputWithText inputGroupUsername;
     @Css("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
     @Css("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
+
+    @Css("#input-group-default") public static InputGroupInputWithText inputGroupDefaultSizing;
+    @Css("#input-group-small") public static InputGroupInputWithText inputGroupSmallSizing;
+    @Css("#input-group-large") public static InputGroupInputWithText inputGroupLargeSizing;
     //endregion
 
     //region Complex Elements
