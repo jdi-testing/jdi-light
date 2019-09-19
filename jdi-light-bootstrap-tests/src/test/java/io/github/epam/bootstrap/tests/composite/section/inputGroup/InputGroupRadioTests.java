@@ -49,26 +49,21 @@ public class InputGroupRadioTests extends TestsInit {
     }
 
     @Test
-    public void getValueTest() {
-        assertEquals(inputGroupRadio.input.getValue(), text);
-    }
-
-    @Test
     public void sendKeysTest() {
         inputGroupRadio.input.sendKeys(added_text);
-        assertEquals(inputGroupRadio.input.getValue(), new_text + added_text);
+        inputGroupRadio.input.assertThat().text(is(new_text + added_text));
     }
 
     @Test
     public void inputTest() {
         inputGroupRadio.input.input(new_text);
-        assertEquals(inputGroupRadio.input.getText(), new_text);
+        inputGroupRadio.input.assertThat().text(is(new_text));
     }
 
     @Test
     public void clearTest() {
         inputGroupRadio.input.clear();
-        assertEquals(inputGroupRadio.input.getText(), "");
+        inputGroupRadio.input.assertThat().text(is(""));
     }
 
     @Test
