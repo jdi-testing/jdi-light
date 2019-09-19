@@ -1,4 +1,4 @@
-package com.epam.jdi.light.elements.complex.dropdown;
+package com.epam.jdi.light.ui.bootstrap.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
@@ -13,7 +13,6 @@ import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.INNER;
-import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -51,12 +50,6 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
         if (!isExpanded())
             toggle();
     }
-
-    @JDIAction(level = DEBUG)
-    public boolean expanded() {
-        return isExpanded();
-    }
-
     @JDIAction(level = DEBUG)
     public void close() {
         if (isExpanded())
@@ -88,29 +81,25 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     }
 
     protected boolean setupDone = false;
-    public IsDropdown setup(String root, String value, String list, String expand) {
-        if (isNotBlank(root))
-            base().setLocator(root);
-        else if (isNotBlank(value)) {
-            base().setLocator(value);
-            thisParent = true;
-        }
-        if (isNotBlank(value)) {
-            valueLocator = value;
-            expandLocator = isNotBlank(expand)
-                    ? expand : value;
-        } else if (isNotBlank(expand))
-            expandLocator = expand;
-        if (isNotBlank(list))
-            listLocator = list;
-        setupDone = true;
-        return this;
-    }
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDropdown.class, IsDropdown.class))
             return;
         JDropdown j = field.getAnnotation(JDropdown.class);
-        setup(j.root(), j.value(), j.list(), j.expand());
+        if (isNotBlank(j.root()))
+            base().setLocator(j.root());
+        else if (isNotBlank(j.value())) {
+            base().setLocator(j.value());
+            thisParent = true;
+        }
+        if (isNotBlank(j.value())) {
+            valueLocator = j.value();
+            expandLocator = isNotBlank(j.expand())
+                ? j.expand() : j.value();
+        } else if (isNotBlank(j.expand()))
+            expandLocator = j.expand();
+        if (isNotBlank(j.list()))
+            listLocator = j.list();
+        setupDone = true;
     }
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() {
