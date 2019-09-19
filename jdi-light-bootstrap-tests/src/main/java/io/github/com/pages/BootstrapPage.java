@@ -12,13 +12,14 @@ public class BootstrapPage extends WebPage {
     @Css("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
     @Css("#jumbotron") public static Jumbotron jumbotron;
 
-    @Css("#input-group-username") public static InputGroupInputWithText inputGroupUsername;
-    @Css("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
-    @Css("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
     //endregion
 
     //region Complex Elements
     @Css("#card-example") public static CardExample cardExample;
+    @Css("#input-group-username") public static InputGroupInputWithText inputGroupUsername;
+    @Css("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
+    @Css("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
+    @Css("#input-group-textarea") public static InputGroupInputWithTextArea inputGroupInputTextArea;
 
     //endregion
 }

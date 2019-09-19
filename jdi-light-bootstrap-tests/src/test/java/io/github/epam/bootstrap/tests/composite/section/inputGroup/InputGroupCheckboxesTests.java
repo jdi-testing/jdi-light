@@ -33,13 +33,13 @@ public class InputGroupCheckboxesTests extends TestsInit {
     @Test
     public void checkCheckboxTest() {
         inputGroupCheckBox.checkbox.check();
-        assertEquals(inputGroupCheckBox.checkbox.isSelected(), true);
+        inputGroupCheckBox.checkbox.isSelected();
     }
 
     @Test
     public void uncheckCheckboxTest() {
         inputGroupCheckBox.checkbox.uncheck();
-        assertEquals(inputGroupCheckBox.checkbox.isSelected(), false);
+        inputGroupCheckBox.checkbox.isSelected();
     }
 
     @Test
@@ -49,26 +49,21 @@ public class InputGroupCheckboxesTests extends TestsInit {
     }
 
     @Test
-    public void getValueTest() {
-        assertEquals(inputGroupCheckBox.input.getValue(), text);
-    }
-
-    @Test
     public void sendKeysTest() {
         inputGroupCheckBox.input.sendKeys(added_text);
-        assertEquals(inputGroupCheckBox.input.getValue(), new_text + added_text);
+        inputGroupCheckBox.input.assertThat().text(is(new_text + added_text));
     }
 
     @Test
     public void inputTest() {
         inputGroupCheckBox.input.input(new_text);
-        assertEquals(inputGroupCheckBox.input.getText(), new_text);
+        inputGroupCheckBox.input.assertThat().text(is(new_text));
     }
 
     @Test
     public void clearTest() {
         inputGroupCheckBox.input.clear();
-        assertEquals(inputGroupCheckBox.input.getText(), "");
+        inputGroupCheckBox.input.assertThat().text(is(""));
     }
 
     @Test
