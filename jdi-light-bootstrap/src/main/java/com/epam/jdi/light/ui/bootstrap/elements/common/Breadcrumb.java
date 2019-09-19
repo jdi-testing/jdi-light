@@ -10,10 +10,33 @@ import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.tools.map.MapArray;
 
+public class Breadcrumb extends UIBaseElement<UIAssert> implements IList<UIElement>, HasUIList, IClickable{
+    // @FindBy(css = ".breadcrumb-item")
+    @Css(".breadcrumb-item") public WebList itemns;
 
-public class Breadcrumb extends UIBaseElement<UIAssert> implements IList<UIElement>, HasUIList, IClickable {
-    @Css(".breadcrumb-item a") public WebList ancestorList;
-    @Css(".breadcrumb-item.active") public UIElement currentItem;
+    /**
+     * @return Get current item in breadcrumbs(last in the WebList)
+     */
+    public UIElement getCurrectItem(){
+        return itemns.last();
+    }
+
+    /**
+     * @return Get first item in breadcrumbs (first in the WebList)
+     */
+    public UIElement getFirstItem(){
+        return itemns.first();
+    }
+
+    @Override
+    public WebList list() {
+        return null;
+    }
+
+    @Override
+    public void click() {
+
+    }
 
     /**
      * Get all application elements
@@ -47,16 +70,6 @@ public class Breadcrumb extends UIBaseElement<UIAssert> implements IList<UIEleme
      */
     @Override
     public void clear() {
-
-    }
-
-    @Override
-    public WebList list() {
-        return null;
-    }
-
-    @Override
-    public void click() {
 
     }
 }
