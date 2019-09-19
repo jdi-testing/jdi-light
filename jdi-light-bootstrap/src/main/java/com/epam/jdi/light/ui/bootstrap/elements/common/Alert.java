@@ -18,12 +18,8 @@ public class Alert extends UIBaseElement<TextAssert> implements IsText, HasClick
     public TextAssert is() { return new TextAssert().set(this); }
 
 
-    public UIElement dismissButtonLocator() {
-        return linked(abLocator, "alert button");
-    }
-
     public UIElement dismissButton() {
-        return dismissButtonLocator();
+        return linked(abLocator, "alert button");
     }
 
 //    @Css("#dismissible-alert-close-button") public static Button alertButton;
