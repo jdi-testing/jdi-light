@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import io.github.com.sections.ButtonWithDropdown;
+import io.github.com.sections.SegmentedButton;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -18,6 +19,7 @@ public class BootstrapPage extends WebPage {
     //region Complex Elements
 
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
+    @UI("#segmented-button") public static SegmentedButton segmentedButton;
 
     //endregion
 
