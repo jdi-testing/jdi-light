@@ -44,8 +44,8 @@ public class Carousel extends UIBaseElement<TextAssert> implements IsText, IsBut
 	
 	public String indicatorsLocator = "li";
 		
-    public WebList list() {
-        return linkedList(indicatorsLocator, "slidesList");
+    public WebList indicators() {
+        return linkedList(indicatorsLocator, "indicators");
     }
     
     /*
@@ -63,7 +63,7 @@ public class Carousel extends UIBaseElement<TextAssert> implements IsText, IsBut
     public void select(int index) {
         if (index < 1)
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
-        list().select(index - 1);
+        indicators().select(index - 1);
     }
     
     @JDIAction("Current slide interval in '{name}'")

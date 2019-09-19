@@ -3,6 +3,7 @@ package io.github.epam.bootstrap.tests.complex;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.com.pages.BootstrapPage.carouselWithSlidesOnly;
+import static io.github.epam.bootstrap.tests.BaseValidations.durationLessThan;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 import org.testng.annotations.BeforeMethod;
@@ -46,144 +47,101 @@ public class CarouselTests extends TestsInit {
 	//Carousel slides only tests
 	@Test
 	public void getSlidesTextTest() {
-		assertEquals(carouselWithSlidesOnly.getText(), firstSlideText);
-		
-		//carouselSlidesOnly.base().waitSec(10);
-		delay(10000);
-		assertEquals(carouselWithSlidesOnly.getText(), secondSlideText);
+		carouselWithSlidesOnly.is().text(firstSlideText);
+		carouselWithSlidesOnly.is().text(secondSlideText);
 	}
 	
 	//Carousel with controls tests
 	@Test
 	public void prevTest() {
 		carouselWithControls.prev();	
-		//carouselControls.base().waitSec(1);
-		delay(1000);
 		carouselWithControls.is().text(secondSlideFullText);
-		assertEquals(carouselWithControls.getText(), secondSlideFullText);
 		
 		carouselWithControls.prev();	
-		//carouselControls.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithControls.getText(), firstSlideFullText);
+		carouselWithControls.is().text(firstSlideFullText);
 		
-		assertEquals(carouselWithControls.prevControl().getText(), prevText);
+		carouselWithControls.prevControl().is().text(prevText);
 	}
 	
 	@Test
 	public void nextTest() {
 		carouselWithControls.next();	
-		//carouselControls.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithControls.getText(), firstSlideFullText);
+		carouselWithControls.is().text(firstSlideFullText);
 		
 		carouselWithControls.next();	
-		//carouselControls.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithControls.getText(), secondSlideFullText);
+		carouselWithControls.is().text(secondSlideFullText);
 		
-		assertEquals(carouselWithControls.nextControl().getText(), nextText);
+		carouselWithControls.nextControl().is().text(nextText);
 	}
 	
 	//Carousel with indicators tests
 	@Test
 	public void selectTest() {
 		carouselWithIndicators.select(1);	
-		//carouselIndicators.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithIndicators.getText(), firstSlideFullText);
-		assertTrue(carouselWithIndicators.list().get(0).isSelected());
-		assertFalse(carouselWithIndicators.list().get(1).isSelected());
+		carouselWithIndicators.is().text(firstSlideFullText);
+		carouselWithIndicators.indicators().get(0).is().selected();
+		carouselWithIndicators.indicators().get(1).is().deselected();
 		
 		carouselWithIndicators.select(3);	
-		//carouselIndicators.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithIndicators.getText(), thirdSlideFullText);
-		assertTrue(carouselWithIndicators.list().get(2).isSelected());
-		assertFalse(carouselWithIndicators.list().get(0).isSelected());
+		carouselWithIndicators.is().text(thirdSlideFullText);
+		carouselWithIndicators.indicators().get(2).is().selected();
+		carouselWithIndicators.indicators().get(0).is().deselected();
 		
 		carouselWithIndicators.select(2);	
-		//carouselIndicators.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithIndicators.getText(), secondSlideFullText);
-		assertTrue(carouselWithIndicators.list().get(1).isSelected());
-		assertFalse(carouselWithIndicators.list().get(2).isSelected());
+		carouselWithIndicators.is().text(secondSlideFullText);
+		carouselWithIndicators.indicators().get(1).is().selected();
+		carouselWithIndicators.indicators().get(2).is().deselected();
     }
 	
 	//Carousel with captions tests
 	@Test
 	public void captionTest() {
 		carouselWithCaptions.select(1);
-		//carouselCaptions.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithCaptions.getText(), firstSlideWithLabelText);
+		carouselWithCaptions.is().text(firstSlideWithLabelText);
 		
 		carouselWithCaptions.select(2);
-		//carouselCaptions.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithCaptions.getText(), secondSlideWithLabelText);
+		carouselWithCaptions.is().text(secondSlideWithLabelText);
 
 		carouselWithCaptions.select(3);
-		//carouselCaptions.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithCaptions.getText(), thirdSlideWithLabelText);
-
+		carouselWithCaptions.is().text(thirdSlideWithLabelText);
 	}
 	
 	// Carousel fade tests
 	@Test
 	public void fadePrevTest() {
 		carouselWithFadeTransition.prev();	
-		//carouselFade.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithFadeTransition.getText(), thirdSlideFullText);
+		carouselWithFadeTransition.is().text(thirdSlideFullText);
 		
 		carouselWithFadeTransition.prev();	
-		//carouselFade.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithFadeTransition.getText(), secondSlideFullText);
+		carouselWithFadeTransition.is().text(secondSlideFullText);
 		
-		assertEquals(carouselWithFadeTransition.prevControl().getText(), prevText);
+		carouselWithFadeTransition.prevControl().is().text(prevText);
 	}
 	
 	@Test
 	public void fadeNextTest() {
 		carouselWithFadeTransition.next();	
-		//carouselFade.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithFadeTransition.getText(), secondSlideFullText);
+		carouselWithFadeTransition.is().text(secondSlideFullText);
 		
 		carouselWithFadeTransition.next();	
-		//carouselFade.base().waitSec(1);
-		delay(1000);
-		assertEquals(carouselWithFadeTransition.getText(), thirdSlideFullText);
+		carouselWithFadeTransition.is().text(thirdSlideFullText);
 		
-		assertEquals(carouselWithFadeTransition.nextControl().getText(), nextText);
+		carouselWithFadeTransition.nextControl().is().text(nextText);
 	}
 	
 	
 	// Carousel with interval tests
 	@Test
 	public void intervalTest() {
-		//carouselInterval.base().waitSec(1);
-		delay(carouselWithCustomInterval.interval());
-		assertEquals(carouselWithCustomInterval.getText(), firstSlideFullText);
+		 durationLessThan(carouselWithCustomInterval.interval(), () -> carouselWithCustomInterval.is().text(secondSlideFullText));;
+		//assertEquals(carouselWithCustomInterval.getText(), firstSlideFullText);
 		
-		//carouselInterval.base().waitSec(1);
-		delay(carouselWithCustomInterval.interval());
-		assertEquals(carouselWithCustomInterval.getText(), secondSlideFullText);
+		//delay(carouselWithCustomInterval.interval());
+		//assertEquals(carouselWithCustomInterval.getText(), secondSlideFullText);
+		durationLessThan(carouselWithCustomInterval.interval(), () -> carouselWithCustomInterval.is().text(secondSlideFullText));;
 		
-		//carouselInterval.base().waitSec(1);
-		delay(carouselWithCustomInterval.interval());
-		assertEquals(carouselWithCustomInterval.getText(), thirdSlideFullText);
-	}
-
-	public void delay(long ms) {
-		try {
-			System.out.println("DELAY: " + ms);
-			Thread.sleep(ms);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		//delay(carouselWithCustomInterval.interval());
+		//assertEquals(carouselWithCustomInterval.getText(), thirdSlideFullText);
+		durationLessThan(carouselWithCustomInterval.interval(), () -> carouselWithCustomInterval.is().text(thirdSlideFullText));;
 	}
 }
