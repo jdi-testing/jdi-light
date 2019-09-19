@@ -1,15 +1,20 @@
 package io.github.epam.bootstrap.tests.complex;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.carouselWithCaptions;
+import static io.github.com.pages.BootstrapPage.carouselWithControls;
+import static io.github.com.pages.BootstrapPage.carouselWithCustomInterval;
+import static io.github.com.pages.BootstrapPage.carouselWithFadeTransition;
+import static io.github.com.pages.BootstrapPage.carouselWithIndicators;
 import static io.github.com.pages.BootstrapPage.carouselWithSlidesOnly;
-import static io.github.epam.bootstrap.tests.BaseValidations.durationLessThan;
+import static io.github.epam.bootstrap.tests.BaseValidations.durationMoreThan;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import com.epam.jdi.light.elements.composite.WebPage;
 
 import io.github.epam.TestsInit;
 
@@ -133,15 +138,14 @@ public class CarouselTests extends TestsInit {
 	// Carousel with interval tests
 	@Test
 	public void intervalTest() {
-		 durationLessThan(carouselWithCustomInterval.interval(), () -> carouselWithCustomInterval.is().text(secondSlideFullText));;
-		//assertEquals(carouselWithCustomInterval.getText(), firstSlideFullText);
-		
-		//delay(carouselWithCustomInterval.interval());
-		//assertEquals(carouselWithCustomInterval.getText(), secondSlideFullText);
-		durationLessThan(carouselWithCustomInterval.interval(), () -> carouselWithCustomInterval.is().text(secondSlideFullText));;
-		
-		//delay(carouselWithCustomInterval.interval());
-		//assertEquals(carouselWithCustomInterval.getText(), thirdSlideFullText);
-		durationLessThan(carouselWithCustomInterval.interval(), () -> carouselWithCustomInterval.is().text(thirdSlideFullText));;
+		WebPage.reload();
+		durationMoreThan(5, 
+				() -> carouselWithCustomInterval.is().text(secondSlideFullText));
+		durationMoreThan(carouselWithCustomInterval.interval()/1000, 
+				() -> carouselWithCustomInterval.is().text(thirdSlideFullText));
+		durationMoreThan(carouselWithCustomInterval.interval()/1000, 
+				() -> carouselWithCustomInterval.is().text(firstSlideFullText));
+		durationMoreThan(carouselWithCustomInterval.interval()/1000, 
+				() -> carouselWithCustomInterval.is().text(secondSlideFullText));
 	}
 }

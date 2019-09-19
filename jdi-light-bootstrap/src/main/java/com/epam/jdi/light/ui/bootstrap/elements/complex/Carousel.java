@@ -48,18 +48,6 @@ public class Carousel extends UIBaseElement<TextAssert> implements IsText, IsBut
         return linkedList(indicatorsLocator, "indicators");
     }
     
-    /*
-    public String selectedIndicatorLocator = "//li[@class='active']";
-    
-    public UIElement selectedIndicator() {
-        return linked(selectedIndicatorLocator, "selected indicator");
-    }
-    
-    public int getSelectedIndicatorIndex() {
-    	return Integer.valueOf(selectedIndicator().getAttribute("data-slide-to"));
-    }
-    */
-    
     public void select(int index) {
         if (index < 1)
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
