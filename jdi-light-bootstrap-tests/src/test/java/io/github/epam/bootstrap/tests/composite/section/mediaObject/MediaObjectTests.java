@@ -40,7 +40,7 @@ public class MediaObjectTests extends TestsInit {
         mediaObjectSample.is().enabled();
         mediaObjectSample.bodyOfMediaObject.is().text(is(bodyTextOfMediaObjectSample));
         mediaObjectSample.bodyOfMediaObject.is().text(containsString("American comic books"));
-        assertThat(mediaObjectSample.mediaHeading.core().css("font-size"), is("20px"));
+        assertThat(mediaObjectSample.headingOfMediaObject.core().css("font-size"), is("20px"));
         assertThat(mediaObjectSample.bodyOfMediaObject.core().css("font-size"), is("14px"));
         mediaObjectSample.bodyOfMediaObject.assertThat().displayed()
                 .and().text(is(bodyTextOfMediaObjectSample))
@@ -55,11 +55,11 @@ public class MediaObjectTests extends TestsInit {
     public void isValidationTestNesting() {
         mediaObjectNesting.is().displayed();
         mediaObjectNesting.is().enabled();
-        mediaObjectNesting.listOfMediaObjectNesting.get(0).bodyOfMediaObject.is().text(is(bodyTextOfMediaObjectNesting));
-        mediaObjectNesting.listOfMediaObjectNesting.get(0).bodyOfMediaObject.is().text(containsString("vel eu leo"));
-        assertThat(mediaObjectNesting.listOfMediaObjectNesting.get(0).mediaHeading.core().css("font-size"), is("20px"));
-        assertThat(mediaObjectNesting.listOfMediaObjectNesting.get(0).bodyOfMediaObject.core().css("font-size"), is("14px"));
-        mediaObjectNesting.listOfMediaObjectNesting.get(0).bodyOfMediaObject.assertThat().displayed()
+        mediaObjectNesting.nestingMediaObject.bodyOfMediaObject.is().text(is(bodyTextOfMediaObjectNesting));
+        mediaObjectNesting.nestingMediaObject.bodyOfMediaObject.is().text(containsString("vel eu leo"));
+        assertThat(mediaObjectNesting.nestingMediaObject.headingOfMediaObject.core().css("font-size"), is("20px"));
+        assertThat(mediaObjectNesting.nestingMediaObject.bodyOfMediaObject.core().css("font-size"), is("14px"));
+        mediaObjectNesting.nestingMediaObject.bodyOfMediaObject.assertThat().displayed()
                 .and().text(is(bodyTextOfMediaObjectNesting))
                 .core()
                 .css("font-size", is("14px"))
@@ -70,7 +70,7 @@ public class MediaObjectTests extends TestsInit {
 
     @Test
     public void clickTest() {
-        mediaObjectNesting.listOfMediaObjectNesting.get(0).image.click();
+        mediaObjectNesting.nestingMediaObject.imageOfMediaObject.click();
         assertThat(2, is(windowsCount()));
         switchToWindow(2);
         assertThat(getUrl(), is(expectedUrl));
