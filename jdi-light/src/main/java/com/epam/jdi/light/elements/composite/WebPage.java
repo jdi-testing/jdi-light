@@ -10,10 +10,8 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.map.MapArray;
 
 import java.text.MessageFormat;
-import java.util.List;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
@@ -61,8 +59,10 @@ public class WebPage extends DriverBase implements PageObject {
     public WebPage() {
         initElements(this);
     }
-    public WebPage(String url) { this.url = url; }
-    public WebPage(String url, String title) { this.url = url; this.title = title; }
+    public WebPage(String url) {
+        setUrl(url, url, CONTAINS);
+    }
+    public WebPage(String url, String title) { this(url); this.title = title; }
     public static void openUrl(String url) {
         new WebPage(url).open();
     }
@@ -85,20 +85,23 @@ public class WebPage extends DriverBase implements PageObject {
         return getDriver().getTitle();
     }
 
+    void setUrl(String uri, String template, CheckTypes validate) {
+        url = uri;
+        checkUrl = template;
+        checkUrlType = validate;
+        if (isBlank(template)) {
+            if (validate != MATCH)
+                checkUrl = uri;
+            else throw exception("In order to validate MATCH for page '%s', please specify 'template' in @Url",
+                    getName());
+        } else if (validate == null) checkUrlType = MATCH;
+        if (!uri.contains("://"))
+            url = getUrlFromUri(uri);
+        else  { if (isBlank(uri)) url = DOMAIN; }
+    }
     public void updatePageData(Url urlAnnotation, Title titleAnnotation) {
-        if (urlAnnotation != null) {
-            url = urlAnnotation.value();
-            checkUrl = urlAnnotation.template();
-            checkUrlType = urlAnnotation.validate();
-            if (isBlank(checkUrl)) {
-                if (checkUrlType != MATCH)
-                    checkUrl = url;
-                else throw exception("In order to validate MATCH for page '%s', please specify 'template' in @Url",
-                        getName());
-            } else if (checkUrlType == null) checkUrlType = MATCH;
-            if (!url.contains("://"))
-                url = getUrlFromUri(url);
-        } else  { if (isBlank(url)) url = DOMAIN; }
+        if (urlAnnotation != null)
+            setUrl(urlAnnotation.value(), urlAnnotation.template(), urlAnnotation.validate());
         if (titleAnnotation != null) {
             title = titleAnnotation.value();
             checkTitleType = titleAnnotation.validate();

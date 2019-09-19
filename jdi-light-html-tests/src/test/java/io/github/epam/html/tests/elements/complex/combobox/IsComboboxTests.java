@@ -93,8 +93,6 @@ public class IsComboboxTests extends TestsInit {
     public void isValidationTest() {
         iceCreamIs.is().enabled();
         iceCreamIs.is().text(is(text));
-        String v = iceCreamIs.selected();
-        boolean s = iceCreamIs.selected(text);
         iceCreamIs.is().text(text);
         iceCreamIs.is().selected(text);
         iceCreamIs.is().selected(is(text));

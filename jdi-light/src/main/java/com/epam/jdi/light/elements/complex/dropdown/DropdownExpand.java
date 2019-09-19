@@ -50,6 +50,12 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
         if (!isExpanded())
             toggle();
     }
+
+    @JDIAction(level = DEBUG)
+    public boolean expanded() {
+        return isExpanded();
+    }
+
     @JDIAction(level = DEBUG)
     public void close() {
         if (isExpanded())
@@ -81,25 +87,29 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     }
 
     protected boolean setupDone = false;
+    public IsDropdown setup(String root, String value, String list, String expand) {
+        if (isNotBlank(root))
+            base().setLocator(root);
+        else if (isNotBlank(value)) {
+            base().setLocator(value);
+            thisParent = true;
+        }
+        if (isNotBlank(value)) {
+            valueLocator = value;
+            expandLocator = isNotBlank(expand)
+                    ? expand : value;
+        } else if (isNotBlank(expand))
+            expandLocator = expand;
+        if (isNotBlank(list))
+            listLocator = list;
+        setupDone = true;
+        return this;
+    }
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDropdown.class, IsDropdown.class))
             return;
         JDropdown j = field.getAnnotation(JDropdown.class);
-        if (isNotBlank(j.root()))
-            base().setLocator(j.root());
-        else if (isNotBlank(j.value())) {
-            base().setLocator(j.value());
-            thisParent = true;
-        }
-        if (isNotBlank(j.value())) {
-            valueLocator = j.value();
-            expandLocator = isNotBlank(j.expand())
-                ? j.expand() : j.value();
-        } else if (isNotBlank(j.expand()))
-            expandLocator = j.expand();
-        if (isNotBlank(j.list()))
-            listLocator = j.list();
-        setupDone = true;
+        setup(j.root(), j.value(), j.list(), j.expand());
     }
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() {

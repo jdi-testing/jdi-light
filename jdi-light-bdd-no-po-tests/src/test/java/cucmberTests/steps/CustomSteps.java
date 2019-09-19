@@ -2,7 +2,6 @@ package cucmberTests.steps;
 
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.tools.map.MapArray;
 import cucumber.api.java.en.Given;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;

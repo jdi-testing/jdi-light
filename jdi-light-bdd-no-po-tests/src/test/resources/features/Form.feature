@@ -2,16 +2,15 @@
 Feature: Form
 
   Background:
-    Given I logged in with name "Roman" and password "Jdi1234"
-    And I open page by url "https://jdi-testing.github.io/jdi-light/contacts.html"
+    Given I'm on "Contacts Page" page
 
   Scenario: fill Contact Form from json
-    When fill form "Contact Form" with "Roman Contacts"
-     And I click on "Submit Button" element
+    When I fill form "Contact Form" with "Roman Contacts"
+     And click on "Submit Button"
     Then the form "Contact Form" data equals to "Roman Contacts"
 
-  Scenario: fill Contact Form Custom
-    When fill form "Contact Form" with data:
+  Scenario: fill Contact Form from table
+    When I fill form "Contact Form" with data:
       | Name              | Roman |
       | Last Name         | Iovlev |
       | Position          | ChiefQA |
@@ -20,7 +19,7 @@ Feature: Form
       | Description       | JDI - awesome UI automation tool |
       | Gender            | Female |
       | Religion          | Other |
-    And I click on "Submit Button" element
+    And click on "Submit Button"
     Then the form "Contact Form" data equals to:
       | Name              | Roman |
       | Last Name         | Iovlev |
