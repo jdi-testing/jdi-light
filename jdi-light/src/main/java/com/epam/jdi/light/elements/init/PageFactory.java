@@ -158,7 +158,7 @@ public class PageFactory {
             info.instance = create(info.type());
         } catch (Exception exception) {
             try {
-                String msg = exception.getMessage();
+                String msg = safeException(exception);
                 if (msg.contains("has no empty constructors")
                     || msg.contains("Can't init class. Class Type is null"))
                     info.instance = create(info.type(), getDriver(info.driverName));
@@ -180,7 +180,9 @@ public class PageFactory {
                     firstRule.key, info.name(), info.parentName(), LINE_BREAK, safeException(ex));
             }
         else
-            throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES).",
+            throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
+                    "Maybe you can solve you problem by adding HtmlSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
+                    "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
                 info.name());
     }
     private static void initWebPage(WebPage webPage) {
