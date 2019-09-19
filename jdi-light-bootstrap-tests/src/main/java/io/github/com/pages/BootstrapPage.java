@@ -9,6 +9,7 @@ import io.github.com.sections.*;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
+    public static UIElement inputGroupWrap,inputGroupNowrap;
     public static Button redButton, doubleButton, disabledButton;
     @UI("#simple-alert") public static Alert simpleAlert;
     @UI("#dismissible-alert") public static Alert dismissibleAlert;

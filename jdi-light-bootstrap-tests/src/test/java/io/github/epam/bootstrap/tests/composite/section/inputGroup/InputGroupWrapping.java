@@ -30,8 +30,8 @@ public class InputGroupWrapping extends TestsInit {
 
     @Test
     public void checkNoWrapping() {
-        inputGroupNoWrap.hasClass("flex-nowrap");
-        inputGroupNoWrap.assertThat().core().css("flex-wrap", "nowrap");
+        inputGroupNowrap.hasClass("flex-nowrap");
+        inputGroupNowrap.assertThat().core().css("flex-wrap", "nowrap");
     }
 
 }
