@@ -1,5 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.inputGroup;
 
+import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,7 +14,7 @@ import static org.testng.Assert.assertEquals;
  * Email: aleksandr_sudiarov@epam.com
  */
 
-public class InputGroupSizingTests {
+public class InputGroupSizingTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
