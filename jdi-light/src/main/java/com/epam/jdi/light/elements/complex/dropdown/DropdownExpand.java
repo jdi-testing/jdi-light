@@ -50,6 +50,12 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
         if (!isExpanded())
             toggle();
     }
+
+    @JDIAction(level = DEBUG)
+    public boolean expanded() {
+        return isExpanded();
+    }
+
     @JDIAction(level = DEBUG)
     public void close() {
         if (isExpanded())

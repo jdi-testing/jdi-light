@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.buttonWithDropdown;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Dmitrii Pavlov on 19.09.2019
@@ -46,7 +45,7 @@ public class ButtonWithDropdownTests extends TestsInit {
     @Test
     public void dropdownMenuTests() {
         buttonWithDropdown.dropdownMenu.expand();
-        assertTrue(buttonWithDropdown.dropdownMenu.isExpanded());
+        buttonWithDropdown.dropdownMenu.is().expanded();
         buttonWithDropdown.dropdownMenu.is().size(4);
         buttonWithDropdown.dropdownMenu.list().get(0).is().text(action);
         buttonWithDropdown.dropdownMenu.list().get(1).is().text(anotherAction);

@@ -4,8 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
 import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
 import static io.github.com.StaticSite.bsPage;
@@ -94,13 +92,7 @@ public class AlertTests extends TestsInit {
     @Test (priority = 1)
     public void dismissibleAlertButtonClickTest() {
         dismissibleAlert.dismissButton().click();
-        dismissibleAlert.base().waitSec(2);
-        try {
-            TimeUnit.MILLISECONDS.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        dismissibleAlert.base().waitSec(1);
         dismissibleAlert.is().hidden();
     }
 
