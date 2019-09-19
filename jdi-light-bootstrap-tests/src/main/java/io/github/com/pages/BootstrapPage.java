@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
@@ -16,13 +17,14 @@ import io.github.com.sections.SegmentedButton;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
+    public static UIElement inputGroupWrap,inputGroupNowrap;
     public static Button redButton, doubleButton, disabledButton;
     @UI("#simple-alert") public static Alert simpleAlert;
     @UI("#dismissible-alert") public static Alert dismissibleAlert;
     @UI("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
     @UI("#jumbotron") public static Jumbotron jumbotron;
     //endregion
-  
+
     //region Complex Elements
     @UI("#carousel-example-slides-only") public static Carousel carouselWithSlidesOnly;
     @UI("#carousel-example-controls") public static Carousel carouselWithControls;
@@ -31,7 +33,7 @@ public class BootstrapPage extends WebPage {
     @UI("#carousel-example-fade") public static Carousel carouselWithFadeTransition;
     @UI("#carousel-example-interval") public static Carousel carouselWithCustomInterval;
     //endregion
-    
+
     //region Composite Elements
     @UI("#input-group-username") public static InputGroupInputWithText inputGroupUsername;
     @UI("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
