@@ -6,13 +6,19 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
+
+/**
+ * Created by Dmitrii Pavlov on 19.09.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
 
 public class AlertTests extends TestsInit {
 
@@ -42,7 +48,7 @@ public class AlertTests extends TestsInit {
     }
 
     @Test
-    public void simpleAlertTextTest () {
+    public void simpleAlertTextTest() {
         simpleAlert.is().text(containsString(simpleAlertTextBeforeLink));
         simpleAlert.is().text(containsString(simpleAlertTextAfterLink));
         simpleAlert.is().text(containsString(simpleAlertLinkText));
@@ -76,7 +82,7 @@ public class AlertTests extends TestsInit {
 
     @Test
     public void dismissibleAlertButtonIsValidationTest() {
-        alertButton.is().displayed()
+        dismissibleAlert.dismissButton().is().displayed()
                 .enabled()
                 .core()
                 .attr("type", "button")
@@ -87,12 +93,14 @@ public class AlertTests extends TestsInit {
 
     @Test (priority = 1)
     public void dismissibleAlertButtonClickTest() {
-        alertButton.click();
+        dismissibleAlert.dismissButton().click();
+        dismissibleAlert.base().waitSec(2);
         try {
             TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         dismissibleAlert.is().hidden();
     }
 

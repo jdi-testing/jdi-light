@@ -7,8 +7,12 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.buttonWithDropdown;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+
+/**
+ * Created by Dmitrii Pavlov on 19.09.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
 
 public class ButtonWithDropdownTests extends TestsInit {
 
@@ -34,16 +38,16 @@ public class ButtonWithDropdownTests extends TestsInit {
     @Test
     public void textInputAreaTests() {
         buttonWithDropdown.textInputArea.sendKeys(testText);
-        assertEquals(buttonWithDropdown.textInputArea.getText(), testText);
+        buttonWithDropdown.textInputArea.is().text(testText);
         buttonWithDropdown.textInputArea.clear();
-        assertEquals(buttonWithDropdown.textInputArea.getText(), "");
+        buttonWithDropdown.textInputArea.is().text("");
     }
 
     @Test
     public void dropdownMenuTests() {
         buttonWithDropdown.dropdownMenu.expand();
         assertTrue(buttonWithDropdown.dropdownMenu.isExpanded());
-        assertEquals(buttonWithDropdown.dropdownMenu.list().size(), 4);
+        buttonWithDropdown.dropdownMenu.is().size(4);
         buttonWithDropdown.dropdownMenu.list().get(0).is().text(action);
         buttonWithDropdown.dropdownMenu.list().get(1).is().text(anotherAction);
         buttonWithDropdown.dropdownMenu.list().get(2).is().text(somethingElseHere);
