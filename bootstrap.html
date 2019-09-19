@@ -52,9 +52,13 @@
 									href="https://getbootstrap.com/docs/4.3/components/buttons/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/buttons/</a>
 							</p>
+							<p>click() - Click on link</p>
+							<p>getText() - Get link's text</p>
+							<p>getRef() - Get link's "ref" attribute</p>
+							<p>getUrl() - Get link's "ref" attribute as URL</p>
+							<p>getAlt() - Get link's "alt" attribute</p>
 						</div>
 					</div>
-					<br>&nbsp;
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -79,48 +83,9 @@
 								</div>
 							</div>
 							<hr>
-							<div class="btn-group-vertical" id="button-group11" role="group"
-								 aria-label="Button group with nested dropdown">
-								<button type="button" class="btn btn-danger"
-										onclick="alert('Red button');">Red button</button>
-								<button type="button" class="btn btn-success"
-										onclick="alert('Green button');">Green button</button>
-
-								<div class="btn-group" role="group">
-									<button id="btnGroupDrop2" type="button"
-											class="btn btn-secondary dropdown-toggle"
-											data-toggle="dropdown" aria-haspopup="true"
-											aria-expanded="false">Dropdown</button>
-									<div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
-										<a class="dropdown-item" href="https://github.com/jdi-testing" target="_blank">JDI</a>
-										<a class="dropdown-item"
-										   href="https://jdi-docs.github.io/jdi-light/#jdi-light-framework" target="_blank">JDI
-											documentation</a>
-									</div>
-								</div>
-							</div>
-							<hr>
-							<div class="btn-group btn-group-lg" id="button-group2" role="group" aria-label="Button group large">
-								<button type="button" class="btn btn-info" ondblclick="alert('Double click');" oncontextmenu="alert('Context Click'); return false;">On Action</button>
+							<div class="btn-group" id="button-group2" role="group" aria-label="Button group with nested dropdown">
+								<button type="button" class="btn btn-info" ondblclick="alert('Double click');" oncontextmenu="alert('Context Click');">On Action</button>
 								<button type="button" class="btn btn-primary" disabled="">Disabled</button>
-							</div>
-							<hr>
-							<div class="btn-group btn-group-sm" id="button-group3" role="group" aria-label="Button group small">
-								<button type="button" class="btn btn-info" ondblclick="alert('Double click');" oncontextmenu="alert('Context Click'); return false;">On Action</button>
-								<button type="button" class="btn btn-primary" disabled="">Disabled</button>
-							</div>
-							<hr>
-							<div class="btn-toolbar mb-3" id="button-group4" role="toolbar" aria-label="Toolbar with button groups">
-								<div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
-									<button type="button" class="btn btn-secondary">1</button>
-									<button type="button" class="btn btn-secondary">2</button>
-								</div>
-								<div class="input-group input-group-sm">
-									<div class="input-group-prepend">
-										<div class="input-group-text" id="btnGroupAddon">@</div>
-									</div>
-									<input type="text" class="form-control" placeholder="Input" aria-label="Input" aria-describedby="btnGroupAddon">
-								</div>
 							</div>
 						</div>
 						<div class="html-right">
@@ -130,6 +95,11 @@
 									href="https://getbootstrap.com/docs/4.3/components/button-group/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/button-group/</a>
 							</p>
+							<p>click() - Click on link</p>
+							<p>getText() - Get link's text</p>
+							<p>getRef() - Get link's "ref" attribute</p>
+							<p>getUrl() - Get link's "ref" attribute as URL</p>
+							<p>getAlt() - Get link's "alt" attribute</p>
 						</div>
 					</div>
 
@@ -154,6 +124,13 @@
 									href="https://getbootstrap.com/docs/4.3/components/alerts/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/alerts/</a>
 							</p>
+							<p>acceptAlert() - Accept alert</p>
+							<p>dismissAlert() - Dismiss alert</p>
+							<p>getAlertText() - Get alert text</p>
+							<p>validateAlert(Matcher text) - Validate alert by matching
+								passed value with alert text</p>
+							<p>inputAndAcceptAlert(String text) - Input the specified
+								text in the alert and accept it</p>
 						</div>
 					</div>
 
@@ -191,6 +168,17 @@
 								Bootstrap: <a
 									href="https://getbootstrap.com/docs/4.3/components/breadcrumb/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/breadcrumb/</a>
+							</p>
+							Index starts at 1 <br>
+							<br> click(int index) - click on item of breadcrumb with
+							target index <br> click(String nameItem) - click on item of
+							breadcrumb with target name <br> getValues() - return ? all
+							pairs: URL and index <br> getValue(int index) - return
+							String: URL of breadcrumb's item with target index <br>
+							getTexts() - return ? all pairs: name and index <br>
+							getText(int index) - return String: name of breadcrumb's item
+							with target index <br> getCurrentPageName() - return String:
+							name of breadcrumb's item with aria-current="page"
 							</p>
 						</div>
 					</div>
@@ -363,6 +351,8 @@
                                     href="https://getbootstrap.com/docs/4.3/components/navbar/#nav"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#nav</a>
                             </p>
+                            <p>getText() - returns text from the text field </p>
+                            <p>getValue() - returns text from the text field </p>
                         </div>
 
 
@@ -412,6 +402,11 @@
 							<p>
 								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navbar/#supported-content" target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#supported-content</a>
 							</p>
+							<p>click() - Click on element</p>
+							<p>getText() - Get element's text</p>
+							<p>isDisabled() - Show\wait that element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Send specific keys</p>
+							<p>submit() - sumbit the ? button</p>
 						</div>
 					</div>
 
@@ -445,6 +440,8 @@
 							<p>
 								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navbar/#brand" target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#brand</a>
 							</p>
+							<p>click() - Click on link</p>
+							<p>getText() - Get text</p>
 						</div>
 					</div>
 
@@ -489,6 +486,15 @@
 									href="https://getbootstrap.com/docs/4.3/components/navbar/#forms"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#forms</a>
 							</p>
+							<p>click() - Click the button </p>
+							<p>sendKeys(CharSequence... value) - adds text to the field </p>
+							<p>setText(String value) - sets new text </p>
+							<p>clear() - clears the text field </p>
+							<p>input(String value) - sets new text </p>
+							<p>focus() - places cursor within the text field </p>
+							<p>placeholder() - returns value of the placeholder attribute </p>
+							<p>getText() - returns text from the text field </p>
+							<p>getValue() - returns text from the text field </p>
 						</div>
 					</div>
 
@@ -530,6 +536,13 @@
 									href="https://getbootstrap.com/docs/4.3/components/navbar/#text"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#text</a>
 							</p>
+							<p>click() - Click the button </p>
+							<p>getText() - returns text from the text field </p>
+							<p>ref() - Returns the reference </p>
+							<p>url() - Returns the URL </p>
+							<p>alt() - Returns the alternate text </p>
+							<p>is() - Returns object for work with assertions </p>
+							<p>assertThat() - Returns object for work with assertions </p>
 						</div>
 					</div>
 
@@ -610,6 +623,8 @@
                                     href="https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes</a>
                             </p>
+                            <p>click() - Click on link</p>
+                            <p>getText() - Get link's text</p>
                         </div>
                     </div>
 
@@ -633,6 +648,8 @@
                                     href="https://getbootstrap.com/docs/4.3/components/navbar/#containers"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#containers</a>
                             </p>
+                            <p>click() - Click on link</p>
+                            <p>getText() - Get link's text</p>
                         </div>
                     </div>
 
@@ -652,6 +669,8 @@
 									href="https://getbootstrap.com/docs/4.3/components/navbar/#placement"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#placement</a>
 							</p>
+							<p>click() - Click on link</p>
+							<p>getText() - Get link's text</p>
 						</div>
 					</div>
 
@@ -739,6 +758,15 @@
 							<p>
 								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navbar/#toggler" target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#toggler</a>
 							</p>
+							<p>click() - Click the button / link</p>
+							<p>sendKeys(CharSequence... value) - adds text to the field</p>
+							<p>setText(String value) - sets new text</p>
+							<p>clear() - clears the text field</p>
+							<p>input(String value) - sets new text</p>
+							<p>focus() - places cursor within the text field</p>
+							<p>placeholder() - returns value of the placeholder attribute</p>
+							<p>getText() - returns text from the text field</p>
+							<p>getValue() - returns text from the text field</p>
 						</div>
 					</div>
 
@@ -765,6 +793,8 @@
 							<p>
 								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/navbar/#external-content" target="_blank">https://getbootstrap.com/docs/4.3/components/navbar/#external-content</a>
 							</p>
+							<p>click()</p>
+							<p>getText() - Get text</p>
 						</div>
 					</div>
 
@@ -838,6 +868,7 @@
 									href="https://getbootstrap.com/docs/4.3/components/pagination/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/pagination/</a>
 							</p>
+							<p>click() - Click on page</p>
 						</div>
 					</div>
 
@@ -917,6 +948,7 @@
                                     href="https://getbootstrap.com/docs/4.3/components/progress/"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/progress/</a>
                             </p>
+                            <p>getValue()</p>
                         </div>
                     </div>
 
@@ -952,6 +984,7 @@
 									href="https://getbootstrap.com/docs/4.3/components/jumbotron/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/jumbotron/</a>
 							</p>
+							<p>click() - Click on link</p>
 
 						</div>
 					</div>
@@ -1065,6 +1098,32 @@
 									href="https://getbootstrap.com/docs/4.3/components/collapse/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/collapse/</a>
 							</p>
+							<ul>
+								<li>for all
+									<ul>
+										<li>click(String nameItem) - click on item of collapse
+											with target name</li>
+										<li>getText(String nameItem) - return String: text
+											content of collapse's item with target name</li>
+										<li>getURL(String nameItem) - return String: URL of
+											collapse's link item with target name</li>
+										<li>getName() - return String: inscription of collapse's
+											item</li>
+										<li>getShowed() - return String: name of collapse's item
+											that content is showed</li>
+									</ul>
+								</li>
+								<br>
+								<li>for Group only
+									<ul>
+										<li>getNames() - return List&lt;String&gt;: list of items
+											inscription</li>
+										<li>getTexts() - return List&lt;String&gt;: list of items
+											text content</li>
+									</ul>
+								</li>
+
+							</ul>
 						</div>
 					</div>
 
@@ -1136,6 +1195,11 @@
                                     href="https://getbootstrap.com/docs/4.3/components/dropdowns/#examples"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#examples</a>
                             </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
                         </div>
                     </div>
                     <div class="doc-space line">
@@ -1196,6 +1260,11 @@
                                     href="https://getbootstrap.com/docs/4.3/components/dropdowns/#sizing"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#sizing</a>
                             </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
                         </div>
                     </div>
                     <div class="doc-space line">
@@ -1285,6 +1354,11 @@
                                     href="https://getbootstrap.com/docs/4.3/components/dropdowns/#directions"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#directions</a>
                             </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
                         </div>
                     </div>
                     <div class="doc-space line">
@@ -1322,6 +1396,11 @@
                                     href="https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-items"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-items</a>
                             </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
                         </div>
                     </div>
                     <div class="doc-space line">
@@ -1364,6 +1443,11 @@
                                     href="https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-alignment"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-alignment</a>
                             </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
                         </div>
                     </div>
                     <div class="doc-space line">
@@ -1416,9 +1500,14 @@
                             <h4>Dropdown - Menu content</h4>
                             <p>
                                 Bootstrap: <a
-                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-content"
+                                    href="https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-content
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-content</a>
                             </p>
+                            <p>selected(String option) - Check if option has been
+                                selected</p>
+                            <p>isExpanded() - Show that dropdown element expanded</p>
+                            <p>isDisplayed() - Show\wait that dropdown element displayed
+                                on the screen</p>
                         </div>
 					</div>
                     <!-- DROPDOWN END -->
@@ -1467,23 +1556,35 @@
 							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
 											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
 							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
 						</div>
 					</div>
 
 					<div class="doc-space line">
 						<div class="html-left">
-							<div class="input-group flex-nowrap" id="input-group-username">
+							<div class="input-group flex-nowrap" id="input-group-wrap">
 								<div class="input-group-prepend">
-									<span class="input-group-text" id="addon-wrapping">@</span>
+									<span class="input-group-text" id="addon-wrapping2">@</span>
 								</div>
-								<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+								<input type="text" class="form-control" placeholder="Input group with wrap(default)" aria-label="Username" aria-describedby="addon-wrapping">
+							</div>
+							<br />
+							<div class="input-group flex-nowrap" id="input-group-nowrap">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="addon-wrapping1">@</span>
+								</div>
+								<input type="text" class="form-control" placeholder="Input group with nowrap" aria-label="Username" aria-describedby="addon-wrapping">
 							</div>
 						</div>
 						<div class="html-right">
 							<h4>Input group - Wrapping</h4>
-							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
-											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
+							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/#wrapping"
+											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/#wrapping</a>
 							</p>
+							<p>hasClass() - checks if the selected section have a specified class name</p>
+							<p>getCss() - return css of the selected section</p>
 						</div>
 					</div>
 
@@ -1515,6 +1616,9 @@
 							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
 											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
 							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
 						</div>
 					</div>
 
@@ -1543,6 +1647,10 @@
 							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
 											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
 							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+							<p>selected(String option) - Check if option has been selected</p>
 						</div>
 					</div>
 
@@ -1561,6 +1669,9 @@
 							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
 											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
 							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
 						</div>
 					</div>
 
@@ -1587,6 +1698,9 @@
 						<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
 										 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
 						</p>
+						<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+						<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+						<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
 					</div>
 			    	</div>
 
@@ -1628,6 +1742,10 @@
 							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
 											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
 							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+							<p>click() - Click on link</p>
 						</div>
 					</div>
 
@@ -1652,6 +1770,17 @@
 							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
 											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
 							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+							<p>selected(String option) - Check if option has been
+								selected</p>
+							<p>isExpanded() - Show that dropdown element expanded</p>
+							<p>isDisplayed() - Show\wait that dropdown element displayed
+								on the screen</p>
+							<p>expand() - Expand dropdown list</p>
+							<p>close() - Close expanded before dropdown list</p>
+							<p>size() - Return amount of elements in the list</p>
 						</div>
 					</div>
 
@@ -1679,6 +1808,18 @@
 							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
 											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
 							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+							<p>selected(String option) - Check if option has been
+								selected</p>
+							<p>isExpanded() - Show that dropdown element expanded</p>
+							<p>isDisplayed() - Show\wait that dropdown element displayed
+								on the screen</p>
+							<p>expand() - Expand dropdown list</p>
+							<p>close() - Close expanded before dropdown list</p>
+							<p>size() - Return amount of elements in the list</p>
+							<p>click() - Click on button</p>
 						</div>
 					</div>
 
@@ -1713,6 +1854,18 @@
 							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
 											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
 							</p>
+							<p>getValue()/getText()/getSelected() - Return value from selected input field</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+							<p>selected(String option) - Check if option has been
+								selected</p>
+							<p>isExpanded() - Show that dropdown element expanded</p>
+							<p>isDisplayed() - Show\wait that dropdown element displayed
+								on the screen</p>
+							<p>expand() - Expand dropdown list</p>
+							<p>close() - Close expanded before dropdown list</p>
+							<p>size() - Return amount of elements in the list</p>
+							<p>click() - Click on button</p>
 						</div>
 					</div>
 
@@ -1742,6 +1895,9 @@
 							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/input-group/"
 											 target="_blank">https://getbootstrap.com/docs/4.3/components/input-group/</a>
 							</p>
+							<p>isDisplayed() - Show\wait that input field element displayed on the screen</p>
+							<p>sendKeys(CharSequence... charSequence) - Set specific keys to input field</p>
+							<p>click() - Click on button</p>
 						</div>
 					</div>
 
@@ -1758,6 +1914,11 @@
 								href="https://getbootstrap.com/docs/4.3/components/badge/"
 								target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
 						</p>
+						<p>GetText() - returns text</p>
+						<p>GetValue() - returns text</p>
+						<p>Is - Gets text assert</p>
+						<p>AssertThat - Gets text assert</p>
+						<p>WaitFor - Gets text assert</p>
 					</div>
 
 					<div class="doc-space line" />
@@ -1775,6 +1936,10 @@
 								href="https://getbootstrap.com/docs/4.3/components/badge/"
 								target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
 						</p>
+						<p>click() - Click the button</p>
+						<p>getText() - Get button text</p>
+						<p>is() - Assert action</p>
+						<p>assertThat() - Assert action</p>
 					</div>
 
 					<div class="doc-space line" />
@@ -1789,6 +1954,13 @@
 								href="https://getbootstrap.com/docs/4.3/components/badge/"
 								target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
 						</p>
+						<p>click() - Follow the link</p>
+						<p>getText() - Returns the link text</p>
+						<p>ref() - Returns the reference</p>
+						<p>url() - Returns the URL</p>
+						<p>alt() - Returns the alternate text</p>
+						<p>is() - Returns object for work with assertions</p>
+						<p>assertThat() - Returns object for work with assertions</p>
 					</div>
 
 					<div class="doc-space line">
@@ -1953,6 +2125,8 @@
 									href="https://getbootstrap.com/docs/4.3/components/carousel/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/carousel/</a>
 							</p>
+							<p>prev() - Goes to the previous item</p>
+							<p>next() - Goes to the next item</p>
 						</div>
 					</div>
 
@@ -1973,6 +2147,12 @@
 							<p>
 								Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/card/#example" target="_blank">https://getbootstrap.com/docs/4.3/components/card/#example</a>
 							</p>
+							<p>click() - click button</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert image / text presence</p>
+							<p>alt() - get value of the image alt attribute</p>
+							<p>url() - return button url</p>
 						</div>
 					</div>
 
@@ -1991,6 +2171,9 @@
 									href="https://getbootstrap.com/docs/4.3/components/card/#body"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/card/#body</a>
 							</p>
+							<p>getText() - returns text</p>
+							<p>is() - asserts text</p>
+							<p>assertThat() - assert text presence</p>
 						</div>
 					</div>
 
@@ -2017,6 +2200,11 @@
 									target="_blank">https://getbootstrap.com/docs/4.3/components/
 								card/#titles-text-and-links</a>
 							</p>
+							<p>click() - follow card link</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert text presence</p>
+							<p>url() - return link url</p>
 						</div>
 					</div>
 
@@ -2040,6 +2228,9 @@
 									href="https://getbootstrap.com/docs/4.3/components/card/#list-groups"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/card/#list-groups</a>
 							</p>
+							<p>getText() - returns text</p>
+							<p>is() - asserts text</p>
+							<p>assertThat() - assert text presence</p>
 						</div>
 					</div>
 
@@ -2069,6 +2260,12 @@
 								<a href="https://getbootstrap.com/docs/4.3/components/card/#kitchen-sink"
 											  target="_blank">https://getbootstrap.com/docs/4.3/components/card/#kitchen-sink</a>
 							</p>
+							<p>click() - follow link</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert image / text presence</p>
+							<p>alt() - get value of the image alt attribute</p>
+							<p>url() - return link url</p>
 						</div>
 					</div>
 
@@ -2118,6 +2315,11 @@
 								<a href="https://getbootstrap.com/docs/4.3/components/card/#header-and-footer"
 								   target="_blank">https://getbootstrap.com/docs/4.3/components/card/#header-and-footer</a>
 							</p>
+							<p>click() - click button</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert text presence</p>
+							<p>url() - return link url</p>
 						</div>
 					</div>
 
@@ -2173,6 +2375,11 @@
 								<a href="https://getbootstrap.com/docs/4.3/components/card/#using-grid-markup"
 								   target="_blank">https://getbootstrap.com/docs/4.3/components/card/#using-grid-markup</a>
 							</p>
+							<p>click() - click button</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert text presence</p>
+							<p>url() - return link url</p>
 						</div>
 					</div>
 
@@ -2211,6 +2418,11 @@
 								<a href="https://getbootstrap.com/docs/4.3/components/card/#text-alignment"
 								   target="_blank">https://getbootstrap.com/docs/4.3/components/card/#text-alignment</a>
 							</p>
+							<p>click() - click button</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert text presence</p>
+							<p>url() - return button link url</p>
 						</div>
 					</div>
 
@@ -2246,6 +2458,11 @@
 								<a href="https://getbootstrap.com/docs/4.3/components/card/#navigation"
 								   target="_blank">https://getbootstrap.com/docs/4.3/components/card/#navigation</a>
 							</p>
+							<p>click() - click button / follow tab link</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text / tab</p>
+							<p>assertThat() - assert text presence</p>
+							<p>url() - return button / tab link url</p>
 						</div>
 					</div>
 
@@ -2278,6 +2495,10 @@
 								<a href="https://getbootstrap.com/docs/4.3/components/card/#image-caps"
 								   target="_blank">https://getbootstrap.com/docs/4.3/components/card/#image-caps</a>
 							</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert text / image presence</p>
+							<p>alt() - get value of the image alt attribute</p>
 						</div>
 					</div>
 
@@ -2302,6 +2523,10 @@
 								<a href="https://getbootstrap.com/docs/4.3/components/card/#image-overlays"
 								   target="_blank">https://getbootstrap.com/docs/4.3/components/card/#image-overlays</a>
 							</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert text / image presence</p>
+							<p>alt() - get value of the image alt attribute</p>
 						</div>
 					</div>
 
@@ -2372,6 +2597,10 @@
 								<a href="https://getbootstrap.com/docs/4.3/components/card/#background-and-color"
 								   target="_blank">https://getbootstrap.com/docs/4.3/components/card/#background-and-color</a>
 							</p>
+							<p>getText() - return text</p>
+							<p>getBackground() - return background</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert text presence</p>
 						</div>
 					</div>
 
@@ -2392,6 +2621,8 @@
 								<a href="https://getbootstrap.com/docs/4.3/components/spinners/#border-spinner"
 								   target="_blank">https://getbootstrap.com/docs/4.3/components/spinners/#border-spinner</a>
 							</p>
+							<p>is() - assert spinner</p>
+							<p>assertThat() - return object for work with assertions</p>
 						</div>
 					</div>
 
@@ -2431,6 +2662,8 @@
 								<a href="https://getbootstrap.com/docs/4.3/components/spinners/#colors"
 								   target="_blank">https://getbootstrap.com/docs/4.3/components/spinners/#colors</a>
 							</p>
+							<p>is() - assert spinner</p>
+							<p>assertThat() - return object for work with assertions</p>
 						</div>
 					</div>
 
@@ -2470,6 +2703,8 @@
 								<a href="https://getbootstrap.com/docs/4.3/components/spinners/#growing-spinner"
 								   target="_blank">https://getbootstrap.com/docs/4.3/components/spinners/#growing-spinner</a>
 							</p>
+							<p>is() - assert spinner</p>
+							<p>assertThat() - return object for work with assertions</p>
 						</div>
 					</div>
 
@@ -2512,6 +2747,8 @@
 								Bootstrap:
 								<a href="https://getbootstrap.com/docs/4.3/components/spinners/#alignment" target="_blank">https://getbootstrap.com/docs/4.3/components/spinners/#alignment</a>
 							</p>
+							<p>is() - assert spinner</p>
+							<p>assertThat() - return object for work with assertions</p>
 						</div>
 					</div>
 
@@ -2543,6 +2780,8 @@
 								Bootstrap:
 								<a href="https://getbootstrap.com/docs/4.3/components/spinners/#size" target="_blank">https://getbootstrap.com/docs/4.3/components/spinners/#size</a>
 							</p>
+							<p>is() - assert spinner</p>
+							<p>assertThat() - return object for work with assertions</p>
 						</div>
 					</div>
 
@@ -2579,6 +2818,8 @@
 								Bootstrap:
 								<a href="https://getbootstrap.com/docs/4.3/components/spinners/#buttons" target="_blank">https://getbootstrap.com/docs/4.3/components/spinners/#buttons</a>
 							</p>
+							<p>is() - assert spinner</p>
+							<p>assertThat() - return object for work with assertions</p>
 						</div>
 					</div>
 
@@ -2637,6 +2878,11 @@
                                     href="https://getbootstrap.com/docs/4.3/components/card/#card-groups"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/card/#card-groups</a>
                             </p>
+                            <p>click() - follow card link</p>
+                            <p>getText() - return text</p>
+                            <p>is() - assert text</p>
+                            <p>assertThat() - assert text presence</p>
+                            <p>url() - return link url</p>
                         </div>
                     </div>
 
@@ -2694,6 +2940,11 @@
 									href="https://getbootstrap.com/docs/4.3/components/card/#card-decks"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/card/#card-decks</a>
 							</p>
+							<p>click() - follow card link</p>
+							<p>getText() - return text</p>
+							<p>is() - assert text</p>
+							<p>assertThat() - assert text presence</p>
+							<p>url() - return link url</p>
 						</div>
 					</div>
 
@@ -2770,6 +3021,9 @@
 									href="https://getbootstrap.com/docs/4.3/components/card/#border"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/card/#border</a>
 							</p>
+							<p>getValue() - Get current value</p>
+							<p>is() - Various assert actions for Text</p>
+							<p>assertThat() - Various assert actions for Text</p>
 						</div>
 					</div>
 
@@ -2793,6 +3047,9 @@
 									href="https://getbootstrap.com/docs/4.3/components/card/#mixins-utilities"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/card/#mixins-utilities/</a>
 							</p>
+							<p>getText() - Get current value</p>
+							<p>is() - Various assert actions for Text</p>
+							<p>assertThat() - Various assert actions for Text</p>
 						</div>
 					</div>
 
@@ -2846,6 +3103,9 @@
                                     href="https://getbootstrap.com/docs/4.3/components/card/#card-columns"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/card/#card-columns</a>
                             </p>
+                            <p>getText() - Get current value</p>
+                            <p>is() - Various assert actions for Text</p>
+                            <p>assertThat() - Various assert actions for Text</p>
                         </div>
                     </div>
 
@@ -2880,6 +3140,11 @@
                                     href="https://getbootstrap.com/docs/4.3/components/card/#using-utilities"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/card/#using-utilities</a>
                             </p>
+                            <p>click() - follow card link</p>
+                            <p>getText() - return text</p>
+                            <p>is() - assert text</p>
+                            <p>assertThat() - assert text presence</p>
+                            <p>url() - return link url</p>
                         </div>
                     </div>
 
@@ -2910,6 +3175,11 @@
                                     href="https://getbootstrap.com/docs/4.3/components/card/#using-custom-css"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/card/#using-custom-css</a>
                             </p>
+                            <p>click() - follow card link</p>
+                            <p>getText() - return text</p>
+                            <p>is() - assert text</p>
+                            <p>assertThat() - assert text presence</p>
+                            <p>url() - return link url</p>
                         </div>
                     </div>
 
@@ -2968,6 +3238,11 @@
 									href="https://getbootstrap.com/docs/4.3/components/list-group/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/</a>
 							</p>
+							<p>click() - Click on link</p>
+							<p>getText() - Get link's text</p>
+							<p>getRef() - Get link's "ref" attribute</p>
+							<p>getUrl() - Get link's "ref" attribute as URL</p>
+							<p>getAlt() - Get link's "alt" attribute</p>
 						</div>
 					</div>
 
@@ -2994,6 +3269,9 @@
 									href="https://getbootstrap.com/docs/4.3/components/media-object/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/media-object/</a>
 							</p>
+							<p>getText() - Get current value</p>
+							<p>is() - Various assert actions for Text</p>
+							<p>assertThat() - Various assert actions for Text</p>
 						</div>
 					</div>
 
@@ -3023,6 +3301,13 @@
                                     href="https://getbootstrap.com/docs/4.3/components/media-object/"
                                     target="_blank">https://getbootstrap.com/docs/4.3/components/media-object/</a>
                             </p>
+							<p>getText() - Get current value</p>
+							<p>is() - Various assert actions for Text</p>
+							<p>assertThat() - Various assert actions for Text</p>
+							<p>click() - Follow the link</p>
+							<p>ref() - Returns the reference</p>
+							<p>url() - Returns the URL	URL</p>
+							<p>alt() - Returns the alternate text</p>
 						</div>
                     </div>
 
@@ -3057,6 +3342,9 @@
 									href="https://getbootstrap.com/docs/4.3/components/media-object/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/media-object/</a>
 							</p>
+							<p>getText() - Get current value</p>
+							<p>is() - Various assert actions for Text</p>
+							<p>assertThat() - Various assert actions for Text</p>
 						</div>
 					</div>
 
@@ -3149,6 +3437,10 @@
 									href="https://getbootstrap.com/docs/4.3/components/scrollspy/#example-in-navbar"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/scrollspy</a>
 							</p>
+							<p>scrollUp() - Scroll up</p>
+							<p>scrollDown() - Scroll down</p>
+							<p>isSelected(String value) - Check if corresponding element selected</p>
+                            <p>click(String value) - Click on element</p>
 						</div>
 					</div>
 
@@ -3252,6 +3544,10 @@
 									href="https://getbootstrap.com/docs/4.3/components/scrollspy/#example-with-nested-nav"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/scrollspy</a>
 							</p>
+							<p>scrollUp() - Scroll up</p>
+							<p>scrollDown() - Scroll down</p>
+							<p>isSelected(String value) - Check if corresponding element selected</p>
+                            <p>click(String value) - Click on element</p>
 						</div>
 					</div>
 
@@ -3316,6 +3612,10 @@
 									href="https://getbootstrap.com/docs/4.3/components/scrollspy/#example-with-list-group"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/scrollspy</a>
 							</p>
+							<p>scrollUp() - Scroll up</p>
+							<p>scrollDown() - Scroll down</p>
+							<p>isSelected(String value) - Check if corresponding element selected</p>
+							<p>click(String value) - Click on element</p>
 						</div>
 					</div>
 
@@ -3799,6 +4099,10 @@
 									href="https://getbootstrap.com/docs/4.3/components/toasts/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/toasts/</a>
 							</p>
+							<p>getText() - Get toasts text</p>
+							<p>getCountsToasts() - Get toasts count</p>
+							<p>close() - Close toast</p>
+							<p>getPosition() - Get toast position</p>
 						</div>
 					</div>
 
