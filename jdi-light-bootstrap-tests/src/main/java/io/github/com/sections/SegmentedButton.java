@@ -9,7 +9,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 
 public class SegmentedButton extends Section {
 
-    @UI("button") public Button actionButton;
+    @UI("#Segmented-action-button") public Button actionButton;
     @UI("input") public TextField textInputArea;
     @JDropdown(expand = ".dropdown-toggle",
             value = ".sr-only",
