@@ -2,13 +2,9 @@ package io.github.epam.bootstrap.tests.composite.section;
 
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import io.github.epam.TestsInit;
-import org.apache.commons.lang3.text.translate.NumericEntityUnescaper;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
@@ -157,6 +153,6 @@ public class ButtonGroupTest extends TestsInit {
 
     @Test
     public void valuesTest() {
-        assertEquals(dropdownButton.cleanValues(), Option.getValues());
+        assertEquals(dropdownButton.getCleanValues(), Option.getValues());
     }
 }

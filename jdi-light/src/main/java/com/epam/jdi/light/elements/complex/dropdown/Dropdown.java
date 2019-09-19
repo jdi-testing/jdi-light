@@ -65,7 +65,7 @@ public class Dropdown extends DropdownExpand {
      * Method to get values without any additional white space including new line
      * @return List<String> of available options from dropdown
      */
-    public List<String> cleanValues() {
+    public List<String> getCleanValues() {
         return values().stream().map(v -> v.replaceAll(SPACES_REGEX, SPACE)).collect(Collectors.toList());
     }
 
