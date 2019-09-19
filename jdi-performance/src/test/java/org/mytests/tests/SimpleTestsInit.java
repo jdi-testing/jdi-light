@@ -23,7 +23,6 @@ public class SimpleTestsInit {
     public static Safe<Timer> TIMER = new Safe<>();
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        logger.setLogLevel(STEP);
         HtmlSettings.init();
         initSite(SiteJdi.class);
         assertThat(TIMEOUT.get(), is(5));

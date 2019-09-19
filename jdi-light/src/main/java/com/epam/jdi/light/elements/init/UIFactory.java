@@ -1,7 +1,10 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -14,7 +17,9 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
  */
 public class UIFactory {
     public static UIElement element(String locator) {
-        return element(defineLocator(locator));
+        return locator.matches("[A-Z].*]")
+            ? new UIElement().setName(locator)
+            : element(defineLocator(locator));
     }
     public static UIElement element(By byLocator) {
         return new UIElement(byLocator);
@@ -36,7 +41,9 @@ public class UIFactory {
     }
 
     public static WebList list(String locator) {
-        return list(defineLocator(locator));
+        return locator.matches("[A-Z].*]")
+                ? new WebList().setName(locator)
+                : list(defineLocator(locator));
     }
     public static WebList list(By byLocator) {
         return new WebList(byLocator);
@@ -58,6 +65,20 @@ public class UIFactory {
     }
     public static WebList $$(List<WebElement> els, String name) {
         return list(els, name);
+    }
+
+    public static Selector selector(String locator) {
+        return locator.matches("[A-Z].*]")
+            ? new Selector().setup(Selector.class, b-> b.setName(locator))
+            : new Selector().setup(Selector.class, b-> b.setLocator(defineLocator(locator)));
+    }
+    public static IsDropdown dropdown(String locator) {
+        return locator.matches("[A-Z].*]")
+                ? new Dropdown().setup(Dropdown.class, b-> b.setName(locator))
+                : new Dropdown().setup(Dropdown.class, b-> b.setLocator(defineLocator(locator)));
+    }
+    public static IsDropdown dropdown(String root, String value, String list, String expand) {
+        return new Dropdown().setup(root, value, list, expand);
     }
 
 }

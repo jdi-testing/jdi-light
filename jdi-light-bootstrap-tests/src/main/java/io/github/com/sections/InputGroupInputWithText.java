@@ -8,5 +8,4 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 public class InputGroupInputWithText extends Section {
     @Css(".input-group-text") public Text text;
     @Css(".form-control") public TextField input;
-
 }

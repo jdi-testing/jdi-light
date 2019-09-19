@@ -44,4 +44,17 @@ public enum LogLevels {
     public static Level getLog4j2Level(LogLevels level) {
         return first(allLog4J2Levels, l -> l.intLevel() >= level.level);
     }
+    public static LogLevels parseLogLevel(String logLevel) {
+        switch (logLevel) {
+            case "OFF": return OFF;
+            case "FATAL": return FATAL;
+            case "ERROR": return ERROR;
+            case "WARNING": return WARNING;
+            case "STEP": return STEP;
+            case "DEBUG": return DEBUG;
+            case "TRACE": return TRACE;
+            case "ALL": return ALL;
+            default: return INFO;
+        }
+    }
 }
