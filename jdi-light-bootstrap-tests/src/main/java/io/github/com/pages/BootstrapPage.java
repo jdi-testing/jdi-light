@@ -1,7 +1,9 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import io.github.com.sections.*;
 
@@ -15,6 +17,8 @@ public class BootstrapPage extends WebPage {
     @Css("#input-group-username") public static InputGroupInputWithText inputGroupUsername;
     @Css("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
     @Css("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
+    @UI("#input-group-wrap") public static UIElement inputGroupWrap;
+    @UI("#input-group-nowrap") public static UIElement inputGroupNoWrap;
     //endregion
 
     //region Complex Elements
