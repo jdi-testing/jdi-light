@@ -5,6 +5,9 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.epam.jdi.light.elements.common.WindowsManager.switchToWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.windowsCount;
 import static io.github.com.StaticSite.bsPage;
@@ -20,6 +23,7 @@ public class MediaObjectTests extends TestsInit {
     private static String bodyTextOfMediaObjectSample = "WOLVERINE\nWolverine is a fictional character appearing in American comic books published by Marvel Comics, mostly in association with the X-Men. He is a mutant who possesses animal-keen senses, enhanced physical capabilities, powerful regenerative ability known as a healing factor, and three retractable claws in each hand.";
     private static String bodyTextOfMediaObjectNesting = "IRON MAN\nDonec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.";
     private static String expectedUrl ="https://jdi-testing.github.io/jdi-light/index.html";
+    private static List<String> listOfHeading = Arrays.asList("WOLVERINE FIRST", "IRON MAN SECOND", "SPIDER MAN THIRD");
 
 
     @BeforeMethod
@@ -67,6 +71,23 @@ public class MediaObjectTests extends TestsInit {
         ;
 
     }
+
+    @Test
+    public void isValidationTestListMediaObject() {
+        mediaObjectList.is().displayed();
+        mediaObjectList.is().enabled();
+        mediaObjectList.get(1).headingOfMediaObject.is().text(is(listOfHeading.get(1)));
+        mediaObjectList.get(1).bodyOfMediaObject.is().text(containsString("Stark requires"));
+        assertThat(mediaObjectList.get(2).headingOfMediaObject.core().css("font-size"), is("20px"));
+        assertThat(mediaObjectList.get(1).bodyOfMediaObject.core().css("font-size"), is("14px"));
+        mediaObjectList.assertThat().displayed()
+                .core()
+                .css("font-size", is("14px"))
+        ;
+
+    }
+
+
 
     @Test
     public void clickTest() {
