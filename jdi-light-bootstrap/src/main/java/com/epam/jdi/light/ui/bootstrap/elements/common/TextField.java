@@ -11,7 +11,7 @@ import static com.epam.jdi.light.common.TextTypes.VALUE;
 
 public class TextField extends UIBaseElement<TextAssert>
         implements HasLabel, SetValue, HasPlaceholder, IsInput {
-    // region Set and get value for Forms
+
     public void setValue(String value) {
         input(value);
     }
@@ -20,7 +20,6 @@ public class TextField extends UIBaseElement<TextAssert>
     }
     @Override
     public String getText() { return core().text(VALUE); }
-    // endregion
 
     @Override
     public TextAssert is() {

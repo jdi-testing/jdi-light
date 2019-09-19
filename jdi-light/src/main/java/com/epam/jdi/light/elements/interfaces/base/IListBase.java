@@ -8,4 +8,9 @@ public interface IListBase extends IsText, HasClick {
     default boolean isSelected() {
         return core().isSelected();
     }
+
+    @JDIAction("Check that '{name}' is deselected")
+    default boolean isDeselected() {
+        return core().isDeselected();
+    }
 }

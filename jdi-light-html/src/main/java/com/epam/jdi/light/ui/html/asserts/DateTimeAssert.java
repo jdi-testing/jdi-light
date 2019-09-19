@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.asserts;
 
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.DateTimeSelector;
@@ -14,7 +15,14 @@ import static org.hamcrest.Matchers.is;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector> {
+public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector>
+    implements ITextAssert<DateTimeAssert> {
+
+    @JDIAction("Assert that '{name}' text {0}")
+    public DateTimeAssert text(Matcher<String> condition) {
+        jdiAssert(element.value(), condition);
+        return this;
+    }
     @JDIAction("Assert that '{name}' date {0}")
     public DateTimeAssert date(Matcher<String> date) {
         jdiAssert(element.value(), date);

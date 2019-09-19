@@ -13,7 +13,8 @@ import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static org.hamcrest.Matchers.*;
 
-public class UISelectAssert<A extends UISelectAssert, E extends ISelector> extends UIAssert<A, E> {
+public class UISelectAssert<A extends UISelectAssert, E extends ISelector> extends UIAssert<A, E>
+        implements ITextAssert<A> {
 
     @JDIAction("Assert that '{0}' option selected for '{name}'")
     public A selected(Matcher<String> condition) {
@@ -28,13 +29,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     public <TEnum extends Enum> UISelectAssert selected(TEnum option) {
         return selected(getEnumValue(option));
     }
-    public A value(Matcher<String> condition) {
-        return selected(condition);
-    }
     public A text(Matcher<String> condition) {
-        return selected(condition);
-    }
-    public A value(String condition) {
         return selected(condition);
     }
     public A text(String condition) {

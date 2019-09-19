@@ -93,6 +93,9 @@ public class IsComboboxTests extends TestsInit {
     public void isValidationTest() {
         iceCreamIs.is().enabled();
         iceCreamIs.is().text(is(text));
+        iceCreamIs.is().text(text);
+        iceCreamIs.is().selected(text);
+        iceCreamIs.is().selected(is(text));
         iceCreamIs.select(Vanilla);
         iceCreamIs.is().text(containsString("Van"));
     }

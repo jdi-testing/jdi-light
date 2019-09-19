@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.AnnotationRule;
@@ -13,6 +14,7 @@ import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.tools.LinqUtils;
@@ -30,21 +32,21 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.updatePage;
 import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
     public static void init() {}
-    private static void webPageSetup(SiteInfo info) {
+    static void webPageSetup(SiteInfo info) {
         WebPage page = (WebPage) info.instance;
         defaultSetup(info, page);
         page.updatePageData(
@@ -53,10 +55,12 @@ public class InitActions {
             valueOrDefault(getAnnotation(info.field, Title.class),
                 page.getClass().getAnnotation(Title.class))
         );
+        updatePage(page);
     }
 
     public static MapArray<Class<?>, Class<?>> INTERFACES = map(
-        $(WebElement.class, UIElement.class)
+        $(WebElement.class, UIElement.class),
+        $(IsDropdown.class, Dropdown.class)
     );
     public static MapArray<String, InitRule> INIT_RULES = map(
         $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList())),
@@ -73,7 +77,7 @@ public class InitActions {
             InitActions::elementSetup)),
         $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
-        $("PageObject", sRule(info -> //!isClass(info.type(), WebPage.class, Section.class &&
+        $("PageObject", sRule(info -> !isClassOr(info.type(), WebPage.class, Section.class) &&
                 isPageObject(info.instance.getClass()),
             PageFactory::initElements))
     );
@@ -91,7 +95,7 @@ public class InitActions {
     public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {
         if (jdi.parent == null)
             jdi.setParent(info.parent);
-        if (isBlank(jdi.name))
+        if (!jdi.name.matches("[A-Z].*]"))
             jdi.setName(info);
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
         return jdi;

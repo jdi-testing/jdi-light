@@ -14,7 +14,6 @@ public class TestsInit extends TestNGListener {
 
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        logger.setLogLevel(STEP);
         initElements(EpamGithubSite.class);
         homePage.open();
         logger.toLog("Run Tests");
