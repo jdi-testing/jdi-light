@@ -45,13 +45,13 @@ public class BreadcrumbTests extends TestsInit {
     }
 
     @Test
-    public void getFirstItem() {
+    public void getFirstItemTest() {
         breadcrumb.itemns.first().has().value(HOME);
         breadcrumb.itemns.first().has().text(HOME);
     }
 
     @Test
-    public void getCurrectItem() {
+    public void getCurrectItemTest() {
         breadcrumb.itemns.last().has().value(BOOTSTRAP);
         breadcrumb.itemns.last().has().text(BOOTSTRAP);
         breadcrumb.itemns.last().has().text(WebPage.getTitle());
@@ -59,7 +59,7 @@ public class BreadcrumbTests extends TestsInit {
     }
 
     @Test
-    public void clickCurrectItem(){
+    public void clickCurrectItemTest(){
         breadcrumb.itemns.last().click();
 
         ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
