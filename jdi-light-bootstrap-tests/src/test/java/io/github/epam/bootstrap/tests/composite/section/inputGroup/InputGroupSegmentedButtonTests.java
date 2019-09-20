@@ -1,21 +1,25 @@
-package io.github.epam.bootstrap.tests.complex;
+package io.github.epam.bootstrap.tests.composite.section.inputGroup;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
+import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.segmentedButton;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Dmitrii Pavlov on 19.09.2019
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-public class SegmentedButtonTests extends TestsInit {
+public class InputGroupSegmentedButtonTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -28,10 +32,7 @@ public class SegmentedButtonTests extends TestsInit {
     String anotherAction = "Another action";
     String somethingElseHere = "Something else here";
     String separatedLink = "Separated link";
-    String buttonClickActionAlert = "Action Alert";
-    String buttonClickAnotherActionAlert = "Another Action Alert";
-    String buttonClickSomethingElseHereAlert = "Something Else Here Alert";
-    String buttonClickSeparatedLinkAlert = "Separated Link Alert";
+    String pageTitle = "Home Page";
     String actionButtonClickAlert = "Action Button Alert";
 
     @Test
@@ -60,33 +61,22 @@ public class SegmentedButtonTests extends TestsInit {
         segmentedButton.dropdownMenu.list().get(2).is().text(somethingElseHere);
         segmentedButton.dropdownMenu.list().get(3).is().text(separatedLink);
         segmentedButton.dropdownMenu.select(action);
-        validateAlert(is(buttonClickActionAlert));
+        newWindowTitleCheck();
         segmentedButton.dropdownMenu.select(anotherAction);
-        validateAlert(is(buttonClickAnotherActionAlert));
+        newWindowTitleCheck();
         segmentedButton.dropdownMenu.select(somethingElseHere);
-        validateAlert(is(buttonClickSomethingElseHereAlert));
+        newWindowTitleCheck();
         segmentedButton.dropdownMenu.select(separatedLink);
-        validateAlert(is(buttonClickSeparatedLinkAlert));
+        newWindowTitleCheck();
     }
 
     @Test
-    public void dropdownButtonTests() {
+    public void actionButtonTests() {
         segmentedButton.actionButton.is().displayed();
         segmentedButton.actionButton.is().enabled();
         segmentedButton.actionButton.is().text(action);
         segmentedButton.actionButton.click();
         validateAlert(is(actionButtonClickAlert));
-    }
-
-    @Test
-    public void dropdownButtonIsValidationTests() {
-        segmentedButton.dropdownMenu.is()
-                .core()
-                .attr("type", "button")
-                .attr("data-toggle", "dropdown")
-                .attr("aria-haspopup", "true")
-                .attr("aria-expanded", "false")
-                .tag("button");
     }
 
     @Test
@@ -98,8 +88,13 @@ public class SegmentedButtonTests extends TestsInit {
                 .hasClass("form-control")
                 .css("font-size", "16px")
                 .attr("type", "text")
-                .attr("aria-label", "Text input with dropdown button")
+                .attr("aria-label", "Text input with segmented dropdown button")
                 .tag("input");
     }
 
+    public void newWindowTitleCheck() {
+        switchToNewWindow();
+        assertEquals(getTitle(), pageTitle);
+        closeWindow();
+    }
 }

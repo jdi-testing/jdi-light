@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.complex;
+package io.github.epam.bootstrap.tests.composite.section.inputGroup;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -13,7 +13,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-public class ButtonWithDropdownTests extends TestsInit {
+public class InputGroupButtonWithDropdownTests extends TestsInit {
 
     @BeforeMethod
     public void before() {

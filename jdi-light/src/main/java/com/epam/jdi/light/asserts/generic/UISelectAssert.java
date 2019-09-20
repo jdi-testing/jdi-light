@@ -104,6 +104,11 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
         jdiAssert(element.list().isDisplayed() ? "expanded" : "hidden", is("expanded"));
         return (A) this;
     }
+    @JDIAction("Assert that '{name}' is collapsed")
+    public A collapsed() {
+        jdiAssert(element.list().isHidden() ? "collapsed" : "expanded", is("expanded"));
+        return (A) this;
+    }
     @JDIAction("Assert that '{name}' is disappeared")
     public A disappear() {
         jdiAssert(element.isHidden() ? "hidden" : "displayed", is("hidden"));
