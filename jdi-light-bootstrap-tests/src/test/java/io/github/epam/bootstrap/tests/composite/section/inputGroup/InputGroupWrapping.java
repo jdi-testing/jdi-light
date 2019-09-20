@@ -8,6 +8,7 @@ import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Iulia Litvin on 19.09.2019
@@ -30,7 +31,7 @@ public class InputGroupWrapping extends TestsInit {
 
     @Test
     public void checkNoWrapping() {
-        inputGroupNowrap.hasClass("flex-nowrap");
+        assertTrue(inputGroupNowrap.hasClass("flex-nowrap"));
         inputGroupNowrap.assertThat().core().css("flex-wrap", "nowrap");
     }
 
