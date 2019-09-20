@@ -16,6 +16,7 @@ public class Carousel extends UIBaseElement<TextAssert> implements IsText, IsBut
 	
     public String currentSlideLocator = "//div[contains(@class,'carousel-item active')]";
 	
+    @JDIAction("Get current slide in '{name}'")
 	public UIElement currentSlide() {
         return linked(currentSlideLocator, "current");
     }
