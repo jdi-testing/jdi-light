@@ -10,15 +10,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
+import static com.epam.jdi.light.common.TextTypes.TEXT;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.breadcrumb;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 
 public class BreadcrumbTests extends TestsInit {
@@ -31,36 +30,40 @@ public class BreadcrumbTests extends TestsInit {
     private static final String HOME = "Home";
     private static final String HTML5 = "HTML 5";
     private static final String BOOTSTRAP = "Bootstrap";
-    private static final List<String> ITEMS_VALUES = Arrays.asList(HOME, HTML5, BOOTSTRAP);
+    private static final String[] ITEMS_VALUES = new String[]{HOME, HTML5, BOOTSTRAP};
 
     @Test
     public void getTextTest() {
-        List<String> itemsTexts = breadcrumb.itemns.stream().map(UIElement::getText).collect(Collectors.toList());
-
-        breadcrumb.itemns.has().size(ITEMS_VALUES.size());
-        assertThat(itemsTexts, is(ITEMS_VALUES));
+        breadcrumb.itemns.has().size(ITEMS_VALUES.length);
+        breadcrumb.itemns.assertThat().values(TEXT, hasItems(ITEMS_VALUES));
     }
 
     @Test
     public void getValueTest() {
-        List<String> itemsValues = breadcrumb.itemns.stream().map(UIElement::getValue).collect(Collectors.toList());
-
-        breadcrumb.itemns.has().size(ITEMS_VALUES.size());
-        assertThat(itemsValues, is(ITEMS_VALUES));
+        breadcrumb.itemns.has().size(ITEMS_VALUES.length);
+        assertThat(breadcrumb.itemns.values().toArray(), is(ITEMS_VALUES));
     }
 
     @Test
     public void getFirstItem() {
-        breadcrumb.getFirstItem().has().value(HOME);
-        breadcrumb.getFirstItem().has().text(HOME);
+        breadcrumb.itemns.first().has().value(HOME);
+        breadcrumb.itemns.first().has().text(HOME);
     }
 
     @Test
     public void getCurrectItem() {
-        breadcrumb.getCurrectItem().has().value(BOOTSTRAP);
-        breadcrumb.getCurrectItem().has().text(BOOTSTRAP);
-        breadcrumb.getCurrectItem().has().text(WebPage.getTitle());
-        breadcrumb.getCurrectItem().has().value(WebPage.getTitle());
+        breadcrumb.itemns.last().has().value(BOOTSTRAP);
+        breadcrumb.itemns.last().has().text(BOOTSTRAP);
+        breadcrumb.itemns.last().has().text(WebPage.getTitle());
+        breadcrumb.itemns.last().has().value(WebPage.getTitle());
+    }
+
+    @Test
+    public void clickCurrectItem(){
+        breadcrumb.itemns.last().click();
+
+        ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
+        assertThat(tabs.size(), is(1));
     }
 
     @Test
@@ -113,7 +116,7 @@ public class BreadcrumbTests extends TestsInit {
                     .tag(is("li"));
         }
 
-        breadcrumb.getCurrectItem().shouldBe().displayed()
+        breadcrumb.itemns.last().shouldBe().displayed()
                 .core()
                 .attr("aria-current", "page")
                 .cssClass("breadcrumb-item active")
