@@ -76,7 +76,12 @@ public class ButtonTests extends TestsInit {
         doubleButton.doubleClick();
         validateAlert(is("Double Click"));
 //        disabledButton.click();
+        isValidationTest();
+        isValidationTest();
+        isValidationTest();
+        isValidationTest();
     }
+
     @Test
     public void isValidationTest() {
         redButton.is().displayed();
