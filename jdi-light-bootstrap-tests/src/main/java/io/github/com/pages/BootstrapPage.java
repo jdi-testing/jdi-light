@@ -2,7 +2,6 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -25,9 +24,6 @@ public class BootstrapPage extends WebPage {
 
     //region Complex Elements
 
-    @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
-    @UI("#media-object-nesting") public static MediaObjectNesting mediaObjectNesting;
-    @UI("#media-object-list") public static JList<MediaObjectSample> mediaObjectList;
 
     // COLLAPSE
     @JDropdown(expand = "#bs-collapse-link",
