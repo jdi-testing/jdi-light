@@ -18,6 +18,10 @@ public class InputGroupCustomSelect extends TestsInit {
     }
 
     String optionText = "Options";
+    String selectChoose = "Choose...";
+    String selectOne = "One";
+    String selectTwo = "Two";
+    String selectThree = "Three";
 
     @Test
     public void isValidationOptionsSectionTests() {
@@ -31,26 +35,26 @@ public class InputGroupCustomSelect extends TestsInit {
 
     @Test
     public void selectorByIndexTests() {
-        customSelect.selector.is().selected("Choose...");
+        customSelect.selector.is().selected(selectChoose);
         customSelect.selector.select(2);
-        customSelect.selector.is().selected("One");
+        customSelect.selector.is().selected(selectOne);
         customSelect.selector.select(3);
-        customSelect.selector.is().selected("Two");
+        customSelect.selector.is().selected(selectTwo);
         customSelect.selector.select(4);
-        customSelect.selector.is().selected("Three");
+        customSelect.selector.is().selected(selectThree);
         customSelect.selector.select(1);
-        customSelect.selector.is().selected("Choose...");
+        customSelect.selector.is().selected(selectChoose);
     }
 
     @Test(priority = 1)
     public void selectorByValueTests() {
-        customSelect.selector.is().selected("Choose...");
-        customSelect.selector.select("One");
-        customSelect.selector.is().selected("One");
-        customSelect.selector.select("Two");
-        customSelect.selector.is().selected("Two");
-        customSelect.selector.select("Three");
-        customSelect.selector.is().selected("Three");
+        customSelect.selector.is().selected(selectChoose);
+        customSelect.selector.select(selectOne);
+        customSelect.selector.is().selected(selectOne);
+        customSelect.selector.select(selectTwo);
+        customSelect.selector.is().selected(selectTwo);
+        customSelect.selector.select(selectThree);
+        customSelect.selector.is().selected(selectThree);
     }
 
     @Test
