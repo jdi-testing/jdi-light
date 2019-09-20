@@ -69,5 +69,6 @@ public class BootstrapPage extends WebPage {
     @UI("#card-example") public static CardExample cardExample;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
+    @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
     //endregion
 }
