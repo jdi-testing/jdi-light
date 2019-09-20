@@ -16,11 +16,13 @@ public class BootstrapPage extends WebPage {
     @Css("#jumbotron") public static Jumbotron jumbotron;
 
     @Css("#input-group-username") public static InputGroupInputWithText inputGroupUsername;
+
+    @Css("#card-example") public static CardExample cardExample;
     @Css("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
     //endregion
 
     //region Complex Elements
-    @Css("#card-example") public static CardExample cardExample;
+
 
     //endregion
 }

@@ -10,7 +10,6 @@ import static io.github.com.pages.BootstrapPage.cardExample;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.core.StringContains.containsString;
 import static org.testng.Assert.assertEquals;
 
 
@@ -31,7 +30,9 @@ public class CardExampleTests extends TestsInit {
     private String mainText = "Some quick example text to build" +
             " on the card title and make up the bulk of the card's content.";
     private String alertText = "Card Button Clicked!";
-    private String imageLink = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
+    private String imageSrc = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
+    private String imageAlt = "image";
+    private String buttonText = "Click Me!";
 
     @Test
     public void getTitleTextTest() {
@@ -51,25 +52,25 @@ public class CardExampleTests extends TestsInit {
 
     @Test
     public void getSrcTest() {
-        assertEquals(cardExample.image.src(), imageLink);
+        assertEquals(cardExample.image.src(), imageSrc);
     }
     @Test
     public void getAltTest() {
-        assertEquals(cardExample.image.alt(), "image");
+        assertEquals(cardExample.image.alt(), imageAlt);
     }
 
     @Test
     public void isValidationTest() {
-        cardExample.image.is().src(containsString("wolverin.jpg"));
-        cardExample.image.is().alt(is("image"));
-        cardExample.image.assertThat().height(is(137));
+        cardExample.image.is().src(is(imageSrc));
+        cardExample.image.is().alt(is(imageAlt));
         cardExample.image.assertThat().width(is(86));
+        cardExample.image.assertThat().height(is(137));
         cardExample.title.is().text(is(titleText));
         cardExample.text.is().text(is(mainText));
         cardExample.button.is().displayed()
-                .and().text(is(alertText))
+                .and().text(is(buttonText))
                 .core()
-                .attr("type", "button")
+                .attr("type", "submit")
                 .tag(is("button"));
         cardExample.button.is().enabled();
     }

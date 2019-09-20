@@ -10,5 +10,5 @@ public class CardExample extends Section {
     @Css(".card-title") public Text title;
     @Css(".card-text") public Text text;
     @Css(".btn") public Button button;
-    @Css(".card-img-top") public Image image;
+    @Css("#bs-card-example-image") public Image image;
 }
