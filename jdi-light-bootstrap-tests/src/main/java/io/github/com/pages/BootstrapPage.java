@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 
 import io.github.com.sections.*;
@@ -22,12 +21,6 @@ public class BootstrapPage extends WebPage {
     //endregion
 
     //region Complex Elements
-    @UI("#carousel-example-slides-only") public static Carousel carouselWithSlidesOnly;
-    @UI("#carousel-example-controls") public static Carousel carouselWithControls;
-    @UI("#carousel-example-indicators") public static Carousel carouselWithIndicators;
-    @UI("#carousel-example-captions") public static Carousel carouselWithCaptions;
-    @UI("#carousel-example-fade") public static Carousel carouselWithFadeTransition;
-    @UI("#carousel-example-interval") public static Carousel carouselWithCustomInterval;
     // COLLAPSE
     @JDropdown(expand = "#bs-collapse-link",
             value = "#bs-collapse-one",
