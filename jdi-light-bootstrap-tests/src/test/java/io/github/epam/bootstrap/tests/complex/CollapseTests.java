@@ -33,97 +33,97 @@ public class CollapseTests extends TestsInit {
     @Test(priority = 1)
     public void collapseLinkTest() {
         collapseLink.highlight();
-        collapseLink.toggle();
+        collapseLink.expand();
 
         collapseLink.is().expanded();
         collapseLink.value().is().text(cardOneText);
 
-        collapseLink.toggle();
+        collapseLink.collapse();
         collapseLink.is().collapsed();
     }
 
     @Test(priority = 2)
     public void collapseButtonTest() {
         collapseDataTarget.highlight();
-        collapseDataTarget.toggle();
+        collapseDataTarget.expand();
 
         collapseDataTarget.is().expanded();
         collapseDataTarget.value().is().text(cardOneText);
 
-        collapseDataTarget.toggle();
+        collapseDataTarget.collapse();
         collapseDataTarget.is().collapsed();
     }
 
     @Test(priority = 3)
     public void collapseToggleOneTest() {
         collapseToggleOne.highlight();
-        collapseToggleOne.toggle();
+        collapseToggleOne.expand();
 
         collapseToggleOne.is().expanded();
         collapseToggleOne.value().is().text(cardTwoText);
 
-        collapseToggleOne.toggle();
+        collapseToggleOne.collapse();
         collapseToggleOne.is().collapsed();
     }
 
     @Test(priority = 4)
     public void collapseToggleTwoTest() {
         collapseToggleTwo.highlight();
-        collapseToggleTwo.toggle();
+        collapseToggleTwo.expand();
 
         collapseToggleTwo.is().expanded();
         collapseToggleTwo.value().is().text(cardThreeText);
 
-        collapseToggleTwo.toggle();
+        collapseToggleTwo.collapse();
         collapseToggleTwo.is().collapsed();
     }
 
     @Test(priority = 5)
     public void collapseToggleBothTest() {
         collapseToggleBoth.highlight();
-        collapseToggleBoth.toggle();
+        collapseToggleBoth.expand();
 
         collapseToggleBoth.is().expanded();
         collapseToggleBoth.value().is().text(cardTwoText);
         collapseToggleTwo.value().is().text(cardThreeText);
 
-        collapseToggleBoth.toggle();
+        collapseToggleBoth.collapse();
         collapseToggleBoth.is().collapsed();
     }
 
     @Test(priority = 6)
     public void collapseGroupOneTest() {
         collapseGroupOne.highlight();
-        collapseGroupOne.toggle();
+        collapseGroupOne.expand();
 
         collapseGroupOne.is().expanded();
         collapseGroupOne.value().is().text(groupOneText);
 
-        collapseGroupOne.toggle();
+        collapseGroupOne.collapse();
         collapseGroupOne.is().collapsed();
     }
 
     @Test(priority = 7)
     public void collapseGroupTwoTest() {
         collapseGroupTwo.highlight();
-        collapseGroupTwo.toggle();
+        collapseGroupTwo.expand();
 
         collapseGroupTwo.is().expanded();
         collapseGroupTwo.value().is().text(groupTwoText);
 
-        collapseGroupTwo.toggle();
+        collapseGroupTwo.collapse();
         collapseGroupTwo.is().collapsed();
     }
 
     @Test(priority = 8)
     public void collapseGroupThreeTest() {
         collapseGroupThree.highlight();
-        collapseGroupThree.toggle();
+        collapseGroupThree.expand();
 
         collapseGroupThree.is().expanded();
         collapseGroupThree.value().is().text(groupThreeText);
 
-        collapseGroupThree.toggle();
+        collapseGroupThree.collapse();
         collapseGroupThree.is().collapsed();
     }
 
