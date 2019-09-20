@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
 
@@ -23,9 +24,9 @@ public class BootstrapPage extends WebPage {
     @Css("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
     @Css("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
 
-    @Css("#input-group-default") public static InputGroupInputWithText inputGroupDefaultSizing;
-    @Css("#input-group-small") public static InputGroupInputWithText inputGroupSmallSizing;
-    @Css("#input-group-large") public static InputGroupInputWithText inputGroupLargeSizing;
+    @UI("#input-group-default") public static TextField inputGroupDefaultSizing;
+    @UI("#input-group-small") public static TextField inputGroupSmallSizing;
+    @UI("#input-group-large") public static TextField inputGroupLargeSizing;
     //endregion
 
     //region Complex Elements
