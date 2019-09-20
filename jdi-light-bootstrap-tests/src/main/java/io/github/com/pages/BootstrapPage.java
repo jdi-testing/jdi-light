@@ -70,5 +70,7 @@ public class BootstrapPage extends WebPage {
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
     @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
+    @UI("#custom-select-01") public static CustomSelect customSelect;
+    @UI("#custom-select-button-01") public static CustomSelectWithButton customSelectWithButton;
     //endregion
 }
