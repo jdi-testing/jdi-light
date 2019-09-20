@@ -30,6 +30,7 @@ public class InputGroupCustomSelectWithButton extends TestsInit {
         customSelectWithButton.button.is().displayed();
         customSelectWithButton.button.is().enabled();
         customSelectWithButton.button.is().text(buttonText);
+        customSelectWithButton.button.hover();
         customSelectWithButton.button.click();
         validateAlert(is(buttonClickAlert));
     }
