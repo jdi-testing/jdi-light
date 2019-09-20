@@ -5,9 +5,9 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
-
 import io.github.com.sections.*;
 
 public class BootstrapPage extends WebPage {
@@ -18,6 +18,8 @@ public class BootstrapPage extends WebPage {
     @UI("#dismissible-alert") public static Alert dismissibleAlert;
     @UI("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
     @UI("#jumbotron") public static Jumbotron jumbotron;
+    @UI("#badge-secondary") public static Badge badgeSecondary;
+    @UI("#btn-primary") public static Button buttonPrimary;
     //endregion
 
     //region Complex Elements

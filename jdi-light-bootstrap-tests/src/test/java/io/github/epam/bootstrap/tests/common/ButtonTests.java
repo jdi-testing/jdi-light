@@ -13,8 +13,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 12.09.2019
@@ -65,6 +64,11 @@ public class ButtonTests extends TestsInit {
     public void rightClickTest() {
         redButton.rightClick();
         validateAlert(is("Right Click"));
+    }
+    @Test
+    public void badgeTest() {
+        assertEquals(buttonPrimary.badgeText(), "9");
+        assertTrue(buttonPrimary.badge().isDisplayed());
     }
     @Test
     public void isValidationTest() {
