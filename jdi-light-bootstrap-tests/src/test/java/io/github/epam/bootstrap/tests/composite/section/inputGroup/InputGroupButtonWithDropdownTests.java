@@ -34,10 +34,22 @@ public class InputGroupButtonWithDropdownTests extends TestsInit {
         buttonWithDropdown.dropdownMenu.is().enabled();
     }
 
-    @Test
+    @Test(invocationCount = 10, threadPoolSize = 10)
     public void textInputAreaTests() {
-        buttonWithDropdown.textInputArea.sendKeys(testText);
-        buttonWithDropdown.textInputArea.is().text(testText);
+        buttonWithDropdown.textInputArea.sendKeys(testText+"1");
+        buttonWithDropdown.textInputArea.is().text(testText+"1");
+        buttonWithDropdown.textInputArea.clear();
+        buttonWithDropdown.textInputArea.is().text("");
+        buttonWithDropdown.textInputArea.sendKeys(testText+"2");
+        buttonWithDropdown.textInputArea.is().text(testText+"2");
+        buttonWithDropdown.textInputArea.clear();
+        buttonWithDropdown.textInputArea.is().text("");
+        buttonWithDropdown.textInputArea.sendKeys(testText+"3");
+        buttonWithDropdown.textInputArea.is().text(testText+"3");
+        buttonWithDropdown.textInputArea.clear();
+        buttonWithDropdown.textInputArea.is().text("");
+        buttonWithDropdown.textInputArea.sendKeys(testText+"4");
+        buttonWithDropdown.textInputArea.is().text(testText+"4");
         buttonWithDropdown.textInputArea.clear();
         buttonWithDropdown.textInputArea.is().text("");
     }
