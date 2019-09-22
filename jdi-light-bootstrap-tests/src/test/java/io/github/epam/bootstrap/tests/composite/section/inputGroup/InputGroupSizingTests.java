@@ -10,7 +10,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 
 /**
- * Created by Aleksandr Sudiarov by 23.09.2019
+ * Created by Aleksandr Sudiarov by 22.09.2019
  * Email: aleksandr_sudiarov@epam.com
  */
 
@@ -32,5 +32,11 @@ public class InputGroupSizingTests extends TestsInit {
         assertEquals(inputGroupDefaultSizing.getText(), text);
         assertEquals(inputGroupSmallSizing.getText(), text);
         assertEquals(inputGroupLargeSizing.getText(), text);
+    }
+
+    @Test
+    public void clearSizingTest() {
+        inputGroupDefaultSizing.clear();
+        assertEquals(inputGroupDefaultSizing.getText(), "");
     }
 }
