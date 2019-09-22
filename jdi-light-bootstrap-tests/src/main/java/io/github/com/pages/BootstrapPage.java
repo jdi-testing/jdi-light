@@ -1,14 +1,12 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
 
@@ -20,14 +18,6 @@ public class BootstrapPage extends WebPage {
     @UI("#jumbotron") public static Jumbotron jumbotron;
     @UI("#simple-alert") public static Alert simpleAlert;
     @UI("#dismissible-alert") public static Alert dismissibleAlert;
-
-    @Css("#input-group-username") public static InputGroupInputWithText inputGroupUsername;
-    @Css("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
-    @Css("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
-
-    @UI("#input-group-default") public static TextField inputGroupDefaultSizing;
-    @UI("#input-group-small") public static TextField inputGroupSmallSizing;
-    @UI("#input-group-large") public static TextField inputGroupLargeSizing;
     //endregion
 
     //region Complex Elements
@@ -71,6 +61,9 @@ public class BootstrapPage extends WebPage {
     //region Composite Elements
     @UI("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
     @UI("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
+    @UI("#input-group-default") public static InputGroupSizing inputGroupDefaultSizing;
+    @UI("#input-group-small") public static InputGroupSizing inputGroupSmallSizing;
+    @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
     @UI("#card-example") public static CardExample cardExample;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;

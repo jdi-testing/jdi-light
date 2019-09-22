@@ -16,27 +16,42 @@ import static org.testng.Assert.assertEquals;
 
 public class InputGroupSizingTests extends TestsInit {
 
+    private String text = "Input text";
+    private String defaultSizingLabelText = "Default";
+    private String smallSizingLabelText = "Small";
+    private String largeSizingLabelText = "Large";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        inputGroupDefaultSizing.setText(text);
-        inputGroupSmallSizing.setText(text);
-        inputGroupLargeSizing.setText(text);
+        inputGroupDefaultSizing.input.setText(text);
+        inputGroupSmallSizing.input.setText(text);
+        inputGroupLargeSizing.input.setText(text);
     }
 
-    private String text = "Input text";
 
     @Test
     public void getTextFromSizingTest() {
-        assertEquals(inputGroupDefaultSizing.getText(), text);
-        assertEquals(inputGroupSmallSizing.getText(), text);
-        assertEquals(inputGroupLargeSizing.getText(), text);
+        assertEquals(inputGroupDefaultSizing.input.getText(), text);
+        assertEquals(inputGroupSmallSizing.input.getText(), text);
+        assertEquals(inputGroupLargeSizing.input.getText(), text);
     }
 
     @Test
     public void clearSizingTest() {
-        inputGroupDefaultSizing.clear();
-        assertEquals(inputGroupDefaultSizing.getText(), "");
+        inputGroupDefaultSizing.input.clear();
+        assertEquals(inputGroupDefaultSizing.input.getText(), "");
+        inputGroupSmallSizing.input.clear();
+        assertEquals(inputGroupDefaultSizing.input.getText(), "");
+        inputGroupLargeSizing.input.clear();
+        assertEquals(inputGroupDefaultSizing.input.getText(), "");
+    }
+
+    @Test
+    public void labelTextSizingTest() {
+        assertEquals(inputGroupDefaultSizing.label.getText(), defaultSizingLabelText);
+        assertEquals(inputGroupSmallSizing.label.getText(), smallSizingLabelText);
+        assertEquals(inputGroupLargeSizing.label.getText(), largeSizingLabelText);
     }
 }
