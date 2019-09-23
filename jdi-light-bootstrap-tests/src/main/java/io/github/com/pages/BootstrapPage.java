@@ -61,6 +61,11 @@ public class BootstrapPage extends WebPage {
     //region Composite Elements
     @UI("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
     @UI("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
+    @UI("#input-group-basic-example1") public static InputGroupInputWithText inputGroupBasicExample1;
+    @UI("#input-group-basic-example2") public static InputGroupInputWithText inputGroupBasicExample2;
+    @UI("#input-group-basic-example3") public static InputGroupInputWithLabelAndText inputGroupBasicExample3;
+    @UI("#input-group-basic-example4") public static InputGroupInputWithTwoText inputGroupBasicExample4;
+    @UI("#input-group-basic-example5") public static InputGroupTextareaWithText inputGroupBasicExample5;
     @UI("#card-example") public static CardExample cardExample;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
