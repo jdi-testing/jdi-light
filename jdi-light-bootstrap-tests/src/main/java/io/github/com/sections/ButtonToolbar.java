@@ -6,8 +6,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 
 public class ButtonToolbar extends Section {
-
     @UI("button") public WebList buttonsInToolbar;
-
     @UI("input") public TextField inputAreaInToolbar;
 }

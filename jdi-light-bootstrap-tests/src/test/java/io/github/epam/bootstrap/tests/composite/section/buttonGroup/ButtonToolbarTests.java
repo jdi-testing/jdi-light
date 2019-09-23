@@ -4,9 +4,11 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.buttonToolbar;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 
 public class ButtonToolbarTests extends TestsInit {
@@ -40,6 +42,7 @@ public class ButtonToolbarTests extends TestsInit {
             button.assertThat().css("background-color", backgroundColorAfterHovering);
             button.assertThat().css("border-color", borderColorBeforeClicking);
             button.click();
+            validateAlert(containsString("button is clicked"));
             button.assertThat().css("border-color", borderColorAfterClicking);
         });
     }
