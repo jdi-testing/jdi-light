@@ -9,10 +9,10 @@ import pseudo.site.PseudoSite;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
-import static com.epam.jdi.light.logger.LogLevels.STEP;
-import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
+import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
+import static io.github.com.StaticSite.htmlElementsPage2;
 
 public class TestsInit {
     @BeforeSuite(alwaysRun = true)

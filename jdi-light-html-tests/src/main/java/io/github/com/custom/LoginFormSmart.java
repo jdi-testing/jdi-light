@@ -20,4 +20,5 @@ public class LoginFormSmart extends Form<User> {
     public boolean isHidden() {
         return name.isHidden();
     }
+
 }

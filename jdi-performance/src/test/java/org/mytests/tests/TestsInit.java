@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mytests.tests.PerfStatistic.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
 
-public class SimpleTestsInit {
+public class TestsInit {
     public static Safe<Timer> TIMER = new Safe<>();
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
