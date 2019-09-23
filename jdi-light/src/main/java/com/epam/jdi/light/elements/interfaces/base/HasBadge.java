@@ -13,6 +13,7 @@ public interface HasBadge extends ICoreElement{
     default UIElement badge() {
         return core().find(By.cssSelector(".badge"));
     }
+
     /**
      * Gets badge text
      * @return String text
@@ -20,5 +21,14 @@ public interface HasBadge extends ICoreElement{
     @JDIAction("Get '{name}' badge text")
     default String badgeText() {
         return core().find(By.cssSelector(".badge")).getText();
+    }
+
+    /**
+     * Gets badge value
+     * @return String text
+     */
+    @JDIAction("Get '{name}' badge text")
+    default String badgeValue() {
+        return core().find(By.cssSelector(".badge")).getValue();
     }
 }

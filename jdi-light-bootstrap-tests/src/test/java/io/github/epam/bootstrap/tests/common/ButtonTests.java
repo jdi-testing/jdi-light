@@ -67,8 +67,9 @@ public class ButtonTests extends TestsInit {
     }
     @Test
     public void badgeTest() {
-        assertEquals(buttonPrimary.badgeText(), "9");
         assertTrue(buttonPrimary.badge().isDisplayed());
+        assertEquals(buttonPrimary.badgeText(), "9");
+        assertEquals(buttonPrimary.badgeValue(), "9");
     }
     @Test
     public void isValidationTest() {
