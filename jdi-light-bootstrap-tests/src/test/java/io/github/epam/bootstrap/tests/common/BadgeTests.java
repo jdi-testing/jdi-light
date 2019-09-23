@@ -14,15 +14,14 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class BadgeTests extends TestsInit {
+    private String badgeSecondaryText = "BADGE";
+    private String badgeSuccessText = "Github JDI";
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    String badgeSecondaryText = "BADGE";
-    String badgeSuccessText = "Github JDI";
 
     @Test
     public void getTextTest() {
