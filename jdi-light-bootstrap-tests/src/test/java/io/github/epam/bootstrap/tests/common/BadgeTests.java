@@ -38,9 +38,22 @@ public class BadgeTests extends TestsInit {
     }
 
     @Test
-    public void badgeAsLinkTest() {
-        badgeSuccess.is().displayed()
-                .and().text(is(badgeSuccessText))
-                .text(containsString(badgeSuccessText));
+    public void isValidationTest() {
+        badgeSecondary.assertThat().displayed()
+                .and()
+                .core()
+                .cssClass("badge badge-secondary")
+                .attr("id", "badge-secondary")
+                .tag(is("span"));
+
+        badgeSuccess.assertThat().displayed()
+                .and()
+                .text(is(badgeSuccessText))
+                .text(containsString(badgeSuccessText))
+                .core()
+                .cssClass("badge badge-success")
+                .attr("id", "badge-success")
+                .attr("alt", "Github JDI Link")
+                .tag(is("a"));
     }
 }
