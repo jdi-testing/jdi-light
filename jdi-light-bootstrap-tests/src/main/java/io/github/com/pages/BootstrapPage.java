@@ -73,5 +73,8 @@ public class BootstrapPage extends WebPage {
     @UI("#btn-lg-group") public static ButtonGroupSizing largeBtnGroup;
     @UI("#btn-md-group") public static ButtonGroupSizing defaultBtnGroup;
     @UI("#btn-sm-group") public static ButtonGroupSizing smallBtnGroup;
+    @UI("#card-text-left") public static CardTextAlignment cardLeftTextAlignment;
+    @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
+    @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
     //endregion
 }
