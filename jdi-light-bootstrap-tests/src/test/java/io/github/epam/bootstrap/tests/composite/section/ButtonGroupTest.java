@@ -6,12 +6,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.sections.buttongroup.DefaultButtonGroup.*;
-import static io.github.com.sections.buttongroup.DefaultButtonGroup.Option.JDI;
-import static io.github.com.sections.buttongroup.DefaultButtonGroup.Option.JDI_DOCUMENTATION;
 import static io.github.com.sections.buttongroup.SpecificButtonGroup.cyanButton;
 import static io.github.com.sections.buttongroup.SpecificButtonGroup.disabledButton;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
@@ -34,6 +34,9 @@ public class ButtonGroupTest extends TestsInit {
 
     private static final String DOUBLE_ALERT_TEXT = "Double click";
     private static final String CONTEXT_ALERT_TEXT = "Context Click";
+
+    private static final String JDI_OPTION = "JDI";
+    private static final String DOCUMENTATION_OPTION = "JDI documentation";
 
     private static final int FIRST_OPTION_INDEX = 1;
     private static final int ADDITIONAL_TAB_INDEX = 2;
@@ -123,13 +126,13 @@ public class ButtonGroupTest extends TestsInit {
     @DataProvider
     private static Object[][] getOption() {
         return new Object[][] {
-                {JDI}, {JDI_DOCUMENTATION}
+                {JDI_OPTION}, {DOCUMENTATION_OPTION}
         };
     }
 
     @Test(dataProvider = "getOption")
-    public void selectTest(Option option) {
-        dropdownButton.select(option.getTitle());
+    public void selectTest(String option) {
+        dropdownButton.select(option);
         int actualTabAmount = windowsCount();
         switchToWindow(ADDITIONAL_TAB_INDEX);
         closeWindow();
@@ -153,6 +156,6 @@ public class ButtonGroupTest extends TestsInit {
 
     @Test
     public void valuesTest() {
-        assertEquals(dropdownButton.getCleanValues(), Option.getValues());
+        assertEquals(dropdownButton.values(), Arrays.asList(JDI_OPTION, DOCUMENTATION_OPTION));
     }
 }

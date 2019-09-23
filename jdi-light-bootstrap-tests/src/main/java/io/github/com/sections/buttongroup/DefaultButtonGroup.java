@@ -24,22 +24,4 @@ public class DefaultButtonGroup extends Section {
                 value = ".dropdown-menu",
                 list = ".dropdown-item")
     public static Dropdown dropdownButton;
-
-    public enum Option {
-        JDI("JDI"), JDI_DOCUMENTATION("JDI documentation");
-
-        String title;
-
-        Option(String title) {
-            this.title = title;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public static List<String> getValues() {
-            return Stream.of(Option.values()).map(option -> option.getTitle()).collect(Collectors.toList());
-        }
-    }
 }
