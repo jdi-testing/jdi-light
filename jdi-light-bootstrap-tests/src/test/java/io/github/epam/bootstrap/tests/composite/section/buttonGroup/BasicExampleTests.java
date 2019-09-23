@@ -19,9 +19,9 @@ public class BasicExampleTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    String leftButtonClickAlert = "Left button clicked!";
-    String middleButtonClickAlert = "Middle button clicked!";
-    String rightButtonClickAlert = "Right button clicked!";
+    String leftButtonClickAlert = "Left Button Clicked!";
+    String middleButtonClickAlert = "Middle Button Clicked!";
+    String rightButtonClickAlert = "Right Button Clicked!";
 
     @Test
     public void leftButtonTests() {
@@ -30,7 +30,7 @@ public class BasicExampleTests extends TestsInit {
                 .enabled()
                 .core()
                 .hasClass("btn btn-secondary")
-                .css("font-size", "12px");
+                .css("font-size", "16px");
         buttonGroupBasicExample.leftButton.click();
         validateAlert(is(leftButtonClickAlert));
     }
@@ -42,7 +42,7 @@ public class BasicExampleTests extends TestsInit {
                 .enabled()
                 .core()
                 .hasClass("btn btn-secondary")
-                .css("font-size", "12px");
+                .css("font-size", "16px");
         buttonGroupBasicExample.middleButton.click();
         validateAlert(is(middleButtonClickAlert));
     }
@@ -54,7 +54,7 @@ public class BasicExampleTests extends TestsInit {
                 .enabled()
                 .core()
                 .hasClass("btn btn-secondary")
-                .css("font-size", "12px");
+                .css("font-size", "16px");
         buttonGroupBasicExample.rightButton.click();
         validateAlert(is(rightButtonClickAlert));
     }
