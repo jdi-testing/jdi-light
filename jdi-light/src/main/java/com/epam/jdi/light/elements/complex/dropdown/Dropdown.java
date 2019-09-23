@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Roman Iovlev on 02.03.2018
