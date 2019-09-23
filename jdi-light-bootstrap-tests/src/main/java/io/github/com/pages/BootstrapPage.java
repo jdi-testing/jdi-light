@@ -70,5 +70,8 @@ public class BootstrapPage extends WebPage {
     @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
     @UI("#media-object-nesting") public static MediaObjectNesting mediaObjectNesting;
     @UI("#media-object-list") public static JList<MediaObjectSample> mediaObjectList;
+    @UI("#btn-lg-group") public static ButtonGroupSizing largeBtnGroup;
+    @UI("#btn-md-group") public static ButtonGroupSizing defaultBtnGroup;
+    @UI("#btn-sm-group") public static ButtonGroupSizing smallBtnGroup;
     //endregion
 }
