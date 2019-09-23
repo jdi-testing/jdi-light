@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
@@ -13,13 +14,15 @@ public class BootstrapPage extends WebPage {
     //region Simple Elements
     public static UIElement inputGroupWrap,inputGroupNowrap;
     public static Button redButton, doubleButton, disabledButton;
-    @UI("#simple-alert") public static Alert simpleAlert;
-    @UI("#dismissible-alert") public static Alert dismissibleAlert;
     @UI("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
     @UI("#jumbotron") public static Jumbotron jumbotron;
+    @UI("#simple-alert") public static Alert simpleAlert;
+    @UI("#dismissible-alert") public static Alert dismissibleAlert;
     //endregion
 
     //region Complex Elements
+
+
     // COLLAPSE
     @JDropdown(expand = "#bs-collapse-link",
             value = "#bs-collapse-one",
@@ -62,5 +65,11 @@ public class BootstrapPage extends WebPage {
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
     @UI(".btn-toolbar") public static ButtonToolbar buttonToolbar;
+    @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
+    @UI("#custom-select-01") public static CustomSelect customSelect;
+    @UI("#custom-select-button-01") public static CustomSelectWithButton customSelectWithButton;
+    @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
+    @UI("#media-object-nesting") public static MediaObjectNesting mediaObjectNesting;
+    @UI("#media-object-list") public static JList<MediaObjectSample> mediaObjectList;
     //endregion
 }
