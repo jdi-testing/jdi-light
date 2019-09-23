@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.bootstrap.elements.common.RadioButton;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
 
@@ -73,5 +74,6 @@ public class BootstrapPage extends WebPage {
     @UI("#basic-example") public static ButtonGroupBasicExample buttonGroupBasicExample;
     @UI("#vertical-variation") public static  ButtonGroupVerticalVariation buttonGroupVerticalVariation;
     @UI("#button-group-nesting") public static ButtonGroupNesting buttonGroupNesting;
+    @UI("#input-group-radio [type='radio']") public static RadioButton radioButton;
     //endregion
 }
