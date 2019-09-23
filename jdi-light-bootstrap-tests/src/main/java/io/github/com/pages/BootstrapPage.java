@@ -74,6 +74,6 @@ public class BootstrapPage extends WebPage {
     @UI("#basic-example") public static ButtonGroupBasicExample buttonGroupBasicExample;
     @UI("#vertical-variation") public static  ButtonGroupVerticalVariation buttonGroupVerticalVariation;
     @UI("#button-group-nesting") public static ButtonGroupNesting buttonGroupNesting;
-    @UI("#input-group-radio [type='radio']") public static RadioButton radioButton;
+    @UI("#radio-buttons") public static RadioButtonGroup radioButtonGroup;
     //endregion
 }
