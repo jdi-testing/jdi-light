@@ -10,7 +10,6 @@ import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindo
 import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.buttonGroupNesting;
-import static io.github.com.pages.BootstrapPage.buttonGroupVerticalVariation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
@@ -25,7 +24,7 @@ public class NestingTests extends TestsInit {
 
     String buttonOneClickAlert = "Button 1 Clicked!";
     String buttonTwoClickAlert = "Button 2 Clicked!";
-    String dropdownMenuLinkOne = "JDI Light";
+    String dropdownMenuLinkOne = "JDI Github";
     String dropdownMenuLinkTwo = "JDI Docs";
     String linkOnePageTitle = "GitHub - jdi-testing/jdi-light: Powerful Framework for UI Automation Testing on Java";
     String linkTwoPageTitle = "JDI Light Framework – API Reference";
@@ -55,7 +54,7 @@ public class NestingTests extends TestsInit {
     }
 
     @Test
-    public void dropdownMwnuTests() {
+    public void dropdownMenuTests() {
         buttonGroupNesting.dropdownMenu.expand();
         buttonGroupNesting.dropdownMenu.is().expanded();
         buttonGroupNesting.dropdownMenu.is().size(2);
@@ -73,5 +72,4 @@ public class NestingTests extends TestsInit {
         assertEquals(getTitle(), pageTitle);
         closeWindow();
     }
-
 }
