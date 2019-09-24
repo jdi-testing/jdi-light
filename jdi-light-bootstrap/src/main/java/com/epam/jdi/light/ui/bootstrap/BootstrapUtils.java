@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.bootstrap.elements;
+package com.epam.jdi.light.ui.bootstrap;
 
 import org.openqa.selenium.WebElement;
 
