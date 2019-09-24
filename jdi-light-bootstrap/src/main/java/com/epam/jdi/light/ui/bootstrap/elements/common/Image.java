@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.ui.bootstrap.asserts.ImageAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.ui.bootstrap.elements.BootstrapUtils.getInt;
+import static com.epam.jdi.light.ui.bootstrap.BootstrapUtils.getInt;
 
 public class Image extends UIBaseElement<ImageAssert>
         implements HasClick, HasValue {
