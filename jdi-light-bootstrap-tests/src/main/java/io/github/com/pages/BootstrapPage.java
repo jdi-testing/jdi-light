@@ -1,7 +1,7 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -61,6 +61,9 @@ public class BootstrapPage extends WebPage {
     //region Composite Elements
     @UI("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
     @UI("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
+    @UI("#input-group-default") public static InputGroupSizing inputGroupDefaultSizing;
+    @UI("#input-group-small") public static InputGroupSizing inputGroupSmallSizing;
+    @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
     @UI("#card-example") public static CardExample cardExample;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
