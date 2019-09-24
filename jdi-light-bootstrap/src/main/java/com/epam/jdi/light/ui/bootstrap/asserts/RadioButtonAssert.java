@@ -8,6 +8,11 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.RadioButton;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Created by Dmitrii Pavlov on 23.09.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
+
 public class RadioButtonAssert extends UIAssert<RadioButtonAssert, RadioButton>
         implements SelectedAssert<RadioButtonAssert> {
 
