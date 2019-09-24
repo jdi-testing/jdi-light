@@ -111,7 +111,6 @@ public class BreadcrumbTests extends TestsInit {
                 .css("font-size", is("14px"));
 
         for (UIElement item : breadcrumb.items) {
-            item.shouldBe().displayed();
             item.shouldBe().enabled();
             item.shouldBe().displayed()
                     .core()
