@@ -3,23 +3,38 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 
 import io.github.com.sections.*;
+import io.github.com.sections.buttongroup.DefaultButtonGroup;
+import io.github.com.sections.buttongroup.SpecificButtonGroup;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
     public static UIElement inputGroupWrap,inputGroupNowrap;
     public static Button redButton, doubleButton, disabledButton;
+
+    @Css("#button-group1")
+    public static DefaultButtonGroup defaultButtonGroup;
+
+    @Css("#button-group2")
+    public static SpecificButtonGroup specificButtonGroup;
+
     @UI("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
     @UI("#jumbotron") public static Jumbotron jumbotron;
     @UI("#simple-alert") public static Alert simpleAlert;
     @UI("#dismissible-alert") public static Alert dismissibleAlert;
+    @UI("#badge-secondary") public static Badge badgeSecondary;
+    @UI("#btn-primary") public static Button buttonPrimary;
+    @UI("#badge-success") public static Link badgeSuccess;
     //endregion
 
     //region Complex Elements
