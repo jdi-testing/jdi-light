@@ -11,7 +11,7 @@ public class CardWithHeaderAndFooter extends Card {
     public Text title;
 
     @UI(".card-body p")
-    public Text body;
+    public Text paragraph;
 
     @UI("button")
     public Button button;
@@ -19,6 +19,6 @@ public class CardWithHeaderAndFooter extends Card {
     @UI(".card-header")
     public Text header;
 
-    @UI(".card-footer")
+    @UI("//*[contains(@class, 'footer')]")
     public Text footer;
 }
