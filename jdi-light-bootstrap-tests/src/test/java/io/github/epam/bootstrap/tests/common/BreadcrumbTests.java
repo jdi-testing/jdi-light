@@ -20,6 +20,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Created by Olga Ivanova on 16.09.2019
+ * Email: olga_ivanova@epam.com
+ */
+
 public class BreadcrumbTests extends TestsInit {
     @BeforeMethod
     public void before() {
@@ -34,33 +39,31 @@ public class BreadcrumbTests extends TestsInit {
 
     @Test
     public void getTextTest() {
-        breadcrumb.itemns.has().size(ITEMS_VALUES.length);
-        breadcrumb.itemns.assertThat().values(TEXT, hasItems(ITEMS_VALUES));
+        breadcrumb.items.has().size(ITEMS_VALUES.length);
+        breadcrumb.items.assertThat().values(TEXT, hasItems(ITEMS_VALUES));
     }
 
     @Test
     public void getValueTest() {
-        breadcrumb.itemns.has().size(ITEMS_VALUES.length);
-        assertThat(breadcrumb.itemns.values().toArray(), is(ITEMS_VALUES));
+        breadcrumb.items.has().size(ITEMS_VALUES.length);
+        assertThat(breadcrumb.items.values().toArray(), is(ITEMS_VALUES));
     }
 
     @Test
     public void getFirstItemTest() {
-        breadcrumb.itemns.first().has().value(HOME);
-        breadcrumb.itemns.first().has().text(HOME);
+        breadcrumb.items.first().has().value(HOME);
+        breadcrumb.items.first().has().text(HOME);
     }
 
     @Test
     public void getCurrectItemTest() {
-        breadcrumb.itemns.last().has().value(BOOTSTRAP);
-        breadcrumb.itemns.last().has().text(BOOTSTRAP);
-        breadcrumb.itemns.last().has().text(WebPage.getTitle());
-        breadcrumb.itemns.last().has().value(WebPage.getTitle());
+        breadcrumb.items.last().has().value(BOOTSTRAP);
+        breadcrumb.items.last().has().text(BOOTSTRAP);
     }
 
     @Test
     public void clickCurrectItemTest(){
-        breadcrumb.itemns.last().click();
+        breadcrumb.items.last().click();
 
         ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
         assertThat(tabs.size(), is(1));
@@ -68,7 +71,7 @@ public class BreadcrumbTests extends TestsInit {
 
     @Test
     public void clickByNameTest() {
-        breadcrumb.itemns.get(HTML5).click();
+        breadcrumb.items.get(HTML5).click();
 
         ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
         WebDriver driver = WebDriverFactory.getDriver();
@@ -82,7 +85,7 @@ public class BreadcrumbTests extends TestsInit {
 
     @Test
     public void clickByIDTest() {
-        breadcrumb.itemns.get(0).click();
+        breadcrumb.items.get(0).click();
 
         ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
         WebDriver driver = WebDriverFactory.getDriver();
@@ -96,7 +99,6 @@ public class BreadcrumbTests extends TestsInit {
 
     @Test
     public void isValdidationTest() {
-        breadcrumb.shouldBe().displayed();
         breadcrumb.shouldBe().enabled();
         breadcrumb.shouldBe().displayed()
                 .core()
@@ -108,7 +110,7 @@ public class BreadcrumbTests extends TestsInit {
                 .css("color", is("rgba(102, 102, 102, 1)")) //#666 Color Hex
                 .css("font-size", is("14px"));
 
-        for (UIElement item : breadcrumb.itemns) {
+        for (UIElement item : breadcrumb.items) {
             item.shouldBe().displayed();
             item.shouldBe().enabled();
             item.shouldBe().displayed()
@@ -116,14 +118,13 @@ public class BreadcrumbTests extends TestsInit {
                     .tag(is("li"));
         }
 
-        breadcrumb.itemns.last().shouldBe().displayed()
+        breadcrumb.items.last().shouldBe().displayed()
                 .core()
                 .attr("aria-current", "page")
                 .cssClass("breadcrumb-item active")
                 .css("color", is("rgba(108, 117, 125, 1)")); //#6c757d Color Hex
 
-        for (UIElement item : breadcrumb.itemns.finds(By.tagName("a"))) {
-            item.shouldBe().displayed();
+        for (UIElement item : breadcrumb.items.finds(By.tagName("a"))) {
             item.shouldBe().enabled();
             item.shouldBe().displayed()
                     .core()
