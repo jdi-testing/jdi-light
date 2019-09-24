@@ -1,7 +1,7 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -66,7 +66,11 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-basic-example3") public static InputGroupInputWithLabelAndText inputGroupBasicExample3;
     @UI("#input-group-basic-example4") public static InputGroupInputWithTwoText inputGroupBasicExample4;
     @UI("#input-group-basic-example5") public static InputGroupTextareaWithText inputGroupBasicExample5;
+    @UI("#input-group-default") public static InputGroupSizing inputGroupDefaultSizing;
+    @UI("#input-group-small") public static InputGroupSizing inputGroupSmallSizing;
+    @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
     @UI("#card-example") public static CardExample cardExample;
+    @UI("#card-body") public static CardBody cardBody;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
     @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
@@ -75,5 +79,15 @@ public class BootstrapPage extends WebPage {
     @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
     @UI("#media-object-nesting") public static MediaObjectNesting mediaObjectNesting;
     @UI("#media-object-list") public static JList<MediaObjectSample> mediaObjectList;
+    @UI("#basic-example") public static ButtonGroupBasicExample buttonGroupBasicExample;
+    @UI("#vertical-variation") public static  ButtonGroupVerticalVariation buttonGroupVerticalVariation;
+    @UI("#button-group-nesting") public static ButtonGroupNesting buttonGroupNesting;
+    @UI("#btn-lg-group") public static ButtonGroupSizing largeBtnGroup;
+    @UI("#btn-md-group") public static ButtonGroupSizing defaultBtnGroup;
+    @UI("#btn-sm-group") public static ButtonGroupSizing smallBtnGroup;
+    @UI("#card-text-left") public static CardTextAlignment cardLeftTextAlignment;
+    @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
+    @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
+    @UI("#card-navigation") public static CardNavigation cardNavigation;
     //endregion
 }
