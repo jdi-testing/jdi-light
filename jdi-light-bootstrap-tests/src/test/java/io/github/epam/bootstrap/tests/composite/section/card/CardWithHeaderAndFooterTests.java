@@ -4,12 +4,12 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.Matchers.is;
 
 public class CardWithHeaderAndFooterTests extends TestsInit {
 
@@ -57,21 +57,84 @@ public class CardWithHeaderAndFooterTests extends TestsInit {
     }
 
 
+    //test title
     @Test
     public void getTitleTextCardWithHeaderTest() {
-
+        cardWithHeader.title.is().text(textTitleCardWithHeader);
     }
+
 
     @Test
     public void getTitleTextCardWithHeaderAndFooterTest() {
-        assertEquals(cardWithHeaderAndFooter.title.getText(), textTitleCardWithHeaderAndFooter);
+        cardWithHeaderAndFooter.title.is().text(textTitleCardWithHeaderAndFooter);
     }
 
-    
+    //test paragraph
+    @Test
+    public void getParagraphTextCardWithHeaderTest() {
+        cardWithHeader.paragraph.is().text(textParagraphCardWithHeader);
+    }
 
+    @Test
+    public void getParagraphTextCardWithHeaderAndFooterQuoteTest() {
+        cardWithHeaderAndFooterQuote.paragraph.is().text(textParagraphCardWithHeaderAndFooterQuote);
+    }
 
+    @Test
+    public void getParagraphTextCardWithHeaderAndFooterTest() {
+        cardWithHeaderAndFooter.paragraph.is().text(textParagraphCardWithHeaderAndFooter);
+    }
 
+    //test button
+    @Test
+    public void getButtonTextCardWithHeaderTest() {
+        cardWithHeader.button.is().text(textButtonCardWithHeader);
+    }
 
-     r
+    @Test
+    public void getButtonTextCardWithHeaderAndFooterTest() {
+        cardWithHeaderAndFooter.button.is().text(textButtonCardWithHeaderAndFooter);
+    }
+
+//test header
+    @Test
+    public void getHeaderTextCardWithHeaderTest() {
+        cardWithHeader.header.is().text(textHeaderCardWithHeader);
+    }
+
+    @Test
+    public void getHeaderTextCardWithHeaderAndFooterQuoteTest() {
+        cardWithHeaderAndFooterQuote.header.is().text(textHeaderCardWithHeaderAndFooterQuote);
+    }
+
+    @Test
+    public void getHeaderTextCardWithHeaderAndFooterTest() {
+        cardWithHeaderAndFooter.header.is().text(textHeaderCardWithHeaderAndFooter);
+    }
+
+//test footer
+    @Test
+    public void getFooterTextCardWithHeaderTest() {
+        cardWithHeader.footer.is().notAppear();
+    }
+
+    @Test
+    public void getFooterTextCardWithHeaderAndFooterQuoteTest() {
+        cardWithHeaderAndFooterQuote.footer.is().text(textFooterCardWithHeaderAndFooterQuote);
+    }
+
+    @Test
+    public void getFooterTextCardWithHeaderAndFooterTest() {
+        cardWithHeaderAndFooter.footer.is().text(textFooterCardWithHeaderAndFooter);
+    }
+
+    @Test
+    public void clickButtonCardWithHeaderTest() {
+        cardWithHeader.button.click();
+        validateAlert(is("Button Clicked!"));
+        cardWithHeader.button.isEnabled();
+        cardWithHeader.button.isDisplayed();
+    }
+
 
 }
