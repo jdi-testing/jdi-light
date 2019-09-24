@@ -4,8 +4,11 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.customFileInput1;
+import static io.github.com.pages.BootstrapPage.customFileInput2;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 /**
@@ -30,16 +33,20 @@ public class InputGroupCustomFileInputTests extends TestsInit {
     public void isValidationOptionsSectionTests() {
 
 
-        customFileInput1.uploadTextBefore.is().text(UPLOAD_TEXT);
-        customFileInput1.uploadTextBefore.is().value(UPLOAD_TEXT);
+        customFileInput1.uploadText.is().text(UPLOAD_TEXT);
+        customFileInput1.uploadText.is().value(UPLOAD_TEXT);
 
         customFileInput1.labelText.is().text(LABEL_TEXT);
         customFileInput1.labelText.is().value(LABEL_TEXT);
 
-        customFileInput1.inputFiled.click();
       //  customFileInput1.inputFiled.is().value(INPUT_FIELD);
 
 
+        customFileInput2.uploadText.is().text(UPLOAD_TEXT);
+        customFileInput2.uploadText.is().value(UPLOAD_TEXT);
+
+        customFileInput2.labelText.is().text(LABEL_TEXT);
+        customFileInput2.labelText.is().value(LABEL_TEXT);
 
 /*      customFileInput1.optionText.is().text(optionText);
         customSelect.optionText.is()
@@ -48,7 +55,63 @@ public class InputGroupCustomFileInputTests extends TestsInit {
                 .css("font-size", is("14px"))
                 .tag("div");*/
     }
+    @Test
+    public void uploadTest() {
 
+        String value =  customFileInput1.inputFiled.getValue();
+
+/*        customFileInput1.inputFiled.uploadFile(mergePath(PROJECT_PATH,"/src/test/resources/general.xml"));
+        customFileInput1.inputFiled.is().text(containsString("general.xml"));
+        assertTrue(customFileInput1.inputFiled.getText().contains("general.xml"));
+        assertTrue(customFileInput1.inputFiled.getValue().contains("general.xml"));*/
+
+      /*  customFileInput2.inputFiled.uploadFile(mergePath(PROJECT_PATH,"/src/test/resources/general.xml"));
+        customFileInput2.inputFiled.is().text(containsString("general.xml"));
+        assertTrue(customFileInput2.inputFiled.getText().contains("general.xml"));
+        assertTrue(customFileInput2.inputFiled.getValue().contains("general.xml"));*/
+    }
+
+    @Test
+    public void disabledUploadTest() {
+/*        try {
+            disabledFileInput.uploadFile(mergePath(PROJECT_PATH, "/src/test/resources/general.xml"));
+        } catch (Exception ignore) {}
+        disabledFileInput.is().text(is("C:\\fakepath\\general.xml"));*/
+    }
+    @Test
+    public void labelTest() {
+/*        assertEquals(avatar.labelText(), "Profile picture:");
+        avatar.label().is().text(containsString("picture"));*/
+    }
+
+    @Test
+    public void downloadTest() {
+      /*  if (isFireFox()) return;
+        cleanupDownloads();
+        downloadJdiLogo.click();
+        assertThatFile("jdi-logo.jpg")
+                .isDownloaded()
+                .hasSize(is(32225L));
+        assertThatFile("jdi-logo.jpg").hasSize(greaterThan(100L));*/
+    }
+    private void createTextFile(String fileName) throws IOException {
+   /*     File txtFile = new File(mergePath(DOWNLOADS_DIR, fileName));
+        writeStringToFile(txtFile,
+                "Earth provides enough to satisfy every man's needs, but not every man's greed",
+                "UTF-8");*/
+    }
+    @Test
+    public void assertFileTest() throws IOException {
+    /*    cleanupDownloads();
+        String fileName = "gandhi.txt";
+        createTextFile(fileName);
+        // Validate file in DOWNLOADS_DFIR folder
+        assertThatFile(fileName).text(containsString("enough to satisfy"));*/
+    }
+    @Test
+    public void baseValidationTest() {
+    //    baseValidation(avatar);
+    }
     @Test
     public void selectorByIndexTests() {
 /*        customSelect.selector.is().selected(selectChoose);
