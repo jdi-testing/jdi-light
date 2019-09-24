@@ -67,8 +67,10 @@ public class BootstrapPage extends WebPage {
     @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
     @UI("#custom-select-01") public static CustomSelect customSelect;
     @UI("#custom-select-button-01") public static CustomSelectWithButton customSelectWithButton;
-    @UI("#custom-file-input-01") public static CustomFileInput customFileInput;
-    @UI("#custom-file-input-button-01") public static CustomFileInputWithButton customFileInputWithButton;
+    @UI("#custom-file-input-01") public static CustomFileInput customFileInput1;
+    @UI("#custom-file-input-02") public static CustomFileInput customFileInput2;
+    @UI("#custom-file-input-button-01") public static CustomFileInputWithButton customFileInputWithButton1;
+    @UI("#custom-file-input-button-02") public static CustomFileInputWithButton customFileInputWithButton2;
     @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
     @UI("#media-object-nesting") public static MediaObjectNesting mediaObjectNesting;
     @UI("#media-object-list") public static JList<MediaObjectSample> mediaObjectList;
