@@ -619,7 +619,7 @@ public class UIElement extends JDIBase
     }
     protected boolean enabled() {
         List<String> cls = classes();
-        return cls.contains("active") || !hasAttribute("disabled") || getWebElement().isEnabled() && !cls.contains("disabled");
+        return cls.contains("active") || !hasAttribute("disabled") || getWebElement().isEnabled() && !cls.contains("disabled") || !hasClass("disabled");
     }
     protected boolean displayed() {
         try {
