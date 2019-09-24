@@ -21,6 +21,8 @@ public class Image extends UIBaseElement<ImageAssert>
     @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
     public String alt() { return uiElement.attr("alt"); }
 
+    public boolean isTop() { return uiElement.core().hasClass("card-img-top"); }
+
     public String getValue() {
         return src();
     }
