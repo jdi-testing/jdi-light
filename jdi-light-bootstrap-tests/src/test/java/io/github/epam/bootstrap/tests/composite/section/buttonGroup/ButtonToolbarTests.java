@@ -33,14 +33,20 @@ public class ButtonToolbarTests extends TestsInit {
     }
 
     @Test
+    public void isValidationTest() {
+        buttonToolbar.buttonsInToolbar.get(0).is().text("1");
+        buttonToolbar.buttonsInToolbar.get(1).is().text("2");
+    }
+
+    @Test
     public void buttonsInButtonToolbarTest() {
         buttonToolbar.buttonsInToolbar.forEach(button -> {
             button.is().displayed();
             button.is().enabled();
             button.assertThat().css("background-color", backgroundColorBeforeHovering);
+            button.assertThat().css("border-color", borderColorBeforeClicking);
             button.core().hover();
             button.assertThat().css("background-color", backgroundColorAfterHovering);
-            button.assertThat().css("border-color", borderColorBeforeClicking);
             button.click();
             validateAlert(containsString("button is clicked"));
             button.assertThat().css("border-color", borderColorAfterClicking);
