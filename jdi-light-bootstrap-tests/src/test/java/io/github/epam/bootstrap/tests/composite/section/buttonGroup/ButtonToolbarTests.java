@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.buttonToolbar;
+import static io.github.com.pages.BootstrapPage.buttonToolbarWithInputField;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
@@ -24,18 +25,20 @@ public class ButtonToolbarTests extends TestsInit {
     private String backgroundColorBeforeHovering = "rgba(108, 117, 125, 1)";
     private String backgroundColorAfterHovering = "rgba(90, 98, 104, 1)";
     private String textForTestingInputField = "Test text";
-    private String placeholderForInputField = "Input";
+    private String placeholderForInputField = "Input group example";
 
     @Test
     public void getTextTest() {
-        assertEquals(buttonToolbar.buttonsInToolbar.get(0).getText(), "1");
-        assertEquals(buttonToolbar.buttonsInToolbar.get(1).getText(), "2");
+        for (int i = 0; i < 8; i++) {
+            assertEquals(buttonToolbar.buttonsInToolbar.get(i).getText(), String.valueOf(i + 1));
+        }
     }
 
     @Test
     public void isValidationTest() {
-        buttonToolbar.buttonsInToolbar.get(0).is().text("1");
-        buttonToolbar.buttonsInToolbar.get(1).is().text("2");
+        for (int i = 0; i < 8; i++) {
+            buttonToolbar.buttonsInToolbar.get(i).is().text(String.valueOf(i + 1));
+        }
     }
 
     @Test
@@ -55,10 +58,10 @@ public class ButtonToolbarTests extends TestsInit {
 
     @Test
     public void inputFieldInButtonToolbarTest() {
-        buttonToolbar.inputAreaInToolbar.is().displayed();
-        buttonToolbar.inputAreaInToolbar.is().enabled();
-        buttonToolbar.inputAreaInToolbar.is().core().attr("placeholder", placeholderForInputField);
-        buttonToolbar.inputAreaInToolbar.setValue(textForTestingInputField);
-        assertEquals(buttonToolbar.inputAreaInToolbar.getValue(), textForTestingInputField);
+        buttonToolbarWithInputField.inputAreaInToolbar.is().displayed();
+        buttonToolbarWithInputField.inputAreaInToolbar.is().enabled();
+        buttonToolbarWithInputField.inputAreaInToolbar.is().core().attr("placeholder", placeholderForInputField);
+        buttonToolbarWithInputField.inputAreaInToolbar.setValue(textForTestingInputField);
+        assertEquals(buttonToolbarWithInputField.inputAreaInToolbar.getValue(), textForTestingInputField);
     }
 }
