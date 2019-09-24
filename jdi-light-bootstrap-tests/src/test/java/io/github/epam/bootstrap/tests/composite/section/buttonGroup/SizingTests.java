@@ -2,7 +2,6 @@ package io.github.epam.bootstrap.tests.composite.section.buttonGroup;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;

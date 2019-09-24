@@ -13,13 +13,13 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 public class CardNavigation extends Section {
 
     @UI(".nav")
-    public Menu menu;
+    public Menu nav;
 
-    @UI(".nav-link active")
+    @UI("#activeLink")
     public Link activeLink;
-    @UI(".nav-link")
+    @UI("#jdiLink")
     public Link jdiLink;
-    @UI(".nav-link disabled")
+    @UI("#disabledLink")
     public Link disabledLink;
 
     @Title
