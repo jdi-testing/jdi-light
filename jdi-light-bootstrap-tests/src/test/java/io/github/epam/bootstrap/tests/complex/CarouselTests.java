@@ -134,7 +134,6 @@ public class CarouselTests extends TestsInit {
 		carouselWithFadeTransition.nextControl().is().text(nextText);
 	}
 	
-	
 	// Carousel with interval tests
 	@Test
 	public void intervalTest() {
