@@ -67,6 +67,9 @@ public class BootstrapPage extends WebPage {
     //region Composite Elements
     @UI("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
     @UI("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
+    @UI("#input-group-default") public static InputGroupSizing inputGroupDefaultSizing;
+    @UI("#input-group-small") public static InputGroupSizing inputGroupSmallSizing;
+    @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
     @UI("#card-example") public static CardExample cardExample;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
@@ -76,5 +79,12 @@ public class BootstrapPage extends WebPage {
     @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
     @UI("#media-object-nesting") public static MediaObjectNesting mediaObjectNesting;
     @UI("#media-object-list") public static JList<MediaObjectSample> mediaObjectList;
+    @UI("#btn-lg-group") public static ButtonGroupSizing largeBtnGroup;
+    @UI("#btn-md-group") public static ButtonGroupSizing defaultBtnGroup;
+    @UI("#btn-sm-group") public static ButtonGroupSizing smallBtnGroup;
+    @UI("#card-text-left") public static CardTextAlignment cardLeftTextAlignment;
+    @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
+    @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
+    @UI("#card-navigation") public static CardNavigation cardNavigation;
     //endregion
 }
