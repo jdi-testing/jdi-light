@@ -100,6 +100,11 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
         core().finds("input").get(index).sendKeys(value);
     }
 
+    @JDIAction("Send keys to input with locator {0}")
+    public void sendKeys(String locator, CharSequence... value) {
+        core().find(locator).sendKeys(value);
+    }
+
     @JDIAction("Send keys to all inputs from {name}")
     public void sendKeysAll(List<CharSequence[]> values) {
         WebList inputs = core().finds("inputs");
@@ -119,6 +124,10 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
         core().finds("inputs").get(index).clear();
     }
 
+    @JDIAction("Clear input from {name} with locator {0}")
+    public void clear(String locator) {
+        core().find(locator).clear();
+    }
     @JDIAction("Clear all inputs from {name}")
     public void clearAll() {
         core().finds("inputs").forEach(UIElement::clear);
@@ -134,16 +143,24 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
         core().finds("inputs").get(index).focus();
     }
 
+    @JDIAction("Focus input from {name} with locator {0}")
+    public void focus(String locator) {
+        core().find(locator).focus();
+    }
     @Override
     public String placeholder() {
         return placeholder(0);
     }
 
-    @JDIAction("Get placeholder from input with index {0}")
+    @JDIAction("Get placeholder from input with index {0} from {name}")
     public String placeholder(int index) {
         return core().finds("inputs").get(index).placeholder();
     }
 
+    @JDIAction("Get placeholder from input with locator {0} from {name}")
+    public String placeholder(String locator) {
+        return core().find(locator).placeholder();
+    }
     @JDIAction("Get all placeholders from {name}")
     public List<String> placeholderAll() {
         WebList inputs = core().finds("inputs");
@@ -164,6 +181,10 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
         core().finds("input").get(index).input(value);
     }
 
+    @JDIAction("Input value {0} in input with locator {1}")
+    public void input(String value, String locator) {
+        core().find(locator).input(value);
+    }
     @JDIAction("Input values in all inputs for {name}")
     public void inputAll(List<String> values) {
         WebList inputs = core().finds("input");
