@@ -10,6 +10,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import io.github.com.sections.*;
 
 public class BootstrapPage extends WebPage {
@@ -97,5 +98,6 @@ public class BootstrapPage extends WebPage {
     @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
     @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
     @UI("#card-navigation") public static CardNavigation cardNavigation;
+    @UI("#") public static ListGroupBasicExample listGroupBasicExample;
     //endregion
 }
