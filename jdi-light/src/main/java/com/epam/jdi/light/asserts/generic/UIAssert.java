@@ -68,7 +68,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction("Assert that '{name}' is disabled")
     public A disabled() {
-         jdiAssert(element.isEnabled() ? "disabled" : "enabled", is("disabled"));
+         jdiAssert(element.isDisabled() ? "disabled" : "enabled", is("disabled"));
         return (A) this;
     }
 

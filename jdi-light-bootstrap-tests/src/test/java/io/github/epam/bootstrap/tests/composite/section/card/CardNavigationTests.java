@@ -125,6 +125,14 @@ public class CardNavigationTests extends TestsInit {
         cardNavigation.disabledLink.is().displayed();
         cardNavigation.disabledLink.is().disabled();
 
+        cardNavigation.activeLink.assertThat().text(is(activeLinkText));
+        cardNavigation.jdiLink.assertThat().text(is(jdiLinkText));
+        cardNavigation.disabledLink.assertThat().text(is(disabledLinkText));
+
+        cardNavigation.activeLink.is().ref(activeLinkRef);
+        cardNavigation.jdiLink.is().ref(jdiLinkRef);
+        cardNavigation.disabledLink.is().ref(disabledLinkRef);
+
         cardNavigation.button.is().text(is(buttonText));
         cardNavigation.button.is().text(containsString("Click"));
         assertThat(cardNavigation.button.core().css("font-size"), is("16px"));
@@ -135,11 +143,5 @@ public class CardNavigationTests extends TestsInit {
                 .attr("onclick", "alert('Button Clicked!');")
                 .tag(is("button"));
     }
-
-//    @Test
-//    public void navLinkClickTest() {
-//        cardNavigation.menu.select("Active");
-//        cardNavigation.menu.select("JDI");
-//    }
 
 }
