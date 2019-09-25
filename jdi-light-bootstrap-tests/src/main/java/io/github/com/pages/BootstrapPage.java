@@ -97,5 +97,6 @@ public class BootstrapPage extends WebPage {
     @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
     @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
     @UI("#card-navigation") public static CardNavigation cardNavigation;
+    @UI("#card-list-groups") public static CardListGroups cardListGroups;
     //endregion
 }
