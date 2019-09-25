@@ -43,32 +43,32 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void baseInitByIndexTest() {
-        radioButtonGroup.radioButton.get(0).is().selected();
-        radioButtonGroup.radioButton.get(1).is().deselected();
+        radioButtonGroup.radioButton.get(1).is().selected();
         radioButtonGroup.radioButton.get(2).is().deselected();
-        radioButtonGroup.radioButton.get(2).is().disabled();
+        radioButtonGroup.radioButton.get(3).is().deselected();
+        radioButtonGroup.radioButton.get(3).is().disabled();
     }
 
     @Test
     public void radioButtonByIndexTests() {
+        radioButtonGroup.radioButton.select(2);
+        radioButtonGroup.radioButton.get(2).is().selected();
+        radioButtonGroup.radioButton.get(1).is().deselected();
         radioButtonGroup.radioButton.select(1);
         radioButtonGroup.radioButton.get(1).is().selected();
-        radioButtonGroup.radioButton.get(0).is().deselected();
-        radioButtonGroup.radioButton.select(0);
-        radioButtonGroup.radioButton.get(0).is().selected();
-        radioButtonGroup.radioButton.get(1).is().deselected();
+        radioButtonGroup.radioButton.get(2).is().deselected();
     }
 
     @Test
     public void radioButtonByLabelTests() {
         radioButtonGroup.radio2Label.click();
-        radioButtonGroup.radioButton.get(1).is().selected();
+        radioButtonGroup.radioButton.get(2).is().selected();
         radioButtonGroup.radioButton.is().text(is(value2));
-        radioButtonGroup.radioButton.get(0).is().deselected();
-        radioButtonGroup.radio1Label.click();
-        radioButtonGroup.radioButton.get(0).is().selected();
-        radioButtonGroup.radioButton.is().text(is(value1));
         radioButtonGroup.radioButton.get(1).is().deselected();
+        radioButtonGroup.radio1Label.click();
+        radioButtonGroup.radioButton.get(1).is().selected();
+        radioButtonGroup.radioButton.is().text(is(value1));
+        radioButtonGroup.radioButton.get(2).is().deselected();
     }
 
     @Test

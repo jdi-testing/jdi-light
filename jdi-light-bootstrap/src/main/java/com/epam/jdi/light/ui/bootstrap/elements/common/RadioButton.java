@@ -24,12 +24,12 @@ public class RadioButton extends UIListBase<RadioButtonAssert> {
 
     @JDIAction("Select '{0}' in '{name}'")
     public UIElement get(int index) {
-        return list().get(index);
+        return list().get(index - 1);
     }
 
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
-        list().select(index); }
+        list().select(index - 1); }
 
     @Override
     public RadioButtonAssert is() {
