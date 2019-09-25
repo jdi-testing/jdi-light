@@ -103,5 +103,7 @@ public class BootstrapPage extends WebPage {
     @UI("#disabled-items") public static ListGroupDisabledItems listGroupDisabledItems;
     @UI("#list-group-links") public static ListGroupLinks listGroupLinks;
     @UI("#list-group-buttons") public static ListGroupButtons listGroupButtons;
+    @UI("#list-group-flush") public static ListGroupFlush listGroupFlush;
+    @UI("#")
     //endregion
 }

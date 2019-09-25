@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.listGroupBasicExample;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Dmitrii Pavlov on 25.09.2019
@@ -46,7 +47,9 @@ public class BasicExampleTests extends TestsInit {
     @Test (dataProvider = "listData")
     public void listGroupTests(int num, String text) {
         listGroupBasicExample.listGroup.is().size(5);
-        listGroupBasicExample.listGroup.get(num).is().text(text);
+        listGroupBasicExample.listGroup.get(num).is()
+                .text(text)
+                .css("font-size", is("14px"));
     }
 
     @Test (dataProvider = "listClasses")

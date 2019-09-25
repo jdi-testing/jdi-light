@@ -6,16 +6,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.listGroupDisabledItems;
+import static io.github.com.pages.BootstrapPage.listGroupFlush;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 
-/**
- * Created by Dmitrii Pavlov on 25.09.2019
- * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
- */
-
-public class DisabledItemsTests extends TestsInit {
+public class FlushTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -45,28 +40,25 @@ public class DisabledItemsTests extends TestsInit {
     }
 
     @Test
-    public void isValidationTests() {
-        listGroupDisabledItems.listGroup.is().size(5);
-        listGroupDisabledItems.is()
+    public void initTests() {
+        listGroupFlush.is()
                 .displayed()
                 .enabled()
                 .core()
-                .hasClass("list-group");
-        listGroupDisabledItems.listGroup.get(1).is()
-                .hasClass(listClass + " disabled")
-                .attr("aria-disabled", "true");
+                .hasClass("list-group list-group-flush");
     }
 
     @Test(dataProvider = "listData")
-    public void listGroupTextTests(int num, String text) {
-        listGroupDisabledItems.listGroup.get(num).is()
+    public void listGroupTests(int num, String text) {
+        listGroupFlush.listGroup.is().size(5);
+        listGroupFlush.listGroup.get(num).is()
                 .text(text)
                 .css("font-size", is("14px"));
     }
 
     @Test (dataProvider = "listClasses")
-    public void listGroupClassesIsValidationTests(int num) {
-        listGroupDisabledItems.listGroup.get(num).is()
+    public void listGroupIsValidationTests(int num) {
+        listGroupFlush.listGroup.get(num).is()
                 .displayed()
                 .enabled()
                 .core()

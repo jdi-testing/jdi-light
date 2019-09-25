@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.listGroupActiveItems;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Dmitrii Pavlov on 25.09.2019
@@ -57,7 +58,9 @@ public class ActiveItemsTests extends TestsInit {
 
     @Test(dataProvider = "listData")
     public void listGroupTextTests(int num, String text) {
-        listGroupActiveItems.listGroup.get(num).is().text(text);
+        listGroupActiveItems.listGroup.get(num).is()
+                .text(text)
+                .css("font-size", is("14px"));
     }
 
     @Test (dataProvider = "listClasses")

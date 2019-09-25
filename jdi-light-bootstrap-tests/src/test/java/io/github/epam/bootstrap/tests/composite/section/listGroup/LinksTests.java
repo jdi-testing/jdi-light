@@ -11,7 +11,9 @@ import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.listGroupLinks;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 
 /**
  * Created by Dmitrii Pavlov on 25.09.2019
@@ -63,17 +65,22 @@ public class LinksTests extends TestsInit {
                 .hasClass(listClass + " active");
         listGroupLinks.listGroup.get(5).is()
                 .hasClass(listClass + " disabled");
+        assertFalse(listGroupLinks.listGroup.get(5).isClickable());
     }
 
     @Test(dataProvider = "listData")
-    public void listGroupTextTests(int num, String text) {
-        listGroupLinks.listGroup.get(num).is().text(text);
+    public void listGroupTextTests(int index, String text) {
+        listGroupLinks.listGroup.get(index).is()
+                .text(text).core()
+                .css("font-size", is("14px"));
     }
 
     @Test (dataProvider = "clickValidate")
     public void linkClickableTests(int index, String pageTitle) {
+        listGroupLinks.listGroup.get(index).highlight();
         listGroupLinks.listGroup.get(index).click();
         newWindowTitleCheck(pageTitle);
+        listGroupLinks.listGroup.get(index).unhighlight();
     }
 
     public void newWindowTitleCheck(String pageTitle) {

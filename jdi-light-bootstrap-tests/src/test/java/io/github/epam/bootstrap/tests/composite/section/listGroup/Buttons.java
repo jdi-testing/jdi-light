@@ -5,9 +5,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.listGroupButtons;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.is;
+
+/**
+ * Created by Dmitrii Pavlov on 25.09.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
 
 public class Buttons extends TestsInit {
 
@@ -31,6 +38,13 @@ public class Buttons extends TestsInit {
         };
     }
 
+    @DataProvider
+    public Object[][] clickValidate() {
+        return new Object[][]{
+                {1, text1}, {2, text2}, {3, text3}, {4, text4}
+        };
+    }
+
     @Test
     public void isValidationTests() {
         listGroupButtons.listGroup.is().size(5);
@@ -45,8 +59,24 @@ public class Buttons extends TestsInit {
     }
 
     @Test(dataProvider = "listData")
-    public void listGroupTextTests(int num, String text) {
-        listGroupButtons.listGroup.get(num).is().text(text);
+    public void buttonGroupTextTests(int index, String text) {
+        listGroupButtons.listGroup.get(index).is()
+                .text(text)
+                .css("font-size", is("14px"));
+    }
+
+    @Test (dataProvider = "clickValidate")
+    public void buttonClickableTests(int index, String text) {
+        listGroupButtons.listGroup.get(index).highlight();
+        listGroupButtons.listGroup.get(index).click();
+        validateAlert(is(text));
+        listGroupButtons.listGroup.get(index).unhighlight();
+    }
+
+    @Test (dataProvider = "clickValidate")
+    public void buttonTextClickableTests(int index, String text) {
+        listGroupButtons.listGroup.select(text);
+        validateAlert(is(text));
     }
 
 }
