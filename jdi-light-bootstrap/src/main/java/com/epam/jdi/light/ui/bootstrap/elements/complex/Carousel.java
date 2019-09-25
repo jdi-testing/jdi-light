@@ -50,8 +50,14 @@ public class Carousel extends UIBaseElement<TextAssert> implements IsText, IsBut
 
 	public void select(int index) {
 		if (index < 1)
-			throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
+			throw exception("Can't select element with index '%s'. Index should be 1 or more", index);
 		indicators().select(index - 1);
+	}
+	
+	public UIElement get(int index) {
+		if (index < 1)
+			throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
+		return indicators().get(index - 1);
 	}
 
 	@JDIAction("Current slide interval in '{name}'")

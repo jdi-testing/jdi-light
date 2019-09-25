@@ -20,13 +20,6 @@ import io.github.epam.TestsInit;
 
 public class CarouselTests extends TestsInit {
 
-	@BeforeMethod
-	public void before() {
-		shouldBeLoggedIn();
-		bsPage.shouldBeOpened();
-		refresh();
-	}
-
 	private String nextText = "Next";
 	private String prevText = "Previous";
 	private String firstSlideText = "First slide";
@@ -45,6 +38,14 @@ public class CarouselTests extends TestsInit {
 	
 	private int interval = 5;
 	private int customInterval = 1;
+	
+
+	@BeforeMethod
+	public void before() {
+		shouldBeLoggedIn();
+		bsPage.shouldBeOpened();
+		refresh();
+	}
 
 	// Carousel slides only tests
 	@Test
@@ -81,18 +82,18 @@ public class CarouselTests extends TestsInit {
 	public void selectTest() {
 		carouselWithIndicators.select(1);
 		carouselWithIndicators.is().text(firstSlideFullText);
-		carouselWithIndicators.indicators().get(0).is().selected();
-		carouselWithIndicators.indicators().get(1).is().deselected();
+		carouselWithIndicators.get(1).is().selected();
+		carouselWithIndicators.get(2).is().deselected();
 
 		carouselWithIndicators.select(3);
 		carouselWithIndicators.is().text(thirdSlideFullText);
-		carouselWithIndicators.indicators().get(2).is().selected();
-		carouselWithIndicators.indicators().get(0).is().deselected();
+		carouselWithIndicators.get(3).is().selected();
+		carouselWithIndicators.get(1).is().deselected();
 
 		carouselWithIndicators.select(2);
 		carouselWithIndicators.is().text(secondSlideFullText);
-		carouselWithIndicators.indicators().get(1).is().selected();
-		carouselWithIndicators.indicators().get(2).is().deselected();
+		carouselWithIndicators.get(2).is().selected();
+		carouselWithIndicators.get(3).is().deselected();
 	}
 
 	// Carousel with captions tests
