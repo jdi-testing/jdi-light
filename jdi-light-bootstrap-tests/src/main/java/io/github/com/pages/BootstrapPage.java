@@ -105,5 +105,6 @@ public class BootstrapPage extends WebPage {
     @UI("#list-group-flush") public static ListGroupFlush listGroupFlush;
     @UI("#") public static ListGroupHorizontal listGroupHorizontal;
     @UI("#list-group-with-badges") public static ListGroupWithBadges listGroupWithBadges;
+    @UI("#list-group-custom-content") public static ListGroupCustomContent listGroupCustomContent;
     //endregion
 }
