@@ -6,15 +6,10 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.listGroupBasicExample;
+import static io.github.com.pages.BootstrapPage.listGroupButtons;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
-/**
- * Created by Dmitrii Pavlov on 25.09.2019
- * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
- */
-
-public class BasicExampleTests extends TestsInit {
+public class Buttons extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -27,7 +22,7 @@ public class BasicExampleTests extends TestsInit {
     String text3 = "Morbi leo risus";
     String text4 = "Porta ac consectetur ac";
     String text5 = "Vestibulum at eros";
-    String listClass = "list-group-item";
+    String listClass = "list-group-item list-group-item-action";
 
     @DataProvider
     public Object[][] listData() {
@@ -36,30 +31,22 @@ public class BasicExampleTests extends TestsInit {
         };
     }
 
-    @DataProvider
-    public Object[][] listClasses() {
-        return new Object[][]{
-                {1}, {2}, {3}, {4}, {5}
-        };
-    }
-
-    @Test (dataProvider = "listData")
-    public void listGroupTests(int num, String text) {
-        listGroupBasicExample.listGroup.is().size(5);
-        listGroupBasicExample.listGroup.get(num).is().text(text);
-    }
-
-    @Test (dataProvider = "listClasses")
-    public void listGroupIsValidationTests(int num) {
-        listGroupBasicExample.is()
+    @Test
+    public void isValidationTests() {
+        listGroupButtons.listGroup.is().size(5);
+        listGroupButtons.is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("list-group");
-        listGroupBasicExample.listGroup.get(num).is()
-                .displayed()
-                .enabled()
-                .core()
-                .hasClass(listClass);
+        listGroupButtons.listGroup.get(1).is()
+                .hasClass(listClass + " active");
+        listGroupButtons.listGroup.get(5).is().disabled();
     }
+
+    @Test(dataProvider = "listData")
+    public void listGroupTextTests(int num, String text) {
+        listGroupButtons.listGroup.get(num).is().text(text);
+    }
+
 }

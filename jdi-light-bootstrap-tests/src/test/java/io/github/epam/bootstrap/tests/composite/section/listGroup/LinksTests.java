@@ -28,7 +28,7 @@ public class LinksTests extends TestsInit {
     @DataProvider
     public Object[][] listData() {
         return new Object[][]{
-                {0, text1}, {1, text2}, {2, text3}, {3, text4}, {4, text5}
+                {1, text1}, {2, text2}, {3, text3}, {4, text4}, {5, text5}
         };
     }
 
@@ -40,14 +40,15 @@ public class LinksTests extends TestsInit {
                 .enabled()
                 .core()
                 .hasClass("list-group");
-        listGroupLinks.listGroup.get(0).is()
+        listGroupLinks.listGroup.get(1).is()
                 .hasClass(listClass + " active");
-        listGroupLinks.listGroup.get(4).is().disabled();
+        listGroupLinks.listGroup.get(5).enabled();
+        listGroupLinks.listGroup.get(5).isEnabled();
+//                .hasClass(listClass + " disabled");
     }
 
     @Test(dataProvider = "listData")
     public void listGroupTextTests(int num, String text) {
         listGroupLinks.listGroup.get(num).is().text(text);
     }
-
 }

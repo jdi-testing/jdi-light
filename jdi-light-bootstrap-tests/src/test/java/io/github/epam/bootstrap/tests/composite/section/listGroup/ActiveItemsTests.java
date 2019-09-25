@@ -32,14 +32,14 @@ public class ActiveItemsTests extends TestsInit {
     @DataProvider
     public Object[][] listData() {
         return new Object[][]{
-                {0, text1}, {1, text2}, {2, text3}, {3, text4}, {4, text5}
+                {1, text1}, {2, text2}, {3, text3}, {4, text4}, {5, text5}
         };
     }
 
     @DataProvider
     public Object[][] listClasses() {
         return new Object[][]{
-                {0}, {1}, {2}, {3}, {4}
+                {1}, {2}, {3}, {4}, {5}
         };
     }
 
@@ -51,7 +51,7 @@ public class ActiveItemsTests extends TestsInit {
                 .enabled()
                 .core()
                 .hasClass("list-group");
-        listGroupActiveItems.listGroup.get(0).is()
+        listGroupActiveItems.listGroup.get(1).is()
                 .hasClass(listClass + " active");
     }
 
