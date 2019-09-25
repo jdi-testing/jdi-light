@@ -23,6 +23,7 @@ public interface ICoreElement extends IBaseElement {
     default boolean isHidden() { return !isDisplayed(); }
     default void highlight(String color) { core().highlight(); }
     default void highlight() { core().highlight(); }
+    default void unhighlight() { core().unhighlight(); }
     default void show() { core().show(); }
     default String attr(String name) { return core().attr(name); }
     default MapArray<String, String> attrs() { return core().attrs(); }

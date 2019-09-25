@@ -449,6 +449,15 @@ public class UIElement extends JDIBase
     }
 
     /**
+     * Unhighlight element
+     */
+    @JDIAction(level = DEBUG)
+    public void unhighlight() {
+        show();
+        jsExecute("style.border='none'");
+    }
+
+    /**
      * Double click on the element
      */
     @JDIAction("DoubleClick on '{name}'") @Override
