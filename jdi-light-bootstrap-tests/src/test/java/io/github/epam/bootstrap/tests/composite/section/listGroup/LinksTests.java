@@ -32,7 +32,7 @@ public class LinksTests extends TestsInit {
     String text4 = "Porta ac consectetur ac";
     String text5 = "Vestibulum at eros";
     String listClass = "list-group-item list-group-item-action";
-    String pageTitle1 = "JDI";
+    String pageTitle1 = "JDI · GitHub";
     String pageTitle2 = "JDI Testing tools · GitHub";
     String pageTitle3 = "Home Page";
     String pageTitle4 = "List group · Bootstrap";
