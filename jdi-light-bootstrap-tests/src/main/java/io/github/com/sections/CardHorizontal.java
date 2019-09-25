@@ -1,6 +1,5 @@
 package io.github.com.sections;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Image;
@@ -11,6 +10,4 @@ public class CardHorizontal extends Section {
     @UI("//p[contains(text(), 'fictional character')]") public Text mainText;
     @UI(".text-muted") public Text smallText;
     @UI(".card-img") public Image image;
-    @UI(".col-md-4") public UIElement colMd4;
-    @UI(".col-md-8") public UIElement colMd8;
 }
