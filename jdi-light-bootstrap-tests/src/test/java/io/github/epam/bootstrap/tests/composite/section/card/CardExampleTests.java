@@ -63,6 +63,7 @@ public class CardExampleTests extends TestsInit {
     public void isValidationTest() {
         cardExample.image.is().src(is(imageSrc));
         cardExample.image.is().alt(is(imageAlt));
+        cardExample.image.unhighlight();
         cardExample.image.assertThat().width(is(86));
         cardExample.image.assertThat().height(is(137));
         cardExample.title.is().text(is(titleText));
