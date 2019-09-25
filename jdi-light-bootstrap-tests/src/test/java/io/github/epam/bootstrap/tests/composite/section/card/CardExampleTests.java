@@ -20,19 +20,20 @@ import static org.testng.Assert.assertEquals;
 
 public class CardExampleTests extends TestsInit {
 
+    private static final String titleText = "CARD TITLE";
+    private static final String mainText = "Some quick example text to build" +
+            " on the card title and make up the bulk of the card's content.";
+    private static final String alertText = "Card Button Clicked!";
+    private static final String imageSrc = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
+    private static final String imageAlt = "image";
+    private static final String buttonText = "Click Me!";
+    private static final String IMAGE_TOP_CLASS = "card-img-top";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private String titleText = "CARD TITLE";
-    private String mainText = "Some quick example text to build" +
-            " on the card title and make up the bulk of the card's content.";
-    private String alertText = "Card Button Clicked!";
-    private String imageSrc = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
-    private String imageAlt = "image";
-    private String buttonText = "Click Me!";
 
     @Test
     public void getTitleTextTest() {
@@ -82,5 +83,11 @@ public class CardExampleTests extends TestsInit {
         baseValidation(cardExample.text);
         baseValidation(cardExample.button);
         baseValidation(cardExample.image);
+    }
+
+    @Test
+    public void imageClassTest() {
+        cardExample.image.is().core().hasClass(IMAGE_TOP_CLASS);
+        cardExample.image.assertThat().core().hasClass(IMAGE_TOP_CLASS);
     }
 }
