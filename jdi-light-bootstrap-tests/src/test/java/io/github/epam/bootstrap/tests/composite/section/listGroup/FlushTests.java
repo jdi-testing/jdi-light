@@ -34,6 +34,7 @@ public class FlushTests extends TestsInit {
 
     @Test
     public void initTests() {
+        listGroupFlush.listGroup.is().size(5);
         listGroupFlush.is()
                 .displayed()
                 .enabled()
@@ -43,7 +44,6 @@ public class FlushTests extends TestsInit {
 
     @Test(dataProvider = "listData")
     public void listGroupTests(int num, String text) {
-        listGroupFlush.listGroup.is().size(5);
         listGroupFlush.listGroup.get(num).is()
                 .text(text)
                 .css("font-size", is("14px"));

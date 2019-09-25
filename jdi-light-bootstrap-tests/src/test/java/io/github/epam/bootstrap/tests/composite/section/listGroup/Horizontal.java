@@ -29,9 +29,13 @@ public class Horizontal extends TestsInit {
         };
     }
 
+    @Test
+    public void initTests() {
+        listGroupHorizontal.listGroup.is().size(3);
+    }
+
     @Test(dataProvider = "listData")
     public void listGroupTests(int num, String text) {
-        listGroupHorizontal.listGroup.is().size(5);
         listGroupHorizontal.listGroup.get(num).is()
                 .text(text)
                 .css("font-size", is("14px"));
