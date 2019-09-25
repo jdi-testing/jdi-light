@@ -101,7 +101,7 @@ public class InputGroupMultipleAddonsTests extends TestsInit{
         textField.is().text(text);
         textField.is().text(containsString(partOfText));
         textField.clear();
-        textField.is().text("");
+        textField.is().text(emptyText);
     }
 
     @Test(dataProvider = "InputGroupMultipleAddonsTextFields")
