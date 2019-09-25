@@ -28,11 +28,11 @@ public class LinksTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    String text1 = "Cras justo odio";
-    String text2 = "Dapibus ac facilisis in";
-    String text3 = "Morbi leo risus";
-    String text4 = "Porta ac consectetur ac";
-    String text5 = "Vestibulum at eros";
+    String text1 = "JDI Docs";
+    String text2 = "JDI - testing tool";
+    String text3 = "JDI website";
+    String text4 = "Bootstrap";
+    String text5 = "JDI Docs";
     String listClass = "list-group-item list-group-item-action";
     String pageTitle1 = "JDI · GitHub";
     String pageTitle2 = "JDI Testing tools · GitHub";

@@ -37,13 +37,6 @@ public class DisabledItemsTests extends TestsInit {
         };
     }
 
-    @DataProvider
-    public Object[][] listClasses() {
-        return new Object[][]{
-                {1}, {2}, {3}, {4}, {5}
-        };
-    }
-
     @Test
     public void isValidationTests() {
         listGroupDisabledItems.listGroup.is().size(5);
@@ -64,8 +57,8 @@ public class DisabledItemsTests extends TestsInit {
                 .css("font-size", is("14px"));
     }
 
-    @Test (dataProvider = "listClasses")
-    public void listGroupClassesIsValidationTests(int num) {
+    @Test (dataProvider = "listData")
+    public void listGroupClassesIsValidationTests(int num, String text) {
         listGroupDisabledItems.listGroup.get(num).is()
                 .displayed()
                 .enabled()

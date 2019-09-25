@@ -37,13 +37,6 @@ public class BasicExampleTests extends TestsInit {
         };
     }
 
-    @DataProvider
-    public Object[][] listClasses() {
-        return new Object[][]{
-                {1}, {2}, {3}, {4}, {5}
-        };
-    }
-
     @Test (dataProvider = "listData")
     public void listGroupTests(int num, String text) {
         listGroupBasicExample.listGroup.is().size(5);
@@ -52,8 +45,8 @@ public class BasicExampleTests extends TestsInit {
                 .css("font-size", is("14px"));
     }
 
-    @Test (dataProvider = "listClasses")
-    public void listGroupIsValidationTests(int num) {
+    @Test (dataProvider = "listData")
+    public void listGroupIsValidationTests(int num, String text) {
         listGroupBasicExample.is()
                 .displayed()
                 .enabled()

@@ -10,7 +10,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import io.github.com.sections.*;
 
 public class BootstrapPage extends WebPage {
@@ -104,6 +103,7 @@ public class BootstrapPage extends WebPage {
     @UI("#list-group-links") public static ListGroupLinks listGroupLinks;
     @UI("#list-group-buttons") public static ListGroupButtons listGroupButtons;
     @UI("#list-group-flush") public static ListGroupFlush listGroupFlush;
-    @UI("#")
+    @UI("#") public static ListGroupHorizontal listGroupHorizontal;
+    @UI("#list-group-with-badges") public static ListGroupWithBadges listGroupWithBadges;
     //endregion
 }

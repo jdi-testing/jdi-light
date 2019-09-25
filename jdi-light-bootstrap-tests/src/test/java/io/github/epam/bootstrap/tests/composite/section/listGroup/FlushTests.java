@@ -32,13 +32,6 @@ public class FlushTests extends TestsInit {
         };
     }
 
-    @DataProvider
-    public Object[][] listClasses() {
-        return new Object[][]{
-                {1}, {2}, {3}, {4}, {5}
-        };
-    }
-
     @Test
     public void initTests() {
         listGroupFlush.is()
@@ -56,8 +49,8 @@ public class FlushTests extends TestsInit {
                 .css("font-size", is("14px"));
     }
 
-    @Test (dataProvider = "listClasses")
-    public void listGroupIsValidationTests(int num) {
+    @Test (dataProvider = "listData")
+    public void listGroupIsValidationTests(int num, String text) {
         listGroupFlush.listGroup.get(num).is()
                 .displayed()
                 .enabled()
