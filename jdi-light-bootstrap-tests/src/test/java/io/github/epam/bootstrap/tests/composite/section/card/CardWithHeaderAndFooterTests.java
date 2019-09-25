@@ -13,7 +13,6 @@ import static org.hamcrest.Matchers.is;
 
 public class CardWithHeaderAndFooterTests extends TestsInit {
 
-
     private String textTitleCardWithHeader = "SPECIAL TITLE TREATMENT";
     private String textTitleCardWithHeaderAndFooterQuote;
     private String textTitleCardWithHeaderAndFooter = "SPECIAL TITLE TREATMENT";
@@ -33,7 +32,6 @@ public class CardWithHeaderAndFooterTests extends TestsInit {
     private String textFooterCardWithHeader;
     private String textFooterCardWithHeaderAndFooterQuote = "Someone famous in Source Title";
     private String textFooterCardWithHeaderAndFooter = "2 days ago";
-
 
     @BeforeMethod
     public void before() {
@@ -56,13 +54,11 @@ public class CardWithHeaderAndFooterTests extends TestsInit {
         baseValidation(cardWithHeaderAndFooter);
     }
 
-
     //test title
     @Test
     public void getTitleTextCardWithHeaderTest() {
         cardWithHeader.title.is().text(textTitleCardWithHeader);
     }
-
 
     @Test
     public void getTitleTextCardWithHeaderAndFooterTest() {
@@ -96,7 +92,7 @@ public class CardWithHeaderAndFooterTests extends TestsInit {
         cardWithHeaderAndFooter.button.is().text(textButtonCardWithHeaderAndFooter);
     }
 
-//test header
+    //test header
     @Test
     public void getHeaderTextCardWithHeaderTest() {
         cardWithHeader.header.is().text(textHeaderCardWithHeader);
@@ -112,7 +108,7 @@ public class CardWithHeaderAndFooterTests extends TestsInit {
         cardWithHeaderAndFooter.header.is().text(textHeaderCardWithHeaderAndFooter);
     }
 
-//test footer
+    //test footer
     @Test
     public void getFooterTextCardWithHeaderTest() {
         cardWithHeader.footer.is().notAppear();
@@ -132,9 +128,8 @@ public class CardWithHeaderAndFooterTests extends TestsInit {
     public void clickButtonCardWithHeaderTest() {
         cardWithHeader.button.click();
         validateAlert(is("Button Clicked!"));
-        cardWithHeader.button.isEnabled();
-        cardWithHeader.button.isDisplayed();
+        cardWithHeader.button.is()
+                .enabled()
+                .disabled();
     }
-
-
 }
