@@ -14,18 +14,18 @@ import static org.testng.Assert.assertEquals;
 
 public class ButtonToolbarTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String borderColorBeforeClicking = "rgb(108, 117, 125)";
     private String borderColorAfterClicking = "rgb(84, 91, 98)";
     private String backgroundColorBeforeHovering = "rgba(108, 117, 125, 1)";
     private String backgroundColorAfterHovering = "rgba(90, 98, 104, 1)";
     private String textForTestingInputField = "Test text";
     private String placeholderForInputField = "Input group example";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void getTextTest() {
