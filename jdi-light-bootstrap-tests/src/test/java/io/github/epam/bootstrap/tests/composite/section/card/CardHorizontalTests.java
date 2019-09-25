@@ -1,5 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.card;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,8 +9,10 @@ import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.cardHorizontal;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class CardHorizontalTests extends TestsInit {
 
@@ -50,6 +53,16 @@ public class CardHorizontalTests extends TestsInit {
     }
 
     @Test
+    public void checkElementsPositionTest() {
+        boolean execResult = WebDriverFactory.jsExecute("var img = document.getElementById('card-horizontal-img');" +
+                "var imgOffset = img.getBoundingClientRect().left;" +
+                "var title = document.getElementById('card-horizontal-title');" +
+                "var titleOffset = title.getBoundingClientRect().left;" +
+                "return imgOffset < titleOffset;");
+        assertTrue(execResult);
+    }
+
+    @Test
     public void isValidationTest() {
         cardHorizontal.title.is().text(is(titleText));
         cardHorizontal.mainText.is().text(is(mainText));
@@ -58,22 +71,13 @@ public class CardHorizontalTests extends TestsInit {
                 .core()
                 .css("font-size", is("11.2px"))
                 .tag(is("small"));
-        cardHorizontal.colMd4.is().displayed()
-                .and().core()
-                .cssClass("col-md-4");
-        cardHorizontal.colMd8.is().displayed()
-                .and().core()
-                .cssClass("col-md-8");
-        //cardHorizontal.image.unhighlight();
         cardHorizontal.image.is().displayed()
                 .and().src(is(imageSrc))
-                /*.width(is(91))
-                .height(is(146))*/
                 .core()
                 .attr("title", imageTitle);
         cardHorizontal.image.unhighlight();
-        cardHorizontal.image.assertThat().width(is(91));
-        cardHorizontal.image.assertThat().height(is(146));
+        cardHorizontal.image.assertThat().width(anyOf(is(91), is(94)));
+        cardHorizontal.image.assertThat().height(anyOf(is(146), is(150)));
     }
 
     @Test
