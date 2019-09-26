@@ -13,6 +13,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 
 import io.github.com.sections.*;
+import io.github.com.sections.card.CardWithHeaderAndFooter;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -83,6 +84,9 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
     @UI("#card-example") public static CardExample cardExample;
     @UI("#card-body") public static CardBody cardBody;
+    @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
+    @UI("#card-with-header-and-footer-quote") public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
+    @UI("#card-with-header-and-footer") public static CardWithHeaderAndFooter cardWithHeaderAndFooter;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
     @UI("#buttonToolbar1") public static ButtonToolbar buttonToolbar;
