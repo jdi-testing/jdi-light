@@ -99,6 +99,8 @@ public class BootstrapPage extends WebPage {
     @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
     @UI("#media-object-nesting") public static MediaObjectNesting mediaObjectNesting;
     @UI("#media-object-list") public static JList<MediaObjectSample> mediaObjectList;
+    @UI("#multiple-addons-1")  public static InputGroupMultipleAddonsUpper multipleAddonUpper;
+    @UI("#multiple-addons-2")  public static InputGroupMultipleAddonsLower multipleAddonLower;
     @UI("#basic-example") public static ButtonGroupBasicExample buttonGroupBasicExample;
     @UI("#vertical-variation") public static  ButtonGroupVerticalVariation buttonGroupVerticalVariation;
     @UI("#button-group-nesting") public static ButtonGroupNesting buttonGroupNesting;
