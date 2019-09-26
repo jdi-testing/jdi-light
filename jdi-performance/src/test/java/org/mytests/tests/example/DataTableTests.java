@@ -19,7 +19,8 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.mytests.tests.states.States.shouldBeLoggedIn;
 import static org.mytests.tests.test.data.MarvelHeroes.SPIDER_MAN;
 import static org.mytests.uiobjects.example.site.SiteJdi.usersPage;
-import static org.mytests.uiobjects.example.site.pages.UsersPage.*;
+import static org.mytests.uiobjects.example.site.pages.UsersPage.users;
+import static org.mytests.uiobjects.example.site.pages.UsersPage.usersSetup;
 import static org.testng.Assert.assertEquals;
 
 public class DataTableTests extends TestsInit {

@@ -7,8 +7,8 @@ import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.ui.html.PageFactory.initSite;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.light.ui.html.PageFactory.initSite;
 import static io.github.com.StaticSite.homePage;
 
 public class TestsInit {

@@ -5,9 +5,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.ui.html.PageFactory.initElements;
-import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.light.ui.html.PageFactory.initElements;
 import static io.github.epam.EpamGithubSite.homePage;
 
 public class TestsInit extends TestNGListener {

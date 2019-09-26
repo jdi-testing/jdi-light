@@ -9,12 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
-import java.util.List;
-
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static java.util.Arrays.asList;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -23,7 +18,7 @@ import static java.util.Arrays.asList;
 public class PageFactory {
 
     private static void init() {
-        INTERFACES.add(new Object[][]{
+        INTERFACES.update(new Object[][]{
             { IsChecklist.class, Checklist.class },
             { IsCombobox.class, DataListOptions.class }
         });
