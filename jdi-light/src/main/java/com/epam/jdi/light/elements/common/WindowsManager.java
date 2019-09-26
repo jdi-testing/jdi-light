@@ -74,16 +74,18 @@ public class WindowsManager {
 
     /**
      * Switch to the specified window
-     * @param number
+     * @param index
      */
-    @JDIAction("Switch to window '{number}'")
-    public static void switchToWindow(int number) {
+    @JDIAction("Switch to window '{index}'")
+    public static void switchToWindow(int index) {
+        if (index < 1)
+            throw exception("Window's index starts from 1. You try to use '%s' that less than 1.", index);
         int counter = 0;
-        if (getWindows().size() < number)
-            throw exception(number + " is to much. Only "+getWindows().size()+" windows found");
+        if (getWindows().size() < index)
+            throw exception(index + " is to much. Only "+getWindows().size()+" windows found");
         for (String window : getWindows()) {
             counter++;
-            if (counter == number) {
+            if (counter == index) {
                 getDriver().switchTo().window(window);
                 return;
             }
