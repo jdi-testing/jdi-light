@@ -9,13 +9,14 @@ import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
 import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.paginationStates;
+import static io.github.com.pages.BootstrapPage.paginationAlignCenter;
+import static io.github.com.pages.BootstrapPage.paginationAlignEnd;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.testng.Assert.assertEquals;
 
-public class StatesTests extends TestsInit {
+public class AlignTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -49,21 +50,28 @@ public class StatesTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        paginationStates.paginationItems.is().size(5);
-        paginationStates.is().core().hasClass("pagination");
-        paginationStates.paginationItems.get(1)
+        paginationAlignCenter.paginationItems.is().size(5);
+        paginationAlignCenter.is().core().hasClass("pagination justify-content-center");
+        paginationAlignCenter.paginationItems.get(1)
                 .is()
                 .core()
                 .hasClass("disabled");
-        paginationStates.paginationItems.get(3)
+        paginationAlignEnd.paginationItems.is().size(5);
+        paginationAlignEnd.is().core().hasClass("pagination justify-content-end");
+        paginationAlignEnd.paginationItems.get(1)
                 .is()
                 .core()
-                .hasClass("active");
+                .hasClass("disabled");
     }
 
-    @Test (dataProvider = "listData")
+    @Test(dataProvider = "listData")
     public void linkTextTests(int index, String linkText) {
-        paginationStates.paginationItems.get(index)
+        paginationAlignCenter.paginationItems.get(index)
+                .is().displayed().enabled()
+                .css("font-size", is("14px"))
+                .hasClass("page-item")
+                .text(is(containsString(linkText)));
+        paginationAlignEnd.paginationItems.get(index)
                 .is().displayed().enabled()
                 .css("font-size", is("14px"))
                 .hasClass("page-item")
@@ -71,12 +79,21 @@ public class StatesTests extends TestsInit {
     }
 
     @Test (dataProvider = "listPageTitles")
-    public void linkClickableTests(int index, String pageTitle) {
-        paginationStates.paginationItems.get(index).hover();
-        paginationStates.paginationItems.get(index).highlight();
-        paginationStates.paginationItems.get(index).click();
+    public void linkClickableCenterTests(int index, String pageTitle) {
+        paginationAlignCenter.paginationItems.get(index).hover();
+        paginationAlignCenter.paginationItems.get(index).highlight();
+        paginationAlignCenter.paginationItems.get(index).click();
         newWindowTitleCheck(pageTitle);
-        paginationStates.paginationItems.get(index).unhighlight();
+        paginationAlignCenter.paginationItems.get(index).unhighlight();
+    }
+
+    @Test (dataProvider = "listPageTitles")
+    public void linkClickableEndTests(int index, String pageTitle) {
+        paginationAlignEnd.paginationItems.get(index).hover();
+        paginationAlignEnd.paginationItems.get(index).highlight();
+        paginationAlignEnd.paginationItems.get(index).click();
+        newWindowTitleCheck(pageTitle);
+        paginationAlignEnd.paginationItems.get(index).unhighlight();
     }
 
     public void newWindowTitleCheck(String pageTitle) {
@@ -84,4 +101,5 @@ public class StatesTests extends TestsInit {
         assertEquals(getTitle(), pageTitle);
         closeWindow();
     }
+
 }

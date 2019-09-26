@@ -50,6 +50,7 @@ public class OverviewTests extends TestsInit {
     @Test
     public void isValidationTests() {
         paginationOverview.paginationItems.is().size(5);
+        paginationOverview.is().core().hasClass("pagination");
     }
 
     @Test (dataProvider = "listData")

@@ -117,6 +117,6 @@ public class BootstrapPage extends WebPage {
     @UI("#pagination-big") public static PaginationSizeBig paginationSizeBig;
     @UI("#pagination-small") public static PaginationSizeSmall paginationSizeSmall;
     @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
-    @UI("#pagination-center") public static PaginationAlignEnd paginationAlignEnd;
+    @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
     //endregion
 }

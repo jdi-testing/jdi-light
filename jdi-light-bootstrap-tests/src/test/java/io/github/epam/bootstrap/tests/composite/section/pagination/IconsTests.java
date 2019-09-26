@@ -50,6 +50,7 @@ public class IconsTests extends TestsInit {
     @Test
     public void isValidationTests() {
         paginationIcons.paginationItems.is().size(5);
+        paginationIcons.is().core().hasClass("pagination");
     }
 
     @Test (dataProvider = "listData")
