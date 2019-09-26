@@ -10,6 +10,12 @@ import static io.github.com.pages.BootstrapPage.listGroupHorizontal;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Created by Dmitrii Pavlov on 25.09.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
+
+
 public class Horizontal extends TestsInit {
 
     @BeforeMethod
