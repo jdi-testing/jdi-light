@@ -48,7 +48,6 @@ public class CardKitchenSinkTests extends TestsInit {
         cardKitchenSink.list.get(0).is().text(is(item0Text));
         cardKitchenSink.list.get(1).is().text(is(item1Text));
         cardKitchenSink.list.get(2).is().text(is(item2Text));
-
         cardKitchenSink.list.get(0).is().text(containsString(item0Text));
         cardKitchenSink.list.get(1).is().text(containsString(item1Text));
         cardKitchenSink.list.get(2).is().text(containsString(item2Text));
