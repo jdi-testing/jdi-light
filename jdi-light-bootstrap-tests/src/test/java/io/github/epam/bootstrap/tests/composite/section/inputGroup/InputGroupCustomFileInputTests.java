@@ -6,9 +6,11 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
+import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.customFileInput1;
-import static io.github.com.pages.BootstrapPage.customFileInput2;
+import static io.github.com.pages.BootstrapPage.customFileInputWithButton1;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 /**
@@ -32,21 +34,29 @@ public class InputGroupCustomFileInputTests extends TestsInit {
     @Test
     public void isValidationOptionsSectionTests() {
 
-
+/*
         customFileInput1.uploadText.is().text(UPLOAD_TEXT);
         customFileInput1.uploadText.is().value(UPLOAD_TEXT);
 
         customFileInput1.labelText.is().text(LABEL_TEXT);
         customFileInput1.labelText.is().value(LABEL_TEXT);
 
-      //  customFileInput1.inputFiled.is().value(INPUT_FIELD);
-
-
         customFileInput2.uploadText.is().text(UPLOAD_TEXT);
         customFileInput2.uploadText.is().value(UPLOAD_TEXT);
 
         customFileInput2.labelText.is().text(LABEL_TEXT);
         customFileInput2.labelText.is().value(LABEL_TEXT);
+*/
+        customFileInput1.click();
+        customFileInput1.inputField.uploadFile(mergePath(PROJECT_PATH,"/src/test/resources/general.xml"));
+
+
+        customFileInputWithButton1.click();
+        customFileInputWithButton1.inputField.uploadFile(mergePath(PROJECT_PATH,"/src/test/resources/general.xml"));
+
+        /*        customFileInput1.inputField.is().value(INPUT_FIELD);
+*/
+
 
 /*      customFileInput1.optionText.is().text(optionText);
         customSelect.optionText.is()
@@ -55,20 +65,21 @@ public class InputGroupCustomFileInputTests extends TestsInit {
                 .css("font-size", is("14px"))
                 .tag("div");*/
     }
+
     @Test
     public void uploadTest() {
 
-        String value =  customFileInput1.inputFiled.getValue();
+      //  String value =  customFileInput1.inputField.getValue();
 
-/*        customFileInput1.inputFiled.uploadFile(mergePath(PROJECT_PATH,"/src/test/resources/general.xml"));
-        customFileInput1.inputFiled.is().text(containsString("general.xml"));
-        assertTrue(customFileInput1.inputFiled.getText().contains("general.xml"));
-        assertTrue(customFileInput1.inputFiled.getValue().contains("general.xml"));*/
+/*        customFileInput1.inputField.uploadFile(mergePath(PROJECT_PATH,"/src/test/resources/general.xml"));
+        customFileInput1.inputField.is().text(containsString("general.xml"));
+        assertTrue(customFileInput1.inputField.getText().contains("general.xml"));
+        assertTrue(customFileInput1.inputField.getValue().contains("general.xml"));*/
 
-      /*  customFileInput2.inputFiled.uploadFile(mergePath(PROJECT_PATH,"/src/test/resources/general.xml"));
-        customFileInput2.inputFiled.is().text(containsString("general.xml"));
-        assertTrue(customFileInput2.inputFiled.getText().contains("general.xml"));
-        assertTrue(customFileInput2.inputFiled.getValue().contains("general.xml"));*/
+      /*  customFileInput2.inputField.uploadFile(mergePath(PROJECT_PATH,"/src/test/resources/general.xml"));
+        customFileInput2.inputField.is().text(containsString("general.xml"));
+        assertTrue(customFileInput2.inputField.getText().contains("general.xml"));
+        assertTrue(customFileInput2.inputField.getValue().contains("general.xml"));*/
     }
 
     @Test
