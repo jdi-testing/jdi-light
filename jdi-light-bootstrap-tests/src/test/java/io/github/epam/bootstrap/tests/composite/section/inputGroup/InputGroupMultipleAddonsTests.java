@@ -15,6 +15,11 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class InputGroupMultipleAddonsTests extends TestsInit{
+
+    private String text = "Some text for tests";
+    private String partOfText = "text ";
+    private String emptyText = "";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -22,10 +27,6 @@ public class InputGroupMultipleAddonsTests extends TestsInit{
         multipleAddonUpper.textField.clear();
         multipleAddonLower.textField.clear();
     }
-
-    private String text = "Some text for tests";
-    private String partOfText = "text ";
-    private String emptyText = "";
 
     @DataProvider(name = "InputGroupMultipleAddonsLabels")
     public static Object[][] labels() {
