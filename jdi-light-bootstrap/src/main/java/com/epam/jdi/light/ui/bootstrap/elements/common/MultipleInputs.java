@@ -9,12 +9,13 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
+import com.epam.jdi.light.ui.bootstrap.asserts.MultipleInputsAssert;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultipleInputs extends UIBaseElement<TextAssert>
+public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
         implements IsInput, HasLabel, HasValue, SetValue {
 
     @Override
@@ -33,7 +34,7 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
     }
 
     @JDIAction("Get all values from {name}")
-    public List<String> getValueAll() {
+    public List<String> getAllValues() {
         WebList inputs = core().finds(By.cssSelector("input"));
         List<String> values = new ArrayList<>(inputs.size());
 
@@ -57,11 +58,11 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
     }
 
     @JDIAction("Get all texts from {name}")
-    public List<String> getTextAll() {
+    public List<String> getAllTexts() {
         WebList inputs = core().finds("input");
         List<String> texts = new ArrayList<String>(inputs.size());
 
-        inputs.foreach(i -> texts.add(i.getText()));
+        inputs.forEach(i -> texts.add(i.getText()));
 
         return texts;
     }
@@ -82,7 +83,7 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
     }
 
     @JDIAction("Set values to all inputs from {name}")
-    public void setValueAll(List<String> values) {
+    public void setAllValues(List<String> values) {
         WebList inputs = core().finds("input");
 
         for(int index = 0; index < values.size(); index++) {
@@ -101,13 +102,13 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
     }
 
     @JDIAction("Send keys to input with locator {0}")
-    public void sendKeys(String locator, CharSequence... value) {
+    public void sendKeys(String locator, CharSequence value) {
         core().find(locator).sendKeys(value);
     }
 
     @JDIAction("Send keys to all inputs from {name}")
-    public void sendKeysAll(List<CharSequence[]> values) {
-        WebList inputs = core().finds("inputs");
+    public void sendKeysAll(List<String> values) {
+        WebList inputs = core().finds("input");
 
         for (int index = 0; index < inputs.size(); index++) {
             inputs.get(index).sendKeys(values.get(index));
@@ -121,7 +122,7 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
 
     @JDIAction("Clear input from {name} with index {0}")
     public void clear(int index) {
-        core().finds("inputs").get(index).clear();
+        core().finds("input").get(index).clear();
     }
 
     @JDIAction("Clear input from {name} with locator {0}")
@@ -130,7 +131,7 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
     }
     @JDIAction("Clear all inputs from {name}")
     public void clearAll() {
-        core().finds("inputs").forEach(UIElement::clear);
+        core().finds("input").forEach(UIElement::clear);
     }
 
     @Override
@@ -140,7 +141,7 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
 
     @JDIAction("Focus input from {name} with index {0}")
     public void focus(int index) {
-        core().finds("inputs").get(index).focus();
+        core().finds("input").get(index).focus();
     }
 
     @JDIAction("Focus input from {name} with locator {0}")
@@ -154,7 +155,7 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
 
     @JDIAction("Get placeholder from input with index {0} from {name}")
     public String placeholder(int index) {
-        return core().finds("inputs").get(index).placeholder();
+        return core().finds("input").get(index).placeholder();
     }
 
     @JDIAction("Get placeholder from input with locator {0} from {name}")
@@ -163,7 +164,7 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
     }
     @JDIAction("Get all placeholders from {name}")
     public List<String> placeholderAll() {
-        WebList inputs = core().finds("inputs");
+        WebList inputs = core().finds("input");
         List<String> placeholders = new ArrayList<String>(inputs.size());
 
         inputs.forEach(i -> placeholders.add(i.placeholder()));
@@ -192,5 +193,10 @@ public class MultipleInputs extends UIBaseElement<TextAssert>
         for(int index = 0; index < inputs.size(); index++) {
            inputs.get(index).input(values.get(index));
         }
+    }
+
+    @Override
+    public MultipleInputsAssert is() {
+        return new MultipleInputsAssert().set(this);
     }
 }
