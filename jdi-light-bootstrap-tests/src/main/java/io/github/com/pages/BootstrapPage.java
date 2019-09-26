@@ -8,9 +8,12 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+
 import io.github.com.sections.*;
+import io.github.com.sections.card.CardWithHeaderAndFooter;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -27,8 +30,12 @@ public class BootstrapPage extends WebPage {
     //endregion
 
     //region Complex Elements
-
-
+    @UI("#carousel-example-slides-only") public static Carousel carouselWithSlidesOnly;
+    @UI("#carousel-example-controls") public static Carousel carouselWithControls;
+    @UI("#carousel-example-indicators") public static Carousel carouselWithIndicators;
+    @UI("#carousel-example-captions") public static Carousel carouselWithCaptions;
+    @UI("#carousel-example-fade") public static Carousel carouselWithFadeTransition;
+    @UI("#carousel-example-interval") public static Carousel carouselWithCustomInterval;
     // COLLAPSE
     @JDropdown(expand = "#bs-collapse-link",
             value = "#bs-collapse-one",
@@ -77,9 +84,13 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
     @UI("#card-example") public static CardExample cardExample;
     @UI("#card-body") public static CardBody cardBody;
-    @UI("#card-kitchen-sink") public static CardKitchenSink cardKitchenSink;
+    @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
+    @UI("#card-with-header-and-footer-quote") public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
+    @UI("#card-with-header-and-footer") public static CardWithHeaderAndFooter cardWithHeaderAndFooter;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
+    @UI("#buttonToolbar1") public static ButtonToolbar buttonToolbar;
+    @UI("#buttonToolbar2") public static ButtonToolbar buttonToolbarWithInputField;
     @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
     @UI("#card-custom-css-1") public static CardWithCustomCss13Rem cardWithCustomCss13Rem;
     @UI("#card-custom-css-2") public static CardWithCustomCss9Rem cardWithCustomCss9Rem;
@@ -98,5 +109,7 @@ public class BootstrapPage extends WebPage {
     @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
     @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
     @UI("#card-navigation") public static CardNavigation cardNavigation;
+    @UI(".card-group:nth-of-type(1)") public static CardGroup cardGroupWithoutFooter;
+    @UI(".card-group:nth-of-type(2)") public static CardGroup cardGroupWithFooter;
     //endregion
 }
