@@ -78,10 +78,10 @@ public class MediaObjectTests extends TestsInit {
     public void isValidationTestListMediaObject() {
         mediaObjectList.is().displayed();
         mediaObjectList.is().enabled();
-        mediaObjectList.get(1).headingOfMediaObject.is().text(is(listOfHeading.get(1)));
-        mediaObjectList.get(1).bodyOfMediaObject.is().text(containsString("Stark requires"));
-        assertThat(mediaObjectList.get(2).headingOfMediaObject.core().css("font-size"), is("20px"));
-        assertThat(mediaObjectList.get(1).bodyOfMediaObject.core().css("font-size"), is("14px"));
+        mediaObjectList.get(2).headingOfMediaObject.is().text(is(listOfHeading.get(1)));
+        mediaObjectList.get(2).bodyOfMediaObject.is().text(containsString("Stark requires"));
+        assertThat(mediaObjectList.get(3).headingOfMediaObject.core().css("font-size"), is("20px"));
+        assertThat(mediaObjectList.get(2).bodyOfMediaObject.core().css("font-size"), is("14px"));
         mediaObjectList.assertThat().displayed()
                 .core()
                 .css("font-size", is("14px"))
