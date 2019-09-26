@@ -8,10 +8,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
-
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 
