@@ -107,7 +107,7 @@ public class BreadcrumbTests extends TestsInit {
                 .css("display", is("flex"))
                 .css("flex-wrap", is("wrap"))
                 .css("background-color", is("rgba(233, 236, 239, 1)")) //#e9ecef Color Hex
-                .css("color", is("rgba(102, 102, 102, 1)")) //#666 Color Hex
+                .css("color", is("rgba(102, 102, 102, 1)"))//#666 Color Hex
                 .css("font-size", is("14px"));
 
         for (UIElement item : breadcrumb.items) {
