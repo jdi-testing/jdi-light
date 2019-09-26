@@ -26,16 +26,16 @@ import static org.hamcrest.Matchers.is;
  */
 
 public class BreadcrumbTests extends TestsInit {
+    private static final String HOME = "Home";
+    private static final String HTML5 = "HTML 5";
+    private static final String BOOTSTRAP = "Bootstrap";
+    private static final String[] ITEMS_VALUES = new String[]{HOME, HTML5, BOOTSTRAP};
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private static final String HOME = "Home";
-    private static final String HTML5 = "HTML 5";
-    private static final String BOOTSTRAP = "Bootstrap";
-    private static final String[] ITEMS_VALUES = new String[]{HOME, HTML5, BOOTSTRAP};
 
     @Test
     public void getTextTest() {
