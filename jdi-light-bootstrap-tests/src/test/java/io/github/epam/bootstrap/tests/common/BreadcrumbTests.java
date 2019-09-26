@@ -52,7 +52,7 @@ public class BreadcrumbTests extends TestsInit {
     @Test
     public void getFirstItemTest() {
         breadcrumb.items.first().has().value(HOME);
-        breadcrumb.items.first().has().text(HOME);
+        breadcrumb.items.first().is().text(HOME);
     }
 
     @Test
