@@ -132,6 +132,6 @@ public class CardWithHeaderAndFooterTests extends TestsInit {
         validateAlert(is("Button Clicked!"));
         cardWithHeader.button.is()
                 .enabled()
-                .disabled();
+                .displayed();
     }
 }
