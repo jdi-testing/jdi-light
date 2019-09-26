@@ -10,7 +10,7 @@ public class ListGroupCustomContent extends Section {
     @UI("a div h5") public ListGroup header;
     @UI("a div small") public ListGroup dateText;
     @UI("a p") public ListGroup mainText;
-    @UI("a small") public ListGroup footer;
+    @UI("small.footer") public ListGroup footer;
     @UI("a div") public ListGroup container;
 
 }

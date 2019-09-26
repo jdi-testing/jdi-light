@@ -1,16 +1,19 @@
 package io.github.epam.bootstrap.tests.composite.section.listGroup;
 
-import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
+import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.listGroupCustomContent;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.containsStringIgnoringCase;
 import static org.hamcrest.CoreMatchers.is;
+import static org.testng.Assert.assertEquals;
 
 public class CustomContentTests extends TestsInit {
 
@@ -33,7 +36,9 @@ public class CustomContentTests extends TestsInit {
     String footer1 = "JDI website";
     String footer2 = "JDI - testing tool";
     String footer3 = "JDI Docs";
-
+    String pageTitle1 = "Home Page";
+    String pageTitle2 = "JDI Testing tools · GitHub";
+    String pageTitle3 = "JDI · GitHub";
 
     @DataProvider
     public Object[][] listData() {
@@ -44,6 +49,13 @@ public class CustomContentTests extends TestsInit {
         };
     }
 
+    @DataProvider
+    public Object[][] clickValidate() {
+        return new Object[][]{
+                {1, pageTitle1}, {2, pageTitle2}, {3, pageTitle3}
+        };
+    }
+
     @Test
     public void isValidationTests() {
         listGroupCustomContent.listGroup.is().size(3);
@@ -51,30 +63,51 @@ public class CustomContentTests extends TestsInit {
         listGroupCustomContent.header.is().size(3);
         listGroupCustomContent.dateText.is().size(3);
         listGroupCustomContent.mainText.is().size(3);
+        listGroupCustomContent.footer.is().size(3);
     }
 
     @Test (dataProvider = "listData")
-    public void tests(int index, String link, String header, String dateText, String mainText, String footer) {
+    public void mainContentTests(int index, String link, String header, String dateText, String mainText, String footer) {
         listGroupCustomContent.listGroup.get(index)
                 .is().core()
+                .displayed().enabled()
                 .hasClass("list-group-item list-group-item-action")
                 .attr("href", is(link));
         listGroupCustomContent.container.get(index)
                 .is().core()
+                .displayed().enabled()
                 .hasClass("d-flex w-100 justify-content-between");
         listGroupCustomContent.header.get(index)
                 .is().core()
+                .displayed().enabled()
                 .hasClass("mb-1")
                 .text(is(containsStringIgnoringCase(header)));
         listGroupCustomContent.dateText.get(index)
                 .is().core()
+                .displayed().enabled()
                 .text(is(dateText));
         listGroupCustomContent.mainText.get(index)
                 .is().core()
+                .displayed().enabled()
                 .hasClass("mb-1")
                 .text(is(mainText));
         listGroupCustomContent.footer.get(index)
                 .is().core()
+                .displayed().enabled()
                 .text(is(footer));
+    }
+
+    @Test (dataProvider = "clickValidate")
+    public void linkClickableTests(int index, String pageTitle) {
+        listGroupCustomContent.listGroup.get(index).highlight();
+        listGroupCustomContent.listGroup.get(index).click();
+        newWindowTitleCheck(pageTitle);
+        listGroupCustomContent.listGroup.get(index).unhighlight();
+    }
+
+    public void newWindowTitleCheck(String pageTitle) {
+        switchToNewWindow();
+        assertEquals(getTitle(), pageTitle);
+        closeWindow();
     }
 }
