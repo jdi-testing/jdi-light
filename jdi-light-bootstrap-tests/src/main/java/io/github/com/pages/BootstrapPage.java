@@ -85,6 +85,8 @@ public class BootstrapPage extends WebPage {
     @UI("#card-body") public static CardBody cardBody;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
+    @UI("#buttonToolbar1") public static ButtonToolbar buttonToolbar;
+    @UI("#buttonToolbar2") public static ButtonToolbar buttonToolbarWithInputField;
     @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
     @UI("#card-custom-css-1") public static CardWithCustomCss13Rem cardWithCustomCss13Rem;
     @UI("#card-custom-css-2") public static CardWithCustomCss9Rem cardWithCustomCss9Rem;
