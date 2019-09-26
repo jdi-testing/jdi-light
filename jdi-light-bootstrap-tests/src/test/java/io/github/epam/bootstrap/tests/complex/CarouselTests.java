@@ -37,8 +37,6 @@ public class CarouselTests extends TestsInit {
 			+ "Praesent commodo cursus magna, vel scelerisque nisl consectetur.\n" + prevText + "\n" + nextText;
 	
 	private int interval = 5;
-	private int customInterval = 1;
-	
 
 	@BeforeMethod
 	public void before() {
@@ -135,6 +133,7 @@ public class CarouselTests extends TestsInit {
 	// Carousel with interval tests
 	@Test
 	public void intervalTest() {
+		int customInterval = 1;
 		WebPage.reload();
 		durationMoreThan(interval, () -> carouselWithCustomInterval.is().text(secondSlideFullText));
 		customInterval = carouselWithCustomInterval.interval() / 1000;
