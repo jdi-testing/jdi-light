@@ -22,6 +22,7 @@ public class ListGroupAssert extends UISelectAssert<ListGroupAssert, ListGroup>
         jdiAssert(getIsSelected(), is("selected"));
         return this;
     }
+
     @JDIAction("Assert that '{name}' is not selected")
     public ListGroupAssert deselected() {
         jdiAssert(getIsSelected(), is("not selected"));

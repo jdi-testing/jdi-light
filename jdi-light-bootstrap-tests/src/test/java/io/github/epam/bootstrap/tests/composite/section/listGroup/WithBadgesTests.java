@@ -69,7 +69,4 @@ public class WithBadgesTests extends TestsInit {
                 .hasClass("badge badge-primary badge-pill")
                 .tag(is("span"));
     }
-
-
-
 }

@@ -30,7 +30,7 @@ public class CustomContentTests extends TestsInit {
     }
 
     String link1 = "https://jdi-testing.github.io/jdi-light/index.html";
-    String Link2 = "https://github.com/jdi-testing";
+    String link2 = "https://github.com/jdi-testing";
     String link3 = "https://github.com/jdi-docs";
     String header1 = "List group item heading one";
     String header2 = "List group item heading two";
@@ -50,7 +50,7 @@ public class CustomContentTests extends TestsInit {
     public Object[][] listData() {
         return new Object[][]{
                 {1, link1, header1, dateText, mainText1, footer1},
-                {2, Link2, header2, dateText, mainText2, footer2},
+                {2, link2, header2, dateText, mainText2, footer2},
                 {3, link3, header3, dateText, mainText3, footer3}
         };
     }
