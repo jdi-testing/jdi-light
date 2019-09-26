@@ -54,8 +54,8 @@ public class CardMixinsUtilitiesTests extends TestsInit {
                 .and().core().css("color", "rgba(102, 102, 102, 1)");
         cardMixinsUtilities.footer.is().text(is(footer))
                 .and().core().css("color", "rgba(102, 102, 102, 1)");
-        cardMixinsUtilities.is().displayed().
-                and().core().css("border-color", "rgb(40, 167, 69)");
+        cardMixinsUtilities.is().displayed()
+                .and().core().css("border-color", "rgb(40, 167, 69)");
     }
 
     @Test
