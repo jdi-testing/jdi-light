@@ -77,6 +77,7 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
     @UI("#card-example") public static CardExample cardExample;
     @UI("#card-body") public static CardBody cardBody;
+    @UI("#card-kitchen-sink") public static CardKitchenSink cardKitchenSink;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
     @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
