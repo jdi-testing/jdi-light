@@ -5,6 +5,10 @@ import com.epam.jdi.tools.Safe;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class Timeout {
     private int INITIAL;
     private Safe<Integer> DEFAULT;

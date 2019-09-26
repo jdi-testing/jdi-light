@@ -10,6 +10,10 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class SoftAssert {
     private static Safe<List<String>> listOfErrors = new Safe<>(new ArrayList<>());
     private static boolean IS_SOFT_ASSERT = false;

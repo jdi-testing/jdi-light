@@ -24,6 +24,10 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class Selector extends UIBaseElement<UISelectAssert>
         implements ISelector, SetValue, HasPlaceholder {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");

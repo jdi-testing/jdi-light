@@ -14,6 +14,10 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class Link extends UIBaseElement<LinkAssert>
         implements HasValue, HasClick, IsText {
     // region Actions

@@ -9,6 +9,10 @@ import com.epam.jdi.light.elements.interfaces.common.IsInput;
 
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class TextField extends UIBaseElement<TextAssert>
         implements HasLabel, SetValue, HasPlaceholder, IsInput {
     // region Set and get value for Forms

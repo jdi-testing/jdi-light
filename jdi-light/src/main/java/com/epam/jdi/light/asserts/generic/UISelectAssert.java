@@ -13,6 +13,10 @@ import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static org.hamcrest.Matchers.*;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class UISelectAssert<A extends UISelectAssert, E extends ISelector> extends UIAssert<A, E>
         implements ITextAssert<A> {
 

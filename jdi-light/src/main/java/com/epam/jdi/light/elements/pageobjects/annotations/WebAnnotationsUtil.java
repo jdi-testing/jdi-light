@@ -1,10 +1,5 @@
 package com.epam.jdi.light.elements.pageobjects.annotations;
 
-/**
- * Created by Roman Iovlev on 14.02.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Quotes;
@@ -17,6 +12,10 @@ import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
+/**
+ * Created by Roman Iovlev on 14.02.2018
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class WebAnnotationsUtil {
 
     public static boolean hasAnnotation(Field field, Class<? extends Annotation> annotation) {

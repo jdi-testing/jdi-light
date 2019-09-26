@@ -10,6 +10,10 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlUtils.asInt;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class Range extends UIBaseElement<RangeAssert> implements HasLabel, SetValue {
 
     // region Actions

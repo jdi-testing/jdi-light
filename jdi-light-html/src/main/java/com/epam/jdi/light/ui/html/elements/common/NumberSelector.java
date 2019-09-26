@@ -9,6 +9,10 @@ import com.epam.jdi.light.ui.html.asserts.NumberAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class NumberSelector extends UIBaseElement<NumberAssert>
         implements HasLabel, HasValue, HasPlaceholder {
     // region Actions

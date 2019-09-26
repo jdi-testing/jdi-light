@@ -22,6 +22,10 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class Line implements IList<String>, IBaseElement {
     private JFunc<MapArray<String, String>> dataMap;
     private WebList elements;

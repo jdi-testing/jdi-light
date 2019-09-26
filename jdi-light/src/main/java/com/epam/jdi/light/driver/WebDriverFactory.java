@@ -1,10 +1,5 @@
 package com.epam.jdi.light.driver;
 
-/**
- * Created by Roman Iovlev on 14.02.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc;
@@ -32,6 +27,10 @@ import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class WebDriverFactory {
     public static MapArray<String, JFunc<WebDriver>> DRIVERS
         = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));

@@ -8,6 +8,10 @@ import com.epam.jdi.light.ui.html.asserts.DateTimeAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class DateTimeSelector extends UIBaseElement<DateTimeAssert>
         implements HasLabel, SetValue {
     // region Actions

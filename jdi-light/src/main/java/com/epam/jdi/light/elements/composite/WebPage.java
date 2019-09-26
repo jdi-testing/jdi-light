@@ -37,7 +37,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Created by Roman Iovlev on 25.03.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-
 public class WebPage extends DriverBase implements PageObject {
     public String url = "";
     public String title = "";

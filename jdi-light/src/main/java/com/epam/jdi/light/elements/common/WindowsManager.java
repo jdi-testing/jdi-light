@@ -10,6 +10,10 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class WindowsManager {
     private static Set<String> windowHandlers;
     private static MapArray<String, String> windowHandles = new MapArray<>();

@@ -11,6 +11,10 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class RadioSteps {
     public static RadioButtons radioButtons(String name) { return getUI(name, RadioButtons.class); }
 

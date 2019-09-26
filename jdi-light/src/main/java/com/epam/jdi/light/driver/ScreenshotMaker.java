@@ -1,10 +1,5 @@
 package com.epam.jdi.light.driver;
 
-/**
- * Created by Roman Iovlev on 14.02.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
@@ -24,6 +19,10 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.OutputType.FILE;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class ScreenshotMaker {
     public static String SCREEN_PATH = LOGS_PATH + "\\screens";
     public static String SCREEN_NAME = "screen";

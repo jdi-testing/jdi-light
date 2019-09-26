@@ -11,6 +11,10 @@ import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class Tabs extends UIListBase<UISelectAssert> {
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) { list().select(value); }

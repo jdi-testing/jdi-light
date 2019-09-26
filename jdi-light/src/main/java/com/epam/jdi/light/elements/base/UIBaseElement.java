@@ -6,6 +6,10 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public abstract class UIBaseElement<A extends UIAssert>
         implements ICoreElement, HasAssert<A> {
     protected UIElement uiElement;

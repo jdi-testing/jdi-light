@@ -8,6 +8,10 @@ import java.util.List;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class MenuSteps {
     public static Menu list(String name) { return getUI(name, Menu.class); }
 

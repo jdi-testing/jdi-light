@@ -8,10 +8,12 @@ import java.util.List;
 
 import static com.epam.jdi.tools.StringUtils.inputStreamToList;
 
-
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class UnixProcessUtils {
     /**
-     *
      * @param rootNamePart
      */
     public static void killProcessesTree(String rootNamePart) {

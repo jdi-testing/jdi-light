@@ -1,10 +1,5 @@
 package com.epam.jdi.light.driver.get;
 
-/**
- * Created by Roman Iovlev on 14.02.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.Dimension;
@@ -37,6 +32,10 @@ import static org.openqa.selenium.ie.InternetExplorerDriver.UNEXPECTED_ALERT_BEH
 import static org.openqa.selenium.remote.CapabilityType.ACCEPT_SSL_CERTS;
 import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class DriverData {
     public static final String PROJECT_PATH = path("");
     public static String SRC_PATH = mergePath(PROJECT_PATH,"src", "main");

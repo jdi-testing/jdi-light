@@ -8,6 +8,10 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static org.hamcrest.Matchers.greaterThan;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class TableAssert extends BaseTableAssert<Table, TableAssert> {
     public Compare exact(int count) {
         return new Compare(count, this, true);

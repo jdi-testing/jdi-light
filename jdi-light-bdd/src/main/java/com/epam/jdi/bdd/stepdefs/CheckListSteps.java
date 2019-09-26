@@ -11,6 +11,10 @@ import static com.epam.jdi.tools.LinqUtils.toIntArray;
 import static org.hamcrest.Matchers.hasSize;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class CheckListSteps {
     public static Checklist checklist(String name) {
         return getUI(name, Checklist.class);

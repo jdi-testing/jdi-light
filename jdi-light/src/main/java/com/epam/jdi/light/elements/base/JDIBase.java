@@ -49,7 +49,6 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-
 public abstract class JDIBase extends DriverBase implements IBaseElement, HasCache {
     public static JFunc1<String, String> STRING_SIMPLIFY =
         s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");

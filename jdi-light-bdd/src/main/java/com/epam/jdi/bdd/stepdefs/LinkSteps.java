@@ -9,7 +9,6 @@ import static org.hamcrest.Matchers.*;
 /**
  * Created by Ekaterina Vasilkova on 19.08.2019
  */
-
 public class LinkSteps {
     public static Link link(String name) { return getUI(name, Link.class); }
 

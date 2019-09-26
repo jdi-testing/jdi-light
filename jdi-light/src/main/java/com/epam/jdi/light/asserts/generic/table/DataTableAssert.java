@@ -10,6 +10,10 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static org.hamcrest.Matchers.*;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class DataTableAssert<L extends Section, D>
         extends BaseTableAssert<DataTable<L, D>, DataTableAssert<L, D>> {
 

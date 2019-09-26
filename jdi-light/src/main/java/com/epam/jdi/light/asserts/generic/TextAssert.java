@@ -11,7 +11,6 @@ import static org.hamcrest.Matchers.is;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-
 public class TextAssert extends UIAssert<TextAssert, IsText>
         implements ITextAssert<TextAssert> {
     @JDIAction("Assert that '{name}' text {0}")

@@ -6,6 +6,10 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.tools.func.JFunc1;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class BaseAssert<E extends IBaseElement> implements IBaseElement {
     public String name;
     @Override

@@ -8,6 +8,10 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class RangeSteps {
     public static Range range(String name) { return getUI(name, Range.class); }
 

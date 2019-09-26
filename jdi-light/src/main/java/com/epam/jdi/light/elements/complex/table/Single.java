@@ -2,6 +2,10 @@ package com.epam.jdi.light.elements.complex.table;
 
 import org.openqa.selenium.support.ui.Quotes;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class Single {
     public static Single hasValue(String value) {
         return new Single("/td[%s]//*/text()[normalize-space(.) = "+ Quotes.escape(value)+"]",

@@ -21,7 +21,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Created by Roman Iovlev on 02.03.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-
 public class DropdownExpand extends UIListBase<UISelectAssert>
         implements IsDropdown, ISetup {
     public String expandLocator = ".caret";

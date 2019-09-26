@@ -20,9 +20,6 @@ import static io.github.com.pages.Header.*;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.*;
 
-/**
- * Created by Dmitry_Lebedev1 on 1/12/2016.
- */
 public class UserStepdefs {
 
     @Then("^the \"([^\"]*)\" is basically valid$")

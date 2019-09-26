@@ -10,6 +10,10 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, IsText, SetValue {
     // region Actions
     @JDIAction("Upload file '{0}' for '{name}'")

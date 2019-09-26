@@ -11,6 +11,10 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.tools.JsonUtils.getMapFromJson;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class FormSteps {
 	public static Safe<Form> lastForm = new Safe<>(() -> null);
 	static Form getForm(String name) {

@@ -1,10 +1,5 @@
 package com.epam.jdi.light.logger;
 
-/**
- * Created by Roman Iovlev on 14.02.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import org.apache.logging.log4j.Level;
 
 import java.util.List;
@@ -13,6 +8,10 @@ import static com.epam.jdi.tools.LinqUtils.first;
 import static java.lang.Integer.MAX_VALUE;
 import static java.util.Arrays.asList;
 
+/**
+ * Created by Roman Iovlev on 14.02.2018
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public enum LogLevels {
     OFF(0),           // No logging
     FATAL(100),       // Unexpected errors

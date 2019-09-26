@@ -21,6 +21,10 @@ import static java.lang.System.setProperty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class DriverInfo extends DataClass<DriverInfo> {
     public DriverTypes type;
     public JFunc<Capabilities> capabilities;

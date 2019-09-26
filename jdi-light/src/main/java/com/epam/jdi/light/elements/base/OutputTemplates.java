@@ -1,7 +1,9 @@
 package com.epam.jdi.light.elements.base;
 
+
 /**
- * Created by Roman_Iovlev on 4/8/2018.
+ * Created by Roman Iovlev on 04.08.2018
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class OutputTemplates {
     public static String PRINT_PAGE_STEP = "(url={url}; title={title})";

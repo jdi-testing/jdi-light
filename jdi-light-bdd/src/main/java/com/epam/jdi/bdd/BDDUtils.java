@@ -12,7 +12,8 @@ import cucumber.api.DataTable;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
 /**
- * Created by Dmitry_Lebedev1 on 1/13/2016.
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public final class BDDUtils {
     private BDDUtils() { }

@@ -19,6 +19,10 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class TableSteps {
     static Table lastTable;
     public static Table table(String name) { return lastTable = getUI(name, Table.class); }

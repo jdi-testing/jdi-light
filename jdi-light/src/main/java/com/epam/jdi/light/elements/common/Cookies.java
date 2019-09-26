@@ -7,6 +7,10 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class Cookies {
 
     private static WebDriver.Options manage() { return WebDriverFactory.getDriver().manage(); }

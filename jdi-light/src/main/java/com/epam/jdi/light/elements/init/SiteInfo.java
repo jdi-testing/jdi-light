@@ -4,6 +4,10 @@ import com.epam.jdi.tools.DataClass;
 
 import java.lang.reflect.Field;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class SiteInfo extends DataClass<SiteInfo> {
     public Field field;
     public Class<?> cl;

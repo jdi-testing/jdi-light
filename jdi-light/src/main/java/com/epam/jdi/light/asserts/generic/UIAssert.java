@@ -10,6 +10,10 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.tools.StringUtils.format;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAssert<E>
     implements CommonAssert<A> {
     /**

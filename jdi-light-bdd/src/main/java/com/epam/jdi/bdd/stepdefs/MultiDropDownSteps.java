@@ -15,6 +15,10 @@ import static org.hamcrest.core.IsIterableContaining.hasItem;
 import static org.hamcrest.core.IsIterableContaining.hasItems;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class MultiDropDownSteps {
     public static MultiSelector multiDropDown(String name) { return getUI(name, MultiSelector.class); }
 

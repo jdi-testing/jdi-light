@@ -42,6 +42,10 @@ import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> extends UIBaseElement<A>
         implements ISetup, HasValue, HasAssert<A>, IHasSize, IsText {
     protected By rowLocator = By.xpath("//tr[%s]/td");

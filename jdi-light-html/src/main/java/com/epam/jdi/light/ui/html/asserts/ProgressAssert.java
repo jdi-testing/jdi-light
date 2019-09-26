@@ -13,7 +13,6 @@ import static org.hamcrest.Matchers.is;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-
 public class ProgressAssert extends UIAssert<ProgressAssert, ProgressBar> {
     @JDIAction("Assert that '{name}' max volume {0}")
     public ProgressAssert maxVolume(Matcher<Integer> max) {

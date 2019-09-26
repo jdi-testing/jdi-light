@@ -6,7 +6,6 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-
 public class Row extends NameNum {
     public static Row row(int num) {
         return (Row)new Row().set(row -> row.num = num);

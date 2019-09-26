@@ -11,6 +11,10 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class IsAssert extends UIAssert<IsAssert, UIElement>
         implements SelectedAssert<IsAssert>, ITextAssert<IsAssert> {
     @JDIAction("Assert that '{name}' text {0}")

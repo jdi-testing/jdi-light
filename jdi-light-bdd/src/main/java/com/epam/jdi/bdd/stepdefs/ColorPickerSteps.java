@@ -7,6 +7,10 @@ import cucumber.api.java.en.When;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class ColorPickerSteps {
     public static ColorPicker colorPicker(String name) { return getUI(name, ColorPicker.class); }
 

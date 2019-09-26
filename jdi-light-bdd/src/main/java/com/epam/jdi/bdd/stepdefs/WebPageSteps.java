@@ -8,6 +8,10 @@ import org.testng.Assert;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class WebPageSteps {
     private final int SCROLLY = 0;
     private final int SCROLLX = 0;

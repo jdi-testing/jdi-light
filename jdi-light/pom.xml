@@ -6,8 +6,8 @@
 
     <artifactId>jdi-light</artifactId>
     <name>JDI Light</name>
-    <packaging>jar</packaging>
-    <version>1.1.1</version>
+    <paadckaging>jar</paadckaging>
+    <version>1.1.2</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>

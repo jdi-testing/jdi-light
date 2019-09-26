@@ -12,7 +12,6 @@ import static org.hamcrest.Matchers.is;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-
 public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox>
         implements SelectedAssert<CheckboxAssert> {
     @JDIAction("Assert that '{name}' is selected")

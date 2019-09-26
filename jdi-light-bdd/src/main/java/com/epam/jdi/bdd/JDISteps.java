@@ -24,6 +24,10 @@ import static com.epam.jdi.light.settings.WebSettings.init;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class JDISteps {
 	@Given("^I open application$")
 	public void iMOpenSite() {

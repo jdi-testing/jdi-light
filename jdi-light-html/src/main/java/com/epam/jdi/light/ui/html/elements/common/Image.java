@@ -9,6 +9,10 @@ import com.epam.jdi.light.ui.html.asserts.ImageAssert;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class Image extends UIBaseElement<ImageAssert>
         implements HasClick, HasValue {
     // region Actions

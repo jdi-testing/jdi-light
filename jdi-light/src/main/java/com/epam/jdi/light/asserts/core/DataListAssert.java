@@ -17,6 +17,10 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.Matchers.*;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class DataListAssert<T extends IListBase, D>
         extends UISelectAssert<DataListAssert<T, D>, DataList<T, D>> {
     public List<D> data() { return element.asData(); }

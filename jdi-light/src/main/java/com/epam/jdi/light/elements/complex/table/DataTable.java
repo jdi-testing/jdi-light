@@ -28,6 +28,10 @@ import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.util.Arrays.asList;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, DataTableAssert<L, D>> {
     private Class<L> lineClass;
     private Class<D> dataClass;

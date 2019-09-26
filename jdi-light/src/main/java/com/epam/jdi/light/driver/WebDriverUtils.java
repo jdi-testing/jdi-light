@@ -1,9 +1,5 @@
 package com.epam.jdi.light.driver;
 
-/**
- * Created by Roman Iovlev on 14.02.2018 Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import java.io.IOException;
 
 import static com.epam.jdi.light.common.UnixProcessUtils.killProcessesTree;
@@ -11,6 +7,10 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Runtime.getRuntime;
 import static java.lang.String.format;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public final class WebDriverUtils {
 
 

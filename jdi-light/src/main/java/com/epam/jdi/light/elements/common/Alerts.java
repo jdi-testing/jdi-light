@@ -7,6 +7,10 @@ import org.openqa.selenium.Alert;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class Alerts {
 
     /**

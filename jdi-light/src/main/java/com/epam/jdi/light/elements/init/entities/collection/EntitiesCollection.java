@@ -25,6 +25,10 @@ import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class EntitiesCollection {
     public static MapArray<String, WebPage> PAGES = new MapArray<>();
     public static MapArray<String, List<Object>> ELEMENTS = new MapArray<>();

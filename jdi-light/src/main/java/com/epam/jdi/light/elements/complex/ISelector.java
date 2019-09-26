@@ -12,6 +12,10 @@ import java.util.List;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue  {
     @JDIAction("Select '{0}' in '{name}'")
     default void select(String value) { list().select(value); }

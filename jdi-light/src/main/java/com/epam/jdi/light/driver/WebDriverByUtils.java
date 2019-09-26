@@ -1,10 +1,5 @@
 package com.epam.jdi.light.driver;
 
-/**
- * Created by Roman Iovlev on 14.02.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import com.epam.jdi.tools.map.MapArray;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
@@ -30,6 +25,10 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public final class WebDriverByUtils {
 
     private WebDriverByUtils() { }

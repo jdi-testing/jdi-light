@@ -36,7 +36,6 @@ import static java.lang.String.format;
  * Created by Roman Iovlev on 29.03.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-
 public class Form<T> extends Section {
     public static JAction4<Field, Object, Object, String> FILL_ACTION = (field, element, parent, setValue)
         -> ((SetValue) element).setValue(setValue);

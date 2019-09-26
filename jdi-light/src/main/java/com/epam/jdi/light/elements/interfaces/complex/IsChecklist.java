@@ -6,6 +6,10 @@ import com.epam.jdi.light.elements.complex.ISelector;
 
 import java.util.List;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public interface IsChecklist extends ISelector, HasAssert<ChecklistAssert> {
     void select(String name);
     void select(String... names);

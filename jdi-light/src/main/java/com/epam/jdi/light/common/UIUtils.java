@@ -1,10 +1,5 @@
 package com.epam.jdi.light.common;
 
-/**
- * Created by Roman Iovlev on 14.02.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
@@ -34,6 +29,10 @@ import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.lang.reflect.Array.get;
 import static java.lang.reflect.Array.getLength;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public final class UIUtils {
     private UIUtils() {
     }

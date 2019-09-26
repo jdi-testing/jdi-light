@@ -1,10 +1,5 @@
 package com.epam.jdi.light.elements.complex.table;
 
-/**
- * Created by Roman Iovlev on 14.02.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import com.epam.jdi.tools.DataClass;
 
 import java.util.List;
@@ -13,6 +8,10 @@ import static com.epam.jdi.tools.LinqUtils.firstIndex;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class NameNum extends DataClass<NameNum> {
     public int num = 0;
     public String name;

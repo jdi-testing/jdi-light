@@ -4,6 +4,10 @@ import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.tools.func.JAction1;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public interface IBaseElement extends JDIElement, HasCache {
     JDIBase base();
     default <T> T setup(Class<T> cl, JAction1<JDIBase> setup) {

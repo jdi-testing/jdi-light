@@ -7,6 +7,10 @@ import cucumber.api.java.en.When;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class DateTimeSelectorSteps {
     public static DateTimeSelector dateTimeSelector(String name) { return getUI(name, DateTimeSelector.class); }
 

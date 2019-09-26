@@ -14,6 +14,10 @@ import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class FileAssert extends BaseAssert {
     public static FileAssert assertThatFile(String fileName) {
         return new FileAssert(fileName);

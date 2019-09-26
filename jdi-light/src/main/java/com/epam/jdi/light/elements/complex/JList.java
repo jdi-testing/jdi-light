@@ -1,10 +1,5 @@
 package com.epam.jdi.light.elements.complex;
 
-/**
- * Created by Roman Iovlev on 14.02.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.IListBase;
@@ -16,8 +11,10 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-
-
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class JList<T extends IListBase> extends ListBase<T, UISelectAssert<UISelectAssert, JList<T>>> {
     public JList() {}
     public JList(By locator) { super(locator); }

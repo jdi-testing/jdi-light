@@ -1,10 +1,5 @@
 package com.epam.jdi.light.elements.common;
 
-/**
- * Created by Roman Iovlev on 14.02.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.ElementArea;
@@ -46,6 +41,10 @@ import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+/**
+ * Created by Roman Iovlev on 14.02.2018
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class UIElement extends JDIBase
         implements WebElement, SetValue, HasAssert<IsAssert>, IListBase,
         HasClick, IsText, HasLabel, HasPlaceholder, IsInput, HasCheck {

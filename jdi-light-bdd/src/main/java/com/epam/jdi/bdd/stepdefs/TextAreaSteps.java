@@ -13,7 +13,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Ekaterina Vasilkova on 22.08.2019
  */
-
 public class TextAreaSteps {
     public static TextArea textArea(String name) { return getUI(name, TextArea.class); }
 

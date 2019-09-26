@@ -6,6 +6,10 @@ import com.epam.jdi.tools.func.JFunc1;
 import static com.epam.jdi.light.elements.common.UIElement.SMART_GET_TEXT;
 import static com.epam.jdi.light.elements.common.UIElement.SMART_LIST_TEXT;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public enum TextTypes {
     SMART_TEXT(SMART_GET_TEXT),
     SMART_LIST(SMART_LIST_TEXT),

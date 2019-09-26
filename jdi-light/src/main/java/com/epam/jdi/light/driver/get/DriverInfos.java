@@ -10,6 +10,10 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class DriverInfos {
     public static DriverInfo CHROME_INFO = new DriverInfo()
         .set(d -> {

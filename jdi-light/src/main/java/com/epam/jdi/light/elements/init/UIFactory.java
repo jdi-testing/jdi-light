@@ -13,7 +13,8 @@ import java.util.List;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 
 /**
- * Created by Roman_Iovlev on 3/28/2018.
+ * Created by Roman Iovlev on 03.28.2018
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class UIFactory {
     public static UIElement element(String locator) {

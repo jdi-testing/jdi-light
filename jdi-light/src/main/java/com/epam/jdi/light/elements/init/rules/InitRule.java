@@ -8,6 +8,10 @@ import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.any;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class InitRule {
     public JFunc1<Field, Boolean> condition;
     public JFunc1<SiteInfo, Object> func;

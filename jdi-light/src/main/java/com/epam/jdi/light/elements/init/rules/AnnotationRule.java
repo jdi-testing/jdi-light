@@ -7,6 +7,10 @@ import com.epam.jdi.tools.func.JAction3;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class AnnotationRule<A extends Annotation> {
     public Class<?> annotation;
     public JAction3<JDIBase, A, Field> action;
