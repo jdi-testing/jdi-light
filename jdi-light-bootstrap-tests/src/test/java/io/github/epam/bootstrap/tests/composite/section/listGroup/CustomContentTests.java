@@ -14,6 +14,6 @@ public class CustomContentTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-
+    
 
 }
