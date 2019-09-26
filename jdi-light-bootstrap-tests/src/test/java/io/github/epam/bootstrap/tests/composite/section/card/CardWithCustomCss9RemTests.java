@@ -18,6 +18,11 @@ import static org.testng.Assert.assertEquals;
 
 public class CardWithCustomCss9RemTests extends TestsInit {
 
+    /**
+     * Created by Aleksandr Khmelinin on 22.09.2019
+     * Email: aleksandr_khmelinin@epam.com; Skype: live:bea50ebde18b7f9e
+     */
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
