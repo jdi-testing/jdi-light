@@ -33,15 +33,30 @@ public class SizingTests extends TestsInit {
     @Test
     public void isValidationTests() {
         paginationSizeBig.paginationItems.is().size(3);
+        paginationSizeBig.is().core().hasClass("pagination pagination-lg");
         paginationSizeSmall.paginationItems.is().size(3);
+        paginationSizeSmall.is().core().hasClass("pagination pagination-sm");
     }
 
     @Test (dataProvider = "listData")
     public void linkTextTests(int index, String linkText) {
         paginationSizeBig.paginationItems.get(index)
                 .is().displayed().enabled()
+                .core()
                 .css("font-size", is("14px"))
                 .hasClass("page-item")
                 .text(is(containsString(linkText)));
+        paginationSizeSmall.paginationItems.get(index)
+                .is().displayed().enabled()
+                .core()
+                .css("font-size", is("14px"))
+                .hasClass("page-item")
+                .text(is(containsString(linkText)));
+        paginationSizeBig.paginationItemsText.get(index)
+                .is().core()
+                .css("font-size", is("20px"));
+        paginationSizeSmall.paginationItemsText.get(index)
+                .is().core()
+                .css("font-size", is("14px"));
     }
 }
