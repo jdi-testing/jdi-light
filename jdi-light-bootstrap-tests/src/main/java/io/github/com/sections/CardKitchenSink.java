@@ -10,6 +10,6 @@ public class CardKitchenSink extends Section {
     @UI(".card-img-top") public Image image;
     @UI(".card-title") public Text title;
     @UI(".card-text") public Text text;
-    @UI(".card-body") public Text body;
+    @UI(".card-body") public WebList body;
     @UI(".list-group") public WebList list;
 }
