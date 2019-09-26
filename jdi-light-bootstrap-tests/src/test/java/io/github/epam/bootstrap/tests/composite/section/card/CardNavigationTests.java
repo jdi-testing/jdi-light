@@ -27,17 +27,17 @@ import static org.testng.Assert.assertEquals;
 public class CardNavigationTests extends TestsInit {
 
     // Texts to check
-    String titleText = "SPECIAL TITLE TREATMENT";
-    String subtitleText = "With supporting text below as a natural lead-in to additional content.";
-    String buttonText = "Click Me!";
-    String activeLinkText = "Active";
-    String jdiLinkText = "JDI";
-    String disabledLinkText = "Disabled";
-    String activeLinkRef = "javascript: void()";
-    String jdiLinkRef = "https://github.com/jdi-testing/jdi-light";
-    String disabledLinkRef = "javascript: void()";
-    String jdiLinkPath = "/jdi-testing/jdi-light";
-    String activeLinkAlert = "Active Tab Clicked!";
+    private final String titleText = "SPECIAL TITLE TREATMENT";
+    private final String subtitleText = "With supporting text below as a natural lead-in to additional content.";
+    private final String buttonText = "Click Me!";
+    private final String activeLinkText = "Active";
+    private final String jdiLinkText = "JDI";
+    private final String disabledLinkText = "Disabled";
+    private final String activeLinkRef = "javascript: void()";
+    private final String jdiLinkRef = "https://github.com/jdi-testing/jdi-light";
+    private final String disabledLinkRef = "javascript: void()";
+    private final String jdiLinkPath = "/jdi-testing/jdi-light";
+    private final String activeLinkAlert = "Active Tab Clicked!";
 
     @BeforeMethod
     public void before() {
