@@ -87,6 +87,14 @@ public class BootstrapPage extends WebPage {
     @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
     @UI("#card-with-header-and-footer-quote") public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
     @UI("#card-with-header-and-footer") public static CardWithHeaderAndFooter cardWithHeaderAndFooter;
+    @UI("#card-bright-blue") public static CardWithHeaderAndFooter cardBrightBlue;
+    @UI("#card-grey") public static CardWithHeaderAndFooter cardGrey;
+    @UI("#card-green") public static CardWithHeaderAndFooter cardGreen;
+    @UI("#card-red") public static CardWithHeaderAndFooter cardRed;
+    @UI("#card-yellow") public static CardWithHeaderAndFooter cardYellow;
+    @UI("#card-blue") public static CardWithHeaderAndFooter cardBlue;
+    @UI("#card-light") public static CardWithHeaderAndFooter cardLight;
+    @UI("#card-dark") public static CardWithHeaderAndFooter cardDark;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
     @UI("#buttonToolbar1") public static ButtonToolbar buttonToolbar;
