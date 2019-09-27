@@ -122,6 +122,15 @@ public class BootstrapPage extends WebPage {
     @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
     @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
     @UI("#card-navigation") public static CardNavigation cardNavigation;
+    @UI("#list-group-basic-example") public static ListGroupBasicExample listGroupBasicExample;
+    @UI("#list-group-active-items") public static ListGroupActiveItems listGroupActiveItems;
+    @UI("#disabled-items") public static ListGroupDisabledItems listGroupDisabledItems;
+    @UI("#list-group-links") public static ListGroupLinks listGroupLinks;
+    @UI("#list-group-buttons") public static ListGroupButtons listGroupButtons;
+    @UI("#list-group-flush") public static ListGroupFlush listGroupFlush;
+    @UI("#list-group-horizontal") public static ListGroupHorizontal listGroupHorizontal;
+    @UI("#list-group-with-badges") public static ListGroupWithBadges listGroupWithBadges;
+    @UI("#list-group-custom-content") public static ListGroupCustomContent listGroupCustomContent;
     @UI("#radio-buttons") public static RadioButtonGroup radioButtonGroup;
     @UI(".card-group:nth-of-type(1)") public static CardGroup cardGroupWithoutFooter;
     @UI(".card-group:nth-of-type(2)") public static CardGroup cardGroupWithFooter;
