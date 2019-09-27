@@ -95,6 +95,7 @@ public class BootstrapPage extends WebPage {
     @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
     @UI("#card-custom-css-1") public static CardWithCustomCss13Rem cardWithCustomCss13Rem;
     @UI("#card-custom-css-2") public static CardWithCustomCss9Rem cardWithCustomCss9Rem;
+    @UI("#card-horizontal") public static CardHorizontal cardHorizontal;
     @UI("#custom-select-01") public static CustomSelect customSelect;
     @UI("#custom-select-button-01") public static CustomSelectWithButton customSelectWithButton;
     @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
