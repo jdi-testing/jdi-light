@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 
 public class ListGroupFlush extends Section {
 
-    @UI("li") public ListGroup listGroup;
+    @UI("li")
+    public ListGroup listGroup;
 
 }

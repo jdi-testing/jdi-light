@@ -55,7 +55,8 @@ public class LinksTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        listGroupLinks.listGroup.is().size(5);
+        listGroupLinks.listGroup.is()
+                .size(5);
         listGroupLinks.is()
                 .displayed()
                 .enabled()
@@ -75,7 +76,7 @@ public class LinksTests extends TestsInit {
                 .css("font-size", is("14px"));
     }
 
-    @Test (dataProvider = "clickValidate")
+    @Test(dataProvider = "clickValidate")
     public void linkClickableTests(int index, String pageTitle) {
         listGroupLinks.listGroup.get(index).highlight();
         listGroupLinks.listGroup.get(index).click();

@@ -1,7 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.listGroup;
 
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,7 +15,6 @@ import static org.hamcrest.CoreMatchers.is;
  * Created by Dmitrii Pavlov on 26.09.2019
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
-
 
 public class WithBadgesTests extends TestsInit {
 
@@ -39,11 +37,13 @@ public class WithBadgesTests extends TestsInit {
 
     @Test
     public void initTests() {
-        listGroupWithBadges.listGroup.is().size(3);
-        listGroupWithBadges.badge.is().size(3);
+        listGroupWithBadges.listGroup.is()
+                .size(3);
+        listGroupWithBadges.badge.is()
+                .size(3);
     }
 
-    @Test (dataProvider = "listData")
+    @Test(dataProvider = "listData")
     public void listGroupTests(int num, String text) {
         listGroupWithBadges.listGroup.get(num).is()
                 .text(containsString(text))

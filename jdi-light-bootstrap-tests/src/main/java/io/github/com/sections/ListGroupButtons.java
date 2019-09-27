@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 
 public class ListGroupButtons extends Section {
 
-    @UI("button") public ListGroup listGroup;
+    @UI("button")
+    public ListGroup listGroup;
 
 }

@@ -1,11 +1,9 @@
 package com.epam.jdi.light.ui.bootstrap.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
-import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.bootstrap.asserts.ListGroupAssert;
 
 /**
@@ -32,7 +30,8 @@ public class ListGroup extends UIListBase<ListGroupAssert> implements IsButton {
 
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
-        list().select(index - 1); }
+        list().select(index - 1);
+    }
 
     @Override
     public ListGroupAssert is() {

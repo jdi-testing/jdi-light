@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 
 public class ListGroupLinks extends Section {
 
-    @UI("a") public ListGroup listGroup;
+    @UI("a")
+    public ListGroup listGroup;
 
 }

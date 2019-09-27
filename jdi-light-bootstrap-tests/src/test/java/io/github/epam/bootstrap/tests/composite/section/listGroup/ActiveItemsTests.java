@@ -39,7 +39,8 @@ public class ActiveItemsTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        listGroupActiveItems.listGroup.is().size(5);
+        listGroupActiveItems.listGroup.is()
+                .size(5);
         listGroupActiveItems.is()
                 .displayed()
                 .enabled()
@@ -56,7 +57,7 @@ public class ActiveItemsTests extends TestsInit {
                 .css("font-size", is("14px"));
     }
 
-    @Test (dataProvider = "listData")
+    @Test(dataProvider = "listData")
     public void listGroupClassesIsValidationTests(int num, String text) {
         listGroupActiveItems.listGroup.get(num).is()
                 .displayed()

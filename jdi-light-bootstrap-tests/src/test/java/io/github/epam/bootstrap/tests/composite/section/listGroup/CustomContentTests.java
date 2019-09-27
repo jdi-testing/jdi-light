@@ -20,7 +20,6 @@ import static org.testng.Assert.assertEquals;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-
 public class CustomContentTests extends TestsInit {
 
     @BeforeMethod
@@ -64,46 +63,64 @@ public class CustomContentTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        listGroupCustomContent.listGroup.is().size(3);
-        listGroupCustomContent.container.is().size(3);
-        listGroupCustomContent.header.is().size(3);
-        listGroupCustomContent.dateText.is().size(3);
-        listGroupCustomContent.mainText.is().size(3);
-        listGroupCustomContent.footer.is().size(3);
+        listGroupCustomContent.listGroup.is()
+                .size(3);
+        listGroupCustomContent.container.is()
+                .size(3);
+        listGroupCustomContent.header.is()
+                .size(3);
+        listGroupCustomContent.dateText.is()
+                .size(3);
+        listGroupCustomContent.mainText.is()
+                .size(3);
+        listGroupCustomContent.footer.is()
+                .size(3);
     }
 
-    @Test (dataProvider = "listData")
+    @Test(dataProvider = "listData")
     public void mainContentTests(int index, String link, String header, String dateText, String mainText, String footer) {
         listGroupCustomContent.listGroup.get(index)
-                .is().core()
-                .displayed().enabled()
+                .is()
+                .core()
+                .displayed()
+                .enabled()
                 .hasClass("list-group-item list-group-item-action")
                 .attr("href", is(link));
         listGroupCustomContent.container.get(index)
-                .is().core()
-                .displayed().enabled()
+                .is()
+                .core()
+                .displayed()
+                .enabled()
                 .hasClass("d-flex w-100 justify-content-between");
         listGroupCustomContent.header.get(index)
-                .is().core()
-                .displayed().enabled()
+                .is()
+                .core()
+                .displayed()
+                .enabled()
                 .hasClass("mb-1")
                 .text(is(containsStringIgnoringCase(header)));
         listGroupCustomContent.dateText.get(index)
-                .is().core()
-                .displayed().enabled()
+                .is()
+                .core()
+                .displayed()
+                .enabled()
                 .text(is(dateText));
         listGroupCustomContent.mainText.get(index)
-                .is().core()
-                .displayed().enabled()
+                .is()
+                .core()
+                .displayed()
+                .enabled()
                 .hasClass("mb-1")
                 .text(is(mainText));
         listGroupCustomContent.footer.get(index)
-                .is().core()
-                .displayed().enabled()
+                .is()
+                .core()
+                .displayed()
+                .enabled()
                 .text(is(footer));
     }
 
-    @Test (dataProvider = "clickValidate")
+    @Test(dataProvider = "clickValidate")
     public void linkClickableTests(int index, String pageTitle) {
         listGroupCustomContent.listGroup.get(index).highlight();
         listGroupCustomContent.listGroup.get(index).click();

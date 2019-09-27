@@ -6,7 +6,9 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 
 public class ListGroupWithBadges extends Section {
 
-    @UI("li") public ListGroup listGroup;
-    @UI("li span") public ListGroup badge;
+    @UI("li")
+    public ListGroup listGroup;
+    @UI("li span")
+    public ListGroup badge;
 
 }

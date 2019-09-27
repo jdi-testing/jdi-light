@@ -47,7 +47,8 @@ public class Buttons extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        listGroupButtons.listGroup.is().size(5);
+        listGroupButtons.listGroup.is()
+                .size(5);
         listGroupButtons.is()
                 .displayed()
                 .enabled()
@@ -55,7 +56,8 @@ public class Buttons extends TestsInit {
                 .hasClass("list-group");
         listGroupButtons.listGroup.get(1).is()
                 .hasClass(listClass + " active");
-        listGroupButtons.listGroup.get(5).is().disabled();
+        listGroupButtons.listGroup.get(5).is()
+                .disabled();
     }
 
     @Test(dataProvider = "listData")
@@ -65,7 +67,7 @@ public class Buttons extends TestsInit {
                 .css("font-size", is("14px"));
     }
 
-    @Test (dataProvider = "clickValidate")
+    @Test(dataProvider = "clickValidate")
     public void buttonClickableTests(int index, String text) {
         listGroupButtons.listGroup.get(index).highlight();
         listGroupButtons.listGroup.get(index).click();
@@ -73,10 +75,9 @@ public class Buttons extends TestsInit {
         listGroupButtons.listGroup.get(index).unhighlight();
     }
 
-    @Test (dataProvider = "clickValidate")
+    @Test(dataProvider = "clickValidate")
     public void buttonTextClickableTests(int index, String text) {
         listGroupButtons.listGroup.select(text);
         validateAlert(is(text));
     }
-
 }

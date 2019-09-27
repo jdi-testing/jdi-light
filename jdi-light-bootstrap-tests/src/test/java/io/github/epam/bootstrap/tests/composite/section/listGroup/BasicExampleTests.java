@@ -37,15 +37,16 @@ public class BasicExampleTests extends TestsInit {
         };
     }
 
-    @Test (dataProvider = "listData")
+    @Test(dataProvider = "listData")
     public void listGroupTests(int num, String text) {
-        listGroupBasicExample.listGroup.is().size(5);
+        listGroupBasicExample.listGroup.is()
+                .size(5);
         listGroupBasicExample.listGroup.get(num).is()
                 .text(text)
                 .css("font-size", is("14px"));
     }
 
-    @Test (dataProvider = "listData")
+    @Test(dataProvider = "listData")
     public void listGroupIsValidationTests(int num, String text) {
         listGroupBasicExample.is()
                 .displayed()

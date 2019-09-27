@@ -15,7 +15,6 @@ import static org.hamcrest.Matchers.is;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-
 public class FlushTests extends TestsInit {
 
     @BeforeMethod
@@ -55,7 +54,7 @@ public class FlushTests extends TestsInit {
                 .css("font-size", is("14px"));
     }
 
-    @Test (dataProvider = "listData")
+    @Test(dataProvider = "listData")
     public void listGroupIsValidationTests(int num, String text) {
         listGroupFlush.listGroup.get(num).is()
                 .displayed()

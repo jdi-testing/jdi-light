@@ -15,7 +15,6 @@ import static org.hamcrest.Matchers.is;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-
 public class Horizontal extends TestsInit {
 
     @BeforeMethod
@@ -37,7 +36,8 @@ public class Horizontal extends TestsInit {
 
     @Test
     public void initTests() {
-        listGroupHorizontal.listGroup.is().size(3);
+        listGroupHorizontal.listGroup.is()
+                .size(3);
     }
 
     @Test(dataProvider = "listData")
@@ -46,5 +46,4 @@ public class Horizontal extends TestsInit {
                 .text(text)
                 .css("font-size", is("14px"));
     }
-
 }

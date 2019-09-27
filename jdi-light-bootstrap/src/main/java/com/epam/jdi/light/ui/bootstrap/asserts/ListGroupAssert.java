@@ -3,7 +3,6 @@ package com.epam.jdi.light.ui.bootstrap.asserts;
 import com.epam.jdi.light.asserts.generic.SelectedAssert;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
