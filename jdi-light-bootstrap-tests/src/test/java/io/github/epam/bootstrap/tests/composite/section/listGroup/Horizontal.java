@@ -17,15 +17,15 @@ import static org.hamcrest.Matchers.is;
 
 public class Horizontal extends TestsInit {
 
+    private String text1 = "Cras justo odio";
+    private String text2 = "Dapibus ac facilisis in";
+    private String text3 = "Morbi leo risus";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    String text1 = "Cras justo odio";
-    String text2 = "Dapibus ac facilisis in";
-    String text3 = "Morbi leo risus";
 
     @DataProvider
     public Object[][] listData() {

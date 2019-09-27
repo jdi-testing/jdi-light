@@ -22,22 +22,22 @@ import static org.testng.Assert.assertFalse;
 
 public class LinksTests extends TestsInit {
 
+    private String text1 = "JDI Docs";
+    private String text2 = "JDI - testing tool";
+    private String text3 = "JDI website";
+    private String text4 = "Bootstrap";
+    private String text5 = "JDI Docs";
+    private String listClass = "list-group-item list-group-item-action";
+    private String pageTitle1 = "JDI · GitHub";
+    private String pageTitle2 = "JDI Testing tools · GitHub";
+    private String pageTitle3 = "Home Page";
+    private String pageTitle4 = "List group · Bootstrap";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    String text1 = "JDI Docs";
-    String text2 = "JDI - testing tool";
-    String text3 = "JDI website";
-    String text4 = "Bootstrap";
-    String text5 = "JDI Docs";
-    String listClass = "list-group-item list-group-item-action";
-    String pageTitle1 = "JDI · GitHub";
-    String pageTitle2 = "JDI Testing tools · GitHub";
-    String pageTitle3 = "Home Page";
-    String pageTitle4 = "List group · Bootstrap";
 
     @DataProvider
     public Object[][] listData() {
@@ -84,7 +84,7 @@ public class LinksTests extends TestsInit {
         listGroupLinks.listGroup.get(index).unhighlight();
     }
 
-    public void newWindowTitleCheck(String pageTitle) {
+    private void newWindowTitleCheck(String pageTitle) {
         switchToNewWindow();
         assertEquals(getTitle(), pageTitle);
         closeWindow();

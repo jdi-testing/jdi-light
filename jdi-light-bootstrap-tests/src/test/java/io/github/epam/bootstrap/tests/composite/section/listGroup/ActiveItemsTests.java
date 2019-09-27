@@ -17,18 +17,18 @@ import static org.hamcrest.Matchers.is;
 
 public class ActiveItemsTests extends TestsInit {
 
+    private String text1 = "Cras justo odio";
+    private String text2 = "Dapibus ac facilisis in";
+    private String text3 = "Morbi leo risus";
+    private String text4 = "Porta ac consectetur ac";
+    private String text5 = "Vestibulum at eros";
+    private String listClass = "list-group-item";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    String text1 = "Cras justo odio";
-    String text2 = "Dapibus ac facilisis in";
-    String text3 = "Morbi leo risus";
-    String text4 = "Porta ac consectetur ac";
-    String text5 = "Vestibulum at eros";
-    String listClass = "list-group-item";
 
     @DataProvider
     public Object[][] listData() {

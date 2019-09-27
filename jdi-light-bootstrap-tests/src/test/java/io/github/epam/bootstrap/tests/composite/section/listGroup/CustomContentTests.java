@@ -22,28 +22,28 @@ import static org.testng.Assert.assertEquals;
 
 public class CustomContentTests extends TestsInit {
 
+    private String link1 = "https://jdi-testing.github.io/jdi-light/index.html";
+    private String link2 = "https://github.com/jdi-testing";
+    private String link3 = "https://github.com/jdi-docs";
+    private String header1 = "List group item heading one";
+    private String header2 = "List group item heading two";
+    private String header3 = "List group item heading three";
+    private String dateText = "3 days ago";
+    private String mainText1 = "Some simple text for first section of custom list group.";
+    private String mainText2 = "Some simple text for second section of custom list group.";
+    private String mainText3 = "Some simple text for third section of custom list group.";
+    private String footer1 = "JDI website";
+    private String footer2 = "JDI - testing tool";
+    private String footer3 = "JDI Docs";
+    private String pageTitle1 = "Home Page";
+    private String pageTitle2 = "JDI Testing tools · GitHub";
+    private String pageTitle3 = "JDI · GitHub";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    String link1 = "https://jdi-testing.github.io/jdi-light/index.html";
-    String link2 = "https://github.com/jdi-testing";
-    String link3 = "https://github.com/jdi-docs";
-    String header1 = "List group item heading one";
-    String header2 = "List group item heading two";
-    String header3 = "List group item heading three";
-    String dateText = "3 days ago";
-    String mainText1 = "Some simple text for first section of custom list group.";
-    String mainText2 = "Some simple text for second section of custom list group.";
-    String mainText3 = "Some simple text for third section of custom list group.";
-    String footer1 = "JDI website";
-    String footer2 = "JDI - testing tool";
-    String footer3 = "JDI Docs";
-    String pageTitle1 = "Home Page";
-    String pageTitle2 = "JDI Testing tools · GitHub";
-    String pageTitle3 = "JDI · GitHub";
 
     @DataProvider
     public Object[][] listData() {
@@ -128,7 +128,7 @@ public class CustomContentTests extends TestsInit {
         listGroupCustomContent.listGroup.get(index).unhighlight();
     }
 
-    public void newWindowTitleCheck(String pageTitle) {
+    private void newWindowTitleCheck(String pageTitle) {
         switchToNewWindow();
         assertEquals(getTitle(), pageTitle);
         closeWindow();
