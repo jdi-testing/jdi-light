@@ -11,5 +11,5 @@ public class CustomFileInputWithButton extends Section {
 
     @UI(".btn.btn-outline-secondary") public Button button;
     @UI(".custom-file-input")public FileInput input;
-    @UI(".custom-file-label") public UIElement label;
+    @UI(".custom-file-label") public Label label;
 }

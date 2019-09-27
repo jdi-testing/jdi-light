@@ -25,7 +25,7 @@ public class InputGroupCustomFileInputWithButtonTests extends TestsInit {
     public final static String INPUT_TEXT_DEFAULT = "Choose file";
     public final static String INPUT_TEXT = "general.xml";
     public final static String FILE_NAME = "/src/test/resources/general.xml";
-    public final static String buttonClickAlert = "Button clicked, thank you!";
+    public final static String ALERT_TEXT = "Button clicked, thank you!";
 
     @BeforeMethod
     public void before() {
@@ -54,9 +54,9 @@ public class InputGroupCustomFileInputWithButtonTests extends TestsInit {
     @Test
     public void uploadTest() {
         customFileInputWithButtonPrepend.click();
-        customFileInputWithButtonPrepend.input.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
+        customFileInputWithButtonPrepend.input.setValue(mergePath(PROJECT_PATH,FILE_NAME));
         customFileInputWithButtonAppend.click();
-        customFileInputWithButtonAppend.input.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
+        customFileInputWithButtonAppend.input.setValue(mergePath(PROJECT_PATH,FILE_NAME));
 
         customFileInputWithButtonPrepend.label.is().text(INPUT_TEXT);
         customFileInputWithButtonPrepend.label.is().value(INPUT_TEXT);
@@ -70,7 +70,7 @@ public class InputGroupCustomFileInputWithButtonTests extends TestsInit {
         customFileInputWithButtonPrepend.button.is().displayed();
         customFileInputWithButtonPrepend.button.is().enabled();
         customFileInputWithButtonPrepend.button.click();
-        validateAlert(is(buttonClickAlert));
+        validateAlert(is(ALERT_TEXT));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class InputGroupCustomFileInputWithButtonTests extends TestsInit {
         customFileInputWithButtonAppend.button.is().displayed();
         customFileInputWithButtonAppend.button.is().enabled();
         customFileInputWithButtonAppend.button.click();
-        validateAlert(is(buttonClickAlert));
+        validateAlert(is(ALERT_TEXT));
     }
 
     @Test
