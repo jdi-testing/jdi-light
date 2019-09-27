@@ -1,13 +1,9 @@
 package io.github.epam.bootstrap.tests.composite.section.card;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.common.WindowsManager;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
@@ -27,7 +23,6 @@ import static org.testng.Assert.assertEquals;
 
 public class CardNavigationTests extends TestsInit {
 
-    // Texts to check
     private final String titleText = "SPECIAL TITLE TREATMENT";
     private final String subtitleText = "With supporting text below as a natural lead-in to additional content.";
     private final String buttonText = "Click Me!";
