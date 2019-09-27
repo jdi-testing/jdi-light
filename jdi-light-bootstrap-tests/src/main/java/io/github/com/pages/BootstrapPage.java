@@ -113,5 +113,7 @@ public class BootstrapPage extends WebPage {
     @UI("#card-navigation") public static CardNavigation cardNavigation;
     @UI(".card-group:nth-of-type(1)") public static CardGroup cardGroupWithoutFooter;
     @UI(".card-group:nth-of-type(2)") public static CardGroup cardGroupWithFooter;
+    @UI(".card-deck:nth-of-type(1)") public static CardDeck cardDeckWithoutFooter;
+    @UI(".card-deck:nth-of-type(2)") public static CardDeck cardDeckWithFooter;
     //endregion
 }
