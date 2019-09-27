@@ -131,6 +131,7 @@ public class BootstrapPage extends WebPage {
     @UI("#list-group-horizontal") public static ListGroupHorizontal listGroupHorizontal;
     @UI("#list-group-with-badges") public static ListGroupWithBadges listGroupWithBadges;
     @UI("#list-group-custom-content") public static ListGroupCustomContent listGroupCustomContent;
+    @UI("#radio-buttons") public static RadioButtonGroup radioButtonGroup;
     @UI(".card-group:nth-of-type(1)") public static CardGroup cardGroupWithoutFooter;
     @UI(".card-group:nth-of-type(2)") public static CardGroup cardGroupWithFooter;
     @UI("#pagination-overview") public static PaginationOverview paginationOverview;
