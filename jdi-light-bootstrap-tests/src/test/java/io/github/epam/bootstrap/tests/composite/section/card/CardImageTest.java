@@ -38,10 +38,8 @@ public class CardImageTest extends TestsInit {
 
     @Test
     public void availabilityest() {
-        cardImage.text.is().enabled();
-        cardImage.text.is().displayed();
-        cardImage.image.is().enabled();
-        cardImage.image.is().displayed();
+        cardImage.text.is().enabled().displayed();
+        cardImage.image.is().enabled().displayed();
     }
 
     @Test
