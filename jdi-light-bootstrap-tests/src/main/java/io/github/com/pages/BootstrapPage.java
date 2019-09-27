@@ -103,7 +103,7 @@ public class BootstrapPage extends WebPage {
     @UI("#list-group-links") public static ListGroupLinks listGroupLinks;
     @UI("#list-group-buttons") public static ListGroupButtons listGroupButtons;
     @UI("#list-group-flush") public static ListGroupFlush listGroupFlush;
-    @UI("#") public static ListGroupHorizontal listGroupHorizontal;
+    @UI("#list-group-horizontal") public static ListGroupHorizontal listGroupHorizontal;
     @UI("#list-group-with-badges") public static ListGroupWithBadges listGroupWithBadges;
     @UI("#list-group-custom-content") public static ListGroupCustomContent listGroupCustomContent;
     //endregion
