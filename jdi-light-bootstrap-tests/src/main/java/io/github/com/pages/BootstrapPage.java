@@ -83,6 +83,7 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-small") public static InputGroupSizing inputGroupSmallSizing;
     @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
     @UI("#card-example") public static CardExample cardExample;
+    @UI("#card-image") public static CardImage cardImage;
     @UI("#card-body") public static CardBody cardBody;
     @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
     @UI("#card-with-header-and-footer-quote") public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
@@ -95,6 +96,7 @@ public class BootstrapPage extends WebPage {
     @UI("#card-custom-css-1") public static CardWithCustomCss13Rem cardWithCustomCss13Rem;
     @UI("#card-custom-css-2") public static CardWithCustomCss9Rem cardWithCustomCss9Rem;
     @UI("#card-mixins-utilities") public static CardMixinsUtilities cardMixinsUtilities;
+    @UI("#card-horizontal") public static CardHorizontal cardHorizontal;
     @UI("#custom-select-01") public static CustomSelect customSelect;
     @UI("#custom-select-button-01") public static CustomSelectWithButton customSelectWithButton;
     @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
