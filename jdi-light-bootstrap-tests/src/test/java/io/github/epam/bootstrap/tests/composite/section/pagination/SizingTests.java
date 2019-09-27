@@ -19,15 +19,15 @@ import static org.hamcrest.CoreMatchers.is;
 
 public class SizingTests extends TestsInit {
 
+    private String one = "1";
+    private String two = "2";
+    private String three = "3";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    String one = "1";
-    String two = "2";
-    String three = "3";
 
     @DataProvider
     public Object[][] listData() {

@@ -21,22 +21,22 @@ import static org.testng.Assert.assertEquals;
 
 public class OverviewTests extends TestsInit {
 
+    private String prev = "Previous";
+    private String one = "1";
+    private String two = "2";
+    private String three = "3";
+    private String next = "Next";
+    private String pageTitle1 = "JDI · GitHub";
+    private String pageTitle2 = "JDI Testing tools · GitHub";
+    private String pageTitle3 = "Home Page";
+    private String pageTitle4 = "Bootstrap · The most popular HTML, CSS, and JS library in the world.";
+    private String pageTitle5 = "JDI Light Framework – API Reference";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    String prev = "Previous";
-    String one = "1";
-    String two = "2";
-    String three = "3";
-    String next = "Next";
-    String pageTitle1 = "JDI · GitHub";
-    String pageTitle2 = "JDI Testing tools · GitHub";
-    String pageTitle3 = "Home Page";
-    String pageTitle4 = "Bootstrap · The most popular HTML, CSS, and JS library in the world.";
-    String pageTitle5 = "JDI Light Framework – API Reference";
 
     @DataProvider
     public Object[][] listData() {
@@ -80,7 +80,7 @@ public class OverviewTests extends TestsInit {
         paginationOverview.paginationItems.get(index).unhighlight();
     }
 
-    public void newWindowTitleCheck(String pageTitle) {
+    private void newWindowTitleCheck(String pageTitle) {
         switchToNewWindow();
         assertEquals(getTitle(), pageTitle);
         closeWindow();
