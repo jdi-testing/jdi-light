@@ -1,6 +1,6 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.ui.html.elements.complex.Checklist;
+import com.epam.jdi.light.elements.complex.Checklist;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 

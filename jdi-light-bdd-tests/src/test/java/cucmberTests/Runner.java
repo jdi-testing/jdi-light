@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.light.ui.html.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.loginForm;

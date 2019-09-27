@@ -325,7 +325,7 @@ public class UIElement extends JDIBase
 
     public Select asSelect() {
         WebElement select = getWebElement();
-        if (!select.getTagName().equals("select")) {
+        if (!getTagName().equals("select")) {
             List<WebElement> els = select.findElements(By.tagName("select"));
             if (els.size() > 0)
                 select = els.get(0);
@@ -392,7 +392,7 @@ public class UIElement extends JDIBase
     public List<String> classes() {
         String cl = attr("class");
         return cl.length() > 0
-            ? asList(attr("class").split(" "))
+            ? asList(cl.split(" "))
             : new ArrayList<>();
     }
 
@@ -506,7 +506,6 @@ public class UIElement extends JDIBase
             click();
     }
 
-
     /** Click on element selected */
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
@@ -603,13 +602,15 @@ public class UIElement extends JDIBase
     protected boolean selected() {
         if (getWebElement().isSelected())
             return true;
-        List<String> cl = classes();
-        return cl.contains("checked") || cl.contains("active")||
-            cl.contains("selected") || getAttribute("checked").equals("true");
+        return hasClass("checked") || hasClass("active")||
+                hasClass("selected") || attr("checked").equals("true");
     }
     protected boolean enabled() {
-        List<String> cls = classes();
-        return cls.contains("active") || !hasAttribute("disabled") || getWebElement().isEnabled() && !cls.contains("disabled");
+        if (hasClass("active"))
+            return true;
+        if (hasClass("disabled") || hasAttribute("disabled"))
+            return false;
+        return getWebElement().isEnabled();
     }
     protected boolean displayed() {
         try {

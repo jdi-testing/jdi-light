@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.ui.html.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 
 public class HomePage {
     public HomePage() {

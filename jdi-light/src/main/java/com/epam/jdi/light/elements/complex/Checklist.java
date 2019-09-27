@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.html.elements.complex;
+package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.complex.ChecklistAssert;
 import com.epam.jdi.light.common.JDIAction;

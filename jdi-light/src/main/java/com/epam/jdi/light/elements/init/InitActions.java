@@ -2,10 +2,7 @@ package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.JList;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -14,6 +11,8 @@ import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
+import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
@@ -64,7 +63,9 @@ public class InitActions {
 
     public static MapArray<Class<?>, Class<?>> INTERFACES = map(
         $(WebElement.class, UIElement.class),
-        $(IsDropdown.class, Dropdown.class)
+        $(IsDropdown.class, Dropdown.class),
+        $(IsCombobox.class, Combobox.class),
+        $(IsChecklist.class, Checklist.class)
     );
     public static MapArray<String, InitRule> INIT_RULES = map(
         $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList())),

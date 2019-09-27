@@ -23,8 +23,8 @@ public class DataListOptions extends UIListBase<UISelectAssert> implements IsCom
     @Override
     public WebList list() {
         return $$("#"+ uiElement.attr("list")+" option")
-                .setup(e->e.noValidation().setName(getName() + "list"))
-                .setUIElementName(VALUE);
+            .setup(e->e.noValidation().setName(getName() + "list"))
+            .setUIElementName(VALUE);
     }
     /**
     *

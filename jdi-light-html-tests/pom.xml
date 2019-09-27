@@ -83,7 +83,6 @@
                 <version>${allure.maven}</version>
             </plugin>
 
-
             <!-- From general pom -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
