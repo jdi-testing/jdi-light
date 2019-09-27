@@ -20,8 +20,14 @@
     <script src="js/lib/popper.min.js"></script>
     <script src="jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
     <script src="bootstrap/js/bootstrap-4.3.min.js"></script>
+	<script src="js/lib/bs-custom-file-input.min.js"></script>
     <script src="js/uui-core.min.js" type="text/javascript"></script>
     <script src="js/utils.js" type="text/javascript"></script>
+	<script>
+        $(document).ready(function () {
+           bsCustomFileInput.init()
+        })
+    </script>
 </head>
 <body>
 <header>
@@ -47,91 +53,12 @@
 						</div>
 						<div class="html-right">
 							<h4>Button</h4>
-							<p>
-								Bootstrap: <a
+							<p>Bootstrap: <a
 									href="https://getbootstrap.com/docs/4.3/components/buttons/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/buttons/</a>
 							</p>
 						</div>
 					</div>
-					<br>&nbsp;
-
-					<div class="doc-space line">
-						<div class="html-left">
-							<div class="btn-group" id="button-group1" role="group"
-								aria-label="Button group with nested dropdown">
-								<button type="button" class="btn btn-danger"
-									onclick="alert('Red button');">Red button</button>
-								<button type="button" class="btn btn-success"
-									onclick="alert('Green button');">Green button</button>
-
-								<div class="btn-group" role="group">
-									<button id="btnGroupDrop1" type="button"
-										class="btn btn-secondary dropdown-toggle"
-										data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">Dropdown</button>
-									<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-										<a class="dropdown-item" href="https://github.com/jdi-testing" target="_blank">JDI</a>
-										<a class="dropdown-item"
-											href="https://jdi-docs.github.io/jdi-light/#jdi-light-framework" target="_blank">JDI documentation</a>
-									</div>
-								</div>
-							</div>
-							<hr>
-							<div class="btn-group-vertical" id="button-group11" role="group"
-								 aria-label="Button group with nested dropdown">
-								<button type="button" class="btn btn-danger"
-										onclick="alert('Red button');">Red button</button>
-								<button type="button" class="btn btn-success"
-										onclick="alert('Green button');">Green button</button>
-
-								<div class="btn-group" role="group">
-									<button id="btnGroupDrop2" type="button"
-											class="btn btn-secondary dropdown-toggle"
-											data-toggle="dropdown" aria-haspopup="true"
-											aria-expanded="false">Dropdown</button>
-									<div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
-										<a class="dropdown-item" href="https://github.com/jdi-testing" target="_blank">JDI</a>
-										<a class="dropdown-item"
-										   href="https://jdi-docs.github.io/jdi-light/#jdi-light-framework" target="_blank">JDI documentation</a>
-									</div>
-								</div>
-							</div>
-							<hr>
-							<div class="btn-group btn-group-lg" id="button-group2" role="group" aria-label="Button group large">
-								<button type="button" class="btn btn-info" ondblclick="alert('Double click');" oncontextmenu="alert('Context Click'); return false;">On Action</button>
-								<button type="button" class="btn btn-primary" disabled="">Disabled</button>
-							</div>
-							<hr>
-							<div class="btn-group btn-group-sm" id="button-group3" role="group" aria-label="Button group small">
-								<button type="button" class="btn btn-info" ondblclick="alert('Double click');" oncontextmenu="alert('Context Click'); return false;">On Action</button>
-								<button type="button" class="btn btn-primary" disabled="">Disabled</button>
-							</div>
-							<hr>
-							<div class="btn-toolbar mb-3" id="button-group4" role="toolbar" aria-label="Toolbar with button groups">
-								<div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
-									<button type="button" class="btn btn-secondary">1</button>
-									<button type="button" class="btn btn-secondary">2</button>
-								</div>
-								<div class="input-group input-group-sm">
-									<div class="input-group-prepend">
-										<div class="input-group-text" id="btnGroupAddon1">@</div>
-									</div>
-									<input type="text" class="form-control" placeholder="Input" aria-label="Input" aria-describedby="btnGroupAddon1">
-								</div>
-							</div>
-						</div>
-						<div class="html-right">
-							<h4>Button group</h4>
-							<p>
-								Bootstrap: <a
-									href="https://getbootstrap.com/docs/4.3/components/button-group/"
-									target="_blank">https://getbootstrap.com/docs/4.3/components/button-group/</a>
-							</p>
-						</div>
-					</div>
-
-
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -375,7 +302,7 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
-							<nav>
+							<nav id="navs">
 								<div class="nav nav-tabs" id="nav-tab" role="tablist">
 									<a class="nav-item nav-link active" id="nav-home-tab"
 									   data-toggle="tab" href="#nav-base" role="tab"
@@ -387,55 +314,55 @@
 									   data-toggle="tab" href="#nav-other" role="tab"
 									   aria-controls="nav-contact" aria-selected="false">Other</a>
 								</div>
-							</nav>
-							<div class="tab-content" id="nav-tabContent">
 
-								<div class="tab-pane fade show active" id="nav-base"
-									 role="tabpanel" aria-labelledby="nav-home-tab">
-									<nav class="nav">
-										<a class="nav-link active"
-										   href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
-										   target="_blank">Bootstrap</a>
-										<a class="nav-link"
-										   href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home</a>
-										<a class="nav-link disabled"
-										   href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank"
-										   tabindex="-1" aria-disabled="true">Disabled</a>
-									</nav>
-								</div>
+								<div class="tab-content" id="nav-tabContent">
 
-								<div class="tab-pane fade" id="nav-vertical-pills" role="tabpanel"
-									 aria-labelledby="nav-profile-tab">
-									<ul class="nav nav-pills flex-column">
-										<li class="nav-item"><a class="nav-link active"
-																href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
-																target="_blank">Bootstrap</a>
-										</li>
-										<li class="nav-item"><a class="nav-link"
-																href="https://jdi-testing.github.io/jdi-light/html5.html"
-																target="_blank">HTML
-											5</a></li>
-										<li class="nav-item"><a class="nav-link"
-																href="https://jdi-testing.github.io/jdi-light/index.html"
-																target="_blank">Home</a>
-										</li>
-										<li class="nav-item"><a class="nav-link disabled"
-																href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
-																tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
-										</li>
-									</ul>
-								</div>
+									<div class="tab-pane fade show active" id="nav-base"
+										 role="tabpanel" aria-labelledby="nav-home-tab">
+										<nav class="nav">
+											<a class="nav-link active"
+											   href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
+											   target="_blank">Bootstrap</a>
+											<a class="nav-link"
+											   href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home</a>
+											<a class="nav-link disabled"
+											   href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank"
+											   tabindex="-1" aria-disabled="true">Disabled</a>
+										</nav>
+									</div>
 
-								<div class="tab-pane fade" id="nav-other" role="tabpanel"
-									 aria-labelledby="nav-contact-tab">
-									Classes are used throughout, so your markup can be super flexible. Use &lt;ul&gt;s like above, &lt;ol&gt; if the order of your items is important, or roll your own with a &lt;nav&gt; element.
-									<br><br>
-									<center><b>Horizontal alignment</b></center><br>
-									- Centered with .justify-content-center<br>
-									- Right-aligned with .justify-content-end<br><br>
-									<center><b>Fill and justify</b></center><br>
-									Force your .nav’s contents to extend the full available width one of two modifier classes. To proportionately fill all available space with your .nav-items, use .nav-fill.<br><br>
-									<center><b>Using dropdowns:</b></center><br>
+									<div class="tab-pane fade" id="nav-vertical-pills" role="tabpanel"
+										 aria-labelledby="nav-profile-tab">
+										<ul class="nav nav-pills flex-column">
+											<li class="nav-item"><a class="nav-link active"
+																	href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
+																	target="_blank">Bootstrap</a>
+											</li>
+											<li class="nav-item"><a class="nav-link"
+																	href="https://jdi-testing.github.io/jdi-light/html5.html"
+																	target="_blank">HTML
+												5</a></li>
+											<li class="nav-item"><a class="nav-link"
+																	href="https://jdi-testing.github.io/jdi-light/index.html"
+																	target="_blank">Home</a>
+											</li>
+											<li class="nav-item"><a class="nav-link disabled"
+																	href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
+																	tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+											</li>
+										</ul>
+									</div>
+
+									<div class="tab-pane fade" id="nav-other" role="tabpanel"
+										 aria-labelledby="nav-contact-tab">
+										Classes are used throughout, so your markup can be super flexible. Use &lt;ul&gt;s like above, &lt;ol&gt; if the order of your items is important, or roll your own with a &lt;nav&gt; element.
+										<br><br>
+										<center><b>Horizontal alignment</b></center><br>
+										- Centered with .justify-content-center<br>
+										- Right-aligned with .justify-content-end<br><br>
+										<center><b>Fill and justify</b></center><br>
+										Force your .nav’s contents to extend the full available width one of two modifier classes. To proportionately fill all available space with your .nav-items, use .nav-fill.<br><br>
+										<center><b>Using dropdowns:</b></center><br>
 										<ul class="nav nav-tabs">
 											<li class="nav-item">
 												<a class="nav-link active" href="https://getbootstrap.com/docs/4.3/components/navs/"
@@ -463,8 +390,9 @@
 										</ul>
 										<br><br>
 
+									</div>
 								</div>
-							</div>
+							</nav>
 						</div>
 						<div class="html-right">
 							<h4>Navs</h4>
@@ -951,70 +879,153 @@
 					<div class="doc-space line">
 						<div class="html-left">
 
-							<p>active states</p>
-
-							<nav aria-label="...">
-								<ul class="pagination pagination-sm">
-									<li class="page-item active" aria-current="page">
-     									 <span class="page-link">1
-											 <span class="sr-only">(current)</span>
-										 </span>
-									</li>
+							<nav aria-label="Page navigation example">
+								<ul class="pagination" id="pagination-overview">
+									<li class="page-item"><a class="page-link" href="https://github.com/jdi-docs" target="_blank">Previous</a></li>
+									<li class="page-item"><a class="page-link" href="https://github.com/jdi-testing" target="_blank">1</a></li>
 									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">2</a></li>
-									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/html5.html" target="_blank">3</a></li>
+									<li class="page-item"><a class="page-link" href="https://getbootstrap.com" target="_blank">3</a></li>
+									<li class="page-item"><a class="page-link" href="https://jdi-docs.github.io/jdi-light/" target="_blank">Next</a></li>
 								</ul>
 							</nav>
+						</div>
+						<div class="html-right">
+							<h4>Pagination - Overview</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/pagination/#overview"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/pagination/#overview</a>
+							</p>
+						</div>
+					</div>
 
-							<p>previous|next</p>
-
+					<div class="doc-space line">
+						<div class="html-left">
 							<nav aria-label="Page navigation example">
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Previous</a></li>
-									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">1</a></li>
-									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/html5.html" target="_blank">2</a></li>
-									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/bootstrap.html" target="_blank">3</a></li>
-									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Next</a></li>
-								</ul>
-							</nav>
-
-							<p>icons</p>
-
-							<nav aria-label="Page navigation example">
-								<ul class="pagination">
+								<ul class="pagination" id="pagination-icons">
 									<li class="page-item">
-										<a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" aria-label="Previous" target="_blank">
+										<a class="page-link" href="https://github.com/jdi-docs" target="_blank" aria-label="Previous">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
-									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">1</a></li>
-									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/html5.html" target="_blank">2</a></li>
-									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/bootstrap.html" target="_blank">3</a></li>
+									<li class="page-item"><a class="page-link" href="https://github.com/jdi-testing" target="_blank">1</a></li>
+									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">2</a></li>
+									<li class="page-item"><a class="page-link" href="https://getbootstrap.com" target="_blank">3</a></li>
 									<li class="page-item">
-										<a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" aria-label="Next" target="_blank">
+										<a class="page-link" href="https://jdi-docs.github.io/jdi-light/" target="_blank" aria-label="Next">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>
 								</ul>
 							</nav>
+						</div>
+						<div class="html-right">
+							<h4>Pagination - Working with icons</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/pagination/#working-with-icons"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/pagination/#working-with-icons</a>
+							</p>
+						</div>
+					</div>
+					<div class="doc-space line">
 
-							<p>disabled</p>
+					<div class="html-left">
+						<nav aria-label="disabled-and-active-states">
+							<ul class="pagination" id="pagination-states">
+								<li class="page-item disabled">
+									<a class="page-link" href="https://github.com/jdi-docs" target="_blank" tabindex="-1" aria-disabled="true">Previous</a>
+								</li>
+								<li class="page-item"><a class="page-link" href="https://github.com/jdi-testing" target="_blank">1</a></li>
+								<li class="page-item active" aria-current="page">
+									<a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">2 <span class="sr-only">(current)</span></a>
+								</li>
+								<li class="page-item"><a class="page-link" href="https://getbootstrap.com" target="_blank">3</a></li>
+								<li class="page-item">
+									<a class="page-link" href="https://jdi-docs.github.io/jdi-light/" target="_blank">Next</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<div class="html-right">
+						<h4>Pagination - Disabled and active states</h4>
+						<p>
+							Bootstrap: <a
+								href="https://getbootstrap.com/docs/4.3/components/pagination/#disabled-and-active-states"
+								target="_blank">https://getbootstrap.com/docs/4.3/components/pagination/#disabled-and-active-states</a>
+						</p>
+					</div>
+				</div>
 
-							<nav aria-label="...">
-								<ul class="pagination">
-									<li class="page-item disabled"> <a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" tabindex="-1" aria-disabled="true" target="_blank">Previous</a> </li>
-									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">1</a></li>
-									<li class="page-item"> <a class="page-link" href="https://jdi-testing.github.io/jdi-light/bootstrap.html" target="_blank">2</a></li>
-									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/html5.html" target="_blank">3</a></li>
-									<li class="page-item"> <a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html"  target="_blank">Next</a> </li>
+					<div class="doc-space line">
+
+						<div class="html-left">
+							<nav aria-label="sizing-big">
+								<ul class="pagination pagination-lg" id="pagination-big">
+									<li class="page-item active" aria-current="page">
+      									<span class="page-link">1<span class="sr-only">(current)</span></span>
+									</li>
+									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">2</a></li>
+									<li class="page-item"><a class="page-link" href="https://getbootstrap.com" target="_blank">3</a></li>
+								</ul>
+							</nav>
+
+							<nav aria-label="sizing-small">
+								<ul class="pagination pagination-sm" id="pagination-small">
+									<li class="page-item active" aria-current="page">
+										<span class="page-link">1<span class="sr-only">(current)</span></span>
+									</li>
+									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">2</a></li>
+									<li class="page-item"><a class="page-link" href="https://getbootstrap.com" target="_blank">3</a></li>
 								</ul>
 							</nav>
 						</div>
 						<div class="html-right">
-							<h4>Pagination</h4>
+							<h4>Pagination - Sizing</h4>
 							<p>
 								Bootstrap: <a
-									href="https://getbootstrap.com/docs/4.3/components/pagination/"
-									target="_blank">https://getbootstrap.com/docs/4.3/components/pagination/</a>
+									href="https://getbootstrap.com/docs/4.3/components/pagination/#sizing"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/pagination/#sizing</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+
+						<div class="html-left">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center" id="pagination-center">
+									<li class="page-item disabled">
+										<a class="page-link" href="https://github.com/jdi-docs" target="_blank" tabindex="-1" aria-disabled="true">Previous</a>
+									</li>
+									<li class="page-item"><a class="page-link" href="https://github.com/jdi-testing" target="_blank">1</a></li>
+									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">2</a></li>
+									<li class="page-item"><a class="page-link" href="https://getbootstrap.com" target="_blank">3</a></li>
+									<li class="page-item">
+										<a class="page-link" href="https://jdi-docs.github.io/jdi-light/" target="_blank">Next</a>
+									</li>
+								</ul>
+							</nav>
+							<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-end" id="pagination-end">
+									<li class="page-item disabled">
+										<a class="page-link" href="https://github.com/jdi-docs" target="_blank" tabindex="-1" aria-disabled="true">Previous</a>
+									</li>
+									<li class="page-item"><a class="page-link" href="https://github.com/jdi-testing" target="_blank">1</a></li>
+									<li class="page-item"><a class="page-link" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">2</a></li>
+									<li class="page-item"><a class="page-link" href="https://getbootstrap.com" target="_blank">3</a></li>
+									<li class="page-item">
+										<a class="page-link" href="https://jdi-docs.github.io/jdi-light/" target="_blank">Next</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+						<div class="html-right">
+							<h4>Pagination - Alignment</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/pagination/#alignment"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/pagination/#alignment</a>
 							</p>
 						</div>
 					</div>
@@ -1717,7 +1728,7 @@
 						<div class="input-group" id="input-group-radio">
 							<div class="input-group-prepend">
 								<div class="input-group-text">
-									<input type="radio" name="radio-button" aria-label="Radio button for following text input">
+									<input type="radio" name="radio-button" id="radio-button" aria-label="Radio button for following text input">
 								</div>
 							</div>
 							<input type="text" class="form-control" aria-label="Text input with radio button">
@@ -2212,6 +2223,22 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
+							<div class="card mb-3" id="card-image" style="width: 18rem;">
+								<img style="width: 30%; margin: 0 auto;" id="bs-card-image" src="https://jdi-testing.github.io/jdi-light/images/wolverin.jpg" class="card-img-top" alt="image">
+								<div class="card-body">
+									<p class="card-text">Some quick example text.</p>
+								</div>
+							</div>
+						</div>
+						<div class="html-right">
+							<h4>Card Images</h4>
+							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/card/#images" target="_blank">https://getbootstrap.com/docs/4.3/components/card/#images</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
 							<div class="card" id="card-body">
 								<div class="card-body">
 									This is some text within a card body.
@@ -2358,42 +2385,44 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
-							<div class="row mb-3">
-								<div class="col-sm-6">
-									<div class="card">
-										<div class="card-body">
-											<h5 class="card-title">Title</h5>
-											<p class="card-text">1st row 1st cell</p>
-											<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
+							<div id="card-with-grid-markup">
+								<div class="row mb-3">
+									<div class="col-sm-6">
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title">Title</h5>
+												<p class="card-text">1st row 1st cell</p>
+												<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title">Title</h5>
+												<p class="card-text">1st row 2nd cell</p>
+												<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
+											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col-sm-6">
-									<div class="card">
-										<div class="card-body">
-											<h5 class="card-title">Title</h5>
-											<p class="card-text">1st row 2nd cell</p>
-											<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
+								<div class="row mb-3">
+									<div class="col-sm-6">
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title">Title</h5>
+												<p class="card-text">2nd row 1st cell</p>
+												<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
+											</div>
 										</div>
 									</div>
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-6">
-									<div class="card">
-										<div class="card-body">
-											<h5 class="card-title">Title</h5>
-											<p class="card-text">2nd row 1st cell</p>
-											<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="card">
-										<div class="card-body">
-											<h5 class="card-title">Title</h5>
-											<p class="card-text">2nd row 2nd cell</p>
-											<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
+									<div class="col-sm-6">
+										<div class="card">
+											<div class="card-body">
+												<h5 class="card-title">Title</h5>
+												<p class="card-text">2nd row 2nd cell</p>
+												<button href="#" class="btn btn-primary" onclick="alert('Button Clicked!');">Click me</button>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -2455,13 +2484,13 @@
 								<div class="card-header">
 									<ul class="nav nav-tabs card-header-tabs">
 										<li class="nav-item">
-											<a class="nav-link active" href="javascript: void()" onclick="alert('Active Tab Clicked!');">Active</a>
+											<a id="activeLink" class="nav-link active" href="javascript: void()" onclick="alert('Active Tab Clicked!');">Active</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" href="https://github.com/jdi-testing/jdi-light" target="_blank">JDI</a>
+											<a id="jdiLink" class="nav-link" href="https://github.com/jdi-testing/jdi-light" target="_blank">JDI</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link disabled" href="javascript: void()" tabindex="-1" aria-disabled="true">Disabled</a>
+											<a id="disabledLink" class="nav-link disabled" href="javascript: void()" tabindex="-1" aria-disabled="true">Disabled</a>
 										</li>
 									</ul>
 								</div>
@@ -3010,7 +3039,7 @@
 					<div class="doc-space line">
 						<div class="html-left">
 
-							<div class="card border-success mb-3" style="max-width: 18rem;">
+							<div class="card border-success mb-3" id="card-mixins-utilities" style="max-width: 18rem;">
 								<div class="card-header bg-transparent border-success">According To Samuel L. Jackson</div>
 								<div class="card-body text-success">
 									<h5 class="card-title">The Secret To Marvel Studios’ Success</h5>
@@ -3149,14 +3178,14 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
-							<div class="card mb-3" style="max-width: 540px;">
+							<div class="card mb-3" id="card-horizontal" style="max-width: 540px;">
 								<div class="row no-gutters">
 									<div class="col-md-4">
-										<img src="images/wolverin.jpg" class="card-img" title="Wolverine icon">
+										<img src="images/wolverin.jpg" class="card-img" id="card-horizontal-img" title="Wolverine icon">
 									</div>
 									<div class="col-md-8">
 										<div class="card-body">
-											<h5 class="card-title">Wolverine</h5>
+											<h5 class="card-title" id="card-horizontal-title">Wolverine</h5>
 											<p class="card-text">Wolverine is a fictional character appearing in American comic books published by Marvel Comics, mostly in association with the X-Men. He is a mutant who possesses animal-keen senses, enhanced physical capabilities, powerful regenerative ability known as a healing factor, and three retractable claws in each hand. Wolverine has been depicted variously as a member of the X-Men, Alpha Flight, and the Avengers.</p>
 											<p class="card-text"><small class="text-muted">The character appeared in #180 (1974)</small></p>
 										</div>
@@ -3201,6 +3230,200 @@
 								Bootstrap: <a
 									href="https://getbootstrap.com/docs/4.3/components/list-group/"
 									target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<ul class="list-group mb-3" id="list-group-basic-example">
+								<li class="list-group-item">Cras justo odio</li>
+								<li class="list-group-item">Dapibus ac facilisis in</li>
+								<li class="list-group-item">Morbi leo risus</li>
+								<li class="list-group-item">Porta ac consectetur ac</li>
+								<li class="list-group-item">Vestibulum at eros</li>
+							</ul>
+						</div>
+						<div class="html-right">
+							<h4>List group - Basic example</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/list-group/#basic-example"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/#basic-example</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<ul class="list-group mb-3" id="list-group-active-items">
+								<li class="list-group-item active">Cras justo odio</li>
+								<li class="list-group-item">Dapibus ac facilisis in</li>
+								<li class="list-group-item">Morbi leo risus</li>
+								<li class="list-group-item">Porta ac consectetur ac</li>
+								<li class="list-group-item">Vestibulum at eros</li>
+							</ul>
+						</div>
+						<div class="html-right">
+							<h4>List group - Active items</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/list-group/#active-items"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/#active-items</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<ul class="list-group mb-3" id="disabled-items">
+								<li class="list-group-item disabled" aria-disabled="true">Cras justo odio</li>
+								<li class="list-group-item">Dapibus ac facilisis in</li>
+								<li class="list-group-item">Morbi leo risus</li>
+								<li class="list-group-item">Porta ac consectetur ac</li>
+								<li class="list-group-item">Vestibulum at eros</li>
+							</ul>
+						</div>
+						<div class="html-right">
+							<h4>List group - Disabled items</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/list-group/#disabled-items"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/#disabled-items</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="list-group mb-3" id="list-group-links">
+								<a href="https://github.com/jdi-docs" class="list-group-item list-group-item-action active" target="_blank">
+									JDI Docs
+								</a>
+								<a href="https://github.com/jdi-testing" class="list-group-item list-group-item-action" target="_blank">JDI - testing tool</a>
+								<a href="https://jdi-testing.github.io/jdi-light/index.html" class="list-group-item list-group-item-action" target="_blank">JDI website</a>
+								<a href="https://getbootstrap.com/docs/4.3/components/list-group/#links-and-buttons" class="list-group-item list-group-item-action" target="_blank">Bootstrap</a>
+								<a href="https://github.com/jdi-docs" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true" target="_blank">JDI Docs</a>
+							</div>
+							<div class="list-group mb-3" id="list-group-buttons">
+								<button type="button" class="list-group-item list-group-item-action active" onclick="alert('Cras justo odio');">Cras justo odio</button>
+								<button type="button" class="list-group-item list-group-item-action" onclick="alert('Dapibus ac facilisis in');">Dapibus ac facilisis in</button>
+								<button type="button" class="list-group-item list-group-item-action" onclick="alert('Morbi leo risus');">Morbi leo risus</button>
+								<button type="button" class="list-group-item list-group-item-action" onclick="alert('Porta ac consectetur ac');">Porta ac consectetur ac</button>
+								<button type="button" class="list-group-item list-group-item-action" onclick="alert('Vestibulum at eros');" disabled>Vestibulum at eros</button>
+							</div>
+						</div>
+						<div class="html-right">
+							<h4>List group - Links and buttons</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/list-group/#links-and-buttons"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/#links-and-buttons</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<ul class="list-group list-group-flush mb-3" id="list-group-flush">
+								<li class="list-group-item">Cras justo odio</li>
+								<li class="list-group-item">Dapibus ac facilisis in</li>
+								<li class="list-group-item">Morbi leo risus</li>
+								<li class="list-group-item">Porta ac consectetur ac</li>
+								<li class="list-group-item">Vestibulum at eros</li>
+							</ul>
+						</div>
+						<div class="html-right">
+							<h4>List group - Flush</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/list-group/#flush"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/#flush</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<ul class="list-group list-group-horizontal mb-3" id="list-group-horizontal">
+								<li class="list-group-item">Cras justo odio</li>
+								<li class="list-group-item">Dapibus ac facilisis in</li>
+								<li class="list-group-item">Morbi leo risus</li>
+							</ul>
+						</div>
+						<div class="html-right">
+							<h4>List group - Horizontal</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/list-group/#horizontal"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/#horizontal</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<ul class="list-group mb-3" id="list-group-with-badges">
+								<li class="list-group-item d-flex justify-content-between align-items-center">
+									Cras justo odio
+									<span class="badge badge-primary badge-pill">14</span>
+								</li>
+								<li class="list-group-item d-flex justify-content-between align-items-center">
+									Dapibus ac facilisis in
+									<span class="badge badge-primary badge-pill">2</span>
+								</li>
+								<li class="list-group-item d-flex justify-content-between align-items-center">
+									Morbi leo risus
+									<span class="badge badge-primary badge-pill">1</span>
+								</li>
+							</ul>
+						</div>
+						<div class="html-right">
+							<h4>List group - With badges</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/list-group/#with-badges"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/#with-badges</a>
+							</p>
+						</div>
+					</div>
+
+				</div>
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="list-group mb-3" id="list-group-custom-content">
+								<a href="https://jdi-testing.github.io/jdi-light/index.html" class="list-group-item list-group-item-action active" target="_blank">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">List group item heading one</h5>
+										<small>3 days ago</small>
+									</div>
+									<p class="mb-1">Some simple text for first section of custom list group.</p>
+									<small class="footer">JDI website</small>
+								</a>
+								<a href="https://github.com/jdi-testing" class="list-group-item list-group-item-action" target="_blank">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">List group item heading two</h5>
+										<small class="text-muted">3 days ago</small>
+									</div>
+									<p class="mb-1">Some simple text for second section of custom list group.</p>
+									<small class="text-muted footer">JDI - testing tool</small>
+								</a>
+								<a href="https://github.com/jdi-docs" class="list-group-item list-group-item-action" target="_blank">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">List group item heading three</h5>
+										<small class="text-muted">3 days ago</small>
+									</div>
+									<p class="mb-1">Some simple text for third section of custom list group.</p>
+									<small class="text-muted footer">JDI Docs</small>
+								</a>
+							</div>
+						</div>
+						<div class="html-right">
+							<h4>List group - Custom content</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/list-group/#custom-content"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/#custom-content</a>
 							</p>
 						</div>
 					</div>
@@ -3842,18 +4065,18 @@
 					<!-- TOOLTIP START -->
 					<div class="doc-space line">
 						<div class="html-left">
-							<button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+							<button type="button" class="btn btn-info btn-block" id="tooltipOnTop" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
 							<hr>
-							<button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+							<button type="button" class="btn btn-info btn-block" id="tooltipOnRight" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
 							<hr>
-							<button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+							<button type="button" class="btn btn-info btn-block" id="tooltipOnBottom" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
 							<hr>
-							<button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+							<button type="button" class="btn btn-info btn-block" id="tooltipOnLeft" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
 							<hr>
-							<button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Tooltip with HTML</button>
+							<button type="button" class="btn btn-info btn-block" id="tooltipWithHTML" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Tooltip with HTML</button>
 							<hr>
 							<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Disabled tooltip">
-  								<button class="btn btn-info btn-block" style="pointer-events: none;" type="button" disabled>Disabled button</button>
+  								<button class="btn btn-info btn-block" id="tooltipOnDisabledButton" style="pointer-events: none;" type="button" disabled>Disabled button</button>
 							</span>
 							<br>&nbsp;
 						</div>
