@@ -8,7 +8,8 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.customFileInputPrepend;
+import static io.github.com.pages.BootstrapPage.customFileInputAppend;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
@@ -32,37 +33,40 @@ public class InputGroupCustomFileInputTests extends TestsInit {
 
     @Test
     public void labelTextTests() {
-        customFileInputPrepend.label.is().text(LABEL_TEXT);
-        customFileInputPrepend.label.is().value(LABEL_TEXT);
+        customFileInputPrepend.upload.is().text(LABEL_TEXT);
+        customFileInputPrepend.upload.is().value(LABEL_TEXT);
 
-        customFileInputAppend.label.is().text(LABEL_TEXT);
-        customFileInputAppend.label.is().value(LABEL_TEXT);
+        customFileInputAppend.upload.is().text(LABEL_TEXT);
+        customFileInputAppend.upload.is().value(LABEL_TEXT);
     }
 
     @Test
     public void inputTextTests() {
-        customFileInputPrepend.inputText.is().text(INPUT_TEXT_DEFAULT);
-        customFileInputPrepend.inputText.is().value(INPUT_TEXT_DEFAULT);
+        customFileInputPrepend.label.is().text(INPUT_TEXT_DEFAULT);
+        customFileInputPrepend.label.is().value(INPUT_TEXT_DEFAULT);
 
-        customFileInputAppend.inputText.is().text(INPUT_TEXT_DEFAULT);
-        customFileInputAppend.inputText.is().value(INPUT_TEXT_DEFAULT);
+        customFileInputAppend.label.is().text(INPUT_TEXT_DEFAULT);
+        customFileInputAppend.label.is().value(INPUT_TEXT_DEFAULT);
     }
 
     @Test
     public void uploadTest() {
         customFileInputPrepend.click();
-        customFileInputPrepend.inputField.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
+        customFileInputPrepend.input.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
         customFileInputAppend.click();
-        customFileInputAppend.inputField.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
+        customFileInputAppend.input.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
 
-        customFileInputPrepend.inputText.is().text(INPUT_TEXT);
-        customFileInputPrepend.inputText.is().value(INPUT_TEXT);
-        customFileInputAppend.inputText.is().text(INPUT_TEXT);
-        customFileInputAppend.inputText.is().value(INPUT_TEXT);
+        customFileInputPrepend.label.is().text(INPUT_TEXT);
+        customFileInputPrepend.label.is().value(INPUT_TEXT);
+        customFileInputAppend.label.is().text(INPUT_TEXT);
+        customFileInputAppend.label.is().value(INPUT_TEXT);
     }
 
     @Test
     public void isValidationOptionsSectionTests() {
+
+        //tests customFileInputPrepend element
+
         customFileInputPrepend.is().enabled();
         customFileInputPrepend.is().displayed()
                 .core()
@@ -79,8 +83,8 @@ public class InputGroupCustomFileInputTests extends TestsInit {
                 .core()
                 .hasClass("custom-file")
                 .tag("div");
-        customFileInputPrepend.label.is().enabled();
-        customFileInputPrepend.label.is().displayed()
+        customFileInputPrepend.upload.is().enabled();
+        customFileInputPrepend.upload.is().displayed()
                 .core()
                 .hasClass("input-group-text")
                 .tag("span")
@@ -90,8 +94,8 @@ public class InputGroupCustomFileInputTests extends TestsInit {
                 .css("font-size", is("16px"))
                 .css("align-items", is("center"))
                 .attr("id", "inputGroupFileAddon01");
-        customFileInputPrepend.inputText.is().enabled();
-        customFileInputPrepend.inputText.is().displayed()
+        customFileInputPrepend.label.is().enabled();
+        customFileInputPrepend.label.is().displayed()
                 .core()
                 .hasClass("custom-file-label")
                 .tag("label")
@@ -99,8 +103,8 @@ public class InputGroupCustomFileInputTests extends TestsInit {
                 .css("color", is("rgba(73, 80, 87, 1)")) // #495057 Color Hex
                 .css("position", is("absolute"))
                 .attr("for", "inputGroupFile01");
-        customFileInputPrepend.inputField.is().enabled();
-        customFileInputPrepend.inputField.is().hidden()
+        customFileInputPrepend.input.is().enabled();
+        customFileInputPrepend.input.is().hidden()
                 .core()
                 .hasClass("custom-file-input")
                 .tag("input")
@@ -108,6 +112,8 @@ public class InputGroupCustomFileInputTests extends TestsInit {
                 .attr("aria-describedby", "inputGroupFileAddon01")
                 .attr("type", "file")
                 .attr("id", "inputGroupFile01");
+
+        //tests customFileInputAppend element
 
         customFileInputAppend.is().enabled();
         customFileInputAppend.is().displayed()
@@ -125,8 +131,8 @@ public class InputGroupCustomFileInputTests extends TestsInit {
                 .core()
                 .hasClass("input-group-append")
                 .tag("div");
-        customFileInputAppend.label.is().enabled();
-        customFileInputAppend.label.is().displayed()
+        customFileInputAppend.upload.is().enabled();
+        customFileInputAppend.upload.is().displayed()
                 .core()
                 .hasClass("input-group-text")
                 .tag("span")
@@ -136,8 +142,8 @@ public class InputGroupCustomFileInputTests extends TestsInit {
                 .css("font-size", is("16px"))
                 .css("align-items", is("center"))
                 .attr("id", "inputGroupFileAddon02");
-        customFileInputAppend.inputText.is().enabled();
-        customFileInputAppend.inputText.is().displayed()
+        customFileInputAppend.label.is().enabled();
+        customFileInputAppend.label.is().displayed()
                 .core()
                 .hasClass("custom-file-label")
                 .tag("label")
@@ -146,8 +152,8 @@ public class InputGroupCustomFileInputTests extends TestsInit {
                 .css("position", is("absolute"))
                 .attr("aria-describedby", "inputGroupFileAddon02")
                 .attr("for", "inputGroupFile02");
-        customFileInputAppend.inputField.is().enabled();
-        customFileInputAppend.inputField.is().hidden()
+        customFileInputAppend.input.is().enabled();
+        customFileInputAppend.input.is().hidden()
                 .core()
                 .hasClass("custom-file-input")
                 .tag("input")

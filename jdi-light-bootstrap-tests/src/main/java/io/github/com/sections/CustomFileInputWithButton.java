@@ -9,7 +9,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.FileInput;
 
 public class CustomFileInputWithButton extends Section {
 
-    @UI(".btn btn-outline-secondary") public Button button;
-    @UI("#inputGroupFile03")public FileInput inputField;
-    @UI(".custom-file-label") public UIElement inputText;
+    @UI(".btn.btn-outline-secondary") public Button button;
+    @UI(".custom-file-input")public FileInput input;
+    @UI(".custom-file-label") public UIElement label;
 }

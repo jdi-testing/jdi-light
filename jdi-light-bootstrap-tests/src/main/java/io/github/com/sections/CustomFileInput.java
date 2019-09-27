@@ -7,7 +7,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.FileInput;
 
 public class CustomFileInput extends Section {
 
-    @UI(".input-group-text") public Label label;
-    @UI(".custom-file-input") public FileInput inputField;
-    @UI(".custom-file-label") public Label inputText;
+    @UI(".input-group-text") public Label upload;
+    @UI(".custom-file-input") public FileInput input;
+    @UI(".custom-file-label") public Label label;
 }

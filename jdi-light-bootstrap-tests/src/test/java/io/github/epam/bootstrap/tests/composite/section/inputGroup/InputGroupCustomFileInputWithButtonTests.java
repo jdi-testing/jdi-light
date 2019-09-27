@@ -6,11 +6,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
-import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.customFileInputWithButtonPrepend;
+import static io.github.com.pages.BootstrapPage.customFileInputWithButtonAppend;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
@@ -44,47 +44,50 @@ public class InputGroupCustomFileInputWithButtonTests extends TestsInit {
 
     @Test
     public void inputTextTests() {
-        customFileInputWithButtonPrepend.inputText.is().text(INPUT_TEXT_DEFAULT);
-        customFileInputWithButtonPrepend.inputText.is().value(INPUT_TEXT_DEFAULT);
+        customFileInputWithButtonPrepend.label.is().text(INPUT_TEXT_DEFAULT);
+        customFileInputWithButtonPrepend.label.is().value(INPUT_TEXT_DEFAULT);
 
-        customFileInputWithButtonAppend.inputText.is().text(INPUT_TEXT_DEFAULT);
-        customFileInputWithButtonAppend.inputText.is().value(INPUT_TEXT_DEFAULT);
+        customFileInputWithButtonAppend.label.is().text(INPUT_TEXT_DEFAULT);
+        customFileInputWithButtonAppend.label.is().value(INPUT_TEXT_DEFAULT);
     }
 
     @Test
     public void uploadTest() {
         customFileInputWithButtonPrepend.click();
-        customFileInputWithButtonPrepend.inputField.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
+        customFileInputWithButtonPrepend.input.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
         customFileInputWithButtonAppend.click();
-        customFileInputWithButtonAppend.inputField.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
+        customFileInputWithButtonAppend.input.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
 
-        customFileInputWithButtonPrepend.inputText.is().text(INPUT_TEXT);
-        customFileInputWithButtonPrepend.inputText.is().value(INPUT_TEXT);
-        customFileInputWithButtonAppend.inputText.is().text(INPUT_TEXT);
-        customFileInputWithButtonAppend.inputText.is().value(INPUT_TEXT);
+        customFileInputWithButtonPrepend.label.is().text(INPUT_TEXT);
+        customFileInputWithButtonPrepend.label.is().value(INPUT_TEXT);
+        customFileInputWithButtonAppend.label.is().text(INPUT_TEXT);
+        customFileInputWithButtonAppend.label.is().value(INPUT_TEXT);
     }
 
-
     @Test
-    public void buttonTests() {
+    public void buttonPrependClickTests() {
         customFileInputWithButtonPrepend.button.hover();
-        customFileInputWithButtonAppend.button.hover();
-
         customFileInputWithButtonPrepend.button.is().displayed();
         customFileInputWithButtonPrepend.button.is().enabled();
-        customFileInputWithButtonAppend.button.is().displayed();
-        customFileInputWithButtonAppend.button.is().enabled();
-
         customFileInputWithButtonPrepend.button.click();
         validateAlert(is(buttonClickAlert));
-        acceptAlert();
+    }
 
+    @Test
+    public void buttonAppendClickTests() {
+        customFileInputWithButtonAppend.button.hover();
+        customFileInputWithButtonAppend.button.is().displayed();
+        customFileInputWithButtonAppend.button.is().enabled();
         customFileInputWithButtonAppend.button.click();
         validateAlert(is(buttonClickAlert));
     }
 
     @Test
-    public void isValidationOptionsSectionTests() {
+    public void
+    isValidationOptionsSectionTests() {
+
+        //tests customFileInputWithButtonPrepend element
+
         customFileInputWithButtonPrepend.is().enabled();
         customFileInputWithButtonPrepend.is().displayed()
                 .core()
@@ -104,37 +107,37 @@ public class InputGroupCustomFileInputWithButtonTests extends TestsInit {
         customFileInputWithButtonPrepend.button.is().enabled();
         customFileInputWithButtonPrepend.button.is().displayed()
                 .core()
-                .hasClass("input-group-text")
-                .tag("span")
-                .css("background-color", is("rgba(233, 236, 239, 1)")) // #e9ecef Color Hex
-                .css("color", is("rgba(73, 80, 87, 1)")) // #495057 Color Hex
+                .hasClass("btn btn-outline-secondary")
+                .tag("button")
                 .css("text-align", is("center"))
                 .css("font-size", is("16px"))
-                .css("align-items", is("center"))
-                .attr("id", "inputGroupFileAddon01");
-        customFileInputWithButtonPrepend.inputText.is().enabled();
-        customFileInputWithButtonPrepend.inputText.is().displayed()
+                .css("align-items", is("flex-start"))
+                .attr("id", "inputGroupFileAddon03");
+        customFileInputWithButtonPrepend.label.is().enabled();
+        customFileInputWithButtonPrepend.label.is().displayed()
                 .core()
                 .hasClass("custom-file-label")
                 .tag("label")
                 .css("background-color", is("rgba(255, 255, 255, 1)")) // #fff Color Hex
                 .css("color", is("rgba(73, 80, 87, 1)")) // #495057 Color Hex
                 .css("position", is("absolute"))
-                .attr("for", "inputGroupFile01");
-        customFileInputWithButtonPrepend.inputField.is().enabled();
-        customFileInputWithButtonPrepend.inputField.is().hidden()
+                .attr("for", "inputGroupFile03");
+        customFileInputWithButtonPrepend.input.is().enabled();
+        customFileInputWithButtonPrepend.input.is().hidden()
                 .core()
                 .hasClass("custom-file-input")
                 .tag("input")
                 .css("position", is("relative"))
-                .attr("aria-describedby", "inputGroupFileAddon01")
+                .attr("aria-describedby", "inputGroupFileAddon03")
                 .attr("type", "file")
-                .attr("id", "inputGroupFile01");
+                .attr("id", "inputGroupFile03");
+
+        //tests customFileInputWithButtonAppend element
 
         customFileInputWithButtonAppend.is().enabled();
         customFileInputWithButtonAppend.is().displayed()
                 .core()
-                .hasClass("input-group mb-3")
+                .hasClass("input-group")
                 .css("font-size", is("14px"))
                 .tag("div");
         customFileInputWithButtonAppend.find(By.cssSelector("div:nth-child(1)")).is().enabled();
@@ -150,32 +153,30 @@ public class InputGroupCustomFileInputWithButtonTests extends TestsInit {
         customFileInputWithButtonAppend.button.is().enabled();
         customFileInputWithButtonAppend.button.is().displayed()
                 .core()
-                .hasClass("input-group-text")
-                .tag("span")
-                .css("background-color", is("rgba(233, 236, 239, 1)")) // #e9ecef Color Hex
-                .css("color", is("rgba(73, 80, 87, 1)")) // #495057 Color Hex
+                .hasClass("btn btn-outline-secondary")
+                .tag("button")
                 .css("text-align", is("center"))
                 .css("font-size", is("16px"))
-                .css("align-items", is("center"))
-                .attr("id", "inputGroupFileAddon02");
-        customFileInputWithButtonAppend.inputText.is().enabled();
-        customFileInputWithButtonAppend.inputText.is().displayed()
+                .css("align-items", is("flex-start"))
+                .attr("id", "inputGroupFileAddon04");
+        customFileInputWithButtonAppend.label.is().enabled();
+        customFileInputWithButtonAppend.label.is().displayed()
                 .core()
                 .hasClass("custom-file-label")
                 .tag("label")
                 .css("background-color", is("rgba(255, 255, 255, 1)")) // #fff Color Hex
                 .css("color", is("rgba(73, 80, 87, 1)")) // #495057 Color Hex
                 .css("position", is("absolute"))
-                .attr("aria-describedby", "inputGroupFileAddon02")
-                .attr("for", "inputGroupFile02");
-        customFileInputWithButtonAppend.inputField.is().enabled();
-        customFileInputWithButtonAppend.inputField.is().hidden()
+                .attr("for", "inputGroupFile04");
+        customFileInputWithButtonAppend.input.is().enabled();
+        customFileInputWithButtonAppend.input.is().hidden()
                 .core()
                 .hasClass("custom-file-input")
                 .tag("input")
                 .css("position", is("relative"))
                 .attr("type", "file")
-                .attr("id", "inputGroupFile02");
+                .attr("aria-describedby", "inputGroupFileAddon04")
+                .attr("id", "inputGroupFile04");
     }
 
     @Test
