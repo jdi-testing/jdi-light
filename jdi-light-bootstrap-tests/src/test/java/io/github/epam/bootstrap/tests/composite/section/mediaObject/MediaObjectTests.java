@@ -25,7 +25,6 @@ public class MediaObjectTests extends TestsInit {
     private static String expectedUrl ="https://jdi-testing.github.io/jdi-light/index.html";
     private static List<String> listOfHeading = Arrays.asList("WOLVERINE FIRST", "IRON MAN SECOND", "SPIDER MAN THIRD");
 
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -33,8 +32,12 @@ public class MediaObjectTests extends TestsInit {
     }
 
     @Test
-    public void baseValidationTest() {
+    public void baseValidationSampleTest() {
         baseValidation(mediaObjectSample);
+    }
+
+    @Test
+    public void baseValidationNestingTest() {
         baseValidation(mediaObjectNesting);
     }
 
@@ -52,7 +55,6 @@ public class MediaObjectTests extends TestsInit {
                 .css("font-size", is("14px"))
                 .cssClass("media-body")
         ;
-
     }
 
     @Test
@@ -87,8 +89,6 @@ public class MediaObjectTests extends TestsInit {
 
     }
 
-
-
     @Test
     public void clickTest() {
         mediaObjectNesting.nestingMediaObject.imageOfMediaObject.click();
@@ -96,7 +96,4 @@ public class MediaObjectTests extends TestsInit {
         switchToWindow(2);
         assertThat(getUrl(), is(expectedUrl));
     }
-
-
-
 }
