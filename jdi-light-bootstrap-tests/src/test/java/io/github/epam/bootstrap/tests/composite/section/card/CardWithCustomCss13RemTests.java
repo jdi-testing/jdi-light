@@ -16,23 +16,23 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Created by Aleksandr Khmelinin on 22.09.2019
+ * Email: aleksandr_khmelinin@epam.com; Skype: live:bea50ebde18b7f9e
+ */
+
 public class CardWithCustomCss13RemTests extends TestsInit {
 
-    /**
-     * Created by Aleksandr Khmelinin on 22.09.2019
-     * Email: aleksandr_khmelinin@epam.com; Skype: live:bea50ebde18b7f9e
-     */
+    private String title = "SPIDER MAN (13REM)";
+    private String text = "Spider-Man is a fictional superhero created by writer-editor Stan Lee and writer-artist Steve Ditko.";
+    private String buttonText = "Read more";
+    private String link = "https://en.wikipedia.org/wiki/Spider-Man";
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private String title = "SPIDER MAN (13REM)";
-    private String text = "Spider-Man is a fictional superhero created by writer-editor Stan Lee and writer-artist Steve Ditko.";
-    private String buttonText = "Read more";
-    private String link = "https://en.wikipedia.org/wiki/Spider-Man";
 
     @Test
     public void getTitleTextTest() {

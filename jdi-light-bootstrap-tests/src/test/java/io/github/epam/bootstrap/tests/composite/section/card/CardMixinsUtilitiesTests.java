@@ -11,18 +11,23 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Created by Aleksandr Khmelinin on 26.09.2019
+ * Email: aleksandr_khmelinin@epam.com; Skype: live:bea50ebde18b7f9e
+ */
+
 public class CardMixinsUtilitiesTests extends TestsInit {
+
+    private String title = "THE SECRET TO MARVEL STUDIOS’ SUCCESS";
+    private String text = "Because while the Marvel Cinematic Universe always includes plenty of spectacle and pulse pounding action, each blockbuster tells a very human story. The heroes of the world are flawed and funny, allowing audiences to connect with characters who are super powered and dealing with situations we truly can't comprehend.";
+    private String header = "According To Samuel L. Jackson";
+    private String footer = "For Cinema Blend";
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private String title = "THE SECRET TO MARVEL STUDIOS’ SUCCESS";
-    private String text = "Because while the Marvel Cinematic Universe always includes plenty of spectacle and pulse pounding action, each blockbuster tells a very human story. The heroes of the world are flawed and funny, allowing audiences to connect with characters who are super powered and dealing with situations we truly can't comprehend.";
-    private String header = "According To Samuel L. Jackson";
-    private String footer = "For Cinema Blend";
 
     @Test
     public void getTitleTextTest() {
@@ -46,16 +51,26 @@ public class CardMixinsUtilitiesTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
-        cardMixinsUtilities.title.is().text(is(title))
-                .and().core().css("color", "rgba(40, 167, 69, 1)");
-        cardMixinsUtilities.text.is().text(is(text))
-                .and().core().css("color", "rgba(40, 167, 69, 1)");
-        cardMixinsUtilities.header.is().text(is(header))
-                .and().core().css("color", "rgba(102, 102, 102, 1)");
-        cardMixinsUtilities.footer.is().text(is(footer))
-                .and().core().css("color", "rgba(102, 102, 102, 1)");
-        cardMixinsUtilities.is().displayed()
-                .and().core().css("border-color", "rgb(40, 167, 69)");
+        cardMixinsUtilities.title.is()
+                .text(is(title))
+                .and().core()
+                .css("color", "rgba(40, 167, 69, 1)");
+        cardMixinsUtilities.text.is()
+                .text(is(text))
+                .and().core()
+                .css("color", "rgba(40, 167, 69, 1)");
+        cardMixinsUtilities.header.is()
+                .text(is(header))
+                .and().core()
+                .css("color", "rgba(102, 102, 102, 1)");
+        cardMixinsUtilities.footer.is()
+                .text(is(footer))
+                .and().core()
+                .css("color", "rgba(102, 102, 102, 1)");
+        cardMixinsUtilities.is()
+                .displayed()
+                .and().core()
+                .css("border-color", "rgb(40, 167, 69)");
     }
 
     @Test

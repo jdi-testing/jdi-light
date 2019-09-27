@@ -16,23 +16,23 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Created by Aleksandr Khmelinin on 22.09.2019
+ * Email: aleksandr_khmelinin@epam.com; Skype: live:bea50ebde18b7f9e
+ */
+
 public class CardWithCustomCss9RemTests extends TestsInit {
 
-    /**
-     * Created by Aleksandr Khmelinin on 22.09.2019
-     * Email: aleksandr_khmelinin@epam.com; Skype: live:bea50ebde18b7f9e
-     */
+    private String title = "HULK\n(9REM)";
+    private String text = "The Hulk is a fictional superhero appearing in publications by the American publisher Marvel Comics.";
+    private String buttonText = "Read more";
+    private String link = "https://en.wikipedia.org/wiki/Hulk_(film)";
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private String title = "HULK\n(9REM)";
-    private String text = "The Hulk is a fictional superhero appearing in publications by the American publisher Marvel Comics.";
-    private String buttonText = "Read more";
-    private String link = "https://en.wikipedia.org/wiki/Hulk_(film)";
 
     @Test
     public void getTitleTextTest() {
