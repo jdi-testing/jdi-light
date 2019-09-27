@@ -58,7 +58,6 @@ public class CardKitchenSinkTests extends TestsInit {
         baseValidation(cardKitchenSink.image);
         baseValidation(cardKitchenSink.title);
         baseValidation(cardKitchenSink.text);
-        baseValidation(cardKitchenSink.list);
         baseValidation(cardKitchenSink.list.get(0));
         baseValidation(cardKitchenSink.list.get(1));
         baseValidation(cardKitchenSink.list.get(2));
