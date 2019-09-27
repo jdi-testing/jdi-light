@@ -351,7 +351,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
-        get(index - jdiIndex).click();
+        get(index).click();
     }
 
     /**
@@ -361,7 +361,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction("Select ({0}) for '{name}'")
     public void select(int... indexes) {
         for (int index : indexes)
-            select(index - jdiIndex);
+            select(index);
     }
 
     /**
@@ -465,8 +465,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
-        System.out.println("JDI INDEX");
-        System.out.println(jdiIndex);
         return isNotEmpty() && get(0).isEnabled();
     }
 
