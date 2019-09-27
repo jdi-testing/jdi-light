@@ -87,6 +87,14 @@ public class BootstrapPage extends WebPage {
     @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
     @UI("#card-with-header-and-footer-quote") public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
     @UI("#card-with-header-and-footer") public static CardWithHeaderAndFooter cardWithHeaderAndFooter;
+    @UI("#card-bright-blue") public static CardWithHeaderAndFooter cardBrightBlue;
+    @UI("#card-grey") public static CardWithHeaderAndFooter cardGrey;
+    @UI("#card-green") public static CardWithHeaderAndFooter cardGreen;
+    @UI("#card-red") public static CardWithHeaderAndFooter cardRed;
+    @UI("#card-yellow") public static CardWithHeaderAndFooter cardYellow;
+    @UI("#card-blue") public static CardWithHeaderAndFooter cardBlue;
+    @UI("#card-light") public static CardWithHeaderAndFooter cardLight;
+    @UI("#card-dark") public static CardWithHeaderAndFooter cardDark;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
     @UI("#buttonToolbar1") public static ButtonToolbar buttonToolbar;
@@ -94,6 +102,8 @@ public class BootstrapPage extends WebPage {
     @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
     @UI("#card-custom-css-1") public static CardWithCustomCss13Rem cardWithCustomCss13Rem;
     @UI("#card-custom-css-2") public static CardWithCustomCss9Rem cardWithCustomCss9Rem;
+    @UI("#card-mixins-utilities") public static CardMixinsUtilities cardMixinsUtilities;
+    @UI("#card-horizontal") public static CardHorizontal cardHorizontal;
     @UI("#custom-select-01") public static CustomSelect customSelect;
     @UI("#custom-select-button-01") public static CustomSelectWithButton customSelectWithButton;
     @UI("#custom-file-input-01") public static CustomFileInput customFileInputPrepend;
@@ -115,7 +125,15 @@ public class BootstrapPage extends WebPage {
     @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
     @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
     @UI("#card-navigation") public static CardNavigation cardNavigation;
+    @UI("#radio-buttons") public static RadioButtonGroup radioButtonGroup;
     @UI(".card-group:nth-of-type(1)") public static CardGroup cardGroupWithoutFooter;
     @UI(".card-group:nth-of-type(2)") public static CardGroup cardGroupWithFooter;
+    @UI("#pagination-overview") public static PaginationOverview paginationOverview;
+    @UI("#pagination-icons") public static PaginationIcons paginationIcons;
+    @UI("#pagination-states") public static PaginationStates paginationStates;
+    @UI("#pagination-big") public static PaginationSizeBig paginationSizeBig;
+    @UI("#pagination-small") public static PaginationSizeSmall paginationSizeSmall;
+    @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
+    @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
     //endregion
 }
