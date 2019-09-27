@@ -16,12 +16,6 @@ import static org.testng.Assert.assertTrue;
 
 public class CardHorizontalTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String titleText = "WOLVERINE";
     private String mainText = "Wolverine is a fictional character appearing in American comic books published by Marvel" +
             " Comics, mostly in association with the X-Men. He is a mutant who possesses animal-keen senses, enhanced" +
@@ -31,6 +25,12 @@ public class CardHorizontalTests extends TestsInit {
     private String smallText = "The character appeared in #180 (1974)";
     private String imageSrc = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
     private String imageTitle = "Wolverine icon";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void getTitleTextTest() {
