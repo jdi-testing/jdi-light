@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.cardExample;
 import static io.github.com.pages.BootstrapPage.cardImage;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -38,8 +37,12 @@ public class CardImageTest extends TestsInit {
 
     @Test
     public void availabilityest() {
-        cardImage.text.is().enabled().displayed();
-        cardImage.image.is().enabled().displayed();
+        cardImage.text.is()
+                .displayed()
+                .enabled();
+        cardImage.image.is()
+                .displayed()
+                .enabled();
     }
 
     @Test
