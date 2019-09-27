@@ -5,13 +5,15 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
 import static com.epam.jdi.light.common.TextTypes.TEXT;
+import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.switchToWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.windowsCount;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.breadcrumb;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
@@ -65,36 +67,31 @@ public class BreadcrumbTests extends TestsInit {
     public void clickCurrectItemTest(){
         breadcrumb.items.last().click();
 
-        ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
-        assertThat(tabs.size(), is(1));
+        assertThat(windowsCount(), is(1));
     }
 
     @Test
     public void clickByNameTest() {
         breadcrumb.items.get(HTML5).click();
 
-        ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
-        WebDriver driver = WebDriverFactory.getDriver();
-        driver.switchTo().window(tabs.get(1));
+        switchToWindow(2);
 
         assertThat(WebPage.getTitle(), is(HTML5));
 
-        driver.close();
-        driver.switchTo().window(tabs.get(0));
+        closeWindow();
+        switchToWindow(1);
     }
 
     @Test
     public void clickByIDTest() {
         breadcrumb.items.get(0).click();
 
-        ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
-        WebDriver driver = WebDriverFactory.getDriver();
-        driver.switchTo().window(tabs.get(1));
+        switchToWindow(2);
 
         assertThat(WebPage.getTitle().contains(HOME), is(true));
 
-        driver.close();
-        driver.switchTo().window(tabs.get(0));
+        closeWindow();
+        switchToWindow(1);
     }
 
     @Test
