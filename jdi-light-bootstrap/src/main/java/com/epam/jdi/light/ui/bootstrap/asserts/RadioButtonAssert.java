@@ -21,6 +21,7 @@ public class RadioButtonAssert extends UISelectAssert<RadioButtonAssert, RadioBu
         jdiAssert(getIsSelected(), is("selected"));
         return this;
     }
+
     @JDIAction("Assert that '{name}' is not selected")
     public RadioButtonAssert deselected() {
         jdiAssert(getIsSelected(), is("not selected"));
@@ -31,5 +32,4 @@ public class RadioButtonAssert extends UISelectAssert<RadioButtonAssert, RadioBu
     protected String getIsSelected() {
         return element.isSelected() ? "selected" : "not selected";
     }
-
 }
