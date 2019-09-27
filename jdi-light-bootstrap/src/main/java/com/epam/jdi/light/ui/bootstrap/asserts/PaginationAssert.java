@@ -20,6 +20,4 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
         jdiAssert(element.isDisabled() ? "disabled" : "enabled", is("enabled"));
         return this;
     }
-
-
 }

@@ -19,11 +19,11 @@ public class Pagination extends UIListBase<PaginationAssert> {
 
     @JDIAction("Select '{0}' in '{name}'")
     public void click(int index) {
-        list().select(index - 1); }
+        list().select(index - 1);
+    }
 
     @Override
     public PaginationAssert is() {
         return new PaginationAssert().set(this);
     }
-
 }
