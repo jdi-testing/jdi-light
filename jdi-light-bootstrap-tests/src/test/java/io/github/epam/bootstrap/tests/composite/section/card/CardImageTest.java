@@ -36,7 +36,7 @@ public class CardImageTest extends TestsInit {
     }
 
     @Test
-    public void availabilityest() {
+    public void availabilityTest() {
         cardImage.text.is()
                 .displayed()
                 .enabled();
