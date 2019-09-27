@@ -6,7 +6,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.paginationSizeBig;
+import static io.github.com.pages.BootstrapPage.paginationSizeSmall;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -37,31 +38,39 @@ public class SizingTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        paginationSizeBig.paginationItems.is().size(3);
-        paginationSizeBig.is().core().hasClass("pagination pagination-lg");
-        paginationSizeSmall.paginationItems.is().size(3);
-        paginationSizeSmall.is().core().hasClass("pagination pagination-sm");
+        paginationSizeBig.paginationItems.is()
+                .size(3);
+        paginationSizeBig.is()
+                .core()
+                .hasClass("pagination pagination-lg");
+        paginationSizeSmall.paginationItems.is()
+                .size(3);
+        paginationSizeSmall.is()
+                .core()
+                .hasClass("pagination pagination-sm");
     }
 
-    @Test (dataProvider = "listData")
+    @Test(dataProvider = "listData")
     public void linkTextTests(int index, String linkText) {
-        paginationSizeBig.paginationItems.get(index)
-                .is().displayed().enabled()
+        paginationSizeBig.paginationItems.get(index).is()
+                .displayed()
+                .enabled()
                 .core()
                 .css("font-size", is("14px"))
                 .hasClass("page-item")
                 .text(is(containsString(linkText)));
-        paginationSizeSmall.paginationItems.get(index)
-                .is().displayed().enabled()
+        paginationSizeSmall.paginationItems.get(index).is()
+                .displayed()
+                .enabled()
                 .core()
                 .css("font-size", is("14px"))
                 .hasClass("page-item")
                 .text(is(containsString(linkText)));
-        paginationSizeBig.paginationItemsText.get(index)
-                .is().core()
+        paginationSizeBig.paginationItemsText.get(index).is()
+                .core()
                 .css("font-size", is("20px"));
-        paginationSizeSmall.paginationItemsText.get(index)
-                .is().core()
+        paginationSizeSmall.paginationItemsText.get(index).is()
+                .core()
                 .css("font-size", is("14px"));
     }
 }

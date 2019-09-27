@@ -54,20 +54,24 @@ public class IconsTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        paginationIcons.paginationItems.is().size(5);
-        paginationIcons.is().core().hasClass("pagination");
+        paginationIcons.paginationItems.is()
+                .size(5);
+        paginationIcons.is()
+                .core()
+                .hasClass("pagination");
     }
 
-    @Test (dataProvider = "listData")
+    @Test(dataProvider = "listData")
     public void linkTextTests(int index, String linkText) {
-        paginationIcons.paginationItems.get(index)
-                .is().displayed().enabled()
+        paginationIcons.paginationItems.get(index).is()
+                .displayed()
+                .enabled()
                 .css("font-size", is("14px"))
                 .hasClass("page-item")
                 .text(is(linkText));
     }
 
-    @Test (dataProvider = "listPageTitles")
+    @Test(dataProvider = "listPageTitles")
     public void linkClickableTests(int index, String pageTitle) {
         paginationIcons.paginationItems.get(index).hover();
         paginationIcons.paginationItems.get(index).highlight();

@@ -6,7 +6,9 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Pagination;
 
 public class PaginationSizeBig extends Section {
 
-    @UI("li") public Pagination paginationItems;
-    @UI(".page-link") public Pagination paginationItemsText;
+    @UI("li")
+    public Pagination paginationItems;
+    @UI(".page-link")
+    public Pagination paginationItemsText;
 
 }

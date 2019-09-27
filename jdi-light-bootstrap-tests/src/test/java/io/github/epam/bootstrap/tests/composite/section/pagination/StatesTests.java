@@ -54,28 +54,30 @@ public class StatesTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        paginationStates.paginationItems.is().size(5);
-        paginationStates.is().core().hasClass("pagination");
-        paginationStates.paginationItems.get(1)
-                .is()
+        paginationStates.paginationItems.is()
+                .size(5);
+        paginationStates.is()
+                .core()
+                .hasClass("pagination");
+        paginationStates.paginationItems.get(1).is()
                 .core()
                 .hasClass("disabled");
-        paginationStates.paginationItems.get(3)
-                .is()
+        paginationStates.paginationItems.get(3).is()
                 .core()
                 .hasClass("active");
     }
 
-    @Test (dataProvider = "listData")
+    @Test(dataProvider = "listData")
     public void linkTextTests(int index, String linkText) {
-        paginationStates.paginationItems.get(index)
-                .is().displayed().enabled()
+        paginationStates.paginationItems.get(index).is()
+                .displayed()
+                .enabled()
                 .css("font-size", is("14px"))
                 .hasClass("page-item")
                 .text(is(containsString(linkText)));
     }
 
-    @Test (dataProvider = "listPageTitles")
+    @Test(dataProvider = "listPageTitles")
     public void linkClickableTests(int index, String pageTitle) {
         paginationStates.paginationItems.get(index).hover();
         paginationStates.paginationItems.get(index).highlight();

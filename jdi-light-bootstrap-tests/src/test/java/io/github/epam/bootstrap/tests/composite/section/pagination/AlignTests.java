@@ -55,35 +55,41 @@ public class AlignTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        paginationAlignCenter.paginationItems.is().size(5);
-        paginationAlignCenter.is().core().hasClass("pagination justify-content-center");
-        paginationAlignCenter.paginationItems.get(1)
-                .is()
+        paginationAlignCenter.paginationItems.is()
+                .size(5);
+        paginationAlignCenter.is()
+                .core()
+                .hasClass("pagination justify-content-center");
+        paginationAlignCenter.paginationItems.get(1).is()
                 .core()
                 .hasClass("disabled");
-        paginationAlignEnd.paginationItems.is().size(5);
-        paginationAlignEnd.is().core().hasClass("pagination justify-content-end");
-        paginationAlignEnd.paginationItems.get(1)
-                .is()
+        paginationAlignEnd.paginationItems.is()
+                .size(5);
+        paginationAlignEnd.is()
+                .core()
+                .hasClass("pagination justify-content-end");
+        paginationAlignEnd.paginationItems.get(1).is()
                 .core()
                 .hasClass("disabled");
     }
 
     @Test(dataProvider = "listData")
     public void linkTextTests(int index, String linkText) {
-        paginationAlignCenter.paginationItems.get(index)
-                .is().displayed().enabled()
+        paginationAlignCenter.paginationItems.get(index).is()
+                .displayed()
+                .enabled()
                 .css("font-size", is("14px"))
                 .hasClass("page-item")
                 .text(is(containsString(linkText)));
-        paginationAlignEnd.paginationItems.get(index)
-                .is().displayed().enabled()
+        paginationAlignEnd.paginationItems.get(index).is()
+                .displayed()
+                .enabled()
                 .css("font-size", is("14px"))
                 .hasClass("page-item")
                 .text(is(containsString(linkText)));
     }
 
-    @Test (dataProvider = "listPageTitles")
+    @Test(dataProvider = "listPageTitles")
     public void linkClickableCenterTests(int index, String pageTitle) {
         paginationAlignCenter.paginationItems.get(index).hover();
         paginationAlignCenter.paginationItems.get(index).highlight();
@@ -92,7 +98,7 @@ public class AlignTests extends TestsInit {
         paginationAlignCenter.paginationItems.get(index).unhighlight();
     }
 
-    @Test (dataProvider = "listPageTitles")
+    @Test(dataProvider = "listPageTitles")
     public void linkClickableEndTests(int index, String pageTitle) {
         paginationAlignEnd.paginationItems.get(index).hover();
         paginationAlignEnd.paginationItems.get(index).highlight();
@@ -106,5 +112,4 @@ public class AlignTests extends TestsInit {
         assertEquals(getTitle(), pageTitle);
         closeWindow();
     }
-
 }

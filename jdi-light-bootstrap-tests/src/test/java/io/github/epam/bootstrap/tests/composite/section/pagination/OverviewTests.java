@@ -54,20 +54,24 @@ public class OverviewTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        paginationOverview.paginationItems.is().size(5);
-        paginationOverview.is().core().hasClass("pagination");
+        paginationOverview.paginationItems.is()
+                .size(5);
+        paginationOverview.is()
+                .core()
+                .hasClass("pagination");
     }
 
-    @Test (dataProvider = "listData")
+    @Test(dataProvider = "listData")
     public void linkTextTests(int index, String linkText) {
-        paginationOverview.paginationItems.get(index)
-                .is().displayed().enabled()
+        paginationOverview.paginationItems.get(index).is()
+                .displayed()
+                .enabled()
                 .css("font-size", is("14px"))
                 .hasClass("page-item")
                 .text(is(linkText));
     }
 
-    @Test (dataProvider = "listPageTitles")
+    @Test(dataProvider = "listPageTitles")
     public void linkClickableTests(int index, String pageTitle) {
         paginationOverview.paginationItems.get(index).hover();
         paginationOverview.paginationItems.get(index).highlight();

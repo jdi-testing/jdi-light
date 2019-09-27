@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Pagination;
 
 public class PaginationStates extends Section {
 
-    @UI("li") public Pagination paginationItems;
+    @UI("li")
+    public Pagination paginationItems;
 
 }
