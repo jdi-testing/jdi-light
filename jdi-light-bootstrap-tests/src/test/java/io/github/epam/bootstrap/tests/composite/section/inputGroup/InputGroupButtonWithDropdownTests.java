@@ -89,7 +89,7 @@ public class InputGroupButtonWithDropdownTests extends TestsInit {
                 .hasClass("form-control")
                 .css("font-size", "16px")
                 .attr("type", "text")
-                .attr("aria-upload", "Text input with dropdown button")
+                .attr("aria-label", "Text input with dropdown button")
                 .tag("input");
     }
 

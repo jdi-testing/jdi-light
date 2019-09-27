@@ -85,7 +85,7 @@ public class AlertTests extends TestsInit {
                 .core()
                 .attr("type", "button")
                 .attr("data-dismiss", "alert")
-                .attr("aria-upload", "Close")
+                .attr("aria-label", "Close")
                 .tag(is("button"));
     }
 

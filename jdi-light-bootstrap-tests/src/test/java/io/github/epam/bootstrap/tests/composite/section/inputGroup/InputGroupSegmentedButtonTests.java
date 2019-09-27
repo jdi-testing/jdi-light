@@ -88,7 +88,7 @@ public class InputGroupSegmentedButtonTests extends TestsInit {
                 .hasClass("form-control")
                 .css("font-size", "16px")
                 .attr("type", "text")
-                .attr("aria-upload", "Text input with segmented dropdown button")
+                .attr("aria-label", "Text input with segmented dropdown button")
                 .tag("input");
     }
 
