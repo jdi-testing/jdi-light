@@ -1,6 +1,7 @@
 package io.github.epam.bootstrap.tests.composite.section.card;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.elements.common.WindowsManager;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
@@ -98,12 +99,11 @@ public class CardNavigationTests extends TestsInit {
         validateAlert(is(activeLinkAlert));
 
         cardNavigation.jdiLink.click();
-        ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
-        WebDriver driver = WebDriverFactory.getDriver();
-        driver.switchTo().window(tabs.get(1));
+        WindowsManager windowsManager = new WindowsManager();
+        windowsManager.switchToWindow(2);
         assertEquals(getUrl() , jdiLinkRef);
-        driver.close();
-        driver.switchTo().window(tabs.get(0));
+        windowsManager.closeWindow();
+        windowsManager.switchToWindow(1);
     }
 
     @Test
