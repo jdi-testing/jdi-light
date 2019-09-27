@@ -43,7 +43,7 @@ public class WebPage extends DriverBase implements PageObject {
 
     public String checkUrl;
     public CheckTypes checkUrlType = CONTAINS;
-    public CheckTypes checkTitleType = CheckTypes.NONE;
+    public CheckTypes checkTitleType = NONE;
 
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this).setup(Form.class,e->e.setName(getName()+" Form"));
@@ -84,6 +84,9 @@ public class WebPage extends DriverBase implements PageObject {
         return getDriver().getTitle();
     }
 
+    void setUrl(String uri) {
+        setUrl(uri, "", CONTAINS);
+    }
     void setUrl(String uri, String template, CheckTypes validate) {
         url = uri;
         checkUrl = template;
@@ -101,6 +104,7 @@ public class WebPage extends DriverBase implements PageObject {
     public void updatePageData(Url urlAnnotation, Title titleAnnotation) {
         if (urlAnnotation != null)
             setUrl(urlAnnotation.value(), urlAnnotation.template(), urlAnnotation.validate());
+        else setUrl(DOMAIN);
         if (titleAnnotation != null) {
             title = titleAnnotation.value();
             checkTitleType = titleAnnotation.validate();
@@ -144,7 +148,7 @@ public class WebPage extends DriverBase implements PageObject {
         if (!hasRunDrivers())
             throw exception("Page '%s' is not opened: Driver is not run", toString());
         String result = Switch(checkUrlType).get(
-                Value(CheckTypes.NONE, ""),
+                Value(NONE, ""),
                 Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
                 Value(MATCH, t -> !url().match() ? "Url '%s' doesn't match to '%s'" : ""),
                 Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
@@ -152,7 +156,7 @@ public class WebPage extends DriverBase implements PageObject {
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getCurrentUrl(), checkUrl));
         result = Switch(checkTitleType).get(
-                Value(CheckTypes.NONE, ""),
+                Value(NONE, ""),
                 Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
                 Value(MATCH, t -> !title().match() ? "Title '%s' doesn't match to '%s'" : ""),
                 Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
@@ -171,7 +175,7 @@ public class WebPage extends DriverBase implements PageObject {
         if (!hasRunDrivers())
             return false;
         boolean result = Switch(checkUrlType).get(
-                Value(CheckTypes.NONE, t -> true),
+                Value(NONE, t -> true),
                 Value(EQUALS, t -> url().check()),
                 Value(MATCH, t -> url().match()),
                 Value(CONTAINS, t -> url().contains()),
@@ -179,7 +183,7 @@ public class WebPage extends DriverBase implements PageObject {
         );
         if (!result) return false;
         result = Switch(checkTitleType).get(
-                Value(CheckTypes.NONE, t -> true),
+                Value(NONE, t -> true),
                 Value(EQUALS, t -> title().check()),
                 Value(MATCH, t -> title().match()),
                 Value(CONTAINS, t -> title().contains()),
