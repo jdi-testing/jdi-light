@@ -52,9 +52,9 @@ public class InputGroupCustomFileInputTests extends TestsInit {
     @Test
     public void uploadTest() {
         customFileInputPrepend.click();
-        customFileInputPrepend.input.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
+        customFileInputPrepend.input.setValue(mergePath(PROJECT_PATH,FILE_NAME));
         customFileInputAppend.click();
-        customFileInputAppend.input.uploadFile(mergePath(PROJECT_PATH,FILE_NAME));
+        customFileInputAppend.input.setValue(mergePath(PROJECT_PATH,FILE_NAME));
 
         customFileInputPrepend.label.is().text(INPUT_TEXT);
         customFileInputPrepend.label.is().value(INPUT_TEXT);
