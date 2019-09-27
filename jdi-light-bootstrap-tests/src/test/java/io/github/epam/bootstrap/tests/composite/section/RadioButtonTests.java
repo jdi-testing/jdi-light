@@ -16,17 +16,17 @@ import static org.hamcrest.Matchers.is;
 
 public class RadioButtonTests extends TestsInit {
 
+    private String label1 = "Default radio";
+    private String label2 = "Second default radio";
+    private String label3 = "Disabled radio";
+    private String value1 = "option1";
+    private String value2 = "option2";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    String label1 = "Default radio";
-    String label2 = "Second default radio";
-    String label3 = "Disabled radio";
-    String value1 = "option1";
-    String value2 = "option2";
 
     @Test
     public void baseInitTest() {
