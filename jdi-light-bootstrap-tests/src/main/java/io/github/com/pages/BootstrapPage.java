@@ -122,6 +122,7 @@ public class BootstrapPage extends WebPage {
     @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
     @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
     @UI("#card-navigation") public static CardNavigation cardNavigation;
+    @UI("#radio-buttons") public static RadioButtonGroup radioButtonGroup;
     @UI(".card-group:nth-of-type(1)") public static CardGroup cardGroupWithoutFooter;
     @UI(".card-group:nth-of-type(2)") public static CardGroup cardGroupWithFooter;
     @UI("#pagination-overview") public static PaginationOverview paginationOverview;
