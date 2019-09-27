@@ -14,7 +14,7 @@ import java.awt.event.KeyEvent;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 
-public class IG_FileInput extends UIBaseElement<TextAssert> implements HasLabel, IsText, SetValue{
+public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, IsText, SetValue{
     // region Actions
     @JDIAction("Upload file '{0}' for '{name}'")
     public void uploadFile(String path) {
