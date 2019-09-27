@@ -58,8 +58,8 @@ public class NestingTests extends TestsInit {
         buttonGroupNesting.dropdownMenu.expand();
         buttonGroupNesting.dropdownMenu.is().expanded();
         buttonGroupNesting.dropdownMenu.is().size(2);
-        buttonGroupNesting.dropdownMenu.list().get(0).is().text(dropdownMenuLinkOne);
-        buttonGroupNesting.dropdownMenu.list().get(1).is().text(dropdownMenuLinkTwo);
+        buttonGroupNesting.dropdownMenu.list().get(1).is().text(dropdownMenuLinkOne);
+        buttonGroupNesting.dropdownMenu.list().get(2).is().text(dropdownMenuLinkTwo);
         buttonGroupNesting.dropdownMenu.highlight();
         buttonGroupNesting.dropdownMenu.select(dropdownMenuLinkOne);
         newWindowTitleCheck(linkOnePageTitle);

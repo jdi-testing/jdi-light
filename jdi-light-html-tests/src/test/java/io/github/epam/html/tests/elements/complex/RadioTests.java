@@ -46,7 +46,7 @@ public class RadioTests extends TestsInit {
     }
     @Test
     public void selectNumTest() {
-        colors.select(1);
+        colors.select(2);
         assertEquals(colors.getValue(), "Red");
     }
     @Test
