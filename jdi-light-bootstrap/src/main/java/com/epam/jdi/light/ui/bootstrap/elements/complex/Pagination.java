@@ -5,6 +5,11 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.bootstrap.asserts.PaginationAssert;
 
+/**
+ * Created by Dmitrii Pavlov on 26.09.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
+
 public class Pagination extends UIListBase<PaginationAssert> {
 
     @JDIAction("Check '{name}'")
