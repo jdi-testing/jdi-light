@@ -102,7 +102,7 @@ public class CardDeckTests extends TestsInit {
     }
 
     @Test
-    public void getTitleIsValidationTest() {
+    public void isValidationTest() {
         cardDeckWithoutFooter.highlight();
         cardDeckWithoutFooter.card1.title.is().text(card1Title);
         cardDeckWithoutFooter.card2.title.is().text(card2Title);
