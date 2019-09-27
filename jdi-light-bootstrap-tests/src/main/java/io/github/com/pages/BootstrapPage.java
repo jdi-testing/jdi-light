@@ -3,28 +3,22 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+
 import io.github.com.sections.*;
-import io.github.com.sections.buttongroup.DefaultButtonGroup;
-import io.github.com.sections.buttongroup.SpecificButtonGroup;
+import io.github.com.sections.card.CardWithHeaderAndFooter;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
     public static UIElement inputGroupWrap,inputGroupNowrap;
     public static Button redButton, doubleButton, disabledButton;
-
-    @Css("#button-group1")
-    public static DefaultButtonGroup defaultButtonGroup;
-
-    @Css("#button-group2")
-    public static SpecificButtonGroup specificButtonGroup;
 
     @UI("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
     @UI("#jumbotron") public static Jumbotron jumbotron;
@@ -36,8 +30,12 @@ public class BootstrapPage extends WebPage {
     //endregion
 
     //region Complex Elements
-
-
+    @UI("#carousel-example-slides-only") public static Carousel carouselWithSlidesOnly;
+    @UI("#carousel-example-controls") public static Carousel carouselWithControls;
+    @UI("#carousel-example-indicators") public static Carousel carouselWithIndicators;
+    @UI("#carousel-example-captions") public static Carousel carouselWithCaptions;
+    @UI("#carousel-example-fade") public static Carousel carouselWithFadeTransition;
+    @UI("#carousel-example-interval") public static Carousel carouselWithCustomInterval;
     // COLLAPSE
     @JDropdown(expand = "#bs-collapse-link",
             value = "#bs-collapse-one",
@@ -85,15 +83,35 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-small") public static InputGroupSizing inputGroupSmallSizing;
     @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
     @UI("#card-example") public static CardExample cardExample;
+    @UI("#card-image") public static CardImage cardImage;
     @UI("#card-body") public static CardBody cardBody;
+    @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
+    @UI("#card-with-header-and-footer-quote") public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
+    @UI("#card-with-header-and-footer") public static CardWithHeaderAndFooter cardWithHeaderAndFooter;
+    @UI("#card-bright-blue") public static CardWithHeaderAndFooter cardBrightBlue;
+    @UI("#card-grey") public static CardWithHeaderAndFooter cardGrey;
+    @UI("#card-green") public static CardWithHeaderAndFooter cardGreen;
+    @UI("#card-red") public static CardWithHeaderAndFooter cardRed;
+    @UI("#card-yellow") public static CardWithHeaderAndFooter cardYellow;
+    @UI("#card-blue") public static CardWithHeaderAndFooter cardBlue;
+    @UI("#card-light") public static CardWithHeaderAndFooter cardLight;
+    @UI("#card-dark") public static CardWithHeaderAndFooter cardDark;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
+    @UI("#buttonToolbar1") public static ButtonToolbar buttonToolbar;
+    @UI("#buttonToolbar2") public static ButtonToolbar buttonToolbarWithInputField;
     @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
+    @UI("#card-custom-css-1") public static CardWithCustomCss13Rem cardWithCustomCss13Rem;
+    @UI("#card-custom-css-2") public static CardWithCustomCss9Rem cardWithCustomCss9Rem;
+    @UI("#card-mixins-utilities") public static CardMixinsUtilities cardMixinsUtilities;
+    @UI("#card-horizontal") public static CardHorizontal cardHorizontal;
     @UI("#custom-select-01") public static CustomSelect customSelect;
     @UI("#custom-select-button-01") public static CustomSelectWithButton customSelectWithButton;
     @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
     @UI("#media-object-nesting") public static MediaObjectNesting mediaObjectNesting;
     @UI("#media-object-list") public static JList<MediaObjectSample> mediaObjectList;
+    @UI("#multiple-addons-1")  public static InputGroupMultipleAddonsUpper multipleAddonUpper;
+    @UI("#multiple-addons-2")  public static InputGroupMultipleAddonsLower multipleAddonLower;
     @UI("#basic-example") public static ButtonGroupBasicExample buttonGroupBasicExample;
     @UI("#vertical-variation") public static  ButtonGroupVerticalVariation buttonGroupVerticalVariation;
     @UI("#button-group-nesting") public static ButtonGroupNesting buttonGroupNesting;
@@ -105,5 +123,14 @@ public class BootstrapPage extends WebPage {
     @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
     @UI("#card-navigation") public static CardNavigation cardNavigation;
     @UI("#radio-buttons") public static RadioButtonGroup radioButtonGroup;
+    @UI(".card-group:nth-of-type(1)") public static CardGroup cardGroupWithoutFooter;
+    @UI(".card-group:nth-of-type(2)") public static CardGroup cardGroupWithFooter;
+    @UI("#pagination-overview") public static PaginationOverview paginationOverview;
+    @UI("#pagination-icons") public static PaginationIcons paginationIcons;
+    @UI("#pagination-states") public static PaginationStates paginationStates;
+    @UI("#pagination-big") public static PaginationSizeBig paginationSizeBig;
+    @UI("#pagination-small") public static PaginationSizeSmall paginationSizeSmall;
+    @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
+    @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
     //endregion
 }
