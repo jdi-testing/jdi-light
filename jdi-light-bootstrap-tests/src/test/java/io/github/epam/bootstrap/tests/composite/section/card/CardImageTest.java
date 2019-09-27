@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.cardExample;
+import static io.github.com.pages.BootstrapPage.cardImage;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
@@ -20,7 +21,7 @@ public class CardImageTest extends TestsInit {
     private static final String SRC_ATTR_EXPECTED = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
     private static final String ALT_ATTR_EXPECTED = "image";
     private static final String IMAGE_TOP_CLASS = "card-img-top";
-    private static final String TEXT = "Some quick example text";
+    private static final String TEXT = "Some quick example text.";
     private static final int WIDTH = 86;
     private static final int HEIGHT = 137;
 
@@ -31,39 +32,47 @@ public class CardImageTest extends TestsInit {
     }
 
     @Test
-    public void getMainTextText() {
-        assertEquals(cardExample.text.getText(), TEXT);
+    public void getMainTextTest() {
+        assertEquals(cardImage.text.getText(), TEXT);
+    }
+
+    @Test
+    public void availabilityest() {
+        cardImage.text.is().enabled();
+        cardImage.text.is().displayed();
+        cardImage.image.is().enabled();
+        cardImage.image.is().displayed();
     }
 
     @Test
     public void getSrcTest() {
-        assertEquals(cardExample.image.src(), SRC_ATTR_EXPECTED);
+        assertEquals(cardImage.image.src(), SRC_ATTR_EXPECTED);
     }
 
     @Test
     public void getAltTest() {
-        assertEquals(cardExample.image.alt(), ALT_ATTR_EXPECTED);
+        assertEquals(cardImage.image.alt(), ALT_ATTR_EXPECTED);
     }
 
     @Test
     public void isValidationTest() {
-        cardExample.text.is().text(is(TEXT));
-        cardExample.image.is().src(is(SRC_ATTR_EXPECTED));
-        cardExample.image.is().alt(is(ALT_ATTR_EXPECTED));
-        cardExample.image.unhighlight();
-        cardExample.image.assertThat().width(is(WIDTH));
-        cardExample.image.assertThat().height(is(HEIGHT));
+        cardImage.text.is().text(is(TEXT));
+        cardImage.image.is().src(is(SRC_ATTR_EXPECTED));
+        cardImage.image.is().alt(is(ALT_ATTR_EXPECTED));
+        cardImage.image.unhighlight();
+        cardImage.image.assertThat().width(is(WIDTH));
+        cardImage.image.assertThat().height(is(HEIGHT));
     }
 
     @Test
     public void baseValidationTest() {
-        baseValidation(cardExample.image);
-        baseValidation(cardExample.text);
+        baseValidation(cardImage.image);
+        baseValidation(cardImage.text);
     }
 
     @Test
     public void imageClassTest() {
-        cardExample.image.is().core().hasClass(IMAGE_TOP_CLASS);
-        cardExample.image.assertThat().core().hasClass(IMAGE_TOP_CLASS);
+        cardImage.image.is().core().hasClass(IMAGE_TOP_CLASS);
+        cardImage.image.assertThat().core().hasClass(IMAGE_TOP_CLASS);
     }
 }
