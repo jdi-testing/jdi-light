@@ -35,14 +35,14 @@ public class ButtonToolbarTests extends TestsInit {
     @Test
     public void getTextTest() {
         for (int i = 0; i < 8; i++) {
-            assertEquals(buttonToolbar.buttonsInToolbar.get(i).getText(), String.valueOf(i + 1));
+            assertEquals(buttonToolbar.buttonsInToolbar.get(i + 1).getText(), String.valueOf(i + 1));
         }
     }
 
     @Test
     public void isValidationTest() {
         for (int i = 0; i < 8; i++) {
-            buttonToolbar.buttonsInToolbar.get(i).is().text(String.valueOf(i + 1));
+            buttonToolbar.buttonsInToolbar.get(i + 1).is().text(String.valueOf(i + 1));
         }
     }
 

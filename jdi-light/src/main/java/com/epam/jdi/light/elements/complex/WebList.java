@@ -45,6 +45,8 @@ import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList, HasAssert<UISelectAssert<UISelectAssert, WebList>> {
+    private int jdiIndex = 0;
+
     @Override
     public WebList list() { return this; }
     public UIElement core() {
@@ -58,10 +60,10 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         super.setCore(base);
         return this;
     }
-    public WebList() { elements.useCache(false); setTextType(SMART_LIST); noValidation(); }
+    public WebList() { jdiIndex = 1; elements.useCache(false); setTextType(SMART_LIST); noValidation(); }
     public WebList(By locator) { this(); setLocator(locator);}
     public WebList(List<WebElement> elements) {
-        this(); setWebElements(elements);
+        this(); jdiIndex = 0; setWebElements(elements);
     }
     public WebList(JDIBase base) {
         super(base);
@@ -191,20 +193,22 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction(level = DEBUG) @Override
     public UIElement get(int index) {
-        if (index < 0)
-            throw exception("Can't get element with index '%s'. Index should be 0 or more", index);
+        final int indexCalculated = index - jdiIndex;
+        if (indexCalculated < 0)
+            throw exception("Can't get element with index '%s'. Index should be 0 or more", indexCalculated);
         return (locator.isTemplate()
-            ? tryGetByIndex(index)
-            : initElement(() -> getList(index+1).get(index)))
-        .setName(nameFromIndex(index));
+                ? tryGetByIndex(indexCalculated)
+                : initElement(() -> getList(indexCalculated + 1).get(indexCalculated)))
+                .setName(nameFromIndex(indexCalculated));
     }
     protected UIElement tryGetByIndex(int index) {
+        int indexCalculated = index - jdiIndex;
         try {
-            return new UIElement(base(), getLocator(index), nameFromIndex(index));
+            return new UIElement(base(), getLocator(indexCalculated), nameFromIndex(indexCalculated));
         } catch (Exception ex) {
             throw exception("Can't get element with index '%s' for template locator. " +
                             "Maybe locator is wrong or you need to get element by name. %s",
-                    index, safeException(ex));
+                    indexCalculated, safeException(ex));
         }
     }
 
