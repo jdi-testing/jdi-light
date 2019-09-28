@@ -35,6 +35,7 @@ import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
+import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
@@ -163,7 +164,7 @@ public class WebSettings {
         switch (prop.toLowerCase().replaceAll(" ", "")) {
             case "sauce":
             case "saucelabs":
-                COMMON_CAPABILITIES = new SauceSettings().asCapabilities();
+                COMMON_CAPABILITIES = sauceCapabilities();
                 return sauceLabs();
             case "browserstack": return browserstack();
             default: return seleniumLocalhost();

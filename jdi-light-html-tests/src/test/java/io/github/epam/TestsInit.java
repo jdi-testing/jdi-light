@@ -1,11 +1,14 @@
 package io.github.epam;
 
+import com.epam.jdi.light.driver.sauce.SauceSettings;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pseudo.site.PseudoSite;
+
+import java.util.Map;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
@@ -23,7 +26,6 @@ public class TestsInit {
         homePage.open();
         logger.toLog("Run Tests");
     }
-
 
     @AfterSuite(alwaysRun = true)
     public static void tearDown() {
