@@ -6,6 +6,8 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
+import com.epam.jdi.light.driver.get.RemoteDriver;
+import com.epam.jdi.light.driver.sauce.SauceSettings;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
@@ -32,7 +34,7 @@ import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
+import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
@@ -141,6 +143,7 @@ public class WebSettings {
         fillAction(SoftAssert::setAssertType, "assert.type");
 
         // RemoteWebDriver properties
+        fillAction(p -> DRIVER_REMOTE_URL = getRemoteUrl(p), "remote.type");
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> SMART_SEARCH_LOCATORS =
@@ -155,6 +158,16 @@ public class WebSettings {
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
+    }
+    private static String getRemoteUrl(String prop) {
+        switch (prop.toLowerCase().replaceAll(" ", "")) {
+            case "sauce":
+            case "saucelabs":
+                COMMON_CAPABILITIES = new SauceSettings().asCapabilities();
+                return sauceLabs();
+            case "browserstack": return browserstack();
+            default: return seleniumLocalhost();
+        }
     }
 
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {

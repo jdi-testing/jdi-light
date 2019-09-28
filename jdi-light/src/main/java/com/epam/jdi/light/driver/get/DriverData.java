@@ -55,6 +55,7 @@ public class DriverData {
     public static Map<String,String> CAPABILITIES_FOR_IE = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_CHROME = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_FF = new HashMap<>();
+    public static Map<String,String> COMMON_CAPABILITIES = new HashMap<>();
 
     public static String chromeDriverPath() {
         return mergePath(getDriverFolder(),getOs() == WIN ? "chromedriver.exe" : "chromedriver");
@@ -127,6 +128,7 @@ public class DriverData {
             cap.addArguments(getBrowserSizeOption());
             cap.setExperimentalOption("prefs", chromePrefs);
             // Capabilities from settings
+            COMMON_CAPABILITIES.forEach(cap::setCapability);
             CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
             return cap;
         } catch (Exception ex) {
@@ -156,6 +158,7 @@ public class DriverData {
             cap.addArguments(getBrowserSizeOption());
             cap.setProfile(firefoxProfile);
             // Capabilities from settings
+            COMMON_CAPABILITIES.forEach(cap::setCapability);
             CAPABILITIES_FOR_FF.forEach(cap::setCapability);
             return cap;
         } catch (Exception ex) {
@@ -177,6 +180,7 @@ public class DriverData {
             cap.is(SUPPORTS_JAVASCRIPT);
             cap.setCapability(ACCEPT_SSL_CERTS, true);
             // Capabilities from settings
+            COMMON_CAPABILITIES.forEach(cap::setCapability);
             CAPABILITIES_FOR_IE.forEach(cap::setCapability);
     //        cap.setCapability("project", WebSettings.DRIVER_REMOTE_PROJECT_NAME);
     //        cap.setCapability("apm_id", WebSettings.DRIVER_REMOTE_APM_ID);
