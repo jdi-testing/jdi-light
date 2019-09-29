@@ -1962,7 +1962,7 @@
 
 							<div class="input-group mb-3" id="custom-file-input-button-01">
 								<div class="input-group-prepend">
-									<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03">Button</button>
+									<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03" onclick="alert('Button clicked, thank you!');">Button</button>
 								</div>
 								<div class="custom-file">
 									<input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03">
@@ -1976,7 +1976,7 @@
 									<label class="custom-file-label" for="inputGroupFile04">Choose file</label>
 								</div>
 								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
+									<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04" onclick="alert('Button clicked, thank you!');">Button</button>
 								</div>
 							</div>
 							<br/>
@@ -4075,7 +4075,7 @@
 							<hr>
 							<button type="button" class="btn btn-info btn-block" id="tooltipWithHTML" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Tooltip with HTML</button>
 							<hr>
-							<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Disabled tooltip">
+							<span class="d-inline-block"  id="wrapperForDisabledButton" tabindex="0" data-toggle="tooltip" title="Disabled tooltip">
   								<button class="btn btn-info btn-block" id="tooltipOnDisabledButton" style="pointer-events: none;" type="button" disabled>Disabled button</button>
 							</span>
 							<br>&nbsp;
