@@ -618,8 +618,13 @@ public class UIElement extends JDIBase
             cl.contains("selected") || getAttribute("checked").equals("true");
     }
     protected boolean enabled() {
-        List<String> cls = classes();
-        return cls.contains("active") || !hasAttribute("disabled") && !hasClass("disabled");
+        if (hasClass("active")) {
+            return true;
+        }
+        if (hasClass("disabled") || hasAttribute("disabled")) {
+            return false;
+        }
+        return getWebElement().isEnabled();
     }
     protected boolean displayed() {
         try {
