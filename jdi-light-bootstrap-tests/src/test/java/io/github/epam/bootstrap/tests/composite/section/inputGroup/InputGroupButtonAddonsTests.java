@@ -35,7 +35,8 @@ public class InputGroupButtonAddonsTests extends TestsInit {
     public void checkButtonAddon2Test() {
         inputGroupButtonAddons2.input2.input(text);
         inputGroupButtonAddons2.button2.click();
-        inputGroupButtonAddons2.input2.assertThat().text(text);
+        inputGroupButtonAddons2.input2.input(placeholder_text);
+        inputGroupButtonAddons2.input2.assertThat().text(placeholder_text);
     }
 
     @Test
@@ -50,7 +51,8 @@ public class InputGroupButtonAddonsTests extends TestsInit {
     public void checkButtonAddon4Test() {
         inputGroupButtonAddons4.input4.input(text);
         inputGroupButtonAddons4.nextButtons.get(1).click();
+        inputGroupButtonAddons4.input4.input(placeholder_text);
         inputGroupButtonAddons4.nextButtons.get(2).click();
-        inputGroupButtonAddons4.input4.assertThat().text(text);
+        inputGroupButtonAddons4.input4.assertThat().text(placeholder_text);
     }
 }
