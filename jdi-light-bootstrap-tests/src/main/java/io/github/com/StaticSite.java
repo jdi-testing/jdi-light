@@ -14,6 +14,7 @@ import io.github.com.pages.BootstrapPage;
 public class StaticSite {
 	@Url("/bootstrap.html")
 	public static BootstrapPage bsPage;
+
 	@UI("#login-form")
 	public static Form<User> loginForm;
 
