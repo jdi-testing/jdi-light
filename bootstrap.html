@@ -302,109 +302,270 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
-							<nav id="navs">
-								<div class="nav nav-tabs" id="nav-tab" role="tablist">
-									<a class="nav-item nav-link active" id="nav-home-tab"
-									   data-toggle="tab" href="#nav-base" role="tab"
-									   aria-controls="nav-home" aria-selected="true">Base</a>
-									<a class="nav-item nav-link" id="nav-profile-tab"
-									   data-toggle="tab" href="#nav-vertical-pills" role="tab"
-									   aria-controls="nav-profile" aria-selected="false">Vertical pills</a>
-									<a class="nav-item nav-link" id="nav-contact-tab"
-									   data-toggle="tab" href="#nav-other" role="tab"
-									   aria-controls="nav-contact" aria-selected="false">Other</a>
-								</div>
-
-								<div class="tab-content" id="nav-tabContent">
-
-									<div class="tab-pane fade show active" id="nav-base"
-										 role="tabpanel" aria-labelledby="nav-home-tab">
-										<nav class="nav">
-											<a class="nav-link active"
-											   href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
-											   target="_blank">Bootstrap</a>
-											<a class="nav-link"
-											   href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Home</a>
-											<a class="nav-link disabled"
-											   href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank"
-											   tabindex="-1" aria-disabled="true">Disabled</a>
-										</nav>
-									</div>
-
-									<div class="tab-pane fade" id="nav-vertical-pills" role="tabpanel"
-										 aria-labelledby="nav-profile-tab">
-										<ul class="nav nav-pills flex-column">
-											<li class="nav-item"><a class="nav-link active"
-																	href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
-																	target="_blank">Bootstrap</a>
-											</li>
-											<li class="nav-item"><a class="nav-link"
-																	href="https://jdi-testing.github.io/jdi-light/html5.html"
-																	target="_blank">HTML
-												5</a></li>
-											<li class="nav-item"><a class="nav-link"
-																	href="https://jdi-testing.github.io/jdi-light/index.html"
-																	target="_blank">Home</a>
-											</li>
-											<li class="nav-item"><a class="nav-link disabled"
-																	href="https://jdi-testing.github.io/jdi-light/bootstrap.html"
-																	tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
-											</li>
-										</ul>
-									</div>
-
-									<div class="tab-pane fade" id="nav-other" role="tabpanel"
-										 aria-labelledby="nav-contact-tab">
-										Classes are used throughout, so your markup can be super flexible. Use &lt;ul&gt;s like above, &lt;ol&gt; if the order of your items is important, or roll your own with a &lt;nav&gt; element.
-										<br><br>
-										<center><b>Horizontal alignment</b></center><br>
-										- Centered with .justify-content-center<br>
-										- Right-aligned with .justify-content-end<br><br>
-										<center><b>Fill and justify</b></center><br>
-										Force your .nav’s contents to extend the full available width one of two modifier classes. To proportionately fill all available space with your .nav-items, use .nav-fill.<br><br>
-										<center><b>Using dropdowns:</b></center><br>
-										<ul class="nav nav-tabs">
-											<li class="nav-item">
-												<a class="nav-link active" href="https://getbootstrap.com/docs/4.3/components/navs/"
-												   target="_blank">Active</a>
-											</li>
-											<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="https://getbootstrap.com/docs/4.3/components/navs/"
-												   target="_blank" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/components/navs/"
-													   target="_blank">Action</a>
-													<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/components/navs/"
-													   target="_blank">Another action</a>
-													<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/components/navs/"
-													   target="_blank">Something else here</a>
-													<div class="dropdown-divider"></div>
-													<a class="dropdown-item" href="https://getbootstrap.com/docs/4.3/components/navs/"
-													   target="_blank">Separated link</a>
-												</div>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" href="https://getbootstrap.com/docs/4.3/components/navs/"
-												   target="_blank">Link</a>
-											</li>
-										</ul>
-										<br><br>
-
-									</div>
-								</div>
+							<b> version with &lt;li&gt; tags</b>
+							<ul class="nav" id="nav-base-li">
+								<li class="nav-item">
+									<a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Active</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-docs" target="_blank">JDI Docs</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-testing" target="_blank">JDI - testing tool</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link disabled" href="https://getbootstrap.com" tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+								</li>
+							</ul>
+						<br>
+							<b> version with &lt;a&gt; tags</b>
+							<nav class="nav"  id="nav-base-a">
+								<a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Active</a>
+								<a class="nav-link" href="https://github.com/jdi-doc" target="_blank">JDI Docs</a>
+								<a class="nav-link" href="https://github.com/jdi-testing" target="_blank">JDI - testing tool</a>
+								<a class="nav-link disabled" href="https://getbootstrap.com" tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
 							</nav>
 						</div>
 						<div class="html-right">
-							<h4>Navs</h4>
+							<h4>Nav - Base</h4>
 							<p>
 								Bootstrap: <a
-									href="https://getbootstrap.com/docs/4.3/components/navs/"
-									target="_blank">https://getbootstrap.com/docs/4.3/components/navs/</a>
+									href="https://getbootstrap.com/docs/4.3/components/navs/#base-nav"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/navs/#base-nav</a>
 							</p>
+						</div>
+					</div>
 
-							<p>click()</p>
-							<p>getValues()</p>
+					<div class="doc-space line">
+						<div class="html-left">
+							<b>center alignment</b>
+							<ul class="nav justify-content-center"  id="nav-center">
+								<li class="nav-item">
+									<a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Active</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-doc" target="_blank">JDI Docs</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-testing" target="_blank">JDI - testing tool</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link disabled" href="https://getbootstrap.com" tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+								</li>
+							</ul>
+							<br>
 
+							<b>right alignment</b>
+							<ul class="nav justify-content-end"  id="nav-end">
+								<li class="nav-item">
+									<a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Active</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-doc" target="_blank">JDI Docs</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-testing" target="_blank">JDI - testing tool</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link disabled" href="https://getbootstrap.com" tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+								</li>
+							</ul>
+						</div>
+						<div class="html-right">
+							<h4>Nav - Horizontal alignment</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/navs/#horizontal-alignment"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/navs/#horizontal-alignment</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<b> version with &lt;li&gt; tags</b>
+							<ul class="nav flex-column" id="nav-vert-li">
+								<li class="nav-item">
+									<a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Active</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-doc" target="_blank">JDI Docs</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-testing" target="_blank">JDI - testing tool</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link disabled" href="https://getbootstrap.com" tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+								</li>
+							</ul>
+							<br>
+
+						    <b> version with &lt;a&gt; tags</b>
+						    <nav class="nav flex-column" id="nav-vert-a">
+						    	<a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Active</a>
+						    	<a class="nav-link" href="https://github.com/jdi-doc" target="_blank">JDI Docs</a>
+						    	<a class="nav-link" href="https://github.com/jdi-testing" target="_blank">JDI - testing tool</a>
+						    	<a class="nav-link disabled" href="https://getbootstrap.com" tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+						    </nav>
+						</div>
+						    <div class="html-right">
+							<h4>Nav - Vertical alignment</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/navs/#vertical"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/navs/#vertical</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<ul class="nav nav-tabs" id="nav-tabs">
+								<li class="nav-item">
+									<a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Active</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-doc" target="_blank">JDI Docs</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-testing" target="_blank">JDI - testing tool</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link disabled" href="https://getbootstrap.com" tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+								</li>
+							</ul>
+						</div>
+						<div class="html-right">
+							<h4>Nav - Tabs</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/navs/#tabs"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/navs/#tabs</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<ul class="nav nav-pills" id="nav-pills">
+								<li class="nav-item">
+									<a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Active</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-doc" target="_blank">JDI Docs</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-testing" target="_blank">JDI - testing tool</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link disabled" href="https://getbootstrap.com" tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+								</li>
+							</ul>
+						</div>
+						<div class="html-right">
+							<h4>Nav - Pills</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/navs/#pills"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/navs/#pills</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+					<ul class="nav nav-pills nav-fill" id="nav-justify">
+						<li class="nav-item">
+							<a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Active</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="https://github.com/jdi-doc" target="_blank">JDI Docs</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="https://github.com/jdi-testing" target="_blank">JDI - testing tool</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" href="https://getbootstrap.com" tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+						</li>
+					</ul>
+					<br>
+					<br>
+					<div class="html-left">
+					</div>
+					<div class="html-right">
+						<h4>Nav - Fill and justify</h4>
+						<p>
+							Bootstrap: <a
+								href="https://getbootstrap.com/docs/4.3/components/navs/#fill-and-justify"
+								target="_blank">https://getbootstrap.com/docs/4.3/components/navs/#fill-and-justify</a>
+						</p>
+					</div>
+				</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<ul class="nav nav-tabs" id="nav-with-dropdown">
+								<li class="nav-item">
+									<a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">Active</a>
+								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">JDI home</a>
+										<a class="dropdown-item" href="https://github.com/jdi-doc" target="_blank">JDI Docs</a>
+										<a class="dropdown-item" href="https://github.com/jdi-testing" target="_blank">JDI - testing tool</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="https://getbootstrap.com" target="_blank">Bootstrap</a>
+									</div>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#" target="_blank">JDI - testing tool</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link disabled" href="https://getbootstrap.com" tabindex="-1" aria-disabled="true" target="_blank">Disabled</a>
+								</li>
+							</ul>
+						</div>
+						<div class="html-right">
+							<h4>Nav - Tabs with dropdowns</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/navs/#tabs-with-dropdowns"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/navs/#tabs-with-dropdowns</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<ul class="nav nav-pills" id="nav-pills-drop">
+								<li class="nav-item">
+									<a class="nav-link active" href="https://jdi-testing.github.io/jdi-light/index.html"  target="_blank">Active</a>
+								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank">JDI home</a>
+										<a class="dropdown-item" href="https://github.com/jdi-doc" target="_blank">JDI Docs</a>
+										<a class="dropdown-item" href="https://github.com/jdi-testing" target="_blank">JDI - testing tool</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="https://getbootstrap.com"  target="_blank">Bootstrap</a>
+									</div>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/jdi-testing"  target="_blank">JDI - testing tool</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link disabled" href="https://getbootstrap.com" tabindex="-1" aria-disabled="true"  target="_blank">Disabled</a>
+								</li>
+							</ul>
+						</div>
+						<div class="html-right">
+							<h4>Nav - Pills with dropdowns</h4>
+							<p>
+								Bootstrap: <a
+									href="https://getbootstrap.com/docs/4.3/components/navs/#pills-with-dropdowns"
+									target="_blank">https://getbootstrap.com/docs/4.3/components/navs/#pills-with-dropdowns</a>
+							</p>
 						</div>
 					</div>
 
@@ -3203,36 +3364,6 @@
 					</div>
 
 					<!-- CARD END -->
-
-					<div class="doc-space line">
-						<div class="html-left mb-3">
-							<div class="list-group">
-								<button type="button" class="btn btn-danger"
-									onclick="alert('Red button');">Red button</button>
-								<a href="https://github.com/jdi-testing" target="_blank"
-									class="list-group-item list-group-item-info">JDI - testing
-									tool</a>
-								<button type="button" class="btn btn-light"
-									onclick="alert('Button with badge');">
-									Profile <span class="badge badge-primary badge-pill">9</span> <span
-										class="sr-only">unread messages</span>
-								</button>
-								<a href="https://jdi-testing.github.io/jdi-light/index.html" target="_blank"
-									class="btn btn-primary btn-lg active" role="button"
-									aria-pressed="true">JDI website</a>
-								<button type="button"
-									class="list-group-item list-group-item-action" disabled>JDI</button>
-							</div>
-						</div>
-						<div class="html-right">
-							<h4>List group</h4>
-							<p>
-								Bootstrap: <a
-									href="https://getbootstrap.com/docs/4.3/components/list-group/"
-									target="_blank">https://getbootstrap.com/docs/4.3/components/list-group/</a>
-							</p>
-						</div>
-					</div>
 
 					<div class="doc-space line">
 						<div class="html-left">
