@@ -33,6 +33,15 @@ public class ComplexElementsTests extends TestsInit {
         //metalAndColorsPage.vegetables.check(Onion, Tomato);
     }
     @Test
+    public void navigationListTest() {
+        navigation.get(nContactForm).click();
+        contactFormPage.checkOpened();
+        navigation.get(nHome).click();
+        jdiText.is().text(containsString("QUIS NOSTRUD EXERCITATION"));
+        githubLink.click();
+        originalWindow();
+    }
+    @Test
     public void menuTest() {
         leftMenu.select(ContactForm);
         contactFormPage.checkOpened();
