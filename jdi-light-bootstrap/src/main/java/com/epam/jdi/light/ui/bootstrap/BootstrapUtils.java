@@ -1,7 +1,6 @@
 package com.epam.jdi.light.ui.bootstrap;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.common.Exceptions.exception;

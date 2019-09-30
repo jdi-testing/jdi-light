@@ -29,9 +29,9 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
     }
 
     @JDIAction("Get value from input with index {0}")
-    public String getValue(int number) {
-        number--;
-        return core().finds(By.cssSelector("input")).get(number).getValue();
+    public String getValue(int index) {
+        int zeroStartIndex = index - 1;
+        return core().finds(By.cssSelector("input")).get(zeroStartIndex).getValue();
     }
 
     @JDIAction("Get all values from {name}")
@@ -54,9 +54,9 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
     }
 
     @JDIAction("Get text from input with index {0}")
-    public String getText(int number) {
-        number--;
-        return core().finds("input").get(number).getText();
+    public String getText(int index) {
+        int zeroStartIndex = index - 1;
+        return core().finds("input").get(zeroStartIndex).getText();
     }
 
     @JDIAction("Get all texts from {name}")
@@ -80,9 +80,9 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
     }
 
     @JDIAction("Set value '{0}' to input with index {1}")
-    public void setValue(String value, int number) {
-        number--;
-        core().finds("input").get(number).setValue(value);
+    public void setValue(String value, int index) {
+        int zeroStartIndex = index - 1;
+        core().finds("input").get(zeroStartIndex).setValue(value);
     }
 
     @JDIAction("Set values to all inputs from {name}")
@@ -101,8 +101,8 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @JDIAction("Send keys to input with index {0}")
     public void sendKeys(int index, CharSequence... value) {
-        index--;
-        core().finds("input").get(index).sendKeys(value);
+        int zeroStartIndex = index - 1;
+        core().finds("input").get(zeroStartIndex).sendKeys(value);
     }
 
     @JDIAction("Send keys to input with locator {0}")
@@ -126,8 +126,8 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @JDIAction("Clear input from {name} with index {0}")
     public void clear(int index) {
-        index--;
-        core().finds("input").get(index).clear();
+        int zeroStartIndex = index - 1;
+        core().finds("input").get(zeroStartIndex).clear();
     }
 
     @JDIAction("Clear input from {name} with locator {0}")
@@ -146,8 +146,8 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @JDIAction("Focus input from {name} with index {0}")
     public void focus(int index) {
-        index--;
-        core().finds("input").get(index).focus();
+        int zeroStartIndex = index - 1;
+        core().finds("input").get(zeroStartIndex).focus();
     }
 
     @JDIAction("Focus input from {name} with locator {0}")
@@ -161,8 +161,8 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @JDIAction("Get placeholder from input with index {0} from {name}")
     public String placeholder(int index) {
-        index--;
-        return core().finds("input").get(index).placeholder();
+        int zeroStartIndex = index - 1;
+        return core().finds("input").get(zeroStartIndex).placeholder();
     }
 
     @JDIAction("Get placeholder from input with locator {0} from {name}")
@@ -186,8 +186,8 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @JDIAction("Input value {0} in input with index {1}")
     public void input(String value, int index) {
-        index--;
-        core().finds("input").get(index).input(value);
+        int zeroStartIndex = index - 1;
+        core().finds("input").get(zeroStartIndex).input(value);
     }
 
     @JDIAction("Input value {0} in input with locator {1}")
