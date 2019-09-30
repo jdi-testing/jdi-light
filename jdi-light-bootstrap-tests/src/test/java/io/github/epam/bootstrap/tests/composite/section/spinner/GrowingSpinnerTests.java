@@ -3,7 +3,6 @@ package io.github.epam.bootstrap.tests.composite.section.spinner;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
@@ -15,6 +14,8 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertNotEquals;
 
 public class GrowingSpinnerTests extends TestsInit {
+
+    private static final String spinnerGrowClass = "spinner-grow";
 
     @BeforeMethod
     public void before() {
@@ -34,8 +35,6 @@ public class GrowingSpinnerTests extends TestsInit {
                       "return y.getBoundingClientRect().width;"
         );
 
-        System.out.println(firstSnapshot);
-
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.tagName("body")));
 
         double secondSnapshot = WebDriverFactory.jsExecute(
@@ -44,9 +43,12 @@ public class GrowingSpinnerTests extends TestsInit {
                         "return y.getBoundingClientRect().width;"
         );
 
-        System.out.println(secondSnapshot);
-
         assertNotEquals(firstSnapshot, secondSnapshot);
+    }
+
+    @Test
+    public void spinnerGrowClassTest() {
+        growingSpinner.primarySpinner.is().core().hasClass(spinnerGrowClass);
     }
 
 }
