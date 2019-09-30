@@ -5,7 +5,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
-import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
