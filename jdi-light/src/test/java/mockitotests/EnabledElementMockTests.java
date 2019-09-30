@@ -1,4 +1,4 @@
-package mockitoTests;
+package mockitotests;
 
 import mocks.CardNavigationMock;
 import org.testng.annotations.BeforeMethod;
