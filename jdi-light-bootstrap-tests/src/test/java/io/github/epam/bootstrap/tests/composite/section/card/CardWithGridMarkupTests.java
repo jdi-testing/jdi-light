@@ -138,7 +138,7 @@ public class CardWithGridMarkupTests extends TestsInit {
         cardWithGridMarkup.listCard.get(2).button.is().text(textButtonCardWithGridMarkup21);
         cardWithGridMarkup.listCard.get(2).button.click();
         validateAlert(is(textAlert));
-        cardWithGridMarkup.listCard.get(3).button.is()
+        cardWithGridMarkup.listCard.get(2).button.is()
                 .enabled()
                 .displayed();
     }
