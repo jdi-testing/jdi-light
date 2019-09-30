@@ -7,7 +7,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.cardBorderDark;
+import static io.github.com.pages.BootstrapPage.cardBorderLight;
+import static io.github.com.pages.BootstrapPage.cardBorderPrimary;
+import static io.github.com.pages.BootstrapPage.cardBorderSecondary;
+import static io.github.com.pages.BootstrapPage.cardBorderSuccess;
+import static io.github.com.pages.BootstrapPage.cardBorderWarning;
+import static io.github.com.pages.BootstrapPage.cardBorderInfo;
+import static io.github.com.pages.BootstrapPage.cardBorderDanger;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.testng.AssertJUnit.assertEquals;
