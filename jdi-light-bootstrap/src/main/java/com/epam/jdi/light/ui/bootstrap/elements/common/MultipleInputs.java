@@ -1,8 +1,8 @@
 package com.epam.jdi.light.ui.bootstrap.elements.common;
 
-import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
@@ -20,7 +20,7 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @Override
     public String getValue() {
-        return getValue(0);
+        return getValue(1);
     }
 
     @JDIAction("Get value from input with locator {0}")
@@ -30,6 +30,7 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @JDIAction("Get value from input with index {0}")
     public String getValue(int number) {
+        number--;
         return core().finds(By.cssSelector("input")).get(number).getValue();
     }
 
@@ -44,7 +45,7 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
     }
 
     public String getText() {
-        return getText(0);
+        return getText(1);
     }
 
     @JDIAction("Get text from input with locator {0}")
@@ -54,6 +55,7 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @JDIAction("Get text from input with index {0}")
     public String getText(int number) {
+        number--;
         return core().finds("input").get(number).getText();
     }
 
@@ -69,7 +71,7 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @Override
     public void setValue(String value) {
-        setValue(value, 0);
+        setValue(value, 1);
     }
 
     @JDIAction("Set value '{0}' to input with locator {1}")
@@ -79,6 +81,7 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @JDIAction("Set value '{0}' to input with index {1}")
     public void setValue(String value, int number) {
+        number--;
         core().finds("input").get(number).setValue(value);
     }
 
@@ -93,11 +96,12 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @Override
     public void sendKeys(CharSequence... value) {
-        sendKeys(0, value);
+        sendKeys(1, value);
     }
 
     @JDIAction("Send keys to input with index {0}")
     public void sendKeys(int index, CharSequence... value) {
+        index--;
         core().finds("input").get(index).sendKeys(value);
     }
 
@@ -117,11 +121,12 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @Override
     public void clear() {
-        clear(0);
+        clear(1);
     }
 
     @JDIAction("Clear input from {name} with index {0}")
     public void clear(int index) {
+        index--;
         core().finds("input").get(index).clear();
     }
 
@@ -136,11 +141,12 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @Override
     public void focus() {
-        focus(0);
+        focus(1);
     }
 
     @JDIAction("Focus input from {name} with index {0}")
     public void focus(int index) {
+        index--;
         core().finds("input").get(index).focus();
     }
 
@@ -150,11 +156,12 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
     }
     @Override
     public String placeholder() {
-        return placeholder(0);
+        return placeholder(1);
     }
 
     @JDIAction("Get placeholder from input with index {0} from {name}")
     public String placeholder(int index) {
+        index--;
         return core().finds("input").get(index).placeholder();
     }
 
@@ -174,11 +181,12 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
 
     @Override
     public void input(String value) {
-        input(value, 0);
+        input(value, 1);
     }
 
     @JDIAction("Input value {0} in input with index {1}")
     public void input(String value, int index) {
+        index--;
         core().finds("input").get(index).input(value);
     }
 
@@ -193,6 +201,16 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
         for(int index = 0; index < inputs.size(); index++) {
            inputs.get(index).input(values.get(index));
         }
+    }
+
+    @Override
+    public Label label() {
+        String xpath = "//*[@id=\"" + core().getAttribute("id") + "\"]//span";
+
+        return new Label().setup(Label.class, j->j
+            .setLocator(By.xpath(xpath))
+            .setName(getName() + "label")
+        );
     }
 
     @Override

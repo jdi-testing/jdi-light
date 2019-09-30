@@ -11,8 +11,10 @@ import static com.epam.jdi.light.ui.bootstrap.elements.BootstrapUtils.isElementI
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.multipleInputs;
 import static io.github.com.pages.BootstrapPage.redButton;
+import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.InputData.inputDataAsList;
+import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -34,10 +36,10 @@ public class MultipleInputsTests extends TestsInit {
 
     @Test
     public void getTextTest() {
-        int index = 0;
+        int index = 1;
 
         String name = multipleInputs.getText(index);
-        assertEquals(name, inputData.get(index));
+        assertEquals(name, inputData.get(--index));
 
         String surname = multipleInputs.getText("#mi-i-2");
         assertEquals(surname, inputData.get(1));
@@ -53,10 +55,10 @@ public class MultipleInputsTests extends TestsInit {
 
     @Test
     public void getValueTest() {
-        int index = 0;
+        int index = 1;
 
         String name = multipleInputs.getValue(index);
-        assertEquals(name, inputData.get(index));
+        assertEquals(name, inputData.get(--index));
 
         String surname = multipleInputs.getValue("#mi-i-2");
         assertEquals(surname, inputData.get(1));
@@ -76,10 +78,10 @@ public class MultipleInputsTests extends TestsInit {
 
         String value = inputData.get(0);
         multipleInputs.setValue(value);
-        assertEquals(multipleInputs.getValue(0), value);
+        assertEquals(multipleInputs.getValue(1), value);
 
-        int index = 1;
-        String name = inputData.get(index);
+        int index = 2;
+        String name = inputData.get(index - 1);
         multipleInputs.setValue(name, index);
         assertEquals(multipleInputs.getValue(index), name);
 
@@ -106,7 +108,7 @@ public class MultipleInputsTests extends TestsInit {
         assertEquals(multipleInputs.getText(), value);
 
         multipleInputs.clearAll();
-        int index = 0;
+        int index = 1;
         String name = inputData.get(index);
         multipleInputs.sendKeys(index, name);
         assertEquals(multipleInputs.getText(index), name);
@@ -133,7 +135,7 @@ public class MultipleInputsTests extends TestsInit {
         multipleInputs.clear();
         assertEquals(multipleInputs.getText(), "");
 
-        int index = 0;
+        int index = 1;
         String name = inputData.get(index);
         multipleInputs.sendKeys(index, name);
         multipleInputs.clear(index);
@@ -160,7 +162,7 @@ public class MultipleInputsTests extends TestsInit {
         assertTrue(isElementInViewPort(multipleInputs.core()));
         redButton.hover();
 
-        int index = 1;
+        int index = 2;
         multipleInputs.focus(index);
         assertTrue(isElementInViewPort(multipleInputs.core()));
         redButton.hover();
@@ -173,7 +175,7 @@ public class MultipleInputsTests extends TestsInit {
     @Test
     public void placeholderTest() {
         assertEquals(multipleInputs.placeholder(), "");
-        assertEquals(multipleInputs.placeholder(0), "");
+        assertEquals(multipleInputs.placeholder(1), "");
         assertEquals(multipleInputs.placeholder("#mi-i-2"), "");
     }
 
@@ -191,7 +193,7 @@ public class MultipleInputsTests extends TestsInit {
         assertEquals(multipleInputs.getText(), value);
 
         multipleInputs.clearAll();
-        int index = 0;
+        int index = 1;
         String name = inputData.get(index);
         multipleInputs.input(name, index);
         assertEquals(multipleInputs.getText(index), name);
@@ -209,5 +211,46 @@ public class MultipleInputsTests extends TestsInit {
 
         multipleInputs.inputAll(inputData);
         assertEquals(multipleInputs.getAllTexts(), inputData);
+    }
+
+    @Test
+    public void isValidationTest() {
+        multipleInputs.is().enabled();
+
+        int index = 1;
+        multipleInputs.is().text(inputData.get(index - 1), index);
+
+        String locator = "#mi-i-2";
+        multipleInputs.is().text(inputData.get(1), locator);
+
+        multipleInputs.is().text(inputData.get(0));
+        multipleInputs.is().text(inputData);
+        multipleInputs.is().text(containsString("0"), index);
+        multipleInputs.is().text(containsString("1"), locator);
+    }
+
+    @Test
+    public void assertThatTest() {
+        int index = 1;
+        multipleInputs.assertThat().text(inputData.get(index - 1), index);
+
+        String locator = "#mi-i-2";
+        multipleInputs.assertThat().text(inputData.get(1), locator);
+
+        multipleInputs.assertThat().text(inputData.get(0));
+        multipleInputs.assertThat().text(inputData);
+        multipleInputs.assertThat().text(containsString("0"), index);
+        multipleInputs.assertThat().text(containsString("1"), locator);
+    }
+
+    @Test
+    public void baseValidationTest() {
+        baseValidation(multipleInputs);
+    }
+
+    @Test
+    public void labelTest() {
+        assertEquals(multipleInputs.label().getText(), "First and last name");
+        multipleInputs.label().is().text(containsString("name"));
     }
 }
