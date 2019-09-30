@@ -5,7 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.cardDeckWithFooter;
+import static io.github.com.pages.BootstrapPage.cardDeckWithoutFooter;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 
@@ -17,16 +18,18 @@ import static org.testng.Assert.assertEquals;
 
 public class CardDeckTests extends TestsInit {
 
-    private String card1Title = "SPIDER MAN";
-    private String card2Title = "HULK";
-    private String card1ImageSrc = "https://jdi-testing.github.io/jdi-light/images/spider-man.jpg";
-    private String card2ImageSrc = "https://jdi-testing.github.io/jdi-light/images/hulk.jpg";
-    private String card1ImageAlt = "spider-man";
-    private String card2ImageAlt = "hulk";
-    private String card1MainText = "Spider-Man is a fictional superhero created by writer-editor Stan Lee and writer-artist Steve Ditko.";
-    private String card2MainText = "The Hulk is a fictional superhero appearing in publications by the American publisher Marvel Comics.";
-    private String card1HeroName = "Peter Parker";
-    private String card2HeroName = "Bruce Banner";
+    private static final String card1Title = "SPIDER MAN";
+    private static final String card2Title = "HULK";
+    private static final String card1ImageSrc = "https://jdi-testing.github.io/jdi-light/images/spider-man.jpg";
+    private static final String card2ImageSrc = "https://jdi-testing.github.io/jdi-light/images/hulk.jpg";
+    private static final String card1ImageAlt = "spider-man";
+    private static final String card2ImageAlt = "hulk";
+    private static final String card1MainText = "Spider-Man is a fictional superhero created by writer-editor Stan Lee and writer-artist Steve Ditko.";
+    private static final String card2MainText = "The Hulk is a fictional superhero appearing in publications by the American publisher Marvel Comics.";
+    private static final String card1HeroName = "Peter Parker";
+    private static final String card2HeroName = "Bruce Banner";
+
+    private static final String cardDeckClass = "card-deck";
 
     @BeforeMethod
     public void before() {
@@ -37,10 +40,10 @@ public class CardDeckTests extends TestsInit {
     @Test
     public void isCardDeckTest() {
         cardDeckWithoutFooter.highlight();
-        cardDeckWithoutFooter.is().core().attr("class", "card-deck");
+        cardDeckWithoutFooter.is().core().hasClass(cardDeckClass);
 
         cardDeckWithFooter.highlight();
-        cardDeckWithFooter.is().core().attr("class", "card-deck");
+        cardDeckWithFooter.is().core().hasClass(cardDeckClass);
     }
 
     @Test
