@@ -1,3 +1,5 @@
+package mockitoTests;
+
 import mocks.CardNavigationMock;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,7 +11,7 @@ import static org.testng.Assert.assertTrue;
 
 public class EnabledElementMockTests {
 
-    CardNavigationMock cardNavigationMock = null;
+    private CardNavigationMock cardNavigationMock = null;
 
     @BeforeMethod
     public void init() {
