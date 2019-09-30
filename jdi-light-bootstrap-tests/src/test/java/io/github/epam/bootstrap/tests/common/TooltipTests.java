@@ -143,6 +143,7 @@ public class TooltipTests extends TestsInit {
         tooltipOnDisabledButton.is()
                 .displayed()
                 .text(disabledButtonText)
+                .disabled()
                 .core()
                 .cssClass("btn btn-info btn-block")
                 .tag(is("button"));
