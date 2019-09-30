@@ -124,7 +124,6 @@ public class BootstrapPage extends WebPage {
     @UI("#card-text-left") public static CardTextAlignment cardLeftTextAlignment;
     @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
     @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
-    @UI("#card-navigation") public static CardNavigation cardNavigation;
     @UI("#list-group-basic-example") public static ListGroupBasicExample listGroupBasicExample;
     @UI("#list-group-active-items") public static ListGroupActiveItems listGroupActiveItems;
     @UI("#disabled-items") public static ListGroupDisabledItems listGroupDisabledItems;
@@ -144,5 +143,7 @@ public class BootstrapPage extends WebPage {
     @UI("#pagination-small") public static PaginationSizeSmall paginationSizeSmall;
     @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
     @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
+    @UI(".card-deck:nth-of-type(1)") public static CardDeck cardDeckWithoutFooter;
+    @UI(".card-deck:nth-of-type(2)") public static CardDeck cardDeckWithFooter;
     //endregion
 }
