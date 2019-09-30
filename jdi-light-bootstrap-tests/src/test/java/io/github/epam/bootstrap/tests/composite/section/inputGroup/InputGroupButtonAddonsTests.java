@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.inputGroupButtonAddons1;
+import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class InputGroupButtonAddonsTests extends TestsInit {
@@ -29,5 +29,28 @@ public class InputGroupButtonAddonsTests extends TestsInit {
         inputGroupButtonAddons1.input1.input(text);
         inputGroupButtonAddons1.button1.click();
         inputGroupButtonAddons1.input1.assertThat().text(text);
+    }
+
+    @Test
+    public void checkButtonAddon2Test() {
+        inputGroupButtonAddons2.input2.input(text);
+        inputGroupButtonAddons2.button2.click();
+        inputGroupButtonAddons2.input2.assertThat().text(text);
+    }
+
+    @Test
+    public void checkButtonAddon3Test() {
+        inputGroupButtonAddons3.input3.input(text);
+        inputGroupButtonAddons3.anyButtons.get(1).click();
+        inputGroupButtonAddons3.anyButtons.get(2).click();
+        inputGroupButtonAddons3.input3.assertThat().text(text);
+    }
+
+    @Test
+    public void checkButtonAddon4Test() {
+        inputGroupButtonAddons4.input4.input(text);
+        inputGroupButtonAddons4.nextButtons.get(1).click();
+        inputGroupButtonAddons4.nextButtons.get(2).click();
+        inputGroupButtonAddons4.input4.assertThat().text(text);
     }
 }
