@@ -10,5 +10,5 @@ public class CardBorder extends Section {
 
     @Title @UI(".card-title") public Text title;
 
-    @UI(".card-text") public Text text;
+    @UI(".card-text") public Text body;
 }
