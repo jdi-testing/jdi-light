@@ -82,6 +82,7 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-default") public static InputGroupSizing inputGroupDefaultSizing;
     @UI("#input-group-small") public static InputGroupSizing inputGroupSmallSizing;
     @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
+    @UI("#input-group-button-addon1") public static ButtonAddons inputGroupButtonAddons1;
     @UI("#card-example") public static CardExample cardExample;
     @UI("#card-body") public static CardBody cardBody;
     @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
