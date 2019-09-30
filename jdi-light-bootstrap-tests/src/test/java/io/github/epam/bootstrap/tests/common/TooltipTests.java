@@ -8,7 +8,13 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.tooltipOnTopButton;
+import static io.github.com.pages.BootstrapPage.tooltipOnBottomButton;
+import static io.github.com.pages.BootstrapPage.tooltipOnLeftButton;
+import static io.github.com.pages.BootstrapPage.tooltipOnRightButton;
+import static io.github.com.pages.BootstrapPage.tooltipWithHTML;
+import static io.github.com.pages.BootstrapPage.tooltipOnDisabledButton;
+import static io.github.com.pages.BootstrapPage.wrapperForDisabledButton;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -34,7 +40,7 @@ public class TooltipTests extends TestsInit {
     private static String bottomButtonText = "Tooltip on bottom";
     private static String rightButtonText = "Tooltip on right";
     private static String leftButtonText = "Tooltip on left";
-    private static String htmlButtonText  = "Tooltip with HTML";
+    private static String htmlButtonText = "Tooltip with HTML";
     private static String disabledButtonText = "Disabled button";
 
     @BeforeMethod
@@ -84,25 +90,25 @@ public class TooltipTests extends TestsInit {
 
     @Test(dataProvider = "Tooltips")
     public void tooltipIsInvisibleTests(Tooltip tooltip, String __) {
-        assertFalse(tooltip.isVisible());
+        tooltip.is().hidden();
     }
 
     @Test(dataProvider = "Tooltips")
     public void tooltipIsVisibleByHoverTests(Tooltip tooltip, String __) {
         tooltip.core().hover();
-        assertTrue(tooltip.isVisible());
+        tooltip.assertThat().isVisible();
     }
 
     @Test(dataProvider = "Tooltips")
     public void tooltipIsVisibleByFocusTests(Tooltip tooltip, String __) {
         tooltip.core().focus();
-        assertTrue(tooltip.isVisible());
+        tooltip.is().isVisible();
     }
 
     @Test(dataProvider = "Tooltips")
     public void tooltipIsVisibleByClickTests(Tooltip tooltip, String __) {
         tooltip.click();
-        assertTrue(tooltip.isVisible());
+        tooltip.assertThat().isVisible();
     }
 
     @Test(dataProvider = "TooltipsPlacements")
@@ -111,25 +117,25 @@ public class TooltipTests extends TestsInit {
     }
 
     @Test
-    public void tooltipWithHtmlTest(){
+    public void tooltipWithHtmlTest() {
         assertTrue(tooltipWithHTML.isTooltipWithHTML());
     }
 
     @Test(dataProvider = "TooltipsPlacements")
-    public void tooltipWithoutHtmlTest(Tooltip tooltip, String __){
+    public void tooltipWithoutHtmlTest(Tooltip tooltip, String __) {
         assertFalse(tooltip.isTooltipWithHTML());
     }
 
     @Test
     public void tooltipOnDisabledButtonIsInvisibleByHoverTest() {
         tooltipOnDisabledButton.core().hover();
-        assertFalse(tooltipOnDisabledButton.isVisible());
+        tooltipOnDisabledButton.is().hidden();
     }
 
     @Test
     public void tooltipOnDisabledButtonIsInvisibleByFocusTest() {
         tooltipOnBottomButton.core().focus();
-        assertFalse(tooltipOnDisabledButton.isVisible());
+        tooltipOnDisabledButton.is().hidden();
     }
 
     @Test
