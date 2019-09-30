@@ -5,7 +5,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.epam.jdi.light.ui.bootstrap.elements.BootstrapUtils.isElementInViewPort;
 import static io.github.com.StaticSite.bsPage;
@@ -13,25 +15,27 @@ import static io.github.com.pages.BootstrapPage.multipleInputs;
 import static io.github.com.pages.BootstrapPage.redButton;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static io.github.epam.test.data.InputData.inputDataAsList;
+import static io.github.epam.test.data.InputData.inputDataAsMap;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class MultipleInputsTests extends TestsInit {
 
-    private static List<String> inputData;
+    private static Map<Integer, String> inputData;
+    private static List<String> inputDataList;
 
     @BeforeClass
     public void beforeClass() {
-        inputData = inputDataAsList(2);
+        inputData = inputDataAsMap(2);
+        inputDataList = new ArrayList<String>(inputData.values());
     }
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        multipleInputs.setAllValues(inputData);
+        multipleInputs.setAllValues(inputDataList);
     }
 
     @Test
@@ -39,18 +43,18 @@ public class MultipleInputsTests extends TestsInit {
         int index = 1;
 
         String name = multipleInputs.getText(index);
-        assertEquals(name, inputData.get(--index));
+        assertEquals(name, inputData.get(index));
 
         String surname = multipleInputs.getText("#mi-i-2");
-        assertEquals(surname, inputData.get(1));
+        assertEquals(surname, inputData.get(2));
 
         String text = multipleInputs.getText();
-        assertEquals(text, inputData.get(0));
+        assertEquals(text, inputData.get(1));
     }
 
     @Test
     public void getTextAllTest() {
-        assertEquals(multipleInputs.getAllTexts(), inputData);
+        assertEquals(multipleInputs.getAllTexts(), inputDataList);
     }
 
     @Test
@@ -58,35 +62,35 @@ public class MultipleInputsTests extends TestsInit {
         int index = 1;
 
         String name = multipleInputs.getValue(index);
-        assertEquals(name, inputData.get(--index));
+        assertEquals(name, inputData.get(index));
 
         String surname = multipleInputs.getValue("#mi-i-2");
-        assertEquals(surname, inputData.get(1));
+        assertEquals(surname, inputData.get(2));
 
         String value = multipleInputs.getValue();
-        assertEquals(value, inputData.get(0));
+        assertEquals(value, inputData.get(1));
     }
 
     @Test
     public void getValueAllTest() {
-        assertEquals(multipleInputs.getAllValues(), inputData);
+        assertEquals(multipleInputs.getAllValues(), inputDataList);
     }
 
     @Test
     public void setValueTest() {
         multipleInputs.clearAll();
 
-        String value = inputData.get(0);
+        String value = inputData.get(1);
         multipleInputs.setValue(value);
         assertEquals(multipleInputs.getValue(1), value);
 
         int index = 2;
-        String name = inputData.get(index - 1);
+        String name = inputData.get(index);
         multipleInputs.setValue(name, index);
         assertEquals(multipleInputs.getValue(index), name);
 
         String locator = "#mi-i-2";
-        String surname = inputData.get(1);
+        String surname = inputData.get(2);
         multipleInputs.clear(locator);
         multipleInputs.setValue(surname, locator);
         assertEquals(multipleInputs.getValue(locator), surname);
@@ -95,27 +99,27 @@ public class MultipleInputsTests extends TestsInit {
     @Test
     public void setAllValuesTest() {
         multipleInputs.clearAll();
-        multipleInputs.setAllValues(inputData);
-        assertEquals(multipleInputs.getAllValues(), inputData);
+        multipleInputs.setAllValues(inputDataList);
+        assertEquals(multipleInputs.getAllValues(), inputDataList);
     }
 
     @Test
     public void sendKeysTest() {
         multipleInputs.clearAll();
 
-        String value = inputData.get(0);
+        String value = inputData.get(1);
         multipleInputs.sendKeys(value);
         assertEquals(multipleInputs.getText(), value);
 
         multipleInputs.clearAll();
-        int index = 1;
+        int index = 2;
         String name = inputData.get(index);
         multipleInputs.sendKeys(index, name);
         assertEquals(multipleInputs.getText(index), name);
 
         multipleInputs.clearAll();
         String locator = "#mi-i-2";
-        String surname = inputData.get(1);
+        String surname = inputData.get(2);
         multipleInputs.sendKeys(locator, surname);
         assertEquals(multipleInputs.getText(locator), surname);
     }
@@ -124,25 +128,25 @@ public class MultipleInputsTests extends TestsInit {
     public void sendAllKeysTest() {
         multipleInputs.clearAll();
 
-        multipleInputs.sendKeysAll(inputData);
-        assertEquals(multipleInputs.getAllTexts(), inputData);
+        multipleInputs.sendKeysAll(inputDataList);
+        assertEquals(multipleInputs.getAllTexts(), inputDataList);
     }
 
     @Test
     public void clearTest() {
-        String value = inputData.get(0);
+        String value = inputData.get(1);
         multipleInputs.sendKeys(value);
         multipleInputs.clear();
         assertEquals(multipleInputs.getText(), "");
 
-        int index = 1;
+        int index = 2;
         String name = inputData.get(index);
         multipleInputs.sendKeys(index, name);
         multipleInputs.clear(index);
         assertEquals(multipleInputs.getText(index), "");
 
         String locator = "#mi-i-2";
-        String surname = inputData.get(1);
+        String surname = inputData.get(2);
         multipleInputs.sendKeys(locator, surname);
         multipleInputs.clear(locator);
         assertEquals(multipleInputs.getText(locator), "");
@@ -150,7 +154,7 @@ public class MultipleInputsTests extends TestsInit {
 
     @Test
     public void clearAllTest() {
-        multipleInputs.sendKeysAll(inputData);
+        multipleInputs.sendKeysAll(inputDataList);
         multipleInputs.clearAll();
 
         multipleInputs.getAllTexts().forEach(t -> assertEquals(t, ""));
@@ -188,19 +192,19 @@ public class MultipleInputsTests extends TestsInit {
     public void inputTest() {
         multipleInputs.clearAll();
 
-        String value = inputData.get(0);
+        String value = inputData.get(1);
         multipleInputs.input(value);
         assertEquals(multipleInputs.getText(), value);
 
         multipleInputs.clearAll();
-        int index = 1;
+        int index = 2;
         String name = inputData.get(index);
         multipleInputs.input(name, index);
         assertEquals(multipleInputs.getText(index), name);
 
         multipleInputs.clearAll();
         String locator = "#mi-i-2";
-        String surname = inputData.get(1);
+        String surname = inputData.get(2);
         multipleInputs.input(surname, locator);
         assertEquals(multipleInputs.getText(locator), surname);
     }
@@ -209,8 +213,8 @@ public class MultipleInputsTests extends TestsInit {
     public void inputAllTest() {
         multipleInputs.clearAll();
 
-        multipleInputs.inputAll(inputData);
-        assertEquals(multipleInputs.getAllTexts(), inputData);
+        multipleInputs.inputAll(inputDataList);
+        assertEquals(multipleInputs.getAllTexts(), inputDataList);
     }
 
     @Test
@@ -218,29 +222,29 @@ public class MultipleInputsTests extends TestsInit {
         multipleInputs.is().enabled();
 
         int index = 1;
-        multipleInputs.is().text(inputData.get(index - 1), index);
+        multipleInputs.is().text(inputData.get(index), index);
 
         String locator = "#mi-i-2";
-        multipleInputs.is().text(inputData.get(1), locator);
+        multipleInputs.is().text(inputData.get(2), locator);
 
-        multipleInputs.is().text(inputData.get(0));
-        multipleInputs.is().text(inputData);
-        multipleInputs.is().text(containsString("0"), index);
-        multipleInputs.is().text(containsString("1"), locator);
+        multipleInputs.is().text(inputData.get(1));
+        multipleInputs.is().text(inputDataList);
+        multipleInputs.is().text(containsString("1"), index);
+        multipleInputs.is().text(containsString("2"), locator);
     }
 
     @Test
     public void assertThatTest() {
         int index = 1;
-        multipleInputs.assertThat().text(inputData.get(index - 1), index);
+        multipleInputs.assertThat().text(inputData.get(index), index);
 
         String locator = "#mi-i-2";
-        multipleInputs.assertThat().text(inputData.get(1), locator);
+        multipleInputs.assertThat().text(inputData.get(2), locator);
 
-        multipleInputs.assertThat().text(inputData.get(0));
-        multipleInputs.assertThat().text(inputData);
-        multipleInputs.assertThat().text(containsString("0"), index);
-        multipleInputs.assertThat().text(containsString("1"), locator);
+        multipleInputs.assertThat().text(inputData.get(1));
+        multipleInputs.assertThat().text(inputDataList);
+        multipleInputs.assertThat().text(containsString("1"), index);
+        multipleInputs.assertThat().text(containsString("2"), locator);
     }
 
     @Test

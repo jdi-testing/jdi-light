@@ -1,15 +1,16 @@
 package io.github.epam.test.data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InputData {
+    public static Map<Integer, String> inputDataAsMap(int size) {
+        Map<Integer, String> inputData = new HashMap<Integer, String>(size);
 
-    public static List<String> inputDataAsList(int size) {
-        List<String> inputData = new ArrayList<String>(size);
-
-        for (int index = 0; index < size; index++) {
-            inputData.add("data" + index);
+        for (int index = 1; index <= size; index++) {
+            inputData.put(index, "data" + index);
         }
 
         return inputData;
