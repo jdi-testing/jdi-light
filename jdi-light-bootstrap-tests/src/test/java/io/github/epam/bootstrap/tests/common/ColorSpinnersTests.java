@@ -36,11 +36,6 @@ public class ColorSpinnersTests extends TestsInit {
     }
 
     @Test(dataProvider = "Color Spinners")
-    public void getSpinnerColorTests(ColorSpinner colorSpinner, String color) {
-        assertEquals(colorSpinner.getColor(), color);
-    }
-
-    @Test(dataProvider = "Color Spinners")
     public void assertColorTests(ColorSpinner colorSpinner, String color) {
         colorSpinner.is().color(color);
     }
