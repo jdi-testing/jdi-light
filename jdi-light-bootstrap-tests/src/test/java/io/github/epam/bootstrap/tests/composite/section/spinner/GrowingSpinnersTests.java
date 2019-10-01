@@ -41,7 +41,7 @@ public class GrowingSpinnersTests extends TestsInit {
 
     @Test(dataProvider = "spinnerData")
     public void spinnerGrowTest(Spinner spinner) {
-        WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 5);
+//        WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 5);
 
         for (int i = 0; i < 7; i++) {
             spinner.highlight();
@@ -52,7 +52,8 @@ public class GrowingSpinnersTests extends TestsInit {
                             "return y.getBoundingClientRect().width;"
             );
 
-            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.tagName("body")));
+//            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.tagName("body")));
+            spinner.core().waitSec(5);
 
             double secondSnapshot = WebDriverFactory.jsExecute(
                     "var x = document.getElementsByClassName('spinner-grow')[" + i + "].children;" +
