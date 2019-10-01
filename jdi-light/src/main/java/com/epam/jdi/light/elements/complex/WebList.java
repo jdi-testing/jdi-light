@@ -130,8 +130,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     protected String getElementName(UIElement element) {
         try {
             return (UIELEMENT_NAME != null
-                    ? UIELEMENT_NAME
-                    : getTextType().func).execute(element);
+                ? UIELEMENT_NAME
+                : getTextType().func).execute(element);
         } catch (Exception ex) {
             return "";
         }
@@ -156,8 +156,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction(level = DEBUG)
     public UIElement get(String value) {
         return elements.isUseCache() && hasKey(value)
-                ? elements.get().get(value)
-                : getUIElement(value);
+            ? elements.get().get(value)
+            : getUIElement(value);
     }
     public UIElement getUIElement(String value) {
         if (locator.isTemplate())
