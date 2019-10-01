@@ -17,7 +17,6 @@ import static io.github.com.pages.BootstrapPage.cardBorderInfo;
 import static io.github.com.pages.BootstrapPage.cardBorderDanger;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.testng.AssertJUnit.assertEquals;
 import static org.hamcrest.Matchers.is;
 
 /**
