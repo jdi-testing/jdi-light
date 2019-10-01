@@ -40,10 +40,10 @@ public class CardListGroupsTests extends TestsInit {
     @Test
     public void checkCardListGroupsValues() {
         int checkedValues = 0;
-        for (WebElement s:cardListGroups.listGroups) {
+        for (WebElement s : cardListGroups.listGroups) {
             if (cardListGroupsValues.contains(s.getText())) {
                 checkedValues++;
-           }
+            }
         }
         assertEquals(cardListGroupsValues.size(), checkedValues);
     }
