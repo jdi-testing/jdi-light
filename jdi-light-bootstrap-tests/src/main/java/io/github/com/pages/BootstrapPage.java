@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
@@ -38,8 +39,13 @@ public class BootstrapPage extends WebPage {
     @UI("#spinner-text-info") public static ColorSpinner spinnerWithTextInfo;
     @UI("#spinner-text-light") public static ColorSpinner spinnerWithTextLight;
     @UI("#spinner-text-dark") public static ColorSpinner spinnerWithTextDark;
-
-
+    @UI("#tooltipOnTop") public static Tooltip tooltipOnTopButton;
+    @UI("#tooltipOnBottom") public static Tooltip tooltipOnBottomButton;
+    @UI("#tooltipOnLeft") public static Tooltip tooltipOnLeftButton;
+    @UI("#tooltipOnRight") public static Tooltip tooltipOnRightButton;
+    @UI("#tooltipWithHTML") public static Tooltip tooltipWithHTML;
+    @UI("#wrapperForDisabledButton") public static Tooltip wrapperForDisabledButton;
+    @UI("#tooltipOnDisabledButton") public static Tooltip tooltipOnDisabledButton;
     //endregion
 
     //region Complex Elements
@@ -154,5 +160,6 @@ public class BootstrapPage extends WebPage {
     @UI("#pagination-small") public static PaginationSizeSmall paginationSizeSmall;
     @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
     @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
+    @UI(".card-columns") public static CardColumns cardColumns;
     //endregion
 }
