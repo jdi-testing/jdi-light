@@ -1,5 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.card;
 
+import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -39,86 +40,90 @@ public class CardWithGridMarkupTests extends TestsInit {
 
     @Test
     public void baseValidationCardWithGridMarkup11Test() {
+        CardWithHeaderAndFooter cardWithGridMarkup11 = cardWithGridMarkup.listCard.get(1);
         baseValidation(cardWithGridMarkup);
-        baseValidation(cardWithGridMarkup.listCard.get(0));
-        baseValidation(cardWithGridMarkup.listCard.get(0).title);
-        baseValidation(cardWithGridMarkup.listCard.get(0).paragraph);
-        baseValidation(cardWithGridMarkup.listCard.get(0).button);
+        baseValidation(cardWithGridMarkup11);
+        baseValidation(cardWithGridMarkup11.title);
+        baseValidation(cardWithGridMarkup11.paragraph);
+        baseValidation(cardWithGridMarkup11.button);
     }
 
     @Test
     public void baseValidationCardWithGridMarkup12Test() {
-        baseValidation(cardWithGridMarkup.listCard.get(1));
-        baseValidation(cardWithGridMarkup.listCard.get(1).title);
-        baseValidation(cardWithGridMarkup.listCard.get(1).paragraph);
-        baseValidation(cardWithGridMarkup.listCard.get(1).button);
+        CardWithHeaderAndFooter cardWithGridMarkup12 = cardWithGridMarkup.listCard.get(2);
+        baseValidation(cardWithGridMarkup12);
+        baseValidation(cardWithGridMarkup12.title);
+        baseValidation(cardWithGridMarkup12.paragraph);
+        baseValidation(cardWithGridMarkup12.button);
     }
 
     @Test
     public void baseValidationCardWithGridMarkup21Test() {
-        baseValidation(cardWithGridMarkup.listCard.get(2));
-        baseValidation(cardWithGridMarkup.listCard.get(2).title);
-        baseValidation(cardWithGridMarkup.listCard.get(2).paragraph);
-        baseValidation(cardWithGridMarkup.listCard.get(2).button);
+        CardWithHeaderAndFooter cardWithGridMarkup21 = cardWithGridMarkup.listCard.get(3);
+        baseValidation(cardWithGridMarkup21);
+        baseValidation(cardWithGridMarkup21.title);
+        baseValidation(cardWithGridMarkup21.paragraph);
+        baseValidation(cardWithGridMarkup21.button);
     }
 
     @Test
     public void baseValidationCardWithGridMarkup22Test() {
-        baseValidation(cardWithGridMarkup.listCard.get(3));
-        baseValidation(cardWithGridMarkup.listCard.get(3).title);
-        baseValidation(cardWithGridMarkup.listCard.get(3).paragraph);
-        baseValidation(cardWithGridMarkup.listCard.get(3).button);
+        CardWithHeaderAndFooter cardWithGridMarkup22 = cardWithGridMarkup.listCard.get(4);
+        baseValidation(cardWithGridMarkup22);
+        baseValidation(cardWithGridMarkup22.title);
+        baseValidation(cardWithGridMarkup22.paragraph);
+        baseValidation(cardWithGridMarkup22.button);
     }
 
     //test title
     @Test
     public void getTitleTextCardWithGridMarkup11Test() {
-        cardWithGridMarkup.listCard.get(0).title.is().text(textTitleCardWithGridMarkup11);
+        cardWithGridMarkup.listCard.get(1).title.is().text(textTitleCardWithGridMarkup11);
     }
 
     @Test
     public void getTitleTextCardWithGridMarkup12Test() {
-        cardWithGridMarkup.listCard.get(1).title.is().text(textTitleCardWithGridMarkup12);
+        cardWithGridMarkup.listCard.get(2).title.is().text(textTitleCardWithGridMarkup12);
     }
 
     @Test
     public void getTitleTextCardWithGridMarkup21Test() {
-        cardWithGridMarkup.listCard.get(2).title.is().text(textTitleCardWithGridMarkup21);
+        cardWithGridMarkup.listCard.get(3).title.is().text(textTitleCardWithGridMarkup21);
     }
 
     @Test
     public void getTitleTextCardWithGridMarkup22Test() {
-        cardWithGridMarkup.listCard.get(3).title.is().text(textTitleCardWithGridMarkup22);
+        cardWithGridMarkup.listCard.get(4).title.is().text(textTitleCardWithGridMarkup22);
     }
     
     //test paragraph
     @Test
     public void getParagraphTextCardWithGridMarkup11Test() {
-        cardWithGridMarkup.listCard.get(0).paragraph.is().text(textParagraphCardWithGridMarkup11);
+        cardWithGridMarkup.listCard.get(1).paragraph.is().text(textParagraphCardWithGridMarkup11);
     }
 
     @Test
     public void getParagraphTextCardWithGridMarkup12Test() {
-        cardWithGridMarkup.listCard.get(1).paragraph.is().text(textParagraphCardWithGridMarkup12);
+        cardWithGridMarkup.listCard.get(2).paragraph.is().text(textParagraphCardWithGridMarkup12);
     }
 
     @Test
     public void getParagraphTextCardWithGridMarkup21Test() {
-        cardWithGridMarkup.listCard.get(2).paragraph.is().text(textParagraphCardWithGridMarkup21);
+        cardWithGridMarkup.listCard.get(3).paragraph.is().text(textParagraphCardWithGridMarkup21);
     }
 
     @Test
     public void getParagraphTextCardWithGridMarkup22Test() {
-        cardWithGridMarkup.listCard.get(3).paragraph.is().text(textParagraphCardWithGridMarkup22);
+        cardWithGridMarkup.listCard.get(4).paragraph.is().text(textParagraphCardWithGridMarkup22);
     }
 
     //test button
     @Test
     public void getButtonTextCardWithGridMarkup11Test() {
-        cardWithGridMarkup.listCard.get(0).button.is().text(textButtonCardWithGridMarkup11);
-        cardWithGridMarkup.listCard.get(0).button.click();
+        cardWithGridMarkup.listCard.get(1).button.is().text(textButtonCardWithGridMarkup11);
+        cardWithGridMarkup.listCard.get(1).button.click();
         validateAlert(is(textAlert));
-        cardWithGridMarkup.listCard.get(0).button.is()
+        cardWithGridMarkup.listCard.get(1).button.is()
                 .enabled()
                 .displayed();
     }
@@ -152,5 +157,4 @@ public class CardWithGridMarkupTests extends TestsInit {
                 .enabled()
                 .displayed();
     }
-
 }
