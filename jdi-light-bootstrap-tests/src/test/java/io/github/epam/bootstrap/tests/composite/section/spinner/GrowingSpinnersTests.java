@@ -3,13 +3,11 @@ package io.github.epam.bootstrap.tests.composite.section.spinner;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import io.github.com.sections.spinner.Spinner;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.growingSpinners;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -41,7 +39,6 @@ public class GrowingSpinnersTests extends TestsInit {
 
     @Test(dataProvider = "spinnerData")
     public void spinnerGrowTest(Spinner spinner) {
-//        WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 5);
 
         for (int i = 0; i < 7; i++) {
             spinner.highlight();
@@ -52,8 +49,7 @@ public class GrowingSpinnersTests extends TestsInit {
                             "return y.getBoundingClientRect().width;"
             );
 
-//            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.tagName("body")));
-            spinner.core().waitSec(5);
+            $("body").waitFor().displayed();
 
             double secondSnapshot = WebDriverFactory.jsExecute(
                     "var x = document.getElementsByClassName('spinner-grow')[" + i + "].children;" +
