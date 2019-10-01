@@ -4135,30 +4135,31 @@
 					<!-- POPOVER START -->
 					<div class="doc-space line">
 						<div class="html-left">
-							<button type="button" class="btn btn-success btn-block" data-toggle="popover"
-									title="Popover title"
-									data-content="And here's some amazing content. It's very engaging. Right?">Popover with title</button>
-							<hr>
-							<button type="button" class="btn btn-success btn-block" data-container="body" data-toggle="popover"
-									data-placement="top"
-									data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on top</button>
-							<hr>
-							<button type="button" class="btn btn-success btn-block" data-container="body" data-toggle="popover"
-									data-placement="right"
-									data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on right</button>
-							<hr>
-							<button type="button" class="btn btn-success btn-block" data-container="body" data-toggle="popover"
-									data-placement="bottom"
-									data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on bottom</button>
-							<hr>
-							<button type="button" class="btn btn-success btn-block" data-container="body" data-toggle="popover"
-									data-placement="left"
-									data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on left</button>
-							<hr>
-							<span class="d-inline-block" data-toggle="popover" data-content="Disabled popover">
-								<button class="btn btn-success btn-block" style="pointer-events: none;" type="button" disabled>Disabled button</button>
+							<button type="button" class="btn btn-secondary mb-3" id="popover-top" data-container="body" data-toggle="popover" data-placement="top"
+									data-content="Top popover is visible.">
+								Popover on top
+							</button><br>
+							<button type="button" class="btn btn-secondary mb-3" id="popover-right" data-container="body" data-toggle="popover" data-placement="right"
+									data-content="Right popover is visible.">
+								Popover on right
+							</button>
+							<button type="button" class="btn btn-secondary mb-3" id="popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+									data-content="Bottom popover is visible.">
+								Popover on bottom
+							</button>
+							<button type="button" class="btn btn-secondary mb-3" id="popover-left" data-container="body" data-toggle="popover" data-placement="left"
+									data-content="Left popover is visible.">
+								Popover on left
+							</button>
+							<button type="button" class="btn btn-lg btn-danger mb-3" id="popover-title" data-toggle="popover" title="Popover title"
+									data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+
+							<a tabindex="0" class="btn btn-lg btn-danger mb-3" role="button" id="popover-dismissible" data-toggle="popover" data-trigger="focus" title="Dismissible popover"
+							   data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
+
+							<span class="d-inline-block mb-3" data-toggle="popover" id="popover-disabled" data-content="Disabled popover">
+								<button class="btn btn-primary" style="pointer-events: none;" type="button" disabled>Disabled button</button>
 							</span>
-							<br>&nbsp;
 						</div>
 
 						<div class="html-right">
