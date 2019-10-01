@@ -2779,10 +2779,11 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
-
-							<div class="spinner-border" role="status" id="spinner-border">
+							<button href="#" class="btn btn-primary" onclick="showSpinner()" style="margin-bottom: 10px; margin-right: 10px;">Click Me!</button>
+							<div class="spinner-border" role="status" id="spinner-border" style="display: none">
 								<span class="sr-only">Loading...</span>
 							</div>
+
 
 						</div>
 						<div class="html-right">
@@ -4380,6 +4381,12 @@
 <footer>
     <div class="replace footer">replace</div>
 </footer>
+<script>
+    function showSpinner()
+    {
+      $('#spinner-border').show(0).delay(1000).hide(0);
+    }
+  </script>
 <script>
  function show_toast(locator) {
    $(locator).toast('show');
