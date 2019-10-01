@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 
 public class NavsVerticalA extends Section {
 
-    @UI("a") public ListGroup navItemLink;
+    @UI("a")
+    public ListGroup navItemLink;
 
 }

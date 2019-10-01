@@ -8,8 +8,10 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 
 public class NavsTabsWithDropdown extends Section {
 
-    @UI("li") public ListGroup navItem;
-    @UI("a.nav-link") public ListGroup navItemLink;
+    @UI("li")
+    public ListGroup navItem;
+    @UI("a.nav-link")
+    public ListGroup navItemLink;
     @JDropdown(expand = ".dropdown-toggle",
             value = ".dropdown-toggle",
             list = ".dropdown-item")
