@@ -14,7 +14,7 @@ public class SpinnerColorAssert extends UIAssert<SpinnerColorAssert, ColorSpinne
         jdiAssert(element.getColor(), condition);
         return this;
     }
-    public SpinnerColorAssert color(String color) {
-        return color(is(color));
+    public SpinnerColorAssert color(String condition) {
+        return color(is(condition));
     }
 }
