@@ -5,11 +5,8 @@ import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 
 import io.github.com.sections.*;
@@ -27,6 +24,16 @@ public class BootstrapPage extends WebPage {
     @UI("#badge-secondary") public static Badge badgeSecondary;
     @UI("#btn-primary") public static Button buttonPrimary;
     @UI("#badge-success") public static Link badgeSuccess;
+    @UI("#spinner-text-primary") public static ColorSpinner spinnerWithTextPrimary;
+    @UI("#spinner-text-secondary") public static ColorSpinner spinnerWithTextSecondary;
+    @UI("#spinner-text-success") public static ColorSpinner spinnerWithTextSuccess;
+    @UI("#spinner-text-danger") public static ColorSpinner spinnerWithTextDanger;
+    @UI("#spinner-text-warning") public static ColorSpinner spinnerWithTextWarning;
+    @UI("#spinner-text-info") public static ColorSpinner spinnerWithTextInfo;
+    @UI("#spinner-text-light") public static ColorSpinner spinnerWithTextLight;
+    @UI("#spinner-text-dark") public static ColorSpinner spinnerWithTextDark;
+
+
     //endregion
 
     //region Complex Elements
