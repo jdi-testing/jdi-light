@@ -1213,11 +1213,11 @@
 
 
                             <br><p>with labels</p>
-							<input type="button" class="progress-change minus" value="-">
+							<input type="button" class="progress-change minus btn btn-outline-info " value="-">
                             <div class="progress">
                                 <div id="progress-with-labels" class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                             </div>
-							<input type="button" class="progress-change plus" value="+" >
+							<input type="button" class="progress-change plus btn btn-outline-info" value="+" >
 
                             <br> <p>backgrounds</p>
                             <div class="progress">
@@ -4492,9 +4492,10 @@ $('input.progress-change').click(function() {
     } else {
     	progress_val = (progress_val+global_step <= 100) ? progress_val+global_step : progress_val;
     }
-    $('.progress-bar').text(progress_val+'%');
+    $('#progress-with-labels').text(progress_val+'%');
 
-   $('.progress-bar').width(progress_val+'%');
+   $('#progress-with-labels').width(progress_val+'%');
+   $('#progress-with-labels').attr('aria-valuenow', progress_val );
 
 
 
