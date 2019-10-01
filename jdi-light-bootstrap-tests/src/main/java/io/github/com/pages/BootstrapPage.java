@@ -85,6 +85,7 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-default") public static InputGroupSizing inputGroupDefaultSizing;
     @UI("#input-group-small") public static InputGroupSizing inputGroupSmallSizing;
     @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
+// Button addons
     @UI("#input-group-button-addon1") public static ButtonAddons inputGroupButtonAddons1;
     @UI("#input-group-button-addon2") public static ButtonAddons inputGroupButtonAddons2;
     @UI("#input-group-button-addon3") public static ButtonAddons inputGroupButtonAddons3;

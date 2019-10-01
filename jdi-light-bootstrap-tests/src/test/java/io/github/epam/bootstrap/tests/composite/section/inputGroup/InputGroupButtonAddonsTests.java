@@ -24,6 +24,7 @@ public class InputGroupButtonAddonsTests extends TestsInit {
         ((JavascriptExecutor) getDriver()).executeScript(JS_SCROLL_TO_ELEMENT, getDriver().findElement(By.xpath(HEADER_RIGHT_PART)));
     }
 
+// Button addons tests
     @Test
     public void checkButtonAddon1Test() {
         inputGroupButtonAddons1.input1.input(text);

@@ -8,6 +8,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 
 public class ButtonAddons extends Section {
+// Button addons locators
     @Css("#button-addon1")
     public Button button1;
     @XPath("//*[@aria-describedby='button-addon1']")
