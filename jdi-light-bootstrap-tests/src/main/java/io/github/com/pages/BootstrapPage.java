@@ -12,7 +12,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
-import io.github.com.sections.spinner.GrowingSpinner;
+import io.github.com.sections.spinner.GrowingSpinners;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -141,6 +141,6 @@ public class BootstrapPage extends WebPage {
     @UI("#pagination-small") public static PaginationSizeSmall paginationSizeSmall;
     @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
     @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
-    @UI("#growing-spinners") public static GrowingSpinner growingSpinner;
+    @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     //endregion
 }
