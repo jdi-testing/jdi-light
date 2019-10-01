@@ -60,11 +60,11 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         super.setCore(base);
         return this;
     }
-    public WebList() {elements.useCache(false); setTextType(SMART_LIST); noValidation(); }
-    public WebList(int jdiIndex) { this.jdiIndex = jdiIndex; elements.useCache(false); setTextType(SMART_LIST); noValidation(); }
-    public WebList(By locator, int jdiIndex) { this(jdiIndex); setLocator(locator);}
+    public WebList() { jdiIndex = 1; elements.useCache(false); setTextType(SMART_LIST); noValidation(); }
+    public WebList(By locator) { this(); setLocator(locator);}
+    public WebList(By locator, int jdiIndex) { this(); this.jdiIndex = jdiIndex; setLocator(locator);}
     public WebList(List<WebElement> elements) {
-        this(0); setWebElements(elements);
+        this(); jdiIndex = 0; setWebElements(elements);
     }
     public WebList(JDIBase base) {
         super(base);
@@ -130,8 +130,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     protected String getElementName(UIElement element) {
         try {
             return (UIELEMENT_NAME != null
-                ? UIELEMENT_NAME
-                : getTextType().func).execute(element);
+                    ? UIELEMENT_NAME
+                    : getTextType().func).execute(element);
         } catch (Exception ex) {
             return "";
         }
@@ -156,8 +156,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction(level = DEBUG)
     public UIElement get(String value) {
         return elements.isUseCache() && hasKey(value)
-            ? elements.get().get(value)
-            : getUIElement(value);
+                ? elements.get().get(value)
+                : getUIElement(value);
     }
     public UIElement getUIElement(String value) {
         if (locator.isTemplate())
@@ -165,8 +165,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         else {
             refresh();
             MapArray<String, UIElement> result = timer().getResultByCondition(
-                () -> elements(1),
-                els -> hasKey(els, value));
+                    () -> elements(1),
+                    els -> hasKey(els, value));
             if (result != null && result.has(value))
                 return result.get(value);
             else
@@ -418,7 +418,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             return 0;
         }
     }
-////
+    ////
     @JDIAction("Check that '{option}' is selected in '{name}'")
     public boolean selected(String option) {
         return get(option).isSelected();
@@ -471,7 +471,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public boolean isDisabled() {
         return !isEnabled();
     }
-////
+    ////
     @JDIAction(level = DEBUG)
     public void highlight(String color) {
         foreach(el -> el.highlight(color));
