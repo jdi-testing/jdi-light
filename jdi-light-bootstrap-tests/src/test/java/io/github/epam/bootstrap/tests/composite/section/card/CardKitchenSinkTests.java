@@ -45,12 +45,12 @@ public class CardKitchenSinkTests extends TestsInit {
     @Test
     public void itemsTest() {
         assertEquals(cardKitchenSink.list.size(), 3);
-        cardKitchenSink.list.get(0).is().text(is(item0Text));
-        cardKitchenSink.list.get(1).is().text(is(item1Text));
-        cardKitchenSink.list.get(2).is().text(is(item2Text));
-        cardKitchenSink.list.get(0).is().text(containsString(item0Text));
-        cardKitchenSink.list.get(1).is().text(containsString(item1Text));
-        cardKitchenSink.list.get(2).is().text(containsString(item2Text));
+        cardKitchenSink.list.get(1).is().text(is(item0Text));
+        cardKitchenSink.list.get(2).is().text(is(item1Text));
+        cardKitchenSink.list.get(3).is().text(is(item2Text));
+        cardKitchenSink.list.get(1).is().text(containsString(item0Text));
+        cardKitchenSink.list.get(2).is().text(containsString(item1Text));
+        cardKitchenSink.list.get(3).is().text(containsString(item2Text));
     }
 
     @Test
@@ -58,12 +58,11 @@ public class CardKitchenSinkTests extends TestsInit {
         baseValidation(cardKitchenSink.image);
         baseValidation(cardKitchenSink.title);
         baseValidation(cardKitchenSink.text);
-        baseValidation(cardKitchenSink.list);
-        baseValidation(cardKitchenSink.list.get(0));
         baseValidation(cardKitchenSink.list.get(1));
         baseValidation(cardKitchenSink.list.get(2));
-        baseValidation(cardKitchenSink.body.get(0));
+        baseValidation(cardKitchenSink.list.get(3));
         baseValidation(cardKitchenSink.body.get(1));
+        baseValidation(cardKitchenSink.body.get(2));
     }
 
     @Test
@@ -81,13 +80,13 @@ public class CardKitchenSinkTests extends TestsInit {
 
     @Test
     public void linksTest(){
-        link0 = cardKitchenSink.body.get(1).findElements(By.cssSelector(".card-link")).get(0);
+        link0 = cardKitchenSink.body.get(2).findElements(By.cssSelector(".card-link")).get(0);
         assertTrue(link0.isDisplayed());
         assertEquals(link0.getText(), link0Text);
         assertEquals(link0.getAttribute("target"), "_blank");
         assertEquals(link0.getTagName(), "a");
 
-        link1 = cardKitchenSink.body.get(1).findElements(By.cssSelector(".card-link")).get(1);
+        link1 = cardKitchenSink.body.get(2).findElements(By.cssSelector(".card-link")).get(1);
         assertTrue(link1.isDisplayed());
         assertEquals(link1.getText(), link1Text);
         assertEquals(link1.getAttribute("target"), "_blank");
