@@ -62,6 +62,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     public WebList() { jdiIndex = 1; elements.useCache(false); setTextType(SMART_LIST); noValidation(); }
     public WebList(By locator) { this(); setLocator(locator);}
+    public WebList(By locator, int jdiIndex) { this(); this.jdiIndex = jdiIndex; setLocator(locator);}
     public WebList(List<WebElement> elements) {
         this(); jdiIndex = 0; setWebElements(elements);
     }

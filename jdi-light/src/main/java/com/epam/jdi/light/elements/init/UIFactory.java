@@ -46,7 +46,7 @@ public class UIFactory {
                 : list(defineLocator(locator));
     }
     public static WebList list(By byLocator) {
-        return new WebList(byLocator);
+        return new WebList(byLocator, 0);
     }
     public static WebList list(List<WebElement> els, String name) {
         return new WebList(els).setup(e->e.setName(name));
