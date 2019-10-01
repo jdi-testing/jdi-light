@@ -66,12 +66,12 @@ public class VerticalTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .hasClass("nav");
+                .hasClass("nav flex-column");
         navsVerticalA.is()
                 .displayed()
                 .enabled()
                 .core()
-                .hasClass("nav");
+                .hasClass("nav flex-column");
         navsVerticalLi.navItemLink.get(1)
                 .is()
                 .core()
