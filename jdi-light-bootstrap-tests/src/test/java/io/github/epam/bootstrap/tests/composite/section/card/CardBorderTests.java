@@ -59,7 +59,7 @@ public class CardBorderTests extends TestsInit {
 
     @Test(dataProvider = "cardBorderHeaderText")
     public void getHeaderTextTest(CardBorder cardBorder, String headerText) {
-        assertEquals(cardBorder.border.getText(), headerText);
+        cardBorder.border.is().text(headerText);
     }
 
     @DataProvider
@@ -78,7 +78,7 @@ public class CardBorderTests extends TestsInit {
 
     @Test(dataProvider = "cardBorderTitleText")
     public void getTitleTextTest(CardBorder cardBorder, String titleText) {
-        assertEquals(cardBorder.title.getText(), titleText);
+        cardBorder.title.is().text(titleText);
     }
 
     @DataProvider
@@ -97,7 +97,7 @@ public class CardBorderTests extends TestsInit {
 
     @Test(dataProvider = "cardBorderBodyText")
     public void getBodyTextTest(CardBorder cardBorder, String bodyText) {
-        assertEquals(cardBorder.body.getText(), bodyText);
+        cardBorder.body.is().text(bodyText);
     }
 
     @DataProvider
