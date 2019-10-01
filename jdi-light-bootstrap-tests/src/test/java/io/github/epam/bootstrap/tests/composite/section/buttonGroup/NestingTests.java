@@ -14,6 +14,11 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Created by Dmitrii Pavlov on 19.09.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
+
 public class NestingTests extends TestsInit {
 
     @BeforeMethod
