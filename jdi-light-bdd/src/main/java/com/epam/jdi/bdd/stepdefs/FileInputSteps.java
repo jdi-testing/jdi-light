@@ -1,6 +1,6 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.ui.html.elements.common.FileInput;
+import com.epam.jdi.light.elements.common.FileInput;
 import cucumber.api.java.en.When;
 
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;

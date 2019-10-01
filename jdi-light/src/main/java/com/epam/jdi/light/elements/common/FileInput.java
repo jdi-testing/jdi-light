@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.html.elements.common;
+package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
@@ -14,9 +14,10 @@ public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, Is
     // region Actions
     @JDIAction("Upload file '{0}' for '{name}'")
     public void uploadFile(String path) {
+        base().noValidation();
         if (isDisabled())
             throw exception("FileInput '%s' is disabled. Can't upload file", getName());
-        uiElement.sendKeys(path);
+        uiElement.setText(path);
     }
     // endregion
 

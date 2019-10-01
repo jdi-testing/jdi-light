@@ -46,8 +46,10 @@ public class FileUploadTests extends TestsInit {
     public void disabledUploadTest() {
         try {
             disabledFileInput.uploadFile(mergePath(PROJECT_PATH, "/src/test/resources/general.xml"));
-        } catch (Exception ignore) {}
-        disabledFileInput.is().text(is("C:\\fakepath\\general.xml"));
+        } catch (Exception ex) {
+            assertTrue(ex.getMessage().contains("FileInput 'Disabled File Input' is disabled. Can't upload file"));
+            disabledFileInput.is().text(is(""));
+        }
     }
     @Test
     public void labelTest() {

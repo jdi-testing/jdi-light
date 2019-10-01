@@ -1,6 +1,8 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.common.FileInput;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.Upload;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
@@ -106,10 +108,8 @@ public class BootstrapPage extends WebPage {
     @UI("#card-horizontal") public static CardHorizontal cardHorizontal;
     @UI("#custom-select-01") public static CustomSelect customSelect;
     @UI("#custom-select-button-01") public static CustomSelectWithButton customSelectWithButton;
-    @UI("#custom-file-input-01") public static CustomFileInput customFileInputPrepend;
-    @UI("#custom-file-input-02") public static CustomFileInput customFileInputAppend;
-    @UI("#custom-file-input-button-01") public static CustomFileInputWithButton customFileInputWithButtonPrepend;
-    @UI("#custom-file-input-button-02") public static CustomFileInputWithButton customFileInputWithButtonAppend;
+    public static FileInput fileInput;  //@FindBy(id = "file-input")
+    public static Upload uploadFile;    //@FindBy(id = "upload-file")
     @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
     @UI("#media-object-nesting") public static MediaObjectNesting mediaObjectNesting;
     @UI("#media-object-list") public static JList<MediaObjectSample> mediaObjectList;

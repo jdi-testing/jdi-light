@@ -367,12 +367,15 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         Object parent = bElement.parent;
         By locator = bElement.getLocator();
         SearchContext searchContext = getContext(parent, bElement.locator);
-        //TODO rethink SMART SEARCH
-        return locator != null
-            ? uiSearch(searchContext, correctLocator(locator)).get(0)
-            : isPageObject(element.getClass())
-                ? searchContext
-                : SMART_SEARCH.execute(bElement.waitSec(getTimeout()));
+        if (locator != null)
+            return uiSearch(searchContext, correctLocator(locator)).get(0);
+        WebElement smart = trySmartSearch(bElement);
+        return smart != null ? smart : searchContext;
+    }
+    private WebElement trySmartSearch(JDIBase bElement) {
+        try {
+            return SMART_SEARCH.execute(bElement);
+        } catch (Exception ignored) { return null; }
     }
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)
@@ -380,8 +383,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     private SearchContext getContext(Object parent, JDILocator locator) {
         return locator.isRoot || isRoot(parent)
-                ? getDefaultContext()
-                : getSearchContext(parent);
+            ? getDefaultContext()
+            : getSearchContext(parent);
     }
     private SearchContext getFrameContext(By frame) {
         return driver().switchTo().frame(uiSearch(driver(),frame).get(0));
@@ -406,8 +409,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public String printFullLocator() {
         return parent == null || isBlank(printContext())
-                ? locator.toString()
-                : printContext() + ">" + locator.toString();
+            ? locator.toString()
+            : printContext() + ">" + locator.toString();
     }
     private void initContext() {
         context = printFullLocator();
@@ -423,7 +426,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     private static String printWebElement(WebElement element) {
         String asString = element.toString().replaceAll("css selector", "css");
         String result = asString.startsWith("WebElement->")
-                ? "" : "WebElement->";
+            ? "" : "WebElement->";
         if (asString.contains(")]")) {
             String s = asString.split("-> ")[1];
             return result + s.substring(0,s.length()-1);
@@ -434,13 +437,13 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         if (element.webElement.hasValue())
             return printWebElement(element.webElement.get());
         return Switch(logger.getLogLevel()).get(
-                Case(l -> l == STEP,
-                        l -> msgFormat(PRINT_ELEMENT_STEP, element)),
-                Case(l -> l == INFO,
-                        l -> msgFormat(PRINT_ELEMENT_INFO, element)),
-                Case(l -> l == ERROR,
-                        l -> msgFormat(PRINT_ERROR_STEP, element)),
-                Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
+            Case(l -> l == STEP,
+                l -> msgFormat(PRINT_ELEMENT_STEP, element)),
+            Case(l -> l == INFO,
+                l -> msgFormat(PRINT_ELEMENT_INFO, element)),
+            Case(l -> l == ERROR,
+                l -> msgFormat(PRINT_ERROR_STEP, element)),
+            Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
         );
     };
 

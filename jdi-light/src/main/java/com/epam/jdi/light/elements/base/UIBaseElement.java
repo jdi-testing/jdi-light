@@ -18,7 +18,7 @@ public abstract class UIBaseElement<A extends UIAssert>
     protected Boolean thisParent = null;
     protected boolean thisParent() {
         if (thisParent == null)
-            return base().locator.isEmpty();
+            thisParent = false;//return base().locator.isEmpty();
         return thisParent;
     }
     protected UIElement linked(String locator, String name) {
