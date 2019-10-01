@@ -144,5 +144,15 @@ public class BootstrapPage extends WebPage {
     @UI("#pagination-small") public static PaginationSizeSmall paginationSizeSmall;
     @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
     @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
+    @UI("#nav-base-li") public static NavsBaseLi navsBaseLi;
+    @UI("#nav-base-a") public static NavsBaseA navsBaseA;
+    @UI("#nav-center") public static NavsAlignmentCenter navsAlignmentCenter;
+    @UI("#nav-end") public static NavsAlignmentEnd navsAlignmentEnd;
+    @UI("#nav-vert-li") public static NavsVerticalLi navsVerticalLi;
+    @UI("#nav-vert-a") public static NavsVerticalA navsVerticalA;
+    @UI("#nav-tabs") public static NavsTabs navsTabs;
+    @UI("#nav-pills") public static NavsPills navsPills;
+    @UI("#nav-justify") public static NavsJustify navsJustify;
+    @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
     //endregion
 }
