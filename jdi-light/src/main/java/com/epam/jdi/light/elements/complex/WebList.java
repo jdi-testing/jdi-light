@@ -165,8 +165,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         else {
             refresh();
             MapArray<String, UIElement> result = timer().getResultByCondition(
-                    () -> elements(1),
-                    els -> hasKey(els, value));
+                () -> elements(1),
+                els -> hasKey(els, value));
             if (result != null && result.has(value))
                 return result.get(value);
             else
@@ -198,9 +198,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         if (indexCalculated < 0)
             throw exception("Can't get element with index '%s'. Index should be 0 or more", indexCalculated);
         return (locator.isTemplate()
-                ? tryGetByIndex(indexCalculated)
-                : initElement(() -> getList(indexCalculated + 1).get(indexCalculated)))
-                .setName(nameFromIndex(indexCalculated));
+            ? tryGetByIndex(indexCalculated)
+            : initElement(() -> getList(indexCalculated + 1).get(indexCalculated)))
+        .setName(nameFromIndex(indexCalculated));
     }
     protected UIElement tryGetByIndex(int index) {
         int indexCalculated = index - jdiIndex;
@@ -418,7 +418,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             return 0;
         }
     }
-    ////
+////
     @JDIAction("Check that '{option}' is selected in '{name}'")
     public boolean selected(String option) {
         return get(option).isSelected();
@@ -471,7 +471,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public boolean isDisabled() {
         return !isEnabled();
     }
-    ////
+////
     @JDIAction(level = DEBUG)
     public void highlight(String color) {
         foreach(el -> el.highlight(color));
