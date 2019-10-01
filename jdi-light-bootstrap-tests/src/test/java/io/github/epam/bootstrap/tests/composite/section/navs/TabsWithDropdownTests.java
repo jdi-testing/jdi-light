@@ -12,7 +12,6 @@ import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
 import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.navsTabs;
 import static io.github.com.pages.BootstrapPage.navsTabsWithDropdown;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
@@ -28,13 +27,17 @@ public class TabsWithDropdownTests extends TestsInit {
     private static final String JS_SCROLL_TO_ELEMENT = "arguments[0].scrollIntoView(true);";
     private static final String HEADER_RIGHT_PART = "#nav-with-dropdown";
     private String link1 = "Active";
-    private String link2 = "JDI Docs";
+    private String link2 = "Dropdown";
     private String link3 = "JDI - testing tool";
     private String link4 = "Disabled";
-    private String linkDropdown = "Dropdown";
+    private String linkDrop1 = "JDI home";
+    private String linkDrop2 = "JDI Docs";
+    private String linkDrop3 = "JDI - testing tool";
+    private String linkDrop4 = "Bootstrap";
     private String pageTitle1 = "Home Page";
     private String pageTitle2 = "JDI · GitHub";
     private String pageTitle3 = "JDI Testing tools · GitHub";
+    private String pageTitle4 = "Bootstrap · The most popular HTML, CSS, and JS library in the world.";
 
     @BeforeMethod
     public void before() {
@@ -50,16 +53,11 @@ public class TabsWithDropdownTests extends TestsInit {
         };
     }
 
-    @DataProvider
-    public Object[][] clickValidate() {
-        return new Object[][]{
-                {1, pageTitle1}, {2, pageTitle2}, {3, pageTitle3}
-        };
-    }
-
     @Test
     public void isValidationTests() {
         navsTabsWithDropdown.navItem.is()
+                .size(4);
+        navsTabsWithDropdown.navItemLink.is()
                 .size(4);
         navsTabsWithDropdown.is()
                 .displayed()
@@ -76,6 +74,47 @@ public class TabsWithDropdownTests extends TestsInit {
                 .hasClass("disabled");
     }
 
+    @Test
+    public void dropdownIsValidationTests() {
+        navsTabsWithDropdown.dropdownMenu.expand();
+        navsTabsWithDropdown.dropdownMenu
+                .is()
+                .displayed()
+                .enabled();
+        navsTabsWithDropdown.dropdownMenu
+                .is()
+                .expanded()
+                .size(4)
+                .core()
+                .attr("data-toggle", "dropdown")
+                .attr("aria-haspopup", "true")
+                .attr("aria-expanded", "true")
+                .attr("role", "button")
+                .tag("a");
+        navsTabsWithDropdown.dropdownMenu.expand();
+    }
+
+    @Test
+    public void dropdownMenuTests() {
+        navsTabsWithDropdown.dropdownMenu.expand();
+        navsTabsWithDropdown.dropdownMenu.list().get(0)
+                .is()
+                .text(linkDrop1)
+                .attr("font-size", is("16px"));
+        navsTabsWithDropdown.dropdownMenu.list().get(1)
+                .is()
+                .text(linkDrop2)
+                .attr("font-size", is("16px"));
+        navsTabsWithDropdown.dropdownMenu.list().get(2)
+                .is()
+                .text(linkDrop3)
+                .attr("font-size", is("16px"));
+        navsTabsWithDropdown.dropdownMenu.list().get(3)
+                .is()
+                .text(linkDrop4)
+                .attr("font-size", is("16px"));
+    }
+
     @Test(dataProvider = "listData")
     public void itemsIsValidationTests(int index, String linkText) {
         navsTabsWithDropdown.navItem.get(index)
@@ -87,15 +126,30 @@ public class TabsWithDropdownTests extends TestsInit {
                 .is()
                 .core()
                 .hasClass("nav-link")
+                .attr("font-size", is("14px"))
                 .text(is(linkText));
     }
 
-    @Test(dataProvider = "clickValidate")
-    public void linkClickableLiTests(int index, String pageTitle) {
-        navsTabsWithDropdown.navItem.get(index).highlight();
-        navsTabsWithDropdown.navItem.get(index).click();
-        newWindowTitleCheck(pageTitle);
-        navsTabsWithDropdown.navItem.get(index).unhighlight();
+    @Test
+    public void dropdownClickableLiTests() {
+        navsTabsWithDropdown.dropdownMenu.select(linkDrop1);
+        newWindowTitleCheck(pageTitle1);
+//        navsTabsWithDropdown.dropdownMenu.select(linkDrop2);
+//        newWindowTitleCheck(pageTitle2);
+        navsTabsWithDropdown.dropdownMenu.select(linkDrop3);
+        newWindowTitleCheck(pageTitle3);
+        navsTabsWithDropdown.dropdownMenu.select(linkDrop4);
+        newWindowTitleCheck(pageTitle4);
+    }
+
+    @Test
+    public void linkClickableLiTests() {
+        navsTabsWithDropdown.navItem.get(1).click();
+        newWindowTitleCheck(pageTitle1);
+        navsTabsWithDropdown.navItem.get(3).click();
+        newWindowTitleCheck(pageTitle3);
+        navsTabsWithDropdown.navItem.get(4).click();
+        newWindowTitleCheck(pageTitle4);
     }
 
     private void newWindowTitleCheck(String pageTitle) {
