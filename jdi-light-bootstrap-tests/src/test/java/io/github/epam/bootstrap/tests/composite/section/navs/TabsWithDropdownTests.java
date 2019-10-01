@@ -14,6 +14,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navsTabsWithDropdown;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.testng.Assert.assertEquals;
 
@@ -80,6 +81,7 @@ public class TabsWithDropdownTests extends TestsInit {
         navsTabsWithDropdown.dropdownMenu
                 .is()
                 .displayed()
+                .expanded()
                 .enabled();
         navsTabsWithDropdown.dropdownMenu
                 .is()
@@ -99,20 +101,16 @@ public class TabsWithDropdownTests extends TestsInit {
         navsTabsWithDropdown.dropdownMenu.expand();
         navsTabsWithDropdown.dropdownMenu.list().get(0)
                 .is()
-                .text(linkDrop1)
-                .attr("font-size", is("16px"));
+                .text(linkDrop1);
         navsTabsWithDropdown.dropdownMenu.list().get(1)
                 .is()
-                .text(linkDrop2)
-                .attr("font-size", is("16px"));
+                .text(linkDrop2);
         navsTabsWithDropdown.dropdownMenu.list().get(2)
                 .is()
-                .text(linkDrop3)
-                .attr("font-size", is("16px"));
+                .text(linkDrop3);
         navsTabsWithDropdown.dropdownMenu.list().get(3)
                 .is()
-                .text(linkDrop4)
-                .attr("font-size", is("16px"));
+                .text(linkDrop4);
     }
 
     @Test(dataProvider = "listData")
@@ -121,12 +119,11 @@ public class TabsWithDropdownTests extends TestsInit {
                 .is()
                 .core()
                 .hasClass("nav-item")
-                .text(is(linkText));
+                .text(is(containsString(linkText)));
         navsTabsWithDropdown.navItemLink.get(index)
                 .is()
                 .core()
                 .hasClass("nav-link")
-                .attr("font-size", is("14px"))
                 .text(is(linkText));
     }
 
@@ -134,8 +131,8 @@ public class TabsWithDropdownTests extends TestsInit {
     public void dropdownClickableLiTests() {
         navsTabsWithDropdown.dropdownMenu.select(linkDrop1);
         newWindowTitleCheck(pageTitle1);
-//        navsTabsWithDropdown.dropdownMenu.select(linkDrop2);
-//        newWindowTitleCheck(pageTitle2);
+        navsTabsWithDropdown.dropdownMenu.select(linkDrop2);
+        newWindowTitleCheck(pageTitle2);
         navsTabsWithDropdown.dropdownMenu.select(linkDrop3);
         newWindowTitleCheck(pageTitle3);
         navsTabsWithDropdown.dropdownMenu.select(linkDrop4);
@@ -143,13 +140,11 @@ public class TabsWithDropdownTests extends TestsInit {
     }
 
     @Test
-    public void linkClickableLiTests() {
+    public void linkClickableTests() {
         navsTabsWithDropdown.navItem.get(1).click();
         newWindowTitleCheck(pageTitle1);
         navsTabsWithDropdown.navItem.get(3).click();
         newWindowTitleCheck(pageTitle3);
-        navsTabsWithDropdown.navItem.get(4).click();
-        newWindowTitleCheck(pageTitle4);
     }
 
     private void newWindowTitleCheck(String pageTitle) {
