@@ -45,7 +45,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     }
 
     ListBase() {}
-    ListBase(By locator) { list = new WebList(locator); }
+    ListBase(By locator) { list = new WebList(locator, 1); }
     ListBase(List<WebElement> elements) { list = new WebList(elements); }
     Class<?> initClass = UIElement.class;
 

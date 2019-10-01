@@ -63,7 +63,7 @@ public class InitActions {
         $(IsDropdown.class, Dropdown.class)
     );
     public static MapArray<String, InitRule> INIT_RULES = map(
-        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList())),
+        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList(0))),
         $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
             info -> new DataList())),
         $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), ICoreElement.class),

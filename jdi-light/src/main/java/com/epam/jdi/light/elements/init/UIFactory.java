@@ -42,7 +42,7 @@ public class UIFactory {
 
     public static WebList list(String locator) {
         return locator.matches("[A-Z].*]")
-                ? new WebList().setName(locator)
+                ? new WebList(1).setName(locator)
                 : list(defineLocator(locator));
     }
     public static WebList list(By byLocator) {
