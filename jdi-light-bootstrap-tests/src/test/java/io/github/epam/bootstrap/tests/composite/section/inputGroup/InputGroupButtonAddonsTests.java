@@ -1,8 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.inputGroup;
 
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
