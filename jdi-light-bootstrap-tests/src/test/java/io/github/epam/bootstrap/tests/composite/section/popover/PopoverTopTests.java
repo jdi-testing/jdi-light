@@ -42,6 +42,5 @@ public class PopoverTopTests extends TestsInit {
     public void clickableTests() {
         popoverTop.click();
         popoverTop.is().core().attr("aria-describedby", containsString("popover"));
-
     }
 }
