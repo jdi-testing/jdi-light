@@ -16,18 +16,22 @@ public class SpinnerBorderTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    @Test(priority = 3)
-    public void checkExistSpinner() {
-        buttonSpinnerBorder.click();
-       // assertTrue(spinnerBorder.core().isDisplayed());
-      spinnerBorder.disappearAfter(5);
-       //buttonSpinnerBorder.click();
-      //  assertTrue(spinnerBorder.core().isDisplayed());
-      //  assertFalse(spinnerBorder.core().isDisplayed());
-
-
-
-
-       // spinnerBorder.waitFor();
+    @Test()
+    public void checkSpinnerClass() {
+        spinnerBorder.assertThat().core().hasClass("spinner-border");
     }
+
+    @Test(priority = 1)
+    public void checkSpinnerAppearAndThenDisappear() {
+        buttonSpinnerBorder.click();
+        spinnerBorder.disappearAfter(4);
+    }
+
+    @Test(priority = 2)
+    public void checkSpinnerAppear() {
+        spinnerBorder.assertThat().hidden();
+        buttonSpinnerBorder.click();
+        spinnerBorder.assertThat().displayed();
+    }
+
 }
