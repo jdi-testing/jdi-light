@@ -6,14 +6,13 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class InputGroupButtonAddonsTests extends TestsInit {
-    private static final String JS_SCROLL_TO_ELEMENT = "arguments[0].scrollIntoView(true);";
+    private static final String JS_SCROLL_TO_ELEMENT = "scrollIntoView(true);";
     private static final String HEADER_RIGHT_PART = "//h4[.='Input group - Button addons']";
     private String text = "XA-XA",
        placeholder_text = "Recipient's username";
@@ -22,7 +21,7 @@ public class InputGroupButtonAddonsTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        ((JavascriptExecutor) getDriver()).executeScript(JS_SCROLL_TO_ELEMENT, getDriver().findElement(By.xpath(HEADER_RIGHT_PART)));
+        $(HEADER_RIGHT_PART).jsExecute(JS_SCROLL_TO_ELEMENT);
     }
 
 // Button addons tests
