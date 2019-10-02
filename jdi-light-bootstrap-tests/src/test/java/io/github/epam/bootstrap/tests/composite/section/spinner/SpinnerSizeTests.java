@@ -12,6 +12,11 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class SpinnerSizeTests extends TestsInit {
 
+    private static final String smallSpinnerClass = "spinner-border-sm";
+    private static final String smallGrowingSpinnerClass = "spinner-grow-sm";
+    private static final String spinnerClass = "spinner-border";
+    private static final String growingSpinnerClass = "spinner-grow";
+
     @DataProvider
     public Object[][] spinnerData() {
         return new Object[][] {
@@ -29,9 +34,17 @@ public class SpinnerSizeTests extends TestsInit {
     }
 
     @Test(dataProvider = "spinnerData")
-    public void simpleTest(Spinner spinner) {
+    public void isValidationTest(Spinner spinner) {
         spinner.highlight();
         spinner.is().enabled().and().displayed();
+    }
+
+    @Test
+    public void spinnerClassTest() {
+        spinnerSize.smallSpinner.is().core().hasClass(smallSpinnerClass);
+        spinnerSize.smallGrowingSpinner.is().core().hasClass(smallGrowingSpinnerClass);
+        spinnerSize.spinner.is().core().hasClass(spinnerClass);
+        spinnerSize.growingSpinner.is().core().hasClass(growingSpinnerClass);
     }
 
 }
