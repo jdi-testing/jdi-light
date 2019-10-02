@@ -12,5 +12,4 @@ public class PopoverTop extends Section {
     @UI(".popover fade show bs-popover-top h3") public Text header;
     @UI(".popover fade show bs-popover-top div") public Text body;
 
-
 }
