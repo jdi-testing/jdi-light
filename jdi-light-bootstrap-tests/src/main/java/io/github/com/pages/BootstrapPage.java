@@ -17,12 +17,8 @@ public class BootstrapPage extends WebPage {
     public static UIElement inputGroupWrap,inputGroupNowrap;
     public static Button redButton, doubleButton, disabledButton;
 
-    @UI("//input[contains(@class, 'progress-change plus')]")
-    public static Button plus;
-
-    @UI("//input[contains(@class, 'progress-change minus')]")
-    public static Button minus;
-
+    @UI("//input[contains(@class, 'progress-change plus')]")  public static Button plus;
+    @UI("//input[contains(@class, 'progress-change minus')]") public static Button minus;
     @UI("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
     @UI("#jumbotron") public static Jumbotron jumbotron;
     @UI("#breadcrumb") public static Breadcrumb breadcrumb;

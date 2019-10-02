@@ -18,7 +18,6 @@ public class ProgressWithLabelsTests extends TestsInit {
     private String defaultPercent = "25%";
 
     @BeforeMethod
-
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
