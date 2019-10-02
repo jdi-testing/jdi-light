@@ -16,6 +16,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
@@ -174,5 +175,7 @@ public class BootstrapPage extends WebPage {
     @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
     @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
     @UI(".card-columns") public static CardColumns cardColumns;
+    @UI("#list-example a") public static ListGroup listGroupForScrollspy;
+    @UI("#list-example~div") public static ScrollspyWithListGroup scrollspyWithListGroup;
     //endregion
 }
