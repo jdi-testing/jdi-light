@@ -1,5 +1,6 @@
 package mockitotests;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import mocks.CardNavigationMock;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

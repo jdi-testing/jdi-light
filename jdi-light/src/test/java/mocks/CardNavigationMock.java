@@ -17,7 +17,7 @@ public class CardNavigationMock implements IEnabled {
     @Override
     public boolean hasAttribute(String attrName) {
         return isNotBlank(uiElement.attr(attrName));
-    };
+    }
 
     @Override
     public boolean isEnabled() {
@@ -25,14 +25,14 @@ public class CardNavigationMock implements IEnabled {
     }
 
     public boolean hasClassCheck() {
-        return this.hasClass("active");
+        return hasClass("active");
     }
 
     public boolean hasClassAndAttributeCheck() {
-        return this.hasClass("disabled") || this.hasAttribute("disabled");
+        return hasClass("disabled") || hasAttribute("disabled");
     }
 
     public boolean getWebElementCheck() {
-        return this.isEnabled();
+        return isEnabled();
     }
 }
