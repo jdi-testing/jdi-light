@@ -1,7 +1,6 @@
 package io.github.com.sections.card;
 
 import com.epam.jdi.light.elements.complex.JList;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
