@@ -16,6 +16,8 @@ import static org.hamcrest.Matchers.is;
 public class ProgressWithLabelsTests extends TestsInit {
 
     private String defaultPercent = "25%";
+    private String minPercent = "0%";
+    private String maxPercent = "100%";
 
     @BeforeMethod
     public void before() {
@@ -53,19 +55,18 @@ public class ProgressWithLabelsTests extends TestsInit {
 
     @Test
     public void getPercentTest() {
-        assertThat(progressWithLabels.core().getText(), is(defaultPercent));
+        progressWithLabels.core().is().text(defaultPercent);
         minus.click();
-        assertThat(progressWithLabels.core().getText(), is("20%"));
+        progressWithLabels.core().is().text("20%");
         for (int i = 0; i < 10; i++) {
             minus.click();
         }
-        assertThat(progressWithLabels.core().getText(), is("0%"));
+        progressWithLabels.core().is().text(minPercent);
         plus.click();
-        assertThat(progressWithLabels.core().getText(), is("5%"));
+        progressWithLabels.core().is().text("5%");
         for (int i = 0; i < 30; i++) {
             plus.click();
         }
-        assertThat(progressWithLabels.core().getText(), is("100%"));
-
+        progressWithLabels.core().is().text(maxPercent);
     }
 }
