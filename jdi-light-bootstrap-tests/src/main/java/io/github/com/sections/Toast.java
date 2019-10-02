@@ -8,7 +8,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 
 public class Toast extends Section {
     @UI(".toast-header") public Label header;
-    @UI(".toast-header .mr-auto") public Text headerText;
+    @UI(".mr-auto") public Text headerText;
     @UI(".toast-body") public Text body;
     @UI(".close") public Button closeButton;
 }

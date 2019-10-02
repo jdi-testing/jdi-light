@@ -140,9 +140,15 @@ public class BootstrapPage extends WebPage {
     @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
 
     //Toasts
-    @UI("#pagination-end") public static Toast toastWithTopAlign;
+    @UI("#toastRightTop") public static Toast toastWithTopAlign;
     @UI("#linkToastRightTop") public static Button toastWithTopAlignButton;
     @UI("#simpleToast") public static Toast simpleToast;
     @UI("#linkSimpleToastExample") public static Button simpleToastButton;
+    @UI("#multipleToast") public static Button stackOfToastsButton;
+    @UI("#firstMultipleToast") public static Toast firstStackToast;
+    @UI("#secondMultipleToast") public static Toast secondStackToast;
+    @UI("#linkStackAlign") public static Button stackOfToastsWithTopAlignButton;
+    @UI("#firstStackToast") public static Toast firstTopAlignStackToast;
+    @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
     //endregion
 }
