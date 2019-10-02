@@ -106,6 +106,14 @@ public class BootstrapPage extends WebPage {
     @UI("#card-blue") public static CardWithHeaderAndFooter cardBlue;
     @UI("#card-light") public static CardWithHeaderAndFooter cardLight;
     @UI("#card-dark") public static CardWithHeaderAndFooter cardDark;
+    @UI("#card-border-primary") public static CardBorder cardBorderPrimary;
+    @UI("#card-border-secondary") public static CardBorder cardBorderSecondary;
+    @UI("#card-border-success") public static CardBorder cardBorderSuccess;
+    @UI("#card-border-danger") public static CardBorder cardBorderDanger;
+    @UI("#card-border-warning") public static CardBorder cardBorderWarning;
+    @UI("#card-border-info") public static CardBorder cardBorderInfo;
+    @UI("#card-border-light") public static CardBorder cardBorderLight;
+    @UI("#card-border-dark") public static CardBorder cardBorderDark;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
     @UI("#buttonToolbar1") public static ButtonToolbar buttonToolbar;
