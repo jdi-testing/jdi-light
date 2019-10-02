@@ -6,13 +6,13 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Popover;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.MediaObject;
 
-public class PopoverTop extends Section {
+public class PopoverBottom extends Section {
 
-    @UI("#popover-top")
+    @UI("#popover-bottom")
     public Popover popover;
-    @UI("div.bs-popover-top")
+    @UI("div.bs-popover-bottom")
     public MediaObject container;
-    @UI("div.bs-popover-top div.popover-body")
+    @UI("div.bs-popover-bottom div.popover-body")
     public Text body;
 
 }

@@ -147,6 +147,11 @@ public class BootstrapPage extends WebPage {
     @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
     @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
     @UI(".card-columns") public static CardColumns cardColumns;
-    @UI("#popover-top") public static PopoverTop popoverTop;
+    @UI("body") public static PopoverTop popoverTop;
+    @UI("body") public static PopoverRight popoverRight;
+    @UI("body") public static PopoverBottom popoverBottom;
+    @UI("body") public static PopoverLeft popoverLeft;
+    @UI("body") public static PopoverWithTitle popoverWithTitle;
+    @UI("body") public static PopoverDismissible popoverDismissible;
     //endregion
 }

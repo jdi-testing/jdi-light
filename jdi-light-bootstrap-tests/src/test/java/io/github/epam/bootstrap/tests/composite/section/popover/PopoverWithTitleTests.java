@@ -5,11 +5,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.popoverRight;
 import static io.github.com.pages.BootstrapPage.popoverTop;
+import static io.github.com.pages.BootstrapPage.popoverWithTitle;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.testng.Assert.assertFalse;
 
 /**
@@ -17,64 +16,70 @@ import static org.testng.Assert.assertFalse;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-public class PopoverTopTests extends TestsInit {
+public class PopoverWithTitleTests extends TestsInit {
 
-    private String dataContent = "Top popover is visible.";
+    private String dataContent = "And here's some amazing content. It's very engaging. Right?";
+    private String dataTitle = "Popover title";
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        popoverTop.hover();
+        popoverWithTitle.hover();
     }
 
     @Test
     public void isValidationTests() {
-        popoverTop.popover.is()
+        popoverWithTitle.popover.is()
                 .displayed()
                 .enabled()
                 .core()
-                .hasClass("btn-secondary")
+                .hasClass("btn btn-lg btn-danger btn-block mb-3")
                 .attr("type", "button")
-                .attr("data-container", "body")
                 .attr("data-toggle", "popover")
-                .attr("data-placement", "top")
+                .attr("data-original-title", dataTitle)
                 .attr("data-content", dataContent)
-                .text(is("Popover on top"));
+                .text(is("Click to toggle popover"));
     }
 
     @Test
     public void clickableTests() {
-        popoverTop.popover.click();
-        popoverTop.popover
+        popoverWithTitle.popover.click();
+        popoverWithTitle.popover
                 .is()
                 .core()
                 .attr("aria-describedby", containsString("popover"));
-        popoverTop.container
+        popoverWithTitle.container
                 .is()
                 .enabled()
                 .core()
-                .hasClass("popover fade bs-popover-top show")
+                .hasClass("popover fade bs-popover-right show")
                 .attr("role", "tooltip")
-                .attr("x-placement", "top");
-        popoverTop.body
+                .attr("x-placement", "right");
+        popoverWithTitle.body
                 .is()
                 .enabled()
                 .core()
                 .hasClass("popover-body")
                 .text(is(dataContent));
-        popoverRight.popover.click();
-        popoverTop.popover.base().waitSec(1);
-        popoverTop.popover
+        popoverWithTitle.header
+                .is()
+                .enabled()
+                .core()
+                .hasClass("popover-header")
+                .text(is(containsStringIgnoringCase(dataTitle)));
+        popoverTop.popover.click();
+        popoverWithTitle.popover.base().waitSec(1);
+        popoverWithTitle.popover
                 .is()
                 .core()
                 .attr("aria-describedby", containsString("popover"));
-        popoverTop.container
+        popoverWithTitle.container
                 .is()
                 .enabled();
-        popoverTop.popover.click();
-        popoverTop.popover.base().waitSec(1);
-        popoverTop.popover
+        popoverWithTitle.popover.click();
+        popoverWithTitle.popover.base().waitSec(1);
+        popoverWithTitle.popover
                 .is()
                 .core()
                 .attr("aria-describedby", "");
@@ -83,7 +88,7 @@ public class PopoverTopTests extends TestsInit {
 
     private boolean isElementPresent() {
         try {
-            popoverTop.container.isEmpty();
+            popoverWithTitle.container.isEmpty();
             return true;
         } catch (Exception e) {
             return false;

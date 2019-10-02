@@ -5,8 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
+import static io.github.com.pages.BootstrapPage.popoverBottom;
 import static io.github.com.pages.BootstrapPage.popoverRight;
-import static io.github.com.pages.BootstrapPage.popoverTop;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -17,20 +17,20 @@ import static org.testng.Assert.assertFalse;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-public class PopoverTopTests extends TestsInit {
+public class PopoverBottomTests extends TestsInit {
 
-    private String dataContent = "Top popover is visible.";
+    private String dataContent = "Bottom popover is visible.";
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        popoverTop.hover();
+        popoverBottom.hover();
     }
 
     @Test
     public void isValidationTests() {
-        popoverTop.popover.is()
+        popoverBottom.popover.is()
                 .displayed()
                 .enabled()
                 .core()
@@ -38,43 +38,43 @@ public class PopoverTopTests extends TestsInit {
                 .attr("type", "button")
                 .attr("data-container", "body")
                 .attr("data-toggle", "popover")
-                .attr("data-placement", "top")
+                .attr("data-placement", "bottom")
                 .attr("data-content", dataContent)
-                .text(is("Popover on top"));
+                .text(is("Popover on bottom"));
     }
 
     @Test
     public void clickableTests() {
-        popoverTop.popover.click();
-        popoverTop.popover
+        popoverBottom.popover.click();
+        popoverBottom.popover
                 .is()
                 .core()
                 .attr("aria-describedby", containsString("popover"));
-        popoverTop.container
+        popoverBottom.container
                 .is()
                 .enabled()
                 .core()
-                .hasClass("popover fade bs-popover-top show")
+                .hasClass("popover fade bs-popover-bottom show")
                 .attr("role", "tooltip")
-                .attr("x-placement", "top");
-        popoverTop.body
+                .attr("x-placement", "bottom");
+        popoverBottom.body
                 .is()
                 .enabled()
                 .core()
                 .hasClass("popover-body")
                 .text(is(dataContent));
         popoverRight.popover.click();
-        popoverTop.popover.base().waitSec(1);
-        popoverTop.popover
+        popoverBottom.popover.base().waitSec(1);
+        popoverBottom.popover
                 .is()
                 .core()
                 .attr("aria-describedby", containsString("popover"));
-        popoverTop.container
+        popoverBottom.container
                 .is()
                 .enabled();
-        popoverTop.popover.click();
-        popoverTop.popover.base().waitSec(1);
-        popoverTop.popover
+        popoverBottom.popover.click();
+        popoverBottom.popover.base().waitSec(1);
+        popoverBottom.popover
                 .is()
                 .core()
                 .attr("aria-describedby", "");
@@ -83,7 +83,7 @@ public class PopoverTopTests extends TestsInit {
 
     private boolean isElementPresent() {
         try {
-            popoverTop.container.isEmpty();
+            popoverBottom.container.isEmpty();
             return true;
         } catch (Exception e) {
             return false;
