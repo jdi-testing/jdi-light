@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.bootstrap.elements.complex;
+package com.epam.jdi.light.ui.bootstrap.elements.common;
 
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.tools.Timer;

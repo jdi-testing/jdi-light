@@ -8,7 +8,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Spinner;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 
@@ -32,6 +31,8 @@ public class BootstrapPage extends WebPage {
     @UI("#tooltipWithHTML") public static Tooltip tooltipWithHTML;
     @UI("#wrapperForDisabledButton") public static Tooltip wrapperForDisabledButton;
     @UI("#tooltipOnDisabledButton") public static Tooltip tooltipOnDisabledButton;
+    @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
+    @UI("#spinner-border") public static Spinner spinnerBorder;
     //endregion
 
     //region Complex Elements
@@ -147,7 +148,5 @@ public class BootstrapPage extends WebPage {
     @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
     @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
     @UI(".card-columns") public static CardColumns cardColumns;
-    @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
-    @UI("#spinner-border") public static Spinner spinnerBorder;
     //endregion
 }

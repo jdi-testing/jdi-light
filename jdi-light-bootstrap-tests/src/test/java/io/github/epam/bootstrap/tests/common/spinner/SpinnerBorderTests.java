@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.complex;
+package io.github.epam.bootstrap.tests.common.spinner;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
