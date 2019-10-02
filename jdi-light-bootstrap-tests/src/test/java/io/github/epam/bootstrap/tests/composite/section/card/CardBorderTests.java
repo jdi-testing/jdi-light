@@ -116,8 +116,14 @@ public class CardBorderTests extends TestsInit {
     @DataProvider
     public static Object[][] cardBorder() {
         return new Object[][]{
-                {cardBorderPrimary}, {cardBorderSecondary}, {cardBorderSuccess}, {cardBorderDanger}, {cardBorderWarning},
-                {cardBorderInfo}, {cardBorderLight}, {cardBorderDark},
+                {cardBorderPrimary},
+                {cardBorderSecondary},
+                {cardBorderSuccess},
+                {cardBorderDanger},
+                {cardBorderWarning},
+                {cardBorderInfo},
+                {cardBorderLight},
+                {cardBorderDark},
         };
     }
 
