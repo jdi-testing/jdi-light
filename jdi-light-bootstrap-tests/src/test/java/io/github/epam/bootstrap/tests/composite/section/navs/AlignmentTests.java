@@ -1,19 +1,17 @@
 package io.github.epam.bootstrap.tests.composite.section.navs;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
-import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
-import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navsAlignmentCenter;
 import static io.github.com.pages.BootstrapPage.navsAlignmentEnd;
+import static io.github.epam.bootstrap.tests.composite.section.navs.ClickVarification.testElementClick;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
-import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Dmitrii Pavlov on 30.09.2019
@@ -115,23 +113,13 @@ public class AlignmentTests extends TestsInit {
 
     @Test(dataProvider = "clickValidate")
     public void linkClickableLiTests(int index, String pageTitle) {
-        navsAlignmentCenter.navItem.get(index).highlight();
-        navsAlignmentCenter.navItem.get(index).click();
-        newWindowTitleCheck(pageTitle);
-        navsAlignmentCenter.navItem.get(index).unhighlight();
+        UIElement element = navsAlignmentCenter.navItem.get(index);
+        testElementClick(element, pageTitle);
     }
 
     @Test(dataProvider = "clickValidate")
     public void linkClickableATests(int index, String pageTitle) {
-        navsAlignmentEnd.navItemLink.get(index).highlight();
-        navsAlignmentEnd.navItemLink.get(index).click();
-        newWindowTitleCheck(pageTitle);
-        navsAlignmentEnd.navItemLink.get(index).unhighlight();
-    }
-
-    private void newWindowTitleCheck(String pageTitle) {
-        switchToNewWindow();
-        assertEquals(getTitle(), pageTitle);
-        closeWindow();
+        UIElement element = navsAlignmentEnd.navItemLink.get(index);
+        testElementClick(element, pageTitle);
     }
 }

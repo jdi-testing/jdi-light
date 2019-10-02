@@ -5,15 +5,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
-import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
-import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navsTabsWithDropdown;
+import static io.github.epam.bootstrap.tests.composite.section.navs.ClickVarification.newWindowTitleCheck;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Dmitrii Pavlov on 30.09.2019
@@ -46,6 +43,20 @@ public class TabsWithDropdownTests extends TestsInit {
     public Object[][] listData() {
         return new Object[][]{
                 {1, link1}, {2, link2}, {3, link3}, {4, link4}
+        };
+    }
+
+    @DataProvider
+    public Object[][] listLinkDrop() {
+        return new Object[][]{
+                {0, linkDrop1}, {1, linkDrop2}, {2, linkDrop3}, {3, linkDrop4}
+        };
+    }
+
+    @DataProvider
+    public Object[][] listPageTitle() {
+        return new Object[][]{
+                {pageTitle1, linkDrop1}, {pageTitle2, linkDrop2}, {pageTitle3, linkDrop3}, {pageTitle4, linkDrop4}
         };
     }
 
@@ -91,21 +102,12 @@ public class TabsWithDropdownTests extends TestsInit {
         navsTabsWithDropdown.dropdownMenu.expand();
     }
 
-    @Test
-    public void dropdownMenuTests() {
+    @Test(dataProvider = "listLinkDrop")
+    public void dropdownMenuTests(int index, String linkText) {
         navsTabsWithDropdown.dropdownMenu.expand();
-        navsTabsWithDropdown.dropdownMenu.list().get(0)
+        navsTabsWithDropdown.dropdownMenu.list().get(index)
                 .is()
-                .text(linkDrop1);
-        navsTabsWithDropdown.dropdownMenu.list().get(1)
-                .is()
-                .text(linkDrop2);
-        navsTabsWithDropdown.dropdownMenu.list().get(2)
-                .is()
-                .text(linkDrop3);
-        navsTabsWithDropdown.dropdownMenu.list().get(3)
-                .is()
-                .text(linkDrop4);
+                .text(linkText);
     }
 
     @Test(dataProvider = "listData")
@@ -122,16 +124,10 @@ public class TabsWithDropdownTests extends TestsInit {
                 .text(is(linkText));
     }
 
-    @Test
-    public void dropdownClickableLiTests() {
-        navsTabsWithDropdown.dropdownMenu.select(linkDrop1);
-        newWindowTitleCheck(pageTitle1);
-        navsTabsWithDropdown.dropdownMenu.select(linkDrop2);
-        newWindowTitleCheck(pageTitle2);
-        navsTabsWithDropdown.dropdownMenu.select(linkDrop3);
-        newWindowTitleCheck(pageTitle3);
-        navsTabsWithDropdown.dropdownMenu.select(linkDrop4);
-        newWindowTitleCheck(pageTitle4);
+    @Test(dataProvider = "listPageTitle")
+    public void dropdownClickableLiTests(String pageTitle, String link) {
+        navsTabsWithDropdown.dropdownMenu.select(link);
+        newWindowTitleCheck(pageTitle);
     }
 
     @Test
@@ -140,11 +136,5 @@ public class TabsWithDropdownTests extends TestsInit {
         newWindowTitleCheck(pageTitle1);
         navsTabsWithDropdown.navItem.get(3).click();
         newWindowTitleCheck(pageTitle3);
-    }
-
-    private void newWindowTitleCheck(String pageTitle) {
-        switchToNewWindow();
-        assertEquals(getTitle(), pageTitle);
-        closeWindow();
     }
 }

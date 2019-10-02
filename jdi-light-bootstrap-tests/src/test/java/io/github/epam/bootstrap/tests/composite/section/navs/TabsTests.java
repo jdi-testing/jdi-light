@@ -1,18 +1,16 @@
 package io.github.epam.bootstrap.tests.composite.section.navs;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
-import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
-import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navsTabs;
+import static io.github.epam.bootstrap.tests.composite.section.navs.ClickVarification.testElementClick;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
-import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Dmitrii Pavlov on 30.09.2019
@@ -85,15 +83,7 @@ public class TabsTests extends TestsInit {
 
     @Test(dataProvider = "clickValidate")
     public void linkClickableLiTests(int index, String pageTitle) {
-        navsTabs.navItem.get(index).highlight();
-        navsTabs.navItem.get(index).click();
-        newWindowTitleCheck(pageTitle);
-        navsTabs.navItem.get(index).unhighlight();
-    }
-
-    private void newWindowTitleCheck(String pageTitle) {
-        switchToNewWindow();
-        assertEquals(getTitle(), pageTitle);
-        closeWindow();
+        UIElement element = navsTabs.navItem.get(index);
+        testElementClick(element, pageTitle);
     }
 }
