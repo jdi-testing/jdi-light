@@ -16,6 +16,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
+import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 
 public class BootstrapPage extends WebPage {
@@ -107,6 +108,7 @@ public class BootstrapPage extends WebPage {
     @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
     @UI("#card-with-header-and-footer-quote") public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
     @UI("#card-with-header-and-footer") public static CardWithHeaderAndFooter cardWithHeaderAndFooter;
+    @UI("#card-with-grid-markup") public static CardWithGridMarkup cardWithGridMarkup;
     @UI("#card-bright-blue") public static CardWithHeaderAndFooter cardBrightBlue;
     @UI("#card-grey") public static CardWithHeaderAndFooter cardGrey;
     @UI("#card-green") public static CardWithHeaderAndFooter cardGreen;
