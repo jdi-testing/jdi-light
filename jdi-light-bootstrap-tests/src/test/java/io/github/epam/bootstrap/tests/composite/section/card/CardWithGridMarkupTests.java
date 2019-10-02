@@ -120,40 +120,44 @@ public class CardWithGridMarkupTests extends TestsInit {
     //test button
     @Test
     public void getButtonTextCardWithGridMarkup11Test() {
-        cardWithGridMarkup.listCard.get(1).button.is().text(textButtonCardWithGridMarkup11);
-        cardWithGridMarkup.listCard.get(1).button.click();
+        CardWithHeaderAndFooter cardWithGridMarkup11 = cardWithGridMarkup.listCard.get(1);
+        cardWithGridMarkup11.button.is().text(textButtonCardWithGridMarkup11);
+        cardWithGridMarkup11.button.click();
         validateAlert(is(textAlert));
-        cardWithGridMarkup.listCard.get(1).button.is()
+        cardWithGridMarkup11.button.is()
                 .enabled()
                 .displayed();
     }
 
     @Test
     public void getButtonTextCardWithGridMarkup12Test() {
-        cardWithGridMarkup.listCard.get(1).button.is().text(textButtonCardWithGridMarkup12);
-        cardWithGridMarkup.listCard.get(1).button.click();
+        CardWithHeaderAndFooter cardWithGridMarkup12 = cardWithGridMarkup.listCard.get(2);
+        cardWithGridMarkup12.button.is().text(textButtonCardWithGridMarkup12);
+        cardWithGridMarkup12.button.click();
         validateAlert(is(textAlert));
-        cardWithGridMarkup.listCard.get(1).button.is()
+        cardWithGridMarkup12.button.is()
                 .enabled()
                 .displayed();
     }
 
     @Test
     public void getButtonTextCardWithGridMarkup21Test() {
-        cardWithGridMarkup.listCard.get(2).button.is().text(textButtonCardWithGridMarkup21);
-        cardWithGridMarkup.listCard.get(2).button.click();
+        CardWithHeaderAndFooter cardWithGridMarkup21 = cardWithGridMarkup.listCard.get(3);
+        cardWithGridMarkup21.button.is().text(textButtonCardWithGridMarkup21);
+        cardWithGridMarkup21.button.click();
         validateAlert(is(textAlert));
-        cardWithGridMarkup.listCard.get(2).button.is()
+        cardWithGridMarkup21.button.is()
                 .enabled()
                 .displayed();
     }
 
     @Test
     public void getButtonTextCardWithGridMarkup22Test() {
-        cardWithGridMarkup.listCard.get(3).button.is().text(textButtonCardWithGridMarkup22);
-        cardWithGridMarkup.listCard.get(3).button.click();
+        CardWithHeaderAndFooter cardWithGridMarkup22 = cardWithGridMarkup.listCard.get(4);
+        cardWithGridMarkup22.button.is().text(textButtonCardWithGridMarkup22);
+        cardWithGridMarkup22.button.click();
         validateAlert(is(textAlert));
-        cardWithGridMarkup.listCard.get(3).button.is()
+        cardWithGridMarkup22.button.is()
                 .enabled()
                 .displayed();
     }
