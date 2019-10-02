@@ -1,13 +1,10 @@
 package io.github.epam.bootstrap.tests.composite.section.navs;
 
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
 import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
@@ -25,8 +22,6 @@ import static org.testng.Assert.assertEquals;
 
 public class AlignmentTests extends TestsInit {
 
-    private static final String JS_SCROLL_TO_ELEMENT = "arguments[0].scrollIntoView(true);";
-    private static final String HEADER_RIGHT_PART = "#nav-center";
     private String link1 = "Active";
     private String link2 = "JDI Docs";
     private String link3 = "JDI - testing tool";
@@ -39,7 +34,7 @@ public class AlignmentTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        ((JavascriptExecutor) getDriver()).executeScript(JS_SCROLL_TO_ELEMENT, getDriver().findElement(By.cssSelector(HEADER_RIGHT_PART)));
+        navsAlignmentCenter.hover();
     }
 
     @DataProvider
