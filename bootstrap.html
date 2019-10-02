@@ -4255,7 +4255,7 @@
 							<button type="button" class="btn btn-sm btn-info"  onclick=show_toast('.toast.several') id="multipleToast">Stack of Toasts</button>
 							<br /><br />
 							<div aria-live="polite" aria-atomic="true" style="min-height: 200px;background-color: grey;">
-							<div class="toast several" role="alert" aria-live="assertive" aria-atomic="true">
+							<div class="toast several" role="alert" aria-live="assertive" id="firstMultipleToast" aria-atomic="true">
 								<div class="toast-header">
 									<img src="images/range-circle.png" class="rounded mr-2" alt="...">
 									<strong class="mr-auto">Bootstrap</strong>
@@ -4268,7 +4268,7 @@
 									See? Just like this.
 								</div>
 							</div>
-							<div class="toast several" role="alert" aria-live="assertive" aria-atomic="true">
+							<div class="toast several" role="alert" aria-live="assertive" id="secondMultipleToast" aria-atomic="true">
 								<div class="toast-header">
 									<img src="images/range-circle.png" class="rounded mr-2" alt="...">
 									<strong class="mr-auto">Bootstrap</strong>
@@ -4312,7 +4312,7 @@
 								<div style="position: absolute; top: 0; right: 0;">
 
 									<!-- Then put toasts within -->
-									<div class="toast severalWithPosition" role="alert" aria-live="assertive" aria-atomic="true">
+									<div class="toast severalWithPosition" role="alert" aria-live="assertive" id="firstStackToast" aria-atomic="true">
 										<div class="toast-header">
 											<img src="images/range-circle.png" class="rounded mr-2" alt="...">
 											<strong class="mr-auto">Bootstrap</strong>
@@ -4326,7 +4326,7 @@
 										</div>
 									</div>
 
-									<div class="toast severalWithPosition" role="alert" aria-live="assertive" aria-atomic="true">
+									<div class="toast severalWithPosition" role="alert" aria-live="assertive" id="secondStackToast" aria-atomic="true">
 										<div class="toast-header">
 											<img src="images/range-circle.png" class="rounded mr-2" alt="...">
 											<strong class="mr-auto">Bootstrap</strong>
