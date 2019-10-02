@@ -26,14 +26,6 @@ import static org.hamcrest.Matchers.is;
 
 public class CardBorderTests extends TestsInit {
 
-    private static String[] headerText = new String[] {"Card with primary border", "Card with secondary border",
-            "Card with success border", "Card with danger border", "Card with warning border", "Card with info border", "Card with light border",
-            "Card with dark border"};
-
-    private static String[] titleText = new String[] {"PRIMARY CARD TITLE", "SECONDARY CARD TITLE",
-            "SUCCESS CARD TITLE", "DANGER CARD TITLE", "WARNING CARD TITLE", "INFO CARD TITLE", "LIGHT CARD TITLE",
-            "DARK CARD TITLE"};
-
     private static String bodyText = "Some quick example text to build on the card title and make up the bulk of the card's content.";
 
     @BeforeMethod
@@ -45,14 +37,14 @@ public class CardBorderTests extends TestsInit {
     @DataProvider
     public static Object[][] cardBorderHeaderText() {
         return new Object[][]{
-                {cardBorderPrimary, headerText[0]},
-                {cardBorderSecondary, headerText[1]},
-                {cardBorderSuccess, headerText[2]},
-                {cardBorderDanger, headerText[3]},
-                {cardBorderWarning, headerText[4]},
-                {cardBorderInfo, headerText[5]},
-                {cardBorderLight, headerText[6]},
-                {cardBorderDark, headerText[7]},
+                {cardBorderPrimary, "Card with primary border"},
+                {cardBorderSecondary, "Card with secondary border"},
+                {cardBorderSuccess, "Card with success border"},
+                {cardBorderDanger, "Card with danger border"},
+                {cardBorderWarning, "Card with warning border"},
+                {cardBorderInfo, "Card with info border"},
+                {cardBorderLight, "Card with light border"},
+                {cardBorderDark, "Card with dark border"},
         };
     }
 
@@ -64,14 +56,14 @@ public class CardBorderTests extends TestsInit {
     @DataProvider
     public static Object[][] cardBorderTitleText() {
         return new Object[][]{
-                {cardBorderPrimary, titleText[0]},
-                {cardBorderSecondary, titleText[1]},
-                {cardBorderSuccess, titleText[2]},
-                {cardBorderDanger, titleText[3]},
-                {cardBorderWarning, titleText[4]},
-                {cardBorderInfo, titleText[5]},
-                {cardBorderLight, titleText[6]},
-                {cardBorderDark, titleText[7]},
+                {cardBorderPrimary, "PRIMARY CARD TITLE"},
+                {cardBorderSecondary, "SECONDARY CARD TITLE"},
+                {cardBorderSuccess, "SUCCESS CARD TITLE"},
+                {cardBorderDanger, "DANGER CARD TITLE"},
+                {cardBorderWarning, "WARNING CARD TITLE"},
+                {cardBorderInfo, "INFO CARD TITLE"},
+                {cardBorderLight, "LIGHT CARD TITLE"},
+                {cardBorderDark, "DARK CARD TITLE"},
         };
     }
 
