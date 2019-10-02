@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.popoverTop;
+import static io.github.com.pages.BootstrapPage.popoverRight;
 import static io.github.com.pages.BootstrapPage.popoverWithTitle;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.*;
@@ -26,6 +26,7 @@ public class PopoverWithTitleTests extends TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         popoverWithTitle.hover();
+        setLocators();
     }
 
     @Test
@@ -44,7 +45,6 @@ public class PopoverWithTitleTests extends TestsInit {
 
     @Test
     public void clickableTests() {
-        popoverWithTitle.popover.click();
         popoverWithTitle.popover
                 .is()
                 .core()
@@ -68,7 +68,7 @@ public class PopoverWithTitleTests extends TestsInit {
                 .core()
                 .hasClass("popover-header")
                 .text(is(containsStringIgnoringCase(dataTitle)));
-        popoverTop.popover.click();
+        popoverRight.popover.click();
         popoverWithTitle.popover.base().waitSec(1);
         popoverWithTitle.popover
                 .is()
@@ -84,6 +84,18 @@ public class PopoverWithTitleTests extends TestsInit {
                 .core()
                 .attr("aria-describedby", "");
         assertFalse(isElementPresent());
+    }
+
+    private void setLocators() {
+        popoverWithTitle.popover.click();
+        if (popoverWithTitle.popover.hasAttribute("aria-describedby")) {
+            String containerLocator = popoverWithTitle.popover.base().get().getAttribute("aria-describedby");
+            popoverWithTitle.container.core().setLocator("#" + containerLocator);
+            popoverWithTitle.header.core().setLocator("#" + containerLocator + " h3");
+            popoverWithTitle.body.core().setLocator("#" + containerLocator + " .popover-body");
+        } else {
+            System.out.println("Popover isn't clickable or broken!");
+        }
     }
 
     private boolean isElementPresent() {

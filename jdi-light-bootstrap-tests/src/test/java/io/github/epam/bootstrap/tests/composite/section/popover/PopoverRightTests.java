@@ -5,8 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.popoverRight;
-import static io.github.com.pages.BootstrapPage.popoverTop;
+import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -26,6 +25,7 @@ public class PopoverRightTests extends TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         popoverRight.hover();
+        setLocators();
     }
 
     @Test
@@ -45,7 +45,6 @@ public class PopoverRightTests extends TestsInit {
 
     @Test
     public void clickableTests() {
-        popoverRight.popover.click();
         popoverRight.popover
                 .is()
                 .core()
@@ -69,7 +68,7 @@ public class PopoverRightTests extends TestsInit {
                 .is()
                 .core()
                 .attr("aria-describedby", containsString("popover"));
-        popoverRight.container
+        popoverRight
                 .is()
                 .enabled();
         popoverRight.popover.click();
@@ -79,6 +78,17 @@ public class PopoverRightTests extends TestsInit {
                 .core()
                 .attr("aria-describedby", "");
         assertFalse(isElementPresent());
+    }
+
+    private void setLocators() {
+        popoverRight.popover.click();
+        if (popoverRight.popover.hasAttribute("aria-describedby")) {
+            String containerLocator = popoverRight.popover.base().get().getAttribute("aria-describedby");
+            popoverRight.container.core().setLocator("#" + containerLocator);
+            popoverRight.body.core().setLocator("#" + containerLocator + " .popover-body");
+        } else {
+            System.out.println("Popover isn't clickable or broken!");
+        }
     }
 
     private boolean isElementPresent() {

@@ -10,9 +10,7 @@ public class PopoverBottom extends Section {
 
     @UI("#popover-bottom")
     public Popover popover;
-    @UI("div.bs-popover-bottom")
     public MediaObject container;
-    @UI("div.bs-popover-bottom div.popover-body")
     public Text body;
 
 }

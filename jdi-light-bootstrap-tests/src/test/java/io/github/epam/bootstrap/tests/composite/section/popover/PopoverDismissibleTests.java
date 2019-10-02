@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.popoverDismissible;
-import static io.github.com.pages.BootstrapPage.popoverTop;
+import static io.github.com.pages.BootstrapPage.popoverRight;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.*;
 import static org.testng.Assert.assertFalse;
@@ -26,6 +26,7 @@ public class PopoverDismissibleTests extends TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         popoverDismissible.hover();
+        setLocators();
     }
 
     @Test
@@ -45,7 +46,6 @@ public class PopoverDismissibleTests extends TestsInit {
 
     @Test
     public void clickableTests() {
-        popoverDismissible.popover.click();
         popoverDismissible.popover
                 .is()
                 .core()
@@ -78,13 +78,25 @@ public class PopoverDismissibleTests extends TestsInit {
         popoverDismissible.container
                 .is()
                 .enabled();
-        popoverTop.popover.click();
+        popoverRight.popover.click();
         popoverDismissible.popover.base().waitSec(1);
         popoverDismissible.popover
                 .is()
                 .core()
                 .attr("aria-describedby", "");
         assertFalse(isElementPresent());
+    }
+
+    private void setLocators() {
+        popoverDismissible.popover.click();
+        if (popoverDismissible.popover.hasAttribute("aria-describedby")) {
+            String containerLocator = popoverDismissible.popover.base().get().getAttribute("aria-describedby");
+            popoverDismissible.container.core().setLocator("#" + containerLocator);
+            popoverDismissible.header.core().setLocator("#" + containerLocator + " h3");
+            popoverDismissible.body.core().setLocator("#" + containerLocator + " .popover-body");
+        } else {
+            System.out.println("Popover isn't clickable or broken!");
+        }
     }
 
     private boolean isElementPresent() {

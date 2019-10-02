@@ -10,9 +10,7 @@ public class PopoverLeft extends Section {
 
     @UI("#popover-left")
     public Popover popover;
-    @UI("div.bs-popover-left")
     public MediaObject container;
-    @UI("div.bs-popover-left div.popover-body")
     public Text body;
 
 }

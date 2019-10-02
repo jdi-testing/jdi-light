@@ -25,6 +25,7 @@ public class PopoverLeftTests extends TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         popoverLeft.hover();
+        setLocators();
     }
 
     @Test
@@ -44,7 +45,6 @@ public class PopoverLeftTests extends TestsInit {
 
     @Test
     public void clickableTests() {
-        popoverLeft.popover.click();
         popoverLeft.popover
                 .is()
                 .core()
@@ -78,6 +78,17 @@ public class PopoverLeftTests extends TestsInit {
                 .core()
                 .attr("aria-describedby", "");
         assertFalse(isElementPresent());
+    }
+
+    private void setLocators() {
+        popoverLeft.popover.click();
+        if (popoverLeft.popover.hasAttribute("aria-describedby")) {
+            String containerLocator = popoverLeft.popover.base().get().getAttribute("aria-describedby");
+            popoverLeft.container.core().setLocator("#" + containerLocator);
+            popoverLeft.body.core().setLocator("#" + containerLocator + " .popover-body");
+        } else {
+            System.out.println("Popover isn't clickable or broken!");
+        }
     }
 
     private boolean isElementPresent() {
