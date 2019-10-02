@@ -43,7 +43,7 @@ public class DataListOptions extends UIListBase<UISelectAssert> implements IsCom
      **/
     @JDIAction("Select '{0}' for '{name}'") @Override
     public void select(int index) {
-        setText(list().elements(index).keys().get(index-1));
+        setText(list().valuesMap(index).keys().get(index-1));
     }
     /**
     *

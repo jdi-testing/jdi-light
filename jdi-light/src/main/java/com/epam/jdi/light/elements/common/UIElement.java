@@ -245,7 +245,7 @@ public class UIElement extends JDIBase
     }
 
     public void click(int x, int y) {
-        actionsWitElement((a, e) -> a.moveByOffset(x-getRect().width/2, y-getRect().height/2).click());
+        actionsWithElement(a -> a.moveByOffset(x-getRect().width/2, y-getRect().height/2).click());
     }
     public void click(ElementArea area) {
         if (isDisabled())
@@ -452,14 +452,14 @@ public class UIElement extends JDIBase
      */
     @JDIAction("DoubleClick on '{name}'") @Override
     public void doubleClick() {
-        actionsWitElement(Actions::doubleClick);
+        actionsWithElement((a,e) -> a.doubleClick(e));
     }
     /**
      * Right click on the element
      */
     @JDIAction("RightClick on '{name}'") @Override
     public void rightClick() {
-        actionsWitElement(Actions::contextClick);
+        actionsWithElement((a,e) -> a.contextClick(e));
     }
 
     /**

@@ -68,7 +68,12 @@ public class Line implements IList<String>, IBaseElement {
      * @return List
      */
     @JDIAction(level = DEBUG)
-    public MapArray<String, String> elements(int minAmount) {
+    public List<String> elements(int minAmount) {
+        return getData(minAmount).values();
+    }
+
+    @Override
+    public MapArray<String, String> valuesMap(int minAmount) {
         return getData(minAmount);
     }
 

@@ -27,6 +27,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.setupFieldUsingRules;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.tools.map.MapArray.toMapArray;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -64,11 +65,20 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
      * @return List
      */
 
-    @JDIAction(level = DEBUG)
-    public MapArray<String, T> elements(int minAmount) {
+    public MapArray<String, T> valuesMap(int minAmount) {
         if (actualMapValue())
             return map.get();
-        return list().elements(minAmount).toMapArray(this::toT);
+        MapArray<String, T> result = list().valuesMap(minAmount).toMapArray((k,v)->k,(k,v)->toT(v));
+        if (map.isUseCache())
+            map.set(result);
+        return result;
+    }
+
+    @JDIAction(level = DEBUG)
+    public List<T> elements(int minAmount) {
+        if (actualMapValue())
+            return map.get().values();
+        return LinqUtils.map(list().elements(minAmount), this::toT);
     }
 
     /**

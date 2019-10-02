@@ -44,7 +44,9 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     @JDIAction(level = DEBUG)
     default List<String> values() { return list().values(); }
     @JDIAction(level = DEBUG)
-    default List<String> values(TextTypes type) { return list().values(type); }
+    default List<String> values(TextTypes type) {
+        return list().values(type);
+    }
     @JDIAction(level = DEBUG)
     default List<String> listEnabled() { return list().listEnabled(); }
     @JDIAction(level = DEBUG)

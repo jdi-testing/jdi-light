@@ -41,7 +41,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
         try {
             return new RemoteWebDriver(new URL(getRemoteURL()), capabilities.execute());
         } catch (Exception ex) {
-            throw exception("Failed to setup remote "+type.name+" driver");
+            throw exception("Failed to setup remote "+type.name+" driver. Exception: " + safeException(ex));
         }
     }
     private WebDriver setupLocal() {

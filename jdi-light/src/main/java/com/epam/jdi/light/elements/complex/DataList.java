@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
+import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 
@@ -43,7 +44,7 @@ public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert
     public List<D> asData() {
         try {
             if (dataType == null) return null;
-            return elements(1).select((k, v) -> asEntity(v, dataType));
+            return LinqUtils.map(elements(1), v -> asEntity(v, dataType));
         } catch (Exception ex) {
             throw exception("Can't get DataList data" + LINE_BREAK + safeException(ex));
         }
@@ -93,5 +94,4 @@ public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert
                     field.getName());
         }
     }
-
 }

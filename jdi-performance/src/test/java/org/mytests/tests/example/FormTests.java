@@ -5,6 +5,7 @@ import org.mytests.tests.TestsInit;
 import org.mytests.uiobjects.example.entities.Contacts;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static org.mytests.tests.states.States.shouldBeLoggedIn;
 import static org.mytests.tests.states.States.shouldBeLoggedOut;
 import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_CONTACT;

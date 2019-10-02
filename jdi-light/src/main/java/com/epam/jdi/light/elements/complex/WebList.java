@@ -11,6 +11,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -21,6 +22,7 @@ import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -35,6 +37,8 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
+import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
+import static com.epam.jdi.tools.pairs.Pair.$;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -57,7 +61,12 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         super.setCore(base);
         return this;
     }
-    public WebList() { elements.useCache(false); setTextType(SMART_LIST); noValidation(); }
+    public WebList() {
+        elements.useCache(true);
+        values_map.useCache(true);
+        setTextType(SMART_LIST);
+        noValidation();
+    }
     public WebList(By locator) { this(); setLocator(locator);}
     public WebList(List<WebElement> elements) {
         this(); setWebElements(elements);
@@ -82,7 +91,10 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         super.setName(name);
         return this;
     }
-    protected CacheValue<MapArray<String, UIElement>> elements =
+
+    protected CacheValue<List<UIElement>> elements =
+        new CacheValue<>(ArrayList::new);
+    protected CacheValue<MapArray<String, UIElement>> values_map =
             new CacheValue<>(MapArray::new);
 
     protected String nameFromIndex(int i) {
@@ -92,26 +104,30 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         return format("%s[%s]", getName(), value);
     }
 
+    public MapArray<String, UIElement> valuesMap(int minAmount) {
+        elements(minAmount);
+        fillValueMap();
+        return values_map.get();
+    }
     @JDIAction(level = DEBUG)
-    public MapArray<String, UIElement> elements(int minAmount) {
+    public List<UIElement> elements(int minAmount) {
         if (elements.isUseCache() && elements.hasValue() && isActual() && elements.get().size() >= minAmount)
             return elements.get();
         if (locator.isTemplate())
             throw exception("You call method that can't be used with template locator. " +
-                    "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator()));
-        MapArray<String, UIElement> result = getListElements(minAmount);
+                "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator()));
+        List<UIElement> result = getListElements(minAmount);
         if (elements.isUseCache())
             elements.set(result);
         return result;
     }
-    protected MapArray<String, UIElement> getListElements(int minAmount) {
-        MapArray<String, UIElement> result = new MapArray<>();
+    protected List<UIElement> getListElements(int minAmount) {
+        List<UIElement> result = new ArrayList<>();
         List<WebElement> webElements = getList(minAmount);
         int length = webElements.size();
         for (int i=0; i < length; i++) {
             int j = i;
-            UIElement element = initElement(webElements.get(j), () -> getList(minAmount).get(j), j);
-            result.update(getElementName(i, element), element);
+            result.add(initElement(webElements.get(j), () -> getList(minAmount).get(j), j));
         }
         return result;
     }
@@ -133,9 +149,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         }
     }
     protected boolean hasKey(String value) {
-        if (elements.get() == null)
-            elements.set(new MapArray<>());
-        return hasKey(elements.get(), value);
+        if (values_map.get() == null)
+            values_map.set(new MapArray<>());
+        return hasKey(values_map.get(), value);
     }
     protected boolean hasKey(MapArray<String, UIElement> map, String value) {
         List<String> keys = map.keys();
@@ -151,22 +167,42 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction(level = DEBUG)
     public UIElement get(String value) {
-        return elements.isUseCache() && hasKey(value)
-            ? elements.get().get(value)
-            : getUIElement(value);
+        if (values_map.isUseCache()) {
+            if (!hasKey(value))
+                fillValueMap();
+            if (hasKey(value))
+                return values_map.get().get(value);
+        }
+        return getUIElement(value);
     }
+    private void fillValueMap() {
+        if (values_map.isUseCache() && values_map.get().isEmpty() && !elements.get().isEmpty()) {
+            for (int i = 0; i <= elements.get().size(); i++) {
+                UIElement el = elements.get().get(i);
+                values_map.get().update(getElementName(i, el), el);
+            }
+        }
+    }
+
     public UIElement getUIElement(String value) {
         if (locator.isTemplate())
             return new UIElement(base(), getLocator(value), nameFromValue(value));
         else {
             refresh();
-            MapArray<String, UIElement> result = timer().getResultByCondition(
+            List<UIElement> result = timer().getResultByCondition(
                 () -> elements(1),
-                els -> hasKey(els, value));
-            if (result != null && result.has(value))
-                return result.get(value);
-            else
-                throw exception("Can't get '%s'. No elements with this name found", value);
+                els -> {
+                    for (int i = 0; i <= els.size(); i++)
+                        if (getElementName(i, els.get(i)).equals(value))
+                            return true;
+                    return false;
+                });
+            if (result != null) {
+                for (int i = 0; i <= result.size(); i++)
+                    if (getElementName(i, result.get(i)).equals(value))
+                        return result.get(i);
+            }
+            throw exception("Can't get '%s'. No elements with this name found", value);
         }
     }
     private JFunc1<UIElement, String> UIELEMENT_NAME;
@@ -228,7 +264,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     @JDIAction("Check all '{name}' unchecked options")
     public void checkAll() {
-        for (UIElement checkbox : elements(0).values()) {
+        for (UIElement checkbox : elements(0)) {
             if (checkbox.isEnabled() && !selected(checkbox)) {
                 checkbox.click();
             }
@@ -236,7 +272,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     @JDIAction("Uncheck all '{name}' checked options")
     public void uncheckAll() {
-        for (UIElement checkbox : elements(0).values()) {
+        for (UIElement checkbox : elements(0)) {
             if (checkbox.isEnabled() && selected(checkbox)) {
                 checkbox.click();
             }
@@ -245,7 +281,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction("Check only '{0}' in '{name}' list")
     public void check(String... names) {
         List<String> listNames = asList(names);
-        for (UIElement value : elements(names.length).values()) {
+        for (UIElement value : elements(names.length)) {
             if (value.isDisabled()) continue;
             if (selected(value) && !listNames.contains(value.labelText().trim())
                     || !selected(value) && listNames.contains(value.labelText().trim()))
@@ -255,7 +291,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction("Uncheck '{0}' checkboxes in '{name}' checklist")
     public void uncheck(String... names) {
         List<String> listNames = asList(names);
-        for (UIElement value : elements(names.length).values()) {
+        for (UIElement value : elements(names.length)) {
             if (value.isDisabled()) continue;
             if (selected(value) && listNames.contains(value.labelText().trim())
                     || !selected(value) && !listNames.contains(value.labelText().trim()))
@@ -426,7 +462,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         refresh();
-        return noValidation(() -> elements(0).keys());
+        List<UIElement> els = noValidation(() -> elements(0));
+        return LinqUtils.map(els, this::getElementName);
     }
 
     @JDIAction("Get '{name}' values")
@@ -499,7 +536,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     protected boolean isActual() {
         try {
-            return elements.get().size() > 0 && isActual(elements.get().get(0).value);
+            return elements.get().size() > 0 && isActual(elements.get().get(0));
         } catch (Exception ex) { return false; }
     }
 
@@ -527,9 +564,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public boolean isEmpty() { return size() == 0; }
     public boolean isNotEmpty() { return size() > 0; }
 
-
     public void offCache() {
         super.offCache();
         elements.useCache(false);
+        values_map.useCache(false);
     }
 }

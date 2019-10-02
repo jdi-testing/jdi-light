@@ -57,7 +57,7 @@ public interface IWebList<T extends IListBase> extends IList<T> {
     @JDIAction("Check only '{0}' in '{name}' list")
     default void check(String... names) {
         List<String> listNames = asList(names);
-        for (T value : elements(names.length).values()) {
+        for (T value : elements(names.length)) {
             if (value.isDisabled()) continue;
             if (value.isSelected() && !listNames.contains(value.text(base().getTextType()).trim())
                     || !value.isSelected() && listNames.contains(value.getText().trim()))
@@ -67,7 +67,7 @@ public interface IWebList<T extends IListBase> extends IList<T> {
     @JDIAction("Uncheck '{0}' checkboxes in '{name}' checklist")
     default void uncheck(String... names) {
         List<String> listNames = asList(names);
-        for (T value : elements(names.length).values()) {
+        for (T value : elements(names.length)) {
             if (value.isDisabled()) continue;
             if (value.isSelected() && listNames.contains(value.text(base().getTextType()).trim())
                     || !value.isSelected() && !listNames.contains(value.text(base().getTextType()).trim()))
@@ -192,7 +192,7 @@ public interface IWebList<T extends IListBase> extends IList<T> {
     default List<String> values() {
         refresh();
         base().noValidation();
-        return elements(0).keys();
+        return valuesMap(0).keys();
     }
 
     @JDIAction("Get '{name}' values")

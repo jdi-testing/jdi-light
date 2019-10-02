@@ -155,10 +155,11 @@ public class ActionHelper {
 
     public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
     static WebPage getPage(Object element) {
-        if (isClass(element.getClass(), DriverBase.class) &&
-            !isClass(element.getClass(), WebPage.class))
-            return ((DriverBase) element).getPage();
-        return null;
+        if (!isClass(element.getClass(), DriverBase.class))
+            return null;
+        return isClass(element.getClass(), WebPage.class)
+            ? (WebPage) element
+                : ((DriverBase) element).getPage();
     }
     public static MethodSignature getJpMethod(JoinPoint joinPoint) {
         return (MethodSignature) joinPoint.getSignature();

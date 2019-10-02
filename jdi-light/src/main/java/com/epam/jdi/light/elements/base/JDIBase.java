@@ -447,8 +447,14 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public void actions(JFunc2<Actions, WebElement, Actions> action) {
         action.execute(actions.get(), get()).build().perform();
     }
-    public void actionsWitElement(JFunc2<Actions, WebElement, Actions> action) {
+    public void actions(JFunc1<Actions, Actions> action) {
+        action.execute(actions.get()).build().perform();
+    }
+    public void actionsWithElement(JFunc2<Actions, WebElement, Actions> action) {
         action.execute(actions.get().moveToElement(get()), get()).build().perform();
+    }
+    public void actionsWithElement(JFunc1<Actions, Actions> action) {
+        action.execute(actions.get().moveToElement(get())).build().perform();
     }
     private Safe<Actions> actions = new Safe<>(() -> new Actions(driver()));
 
