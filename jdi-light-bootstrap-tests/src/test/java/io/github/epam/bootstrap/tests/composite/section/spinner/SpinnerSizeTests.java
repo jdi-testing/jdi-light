@@ -14,8 +14,7 @@ public class SpinnerSizeTests extends TestsInit {
 
     private static final String smallSpinnerClass = "spinner-border-sm";
     private static final String smallGrowingSpinnerClass = "spinner-grow-sm";
-    private static final String spinnerClass = "spinner-border";
-    private static final String growingSpinnerClass = "spinner-grow";
+    private static final String spinnerStyleValue = "width: 3rem; height: 3rem;";
 
     @DataProvider
     public Object[][] spinnerData() {
@@ -43,8 +42,12 @@ public class SpinnerSizeTests extends TestsInit {
     public void spinnerClassTest() {
         spinnerSize.smallSpinner.is().core().hasClass(smallSpinnerClass);
         spinnerSize.smallGrowingSpinner.is().core().hasClass(smallGrowingSpinnerClass);
-        spinnerSize.spinner.is().core().hasClass(spinnerClass);
-        spinnerSize.growingSpinner.is().core().hasClass(growingSpinnerClass);
+    }
+
+    @Test
+    public void spinnerStylingTest() {
+        spinnerSize.spinner.is().core().attr("style", spinnerStyleValue);
+        spinnerSize.growingSpinner.is().core().attr("style", spinnerStyleValue);
     }
 
 }

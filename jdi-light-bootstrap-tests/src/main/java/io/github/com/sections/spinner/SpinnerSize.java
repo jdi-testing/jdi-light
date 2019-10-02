@@ -10,10 +10,10 @@ public class SpinnerSize extends Spinner {
     @UI(".spinner-grow-sm")
     public Spinner smallGrowingSpinner;
 
-    @UI(".spinner-border")
+    @UI("#spinBorder")
     public Spinner spinner;
 
-    @UI(".spinner-grow")
+    @UI("#spinGrow")
     public Spinner growingSpinner;
 
 }
