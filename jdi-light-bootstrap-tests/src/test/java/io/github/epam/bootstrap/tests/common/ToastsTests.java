@@ -36,11 +36,7 @@ public class ToastsTests extends TestsInit {
         toastWithTopAlign.headerText.is().text(toastHeaderText);
         toastWithTopAlign.body.is().text(toastBodyText);
         toastWithTopAlign.closeButton.click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        toastWithTopAlign.base().waitSec(1);
         toastWithTopAlign.is().hidden();
     }
 
