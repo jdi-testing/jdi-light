@@ -1,12 +1,12 @@
 package io.github.epam.bootstrap.tests.composite.section.popover;
 
-import com.epam.jdi.light.ui.bootstrap.elements.common.Popover;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.popoverBottom;
+import static io.github.com.pages.BootstrapPage.popoverRight;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
