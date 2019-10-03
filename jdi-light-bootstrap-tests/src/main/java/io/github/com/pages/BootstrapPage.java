@@ -12,8 +12,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
-
+import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
@@ -26,6 +25,8 @@ public class BootstrapPage extends WebPage {
     public static UIElement inputGroupWrap,inputGroupNowrap;
     public static Button redButton, doubleButton, disabledButton;
 
+    @UI("//input[contains(@class, 'progress-change plus')]")  public static Button plus;
+    @UI("//input[contains(@class, 'progress-change minus')]") public static Button minus;
     @UI("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
     @UI("#jumbotron") public static Jumbotron jumbotron;
     @UI("#breadcrumb") public static Breadcrumb breadcrumb;
@@ -49,6 +50,7 @@ public class BootstrapPage extends WebPage {
     @UI("#tooltipWithHTML") public static Tooltip tooltipWithHTML;
     @UI("#wrapperForDisabledButton") public static Tooltip wrapperForDisabledButton;
     @UI("#tooltipOnDisabledButton") public static Tooltip tooltipOnDisabledButton;
+    @UI("#progress-with-labels") public static Progress progressWithLabels;
     @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
     @UI("#spinner-border") public static Spinner spinnerBorder;
     //endregion
@@ -154,7 +156,6 @@ public class BootstrapPage extends WebPage {
     @UI("#card-text-left") public static CardTextAlignment cardLeftTextAlignment;
     @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
     @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
-    @UI("#card-navigation") public static CardNavigation cardNavigation;
     @UI("#list-group-basic-example") public static ListGroupBasicExample listGroupBasicExample;
     @UI("#list-group-active-items") public static ListGroupActiveItems listGroupActiveItems;
     @UI("#disabled-items") public static ListGroupDisabledItems listGroupDisabledItems;
@@ -174,8 +175,21 @@ public class BootstrapPage extends WebPage {
     @UI("#pagination-small") public static PaginationSizeSmall paginationSizeSmall;
     @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
     @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
+    @UI("#nav-base-li") public static NavsBaseLi navsBaseLi;
+    @UI("#nav-base-a") public static NavsBaseA navsBaseA;
+    @UI("#nav-center") public static NavsAlignmentCenter navsAlignmentCenter;
+    @UI("#nav-end") public static NavsAlignmentEnd navsAlignmentEnd;
+    @UI("#nav-vert-li") public static NavsVerticalLi navsVerticalLi;
+    @UI("#nav-vert-a") public static NavsVerticalA navsVerticalA;
+    @UI("#nav-tabs") public static NavsTabs navsTabs;
+    @UI("#nav-pills") public static NavsPills navsPills;
+    @UI("#nav-justify") public static NavsJustify navsJustify;
+    @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
+    @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI("#list-example a") public static ListGroup listGroupForScrollspy;
     @UI("#list-example~div") public static ScrollspyWithListGroup scrollspyWithListGroup;
+    @UI(".card-deck:nth-of-type(1)") public static CardDeck cardDeckWithoutFooter;
+    @UI(".card-deck:nth-of-type(2)") public static CardDeck cardDeckWithFooter;
     //endregion
 }
