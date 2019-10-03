@@ -1,12 +1,13 @@
 package io.github.com.sections.card;
 
+import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Card;
 
-public class CardWithHeaderAndFooter extends Card {
+public class CardWithGridMarkup extends Card {
     @Title
     @UI(".card-title")
     public Text title;
@@ -17,9 +18,7 @@ public class CardWithHeaderAndFooter extends Card {
     @UI("button")
     public Button button;
 
-    @UI(".card-header")
-    public Text header;
+    @UI(".row .col-sm-6")
+    public JList<CardWithHeaderAndFooter> listCard;
 
-    @UI("//*[contains(@class, 'footer')]")
-    public Text footer;
 }

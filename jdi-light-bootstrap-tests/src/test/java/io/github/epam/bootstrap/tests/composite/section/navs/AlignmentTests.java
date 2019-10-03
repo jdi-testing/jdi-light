@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navsAlignmentCenter;
 import static io.github.com.pages.BootstrapPage.navsAlignmentEnd;
-import static io.github.epam.bootstrap.tests.composite.section.navs.ClickVarification.testElementClick;
+import static io.github.epam.bootstrap.tests.composite.section.navs.ClickVerification.testElementClick;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 

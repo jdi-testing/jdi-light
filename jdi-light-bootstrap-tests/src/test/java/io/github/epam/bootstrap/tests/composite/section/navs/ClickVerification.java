@@ -12,7 +12,7 @@ import static org.testng.Assert.assertEquals;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-public class ClickVarification {
+public class ClickVerification {
 
     public static void testElementClick(UIElement element, String pageTitle) {
         element.highlight();

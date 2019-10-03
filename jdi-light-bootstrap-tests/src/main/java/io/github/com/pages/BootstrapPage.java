@@ -12,10 +12,11 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
-
+import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
+import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 
 public class BootstrapPage extends WebPage {
@@ -23,6 +24,8 @@ public class BootstrapPage extends WebPage {
     public static UIElement inputGroupWrap,inputGroupNowrap;
     public static Button redButton, doubleButton, disabledButton;
 
+    @UI("//input[contains(@class, 'progress-change plus')]")  public static Button plus;
+    @UI("//input[contains(@class, 'progress-change minus')]") public static Button minus;
     @UI("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
     @UI("#jumbotron") public static Jumbotron jumbotron;
     @UI("#breadcrumb") public static Breadcrumb breadcrumb;
@@ -46,6 +49,9 @@ public class BootstrapPage extends WebPage {
     @UI("#tooltipWithHTML") public static Tooltip tooltipWithHTML;
     @UI("#wrapperForDisabledButton") public static Tooltip wrapperForDisabledButton;
     @UI("#tooltipOnDisabledButton") public static Tooltip tooltipOnDisabledButton;
+    @UI("#progress-with-labels") public static Progress progressWithLabels;
+    @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
+    @UI("#spinner-border") public static Spinner spinnerBorder;
     //endregion
 
     //region Complex Elements
@@ -107,6 +113,7 @@ public class BootstrapPage extends WebPage {
     @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
     @UI("#card-with-header-and-footer-quote") public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
     @UI("#card-with-header-and-footer") public static CardWithHeaderAndFooter cardWithHeaderAndFooter;
+    @UI("#card-with-grid-markup") public static CardWithGridMarkup cardWithGridMarkup;
     @UI("#card-bright-blue") public static CardWithHeaderAndFooter cardBrightBlue;
     @UI("#card-grey") public static CardWithHeaderAndFooter cardGrey;
     @UI("#card-green") public static CardWithHeaderAndFooter cardGreen;
