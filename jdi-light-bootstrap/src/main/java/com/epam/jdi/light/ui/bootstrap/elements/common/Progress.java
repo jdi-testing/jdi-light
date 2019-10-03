@@ -11,16 +11,8 @@ public class Progress extends UIBaseElement<ProgressAssert> {
     }
 
     @JDIAction(value = "Get '{name}' width")
-    public String getWidth() {
-        if (uiElement.hasAttribute("style")) {
-            if (uiElement.core().attr("style").contains("width")) {
-                return uiElement.core().attr("style");
-            } else {
-                return "width: 0%; or element is wrong";
-            }
-        } else {
-            return "width: 0%; or element is wrong";
-        }
+    public String getAriaValue() {
+        return uiElement.core().attr("aria-valuenow");
     }
 
     @Override

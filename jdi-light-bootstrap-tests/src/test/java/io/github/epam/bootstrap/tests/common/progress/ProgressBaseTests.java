@@ -33,17 +33,17 @@ public class ProgressBaseTests extends TestsInit {
     @DataProvider
     public static Object[][] progressWidth() {
         return new Object[][] {
-                {progressBaseWidth0, "width: 0%;"},
-                {progressBaseWidth25, "width: 25%;"},
-                {progressBaseWidth50, "width: 50%;"},
-                {progressBaseWidth75, "width: 75%;"},
-                {progressBaseWidth100, "width: 100%;"},
+                {progressBaseWidth0, "0"},
+                {progressBaseWidth25, "25"},
+                {progressBaseWidth50, "50"},
+                {progressBaseWidth75, "75"},
+                {progressBaseWidth100, "100"},
         };
     }
 
     @Test(dataProvider = "progressWidth")
     public void getWidthTest(Progress progress, String width) {
-        progress.is().width(width);
+        progress.is().ariaValue(width);
     }
 
     @DataProvider
