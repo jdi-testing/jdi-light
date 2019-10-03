@@ -35,7 +35,11 @@ public class SpinnerSizeTests extends TestsInit {
     @Test(dataProvider = "spinnerData")
     public void isValidationTest(Spinner spinner) {
         spinner.highlight();
-        spinner.is().enabled().and().displayed();
+        spinner
+                .is()
+                .enabled()
+                .and()
+                .displayed();
     }
 
     @Test
