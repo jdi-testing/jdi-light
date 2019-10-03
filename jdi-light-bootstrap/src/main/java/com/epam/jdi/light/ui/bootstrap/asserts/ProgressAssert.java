@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 /**
@@ -19,7 +20,7 @@ public class ProgressAssert extends UIAssert<ProgressAssert, Progress> {
         return this;
     }
     public ProgressAssert width(String width) {
-        return width(is(width));
+        return width(containsString(width));
     }
 
     @JDIAction("Assert that '{name}' color {0}")

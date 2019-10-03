@@ -14,11 +14,11 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
-import io.github.com.sections.progress.ProgressBase;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -48,7 +48,12 @@ public class BootstrapPage extends WebPage {
     @UI("#tooltipWithHTML") public static Tooltip tooltipWithHTML;
     @UI("#wrapperForDisabledButton") public static Tooltip wrapperForDisabledButton;
     @UI("#tooltipOnDisabledButton") public static Tooltip tooltipOnDisabledButton;
-    @UI("#progress-base") public static ProgressBase progressBase;
+    @UI("#progress-bar-base-width-0") public static Progress progressBaseProgress0;
+    @UI("#progress-bar-base-width-0 .progress-bar") public static Progress progressBaseWidth0;
+    @UI("#progress-bar-base-width-25 .progress-bar") public static Progress progressBaseWidth25;
+    @UI("#progress-bar-base-width-50 .progress-bar") public static Progress progressBaseWidth50;
+    @UI("#progress-bar-base-width-75 .progress-bar") public static Progress progressBaseWidth75;
+    @UI("#progress-bar-base-width-100 .progress-bar") public static Progress progressBaseWidth100;
     //endregion
 
     //region Complex Elements

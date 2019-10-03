@@ -7,9 +7,10 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.progressBase;
+import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+
 
 /**
  * Created by Aleksandr Khmelinin on 2.10.2019
@@ -27,11 +28,11 @@ public class ProgressBaseTests extends TestsInit {
     @DataProvider
     public static Object[][] progressWidth() {
         return new Object[][] {
-                {progressBase.width0, "width: 0%;"},
-                {progressBase.width25, "width: 25%;"},
-                {progressBase.width50, "width: 50%;"},
-                {progressBase.width75, "width: 75%;"},
-                {progressBase.width100, "width: 100%;"},
+                {progressBaseWidth0, "width: 0%;"},
+                {progressBaseWidth25, "width: 25%;"},
+                {progressBaseWidth50, "width: 50%;"},
+                {progressBaseWidth75, "width: 75%;"},
+                {progressBaseWidth100, "width: 100%;"},
         };
     }
 
@@ -43,11 +44,11 @@ public class ProgressBaseTests extends TestsInit {
     @DataProvider
     public static Object[][] progressColor() {
         return new Object[][] {
-                {progressBase.width0, "rgba(0, 123, 255, 1)"},
-                {progressBase.width25, "rgba(0, 123, 255, 1)"},
-                {progressBase.width50, "rgba(0, 123, 255, 1)"},
-                {progressBase.width75, "rgba(0, 123, 255, 1)"},
-                {progressBase.width100, "rgba(0, 123, 255, 1)"},
+                {progressBaseWidth0, "rgba(0, 123, 255, 1)"},
+                {progressBaseWidth25, "rgba(0, 123, 255, 1)"},
+                {progressBaseWidth50, "rgba(0, 123, 255, 1)"},
+                {progressBaseWidth75, "rgba(0, 123, 255, 1)"},
+                {progressBaseWidth100, "rgba(0, 123, 255, 1)"},
         };
     }
 
@@ -58,10 +59,10 @@ public class ProgressBaseTests extends TestsInit {
 
     @Test
     public void baseValidationTest() {
-        baseValidation(progressBase.progress0);
-        baseValidation(progressBase.progress25);
-        baseValidation(progressBase.progress50);
-        baseValidation(progressBase.progress75);
-        baseValidation(progressBase.progress100);
+        baseValidation(progressBaseProgress0);
+        baseValidation(progressBaseWidth25);
+        baseValidation(progressBaseWidth50);
+        baseValidation(progressBaseWidth75);
+        baseValidation(progressBaseWidth100);
     }
 }
