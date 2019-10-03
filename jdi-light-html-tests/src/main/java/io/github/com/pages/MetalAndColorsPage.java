@@ -28,8 +28,12 @@ public class MetalAndColorsPage extends WebPage {
 		list = "li", expand = ".caret")
 	public static IsDropdown colors3;
 
+	@JDropdown(root = "div[ui=dropdown]", value = ".filter-option",
+		list = "*root*//div[@ui='dropdown']//li", expand = ".caret")
+	public static Dropdown colorsRoot;
+
 	@JDropdown(value = "div[ui=dropdown] .filter-option",
-			   list = "div[ui=dropdown] li")
+	   list = "div[ui=dropdown] li")
 	public static IsDropdown colors4;
 
 	@UI("div[ui=dropdown]")

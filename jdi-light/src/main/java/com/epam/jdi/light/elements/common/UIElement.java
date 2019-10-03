@@ -375,6 +375,18 @@ public class UIElement extends JDIBase
         return !displayed();
     }
 
+    @JDIAction("Check that '{name}' is hidden")
+    public boolean isExist() {
+        return noWait(() -> {
+            try {
+                get(); return true;
+            } catch (Exception ignore) { return false; }
+        });
+    }
+    @JDIAction("Check that '{name}' is hidden")
+    public boolean isNotExist() {
+        return !isExist();
+    }
     /**
      * Check the element is disabled
      * @return boolean
@@ -603,7 +615,7 @@ public class UIElement extends JDIBase
         if (getWebElement().isSelected())
             return true;
         return hasClass("checked") || hasClass("active")||
-                hasClass("selected") || attr("checked").equals("true");
+            hasClass("selected") || attr("checked").equals("true");
     }
     protected boolean enabled() {
         if (hasClass("active"))

@@ -12,7 +12,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.map.MultiMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -27,7 +27,6 @@ import static com.epam.jdi.light.elements.init.PageFactory.setupFieldUsingRules;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
-import static com.epam.jdi.tools.map.MapArray.toMapArray;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -52,7 +51,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     private boolean actualMapValue() {
         return map.hasValue() && map.get().size() > 0 && isActual(map.get().get(0).value);
     }
-    protected CacheValue<MapArray<String, T>> map = new CacheValue<>(MapArray::new);
+    protected CacheValue<MultiMap<String, T>> map = new CacheValue<>(MultiMap::new);
     private boolean isActual(T element) {
         try {
             element.getTagName();
@@ -60,25 +59,11 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
         } catch (Exception ex) { return false; }
     }
 
-    /**
-     * @param minAmount
-     * @return List
-     */
-
-    public MapArray<String, T> valuesMap(int minAmount) {
+    @JDIAction(level = DEBUG)
+    public MultiMap<String, T> elements(int minAmount) {
         if (actualMapValue())
             return map.get();
-        MapArray<String, T> result = list().valuesMap(minAmount).toMapArray((k,v)->k,(k,v)->toT(v));
-        if (map.isUseCache())
-            map.set(result);
-        return result;
-    }
-
-    @JDIAction(level = DEBUG)
-    public List<T> elements(int minAmount) {
-        if (actualMapValue())
-            return map.get().values();
-        return LinqUtils.map(list().elements(minAmount), this::toT);
+        return list().elements(minAmount).toMultiMap(this::toT);
     }
 
     /**

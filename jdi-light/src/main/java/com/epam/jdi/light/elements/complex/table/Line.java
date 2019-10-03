@@ -10,6 +10,7 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.map.MultiMap;
 import com.epam.jdi.tools.pairs.Pair;
 
 import java.lang.reflect.Field;
@@ -27,7 +28,7 @@ import static com.epam.jdi.tools.StringUtils.namesEqual;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class Line implements IList<String>, IBaseElement {
-    private JFunc<MapArray<String, String>> dataMap;
+    private JFunc<MultiMap<String, String>> dataMap;
     private WebList elements;
     private List<String> headers;
     public JDIBase base() {
@@ -39,7 +40,7 @@ public class Line implements IList<String>, IBaseElement {
         this.elements = elements;
         this.headers = headers;
         List<String> values = LinqUtils.map(elements, UIElement::getText);
-        this.dataMap = () -> new MapArray<>(headers, values);
+        this.dataMap = () -> new MultiMap<>(headers, values);
     }
     public static Line initLine(List<String> list, List<String> headers) {
         Line line = new Line();
@@ -47,7 +48,7 @@ public class Line implements IList<String>, IBaseElement {
         line.headers = new ArrayList<>(headers);
         return line;
     }
-    private MapArray<String, String> data;
+    private MultiMap<String, String> data;
     private List<String> list;
     private List<String> getList(int minAmount) {
         return list != null && list.size() >= minAmount
@@ -56,7 +57,7 @@ public class Line implements IList<String>, IBaseElement {
     }
     // TODO Implement
     public String get(String value) {return ""; }
-    private MapArray<String, String> getData(int minAmount) {
+    private MultiMap<String, String> getData(int minAmount) {
         if (data == null || data.size() < minAmount)
             data = dataMap.execute();
         return data;
@@ -68,14 +69,10 @@ public class Line implements IList<String>, IBaseElement {
      * @return List
      */
     @JDIAction(level = DEBUG)
-    public List<String> elements(int minAmount) {
-        return getData(minAmount).values();
-    }
-
-    @Override
-    public MapArray<String, String> valuesMap(int minAmount) {
+    public MultiMap<String, String> elements(int minAmount) {
         return getData(minAmount);
     }
+
 
     public String getValue() {
         return PrintUtils.print(getList(0), ";");
