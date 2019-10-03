@@ -149,7 +149,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction(level = DEBUG)
     public UIElement get(String value) {
-        if (hasKey(value))
+        if (!locator.isTemplate() && hasKey(value))
             return elements(0).get(value);
         return getUIElement(value);
     }
