@@ -26,7 +26,7 @@ public class PopoverBottomTests extends TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         popoverBottom.hover();
-        setLocators();
+        getPopover();
     }
 
     @Test
@@ -81,7 +81,7 @@ public class PopoverBottomTests extends TestsInit {
         assertFalse(isElementPresent());
     }
 
-    private void setLocators() {
+    private void getPopover() {
         popoverBottom.popover.click();
         if (popoverBottom.popover.hasAttribute("aria-describedby")) {
             String containerLocator = popoverBottom.popover.base().get().getAttribute("aria-describedby");
