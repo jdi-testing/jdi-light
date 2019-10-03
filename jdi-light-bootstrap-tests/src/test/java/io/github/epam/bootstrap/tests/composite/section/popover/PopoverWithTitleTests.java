@@ -100,7 +100,7 @@ public class PopoverWithTitleTests extends TestsInit {
 
     private boolean isElementPresent() {
         try {
-            popoverWithTitle.container.isEmpty();
+            popoverWithTitle.container.isEnabled();
             return true;
         } catch (Exception e) {
             return false;

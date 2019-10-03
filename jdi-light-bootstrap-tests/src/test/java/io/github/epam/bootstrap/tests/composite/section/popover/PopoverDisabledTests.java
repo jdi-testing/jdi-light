@@ -91,7 +91,7 @@ public class PopoverDisabledTests extends TestsInit {
 
     private boolean isElementPresent() {
         try {
-            popoverDisabled.container.isEmpty();
+            popoverDisabled.container.isEnabled();
             return true;
         } catch (Exception e) {
             return false;

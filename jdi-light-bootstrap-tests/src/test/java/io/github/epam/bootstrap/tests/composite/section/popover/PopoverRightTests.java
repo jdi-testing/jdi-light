@@ -93,7 +93,7 @@ public class PopoverRightTests extends TestsInit {
 
     private boolean isElementPresent() {
         try {
-            popoverRight.container.isEmpty();
+            popoverRight.container.isEnabled();
             return true;
         } catch (Exception e) {
             return false;
