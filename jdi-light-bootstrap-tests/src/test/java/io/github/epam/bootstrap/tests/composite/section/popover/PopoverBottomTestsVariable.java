@@ -49,14 +49,11 @@ public class PopoverBottomTestsVariable extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-//                .hasClass("btn-secondary")
-//                .attr("data-container", "body")
                 .attr("data-toggle", "popover")
 //                .attr("data-placement", placement)
                 .attr("data-content", popoverBody)
                 .attr("data-original-title", popoverHeader)
                 .text(is(buttonText));
-//        popover.popoverButton.click();
     }
 
     @Test(dataProvider = "listData")
@@ -79,13 +76,17 @@ public class PopoverBottomTestsVariable extends TestsInit {
                 .core()
                 .hasClass("popover-body")
                 .text(is(popoverBody));
-        popover.header
-                .is()
-                .enabled()
-                .core()
-                .hasClass("popover-header")
-                .text(is(popoverHeader.toUpperCase()));
-        popoverRight.popover.click();
+//        popover.header
+//                .is()
+//                .enabled()
+//                .core()
+//                .hasClass("popover-header")
+//                .text(is(popoverHeader.toUpperCase()));
+        if(locator.contains("Dismissible")) {
+            popover.popoverButton.click();
+        } else {
+            popover.container.click();
+        }
         popover.popoverButton.base().waitSec(1);
         popover.popoverButton
                 .is()
@@ -102,12 +103,6 @@ public class PopoverBottomTestsVariable extends TestsInit {
                 .attr("aria-describedby", "");
         assertFalse(isElementPresent());
     }
-
-//    private void getPopover() {
-//        popover.popoverBottom1.click();
-//        popover.popoverBottom1.container.core().setLocator(popover.popoverBottom1.getContainer());
-//        popover.popoverBottom1.body.core().setLocator(popover.popoverBottom1.getBody());
-//    }
 
     private boolean isElementPresent() {
         try {
