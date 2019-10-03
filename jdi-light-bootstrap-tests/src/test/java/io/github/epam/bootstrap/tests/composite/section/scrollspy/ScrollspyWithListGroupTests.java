@@ -12,6 +12,7 @@ import static io.github.com.pages.BootstrapPage.scrollspyWithListGroup;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Olga Ivanova on 01.10.2019
@@ -73,10 +74,13 @@ public class ScrollspyWithListGroupTests extends TestsInit {
 
         if (index == 1) listGroupForScrollspy.get(index)
                 .is()
-                .cssClass("list-group-item list-group-item-action active");
+                .cssClass("list-group-item list-group-item-action active")
+                .css("background-color", "rgba(0, 123, 255, 1)") //#007bff Color Hex
+                .css("border-color", "rgb(0, 123, 255)"); //#007bff Color Hex
         else listGroupForScrollspy.get(index)
                 .is()
-                .cssClass("list-group-item list-group-item-action");
+                .cssClass("list-group-item list-group-item-action")
+                .css("background-color", "rgba(255, 255, 255, 1)"); //#fff Color Hex
 
         scrollspyWithListGroup.is()
                 .core()
@@ -113,22 +117,24 @@ public class ScrollspyWithListGroupTests extends TestsInit {
                 .size(4);
             listGroupForScrollspy.is()
                 .size(4);
-
     }
-// {1, paragraphN1, header, mainText1},
+
     @Test(dataProvider = "clickValidate")
     public void linkClickableTests(int index, String paragraph, String header, String mainText) {
         refresh();
+        int y_Start = scrollspyWithListGroup.header.get(1).core().getLocation().y + 4;
         listGroupForScrollspy.get(index).highlight();
         listGroupForScrollspy.get(index).click();
+
+        int y_Current = scrollspyWithListGroup.header.get(index).core().getLocation().y;
 
         listGroupForScrollspy.get(index)
                 .is()
                 .core()
                 .displayed()
                 .enabled()
-                .cssClass("list-group-item list-group-item-action active");
-
+                .cssClass("list-group-item list-group-item-action active")
+                .css("background-color", "rgba(0, 123, 255, 1)");//#007bff Color Hex
         scrollspyWithListGroup.header.get(index).is()
                 .text(is(header.toUpperCase()))
                 .value(is(header.toUpperCase()))
@@ -138,48 +144,29 @@ public class ScrollspyWithListGroupTests extends TestsInit {
                 .text(is(mainText))
                 .value(is(mainText));
 
-/*
-???
-        scrollspyWithListGroup.header.get(index).is().displayed();
-        scrollspyWithListGroup.header.get(index).is().displayed();
-        scrollspyWithListGroup.header.get(index).is().hidden();
-        scrollspyWithListGroup.header.get(index).isHidden();*/
-
-/*        scrollspyWithListGroup.header.get(2).is().hidden();
-        scrollspyWithListGroup.mainText.get(2).is().hidden();
-        scrollspyWithListGroup.header.get(3).is().displayed();
-        scrollspyWithListGroup.mainText.get(3).is().displayed();*/
-
+        assertEquals(y_Start, y_Current);
         listGroupForScrollspy.get(index).unhighlight();
     }
 
     @Test(dataProvider = "clickValidate")
     public void paragraphClickableTests(int index, String paragraph, String header, String mainText) {
         refresh();
+        scrollspyWithListGroup.mainText.get(index).highlight();
         scrollspyWithListGroup.mainText.get(index).show();
 
-        listGroupForScrollspy.get(index).waitFor().core().cssClass("list-group-item list-group-item-action active");
+       if (listGroupForScrollspy.get(index).core().hasClass("list-group-item list-group-item-action"))
+           scrollspyWithListGroup.header.get(index+1).show();
+
         listGroupForScrollspy.get(index)
                 .is()
                 .core()
                 .displayed()
                 .enabled()
-                .cssClass("list-group-item list-group-item-action active");
-
-/*      scrollspyWithListGroup.header.get(index).is().displayed();
-        scrollspyWithListGroup.header.get(index).is().displayed();
-        scrollspyWithListGroup.header.get(index).is().hidden();
-        scrollspyWithListGroup.header.get(index).isHidden();*/
-
-/*        scrollspyWithListGroup.header.get(2).is().hidden();
-        scrollspyWithListGroup.mainText.get(2).is().hidden();
-        scrollspyWithListGroup.header.get(3).is().displayed();
-        scrollspyWithListGroup.mainText.get(3).is().displayed();*/
+                .cssClass("list-group-item list-group-item-action active")
+                .css("background-color", "rgba(0, 123, 255, 1)")//#007bff Color Hex
+                .css("border-color", "rgb(0, 123, 255)");//#007bff Color Hex
 
         listGroupForScrollspy.get(index).unhighlight();
-
-        listGroupForScrollspy.get(index).core().getLocation();
-        listGroupForScrollspy.get(index).core().getRect();
     }
 
     public void baseValidationTest() {
