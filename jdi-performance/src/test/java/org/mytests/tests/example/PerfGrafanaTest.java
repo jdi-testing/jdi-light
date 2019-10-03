@@ -9,7 +9,7 @@ public class PerfGrafanaTest extends TestsInit {
     public void loginTest() {
         /*String host = System.getenv().getOrDefault("influx.host", "influxdb");
         InfluxDB db = connect("http://"+host+":8086", "root", "root");
-        db.createDatacore();*/
+        db.createDataCore();*/
 
     }
 }

@@ -68,11 +68,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     public WebList(JDIBase base) {
         super(base);
-        elements.useCache(false);
     }
     public WebList(JDIBase base, String locator, String name, Object parent) {
         super(base);
-        elements.useCache(false);
         setLocator(locator);
         setName(name);
         setParent(parent);
@@ -138,12 +136,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         }
     }
     protected boolean hasKey(String value) {
-        if (elements.get() == null)
-            elements.set(new MultiMap<>());
-        return hasKey(elements.get(), value);
-    }
-    protected boolean hasKey(MultiMap<String, UIElement> map, String value) {
-        List<String> keys = map.keys();
+        List<String> keys = elements(0).keys();
         if (keys.isEmpty())
             return false;
         for (String key : keys)
@@ -157,7 +150,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction(level = DEBUG)
     public UIElement get(String value) {
         if (hasKey(value))
-            return elements.get().get(value);
+            return elements(0).get(value);
         return getUIElement(value);
     }
 
@@ -169,7 +162,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             MultiMap<String, UIElement> result = timer().getResultByCondition(
                 () -> elements(1), els -> hasKey(value));
             if (result != null)
-                return elements.get().get(value);
+                return elements(1).get(value);
             throw exception("Can't get '%s'. No elements with this name found", value);
         }
     }
@@ -501,7 +494,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     protected boolean isActual() {
         try {
-            return elements.get().size() > 0 && isActual(elements.get().get(0).value);
+            return elements.isUseCache() && elements.get().size() > 0 && isActual(elements.get().get(0).value);
         } catch (Exception ex) { return false; }
     }
 
