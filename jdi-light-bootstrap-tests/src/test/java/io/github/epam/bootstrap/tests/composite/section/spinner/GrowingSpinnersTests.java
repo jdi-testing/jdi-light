@@ -70,7 +70,11 @@ public class GrowingSpinnersTests extends TestsInit {
     @Test(dataProvider = "spinnerData")
     public void isValidationTest(Spinner spinner) {
         spinner.highlight();
-        spinner.is().displayed().and().enabled();
+        spinner
+                .is()
+                .displayed()
+                .and()
+                .enabled();
     }
 
 }
