@@ -154,5 +154,6 @@ public class BootstrapPage extends WebPage {
     @UI("body") public static PopoverLeft popoverLeft;
     @UI("body") public static PopoverWithTitle popoverWithTitle;
     @UI("body") public static PopoverDismissible popoverDismissible;
+    @UI("body") public static PopoverDisabled popoverDisabled;
     //endregion
 }
