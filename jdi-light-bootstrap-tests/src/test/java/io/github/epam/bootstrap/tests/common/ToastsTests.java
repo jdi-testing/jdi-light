@@ -61,4 +61,15 @@ public class ToastsTests extends TestsInit {
         firstTopAlignStackToast.is().displayed();
         secondTopAlignStackToast.is().displayed();
     }
+
+    @Test
+    public void toastWithCenterAlignValidationTest() {
+        toastWithCenterAlignButton.click();
+        toastWithCenterAlign.is().displayed();
+        toastWithCenterAlign.headerText.is().text(toastHeaderText);
+        toastWithCenterAlign.body.is().text(toastBodyText);
+        toastWithCenterAlign.closeButton.click();
+        toastWithCenterAlign.base().waitSec(1);
+        toastWithCenterAlign.is().hidden();
+    }
 }
