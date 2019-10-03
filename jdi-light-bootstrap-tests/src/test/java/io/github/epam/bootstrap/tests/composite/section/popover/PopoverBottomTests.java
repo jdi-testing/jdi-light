@@ -14,7 +14,7 @@ import static org.testng.Assert.assertFalse;
 
 /**
  * Created by Dmitrii Pavlov on 02.10.2019
- * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ * Email: delnote@gmail.com;  Skype: Dmitrii Pavlov
  */
 
 public class PopoverBottomTests extends TestsInit {
