@@ -14,6 +14,11 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+/**
+ * Created by Aleksandr Khmelinin on 25.09.2019
+ * Email: aleksandr_khmelinin@epam.com; Skype: live:bea50ebde18b7f9e
+ */
+
 public class CardHorizontalTests extends TestsInit {
 
     private String titleText = "WOLVERINE";
