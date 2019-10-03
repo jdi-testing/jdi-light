@@ -44,6 +44,7 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
         return values;
     }
 
+    @Override
     public String getText() {
         return getText(1);
     }
@@ -169,6 +170,7 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
     public String placeholder(String locator) {
         return core().find(locator).placeholder();
     }
+
     @JDIAction("Get all placeholders from {name}")
     public List<String> placeholderAll() {
         WebList inputs = core().finds("input");
