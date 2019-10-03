@@ -1,6 +1,5 @@
 package mockitotests;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import mocks.CardNavigationMock;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,7 +21,7 @@ public class EnabledElementMockTests {
     @Test
     public void hasClassTest() {
         when(cardNavigationMock.hasClassCheck()).thenReturn(true);
-        assertTrue(cardNavigationMock.hasClassCheck());
+        assertTrue(cardNavigationMock.enabled());
     }
 
     @Test
