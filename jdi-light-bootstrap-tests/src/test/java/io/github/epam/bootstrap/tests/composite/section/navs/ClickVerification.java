@@ -9,7 +9,8 @@ import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Dmitrii Pavlov on 30.09.2019
- * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ * Email: delnote@gmail.com;
+ * Skype: Dmitrii Pavlov
  */
 
 public class ClickVerification {
