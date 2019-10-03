@@ -7,7 +7,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class CardNavigationMock implements IEnabled {
 
-    public static UIElement uiElement;
+    private UIElement uiElement;
 
     @Override
     public boolean hasClass(String className) {
@@ -36,7 +36,7 @@ public class CardNavigationMock implements IEnabled {
         return this.isEnabled();
     }
 
-    public boolean enabled() {
+    public boolean uiElementEnabled() {
         return uiElement.isEnabled();
     }
 }
