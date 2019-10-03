@@ -1,14 +1,15 @@
 package io.github.epam.bootstrap.tests.composite.section.scrollspy;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.listGroupForScrollspy;
 import static io.github.com.pages.BootstrapPage.scrollspyWithListGroup;
+import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -58,8 +59,9 @@ public class ScrollspyWithListGroupTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider = "listData")
+    @Test(dataProvider = "listData", priority = 1)
     public void mainContentTests(int index, String link, String header, String paragraph, String mainText) {
+        refresh();
         listGroupForScrollspy.get(index)
                 .is()
                 .core()
@@ -116,6 +118,7 @@ public class ScrollspyWithListGroupTests extends TestsInit {
 // {1, paragraphN1, header, mainText1},
     @Test(dataProvider = "clickValidate")
     public void linkClickableTests(int index, String paragraph, String header, String mainText) {
+        refresh();
         listGroupForScrollspy.get(index).highlight();
         listGroupForScrollspy.get(index).click();
 
@@ -152,8 +155,8 @@ public class ScrollspyWithListGroupTests extends TestsInit {
 
     @Test(dataProvider = "clickValidate")
     public void paragraphClickableTests(int index, String paragraph, String header, String mainText) {
+        refresh();
         scrollspyWithListGroup.mainText.get(index).show();
-
 
         listGroupForScrollspy.get(index).waitFor().core().cssClass("list-group-item list-group-item-action active");
         listGroupForScrollspy.get(index)
@@ -174,58 +177,13 @@ public class ScrollspyWithListGroupTests extends TestsInit {
         scrollspyWithListGroup.mainText.get(3).is().displayed();*/
 
         listGroupForScrollspy.get(index).unhighlight();
+
+        listGroupForScrollspy.get(index).core().getLocation();
+        listGroupForScrollspy.get(index).core().getRect();
     }
 
-
- /*   @Test(dataProvider = "listData")
-    public void mainContentTests(int index, String link, String header, String dateText, String mainText, String footer) {
-        listGroupCustomContent.listGroup.get(index)
-                .is()
-                .core()
-                .displayed()
-                .enabled()
-                .hasClass("list-group-item list-group-item-action")
-                .attr("href", is(link));
-        listGroupCustomContent.container.get(index)
-                .is()
-                .core()
-                .displayed()
-                .enabled()
-                .hasClass("d-flex w-100 justify-content-between");
-        listGroupCustomContent.header.get(index)
-                .is()
-                .core()
-                .displayed()
-                .enabled()
-                .hasClass("mb-1")
-                .text(is(containsStringIgnoringCase(header)));
-        listGroupCustomContent.dateText.get(index)
-                .is()
-                .core()
-                .displayed()
-                .enabled()
-                .text(is(dateText));
-        listGroupCustomContent.mainText.get(index)
-                .is()
-                .core()
-                .displayed()
-                .enabled()
-                .hasClass("mb-1")
-                .text(is(mainText));
-        listGroupCustomContent.footer.get(index)
-                .is()
-                .core()
-                .displayed()
-                .enabled()
-                .text(is(footer));
+    public void baseValidationTest() {
+        baseValidation(scrollspyWithListGroup);
+        baseValidation(listGroupForScrollspy);
     }
-
-
-
-    private void newWindowTitleCheck(String pageTitle) {
-        switchToNewWindow();
-        assertEquals(getTitle(), pageTitle);
-        closeWindow();
-    }*/
-
 }
