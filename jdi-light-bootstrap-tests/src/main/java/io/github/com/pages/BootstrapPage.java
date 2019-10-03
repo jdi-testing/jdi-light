@@ -155,6 +155,4 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-justify") public static NavsJustify navsJustify;
     @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
-    @UI(".card-columns") public static CardColumns cardColumns;
-    //endregion
 }
