@@ -209,6 +209,52 @@
 
 				<div class="doc-space line">
 					<div class="html-left">
+						<div class="form-check" id="check1">
+							<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+							<label class="form-check-label" for="defaultCheck1">
+								Default checkbox
+							</label>
+						</div>
+						<div class="form-check" id="check2">
+							<input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
+							<label class="form-check-label" for="defaultCheck2">
+								Disabled checkbox
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="html-right">
+					<h4>Default Checkbox</h4>
+					<p>
+						Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#default-stacked" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#default-stacked</a>
+					</p>
+				</div>
+
+				<div class="doc-space line">
+					<div class="html-left">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+							<label class="form-check-label" for="inlineCheckbox1">1</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+							<label class="form-check-label" for="inlineCheckbox2">2</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
+							<label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+						</div>
+					</div>
+				</div>
+				<div class="html-right">
+					<h4>Default Checkbox inline</h4>
+					<p>
+						Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#inline" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#inline</a>
+					</p>
+				</div>
+
+				<div class="doc-space line">
+					<div class="html-left">
 						<div class="btn-group-vertical mb-3" id="radio-buttons" role="group">
 							<div class="form-check">
 								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
@@ -232,11 +278,143 @@
 					</div>
 				</div>
 				<div class="html-right">
-					<h4>Radio Button</h4>
+					<h4>Default Radio Button</h4>
 					<p>
 						Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#default-stacked" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#default-stacked</a>
 					</p>
 				</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+								<label class="form-check-label" for="inlineRadio1">1</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+								<label class="form-check-label" for="inlineRadio2">2</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
+								<label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Default Radio Button inline</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#inline" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#inline</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="form-check">
+								<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+							</div>
+							<div class="form-check">
+								<input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Default Without labels</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#without-labels" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#without-labels</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="customCheck1">
+								<label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Custom Checkbox</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#checkboxes" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#checkboxes</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="custom-control custom-radio">
+								<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+								<label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+							</div>
+							<div class="custom-control custom-radio">
+								<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+								<label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Custom Radio Button</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#radios" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#radios</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+								<label class="custom-control-label" for="customRadioInline1">Toggle this <br> custom radio</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+								<label class="custom-control-label" for="customRadioInline2">Or toggle this <br> custom radio</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Custom Radio Button inline</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#inline-1" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#inline-1</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="customCheckDisabled1" disabled>
+								<label class="custom-control-label" for="customCheckDisabled1">Check this custom checkbox</label>
+							</div>
+
+							<div class="custom-control custom-radio">
+								<input type="radio" name="radioDisabled" id="customRadioDisabled2" class="custom-control-input" disabled>
+								<label class="custom-control-label" for="customRadioDisabled2">Toggle this custom radio</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Custom Disabled</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#disabled" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#disabled</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="custom-control custom-switch">
+								<input type="checkbox" class="custom-control-input" id="customSwitch1">
+								<label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+							</div>
+							<div class="custom-control custom-switch">
+								<input type="checkbox" class="custom-control-input" disabled id="customSwitch2">
+								<label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Custom Switches</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#switches" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#switches</a>
+						</p>
+					</div>
 
 					<div class="doc-space line">
 						<div class="html-left">
