@@ -7,6 +7,11 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * Created by Dmitrii Pavlov on 04.10.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
+
 public class Popover extends Section {
 
     public Button popoverButton;

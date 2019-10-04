@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.popover;
-import static io.github.epam.bootstrap.tests.BaseValidations.durationMoreThan;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
