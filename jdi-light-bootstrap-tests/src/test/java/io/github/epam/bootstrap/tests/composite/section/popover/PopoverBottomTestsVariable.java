@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.popover;
-import static io.github.com.pages.BootstrapPage.popoverRight;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -37,11 +36,6 @@ public class PopoverBottomTestsVariable extends TestsInit {
         };
     }
 
-//    @Test(dataProvider = "listData", priority = 0)
-//    public void selectPopover(String locator, String placement, String popoverBody, String popoverHeader) {
-//        popover.getPopover(locator);
-//    }
-
     @Test(dataProvider = "listData")
     public void isValidationTests(String locator, String __, String popoverBody, String popoverHeader, String buttonText) {
         popover.getPopover(locator);
@@ -50,7 +44,6 @@ public class PopoverBottomTestsVariable extends TestsInit {
                 .enabled()
                 .core()
                 .attr("data-toggle", "popover")
-//                .attr("data-placement", placement)
                 .attr("data-content", popoverBody)
                 .attr("data-original-title", popoverHeader)
                 .text(is(buttonText));
