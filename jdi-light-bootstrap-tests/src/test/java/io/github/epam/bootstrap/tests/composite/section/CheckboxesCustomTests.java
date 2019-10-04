@@ -26,21 +26,34 @@ public class CheckboxesCustomTests extends TestsInit {
                 .enabled()
                 .core()
                 .attr("type", "checkbox")
-                .hasClass("custom-control-input");
+                .hasClass("custom-control-input")
+                .tag(is("input"));
         checkboxesCustom.checkbox.label()
                 .is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("custom-control-label")
-                .text(is("Check this custom checkbox"));
+                .text(is("Check this custom checkbox"))
+                .tag(is("label"));
+        checkboxesCustom.checkboxContainer
+                .is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("custom-control custom-checkbox")
+                .tag(is("div"));
     }
 
     @Test
     public void clickableTests() {
-        checkboxesCustom.checkbox.check();
+        checkboxesCustom.checkboxContainer.check();
         checkboxesCustom.checkbox.is().selected();
-        checkboxesCustom.checkbox.uncheck();
+        checkboxesCustom.checkboxContainer.check();
+        checkboxesCustom.checkbox.is().deselected();
+        checkboxesCustom.checkbox.label().click();
+        checkboxesCustom.checkbox.is().selected();
+        checkboxesCustom.checkbox.label().click();
         checkboxesCustom.checkbox.is().deselected();
     }
 }

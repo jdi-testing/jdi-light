@@ -26,26 +26,30 @@ public class CheckboxesDefaultTests extends TestsInit {
                 .enabled()
                 .core()
                 .attr("type", "checkbox")
-                .hasClass("form-check-input");
+                .hasClass("form-check-input")
+                .tag(is("input"));
         checkboxesDefault.checkboxOne.label()
                 .is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("form-check-label")
-                .text(is("Default checkbox"));
+                .text(is("Default checkbox"))
+                .tag(is("label"));
         checkboxesDefault.checkboxTwo
                 .is()
                 .displayed()
                 .disabled()
                 .core()
-                .hasClass("form-check-input");
+                .hasClass("form-check-input")
+                .tag(is("input"));
         checkboxesDefault.checkboxTwo.label()
                 .is()
                 .displayed()
                 .core()
                 .hasClass("form-check-label")
-                .text(is("Disabled checkbox"));
+                .text(is("Disabled checkbox"))
+                .tag(is("label"));
     }
 
     @Test
