@@ -178,6 +178,7 @@ public class BootstrapPage extends WebPage {
     @UI("#radio-buttons") public static RadioButtonGroup radioButtonGroup;
     @UI(".card-group:nth-of-type(1)") public static CardGroup cardGroupWithoutFooter;
     @UI(".card-group:nth-of-type(2)") public static CardGroup cardGroupWithFooter;
+    @UI("#card-list-groups") public static CardListGroups cardListGroups;
     @UI("#pagination-overview") public static PaginationOverview paginationOverview;
     @UI("#pagination-icons") public static PaginationIcons paginationIcons;
     @UI("#pagination-states") public static PaginationStates paginationStates;
