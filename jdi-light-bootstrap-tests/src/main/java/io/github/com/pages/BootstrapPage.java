@@ -12,8 +12,11 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
-import com.epam.jdi.light.ui.bootstrap.elements.common.*;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
+import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
+
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
@@ -188,5 +191,6 @@ public class BootstrapPage extends WebPage {
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI(".card-deck:nth-of-type(1)") public static CardDeck cardDeckWithoutFooter;
     @UI(".card-deck:nth-of-type(2)") public static CardDeck cardDeckWithFooter;
+    @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
     //endregion
 }
