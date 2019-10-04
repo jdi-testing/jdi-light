@@ -5,26 +5,15 @@ import interfaces.IEnabled;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class CardNavigationMock implements IEnabled {
-
-    private UIElement uiElement;
-
-    public UIElement getUiElement() {
-        return uiElement;
-    }
+public class CardNavigationMock extends UIElement {
 
     @Override
     public boolean hasClass(String className) {
-        return uiElement.classes().contains(className);
+        return this.classes().contains(className);
     }
 
     @Override
     public boolean hasAttribute(String attrName) {
-        return isNotBlank(uiElement.attr(attrName));
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return uiElement.getWebElement().isEnabled();
+        return isNotBlank(this.attr(attrName));
     }
 }

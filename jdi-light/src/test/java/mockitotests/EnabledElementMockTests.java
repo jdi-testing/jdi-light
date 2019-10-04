@@ -25,9 +25,9 @@ public class EnabledElementMockTests {
         when(cardNavigationMock.hasClass("active")).thenReturn(true);
         when(cardNavigationMock.hasClass("disabled")).thenReturn(false);
         when(cardNavigationMock.hasAttribute("disabled")).thenReturn(false);
-        when(cardNavigationMock.getUiElement().getWebElement()).thenReturn(uiElement);
+        when(cardNavigationMock.getWebElement()).thenReturn(uiElement);
         when(uiElement.isEnabled()).thenReturn(false);
-        assertTrue(cardNavigationMock.getUiElement().isEnabled());
+        assertTrue(cardNavigationMock.isEnabled());
     }
 
 //    @Test

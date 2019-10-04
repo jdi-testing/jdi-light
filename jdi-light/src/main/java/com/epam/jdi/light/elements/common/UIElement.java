@@ -623,8 +623,10 @@ public class UIElement extends JDIBase
             return true;
         }
         if (hasClass("disabled1") || hasAttribute("disabled1")) {
+            System.out.println("hasClass and hasAttr Called");
             return false;
         }
+        System.out.println("getWebelement Called");
         return !getWebElement().isEnabled();
     }
     protected boolean displayed() {
