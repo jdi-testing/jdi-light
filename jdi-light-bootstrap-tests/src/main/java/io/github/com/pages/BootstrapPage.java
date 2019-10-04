@@ -21,6 +21,8 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.spinner.GrowingSpinners;
+import io.github.com.sections.spinner.SpinnerSize;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -200,5 +202,7 @@ public class BootstrapPage extends WebPage {
     @UI(".card-deck:nth-of-type(1)") public static CardDeck cardDeckWithoutFooter;
     @UI(".card-deck:nth-of-type(2)") public static CardDeck cardDeckWithFooter;
     @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
+    @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
+    @UI("#spinner-size") public static SpinnerSize spinnerSize;
     //endregion
 }
