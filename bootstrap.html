@@ -209,6 +209,52 @@
 
 				<div class="doc-space line">
 					<div class="html-left">
+						<div class="form-check" id="check1">
+							<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+							<label class="form-check-label" for="defaultCheck1">
+								Default checkbox
+							</label>
+						</div>
+						<div class="form-check" id="check2">
+							<input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
+							<label class="form-check-label" for="defaultCheck2">
+								Disabled checkbox
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="html-right">
+					<h4>Default Checkbox</h4>
+					<p>
+						Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#default-stacked" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#default-stacked</a>
+					</p>
+				</div>
+
+				<div class="doc-space line">
+					<div class="html-left">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+							<label class="form-check-label" for="inlineCheckbox1">1</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+							<label class="form-check-label" for="inlineCheckbox2">2</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
+							<label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+						</div>
+					</div>
+				</div>
+				<div class="html-right">
+					<h4>Default Checkbox inline</h4>
+					<p>
+						Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#inline" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#inline</a>
+					</p>
+				</div>
+
+				<div class="doc-space line">
+					<div class="html-left">
 						<div class="btn-group-vertical mb-3" id="radio-buttons" role="group">
 							<div class="form-check">
 								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
@@ -232,11 +278,143 @@
 					</div>
 				</div>
 				<div class="html-right">
-					<h4>Radio Button</h4>
+					<h4>Default Radio Button</h4>
 					<p>
 						Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#default-stacked" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#default-stacked</a>
 					</p>
 				</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+								<label class="form-check-label" for="inlineRadio1">1</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+								<label class="form-check-label" for="inlineRadio2">2</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
+								<label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Default Radio Button inline</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#inline" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#inline</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="form-check">
+								<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+							</div>
+							<div class="form-check">
+								<input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Default Without labels</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#without-labels" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#without-labels</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="custom-control custom-checkbox" id="customCheck1-div">
+								<input type="checkbox" class="custom-control-input" id="customCheck1">
+								<label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Custom Checkbox</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#checkboxes" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#checkboxes</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="custom-control custom-radio" id="customRadio1-div">
+								<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+								<label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+							</div>
+							<div class="custom-control custom-radio" id="customRadio2-div">
+								<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+								<label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Custom Radio Button</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#radios" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#radios</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="custom-control custom-radio custom-control-inline" id="customRadioInline1-div">
+								<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+								<label class="custom-control-label" for="customRadioInline1">Toggle this <br> custom radio</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline" id="customRadioInline2-div">
+								<input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+								<label class="custom-control-label" for="customRadioInline2">Or toggle this <br> custom radio</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Custom Radio Button inline</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#inline-1" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#inline-1</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="custom-control custom-checkbox" id="customCheckDisabled1-div">
+								<input type="checkbox" class="custom-control-input" id="customCheckDisabled1" disabled>
+								<label class="custom-control-label" for="customCheckDisabled1">Check this custom checkbox</label>
+							</div>
+
+							<div class="custom-control custom-radio" id="customRadioDisabled2-div">
+								<input type="radio" name="radioDisabled" id="customRadioDisabled2" class="custom-control-input" disabled>
+								<label class="custom-control-label" for="customRadioDisabled2">Toggle this custom radio</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Custom Disabled</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#disabled" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#disabled</a>
+						</p>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
+							<div class="custom-control custom-switch" id="customSwitch1-div">
+								<input type="checkbox" class="custom-control-input" id="customSwitch1">
+								<label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+							</div>
+							<div class="custom-control custom-switch" id="customSwitch2-div">
+								<input type="checkbox" class="custom-control-input" disabled id="customSwitch2">
+								<label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
+							</div>
+						</div>
+					</div>
+					<div class="html-right">
+						<h4>Custom Switches</h4>
+						<p>
+							Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#switches" target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#switches</a>
+						</p>
+					</div>
 
 					<div class="doc-space line">
 						<div class="html-left">
@@ -1193,43 +1371,44 @@
 
                     <div class="doc-space line">
                         <div class="html-left mb-3">
-
-                            <p>base</p>
-                            <div class="progress">
-                                <div class="progress-bar" id="progress-bar-base-width-0" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" id="progress-bar-base-width-25" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" id="progress-bar-base-width-50" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" id="progress-bar-base-width-100" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+							<div id="progress-base">
+								<p>base</p>
+								<div class="progress" id="progress-bar-base-width-0">
+									<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="progress" id="progress-bar-base-width-25">
+									<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="progress" id="progress-bar-base-width-50">
+									<div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="progress" id="progress-bar-base-width-75">
+									<div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="progress" id="progress-bar-base-width-100">
+									<div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
 
 
                             <br><p>with labels</p>
-							<input type="button" class="progress-change minus btn btn-outline-info " value="-">
+							<input type="button" style="margin-bottom: 5px;" class="progress-change minus btn btn-primary btn-sm" value="-">
+                            <input type="button" style="margin-bottom: 5px;" class="progress-change plus btn btn-primary btn-sm" value="+" >
                             <div class="progress">
                                 <div id="progress-with-labels" class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                             </div>
-							<input type="button" class="progress-change plus btn btn-outline-info" value="+" >
 
                             <br> <p>backgrounds</p>
-                            <div class="progress">
+                            <div id="progress-backgrounds-green" class="progress">
                                 <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <div class="progress">
+                            <div id="progress-backgrounds-blue" class="progress">
                                 <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <div class="progress">
+                            <div id="progress-backgrounds-yellow" class="progress">
                                 <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <div class="progress">
+                            <div id="progress-backgrounds-red" class="progress">
                                 <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
 
@@ -1257,10 +1436,10 @@
                                 <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
 
-                            <p>animated stripes</p>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-                            </div>
+							<p>animated stripes</p>
+							<div class="progress">
+								<div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+							</div>
                         </div>
                         <div class="html-right">
                             <h4>Progress</h4>
@@ -2378,6 +2557,30 @@
 
 					<div class="doc-space line">
 						<div class="html-left">
+							<div class="card bg-dark text-white mb-3" id="card-image-overlay">
+								<svg class="bd-placeholder-img bd-placeholder-img-lg card-img" id="card-svg" width="100%" height="270"
+									 xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"
+									 focusable="false" role="img" aria-label="Placeholder: Card image">
+									<title>Placeholder</title>
+									<rect width="100%" height="100%" fill="#868e96"></rect>
+									<text x="37%" y="50%" fill="#dee2e6" dy=".3em">Card image</text>
+								</svg>
+								<div class="card-img-overlay" id="card-overlay-section">
+									<h5 class="card-title">Card title</h5>
+									<p class="card-text">This card is supporting text.</p>
+									<p class="card-text">Last updated 3 mins ago</p>
+								</div>
+							</div>
+						</div>
+						<div class="html-right">
+							<h4>Card Image Overlays</h4>
+							<p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/card/#image-overlays" target="_blank">https://getbootstrap.com/docs/4.3/components/card/#image-overlays</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="doc-space line">
+						<div class="html-left">
 							<div class="card" id="card-body">
 								<div class="card-body">
 									This is some text within a card body.
@@ -2881,33 +3084,36 @@
 					<div class="doc-space line">
 						<div class="html-left">
 
-							<div class="border mb-3 p-3">
-								<div class="spinner-border" role="status">
-									<span class="sr-only">Loading...</span>
+							<div id="spinner-alignment">
+								<div class="border mb-3 p-3">
+									<div class="spinner-border" role="status">
+										<span class="sr-only">Loading...</span>
+									</div>
 								</div>
-							</div>
 
-							<div class="d-flex justify-content-center border mb-3 p-3">
-								<div class="spinner-border" role="status">
-									<span class="sr-only">Loading...</span>
+								<div class="d-flex justify-content-center border mb-3 p-3">
+									<div class="spinner-border" role="status">
+										<span class="sr-only">Loading...</span>
+									</div>
 								</div>
-							</div>
 
-							<div class="d-flex align-items-center border mb-3 p-3">
-								<strong>Loading...</strong>
-								<div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
-							</div>
-
-							<div class="clearfix border mb-3 p-3">
-								<div class="spinner-border float-right" role="status">
-									<span class="sr-only">Loading...</span>
+								<div class="d-flex align-items-center border mb-3 p-3">
+									<strong>Loading...</strong>
+									<div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
 								</div>
-							</div>
 
-							<div class="text-center mb-3 border p-3">
-								<div class="spinner-border" role="status">
-									<span class="sr-only">Loading...</span>
+								<div class="clearfix border mb-3 p-3">
+									<div class="spinner-border float-right" role="status">
+										<span class="sr-only">Loading...</span>
+									</div>
 								</div>
+
+								<div class="text-center mb-3 border p-3">
+									<div class="spinner-border" role="status">
+										<span class="sr-only">Loading...</span>
+									</div>
+								</div>
+
 							</div>
 
 						</div>
@@ -2933,10 +3139,10 @@
 								</div>
 
 								<div class="border mb-3 p-3 text-center">
-									<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+									<div class="spinner-border" id="spinBorder" style="width: 3rem; height: 3rem;" role="status">
 										<span class="sr-only">Loading...</span>
 									</div>
-									<div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+									<div class="spinner-grow" id="spinGrow" style="width: 3rem; height: 3rem;" role="status">
 										<span class="sr-only">Loading...</span>
 									</div>
 								</div>
@@ -4230,7 +4436,7 @@
 							<button type="button" class="btn btn-sm btn-info"  onclick=show_toast('.toast.several') id="multipleToast">Stack of Toasts</button>
 							<br /><br />
 							<div aria-live="polite" aria-atomic="true" style="min-height: 200px;background-color: grey;">
-							<div class="toast several" role="alert" aria-live="assertive" aria-atomic="true">
+							<div class="toast several" role="alert" aria-live="assertive" id="firstMultipleToast" aria-atomic="true">
 								<div class="toast-header">
 									<img src="images/range-circle.png" class="rounded mr-2" alt="...">
 									<strong class="mr-auto">Bootstrap</strong>
@@ -4243,7 +4449,7 @@
 									See? Just like this.
 								</div>
 							</div>
-							<div class="toast several" role="alert" aria-live="assertive" aria-atomic="true">
+							<div class="toast several" role="alert" aria-live="assertive" id="secondMultipleToast" aria-atomic="true">
 								<div class="toast-header">
 									<img src="images/range-circle.png" class="rounded mr-2" alt="...">
 									<strong class="mr-auto">Bootstrap</strong>
@@ -4287,7 +4493,7 @@
 								<div style="position: absolute; top: 0; right: 0;">
 
 									<!-- Then put toasts within -->
-									<div class="toast severalWithPosition" role="alert" aria-live="assertive" aria-atomic="true">
+									<div class="toast severalWithPosition" role="alert" aria-live="assertive" id="firstStackToast" aria-atomic="true">
 										<div class="toast-header">
 											<img src="images/range-circle.png" class="rounded mr-2" alt="...">
 											<strong class="mr-auto">Bootstrap</strong>
@@ -4301,7 +4507,7 @@
 										</div>
 									</div>
 
-									<div class="toast severalWithPosition" role="alert" aria-live="assertive" aria-atomic="true">
+									<div class="toast severalWithPosition" role="alert" aria-live="assertive" id="secondStackToast" aria-atomic="true">
 										<div class="toast-header">
 											<img src="images/range-circle.png" class="rounded mr-2" alt="...">
 											<strong class="mr-auto">Bootstrap</strong>
