@@ -7,7 +7,7 @@ import pseudo.site.dataproviders.section.CustomSectionUIDataProvider;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 
-public class CustomSectionUITests extends TestsInit {
+public class CustomSectionUITests implements TestsInit {
 
     @Test(dataProvider = "customSectionUIWebElementDataProvider", dataProviderClass = CustomSectionUIDataProvider.class)
     public void customSectionUIWebElementTest(ICoreElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {

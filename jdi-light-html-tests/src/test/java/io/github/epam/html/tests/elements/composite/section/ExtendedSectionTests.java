@@ -9,7 +9,7 @@ import pseudo.site.section.ExtendedSection;
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 import static pseudo.site.PseudoSite.extendedSection;
 
-public class ExtendedSectionTests extends TestsInit {
+public class ExtendedSectionTests implements TestsInit {
 
     @Test(dataProvider = "extendedSectionWebElementDataProvider", dataProviderClass = ExtendedSectionDataProvider.class)
     public void extendedSectionWebElementTest(ICoreElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {

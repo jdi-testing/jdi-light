@@ -9,7 +9,7 @@ import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 
-public class MenuTests extends TestsInit {
+public class MenuTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

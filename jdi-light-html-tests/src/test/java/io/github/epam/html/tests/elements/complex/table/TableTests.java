@@ -19,7 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
-public class TableTests extends TestsInit {
+public class TableTests implements TestsInit {
     private boolean firstTime = true;
     @BeforeMethod
     public void before() {

@@ -20,7 +20,7 @@ import static org.testng.Assert.assertEquals;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class ImageTests extends TestsInit {
+public class ImageTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

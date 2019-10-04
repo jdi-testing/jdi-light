@@ -17,7 +17,7 @@ import static org.testng.Assert.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class CheckboxTests extends TestsInit {
+public class CheckboxTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

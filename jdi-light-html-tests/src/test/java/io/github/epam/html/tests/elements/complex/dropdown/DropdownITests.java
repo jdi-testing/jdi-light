@@ -24,7 +24,7 @@ import static org.testng.Assert.fail;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class DropdownITests extends TestsInit {
+public class DropdownITests implements TestsInit {
 
     @BeforeMethod
     public void before() {

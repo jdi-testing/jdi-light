@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class FormTests extends TestsInit {
+public class FormTests implements TestsInit {
 
     @Test
     public void loginWithUserTest() {

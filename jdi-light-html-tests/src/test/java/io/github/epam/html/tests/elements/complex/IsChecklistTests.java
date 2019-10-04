@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
-public class IsChecklistTests extends TestsInit {
+public class IsChecklistTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

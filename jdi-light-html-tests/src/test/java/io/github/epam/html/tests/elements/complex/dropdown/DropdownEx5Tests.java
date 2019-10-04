@@ -23,7 +23,7 @@ import static org.testng.Assert.fail;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class DropdownEx5Tests extends TestsInit {
+public class DropdownEx5Tests implements TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();

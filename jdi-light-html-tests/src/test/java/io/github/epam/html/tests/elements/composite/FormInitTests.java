@@ -9,7 +9,7 @@ import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkI
 import static pseudo.site.PseudoSite.pseudoHeader;
 import static pseudo.site.pages.Header.pseudoFormLight;
 
-public class FormInitTests extends TestsInit {
+public class FormInitTests implements TestsInit {
 
     @Test(dataProvider = "formDataProvider", dataProviderClass = FormDataProvider.class)
     public void formInitializationTest(ICoreElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {

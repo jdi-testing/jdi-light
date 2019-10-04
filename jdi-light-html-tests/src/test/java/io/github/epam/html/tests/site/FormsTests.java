@@ -18,7 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 
-public class FormsTests extends TestsInit {
+public class FormsTests implements TestsInit {
 
     @Test
     public void loginTest() {

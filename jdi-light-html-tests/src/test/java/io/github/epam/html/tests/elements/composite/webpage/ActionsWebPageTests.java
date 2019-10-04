@@ -11,7 +11,7 @@ import static io.github.com.StaticSite.leftMenu;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 
 
-public class ActionsWebPageTests extends TestsInit {
+public class ActionsWebPageTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

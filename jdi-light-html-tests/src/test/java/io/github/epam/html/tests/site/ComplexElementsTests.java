@@ -18,7 +18,7 @@ import static io.github.com.pages.HomePage.jdiText;
 import static io.github.com.pages.MetalAndColorsPage.*;
 import static org.hamcrest.Matchers.containsString;
 
-public class ComplexElementsTests extends TestsInit {
+public class ComplexElementsTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

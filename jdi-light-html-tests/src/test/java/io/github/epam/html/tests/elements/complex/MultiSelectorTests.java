@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
-public class MultiSelectorTests extends TestsInit {
+public class MultiSelectorTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

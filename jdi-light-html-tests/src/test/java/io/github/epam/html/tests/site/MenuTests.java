@@ -10,7 +10,7 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
-public class MenuTests extends TestsInit {
+public class MenuTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

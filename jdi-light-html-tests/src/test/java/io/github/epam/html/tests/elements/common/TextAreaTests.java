@@ -19,7 +19,7 @@ import static org.testng.Assert.assertEquals;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class TextAreaTests extends TestsInit {
+public class TextAreaTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

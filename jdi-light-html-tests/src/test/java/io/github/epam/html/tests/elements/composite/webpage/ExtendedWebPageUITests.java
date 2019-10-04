@@ -7,7 +7,7 @@ import pseudo.site.dataproviders.webpages.ExtendedWebPageUIDataProvider;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 
-public class ExtendedWebPageUITests extends TestsInit {
+public class ExtendedWebPageUITests implements TestsInit {
 
     @Test(dataProvider = "extendedWebPageUIWebElementDataProvider", dataProviderClass = ExtendedWebPageUIDataProvider.class)
     public void extendedWebPageUIWebElementTest(IBaseElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
