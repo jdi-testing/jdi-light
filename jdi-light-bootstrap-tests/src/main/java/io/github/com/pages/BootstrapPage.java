@@ -5,8 +5,18 @@ import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.bootstrap.elements.common.*;
+import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
+import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
+
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
@@ -42,6 +52,12 @@ public class BootstrapPage extends WebPage {
     @UI("#tooltipWithHTML") public static Tooltip tooltipWithHTML;
     @UI("#wrapperForDisabledButton") public static Tooltip wrapperForDisabledButton;
     @UI("#tooltipOnDisabledButton") public static Tooltip tooltipOnDisabledButton;
+    @UI("#progress-bar-base-width-0") public static Progress progressBaseProgress0;
+    @UI("#progress-bar-base-width-0 .progress-bar") public static Progress progressBaseWidth0;
+    @UI("#progress-bar-base-width-25 .progress-bar") public static Progress progressBaseWidth25;
+    @UI("#progress-bar-base-width-50 .progress-bar") public static Progress progressBaseWidth50;
+    @UI("#progress-bar-base-width-75 .progress-bar") public static Progress progressBaseWidth75;
+    @UI("#progress-bar-base-width-100 .progress-bar") public static Progress progressBaseWidth100;
     @UI("#progress-with-labels") public static Progress progressWithLabels;
     @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
     @UI("#spinner-border") public static Spinner spinnerBorder;
@@ -148,7 +164,6 @@ public class BootstrapPage extends WebPage {
     @UI("#card-text-left") public static CardTextAlignment cardLeftTextAlignment;
     @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
     @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
-    @UI("#card-navigation") public static CardNavigation cardNavigation;
     @UI("#list-group-basic-example") public static ListGroupBasicExample listGroupBasicExample;
     @UI("#list-group-active-items") public static ListGroupActiveItems listGroupActiveItems;
     @UI("#disabled-items") public static ListGroupDisabledItems listGroupDisabledItems;
@@ -182,5 +197,8 @@ public class BootstrapPage extends WebPage {
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
     @UI("body") public static RadioButtonsDefaultInline radioButtonsDefaultInline;
+    @UI(".card-deck:nth-of-type(1)") public static CardDeck cardDeckWithoutFooter;
+    @UI(".card-deck:nth-of-type(2)") public static CardDeck cardDeckWithFooter;
+    @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
     //endregion
 }
