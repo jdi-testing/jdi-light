@@ -45,6 +45,7 @@ public class WebListTests {
         webList = new WebList(locator, 1);
         webList.setWebElements(list);
         assertEquals(webList.get(1).getText(), element0Text);
+        assertEquals(webList.get(2).getText(), element1Text);
     }
 
     @Test (expectedExceptions = RuntimeException.class)
