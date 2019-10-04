@@ -18,6 +18,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
@@ -197,6 +198,8 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-justify") public static NavsJustify navsJustify;
     @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
+    @UI("#navbar-nav-with-disabled") public static Navbar navbarNavWithDisabled;
+    @UI("#navbar-nav-with-dropdown") public static Navbar navbarNavWithDropdown;
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
     @UI("body") public static RadioButtonsDefaultInline radioButtonsDefaultInline;
