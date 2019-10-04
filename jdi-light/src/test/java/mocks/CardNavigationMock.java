@@ -1,7 +1,6 @@
 package mocks;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import interfaces.IEnabled;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
