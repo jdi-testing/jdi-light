@@ -7,20 +7,23 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.popover;
+import static io.github.epam.bootstrap.tests.BaseValidations.durationMoreThan;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.testng.Assert.assertFalse;
 
-public class PopoverBottomTestsVariable extends TestsInit {
+/**
+ * Created by Dmitrii Pavlov on 04.10.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
 
-    private String dataContent = "Bottom popover is visible.";
+public class PopoverTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-//        popover.popoverButton.click();
     }
 
     @DataProvider
@@ -69,13 +72,14 @@ public class PopoverBottomTestsVariable extends TestsInit {
                 .core()
                 .hasClass("popover-body")
                 .text(is(popoverBody));
-//        popover.header
-//                .is()
-//                .enabled()
-//                .core()
-//                .hasClass("popover-header")
-//                .text(is(popoverHeader.toUpperCase()));
-        if(locator.contains("Dismissible")) {
+        if (popover.header.isDisplayed()) {
+            popover.header
+                    .is()
+                    .core()
+                    .hasClass("popover-header")
+                    .text(is(popoverHeader.toUpperCase()));
+        }
+        if (locator.contains("dismissible")) {
             popover.popoverButton.click();
         } else {
             popover.container.click();
@@ -88,7 +92,11 @@ public class PopoverBottomTestsVariable extends TestsInit {
         popover.container
                 .is()
                 .enabled();
-        popover.popoverButton.click();
+        if (locator.contains("dismissible")) {
+            popover.container.click();
+        } else {
+            popover.popoverButton.click();
+        }
         popover.popoverButton.base().waitSec(1);
         popover.popoverButton
                 .is()
@@ -100,6 +108,7 @@ public class PopoverBottomTestsVariable extends TestsInit {
     private boolean isElementPresent() {
         try {
             popover.container.isEnabled();
+            popover.popoverButton.base().waitSec(1);
             return true;
         } catch (Exception e) {
             return false;

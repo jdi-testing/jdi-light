@@ -9,8 +9,8 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.*;
-import io.github.com.sections.PopoverBottom;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 
 public class BootstrapPage extends WebPage {
@@ -148,13 +148,6 @@ public class BootstrapPage extends WebPage {
     @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
     @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
     @UI(".card-columns") public static CardColumns cardColumns;
-    @UI("body") public static PopoverTop popoverTop;
-    @UI("body") public static PopoverRight popoverRight;
-    @UI("body") public static PopoverBottom popoverBottom;
     @UI("body") public static Popover popover;
-    @UI("body") public static PopoverLeft popoverLeft;
-    @UI("body") public static PopoverWithTitle popoverWithTitle;
-    @UI("body") public static PopoverDismissible popoverDismissible;
-    @UI("body") public static PopoverDisabled popoverDisabled;
     //endregion
 }

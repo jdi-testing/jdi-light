@@ -1,8 +1,9 @@
-package com.epam.jdi.light.ui.bootstrap.elements.common;
+package com.epam.jdi.light.ui.bootstrap.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.MediaObject;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
@@ -23,7 +24,7 @@ public class Popover extends Section {
     }
 
     @JDIAction(value = "Get '{name}' popover", level = DEBUG)
-    public String getPopoverId() {
+    private String getPopoverId() {
         return popoverButton.attr("aria-describedby");
     }
 
