@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.is;
  * Email: mariia_tikhonova@epam.com, Skype: mariatikhonova5_2
  */
 
-public class ProgressBackgroundsTests extends TestsInit {
+public class ProgressBackgroundTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
