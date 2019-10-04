@@ -626,7 +626,7 @@ public class UIElement extends JDIBase
             System.out.println("hasClass and hasAttr Called");
             return false;
         }
-        System.out.println("getWebelement Called");
+        System.out.println("getWebElement Called");
         return getWebElement().isEnabled();
     }
     protected boolean displayed() {

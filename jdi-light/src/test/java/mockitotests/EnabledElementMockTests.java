@@ -5,6 +5,7 @@ import mocks.CardNavigationMock;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.*;
@@ -12,30 +13,45 @@ import static org.testng.Assert.assertTrue;
 
 public class EnabledElementMockTests {
 
+    @DataProvider
+    public Object[][] combinations() {
+        return new Object[][] {
+                {true, false, false, false},
+                {false, true, false, false},
+                {false, false, true, false},
+                {false, false, false, true},
+                {false, false, false, false},
+
+                {false, true, true, true},
+                {true, false, true, true},
+                {true, true, false, true},
+                {true, true, true, false},
+                {true, true, true, true},
+
+                {true, true, false, false},
+                {false, false, true, true},
+        };
+    }
+
     private CardNavigationMock cardNavigationMock = null;
     private UIElement uiElement = null;
     private WebElement webElement = null;
 
     @BeforeMethod
     public void init() {
-//        cardNavigationMock = mock(CardNavigationMock.class);
-//        cardNavigationMock = new CardNavigationMock();
         uiElement = mock(UIElement.class);
         webElement = mock(WebElement.class);
     }
 
-    @Test
-    public void hasClassTest() {
+    @Test(dataProvider = "combinations")
+    public void hasClassTest(boolean value1, boolean value2, boolean value3, boolean value4) {
         CardNavigationMock cardNavigationMock = Mockito.spy(new CardNavigationMock());
         WebElement webElement = Mockito.spy(new CardNavigationMock());
-//        when(cardNavigationMock.hasClass("active")).thenReturn(true);
         Mockito.doReturn(false).when(cardNavigationMock).hasClass("active");
         Mockito.doReturn(false).when(cardNavigationMock).hasClass("disabled");
         Mockito.doReturn(false).when(cardNavigationMock).hasAttribute("disabled");
         Mockito.doReturn(webElement).when(cardNavigationMock).getWebElement();
         Mockito.doReturn(true).when(webElement).isEnabled();
-//        when(cardNavigationMock.getWebElement()).thenReturn(webElement);
-//        when(webElement.isEnabled()).thenReturn(false);
         assertTrue(cardNavigationMock.isEnabled());
     }
 
