@@ -9,6 +9,10 @@ public class CardNavigationMock implements IEnabled {
 
     private UIElement uiElement;
 
+    public UIElement getUiElement() {
+        return uiElement;
+    }
+
     @Override
     public boolean hasClass(String className) {
         return uiElement.classes().contains(className);
@@ -22,21 +26,5 @@ public class CardNavigationMock implements IEnabled {
     @Override
     public boolean isEnabled() {
         return uiElement.getWebElement().isEnabled();
-    }
-
-    public boolean hasClassCheck() {
-        return this.hasClass("active");
-    }
-
-    public boolean hasClassAndAttributeCheck() {
-        return this.hasClass("disabled") || this.hasAttribute("disabled");
-    }
-
-    public boolean getWebElementCheck() {
-        return this.isEnabled();
-    }
-
-    public boolean uiElementEnabled() {
-        return uiElement.isEnabled();
     }
 }
