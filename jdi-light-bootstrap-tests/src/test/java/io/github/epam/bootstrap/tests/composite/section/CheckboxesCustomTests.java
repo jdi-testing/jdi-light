@@ -9,6 +9,11 @@ import static io.github.com.pages.BootstrapPage.checkboxesCustom;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 
+/**
+ * Created by Dmitrii Pavlov on 04.10.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
+
 public class CheckboxesCustomTests extends TestsInit {
 
     @BeforeMethod
