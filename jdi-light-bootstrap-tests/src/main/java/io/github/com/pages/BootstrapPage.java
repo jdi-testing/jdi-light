@@ -195,6 +195,8 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
     @UI(".card-columns") public static CardColumns cardColumns;
+    @UI("body") public static CheckboxesDefault checkboxesDefault;
+    @UI("body") public static CheckboxesCustom checkboxesCustom;
     @UI(".card-deck:nth-of-type(1)") public static CardDeck cardDeckWithoutFooter;
     @UI(".card-deck:nth-of-type(2)") public static CardDeck cardDeckWithFooter;
     @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
