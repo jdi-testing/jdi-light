@@ -22,7 +22,7 @@ public class CheckboxesCustomTests extends TestsInit {
     public void isValidationTests() {
         checkboxesCustom.checkbox
                 .is()
-                .hidden()
+                .disappear()
                 .enabled()
                 .core()
                 .attr("type", "checkbox")

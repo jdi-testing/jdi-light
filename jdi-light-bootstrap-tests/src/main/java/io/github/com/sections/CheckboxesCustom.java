@@ -6,7 +6,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
 
 public class CheckboxesCustom extends Section {
 
-    @UI("")
+//    @UI("")
     @UI("#customCheck1") public Checkbox checkbox;
 
 }
