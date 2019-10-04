@@ -21,6 +21,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.spinner.GrowingSpinners;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -58,9 +59,11 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-bar-base-width-50 .progress-bar") public static Progress progressBaseWidth50;
     @UI("#progress-bar-base-width-75 .progress-bar") public static Progress progressBaseWidth75;
     @UI("#progress-bar-base-width-100 .progress-bar") public static Progress progressBaseWidth100;
+    @UI("#progress-animated") public static Progress progressAnimated;
     @UI("#progress-with-labels") public static Progress progressWithLabels;
     @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
     @UI("#spinner-border") public static Spinner spinnerBorder;
+    @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     //endregion
 
     //region Complex Elements
