@@ -1,7 +1,9 @@
 package io.github.epam.bootstrap.tests.composite.section.card;
 
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
@@ -17,12 +19,11 @@ import static org.testng.Assert.assertEquals;
  */
 public class CardImageOverlaysTest  extends TestsInit {
 
-    private static final String SRC_ATTR_EXPECTED = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
-    private static final String ALT_ATTR_EXPECTED = "image";
     private static final String IMAGE_TOP_CLASS = "card-img";
+    private static final String OVERLAY_CLASS = "card-img-overlay";
     private static final String TITLE = "CARD TITLE";
-    private static final int WIDTH = 86;
-    private static final int HEIGHT = 137;
+    private static final String WIDTH = "100%";
+    private static final int HEIGHT = 270;
 
     @BeforeMethod
     public void before() {
@@ -32,36 +33,43 @@ public class CardImageOverlaysTest  extends TestsInit {
 
     @Test
     public void getTitleTest() {
-        assertEquals(cardImageOverlays.title.getText(), TITLE);
+        assertEquals(cardImageOverlays.overlaySection.title.getText(), TITLE);
     }
 
-    @Test
-    public void availabilityTest() {
-        cardImageOverlays.title.is()
+    @DataProvider
+    private static Object[][] getElement() {
+        return new Object[][] {
+            {cardImageOverlays.overlaySection.title},
+            {cardImageOverlays.vectorImage}
+        };
+    }
+
+    @Test(dataProvider = "getElement")
+    public void availabilityTest(UIBaseElement element) {
+        element.is()
                 .displayed()
-                .enabled();
-        cardImageOverlays.vectorImage.is()
-                .hidden()
+                .notAppear()
                 .enabled();
     }
 
     @Test
     public void isValidationTest() {
-        cardImageOverlays.title.is().text(is(TITLE));
-        cardImageOverlays.vectorImage.unhighlight();
-        cardImageOverlays.vectorImage.assertThat().width(is(WIDTH));
+        cardImageOverlays.overlaySection.title.is().text(is(TITLE));
         cardImageOverlays.vectorImage.assertThat().height(is(HEIGHT));
+        cardImageOverlays.vectorImage.assertThat().width(is(WIDTH));
     }
 
     @Test
     public void baseValidationTest() {
         baseValidation(cardImageOverlays.vectorImage);
-        baseValidation(cardImageOverlays.title);
+        baseValidation(cardImageOverlays.overlaySection.title);
     }
 
     @Test
-    public void imageClassTest() {
+    public void classTest() {
+        cardImageOverlays.overlaySection.is().core().hasClass(IMAGE_TOP_CLASS);
+        cardImageOverlays.overlaySection.assertThat().core().hasClass(OVERLAY_CLASS);
         cardImageOverlays.vectorImage.is().core().hasClass(IMAGE_TOP_CLASS);
-        cardImageOverlays.vectorImage.assertThat().core().hasClass(IMAGE_TOP_CLASS);
+        //cardImageOverlays.vectorImage.assertThat().core().hasClass(IMAGE_TOP_CLASS);
     }
 }
