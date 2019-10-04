@@ -33,7 +33,6 @@ public class PopoverTests extends TestsInit {
                 {"#popover-bottom", "bottom", "Bottom popover is visible.", "", "Popover on bottom"},
                 {"#popover-left", "left", "Left popover is visible.", "", "Popover on left"},
                 {"#popover-title", "right", "And here's some amazing content. It's very engaging. Right?", "Popover title", "Click to toggle popover"},
-                {"#popover-dismissible", "right", "And here's some amazing content. It's very engaging. Right?", "Dismissible popover", "Dismissible popover"},
                 {"#popover-disabled", "right", "Disabled popover", "", "Disabled button"},
         };
     }
@@ -49,6 +48,7 @@ public class PopoverTests extends TestsInit {
                 .attr("data-content", popoverBody)
                 .attr("data-original-title", popoverHeader)
                 .text(is(buttonText));
+        popover.popoverButton.click();
     }
 
     @Test(dataProvider = "listData")
@@ -71,18 +71,11 @@ public class PopoverTests extends TestsInit {
                 .core()
                 .hasClass("popover-body")
                 .text(is(popoverBody));
-        if (popover.header.isDisplayed()) {
-            popover.header
-                    .is()
-                    .core()
-                    .hasClass("popover-header")
-                    .text(is(popoverHeader.toUpperCase()));
-        }
-        if (locator.contains("dismissible")) {
-            popover.popoverButton.click();
-        } else {
-            popover.container.click();
-        }
+        popover.header
+                .is()
+                .core()
+                .hasClass("popover-header");
+        popover.container.click();
         popover.popoverButton.base().waitSec(1);
         popover.popoverButton
                 .is()
@@ -91,26 +84,76 @@ public class PopoverTests extends TestsInit {
         popover.container
                 .is()
                 .enabled();
-        if (locator.contains("dismissible")) {
-            popover.container.click();
-        } else {
-            popover.popoverButton.click();
-        }
+        popover.popoverButton.click();
         popover.popoverButton.base().waitSec(1);
         popover.popoverButton
                 .is()
                 .core()
                 .attr("aria-describedby", "");
-        assertFalse(isElementPresent());
+        assertFalse(popover.container.isDisplayed());
     }
 
-    private boolean isElementPresent() {
-        try {
-            popover.container.isEnabled();
-            popover.popoverButton.base().waitSec(1);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    @Test()
+    public void titleIsValidationTest() {
+        popover.getPopover("#popover-title");
+        popover.header
+                .is()
+                .core()
+                .hasClass("popover-header")
+                .text(is(containsString("Popover title".toUpperCase())));
+        popover.popoverButton.click();
+    }
+
+    @Test()
+    public void dismissibleClickableTests() {
+        popover.getPopover("#popover-dismissible");
+        popover.popoverButton
+                .is()
+                .displayed()
+                .enabled()
+                .core()
+                .attr("aria-describedby", containsString("popover"))
+                .attr("data-trigger", "focus")
+                .attr("data-toggle", "popover")
+                .attr("role", "button")
+                .attr("tabindex", "0")
+                .attr("data-content", "And here's some amazing content. It's very engaging. Right?")
+                .attr("data-original-title", "Dismissible popover")
+                .text(is("Dismissible popover"))
+                .tag(is("a"));
+        popover.container
+                .is()
+                .enabled()
+                .core()
+                .hasClass("popover fade bs-popover-right show")
+                .attr("role", "tooltip")
+                .attr("x-placement", "right");
+        popover.body
+                .is()
+                .enabled()
+                .core()
+                .hasClass("popover-body")
+                .text(is("And here's some amazing content. It's very engaging. Right?"));
+        popover.header
+                .is()
+                .core()
+                .hasClass("popover-header")
+                .text(is("Dismissible popover".toUpperCase()));
+        popover.popoverButton.click();
+        popover.popoverButton.base().waitSec(1);
+        popover.popoverButton
+                .is()
+                .core()
+                .attr("aria-describedby", containsString("popover"));
+        popover.container
+                .is()
+                .enabled();
+        popover.container.click();
+        popover.popoverButton.base().waitSec(1);
+        popover.popoverButton
+                .is()
+                .core()
+                .attr("aria-describedby", "");
+        assertFalse(popover.container.isDisplayed());
     }
 }
