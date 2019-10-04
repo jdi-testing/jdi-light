@@ -11,7 +11,6 @@ import com.epam.jdi.light.ui.bootstrap.asserts.TextAreaAssert;
 import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-
 import static com.epam.jdi.light.ui.bootstrap.BootstrapUtils.getInt;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
