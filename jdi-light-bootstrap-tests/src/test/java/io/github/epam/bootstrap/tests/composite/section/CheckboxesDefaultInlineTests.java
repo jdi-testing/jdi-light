@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.checkboxDefaultInline;
+import static io.github.com.pages.BootstrapPage.checkboxesDefaultInline;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -14,7 +14,7 @@ import static org.hamcrest.CoreMatchers.is;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-public class CheckboxDefaultInlineTests extends TestsInit {
+public class CheckboxesDefaultInlineTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -24,7 +24,7 @@ public class CheckboxDefaultInlineTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        checkboxDefaultInline.checkboxOne
+        checkboxesDefaultInline.checkboxOne
                 .is()
                 .displayed()
                 .enabled()
@@ -33,7 +33,7 @@ public class CheckboxDefaultInlineTests extends TestsInit {
                 .attr("value", "option1")
                 .hasClass("form-check-input")
                 .tag(is("input"));
-        checkboxDefaultInline.checkboxOne.label()
+        checkboxesDefaultInline.checkboxOne.label()
                 .is()
                 .displayed()
                 .enabled()
@@ -41,7 +41,7 @@ public class CheckboxDefaultInlineTests extends TestsInit {
                 .hasClass("form-check-label")
                 .text(is("1"))
                 .tag(is("label"));
-        checkboxDefaultInline.checkboxTwo
+        checkboxesDefaultInline.checkboxTwo
                 .is()
                 .displayed()
                 .enabled()
@@ -50,7 +50,7 @@ public class CheckboxDefaultInlineTests extends TestsInit {
                 .attr("value", "option2")
                 .hasClass("form-check-input")
                 .tag(is("input"));
-        checkboxDefaultInline.checkboxTwo.label()
+        checkboxesDefaultInline.checkboxTwo.label()
                 .is()
                 .displayed()
                 .enabled()
@@ -58,7 +58,7 @@ public class CheckboxDefaultInlineTests extends TestsInit {
                 .hasClass("form-check-label")
                 .text(is("2"))
                 .tag(is("label"));
-        checkboxDefaultInline.checkboxThree
+        checkboxesDefaultInline.checkboxThree
                 .is()
                 .displayed()
                 .disabled()
@@ -67,7 +67,7 @@ public class CheckboxDefaultInlineTests extends TestsInit {
                 .attr("value", "option3")
                 .hasClass("form-check-input")
                 .tag(is("input"));
-        checkboxDefaultInline.checkboxThree.label()
+        checkboxesDefaultInline.checkboxThree.label()
                 .is()
                 .displayed()
                 .core()
@@ -78,36 +78,36 @@ public class CheckboxDefaultInlineTests extends TestsInit {
 
     @Test
     public void clickableTests() {
-        checkboxDefaultInline.checkboxOne.check();
-        checkboxDefaultInline.checkboxOne
+        checkboxesDefaultInline.checkboxOne.check();
+        checkboxesDefaultInline.checkboxOne
                 .is()
                 .selected();
-        checkboxDefaultInline.checkboxOne.uncheck();
-        checkboxDefaultInline.checkboxOne
+        checkboxesDefaultInline.checkboxOne.uncheck();
+        checkboxesDefaultInline.checkboxOne
                 .is()
                 .deselected();
-        checkboxDefaultInline.checkboxTwo.check();
-        checkboxDefaultInline.checkboxTwo
+        checkboxesDefaultInline.checkboxTwo.check();
+        checkboxesDefaultInline.checkboxTwo
                 .is()
                 .selected();
-        checkboxDefaultInline.checkboxTwo.uncheck();
-        checkboxDefaultInline.checkboxTwo
+        checkboxesDefaultInline.checkboxTwo.uncheck();
+        checkboxesDefaultInline.checkboxTwo
                 .is()
                 .deselected();
-        checkboxDefaultInline.checkboxOne.label().click();
-        checkboxDefaultInline.checkboxOne
+        checkboxesDefaultInline.checkboxOne.label().click();
+        checkboxesDefaultInline.checkboxOne
                 .is()
                 .selected();
-        checkboxDefaultInline.checkboxOne.label().click();
-        checkboxDefaultInline.checkboxOne
+        checkboxesDefaultInline.checkboxOne.label().click();
+        checkboxesDefaultInline.checkboxOne
                 .is()
                 .deselected();
-        checkboxDefaultInline.checkboxTwo.label().click();
-        checkboxDefaultInline.checkboxTwo
+        checkboxesDefaultInline.checkboxTwo.label().click();
+        checkboxesDefaultInline.checkboxTwo
                 .is()
                 .selected();
-        checkboxDefaultInline.checkboxTwo.label().click();
-        checkboxDefaultInline.checkboxTwo
+        checkboxesDefaultInline.checkboxTwo.label().click();
+        checkboxesDefaultInline.checkboxTwo
                 .is()
                 .deselected();
     }
