@@ -23,7 +23,10 @@ import static org.hamcrest.Matchers.*;
  */
 public class DataListAssert<T extends IListBase, D>
         extends UISelectAssert<DataListAssert<T, D>, DataList<T, D>> {
-    public List<D> data() { return element.asData(); }
+    public List<D> data() {
+        element.refresh();
+        return element.asData();
+    }
 
     /**
      * Check that all elements meet condition

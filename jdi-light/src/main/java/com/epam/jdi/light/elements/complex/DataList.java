@@ -44,7 +44,7 @@ public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert
     public List<D> asData() {
         try {
             if (dataType == null) return null;
-            return LinqUtils.map(elements(1), v -> asEntity(v, dataType));
+            return LinqUtils.map(elements(1).values(), v -> asEntity(v, dataType));
         } catch (Exception ex) {
             throw exception("Can't get DataList data" + LINE_BREAK + safeException(ex));
         }

@@ -1,6 +1,7 @@
 package io.github.epam;
 
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -22,7 +23,8 @@ public class EpamGithubSite {
 	public static ContactFormPage contactFormPage;
 	@Url("/performance.html") @Title("Performance page")
 	public static PerformancePage tablePage;
-
+	@Url("/complex-table.html") @Title("Complex Table")
+	public static WebPage complextablePage;
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;
 

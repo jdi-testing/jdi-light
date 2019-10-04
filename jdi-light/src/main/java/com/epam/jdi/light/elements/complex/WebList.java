@@ -123,7 +123,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             return nameFromIndex(i);
         else {
             String name = getElementName(element);
-            return isNotBlank(name) ? name : nameFromIndex(i);
+            return (isNotBlank(name) ? name : nameFromIndex(i)).trim();
         }
     }
     protected String getElementName(UIElement element) {
@@ -136,7 +136,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         }
     }
     protected boolean hasKey(String value) {
-        List<String> keys = elements(0).keys();
+        List<String> keys = elements(1).keys();
         if (keys.isEmpty())
             return false;
         for (String key : keys)
@@ -149,9 +149,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction(level = DEBUG)
     public UIElement get(String value) {
-        if (!locator.isTemplate() && hasKey(value))
-            return elements(0).get(value);
-        return getUIElement(value);
+        return !locator.isTemplate() && hasKey(value)
+            ? elements(1).get(value)
+            : getUIElement(value);
     }
 
     public UIElement getUIElement(String value) {

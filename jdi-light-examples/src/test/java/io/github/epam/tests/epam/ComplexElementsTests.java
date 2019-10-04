@@ -45,5 +45,6 @@ public class ComplexElementsTests extends TestsInit {
         homePage.checkOpened();
         navigationL.select(Service);
         navigationL.select(ComplexTable);
+        complextablePage.checkOpened();
     }
 }

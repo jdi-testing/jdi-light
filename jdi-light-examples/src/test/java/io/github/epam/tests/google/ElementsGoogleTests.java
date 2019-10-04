@@ -13,6 +13,7 @@ import static io.github.com.pages.Header.epamLogo;
 import static io.github.com.pages.Header.search;
 import static io.github.epam.test.data.ListData.*;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
@@ -40,12 +41,15 @@ public class ElementsGoogleTests extends StaticTestsInit {
     @Test
     public void validateEntities2Tests() {
         DataList<SearchResult, ?> jobs = searchPage.search2;
+
         assertEquals(jobs.get(0).name.getText(),"JDI SKYPE");
         assertEquals(jobs.get(1).name.getText(),"JDI OWNER CONTACT");
         try {
             jobs.is().empty();
             Assert.fail("List should not be empty");
-        } catch (Throwable ex) { }
+        } catch (Throwable ex) {
+            assertThat(ex.getMessage(), containsString("but: was \"list is not empty\""));
+        }
         jobs.is().notEmpty();
         jobs.assertThat().size(equalTo(8));
     }
