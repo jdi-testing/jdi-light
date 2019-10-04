@@ -4688,43 +4688,44 @@ $(function(){
 
 </script>
 <script>
-var progress_val = $('#progress-with-labels').attr('aria-valuenow');
-var progress_max = $('#progress-with-labels').attr('aria-valuemax');
-var interval = null;
-var global_step = 5;
-$('input.progress-change').click(function() {
-    if ($(this).hasClass('minus')){
-    	progress_val = (progress_val-global_step >= 0) ? progress_val-global_step : progress_val;
-    } else {
-    	progress_val = (progress_val+global_step <= 100) ? progress_val+global_step : progress_val;
-    }
-    $('#progress-with-labels').text(progress_val+'%');
+        var progress_val = parseInt($('#progress-with-labels').attr('aria-valuenow'));
+        var progress_max = $('#progress-with-labels').attr('aria-valuemax');
+        var interval = null;
+        var global_step = 5;
+        $('.progress-change').on('click', function () {
 
-   $('#progress-with-labels').width(progress_val+'%');
-   $('#progress-with-labels').attr('aria-valuenow', progress_val );
+            if ($(this).hasClass('minus')) {
+                progress_val - global_step >= 0 ? progress_val = progress_val - global_step : progress_val = progress_val;
+            } else {
+                progress_val + global_step <= 100 ? progress_val = progress_val + global_step : progress_val = progress_val;
+            }
 
+            $('#progress-with-labels').text(progress_val + '%');
+            $('#progress-with-labels').width(progress_val + '%');
+            $('#progress-with-labels').attr('aria-valuenow', progress_val);
 
-
-    progress_change();
-
-
-});
-function progress_change(){
-	var step = 1;
-  if ($('#progress-with-labels').attr('aria-valuenow') > progress_val){
-  	step = -1;
-  }
-  if ($('#progress-with-labels').attr('aria-valuenow') != progress_val){
-    clearInterval(interval);
-    interval = setTimeout(function(){
-    	 $('#progress-with-labels').attr('aria-valuenow', ($('.progress-bar').attr('aria-valuenow') + step));
+            progress_change();
+        });
 
 
-       progress_change();
-    }, 30); // чем выше значение, тем медленнее заполняется прогресс
-  }
-}
-</script>
+        function progress_change() {
+
+            var step = 1;
+
+            if ($('#progress-with-labels').attr('aria-valuenow') > progress_val) {
+                step = -1;
+            }
+
+            if ($('#progress-with-labels').attr('aria-valuenow') != progress_val) {
+                clearInterval(interval);
+                interval = setTimeout(function () {
+                    $('#progress-with-labels').attr('aria-valuenow', ($('.progress-bar').attr('aria-valuenow') + step));
+                    progress_change();
+                }, 30);  // чем выше значение, тем медленнее заполняется прогресс
+            }
+        }
+
+    </script>
 
 </body>
 </html>
