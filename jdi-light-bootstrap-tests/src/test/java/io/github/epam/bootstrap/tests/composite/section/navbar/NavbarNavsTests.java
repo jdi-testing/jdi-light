@@ -37,8 +37,7 @@ public class NavbarNavsTests extends TestsInit {
         navbarNavWithDisabled.assertThat().displayed()
                 .core()
                 .css("font-size", is("14px"))
-                .cssClass("navbar")
+                .cssClass("navbar navbar-expand-lg navbar-light bg-light")
                 .tag(is("nav"));
     }
-
 }
