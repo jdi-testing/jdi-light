@@ -197,6 +197,8 @@ public class BootstrapPage extends WebPage {
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
     @UI("body") public static RadioButtonsDefaultInline radioButtonsDefaultInline;
+    @UI("body") public static CheckboxesDefault checkboxesDefault;
+    @UI("body") public static CheckboxesCustom checkboxesCustom;
     @UI(".card-deck:nth-of-type(1)") public static CardDeck cardDeckWithoutFooter;
     @UI(".card-deck:nth-of-type(2)") public static CardDeck cardDeckWithFooter;
     @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
