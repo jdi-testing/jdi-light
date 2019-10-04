@@ -1,43 +1,32 @@
 package io.github.epam.html.tests.elements.complex.table;
 
-import com.epam.jdi.light.elements.complex.table.Single;
-import io.github.com.entities.MarvelUserInfo;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.StaticSite.usersPage;
-import static io.github.com.pages.UsersPage.users;
-import static io.github.com.pages.UsersPage.usersSetup;
+import static io.github.com.pages.SimpleTablePage.flist;
+import static io.github.com.pages.SimpleTablePage.furniture;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.testng.Assert.assertEquals;
 
 public class FurnitureTests implements TestsInit {
-//    @BeforeMethod
-//    public void before() {
-//        shouldBeLoggedIn();
-//        tablePage.open();
-//    }
-//
-//    @Test
-//    public void tableParamsTest() {
-//        assertEquals(users.size(), 4);
-//        assertEquals(users.count(), 6);
-//        assertEquals(users.header(), asList("Number", "Type", "User", "Description"));
-//    }
-//
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        tablePage.open();
+    }
+
+    @Test
+    public void tableParamsTest() {
+        assertEquals(furniture.size(), 4);
+        assertEquals(furniture.count(), 5);
+        assertEquals(furniture.header(), asList("Name", "Type", "Cost", "Weight"));
+    }
+
 //    @Test
 //    public void previewTest() {
 //        String value = users.preview();
