@@ -181,5 +181,6 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI("body") public static CheckboxDefaultInline checkboxDefaultInline;
+    @UI("body") public static RadioButtonDefaultInline radioButtonDefaultInline;
     //endregion
 }

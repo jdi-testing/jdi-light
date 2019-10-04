@@ -5,11 +5,11 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
 
 public class CheckboxDefaultInline {
 
-    @UI("inlineCheckbox1")
+    @UI("#inlineCheckbox1")
     public Checkbox checkboxOne;
-    @UI("inlineCheckbox2")
+    @UI("#inlineCheckbox2")
     public Checkbox checkboxTwo;
-    @UI("inlineCheckbox3")
+    @UI("#inlineCheckbox3")
     public Checkbox checkboxThree;
 
 }
