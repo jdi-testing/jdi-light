@@ -188,5 +188,6 @@ public class BootstrapPage extends WebPage {
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI(".card-deck:nth-of-type(1)") public static CardDeck cardDeckWithoutFooter;
     @UI(".card-deck:nth-of-type(2)") public static CardDeck cardDeckWithFooter;
+    @UI("#card-navigation") public static CardNavigation cardNavigation;
     //endregion
 }
