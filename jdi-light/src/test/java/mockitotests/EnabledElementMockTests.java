@@ -1,48 +1,50 @@
 package mockitotests;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import mocks.CardNavigationMock;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.mockito.Mockito.*;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.testng.Assert.assertEquals;
 
 public class EnabledElementMockTests {
 
-    @DataProvider
-    public Object[][] combinations() {
-        return new Object[][] {
-                // §3
-                {true, true, true, false, true},
-                {false, true, true, false, false},
-                {true, false, true, false, true},
-                {false, false, true, false, false},
-
-                {true, true, false, true, true},
-                {false, true, false, true, false},
-                {true, false, false, true, true},
-                {false, false, false, true, true},
-
-                {true, true, true, true, true},
-                {false, true, true, true, false},
-                {true, false, true, true, true},
-                {false, false, true, true, false},
-
-                {true, true, false, false, true},
-                {false, true, false, false, false},
-                {true, false, false, false, true},
-                {false, false, false, false, false},
-        };
-    }
-
-    private CardNavigationMock cardNavigationMock = null;
     private UIElement uiElement = null;
     private WebElement webElement = null;
+
+    static final boolean active = true;
+    static final boolean disabledByClass = true;
+    static final boolean disabledByAttribute = true;
+    static final boolean webElementEnabled = true;
+    static final boolean isEnabled = true;
+
+    @DataProvider
+    public Object[][] combinations() {
+        return new Object[][]{
+                {active, disabledByClass, disabledByAttribute, webElementEnabled, isEnabled},
+                {active, disabledByClass, !disabledByAttribute, webElementEnabled, isEnabled},
+                {active, disabledByClass, !disabledByAttribute, !webElementEnabled, !isEnabled},
+                {active, disabledByClass, disabledByAttribute, !webElementEnabled, !isEnabled},
+
+                {active, !disabledByClass, disabledByAttribute, webElementEnabled, isEnabled},
+                {active, !disabledByClass, disabledByAttribute, !webElementEnabled, !isEnabled},
+                {active, !disabledByClass, !disabledByAttribute, webElementEnabled, isEnabled},
+                {active, !disabledByClass, !disabledByAttribute, !webElementEnabled, !isEnabled},
+
+                {!active, disabledByClass, disabledByAttribute, webElementEnabled, isEnabled},
+                {!active, disabledByClass, disabledByAttribute, !webElementEnabled, !isEnabled},
+                {!active, disabledByClass, !disabledByAttribute, webElementEnabled, isEnabled},
+                {!active, disabledByClass, !disabledByAttribute, !webElementEnabled, !isEnabled},
+
+                {!active, !disabledByClass, disabledByAttribute, webElementEnabled, isEnabled},
+                {!active, !disabledByClass, disabledByAttribute, !webElementEnabled, !isEnabled},
+                {!active, !disabledByClass, !disabledByAttribute, webElementEnabled, isEnabled},
+                {!active, !disabledByClass, !disabledByAttribute, !webElementEnabled, !isEnabled},
+        };
+    }
 
     @BeforeMethod
     public void init() {
@@ -51,39 +53,20 @@ public class EnabledElementMockTests {
     }
 
     @Test(dataProvider = "combinations")
-    public void hasClassTest(boolean value1, boolean value2, boolean value3, boolean value4, boolean assertion) {
-        CardNavigationMock cardNavigationMock = Mockito.spy(new CardNavigationMock());
-        WebElement webElement = Mockito.spy(new CardNavigationMock());
-        Mockito.doReturn(value1).when(cardNavigationMock).hasClass("active");
-        Mockito.doReturn(value2).when(cardNavigationMock).hasClass("disabled");
-        Mockito.doReturn(value3).when(cardNavigationMock).hasAttribute("disabled");
-        Mockito.doReturn(webElement).when(cardNavigationMock).getWebElement();
-        Mockito.doReturn(value4).when(webElement).isEnabled();
+    public void hasClassTest(boolean active,
+                             boolean disabledByClass,
+                             boolean disabledByAttribute,
+                             boolean webElementEnabled,
+                             boolean isEnabled) {
+//        CardNavigationMock cardNavigationMock = Mockito.spy(new CardNavigationMock());
+        webElement = Mockito.spy(new UIElement());
+        Mockito.doReturn(active).when(uiElement).hasClass("active");
+        Mockito.doReturn(disabledByClass).when(uiElement).hasClass("disabled");
+        Mockito.doReturn(disabledByAttribute).when(uiElement).hasAttribute("disabled");
+        Mockito.doReturn(webElement).when(uiElement).getWebElement();
+        Mockito.doReturn(webElementEnabled).when(webElement).isEnabled();
 
-        if (assertion == true) {
-            assertTrue(cardNavigationMock.isEnabled());
-        }
-        if (assertion == false) {
-            assertFalse(cardNavigationMock.isEnabled());
-        }
+        assertEquals(webElement.isEnabled(), isEnabled);
     }
-
-//    @Test
-//    public void hasClassAndAttributeTest() {
-//        when(cardNavigationMock.hasClass("active")).thenReturn(false);
-//        when(cardNavigationMock.hasClass("disabled")).thenReturn(true);
-//        when(cardNavigationMock.hasAttribute("disabled")).thenReturn(true);
-//        when(cardNavigationMock.getUiElement().getWebElement().isEnabled()).thenReturn(cardNavigationMock.getUiElement());
-//        when(cardNavigationMock.isEnabled()).thenReturn(false);
-//        assertTrue(uiElement.isEnabled());
-//    }
-
-//    @Test
-//    public void getWebElementCheck() {
-//        when(cardNavigationMock.hasClassCheck()).thenReturn(false);
-//        when(cardNavigationMock.hasClassAndAttributeCheck()).thenReturn(false);
-//        when(cardNavigationMock.getWebElementCheck()).thenReturn(true);
-//        assertTrue(cardNavigationMock.uiElementEnabled());
-//    }
 
 }
