@@ -22,6 +22,7 @@ import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.spinner.GrowingSpinners;
+import io.github.com.sections.spinner.SpinnerSize;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -60,6 +61,10 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-bar-base-width-75 .progress-bar") public static Progress progressBaseWidth75;
     @UI("#progress-bar-base-width-100 .progress-bar") public static Progress progressBaseWidth100;
     @UI("#progress-with-labels") public static Progress progressWithLabels;
+    @UI("#progress-backgrounds-green") public static Progress progressBackgroundGreen;
+    @UI("#progress-backgrounds-blue") public static Progress progressBackgroundBlue;
+    @UI("#progress-backgrounds-yellow") public static Progress progressBackgroundYellow;
+    @UI("#progress-backgrounds-red") public static Progress progressBackgroundRed;
     @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
     @UI("#spinner-border") public static Spinner spinnerBorder;
     //endregion
@@ -177,6 +182,7 @@ public class BootstrapPage extends WebPage {
     @UI("#radio-buttons") public static RadioButtonGroup radioButtonGroup;
     @UI(".card-group:nth-of-type(1)") public static CardGroup cardGroupWithoutFooter;
     @UI(".card-group:nth-of-type(2)") public static CardGroup cardGroupWithFooter;
+    @UI("#card-list-groups") public static CardListGroups cardListGroups;
     @UI("#pagination-overview") public static PaginationOverview paginationOverview;
     @UI("#pagination-icons") public static PaginationIcons paginationIcons;
     @UI("#pagination-states") public static PaginationStates paginationStates;
@@ -196,6 +202,8 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
     @UI(".card-columns") public static CardColumns cardColumns;
+    @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
+    @UI("body") public static RadioButtonsDefaultInline radioButtonsDefaultInline;
     @UI("body") public static CheckboxesDefault checkboxesDefault;
     @UI("body") public static CheckboxesCustom checkboxesCustom;
     @UI(".card-deck:nth-of-type(1)") public static CardDeck cardDeckWithoutFooter;
@@ -203,5 +211,6 @@ public class BootstrapPage extends WebPage {
     @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
     @UI("#card-navigation") public static CardNavigation cardNavigation;
     @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
+    @UI("#spinner-size") public static SpinnerSize spinnerSize;
     //endregion
 }
