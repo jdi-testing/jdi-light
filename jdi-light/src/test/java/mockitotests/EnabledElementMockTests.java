@@ -9,6 +9,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.*;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class EnabledElementMockTests {
@@ -16,20 +17,26 @@ public class EnabledElementMockTests {
     @DataProvider
     public Object[][] combinations() {
         return new Object[][] {
-                {true, false, false, false},
-                {false, true, false, false},
-                {false, false, true, false},
-                {false, false, false, true},
-                {false, false, false, false},
+                // §3
+                {true, true, true, false, true},
+                {false, true, true, false, false},
+                {true, false, true, false, true},
+                {false, false, true, false, false},
 
-                {false, true, true, true},
-                {true, false, true, true},
-                {true, true, false, true},
-                {true, true, true, false},
-                {true, true, true, true},
+                {true, true, false, true, true},
+                {false, true, false, true, false},
+                {true, false, false, true, true},
+                {false, false, false, true, true},
 
-                {true, true, false, false},
-                {false, false, true, true},
+                {true, true, true, true, true},
+                {false, true, true, true, false},
+                {true, false, true, true, true},
+                {false, false, true, true, false},
+
+                {true, true, false, false, true},
+                {false, true, false, false, false},
+                {true, false, false, false, true},
+                {false, false, false, false, false},
         };
     }
 
@@ -44,15 +51,21 @@ public class EnabledElementMockTests {
     }
 
     @Test(dataProvider = "combinations")
-    public void hasClassTest(boolean value1, boolean value2, boolean value3, boolean value4) {
+    public void hasClassTest(boolean value1, boolean value2, boolean value3, boolean value4, boolean assertion) {
         CardNavigationMock cardNavigationMock = Mockito.spy(new CardNavigationMock());
         WebElement webElement = Mockito.spy(new CardNavigationMock());
-        Mockito.doReturn(false).when(cardNavigationMock).hasClass("active");
-        Mockito.doReturn(false).when(cardNavigationMock).hasClass("disabled");
-        Mockito.doReturn(false).when(cardNavigationMock).hasAttribute("disabled");
+        Mockito.doReturn(value1).when(cardNavigationMock).hasClass("active");
+        Mockito.doReturn(value2).when(cardNavigationMock).hasClass("disabled");
+        Mockito.doReturn(value3).when(cardNavigationMock).hasAttribute("disabled");
         Mockito.doReturn(webElement).when(cardNavigationMock).getWebElement();
-        Mockito.doReturn(true).when(webElement).isEnabled();
-        assertTrue(cardNavigationMock.isEnabled());
+        Mockito.doReturn(value4).when(webElement).isEnabled();
+
+        if (assertion == true) {
+            assertTrue(cardNavigationMock.isEnabled());
+        }
+        if (assertion == false) {
+            assertFalse(cardNavigationMock.isEnabled());
+        }
     }
 
 //    @Test
