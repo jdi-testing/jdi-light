@@ -30,4 +30,34 @@ public class ProgressAssert extends UIAssert<ProgressAssert, Progress> {
     public ProgressAssert color(String color) {
         return color(is(color));
     }
+
+    @JDIAction(value = "Get '{name}' min value {0}")
+    public ProgressAssert minValue(Matcher<String> condition) {
+        jdiAssert(element.getMinValue(), condition);
+        return this;
+    }
+
+    public ProgressAssert minValue(String minValue) {
+        return minValue(is(minValue));
+    }
+
+    @JDIAction(value = "Get '{name}' max value {0}")
+    public ProgressAssert maxValue(Matcher<String> condition) {
+        jdiAssert(element.getMaxValue(), condition);
+        return this;
+    }
+
+    public ProgressAssert maxValue(String maxValue) {
+        return maxValue(is(maxValue));
+    }
+
+    @JDIAction(value = "Get '{name}' style {0}")
+    public ProgressAssert style(Matcher<String> condition) {
+        jdiAssert(element.getStyle(), condition);
+        return this;
+    }
+
+    public ProgressAssert style(String style) {
+        return style(is(style));
+    }
 }

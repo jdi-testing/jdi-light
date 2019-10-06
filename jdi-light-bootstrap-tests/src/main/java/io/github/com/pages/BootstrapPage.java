@@ -211,5 +211,6 @@ public class BootstrapPage extends WebPage {
     @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
     @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
+    @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
     //endregion
 }

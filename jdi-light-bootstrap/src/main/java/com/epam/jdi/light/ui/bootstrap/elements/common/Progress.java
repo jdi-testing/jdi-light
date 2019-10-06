@@ -15,8 +15,24 @@ public class Progress extends UIBaseElement<ProgressAssert> {
         return uiElement.core().attr("aria-valuenow");
     }
 
+    @JDIAction(value = "Get '{name}' min value")
+    public String getMinValue() {
+        return uiElement.core().attr("aria-valuemin");
+    }
+
+    @JDIAction(value = "Get '{name}' max value")
+    public String getMaxValue() {
+        return uiElement.core().attr("aria-valuemax");
+    }
+
+    @JDIAction(value = "Get '{name}' style")
+    public String getStyle() {
+        return uiElement.core().attr("style");
+    }
+
     @Override
     public ProgressAssert is() {
         return new ProgressAssert().set(this);
     }
+
 }
