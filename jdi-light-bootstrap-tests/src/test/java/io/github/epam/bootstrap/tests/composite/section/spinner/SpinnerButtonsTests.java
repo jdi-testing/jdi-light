@@ -18,14 +18,15 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.testng.Assert.assertNotEquals;
 
 public class SpinnerButtonsTests extends TestsInit {
+
+    private final String buttonText = "Loading...";
+    private final String spinnerClass = "spinner-border";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private final String buttonText = "Loading...";
-    private final String spinnerClass = "spinner-border";
 
     @DataProvider
     public Object[][] buttonsWithGrowingSpinners() {
