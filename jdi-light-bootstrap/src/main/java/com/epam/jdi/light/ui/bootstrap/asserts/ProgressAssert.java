@@ -7,6 +7,7 @@ import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 /**
  * Created by Aleksandr Khmelinin on 2.10.2019
@@ -50,13 +51,11 @@ public class ProgressAssert extends UIAssert<ProgressAssert, Progress> {
     }
 
     @JDIAction("Assert that '{name}' is animated")
-    public ProgressAssert animated() {
-        jdiAssert(element.css("animation-play-state"), is("running"));
-        //jdiAssert(element.core().css("animation-play-state"), true);
+    public ProgressAssert animated(Matcher<String> condition) {
+        jdiAssert(element.css("animation-name"), is(condition));
         return this;
     }
-
-   /* protected String getIsAnimated() {
-        return element.css("dfs", is("df"));
-    }*/
+    public ProgressAssert animated(String animation) {
+        return animated(is(animation));
+    }
 }

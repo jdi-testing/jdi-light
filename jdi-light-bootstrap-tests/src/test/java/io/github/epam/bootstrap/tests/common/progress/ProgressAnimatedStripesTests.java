@@ -7,8 +7,10 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.progressAnimated;
 import static io.github.com.pages.BootstrapPage.progressBaseWidth50;
+import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
+import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * Created by Aleksandr Khmelinin on 4.10.2019
@@ -23,22 +25,26 @@ public class ProgressAnimatedStripesTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-
     @Test
-    public void isAnimatedTest() {
-        System.out.println(progressAnimated.is().animated());
-        progressAnimated.is().animated();
-        progressAnimated.is().core().css("animation-play-state", is("running"));
+    public void AnimationTest() {
+        assertEquals(progressAnimated.core().css("animation-name"), "progress-bar-stripes");
     }
 
     @Test
-    public void isAnimateddTest() {
-        System.out.println(progressBaseWidth50.is().animated());
-        progressBaseWidth50.is().animated();
+    public void getColorTest() {
+        assertEquals(progressAnimated.getColor(), "rgba(0, 123, 255, 1)");
     }
 
     @Test
-    public void isAnimatdeddTest() {
-        progressBaseWidth50.is().core().css("animation-play-state", is("running"));
+    public void isValidationTest() {
+        progressAnimated.is()
+                .animated("progress-bar-stripes")
+                .color("rgba(0, 123, 255, 1)");
     }
+
+    @Test
+    public void baseValidationTest() {
+        baseValidation(progressAnimated);
+    }
+
 }
