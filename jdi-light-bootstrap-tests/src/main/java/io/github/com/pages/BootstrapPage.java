@@ -14,6 +14,7 @@ import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.spinner.GrowingSpinners;
+import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
 
 public class BootstrapPage extends WebPage {
@@ -222,5 +223,6 @@ public class BootstrapPage extends WebPage {
     @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
     @UI("#linkToastCenterTop") public static Toast toastWithCenterAlignButton;
     @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
+    @UI("#spinner-alignment") public static SpinnerAlignment spinnerAlignment;
     //endregion
 }
