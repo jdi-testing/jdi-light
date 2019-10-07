@@ -26,20 +26,20 @@ public class EnabledElementMockTests {
         return new Object[][]{
                 {active, disabledByClass, disabledByAttribute, webElementEnabled, isEnabled},
                 {active, disabledByClass, !disabledByAttribute, webElementEnabled, isEnabled},
-                {active, disabledByClass, !disabledByAttribute, !webElementEnabled, !isEnabled},
-                {active, disabledByClass, disabledByAttribute, !webElementEnabled, !isEnabled},
+                {active, disabledByClass, !disabledByAttribute, !webElementEnabled, isEnabled},
+                {active, disabledByClass, disabledByAttribute, !webElementEnabled, isEnabled},
 
                 {active, !disabledByClass, disabledByAttribute, webElementEnabled, isEnabled},
-                {active, !disabledByClass, disabledByAttribute, !webElementEnabled, !isEnabled},
+                {active, !disabledByClass, disabledByAttribute, !webElementEnabled, isEnabled},
                 {active, !disabledByClass, !disabledByAttribute, webElementEnabled, isEnabled},
-                {active, !disabledByClass, !disabledByAttribute, !webElementEnabled, !isEnabled},
+                {active, !disabledByClass, !disabledByAttribute, !webElementEnabled, isEnabled},
 
-                {!active, disabledByClass, disabledByAttribute, webElementEnabled, isEnabled},
+                {!active, disabledByClass, disabledByAttribute, webElementEnabled, !isEnabled},
                 {!active, disabledByClass, disabledByAttribute, !webElementEnabled, !isEnabled},
-                {!active, disabledByClass, !disabledByAttribute, webElementEnabled, isEnabled},
+                {!active, disabledByClass, !disabledByAttribute, webElementEnabled, !isEnabled},
                 {!active, disabledByClass, !disabledByAttribute, !webElementEnabled, !isEnabled},
 
-                {!active, !disabledByClass, disabledByAttribute, webElementEnabled, isEnabled},
+                {!active, !disabledByClass, disabledByAttribute, webElementEnabled, !isEnabled},
                 {!active, !disabledByClass, disabledByAttribute, !webElementEnabled, !isEnabled},
                 {!active, !disabledByClass, !disabledByAttribute, webElementEnabled, isEnabled},
                 {!active, !disabledByClass, !disabledByAttribute, !webElementEnabled, !isEnabled},
@@ -57,16 +57,19 @@ public class EnabledElementMockTests {
                              boolean disabledByClass,
                              boolean disabledByAttribute,
                              boolean webElementEnabled,
-                             boolean isEnabled) {
-//        CardNavigationMock cardNavigationMock = Mockito.spy(new CardNavigationMock());
-        webElement = Mockito.spy(new UIElement());
+                             boolean isEnabled)
+    {
+        uiElement = Mockito.spy(new UIElement());
+
         Mockito.doReturn(active).when(uiElement).hasClass("active");
+
         Mockito.doReturn(disabledByClass).when(uiElement).hasClass("disabled");
         Mockito.doReturn(disabledByAttribute).when(uiElement).hasAttribute("disabled");
+
         Mockito.doReturn(webElement).when(uiElement).getWebElement();
         Mockito.doReturn(webElementEnabled).when(webElement).isEnabled();
 
-        assertEquals(webElement.isEnabled(), isEnabled);
+        assertEquals(uiElement.isEnabled(), isEnabled);
     }
 
 }
