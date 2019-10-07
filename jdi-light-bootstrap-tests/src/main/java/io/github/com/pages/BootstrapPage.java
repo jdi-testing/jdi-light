@@ -13,6 +13,7 @@ import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerSize;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -202,5 +203,8 @@ public class BootstrapPage extends WebPage {
     @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
     @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
-    //endregion
+    @UI("#button-with-spinner-and-text") public static ButtonWithSpinner buttonWithSpinnerAndText;
+    @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
+    @UI("#button-with-growing-spinner-and-text") public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
+    @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
 }
