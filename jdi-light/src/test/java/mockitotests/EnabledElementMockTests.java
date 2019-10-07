@@ -15,11 +15,11 @@ public class EnabledElementMockTests {
     private UIElement uiElement = null;
     private WebElement webElement = null;
 
-    static final boolean active = true;
-    static final boolean disabledByClass = true;
-    static final boolean disabledByAttribute = true;
-    static final boolean webElementEnabled = true;
-    static final boolean isEnabled = true;
+    private static final boolean active = true;
+    private static final boolean disabledByClass = true;
+    private static final boolean disabledByAttribute = true;
+    private static final boolean webElementEnabled = true;
+    private static final boolean isEnabled = true;
 
     @DataProvider
     public Object[][] combinations() {
