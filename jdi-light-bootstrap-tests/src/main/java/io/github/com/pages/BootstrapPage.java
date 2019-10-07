@@ -68,7 +68,6 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-backgrounds-red") public static Progress progressBackgroundRed;
     @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
     @UI("#spinner-border") public static Spinner spinnerBorder;
-    //@UI("body > div > div.uui-main-container.page-inside > main > div.main-content > div > div:nth-child(73) > div.doc-space.line > div:nth-child(3) > div:nth-child(23) > div.html-left > div:nth-child(1) > button:nth-child(1)") public static ButtonWithSpinner buttonWithSpinner;
     //endregion
 
     //region Complex Elements
