@@ -48,14 +48,20 @@ public class CheckboxesAndRadiosWithoutLabelsTests extends TestsInit {
     @Test
     public void checkboxClickableTests() {
         checkboxesAndRadiosWithoutLabels.checkbox.check();
-        checkboxesAndRadiosWithoutLabels.checkbox.is().selected();
+        checkboxesAndRadiosWithoutLabels.checkbox
+                .is()
+                .selected();
         checkboxesAndRadiosWithoutLabels.checkbox.uncheck();
-        checkboxesAndRadiosWithoutLabels.checkbox.is().deselected();
+        checkboxesAndRadiosWithoutLabels.checkbox
+                .is()
+                .deselected();
     }
 
     @Test
     public void radioButtonTests() {
         checkboxesAndRadiosWithoutLabels.radioButton.select();
-        checkboxesAndRadiosWithoutLabels.radioButton.is().selected();
+        checkboxesAndRadiosWithoutLabels.radioButton
+                .is()
+                .selected();
     }
 }
