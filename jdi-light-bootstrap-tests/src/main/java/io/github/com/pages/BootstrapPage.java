@@ -52,6 +52,7 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-bar-base-width-50 .progress-bar") public static Progress progressBaseWidth50;
     @UI("#progress-bar-base-width-75 .progress-bar") public static Progress progressBaseWidth75;
     @UI("#progress-bar-base-width-100 .progress-bar") public static Progress progressBaseWidth100;
+    @UI("#progress-animated") public static Progress progressAnimated;
     @UI("#progress-with-labels") public static Progress progressWithLabels;
     @UI("#progress-backgrounds-green") public static Progress progressBackgroundGreen;
     @UI("#progress-backgrounds-blue") public static Progress progressBackgroundBlue;
