@@ -1,6 +1,5 @@
 package io.github.epam.bootstrap.tests.composite.section.navbar;
 
-
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,7 +20,6 @@ public class NavbarNavsTests extends TestsInit {
         bsPage.shouldBeOpened();
         bsPage.refresh();
     }
-
 
     @Test
     public void baseValidationTest() {
