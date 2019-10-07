@@ -5,18 +5,8 @@ import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
-import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
-
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
@@ -67,6 +57,7 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-backgrounds-red") public static Progress progressBackgroundRed;
     @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
     @UI("#spinner-border") public static Spinner spinnerBorder;
+    //@UI("body > div > div.uui-main-container.page-inside > main > div.main-content > div > div:nth-child(73) > div.doc-space.line > div:nth-child(3) > div:nth-child(23) > div.html-left > div:nth-child(1) > button:nth-child(1)") public static ButtonWithSpinner buttonWithSpinner;
     //endregion
 
     //region Complex Elements
