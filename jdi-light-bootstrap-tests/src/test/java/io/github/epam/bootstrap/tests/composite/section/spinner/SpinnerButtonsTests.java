@@ -9,7 +9,10 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.buttonWithGrowingSpinner;
+import static io.github.com.pages.BootstrapPage.buttonWithGrowingSpinnerAndText;
+import static io.github.com.pages.BootstrapPage.buttonWithSpinner;
+import static io.github.com.pages.BootstrapPage.buttonWithSpinnerAndText;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 import static org.testng.Assert.assertNotEquals;
@@ -21,7 +24,8 @@ public class SpinnerButtonsTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    private final String buttonText = "Loading...", spinnerClass = "spinner-border";
+    private final String buttonText = "Loading...";
+    private final String spinnerClass = "spinner-border";
 
     @DataProvider
     public Object[][] buttonsWithGrowingSpinners() {
