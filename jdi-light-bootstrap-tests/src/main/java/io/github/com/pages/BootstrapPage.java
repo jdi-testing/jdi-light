@@ -5,6 +5,8 @@ import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.bootstrap.elements.common.*;
+
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
@@ -18,6 +20,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
@@ -202,6 +205,7 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
     @UI(".card-columns") public static CardColumns cardColumns;
+    @UI("body") public static Popover popover;
     @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
     @UI("body") public static RadioButtonsDefaultInline radioButtonsDefaultInline;
     @UI("body") public static CheckboxesDefault checkboxesDefault;
