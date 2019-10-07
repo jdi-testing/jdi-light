@@ -5,6 +5,8 @@ import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.bootstrap.elements.common.*;
+
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
@@ -14,11 +16,14 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.*;
+import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
@@ -62,6 +67,10 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-bar-base-width-75 .progress-bar") public static Progress progressBaseWidth75;
     @UI("#progress-bar-base-width-100 .progress-bar") public static Progress progressBaseWidth100;
     @UI("#progress-with-labels") public static Progress progressWithLabels;
+    @UI("#progress-backgrounds-green") public static Progress progressBackgroundGreen;
+    @UI("#progress-backgrounds-blue") public static Progress progressBackgroundBlue;
+    @UI("#progress-backgrounds-yellow") public static Progress progressBackgroundYellow;
+    @UI("#progress-backgrounds-red") public static Progress progressBackgroundRed;
     @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
     @UI("#spinner-border") public static Spinner spinnerBorder;
     //endregion
@@ -201,6 +210,7 @@ public class BootstrapPage extends WebPage {
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI("#list-example a") public static ListGroup listGroupForScrollspy;
     @UI("#list-example~div") public static ScrollspyWithListGroup scrollspyWithListGroup;
+    @UI("body") public static Popover popover;
     @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
     @UI("body") public static RadioButtonsDefaultInline radioButtonsDefaultInline;
     @UI("body") public static CheckboxesDefault checkboxesDefault;
@@ -210,5 +220,19 @@ public class BootstrapPage extends WebPage {
     @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
     @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
+
+    //Toasts
+    @UI("#toastRightTop") public static Toast toastWithTopAlign;
+    @UI("#linkToastRightTop") public static Button toastWithTopAlignButton;
+    @UI("#simpleToast") public static Toast simpleToast;
+    @UI("#linkSimpleToastExample") public static Button simpleToastButton;
+    @UI("#multipleToast") public static Button stackOfToastsButton;
+    @UI("#firstMultipleToast") public static Toast firstStackToast;
+    @UI("#secondMultipleToast") public static Toast secondStackToast;
+    @UI("#linkStackAlign") public static Button stackOfToastsWithTopAlignButton;
+    @UI("#firstStackToast") public static Toast firstTopAlignStackToast;
+    @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
+    @UI("#linkToastCenterTop") public static Toast toastWithCenterAlignButton;
+    @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
     //endregion
 }
