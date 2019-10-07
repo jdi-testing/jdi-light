@@ -263,7 +263,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction("Check '{0}' checkboxes in '{name}' checklist")
     public void check(int... indexes) {
         List<Integer> listIndexes = toList(indexes);
-        for (int i = 0; i < values().size(); i++) {
+        for (int i = 1; i < values().size() + 1; i++) {
             UIElement value = get(i);
             if (value.isDisabled()) continue;
             if (selected(value) && !listIndexes.contains(i+1)
@@ -273,9 +273,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     @JDIAction("Uncheck '{0}' checkboxes in  '{name}' checklist")
     public void uncheck(int... indexes) {
-        if (indexes.length > 0 && list().get(indexes[0]-1).isDisplayed()) {
+        if (indexes.length > 0 && list().get(indexes[0]).isDisplayed()) {
             List<Integer> listIndexes = toList(indexes);
-            for (int i = 0; i < values().size(); i++) {
+            for (int i = 1; i < values().size() + 1; i++) {
                 UIElement value = get(i);
                 if (value.isDisabled()) continue;
                 if (selected(value) && listIndexes.contains(i+1)

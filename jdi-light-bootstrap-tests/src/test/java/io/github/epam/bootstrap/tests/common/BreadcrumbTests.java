@@ -1,6 +1,5 @@
 package io.github.epam.bootstrap.tests.common;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
@@ -8,12 +7,8 @@ import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-
 import static com.epam.jdi.light.common.TextTypes.TEXT;
-import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
-import static com.epam.jdi.light.elements.common.WindowsManager.switchToWindow;
-import static com.epam.jdi.light.elements.common.WindowsManager.windowsCount;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.breadcrumb;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
@@ -84,7 +79,7 @@ public class BreadcrumbTests extends TestsInit {
 
     @Test
     public void clickByIDTest() {
-        breadcrumb.items.get(0).click();
+        breadcrumb.items.get(1).click();
 
         switchToWindow(2);
 

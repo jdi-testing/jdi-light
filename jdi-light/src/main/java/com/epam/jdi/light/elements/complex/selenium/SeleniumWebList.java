@@ -1,8 +1,11 @@
 package com.epam.jdi.light.elements.complex.selenium;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.tools.func.JAction1;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -14,8 +17,12 @@ public class SeleniumWebList extends WebList {
     public SeleniumWebList() {
         super();
     }
+    public SeleniumWebList(By locator) { super(); setLocator(locator);}
     public SeleniumWebList(List<WebElement> elements) {
         super(); setWebElements(elements);
+    }
+    public SeleniumWebList setup(JAction1<JDIBase> setup) {
+        return setup(SeleniumWebList.class, setup);
     }
     /**
      * @param index
@@ -28,5 +35,14 @@ public class SeleniumWebList extends WebList {
                 ? tryGetByIndex(index)
                 : initElement(() -> getList(index+1).get(index)))
                 .setName(nameFromIndex(index));
+    }
+    @Override
+    public SeleniumWebList setName(String name) {
+        super.setName(name);
+        return this;
+    }
+    public SeleniumWebList noValidation() {
+        super.noValidation();
+        return this;
     }
 }
