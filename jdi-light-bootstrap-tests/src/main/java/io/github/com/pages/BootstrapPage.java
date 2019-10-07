@@ -27,6 +27,7 @@ import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.spinner.GrowingSpinners;
+import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
 
 public class BootstrapPage extends WebPage {
@@ -217,6 +218,7 @@ public class BootstrapPage extends WebPage {
     @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
     @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
+    @UI("#spinner-alignment") public static SpinnerAlignment spinnerAlignment;
 
     //Toasts
     @UI("#toastRightTop") public static Toast toastWithTopAlign;
