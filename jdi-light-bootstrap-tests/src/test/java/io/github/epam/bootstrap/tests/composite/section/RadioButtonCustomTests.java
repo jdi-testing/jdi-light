@@ -9,6 +9,11 @@ import static io.github.com.pages.BootstrapPage.radioButtonCustom;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Created by Dmitrii Pavlov on 07.10.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
+
 public class RadioButtonCustomTests extends TestsInit {
 
     private String label1 = "Toggle this custom radio";
