@@ -23,6 +23,7 @@ public class ProgressWithLabelsTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        bsPage.refresh();
     }
 
     @Test
@@ -41,11 +42,12 @@ public class ProgressWithLabelsTests extends TestsInit {
                 .core()
                 .css("font-size", is("12px"))
                 .cssClass("progress-bar")
+                .tag(is("div"));
+        progressWithLabels.core().is()
                 .attr("role", "progressbar")
                 .attr("aria-valuenow", "25")
                 .attr("aria-valuemin", "0")
-                .attr("aria-valuemax", "100")
-                .tag(is("div"));
+                .attr("aria-valuemax", "100");
     }
 
     @Test
