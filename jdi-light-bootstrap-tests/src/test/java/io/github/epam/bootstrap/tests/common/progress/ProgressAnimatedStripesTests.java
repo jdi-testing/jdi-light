@@ -6,10 +6,8 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.progressAnimated;
-import static io.github.com.pages.BootstrapPage.progressBaseWidth50;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.is;
 import static org.testng.AssertJUnit.assertEquals;
 
 /**
@@ -26,7 +24,7 @@ public class ProgressAnimatedStripesTests extends TestsInit {
     }
 
     @Test
-    public void AnimationTest() {
+    public void animationTest() {
         assertEquals(progressAnimated.core().css("animation-name"), "progress-bar-stripes");
     }
 
@@ -46,5 +44,4 @@ public class ProgressAnimatedStripesTests extends TestsInit {
     public void baseValidationTest() {
         baseValidation(progressAnimated);
     }
-
 }
