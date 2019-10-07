@@ -44,12 +44,11 @@ public class ProgressBarsListTests extends TestsInit {
         progressSections.stream().filter(progressSection ->
                 progressSection.progress.attr("id").equals(progressId)).forEach(
                 progressSection -> {
-                    progressSection.progress.is().ariaValue(value);
-                    progressSection.progress.is().color(color);
-                    progressSection.progress.is().minValue(min);
-                    progressSection.progress.is().maxValue(max);
-                    assertThat(progressSection.progress.core().attr("class"),
-                            containsString(classStriped));
+                    assertThat(progressSection.progress.core().attr("class"), containsString(classStriped));
+                    progressSection.progress.is().ariaValue(value)
+                                                 .color(color)
+                                                 .minValue(min)
+                                                 .maxValue(max);
                 });
     }
 

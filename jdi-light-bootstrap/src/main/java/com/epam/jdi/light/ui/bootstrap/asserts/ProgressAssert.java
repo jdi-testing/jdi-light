@@ -51,7 +51,7 @@ public class ProgressAssert extends UIAssert<ProgressAssert, Progress> {
         return maxValue(is(maxValue));
     }
 
-    @JDIAction(value = "Get '{name}' style {0}")
+    @JDIAction(value = "Get '{name}' value {0}")
     public ProgressAssert style(Matcher<String> condition) {
         jdiAssert(element.getStyle(), condition);
         return this;
