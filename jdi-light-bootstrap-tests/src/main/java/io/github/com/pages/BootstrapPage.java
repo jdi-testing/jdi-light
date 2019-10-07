@@ -5,25 +5,15 @@ import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.*;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
-import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
-
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerSize;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -218,4 +208,3 @@ public class BootstrapPage extends WebPage {
     @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
     //endregion
 }
-
