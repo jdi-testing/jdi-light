@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.light.elements.complex.selenium.SeleniumWebList;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -49,7 +50,7 @@ public class UIFactory {
         return new WebList(byLocator);
     }
     public static WebList list(List<WebElement> els, String name) {
-        return new WebList(els).setup(e->e.setName(name));
+        return new SeleniumWebList(els).setup(e->e.setName(name));
     }
     public static WebList $$(String locator) {
         return list(locator);

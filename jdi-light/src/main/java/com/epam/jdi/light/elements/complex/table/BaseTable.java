@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IHasSize;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.selenium.SeleniumWebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
@@ -144,7 +145,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         validateRowIndex(rowNum);
         if (!rows.get().has(rowNum+"")) {
             WebList result = cells.isGotAll()
-                ? new WebList(LinqUtils.select(cells.get(), c -> c.value.get(rowNum+"")))
+                ? new SeleniumWebList(LinqUtils.select(cells.get(), c -> c.value.get(rowNum+"")))
                 : getRow(rowNum);
             rows.get().update(rowNum+"", result);
         }
@@ -172,7 +173,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         validateColumnIndex(colNum) ;
         if (!columns.get().has(colNum+"")) {
             WebList result = cells.isGotAll()
-                ? new WebList(new ArrayList<>(cells.get().get(colNum + "").values()))
+                ? new SeleniumWebList(new ArrayList<>(cells.get().get(colNum + "").values()))
                 : getColumn(colNum);
             columns.get().update(colNum + "", result);
         }
@@ -239,9 +240,9 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         if (firstColumnIndex > 1 || columnsMapping.length > 0) {
             for (int i = 1; i <= header().size(); i++)
                 result.add(webElements.get(getColumnIndex(i)-1));
-            return new WebList(result);
+            return new SeleniumWebList(result);
         }
-        return new WebList(webElements);
+        return new SeleniumWebList(webElements);
     }
     protected MapArray<String, WebList> getColumns() {
         if (columns.isGotAll()) return columns.get();

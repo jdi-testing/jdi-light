@@ -11,6 +11,7 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.selenium.SeleniumWebList;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -46,7 +47,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
 
     ListBase() {}
     ListBase(By locator) { list = new WebList(locator); }
-    ListBase(List<WebElement> elements) { list = new WebList(elements); }
+    ListBase(List<WebElement> elements) { list = new SeleniumWebList(elements); }
     Class<?> initClass = UIElement.class;
 
     private boolean actualMapValue() {

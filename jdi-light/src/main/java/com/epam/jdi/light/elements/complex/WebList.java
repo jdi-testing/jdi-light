@@ -60,9 +60,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     public WebList() { elements.useCache(false); setTextType(SMART_LIST); noValidation(); }
     public WebList(By locator) { this(); setLocator(locator);}
-    public WebList(List<WebElement> elements) {
-        this(); setWebElements(elements);
-    }
     public WebList(JDIBase base) {
         super(base);
         elements.useCache(false);
@@ -191,12 +188,12 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction(level = DEBUG) @Override
     public UIElement get(int index) {
-        if (index < 0)
-            throw exception("Can't get element with index '%s'. Index should be 0 or more", index);
+        if (index-1 < 0)
+            throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
         return (locator.isTemplate()
-            ? tryGetByIndex(index)
-            : initElement(() -> getList(index+1).get(index)))
-        .setName(nameFromIndex(index));
+            ? tryGetByIndex(index-1)
+            : initElement(() -> getList(index).get(index-1)))
+        .setName(nameFromIndex(index-1));
     }
     protected UIElement tryGetByIndex(int index) {
         try {
