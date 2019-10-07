@@ -11,7 +11,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.testng.Assert.assertNotEquals;
 
 public class SpinnerButtonsTests extends TestsInit {
@@ -25,18 +25,15 @@ public class SpinnerButtonsTests extends TestsInit {
 
     @DataProvider
     public Object[][] buttonsWithGrowingSpinners() {
-        return new Object[][] {
+        return new Object[][]{
                 {buttonWithGrowingSpinner},
                 {buttonWithGrowingSpinnerAndText},
         };
     }
 
-
     @Test()
     public void checkButtonText() {
-        buttonWithSpinnerAndText.span.assertThat().core().css("overflow", "hidden");
-        System.out.println("jjj" +buttonWithSpinnerAndText.span.text());
-        System.out.println(buttonWithSpinnerAndText.getText());
+        buttonWithSpinnerAndText.isDisplayed();
         buttonWithSpinnerAndText.assertThat().text(is(buttonText));
     }
 
@@ -52,7 +49,8 @@ public class SpinnerButtonsTests extends TestsInit {
 
     @Test()
     public void checkButtonWithoutText() {
-        buttonWithSpinner.assertThat().text(is(""));
+        buttonWithSpinner.span.isHidden();
+        buttonWithSpinnerAndText.assertThat().text(is(buttonText));
     }
 
     @Test()
@@ -86,6 +84,7 @@ public class SpinnerButtonsTests extends TestsInit {
 
 
 }
+
 
 
 
