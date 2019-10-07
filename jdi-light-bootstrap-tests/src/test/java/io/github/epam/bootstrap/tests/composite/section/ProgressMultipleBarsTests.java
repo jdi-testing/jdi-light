@@ -1,6 +1,7 @@
 package io.github.epam.bootstrap.tests.composite.section;
 
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
+import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -15,7 +16,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
  * Email: Roman_Bordiugov@epam.com; Skype: rome_hk
  */
 
-public class ProgressMultipleBarsTests {
+public class ProgressMultipleBarsTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -35,6 +36,10 @@ public class ProgressMultipleBarsTests {
     @Test(dataProvider = "progressMultipleBarsData")
     public void isValidationTest(Progress progress) {
         progress.is().enabled().and().displayed();
+        progress.assertThat()
+                .core()
+                .hasClass("progress-bar")
+                .attr("role", "progressbar");
     }
 
     @Test(dataProvider = "progressMultipleBarsData")
