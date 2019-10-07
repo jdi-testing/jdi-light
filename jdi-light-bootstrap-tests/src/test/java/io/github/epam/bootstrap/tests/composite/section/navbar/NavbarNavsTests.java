@@ -108,13 +108,4 @@ public class NavbarNavsTests extends TestsInit {
     public void isDisabledItem() {
         navbarNavWithDisabled.navbarLinks.get(3).is().disabled();
     }
-
-
-
-
-
-
-
-
-
 }
