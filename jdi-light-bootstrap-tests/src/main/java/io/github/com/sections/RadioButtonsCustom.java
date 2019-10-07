@@ -9,9 +9,9 @@ public class RadioButtonsCustom extends Section {
 
     @UI("#customRadio1")
     public RadioButton radio1;
-    @UI("#customRadio1")
+    @UI("#customRadio2")
     public RadioButton radio2;
-    @UI("input[name='customRadio']")
+    @UI(".custom-radio")
     public RadioButton radioButton;
     @UI("label[for='customRadio1']")
     public Label radio1Label;

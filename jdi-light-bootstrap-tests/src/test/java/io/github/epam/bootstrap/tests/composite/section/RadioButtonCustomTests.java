@@ -13,8 +13,6 @@ public class RadioButtonCustomTests extends TestsInit {
 
     private String label1 = "Toggle this custom radio";
     private String label2 = "Or toggle this other custom radio";
-    private String value1 = "Toggle this custom radio";
-    private String value2 = "Or toggle this other custom radio";
 
     @BeforeMethod
     public void before() {
@@ -24,8 +22,8 @@ public class RadioButtonCustomTests extends TestsInit {
 
     @Test
     public void baseInitTest() {
-//        radioButtonCustom.radioButton.is()
-//                .size(2);
+        radioButtonCustom.radioButton.is()
+                .size(2);
         radioButtonCustom.radio1.is()
                 .deselected();
         radioButtonCustom.radio2.is()
@@ -47,32 +45,28 @@ public class RadioButtonCustomTests extends TestsInit {
     @Test
     public void radioButtonByIndexTests() {
         radioButtonCustom.radioButton.select(2);
-        radioButtonCustom.radioButton.get(2).is()
+        radioButtonCustom.radio2.is()
                 .selected();
-        radioButtonCustom.radioButton.get(1).is()
+        radioButtonCustom.radio1.is()
                 .deselected();
         radioButtonCustom.radioButton.select(1);
-        radioButtonCustom.radioButton.get(1).is()
+        radioButtonCustom.radio1.is()
                 .selected();
-        radioButtonCustom.radioButton.get(2).is()
+        radioButtonCustom.radio2.is()
                 .deselected();
     }
 
     @Test
     public void radioButtonByLabelTests() {
         radioButtonCustom.radio2Label.click();
-        radioButtonCustom.radioButton.get(2).is()
+        radioButtonCustom.radio2.is()
                 .selected();
-        radioButtonCustom.radioButton.is()
-                .text(is(value2));
-        radioButtonCustom.radioButton.get(1).is()
+        radioButtonCustom.radio1.is()
                 .deselected();
         radioButtonCustom.radio1Label.click();
-        radioButtonCustom.radioButton.get(1).is()
+        radioButtonCustom.radio1.is()
                 .selected();
-        radioButtonCustom.radioButton.is()
-                .text(is(value1));
-        radioButtonCustom.radioButton.get(2).is()
+        radioButtonCustom.radio2.is()
                 .deselected();
     }
 
