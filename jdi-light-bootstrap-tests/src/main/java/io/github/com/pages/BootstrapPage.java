@@ -9,6 +9,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
@@ -193,6 +194,7 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
     @UI(".card-columns") public static CardColumns cardColumns;
+    @UI("body") public static Popover popover;
     @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
     @UI("body") public static RadioButtonsDefaultInline radioButtonsDefaultInline;
     @UI("body") public static CheckboxesDefault checkboxesDefault;
@@ -206,5 +208,18 @@ public class BootstrapPage extends WebPage {
     @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
     @UI("#button-with-growing-spinner-and-text") public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
     @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
+    //Toasts
+    @UI("#toastRightTop") public static Toast toastWithTopAlign;
+    @UI("#linkToastRightTop") public static Button toastWithTopAlignButton;
+    @UI("#simpleToast") public static Toast simpleToast;
+    @UI("#linkSimpleToastExample") public static Button simpleToastButton;
+    @UI("#multipleToast") public static Button stackOfToastsButton;
+    @UI("#firstMultipleToast") public static Toast firstStackToast;
+    @UI("#secondMultipleToast") public static Toast secondStackToast;
+    @UI("#linkStackAlign") public static Button stackOfToastsWithTopAlignButton;
+    @UI("#firstStackToast") public static Toast firstTopAlignStackToast;
+    @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
+    @UI("#linkToastCenterTop") public static Toast toastWithCenterAlignButton;
+    @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
     //endregion
 }
