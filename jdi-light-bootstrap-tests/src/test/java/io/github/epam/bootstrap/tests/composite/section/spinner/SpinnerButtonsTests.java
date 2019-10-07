@@ -16,6 +16,7 @@ import static io.github.com.pages.BootstrapPage.buttonWithSpinnerAndText;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertTrue;
 
 public class SpinnerButtonsTests extends TestsInit {
 
@@ -38,7 +39,7 @@ public class SpinnerButtonsTests extends TestsInit {
 
     @Test()
     public void checkButtonText() {
-        buttonWithSpinnerAndText.isDisplayed();
+        assertTrue(buttonWithSpinnerAndText.isDisplayed());
         buttonWithSpinnerAndText.assertThat().text(is(buttonText));
     }
 
@@ -54,7 +55,7 @@ public class SpinnerButtonsTests extends TestsInit {
 
     @Test()
     public void checkButtonWithoutText() {
-        buttonWithSpinner.span.isHidden();
+        buttonWithSpinner.span.assertThat().core().css("overflow", "hidden");
         buttonWithSpinnerAndText.assertThat().text(is(buttonText));
     }
 
@@ -63,33 +64,22 @@ public class SpinnerButtonsTests extends TestsInit {
         buttonWithGrowingSpinnerAndText.assertThat().text(is(buttonText));
     }
 
-
     @Test(dataProvider = "buttonsWithGrowingSpinners")
     public void spinnerGrowTest(ButtonWithSpinner buttonWithSpinner) {
         for (int i = 0; i < 7; i++) {
             buttonWithSpinner.spinner.highlight();
-
-            double firstSnapshot = WebDriverFactory.jsExecute(
-                    "var x = document.getElementsByClassName('spinner-grow')[" + i + "].children;" +
-                            "var y = x[0];" +
-                            "return y.getBoundingClientRect().width;"
-            );
-
+            double firstSnapshot = takeSnaphot(i);
             $("body").waitFor().displayed();
-
-            double secondSnapshot = WebDriverFactory.jsExecute(
-                    "var x = document.getElementsByClassName('spinner-grow')[" + i + "].children;" +
-                            "var y = x[0];" +
-                            "return y.getBoundingClientRect().width;"
-            );
-
+            double secondSnapshot = takeSnaphot(i);
             assertNotEquals(firstSnapshot, secondSnapshot);
         }
     }
 
-
+    private double takeSnaphot(int index) {
+        return WebDriverFactory.jsExecute(
+                "var x = document.getElementsByClassName('spinner-grow')[" + index + "].children;" +
+                        "var y = x[0];" +
+                        "return y.getBoundingClientRect().width;"
+        );
+    }
 }
-
-
-
-
