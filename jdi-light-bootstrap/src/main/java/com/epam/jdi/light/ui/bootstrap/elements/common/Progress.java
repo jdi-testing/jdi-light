@@ -15,6 +15,11 @@ public class Progress extends UIBaseElement<ProgressAssert> {
         return uiElement.core().attr("aria-valuenow");
     }
 
+    @JDIAction(value = "Get '{name}' style")
+    public String getStyle() {
+        return uiElement.core().attr("style");
+    }
+
     @JDIAction(value = "Get '{name}' max limit")
     public String getMaxValue() {
         return uiElement.attr("aria-valuemax");
