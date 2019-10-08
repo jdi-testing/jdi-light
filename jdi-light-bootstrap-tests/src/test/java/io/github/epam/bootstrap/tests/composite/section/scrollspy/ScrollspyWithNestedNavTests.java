@@ -1,9 +1,12 @@
 package io.github.epam.bootstrap.tests.composite.section.scrollspy;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
@@ -12,6 +15,8 @@ import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertFalse;
 
 public class ScrollspyWithNestedNavTests extends TestsInit {
     private String itemLink = "https://jdi-testing.github.io/jdi-light/bootstrap.html#";
@@ -39,14 +44,11 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
     private String mainText31 = "Deserunt quis elit Lorem eiusmod amet enim enim amet minim Lorem proident nostrud. Ea id dolore anim exercitation aute fugiat labore voluptate cillum do laboris labore. Ex velit exercitation nisi enim labore reprehenderit labore nostrud ut ut. Esse officia sunt duis aliquip ullamco tempor eiusmod deserunt irure nostrud irure. Ullamco proident veniam laboris ea consectetur magna sunt ex exercitation aliquip minim enim culpa occaecat exercitation. Est tempor excepteur aliquip laborum consequat do deserunt laborum esse eiusmod irure proident ipsum esse qui.";
     private String mainText32 = "Labore sit culpa commodo elit adipisicing sit aliquip elit proident voluptate minim mollit nostrud aute reprehenderit do. Mollit excepteur eu Lorem ipsum anim commodo sint labore Lorem in exercitation velit incididunt. Occaecat consectetur nisi in occaecat proident minim enim sunt reprehenderit exercitation cupidatat et do officia. Aliquip consequat ad labore labore mollit ut amet. Sit pariatur tempor proident in veniam culpa aliqua excepteur elit magna fugiat eiusmod amet officia.";
 
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-   /* nestedNav;
-    scrollspyWithNestedNav;*/
 
     @DataProvider
     public Object[][] listData() {
@@ -74,9 +76,53 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
         };
     }
 
+    @DataProvider
+    public Object[][] indexes() {
+        return new Object[][]{
+                {1, paragraphN1},
+                {2, paragraphN11},
+                {3, paragraphN12},
+                {4, paragraphN2},
+                {5, paragraphN3},
+                {6, paragraphN31},
+                {7, paragraphN32}
+        };
+    }
+
     @Test(dataProvider = "listData", priority = 1)
     public void mainContentTests(int index, String link, String header, String paragraph, String mainText) {
         refresh();
+
+         nestedNav.navItemLink.get(index).is()
+                .core()
+                .displayed()
+                .enabled()
+                .text(is(header))
+                .value(is(header))
+                .attr("href", is(link));
+
+        scrollspyWithNestedNav.header.get(index).is()
+                .core()
+                .displayed()
+                .enabled()
+                .text(is(header.toUpperCase()))
+                .value(is(header.toUpperCase()))
+                .attr("id", is(paragraph));
+
+        scrollspyWithNestedNav.mainText.get(index).is()
+                .core()
+                .displayed()
+                .enabled()
+                .text(is(mainText))
+                .value(is(mainText));
+    }
+
+    @Test
+    public void isValidationTests() {
+        nestedNav.navItemLink.is().size(7);
+        nestedNav.navGroup.is().size(3);
+        scrollspyWithNestedNav.mainText.is().size(7);
+        scrollspyWithNestedNav.header.is().size(7);
 
         nestedNav.navbarLink.is()
                 .core()
@@ -86,111 +132,36 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .value(is(navbarText))
                 .text(is(navbarText))
                 .cssClass("navbar-brand");
-          //      .attr("color","rgba(0,0,0,.9)"); //rgba(0,0,0,.9) Color Hex
-/*
 
-        nestedNav.navGroup.get(index).is()
-                .core()
-                .displayed()
-                .enabled()
-                .cssClass("nav nav-pills flex-column");
-*/
-
-        nestedNav.navItemLink.get(index).is()
-                .core()
-                .displayed()
-                .enabled()
-                .text(header)
-                .value(header)
-                .attr("href", link);
-
-        scrollspyWithNestedNav.header.get(index).is()
-                .core()
-                .displayed()
-                .enabled()
-                .text(header.toUpperCase())
-                .value(header.toUpperCase())
-                .attr("id", paragraph);
-
-        scrollspyWithNestedNav.mainText.get(index).is()
-                .core()
-                .displayed()
-                .enabled()
-                .text(mainText)
-                .value(mainText);
-
-/*        nestedNav.get(index)
-                .is()
-                .core()
-                .displayed()
-                .enabled()
-                .attr("href", is(link))
-                .value(is(header))
-                .text(is(header));
-
-        if (index == 1) nestedNav.get(index)
-                .is()
-                .cssClass("list-group-item list-group-item-action active")
-                .css("background-color", "rgba(0, 123, 255, 1)") //#007bff Color Hex
-                .css("border-color", "rgb(0, 123, 255)"); //#007bff Color Hex
-        else nestedNav.get(index)
-                .is()
-                .cssClass("list-group-item list-group-item-action")
-                .css("background-color", "rgba(255, 255, 255, 1)"); //#fff Color Hex
+        for (UIElement element: nestedNav.navGroup.list())
+        {
+            element.is()
+                    .core()
+                    .displayed()
+                    .enabled()
+                    .cssClass("nav nav-pills flex-column");
+        }
 
         scrollspyWithNestedNav.is()
                 .core()
                 .displayed()
                 .enabled()
                 .attr("data-spy", is("scroll"))
-                .attr("data-target", is("#list-example"))
+                .attr("data-target", is("#navbar-example3"))
                 .attr("data-offset", is("0"))
-                .cssClass("scrollspy-example");
-
-        scrollspyWithNestedNav.header.get(index)
-                .is()
-                .core()
-                .displayed()
-                .enabled()
-                .text(is(header.toUpperCase()))
-                .value(is(header.toUpperCase()))
-                .attr("id", is(paragraph));
-
-        scrollspyWithNestedNav.mainText.get(index)
-                .is()
-                .core()
-                .displayed()
-                .enabled()
-                .text(is(mainText))
-                .value(is(mainText));*/
+                .cssClass("scrollspy-example-2");
     }
 
- /*   @Test
-    public void isValidationTests() {
-        scrollspyWithNestedNav.header.is()
-                .size(4);
-        scrollspyWithNestedNav.mainText.is()
-                .size(4);
-        nestedNav.is()
-                .size(4);
-    }
 
     @Test(dataProvider = "clickValidate")
     public void linkClickableTests(int index, String paragraph, String header, String mainText) {
         refresh();
-        int y_Start = scrollspyWithNestedNav.header.get(1).core().getLocation().y + 4;
-        nestedNav.get(index).highlight();
-        nestedNav.get(index).click();
-
-        int y_Current = scrollspyWithNestedNav.header.get(index).core().getLocation().y;
-
-        nestedNav.get(index)
+        nestedNav.navItemLink.get(index)
                 .is()
                 .core()
                 .displayed()
-                .enabled()
-                .cssClass("list-group-item list-group-item-action active")
-                .css("background-color", "rgba(0, 123, 255, 1)");//#007bff Color Hex
+                .enabled();
+
         scrollspyWithNestedNav.header.get(index).is()
                 .text(is(header.toUpperCase()))
                 .value(is(header.toUpperCase()))
@@ -200,8 +171,54 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .text(is(mainText))
                 .value(is(mainText));
 
-        assertEquals(y_Start, y_Current);
-        nestedNav.get(index).unhighlight();
+        nestedNav.navItemLink.get(index).unhighlight();
+    }
+
+    @Test(dataProvider = "clickValidate")
+    public void linkClickableFocusTests(int index, String paragraph, String header, String mainText) {
+        refresh();
+        nestedNav.navItemLink.get(1).click();
+
+        int y_header_start = scrollspyWithNestedNav.header.get(1).core().getRect().y;
+
+        nestedNav.navItemLink.get(index).highlight();
+        nestedNav.navItemLink.get(index).click();
+
+        int y_header_current = scrollspyWithNestedNav.header.get(index).core().getRect().y;
+
+        if (index!=7)
+            assertEquals(y_header_start, y_header_current - 6);
+        else
+            assertEquals(y_header_start, y_header_current - 92);
+
+        nestedNav.navItemLink.get(index).unhighlight();
+    }
+
+    @Test
+    public void highlightFocusedItemsTests() {
+        nestedNav.navItemLink.get(7).highlight();
+        nestedNav.navItemLink.get(7).click();
+
+        for (int i = 1; i <= nestedNav.navItemLink.size(); i++) {
+            if (i != 7 && i != 5) {
+                assertTrue(nestedNav.navItemLink.get(i).hasClass("nav-link"));
+                assertFalse(nestedNav.navItemLink.get(i).hasClass("active"));
+            }
+        }
+
+        nestedNav.navItemLink.get(7).is()
+                .core()
+                .displayed()
+                .enabled()
+                .cssClass("nav-link ml-3 my-1 active");
+
+        nestedNav.navItemLink.get(5).is()
+                .core()
+                .displayed()
+                .enabled()
+                .cssClass("nav-link active");
+
+        nestedNav.navItemLink.get(7).unhighlight();
     }
 
     @Test(dataProvider = "clickValidate")
@@ -210,24 +227,18 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
         scrollspyWithNestedNav.mainText.get(index).highlight();
         scrollspyWithNestedNav.mainText.get(index).show();
 
-        if (nestedNav.get(index).core().hasClass("list-group-item list-group-item-action"))
+        if (!nestedNav.navItemLink.get(index).core().hasClass("active") &&
+                index < nestedNav.navItemLink.size())
             scrollspyWithNestedNav.header.get(index+1).show();
 
-        nestedNav.get(index)
-                .is()
-                .core()
-                .displayed()
-                .enabled()
-                .cssClass("list-group-item list-group-item-action active")
-                .css("background-color", "rgba(0, 123, 255, 1)")//#007bff Color Hex
-                .css("border-color", "rgb(0, 123, 255)");//#007bff Color Hex
+        assertTrue(nestedNav.navItemLink.get(index).hasClass("active"));
 
-        nestedNav.get(index).unhighlight();
+        nestedNav.navItemLink.get(index).unhighlight();
     }
 
+    @Test
     public void baseValidationTest() {
         baseValidation(scrollspyWithNestedNav);
         baseValidation(nestedNav);
-    }*/
-
+    }
 }

@@ -208,7 +208,7 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
     @UI(".card-columns") public static CardColumns cardColumns;
-    @UI("#list-example a") public static ListGroup listGroupForScrollspy;
+    @UI("#list-example>a") public static ListGroup listGroupForScrollspy;
     @UI("#list-example~div") public static ScrollspyWithListGroup scrollspyWithListGroup;
     @UI("#navbar-example3") public static NestedNav nestedNav;
     @UI("#navbar-example3~div") public static ScrollspyWithNestedNav scrollspyWithNestedNav;

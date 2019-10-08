@@ -1,5 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.scrollspy;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -149,12 +150,13 @@ public class ScrollspyWithListGroupTests extends TestsInit {
     }
 
     @Test(dataProvider = "clickValidate")
-    public void paragraphClickableTests(int index, String paragraph, String header, String mainText) {
+    public void paragraphClickableTests(int index) {
         refresh();
         scrollspyWithListGroup.mainText.get(index).highlight();
         scrollspyWithListGroup.mainText.get(index).show();
 
-       if (listGroupForScrollspy.get(index).core().hasClass("list-group-item list-group-item-action"))
+       if (listGroupForScrollspy.get(index).core().hasClass("list-group-item list-group-item-action") &&
+               index < scrollspyWithListGroup.header.size())
            scrollspyWithListGroup.header.get(index+1).show();
 
         listGroupForScrollspy.get(index)
@@ -169,8 +171,11 @@ public class ScrollspyWithListGroupTests extends TestsInit {
         listGroupForScrollspy.get(index).unhighlight();
     }
 
+    @Test
     public void baseValidationTest() {
         baseValidation(scrollspyWithListGroup);
-        baseValidation(listGroupForScrollspy);
+        for (UIElement element:listGroupForScrollspy.list()){
+            baseValidation(element);
+        }
     }
 }
