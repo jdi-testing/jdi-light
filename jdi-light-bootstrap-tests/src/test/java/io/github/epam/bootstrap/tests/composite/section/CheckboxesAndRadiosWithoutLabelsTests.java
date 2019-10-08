@@ -38,9 +38,9 @@ public class CheckboxesAndRadiosWithoutLabelsTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
+                .value("option1")
                 .attr("type", "radio")
                 .attr("aria-label", "...")
-                .attr("value", "option1")
                 .hasClass("form-check-input position-static")
                 .tag(is("input"));
     }
