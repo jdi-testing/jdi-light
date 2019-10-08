@@ -6,21 +6,8 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.*;
-
-import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
-import com.epam.jdi.light.ui.bootstrap.elements.common.*;
-import com.epam.jdi.light.ui.bootstrap.elements.common.*;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
-import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
-
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
@@ -66,6 +53,7 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-bar-base-width-50 .progress-bar") public static Progress progressBaseWidth50;
     @UI("#progress-bar-base-width-75 .progress-bar") public static Progress progressBaseWidth75;
     @UI("#progress-bar-base-width-100 .progress-bar") public static Progress progressBaseWidth100;
+    @UI("#progress-animated") public static Progress progressAnimated;
     @UI("#progress-with-labels") public static Progress progressWithLabels;
     @UI("#progress-backgrounds-green") public static Progress progressBackgroundGreen;
     @UI("#progress-backgrounds-blue") public static Progress progressBackgroundBlue;
@@ -222,7 +210,10 @@ public class BootstrapPage extends WebPage {
     @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
     @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
-
+    @UI("#button-with-spinner-and-text") public static ButtonWithSpinner buttonWithSpinnerAndText;
+    @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
+    @UI("#button-with-growing-spinner-and-text") public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
+    @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
     //Toasts
     @UI("#toastRightTop") public static Toast toastWithTopAlign;
     @UI("#linkToastRightTop") public static Button toastWithTopAlignButton;
@@ -236,5 +227,6 @@ public class BootstrapPage extends WebPage {
     @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
     @UI("#linkToastCenterTop") public static Toast toastWithCenterAlignButton;
     @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
+    @UI("#custom-radio-con") public static RadioButtonsCustom radioButtonCustom;
     //endregion
 }

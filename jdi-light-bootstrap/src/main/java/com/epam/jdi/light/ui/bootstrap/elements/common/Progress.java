@@ -10,9 +10,19 @@ public class Progress extends UIBaseElement<ProgressAssert> {
         return uiElement.core().css("background-color");
     }
 
-    @JDIAction(value = "Get '{name}' width")
+    @JDIAction(value = "Get '{name}' progress value")
     public String getAriaValue() {
         return uiElement.core().attr("aria-valuenow");
+    }
+
+    @JDIAction(value = "Get '{name}' max limit")
+    public String getMaxValue() {
+        return uiElement.attr("aria-valuemax");
+    }
+
+    @JDIAction(value = "Get '{name}' min limit")
+    public String getMinValue() {
+        return uiElement.attr("aria-valuemin");
     }
 
     @Override
