@@ -25,9 +25,9 @@ public class EnabledElementMockTests {
     public Object[][] combinations() {
         return new Object[][]{
                 {active, disabledByClass, disabledByAttribute, webElementEnabled, isEnabled},
+                {active, disabledByClass, disabledByAttribute, !webElementEnabled, isEnabled},
                 {active, disabledByClass, !disabledByAttribute, webElementEnabled, isEnabled},
                 {active, disabledByClass, !disabledByAttribute, !webElementEnabled, isEnabled},
-                {active, disabledByClass, disabledByAttribute, !webElementEnabled, isEnabled},
 
                 {active, !disabledByClass, disabledByAttribute, webElementEnabled, isEnabled},
                 {active, !disabledByClass, disabledByAttribute, !webElementEnabled, isEnabled},

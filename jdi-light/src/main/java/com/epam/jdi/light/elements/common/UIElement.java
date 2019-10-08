@@ -619,14 +619,11 @@ public class UIElement extends JDIBase
     }
     protected boolean enabled() {
         if (hasClass("active")) {
-            System.out.println("hasClass Called");
             return true;
         }
         if (hasClass("disabled") || hasAttribute("disabled")) {
-            System.out.println("hasClass and hasAttr Called");
             return false;
         }
-        System.out.println("getWebElement Called");
         return getWebElement().isEnabled();
     }
     protected boolean displayed() {

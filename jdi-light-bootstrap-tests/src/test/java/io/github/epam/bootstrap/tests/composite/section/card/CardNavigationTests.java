@@ -94,11 +94,10 @@ public class CardNavigationTests extends TestsInit {
         validateAlert(is(activeLinkAlert));
 
         cardNavigation.jdiLink.click();
-        WindowsManager windowsManager = new WindowsManager();
-        windowsManager.switchToWindow(2);
+        WindowsManager.switchToWindow(2);
         assertEquals(getUrl() , jdiLinkRef);
-        windowsManager.closeWindow();
-        windowsManager.switchToWindow(1);
+        WindowsManager.closeWindow();
+        WindowsManager.switchToWindow(1);
     }
 
     @Test
