@@ -116,7 +116,7 @@ public final class UIUtils {
             throw exception("Can't get entity from '" + getName(obj) + "' for class: " + entityClass.getClass());
         }
     }
-    private static String getName(Object obj) {
+    public static String getName(Object obj) {
         return isInterface(obj.getClass(), INamed.class)
             ? ((INamed)obj).getName()
             : obj.getClass().getSimpleName();

@@ -31,7 +31,7 @@ public class BSActions {
             if (aroundCount() > 1)
                 return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
-            Object result = stableAction(jp);
+            Object result = STABLE_ACTION.execute(jp);
             if (aroundCount() == 1)
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);

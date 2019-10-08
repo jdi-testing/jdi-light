@@ -93,6 +93,16 @@ public class WebSettings {
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
+
+    private static String EYES_CHECK = "eyes.check";
+    public static String APPLICATION_NAME = "";
+    public static boolean EYES_ENABLED = false;
+    public static boolean EYES_CHECK_NEW_PAGE = false;
+    public static boolean EYES_CHECK_ON_TEST_START = false;
+    public static boolean EYES_CHECK_AFTER_ASSERTION = false;
+    public static boolean EYES_CHECK_AFTER_JDI_ASSERTION = false;
+    public static boolean EYES_CHECK_WITH_PROCESSED_ELEMENT = false;
+
     public static String useDriver(JFunc<WebDriver> driver) {
         return WebDriverFactory.useDriver(driver);
     }
@@ -140,6 +150,16 @@ public class WebSettings {
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
         fillAction(SoftAssert::setAssertType, "assert.type");
+
+
+        //Applitools eyes settings
+        fillAction(p -> APPLICATION_NAME = p, "application.name");
+        fillAction(p -> EYES_ENABLED = p.equals("true"), "eyes.enabled");
+        fillAction(p -> EYES_CHECK_NEW_PAGE = EYES_ENABLED && p.contains("new page"), EYES_CHECK);
+        fillAction(p -> EYES_CHECK_AFTER_JDI_ASSERTION = EYES_ENABLED && p.contains("after jdi assertion"), EYES_CHECK);
+        fillAction(p -> EYES_CHECK_AFTER_ASSERTION = EYES_ENABLED && p.contains("after assertion"), EYES_CHECK);
+        fillAction(p -> EYES_CHECK_ON_TEST_START = EYES_ENABLED && p.contains("on test start"), EYES_CHECK);
+        fillAction(p -> EYES_CHECK_WITH_PROCESSED_ELEMENT = EYES_ENABLED && p.contains("with processed element"), EYES_CHECK);
 
         // RemoteWebDriver properties
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");

@@ -51,6 +51,7 @@ public class ActionHelper {
     static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
     }
+
     public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = jp -> {
         try {
             MethodSignature method = getJpMethod(jp);
@@ -63,6 +64,7 @@ public class ActionHelper {
                     "Can't get action name: " + safeException(ex));
         }
     };
+
     public static String fillTemplate(String template,
         ProceedingJoinPoint jp, MethodSignature method) {
         try {
@@ -93,12 +95,14 @@ public class ActionHelper {
     public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
         logger.toLog(getBeforeLogString(jp), logLevel(jp));
     };
+
     public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = jp -> {
         BEFORE_STEP_ACTION.execute(jp);
         processNewPage(jp);
     };
 
     public static int CUT_STEP_TEXT = 70;
+
     public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
         if (!logResult(jp)) return result;
         LogLevels logLevel = logLevel(jp);
@@ -154,12 +158,14 @@ public class ActionHelper {
     }
 
     public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
-    static WebPage getPage(Object element) {
-        if (isClass(element.getClass(), DriverBase.class) &&
-            !isClass(element.getClass(), WebPage.class))
-            return ((DriverBase) element).getPage();
-        return null;
+
+    public static WebPage getPage(Object element) {
+        if (!isClass(element.getClass(), DriverBase.class)) {
+            return null;
+        }
+        return isClass(element.getClass(), WebPage.class) ? (WebPage) element : ((DriverBase) element).getPage();
     }
+
     public static MethodSignature getJpMethod(JoinPoint joinPoint) {
         return (MethodSignature) joinPoint.getSignature();
     }
@@ -179,6 +185,7 @@ public class ActionHelper {
                     "Can't get method name template: " + safeException(ex));
         }
     }
+
     static LogLevels logLevel(JoinPoint joinPoint) {
         Method m = getJpMethod(joinPoint).getMethod();
         return m.isAnnotationPresent(JDIAction.class)
@@ -208,6 +215,7 @@ public class ActionHelper {
         IGNORE_NOT_UNIQUE = false;
         return map;
     }
+
     static Object[] getArgs(JoinPoint jp) {
         Object[] args = jp.getArgs();
         if (args.length == 1 && args[0] == null)
@@ -231,6 +239,7 @@ public class ActionHelper {
         }
         return new MapArray<>();
     }
+
     static MapArray<String, Object> classFields(Object obj) {
         return obj != null ? getAllFields(obj) : new MapArray<>();
     }
@@ -246,6 +255,7 @@ public class ActionHelper {
             throw exception("Can't get element name");
         }
     }
+
     static String getActionNameFromTemplate(MethodSignature method, String value,
                                             MapArray<String, Object>... args) {
         String result;

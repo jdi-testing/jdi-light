@@ -11,20 +11,32 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SoftAssert {
+
     private static Safe<List<String>> listOfErrors = new Safe<>(new ArrayList<>());
+
     private static boolean IS_SOFT_ASSERT = false;
 
     public static void setAssertType(String type) {
         IS_SOFT_ASSERT = type.equalsIgnoreCase("soft");
         clearResults();
     }
+
     public static void assertSoft() {
         setAssertType("soft");
     }
+
     public static void assertStrict() {
         setAssertType("strict");
     }
+
+    //region public static <T> void jdiAssert(List<T> actual, Matcher<? super List<T>> matcher)
     public static <T> void jdiAssert(List<T> actual, Matcher<? super List<T>> matcher) {
+        JDI_ASSERT_FOR_LIST_ENTRY.is(actual, matcher);
+    }
+
+    //added for possibility overriding jdiAssert method
+    public static JComparisonList JDI_ASSERT_FOR_LIST_ENTRY = SoftAssert::jdi_assert_for_list_entry;
+    public static <T> void jdi_assert_for_list_entry(List<T> actual, Matcher<? super List<T>> matcher) {
         try {
             assertThat(actual, matcher);
         } catch (Throwable error) {
@@ -34,7 +46,16 @@ public class SoftAssert {
                 throw new AssertionError(error);
         }
     }
+    //endregion
+
+    //region public static <T> void jdiAssert(T actual, Matcher<? super T> matcher)
     public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
+        JDI_ASSERT_FOR_SINGLE_ENTRY.is(actual, matcher);
+    }
+
+    //added for possibility overriding jdiAssert method
+    public static JComparison1 JDI_ASSERT_FOR_SINGLE_ENTRY = SoftAssert::jdi_assert_for_single_entry;
+    public static <T> void jdi_assert_for_single_entry(T actual, Matcher<? super T> matcher) {
         try {
             assertThat(actual, matcher);
             logger.debug(">>> " + actual);
@@ -45,9 +66,12 @@ public class SoftAssert {
                 throw new AssertionError(error);
         }
     }
+    //endregion
+
     private static void addError(Throwable error) {
         listOfErrors.get().add(error.getMessage().replace("java.lang.AssertionError: ", ""));
     }
+
     public static List<String> getErrors() {
         List<String> errors = new ArrayList<>(listOfErrors.get());
         clearResults();
