@@ -76,19 +76,6 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
         };
     }
 
-    @DataProvider
-    public Object[][] indexes() {
-        return new Object[][]{
-                {1, paragraphN1},
-                {2, paragraphN11},
-                {3, paragraphN12},
-                {4, paragraphN2},
-                {5, paragraphN3},
-                {6, paragraphN31},
-                {7, paragraphN32}
-        };
-    }
-
     @Test(dataProvider = "listData", priority = 1)
     public void mainContentTests(int index, String link, String header, String paragraph, String mainText) {
         refresh();
@@ -151,7 +138,6 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .attr("data-offset", is("0"))
                 .cssClass("scrollspy-example-2");
     }
-
 
     @Test(dataProvider = "clickValidate")
     public void linkClickableTests(int index, String paragraph, String header, String mainText) {
