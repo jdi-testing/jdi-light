@@ -3,11 +3,9 @@
 <suite name="Test suite" parallel="methods" thread-count="1">
     <test name="Tests">
         <packages>
-            <package name="io.github.epam.html.tests.elements.common"/>
-            <package name="io.github.epam.html.tests.elements.complex"/>
-            <package name="io.github.epam.html.tests.elements.composite.*"/>
-            <package name="io.github.epam.html.tests.site"/>
-            <package name="io.github.epam.html.tests.suspend"/>
+            <package name="io.github.epam.bootstrap.tests.common"/>
+            <package name="io.github.epam.bootstrap.tests.complex"/>
+            <package name="io.github.epam.bootstrap.tests.composite.*"/>
         </packages>
     </test>
     <listeners>
