@@ -238,8 +238,10 @@ public class BootstrapPage extends WebPage {
     @UI("#linkStackAlign") public static Button stackOfToastsWithTopAlignButton;
     @UI("#firstStackToast") public static Toast firstTopAlignStackToast;
     @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
-    @UI("#linkToastCenterTop") public static Toast toastWithCenterAlignButton;
+    @UI("#linkToastCenterTop") public static Button toastWithCenterAlignButton;
     @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
+    @UI("#translucentToastButton") public static Button translucentToastButton;
+    @UI("#translucentToast") public static Toast translucentToast;
     @UI("#custom-radio-con") public static RadioButtonsCustom radioButtonCustom;
     //endregion
 }
