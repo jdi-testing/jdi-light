@@ -13,6 +13,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.composite.section.navs.ClickVerification.newWindowTitleCheck;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -97,6 +98,7 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .value(is(header))
                 .attr("href", is(link));
 
+
         scrollspyWithNestedNav.header.get(index).is()
                 .core()
                 .displayed()
@@ -111,7 +113,7 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .enabled()
                 .text(is(mainText))
                 .value(is(mainText));
-    }
+}
 
     @Test
     public void isValidationTests() {
@@ -146,39 +148,6 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .attr("data-target", is("#navbar-example3"))
                 .attr("data-offset", is("0"))
                 .cssClass("scrollspy-example-2");
-    }
-
-    @Test(dataProvider = "clickValidate")
-    public void linkClickableTests(int index, String paragraph, String header, String mainText) {
-        refresh();
-        nestedNav.navItemLink.get(index)
-                .is()
-                .core()
-                .displayed()
-                .enabled();
-
-        scrollspyWithNestedNav.header.get(index).is()
-                .text(is(header.toUpperCase()))
-                .value(is(header.toUpperCase()))
-                .core().attr("id", is(paragraph));
-
-        scrollspyWithNestedNav.mainText.get(index).is()
-                .text(is(mainText))
-                .value(is(mainText));
-
-        nestedNav.navItemLink.get(index).unhighlight();
-    }
-
-    @Test
-    public void navbarLinkClickableTests() {
-        nestedNav.navbarLink.click();
-
-        switchToWindow(2);
-
-        assertThat(WebPage.getTitle(), is(pageTitle));
-
-        closeWindow();
-        switchToWindow(1);
     }
 
     @Test(dataProvider = "itemsCheck")
@@ -240,6 +209,12 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
 
         assertTrue(nestedNav.navItemLink.get(index).hasClass("active"));
         nestedNav.navItemLink.get(index).unhighlight();
+    }
+
+    @Test
+    public void navbarLinkClickableTests() {
+        nestedNav.navbarLink.click();
+        newWindowTitleCheck(pageTitle);
     }
 
     @Test

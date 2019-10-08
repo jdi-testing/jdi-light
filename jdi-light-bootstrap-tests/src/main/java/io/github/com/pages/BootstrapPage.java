@@ -212,8 +212,8 @@ public class BootstrapPage extends WebPage {
     @UI("#list-example~div") public static ScrollspyWithListGroup scrollspyWithListGroup;
     @UI("#navbar-example3") public static NestedNav nestedNav;
     @UI("#navbar-example3~div") public static ScrollspyWithNestedNav scrollspyWithNestedNav;
-    @UI("#navbar-example3") public static NestedNav nestedNav;
-    @UI("#navbar-example3~div") public static ScrollspyWithNestedNav scrollspyInNavbar;
+    @UI("#navbar-example2") public static NavbarWithDropdown navbarWithDropdown;
+    @UI("#navbar-example2~div") public static ScrollspyWithListGroup scrollspyInNavbar;
     @UI("body") public static Popover popover;
     @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
     @UI("body") public static RadioButtonsDefaultInline radioButtonsDefaultInline;
