@@ -1,11 +1,11 @@
 package io.github.epam.bootstrap.tests.composite.section.navbar;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.common.WindowsManager;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
@@ -13,19 +13,33 @@ import static io.github.com.pages.BootstrapPage.navbarNavWithDisabled;
 import static io.github.com.pages.BootstrapPage.navbarNavWithDropdown;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 public class NavbarNavsTests extends TestsInit {
 
     private String textNavbarBrandDisabled = "Navbar";
     private String textNavbarBrandWithDropdown = "Navbar";
-    private List<String> textLinksnavbarNavWithDisabled = asList("Home", "HTML 5", "Bootstrap", "Disabled");
-    private List<String> urlLinksnavbarNavWithDisabled = asList("https://jdi-testing.github.io/jdi-light/index.html", "https://jdi-testing.github.io/jdi-light/html5.html", "https://jdi-testing.github.io/jdi-light/bootstrap.html", "#");
-    private List<String> textLinksnavbarNavWithDropdown = asList("Home", "HTML 5", "Bootstrap", "Navbar");
-    private List<String> urlLinksnavbarNavWithDropdown = asList("https://jdi-testing.github.io/jdi-light/index.html", "https://jdi-testing.github.io/jdi-light/html5.html", "https://jdi-testing.github.io/jdi-light/bootstrap.html");
+
+    @DataProvider
+    public Object[][] linkNavbarDisabledTest() {
+        return new Object[][]{
+                {0, "Home\n(current)", "https://jdi-testing.github.io/jdi-light/index.html"},
+                {1, "HTML 5", "https://jdi-testing.github.io/jdi-light/html5.html"},
+                {2, "Bootstrap", "https://jdi-testing.github.io/jdi-light/bootstrap.html"},
+                {3, "Disabled", "#"},
+        };
+    }
+
+    @DataProvider
+    public Object[][] linkNavbarWithDropdownTest() {
+        return new Object[][]{
+                {0, "Home\n(current)", "https://jdi-testing.github.io/jdi-light/index.html"},
+                {1, "HTML 5", "https://jdi-testing.github.io/jdi-light/html5.html"},
+                {2, "Bootstrap", "https://jdi-testing.github.io/jdi-light/bootstrap.html"},
+                {3, "Navbar", "#"},
+        };
+    }
 
     @BeforeMethod
     public void before() {
@@ -67,45 +81,33 @@ public class NavbarNavsTests extends TestsInit {
         navbarNavWithDropdown.navbarBrand.is().text(textNavbarBrandWithDropdown);
     }
 
-    @Test
-    public void clickNavbarNavWithDisabledLinksTest() throws RuntimeException {
-        for (int i = 1; i < navbarNavWithDisabled.navbarLinks.size(); i++) {
-            navbarNavWithDisabled.navbarLinks.get(i).is().text(containsString(textLinksnavbarNavWithDisabled.get(i)));
-            try {
-                navbarNavWithDisabled.navbarLinks.get(i).click();
-                assertThat(WindowsManager.windowsCount(), is(2));
-                WindowsManager.switchToWindow(2);
-                assertThat(getUrl(), is(urlLinksnavbarNavWithDisabled.get(i)));
-                WindowsManager.closeWindow();
-            } catch (RuntimeException e) {
-                assertThat(e.getMessage(), containsString("is not clickable in any parts"));
-                break;
-            }
+    @Test(dataProvider = "linkNavbarDisabledTest")
+    public void clickNavbarNavWithDisabledLinksTest(int i, String text, String url) {
+        UIElement link = navbarNavWithDisabled.navbarLinks.get(i);
+        link.is().text(text);
+        if (link.isDisabled()) {
+            link.is().disabled();
+        } else {
+            link.click();
+            assertThat(WindowsManager.windowsCount(), is(2));
+            WindowsManager.switchToWindow(2);
+            assertThat(getUrl(), is(url));
+            WindowsManager.closeWindow();
         }
     }
 
-    @Test
-    public void clickNavbarNavWithDropdownLinksTest() throws RuntimeException {
-        for (int i = 1; i < navbarNavWithDropdown.navbarLinks.size(); i++) {
-            navbarNavWithDropdown.navbarLinks.get(i).is().text(containsString(textLinksnavbarNavWithDropdown.get(i)));
-            try {
-                navbarNavWithDropdown.navbarLinks.get(i).click();
-                if (navbarNavWithDropdown.navbarLinks.get(i).getAttribute("class").equals("nav-item dropdown show")) {
-                    break;
-                }
-                assertThat(WindowsManager.windowsCount(), is(2));
-                WindowsManager.switchToWindow(2);
-                assertThat(getUrl(), is(urlLinksnavbarNavWithDropdown.get(i)));
-                WindowsManager.closeWindow();
-            } catch (RuntimeException e) {
-                assertThat(e.getMessage(), containsString("is not clickable in any parts"));
-                break;
-            }
+    @Test(dataProvider = "linkNavbarWithDropdownTest")
+    public void clickNavbarNavWithDropdownLinksTest(int i, String text, String url) {
+        UIElement link = navbarNavWithDropdown.navbarLinks.get(i);
+        link.is().text(text);
+        if (link.getAttribute("class").equals("nav-item dropdown")) {
+            baseValidation(link);
+        } else {
+            link.click();
+            assertThat(WindowsManager.windowsCount(), is(2));
+            WindowsManager.switchToWindow(2);
+            assertThat(getUrl(), is(url));
+            WindowsManager.closeWindow();
         }
-    }
-
-    @Test
-    public void isDisabledItem() {
-        navbarNavWithDisabled.navbarLinks.get(3).is().disabled();
     }
 }
