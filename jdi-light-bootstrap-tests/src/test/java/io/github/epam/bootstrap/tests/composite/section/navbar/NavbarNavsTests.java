@@ -4,7 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
@@ -14,6 +13,7 @@ import static io.github.com.pages.BootstrapPage.navbarNavWithDisabled;
 import static io.github.com.pages.BootstrapPage.navbarNavWithDropdown;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
@@ -22,10 +22,10 @@ public class NavbarNavsTests extends TestsInit {
 
     private String textNavbarBrandDisabled = "Navbar";
     private String textNavbarBrandWithDropdown = "Navbar";
-    private List<String> textLinksnavbarNavWithDisabled = Arrays.asList("Home", "HTML 5", "Bootstrap", "Disabled");
-    private List<String> urlLinksnavbarNavWithDisabled = Arrays.asList("https://jdi-testing.github.io/jdi-light/index.html", "https://jdi-testing.github.io/jdi-light/html5.html", "https://jdi-testing.github.io/jdi-light/bootstrap.html", "#");
-    private List<String> textLinksnavbarNavWithDropdown = Arrays.asList("Home", "HTML 5", "Bootstrap", "Navbar");
-    private List<String> urlLinksnavbarNavWithDropdown = Arrays.asList("https://jdi-testing.github.io/jdi-light/index.html", "https://jdi-testing.github.io/jdi-light/html5.html", "https://jdi-testing.github.io/jdi-light/bootstrap.html");
+    private List<String> textLinksnavbarNavWithDisabled = asList("Home", "HTML 5", "Bootstrap", "Disabled");
+    private List<String> urlLinksnavbarNavWithDisabled = asList("https://jdi-testing.github.io/jdi-light/index.html", "https://jdi-testing.github.io/jdi-light/html5.html", "https://jdi-testing.github.io/jdi-light/bootstrap.html", "#");
+    private List<String> textLinksnavbarNavWithDropdown = asList("Home", "HTML 5", "Bootstrap", "Navbar");
+    private List<String> urlLinksnavbarNavWithDropdown = asList("https://jdi-testing.github.io/jdi-light/index.html", "https://jdi-testing.github.io/jdi-light/html5.html", "https://jdi-testing.github.io/jdi-light/bootstrap.html");
 
     @BeforeMethod
     public void before() {
