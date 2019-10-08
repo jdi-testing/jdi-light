@@ -11,7 +11,8 @@ import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.switchToWindow;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.nestedNav;
+import static io.github.com.pages.BootstrapPage.scrollspyWithNestedNav;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
@@ -19,32 +20,31 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertFalse;
 
-public class ScrollspyWithNestedNavTests extends TestsInit {
+public class ScrollspyInNavbarTests extends TestsInit {
     private String itemLink = "https://jdi-testing.github.io/jdi-light/bootstrap.html#";
-    private String navbarLink = "https://getbootstrap.com/docs/4.3/components/scrollspy/#example-with-nested-nav";
+    private String navbarLink = "https://getbootstrap.com/docs/4.3/components/scrollspy/#example-in-navbar";
     private String navbarText = "Navbar";
     private String pageTitle = "Scrollspy · Bootstrap";
-    private String paragraphN1 = "item-1";
-    private String paragraphN11 = "item-1-1";
-    private String paragraphN12 = "item-1-2";
-    private String paragraphN2 = "item-2";
-    private String paragraphN3 = "item-3";
-    private String paragraphN31 = "item-3-1";
-    private String paragraphN32 = "item-3-2";
-    private String header1 = "Item 1";
-    private String header11 = "Item 1-1";
-    private String header12 = "Item 1-2";
-    private String header2 = "Item 2";
-    private String header3 = "Item 3";
-    private String header31 = "Item 3-1";
-    private String header32 = "Item 3-2";
-    private String mainText1 = "Ex consequat commodo adipisicing exercitation aute excepteur occaecat ullamco duis aliqua id magna ullamco eu. Do aute ipsum ipsum ullamco cillum consectetur ut et aute consectetur labore. Fugiat laborum incididunt tempor eu consequat enim dolore proident. Qui laborum do non excepteur nulla magna eiusmod consectetur in. Aliqua et aliqua officia quis et incididunt voluptate non anim reprehenderit adipisicing dolore ut consequat deserunt mollit dolore. Aliquip nulla enim veniam non fugiat id cupidatat nulla elit cupidatat commodo velit ut eiusmod cupidatat elit dolore.";
-    private String mainText11 = "Amet tempor mollit aliquip pariatur excepteur commodo do ea cillum commodo Lorem et occaecat elit qui et. Aliquip labore ex ex esse voluptate occaecat Lorem ullamco deserunt. Aliqua cillum excepteur irure consequat id quis ea. Sit proident ullamco aute magna pariatur nostrud labore. Reprehenderit aliqua commodo eiusmod aliquip est do duis amet proident magna consectetur consequat eu commodo fugiat non quis. Enim aliquip exercitation ullamco adipisicing voluptate excepteur minim exercitation minim minim commodo adipisicing exercitation officia nisi adipisicing. Anim id duis qui consequat labore adipisicing sint dolor elit cillum anim et fugiat.";
-    private String mainText12 = "Cillum nisi deserunt magna eiusmod qui eiusmod velit voluptate pariatur laborum sunt enim. Irure laboris mollit consequat incididunt sint et culpa culpa incididunt adipisicing magna magna occaecat. Nulla ipsum cillum eiusmod sint elit excepteur ea labore enim consectetur in labore anim. Proident ullamco ipsum esse elit ut Lorem eiusmod dolor et eiusmod. Anim occaecat nulla in non consequat eiusmod velit incididunt.";
-    private String mainText2 = "Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.";
-    private String mainText3 = "Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur.";
-    private String mainText31 = "Deserunt quis elit Lorem eiusmod amet enim enim amet minim Lorem proident nostrud. Ea id dolore anim exercitation aute fugiat labore voluptate cillum do laboris labore. Ex velit exercitation nisi enim labore reprehenderit labore nostrud ut ut. Esse officia sunt duis aliquip ullamco tempor eiusmod deserunt irure nostrud irure. Ullamco proident veniam laboris ea consectetur magna sunt ex exercitation aliquip minim enim culpa occaecat exercitation. Est tempor excepteur aliquip laborum consequat do deserunt laborum esse eiusmod irure proident ipsum esse qui.";
-    private String mainText32 = "Labore sit culpa commodo elit adipisicing sit aliquip elit proident voluptate minim mollit nostrud aute reprehenderit do. Mollit excepteur eu Lorem ipsum anim commodo sint labore Lorem in exercitation velit incididunt. Occaecat consectetur nisi in occaecat proident minim enim sunt reprehenderit exercitation cupidatat et do officia. Aliquip consequat ad labore labore mollit ut amet. Sit pariatur tempor proident in veniam culpa aliqua excepteur elit magna fugiat eiusmod amet officia.";
+
+    private String paragraphFat = "fat";//@
+    private String paragraphMdo = "mdo";//@
+    private String paragraphOne = "one";
+    private String paragraphTwo = "two";
+    private String paragraphThree = "three";
+    private String dropdown = "Dropdown";
+
+    private String headerFat = "fat";
+    private String headerMdo = "mdo";
+    private String headerOne = "one";
+    private String headerTwo = "two";
+    private String headerThree = "three";
+
+    private String mainTextFat = "";
+    private String mainTextMdo = "";
+    private String mainTextOne = "";
+    private String mainTextTwo = "";
+    private String mainTextThree = "";
+
 
     @BeforeMethod
     public void before() {
@@ -55,41 +55,37 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
     @DataProvider
     public Object[][] listData() {
         return new Object[][]{
-                {1, itemLink + paragraphN1, header1, paragraphN1, mainText1},
-                {2, itemLink + paragraphN11, header11, paragraphN11, mainText11},
-                {3, itemLink + paragraphN12, header12, paragraphN12, mainText12},
-                {4, itemLink + paragraphN2, header2, paragraphN2, mainText2},
-                {5, itemLink + paragraphN3, header3, paragraphN3, mainText3},
-                {6, itemLink + paragraphN31, header31, paragraphN31, mainText31},
-                {7, itemLink + paragraphN32, header32, paragraphN32, mainText32}
+                {1, itemLink + paragraphFat, headerFat, paragraphFat, mainTextFat},
+                {2, itemLink + paragraphMdo, headerMdo, paragraphMdo, mainTextMdo},
+                {3, itemLink + paragraphOne, headerOne, paragraphOne, mainTextOne},
+                {4, itemLink + paragraphTwo, headerTwo, paragraphTwo, mainTextTwo},
+                {5, itemLink + paragraphThree, headerThree, paragraphThree, mainTextThree}
         };
     }
 
     @DataProvider
     public Object[][] clickValidate() {
         return new Object[][]{
-                {1, paragraphN1, header1, mainText1},
-                {2, paragraphN11, header11, mainText11},
-                {3, paragraphN12, header12, mainText12},
-                {4, paragraphN2, header2, mainText2},
-                {5, paragraphN3, header3, mainText3},
-                {6, paragraphN31, header31, mainText31},
-                {7, paragraphN32, header32, mainText32}
+                {1, paragraphFat, headerFat, mainTextFat},
+                {2, paragraphMdo, headerMdo, mainTextMdo},
+                {3, paragraphOne, headerOne, mainTextOne},
+                {4, paragraphTwo, headerTwo, mainTextTwo},
+                {5, paragraphThree, headerThree, mainTextThree}
         };
     }
 
     @DataProvider
     public Object[][] itemsCheck() {
         return new Object[][]{
-                {1}, {2}, {3}, {4}, {5}, {6}, {7}
+                {1}, {2}, {3}, {4}, {5}
         };
     }
 
-    @Test(dataProvider = "listData", priority = 1)
+/*    @Test(dataProvider = "listData", priority = 1)
     public void mainContentTests(int index, String link, String header, String paragraph, String mainText) {
         refresh();
 
-         nestedNav.navItemLink.get(index).is()
+        nestedNav.navItemLink.get(index).is()
                 .core()
                 .displayed()
                 .enabled()
@@ -111,9 +107,9 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .enabled()
                 .text(is(mainText))
                 .value(is(mainText));
-    }
+    }*/
 
-    @Test
+/*    @Test
     public void isValidationTests() {
         nestedNav.navItemLink.is().size(7);
         nestedNav.navGroup.is().size(3);
@@ -146,9 +142,9 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .attr("data-target", is("#navbar-example3"))
                 .attr("data-offset", is("0"))
                 .cssClass("scrollspy-example-2");
-    }
+    }*/
 
-    @Test(dataProvider = "clickValidate")
+/*    @Test(dataProvider = "clickValidate")
     public void linkClickableTests(int index, String paragraph, String header, String mainText) {
         refresh();
         nestedNav.navItemLink.get(index)
@@ -167,9 +163,9 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .value(is(mainText));
 
         nestedNav.navItemLink.get(index).unhighlight();
-    }
+    }*/
 
-    @Test
+/*    @Test
     public void navbarLinkClickableTests() {
         nestedNav.navbarLink.click();
 
@@ -179,9 +175,9 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
 
         closeWindow();
         switchToWindow(1);
-    }
+    }*/
 
-    @Test(dataProvider = "itemsCheck")
+/*    @Test(dataProvider = "itemsCheck")
     public void linkClickableFocusTests(int index) {
         refresh();
         nestedNav.navItemLink.get(1).click();
@@ -199,9 +195,9 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
             assertThat(y_header_start, is(y_header_current - 92));
 
         nestedNav.navItemLink.get(index).unhighlight();
-    }
+    }*/
 
-    @Test
+/*    @Test
     public void highlightFocusedItemsTests() {
         nestedNav.navItemLink.get(7).highlight();
         nestedNav.navItemLink.get(7).click();
@@ -226,9 +222,9 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .cssClass("nav-link active");
 
         nestedNav.navItemLink.get(7).unhighlight();
-    }
+    }*/
 
-    @Test(dataProvider = "itemsCheck")
+/*    @Test(dataProvider = "itemsCheck")
     public void paragraphClickableTests(int index) {
         refresh();
         scrollspyWithNestedNav.mainText.get(index).highlight();
@@ -240,11 +236,12 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
 
         assertTrue(nestedNav.navItemLink.get(index).hasClass("active"));
         nestedNav.navItemLink.get(index).unhighlight();
-    }
+    }*/
 
-    @Test
+/*    @Test
     public void baseValidationTest() {
         baseValidation(scrollspyWithNestedNav);
         baseValidation(nestedNav);
-    }
+    }*/
+
 }

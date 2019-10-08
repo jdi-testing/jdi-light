@@ -61,6 +61,13 @@ public class ScrollspyWithListGroupTests extends TestsInit {
         };
     }
 
+    @DataProvider
+    public Object[][] itemsCheck() {
+        return new Object[][]{
+                {1}, {2}, {3}, {4}
+        };
+    }
+
     @Test(dataProvider = "listData", priority = 1)
     public void mainContentTests(int index, String link, String header, String paragraph, String mainText) {
         refresh();
@@ -149,7 +156,7 @@ public class ScrollspyWithListGroupTests extends TestsInit {
         listGroupForScrollspy.get(index).unhighlight();
     }
 
-    @Test(dataProvider = "clickValidate")
+    @Test(dataProvider = "itemsCheck")
     public void paragraphClickableTests(int index) {
         refresh();
         scrollspyWithListGroup.mainText.get(index).highlight();
