@@ -44,7 +44,7 @@ public class ProgressBarsListTests extends TestsInit {
         progressSections.stream().filter(progressSection ->
                 progressSection.progress.attr("id").equals(progressId)).forEach(
                 progressSection -> {
-                    assertThat(progressSection.progress.core().attr("class"), containsString(classStriped));
+                    progressSection.progress.core().hasClass(classStriped);
                     progressSection.progress.is().ariaValue(value)
                                                  .color(color)
                                                  .minValue(min)
@@ -57,6 +57,5 @@ public class ProgressBarsListTests extends TestsInit {
         progressSections.forEach(
                 progressSection ->
                         baseValidation(progressSection.progress));
-
     }
 }
