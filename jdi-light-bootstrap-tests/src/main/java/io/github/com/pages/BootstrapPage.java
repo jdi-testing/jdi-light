@@ -239,5 +239,6 @@ public class BootstrapPage extends WebPage {
     @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
     @UI("#linkToastCenterTop") public static Toast toastWithCenterAlignButton;
     @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
+    @UI("#custom-radio-con") public static RadioButtonsCustom radioButtonCustom;
     //endregion
 }
