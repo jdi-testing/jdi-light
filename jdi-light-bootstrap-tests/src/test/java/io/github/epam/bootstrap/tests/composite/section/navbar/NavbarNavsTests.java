@@ -1,12 +1,12 @@
 package io.github.epam.bootstrap.tests.composite.section.navbar;
 
+import com.epam.jdi.light.elements.common.WindowsManager;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarNavWithDisabled;
@@ -73,10 +73,10 @@ public class NavbarNavsTests extends TestsInit {
             navbarNavWithDisabled.navbarLinks.get(i).is().text(containsString(textLinksnavbarNavWithDisabled.get(i)));
             try {
                 navbarNavWithDisabled.navbarLinks.get(i).click();
-                assertThat(windowsCount(), is(2));
-                switchToWindow(2);
+                assertThat(WindowsManager.windowsCount(), is(2));
+                WindowsManager.switchToWindow(2);
                 assertThat(getUrl(), is(urlLinksnavbarNavWithDisabled.get(i)));
-                closeWindow();
+                WindowsManager.closeWindow();
             } catch (RuntimeException e) {
                 assertThat(e.getMessage(), containsString("is not clickable in any parts"));
                 break;
@@ -93,10 +93,10 @@ public class NavbarNavsTests extends TestsInit {
                 if (navbarNavWithDropdown.navbarLinks.get(i).getAttribute("class").equals("nav-item dropdown show")) {
                     break;
                 }
-                assertThat(windowsCount(), is(2));
-                switchToWindow(2);
+                assertThat(WindowsManager.windowsCount(), is(2));
+                WindowsManager.switchToWindow(2);
                 assertThat(getUrl(), is(urlLinksnavbarNavWithDropdown.get(i)));
-                closeWindow();
+                WindowsManager.closeWindow();
             } catch (RuntimeException e) {
                 assertThat(e.getMessage(), containsString("is not clickable in any parts"));
                 break;
