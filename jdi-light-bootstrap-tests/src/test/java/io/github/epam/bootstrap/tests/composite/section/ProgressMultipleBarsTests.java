@@ -35,7 +35,9 @@ public class ProgressMultipleBarsTests extends TestsInit {
 
     @Test(dataProvider = "progressMultipleBarsData")
     public void isValidationTest(Progress progress) {
-        progress.is().enabled().and().displayed();
+        progress
+                .is().enabled()
+                .and().displayed();
         progress.assertThat()
                 .core()
                 .hasClass("progress-bar")
