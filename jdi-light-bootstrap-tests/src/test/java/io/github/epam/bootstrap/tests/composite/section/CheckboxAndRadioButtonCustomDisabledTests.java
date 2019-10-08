@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-public class CheckboxAndRadioButtonCustomDisabled extends TestsInit {
+public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
