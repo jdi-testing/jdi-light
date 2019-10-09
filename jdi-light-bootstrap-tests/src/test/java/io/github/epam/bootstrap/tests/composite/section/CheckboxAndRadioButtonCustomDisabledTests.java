@@ -50,7 +50,8 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .hasClass("custom-control custom-checkbox")
+                .hasClass("custom-control")
+                .hasClass("custom-checkbox")
                 .tag(is("div"));
     }
 
