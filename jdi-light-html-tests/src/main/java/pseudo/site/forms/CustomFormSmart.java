@@ -14,9 +14,9 @@ public class CustomFormSmart extends Form<User> {
     public WebElement fbPublicWebElement;
     private WebElement fbPrivateWebElement;
 
-    List<WebElement> fbWebElementList;
-    public List<WebElement> fbPublicWebElementList;
-    private List<WebElement> fbPrivateWebElementList;
+    WebList fbWebElementList;
+    public WebList fbPublicWebElementList;
+    private WebList fbPrivateWebElementList;
 
     UIElement fbUIElement;
     public UIElement fbPublicUIElement;
@@ -50,15 +50,15 @@ public class CustomFormSmart extends Form<User> {
         return fbPrivateWebElement;
     }
 
-    public List<WebElement> getFbWebElementList() {
+    public WebList getFbWebElementList() {
         return fbWebElementList;
     }
 
-    public List<WebElement> getFbPublicWebElementList() {
+    public WebList getFbPublicWebElementList() {
         return fbPublicWebElementList;
     }
 
-    public List<WebElement> getFbPrivateWebElementList() {
+    public WebList getFbPrivateWebElementList() {
         return fbPrivateWebElementList;
     }
 

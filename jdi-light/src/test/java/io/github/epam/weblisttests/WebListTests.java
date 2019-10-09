@@ -44,7 +44,7 @@ public class WebListTests {
     }
 
     @Test
-    public void jdiWebList() {
+    public void jdiWebListTest() {
         webList = new WebList();
         webList.setWebElements(list);
         assertEquals(webList.get(1).getText(), element0Text);
@@ -52,7 +52,7 @@ public class WebListTests {
     }
 
     @Test
-    public void jdiWebListTestWithLocator() {
+    public void jdiWebListWithLocatorTest() {
         webList = new WebList(locator);
         webList.setWebElements(list);
         assertEquals(webList.get(1).getText(), element0Text);
@@ -60,7 +60,7 @@ public class WebListTests {
     }
 
     @Test
-    public void jdiWebListTestWithJdiBase() {
+    public void jdiWebListWithJdiBaseTest() {
         webList = new WebList(new JDIBase() {
             @Override
             public JDIBase base() {
@@ -73,7 +73,7 @@ public class WebListTests {
     }
 
     @Test
-    public void jdiWebListTestWithAllParams() {
+    public void jdiWebListWithAllParamsTest() {
         webList = new WebList(new JDIBase() {
             @Override
             public JDIBase base() {

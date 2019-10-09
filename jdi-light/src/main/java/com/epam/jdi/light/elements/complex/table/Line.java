@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.SeleniumWebList;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
@@ -24,14 +25,14 @@ import static com.epam.jdi.tools.StringUtils.namesEqual;
 
 public class Line implements IList<String>, IBaseElement {
     private JFunc<MapArray<String, String>> dataMap;
-    private WebList elements;
+    private SeleniumWebList elements;
     private List<String> headers;
     public JDIBase base() {
         return elements.base();
     }
 
     public Line() {}
-    public Line(WebList elements, List<String> headers) {
+    public Line(SeleniumWebList elements, List<String> headers) {
         this.elements = elements;
         this.headers = headers;
         List<String> values = LinqUtils.map(elements, UIElement::getText);

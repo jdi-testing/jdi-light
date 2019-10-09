@@ -24,13 +24,13 @@ public class CustomForm extends Form<User> {
     @Css("#cssWebElement-id") WebElement cssWebElement;
     @XPath("//*[@id='xpathPublicWebElement-id']") public WebElement xpathPublicWebElement;
 
-    @FindBy(css = ".fbWebElementList-class") List<WebElement> fbWebElementList;
-    @FindBy(css = ".fbPublicWebElementList-class") public List<WebElement> fbPublicWebElementList;
-    @FindBy(css = ".fbPrivateWebElementList-class") private List<WebElement> fbPrivateWebElementList;
-    @UI(".uiWebElementList-class") List<WebElement> uiWebElementList;
-    @UI(".uiPublicWebElementList-class") public List<WebElement> uiPublicWebElementList;
-    @Css(".cssWebElementList-class") List<WebElement> cssWebElementList;
-    @XPath("//*[@class='xpathPublicWebElementList-class']") public List<WebElement> xpathPublicWebElementList;
+    @FindBy(css = ".fbWebElementList-class") WebList fbWebElementList;
+    @FindBy(css = ".fbPublicWebElementList-class") public WebList fbPublicWebElementList;
+    @FindBy(css = ".fbPrivateWebElementList-class") private WebList fbPrivateWebElementList;
+    @UI(".uiWebElementList-class") WebList uiWebElementList;
+    @UI(".uiPublicWebElementList-class") public WebList uiPublicWebElementList;
+    @Css(".cssWebElementList-class") WebList cssWebElementList;
+    @XPath("//*[@class='xpathPublicWebElementList-class']") public WebList xpathPublicWebElementList;
 
     @FindBy(css = "#fbUIElement-id") UIElement fbUIElement;
     @FindBy(css = "#fbPublicUIElement-id") public UIElement fbPublicUIElement;
@@ -97,23 +97,23 @@ public class CustomForm extends Form<User> {
         return uiPublicWebElement;
     }
 
-    public List<WebElement> getFbWebElementList() {
+    public WebList getFbWebElementList() {
         return fbWebElementList;
     }
 
-    public List<WebElement> getFbPublicWebElementList() {
+    public WebList getFbPublicWebElementList() {
         return fbPublicWebElementList;
     }
 
-    public List<WebElement> getFbPrivateWebElementList() {
+    public WebList getFbPrivateWebElementList() {
         return fbPrivateWebElementList;
     }
 
-    public List<WebElement> getUiWebElementList() {
+    public WebList getUiWebElementList() {
         return uiWebElementList;
     }
 
-    public List<WebElement> getUiPublicWebElementList() {
+    public WebList getUiPublicWebElementList() {
         return uiPublicWebElementList;
     }
 
@@ -237,11 +237,11 @@ public class CustomForm extends Form<User> {
         return xpathPublicWebElement;
     }
 
-    public List<WebElement> getCssWebElementList() {
+    public WebList getCssWebElementList() {
         return cssWebElementList;
     }
 
-    public List<WebElement> getXpathPublicWebElementList() {
+    public WebList getXpathPublicWebElementList() {
         return xpathPublicWebElementList;
     }
 
