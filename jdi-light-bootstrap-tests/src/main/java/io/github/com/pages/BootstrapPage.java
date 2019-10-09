@@ -197,6 +197,7 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
     @UI("#navbar-nav-with-disabled") public static Navbar navbarNavWithDisabled;
     @UI("#navbar-nav-with-dropdown") public static Navbar navbarNavWithDropdown;
+    @UI("#progress-multiple-bars") public static ProgressMultipleBars progressMultipleBars;
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI("body") public static Popover popover;
     @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
@@ -208,10 +209,16 @@ public class BootstrapPage extends WebPage {
     @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
     @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
+    @UI("body") public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
+
+
+    @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
+
     @UI("#button-with-spinner-and-text") public static ButtonWithSpinner buttonWithSpinnerAndText;
     @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
     @UI("#button-with-growing-spinner-and-text") public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
     @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
+
     //Toasts
     @UI("#toastRightTop") public static Toast toastWithTopAlign;
     @UI("#linkToastRightTop") public static Button toastWithTopAlignButton;
@@ -223,7 +230,11 @@ public class BootstrapPage extends WebPage {
     @UI("#linkStackAlign") public static Button stackOfToastsWithTopAlignButton;
     @UI("#firstStackToast") public static Toast firstTopAlignStackToast;
     @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
-    @UI("#linkToastCenterTop") public static Toast toastWithCenterAlignButton;
+    @UI("#linkToastCenterTop") public static Button toastWithCenterAlignButton;
     @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
+    @UI("body") public static RadioButtonsCustomInline radioButtonsCustomInline;
+    @UI("#translucentToastButton") public static Button translucentToastButton;
+    @UI("#translucentToast") public static Toast translucentToast;
+    @UI("#custom-radio-con") public static RadioButtonsCustom radioButtonCustom;
     //endregion
 }
