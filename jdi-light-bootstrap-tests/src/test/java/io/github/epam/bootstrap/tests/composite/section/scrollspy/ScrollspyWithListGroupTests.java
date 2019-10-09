@@ -39,6 +39,7 @@ public class ScrollspyWithListGroupTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        refresh();
     }
 
     @DataProvider
@@ -70,7 +71,6 @@ public class ScrollspyWithListGroupTests extends TestsInit {
 
     @Test(dataProvider = "listData", priority = 1)
     public void mainContentTests(int index, String link, String header, String paragraph, String mainText) {
-        refresh();
         listGroupForScrollspy.get(index)
                 .is()
                 .core()
@@ -129,7 +129,6 @@ public class ScrollspyWithListGroupTests extends TestsInit {
 
     @Test(dataProvider = "clickValidate")
     public void linkClickableTests(int index, String paragraph, String header, String mainText) {
-        refresh();
         int y_Start = scrollspyWithListGroup.header.get(1).core().getLocation().y + 4;
         listGroupForScrollspy.get(index).highlight();
         listGroupForScrollspy.get(index).click();
@@ -158,7 +157,6 @@ public class ScrollspyWithListGroupTests extends TestsInit {
 
     @Test(dataProvider = "itemsCheck")
     public void paragraphClickableTests(int index) {
-        refresh();
         scrollspyWithListGroup.mainText.get(index).highlight();
         scrollspyWithListGroup.mainText.get(index).show();
 

@@ -1,14 +1,11 @@
 package io.github.epam.bootstrap.tests.composite.section.scrollspy;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
-import static com.epam.jdi.light.elements.common.WindowsManager.switchToWindow;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
@@ -51,6 +48,7 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        refresh();
     }
 
     @DataProvider
@@ -88,8 +86,6 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
 
     @Test(dataProvider = "listData", priority = 1)
     public void mainContentTests(int index, String link, String header, String paragraph, String mainText) {
-        refresh();
-
          nestedNav.navItemLink.get(index).is()
                 .core()
                 .displayed()
@@ -97,7 +93,6 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .text(is(header))
                 .value(is(header))
                 .attr("href", is(link));
-
 
         scrollspyWithNestedNav.header.get(index).is()
                 .core()
@@ -152,7 +147,6 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
 
     @Test(dataProvider = "itemsCheck")
     public void linkClickableFocusTests(int index) {
-        refresh();
         nestedNav.navItemLink.get(1).click();
 
         int y_header_start = scrollspyWithNestedNav.header.get(1).core().getRect().y;
@@ -199,7 +193,6 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
 
     @Test(dataProvider = "itemsCheck")
     public void paragraphClickableTests(int index) {
-        refresh();
         scrollspyWithNestedNav.mainText.get(index).highlight();
         scrollspyWithNestedNav.mainText.get(index).show();
 
