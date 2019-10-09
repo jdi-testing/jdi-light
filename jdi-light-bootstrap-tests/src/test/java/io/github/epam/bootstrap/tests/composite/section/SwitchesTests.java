@@ -47,7 +47,8 @@ public class SwitchesTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .hasClass("custom-control custom-switch")
+                .hasClass("custom-control")
+                .hasClass("custom-switch")
                 .tag(is("div"));
     }
 
@@ -74,7 +75,8 @@ public class SwitchesTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .hasClass("custom-control custom-switch")
+                .hasClass("custom-control")
+                .hasClass("custom-switch")
                 .tag(is("div"));
     }
 
