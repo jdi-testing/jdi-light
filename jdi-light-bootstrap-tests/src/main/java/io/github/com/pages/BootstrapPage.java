@@ -222,5 +222,12 @@ public class BootstrapPage extends WebPage {
     @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
     @UI("#linkToastCenterTop") public static Toast toastWithCenterAlignButton;
     @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
+
+    //Progress Height Sections
+    @UI("#progress-height") public static ProgressSection progressHeightSection;
+//    @UI("#progress-height-20px") public static ProgressSection progressHeight20;
+//    @UI("#progress-height-40px") public static ProgressSection progressHeight40;
+//    @UI("#progress-height-60px") public static ProgressSection progressHeight60;
+//    @UI("#progress-height-80px") public static ProgressSection progressHeight80;
     //endregion
 }

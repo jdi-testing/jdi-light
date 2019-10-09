@@ -5,22 +5,19 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.asserts.ProgressAssert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.ProgressBarWrapper;
 
 import java.util.List;
 
 public class ProgressSection extends Section {
 
-    @UI(".progress-bar")
-    List<Progress> progressBarsList;
+    @UI(".progress")
+    List<ProgressBarWrapper> progressBarWrappersList;
 
-    public List<Progress> getProgressBarsList() {
-        return progressBarsList;
+    public List<ProgressBarWrapper> getProgressBarWrappersList() {
+        return progressBarWrappersList;
     }
 
-    public Integer getSectionHeightValueInPx() {
-        String textHeight = uiElement.getAttribute("style");
-        Integer height = Integer.parseInt(textHeight.substring(textHeight.length() - 4, textHeight.length() - 2));
-        return height;
-    }
+
 
 }
