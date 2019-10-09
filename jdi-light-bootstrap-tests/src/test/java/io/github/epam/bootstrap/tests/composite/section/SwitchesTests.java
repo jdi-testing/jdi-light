@@ -17,7 +17,6 @@ import static org.hamcrest.CoreMatchers.is;
 public class SwitchesTests extends TestsInit {
 
 
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
