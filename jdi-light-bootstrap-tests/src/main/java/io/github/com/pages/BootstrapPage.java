@@ -5,20 +5,8 @@ import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-
-import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
-
 import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
-
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
@@ -206,6 +194,7 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-justify") public static NavsJustify navsJustify;
     @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
+    @UI("#progress-multiple-bars") public static ProgressMultipleBars progressMultipleBars;
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI("body") public static Popover popover;
     @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
@@ -217,6 +206,7 @@ public class BootstrapPage extends WebPage {
     @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
     @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
+    @UI("body") public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
 
 
     @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
@@ -237,8 +227,11 @@ public class BootstrapPage extends WebPage {
     @UI("#linkStackAlign") public static Button stackOfToastsWithTopAlignButton;
     @UI("#firstStackToast") public static Toast firstTopAlignStackToast;
     @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
-    @UI("#linkToastCenterTop") public static Toast toastWithCenterAlignButton;
+    @UI("#linkToastCenterTop") public static Button toastWithCenterAlignButton;
     @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
+    @UI("body") public static RadioButtonsCustomInline radioButtonsCustomInline;
+    @UI("#translucentToastButton") public static Button translucentToastButton;
+    @UI("#translucentToast") public static Toast translucentToast;
     @UI("#custom-radio-con") public static RadioButtonsCustom radioButtonCustom;
     //endregion
 }
