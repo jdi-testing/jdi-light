@@ -198,11 +198,11 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-multiple-bars") public static ProgressMultipleBars progressMultipleBars;
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI("#list-example>a") public static ListGroup listGroupForScrollspy;
-    @UI("#list-example~div") public static ScrollspyWithListGroup scrollspyWithListGroup;
+    @UI("#list-example~div") public static ScrollspyNav scrollspyWithListGroup;
     @UI("#navbar-example3") public static NestedNav nestedNav;
-    @UI("#navbar-example3~div") public static ScrollspyWithNestedNav scrollspyWithNestedNav;
+    @UI("#navbar-example3~div") public static ScrollspyNav scrollspyWithNestedNav;
     @UI("#navbar-example2") public static NavbarWithDropdown navbarWithDropdown;
-    @UI("#navbar-example2~div") public static ScrollspyWithListGroup scrollspyInNavbar;
+    @UI("#navbar-example2~div") public static ScrollspyNav scrollspyInNavbar;
     @UI("body") public static Popover popover;
     @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
     @UI("body") public static RadioButtonsDefaultInline radioButtonsDefaultInline;
