@@ -1025,25 +1025,21 @@
                                     <li class="nav-item active">
                                         <a class="nav-link"
                                            href="https://getbootstrap.com/docs/4.3/components/navbar/#nav"
-                                           target="_blank">Active link <span class="sr-only">(current)</span></a>
+                                           target="_blank">Active link<span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link"
-                                           href="https://getbootstrap.com/docs/4.3/components/navbar/#nav"
-                                           target="_blank">Link</a>
+                                           href="https://github.com/jdi-testing/jdi-light/"
+                                           target="_blank">JDI Light</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Dropdown
-                                        </a>
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" onclick="alert('Action Clicked!');">Action</a>
-                                            <a class="dropdown-item" onclick="alert('Another action Clicked!');">Another
-                                                action</a>
+                                            <a class="dropdown-item" onclick="alert('Another action Clicked!');">Another action</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" onclick="alert('Something else happened!');">Something
-                                                else here</a>
+                                            <a class="dropdown-item" onclick="alert('Something else happened!');">Something else here</a>
                                         </div>
                                     </li>
                                     <li class="nav-item">
@@ -1112,7 +1108,7 @@
                     <div class="doc-space line">
                         <div class="html-left">
 
-                            <nav class="navbar navbar-light bg-light">
+                            <nav class="navbar navbar-light bg-light" id="navbar-form-1">
                                 <form class="form-inline">
                                     <input class="form-control mr-sm-2" type="search" placeholder="Search"
                                            aria-label="Search" style="width: 135px">
@@ -1123,7 +1119,7 @@
                                 </form>
                             </nav>
                             <br>
-                            <nav class="navbar navbar-light bg-light">
+                            <nav class="navbar navbar-light bg-light" id="navbar-form-2">
                                 <a class="navbar-brand">Navbar</a>
                                 <form class="form-inline">
                                     <input class="form-control mr-sm-2" type="search" placeholder="Search"
@@ -1135,7 +1131,7 @@
                                 </form>
                             </nav>
                             <br>
-                            <nav class="navbar navbar-light bg-light">
+                            <nav class="navbar navbar-light bg-light" id="navbar-form-3">
                                 <form class="form-inline">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -1206,7 +1202,7 @@
                     </div>
 
                     <div class="doc-space line">
-                        <nav id="navbar-dark" class="navbar navbar-expand-lg navbar-dark bg-dark mb-1">
+                        <nav id="navbar-dark-colorscheme" class="navbar navbar-expand-lg navbar-dark bg-dark mb-1">
                             <a class="navbar-brand"
                                href="https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes"
                                target="_blank">Navbar</a>
@@ -1240,7 +1236,7 @@
                                 </form>
                             </div>
                         </nav>
-                        <nav id="navbar-blue" class="navbar navbar-expand-lg navbar-dark bg-primary mb-1">
+                        <nav id="navbar-blue-colorscheme" class="navbar navbar-expand-lg navbar-dark bg-primary mb-1">
                             <a class="navbar-brand"
                                href="https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes"
                                target="_blank">Navbar</a>
@@ -1274,7 +1270,7 @@
                                 </form>
                             </div>
                         </nav>
-                        <nav id = "navbar-light" class="navbar navbar-expand-lg navbar-light mb-1" style="background-color: #e3f2fd;">
+                        <nav id = "navbar-light-colorscheme" class="navbar navbar-expand-lg navbar-light mb-1" style="background-color: #e3f2fd;">
                             <a class="navbar-brand"
                                href="https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes"
                                target="_blank">Navbar</a>
@@ -1320,14 +1316,17 @@
 
                     <div class="doc-space line">
                         <div class="html-left">
-                            <div class="container">
+
+                            <div class="container" id = "navbar-containers-centred">
                                 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-1">
                                     <a class="navbar-brand"
                                        href="https://getbootstrap.com/docs/4.3/components/navbar/#containers"
                                        target="_blank">Navbar</a>
                                 </nav>
                             </div>
-                            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+
+
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3" id = "navbar-containers-expanded">
                                 <div class="container">
                                     <a class="navbar-brand"
                                        href="https://getbootstrap.com/docs/4.3/components/navbar/#containers"
@@ -1879,6 +1878,37 @@
                             </div>
                     </div>
 
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <div id="progress-height">
+                                <p>base</p>
+                                <div class="progress" id="progress-height-20px" style="height: 20px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="progress" id="progress-height-40px" style="height: 40px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="progress" id="progress-height-60px" style="height: 60px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="progress" id="progress-height-80px" style="height: 80px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Progress - Height</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/progress/#height"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/progress/#height</a>
+                            </p>
+                        </div>
+                    </div>
 
                     <div class="doc-space line">
                         <div class="html-left">
@@ -2565,6 +2595,1018 @@
                         </div>
                     </div>
                     <!-- DROPDOWN END -->
+
+                    <!-- FORMS START -->
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <form class="mb-3">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Overview</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#overview"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#overview</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Example select</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect2">Example multiple select</label>
+                                    <select multiple class="form-control" id="exampleFormControlSelect2">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Example textarea</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                            </form>
+
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Example file input</label>
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Form-controls</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#form-controls"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#form-controls</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left" id="forms-sizing">
+                            <div class="mb-3">
+                                <input class="form-control form-control-lg mb-3" id="form-sizing-lg" type="text" placeholder=".form-control-lg">
+                                <input class="form-control mb-3" id="form-sizing-default" type="text" placeholder="Default input">
+                                <input class="form-control form-control-sm mb-3" id="form-sizing-sm" type="text" placeholder=".form-control-sm">
+                            </div>
+
+                            <div class="mb-3">
+                                <select class="form-control form-control-lg mb-3" id="form-sizing-select-lg">
+                                    <option>Large select</option>
+                                </select>
+                                <select class="form-control mb-3" id="form-sizing-select-default">
+                                    <option>Default select</option>
+                                </select>
+                                <select class="form-control form-control-sm mb-3" id="form-sizing-select-sm">
+                                    <option>Small select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Sizing</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#sizing"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#sizing</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <input class="form-control mb-3" type="text" placeholder="Readonly input here..." readonly>
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Readonly</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#readonly"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#readonly</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+
+                        <form class="mb-3">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                </div>
+                            </div>
+                        </form>
+
+                        <form class="form-inline mb-3">
+                            <div class="form-group mb-2">
+                                <label for="staticEmail2" class="sr-only">Email</label>
+                                <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="inputPassword2" class="sr-only">Password</label>
+                                <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+                        </form>
+
+                        <div class="html-left">
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Readonly plain text</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#readonly-plain-text"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#readonly-plain-text</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <form class="mb-3">
+                                <div class="form-group">
+                                    <label for="formControlRange">Example Range input</label>
+                                    <input type="range" class="form-control-range" id="formControlRange">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Range Inputs</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#range-inputs"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#range-inputs</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <form>
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Example label</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+                                </div>
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Another label</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Form groups</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#form-groups"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#form-groups</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <form>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="First name">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="Last name">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Form grid</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#form-grid"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#form-grid</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <form>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="First name">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="Last name">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Form row</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#form-row"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#form-row</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <form>
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                    </div>
+                                </div>
+                                <fieldset class="form-group">
+                                    <div class="row">
+                                        <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                                <label class="form-check-label" for="gridRadios1">
+                                                    First radio
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                                <label class="form-check-label" for="gridRadios2">
+                                                    Second radio
+                                                </label>
+                                            </div>
+                                            <div class="form-check disabled">
+                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+                                                <label class="form-check-label" for="gridRadios3">
+                                                    Third disabled radio
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="form-group row">
+                                    <div class="col-sm-2">Checkbox</div>
+                                    <div class="col-sm-10">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                            <label class="form-check-label" for="gridCheck1">
+                                                Example checkbox
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Horizontal form</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#horizontal-form"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#horizontal-form</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <form>
+                                <div class="form-group row">
+                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="col-form-label-sm">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="colFormLabel" placeholder="col-form-label">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Horizontal form label sizing</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#horizontal-form-label-sizing"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#horizontal-form-label-sizing</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                    <div class="html-left">
+                        <form>
+                            <div class="form-row">
+                                <div class="col-7">
+                                    <input type="text" class="form-control" placeholder="City">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="State">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Zip">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="html-right">
+                        <h4>Forms - Column sizing</h4>
+                        <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#column-sizing"
+                                         target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#column-sizing</a>
+                        </p>
+                    </div>
+                </div>
+
+                    <div class="doc-space line">
+
+                        <form class="mb-3">
+                            <div class="form-row align-items-center">
+                                <div class="col-auto">
+                                    <label class="sr-only" for="inlineFormInput">Name</label>
+                                    <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe">
+                                </div>
+                                <div class="col-auto">
+                                    <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">@</div>
+                                        </div>
+                                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+                                        <label class="form-check-label" for="autoSizingCheck">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        <form class="mb-3">
+                            <div class="form-row align-items-center">
+                                <div class="col-sm-3 my-1">
+                                    <label class="sr-only" for="inlineFormInputName">Name</label>
+                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Jane Doe">
+                                </div>
+                                <div class="col-sm-3 my-1">
+                                    <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">@</div>
+                                        </div>
+                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="autoSizingCheck2">
+                                        <label class="form-check-label" for="autoSizingCheck2">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <form class="mb-3">
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                        <option selected>Choose...</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <div class="custom-control custom-checkbox mr-sm-2">
+                                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                                        <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="html-left">
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Auto-sizing</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#auto-sizing"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#auto-sizing</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+
+                        <form class="form-inline mb-3">
+                            <label class="sr-only" for="inlineFormInputName2">Name</label>
+                            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+
+                            <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">@</div>
+                                </div>
+                                <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+                            </div>
+
+                            <div class="form-check mb-2 mr-sm-2">
+                                <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+                                <label class="form-check-label" for="inlineFormCheck">
+                                    Remember me
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                        </form>
+
+                        <form class="form-inline mb-3">
+                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                <option selected>Choose...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+                            <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                <label class="custom-control-label" for="customControlInline">Remember my preference</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary my-1">Submit</button>
+                        </form>
+
+                        <div class="html-left">
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Inline forms</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#inline-forms"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#inline-forms</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+
+                        <label for="inputPassword5">Password</label>
+                        <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+                        <small id="passwordHelpBlock" class="form-text text-muted mb-3">
+                            Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                        </small>
+
+                        <form class="form-inline mb-3">
+                            <div class="form-group">
+                                <label for="inputPassword6">Password</label>
+                                <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline">
+                                <small id="passwordHelpInline" class="text-muted">
+                                    Must be 8-20 characters long.
+                                </small>
+                            </div>
+                        </form>
+
+                        <div class="html-left">
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Help text</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#help-text"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#help-text</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <form class="mb-3">
+                                <fieldset disabled>
+                                    <div class="form-group">
+                                        <label for="disabledTextInput">Disabled input</label>
+                                        <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="disabledSelect">Disabled select menu</label>
+                                        <select id="disabledSelect" class="form-control">
+                                            <option>Disabled select</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
+                                            <label class="form-check-label" for="disabledFieldsetCheck">
+                                                Can't check this
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Disabled forms</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#disabled-forms"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#disabled-forms</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+
+                        <form class="needs-validation" novalidate>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">First name</label>
+                                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom02">Last name</label>
+                                    <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustomUsername">Username</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            Please choose a username.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom03">City</label>
+                                    <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationCustom04">State</label>
+                                    <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid state.
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationCustom05">Zip</label>
+                                    <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid zip.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                    <label class="form-check-label" for="invalidCheck">
+                                        Agree to terms and conditions
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        You must agree before submitting.
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
+
+                        <!-- Example starter JavaScript for disabling form submissions if there are invalid fields -->
+                        <script>
+                                (function() {
+                                  'use strict';
+                                  window.addEventListener('load', function() {
+                                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                    var forms = document.getElementsByClassName('needs-validation');
+                                    // Loop over them and prevent submission
+                                    var validation = Array.prototype.filter.call(forms, function(form) {
+                                      form.addEventListener('submit', function(event) {
+                                        if (form.checkValidity() === false) {
+                                          event.preventDefault();
+                                          event.stopPropagation();
+                                        }
+                                        form.classList.add('was-validated');
+                                      }, false);
+                                    });
+                                  }, false);
+                                })();
+                            </script>
+
+                        <div class="html-left">
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Custom styles</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#custom-styles"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#custom-styles</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+
+                        <form>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationDefault01">First name</label>
+                                    <input type="text" class="form-control" id="validationDefault01" placeholder="First name" value="Mark" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Last name</label>
+                                    <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value="Otto" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationDefaultUsername">Username</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationDefault03">City</label>
+                                    <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationDefault04">State</label>
+                                    <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationDefault05">Zip</label>
+                                    <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                                    <label class="form-check-label" for="invalidCheck2">
+                                        Agree to terms and conditions
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
+
+                        <div class="html-left">
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Browser defaults</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#browser-defaults"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#browser-defaults</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+
+                        <form>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationServer01">First name</label>
+                                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationServer02">Last name</label>
+                                    <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationServerUsername">Username</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                                        </div>
+                                        <input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
+                                        <div class="invalid-feedback">
+                                            Please choose a username.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationServer03">City</label>
+                                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationServer04">State</label>
+                                    <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="State" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid state.
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationServer05">Zip</label>
+                                    <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid zip.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+                                    <label class="form-check-label" for="invalidCheck3">
+                                        Agree to terms and conditions
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        You must agree before submitting.
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
+
+                        <div class="html-left">
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Server side</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#server-side"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#server-side</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+
+                        <form class="was-validated" id="form-supported-elements">
+                            <div class="mb-3" id="validation-textarea-div">
+                                <label for="validationTextarea">Textarea</label>
+                                <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+                                <div class="invalid-feedback">
+                                    Please enter a message in the textarea.
+                                </div>
+                            </div>
+
+                            <div class="custom-control custom-checkbox mb-3" id="customControlValidation1-div">
+                                <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
+                                <label class="custom-control-label" for="customControlValidation1">Check this custom checkbox</label>
+                                <div class="invalid-feedback">Example invalid feedback text</div>
+                            </div>
+
+                            <div class="custom-control custom-radio" id="customControlValidation2-div">
+                                <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+                                <label class="custom-control-label" for="customControlValidation2">Toggle this custom radio</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-3" id="customControlValidation3-div">
+                                <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
+                                <label class="custom-control-label" for="customControlValidation3">Or toggle this other custom radio</label>
+                                <div class="invalid-feedback">More example invalid feedback text</div>
+                            </div>
+
+                            <div class="form-group">
+                                <select class="custom-select" required>
+                                    <option value="">Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <div class="invalid-feedback">Example invalid custom select feedback</div>
+                            </div>
+
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                                <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                <div class="invalid-feedback">Example invalid custom file feedback</div>
+                            </div>
+                        </form>
+
+                        <div class="html-left">
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Supported elements</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#supported-elements"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#supported-elements</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+
+                        <form class="needs-validation" novalidate>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationTooltip01">First name</label>
+                                    <input type="text" class="form-control" id="validationTooltip01" placeholder="First name" value="Mark" required>
+                                    <div class="valid-tooltip">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationTooltip02">Last name</label>
+                                    <input type="text" class="form-control" id="validationTooltip02" placeholder="Last name" value="Otto" required>
+                                    <div class="valid-tooltip">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationTooltipUsername">Username</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
+                                        <div class="invalid-tooltip">
+                                            Please choose a unique and valid username.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationTooltip03">City</label>
+                                    <input type="text" class="form-control" id="validationTooltip03" placeholder="City" required>
+                                    <div class="invalid-tooltip">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationTooltip04">State</label>
+                                    <input type="text" class="form-control" id="validationTooltip04" placeholder="State" required>
+                                    <div class="invalid-tooltip">
+                                        Please provide a valid state.
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationTooltip05">Zip</label>
+                                    <input type="text" class="form-control" id="validationTooltip05" placeholder="Zip" required>
+                                    <div class="invalid-tooltip">
+                                        Please provide a valid zip.
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
+
+                        <div class="html-left">
+
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Tooltips</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#tooltips"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#tooltips</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <select class="custom-select custom-select-lg mb-3">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+                            <select class="custom-select mb-3">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+                            <select class="custom-select custom-select-sm mb-3">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+                            <select class="custom-select mb-3" multiple>
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+                            <select class="custom-select mb-3" size="3">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Select menu</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#select-menu"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#select-menu</a>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <label for="customRange1">Example range</label>
+                            <input type="range" class="custom-range" id="customRange1">
+
+                            <label for="customRange2">Example range</label>
+                            <input type="range" class="custom-range" min="0" max="5" id="customRange2">
+
+                            <label for="customRange3">Example range</label>
+                            <input type="range" class="custom-range" min="0" max="5" step="0.5" id="customRange3">
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Range</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#range"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#range</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - File browser</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#file-browser"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#file-browser</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FORMS END -->
 
                     <div class="doc-space line">
                         <div class="html-left">
@@ -4795,6 +5837,441 @@
 
                 <!-- MEDIA END -->
 
+                <!-- MODAL END -->
+
+                <div class="doc-space line" style="border-color:#ccc">
+                    <div class="html-left mb-3">
+                        <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLiveLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Woohoo, you're reading this text in a modal!</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bd-example">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLive">
+                                Launch demo modal
+                            </button>
+                        </div>
+                    </div>
+                    <div class="html-right">
+                        <h4>Modal - Live demo</h4>
+                        <p>
+                            Bootstrap: <a
+                                href="https://getbootstrap.com/docs/4.3/components/modal/#live-demo"
+                                target="_blank">https://getbootstrap.com/docs/4.3/components/modal/#live-demo</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="doc-space line" style="border-color:#ccc">
+                    <div class="html-left mb-3">
+                        <div id="exampleModalLong" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bd-example">
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalLong">
+                                Launch demo modal
+                            </button>
+                        </div>
+
+                        <div id="exampleModalScrollable" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bd-example">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+                                Launch demo modal
+                            </button>
+                        </div>
+                    </div>
+                    <div class="html-right">
+                        <h4>Modal - Scrolling long content</h4>
+                        <p>
+                            Bootstrap: <a
+                                href="https://getbootstrap.com/docs/4.3/components/modal/#scrolling-long-content"
+                                target="_blank">https://getbootstrap.com/docs/4.3/components/modal/#scrolling-long-content</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="doc-space line" style="border-color:#ccc">
+                    <div class="html-left mb-3">
+                        <div id="exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="exampleModalCenteredScrollable" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bd-example">
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalCenter">
+                                Vertically centered modal
+                            </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenteredScrollable">
+                                Vertically centered scrollable modal
+                            </button>
+                        </div>
+                    </div>
+                    <div class="html-right">
+                        <h4>Modal - Vertically centered</h4>
+                        <p>
+                            Bootstrap: <a
+                                href="https://getbootstrap.com/docs/4.3/components/modal/#vertically-centered"
+                                target="_blank">https://getbootstrap.com/docs/4.3/components/modal/#vertically-centered</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="doc-space line" style="border-color:#ccc">
+                    <div class="html-left mb-3">
+                        <!-- Button trigger modal -->
+                        <div class="bd-example">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalPopovers">
+                                Launch demo modal
+                            </button>
+                        </div>
+
+                        <!-- Modal -->
+                        <div id="exampleModalPopovers" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalPopoversLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5>Popover in a modal</h5>
+                                        <p>This <a href="#" role="button" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute." data-container="#exampleModalPopovers">button</a> triggers a popover on click.</p>
+                                        <hr />
+                                        <h5>Tooltips in a modal</h5>
+                                        <p><a href="#" class="tooltip-test" title="Tooltip" data-container="#exampleModalPopovers">This link</a> and <a href="#" class="tooltip-test" title="Tooltip" data-container="#exampleModalPopovers">that link</a> have tooltips on hover.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="html-right">
+                        <h4>Modal - Tooltips and popovers</h4>
+                        <p>
+                            Bootstrap: <a
+                                href="https://getbootstrap.com/docs/4.3/components/modal/#tooltips-and-popovers"
+                                target="_blank">https://getbootstrap.com/docs/4.3/components/modal/#tooltips-and-popovers</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="doc-space line" style="border-color:#ccc">
+                    <div class="html-left mb-3">
+                        <div id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="gridModalLabel">Grids in modals</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid bd-example-row">
+                                            <div class="row">
+                                                <div class="col-md-4">.col-md-4</div>
+                                                <div class="col-md-4 ml-auto">.col-md-4 .ml-auto</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 ml-auto">.col-md-3 .ml-auto</div>
+                                                <div class="col-md-2 ml-auto">.col-md-2 .ml-auto</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 ml-auto">.col-md-6 .ml-auto</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    Level 1: .col-sm-9
+                                                    <div class="row">
+                                                        <div class="col-8 col-sm-6">
+                                                            Level 2: .col-8 .col-sm-6
+                                                        </div>
+                                                        <div class="col-4 col-sm-6">
+                                                            Level 2: .col-4 .col-sm-6
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bd-example">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gridSystemModal">
+                                Launch demo modal
+                            </button>
+                        </div>
+                    </div>
+                    <div class="html-right">
+                        <h4>Modal - Using the grid</h4>
+                        <p>
+                            Bootstrap: <a
+                                href="https://getbootstrap.com/docs/4.3/components/modal/#using-the-grid"
+                                target="_blank">https://getbootstrap.com/docs/4.3/components/modal/#using-the-grid</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="doc-space line" style="border-color:#ccc">
+                    <div class="html-left mb-3">
+                        <div class="bd-example">
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                                    <input type="text" class="form-control" id="recipient-name" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="message-text" class="col-form-label">Message:</label>
+                                                    <textarea class="form-control" id="message-text"></textarea>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Send message</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            $('#exampleModal').on('show.bs.modal', function (event) {
+                                var button = $(event.relatedTarget) // Button that triggered the modal
+                                var recipient = button.data('whatever') // Extract info from data-* attributes
+                                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                                var modal = $(this)
+                                modal.find('.modal-title').text('New message to ' + recipient)
+                                modal.find('.modal-body input').val(recipient)
+                            })
+                        </script>
+                    </div>
+                    <div class="html-right">
+                        <h4>Modal - Varying modal content</h4>
+                        <p>
+                            Bootstrap: <a
+                                href="https://getbootstrap.com/docs/4.3/components/modal/#varying-modal-content"
+                                target="_blank">https://getbootstrap.com/docs/4.3/components/modal/#varying-modal-content</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="doc-space line" style="border-color:#ccc">
+                    <div class="html-left mb-3">
+                        <div class="bd-example">
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large modal</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>
+                        </div>
+                        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title h4" id="myExtraLargeModalLabel">Extra large modal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title h4" id="myLargeModalLabel">Large modal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title h4" id="mySmallModalLabel">Small modal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="html-right">
+                        <h4>Modal - Optional sizes</h4>
+                        <p>
+                            Bootstrap: <a
+                                href="https://getbootstrap.com/docs/4.3/components/modal/#optional-sizes"
+                                target="_blank">https://getbootstrap.com/docs/4.3/components/modal/#optional-sizes</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- MODAL END -->
+
                 <div class="doc-space line">
                     <div class="html-left mb-3">
                         <nav id="navbar-example2" class="navbar navbar-light bg-light">
@@ -5424,6 +6901,31 @@
                                  style="min-height: 200px;background-color: grey;">
                                 <div class="toast" role="alert" data-animation="false" aria-live="assertive"
                                      aria-atomic="true" id="simpleToast">
+                                    <div class="toast-header">
+                                        <img src="images/range-circle.png" class="rounded mr-2" alt="...">
+                                        <strong class="mr-auto">Bootstrap</strong>
+                                        <small class="text-muted">11 mins ago</small>
+                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="toast-body">
+                                        Hello, world! This is a toast message.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="toast-example">
+                            <button type="button" onclick=show_toast('#translucentToast') class="btn btn-sm btn-info"
+                                    id="translucentToastButton">Translucent Toast
+                            </button>
+                            <p class="small"> With option data-animation false</p>
+                            <div aria-live="polite" aria-atomic="true"
+                                 style="min-height: 200px;background-color: grey;">
+                                <div class="toast" role="alert" data-animation="false" aria-live="assertive"
+                                     aria-atomic="true" id="translucentToast">
                                     <div class="toast-header">
                                         <img src="images/range-circle.png" class="rounded mr-2" alt="...">
                                         <strong class="mr-auto">Bootstrap</strong>
