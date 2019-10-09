@@ -227,6 +227,7 @@ public class BootstrapPage extends WebPage {
     @UI("#button-with-growing-spinner-and-text") public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
     @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
 
+
     //Toasts
     @UI("#toastRightTop") public static Toast toastWithTopAlign;
     @UI("#linkToastRightTop") public static Button toastWithTopAlignButton;
