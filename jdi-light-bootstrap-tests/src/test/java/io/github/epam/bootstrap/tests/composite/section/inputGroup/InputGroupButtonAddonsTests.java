@@ -12,8 +12,8 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 public class InputGroupButtonAddonsTests extends TestsInit {
     private static final String JS_SCROLL_TO_ELEMENT = "scrollIntoView(true);";
     private static final String HEADER_RIGHT_PART = "//h4[.='Input group - Button addons']";
-    private String text = "XA-XA",
-       placeholder_text = "Recipient's username";
+    private String text = "XA-XA";
+    private String placeholder_text = "recipient's username";
 
     @BeforeMethod
     public void before() {
