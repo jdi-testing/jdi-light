@@ -16,9 +16,6 @@ public class NavbarSupportedContent extends Navbar {
             list = "a")
     public Collapse nav;
 
-    @UI("#navbarDropdown")
-    public Link dropdownExpand;
-
     @JDropdown(root = ".dropdown",
             expand = "#navbarDropdown",
             list = "a")
