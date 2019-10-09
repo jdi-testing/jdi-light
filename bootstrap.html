@@ -6086,6 +6086,192 @@
                     </div>
                 </div>
 
+                <div class="doc-space line" style="border-color:#ccc">
+                    <div class="html-left mb-3">
+                        <div id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="gridModalLabel">Grids in modals</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid bd-example-row">
+                                            <div class="row">
+                                                <div class="col-md-4">.col-md-4</div>
+                                                <div class="col-md-4 ml-auto">.col-md-4 .ml-auto</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 ml-auto">.col-md-3 .ml-auto</div>
+                                                <div class="col-md-2 ml-auto">.col-md-2 .ml-auto</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 ml-auto">.col-md-6 .ml-auto</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    Level 1: .col-sm-9
+                                                    <div class="row">
+                                                        <div class="col-8 col-sm-6">
+                                                            Level 2: .col-8 .col-sm-6
+                                                        </div>
+                                                        <div class="col-4 col-sm-6">
+                                                            Level 2: .col-4 .col-sm-6
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bd-example">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gridSystemModal">
+                                Launch demo modal
+                            </button>
+                        </div>
+                    </div>
+                    <div class="html-right">
+                        <h4>Modal - Using the grid</h4>
+                        <p>
+                            Bootstrap: <a
+                                href="https://getbootstrap.com/docs/4.3/components/modal/#using-the-grid"
+                                target="_blank">https://getbootstrap.com/docs/4.3/components/modal/#using-the-grid</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="doc-space line" style="border-color:#ccc">
+                    <div class="html-left mb-3">
+                        <div class="bd-example">
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                                    <input type="text" class="form-control" id="recipient-name" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="message-text" class="col-form-label">Message:</label>
+                                                    <textarea class="form-control" id="message-text"></textarea>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Send message</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            $('#exampleModal').on('show.bs.modal', function (event) {
+                                var button = $(event.relatedTarget) // Button that triggered the modal
+                                var recipient = button.data('whatever') // Extract info from data-* attributes
+                                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                                var modal = $(this)
+                                modal.find('.modal-title').text('New message to ' + recipient)
+                                modal.find('.modal-body input').val(recipient)
+                            })
+                        </script>
+                    </div>
+                    <div class="html-right">
+                        <h4>Modal - Varying modal content</h4>
+                        <p>
+                            Bootstrap: <a
+                                href="https://getbootstrap.com/docs/4.3/components/modal/#varying-modal-content"
+                                target="_blank">https://getbootstrap.com/docs/4.3/components/modal/#varying-modal-content</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="doc-space line" style="border-color:#ccc">
+                    <div class="html-left mb-3">
+                        <div class="bd-example">
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large modal</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>
+                        </div>
+                        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title h4" id="myExtraLargeModalLabel">Extra large modal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title h4" id="myLargeModalLabel">Large modal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title h4" id="mySmallModalLabel">Small modal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="html-right">
+                        <h4>Modal - Optional sizes</h4>
+                        <p>
+                            Bootstrap: <a
+                                href="https://getbootstrap.com/docs/4.3/components/modal/#optional-sizes"
+                                target="_blank">https://getbootstrap.com/docs/4.3/components/modal/#optional-sizes</a>
+                        </p>
+                    </div>
+                </div>
+
                 <!-- MODAL END -->
 
                 <div class="doc-space line">
