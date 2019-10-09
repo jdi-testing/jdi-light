@@ -18,6 +18,7 @@ public class ExternalContentTests extends TestsInit {
 
     private String text = "COLLAPSED CONTENT";
     private String mutedText = "Toggleable via the navbar brand.";
+    private static final String ariaExpanded = "aria-expanded";
 
     @BeforeMethod
     public void before() {
@@ -27,20 +28,20 @@ public class ExternalContentTests extends TestsInit {
 
     @Test
     public void expandingTest() {
-        navbarExternalContent.toggler.expander().is().core().attr("aria-expanded", "false");
+        navbarExternalContent.toggler.expander().is().core().attr(ariaExpanded, "false");
         navbarExternalContent.toggler.expand();
-        navbarExternalContent.toggler.expander().is().core().attr("aria-expanded", "true");
+        navbarExternalContent.toggler.expander().is().core().attr(ariaExpanded, "true");
         navbarExternalContent.toggler.collapse();
-        navbarExternalContent.toggler.expander().is().core().attr("aria-expanded", "false");
+        navbarExternalContent.toggler.expander().is().core().attr(ariaExpanded, "false");
     }
 
     @Test
     public void getTextTest() {
         navbarExternalContent.toggler.expand();
-        navbarExternalContent.toggler.value().childs().get(0).is()
+        navbarExternalContent.toggler.value().childs().get(1).is()
                 .displayed()
                 .text(text);
-        navbarExternalContent.toggler.value().childs().get(1).is()
+        navbarExternalContent.toggler.value().childs().get(2).is()
                 .displayed()
                 .text(mutedText);
         navbarExternalContent.toggler.collapse();
