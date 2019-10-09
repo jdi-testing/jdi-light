@@ -9,8 +9,6 @@ import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.progressSections;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 
 
 /**
@@ -46,9 +44,9 @@ public class ProgressBarsListTests extends TestsInit {
                 progressSection -> {
                     progressSection.progress.is().core().hasClass(classStriped);
                     progressSection.progress.is().ariaValue(value)
-                                                 .color(color)
-                                                 .minValue(min)
-                                                 .maxValue(max);
+                            .color(color)
+                            .minValue(min)
+                            .maxValue(max);
                 });
     }
 
