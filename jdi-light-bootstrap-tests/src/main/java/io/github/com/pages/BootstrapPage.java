@@ -6,10 +6,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.*;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.*;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
@@ -210,6 +207,7 @@ public class BootstrapPage extends WebPage {
 
 
     @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
+    @UI("#navbar-base .navbar") public static NavbarSection navbarSection;
 
     @UI("#button-with-spinner-and-text") public static ButtonWithSpinner buttonWithSpinnerAndText;
     @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
