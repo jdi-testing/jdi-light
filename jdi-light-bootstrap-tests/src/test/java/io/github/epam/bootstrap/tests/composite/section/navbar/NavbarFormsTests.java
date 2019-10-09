@@ -6,12 +6,11 @@ import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.core.Is.is;
-import static org.testng.Assert.assertEquals;
 
 public class NavbarFormsTests extends TestsInit {
 
@@ -39,7 +38,7 @@ public class NavbarFormsTests extends TestsInit {
     @Test
     public void clickButtonTest() {
         navbarForm.button.click();
-        assertEquals(getAlertText(), alertText);
+        validateAlert(is(alertText));
     }
 
     @Test
@@ -54,7 +53,7 @@ public class NavbarFormsTests extends TestsInit {
     @Test
     public void clickButtonOnFormWithTextTest() {
         navbarFormWithText.button.click();
-        assertEquals(getAlertText(), alertTextOnClickAtSmallButton);
+        validateAlert(is(alertTextOnClickAtSmallButton));
     }
 
     @Test
@@ -69,7 +68,7 @@ public class NavbarFormsTests extends TestsInit {
         UIElement text = navbarFormWithInputGroup.form.core().find((By.tagName("span")));
         inputGroup.shouldBe().displayed().enabled();
         input.shouldBe().enabled();
-        assertEquals(input.placeholder(), placeholderText);
+        input.assertThat().attr("placeholder", placeholderText);
         text.shouldBe().enabled().text(is(inputGroupText));
     }
 
@@ -81,7 +80,7 @@ public class NavbarFormsTests extends TestsInit {
 
     @Test
     public void checkPlaceholderInputGroup() {
-        assertEquals(navbarFormWithInputGroup.inputGroup.input.placeholder(), placeholderText);
+        navbarFormWithInputGroup.inputGroup.input.core().assertThat().attr("placeholder", placeholderText);
     }
 
     @Test
