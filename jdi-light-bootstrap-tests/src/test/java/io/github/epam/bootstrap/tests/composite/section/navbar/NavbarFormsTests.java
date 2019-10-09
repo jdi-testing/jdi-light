@@ -15,17 +15,20 @@ import static org.testng.Assert.assertEquals;
 
 public class NavbarFormsTests extends TestsInit {
 
+    private final String inputText = "This is input in navbar";
+    private final String navbarText = "Navbar";
+    private final String buttonText = "Search";
+    private final String alertText = "Search Main Button Clicked!";
+    private final String alertTextOnClickAtSmallButton = "Search Smaller Button Clicked!";
+    private final String placeholderText = "Username";
+    private final String inputGroupText = "@";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         checkboxesCustom.hover();
     }
-
-    String inputText = "This is input in navbar";
-    String navbarText = "Navbar";
-    String buttonText = "Search";
-    String alertText = "Search Main Button Clicked!";
 
     @Test
     public void setValueText() {
@@ -45,7 +48,18 @@ public class NavbarFormsTests extends TestsInit {
         UIElement button = navbarFormWithText.form.core().find((By.tagName("button")));
         input.shouldBe().enabled();
         button.shouldBe().enabled().text(is(buttonText));
-        navbarForm.form.click();
+        navbarFormWithText.form.click();
+    }
+
+    @Test
+    public void clickButtonOnFormWithTextTest() {
+        navbarFormWithText.button.click();
+        assertEquals(getAlertText(), alertTextOnClickAtSmallButton);
+    }
+
+    @Test
+    public void checkTextOnFormWithTextTest() {
+        navbarFormWithText.textLink.assertThat().text(is(navbarText));
     }
 
     @Test
@@ -55,18 +69,23 @@ public class NavbarFormsTests extends TestsInit {
         UIElement text = navbarFormWithInputGroup.form.core().find((By.tagName("span")));
         inputGroup.shouldBe().displayed().enabled();
         input.shouldBe().enabled();
-        assertEquals(input.placeholder(), "Username");
-        text.shouldBe().enabled().text(is("@"));
+        assertEquals(input.placeholder(), placeholderText);
+        text.shouldBe().enabled().text(is(inputGroupText));
     }
 
     @Test
     public void checkSetValueInputGroup() {
-        navbarForm.textField.assertThat().text(is(inputText));
+        navbarFormWithInputGroup.inputGroup.input.setValue(inputText);
+        navbarFormWithInputGroup.inputGroup.input.assertThat().text(is(inputText));
     }
 
     @Test
-    public void checkTextTest() {
-        navbarFormWithText.text.assertThat().text(is(navbarText));
+    public void checkPlaceholderInputGroup() {
+        assertEquals(navbarFormWithInputGroup.inputGroup.input.placeholder(), placeholderText);
     }
 
+    @Test
+    public void checkTextInputGroupTest() {
+        navbarFormWithInputGroup.inputGroup.text.assertThat().text(is(inputGroupText));
+    }
 }

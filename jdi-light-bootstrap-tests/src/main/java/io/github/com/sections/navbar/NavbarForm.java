@@ -13,5 +13,5 @@ public class NavbarForm extends Section implements PageObject {
     @UI("form") public Form form;
     @UI("input") public TextField textField;
     @UI("button") public Button button;
-    @UI("a") public Link text;
+    @UI("a") public Link textLink;
 }
