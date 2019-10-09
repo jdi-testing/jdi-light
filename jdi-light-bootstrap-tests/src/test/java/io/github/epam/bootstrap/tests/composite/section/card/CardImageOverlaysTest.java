@@ -19,6 +19,10 @@ import static org.testng.Assert.assertEquals;
  */
 public class CardImageOverlaysTest  extends TestsInit {
 
+    private static final String VECTOR_TEXT_TAG = "text";
+    private static final String VECTOR_TEXT = "Card image";
+    private static final String VECTOR_TEXT_ATTR = "fill";
+    private static final String VECTOR_TEXT_VALUE = "#dee2e6";
     private static final String IMAGE_TOP_CLASS = "card-img";
     private static final String OVERLAY_CLASS = "card-img-overlay";
     private static final String TITLE = "CARD TITLE";
@@ -48,7 +52,6 @@ public class CardImageOverlaysTest  extends TestsInit {
     public void availabilityTest(UIBaseElement element) {
         element.is()
                 .displayed()
-                .notAppear()
                 .enabled();
     }
 
@@ -67,9 +70,15 @@ public class CardImageOverlaysTest  extends TestsInit {
 
     @Test
     public void classTest() {
-        cardImageOverlays.overlaySection.is().core().hasClass(IMAGE_TOP_CLASS);
+        cardImageOverlays.overlaySection.is().core().hasClass(OVERLAY_CLASS);
         cardImageOverlays.overlaySection.assertThat().core().hasClass(OVERLAY_CLASS);
         cardImageOverlays.vectorImage.is().core().hasClass(IMAGE_TOP_CLASS);
-        //cardImageOverlays.vectorImage.assertThat().core().hasClass(IMAGE_TOP_CLASS);
+        cardImageOverlays.vectorImage.assertThat().core().hasClass(IMAGE_TOP_CLASS);
+    }
+
+    @Test
+    public void vectorInternalElementsTest() {
+        assertEquals(cardImageOverlays.vectorImage.getText(VECTOR_TEXT_TAG), VECTOR_TEXT);
+        assertEquals(cardImageOverlays.vectorImage.getAttribute(VECTOR_TEXT_TAG, VECTOR_TEXT_ATTR), VECTOR_TEXT_VALUE);
     }
 }
