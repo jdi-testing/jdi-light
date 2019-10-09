@@ -9,7 +9,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IHasSize;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.complex.selenium.SeleniumWebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
@@ -32,7 +31,8 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.JDIBase.STRING_SIMPLIFY;
 import static com.epam.jdi.light.elements.complex.table.Line.initLine;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -85,8 +85,8 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     }
 
     public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
-    public SeleniumWebList headerUI() {
-        return $$$(headerLocator, this).setName(getName() + " header");
+    public WebList headerUI() {
+        return $$(headerLocator, this).setName(getName() + " header");
     }
     protected List<String> getHeader() {
         return LinqUtils.select(headerUI(), UIElement::getText);
@@ -116,7 +116,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     protected int getCount() {
         if (columns.get().any())
             return columns.get().get(0).value.size();
-        SeleniumWebList firstColumn = $$$(fillByTemplate(columnLocator, 1), this)
+        WebList firstColumn = $$(fillByTemplate(columnLocator, 1), this)
             .setName(getName() + " rows header");
         firstColumn.noValidation();
         return firstColumn.size();
@@ -144,7 +144,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         validateRowIndex(rowNum);
         if (!rows.get().has(rowNum+"")) {
             WebList result = cells.isGotAll()
-                ? new SeleniumWebList(LinqUtils.select(cells.get(), c -> c.value.get(rowNum+"")))
+                ? new WebList(LinqUtils.select(cells.get(), c -> c.value.get(rowNum+"")))
                 : getRow(rowNum);
             rows.get().update(rowNum+"", result);
         }
@@ -172,7 +172,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         validateColumnIndex(colNum) ;
         if (!columns.get().has(colNum+"")) {
             WebList result = cells.isGotAll()
-                ? new SeleniumWebList(new ArrayList<>(cells.get().get(colNum + "").values()))
+                ? new WebList(new ArrayList<>(cells.get().get(colNum + "").values()))
                 : getColumn(colNum);
             columns.get().update(colNum + "", result);
         }
@@ -228,8 +228,8 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         rows.gotAll();
         return rows.set(result);
     }
-    protected SeleniumWebList getRowByIndex(int rowNum) {
-        return $$$(fillByTemplate(rowLocator, rowNum), this).noValidation();
+    protected WebList getRowByIndex(int rowNum) {
+        return $$(fillByTemplate(rowLocator, rowNum), this).noValidation();
     }
 
     protected WebList getRow(int rowNum) {
@@ -239,9 +239,9 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         if (firstColumnIndex > 1 || columnsMapping.length > 0) {
             for (int i = 1; i <= header().size(); i++)
                 result.add(webElements.get(getColumnIndex(i)-1));
-            return new SeleniumWebList(result);
+            return new WebList(result);
         }
-        return new SeleniumWebList(webElements);
+        return new WebList(webElements);
     }
     protected MapArray<String, WebList> getColumns() {
         if (columns.isGotAll()) return columns.get();
@@ -258,8 +258,8 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
             return columnsMapping[index-1];
         return index;
     }
-    protected SeleniumWebList getColumn(int colNum) {
-        return $$$(fillByTemplate(columnLocator, getColumnIndex(colNum)), this).noValidation();
+    protected WebList getColumn(int colNum) {
+        return $$(fillByTemplate(columnLocator, getColumnIndex(colNum)), this).noValidation();
     }
     protected UIElement getCell(int colNum, int rowNum) {
         return $(fillByMsgTemplate(cellLocator, getColumnIndex(colNum), getRowIndex(rowNum), this));
@@ -314,7 +314,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     public T getTable() {
         if (!cells.isGotAll()) {
             try {
-                List<WebElement> listOfCells = $$$(allCellsLocator, core().parent)
+                List<WebElement> listOfCells = $$(allCellsLocator, core().parent)
                     .core().noValidation().getAllElements();
                 cells.set(new MapArray<>());
                 int k = 0;
@@ -361,7 +361,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
      */
     @JDIAction("Get first '{name}' table row that match criteria")
     public Line row(TableMatcher... matchers) {
-        SeleniumWebList lines = TABLE_MATCHER.execute(this, matchers);
+        WebList lines = TABLE_MATCHER.execute(this, matchers);
         if (lines == null || lines.size() == 0)
             return null;
         List<String> result = new ArrayList<>();
