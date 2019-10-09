@@ -12,4 +12,5 @@ public class OverlaySection extends Section {
     public Text textMain;
     @UI(".card-text-status")
     public Text textStatus;
+
 }
