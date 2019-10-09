@@ -6,14 +6,17 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.inputGroupButtonAddons1;
+import static io.github.com.pages.BootstrapPage.inputGroupButtonAddons2;
+import static io.github.com.pages.BootstrapPage.inputGroupButtonAddons3;
+import static io.github.com.pages.BootstrapPage.inputGroupButtonAddons4;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class InputGroupButtonAddonsTests extends TestsInit {
     private static final String JS_SCROLL_TO_ELEMENT = "scrollIntoView(true);";
     private static final String HEADER_RIGHT_PART = "//h4[.='Input group - Button addons']";
     private String text = "XA-XA";
-    private String placeholder_text = "recipient's username";
+    private String placeholderText = "recipient's username";
 
     @BeforeMethod
     public void before() {
@@ -34,8 +37,8 @@ public class InputGroupButtonAddonsTests extends TestsInit {
     public void checkButtonAddon2Test() {
         inputGroupButtonAddons2.input.input(text);
         inputGroupButtonAddons2.button.click();
-        inputGroupButtonAddons2.input.input(placeholder_text);
-        inputGroupButtonAddons2.input.assertThat().text(placeholder_text);
+        inputGroupButtonAddons2.input.input(placeholderText);
+        inputGroupButtonAddons2.input.assertThat().text(placeholderText);
     }
 
     @Test
@@ -50,8 +53,8 @@ public class InputGroupButtonAddonsTests extends TestsInit {
     public void checkButtonAddon4Test() {
         inputGroupButtonAddons4.inputField.input(text);
         inputGroupButtonAddons4.listButtons.get(1).click();
-        inputGroupButtonAddons4.inputField.input(placeholder_text);
+        inputGroupButtonAddons4.inputField.input(placeholderText);
         inputGroupButtonAddons4.listButtons.get(2).click();
-        inputGroupButtonAddons4.inputField.assertThat().text(placeholder_text);
+        inputGroupButtonAddons4.inputField.assertThat().text(placeholderText);
     }
 }
