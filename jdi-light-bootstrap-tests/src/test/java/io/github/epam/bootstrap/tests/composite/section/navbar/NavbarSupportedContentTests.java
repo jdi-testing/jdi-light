@@ -53,11 +53,21 @@ public class NavbarSupportedContentTests extends TestsInit {
     public void navLinksContentTest(String elementName,
                                     String elementText,
                                     String elementUrl) {
+        navbarSupportedContent.nav.highlight();
         navbarSupportedContent.nav.list().get(elementName)
                 .is()
                 .text(elementText)
                 .and()
                 .attr("href", elementUrl);
+    }
+
+    @Test
+    public void dropdownTest() throws InterruptedException {
+        navbarSupportedContent.dropdown.highlight();
+        Thread.sleep(2000);
+        navbarSupportedContent.dropdown.toggle();
+        Thread.sleep(2000);
+        navbarSupportedContent.dropdown.list().get("Action").click();
     }
 
 }
