@@ -27,7 +27,6 @@ public class NavbarNavsTests extends TestsInit {
                 {0, "Home\n(current)", "https://jdi-testing.github.io/jdi-light/index.html"},
                 {1, "HTML 5", "https://jdi-testing.github.io/jdi-light/html5.html"},
                 {2, "Bootstrap", "https://jdi-testing.github.io/jdi-light/bootstrap.html"},
-                {3, "Disabled", "#"},
         };
     }
 
@@ -37,7 +36,6 @@ public class NavbarNavsTests extends TestsInit {
                 {0, "Home\n(current)", "https://jdi-testing.github.io/jdi-light/index.html"},
                 {1, "HTML 5", "https://jdi-testing.github.io/jdi-light/html5.html"},
                 {2, "Bootstrap", "https://jdi-testing.github.io/jdi-light/bootstrap.html"},
-                {3, "Navbar", "#"},
         };
     }
 
@@ -85,29 +83,26 @@ public class NavbarNavsTests extends TestsInit {
     public void clickNavbarNavWithDisabledLinksTest(int i, String text, String url) {
         UIElement link = navbarNavWithDisabled.navbarLinks.get(i);
         link.is().text(text);
-        if (link.isDisabled()) {
-            link.is().disabled();
-        } else {
-            link.click();
-            assertThat(WindowsManager.windowsCount(), is(2));
-            WindowsManager.switchToWindow(2);
-            assertThat(getUrl(), is(url));
-            WindowsManager.closeWindow();
-        }
+        link.click();
+        assertThat(WindowsManager.windowsCount(), is(2));
+        WindowsManager.switchToWindow(2);
+        assertThat(getUrl(), is(url));
+        WindowsManager.closeWindow();
     }
 
     @Test(dataProvider = "linkNavbarWithDropdownTest")
     public void clickNavbarNavWithDropdownLinksTest(int i, String text, String url) {
         UIElement link = navbarNavWithDropdown.navbarLinks.get(i);
         link.is().text(text);
-        if (link.getAttribute("class").equals("nav-item dropdown")) {
-            baseValidation(link);
-        } else {
-            link.click();
-            assertThat(WindowsManager.windowsCount(), is(2));
-            WindowsManager.switchToWindow(2);
-            assertThat(getUrl(), is(url));
-            WindowsManager.closeWindow();
-        }
+        link.click();
+        assertThat(WindowsManager.windowsCount(), is(2));
+        WindowsManager.switchToWindow(2);
+        assertThat(getUrl(), is(url));
+        WindowsManager.closeWindow();
+    }
+
+    @Test
+    public void isDisabledItemNavWithDisabled(){
+        navbarNavWithDisabled.navbarLinks.get(3).is().disabled();
     }
 }

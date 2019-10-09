@@ -12,7 +12,7 @@ public class Navbar extends Section {
     @UI("//*[contains(@class, 'nav-item')]") public WebList navbarLinks;
     @UI(".navbar-brand") public Link navbarBrand;
     @JDropdown(expand = ".navbar-toggler-icon", value = ".navbar-nav", list = "a")
-    public Collapse togglerButton;
+    public Collapse collapseButton;
     @UI("//*[contains(@class, 'nav-link dropdown-toggle')]")
     public Dropdown navbarDropdown;
 }
