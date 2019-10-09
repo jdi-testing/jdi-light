@@ -41,7 +41,7 @@ public class CardImageOverlaysTest  extends TestsInit {
     }
 
     @DataProvider
-    private static Object[][] getElement() {
+    public static Object[][] getElement() {
         return new Object[][] {
             {cardImageOverlays.overlaySection.title},
             {cardImageOverlays.vectorImage}
