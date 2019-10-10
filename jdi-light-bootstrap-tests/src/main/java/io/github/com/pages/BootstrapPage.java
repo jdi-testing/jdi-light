@@ -233,5 +233,6 @@ public class BootstrapPage extends WebPage {
     @UI("#translucentToastButton") public static Button translucentToastButton;
     @UI("#translucentToast") public static Toast translucentToast;
     @UI("#custom-radio-con") public static RadioButtonsCustom radioButtonCustom;
+    @UI("#forms-sizing") public static FormsSizing formsSizing;
     //endregion
 }
