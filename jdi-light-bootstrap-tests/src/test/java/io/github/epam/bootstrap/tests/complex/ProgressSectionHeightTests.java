@@ -16,7 +16,7 @@ import static org.testng.Assert.assertEquals;
 
 public class ProgressSectionHeightTests extends TestsInit {
 
-    List<ProgressBarWrapper> list;
+    public List<ProgressBarWrapper> list;
 
     @BeforeMethod
     public void before() {
@@ -26,7 +26,7 @@ public class ProgressSectionHeightTests extends TestsInit {
     }
 
     @Test
-    public void HeightOfWrapperShouldBeValid() {
+    public void heightOfWrapperShouldBeValid() {
         for (ProgressBarWrapper wrapper : list) {
             int actualHeight = wrapper.core().getSize().getHeight();
             int expectedHeight = wrapper.getWrapperHeightValueInPx();
@@ -35,7 +35,7 @@ public class ProgressSectionHeightTests extends TestsInit {
     }
 
     @Test
-    public void HeightOfBarShouldBeValid() {
+    public void heightOfBarShouldBeValid() {
         for (ProgressBarWrapper wrapper : list) {
             int expectedBarHeight = wrapper.getWrapperHeightValueInPx();
 

@@ -13,13 +13,12 @@ public class ProgressBarWrapper extends Section {
     public @UI(".progress-bar")
     List<Progress> progressBarList;
 
-    public Integer getWrapperHeightValueInPx() {
+    public int getWrapperHeightValueInPx() {
         String textHeight = uiElement.getAttribute("style");
 
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(textHeight);
-        Integer height = Integer.parseInt(matcher.group());
-        System.out.println(height);
+        int height = Integer.parseInt(matcher.group());
         return height;
     }
 

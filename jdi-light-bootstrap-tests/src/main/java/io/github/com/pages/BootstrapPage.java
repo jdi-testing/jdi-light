@@ -209,7 +209,7 @@ public class BootstrapPage extends WebPage {
     @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
     @UI("#button-with-growing-spinner-and-text") public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
     @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
-    @UI("#progress-height") public static ProgressSection progressHeightSection;
+    @UI("#progress-height") public static ProgressWrapperSection progressHeightSection;
 
     //Toasts
     @UI("#toastRightTop") public static Toast toastWithTopAlign;
