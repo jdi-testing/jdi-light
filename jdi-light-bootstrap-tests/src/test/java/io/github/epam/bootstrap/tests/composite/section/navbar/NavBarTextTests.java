@@ -35,12 +35,12 @@ public class NavBarTextTests extends TestsInit {
 
     @Test
     public void verifySimpleNavbarTextTest() {
-        Assert.assertEquals(inlineElement,navbarText.simpleText.getText());
+        assertEquals(inlineElement,navbarText.simpleText.getText());
     }
 
     @Test
     public void verifyComplexNavbarTextTest() {
-        Assert.assertEquals(inlineElement,navbarText.complexNavbar.simpleText.getText());
+        assertEquals(inlineElement,navbarText.complexNavbar.simpleText.getText());
     }
 
     @Test
@@ -52,13 +52,13 @@ public class NavBarTextTests extends TestsInit {
 
     @Test
     public void verifyComplexNavbarHomeTest() {
-        Assert.assertEquals(linkName1,navbarText.complexNavbar.listPages.get(1).getText());
+        assertEquals(linkName1,navbarText.complexNavbar.listPages.get(1).getText());
         navbarText.complexNavbar.listPages.get(1).click();
         newWindowTitleCheck(page1);
-        Assert.assertEquals(linkName2,navbarText.complexNavbar.listPages.get(2).getText());
+        assertEquals(linkName2,navbarText.complexNavbar.listPages.get(2).getText());
         navbarText.complexNavbar.listPages.get(2).click();
         newWindowTitleCheck(page2);
-        Assert.assertEquals(linkName3,navbarText.complexNavbar.listPages.get(3).getText());
+        assertEquals(linkName3,navbarText.complexNavbar.listPages.get(3).getText());
         navbarText.complexNavbar.listPages.get(3).click();
         newWindowTitleCheck(page3);
     }
