@@ -1,5 +1,6 @@
 package io.github.epam.bootstrap.tests.complex;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ProgressBarWrapper;
 import io.github.epam.TestsInit;
@@ -25,23 +26,26 @@ public class ProgressSectionHeightTests extends TestsInit {
     }
 
     @Test
-    public void HeightOfWrapperIsValid(){
-            for (ProgressBarWrapper wrapper : list){
-                int actualHeight = wrapper.core().getSize().getHeight();
-                int expectedHeight = wrapper.getWrapperHeightValueInPx();
-                assertEquals(actualHeight, expectedHeight);
-            }
+    public void HeightOfWrapperShouldBeValid() {
+        for (ProgressBarWrapper wrapper : list) {
+            int actualHeight = wrapper.core().getSize().getHeight();
+            int expectedHeight = wrapper.getWrapperHeightValueInPx();
+            assertEquals(actualHeight, expectedHeight);
+        }
     }
 
     @Test
-    public void HeightOfBarIsValid(){
-        for (ProgressBarWrapper wrapper : list){
-            int actualBarHeight = wrapper.
+    public void HeightOfBarShouldBeValid() {
+        for (ProgressBarWrapper wrapper : list) {
             int expectedBarHeight = wrapper.getWrapperHeightValueInPx();
-            assertEquals(actualBarHeight, expectedBarHeight);
+
+            List<Progress> progressBarList = wrapper.getProgressBarList();
+            for (Progress progressBar : progressBarList) {
+                int actualBarHeight = progressBar.core().getSize().getHeight();
+                assertEquals(actualBarHeight, expectedBarHeight);
+            }
         }
+    }
 
 
-
-    
 }

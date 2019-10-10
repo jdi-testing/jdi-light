@@ -209,6 +209,8 @@ public class BootstrapPage extends WebPage {
     @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
     @UI("#button-with-growing-spinner-and-text") public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
     @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
+    @UI("#progress-height") public static ProgressSection progressHeightSection;
+
     //Toasts
     @UI("#toastRightTop") public static Toast toastWithTopAlign;
     @UI("#linkToastRightTop") public static Button toastWithTopAlignButton;
@@ -223,11 +225,5 @@ public class BootstrapPage extends WebPage {
     @UI("#linkToastCenterTop") public static Toast toastWithCenterAlignButton;
     @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
 
-    //Progress Height Sections
-    @UI("#progress-height") public static ProgressSection progressHeightSection;
-//    @UI("#progress-height-20px") public static ProgressSection progressHeight20;
-//    @UI("#progress-height-40px") public static ProgressSection progressHeight40;
-//    @UI("#progress-height-60px") public static ProgressSection progressHeight60;
-//    @UI("#progress-height-80px") public static ProgressSection progressHeight80;
     //endregion
 }
