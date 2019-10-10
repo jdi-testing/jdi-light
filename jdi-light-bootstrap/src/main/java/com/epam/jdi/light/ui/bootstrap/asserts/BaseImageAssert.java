@@ -15,6 +15,8 @@ public abstract class BaseImageAssert<E extends BaseImage> extends UIAssert<Base
         jdiAssert(element.height(), condition);
         return this;
     }
+
+    @JDIAction("Assert that '{name}' height {0}")
     public BaseImageAssert height(int height) { return height(is(height)); }
 
     @JDIAction("Assert that '{name}' width {0}")
@@ -22,5 +24,7 @@ public abstract class BaseImageAssert<E extends BaseImage> extends UIAssert<Base
         jdiAssert(element.width(), condition);
         return this;
     }
+    
+    @JDIAction("Assert that '{name}' width {0}")
     public BaseImageAssert width(String width) { return width(is(width)); }
 }
