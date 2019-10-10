@@ -73,6 +73,23 @@ public class ScrollspyInNavbarTests extends TestsInit {
     }
 
     @DataProvider
+    public Object[][] linkCheck() {
+        return new Object[][]{
+                {1, itemLink + paragraphFat, "@" + paragraphFat},
+                {2, itemLink + paragraphMdo, "@" + paragraphMdo}
+        };
+    }
+
+    @DataProvider
+    public Object[][] dropdownCheck() {
+        return new Object[][]{
+                {3, itemLink + paragraphOne, paragraphOne},
+                {4, itemLink + paragraphTwo, paragraphTwo},
+                {5, itemLink + paragraphThree, paragraphThree}
+        };
+    }
+
+    @DataProvider
     public Object[][] itemsCheck() {
         return new Object[][]{
                 {1, paragraphFat}, {2, paragraphMdo}, {3, paragraphOne}, {4, paragraphTwo}, {5, paragraphThree}
@@ -113,6 +130,29 @@ public class ScrollspyInNavbarTests extends TestsInit {
                 .enabled()
                 .text(is(mainText))
                 .value(is(mainText));
+    }
+
+    @Test(dataProvider = "linkCheck", priority = 1)
+    public void linkCheckTests(int index, String link, String header) {
+        navbarWithDropdown.navItemLink.get(index).is()
+                .core()
+                .displayed()
+                .enabled()
+                .text(is(header))
+                .value(is(header))
+                .attr(ATTR_NAME_HREF, is(link));
+    }
+
+    @Test(dataProvider = "dropdownCheck", priority = 1)
+    public void dropdownCheckTests(int _index, String link, String header) {
+        navbarWithDropdown.dropdownMenu.expand();
+        navbarWithDropdown.dropdownMenu.list().get(header).is()
+                .core()
+                .displayed()
+                .enabled()
+                .text(is(header))
+                .value(is(header))
+                .attr(ATTR_NAME_HREF, is(link));
     }
 
     @Test
@@ -161,16 +201,28 @@ public class ScrollspyInNavbarTests extends TestsInit {
                 .cssClass(CLASS_NAME_SCROLLSPY_EXAMPLE);
     }
 
-    @Test(dataProvider = "itemsCheck")
-    public void linkClickableFocusTests(int index, String header) {
+    @Test(dataProvider = "linkCheck")
+    public void linkClickableFocusTests(int index, String _link, String _header) {
         navbarWithDropdown.navItemLink.get(1).click();
         navbarWithDropdown.dropdownMenu.expand();
 
         int y_header_start = scrollSpyInNavbar.header.get(1).core().getRect().y;
-        if (index < 3)
-            navbarWithDropdown.navItemLink.get(index).click();
-        else
-            navbarWithDropdown.dropdownMenu.list().get(header).click();
+
+        navbarWithDropdown.navItemLink.get(index).click();
+
+
+        int y_header_current = scrollSpyInNavbar.header.get(index).core().getRect().y;
+        assertThat(y_header_start, is(y_header_current));
+    }
+
+    @Test(dataProvider = "dropdownCheck")
+    public void dropdownClickableFocusTests(int index, String _link, String header) {
+        navbarWithDropdown.navItemLink.get(1).click();
+        navbarWithDropdown.dropdownMenu.expand();
+
+        int y_header_start = scrollSpyInNavbar.header.get(1).core().getRect().y;
+
+        navbarWithDropdown.dropdownMenu.list().get(header).click();
 
         int y_header_current = scrollSpyInNavbar.header.get(index).core().getRect().y;
         assertThat(y_header_start, is(y_header_current));

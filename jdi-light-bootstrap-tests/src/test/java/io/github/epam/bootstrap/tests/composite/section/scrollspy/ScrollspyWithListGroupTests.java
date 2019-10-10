@@ -93,15 +93,18 @@ public class ScrollspyWithListGroupTests extends TestsInit {
                 .value(is(header))
                 .text(is(header));
 
-        if (index == 1) listGroupForScrollSpy.get(index)
-                .is()
-                .cssClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION_ACTIVE)
-                .css(CSS_NAME_BACKGROUND_COLOR, "rgba(0, 123, 255, 1)") //#007bff Color Hex
-                .css(CSS_NAME_BORDER_COLOR, "rgb(0, 123, 255)"); //#007bff Color Hex
-        else listGroupForScrollSpy.get(index)
-                .is()
-                .cssClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION)
-                .css(CSS_NAME_BACKGROUND_COLOR, "rgba(255, 255, 255, 1)"); //#fff Color Hex
+        if (index == 1) {
+            listGroupForScrollSpy.get(index)
+                    .is()
+                    .cssClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION_ACTIVE)
+                    .css(CSS_NAME_BACKGROUND_COLOR, "rgba(0, 123, 255, 1)") //#007bff Color Hex
+                    .css(CSS_NAME_BORDER_COLOR, "rgb(0, 123, 255)"); //#007bff Color Hex
+        } else {
+            listGroupForScrollSpy.get(index)
+                    .is()
+                    .cssClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION)
+                    .css(CSS_NAME_BACKGROUND_COLOR, "rgba(255, 255, 255, 1)"); //#fff Color Hex
+        }
 
         scrollSpyWithListGroup.is()
                 .core()
@@ -132,12 +135,9 @@ public class ScrollspyWithListGroupTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        scrollSpyWithListGroup.header.is()
-                .size(4);
-        scrollSpyWithListGroup.mainText.is()
-                .size(4);
-        listGroupForScrollSpy.is()
-                .size(4);
+        scrollSpyWithListGroup.header.is().size(4);
+        scrollSpyWithListGroup.mainText.is().size(4);
+        listGroupForScrollSpy.is().size(4);
     }
 
     @Test(dataProvider = "clickValidate")
@@ -155,6 +155,7 @@ public class ScrollspyWithListGroupTests extends TestsInit {
                 .enabled()
                 .cssClass(ScrollspyWithListGroupTests.CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION_ACTIVE)
                 .css(ScrollspyWithListGroupTests.CSS_NAME_BACKGROUND_COLOR, "rgba(0, 123, 255, 1)");//#007bff Color Hex
+
         scrollSpyWithListGroup.header.get(index).is()
                 .text(is(header.toUpperCase()))
                 .value(is(header.toUpperCase()))

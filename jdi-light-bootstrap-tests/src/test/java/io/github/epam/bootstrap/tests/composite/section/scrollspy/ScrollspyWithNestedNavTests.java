@@ -6,6 +6,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.nestedNav;
@@ -16,7 +19,6 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
-import static org.testng.AssertJUnit.assertFalse;
 
 public class ScrollspyWithNestedNavTests extends TestsInit {
     public static final String ATTR_NAME_HREF = "href";
@@ -29,8 +31,9 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
     public static final String CLASS_NAME_SCROLLSPY_EXAMPLE_2 = "scrollspy-example-2";
     public static final String CLASS_NAME_ACTIVE = "active";
     public static final String CLASS_NAME_NAV_LINK = "nav-link";
-    public static final String CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE = "nav-link ml-3 my-1 active";
     public static final String CLASS_NAME_NAV_LINK_ACTIVE = "nav-link active";
+    public static final String CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE = "nav-link ml-3 my-1 active";
+    public static final String CLASS_NAME_NAV_LINK_ML_3_MY_1 = "nav-link ml-3 my-1";
     public static final String ATTR_VALUE_SCROLL = "scroll";
     public static final String ATTR_VALUE_NAVBAR_EXAMPLE_3 = "#navbar-example3";
     public static final String ATTR_VALUE_0 = "0";
@@ -94,6 +97,18 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
         };
     }
 
+    @DataProvider
+    public Object[][] focusCheck() {
+        return new Object[][]{
+                {1, 1, CLASS_NAME_NAV_LINK_ACTIVE, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                {2, 1, CLASS_NAME_NAV_LINK_ACTIVE, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                {3, 1, CLASS_NAME_NAV_LINK_ACTIVE, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                {4, 1, CLASS_NAME_NAV_LINK, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK_ACTIVE, 5, CLASS_NAME_NAV_LINK, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                {5, 1, CLASS_NAME_NAV_LINK, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK_ACTIVE, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                {6, 1, CLASS_NAME_NAV_LINK, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK_ACTIVE, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                {7, 1, CLASS_NAME_NAV_LINK, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK_ACTIVE, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE}
+        };
+    }
     @DataProvider
     public Object[][] itemsCheck() {
         return new Object[][]{
@@ -172,39 +187,42 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
 
         int y_header_current = scrollSpyWithNestedNav.header.get(index).core().getRect().y;
 
-        if (index != 7)
+        if (index != 7) {
             assertThat(y_header_start, is(y_header_current - 6));
-        else
+        } else {
             assertThat(y_header_start, is(y_header_current - 92));
+        }
 
         nestedNav.navItemLink.get(index).unhighlight();
     }
 
-    @Test
-    public void highlightFocusedItemsTests() {
-        nestedNav.navItemLink.get(7).highlight();
-        nestedNav.navItemLink.get(7).click();
 
-        for (int i = 1; i <= nestedNav.navItemLink.size(); i++) {
-            if (i != 7 && i != 5) {
-                assertTrue(nestedNav.navItemLink.get(i).hasClass(CLASS_NAME_NAV_LINK));
-                assertFalse(nestedNav.navItemLink.get(i).hasClass(CLASS_NAME_ACTIVE));
-            }
+    @Test(dataProvider = "focusCheck")
+    public void highlightFocusedItemsTests(int itemToClick,
+                                           int index_1, String class_1,
+                                           int index_2, String class_2,
+                                           int index_3, String class_3,
+                                           int index_4, String class_4,
+                                           int index_5, String class_5,
+                                           int index_6, String class_6,
+                                           int index_7, String class_7) {
+        List<Integer> elementsIndex = Arrays.asList(index_1, index_2, index_3, index_4, index_5, index_6, index_7);
+        List<String> elementsClass = Arrays.asList(class_1, class_2, class_3, class_4, class_5, class_6, class_7);
+        int classIndex = 0;
+
+        nestedNav.navItemLink.get(itemToClick).highlight();
+        nestedNav.navItemLink.get(itemToClick).click();
+
+        for (int elIndex : elementsIndex) {
+            nestedNav.navItemLink.get(elIndex).is()
+                    .core()
+                    .displayed()
+                    .enabled()
+                    .cssClass(elementsClass.get(classIndex));
+            classIndex++;
         }
 
-        nestedNav.navItemLink.get(7).is()
-                .core()
-                .displayed()
-                .enabled()
-                .cssClass(CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE);
-
-        nestedNav.navItemLink.get(5).is()
-                .core()
-                .displayed()
-                .enabled()
-                .cssClass(CLASS_NAME_NAV_LINK_ACTIVE);
-
-        nestedNav.navItemLink.get(7).unhighlight();
+        nestedNav.navItemLink.get(itemToClick).unhighlight();
     }
 
     @Test(dataProvider = "itemsCheck")
@@ -213,8 +231,9 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
         scrollSpyWithNestedNav.mainText.get(index).show();
 
         if (!nestedNav.navItemLink.get(index).core().hasClass(CLASS_NAME_ACTIVE) &&
-                index < nestedNav.navItemLink.size())
+                index < nestedNav.navItemLink.size()) {
             scrollSpyWithNestedNav.header.get(index + 1).show();
+        }
 
         assertTrue(nestedNav.navItemLink.get(index).hasClass(CLASS_NAME_ACTIVE));
         nestedNav.navItemLink.get(index).unhighlight();
