@@ -11,6 +11,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.*;
+import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.navbar.NavbarForm;
@@ -124,6 +125,7 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-button-addon4") public static ButtonAddons inputGroupButtonAddons4;
     @UI("#card-example") public static CardExample cardExample;
     @UI("#card-image") public static CardImage cardImage;
+    @UI("#card-image-overlay") public static CardImageOverlays cardImageOverlays;
     @UI("#card-body") public static CardBody cardBody;
     @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
     @UI("#card-with-header-and-footer-quote") public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
