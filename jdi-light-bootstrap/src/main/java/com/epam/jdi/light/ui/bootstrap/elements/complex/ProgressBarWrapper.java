@@ -10,14 +10,15 @@ import java.util.regex.Pattern;
 
 public class ProgressBarWrapper extends Section {
 
+    //Может быть, можно сделать здесь какой-нибудь список, специфичный для JDI?
     public @UI(".progress-bar")
     List<Progress> progressBarList;
 
     public int getWrapperHeightValueInPx() {
         String textHeight = uiElement.getAttribute("style");
-
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(textHeight);
+        matcher.find();
         int height = Integer.parseInt(matcher.group());
         return height;
     }
