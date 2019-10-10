@@ -26,6 +26,7 @@ public class BootstrapPage extends WebPage {
     @UI("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
     @UI("#jumbotron") public static Jumbotron jumbotron;
     @UI("#breadcrumb") public static Breadcrumb breadcrumb;
+    @UI("(//div[@class='dropdown'])[1]") public static Dropdown simpleDropdown;             //dropdown
     @UI("#simple-alert") public static Alert simpleAlert;
     @UI("#dismissible-alert") public static Alert dismissibleAlert;
     @UI("#badge-secondary") public static Badge badgeSecondary;
