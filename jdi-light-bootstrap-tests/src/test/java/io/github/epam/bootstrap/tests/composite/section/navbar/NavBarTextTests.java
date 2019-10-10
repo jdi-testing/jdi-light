@@ -1,7 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.navbar;
 
 import io.github.epam.TestsInit;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,6 +11,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarText;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.CoreMatchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class NavBarTextTests extends TestsInit {
@@ -35,30 +35,42 @@ public class NavBarTextTests extends TestsInit {
 
     @Test
     public void verifySimpleNavbarTextTest() {
-        assertEquals(inlineElement,navbarText.simpleText.getText());
+        navbarText.simpleText
+                .is()
+                .text(is(inlineElement));
     }
 
     @Test
     public void verifyComplexNavbarTextTest() {
-        assertEquals(inlineElement,navbarText.complexNavbar.simpleText.getText());
+        navbarText.complexNavbar.simpleText
+                .is()
+                .text(is(inlineElement));
     }
 
     @Test
     public void verifyComplexNavbarBrandTest() {
-        Assert.assertEquals(brandName,navbarText.complexNavbar.brand.getText());
+        navbarText.complexNavbar.brand
+                .is()
+                .text(is(brandName));
         navbarText.complexNavbar.brand.click();
         newWindowTitleCheck(navbarBootstrap);
     }
 
     @Test
     public void verifyComplexNavbarHomeTest() {
-        assertEquals(linkName1,navbarText.complexNavbar.listPages.get(1).getText());
+        navbarText.complexNavbar.listPages.get(1)
+                .is()
+                .text(is(linkName1));
         navbarText.complexNavbar.listPages.get(1).click();
         newWindowTitleCheck(page1);
-        assertEquals(linkName2,navbarText.complexNavbar.listPages.get(2).getText());
+        navbarText.complexNavbar.listPages.get(2)
+                .is()
+                .text(is(linkName2));
         navbarText.complexNavbar.listPages.get(2).click();
         newWindowTitleCheck(page2);
-        assertEquals(linkName3,navbarText.complexNavbar.listPages.get(3).getText());
+        navbarText.complexNavbar.listPages.get(3)
+                .is()
+                .text(is(linkName3));
         navbarText.complexNavbar.listPages.get(3).click();
         newWindowTitleCheck(page3);
     }
