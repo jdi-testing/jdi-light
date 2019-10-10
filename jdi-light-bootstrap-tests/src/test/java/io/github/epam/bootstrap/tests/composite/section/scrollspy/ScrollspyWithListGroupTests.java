@@ -29,6 +29,7 @@ public class ScrollspyWithListGroupTests extends TestsInit {
     public static final String CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION_ACTIVE = "list-group-item list-group-item-action active";
     public static final String CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION = "list-group-item list-group-item-action";
     public static final String CLASS_NAME_SCROLLSPY_EXAMPLE = "scrollspy-example";
+    public static final String CLASS_NAME_ACTIVE = "active";
     public static final String CSS_NAME_BACKGROUND_COLOR = "background-color";
     public static final String CSS_NAME_BORDER_COLOR = "border-color";
     public static final String ATTR_VALUE_SCROLL = "scroll";
@@ -99,7 +100,8 @@ public class ScrollspyWithListGroupTests extends TestsInit {
                     .cssClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION_ACTIVE)
                     .css(CSS_NAME_BACKGROUND_COLOR, "rgba(0, 123, 255, 1)") //#007bff Color Hex
                     .css(CSS_NAME_BORDER_COLOR, "rgb(0, 123, 255)"); //#007bff Color Hex
-        } else {
+        }
+        else {
             listGroupForScrollSpy.get(index)
                     .is()
                     .cssClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION)
@@ -172,12 +174,8 @@ public class ScrollspyWithListGroupTests extends TestsInit {
     @Test(dataProvider = "itemsCheck")
     public void paragraphClickableTests(int index) {
         scrollSpyWithListGroup.mainText.get(index).highlight();
-        scrollSpyWithListGroup.mainText.get(index).show();
 
-        if (listGroupForScrollSpy.get(index).core().hasClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION) &&
-                index < scrollSpyWithListGroup.header.size()) {
-            scrollSpyWithListGroup.header.get(index + 1).show();
-        }
+        scrollSpyWithListGroup.scrollParagraph(listGroupForScrollSpy, index, CLASS_NAME_ACTIVE);
 
         listGroupForScrollSpy.get(index)
                 .is()

@@ -90,7 +90,7 @@ public class ScrollspyInNavbarTests extends TestsInit {
     }
 
     @Test(dataProvider = "navMenu", priority = 1)
-    public void mainContentTests(int index, String link, String header, String paragraph, String mainText) {
+    public void mainContentTests(int index, String _link, String header, String paragraph, String mainText) {
         scrollSpyInNavbar.header.get(index).is()
                 .core()
                 .displayed()
@@ -184,7 +184,6 @@ public class ScrollspyInNavbarTests extends TestsInit {
         int y_header_start = scrollSpyInNavbar.header.get(1).core().getRect().y;
 
         navbarWithDropdown.navItemLink.get(index).click();
-
 
         int y_header_current = scrollSpyInNavbar.header.get(index).core().getRect().y;
         assertThat(y_header_start, is(y_header_current));

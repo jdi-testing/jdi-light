@@ -228,12 +228,8 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
     @Test(dataProvider = "itemsCheck")
     public void paragraphClickableTests(int index) {
         scrollSpyWithNestedNav.mainText.get(index).highlight();
-        scrollSpyWithNestedNav.mainText.get(index).show();
 
-        if (!nestedNav.navItemLink.get(index).core().hasClass(CLASS_NAME_ACTIVE) &&
-                index < nestedNav.navItemLink.size()) {
-            scrollSpyWithNestedNav.header.get(index + 1).show();
-        }
+        scrollSpyWithNestedNav.scrollParagraph(nestedNav.navItemLink, index, CLASS_NAME_ACTIVE);
 
         assertTrue(nestedNav.navItemLink.get(index).hasClass(CLASS_NAME_ACTIVE));
         nestedNav.navItemLink.get(index).unhighlight();
