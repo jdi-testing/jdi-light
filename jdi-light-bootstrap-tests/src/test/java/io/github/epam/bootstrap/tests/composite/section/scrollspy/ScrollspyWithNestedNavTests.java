@@ -18,6 +18,22 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertFalse;
 
 public class ScrollspyWithNestedNavTests extends TestsInit {
+    public static final String ATTR_NAME_HREF = "href";
+    public static final String ATTR_NAME_ID = "id";
+    public static final String ATTR_NAME_DATA_SPY = "data-spy";
+    public static final String ATTR_NAME_DATA_TARGET = "data-target";
+    public static final String ATTR_NAME_DATA_OFFSET = "data-offset";
+    public static final String CLASS_NAME_NAVBAR_BRAND = "navbar-brand";
+    public static final String CLASS_NAME_NAV_NAV_PILLS_FLEX_COLUMN = "nav nav-pills flex-column";
+    public static final String CLASS_NAME_SCROLLSPY_EXAMPLE_2 = "scrollspy-example-2";
+    public static final String CLASS_NAME_ACTIVE = "active";
+    public static final String CLASS_NAME_NAV_LINK = "nav-link";
+    public static final String CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE = "nav-link ml-3 my-1 active";
+    public static final String CLASS_NAME_NAV_LINK_ACTIVE = "nav-link active";
+    public static final String ATTR_VALUE_SCROLL = "scroll";
+    public static final String ATTR_VALUE_NAVBAR_EXAMPLE_3 = "#navbar-example3";
+    public static final String ATTR_VALUE_0 = "0";
+
     private String itemLink = "https://jdi-testing.github.io/jdi-light/bootstrap.html#";
     private String navbarLink = "https://getbootstrap.com/docs/4.3/components/scrollspy/#example-with-nested-nav";
     private String navbarText = "Navbar";
@@ -92,7 +108,7 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .enabled()
                 .text(is(header))
                 .value(is(header))
-                .attr("href", is(link));
+                .attr(ATTR_NAME_HREF, is(link));
 
         scrollspyWithNestedNav.header.get(index).is()
                 .core()
@@ -100,7 +116,7 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .enabled()
                 .text(is(header.toUpperCase()))
                 .value(is(header.toUpperCase()))
-                .attr("id", is(paragraph));
+                .attr(ATTR_NAME_ID, is(paragraph));
 
         scrollspyWithNestedNav.mainText.get(index).is()
                 .core()
@@ -121,10 +137,10 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .core()
                 .displayed()
                 .enabled()
-                .attr("href", is(navbarLink))
+                .attr(ATTR_NAME_HREF, is(navbarLink))
                 .value(is(navbarText))
                 .text(is(navbarText))
-                .cssClass("navbar-brand");
+                .cssClass(CLASS_NAME_NAVBAR_BRAND);
 
         for (UIElement element: nestedNav.navGroup.list())
         {
@@ -132,17 +148,17 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                     .core()
                     .displayed()
                     .enabled()
-                    .cssClass("nav nav-pills flex-column");
+                    .cssClass(CLASS_NAME_NAV_NAV_PILLS_FLEX_COLUMN);
         }
 
         scrollspyWithNestedNav.is()
                 .core()
                 .displayed()
                 .enabled()
-                .attr("data-spy", is("scroll"))
-                .attr("data-target", is("#navbar-example3"))
-                .attr("data-offset", is("0"))
-                .cssClass("scrollspy-example-2");
+                .attr(ATTR_NAME_DATA_SPY, is(ATTR_VALUE_SCROLL))
+                .attr(ATTR_NAME_DATA_TARGET, is(ATTR_VALUE_NAVBAR_EXAMPLE_3))
+                .attr(ATTR_NAME_DATA_OFFSET, is(ATTR_VALUE_0))
+                .cssClass(CLASS_NAME_SCROLLSPY_EXAMPLE_2);
     }
 
     @Test(dataProvider = "itemsCheck")
@@ -171,8 +187,8 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
 
         for (int i = 1; i <= nestedNav.navItemLink.size(); i++) {
             if (i != 7 && i != 5) {
-                assertTrue(nestedNav.navItemLink.get(i).hasClass("nav-link"));
-                assertFalse(nestedNav.navItemLink.get(i).hasClass("active"));
+                assertTrue(nestedNav.navItemLink.get(i).hasClass(CLASS_NAME_NAV_LINK));
+                assertFalse(nestedNav.navItemLink.get(i).hasClass(CLASS_NAME_ACTIVE));
             }
         }
 
@@ -180,13 +196,13 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .core()
                 .displayed()
                 .enabled()
-                .cssClass("nav-link ml-3 my-1 active");
+                .cssClass(CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE);
 
         nestedNav.navItemLink.get(5).is()
                 .core()
                 .displayed()
                 .enabled()
-                .cssClass("nav-link active");
+                .cssClass(CLASS_NAME_NAV_LINK_ACTIVE);
 
         nestedNav.navItemLink.get(7).unhighlight();
     }
@@ -196,11 +212,11 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
         scrollspyWithNestedNav.mainText.get(index).highlight();
         scrollspyWithNestedNav.mainText.get(index).show();
 
-        if (!nestedNav.navItemLink.get(index).core().hasClass("active") &&
+        if (!nestedNav.navItemLink.get(index).core().hasClass(CLASS_NAME_ACTIVE) &&
                 index < nestedNav.navItemLink.size())
             scrollspyWithNestedNav.header.get(index+1).show();
 
-        assertTrue(nestedNav.navItemLink.get(index).hasClass("active"));
+        assertTrue(nestedNav.navItemLink.get(index).hasClass(CLASS_NAME_ACTIVE));
         nestedNav.navItemLink.get(index).unhighlight();
     }
 

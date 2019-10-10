@@ -18,6 +18,23 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ScrollspyInNavbarTests extends TestsInit {
+    public static final String ATTR_NAME_HREF = "href";
+    public static final String ATTR_NAME_ID = "id";
+    public static final String ATTR_NAME_DATA_SPY = "data-spy";
+    public static final String ATTR_NAME_DATA_TARGET = "data-target";
+    public static final String ATTR_NAME_DATA_OFFSET = "data-offset";
+    public static final String ATTR_NAME_ROLE = "role";
+    public static final String CLASS_NAME_DROPDOWN_ITEM_ACTIVE = "dropdown-item active";
+    public static final String CLASS_NAME_NAV_ITEM = "nav-item";
+    public static final String CLASS_NAME_DROPDOWN_DIVIDER = "dropdown-divider";
+    public static final String CLASS_NAME_NAVBAR_BRAND = "navbar-brand";
+    public static final String CLASS_NAME_NAV_LINK_ACTIVE = "nav-link active";
+    public static final String CLASS_NAME_SCROLLSPY_EXAMPLE = "scrollspy-example";
+    public static final String ATTR_VALUE_SCROLL = "scroll";
+    public static final String ATTR_VALUE_0 = "0";
+    public static final String ATTR_VALUE_NAVBAR_EXAMPLE_2 = "#navbar-example2";
+    public static final String ATTR_VALUE_SEPARATOR = "separator";
+
     private String itemLink = "https://jdi-testing.github.io/jdi-light/bootstrap.html#";
     private String navbarLink = "https://getbootstrap.com/docs/4.3/components/scrollspy/#example-in-navbar";
     private String navbarText = "Navbar";
@@ -71,7 +88,7 @@ public class ScrollspyInNavbarTests extends TestsInit {
                     .enabled()
                     .text(is(header))
                     .value(is(header))
-                    .attr("href", is(link));
+                    .attr(ATTR_NAME_HREF, is(link));
         } else {
             navbarWithDropdown.dropdownMenu.expand();
             navbarWithDropdown.dropdownMenu.list().get(header).is()
@@ -80,7 +97,7 @@ public class ScrollspyInNavbarTests extends TestsInit {
                     .enabled()
                     .text(is(header))
                     .value(is(header))
-                    .attr("href", is(link));
+                    .attr(ATTR_NAME_HREF, is(link));
         }
         scrollspyInNavbar.header.get(index).is()
                 .core()
@@ -88,7 +105,7 @@ public class ScrollspyInNavbarTests extends TestsInit {
                 .enabled()
                 .text(is(header.toUpperCase()))
                 .value(is(header.toUpperCase()))
-                .attr("id", is(paragraph));
+                .attr(ATTR_NAME_ID, is(paragraph));
 
         scrollspyInNavbar.mainText.get(index).is()
                 .core()
@@ -108,11 +125,11 @@ public class ScrollspyInNavbarTests extends TestsInit {
         navbarWithDropdown.dropdownMenu.expand();
         navbarWithDropdown.dropdownMenu.is().size(3);
 
-        navbarWithDropdown.find(By.className("dropdown-divider")).is()
+        navbarWithDropdown.find(By.className(CLASS_NAME_DROPDOWN_DIVIDER)).is()
                 .core()
                 .displayed()
                 .enabled()
-                .attr("role", "separator");
+                .attr(ATTR_NAME_ROLE, ATTR_VALUE_SEPARATOR);
 
         scrollspyInNavbar.mainText.is().size(5);
         scrollspyInNavbar.header.is().size(5);
@@ -121,27 +138,27 @@ public class ScrollspyInNavbarTests extends TestsInit {
                 .core()
                 .displayed()
                 .enabled()
-                .attr("href", is(navbarLink))
+                .attr(ATTR_NAME_HREF, is(navbarLink))
                 .value(is(navbarText))
                 .text(is(navbarText))
-                .cssClass("navbar-brand");
+                .cssClass(CLASS_NAME_NAVBAR_BRAND);
 
         for (UIElement element : navbarWithDropdown.navGroup.list()) {
             element.is()
                     .core()
                     .displayed()
                     .enabled()
-                    .hasClass("nav-item");
+                    .hasClass(CLASS_NAME_NAV_ITEM);
         }
 
         scrollspyInNavbar.is()
                 .core()
                 .displayed()
                 .enabled()
-                .attr("data-spy", is("scroll"))
-                .attr("data-target", is("#navbar-example2"))
-                .attr("data-offset", is("0"))
-                .cssClass("scrollspy-example");
+                .attr(ATTR_NAME_DATA_SPY, is(ATTR_VALUE_SCROLL))
+                .attr(ATTR_NAME_DATA_TARGET, is(ATTR_VALUE_NAVBAR_EXAMPLE_2))
+                .attr(ATTR_NAME_DATA_OFFSET, is(ATTR_VALUE_0))
+                .cssClass(CLASS_NAME_SCROLLSPY_EXAMPLE);
     }
 
     @Test(dataProvider = "itemsCheck")
@@ -170,13 +187,13 @@ public class ScrollspyInNavbarTests extends TestsInit {
                     .core()
                     .displayed()
                     .enabled()
-                    .cssClass("nav-link active");
+                    .cssClass(CLASS_NAME_NAV_LINK_ACTIVE);
         else
             navbarWithDropdown.dropdownMenu.list().get(header).is()
                     .core()
                     .displayed()
                     .enabled()
-                    .cssClass("dropdown-item active");
+                    .cssClass(CLASS_NAME_DROPDOWN_ITEM_ACTIVE);
 
         scrollspyInNavbar.mainText.get(index).unhighlight();
     }
