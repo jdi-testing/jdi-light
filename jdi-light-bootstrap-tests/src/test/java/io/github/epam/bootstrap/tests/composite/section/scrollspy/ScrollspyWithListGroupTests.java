@@ -175,8 +175,9 @@ public class ScrollspyWithListGroupTests extends TestsInit {
         scrollSpyWithListGroup.mainText.get(index).show();
 
         if (listGroupForScrollSpy.get(index).core().hasClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION) &&
-                index < scrollSpyWithListGroup.header.size())
+                index < scrollSpyWithListGroup.header.size()) {
             scrollSpyWithListGroup.header.get(index + 1).show();
+        }
 
         listGroupForScrollSpy.get(index)
                 .is()
