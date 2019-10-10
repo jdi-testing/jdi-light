@@ -78,4 +78,3 @@ public class NavbarContainersTest extends TestsInit {
         WindowsManager.closeWindow();
     }
 }
-
