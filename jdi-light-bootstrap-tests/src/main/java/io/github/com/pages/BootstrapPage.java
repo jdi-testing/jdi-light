@@ -204,12 +204,12 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
     @UI("#progress-multiple-bars") public static ProgressMultipleBars progressMultipleBars;
     @UI(".card-columns") public static CardColumns cardColumns;
-    @UI("#list-example>a") public static ListGroup listGroupForScrollspy;
-    @UI("#list-example~div") public static ScrollspyNav scrollspyWithListGroup;
+    @UI("#list-example>a") public static ListGroup listGroupForScrollSpy;
+    @UI("#list-example~div") public static ScrollSpyNav scrollSpyWithListGroup;
     @UI("#navbar-example3") public static NestedNav nestedNav;
-    @UI("#navbar-example3~div") public static ScrollspyNav scrollspyWithNestedNav;
+    @UI("#navbar-example3~div") public static ScrollSpyNav scrollSpyWithNestedNav;
     @UI("#navbar-example2") public static NavbarWithDropdown navbarWithDropdown;
-    @UI("#navbar-example2~div") public static ScrollspyNav scrollspyInNavbar;
+    @UI("#navbar-example2~div") public static ScrollSpyNav scrollSpyInNavbar;
     @UI("body") public static Popover popover;
     @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
     @UI("body") public static RadioButtonsDefaultInline radioButtonsDefaultInline;

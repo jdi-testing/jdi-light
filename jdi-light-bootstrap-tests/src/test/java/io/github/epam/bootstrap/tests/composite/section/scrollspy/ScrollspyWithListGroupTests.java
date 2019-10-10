@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.listGroupForScrollspy;
-import static io.github.com.pages.BootstrapPage.scrollspyWithListGroup;
+import static io.github.com.pages.BootstrapPage.listGroupForScrollSpy;
+import static io.github.com.pages.BootstrapPage.scrollSpyWithListGroup;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
@@ -84,7 +84,7 @@ public class ScrollspyWithListGroupTests extends TestsInit {
 
     @Test(dataProvider = "listData", priority = 1)
     public void mainContentTests(int index, String link, String header, String paragraph, String mainText) {
-        listGroupForScrollspy.get(index)
+        listGroupForScrollSpy.get(index)
                 .is()
                 .core()
                 .displayed()
@@ -93,17 +93,17 @@ public class ScrollspyWithListGroupTests extends TestsInit {
                 .value(is(header))
                 .text(is(header));
 
-        if (index == 1) listGroupForScrollspy.get(index)
+        if (index == 1) listGroupForScrollSpy.get(index)
                 .is()
                 .cssClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION_ACTIVE)
                 .css(CSS_NAME_BACKGROUND_COLOR, "rgba(0, 123, 255, 1)") //#007bff Color Hex
                 .css(CSS_NAME_BORDER_COLOR, "rgb(0, 123, 255)"); //#007bff Color Hex
-        else listGroupForScrollspy.get(index)
+        else listGroupForScrollSpy.get(index)
                 .is()
                 .cssClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION)
                 .css(CSS_NAME_BACKGROUND_COLOR, "rgba(255, 255, 255, 1)"); //#fff Color Hex
 
-        scrollspyWithListGroup.is()
+        scrollSpyWithListGroup.is()
                 .core()
                 .displayed()
                 .enabled()
@@ -112,7 +112,7 @@ public class ScrollspyWithListGroupTests extends TestsInit {
                 .attr(ATTR_NAME_DATA_OFFSET, is(ATRR_VALUE_0))
                 .cssClass(CLASS_NAME_SCROLLSPY_EXAMPLE);
 
-        scrollspyWithListGroup.header.get(index)
+        scrollSpyWithListGroup.header.get(index)
                 .is()
                 .core()
                 .displayed()
@@ -121,7 +121,7 @@ public class ScrollspyWithListGroupTests extends TestsInit {
                 .value(is(header.toUpperCase()))
                 .attr(ATTR_NAME_ID, is(paragraph));
 
-        scrollspyWithListGroup.mainText.get(index)
+        scrollSpyWithListGroup.mainText.get(index)
                 .is()
                 .core()
                 .displayed()
@@ -132,52 +132,52 @@ public class ScrollspyWithListGroupTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        scrollspyWithListGroup.header.is()
+        scrollSpyWithListGroup.header.is()
                 .size(4);
-        scrollspyWithListGroup.mainText.is()
+        scrollSpyWithListGroup.mainText.is()
                 .size(4);
-            listGroupForScrollspy.is()
+        listGroupForScrollSpy.is()
                 .size(4);
     }
 
     @Test(dataProvider = "clickValidate")
     public void linkClickableTests(int index, String paragraph, String header, String mainText) {
-        int y_Start = scrollspyWithListGroup.header.get(1).core().getLocation().y + 4;
-        listGroupForScrollspy.get(index).highlight();
-        listGroupForScrollspy.get(index).click();
+        int y_Start = scrollSpyWithListGroup.header.get(1).core().getLocation().y + 4;
+        listGroupForScrollSpy.get(index).highlight();
+        listGroupForScrollSpy.get(index).click();
 
-        int y_Current = scrollspyWithListGroup.header.get(index).core().getLocation().y;
+        int y_Current = scrollSpyWithListGroup.header.get(index).core().getLocation().y;
 
-        listGroupForScrollspy.get(index)
+        listGroupForScrollSpy.get(index)
                 .is()
                 .core()
                 .displayed()
                 .enabled()
                 .cssClass(ScrollspyWithListGroupTests.CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION_ACTIVE)
                 .css(ScrollspyWithListGroupTests.CSS_NAME_BACKGROUND_COLOR, "rgba(0, 123, 255, 1)");//#007bff Color Hex
-        scrollspyWithListGroup.header.get(index).is()
+        scrollSpyWithListGroup.header.get(index).is()
                 .text(is(header.toUpperCase()))
                 .value(is(header.toUpperCase()))
                 .core().attr(ATTR_NAME_ID, is(paragraph));
 
-        scrollspyWithListGroup.mainText.get(index).is()
+        scrollSpyWithListGroup.mainText.get(index).is()
                 .text(is(mainText))
                 .value(is(mainText));
 
         assertEquals(y_Start, y_Current);
-        listGroupForScrollspy.get(index).unhighlight();
+        listGroupForScrollSpy.get(index).unhighlight();
     }
 
     @Test(dataProvider = "itemsCheck")
     public void paragraphClickableTests(int index) {
-        scrollspyWithListGroup.mainText.get(index).highlight();
-        scrollspyWithListGroup.mainText.get(index).show();
+        scrollSpyWithListGroup.mainText.get(index).highlight();
+        scrollSpyWithListGroup.mainText.get(index).show();
 
-       if (listGroupForScrollspy.get(index).core().hasClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION) &&
-               index < scrollspyWithListGroup.header.size())
-           scrollspyWithListGroup.header.get(index+1).show();
+        if (listGroupForScrollSpy.get(index).core().hasClass(CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION) &&
+                index < scrollSpyWithListGroup.header.size())
+            scrollSpyWithListGroup.header.get(index + 1).show();
 
-        listGroupForScrollspy.get(index)
+        listGroupForScrollSpy.get(index)
                 .is()
                 .core()
                 .displayed()
@@ -186,13 +186,13 @@ public class ScrollspyWithListGroupTests extends TestsInit {
                 .css(CSS_NAME_BACKGROUND_COLOR, "rgba(0, 123, 255, 1)")//#007bff Color Hex
                 .css(CSS_NAME_BORDER_COLOR, "rgb(0, 123, 255)");//#007bff Color Hex
 
-        listGroupForScrollspy.get(index).unhighlight();
+        listGroupForScrollSpy.get(index).unhighlight();
     }
 
     @Test
     public void baseValidationTest() {
-        baseValidation(scrollspyWithListGroup);
-        for (UIElement element:listGroupForScrollspy.list()){
+        baseValidation(scrollSpyWithListGroup);
+        for (UIElement element : listGroupForScrollSpy.list()) {
             baseValidation(element);
         }
     }

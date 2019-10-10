@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarWithDropdown;
-import static io.github.com.pages.BootstrapPage.scrollspyInNavbar;
+import static io.github.com.pages.BootstrapPage.scrollSpyInNavbar;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.bootstrap.tests.composite.section.navs.ClickVerification.newWindowTitleCheck;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -99,7 +99,7 @@ public class ScrollspyInNavbarTests extends TestsInit {
                     .value(is(header))
                     .attr(ATTR_NAME_HREF, is(link));
         }
-        scrollspyInNavbar.header.get(index).is()
+        scrollSpyInNavbar.header.get(index).is()
                 .core()
                 .displayed()
                 .enabled()
@@ -107,7 +107,7 @@ public class ScrollspyInNavbarTests extends TestsInit {
                 .value(is(header.toUpperCase()))
                 .attr(ATTR_NAME_ID, is(paragraph));
 
-        scrollspyInNavbar.mainText.get(index).is()
+        scrollSpyInNavbar.mainText.get(index).is()
                 .core()
                 .displayed()
                 .enabled()
@@ -131,8 +131,8 @@ public class ScrollspyInNavbarTests extends TestsInit {
                 .enabled()
                 .attr(ATTR_NAME_ROLE, ATTR_VALUE_SEPARATOR);
 
-        scrollspyInNavbar.mainText.is().size(5);
-        scrollspyInNavbar.header.is().size(5);
+        scrollSpyInNavbar.mainText.is().size(5);
+        scrollSpyInNavbar.header.is().size(5);
 
         navbarWithDropdown.navbarLink.is()
                 .core()
@@ -151,7 +151,7 @@ public class ScrollspyInNavbarTests extends TestsInit {
                     .hasClass(CLASS_NAME_NAV_ITEM);
         }
 
-        scrollspyInNavbar.is()
+        scrollSpyInNavbar.is()
                 .core()
                 .displayed()
                 .enabled()
@@ -166,21 +166,21 @@ public class ScrollspyInNavbarTests extends TestsInit {
         navbarWithDropdown.navItemLink.get(1).click();
         navbarWithDropdown.dropdownMenu.expand();
 
-        int y_header_start = scrollspyInNavbar.header.get(1).core().getRect().y;
+        int y_header_start = scrollSpyInNavbar.header.get(1).core().getRect().y;
         if (index < 3)
             navbarWithDropdown.navItemLink.get(index).click();
         else
             navbarWithDropdown.dropdownMenu.list().get(header).click();
 
-        int y_header_current = scrollspyInNavbar.header.get(index).core().getRect().y;
+        int y_header_current = scrollSpyInNavbar.header.get(index).core().getRect().y;
         assertThat(y_header_start, is(y_header_current));
     }
 
     @Test(dataProvider = "itemsCheck")
     public void paragraphScrollableTests(int index, String header) {
         navbarWithDropdown.dropdownMenu.expand();
-        scrollspyInNavbar.mainText.get(index).highlight();
-        scrollspyInNavbar.mainText.get(index).show();
+        scrollSpyInNavbar.mainText.get(index).highlight();
+        scrollSpyInNavbar.mainText.get(index).show();
 
         if (index < 3)
             navbarWithDropdown.navItemLink.get(index).is()
@@ -195,7 +195,7 @@ public class ScrollspyInNavbarTests extends TestsInit {
                     .enabled()
                     .cssClass(CLASS_NAME_DROPDOWN_ITEM_ACTIVE);
 
-        scrollspyInNavbar.mainText.get(index).unhighlight();
+        scrollSpyInNavbar.mainText.get(index).unhighlight();
     }
 
     @Test
@@ -206,7 +206,7 @@ public class ScrollspyInNavbarTests extends TestsInit {
 
     @Test
     public void baseValidationTest() {
-        baseValidation(scrollspyInNavbar);
+        baseValidation(scrollSpyInNavbar);
         baseValidation(navbarWithDropdown);
     }
 }

@@ -8,7 +8,8 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.nestedNav;
+import static io.github.com.pages.BootstrapPage.scrollSpyWithNestedNav;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.bootstrap.tests.composite.section.navs.ClickVerification.newWindowTitleCheck;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -102,7 +103,7 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
 
     @Test(dataProvider = "listData", priority = 1)
     public void mainContentTests(int index, String link, String header, String paragraph, String mainText) {
-         nestedNav.navItemLink.get(index).is()
+        nestedNav.navItemLink.get(index).is()
                 .core()
                 .displayed()
                 .enabled()
@@ -110,7 +111,7 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .value(is(header))
                 .attr(ATTR_NAME_HREF, is(link));
 
-        scrollspyWithNestedNav.header.get(index).is()
+        scrollSpyWithNestedNav.header.get(index).is()
                 .core()
                 .displayed()
                 .enabled()
@@ -118,20 +119,20 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .value(is(header.toUpperCase()))
                 .attr(ATTR_NAME_ID, is(paragraph));
 
-        scrollspyWithNestedNav.mainText.get(index).is()
+        scrollSpyWithNestedNav.mainText.get(index).is()
                 .core()
                 .displayed()
                 .enabled()
                 .text(is(mainText))
                 .value(is(mainText));
-}
+    }
 
     @Test
     public void isValidationTests() {
         nestedNav.navItemLink.is().size(7);
         nestedNav.navGroup.is().size(3);
-        scrollspyWithNestedNav.mainText.is().size(7);
-        scrollspyWithNestedNav.header.is().size(7);
+        scrollSpyWithNestedNav.mainText.is().size(7);
+        scrollSpyWithNestedNav.header.is().size(7);
 
         nestedNav.navbarLink.is()
                 .core()
@@ -142,8 +143,7 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                 .text(is(navbarText))
                 .cssClass(CLASS_NAME_NAVBAR_BRAND);
 
-        for (UIElement element: nestedNav.navGroup.list())
-        {
+        for (UIElement element : nestedNav.navGroup.list()) {
             element.is()
                     .core()
                     .displayed()
@@ -151,7 +151,7 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
                     .cssClass(CLASS_NAME_NAV_NAV_PILLS_FLEX_COLUMN);
         }
 
-        scrollspyWithNestedNav.is()
+        scrollSpyWithNestedNav.is()
                 .core()
                 .displayed()
                 .enabled()
@@ -165,14 +165,14 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
     public void linkClickableFocusTests(int index) {
         nestedNav.navItemLink.get(1).click();
 
-        int y_header_start = scrollspyWithNestedNav.header.get(1).core().getRect().y;
+        int y_header_start = scrollSpyWithNestedNav.header.get(1).core().getRect().y;
 
         nestedNav.navItemLink.get(index).highlight();
         nestedNav.navItemLink.get(index).click();
 
-        int y_header_current = scrollspyWithNestedNav.header.get(index).core().getRect().y;
+        int y_header_current = scrollSpyWithNestedNav.header.get(index).core().getRect().y;
 
-        if (index!=7)
+        if (index != 7)
             assertThat(y_header_start, is(y_header_current - 6));
         else
             assertThat(y_header_start, is(y_header_current - 92));
@@ -209,12 +209,12 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
 
     @Test(dataProvider = "itemsCheck")
     public void paragraphClickableTests(int index) {
-        scrollspyWithNestedNav.mainText.get(index).highlight();
-        scrollspyWithNestedNav.mainText.get(index).show();
+        scrollSpyWithNestedNav.mainText.get(index).highlight();
+        scrollSpyWithNestedNav.mainText.get(index).show();
 
         if (!nestedNav.navItemLink.get(index).core().hasClass(CLASS_NAME_ACTIVE) &&
                 index < nestedNav.navItemLink.size())
-            scrollspyWithNestedNav.header.get(index+1).show();
+            scrollSpyWithNestedNav.header.get(index + 1).show();
 
         assertTrue(nestedNav.navItemLink.get(index).hasClass(CLASS_NAME_ACTIVE));
         nestedNav.navItemLink.get(index).unhighlight();
@@ -228,7 +228,7 @@ public class ScrollspyWithNestedNavTests extends TestsInit {
 
     @Test
     public void baseValidationTest() {
-        baseValidation(scrollspyWithNestedNav);
+        baseValidation(scrollSpyWithNestedNav);
         baseValidation(nestedNav);
     }
 }
