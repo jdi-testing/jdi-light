@@ -89,33 +89,8 @@ public class ScrollspyInNavbarTests extends TestsInit {
         };
     }
 
-    @DataProvider
-    public Object[][] itemsCheck() {
-        return new Object[][]{
-                {1, paragraphFat}, {2, paragraphMdo}, {3, paragraphOne}, {4, paragraphTwo}, {5, paragraphThree}
-        };
-    }
-
     @Test(dataProvider = "navMenu", priority = 1)
     public void mainContentTests(int index, String link, String header, String paragraph, String mainText) {
-        if (index < 3) {
-            navbarWithDropdown.navItemLink.get(index).is()
-                    .core()
-                    .displayed()
-                    .enabled()
-                    .text(is(header))
-                    .value(is(header))
-                    .attr(ATTR_NAME_HREF, is(link));
-        } else {
-            navbarWithDropdown.dropdownMenu.expand();
-            navbarWithDropdown.dropdownMenu.list().get(header).is()
-                    .core()
-                    .displayed()
-                    .enabled()
-                    .text(is(header))
-                    .value(is(header))
-                    .attr(ATTR_NAME_HREF, is(link));
-        }
         scrollSpyInNavbar.header.get(index).is()
                 .core()
                 .displayed()
@@ -216,9 +191,17 @@ public class ScrollspyInNavbarTests extends TestsInit {
     }
 
     @Test(dataProvider = "dropdownCheck")
-    public void dropdownClickableFocusTests(int index, String _link, String header) {
+    public void dropdownClickableFocusTests(int index, String link, String header) {
         navbarWithDropdown.navItemLink.get(1).click();
         navbarWithDropdown.dropdownMenu.expand();
+
+        navbarWithDropdown.dropdownMenu.list().get(header).is()
+                .core()
+                .displayed()
+                .enabled()
+                .text(is(header))
+                .value(is(header))
+                .attr(ATTR_NAME_HREF, is(link));
 
         int y_header_start = scrollSpyInNavbar.header.get(1).core().getRect().y;
 
@@ -228,24 +211,40 @@ public class ScrollspyInNavbarTests extends TestsInit {
         assertThat(y_header_start, is(y_header_current));
     }
 
-    @Test(dataProvider = "itemsCheck")
-    public void paragraphScrollableTests(int index, String header) {
+    @Test(dataProvider = "linkCheck")
+    public void paragraphScrollableLinkTests(int index, String link, String header) {
         navbarWithDropdown.dropdownMenu.expand();
         scrollSpyInNavbar.mainText.get(index).highlight();
         scrollSpyInNavbar.mainText.get(index).show();
 
-        if (index < 3)
-            navbarWithDropdown.navItemLink.get(index).is()
-                    .core()
-                    .displayed()
-                    .enabled()
-                    .cssClass(CLASS_NAME_NAV_LINK_ACTIVE);
-        else
-            navbarWithDropdown.dropdownMenu.list().get(header).is()
-                    .core()
-                    .displayed()
-                    .enabled()
-                    .cssClass(CLASS_NAME_DROPDOWN_ITEM_ACTIVE);
+        navbarWithDropdown.navItemLink.get(index).is()
+                .core()
+                .displayed()
+                .enabled()
+                .text(is(header))
+                .value(is(header))
+                .attr(ATTR_NAME_HREF, is(link));
+
+        navbarWithDropdown.navItemLink.get(index).is()
+                .core()
+                .displayed()
+                .enabled()
+                .cssClass(CLASS_NAME_NAV_LINK_ACTIVE);
+
+        scrollSpyInNavbar.mainText.get(index).unhighlight();
+    }
+
+    @Test(dataProvider = "dropdownCheck")
+    public void paragraphScrollableDropdownTests(int index, String _link, String header) {
+        navbarWithDropdown.dropdownMenu.expand();
+        scrollSpyInNavbar.mainText.get(index).highlight();
+        scrollSpyInNavbar.mainText.get(index).show();
+
+        navbarWithDropdown.dropdownMenu.list().get(header).is()
+                .core()
+                .displayed()
+                .enabled()
+                .cssClass(CLASS_NAME_DROPDOWN_ITEM_ACTIVE);
 
         scrollSpyInNavbar.mainText.get(index).unhighlight();
     }

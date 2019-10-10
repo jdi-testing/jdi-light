@@ -6,7 +6,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 
 public class NestedNav extends Section {
-    @UI("nav") public ListGroup navGroup;             // @FindBy(css = "nav")
-    @UI("nav nav a") public ListGroup navItemLink;        // @FindBy(css = "nav nav a")
-    @UI(".navbar-brand") public Link navbarLink; // @FindBy(css = ".navbar-brand")
+    @UI("nav") public ListGroup navGroup;          // @FindBy(css = "nav")
+    @UI("nav nav a") public ListGroup navItemLink; // @FindBy(css = "nav nav a")
+    @UI(".navbar-brand") public Link navbarLink;   // @FindBy(css = ".navbar-brand")
 }
