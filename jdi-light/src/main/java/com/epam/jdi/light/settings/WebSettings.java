@@ -6,8 +6,6 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
-import com.epam.jdi.light.driver.get.RemoteDriver;
-import com.epam.jdi.light.driver.sauce.SauceSettings;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
@@ -111,7 +109,7 @@ public class WebSettings {
         String locatorName = SMART_SEARCH_NAME.execute(el.getName());
         return el.base().timer().getResult(() -> {
             for (String template : SMART_SEARCH_LOCATORS) {
-                UIElement ui = (template.equals("#%s")
+                UIElement ui = (("#%s").equals(template)
                     ? $(String.format(template, locatorName))
                     : $(String.format(template, locatorName), el.base().parent))
                         .setup(e -> e.setName(el.getName()).noWait());
@@ -182,9 +180,9 @@ public class WebSettings {
 
     private static void setSearchStrategy(String p) {
         p = p.toLowerCase();
-        if (p.equals("soft"))
+        if (("soft").equals(p))
             p = "any, multiple";
-        if (p.equals("strict"))
+        if (("strict").equals(p))
             p = "visible, single";
         if (p.split(",").length == 2) {
             List<String> params = asList(p.split(","));
