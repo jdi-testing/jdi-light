@@ -114,28 +114,28 @@ public class NavbarSupportedContentTests extends TestsInit {
         navbarSupportedContent.dropdown.unhighlight();
     }
 
-    @Test(dataProvider = "collapseLinkTextData", priority = 10)
-    public void resizeTest(String linkText) {
+    @Test(dataProvider = "collapseLinkTextData", priority = 11)
+    public void collapseLinkTextTest(String linkText) {
         Dimension dimension = new Dimension(900, 600);
         WebDriverFactory.getDriver().manage().window().setSize(dimension);
 
         navbarSupportedContent.navExpand.highlight();
         navbarSupportedContent.navExpand.click();
-        navbarSupportedContent.navExpand.unhighlight();
 
         navbarSupportedContent.nav.is().expanded();
 
         assertTrue(navbarSupportedContent.nav.list().values().contains(linkText));
+
+        navbarSupportedContent.navExpand.unhighlight();
     }
 
-    @Test(priority = 11)
+    @Test(priority = 10)
     public void resizeLinkTest() {
         Dimension dimension = new Dimension(900, 600);
         WebDriverFactory.getDriver().manage().window().setSize(dimension);
 
         navbarSupportedContent.navExpand.highlight();
         navbarSupportedContent.navExpand.click();
-        navbarSupportedContent.navExpand.unhighlight();
 
         navbarSupportedContent.nav.is().expanded();
 
@@ -150,6 +150,8 @@ public class NavbarSupportedContentTests extends TestsInit {
         assertEquals(getUrl(), jdiPageUrl);
         WindowsManager.closeWindow();
         WindowsManager.switchToWindow(1);
+
+        navbarSupportedContent.navExpand.unhighlight();
     }
 
     @Test
