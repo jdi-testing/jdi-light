@@ -1,6 +1,5 @@
 package io.github.epam.bootstrap.tests.composite.section.card;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.CardImageData;
