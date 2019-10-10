@@ -13,7 +13,9 @@ import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
 import static org.mytests.tests.states.States.shouldBeLoggedIn;
 import static org.mytests.uiobjects.example.TestData.TABLE_SNAPSHOOT;
 import static org.mytests.uiobjects.example.site.SiteJdi.performancePage;
-import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.*;
+import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.textareaPerformance;
+import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.userNames;
+import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.usersTable;
 
 public class JDIPerformanceTests extends SimpleTestsInit {
 

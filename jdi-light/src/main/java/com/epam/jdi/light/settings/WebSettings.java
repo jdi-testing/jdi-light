@@ -51,7 +51,9 @@ import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-import static org.openqa.selenium.PageLoadStrategy.*;
+import static org.openqa.selenium.PageLoadStrategy.EAGER;
+import static org.openqa.selenium.PageLoadStrategy.NONE;
+import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 
 public class WebSettings {
     public static ILogger logger = instance("JDI");

@@ -6,7 +6,9 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.cardCenterTextAlignment;
+import static io.github.com.pages.BootstrapPage.cardLeftTextAlignment;
+import static io.github.com.pages.BootstrapPage.cardRightTextAlignment;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
