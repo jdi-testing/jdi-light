@@ -13,6 +13,8 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerSize;
 
@@ -115,6 +117,11 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-default") public static InputGroupSizing inputGroupDefaultSizing;
     @UI("#input-group-small") public static InputGroupSizing inputGroupSmallSizing;
     @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
+// Button addons
+    @UI("#input-group-button-addon1") public static ButtonAddons inputGroupButtonAddons1;
+    @UI("#input-group-button-addon2") public static ButtonAddons inputGroupButtonAddons2;
+    @UI("#input-group-button-addon3") public static ButtonAddons inputGroupButtonAddons3;
+    @UI("#input-group-button-addon4") public static ButtonAddons inputGroupButtonAddons4;
     @UI("#card-example") public static CardExample cardExample;
     @UI("#card-image") public static CardImage cardImage;
     @UI("#card-body") public static CardBody cardBody;
@@ -215,7 +222,9 @@ public class BootstrapPage extends WebPage {
     @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
     @UI("#button-with-growing-spinner-and-text") public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
     @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
-
+    @UI("#navbar-form-1") public static NavbarForm navbarForm;
+    @UI("#navbar-form-2") public static NavbarForm navbarFormWithText;
+    @UI("#navbar-form-3") public static NavbarWithInputGroupForm navbarFormWithInputGroup;
     //Toasts
     @UI("#toastRightTop") public static Toast toastWithTopAlign;
     @UI("#linkToastRightTop") public static Button toastWithTopAlignButton;
@@ -229,10 +238,13 @@ public class BootstrapPage extends WebPage {
     @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
     @UI("#linkToastCenterTop") public static Button toastWithCenterAlignButton;
     @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
+    @UI("body") public static Switches switches;
     @UI("body") public static RadioButtonsCustomInline radioButtonsCustomInline;
     @UI("#translucentToastButton") public static Button translucentToastButton;
     @UI("#translucentToast") public static Toast translucentToast;
     @UI("#custom-radio-con") public static RadioButtonsCustom radioButtonCustom;
     @UI("#forms-sizing") public static FormsSizing formsSizing;
+    //Navbar
+    @UI("#navbar-external-content") public static NavbarExternalContent navbarExternalContent;
     //endregion
 }
