@@ -13,6 +13,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.spinner.GrowingSpinners;
@@ -201,6 +202,9 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-justify") public static NavsJustify navsJustify;
     @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
+    @UI("#navbar-dark-colorscheme") public static NavbarColorScheme navbarDarkColorScheme;
+    @UI("#navbar-blue-colorscheme") public static NavbarColorScheme navbarBlueColorScheme;
+    @UI("#navbar-light-colorscheme") public static NavbarColorScheme navbarLightColorScheme;
     @UI("#progress-multiple-bars") public static ProgressMultipleBars progressMultipleBars;
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI("body") public static Popover popover;
