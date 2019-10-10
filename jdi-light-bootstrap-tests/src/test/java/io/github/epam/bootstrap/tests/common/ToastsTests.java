@@ -30,6 +30,14 @@ public class ToastsTests extends TestsInit {
     }
 
     @Test
+    public void translucentToastValidationTest() {
+        translucentToastButton.click();
+        translucentToast.is().displayed();
+        translucentToast.headerText.is().text(toastHeaderText);
+        translucentToast.body.is().text(toastBodyText);
+    }
+
+    @Test
     public void toastWithTopAlignValidationTest() {
         toastWithTopAlignButton.click();
         toastWithTopAlign.is().displayed();
