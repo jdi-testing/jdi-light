@@ -13,6 +13,8 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerSize;
 
@@ -220,7 +222,9 @@ public class BootstrapPage extends WebPage {
     @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
     @UI("#button-with-growing-spinner-and-text") public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
     @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
-
+    @UI("#navbar-form-1") public static NavbarForm navbarForm;
+    @UI("#navbar-form-2") public static NavbarForm navbarFormWithText;
+    @UI("#navbar-form-3") public static NavbarWithInputGroupForm navbarFormWithInputGroup;
     //Toasts
     @UI("#toastRightTop") public static Toast toastWithTopAlign;
     @UI("#linkToastRightTop") public static Button toastWithTopAlignButton;
