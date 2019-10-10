@@ -240,6 +240,7 @@ public class BootstrapPage extends WebPage {
     @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
     @UI("#linkToastCenterTop") public static Button toastWithCenterAlignButton;
     @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
+    @UI("body") public static CheckboxAndRadioButtonCustomDisabled checkboxAndRadioButtonCustomDisabled;
     @UI("body") public static Switches switches;
     @UI("body") public static RadioButtonsCustomInline radioButtonsCustomInline;
     @UI("#translucentToastButton") public static Button translucentToastButton;
