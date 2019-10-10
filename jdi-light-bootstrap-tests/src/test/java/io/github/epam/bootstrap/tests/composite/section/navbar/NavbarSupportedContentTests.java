@@ -78,6 +78,11 @@ public class NavbarSupportedContentTests extends TestsInit {
     }
 
     @Test
+    public void navClassCheck() {
+        assertThat(navbarSupportedContent.nav.hasClass("navbar-nav"), is(true));
+    }
+
+    @Test
     public void navbarLinkTest() {
         navbarSupportedContent.brand.is().text(navbarBrandText);
         navbarSupportedContent.brand.click();
@@ -93,40 +98,22 @@ public class NavbarSupportedContentTests extends TestsInit {
                                     String elementText,
                                     String elementUrl)
     {
-        navbarSupportedContent.nav.highlight();
+        navbarSupportedContent.nav.show();
         navbarSupportedContent.nav.list().get(elementName)
                 .is()
                 .text(elementText)
                 .and()
                 .attr("href", elementUrl);
-        navbarSupportedContent.nav.unhighlight();
     }
 
     @Test(dataProvider = "dropdownData")
     public void dropdownContentTest(String element, String alertText) {
-        navbarSupportedContent.dropdown.highlight();
+        navbarSupportedContent.dropdown.show();
 
         navbarSupportedContent.dropdown.toggle();
         navbarSupportedContent.dropdown.list().select(element);
 
         validateAlert(is(alertText));
-
-        navbarSupportedContent.dropdown.unhighlight();
-    }
-
-    @Test(dataProvider = "collapseLinkTextData", priority = 11)
-    public void collapseLinkTextTest(String linkText) {
-        Dimension dimension = new Dimension(900, 600);
-        WebDriverFactory.getDriver().manage().window().setSize(dimension);
-
-        navbarSupportedContent.navExpand.highlight();
-        navbarSupportedContent.navExpand.click();
-
-        navbarSupportedContent.nav.is().expanded();
-
-        assertTrue(navbarSupportedContent.nav.list().values().contains(linkText));
-
-        navbarSupportedContent.navExpand.unhighlight();
     }
 
     @Test(priority = 10)
@@ -134,7 +121,7 @@ public class NavbarSupportedContentTests extends TestsInit {
         Dimension dimension = new Dimension(900, 600);
         WebDriverFactory.getDriver().manage().window().setSize(dimension);
 
-        navbarSupportedContent.navExpand.highlight();
+        navbarSupportedContent.navExpand.show();
         navbarSupportedContent.navExpand.click();
 
         navbarSupportedContent.nav.is().expanded();
@@ -150,25 +137,34 @@ public class NavbarSupportedContentTests extends TestsInit {
         assertEquals(getUrl(), jdiPageUrl);
         WindowsManager.closeWindow();
         WindowsManager.switchToWindow(1);
+    }
 
-        navbarSupportedContent.navExpand.unhighlight();
+    @Test(dataProvider = "collapseLinkTextData", priority = 11)
+    public void collapseLinkTextTest(String linkText) {
+        Dimension dimension = new Dimension(900, 600);
+        WebDriverFactory.getDriver().manage().window().setSize(dimension);
+
+        navbarSupportedContent.navExpand.show();
+        navbarSupportedContent.navExpand.click();
+
+        navbarSupportedContent.nav.is().expanded();
+
+        assertTrue(navbarSupportedContent.nav.list().values().contains(linkText));
     }
 
     @Test
     public void searchFormTest() {
-        navbarSupportedContent.searchField.highlight();
+        navbarSupportedContent.searchField.show();
         navbarSupportedContent.searchField.setValue("JDI Light");
         assertThat(navbarSupportedContent.searchField.getValue(), is("JDI Light"));
-        navbarSupportedContent.searchField.unhighlight();
     }
 
     @Test
     public void searchButtonTest() {
-        navbarSupportedContent.searchButton.highlight();
+        navbarSupportedContent.searchButton.show();
         navbarSupportedContent.searchButton.is().text(searchButtonText);
         navbarSupportedContent.searchButton.click();
         validateAlert(is(searchButtonAlertText));
-        navbarSupportedContent.searchButton.unhighlight();
     }
 
 }
