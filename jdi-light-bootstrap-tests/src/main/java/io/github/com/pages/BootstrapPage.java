@@ -6,10 +6,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.*;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.*;
 import io.github.com.sections.*;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
@@ -58,6 +55,8 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-backgrounds-blue") public static Progress progressBackgroundBlue;
     @UI("#progress-backgrounds-yellow") public static Progress progressBackgroundYellow;
     @UI("#progress-backgrounds-red") public static Progress progressBackgroundRed;
+    @UI("#navbar-containers-centred") public static Navbar navbarCentredContainer;
+    @UI("#navbar-containers-expanded") public static Navbar navbarExpandedConteiner;
     @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
     @UI("#spinner-border") public static Spinner spinnerBorder;
     //endregion

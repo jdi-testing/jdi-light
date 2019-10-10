@@ -1,13 +1,18 @@
 package io.github.epam.bootstrap.tests.composite.section;
 
+import com.epam.jdi.light.elements.common.WindowsManager;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.navbarCentredContainer;
+import static io.github.com.pages.BootstrapPage.navbarExpandedConteiner;
+import static org.hamcrest.Matchers.is;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class NavbarContainersTest extends TestsInit {
 
@@ -36,7 +41,7 @@ public class NavbarContainersTest extends TestsInit {
         navbarCentredContainer.is().enabled();
         navbarCentredContainer.assertThat().displayed()
                 .core()
-                .css("font-size", is("20px"))
+                .css("font-size", is("14px"))
                 .cssClass("container")
                 .tag(is("div"));
 
@@ -44,9 +49,9 @@ public class NavbarContainersTest extends TestsInit {
         navbarExpandedConteiner.is().enabled();
         navbarExpandedConteiner.assertThat().displayed()
                 .core()
-                .css("font-size", is("20px"))
-                .cssClass("container")
-                .tag(is("div"));
+                .css("font-size", is("14px"))
+                .cssClass("navbar navbar-expand-lg navbar-light bg-light mb-3")
+                .tag(is("nav"));
     }
 
     @Test
@@ -57,14 +62,20 @@ public class NavbarContainersTest extends TestsInit {
 
     @Test
     public void clickNavbarCentredContainerLinksTest() {
-        navbarNavWithDropdown.navbarBrand.click();
+        navbarCentredContainer.navbarBrand.click();
         assertThat(WindowsManager.windowsCount(), is(2));
         WindowsManager.switchToWindow(2);
         assertThat(getUrl(), is(url));
         WindowsManager.closeWindow();
     }
 
-
-    //проверить разные бутстрап классы навса
-
+    @Test
+    public void clickNavbarExpandedContainerLinksTest() {
+        navbarExpandedConteiner.navbarBrand.click();
+        assertThat(WindowsManager.windowsCount(), is(2));
+        WindowsManager.switchToWindow(2);
+        assertThat(getUrl(), is(url));
+        WindowsManager.closeWindow();
+    }
 }
+
