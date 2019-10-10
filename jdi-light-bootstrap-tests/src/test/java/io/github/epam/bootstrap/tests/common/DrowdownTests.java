@@ -66,6 +66,11 @@ public class DrowdownTests extends TestsInit {
                 .core()
                 .cssClass("dropdown")
                 .tag(is("div"));
+        simpleDropdown.dropdownMenu.is()
+                .core()
+                .cssClass("dropdown-menu")
+                .attr("x-placement", "bottom-start")
+                .tag(is("div"));
         simpleDropdown.dropdownToggle.is()
                 .core()
                 .cssClass("btn btn-primary dropdown-toggle")
