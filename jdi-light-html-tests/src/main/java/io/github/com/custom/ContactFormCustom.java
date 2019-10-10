@@ -13,13 +13,17 @@ import io.github.com.entities.Contacts;
 
 public class ContactFormCustom extends Form<Contacts> {
     @Mandatory TextField name;
-    TextField lastName, position, passportNumber, passportSeria;
+    public TextField lastName;
+    public TextField position;
+    public TextField passportNumber;
+    public TextField passportSeria;
 
-    Dropdown gender;
-    IsCombobox religion;
+    public Dropdown gender;
+    public IsCombobox religion;
 
-    Checkbox passport, acceptConditions;
-    TextArea description;
+    public Checkbox passport;
+    public Checkbox acceptConditions;
+    public TextArea description;
 
     @UI("['Submit']") public Button submit;
     @UI("['Submit']") public Button custom;

@@ -24,7 +24,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class DriverInfo extends DataClass<DriverInfo> {
     public DriverTypes type;
     public JFunc<Capabilities> capabilities;
-    public String properties, path;
+    public String properties;
+    public String path;
     public JFunc<WebDriver> getDriver;
 
     public WebDriver getDriver() {

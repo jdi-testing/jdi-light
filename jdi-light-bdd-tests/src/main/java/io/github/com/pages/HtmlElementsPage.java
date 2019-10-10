@@ -15,7 +15,10 @@ public class HtmlElementsPage extends WebPage {
     public static Label jdiTitle;
     public static Text jdiText;
     @UI("[value*='Red Button']") public static Button redButton;
-    public static Button blueButton, dblClickButton, rightClickButton, disabledButton;
+    public static Button blueButton;
+    public static Button dblClickButton;
+    public static Button rightClickButton;
+    public static Button disabledButton;
     public static Link githubLink;
     public static TextField name;
     public static TextArea textArea;
@@ -26,13 +29,18 @@ public class HtmlElementsPage extends WebPage {
     public static ColorPicker colorPicker;
     public static Range volume;
     public static ProgressBar progress;
-    public static DateTimeSelector birthDate, monthDate, partyTime, bookingTime, autumnWeek;
+    public static DateTimeSelector birthDate;
+    public static DateTimeSelector monthDate;
+    public static DateTimeSelector partyTime;
+    public static DateTimeSelector bookingTime;
+    public static DateTimeSelector autumnWeek;
     public static NumberSelector height;
     //endregion
 
     //region Complex Elements
     public static Dropdown dressCode;
-    public static MultiSelector ages, multiDropdown;
+    public static MultiSelector ages;
+    public static MultiSelector multiDropdown;
     public static IsCombobox iceCream;
     public static Checkbox acceptConditions;
     @UI("[name=checks-group]")
