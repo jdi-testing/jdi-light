@@ -11,6 +11,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 public class Dropdown extends UIBaseElement<UIAssert> implements IsButton{
     @Css(".dropdown-toggle") public Button dropdownToggle;
     @Css(".dropdown-menu") public UIElement dropdownMenu;
-    @Css(".dropdown-item") public WebList items;
+    @Css(".dropdown-menu > *") public WebList items;
 
 }
