@@ -17,13 +17,13 @@ public class FurnitureTests implements TestsInit {
         tablePage.open();
     }
 
-    @Test
-    public void tableParamsTest() {
-        assertEquals(furniture.size(), 4);
-        assertEquals(furniture.count(), 5);
-        assertEquals(furniture.header(), asList("Name", "Type", "Cost", "Weight"));
-    }
-
+//    @Test
+//    public void tableParamsTest() {
+//        assertEquals(furniture.size(), 4);
+//        assertEquals(furniture.count(), 5);
+//        assertEquals(furniture.header(), asList("Name", "Type", "Cost", "Weight"));
+//    }
+//
 //    @Test
 //    public void previewTest() {
 //        String value = users.preview();
