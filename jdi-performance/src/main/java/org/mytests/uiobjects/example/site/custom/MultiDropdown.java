@@ -19,7 +19,9 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.ifSelect;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.LinqUtils.toList;
 import static java.util.Arrays.asList;
 import static org.jsoup.helper.StringUtil.isBlank;
 

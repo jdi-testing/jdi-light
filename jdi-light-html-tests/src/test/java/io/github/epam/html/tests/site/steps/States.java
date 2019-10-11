@@ -7,7 +7,10 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
-import static io.github.com.pages.Header.*;
+import static io.github.com.pages.Header.loginForm;
+import static io.github.com.pages.Header.logout;
+import static io.github.com.pages.Header.userIcon;
+import static io.github.com.pages.Header.userName;
 
 /**
  * Created by Roman_Iovlev on 3/1/2018.
