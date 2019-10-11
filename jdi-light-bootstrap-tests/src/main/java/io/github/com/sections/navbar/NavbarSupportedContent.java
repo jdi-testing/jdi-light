@@ -6,8 +6,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.DropdownExpand;
-import io.github.com.sections.InputGroupInputWithText;
 
 public class NavbarSupportedContent extends Navbar {
 
