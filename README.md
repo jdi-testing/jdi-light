@@ -10,11 +10,11 @@
 For fast start you can go through [tutorial](https://jdi-docs.github.io/jdi-light/?java#tutorial) </br>
 
 More links: </br>
-Documentation: https://jdi-docs.github.io/jdi-light/?java - different types of documentation from introduction and tutorial to technical methods documentation </br>
-Introduction + fast start example: https://jdi-docs.github.io/jdi-light/?java#introduction </br>
-Tutorial: https://jdi-docs.github.io/jdi-light/?java#tutorial - helps to get main ideas on practice </br>
-Tutorial repo:  https://github.com/jdi-tutorials </br>
-Project templates: https://github.com/jdi-templates - for fast projects start </br>
+Documentation: <a href = "https://jdi-docs.github.io/jdi-light/?java" target = "a_blank"> https://jdi-docs.github.io/jdi-light/?java </a> - different types of documentation from introduction and tutorial to technical methods documentation </br>
+Introduction + fast start example: <a href = "https://jdi-docs.github.io/jdi-light/?java#introduction" target = "a_blank"> https://jdi-docs.github.io/jdi-light/?java#introduction </a> </br>
+Tutorial: <a href = "https://jdi-docs.github.io/jdi-light/?java#tutorial" target = "a_blank"> https://jdi-docs.github.io/jdi-light/?java#tutorial </a> - helps to get main ideas on practice </br>
+Tutorial repo: <a href = "https://github.com/jdi-tutorials" target = "a_blank"> https://github.com/jdi-tutorials </a> </br>
+Project templates: <a href = "https://github.com/jdi-templates" target = "a_blank"> https://github.com/jdi-templates </a>  - for fast projects start </br>
 Examples: https://github.com/jdi-examples </br>
 How to use [UI Elements examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests/src/test/java/io/github/epam/html/tests/elements) </br>
 Increase test [performance examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-performance) </br>
@@ -41,25 +41,25 @@ Run test execution automatically and correct tests if any changes in layout happ
 [Features](https://github.com/jdi-testing/jdi-light/labels/feature)
 
 ## Useful Links
-Test site: https://jdi-testing.github.io/jdi-light/
+Test site: <a href = "https://jdi-testing.github.io/jdi-light/" target = "a_blank"> https://jdi-testing.github.io/jdi-light/ </a>
 
 Login to get access to all pages (Login: Roman; Password: Jdi1234)
 
-Html Elements examples: https://jdi-testing.github.io/jdi-light/html5.html
+Html Elements examples: <a href = "https://jdi-testing.github.io/jdi-light/html5.html" target = "a_blank"> https://jdi-testing.github.io/jdi-light/html5.html </a>
 
-Example Html elements tests: https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests
+Example Html elements tests: <a href = "https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests" target = "a_blank"> https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests </a>
 
-Example Scenario tests: https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-examples
+Example Scenario tests: <a href = "https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-examples" target = "a_blank"> https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-examples </a>
 
-Site: http://jdi.epam.com/
+Site: <a href = "http://jdi.epam.com/" target = "a_blank"> http://jdi.epam.com/ </a>
 
-VK: https://vk.com/jdi_framework
+VK: <a href = "https://vk.com/jdi_framework" target = "a_blank"> https://vk.com/jdi_framework </a>
 
-Facebook: https://www.facebook.com/groups/jdi.framework/
+Facebook: <a href = "https://www.facebook.com/groups/jdi.framework/" target = "a_blank"> https://www.facebook.com/groups/jdi.framework/ </a>
 
 You can ask your questions on StackOverflow with [![htmlelements](https://img.shields.io/badge/stackoverflow-jdiframework-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/jdiframework) tag
 
-Get Help in active users Skype chat: https://join.skype.com/clvyVvnZvWqc
+Get Help in active users Skype chat: <a href = "https://join.skype.com/clvyVvnZvWqc" target = "a_blank"> https://join.skype.com/clvyVvnZvWqc </a>
 
 ## Contacts:
 

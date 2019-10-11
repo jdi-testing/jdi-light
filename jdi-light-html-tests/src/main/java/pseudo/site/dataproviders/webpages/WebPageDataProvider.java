@@ -2,7 +2,11 @@ package pseudo.site.dataproviders.webpages;
 
 import org.testng.annotations.DataProvider;
 
-import static pseudo.site.PseudoSite.*;
+import static pseudo.site.PseudoSite.pageWithBoth;
+import static pseudo.site.PseudoSite.pageWithTitle;
+import static pseudo.site.PseudoSite.pageWithURL;
+import static pseudo.site.PseudoSite.pageWithoutBoth;
+import static pseudo.site.PseudoSite.slashPageWithURL;
 
 public class WebPageDataProvider {
 

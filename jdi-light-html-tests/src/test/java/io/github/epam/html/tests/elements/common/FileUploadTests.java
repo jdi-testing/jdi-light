@@ -13,11 +13,15 @@ import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.com.pages.HtmlElementsPage.avatar;
+import static io.github.com.pages.HtmlElementsPage.disabledFileInput;
+import static io.github.com.pages.HtmlElementsPage.downloadJdiLogo;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.apache.commons.io.FileUtils.writeStringToFile;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 

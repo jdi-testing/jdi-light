@@ -8,7 +8,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.multipleAddonLower;
+import static io.github.com.pages.BootstrapPage.multipleAddonUpper;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
