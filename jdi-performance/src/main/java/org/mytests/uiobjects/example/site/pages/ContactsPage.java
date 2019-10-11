@@ -18,7 +18,7 @@ public class ContactsPage extends WebPage {
 	public TextField lastName;
 	public TextField position;
 	public TextField passportNumber;
-	public TextField passportSeria;
+	public TextField passportSerial;
 
 	DropdownSelect gender;
 	IsCombobox religion;

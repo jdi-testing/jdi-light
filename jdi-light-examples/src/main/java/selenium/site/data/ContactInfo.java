@@ -11,7 +11,7 @@ public class ContactInfo extends DataClass<ContactInfo> {
     public String weather;
     public String description;
     public Integer passportNumber;
-    public Integer passportSeria;
+    public Integer passportSerial;
     public Boolean passport;
     public Boolean acceptConditions;
 }

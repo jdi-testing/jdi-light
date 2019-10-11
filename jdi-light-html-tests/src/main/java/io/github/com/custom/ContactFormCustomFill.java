@@ -17,7 +17,7 @@ public class ContactFormCustomFill extends Form<Contacts> {
     public TextField lastName;
     public TextField position;
     public TextField passportNumber;
-    public TextField passportSeria;
+    public TextField passportSerial;
 
     public Dropdown gender;
     public IsCombobox religion;

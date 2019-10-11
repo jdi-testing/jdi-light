@@ -10,7 +10,7 @@ public class Defaults {
         c.position = "ChiefQA";
         c.passport = true;
         c.passportNumber = "4321";
-        c.passportSeria = "123456";
+        c.passportSerial = "123456";
         c.description = "JDI - awesome UI automation tool";
         c.acceptConditions = "true";
         c.gender = "Female";

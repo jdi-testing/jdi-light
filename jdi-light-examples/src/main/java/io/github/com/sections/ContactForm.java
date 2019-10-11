@@ -11,7 +11,7 @@ public class ContactForm extends Form<User> {
 	public WebElement lastName;
 	public WebElement position;
 	public WebElement passportNumber;
-	public WebElement passportSeria;
+	public WebElement passportSerial;
 	public WebElement passport;
 	public WebElement acceptConditions;
 	public WebElement description;
