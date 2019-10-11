@@ -1,9 +1,7 @@
 package io.github.epam.bootstrap.tests.composite.section.navbar;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.common.WindowsManager;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -118,8 +116,7 @@ public class NavbarSupportedContentTests extends TestsInit {
 
     @Test(priority = 10)
     public void resizeLinkTest() {
-        Dimension dimension = new Dimension(900, 600);
-        WebDriverFactory.getDriver().manage().window().setSize(dimension);
+        WindowsManager.resizeWindow(900, 600);
 
         navbarSupportedContent.navExpand.show();
         navbarSupportedContent.navExpand.click();
@@ -141,8 +138,7 @@ public class NavbarSupportedContentTests extends TestsInit {
 
     @Test(dataProvider = "collapseLinkTextData", priority = 11)
     public void collapseLinkTextTest(String linkText) {
-        Dimension dimension = new Dimension(900, 600);
-        WebDriverFactory.getDriver().manage().window().setSize(dimension);
+        WindowsManager.resizeWindow(900, 600);
 
         navbarSupportedContent.navExpand.show();
         navbarSupportedContent.navExpand.click();
