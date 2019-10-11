@@ -29,6 +29,7 @@
         })
 
 
+
     </script>
 </head>
 <body>
@@ -1025,7 +1026,7 @@
                                     <li class="nav-item active">
                                         <a class="nav-link"
                                            href="https://getbootstrap.com/docs/4.3/components/navbar/#nav"
-                                           target="_blank">Active link<span class="sr-only">(current)</span></a>
+                                           target="_blank">Active link</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link"
@@ -1034,7 +1035,8 @@
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                           data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false">Dropdown</a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" onclick="alert('Action Clicked!');">Action</a>
                                             <a class="dropdown-item" onclick="alert('Another action Clicked!');">Another action</a>
@@ -1043,16 +1045,14 @@
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled
-                                            link</a>
+                                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled link</a>
                                     </li>
                                 </ul>
                                 <form class="form-inline my-2 my-lg-0">
                                     <input class="form-control mr-sm-2" type="search" placeholder="Search"
                                            aria-label="Search">
                                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                                            onclick="alert('Search Button Clicked!');">Search
-                                    </button>
+                                            onclick="alert('Search Button Clicked!');">Search</button>
                                 </form>
                             </div>
                         </nav>
@@ -1068,33 +1068,38 @@
                     </div>
 
                     <div class="doc-space line">
-                        <div class="html-left">
-                            <p>Navbar - Brand as link</p>
-                            <nav class="navbar navbar-light bg-light">
-                                <a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav"
-                                   target="_blank">Brand link</a>
-                            </nav>
-                            <br>
-                            <p>Navbar - Brand as heading</p>
-                            <nav class="navbar navbar-light bg-light">
-                                <span class="navbar-brand mb-0 h1">Brand heading</span>
-                            </nav>
-                            <br>
-                            <p>Navbar - Brand as image</p>
-                            <nav class="navbar navbar-light bg-light">
-                                <a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav"
-                                   target="_blank">
-                                    <img src="images/wolverin.jpg" width="20" height="30" alt="">
-                                </a>
-                            </nav>
-                            <br>
-                            <p>Navbar - Brand as image and link</p>
-                            <nav class="navbar navbar-light bg-light mb-3">
-                                <a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/navbar/#nav"
-                                   target="_blank">
-                                    <img src="images/wolverin.jpg" width="20" height="30"
-                                         class="d-inline-block align-top" alt="">Brand link</a>
-                            </nav>
+                        <div id="navbar-base-for-brand">
+                            <div class="html-left">
+                                <p>Navbar - Brand as link</p>
+                                <nav class="navbar navbar-light bg-light">
+                                    <a class="navbar-brand" id="brand-link"
+                                       href="https://getbootstrap.com/docs/4.3/components/navbar/#nav"
+                                       target="_blank">Brand link</a>
+                                </nav>
+                                <br>
+                                <p>Navbar - Brand as heading</p>
+                                <nav class="navbar navbar-light bg-light">
+                                    <span class="navbar-brand mb-0 h1" id="brand-heading">Brand heading</span>
+                                </nav>
+                                <br>
+                                <p>Navbar - Brand as image</p>
+                                <nav class="navbar navbar-light bg-light">
+                                    <a class="navbar-brand" id="brand-as-image"
+                                       href="https://getbootstrap.com/docs/4.3/components/navbar/#nav"
+                                       target="_blank">
+                                        <img src="images/wolverin.jpg" width="20" height="30" alt="">
+                                    </a>
+                                </nav>
+                                <br>
+                                <p>Navbar - Brand as image and link</p>
+                                <nav class="navbar navbar-light bg-light mb-3">
+                                    <a class="navbar-brand" id="brand-as-image-and-link"
+                                       href="https://getbootstrap.com/docs/4.3/components/navbar/#nav"
+                                       target="_blank">
+                                        <img src="images/wolverin.jpg" width="20" height="30"
+                                             class="d-inline-block align-top" alt="">Brand link</a>
+                                </nav>
+                            </div>
                         </div>
                         <div class="html-right">
                             <h4>Navbar - Brand</h4>
@@ -1270,7 +1275,8 @@
                                 </form>
                             </div>
                         </nav>
-                        <nav id = "navbar-light-colorscheme" class="navbar navbar-expand-lg navbar-light mb-1" style="background-color: #e3f2fd;">
+                        <nav id="navbar-light-colorscheme" class="navbar navbar-expand-lg navbar-light mb-1"
+                             style="background-color: #e3f2fd;">
                             <a class="navbar-brand"
                                href="https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes"
                                target="_blank">Navbar</a>
@@ -1317,7 +1323,7 @@
                     <div class="doc-space line">
                         <div class="html-left">
 
-                            <div class="container" id = "navbar-containers-centred">
+                            <div class="container" id="navbar-containers-centred">
                                 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-1">
                                     <a class="navbar-brand"
                                        href="https://getbootstrap.com/docs/4.3/components/navbar/#containers"
@@ -1326,7 +1332,8 @@
                             </div>
 
 
-                            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3" id = "navbar-containers-expanded">
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3"
+                                 id="navbar-containers-expanded">
                                 <div class="container">
                                     <a class="navbar-brand"
                                        href="https://getbootstrap.com/docs/4.3/components/navbar/#containers"
@@ -1346,12 +1353,13 @@
 
                     <div class="doc-space line">
                         <div class="html-left mb-3">
-                            <nav id="navbar-placement-default" class="navbar navbar-light bg-light">
-                                <a class="navbar-brand" href="https://jdi-testing.github.io/jdi-light/index.html"
+                            <nav class="navbar navbar-light bg-light">
+                                <a class="navbar-brand" id="navbar-placement-default"
+                                   href="https://jdi-testing.github.io/jdi-light/index.html"
                                    target="_blank">Default</a>
                             </nav>
-                            <nav id="navbar-placement-sticky-top" class="navbar sticky-top navbar-light bg-light">
-                                <a class="navbar-brand" href="#">Sticky top</a>
+                            <nav class="navbar sticky-top navbar-light bg-light">
+                                <a class="navbar-brand" id="navbar-placement-sticky-top" href="#">Sticky top</a>
                             </nav>
                         </div>
                         <div class="html-right">
@@ -1721,14 +1729,14 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="html-right">
-                                <h4>Progress</h4>
-                                <p>
-                                    Bootstrap: <a
-                                        href="https://getbootstrap.com/docs/4.3/components/progress/"
-                                        target="_blank">https://getbootstrap.com/docs/4.3/components/progress/</a>
-                                </p>
-                            </div>
+                        <div class="html-right">
+                            <h4>Progress</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/progress/"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/progress/</a>
+                            </p>
+                        </div>
                     </div>
                     <div class="doc-space line">
                         <div class="html-left">
@@ -1744,14 +1752,14 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="html-right">
-                                <h4>Progress</h4>
-                                <p>
-                                    Bootstrap: <a
-                                        href="https://getbootstrap.com/docs/4.3/components/progress/"
-                                        target="_blank">https://getbootstrap.com/docs/4.3/components/progress/</a>
-                                </p>
-                            </div>
+                        <div class="html-right">
+                            <h4>Progress</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/progress/"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/progress/</a>
+                            </p>
+                        </div>
                     </div>
                     <div class="doc-space line">
                         <div class="html-left">
@@ -1776,14 +1784,14 @@
                                      aria-valuemax="100"></div>
                             </div>
                         </div>
-                            <div class="html-right">
-                                <h4>Progress</h4>
-                                <p>
-                                    Bootstrap: <a
-                                        href="https://getbootstrap.com/docs/4.3/components/progress/"
-                                        target="_blank">https://getbootstrap.com/docs/4.3/components/progress/</a>
-                                </p>
-                            </div>
+                        <div class="html-right">
+                            <h4>Progress</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/progress/"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/progress/</a>
+                            </p>
+                        </div>
                     </div>
 
                     <div class="doc-space line">
@@ -1792,22 +1800,25 @@
                             <br>
                             <p>multiple bars</p>
                             <div id="progress-multiple-bars" class="progress">
-                                <div id="progress-multiple-ordinary" class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15"
+                                <div id="progress-multiple-ordinary" class="progress-bar" role="progressbar"
+                                     style="width: 15%" aria-valuenow="15"
                                      aria-valuemin="0" aria-valuemax="100"></div>
-                                <div id="progress-multiple-success" class="progress-bar bg-success" role="progressbar" style="width: 30%"
+                                <div id="progress-multiple-success" class="progress-bar bg-success" role="progressbar"
+                                     style="width: 30%"
                                      aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                <div id="progress-multiple-info" class="progress-bar bg-info" role="progressbar" style="width: 20%"
+                                <div id="progress-multiple-info" class="progress-bar bg-info" role="progressbar"
+                                     style="width: 20%"
                                      aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
-                            <div class="html-right">
-                                <h4>Progress</h4>
-                                <p>
-                                    Bootstrap: <a
-                                        href="https://getbootstrap.com/docs/4.3/components/progress/"
-                                        target="_blank">https://getbootstrap.com/docs/4.3/components/progress/</a>
-                                </p>
-                            </div>
+                        <div class="html-right">
+                            <h4>Progress</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/progress/"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/progress/</a>
+                            </p>
+                        </div>
                     </div>
 
                     <div class="doc-space line">
@@ -1848,14 +1859,14 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="html-right">
-                                <h4>Progress-Striped</h4>
-                                <p>
-                                    Bootstrap: <a
-                                        href="https://getbootstrap.com/docs/4.3/components/progress/#striped"
-                                        target="_blank">https://getbootstrap.com/docs/4.3/components/progress/#striped</a>
-                                </p>
-                            </div>
+                        <div class="html-right">
+                            <h4>Progress-Striped</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/progress/#striped"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/progress/#striped</a>
+                            </p>
+                        </div>
                     </div>
                     <div class="doc-space line">
                         <div class="html-left">
@@ -1868,34 +1879,34 @@
                                      aria-valuemax="100" style="width: 75%"></div>
                             </div>
                         </div>
-                            <div class="html-right">
-                                <h4>Progress</h4>
-                                <p>
-                                    Bootstrap: <a
-                                        href="https://getbootstrap.com/docs/4.3/components/progress/"
-                                        target="_blank">https://getbootstrap.com/docs/4.3/components/progress/</a>
-                                </p>
-                            </div>
+                        <div class="html-right">
+                            <h4>Progress</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/progress/"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/progress/</a>
+                            </p>
+                        </div>
                     </div>
 
                     <div class="doc-space line">
                         <div class="html-left">
                             <div id="progress-height">
-                                <p>base</p>
+                                <p>various heights</p>
                                 <div class="progress" id="progress-height-20px" style="height: 20px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
                                          aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="progress" id="progress-height-40px" style="height: 40px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50"
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50"
                                          aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="progress" id="progress-height-60px" style="height: 60px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75"
                                          aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="progress" id="progress-height-80px" style="height: 80px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100"
                                          aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
@@ -2076,7 +2087,7 @@
                     <!-- DROPDOWN START -->
                     <div class="doc-space line">
                         <div class="html-left mb-3">
-                            <div class="dropdown">
+                            <div id="simpleDropdown" class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                         style="margin-bottom: 5px;">
@@ -2603,12 +2614,15 @@
                             <form class="mb-3">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Enter email">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                        anyone else.</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                           placeholder="Password">
                                 </div>
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -2630,7 +2644,8 @@
                             <form>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                                           placeholder="name@example.com">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Example select</label>
@@ -2677,9 +2692,12 @@
                     <div class="doc-space line">
                         <div class="html-left" id="forms-sizing">
                             <div class="mb-3">
-                                <input class="form-control form-control-lg mb-3" id="form-sizing-lg" type="text" placeholder=".form-control-lg">
-                                <input class="form-control mb-3" id="form-sizing-default" type="text" placeholder="Default input">
-                                <input class="form-control form-control-sm mb-3" id="form-sizing-sm" type="text" placeholder=".form-control-sm">
+                                <input class="form-control form-control-lg mb-3" id="form-sizing-lg" type="text"
+                                       placeholder=".form-control-lg">
+                                <input class="form-control mb-3" id="form-sizing-default" type="text"
+                                       placeholder="Default input">
+                                <input class="form-control form-control-sm mb-3" id="form-sizing-sm" type="text"
+                                       placeholder=".form-control-sm">
                             </div>
 
                             <div class="mb-3">
@@ -2721,13 +2739,15 @@
                             <div class="form-group row">
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                                           value="email@example.com">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                    <input type="password" class="form-control" id="inputPassword"
+                                           placeholder="Password">
                                 </div>
                             </div>
                         </form>
@@ -2735,7 +2755,8 @@
                         <form class="form-inline mb-3">
                             <div class="form-group mb-2">
                                 <label for="staticEmail2" class="sr-only">Email</label>
-                                <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
+                                <input type="text" readonly class="form-control-plaintext" id="staticEmail2"
+                                       value="email@example.com">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
                                 <label for="inputPassword2" class="sr-only">Password</label>
@@ -2749,8 +2770,9 @@
                         </div>
                         <div class="html-right">
                             <h4>Forms - Readonly plain text</h4>
-                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#readonly-plain-text"
-                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#readonly-plain-text</a>
+                            <p>Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/forms/#readonly-plain-text"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#readonly-plain-text</a>
                             </p>
                         </div>
                     </div>
@@ -2777,11 +2799,13 @@
                             <form>
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Example label</label>
-                                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+                                    <input type="text" class="form-control" id="formGroupExampleInput"
+                                           placeholder="Example input">
                                 </div>
                                 <div class="form-group">
                                     <label for="formGroupExampleInput2">Another label</label>
-                                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                                    <input type="text" class="form-control" id="formGroupExampleInput2"
+                                           placeholder="Another input">
                                 </div>
                             </form>
                         </div>
@@ -2847,7 +2871,8 @@
                                 <div class="form-group row">
                                     <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                        <input type="password" class="form-control" id="inputPassword3"
+                                               placeholder="Password">
                                     </div>
                                 </div>
                                 <fieldset class="form-group">
@@ -2855,19 +2880,22 @@
                                         <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
                                         <div class="col-sm-10">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                                <input class="form-check-input" type="radio" name="gridRadios"
+                                                       id="gridRadios1" value="option1" checked>
                                                 <label class="form-check-label" for="gridRadios1">
                                                     First radio
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                                <input class="form-check-input" type="radio" name="gridRadios"
+                                                       id="gridRadios2" value="option2">
                                                 <label class="form-check-label" for="gridRadios2">
                                                     Second radio
                                                 </label>
                                             </div>
                                             <div class="form-check disabled">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+                                                <input class="form-check-input" type="radio" name="gridRadios"
+                                                       id="gridRadios3" value="option3" disabled>
                                                 <label class="form-check-label" for="gridRadios3">
                                                     Third disabled radio
                                                 </label>
@@ -2905,56 +2933,62 @@
                         <div class="html-left">
                             <form>
                                 <div class="form-group row">
-                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+                                    <label for="colFormLabelSm"
+                                           class="col-sm-2 col-form-label col-form-label-sm">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="col-form-label-sm">
+                                        <input type="email" class="form-control form-control-sm" id="colFormLabelSm"
+                                               placeholder="col-form-label-sm">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="colFormLabel" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="colFormLabel" placeholder="col-form-label">
+                                        <input type="email" class="form-control" id="colFormLabel"
+                                               placeholder="col-form-label">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Email</label>
+                                    <label for="colFormLabelLg"
+                                           class="col-sm-2 col-form-label col-form-label-lg">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg">
+                                        <input type="email" class="form-control form-control-lg" id="colFormLabelLg"
+                                               placeholder="col-form-label-lg">
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="html-right">
                             <h4>Forms - Horizontal form label sizing</h4>
-                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#horizontal-form-label-sizing"
-                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#horizontal-form-label-sizing</a>
+                            <p>Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/forms/#horizontal-form-label-sizing"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#horizontal-form-label-sizing</a>
                             </p>
                         </div>
                     </div>
 
                     <div class="doc-space line">
-                    <div class="html-left">
-                        <form>
-                            <div class="form-row">
-                                <div class="col-7">
-                                    <input type="text" class="form-control" placeholder="City">
+                        <div class="html-left">
+                            <form>
+                                <div class="form-row">
+                                    <div class="col-7">
+                                        <input type="text" class="form-control" placeholder="City">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="State">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="Zip">
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="State">
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="Zip">
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+                        <div class="html-right">
+                            <h4>Forms - Column sizing</h4>
+                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#column-sizing"
+                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#column-sizing</a>
+                            </p>
+                        </div>
                     </div>
-                    <div class="html-right">
-                        <h4>Forms - Column sizing</h4>
-                        <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#column-sizing"
-                                         target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#column-sizing</a>
-                        </p>
-                    </div>
-                </div>
 
                     <div class="doc-space line">
 
@@ -2962,7 +2996,8 @@
                             <div class="form-row align-items-center">
                                 <div class="col-auto">
                                     <label class="sr-only" for="inlineFormInput">Name</label>
-                                    <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe">
+                                    <input type="text" class="form-control mb-2" id="inlineFormInput"
+                                           placeholder="Jane Doe">
                                 </div>
                                 <div class="col-auto">
                                     <label class="sr-only" for="inlineFormInputGroup">Username</label>
@@ -2970,7 +3005,8 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">@</div>
                                         </div>
-                                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+                                        <input type="text" class="form-control" id="inlineFormInputGroup"
+                                               placeholder="Username">
                                     </div>
                                 </div>
                                 <div class="col-auto">
@@ -2992,7 +3028,8 @@
                             <div class="form-row align-items-center">
                                 <div class="col-sm-3 my-1">
                                     <label class="sr-only" for="inlineFormInputName">Name</label>
-                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Jane Doe">
+                                    <input type="text" class="form-control" id="inlineFormInputName"
+                                           placeholder="Jane Doe">
                                 </div>
                                 <div class="col-sm-3 my-1">
                                     <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
@@ -3000,7 +3037,8 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">@</div>
                                         </div>
-                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername"
+                                               placeholder="Username">
                                     </div>
                                 </div>
                                 <div class="col-auto my-1">
@@ -3030,8 +3068,10 @@
                                 </div>
                                 <div class="col-auto my-1">
                                     <div class="custom-control custom-checkbox mr-sm-2">
-                                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                                        <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
+                                        <input type="checkbox" class="custom-control-input"
+                                               id="customControlAutosizing">
+                                        <label class="custom-control-label" for="customControlAutosizing">Remember my
+                                            preference</label>
                                     </div>
                                 </div>
                                 <div class="col-auto my-1">
@@ -3055,14 +3095,16 @@
 
                         <form class="form-inline mb-3">
                             <label class="sr-only" for="inlineFormInputName2">Name</label>
-                            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2"
+                                   placeholder="Jane Doe">
 
                             <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
                             <div class="input-group mb-2 mr-sm-2">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">@</div>
                                 </div>
-                                <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+                                <input type="text" class="form-control" id="inlineFormInputGroupUsername2"
+                                       placeholder="Username">
                             </div>
 
                             <div class="form-check mb-2 mr-sm-2">
@@ -3086,7 +3128,8 @@
 
                             <div class="custom-control custom-checkbox my-1 mr-sm-2">
                                 <input type="checkbox" class="custom-control-input" id="customControlInline">
-                                <label class="custom-control-label" for="customControlInline">Remember my preference</label>
+                                <label class="custom-control-label" for="customControlInline">Remember my
+                                    preference</label>
                             </div>
 
                             <button type="submit" class="btn btn-primary my-1">Submit</button>
@@ -3106,15 +3149,18 @@
                     <div class="doc-space line">
 
                         <label for="inputPassword5">Password</label>
-                        <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+                        <input type="password" id="inputPassword5" class="form-control"
+                               aria-describedby="passwordHelpBlock">
                         <small id="passwordHelpBlock" class="form-text text-muted mb-3">
-                            Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                            Your password must be 8-20 characters long, contain letters and numbers, and must not
+                            contain spaces, special characters, or emoji.
                         </small>
 
                         <form class="form-inline mb-3">
                             <div class="form-group">
                                 <label for="inputPassword6">Password</label>
-                                <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline">
+                                <input type="password" id="inputPassword6" class="form-control mx-sm-3"
+                                       aria-describedby="passwordHelpInline">
                                 <small id="passwordHelpInline" class="text-muted">
                                     Must be 8-20 characters long.
                                 </small>
@@ -3138,7 +3184,8 @@
                                 <fieldset disabled>
                                     <div class="form-group">
                                         <label for="disabledTextInput">Disabled input</label>
-                                        <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+                                        <input type="text" id="disabledTextInput" class="form-control"
+                                               placeholder="Disabled input">
                                     </div>
                                     <div class="form-group">
                                         <label for="disabledSelect">Disabled select menu</label>
@@ -3148,7 +3195,8 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
+                                            <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck"
+                                                   disabled>
                                             <label class="form-check-label" for="disabledFieldsetCheck">
                                                 Can't check this
                                             </label>
@@ -3168,29 +3216,32 @@
 
                     <div class="doc-space line">
 
-                        <form class="needs-validation" novalidate>
+                        <form class="needs-validation" id="validation-submit-form" novalidate>
                             <div class="form-row">
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-4 mb-3" id="validationCustom01-div">
                                     <label for="validationCustom01">First name</label>
-                                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+                                    <input type="text" class="form-control" id="validationCustom01"
+                                           placeholder="First name" value="Mark" required>
                                     <div class="valid-feedback">
                                         Looks good!
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-4 mb-3" id="validationCustom02-div">
                                     <label for="validationCustom02">Last name</label>
-                                    <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required>
+                                    <input type="text" class="form-control" id="validationCustom02"
+                                           placeholder="Last name" value="Otto" required>
                                     <div class="valid-feedback">
                                         Looks good!
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-4 mb-3" id="validationCustomUsername-div">
                                     <label for="validationCustomUsername">Username</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
                                         </div>
-                                        <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required>
+                                        <input type="text" class="form-control" id="validationCustomUsername"
+                                               placeholder="Username" aria-describedby="inputGroupPrepend" required>
                                         <div class="invalid-feedback">
                                             Please choose a username.
                                         </div>
@@ -3198,30 +3249,33 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-6 mb-3" id="validationCustom03-div">
                                     <label for="validationCustom03">City</label>
-                                    <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
+                                    <input type="text" class="form-control" id="validationCustom03" placeholder="City"
+                                           required>
                                     <div class="invalid-feedback">
                                         Please provide a valid city.
                                     </div>
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-3 mb-3" id="validationCustom04-div">
                                     <label for="validationCustom04">State</label>
-                                    <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
+                                    <input type="text" class="form-control" id="validationCustom04" placeholder="State"
+                                           required>
                                     <div class="invalid-feedback">
                                         Please provide a valid state.
                                     </div>
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-3 mb-3"  id="validationCustom05-div">
                                     <label for="validationCustom05">Zip</label>
-                                    <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
+                                    <input type="text" class="form-control" id="validationCustom05" placeholder="Zip"
+                                           required>
                                     <div class="invalid-feedback">
                                         Please provide a valid zip.
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="form-check">
+                                <div class="form-check" id="invalidCheck-div">
                                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                                     <label class="form-check-label" for="invalidCheck">
                                         Agree to terms and conditions
@@ -3231,7 +3285,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" type="submit">Submit form</button>
+                            <button class="btn btn-primary" type="submit" onclick="alert('Form filled and submitted successfully');">Submit form</button>
                         </form>
 
                         <!-- Example starter JavaScript for disabling form submissions if there are invalid fields -->
@@ -3253,7 +3307,8 @@
                                     });
                                   }, false);
                                 })();
-                            </script>
+
+                        </script>
 
                         <div class="html-left">
 
@@ -3268,15 +3323,17 @@
 
                     <div class="doc-space line">
 
-                        <form>
+                        <form id="form-browser-defaults">
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label for="validationDefault01">First name</label>
-                                    <input type="text" class="form-control" id="validationDefault01" placeholder="First name" value="Mark" required>
+                                    <input type="text" class="form-control" id="validationDefault01"
+                                           placeholder="First name" value="Mark" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationDefault02">Last name</label>
-                                    <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value="Otto" required>
+                                    <input type="text" class="form-control" id="validationDefault02"
+                                           placeholder="Last name" value="Otto" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationDefaultUsername">Username</label>
@@ -3284,33 +3341,38 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroupPrepend2">@</span>
                                         </div>
-                                        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+                                        <input type="text" class="form-control" id="validationDefaultUsername"
+                                               placeholder="Username" aria-describedby="inputGroupPrepend2" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationDefault03">City</label>
-                                    <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
+                                    <input type="text" class="form-control" id="validationDefault03" placeholder="City"
+                                           required>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="validationDefault04">State</label>
-                                    <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
+                                    <input type="text" class="form-control" id="validationDefault04" placeholder="State"
+                                           required>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="validationDefault05">Zip</label>
-                                    <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
+                                    <input type="text" class="form-control" id="validationDefault05" placeholder="Zip"
+                                           required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2"
+                                           required>
                                     <label class="form-check-label" for="invalidCheck2">
                                         Agree to terms and conditions
                                     </label>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" type="submit">Submit form</button>
+                            <button class="btn btn-primary" type="submit" onclick="alert('Form filled and submitted successfully');">Submit form</button>
                         </form>
 
                         <div class="html-left">
@@ -3326,18 +3388,20 @@
 
                     <div class="doc-space line">
 
-                        <form>
+                        <form id="form-server-side">
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label for="validationServer01">First name</label>
-                                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
+                                    <input type="text" class="form-control is-valid" id="validationServer01"
+                                           placeholder="First name" value="Mark" required>
                                     <div class="valid-feedback">
                                         Looks good!
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationServer02">Last name</label>
-                                    <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
+                                    <input type="text" class="form-control is-valid" id="validationServer02"
+                                           placeholder="Last name" value="Otto" required>
                                     <div class="valid-feedback">
                                         Looks good!
                                     </div>
@@ -3348,7 +3412,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroupPrepend3">@</span>
                                         </div>
-                                        <input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
+                                        <input type="text" class="form-control is-invalid" id="validationServerUsername"
+                                               placeholder="Username" aria-describedby="inputGroupPrepend3" required>
                                         <div class="invalid-feedback">
                                             Please choose a username.
                                         </div>
@@ -3358,21 +3423,24 @@
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationServer03">City</label>
-                                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
+                                    <input type="text" class="form-control is-invalid" id="validationServer03"
+                                           placeholder="City" required>
                                     <div class="invalid-feedback">
                                         Please provide a valid city.
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="validationServer04">State</label>
-                                    <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="State" required>
+                                    <input type="text" class="form-control is-invalid" id="validationServer04"
+                                           placeholder="State" required>
                                     <div class="invalid-feedback">
                                         Please provide a valid state.
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="validationServer05">Zip</label>
-                                    <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
+                                    <input type="text" class="form-control is-invalid" id="validationServer05"
+                                           placeholder="Zip" required>
                                     <div class="invalid-feedback">
                                         Please provide a valid zip.
                                     </div>
@@ -3380,7 +3448,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+                                    <input class="form-check-input is-invalid" type="checkbox" value=""
+                                           id="invalidCheck3" required>
                                     <label class="form-check-label" for="invalidCheck3">
                                         Agree to terms and conditions
                                     </label>
@@ -3408,25 +3477,32 @@
                         <form class="was-validated" id="form-supported-elements">
                             <div class="mb-3" id="validation-textarea-div">
                                 <label for="validationTextarea">Textarea</label>
-                                <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+                                <textarea class="form-control is-invalid" id="validationTextarea"
+                                          placeholder="Required example textarea" required></textarea>
                                 <div class="invalid-feedback">
                                     Please enter a message in the textarea.
                                 </div>
                             </div>
 
                             <div class="custom-control custom-checkbox mb-3" id="customControlValidation1-div">
-                                <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
-                                <label class="custom-control-label" for="customControlValidation1">Check this custom checkbox</label>
+                                <input type="checkbox" class="custom-control-input" id="customControlValidation1"
+                                       required>
+                                <label class="custom-control-label" for="customControlValidation1">Check this custom
+                                    checkbox</label>
                                 <div class="invalid-feedback">Example invalid feedback text</div>
                             </div>
 
                             <div class="custom-control custom-radio" id="customControlValidation2-div">
-                                <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
-                                <label class="custom-control-label" for="customControlValidation2">Toggle this custom radio</label>
+                                <input type="radio" class="custom-control-input" id="customControlValidation2"
+                                       name="radio-stacked" required>
+                                <label class="custom-control-label" for="customControlValidation2">Toggle this custom
+                                    radio</label>
                             </div>
                             <div class="custom-control custom-radio mb-3" id="customControlValidation3-div">
-                                <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
-                                <label class="custom-control-label" for="customControlValidation3">Or toggle this other custom radio</label>
+                                <input type="radio" class="custom-control-input" id="customControlValidation3"
+                                       name="radio-stacked" required>
+                                <label class="custom-control-label" for="customControlValidation3">Or toggle this other
+                                    custom radio</label>
                                 <div class="invalid-feedback">More example invalid feedback text</div>
                             </div>
 
@@ -3452,8 +3528,9 @@
                         </div>
                         <div class="html-right">
                             <h4>Forms - Supported elements</h4>
-                            <p>Bootstrap: <a href="https://getbootstrap.com/docs/4.3/components/forms/#supported-elements"
-                                             target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#supported-elements</a>
+                            <p>Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/forms/#supported-elements"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/forms/#supported-elements</a>
                             </p>
                         </div>
                     </div>
@@ -3464,14 +3541,16 @@
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label for="validationTooltip01">First name</label>
-                                    <input type="text" class="form-control" id="validationTooltip01" placeholder="First name" value="Mark" required>
+                                    <input type="text" class="form-control" id="validationTooltip01"
+                                           placeholder="First name" value="Mark" required>
                                     <div class="valid-tooltip">
                                         Looks good!
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationTooltip02">Last name</label>
-                                    <input type="text" class="form-control" id="validationTooltip02" placeholder="Last name" value="Otto" required>
+                                    <input type="text" class="form-control" id="validationTooltip02"
+                                           placeholder="Last name" value="Otto" required>
                                     <div class="valid-tooltip">
                                         Looks good!
                                     </div>
@@ -3480,9 +3559,12 @@
                                     <label for="validationTooltipUsername">Username</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+                                            <span class="input-group-text"
+                                                  id="validationTooltipUsernamePrepend">@</span>
                                         </div>
-                                        <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
+                                        <input type="text" class="form-control" id="validationTooltipUsername"
+                                               placeholder="Username"
+                                               aria-describedby="validationTooltipUsernamePrepend" required>
                                         <div class="invalid-tooltip">
                                             Please choose a unique and valid username.
                                         </div>
@@ -3492,21 +3574,24 @@
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationTooltip03">City</label>
-                                    <input type="text" class="form-control" id="validationTooltip03" placeholder="City" required>
+                                    <input type="text" class="form-control" id="validationTooltip03" placeholder="City"
+                                           required>
                                     <div class="invalid-tooltip">
                                         Please provide a valid city.
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="validationTooltip04">State</label>
-                                    <input type="text" class="form-control" id="validationTooltip04" placeholder="State" required>
+                                    <input type="text" class="form-control" id="validationTooltip04" placeholder="State"
+                                           required>
                                     <div class="invalid-tooltip">
                                         Please provide a valid state.
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="validationTooltip05">Zip</label>
-                                    <input type="text" class="form-control" id="validationTooltip05" placeholder="Zip" required>
+                                    <input type="text" class="form-control" id="validationTooltip05" placeholder="Zip"
+                                           required>
                                     <div class="invalid-tooltip">
                                         Please provide a valid zip.
                                     </div>
@@ -4360,6 +4445,7 @@
                                 }
 
 
+
                             </style>
                         </div>
                         <div class="html-right">
@@ -5080,23 +5166,29 @@
                             <div class="border text-center p-3 mb-3">
                                 <button class="btn btn-primary" type="button" disabled="" id="button-with-spinner">
                                     <span class="spinner-border spinner-border-sm" role="status"
-										  id=spinner-in-button"  aria-hidden="true"></span>
+                                          id=spinner-in-button" aria-hidden="true"></span>
                                     <span class="sr-only">Loading...</span>
                                 </button>
-                                <button class="btn btn-primary" type="button" disabled="" id="button-with-spinner-and-text">
-                                    <span class="spinner-border spinner-border-sm" role="status"  id=spinner-in-button-with-text"
-										  aria-hidden="true"></span>
+                                <button class="btn btn-primary" type="button" disabled=""
+                                        id="button-with-spinner-and-text">
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                          id=spinner-in-button-with-text"
+                                          aria-hidden="true"></span>
                                     Loading...
                                 </button>
                             </div>
 
                             <div class="border text-center p-3 mb-3">
-                                <button class="btn btn-primary" type="button" disabled="" id="button-with-growing-spinner">
-                                    <span class="spinner-grow spinner-grow-sm" role="status" id=growing-spinner-in-button" aria-hidden="true"></span>
+                                <button class="btn btn-primary" type="button" disabled=""
+                                        id="button-with-growing-spinner">
+                                    <span class="spinner-grow spinner-grow-sm" role="status"
+                                          id=growing-spinner-in-button" aria-hidden="true"></span>
                                     <span class="sr-only">Loading...</span>
                                 </button>
-                                <button class="btn btn-primary" type="button" disabled="" id="button-with-growing-spinner-and-text">
-                                    <span class="spinner-grow spinner-grow-sm" role="status" id=growing-spinner-in-button-with-text"  aria-hidden="true"></span>
+                                <button class="btn btn-primary" type="button" disabled=""
+                                        id="button-with-growing-spinner-and-text">
+                                    <span class="spinner-grow spinner-grow-sm" role="status"
+                                          id=growing-spinner-in-button-with-text" aria-hidden="true"></span>
                                     Loading...
                                 </button>
                             </div>
@@ -5841,7 +5933,8 @@
 
                 <div class="doc-space line" style="border-color:#ccc">
                     <div class="html-left mb-3">
-                        <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+                        <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -5854,7 +5947,8 @@
                                         <p>Woohoo, you're reading this text in a modal!</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
@@ -5862,7 +5956,8 @@
                         </div>
 
                         <div class="bd-example">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLive">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalLive">
                                 Launch demo modal
                             </button>
                         </div>
@@ -5879,7 +5974,8 @@
 
                 <div class="doc-space line" style="border-color:#ccc">
                     <div class="html-left mb-3">
-                        <div id="exampleModalLong" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div id="exampleModalLong" class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -5889,27 +5985,58 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
@@ -5917,12 +6044,14 @@
                         </div>
 
                         <div class="bd-example">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalLong">
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal"
+                                    data-target="#exampleModalLong">
                                 Launch demo modal
                             </button>
                         </div>
 
-                        <div id="exampleModalScrollable" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                        <div id="exampleModalScrollable" class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -5932,27 +6061,58 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
@@ -5960,7 +6120,8 @@
                         </div>
 
                         <div class="bd-example">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalScrollable">
                                 Launch demo modal
                             </button>
                         </div>
@@ -5976,45 +6137,60 @@
                 </div>
 
                 <div class="doc-space line" style="border-color:#ccc">
-                    <div class="html-left mb-3">
-                        <div id="exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div id="modal-vertically-centered" class="html-left mb-3">
+                        <div id="exModalCenter" class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                        <h5 class="modal-title" id="exModalCenterTitle">Modal title</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="exampleModalCenteredScrollable" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
+                        <div id="exampleModalCenteredScrollable" class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Modal title</h5>
+                                        <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Modal
+                                            title</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna,
+                                            vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                            nulla non metus auctor fringilla.</p>
+                                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
+                                            facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                                            vestibulum at eros.</p>
+                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                                            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
@@ -6022,10 +6198,12 @@
                         </div>
 
                         <div class="bd-example">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalCenter">
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal"
+                                    data-target="#exModalCenter">
                                 Vertically centered modal
                             </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenteredScrollable">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalCenteredScrollable">
                                 Vertically centered scrollable modal
                             </button>
                         </div>
@@ -6044,13 +6222,15 @@
                     <div class="html-left mb-3">
                         <!-- Button trigger modal -->
                         <div class="bd-example">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalPopovers">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalPopovers">
                                 Launch demo modal
                             </button>
                         </div>
 
                         <!-- Modal -->
-                        <div id="exampleModalPopovers" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true">
+                        <div id="exampleModalPopovers" class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalPopoversLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -6061,13 +6241,23 @@
                                     </div>
                                     <div class="modal-body">
                                         <h5>Popover in a modal</h5>
-                                        <p>This <a href="#" role="button" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute." data-container="#exampleModalPopovers">button</a> triggers a popover on click.</p>
-                                        <hr />
+                                        <p>This <a href="#" role="button" class="btn btn-secondary popover-test"
+                                                   title="Popover title"
+                                                   data-content="Popover body content is set in this attribute."
+                                                   data-container="#exampleModalPopovers">button</a> triggers a popover
+                                            on click.</p>
+                                        <hr/>
                                         <h5>Tooltips in a modal</h5>
-                                        <p><a href="#" class="tooltip-test" title="Tooltip" data-container="#exampleModalPopovers">This link</a> and <a href="#" class="tooltip-test" title="Tooltip" data-container="#exampleModalPopovers">that link</a> have tooltips on hover.</p>
+                                        <p><a href="#" class="tooltip-test" title="Tooltip"
+                                              data-container="#exampleModalPopovers">This link</a> and <a href="#"
+                                                                                                          class="tooltip-test"
+                                                                                                          title="Tooltip"
+                                                                                                          data-container="#exampleModalPopovers">that
+                                            link</a> have tooltips on hover.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
@@ -6086,12 +6276,14 @@
 
                 <div class="doc-space line" style="border-color:#ccc">
                     <div class="html-left mb-3">
-                        <div id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true">
+                        <div id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="gridModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="gridModalLabel">Grids in modals</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="container-fluid bd-example-row">
@@ -6122,7 +6314,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
@@ -6130,7 +6323,8 @@
                         </div>
 
                         <div class="bd-example">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gridSystemModal">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#gridSystemModal">
                                 Launch demo modal
                             </button>
                         </div>
@@ -6148,11 +6342,19 @@
                 <div class="doc-space line" style="border-color:#ccc">
                     <div class="html-left mb-3">
                         <div class="bd-example">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal"
+                                    data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo
+                            </button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal"
+                                    data-target="#exampleModal" data-whatever="@fat">Open modal for @fat
+                            </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for
+                                @getbootstrap
+                            </button>
 
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -6164,8 +6366,9 @@
                                         <div class="modal-body">
                                             <form>
                                                 <div class="form-group">
-                                                    <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                                    <input type="text" class="form-control" id="recipient-name" />
+                                                    <label for="recipient-name"
+                                                           class="col-form-label">Recipient:</label>
+                                                    <input type="text" class="form-control" id="recipient-name"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="message-text" class="col-form-label">Message:</label>
@@ -6174,7 +6377,8 @@
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
                                             <button type="button" class="btn btn-primary">Send message</button>
                                         </div>
                                     </div>
@@ -6191,6 +6395,7 @@
                                 modal.find('.modal-title').text('New message to ' + recipient)
                                 modal.find('.modal-body input').val(recipient)
                             })
+
                         </script>
                     </div>
                     <div class="html-right">
@@ -6206,11 +6411,18 @@
                 <div class="doc-space line" style="border-color:#ccc">
                     <div class="html-left mb-3">
                         <div class="bd-example">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large modal</button>
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal"
+                                    data-target=".bd-example-modal-xl">Extra large modal
+                            </button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal"
+                                    data-target=".bd-example-modal-lg">Large modal
+                            </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target=".bd-example-modal-sm">Small modal
+                            </button>
                         </div>
-                        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+                             aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
 
@@ -6227,7 +6439,8 @@
                             </div>
                         </div>
 
-                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                             aria-labelledby="myLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
 
@@ -6244,7 +6457,8 @@
                             </div>
                         </div>
 
-                        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+                             aria-labelledby="mySmallModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -6275,7 +6489,9 @@
                 <div class="doc-space line">
                     <div class="html-left mb-3">
                         <nav id="navbar-example2" class="navbar navbar-light bg-light">
-                            <a class="navbar-brand" href="https://getbootstrap.com/docs/4.3/components/scrollspy/#example-in-navbar" target="_blank">Navbar</a>
+                            <a class="navbar-brand"
+                               href="https://getbootstrap.com/docs/4.3/components/scrollspy/#example-in-navbar"
+                               target="_blank">Navbar</a>
                             <ul class="nav nav-pills">
                                 <li class="nav-item"><a class="nav-link" href="#fat">@fat</a>
                                 </li>
@@ -7133,6 +7349,7 @@
     }
 
 
+
 </script>
 <script>
  function show_toast(locator) {
@@ -7159,12 +7376,14 @@ $('#toastEventsTest').on('show.bs.toast', function () {
 });
 
 
+
 </script>
 <script>
     setTimeout(function() {
 		$('.invisible')[0].classList.remove("invisible");
 		$('#ghost-button')[0].classList.add("invisible");
 	}, 3000);
+
 
 
 
@@ -7188,9 +7407,11 @@ $('#toastEventsTest').on('show.bs.toast', function () {
 
 
 
+
 </script>
 <script type="text/javascript">
     $('#multi-dropdown').multiselect();
+
 
 
 
@@ -7210,9 +7431,11 @@ $('#toastEventsTest').on('show.bs.toast', function () {
 
 
 
+
 </script>
 <script>
     $('.selectpicker').selectpicker();
+
 
 
 
@@ -7229,10 +7452,12 @@ $(function(){
 })
 
 
+
 </script>
 <script>
 		includeSideBar();
 		activateTopElement(5,2);
+
 
 
 
@@ -7279,6 +7504,7 @@ $(function(){
                 }, 30);  // чем выше значение, тем медленнее заполняется прогресс
             }
         }
+
 
 
 
