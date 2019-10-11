@@ -102,6 +102,7 @@ import io.github.com.sections.SegmentedButton;
 import io.github.com.sections.Switches;
 import io.github.com.sections.Toast;
 import io.github.com.sections.card.CardImageOverlays;
+import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.navbar.NavbarColorScheme;
@@ -240,6 +241,8 @@ public class BootstrapPage extends WebPage {
     @UI("#card-border-info") public static CardBorder cardBorderInfo;
     @UI("#card-border-light") public static CardBorder cardBorderLight;
     @UI("#card-border-dark") public static CardBorder cardBorderDark;
+    @UI(".w-75") public static CardUtilities cardWidth75;
+    @UI(".w-50") public static CardUtilities cardWidth50;
     @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button") public static SegmentedButton segmentedButton;
     @UI("#buttonToolbar1") public static ButtonToolbar buttonToolbar;
