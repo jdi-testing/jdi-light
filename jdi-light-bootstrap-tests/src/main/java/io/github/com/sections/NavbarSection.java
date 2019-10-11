@@ -11,7 +11,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import java.util.List;
 
 public class NavbarSection extends Section {
-    @FindBy(css = ".navbar-brand")
-    //@UI(".navbar-brand")
+    //@FindBy(css = ".navbar-brand")
+    @UI(".navbar-brand")
     public JList<NavbarBrand> navbarBrandJList;
 }

@@ -12,19 +12,20 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 public class NavbarBrand extends UIBaseElement<UIAssert> implements IsNavbarBrand, IListBase {
 
     @JDIAction(value = "Get '{name}' text", level = DEBUG)
-    public String getRef() { return uiElement.attr("href"); }
-
-    @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
-    public String getAlt() { return uiElement.attr("alt"); }
+    public String getRef() {
+        return uiElement.attr("href");
+    }
 
     public boolean isLink() {
         return hasAttribute("href");
-    };
+    }
 
     public boolean isNavbarBrand() {
         return hasClass(".navbar-brand");
     }
 
-    public String getText() {return uiElement.getText();}
+    public String getText() {
+        return uiElement.getText();
+    }
 }
 
