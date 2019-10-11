@@ -1,41 +1,13 @@
-package io.github.epam.weblisttests;
+package io.github.epam.listtests;
 
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.WebList;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.BeforeClass;
+import io.github.epam.ListTestsInit;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
-public class WebListTests {
-    private String element0Text = "0 element";
-    private String element1Text = "1 element";
-    private By locator = new By.ByCssSelector("");
-    private List<WebElement> list;
-    private WebList webList;
-    private WebElement element0;
-    private WebElement element1;
-
-    @BeforeClass
-    public void before() {
-        list = new ArrayList<>();
-        element0 = mock(WebElement.class);
-        element1 = mock(WebElement.class);
-        list.add(element0);
-        list.add(element1);
-        when(element0.getText()).thenReturn(element0Text);
-        when(element1.getText()).thenReturn(element1Text);
-        when(element0.isDisplayed()).thenReturn(true);
-        when(element1.isDisplayed()).thenReturn(true);
-    }
-
+public class WebListTests extends ListTestsInit {
     @Test
     public void seleniumWebListTest() {
         webList = new WebList(list);
