@@ -9,6 +9,7 @@ import static io.github.com.pages.BootstrapPage.simpleDropdown;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -74,6 +75,9 @@ public class DrowdownTests extends TestsInit {
         simpleDropdown.dropdownToggle.is()
                 .core()
                 .cssClass("btn btn-primary dropdown-toggle")
+                .cssClass(containsString("btn"))
+                .cssClass(containsString("btn-primary"))
+                .cssClass(containsString("dropdown-toggle"))
                 .attr("data-toggle", "dropdown")
                 .tag(is("button"));
     }
