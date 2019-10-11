@@ -74,10 +74,9 @@ public class DrowdownTests extends TestsInit {
                 .tag(is("div"));
         simpleDropdown.dropdownToggle.is()
                 .core()
-                .cssClass("btn btn-primary dropdown-toggle")
-                .cssClass(containsString("btn"))
-                .cssClass(containsString("btn-primary"))
-                .cssClass(containsString("dropdown-toggle"))
+                .cssClass("btn")
+                .cssClass("btn-primary")
+                .cssClass("dropdown-toggle")
                 .attr("data-toggle", "dropdown")
                 .tag(is("button"));
     }
