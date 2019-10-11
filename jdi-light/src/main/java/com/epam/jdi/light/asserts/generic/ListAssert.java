@@ -1,6 +1,5 @@
 package com.epam.jdi.light.asserts.generic;
 
-import com.epam.jdi.light.asserts.core.DataListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.IListSelector;
 import com.epam.jdi.tools.LinqUtils;

@@ -51,12 +51,12 @@ public class ComplexElementsTests implements TestsInit {
     }
     @Test
     public void navigationMenuTest() {
-        navigationL.select(ContactForm);
+        navigationElement.select(ContactForm);
         contactFormPage.checkOpened();
         navigationL.select(Home);
         homePage.checkOpened();
         navigationS.select(Service);
-        navigationS.select(ComplexTable);
+        navigationElement.select("Complex Table");
     }
     @Test
     public void navigationMenuSTest() {

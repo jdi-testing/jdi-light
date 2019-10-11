@@ -4,10 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.SimpleTablePage.flist;
 import static io.github.com.pages.SimpleTablePage.furniture;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;

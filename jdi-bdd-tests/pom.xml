@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.jdi</groupId>
-    <artifactId>jdi-light-bdd-tests</artifactId>
+    <artifactId>jdi-bdd-tests</artifactId>
     <version>1.0.0</version>
     <name>JDI BDD Tests</name>
 
@@ -22,7 +22,7 @@
         <!--JDI-->
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-bdd</artifactId>
+            <artifactId>jdi-bdd</artifactId>
             <version>1.0.0</version>
         </dependency>
 

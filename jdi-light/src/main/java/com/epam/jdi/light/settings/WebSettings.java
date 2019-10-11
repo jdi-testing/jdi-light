@@ -6,8 +6,6 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
-import com.epam.jdi.light.driver.get.RemoteDriver;
-import com.epam.jdi.light.driver.sauce.SauceSettings;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
