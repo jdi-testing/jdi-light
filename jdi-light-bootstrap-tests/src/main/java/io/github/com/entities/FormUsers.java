@@ -1,5 +1,9 @@
 package io.github.com.entities;
 
+/**
+ * Created by Dmitrii Pavlov on 10.10.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
 
 public class FormUsers {
 
