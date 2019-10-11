@@ -40,7 +40,7 @@ public class NavbarSupportedContentTests extends TestsInit {
 
     @DataProvider
     public Object[][] navbarLinkData() {
-        return new Object[][] {
+        return new Object[][]{
                 {activeLinkText, activeLinkText, bootstrapNavPageUrl},
                 {jdiLinkText, jdiLinkText, jdiPageUrl},
                 {disabledLinkText, disabledLinkText, jdiBootstrapPageUrl}
@@ -49,7 +49,7 @@ public class NavbarSupportedContentTests extends TestsInit {
 
     @DataProvider
     public Object[][] dropdownData() {
-        return new Object[][] {
+        return new Object[][]{
                 {dropdownAction, dropdownActionAlert},
                 {dropdownAnotherAction, dropdownAnotherActionAlert},
                 {dropdownSmthElse, dropdownSmthElseAlert},
@@ -58,7 +58,7 @@ public class NavbarSupportedContentTests extends TestsInit {
 
     @DataProvider
     public Object[][] collapseLinkTextData() {
-        return new Object[][] {
+        return new Object[][]{
                 {activeLinkText},
                 {jdiLinkText},
                 {dropdownLinkText},
@@ -94,8 +94,7 @@ public class NavbarSupportedContentTests extends TestsInit {
     @Test(dataProvider = "navbarLinkData")
     public void navLinkContentsTest(String elementName,
                                     String elementText,
-                                    String elementUrl)
-    {
+                                    String elementUrl) {
         navbarSupportedContent.nav.show();
         navbarSupportedContent.nav.list().get(elementName)
                 .is()
