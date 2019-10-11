@@ -217,6 +217,7 @@ public class BootstrapPage extends WebPage {
 
 
     @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
+    @UI("#progress-height .progress") public static JList<ProgressSection> progressHeightSections;
 
     @UI("#button-with-spinner-and-text") public static ButtonWithSpinner buttonWithSpinnerAndText;
     @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
@@ -225,7 +226,7 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-form-1") public static NavbarForm navbarForm;
     @UI("#navbar-form-2") public static NavbarForm navbarFormWithText;
     @UI("#navbar-form-3") public static NavbarWithInputGroupForm navbarFormWithInputGroup;
-    @UI("#progress-height") public static ProgressWrapperSection progressHeightSection;
+
 
     //Toasts
     @UI("#toastRightTop") public static Toast toastWithTopAlign;
