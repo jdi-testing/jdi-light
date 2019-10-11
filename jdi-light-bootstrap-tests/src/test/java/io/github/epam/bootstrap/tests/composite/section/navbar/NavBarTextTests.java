@@ -16,15 +16,15 @@ import static org.testng.Assert.assertEquals;
 
 public class NavBarTextTests extends TestsInit {
     private static final String JS_SCROLL_TO_ELEMENT = "scrollIntoView(true);";
-    private static final String inlineElement = "Navbar text with an inline element";
-    private static final String brandName = "Navbar w/ text";
-    private static final String navbarBootstrap = "Navbar · Bootstrap";
+    private static final String INLINE_ELEMENT = "Navbar text with an inline element";
+    private static final String BRAND_NAME = "Navbar w/ text";
+    private static final String NAVBAR_BOOTSTRAP = "Navbar · Bootstrap";
     private static final String linkName1 = "Home\n(current)";
     private static final String linkName2 = "HTML 5";
     private static final String linkName3 = "Bootstrap";
-    private static final String page1 = "Home Page";
-    private static final String page2 = linkName2;
-    private static final String page3 = linkName3;
+    private static final String PAGE1 = "Home Page";
+    private static final String PAGE2 = linkName2;
+    private static final String PAGE3 = linkName3;
 
     @BeforeMethod
     public void before() {
@@ -37,23 +37,23 @@ public class NavBarTextTests extends TestsInit {
     public void verifySimpleNavbarTextTest() {
         navbarText.simpleText
                 .is()
-                .text(is(inlineElement));
+                .text(is(INLINE_ELEMENT));
     }
 
     @Test
     public void verifyComplexNavbarTextTest() {
         navbarText.complexNavbar.simpleText
                 .is()
-                .text(is(inlineElement));
+                .text(is(INLINE_ELEMENT));
     }
 
     @Test
     public void verifyComplexNavbarBrandTest() {
         navbarText.complexNavbar.brand
                 .is()
-                .text(is(brandName));
+                .text(is(BRAND_NAME));
         navbarText.complexNavbar.brand.click();
-        newWindowTitleCheck(navbarBootstrap);
+        newWindowTitleCheck(NAVBAR_BOOTSTRAP);
     }
 
     @Test
@@ -62,17 +62,17 @@ public class NavBarTextTests extends TestsInit {
                 .is()
                 .text(is(linkName1));
         navbarText.complexNavbar.listPages.get(1).click();
-        newWindowTitleCheck(page1);
+        newWindowTitleCheck(PAGE1);
         navbarText.complexNavbar.listPages.get(2)
                 .is()
                 .text(is(linkName2));
         navbarText.complexNavbar.listPages.get(2).click();
-        newWindowTitleCheck(page2);
+        newWindowTitleCheck(PAGE2);
         navbarText.complexNavbar.listPages.get(3)
                 .is()
                 .text(is(linkName3));
         navbarText.complexNavbar.listPages.get(3).click();
-        newWindowTitleCheck(page3);
+        newWindowTitleCheck(PAGE3);
     }
 
     private void newWindowTitleCheck(String pageTitle) {
