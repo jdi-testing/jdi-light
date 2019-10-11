@@ -13,7 +13,9 @@ import static selenium.entities.TestData.TABLE_SNAPSHOOT;
 import static selenium.seleniumPO.HomePage.leftNavigation;
 import static selenium.seleniumPO.SiteSelenium.homePage;
 import static selenium.seleniumPO.SiteSelenium.login;
-import static selenium.site.pages.JDIPerformancePage.*;
+import static selenium.site.pages.JDIPerformancePage.textareaPerformance;
+import static selenium.site.pages.JDIPerformancePage.userNames;
+import static selenium.site.pages.JDIPerformancePage.usersTable;
 
 public class JDIPerformanceTests implements SimpleTestsInit {
 

@@ -13,7 +13,6 @@ import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.INNER;
-import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;

@@ -4,7 +4,9 @@ import com.epam.jdi.light.ui.html.elements.common.Link;
 import cucumber.api.java.en.Then;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.matchesPattern;
 
 /**
  * Created by Ekaterina Vasilkova on 19.08.2019

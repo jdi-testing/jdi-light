@@ -8,7 +8,10 @@ import com.epam.jdi.tools.func.JFunc1;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
 
 public class DataTableAssert<L extends Section, D>
         extends BaseTableAssert<DataTable<L, D>, DataTableAssert<L, D>> {

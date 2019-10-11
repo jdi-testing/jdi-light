@@ -1,7 +1,11 @@
 package com.epam.jdi.bdd;
 
 import com.epam.jdi.light.asserts.core.IsAssert;
-import com.epam.jdi.light.asserts.generic.*;
+import com.epam.jdi.light.asserts.generic.CommonAssert;
+import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.asserts.generic.ITextAssert;
+import com.epam.jdi.light.asserts.generic.SelectedAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;

@@ -5,14 +5,20 @@ package com.epam.jdi.light.elements.pageobjects.annotations;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.ByText;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.WithText;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Quotes;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.driver.WebDriverByUtils.byText;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.withText;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;

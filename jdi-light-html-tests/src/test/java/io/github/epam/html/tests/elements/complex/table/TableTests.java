@@ -16,7 +16,9 @@ import static io.github.com.pages.UsersPage.usersTable;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN_SIMPLE;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.testng.Assert.assertEquals;
 
 public class TableTests extends TestsInit {
