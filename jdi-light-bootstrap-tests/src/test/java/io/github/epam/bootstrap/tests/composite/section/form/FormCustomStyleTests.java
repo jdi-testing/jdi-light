@@ -58,6 +58,34 @@ public class FormCustomStyleTests extends TestsInit {
     }
 
     @Test
+    public void isValidationTests() {
+        formCustomStyles.accept
+                .is()
+                .displayed()
+                .enabled()
+                .core()
+                .attr("type", "checkbox")
+                .hasClass("form-check-input")
+                .tag(is("input"));
+        formCustomStyles.accept.label()
+                .is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("form-check-label")
+                .text(is("Agree to terms and conditions"))
+                .tag(is("label"));
+    }
+
+    @Test
+    public void checkboxTests() {
+        formCustomStyles.accept.check();
+        formCustomStyles.accept.is().selected();
+        formCustomStyles.accept.uncheck();
+        formCustomStyles.accept.is().deselected();
+    }
+
+    @Test
     public void fillTest() {
         formCustomStyles.fill(DEFAULT_CONTACT);
         formCustomStyles.check(DEFAULT_CONTACT);
