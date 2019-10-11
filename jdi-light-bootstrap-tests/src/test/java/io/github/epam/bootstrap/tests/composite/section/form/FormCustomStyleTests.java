@@ -10,7 +10,10 @@ import java.util.List;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.entities.FormUsers.*;
+import static io.github.com.entities.FormUsers.DEFAULT_CONTACT;
+import static io.github.com.entities.FormUsers.ONLY_NAME_FILLED_DEFAULT_CONTACT;
+import static io.github.com.entities.FormUsers.DEFAULT_CHECK;
+import static io.github.com.entities.FormUsers.ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT;
 import static io.github.com.pages.BootstrapPage.formCustomStyles;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
@@ -157,7 +160,6 @@ public class FormCustomStyleTests extends TestsInit {
 
     @Test
     public void saveMethodTest() {
-        ;
         formCustomStyles.save(DEFAULT_CONTACT);
         formCustomStyles.check(DEFAULT_CHECK);
     }
