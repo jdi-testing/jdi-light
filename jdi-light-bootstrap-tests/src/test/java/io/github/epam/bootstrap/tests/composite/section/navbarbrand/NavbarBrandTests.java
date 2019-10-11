@@ -4,21 +4,22 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.ui.bootstrap.elements.common.NavbarBrand;
 import io.github.epam.TestsInit;
 import io.github.epam.bootstrap.tests.BaseValidations;
-import org.hamcrest.Matcher;
-import org.hamcrest.core.StringContains;
-import org.hamcrest.core.SubstringMatcher;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarSection;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class NavbarBrandTests extends TestsInit {
 
@@ -37,11 +38,11 @@ public class NavbarBrandTests extends TestsInit {
     }
 
     @DataProvider
-    public static Object[][] navbarData() {
+    public static Object[][] navbarBrandData() {
         return new Object[][]{
-                {"navbar-link", "Brand link"},
-                {"navbar-heading", "Brand heading"},
-                {"nav-bar-as-image", null},
+                {"brand-link", "Brand link"},
+                {"brand-heading", "Brand heading"},
+                {"brand-as-image", ""},
                 {"brand-as-image-and-link", "Brand link"},
         };
     }
@@ -59,37 +60,37 @@ public class NavbarBrandTests extends TestsInit {
         });
     }
 
-    @Test(dataProvider = "navbarData")
+    @Test(dataProvider = "navbarBrandData")
     public void checkNavbarText(String navbarId, String navbarText) {
         navbarBrandList.stream().filter(navbarBrand ->
                 navbarBrand.attr("id").equals(navbarId)).forEach(nbb -> {
-                                            nbb.highlight();
-                                            nbb.core().is().text(navbarText);
-                                            nbb.core().is().attr("href", navbarUrl);
-                                            nbb.unhighlight();
+            nbb.highlight();
+            nbb.is().core()
+                    .text(navbarText);
+            nbb.unhighlight();
         });
     }
 
     @Test
     public void checkNavbarClickImage() {
         navbarBrandList.stream()
-                       .filter(nbb -> nbb.isLink() && nbb.childs().size() > 0)
-                       .map(nbbWithIm -> nbbWithIm.childs().get(0))
-                       .forEach( imgFromNavbar -> {
+                .filter(nbb -> nbb.isLink() && nbb.childs().size() > 0)
+                .map(nbbWithIm -> nbbWithIm.childs().get(0))
+                .forEach(imgFromNavbar -> {
 
-                        imgFromNavbar.highlight("blue");
-                        imgFromNavbar.is().attr("src", containsString(imgPath))
-                                          .tag("img");
-                        imgFromNavbar.unhighlight();
+                    imgFromNavbar.highlight("blue");
+                    imgFromNavbar.is().attr("src", containsString(imgPath))
+                            .tag("img");
+                    imgFromNavbar.unhighlight();
 
-                        imgFromNavbar.click();
-                        WebDriver driver = WebDriverFactory.getDriver();
-                        ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
-                        driver.switchTo().window(tabs.get(tabs.size() - 1));
-                        assertEquals(getUrl(), navbarUrl);
-                        driver.close();
-                        driver.switchTo().window(tabs.get(tabs.size() - 2));
-        });
+                    imgFromNavbar.click();
+                    WebDriver driver = WebDriverFactory.getDriver();
+                    ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
+                    driver.switchTo().window(tabs.get(tabs.size() - 1));
+                    assertEquals(getUrl(), navbarUrl);
+                    driver.close();
+                    driver.switchTo().window(tabs.get(tabs.size() - 2));
+                });
     }
 
     @Test

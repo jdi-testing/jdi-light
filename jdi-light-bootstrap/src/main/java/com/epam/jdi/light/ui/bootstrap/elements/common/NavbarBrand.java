@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.light.ui.bootstrap.interfaces.IsNavbarBrand;
 
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 
@@ -25,5 +24,7 @@ public class NavbarBrand extends UIBaseElement<UIAssert> implements IsNavbarBran
     public boolean isNavbarBrand() {
         return hasClass(".navbar-brand");
     }
+
+    public String getText() {return uiElement.getText();}
 }
 
