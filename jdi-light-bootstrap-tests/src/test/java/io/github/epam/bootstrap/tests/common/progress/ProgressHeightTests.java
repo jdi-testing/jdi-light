@@ -13,7 +13,6 @@ import static org.testng.Assert.assertEquals;
 
 public class ProgressHeightTests extends TestsInit {
 
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -22,7 +21,10 @@ public class ProgressHeightTests extends TestsInit {
 
     @Test
     public void baseValidationTest() {
-        baseValidation(progressHeightSections);
+        for (ProgressSection section : progressHeightSections) {
+            baseValidation(section);
+            section.unhighlight();
+        }
     }
 
     @Test

@@ -215,7 +215,6 @@ public class BootstrapPage extends WebPage {
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
     @UI("body") public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
 
-
     @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
     @UI("#progress-height .progress") public static JList<ProgressSection> progressHeightSections;
 
