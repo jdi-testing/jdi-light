@@ -44,7 +44,6 @@ public class NavbarColorSchemeTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        navbarDarkColorScheme.hover();
     }
 
     @Test(dataProvider = "navbarColorSchemes")
