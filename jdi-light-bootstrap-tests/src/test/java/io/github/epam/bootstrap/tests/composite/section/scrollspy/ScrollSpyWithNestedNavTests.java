@@ -20,7 +20,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 
-public class ScrollspyWithNestedNavTests extends TestsInit {
+public class ScrollSpyWithNestedNavTests extends TestsInit {
     public static final String ATTR_NAME_HREF = "href";
     public static final String ATTR_NAME_ID = "id";
     public static final String ATTR_NAME_DATA_SPY = "data-spy";

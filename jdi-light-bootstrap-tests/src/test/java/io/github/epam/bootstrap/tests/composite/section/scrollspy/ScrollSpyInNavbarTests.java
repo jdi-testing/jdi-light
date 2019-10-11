@@ -17,7 +17,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ScrollspyInNavbarTests extends TestsInit {
+public class ScrollSpyInNavbarTests extends TestsInit {
     public static final String ATTR_NAME_HREF = "href";
     public static final String ATTR_NAME_ID = "id";
     public static final String ATTR_NAME_DATA_SPY = "data-spy";

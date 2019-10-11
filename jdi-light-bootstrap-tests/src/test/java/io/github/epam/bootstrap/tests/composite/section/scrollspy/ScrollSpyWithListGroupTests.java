@@ -20,7 +20,7 @@ import static org.testng.Assert.assertEquals;
  * Email: olga_ivanova@epam.com;
  */
 
-public class ScrollspyWithListGroupTests extends TestsInit {
+public class ScrollSpyWithListGroupTests extends TestsInit {
     public static final String ATTR_NAME_HREF = "href";
     public static final String ATTR_NAME_DATA_SPY = "data-spy";
     public static final String ATTR_NAME_DATA_TARGET = "data-target";
@@ -155,8 +155,8 @@ public class ScrollspyWithListGroupTests extends TestsInit {
                 .core()
                 .displayed()
                 .enabled()
-                .cssClass(ScrollspyWithListGroupTests.CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION_ACTIVE)
-                .css(ScrollspyWithListGroupTests.CSS_NAME_BACKGROUND_COLOR, "rgba(0, 123, 255, 1)");//#007bff Color Hex
+                .cssClass(ScrollSpyWithListGroupTests.CLASS_NAME_LIST_GROUP_ITEM_LIST_GROUP_ITEM_ACTION_ACTIVE)
+                .css(ScrollSpyWithListGroupTests.CSS_NAME_BACKGROUND_COLOR, "rgba(0, 123, 255, 1)");//#007bff Color Hex
 
         scrollSpyWithListGroup.header.get(index).is()
                 .text(is(header.toUpperCase()))
