@@ -12,8 +12,10 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.*;
+import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.spinner.GrowingSpinners;
@@ -125,6 +127,7 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-button-addon4") public static ButtonAddons inputGroupButtonAddons4;
     @UI("#card-example") public static CardExample cardExample;
     @UI("#card-image") public static CardImage cardImage;
+    @UI("#card-image-overlay") public static CardImageOverlays cardImageOverlays;
     @UI("#card-body") public static CardBody cardBody;
     @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
     @UI("#card-with-header-and-footer-quote") public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
@@ -202,6 +205,9 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-justify") public static NavsJustify navsJustify;
     @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
     @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
+    @UI("#navbar-dark-colorscheme") public static NavbarColorScheme navbarDarkColorScheme;
+    @UI("#navbar-blue-colorscheme") public static NavbarColorScheme navbarBlueColorScheme;
+    @UI("#navbar-light-colorscheme") public static NavbarColorScheme navbarLightColorScheme;
     @UI("#progress-multiple-bars") public static ProgressMultipleBars progressMultipleBars;
     @UI(".card-columns") public static CardColumns cardColumns;
     @UI("#list-example>a") public static ListGroup listGroupForScrollSpy;
@@ -245,6 +251,7 @@ public class BootstrapPage extends WebPage {
     @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
     @UI("#linkToastCenterTop") public static Button toastWithCenterAlignButton;
     @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
+    @UI("body") public static CheckboxAndRadioButtonCustomDisabled checkboxAndRadioButtonCustomDisabled;
     @UI("body") public static Switches switches;
     @UI("body") public static RadioButtonsCustomInline radioButtonsCustomInline;
     @UI("#translucentToastButton") public static Button translucentToastButton;
