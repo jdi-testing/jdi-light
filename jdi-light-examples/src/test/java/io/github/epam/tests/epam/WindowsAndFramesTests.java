@@ -4,8 +4,16 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.*;
-import static io.github.epam.EpamGithubSite.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
+import static com.epam.jdi.light.elements.common.WindowsManager.newWindowIsOpened;
+import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.setWindowName;
+import static com.epam.jdi.light.elements.common.WindowsManager.switchToWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.windowsCount;
+import static io.github.epam.EpamGithubSite.githubPage;
+import static io.github.epam.EpamGithubSite.homePage;
+import static io.github.epam.EpamGithubSite.iframe;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;

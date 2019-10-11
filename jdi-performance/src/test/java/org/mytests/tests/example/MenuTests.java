@@ -4,8 +4,16 @@ import org.mytests.tests.SimpleTestsInit;
 import org.mytests.tests.states.States;
 import org.testng.annotations.Test;
 
-import static org.mytests.uiobjects.example.entities.LeftMenuData.*;
-import static org.mytests.uiobjects.example.site.SiteJdi.*;
+import static org.mytests.uiobjects.example.entities.LeftMenuData.ContactForm;
+import static org.mytests.uiobjects.example.entities.LeftMenuData.Dates;
+import static org.mytests.uiobjects.example.entities.LeftMenuData.ElementsPacks;
+import static org.mytests.uiobjects.example.entities.LeftMenuData.HTML5;
+import static org.mytests.uiobjects.example.entities.LeftMenuData.Service;
+import static org.mytests.uiobjects.example.site.SiteJdi.datesPage;
+import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
+import static org.mytests.uiobjects.example.site.SiteJdi.html5Page;
+import static org.mytests.uiobjects.example.site.SiteJdi.leftMenu;
+import static org.mytests.uiobjects.example.site.SiteJdi.menu;
 import static org.testng.Assert.assertEquals;
 
 public class MenuTests extends SimpleTestsInit {
