@@ -23,7 +23,10 @@ import java.util.regex.Pattern;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.LinqUtils.selectMany;
+import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;

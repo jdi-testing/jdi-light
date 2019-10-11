@@ -9,7 +9,9 @@ import static io.github.com.pages.HtmlElementsPage.disabledName;
 import static io.github.com.pages.HtmlElementsPage.name;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 /**
