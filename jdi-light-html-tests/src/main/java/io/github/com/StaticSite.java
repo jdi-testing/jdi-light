@@ -11,7 +11,16 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JMenu;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.custom.MenuItem;
-import io.github.com.pages.*;
+import io.github.com.pages.ContactFormPage;
+import io.github.com.pages.DatesPage;
+import io.github.com.pages.Footer;
+import io.github.com.pages.GithubPage;
+import io.github.com.pages.Header;
+import io.github.com.pages.HomePage;
+import io.github.com.pages.HomePageFrame;
+import io.github.com.pages.HtmlElementsPage;
+import io.github.com.pages.MetalAndColorsPage;
+import io.github.com.pages.UsersPage;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

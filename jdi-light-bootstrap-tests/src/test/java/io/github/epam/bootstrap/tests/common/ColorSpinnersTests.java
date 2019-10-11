@@ -7,11 +7,17 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.spinnerWithTextDanger;
+import static io.github.com.pages.BootstrapPage.spinnerWithTextDark;
+import static io.github.com.pages.BootstrapPage.spinnerWithTextInfo;
+import static io.github.com.pages.BootstrapPage.spinnerWithTextLight;
+import static io.github.com.pages.BootstrapPage.spinnerWithTextPrimary;
+import static io.github.com.pages.BootstrapPage.spinnerWithTextSecondary;
+import static io.github.com.pages.BootstrapPage.spinnerWithTextSuccess;
+import static io.github.com.pages.BootstrapPage.spinnerWithTextWarning;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.StringContains.containsString;
-import static org.testng.Assert.assertEquals;
 
 public class ColorSpinnersTests extends TestsInit {
 

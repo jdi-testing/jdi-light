@@ -8,8 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
-import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
-import static io.github.epam.html.tests.issues.issue69.IssuePage69.*;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.paragraphs;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.paragraphsData;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.paragraphsList;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.template;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.templateData;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.templateList;
 import static io.github.epam.html.tests.issues.issue69.JDISite69.issuePage69;
 import static org.testng.Assert.assertEquals;
 

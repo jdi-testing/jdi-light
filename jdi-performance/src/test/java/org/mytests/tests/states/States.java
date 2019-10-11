@@ -4,7 +4,11 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 import org.mytests.uiobjects.example.entities.User;
 
-import static org.mytests.uiobjects.example.site.SiteJdi.*;
+import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
+import static org.mytests.uiobjects.example.site.SiteJdi.loginForm;
+import static org.mytests.uiobjects.example.site.SiteJdi.logout;
+import static org.mytests.uiobjects.example.site.SiteJdi.userIcon;
+import static org.mytests.uiobjects.example.site.SiteJdi.userName;
 
 /**
  * Created by Roman_Iovlev on 3/1/2018.
