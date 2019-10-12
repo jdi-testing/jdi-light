@@ -7,13 +7,18 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.buttonPrimary;
+import static io.github.com.pages.BootstrapPage.disabledButton;
+import static io.github.com.pages.BootstrapPage.doubleButton;
+import static io.github.com.pages.BootstrapPage.redButton;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 /**
  * Created by Roman Iovlev on 12.09.2019
