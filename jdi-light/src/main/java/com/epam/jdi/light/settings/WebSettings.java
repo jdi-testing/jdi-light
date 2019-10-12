@@ -121,7 +121,7 @@ public class WebSettings {
         String locatorName = SMART_SEARCH_NAME.execute(el.getName());
         return el.base().timer().getResult(() -> {
             for (String template : SMART_SEARCH_LOCATORS) {
-                UIElement ui = (template.equals("#%s")
+                UIElement ui = (("#%s").equals(template)
                     ? $(String.format(template, locatorName))
                     : $(String.format(template, locatorName), el.base().parent))
                         .setup(e -> e.setName(el.getName()).noWait());
@@ -181,9 +181,9 @@ public class WebSettings {
 
     private static void setSearchStrategy(String p) {
         p = p.toLowerCase();
-        if (p.equals("soft"))
+        if (("soft").equals(p))
             p = "any, multiple";
-        if (p.equals("strict"))
+        if (("strict").equals(p))
             p = "visible, single";
         if (p.split(",").length == 2) {
             List<String> params = asList(p.split(","));
