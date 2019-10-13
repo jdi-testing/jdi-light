@@ -42,7 +42,7 @@ public class ModalVerticallyCenteredTests extends TestsInit {
                 {
                         modalVerticallyCentered.modalCenterTrigger,
                         modalVerticallyCentered.dismissModal1Trigger,
-                        modalVerticallyCentered.modalContent1,
+                        modalVerticallyCentered.modalCenterBg,
                         "modal-vertical-content-1",
                         "modal-dialog-centered"
                 },
@@ -52,7 +52,7 @@ public class ModalVerticallyCenteredTests extends TestsInit {
                         modalVerticallyCentered.dismissModal2Trigger,
                         modalVerticallyCentered.modalCenterScrollableBg,
                         "modal-vertical-content-2",
-                        "modal-dialog-scrollable"
+                        "modal-dialog-centered"
                 }
         };
     }
@@ -64,7 +64,7 @@ public class ModalVerticallyCenteredTests extends TestsInit {
     }
 
     @Test(dataProvider = "modalContentData")
-    public void modalDisplayedHiddenTest(Button showButton,
+    public void modalBasicFunctionalityTest(Button showButton,
                                          Button dismissButton,
                                          Modal modal,
                                          String modalId)
@@ -106,6 +106,11 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         dismissButton.click();
 
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(modalCss)));
+    }
+
+    @Test
+    public void modalCenteredTest() {
+
     }
 
 }
