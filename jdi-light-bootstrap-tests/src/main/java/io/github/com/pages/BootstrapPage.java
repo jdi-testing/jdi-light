@@ -321,6 +321,7 @@ public class BootstrapPage extends WebPage {
     @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
     @UI("body") public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
+    @UI("#validation-submit-form") public static FormCustomStyles formCustomStyles;
 
 
     @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
