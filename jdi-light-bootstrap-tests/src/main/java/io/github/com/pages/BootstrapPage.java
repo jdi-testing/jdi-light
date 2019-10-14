@@ -50,6 +50,7 @@ import io.github.com.sections.CheckboxesDefaultInline;
 import io.github.com.sections.CustomSelect;
 import io.github.com.sections.CustomSelectWithButton;
 import io.github.com.sections.FormCustomStyles;
+import io.github.com.sections.GridModalSection;
 import io.github.com.sections.InputGroupInputWithCheckBox;
 import io.github.com.sections.InputGroupInputWithLabelAndText;
 import io.github.com.sections.InputGroupInputWithRadio;
@@ -551,4 +552,6 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
     //endregion
+    @UI("#gridModalBase")
+    public static GridModalSection gridModalSection;
 }
