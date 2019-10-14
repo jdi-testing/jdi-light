@@ -7,7 +7,9 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
 public class Paragraph extends Section {
-    public Button paragraph, paragraph2, paragraph3;
+    public Button paragraph;
+    public Button paragraph2;
+    public Button paragraph3;
 
     @Override
     public String toString() {
