@@ -7,5 +7,9 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 
 public class ReadonlyPlainText extends Text {
 
+    public String getText() {
+        return core().getText();
+    }
+
 
 }

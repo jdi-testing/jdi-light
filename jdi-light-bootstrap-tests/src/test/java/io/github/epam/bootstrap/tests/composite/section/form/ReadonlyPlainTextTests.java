@@ -33,8 +33,8 @@ public class ReadonlyPlainTextTests extends TestsInit {
 
         @Test
         public void getTextTest(){
-        assertEquals(readonlyPlainText1.getText(), plainTextValue);
-        assertEquals(readonlyPlainText2.getText(), plainTextValue);
+           assertEquals(readonlyPlainText1.getText(), plainTextValue);
+           assertEquals(readonlyPlainText2.getText(), plainTextValue);
         }
 
         @Test
