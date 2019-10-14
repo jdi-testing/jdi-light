@@ -45,8 +45,7 @@ public class FormSteps {
 	public void fillForm(String name, String jsonName) {
 		getForm(name).fill(getMapFromJson(jsonName, "json.test.data"));
 	}
-	@When("^(?:I |)(?:submit|send|add|publich|save|update|cancel|close|back|select|next|search) " +
-			"form$")
+	@When("^(?:I |)(?:submit|send|add|publich|save|update|cancel|close|back|select|next|search) form$")
 	public void submitDataForm() {
 		getLastForm().submit();
 	}

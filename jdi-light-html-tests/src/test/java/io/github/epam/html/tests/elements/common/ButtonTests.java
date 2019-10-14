@@ -15,8 +15,7 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
@@ -129,6 +128,13 @@ public class ButtonTests implements TestsInit {
             suspendButton.is().notAppear(2));
     }
 
+    @Test
+    public void displayButtonTest() {
+        WebPage.reload();
+        assertFalse(suspendButton.isDisplayed());
+        durationMoreThan(2, () ->
+                suspendButton.is().displayed());
+    }
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void isNotAppearFailedButtonTest() {

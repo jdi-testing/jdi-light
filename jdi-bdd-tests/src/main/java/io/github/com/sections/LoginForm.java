@@ -16,7 +16,7 @@ public class LoginForm extends Form<User> {
 			userIcon.click();
 		}
 	}
-
+	@Override
 	public boolean isHidden() {
 		return name.isHidden();
 	}

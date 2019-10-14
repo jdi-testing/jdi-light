@@ -135,7 +135,7 @@ public class UIElement extends JDIBase
      * Check that element is selected
      * @return boolean
      */
-    @JDIAction("Check that '{name}' is selected")
+    @JDIAction(value = "Check that '{name}' is selected", timeout = 0)
     public boolean isSelected() {
         return selected();
     }
@@ -144,7 +144,7 @@ public class UIElement extends JDIBase
      * Check the element is enabled
      * @return boolean
      */
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction(value = "Check that '{name}' is enabled", timeout = 0)
     public boolean isEnabled() {
         return enabled();
     }
@@ -158,7 +158,7 @@ public class UIElement extends JDIBase
      * Check the element is displayed
      * @return boolean
      */
-    @JDIAction("Check that '{name}' is displayed")
+    @JDIAction(value = "Check that '{name}' is displayed", timeout = 0)
     public boolean isDisplayed() {
         return displayed();
     }
@@ -361,7 +361,7 @@ public class UIElement extends JDIBase
      * Check that element is deselected
      * @return boolean
      */
-    @JDIAction("Check that '{name}' is deselected")
+    @JDIAction(value = "Check that '{name}' is deselected", timeout = 0)
     public boolean isDeselected() {
         return !selected();
     }
@@ -370,12 +370,12 @@ public class UIElement extends JDIBase
      * Check the element is hidden
      * @return boolean
      */
-    @JDIAction("Check that '{name}' is hidden")
+    @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
     public boolean isHidden() {
         return !displayed();
     }
 
-    @JDIAction("Check that '{name}' is hidden")
+    @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
     public boolean isExist() {
         return noWait(() -> {
             try {
@@ -383,7 +383,7 @@ public class UIElement extends JDIBase
             } catch (Exception ignore) { return false; }
         });
     }
-    @JDIAction("Check that '{name}' is hidden")
+    @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
     public boolean isNotExist() {
         return !isExist();
     }

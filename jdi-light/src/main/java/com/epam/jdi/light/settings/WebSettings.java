@@ -42,6 +42,7 @@ import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.format;
@@ -61,18 +62,14 @@ public class WebSettings {
     public static String getDomain() {
         if (DOMAIN != null)
             return DOMAIN;
-        if (!initialized) {
+        if (!initialized)
             init();
-            if (readProperties().size() == 0)
-                throw new RuntimeException(format("Can't find test.properties at: %s%sIn order to get DOMAIN please specify it in test.properties or directly using WebSettings.setDomain('http://...')",
-                    getCorrectPath(), LINE_BREAK));
-            else if (DOMAIN == null)
-                throw new RuntimeException(format("Can't find 'domain=' in test.properties at: %s%sIn order to get DOMAIN please specify it in test.properties or directly using WebSettings.setDomain('http://...')",
-                    getCorrectPath(), LINE_BREAK));
-        }
-        if (DOMAIN == null) {
-            DOMAIN = "Domain not specified";
-        }
+        if (loadProperties().size() == 0)
+            throw new RuntimeException(format("Can't find test.properties at: %s%sIn order to get DOMAIN please specify it in test.properties or directly using WebSettings.setDomain('http://...')",
+                getCorrectPath(), LINE_BREAK));
+        if (DOMAIN == null)
+            throw new RuntimeException(format("Can't find 'domain=' in test.properties at: %s%sIn order to get DOMAIN please specify it in test.properties or directly using WebSettings.setDomain('http://...')",
+                getCorrectPath(), LINE_BREAK));
         return DOMAIN;
     }
     public static void setDomain(String domain) {
@@ -235,7 +232,13 @@ public class WebSettings {
     }
     public static Properties getProperties(String path) {
         // TODO use mergePath macos and windows
-        Properties p = PropertyReader.getProperties("/../../target/classes/" + path);
-        return p.size() > 0 ? p : PropertyReader.getProperties(path);
+        Properties pTest = PropertyReader.getProperties(mergePath(path));
+        Properties pTarget = PropertyReader.getProperties(mergePath("/../../target/classes/" + path));
+        if (pTarget.size() > 0)
+            return pTarget;
+        String propertiesPath = pTest.size() > 0
+                ? path
+                : "/../../target/classes/" + path;
+        return PropertyReader.getProperties(mergePath(propertiesPath));
     }
 }
