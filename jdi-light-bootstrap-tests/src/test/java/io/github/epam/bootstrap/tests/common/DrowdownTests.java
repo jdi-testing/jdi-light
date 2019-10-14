@@ -171,6 +171,69 @@ public class DrowdownTests extends TestsInit {
     }
 
     @Test
+    public void dropUpDropdownIsValidationTest() {
+        dropUpDropdown.is()
+                .core()
+                .cssClass(containsString("dropup"));
+        dropUpDropdown.dropdownMenu.is()
+                .core()
+                .css("top", is("auto"))
+                .css("bottom", is("100%"));
+    }
+
+    @Test
+    public void dropUpSplitDropdownIsValidationTest() {
+        dropUpSplitDropdown.is()
+                .core()
+                .cssClass(containsString("dropup"));
+        dropUpSplitDropdown.dropdownMenu.is()
+                .core()
+                .css("top", is("auto"))
+                .css("bottom", is("100%"));
+    }
+
+    @Test
+    public void dropRightDropdownIsValidationTest() {
+        dropRightDropdown.is()
+                .core()
+                .cssClass(containsString("dropright"));
+        dropRightDropdown.dropdownMenu.is()
+                .core()
+                .css("right", is("auto"))
+                .css("left", is("100%"));
+    }
+
+    @Test
+    public void dropRightSplitDropdownIsValidationTest() {
+        dropRightSplitDropdown.is()
+                .core()
+                .cssClass(containsString("dropright"));
+        dropRightSplitDropdown.dropdownMenu.is()
+                .core()
+                .css("right", is("auto"))
+                .css("left", is("100%"));
+    }
+
+    @Test
+    public void dropLeftDropdownIsValidationTest() {
+        dropLeftDropdown.is()
+                .core()
+                .cssClass(containsString("dropleft"));
+        dropLeftDropdown.dropdownMenu.is()
+                .core()
+                .css("left", is("auto"))
+                .css("right", is("100%"));
+    }
+
+    @Test
+    public void dropLeftSplitDropdownIsValidationTest() {
+        dropLeftSplitDropdown.dropdownMenu.is()
+                .core()
+                .css("left", is("auto"))
+                .css("right", is("100%"));
+    }
+
+    @Test
     public void baseValidationTest() {
         baseValidation(simpleDropdown);
     }
