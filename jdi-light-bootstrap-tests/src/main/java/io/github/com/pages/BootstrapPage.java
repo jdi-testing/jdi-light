@@ -19,6 +19,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonGroupBasicExample;
@@ -70,6 +71,7 @@ import io.github.com.sections.ListGroupWithBadges;
 import io.github.com.sections.MediaObjectNesting;
 import io.github.com.sections.MediaObjectSample;
 import io.github.com.sections.NavbarExternalContent;
+import io.github.com.sections.NavbarWithDropdown;
 import io.github.com.sections.NavsAlignmentCenter;
 import io.github.com.sections.NavsAlignmentEnd;
 import io.github.com.sections.NavsBaseA;
@@ -81,6 +83,7 @@ import io.github.com.sections.NavsTabs;
 import io.github.com.sections.NavsTabsWithDropdown;
 import io.github.com.sections.NavsVerticalA;
 import io.github.com.sections.NavsVerticalLi;
+import io.github.com.sections.NestedNav;
 import io.github.com.sections.PaginationAlignCenter;
 import io.github.com.sections.PaginationAlignEnd;
 import io.github.com.sections.PaginationIcons;
@@ -94,6 +97,7 @@ import io.github.com.sections.RadioButtonGroup;
 import io.github.com.sections.RadioButtonsCustom;
 import io.github.com.sections.RadioButtonsCustomInline;
 import io.github.com.sections.RadioButtonsDefaultInline;
+import io.github.com.sections.ScrollSpyNav;
 import io.github.com.sections.SegmentedButton;
 import io.github.com.sections.Switches;
 import io.github.com.sections.Toast;
@@ -102,14 +106,18 @@ import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarText;
 import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerSize;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
-    public static UIElement inputGroupWrap,inputGroupNowrap;
-    public static Button redButton, doubleButton, disabledButton;
+    public static UIElement inputGroupWrap;
+    public static UIElement inputGroupNowrap;
+    public static Button redButton;
+    public static Button doubleButton;
+    public static Button disabledButton;
 
     @UI("//input[contains(@class, 'progress-change plus')]")  public static Button plus;
     @UI("//input[contains(@class, 'progress-change minus')]") public static Button minus;
@@ -148,6 +156,8 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-backgrounds-blue") public static Progress progressBackgroundBlue;
     @UI("#progress-backgrounds-yellow") public static Progress progressBackgroundYellow;
     @UI("#progress-backgrounds-red") public static Progress progressBackgroundRed;
+    @UI("#navbar-containers-centred") public static Navbar navbarCentredContainer;
+    @UI("#navbar-containers-expanded") public static Navbar navbarExpandedContainer;
     @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
     @UI("#spinner-border") public static Spinner spinnerBorder;
     //endregion
@@ -312,7 +322,9 @@ public class BootstrapPage extends WebPage {
     @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
     @UI("body") public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
+    @UI("#validation-submit-form") public static FormCustomStyles formCustomStyles;
 
+    @UI("//h4[.='Navbar - Text']/../..") public static NavbarText navbarText;
 
     @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
 

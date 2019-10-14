@@ -18,7 +18,7 @@ public class ContactForm {
     @UI("#passport-number")
     WebElement passportNumber;
     @UI("#passport-seria")
-    WebElement passportSeria;
+    WebElement passportSerial;
     @UI("#passport")
     WebElement passport;
     // Dropdown
@@ -54,7 +54,7 @@ public class ContactForm {
         fillTextField(lastName, contact.lastName);
         fillTextField(position, contact.position);
         fillTextField(passportNumber, contact.passportNumber);
-        fillTextField(passportSeria, contact.passportSeria);
+        fillTextField(passportSerial, contact.passportSerial);
 
         // Dropdown
         fillDropdown(genderExpand, genderList, contact.gender);
