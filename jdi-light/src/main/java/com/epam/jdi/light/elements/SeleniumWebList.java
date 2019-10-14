@@ -271,15 +271,15 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
     }
     @JDIAction("Check '{0}' checkboxes in '{name}' checklist")
     public void check(int... indexes) {
-        setOrUnsetCheckBoxes(true, indexes);
+        setOrUnsetCheckboxes(true, indexes);
     }
     @JDIAction("Uncheck '{0}' checkboxes in  '{name}' checklist")
     public void uncheck(int... indexes) {
         if (indexes.length > 0 && list().get(indexes[0]).isDisplayed()) {
-            setOrUnsetCheckBoxes(false, indexes);
+            setOrUnsetCheckboxes(false, indexes);
         }
     }
-    private void setOrUnsetCheckBoxes(boolean setChecked, int... indexes) {
+    private void setOrUnsetCheckboxes(boolean setChecked, int... indexes) {
         List<Integer> listIndexes = toList(indexes);
         for (int i = 1; i <= values().size(); i++) {
             UIElement value = get(i);
