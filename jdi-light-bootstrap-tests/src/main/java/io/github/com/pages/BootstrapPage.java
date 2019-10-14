@@ -106,6 +106,7 @@ import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarText;
 import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerSize;
@@ -323,6 +324,7 @@ public class BootstrapPage extends WebPage {
     @UI("body") public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
     @UI("#validation-submit-form") public static FormCustomStyles formCustomStyles;
 
+    @UI("//h4[.='Navbar - Text']/../..") public static NavbarText navbarText;
 
     @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
 
