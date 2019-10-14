@@ -538,7 +538,6 @@ public class BootstrapPage extends WebPage {
     public static NavbarExternalContent navbarExternalContent;
 
 
-
     //Modals
     @UI("#modal-vertically-centered")
     public static ModalVerticallyCentered modalVerticallyCentered;
