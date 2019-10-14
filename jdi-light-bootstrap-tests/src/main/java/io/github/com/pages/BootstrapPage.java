@@ -42,6 +42,8 @@ public class BootstrapPage extends WebPage {
     @UI("(//div[@class='btn-group dropright'])[2]") public static Dropdown dropRightSplitDropdown;
     @UI("(//div[@class='btn-group dropleft'])[1]") public static Dropdown dropLeftDropdown;
     @UI("(//div[@class='btn-group'])[14]") public static Dropdown dropLeftSplitDropdown;
+    @UI("(//div[@class='btn-group'])[15]") public static Dropdown rightAllignedDropdown;
+    @UI("(//div[@class='btn-group'])[17]") public static Dropdown leftAllignedDropdown;
     @UI("#simple-alert") public static Alert simpleAlert;
     @UI("#dismissible-alert") public static Alert dismissibleAlert;
     @UI("#badge-secondary") public static Badge badgeSecondary;
