@@ -430,7 +430,20 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
         if (header.hasValue()) {
             return;
         }
+
+        List<String> headers = collectHeaders(lineClass, dataClass);
+        if(headers != null && headers.size() > 0) {
+            header.setFinal(headers);
+            if (!size.hasValue()) {
+                size.setFinal(headers.size());
+            }
+        }
+
+    }
+
+    private  List<String> collectHeaders(Class<L> lineClass,  Class<D> dataClass) {
         List<Field> entityFields = new ArrayList<>();
+        List<String> headers = null;
         if (lineClass != null) {
             entityFields.addAll(getFieldsExact(lineClass, f -> isInterface(f, HasValue.class)));
         }
@@ -438,13 +451,11 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
             entityFields.addAll(asList(dataClass.getDeclaredFields()));
         }
         if (entityFields.size() > 0) {
-            List<String> headers = map(entityFields, field1 -> splitCamelCase(field1.getName()))
-                .stream().distinct().collect(Collectors.toList());
-            header.setFinal(headers);
-            if (!size.hasValue()) {
-                size.setFinal(headers.size());
-            }
+            headers = map(entityFields, field1 -> splitCamelCase(field1.getName()))
+                    .stream().distinct().collect(Collectors.toList());
         }
+
+        return headers;
     }
 
     private D getLineData(Line row) {
