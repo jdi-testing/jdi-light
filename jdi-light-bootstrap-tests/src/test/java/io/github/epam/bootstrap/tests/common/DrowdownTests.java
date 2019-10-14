@@ -234,6 +234,22 @@ public class DrowdownTests extends TestsInit {
     }
 
     @Test
+    public void rightAllignedDropdownIsValidationTest() {
+        rightAllignedDropdown.dropdownMenu.is()
+                .core()
+                .cssClass(containsString("dropdown-menu-right"));
+    }
+
+    @Test
+    public void leftAllignedDropdownIsValidationTest() {
+        leftAllignedDropdown.dropdownMenu.is()
+                .core()
+                .cssClass(containsString("dropdown-menu-lg-left"))
+                .css("right", is("auto"))
+                .css("left", is("0px"));
+    }
+
+    @Test
     public void baseValidationTest() {
         baseValidation(simpleDropdown);
     }
