@@ -36,75 +36,75 @@ public class gridModalTests extends TestsInit {
         };
     }
 
-  /*  @Test(dataProvider = "elementsData")
-    public void baseGridValidationTest(String elementId) {
-
+    @Test
+    public void baseGridRowsValidationTest() {
         gridModalSection.openGridModalWindow();
-
-        uiElements.stream().filter(uiElement ->
-                uiElement.attr("id").equals(elementId)).forEach(
-                e -> {
-                    e.highlight();
-                    baseValidation(e);
-                    e.unhighlight();
-                }
-        );
+        gridModalSection.gridModalWindow.
+                gridModal.
+                getAllGridRows().
+                forEach(
+                        e -> {
+                            e.highlight();
+                            baseValidation(e);
+                            e.unhighlight();
+                        }
+                );
     }
-*/
 
-   /* @Test(dataProvider = "elementsData")
-    public void baseGridValidationTest(String elementId) {
-
+    @Test
+    public void baseGridCellsValidationTest() {
         gridModalSection.openGridModalWindow();
-
-        gridModalSection.gridModal.childs().stream().
-                filter(uiElement -> uiElement.attr("id").equals(elementId)).forEach(
-                e -> {
-                    e.highlight();
-                    baseValidation(e);
-                    e.unhighlight();
-                }
-        );
-    }*/
+        gridModalSection.gridModalWindow.
+                gridModal.
+                getAllGridCells().
+                forEach(
+                        e -> {
+                            e.highlight();
+                            baseValidation(e);
+                            e.unhighlight();
+                        }
+                );
+    }
 
     @Test
     public void checkCloseModalButton() {
-        gridModalSection.gridModal.btnClose.highlight("red");
-        gridModalSection.gridModal.btnClose.click();
-        gridModalSection.gridModal.is().core().disappear();
+        gridModalSection.gridModalWindow.btnClose.highlight("red");
+        gridModalSection.gridModalWindow.btnClose.click();
+        gridModalSection.gridModalWindow.is().core().disappear();
     }
 
     @Test
     public void checkCloseXModalButton() {
-        gridModalSection.gridModal.btnCloseX.highlight("red");
-        gridModalSection.gridModal.btnCloseX.click();
-        gridModalSection.gridModal.is().core().disappear();
+        gridModalSection.gridModalWindow.btnCloseX.highlight("red");
+        gridModalSection.gridModalWindow.btnCloseX.click();
+        gridModalSection.gridModalWindow.is().core().disappear();
     }
 
     @Test
     public void checkSaveModalButton() {
-        gridModalSection.gridModal.btnSave.highlight("red");
-        gridModalSection.gridModal.btnSave.click();
-        gridModalSection.gridModal.is().core().displayed();
+        gridModalSection.gridModalWindow.btnSave.highlight("red");
+        gridModalSection.gridModalWindow.btnSave.click();
+        gridModalSection.gridModalWindow.is().core().displayed();
     }
 
     @Test
     public void checkCloseByEscapeButton() {
-        gridModalSection.gridModal.core().sendKeys(Keys.ESCAPE);
-        gridModalSection.gridModal.is().core().disappear();
+        gridModalSection.openGridModalWindow();
+        gridModalSection.gridModalWindow.core().sendKeys(Keys.ESCAPE);
+        gridModalSection.gridModalWindow.is().core().disappear();
     }
 
     @Test
     public void baseModalValidationTest() {
-        baseValidation(gridModalSection.gridModal.modalTitle);
-        baseValidation(gridModalSection.gridModal.btnSave);
-        baseValidation(gridModalSection.gridModal.btnCloseX);
-        baseValidation(gridModalSection.gridModal.btnClose);
+        baseValidation(gridModalSection.gridModalWindow.modalTitle);
+        baseValidation(gridModalSection.gridModalWindow.btnSave);
+        baseValidation(gridModalSection.gridModalWindow.btnCloseX);
+        baseValidation(gridModalSection.gridModalWindow.btnClose);
 
-        gridModalSection.gridModal.modalTitle.unhighlight();
-        gridModalSection.gridModal.btnSave.unhighlight();
-        gridModalSection.gridModal.btnCloseX.unhighlight();
-        gridModalSection.gridModal.btnClose.unhighlight();
+        gridModalSection.gridModalWindow.modalTitle.unhighlight();
+        gridModalSection.gridModalWindow.btnSave.unhighlight();
+        gridModalSection.gridModalWindow.btnCloseX.unhighlight();
+        gridModalSection.gridModalWindow.btnClose.unhighlight();
     }
 }
 

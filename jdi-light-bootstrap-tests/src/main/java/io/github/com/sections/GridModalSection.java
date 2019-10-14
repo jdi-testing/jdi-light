@@ -8,16 +8,16 @@ import static io.github.com.pages.BootstrapPage.gridModalSection;
 
 //import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 public class GridModalSection extends Section {
-    //@FindBy(css = "#gridSsytemModal")
+    //@FindBy(css = "#gridSystemModal")
     @UI("#gridSystemModal")
-    public GridModalWindow gridModal;
+    public GridModalWindow gridModalWindow;
 
     //@FindBy(css = "#btn-modal-using-grid")
     @UI("#btn-modal-using-grid")
     private Button btnOpenGridModal;
 
     public void openGridModalWindow() {
-        if (!gridModalSection.gridModal.isDisplayed()) {
+        if (!gridModalSection.gridModalWindow.isDisplayed()) {
             gridModalSection.btnOpenGridModal.click();
         }
     }
