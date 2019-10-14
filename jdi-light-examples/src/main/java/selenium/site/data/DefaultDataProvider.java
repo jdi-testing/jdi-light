@@ -6,7 +6,7 @@ public class DefaultDataProvider {
         c.lastName = "Full Contact";
         c.position = "ChiefQA";
         c.passportNumber = 4321;
-        c.passportSeria = 123456;
+        c.passportSerial = 123456;
         c.description = "JDI - awesome UI automation tool";
 
         c.gender = "Female";

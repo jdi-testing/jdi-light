@@ -8,7 +8,7 @@ public class Users {
     public static final String defaultLastName = "Iovlev";
     public static final String defaultPosition = "ChiefQA";
     public static final String defaultPassportNumber = "4321";
-    public static final String defaultPassportSeria = "123456";
+    public static final String defaultpassportSerial = "123456";
     public static final String defaultDescription = "JDI - awesome UI automation tool";
     public static final String defaultAcceptConditions = "true";
     public static final String defaultGender = "Female";
@@ -21,7 +21,7 @@ public class Users {
         c.position = defaultPosition;
         //c.passport = true;
         c.passportNumber = defaultPassportNumber;
-        c.passportSeria = defaultPassportSeria;
+        c.passportSerial = defaultpassportSerial;
         c.description = defaultDescription;
         c.acceptConditions = defaultAcceptConditions;
         c.gender = defaultGender;
@@ -33,7 +33,7 @@ public class Users {
         c.lastName = defaultLastName;
         c.position = defaultPosition;
         c.passportNumber = defaultPassportNumber;
-        c.passportSeria = defaultPassportSeria;
+        c.passportSerial = defaultpassportSerial;
         c.description = defaultDescription;
         c.acceptConditions = defaultAcceptConditions;
         c.gender = defaultGender;
@@ -47,7 +47,7 @@ public class Users {
         c.position = defaultPosition;
         //c.passport = true;
         c.passportNumber = defaultPassportNumber;
-        c.passportSeria = defaultPassportSeria;
+        c.passportSerial = defaultpassportSerial;
         c.description = defaultDescription;
         c.acceptConditions = defaultAcceptConditions;
         c.gender = defaultGender;

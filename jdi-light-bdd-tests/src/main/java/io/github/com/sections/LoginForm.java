@@ -8,8 +8,9 @@ import io.github.com.entities.User;
 import static io.github.com.pages.Header.userIcon;
 
 public class LoginForm extends Form<User> {
-	TextField name, password;
-	Button loginButton;
+	public TextField name;
+	public TextField password;
+	public Button loginButton;
 
 	public void shouldBeOpened() {
 		if (isHidden()) {

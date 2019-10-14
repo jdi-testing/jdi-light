@@ -13,7 +13,7 @@ Feature: Form
       |lastName|Iovlev|
       |position|ChiefQA|
       |passportNumber|654321|
-      |passportSeria|1234|
+      |passportSerial|1234|
       |description|JDI - awesome UI automation tool|
       |acceptConditions|true|
       |gender|Female|
@@ -23,7 +23,7 @@ Feature: Form
       |lastName|Iovlev|
       |position|ChiefQA|
       |passportNumber|654321|
-      |passportSeria|1234|
+      |passportSerial|1234|
       |description|JDI - awesome UI automation tool|
       |acceptConditions|true|
       |gender|Female|
@@ -36,7 +36,7 @@ Feature: Form
       |lastName|Iovlev|
       |position|ChiefQA|
       |passportNumber|654321|
-      |passportSeria|1234|
+      |passportSerial|1234|
       |description|JDI - awesome UI automation tool|
       |acceptConditions|true|
       |gender|Female|
@@ -47,7 +47,7 @@ Feature: Form
       |lastName|Iovlev|
       |position|ChiefQA|
       |passportNumber|654321|
-      |passportSeria|1234|
+      |passportSerial|1234|
       |description|JDI - awesome UI automation tool|
       |acceptConditions|true|
       |gender|Female|
