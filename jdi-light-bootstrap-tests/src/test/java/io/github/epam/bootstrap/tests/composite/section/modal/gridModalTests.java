@@ -1,13 +1,13 @@
 package io.github.epam.bootstrap.tests.composite.section.modal;
 
 import io.github.epam.TestsInit;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.gridModalSection;
-import static io.github.com.pages.BootstrapPage.progressSections;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
@@ -23,62 +23,89 @@ public class gridModalTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        gridModalSection.openGridModalWindow();
     }
 
     @DataProvider
-    public static Object[][] progressData() {
-        return new Object[][]{
-                {"striped_ordinary", "10", "rgba(0, 123, 255, 1)", "0", "100", "progress-bar-striped"},
-                {"striped_success", "25", "rgba(40, 167, 69, 1)", "0", "100", "progress-bar-striped"},
-                {"striped_info", "50", "rgba(23, 162, 184, 1)", "0", "100", "progress-bar-striped"},
-                {"striped_warning", "75", "rgba(255, 193, 7, 1)", "0", "100", "progress-bar-striped"},
-                {"striped_danger", "100", "rgba(220, 53, 69, 1)", "0", "100", "progress-bar-striped"}
-        };
-    }
-
-    @Test(dataProvider = "progressData")
-    public void checkProgressData(String progressId, String value, String color,
-                                  String min, String max, String classStriped) {
-
-        progressSections.stream().filter(progressSection ->
-                progressSection.progress.attr("id").equals(progressId)).forEach(
-                progressSection -> {
-                    progressSection.progress.is().core().hasClass(classStriped);
-                    progressSection.progress.is().ariaValue(value)
-                            .color(color)
-                            .minValue(min)
-                            .maxValue(max);
-                });
-    }
-
-
-
-
-
-    @DataProvider
-    public static Object[][] baseModalValidationElementsData() {
+    public static Object[][] elementsData() {
         return new Object[][]{
                 {"gridModalLabel"},
+                {"close-modal-cross"},
                 {"save-modal"},
                 {"close-modal"},
-                {"close-modal-cross"}
         };
     }
 
-    @Test(dataProvider = "baseModalValidationElementsData")
-    public void baseModalElementsValidationTest(String elementId) {
+  /*  @Test(dataProvider = "elementsData")
+    public void baseGridValidationTest(String elementId) {
 
-        if (!gridModalSection.gridModal.isOpen()) {
-            gridModalSection.btnOpenGridModal.click();
-        }
+        gridModalSection.openGridModalWindow();
+
+        uiElements.stream().filter(uiElement ->
+                uiElement.attr("id").equals(elementId)).forEach(
+                e -> {
+                    e.highlight();
+                    baseValidation(e);
+                    e.unhighlight();
+                }
+        );
+    }
+*/
+
+   /* @Test(dataProvider = "elementsData")
+    public void baseGridValidationTest(String elementId) {
+
+        gridModalSection.openGridModalWindow();
+
         gridModalSection.gridModal.childs().stream().
-                    filter(uiElement -> uiElement.attr("id").equals(elementId)).forEach(
-                    e -> {
-                        e.highlight();
-                        baseValidation(e);
-                        e.unhighlight();
-                    }
-            );
-        }
+                filter(uiElement -> uiElement.attr("id").equals(elementId)).forEach(
+                e -> {
+                    e.highlight();
+                    baseValidation(e);
+                    e.unhighlight();
+                }
+        );
+    }*/
+
+    @Test
+    public void checkCloseModalButton() {
+        gridModalSection.gridModal.btnClose.highlight("red");
+        gridModalSection.gridModal.btnClose.click();
+        gridModalSection.gridModal.is().core().disappear();
+    }
+
+    @Test
+    public void checkCloseXModalButton() {
+        gridModalSection.gridModal.btnCloseX.highlight("red");
+        gridModalSection.gridModal.btnCloseX.click();
+        gridModalSection.gridModal.is().core().disappear();
+    }
+
+    @Test
+    public void checkSaveModalButton() {
+        gridModalSection.gridModal.btnSave.highlight("red");
+        gridModalSection.gridModal.btnSave.click();
+        gridModalSection.gridModal.is().core().displayed();
+    }
+
+    @Test
+    public void checkCloseByEscapeButton() {
+        gridModalSection.gridModal.core().sendKeys(Keys.ESCAPE);
+        gridModalSection.gridModal.is().core().disappear();
+    }
+
+    @Test
+    public void baseModalValidationTest() {
+        baseValidation(gridModalSection.gridModal.modalTitle);
+        baseValidation(gridModalSection.gridModal.btnSave);
+        baseValidation(gridModalSection.gridModal.btnCloseX);
+        baseValidation(gridModalSection.gridModal.btnClose);
+
+        gridModalSection.gridModal.modalTitle.unhighlight();
+        gridModalSection.gridModal.btnSave.unhighlight();
+        gridModalSection.gridModal.btnCloseX.unhighlight();
+        gridModalSection.gridModal.btnClose.unhighlight();
+    }
 }
+
 

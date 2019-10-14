@@ -552,6 +552,6 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
     //endregion
-    @UI("#gridModalBase")
+    @UI("#grid-modal-base")
     public static GridModalSection gridModalSection;
 }
