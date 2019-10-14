@@ -18,6 +18,11 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class FormsSizingTests extends TestsInit {
 
+    private String text = "TextField";
+    private String placeholderLarge = ".form-control-lg";
+    private String placeholderDefault = "Default input";
+    private String placeholderSmall = ".form-control-sm";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -26,11 +31,6 @@ public class FormsSizingTests extends TestsInit {
         formsSizing.defaultTextField.setText(text);
         formsSizing.smallTextField.setText(text);
     }
-    private String text = "TextField";
-    private String placeholderLarge = ".form-control-lg";
-    private String placeholderDefault = "Default input";
-    private String placeholderSmall = ".form-control-sm";
-
 
     @Test
     public void getTextTest() {
