@@ -27,6 +27,15 @@ public class BootstrapPage extends WebPage {
     @UI("#jumbotron") public static Jumbotron jumbotron;
     @UI("#breadcrumb") public static Breadcrumb breadcrumb;
     @UI("#simpleDropdown") public static Dropdown simpleDropdown;
+    @UI(".dropdown.show") public static Dropdown linkDropdown;
+    @UI("(//div[@class='btn-group'])[6]") public static Dropdown primaryDropdown;
+    @UI("(//div[@class='btn-group'])[7]") public static Dropdown successDropdown;
+    @UI("(//div[@class='btn-group'])[8]") public static Dropdown infoDropdown;
+    @UI("(//div[@class='btn-group'])[9]") public static Dropdown splitDropdown;
+    @UI("(//div[@class='btn-group'])[10]") public static Dropdown largeDropdown;
+    @UI("(//div[@class='btn-group'])[11]") public static Dropdown largeSplitDropdown;
+    @UI("(//div[@class='btn-group'])[12]") public static Dropdown smallDropdown;
+    @UI("(//div[@class='btn-group'])[13]") public static Dropdown smallSplitDropdown;
     @UI("#simple-alert") public static Alert simpleAlert;
     @UI("#dismissible-alert") public static Alert dismissibleAlert;
     @UI("#badge-secondary") public static Badge badgeSecondary;
