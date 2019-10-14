@@ -451,7 +451,8 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
         List<Field> fields = getFieldsExact(line.getClass(), f -> isInterface(f, HasValue.class));
         MapArray<String, String> result = new MapArray<>();
         for (Field field : fields) {
-            String name = "", value = "";
+            String name = "";
+            String value = "";
             try {
                 name = field.getName();
                 value = ((HasValue) field.get(line)).getValue();

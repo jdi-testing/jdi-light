@@ -106,14 +106,18 @@ import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarText;
 import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerSize;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
-    public static UIElement inputGroupWrap,inputGroupNowrap;
-    public static Button redButton, doubleButton, disabledButton;
+    public static UIElement inputGroupWrap;
+    public static UIElement inputGroupNowrap;
+    public static Button redButton;
+    public static Button doubleButton;
+    public static Button disabledButton;
 
     @UI("//input[contains(@class, 'progress-change plus')]")  public static Button plus;
     @UI("//input[contains(@class, 'progress-change minus')]") public static Button minus;
@@ -318,6 +322,10 @@ public class BootstrapPage extends WebPage {
     @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
     @UI("body") public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
+    @UI("#validation-submit-form") public static FormCustomStyles formCustomStyles;
+
+
+    @UI("//h4[.='Navbar - Text']/../..") public static NavbarText navbarText;
 
     @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
     @UI("#progress-height .progress") public static JList<ProgressSection> progressHeightSections;
