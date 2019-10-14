@@ -22,6 +22,10 @@ import static org.testng.Assert.assertEquals;
 
 public class CardUtilitiesTests extends TestsInit {
 
+    private String whiteColor = "rgba(255, 255, 255, 1)";
+    private String buttonBorderColor = "rgb(0, 123, 255)";
+    private String buttonBackgroundColor = "rgba(0, 123, 255, 1)";
+
     @DataProvider(name = "cardUtilitiesElements")
     public static Object[][] cardUtilitiesElements() {
         return new Object[][]{
@@ -77,9 +81,9 @@ public class CardUtilitiesTests extends TestsInit {
     @Test(dataProvider = "cardUtilitiesElementsWithWidth")
     public void cardValidationTest(CardUtilities cardUtilitiesElem, int widthInPercent, String widthInPixels) {
         cardUtilitiesElem.core().is()
-                .attr("class", String.format("card w-%d", widthInPercent))
+                .hasClass(String.format("card w-%d", widthInPercent))
                 .css("width", widthInPixels)
-                .css("background-color", "rgba(255, 255, 255, 1)");
+                .css("background-color", whiteColor);
     }
 
     @Test(dataProvider = "cardUtilitiesElementsWithTitle")
@@ -101,9 +105,9 @@ public class CardUtilitiesTests extends TestsInit {
     public void buttonValidationTest(CardUtilities cardUtilitiesElem, String link) {
         cardUtilitiesElem.cardButton.core().is()
                 .text("Read more")
-                .css("color", "rgba(255, 255, 255, 1)")
-                .css("background-color", "rgba(0, 123, 255, 1)")
-                .css("border-color", "rgb(0, 123, 255)");
+                .css("color", whiteColor)
+                .css("background-color", buttonBackgroundColor)
+                .css("border-color", buttonBorderColor);
         cardUtilitiesElem.cardButton.click();
         WindowsManager.switchToWindow(2);
         assertEquals(getUrl(), link);
