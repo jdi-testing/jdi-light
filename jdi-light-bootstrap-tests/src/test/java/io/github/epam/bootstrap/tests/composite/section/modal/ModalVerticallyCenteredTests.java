@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.modalVerticallyCentered;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -112,12 +113,14 @@ public class ModalVerticallyCenteredTests extends TestsInit {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(modalId)));
 
+        $(modalId).waitFor().displayed();
+
         modal.is().displayed();
 
         dismissButton.show();
         dismissButton.click();
 
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(modalId)));
+        $(modalId).waitFor().hidden();
 
         modal.is().hidden();
     }

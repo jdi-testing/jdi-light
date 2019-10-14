@@ -37,18 +37,4 @@ public class ModalVerticallyCentered extends Modal {
     @UI("//*[@id='modal-vertical-content-2']//div//button//span")
     public Button dismissModal2Cross;
 
-    @Title
-    @UI("//*[@id='modal-vertical-content-1']//div//h5")
-    public Text modal1Title;
-
-    @UI("//*[@id='modal-vertical-content-1']//*[@class='modal-body']//p")
-    public Modal modal1Content;
-
-    @Title
-    @UI("//*[@id='modal-vertical-content-2']//div//h5")
-    public Text modal2Title;
-
-    @UI("//*[@id='modal-vertical-content-2']//*[@class='modal-body']//p")
-    public Modal modal2Content;
-
 }
