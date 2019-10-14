@@ -104,6 +104,7 @@ import io.github.com.sections.Toast;
 import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarWithInputGroupForm;
@@ -156,6 +157,8 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-containers-expanded") public static Navbar navbarExpandedContainer;
     @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
     @UI("#spinner-border") public static Spinner spinnerBorder;
+    @UI("#readonlyPlainText1") public static ReadonlyPlainText readonlyPlainText1;
+    @UI("#readonlyPlainText2") public static ReadonlyPlainText readonlyPlainText2;
     //endregion
 
     //region Complex Elements
