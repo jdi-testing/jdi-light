@@ -49,6 +49,10 @@ import io.github.com.sections.CheckboxesDefault;
 import io.github.com.sections.CheckboxesDefaultInline;
 import io.github.com.sections.CustomSelect;
 import io.github.com.sections.CustomSelectWithButton;
+import io.github.com.sections.FormBrowserDefaults;
+import io.github.com.sections.FormCustomStyles;
+import io.github.com.sections.FormServerSide;
+import io.github.com.sections.FormTooptip;
 import io.github.com.sections.InputGroupInputWithCheckBox;
 import io.github.com.sections.InputGroupInputWithLabelAndText;
 import io.github.com.sections.InputGroupInputWithRadio;
@@ -323,6 +327,9 @@ public class BootstrapPage extends WebPage {
     @UI("#spinner-size") public static SpinnerSize spinnerSize;
     @UI("body") public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
     @UI("#validation-submit-form") public static FormCustomStyles formCustomStyles;
+    @UI("#form-browser-defaults") public static FormBrowserDefaults formBrowserDefaults;
+    @UI("#form-server-side") public static FormServerSide formServerSide;
+    @UI("#form-tooltip") public static FormTooptip formTooptip;
 
     @UI("//h4[.='Navbar - Text']/../..") public static NavbarText navbarText;
 

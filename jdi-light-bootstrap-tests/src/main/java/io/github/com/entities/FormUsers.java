@@ -7,6 +7,8 @@ package io.github.com.entities;
 
 public class FormUsers {
 
+    public static FormContacts BLANK_CONTACT = blankContact();
+
     public static FormContacts DEFAULT_CONTACT = defaultContact();
 
     public static FormContacts DEFAULT_CHECK = defaultCheckContact();
@@ -21,6 +23,18 @@ public class FormUsers {
 
     public static FormContacts ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT =
             defaultContact().set(c -> c.name = null);
+
+    public static void clearBlankContact() {
+        BLANK_CONTACT.set(c -> {
+            c.name = "";
+            c.lastName = "";
+            c.userName = "";
+            c.city = "";
+            c.state = "";
+            c.zip = "";
+            c.accept = "false";
+        });
+    }
 
     private static FormContacts defaultContact() {
         return new FormContacts().set(c -> {
@@ -38,6 +52,18 @@ public class FormUsers {
         return new FormContacts().set(c -> {
             c.name = "Mark";
             c.lastName = "Otto";
+            c.userName = "";
+            c.city = "";
+            c.state = "";
+            c.zip = "";
+            c.accept = "false";
+        });
+    }
+
+    private static FormContacts blankContact() {
+        return new FormContacts().set(c -> {
+            c.name = "";
+            c.lastName = "";
             c.userName = "";
             c.city = "";
             c.state = "";
