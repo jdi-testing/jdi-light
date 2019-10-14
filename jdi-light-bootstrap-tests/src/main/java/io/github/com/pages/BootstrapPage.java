@@ -36,6 +36,12 @@ public class BootstrapPage extends WebPage {
     @UI("(//div[@class='btn-group'])[11]") public static Dropdown largeSplitDropdown;
     @UI("(//div[@class='btn-group'])[12]") public static Dropdown smallDropdown;
     @UI("(//div[@class='btn-group'])[13]") public static Dropdown smallSplitDropdown;
+    @UI("(//div[@class='btn-group dropup'])[1]") public static Dropdown dropUpDropdown;
+    @UI("(//div[@class='btn-group dropup'])[2]") public static Dropdown dropUpSplitDropdown;
+    @UI("(//div[@class='btn-group dropright'])[1]") public static Dropdown dropRightDropdown;
+    @UI("(//div[@class='btn-group dropright'])[2]") public static Dropdown dropRightSplitDropdown;
+    @UI("(//div[@class='btn-group dropleft'])[1]") public static Dropdown dropLeftDropdown;
+    @UI("(//div[@class='btn-group'])[14]") public static Dropdown dropLeftSplitDropdown;
     @UI("#simple-alert") public static Alert simpleAlert;
     @UI("#dismissible-alert") public static Alert dismissibleAlert;
     @UI("#badge-secondary") public static Badge badgeSecondary;
