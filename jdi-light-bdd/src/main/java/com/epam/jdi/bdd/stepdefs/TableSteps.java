@@ -117,7 +117,8 @@ public class TableSteps {
         return cell(name, cellPair).is();
     }
     private UIElement cell(String name, String cellPair) {
-        int x, y;
+        int x;
+        int y;
         try {
             String[] xy = cellPair.split(",");
             x = Integer.parseInt(xy[0].trim());
