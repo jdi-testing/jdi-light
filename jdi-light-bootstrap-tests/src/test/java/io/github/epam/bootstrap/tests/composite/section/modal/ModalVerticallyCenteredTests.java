@@ -11,7 +11,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.modalVerticallyCentered;
 import static io.github.epam.states.States.shouldBeLoggedIn;
