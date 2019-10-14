@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.simpleDropdown;
+import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
@@ -70,15 +70,104 @@ public class DrowdownTests extends TestsInit {
         simpleDropdown.dropdownMenu.is()
                 .core()
                 .cssClass("dropdown-menu")
-                .attr("x-placement", "bottom-start")
                 .tag(is("div"));
         simpleDropdown.dropdownToggle.is()
                 .core()
-                .cssClass("btn")
-                .cssClass("btn-primary")
-                .cssClass("dropdown-toggle")
+                .cssClass(containsString("btn"))
+                .cssClass(containsString("btn-primary"))
+                .cssClass(containsString("dropdown-toggle"))
                 .attr("data-toggle", "dropdown")
                 .tag(is("button"));
+    }
+
+    @Test
+    public void linkDropdownIsValidationTest() {
+        linkDropdown.dropdownToggle.is()
+                .core()
+                .tag(is("a"));
+    }
+
+    @Test
+    public void primaryDropdownIsValidationTest() {
+        primaryDropdown.dropdownToggle.is()
+                .core()
+                .cssClass(containsString("btn-primary"))
+                .css("color", is("rgba(255, 255, 255, 1)")) //#fff Color Hex
+                .css("background-color", is("rgba(0, 123, 255, 1)")) //#007bff Color Hex
+                .css("border-color", is("rgb(0, 123, 255)")); //#007bff Color Hex
+    }
+
+    @Test
+    public void successDropdownIsValidationTest() {
+        successDropdown.dropdownToggle.is()
+                .core()
+                .cssClass(containsString("btn-success"))
+                .css("color", is("rgba(255, 255, 255, 1)")) //#fff Color Hex
+                .css("background-color", is("rgba(40, 167, 69, 1)")) //#28a745 Color Hex
+                .css("border-color", is("rgb(40, 167, 69)")); //#28a745 Color Hex
+    }
+
+    @Test
+    public void infoDropdownIsValidationTest() {
+        infoDropdown.dropdownToggle.is()
+                .core()
+                .cssClass(containsString("btn-info"))
+                .css("color", is("rgba(255, 255, 255, 1)")) //#fff Color Hex
+                .css("background-color", is("rgba(23, 162, 184, 1)")) //#28a745 Color Hex
+                .css("border-color", is("rgb(23, 162, 184)")); //#28a745 Color Hex
+    }
+
+    @Test
+    public void splitDropdownIsValidationTest() {
+        splitDropdown.dropdownToggle.is()
+                .core()
+                .cssClass(containsString("dropdown-toggle-split"));
+    }
+
+    @Test
+    public void largeDropdownIsValidationTest() {
+        largeDropdown.dropdownToggle.is()
+                .core()
+                .cssClass(containsString("btn-lg"))
+                .css("padding", is("8px 16px"))
+                .css("font-size", is("20px"))
+                .css("line-height", is("30px"))
+                .css("border-radius", is("4.8px"));
+    }
+
+    @Test
+    public void largeSplitDropdownIsValidationTest() {
+        largeSplitDropdown.dropdownToggle.is()
+                .core()
+                .cssClass(containsString("btn-lg"))
+                .cssClass(containsString("dropdown-toggle-split"))
+                .css("padding", is("8px 12px"))
+                .css("font-size", is("20px"))
+                .css("line-height", is("30px"))
+                .css("border-radius", is("0px 4.8px 4.8px 0px"));
+    }
+
+    @Test
+    public void smallDropdownIsValidationTest() {
+        smallDropdown.dropdownToggle.is()
+                .core()
+                .cssClass(containsString("btn-sm"))
+                .css("padding", is("4px 8px"))
+                .css("font-size", is("14px"))
+                .css("line-height", is("21px"))
+                .css("border-radius", is("3.2px"));
+    }
+
+    @Test
+    public void smallSplitDropdownIsValidationTest() {
+        smallSplitDropdown.dropdownToggle.is()
+                .core()
+                .cssClass(containsString("btn-sm"))
+                .cssClass(containsString("dropdown-toggle-split"))
+                .css("padding", is("4px 6px"))
+                .css("font-size", is("14px"))
+                .css("line-height", is("21px"))
+                .css("border-radius", is("0px 3.2px 3.2px 0px"));
     }
 
     @Test
