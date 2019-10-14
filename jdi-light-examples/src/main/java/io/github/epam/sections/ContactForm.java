@@ -13,7 +13,7 @@ public class ContactForm extends Form<User> {
 	@Css("#last-name") public WebElement lastName;
 	@Css("#position") public WebElement position;
 	@Css("#passport-number") public WebElement passportNumber;
-	@Css("#passport-seria") public WebElement passportSeria;
+	@Css("#passport-seria") public WebElement passportSerial;
 
 	@Css("#gender") public Selector gender;
 	@Css("div[ui=combobox] input") public WebElement religion;
