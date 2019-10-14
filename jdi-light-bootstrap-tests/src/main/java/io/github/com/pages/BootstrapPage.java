@@ -485,9 +485,11 @@ public class BootstrapPage extends WebPage {
     public static NavbarWithDropdown navbarWithDropdown;
     @UI("#navbar-example2~div")
     public static ScrollSpyNav scrollSpyInNavbar;
-    @UI("#validation-submit-form") public static FormCustomStyles formCustomStyles;
+    @UI("#validation-submit-form")
+    public static FormCustomStyles formCustomStyles;
 
-    @UI("//h4[.='Navbar - Text']/../..") public static NavbarText navbarText;
+    @UI("//h4[.='Navbar - Text']/../..")
+    public static NavbarText navbarText;
 
     @UI("#striped-base .progress")
     public static JList<ProgressSection> progressSections;
