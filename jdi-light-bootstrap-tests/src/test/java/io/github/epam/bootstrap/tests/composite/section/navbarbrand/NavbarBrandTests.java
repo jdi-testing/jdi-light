@@ -5,7 +5,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.NavbarBrand;
 import io.github.epam.TestsInit;
 import io.github.epam.bootstrap.tests.BaseValidations;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -19,7 +18,6 @@ import static io.github.com.pages.BootstrapPage.navbarSection;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class NavbarBrandTests extends TestsInit {
 
