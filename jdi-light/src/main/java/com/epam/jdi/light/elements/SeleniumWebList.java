@@ -86,14 +86,17 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
 
     @JDIAction(level = DEBUG)
     public MapArray<String, UIElement> elements(int minAmount) {
-        if (elements.isUseCache() && elements.hasValue() && isActual() && elements.get().size() >= minAmount)
+        if (elements.isUseCache() && elements.hasValue() && isActual() && elements.get().size() >= minAmount) {
             return elements.get();
-        if (locator.isTemplate())
+        }
+        if (locator.isTemplate()) {
             throw exception("You call method that can't be used with template locator. " +
                     "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator()));
+        }
         MapArray<String, UIElement> result = getListElements(minAmount);
-        if (elements.isUseCache())
+        if (elements.isUseCache()) {
             elements.set(result);
+        }
         return result;
     }
     protected MapArray<String, UIElement> getListElements(int minAmount) {
@@ -108,8 +111,9 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
         return result;
     }
     protected String getElementName(int i, UIElement element) {
-        if (nameIndex)
+        if (nameIndex) {
             return nameFromIndex(i);
+        }
         else {
             String name = getElementName(element);
             return isNotBlank(name) ? name : nameFromIndex(i);
@@ -125,17 +129,21 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
         }
     }
     protected boolean hasKey(String value) {
-        if (elements.get() == null)
+        if (elements.get() == null){
             elements.set(new MapArray<>());
+        }
         return hasKey(elements.get(), value);
     }
     protected boolean hasKey(MapArray<String, UIElement> map, String value) {
         List<String> keys = map.keys();
-        if (keys.isEmpty())
+        if (keys.isEmpty()) {
             return false;
-        for (String key : keys)
-            if (namesEqual(key, value))
+        }
+        for (String key : keys) {
+            if (namesEqual(key, value)) {
                 return true;
+            }
+        }
         return false;
     }
     /**
@@ -148,17 +156,20 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
                 : getUIElement(value);
     }
     public UIElement getUIElement(String value) {
-        if (locator.isTemplate())
+        if (locator.isTemplate()) {
             return new UIElement(base(), getLocator(value), nameFromValue(value));
+        }
         else {
             refresh();
             MapArray<String, UIElement> result = timer().getResultByCondition(
                     () -> elements(1),
                     els -> hasKey(els, value));
-            if (result != null && result.has(value))
+            if (result != null && result.has(value)) {
                 return result.get(value);
-            else
+            }
+            else {
                 throw exception("Can't get '%s'. No elements with this name found", value);
+            }
         }
     }
     protected JFunc1<UIElement, String> UIELEMENT_NAME;
@@ -182,8 +193,9 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
      */
     @JDIAction(level = DEBUG) @Override
     public UIElement get(int index) {
-        if (index-jdiIndex < 0)
+        if (index-jdiIndex < 0) {
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
+        }
         return (locator.isTemplate()
                 ? tryGetByIndex(index-jdiIndex)
                 : initElement(() -> getList(index).get(index-jdiIndex)))
@@ -215,8 +227,9 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
      */
     @JDIAction("Select ({0}) for '{name}'")
     public void select(String... values) {
-        for (String value : values)
+        for (String value : values) {
             select(value);
+        }
     }
     @JDIAction("Check all '{name}' unchecked options")
     public void checkAll() {
@@ -238,43 +251,42 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
     public void check(String... names) {
         List<String> listNames = asList(names);
         for (UIElement value : elements(names.length).values()) {
-            if (value.isDisabled()) continue;
+            if (value.isDisabled()) {continue;}
             if (selected(value) && !listNames.contains(value.labelText().trim())
-                    || !selected(value) && listNames.contains(value.labelText().trim()))
+                    || !selected(value) && listNames.contains(value.labelText().trim())) {
                 value.click();
+            }
         }
     }
     @JDIAction("Uncheck '{0}' checkboxes in '{name}' checklist")
     public void uncheck(String... names) {
         List<String> listNames = asList(names);
         for (UIElement value : elements(names.length).values()) {
-            if (value.isDisabled()) continue;
+            if (value.isDisabled()) {continue;}
             if (selected(value) && listNames.contains(value.labelText().trim())
-                    || !selected(value) && !listNames.contains(value.labelText().trim()))
+                    || !selected(value) && !listNames.contains(value.labelText().trim())) {
                 value.click();
+            }
         }
     }
     @JDIAction("Check '{0}' checkboxes in '{name}' checklist")
     public void check(int... indexes) {
-        List<Integer> listIndexes = toList(indexes);
-        for (int i = 1; i < values().size() + 1; i++) {
-            UIElement value = get(i);
-            if (value.isDisabled()) continue;
-            if (selected(value) && !listIndexes.contains(i+1)
-                    || !selected(value) && listIndexes.contains(i+1))
-                value.click();
-        }
+        setOrUnsetCheckBoxes(true, indexes);
     }
     @JDIAction("Uncheck '{0}' checkboxes in  '{name}' checklist")
     public void uncheck(int... indexes) {
         if (indexes.length > 0 && list().get(indexes[0]).isDisplayed()) {
-            List<Integer> listIndexes = toList(indexes);
-            for (int i = 1; i < values().size() + 1; i++) {
-                UIElement value = get(i);
-                if (value.isDisabled()) continue;
-                if (selected(value) && listIndexes.contains(i+1)
-                        || !selected(value) && !listIndexes.contains(i+1))
-                    value.click();
+            setOrUnsetCheckBoxes(false, indexes);
+        }
+    }
+    private void setOrUnsetCheckBoxes(boolean setChecked, int... indexes) {
+        List<Integer> listIndexes = toList(indexes);
+        for (int i = 1; i <= values().size(); i++) {
+            UIElement value = get(i);
+            if (value.isDisabled()) {continue;}
+            boolean checkSign = selected(value) ^ listIndexes.contains(i + 1);
+            if (!(setChecked ^ checkSign)) {
+                value.click();
             }
         }
     }
@@ -294,10 +306,12 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
      */
     @JDIAction("Select ({0}) for '{name}'")
     public void hoverAndClick(String... values) {
-        if (ArrayUtils.isEmpty(values))
+        if (ArrayUtils.isEmpty(values)) {
             throw exception("Nothing to select in %s", getName());
-        if (values.length < 2)
+        }
+        if (values.length < 2) {
             throw exception("Hover and click method should have at list 2 parameters");
+        }
         int length = values.length;
         for (int i=0; i < length-1;i++) {
             get(values[i]).hover();
@@ -312,9 +326,12 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
     @JDIAction("Select ({0}) for '{name}'")
     public void hoverAndClick(String value) {
         String[] split = value.split(">");
-        if (split.length == 1)
+        if (split.length == 1) {
             select(split[0]);
-        else hoverAndClick(split);
+        }
+        else {
+            hoverAndClick(split);
+        }
     }
     public <TEnum extends Enum> void select(TEnum value) {
         select(getEnumValue(value));
@@ -326,8 +343,9 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
      */
     @JDIAction("Select ({0}) for '{name}'")
     public <TEnum extends Enum> void select(TEnum... values) {
-        for (TEnum value : values)
+        for (TEnum value : values) {
             select(value);
+        }
     }
 
     /**
@@ -345,8 +363,9 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
      */
     @JDIAction("Select ({0}) for '{name}'")
     public void select(int... indexes) {
-        for (int index : indexes)
+        for (int index : indexes) {
             select(index);
+        }
     }
 
     /**

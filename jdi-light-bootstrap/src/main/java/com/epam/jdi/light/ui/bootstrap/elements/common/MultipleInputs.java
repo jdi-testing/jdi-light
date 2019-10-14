@@ -87,8 +87,8 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
     public void setAllValues(List<String> values) {
         WebList inputs = core().finds("input");
 
-        for(int index = 0; index < values.size(); index++) {
-            inputs.get(index + 1).setValue(values.get(index));
+        for(int index = 1; index <= values.size(); index++) {
+            inputs.get(index).setValue(values.get(index-1));
         }
     }
 
@@ -111,8 +111,8 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
     public void sendKeysAll(List<String> values) {
         WebList inputs = core().finds("input");
 
-        for (int index = 0; index < inputs.size(); index++) {
-            inputs.get(index + 1).sendKeys(values.get(index));
+        for (int index = 1; index <= inputs.size(); index++) {
+            inputs.get(index).sendKeys(values.get(index-1));
         }
     }
 
@@ -192,8 +192,8 @@ public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
     public void inputAll(List<String> values) {
         WebList inputs = core().finds("input");
 
-        for(int index = 0; index < inputs.size(); index++) {
-           inputs.get(index + 1).input(values.get(index));
+        for(int index = 1; index <= inputs.size(); index++) {
+           inputs.get(index).input(values.get(index-1));
         }
     }
 
