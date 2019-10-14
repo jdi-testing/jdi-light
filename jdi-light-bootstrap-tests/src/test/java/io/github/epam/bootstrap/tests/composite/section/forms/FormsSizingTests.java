@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.testng.AssertJUnit.assertEquals;
 
 /**
- * Created by Aleksandr Khmelinin on 11.10.2019
+ * Created by Aleksandr Khmelinin on 14.10.2019
  * Email: aleksandr_khmelinin@epam.com; Skype: live:bea50ebde18b7f9e
  */
 
@@ -58,13 +58,10 @@ public class FormsSizingTests extends TestsInit {
 
     @Test
     public void selectOptionTest() {
-        formsSizing.largeSelect.click();
         formsSizing.largeSelect.select("Large select");
         assertEquals(formsSizing.largeSelect.getValue(), "Large select");
-        formsSizing.defaultSelect.click();
         formsSizing.defaultSelect.select("Default select");
         assertEquals(formsSizing.defaultSelect.getValue(), "Default select");
-        formsSizing.smallSelect.click();
         formsSizing.smallSelect.select("Small select");
         assertEquals(formsSizing.smallSelect.getValue(), "Small select");
     }
