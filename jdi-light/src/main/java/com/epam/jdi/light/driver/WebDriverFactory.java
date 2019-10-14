@@ -44,9 +44,9 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class WebDriverFactory {
     public static MapArray<String, JFunc<WebDriver>> DRIVERS
-        = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
+            = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
     private static Safe<MapArray<String, WebDriver>> RUN_DRIVERS
-        = new Safe<>(MapArray::new);
+            = new Safe<>(MapArray::new);
 
     private WebDriverFactory() {
     }
@@ -67,18 +67,19 @@ public class WebDriverFactory {
     public static String useDriver(DriverTypes driverType) {
         return useDriver(driverType, () -> initDriver(driverType));
     }
+
     public static boolean isRemote() {
         return isNotEmpty(DRIVER_REMOTE_URL);
     }
 
     private static WebDriver initDriver(DriverTypes type) {
         WebDriver driver = Switch(type).get(
-            Value(CHROME, t -> CHROME_INFO.getDriver()),
-            Value(FIREFOX, t -> FF_INFO.getDriver()),
-            Value(IE, t -> IE_INFO.getDriver()),
-            Value(PHANTOMJS, t -> CHROME_INFO.getDriver()),
-            Value(OPERA, t -> CHROME_INFO.getDriver()),
-            Value(EDGE, t -> CHROME_INFO.getDriver())
+                Value(CHROME, t -> CHROME_INFO.getDriver()),
+                Value(FIREFOX, t -> FF_INFO.getDriver()),
+                Value(IE, t -> IE_INFO.getDriver()),
+                Value(PHANTOMJS, t -> CHROME_INFO.getDriver()),
+                Value(OPERA, t -> CHROME_INFO.getDriver()),
+                Value(EDGE, t -> CHROME_INFO.getDriver())
         );
         if (driver == null)
             throw exception("Unknown driver: " + type);
@@ -105,7 +106,7 @@ public class WebDriverFactory {
     }
 
     public static <T> T jsExecute(String script, Object... args) {
-        return (T)((JavascriptExecutor) getDriver()).executeScript(script, args);
+        return (T) ((JavascriptExecutor) getDriver()).executeScript(script, args);
     }
 
     public static WebDriver getDriver() {
@@ -193,7 +194,8 @@ public class WebDriverFactory {
         for (Pair<String, WebDriver> pair : RUN_DRIVERS.get())
             try {
                 pair.value.quit();
-            } catch (Exception ignore) {}
+            } catch (Exception ignore) {
+            }
         RUN_DRIVERS.get().clear();
     }
 
