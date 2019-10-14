@@ -7,7 +7,10 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.progressBackgroundBlue;
+import static io.github.com.pages.BootstrapPage.progressBackgroundGreen;
+import static io.github.com.pages.BootstrapPage.progressBackgroundRed;
+import static io.github.com.pages.BootstrapPage.progressBackgroundYellow;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
@@ -17,7 +20,7 @@ import static org.hamcrest.Matchers.is;
  * Email: mariia_tikhonova@epam.com, Skype: mariatikhonova5_2
  */
 
-public class ProgressBackgroundsTests extends TestsInit {
+public class ProgressBackgroundTests extends TestsInit {
 
     @BeforeMethod
     public void before() {

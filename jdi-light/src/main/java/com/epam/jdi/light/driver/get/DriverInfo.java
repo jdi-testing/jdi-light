@@ -13,7 +13,10 @@ import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.isRemote;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
-import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVERS_FOLDER;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_VERSION;
+import static com.epam.jdi.light.driver.get.DriverData.LATEST_VERSION;
+import static com.epam.jdi.light.driver.get.DriverData.PLATFORM;
 import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Integer.parseInt;
@@ -24,7 +27,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class DriverInfo extends DataClass<DriverInfo> {
     public DriverTypes type;
     public JFunc<Capabilities> capabilities;
-    public String properties, path;
+    public String properties;
+    public String path;
     public JFunc<WebDriver> getDriver;
 
     public WebDriver getDriver() {

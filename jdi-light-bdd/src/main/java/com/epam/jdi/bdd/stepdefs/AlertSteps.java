@@ -3,8 +3,12 @@ package com.epam.jdi.bdd.stepdefs;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static com.epam.jdi.light.elements.common.Alerts.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
+import static com.epam.jdi.light.elements.common.Alerts.dismissAlert;
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.matchesPattern;
 
 public class AlertSteps {
 

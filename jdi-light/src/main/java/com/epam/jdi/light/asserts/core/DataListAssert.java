@@ -13,9 +13,18 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.all;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.LinqUtils.single;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 
 public class DataListAssert<T extends IListBase, D>
         extends UISelectAssert<DataListAssert<T, D>, DataList<T, D>> {
