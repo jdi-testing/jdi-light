@@ -113,14 +113,10 @@ public class ModalVerticallyCenteredTests extends TestsInit {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(modalId)));
 
-        $(modalId).waitFor().displayed();
-
         modal.is().displayed();
 
         dismissButton.show();
         dismissButton.click();
-
-        $(modalId).waitFor().hidden();
 
         modal.is().hidden();
     }
