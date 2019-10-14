@@ -489,23 +489,13 @@ public class BootstrapPage extends WebPage {
     public static FormCustomStyles formCustomStyles;
 
 
-    @UI("//h4[.='Navbar - Text']/../..") public static NavbarText navbarText;
     @UI("//h4[.='Navbar - Text']/../..")
     public static NavbarText navbarText;
 
     @UI("#striped-base .progress")
     public static JList<ProgressSection> progressSections;
-    @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
-    @UI("#progress-height .progress") public static JList<ProgressSection> progressHeightSections;
-
-    @UI("#button-with-spinner-and-text") public static ButtonWithSpinner buttonWithSpinnerAndText;
-    @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
-    @UI("#button-with-growing-spinner-and-text") public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
-    @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
-    @UI("#navbar-form-1") public static NavbarForm navbarForm;
-    @UI("#navbar-form-2") public static NavbarForm navbarFormWithText;
-    @UI("#navbar-form-3") public static NavbarWithInputGroupForm navbarFormWithInputGroup;
-
+    @UI("#progress-height .progress")
+    public static JList<ProgressSection> progressHeightSections;
 
     @UI("#button-with-spinner-and-text")
     public static ButtonWithSpinner buttonWithSpinnerAndText;
@@ -522,27 +512,7 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-form-3")
     public static NavbarWithInputGroupForm navbarFormWithInputGroup;
     //Toasts
-    @UI("#toastRightTop") public static Toast toastWithTopAlign;
-    @UI("#linkToastRightTop") public static Button toastWithTopAlignButton;
-    @UI("#simpleToast") public static Toast simpleToast;
-    @UI("#linkSimpleToastExample") public static Button simpleToastButton;
-    @UI("#multipleToast") public static Button stackOfToastsButton;
-    @UI("#firstMultipleToast") public static Toast firstStackToast;
-    @UI("#secondMultipleToast") public static Toast secondStackToast;
-    @UI("#linkStackAlign") public static Button stackOfToastsWithTopAlignButton;
-    @UI("#firstStackToast") public static Toast firstTopAlignStackToast;
-    @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
-    @UI("#linkToastCenterTop") public static Button toastWithCenterAlignButton;
-    @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
 
-    @UI("body") public static CheckboxAndRadioButtonCustomDisabled checkboxAndRadioButtonCustomDisabled;
-    @UI("body") public static Switches switches;
-    @UI("body") public static RadioButtonsCustomInline radioButtonsCustomInline;
-    @UI("#translucentToastButton") public static Button translucentToastButton;
-    @UI("#translucentToast") public static Toast translucentToast;
-    @UI("#custom-radio-con") public static RadioButtonsCustom radioButtonCustom;
-    //Navbar
-    @UI("#navbar-external-content") public static NavbarExternalContent navbarExternalContent;
     @UI("#toastRightTop")
     public static Toast toastWithTopAlign;
     @UI("#linkToastRightTop")
