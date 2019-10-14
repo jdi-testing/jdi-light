@@ -17,7 +17,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 @CucumberOptions(
     features = "classpath:features"
     , glue = {"com.epam.jdi.bdd", "cucmberTests"}
-    //, tags = {"@fail-test"}
+    , tags = {"@form"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass

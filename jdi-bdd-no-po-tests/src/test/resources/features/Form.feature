@@ -3,6 +3,7 @@ Feature: Form
 
   Background:
     Given I'm on "Contacts Page" page
+    When I open "https://jdi-testing.github.io/jdi-light/"
 
   Scenario: fill Contact Form from json
     When I fill form "Contact Form" with "Roman Contacts"

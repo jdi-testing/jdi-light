@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.composite;
 
-import io.github.com.entities.User;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
@@ -8,7 +7,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.FormFilters.ALL;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static com.epam.jdi.light.elements.init.UIFactory.form;
 import static com.epam.jdi.light.elements.init.UIFactory.loginAs;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.homePage;

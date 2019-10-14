@@ -19,7 +19,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
+import static com.epam.jdi.light.settings.WebSettings.getDomain;
 import static com.epam.jdi.light.settings.WebSettings.init;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
@@ -32,12 +32,14 @@ public class JDISteps {
 	@Given("^I open application$")
 	public void iMOpenSite() {
 		init();
-		openUrl(DOMAIN);
+		openUrl(getDomain());
 	}
 	@Given("^I open \"([^\"]*)\"(?: page|)$")
     public void iOpen(String pageName) {
-        if (pageName.startsWith("http"))
+        if (pageName.startsWith("http")) {
 			WebPage.openUrl(pageName);
+			return;
+		}
 		getPage(pageName).shouldBeOpened();
     }
 	@Given("^I'm on \"([^\"]*)\"(?: page|)$")

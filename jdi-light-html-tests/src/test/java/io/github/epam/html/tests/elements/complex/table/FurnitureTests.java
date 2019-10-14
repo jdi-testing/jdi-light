@@ -2,13 +2,9 @@ package io.github.epam.html.tests.elements.complex.table;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.SimpleTablePage.furniture;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static java.util.Arrays.asList;
-import static org.testng.Assert.assertEquals;
 
 public class FurnitureTests implements TestsInit {
     @BeforeMethod
