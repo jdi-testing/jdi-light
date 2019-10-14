@@ -293,18 +293,8 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         String rowHeader = j.rowHeader();
         List<String> header = asList(j.header());
 
-        if (isNotBlank(j.root()))
-            core().setLocator(defineLocator(j.root()));
-        if (isNotBlank(j.row()))
-            this.rowLocator = defineLocator(j.row());
-        if (isNotBlank(j.column()))
-            this.columnLocator = defineLocator(j.column());
-        if (isNotBlank(j.cell()))
-            this.cellLocator = defineLocator(j.cell());
-        if (isNotBlank(j.allCells()))
-            this.allCellsLocator = defineLocator(j.allCells());
-        if (isNotBlank(j.headers()))
-            this.headerLocator = defineLocator(j.headers());
+        overrideTableLocators(j);
+
         if (header.size() > 0)
             this.header.setFinal(header);
         if (j.columnsMapping().length > 0)
@@ -317,6 +307,27 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
             this.firstColumnIndex = j.firstColumnIndex();
         if (isNotBlank(rowHeader))
             rowHeaderName = rowHeader;
+    }
+
+    private void overrideTableLocators(JTable j) {
+        if (isNotBlank(j.root())) {
+            core().setLocator(defineLocator(j.root()));
+        }
+        if (isNotBlank(j.row())) {
+            this.rowLocator = defineLocator(j.row());
+        }
+        if (isNotBlank(j.column())) {
+            this.columnLocator = defineLocator(j.column());
+        }
+        if (isNotBlank(j.cell())) {
+            this.cellLocator = defineLocator(j.cell());
+        }
+        if (isNotBlank(j.allCells())) {
+            this.allCellsLocator = defineLocator(j.allCells());
+        }
+        if (isNotBlank(j.headers())) {
+            this.headerLocator = defineLocator(j.headers());
+        }
     }
 
     public T getTable() {
