@@ -52,7 +52,7 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
     public SeleniumWebList() { elements.useCache(false); setTextType(SMART_LIST); noValidation(); }
     public SeleniumWebList(By locator) { this(); setLocator(locator);}
     public SeleniumWebList(List<WebElement> elements) {
-        super(); setWebElements(elements);
+        this(); setWebElements(elements);
     }
     public SeleniumWebList(JDIBase base) {
         super(base);
