@@ -68,7 +68,6 @@ public class FormsSizingTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
-        formsSizing.largeSelect.highlight();
         formsSizing.largeTextField.is().enabled().text(is(text));
         formsSizing.defaultTextField.is().enabled().text(is(text));
         formsSizing.smallTextField.is().enabled().text(is(text));
