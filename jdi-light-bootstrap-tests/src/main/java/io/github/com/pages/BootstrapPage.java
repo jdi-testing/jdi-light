@@ -546,6 +546,8 @@ public class BootstrapPage extends WebPage {
     public static Toast translucentToast;
     @UI("#custom-radio-con")
     public static RadioButtonsCustom radioButtonCustom;
+    @UI("#forms-sizing")
+    public static FormsSizing formsSizing;
     //Navbars
     @UI("#navbar-external-content")
     public static NavbarExternalContent navbarExternalContent;
