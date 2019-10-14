@@ -117,6 +117,8 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         dismissButton.show();
         dismissButton.click();
 
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(modalId)));
+
         modal.is().hidden();
     }
 
