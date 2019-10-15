@@ -2,7 +2,7 @@ package io.github.epam.bootstrap.tests.composite.section.modal;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import io.github.com.sections.modal.Modal;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Modal;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.modalVerticallyCentered;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -20,6 +21,42 @@ public class ModalVerticallyCenteredTests extends TestsInit {
 
     @DataProvider
     public Object[][] modalBasicData() {
+        return new Object[][]{
+                {
+                        modalVerticallyCentered.modalCenterTrigger,
+                        modalVerticallyCentered.dismissModal1Close,
+                        modalVerticallyCentered.modal1
+                },
+
+                {
+                        modalVerticallyCentered.modalCenterScrollableTrigger,
+                        modalVerticallyCentered.dismissModal2Close,
+                        modalVerticallyCentered.modal2
+                }
+        };
+    }
+
+    @DataProvider
+    public Object[][] modalCssData() {
+        return new Object[][]{
+                {
+                        modalVerticallyCentered.modalCenterTrigger,
+                        modalVerticallyCentered.dismissModal1Close,
+                        modalVerticallyCentered.modalCenterBg,
+                        "modal-dialog-centered"
+                },
+
+                {
+                        modalVerticallyCentered.modalCenterScrollableTrigger,
+                        modalVerticallyCentered.dismissModal2Close,
+                        modalVerticallyCentered.modalCenterScrollableBg,
+                        "modal-dialog-centered"
+                }
+        };
+    }
+
+    @DataProvider
+    public Object[][] modalVerticalAlignmentData() {
         return new Object[][]{
                 {
                         modalVerticallyCentered.modalCenterTrigger,
@@ -38,57 +75,19 @@ public class ModalVerticallyCenteredTests extends TestsInit {
     }
 
     @DataProvider
-    public Object[][] modalCssData() {
-        return new Object[][]{
-                {
-                        modalVerticallyCentered.modalCenterTrigger,
-                        modalVerticallyCentered.dismissModal1Close,
-                        modalVerticallyCentered.modalCenterBg,
-                        "modal-vertical-content-1",
-                        "modal-dialog-centered"
-                },
-
-                {
-                        modalVerticallyCentered.modalCenterScrollableTrigger,
-                        modalVerticallyCentered.dismissModal2Close,
-                        modalVerticallyCentered.modalCenterScrollableBg,
-                        "modal-vertical-content-2",
-                        "modal-dialog-centered"
-                }
-        };
-    }
-
-    @DataProvider
-    public Object[][] modalVerticalAlignmentData() {
-        return new Object[][]{
-                {
-                        modalVerticallyCentered.modalCenterTrigger,
-                        modalVerticallyCentered.dismissModal1Close,
-                        "modal-vertical-content-1"
-                },
-
-                {
-                        modalVerticallyCentered.modalCenterScrollableTrigger,
-                        modalVerticallyCentered.dismissModal2Close,
-                        "modal-vertical-content-2"
-                }
-        };
-    }
-
-    @DataProvider
     public Object[][] modalDismissData() {
         return new Object[][]{
                 {
                         modalVerticallyCentered.modalCenterTrigger,
                         modalVerticallyCentered.dismissModal1Close,
-                        modalVerticallyCentered.dismissModal1Cross,
+                        modalVerticallyCentered.closeX,
                         "modal-vertical-content-1"
                 },
 
                 {
                         modalVerticallyCentered.modalCenterScrollableTrigger,
                         modalVerticallyCentered.dismissModal2Close,
-                        modalVerticallyCentered.dismissModal2Cross,
+                        modalVerticallyCentered.closeX,
                         "modal-vertical-content-2"
                 }
         };
@@ -103,21 +102,14 @@ public class ModalVerticallyCenteredTests extends TestsInit {
     @Test(dataProvider = "modalBasicData")
     public void modalBasicFunctionalityTest(Button showButton,
                                             Button dismissButton,
-                                            Modal modal,
-                                            String modalId) {
-        WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 5);
-
+                                            Modal modal) {
         showButton.show();
         showButton.click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(modalId)));
 
         modal.is().displayed();
 
         dismissButton.show();
         dismissButton.click();
-
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(modalId)));
 
         modal.is().hidden();
     }
@@ -126,33 +118,28 @@ public class ModalVerticallyCenteredTests extends TestsInit {
     public void modalCssTest(Button showButton,
                              Button dismissButton,
                              Modal modal,
-                             String modalCss,
                              String modalBgCss) {
-        WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 5);
-
         showButton.show();
         showButton.click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(modalCss)));
 
         modal.core().hasClass(modalBgCss);
 
         dismissButton.show();
         dismissButton.click();
-
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(modalCss)));
     }
 
     @Test(dataProvider = "modalVerticalAlignmentData")
     public void modalVerticalAlignmentTest(Button showButton,
                                            Button dismissButton,
+                                           Modal modal,
                                            String modalId) {
-        WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 5);
+//        WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 5);
 
         showButton.show();
         showButton.click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(modalId)));
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(modalId)));
+        modal.base().waitSec(5);
 
         long modalTop = WebDriverFactory.jsExecute(
                 "var modal = document.getElementById('" + modalId + "');" +
@@ -168,7 +155,7 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         dismissButton.show();
         dismissButton.click();
 
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(modalId)));
+//        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(modalId)));
     }
 
     @Test(dataProvider = "modalDismissData")
