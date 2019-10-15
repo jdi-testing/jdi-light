@@ -23,14 +23,13 @@
     <script src="js/lib/bs-custom-file-input.min.js"></script>
     <script src="js/uui-core.min.js" type="text/javascript"></script>
     <script src="js/utils.js" type="text/javascript"></script>
+
     <script>
         $(document).ready(function () {
            bsCustomFileInput.init()
         })
-
-
-
     </script>
+
 </head>
 <body>
 <header>
@@ -1894,20 +1893,20 @@
                             <div id="progress-height">
                                 <p>various heights</p>
                                 <div class="progress" id="progress-height-20px" style="height: 20px;">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%"
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="progress" id="progress-height-40px" style="height: 40px;">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
+                                         aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="progress" id="progress-height-60px" style="height: 60px;">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 75%"
+                                         aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="progress" id="progress-height-80px" style="height: 80px;">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
+                                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>
@@ -2611,7 +2610,7 @@
 
                     <div class="doc-space line">
                         <div class="html-left">
-                            <form class="mb-3" id="forms-overview">
+                            <form id="forms-overview" class="mb-3">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
                                     <input type="email" class="form-control" id="exampleInputEmail1"
@@ -2628,7 +2627,8 @@
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary" onclick="alert('Form filled and submitted successfully');">Submit</button>
+                                <button type="submit" class="btn btn-primary"
+                                        onclick="alert('Form filled and submitted successfully');">Submit</button>
                             </form>
                         </div>
                         <div class="html-right">
@@ -2919,7 +2919,8 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-primary" onclick="alert('Form filled and submitted successfully');">Sign in</button>
+                                        <button type="submit" class="btn btn-primary"
+                                                onclick="alert('Form filled and submitted successfully');">Sign in</button>
                                     </div>
                                 </div>
                             </form>
@@ -3149,18 +3150,17 @@
                         </div>
                     </div>
 
-                    <div class="doc-space line">
-                        <div id="form-help-text">
-                            <label for="inputPassword5">Password</label>
-                            <input type="password" id="inputPassword5" class="form-control"
-                                   aria-describedby="passwordHelpBlock">
-                            <small id="passwordHelpBlock" class="form-text text-muted mb-3">
-                                Your password must be 8-20 characters long, contain letters and numbers, and must not
-                                contain spaces, special characters, or emoji.
-                            </small>
-                        </div>
+                    <div id="form-help-text" class="doc-space line">
+                        <label for="inputPassword5">Password</label>
+                        <input type="password" id="inputPassword5" class="form-control"
+                               aria-describedby="passwordHelpBlock">
+                        <small id="passwordHelpBlock" class="form-text text-muted mb-3">
+                            Your password must be 8-20 characters long, contain letters and numbers, and must not
+                            contain spaces, special characters, or emoji.
+                        </small>
+
                         <form class="form-inline mb-3">
-                            <div class="form-group" id="form-help-text-pass">
+                            <div id="form-help-text-pass" class="form-group">
                                 <label for="inputPassword6">Password</label>
                                 <input type="password" id="inputPassword6" class="form-control mx-sm-3"
                                        aria-describedby="passwordHelpInline">
@@ -3183,7 +3183,7 @@
 
                     <div class="doc-space line">
                         <div class="html-left">
-                            <form class="mb-3" id="form-disabled">
+                            <form id="form-disabled" class="mb-3">
                                 <fieldset disabled>
                                     <div class="form-group">
                                         <label for="disabledTextInput">Disabled input</label>
@@ -3268,7 +3268,7 @@
                                         Please provide a valid state.
                                     </div>
                                 </div>
-                                <div class="col-md-3 mb-3"  id="validationCustom05-div">
+                                <div id="validationCustom05-div" class="col-md-3 mb-3">
                                     <label for="validationCustom05">Zip</label>
                                     <input type="text" class="form-control" id="validationCustom05" placeholder="Zip"
                                            required>
@@ -3288,7 +3288,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" type="submit" onclick="alert('Form filled and submitted successfully');">Submit form</button>
+                            <button class="btn btn-primary" type="submit"
+                                    onclick="alert('Form filled and submitted successfully');">Submit form</button>
                         </form>
 
                         <!-- Example starter JavaScript for disabling form submissions if there are invalid fields -->
@@ -3310,7 +3311,6 @@
                                     });
                                   }, false);
                                 })();
-
                         </script>
 
                         <div class="html-left">
@@ -3375,7 +3375,8 @@
                                     </label>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" type="submit" onclick="alert('Form filled and submitted successfully');">Submit form</button>
+                            <button class="btn btn-primary" type="submit"
+                                    onclick="alert('Form filled and submitted successfully');">Submit form</button>
                         </form>
 
                         <div class="html-left">
@@ -3461,7 +3462,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" type="submit" onclick="alert('Form filled and submitted successfully');">Submit form</button>
+                            <button class="btn btn-primary" type="submit"
+                                    onclick="alert('Form filled and submitted successfully');">Submit form</button>
                         </form>
 
                         <div class="html-left">
@@ -3600,7 +3602,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" type="submit" onclick="alert('Form filled and submitted successfully');">Submit form</button>
+                            <button class="btn btn-primary" type="submit"
+                                    onclick="alert('Form filled and submitted successfully');">Submit form</button>
                         </form>
 
                         <div class="html-left">
@@ -3919,7 +3922,6 @@
                                     <button class="btn btn-outline-secondary" type="button">Button</button>
                                 </div>
                             </div>
-                            </p>
                         </div>
                         <div class="html-right">
                             <h4>Input group - Button addons</h4>
@@ -4091,50 +4093,53 @@
                         </div>
                     </div>
 
-                    <div class="doc-space line"/>
-                    <div class="html-left">
-                        <h5>
-                            Heading <span class="badge badge-secondary" id="badge-secondary">Badge</span>
-                        </h5>
-                    </div>
-                    <div class="html-right">
-                        <h4>Badge</h4>
-                        <p>
-                            Bootstrap: <a
-                                href="https://getbootstrap.com/docs/4.3/components/badge/"
-                                target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
-                        </p>
-                    </div>
-
-                    <div class="doc-space line"/>
-                    <div class="html-left">
-                        <button type="button" class="btn btn-primary" id="btn-primary"
-                                onclick="alert('Button with badge');">
-                            Profile <span class="badge badge-light">9</span> <span
-                                class="sr-only">unread messages</span>
-                        </button>
-                    </div>
-                    <div class="html-right">
-                        <h4>Badge as part of button</h4>
-                        <p>
-                            Bootstrap: <a
-                                href="https://getbootstrap.com/docs/4.3/components/badge/"
-                                target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
-                        </p>
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <h5>
+                                Heading <span class="badge badge-secondary" id="badge-secondary">Badge</span>
+                            </h5>
+                        </div>
+                        <div class="html-right">
+                            <h4>Badge</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/badge/"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="doc-space line"/>
-                    <div class="html-left">
-                        <a href="https://github.com/jdi-testing" style="font-size: 16px;"
-                           class="badge badge-success" id="badge-success" alt="Github JDI Link">Github JDI</a>
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <button type="button" class="btn btn-primary" id="btn-primary"
+                                    onclick="alert('Button with badge');">
+                                Profile <span class="badge badge-light">9</span> <span
+                                    class="sr-only">unread messages</span>
+                            </button>
+                        </div>
+                        <div class="html-right">
+                            <h4>Badge as part of button</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/badge/"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
+                            </p>
+                        </div>
                     </div>
-                    <div class="html-right">
-                        <h4>Badge as part of link</h4>
-                        <p>
-                            Bootstrap: <a
-                                href="https://getbootstrap.com/docs/4.3/components/badge/"
-                                target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
-                        </p>
+
+                    <div class="doc-space line">
+                        <div class="html-left">
+                            <a href="https://github.com/jdi-testing" style="font-size: 16px;"
+                               class="badge badge-success" id="badge-success" alt="Github JDI Link">Github JDI</a>
+                        </div>
+                        <div class="html-right">
+                            <h4>Badge as part of link</h4>
+                            <p>
+                                Bootstrap: <a
+                                    href="https://getbootstrap.com/docs/4.3/components/badge/"
+                                    target="_blank">https://getbootstrap.com/docs/4.3/components/badge/</a>
+                            </p>
+                        </div>
                     </div>
 
                     <div class="doc-space line">
@@ -4446,6 +4451,15 @@
                                     left: 50;
                                     min-height: 500px;
                                 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5530,7 +5544,7 @@
 
                             <div class="card w-50" style="margin-bottom: 10px;">
                                 <div class="card-body">
-                                    <h5 class="card-title">Hulk </br>(w-50)</h5>
+                                    <h5 class="card-title">Hulk (w-50)</h5>
                                     <p class="card-text">The Hulk is a fictional superhero appearing in publications by
                                         the American publisher Marvel Comics.</p>
                                     <a href="https://en.wikipedia.org/wiki/Hulk_(film)" class="btn btn-primary"
@@ -5563,7 +5577,7 @@
 
                             <div class="card" id="card-custom-css-2" style="width: 9rem; margin-bottom: 10px;">
                                 <div class="card-body">
-                                    <h5 class="card-title">Hulk </br>(9rem)</h5>
+                                    <h5 class="card-title">Hulk (9rem)</h5>
                                     <p class="card-text">The Hulk is a fictional superhero appearing in publications by
                                         the American publisher Marvel Comics.</p>
                                     <a href="https://en.wikipedia.org/wiki/Hulk_(film)" class="btn btn-primary"
@@ -5935,7 +5949,7 @@
                 <!-- MODAL END -->
 
                 <div class="doc-space line" style="border-color:#ccc">
-                    <div class="html-left mb-3" id="modal-live-demo">
+                    <div id="modal-live-demo" class="html-left mb-3">
                         <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -5976,7 +5990,7 @@
                 </div>
 
                 <div class="doc-space line" style="border-color:#ccc">
-                    <div class="html-left mb-3">
+                    <div id="modal-scroll-long" class="html-left mb-3">
                         <div id="exampleModalLong" class="modal fade" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -6277,15 +6291,15 @@
                 </div>
 
                 <div class="doc-space line" style="border-color:#ccc">
-                    <div class="html-left mb-3" id = "grid-modal-base">
+                    <div id="grid-modal-base" class="html-left mb-3">
                         <div id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog"
                              aria-labelledby="gridModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="gridModalLabel">Grids in modals</h5>
-                                        <button type="button" class="close" id="close-modal-cross" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span></button>
+                                        <button id="close-modal-cross" type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="container-fluid bd-example-row">
@@ -6316,19 +6330,18 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" id = "close-modal" class="btn btn-secondary" data-dismiss="modal">Close
+                                        <button id="close-modal" type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close
                                         </button>
-                                        <button type="button" id = "save-modal" class="btn btn-primary">Save changes</button>
+                                        <button id = "save-modal" type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="bd-example">
-                            <button type="button" id="btn-modal-using-grid" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#gridSystemModal">
-                                Launch demo modal
-                            </button>
+                            <button id="btn-modal-using-grid" type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#gridSystemModal">Launch demo modal</button>
                         </div>
                     </div>
                     <div class="html-right">
@@ -6351,8 +6364,7 @@
                                     data-target="#exampleModal" data-whatever="@fat">Open modal for @fat
                             </button>
                             <button id="modalGetbootstrap" type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for
-                                @getbootstrap
+                                    data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap
                             </button>
 
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -6387,6 +6399,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <script>
                             $('#exampleModal').on('show.bs.modal', function (event) {
                                 var button = $(event.relatedTarget) // Button that triggered the modal
@@ -6397,8 +6410,8 @@
                                 modal.find('.modal-title').text('New message to ' + recipient)
                                 modal.find('.modal-body input').val(recipient)
                             })
-
                         </script>
+
                     </div>
                     <div class="html-right">
                         <h4>Modal - Varying modal content</h4>
@@ -7339,20 +7352,17 @@
     </div>
 </div>
 
-</div>
-
 <footer>
     <div class="replace footer">replace</div>
 </footer>
+
 <script>
     function showSpinner()
     {
       $('#spinner-border').show(0).delay(3000).hide(0);
     }
-
-
-
 </script>
+
 <script>
  function show_toast(locator) {
    $(locator).toast('show');
@@ -7376,99 +7386,47 @@ $('#toastEventsTest').on('show.bs.toast', function () {
 }).on('hidden.bs.toast', function () {
    add_text_about_toast_event(hidden_desc);
 });
-
-
-
 </script>
+
 <script>
     setTimeout(function() {
 		$('.invisible')[0].classList.remove("invisible");
 		$('#ghost-button')[0].classList.add("invisible");
 	}, 3000);
-
-
-
-
-
-
-
-
-
 </script>
+
 <script>
     const volumeSpan = $('#volume-value')[0];
     volumeSpan.value = $('#volume')[0].value;
     function showVal(val) {
         volumeSpan.value = val;
     }
-
-
-
-
-
-
-
-
-
 </script>
+
 <script type="text/javascript">
     $('#multi-dropdown').multiselect();
-
-
-
-
-
-
-
-
-
 </script>
+
 <Script language="JavaScript">
     UUI.Vertical_Menu.init({"open":true});
-
-
-
-
-
-
-
-
-
 </script>
+
 <script>
     $('.selectpicker').selectpicker();
-
-
-
-
-
-
-
-
-
 </script>
+
 <script>
 $(function(){
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover()
 })
-
-
-
 </script>
+
 <script>
 		includeSideBar();
 		activateTopElement(5,2);
-
-
-
-
-
-
-
-
-
 </script>
+
 <script>
         var progress_val = parseInt($('#progress-with-labels').attr('aria-valuenow'));
         var progress_max = $('#progress-with-labels').attr('aria-valuemax');
@@ -7506,10 +7464,6 @@ $(function(){
                 }, 30);  // чем выше значение, тем медленнее заполняется прогресс
             }
         }
-
-
-
-
 </script>
 
 </body>
