@@ -1,8 +1,5 @@
 package com.epam.jdi.light.ui.bootstrap.elements.complex;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.TextTypes.TEXT;
-
 import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -10,6 +7,9 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
+
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.TextTypes.TEXT;
 
 public class Carousel extends UIBaseElement<TextAssert> implements IsText, IsButton {
 	public String currentSlideLocator = "//div[contains(@class,'carousel-item active')]";
@@ -51,13 +51,13 @@ public class Carousel extends UIBaseElement<TextAssert> implements IsText, IsBut
 	public void select(int index) {
 		if (index < 1)
 			throw exception("Can't select element with index '%s'. Index should be 1 or more", index);
-		indicators().select(index - 1);
+		indicators().select(index);
 	}
 	
 	public UIElement get(int index) {
 		if (index < 1)
 			throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
-		return indicators().get(index - 1);
+		return indicators().get(index);
 	}
 
 	@JDIAction("Current slide interval in '{name}'")

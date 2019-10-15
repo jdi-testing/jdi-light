@@ -63,8 +63,8 @@ public class MenuTests extends TestsInit {
     }
     @Test
     public void refreshIndexSelectTest() {
-        menu.select(2);
-        menu.select(8);
+        menu.select(3);
+        menu.select(9);
         usersPage.checkOpened();
     }
 

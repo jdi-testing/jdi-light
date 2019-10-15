@@ -105,7 +105,7 @@ public class TabsWithDropdownTests extends TestsInit {
     @Test(dataProvider = "listLinkDrop")
     public void dropdownMenuTests(int index, String linkText) {
         navsTabsWithDropdown.dropdownMenu.expand();
-        navsTabsWithDropdown.dropdownMenu.list().get(index)
+        navsTabsWithDropdown.dropdownMenu.list().get(index + 1)
                 .is()
                 .text(linkText);
     }
