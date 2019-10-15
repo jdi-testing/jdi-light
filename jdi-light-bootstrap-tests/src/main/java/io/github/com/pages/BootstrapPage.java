@@ -21,6 +21,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.modal.ModalVaryingContent;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonGroupBasicExample;
 import io.github.com.sections.ButtonGroupNesting;
@@ -271,6 +272,14 @@ public class BootstrapPage extends WebPage {
     public static InputGroupSizing inputGroupSmallSizing;
     @UI("#input-group-large")
     public static InputGroupSizing inputGroupLargeSizing;
+    @UI("#modalMdo")
+    public static Button modalMdoButton;
+    @UI("#modalFat")
+    public static Button modalFatButton;
+    @UI("#modalGetbootstrap")
+    public static Button modalGetbootstrapButton;
+    @UI(".modal-content")
+    public static ModalVaryingContent modalVaryingContentWindow;
     // Button addons
     @UI("#input-group-button-addon1")
     public static ButtonAddons inputGroupButtonAddons1;
