@@ -157,25 +157,38 @@ public class WebPage extends DriverBase implements PageObject {
         if (!hasRunDrivers()) {
             throw exception("Page '%s' is not opened: Driver is not run", toString());
         }
+
+        String urlCheckingError = getUrlCheckingError();
+        if (isNotBlank(urlCheckingError)) {
+            throw exception("Page '%s' is not opened: %s", getName(), format(urlCheckingError, driver().getCurrentUrl(), checkUrl));
+        }
+
+        String titleCheckingError = getTitleCheckingError();
+        if (isNotBlank(titleCheckingError)) {
+            throw exception("Page '%s' is not opened: %s", getName(), format(titleCheckingError, driver().getTitle(), title));
+        }
+
+        setCurrentPage(this);
+    }
+
+    private String getUrlCheckingError() {
         String result = Switch(checkUrlType).get(
                 Value(CheckTypes.NONE, ""),
                 Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
                 Value(MATCH, t -> !url().match() ? "Url '%s' doesn't match to '%s'" : ""),
                 Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
         );
-        if (isNotBlank(result)) {
-            throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getCurrentUrl(), checkUrl));
-        }
-        result = Switch(checkTitleType).get(
+        return result;
+    }
+
+    private String getTitleCheckingError() {
+        String result = Switch(checkTitleType).get(
                 Value(CheckTypes.NONE, ""),
                 Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
                 Value(MATCH, t -> !title().match() ? "Title '%s' doesn't match to '%s'" : ""),
                 Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
         );
-        if (isNotBlank(result)) {
-            throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
-        }
-        setCurrentPage(this);
+        return result;
     }
 
     /**
