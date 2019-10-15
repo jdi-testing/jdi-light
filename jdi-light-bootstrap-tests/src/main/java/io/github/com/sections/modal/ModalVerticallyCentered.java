@@ -26,13 +26,13 @@ public class ModalVerticallyCentered extends Modal {
     @UI("//*[@id='modal-vertical-content-1']//button[contains(., 'Close')]")
     public Button dismissModal1Close;
 
-    @UI("//*[@id='modal-vertical-content-1']//div//button//span")
+    @UI("//*[@id='modal-vertical-content-1']//span")
     public Button dismissModal1Cross;
 
     @UI("//*[@id='modal-vertical-content-2']//button[contains(., 'Close')]")
     public Button dismissModal2Close;
 
-    @UI("//*[@id='modal-vertical-content-2']//div//button//span")
+    @UI("//*[@id='modal-vertical-content-2']//span")
     public Button dismissModal2Cross;
 
 }
