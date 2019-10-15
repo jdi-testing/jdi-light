@@ -25,15 +25,7 @@ public class FormUsers {
             defaultContact().set(c -> c.name = null);
 
     public static void clearBlankContact() {
-        BLANK_CONTACT.set(c -> {
-            c.name = "";
-            c.lastName = "";
-            c.userName = "";
-            c.city = "";
-            c.state = "";
-            c.zip = "";
-            c.accept = "false";
-        });
+        BLANK_CONTACT = new FormContacts();
     }
 
     private static FormContacts defaultContact() {
@@ -62,13 +54,6 @@ public class FormUsers {
 
     private static FormContacts blankContact() {
         return new FormContacts().set(c -> {
-            c.name = "";
-            c.lastName = "";
-            c.userName = "";
-            c.city = "";
-            c.state = "";
-            c.zip = "";
-            c.accept = "false";
         });
     }
 }
