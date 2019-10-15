@@ -10,7 +10,9 @@ import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.jdiTitle;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 /**

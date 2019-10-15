@@ -6,7 +6,6 @@ import selenium.site.SiteJdi;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
-import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public interface SimpleTestsInit {

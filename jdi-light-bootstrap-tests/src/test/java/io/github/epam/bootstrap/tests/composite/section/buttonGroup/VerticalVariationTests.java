@@ -14,6 +14,11 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Created by Dmitrii Pavlov on 19.09.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
+
 public class VerticalVariationTests extends TestsInit {
 
     @BeforeMethod
@@ -58,8 +63,8 @@ public class VerticalVariationTests extends TestsInit {
         buttonGroupVerticalVariation.dropdownMenu.expand();
         buttonGroupVerticalVariation.dropdownMenu.is().expanded();
         buttonGroupVerticalVariation.dropdownMenu.is().size(2);
-        buttonGroupVerticalVariation.dropdownMenu.list().get(0).is().text(dropdownMenuLinkOne);
-        buttonGroupVerticalVariation.dropdownMenu.list().get(1).is().text(dropdownMenuLinkTwo);
+        buttonGroupVerticalVariation.dropdownMenu.list().get(1).is().text(dropdownMenuLinkOne);
+        buttonGroupVerticalVariation.dropdownMenu.list().get(2).is().text(dropdownMenuLinkTwo);
         buttonGroupVerticalVariation.dropdownMenu.highlight();
         buttonGroupVerticalVariation.dropdownMenu.select(dropdownMenuLinkOne);
         newWindowTitleCheck(linkOnePageTitle);

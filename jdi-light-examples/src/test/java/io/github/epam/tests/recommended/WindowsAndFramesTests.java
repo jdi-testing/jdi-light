@@ -4,7 +4,13 @@ import io.github.epam.StaticTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
+import static com.epam.jdi.light.elements.common.WindowsManager.newWindowIsOpened;
+import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.setWindowName;
+import static com.epam.jdi.light.elements.common.WindowsManager.switchToWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.windowsCount;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.StaticSite.iframe;
 import static io.github.com.pages.GithubPage.repoDescription;

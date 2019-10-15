@@ -12,6 +12,11 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Created by Dmitrii Pavlov on 19.09.2019
+ * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
+ */
+
 public class ButtonToolbarTests extends TestsInit {
 
     private String borderColorBeforeClicking = "rgb(108, 117, 125)";
@@ -29,15 +34,15 @@ public class ButtonToolbarTests extends TestsInit {
 
     @Test
     public void getTextTest() {
-        for (int i = 0; i < 8; i++) {
-            assertEquals(buttonToolbar.buttonsInToolbar.get(i).getText(), String.valueOf(i + 1));
+        for (int i = 1; i < 9; i++) {
+            assertEquals(buttonToolbar.buttonsInToolbar.get(i).getText(), String.valueOf(i));
         }
     }
 
     @Test
     public void isValidationTest() {
-        for (int i = 0; i < 8; i++) {
-            buttonToolbar.buttonsInToolbar.get(i).is().text(String.valueOf(i + 1));
+        for (int i = 1; i < 9; i++) {
+            buttonToolbar.buttonsInToolbar.get(i).is().text(String.valueOf(i));
         }
     }
 

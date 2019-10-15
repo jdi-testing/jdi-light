@@ -20,7 +20,7 @@ public class ContactForm {
     @UI("#passport-number")
     WebElement passportNumber;
     @UI("#passport-seria")
-    WebElement passportSeria;
+    WebElement passportSerial;
     @UI("#passport")
     WebElement passport;
     // Dropdown
@@ -65,9 +65,9 @@ public class ContactForm {
             passportNumber.clear();
             passportNumber.sendKeys(contact.passportNumber.toString());
         }
-        if (contact.passportSeria != null) {
-            passportSeria.clear();
-            passportSeria.sendKeys(contact.passportSeria.toString());
+        if (contact.passportSerial != null) {
+            passportSerial.clear();
+            passportSerial.sendKeys(contact.passportSerial.toString());
         }
         // Dropdown
         if (contact.gender != null) {
@@ -118,8 +118,8 @@ public class ContactForm {
             assertThat(position.getText(), is(contact.position));
         if (contact.passportNumber != null)
             assertThat(passportNumber.getText(), is(contact.passportNumber));
-        if (contact.passportSeria != null)
-            assertThat(passportSeria.getText(), is(contact.passportSeria));
+        if (contact.passportSerial != null)
+            assertThat(passportSerial.getText(), is(contact.passportSerial));
         // Dropdown
         if (contact.gender != null)
             assertThat(genderValue.getText(), is(contact.gender));
