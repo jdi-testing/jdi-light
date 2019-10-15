@@ -14,7 +14,7 @@ public class CustomFormSmart extends Form<User> {
     public WebElement fbPublicWebElement;
     private WebElement fbPrivateWebElement;
 
-    WebList fbWebElementList;
+    public WebList fbWebElementList;
     public WebList fbPublicWebElementList;
     private WebList fbPrivateWebElementList;
 

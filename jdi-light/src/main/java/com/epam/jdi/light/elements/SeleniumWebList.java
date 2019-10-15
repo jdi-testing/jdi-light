@@ -37,6 +37,10 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetValue{
     protected int jdiIndex = 0;
+    protected JFunc1<UIElement, String> UIELEMENT_NAME;
+    protected boolean nameIndex = false;
+    protected CacheValue<MapArray<String, UIElement>> elements =
+            new CacheValue<>(MapArray::new);
 
     public UIElement core() {
         return new UIElement(base());
@@ -74,8 +78,6 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
         super.setName(name);
         return this;
     }
-    protected CacheValue<MapArray<String, UIElement>> elements =
-            new CacheValue<>(MapArray::new);
 
     protected String nameFromIndex(int i) {
         return nameFromValue(i+1+"");
@@ -172,8 +174,6 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
             }
         }
     }
-    protected JFunc1<UIElement, String> UIELEMENT_NAME;
-    protected boolean nameIndex = false;
 
     public SeleniumWebList setUIElementName(JFunc1<UIElement, String> func) {
         UIELEMENT_NAME = func;

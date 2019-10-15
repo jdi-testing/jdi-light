@@ -1,11 +1,9 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.elements.SeleniumWebList;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.func.JFunc2;
 import org.openqa.selenium.support.ui.Quotes;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$$;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;

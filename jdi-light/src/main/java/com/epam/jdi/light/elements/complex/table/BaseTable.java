@@ -61,6 +61,18 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     protected int firstColumnIndex = -1;
     protected int[] columnsMapping = new int[]{};
     protected String rowHeaderName = "";
+    protected CacheAll<MapArray<String, SeleniumWebList>> rows
+            = new CacheAll<>(MapArray::new);
+    protected CacheAll<MapArray<String, SeleniumWebList>> columns
+            = new CacheAll<>(MapArray::new);
+    protected CacheAll<MapArray<String, MapArray<String, UIElement>>> cells
+            = new CacheAll<>(MapArray::new);
+    // Amount of Rows
+    protected CacheValue<Integer> count = new CacheValue<>(this::getCount);
+    protected CacheValue<List<String>> header = new CacheValue<>(this::getHeader);
+    protected CacheValue<List<String>> rowHeader = new CacheValue<>(this::getRowHeader);
+    // Amount of Columns
+    protected CacheValue<Integer> size = new CacheValue<>(this::getTableSize);
 
     protected int getRowHeaderIndex() {
         if (rowHeaderIndex == -1 && isNotBlank(rowHeaderName)) {
@@ -74,19 +86,6 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         }
         return rowHeaderIndex;
     }
-
-    protected CacheAll<MapArray<String, SeleniumWebList>> rows
-        = new CacheAll<>(MapArray::new);
-    protected CacheAll<MapArray<String, SeleniumWebList>> columns
-        = new CacheAll<>(MapArray::new);
-    protected CacheAll<MapArray<String, MapArray<String, UIElement>>> cells
-            = new CacheAll<>(MapArray::new);
-    // Amount of Rows
-    protected CacheValue<Integer> count = new CacheValue<>(this::getCount);
-    protected CacheValue<List<String>> header = new CacheValue<>(this::getHeader);
-    protected CacheValue<List<String>> rowHeader = new CacheValue<>(this::getRowHeader);
-    // Amount of Columns
-    protected CacheValue<Integer> size = new CacheValue<>(this::getTableSize);
 
     public void setHeader(List<String> header) {
         this.header.setFinal(header);

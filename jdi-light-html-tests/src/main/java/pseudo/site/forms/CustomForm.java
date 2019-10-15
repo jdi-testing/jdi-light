@@ -24,12 +24,12 @@ public class CustomForm extends Form<User> {
     @Css("#cssWebElement-id") WebElement cssWebElement;
     @XPath("//*[@id='xpathPublicWebElement-id']") public WebElement xpathPublicWebElement;
 
-    @FindBy(css = ".fbWebElementList-class") WebList fbWebElementList;
+    @FindBy(css = ".fbWebElementList-class") public WebList fbWebElementList;
     @FindBy(css = ".fbPublicWebElementList-class") public WebList fbPublicWebElementList;
     @FindBy(css = ".fbPrivateWebElementList-class") private WebList fbPrivateWebElementList;
-    @UI(".uiWebElementList-class") WebList uiWebElementList;
+    @UI(".uiWebElementList-class") public WebList uiWebElementList;
     @UI(".uiPublicWebElementList-class") public WebList uiPublicWebElementList;
-    @Css(".cssWebElementList-class") WebList cssWebElementList;
+    @Css(".cssWebElementList-class") public WebList cssWebElementList;
     @XPath("//*[@class='xpathPublicWebElementList-class']") public WebList xpathPublicWebElementList;
 
     @FindBy(css = "#fbUIElement-id") UIElement fbUIElement;
