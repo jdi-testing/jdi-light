@@ -40,7 +40,7 @@ public class TestNGListener implements IInvokedMethodListener {
             String result = getTestResult(r);
             logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
                     new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())));
-            if (("FAILED").equals(result)) {
+            if ("FAILED".equals(result)) {
                 takeScreen();
                 logger.step("ERROR: " + r.getThrowable().getMessage());
             }
