@@ -20,7 +20,7 @@ public class ReadonlyPlainTextTests extends TestsInit {
     private static final String labelTextValue = "Email";
 
     @DataProvider
-    public static Object[] itemsUnderTesting(){
+    public static Object[] itemsUnderTesting() {
         return new Object[]{readonlyPlainText1, readonlyPlainText2};
     }
 
@@ -30,30 +30,30 @@ public class ReadonlyPlainTextTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    @Test (dataProvider = "itemsUnderTesting")
+    @Test(dataProvider = "itemsUnderTesting")
     public void baseValidationTest(ReadonlyPlainText item) {
         baseValidation(item);
         item.unhighlight();
     }
 
-    @Test (dataProvider = "itemsUnderTesting")
+    @Test(dataProvider = "itemsUnderTesting")
     public void isValidationTest(ReadonlyPlainText item) {
         item.is().core().hasClass("form-control-plaintext");
         item.hasAttribute("readonly");
         item.is().core().attr("type", "text");
-}
+    }
 
-    @Test (dataProvider = "itemsUnderTesting")
+    @Test(dataProvider = "itemsUnderTesting")
     public void textValidationTest(ReadonlyPlainText item) {
         item.is().text(plainTextValue);
     }
 
-    @Test (dataProvider = "itemsUnderTesting")
+    @Test(dataProvider = "itemsUnderTesting")
     public void valueValidationTest(ReadonlyPlainText item) {
         item.is().value(plainTextValue);
     }
 
-    @Test (dataProvider = "itemsUnderTesting")
+    @Test(dataProvider = "itemsUnderTesting")
     public void labelTest(ReadonlyPlainText item) {
         assertEquals(item.labelText(), labelTextValue);
         item.label().is().text(containsString(labelTextValue));
