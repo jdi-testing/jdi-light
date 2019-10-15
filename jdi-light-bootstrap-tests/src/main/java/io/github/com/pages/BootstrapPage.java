@@ -50,7 +50,7 @@ import io.github.com.sections.CheckboxesDefaultInline;
 import io.github.com.sections.CustomSelect;
 import io.github.com.sections.CustomSelectWithButton;
 import io.github.com.sections.FormCustomStyles;
-import io.github.com.sections.GridModalSection;
+import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.InputGroupInputWithCheckBox;
 import io.github.com.sections.InputGroupInputWithLabelAndText;
 import io.github.com.sections.InputGroupInputWithRadio;

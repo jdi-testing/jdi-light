@@ -1,15 +1,16 @@
 package io.github.epam.bootstrap.tests.composite.section.modal;
 
+import io.github.com.sections.modal.gridmodal.grid.GridCell;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.gridModalSection;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 
 
 /**
@@ -26,22 +27,11 @@ public class gridModalTests extends TestsInit {
         gridModalSection.openGridModalWindow();
     }
 
-    @DataProvider
-    public static Object[][] elementsData() {
-        return new Object[][]{
-                {"gridModalLabel"},
-                {"close-modal-cross"},
-                {"save-modal"},
-                {"close-modal"},
-        };
-    }
-
     @Test
     public void baseGridRowsValidationTest() {
-        gridModalSection.openGridModalWindow();
-        gridModalSection.gridModalWindow.
-                gridModal.
-                getAllGridRows().
+        gridModalSection.getGridModalWindow().
+                getBody().
+                getAllRows().
                 forEach(
                         e -> {
                             e.highlight();
@@ -53,10 +43,9 @@ public class gridModalTests extends TestsInit {
 
     @Test
     public void baseGridCellsValidationTest() {
-        gridModalSection.openGridModalWindow();
-        gridModalSection.gridModalWindow.
-                gridModal.
-                getAllGridCells().
+        gridModalSection.getGridModalWindow().
+                getBody().
+                getAllCells().
                 forEach(
                         e -> {
                             e.highlight();
@@ -66,46 +55,65 @@ public class gridModalTests extends TestsInit {
                 );
     }
 
-    @Test
-    public void checkCloseModalButton() {
-        gridModalSection.gridModalWindow.btnClose.highlight("red");
-        gridModalSection.gridModalWindow.btnClose.click();
-        gridModalSection.gridModalWindow.is().core().disappear();
+    @DataProvider
+    public static Object[][] gridData() {
+        return new Object[][]{
+                {0, 0, ".col-md-4", "33"},
+                {1, 0, ".col-md-3 .ml-auto", "25"},
+                {1, 1, ".col-md-2 .ml-auto", "16"},
+                {3, 1, "Level 2: .col-8 .col-sm-6", "50"},
+                {3, 2, "Level 2: .col-4 .col-sm-6", "50"},
+        };
+    }
+
+    @Test(dataProvider = "gridData")
+    public void checkTextInCell(int rowN, int cellN, String textExpected, String max_width) {
+        GridCell cell = gridModalSection.getGridModalWindow().getBody()
+                .getCellInRow(rowN, cellN);
+        cell.highlight("blue");
+        cell.is().core().text(textExpected)
+                .and()
+                .css("max-width", startsWith(max_width));
+        cell.unhighlight();
     }
 
     @Test
-    public void checkCloseXModalButton() {
-        gridModalSection.gridModalWindow.btnCloseX.highlight("red");
-        gridModalSection.gridModalWindow.btnCloseX.click();
-        gridModalSection.gridModalWindow.is().core().disappear();
+    public void checkCloseModalButton() {
+        gridModalSection.getGridModalWindow().getBtnClose().highlight("red");
+        gridModalSection.getGridModalWindow().clickBtnClose();
+        gridModalSection.getGridModalWindow().is().disappear();
     }
 
     @Test
     public void checkSaveModalButton() {
-        gridModalSection.gridModalWindow.btnSave.highlight("red");
-        gridModalSection.gridModalWindow.btnSave.click();
-        gridModalSection.gridModalWindow.is().core().displayed();
+        gridModalSection.getGridModalWindow().getBtnSave().highlight("red");
+        gridModalSection.getGridModalWindow().clickBtnSave();
+        gridModalSection.getGridModalWindow().is().displayed();
+    }
+
+    @Test
+    public void checkCloseXModalButton() {
+        gridModalSection.getGridModalWindow().getBtnCloseX().highlight("red");
+        gridModalSection.getGridModalWindow().clickBtnCloseX();
+        gridModalSection.getGridModalWindow().is().disappear();
     }
 
     @Test
     public void checkCloseByEscapeButton() {
-        gridModalSection.openGridModalWindow();
-        gridModalSection.gridModalWindow.core().sendKeys(Keys.ESCAPE);
-        gridModalSection.gridModalWindow.is().core().disappear();
+        gridModalSection.getGridModalWindow().core().sendKeys(Keys.ESCAPE);
+        gridModalSection.getGridModalWindow().is().disappear();
     }
 
     @Test
     public void baseModalValidationTest() {
-        baseValidation(gridModalSection.gridModalWindow.modalTitle);
-        baseValidation(gridModalSection.gridModalWindow.btnSave);
-        baseValidation(gridModalSection.gridModalWindow.btnCloseX);
-        baseValidation(gridModalSection.gridModalWindow.btnClose);
+        baseValidation(gridModalSection.getGridModalWindow().getBtnClose());
+        baseValidation(gridModalSection.getGridModalWindow().getBtnSave());
+        baseValidation(gridModalSection.getGridModalWindow().getBtnCloseX());
+        baseValidation(gridModalSection.getGridModalWindow().getTitle());
 
-        gridModalSection.gridModalWindow.modalTitle.unhighlight();
-        gridModalSection.gridModalWindow.btnSave.unhighlight();
-        gridModalSection.gridModalWindow.btnCloseX.unhighlight();
-        gridModalSection.gridModalWindow.btnClose.unhighlight();
+        gridModalSection.getGridModalWindow().getTitle().unhighlight();
+        gridModalSection.getGridModalWindow().getBtnCloseX().unhighlight();
+        gridModalSection.getGridModalWindow().getBtnSave().unhighlight();
+        gridModalSection.getGridModalWindow().getBtnClose().unhighlight();
     }
 }
-
-
