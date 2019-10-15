@@ -34,11 +34,11 @@ public class ReadonlyPlainTextTests extends TestsInit {
     @Test
     public void isValidationTest() {
         readonlyPlainText1.hasClass("form-control-plaintext");
-        readonlyPlainText1.hasAttribute("readonly");
+        readonlyPlainText1.attr("readonly");
         assertEquals(readonlyPlainText1.attr("type"), "text");
 
         readonlyPlainText2.hasClass("form-control-plaintext");
-        readonlyPlainText2.hasAttribute("readonly");
+        readonlyPlainText2.attr("readonly");
         assertEquals(readonlyPlainText2.attr("type"), "text");
     }
 
