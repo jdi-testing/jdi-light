@@ -66,7 +66,7 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
         if (index < 1)
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
         expand();
-        list().select(index-1);
+        list().select(index);
         close();
     }
     @JDIAction("Get selected value") @Override

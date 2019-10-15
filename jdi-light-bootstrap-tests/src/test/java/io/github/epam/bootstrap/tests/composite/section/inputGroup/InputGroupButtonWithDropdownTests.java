@@ -47,10 +47,10 @@ public class InputGroupButtonWithDropdownTests extends TestsInit {
         buttonWithDropdown.dropdownMenu.expand();
         buttonWithDropdown.dropdownMenu.is().expanded();
         buttonWithDropdown.dropdownMenu.is().size(4);
-        buttonWithDropdown.dropdownMenu.list().get(0).is().text(action);
-        buttonWithDropdown.dropdownMenu.list().get(1).is().text(anotherAction);
-        buttonWithDropdown.dropdownMenu.list().get(2).is().text(somethingElseHere);
-        buttonWithDropdown.dropdownMenu.list().get(3).is().text(separatedLink);
+        buttonWithDropdown.dropdownMenu.list().get(1).is().text(action);
+        buttonWithDropdown.dropdownMenu.list().get(2).is().text(anotherAction);
+        buttonWithDropdown.dropdownMenu.list().get(3).is().text(somethingElseHere);
+        buttonWithDropdown.dropdownMenu.list().get(4).is().text(separatedLink);
         buttonWithDropdown.dropdownMenu.highlight();
         buttonWithDropdown.dropdownMenu.select(action);
         buttonWithDropdown.dropdownMenu.select(anotherAction);
