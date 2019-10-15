@@ -14,9 +14,9 @@ import static org.testng.Assert.assertEquals;
 
 public class ReadonlyPlainTextTests extends TestsInit {
 
-    public String plainTextValue = "email@example.com";
-    public String labelTextValue = "Email";
-    
+    private static final String plainTextValue = "email@example.com";
+    private static final String labelTextValue = "Email";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
