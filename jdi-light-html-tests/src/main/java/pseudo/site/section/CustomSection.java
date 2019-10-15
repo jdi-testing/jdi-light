@@ -32,19 +32,19 @@ public class CustomSection extends Section {
     public WebElement webElementPublicXPath;
 
     @FindBy(id = "listWebElementPackage")
-    List<WebElement> listWebElementPackage;
+    WebList listWebElementPackage;
     @FindBy(id = "listWebElementPublic")
-    public List<WebElement> listWebElementPublic;
+    public WebList listWebElementPublic;
     @FindBy(id = "listWebElementPrivate")
-    private List<WebElement> listWebElementPrivate;
+    private WebList listWebElementPrivate;
     @UI(".listWebElementPackageUI")
-    List<WebElement> listWebElementPackageUI;
+    WebList listWebElementPackageUI;
     @UI(".listWebElementPublicUI")
-    public List<WebElement> listWebElementPublicUI;
+    public WebList listWebElementPublicUI;
     @Css(".listWebElementPackageCss")
-    List<WebElement> listWebElementPackageCss;
+    WebList listWebElementPackageCss;
     @XPath("//*[@class='listWebElementPublicXPath']")
-    public List<WebElement> listWebElementPublicXPath;
+    public WebList listWebElementPublicXPath;
 
     @FindBy(id = "uielementPackage")
     UIElement uielementPackage;
@@ -186,28 +186,28 @@ public class CustomSection extends Section {
         this.webElementPackageUI = webElementPackageUI;
     }
 
-    public List<WebElement> getListWebElementPackage() {
+    public WebList getListWebElementPackage() {
         return listWebElementPackage;
     }
 
-    public void setListWebElementPackage(List<WebElement> listWebElementPackage) {
+    public void setListWebElementPackage(WebList listWebElementPackage) {
         this.listWebElementPackage = listWebElementPackage;
     }
 
-    public List<WebElement> getListWebElementPrivate() {
+    public WebList getListWebElementPrivate() {
         return listWebElementPrivate;
     }
 
-    public void setListWebElementPrivate(List<WebElement> listWebElementPrivate) {
+    public void setListWebElementPrivate(WebList listWebElementPrivate) {
         this.listWebElementPrivate = listWebElementPrivate;
     }
 
 
-    public List<WebElement> getListWebElementPackageUI() {
+    public WebList getListWebElementPackageUI() {
         return listWebElementPackageUI;
     }
 
-    public void setListWebElementPackageUI(List<WebElement> listWebElementPackageUI) {
+    public void setListWebElementPackageUI(WebList listWebElementPackageUI) {
         this.listWebElementPackageUI = listWebElementPackageUI;
     }
 
@@ -409,7 +409,7 @@ public class CustomSection extends Section {
         return webElementPackageCss;
     }
 
-    public List<WebElement> getListWebElementPackageCss() {
+    public WebList getListWebElementPackageCss() {
         return listWebElementPackageCss;
     }
 
