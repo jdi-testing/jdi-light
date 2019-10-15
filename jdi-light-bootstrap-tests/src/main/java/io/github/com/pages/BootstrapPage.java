@@ -106,7 +106,6 @@ import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.modal.ModalOptionalSizes;
-import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarSupportedContent;
@@ -553,8 +552,7 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
 
-    @UI("#modal-vertically-centered")
-    public static ModalVerticallyCentered modalVerticallyCentered;
+
     @UI("#modal-optional-sizes")
     public static ModalOptionalSizes modalOptionalSizes;
     //endregion

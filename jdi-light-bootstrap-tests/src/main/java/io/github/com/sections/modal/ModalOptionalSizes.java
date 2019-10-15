@@ -1,30 +1,29 @@
 package io.github.com.sections.modal;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Modal;
 
 public class ModalOptionalSizes extends Modal {
 
     // Buttons
-    @UI("//button[contains(text(), 'Extra large')]")
+    @UI(".bd-example button:nth-of-type(1)")
     public Button xlButton;
 
-    @UI("//*[@id='modal-optional-sizes']//button[contains(text(), 'Large')]")
+    @UI(".bd-example button:nth-of-type(2)")
     public Button lgButton;
 
-    @UI("//*[@id='modal-optional-sizes']//button[contains(text(), 'Small')]")
+    @UI(".bd-example button:nth-of-type(3)")
     public Button smButton;
 
     // Modals
-    @WaitTimeout(2)
-    @UI("//*[@id='modal-optional-sizes']//*[@class='modal-dialog modal-xl']")
+    @UI(".modal-xl .modal-content")
     public Modal xlModal;
 
-    @UI("//*[@id='modal-optional-sizes']//*[@class='modal-dialog modal-lg']")
+    @UI(".modal-lg .modal-content")
     public Modal lgModal;
 
-    @UI("//*[@id='modal-optional-sizes']//*[@class='modal-dialog modal-sm']")
+    @UI(".modal-sm .modal-content")
     public Modal smModal;
 
 }
