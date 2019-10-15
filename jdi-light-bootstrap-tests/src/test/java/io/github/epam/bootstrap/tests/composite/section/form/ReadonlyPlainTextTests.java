@@ -14,14 +14,14 @@ import static org.testng.Assert.assertEquals;
 
 public class ReadonlyPlainTextTests extends TestsInit {
 
+    public String plainTextValue = "email@example.com";
+    public String labelTextValue = "Email";
+    
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    String plainTextValue = "email@example.com";
-    String labelTextValue = "Email";
 
     @Test
     public void baseValidationTest() {
