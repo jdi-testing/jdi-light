@@ -49,6 +49,7 @@ import io.github.com.sections.CheckboxesDefault;
 import io.github.com.sections.CheckboxesDefaultInline;
 import io.github.com.sections.CustomSelect;
 import io.github.com.sections.CustomSelectWithButton;
+import io.github.com.sections.FormCustomStyles;
 import io.github.com.sections.InputGroupInputWithCheckBox;
 import io.github.com.sections.InputGroupInputWithLabelAndText;
 import io.github.com.sections.InputGroupInputWithRadio;
@@ -103,69 +104,120 @@ import io.github.com.sections.SegmentedButton;
 import io.github.com.sections.Switches;
 import io.github.com.sections.Toast;
 import io.github.com.sections.card.CardImageOverlays;
+import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarSupportedContent;
+import io.github.com.sections.navbar.NavbarText;
 import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.spinner.GrowingSpinners;
+import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
-    public static UIElement inputGroupWrap,inputGroupNowrap;
+    public static UIElement inputGroupWrap, inputGroupNowrap;
     public static Button redButton, doubleButton, disabledButton;
 
-    @UI("//input[contains(@class, 'progress-change plus')]")  public static Button plus;
-    @UI("//input[contains(@class, 'progress-change minus')]") public static Button minus;
-    @UI("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
-    @UI("#jumbotron") public static Jumbotron jumbotron;
-    @UI("#breadcrumb") public static Breadcrumb breadcrumb;
-    @UI("#simple-alert") public static Alert simpleAlert;
-    @UI("#dismissible-alert") public static Alert dismissibleAlert;
-    @UI("#badge-secondary") public static Badge badgeSecondary;
-    @UI("#btn-primary") public static Button buttonPrimary;
-    @UI("#badge-success") public static Link badgeSuccess;
-    @UI("#spinner-text-primary") public static ColorSpinner spinnerWithTextPrimary;
-    @UI("#spinner-text-secondary") public static ColorSpinner spinnerWithTextSecondary;
-    @UI("#spinner-text-success") public static ColorSpinner spinnerWithTextSuccess;
-    @UI("#spinner-text-danger") public static ColorSpinner spinnerWithTextDanger;
-    @UI("#spinner-text-warning") public static ColorSpinner spinnerWithTextWarning;
-    @UI("#spinner-text-info") public static ColorSpinner spinnerWithTextInfo;
-    @UI("#spinner-text-light") public static ColorSpinner spinnerWithTextLight;
-    @UI("#spinner-text-dark") public static ColorSpinner spinnerWithTextDark;
-    @UI("#tooltipOnTop") public static Tooltip tooltipOnTopButton;
-    @UI("#tooltipOnBottom") public static Tooltip tooltipOnBottomButton;
-    @UI("#tooltipOnLeft") public static Tooltip tooltipOnLeftButton;
-    @UI("#tooltipOnRight") public static Tooltip tooltipOnRightButton;
-    @UI("#tooltipWithHTML") public static Tooltip tooltipWithHTML;
-    @UI("#wrapperForDisabledButton") public static Tooltip wrapperForDisabledButton;
-    @UI("#tooltipOnDisabledButton") public static Tooltip tooltipOnDisabledButton;
-    @UI("#progress-bar-base-width-0") public static Progress progressBaseProgress0;
-    @UI("#progress-bar-base-width-0 .progress-bar") public static Progress progressBaseWidth0;
-    @UI("#progress-bar-base-width-25 .progress-bar") public static Progress progressBaseWidth25;
-    @UI("#progress-bar-base-width-50 .progress-bar") public static Progress progressBaseWidth50;
-    @UI("#progress-bar-base-width-75 .progress-bar") public static Progress progressBaseWidth75;
-    @UI("#progress-bar-base-width-100 .progress-bar") public static Progress progressBaseWidth100;
-    @UI("#progress-animated") public static Progress progressAnimated;
-    @UI("#progress-with-labels") public static Progress progressWithLabels;
-    @UI("#progress-backgrounds-green") public static Progress progressBackgroundGreen;
-    @UI("#progress-backgrounds-blue") public static Progress progressBackgroundBlue;
-    @UI("#progress-backgrounds-yellow") public static Progress progressBackgroundYellow;
-    @UI("#progress-backgrounds-red") public static Progress progressBackgroundRed;
-    @UI("#navbar-containers-centred") public static Navbar navbarCentredContainer;
-    @UI("#navbar-containers-expanded") public static Navbar navbarExpandedContainer;
-    @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
-    @UI("#spinner-border") public static Spinner spinnerBorder;
+    @UI("//input[contains(@class, 'progress-change plus')]")
+    public static Button plus;
+    @UI("//input[contains(@class, 'progress-change minus')]")
+    public static Button minus;
+    @UI("#jumbotron-fluid")
+    public static Jumbotron jumbotronFluid;
+    @UI("#jumbotron")
+    public static Jumbotron jumbotron;
+    @UI("#breadcrumb")
+    public static Breadcrumb breadcrumb;
+    @UI("#simple-alert")
+    public static Alert simpleAlert;
+    @UI("#dismissible-alert")
+    public static Alert dismissibleAlert;
+    @UI("#badge-secondary")
+    public static Badge badgeSecondary;
+    @UI("#btn-primary")
+    public static Button buttonPrimary;
+    @UI("#badge-success")
+    public static Link badgeSuccess;
+    @UI("#spinner-text-primary")
+    public static ColorSpinner spinnerWithTextPrimary;
+    @UI("#spinner-text-secondary")
+    public static ColorSpinner spinnerWithTextSecondary;
+    @UI("#spinner-text-success")
+    public static ColorSpinner spinnerWithTextSuccess;
+    @UI("#spinner-text-danger")
+    public static ColorSpinner spinnerWithTextDanger;
+    @UI("#spinner-text-warning")
+    public static ColorSpinner spinnerWithTextWarning;
+    @UI("#spinner-text-info")
+    public static ColorSpinner spinnerWithTextInfo;
+    @UI("#spinner-text-light")
+    public static ColorSpinner spinnerWithTextLight;
+    @UI("#spinner-text-dark")
+    public static ColorSpinner spinnerWithTextDark;
+    @UI("#tooltipOnTop")
+    public static Tooltip tooltipOnTopButton;
+    @UI("#tooltipOnBottom")
+    public static Tooltip tooltipOnBottomButton;
+    @UI("#tooltipOnLeft")
+    public static Tooltip tooltipOnLeftButton;
+    @UI("#tooltipOnRight")
+    public static Tooltip tooltipOnRightButton;
+    @UI("#tooltipWithHTML")
+    public static Tooltip tooltipWithHTML;
+    @UI("#wrapperForDisabledButton")
+    public static Tooltip wrapperForDisabledButton;
+    @UI("#tooltipOnDisabledButton")
+    public static Tooltip tooltipOnDisabledButton;
+    @UI("#progress-bar-base-width-0")
+    public static Progress progressBaseProgress0;
+    @UI("#progress-bar-base-width-0 .progress-bar")
+    public static Progress progressBaseWidth0;
+    @UI("#progress-bar-base-width-25 .progress-bar")
+    public static Progress progressBaseWidth25;
+    @UI("#progress-bar-base-width-50 .progress-bar")
+    public static Progress progressBaseWidth50;
+    @UI("#progress-bar-base-width-75 .progress-bar")
+    public static Progress progressBaseWidth75;
+    @UI("#progress-bar-base-width-100 .progress-bar")
+    public static Progress progressBaseWidth100;
+    @UI("#progress-animated")
+    public static Progress progressAnimated;
+    @UI("#progress-with-labels")
+    public static Progress progressWithLabels;
+    @UI("#progress-backgrounds-green")
+    public static Progress progressBackgroundGreen;
+    @UI("#progress-backgrounds-blue")
+    public static Progress progressBackgroundBlue;
+    @UI("#progress-backgrounds-yellow")
+    public static Progress progressBackgroundYellow;
+    @UI("#progress-backgrounds-red")
+    public static Progress progressBackgroundRed;
+    @UI("#navbar-containers-centred")
+    public static Navbar navbarCentredContainer;
+    @UI("#navbar-containers-expanded")
+    public static Navbar navbarExpandedContainer;
+    @UI("#button-show-spinner-border")
+    public static Button buttonSpinnerBorder;
+    @UI("#spinner-border")
+    public static Spinner spinnerBorder;
     //endregion
 
     //region Complex Elements
-    @UI("#carousel-example-slides-only") public static Carousel carouselWithSlidesOnly;
-    @UI("#carousel-example-controls") public static Carousel carouselWithControls;
-    @UI("#carousel-example-indicators") public static Carousel carouselWithIndicators;
-    @UI("#carousel-example-captions") public static Carousel carouselWithCaptions;
-    @UI("#carousel-example-fade") public static Carousel carouselWithFadeTransition;
-    @UI("#carousel-example-interval") public static Carousel carouselWithCustomInterval;
+    @UI("#carousel-example-slides-only")
+    public static Carousel carouselWithSlidesOnly;
+    @UI("#carousel-example-controls")
+    public static Carousel carouselWithControls;
+    @UI("#carousel-example-indicators")
+    public static Carousel carouselWithIndicators;
+    @UI("#carousel-example-captions")
+    public static Carousel carouselWithCaptions;
+    @UI("#carousel-example-fade")
+    public static Carousel carouselWithFadeTransition;
+    @UI("#carousel-example-interval")
+    public static Carousel carouselWithCustomInterval;
     // COLLAPSE
     @JDropdown(expand = "#bs-collapse-link",
             value = "#bs-collapse-one",
@@ -202,158 +254,313 @@ public class BootstrapPage extends WebPage {
     //endregion
 
     //region Composite Elements
-    @UI("#input-group-checkbox") public static InputGroupInputWithCheckBox inputGroupCheckBox;
-    @UI("#input-group-radio") public static InputGroupInputWithRadio inputGroupRadio;
-    @UI("#input-group-basic-example1") public static InputGroupInputWithText inputGroupBasicExample1;
-    @UI("#input-group-basic-example2") public static InputGroupInputWithText inputGroupBasicExample2;
-    @UI("#input-group-basic-example3") public static InputGroupInputWithLabelAndText inputGroupBasicExample3;
-    @UI("#input-group-basic-example4") public static InputGroupInputWithTwoText inputGroupBasicExample4;
-    @UI("#input-group-basic-example5") public static InputGroupTextareaWithText inputGroupBasicExample5;
-    @UI("#input-group-default") public static InputGroupSizing inputGroupDefaultSizing;
-    @UI("#input-group-small") public static InputGroupSizing inputGroupSmallSizing;
-    @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
-// Button addons
-    @UI("#input-group-button-addon1") public static ButtonAddons inputGroupButtonAddons1;
-    @UI("#input-group-button-addon2") public static ButtonAddons inputGroupButtonAddons2;
-    @UI("#input-group-button-addon3") public static ButtonAddons inputGroupButtonAddons3;
-    @UI("#input-group-button-addon4") public static ButtonAddons inputGroupButtonAddons4;
-    @UI("#card-example") public static CardExample cardExample;
-    @UI("#card-image") public static CardImage cardImage;
-    @UI("#card-image-overlay") public static CardImageOverlays cardImageOverlays;
-    @UI("#card-body") public static CardBody cardBody;
-    @UI("#card-with-header") public static CardWithHeaderAndFooter cardWithHeader;
-    @UI("#card-with-header-and-footer-quote") public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
-    @UI("#card-with-header-and-footer") public static CardWithHeaderAndFooter cardWithHeaderAndFooter;
-    @UI("#card-with-grid-markup") public static CardWithGridMarkup cardWithGridMarkup;
-    @UI("#card-bright-blue") public static CardWithHeaderAndFooter cardBrightBlue;
-    @UI("#card-grey") public static CardWithHeaderAndFooter cardGrey;
-    @UI("#card-green") public static CardWithHeaderAndFooter cardGreen;
-    @UI("#card-red") public static CardWithHeaderAndFooter cardRed;
-    @UI("#card-yellow") public static CardWithHeaderAndFooter cardYellow;
-    @UI("#card-blue") public static CardWithHeaderAndFooter cardBlue;
-    @UI("#card-light") public static CardWithHeaderAndFooter cardLight;
-    @UI("#card-dark") public static CardWithHeaderAndFooter cardDark;
-    @UI("#card-border-primary") public static CardBorder cardBorderPrimary;
-    @UI("#card-border-secondary") public static CardBorder cardBorderSecondary;
-    @UI("#card-border-success") public static CardBorder cardBorderSuccess;
-    @UI("#card-border-danger") public static CardBorder cardBorderDanger;
-    @UI("#card-border-warning") public static CardBorder cardBorderWarning;
-    @UI("#card-border-info") public static CardBorder cardBorderInfo;
-    @UI("#card-border-light") public static CardBorder cardBorderLight;
-    @UI("#card-border-dark") public static CardBorder cardBorderDark;
-    @UI("#button-with-dropdown") public static ButtonWithDropdown buttonWithDropdown;
-    @UI("#segmented-button") public static SegmentedButton segmentedButton;
-    @UI("#buttonToolbar1") public static ButtonToolbar buttonToolbar;
-    @UI("#buttonToolbar2") public static ButtonToolbar buttonToolbarWithInputField;
-    @UI("#card-subtitle-link") public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
-    @UI("#card-custom-css-1") public static CardWithCustomCss13Rem cardWithCustomCss13Rem;
-    @UI("#card-custom-css-2") public static CardWithCustomCss9Rem cardWithCustomCss9Rem;
-    @UI("#card-mixins-utilities") public static CardMixinsUtilities cardMixinsUtilities;
-    @UI("#card-horizontal") public static CardHorizontal cardHorizontal;
-    @UI("#custom-select-01") public static CustomSelect customSelect;
-    @UI("#custom-select-button-01") public static CustomSelectWithButton customSelectWithButton;
-    @UI("#media-object-sample") public static MediaObjectSample mediaObjectSample;
-    @UI("#media-object-nesting") public static MediaObjectNesting mediaObjectNesting;
-    @UI("#media-object-list") public static JList<MediaObjectSample> mediaObjectList;
-    @UI("#multiple-addons-1")  public static InputGroupMultipleAddonsUpper multipleAddonUpper;
-    @UI("#multiple-addons-2")  public static InputGroupMultipleAddonsLower multipleAddonLower;
-    @UI("#basic-example") public static ButtonGroupBasicExample buttonGroupBasicExample;
-    @UI("#vertical-variation") public static  ButtonGroupVerticalVariation buttonGroupVerticalVariation;
-    @UI("#button-group-nesting") public static ButtonGroupNesting buttonGroupNesting;
-    @UI("#btn-lg-group") public static ButtonGroupSizing largeBtnGroup;
-    @UI("#btn-md-group") public static ButtonGroupSizing defaultBtnGroup;
-    @UI("#btn-sm-group") public static ButtonGroupSizing smallBtnGroup;
-    @UI("#card-text-left") public static CardTextAlignment cardLeftTextAlignment;
-    @UI("#card-text-center") public static CardTextAlignment cardCenterTextAlignment;
-    @UI("#card-text-right") public static CardTextAlignment cardRightTextAlignment;
-    @UI("#list-group-basic-example") public static ListGroupBasicExample listGroupBasicExample;
-    @UI("#list-group-active-items") public static ListGroupActiveItems listGroupActiveItems;
-    @UI("#disabled-items") public static ListGroupDisabledItems listGroupDisabledItems;
-    @UI("#list-group-links") public static ListGroupLinks listGroupLinks;
-    @UI("#list-group-buttons") public static ListGroupButtons listGroupButtons;
-    @UI("#list-group-flush") public static ListGroupFlush listGroupFlush;
-    @UI("#list-group-horizontal") public static ListGroupHorizontal listGroupHorizontal;
-    @UI("#list-group-with-badges") public static ListGroupWithBadges listGroupWithBadges;
-    @UI("#list-group-custom-content") public static ListGroupCustomContent listGroupCustomContent;
-    @UI("#radio-buttons") public static RadioButtonGroup radioButtonGroup;
-    @UI(".card-group:nth-of-type(1)") public static CardGroup cardGroupWithoutFooter;
-    @UI(".card-group:nth-of-type(2)") public static CardGroup cardGroupWithFooter;
-    @UI("#card-list-groups") public static CardListGroups cardListGroups;
-    @UI("#pagination-overview") public static PaginationOverview paginationOverview;
-    @UI("#pagination-icons") public static PaginationIcons paginationIcons;
-    @UI("#pagination-states") public static PaginationStates paginationStates;
-    @UI("#pagination-big") public static PaginationSizeBig paginationSizeBig;
-    @UI("#pagination-small") public static PaginationSizeSmall paginationSizeSmall;
-    @UI("#pagination-center") public static PaginationAlignCenter paginationAlignCenter;
-    @UI("#pagination-end") public static PaginationAlignEnd paginationAlignEnd;
-    @UI("#nav-base-li") public static NavsBaseLi navsBaseLi;
-    @UI("#nav-base-a") public static NavsBaseA navsBaseA;
-    @UI("#nav-center") public static NavsAlignmentCenter navsAlignmentCenter;
-    @UI("#nav-end") public static NavsAlignmentEnd navsAlignmentEnd;
-    @UI("#nav-vert-li") public static NavsVerticalLi navsVerticalLi;
-    @UI("#nav-vert-a") public static NavsVerticalA navsVerticalA;
-    @UI("#nav-tabs") public static NavsTabs navsTabs;
-    @UI("#nav-pills") public static NavsPills navsPills;
-    @UI("#nav-justify") public static NavsJustify navsJustify;
-    @UI("#nav-with-dropdown") public static NavsTabsWithDropdown navsTabsWithDropdown;
-    @UI("#nav-pills-drop") public static NavsPillsWithDropdown navsPillsWithDropdown;
-    @UI("#navbar-dark-colorscheme") public static NavbarColorScheme navbarDarkColorScheme;
-    @UI("#navbar-blue-colorscheme") public static NavbarColorScheme navbarBlueColorScheme;
-    @UI("#navbar-light-colorscheme") public static NavbarColorScheme navbarLightColorScheme;
-    @UI("#progress-multiple-bars") public static ProgressMultipleBars progressMultipleBars;
-    @UI(".card-columns") public static CardColumns cardColumns;
-    @UI("#list-example>a") public static ListGroup listGroupForScrollSpy;
-    @UI("#list-example~div") public static ScrollSpyNav scrollSpyWithListGroup;
-    @UI("#navbar-example3") public static NestedNav nestedNav;
-    @UI("#navbar-example3~div") public static ScrollSpyNav scrollSpyWithNestedNav;
-    @UI("#navbar-example2") public static NavbarWithDropdown navbarWithDropdown;
-    @UI("#navbar-example2~div") public static ScrollSpyNav scrollSpyInNavbar;
-    @UI("body") public static Popover popover;
-    @UI("body") public static CheckboxesDefaultInline checkboxesDefaultInline;
-    @UI("body") public static RadioButtonsDefaultInline radioButtonsDefaultInline;
-    @UI("body") public static CheckboxesDefault checkboxesDefault;
-    @UI("body") public static CheckboxesCustom checkboxesCustom;
-    @UI(".card-deck:nth-of-type(1)") public static CardDeck cardDeckWithoutFooter;
-    @UI(".card-deck:nth-of-type(2)") public static CardDeck cardDeckWithFooter;
-    @UI("#multiple-inputs") public static MultipleInputs multipleInputs;
-    @UI("#growing-spinners") public static GrowingSpinners growingSpinners;
-    @UI("#spinner-size") public static SpinnerSize spinnerSize;
-    @UI("body") public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
+    @UI("#input-group-checkbox")
+    public static InputGroupInputWithCheckBox inputGroupCheckBox;
+    @UI("#input-group-radio")
+    public static InputGroupInputWithRadio inputGroupRadio;
+    @UI("#input-group-basic-example1")
+    public static InputGroupInputWithText inputGroupBasicExample1;
+    @UI("#input-group-basic-example2")
+    public static InputGroupInputWithText inputGroupBasicExample2;
+    @UI("#input-group-basic-example3")
+    public static InputGroupInputWithLabelAndText inputGroupBasicExample3;
+    @UI("#input-group-basic-example4")
+    public static InputGroupInputWithTwoText inputGroupBasicExample4;
+    @UI("#input-group-basic-example5")
+    public static InputGroupTextareaWithText inputGroupBasicExample5;
+    @UI("#input-group-default")
+    public static InputGroupSizing inputGroupDefaultSizing;
+    @UI("#input-group-small")
+    public static InputGroupSizing inputGroupSmallSizing;
+    @UI("#input-group-large")
+    public static InputGroupSizing inputGroupLargeSizing;
+    // Button addons
+    @UI("#input-group-button-addon1")
+    public static ButtonAddons inputGroupButtonAddons1;
+    @UI("#input-group-button-addon2")
+    public static ButtonAddons inputGroupButtonAddons2;
+    @UI("#input-group-button-addon3")
+    public static ButtonAddons inputGroupButtonAddons3;
+    @UI("#input-group-button-addon4")
+    public static ButtonAddons inputGroupButtonAddons4;
+    @UI("#card-example")
+    public static CardExample cardExample;
+    @UI("#card-image")
+    public static CardImage cardImage;
+    @UI("#card-image-overlay")
+    public static CardImageOverlays cardImageOverlays;
+    @UI("#card-body")
+    public static CardBody cardBody;
+    @UI("#card-with-header")
+    public static CardWithHeaderAndFooter cardWithHeader;
+    @UI("#card-with-header-and-footer-quote")
+    public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
+    @UI("#card-with-header-and-footer")
+    public static CardWithHeaderAndFooter cardWithHeaderAndFooter;
+    @UI("#card-with-grid-markup")
+    public static CardWithGridMarkup cardWithGridMarkup;
+    @UI("#card-bright-blue")
+    public static CardWithHeaderAndFooter cardBrightBlue;
+    @UI("#card-grey")
+    public static CardWithHeaderAndFooter cardGrey;
+    @UI("#card-green")
+    public static CardWithHeaderAndFooter cardGreen;
+    @UI("#card-red")
+    public static CardWithHeaderAndFooter cardRed;
+    @UI("#card-yellow")
+    public static CardWithHeaderAndFooter cardYellow;
+    @UI("#card-blue")
+    public static CardWithHeaderAndFooter cardBlue;
+    @UI("#card-light")
+    public static CardWithHeaderAndFooter cardLight;
+    @UI("#card-dark")
+    public static CardWithHeaderAndFooter cardDark;
+    @UI("#card-border-primary")
+    public static CardBorder cardBorderPrimary;
+    @UI("#card-border-secondary")
+    public static CardBorder cardBorderSecondary;
+    @UI("#card-border-success")
+    public static CardBorder cardBorderSuccess;
+    @UI("#card-border-danger")
+    public static CardBorder cardBorderDanger;
+    @UI("#card-border-warning")
+    public static CardBorder cardBorderWarning;
+    @UI("#card-border-info")
+    public static CardBorder cardBorderInfo;
+    @UI("#card-border-light")
+    public static CardBorder cardBorderLight;
+    @UI("#card-border-dark")
+    public static CardBorder cardBorderDark;
+    @UI(".w-75")
+    public static CardUtilities cardWidth75;
+    @UI(".w-50")
+    public static CardUtilities cardWidth50;
+    @UI("#button-with-dropdown")
+    public static ButtonWithDropdown buttonWithDropdown;
+    @UI("#segmented-button")
+    public static SegmentedButton segmentedButton;
+    @UI("#buttonToolbar1")
+    public static ButtonToolbar buttonToolbar;
+    @UI("#buttonToolbar2")
+    public static ButtonToolbar buttonToolbarWithInputField;
+    @UI("#card-subtitle-link")
+    public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
+    @UI("#card-custom-css-1")
+    public static CardWithCustomCss13Rem cardWithCustomCss13Rem;
+    @UI("#card-custom-css-2")
+    public static CardWithCustomCss9Rem cardWithCustomCss9Rem;
+    @UI("#card-mixins-utilities")
+    public static CardMixinsUtilities cardMixinsUtilities;
+    @UI("#card-horizontal")
+    public static CardHorizontal cardHorizontal;
+    @UI("#custom-select-01")
+    public static CustomSelect customSelect;
+    @UI("#custom-select-button-01")
+    public static CustomSelectWithButton customSelectWithButton;
+    @UI("#media-object-sample")
+    public static MediaObjectSample mediaObjectSample;
+    @UI("#media-object-nesting")
+    public static MediaObjectNesting mediaObjectNesting;
+    @UI("#media-object-list")
+    public static JList<MediaObjectSample> mediaObjectList;
+    @UI("#multiple-addons-1")
+    public static InputGroupMultipleAddonsUpper multipleAddonUpper;
+    @UI("#multiple-addons-2")
+    public static InputGroupMultipleAddonsLower multipleAddonLower;
+    @UI("#basic-example")
+    public static ButtonGroupBasicExample buttonGroupBasicExample;
+    @UI("#vertical-variation")
+    public static ButtonGroupVerticalVariation buttonGroupVerticalVariation;
+    @UI("#button-group-nesting")
+    public static ButtonGroupNesting buttonGroupNesting;
+    @UI("#btn-lg-group")
+    public static ButtonGroupSizing largeBtnGroup;
+    @UI("#btn-md-group")
+    public static ButtonGroupSizing defaultBtnGroup;
+    @UI("#btn-sm-group")
+    public static ButtonGroupSizing smallBtnGroup;
+    @UI("#card-text-left")
+    public static CardTextAlignment cardLeftTextAlignment;
+    @UI("#card-text-center")
+    public static CardTextAlignment cardCenterTextAlignment;
+    @UI("#card-text-right")
+    public static CardTextAlignment cardRightTextAlignment;
+    @UI("#list-group-basic-example")
+    public static ListGroupBasicExample listGroupBasicExample;
+    @UI("#list-group-active-items")
+    public static ListGroupActiveItems listGroupActiveItems;
+    @UI("#disabled-items")
+    public static ListGroupDisabledItems listGroupDisabledItems;
+    @UI("#list-group-links")
+    public static ListGroupLinks listGroupLinks;
+    @UI("#list-group-buttons")
+    public static ListGroupButtons listGroupButtons;
+    @UI("#list-group-flush")
+    public static ListGroupFlush listGroupFlush;
+    @UI("#list-group-horizontal")
+    public static ListGroupHorizontal listGroupHorizontal;
+    @UI("#list-group-with-badges")
+    public static ListGroupWithBadges listGroupWithBadges;
+    @UI("#list-group-custom-content")
+    public static ListGroupCustomContent listGroupCustomContent;
+    @UI("#radio-buttons")
+    public static RadioButtonGroup radioButtonGroup;
+    @UI(".card-group:nth-of-type(1)")
+    public static CardGroup cardGroupWithoutFooter;
+    @UI(".card-group:nth-of-type(2)")
+    public static CardGroup cardGroupWithFooter;
+    @UI("#card-list-groups")
+    public static CardListGroups cardListGroups;
+    @UI("#pagination-overview")
+    public static PaginationOverview paginationOverview;
+    @UI("#pagination-icons")
+    public static PaginationIcons paginationIcons;
+    @UI("#pagination-states")
+    public static PaginationStates paginationStates;
+    @UI("#pagination-big")
+    public static PaginationSizeBig paginationSizeBig;
+    @UI("#pagination-small")
+    public static PaginationSizeSmall paginationSizeSmall;
+    @UI("#pagination-center")
+    public static PaginationAlignCenter paginationAlignCenter;
+    @UI("#pagination-end")
+    public static PaginationAlignEnd paginationAlignEnd;
+    @UI("#nav-base-li")
+    public static NavsBaseLi navsBaseLi;
+    @UI("#nav-base-a")
+    public static NavsBaseA navsBaseA;
+    @UI("#nav-center")
+    public static NavsAlignmentCenter navsAlignmentCenter;
+    @UI("#nav-end")
+    public static NavsAlignmentEnd navsAlignmentEnd;
+    @UI("#nav-vert-li")
+    public static NavsVerticalLi navsVerticalLi;
+    @UI("#nav-vert-a")
+    public static NavsVerticalA navsVerticalA;
+    @UI("#nav-tabs")
+    public static NavsTabs navsTabs;
+    @UI("#nav-pills")
+    public static NavsPills navsPills;
+    @UI("#nav-justify")
+    public static NavsJustify navsJustify;
+    @UI("#nav-with-dropdown")
+    public static NavsTabsWithDropdown navsTabsWithDropdown;
+    @UI("#nav-pills-drop")
+    public static NavsPillsWithDropdown navsPillsWithDropdown;
+    @UI("#navbar-dark-colorscheme")
+    public static NavbarColorScheme navbarDarkColorScheme;
+    @UI("#navbar-blue-colorscheme")
+    public static NavbarColorScheme navbarBlueColorScheme;
+    @UI("#navbar-light-colorscheme")
+    public static NavbarColorScheme navbarLightColorScheme;
+    @UI("#progress-multiple-bars")
+    public static ProgressMultipleBars progressMultipleBars;
+    @UI(".card-columns")
+    public static CardColumns cardColumns;
+    @UI("#list-example>a")
+    public static ListGroup listGroupForScrollSpy;
+    @UI("#list-example~div")
+    public static ScrollSpyNav scrollSpyWithListGroup;
+    @UI("#navbar-example3")
+    public static NestedNav nestedNav;
+    @UI("#navbar-example3~div")
+    public static ScrollSpyNav scrollSpyWithNestedNav;
+    @UI("#navbar-example2")
+    public static NavbarWithDropdown navbarWithDropdown;
+    @UI("#navbar-example2~div")
+    public static ScrollSpyNav scrollSpyInNavbar;
+    @UI("body")
+    public static Popover popover;
+    @UI("body")
+    public static CheckboxesDefaultInline checkboxesDefaultInline;
+    @UI("body")
+    public static RadioButtonsDefaultInline radioButtonsDefaultInline;
+    @UI("body")
+    public static CheckboxesDefault checkboxesDefault;
+    @UI("body")
+    public static CheckboxesCustom checkboxesCustom;
+    @UI(".card-deck:nth-of-type(1)")
+    public static CardDeck cardDeckWithoutFooter;
+    @UI(".card-deck:nth-of-type(2)")
+    public static CardDeck cardDeckWithFooter;
+    @UI("#multiple-inputs")
+    public static MultipleInputs multipleInputs;
+    @UI("#growing-spinners")
+    public static GrowingSpinners growingSpinners;
+    @UI("#spinner-size")
+    public static SpinnerSize spinnerSize;
+    @UI("body")
+    public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
+    @UI("#validation-submit-form")
+    public static FormCustomStyles formCustomStyles;
 
+    @UI("//h4[.='Navbar - Text']/../..")
+    public static NavbarText navbarText;
 
-    @UI("#striped-base .progress") public static JList<ProgressSection> progressSections;
-
-    @UI("#button-with-spinner-and-text") public static ButtonWithSpinner buttonWithSpinnerAndText;
-    @UI("#button-with-spinner") public static ButtonWithSpinner buttonWithSpinner;
-    @UI("#button-with-growing-spinner-and-text") public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
-    @UI("#button-with-growing-spinner") public static ButtonWithSpinner buttonWithGrowingSpinner;
-
-    @UI("#navbar-form-1") public static NavbarForm navbarForm;
-    @UI("#navbar-form-2") public static NavbarForm navbarFormWithText;
-    @UI("#navbar-form-3") public static NavbarWithInputGroupForm navbarFormWithInputGroup;
+    @UI("#striped-base .progress")
+    public static JList<ProgressSection> progressSections;
 
     @UI("#navbar-base-for-brand") public static NavbarSection navbarSection;
 
+    @UI("#button-with-spinner-and-text")
+    public static ButtonWithSpinner buttonWithSpinnerAndText;
+    @UI("#button-with-spinner")
+    public static ButtonWithSpinner buttonWithSpinner;
+    @UI("#button-with-growing-spinner-and-text")
+    public static ButtonWithSpinner buttonWithGrowingSpinnerAndText;
+    @UI("#button-with-growing-spinner")
+    public static ButtonWithSpinner buttonWithGrowingSpinner;
+    @UI("#navbar-form-1")
+    public static NavbarForm navbarForm;
+    @UI("#navbar-form-2")
+    public static NavbarForm navbarFormWithText;
+    @UI("#navbar-form-3")
+    public static NavbarWithInputGroupForm navbarFormWithInputGroup;
+
     //Toasts
-    @UI("#toastRightTop") public static Toast toastWithTopAlign;
-    @UI("#linkToastRightTop") public static Button toastWithTopAlignButton;
-    @UI("#simpleToast") public static Toast simpleToast;
-    @UI("#linkSimpleToastExample") public static Button simpleToastButton;
-    @UI("#multipleToast") public static Button stackOfToastsButton;
-    @UI("#firstMultipleToast") public static Toast firstStackToast;
-    @UI("#secondMultipleToast") public static Toast secondStackToast;
-    @UI("#linkStackAlign") public static Button stackOfToastsWithTopAlignButton;
-    @UI("#firstStackToast") public static Toast firstTopAlignStackToast;
-    @UI("#secondStackToast") public static Toast secondTopAlignStackToast;
-    @UI("#linkToastCenterTop") public static Button toastWithCenterAlignButton;
-    @UI("#toastCenterTop") public static Toast toastWithCenterAlign;
-    @UI("body") public static CheckboxAndRadioButtonCustomDisabled checkboxAndRadioButtonCustomDisabled;
-    @UI("body") public static Switches switches;
-    @UI("body") public static RadioButtonsCustomInline radioButtonsCustomInline;
-    @UI("#translucentToastButton") public static Button translucentToastButton;
-    @UI("#translucentToast") public static Toast translucentToast;
-    @UI("#custom-radio-con") public static RadioButtonsCustom radioButtonCustom;
-    //Navbar
-    @UI("#navbar-external-content") public static NavbarExternalContent navbarExternalContent;
+    @UI("#toastRightTop")
+    public static Toast toastWithTopAlign;
+    @UI("#linkToastRightTop")
+    public static Button toastWithTopAlignButton;
+    @UI("#simpleToast")
+    public static Toast simpleToast;
+    @UI("#linkSimpleToastExample")
+    public static Button simpleToastButton;
+    @UI("#multipleToast")
+    public static Button stackOfToastsButton;
+    @UI("#firstMultipleToast")
+    public static Toast firstStackToast;
+    @UI("#secondMultipleToast")
+    public static Toast secondStackToast;
+    @UI("#linkStackAlign")
+    public static Button stackOfToastsWithTopAlignButton;
+    @UI("#firstStackToast")
+    public static Toast firstTopAlignStackToast;
+    @UI("#secondStackToast")
+    public static Toast secondTopAlignStackToast;
+    @UI("#linkToastCenterTop")
+    public static Button toastWithCenterAlignButton;
+    @UI("#toastCenterTop")
+    public static Toast toastWithCenterAlign;
+    @UI("#spinner-alignment")
+    public static SpinnerAlignment spinnerAlignment;
+    @UI("body")
+    public static CheckboxAndRadioButtonCustomDisabled checkboxAndRadioButtonCustomDisabled;
+    @UI("body")
+    public static Switches switches;
+    @UI("body")
+    public static RadioButtonsCustomInline radioButtonsCustomInline;
+    @UI("#translucentToastButton")
+    public static Button translucentToastButton;
+    @UI("#translucentToast")
+    public static Toast translucentToast;
+    @UI("#custom-radio-con")
+    public static RadioButtonsCustom radioButtonCustom;
+
+    //Navbars
+    @UI("#navbar-external-content")
+    public static NavbarExternalContent navbarExternalContent;
+    @UI("#navbar-supported-content")
+    public static NavbarSupportedContent navbarSupportedContent;
     //endregion
 }

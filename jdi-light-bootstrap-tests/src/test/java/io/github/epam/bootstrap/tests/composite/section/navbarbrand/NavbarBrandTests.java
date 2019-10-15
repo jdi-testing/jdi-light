@@ -31,7 +31,7 @@ public class NavbarBrandTests extends TestsInit {
         bsPage.shouldBeOpened();
 
         navbarBrandList = new ArrayList<NavbarBrand>();
-        for (int i = 0; i < navbarSection.navbarBrandJList.size(); i++)
+        for (int i = 1; i <= navbarSection.navbarBrandJList.size(); i++)
             navbarBrandList.add(navbarSection.navbarBrandJList.get(i));
     }
 
@@ -73,7 +73,7 @@ public class NavbarBrandTests extends TestsInit {
     public void checkNavbarClickImage() {
         navbarBrandList.stream()
                 .filter(nbb -> nbb.isLink() && nbb.childs().size() > 0)
-                .map(nbbWithIm -> nbbWithIm.childs().get(0))
+                .map(nbbWithIm -> nbbWithIm.childs().get(1))
                 .forEach(imgFromNavbar -> {
 
                     imgFromNavbar.highlight("blue");
