@@ -83,18 +83,19 @@ public class ActionHelper {
             } else if (template.contains("%s")) {
                 template = format(template, getArgs(jp));
             }
+            String newTemplate = null;
             if (template.contains("{")) {
                 MapArray<String, Object> obj = toMap(() -> new MapArray<>("this", getElementName(jp)));
                 MapArray<String, Object> args = methodArgs(jp, method);
                 MapArray<String, Object> core = core(jp);
                 MapArray<String, Object> fields = classFields(jp.getThis());
-                template = getActionNameFromTemplate(method, template, obj, args, core, fields);
-                if (template.contains("{{VALUE}}") && args.size() > 0)
-                    template = template.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
-                if (template.contains("{failElement}"))
-                    template = template.replaceAll("\\{failElement}", obj.get(0).value.toString());
+                newTemplate = getActionNameFromTemplate(method, template, obj, args, core, fields);
+                if (newTemplate.contains("{{VALUE}}") && args.size() > 0)
+                    newTemplate = newTemplate.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
+                if (newTemplate.contains("{failElement}"))
+                    newTemplate = newTemplate.replaceAll("\\{failElement}", obj.get(0).value.toString());
             }
-            return template;
+            return newTemplate != null ? newTemplate : template;
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName() +
                 LINE_BREAK + "" + safeException(ex));
