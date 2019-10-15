@@ -11,8 +11,6 @@ import static io.github.com.pages.BootstrapPage.readonlyPlainText1;
 import static io.github.com.pages.BootstrapPage.readonlyPlainText2;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.core.StringContains.containsString;
-import static org.testng.Assert.assertEquals;
 
 public class ReadonlyPlainTextTests extends TestsInit {
 
@@ -55,7 +53,6 @@ public class ReadonlyPlainTextTests extends TestsInit {
 
     @Test(dataProvider = "itemsUnderTesting")
     public void labelTest(ReadonlyPlainText item) {
-        assertEquals(item.labelText(), labelTextValue);
-        item.label().is().text(containsString(labelTextValue));
+        item.label().is().text(labelTextValue);
     }
 }
