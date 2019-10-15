@@ -36,6 +36,7 @@ import io.github.com.sections.CardExample;
 import io.github.com.sections.CardGroup;
 import io.github.com.sections.CardHorizontal;
 import io.github.com.sections.CardImage;
+import io.github.com.sections.CardKitchenSink;
 import io.github.com.sections.CardListGroups;
 import io.github.com.sections.CardMixinsUtilities;
 import io.github.com.sections.CardTextAlignment;
@@ -286,6 +287,8 @@ public class BootstrapPage extends WebPage {
     public static CardImage cardImage;
     @UI("#card-body")
     public static CardBody cardBody;
+    @UI("#card-kitchen-sink")
+    public static CardKitchenSink cardKitchenSink;
     @UI("#card-with-header")
     public static CardWithHeaderAndFooter cardWithHeader;
     @UI("#card-with-header-and-footer-quote")
