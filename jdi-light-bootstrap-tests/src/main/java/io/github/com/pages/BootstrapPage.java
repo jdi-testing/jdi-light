@@ -19,6 +19,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.MediaObject;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.modal.ModalVaryingContent;
@@ -278,8 +279,10 @@ public class BootstrapPage extends WebPage {
     public static Button modalFatButton;
     @UI("#modalGetbootstrap")
     public static Button modalGetbootstrapButton;
-    @UI(".modal-content")
+    @UI("#modalVaryingContentWindow")
     public static ModalVaryingContent modalVaryingContentWindow;
+    @UI("#exampleModal")
+    public static MediaObject modalVaryingContentContainer;
     // Button addons
     @UI("#input-group-button-addon1")
     public static ButtonAddons inputGroupButtonAddons1;

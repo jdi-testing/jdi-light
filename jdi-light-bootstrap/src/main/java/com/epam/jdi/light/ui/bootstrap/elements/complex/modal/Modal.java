@@ -10,5 +10,5 @@ public class Modal extends Section {
     @UI(".modal-header .modal-title")
     public Text title;
     @UI(".modal-header button")
-    public Button button;
+    public Button closeX;
 }
