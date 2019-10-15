@@ -181,24 +181,32 @@ public class WebSettings {
 
     private static void setSearchStrategy(String p) {
         p = p.toLowerCase();
-        if (("soft").equals(p))
+        if (("soft").equals(p)) {
             p = "any, multiple";
-        if (("strict").equals(p))
+        } else if (("strict").equals(p)) {
             p = "visible, single";
+        }
+
         if (p.split(",").length == 2) {
             List<String> params = asList(p.split(","));
-            if (params.contains("visible") || params.contains("displayed"))
+            if (params.contains("visible") || params.contains("displayed")) {
                 onlyVisible();
-            if (params.contains("any") || params.contains("all"))
+            }
+            if (params.contains("any") || params.contains("all")) {
                 noValidation();
-            if (params.contains("enabled"))
+            }
+            if (params.contains("enabled")) {
                 visibleEnabled();
-            if (params.contains("inview"))
+            }
+            if (params.contains("inview")) {
                 inView();
-            if (params.contains("single"))
+            }
+            if (params.contains("single")) {
                 STRICT_SEARCH = true;
-            if (params.contains("multiple"))
+            }
+            if (params.contains("multiple")) {
                 STRICT_SEARCH = false;
+            }
         }
     }
 
