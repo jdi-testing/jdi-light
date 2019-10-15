@@ -2611,7 +2611,7 @@
 
                     <div class="doc-space line">
                         <div class="html-left">
-                            <form class="mb-3">
+                            <form id="forms-overview" class="mb-3">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
                                     <input type="email" class="form-control" id="exampleInputEmail1"
@@ -2628,7 +2628,9 @@
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary"
+                                        onclick="alert('Form filled and submitted successfully');">Submit
+                                </button>
                             </form>
                         </div>
                         <div class="html-right">
@@ -2703,12 +2705,15 @@
                             <div class="mb-3">
                                 <select class="form-control form-control-lg mb-3" id="form-sizing-select-lg">
                                     <option>Large select</option>
+                                    <option>Large option</option>
                                 </select>
                                 <select class="form-control mb-3" id="form-sizing-select-default">
                                     <option>Default select</option>
+                                    <option>Default option</option>
                                 </select>
                                 <select class="form-control form-control-sm mb-3" id="form-sizing-select-sm">
                                     <option>Small select</option>
+                                    <option>Small option</option>
                                 </select>
                             </div>
                         </div>
@@ -2861,7 +2866,7 @@
 
                     <div class="doc-space line">
                         <div class="html-left">
-                            <form>
+                            <form id="form-horizontal">
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
@@ -2916,7 +2921,9 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                        <button type="submit" class="btn btn-primary"
+                                                onclick="alert('Form filled and submitted successfully');">Sign in
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -3157,7 +3164,7 @@
                         </small>
 
                         <form class="form-inline mb-3">
-                            <div class="form-group">
+                            <div id="form-help-text-pass" class="form-group">
                                 <label for="inputPassword6">Password</label>
                                 <input type="password" id="inputPassword6" class="form-control mx-sm-3"
                                        aria-describedby="passwordHelpInline">
@@ -3180,7 +3187,7 @@
 
                     <div class="doc-space line">
                         <div class="html-left">
-                            <form class="mb-3">
+                            <form id="form-disabled" class="mb-3">
                                 <fieldset disabled>
                                     <div class="form-group">
                                         <label for="disabledTextInput">Disabled input</label>
