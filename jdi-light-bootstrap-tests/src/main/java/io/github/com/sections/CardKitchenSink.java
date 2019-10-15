@@ -11,5 +11,6 @@ public class CardKitchenSink extends Section {
     @UI(".card-title") public Text title;
     @UI(".card-text") public Text text;
     @UI(".card-body") public WebList body;
+    @UI(".card-link") public WebList links;
     @UI(".list-group") public WebList list;
 }
