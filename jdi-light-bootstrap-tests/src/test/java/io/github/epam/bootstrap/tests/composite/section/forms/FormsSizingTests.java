@@ -58,12 +58,12 @@ public class FormsSizingTests extends TestsInit {
 
     @Test
     public void selectOptionTest() {
-        formsSizing.largeSelect.select("Large select");
-        assertEquals(formsSizing.largeSelect.getValue(), "Large select");
-        formsSizing.defaultSelect.select("Default select");
-        assertEquals(formsSizing.defaultSelect.getValue(), "Default select");
-        formsSizing.smallSelect.select("Small select");
-        assertEquals(formsSizing.smallSelect.getValue(), "Small select");
+        formsSizing.largeSelect.select("Large option");
+        assertEquals(formsSizing.largeSelect.getValue(), "Large option");
+        formsSizing.defaultSelect.select("Default option");
+        assertEquals(formsSizing.defaultSelect.getValue(), "Default option");
+        formsSizing.smallSelect.select("Small option");
+        assertEquals(formsSizing.smallSelect.getValue(), "Small option");
     }
 
     @Test
