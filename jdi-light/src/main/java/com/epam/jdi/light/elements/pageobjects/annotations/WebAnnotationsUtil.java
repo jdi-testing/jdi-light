@@ -10,11 +10,17 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.WithText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
+import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Quotes;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.byText;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
@@ -56,81 +62,75 @@ public class WebAnnotationsUtil {
     }
 
     public static By getFrame(Frame frame) {
-        if (frame == null) return null;
+        if (frame == null) {
+            return null;
+        }
 
-        if (!"".equals(frame.value()))
-            return By.id(frame.value());
+        List<Pair<Supplier<String>, Function<String,By>>> remap = new ArrayList<>();
+        remap.add(map(frame::value, By::id));
+        remap.add(map(frame::xpath, By::xpath));
+        remap.add(map(frame::css, By::cssSelector));
+        remap.add(map(frame::linkText, By::linkText));
+        remap.add(map(frame::partialLinkText, By::partialLinkText));
+        remap.add(map(frame::tagName, By::tagName));
+        remap.add(map(frame::text,
+                t -> By.xpath(".//*/text()[normalize-space(.) = " + Quotes.escape(t) + "]/parent::*")));
+        remap.add(map(frame::id, By::id));
+        remap.add(map(frame::className, By::className));
+        remap.add(map(frame::name, By::name));
 
-        if (!"".equals(frame.xpath()))
-            return By.xpath(frame.xpath());
-        if (!"".equals(frame.css()))
-            return By.cssSelector(frame.css());
-        if (!"".equals(frame.linkText()))
-            return By.linkText(frame.linkText());
-        if (!"".equals(frame.partialLinkText()))
-            return By.partialLinkText(frame.partialLinkText());
-        if (!"".equals(frame.tagName()))
-            return By.tagName(frame.tagName());
-
-        if (!"".equals(frame.text()))
-            return By.xpath(".//*/text()[normalize-space(.) = " +
-                    Quotes.escape(frame.text()) + "]/parent::*");
-
-        if (!"".equals(frame.id()))
-            return By.id(frame.id());
-        if (!"".equals(frame.className()))
-            return By.className(frame.className());
-        if (!"".equals(frame.name()))
-            return By.name(frame.name());
-
-        return null;
+        return getMappedBy(remap);
     }
 
     public static By findByToBy(org.openqa.selenium.support.FindBy locator) {
-        if (locator == null) return null;
-        if (!locator.id().isEmpty())
-            return By.id(locator.id());
-        if (!locator.className().isEmpty())
-            return By.className(locator.className());
-        if (!locator.xpath().isEmpty())
-            return By.xpath(locator.xpath());
-        if (!locator.css().isEmpty())
-            return By.cssSelector(locator.css());
-        if (!locator.linkText().isEmpty())
-            return By.linkText(locator.linkText());
-        if (!locator.name().isEmpty())
-            return By.name(locator.name());
-        if (!locator.partialLinkText().isEmpty())
-            return By.partialLinkText(locator.partialLinkText());
-        if (!locator.tagName().isEmpty())
-            return By.tagName(locator.tagName());
-        return null;
+        if (locator == null) {
+            return null;
+        }
+
+        List<Pair<Supplier<String>, Function<String,By>>> remap = new ArrayList<>();
+        remap.add(map(locator::id, By::id));
+        remap.add(map(locator::className, By::className));
+        remap.add(map(locator::xpath, By::xpath));
+        remap.add(map(locator::css, By::cssSelector));
+        remap.add(map(locator::linkText, By::linkText));
+        remap.add(map(locator::name, By::name));
+        remap.add(map(locator::partialLinkText, By::partialLinkText));
+        remap.add(map(locator::tagName, By::tagName));
+
+        return getMappedBy(remap);
     }
 
     public static By findByToBy(FindBy locator) {
-        if (locator == null) return null;
+        if (locator == null) {
+            return null;
+        }
 
-        if (!"".equals(locator.xpath()))
-            return By.xpath(locator.xpath());
-        if (!"".equals(locator.css()))
-            return By.cssSelector(locator.css());
-        if (!"".equals(locator.linkText()))
-            return By.linkText(locator.linkText());
-        if (!"".equals(locator.partialLinkText()))
-            return By.partialLinkText(locator.partialLinkText());
-        if (!"".equals(locator.tagName()))
-            return By.tagName(locator.tagName());
+        List<Pair<Supplier<String>, Function<String,By>>> remap = new ArrayList<>();
+        remap.add(map(locator::xpath, By::xpath));
+        remap.add(map(locator::css, By::cssSelector));
+        remap.add(map(locator::linkText, By::linkText));
+        remap.add(map(locator::partialLinkText, By::partialLinkText));
+        remap.add(map(locator::tagName, By::tagName));
+        remap.add(map(locator::text, (t) -> By.xpath(".//*/text()[normalize-space(.) = " +
+                Quotes.escape(t) + "]/parent::*")));
+        remap.add(map(locator::id, By::id));
+        remap.add(map(locator::className, By::className));
+        remap.add(map(locator::name, By::name));
 
-        if (!"".equals(locator.text()))
-            return By.xpath(".//*/text()[normalize-space(.) = " +
-                Quotes.escape(locator.text()) + "]/parent::*");
+        return getMappedBy(remap);
+    }
 
-        if (!"".equals(locator.id()))
-            return By.id(locator.id());
-        if (!"".equals(locator.className()))
-            return By.className(locator.className());
-        if (!"".equals(locator.name()))
-            return By.name(locator.name());
+    private static Pair<Supplier<String>, Function<String,By>> map(Supplier<String> textKey,  Function<String,By> byValue) {
+        return new Pair<> (textKey, byValue);
+    }
+
+    private static By getMappedBy(List<Pair<Supplier<String>, Function<String,By>>> remap) {
+        for(Pair<Supplier<String>, Function<String,By>> rule : remap) {
+            String frameKey = rule.key.get();
+            if(!frameKey.isEmpty()) {
+                return rule.value.apply(frameKey);
+            }
+        }
 
         return null;
     }
