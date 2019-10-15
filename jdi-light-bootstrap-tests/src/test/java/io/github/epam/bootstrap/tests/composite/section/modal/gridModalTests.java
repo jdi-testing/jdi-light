@@ -58,11 +58,11 @@ public class gridModalTests extends TestsInit {
     @DataProvider
     public static Object[][] gridData() {
         return new Object[][]{
-                {0, 0, ".col-md-4", "33"},
-                {1, 0, ".col-md-3 .ml-auto", "25"},
-                {1, 1, ".col-md-2 .ml-auto", "16"},
-                {3, 1, "Level 2: .col-8 .col-sm-6", "50"},
-                {3, 2, "Level 2: .col-4 .col-sm-6", "50"},
+                {1, 1, ".col-md-4", "33"},
+                {2, 1, ".col-md-3 .ml-auto", "25"},
+                {2, 2, ".col-md-2 .ml-auto", "16"},
+                {4, 2, "Level 2: .col-8 .col-sm-6", "50"},
+                {4, 3, "Level 2: .col-4 .col-sm-6", "50"},
         };
     }
 
