@@ -12,6 +12,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class SpinnerSizeTests extends TestsInit {
 
+    // Fields
     private static final String smallSpinnerClass = "spinner-border-sm";
     private static final String smallGrowingSpinnerClass = "spinner-grow-sm";
     private static final String spinnerStyleValue = "width: 3rem; height: 3rem; border: 3px dashed red;";
