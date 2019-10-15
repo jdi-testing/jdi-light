@@ -1,7 +1,9 @@
 package io.github.epam.bootstrap.tests.composite.section.form;
 
+import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
@@ -17,48 +19,43 @@ public class ReadonlyPlainTextTests extends TestsInit {
     private static final String plainTextValue = "email@example.com";
     private static final String labelTextValue = "Email";
 
+    @DataProvider
+    public static Object[] itemsUnderTesting(){
+        return new Object[]{readonlyPlainText1, readonlyPlainText2};
+    }
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
 
-    @Test
-    public void baseValidationTest() {
-        baseValidation(readonlyPlainText1);
-        readonlyPlainText1.unhighlight();
-        baseValidation(readonlyPlainText2);
-        readonlyPlainText2.unhighlight();
+    @Test (dataProvider = "itemsUnderTesting")
+    public void baseValidationTest(ReadonlyPlainText item) {
+        baseValidation(item);
+        item.unhighlight();
     }
 
-    @Test
-    public void isValidationTest() {
-        readonlyPlainText1.is().core().hasClass("form-control-plaintext");
-        readonlyPlainText1.hasAttribute("readonly");
-        readonlyPlainText1.is().core().attr("type", "text");
+    @Test (dataProvider = "itemsUnderTesting")
+    public void isValidationTest(ReadonlyPlainText item) {
+        item.is().core().hasClass("form-control-plaintext");
+        item.hasAttribute("readonly");
+        item.is().core().attr("type", "text");
+}
 
-        readonlyPlainText2.is().core().hasClass("form-control-plaintext");
-        readonlyPlainText2.hasAttribute("readonly");
-        readonlyPlainText1.is().core().attr("type", "text");
+    @Test (dataProvider = "itemsUnderTesting")
+    public void textValidationTest(ReadonlyPlainText item) {
+        item.is().text(plainTextValue);
     }
 
-    @Test
-    public void textValidationTest() {
-        readonlyPlainText1.is().text(plainTextValue);
-        readonlyPlainText2.is().text(plainTextValue);
+    @Test (dataProvider = "itemsUnderTesting")
+    public void valueValidationTest(ReadonlyPlainText item) {
+        item.is().value(plainTextValue);
     }
 
-    @Test
-    public void valueValidationTest() {
-        readonlyPlainText1.is().value(plainTextValue);
-        readonlyPlainText2.is().value(plainTextValue);
-    }
-
-    @Test
-    public void labelTest() {
-        assertEquals(readonlyPlainText1.labelText(), labelTextValue);
-        readonlyPlainText1.label().is().text(containsString(labelTextValue));
-        assertEquals(readonlyPlainText2.labelText(), labelTextValue);
-        readonlyPlainText2.label().is().text(containsString(labelTextValue));
+    @Test (dataProvider = "itemsUnderTesting")
+    public void labelTest(ReadonlyPlainText item) {
+        assertEquals(item.labelText(), labelTextValue);
+        item.label().is().text(containsString(labelTextValue));
     }
 }

@@ -203,10 +203,6 @@ public class BootstrapPage extends WebPage {
     public static Button buttonSpinnerBorder;
     @UI("#spinner-border")
     public static Spinner spinnerBorder;
-    @UI("#navbar-containers-centred")
-    public static Navbar navbarCentredContainer;
-    @UI("#navbar-containers-expanded")
-    public static Navbar navbarExpandedContainer;
     @UI("#readonlyPlainText1")
     public static ReadonlyPlainText readonlyPlainText1;
     @UI("#readonlyPlainText2")
