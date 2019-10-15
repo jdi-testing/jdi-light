@@ -7,7 +7,6 @@ package com.epam.jdi.light.settings;
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.common.ElementArea;
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.driver.WebDriverFactory;
@@ -59,7 +58,6 @@ import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
-import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.openqa.selenium.PageLoadStrategy.EAGER;
@@ -191,7 +189,7 @@ public class WebSettings {
         String[] params = p.split(",");
 
         if (params.length != 2) {
-            Exceptions.exception("You must specify exact two parameters, " +
+            exception("You must specify exact two parameters, " +
                     "or use 'soft' or 'strict' as shortcats for 'any, multiple' and 'visible, single'");
         }
 
@@ -212,7 +210,7 @@ public class WebSettings {
         } else if ("inview".equals(param)) {
             inView();
         } else {
-            Exceptions.exception("%s is not correct visibility parameter", param);
+            exception("%s is not correct visibility parameter", param);
         }
     }
 
@@ -222,7 +220,7 @@ public class WebSettings {
         } else if ("multiple".equals(param)) {
             STRICT_SEARCH = false;
         } else {
-            Exceptions.exception("%s is not correct search type parameter", param);
+            exception("%s is not correct search type parameter", param);
         }
     }
 
