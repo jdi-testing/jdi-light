@@ -20,7 +20,12 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
-import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.logger.LogLevels.INFO;
+import static com.epam.jdi.light.logger.LogLevels.OFF;
+import static com.epam.jdi.light.logger.LogLevels.STEP;
+import static com.epam.jdi.light.logger.LogLevels.TRACE;
+import static com.epam.jdi.light.logger.LogLevels.getLog4j2Level;
 import static com.epam.jdi.tools.StringUtils.format;
 import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
 import static io.qameta.allure.model.Status.PASSED;

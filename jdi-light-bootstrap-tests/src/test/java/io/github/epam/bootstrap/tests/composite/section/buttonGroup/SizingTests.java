@@ -6,7 +6,9 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.defaultBtnGroup;
+import static io.github.com.pages.BootstrapPage.largeBtnGroup;
+import static io.github.com.pages.BootstrapPage.smallBtnGroup;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -1,11 +1,11 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.SeleniumWebList;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.JList;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -15,8 +15,26 @@ import com.epam.jdi.light.elements.init.rules.SetupRule;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
-import com.epam.jdi.light.elements.pageobjects.annotations.*;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.ClickArea;
+import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
+import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
+import com.epam.jdi.light.elements.pageobjects.annotations.GetAny;
+import com.epam.jdi.light.elements.pageobjects.annotations.GetShowInView;
+import com.epam.jdi.light.elements.pageobjects.annotations.GetTextAs;
+import com.epam.jdi.light.elements.pageobjects.annotations.GetVisible;
+import com.epam.jdi.light.elements.pageobjects.annotations.GetVisibleEnabled;
+import com.epam.jdi.light.elements.pageobjects.annotations.Name;
+import com.epam.jdi.light.elements.pageobjects.annotations.NoCache;
+import com.epam.jdi.light.elements.pageobjects.annotations.NoWait;
+import com.epam.jdi.light.elements.pageobjects.annotations.Root;
+import com.epam.jdi.light.elements.pageobjects.annotations.Title;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.ByText;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.WithText;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
@@ -36,10 +54,17 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
 import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
 import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.findByToBy;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getAnnotation;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getFrame;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.LinqUtils.any;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.isClassOr;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -63,7 +88,7 @@ public class InitActions {
         $(IsDropdown.class, Dropdown.class)
     );
     public static MapArray<String, InitRule> INIT_RULES = map(
-        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList())),
+        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new SeleniumWebList())),
         $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
             info -> new DataList())),
         $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), ICoreElement.class),

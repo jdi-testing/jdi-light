@@ -21,9 +21,14 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.ifSelect;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.getFieldsExact;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.util.Arrays.asList;
@@ -446,7 +451,8 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
         List<Field> fields = getFieldsExact(line.getClass(), f -> isInterface(f, HasValue.class));
         MapArray<String, String> result = new MapArray<>();
         for (Field field : fields) {
-            String name = "", value = "";
+            String name = "";
+            String value = "";
             try {
                 name = field.getName();
                 value = ((HasValue) field.get(line)).getValue();

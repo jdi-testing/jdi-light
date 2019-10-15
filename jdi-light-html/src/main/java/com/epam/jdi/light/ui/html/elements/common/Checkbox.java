@@ -12,7 +12,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
     implements HasLabel, SetValue, HasClick, HasCheck {
     // region Actions
     public void check(String value) {
-        if (value.equalsIgnoreCase("true") || value.equals("1"))
+        if (("true").equalsIgnoreCase(value) || ("1").equals(value))
             check();
         else uncheck();
     }

@@ -11,7 +11,10 @@ import java.util.List;
 import static com.epam.jdi.light.elements.common.WindowsManager.switchToWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.windowsCount;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.getUrl;
+import static io.github.com.pages.BootstrapPage.mediaObjectList;
+import static io.github.com.pages.BootstrapPage.mediaObjectNesting;
+import static io.github.com.pages.BootstrapPage.mediaObjectSample;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -78,8 +81,8 @@ public class MediaObjectTests extends TestsInit {
     public void isValidationTestListMediaObject() {
         mediaObjectList.is().displayed();
         mediaObjectList.is().enabled();
-        mediaObjectList.get(1).headingOfMediaObject.is().text(is(listOfHeading.get(1)));
-        mediaObjectList.get(1).bodyOfMediaObject.is().text(containsString("Stark requires"));
+        mediaObjectList.get(1).headingOfMediaObject.is().text(is(listOfHeading.get(0)));
+        mediaObjectList.get(2).bodyOfMediaObject.is().text(containsString("Stark requires"));
         assertThat(mediaObjectList.get(2).headingOfMediaObject.core().css("font-size"), is("20px"));
         assertThat(mediaObjectList.get(1).bodyOfMediaObject.core().css("font-size"), is("14px"));
         mediaObjectList.assertThat().displayed()
