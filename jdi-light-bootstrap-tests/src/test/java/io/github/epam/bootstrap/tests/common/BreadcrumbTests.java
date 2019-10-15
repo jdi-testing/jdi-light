@@ -81,7 +81,7 @@ public class BreadcrumbTests extends TestsInit {
 
     @Test
     public void clickByIDTest() {
-        breadcrumb.items.get(0).click();
+        breadcrumb.items.get(1).click();
 
         switchToWindow(2);
 

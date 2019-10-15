@@ -50,6 +50,8 @@ public class DownloadDriverManager {
                     case X64:
                         wdm = wdm.arch64();
                         break;
+                    default:
+                        throw exception("Unknown platform type: " + platform);
                 }
                 driverName += " " + platform;
             }

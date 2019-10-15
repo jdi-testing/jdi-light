@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.init;
 
+import com.epam.jdi.light.elements.SeleniumWebList;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -45,8 +46,16 @@ public class UIFactory {
                 ? new WebList().setName(locator)
                 : list(defineLocator(locator));
     }
+    public static SeleniumWebList seleniumList(String locator) {
+        return locator.matches("[A-Z].*]")
+                ? new SeleniumWebList().setName(locator)
+                : seleniumList(defineLocator(locator));
+    }
     public static WebList list(By byLocator) {
         return new WebList(byLocator);
+    }
+    public static SeleniumWebList seleniumList(By byLocator) {
+        return new SeleniumWebList(byLocator);
     }
     public static WebList list(List<WebElement> els, String name) {
         return new WebList(els).setup(e->e.setName(name));
@@ -57,11 +66,17 @@ public class UIFactory {
     public static WebList $$(String locator, Object parent) {
         return list(locator).setup(j->j.setParent(parent));
     }
+    public static SeleniumWebList $$$(String locator, Object parent) {
+        return seleniumList(locator).setup(j->j.setParent(parent));
+    }
     public static WebList $$(By locator) {
         return list(locator);
     }
     public static WebList $$(By locator, Object parent) {
         return list(locator).setup(j->j.setParent(parent));
+    }
+    public static SeleniumWebList $$$(By locator, Object parent) {
+        return seleniumList(locator).setup(j->j.setParent(parent));
     }
     public static WebList $$(List<WebElement> els, String name) {
         return list(els, name);
