@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.testng.Assert.assertEquals;
 
-public class DataSimpleTableTests extends TestsInit {
+public class DataSimpleTableTests implements TestsInit {
     private boolean firstTime = true;
     @BeforeMethod
     public void before() {

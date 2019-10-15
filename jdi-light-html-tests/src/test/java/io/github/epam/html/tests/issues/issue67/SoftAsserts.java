@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 
-public class SoftAsserts extends TestsInit {
+public class SoftAsserts implements TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();

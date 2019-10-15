@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.pageobjects.annotations;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
+import com.epam.jdi.light.settings.WebSettings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Quotes;
 
@@ -8,7 +9,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
+import static com.epam.jdi.light.settings.WebSettings.getDomain;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -40,12 +41,12 @@ public class WebAnnotationsUtil {
         if (parentClass != null && parentClass.isAnnotationPresent(JSite.class)) {
             String siteDomain = parentClass.getAnnotation(JSite.class).value();
             if (!isBlank(siteDomain))
-                DOMAIN = siteDomain;
+                WebSettings.setDomain(siteDomain);
         }
     }
     public static String getUrlFromUri(String uri) {
-        if (isBlank(uri)) return DOMAIN;
-        return DOMAIN.replaceAll("/*$", "") + "/" + uri.replaceAll("^/*", "");
+        if (isBlank(uri)) return getDomain();
+        return getDomain().replaceAll("/*$", "") + "/" + uri.replaceAll("^/*", "");
     }
 
     public static By getFrame(Frame frame) {

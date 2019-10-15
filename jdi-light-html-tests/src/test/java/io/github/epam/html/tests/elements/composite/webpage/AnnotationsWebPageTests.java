@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import pseudo.site.dataproviders.webpages.WebPageDataProvider;
 
 
-public class AnnotationsWebPageTests extends TestsInit {
+public class AnnotationsWebPageTests implements TestsInit {
 
     @Test(dataProvider = "annotationsWebPageDataProvider", dataProviderClass = WebPageDataProvider.class)
     public void annotationsWebPageTest(WebPage webPage, String expectedURL, String expectedTitle) {

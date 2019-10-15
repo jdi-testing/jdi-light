@@ -15,15 +15,14 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class ButtonTests extends TestsInit {
+public class ButtonTests implements TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -129,6 +128,13 @@ public class ButtonTests extends TestsInit {
             suspendButton.is().notAppear(2));
     }
 
+    @Test
+    public void displayButtonTest() {
+        WebPage.reload();
+        assertFalse(suspendButton.isDisplayed());
+        durationMoreThan(2, () ->
+                suspendButton.is().displayed());
+    }
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void isNotAppearFailedButtonTest() {

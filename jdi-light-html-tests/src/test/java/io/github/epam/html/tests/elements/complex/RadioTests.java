@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
-public class RadioTests extends TestsInit {
+public class RadioTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

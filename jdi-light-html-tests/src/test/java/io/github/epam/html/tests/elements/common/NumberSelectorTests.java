@@ -16,7 +16,7 @@ import static org.testng.Assert.assertEquals;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class NumberSelectorTests extends TestsInit {
+public class NumberSelectorTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

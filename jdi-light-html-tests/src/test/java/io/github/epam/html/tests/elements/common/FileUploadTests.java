@@ -26,7 +26,7 @@ import static org.testng.Assert.assertTrue;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class FileUploadTests extends TestsInit {
+public class FileUploadTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

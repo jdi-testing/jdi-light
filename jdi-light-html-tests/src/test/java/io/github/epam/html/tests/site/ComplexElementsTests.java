@@ -18,7 +18,7 @@ import static io.github.com.pages.HomePage.jdiText;
 import static io.github.com.pages.MetalAndColorsPage.*;
 import static org.hamcrest.Matchers.containsString;
 
-public class ComplexElementsTests extends TestsInit {
+public class ComplexElementsTests implements TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -51,12 +51,12 @@ public class ComplexElementsTests extends TestsInit {
     }
     @Test
     public void navigationMenuTest() {
-        navigationL.select(ContactForm);
+        navigationElement.select(ContactForm);
         contactFormPage.checkOpened();
         navigationL.select(Home);
         homePage.checkOpened();
         navigationS.select(Service);
-        navigationS.select(ComplexTable);
+        navigationElement.select("Complex Table");
     }
     @Test
     public void navigationMenuSTest() {

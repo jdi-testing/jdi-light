@@ -25,8 +25,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.String.format;
@@ -65,6 +64,10 @@ public class WebPage extends DriverBase implements PageObject {
     public static void openUrl(String url) {
         new WebPage(url).open();
     }
+    public static void openSite() {
+        init();
+        new WebPage(getDomain()).open();
+    }
 
     /**
      * Get Web page URL
@@ -99,12 +102,12 @@ public class WebPage extends DriverBase implements PageObject {
         } else if (validate == null) checkUrlType = MATCH;
         if (!uri.contains("://"))
             url = getUrlFromUri(uri);
-        else  { if (isBlank(uri)) url = DOMAIN; }
+        else  { if (isBlank(uri)) url = getDomain(); }
     }
     public void updatePageData(Url urlAnnotation, Title titleAnnotation) {
         if (urlAnnotation != null)
             setUrl(urlAnnotation.value(), urlAnnotation.template(), urlAnnotation.validate());
-        else setUrl(DOMAIN);
+        else setUrl(getDomain());
         if (titleAnnotation != null) {
             title = titleAnnotation.value();
             checkTitleType = titleAnnotation.validate();
@@ -125,6 +128,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Open '{name}'(url={0})")
     private void open(String url) {
+        init();
         CacheValue.reset();
         driver().navigate().to(url);
         setCurrentPage(this);

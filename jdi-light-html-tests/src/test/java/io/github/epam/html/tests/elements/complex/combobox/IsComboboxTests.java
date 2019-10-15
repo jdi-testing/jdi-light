@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
-public class IsComboboxTests extends TestsInit {
+public class IsComboboxTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

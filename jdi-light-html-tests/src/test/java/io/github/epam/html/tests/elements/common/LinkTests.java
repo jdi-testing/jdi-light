@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class LinkTests extends TestsInit {
+public class LinkTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

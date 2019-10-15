@@ -27,7 +27,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 
-public class TableInteractTests extends TestsInit {
+public class TableInteractTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

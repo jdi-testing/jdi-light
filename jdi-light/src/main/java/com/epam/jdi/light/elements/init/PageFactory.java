@@ -161,10 +161,10 @@ public class PageFactory {
                 if (msg.contains("has no empty constructors")
                     || msg.contains("Can't init class. Class Type is null"))
                     info.instance = create(info.type(), getDriver(info.driverName));
-                throw exception(msg);
+                    throw exception(msg);
             } catch (Exception ex) {
-                throw exception("Can't create field '%s' instance of type '%s'. %sException: %s",
-                        info.name(), info.type(), LINE_BREAK, safeException(ex));
+                throw exception("Can't create field '%s' instance of type '%s'. Try new %s() to get more details. %sException: %s",
+                        info.name(), info.type(), info.type(), LINE_BREAK, safeException(ex));
             }
         }
     }

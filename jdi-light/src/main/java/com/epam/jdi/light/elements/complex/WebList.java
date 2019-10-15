@@ -147,7 +147,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     /**
      * @param value
      */
-    @JDIAction(level = DEBUG)
+    @JDIAction(level = DEBUG) @Override
     public UIElement get(String value) {
         return !locator.isTemplate() && hasKey(value)
             ? elements(1).get(value)
@@ -440,23 +440,23 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         return noValidation(() -> ifSelect(IListBase::isDisabled, this::getElementName));
     }
 
-    @JDIAction("Check that '{name}' is displayed")
+    @JDIAction(value = "Check that '{name}' is displayed", timeout = 0)
     public boolean isDisplayed() {
         refresh();
         return isNotEmpty();
     }
 
-    @JDIAction("Check that '{name}' is hidden")
+    @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
     public boolean isHidden() {
         return !isDisplayed();
     }
 
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction(value = "Check that '{name}' is enabled", timeout = 0)
     public boolean isEnabled() {
         return isNotEmpty() && get(0).isEnabled();
     }
 
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction(value = "Check that '{name}' is disabled", timeout = 0)
     public boolean isDisabled() {
         return !isEnabled();
     }

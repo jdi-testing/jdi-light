@@ -14,7 +14,7 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 
-public class WindowsAndFramesTests extends TestsInit {
+public class WindowsAndFramesTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

@@ -35,6 +35,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
@@ -218,8 +219,15 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         }
         if (locator.isEmpty())
             return beforeSearch(getSmart());
-        if (locator.argsCount() != args.length)
+        if (locator.argsCount() != args.length) {
+            if (locator.argsCount() == 0 && args.length == 1) {
+                if (args[0].getClass() == String.class)
+                    return new WebList(this).get(args[0].toString());
+                if (isClass(args[0].getClass(), Enum.class))
+                    return new WebList(this).get(getEnumValue((Enum)args[0]));
+            }
             throw exception("Can't get element with template locator '%s'. Expected %s arguments but found %s", getLocator(), locator.argsCount(), args.length);
+        }
         List<WebElement> els = getAllElements(args);
         if (els.size() == 1)
             return els.get(0);

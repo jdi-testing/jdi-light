@@ -15,7 +15,7 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
-public class DataTableInteractTests extends TestsInit {
+public class DataTableInteractTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

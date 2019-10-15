@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
-public class MultiDropdownTests extends TestsInit {
+public class MultiDropdownTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

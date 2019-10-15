@@ -18,7 +18,7 @@ import static org.testng.Assert.assertEquals;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class ColorPickerTests extends TestsInit {
+public class ColorPickerTests implements TestsInit {
 
     @BeforeMethod
     public void before() {
