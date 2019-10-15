@@ -37,9 +37,10 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     public int maxlength() { return getInt("maxlength", uiElement); }
     @JDIAction("Add ne line '{0}' in '{name}'")
     public void addNewLine(String line) {
+        String nLine = null;
         if (isNotEmpty())
-            line = "\n" + line;
-        sendKeys(line);
+            nLine = "\n" + line;
+        sendKeys(nLine);
     }
     // endregion
 
