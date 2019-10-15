@@ -4,9 +4,6 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Modal;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -61,14 +58,14 @@ public class ModalVerticallyCenteredTests extends TestsInit {
                 {
                         modalVerticallyCentered.modalCenterTrigger,
                         modalVerticallyCentered.dismissModal1Close,
-                        modalVerticallyCentered.modal1,
+                        "button:nth-of-type(1)",
                         "modal-vertical-content-1"
                 },
 
                 {
                         modalVerticallyCentered.modalCenterScrollableTrigger,
                         modalVerticallyCentered.dismissModal2Close,
-                        modalVerticallyCentered.modal2,
+                        "button:nth-of-type(2)",
                         "modal-vertical-content-2"
                 }
         };
@@ -80,15 +77,13 @@ public class ModalVerticallyCenteredTests extends TestsInit {
                 {
                         modalVerticallyCentered.modalCenterTrigger,
                         modalVerticallyCentered.dismissModal1Close,
-                        modalVerticallyCentered.closeX,
-                        "modal-vertical-content-1"
+                        modalVerticallyCentered.closeX
                 },
 
                 {
                         modalVerticallyCentered.modalCenterScrollableTrigger,
                         modalVerticallyCentered.dismissModal2Close,
-                        modalVerticallyCentered.closeX,
-                        "modal-vertical-content-2"
+                        modalVerticallyCentered.closeX
                 }
         };
     }
@@ -131,15 +126,12 @@ public class ModalVerticallyCenteredTests extends TestsInit {
     @Test(dataProvider = "modalVerticalAlignmentData")
     public void modalVerticalAlignmentTest(Button showButton,
                                            Button dismissButton,
-                                           Modal modal,
+                                           String waiterSelector,
                                            String modalId) {
-//        WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 5);
-
         showButton.show();
         showButton.click();
 
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(modalId)));
-        modal.base().waitSec(20);
+        $(waiterSelector).waitFor().hidden();
 
         long modalTop = WebDriverFactory.jsExecute(
                 "var modal = document.getElementById('" + modalId + "');" +
@@ -154,36 +146,23 @@ public class ModalVerticallyCenteredTests extends TestsInit {
 
         dismissButton.show();
         dismissButton.click();
-
-//        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(modalId)));
     }
 
     @Test(dataProvider = "modalDismissData")
     public void modalDismissTest(Button showButton,
                                  Button dismissButton1,
-                                 Button dismissButton2,
-                                 String modalId) {
-        WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 5);
-
+                                 Button dismissButton2) {
         showButton.show();
         showButton.click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(modalId)));
 
         dismissButton1.show();
         dismissButton1.click();
 
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(modalId)));
-
         showButton.show();
         showButton.click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(modalId)));
-
         dismissButton2.show();
         dismissButton2.click();
-
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(modalId)));
     }
 
 }
