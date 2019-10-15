@@ -105,6 +105,7 @@ import io.github.com.sections.Toast;
 import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.modal.ModalTooltipsAndPopovers;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarSupportedContent;
@@ -490,6 +491,8 @@ public class BootstrapPage extends WebPage {
 
     @UI("//h4[.='Navbar - Text']/../..")
     public static NavbarText navbarText;
+    @UI("//h4[.='Modal - Tooltips and popovers']/../..")
+    public static ModalTooltipsAndPopovers modalTooltipsAndPopovers;
 
     @UI("#striped-base .progress")
     public static JList<ProgressSection> progressSections;
