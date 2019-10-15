@@ -119,49 +119,6 @@ public class BootstrapPage extends WebPage {
     public static UIElement inputGroupWrap, inputGroupNowrap;
     public static Button redButton, doubleButton, disabledButton;
 
-    @UI("//input[contains(@class, 'progress-change plus')]")  public static Button plus;
-    @UI("//input[contains(@class, 'progress-change minus')]") public static Button minus;
-    @UI("#jumbotron-fluid") public static Jumbotron jumbotronFluid;
-    @UI("#jumbotron") public static Jumbotron jumbotron;
-    @UI("#breadcrumb") public static Breadcrumb breadcrumb;
-    @UI("#simple-alert") public static Alert simpleAlert;
-    @UI("#dismissible-alert") public static Alert dismissibleAlert;
-    @UI("#badge-secondary") public static Badge badgeSecondary;
-    @UI("#btn-primary") public static Button buttonPrimary;
-    @UI("#badge-success") public static Link badgeSuccess;
-    @UI("#spinner-text-primary") public static ColorSpinner spinnerWithTextPrimary;
-    @UI("#spinner-text-secondary") public static ColorSpinner spinnerWithTextSecondary;
-    @UI("#spinner-text-success") public static ColorSpinner spinnerWithTextSuccess;
-    @UI("#spinner-text-danger") public static ColorSpinner spinnerWithTextDanger;
-    @UI("#spinner-text-warning") public static ColorSpinner spinnerWithTextWarning;
-    @UI("#spinner-text-info") public static ColorSpinner spinnerWithTextInfo;
-    @UI("#spinner-text-light") public static ColorSpinner spinnerWithTextLight;
-    @UI("#spinner-text-dark") public static ColorSpinner spinnerWithTextDark;
-    @UI("#tooltipOnTop") public static Tooltip tooltipOnTopButton;
-    @UI("#tooltipOnBottom") public static Tooltip tooltipOnBottomButton;
-    @UI("#tooltipOnLeft") public static Tooltip tooltipOnLeftButton;
-    @UI("#tooltipOnRight") public static Tooltip tooltipOnRightButton;
-    @UI("#tooltipWithHTML") public static Tooltip tooltipWithHTML;
-    @UI("#wrapperForDisabledButton") public static Tooltip wrapperForDisabledButton;
-    @UI("#tooltipOnDisabledButton") public static Tooltip tooltipOnDisabledButton;
-    @UI("#progress-bar-base-width-0") public static Progress progressBaseProgress0;
-    @UI("#progress-bar-base-width-0 .progress-bar") public static Progress progressBaseWidth0;
-    @UI("#progress-bar-base-width-25 .progress-bar") public static Progress progressBaseWidth25;
-    @UI("#progress-bar-base-width-50 .progress-bar") public static Progress progressBaseWidth50;
-    @UI("#progress-bar-base-width-75 .progress-bar") public static Progress progressBaseWidth75;
-    @UI("#progress-bar-base-width-100 .progress-bar") public static Progress progressBaseWidth100;
-    @UI("#progress-animated") public static Progress progressAnimated;
-    @UI("#progress-with-labels") public static Progress progressWithLabels;
-    @UI("#progress-backgrounds-green") public static Progress progressBackgroundGreen;
-    @UI("#progress-backgrounds-blue") public static Progress progressBackgroundBlue;
-    @UI("#progress-backgrounds-yellow") public static Progress progressBackgroundYellow;
-    @UI("#progress-backgrounds-red") public static Progress progressBackgroundRed;
-    @UI("#navbar-containers-centred") public static Navbar navbarCentredContainer;
-    @UI("#navbar-containers-expanded") public static Navbar navbarExpandedContainer;
-    @UI("#button-show-spinner-border") public static Button buttonSpinnerBorder;
-    @UI("#spinner-border") public static Spinner spinnerBorder;
-    @UI("#readonlyPlainText1") public static ReadonlyPlainText readonlyPlainText1;
-    @UI("#readonlyPlainText2") public static ReadonlyPlainText readonlyPlainText2;
     @UI("//input[contains(@class, 'progress-change plus')]")
     public static Button plus;
     @UI("//input[contains(@class, 'progress-change minus')]")
@@ -244,6 +201,10 @@ public class BootstrapPage extends WebPage {
     public static Navbar navbarCentredContainer;
     @UI("#navbar-containers-expanded")
     public static Navbar navbarExpandedContainer;
+    @UI("#readonlyPlainText1")
+    public static ReadonlyPlainText readonlyPlainText1;
+    @UI("#readonlyPlainText2")
+    public static ReadonlyPlainText readonlyPlainText2;
     //endregion
 
     //region Complex Elements
