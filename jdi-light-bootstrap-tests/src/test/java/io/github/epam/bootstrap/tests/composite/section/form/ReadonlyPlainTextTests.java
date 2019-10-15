@@ -35,11 +35,11 @@ public class ReadonlyPlainTextTests extends TestsInit {
     public void isValidationTest() {
         readonlyPlainText1.hasClass("form-control-plaintext");
         readonlyPlainText1.attr("readonly");
-        assertEquals(readonlyPlainText1.attr("type"), "text");
+        readonlyPlainText1.is().core().attr("type", "text");
 
         readonlyPlainText2.hasClass("form-control-plaintext");
         readonlyPlainText2.attr("readonly");
-        assertEquals(readonlyPlainText2.attr("type"), "text");
+        readonlyPlainText1.is().core().attr("type", "text");
     }
 
     @Test
@@ -50,9 +50,9 @@ public class ReadonlyPlainTextTests extends TestsInit {
 
     @Test
     public void valueValidationTest() {
-        assertEquals(readonlyPlainText1.getValue(), plainTextValue);
-        assertEquals(readonlyPlainText2.getValue(), plainTextValue);
-}
+        readonlyPlainText1.assertThat().value(plainTextValue);
+        readonlyPlainText2.assertThat().value(plainTextValue);
+    }
 
     @Test
     public void labelTest() {
