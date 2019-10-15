@@ -110,25 +110,25 @@ public class IsChecklistTests extends TestsInit {
 
     @Test
     public void checkNumTest() {
-        isWeather.check(4);
+        isWeather.check(5);
         assertEquals(isWeather.checked(), asList("Sunny"));
     }
     @Test
     public void checkNumTwoTest() {
-        isWeather.check(1, 4);
+        isWeather.check(2, 5);
         assertEquals(isWeather.checked(), asList("Hot option", "Sunny"));
     }
     @Test
     public void uncheckNumTest() {
         isWeather.checkAll();
-        isWeather.uncheck(1);
+        isWeather.uncheck(2);
         isWeather.is().checked(hasSize(3));
         isWeather.is().checked(hasItems("Cold", "Rainy day", "Sunny"));
     }
     @Test
     public void uncheckNumTwoTest() {
         isWeather.checkAll();
-        isWeather.uncheck(1, 4);
+        isWeather.uncheck(2, 5);
         isWeather.is().checked(hasSize(2));
         isWeather.is().checked(hasItems("Cold", "Rainy day"));
     }
