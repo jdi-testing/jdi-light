@@ -500,7 +500,8 @@ public class BootstrapPage extends WebPage {
     @UI("#striped-base .progress")
     public static JList<ProgressSection> progressSections;
 
-    @UI("#navbar-base-for-brand") public static NavbarSection navbarSection;
+    @UI("#navbar-base-for-brand")
+    public static NavbarSection navbarSection;
 
     @UI("#button-with-spinner-and-text")
     public static ButtonWithSpinner buttonWithSpinnerAndText;
