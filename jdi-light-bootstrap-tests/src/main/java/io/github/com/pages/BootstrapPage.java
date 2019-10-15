@@ -19,6 +19,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Modal;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.ButtonAddons;
@@ -545,6 +546,8 @@ public class BootstrapPage extends WebPage {
     public static Toast translucentToast;
     @UI("#custom-radio-con")
     public static RadioButtonsCustom radioButtonCustom;
+    @UI("#modal-live-demo")
+    public static Modal modalLiveDemo;
     //Navbars
     @UI("#navbar-external-content")
     public static NavbarExternalContent navbarExternalContent;
