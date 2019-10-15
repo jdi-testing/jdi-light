@@ -23,7 +23,7 @@ public class SpinnerAlignmentTests extends TestsInit {
 
     @DataProvider
     public Object[][] spinnerData() {
-        return new Object[][] {
+        return new Object[][]{
                 {spinnerAlignment.spinnerLeft},
                 {spinnerAlignment.flexJustifySpinner},
                 {spinnerAlignment.flexAlignCenterSpinner},
@@ -34,7 +34,7 @@ public class SpinnerAlignmentTests extends TestsInit {
 
     @DataProvider
     public Object[][] spinnerStyleData() {
-        return new Object[][] {
+        return new Object[][]{
                 {spinnerAlignment.spinnerLeft, spinnerMarginStyle},
                 {spinnerAlignment.flexJustifySpinner, spinnerJustifyContentStyle},
                 {spinnerAlignment.flexAlignCenterSpinner, spinnerAlignCenterStyle},
@@ -51,7 +51,7 @@ public class SpinnerAlignmentTests extends TestsInit {
 
     @Test(dataProvider = "spinnerData")
     public void isValidationTest(Spinner spinner) {
-        spinner.childs().get(0).highlight();
+        spinner.childs().get(1).highlight();
         spinner
                 .is()
                 .enabled()
@@ -61,7 +61,7 @@ public class SpinnerAlignmentTests extends TestsInit {
 
     @Test(dataProvider = "spinnerData")
     public void spinnerBorderStyleTest(Spinner spinner) {
-        spinner.childs().get(0).is().core().hasClass(spinnerBorderStyle);
+        spinner.childs().get(1).is().core().hasClass(spinnerBorderStyle);
     }
 
     @Test(dataProvider = "spinnerStyleData")
