@@ -1,14 +1,9 @@
 package io.github.com.sections.modal.gridmodal;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Modal;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
 //import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 
 public class GridModalWindow extends Modal {
@@ -19,6 +14,10 @@ public class GridModalWindow extends Modal {
     //@FindBy(css = ".modal-footer")
     @UI(".modal-footer")
     private ModalFooterSaveClose modalFooter;
+
+    @UI(".modal-header button")
+    public Button closeX;
+
 
     public GridModalBody getBody() {
         return gridModal;
@@ -45,7 +44,7 @@ public class GridModalWindow extends Modal {
     }
 
     public Button getBtnCloseX() {
-        return super.closeX;
+        return closeX;
     }
 
     public Text getTitle() {
