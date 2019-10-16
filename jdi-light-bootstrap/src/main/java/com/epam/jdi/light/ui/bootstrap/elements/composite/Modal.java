@@ -8,6 +8,7 @@ public class Modal extends Section {
 
     @UI(".modal-header .modal-title")
     public Text title;
+
     public void close() {
         linked(".modal-header button", "Close").click();
     }

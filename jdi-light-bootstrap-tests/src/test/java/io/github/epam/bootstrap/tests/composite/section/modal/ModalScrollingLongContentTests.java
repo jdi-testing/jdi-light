@@ -44,7 +44,7 @@ public class ModalScrollingLongContentTests extends TestsInit {
                 .tag("div");
         modal.close();
         modal.is().disappear();
-    }//modal-dialog-scrollable
+    }
 
     @Test(dataProvider = "listData")
     public void bottomButtonsTest(Button showModal, ModalWithButtons modal) {
