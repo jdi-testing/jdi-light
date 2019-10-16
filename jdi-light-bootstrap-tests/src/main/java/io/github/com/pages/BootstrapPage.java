@@ -14,6 +14,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
@@ -209,6 +210,8 @@ public class BootstrapPage extends WebPage {
     public static Button buttonSpinnerBorder;
     @UI("#spinner-border")
     public static Spinner spinnerBorder;
+    @UI("#forms-readonly-input")
+    public static TextField readonlyInput;
     //endregion
 
     //region Complex Elements
