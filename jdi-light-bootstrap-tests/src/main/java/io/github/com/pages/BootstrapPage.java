@@ -106,11 +106,7 @@ import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
-import io.github.com.sections.navbar.NavbarColorScheme;
-import io.github.com.sections.navbar.NavbarForm;
-import io.github.com.sections.navbar.NavbarSupportedContent;
-import io.github.com.sections.navbar.NavbarText;
-import io.github.com.sections.navbar.NavbarWithInputGroupForm;
+import io.github.com.sections.navbar.*;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
@@ -561,5 +557,9 @@ public class BootstrapPage extends WebPage {
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
+    @UI("#navbar-placement-default")
+    public static NavbarPlacement navbarPlacementDefault;
+    @UI("#navbar-placement-sticky-top")
+    public static NavbarPlacement navbarPlacementStickyTop;
     //endregion
 }
