@@ -12,7 +12,8 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.modalVerticallyCentered;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ModalVerticallyCenteredTests extends TestsInit {
 
@@ -142,7 +143,7 @@ public class ModalVerticallyCenteredTests extends TestsInit {
                         "return window.innerHeight - modal.getBoundingClientRect().bottom;"
         );
 
-        assertEquals(modalTop, modalBottom);
+        assertThat(modalTop, equalTo(modalBottom));
 
         dismissButton.show();
         dismissButton.click();
