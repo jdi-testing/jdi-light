@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.entities.FormUsers.ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT;
@@ -18,9 +19,9 @@ import static io.github.com.entities.FormUsers.ONLY_NAME_FILLED_DEFAULT_CONTACT;
 import static io.github.com.entities.FormUsers.clearBlankContact;
 import static io.github.com.pages.BootstrapPage.formTooptip;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Created by Dmitrii Pavlov on 14.10.2019
@@ -194,15 +195,15 @@ public class FormTooltipTests extends TestsInit {
     public void verifyMethodPositiveTest() {
         formTooptip.fill(DEFAULT_CONTACT);
         List<String> verified = formTooptip.verify(DEFAULT_CONTACT);
-        assertEquals(verified.size(), 0);
+        jdiAssert(verified, hasSize(0));
     }
 
     @Test
     public void verifyMethodNegativeTest() {
         formTooptip.fill(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
         List<String> verified = formTooptip.verify(DEFAULT_CONTACT);
-        assertEquals(verified.size(), 1);
-        assertTrue(verified.get(0).contains("Mark"));
+        jdiAssert(verified, hasSize(1));
+        jdiAssert(verified.get(0), containsString("Mark"));
     }
 
     @Test
