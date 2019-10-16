@@ -418,27 +418,44 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     public void setup(Field field) {
         super.setup(field);
         Type[] types = InitActions.getGenericTypes(field);
-        if (types.length != 2)
+        if (types.length != 2) {
             return;
+        }
         try {
             lineClass = types[0].toString().equals("?") ? null : (Class<L>) types[0];
             dataClass = types[1].toString().equals("?") ? null : (Class<D>) types[1];
         } catch (Exception ex) {
             throw exception("Can't get DataTable %s data or entity class", getName());
         }
-        if (header.hasValue()) return;
-        List<Field> entityFields = new ArrayList<>();
-        if (lineClass != null)
-            entityFields.addAll(getFieldsExact(lineClass, f -> isInterface(f, HasValue.class)));
-        if (dataClass != null)
-            entityFields.addAll(asList(dataClass.getDeclaredFields()));
-        if (entityFields.size() > 0) {
-            List<String> headers = map(entityFields, field1 -> splitCamelCase(field1.getName()))
-                .stream().distinct().collect(Collectors.toList());
-            header.setFinal(headers);
-            if (!size.hasValue())
-                size.setFinal(headers.size());
+        if (header.hasValue()) {
+            return;
         }
+
+        List<String> headers = collectHeaders(lineClass, dataClass);
+        if(headers != null && headers.size() > 0) {
+            header.setFinal(headers);
+            if (!size.hasValue()) {
+                size.setFinal(headers.size());
+            }
+        }
+
+    }
+
+    private  List<String> collectHeaders(Class<L> lineClass,  Class<D> dataClass) {
+        List<Field> entityFields = new ArrayList<>();
+        List<String> headers = null;
+        if (lineClass != null) {
+            entityFields.addAll(getFieldsExact(lineClass, f -> isInterface(f, HasValue.class)));
+        }
+        if (dataClass != null) {
+            entityFields.addAll(asList(dataClass.getDeclaredFields()));
+        }
+        if (entityFields.size() > 0) {
+            headers = map(entityFields, field1 -> splitCamelCase(field1.getName()))
+                    .stream().distinct().collect(Collectors.toList());
+        }
+
+        return headers;
     }
 
     private D getLineData(Line row) {
