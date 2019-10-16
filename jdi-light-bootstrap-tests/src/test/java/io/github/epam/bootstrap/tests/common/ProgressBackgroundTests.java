@@ -7,7 +7,10 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.progressBackgroundBlue;
+import static io.github.com.pages.BootstrapPage.progressBackgroundGreen;
+import static io.github.com.pages.BootstrapPage.progressBackgroundRed;
+import static io.github.com.pages.BootstrapPage.progressBackgroundYellow;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;

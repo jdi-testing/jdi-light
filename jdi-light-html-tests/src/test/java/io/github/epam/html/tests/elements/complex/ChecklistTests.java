@@ -7,11 +7,19 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.weather;
 import static io.github.com.pages.HtmlElementsPage.weatherNoLocator;
-import static io.github.epam.html.tests.elements.complex.enums.Weather.*;
+import static io.github.epam.html.tests.elements.complex.enums.Weather.Cold;
+import static io.github.epam.html.tests.elements.complex.enums.Weather.Hot;
+import static io.github.epam.html.tests.elements.complex.enums.Weather.Rainy;
+import static io.github.epam.html.tests.elements.complex.enums.Weather.Sunny;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
@@ -102,25 +110,25 @@ public class ChecklistTests extends TestsInit {
 
     @Test
     public void checkNumTest() {
-        weather.check(4);
+        weather.check(5);
         assertEquals(weather.checked(), asList("Sunny"));
     }
     @Test
     public void checkNumTwoTest() {
-        weather.check(1, 4);
+        weather.check(2, 5);
         assertEquals(weather.checked(), asList("Hot option", "Sunny"));
     }
     @Test
     public void uncheckNumTest() {
         weather.checkAll();
-        weather.uncheck(1);
+        weather.uncheck(2);
         weather.is().checked(hasSize(3));
         weather.is().checked(hasItems("Cold", "Rainy day", "Sunny"));
     }
     @Test
     public void uncheckNumTwoTest() {
         weather.checkAll();
-        weather.uncheck(1, 4);
+        weather.uncheck(2, 5);
         weather.is().checked(hasSize(2));
         weather.is().checked(hasItems("Cold", "Rainy day"));
     }

@@ -9,10 +9,14 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertStrict;
+import static com.epam.jdi.light.asserts.core.SoftAssert.clearResults;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.StaticSite.usersPage;
-import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.com.pages.HtmlElementsPage.acceptConditions;
+import static io.github.com.pages.HtmlElementsPage.jdiLogo;
+import static io.github.com.pages.HtmlElementsPage.redButton;
 import static io.github.com.pages.UsersPage.users;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;

@@ -8,8 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
-import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
-import static io.github.epam.html.tests.issues.issue69.IssuePage69.*;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.paragraphs;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.paragraphsData;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.paragraphsList;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.template;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.templateData;
+import static io.github.epam.html.tests.issues.issue69.IssuePage69.templateList;
 import static io.github.epam.html.tests.issues.issue69.JDISite69.issuePage69;
 import static org.testng.Assert.assertEquals;
 
@@ -26,7 +30,7 @@ public class IssueTest69 {
 
     @Test(dataProvider = "paragraphs")
     public void issue69Tests(String paragraphName) {
-        Paragraph p = paragraph(paragraphName).get(0);
+        Paragraph p = paragraph(paragraphName).get(1);
         assertEquals(p.toString(), "element_0_1,element_0_2,element_0_3");
     }
 
@@ -35,12 +39,12 @@ public class IssueTest69 {
     });
     @Test
     public void issue69DataTests() {
-        ParagraphData p = templateData.getData(0);
+        ParagraphData p = templateData.getData(1);
         assertEquals(p, expectedParagraph);
     }
     @Test
     public void issue69DataParagraphTests() {
-        ParagraphData p = paragraphsData.getData(0);
+        ParagraphData p = paragraphsData.getData(1);
         assertEquals(p, expectedParagraph);
     }
 
@@ -54,8 +58,8 @@ public class IssueTest69 {
             case "paragraphsList"   : return paragraphsList;
             case "templateData"     : return templateData;
             case "paragraphsData"   : return paragraphsData;
+            default                 : return new ArrayList<>();
         }
-        return new ArrayList<>();
     }
 
     @DataProvider(name = "paragraphs")

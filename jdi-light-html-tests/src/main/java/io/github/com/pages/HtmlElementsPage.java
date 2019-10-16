@@ -10,7 +10,19 @@ import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.NoWait;
 import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.*;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Checkbox;
+import com.epam.jdi.light.ui.html.elements.common.ColorPicker;
+import com.epam.jdi.light.ui.html.elements.common.DateTimeSelector;
+import com.epam.jdi.light.ui.html.elements.common.FileInput;
+import com.epam.jdi.light.ui.html.elements.common.Image;
+import com.epam.jdi.light.ui.html.elements.common.Link;
+import com.epam.jdi.light.ui.html.elements.common.NumberSelector;
+import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
+import com.epam.jdi.light.ui.html.elements.common.Range;
+import com.epam.jdi.light.ui.html.elements.common.Text;
+import com.epam.jdi.light.ui.html.elements.common.TextArea;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 import com.epam.jdi.light.ui.html.elements.complex.Checklist;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
@@ -28,9 +40,13 @@ public class HtmlElementsPage extends WebPage {
     // @UI("input[type=button].red") public static Button redButton;
     @UI("[value*='Disabled Button']") public static Button disabledButtonInput;
     // @UI("input[type=button][disabled]") public static Button disabledButtonInput;
-    public static Button blueButton, dblClickButton, rightClickButton;
+    public static Button blueButton;
+    public static Button dblClickButton;
+    public static Button rightClickButton;
     @WaitTimeout(4)
-    public static Button ghostButton, suspendButton;
+    public static Button ghostButton;
+    @WaitTimeout(4)
+    public static Button suspendButton;
     @NoWait
     public static Button disabledButton;
     // @UI("#blue-button") public static Button blueButton;

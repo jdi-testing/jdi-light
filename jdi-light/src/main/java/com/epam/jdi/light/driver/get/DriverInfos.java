@@ -7,8 +7,15 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
-import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.DriverTypes.*;
+import static com.epam.jdi.light.driver.get.DriverData.CHROME_OPTIONS;
+import static com.epam.jdi.light.driver.get.DriverData.FIREFOX_OPTIONS;
+import static com.epam.jdi.light.driver.get.DriverData.IE_OPTIONS;
+import static com.epam.jdi.light.driver.get.DriverData.chromeDriverPath;
+import static com.epam.jdi.light.driver.get.DriverData.firefoxDriverPath;
+import static com.epam.jdi.light.driver.get.DriverData.ieDriverPath;
+import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
+import static com.epam.jdi.light.driver.get.DriverTypes.FIREFOX;
+import static com.epam.jdi.light.driver.get.DriverTypes.IE;
 
 public class DriverInfos {
     public static DriverInfo CHROME_INFO = new DriverInfo()

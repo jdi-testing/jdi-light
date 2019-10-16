@@ -6,16 +6,27 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
-import static io.github.com.StaticSite.*;
+import static io.github.com.StaticSite.contactFormPage;
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.StaticSite.leftMenu;
+import static io.github.com.StaticSite.metalAndColorsPage;
+import static io.github.com.StaticSite.navigation;
+import static io.github.com.StaticSite.navigationL;
+import static io.github.com.StaticSite.navigationS;
 import static io.github.com.enums.ColorsList.Green;
 import static io.github.com.enums.Metals.Gold;
 import static io.github.com.enums.Metals.Silver;
-import static io.github.com.enums.Navigation.*;
+import static io.github.com.enums.Navigation.ComplexTable;
+import static io.github.com.enums.Navigation.ContactForm;
+import static io.github.com.enums.Navigation.Home;
+import static io.github.com.enums.Navigation.Service;
 import static io.github.com.enums.NavigationNums.nContactForm;
 import static io.github.com.enums.NavigationNums.nHome;
 import static io.github.com.pages.HomePage.githubLink;
 import static io.github.com.pages.HomePage.jdiText;
-import static io.github.com.pages.MetalAndColorsPage.*;
+import static io.github.com.pages.MetalAndColorsPage.colors;
+import static io.github.com.pages.MetalAndColorsPage.metals;
+import static io.github.com.pages.MetalAndColorsPage.metals2;
 import static org.hamcrest.Matchers.containsString;
 
 public class ComplexElementsTests extends TestsInit {
