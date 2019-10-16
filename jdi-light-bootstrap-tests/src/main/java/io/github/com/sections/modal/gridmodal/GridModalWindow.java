@@ -21,7 +21,7 @@ public class GridModalWindow extends Modal {
 
     public ModalFooterSaveClose getFooter() {
         return modalFooter;
-    };
+    }
 
     public Button getBtnSave() {
         return getFooter().getBtnSave();
@@ -48,6 +48,6 @@ public class GridModalWindow extends Modal {
     }
 
     public void clickBtnCloseX() {
-      super.closeX.click();
+      super.close();
     }
 }
