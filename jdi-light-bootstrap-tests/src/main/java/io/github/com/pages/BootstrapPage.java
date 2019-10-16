@@ -106,6 +106,7 @@ import io.github.com.sections.Toast;
 import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.modal.ModalLiveDemo;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarSupportedContent;
@@ -547,7 +548,7 @@ public class BootstrapPage extends WebPage {
     @UI("#custom-radio-con")
     public static RadioButtonsCustom radioButtonCustom;
     @UI("#modal-live-demo")
-    public static Modal modalLiveDemo;
+    public static ModalLiveDemo modalLiveDemo;
     //Navbars
     @UI("#navbar-external-content")
     public static NavbarExternalContent navbarExternalContent;
