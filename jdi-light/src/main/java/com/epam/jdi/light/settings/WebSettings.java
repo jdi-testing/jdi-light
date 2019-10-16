@@ -180,13 +180,14 @@ public class WebSettings {
     }
 
     private static void setSearchStrategy(String p) {
-        p = p.toLowerCase();
-        if (("soft").equals(p))
-            p = "any, multiple";
-        if (("strict").equals(p))
-            p = "visible, single";
-        if (p.split(",").length == 2) {
-            List<String> params = asList(p.split(","));
+        String paramString = p.toLowerCase();
+        if (("soft").equals(paramString)) {
+            paramString = "any, multiple";
+        } else if (("strict").equals(paramString)) {
+            paramString = "visible, single";
+        }
+        if (paramString.split(",").length == 2) {
+            List<String> params = asList(paramString.split(","));
             if (params.contains("visible") || params.contains("displayed"))
                 onlyVisible();
             if (params.contains("any") || params.contains("all"))
