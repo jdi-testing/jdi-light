@@ -105,7 +105,7 @@ import io.github.com.sections.Toast;
 import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
-import io.github.com.sections.modal.ModalScrollingLongContent;
+import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarSupportedContent;
@@ -554,6 +554,6 @@ public class BootstrapPage extends WebPage {
     //endregion
     //region Modals
     @UI("#modal-scroll-long")
-    public static ModalScrollingLongContent modalScrollingLongContent;
+    public static SectionModalLongScrolling sectionModalLongScrolling;
     //endregion
 }
