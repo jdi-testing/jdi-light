@@ -58,8 +58,8 @@ public class IssueTest69 {
             case "paragraphsList"   : return paragraphsList;
             case "templateData"     : return templateData;
             case "paragraphsData"   : return paragraphsData;
+            default                 : return new ArrayList<>();
         }
-        return new ArrayList<>();
     }
 
     @DataProvider(name = "paragraphs")

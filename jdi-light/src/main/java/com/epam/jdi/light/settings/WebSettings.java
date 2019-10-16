@@ -207,8 +207,8 @@ public class WebSettings {
             case "normal": return NORMAL;
             case "none": return NONE;
             case "eager": return EAGER;
+            default: return NORMAL;
         }
-        return NORMAL;
     }
     public static Properties getProperties(String path) {
         // TODO use mergePath macos and windows
