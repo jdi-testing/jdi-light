@@ -24,18 +24,18 @@ public class NavbarNavsTests extends TestsInit {
     @DataProvider
     public Object[][] linkNavbarDisabledTest() {
         return new Object[][]{
-                {0, "Home\n(current)", "https://jdi-testing.github.io/jdi-light/index.html"},
-                {1, "HTML 5", "https://jdi-testing.github.io/jdi-light/html5.html"},
-                {2, "Bootstrap", "https://jdi-testing.github.io/jdi-light/bootstrap.html"},
+                {1, "Home\n(current)", "https://jdi-testing.github.io/jdi-light/index.html"},
+                {2, "HTML 5", "https://jdi-testing.github.io/jdi-light/html5.html"},
+                {3, "Bootstrap", "https://jdi-testing.github.io/jdi-light/bootstrap.html"},
         };
     }
 
     @DataProvider
     public Object[][] linkNavbarWithDropdownTest() {
         return new Object[][]{
-                {0, "Home\n(current)", "https://jdi-testing.github.io/jdi-light/index.html"},
-                {1, "HTML 5", "https://jdi-testing.github.io/jdi-light/html5.html"},
-                {2, "Bootstrap", "https://jdi-testing.github.io/jdi-light/bootstrap.html"},
+                {1, "Home\n(current)", "https://jdi-testing.github.io/jdi-light/index.html"},
+                {2, "HTML 5", "https://jdi-testing.github.io/jdi-light/html5.html"},
+                {3, "Bootstrap", "https://jdi-testing.github.io/jdi-light/bootstrap.html"},
         };
     }
 
