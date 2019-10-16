@@ -179,14 +179,14 @@ public class WebSettings {
     }
 
     private static void setSearchStrategy(String p) {
-        p = p.toLowerCase();
-        if (("soft").equals(p)) {
-            p = "any, multiple";
-        } else if (("strict").equals(p)) {
-            p = "visible, single";
+        String paramString = p.toLowerCase();
+        if (("soft").equals(paramString)) {
+            paramString = "any, multiple";
+        } else if (("strict").equals(paramString)) {
+            paramString = "visible, single";
         }
 
-        String[] params = p.split(",");
+        String[] params = paramString.split(",");
 
         if (params.length != 2) {
             exception("You must specify exact two parameters, " +
@@ -229,8 +229,8 @@ public class WebSettings {
             case "normal": return NORMAL;
             case "none": return NONE;
             case "eager": return EAGER;
+            default: return NORMAL;
         }
-        return NORMAL;
     }
     public static Properties getProperties(String path) {
         // TODO use mergePath macos and windows
