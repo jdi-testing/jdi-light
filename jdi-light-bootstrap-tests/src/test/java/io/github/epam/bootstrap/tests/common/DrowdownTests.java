@@ -25,9 +25,8 @@ import static io.github.com.pages.BootstrapPage.rightAllignedDropdown;
 import static io.github.com.pages.BootstrapPage.leftAllignedDropdown;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Daniil Kopylov on 03.10.2019
@@ -62,31 +61,31 @@ public class DrowdownTests extends TestsInit {
 
     @Test
     public void getTextTest() {
-        assertEquals(simpleDropdown.getText(), DROPDOWN);
+        assertThat(simpleDropdown.getText(), is(DROPDOWN));
     }
 
     @Test
     public void getValueTest() {
-        assertEquals(simpleDropdown.getValue(), DROPDOWN);
+        assertThat(simpleDropdown.getValue(), is(DROPDOWN));
     }
 
     @Test
     public void itemsTest() {
-        assertEquals(simpleDropdown.items.getValue(), ITEMS_VALUES);
+        assertThat(simpleDropdown.items.getValue(), is(ITEMS_VALUES));
     }
 
     @Test
     public void clickTest() {
         simpleDropdown.click();
         simpleDropdown.items.is().displayed();
-        assertTrue(simpleDropdown.items.isDisplayed());
+        assertThat(simpleDropdown.items.isDisplayed(), is(Boolean.TRUE));
     }
 
     @Test
     public void toggleTest() {
         simpleDropdown.dropdownToggle.click();
         simpleDropdown.items.is().displayed();
-        assertTrue(simpleDropdown.items.isDisplayed());
+        assertThat(simpleDropdown.items.isDisplayed(), is(Boolean.TRUE));
     }
 
     @Test
