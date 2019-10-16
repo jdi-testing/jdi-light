@@ -106,6 +106,7 @@ import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.form.InputRange;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarSupportedContent;
@@ -205,6 +206,8 @@ public class BootstrapPage extends WebPage {
     public static Button buttonSpinnerBorder;
     @UI("#spinner-border")
     public static Spinner spinnerBorder;
+    @UI("#formControlRange")
+    public static InputRange inputRange;
     //endregion
 
     //region Complex Elements
