@@ -2,7 +2,7 @@ package io.github.epam.bootstrap.tests.composite.section.modal;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Modal;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -21,13 +21,11 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         return new Object[][]{
                 {
                         modalVerticallyCentered.modalCenterTrigger,
-                        modalVerticallyCentered.dismissModal1Close,
                         modalVerticallyCentered.modal1
                 },
 
                 {
                         modalVerticallyCentered.modalCenterScrollableTrigger,
-                        modalVerticallyCentered.dismissModal2Close,
                         modalVerticallyCentered.modal2
                 }
         };
@@ -39,14 +37,14 @@ public class ModalVerticallyCenteredTests extends TestsInit {
                 {
                         modalVerticallyCentered.modalCenterTrigger,
                         modalVerticallyCentered.dismissModal1Close,
-                        modalVerticallyCentered.modalCenterBg,
+                        modalVerticallyCentered.modal1,
                         "modal-dialog-centered"
                 },
 
                 {
                         modalVerticallyCentered.modalCenterScrollableTrigger,
                         modalVerticallyCentered.dismissModal2Close,
-                        modalVerticallyCentered.modalCenterScrollableBg,
+                        modalVerticallyCentered.modal2,
                         "modal-dialog-centered"
                 }
         };
@@ -77,13 +75,13 @@ public class ModalVerticallyCenteredTests extends TestsInit {
                 {
                         modalVerticallyCentered.modalCenterTrigger,
                         modalVerticallyCentered.dismissModal1Close,
-                        modalVerticallyCentered.closeX
+                        modalVerticallyCentered.modal1
                 },
 
                 {
                         modalVerticallyCentered.modalCenterScrollableTrigger,
                         modalVerticallyCentered.dismissModal2Close,
-                        modalVerticallyCentered.closeX
+                        modalVerticallyCentered.modal2
                 }
         };
     }
@@ -96,15 +94,17 @@ public class ModalVerticallyCenteredTests extends TestsInit {
 
     @Test(dataProvider = "modalBasicData")
     public void modalBasicFunctionalityTest(Button showButton,
-                                            Button dismissButton,
                                             Modal modal) {
         showButton.show();
         showButton.click();
 
+        modal.core().waitFor().displayed();
+
         modal.is().displayed();
 
-        dismissButton.show();
-        dismissButton.click();
+        modal.close();
+
+        modal.core().waitFor().hidden();
 
         modal.is().hidden();
     }
@@ -151,9 +151,11 @@ public class ModalVerticallyCenteredTests extends TestsInit {
     @Test(dataProvider = "modalDismissData")
     public void modalDismissTest(Button showButton,
                                  Button dismissButton1,
-                                 Button dismissButton2) {
+                                 Modal modal) {
         showButton.show();
         showButton.click();
+
+        modal.waitFor().displayed();
 
         dismissButton1.show();
         dismissButton1.click();
@@ -161,8 +163,8 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         showButton.show();
         showButton.click();
 
-        dismissButton2.show();
-        dismissButton2.click();
+        modal.show();
+        modal.close();
     }
 
 }
