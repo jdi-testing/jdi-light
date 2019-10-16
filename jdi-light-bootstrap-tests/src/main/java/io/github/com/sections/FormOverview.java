@@ -9,7 +9,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import io.github.com.entities.FormSignUp;
 
 public class FormOverview extends Form<FormSignUp> {
-
     @UI(".//*[@for='exampleInputEmail1']")
     public Label emailLabel;
     @UI("#exampleInputEmail1")
