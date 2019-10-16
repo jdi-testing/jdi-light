@@ -11,6 +11,7 @@ import static io.github.com.pages.BootstrapPage.readonlyPlainText1;
 import static io.github.com.pages.BootstrapPage.readonlyPlainText2;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.testng.Assert.assertTrue;
 
 public class ReadonlyPlainTextTests extends TestsInit {
 
@@ -37,7 +38,7 @@ public class ReadonlyPlainTextTests extends TestsInit {
     @Test(dataProvider = "itemsUnderTesting")
     public void isValidationTest(ReadonlyPlainText item) {
         item.is().core().hasClass("form-control-plaintext");
-        assert(item.hasAttribute("readonly"));
+        assertTrue(item.hasAttribute("readonly"));
         item.is().core().attr("type", "text");
     }
 
