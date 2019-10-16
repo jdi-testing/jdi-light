@@ -20,6 +20,7 @@ public class ModalLiveDemoTests extends TestsInit {
 
     @Test(priority = 3)
     public void bodyTextTest() {
+        modalLiveDemo.launchModal.base().waitSec(5);
         modalLiveDemo.launchModal.is().text("Launch demo modal");
         modalLiveDemo.launchModal.click();
         modalLiveDemo.title.is().text("MODAL TITLE");
@@ -29,22 +30,28 @@ public class ModalLiveDemoTests extends TestsInit {
         modalLiveDemo.closeButton.click();
     }
 
+
+    //$(By.className."ldo)).").is.display
     @Test(priority = 2)
     public void buttonsInBodyTest() {
         modalLiveDemo.launchModal.click();
-        modalLiveDemo.title.isDisplayed();
+        //modalLiveDemo.title.is().displayed();
+        modalLiveDemo.title.is().displayed();
         modalLiveDemo.saveButton.click();
-        modalLiveDemo.title.isDisplayed();
+        modalLiveDemo.title.is().displayed();
         modalLiveDemo.closeButton.click();
-        modalLiveDemo.title.isHidden();
+        modalLiveDemo.title.is().hidden();
     }
 
     @Test(priority = 1)
     public void closeXTest() {
         modalLiveDemo.launchModal.click();
-        modalLiveDemo.title.is().displayed();
+//        modalLiveDemo.core().waitSec(2);
+        //modalLiveDemo.modalContent.title.is().displayed();
+        modalLiveDemo.modalContent.is().displayed();
         modalLiveDemo.closeX.click();
-        modalLiveDemo.title.is().hidden();
+//        modalLiveDemo.title.is().hidden();
+        modalLiveDemo.modalContent.is().hidden();
     }
 
     @Test(priority = 4)
@@ -58,7 +65,7 @@ public class ModalLiveDemoTests extends TestsInit {
         modalLiveDemo.closeX.click();
     }
 
-    /*@Test
+    @Test
     public void baseValidation() {
         BaseValidations.baseValidation(modalLiveDemo.launchModal);
         modalLiveDemo.launchModal.click();
@@ -68,5 +75,5 @@ public class ModalLiveDemoTests extends TestsInit {
         BaseValidations.baseValidation(modalLiveDemo.closeButton);
         BaseValidations.baseValidation(modalLiveDemo.closeX);
         modalLiveDemo.closeX.click();
-    }*/
+    }
 }
