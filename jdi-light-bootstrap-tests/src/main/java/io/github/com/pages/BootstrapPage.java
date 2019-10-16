@@ -115,8 +115,11 @@ import io.github.com.sections.spinner.SpinnerSize;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
-    public static UIElement inputGroupWrap, inputGroupNowrap;
-    public static Button redButton, doubleButton, disabledButton;
+    public static UIElement inputGroupWrap;
+    public static UIElement inputGroupNowrap;
+    public static Button redButton;
+    public static Button doubleButton;
+    public static Button disabledButton;
 
     @UI("//input[contains(@class, 'progress-change plus')]")
     public static Button plus;
