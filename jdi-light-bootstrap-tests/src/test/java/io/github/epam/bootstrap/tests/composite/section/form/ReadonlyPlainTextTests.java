@@ -37,7 +37,7 @@ public class ReadonlyPlainTextTests extends TestsInit {
     @Test(dataProvider = "itemsUnderTesting")
     public void isValidationTest(ReadonlyPlainText item) {
         item.is().core().hasClass("form-control-plaintext");
-        item.hasAttribute("readonly");
+        assert(item.hasAttribute("readonly"));
         item.is().core().attr("type", "text");
     }
 
