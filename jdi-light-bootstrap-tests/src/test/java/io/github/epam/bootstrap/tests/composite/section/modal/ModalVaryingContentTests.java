@@ -11,18 +11,23 @@ import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.modalFatButton;
 import static io.github.com.pages.BootstrapPage.modalGetbootstrapButton;
 import static io.github.com.pages.BootstrapPage.modalMdoButton;
-import static io.github.com.pages.BootstrapPage.modalVaryingContentContainer;
 import static io.github.com.pages.BootstrapPage.modalVaryingContentWindow;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.testng.Assert.assertTrue;
 
 public class ModalVaryingContentTests extends TestsInit {
+
+    private String whiteColor = "rgba(255, 255, 255, 1)";
+    private String grayColorBackground = "rgba(108, 117, 125, 1)";
+    private String grayColorBorder = "rgb(108, 117, 125)";
+    private String blueColorBackground = "rgba(0, 123, 255, 1)";
+    private String blueColorBorder = "rgb(0, 123, 255)";
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        bsPage.refresh();
     }
 
     @DataProvider(name = "modalVaryingContentButtons")
@@ -56,23 +61,57 @@ public class ModalVaryingContentTests extends TestsInit {
         baseValidationAndUnhighlight(modalVaryingContentWindow.messageTextArea);
         baseValidationAndUnhighlight(modalVaryingContentWindow.closeButton);
         baseValidationAndUnhighlight(modalVaryingContentWindow.sendMessageButton);
-        modalVaryingContentWindow.closeButton.click();
+        modalVaryingContentWindow.close();
+    }
+
+    @Test(dataProvider = "modalVaryingContentButtonsWithRecipients")
+    public void modalButtonsTest(Button modalButton, String recipient) {
+        checkButton(modalButton, String.format("Open modal for @%s", recipient), whiteColor, blueColorBackground, blueColorBorder);
     }
 
     @Test(dataProvider = "modalVaryingContentButtonsWithRecipients")
     public void headerValidationTest(Button modalButton, String recipient) {
         modalButton.click();
+        modalVaryingContentWindow.is().displayed();
         modalVaryingContentWindow.title.core().is()
                 .text(String.format("NEW MESSAGE TO @%s", recipient.toUpperCase()));
         modalVaryingContentWindow.closeX.click();
-        //modalVaryingContentContainer.is().core()
-         //       .attr("class", "modal fade");
-        //assertTrue(modalVaryingContentWindow.isHidden());
-        //modalVaryingContentWindow.title.is().hidden();
+        modalVaryingContentWindow.is().hidden();
+    }
+
+    @Test(dataProvider = "modalVaryingContentButtonsWithRecipients")
+    public void bodyValidationTest(Button modalButton, String recipient) {
+        modalButton.click();
+        modalVaryingContentWindow.recipientLabel.is().text("Recipient:");
+        modalVaryingContentWindow.recipientTextField.is().text(String.format("@%s", recipient));
+        modalVaryingContentWindow.messageLabel.is().text("Message:");
+        modalVaryingContentWindow.messageTextArea.is().text("");
+        modalVaryingContentWindow.messageTextArea.sendKeys("Hello world!");
+        modalVaryingContentWindow.messageTextArea.is().text("Hello world!");
+        modalVaryingContentWindow.close();
+    }
+
+    @Test(dataProvider = "modalVaryingContentButtons")
+    public void footerValidationTest(Button modalButton) {
+        modalButton.click();
+        checkButton(modalVaryingContentWindow.sendMessageButton, "Send message", whiteColor, blueColorBackground, blueColorBorder);
+        modalVaryingContentWindow.sendMessageButton.click();
+        checkButton(modalVaryingContentWindow.closeButton, "Close", whiteColor, grayColorBackground, grayColorBorder);
+        modalVaryingContentWindow.closeButton.click();
+        modalVaryingContentWindow.is().hidden();
     }
 
     private void baseValidationAndUnhighlight(ICoreElement elem) {
         baseValidation(elem);
         elem.unhighlight();
+    }
+
+    private void checkButton(Button button, String text, String color, String backgroundColor, String borderColor) {
+        button.is().core()
+                .text(text)
+                .tag("button")
+                .css("color", color)
+                .css("background-color", backgroundColor)
+                .css("border-color", borderColor);
     }
 }

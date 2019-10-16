@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.bootstrap.elements.complex.modal;
+package io.github.com.sections.modal;
 
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.ByText;
@@ -6,9 +6,12 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextArea;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
 
 public class ModalVaryingContent extends Modal {
 
+    @UI(".modal-header .close")
+    public Button closeX;
     @UI("label[for='recipient-name']")
     public Label recipientLabel;
     @UI("#recipient-name")
