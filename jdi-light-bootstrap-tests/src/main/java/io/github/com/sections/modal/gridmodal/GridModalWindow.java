@@ -15,6 +15,7 @@ public class GridModalWindow extends Modal {
     @UI(".modal-footer")
     private ModalFooterSaveClose modalFooter;
 
+    //@FindBy(css = "modal-header button")
     @UI(".modal-header button")
     public Button closeX;
 
