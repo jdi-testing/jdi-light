@@ -117,7 +117,7 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         showButton.show();
         showButton.click();
 
-        modal.core().hasClass(modalBgCss);
+        modal.childs().get(0).is().hasClass(modalBgCss);
 
         dismissButton.show();
         dismissButton.click();
