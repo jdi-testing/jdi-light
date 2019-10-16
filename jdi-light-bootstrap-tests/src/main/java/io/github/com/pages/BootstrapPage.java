@@ -53,6 +53,7 @@ import io.github.com.sections.CheckboxesDefaultInline;
 import io.github.com.sections.CustomSelect;
 import io.github.com.sections.CustomSelectWithButton;
 import io.github.com.sections.FormCustomStyles;
+import io.github.com.sections.FormOverview;
 import io.github.com.sections.InputGroupInputWithCheckBox;
 import io.github.com.sections.InputGroupInputWithLabelAndText;
 import io.github.com.sections.InputGroupInputWithRadio;
@@ -510,6 +511,8 @@ public class BootstrapPage extends WebPage {
     public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
     @UI("#validation-submit-form")
     public static FormCustomStyles formCustomStyles;
+    @UI("#forms-overview")
+    public static FormOverview formOverview;
 
 
     @UI("//h4[.='Navbar - Text']/../..")
