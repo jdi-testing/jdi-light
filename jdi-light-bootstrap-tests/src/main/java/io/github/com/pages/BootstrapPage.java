@@ -511,11 +511,14 @@ public class BootstrapPage extends WebPage {
     @UI("#validation-submit-form")
     public static FormCustomStyles formCustomStyles;
 
+
     @UI("//h4[.='Navbar - Text']/../..")
     public static NavbarText navbarText;
 
     @UI("#striped-base .progress")
     public static JList<ProgressSection> progressSections;
+    @UI("#progress-height .progress")
+    public static JList<ProgressSection> progressHeightSections;
 
     @UI("#button-with-spinner-and-text")
     public static ButtonWithSpinner buttonWithSpinnerAndText;
@@ -532,6 +535,7 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-form-3")
     public static NavbarWithInputGroupForm navbarFormWithInputGroup;
     //Toasts
+
     @UI("#toastRightTop")
     public static Toast toastWithTopAlign;
     @UI("#linkToastRightTop")
