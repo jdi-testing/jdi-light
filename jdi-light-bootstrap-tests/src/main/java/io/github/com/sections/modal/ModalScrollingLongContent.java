@@ -3,7 +3,7 @@ package io.github.com.sections.modal;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Modal;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
 
 public class ModalScrollingLongContent extends Section {
 
@@ -16,6 +16,4 @@ public class ModalScrollingLongContent extends Section {
     public Modal modalLong;
     @UI("#exampleModalScrollable")
     public Modal modalScrollable;
-    @UI("#exampleModalLong div.modal-header")
-    public Section header;
 }

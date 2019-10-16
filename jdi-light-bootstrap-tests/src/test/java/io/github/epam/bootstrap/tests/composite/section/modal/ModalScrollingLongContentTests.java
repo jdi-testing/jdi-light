@@ -1,7 +1,7 @@
 package io.github.epam.bootstrap.tests.composite.section.modal;
 
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Modal;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -28,13 +28,6 @@ public class ModalScrollingLongContentTests extends TestsInit {
         };
     }
 
-    @Test
-    public void baseValidationTest() {
-        baseValidation(modalScrollingLongContent);
-        baseValidation(modalScrollingLongContent.buttonLongScroll);
-        baseValidation(modalScrollingLongContent.buttonLongScrollable);
-    }
-
     @Test(dataProvider = "listData")
     public void isValidationTest(Button showModal, Modal modal) {
         showModal.click();
@@ -49,8 +42,15 @@ public class ModalScrollingLongContentTests extends TestsInit {
                 .attr("role", "dialog")
                 .attr("aria-modal", "true")
                 .tag("div");
-        modal.button.click();
+        modal.close();
         modal.core().waitSec(2);
         modal.is().disappear();
+    }
+
+    @Test
+    public void baseValidationTest() {
+        baseValidation(modalScrollingLongContent);
+        baseValidation(modalScrollingLongContent.buttonLongScroll);
+        baseValidation(modalScrollingLongContent.buttonLongScrollable);
     }
 }
