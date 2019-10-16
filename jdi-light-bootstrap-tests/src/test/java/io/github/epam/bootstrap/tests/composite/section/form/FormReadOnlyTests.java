@@ -41,6 +41,4 @@ public class FormReadOnlyTests extends TestsInit {
         readonlyInput.setValue(text);
         readonlyInput.sendKeys(text);
     }
-
-
 }
