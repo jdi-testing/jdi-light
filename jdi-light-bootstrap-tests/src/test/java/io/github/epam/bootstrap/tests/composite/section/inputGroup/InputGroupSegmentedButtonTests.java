@@ -56,10 +56,10 @@ public class InputGroupSegmentedButtonTests extends TestsInit {
         segmentedButton.dropdownMenu.expand();
         segmentedButton.dropdownMenu.is().expanded();
         segmentedButton.dropdownMenu.is().size(4);
-        segmentedButton.dropdownMenu.list().get(0).is().text(action);
-        segmentedButton.dropdownMenu.list().get(1).is().text(anotherAction);
-        segmentedButton.dropdownMenu.list().get(2).is().text(somethingElseHere);
-        segmentedButton.dropdownMenu.list().get(3).is().text(separatedLink);
+        segmentedButton.dropdownMenu.list().get(1).is().text(action);
+        segmentedButton.dropdownMenu.list().get(2).is().text(anotherAction);
+        segmentedButton.dropdownMenu.list().get(3).is().text(somethingElseHere);
+        segmentedButton.dropdownMenu.list().get(4).is().text(separatedLink);
         segmentedButton.dropdownMenu.select(action);
         newWindowTitleCheck();
         segmentedButton.dropdownMenu.select(anotherAction);

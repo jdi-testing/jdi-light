@@ -19,8 +19,10 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.MediaObject;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
+import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonGroupBasicExample;
 import io.github.com.sections.ButtonGroupNesting;
@@ -36,6 +38,7 @@ import io.github.com.sections.CardExample;
 import io.github.com.sections.CardGroup;
 import io.github.com.sections.CardHorizontal;
 import io.github.com.sections.CardImage;
+import io.github.com.sections.CardKitchenSink;
 import io.github.com.sections.CardListGroups;
 import io.github.com.sections.CardMixinsUtilities;
 import io.github.com.sections.CardTextAlignment;
@@ -103,6 +106,7 @@ import io.github.com.sections.SegmentedButton;
 import io.github.com.sections.Switches;
 import io.github.com.sections.Toast;
 import io.github.com.sections.card.CardImageOverlays;
+import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.modal.ModalVerticallyCentered;
@@ -112,12 +116,16 @@ import io.github.com.sections.navbar.NavbarSupportedContent;
 import io.github.com.sections.navbar.NavbarText;
 import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.spinner.GrowingSpinners;
+import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
-    public static UIElement inputGroupWrap, inputGroupNowrap;
-    public static Button redButton, doubleButton, disabledButton;
+    public static UIElement inputGroupWrap;
+    public static UIElement inputGroupNowrap;
+    public static Button redButton;
+    public static Button doubleButton;
+    public static Button disabledButton;
 
     @UI("//input[contains(@class, 'progress-change plus')]")
     public static Button plus;
@@ -193,14 +201,14 @@ public class BootstrapPage extends WebPage {
     public static Progress progressBackgroundYellow;
     @UI("#progress-backgrounds-red")
     public static Progress progressBackgroundRed;
-    @UI("#button-show-spinner-border")
-    public static Button buttonSpinnerBorder;
-    @UI("#spinner-border")
-    public static Spinner spinnerBorder;
     @UI("#navbar-containers-centred")
     public static Navbar navbarCentredContainer;
     @UI("#navbar-containers-expanded")
     public static Navbar navbarExpandedContainer;
+    @UI("#button-show-spinner-border")
+    public static Button buttonSpinnerBorder;
+    @UI("#spinner-border")
+    public static Spinner spinnerBorder;
     //endregion
 
     //region Complex Elements
@@ -272,6 +280,16 @@ public class BootstrapPage extends WebPage {
     public static InputGroupSizing inputGroupSmallSizing;
     @UI("#input-group-large")
     public static InputGroupSizing inputGroupLargeSizing;
+    @UI("#modalMdo")
+    public static Button modalMdoButton;
+    @UI("#modalFat")
+    public static Button modalFatButton;
+    @UI("#modalGetbootstrap")
+    public static Button modalGetbootstrapButton;
+    @UI("#modalVaryingContentWindow")
+    public static ModalVaryingContent modalVaryingContentWindow;
+    @UI("#exampleModal")
+    public static MediaObject modalVaryingContentContainer;
     // Button addons
     @UI("#input-group-button-addon1")
     public static ButtonAddons inputGroupButtonAddons1;
@@ -285,8 +303,12 @@ public class BootstrapPage extends WebPage {
     public static CardExample cardExample;
     @UI("#card-image")
     public static CardImage cardImage;
+    @UI("#card-image-overlay")
+    public static CardImageOverlays cardImageOverlays;
     @UI("#card-body")
     public static CardBody cardBody;
+    @UI("#card-kitchen-sink")
+    public static CardKitchenSink cardKitchenSink;
     @UI("#card-with-header")
     public static CardWithHeaderAndFooter cardWithHeader;
     @UI("#card-with-header-and-footer-quote")
@@ -327,6 +349,10 @@ public class BootstrapPage extends WebPage {
     public static CardBorder cardBorderLight;
     @UI("#card-border-dark")
     public static CardBorder cardBorderDark;
+    @UI(".w-75")
+    public static CardUtilities cardWidth75;
+    @UI(".w-50")
+    public static CardUtilities cardWidth50;
     @UI("#button-with-dropdown")
     public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button")
@@ -439,10 +465,28 @@ public class BootstrapPage extends WebPage {
     public static NavsTabsWithDropdown navsTabsWithDropdown;
     @UI("#nav-pills-drop")
     public static NavsPillsWithDropdown navsPillsWithDropdown;
+    @UI("#navbar-dark-colorscheme")
+    public static NavbarColorScheme navbarDarkColorScheme;
+    @UI("#navbar-blue-colorscheme")
+    public static NavbarColorScheme navbarBlueColorScheme;
+    @UI("#navbar-light-colorscheme")
+    public static NavbarColorScheme navbarLightColorScheme;
     @UI("#progress-multiple-bars")
     public static ProgressMultipleBars progressMultipleBars;
     @UI(".card-columns")
     public static CardColumns cardColumns;
+    @UI("#list-example>a")
+    public static ListGroup listGroupForScrollSpy;
+    @UI("#list-example~div")
+    public static ScrollSpyNav scrollSpyWithListGroup;
+    @UI("#navbar-example3")
+    public static NestedNav nestedNav;
+    @UI("#navbar-example3~div")
+    public static ScrollSpyNav scrollSpyWithNestedNav;
+    @UI("#navbar-example2")
+    public static NavbarWithDropdown navbarWithDropdown;
+    @UI("#navbar-example2~div")
+    public static ScrollSpyNav scrollSpyInNavbar;
     @UI("body")
     public static Popover popover;
     @UI("body")
@@ -465,27 +509,6 @@ public class BootstrapPage extends WebPage {
     public static SpinnerSize spinnerSize;
     @UI("body")
     public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
-    // Button addons
-    @UI("#card-image-overlay")
-    public static CardImageOverlays cardImageOverlays;
-    @UI("#navbar-dark-colorscheme")
-    public static NavbarColorScheme navbarDarkColorScheme;
-    @UI("#navbar-blue-colorscheme")
-    public static NavbarColorScheme navbarBlueColorScheme;
-    @UI("#navbar-light-colorscheme")
-    public static NavbarColorScheme navbarLightColorScheme;
-    @UI("#list-example>a")
-    public static ListGroup listGroupForScrollSpy;
-    @UI("#list-example~div")
-    public static ScrollSpyNav scrollSpyWithListGroup;
-    @UI("#navbar-example3")
-    public static NestedNav nestedNav;
-    @UI("#navbar-example3~div")
-    public static ScrollSpyNav scrollSpyWithNestedNav;
-    @UI("#navbar-example2")
-    public static NavbarWithDropdown navbarWithDropdown;
-    @UI("#navbar-example2~div")
-    public static ScrollSpyNav scrollSpyInNavbar;
     @UI("#validation-submit-form")
     public static FormCustomStyles formCustomStyles;
 
@@ -534,6 +557,8 @@ public class BootstrapPage extends WebPage {
     public static Button toastWithCenterAlignButton;
     @UI("#toastCenterTop")
     public static Toast toastWithCenterAlign;
+    @UI("#spinner-alignment")
+    public static SpinnerAlignment spinnerAlignment;
     @UI("body")
     public static CheckboxAndRadioButtonCustomDisabled checkboxAndRadioButtonCustomDisabled;
     @UI("body")
@@ -546,6 +571,7 @@ public class BootstrapPage extends WebPage {
     public static Toast translucentToast;
     @UI("#custom-radio-con")
     public static RadioButtonsCustom radioButtonCustom;
+
     //Navbars
     @UI("#navbar-external-content")
     public static NavbarExternalContent navbarExternalContent;
