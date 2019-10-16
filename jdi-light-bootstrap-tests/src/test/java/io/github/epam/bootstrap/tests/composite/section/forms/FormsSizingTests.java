@@ -68,12 +68,33 @@ public class FormsSizingTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
-        formsSizing.largeTextField.is().enabled().text(is(text));
-        formsSizing.defaultTextField.is().enabled().text(is(text));
-        formsSizing.smallTextField.is().enabled().text(is(text));
-        formsSizing.largeSelect.is().displayed().selected("Large select");
-        formsSizing.defaultSelect.is().displayed().selected("Default select");
-        formsSizing.smallSelect.is().displayed().selected("Small select");
+        formsSizing.largeTextField.is()
+                .enabled()
+                .text(is(text));
+        formsSizing.defaultTextField.is()
+                .enabled()
+                .text(is(text));
+        formsSizing.smallTextField.is()
+                .enabled()
+                .text(is(text));
+        formsSizing.largeSelect.is()
+                .displayed()
+                .selected("Large select");
+        formsSizing.defaultSelect.is()
+                .displayed()
+                .selected("Default select");
+        formsSizing.smallSelect.is()
+                .displayed()
+                .selected("Small select");
+        formsSizing.largeTextField.is()
+                .enabled()
+                .placeholder(placeholderLarge);
+        formsSizing.defaultTextField.is()
+                .enabled()
+                .placeholder(placeholderDefault);
+        formsSizing.smallTextField.is()
+                .enabled()
+                .placeholder(placeholderSmall);
     }
 
     @Test
