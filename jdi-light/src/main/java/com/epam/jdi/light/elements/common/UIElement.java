@@ -302,6 +302,9 @@ public class UIElement extends JDIBase
                         throw getNotClickableException();
                     }
                 } else click(clArea);
+                break;
+            default:
+                throw exception("Can't perform click because of unknown Element area: " + area);
         }
     }
     private RuntimeException getNotClickableException() {
