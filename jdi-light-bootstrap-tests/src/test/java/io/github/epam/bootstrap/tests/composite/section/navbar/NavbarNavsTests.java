@@ -103,6 +103,6 @@ public class NavbarNavsTests extends TestsInit {
 
     @Test
     public void isDisabledItemNavWithDisabled(){
-        navbarNavWithDisabled.navbarLinks.get(3).is().disabled();
+        navbarNavWithDisabled.navbarLinks.get(4).is().disabled();
     }
 }
