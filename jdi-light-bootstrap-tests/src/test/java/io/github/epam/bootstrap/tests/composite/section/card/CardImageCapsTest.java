@@ -1,5 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.card;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.CardImageData;
@@ -100,9 +101,9 @@ public class CardImageCapsTest extends TestsInit {
 
     @Test
     public void imagePositionTest() {
-        assertEquals(cardImageOnTop.childs().get(0).getTagName(), "img");
+        assertEquals(cardImageOnTop.childs().get(1).getTagName(), "img");
 
         WebList children = cardImageOnBottom.childs();
-        assertEquals(children.get(children.size() - 1).getTagName(), "img");
+        assertEquals(children.get(children.size()).getTagName(), "img");
     }
 }
