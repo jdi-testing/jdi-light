@@ -170,7 +170,6 @@ public class FormOverviewTests extends TestsInit {
             expectedExceptions = {RuntimeException.class},
             expectedExceptionsMessageRegExp = ".*Check form failed:.*")
     public void fillNegativeTest(FormSignUp INCORRECT_CREDENTIALS) {
-
         formOverview.fill(DEFAULT_CREDENTIALS);
         formOverview.check(INCORRECT_CREDENTIALS);
         checkContactFormSubmitted();

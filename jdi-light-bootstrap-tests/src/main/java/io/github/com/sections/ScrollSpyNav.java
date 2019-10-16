@@ -9,7 +9,7 @@ public class ScrollSpyNav extends Section {
     @UI(".//h4 | .//h5") public ListGroup header;//@FindBy(xpath = ".//h4 | .//h5")
     @UI("p") public ListGroup mainText;          // @FindBy(css = "p")
 
-    @JDIAction("Scroll {0} to '{index}' check 'className' class exists")
+    @JDIAction("Scroll {0} to '{index}' check {'className'} class exists")
     public void scrollParagraph(ListGroup listGroup, int index, String className){
         mainText.get(index).show();
 
