@@ -18,7 +18,7 @@ import static org.hamcrest.core.StringStartsWith.startsWith;
  * Email: aleksandr_shiganov@epam.com;
  */
 
-public class gridModalTests extends TestsInit {
+public class GridModalTests extends TestsInit {
 
     @BeforeMethod
     public void before() {

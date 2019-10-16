@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 //import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 
 public class GridModalSection extends Section {
+
     //@FindBy(css = "#gridSystemModal")
     @UI("#gridSystemModal")
     private GridModalWindow gridModalWindow;

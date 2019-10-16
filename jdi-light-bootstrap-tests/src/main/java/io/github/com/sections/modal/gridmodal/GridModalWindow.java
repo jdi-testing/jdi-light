@@ -15,10 +15,6 @@ public class GridModalWindow extends Modal {
     @UI(".modal-footer")
     private ModalFooterSaveClose modalFooter;
 
-    public boolean isOpen() {
-        return (attr("style").contains("display"));
-    }
-
     public GridModalBody getBody() {
         return gridModal;
     }
