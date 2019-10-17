@@ -20,7 +20,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.MediaObject;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.modal.ModalTooltipsAndPopovers;
@@ -55,8 +54,12 @@ import io.github.com.sections.CheckboxesDefault;
 import io.github.com.sections.CheckboxesDefaultInline;
 import io.github.com.sections.CustomSelect;
 import io.github.com.sections.CustomSelectWithButton;
+import io.github.com.sections.FormBrowserDefaults;
 import io.github.com.sections.FormCustomStyles;
 import io.github.com.sections.FormOverview;
+import io.github.com.sections.FormServerSide;
+import io.github.com.sections.FormTooltip;
+import io.github.com.sections.FormsSizing;
 import io.github.com.sections.InputGroupInputWithCheckBox;
 import io.github.com.sections.InputGroupInputWithLabelAndText;
 import io.github.com.sections.InputGroupInputWithRadio;
@@ -113,7 +116,10 @@ import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.form.ReadonlyPlainText;
+import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.SectionModalLongScrolling;
+import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarSupportedContent;
@@ -215,6 +221,10 @@ public class BootstrapPage extends WebPage {
     public static Spinner spinnerBorder;
     @UI("#forms-readonly-input")
     public static TextField readonlyInput;
+    @UI("#readonlyPlainText1")
+    public static ReadonlyPlainText readonlyPlainText1;
+    @UI("#readonlyPlainText2")
+    public static ReadonlyPlainText readonlyPlainText2;
     //endregion
 
     //region Complex Elements
@@ -286,16 +296,6 @@ public class BootstrapPage extends WebPage {
     public static InputGroupSizing inputGroupSmallSizing;
     @UI("#input-group-large")
     public static InputGroupSizing inputGroupLargeSizing;
-    @UI("#modalMdo")
-    public static Button modalMdoButton;
-    @UI("#modalFat")
-    public static Button modalFatButton;
-    @UI("#modalGetbootstrap")
-    public static Button modalGetbootstrapButton;
-    @UI("#modalVaryingContentWindow")
-    public static ModalVaryingContent modalVaryingContentWindow;
-    @UI("#exampleModal")
-    public static MediaObject modalVaryingContentContainer;
     // Button addons
     @UI("#input-group-button-addon1")
     public static ButtonAddons inputGroupButtonAddons1;
@@ -313,10 +313,6 @@ public class BootstrapPage extends WebPage {
     public static CardImageOverlays cardImageOverlays;
     @UI("#card-body")
     public static CardBody cardBody;
-    @UI("#card-kitchen-sink")
-    public static CardKitchenSink cardKitchenSink;
-    @UI("#card-navigation")
-    public static CardNavigation cardNavigation;
     @UI("#card-with-header")
     public static CardWithHeaderAndFooter cardWithHeader;
     @UI("#card-with-header-and-footer-quote")
@@ -357,10 +353,6 @@ public class BootstrapPage extends WebPage {
     public static CardBorder cardBorderLight;
     @UI("#card-border-dark")
     public static CardBorder cardBorderDark;
-    @UI(".w-75")
-    public static CardUtilities cardWidth75;
-    @UI(".w-50")
-    public static CardUtilities cardWidth50;
     @UI("#button-with-dropdown")
     public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button")
@@ -519,6 +511,28 @@ public class BootstrapPage extends WebPage {
     public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
     @UI("#validation-submit-form")
     public static FormCustomStyles formCustomStyles;
+    @UI("#form-browser-defaults")
+    public static FormBrowserDefaults formBrowserDefaults;
+    @UI("#form-server-side")
+    public static FormServerSide formServerSide;
+    @UI("#form-tooltip")
+    public static FormTooltip formTooltip;
+    @UI("#modalMdo")
+    public static Button modalMdoButton;
+    @UI("#modalFat")
+    public static Button modalFatButton;
+    @UI("#modalGetbootstrap")
+    public static Button modalGetbootstrapButton;
+    @UI("#modalVaryingContentWindow")
+    public static ModalVaryingContent modalVaryingContentWindow;
+    @UI("#card-kitchen-sink")
+    public static CardKitchenSink cardKitchenSink;
+    @UI("#card-navigation")
+    public static CardNavigation cardNavigation;
+    @UI(".w-75")
+    public static CardUtilities cardWidth75;
+    @UI(".w-50")
+    public static CardUtilities cardWidth50;
     @UI("#forms-overview")
     public static FormOverview formOverview;
 
@@ -587,6 +601,8 @@ public class BootstrapPage extends WebPage {
     public static Toast translucentToast;
     @UI("#custom-radio-con")
     public static RadioButtonsCustom radioButtonCustom;
+    @UI("#forms-sizing")
+    public static FormsSizing formsSizing;
 
     //Navbars
     @UI("#navbar-nav-with-disabled")
@@ -598,6 +614,9 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
     //endregion
+
+    @UI("#grid-modal-base")
+    public static GridModalSection gridModalSection;
     //region Modals
     @UI("#modal-scroll-long")
     public static SectionModalLongScrolling sectionModalLongScrolling;
