@@ -87,4 +87,13 @@ public class ProgressAssert extends UIAssert<ProgressAssert, Progress> {
     public ProgressAssert animated(String animation) {
         return animated(is(animation));
     }
+
+    @JDIAction("Assert that '{name}' height is {0}")
+    public ProgressAssert height(Matcher<Integer> height) {
+        jdiAssert(element.core().getSize().getHeight(), height);
+        return this;
+    }
+    public ProgressAssert height(Integer height) {
+        return height(is(height));
+    }
 }
