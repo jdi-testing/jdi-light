@@ -2,7 +2,7 @@ package io.github.com.sections.modal;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Modal;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
 
 public class ModalOptionalSizes extends Modal {
 
