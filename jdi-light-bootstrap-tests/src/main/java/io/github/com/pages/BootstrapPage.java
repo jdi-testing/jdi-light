@@ -115,6 +115,7 @@ import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.modal.SectionModalLongScrolling;
+import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarSupportedContent;
@@ -216,6 +217,10 @@ public class BootstrapPage extends WebPage {
     public static Spinner spinnerBorder;
     @UI("#forms-readonly-input")
     public static TextField readonlyInput;
+    @UI("#readonlyPlainText1")
+    public static ReadonlyPlainText readonlyPlainText1;
+    @UI("#readonlyPlainText2")
+    public static ReadonlyPlainText readonlyPlainText2;
     //endregion
 
     //region Complex Elements
