@@ -1,6 +1,5 @@
 package io.github.epam.bootstrap.tests.composite.section.modal;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
 import io.github.epam.TestsInit;
@@ -37,9 +36,9 @@ public class ModalOptionalSizesTests extends TestsInit {
     @DataProvider
     public Object[][] modalSizeData() {
         return new Object[][]{
-                {modalOptionalSizes.xlButton, modalOptionalSizes.xlModal, "bd-example-modal-xl", 1140},
-                {modalOptionalSizes.lgButton, modalOptionalSizes.lgModal, "bd-example-modal-lg", 800},
-                {modalOptionalSizes.smButton, modalOptionalSizes.smModal, "bd-example-modal-sm", 300},
+                {modalOptionalSizes.xlButton, modalOptionalSizes.xlModal, 1140},
+                {modalOptionalSizes.lgButton, modalOptionalSizes.lgModal, 800},
+                {modalOptionalSizes.smButton, modalOptionalSizes.smModal, 300},
         };
     }
 
@@ -51,7 +50,7 @@ public class ModalOptionalSizesTests extends TestsInit {
 
     @Test(dataProvider = "modalBasicData")
     public void modalBasicFunctionalityTest(Button button, Modal modal) {
-        button.highlight();
+        button.show();
         button.click();
 
         modal.is().displayed();
@@ -59,13 +58,11 @@ public class ModalOptionalSizesTests extends TestsInit {
         modal.close();
 
         modal.is().hidden();
-
-        button.unhighlight();
     }
 
     @Test(dataProvider = "modalCssData")
     public void modalCssTest(Button button, Modal modal, String modalCss) {
-        button.highlight();
+        button.show();
         button.click();
 
         modal.is().displayed();
@@ -73,30 +70,20 @@ public class ModalOptionalSizesTests extends TestsInit {
         modal.childs().get(1).core().is().hasClass(modalCss);
 
         modal.close();
-
-        button.unhighlight();
     }
 
     @Test(dataProvider = "modalSizeData")
     public void modalSizeTest(Button button,
                               Modal modal,
-                              String modalClassName,
-                              long modalSize) {
-        button.highlight();
+                              int modalWidth) {
+        button.show();
         button.click();
 
         modal.is().displayed();
 
-        long modalWidth = WebDriverFactory.jsExecute(
-                "var modal = document.getElementsByClassName('" + modalClassName + "')[0];" +
-                        "return modal.children[0].offsetWidth;"
-        );
-
-        assertThat(modalWidth, equalTo(modalSize));
+        assertThat(modal.childs().get(2).core().getRect().width, equalTo(modalWidth));
 
         modal.close();
-
-        button.unhighlight();
     }
 
 }
