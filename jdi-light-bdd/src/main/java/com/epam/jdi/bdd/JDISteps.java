@@ -140,7 +140,7 @@ public class JDISteps {
 		WebDriverFactory.getDriver().manage().window().setSize(dimension);
 	}
 
-	@Given("Page with url \"([^\"]*)\" openned$")
+	@Given("Page with url \"([^\"]*)\" opened$")
 	@When("^(?:I |)open url \"([^\"]*)\"$")
 	public void iOpenUrl(String url) {
 		openUrl(url);
