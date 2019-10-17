@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite.section.navbarbrand;
+package io.github.epam.bootstrap.tests.composite.section.navbar;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.ui.bootstrap.elements.common.NavbarBrand;
