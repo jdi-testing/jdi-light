@@ -56,6 +56,7 @@ import io.github.com.sections.CustomSelect;
 import io.github.com.sections.CustomSelectWithButton;
 import io.github.com.sections.FormCustomStyles;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
+import io.github.com.sections.FormsSizing;
 import io.github.com.sections.FormOverview;
 import io.github.com.sections.InputGroupInputWithCheckBox;
 import io.github.com.sections.InputGroupInputWithLabelAndText;
@@ -585,6 +586,8 @@ public class BootstrapPage extends WebPage {
     public static Toast translucentToast;
     @UI("#custom-radio-con")
     public static RadioButtonsCustom radioButtonCustom;
+    @UI("#forms-sizing")
+    public static FormsSizing formsSizing;
 
     //Navbars
     @UI("#navbar-nav-with-disabled")
