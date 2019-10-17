@@ -229,28 +229,33 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 element.getTagName();
                 return beforeSearch(element);
             } catch (Exception ignore) {
-                if (getElementFunc == null)
+                if (getElementFunc == null) {
                     webElement.clear();
-                else {
+                } else {
                     return beforeSearch(webElement.set(purify(getElementFunc.execute())));
                 }
             }
         }
-        if (locator.isEmpty())
+        if (locator.isEmpty()) {
             return beforeSearch(getSmart());
-        if (locator.argsCount() != args.length)
+        }
+        if (locator.argsCount() != args.length) {
             throw exception("Can't get element with template locator '%s'. Expected %s arguments but found %s", getLocator(), locator.argsCount(), args.length);
+        }
+
         List<WebElement> els = getAllElements(args);
-        if (els.size() == 1)
-            return els.get(0);
-        if (els.size() == 0)
+        if (els.size() == 0) {
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
-        List<WebElement> filtered = filterElements(els);
-        if (filtered.size() == 1)
-            return filtered.get(0);
-        if (STRICT_SEARCH)
-            throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, els.size(), toString(), getTimeout());
-        return (filtered.size() > 1 ? filtered : els).get(0);
+        } else if (els.size() == 1) {
+            return els.get(0);
+        } else {
+            List<WebElement> filtered = filterElements(els);
+            if (STRICT_SEARCH && filtered.size() != 1) {
+                throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, els.size(), toString(), getTimeout());
+            } else {
+                return (filtered.size() > 0 ? filtered : els).get(0);
+            }
+        }
     }
 
     private List<WebElement> filterElements(List<WebElement> elements) {
