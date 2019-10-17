@@ -99,13 +99,9 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         showButton.show();
         showButton.click();
 
-        modal.core().waitFor().displayed();
-
         modal.is().displayed();
 
         modal.close();
-
-        modal.core().waitFor().hidden();
 
         modal.is().hidden();
     }
@@ -156,16 +152,22 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         showButton.show();
         showButton.click();
 
-        modal.waitFor().displayed();
+        modal.is().displayed();
 
         dismissButton1.show();
         dismissButton1.click();
 
+        modal.is().hidden();
+
         showButton.show();
         showButton.click();
 
+        modal.is().displayed();
+
         modal.show();
         modal.close();
+
+        modal.is().hidden();
     }
 
 }
