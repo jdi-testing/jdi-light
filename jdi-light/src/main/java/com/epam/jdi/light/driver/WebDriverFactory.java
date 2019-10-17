@@ -135,16 +135,20 @@ public class WebDriverFactory {
         try {
             Lock lock = new ReentrantLock();
             lock.lock();
-            if (!RUN_DRIVERS.get().has(driverName)) {
-                MapArray<String, WebDriver> rDrivers = RUN_DRIVERS.get();
-                if (rDrivers == null)
-                    rDrivers = new MapArray<>();
-                WebDriver resultDriver = DRIVERS.get(driverName).invoke();
-                if (resultDriver == null)
-                    throw exception("Can't get WebDriver '%s'. This Driver name not registered", driverName);
-                rDrivers.add(driverName, resultDriver);
-                RUN_DRIVERS.set(rDrivers);
+
+            MapArray<String, WebDriver> rDrivers = RUN_DRIVERS.get();
+            if (rDrivers == null) {
+                rDrivers = new MapArray<>();
             }
+            if (!rDrivers.has(driverName)) {
+                WebDriver resultDriver = DRIVERS.get(driverName).invoke();
+                if (resultDriver == null) {
+                    throw exception("Can't get WebDriver '%s'. This Driver name not registered", driverName);
+                }
+                rDrivers.add(driverName, resultDriver);
+            }
+            RUN_DRIVERS.set(rDrivers);
+
             WebDriver result = RUN_DRIVERS.get().get(driverName);
             if (result.toString().contains("(null)")) {
                 result = DRIVERS.get(driverName).invoke();
