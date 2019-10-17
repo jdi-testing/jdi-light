@@ -7,7 +7,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import io.github.com.entities.FormContacts;
 
-public class FormTooptip extends Form<FormContacts> {
+public class FormTooltip extends Form<FormContacts> {
 
     @UI("#validationTooltip01")
     public TextField name;

@@ -17,7 +17,7 @@ import static io.github.com.entities.FormUsers.DEFAULT_CHECK;
 import static io.github.com.entities.FormUsers.DEFAULT_CONTACT;
 import static io.github.com.entities.FormUsers.ONLY_NAME_FILLED_DEFAULT_CONTACT;
 import static io.github.com.entities.FormUsers.clearBlankContact;
-import static io.github.com.pages.BootstrapPage.formTooptip;
+import static io.github.com.pages.BootstrapPage.formTooltip;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
@@ -48,12 +48,12 @@ public class FormTooltipTests extends TestsInit {
     @DataProvider
     public Object[][] listData() {
         return new Object[][]{
-                {formTooptip.name, "First name", "Mark"},
-                {formTooptip.lastName, "Last name", "Otto"},
-                {formTooptip.userName, "Username", ""},
-                {formTooptip.city, "City", ""},
-                {formTooptip.state, "State", ""},
-                {formTooptip.zip, "Zip", ""}
+                {formTooltip.name, "First name", "Mark"},
+                {formTooltip.lastName, "Last name", "Otto"},
+                {formTooltip.userName, "Username", ""},
+                {formTooltip.city, "City", ""},
+                {formTooltip.state, "State", ""},
+                {formTooltip.zip, "Zip", ""}
         };
     }
 
@@ -80,37 +80,37 @@ public class FormTooltipTests extends TestsInit {
     @Test
     public void tooltipTests() {
         checkContactFormSubmitted();
-        formTooptip.tooltipName
+        formTooltip.tooltipName
                 .is()
                 .displayed()
                 .core()
                 .hasClass("valid-tooltip")
                 .text(is(positiveTooltip));
-        formTooptip.tooltipLastName
+        formTooltip.tooltipLastName
                 .is()
                 .displayed()
                 .core()
                 .hasClass("valid-tooltip")
                 .text(is(positiveTooltip));
-        formTooptip.tooltipUserName
+        formTooltip.tooltipUserName
                 .is()
                 .displayed()
                 .core()
                 .hasClass("valid-tooltip")
                 .text(is("Please choose a unique and valid username."));
-        formTooptip.tooltipCity
+        formTooltip.tooltipCity
                 .is()
                 .displayed()
                 .core()
                 .hasClass("invalid-tooltip")
                 .text(is(negativeTooltip + " city."));
-        formTooptip.tooltipState
+        formTooltip.tooltipState
                 .is()
                 .displayed()
                 .core()
                 .hasClass("invalid-tooltip")
                 .text(is(negativeTooltip + " state."));
-        formTooptip.tooltipZip
+        formTooltip.tooltipZip
                 .is()
                 .displayed()
                 .core()
@@ -120,167 +120,167 @@ public class FormTooltipTests extends TestsInit {
 
     @Test
     public void fillTest() {
-        formTooptip.fill(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CONTACT);
+        formTooltip.fill(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CONTACT);
         checkContactFormSubmitted();
     }
 
     @Test
     public void customFillingTest() {
-        formTooptip.fill(BLANK_CONTACT.set(c -> c.name = name));
+        formTooltip.fill(BLANK_CONTACT.set(c -> c.name = name));
         checkContactFormSubmitted();
-        formTooptip.check(BLANK_CONTACT);
-        formTooptip.fill(BLANK_CONTACT.set(c -> c.lastName = lastName));
+        formTooltip.check(BLANK_CONTACT);
+        formTooltip.fill(BLANK_CONTACT.set(c -> c.lastName = lastName));
         checkContactFormSubmitted();
-        formTooptip.check(BLANK_CONTACT);
-        formTooptip.fill(BLANK_CONTACT.set(c -> c.userName = userName));
+        formTooltip.check(BLANK_CONTACT);
+        formTooltip.fill(BLANK_CONTACT.set(c -> c.userName = userName));
         checkContactFormSubmitted();
-        formTooptip.check(BLANK_CONTACT);
-        formTooptip.fill(BLANK_CONTACT.set(c -> c.city = city));
+        formTooltip.check(BLANK_CONTACT);
+        formTooltip.fill(BLANK_CONTACT.set(c -> c.city = city));
         checkContactFormSubmitted();
-        formTooptip.check(BLANK_CONTACT);
-        formTooptip.fill(BLANK_CONTACT.set(c -> c.state = state));
+        formTooltip.check(BLANK_CONTACT);
+        formTooltip.fill(BLANK_CONTACT.set(c -> c.state = state));
         checkContactFormSubmitted();
-        formTooptip.check(BLANK_CONTACT);
-        formTooptip.fill(BLANK_CONTACT.set(c -> c.zip = zip));
+        formTooltip.check(BLANK_CONTACT);
+        formTooltip.fill(BLANK_CONTACT.set(c -> c.zip = zip));
         checkContactFormSubmitted();
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.check(DEFAULT_CHECK);
         clearBlankContact();
     }
 
     @Test
     public void directFillingTest() {
-        formTooptip.name.clear();
-        formTooptip.lastName.clear();
-        formTooptip.name.setValue(name);
+        formTooltip.name.clear();
+        formTooltip.lastName.clear();
+        formTooltip.name.setValue(name);
         checkContactFormSubmitted();
-        formTooptip.check(BLANK_CONTACT.set(c -> c.name = name));
-        formTooptip.lastName.setValue(lastName);
+        formTooltip.check(BLANK_CONTACT.set(c -> c.name = name));
+        formTooltip.lastName.setValue(lastName);
         checkContactFormSubmitted();
-        formTooptip.check(BLANK_CONTACT.set(c -> c.lastName = lastName));
-        formTooptip.userName.sendKeys(userName);
+        formTooltip.check(BLANK_CONTACT.set(c -> c.lastName = lastName));
+        formTooltip.userName.sendKeys(userName);
         checkContactFormSubmitted();
-        formTooptip.check(BLANK_CONTACT.set(c -> c.userName = userName));
-        formTooptip.city.sendKeys(city);
+        formTooltip.check(BLANK_CONTACT.set(c -> c.userName = userName));
+        formTooltip.city.sendKeys(city);
         checkContactFormSubmitted();
-        formTooptip.check(BLANK_CONTACT.set(c -> c.city = city));
-        formTooptip.state.sendKeys(state);
+        formTooltip.check(BLANK_CONTACT.set(c -> c.city = city));
+        formTooltip.state.sendKeys(state);
         checkContactFormSubmitted();
-        formTooptip.check(BLANK_CONTACT.set(c -> c.state = state));
-        formTooptip.zip.sendKeys(zip);
+        formTooltip.check(BLANK_CONTACT.set(c -> c.state = state));
+        formTooltip.zip.sendKeys(zip);
         checkContactFormSubmitted();
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.check(DEFAULT_CHECK);
         clearBlankContact();
     }
 
     @Test
     public void submitTextToContactFormTest() {
-        formTooptip.submit("Roman");
-        formTooptip.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
+        formTooltip.submit("Roman");
+        formTooltip.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
     }
 
     @Test
     public void submitEntityToContactFormTest() {
-        formTooptip.submit(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.submit(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void submitTextToContactFormUsingCustomButtonTest() {
-        formTooptip.submit("Roman", "submit");
-        formTooptip.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
+        formTooltip.submit("Roman", "submit");
+        formTooltip.check(ONLY_NAME_FILLED_DEFAULT_CONTACT);
     }
 
     @Test
     public void verifyMethodPositiveTest() {
-        formTooptip.fill(DEFAULT_CONTACT);
-        List<String> verified = formTooptip.verify(DEFAULT_CONTACT);
+        formTooltip.fill(DEFAULT_CONTACT);
+        List<String> verified = formTooltip.verify(DEFAULT_CONTACT);
         jdiAssert(verified, hasSize(0));
     }
 
     @Test
     public void verifyMethodNegativeTest() {
-        formTooptip.fill(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
-        List<String> verified = formTooptip.verify(DEFAULT_CONTACT);
+        formTooltip.fill(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
+        List<String> verified = formTooltip.verify(DEFAULT_CONTACT);
         jdiAssert(verified, hasSize(1));
         jdiAssert(verified.get(0), containsString("Mark"));
     }
 
     @Test
     public void sendMethodTest() {
-        formTooptip.fill(DEFAULT_CONTACT);
-        formTooptip.send();
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.fill(DEFAULT_CONTACT);
+        formTooltip.send();
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void sendEntityMethodTest() {
-        formTooptip.send(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.send(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void addEntityMethodTest() {
-        formTooptip.add(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.add(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void publishMethodTest() {
-        formTooptip.publish(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.publish(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void saveMethodTest() {
-        formTooptip.save(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.save(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void updateMethodTest() {
-        formTooptip.update(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.update(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void cancelMethodTest() {
-        formTooptip.cancel(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.cancel(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void closeMethodTest() {
-        formTooptip.close(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.close(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void backMethodTest() {
-        formTooptip.back(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.back(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void selectMethodTest() {
-        formTooptip.select(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.select(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void nextMethodTest() {
-        formTooptip.next(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.next(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     @Test
     public void searchMethodTest() {
-        formTooptip.search(DEFAULT_CONTACT);
-        formTooptip.check(DEFAULT_CHECK);
+        formTooltip.search(DEFAULT_CONTACT);
+        formTooltip.check(DEFAULT_CHECK);
     }
 
     private void checkContactFormSubmitted() {
-        formTooptip.submit();
+        formTooltip.submit();
         validateAlert(is("Form filled and submitted successfully"));
     }
 }
