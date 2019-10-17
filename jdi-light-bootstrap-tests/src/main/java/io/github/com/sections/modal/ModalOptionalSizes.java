@@ -17,13 +17,13 @@ public class ModalOptionalSizes extends Modal {
     public Button smButton;
 
     // Modals
-    @UI(".modal-xl .modal-content")
+    @UI(".bd-example-modal-xl")
     public Modal xlModal;
 
-    @UI(".modal-lg .modal-content")
+    @UI("bd-example-modal-lg")
     public Modal lgModal;
 
-    @UI(".modal-sm .modal-content")
+    @UI("bd-example-modal-sm")
     public Modal smModal;
 
 }
