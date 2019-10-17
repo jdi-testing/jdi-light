@@ -38,7 +38,7 @@ import io.github.com.sections.CardGroup;
 import io.github.com.sections.CardHorizontal;
 import io.github.com.sections.CardImage;
 import io.github.com.sections.CardKitchenSink;
-import io.github.com.sections.CardImageCaps;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import io.github.com.sections.CardListGroups;
 import io.github.com.sections.CardMixinsUtilities;
 import io.github.com.sections.CardNavigation;

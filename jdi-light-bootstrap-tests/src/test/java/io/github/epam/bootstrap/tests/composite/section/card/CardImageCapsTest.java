@@ -78,6 +78,9 @@ public class CardImageCapsTest extends TestsInit {
         cardImageOnBottom.image.unhighlight();
         cardImageOnBottom.image.assertThat().width(is(bottomCardData.getWidth()));
         cardImageOnBottom.image.assertThat().height(is(bottomCardData.getHeight()));
+
+        cardImageOnTop.is().imageOnTop();
+        cardImageOnBottom.is().imageBelow();
     }
 
     @Test
