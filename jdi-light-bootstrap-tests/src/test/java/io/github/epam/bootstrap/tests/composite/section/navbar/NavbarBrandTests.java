@@ -44,7 +44,7 @@ public class NavbarBrandTests extends TestsInit {
         for (int i = 1; i < navbarSection.allNavbarBrands.size() + 1; i++) {
             NavbarBrand nbb = navbarSection.allNavbarBrands.get(i);
             if (nbb.isLink()) {
-                nbb.highlight("orange");
+                nbb.highlight();
                 nbb.click();
                 WebDriver driver = WebDriverFactory.getDriver();
                 ArrayList<String> tabs = new ArrayList<>(
