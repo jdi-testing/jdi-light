@@ -96,4 +96,10 @@ public class NavbarBrandTests extends TestsInit {
         navbarBrandList.forEach(BaseValidations::baseValidation);
         navbarBrandList.forEach(NavbarBrand::unhighlight);
     }
+
+    @Test
+    public void baseValidationStreamJListTest() {
+        navbarSection.navbarBrandJList.forEach(BaseValidations::baseValidation);
+        navbarSection.navbarBrandJList.forEach(NavbarBrand::unhighlight);
+    }
 }
