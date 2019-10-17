@@ -1,6 +1,5 @@
 package io.github.epam.bootstrap.tests.composite.section.modal;
 
-import io.github.com.sections.modal.ModalTooltipsAndPopoversDialog;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
