@@ -5,11 +5,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.inputRange;
+import static io.github.com.pages.BootstrapPage.rangeInput;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
-public class InputRangeTests extends TestsInit {
+public class RangeInputTests extends TestsInit {
 
     private final String rangeLabel = "Example Range input";
     private final String rangeClass = "form-control-range";
@@ -22,22 +22,22 @@ public class InputRangeTests extends TestsInit {
 
     @Test
     public void baseValidationTest() {
-        baseValidation(inputRange);
-        inputRange.unhighlight();
+        baseValidation(rangeInput);
+        rangeInput.unhighlight();
     }
 
     @Test
     public void itemHasProperClass() {
-        inputRange.is().core().hasClass(rangeClass);
+        rangeInput.is().core().hasClass(rangeClass);
     }
 
     @Test
     public void itemHasProperType() {
-        inputRange.is().core().attr("type", "range");
+        rangeInput.is().core().attr("type", "range");
     }
 
     @Test
     public void labelValidationTest() {
-        inputRange.label().is().text(rangeLabel);
+        rangeInput.label().is().text(rangeLabel);
     }
 }

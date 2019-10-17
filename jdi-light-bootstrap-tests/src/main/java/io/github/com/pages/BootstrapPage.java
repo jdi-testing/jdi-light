@@ -113,7 +113,7 @@ import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.modal.SectionModalLongScrolling;
-import io.github.com.sections.form.InputRange;
+import io.github.com.sections.form.RangeInput;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarSupportedContent;
@@ -216,7 +216,7 @@ public class BootstrapPage extends WebPage {
     @UI("#forms-readonly-input")
     public static TextField readonlyInput;
     @UI("#formControlRange")
-    public static InputRange inputRange;
+    public static RangeInput rangeInput;
     //endregion
 
     //region Complex Elements
