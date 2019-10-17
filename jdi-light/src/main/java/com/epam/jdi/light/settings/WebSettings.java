@@ -58,7 +58,6 @@ import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
-import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.openqa.selenium.PageLoadStrategy.EAGER;
@@ -180,25 +179,48 @@ public class WebSettings {
     }
 
     private static void setSearchStrategy(String p) {
-        p = p.toLowerCase();
-        if (("soft").equals(p))
-            p = "any, multiple";
-        if (("strict").equals(p))
-            p = "visible, single";
-        if (p.split(",").length == 2) {
-            List<String> params = asList(p.split(","));
-            if (params.contains("visible") || params.contains("displayed"))
-                onlyVisible();
-            if (params.contains("any") || params.contains("all"))
-                noValidation();
-            if (params.contains("enabled"))
-                visibleEnabled();
-            if (params.contains("inview"))
-                inView();
-            if (params.contains("single"))
-                STRICT_SEARCH = true;
-            if (params.contains("multiple"))
-                STRICT_SEARCH = false;
+        String paramString = p.toLowerCase();
+        if (("soft").equals(paramString)) {
+            paramString = "any, multiple";
+        } else if (("strict").equals(paramString)) {
+            paramString = "visible, single";
+        }
+
+        String[] params = paramString.split(",");
+
+        if (params.length != 2) {
+            exception("You must specify exact two parameters, " +
+                    "or use 'soft' or 'strict' as shortcats for 'any, multiple' and 'visible, single'");
+        }
+
+        String visibilityParam = params[0].trim();
+        String searchTypeParam = params[1].trim();
+
+        handleVisibilityParam(visibilityParam);
+        handleSearchTypeParam(searchTypeParam);
+    }
+
+    private static void handleVisibilityParam(String param) {
+        if ("visible".equals(param) || "displayed".equals(param)) {
+            onlyVisible();
+        } else if ("any".equals(param) || "all".equals(param)) {
+            noValidation();
+        } else if ("enabled".equals(param)) {
+            visibleEnabled();
+        } else if ("inview".equals(param)) {
+            inView();
+        } else {
+            exception("%s is not correct visibility parameter", param);
+        }
+    }
+
+    private static void handleSearchTypeParam(String param) {
+        if ("single".equals(param)) {
+            STRICT_SEARCH = true;
+        } else if ("multiple".equals(param)) {
+            STRICT_SEARCH = false;
+        } else {
+            exception("%s is not correct search type parameter", param);
         }
     }
 

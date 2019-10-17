@@ -14,6 +14,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
@@ -36,8 +37,10 @@ import io.github.com.sections.CardExample;
 import io.github.com.sections.CardGroup;
 import io.github.com.sections.CardHorizontal;
 import io.github.com.sections.CardImage;
+import io.github.com.sections.CardKitchenSink;
 import io.github.com.sections.CardListGroups;
 import io.github.com.sections.CardMixinsUtilities;
+import io.github.com.sections.CardNavigation;
 import io.github.com.sections.CardTextAlignment;
 import io.github.com.sections.CardWithCustomCss13Rem;
 import io.github.com.sections.CardWithCustomCss9Rem;
@@ -49,7 +52,12 @@ import io.github.com.sections.CheckboxesDefault;
 import io.github.com.sections.CheckboxesDefaultInline;
 import io.github.com.sections.CustomSelect;
 import io.github.com.sections.CustomSelectWithButton;
+import io.github.com.sections.FormBrowserDefaults;
 import io.github.com.sections.FormCustomStyles;
+import io.github.com.sections.FormOverview;
+import io.github.com.sections.FormServerSide;
+import io.github.com.sections.FormTooltip;
+import io.github.com.sections.FormsSizing;
 import io.github.com.sections.InputGroupInputWithCheckBox;
 import io.github.com.sections.InputGroupInputWithLabelAndText;
 import io.github.com.sections.InputGroupInputWithRadio;
@@ -106,6 +114,15 @@ import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.form.ReadonlyPlainText;
+import io.github.com.sections.modal.ModalVaryingContent;
+import io.github.com.sections.modal.SectionModalLongScrolling;
+import io.github.com.sections.modal.gridmodal.GridModalSection;
+import io.github.com.sections.navbar.NavbarColorScheme;
+import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarSupportedContent;
+import io.github.com.sections.navbar.NavbarText;
+import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.navbar.*;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
@@ -201,6 +218,12 @@ public class BootstrapPage extends WebPage {
     public static Button buttonSpinnerBorder;
     @UI("#spinner-border")
     public static Spinner spinnerBorder;
+    @UI("#forms-readonly-input")
+    public static TextField readonlyInput;
+    @UI("#readonlyPlainText1")
+    public static ReadonlyPlainText readonlyPlainText1;
+    @UI("#readonlyPlainText2")
+    public static ReadonlyPlainText readonlyPlainText2;
     //endregion
 
     //region Complex Elements
@@ -329,10 +352,6 @@ public class BootstrapPage extends WebPage {
     public static CardBorder cardBorderLight;
     @UI("#card-border-dark")
     public static CardBorder cardBorderDark;
-    @UI(".w-75")
-    public static CardUtilities cardWidth75;
-    @UI(".w-50")
-    public static CardUtilities cardWidth50;
     @UI("#button-with-dropdown")
     public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button")
@@ -491,12 +510,39 @@ public class BootstrapPage extends WebPage {
     public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
     @UI("#validation-submit-form")
     public static FormCustomStyles formCustomStyles;
+    @UI("#form-browser-defaults")
+    public static FormBrowserDefaults formBrowserDefaults;
+    @UI("#form-server-side")
+    public static FormServerSide formServerSide;
+    @UI("#form-tooltip")
+    public static FormTooltip formTooltip;
+    @UI("#modalMdo")
+    public static Button modalMdoButton;
+    @UI("#modalFat")
+    public static Button modalFatButton;
+    @UI("#modalGetbootstrap")
+    public static Button modalGetbootstrapButton;
+    @UI("#modalVaryingContentWindow")
+    public static ModalVaryingContent modalVaryingContentWindow;
+    @UI("#card-kitchen-sink")
+    public static CardKitchenSink cardKitchenSink;
+    @UI("#card-navigation")
+    public static CardNavigation cardNavigation;
+    @UI(".w-75")
+    public static CardUtilities cardWidth75;
+    @UI(".w-50")
+    public static CardUtilities cardWidth50;
+    @UI("#forms-overview")
+    public static FormOverview formOverview;
+
 
     @UI("//h4[.='Navbar - Text']/../..")
     public static NavbarText navbarText;
 
     @UI("#striped-base .progress")
     public static JList<ProgressSection> progressSections;
+    @UI("#progress-height .progress")
+    public static JList<ProgressSection> progressHeightSections;
 
     @UI("#button-with-spinner-and-text")
     public static ButtonWithSpinner buttonWithSpinnerAndText;
@@ -513,6 +559,7 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-form-3")
     public static NavbarWithInputGroupForm navbarFormWithInputGroup;
     //Toasts
+
     @UI("#toastRightTop")
     public static Toast toastWithTopAlign;
     @UI("#linkToastRightTop")
@@ -551,8 +598,14 @@ public class BootstrapPage extends WebPage {
     public static Toast translucentToast;
     @UI("#custom-radio-con")
     public static RadioButtonsCustom radioButtonCustom;
+    @UI("#forms-sizing")
+    public static FormsSizing formsSizing;
 
     //Navbars
+    @UI("#navbar-nav-with-disabled")
+    public static Navbar navbarNavWithDisabled;
+    @UI("#navbar-nav-with-dropdown")
+    public static Navbar navbarNavWithDropdown;
     @UI("#navbar-external-content")
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
@@ -561,5 +614,12 @@ public class BootstrapPage extends WebPage {
     public static NavbarPlacement navbarPlacementDefault;
     @UI("#navbar-placement-sticky-top")
     public static NavbarPlacement navbarPlacementStickyTop;
+    //endregion
+
+    @UI("#grid-modal-base")
+    public static GridModalSection gridModalSection;
+    //region Modals
+    @UI("#modal-scroll-long")
+    public static SectionModalLongScrolling sectionModalLongScrolling;
     //endregion
 }
