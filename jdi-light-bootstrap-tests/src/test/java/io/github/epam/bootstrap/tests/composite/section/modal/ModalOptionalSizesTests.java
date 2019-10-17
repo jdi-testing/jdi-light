@@ -82,7 +82,7 @@ public class ModalOptionalSizesTests extends TestsInit {
                               Modal modal,
                               String modalClassName,
                               long modalSize) {
-        button.highlight();
+        button.show();
         button.click();
 
         modal.is().displayed();
@@ -95,8 +95,6 @@ public class ModalOptionalSizesTests extends TestsInit {
         assertThat(modalWidth, equalTo(modalSize));
 
         modal.close();
-
-        button.unhighlight();
     }
 
 }

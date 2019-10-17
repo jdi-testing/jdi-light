@@ -6,7 +6,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
 
 public class ModalOptionalSizes extends Modal {
 
-    // Buttons
     @UI(".bd-example button:nth-of-type(1)")
     public Button xlButton;
 
@@ -16,7 +15,6 @@ public class ModalOptionalSizes extends Modal {
     @UI(".bd-example button:nth-of-type(3)")
     public Button smButton;
 
-    // Modals
     @UI(".bd-example-modal-xl")
     public Modal xlModal;
 
