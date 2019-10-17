@@ -3,25 +3,23 @@ package io.github.epam.bootstrap.tests.composite.section.navbar;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.ui.bootstrap.elements.common.NavbarBrand;
 import io.github.epam.TestsInit;
-import io.github.epam.bootstrap.tests.BaseValidations;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarSection;
+import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.testng.Assert.assertEquals;
 
 public class NavbarBrandTests extends TestsInit {
 
-    private List<NavbarBrand> navbarBrandList;
     private String imgPath = "images/wolverin.jpg";
     private String navbarUrl = "https://getbootstrap.com/docs/4.3/components/navbar/#nav";
 
@@ -29,10 +27,6 @@ public class NavbarBrandTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-
-        navbarBrandList = new ArrayList<NavbarBrand>();
-        for (int i = 1; i <= navbarSection.navbarBrandJList.size(); i++)
-            navbarBrandList.add(navbarSection.navbarBrandJList.get(i));
     }
 
     @DataProvider
@@ -47,35 +41,40 @@ public class NavbarBrandTests extends TestsInit {
 
     @Test
     public void checkNavbarClickLink() {
-        navbarBrandList.stream().filter(NavbarBrand::isLink).forEach(nbb -> {
-            nbb.click();
-            WebDriver driver = WebDriverFactory.getDriver();
-            ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
-            driver.switchTo().window(tabs.get(tabs.size() - 1));
-            assertEquals(getUrl(), navbarUrl);
-            driver.close();
-            driver.switchTo().window(tabs.get(tabs.size() - 2));
-        });
+        for (int i = 1; i < navbarSection.allNavbarBrands.size() + 1; i++) {
+            NavbarBrand nbb = navbarSection.allNavbarBrands.get(i);
+            if (nbb.isLink()) {
+                nbb.highlight("orange");
+                nbb.click();
+                WebDriver driver = WebDriverFactory.getDriver();
+                ArrayList<String> tabs = new ArrayList<>(
+                        WebDriverFactory.getDriver().getWindowHandles());
+                driver.switchTo().window(tabs.get(tabs.size() - 1));
+                assertEquals(getUrl(), navbarUrl);
+                driver.close();
+                driver.switchTo().window(tabs.get(tabs.size() - 2));
+            }
+        }
     }
 
     @Test(dataProvider = "navbarBrandData")
     public void checkNavbarText(String navbarId, String navbarText) {
-        navbarBrandList.stream().filter(navbarBrand ->
-                navbarBrand.attr("id").equals(navbarId)).forEach(nbb -> {
-            nbb.highlight();
-            nbb.is().core()
-                    .text(navbarText);
-            nbb.unhighlight();
-        });
+        for (int i = 1; i < navbarSection.allNavbarBrands.size() + 1; i++) {
+            NavbarBrand nbb = navbarSection.allNavbarBrands.get(i);
+            if (nbb.attr("id").equals(navbarId)) {
+                nbb.highlight();
+                nbb.is().core().text(navbarText);
+                nbb.unhighlight();
+            }
+        }
     }
 
     @Test
     public void checkNavbarClickImage() {
-        navbarBrandList.stream()
+        navbarSection.navbarBrandWithImage.stream()
                 .filter(nbb -> nbb.isLink() && nbb.childs().size() > 0)
                 .map(nbbWithIm -> nbbWithIm.childs().get(1))
                 .forEach(imgFromNavbar -> {
-
                     imgFromNavbar.highlight("blue");
                     imgFromNavbar.is().attr("src", containsString(imgPath))
                             .tag("img");
@@ -83,7 +82,8 @@ public class NavbarBrandTests extends TestsInit {
 
                     imgFromNavbar.click();
                     WebDriver driver = WebDriverFactory.getDriver();
-                    ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver().getWindowHandles());
+                    ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver()
+                            .getWindowHandles());
                     driver.switchTo().window(tabs.get(tabs.size() - 1));
                     assertEquals(getUrl(), navbarUrl);
                     driver.close();
@@ -92,14 +92,11 @@ public class NavbarBrandTests extends TestsInit {
     }
 
     @Test
-    public void baseValidationStreamTest() {
-        navbarBrandList.forEach(BaseValidations::baseValidation);
-        navbarBrandList.forEach(NavbarBrand::unhighlight);
-    }
-
-    @Test
     public void baseValidationStreamJListTest() {
-        navbarSection.navbarBrandJList.forEach(BaseValidations::baseValidation);
-        navbarSection.navbarBrandJList.forEach(NavbarBrand::unhighlight);
+        for (int i = 1; i < navbarSection.allNavbarBrands.size() + 1; i++) {
+            NavbarBrand nb = navbarSection.allNavbarBrands.get(i);
+            baseValidation(nb);
+            nb.unhighlight();
+        }
     }
 }
