@@ -168,20 +168,20 @@ public class FormHorizontalTests extends TestsInit {
     @Test
     public void emailInputTest() {
         formHorizontal.email.sendKeys("delnote");
-        checkContactFormSubmitted();
+        checkSubmitClicked();
         formHorizontal.check(BLANK_CONTACT.set(c -> c.email = "delnote"));
         formHorizontal.email.sendKeys("@");
-        checkContactFormSubmitted();
+        checkSubmitClicked();
         formHorizontal.check(BLANK_CONTACT.set(c -> c.email = "delnote@"));
         formHorizontal.email.sendKeys(".");
-        checkContactFormSubmitted();
+        checkSubmitClicked();
         formHorizontal.check(BLANK_CONTACT.set(c -> c.email = "delnote@."));
         formHorizontal.email.clear();
         formHorizontal.email.sendKeys("delnote@gmail.");
-        checkContactFormSubmitted();
+        checkSubmitClicked();
         formHorizontal.check(BLANK_CONTACT.set(c -> c.email = "delnote@gmail."));
         formHorizontal.email.sendKeys("com");
-        checkContactFormSubmitted();
+        checkSubmitClicked();
         validateAlert(is("Form submitted successfully"));
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
         clearBlankContact();
@@ -191,7 +191,7 @@ public class FormHorizontalTests extends TestsInit {
     public void formTest() {
         formHorizontal.fill(HORIZONTAL_FORM_CONTACT);
         formHorizontal.check(HORIZONTAL_FORM_CONTACT);
-        checkContactFormSubmitted();
+        checkSubmitClicked();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
@@ -205,7 +205,7 @@ public class FormHorizontalTests extends TestsInit {
         formHorizontal.check(BLANK_CONTACT);
         formHorizontal.fill(BLANK_CONTACT.set(c -> c.accept = accept));
         formHorizontal.check(BLANK_CONTACT);
-        checkContactFormSubmitted();
+        checkSubmitClicked();
         validateAlert(is("Form submitted successfully"));
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
         clearBlankContact();
@@ -221,7 +221,7 @@ public class FormHorizontalTests extends TestsInit {
         formHorizontal.check(BLANK_CONTACT.set(c -> c.radio = radio));
         formHorizontal.accept.setValue(accept);
         formHorizontal.check(BLANK_CONTACT.set(c -> c.accept = accept));
-        checkContactFormSubmitted();
+        checkSubmitClicked();
         validateAlert(is("Form submitted successfully"));
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
         clearBlankContact();
@@ -306,8 +306,8 @@ public class FormHorizontalTests extends TestsInit {
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
-    private void checkContactFormSubmitted() {
+    private void checkSubmitClicked() {
         formHorizontal.submit();
-        validateAlert(is("Form filled and submitted successfully"));
+        validateAlert(is("Submit button clicked."));
     }
 }
