@@ -23,6 +23,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.MediaObject;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
+import io.github.com.sections.modal.EmbeddedVideoModal;
 import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonGroupBasicExample;
@@ -291,10 +292,14 @@ public class BootstrapPage extends WebPage {
     public static Button modalFatButton;
     @UI("#modalGetbootstrap")
     public static Button modalGetbootstrapButton;
+    @UI("#modal-youtube button.btn-primary")
+    public static Button modalEmbeddedVideoButton;
     @UI("#modalVaryingContentWindow")
     public static ModalVaryingContent modalVaryingContentWindow;
     @UI("#exampleModal")
     public static MediaObject modalVaryingContentContainer;
+    @UI("#youTubeModalLabel")
+    public static EmbeddedVideoModal embeddedVideoModal;
     // Button addons
     @UI("#input-group-button-addon1")
     public static ButtonAddons inputGroupButtonAddons1;
