@@ -55,6 +55,7 @@ import io.github.com.sections.CustomSelect;
 import io.github.com.sections.CustomSelectWithButton;
 import io.github.com.sections.FormBrowserDefaults;
 import io.github.com.sections.FormCustomStyles;
+import io.github.com.sections.FormHorizontal;
 import io.github.com.sections.FormOverview;
 import io.github.com.sections.FormServerSide;
 import io.github.com.sections.FormTooltip;
@@ -535,6 +536,8 @@ public class BootstrapPage extends WebPage {
     public static CardUtilities cardWidth50;
     @UI("#forms-overview")
     public static FormOverview formOverview;
+    @UI("#form-horizontal")
+    public static FormHorizontal formHorizontal;
 
 
     @UI("//h4[.='Navbar - Text']/../..")

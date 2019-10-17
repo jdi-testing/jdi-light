@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite.section;
+package io.github.epam.bootstrap.tests.composite.section.navbar;
 
 import com.epam.jdi.light.elements.common.WindowsManager;
 import io.github.epam.TestsInit;
