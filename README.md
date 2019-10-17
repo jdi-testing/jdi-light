@@ -15,7 +15,7 @@ Introduction + fast start example: <a href = "https://jdi-docs.github.io/jdi-lig
 Tutorial: <a href = "https://jdi-docs.github.io/jdi-light/?java#tutorial" target = "a_blank"> https://jdi-docs.github.io/jdi-light/?java#tutorial </a> - helps to get main ideas on practice </br>
 Tutorial repo: <a href = "https://github.com/jdi-tutorials" target = "a_blank"> https://github.com/jdi-tutorials </a> </br>
 Project templates: <a href = "https://github.com/jdi-templates" target = "a_blank"> https://github.com/jdi-templates </a>  - for fast projects start </br>
-Examples: https://github.com/jdi-examples </br>
+Examples: <a href = "https://github.com/jdi-examples" target = "a_blank"> https://github.com/jdi-examples </a>  </br> 
 How to use [UI Elements examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests/src/test/java/io/github/epam/html/tests/elements) </br>
 Increase test [performance examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-performance) </br>
  </br>
