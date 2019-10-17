@@ -1,16 +1,24 @@
 package io.github.epam.bootstrap.tests.composite.section.modal;
 
 import io.github.epam.TestsInit;
-import io.github.epam.bootstrap.tests.BaseValidations;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.modalLiveDemo;
+import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.testng.Assert.assertEquals;
+
 
 public class ModalLiveDemoTests extends TestsInit {
+
+    private String launchButtonText = "Launch demo modal";
+    private String titleText = "MODAL TITLE";
+    private String bodyText = "Woohoo, you're reading this text in a modal!";
+    private String saveButtonText = "Save changes";
+    private String closeButtonText = "Close";
+
 
     @BeforeMethod
     public void before() {
@@ -18,62 +26,69 @@ public class ModalLiveDemoTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    @Test(priority = 3)
-    public void bodyTextTest() {
-        modalLiveDemo.launchModal.base().waitSec(5);
-        modalLiveDemo.launchModal.is().text("Launch demo modal");
+    @Test
+    public void modalContentGetTextTest() {
+        assertEquals(modalLiveDemo.launchModal.getText(), launchButtonText);
         modalLiveDemo.launchModal.click();
-        modalLiveDemo.title.is().text("MODAL TITLE");
-        modalLiveDemo.body.is().text("Woohoo, you're reading this text in a modal!");
-        modalLiveDemo.saveButton.is().text("Save changes");
-        modalLiveDemo.closeButton.is().text("Close");
+        assertEquals(modalLiveDemo.modalContent.title.getText(), titleText);
+        assertEquals(modalLiveDemo.body.getText(), bodyText);
+        assertEquals(modalLiveDemo.saveButton.getText(), saveButtonText);
+        assertEquals(modalLiveDemo.closeButton.getText(), closeButtonText);
         modalLiveDemo.closeButton.click();
-    }
-
-
-    //$(By.className."ldo)).").is.display
-    @Test(priority = 2)
-    public void buttonsInBodyTest() {
-        modalLiveDemo.launchModal.click();
-        //modalLiveDemo.title.is().displayed();
-        modalLiveDemo.title.is().displayed();
-        modalLiveDemo.saveButton.click();
-        modalLiveDemo.title.is().displayed();
-        modalLiveDemo.closeButton.click();
-        modalLiveDemo.title.is().hidden();
-    }
-
-    @Test(priority = 1)
-    public void closeXTest() {
-        modalLiveDemo.launchModal.click();
-//        modalLiveDemo.core().waitSec(2);
-        //modalLiveDemo.modalContent.title.is().displayed();
-        modalLiveDemo.modalContent.is().displayed();
-        modalLiveDemo.closeX.click();
-//        modalLiveDemo.title.is().hidden();
-        modalLiveDemo.modalContent.is().hidden();
-    }
-
-    @Test(priority = 4)
-    public void isValidationTest() {
-        refresh();
-        modalLiveDemo.launchModal.is().displayed().enabled().text("Launch demo modal");
-        modalLiveDemo.launchModal.click();
-        modalLiveDemo.saveButton.is().displayed().enabled().text("Save changes");
-        modalLiveDemo.closeButton.is().displayed().enabled().text("Close");
-        modalLiveDemo.closeX.is().displayed().enabled();
-        modalLiveDemo.closeX.click();
     }
 
     @Test
-    public void baseValidation() {
-        BaseValidations.baseValidation(modalLiveDemo.launchModal);
+    public void saveAndCloseButtonsTest() {
         modalLiveDemo.launchModal.click();
-        BaseValidations.baseValidation(modalLiveDemo.title);
-        BaseValidations.baseValidation(modalLiveDemo.body);
-        BaseValidations.baseValidation(modalLiveDemo.saveButton);
-        BaseValidations.baseValidation(modalLiveDemo.closeButton);
-        BaseValidations.baseValidation(modalLiveDemo.closeX);
+        modalLiveDemo.modalContent.is().displayed();
+        modalLiveDemo.saveButton.click();
+        modalLiveDemo.modalContent.is().displayed();
+        modalLiveDemo.closeButton.click();
+        modalLiveDemo.modalContent.is().hidden();
+    }
+
+    @Test
+    public void closeXButtonTest() {
+        modalLiveDemo.launchModal.click();
+        modalLiveDemo.modalContent.is().displayed();
         modalLiveDemo.closeX.click();
+        modalLiveDemo.modalContent.is().hidden();
+    }
+
+    @Test
+    public void isValidationTest() {
+        modalLiveDemo.launchModal.is()
+                .displayed()
+                .enabled()
+                .text(launchButtonText)
+                .core().tag("button");
+        modalLiveDemo.launchModal.click();
+        modalLiveDemo.saveButton.is()
+                .displayed()
+                .enabled()
+                .text(saveButtonText)
+                .core().tag("button");
+        modalLiveDemo.closeButton.is()
+                .displayed()
+                .enabled()
+                .text(closeButtonText)
+                .core().tag("button");
+        modalLiveDemo.closeX.is()
+                .displayed()
+                .enabled()
+                .core().tag("button");
+        modalLiveDemo.modalContent.close();
+    }
+
+    @Test
+    public void baseValidations() {
+        baseValidation(modalLiveDemo.launchModal);
+        modalLiveDemo.launchModal.click();
+        baseValidation(modalLiveDemo.modalContent.title);
+        baseValidation(modalLiveDemo.body);
+        baseValidation(modalLiveDemo.saveButton);
+        baseValidation(modalLiveDemo.closeButton);
+        baseValidation(modalLiveDemo.closeX);
+        modalLiveDemo.modalContent.close();
     }
 }
