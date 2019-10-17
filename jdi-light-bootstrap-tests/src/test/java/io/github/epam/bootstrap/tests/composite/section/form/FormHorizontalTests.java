@@ -182,6 +182,7 @@ public class FormHorizontalTests extends TestsInit {
         formHorizontal.check(BLANK_CONTACT.set(c -> c.email = "delnote@gmail."));
         formHorizontal.email.sendKeys("com");
         checkContactFormSubmitted();
+        validateAlert(is("Form filled and submitted successfully"));
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
         clearBlankContact();
     }
