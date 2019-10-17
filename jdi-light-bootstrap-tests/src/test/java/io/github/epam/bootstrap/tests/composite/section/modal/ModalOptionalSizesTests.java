@@ -33,13 +33,9 @@ public class ModalOptionalSizesTests extends TestsInit {
         button.highlight();
         button.click();
 
-        modal.core().waitFor().displayed();
-
         modal.is().displayed();
 
         modal.close();
-
-        modal.core().waitFor().hidden();
 
         modal.is().hidden();
 

@@ -20,10 +20,10 @@ public class ModalOptionalSizes extends Modal {
     @UI(".bd-example-modal-xl")
     public Modal xlModal;
 
-    @UI("bd-example-modal-lg")
+    @UI(".bd-example-modal-lg")
     public Modal lgModal;
 
-    @UI("bd-example-modal-sm")
+    @UI(".bd-example-modal-sm")
     public Modal smModal;
 
 }
