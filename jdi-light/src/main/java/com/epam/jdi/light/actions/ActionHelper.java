@@ -76,26 +76,31 @@ public class ActionHelper {
     };
     public static String fillTemplate(String template,
         ProceedingJoinPoint jp, MethodSignature method) {
+
+        String filledTemplate = template;
+
         try {
-            if (template.contains("{0")) {
+            if (filledTemplate.contains("{0")) {
                 Object[] args = getArgs(jp);
-                template = msgFormat(template, args);
-            } else if (template.contains("%s")) {
-                template = format(template, getArgs(jp));
+                filledTemplate = msgFormat(filledTemplate, args);
+            } else if (filledTemplate.contains("%s")) {
+                filledTemplate = format(filledTemplate, getArgs(jp));
             }
-            String newTemplate = null;
-            if (template.contains("{")) {
+
+            if (filledTemplate.contains("{")) {
                 MapArray<String, Object> obj = toMap(() -> new MapArray<>("this", getElementName(jp)));
                 MapArray<String, Object> args = methodArgs(jp, method);
                 MapArray<String, Object> core = core(jp);
                 MapArray<String, Object> fields = classFields(jp.getThis());
-                newTemplate = getActionNameFromTemplate(method, template, obj, args, core, fields);
-                if (newTemplate.contains("{{VALUE}}") && args.size() > 0)
-                    newTemplate = newTemplate.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
-                if (newTemplate.contains("{failElement}"))
-                    newTemplate = newTemplate.replaceAll("\\{failElement}", obj.get(0).value.toString());
+                filledTemplate = getActionNameFromTemplate(method, filledTemplate, obj, args, core, fields);
+                if (filledTemplate.contains("{{VALUE}}") && args.size() > 0) {
+                    filledTemplate = filledTemplate.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
+                }
+                if (filledTemplate.contains("{failElement}")) {
+                    filledTemplate = filledTemplate.replaceAll("\\{failElement}", obj.get(0).value.toString());
+                }
             }
-            return newTemplate != null ? newTemplate : template;
+            return filledTemplate;
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName() +
                 LINE_BREAK + "" + safeException(ex));
