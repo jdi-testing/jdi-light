@@ -84,7 +84,6 @@ import io.github.com.sections.ListGroupWithBadges;
 import io.github.com.sections.MediaObjectNesting;
 import io.github.com.sections.MediaObjectSample;
 import io.github.com.sections.NavbarExternalContent;
-import io.github.com.sections.NavbarSection;
 import io.github.com.sections.NavbarWithDropdown;
 import io.github.com.sections.NavsAlignmentCenter;
 import io.github.com.sections.NavsAlignmentEnd;
@@ -287,7 +286,7 @@ public class BootstrapPage extends WebPage {
     @UI("#input-group-default") public static InputGroupSizing inputGroupDefaultSizing;
     @UI("#input-group-small") public static InputGroupSizing inputGroupSmallSizing;
     @UI("#input-group-large") public static InputGroupSizing inputGroupLargeSizing;
-// Button addons
+    // Button addons
     @UI("#input-group-button-addon1") public static ButtonAddons inputGroupButtonAddons1;
     @UI("#input-group-button-addon2") public static ButtonAddons inputGroupButtonAddons2;
     @UI("#input-group-button-addon3") public static ButtonAddons inputGroupButtonAddons3;
@@ -398,7 +397,6 @@ public class BootstrapPage extends WebPage {
     @UI("#form-browser-defaults") public static FormBrowserDefaults formBrowserDefaults;
     @UI("#form-server-side") public static FormServerSide formServerSide;
     @UI("#form-tooltip") public static FormTooltip formTooltip;
-
     @UI("#modalMdo")
     public static Button modalMdoButton;
     @UI("#modalFat")
@@ -410,7 +408,14 @@ public class BootstrapPage extends WebPage {
     @UI("#exampleModal")
     public static MediaObject modalVaryingContentContainer;
     // Button addons
-   
+    @UI("#card-kitchen-sink")
+    public static CardKitchenSink cardKitchenSink;
+    @UI("#card-navigation")
+    public static CardNavigation cardNavigation;
+    @UI(".w-75")
+    public static CardUtilities cardWidth75;
+    @UI(".w-50")
+    public static CardUtilities cardWidth50;
     @UI("#forms-overview")
     public static FormOverview formOverview;
 
@@ -422,9 +427,6 @@ public class BootstrapPage extends WebPage {
     public static JList<ProgressSection> progressSections;
     @UI("#progress-height .progress")
     public static JList<ProgressSection> progressHeightSections;
-
-    @UI("#navbar-base-for-brand")
-    public static NavbarSection navbarSection;
 
     @UI("#button-with-spinner-and-text")
     public static ButtonWithSpinner buttonWithSpinnerAndText;
@@ -440,7 +442,6 @@ public class BootstrapPage extends WebPage {
     public static NavbarForm navbarFormWithText;
     @UI("#navbar-form-3")
     public static NavbarWithInputGroupForm navbarFormWithInputGroup;
-
     //Toasts
 
     @UI("#toastRightTop")
