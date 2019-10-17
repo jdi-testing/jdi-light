@@ -94,7 +94,7 @@ public class GridModalTests extends TestsInit {
     @Test
     public void checkCloseXModalButton() {
         gridModalSection.getGridModalWindow().getBtnCloseX().highlight("red");
-        gridModalSection.getGridModalWindow().clickBtnCloseX();
+        gridModalSection.getGridModalWindow().close();
         gridModalSection.getGridModalWindow().is().disappear();
     }
 
