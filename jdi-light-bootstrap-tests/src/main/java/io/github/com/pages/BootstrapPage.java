@@ -22,6 +22,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.buttongroup.ButtonGroupBasicExample;
 import io.github.com.sections.buttongroup.ButtonGroupNesting;
@@ -117,9 +118,11 @@ import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.SectionModalLongScrolling;
+import io.github.com.sections.form.RangeInput;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
@@ -226,6 +229,8 @@ public class BootstrapPage extends WebPage {
     public static ReadonlyPlainText readonlyPlainText1;
     @UI("#readonlyPlainText2")
     public static ReadonlyPlainText readonlyPlainText2;
+    @UI("#formControlRange")
+    public static RangeInput rangeInput;
     //endregion
 
     //region Complex Elements
@@ -312,6 +317,10 @@ public class BootstrapPage extends WebPage {
     public static CardImage cardImage;
     @UI("#card-image-overlay")
     public static CardImageOverlays cardImageOverlays;
+    @UI("#card-image-caps-1")
+    public static CardImageCaps cardImageOnTop;
+    @UI("#card-image-caps-2")
+    public static CardImageCaps cardImageOnBottom;
     @UI("#card-body")
     public static CardBody cardBody;
     @UI("#card-with-header")
@@ -618,6 +627,9 @@ public class BootstrapPage extends WebPage {
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
+
+    @UI("#modal-vertically-centered")
+    public static ModalVerticallyCentered modalVerticallyCentered;
     //endregion
 
     @UI("#grid-modal-base")
