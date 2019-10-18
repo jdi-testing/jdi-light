@@ -31,7 +31,7 @@ public class ModalEmbeddingVideoTests extends TestsInit {
         baseValidation(embeddedVideoModal);
         baseValidation(embeddedVideoModal.getVideoModalFrame().getVideoTitle());
         baseValidation(embeddedVideoModal.getVideoModalFrame().getPlayButton());
-
+        embeddedVideoModal.close();
     }
 
     @Test
@@ -42,6 +42,7 @@ public class ModalEmbeddingVideoTests extends TestsInit {
                 .enabled()
                 .ref(VIDEO_URL)
                 .text(VIDEO_TITLE);
+        embeddedVideoModal.close();
     }
 
     @Test
@@ -51,6 +52,7 @@ public class ModalEmbeddingVideoTests extends TestsInit {
         embeddedVideoModal.getVideoModalFrame().getProgressBar().assertThat()
                 .displayed()
                 .attr("aria-valuenow", Matchers.matchesPattern("[1-9]{1}[0-9]*"));
+        embeddedVideoModal.close();
     }
 
 
