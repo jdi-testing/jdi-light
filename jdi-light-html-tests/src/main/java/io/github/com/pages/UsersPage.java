@@ -11,11 +11,14 @@ import io.github.com.entities.MarvelUserInfo;
 import io.github.com.entities.MarvelUserSimple;
 
 public class UsersPage extends WebPage {
-	@UI("#user-table") public static Table usersTable;
+	@UI("#user-table")
+	public static Table usersTable;
 	@UI("#user-table") @WaitTimeout(2)
 	public static DataTable<MarvelUser, MarvelUserInfo> users;
-	@UI("#user-table") public static DataTable<MarvelUser, ?> usersRow;
-	@UI("#user-table") public static DataTable<?, MarvelUserSimple> usersData;
+	@UI("#user-table")
+	public static DataTable<MarvelUser, ?> usersRow;
+	@UI("#user-table")
+	public static DataTable<?, MarvelUserSimple> usersData;
 	@JTable(root = "#user-table", rowHeader = "User")
 	public static DataTable<MarvelUser, MarvelUserInfo> usersSetup;
 
