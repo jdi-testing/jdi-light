@@ -38,6 +38,7 @@ import io.github.com.sections.CardGroup;
 import io.github.com.sections.CardHorizontal;
 import io.github.com.sections.CardImage;
 import io.github.com.sections.CardKitchenSink;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import io.github.com.sections.CardListGroups;
 import io.github.com.sections.CardMixinsUtilities;
 import io.github.com.sections.CardNavigation;
@@ -54,6 +55,9 @@ import io.github.com.sections.CustomSelect;
 import io.github.com.sections.CustomSelectWithButton;
 import io.github.com.sections.FormBrowserDefaults;
 import io.github.com.sections.FormCustomStyles;
+import io.github.com.sections.FormDisabled;
+import io.github.com.sections.FormHelpText;
+import io.github.com.sections.FormHorizontal;
 import io.github.com.sections.FormOverview;
 import io.github.com.sections.FormServerSide;
 import io.github.com.sections.FormTooltip;
@@ -114,11 +118,13 @@ import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.modal.ModalOptionalSizes;
 import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
+import io.github.com.sections.form.RangeInput;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
@@ -225,6 +231,8 @@ public class BootstrapPage extends WebPage {
     public static ReadonlyPlainText readonlyPlainText1;
     @UI("#readonlyPlainText2")
     public static ReadonlyPlainText readonlyPlainText2;
+    @UI("#formControlRange")
+    public static RangeInput rangeInput;
     //endregion
 
     //region Complex Elements
@@ -311,6 +319,10 @@ public class BootstrapPage extends WebPage {
     public static CardImage cardImage;
     @UI("#card-image-overlay")
     public static CardImageOverlays cardImageOverlays;
+    @UI("#card-image-caps-1")
+    public static CardImageCaps cardImageOnTop;
+    @UI("#card-image-caps-2")
+    public static CardImageCaps cardImageOnBottom;
     @UI("#card-body")
     public static CardBody cardBody;
     @UI("#card-with-header")
@@ -535,6 +547,8 @@ public class BootstrapPage extends WebPage {
     public static CardUtilities cardWidth50;
     @UI("#forms-overview")
     public static FormOverview formOverview;
+    @UI("#form-horizontal")
+    public static FormHorizontal formHorizontal;
 
 
     @UI("//h4[.='Navbar - Text']/../..")
@@ -601,6 +615,10 @@ public class BootstrapPage extends WebPage {
     public static RadioButtonsCustom radioButtonCustom;
     @UI("#forms-sizing")
     public static FormsSizing formsSizing;
+    @UI("#form-help-text")
+    public static FormHelpText formHelpText;
+    @UI("#form-disabled")
+    public static FormDisabled formDisabled;
 
     //Navbars
     @UI("#navbar-nav-with-disabled")

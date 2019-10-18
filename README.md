@@ -67,7 +67,5 @@ Mail: roman.iovlev.jdi@gmail.com
 
 Skype: roman.iovlev
 
-
-
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light?ref=badge_large)
