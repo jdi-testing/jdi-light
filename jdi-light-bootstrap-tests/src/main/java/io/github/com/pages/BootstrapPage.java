@@ -17,6 +17,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
@@ -38,7 +39,6 @@ import io.github.com.sections.CardGroup;
 import io.github.com.sections.CardHorizontal;
 import io.github.com.sections.CardImage;
 import io.github.com.sections.CardKitchenSink;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import io.github.com.sections.CardListGroups;
 import io.github.com.sections.CardMixinsUtilities;
 import io.github.com.sections.CardNavigation;
@@ -118,14 +118,14 @@ import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
-import io.github.com.sections.modal.ModalVerticallyCentered;
+import io.github.com.sections.form.RangeInput;
 import io.github.com.sections.form.ReadonlyPlainText;
+import io.github.com.sections.modal.EmbeddedVideoModal;
 import io.github.com.sections.modal.ModalLiveDemo;
 import io.github.com.sections.modal.ModalOptionalSizes;
 import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
-import io.github.com.sections.form.RangeInput;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
@@ -538,6 +538,10 @@ public class BootstrapPage extends WebPage {
     public static Button modalGetbootstrapButton;
     @UI("#modalVaryingContentWindow")
     public static ModalVaryingContent modalVaryingContentWindow;
+    @UI("#modal-youtube button.btn-primary")
+    public static Button modalEmbeddedVideoButton;
+    @UI("#youTubeModalLabel")
+    public static EmbeddedVideoModal embeddedVideoModal;
     @UI("#card-kitchen-sink")
     public static CardKitchenSink cardKitchenSink;
     @UI("#card-navigation")
