@@ -168,21 +168,21 @@ public class FormHorizontalTests extends TestsInit {
     @Test
     public void emailInputTest() {
         formHorizontal.email.sendKeys("delnote");
-        checkSubmitClicked();
+        formHorizontal.submit();
         formHorizontal.check(BLANK_CONTACT.set(c -> c.email = "delnote"));
         formHorizontal.email.sendKeys("@");
-        checkSubmitClicked();
+        formHorizontal.submit();
         formHorizontal.check(BLANK_CONTACT.set(c -> c.email = "delnote@"));
         formHorizontal.email.sendKeys(".");
-        checkSubmitClicked();
+        formHorizontal.submit();
         formHorizontal.check(BLANK_CONTACT.set(c -> c.email = "delnote@."));
         formHorizontal.email.clear();
         formHorizontal.email.sendKeys("delnote@gmail.");
-        checkSubmitClicked();
+        formHorizontal.submit();
         formHorizontal.check(BLANK_CONTACT.set(c -> c.email = "delnote@gmail."));
         formHorizontal.email.sendKeys("com");
-        checkSubmitClicked();
-        validateAlert(is("Form submitted successfully"));
+        formHorizontal.submit();
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
         clearBlankContact();
     }
@@ -191,7 +191,8 @@ public class FormHorizontalTests extends TestsInit {
     public void formTest() {
         formHorizontal.fill(HORIZONTAL_FORM_CONTACT);
         formHorizontal.check(HORIZONTAL_FORM_CONTACT);
-        checkSubmitClicked();
+        formHorizontal.submit();
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
@@ -205,8 +206,8 @@ public class FormHorizontalTests extends TestsInit {
         formHorizontal.check(BLANK_CONTACT);
         formHorizontal.fill(BLANK_CONTACT.set(c -> c.accept = accept));
         formHorizontal.check(BLANK_CONTACT);
-        checkSubmitClicked();
-        validateAlert(is("Form submitted successfully"));
+        formHorizontal.submit();
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
         clearBlankContact();
     }
@@ -221,8 +222,8 @@ public class FormHorizontalTests extends TestsInit {
         formHorizontal.check(BLANK_CONTACT.set(c -> c.radio = radio));
         formHorizontal.accept.setValue(accept);
         formHorizontal.check(BLANK_CONTACT.set(c -> c.accept = accept));
-        checkSubmitClicked();
-        validateAlert(is("Form submitted successfully"));
+        formHorizontal.submit();
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
         clearBlankContact();
     }
@@ -230,6 +231,7 @@ public class FormHorizontalTests extends TestsInit {
     @Test
     public void submitEntityToContactFormTest() {
         formHorizontal.submit(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
@@ -237,77 +239,89 @@ public class FormHorizontalTests extends TestsInit {
     public void sendMethodTest() {
         formHorizontal.fill(HORIZONTAL_FORM_CONTACT);
         formHorizontal.send();
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
     @Test
     public void sendEntityMethodTest() {
         formHorizontal.send(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
     @Test
     public void addEntityMethodTest() {
         formHorizontal.add(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
     @Test
     public void publishMethodTest() {
         formHorizontal.publish(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
     @Test
     public void saveMethodTest() {
         formHorizontal.save(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
     @Test
     public void updateMethodTest() {
         formHorizontal.update(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
     @Test
     public void cancelMethodTest() {
         formHorizontal.cancel(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
     @Test
     public void closeMethodTest() {
         formHorizontal.close(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
     @Test
     public void backMethodTest() {
         formHorizontal.back(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
     @Test
     public void selectMethodTest() {
         formHorizontal.select(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
     @Test
     public void nextMethodTest() {
         formHorizontal.next(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
     @Test
     public void searchMethodTest() {
         formHorizontal.search(HORIZONTAL_FORM_CONTACT);
+        validateAlerts();
         formHorizontal.check(HORIZONTAL_FORM_DEFAULT);
     }
 
-    private void checkSubmitClicked() {
-        formHorizontal.submit();
+    private void validateAlerts() {
         validateAlert(is("Submit button clicked."));
+        validateAlert(is("Form submitted successfully"));
     }
 }
