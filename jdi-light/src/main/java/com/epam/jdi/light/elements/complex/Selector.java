@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import org.apache.logging.log4j.util.Strings;
@@ -25,7 +26,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
 public class Selector extends UIBaseElement<UISelectAssert>
-        implements ISelector, SetValue, HasPlaceholder {
+        implements ISelector, SetValue, HasPlaceholder, HasLabel {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
     protected Select asSelect() {
         return core().asSelect();
