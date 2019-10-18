@@ -13,6 +13,10 @@ public class FormUsers {
 
     public static FormContacts DEFAULT_CHECK = defaultCheckContact();
 
+    public static FormContacts HORIZONTAL_FORM_CONTACT = horizontalFormContact();
+
+    public static FormContacts HORIZONTAL_FORM_DEFAULT = horizontalFormBlankContact();
+
     public static FormContacts LOWER_CASE_NAME_CONTACT =
             defaultContact().set(c -> c.name = c.name.toLowerCase());
     public static FormContacts UPPER_CASE_NAME_CONTACT =
@@ -48,6 +52,24 @@ public class FormUsers {
             c.city = "";
             c.state = "";
             c.zip = "";
+            c.accept = "false";
+        });
+    }
+
+    private static FormContacts horizontalFormContact() {
+        return new FormContacts().set(c -> {
+            c.email = "delnote@gmail.com";
+            c.password = "qwerty";
+            c.radio = "option2";
+            c.accept = "true";
+        });
+    }
+
+    private static FormContacts horizontalFormBlankContact() {
+        return new FormContacts().set(c -> {
+            c.email = "";
+            c.password = "";
+            c.radio = "option1";
             c.accept = "false";
         });
     }

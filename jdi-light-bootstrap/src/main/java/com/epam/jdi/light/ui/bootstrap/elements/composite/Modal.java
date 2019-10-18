@@ -12,4 +12,5 @@ public class Modal extends Section {
     public void close() {
         linked(".modal-header button", "Close").click();
     }
+
 }
