@@ -38,6 +38,7 @@ import io.github.com.sections.CardGroup;
 import io.github.com.sections.CardHorizontal;
 import io.github.com.sections.CardImage;
 import io.github.com.sections.CardKitchenSink;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import io.github.com.sections.CardListGroups;
 import io.github.com.sections.CardMixinsUtilities;
 import io.github.com.sections.CardNavigation;
@@ -312,6 +313,10 @@ public class BootstrapPage extends WebPage {
     public static CardImage cardImage;
     @UI("#card-image-overlay")
     public static CardImageOverlays cardImageOverlays;
+    @UI("#card-image-caps-1")
+    public static CardImageCaps cardImageOnTop;
+    @UI("#card-image-caps-2")
+    public static CardImageCaps cardImageOnBottom;
     @UI("#card-body")
     public static CardBody cardBody;
     @UI("#card-with-header")
