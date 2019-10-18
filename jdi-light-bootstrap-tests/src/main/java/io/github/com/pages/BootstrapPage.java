@@ -120,7 +120,9 @@ import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.form.ReadonlyPlainText;
+import io.github.com.sections.modal.ModalOptionalSizes;
 import io.github.com.sections.modal.ModalVaryingContent;
+import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.form.RangeInput;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
@@ -627,15 +629,26 @@ public class BootstrapPage extends WebPage {
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
-
-    @UI("#modal-vertically-centered")
-    public static ModalVerticallyCentered modalVerticallyCentered;
     //endregion
 
+    //region Modals
     @UI("#grid-modal-base")
     public static GridModalSection gridModalSection;
-    //region Modals
     @UI("#modal-scroll-long")
     public static SectionModalLongScrolling sectionModalLongScrolling;
+    @UI("#modal-vertically-centered")
+    public static ModalVerticallyCentered modalVerticallyCentered;
+
+    // * Modal Optional Sizes Beginning *
+    @UI("//*[@id='modal-optional-sizes']//button[contains(text(), 'Extra')]")
+    public Button xlButton;
+    @UI("//*[@id='modal-optional-sizes']//button[contains(text(), 'Large')]")
+    public Button lgButton;
+    @UI("//*[@id='modal-optional-sizes']//button[contains(text(), 'Small')]")
+    public Button smButton;
+    @UI("#modal-optional-sizes")
+    public static ModalOptionalSizes modalOptionalSizes;
+    // * Modal Optional Sizes End *
+
     //endregion
 }
