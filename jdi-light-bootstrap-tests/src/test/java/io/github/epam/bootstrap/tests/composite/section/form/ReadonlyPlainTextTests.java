@@ -2,11 +2,13 @@ package io.github.epam.bootstrap.tests.composite.section.form;
 
 import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.InvalidElementStateException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
+import static io.github.com.pages.BootstrapPage.readonlyInput;
 import static io.github.com.pages.BootstrapPage.readonlyPlainText1;
 import static io.github.com.pages.BootstrapPage.readonlyPlainText2;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
@@ -15,8 +17,9 @@ import static org.testng.Assert.assertTrue;
 
 public class ReadonlyPlainTextTests extends TestsInit {
 
-    private static final String plainTextValue = "email@example.com";
-    private static final String labelTextValue = "Email";
+    private String plainTextValue = "email@example.com";
+    private String labelTextValue = "Email";
+    private String text = "This method will throw an exception , because this element isn't user-editable ";
 
     @DataProvider
     public static Object[] itemsUnderTesting() {
@@ -40,6 +43,12 @@ public class ReadonlyPlainTextTests extends TestsInit {
         item.is().core().hasClass("form-control-plaintext");
         assertTrue(item.hasAttribute("readonly"));
         item.is().core().attr("type", "text");
+    }
+
+    @Test(dataProvider = "itemsUnderTesting", expectedExceptions = {InvalidElementStateException.class})
+    public void check(ReadonlyPlainText item) {
+        item.setValue(text);
+        item.sendKeys(text);
     }
 
     @Test(dataProvider = "itemsUnderTesting")
