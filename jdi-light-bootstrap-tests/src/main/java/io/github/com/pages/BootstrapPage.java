@@ -610,9 +610,7 @@ public class BootstrapPage extends WebPage {
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
-    @UI("#navbar-placement-default")
-    public static NavbarPlacement navbarPlacementDefault;
-    @UI("#navbar-placement-sticky-top")
+    @UI("#navbar-sticky-top")
     public static NavbarPlacement navbarPlacementStickyTop;
     //endregion
 
