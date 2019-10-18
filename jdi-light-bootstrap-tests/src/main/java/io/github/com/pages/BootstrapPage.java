@@ -120,6 +120,7 @@ import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.form.ReadonlyPlainText;
+import io.github.com.sections.modal.ModalLiveDemo;
 import io.github.com.sections.modal.ModalOptionalSizes;
 import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
@@ -636,6 +637,10 @@ public class BootstrapPage extends WebPage {
     public static GridModalSection gridModalSection;
     @UI("#modal-scroll-long")
     public static SectionModalLongScrolling sectionModalLongScrolling;
+    @UI("#modal-live-demo .bd-example .btn")
+    public static Button modalLiveDemoLaunchButton;
+    @UI("#exampleModalLive")
+    public static ModalLiveDemo modalLiveDemo;
     @UI("#modal-vertically-centered")
     public static ModalVerticallyCentered modalVerticallyCentered;
 
