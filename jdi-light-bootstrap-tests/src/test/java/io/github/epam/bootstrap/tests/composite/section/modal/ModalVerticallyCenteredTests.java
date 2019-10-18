@@ -101,7 +101,6 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         showButton.click();
 
         modal.core().waitFor().displayed();
-        modal.core().waitFor().displayed();
 
         long modalTop = WebDriverFactory.jsExecute(
                 "var modal = document.getElementById('" + modal.childs().get(2).getAttribute("id") + "');" +

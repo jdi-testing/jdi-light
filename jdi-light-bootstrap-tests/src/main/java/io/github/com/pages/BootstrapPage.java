@@ -121,6 +121,7 @@ import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.form.RangeInput;
 import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.modal.ModalLiveDemo;
+import io.github.com.sections.modal.ModalOptionalSizes;
 import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
