@@ -16,5 +16,8 @@ public class FormContacts extends DataClass<FormContacts> {
     public String state;
     public String zip;
     public String accept;
+    public String radio;
+    public String email;
+    public String password;
 
 }
