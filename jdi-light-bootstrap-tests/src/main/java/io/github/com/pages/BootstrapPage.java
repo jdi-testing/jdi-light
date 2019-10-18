@@ -122,6 +122,7 @@ import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.SectionModalLongScrolling;
+import io.github.com.sections.form.RangeInput;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
@@ -228,6 +229,8 @@ public class BootstrapPage extends WebPage {
     public static ReadonlyPlainText readonlyPlainText1;
     @UI("#readonlyPlainText2")
     public static ReadonlyPlainText readonlyPlainText2;
+    @UI("#formControlRange")
+    public static RangeInput rangeInput;
     //endregion
 
     //region Complex Elements
