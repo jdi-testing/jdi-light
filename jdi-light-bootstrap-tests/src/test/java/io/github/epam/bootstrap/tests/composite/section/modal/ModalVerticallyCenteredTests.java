@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.modalVerticallyCentered;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -37,14 +36,12 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         return new Object[][]{
                 {
                         modalVerticallyCentered.modalCenterTrigger,
-                        modalVerticallyCentered.dismissModal1Close,
                         modalVerticallyCentered.modal1,
                         "modal-dialog-centered"
                 },
 
                 {
                         modalVerticallyCentered.modalCenterScrollableTrigger,
-                        modalVerticallyCentered.dismissModal2Close,
                         modalVerticallyCentered.modal2,
                         "modal-dialog-centered"
                 }
@@ -56,32 +53,11 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         return new Object[][]{
                 {
                         modalVerticallyCentered.modalCenterTrigger,
-                        modalVerticallyCentered.dismissModal1Close,
-                        "button:nth-of-type(1)",
-                        "modal-vertical-content-1"
-                },
-
-                {
-                        modalVerticallyCentered.modalCenterScrollableTrigger,
-                        modalVerticallyCentered.dismissModal2Close,
-                        "button:nth-of-type(2)",
-                        "modal-vertical-content-2"
-                }
-        };
-    }
-
-    @DataProvider
-    public Object[][] modalDismissData() {
-        return new Object[][]{
-                {
-                        modalVerticallyCentered.modalCenterTrigger,
-                        modalVerticallyCentered.dismissModal1Close,
                         modalVerticallyCentered.modal1
                 },
 
                 {
                         modalVerticallyCentered.modalCenterScrollableTrigger,
-                        modalVerticallyCentered.dismissModal2Close,
                         modalVerticallyCentered.modal2
                 }
         };
@@ -108,7 +84,6 @@ public class ModalVerticallyCenteredTests extends TestsInit {
 
     @Test(dataProvider = "modalCssData")
     public void modalCssTest(Button showButton,
-                             Button dismissButton,
                              Modal modal,
                              String modalBgCss) {
         showButton.show();
@@ -116,58 +91,29 @@ public class ModalVerticallyCenteredTests extends TestsInit {
 
         modal.childs().get(1).is().hasClass(modalBgCss);
 
-        dismissButton.show();
-        dismissButton.click();
+        modal.close();
     }
 
     @Test(dataProvider = "modalVerticalAlignmentData")
     public void modalVerticalAlignmentTest(Button showButton,
-                                           Button dismissButton,
-                                           String waiterSelector,
-                                           String modalId) {
+                                           Modal modal) {
         showButton.show();
         showButton.click();
 
-        $(waiterSelector).waitFor().hidden();
+        modal.core().waitFor().displayed();
 
         long modalTop = WebDriverFactory.jsExecute(
-                "var modal = document.getElementById('" + modalId + "');" +
+                "var modal = document.getElementById('" + modal.childs().get(2).getAttribute("id") + "');" +
                         "return modal.getBoundingClientRect().top;"
         );
         long modalBottom = WebDriverFactory.jsExecute(
-                "var modal = document.getElementById('" + modalId + "');" +
+                "var modal = document.getElementById('" + modal.childs().get(2).getAttribute("id") + "');" +
                         "return window.innerHeight - modal.getBoundingClientRect().bottom;"
         );
 
         assertThat(modalTop, equalTo(modalBottom));
 
-        dismissButton.show();
-        dismissButton.click();
-    }
-
-    @Test(dataProvider = "modalDismissData")
-    public void modalDismissTest(Button showButton,
-                                 Button dismissButton1,
-                                 Modal modal) {
-        showButton.show();
-        showButton.click();
-
-        modal.is().displayed();
-
-        dismissButton1.show();
-        dismissButton1.click();
-
-        modal.is().hidden();
-
-        showButton.show();
-        showButton.click();
-
-        modal.is().displayed();
-
-        modal.show();
         modal.close();
-
-        modal.is().hidden();
     }
 
 }
