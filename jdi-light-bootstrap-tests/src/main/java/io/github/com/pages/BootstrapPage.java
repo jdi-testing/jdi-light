@@ -54,6 +54,8 @@ import io.github.com.sections.CustomSelect;
 import io.github.com.sections.CustomSelectWithButton;
 import io.github.com.sections.FormBrowserDefaults;
 import io.github.com.sections.FormCustomStyles;
+import io.github.com.sections.FormDisabled;
+import io.github.com.sections.FormHelpText;
 import io.github.com.sections.FormHorizontal;
 import io.github.com.sections.FormOverview;
 import io.github.com.sections.FormServerSide;
@@ -602,6 +604,10 @@ public class BootstrapPage extends WebPage {
     public static RadioButtonsCustom radioButtonCustom;
     @UI("#forms-sizing")
     public static FormsSizing formsSizing;
+    @UI("#form-help-text")
+    public static FormHelpText formHelpText;
+    @UI("#form-disabled")
+    public static FormDisabled formDisabled;
 
     //Navbars
     @UI("#navbar-nav-with-disabled")
