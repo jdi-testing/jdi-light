@@ -16,6 +16,9 @@ public class EmbeddedVideoModalFrame extends Section {
     @UI(".ytp-large-play-button")
     private Button playButton;
 
+    @UI("video.video-stream")
+    private UIElement video;
+
     public Link getVideoTitle() {
         return title;
     }
@@ -26,6 +29,10 @@ public class EmbeddedVideoModalFrame extends Section {
 
     public Button getPlayButton() {
         return playButton;
+    }
+
+    public UIElement getVideo() {
+        return video;
     }
 
 }

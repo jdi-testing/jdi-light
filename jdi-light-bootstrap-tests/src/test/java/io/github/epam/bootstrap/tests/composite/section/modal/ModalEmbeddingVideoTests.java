@@ -28,26 +28,31 @@ public class ModalEmbeddingVideoTests extends TestsInit {
     @Test
     public void baseValidationTest() {
         modalEmbeddedVideoButton.click();
+        embeddedVideoModal.waitFor().enabled();
         baseValidation(embeddedVideoModal);
         baseValidation(videoModalFrame.getVideoTitle());
         baseValidation(videoModalFrame.getPlayButton());
+
     }
 
     @Test
     public void videoTitleTest() {
         modalEmbeddedVideoButton.click();
         videoModalFrame.getVideoTitle().is()
+                .displayed()
+                .enabled()
                 .ref(VIDEO_URL)
                 .text(VIDEO_TITLE);
     }
 
     @Test
-    public void playVideoTest() throws InterruptedException {
+    public void playVideoTest() {
         modalEmbeddedVideoButton.click();
         videoModalFrame.getPlayButton().click();
-        videoModalFrame.getProgressBar().waitFor().displayed();
-        Thread.sleep(5000);
-        videoModalFrame.getProgressBar().is().attr("aria-valuenow", Matchers.matchesPattern("[1-9]{1}[0-9]*"));
+        videoModalFrame.getProgressBar().assertThat()
+                .displayed()
+                .attr("aria-valuenow", Matchers.matchesPattern("[1-9]{1}[0-9]*"));
     }
+
 
 }
