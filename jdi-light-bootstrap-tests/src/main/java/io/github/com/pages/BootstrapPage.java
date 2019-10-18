@@ -619,8 +619,6 @@ public class BootstrapPage extends WebPage {
     @UI("#form-disabled")
     public static FormDisabled formDisabled;
 
-    @UI("#modal-live-demo")
-    public static ModalLiveDemo modalLiveDemo;
     //Navbars
     @UI("#navbar-nav-with-disabled")
     public static Navbar navbarNavWithDisabled;
@@ -640,5 +638,9 @@ public class BootstrapPage extends WebPage {
     //region Modals
     @UI("#modal-scroll-long")
     public static SectionModalLongScrolling sectionModalLongScrolling;
+    @UI("#modal-live-demo .bd-example .btn")
+    public static Button modalLiveDemoLaunchButton;
+    @UI("#exampleModalLive")
+    public static ModalLiveDemo modalLiveDemo;
     //endregion
 }
