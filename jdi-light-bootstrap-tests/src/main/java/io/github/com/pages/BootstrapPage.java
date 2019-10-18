@@ -641,6 +641,9 @@ public class BootstrapPage extends WebPage {
     public static ModalLiveDemo modalLiveDemo;
     @UI("#modal-vertically-centered")
     public static ModalVerticallyCentered modalVerticallyCentered;
+    @UI("#modal-optional-sizes")
+    public static ModalOptionalSizes modalOptionalSizes;
+
 
     //endregion
 }
