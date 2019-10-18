@@ -18,27 +18,27 @@ public class ModalOptionalSizesTests extends TestsInit {
     @DataProvider
     public Object[][] modalBasicData() {
         return new Object[][]{
-                {bsPage.xlButton, modalOptionalSizes.xlModal},
-                {bsPage.lgButton, modalOptionalSizes.lgModal},
-                {bsPage.smButton, modalOptionalSizes.smModal},
+                {modalOptionalSizes.xlButton, modalOptionalSizes.xlModal},
+                {modalOptionalSizes.lgButton, modalOptionalSizes.lgModal},
+                {modalOptionalSizes.smButton, modalOptionalSizes.smModal},
         };
     }
 
     @DataProvider
     public Object[][] modalCssData() {
         return new Object[][]{
-                {bsPage.xlButton, modalOptionalSizes.xlModal, "modal-xl"},
-                {bsPage.lgButton, modalOptionalSizes.lgModal, "modal-lg"},
-                {bsPage.smButton, modalOptionalSizes.smModal, "modal-sm"},
+                {modalOptionalSizes.xlButton, modalOptionalSizes.xlModal, "modal-xl"},
+                {modalOptionalSizes.lgButton, modalOptionalSizes.lgModal, "modal-lg"},
+                {modalOptionalSizes.smButton, modalOptionalSizes.smModal, "modal-sm"},
         };
     }
 
     @DataProvider
     public Object[][] modalSizeData() {
         return new Object[][]{
-                {bsPage.xlButton, modalOptionalSizes.xlModal, 1140},
-                {bsPage.lgButton, modalOptionalSizes.lgModal, 800},
-                {bsPage.smButton, modalOptionalSizes.smModal, 300},
+                {modalOptionalSizes.xlButton, modalOptionalSizes.xlModal, 1140},
+                {modalOptionalSizes.lgButton, modalOptionalSizes.lgModal, 800},
+                {modalOptionalSizes.smButton, modalOptionalSizes.smModal, 300},
         };
     }
 

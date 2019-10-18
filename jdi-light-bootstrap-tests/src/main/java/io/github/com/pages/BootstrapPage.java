@@ -643,17 +643,8 @@ public class BootstrapPage extends WebPage {
     public static ModalLiveDemo modalLiveDemo;
     @UI("#modal-vertically-centered")
     public static ModalVerticallyCentered modalVerticallyCentered;
-
-    // * Modal Optional Sizes Beginning *
-    @UI("//*[@id='modal-optional-sizes']//button[contains(text(), 'Extra')]")
-    public Button xlButton;
-    @UI("//*[@id='modal-optional-sizes']//button[contains(text(), 'Large')]")
-    public Button lgButton;
-    @UI("//*[@id='modal-optional-sizes']//button[contains(text(), 'Small')]")
-    public Button smButton;
     @UI("#modal-optional-sizes")
     public static ModalOptionalSizes modalOptionalSizes;
-    // * Modal Optional Sizes End *
 
     //endregion
 }
