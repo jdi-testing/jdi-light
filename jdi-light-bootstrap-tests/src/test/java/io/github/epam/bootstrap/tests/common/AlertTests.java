@@ -55,7 +55,7 @@ public class AlertTests extends TestsInit {
     }
 
     @Test
-    public void dismissibleAlertTextTest () {
+    public void dismissibleAlertTextTest() {
         dismissibleAlert.is().text(containsString(dismissibleAlertStrongText));
         dismissibleAlert.is().text(containsString(dismissibleAlertDescriptionText));
     }
@@ -91,7 +91,7 @@ public class AlertTests extends TestsInit {
                 .tag(is("button"));
     }
 
-    @Test (priority = 1)
+    @Test(priority = 1)
     public void dismissibleAlertButtonClickTest() {
         dismissibleAlert.dismissButton().click();
         dismissibleAlert.base().waitSec(1);
