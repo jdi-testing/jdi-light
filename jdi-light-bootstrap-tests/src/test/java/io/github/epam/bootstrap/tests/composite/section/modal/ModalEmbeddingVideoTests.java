@@ -27,7 +27,7 @@ public class ModalEmbeddingVideoTests extends TestsInit {
     @Test
     public void baseValidationTest() {
         modalEmbeddedVideoButton.click();
-        embeddedVideoModal.waitFor().enabled();
+        embeddedVideoModal.waitFor().displayed();
         baseValidation(embeddedVideoModal);
         baseValidation(embeddedVideoModal.getVideoModalFrame().getVideoTitle());
         baseValidation(embeddedVideoModal.getVideoModalFrame().getPlayButton());
