@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.StaticSite.videoModalFrame;
 import static io.github.com.pages.BootstrapPage.embeddedVideoModal;
 import static io.github.com.pages.BootstrapPage.modalEmbeddedVideoButton;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
@@ -30,15 +29,15 @@ public class ModalEmbeddingVideoTests extends TestsInit {
         modalEmbeddedVideoButton.click();
         embeddedVideoModal.waitFor().enabled();
         baseValidation(embeddedVideoModal);
-        baseValidation(videoModalFrame.getVideoTitle());
-        baseValidation(videoModalFrame.getPlayButton());
+        baseValidation(embeddedVideoModal.getVideoModalFrame().getVideoTitle());
+        baseValidation(embeddedVideoModal.getVideoModalFrame().getPlayButton());
 
     }
 
     @Test
     public void videoTitleTest() {
         modalEmbeddedVideoButton.click();
-        videoModalFrame.getVideoTitle().is()
+        embeddedVideoModal.getVideoModalFrame().getVideoTitle().is()
                 .displayed()
                 .enabled()
                 .ref(VIDEO_URL)
@@ -48,8 +47,8 @@ public class ModalEmbeddingVideoTests extends TestsInit {
     @Test
     public void playVideoTest() {
         modalEmbeddedVideoButton.click();
-        videoModalFrame.getPlayButton().click();
-        videoModalFrame.getProgressBar().assertThat()
+        embeddedVideoModal.getVideoModalFrame().getPlayButton().click();
+        embeddedVideoModal.getVideoModalFrame().getProgressBar().assertThat()
                 .displayed()
                 .attr("aria-valuenow", Matchers.matchesPattern("[1-9]{1}[0-9]*"));
     }

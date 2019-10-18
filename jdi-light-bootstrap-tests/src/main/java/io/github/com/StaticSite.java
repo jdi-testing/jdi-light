@@ -17,9 +17,6 @@ public class StaticSite {
 	@Url("/bootstrap.html")
 	public static BootstrapPage bsPage;
 
-	@Frame(xpath="//iframe")
-	public static EmbeddedVideoModalFrame videoModalFrame;
-
 	@UI("#login-form")
 	public static Form<User> loginForm;
 
