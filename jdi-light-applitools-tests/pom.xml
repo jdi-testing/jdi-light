@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-    <version>1.1.6</version>
-    <artifactId>jdi-light-examples</artifactId>
-    <name>JDI Web Tests</name>
+    <artifactId>jdi-light-applitools-tests</artifactId>
+    <name>JDI Light Applitools Eyes Tests</name>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
+        <java.version>1.8</java.version>
+        <applitools.version>3.157.10</applitools.version>
         <driver>chrome</driver>
+        <domain>https://jdi-testing.github.io/jdi-light/</domain>
+        <aspectj.version>1.9.1</aspectj.version>
         <allure.testng>2.7.0</allure.testng>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.1</aspectj.version>
     </properties>
 
     <dependencies>
-        <!--JDI-->
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light</artifactId>
-            <version>1.1.6</version>
-        </dependency>
-
-        <!--Allure config in parent-->
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
-            <version>${allure.testng}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.0.0-beta1</version>
+            <version>RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>1.1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-eyes</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
@@ -73,6 +74,7 @@
                         <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
+
             </plugin>
 
             <plugin>
@@ -124,5 +126,4 @@
             </plugin>
         </plugins>
     </reporting>
-    
 </project>

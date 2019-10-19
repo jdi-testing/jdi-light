@@ -16,6 +16,7 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
+import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
@@ -79,6 +80,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         timeout = base.timeout;
         return this;
     }
+    public MapArray<String, Object> params = new MapArray<>();
+
     public JDILocator locator = new JDILocator();
     @Override
     public DriverBase setParent(Object parent) {

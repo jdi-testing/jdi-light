@@ -6,19 +6,18 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-performance</artifactId>
-    <version>1.1.5</version>
+    <version>1.1.6</version>
     <name>JDI Performance</name>
 
     <properties>
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
+        <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <aspectj.version>1.9.1</aspectj.version>
-        <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <allure.testng>2.7.0</allure.testng>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <domain>https://jdi-testing.github.io/jdi-light/</domain>
     </properties>
 
     <dependencies>
@@ -26,7 +25,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
         </dependency>
 
         <!--Allure-->
