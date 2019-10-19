@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.modalVerticallyCentered;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ModalVerticallyCenteredTests extends TestsInit {
@@ -100,20 +100,20 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         showButton.show();
         showButton.click();
 
-        modal.core().waitFor().displayed();
+        showButton.core().waitFor().hidden();
 
-        long modalTop = WebDriverFactory.jsExecute(
+        boolean execResult = WebDriverFactory.jsExecute(
                 "var modal = document.getElementById('" + modal.childs().get(2).getAttribute("id") + "');" +
-                        "return modal.getBoundingClientRect().top;"
-        );
-        long modalBottom = WebDriverFactory.jsExecute(
-                "var modal = document.getElementById('" + modal.childs().get(2).getAttribute("id") + "');" +
-                        "return window.innerHeight - modal.getBoundingClientRect().bottom;"
+                        "var modalTop = modal.getBoundingClientRect().top;" +
+                        "var modalBottom = window.innerHeight - modal.getBoundingClientRect().bottom;" +
+                        "return modalTop == modalBottom;"
         );
 
-        assertThat(modalTop, equalTo(modalBottom));
+        assertThat(execResult, is(true));
 
         modal.close();
+
+        showButton.core().waitFor().displayed();
     }
 
 }
