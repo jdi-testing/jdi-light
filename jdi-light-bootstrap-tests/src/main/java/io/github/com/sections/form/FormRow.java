@@ -11,10 +11,8 @@ public class FormRow extends Section {
     public UIElement row;
     @UI(".col")
     public WebList cols;
-
     @UI("[placeholder=\"First name\"]")
     public TextField firstName;
     @UI("[placeholder=\"Last name\"]")
     public TextField lastName;
-
 }
