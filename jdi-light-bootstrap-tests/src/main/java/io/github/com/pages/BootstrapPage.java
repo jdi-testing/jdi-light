@@ -24,6 +24,8 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
+import io.github.com.sections.modal.ModalTooltipsAndPopovers;
+import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.buttongroup.ButtonGroupBasicExample;
 import io.github.com.sections.buttongroup.ButtonGroupNesting;
@@ -592,6 +594,8 @@ public class BootstrapPage extends WebPage {
 
     @UI("//h4[.='Navbar - Text']/../..")
     public static NavbarText navbarText;
+    @UI("//h4[.='Modal - Tooltips and popovers']/../..")
+    public static ModalTooltipsAndPopovers modalTooltipsAndPopovers;
 
     @UI("#striped-base .progress")
     public static JList<ProgressSection> progressSections;
