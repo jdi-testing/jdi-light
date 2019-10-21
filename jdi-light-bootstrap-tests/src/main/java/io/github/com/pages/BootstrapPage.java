@@ -274,8 +274,6 @@ public class BootstrapPage extends WebPage {
     public static ReadonlyPlainText readonlyPlainText1;
     @UI("#readonlyPlainText2")
     public static ReadonlyPlainText readonlyPlainText2;
-    @UI("#formControlRange")
-    public static RangeInput rangeInput;
     @UI("#forms-select-menu-large")
     public static SelectMenu formsSelectMenuLarge;
     @UI("#forms-select-menu")
