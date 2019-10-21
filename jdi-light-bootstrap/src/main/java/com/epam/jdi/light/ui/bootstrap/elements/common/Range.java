@@ -14,9 +14,17 @@ import static com.epam.jdi.light.ui.bootstrap.BootstrapUtils.getInt;
 public class Range extends UIBaseElement<UIAssert> implements HasLabel, SetValue {
 
     @JDIAction(value = "Get '{name}' thumbValue", level = DEBUG)
-    public int thumbValue() {
-        return getInt("value", uiElement);
+//    public int thumbValue() {
+//        return getInt("value", uiElement);
+//    }
+    public double thumbValue() {
+        return Double.parseDouble(uiElement.getAttribute("value"));
     }
+
+//    @JDIAction(value = "Get '{name}' thumbValue", level = DEBUG)
+//    public double thumbValueDouble() {
+//        return Double.parseDouble(uiElement.getAttribute("value"));
+//    }
 
     @JDIAction(value = "Get '{name}' min limit", level = DEBUG)
     public String min() {
@@ -34,7 +42,7 @@ public class Range extends UIBaseElement<UIAssert> implements HasLabel, SetValue
     }
 
     @JDIAction(value = "Set thumbValue '{0}' for '{name}'", level = DEBUG)
-    public void setThumbValue(int thumbValue) {
+    public void setThumbValue(double thumbValue) {
         uiElement.setAttribute("value", thumbValue + "");
     }
     // endregion
@@ -47,6 +55,10 @@ public class Range extends UIBaseElement<UIAssert> implements HasLabel, SetValue
     public String getValue() {
         return thumbValue() + "";
     }
+
+//    public String getValueDouble() {
+//        return thumbValueDouble() + "";
+//    }
     // endregion
 
     // region Extend assertions
@@ -54,5 +66,4 @@ public class Range extends UIBaseElement<UIAssert> implements HasLabel, SetValue
     public RangeAssert is() {
         return new RangeAssert().set(this);
     }
-
 }

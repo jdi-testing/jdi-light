@@ -6,17 +6,27 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Range;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.ui.bootstrap.BootstrapUtils.asInt;
 import static com.epam.jdi.light.ui.bootstrap.BootstrapUtils.getInt;
 import static org.hamcrest.Matchers.is;
 
 public class RangeAssert extends UIAssert<RangeAssert, Range> {
 
-    @JDIAction("Assert that '{name}' thumbValue {0}")
-    public RangeAssert thumbValue(Matcher<Integer> thumbValue) {
-        jdiAssert(getInt("value", element.core()), thumbValue);
+//    @JDIAction("Assert that '{name}' thumbValue {0}")
+//    public RangeAssert thumbValue(Matcher<Integer> thumbValue) {
+//        jdiAssert(getInt("value", element.core()), thumbValue);
+//        return this;
+//    }
+//    public RangeAssert thumbValue(int thumbValue) {
+//        return thumbValue(is(thumbValue));
+//    }
+
+    @JDIAction("Assert that '{name}' thumbValue b {0}")
+    public RangeAssert thumbValue(Matcher<Double> thumbValue) {
+        jdiAssert(Double.parseDouble(element.getValue()), thumbValue);
         return this;
     }
-    public RangeAssert thumbValue(int thumbValue) {
+    public RangeAssert thumbValue(double thumbValue) {
         return thumbValue(is(thumbValue));
     }
 
@@ -39,11 +49,12 @@ public class RangeAssert extends UIAssert<RangeAssert, Range> {
     }
 
     @JDIAction("Assert that '{name}' step {0}")
-    public RangeAssert step(Matcher<Integer> step) {
-        jdiAssert(getInt("step", element.core()), step);
+    public RangeAssert step(Matcher<Double> step) {
+        jdiAssert(Double.parseDouble(element.core().getAttribute("step")), step);
         return this;
     }
-    public RangeAssert step(int step) {
+    public RangeAssert step(double step) {
         return step(is(step));
     }
+
 }
