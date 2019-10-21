@@ -12,7 +12,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
-import com.epam.jdi.light.ui.bootstrap.elements.common.NavbarBrand;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;

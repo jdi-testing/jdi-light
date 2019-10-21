@@ -1,15 +1,13 @@
 package io.github.epam.bootstrap.tests.composite.section.navbar;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.ui.bootstrap.elements.common.NavbarBrand;
+import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.util.ArrayList;
-
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarSection;
@@ -42,8 +40,8 @@ public class NavbarBrandTests extends TestsInit {
     @Test
     public void checkNavbarClickLink() {
         for (int i = 1; i < navbarSection.allNavbarBrands.size() + 1; i++) {
-            NavbarBrand nbb = navbarSection.allNavbarBrands.get(i);
-            if (nbb.isLink()) {
+            UIElement nbb = navbarSection.allNavbarBrands.get(i);
+            if (nbb.hasAttribute("href")) {
                 nbb.highlight();
                 nbb.click();
                 WebDriver driver = WebDriverFactory.getDriver();
@@ -60,7 +58,7 @@ public class NavbarBrandTests extends TestsInit {
     @Test(dataProvider = "navbarBrandData")
     public void checkNavbarText(String navbarId, String navbarText) {
         for (int i = 1; i < navbarSection.allNavbarBrands.size() + 1; i++) {
-            NavbarBrand nbb = navbarSection.allNavbarBrands.get(i);
+            UIElement nbb = navbarSection.allNavbarBrands.get(i);
             if (nbb.attr("id").equals(navbarId)) {
                 nbb.highlight();
                 nbb.is().core().text(navbarText);
@@ -72,7 +70,7 @@ public class NavbarBrandTests extends TestsInit {
     @Test
     public void checkNavbarClickImage() {
         navbarSection.navbarBrandWithImage.stream()
-                .filter(nbb -> nbb.isLink() && nbb.childs().size() > 0)
+                .filter(nbb -> nbb.hasAttribute("href") && nbb.childs().size() > 0)
                 .map(nbbWithIm -> nbbWithIm.childs().get(1))
                 .forEach(imgFromNavbar -> {
                     imgFromNavbar.highlight("blue");
@@ -94,7 +92,7 @@ public class NavbarBrandTests extends TestsInit {
     @Test
     public void baseValidationStreamJListTest() {
         for (int i = 1; i < navbarSection.allNavbarBrands.size() + 1; i++) {
-            NavbarBrand nb = navbarSection.allNavbarBrands.get(i);
+            UIElement nb = navbarSection.allNavbarBrands.get(i);
             baseValidation(nb);
             nb.unhighlight();
         }
