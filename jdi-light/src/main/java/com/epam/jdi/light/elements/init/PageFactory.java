@@ -51,7 +51,7 @@ public class PageFactory {
     public static MapArray<String, JAction> PRE_INIT =
         new MapArray<>("WebSettings", WebSettings::init);
     public static boolean initialized = false;
-    private static void preInit() {
+    public static void preInit() {
         if (PRE_INIT == null) return;
         if (!initialized) {
             for (Pair<String, JAction> action : PRE_INIT)

@@ -15,23 +15,16 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 class JEyes extends Eyes {
     JEyes() {
-        super(new ClassicRunner());
-        if (isNullOrEmpty(System.getenv("APPLITOOLS_API_KEY"))) {
-            throw new RuntimeException("No API Key found; Please set environment variable 'APPLITOOLS_API_KEY'. More info how to obtain API_KEY https://applitools.com/docs/topics/overview/obtain-api-key.html");
-        }
+        super(EYES_CONFIG.runner);
+        setConfiguration(EYES_CONFIG.config);
         setApiKey(EYES_CONFIG.apiKey);
         setAppName(EYES_CONFIG.appName);
-        setConfiguration(EYES_CONFIG.config);
-        open(EYES_CONFIG.webDriver);
     }
 
     boolean getResult() {
         try {
             TestResults testResults = close(false);
-            //String fullTestResult = testResults.toString();
-            //String testResult = fullTestResult.substring(fullTestResult.indexOf("test name"), fullTestResult.indexOf(']'));
             return testResults.getStatus() == Passed;
-            //logger.info(format("Applitools eyes check result: %s: %s (full info in your Applitools account).", status, testResult));
         } catch (Exception ex){
             abortIfNotClosed();
         }

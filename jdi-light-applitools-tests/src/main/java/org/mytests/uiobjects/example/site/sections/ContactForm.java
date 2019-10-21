@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
+import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import org.mytests.uiobjects.example.entities.Contacts;
 import org.mytests.uiobjects.example.site.custom.MultiDropdown;
 
@@ -17,7 +18,7 @@ public class ContactForm extends Form<Contacts> {
 	TextField name, lastName, position, passportNumber, passportSeria;
 
 	DropdownSelect gender;
-	IsCombobox religion;
+	DataListOptions religion;
 	MultiDropdown weather;
 
 	Checkbox passport, acceptConditions;

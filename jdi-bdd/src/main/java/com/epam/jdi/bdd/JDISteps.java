@@ -16,11 +16,11 @@ import static com.epam.jdi.bdd.BDDUtils.*;
 import static com.epam.jdi.light.common.ElementArea.JS;
 import static com.epam.jdi.light.driver.WebDriverByUtils.byText;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.init.PageFactory.preInit;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.light.settings.WebSettings.getDomain;
-import static com.epam.jdi.light.settings.WebSettings.init;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 
@@ -31,7 +31,7 @@ import static org.junit.Assert.assertEquals;
 public class JDISteps {
 	@Given("^I open application$")
 	public void iMOpenSite() {
-		init();
+		preInit();
 		openUrl(getDomain());
 	}
 	@Given("^I open \"([^\"]*)\"(?: page|)$")

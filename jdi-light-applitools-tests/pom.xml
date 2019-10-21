@@ -74,7 +74,6 @@
                         <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
-
             </plugin>
 
             <plugin>
@@ -82,7 +81,6 @@
                 <artifactId>allure-maven</artifactId>
                 <version>${allure.maven}</version>
             </plugin>
-
 
             <!-- From general pom -->
             <plugin>

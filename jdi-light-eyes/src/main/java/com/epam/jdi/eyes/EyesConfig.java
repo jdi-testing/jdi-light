@@ -10,12 +10,13 @@ import com.applitools.eyes.selenium.ClassicRunner;
 import com.applitools.eyes.selenium.Configuration;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.tools.DataClass;
+import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.WebDriver;
 
 public class EyesConfig extends DataClass<EyesConfig> {
     public String appName;
     public Configuration config;
-    public WebDriver webDriver;
+    public JFunc<WebDriver> webDriver;
     public EyesRunner runner;
     public String apiKey;
 
@@ -23,7 +24,7 @@ public class EyesConfig extends DataClass<EyesConfig> {
         appName = "JDI Application";
         config = new Configuration();
         config.setHideScrollbars(false);
-        webDriver = WebDriverFactory.getDriver();
+        webDriver = WebDriverFactory::getDriver;
         runner = new ClassicRunner();
         try {
             apiKey = System.getenv("APPLITOOLS_API_KEY");

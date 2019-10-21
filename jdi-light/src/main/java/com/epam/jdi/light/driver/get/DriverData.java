@@ -1,6 +1,7 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JAction;
+import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -12,17 +13,18 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.driver.get.Platform.X32;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.RegExUtils.matches;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -110,35 +112,60 @@ public class DriverData {
             throw ex;
         }
     }
-
-    public static JFunc<Capabilities> CHROME_OPTIONS = () -> {
+    public static Capabilities getCapabilities(
+        MutableCapabilities capabilities, JAction1<Object> defaultCapabilities) {
         try {
-            HashMap<String, Object> chromePrefs = new HashMap<>();
+            setupErrors.clear();
+            defaultCapabilities.execute(capabilities);
+        } catch (Throwable ex) {
+            logger.info("Failed to set Default Capabilities for Driver: " + safeException(ex));
+            logger.info("Errors: " + print(setupErrors));
+        }
+        try {
+            COMMON_CAPABILITIES.forEach(capabilities::setCapability);
+        } catch (Throwable ex) {
+            logger.info("Failed to set COMMON_CAPABILITIES Capabilities for Driver: " + safeException(ex));
+        }
+        return capabilities;
+    }
+    public static List<String> setupErrors = new ArrayList<>();
+    public static void setUp(String name, JAction action) {
+        try {
+            action.invoke();
+        } catch (Throwable ex) {
+            setupErrors.add(name);
+        }
+    }
+
+    public static JAction1<ChromeOptions> CHROME_OPTIONS = cap -> {
+        HashMap<String, Object> chromePrefs = new HashMap<>();
+        setUp("Set Chrome Prefs", () -> {
             chromePrefs.put("credentials_enable_service", false);
             new File(DOWNLOADS_DIR).mkdirs();
             chromePrefs.put("download.default_directory", DOWNLOADS_DIR);
             chromePrefs.put("profile.default_content_setting_values.notifications", 0);
             chromePrefs.put("profile.default_content_settings.popups", 0);
             chromePrefs.put("profile.password_manager_enabled", false);
-            ChromeOptions cap = new ChromeOptions();
-            // cap.addArguments("--disable-web-security", "--disable-extensions", "test-type");
-            cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY);
-            cap.setCapability(ACCEPT_SSL_CERTS, true);
-            cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT);
-            cap.addArguments(getBrowserSizeOption());
-            cap.setExperimentalOption("prefs", chromePrefs);
-            // Capabilities from settings
-            COMMON_CAPABILITIES.forEach(cap::setCapability);
-            CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
-            return cap;
-        } catch (Exception ex) {
-            throw exception("Failed Init Chrome Driver settings: " + safeException(ex));
-        }
+        });
+        setUp("Chrome: '--disable-web-security', '--disable-extensions', 'test-type'",
+            () -> cap.addArguments("--disable-web-security", "--disable-extensions", "test-type"));
+        setUp("Chrome: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
+            () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
+        setUp("Chrome: ACCEPT_SSL_CERTS:true",
+            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+        setUp("Chrome: " + UNEXPECTED_ALERT_BEHAVIOR + "=" + ACCEPT,
+            () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+        setUp("Chrome: " + getBrowserSizeOption(),
+            () -> cap.addArguments(getBrowserSizeOption()));
+        setUp("Chrome: setExperimentalOption: prefs",
+            () -> cap.setExperimentalOption("prefs", chromePrefs));
+        // Capabilities from settings
+        CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
     };
 
-    public static JFunc<Capabilities> FIREFOX_OPTIONS = () -> {
-        try {
-            FirefoxProfile firefoxProfile = new FirefoxProfile();
+    public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = cap -> {
+        FirefoxProfile firefoxProfile = new FirefoxProfile();
+        setUp("Set FirefoxProfile", () -> {
             firefoxProfile.setAssumeUntrustedCertificateIssuer(false);
             firefoxProfile.setPreference("browser.download.folderList", 2);
             firefoxProfile.setPreference("browser.download.manager.showWhenStarting", false);
@@ -151,45 +178,44 @@ public class DriverData {
             firefoxProfile.setPreference("startup.homepage_welcome_url", "about:blank");
             firefoxProfile.setPreference("startup.homepage_welcome_url.additional", "about:blank");
             firefoxProfile.setPreference("network.http.phishy-userpass-length", 255);
-            FirefoxOptions cap = new FirefoxOptions();
-            cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY);
-            cap.setCapability(ACCEPT_SSL_CERTS, true);
-            cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT);
-            cap.addArguments(getBrowserSizeOption());
-            cap.setProfile(firefoxProfile);
-            // Capabilities from settings
-            COMMON_CAPABILITIES.forEach(cap::setCapability);
-            CAPABILITIES_FOR_FF.forEach(cap::setCapability);
-            return cap;
-        } catch (Exception ex) {
-            throw exception("Failed Init Firefox Driver settings: " + safeException(ex));
-        }
+        });
+        setUp("Firefox: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
+            () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
+        setUp("Firefox: ACCEPT_SSL_CERTS: true",
+            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+        setUp("Firefox: UNEXPECTED_ALERT_BEHAVIOR, ACCEPT",
+            () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+        setUp("Firefox: BrowserSize:" + getBrowserSizeOption(),
+            () -> cap.addArguments(getBrowserSizeOption()));
+        setUp("Firefox: Firefox Profile",
+            () -> cap.setProfile(firefoxProfile));
+        // Capabilities from settings
+        CAPABILITIES_FOR_FF.forEach(cap::setCapability);
     };
 
-    public static JFunc<Capabilities> IE_OPTIONS = () -> {
-        try {
-            InternetExplorerOptions cap = new InternetExplorerOptions();
-            //cap.introduceFlakinessByIgnoringSecurityDomains();
-            cap.ignoreZoomSettings();
-            //cap.setCapability("requireWindowFocus", true);
-            cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY);
-            cap.takeFullPageScreenshot();
-            cap.setCapability(ACCEPT_SSL_CERTS, true);
-            cap.destructivelyEnsureCleanSession();
-            cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT);
-            cap.is(SUPPORTS_JAVASCRIPT);
-            cap.setCapability(ACCEPT_SSL_CERTS, true);
-            // Capabilities from settings
-            COMMON_CAPABILITIES.forEach(cap::setCapability);
-            CAPABILITIES_FOR_IE.forEach(cap::setCapability);
-    //        cap.setCapability("project", WebSettings.DRIVER_REMOTE_PROJECT_NAME);
-    //        cap.setCapability("apm_id", WebSettings.DRIVER_REMOTE_APM_ID);
-    //        cap.setCapability("user", WebSettings.DRIVER_REMOTE_USER_NAME);
-    //        cap.setCapability("password", WebSettings.DRIVER_REMOTE_USER_PASSWORD);
-            return cap;
-        } catch (Exception ex) {
-            throw exception("Failed Init Internet Explorer Driver settings: " + safeException(ex));
-        }
+    public static JAction1<InternetExplorerOptions> IE_OPTIONS = cap -> {
+        setUp("IE: introduceFlakinessByIgnoringSecurityDomains",
+            cap::introduceFlakinessByIgnoringSecurityDomains);
+        setUp("ignoreZoomSettings",
+            cap::ignoreZoomSettings);
+        setUp("IE: requireWindowFocus:true",
+            () -> cap.setCapability("requireWindowFocus", true));
+        setUp("IE: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
+            () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
+        setUp("IE: takeFullPageScreenshot",
+            cap::takeFullPageScreenshot);
+        setUp("IE: ACCEPT_SSL_CERTS: true",
+            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+        setUp("IE: destructivelyEnsureCleanSession",
+            cap::destructivelyEnsureCleanSession);
+        setUp("IE: UNEXPECTED_ALERT_BEHAVIOR: ACCEPT)",
+            () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+        setUp("IE: SUPPORTS_JAVASCRIPT",
+            () -> cap.is(SUPPORTS_JAVASCRIPT));
+        setUp("IE: ACCEPT_SSL_CERTS: true",
+            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+        // Capabilities from settings
+        CAPABILITIES_FOR_IE.forEach(cap::setCapability);
     };
 
     private static String getBrowserSizeOption() {

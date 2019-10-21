@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.driver.get.DriverData;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
@@ -36,6 +37,7 @@ import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.PageFactory.initialized;
+import static com.epam.jdi.light.elements.init.PageFactory.preInit;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
@@ -62,8 +64,7 @@ public class WebSettings {
     public static String getDomain() {
         if (DOMAIN != null)
             return DOMAIN;
-        if (!initialized)
-            init();
+        preInit();
         if (loadProperties().size() == 0)
             throw new RuntimeException(format("Can't find test.properties at: %s%sIn order to get DOMAIN please specify it in test.properties or directly using WebSettings.setDomain('http://...')",
                 getCorrectPath(), LINE_BREAK));
@@ -106,8 +107,7 @@ public class WebSettings {
     public static TextTypes TEXT_TYPE = SMART_TEXT;
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
-        if (!initialized)
-            init();
+        preInit();
         return DOMAIN != null && DOMAIN.contains("://");
     }
     public static String TEST_GROUP = "";

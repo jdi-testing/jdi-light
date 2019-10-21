@@ -3,8 +3,11 @@ package com.epam.jdi.light.actions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -50,6 +53,7 @@ public class ActionProcessor {
                 return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jp);
+            isOverride.set(false);
             if (aroundCount() == 1)
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
@@ -75,23 +79,24 @@ public class ActionProcessor {
                 .size();
     }
     public static Object defaultAction(ProceedingJoinPoint jp) throws Throwable {
-        JDIBase obj = getJdi(jp);
-        JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
+        ICoreElement obj = getJdi(jp);
+        JFunc1<ICoreElement, Object> overrideAction = getOverride(jp, obj);
         return overrideAction != null
                 ? overrideAction.execute(obj) : jp.proceed();
     }
-    public static JDIBase getJdi(ProceedingJoinPoint jp) {
+    public static ICoreElement getJdi(ProceedingJoinPoint jp) {
         try {
-            return jp.getThis() != null && isInterface(getJpClass(jp), IBaseElement.class)
-                ? ((IBaseElement) jp.getThis()).base() : null;
+            return jp.getThis() != null && isInterface(getJpClass(jp), ICoreElement.class)
+                ? ((ICoreElement) jp.getThis()) : null;
         } catch (Exception ex) { return null; }
     }
+    public static Safe<Boolean> isOverride = new Safe<>(() -> false);
     public static Object stableAction(ProceedingJoinPoint jp) {
         try {
             String exception = "";
             JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
-            JDIBase obj = getJdi(jp);
-            JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
+            ICoreElement obj = getJdi(jp);
+            JFunc1<ICoreElement, Object> overrideAction = getOverride(jp, obj);
             int timeout = getTimeout(ja, obj);
             long start = currentTimeMillis();
             do {
@@ -111,8 +116,16 @@ public class ActionProcessor {
         } finally { }
     }
 
-    private static JFunc1<JDIBase, Object> getOverride(ProceedingJoinPoint jp, JDIBase obj) {
-        return obj != null ? GetOverrideAction(jp) : null;
+    private static JFunc1<ICoreElement, Object> getOverride(ProceedingJoinPoint jp, ICoreElement obj) {
+        if (isOverride.get()) {
+            return null;
+        }
+        JFunc1<ICoreElement, Object> override = null;
+        if (obj != null) {
+            override = GetOverrideAction(jp);
+            isOverride.set(true);
+        }
+        return override;
     }
 
     private static int getTimeout(JDIAction ja, IBaseElement obj) {

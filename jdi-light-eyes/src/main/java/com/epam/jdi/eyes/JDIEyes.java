@@ -6,48 +6,45 @@ package com.epam.jdi.eyes;
  */
 
 import com.applitools.eyes.BatchInfo;
-import com.applitools.eyes.EyesRunner;
-import com.applitools.eyes.TestResults;
-import com.applitools.eyes.selenium.ClassicRunner;
-import com.applitools.eyes.selenium.Configuration;
 import com.applitools.eyes.selenium.Eyes;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import static com.applitools.eyes.TestResultsStatus.Passed;
 import static com.epam.jdi.light.actions.ActionOverride.OverrideAction;
 import static com.epam.jdi.light.elements.init.InitActions.JDI_ANNOTATIONS;
 import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
-import static com.google.common.base.Strings.isNullOrEmpty;
 
-public class JDIEyes extends Eyes {
-    private static Safe<JEyes> eyes = new Safe<>(new JEyes());
+public class JDIEyes {
     public static EyesConfig EYES_CONFIG = new EyesConfig();
+    private static Safe<JEyes> eyes = new Safe<>(JEyes::new);
 
     public static void initVisualTest() {
-        OverrideAction("isDisplayed", e -> { e.get().isDisplayed(); visualCheckElement(e); });
+        OverrideAction("isDisplayed", e -> {
+            e.isDisplayed();
+            visualCheckElement(e);
+        });
         JDI_ANNOTATIONS.add("VisualCheck", aRule(VisualCheck.class, (e,a) -> e.params.add("visualCheck", "")));
     }
     public static void initVisualTest(EyesConfig config) {
-        OverrideAction("isDisplayed", e -> { e.get().isDisplayed(); visualCheckElement(e); });
+        OverrideAction("isDisplayed", e -> {
+            e.isDisplayed();
+            visualCheckElement(e);
+        });
         JDI_ANNOTATIONS.add("VisualCheck", aRule(VisualCheck.class, (e,a) -> e.params.add("visualCheck", "")));
         EYES_CONFIG = config;
     }
 
     public static void startVisualTest(String testName) {
-        eyes.get().setBatch(new BatchInfo(testName));
+        eyes.get().open(EYES_CONFIG.webDriver.execute(), EYES_CONFIG.appName, testName);
     }
     public static void endVisualTest() {
         try {
             eyes.get().close();
         } finally {
-            eyes.get().abortIfNotClosed();
+            if (eyes.get().getIsOpen())
+                eyes.get().abortIfNotClosed();
         }
     }
     public static boolean visualCheckPage(INamed page) {
