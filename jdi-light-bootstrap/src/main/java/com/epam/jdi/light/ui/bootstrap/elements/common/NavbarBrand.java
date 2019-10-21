@@ -8,7 +8,6 @@ import com.epam.jdi.light.ui.bootstrap.interfaces.IsNavbarBrand;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
-
 public class NavbarBrand extends UIBaseElement<UIAssert> implements IsNavbarBrand, IListBase {
 
     @JDIAction(value = "Get '{name}' text", level = DEBUG)

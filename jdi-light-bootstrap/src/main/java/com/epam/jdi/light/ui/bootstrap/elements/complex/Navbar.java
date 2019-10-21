@@ -1,6 +1,5 @@
 package com.epam.jdi.light.ui.bootstrap.elements.complex;
 
-
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.Section;
