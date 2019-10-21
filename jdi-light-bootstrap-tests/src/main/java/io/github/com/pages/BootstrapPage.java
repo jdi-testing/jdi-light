@@ -47,22 +47,9 @@ import io.github.com.sections.card.CardTextAlignment;
 import io.github.com.sections.card.CardWithCustomCss13Rem;
 import io.github.com.sections.card.CardWithCustomCss9Rem;
 import io.github.com.sections.card.CardWithSubtitlesAndLinks;
-import io.github.com.sections.form.CheckboxAndRadioButtonCustomDisabled;
-import io.github.com.sections.form.CheckboxesAndRadiosWithoutLabels;
-import io.github.com.sections.form.CheckboxesCustom;
-import io.github.com.sections.form.CheckboxesDefault;
-import io.github.com.sections.form.CheckboxesDefaultInline;
+import io.github.com.sections.form.*;
 import io.github.com.sections.inputgroup.CustomSelect;
 import io.github.com.sections.inputgroup.CustomSelectWithButton;
-import io.github.com.sections.form.FormBrowserDefaults;
-import io.github.com.sections.form.FormCustomStyles;
-import io.github.com.sections.form.FormDisabled;
-import io.github.com.sections.form.FormHelpText;
-import io.github.com.sections.form.FormHorizontal;
-import io.github.com.sections.form.FormOverview;
-import io.github.com.sections.form.FormServerSide;
-import io.github.com.sections.form.FormTooltip;
-import io.github.com.sections.form.FormsSizing;
 import io.github.com.sections.inputgroup.InputGroupInputWithCheckBox;
 import io.github.com.sections.inputgroup.InputGroupInputWithLabelAndText;
 import io.github.com.sections.inputgroup.InputGroupInputWithRadio;
@@ -107,20 +94,13 @@ import io.github.com.sections.pagination.PaginationSizeSmall;
 import io.github.com.sections.pagination.PaginationStates;
 import io.github.com.sections.progress.ProgressMultipleBars;
 import io.github.com.sections.progress.ProgressSection;
-import io.github.com.sections.form.RadioButtonGroup;
-import io.github.com.sections.form.RadioButtonsCustom;
-import io.github.com.sections.form.RadioButtonsCustomInline;
-import io.github.com.sections.form.RadioButtonsDefaultInline;
 import io.github.com.sections.navbar.ScrollSpyNav;
 import io.github.com.sections.inputgroup.SegmentedButton;
-import io.github.com.sections.form.Switches;
 import io.github.com.sections.Toast;
 import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
-import io.github.com.sections.form.RangeInput;
-import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.modal.ModalLiveDemo;
 import io.github.com.sections.modal.ModalOptionalSizes;
 import io.github.com.sections.modal.ModalVaryingContent;
@@ -550,6 +530,12 @@ public class BootstrapPage extends WebPage {
     public static FormOverview formOverview;
     @UI("#form-horizontal")
     public static FormHorizontal formHorizontal;
+    @UI("#form-auto-sizing-all")
+    public static FormAutoSizingAll formAutoSizingAll;
+    @UI("#form-auto-sizing-size-specific")
+    public static FormAutoSizingSizeSpecific formAutoSizingSizeSpecific;
+    @UI("#form-auto-sizing-with-custom-controls")
+    public static FormAutoSizingWithCustomControls formAutoSizingWithCustomControls;
 
 
     @UI("//h4[.='Navbar - Text']/../..")
