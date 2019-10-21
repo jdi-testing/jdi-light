@@ -23,7 +23,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.buttongroup.ButtonGroupBasicExample;
 import io.github.com.sections.buttongroup.ButtonGroupNesting;
@@ -84,6 +83,8 @@ import io.github.com.sections.listgroup.ListGroupLinks;
 import io.github.com.sections.listgroup.ListGroupWithBadges;
 import io.github.com.sections.MediaObjectNesting;
 import io.github.com.sections.MediaObjectSample;
+
+import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarExternalContent;
 import io.github.com.sections.navbar.NavbarWithDropdown;
 import io.github.com.sections.navs.NavsAlignmentCenter;
@@ -630,6 +631,8 @@ public class BootstrapPage extends WebPage {
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
+    @UI("#navbar-base-for-brand")
+    public static NavbarSection navbarSection;
     //endregion
 
     //region Modals
