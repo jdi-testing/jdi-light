@@ -29,15 +29,21 @@ public class ModalEmbeddingVideoTests extends TestsInit {
         modalEmbeddedVideoButton.click();
         embeddedVideoModal.waitFor().displayed();
         baseValidation(embeddedVideoModal);
-        baseValidation(embeddedVideoModal.getVideoModalFrame().getVideoTitle());
-        baseValidation(embeddedVideoModal.getVideoModalFrame().getPlayButton());
+        baseValidation(embeddedVideoModal
+                .getVideoModalFrame()
+                .getVideoTitle());
+        baseValidation(embeddedVideoModal
+                .getVideoModalFrame()
+                .getPlayButton());
         embeddedVideoModal.close();
     }
 
     @Test
     public void videoTitleTest() {
         modalEmbeddedVideoButton.click();
-        embeddedVideoModal.getVideoModalFrame().getVideoTitle().is()
+        embeddedVideoModal.getVideoModalFrame()
+                .getVideoTitle()
+                .is()
                 .displayed()
                 .enabled()
                 .ref(VIDEO_URL)
@@ -48,12 +54,15 @@ public class ModalEmbeddingVideoTests extends TestsInit {
     @Test
     public void playVideoTest() {
         modalEmbeddedVideoButton.click();
-        embeddedVideoModal.getVideoModalFrame().getPlayButton().click();
-        embeddedVideoModal.getVideoModalFrame().getProgressBar().assertThat()
+        embeddedVideoModal.getVideoModalFrame()
+                .getPlayButton()
+                .click();
+        embeddedVideoModal.getVideoModalFrame()
+                .getProgressBar()
+                .assertThat()
                 .displayed()
                 .attr("aria-valuenow", Matchers.matchesPattern("[1-9]{1}[0-9]*"));
         embeddedVideoModal.close();
     }
-
 
 }
