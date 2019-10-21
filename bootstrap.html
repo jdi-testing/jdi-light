@@ -3055,7 +3055,7 @@
 
                     <div class="doc-space line">
 
-                        <form id="form-auto-sizing-all" class="mb-3">
+                        <form id="form-auto-sizing-all" class="mb-3" onsubmit="alert('Form submitted successfully');">
                             <div class="form-row align-items-center">
                                 <div class="col-auto">
                                     <label class="sr-only" for="inlineFormInput">Name</label>
@@ -3081,13 +3081,14 @@
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                                    <button type="submit" class="btn btn-primary mb-2" onclick="alert('Submit button clicked.');">
+                                        Submit</button>
                                 </div>
                             </div>
                         </form>
 
 
-                        <form id="form-auto-sizing-size-specific" class="mb-3">
+                        <form id="form-auto-sizing-size-specific" class="mb-3" onsubmit="alert('Form submitted successfully');">
                             <div class="form-row align-items-center">
                                 <div class="col-sm-3 my-1">
                                     <label class="sr-only" for="inlineFormInputName">Name</label>
@@ -3113,12 +3114,13 @@
                                     </div>
                                 </div>
                                 <div class="col-auto my-1">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary" onclick="alert('Submit button clicked.');">
+                                        Submit</button>
                                 </div>
                             </div>
                         </form>
 
-                        <form id="form-auto-sizing-with-custom-controls" class="mb-3">
+                        <form id="form-auto-sizing-with-custom-controls" class="mb-3" onsubmit="alert('Form submitted successfully');">
                             <div class="form-row align-items-center">
                                 <div class="col-auto my-1">
                                     <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
@@ -3130,7 +3132,7 @@
                                     </select>
                                 </div>
                                 <div class="col-auto my-1">
-                                    <div class="custom-control custom-checkbox mr-sm-2">
+                                    <div id="formAutoSizing-customCheckbox" class="custom-control custom-checkbox mr-sm-2">
                                         <input type="checkbox" class="custom-control-input"
                                                id="customControlAutosizing">
                                         <label class="custom-control-label" for="customControlAutosizing">Remember my
@@ -3138,7 +3140,8 @@
                                     </div>
                                 </div>
                                 <div class="col-auto my-1">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary" onclick="alert('Submit button clicked.');">
+                                        Submit</button>
                                 </div>
                             </div>
                         </form>
