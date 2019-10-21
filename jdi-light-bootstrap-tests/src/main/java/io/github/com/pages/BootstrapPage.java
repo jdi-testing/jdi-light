@@ -14,6 +14,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
+import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
@@ -274,6 +275,16 @@ public class BootstrapPage extends WebPage {
     public static ReadonlyPlainText readonlyPlainText2;
     @UI("#formControlRange")
     public static RangeInput rangeInput;
+    @UI("#forms-select-menu-large")
+    public static SelectMenu formsSelectMenuLarge;
+    @UI("#forms-select-menu")
+    public static SelectMenu formsSelectMenu;
+    @UI("#forms-select-menu-small")
+    public static SelectMenu formsSelectMenuSmall;
+    @UI("#forms-select-menu-multiple")
+    public static SelectMenu formsSelectMenuMultiple;
+    @UI("#forms-select-menu-size")
+    public static SelectMenu formsSelectMenuSize;
     //endregion
 
     //region Complex Elements
