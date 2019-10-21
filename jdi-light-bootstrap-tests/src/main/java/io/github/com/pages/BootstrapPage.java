@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
@@ -155,6 +156,42 @@ public class BootstrapPage extends WebPage {
     public static Jumbotron jumbotron;
     @UI("#breadcrumb")
     public static Breadcrumb breadcrumb;
+    @UI("#simpleDropdown")
+    public static Dropdown simpleDropdown;
+    @UI("#linkDropdown")
+    public static Dropdown linkDropdown;
+    @UI("#primaryDropdown")
+    public static Dropdown primaryDropdown;
+    @UI("#successDropdown")
+    public static Dropdown successDropdown;
+    @UI("#infoDropdown")
+    public static Dropdown infoDropdown;
+    @UI("#splitDropdown")
+    public static Dropdown splitDropdown;
+    @UI("#largeDropdown")
+    public static Dropdown largeDropdown;
+    @UI("#largeSplitDropdown")
+    public static Dropdown largeSplitDropdown;
+    @UI("#smallDropdown")
+    public static Dropdown smallDropdown;
+    @UI("#smallSplitDropdown")
+    public static Dropdown smallSplitDropdown;
+    @UI("#dropUpDropdown")
+    public static Dropdown dropUpDropdown;
+    @UI("#dropUpSplitDropdown")
+    public static Dropdown dropUpSplitDropdown;
+    @UI("#dropRightDropdown")
+    public static Dropdown dropRightDropdown;
+    @UI("#dropRightSplitDropdown")
+    public static Dropdown dropRightSplitDropdown;
+    @UI("#dropLeftDropdown")
+    public static Dropdown dropLeftDropdown;
+    @UI("#dropLeftSplitDropdown")
+    public static Dropdown dropLeftSplitDropdown;
+    @UI("#rightAllignedDropdown")
+    public static Dropdown rightAllignedDropdown;
+    @UI("#leftAllignedDropdown")
+    public static Dropdown leftAllignedDropdown;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")
