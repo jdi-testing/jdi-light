@@ -22,7 +22,9 @@ public class FormDisabledTests extends TestsInit {
         formDisabled.formContainer
                 .is()
                 .displayed()
-                .disabled();
+                .disabled()
+                .core()
+                .hasAttr("disabled");
         formDisabled.textField
                 .is()
                 .displayed()
