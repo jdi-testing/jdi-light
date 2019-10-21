@@ -20,18 +20,6 @@ public class BootstrapUtils {
         } catch (Exception ex) { throw exception("Can't parse value %s to Integer", value); }
     }
 
-//    public static double getDouble(String attr, WebElement el) {
-//        String value = el.getAttribute(attr);
-//        try {
-//            return parseDouble(value);
-//        } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Double", attr, value); }
-//    }
-//    public static double asDouble(String value) {
-//        try {
-//            return parseDouble(value);
-//        } catch (Exception ex) { throw exception("Can't parse value %s to Doubler", value); }
-//    }
-
     public static Boolean isElementInViewPort(UIElement element) {
         String script = "var elem = arguments[0],                 " +
                 "  box = elem.getBoundingClientRect(),    " +

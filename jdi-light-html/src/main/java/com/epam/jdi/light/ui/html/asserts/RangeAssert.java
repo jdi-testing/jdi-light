@@ -42,5 +42,4 @@ public class RangeAssert extends UIAssert<RangeAssert, Range> {
         return this;
     }
     public RangeAssert step(int step) { return step(is(step)); }
-
 }
