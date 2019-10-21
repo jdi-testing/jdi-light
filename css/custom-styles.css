@@ -79,6 +79,7 @@ header { z-index: 1001 }
     margin: 0 !important;
     /*width: 100%;*/
     flex-grow: 2;
+    z-index: 1000;
 }
 .uui-main-container main,
 .uui-main-container main .main-content {
