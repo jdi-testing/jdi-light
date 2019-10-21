@@ -17,6 +17,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
@@ -118,11 +119,13 @@ import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
-import io.github.com.sections.modal.ModalVerticallyCentered;
-import io.github.com.sections.form.ReadonlyPlainText;
-import io.github.com.sections.modal.ModalVaryingContent;
-import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.form.RangeInput;
+import io.github.com.sections.form.ReadonlyPlainText;
+import io.github.com.sections.modal.ModalLiveDemo;
+import io.github.com.sections.modal.ModalOptionalSizes;
+import io.github.com.sections.modal.ModalVaryingContent;
+import io.github.com.sections.modal.ModalVerticallyCentered;
+import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarForm;
@@ -627,15 +630,22 @@ public class BootstrapPage extends WebPage {
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
-
-    @UI("#modal-vertically-centered")
-    public static ModalVerticallyCentered modalVerticallyCentered;
     //endregion
 
+    //region Modals
     @UI("#grid-modal-base")
     public static GridModalSection gridModalSection;
-    //region Modals
     @UI("#modal-scroll-long")
     public static SectionModalLongScrolling sectionModalLongScrolling;
+    @UI("#modal-live-demo .bd-example .btn")
+    public static Button modalLiveDemoLaunchButton;
+    @UI("#exampleModalLive")
+    public static ModalLiveDemo modalLiveDemo;
+    @UI("#modal-vertically-centered")
+    public static ModalVerticallyCentered modalVerticallyCentered;
+    @UI("#modal-optional-sizes")
+    public static ModalOptionalSizes modalOptionalSizes;
+
+
     //endregion
 }
