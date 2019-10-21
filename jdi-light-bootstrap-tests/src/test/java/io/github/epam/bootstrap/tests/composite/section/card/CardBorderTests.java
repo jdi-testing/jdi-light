@@ -1,6 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.card;
 
-import io.github.com.sections.CardBorder;
+import io.github.com.sections.card.CardBorder;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;

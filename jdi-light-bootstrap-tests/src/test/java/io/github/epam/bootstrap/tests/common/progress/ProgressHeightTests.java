@@ -1,6 +1,6 @@
 package io.github.epam.bootstrap.tests.common.progress;
 
-import io.github.com.sections.ProgressSection;
+import io.github.com.sections.progress.ProgressSection;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
