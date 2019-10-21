@@ -2887,8 +2887,9 @@
                                     </div>
                                     <div class="col">
                                         <input type="text" id="last_name" class="form-control" placeholder="Last name"
-                                               onkeypress="document.getElementById('form-grid-base').submit();
-                                               alert('Form filled and submitted successfully');">
+                                               onkeypress="if (event.keyCode==13){
+                                               document.getElementById('form-grid-base').submit();
+                                               alert('Form filled and submitted successfully');}">
                                     </div>
                                 </div>
                             </form>
