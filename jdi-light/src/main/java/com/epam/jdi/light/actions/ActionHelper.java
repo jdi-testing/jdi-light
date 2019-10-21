@@ -33,15 +33,26 @@ import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.OutputTemplates.STEP_TEMPLATE;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_NEW_PAGE;
+import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_THIS_PAGE;
+import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
+import static com.epam.jdi.light.elements.composite.WebPage.setCurrentPage;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.getAllFields;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.tools.StringUtils.arrayToString;
+import static com.epam.jdi.tools.StringUtils.msgFormat;
+import static com.epam.jdi.tools.StringUtils.splitLowerCase;
 import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.Case;
+import static com.epam.jdi.tools.switcher.SwitchActions.Default;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
+import static com.epam.jdi.tools.switcher.SwitchActions.Value;
 import static java.lang.Character.toUpperCase;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -65,25 +76,31 @@ public class ActionHelper {
     };
     public static String fillTemplate(String template,
         ProceedingJoinPoint jp, MethodSignature method) {
+
+        String filledTemplate = template;
+
         try {
-            if (template.contains("{0")) {
+            if (filledTemplate.contains("{0")) {
                 Object[] args = getArgs(jp);
-                template = msgFormat(template, args);
-            } else if (template.contains("%s")) {
-                template = format(template, getArgs(jp));
+                filledTemplate = msgFormat(filledTemplate, args);
+            } else if (filledTemplate.contains("%s")) {
+                filledTemplate = format(filledTemplate, getArgs(jp));
             }
-            if (template.contains("{")) {
+
+            if (filledTemplate.contains("{")) {
                 MapArray<String, Object> obj = toMap(() -> new MapArray<>("this", getElementName(jp)));
                 MapArray<String, Object> args = methodArgs(jp, method);
                 MapArray<String, Object> core = core(jp);
                 MapArray<String, Object> fields = classFields(jp.getThis());
-                template = getActionNameFromTemplate(method, template, obj, args, core, fields);
-                if (template.contains("{{VALUE}}") && args.size() > 0)
-                    template = template.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
-                if (template.contains("{failElement}"))
-                    template = template.replaceAll("\\{failElement}", obj.get(0).value.toString());
+                filledTemplate = getActionNameFromTemplate(method, filledTemplate, obj, args, core, fields);
+                if (filledTemplate.contains("{{VALUE}}") && args.size() > 0) {
+                    filledTemplate = filledTemplate.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
+                }
+                if (filledTemplate.contains("{failElement}")) {
+                    filledTemplate = filledTemplate.replaceAll("\\{failElement}", obj.get(0).value.toString());
+                }
             }
-            return template;
+            return filledTemplate;
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName() +
                 LINE_BREAK + "" + safeException(ex));

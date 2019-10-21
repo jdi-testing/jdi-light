@@ -27,20 +27,40 @@ import java.util.concurrent.TimeUnit;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.elements.base.OutputTemplates.*;
+import static com.epam.jdi.light.driver.WebDriverByUtils.correctXPaths;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
+import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
+import static com.epam.jdi.light.elements.base.OutputTemplates.PRINT_ELEMENT_DEBUG;
+import static com.epam.jdi.light.elements.base.OutputTemplates.PRINT_ELEMENT_INFO;
+import static com.epam.jdi.light.elements.base.OutputTemplates.PRINT_ELEMENT_STEP;
+import static com.epam.jdi.light.elements.base.OutputTemplates.PRINT_ERROR_STEP;
 import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.logger.LogLevels.ERROR;
+import static com.epam.jdi.light.logger.LogLevels.INFO;
+import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.settings.WebSettings.ANY_ELEMENT;
+import static com.epam.jdi.light.settings.WebSettings.BEFORE_SEARCH;
+import static com.epam.jdi.light.settings.WebSettings.CLICK_TYPE;
+import static com.epam.jdi.light.settings.WebSettings.ELEMENT_IN_VIEW;
+import static com.epam.jdi.light.settings.WebSettings.ENABLED_ELEMENT;
+import static com.epam.jdi.light.settings.WebSettings.SEARCH_RULES;
+import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH;
+import static com.epam.jdi.light.settings.WebSettings.STRICT_SEARCH;
+import static com.epam.jdi.light.settings.WebSettings.TEXT_TYPE;
+import static com.epam.jdi.light.settings.WebSettings.VISIBLE_ELEMENT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.Case;
+import static com.epam.jdi.tools.switcher.SwitchActions.Default;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -209,28 +229,33 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 element.getTagName();
                 return beforeSearch(element);
             } catch (Exception ignore) {
-                if (getElementFunc == null)
+                if (getElementFunc == null) {
                     webElement.clear();
-                else {
+                } else {
                     return beforeSearch(webElement.set(purify(getElementFunc.execute())));
                 }
             }
         }
-        if (locator.isEmpty())
+        if (locator.isEmpty()) {
             return beforeSearch(getSmart());
-        if (locator.argsCount() != args.length)
+        }
+        if (locator.argsCount() != args.length) {
             throw exception("Can't get element with template locator '%s'. Expected %s arguments but found %s", getLocator(), locator.argsCount(), args.length);
+        }
+
         List<WebElement> els = getAllElements(args);
-        if (els.size() == 1)
-            return els.get(0);
-        if (els.size() == 0)
+        if (els.size() == 0) {
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
-        List<WebElement> filtered = filterElements(els);
-        if (filtered.size() == 1)
-            return filtered.get(0);
-        if (STRICT_SEARCH)
-            throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, els.size(), toString(), getTimeout());
-        return (filtered.size() > 1 ? filtered : els).get(0);
+        } else if (els.size() == 1) {
+            return els.get(0);
+        } else {
+            List<WebElement> filtered = filterElements(els);
+            if (STRICT_SEARCH && filtered.size() != 1) {
+                throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, els.size(), toString(), getTimeout());
+            } else {
+                return (filtered.size() > 0 ? filtered : els).get(0);
+            }
+        }
     }
 
     private List<WebElement> filterElements(List<WebElement> elements) {

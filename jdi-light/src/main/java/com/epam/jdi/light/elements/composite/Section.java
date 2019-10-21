@@ -12,7 +12,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class Section extends UIBaseElement<UIAssert> implements PageObject, IListBase {
+public class Section extends UIBaseElement<UIAssert> implements PageObject, IListBase  {
     public Section() {
         initElements(this);
     }

@@ -36,7 +36,17 @@ import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
-import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.driver.get.DriverData.BROWSER_SIZE;
+import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_CHROME;
+import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_FF;
+import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_IE;
+import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVERS_FOLDER;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_VERSION;
+import static com.epam.jdi.light.driver.get.DriverData.LATEST_VERSION;
+import static com.epam.jdi.light.driver.get.DriverData.PAGE_LOAD_STRATEGY;
+import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
 import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -48,10 +58,11 @@ import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
-import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-import static org.openqa.selenium.PageLoadStrategy.*;
+import static org.openqa.selenium.PageLoadStrategy.EAGER;
+import static org.openqa.selenium.PageLoadStrategy.NONE;
+import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 
 public class WebSettings {
     public static ILogger logger = instance("JDI");
@@ -109,7 +120,7 @@ public class WebSettings {
         String locatorName = SMART_SEARCH_NAME.execute(el.getName());
         return el.base().timer().getResult(() -> {
             for (String template : SMART_SEARCH_LOCATORS) {
-                UIElement ui = (template.equals("#%s")
+                UIElement ui = (("#%s").equals(template)
                     ? $(String.format(template, locatorName))
                     : $(String.format(template, locatorName), el.base().parent))
                         .setup(e -> e.setName(el.getName()).noWait());
@@ -168,25 +179,48 @@ public class WebSettings {
     }
 
     private static void setSearchStrategy(String p) {
-        p = p.toLowerCase();
-        if (p.equals("soft"))
-            p = "any, multiple";
-        if (p.equals("strict"))
-            p = "visible, single";
-        if (p.split(",").length == 2) {
-            List<String> params = asList(p.split(","));
-            if (params.contains("visible") || params.contains("displayed"))
-                onlyVisible();
-            if (params.contains("any") || params.contains("all"))
-                noValidation();
-            if (params.contains("enabled"))
-                visibleEnabled();
-            if (params.contains("inview"))
-                inView();
-            if (params.contains("single"))
-                STRICT_SEARCH = true;
-            if (params.contains("multiple"))
-                STRICT_SEARCH = false;
+        String paramString = p.toLowerCase();
+        if (("soft").equals(paramString)) {
+            paramString = "any, multiple";
+        } else if (("strict").equals(paramString)) {
+            paramString = "visible, single";
+        }
+
+        String[] params = paramString.split(",");
+
+        if (params.length != 2) {
+            exception("You must specify exact two parameters, " +
+                    "or use 'soft' or 'strict' as shortcats for 'any, multiple' and 'visible, single'");
+        }
+
+        String visibilityParam = params[0].trim();
+        String searchTypeParam = params[1].trim();
+
+        handleVisibilityParam(visibilityParam);
+        handleSearchTypeParam(searchTypeParam);
+    }
+
+    private static void handleVisibilityParam(String param) {
+        if ("visible".equals(param) || "displayed".equals(param)) {
+            onlyVisible();
+        } else if ("any".equals(param) || "all".equals(param)) {
+            noValidation();
+        } else if ("enabled".equals(param)) {
+            visibleEnabled();
+        } else if ("inview".equals(param)) {
+            inView();
+        } else {
+            exception("%s is not correct visibility parameter", param);
+        }
+    }
+
+    private static void handleSearchTypeParam(String param) {
+        if ("single".equals(param)) {
+            STRICT_SEARCH = true;
+        } else if ("multiple".equals(param)) {
+            STRICT_SEARCH = false;
+        } else {
+            exception("%s is not correct search type parameter", param);
         }
     }
 
@@ -195,8 +229,8 @@ public class WebSettings {
             case "normal": return NORMAL;
             case "none": return NONE;
             case "eager": return EAGER;
+            default: return NORMAL;
         }
-        return NORMAL;
     }
     public static Properties getProperties(String path) {
         // TODO use mergePath macos and windows

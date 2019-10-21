@@ -7,7 +7,9 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.*;
+import static io.github.com.pages.BootstrapPage.dismissibleAlert;
+import static io.github.com.pages.BootstrapPage.getTitle;
+import static io.github.com.pages.BootstrapPage.simpleAlert;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
@@ -53,7 +55,7 @@ public class AlertTests extends TestsInit {
     }
 
     @Test
-    public void dismissibleAlertTextTest () {
+    public void dismissibleAlertTextTest() {
         dismissibleAlert.is().text(containsString(dismissibleAlertStrongText));
         dismissibleAlert.is().text(containsString(dismissibleAlertDescriptionText));
     }
@@ -89,7 +91,7 @@ public class AlertTests extends TestsInit {
                 .tag(is("button"));
     }
 
-    @Test (priority = 1)
+    @Test(priority = 1)
     public void dismissibleAlertButtonClickTest() {
         dismissibleAlert.dismissButton().click();
         dismissibleAlert.base().waitSec(1);

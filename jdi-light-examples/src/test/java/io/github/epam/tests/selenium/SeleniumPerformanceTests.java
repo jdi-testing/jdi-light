@@ -6,7 +6,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import selenium.entities.User;
 
-import static selenium.seleniumPO.SiteSelenium.*;
+import static selenium.seleniumPO.SiteSelenium.homePage;
+import static selenium.seleniumPO.SiteSelenium.login;
+import static selenium.seleniumPO.SiteSelenium.performancePage;
 
 
 public class SeleniumPerformanceTests {

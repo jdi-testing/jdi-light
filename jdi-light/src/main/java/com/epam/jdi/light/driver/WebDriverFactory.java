@@ -18,9 +18,19 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.DriverInfos.*;
-import static com.epam.jdi.light.driver.get.DriverTypes.*;
+import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_SETTINGS;
+import static com.epam.jdi.light.driver.get.DriverInfos.CHROME_INFO;
+import static com.epam.jdi.light.driver.get.DriverInfos.FF_INFO;
+import static com.epam.jdi.light.driver.get.DriverInfos.IE_INFO;
+import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
+import static com.epam.jdi.light.driver.get.DriverTypes.EDGE;
+import static com.epam.jdi.light.driver.get.DriverTypes.FIREFOX;
+import static com.epam.jdi.light.driver.get.DriverTypes.IE;
+import static com.epam.jdi.light.driver.get.DriverTypes.OPERA;
+import static com.epam.jdi.light.driver.get.DriverTypes.PHANTOMJS;
+import static com.epam.jdi.light.driver.get.DriverTypes.getByName;
 import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.map.MapArray.map;
@@ -34,9 +44,9 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class WebDriverFactory {
     public static MapArray<String, JFunc<WebDriver>> DRIVERS
-        = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
+            = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
     private static Safe<MapArray<String, WebDriver>> RUN_DRIVERS
-        = new Safe<>(MapArray::new);
+            = new Safe<>(MapArray::new);
 
     private WebDriverFactory() {
     }
@@ -57,18 +67,19 @@ public class WebDriverFactory {
     public static String useDriver(DriverTypes driverType) {
         return useDriver(driverType, () -> initDriver(driverType));
     }
+
     public static boolean isRemote() {
         return isNotEmpty(DRIVER_REMOTE_URL);
     }
 
     private static WebDriver initDriver(DriverTypes type) {
         WebDriver driver = Switch(type).get(
-            Value(CHROME, t -> CHROME_INFO.getDriver()),
-            Value(FIREFOX, t -> FF_INFO.getDriver()),
-            Value(IE, t -> IE_INFO.getDriver()),
-            Value(PHANTOMJS, t -> CHROME_INFO.getDriver()),
-            Value(OPERA, t -> CHROME_INFO.getDriver()),
-            Value(EDGE, t -> CHROME_INFO.getDriver())
+                Value(CHROME, t -> CHROME_INFO.getDriver()),
+                Value(FIREFOX, t -> FF_INFO.getDriver()),
+                Value(IE, t -> IE_INFO.getDriver()),
+                Value(PHANTOMJS, t -> CHROME_INFO.getDriver()),
+                Value(OPERA, t -> CHROME_INFO.getDriver()),
+                Value(EDGE, t -> CHROME_INFO.getDriver())
         );
         if (driver == null)
             throw exception("Unknown driver: " + type);
@@ -95,7 +106,7 @@ public class WebDriverFactory {
     }
 
     public static <T> T jsExecute(String script, Object... args) {
-        return (T)((JavascriptExecutor) getDriver()).executeScript(script, args);
+        return (T) ((JavascriptExecutor) getDriver()).executeScript(script, args);
     }
 
     public static WebDriver getDriver() {
@@ -124,16 +135,20 @@ public class WebDriverFactory {
         try {
             Lock lock = new ReentrantLock();
             lock.lock();
-            if (!RUN_DRIVERS.get().has(driverName)) {
-                MapArray<String, WebDriver> rDrivers = RUN_DRIVERS.get();
-                if (rDrivers == null)
-                    rDrivers = new MapArray<>();
-                WebDriver resultDriver = DRIVERS.get(driverName).invoke();
-                if (resultDriver == null)
-                    throw exception("Can't get WebDriver '%s'. This Driver name not registered", driverName);
-                rDrivers.add(driverName, resultDriver);
-                RUN_DRIVERS.set(rDrivers);
+
+            MapArray<String, WebDriver> rDrivers = RUN_DRIVERS.get();
+            if (rDrivers == null) {
+                rDrivers = new MapArray<>();
             }
+            if (!rDrivers.has(driverName)) {
+                WebDriver resultDriver = DRIVERS.get(driverName).invoke();
+                if (resultDriver == null) {
+                    throw exception("Can't get WebDriver '%s'. This Driver name not registered", driverName);
+                }
+                rDrivers.add(driverName, resultDriver);
+            }
+            RUN_DRIVERS.set(rDrivers);
+
             WebDriver result = RUN_DRIVERS.get().get(driverName);
             if (result.toString().contains("(null)")) {
                 result = DRIVERS.get(driverName).invoke();
@@ -183,7 +198,8 @@ public class WebDriverFactory {
         for (Pair<String, WebDriver> pair : RUN_DRIVERS.get())
             try {
                 pair.value.quit();
-            } catch (Exception ignore) {}
+            } catch (Exception ignore) {
+            }
         RUN_DRIVERS.get().clear();
     }
 
