@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class BootstrapUtils {
