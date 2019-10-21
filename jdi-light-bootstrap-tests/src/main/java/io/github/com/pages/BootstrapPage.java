@@ -104,6 +104,9 @@ import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
+import io.github.com.sections.MediaObjectNesting;
+import io.github.com.sections.MediaObjectSample;
+import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarExternalContent;
 import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarSupportedContent;
@@ -632,6 +635,8 @@ public class BootstrapPage extends WebPage {
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
+    @UI("#navbar-base-for-brand")
+    public static NavbarSection navbarSection;
     //endregion
 
     //region Modals
