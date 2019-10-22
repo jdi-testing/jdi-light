@@ -11,13 +11,15 @@ import static io.github.com.pages.BootstrapPage.formAutoSizingWithCustomControls
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertEquals;
 
 public class FormAutoSizingWithCustomControls extends TestsInit {
 
     private String checkboxText="Remember my preference";
+    private String defaultSelectMenuText="Remember my preference";
 
     @DataProvider
-    public Object[][] selectorValuesFormAutoSizingTest() {
+    public Object[][] selectMenuValuesFormAutoSizingTest() {
         return new Object[][]{
                 {1, "Choose...",""},
                 {2, "One","1"},
@@ -35,8 +37,8 @@ public class FormAutoSizingWithCustomControls extends TestsInit {
 
     @Test
     public void baseValidationTest() {
-        baseValidation(formAutoSizingWithCustomControls.checkbox);
-        baseValidation(formAutoSizingWithCustomControls.selector);
+        baseValidation(formAutoSizingWithCustomControls.checkboxContainer);
+        //baseValidation(formAutoSizingWithCustomControls.selectMenu);
     }
 
     @Test
@@ -64,6 +66,14 @@ public class FormAutoSizingWithCustomControls extends TestsInit {
                 .core()
                 .hasClass("custom-control custom-checkbox mr-sm-2")
                 .tag(is("div"));
+        formAutoSizingWithCustomControls.selectMenu
+                .is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("custom-select mr-sm-2")
+                .text(is(defaultSelectMenuText))
+                .tag(is("select"));
     }
 
     @Test
@@ -86,26 +96,37 @@ public class FormAutoSizingWithCustomControls extends TestsInit {
         validateAlerts();
     }
 
-    @Test(dataProvider = "selectorValuesFormAutoSizingTest")
-    public void separateElementsCheckboxTests(int i,String optionText,String attrValue) {
-        formAutoSizingWithCustomControls.selector.select(i);
-        formAutoSizingWithCustomControls.selector.selected().equals(optionText);
-        formAutoSizingWithCustomControls.selector.selected().toCharArray();
+    @Test(dataProvider = "selectMenuValuesFormAutoSizingTest")
+    public void separateElementsSelectMenuTestsWithDataProvider(int i,String optionText,String attrValue) {
+        formAutoSizingWithCustomControls.selectMenu.optionsSelectMenu.get(i).is().tag(optionText);
+        formAutoSizingWithCustomControls.selectMenu.optionsSelectMenu.get(i).assertThat().attr("value",attrValue);
+    }
 
+    @Test
+    public void separateElementsSelectMenuClickTest() {
+        formAutoSizingWithCustomControls.selectMenu.optionsSelectMenu.get(1).click();
         formAutoSizingWithCustomControls.submit.click();
-        formAutoSizingWithCustomControls.checkbox.is().selected();
+        assertEquals(formAutoSizingWithCustomControls.selectMenu.getValue(), "Choose...");
         validateAlerts();
-        formAutoSizingWithCustomControls.checkboxContainer.check();
+
+        formAutoSizingWithCustomControls.selectMenu.optionsSelectMenu.get(3).click();
         formAutoSizingWithCustomControls.submit.click();
-        formAutoSizingWithCustomControls.checkbox.is().deselected();
+        assertEquals(formAutoSizingWithCustomControls.selectMenu.getValue(), "Two");
         validateAlerts();
-        formAutoSizingWithCustomControls.checkbox.label().click();
+
+        formAutoSizingWithCustomControls.selectMenu.optionsSelectMenu.get(2).click();
         formAutoSizingWithCustomControls.submit.click();
-        formAutoSizingWithCustomControls.checkbox.is().selected();
+        assertEquals(formAutoSizingWithCustomControls.selectMenu.getValue(), "One");
         validateAlerts();
-        formAutoSizingWithCustomControls.checkbox.label().click();
+
+        formAutoSizingWithCustomControls.selectMenu.optionsSelectMenu.get(3).click();
         formAutoSizingWithCustomControls.submit.click();
-        formAutoSizingWithCustomControls.checkbox.is().deselected();
+        assertEquals(formAutoSizingWithCustomControls.selectMenu.getValue(), "Two");
+        validateAlerts();
+
+        formAutoSizingWithCustomControls.selectMenu.optionsSelectMenu.get(4).click();
+        formAutoSizingWithCustomControls.submit.click();
+        assertEquals(formAutoSizingWithCustomControls.selectMenu.getValue(), "Three");
         validateAlerts();
     }
 

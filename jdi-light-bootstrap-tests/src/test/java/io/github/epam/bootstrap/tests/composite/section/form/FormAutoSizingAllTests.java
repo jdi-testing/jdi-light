@@ -68,6 +68,10 @@ public class FormAutoSizingAllTests extends TestsInit {
                 .core()
                 .hasClass("input-group-text")
                 .text("@");
+        formAutoSizingAll.colParameter
+                .is()
+                .core()
+                .hasClass("col-auto");
         formAutoSizingAll.email
                 .is()
                 .displayed()

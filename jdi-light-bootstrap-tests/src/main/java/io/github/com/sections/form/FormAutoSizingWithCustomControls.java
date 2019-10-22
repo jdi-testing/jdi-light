@@ -7,12 +7,13 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
+import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
 
 public class FormAutoSizingWithCustomControls extends Section {
     @UI("#inlineFormCustomSelect")
-    public Selector selector; // ЗДЕСЬ ОБЪЯВИТЬ КАК SelectorMenu
-    @UI("#customCheck1-div")
-    public Checkbox checkboxContainer; //ADD ID HERE IN HTML
+    public SelectMenu selectMenu;
+    @UI("formAutoSizing-customCheckbox")
+    public Checkbox checkboxContainer;
     @UI("#customControlAutosizing")
     public Checkbox checkbox;
     @UI("button")
