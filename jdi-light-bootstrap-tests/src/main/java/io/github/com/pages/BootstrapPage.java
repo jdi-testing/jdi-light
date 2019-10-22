@@ -15,6 +15,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Range;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
@@ -274,8 +275,6 @@ public class BootstrapPage extends WebPage {
     public static ReadonlyPlainText readonlyPlainText1;
     @UI("#readonlyPlainText2")
     public static ReadonlyPlainText readonlyPlainText2;
-    @UI("#formControlRange")
-    public static RangeInput rangeInput;
     @UI("#forms-select-menu-large")
     public static SelectMenu formsSelectMenuLarge;
     @UI("#forms-select-menu")
@@ -688,6 +687,17 @@ public class BootstrapPage extends WebPage {
     public static NavbarSupportedContent navbarSupportedContent;
     @UI("#navbar-base-for-brand")
     public static NavbarSection navbarSection;
+    //endregion
+
+    //region Ranges
+    @UI("#formControlRange")
+    public static RangeInput rangeInput;
+    @UI("#customRange1")
+    public static Range range1;
+    @UI("#customRange2")
+    public static Range range2;
+    @UI("#customRange3")
+    public static Range range3;
     //endregion
 
     //region Modals
