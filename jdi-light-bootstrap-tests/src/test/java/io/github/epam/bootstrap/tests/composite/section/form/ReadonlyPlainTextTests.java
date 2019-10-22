@@ -8,7 +8,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.readonlyInput;
 import static io.github.com.pages.BootstrapPage.readonlyPlainText1;
 import static io.github.com.pages.BootstrapPage.readonlyPlainText2;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
@@ -46,9 +45,8 @@ public class ReadonlyPlainTextTests extends TestsInit {
     }
 
     @Test(dataProvider = "itemsUnderTesting", expectedExceptions = {InvalidElementStateException.class})
-    public void check(ReadonlyPlainText item) {
+    public void setValueShouldFailTest(ReadonlyPlainText item) {
         item.setValue(text);
-        item.sendKeys(text);
     }
 
     @Test(dataProvider = "itemsUnderTesting")
