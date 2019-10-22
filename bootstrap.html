@@ -6325,19 +6325,18 @@
                                     </div>
                                     <div class="modal-body">
                                         <h5>Popover in a modal</h5>
-                                        <p>This <a href="#" role="button" class="btn btn-secondary popover-test"
-                                                   title="Popover title"
+                                        <p>This <a href="#exampleModalPopovers" role="button" class="btn btn-secondary popover-test"
+                                                   title="Popover title" data-toggle="popover"
                                                    data-content="Popover body content is set in this attribute."
-                                                   data-container="#exampleModalPopovers">button</a> triggers a popover
-                                            on click.</p>
+                                                   data-container="#exampleModalPopovers">button</a> triggers a popover on click.
+                                        </p>
                                         <hr/>
                                         <h5>Tooltips in a modal</h5>
-                                        <p><a href="#" class="tooltip-test" title="Tooltip"
-                                              data-container="#exampleModalPopovers">This link</a> and <a href="#"
-                                                                                                          class="tooltip-test"
-                                                                                                          title="Tooltip"
-                                                                                                          data-container="#exampleModalPopovers">that
-                                            link</a> have tooltips on hover.</p>
+                                        <p><a href="#exampleModalPopovers" class="tooltip-test" title="Tooltip" data-toggle="tooltip"
+                                              data-container="#exampleModalPopovers">This link</a> and
+                                            <a href="#exampleModalPopovers" class="tooltip-test" title="Tooltip" data-toggle="tooltip"
+                                               data-container="#exampleModalPopovers">that link</a> have tooltips on hover.
+                                        </p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
@@ -6883,7 +6882,6 @@
                                 data-content="Top popover is visible.">
                             Popover on top
                         </button>
-                        <br>
                         <button type="button" class="btn btn-secondary btn-block mb-3" id="popover-right"
                                 data-container="body" data-toggle="popover" data-placement="right"
                                 data-content="Right popover is visible.">
