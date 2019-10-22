@@ -22,7 +22,7 @@ public class RangeAssert extends UIAssert<RangeAssert, Range> {
 
     @JDIAction("Assert that '{name}' min volume {0}")
     public RangeAssert minValue(Matcher<Double> min) {
-        jdiAssert(Double.parseDouble(element.core().getAttribute("min")), min);
+        jdiAssert(element.min(), min);
         return this;
     }
 
@@ -32,7 +32,7 @@ public class RangeAssert extends UIAssert<RangeAssert, Range> {
 
     @JDIAction("Assert that '{name}' max volume {0}")
     public RangeAssert maxValue(Matcher<Double> max) {
-        jdiAssert(Double.parseDouble(element.core().getAttribute("max")), max);
+        jdiAssert(element.max(), max);
         return this;
     }
 
@@ -42,7 +42,7 @@ public class RangeAssert extends UIAssert<RangeAssert, Range> {
 
     @JDIAction("Assert that '{name}' step {0}")
     public RangeAssert step(Matcher<Double> step) {
-        jdiAssert(Double.parseDouble(element.core().getAttribute("step")), step);
+        jdiAssert(element.step(), step);
         return this;
     }
 
