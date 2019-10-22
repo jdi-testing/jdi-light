@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Dropdown;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
@@ -25,6 +25,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
+import io.github.com.sections.dropdown.DropdownMenuItemsSection;
 import io.github.com.sections.form.FormGrid;
 import io.github.com.sections.modal.ModalTooltipsAndPopovers;
 import io.github.com.sections.modal.ModalVaryingContent;
@@ -129,7 +130,6 @@ import io.github.com.sections.form.RangeInput;
 import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.modal.ModalLiveDemo;
 import io.github.com.sections.modal.ModalOptionalSizes;
-import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
@@ -196,6 +196,8 @@ public class BootstrapPage extends WebPage {
     public static Dropdown rightAllignedDropdown;
     @UI("#leftAllignedDropdown")
     public static Dropdown leftAllignedDropdown;
+    @UI("#dropdown-menu-items-section")
+    public static DropdownMenuItemsSection dropdownMenuItemsSection;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")
