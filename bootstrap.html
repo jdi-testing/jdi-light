@@ -2880,7 +2880,7 @@
 
                     <div class="doc-space line">
                         <div class="html-left">
-                            <form id="form-grid-base" onsubmit="window.alert('Form filled and submitted successfully');">
+                            <form id="form-grid-base">
                                 <div class="row">
                                     <div class="col">
                                         <input type="text" id="first_name" class="form-control" placeholder="First name">
@@ -2888,7 +2888,8 @@
                                     <div class="col">
                                         <input type="text" id="last_name" class="form-control" placeholder="Last name"
                                                onkeypress="if (event.keyCode==13){
-                                               document.getElementById('form-grid-base').submit();}">
+                                               document.getElementById('form-grid-base').submit();
+                                               alert('Form filled and submitted successfully');}">
                                     </div>
                                 </div>
                             </form>
