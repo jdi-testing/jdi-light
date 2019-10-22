@@ -22,7 +22,6 @@ public class FormRowTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-
     @Test
     public void checkStructureRow() {
         formRow.row.assertThat().hasClass("form-row");
