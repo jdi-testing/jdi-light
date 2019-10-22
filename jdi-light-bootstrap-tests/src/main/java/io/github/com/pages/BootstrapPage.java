@@ -652,7 +652,7 @@ public class BootstrapPage extends WebPage {
     //endregion
 
     //region Forms
-    @UI("#")
+    @UI("#form-column-size")
     public static FormColumnSizing formColumnSizing;
     //endregion
 }
