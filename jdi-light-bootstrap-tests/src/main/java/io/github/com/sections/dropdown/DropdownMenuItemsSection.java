@@ -14,10 +14,6 @@ public class DropdownMenuItemsSection extends Section {
     //@FindBy(css = "#dropdown-menu-text-item")
     private StaticDropdownMenu menuWithText;
 
-    @UI("#dropdown-menu-disabled-item")
-    //@FindBy(css = "#dropdown-menu-disabled-item")
-    private StaticDropdownMenu menuWithDisabled;
-
     public Dropdown getDropdown() {
         return dropdown;
     }
