@@ -51,6 +51,7 @@ import io.github.com.sections.form.CheckboxesAndRadiosWithoutLabels;
 import io.github.com.sections.form.CheckboxesCustom;
 import io.github.com.sections.form.CheckboxesDefault;
 import io.github.com.sections.form.CheckboxesDefaultInline;
+import io.github.com.sections.form.FormColumnSizing;
 import io.github.com.sections.inputgroup.CustomSelect;
 import io.github.com.sections.inputgroup.CustomSelectWithButton;
 import io.github.com.sections.form.FormBrowserDefaults;
@@ -648,7 +649,10 @@ public class BootstrapPage extends WebPage {
     public static ModalVerticallyCentered modalVerticallyCentered;
     @UI("#modal-optional-sizes")
     public static ModalOptionalSizes modalOptionalSizes;
+    //endregion
 
-
+    //region Forms
+    @UI("#")
+    public static FormColumnSizing formColumnSizing;
     //endregion
 }
