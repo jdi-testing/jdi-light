@@ -10,9 +10,9 @@ import static org.hamcrest.Matchers.is;
 
 public class RangeAssert extends UIAssert<RangeAssert, Range> {
 
-    @JDIAction("Assert that '{name}' thumbValue b {0}")
+    @JDIAction("Assert that '{name}' thumbValue is {0}")
     public RangeAssert thumbValue(Matcher<Double> thumbValue) {
-        jdiAssert(Double.parseDouble(element.getValue()), thumbValue);
+        jdiAssert(element.thumbValue(), thumbValue);
         return this;
     }
 
@@ -20,7 +20,7 @@ public class RangeAssert extends UIAssert<RangeAssert, Range> {
         return thumbValue(is(thumbValue));
     }
 
-    @JDIAction("Assert that '{name}' min volume {0}")
+    @JDIAction("Assert that '{name}' min volume is {0}")
     public RangeAssert minValue(Matcher<Double> min) {
         jdiAssert(element.min(), min);
         return this;
@@ -30,7 +30,7 @@ public class RangeAssert extends UIAssert<RangeAssert, Range> {
         return minValue(is(minValue));
     }
 
-    @JDIAction("Assert that '{name}' max volume {0}")
+    @JDIAction("Assert that '{name}' max volume is {0}")
     public RangeAssert maxValue(Matcher<Double> max) {
         jdiAssert(element.max(), max);
         return this;
@@ -40,7 +40,7 @@ public class RangeAssert extends UIAssert<RangeAssert, Range> {
         return maxValue(is(maxValue));
     }
 
-    @JDIAction("Assert that '{name}' step {0}")
+    @JDIAction("Assert that '{name}' step is {0}")
     public RangeAssert step(Matcher<Double> step) {
         jdiAssert(element.step(), step);
         return this;
