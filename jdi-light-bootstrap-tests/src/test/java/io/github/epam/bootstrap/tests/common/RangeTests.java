@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite.section.form;
+package io.github.epam.bootstrap.tests.common;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
