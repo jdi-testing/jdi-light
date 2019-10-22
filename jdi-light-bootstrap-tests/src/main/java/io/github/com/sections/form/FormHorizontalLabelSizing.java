@@ -11,13 +11,13 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 
 public class FormHorizontalLabelSizing extends Form {
 
-    @UI("#colFormLabelSm") //form-control-sm
+    @UI("#colFormLabelSm")
     public TextField smallText;
 
-    @UI("#colFormLabel") //form-control
+    @UI("#colFormLabel")
     public TextField commonText;
 
-    @UI("#colFormLabelLg") //form-control-lg
+    @UI("#colFormLabelLg")
     public TextField largeText;
 
 }

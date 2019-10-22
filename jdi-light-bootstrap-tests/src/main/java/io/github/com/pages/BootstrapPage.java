@@ -652,7 +652,7 @@ public class BootstrapPage extends WebPage {
     //endregion
 
     //region Forms
-    @UI("#")
+    @UI("#form-horizontal-label-size")
     public static FormHorizontalLabelSizing formHorizontalLabelSizing;
     //endregion
 
