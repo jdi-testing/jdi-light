@@ -10,6 +10,8 @@ public class FormAutoSizingSizeSpecific extends Section {
 
     @UI("#inlineFormInputName")
     public TextField name;
+    @UI(".input-group-text")
+    public TextField atSign;
     @UI("#inlineFormInputGroupUsername")
     public TextField email;
     @UI("#autoSizingCheck2")

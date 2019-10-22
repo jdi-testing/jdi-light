@@ -10,6 +10,8 @@ public class FormAutoSizingAll extends Section {
 
     @UI("#inlineFormInput")
     public TextField name;
+    @UI(".input-group-text")
+    public TextField atSign;
     @UI("#inlineFormInputGroup")
     public TextField email;
     @UI("#autoSizingCheck")

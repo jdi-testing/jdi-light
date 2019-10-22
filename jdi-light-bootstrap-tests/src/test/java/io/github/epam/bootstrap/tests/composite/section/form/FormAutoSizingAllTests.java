@@ -62,6 +62,12 @@ public class FormAutoSizingAllTests extends TestsInit {
                 .enabled()
                 .core()
                 .value(labelNameText);
+        formAutoSizingAll.atSign
+                .is()
+                .enabled()
+                .core()
+                .hasClass("input-group-text")
+                .text("@");
         formAutoSizingAll.email
                 .is()
                 .displayed()
