@@ -8,11 +8,14 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
+import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Range;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
@@ -23,7 +26,9 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
+import io.github.com.sections.form.FormGrid;
+import io.github.com.sections.modal.ModalTooltipsAndPopovers;
+import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.buttongroup.ButtonGroupBasicExample;
 import io.github.com.sections.buttongroup.ButtonGroupNesting;
@@ -71,6 +76,8 @@ import io.github.com.sections.listgroup.ListGroupLinks;
 import io.github.com.sections.listgroup.ListGroupWithBadges;
 import io.github.com.sections.MediaObjectNesting;
 import io.github.com.sections.MediaObjectSample;
+
+import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarExternalContent;
 import io.github.com.sections.navbar.NavbarWithDropdown;
 import io.github.com.sections.navs.NavsAlignmentCenter;
@@ -134,6 +141,42 @@ public class BootstrapPage extends WebPage {
     public static Jumbotron jumbotron;
     @UI("#breadcrumb")
     public static Breadcrumb breadcrumb;
+    @UI("#simpleDropdown")
+    public static Dropdown simpleDropdown;
+    @UI("#linkDropdown")
+    public static Dropdown linkDropdown;
+    @UI("#primaryDropdown")
+    public static Dropdown primaryDropdown;
+    @UI("#successDropdown")
+    public static Dropdown successDropdown;
+    @UI("#infoDropdown")
+    public static Dropdown infoDropdown;
+    @UI("#splitDropdown")
+    public static Dropdown splitDropdown;
+    @UI("#largeDropdown")
+    public static Dropdown largeDropdown;
+    @UI("#largeSplitDropdown")
+    public static Dropdown largeSplitDropdown;
+    @UI("#smallDropdown")
+    public static Dropdown smallDropdown;
+    @UI("#smallSplitDropdown")
+    public static Dropdown smallSplitDropdown;
+    @UI("#dropUpDropdown")
+    public static Dropdown dropUpDropdown;
+    @UI("#dropUpSplitDropdown")
+    public static Dropdown dropUpSplitDropdown;
+    @UI("#dropRightDropdown")
+    public static Dropdown dropRightDropdown;
+    @UI("#dropRightSplitDropdown")
+    public static Dropdown dropRightSplitDropdown;
+    @UI("#dropLeftDropdown")
+    public static Dropdown dropLeftDropdown;
+    @UI("#dropLeftSplitDropdown")
+    public static Dropdown dropLeftSplitDropdown;
+    @UI("#rightAllignedDropdown")
+    public static Dropdown rightAllignedDropdown;
+    @UI("#leftAllignedDropdown")
+    public static Dropdown leftAllignedDropdown;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")
@@ -212,8 +255,16 @@ public class BootstrapPage extends WebPage {
     public static ReadonlyPlainText readonlyPlainText1;
     @UI("#readonlyPlainText2")
     public static ReadonlyPlainText readonlyPlainText2;
-    @UI("#formControlRange")
-    public static RangeInput rangeInput;
+    @UI("#forms-select-menu-large")
+    public static SelectMenu formsSelectMenuLarge;
+    @UI("#forms-select-menu")
+    public static SelectMenu formsSelectMenu;
+    @UI("#forms-select-menu-small")
+    public static SelectMenu formsSelectMenuSmall;
+    @UI("#forms-select-menu-multiple")
+    public static SelectMenu formsSelectMenuMultiple;
+    @UI("#forms-select-menu-size")
+    public static SelectMenu formsSelectMenuSize;
     //endregion
 
     //region Complex Elements
@@ -540,6 +591,8 @@ public class BootstrapPage extends WebPage {
 
     @UI("//h4[.='Navbar - Text']/../..")
     public static NavbarText navbarText;
+    @UI("//h4[.='Modal - Tooltips and popovers']/../..")
+    public static ModalTooltipsAndPopovers modalTooltipsAndPopovers;
 
     @UI("#striped-base .progress")
     public static JList<ProgressSection> progressSections;
@@ -560,6 +613,8 @@ public class BootstrapPage extends WebPage {
     public static NavbarForm navbarFormWithText;
     @UI("#navbar-form-3")
     public static NavbarWithInputGroupForm navbarFormWithInputGroup;
+    @UI("#form-grid-base")
+    public static FormGrid formGrid;
     //Toasts
 
     @UI("#toastRightTop")
@@ -616,6 +671,19 @@ public class BootstrapPage extends WebPage {
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
+    @UI("#navbar-base-for-brand")
+    public static NavbarSection navbarSection;
+    //endregion
+
+    //region Ranges
+    @UI("#formControlRange")
+    public static RangeInput rangeInput;
+    @UI("#customRange1")
+    public static Range range1;
+    @UI("#customRange2")
+    public static Range range2;
+    @UI("#customRange3")
+    public static Range range3;
     //endregion
 
     //region Modals
