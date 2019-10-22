@@ -26,7 +26,6 @@ public class FormTests extends TestsInit {
     public void fillContactFormTest() {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();
-        userName.is().displayed();
         contactForm.submit(DEFAULT_CONTACT);
         contactForm.check(DEFAULT_CONTACT);
     }

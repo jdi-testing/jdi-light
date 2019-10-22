@@ -37,6 +37,12 @@
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-eyes</artifactId>
             <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

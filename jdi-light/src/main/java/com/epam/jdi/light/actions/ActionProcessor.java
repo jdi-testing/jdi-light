@@ -1,13 +1,11 @@
 package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -80,7 +78,7 @@ public class ActionProcessor {
     }
     public static Object defaultAction(ProceedingJoinPoint jp) throws Throwable {
         ICoreElement obj = getJdi(jp);
-        JFunc1<ICoreElement, Object> overrideAction = getOverride(jp, obj);
+        JFunc1<Object, Object> overrideAction = getOverride(jp, obj);
         return overrideAction != null
                 ? overrideAction.execute(obj) : jp.proceed();
     }
@@ -96,7 +94,7 @@ public class ActionProcessor {
             String exception = "";
             JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
             ICoreElement obj = getJdi(jp);
-            JFunc1<ICoreElement, Object> overrideAction = getOverride(jp, obj);
+            JFunc1<Object, Object> overrideAction = getOverride(jp, obj);
             int timeout = getTimeout(ja, obj);
             long start = currentTimeMillis();
             do {
@@ -116,11 +114,11 @@ public class ActionProcessor {
         } finally { }
     }
 
-    private static JFunc1<ICoreElement, Object> getOverride(ProceedingJoinPoint jp, ICoreElement obj) {
+    private static JFunc1<Object, Object> getOverride(ProceedingJoinPoint jp, ICoreElement obj) {
         if (isOverride.get()) {
             return null;
         }
-        JFunc1<ICoreElement, Object> override = null;
+        JFunc1<Object, Object> override = null;
         if (obj != null) {
             override = GetOverrideAction(jp);
             isOverride.set(true);

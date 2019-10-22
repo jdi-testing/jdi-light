@@ -7,7 +7,9 @@ package com.epam.jdi.eyes;
 
 import com.applitools.eyes.BatchInfo;
 import com.applitools.eyes.selenium.Eyes;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.tools.Safe;
 import org.openqa.selenium.WebElement;
@@ -22,17 +24,19 @@ public class JDIEyes {
 
     public static void initVisualTest() {
         OverrideAction("isDisplayed", e -> {
-            e.isDisplayed();
-            visualCheckElement(e);
+            ICoreElement ui = (ICoreElement) e;
+            ui.isDisplayed();
+            visualCheckElement(ui);
+        });
+        OverrideAction("checkOpened", e -> {
+            WebPage page = (WebPage) e;
+            page.checkOpened();
+            visualCheckPage(page);
         });
         JDI_ANNOTATIONS.add("VisualCheck", aRule(VisualCheck.class, (e,a) -> e.params.add("visualCheck", "")));
     }
     public static void initVisualTest(EyesConfig config) {
-        OverrideAction("isDisplayed", e -> {
-            e.isDisplayed();
-            visualCheckElement(e);
-        });
-        JDI_ANNOTATIONS.add("VisualCheck", aRule(VisualCheck.class, (e,a) -> e.params.add("visualCheck", "")));
+        initVisualTest();
         EYES_CONFIG = config;
     }
 
@@ -41,7 +45,8 @@ public class JDIEyes {
     }
     public static void endVisualTest() {
         try {
-            eyes.get().close();
+            if (eyes.get().getIsOpen())
+                eyes.get().close();
         } finally {
             if (eyes.get().getIsOpen())
                 eyes.get().abortIfNotClosed();
