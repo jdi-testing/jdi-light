@@ -10,9 +10,11 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
+import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
@@ -99,6 +101,7 @@ import io.github.com.sections.listgroup.ListGroupWithBadges;
 import io.github.com.sections.modal.EmbeddedVideoModal;
 import io.github.com.sections.modal.ModalLiveDemo;
 import io.github.com.sections.modal.ModalOptionalSizes;
+import io.github.com.sections.modal.ModalTooltipsAndPopovers;
 import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
@@ -106,6 +109,7 @@ import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarExternalContent;
 import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarSupportedContent;
 import io.github.com.sections.navbar.NavbarText;
 import io.github.com.sections.navbar.NavbarWithDropdown;
@@ -154,6 +158,42 @@ public class BootstrapPage extends WebPage {
     public static Jumbotron jumbotron;
     @UI("#breadcrumb")
     public static Breadcrumb breadcrumb;
+    @UI("#simpleDropdown")
+    public static Dropdown simpleDropdown;
+    @UI("#linkDropdown")
+    public static Dropdown linkDropdown;
+    @UI("#primaryDropdown")
+    public static Dropdown primaryDropdown;
+    @UI("#successDropdown")
+    public static Dropdown successDropdown;
+    @UI("#infoDropdown")
+    public static Dropdown infoDropdown;
+    @UI("#splitDropdown")
+    public static Dropdown splitDropdown;
+    @UI("#largeDropdown")
+    public static Dropdown largeDropdown;
+    @UI("#largeSplitDropdown")
+    public static Dropdown largeSplitDropdown;
+    @UI("#smallDropdown")
+    public static Dropdown smallDropdown;
+    @UI("#smallSplitDropdown")
+    public static Dropdown smallSplitDropdown;
+    @UI("#dropUpDropdown")
+    public static Dropdown dropUpDropdown;
+    @UI("#dropUpSplitDropdown")
+    public static Dropdown dropUpSplitDropdown;
+    @UI("#dropRightDropdown")
+    public static Dropdown dropRightDropdown;
+    @UI("#dropRightSplitDropdown")
+    public static Dropdown dropRightSplitDropdown;
+    @UI("#dropLeftDropdown")
+    public static Dropdown dropLeftDropdown;
+    @UI("#dropLeftSplitDropdown")
+    public static Dropdown dropLeftSplitDropdown;
+    @UI("#rightAllignedDropdown")
+    public static Dropdown rightAllignedDropdown;
+    @UI("#leftAllignedDropdown")
+    public static Dropdown leftAllignedDropdown;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")
@@ -234,6 +274,16 @@ public class BootstrapPage extends WebPage {
     public static ReadonlyPlainText readonlyPlainText2;
     @UI("#formControlRange")
     public static RangeInput rangeInput;
+    @UI("#forms-select-menu-large")
+    public static SelectMenu formsSelectMenuLarge;
+    @UI("#forms-select-menu")
+    public static SelectMenu formsSelectMenu;
+    @UI("#forms-select-menu-small")
+    public static SelectMenu formsSelectMenuSmall;
+    @UI("#forms-select-menu-multiple")
+    public static SelectMenu formsSelectMenuMultiple;
+    @UI("#forms-select-menu-size")
+    public static SelectMenu formsSelectMenuSize;
     //endregion
 
     //region Complex Elements
@@ -558,6 +608,8 @@ public class BootstrapPage extends WebPage {
 
     @UI("//h4[.='Navbar - Text']/../..")
     public static NavbarText navbarText;
+    @UI("//h4[.='Modal - Tooltips and popovers']/../..")
+    public static ModalTooltipsAndPopovers modalTooltipsAndPopovers;
 
     @UI("#striped-base .progress")
     public static JList<ProgressSection> progressSections;
@@ -634,6 +686,8 @@ public class BootstrapPage extends WebPage {
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
+    @UI("#navbar-base-for-brand")
+    public static NavbarSection navbarSection;
     //endregion
 
     //region Modals
