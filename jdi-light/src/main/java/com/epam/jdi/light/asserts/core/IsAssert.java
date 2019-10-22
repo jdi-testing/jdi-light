@@ -37,8 +37,7 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
      * Check that the element contains attribute
      * @param attrName
      */
-
-    @JDIAction("Assert that '{name}' attribute {0}")
+    @JDIAction("Assert that '{name}' has attribute {0}")
     public IsAssert hasAttr(String attrName) {
         jdiAssert(element.attrs().keys().toArray(), hasItemInArray(attrName));
         return this;
