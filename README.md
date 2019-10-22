@@ -10,12 +10,12 @@
 For fast start you can go through [tutorial](https://jdi-docs.github.io/jdi-light/?java#tutorial) </br>
 
 More links: </br>
-Documentation: <a href = "https://jdi-docs.github.io/jdi-light/?java" target = "a_blank"> https://jdi-docs.github.io/jdi-light/?java </a> - different types of documentation from introduction and tutorial to technical methods documentation </br>
-Introduction + fast start example: <a href = "https://jdi-docs.github.io/jdi-light/?java#introduction" target = "a_blank"> https://jdi-docs.github.io/jdi-light/?java#introduction </a> </br>
-Tutorial: <a href = "https://jdi-docs.github.io/jdi-light/?java#tutorial" target = "a_blank"> https://jdi-docs.github.io/jdi-light/?java#tutorial </a> - helps to get main ideas on practice </br>
-Tutorial repo: <a href = "https://github.com/jdi-tutorials" target = "a_blank"> https://github.com/jdi-tutorials </a> </br>
-Project templates: <a href = "https://github.com/jdi-templates" target = "a_blank"> https://github.com/jdi-templates </a>  - for fast projects start </br>
-Examples: <a href = "https://github.com/jdi-examples" target = "a_blank"> https://github.com/jdi-examples </a>  </br> 
+Documentation: https://jdi-docs.github.io/jdi-light/?java - different types of documentation from introduction and tutorial to technical methods documentation </br>
+Introduction + fast start example: https://jdi-docs.github.io/jdi-light/?java#introduction </br>
+Tutorial: https://jdi-docs.github.io/jdi-light/?java#tutorial - helps to get main ideas on practice </br>
+Tutorial repo:  https://github.com/jdi-tutorials </br>
+Project templates: https://github.com/jdi-templates - for fast projects start </br>
+Examples: https://github.com/jdi-examples </br>
 How to use [UI Elements examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests/src/test/java/io/github/epam/html/tests/elements) </br>
 Increase test [performance examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-performance) </br>
  </br>
@@ -26,12 +26,12 @@ Increase test [performance examples](https://github.com/jdi-testing/jdi-light/tr
 JDI – is the test Framework for UI test automation that helps to makes your tests fast and sustainable and provide obvious and predictable test run result
 
 ## Highlights
--   Has simple integration with any Selenium based project that allows to increase projects stability, add user actions logs and enrich standard WebElements capabilities with new features in minutes (TBD add Guide)
--   Extends Page Objects pattern with powerful UI Elements: Buttons, TextFields, Forms, Tables etc ( TBD add good links to examples)
--   Write stable and predictable tests that fail only because of changing business logic or layout. No more waits, thread sleep and other flaky staff
--   Increase your tests execution speed in general and especially for complex cases like search in big tables, dropdowns with hundreds elements or enter text with thousand lines
--   Get detailed logs and good reports of all user actions with no effort
--   Easy integration with all modern Automation tools: CI (Jenkins, TC etc.), Logging (Log4j or any other slf4j based logs), Reporting (Allure or Report Portal); Browser/Devices farms (Selenium Grid, Browser Stack, Selenoid etc.), Test Runners (TestNG, JUnit) etc.
+- Has simple integration with any Selenium based project that allows to increase projects stability, add user actions logs and enrich standard WebElements capabilities with new features in minutes (TBD add Guide)
+- Extends Page Objects pattern with powerful UI Elements: Buttons, TextFields, Forms, Tables etc ( TBD add good links to examples)
+- Write stable and predictable tests that fail only because of changing business logic or layout. No more waits, thread sleep and other flaky staff
+- Increase your tests execution speed in general and especially for complex cases like search in big tables, dropdowns with hundreds elements or enter text with thousand lines
+- Get detailed logs and good reports of all user actions with no effort
+- Easy integration with all modern Automation tools: CI (Jenkins, TC etc.), Logging (Log4j or any other slf4j based logs), Reporting (Allure or Report Portal); Browser/Devices farms (Selenium Grid, Browser Stack, Selenoid etc.), Test Runners (TestNG, JUnit) etc.
 
 ## Our plans
 ### Ultimate Goal
@@ -41,31 +41,33 @@ Run test execution automatically and correct tests if any changes in layout happ
 [Features](https://github.com/jdi-testing/jdi-light/labels/feature)
 
 ## Useful Links
-Test site: <a href = "https://jdi-testing.github.io/jdi-light/" target = "a_blank"> https://jdi-testing.github.io/jdi-light/ </a>
+Test site: https://jdi-testing.github.io/jdi-light/
 
 Login to get access to all pages (Login: Roman; Password: Jdi1234)
 
-Html Elements examples: <a href = "https://jdi-testing.github.io/jdi-light/html5.html" target = "a_blank"> https://jdi-testing.github.io/jdi-light/html5.html </a>
+Html Elements examples: https://jdi-testing.github.io/jdi-light/html5.html
 
-Example Html elements tests: <a href = "https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests" target = "a_blank"> https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests </a>
+Example Html elements tests: https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests
 
-Example Scenario tests: <a href = "https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-examples" target = "a_blank"> https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-examples </a>
+Example Scenario tests: https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-examples
 
-Site: <a href = "http://jdi.epam.com/" target = "a_blank"> http://jdi.epam.com/ </a>
+Site: http://jdi.epam.com/
 
-VK: <a href = "https://vk.com/jdi_framework" target = "a_blank"> https://vk.com/jdi_framework </a>
+VK: https://vk.com/jdi_framework
 
-Facebook: <a href = "https://www.facebook.com/groups/jdi.framework/" target = "a_blank"> https://www.facebook.com/groups/jdi.framework/ </a>
+Facebook: https://www.facebook.com/groups/jdi.framework/
 
 You can ask your questions on StackOverflow with [![htmlelements](https://img.shields.io/badge/stackoverflow-jdiframework-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/jdiframework) tag
 
-Get Help in active users Skype chat: <a href = "https://join.skype.com/clvyVvnZvWqc" target = "a_blank"> https://join.skype.com/clvyVvnZvWqc </a>
+Get Help in active users Skype chat: https://join.skype.com/clvyVvnZvWqc
 
-## Contacts:
+## Contacts :
 
 Mail: roman.iovlev.jdi@gmail.com
 
 Skype: roman.iovlev
+
+
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light?ref=badge_large)
