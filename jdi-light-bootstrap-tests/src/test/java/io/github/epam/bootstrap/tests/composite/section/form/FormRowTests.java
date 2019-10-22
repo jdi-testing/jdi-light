@@ -27,11 +27,12 @@ public class FormRowTests extends TestsInit {
     public void checkStructureRow() {
         formRow.row.assertThat().hasClass("form-row");
         formRow.row.is().enabled().displayed();
-        formRow.row.childs().foreach(e -> {
-            e.hasClass("col");
-            e.is().displayed().enabled();
-        });
-        formRow.cols.childs().foreach(e -> e.is().tag("input"));
+        formRow.row.childs().foreach(e -> e.is()
+                .displayed()
+                .enabled());
+        formRow.cols.childs().foreach(e -> e.is()
+                .tag("input")
+        );
     }
 
     @Test

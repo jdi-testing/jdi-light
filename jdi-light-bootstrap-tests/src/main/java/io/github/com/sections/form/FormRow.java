@@ -9,7 +9,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 public class FormRow extends Section {
     @UI(".form-row")
     public UIElement row;
-    @UI(".col")
+    @UI(".form-row > .col")
     public WebList cols;
     @UI("[placeholder=\"First name\"]")
     public TextField firstName;
