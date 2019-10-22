@@ -64,6 +64,7 @@ import io.github.com.sections.form.CheckboxesDefaultInline;
 import io.github.com.sections.form.FormBrowserDefaults;
 import io.github.com.sections.form.FormCustomStyles;
 import io.github.com.sections.form.FormDisabled;
+import io.github.com.sections.form.FormGrid;
 import io.github.com.sections.form.FormHelpText;
 import io.github.com.sections.form.FormHorizontal;
 import io.github.com.sections.form.FormOverview;
@@ -630,6 +631,8 @@ public class BootstrapPage extends WebPage {
     public static NavbarForm navbarFormWithText;
     @UI("#navbar-form-3")
     public static NavbarWithInputGroupForm navbarFormWithInputGroup;
+    @UI("#form-grid-base")
+    public static FormGrid formGrid;
     //Toasts
 
     @UI("#toastRightTop")

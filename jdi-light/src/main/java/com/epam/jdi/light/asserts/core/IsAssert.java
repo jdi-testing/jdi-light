@@ -9,6 +9,7 @@ import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasItemInArray;
 import static org.hamcrest.Matchers.is;
 
 public class IsAssert extends UIAssert<IsAssert, UIElement>
@@ -30,6 +31,16 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
     }
     public IsAssert attr(String attrName, String value) {
         return attr(attrName, is(value));
+    }
+
+    /**
+     * Check that the element contains attribute
+     * @param attrName
+     */
+    @JDIAction("Assert that '{name}' has attribute {0}")
+    public IsAssert hasAttr(String attrName) {
+        jdiAssert(element.attrs().keys().toArray(), hasItemInArray(attrName));
+        return this;
     }
 
     /**
