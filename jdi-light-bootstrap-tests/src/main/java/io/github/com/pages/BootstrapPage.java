@@ -25,6 +25,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
+import io.github.com.sections.form.FormGrid;
 import io.github.com.sections.modal.ModalTooltipsAndPopovers;
 import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.ButtonAddons;
@@ -627,6 +628,8 @@ public class BootstrapPage extends WebPage {
     public static NavbarForm navbarFormWithText;
     @UI("#navbar-form-3")
     public static NavbarWithInputGroupForm navbarFormWithInputGroup;
+    @UI("#form-grid-base")
+    public static FormGrid formGrid;
     //Toasts
 
     @UI("#toastRightTop")
