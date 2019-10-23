@@ -7,9 +7,10 @@ import io.github.com.entities.FormContacts;
 import org.openqa.selenium.Keys;
 
 public class FormGrid extends Form<FormContacts> {
-
+    //FindBy(css = "#first_name")
     @UI("#first_name")
     public TextField name;
+    //FindBy(css = "#last_name")
     @UI("#last_name")
     public TextField lastName;
 
