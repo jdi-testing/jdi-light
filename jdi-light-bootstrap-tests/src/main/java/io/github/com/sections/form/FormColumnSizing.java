@@ -12,11 +12,11 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 public class FormColumnSizing extends Form {
 
     @UI("#form-column-size-city")
-    public TextField cityText;
+    public TextField cityName;
 
     @UI("#form-column-size-state")
-    public TextField stateText;
+    public TextField stateName;
 
     @UI("#form-column-size-zip")
-    public TextField zipText;
+    public TextField zipCode;
 }
