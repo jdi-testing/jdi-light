@@ -65,6 +65,9 @@ import io.github.com.sections.form.CheckboxesAndRadiosWithoutLabels;
 import io.github.com.sections.form.CheckboxesCustom;
 import io.github.com.sections.form.CheckboxesDefault;
 import io.github.com.sections.form.CheckboxesDefaultInline;
+import io.github.com.sections.form.FormAutoSizingAll;
+import io.github.com.sections.form.FormAutoSizingSizeSpecific;
+import io.github.com.sections.form.FormAutoSizingWithCustomControls;
 import io.github.com.sections.form.FormBrowserDefaults;
 import io.github.com.sections.form.FormCustomStyles;
 import io.github.com.sections.form.FormDisabled;
@@ -603,6 +606,12 @@ public class BootstrapPage extends WebPage {
     public static FormOverview formOverview;
     @UI("#form-horizontal")
     public static FormHorizontal formHorizontal;
+    @UI("#form-auto-sizing-all")
+    public static FormAutoSizingAll formAutoSizingAll;
+    @UI("#form-auto-sizing-size-specific")
+    public static FormAutoSizingSizeSpecific formAutoSizingSizeSpecific;
+    @UI("#form-auto-sizing-with-custom-controls")
+    public static FormAutoSizingWithCustomControls formAutoSizingWithCustomControls;
 
 
     @UI("//h4[.='Navbar - Text']/../..")
