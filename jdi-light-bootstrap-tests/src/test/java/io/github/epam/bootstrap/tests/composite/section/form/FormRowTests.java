@@ -12,9 +12,9 @@ import static org.hamcrest.Matchers.is;
 
 public class FormRowTests extends TestsInit {
 
-    private String text_first_name = "First name";
-    private String text_last_name = "Last name";
-    private String text_for_send_keys = "test send keys";
+    private String textFirstName = "First name";
+    private String textLastName = "Last name";
+    private String textForSendKeys = "test send keys";
 
     @BeforeMethod
     public void before() {
@@ -36,18 +36,18 @@ public class FormRowTests extends TestsInit {
 
     @Test
     public void setTextTest() {
-        formRow.firstName.setValue(text_first_name);
-        formRow.firstName.assertThat().text(is(text_first_name));
-        formRow.lastName.setValue(text_last_name);
-        formRow.lastName.assertThat().text(is(text_last_name));
+        formRow.firstName.setValue(textFirstName);
+        formRow.firstName.assertThat().text(is(textFirstName));
+        formRow.lastName.setValue(textLastName);
+        formRow.lastName.assertThat().text(is(textLastName));
     }
 
     @Test
     public void sendKeysTest() {
-        formRow.firstName.sendKeys(text_for_send_keys);
-        formRow.lastName.sendKeys(text_for_send_keys);
-        formRow.firstName.assertThat().text(is(text_for_send_keys));
-        formRow.lastName.assertThat().text(is(text_for_send_keys));
+        formRow.firstName.sendKeys(textForSendKeys);
+        formRow.lastName.sendKeys(textForSendKeys);
+        formRow.firstName.assertThat().text(is(textForSendKeys));
+        formRow.lastName.assertThat().text(is(textForSendKeys));
     }
 
     @Test
