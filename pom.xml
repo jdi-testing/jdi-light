@@ -27,6 +27,12 @@
             <artifactId>a-javabeans</artifactId>
             <version>1.0.4</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sourceforge.collections/collections-generic -->
+        <dependency>
+            <groupId>net.sourceforge.collections</groupId>
+            <artifactId>collections-generic</artifactId>
+            <version>4.01</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -60,9 +66,9 @@
         <module>jdi-light-examples</module>
         <module>jdi-light-html-tests</module>
         <module>jdi-light-html</module>
-        <module>jdi-bdd</module>
-        <module>jdi-bdd-tests</module>
-        <module>jdi-bdd-no-po-tests</module>
+        <module>jdi-light-bdd</module>
+        <module>jdi-light-bdd-tests</module>
+        <module>jdi-light-bdd-no-po-tests</module>
         <module>jdi-performance</module>
     </modules>
 </project>
