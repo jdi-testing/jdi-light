@@ -51,6 +51,16 @@ public class NavbarPlacementTests extends TestsInit {
         assertEquals(getUrl(), bootstrapNavbarPlacementPageUrl);
     }
 
+    @Test
+    public void navbarPositionTest() {
+        navbarPlacementStickyTop.show();
+        navbarPlacementStickyTop.core().
+                is().
+                css("position", "sticky").
+                css("top", "0px");
+    }
+
+
     @Test(dataProvider = "navLinkTextData")
     public void navLinkTextTest(String linkText) {
         navbarPlacementStickyTop.navbarLinks.show();
