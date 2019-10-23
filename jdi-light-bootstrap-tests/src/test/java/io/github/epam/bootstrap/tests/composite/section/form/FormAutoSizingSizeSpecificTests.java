@@ -18,6 +18,8 @@ public class FormAutoSizingSizeSpecificTests extends TestsInit {
     private String labelNameText = "Name";
     private String labelEmailText = "Username";
     private String labelCheckboxText = "Remember me";
+    private String colSpecificParameter="col-sm-3 my-1";
+    private String colAutoParameter="col-auto my-1";
 
     @DataProvider
     public Object[][] optionFormAutoSizingTest() {
@@ -67,6 +69,10 @@ public class FormAutoSizingSizeSpecificTests extends TestsInit {
                 .core()
                 .hasClass("input-group-text")
                 .text("@");
+        formAutoSizingSizeSpecific.colParameterName
+                .is()
+                .core()
+                .hasClass(colSpecificParameter);
         formAutoSizingSizeSpecific.email
                 .is()
                 .displayed()
@@ -83,6 +89,10 @@ public class FormAutoSizingSizeSpecificTests extends TestsInit {
                 .enabled()
                 .core()
                 .value(labelEmailText);
+        formAutoSizingSizeSpecific.colParameterEmail
+                .is()
+                .core()
+                .hasClass(colSpecificParameter);
         formAutoSizingSizeSpecific.rememberMeCheckbox
                 .is()
                 .displayed()
@@ -98,6 +108,14 @@ public class FormAutoSizingSizeSpecificTests extends TestsInit {
                 .enabled()
                 .core()
                 .value(labelCheckboxText);
+        formAutoSizingSizeSpecific.colParameterCheckbox
+                .is()
+                .core()
+                .hasClass(colAutoParameter);
+        formAutoSizingSizeSpecific.colParameterButton
+                .is()
+                .core()
+                .hasClass(colAutoParameter);
     }
 
     @Test(dataProvider = "optionFormAutoSizingTest")

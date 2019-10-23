@@ -13,13 +13,19 @@ public class FormAutoSizingSizeSpecific extends Section {
     public TextField name;
     @UI(".input-group-text")
     public TextField atSign;
-    @UI("//input[@id='inlineFormInput']/..")
-    public TextField colParameter;
+    @UI("//input[@id='inlineFormInputName']/..")
+    public Text colParameterName;
     @UI("#inlineFormInputGroupUsername")
     public TextField email;
+    @UI("//label[@for='inlineFormInputGroupUsername']/..")
+    public Text colParameterEmail;
     @UI("#autoSizingCheck2")
     public Checkbox rememberMeCheckbox;
+    @UI("//input[@id='autoSizingCheck2']/../..")
+    public Text colParameterCheckbox;
     @UI("button")
     public Button submit;
+    @UI("//button/..")
+    public Button colParameterButton;
 
 }

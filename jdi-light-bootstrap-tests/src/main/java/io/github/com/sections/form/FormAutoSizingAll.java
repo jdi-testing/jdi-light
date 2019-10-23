@@ -14,11 +14,17 @@ public class FormAutoSizingAll extends Section {
     @UI(".input-group-text")
     public TextField atSign;
     @UI("//input[@id='inlineFormInput']/..")
-    public Text colParameter;
+    public Text colParameterName;
     @UI("#inlineFormInputGroup")
     public TextField email;
+    @UI("//label[@for='inlineFormInputGroup']/..")
+    public Text colParameterEmail;
     @UI("#autoSizingCheck")
     public Checkbox rememberMeCheckbox;
+    @UI("//input[@id='autoSizingCheck']/../..")
+    public Text colParameterCheckbox;
     @UI("button")
     public Button submit;
+    @UI("//button/..")
+    public Button colParameterButton;
 }
