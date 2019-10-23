@@ -163,4 +163,10 @@ public class ButtonTests implements TestsInit {
             ghostButton.is().notAppear(2));
     }
 
+    @Test
+    public void isThereAnybodyOutThereTest() {
+        missingButton.isDisplayed();
+        missingButton.is().disappear();
+    }
+
 }

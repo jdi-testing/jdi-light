@@ -36,6 +36,9 @@ public class HtmlElementsPage extends WebPage {
     // @UI("#blue-button") public static Button blueButton;
     // @UI("#disabled-button") public static Button disabledButton;
 
+    @UI("#missing-button")
+    public static Button missingButton;
+
     public static Link githubLink;
     // @UI("[ui=github-link]") public static Link gitHubLink;
 
