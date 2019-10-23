@@ -19,7 +19,7 @@ public class FormAutoSizingAllTests extends TestsInit {
     private String labelNameText = "Name";
     private String labelEmailText = "Username";
     private String labelCheckboxText = "Remember me";
-    private String colAutoParameter="col-auto";
+    private String colAutoParameter = "col-auto";
 
     @DataProvider
     public Object[][] optionFormAutoSizingTest() {
