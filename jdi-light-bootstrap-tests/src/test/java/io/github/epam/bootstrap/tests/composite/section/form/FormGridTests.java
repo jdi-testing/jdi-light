@@ -51,7 +51,7 @@ public class FormGridTests extends TestsInit {
                 {"Edgar", "Poe"},
                 {"Mark", ""},
                 {"", "Twain"},
-                {"", ""},
+                {"", ""}
         };
     }
 
