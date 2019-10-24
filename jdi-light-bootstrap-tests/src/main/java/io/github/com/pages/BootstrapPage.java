@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
+import com.epam.jdi.light.ui.bootstrap.elements.common.CustomCheckbox;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
@@ -554,6 +555,8 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-example2~div")
     public static ScrollSpyNav scrollSpyInNavbar;
     @UI("body")
+    public static CheckboxesCustom checkboxesCustom;
+    @UI("body")
     public static Popover popover;
     @UI("body")
     public static CheckboxesDefaultInline checkboxesDefaultInline;
@@ -561,8 +564,8 @@ public class BootstrapPage extends WebPage {
     public static RadioButtonsDefaultInline radioButtonsDefaultInline;
     @UI("body")
     public static CheckboxesDefault checkboxesDefault;
-    @UI("body")
-    public static CheckboxesCustom checkboxesCustom;
+    @UI("#customCheck1")
+    public static CustomCheckbox customCheckbox;
     @UI(".card-deck:nth-of-type(1)")
     public static CardDeck cardDeckWithoutFooter;
     @UI(".card-deck:nth-of-type(2)")

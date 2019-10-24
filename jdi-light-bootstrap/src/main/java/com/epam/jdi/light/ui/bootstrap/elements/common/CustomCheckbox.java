@@ -3,7 +3,7 @@ package com.epam.jdi.light.ui.bootstrap.elements.common;
 import com.epam.jdi.light.common.JDIAction;
 
 public class CustomCheckbox extends Checkbox {
-
+    // region Actions
     @JDIAction("Check '{name}'")
     @Override
     public void check() {
@@ -22,8 +22,14 @@ public class CustomCheckbox extends Checkbox {
     @Override
     public void click() {
         uiElement.label().click();
+
     }
 
-    //NEED TO IMPROVE WORKING OF IsDisplayed()
+    @JDIAction("Assert that '{name}' is displayed")
+    @Override
+    public boolean isDisplayed() {
+        return uiElement.label().isDisplayed();
+    }
+    // endregion
 
 }
