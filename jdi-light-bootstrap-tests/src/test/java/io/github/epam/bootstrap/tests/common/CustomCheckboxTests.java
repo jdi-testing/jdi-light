@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.customCheckbox;
+import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -16,6 +17,11 @@ public class CustomCheckboxTests extends TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         //customCheckbox.hover();
+    }
+
+    @Test
+    public void baseValidationTest() {
+        baseValidation(customCheckbox);
     }
 
     @Test
