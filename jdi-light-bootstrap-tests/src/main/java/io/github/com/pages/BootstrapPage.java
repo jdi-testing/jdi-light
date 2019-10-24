@@ -8,15 +8,15 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
-import com.epam.jdi.light.ui.bootstrap.elements.common.CustomCheckbox;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
-import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Range;
+import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
@@ -27,9 +27,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
-import io.github.com.sections.form.FormGrid;
-import io.github.com.sections.modal.ModalTooltipsAndPopovers;
-import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonToolbar;
 import io.github.com.sections.Jumbotron;
@@ -69,6 +66,7 @@ import io.github.com.sections.form.CheckboxesDefaultInline;
 import io.github.com.sections.form.FormBrowserDefaults;
 import io.github.com.sections.form.FormCustomStyles;
 import io.github.com.sections.form.FormDisabled;
+import io.github.com.sections.form.FormGrid;
 import io.github.com.sections.form.FormHelpText;
 import io.github.com.sections.form.FormHorizontal;
 import io.github.com.sections.form.FormOverview;
@@ -106,16 +104,15 @@ import io.github.com.sections.listgroup.ListGroupLinks;
 import io.github.com.sections.listgroup.ListGroupWithBadges;
 import io.github.com.sections.modal.ModalLiveDemo;
 import io.github.com.sections.modal.ModalOptionalSizes;
+import io.github.com.sections.modal.ModalTooltipsAndPopovers;
 import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
-import io.github.com.sections.MediaObjectNesting;
-import io.github.com.sections.MediaObjectSample;
-import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarExternalContent;
 import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarSupportedContent;
 import io.github.com.sections.navbar.NavbarText;
 import io.github.com.sections.navbar.NavbarWithDropdown;
@@ -564,8 +561,8 @@ public class BootstrapPage extends WebPage {
     public static RadioButtonsDefaultInline radioButtonsDefaultInline;
     @UI("body")
     public static CheckboxesDefault checkboxesDefault;
-    @UI("#customCheck1")
-    public static CustomCheckbox customCheckbox;
+    @UI("#customCheck1-div")
+    public static Checkbox customCheckbox;
     @UI(".card-deck:nth-of-type(1)")
     public static CardDeck cardDeckWithoutFooter;
     @UI(".card-deck:nth-of-type(2)")

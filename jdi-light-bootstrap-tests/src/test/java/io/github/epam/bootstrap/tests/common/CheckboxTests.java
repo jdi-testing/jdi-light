@@ -10,13 +10,13 @@ import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 
-public class CustomCheckboxTests extends TestsInit {
+public class CheckboxTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        //customCheckbox.hover();
+       // customCheckbox.hover();
     }
 
     @Test
@@ -30,18 +30,7 @@ public class CustomCheckboxTests extends TestsInit {
                 .is()
                 .displayed()
                 .enabled()
-                .core()
-                .attr("type", "checkbox")
-                .hasClass("custom-control-input")
-                .tag(is("input"));
-        customCheckbox.label()
-                .is()
-                .displayed()
-                .enabled()
-                .core()
-                .hasClass("custom-control-label")
-                .text(is("Check this custom checkbox"))
-                .tag(is("label"));
+                .core();
     }
 
     @Test

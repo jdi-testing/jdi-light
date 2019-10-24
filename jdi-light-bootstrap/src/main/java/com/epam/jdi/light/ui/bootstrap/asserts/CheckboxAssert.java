@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.SelectedAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
+import org.openqa.selenium.By;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;
@@ -28,6 +29,6 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox>
 
     //protected
     protected String getIsSelected() {
-        return element.isSelected() ? "selected" : "not selected";
+        return element.find(By.tagName("input")).isSelected() ? "selected" : "not selected";
     }
 }

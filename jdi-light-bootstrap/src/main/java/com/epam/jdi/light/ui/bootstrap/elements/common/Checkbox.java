@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.ui.bootstrap.asserts.CheckboxAssert;
+import org.openqa.selenium.By;
 
 public class Checkbox extends UIBaseElement<CheckboxAssert>
     implements HasLabel, SetValue, HasClick, HasCheck {
@@ -22,11 +23,14 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
     }
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
-        uiElement.uncheck();
+        if(isSelected()) {
+            uiElement.click();
+        }
     }
+
     @JDIAction("Check that '{name}' is selected")
     public boolean isSelected() {
-        return uiElement.isSelected();
+      return uiElement.find(By.tagName("input")).isSelected();
     }
     // endregion
 
