@@ -2678,12 +2678,21 @@
                     </div>
                     <div class="doc-space line">
                         <div class="html-left mb-3">
-                            <div class="dropdown-menu dropdown-static" id="dropdown-content-header">
-                                <h6 class="dropdown-header">Dropdown header</h6>
-                                <a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
-                                <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/"
-                                   target="_blank">Another action</a>
+
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        style="margin-bottom: 5px;">
+                                    Menu content with header
+                                </button>
+                                <div class="dropdown-menu" id="dropdown-content-header">
+                                    <h6 class="dropdown-header">Dropdown header</h6>
+                                    <a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
+                                    <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/"
+                                       target="_blank">Another action</a>
+                                </div>
                             </div>
+
                         </div>
                         <div class="html-right">
                             <h4>Dropdown - Menu content - Headers</h4>
@@ -2696,14 +2705,21 @@
                     </div>
                     <div class="doc-space line">
                         <div class="html-left mb-3">
-                            <div class="dropdown-menu dropdown-static" id="dropdown-content-divider">
-                                <a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
-                                <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/"
-                                   target="_blank">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item"
-                                   href="https://getbootstrap.com/docs/4.3/getting-started/introduction/"
-                                   target="_blank">Separated link</a>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        style="margin-bottom: 5px;">
+                                    Menu content with divider
+                                </button>
+                                <div class="dropdown-menu" id="dropdown-content-divider">
+                                    <a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Action</a>
+                                    <a class="dropdown-item" href="https://getbootstrap.com/docs/4.0/components/dropdowns/"
+                                       target="_blank">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item"
+                                       href="https://getbootstrap.com/docs/4.3/getting-started/introduction/"
+                                       target="_blank">Separated link</a>
+                                </div>
                             </div>
                         </div>
                         <div class="html-right">
@@ -2717,13 +2733,20 @@
                     </div>
                     <div class="doc-space line">
                         <div class="html-left mb-3">
-                            <div class="dropdown-menu dropdown-static p-4 text-muted" style="max-width: 200px;" id="dropdown-content-text">
-                                <p>
-                                    Some example text that's free-flowing within the dropdown menu.
-                                </p>
-                                <p class="mb-0">
-                                    And this is more example text.
-                                </p>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        style="margin-bottom: 5px;">
+                                    Menu content with text
+                                </button>
+                                <div class="dropdown-menu p-4 text-muted" style="max-width: 200px;" id="dropdown-content-text">
+                                    <p>
+                                        Some example text that's free-flowing within the dropdown menu.
+                                    </p>
+                                    <p class="mb-0">
+                                        And this is more example text.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div class="html-right">
@@ -2737,34 +2760,41 @@
                     </div>
                     <div class="doc-space line">
                         <div class="html-left mb-3">
-                            <div class="dropdown-menu dropdown-static">
-                                <form class="px-4 py-3">
-                                    <div class="form-group">
-                                        <label for="exampleDropdownFormEmail1">Email address</label>
-                                        <input type="email" class="form-control" id="exampleDropdownFormEmail1"
-                                               placeholder="email@example.com">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleDropdownFormPassword1">Password</label>
-                                        <input type="password" class="form-control" id="exampleDropdownFormPassword1"
-                                               placeholder="Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                            <label class="form-check-label" for="dropdownCheck">
-                                                Remember me
-                                            </label>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        style="margin-bottom: 5px;">
+                                    Menu content with form
+                                </button>
+                                <div class="dropdown-menu">
+                                    <form class="px-4 py-3">
+                                        <div class="form-group">
+                                            <label for="exampleDropdownFormEmail1">Email address</label>
+                                            <input type="email" class="form-control" id="exampleDropdownFormEmail1"
+                                                   placeholder="email@example.com">
                                         </div>
-                                    </div>
-                                    <button type="button" class="btn btn-primary" onclick="alert('Sign in');">Sign in
-                                    </button>
-                                </form>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="https://jdi-testing.github.io/jdi-light/index.html"
-                                   target="_blank">New around here? Sign up</a>
-                                <a class="dropdown-item" href="https://jdi-testing.github.io/jdi-light/index.html"
-                                   target="_blank">Forgot password?</a>
+                                        <div class="form-group">
+                                            <label for="exampleDropdownFormPassword1">Password</label>
+                                            <input type="password" class="form-control" id="exampleDropdownFormPassword1"
+                                                   placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                                <label class="form-check-label" for="dropdownCheck">
+                                                    Remember me
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" onclick="alert('Sign in');">Sign in
+                                        </button>
+                                    </form>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="https://jdi-testing.github.io/jdi-light/index.html"
+                                       target="_blank">New around here? Sign up</a>
+                                    <a class="dropdown-item" href="https://jdi-testing.github.io/jdi-light/index.html"
+                                       target="_blank">Forgot password?</a>
+                                </div>
                             </div>
                         </div>
                         <div class="html-right">
