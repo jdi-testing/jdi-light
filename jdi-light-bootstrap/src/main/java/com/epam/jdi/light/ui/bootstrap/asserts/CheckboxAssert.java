@@ -26,9 +26,22 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox>
         jdiAssert(getIsSelected(), is("not selected"));
         return this;
     }
-
+    @JDIAction("Assert that '{name}' is not selected")
+    public CheckboxAssert enabled() {
+        jdiAssert(getIsEnabled(), is("enabled"));
+        return this;
+    }
+    @JDIAction("Assert that '{name}' is not selected")
+    public CheckboxAssert disabled() {
+        jdiAssert(getIsEnabled(), is("disabled"));
+        return this;
+    }
     //protected
     protected String getIsSelected() {
         return element.find(By.tagName("input")).isSelected() ? "selected" : "not selected";
+    }
+
+    protected String getIsEnabled() {
+        return element.find(By.tagName("input")).isEnabled() ? "enabled" : "disabled";
     }
 }

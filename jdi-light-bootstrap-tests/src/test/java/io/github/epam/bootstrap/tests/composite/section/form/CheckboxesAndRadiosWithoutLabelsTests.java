@@ -29,10 +29,7 @@ public class CheckboxesAndRadiosWithoutLabelsTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .attr("type", "checkbox")
-                .attr("aria-label", "...")
-                .hasClass("form-check-input position-static")
-                .tag(is("input"));
+                .hasClass("form-check");
         checkboxesAndRadiosWithoutLabels.radioButton
                 .is()
                 .displayed()
