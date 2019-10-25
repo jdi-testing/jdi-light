@@ -29,51 +29,42 @@ public class CheckboxesDefaultInlineTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .attr("type", "checkbox")
-                .attr("value", "option1")
-                .hasClass("form-check-input")
-                .tag(is("input"));
-        checkboxesDefaultInline.checkboxOne.label()
+                .hasClass("form-check form-check-inline");
+        /*checkboxesDefaultInline.checkboxOne.label()
                 .is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("form-check-label")
                 .text(is("1"))
-                .tag(is("label"));
+                .tag(is("label"));*/
         checkboxesDefaultInline.checkboxTwo
                 .is()
                 .displayed()
                 .enabled()
                 .core()
-                .attr("type", "checkbox")
-                .attr("value", "option2")
-                .hasClass("form-check-input")
-                .tag(is("input"));
-        checkboxesDefaultInline.checkboxTwo.label()
+                .hasClass("form-check form-check-inline");
+        /*checkboxesDefaultInline.checkboxTwo.label()
                 .is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("form-check-label")
                 .text(is("2"))
-                .tag(is("label"));
+                .tag(is("label"));*/
         checkboxesDefaultInline.checkboxThree
                 .is()
                 .displayed()
                 .disabled()
                 .core()
-                .attr("type", "checkbox")
-                .attr("value", "option3")
-                .hasClass("form-check-input")
-                .tag(is("input"));
-        checkboxesDefaultInline.checkboxThree.label()
+                .hasClass("form-check form-check-inline");
+        /*checkboxesDefaultInline.checkboxThree.label()
                 .is()
                 .displayed()
                 .core()
                 .hasClass("form-check-label")
                 .text(is("3 (disabled)"))
-                .tag(is("label"));
+                .tag(is("label"));*/
     }
 
     @Test
@@ -94,7 +85,7 @@ public class CheckboxesDefaultInlineTests extends TestsInit {
         checkboxesDefaultInline.checkboxTwo
                 .is()
                 .deselected();
-        checkboxesDefaultInline.checkboxOne.label().click();
+        /*checkboxesDefaultInline.checkboxOne.label().click();
         checkboxesDefaultInline.checkboxOne
                 .is()
                 .selected();
@@ -109,6 +100,6 @@ public class CheckboxesDefaultInlineTests extends TestsInit {
         checkboxesDefaultInline.checkboxTwo.label().click();
         checkboxesDefaultInline.checkboxTwo
                 .is()
-                .deselected();
+                .deselected();*/
     }
 }
