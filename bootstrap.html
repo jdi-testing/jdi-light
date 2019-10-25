@@ -29,7 +29,8 @@
            bsCustomFileInput.init()
         })
         $('#customFile').change(function() {
-           alert('Selected file: ' + this.value.replace(/.*[\/\\]/, ''));
+           var fileInput = document.getElementById('customFile');
+           alert('Selected file: ' + fileInput.value.replace(/.*[\/\\]/, ''));
         })
     </script>
 
@@ -3942,7 +3943,7 @@
                     <div class="doc-space line">
                         <div class="html-left">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" onchange="return browseFile();">
+                                <input type="file" class="custom-file-input" id="customFile">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                             </div>
                         </div>
