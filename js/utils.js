@@ -784,3 +784,7 @@ function getTimeString() {
     return ((hrs > 9) ? hrs : '0' + hrs) + ':' + ((min > 9) ? min : '0' + min) + ':' + ((sec > 9) ? sec : '0' + sec);
 }
 
+
+document.getElementById('customFile').onchange = function () {
+  alert('Selected file: ' + this.value.replace(/.*[\/\\]/, ''));
+};
