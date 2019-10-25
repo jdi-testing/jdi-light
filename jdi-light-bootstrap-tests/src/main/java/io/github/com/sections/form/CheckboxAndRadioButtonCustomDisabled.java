@@ -9,8 +9,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.RadioButton;
 public class CheckboxAndRadioButtonCustomDisabled extends Section {
 
     @UI("#customCheckDisabled1-div")
-    public Checkbox checkboxContainer;
-    @UI("#customCheckDisabled1")
     public Checkbox checkbox;
     @UI("#customRadioDisabled2-div")
     public RadioButton radioButtonContainer;

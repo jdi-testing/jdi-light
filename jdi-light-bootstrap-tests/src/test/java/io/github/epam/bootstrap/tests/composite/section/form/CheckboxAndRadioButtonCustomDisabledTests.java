@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.checkboxAndRadioButtonCustomDisabled;
-import static io.github.com.pages.BootstrapPage.checkboxesCustom;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -24,28 +23,12 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        checkboxesCustom.hover();
+        checkboxAndRadioButtonCustomDisabled.checkbox.hover();
     }
 
     @Test
     public void checkboxIsValidationTests() {
         checkboxAndRadioButtonCustomDisabled.checkbox
-                .is()
-                .disappear()
-                .disabled()
-                .core()
-                .attr("type", "checkbox")
-                .hasClass("custom-control-input")
-                .tag(is("input"));
-        checkboxAndRadioButtonCustomDisabled.checkbox.label()
-                .is()
-                .displayed()
-                .enabled()
-                .core()
-                .hasClass("custom-control-label")
-                .text(is("Check this custom checkbox"))
-                .tag(is("label"));
-        checkboxAndRadioButtonCustomDisabled.checkboxContainer
                 .is()
                 .displayed()
                 .enabled()
@@ -89,9 +72,9 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
 
     @Test
     public void checkboxTests() {
-        checkboxAndRadioButtonCustomDisabled.checkboxContainer.check();
+        checkboxAndRadioButtonCustomDisabled.checkbox.check();
         checkboxAndRadioButtonCustomDisabled.checkbox.is().deselected();
-        checkboxAndRadioButtonCustomDisabled.checkbox.label().click();
+        checkboxAndRadioButtonCustomDisabled.checkbox.click();
         checkboxAndRadioButtonCustomDisabled.checkbox.is().deselected();
     }
 }
