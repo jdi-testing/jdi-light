@@ -60,7 +60,6 @@ import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.card.CardWithSubtitlesAndLinks;
 import io.github.com.sections.form.CheckboxAndRadioButtonCustomDisabled;
 import io.github.com.sections.form.CheckboxesAndRadiosWithoutLabels;
-import io.github.com.sections.form.CheckboxesCustom;
 import io.github.com.sections.form.CheckboxesDefault;
 import io.github.com.sections.form.CheckboxesDefaultInline;
 import io.github.com.sections.form.FormBrowserDefaults;
@@ -553,8 +552,6 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-example2~div")
     public static ScrollSpyNav scrollSpyInNavbar;
     @UI("body")
-    public static CheckboxesCustom checkboxesCustom;
-    @UI("body")
     public static Popover popover;
     @UI("body")
     public static CheckboxesDefaultInline checkboxesDefaultInline;
@@ -562,7 +559,7 @@ public class BootstrapPage extends WebPage {
     public static RadioButtonsDefaultInline radioButtonsDefaultInline;
     @UI("body")
     public static CheckboxesDefault checkboxesDefault;
-    @UI("#customCheck1-div")
+    @UI("#check1")
     public static Checkbox checkbox;
     @UI(".card-deck:nth-of-type(1)")
     public static CardDeck cardDeckWithoutFooter;
