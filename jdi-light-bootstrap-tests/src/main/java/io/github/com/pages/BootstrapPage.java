@@ -102,6 +102,7 @@ import io.github.com.sections.listgroup.ListGroupFlush;
 import io.github.com.sections.listgroup.ListGroupHorizontal;
 import io.github.com.sections.listgroup.ListGroupLinks;
 import io.github.com.sections.listgroup.ListGroupWithBadges;
+import io.github.com.sections.modal.EmbeddedVideoModal;
 import io.github.com.sections.modal.ModalLiveDemo;
 import io.github.com.sections.modal.ModalOptionalSizes;
 import io.github.com.sections.modal.ModalTooltipsAndPopovers;
@@ -591,6 +592,10 @@ public class BootstrapPage extends WebPage {
     public static Button modalGetbootstrapButton;
     @UI("#modalVaryingContentWindow")
     public static ModalVaryingContent modalVaryingContentWindow;
+    @UI("#modal-youtube button.btn-primary")
+    public static Button modalEmbeddedVideoButton;
+    @UI("#youTubeModalLabel")
+    public static EmbeddedVideoModal embeddedVideoModal;
     @UI("#card-kitchen-sink")
     public static CardKitchenSink cardKitchenSink;
     @UI("#card-navigation")

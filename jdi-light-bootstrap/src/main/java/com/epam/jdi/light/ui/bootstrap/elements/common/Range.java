@@ -15,7 +15,7 @@ public class Range extends UIBaseElement<UIAssert> implements HasLabel, SetValue
 
     @JDIAction(value = "Get '{name}' thumbValue", level = DEBUG)
     public double thumbValue() {
-        return Double.parseDouble(uiElement.getAttribute("value"));
+        return Double.parseDouble(uiElement.core().jsExecute("value"));
     }
 
     @JDIAction(value = "Get '{name}' min limit", level = DEBUG)
@@ -35,7 +35,7 @@ public class Range extends UIBaseElement<UIAssert> implements HasLabel, SetValue
 
     @JDIAction(value = "Set thumbValue '{0}' for '{name}'", level = DEBUG)
     public void setThumbValue(double thumbValue) {
-        uiElement.setAttribute("value", String.valueOf(thumbValue));
+        uiElement.core().jsExecute("value=" + thumbValue);
     }
     // endregion
 
