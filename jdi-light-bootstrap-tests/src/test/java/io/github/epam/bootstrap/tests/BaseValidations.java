@@ -28,7 +28,7 @@ public class BaseValidations {
         assertFalse(el.isHidden());
         logger.info("Check getLocation");
         Point location = el.core().getLocation();
-        assertTrue(location.x > 0 && location.y > 0, "Location: " + location);
+        assertTrue(location.x >= 0 && location.y >= 0, "Location: " + location);
         logger.info("Check getSize");
         Dimension size = el.core().getSize();
         assertTrue(size.height > 0 && size.width > 0, "Size: " + location);
