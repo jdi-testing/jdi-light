@@ -10,9 +10,12 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Range;
+import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
@@ -24,11 +27,15 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.ButtonAddons;
+import io.github.com.sections.ButtonToolbar;
+import io.github.com.sections.Jumbotron;
+import io.github.com.sections.MediaObjectNesting;
+import io.github.com.sections.MediaObjectSample;
+import io.github.com.sections.Toast;
 import io.github.com.sections.buttongroup.ButtonGroupBasicExample;
 import io.github.com.sections.buttongroup.ButtonGroupNesting;
 import io.github.com.sections.buttongroup.ButtonGroupSizing;
 import io.github.com.sections.buttongroup.ButtonGroupVerticalVariation;
-import io.github.com.sections.ButtonToolbar;
 import io.github.com.sections.buttongroup.ButtonWithDropdown;
 import io.github.com.sections.card.CardBody;
 import io.github.com.sections.card.CardBorder;
@@ -38,13 +45,17 @@ import io.github.com.sections.card.CardExample;
 import io.github.com.sections.card.CardGroup;
 import io.github.com.sections.card.CardHorizontal;
 import io.github.com.sections.card.CardImage;
+import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardKitchenSink;
 import io.github.com.sections.card.CardListGroups;
 import io.github.com.sections.card.CardMixinsUtilities;
 import io.github.com.sections.card.CardNavigation;
 import io.github.com.sections.card.CardTextAlignment;
+import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithCustomCss13Rem;
 import io.github.com.sections.card.CardWithCustomCss9Rem;
+import io.github.com.sections.card.CardWithGridMarkup;
+import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.card.CardWithSubtitlesAndLinks;
 import io.github.com.sections.form.CheckboxAndRadioButtonCustomDisabled;
 import io.github.com.sections.form.CheckboxesAndRadiosWithoutLabels;
@@ -52,17 +63,26 @@ import io.github.com.sections.form.CheckboxesCustom;
 import io.github.com.sections.form.CheckboxesDefault;
 import io.github.com.sections.form.CheckboxesDefaultInline;
 import io.github.com.sections.form.FormHorizontalLabelSizing;
-import io.github.com.sections.inputgroup.CustomSelect;
-import io.github.com.sections.inputgroup.CustomSelectWithButton;
 import io.github.com.sections.form.FormBrowserDefaults;
 import io.github.com.sections.form.FormCustomStyles;
 import io.github.com.sections.form.FormDisabled;
+import io.github.com.sections.form.FormGrid;
 import io.github.com.sections.form.FormHelpText;
 import io.github.com.sections.form.FormHorizontal;
 import io.github.com.sections.form.FormOverview;
+import io.github.com.sections.form.FormRow;
 import io.github.com.sections.form.FormServerSide;
 import io.github.com.sections.form.FormTooltip;
 import io.github.com.sections.form.FormsSizing;
+import io.github.com.sections.form.RadioButtonGroup;
+import io.github.com.sections.form.RadioButtonsCustom;
+import io.github.com.sections.form.RadioButtonsCustomInline;
+import io.github.com.sections.form.RadioButtonsDefaultInline;
+import io.github.com.sections.form.RangeInput;
+import io.github.com.sections.form.ReadonlyPlainText;
+import io.github.com.sections.form.Switches;
+import io.github.com.sections.inputgroup.CustomSelect;
+import io.github.com.sections.inputgroup.CustomSelectWithButton;
 import io.github.com.sections.inputgroup.InputGroupInputWithCheckBox;
 import io.github.com.sections.inputgroup.InputGroupInputWithLabelAndText;
 import io.github.com.sections.inputgroup.InputGroupInputWithRadio;
@@ -72,7 +92,7 @@ import io.github.com.sections.inputgroup.InputGroupMultipleAddonsLower;
 import io.github.com.sections.inputgroup.InputGroupMultipleAddonsUpper;
 import io.github.com.sections.inputgroup.InputGroupSizing;
 import io.github.com.sections.inputgroup.InputGroupTextareaWithText;
-import io.github.com.sections.Jumbotron;
+import io.github.com.sections.inputgroup.SegmentedButton;
 import io.github.com.sections.listgroup.ListGroupActiveItems;
 import io.github.com.sections.listgroup.ListGroupBasicExample;
 import io.github.com.sections.listgroup.ListGroupButtons;
@@ -82,12 +102,23 @@ import io.github.com.sections.listgroup.ListGroupFlush;
 import io.github.com.sections.listgroup.ListGroupHorizontal;
 import io.github.com.sections.listgroup.ListGroupLinks;
 import io.github.com.sections.listgroup.ListGroupWithBadges;
-import io.github.com.sections.MediaObjectNesting;
-import io.github.com.sections.MediaObjectSample;
-
-import io.github.com.sections.navbar.NavbarSection;
+import io.github.com.sections.modal.EmbeddedVideoModal;
+import io.github.com.sections.modal.ModalLiveDemo;
+import io.github.com.sections.modal.ModalOptionalSizes;
+import io.github.com.sections.modal.ModalTooltipsAndPopovers;
+import io.github.com.sections.modal.ModalVaryingContent;
+import io.github.com.sections.modal.ModalVerticallyCentered;
+import io.github.com.sections.modal.SectionModalLongScrolling;
+import io.github.com.sections.modal.gridmodal.GridModalSection;
+import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarExternalContent;
+import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarSection;
+import io.github.com.sections.navbar.NavbarSupportedContent;
+import io.github.com.sections.navbar.NavbarText;
 import io.github.com.sections.navbar.NavbarWithDropdown;
+import io.github.com.sections.navbar.NavbarWithInputGroupForm;
+import io.github.com.sections.navbar.ScrollSpyNav;
 import io.github.com.sections.navs.NavsAlignmentCenter;
 import io.github.com.sections.navs.NavsAlignmentEnd;
 import io.github.com.sections.navs.NavsBaseA;
@@ -109,31 +140,6 @@ import io.github.com.sections.pagination.PaginationSizeSmall;
 import io.github.com.sections.pagination.PaginationStates;
 import io.github.com.sections.progress.ProgressMultipleBars;
 import io.github.com.sections.progress.ProgressSection;
-import io.github.com.sections.form.RadioButtonGroup;
-import io.github.com.sections.form.RadioButtonsCustom;
-import io.github.com.sections.form.RadioButtonsCustomInline;
-import io.github.com.sections.form.RadioButtonsDefaultInline;
-import io.github.com.sections.navbar.ScrollSpyNav;
-import io.github.com.sections.inputgroup.SegmentedButton;
-import io.github.com.sections.form.Switches;
-import io.github.com.sections.Toast;
-import io.github.com.sections.card.CardImageOverlays;
-import io.github.com.sections.card.CardUtilities;
-import io.github.com.sections.card.CardWithGridMarkup;
-import io.github.com.sections.card.CardWithHeaderAndFooter;
-import io.github.com.sections.form.RangeInput;
-import io.github.com.sections.form.ReadonlyPlainText;
-import io.github.com.sections.modal.ModalLiveDemo;
-import io.github.com.sections.modal.ModalOptionalSizes;
-import io.github.com.sections.modal.ModalVaryingContent;
-import io.github.com.sections.modal.ModalVerticallyCentered;
-import io.github.com.sections.modal.SectionModalLongScrolling;
-import io.github.com.sections.modal.gridmodal.GridModalSection;
-import io.github.com.sections.navbar.NavbarColorScheme;
-import io.github.com.sections.navbar.NavbarForm;
-import io.github.com.sections.navbar.NavbarSupportedContent;
-import io.github.com.sections.navbar.NavbarText;
-import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
@@ -156,6 +162,42 @@ public class BootstrapPage extends WebPage {
     public static Jumbotron jumbotron;
     @UI("#breadcrumb")
     public static Breadcrumb breadcrumb;
+    @UI("#simpleDropdown")
+    public static Dropdown simpleDropdown;
+    @UI("#linkDropdown")
+    public static Dropdown linkDropdown;
+    @UI("#primaryDropdown")
+    public static Dropdown primaryDropdown;
+    @UI("#successDropdown")
+    public static Dropdown successDropdown;
+    @UI("#infoDropdown")
+    public static Dropdown infoDropdown;
+    @UI("#splitDropdown")
+    public static Dropdown splitDropdown;
+    @UI("#largeDropdown")
+    public static Dropdown largeDropdown;
+    @UI("#largeSplitDropdown")
+    public static Dropdown largeSplitDropdown;
+    @UI("#smallDropdown")
+    public static Dropdown smallDropdown;
+    @UI("#smallSplitDropdown")
+    public static Dropdown smallSplitDropdown;
+    @UI("#dropUpDropdown")
+    public static Dropdown dropUpDropdown;
+    @UI("#dropUpSplitDropdown")
+    public static Dropdown dropUpSplitDropdown;
+    @UI("#dropRightDropdown")
+    public static Dropdown dropRightDropdown;
+    @UI("#dropRightSplitDropdown")
+    public static Dropdown dropRightSplitDropdown;
+    @UI("#dropLeftDropdown")
+    public static Dropdown dropLeftDropdown;
+    @UI("#dropLeftSplitDropdown")
+    public static Dropdown dropLeftSplitDropdown;
+    @UI("#rightAllignedDropdown")
+    public static Dropdown rightAllignedDropdown;
+    @UI("#leftAllignedDropdown")
+    public static Dropdown leftAllignedDropdown;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")
@@ -234,8 +276,16 @@ public class BootstrapPage extends WebPage {
     public static ReadonlyPlainText readonlyPlainText1;
     @UI("#readonlyPlainText2")
     public static ReadonlyPlainText readonlyPlainText2;
-    @UI("#formControlRange")
-    public static RangeInput rangeInput;
+    @UI("#forms-select-menu-large")
+    public static SelectMenu formsSelectMenuLarge;
+    @UI("#forms-select-menu")
+    public static SelectMenu formsSelectMenu;
+    @UI("#forms-select-menu-small")
+    public static SelectMenu formsSelectMenuSmall;
+    @UI("#forms-select-menu-multiple")
+    public static SelectMenu formsSelectMenuMultiple;
+    @UI("#forms-select-menu-size")
+    public static SelectMenu formsSelectMenuSize;
     //endregion
 
     //region Complex Elements
@@ -540,6 +590,10 @@ public class BootstrapPage extends WebPage {
     public static Button modalGetbootstrapButton;
     @UI("#modalVaryingContentWindow")
     public static ModalVaryingContent modalVaryingContentWindow;
+    @UI("#modal-youtube button.btn-primary")
+    public static Button modalEmbeddedVideoButton;
+    @UI("#youTubeModalLabel")
+    public static EmbeddedVideoModal embeddedVideoModal;
     @UI("#card-kitchen-sink")
     public static CardKitchenSink cardKitchenSink;
     @UI("#card-navigation")
@@ -556,6 +610,8 @@ public class BootstrapPage extends WebPage {
 
     @UI("//h4[.='Navbar - Text']/../..")
     public static NavbarText navbarText;
+    @UI("//h4[.='Modal - Tooltips and popovers']/../..")
+    public static ModalTooltipsAndPopovers modalTooltipsAndPopovers;
 
     @UI("#striped-base .progress")
     public static JList<ProgressSection> progressSections;
@@ -576,6 +632,8 @@ public class BootstrapPage extends WebPage {
     public static NavbarForm navbarFormWithText;
     @UI("#navbar-form-3")
     public static NavbarWithInputGroupForm navbarFormWithInputGroup;
+    @UI("#form-grid-base")
+    public static FormGrid formGrid;
     //Toasts
 
     @UI("#toastRightTop")
@@ -622,6 +680,8 @@ public class BootstrapPage extends WebPage {
     public static FormHelpText formHelpText;
     @UI("#form-disabled")
     public static FormDisabled formDisabled;
+    @UI("#form-row")
+    public static FormRow formRow;
 
     //region Navbars
     @UI("#navbar-nav-with-disabled")
@@ -634,6 +694,17 @@ public class BootstrapPage extends WebPage {
     public static NavbarSupportedContent navbarSupportedContent;
     @UI("#navbar-base-for-brand")
     public static NavbarSection navbarSection;
+    //endregion
+
+    //region Ranges
+    @UI("#formControlRange")
+    public static RangeInput rangeInput;
+    @UI("#customRange1")
+    public static Range range1;
+    @UI("#customRange2")
+    public static Range range2;
+    @UI("#customRange3")
+    public static Range range3;
     //endregion
 
     //region Modals
