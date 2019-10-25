@@ -563,7 +563,7 @@ public class BootstrapPage extends WebPage {
     @UI("body")
     public static CheckboxesDefault checkboxesDefault;
     @UI("#customCheck1-div")
-    public static Checkbox customCheckbox;
+    public static Checkbox checkbox;
     @UI(".card-deck:nth-of-type(1)")
     public static CardDeck cardDeckWithoutFooter;
     @UI(".card-deck:nth-of-type(2)")
