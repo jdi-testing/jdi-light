@@ -783,3 +783,5 @@ function getTimeString() {
     var sec = time.getSeconds();
     return ((hrs > 9) ? hrs : '0' + hrs) + ':' + ((min > 9) ? min : '0' + min) + ':' + ((sec > 9) ? sec : '0' + sec);
 }
+
+alert("HEY!")
