@@ -63,6 +63,7 @@ import io.github.com.sections.form.CheckboxesCustom;
 import io.github.com.sections.form.CheckboxesDefault;
 import io.github.com.sections.form.CheckboxesDefaultInline;
 import io.github.com.sections.form.FormColumnSizing;
+import io.github.com.sections.form.FormHorizontalLabelSizing;
 import io.github.com.sections.form.FormBrowserDefaults;
 import io.github.com.sections.form.FormCustomStyles;
 import io.github.com.sections.form.FormDisabled;
@@ -683,7 +684,7 @@ public class BootstrapPage extends WebPage {
     @UI("#form-row")
     public static FormRow formRow;
 
-    //Navbars
+    //region Navbars
     @UI("#navbar-nav-with-disabled")
     public static Navbar navbarNavWithDisabled;
     @UI("#navbar-nav-with-dropdown")
@@ -723,6 +724,8 @@ public class BootstrapPage extends WebPage {
     //endregion
 
     //region Forms
+    @UI("#form-horizontal-label-size")
+    public static FormHorizontalLabelSizing formHorizontalLabelSizing;
     @UI("#form-column-size")
     public static FormColumnSizing formColumnSizing;
     //endregion
