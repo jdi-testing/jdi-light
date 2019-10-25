@@ -62,6 +62,7 @@ import io.github.com.sections.form.CheckboxesAndRadiosWithoutLabels;
 import io.github.com.sections.form.CheckboxesCustom;
 import io.github.com.sections.form.CheckboxesDefault;
 import io.github.com.sections.form.CheckboxesDefaultInline;
+import io.github.com.sections.form.FormColumnSizing;
 import io.github.com.sections.form.FormHorizontalLabelSizing;
 import io.github.com.sections.form.FormBrowserDefaults;
 import io.github.com.sections.form.FormCustomStyles;
@@ -725,6 +726,7 @@ public class BootstrapPage extends WebPage {
     //region Forms
     @UI("#form-horizontal-label-size")
     public static FormHorizontalLabelSizing formHorizontalLabelSizing;
+    @UI("#form-column-size")
+    public static FormColumnSizing formColumnSizing;
     //endregion
-
 }
