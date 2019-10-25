@@ -3,6 +3,7 @@ package io.github.epam.bootstrap.tests.composite.section.form;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
@@ -24,6 +25,24 @@ public class FormColumnSizingTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
+    @DataProvider
+    public Object[][] listData() {
+        return new Object[][]{
+                {formColumnSizing.cityName, "City"},
+                {formColumnSizing.stateName, "State"},
+                {formColumnSizing.zipCode, "Zip"}
+        };
+    }
+
+    @DataProvider
+    public Object[][] fieldsData() {
+        return new Object[][]{
+                {"Saint Petersburg", "Leningrad", "190500"},
+                {"City", "State", "Zip"},
+                {"VLG", "Stateless", "zip1220"}
+        };
+    }
+
     @Test(dataProvider = "listData")
     public void isValidationTests(TextField textField, String placeholder) {
         textField.is()
@@ -36,20 +55,20 @@ public class FormColumnSizingTests extends TestsInit {
                 .tag(is("input"));
     }
 
-    @Test(dataProvider = "list")
-    public void textFieldsTest(String txt) {
-        /*formColumnSizing.cityName.sendKeys();
-        formColumnSizing.cityName.is().value();
+    @Test(dataProvider = "fieldsData")
+    public void textFieldsTest(String city, String state, String zip) {
+        formColumnSizing.cityName.sendKeys(city);
+        formColumnSizing.cityName.is().value(city);
 
-        formColumnSizing.stateName.sendKeys();
-        formColumnSizing.stateName.is().value();
+        formColumnSizing.stateName.sendKeys(state);
+        formColumnSizing.stateName.is().value(state);
 
-        formColumnSizing.zipCode.sendKeys();
-        formColumnSizing.zipCode.is().value();
+        formColumnSizing.zipCode.sendKeys(zip);
+        formColumnSizing.zipCode.is().value(zip);
 
         formColumnSizing.cityName.clear();
         formColumnSizing.stateName.clear();
-        formColumnSizing.zipCode.clear();*/
+        formColumnSizing.zipCode.clear();
     }
 
     @Test
