@@ -28,6 +28,9 @@
         $(document).ready(function () {
            bsCustomFileInput.init()
         })
+        document.getElementById('customFile').onchange = function () {
+          alert('Selected file: ' + this.value.replace(/.*[\/\\]/, ''));
+        };
     </script>
 
 </head>
