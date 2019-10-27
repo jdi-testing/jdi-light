@@ -15,7 +15,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
-public class EpamGithubSite {
+public class EpamGithubStaticSite {
 	@Url("/index.html") public static HomePage homePage;
 	@Url("/metals-colors.html") @Title("Metal and Colors")
 	public static MetalAndColorsPage metalAndColorsPage;

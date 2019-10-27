@@ -12,20 +12,26 @@ import selenium.site.pages.JDIPerformancePage;
 import selenium.site.sections.LoginForm;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
-public class SiteJdi {
-    public static HomePage homePage;
-    public static ContactPage contactPage;
-    public static JDIPerformancePage performancePage;
-    @FindBy(css = "form") public static LoginForm loginForm;
+public class NonStaticSiteJdi {
 
-    @FindBy(css = ".profile-photo") public static WebElement profilePhoto;
-    @FindBy(css = ".profile-photo [ui=label]") public static WebElement userName;
+    public HomePage homePage;
+    public ContactPage contactPage;
+    public JDIPerformancePage performancePage;
+
+    @FindBy(css = "form")
+    public LoginForm loginForm;
+
+    @FindBy(css = ".profile-photo")
+    public WebElement profilePhoto;
+
+    @FindBy(css = ".profile-photo [ui=label]")
+    public WebElement userName;
 
     @FindBy(css = ".sidebar-menu [ui=label]")
-    public static WebList navigation;
+    public WebList navigation;
 
     @Step("Login")
-    public static void login(User user) {
+    public void login(User user) {
         if (!userName.isDisplayed()) {
             profilePhoto.click();
             loginForm.submit(user, "enter");

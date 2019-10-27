@@ -2,7 +2,7 @@ package io.github.epam.tests.selenium;
 
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import selenium.site.SiteJdi;
+import selenium.site.StaticSiteJdi;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
@@ -12,7 +12,7 @@ public interface SimpleTestsInit {
 
     @BeforeSuite(alwaysRun = true)
     static void setUp() {
-        initElements(SiteJdi.class);
+        initElements(StaticSiteJdi.class);
         logger.info("Run Tests");
     }
 
