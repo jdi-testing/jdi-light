@@ -21,7 +21,7 @@ public class Dropdown extends UIBaseElement<DropdownAssert> {
 
     @JDIAction("Expand dropdown '{name}' ")
     public void expand() {
-        if (isExpanded() == false) {
+        if (!isExpanded()) {
             dropdownToggle.click();
         }
         waitFor().expanded();
@@ -29,7 +29,7 @@ public class Dropdown extends UIBaseElement<DropdownAssert> {
 
     @JDIAction("Collapse dropdown '{name}' ")
     public void collapse() {
-        if (isExpanded() == true) {
+        if (isExpanded()) {
             dropdownToggle.click();
         }
         waitFor().collapsed();

@@ -41,7 +41,6 @@ public class DropdownTests extends TestsInit {
     private static final String FIRSTITEM = "Action";
     private static final String SECONDITEM = "Another action";
     private static final String LASTITEM = "Separated link";
-    private static final String ITEMS_VALUES = String.format("%s,%s,%s", FIRSTITEM, SECONDITEM, LASTITEM);
     private static final String[] ITEMS_ARR = new String[] {FIRSTITEM, SECONDITEM, LASTITEM};
 
     private static final String COLOR = "color";
