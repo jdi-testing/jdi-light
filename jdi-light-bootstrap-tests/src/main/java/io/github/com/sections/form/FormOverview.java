@@ -23,7 +23,7 @@ public class FormOverview extends Form<FormSignUp> {
 
     @UI(".//*[@for='exampleCheck1']")
     public Label acceptLabel;
-    @UI("#exampleCheck1")
+    @UI("//input[@id='exampleCheck1']/..")
     public Checkbox accept;
 
     @UI("button")

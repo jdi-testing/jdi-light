@@ -28,8 +28,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
 
     @JDIAction("Check '{name}'")
     public void check() {
-        uiElement.check(); //only break when div is too long
-        //uiElement.find(By.tagName("input")).check(); break for custom cannot access input field
+        uiElement.check();
         if (!isSelected()) {
             click();
         }
@@ -49,8 +48,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
             input.click();
         } else {
             label().click();
-            uiElement.click();//only break when div is too long
-            //uiElement.find(By.tagName("input")).click(); //break for custom cannot access input field
+            uiElement.click();
         }
     }
 

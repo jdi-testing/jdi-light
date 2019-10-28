@@ -16,7 +16,7 @@ public class FormHorizontal extends Form<FormContacts> {
     public TextField password;
     @UI("input[name='gridRadios']")
     public RadioButton radio;
-    @UI("#gridCheck1")
+    @UI("//input[@id='gridCheck1']/..")
     public Checkbox accept;
     @UI("button")
     public Button submit;

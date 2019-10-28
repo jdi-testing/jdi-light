@@ -22,7 +22,7 @@ public class FormCustomStyles extends Form<FormContacts> {
     @UI("#validationCustom05")
     public TextField zip;
 
-    @UI("#invalidCheck")
+    @UI("#invalidCheck-div")
     public Checkbox accept;
 
     @UI("button")

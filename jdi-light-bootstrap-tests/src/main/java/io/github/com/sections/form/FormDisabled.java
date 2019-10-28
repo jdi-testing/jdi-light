@@ -16,7 +16,7 @@ public class FormDisabled extends Section {
     public TextField textField;
     @UI("#disabledSelect")
     public Selector selector;
-    @UI("#disabledFieldsetCheck")
+    @UI("//input[@id='disabledFieldsetCheck']/..")
     public Checkbox checkbox;
     @UI("button")
     public Button submit;

@@ -38,7 +38,7 @@ public class FormServerSide extends Form<FormContacts> {
     @UI("//input[@id='invalidCheck3']/../div")
     public Text feedbackAccept;
 
-    @UI("#invalidCheck3")
+    @UI("//input[@id='invalidCheck3']/..")
     public Checkbox accept;
 
     @UI("button")
