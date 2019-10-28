@@ -7,7 +7,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.RadioButton;
 
 public class CheckboxesAndRadiosWithoutLabels extends Section {
     @UI("//input[@id='blankCheckbox']/..")
-    //@UI("#blankCheckbox")
     public Checkbox checkbox;
     @UI("#blankRadio1")
     public RadioButton radioButton;

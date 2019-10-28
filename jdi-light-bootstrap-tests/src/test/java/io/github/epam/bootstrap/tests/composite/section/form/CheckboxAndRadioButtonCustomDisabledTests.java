@@ -31,11 +31,19 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
         checkboxAndRadioButtonCustomDisabled.checkbox
                 .is()
                 .displayed()
-                .enabled()
+                .disabled()
                 .core()
                 .hasClass("custom-control")
                 .hasClass("custom-checkbox")
                 .tag(is("div"));
+        checkboxAndRadioButtonCustomDisabled.checkbox.label()
+                .is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("custom-control-label")
+                .text(is("Check this custom checkbox"))
+                .tag(is("label"));
     }
 
     @Test

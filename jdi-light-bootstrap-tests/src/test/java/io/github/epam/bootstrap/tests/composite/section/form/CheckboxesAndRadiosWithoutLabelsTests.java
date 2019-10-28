@@ -29,7 +29,8 @@ public class CheckboxesAndRadiosWithoutLabelsTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .hasClass("form-check");
+                .hasClass("form-check")
+                .tag(is("div"));
         checkboxesAndRadiosWithoutLabels.radioButton
                 .is()
                 .displayed()
