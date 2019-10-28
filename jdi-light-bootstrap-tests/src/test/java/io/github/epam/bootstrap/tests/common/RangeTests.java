@@ -64,11 +64,15 @@ public class RangeTests extends TestsInit {
 
     @Test
     public void setThumbValueTest() {
-        range1.setThumbValue(10);
+        range3.hover();
+        range1.setValue(10);
         range1.is().thumbValue(10);
-        range2.setThumbValue(2);
+        range1.setValue(50);
+        range2.setValue(2);
         range2.is().thumbValue(2);
-        range3.setThumbValue(5);
+        range2.setValue(3);
+        range3.setValue(5);
         range3.is().thumbValue(5);
+        range3.setValue(2.5);
     }
 }
