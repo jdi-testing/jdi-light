@@ -199,6 +199,10 @@ public class BootstrapPage extends WebPage {
     public static Dropdown rightAllignedDropdown;
     @UI("#leftAllignedDropdown")
     public static Dropdown leftAllignedDropdown;
+    @UI("#offsetDropdown")
+    public static Dropdown offsetDropdown;
+    @UI("#referenceDropdown")
+    public static Dropdown referenceDropdown;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")
