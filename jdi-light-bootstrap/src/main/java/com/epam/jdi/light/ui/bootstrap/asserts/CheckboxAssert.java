@@ -38,7 +38,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox>
     }
     //protected
     protected String getIsSelected() {
-        return element.find(By.tagName("input")).isSelected() ? "selected" : "not selected";
+        return element.isSelected() ? "selected" : "not selected";
     }
 
     protected String getIsEnabled() {
