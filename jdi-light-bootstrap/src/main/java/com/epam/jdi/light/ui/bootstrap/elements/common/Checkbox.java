@@ -10,10 +10,9 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.asserts.CheckboxAssert;
-import org.openqa.selenium.By;
 
 public class Checkbox extends UIBaseElement<CheckboxAssert>
-    implements HasLabel, SetValue, HasClick, HasCheck {
+        implements HasLabel, SetValue, HasClick, HasCheck {
 
     @UI("input")
     private UIElement input;
@@ -31,13 +30,14 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
     public void check() {
         uiElement.check(); //only break when div is too long
         //uiElement.find(By.tagName("input")).check(); break for custom cannot access input field
-        if(!isSelected()) {
+        if (!isSelected()) {
             click();
         }
     }
+
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
-        if(isSelected()) {
+        if (isSelected()) {
             click();
         }
 
@@ -56,7 +56,12 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
 
     @JDIAction("Check that '{name}' is selected")
     public boolean isSelected() {
-      return input.isSelected();
+        return input.isSelected();
+    }
+
+    @JDIAction("Check that '{name}' is enabled")
+    public boolean isEnabled() {
+        return input.isEnabled();
     }
 
     @Override
@@ -70,8 +75,9 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
     public void setValue(String value) {
         check(value);
     }
+
     public String getValue() {
-        return isSelected()+"";
+        return isSelected() + "";
     }
     // endregion
 
