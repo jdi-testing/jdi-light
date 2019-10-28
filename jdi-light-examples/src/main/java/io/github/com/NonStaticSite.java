@@ -61,4 +61,10 @@ public class NonStaticSite {
     public HomePageFrame iframe;
 
     public GithubPage githubPage;
+
+    public NonStaticSite() {}
+
+    public HomePage getHomePage() {
+        return new HomePage();
+    }
 }
