@@ -43,5 +43,4 @@ public class DropdownAssert<A extends DropdownAssert, E extends Dropdown> extend
         return (A) this;
     }
 
-
 }
