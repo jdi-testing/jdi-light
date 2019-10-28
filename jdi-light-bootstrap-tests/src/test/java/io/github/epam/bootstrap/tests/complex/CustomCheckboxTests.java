@@ -8,7 +8,8 @@ import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.customCheckbox;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.is;
+
 
 public class CheckboxTests extends TestsInit {
 
