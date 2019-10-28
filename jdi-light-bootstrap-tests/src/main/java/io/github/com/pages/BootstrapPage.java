@@ -9,6 +9,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Checkbox;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
@@ -59,7 +60,6 @@ import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.card.CardWithSubtitlesAndLinks;
 import io.github.com.sections.form.CheckboxAndRadioButtonCustomDisabled;
 import io.github.com.sections.form.CheckboxesAndRadiosWithoutLabels;
-import io.github.com.sections.form.CheckboxesCustom;
 import io.github.com.sections.form.CheckboxesDefault;
 import io.github.com.sections.form.CheckboxesDefaultInline;
 import io.github.com.sections.form.FormColumnSizing;
@@ -144,6 +144,7 @@ import io.github.com.sections.progress.ProgressSection;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
+
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -565,8 +566,8 @@ public class BootstrapPage extends WebPage {
     public static RadioButtonsDefaultInline radioButtonsDefaultInline;
     @UI("body")
     public static CheckboxesDefault checkboxesDefault;
-    @UI("body")
-    public static CheckboxesCustom checkboxesCustom;
+    @UI("#customCheck1-div")
+    public static Checkbox customCheckbox;
     @UI(".card-deck:nth-of-type(1)")
     public static CardDeck cardDeckWithoutFooter;
     @UI(".card-deck:nth-of-type(2)")

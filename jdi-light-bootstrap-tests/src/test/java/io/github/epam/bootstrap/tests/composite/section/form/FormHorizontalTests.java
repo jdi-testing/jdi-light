@@ -64,8 +64,7 @@ public class FormHorizontalTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .attr("type", "checkbox")
-                .tag(is("input"));
+                .tag(is("div"));
         formHorizontal.accept.label()
                 .is()
                 .displayed()

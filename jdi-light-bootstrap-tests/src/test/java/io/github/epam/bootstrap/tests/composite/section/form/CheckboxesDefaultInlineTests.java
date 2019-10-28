@@ -29,10 +29,7 @@ public class CheckboxesDefaultInlineTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .attr("type", "checkbox")
-                .attr("value", "option1")
-                .hasClass("form-check-input")
-                .tag(is("input"));
+                .hasClass("form-check form-check-inline");
         checkboxesDefaultInline.checkboxOne.label()
                 .is()
                 .displayed()
@@ -46,10 +43,7 @@ public class CheckboxesDefaultInlineTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .attr("type", "checkbox")
-                .attr("value", "option2")
-                .hasClass("form-check-input")
-                .tag(is("input"));
+                .hasClass("form-check form-check-inline");
         checkboxesDefaultInline.checkboxTwo.label()
                 .is()
                 .displayed()
@@ -63,10 +57,7 @@ public class CheckboxesDefaultInlineTests extends TestsInit {
                 .displayed()
                 .disabled()
                 .core()
-                .attr("type", "checkbox")
-                .attr("value", "option3")
-                .hasClass("form-check-input")
-                .tag(is("input"));
+                .hasClass("form-check form-check-inline");
         checkboxesDefaultInline.checkboxThree.label()
                 .is()
                 .displayed()

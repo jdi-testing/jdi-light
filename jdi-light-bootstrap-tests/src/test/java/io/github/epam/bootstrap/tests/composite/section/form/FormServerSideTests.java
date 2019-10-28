@@ -85,9 +85,8 @@ public class FormServerSideTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .attr("type", "checkbox")
-                .hasClass("form-check-input")
-                .tag(is("input"));
+                .hasClass("form-check")
+                .tag(is("div"));
         formServerSide.accept.label()
                 .is()
                 .displayed()
