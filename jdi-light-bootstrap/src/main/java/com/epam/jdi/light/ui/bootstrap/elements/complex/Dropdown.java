@@ -19,11 +19,6 @@ public class Dropdown extends UIBaseElement<DropdownAssert> {
     @UI(".dropdown-item,.dropdown-item-text")
     private WebList items;
 
-    private final String rootLocator = "";
-    private final String listLocator = ".dropdown-item,.dropdown-item-text";
-    private final String expandLocator = ".dropdown-toggle";
-
-
     @JDIAction("Expand dropdown '{name}' ")
     public void expand() {
         if (isExpanded() == false) {
@@ -32,7 +27,7 @@ public class Dropdown extends UIBaseElement<DropdownAssert> {
         waitFor().expanded();
     }
 
-    @JDIAction("Coollapse dropdown '{name}' ")
+    @JDIAction("Collapse dropdown '{name}' ")
     public void collapse() {
         if (isExpanded() == true) {
             dropdownToggle.click();
