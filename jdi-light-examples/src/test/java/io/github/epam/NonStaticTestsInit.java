@@ -19,7 +19,10 @@ public class NonStaticTestsInit {
     }
 
     @Test
-    public void test() {}
+    public void test() {
+
+
+    }
 
     @AfterSuite
     public void cleanUp() {
