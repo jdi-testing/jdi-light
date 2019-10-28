@@ -18,6 +18,10 @@ public class Range extends UIBaseElement<UIAssert> implements HasLabel, SetValue
         return Double.parseDouble(uiElement.core().jsExecute("value"));
     }
 
+    public String getValue() {
+        return String.valueOf(thumbValue());
+    }
+
     @JDIAction(value = "Get '{name}' min limit", level = DEBUG)
     public double min() {
         return getDouble("min", uiElement);
@@ -34,22 +38,14 @@ public class Range extends UIBaseElement<UIAssert> implements HasLabel, SetValue
     }
 
     @JDIAction(value = "Set thumbValue '{0}' for '{name}'", level = DEBUG)
-    public void setThumbValue(double thumbValue) {
+    public void setValue(double thumbValue) {
         uiElement.core().jsExecute("value=" + thumbValue);
     }
-    // endregion
 
-    // region Set and get value for Forms
     public void setValue(String value) {
-        setThumbValue(asDouble(value));
+        uiElement.core().jsExecute("value=" + value);
     }
 
-    public String getValue() {
-        return String.valueOf(thumbValue());
-    }
-    // endregion
-
-    // region Extend assertions
     @Override
     public RangeAssert is() {
         return new RangeAssert().set(this);

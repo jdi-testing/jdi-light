@@ -11,7 +11,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Checkbox;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
@@ -24,6 +23,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
@@ -62,6 +62,8 @@ import io.github.com.sections.form.CheckboxAndRadioButtonCustomDisabled;
 import io.github.com.sections.form.CheckboxesAndRadiosWithoutLabels;
 import io.github.com.sections.form.CheckboxesDefault;
 import io.github.com.sections.form.CheckboxesDefaultInline;
+import io.github.com.sections.form.FormColumnSizing;
+import io.github.com.sections.form.FormHorizontalLabelSizing;
 import io.github.com.sections.form.FormBrowserDefaults;
 import io.github.com.sections.form.FormCustomStyles;
 import io.github.com.sections.form.FormDisabled;
@@ -198,6 +200,10 @@ public class BootstrapPage extends WebPage {
     public static Dropdown rightAllignedDropdown;
     @UI("#leftAllignedDropdown")
     public static Dropdown leftAllignedDropdown;
+    @UI("#dropdown-menu-items")
+    public static Dropdown dropdownMenuItems;
+    @UI("#dropdown-menu-text-item")
+    public static Dropdown dropdownMenuTextItem;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")
@@ -683,7 +689,7 @@ public class BootstrapPage extends WebPage {
     @UI("#form-row")
     public static FormRow formRow;
 
-    //Navbars
+    //region Navbars
     @UI("#navbar-nav-with-disabled")
     public static Navbar navbarNavWithDisabled;
     @UI("#navbar-nav-with-dropdown")
@@ -720,7 +726,12 @@ public class BootstrapPage extends WebPage {
     public static ModalVerticallyCentered modalVerticallyCentered;
     @UI("#modal-optional-sizes")
     public static ModalOptionalSizes modalOptionalSizes;
+    //endregion
 
-
+    //region Forms
+    @UI("#form-horizontal-label-size")
+    public static FormHorizontalLabelSizing formHorizontalLabelSizing;
+    @UI("#form-column-size")
+    public static FormColumnSizing formColumnSizing;
     //endregion
 }
