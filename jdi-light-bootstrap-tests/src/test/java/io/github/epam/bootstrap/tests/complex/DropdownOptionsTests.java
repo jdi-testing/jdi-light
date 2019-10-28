@@ -36,13 +36,13 @@ public class DropdownOptionsTests extends TestsInit {
         };
     }
 
-    @DataProvider
-    public Object[][] dropdownLinkData() {
-        return new Object[][]{
-                {offsetDropdown, OFFSET_DROPDOWN_CONTENTS},
-                {referenceDropdown, REFERENCE_DROPDOWN_CONTENTS}
-        };
-    }
+//    @DataProvider
+//    public Object[][] dropdownLinkData() {
+//        return new Object[][]{
+//                {offsetDropdown, OFFSET_DROPDOWN_CONTENTS},
+//                {referenceDropdown, REFERENCE_DROPDOWN_CONTENTS}
+//        };
+//    }
 
     @BeforeMethod
     public void before() {
@@ -56,6 +56,16 @@ public class DropdownOptionsTests extends TestsInit {
         dropdown.is().expanded();
         dropdown.collapse();
         dropdown.is().collapsed();
+    }
+
+    @Test
+    public void dropdownLinkTest() {
+        for (int i = 1; i < offsetDropdown.list().size() + 1; i++) {
+            offsetDropdown.expand();
+            offsetDropdown.list().get(i).click();
+            validateAlert(is(OFFSET_DROPDOWN_CONTENTS[i]));
+            dismissAlert();
+        }
     }
 
     @Test
@@ -74,12 +84,6 @@ public class DropdownOptionsTests extends TestsInit {
                 .hasItems(ITEM_TWO)
                 .hasItems(ITEM_THREE)
                 .hasItems(ITEM_FOUR);
-    }
-
-    @Test(dataProvider = "dropdownLinkData")
-    public void dropdownLinkTest(Dropdown dropdown, String[] alertTextArray) {
-        dropdown.expand();
-        dropdown.assertThat().itemValues(is(hasItems(alertTextArray)));
     }
 
 }
