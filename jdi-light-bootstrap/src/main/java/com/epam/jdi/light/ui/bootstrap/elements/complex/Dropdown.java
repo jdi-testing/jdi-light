@@ -37,7 +37,7 @@ public class Dropdown extends UIBaseElement<DropdownAssert> {
 
     @JDIAction("Check that '{name}' is expanded")
     public boolean isExpanded() {
-        return attr("class").contains("show");
+        return hasClass("show");
     }
 
     @JDIAction("Check that '{name}' is collapsed")
