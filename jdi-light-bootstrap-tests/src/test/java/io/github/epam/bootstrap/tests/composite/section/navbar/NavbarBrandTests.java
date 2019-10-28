@@ -75,8 +75,6 @@ public class NavbarBrandTests extends TestsInit {
 
     @Test(dataProvider = "navbarBrandsWithImage")
     public void checkNavbarImage(UIElement brandWithImage) {
-
-        brandWithImage.is().core().hasAttr("href");
         UIElement imgFromNavbar = brandWithImage.childs().get(1);
         imgFromNavbar.highlight("blue");
         imgFromNavbar.is().core().tag("img").attr("src", containsString(imgPath));
