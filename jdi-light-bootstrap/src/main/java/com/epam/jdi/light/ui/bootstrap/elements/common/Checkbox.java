@@ -20,9 +20,12 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
 
     // region Actions
     public void check(String value) {
-        if ("true".equalsIgnoreCase(value) || ("1").equals(value))
+        if ("true".equalsIgnoreCase(value) || ("1").equals(value)) {
             check();
-        else uncheck();
+        }
+        else {
+            uncheck();
+        }
     }
 
     @JDIAction("Check '{name}'")
