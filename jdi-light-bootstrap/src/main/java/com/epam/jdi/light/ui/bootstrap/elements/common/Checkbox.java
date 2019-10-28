@@ -22,8 +22,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
     public void check(String value) {
         if ("true".equalsIgnoreCase(value) || ("1").equals(value)) {
             check();
-        }
-        else {
+        } else {
             uncheck();
         }
     }
