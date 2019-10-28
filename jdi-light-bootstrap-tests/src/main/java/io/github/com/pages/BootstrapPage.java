@@ -559,7 +559,8 @@ public class BootstrapPage extends WebPage {
     public static RadioButtonsDefaultInline radioButtonsDefaultInline;
     @UI("body")
     public static CheckboxesDefault checkboxesDefault;
-    @UI("#check1")
+    //@UI("#check1")
+    @UI("#formAutoSizing-customCheckbox")
     public static Checkbox checkbox;
     @UI(".card-deck:nth-of-type(1)")
     public static CardDeck cardDeckWithoutFooter;

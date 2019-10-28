@@ -2,6 +2,9 @@ package com.epam.jdi.light.ui.bootstrap.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+
+import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
@@ -17,14 +20,20 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
             check();
         else uncheck();
     }
+
+
+    //private  UIElement inputField=uiElement.find(By.tagName("input"));
+
     @JDIAction("Check '{name}'")
     public void check() {
-        uiElement.find(By.tagName("input")).check();
+        uiElement.check(); //only break when div is too long
+        //uiElement.find(By.tagName("input")).check(); break for custom cannot access input field
     }
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
         if(isSelected()) {
-            uiElement.find(By.tagName("input")).click();
+            uiElement.click();//only break when div is too long
+            //uiElement.find(By.tagName("input")).click(); //break for custom cannot access input field
         }
     }
 

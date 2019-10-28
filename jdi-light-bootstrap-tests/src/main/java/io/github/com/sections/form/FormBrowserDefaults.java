@@ -22,7 +22,8 @@ public class FormBrowserDefaults extends Form<FormContacts> {
     @UI("#validationDefault05")
     public TextField zip;
 
-    @UI("#invalidCheck2")
+    //@UI("#invalidCheck2")
+    @UI("//input[@id='invalidCheck2']/..")
     public Checkbox accept;
 
     @UI("button")
