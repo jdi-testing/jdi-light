@@ -1,9 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.navbar;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -14,6 +11,7 @@ import static io.github.com.pages.BootstrapPage.navbarPlacementStickyTop;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 
 public class NavbarPlacementTests extends TestsInit {
 
@@ -63,16 +61,18 @@ public class NavbarPlacementTests extends TestsInit {
     }
 
     @Test
-    public void navbarSectionTest() throws InterruptedException {
+    public void navbarScrollTest() throws InterruptedException {
         navbarPlacementStickyTop.core().jsExecute("scrollIntoView()");
-        WebDriver driver = WebDriverFactory.getDriver();
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        Thread.sleep(1000);
-        js.executeScript("window.scrollBy(0, 100);");
-        Thread.sleep(1000);
-
+        bsPageExecuteJS("scrollBy(0, 15)");
+        String top1 = getTopValueOfNavbarPlacementStickyTop();
+        assertEquals(top1, "0");
+        bsPageExecuteJS("scrollBy(0, 100)");
+        String top2 = getTopValueOfNavbarPlacementStickyTop();
+        assertEquals(top2, "0");
+        bsPageExecuteJS("scrollBy(0, 200)");
+        String top3 = getTopValueOfNavbarPlacementStickyTop();
+        assertNotEquals(top3, "0");
     }
-
 
     @Test(dataProvider = "navLinkTextData")
     public void navLinkTextTest(String linkText) {
@@ -81,4 +81,11 @@ public class NavbarPlacementTests extends TestsInit {
                 .text(linkText);
     }
 
+    private void bsPageExecuteJS(String jsCode) {
+        bsPage.js().executeScript(jsCode);
+    }
+
+    private String getTopValueOfNavbarPlacementStickyTop() {
+        return navbarPlacementStickyTop.core().jsExecute("getBoundingClientRect().top");
+    }
 }
