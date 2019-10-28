@@ -1,16 +1,11 @@
 package io.github.epam.bootstrap.tests.composite.section.navbar;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.common.WindowsManager;
-import com.epam.jdi.light.settings.WebSettings;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import java.util.ArrayList;
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarSection;
@@ -19,7 +14,6 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.StringContains.containsString;
-import static org.testng.Assert.assertEquals;
 
 public class NavbarBrandTests extends TestsInit {
 
@@ -33,7 +27,7 @@ public class NavbarBrandTests extends TestsInit {
     }
 
     @DataProvider
-    public static Object[][] navbarBrandData() {
+    public static Object[][] navbarBrands() {
         return new Object[][]{
                 {navbarSection.navbarBrandLink, "Brand link"},
                 {navbarSection.navbarBrandHeading, "Brand heading"},
@@ -43,77 +37,61 @@ public class NavbarBrandTests extends TestsInit {
     }
 
     @DataProvider
-    public static Object[][] navbarBrandImage() {
+    public static Object[][] navbarBrandsWithImage() {
         return new Object[][]{
                 {navbarSection.navbarBrandAsImage},
                 {navbarSection.navbarBrandAsImageAndLink},
         };
     }
 
-    /*@Test
-    public void checkNavbarClickLink() {
-        for (int i = 1; i < navbarSection.allNavbarBrands.size() + 1; i++) {
-            UIElement nbb = navbarSection.allNavbarBrands.get(i);
-            if (nbb.hasAttribute("href")) {
-                nbb.highlight();
-                nbb.click();
-                WebDriver driver = WebDriverFactory.getDriver();
-                ArrayList<String> tabs = new ArrayList<>(
-                        WebDriverFactory.getDriver().getWindowHandles());
-                driver.switchTo().window(tabs.get(tabs.size() - 1));
-                assertEquals(getUrl(), navbarUrl);
-                driver.close();
-                driver.switchTo().window(tabs.get(tabs.size() - 2));
-            }
-        }
+    @DataProvider
+    public static Object[][] navbarBrandsWithLink() {
+        return new Object[][]{
+                {navbarSection.navbarBrandLink},
+                {navbarSection.navbarBrandAsImage},
+                {navbarSection.navbarBrandAsImageAndLink},
+        };
     }
-*/
-    @Test(dataProvider = "navbarBrandData")
-    public void checkNavbarText(UIBaseElement uiBaseElement, String navbarText) {
+
+    @Test (dataProvider = "navbarBrandsWithLink")
+    public void  checkNavbarLink(UIElement brandAsLink) {
+        brandAsLink.is().core().hasAttr("href");
+        brandAsLink.highlight("blue");
+        brandAsLink.unhighlight();
+        brandAsLink.click();
+        int winNumber = WindowsManager.windowsCount();
+        WindowsManager.switchToWindow(winNumber);
+        assertThat(getUrl(), is(navbarUrl));
+        WindowsManager.closeWindow();
+        WindowsManager.switchToWindow(winNumber - 1);
+        }
+
+    @Test(dataProvider = "navbarBrands")
+    public void checkNavbarText(UIElement uiBaseElement, String navbarText) {
                 uiBaseElement.highlight();
                 uiBaseElement.is().core().text(navbarText);
                 uiBaseElement.unhighlight();
             }
 
+    @Test(dataProvider = "navbarBrandsWithImage")
+    public void checkNavbarImage(UIElement brandWithImage) {
 
-    @Test(dataProvider = "navbarBrandImage")
-    public void checkNavbarClickImage() {
-
-        navbarSection.navbarBrandAsImage.is().core().hasAttr("href");
-        UIElement imgFromNavbar = navbarSection.navbarBrandAsImage.childs().get(1);
+        brandWithImage.is().core().hasAttr("href");
+        UIElement imgFromNavbar = brandWithImage.childs().get(1);
         imgFromNavbar.highlight("blue");
         imgFromNavbar.is().core().tag("img").attr("src", containsString(imgPath));
         imgFromNavbar.unhighlight();
         imgFromNavbar.click();
-        assertThat(WindowsManager.windowsCount(), is(2));
-        WindowsManager.switchToWindow(2);
+        int winNumber = WindowsManager.windowsCount();
+        WindowsManager.switchToWindow(winNumber);
         assertThat(getUrl(), is(navbarUrl));
         WindowsManager.closeWindow();
-
-
-
-                   /* WebDriver driver = WebDriverFactory.getDriver();
-                    ArrayList<String> tabs = new ArrayList<>(WebDriverFactory.getDriver()
-                            .getWindowHandles());
-                    driver.switchTo().window(tabs.get(tabs.size() - 1));
-                    assertEquals(getUrl(), navbarUrl);
-                    driver.close();
-                    driver.switchTo().window(tabs.get(tabs.size() - 2));*/
-
+        WindowsManager.switchToWindow(winNumber - 1);
     }
 
-    @Test
-    public void baseValidationStreamJListTest() {
-        baseValidation(navbarSection.navbarBrandLink);
-        navbarSection.navbarBrandLink.unhighlight();
-
-        baseValidation(navbarSection.navbarBrandHeading);
-        navbarSection.navbarBrandHeading.unhighlight();
-
-        baseValidation(navbarSection.navbarBrandAsImage);
-        navbarSection.navbarBrandAsImage.unhighlight();
-
-        baseValidation(navbarSection.navbarBrandAsImageAndLink);
-        navbarSection.navbarBrandAsImageAndLink.unhighlight();
+    @Test(dataProvider = "navbarBrands")
+    public void baseValidationNavbarBrand(Object...nbBrand) {
+        baseValidation((UIElement) nbBrand[0]);
+       ((UIElement) nbBrand[0]).unhighlight();
     }
 }
