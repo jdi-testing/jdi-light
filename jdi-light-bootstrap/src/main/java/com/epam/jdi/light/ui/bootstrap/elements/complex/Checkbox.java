@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.bootstrap.elements.common;
+package com.epam.jdi.light.ui.bootstrap.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;

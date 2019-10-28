@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.common;
+package io.github.epam.bootstrap.tests.complex;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -11,7 +11,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 
 
-public class CheckboxTests extends TestsInit {
+public class CustomCheckboxTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
