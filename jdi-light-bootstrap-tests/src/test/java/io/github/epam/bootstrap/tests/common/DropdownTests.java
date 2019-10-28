@@ -35,15 +35,12 @@ import static org.hamcrest.Matchers.is;
  * Email: daniil_kopylov@epam.com
  */
 
-public class DrowdownTests extends TestsInit {
+public class DropdownTests extends TestsInit {
     private static final String DROPDOWN = "Dropdown";
 
     private static final String FIRSTITEM = "Action";
     private static final String SECONDITEM = "Another action";
     private static final String LASTITEM = "Separated link";
-//    private static final String FIRSTITEM = "Action";
-//    private static final String SECONDITEM = "Another\n                                        action";
-//    private static final String LASTITEM = "Separated link";
     private static final String ITEMS_VALUES = String.format("%s,%s,%s", FIRSTITEM, SECONDITEM, LASTITEM);
     private static final String[] ITEMS_ARR = new String[] {FIRSTITEM, SECONDITEM, LASTITEM};
 
