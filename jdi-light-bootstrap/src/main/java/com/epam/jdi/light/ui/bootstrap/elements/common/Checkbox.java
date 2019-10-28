@@ -28,7 +28,6 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
 
     @JDIAction("Check '{name}'")
     public void check() {
-        uiElement.check();
         if (!isSelected()) {
             click();
         }
@@ -39,7 +38,6 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
         if (isSelected()) {
             click();
         }
-
     }
 
     @JDIAction("Click at '{name}'")
@@ -48,7 +46,6 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
             input.click();
         } else {
             label().click();
-            uiElement.click();
         }
     }
 
@@ -63,6 +60,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
     }
 
     @Override
+
     public Label label() {
         return input.label();
     }

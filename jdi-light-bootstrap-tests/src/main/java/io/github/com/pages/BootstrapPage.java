@@ -143,6 +143,8 @@ import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
 
+import java.awt.*;
+
 public class BootstrapPage extends WebPage {
     //region Simple Elements
     public static UIElement inputGroupWrap;
@@ -559,9 +561,8 @@ public class BootstrapPage extends WebPage {
     public static RadioButtonsDefaultInline radioButtonsDefaultInline;
     @UI("body")
     public static CheckboxesDefault checkboxesDefault;
-    //@UI("#check1")
-    @UI("#formAutoSizing-customCheckbox")
-    public static Checkbox checkbox;
+    @UI("#customCheck1-div")
+    public static Checkbox customCheckbox;
     @UI(".card-deck:nth-of-type(1)")
     public static CardDeck cardDeckWithoutFooter;
     @UI(".card-deck:nth-of-type(2)")
