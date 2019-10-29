@@ -28,6 +28,11 @@ public class FormUsers {
     public static FormContacts ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT =
             defaultContact().set(c -> c.name = null);
 
+    public static FormContacts INLINE_FORM_CONTACT = inlineFormContact();
+
+    public static FormContacts ONLY_NAME_FILLED_INLINE_FORM_CONTACT =
+            new FormContacts().set(c -> c.name = "Arnold");
+
     public static void clearBlankContact() {
         BLANK_CONTACT = new FormContacts();
     }
@@ -76,6 +81,13 @@ public class FormUsers {
 
     private static FormContacts blankContact() {
         return new FormContacts().set(c -> {
+        });
+    }
+
+    private static FormContacts inlineFormContact() {
+        return new FormContacts().set(c -> {
+            c.name = "Arnold";
+            c.userName = "Reiner";
         });
     }
 }
