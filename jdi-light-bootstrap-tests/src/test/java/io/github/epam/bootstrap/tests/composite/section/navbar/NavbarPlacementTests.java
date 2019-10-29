@@ -1,6 +1,10 @@
 package io.github.epam.bootstrap.tests.composite.section.navbar;
 
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.JList;
+import io.github.com.sections.navbar.NavbarPlacement;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -10,6 +14,7 @@ import static io.github.com.pages.BootstrapPage.getUrl;
 import static io.github.com.pages.BootstrapPage.navbarPlacementStickyTop;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static java.lang.Integer.parseInt;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 
@@ -51,6 +56,19 @@ public class NavbarPlacementTests extends TestsInit {
         assertEquals(getUrl(), bootstrapNavbarPlacementPageUrl);
     }
 
+    @Test(dataProvider = "navLinkTextData")
+    public void navLinkTextTest(String linkText) {
+        navbarPlacementStickyTop.navbarLinks.show();
+        navbarPlacementStickyTop.navbarLinks.is()
+                .text(linkText);
+    }
+
+    @Test
+    public void navTextTest() {
+        String s = navbarPlacementStickyTop.navbarLinks.get(3).getText();
+        assertEquals(s, "Pricing");
+    }
+
     @Test
     public void navbarPositionTest() {
         navbarPlacementStickyTop.show();
@@ -63,29 +81,33 @@ public class NavbarPlacementTests extends TestsInit {
     @Test
     public void navbarScrollTest() throws InterruptedException {
         navbarPlacementStickyTop.core().jsExecute("scrollIntoView()");
-        bsPageExecuteJS("scrollBy(0, 15)");
-        String top1 = getTopValueOfNavbarPlacementStickyTop();
-        assertEquals(top1, "0");
-        bsPageExecuteJS("scrollBy(0, 100)");
-        String top2 = getTopValueOfNavbarPlacementStickyTop();
-        assertEquals(top2, "0");
-        bsPageExecuteJS("scrollBy(0, 200)");
-        String top3 = getTopValueOfNavbarPlacementStickyTop();
-        assertNotEquals(top3, "0");
+        int heightOfContainer = getHeightOfContainer();
+        int top1 = getTopValueOfNavbarPlacementStickyTop();
+        assertEquals(top1, 0);
+        bsPageExecuteJS("scrollBy(0," + heightOfContainer/3 + ")");
+        int top2 = getTopValueOfNavbarPlacementStickyTop();
+        assertEquals(top2, 0);
+        bsPageExecuteJS("scrollBy(0," + heightOfContainer + ")");
+        int top3 = getTopValueOfNavbarPlacementStickyTop();
+        assertNotEquals(top3, 0);
     }
 
-    @Test(dataProvider = "navLinkTextData")
-    public void navLinkTextTest(String linkText) {
-        navbarPlacementStickyTop.navbarLinks.show();
-        navbarPlacementStickyTop.navbarLinks.is()
-                .text(linkText);
+    private int getHeightOfContainer() {
+        UIElement parentContainer = navbarPlacementStickyTop.find(By.xpath("./.."));
+        String heightOfContainerWithPaddings = parentContainer.core().jsExecute("clientHeight");
+        String nonDigitsRegexp = "[^0-9.]";
+        String contentPT = parentContainer.core().css("padding-top").replaceAll(nonDigitsRegexp,"");
+        String contentPB = parentContainer.core().css("padding-bottom").replaceAll(nonDigitsRegexp, "");
+        return parseInt(heightOfContainerWithPaddings) - parseInt(contentPT) - parseInt(contentPB);
     }
 
     private void bsPageExecuteJS(String jsCode) {
         bsPage.js().executeScript(jsCode);
     }
 
-    private String getTopValueOfNavbarPlacementStickyTop() {
-        return navbarPlacementStickyTop.core().jsExecute("getBoundingClientRect().top");
+    private int getTopValueOfNavbarPlacementStickyTop() {
+        String topStr = navbarPlacementStickyTop.core().jsExecute("getBoundingClientRect().top");
+        double topDouble = Double.parseDouble(topStr);
+        return (int) Math.round(topDouble);
     }
 }
