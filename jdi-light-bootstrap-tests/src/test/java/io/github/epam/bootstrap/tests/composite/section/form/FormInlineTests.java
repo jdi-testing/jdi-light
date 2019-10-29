@@ -15,14 +15,21 @@ import static io.github.com.entities.FormUsers.INLINE_FORM_CONTACT;
 import static io.github.com.entities.FormUsers.ONLY_NAME_FILLED_INLINE_FORM_CONTACT;
 import static io.github.com.pages.BootstrapPage.formInlinePreference;
 import static io.github.com.pages.BootstrapPage.formInlineUsername;
+import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+
+/**
+ * Created by Aleksandr Khmelinin on 29.10.2019
+ * Email: aleksandr_khmelinin@epam.com; Skype: live:bea50ebde18b7f9e
+ */
 
 public class FormInlineTests extends TestsInit {
 
     private String name = "Arnold";
     private String userName = "Reiner";
+    private String submitAlert = "Submit button clicked";
 
     @BeforeMethod
     public void before() {
@@ -30,35 +37,33 @@ public class FormInlineTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    @DataProvider
-    public Object[][] fields() {
-        return new Object[][]{
-                {formInlineUsername.name, "Jane Doe"},
-                {formInlineUsername.userName, "Username"}
-        };
-    }
-
-    @Test(dataProvider = "fields")
-    public void isValidationTest(TextField field, String value) {
-        field.is()
-                .displayed()
-                .enabled()
-                .core()
-                .hasClass("form-control")
-                .tag(is("input"))
-                .attr("placeholder", value);
+    @Test
+    public void selectPreferenceTest() {
+        formInlinePreference.preferenceSelect.is().value("Choose...");
+        formInlinePreference.preferenceSelect.select("One");
+        formInlinePreference.preferenceSelect.is().value("One");
+        formInlinePreference.preferenceSelect.select("Two");
+        formInlinePreference.preferenceSelect.is().value("Two");
+        formInlinePreference.preferenceSelect.select("Three");
+        formInlinePreference.preferenceSelect.is().value("Three");
     }
 
     @Test
-    public void checkboxTests() {
-        formInlineUsername.rememberMe.check();
-        formInlineUsername.rememberMe.is().selected();
-        formInlineUsername.rememberMe.uncheck();
-        formInlineUsername.rememberMe.is().deselected();
-        formInlinePreference.rememberPreference.label().click();
-        formInlinePreference.rememberPreference.is().selected();
-        formInlinePreference.rememberPreference.label().click();
-        formInlinePreference.rememberPreference.is().deselected();
+    public void submitPreferenceFormTest() {
+        formInlinePreference.submit.click();
+        validateAlert(is(submitAlert));
+    }
+
+    @Test
+    public void checkboxesTests() {
+        formInlineUsername.rememberMeCheckbox.check();
+        formInlineUsername.rememberMeCheckbox.is().selected();
+        formInlineUsername.rememberMeCheckbox.uncheck();
+        formInlineUsername.rememberMeCheckbox.is().deselected();
+        formInlinePreference.rememberPreferenceCheckbox.check();
+        formInlinePreference.rememberPreferenceCheckbox.is().selected();
+        formInlinePreference.rememberPreferenceCheckbox.uncheck();
+        formInlinePreference.rememberPreferenceCheckbox.is().deselected();
     }
 
     @Test
@@ -121,7 +126,7 @@ public class FormInlineTests extends TestsInit {
 
     @Test
     public void publishMethodText() {
-        formInlineUsername.add(INLINE_FORM_CONTACT);
+        formInlineUsername.publish(INLINE_FORM_CONTACT);
         formInlineUsername.check(INLINE_FORM_CONTACT);
         checkInlineFormSubmitted();
     }
@@ -182,8 +187,69 @@ public class FormInlineTests extends TestsInit {
         checkInlineFormSubmitted();
     }
 
+    @DataProvider
+    public Object[][] fields() {
+        return new Object[][]{
+                {formInlineUsername.name, "Jane Doe"},
+                {formInlineUsername.userName, "Username"}
+        };
+    }
+
+    @Test(dataProvider = "fields")
+    public void fieldsIsValidationTest(TextField field, String value) {
+        field.is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("form-control")
+                .tag(is("input"))
+                .attr("placeholder", value);
+    }
+
+    @Test
+    public void isValidationTest() {
+        formInlineUsername.rememberMeCheckbox.is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("form-check");
+        formInlineUsername.submit.is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("btn")
+                .text(is("Submit"));
+        formInlinePreference.preferenceSelect.is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("custom-select");
+        formInlinePreference.rememberPreferenceCheckbox.is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("custom-control");
+        formInlinePreference.submit.is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("btn")
+                .text(is("Submit"));
+    }
+
+    @Test
+    public void baseValidationsTest() {
+        baseValidation(formInlineUsername.name);
+        baseValidation(formInlineUsername.userName);
+        baseValidation(formInlineUsername.rememberMeCheckbox);
+        baseValidation(formInlineUsername.submit);
+        baseValidation(formInlinePreference.preferenceSelect);
+        baseValidation(formInlinePreference.rememberPreferenceCheckbox);
+        baseValidation(formInlinePreference.submit);
+    }
+
     private void checkInlineFormSubmitted() {
         formInlineUsername.submit();
-        validateAlert(is("Submit button clicked"));
+        validateAlert(is(submitAlert));
     }
 }
