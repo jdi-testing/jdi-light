@@ -58,12 +58,12 @@ public class NavbarBrandTests extends TestsInit {
         brandAsLink.is().core().hasAttr("href");
         brandAsLink.highlight("blue");
         brandAsLink.unhighlight();
-        brandAsLink.click();
         int winNumber = WindowsManager.windowsCount();
-        WindowsManager.switchToWindow(winNumber);
+        brandAsLink.click();
+        WindowsManager.switchToWindow(winNumber + 1);
         assertThat(getUrl(), is(navbarUrl));
         WindowsManager.closeWindow();
-        WindowsManager.switchToWindow(winNumber - 1);
+        WindowsManager.switchToWindow(winNumber);
         }
 
     @Test(dataProvider = "navbarBrands")
@@ -79,12 +79,12 @@ public class NavbarBrandTests extends TestsInit {
         imgFromNavbar.highlight("blue");
         imgFromNavbar.is().core().tag("img").attr("src", containsString(imgPath));
         imgFromNavbar.unhighlight();
-        imgFromNavbar.click();
         int winNumber = WindowsManager.windowsCount();
-        WindowsManager.switchToWindow(winNumber);
+        imgFromNavbar.click();
+        WindowsManager.switchToWindow(winNumber + 1);
         assertThat(getUrl(), is(navbarUrl));
         WindowsManager.closeWindow();
-        WindowsManager.switchToWindow(winNumber - 1);
+        WindowsManager.switchToWindow(winNumber);
     }
 
     @Test(dataProvider = "navbarBrands")
