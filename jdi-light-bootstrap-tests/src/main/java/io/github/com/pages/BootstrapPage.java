@@ -206,7 +206,7 @@ public class BootstrapPage extends WebPage {
     public static Dropdown dropdownMenuItems;
     @UI("#dropdown-menu-text-item")
     public static Dropdown dropdownMenuTextItem;
-    @UI("//div[@id='dropdown-menu-disabled-item']/..")
+    @UI("#dropdown-menu-disabled-item")
     public static Dropdown dropdownMenuDisabledItem;
     @UI("#simple-alert")
     public static Alert simpleAlert;
