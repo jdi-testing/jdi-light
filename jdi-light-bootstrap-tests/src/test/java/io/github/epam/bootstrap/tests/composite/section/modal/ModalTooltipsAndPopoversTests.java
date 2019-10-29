@@ -9,6 +9,7 @@ import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.modalTooltipsAndPopovers;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
+import static org.testng.Assert.assertEquals;
 
 public class ModalTooltipsAndPopoversTests extends TestsInit {
     private static final String JS_SCROLL_TO_ELEMENT = "scrollIntoView(true);";
@@ -46,47 +47,26 @@ public class ModalTooltipsAndPopoversTests extends TestsInit {
     @Test
     public void verifyOpenModalDialogElements() {
         modalTooltipsAndPopovers.demoModalButton.click();
-        modalTooltipsAndPopovers.modalDlg.body.buttonTriggers.click();
-        modalTooltipsAndPopovers
-                .modalDlg
-                .body
-                .buttonTriggers
-                .is()
+        modalTooltipsAndPopovers.modalDlg.body.popover.getPopover("p:nth-child(2) > a");
+        modalTooltipsAndPopovers.modalDlg.body.popover.popoverButton.is()
+                .displayed()
+                .enabled()
                 .core()
-                .attr("title", POPOVER_TITLE);
-        modalTooltipsAndPopovers
-                .modalDlg
-                .body
-                .buttonTriggers
-                .is()
+                .attr("data-toggle", "popover")
+                .attr("data-content", POPOVER_BODY)
+                .attr("data-original-title", POPOVER_TITLE)
+                .text(is("button"));
+        modalTooltipsAndPopovers.modalDlg.body.popover.popoverButton.click();
+
+        modalTooltipsAndPopovers.modalDlg.body.tooltipOnLink
                 .core()
-                .attr("data-content", POPOVER_BODY);
-        modalTooltipsAndPopovers
-                .modalDlg
-                .body
-                .thisLink
-                .is()
-                .text(is(THIS_LINK));
-        modalTooltipsAndPopovers
-                .modalDlg
-                .body
-                .thisLink
-                .is()
-                .core()
-                .attr("title", TOOLTIP);
-        modalTooltipsAndPopovers
-                .modalDlg
-                .body
-                .thatLink
-                .is()
-                .text(is(THAT_LINK));
-        modalTooltipsAndPopovers
-                .modalDlg
-                .body
-                .thatLink
-                .is()
-                .core()
-                .attr("title", TOOLTIP);
+                .setLocator(modalTooltipsAndPopovers.modalDlg.body.thisLink.core().getLocator());
+        modalTooltipsAndPopovers.modalDlg.body.thisLink.hover();
+        modalTooltipsAndPopovers.modalDlg.body.tooltipOnLink.assertThat().isVisible();
+        assertEquals(modalTooltipsAndPopovers.modalDlg.body.tooltipOnLink.getTooltipText(),TOOLTIP);
+        modalTooltipsAndPopovers.modalDlg.body.thisLink.click();
+        modalTooltipsAndPopovers.modalDlg.body.thatLink.hover();
+
         modalTooltipsAndPopovers.modalDlg.close();
     }
 }

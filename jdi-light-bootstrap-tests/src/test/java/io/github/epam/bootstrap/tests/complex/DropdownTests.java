@@ -1,28 +1,30 @@
-package io.github.epam.bootstrap.tests.common;
+package io.github.epam.bootstrap.tests.complex;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.simpleDropdown;
-import static io.github.com.pages.BootstrapPage.linkDropdown;
-import static io.github.com.pages.BootstrapPage.primaryDropdown;
-import static io.github.com.pages.BootstrapPage.successDropdown;
-import static io.github.com.pages.BootstrapPage.infoDropdown;
-import static io.github.com.pages.BootstrapPage.splitDropdown;
-import static io.github.com.pages.BootstrapPage.largeDropdown;
-import static io.github.com.pages.BootstrapPage.largeSplitDropdown;
-import static io.github.com.pages.BootstrapPage.smallDropdown;
-import static io.github.com.pages.BootstrapPage.smallSplitDropdown;
-import static io.github.com.pages.BootstrapPage.dropUpDropdown;
-import static io.github.com.pages.BootstrapPage.dropUpSplitDropdown;
-import static io.github.com.pages.BootstrapPage.dropRightDropdown;
-import static io.github.com.pages.BootstrapPage.dropRightSplitDropdown;
 import static io.github.com.pages.BootstrapPage.dropLeftDropdown;
 import static io.github.com.pages.BootstrapPage.dropLeftSplitDropdown;
-import static io.github.com.pages.BootstrapPage.rightAllignedDropdown;
+import static io.github.com.pages.BootstrapPage.dropRightDropdown;
+import static io.github.com.pages.BootstrapPage.dropRightSplitDropdown;
+import static io.github.com.pages.BootstrapPage.dropUpDropdown;
+import static io.github.com.pages.BootstrapPage.dropUpSplitDropdown;
+import static io.github.com.pages.BootstrapPage.infoDropdown;
+import static io.github.com.pages.BootstrapPage.largeDropdown;
+import static io.github.com.pages.BootstrapPage.largeSplitDropdown;
 import static io.github.com.pages.BootstrapPage.leftAllignedDropdown;
+import static io.github.com.pages.BootstrapPage.linkDropdown;
+import static io.github.com.pages.BootstrapPage.primaryDropdown;
+import static io.github.com.pages.BootstrapPage.rightAllignedDropdown;
+import static io.github.com.pages.BootstrapPage.simpleDropdown;
+import static io.github.com.pages.BootstrapPage.smallDropdown;
+import static io.github.com.pages.BootstrapPage.smallSplitDropdown;
+import static io.github.com.pages.BootstrapPage.splitDropdown;
+import static io.github.com.pages.BootstrapPage.successDropdown;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,13 +35,13 @@ import static org.hamcrest.Matchers.is;
  * Email: daniil_kopylov@epam.com
  */
 
-public class DrowdownTests extends TestsInit {
+public class DropdownTests extends TestsInit {
     private static final String DROPDOWN = "Dropdown";
 
     private static final String FIRSTITEM = "Action";
-    private static final String SECONDITEM = "Another\n                                        action";
+    private static final String SECONDITEM = "Another action";
     private static final String LASTITEM = "Separated link";
-    private static final String ITEMS_VALUES = String.format("%s,%s,%s", FIRSTITEM, SECONDITEM, LASTITEM);
+    private static final String[] ITEMS_ARR = new String[]{FIRSTITEM, SECONDITEM, LASTITEM};
 
     private static final String COLOR = "color";
     private static final String BACKGROUNDCOLOR = "background-color";
@@ -60,63 +62,57 @@ public class DrowdownTests extends TestsInit {
     }
 
     @Test
-    public void getTextTest() {
-        assertThat(simpleDropdown.getText(), is(DROPDOWN));
+    public void selfTest() {
+        simpleDropdown.expand();
+
+        simpleDropdown.assertThat()
+                .itemValues(is(simpleDropdown.itemValues()))
+                .itemValues(simpleDropdown.itemValues().toArray(new String[]{}))
+                .hasItems(simpleDropdown.itemValues().toArray(new String[]{}));
+
+        simpleDropdown.collapse();
     }
 
     @Test
-    public void getValueTest() {
-        assertThat(simpleDropdown.getValue(), is(DROPDOWN));
+    public void textTest() {
+        simpleDropdown.assertThat()
+                .core()
+                .text(DROPDOWN);
+        assertThat(simpleDropdown.core().getText(), is(DROPDOWN));
     }
 
     @Test
     public void itemsTest() {
-        assertThat(simpleDropdown.items.getValue(), is(ITEMS_VALUES));
+        simpleDropdown.expand();
+        simpleDropdown.assertThat()
+                .itemValues(is(Arrays.asList(ITEMS_ARR)))
+                .hasItems(FIRSTITEM)
+                .hasItems(SECONDITEM)
+                .hasItems(LASTITEM)
+                .hasItems(FIRSTITEM, LASTITEM);
+        assertThat(simpleDropdown.itemValues(), is(Arrays.asList(ITEMS_ARR)));
     }
 
     @Test
     public void clickTest() {
-        simpleDropdown.click();
-        simpleDropdown.items.is().displayed();
-        assertThat(simpleDropdown.items.isDisplayed(), is(Boolean.TRUE));
-    }
-
-    @Test
-    public void toggleTest() {
-        simpleDropdown.dropdownToggle.click();
-        simpleDropdown.items.is().displayed();
-        assertThat(simpleDropdown.items.isDisplayed(), is(Boolean.TRUE));
-    }
-
-    @Test
-    public void simpleDropdownIsValidationTest() {
+        simpleDropdown.expand();
         simpleDropdown.is()
-                .core()
-                .cssClass("dropdown")
-                .tag(is("div"));
-        simpleDropdown.dropdownMenu.is()
-                .core()
-                .cssClass("dropdown-menu")
-                .tag(is("div"));
-        simpleDropdown.dropdownToggle.is()
-                .core()
-                .hasClass("btn")
-                .hasClass("btn-primary")
-                .hasClass("dropdown-toggle")
-                .attr("data-toggle", "dropdown")
-                .tag(is("button"));
+                .expanded();
+        simpleDropdown.collapse();
+        simpleDropdown.is()
+                .collapsed();
     }
 
     @Test
     public void linkDropdownIsValidationTest() {
-        linkDropdown.dropdownToggle.is()
+        linkDropdown.expander().is()
                 .core()
                 .tag(is("a"));
     }
 
     @Test
     public void primaryDropdownIsValidationTest() {
-        primaryDropdown.dropdownToggle.is()
+        primaryDropdown.expander().is()
                 .core()
                 .hasClass("btn-primary")
                 .css(COLOR, is("rgba(255, 255, 255, 1)")) //#fff Color Hex
@@ -126,7 +122,7 @@ public class DrowdownTests extends TestsInit {
 
     @Test
     public void successDropdownIsValidationTest() {
-        successDropdown.dropdownToggle.is()
+        successDropdown.expander().is()
                 .core()
                 .hasClass("btn-success")
                 .css(COLOR, is("rgba(255, 255, 255, 1)")) //#fff Color Hex
@@ -136,7 +132,7 @@ public class DrowdownTests extends TestsInit {
 
     @Test
     public void infoDropdownIsValidationTest() {
-        infoDropdown.dropdownToggle.is()
+        infoDropdown.expander().is()
                 .core()
                 .hasClass("btn-info")
                 .css(COLOR, is("rgba(255, 255, 255, 1)")) //#fff Color Hex
@@ -146,14 +142,14 @@ public class DrowdownTests extends TestsInit {
 
     @Test
     public void splitDropdownIsValidationTest() {
-        splitDropdown.dropdownToggle.is()
+        splitDropdown.expander().is()
                 .core()
                 .hasClass("dropdown-toggle-split");
     }
 
     @Test
     public void largeDropdownIsValidationTest() {
-        largeDropdown.dropdownToggle.is()
+        largeDropdown.expander().is()
                 .core()
                 .hasClass("btn-lg")
                 .css(PADDING, is("8px 16px"))
@@ -164,7 +160,7 @@ public class DrowdownTests extends TestsInit {
 
     @Test
     public void largeSplitDropdownIsValidationTest() {
-        largeSplitDropdown.dropdownToggle.is()
+        largeSplitDropdown.expander().is()
                 .core()
                 .hasClass("btn-lg")
                 .hasClass("dropdown-toggle-split")
@@ -176,7 +172,7 @@ public class DrowdownTests extends TestsInit {
 
     @Test
     public void smallDropdownIsValidationTest() {
-        smallDropdown.dropdownToggle.is()
+        smallDropdown.expander().is()
                 .core()
                 .hasClass("btn-sm")
                 .css(PADDING, is("4px 8px"))
@@ -187,7 +183,7 @@ public class DrowdownTests extends TestsInit {
 
     @Test
     public void smallSplitDropdownIsValidationTest() {
-        smallSplitDropdown.dropdownToggle.is()
+        smallSplitDropdown.expander().is()
                 .core()
                 .hasClass("btn-sm")
                 .hasClass("dropdown-toggle-split")
@@ -202,7 +198,7 @@ public class DrowdownTests extends TestsInit {
         dropUpDropdown.is()
                 .core()
                 .hasClass("dropup");
-        dropUpDropdown.dropdownMenu.is()
+        dropUpDropdown.menu().is()
                 .core()
                 .css(TOP, is("auto"))
                 .css(BOTTOM, is("100%"));
@@ -213,7 +209,7 @@ public class DrowdownTests extends TestsInit {
         dropUpSplitDropdown.is()
                 .core()
                 .hasClass("dropup");
-        dropUpSplitDropdown.dropdownMenu.is()
+        dropUpSplitDropdown.menu().is()
                 .core()
                 .css(TOP, is("auto"))
                 .css(BOTTOM, is("100%"));
@@ -224,7 +220,7 @@ public class DrowdownTests extends TestsInit {
         dropRightDropdown.is()
                 .core()
                 .hasClass("dropright");
-        dropRightDropdown.dropdownMenu.is()
+        dropRightDropdown.menu().is()
                 .core()
                 .css(RIGHT, is("auto"))
                 .css(LEFT, is("100%"));
@@ -235,7 +231,7 @@ public class DrowdownTests extends TestsInit {
         dropRightSplitDropdown.is()
                 .core()
                 .hasClass("dropright");
-        dropRightSplitDropdown.dropdownMenu.is()
+        dropRightSplitDropdown.menu().is()
                 .core()
                 .css(RIGHT, is("auto"))
                 .css(LEFT, is("100%"));
@@ -246,7 +242,7 @@ public class DrowdownTests extends TestsInit {
         dropLeftDropdown.is()
                 .core()
                 .hasClass("dropleft");
-        dropLeftDropdown.dropdownMenu.is()
+        dropLeftDropdown.menu().is()
                 .core()
                 .css(LEFT, is("auto"))
                 .css(RIGHT, is("100%"));
@@ -254,7 +250,7 @@ public class DrowdownTests extends TestsInit {
 
     @Test
     public void dropLeftSplitDropdownIsValidationTest() {
-        dropLeftSplitDropdown.dropdownMenu.is()
+        dropLeftSplitDropdown.menu().is()
                 .core()
                 .css(LEFT, is("auto"))
                 .css(RIGHT, is("100%"));
@@ -262,14 +258,14 @@ public class DrowdownTests extends TestsInit {
 
     @Test
     public void rightAllignedDropdownIsValidationTest() {
-        rightAllignedDropdown.dropdownMenu.is()
+        rightAllignedDropdown.menu().is()
                 .core()
                 .hasClass("dropdown-menu-right");
     }
 
     @Test
     public void leftAllignedDropdownIsValidationTest() {
-        leftAllignedDropdown.dropdownMenu.is()
+        leftAllignedDropdown.menu().is()
                 .core()
                 .hasClass("dropdown-menu-lg-left")
                 .css(RIGHT, is("auto"))

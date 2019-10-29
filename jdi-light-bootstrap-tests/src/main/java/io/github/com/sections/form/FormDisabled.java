@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Checkbox;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.MediaObject;
 
@@ -16,7 +16,7 @@ public class FormDisabled extends Section {
     public TextField textField;
     @UI("#disabledSelect")
     public Selector selector;
-    @UI("#disabledFieldsetCheck")
+    @UI("//input[@id='disabledFieldsetCheck']/..")
     public Checkbox checkbox;
     @UI("button")
     public Button submit;
