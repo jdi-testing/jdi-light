@@ -74,14 +74,14 @@ public class DropdownOptionsTests extends TestsInit {
     public void dropdownContentTest() {
         offsetDropdown.expand();
         offsetDropdown.assertThat()
-                .itemValues(is(Arrays.asList(OFFSET_DROPDOWN_CONTENTS)))
+                .itemValues(OFFSET_DROPDOWN_CONTENTS)
                 .hasItems(ITEM_ONE)
                 .hasItems(ITEM_TWO)
                 .hasItems(ITEM_THREE);
 
         referenceDropdown.expand();
         referenceDropdown.assertThat()
-                .itemValues(is(Arrays.asList(REFERENCE_DROPDOWN_CONTENTS)))
+                .itemValues(REFERENCE_DROPDOWN_CONTENTS)
                 .hasItems(ITEM_ONE)
                 .hasItems(ITEM_TWO)
                 .hasItems(ITEM_THREE)
@@ -91,11 +91,13 @@ public class DropdownOptionsTests extends TestsInit {
     @Test
     public void optionsCssTest() {
         offsetDropdown.expand();
-        assertThat(offsetDropdown.core().childs().get(1).getAttribute(DATA_OFFSET), is(DATA_OFFSET_VALUE));
+//        assertThat(offsetDropdown.core().childs().get(1).getAttribute(DATA_OFFSET), is(DATA_OFFSET_VALUE));
+        offsetDropdown.childs().get(1).assertThat().core().attr(DATA_OFFSET, is(DATA_OFFSET_VALUE));
         offsetDropdown.collapse();
 
         referenceDropdown.expand();
-        assertThat(referenceDropdown.core().childs().get(2).getAttribute(DATA_REFERENCE), is(DATA_REFERENCE_VALUE));
+//        assertThat(referenceDropdown.core().childs().get(2).getAttribute(DATA_REFERENCE), is(DATA_REFERENCE_VALUE));
+        referenceDropdown.childs().get(2).assertThat().core().attr(DATA_REFERENCE, is(DATA_REFERENCE_VALUE));
         referenceDropdown.collapse();
     }
 
