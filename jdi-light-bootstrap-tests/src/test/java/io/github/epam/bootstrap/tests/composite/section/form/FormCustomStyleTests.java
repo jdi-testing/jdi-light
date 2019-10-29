@@ -73,9 +73,8 @@ public class FormCustomStyleTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .attr("type", "checkbox")
-                .hasClass("form-check-input")
-                .tag(is("input"));
+                .hasClass("form-check")
+                .tag(is("div"));
         formCustomStyles.accept.label()
                 .is()
                 .displayed()

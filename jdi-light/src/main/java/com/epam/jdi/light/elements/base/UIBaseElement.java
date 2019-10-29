@@ -5,9 +5,10 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.base.IListBase;
 
 public abstract class UIBaseElement<A extends UIAssert>
-        implements ICoreElement, HasAssert<A> {
+        implements ICoreElement, HasAssert<A>, IListBase {
     protected UIElement uiElement;
     public JDIBase base() { return core().base(); }
     public UIElement core() {

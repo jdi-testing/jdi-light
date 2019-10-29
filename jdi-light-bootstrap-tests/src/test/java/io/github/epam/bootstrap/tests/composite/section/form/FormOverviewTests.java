@@ -27,17 +27,17 @@ public class FormOverviewTests extends TestsInit {
     public static final String ATTR_VALUE_SUBMIT = "submit";
     public static final String ATTR_VALUE_EXAMPLE_CHECK_1 = "exampleCheck1";
     public static final String ATTR_VALUE_EXAMPLE_INPUT_PASSWORD_1 = "exampleInputPassword1";
-    public static final String ATTR_VALUE_CHECKBOX = "checkbox";
     public static final String ATTR_VALUE_EMAIL = "email";
     public static final String ATTR_VALUE_EXAMPLE_INPUT_EMAIL_1 = "exampleInputEmail1";
     public static final String TAG_NAMR_SMALL = "small";
     public static final String TAG_NAME_LABEL = "label";
     public static final String TAG_NAME_INPUT = "input";
+    public static final String TAG_NAME_DIV="div";
     public static final String TAG_NAME_BUTTON = "button";
     public static final String CLASS_NAME_FORM_CHECK_LABEL = "form-check-label";
     public static final String CLASS_NAME_BTN_BTN_PRIMARY = "btn btn-primary";
     public static final String CLASS_NAME_FORM_TEXT_TEXT_MUTED = "form-text text-muted";
-    public static final String CLASS_NAME_FORM_CHECK_INPUT = "form-check-input";
+    public static final String CLASS_NAME_FORM_CHECK_INPUT = "form-group form-check";
     public static final String CLASS_NAME_FORM_CONTROL = "form-control";
 
     private static String emailPlaceholder = "Enter email";
@@ -126,9 +126,7 @@ public class FormOverviewTests extends TestsInit {
                 .enabled()
                 .core()
                 .cssClass(CLASS_NAME_FORM_CHECK_INPUT)
-                .attr(ATTR_NAME_TYPE, ATTR_VALUE_CHECKBOX)
-                .attr(ATTR_NAME_ID, ATTR_VALUE_EXAMPLE_CHECK_1)
-                .tag(TAG_NAME_INPUT);
+                .tag(TAG_NAME_DIV);
 
         formOverview.acceptLabel.is()
                 .displayed()

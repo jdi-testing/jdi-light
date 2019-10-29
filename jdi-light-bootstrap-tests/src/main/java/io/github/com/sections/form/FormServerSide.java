@@ -3,7 +3,7 @@ package io.github.com.sections.form;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Checkbox;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import io.github.com.entities.FormContacts;
@@ -38,7 +38,7 @@ public class FormServerSide extends Form<FormContacts> {
     @UI("//input[@id='invalidCheck3']/../div")
     public Text feedbackAccept;
 
-    @UI("#invalidCheck3")
+    @UI("//input[@id='invalidCheck3']/..")
     public Checkbox accept;
 
     @UI("button")
