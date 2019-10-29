@@ -13,8 +13,10 @@ public class NonStaticTestsInit {
     @BeforeSuite
     public void setUp() {
 
-        PageFactory.initElements(NonStaticSite.class);
-        new NonStaticSite().getHomePage().open();
+        NonStaticSite nonStaticSite = new NonStaticSite();
+
+        PageFactory.initElements(nonStaticSite);
+        nonStaticSite.getHomePage().open();
         WebSettings.logger.toLog("Run tests");
     }
 
