@@ -18,12 +18,6 @@ public class NonStaticTestsInit {
         WebSettings.logger.toLog("Run tests");
     }
 
-    @Test
-    public void test() {
-
-
-    }
-
     @AfterSuite
     public void cleanUp() {
 
