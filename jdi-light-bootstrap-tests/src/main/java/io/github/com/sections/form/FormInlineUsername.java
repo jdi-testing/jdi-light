@@ -12,7 +12,7 @@ public class FormInlineUsername extends Form<FormContacts> {
     @UI("#inlineFormInputName2")
     public TextField name;
     @UI("#inlineFormInputGroupUsername2")
-    public TextField atSignText;
+    public TextField userName;
     @UI("#inlineFormCheck")
     public Checkbox rememberMe;
     @UI(".btn")
