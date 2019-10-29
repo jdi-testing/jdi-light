@@ -30,13 +30,10 @@ public class CheckboxesDefaultTests extends TestsInit {
                 .displayed()
                 .enabled()
                 .core()
-                .attr("type", "checkbox")
-                .hasClass("form-check-input")
-                .tag(is("input"));
+                .hasClass("form-check")
+                .tag(is("div"));
         checkboxesDefault.checkboxOne.label()
                 .is()
-                .displayed()
-                .enabled()
                 .core()
                 .hasClass("form-check-label")
                 .text(is("Default checkbox"))
@@ -46,11 +43,10 @@ public class CheckboxesDefaultTests extends TestsInit {
                 .displayed()
                 .disabled()
                 .core()
-                .hasClass("form-check-input")
-                .tag(is("input"));
+                .hasClass("form-check")
+                .tag(is("div"));
         checkboxesDefault.checkboxTwo.label()
                 .is()
-                .displayed()
                 .core()
                 .hasClass("form-check-label")
                 .text(is("Disabled checkbox"))

@@ -25,14 +25,6 @@ public class SwitchesTests extends TestsInit {
 
     @Test
     public void isValidationTests() {
-        switches.checkbox
-                .is()
-                .hidden()
-                .enabled()
-                .core()
-                .attr("type", "checkbox")
-                .hasClass("custom-control-input")
-                .tag(is("input"));
         switches.checkbox.label()
                 .is()
                 .displayed()
@@ -41,7 +33,7 @@ public class SwitchesTests extends TestsInit {
                 .hasClass("custom-control-label")
                 .text(is("Toggle this switch element"))
                 .tag(is("label"));
-        switches.checkboxContainer
+        switches.checkbox
                 .is()
                 .displayed()
                 .enabled()
@@ -53,14 +45,6 @@ public class SwitchesTests extends TestsInit {
 
     @Test
     public void disabledIsValidationTests() {
-        switches.checkboxDisabled
-                .is()
-                .hidden()
-                .disabled()
-                .core()
-                .attr("type", "checkbox")
-                .hasClass("custom-control-input")
-                .tag(is("input"));
         switches.checkboxDisabled.label()
                 .is()
                 .displayed()
@@ -69,10 +53,10 @@ public class SwitchesTests extends TestsInit {
                 .hasClass("custom-control-label")
                 .text(is("Disabled switch element"))
                 .tag(is("label"));
-        switches.checkboxDisabledContainer
+        switches.checkboxDisabled
                 .is()
                 .displayed()
-                .enabled()
+                .disabled()
                 .core()
                 .hasClass("custom-control")
                 .hasClass("custom-switch")
@@ -81,9 +65,9 @@ public class SwitchesTests extends TestsInit {
 
     @Test
     public void clickableTests() {
-        switches.checkboxContainer.check();
+        switches.checkbox.check();
         switches.checkbox.is().selected();
-        switches.checkboxContainer.check();
+        switches.checkbox.check();
         switches.checkbox.is().deselected();
         switches.checkbox.label().click();
         switches.checkbox.is().selected();
@@ -93,7 +77,7 @@ public class SwitchesTests extends TestsInit {
 
     @Test
     public void disabledClickableTests() {
-        switches.checkboxDisabledContainer.check();
+        switches.checkboxDisabled.check();
         switches.checkboxDisabled.is().deselected();
         switches.checkboxDisabled.label().click();
         switches.checkboxDisabled.is().deselected();
