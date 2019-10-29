@@ -70,6 +70,8 @@ import io.github.com.sections.form.FormDisabled;
 import io.github.com.sections.form.FormGrid;
 import io.github.com.sections.form.FormHelpText;
 import io.github.com.sections.form.FormHorizontal;
+import io.github.com.sections.form.FormInlinePreference;
+import io.github.com.sections.form.FormInlineUsername;
 import io.github.com.sections.form.FormOverview;
 import io.github.com.sections.form.FormRow;
 import io.github.com.sections.form.FormServerSide;
@@ -204,6 +206,8 @@ public class BootstrapPage extends WebPage {
     public static Dropdown dropdownMenuItems;
     @UI("#dropdown-menu-text-item")
     public static Dropdown dropdownMenuTextItem;
+    @UI("#dropdown-menu-disabled-item")
+    public static Dropdown dropdownMenuDisabledItem;
     @UI("#offsetDropdown")
     public static Dropdown offsetDropdown;
     @UI("#referenceDropdown")
@@ -616,6 +620,10 @@ public class BootstrapPage extends WebPage {
     public static FormOverview formOverview;
     @UI("#form-horizontal")
     public static FormHorizontal formHorizontal;
+    @UI("#form-inline-username")
+    public static FormInlineUsername formInlineUsername;
+    @UI("#form-inline-preference")
+    public static FormInlinePreference formInlinePreference;
 
 
     @UI("//h4[.='Navbar - Text']/../..")
