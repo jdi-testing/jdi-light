@@ -69,7 +69,7 @@ public class DropdownMenuItemsTest extends TestsInit {
         dropdownMenuItems.collapse();
     }
 
-    @Test(expectedExceptions = RuntimeException.class,
+    @Test(expectedExceptions = AssertionError.class,
             expectedExceptionsMessageRegExp = ".*Expected: an array containing \"href\".*")
     public void textItemTest() {
         dropdownMenuTextItem.expand();
