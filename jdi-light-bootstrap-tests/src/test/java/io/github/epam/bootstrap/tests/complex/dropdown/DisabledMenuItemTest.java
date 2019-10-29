@@ -26,7 +26,7 @@ public class DisabledMenuItemTest extends TestsInit {
                 .get(DISABLED_ITEM_TEXT)
                 .assertThat()
                 .tag("a")
-                .attr("href",DISABLED_ITEM_HREF)
+                .attr("href", DISABLED_ITEM_HREF)
                 .disabled();
     }
 
