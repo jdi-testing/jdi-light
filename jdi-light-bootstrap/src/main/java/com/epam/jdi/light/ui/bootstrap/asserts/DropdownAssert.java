@@ -9,6 +9,7 @@ import org.hamcrest.Matchers;
 import java.util.Arrays;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 
 public class DropdownAssert<A extends DropdownAssert, E extends Dropdown> extends UIAssert<A, E> {
@@ -40,6 +41,12 @@ public class DropdownAssert<A extends DropdownAssert, E extends Dropdown> extend
     @JDIAction("Assert that '{name}' items values are {0}")
     public A hasItems(String... values) {
         itemValues(Matchers.hasItems(values));
+        return (A) this;
+    }
+
+    @JDIAction("Assert that '{name}' item is active")
+    public A active(int itemIndex) {
+        jdiAssert(element.list().get(itemIndex).core().getAttribute("class"), is("dropdown-item active"));
         return (A) this;
     }
 
