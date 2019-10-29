@@ -1,6 +1,5 @@
 package org.mytests.tests;
 
-import com.epam.jdi.eyes.EyesConfig;
 import org.mytests.uiobjects.example.site.SiteJdi;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -20,21 +19,18 @@ public class TestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         initSite(SiteJdi.class);
-        initVisualTest(new EyesConfig().set(c -> c.apiKey = "J9WC7iD104muzDaL6osEneluBJhfwRBA97e99YofWV5Rptw110"));
+        initVisualTest("J9WC7iD104muzDaL6osEneluBJhfwRBA97e99YofWV5Rptw110");
         homePage.open();
+        homePage.checkOpened();
         logger.info("Run Tests");
     }
     @BeforeMethod
     public void before(Method method) {
-        startVisualTest(format("%s.%s", method.getDeclaringClass().getSimpleName(), method.getName()));
-    }
-
-    @AfterMethod
-    public void after(Method method) {
-        endVisualTest();
+        newVisualTest(format("%s.%s", method.getDeclaringClass().getSimpleName(), method.getName()));
     }
     @AfterSuite(alwaysRun = true)
     public void teardown() {
+        closeAllEyes();
         killAllSeleniumDrivers();
     }
 }

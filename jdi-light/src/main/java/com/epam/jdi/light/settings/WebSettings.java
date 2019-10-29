@@ -175,6 +175,10 @@ public class WebSettings {
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
         loadCapabilities("ie.capabilities.path",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
+        loadCapabilities("edge.capabilities.path",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(),value.toString())));
+        loadCapabilities("opera.capabilities.path",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(),value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);

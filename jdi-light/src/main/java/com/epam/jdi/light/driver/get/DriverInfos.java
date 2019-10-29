@@ -2,10 +2,14 @@ package com.epam.jdi.light.driver.get;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import static com.epam.jdi.light.driver.get.DriverData.*;
@@ -44,6 +48,26 @@ public class DriverInfos {
             d.properties = "webdriver.ie.driver";
             d.path = ieDriverPath();
             d.getDriver = c -> new InternetExplorerDriver((InternetExplorerOptions) c);
+        }
+    );
+    public static DriverInfo OPERA_INFO = new DriverInfo()
+        .set(d -> {
+            d.type = OPERA;
+            d.initCapabilities = new OperaOptions();
+            d.capabilities = c -> getCapabilities(c, cap -> OPERA_OPTIONS.execute((OperaOptions) cap));
+            d.properties = "webdriver.opera.driver";
+            d.path = operaDriverPath();
+            d.getDriver = c -> new OperaDriver((OperaOptions) c);
+        }
+    );
+    public static DriverInfo EDGE_INFO = new DriverInfo()
+        .set(d -> {
+            d.type = EDGE;
+            d.initCapabilities = new EdgeOptions();
+            d.capabilities = c -> getCapabilities(c, cap -> EDGE_OPTIONS.execute((EdgeOptions) cap));
+            d.properties = "webdriver.edge.driver";
+            d.path = operaDriverPath();
+            d.getDriver = c -> new EdgeDriver((EdgeOptions) c);
         }
     );
 }

@@ -78,9 +78,9 @@ public class ActionProcessor {
     }
     public static Object defaultAction(ProceedingJoinPoint jp) throws Throwable {
         ICoreElement obj = getJdi(jp);
-        JFunc1<Object, Object> overrideAction = getOverride(jp, obj);
+        JFunc1<Object, Object> overrideAction = getOverride(jp);
         return overrideAction != null
-                ? overrideAction.execute(obj) : jp.proceed();
+                ? overrideAction.execute(jp.getThis()) : jp.proceed();
     }
     public static ICoreElement getJdi(ProceedingJoinPoint jp) {
         try {
@@ -94,13 +94,13 @@ public class ActionProcessor {
             String exception = "";
             JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
             ICoreElement obj = getJdi(jp);
-            JFunc1<Object, Object> overrideAction = getOverride(jp, obj);
+            JFunc1<Object, Object> overrideAction = getOverride(jp);
             int timeout = getTimeout(ja, obj);
             long start = currentTimeMillis();
             do {
                 try {
                     Object result = overrideAction != null
-                        ? overrideAction.execute(obj) : jp.proceed();
+                        ? overrideAction.execute(jp.getThis()) : jp.proceed();
                     if (!condition(jp)) continue;
                     return result;
                 } catch (Throwable ex) {
@@ -114,15 +114,13 @@ public class ActionProcessor {
         } finally { }
     }
 
-    private static JFunc1<Object, Object> getOverride(ProceedingJoinPoint jp, ICoreElement obj) {
+    private static JFunc1<Object, Object> getOverride(ProceedingJoinPoint jp) {
         if (isOverride.get()) {
             return null;
         }
-        JFunc1<Object, Object> override = null;
-        if (obj != null) {
-            override = GetOverrideAction(jp);
+        JFunc1<Object, Object> override = GetOverrideAction(jp);
+        if (override != null)
             isOverride.set(true);
-        }
         return override;
     }
 
