@@ -9,7 +9,6 @@ import org.hamcrest.Matchers;
 import java.util.Arrays;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 
 public class DropdownAssert<A extends DropdownAssert, E extends Dropdown> extends UIAssert<A, E> {
