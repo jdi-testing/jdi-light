@@ -1,12 +1,9 @@
 package io.github.epam.bootstrap.tests.composite.section.navbar;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.JList;
-import io.github.com.sections.navbar.NavbarPlacement;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
@@ -27,17 +24,6 @@ public class NavbarPlacementTests extends TestsInit {
     private static final String pricingLinkText = "Pricing";
     private static final String disabledLinkText = "Disabled";
 
-
-    @DataProvider
-    public Object[][] navLinkTextData() {
-        return new Object[][]{
-                {homeLinkText},
-                {featuresLinkText},
-                {pricingLinkText},
-                {disabledLinkText}
-        };
-    }
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -56,17 +42,10 @@ public class NavbarPlacementTests extends TestsInit {
         assertEquals(getUrl(), bootstrapNavbarPlacementPageUrl);
     }
 
-    @Test(dataProvider = "navLinkTextData")
-    public void navLinkTextTest(String linkText) {
-        navbarPlacementStickyTop.navbarLinks.show();
-        navbarPlacementStickyTop.navbarLinks.is()
-                .text(linkText);
-    }
-
     @Test
-    public void navTextTest() {
-        String s = navbarPlacementStickyTop.navbarLinks.get(3).getText();
-        assertEquals(s, "Pricing");
+    public void navLinkTextTest() {
+        navbarPlacementStickyTop.navbarLinks.is()
+                .values(homeLinkText, featuresLinkText, pricingLinkText, disabledLinkText);
     }
 
     @Test
