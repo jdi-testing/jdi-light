@@ -74,7 +74,7 @@ public class CustomWebPage extends WebPage {
     @UI(".buttonPublicUI")
     public Button buttonPublicUI;
     @Css(".buttonPackageCss")
-    UIElement buttonPackageCss;
+    private UIElement buttonPackageCss;
     @XPath("//*[@class='buttonPublicXPath']")
     public UIElement buttonPublicXPath;
 

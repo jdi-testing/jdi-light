@@ -22,11 +22,11 @@ public class ContactsPage extends WebPage {
 
 	DropdownSelect gender;
 	IsCombobox religion;
-	MultiDropdown weather;
+	private MultiDropdown weather;
 
 	public Checkbox passport;
 	public Checkbox acceptConditions;
-	TextArea description;
+	private TextArea description;
 
 	@UI("['Submit']") public Button submit;
 }

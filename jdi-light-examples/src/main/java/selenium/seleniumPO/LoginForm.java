@@ -6,7 +6,7 @@ import selenium.entities.User;
 
 public class LoginForm {
     @FindBy(css="form #name")      WebElement userName;
-    @FindBy(css="form #password")  WebElement password;
+    @FindBy(css="form #password")private WebElement password;
 
     @FindBy(css="form [type=submit]") WebElement enter;
 

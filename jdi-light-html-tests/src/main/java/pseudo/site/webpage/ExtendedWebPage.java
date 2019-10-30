@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ExtendedWebPage extends ExtendWebPage {
     @FindBy(id = "webElementPackage")
-    WebElement webElementPackage;
+    private WebElement webElementPackage;
     @FindBy(id = "webElementPublic")
     public WebElement webElementPublic;
     @FindBy(id = "webElementPrivate")
@@ -78,7 +78,7 @@ public class ExtendedWebPage extends ExtendWebPage {
     public UIElement buttonPublicXPath;
 
     @FindBy(id = "listUIElementPackage")
-    List<UIElement> listUIElementPackage;
+    private List<UIElement> listUIElementPackage;
     @FindBy(id = "listUIElementPublic")
     public List<UIElement> listUIElementPublic;
     @FindBy(id = "listUIElementPrivate")

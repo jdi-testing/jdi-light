@@ -57,7 +57,7 @@ public class DataTableAssert<L extends Section, D>
         public int count;
         public String name;
         public String type;
-        DataTableAssert<L, D> dtAssert;
+        private DataTableAssert<L, D> dtAssert;
         boolean exact;
         private Compare(int count, DataTableAssert<L, D> dtAssert, boolean exact) {
             this.count = count;

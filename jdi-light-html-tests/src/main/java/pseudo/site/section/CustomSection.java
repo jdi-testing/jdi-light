@@ -42,7 +42,7 @@ public class CustomSection extends Section {
     @UI(".listWebElementPublicUI")
     public WebList listWebElementPublicUI;
     @Css(".listWebElementPackageCss")
-    WebList listWebElementPackageCss;
+    private WebList listWebElementPackageCss;
     @XPath("//*[@class='listWebElementPublicXPath']")
     public WebList listWebElementPublicXPath;
 
@@ -92,7 +92,7 @@ public class CustomSection extends Section {
     public List<UIElement> listUIElementPublicXPath;
 
     @FindBy(id = "listButtonPackage")
-    List<Button> listButtonPackage;
+    private List<Button> listButtonPackage;
     @FindBy(id = "listButtonPublic")
     public List<Button> listButtonPublic;
     @FindBy(id = "listButtonPrivate")

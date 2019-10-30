@@ -16,7 +16,7 @@ public class PageInitTests {
     private static String expecterdUrl(String url) {
         return JDI_DOMAIN + url;
     }
-    boolean first = true;
+    private boolean first = true;
     @BeforeMethod
     public void before() {
         if (first) {

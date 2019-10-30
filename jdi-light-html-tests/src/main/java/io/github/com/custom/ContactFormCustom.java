@@ -12,7 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.entities.Contacts;
 
 public class ContactFormCustom extends Form<Contacts> {
-    @Mandatory TextField name;
+    private @Mandatory TextField name;
     public TextField lastName;
     public TextField position;
     public TextField passportNumber;

@@ -106,7 +106,7 @@ public class TableTests extends StaticTestsInit {
     }
 
     private static long timeStart;
-    static void start() {
+    private static void start() {
         timeStart = currentTimeMillis();
     }
     static void logTime(String description) {

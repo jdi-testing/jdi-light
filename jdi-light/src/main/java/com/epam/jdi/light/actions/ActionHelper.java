@@ -59,7 +59,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class ActionHelper {
 
-    static String getTemplate(LogLevels level) {
+    private static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
     }
     public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = jp -> {
@@ -215,7 +215,7 @@ public class ActionHelper {
         return format("%s%s", method, stringArgs);
     }
 
-    static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
+    private static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
         return toMap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint)));
     }
 
@@ -225,7 +225,7 @@ public class ActionHelper {
         IGNORE_NOT_UNIQUE = false;
         return map;
     }
-    static Object[] getArgs(JoinPoint jp) {
+    private static Object[] getArgs(JoinPoint jp) {
         Object[] args = jp.getArgs();
         if (args.length == 1 && args[0] == null)
             return new Object[] {};
@@ -248,11 +248,11 @@ public class ActionHelper {
         }
         return new MapArray<>();
     }
-    static MapArray<String, Object> classFields(Object obj) {
+    private static MapArray<String, Object> classFields(Object obj) {
         return obj != null ? getAllFields(obj) : new MapArray<>();
     }
 
-    static String getElementName(JoinPoint jp) {
+    private static String getElementName(JoinPoint jp) {
         try {
             Object obj = jp.getThis();
             if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
@@ -263,7 +263,7 @@ public class ActionHelper {
             throw exception("Can't get element name");
         }
     }
-    static String getActionNameFromTemplate(MethodSignature method, String value,
+    private static String getActionNameFromTemplate(MethodSignature method, String value,
                                             MapArray<String, Object>... args) {
         String result;
         try {

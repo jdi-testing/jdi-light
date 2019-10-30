@@ -56,7 +56,7 @@ public class CustomForm extends Form<User> {
     @Css("#cssButton-id") private Button cssButton;
     @XPath("//*[@id='xpathPublicButton-id']") public Button xpathPublicButton;
 
-    @FindBy(css = ".fbButtonList-class") List<Button> fbButtonList;
+    @FindBy(css = ".fbButtonList-class")private List<Button> fbButtonList;
     @FindBy(css = ".fbPublicButtonList-class") public List<Button> fbPublicButtonList;
     @FindBy(css = ".fbPrivateButtonList-class") private List<Button> fbPrivateButtonList;
     @UI(".uiButtonList-class") List<Button> uiButtonList;
