@@ -22,7 +22,7 @@ public class ExtendedSection extends ExtendSection {
     @FindBy(id = "webElementPrivate")
     private WebElement webElementPrivate;
     @UI(".webElementPackageUI")
-    WebElement webElementPackageUI;
+    private WebElement webElementPackageUI;
     @UI(".webElementPublicUI")
     public WebElement webElementPublicUI;
     @Css(".webElementPackageCss")
@@ -41,7 +41,7 @@ public class ExtendedSection extends ExtendSection {
     @UI(".listWebElementPublicUI")
     public WebList listWebElementPublicUI;
     @Css(".listWebElementPackageCss")
-    WebList listWebElementPackageCss;
+    private WebList listWebElementPackageCss;
     @XPath("//*[@class='listWebElementPublicXPath']")
     public WebList listWebElementPublicXPath;
 
@@ -146,7 +146,7 @@ public class ExtendedSection extends ExtendSection {
     @UI(".uilistSomedataPublicData")
     public DataList<CustomSection, SomeData> uilistSomedataPublicData;
     @Css(".uilistSomedataPackageCss")
-    DataList<CustomSection, SomeData> uilistSomedataPackageCss;
+    private DataList<CustomSection, SomeData> uilistSomedataPackageCss;
     @XPath("//*[@class='uilistSomedataPublicXPath']")
     public DataList<CustomSection, SomeData> uilistSomedataPublicXPath;
 

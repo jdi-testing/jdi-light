@@ -22,7 +22,7 @@ public class CustomFormSmart extends Form<User> {
     public UIElement fbPublicUIElement;
     private UIElement fbPrivateUIElement;
 
-    List<UIElement> fbUIElementList;
+    private List<UIElement> fbUIElementList;
     public List<UIElement> fbPublicUIElementList;
     private List<UIElement> fbPrivateUIElementList;
 
@@ -34,7 +34,7 @@ public class CustomFormSmart extends Form<User> {
     public List<Button> fbPublicButtonList;
     private List<Button> fbPrivateButtonList;
 
-    WebList fbWebList;
+    private WebList fbWebList;
     public WebList fbPublicWebList;
     private WebList fbPrivateWebList;
 

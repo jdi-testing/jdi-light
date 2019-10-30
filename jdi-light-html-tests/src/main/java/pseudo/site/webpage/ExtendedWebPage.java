@@ -33,7 +33,7 @@ public class ExtendedWebPage extends ExtendWebPage {
     public WebElement webElementPublicXPath;
 
     @FindBy(id = "listWebElementPackage")
-    List<WebElement> listWebElementPackage;
+    private List<WebElement> listWebElementPackage;
     @FindBy(id = "listWebElementPublic")
     public List<WebElement> listWebElementPublic;
     @FindBy(id = "listWebElementPrivate")
@@ -153,7 +153,7 @@ public class ExtendedWebPage extends ExtendWebPage {
     public DataList<CustomSection, SomeData> uilistSomedataPublicXPath;
 
     @JDropdown(root = "div[ui=droplistPackage", value = "input", list = "li", expand = ".expand")
-    DropdownExpand droplistPackage;
+    private DropdownExpand droplistPackage;
     @JDropdown(root = "div[ui=droplistPublic", value = "input", list = "li", expand = ".expand")
     public DropdownExpand droplistPublic;
     @JDropdown(root = "div[ui=droplistPrivate", value = "input", list = "li", expand = ".expand")

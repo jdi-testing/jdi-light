@@ -72,7 +72,7 @@ public class CustomSection extends Section {
     @UI(".buttonPublicUI")
     public Button buttonPublicUI;
     @Css(".buttonPackageCss")
-    UIElement buttonPackageCss;
+    private UIElement buttonPackageCss;
     @XPath("//*[@class='buttonPublicXPath']")
     public UIElement buttonPublicXPath;
 
@@ -132,7 +132,7 @@ public class CustomSection extends Section {
     @UI(".uilistQuestionPublicData")
     public DataList<CustomSection, ?> uilistQuestionPublicData;
     @Css(".uilistQuestionPackageCss")
-    DataList<CustomSection, ?> uilistQuestionPackageCss;
+    private DataList<CustomSection, ?> uilistQuestionPackageCss;
     @XPath("//*[@class='uilistQuestionPublicXPath']")
     public DataList<CustomSection, ?> uilistQuestionPublicXPath;
 

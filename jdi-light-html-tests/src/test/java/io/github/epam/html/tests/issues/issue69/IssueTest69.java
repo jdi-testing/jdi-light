@@ -18,7 +18,7 @@ import static io.github.epam.html.tests.issues.issue69.JDISite69.issuePage69;
 import static org.testng.Assert.assertEquals;
 
 public class IssueTest69 {
-    static boolean first = true;
+    private static boolean first = true;
     @BeforeMethod
     public void before() {
         if (first) {

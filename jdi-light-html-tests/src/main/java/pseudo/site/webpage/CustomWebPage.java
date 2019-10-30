@@ -64,13 +64,13 @@ public class CustomWebPage extends WebPage {
     public UIElement uielementPublicXPath;
 
     @FindBy(id = "buttonPackage")
-    Button buttonPackage;
+    private Button buttonPackage;
     @FindBy(id = "buttonPublic")
     public Button buttonPublic;
     @FindBy(id = "buttonPrivate")
     private Button buttonPrivate;
     @UI(".buttonPackageUI")
-    Button buttonPackageUI;
+    private Button buttonPackageUI;
     @UI(".buttonPublicUI")
     public Button buttonPublicUI;
     @Css(".buttonPackageCss")
@@ -115,7 +115,7 @@ public class CustomWebPage extends WebPage {
     @FindBy(id = "webListPrivate")
     private WebList webListPrivate;
     @UI(".webListPackageUI")
-    WebList webListPackageUI;
+    private WebList webListPackageUI;
     @UI(".webListPublicUI")
     public WebList webListPublicUI;
     @Css(".webListPackageCss")
@@ -154,7 +154,7 @@ public class CustomWebPage extends WebPage {
     public DataList<CustomSection, SomeData> uilistSomedataPublicXPath;
 
     @JDropdown(root = "div[ui=droplistPackage", value = "input", list = "li", expand = ".expand")
-    DropdownExpand droplistPackage;
+    private DropdownExpand droplistPackage;
     @JDropdown(root = "div[ui=droplistPublic", value = "input", list = "li", expand = ".expand")
     public DropdownExpand droplistPublic;
     @JDropdown(root = "div[ui=droplistPrivate", value = "input", list = "li", expand = ".expand")

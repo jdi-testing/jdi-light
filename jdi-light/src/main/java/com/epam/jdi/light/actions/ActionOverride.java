@@ -10,7 +10,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 public class ActionOverride {
     private ActionOverride() { }
-    static MapArray<JFunc1<ProceedingJoinPoint, Boolean>, JFunc1<JDIBase, Object>> OVERRIDE_ACTIONS_LIST =
+    private static MapArray<JFunc1<ProceedingJoinPoint, Boolean>, JFunc1<JDIBase, Object>> OVERRIDE_ACTIONS_LIST =
         new MapArray<>();
     public static void OverrideFunction(JFunc1<ProceedingJoinPoint, Boolean> condition, JFunc1<JDIBase, Object> func) {
         OVERRIDE_ACTIONS_LIST.add(condition, func);

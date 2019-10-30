@@ -35,7 +35,7 @@ public class CustomForm extends Form<User> {
     @FindBy(css = "#fbUIElement-id") UIElement fbUIElement;
     @FindBy(css = "#fbPublicUIElement-id") public UIElement fbPublicUIElement;
     @FindBy(css = "#fbPrivateUIElement-id") private UIElement fbPrivateUIElement;
-    @UI("#uiUIElement-id") UIElement uiUIElement;
+    @UI("#uiUIElement-id") private UIElement uiUIElement;
     @UI("#uiPublicUIElement-id") public UIElement uiPublicUIElement;
     @Css("#cssUIElement-id") UIElement cssUIElement;
     @XPath("//*[@id='xpathPublicUIElement-id']") public WebElement xpathPublicUIElement;
@@ -51,9 +51,9 @@ public class CustomForm extends Form<User> {
     @FindBy(css = "#fbButton-id") Button fbButton;
     @FindBy(css = "#fbPublicButton-id") public Button fbPublicButton;
     @FindBy(css = "#fbPrivateButton-id") private Button fbPrivateButton;
-    @UI("#uiButton-id") Button uiButton;
+    @UI("#uiButton-id") private Button uiButton;
     @UI("#uiPublicButton-id") public Button uiPublicButton;
-    @Css("#cssButton-id") Button cssButton;
+    @Css("#cssButton-id") private Button cssButton;
     @XPath("//*[@id='xpathPublicButton-id']") public Button xpathPublicButton;
 
     @FindBy(css = ".fbButtonList-class") List<Button> fbButtonList;
