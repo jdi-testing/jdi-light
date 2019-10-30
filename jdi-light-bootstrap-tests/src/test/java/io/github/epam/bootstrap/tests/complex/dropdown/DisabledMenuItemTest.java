@@ -28,6 +28,7 @@ public class DisabledMenuItemTest extends TestsInit {
                 .tag("a")
                 .attr("href", DISABLED_ITEM_HREF)
                 .disabled();
+        dropdownMenuDisabledItem.collapse();
     }
 
 }
