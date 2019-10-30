@@ -529,7 +529,10 @@ function includeSideBar() {
 					          <li ui="label" index="3"><a href="bootstrap_form.html">\
 						            <span>Bootstrap form</span>\
 					          </a></li>\
-					          <li ui="label" index="4"><a href="react-ant.html">\
+                              <li ui="label" index="4"><a href="bootstrap_forms.html">\
+                                   <span>Bootstrap forms</span>\
+                              </a></li>\
+					          <li ui="label" index="5"><a href="react-ant.html">\
 		                    <span>React Ant</span>\
                     </a></li>\
                 </ul>\

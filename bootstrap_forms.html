@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Bootstrap Forms</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-4.3.min.css"/>
+    <link rel="stylesheet" href="css/uui-all.css"/>
+    <link rel="stylesheet" href="css/custom-styles.css"/>
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/lib/components/datepicker3.css"/>
+    <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css"/>
+    <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
+    <link rel="stylesheet" href="css/fix-bootstrap4.3.css"/>
+    <script src="js/lib/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="js/lib/popper.min.js"></script>
+    <script src="jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="bootstrap/js/bootstrap-4.3.min.js"></script>
+    <script src="js/lib/bs-custom-file-input.min.js"></script>
+    <script src="js/uui-core.min.js" type="text/javascript"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function () {
+           bsCustomFileInput.init()
+        })
+    </script>
+
+</head>
+<body>
+<header>
+    <div class="replace site-header">replace</div>
+</header>
+<div class="wrapper">
+    <div class="replace left-side-bar">replace</div>
+    <div class="uui-main-container page-inside">
+        <main class="main-form">
+            <div class="pattern-top"></div>
+            <div class="main-content">
+                <div class="main-content-hg">
+                    <div class="support-title">
+                        <i class="fa fa-comments-o"></i>Bootstrap Forms
+                    </div>
+                    <div class="doc-space line">
+                        <h4>Contact support</h4>
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Please enter your email address at which
+                                    our manager can contact you</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                    else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Your message</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-danger">Cancel</button>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="replace right-side-bar">replace</div>
+</div>
+<footer>
+    <div class="replace footer">replace</div>
+</footer>
+
+<script>
+		includeSideBar();
+		activateTopElement(6);
+</script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+</body>
+</html>
