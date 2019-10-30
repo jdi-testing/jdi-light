@@ -6,7 +6,7 @@ import com.epam.jdi.light.settings.WebSettings;
 import io.github.com.NonStaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import selenium.site.NonStaticSiteJdi;
 
 public class NonStaticTestsInit {
 
@@ -14,10 +14,20 @@ public class NonStaticTestsInit {
     public void setUp() {
 
         NonStaticSite nonStaticSite = new NonStaticSite();
+        NonStaticSiteJdi nonStaticSiteJdi = new NonStaticSiteJdi();
+        PageFactory.initElements(nonStaticSite, nonStaticSiteJdi);
 
-        PageFactory.initElements(nonStaticSite);
+        EpamGithubNonStaticSite epamGithubNonStaticSite = new EpamGithubNonStaticSite();
+        PageFactory.initElements(epamGithubNonStaticSite);
+
         nonStaticSite.getHomePage().open();
-        WebSettings.logger.toLog("Run tests");
+        WebSettings.logger.toLog("Non Static site page opened");
+
+        nonStaticSiteJdi.getHomePage().open();
+        WebSettings.logger.toLog("Non Static site JDI page opened");
+
+        epamGithubNonStaticSite.getHomePage().open();
+        WebSettings.logger.toLog("Epam Github Non Static site page opened");
     }
 
     @AfterSuite

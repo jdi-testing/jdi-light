@@ -52,4 +52,13 @@ public class EpamGithubNonStaticSite {
     public HomePageFrame iframe;
 
     public GithubPage githubPage;
+
+    EpamGithubNonStaticSite() {
+
+    }
+
+    public HomePage getHomePage() {
+
+        return homePage;
+    }
 }

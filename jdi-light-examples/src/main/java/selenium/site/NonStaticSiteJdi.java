@@ -22,7 +22,7 @@ public class NonStaticSiteJdi {
     public LoginForm loginForm;
 
     @FindBy(css = ".profile-photo")
-    public WebElement profilePhoto;
+    private WebElement profilePhoto;
 
     @FindBy(css = ".profile-photo [ui=label]")
     public WebElement userName;
@@ -36,5 +36,14 @@ public class NonStaticSiteJdi {
             profilePhoto.click();
             loginForm.submit(user, "enter");
         }
+    }
+
+    public NonStaticSiteJdi() {
+
+    }
+
+    public HomePage getHomePage() {
+
+        return homePage;
     }
 }
