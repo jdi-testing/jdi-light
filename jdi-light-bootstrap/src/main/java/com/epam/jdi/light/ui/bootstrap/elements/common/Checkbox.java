@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.bootstrap.elements.complex;
+package com.epam.jdi.light.ui.bootstrap.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -19,7 +19,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
 
     // region Actions
     public void check(String value) {
-        if ("true".equalsIgnoreCase(value) || ("1").equals(value)) {
+        if ("true".equalsIgnoreCase(value) || "1".equals(value)) {
             check();
         } else {
             uncheck();
@@ -73,7 +73,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
     }
 
     public String getValue() {
-        return isSelected() + "";
+        return String.valueOf(isSelected());
     }
     // endregion
 
