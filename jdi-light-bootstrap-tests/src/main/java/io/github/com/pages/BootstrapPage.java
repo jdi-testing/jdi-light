@@ -208,6 +208,10 @@ public class BootstrapPage extends WebPage {
     public static Dropdown dropdownMenuTextItem;
     @UI("#dropdown-menu-disabled-item")
     public static Dropdown dropdownMenuDisabledItem;
+    @UI("#offsetDropdown")
+    public static Dropdown offsetDropdown;
+    @UI("#referenceDropdown")
+    public static Dropdown referenceDropdown;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")
