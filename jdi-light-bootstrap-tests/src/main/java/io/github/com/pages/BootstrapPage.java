@@ -29,48 +29,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonToolbar;
-import io.github.com.sections.ButtonWithDropdown;
-import io.github.com.sections.CardBody;
-import io.github.com.sections.CardBorder;
-import io.github.com.sections.CardColumns;
-import io.github.com.sections.CardDeck;
-import io.github.com.sections.CardExample;
-import io.github.com.sections.CardGroup;
-import io.github.com.sections.CardHorizontal;
-import io.github.com.sections.CardImage;
-import io.github.com.sections.CardKitchenSink;
-import io.github.com.sections.CardListGroups;
-import io.github.com.sections.CardMixinsUtilities;
-import io.github.com.sections.CardNavigation;
-import io.github.com.sections.CardTextAlignment;
-import io.github.com.sections.CardWithCustomCss13Rem;
-import io.github.com.sections.CardWithCustomCss9Rem;
-import io.github.com.sections.CardWithSubtitlesAndLinks;
-import io.github.com.sections.CheckboxAndRadioButtonCustomDisabled;
-import io.github.com.sections.CheckboxesAndRadiosWithoutLabels;
-import io.github.com.sections.CheckboxesCustom;
-import io.github.com.sections.CheckboxesDefault;
-import io.github.com.sections.CheckboxesDefaultInline;
-import io.github.com.sections.CustomSelect;
-import io.github.com.sections.CustomSelectWithButton;
-import io.github.com.sections.FormBrowserDefaults;
-import io.github.com.sections.FormCustomStyles;
-import io.github.com.sections.FormDisabled;
-import io.github.com.sections.FormHelpText;
-import io.github.com.sections.FormHorizontal;
-import io.github.com.sections.FormOverview;
-import io.github.com.sections.FormServerSide;
-import io.github.com.sections.FormTooltip;
-import io.github.com.sections.FormsSizing;
-import io.github.com.sections.InputGroupInputWithCheckBox;
-import io.github.com.sections.InputGroupInputWithLabelAndText;
-import io.github.com.sections.InputGroupInputWithRadio;
-import io.github.com.sections.InputGroupInputWithText;
-import io.github.com.sections.InputGroupInputWithTwoText;
-import io.github.com.sections.InputGroupMultipleAddonsLower;
-import io.github.com.sections.InputGroupMultipleAddonsUpper;
-import io.github.com.sections.InputGroupSizing;
-import io.github.com.sections.InputGroupTextareaWithText;
 import io.github.com.sections.Jumbotron;
 import io.github.com.sections.MediaObjectNesting;
 import io.github.com.sections.MediaObjectSample;
@@ -158,7 +116,6 @@ import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarExternalContent;
 import io.github.com.sections.navbar.NavbarForm;
-import io.github.com.sections.navbar.NavbarPlacement;
 import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarSupportedContent;
 import io.github.com.sections.navbar.NavbarText;
@@ -755,8 +712,6 @@ public class BootstrapPage extends WebPage {
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
     public static NavbarSupportedContent navbarSupportedContent;
-    @UI("#navbar-sticky-top")
-    public static NavbarPlacement navbarPlacementStickyTop;
     @UI("#navbar-base-for-brand")
     public static NavbarSection navbarSection;
     //endregion
@@ -770,7 +725,6 @@ public class BootstrapPage extends WebPage {
     public static Range range2;
     @UI("#customRange3")
     public static Range range3;
-
     //endregion
 
     //region Modals
