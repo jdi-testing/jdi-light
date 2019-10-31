@@ -181,7 +181,7 @@ public class ActionHelper {
         return (MethodSignature) joinPoint.getSignature();
     }
 
-    static String methodNameTemplate(MethodSignature method) {
+    private static String methodNameTemplate(MethodSignature method) {
         try {
             Method m = method.getMethod();
             if (m.isAnnotationPresent(JDIAction.class)) {
@@ -196,14 +196,14 @@ public class ActionHelper {
                     "Can't get method name template: " + safeException(ex));
         }
     }
-    static LogLevels logLevel(JoinPoint joinPoint) {
+    private static LogLevels logLevel(JoinPoint joinPoint) {
         Method m = getJpMethod(joinPoint).getMethod();
         return m.isAnnotationPresent(JDIAction.class)
                 ? m.getAnnotation(JDIAction.class).level()
                 : STEP;
     }
 
-    static String getDefaultName(String method, MapArray<String, Object> args) {
+    private static String getDefaultName(String method, MapArray<String, Object> args) {
         if (args.size() == 1 && args.get(0).value.getClass().isArray())
             return format("%s(%s)", method, arrayToString(args.get(0).value));
         MapArray<String, String> methodArgs = args.toMapArray(Object::toString);
@@ -240,7 +240,7 @@ public class ActionHelper {
         return result;
     }
 
-    static MapArray<String, Object> core(JoinPoint jp) {
+    private static MapArray<String, Object> core(JoinPoint jp) {
         Class cl = jp.getSignature().getDeclaringType();
         if (jp.getThis() != null && isInterface(cl, ICoreElement.class)) {
             UIElement el = ((ICoreElement) jp.getThis()).core();

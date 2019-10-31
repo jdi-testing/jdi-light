@@ -15,8 +15,8 @@ public class Header extends Section {
 	@XPath("//*[@ui='label']") public static UIElement userName;
 
 	@Css(".search-field input") static UIElement searchInput;
-	@Css(".icon-search") static WebElement searchIcon;
-	@Css(".icon-search.active") static WebElement doSearch;
+	private @Css(".icon-search") static WebElement searchIcon;
+	private @Css(".icon-search.active") static WebElement doSearch;
 
 	public static void search(String text) {
 		if(logout.isDisplayed())

@@ -19,7 +19,7 @@ class IssuePage69 extends WebPage {
     static List<Paragraph> paragraphsList;
 
     @UI("[qa-item=template] [value=element_%s]")
-    static DataList<Paragraph, ParagraphData> templateData;
+    private static DataList<Paragraph, ParagraphData> templateData;
     @UI("[qa-item=paragraph]>div")
-    static DataList<Paragraph, ParagraphData> paragraphsData;
+    private static DataList<Paragraph, ParagraphData> paragraphsData;
 }

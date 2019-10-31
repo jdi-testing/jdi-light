@@ -41,7 +41,7 @@ public final class BDDUtils {
 	public static UISelectAssert selectAssert(String name) {
 		return ((HasAssert<UISelectAssert>)getAssert(name)).is();
 	}
-	static HasAssert getAssert(String name) {
+	private static HasAssert getAssert(String name) {
 		return getUI(name, HasAssert.class);
 	}
 	public static IsInput input(String name) {

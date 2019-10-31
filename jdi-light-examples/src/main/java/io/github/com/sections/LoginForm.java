@@ -10,8 +10,8 @@ import org.openqa.selenium.WebElement;
 
 public class LoginForm extends Form<User> {
 	@UI("*root*//header//form//input[@type='text']")
-	public WebElement name;
-	@Css("input[type=password]") WebElement password;
+	private WebElement name;
+	@Css("input[type=password]")private WebElement password;
 
 	@Root @XPath(".//header//form//button[@type='submit']") WebElement enter;
 

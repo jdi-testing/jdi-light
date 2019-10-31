@@ -28,9 +28,9 @@ public class AlertTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    String pageTitle = "Home Page";
+    private String pageTitle = "Home Page";
     String simpleAlertTextBeforeLink = "Alert with";
-    String simpleAlertTextAfterLink = ".";
+    private String simpleAlertTextAfterLink = ".";
     String simpleAlertLinkText = "index page link";
     String dismissibleAlertStrongText = "Dismissible alert!";
     String dismissibleAlertDescriptionText = "Hide alert clicking on \"x\".";

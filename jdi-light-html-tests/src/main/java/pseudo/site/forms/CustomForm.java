@@ -32,7 +32,7 @@ public class CustomForm extends Form<User> {
     @Css(".cssWebElementList-class") public WebList cssWebElementList;
     @XPath("//*[@class='xpathPublicWebElementList-class']") public WebList xpathPublicWebElementList;
 
-    @FindBy(css = "#fbUIElement-id") UIElement fbUIElement;
+    @FindBy(css = "#fbUIElement-id")private UIElement fbUIElement;
     @FindBy(css = "#fbPublicUIElement-id") public UIElement fbPublicUIElement;
     @FindBy(css = "#fbPrivateUIElement-id") private UIElement fbPrivateUIElement;
     @UI("#uiUIElement-id") private UIElement uiUIElement;
@@ -40,15 +40,15 @@ public class CustomForm extends Form<User> {
     @Css("#cssUIElement-id") UIElement cssUIElement;
     @XPath("//*[@id='xpathPublicUIElement-id']") public WebElement xpathPublicUIElement;
 
-    @FindBy(css = ".fbUIElementList-class") List<UIElement> fbUIElementList;
+    @FindBy(css = ".fbUIElementList-class")private List<UIElement> fbUIElementList;
     @FindBy(css = ".fbPublicUIElementList-class") public List<UIElement> fbPublicUIElementList;
     @FindBy(css = ".fbPrivateUIElementList-class") private List<UIElement> fbPrivateUIElementList;
-    @UI(".uiUIElementList-class") List<UIElement> uiUIElementList;
+    @UI(".uiUIElementList-class") private List<UIElement> uiUIElementList;
     @UI(".uiPublicUIElementList-class") public List<UIElement> uiPublicUIElementList;
     @Css(".cssUIElementList-class") List<UIElement> cssUIElementList;
     @XPath("//*[@class='xpathPublicUIElementList-class']") public List<UIElement> xpathPublicUIElementList;
 
-    @FindBy(css = "#fbButton-id") Button fbButton;
+    @FindBy(css = "#fbButton-id")private Button fbButton;
     @FindBy(css = "#fbPublicButton-id") public Button fbPublicButton;
     @FindBy(css = "#fbPrivateButton-id") private Button fbPrivateButton;
     @UI("#uiButton-id") private Button uiButton;
@@ -59,7 +59,7 @@ public class CustomForm extends Form<User> {
     @FindBy(css = ".fbButtonList-class")private List<Button> fbButtonList;
     @FindBy(css = ".fbPublicButtonList-class") public List<Button> fbPublicButtonList;
     @FindBy(css = ".fbPrivateButtonList-class") private List<Button> fbPrivateButtonList;
-    @UI(".uiButtonList-class") List<Button> uiButtonList;
+    @UI(".uiButtonList-class")private List<Button> uiButtonList;
     @UI(".uiPublicButtonList-class") public List<Button> uiPublicButtonList;
     @Css(".cssButtonList-class") List<Button> cssButtonList;
     @XPath("//*[@class='xpathPublicButtonList-class']") public List<Button> xpathPublicButtonList;

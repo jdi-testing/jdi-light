@@ -23,22 +23,22 @@ public class CustomSection extends Section {
     @FindBy(id = "webElementPrivate")
     private WebElement webElementPrivate;
     @UI(".webElementPackageUI")
-    WebElement webElementPackageUI;
+    private WebElement webElementPackageUI;
     @UI(".webElementPublicUI")
     public WebElement webElementPublicUI;
     @Css(".webElementPackageCss")
-    WebElement webElementPackageCss;
+    private WebElement webElementPackageCss;
     @XPath("//*[@class='webElementPublicXPath']")
     public WebElement webElementPublicXPath;
 
     @FindBy(id = "listWebElementPackage")
-    WebList listWebElementPackage;
+    private WebList listWebElementPackage;
     @FindBy(id = "listWebElementPublic")
     public WebList listWebElementPublic;
     @FindBy(id = "listWebElementPrivate")
     private WebList listWebElementPrivate;
     @UI(".listWebElementPackageUI")
-    WebList listWebElementPackageUI;
+    private WebList listWebElementPackageUI;
     @UI(".listWebElementPublicUI")
     public WebList listWebElementPublicUI;
     @Css(".listWebElementPackageCss")
@@ -57,12 +57,12 @@ public class CustomSection extends Section {
     @UI(".uielementPublicUI")
     public UIElement uielementPublicUI;
     @Css(".uielementPackageCss")
-    UIElement uielementPackageCss;
+    private UIElement uielementPackageCss;
     @XPath("//*[@class='uielementPublicXPath']")
     public UIElement uielementPublicXPath;
 
     @FindBy(id = "buttonPackage")
-    Button buttonPackage;
+    private Button buttonPackage;
     @FindBy(id = "buttonPublic")
     public Button buttonPublic;
     @FindBy(id = "buttonPrivate")
@@ -77,7 +77,7 @@ public class CustomSection extends Section {
     public UIElement buttonPublicXPath;
 
     @FindBy(id = "listUIElementPackage")
-    List<UIElement> listUIElementPackage;
+    private List<UIElement> listUIElementPackage;
     @FindBy(id = "listUIElementPublic")
     public List<UIElement> listUIElementPublic;
     @FindBy(id = "listUIElementPrivate")
@@ -98,7 +98,7 @@ public class CustomSection extends Section {
     @FindBy(id = "listButtonPrivate")
     private List<Button> listButtonPrivate;
     @UI(".listButtonPackageUI")
-    List<Button> listButtonPackageUI;
+    private List<Button> listButtonPackageUI;
     @UI(".listButtonPublicUI")
     public List<Button> listButtonPublicUI;
     @Css(".listButtonPackageCss")
@@ -107,7 +107,7 @@ public class CustomSection extends Section {
     public List<Button> listButtonPublicXPath;
 
     @FindBy(id = "webListPackage")
-    WebList webListPackage;
+    private WebList webListPackage;
     @FindBy(id = "webListPublic")
     public WebList webListPublic;
     @FindBy(id = "webListPrivate")
@@ -137,7 +137,7 @@ public class CustomSection extends Section {
     public DataList<CustomSection, ?> uilistQuestionPublicXPath;
 
     @FindBy(id = "uilistSomedataPackage")
-    DataList<CustomSection, SomeData> uilistSomedataPackage;
+    private DataList<CustomSection, SomeData> uilistSomedataPackage;
     @FindBy(id = "uilistSomedataPublic")
     public DataList<CustomSection, SomeData> uilistSomedataPublic;
     @FindBy(id = "uilistSomedataPrivate")
@@ -152,7 +152,7 @@ public class CustomSection extends Section {
     public DataList<CustomSection, SomeData> uilistSomedataPublicXPath;
 
     @JDropdown(root = "div[ui=droplistPackage", value = "input", list = "li", expand = ".expand")
-    Dropdown droplistPackage;
+    private Dropdown droplistPackage;
     @JDropdown(root = "div[ui=droplistPublic", value = "input", list = "li", expand = ".expand")
     public Dropdown droplistPublic;
     @JDropdown(root = "div[ui=droplistPrivate", value = "input", list = "li", expand = ".expand")
