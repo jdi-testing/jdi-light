@@ -715,7 +715,7 @@ public class BootstrapPage extends WebPage {
     public static NavbarSupportedContent navbarSupportedContent;
     @UI("#navbar-base-for-brand")
     public static NavbarSection navbarSection;
-    @UI("#navbar-placement-sticky-top")
+    @UI("#navbar-sticky-top")
     public static NavbarPlacement navbarPlacementStickyTop;
     //endregion
 
