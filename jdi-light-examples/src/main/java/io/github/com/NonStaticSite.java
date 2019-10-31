@@ -18,53 +18,104 @@ public class NonStaticSite {
 
     @Url("/index.html")
     @Title(value = "Home", validate = CheckTypes.CONTAINS)
-    public HomePage homePage;
+    private HomePage homePage;
 
     @Url("/metals-colors.html")
     @Title("Metal and Colors")
-    public MetalAndColorsPage metalAndColorsPage;
+    private MetalAndColorsPage metalAndColorsPage;
 
     @Url(value = "/metals-colors.html{0}", template = "metals-colors.html")
     @Title("Metal and Colors")
-    public MetalAndColorsPage metalAndColorsPageParams;
+    private MetalAndColorsPage metalAndColorsPageParams;
 
     @Url("/contacts.html")
     @Title(value = ".*tact \\w{4}", validate = CheckTypes.MATCH)
-    public ContactFormPage contactFormPage;
+    private ContactFormPage contactFormPage;
 
     @Url("/performance.html")
     @Title("Performance page")
-    public PerformancePage tablePage;
+    private PerformancePage tablePage;
 
     @Url("/search.html")
-    public SearchPage searchPage;
+    private SearchPage searchPage;
 
     @Css("[ui=label]")
-    public List<WebElement> navigation;
+    private List<WebElement> navigation;
 
     @Css("[ui=label]")
-    public WebList navigationL;
+    private WebList navigationL;
 
     @UI("//*[@ui='label']//*[contains(text(),'%s')]")
-    public WebList navigationS; // TODO fix slow @UI("[ui=label][*'%s']") public static WebList navigationS;
+    private WebList navigationS;
 
     @UI("//*[@ui='label']//*[contains(text(),'%s')]")
-    public UIElement menu; // TODO fix slow @UI("[ui=label][*'%s']") public static UIElement menu;
+    private UIElement menu;
 
     @Css("header")
-    public Header header;
+    private Header header;
 
     @Css("footer")
-    public Footer footer;
+    private Footer footer;
 
     @Frame("iframe")
-    public HomePageFrame iframe;
+    private HomePageFrame iframe;
 
-    public GithubPage githubPage;
+    private GithubPage githubPage;
 
-    public NonStaticSite() {}
 
     public HomePage getHomePage() {
-        return new HomePage();
+        return homePage;
+    }
+
+    public MetalAndColorsPage getMetalAndColorsPage() {
+        return metalAndColorsPage;
+    }
+
+    public MetalAndColorsPage getMetalAndColorsPageParams() {
+        return metalAndColorsPageParams;
+    }
+
+    public ContactFormPage getContactFormPage() {
+        return contactFormPage;
+    }
+
+    public PerformancePage getTablePage() {
+        return tablePage;
+    }
+
+    public SearchPage getSearchPage() {
+        return searchPage;
+    }
+
+    public List<WebElement> getNavigation() {
+        return navigation;
+    }
+
+    public WebList getNavigationL() {
+        return navigationL;
+    }
+
+    public WebList getNavigationS() {
+        return navigationS;
+    }
+
+    public UIElement getMenu() {
+        return menu;
+    }
+
+    public Header getHeader() {
+        return header;
+    }
+
+    public Footer getFooter() {
+        return footer;
+    }
+
+    public HomePageFrame getIframe() {
+        return iframe;
+    }
+
+    public GithubPage getGithubPage() {
+        return githubPage;
     }
 }

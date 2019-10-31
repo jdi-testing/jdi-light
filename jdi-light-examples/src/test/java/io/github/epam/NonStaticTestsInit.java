@@ -6,33 +6,25 @@ import com.epam.jdi.light.settings.WebSettings;
 import io.github.com.NonStaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import selenium.site.NonStaticSiteJdi;
+
 
 public class NonStaticTestsInit {
 
-    @BeforeSuite
+    protected NonStaticSite nonStaticSite;
+
+    @BeforeSuite(alwaysRun = true)
     public void setUp() {
 
-        NonStaticSite nonStaticSite = new NonStaticSite();
-        NonStaticSiteJdi nonStaticSiteJdi = new NonStaticSiteJdi();
-        PageFactory.initElements(nonStaticSite, nonStaticSiteJdi);
-
-        EpamGithubNonStaticSite epamGithubNonStaticSite = new EpamGithubNonStaticSite();
-        PageFactory.initElements(epamGithubNonStaticSite);
+        nonStaticSite = new NonStaticSite();
+        PageFactory.initElements(nonStaticSite);
 
         nonStaticSite.getHomePage().open();
         WebSettings.logger.toLog("Non Static site page opened");
-
-        nonStaticSiteJdi.getHomePage().open();
-        WebSettings.logger.toLog("Non Static site JDI page opened");
-
-        epamGithubNonStaticSite.getHomePage().open();
-        WebSettings.logger.toLog("Epam Github Non Static site page opened");
     }
 
-    @AfterSuite
-    public void cleanUp() {
 
+    @AfterSuite(alwaysRun = true)
+    public void cleanUp() {
         WebDriverUtils.killAllSeleniumDrivers();
     }
 }
