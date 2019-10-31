@@ -27,7 +27,7 @@ public class ImageTests extends TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    String text = "https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg";
+    private String text = "https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg";
 
     @Test
     public void getSrcTest() {

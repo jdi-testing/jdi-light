@@ -20,8 +20,8 @@ public class ContactsPage extends WebPage {
 	public TextField passportNumber;
 	public TextField passportSerial;
 
-	DropdownSelect gender;
-	IsCombobox religion;
+	private DropdownSelect gender;
+	private IsCombobox religion;
 	private MultiDropdown weather;
 
 	public Checkbox passport;

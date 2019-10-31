@@ -27,7 +27,7 @@ public class TextAreaTests extends TestsInit {
         html5Page.shouldBeOpened();
         textArea.clear();
     }
-    String text = "TextArea";
+    private String text = "TextArea";
 
     @Test
     public void getTextTest() {

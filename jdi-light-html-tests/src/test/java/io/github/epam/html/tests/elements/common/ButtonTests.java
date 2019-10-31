@@ -39,7 +39,7 @@ public class ButtonTests extends TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    String text = "Big Red Button-Input";
+    private String text = "Big Red Button-Input";
 
     @Test
     public void getTextTest() {
