@@ -70,7 +70,7 @@ public class BootstrapValidationTest extends TestsInit {
                                 .displayed()
                                 .text("Looks good!")
                                 .css("color", "rgba(40, 167, 69, 1)") ),
-                new Pair<>("name11111", el ->
+                new Pair<>("lastName", el ->
                         el.is()
                                 .displayed()
                                 .text("Looks good!")
@@ -87,7 +87,7 @@ public class BootstrapValidationTest extends TestsInit {
     private FormContacts contact() {
         return new FormContacts().set(c -> {
             c.name = "NAME";
-            c.lastName = "";
+            c.lastName = "LAST NAME";
             c.userName = "";
             c.city = "";
             c.state = "";
