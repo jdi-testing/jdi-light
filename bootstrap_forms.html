@@ -78,49 +78,73 @@
                                        aria-describedby="emailHelp" placeholder="Enter alter ego">
                             </div>
                             <!-- Radios start -->
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="superhero-radio-human" value="option1" checked>
-                                <label class="form-check-label" for="superhero-radio-human">
-                                    Human
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="superhero-radio-symbiote" value="option2">
-                                <label class="form-check-label" for="superhero-radio-symbiote">
-                                    Symbiote
-                                </label>
-                            </div>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-sm-2 pt-0">Species</legend>
+                                    <div class="col-sm-10">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="superhero-radio-human" value="option1" checked>
+                                            <label class="form-check-label" for="superhero-radio-human">
+                                                Human
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="superhero-radio-symbiote" value="option2">
+                                            <label class="form-check-label" for="superhero-radio-symbiote">
+                                                Symbiote
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
                             <!-- Radios end -->
                             <!-- Checkboxes start -->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="superhero-checkbox-strength">
-                                <label class="form-check-label" for="superhero-checkbox-strength">
-                                    Strength
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="superhero-checkbox-agility">
-                                <label class="form-check-label" for="superhero-checkbox-agility">
-                                    Agility
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="superhero-checkbox-vitality">
-                                <label class="form-check-label" for="superhero-checkbox-vitality">
-                                    Vitality
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="superhero-checkbox-endurance">
-                                <label class="form-check-label" for="superhero-checkbox-endurance">
-                                    Endurance
-                                </label>
+                            <div class="form-group row" id="superhero-checkboxes">
+                                <div class="col-sm-2">Abilities</div>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="superhero-checkbox-strength">
+                                        <label class="form-check-label" for="superhero-checkbox-strength">
+                                            Superhuman Strength
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="superhero-checkbox-speed">
+                                        <label class="form-check-label" for="superhero-checkbox-speed">
+                                            Super Speed
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="superhero-checkbox-flying">
+                                        <label class="form-check-label" for="superhero-checkbox-flying">
+                                            Flying
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="superhero-checkbox-telepathy">
+                                        <label class="form-check-label" for="superhero-checkbox-telepathy">
+                                            Telepathy
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="superhero-checkbox-absorbtion">
+                                        <label class="form-check-label" for="superhero-checkbox-absorbtion">
+                                            Power Absorbtion
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <!-- Checkboxes end -->
+                            <label for="superhero-select-universe">Universe:</label>
+                            <select class="custom-select mb-3" id="superhero-select-universe">
+                                <option selected>Select character's universe</option>
+                                <option value="1">DC</option>
+                                <option value="2">Marvel</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary" id="superhero-button-submit">Submit</button>
+                            <button type="button" class="btn btn-danger" id="superhero-button-clear">Clear</button>
                         </form>
                     </div>
-
-
                 </div>
             </div>
         </main>
