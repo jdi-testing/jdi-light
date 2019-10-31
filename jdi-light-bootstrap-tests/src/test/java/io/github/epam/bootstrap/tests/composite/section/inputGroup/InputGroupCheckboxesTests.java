@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.inputGroupCheckBox;
+import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
@@ -31,21 +32,37 @@ public class InputGroupCheckboxesTests extends TestsInit {
             placeholder_text = "";
 
     @Test
-    public void checkCheckboxTest() {
+    public void clickCheckboxTest() {
         inputGroupCheckBox.checkbox.check();
-        inputGroupCheckBox.checkbox.isSelected();
-    }
-
-    @Test
-    public void uncheckCheckboxTest() {
+        inputGroupCheckBox.checkbox.is().selected();
         inputGroupCheckBox.checkbox.uncheck();
-        inputGroupCheckBox.checkbox.isSelected();
+        inputGroupCheckBox.checkbox.is().deselected();
+        inputGroupCheckBox.checkbox.click();
+        inputGroupCheckBox.checkbox.is().selected();
+        inputGroupCheckBox.checkbox.click();
+        inputGroupCheckBox.checkbox.is().deselected();
     }
 
     @Test
     public void getTextInputTest() {
         inputGroupCheckBox.input.setText(text);
         inputGroupCheckBox.input.assertThat().text(is(text));
+    }
+
+    @Test
+    public void isValidationTests() {
+        inputGroupCheckBox.checkbox
+                .is()
+                .displayed()
+                .enabled()
+                .core()
+                .hasClass("input-group-text")
+                .tag(is("div"));
+    }
+
+    @Test
+    public void baseValidationTest() {
+        baseValidation(inputGroupCheckBox.checkbox);
     }
 
     @Test
@@ -81,14 +98,6 @@ public class InputGroupCheckboxesTests extends TestsInit {
         inputGroupCheckBox.input.is().enabled();
         inputGroupCheckBox.input.is().text(is(new_text));
         inputGroupCheckBox.input.is().text(containsString(part_of_text));
-    }
-    @Test
-    public void isValidationCheckBoxTest() {
-        inputGroupCheckBox.checkbox.is().selected();
-        inputGroupCheckBox.checkbox.click();
-        inputGroupCheckBox.checkbox.is().deselected();
-        inputGroupCheckBox.checkbox.is().enabled();
-        inputGroupCheckBox.checkbox.is().displayed();
     }
 
 }

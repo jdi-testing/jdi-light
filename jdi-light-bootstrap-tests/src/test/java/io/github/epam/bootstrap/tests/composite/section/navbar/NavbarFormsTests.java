@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.checkboxesCustom;
 import static io.github.com.pages.BootstrapPage.navbarForm;
 import static io.github.com.pages.BootstrapPage.navbarFormWithInputGroup;
 import static io.github.com.pages.BootstrapPage.navbarFormWithText;
@@ -29,7 +28,6 @@ public class NavbarFormsTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        checkboxesCustom.hover();
     }
 
     @Test

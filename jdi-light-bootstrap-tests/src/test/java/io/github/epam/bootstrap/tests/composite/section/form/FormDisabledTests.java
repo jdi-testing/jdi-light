@@ -22,7 +22,9 @@ public class FormDisabledTests extends TestsInit {
         formDisabled.formContainer
                 .is()
                 .displayed()
-                .disabled();
+                .disabled()
+                .core()
+                .hasAttr("disabled");
         formDisabled.textField
                 .is()
                 .displayed()
@@ -56,9 +58,8 @@ public class FormDisabledTests extends TestsInit {
                 .disabled()
                 .deselected()
                 .core()
-                .hasClass("form-check-input")
-                .attr("type", "checkbox")
-                .tag(is("input"));
+                .hasClass("form-check")
+                .tag(is("div"));
         formDisabled.checkbox.label()
                 .is()
                 .displayed()
