@@ -98,6 +98,9 @@ public class Form<T> extends Section {
         pageObject = obj;
         return this;
     }
+    protected Object getPageObject() {
+        return this.pageObject;
+    }
     public List<Field> allFields() {
         return allFields(pageObject);
     }
