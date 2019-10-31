@@ -25,36 +25,36 @@ import static org.testng.Assert.assertEquals;
 public class SizingTests extends TestsInit {
 
     // Button texts to check
-    String leftBtnText = "Left";
-    String midBtnText = "Middle";
-    String rightBtnText = "Right";
+    private String leftBtnText = "Left";
+    private String midBtnText = "Middle";
+    private String rightBtnText = "Right";
 
     // Alert texts to check - single click
-    String lgLeftBtnAlertText = "Lg Left Button Clicked!";
-    String lgMidBtnAlertText = "Lg Middle Button Clicked!";
-    String lgRightBtnAlertText = "Lg Right Button Clicked!";
+    private String lgLeftBtnAlertText = "Lg Left Button Clicked!";
+    private String lgMidBtnAlertText = "Lg Middle Button Clicked!";
+    private String lgRightBtnAlertText = "Lg Right Button Clicked!";
 
-    String smLeftBtnAlertText = "Sm Left Button Clicked!";
-    String smMidBtnAlertText = "Sm Middle Button Clicked!";
-    String smRightBtnAlertText = "Sm Right Button Clicked!";
+    private String smLeftBtnAlertText = "Sm Left Button Clicked!";
+    private String smMidBtnAlertText = "Sm Middle Button Clicked!";
+    private String smRightBtnAlertText = "Sm Right Button Clicked!";
 
     // Alert texts to check - double click
-    String leftBtnDoubleClickText = "Left Button Double Clicked!";
-    String midBtnDoubleClickText = "Middle Button Double Clicked!";
-    String rightBtnDoubleClickText = "Right Button Double Clicked!";
+    private String leftBtnDoubleClickText = "Left Button Double Clicked!";
+    private String midBtnDoubleClickText = "Middle Button Double Clicked!";
+    private String rightBtnDoubleClickText = "Right Button Double Clicked!";
 
     // Alert texts to check - right click
-    String lgLeftBtnRightClickText = "Lg Left Button Right Clicked!";
-    String lgMidBtnRightClickText = "Lg Middle Button Right Clicked!";
-    String lgRightBtnRightClickText = "Lg Right Button Right Clicked!";
+    private String lgLeftBtnRightClickText = "Lg Left Button Right Clicked!";
+    private String lgMidBtnRightClickText = "Lg Middle Button Right Clicked!";
+    private String lgRightBtnRightClickText = "Lg Right Button Right Clicked!";
 
-    String leftBtnRightClickText = "Left Button Right Clicked!";
-    String midBtnRightClickText = "Middle Button Right Clicked!";
-    String rightBtnRightClickText = "Right Button Right Clicked!";
+    private String leftBtnRightClickText = "Left Button Right Clicked!";
+    private String midBtnRightClickText = "Middle Button Right Clicked!";
+    private String rightBtnRightClickText = "Right Button Right Clicked!";
 
-    String smLeftBtnRightClickText = "Sm Left Button Right Clicked!";
-    String smMidBtnRightClickText = "Sm Middle Button Right Clicked!";
-    String smRightBtnRightClickText = "Sm Right Button Right Clicked!";
+    private String smLeftBtnRightClickText = "Sm Left Button Right Clicked!";
+    private String smMidBtnRightClickText = "Sm Middle Button Right Clicked!";
+    private String smRightBtnRightClickText = "Sm Right Button Right Clicked!";
 
 
 

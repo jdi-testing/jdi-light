@@ -24,12 +24,12 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 public class CollapseTests extends TestsInit {
 
     // List texts to check
-    String cardOneText = "Anim pariatur cliche reprehenderit.";
-    String cardTwoText = "Craft beer labore wes anderson cred nesciunt sapiente ea proident.";
-    String cardThreeText = "High life accusamus terry richardson ad squid. Nihil anim.";
-    String groupOneText = "You probably haven't heard of them accusamus labore sustainable VHS.";
-    String groupTwoText = "Nihil anim keffiyeh helvetica, craft beer labore.";
-    String groupThreeText = "3 wolf moon officia aute, non cupidatat skateboard dolor brunch.";
+    private String cardOneText = "Anim pariatur cliche reprehenderit.";
+    private String cardTwoText = "Craft beer labore wes anderson cred nesciunt sapiente ea proident.";
+    private String cardThreeText = "High life accusamus terry richardson ad squid. Nihil anim.";
+    private String groupOneText = "You probably haven't heard of them accusamus labore sustainable VHS.";
+    private String groupTwoText = "Nihil anim keffiyeh helvetica, craft beer labore.";
+    private String groupThreeText = "3 wolf moon officia aute, non cupidatat skateboard dolor brunch.";
 
     @BeforeMethod
     public void before() {

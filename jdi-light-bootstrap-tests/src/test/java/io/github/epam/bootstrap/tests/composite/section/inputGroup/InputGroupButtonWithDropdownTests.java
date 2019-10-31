@@ -21,12 +21,12 @@ public class InputGroupButtonWithDropdownTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    String testText = "Test text";
-    String action = "Action";
-    String anotherAction = "Another action";
-    String somethingElseHere = "Something else here";
-    String separatedLink = "Separated link";
-    String dropdownButton = "Dropdown";
+    private String testText = "Test text";
+    private String action = "Action";
+    private String anotherAction = "Another action";
+    private String somethingElseHere = "Something else here";
+    private String separatedLink = "Separated link";
+    private String dropdownButton = "Dropdown";
 
     @Test
     public void dropdownMenuIsValidationTests() {

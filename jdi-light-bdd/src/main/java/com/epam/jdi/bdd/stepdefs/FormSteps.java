@@ -13,7 +13,7 @@ import static com.epam.jdi.tools.JsonUtils.getMapFromJson;
 
 public class FormSteps {
 	public static Safe<Form> lastForm = new Safe<>(() -> null);
-	static Form getForm(String name) {
+	private static Form getForm(String name) {
 		Form form = null;
 		try {
 			form = getUI(name, Form.class);

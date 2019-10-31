@@ -27,12 +27,12 @@ public class VerticalVariationTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    String buttonOneClickAlert = "Button One Clicked!";
-    String buttonTwoClickAlert = "Button Two Clicked!";
-    String dropdownMenuLinkOne = "JDI Light";
-    String dropdownMenuLinkTwo = "JDI Docs";
-    String linkOnePageTitle = "GitHub - jdi-testing/jdi-light: Powerful Framework for UI Automation Testing on Java";
-    String linkTwoPageTitle = "JDI Light Framework – API Reference";
+    private String buttonOneClickAlert = "Button One Clicked!";
+    private String buttonTwoClickAlert = "Button Two Clicked!";
+    private String dropdownMenuLinkOne = "JDI Light";
+    private String dropdownMenuLinkTwo = "JDI Docs";
+    private String linkOnePageTitle = "GitHub - jdi-testing/jdi-light: Powerful Framework for UI Automation Testing on Java";
+    private String linkTwoPageTitle = "JDI Light Framework – API Reference";
 
     @Test
     public void buttonOneTests() {

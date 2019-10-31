@@ -32,7 +32,7 @@ public class ButtonTests extends TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-    String text = "Red button";
+    private String text = "Red button";
 
     @Test
     public void getTextTest() {
