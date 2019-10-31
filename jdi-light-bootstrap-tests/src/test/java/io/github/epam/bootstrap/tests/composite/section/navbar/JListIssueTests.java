@@ -13,6 +13,20 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
+/*Issue: JList does not work correctly with web elements that have the same text
+
+  Steps:
+  Use JList class to collect UIElements (f.e. with class navbar-brand) on Bootstrap page
+  Pls. look at tests below.
+
+  Actual results:
+  JList has size 20. forEach loop processes only 8 UIElements.
+  Pls. look at tests below.
+
+  Expected results:
+  JList has size 20. forEach loop processes 20 UIElements.
+*/
+
 public class JListIssueTests extends TestsInit {
 
     private int expectedNumberOfNavbarBrands = 20;
