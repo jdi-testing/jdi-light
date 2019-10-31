@@ -8,6 +8,7 @@ import static io.github.com.StaticSite.bsFormsPage;
 import static io.github.com.pages.BootstrapFormsPage.superheroForm;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static io.github.epam.test.data.Superheroes.EXAMPLE_HERO;
 
 public class ComplicatedFormTests extends TestsInit {
 
@@ -19,7 +20,7 @@ public class ComplicatedFormTests extends TestsInit {
 
     @Test
     public void submitForm() {
-
+        superheroForm.fill(EXAMPLE_HERO);
     }
 
     @Test

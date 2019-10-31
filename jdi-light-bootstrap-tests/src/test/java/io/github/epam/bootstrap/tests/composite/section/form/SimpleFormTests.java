@@ -8,7 +8,7 @@ import static io.github.com.StaticSite.bsFormsPage;
 import static io.github.com.pages.BootstrapFormsPage.supportMessageForm;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static io.github.epam.test.data.SupportMessages.DEFAULT_MESSAGE;
+import static io.github.epam.test.data.SupportMessages.EXAMPLE_MESSAGE;
 
 public class SimpleFormTests extends TestsInit {
 
@@ -20,7 +20,7 @@ public class SimpleFormTests extends TestsInit {
 
     @Test
     public void submitForm() {
-        supportMessageForm.submit(DEFAULT_MESSAGE);
+        supportMessageForm.submit(EXAMPLE_MESSAGE);
     }
 
     @Test
