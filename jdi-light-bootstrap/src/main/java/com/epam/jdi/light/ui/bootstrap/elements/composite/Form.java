@@ -46,10 +46,12 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
         return validatedElement.finds(locator);
     }
 
+    @JDIAction("Return if form has browser validation")
     public boolean isBrowserValidation() {
         return !this.hasAttribute("novalidate");
     }
 
+    @JDIAction("Return if form valid")
     public boolean isValid() {
         Object res = core().js().executeScript ("return arguments[0].checkValidity()", core().get());
         return (Boolean)res;
