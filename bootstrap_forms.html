@@ -135,24 +135,25 @@
                                 </div>
                             </div>
                             <!-- Checkboxes end -->
+                            <div>
+                                <label for="superhero-range">Power scale:</label>
+                                <input type="range" class="custom-range mb-3" min="0" max="100" id="superhero-range">
+                            </div>
                             <label for="superhero-select-universe">Universe:</label>
                             <select class="custom-select mb-3" id="superhero-select-universe">
-                                <option>Select character's universe</option>
+                                <option selected>Select character's universe</option>
                                 <option value="1">DC</option>
                                 <option value="2">Marvel</option>
                             </select>
-                            <div>
-                                <label for="superhero-range">Power scale</label>
-                                <input type="range" class="custom-range" min="0" max="100" id="superhero-range">
-                            </div>
-                            <div class="custom-control custom-switch">
+                            <div class="custom-control custom-switch mb-3">
                                 <input type="checkbox" class="custom-control-input" id="superhero-switch">
-                                <label class="custom-control-label" for="superhero-switch">I'm not going to destroy the universe</label>
+                                <label class="custom-control-label" for="superhero-switch">I'm not going to destroy all living beings</label>
                             </div>
                             <button type="submit" class="btn btn-primary" id="superhero-button-submit">Submit</button>
                             <button type="button" class="btn btn-danger" id="superhero-button-clear">Clear</button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </main>
