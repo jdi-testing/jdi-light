@@ -7,12 +7,16 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import io.github.com.entities.FormContacts;
+import io.github.com.sections.modal.ModalTooltipsAndPopovers;
 import io.github.epam.TestsInit;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 import static io.github.com.StaticSite.bsPage;
@@ -30,7 +34,7 @@ public class BootstrapValidationTest extends TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
+/*
     @Test
     public void formValidationTest() {
 
@@ -59,29 +63,20 @@ public class BootstrapValidationTest extends TestsInit {
 
         WebList userNameValidFeedback = formCustomStyles.getValidFeedback(formCustomStyles.userName);
         userNameValidFeedback.is().size(0);
-    }
+    }*/
 
     @Test
     public void validationAgainstMapTest() {
 
-        MapArray<String, Consumer<UIElement>> map = MapArray.map(
-                new Pair<>("name", el ->
-                        el.is()
-                                .displayed()
-                                .text("Looks good!")
-                                .css("color", "rgba(40, 167, 69, 1)") ),
-                new Pair<>("lastName", el ->
-                        el.is()
-                                .displayed()
-                                .text("Looks good!")
-                                .css("color", "rgba(40, 167, 69, 1)"))
-
-        );
 
         formCustomStyles.submit(contact());
         Alerts.validateAlert(is("Form filled and submitted successfully"));
 
-        formCustomStyles.checkValid(map);
+        Map<String, UIElement> map = formCustomStyles.getAllFeedbackElements();
+
+
+
+        System.out.println(map);
     }
 
     private FormContacts contact() {
