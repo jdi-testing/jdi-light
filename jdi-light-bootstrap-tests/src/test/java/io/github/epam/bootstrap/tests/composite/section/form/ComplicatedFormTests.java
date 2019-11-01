@@ -21,6 +21,7 @@ public class ComplicatedFormTests extends TestsInit {
     @Test
     public void submitForm() {
         superheroForm.fill(EXAMPLE_HERO);
+        //return;
     }
 
     @Test
