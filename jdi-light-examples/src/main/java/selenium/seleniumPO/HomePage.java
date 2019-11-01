@@ -17,7 +17,7 @@ public class HomePage {
         getDriver().navigate().to(url);
     }
 
-    @FindBy(css = ".sidebar-menu [ui=label]") List<WebElement> navigation;
+    @FindBy(css = ".sidebar-menu [ui=label]")private List<WebElement> navigation;
     public void navigateTo(int num) {
         try {
             navigation.get(num).click();

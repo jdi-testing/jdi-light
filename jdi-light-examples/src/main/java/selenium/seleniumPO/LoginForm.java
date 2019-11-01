@@ -5,10 +5,10 @@ import org.openqa.selenium.support.FindBy;
 import selenium.entities.User;
 
 public class LoginForm {
-    @FindBy(css="form #name")      WebElement userName;
+    @FindBy(css="form #name")private  WebElement userName;
     @FindBy(css="form #password")private WebElement password;
 
-    @FindBy(css="form [type=submit]") WebElement enter;
+    @FindBy(css="form [type=submit]")private WebElement enter;
 
     void loginAs(User user) {
         userName.sendKeys(user.userName);
