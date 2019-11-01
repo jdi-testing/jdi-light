@@ -11,12 +11,15 @@ import io.github.com.entities.Superhero;
 
 public class SuperheroForm extends Form<Superhero> {
 
-    public TextField superheroCurrentAlias;
-    public TextField superheroAlterEgo;
+    public TextField currentAlias;
+    public TextField alterEgo;
+
     @UI("[name=superheroSpecies]")
-    public RadioButtons superheroSpecies;
-    public Selector superheroSelectUniverse;
+    public RadioButtons species;
+
+    public Selector selectUniverse;
     public Range superheroRange;
+
     @UI("#superhero-switch-div")
     public Checkbox superheroSwitch;
 }

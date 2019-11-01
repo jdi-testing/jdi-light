@@ -4,12 +4,12 @@ import com.epam.jdi.tools.DataClass;
 
 public class Superhero extends DataClass<Superhero> {
 
-    public String superheroCurrentAlias = "Venom";
-    public String superheroAlterEgo = "Peter Parker";
-    //public String superheroRadioSymbiote = "Symbiote";
-    public String superheroSelectUniverse = "Marvel";
-    public String superheroRange = "10";
-    public String superheroSwitch = "1";
+    public String currentAlias = "Venom";
+    public String alterEgo = "Peter Parker";
+    public String species = "Symbiote";
+    public String selectUniverse = "Marvel";
+    public String superheroRange = "10.0";
+    public String superheroSwitch = "true";
 
 
 //    public String superheroCommonAbilities = "Strength; Agility; Endurance";
