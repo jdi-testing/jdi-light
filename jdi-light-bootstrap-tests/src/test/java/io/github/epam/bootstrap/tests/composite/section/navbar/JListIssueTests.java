@@ -64,11 +64,11 @@ public class JListIssueTests extends TestsInit {
         int actualNumberOfNavbarBrands = jList.size();
 
         System.out.println("------------UIElements in forEach loop----------");
-        jList.forEach(e ->  System.out.println(iarr[0]++));
+        jList.forEach(e -> System.out.println(iarr[0]++));
 
         System.out.println("------------UIElements in for loop--------------");
         for (int i = 1; i <= jList.size(); i++) {
-                System.out.println(i);
+            System.out.println(i);
         }
 
         assertThat(NumberUIElementsInJList, is(equalTo(actualNumberOfNavbarBrands)));
