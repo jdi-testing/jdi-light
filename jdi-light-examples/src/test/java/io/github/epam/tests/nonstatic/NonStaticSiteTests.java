@@ -9,16 +9,12 @@ public class NonStaticSiteTests extends NonStaticTestsInit {
 
     @BeforeMethod
     public void before() {
-        shouldBeLoggedIn();
+        nonStaticSite.shouldBeLoggedIn();
         nonStaticSite.getHomePage().shouldBeOpened();
     }
 
     @Test
     public void isOpenedTest() {
         nonStaticSite.getHomePage().isOpened();
-    }
-    @Test
-    public void checkTest() {
-        nonStaticSite.getHomePage().title().check();
     }
 }
