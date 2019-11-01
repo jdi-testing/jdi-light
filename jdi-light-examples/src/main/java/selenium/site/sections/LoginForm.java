@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import selenium.entities.User;
 
 public class LoginForm extends Form<User> {
-    WebElement name;
-    WebElement password;
+    private WebElement name;
+    private WebElement password;
 
-    WebElement loginButton;
+    private WebElement loginButton;
 }

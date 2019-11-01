@@ -22,7 +22,7 @@ public class DataListTests extends TestsInit {
         html5Page.shouldBeOpened();
         iceCream.select(text);
     }
-    String text = "Coconut";
+    private String text = "Coconut";
 
     @Test
     public void getValueTest() {

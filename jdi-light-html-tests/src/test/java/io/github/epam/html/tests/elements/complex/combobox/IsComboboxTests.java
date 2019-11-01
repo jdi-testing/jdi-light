@@ -22,7 +22,7 @@ public class IsComboboxTests extends TestsInit {
         html5Page.shouldBeOpened();
         iceCreamIs.select(text);
     }
-    String text = "Coconut";
+    private String text = "Coconut";
 
     @Test
     public void getValueTest() {
