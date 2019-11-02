@@ -1,26 +1,20 @@
 package io.github.epam.bootstrap.tests.composite.section.form;
 
-import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.elements.common.Alerts;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
 import io.github.com.entities.FormContacts;
-import io.github.com.sections.modal.ModalTooltipsAndPopovers;
+import io.github.com.entities.SimpleContact;
+import io.github.com.sections.form.FormValidationForm;
 import io.github.epam.TestsInit;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Map;
-import java.util.function.Consumer;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
-
+import static io.github.com.StaticSite.formPage;
 import static io.github.com.pages.BootstrapPage.formCustomStyles;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
@@ -32,8 +26,48 @@ public class BootstrapValidationTest extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
+        formPage.shouldBeOpened();
+        //refresh();
     }
+
+    @Test(description = "Test validation rules with positive data")
+    public void simpleValidationPositiveTest(SimpleContact entity) {
+
+        FormValidationForm form = formPage.formValidationSection.form();
+        formPage.formValidationSection.swithToBrowserValidation();
+
+        form.fill(entity);
+        Assert.assertTrue(form.isValid());
+
+        form.pressButton("reset");
+
+        formPage.formValidationSection.swithToCustomValidation();
+
+        form.fill(entity);
+        Assert.assertTrue(form.isValid());
+
+        form.pressButton("reset");
+    }
+
+    @Test(description = "Test validation rules with negative data")
+    public void simpleValidationNegativeTest(SimpleContact entity) {
+
+        FormValidationForm form = formPage.formValidationSection.form();
+        formPage.formValidationSection.swithToBrowserValidation();
+
+        form.fill(entity);
+        Assert.assertFalse(form.isValid());
+
+        form.pressButton("reset");
+
+        formPage.formValidationSection.swithToCustomValidation();
+
+        form.fill(entity);
+        Assert.assertFalse(form.isValid());
+
+        form.pressButton("reset");
+    }
+
 /*
     @Test
     public void formValidationTest() {
