@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css"/>
     <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
     <link rel="stylesheet" href="css/fix-bootstrap4.3.css"/>
+    <link rel="stylesheet" href="css/bootstrap-validated-form.css"/>
     <script src="js/lib/jquery-1.11.1.min.js"></script>
     <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/lib/jquery.cookie.js"></script>
@@ -165,6 +166,53 @@
                             <button type="button" class="btn btn-danger" id="superhero-button-clear">Clear</button>
                         </form>
                     </div>
+
+                    <!-- FORM VALIDATION-->
+                    <div class="doc-space line">
+                        <h4>Form validation</h4>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="browser-validation-radio" name="validationType" class="custom-control-input">
+                            <label class="custom-control-label" for="browser-validation-radio">Browser validation</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="client-validation-radio" name="validationType" class="custom-control-input">
+                            <label class="custom-control-label" for="client-validation-radio">Custom validation</label>
+                        </div>
+                        <h6 id = "validated-form-title">Form validation</h6>
+                        <form id="validated-form">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="validated-form-name"
+                                            aria-describedby="emailHelp" placeholder="Enter name" required>
+                                        <div class="valid-feedback">Looks good!</div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="validated-form-email"
+                                            aria-describedby="emailHelp" placeholder="Enter email" required>
+                                        <div class="valid-feedback">Looks good!</div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="validated-form-phone"
+                                            aria-describedby="emailHelp" placeholder="Enter phone" pattern="^[-+0-9()\s]+$">
+                                        <div class="valid-feedback">Looks good!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                <button type="submit" class="btn btn-primary" id="svalidated-form-submit">Send</button>
+                                <button type="reset" class="btn btn-danger" id="validated-form-reset">Clear</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- FORM VALIDATION-->
 
                 </div>
             </div>
