@@ -84,7 +84,9 @@ public class InitActions {
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
         $("PageObject", sRule(info -> !isClassOr(info.type(), WebPage.class, Section.class) &&
                 isPageObject(info.instance.getClass()),
-            PageFactory::initElements))
+            PageFactory::initElements)),
+        $("VisualCheck", sRule(info -> isInterface(info.field, ICoreElement.class),
+            i-> ((ICoreElement)i.instance).base().params.add("visualCheck","")))
     );
 
     private static boolean isSetupValue(SiteInfo info) {
@@ -135,7 +137,8 @@ public class InitActions {
             FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
             if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
                 e.setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
-            }))
+            })),
+        $("VisualCheck", aRule(VisualCheck.class, (e, a) -> e.params.add("visualCheck", "")))
     );
 
     public static IBaseElement elementSetup(SiteInfo info) {

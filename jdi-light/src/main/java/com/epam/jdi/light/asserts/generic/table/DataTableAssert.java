@@ -24,7 +24,7 @@ public class DataTableAssert<L extends Section, D>
      */
     @JDIAction("Assert that '{name}' has rows that meet expected condition")
     public DataTableAssert<L, D> row(JFunc1<D,Boolean> condition) {
-        jdiAssert(table().data(condition), not(nullValue()));
+        jdiAssert(table().dataRow(condition), not(nullValue()));
         return this;
     }
 
@@ -76,8 +76,8 @@ public class DataTableAssert<L extends Section, D>
         @JDIAction("Assert that '{name}' has {type} '{count}' rows that meet expected condition")
         public DataTableAssert<L, D> rows(JFunc1<D,Boolean> condition) {
             jdiAssert(exact
-                ? table().datas(condition)
-                : table().datas(condition, count),
+                ? table().dataRows(condition)
+                : table().dataRows(condition, count),
             hasSize(count));
             return dtAssert;
         }

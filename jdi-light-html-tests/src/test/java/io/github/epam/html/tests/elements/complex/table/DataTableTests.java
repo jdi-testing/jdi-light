@@ -63,19 +63,19 @@ public class DataTableTests implements TestsInit {
     }
     @Test
     public void dataColumnTestIndex() {
-        assertEquals(users.data(2), SPIDER_MAN);
+        assertEquals(users.dataRow(2), SPIDER_MAN);
     }
     @Test
     public void dataColumnNameTest() {
-        assertEquals(usersSetup.data("Sergey Ivan"), SPIDER_MAN);
+        assertEquals(usersSetup.dataRow("Sergey Ivan"), SPIDER_MAN);
     }
     @Test
     public void dataFilterTest() {
-        assertEquals(users.data(d -> d.user.contains("Ivan")), SPIDER_MAN);
+        assertEquals(users.dataRow(d -> d.user.contains("Ivan")), SPIDER_MAN);
     }
     @Test
     public void allDataFilterTest() {
-        List<MarvelUserInfo> filteredData = users.datas(d -> d.user.contains("Ivan"));
+        List<MarvelUserInfo> filteredData = users.dataRows(d -> d.user.contains("Ivan"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), SPIDER_MAN);
     }

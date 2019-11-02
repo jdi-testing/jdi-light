@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
+import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.light.settings.TimeoutSettings;
 import com.epam.jdi.tools.PrintUtils;
@@ -27,12 +28,14 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
 import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.OutputTemplates.STEP_TEMPLATE;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
@@ -100,7 +103,7 @@ public class ActionHelper {
         processNewPage(jp);
     };
 
-    public static int CUT_STEP_TEXT = 70;
+    public static int CUT_STEP_TEXT = 100;
     public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
         if (!logResult(jp)) return result;
         LogLevels logLevel = logLevel(jp);
@@ -111,9 +114,16 @@ public class ActionHelper {
             logger.toLog(">>> " + text, logLevel);
         } else
             logger.debug("Done");
+        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION
+            && isVisualAction(jp))
+            visualWindowCheck();
         TIMEOUT.reset();
         return result;
     };
+    static boolean isVisualAction(ProceedingJoinPoint jp) {
+        VisualCheck visual = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(VisualCheck.class);
+        return visual != null;
+    }
     static boolean logResult(ProceedingJoinPoint jp) {
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class)) return false;

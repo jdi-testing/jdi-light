@@ -18,6 +18,8 @@ import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
 import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
+import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
+import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
@@ -169,7 +171,14 @@ public class WebPage extends DriverBase implements PageObject {
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
         setCurrentPage(this);
+        if (VISUAL_PAGE_STRATEGY == CHECK_PAGE)
+            visualWindowCheck();
     }
+    /**
+     * Check that page opened
+     */
+    @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
+    public static void visualWindowCheck() { }
 
     /**
      * Check the page is opened
@@ -382,6 +391,8 @@ public class WebPage extends DriverBase implements PageObject {
     public static JAction1<WebPage> BEFORE_NEW_PAGE = page -> {
         if (CHECK_AFTER_OPEN == NEW_PAGE)
             page.checkOpened();
+        if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
+            visualWindowCheck();
         logger.toLog("Page: " + page.getName());
         TIMEOUT.set(PAGE_TIMEOUT.get());
     };

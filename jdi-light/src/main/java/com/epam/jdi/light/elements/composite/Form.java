@@ -2,12 +2,15 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
+import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction4;
 import com.epam.jdi.tools.func.JFunc3;
@@ -23,8 +26,11 @@ import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.FormFilters.*;
 import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
+import static com.epam.jdi.light.common.VisualCheckAction.*;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
@@ -194,15 +200,19 @@ public class Form<T> extends Section {
             throw exception("Can't submit '%s' in form %s", text, this);
         Field field = fields.get(0);
         FILL_ACTION.execute(field, getValueField(field, pageObject), pageObject, text);
-        GET_BUTTON.execute(pageObject, buttonName).click();
+        pressButton(buttonName);
     }
 
     /**
      * Allowed different buttons to send one form e.g. save/ publish / cancel / search update ...
      */
+    @VisualCheck
     @JDIAction("Submit '{name}' and press '{0}' button")
     public void pressButton(String buttonName) {
-        GET_BUTTON.execute(pageObject, buttonName).click();
+        IClickable button = GET_BUTTON.execute(pageObject, buttonName);
+        button.click();
+        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
+            visualWindowCheck();
     }
     public void submit() {
         pressButton("submit");
@@ -233,8 +243,7 @@ public class Form<T> extends Section {
 
     protected void submit(MapArray<String, String> objStrings, String name) {
         fill(objStrings);
-        IClickable button = GET_BUTTON.execute(pageObject, name);
-        button.click();
+        pressButton(name);
     }
     /**
      * @param objStrings Fill all SetValue elements and click on Button specified button e.g. "Publish" or "Save" <br>
@@ -259,7 +268,7 @@ public class Form<T> extends Section {
     }
     @JDIAction("Login")
     public void login() {
-        GET_BUTTON.execute(pageObject, "login").click();
+        pressButton("login");
     }
     /**
      * @param entity Specify entity
@@ -283,7 +292,7 @@ public class Form<T> extends Section {
 
     @JDIAction("Send '{name}'")
     public void send() {
-        GET_BUTTON.execute(pageObject, "send").click();
+        pressButton("send");
     }
     /**
      * @param entity Specify entity

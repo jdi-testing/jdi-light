@@ -53,7 +53,7 @@ public class FurnitureTests implements TestsInit {
 //    }
 //    @Test
 //    public void allDataFilterTest() {
-//        List<MarvelUserInfo> filteredData = users.datas(d -> d.user.contains("Ivan"));
+//        List<MarvelUserInfo> filteredData = users.dataRows(d -> d.user.contains("Ivan"));
 //        assertEquals(filteredData.size(), 1);
 //        assertEquals(filteredData.get(0), SPIDER_MAN);
 //    }

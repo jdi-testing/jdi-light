@@ -92,10 +92,9 @@ public class ActionProcessor {
     public static Object stableAction(ProceedingJoinPoint jp) {
         try {
             String exception = "";
-            JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
             ICoreElement obj = getJdi(jp);
             JFunc1<Object, Object> overrideAction = getOverride(jp);
-            int timeout = getTimeout(ja, obj);
+            int timeout = getTimeout(jp, obj);
             long start = currentTimeMillis();
             do {
                 try {
@@ -124,7 +123,10 @@ public class ActionProcessor {
         return override;
     }
 
-    private static int getTimeout(JDIAction ja, IBaseElement obj) {
+    private static int getTimeout(ProceedingJoinPoint jp, IBaseElement obj) {
+        JDIAction ja = jp != null
+            ? getJpMethod(jp).getMethod().getAnnotation(JDIAction.class)
+            : null;
         return ja != null && ja.timeout() != -1
             ? ja.timeout()
             : obj != null

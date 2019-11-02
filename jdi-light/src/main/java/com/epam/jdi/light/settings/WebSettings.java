@@ -1,9 +1,7 @@
 package com.epam.jdi.light.settings;
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
-import com.epam.jdi.light.common.ElementArea;
-import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.common.Timeout;
+import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverData;
 import com.epam.jdi.light.driver.get.DriverTypes;
@@ -105,6 +103,8 @@ public class WebSettings {
 
     public static ElementArea CLICK_TYPE = SMART_CLICK;
     public static TextTypes TEXT_TYPE = SMART_TEXT;
+    public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
+    public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
         preInit();
