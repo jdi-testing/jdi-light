@@ -8,12 +8,11 @@ import io.github.com.sections.form.FormValidationForm;
 import io.github.epam.TestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Map;
 
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static io.github.com.StaticSite.bsPage;
 import static io.github.com.StaticSite.formPage;
 import static io.github.com.pages.BootstrapPage.formCustomStyles;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -30,7 +29,16 @@ public class BootstrapValidationTest extends TestsInit {
         //refresh();
     }
 
-    @Test(description = "Test validation rules with positive data")
+    @DataProvider
+    public Object[][] positiveData() {
+        return new Object[][] {
+                {new SimpleContact("Peter", "peter@dailybugle.com", "+44 (589)-23-11")},
+                {new SimpleContact("Peter Parker", "spidey@photo.com", "")},
+                {new SimpleContact("With great power there must also come—great responsibility!", "doesnt@matter", "123")},
+        };
+    }
+
+    @Test(description = "Test validation rules with positive data", dataProvider = "positiveData")
     public void simpleValidationPositiveTest(SimpleContact entity) {
 
         FormValidationForm form = formPage.formValidationSection.form();
@@ -49,7 +57,16 @@ public class BootstrapValidationTest extends TestsInit {
         form.pressButton("reset");
     }
 
-    @Test(description = "Test validation rules with negative data")
+    @DataProvider
+    public Object[][] negativeData() {
+        return new Object[][] {
+                {new SimpleContact("", "", "")},
+                {new SimpleContact("Norman", "gg@oscorp.com", "Ha ha ha!")},
+                {new SimpleContact("", "gg@oscorp.com", "123")},
+        };
+    }
+
+    @Test(description = "Test validation rules with negative data", dataProvider = "negativeData")
     public void simpleValidationNegativeTest(SimpleContact entity) {
 
         FormValidationForm form = formPage.formValidationSection.form();
@@ -111,6 +128,10 @@ public class BootstrapValidationTest extends TestsInit {
 
 
         System.out.println(map);
+    }
+
+    private SimpleContact entity(String name, String email, String phone) {
+        return new SimpleContact(name, email, phone);
     }
 
     private FormContacts contact() {
