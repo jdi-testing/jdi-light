@@ -116,36 +116,4 @@ public class BootstrapValidationTest extends TestsInit {
         userNameValidFeedback.is().size(0);
     }*/
 
-    @Test
-    public void validationAgainstMapTest() {
-
-
-        formCustomStyles.submit(contact());
-        Alerts.validateAlert(is("Form filled and submitted successfully"));
-
-        Map<String, UIElement> map = formCustomStyles.getAllFeedbackElements();
-
-
-
-        System.out.println(map);
-    }
-
-    private SimpleContact entity(String name, String email, String phone) {
-        return new SimpleContact(name, email, phone);
-    }
-
-    private FormContacts contact() {
-        return new FormContacts().set(c -> {
-            c.name = "NAME";
-            c.lastName = "LAST NAME";
-            c.userName = "";
-            c.city = "";
-            c.state = "";
-            c.zip = "";
-            c.accept = "";
-            c.radio = "";
-            c.email = "";
-            c.password = "";
-        });
-    }
 }

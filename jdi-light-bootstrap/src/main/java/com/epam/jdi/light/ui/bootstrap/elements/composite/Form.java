@@ -41,6 +41,39 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
         return getFeedbackList(element, ANY_FEEDBACK_LOCATOR);
     }
 
+    private String getBrowserFeedback(UIElement element) {
+        UIElement submitted = getSubmittedElement(element);
+        String feedback = (String) submitted.js().executeScript(
+                "arguments[0].validationMessage", submitted);
+        return feedback;
+    }
+
+    @JDIAction("Get browser feedback text")
+    public Map<String,String> getBrowserFeedback() {
+        Map<String, String> feedbackMap = new HashMap<>();
+
+        List<Field> allFields = allFields();
+
+        for (Field field : allFields) {
+
+            String fieldName = getElementName(field);
+            Object fieldObj = ReflectionUtils.getValueField(field, getPageObject());
+            String feedback = "";
+            if (fieldObj instanceof UIElement) {
+                feedback = getBrowserFeedback((UIElement)fieldObj);
+            } else if (fieldObj instanceof UIBaseElement) {
+                feedback = getBrowserFeedback(((UIBaseElement) fieldObj).core());
+            } else {
+                throw Exceptions.exception("Cant make checking against field %s because it is not %s or %s",
+                        fieldName, UIElement.class.getName(), UIBaseElement.class.getName());
+            }
+
+            feedbackMap.put(fieldName, feedback);
+        }
+
+        return feedbackMap;
+    }
+
     private WebList getFeedbackList(UIElement element, String locator) {
         UIElement validatedElement = getSubmittedElement(element);
         return validatedElement.finds(locator);
