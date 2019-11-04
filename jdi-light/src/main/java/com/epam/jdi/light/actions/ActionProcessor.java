@@ -81,7 +81,7 @@ public class ActionProcessor {
         ICoreElement obj = getJdi(jp);
         JFunc1<Object, Object> overrideAction = getOverride(jp);
         return overrideAction != null
-                ? overrideAction.execute(jp.getThis()) : jp.proceed();
+                ? overrideAction.execute(jp) : jp.proceed();
     }
     public static ICoreElement getJdi(ProceedingJoinPoint jp) {
         try {

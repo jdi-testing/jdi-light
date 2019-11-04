@@ -1,6 +1,8 @@
 package com.epam.jdi.light.asserts.generic.table;
 
+import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.TableMatcher;
 import com.epam.jdi.light.elements.composite.Section;
@@ -54,12 +56,15 @@ public class DataTableAssert<L extends Section, D>
         return exact(1);
     }
 
-    public class Compare {
+    public class Compare implements JAssert {
+
         public int count;
         public String name;
         public String type;
         DataTableAssert<L, D> dtAssert;
         boolean exact;
+        public JDIBase base() { return DataTableAssert.this.base(); }
+
         private Compare(int count, DataTableAssert<L, D> dtAssert, boolean exact) {
             this.count = count;
             this.dtAssert = dtAssert;

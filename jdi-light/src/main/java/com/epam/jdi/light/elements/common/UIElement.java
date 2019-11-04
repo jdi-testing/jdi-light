@@ -10,7 +10,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -164,7 +163,7 @@ public class UIElement extends JDIBase
     @JDIAction(value = "Check that '{name}' is displayed", timeout = 0)
     public boolean isDisplayed() {
         if (VISUAL_ACTION_STRATEGY == IS_DISPLAYED && params.keys().contains("visualCheck"))
-            visualCheck();
+            visualCheck("Is Displayed");
         return displayed();
     }
     /**

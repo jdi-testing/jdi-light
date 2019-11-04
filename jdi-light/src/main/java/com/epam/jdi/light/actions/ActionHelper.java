@@ -1,9 +1,7 @@
 package com.epam.jdi.light.actions;
 
-
-import com.epam.jdi.light.asserts.generic.CommonAssert;
+import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -12,9 +10,7 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
-import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.logger.LogLevels;
-import com.epam.jdi.light.settings.TimeoutSettings;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
@@ -100,16 +96,18 @@ public class ActionHelper {
     }
 
     public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
-        logger.toLog(getBeforeLogString(jp), logLevel(jp));
+        String message = getBeforeLogString(jp);
+        logger.toLog(message, logLevel(jp));
         if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION
-            && isInterface(jp.getClass(), CommonAssert.class)) {
+            && isInterface(jp.getThis().getClass(), JAssert.class)) {
             JDIBase element = ((IBaseElement) jp.getThis()).base();
-            element.visualCheck();
+            element.visualCheck(message);
         }
     };
     public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = jp -> {
         BEFORE_STEP_ACTION.execute(jp);
         processNewPage(jp);
+
     };
 
     public static int CUT_STEP_TEXT = 100;
@@ -144,7 +142,7 @@ public class ActionHelper {
         (jp, result) -> AFTER_STEP_ACTION.execute(jp, result);
 
     //region Private
-    static String getBeforeLogString(ProceedingJoinPoint jp) {
+    public static String getBeforeLogString(ProceedingJoinPoint jp) {
         String actionName = GET_ACTION_NAME.execute(jp);
         String logString = jp.getThis() == null
             ? actionName

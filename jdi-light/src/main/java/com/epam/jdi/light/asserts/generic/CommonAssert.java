@@ -7,7 +7,7 @@ import com.epam.jdi.tools.func.JFunc1;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public interface CommonAssert<A> {
+public interface CommonAssert<A> extends JAssert {
     A displayed();
     A disappear();
     A hidden();

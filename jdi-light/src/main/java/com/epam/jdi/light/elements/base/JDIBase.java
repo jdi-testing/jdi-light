@@ -177,8 +177,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return this;
     }
 
-    @JDIAction(value = "Check '{name}' view", timeout = 0)
-    public void visualCheck() { }
+    @JDIAction(value = "{0}", timeout = 0)
+    public void visualCheck(String message) { }
 
     public static final String FAILED_TO_FIND_ELEMENT_MESSAGE
             = "Can't find Element '%s' during %s seconds";

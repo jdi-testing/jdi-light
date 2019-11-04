@@ -1,11 +1,10 @@
 package org.mytests.tests.example;
 
-import org.hamcrest.Matchers;
 import org.mytests.tests.TestsInit;
 import org.testng.annotations.Test;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
 import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_USER;
 import static org.mytests.uiobjects.example.entities.Defaults.SPIDER_MAN;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
