@@ -5,11 +5,9 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -19,13 +17,11 @@ import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
-import static com.epam.jdi.tools.RegExUtils.matches;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static com.epam.jdi.tools.switcher.SwitchActions.Value;
-import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;

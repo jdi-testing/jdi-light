@@ -38,6 +38,11 @@
             <artifactId>jdi-light-eyes</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.testng}</version>
+        </dependency>
     </dependencies>
 
     <build>

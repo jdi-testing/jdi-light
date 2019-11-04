@@ -1,8 +1,9 @@
 package com.epam.jdi.eyes;
 
 /**
- * Created by Ekaterina Vasilkova on 25.09.2019
- * Email: katenka.vasilkova@gmail.com; Skype: live:katenka.vasilkova
+ * Created by Roman Iovlev on 11.04.2019
+ * Email: roman.iovlev.jdi@gmail.com;
+ * Skype: roman.iovlev
  */
 
 import com.applitools.eyes.BatchInfo;
@@ -76,8 +77,7 @@ public class JDIEyes {
         if (!eyesList.contains(eye))
             eyesList.add(eye);
         if (NEW_TEST.get()) {
-            if (eye.getIsOpen())
-                closeEye(eye);
+            closeEye(eye);
             eye.open(EYES_CONFIG.webDriver.execute(), EYES_CONFIG.appName, TEST_NAME.get());
             NEW_TEST.set(false);
         }
@@ -85,7 +85,7 @@ public class JDIEyes {
     static void closeEye(Eyes eye) {
         try {
             if (eye.getIsOpen())
-                eye.close();
+                eye.close(false);
         } finally {
             if (eye.getIsOpen())
                 eye.abortIfNotClosed();

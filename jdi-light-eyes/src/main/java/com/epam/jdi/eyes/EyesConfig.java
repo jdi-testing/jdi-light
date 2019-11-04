@@ -1,8 +1,9 @@
 package com.epam.jdi.eyes;
 
 /**
- * Created by Ekaterina Vasilkova on 25.09.2019
- * Email: katenka.vasilkova@gmail.com; Skype: live:katenka.vasilkova
+ * Created by Roman Iovlev on 11.04.2019
+ * Email: roman.iovlev.jdi@gmail.com;
+ * Skype: roman.iovlev
  */
 
 import com.epam.jdi.light.driver.WebDriverFactory;
