@@ -14,6 +14,7 @@ public class EyesConfig extends DataClass<EyesConfig> {
     public String appName;
     public JFunc<WebDriver> webDriver;
     public String apiKey;
+    public static boolean THROW_EXCEPTIONS = true;
 
     public EyesConfig() {
         appName = "JDI Application";

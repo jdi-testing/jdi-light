@@ -86,7 +86,7 @@ public class InitActions {
                 isPageObject(info.instance.getClass()),
             PageFactory::initElements)),
         $("VisualCheck", sRule(info -> isInterface(info.field, ICoreElement.class),
-            i-> ((ICoreElement)i.instance).base().params.add("visualCheck","")))
+            i-> ((ICoreElement)i.instance).base().params.update("visualCheck","")))
     );
 
     private static boolean isSetupValue(SiteInfo info) {

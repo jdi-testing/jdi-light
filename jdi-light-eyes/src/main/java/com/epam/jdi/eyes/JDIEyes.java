@@ -11,7 +11,6 @@ import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.common.VisualCheckPage;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.tools.Safe;
 import org.openqa.selenium.WebElement;
@@ -20,7 +19,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.applitools.eyes.TestResultsStatus.Passed;
 import static com.applitools.eyes.selenium.fluent.Target.region;
 import static com.epam.jdi.light.actions.ActionOverride.OverrideAction;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
@@ -46,15 +44,13 @@ public class JDIEyes {
         VISUAL_PAGE_STRATEGY = checkPageStrategy;
         VISUAL_ACTION_STRATEGY = checkActionStrategy;
         OverrideAction("visualCheck", e -> {
-            if (!isClass(e.getClass(), ICoreElement.class))
+            if (!isClass(e.getClass(), IBaseElement.class))
                 return;
-            ICoreElement ui = (ICoreElement) e;
-            ui.isDisplayed();
+            IBaseElement ui = (IBaseElement) e;
             visualCheckElement(ui);
         });
-        OverrideAction("visualWindowCheck", e -> {
-            visualCheckPage(WebPage.getCurrentPage());
-        });
+        OverrideAction("visualWindowCheck",
+            e -> visualCheckPage(WebPage.getCurrentPage()));
     }
     public static void visualTestInit() {
         visualTestInit(CHECK_NEW_PAGE, ON_VISUAL_ACTION);
@@ -76,9 +72,9 @@ public class JDIEyes {
         if (NEW_TEST.get()) {
             if (eye.getIsOpen())
                 closeEye(eye);
-            eye.open(EYES_CONFIG.webDriver.execute(), EYES_CONFIG.appName, TEST_NAME.get());
-            NEW_TEST.set(false);
         }
+        eye.open(EYES_CONFIG.webDriver.execute(), EYES_CONFIG.appName, TEST_NAME.get());
+        NEW_TEST.set(false);
     }
     static void closeEye(Eyes eye) {
         try {
@@ -105,30 +101,34 @@ public class JDIEyes {
     public static void newVisualTest(Method method) {
         newVisualTest(format("%s.%s", method.getDeclaringClass().getSimpleName(), method.getName()));
     }
-    public static boolean visualCheckPage(String pageName) {
+    public static void visualCheckPage(String pageName) {
         openEyes();
         eyes.get().checkWindow(pageName);
-        return getResult(eyes.get());
+        TestResults result = getResult(eyes.get());
+        System.out.println(result.toString());
+        //getResult(eyes.get());
     }
-    public static boolean visualCheckPage(INamed page) {
-        return visualCheckPage(page.getName());
+    public static void visualCheckPage(INamed page) {
+        visualCheckPage(page.getName());
     }
-    public static boolean visualCheckElement(IBaseElement uiElement) {
-        return visualCheckElement(uiElement.base().getWebElement(), uiElement.getName());
+    public static void visualCheckElement(IBaseElement uiElement) {
+        visualCheckElement(uiElement.base().getWebElement(), uiElement.getName());
     }
-    public static boolean visualCheckElement(WebElement webElement, String name) {
+    public static void visualCheckElement(WebElement webElement, String name) {
         openEyes();
         eyes.get().check(name, region(webElement));
-        return getResult(eyes.get());
+        TestResults result = getResult(eyes.get());
+        System.out.println(result.toString());
+        //if (EyesConfig.THROW_EXCEPTIONS getResult(eyes.get()))
     }
 
-    static boolean getResult(Eyes eyes) {
+    static TestResults getResult(Eyes eyes) {
         try {
-            TestResults testResults = eyes.close(false);
-            return testResults.getStatus() == Passed;
+            return eyes.close(false);
+            //return testResults.getStatus() != Failed;
         } catch (Exception ex){
             eyes.abortIfNotClosed();
         }
-        return false;
+        return null;
     }
 }

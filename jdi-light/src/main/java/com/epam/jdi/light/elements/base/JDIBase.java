@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDILocator;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -175,6 +176,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         this.failElement = name;
         return this;
     }
+
+    @JDIAction(value = "Check '{name}' view", timeout = 0)
+    public void visualCheck() { }
 
     public static final String FAILED_TO_FIND_ELEMENT_MESSAGE
             = "Can't find Element '%s' during %s seconds";

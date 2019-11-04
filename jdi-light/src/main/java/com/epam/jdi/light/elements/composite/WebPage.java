@@ -381,9 +381,7 @@ public class WebPage extends DriverBase implements PageObject {
         public boolean contains() {
             String value = actual.get();
             logger.toLog(format("Check that page %s(%s) contains '%s'", what, value, equals));
-            return equals == null
-                    || equals.equals("")
-                    || value.contains(equals);
+            return equals == null || equals.equals("") || value.contains(equals);
         }
     }
 

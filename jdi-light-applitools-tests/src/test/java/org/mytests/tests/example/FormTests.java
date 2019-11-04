@@ -1,9 +1,11 @@
 package org.mytests.tests.example;
 
+import org.hamcrest.Matchers;
 import org.mytests.tests.TestsInit;
 import org.testng.annotations.Test;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.hamcrest.Matchers.*;
 import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_USER;
 import static org.mytests.uiobjects.example.entities.Defaults.SPIDER_MAN;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
@@ -20,5 +22,8 @@ public class FormTests extends TestsInit {
             .no().rows(d -> isBlank(d.user))
             .atLeast(3).rows(d -> d.type.contains("User"))
             .exact(1).rows(SPIDER_MAN);
+        userTable.line(2).description.image.is()
+            .src(containsString("spider-man"));
+        userTable.line(3).description.is().displayed();
     }
 }

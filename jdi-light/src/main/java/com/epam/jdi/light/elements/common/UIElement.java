@@ -163,13 +163,10 @@ public class UIElement extends JDIBase
      */
     @JDIAction(value = "Check that '{name}' is displayed", timeout = 0)
     public boolean isDisplayed() {
-        if (params.keys().contains("visualCheck"))
+        if (VISUAL_ACTION_STRATEGY == IS_DISPLAYED && params.keys().contains("visualCheck"))
             visualCheck();
         return displayed();
     }
-    @VisualCheck
-    @JDIAction(value = "Check '{name}' view", timeout = 0)
-    public void visualCheck() { }
     /**
      * Get element location as Point
      * @return Point

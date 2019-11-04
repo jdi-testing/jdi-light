@@ -206,13 +206,10 @@ public class Form<T> extends Section {
     /**
      * Allowed different buttons to send one form e.g. save/ publish / cancel / search update ...
      */
-    @VisualCheck
     @JDIAction("Submit '{name}' and press '{0}' button")
     public void pressButton(String buttonName) {
         IClickable button = GET_BUTTON.execute(pageObject, buttonName);
         button.click();
-        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
-            visualWindowCheck();
     }
     public void submit() {
         pressButton("submit");

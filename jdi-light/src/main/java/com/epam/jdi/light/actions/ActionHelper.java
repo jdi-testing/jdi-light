@@ -1,10 +1,14 @@
 package com.epam.jdi.light.actions;
 
 
+import com.epam.jdi.light.asserts.generic.CommonAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
@@ -97,6 +101,11 @@ public class ActionHelper {
 
     public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
         logger.toLog(getBeforeLogString(jp), logLevel(jp));
+        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION
+            && isInterface(jp.getClass(), CommonAssert.class)) {
+            JDIBase element = ((IBaseElement) jp.getThis()).base();
+            element.visualCheck();
+        }
     };
     public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = jp -> {
         BEFORE_STEP_ACTION.execute(jp);
@@ -114,16 +123,11 @@ public class ActionHelper {
             logger.toLog(">>> " + text, logLevel);
         } else
             logger.debug("Done");
-        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION
-            && isVisualAction(jp))
-            visualWindowCheck();
+        if (getJpMethod(jp).getName().equals("open"))
+            BEFORE_NEW_PAGE.execute(getPage(jp.getThis()));
         TIMEOUT.reset();
         return result;
     };
-    static boolean isVisualAction(ProceedingJoinPoint jp) {
-        VisualCheck visual = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(VisualCheck.class);
-        return visual != null;
-    }
     static boolean logResult(ProceedingJoinPoint jp) {
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class)) return false;
@@ -153,7 +157,7 @@ public class ActionHelper {
     public static void processNewPage(JoinPoint jp) {
         getWindows();
         Object element = jp.getThis();
-        if (element != null) { // TODO support static pages
+        if (element != null && !isClass(element.getClass(), WebPage.class)) {
             WebPage page = getPage(element);
             String currentPage = getCurrentPage();
             if (currentPage != null && page != null) {
