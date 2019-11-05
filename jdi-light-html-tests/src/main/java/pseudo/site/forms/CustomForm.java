@@ -16,12 +16,12 @@ import pseudo.site.entities.User;
 import java.util.List;
 
 public class CustomForm extends Form<User> {
-    @FindBy(css = "#fbWebElement-id") WebElement fbWebElement;
+    @FindBy(css = "#fbWebElement-id")private WebElement fbWebElement;
     @FindBy(css = "#fbPublicWebElement-id") public WebElement fbPublicWebElement;
     @FindBy(css = "#fbPrivateWebElement-id") private WebElement fbPrivateWebElement;
-    @UI("#uiWebElement-id") WebElement uiWebElement;
+    @UI("#uiWebElement-id")private WebElement uiWebElement;
     @UI("#uiPublicWebElement-id") public WebElement uiPublicWebElement;
-    @Css("#cssWebElement-id") WebElement cssWebElement;
+    @Css("#cssWebElement-id")private WebElement cssWebElement;
     @XPath("//*[@id='xpathPublicWebElement-id']") public WebElement xpathPublicWebElement;
 
     @FindBy(css = ".fbWebElementList-class") public WebList fbWebElementList;
@@ -37,7 +37,7 @@ public class CustomForm extends Form<User> {
     @FindBy(css = "#fbPrivateUIElement-id") private UIElement fbPrivateUIElement;
     @UI("#uiUIElement-id") private UIElement uiUIElement;
     @UI("#uiPublicUIElement-id") public UIElement uiPublicUIElement;
-    @Css("#cssUIElement-id") UIElement cssUIElement;
+    @Css("#cssUIElement-id")private UIElement cssUIElement;
     @XPath("//*[@id='xpathPublicUIElement-id']") public WebElement xpathPublicUIElement;
 
     @FindBy(css = ".fbUIElementList-class")private List<UIElement> fbUIElementList;
@@ -45,7 +45,7 @@ public class CustomForm extends Form<User> {
     @FindBy(css = ".fbPrivateUIElementList-class") private List<UIElement> fbPrivateUIElementList;
     @UI(".uiUIElementList-class") private List<UIElement> uiUIElementList;
     @UI(".uiPublicUIElementList-class") public List<UIElement> uiPublicUIElementList;
-    @Css(".cssUIElementList-class") List<UIElement> cssUIElementList;
+    @Css(".cssUIElementList-class")private List<UIElement> cssUIElementList;
     @XPath("//*[@class='xpathPublicUIElementList-class']") public List<UIElement> xpathPublicUIElementList;
 
     @FindBy(css = "#fbButton-id")private Button fbButton;
@@ -61,19 +61,19 @@ public class CustomForm extends Form<User> {
     @FindBy(css = ".fbPrivateButtonList-class") private List<Button> fbPrivateButtonList;
     @UI(".uiButtonList-class")private List<Button> uiButtonList;
     @UI(".uiPublicButtonList-class") public List<Button> uiPublicButtonList;
-    @Css(".cssButtonList-class") List<Button> cssButtonList;
+    @Css(".cssButtonList-class")private List<Button> cssButtonList;
     @XPath("//*[@class='xpathPublicButtonList-class']") public List<Button> xpathPublicButtonList;
 
-    @FindBy(css = ".fbWebList-class") WebList fbWebList;
+    @FindBy(css = ".fbWebList-class")private WebList fbWebList;
     @FindBy(css = ".fbPublicWebList-class") public WebList fbPublicWebList;
     @FindBy(css = ".fbPrivateWebList-class") private WebList fbPrivateWebList;
-    @UI(".uiWebList-class") WebList uiWebList;
+    @UI(".uiWebList-class")private WebList uiWebList;
     @UI(".uiPublicWebList-class") public WebList uiPublicWebList;
-    @Css("#cssWebList-id") WebList cssWebList;
+    @Css("#cssWebList-id")private WebList cssWebList;
     @XPath("//*[@id='xpathPublicWebList-id']") public WebList xpathPublicWebList;
 
     @JDropdown(root = "div[ui=dropList]", value = "input", list = "li", expand = ".expand")
-    Dropdown dropList;
+    private Dropdown dropList;
     @JDropdown(root = "div[ui=publicDropList]", value = "input", list = "li", expand = ".expand") public Dropdown publicDropList;
     @JDropdown(root = "div[ui=privateDropList]", value = "input", list = "li", expand = ".expand") private Dropdown privateDropList;
 

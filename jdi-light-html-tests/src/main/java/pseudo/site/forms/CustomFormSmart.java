@@ -10,7 +10,7 @@ import pseudo.site.entities.User;
 import java.util.List;
 
 public class CustomFormSmart extends Form<User> {
-    WebElement fbWebElement;
+    private WebElement fbWebElement;
     public WebElement fbPublicWebElement;
     private WebElement fbPrivateWebElement;
 
@@ -18,7 +18,7 @@ public class CustomFormSmart extends Form<User> {
     public WebList fbPublicWebElementList;
     private WebList fbPrivateWebElementList;
 
-    UIElement fbUIElement;
+    private UIElement fbUIElement;
     public UIElement fbPublicUIElement;
     private UIElement fbPrivateUIElement;
 

@@ -34,6 +34,7 @@ public class HomePage {
             }
         }
     }
+    
     @FindBy(css = ".profile-photo") WebElement profilePhoto;
     @FindBy(css = ".profile-photo [ui=label]") WebElement userName;
 

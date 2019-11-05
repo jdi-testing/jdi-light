@@ -23,7 +23,7 @@ public class FormSteps {
 		lastForm.set(form);
 		return form;
 	}
-	static Form getLastForm() {
+	private static Form getLastForm() {
 		if (lastForm.get() != null)
 			return lastForm.get();
 		throw exception("You should execute form action with name before steps without form name");

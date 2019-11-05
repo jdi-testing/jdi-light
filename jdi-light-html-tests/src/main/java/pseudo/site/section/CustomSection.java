@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CustomSection extends Section {
     @FindBy(id = "webElementPackage")
-    WebElement webElementPackage;
+    private WebElement webElementPackage;
     @FindBy(id = "webElementPublic")
     public WebElement webElementPublic;
     @FindBy(id = "webElementPrivate")
@@ -47,13 +47,13 @@ public class CustomSection extends Section {
     public WebList listWebElementPublicXPath;
 
     @FindBy(id = "uielementPackage")
-    UIElement uielementPackage;
+    private UIElement uielementPackage;
     @FindBy(id = "uielementPublic")
     public UIElement uielementPublic;
     @FindBy(id = "uielementPrivate")
     private UIElement uielementPrivate;
     @UI(".uielementPackageUI")
-    UIElement uielementPackageUI;
+    private UIElement uielementPackageUI;
     @UI(".uielementPublicUI")
     public UIElement uielementPublicUI;
     @Css(".uielementPackageCss")
@@ -68,7 +68,7 @@ public class CustomSection extends Section {
     @FindBy(id = "buttonPrivate")
     private Button buttonPrivate;
     @UI(".buttonPackageUI")
-    Button buttonPackageUI;
+    private Button buttonPackageUI;
     @UI(".buttonPublicUI")
     public Button buttonPublicUI;
     @Css(".buttonPackageCss")
@@ -83,11 +83,11 @@ public class CustomSection extends Section {
     @FindBy(id = "listUIElementPrivate")
     private List<UIElement> listUIElementPrivate;
     @UI(".listUIElementPackageUI")
-    List<UIElement> listUIElementPackageUI;
+    private List<UIElement> listUIElementPackageUI;
     @UI(".listUIElementPublicUI")
     public List<UIElement> listUIElementPublicUI;
     @Css(".listUIElementPackageCss")
-    List<UIElement> listUIElementPackageCss;
+    private List<UIElement> listUIElementPackageCss;
     @XPath("//*[@class='listUIElementPublicXPath']")
     public List<UIElement> listUIElementPublicXPath;
 
@@ -102,7 +102,7 @@ public class CustomSection extends Section {
     @UI(".listButtonPublicUI")
     public List<Button> listButtonPublicUI;
     @Css(".listButtonPackageCss")
-    List<Button> listButtonPackageCss;
+    private List<Button> listButtonPackageCss;
     @XPath("//*[@class='listButtonPublicXPath']")
     public List<Button> listButtonPublicXPath;
 
@@ -113,22 +113,22 @@ public class CustomSection extends Section {
     @FindBy(id = "webListPrivate")
     private WebList webListPrivate;
     @UI(".webListPackageUI")
-    WebList webListPackageUI;
+    private WebList webListPackageUI;
     @UI(".webListPublicUI")
     public WebList webListPublicUI;
     @Css(".webListPackageCss")
-    WebList webListPackageCss;
+    private WebList webListPackageCss;
     @XPath("//*[@class='webListPublicXPath']")
     public WebList webListPublicXPath;
 
     @FindBy(id = "uilistQuestionPackage")
-    DataList<CustomSection, ?> uilistQuestionPackage;
+    private DataList<CustomSection, ?> uilistQuestionPackage;
     @FindBy(id = "uilistQuestionPublic")
     public DataList<CustomSection, ?> uilistQuestionPublic;
     @FindBy(id = "uilistQuestionPrivate")
     private DataList<CustomSection, ?> uilistQuestionPrivate;
     @UI(".uilistQuestionPackageData")
-    DataList<CustomSection, ?> uilistQuestionPackageData;
+    private DataList<CustomSection, ?> uilistQuestionPackageData;
     @UI(".uilistQuestionPublicData")
     public DataList<CustomSection, ?> uilistQuestionPublicData;
     @Css(".uilistQuestionPackageCss")
@@ -143,11 +143,11 @@ public class CustomSection extends Section {
     @FindBy(id = "uilistSomedataPrivate")
     private DataList<CustomSection, SomeData> uilistSomedataPrivate;
     @UI(".uilistSomedataPackageData")
-    DataList<CustomSection, SomeData> uilistSomedataPackageData;
+    private DataList<CustomSection, SomeData> uilistSomedataPackageData;
     @UI(".uilistSomedataPublicData")
     public DataList<CustomSection, SomeData> uilistSomedataPublicData;
     @Css(".uilistSomedataPackageCss")
-    DataList<CustomSection, SomeData> uilistSomedataPackageCss;
+    private DataList<CustomSection, SomeData> uilistSomedataPackageCss;
     @XPath("//*[@class='uilistSomedataPublicXPath']")
     public DataList<CustomSection, SomeData> uilistSomedataPublicXPath;
 
@@ -158,7 +158,7 @@ public class CustomSection extends Section {
     @JDropdown(root = "div[ui=droplistPrivate", value = "input", list = "li", expand = ".expand")
     private Dropdown droplistPrivate;
     @UI(".droplistPackageUI")
-    Dropdown droplistPackageUI;
+    private Dropdown droplistPackageUI;
     @UI(".droplistPublicUI")
     public Dropdown droplistPublicUI;
 

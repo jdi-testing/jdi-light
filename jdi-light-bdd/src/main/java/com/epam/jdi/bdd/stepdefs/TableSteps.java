@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TableSteps {
-    static Table lastTable;
+    private static Table lastTable;
     public static Table table(String name) { return lastTable = getUI(name, Table.class); }
 
     //#region When
