@@ -28,7 +28,8 @@ $(document).ready(function () {
          valForm.addEventListener('submit', customValidationListener, false);
     }
 
-     document.getElementById("#browser-validation-radio").checked = true;
+     document.getElementById("browser-validation-radio").checked = true;
+
      browserValidation();
 
     $("#browser-validation-radio").on('change', function() {
