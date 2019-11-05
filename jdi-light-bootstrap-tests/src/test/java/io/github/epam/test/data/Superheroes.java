@@ -7,24 +7,24 @@ public class Superheroes {
     public static Superhero TEMPLATE_HERO = getHeroTemplate();
 
     private static Superhero getExampleHero() {
-        return new Superhero().set(c -> {
-            c.currentAlias = "Venom";
-            c.alterEgo = "Peter Parker";
-            c.species = "Symbiote";
-            c.selectUniverse = "Marvel";
-            c.superheroRange = "10.0";
-            c.superheroSwitch = "true";
+        return new Superhero().set(field -> {
+            field.currentAlias = "Venom";
+            field.alterEgo = "Peter Parker";
+            field.species = "Symbiote";
+            field.selectUniverse = "Marvel";
+            field.superheroRange = "10.0";
+            field.superheroSwitch = "true";
         });
     }
 
     private static Superhero getHeroTemplate() {
-        return new Superhero().set(c -> {
-            c.currentAlias = "";
-            c.alterEgo = "";
-            c.species = "Human";
-            c.selectUniverse = "Select character's universe";
-            c.superheroRange = "50.0";
-            c.superheroSwitch = "false";
+        return new Superhero().set(field -> {
+            field.currentAlias = "";
+            field.alterEgo = "";
+            field.species = "Human";
+            field.selectUniverse = "Select character's universe";
+            field.superheroRange = "50.0";
+            field.superheroSwitch = "false";
         });
     }
 }
