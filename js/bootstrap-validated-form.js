@@ -30,6 +30,7 @@ $(document).ready(function () {
 
      document.getElementById("browser-validation-radio").checked = true;
 
+
      browserValidation();
 
     $("#browser-validation-radio").on('change', function() {
