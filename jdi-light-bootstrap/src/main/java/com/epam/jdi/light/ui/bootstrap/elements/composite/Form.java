@@ -76,12 +76,6 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
         return !this.hasAttribute("novalidate");
     }
 
-    @JDIAction("Return if form valid")
-    public boolean isValid() {
-        Object res = core().js().executeScript("return arguments[0].checkValidity()", core().get());
-        return (Boolean) res;
-    }
-
     @JDIAction("Get all feedback elements")
     public Map<String, UIElement> getFeedbackElements() {
         return getFeedbackMap(ANY_FEEDBACK_LOCATOR);

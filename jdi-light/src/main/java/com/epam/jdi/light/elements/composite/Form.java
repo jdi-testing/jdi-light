@@ -411,4 +411,10 @@ public class Form<T> extends Section {
         return false;
     }
     //endregion
+
+    @JDIAction("Return if form valid")
+    public boolean isValid() {
+        Object res = core().js().executeScript("return arguments[0].checkValidity()", core().get());
+        return (Boolean) res;
+    }
 }
