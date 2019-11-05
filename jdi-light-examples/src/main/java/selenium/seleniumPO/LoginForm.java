@@ -10,7 +10,7 @@ public class LoginForm {
 
     @FindBy(css="form [type=submit]")private WebElement enter;
 
-    void loginAs(User user) {
+    public void loginAs(User user) {
         userName.sendKeys(user.userName);
         password.sendKeys(user.password);
         enter.click();

@@ -14,7 +14,7 @@ public class Header extends Section {
 	public static WebElement userIcon;
 	@XPath("//*[@ui='label']") public static UIElement userName;
 
-	@Css(".search-field input") static UIElement searchInput;
+	private @Css(".search-field input") static UIElement searchInput;
 	private @Css(".icon-search") static WebElement searchIcon;
 	private @Css(".icon-search.active") static WebElement doSearch;
 
