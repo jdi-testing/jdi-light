@@ -34,7 +34,7 @@ public class IssueTest69 {
         assertEquals(p.toString(), "element_0_1,element_0_2,element_0_3");
     }
 
-    ParagraphData expectedParagraph = new ParagraphData().set(p-> {
+    private ParagraphData expectedParagraph = new ParagraphData().set(p-> {
         p.paragraph="element_0_1"; p.paragraph2="element_0_2"; p.paragraph3="element_0_3";
     });
     @Test

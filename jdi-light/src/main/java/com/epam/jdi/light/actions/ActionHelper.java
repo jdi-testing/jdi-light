@@ -128,7 +128,7 @@ public class ActionHelper {
             logger.debug("Done");
         return result;
     };
-    static boolean logResult(ProceedingJoinPoint jp) {
+    private static boolean logResult(ProceedingJoinPoint jp) {
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class)) return false;
         JDIAction ja = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
@@ -144,7 +144,7 @@ public class ActionHelper {
         (jp, result) -> AFTER_STEP_ACTION.execute(jp, result);
 
     //region Private
-    static String getBeforeLogString(ProceedingJoinPoint jp) {
+    private static String getBeforeLogString(ProceedingJoinPoint jp) {
         String actionName = GET_ACTION_NAME.execute(jp);
         String logString = jp.getThis() == null
             ? actionName
@@ -171,7 +171,7 @@ public class ActionHelper {
     }
 
     public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
-    static WebPage getPage(Object element) {
+    private static WebPage getPage(Object element) {
         if (isClass(element.getClass(), DriverBase.class) &&
             !isClass(element.getClass(), WebPage.class))
             return ((DriverBase) element).getPage();
@@ -219,7 +219,7 @@ public class ActionHelper {
         return toMap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint)));
     }
 
-    static MapArray<String, Object> toMap(JFunc<MapArray<String, Object>> getMap) {
+    private static MapArray<String, Object> toMap(JFunc<MapArray<String, Object>> getMap) {
         IGNORE_NOT_UNIQUE = true;
         MapArray<String, Object> map = getMap.execute();
         IGNORE_NOT_UNIQUE = false;
