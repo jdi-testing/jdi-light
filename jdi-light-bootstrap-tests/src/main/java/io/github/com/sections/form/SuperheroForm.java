@@ -22,4 +22,9 @@ public class SuperheroForm extends Form<Superhero> {
 
     @UI("#superhero-switch-div")
     public Checkbox superheroSwitch;
+
+    @Override
+    public void cancel(Superhero entity) {
+        submit(entity, "clear");
+    }
 }

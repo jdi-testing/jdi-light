@@ -10,6 +10,7 @@ import static io.github.com.pages.BootstrapFormsPage.superheroForm;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.Superheroes.EXAMPLE_HERO;
+import static io.github.epam.test.data.Superheroes.TEMPLATE_HERO;
 import static org.hamcrest.Matchers.containsString;
 
 public class ComplicatedFormTests extends TestsInit {
@@ -24,6 +25,7 @@ public class ComplicatedFormTests extends TestsInit {
     public void fillAndVerifyForm() {
         superheroForm.fill(EXAMPLE_HERO);
         superheroForm.verify(EXAMPLE_HERO);
+        superheroForm.check(EXAMPLE_HERO);
     }
 
     @Test
@@ -31,6 +33,13 @@ public class ComplicatedFormTests extends TestsInit {
         superheroForm.submit(EXAMPLE_HERO);
         lastLogEntry.has().text(containsString("superhero-button-submit:button clicked"));
         superheroForm.check(EXAMPLE_HERO);
+    }
+
+    @Test
+    public void clearForm() {
+        superheroForm.cancel(EXAMPLE_HERO);
+        lastLogEntry.has().text(containsString("superhero-button-clear:button clicked"));
+        superheroForm.check(TEMPLATE_HERO);
     }
 
     @Test
