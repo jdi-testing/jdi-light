@@ -14,6 +14,9 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 @SuppressWarnings("unused")
 public class HomePage {
     private String url = "https://jdi-testing.github.io/jdi-light/index.html";
+    @FindBy(css = ".profile-photo")protected WebElement profilePhoto;
+    @FindBy(css = ".profile-photo [ui=label]")protected WebElement userName;
+
     public void open() {
         getDriver().navigate().to(url);
     }
@@ -35,9 +38,6 @@ public class HomePage {
             }
         }
     }
-    
-    @FindBy(css = ".profile-photo")protected WebElement profilePhoto;
-    @FindBy(css = ".profile-photo [ui=label]")protected WebElement userName;
 
     // TODO fix performance
     @UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList leftNavigation;
