@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import selenium.entities.User;
 
+@SuppressWarnings("unused")
 public class LoginForm {
     @FindBy(css="form #name")private  WebElement userName;
     @FindBy(css="form #password")private WebElement password;

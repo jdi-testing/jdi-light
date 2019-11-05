@@ -11,6 +11,7 @@ import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.entities.Contacts;
 
+@SuppressWarnings("unused")
 public class ContactFormCustom extends Form<Contacts> {
     private @Mandatory TextField name;
     public TextField lastName;
