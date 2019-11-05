@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import io.github.epam.entities.User;
 import org.openqa.selenium.WebElement;
-@SuppressWarnings({"PMD.UnusedLocalVariable"})
+@SuppressWarnings("unused")
 public class LoginForm extends Form<User> {
 	@UI("*root*//header//form//input[@type='text']")
 	private WebElement name;
