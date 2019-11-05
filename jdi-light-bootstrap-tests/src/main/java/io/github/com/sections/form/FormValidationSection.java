@@ -15,16 +15,18 @@ public class FormValidationSection extends Section {
     private FormValidationForm validatedForm;
 
 
-    public void swithToBrowserValidation() {
-        browserValidationRadio.select();
+    public void switchToBrowserValidation() {
+        browserValidationRadio.core().label().click();
     }
 
-    public void swithToCustomValidation() {
-        browserValidationRadio.select();
+    public void switchToCustomValidation() {
+        customValidationRadio.core().label().click();
     }
+
 
     public FormValidationForm form() {
-        return  validatedForm;
+        return validatedForm;
     }
+
 
 }

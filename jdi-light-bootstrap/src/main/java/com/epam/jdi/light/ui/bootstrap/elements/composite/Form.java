@@ -67,7 +67,8 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
 
     private WebList getFeedbackList(UIElement element, String locator) {
         UIElement validatedElement = getSubmittedElement(element);
-        return validatedElement.finds(locator);
+        WebList list = validatedElement.finds(locator);
+        return list;
     }
 
     @JDIAction("Return if form has browser validation")
@@ -126,7 +127,7 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
                 throw Exceptions.exception("Cant make checking against field %s because it is not %s or %s",
                         fieldName, UIElement.class.getName(), UIBaseElement.class.getName());
             }
-
+            feedbackList.searchVisible();
             if (feedbackList.size() > 1) {
                 throw Exceptions.exception("Cant get feedback for field %s, founded %s feedback", fieldName, feedbackList.size());
             } else if (feedbackList.size() == 1) {

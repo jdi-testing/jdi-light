@@ -1,6 +1,7 @@
 package io.github.com.sections.form;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.Form;
 import io.github.com.entities.SimpleContact;
@@ -14,6 +15,18 @@ public class FormValidationForm extends Form<SimpleContact> {
     @UI("#validated-form-phone")
     private TextField phone;
 
+    @UI(".//button[@type='submit']")
+    private Button submitBtn;
 
+    @UI(".//button[@type='reset']")
+    private Button clearBtn;
+
+    public void reset() {
+        this.clearBtn.click();
+    }
+
+    public void submit() {
+        this.submitBtn.click();
+    }
 
 }

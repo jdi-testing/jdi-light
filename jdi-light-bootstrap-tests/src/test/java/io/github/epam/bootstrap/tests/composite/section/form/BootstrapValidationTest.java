@@ -13,7 +13,6 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.formPage;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
@@ -39,19 +38,19 @@ public class BootstrapValidationTest extends TestsInit {
     public void simpleValidationPositiveTest(SimpleContact entity) {
 
         FormValidationForm form = formPage.formValidationSection.form();
-        formPage.formValidationSection.swithToBrowserValidation();
+        formPage.formValidationSection.switchToBrowserValidation();
 
         form.fill(entity);
         Assert.assertTrue(form.isValid());
 
-        form.pressButton("reset");
+        form.reset();
 
-        formPage.formValidationSection.swithToCustomValidation();
+        formPage.formValidationSection.switchToCustomValidation();
 
         form.fill(entity);
         Assert.assertTrue(form.isValid());
 
-        form.pressButton("reset");
+        form.reset();
     }
 
     @DataProvider
@@ -67,19 +66,19 @@ public class BootstrapValidationTest extends TestsInit {
     public void simpleValidationNegativeTest(SimpleContact entity) {
 
         FormValidationForm form = formPage.formValidationSection.form();
-        formPage.formValidationSection.swithToBrowserValidation();
+        formPage.formValidationSection.switchToBrowserValidation();
 
         form.fill(entity);
         Assert.assertFalse(form.isValid());
 
-        form.pressButton("reset");
+        form.reset();
 
-        formPage.formValidationSection.swithToCustomValidation();
+        formPage.formValidationSection.switchToCustomValidation();
 
         form.fill(entity);
         Assert.assertFalse(form.isValid());
 
-        form.pressButton("reset");
+        form.reset();
     }
 
     @Test
@@ -92,7 +91,7 @@ public class BootstrapValidationTest extends TestsInit {
         SimpleContact entity = new SimpleContact(name, email, phone);
 
         FormValidationForm form = formPage.formValidationSection.form();
-        formPage.formValidationSection.swithToCustomValidation();
+        formPage.formValidationSection.switchToCustomValidation();
 
         form.fill(entity);
         form.submit();
@@ -108,19 +107,15 @@ public class BootstrapValidationTest extends TestsInit {
         MatcherAssert.assertThat(invalidFeedback.keySet(), Matchers.hasItems("Email", "Phone"));
         MatcherAssert.assertThat(invalidFeedback.values(), Matchers.hasItems("Enter valid email!", "It doesn't look like a valid phone number"));
 
-        form.pressButton("reset");
+        form.reset();
 
     }
 
     @AfterMethod
     public void reset() {
-        try {
-            formPage.formValidationSection
-                    .form()
-                    .pressButton("reset");
-        } catch (Exception e) {
-            refresh();
-        }
+        formPage.formValidationSection
+                .form()
+                .reset();
     }
 
 }
