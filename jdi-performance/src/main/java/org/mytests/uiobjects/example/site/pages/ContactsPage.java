@@ -12,6 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import org.mytests.uiobjects.example.site.custom.MultiDropdown;
 
+@SuppressWarnings({"PMD.UnusedLocalVariable"})
 @Url("/contacts.html") @Title("Contact Form")
 public class ContactsPage extends WebPage {
 	public TextField name;

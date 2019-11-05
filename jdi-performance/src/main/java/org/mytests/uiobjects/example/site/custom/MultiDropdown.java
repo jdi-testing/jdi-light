@@ -28,20 +28,20 @@ import static org.jsoup.helper.StringUtil.isBlank;
 public class MultiDropdown extends UIListBase<UISelectAssert>
         implements ICoreElement, HasLabel {
 
-    By expandArrow = By.cssSelector(".caret");
-    By values = By.tagName("li");
-    By valueTemplate = By.xpath(".//a[label[text()='%s']]");
-    By value = By.cssSelector("button");
-    By valuesConatiner = By.tagName("ul");
+    private By expandArrow = By.cssSelector(".caret");
+    private By values = By.tagName("li");
+    private By valueTemplate = By.xpath(".//a[label[text()='%s']]");
+    private By value = By.cssSelector("button");
+    private By valuesConatiner = By.tagName("ul");
 
-    UIElement root() { return $(By.xpath(".."),this).setName("root"); }
-    UIElement expander() { return root().find(expandArrow).setName("expandArrow"); }
-    UIElement valuesList() { return root().find(valuesConatiner).setName("valuesContainer"); }
-    UIElement value(String name) {
+    private UIElement root() { return $(By.xpath(".."),this).setName("root"); }
+    private UIElement expander() { return root().find(expandArrow).setName("expandArrow"); }
+    private UIElement valuesList() { return root().find(valuesConatiner).setName("valuesContainer"); }
+    private UIElement value(String name) {
         return root().find(fillByTemplate(valueTemplate, name)).setName("valueTemplate");
     }
-    UIElement valueText() { return root().find(value).setName("value"); }
-    List<UIElement> allValues() {
+    private UIElement valueText() { return root().find(value).setName("value"); }
+    private List<UIElement> allValues() {
         return root().finds(values);
     }
 
