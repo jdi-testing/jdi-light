@@ -52,7 +52,7 @@ public class JListIssueTests extends TestsInit {
      will show incorrect number */
 
     /* JList does not collect UIElements correctly since it converts a list of elements found
-    to MapArray using as a key in the MapArray the elements text if it exists. The elements
+    to MapArray using as a key the elements text if it exists. The elements
     with the same text will be rewritten in the MapArray and they will not be processed in
     forEach loop */
 
