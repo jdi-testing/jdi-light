@@ -11,6 +11,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
+@SuppressWarnings("unused")
 public class HomePage {
     private String url = "https://jdi-testing.github.io/jdi-light/index.html";
     public void open() {
