@@ -8,6 +8,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+@SuppressWarnings("unused")
 public class ContactForm {
     @UI("#name")
     private WebElement name;
@@ -27,7 +28,7 @@ public class ContactForm {
     @UI("#gender")
     private List<WebElement> genderList;
     @UI("#gender")
-    WebElement genderValue;
+    private WebElement genderValue;
     // Combobox
     @UI("#religion")
     private WebElement religion;
