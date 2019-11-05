@@ -134,7 +134,7 @@ public class ActionHelper {
         JDIAction ja = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
         return ja != null && ja.logResult();
     }
-    static Class<?> getJpClass(JoinPoint jp) {
+    protected static Class<?> getJpClass(JoinPoint jp) {
         return jp.getThis() != null
                 ? jp.getThis().getClass()
                 : jp.getSignature().getDeclaringType();

@@ -30,8 +30,8 @@ public class TableAssert extends BaseTableAssert<Table, TableAssert> {
         public String name;
         public String failElement;
         public String type;
-        TableAssert tAssert;
-        boolean exact;
+        protected TableAssert tAssert;
+        protected boolean exact;
         private Compare(int count, TableAssert tAssert, boolean exact) {
             this.count = count;
             this.tAssert = tAssert;
