@@ -2,14 +2,10 @@ package com.epam.jdi.light.ui.bootstrap.elements.composite;
 
 import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.tools.ReflectionUtils;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -17,11 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
-import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
 
 public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
 
@@ -30,26 +23,24 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
     private final static String ANY_FEEDBACK_LOCATOR = "./following-sibling::*[contains(concat(' ',normalize-space(@class),' '),' invalid-feedback ') or contains(concat(' ',normalize-space(@class),' '),' valid-feedback ')]";
     private final static String SUBMITTED_ELEMENT_LOCATOR = "./descendant-or-self::input|./descendant-or-self::textarea|./descendant-or-self::select|./descendant-or-self::button[@type='submit']";
 
-
     private UIElement getSubmittedElement(UIElement element) {
         return element.find(SUBMITTED_ELEMENT_LOCATOR);
     }
 
-
     @JDIAction("Get feedback elements for {0}")
-    public WebList getFeedbacks(UIElement element) {
+    public WebList getFeedbackElements(UIElement element) {
         return getFeedbackList(element, ANY_FEEDBACK_LOCATOR);
     }
 
-    private String getBrowserFeedback(UIElement element) {
+    private String getValidationMessage(UIElement element) {
         UIElement submitted = getSubmittedElement(element);
         String feedback = (String) submitted.js().executeScript(
                 "arguments[0].validationMessage", submitted);
         return feedback;
     }
 
-    @JDIAction("Get browser feedback text")
-    public Map<String,String> getBrowserFeedback() {
+    @JDIAction("Get browser validation messages")
+    public Map<String, String> getValidationMessages() {
         Map<String, String> feedbackMap = new HashMap<>();
 
         List<Field> allFields = allFields();
@@ -60,9 +51,9 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
             Object fieldObj = ReflectionUtils.getValueField(field, getPageObject());
             String feedback = "";
             if (fieldObj instanceof UIElement) {
-                feedback = getBrowserFeedback((UIElement)fieldObj);
+                feedback = getValidationMessage((UIElement) fieldObj);
             } else if (fieldObj instanceof UIBaseElement) {
-                feedback = getBrowserFeedback(((UIBaseElement) fieldObj).core());
+                feedback = getValidationMessage(((UIBaseElement) fieldObj).core());
             } else {
                 throw Exceptions.exception("Cant make checking against field %s because it is not %s or %s",
                         fieldName, UIElement.class.getName(), UIBaseElement.class.getName());
@@ -86,12 +77,12 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
 
     @JDIAction("Return if form valid")
     public boolean isValid() {
-        Object res = core().js().executeScript ("return arguments[0].checkValidity()", core().get());
-        return (Boolean)res;
+        Object res = core().js().executeScript("return arguments[0].checkValidity()", core().get());
+        return (Boolean) res;
     }
 
     @JDIAction("Get all feedback elements")
-    public Map<String, UIElement> getAllFeedbackElements() {
+    public Map<String, UIElement> getFeedbackElements() {
         return getFeedbackMap(ANY_FEEDBACK_LOCATOR);
     }
 
@@ -108,7 +99,7 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
     private Map<String, String> getFeedback(String locator) {
         Map<String, UIElement> elementMap = getFeedbackMap(locator);
         Map<String, String> feedbacks = new HashMap<>();
-        for(String name : elementMap.keySet()) {
+        for (String name : elementMap.keySet()) {
             UIElement el = elementMap.get(name);
             String text = el.getText();
             feedbacks.put(name, text);
@@ -147,21 +138,20 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
         return feedbackMap;
     }
 
-
     /**
      * Return elements that are listed in the form.elements APIs.
+     *
      * @return
      */
     private List<WebElement> getFormListedElements() {
         List<WebElement> elementList = new ArrayList<>();
-        Object elListObj = core().js().executeScript ("return arguments[0].elements", core().get());
-        List elList = (List)elListObj;
-        for(Object elObj : elList) {
+        Object elListObj = core().js().executeScript("return arguments[0].elements", core().get());
+        List elList = (List) elListObj;
+        for (Object elObj : elList) {
             WebElement el = (WebElement) elObj;
             elementList.add(el);
         }
         return elementList;
     }
-
 
 }

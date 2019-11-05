@@ -1,26 +1,23 @@
 package io.github.epam.bootstrap.tests.composite.section.form;
 
-import com.epam.jdi.light.elements.common.Alerts;
-import com.epam.jdi.light.elements.common.UIElement;
-import io.github.com.entities.FormContacts;
 import io.github.com.entities.SimpleContact;
 import io.github.com.sections.form.FormValidationForm;
 import io.github.epam.TestsInit;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Map;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.formPage;
-import static io.github.com.pages.BootstrapPage.formCustomStyles;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.is;
 
 public class BootstrapValidationTest extends TestsInit {
-
-
 
     @BeforeMethod
     public void before() {
@@ -31,7 +28,7 @@ public class BootstrapValidationTest extends TestsInit {
 
     @DataProvider
     public Object[][] positiveData() {
-        return new Object[][] {
+        return new Object[][]{
                 {new SimpleContact("Peter", "peter@dailybugle.com", "+44 (589)-23-11")},
                 {new SimpleContact("Peter Parker", "spidey@photo.com", "")},
                 {new SimpleContact("With great power there must also come—great responsibility!", "doesnt@matter", "123")},
@@ -59,7 +56,7 @@ public class BootstrapValidationTest extends TestsInit {
 
     @DataProvider
     public Object[][] negativeData() {
-        return new Object[][] {
+        return new Object[][]{
                 {new SimpleContact("", "", "")},
                 {new SimpleContact("Norman", "gg@oscorp.com", "Ha ha ha!")},
                 {new SimpleContact("", "gg@oscorp.com", "123")},
@@ -85,35 +82,45 @@ public class BootstrapValidationTest extends TestsInit {
         form.pressButton("reset");
     }
 
-/*
     @Test
-    public void formValidationTest() {
+    public void bootstrapValidationTest() {
 
-        boolean browserValidation = formCustomStyles.isBrowserValidation();
-        Assert.assertFalse(browserValidation);
+        String name = "ValidName";
+        String email = "InvalidEmail";
+        String phone = "InvalidPhone";
 
-        formCustomStyles.submit(contact());
-        Alerts.validateAlert(is("Form filled and submitted successfully"));
+        SimpleContact entity = new SimpleContact(name, email, phone);
 
-        WebList nameInvalidFeedback = formCustomStyles.getInvalidFeedback(formCustomStyles.name);
-        nameInvalidFeedback.is().size(0);
+        FormValidationForm form = formPage.formValidationSection.form();
+        formPage.formValidationSection.swithToCustomValidation();
 
-        WebList nameValidFeedback = formCustomStyles.getValidFeedback(formCustomStyles.name);
-        nameValidFeedback.is().size(1);
-        nameValidFeedback.get(1).is()
-                .displayed()
-                .text("Looks good!")
-                .css("color", "rgba(40, 167, 69, 1)");
+        form.fill(entity);
+        form.submit();
 
-        WebList userNameInvalidFeedback = formCustomStyles.getInvalidFeedback(formCustomStyles.userName);
-        userNameInvalidFeedback.is().size(1);
-        userNameInvalidFeedback.get(1).is()
-                .displayed()
-                .text("Please choose a username.")
-                .css("color","rgba(220, 53, 69, 1)");
+        Map<String, String> validFeedback = form.getValidFeedback();
 
-        WebList userNameValidFeedback = formCustomStyles.getValidFeedback(formCustomStyles.userName);
-        userNameValidFeedback.is().size(0);
-    }*/
+        MatcherAssert.assertThat("Number of valid feedbacks not equals 1", validFeedback.size() == 1);
+        MatcherAssert.assertThat(validFeedback.keySet(), Matchers.hasItems("Name"));
+        MatcherAssert.assertThat(validFeedback.values(), Matchers.hasItem("Hi, " + name + "!"));
+
+        Map<String, String> invalidFeedback = form.getInvalidFeedback();
+        MatcherAssert.assertThat("Number of invalid feedbacks not equals 2", invalidFeedback.size() == 2);
+        MatcherAssert.assertThat(invalidFeedback.keySet(), Matchers.hasItems("Email", "Phone"));
+        MatcherAssert.assertThat(invalidFeedback.values(), Matchers.hasItems("Enter valid email!", "It doesn't look like a valid phone number"));
+
+        form.pressButton("reset");
+
+    }
+
+    @AfterMethod
+    public void reset() {
+        try {
+            formPage.formValidationSection
+                    .form()
+                    .pressButton("reset");
+        } catch (Exception e) {
+            refresh();
+        }
+    }
 
 }
