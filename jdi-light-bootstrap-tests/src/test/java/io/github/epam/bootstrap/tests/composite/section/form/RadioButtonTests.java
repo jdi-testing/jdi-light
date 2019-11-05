@@ -76,20 +76,24 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void radioButtonByLabelTests() {
-        radioButtonGroup.radio2Label.click();
-        radioButtonGroup.radioButton.get(2).is()
-                .selected();
+        radioButtonGroup.radio2.click();
+        radioButtonGroup.radio2.is().selected();
+        /*radioButtonGroup.radioButton.get(2).is()
+                .selected();*/
         radioButtonGroup.radioButton.is()
                 .text(is(value2));
-        radioButtonGroup.radioButton.get(1).is()
-                .deselected();
-        radioButtonGroup.radio1Label.click();
-        radioButtonGroup.radioButton.get(1).is()
-                .selected();
+        radioButtonGroup.radio1.is().deselected();
+        /*radioButtonGroup.radioButton.get(1).is()
+                .deselected();*/
+        radioButtonGroup.radio1.click();
+        radioButtonGroup.radio1.is().selected();
+        /*radioButtonGroup.radioButton.get(1).is()
+                .selected();*/
         radioButtonGroup.radioButton.is()
                 .text(is(value1));
-        radioButtonGroup.radioButton.get(2).is()
-                .deselected();
+        radioButtonGroup.radio2.is().deselected();
+        /*radioButtonGroup.radioButton.get(2).is()
+                .deselected();*/
     }
 
     @Test
@@ -111,11 +115,11 @@ public class RadioButtonTests extends TestsInit {
         radioButtonGroup.radio1.is()
                 .displayed()
                 .enabled()
-                .core()
-                .attr("type", "radio")
-                .attr("name", "exampleRadios")
-                .hasClass("form-check-input")
-                .tag(is("input"));
+                .core();
+                /*.attr("type", "radio")
+                .attr("name", "exampleRadios")*/
+                //.hasClass("form-check-input")
+                //.tag(is("input"));
     }
 
     @Test
@@ -123,11 +127,11 @@ public class RadioButtonTests extends TestsInit {
         radioButtonGroup.radio2.is()
                 .displayed()
                 .enabled()
-                .core()
-                .attr("type", "radio")
-                .attr("name", "exampleRadios")
-                .hasClass("form-check-input")
-                .tag(is("input"));
+                .core();
+                /*.attr("type", "radio")
+                .attr("name", "exampleRadios")*/
+                //.hasClass("form-check-input")
+                //.tag(is("input"));
     }
 
     @Test
@@ -135,10 +139,10 @@ public class RadioButtonTests extends TestsInit {
         radioButtonGroup.radio3.is()
                 .displayed()
                 .disabled()
-                .core()
-                .attr("type", "radio")
-                .attr("name", "exampleRadios")
-                .hasClass("form-check-input")
-                .tag(is("input"));
+                .core();
+                /*.attr("type", "radio")
+                .attr("name", "exampleRadios")*/
+                //.hasClass("form-check-input")
+                //.tag(is("input"));
     }
 }

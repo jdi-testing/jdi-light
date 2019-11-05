@@ -63,12 +63,12 @@ public class RadioButtonCustomTests extends TestsInit {
 
     @Test
     public void radioButtonByLabelTests() {
-        radioButtonCustom.radio2Label.click();
+        radioButtonCustom.radio2.click();
         radioButtonCustom.radio2.is()
                 .selected();
         radioButtonCustom.radio1.is()
                 .deselected();
-        radioButtonCustom.radio1Label.click();
+        radioButtonCustom.radio1.click();
         radioButtonCustom.radio1.is()
                 .selected();
         radioButtonCustom.radio2.is()

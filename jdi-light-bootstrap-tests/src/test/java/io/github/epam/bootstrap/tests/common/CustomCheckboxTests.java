@@ -56,6 +56,9 @@ public class CustomCheckboxTests extends TestsInit {
         customCheckbox.is().selected();
         customCheckbox.check("");
         customCheckbox.is().deselected();
+
+        customCheckbox.setValue("true");
+        System.out.println(customCheckbox.getValue());
     }
 
 }

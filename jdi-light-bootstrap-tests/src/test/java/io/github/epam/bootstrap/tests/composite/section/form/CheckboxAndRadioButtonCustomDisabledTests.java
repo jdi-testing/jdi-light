@@ -71,10 +71,10 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
     @Test
     public void radioButtonTests() {
         checkboxAndRadioButtonCustomDisabled.radioButtonContainer.select();
-        checkboxAndRadioButtonCustomDisabled.radioButton.is()
+        checkboxAndRadioButtonCustomDisabled.radioButtonContainer.is()
                 .deselected();
-        checkboxAndRadioButtonCustomDisabled.radio1Label.click();
-        checkboxAndRadioButtonCustomDisabled.radioButton.is()
+        checkboxAndRadioButtonCustomDisabled.radioButtonContainer.click();
+        checkboxAndRadioButtonCustomDisabled.radioButtonContainer.is()
                 .deselected();
     }
 

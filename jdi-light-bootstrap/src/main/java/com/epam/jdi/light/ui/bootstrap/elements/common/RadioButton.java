@@ -2,7 +2,9 @@ package com.epam.jdi.light.ui.bootstrap.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.asserts.RadioButtonAssert;
 
 /**
@@ -12,6 +14,9 @@ import com.epam.jdi.light.ui.bootstrap.asserts.RadioButtonAssert;
 
 public class RadioButton extends UIListBase<RadioButtonAssert> {
 
+    @UI("input")
+    private UIElement input;
+
     @JDIAction("Check '{name}'")
     public void select() {
         uiElement.check();
@@ -19,7 +24,12 @@ public class RadioButton extends UIListBase<RadioButtonAssert> {
 
     @JDIAction("Check that '{name}' is selected")
     public boolean isSelected() {
-        return uiElement.isSelected();
+        return input.isSelected();
+    }
+
+    @JDIAction("Check that '{name}' is enabled")
+    public boolean isEnabled() {
+        return input.isEnabled();
     }
 
     @JDIAction("Select '{0}' in '{name}'")
@@ -30,6 +40,15 @@ public class RadioButton extends UIListBase<RadioButtonAssert> {
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
         list().select(index);
+    }
+
+    @JDIAction("Click at '{name}'")
+    public void click() {
+            label().click();
+    }
+
+    public Label label() {
+        return input.label();
     }
 
     @Override

@@ -7,9 +7,9 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.RadioButton;
 
 public class RadioButtonsCustom extends Section {
 
-    @UI("#customRadio1")
+    @UI("#customRadio1-div")
     public RadioButton radio1;
-    @UI("#customRadio2")
+    @UI("#customRadio2-div")
     public RadioButton radio2;
     @UI(".custom-radio")
     public RadioButton radioButton;

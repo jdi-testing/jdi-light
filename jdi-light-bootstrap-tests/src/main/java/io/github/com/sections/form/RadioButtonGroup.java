@@ -7,11 +7,12 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.RadioButton;
 
 public class RadioButtonGroup extends Section {
 
-    @UI("#exampleRadios1")
+    //@UI("#exampleRadios1")
+    @UI("//input[@id='exampleRadios1']/..")
     public RadioButton radio1;
-    @UI("#exampleRadios2")
+    @UI("//input[@id='exampleRadios2']/..")
     public RadioButton radio2;
-    @UI("#exampleRadios3")
+    @UI("//input[@id='exampleRadios3']/..")
     public RadioButton radio3;
     @UI("input[type='radio']")
     public RadioButton radioButton;
