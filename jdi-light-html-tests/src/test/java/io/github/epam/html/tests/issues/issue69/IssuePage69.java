@@ -8,9 +8,9 @@ import java.util.List;
 
 class IssuePage69 extends WebPage {
     @UI("[qa-item=template] [value=element_%s]")
-    static DataList<Paragraph, ?> template;
+    protected static DataList<Paragraph, ?> template;
     @UI("[qa-item=paragraph]>div")
-    static DataList<Paragraph, ?> paragraphs;
+    protected static DataList<Paragraph, ?> paragraphs;
 
 
     @UI("[qa-item=template] [value=element_%s]")
