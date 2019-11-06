@@ -22,7 +22,6 @@ public class BootstrapValidationTest extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         formPage.shouldBeOpened();
-        //refresh();
     }
 
     @DataProvider
@@ -109,6 +108,29 @@ public class BootstrapValidationTest extends TestsInit {
 
         form.reset();
 
+    }
+
+    @Test
+    public void browserValidationTest() {
+        String name = "ValidName";
+        String email = "InvalidEmail";
+        String phone = "InvalidPhone";
+
+        SimpleContact entity = new SimpleContact(name, email, phone);
+
+        FormValidationForm form = formPage.formValidationSection.form();
+        formPage.formValidationSection.switchToCustomValidation();
+
+        form.fill(entity);
+        form.submit();
+
+        Map<String, String> validFeedback = form.getValidationMessages();
+
+        MatcherAssert.assertThat("", validFeedback.get("Email"), Matchers.is("Please include an '@' in the email address. 'InvalidEmail' is missing an '@'."));
+        MatcherAssert.assertThat("", validFeedback.get("Phone"), Matchers.is("Please match the requested format."));
+        MatcherAssert.assertThat("", validFeedback.get("Name"), Matchers.is(""));
+
+        form.reset();
     }
 
     @AfterMethod

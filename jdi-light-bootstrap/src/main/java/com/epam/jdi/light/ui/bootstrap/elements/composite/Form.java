@@ -28,18 +28,25 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
     }
 
     @JDIAction("Get feedback elements for {0}")
+    /**
+     * Get get list of visible bootstrap feedback elements.
+     */
     public WebList getFeedbackElements(UIElement element) {
-        return getFeedbackList(element, ANY_FEEDBACK_LOCATOR);
+        WebList elements = getFeedbackList(element, ANY_FEEDBACK_LOCATOR);
+        elements.searchVisible();
+        return elements;
     }
 
     private String getValidationMessage(UIElement element) {
         UIElement submitted = getSubmittedElement(element);
-        String feedback = (String) submitted.js().executeScript(
-                "arguments[0].validationMessage", submitted);
+        String feedback = (String) submitted.jsExecute("validationMessage");
         return feedback;
     }
 
     @JDIAction("Get browser validation messages")
+    /**
+     * Return map field names to browser validation messages (validationMessage property of html-element)
+     */
     public Map<String, String> getValidationMessages() {
         Map<String, String> feedbackMap = new HashMap<>();
 

@@ -25,8 +25,15 @@ public class FormValidationForm extends Form<SimpleContact> {
         this.clearBtn.click();
     }
 
+    @Override
     public void submit() {
         this.submitBtn.click();
+    }
+
+    @Override
+    public void fill(SimpleContact entity) {
+        super.fill(entity);
+        name.core().jsExecute("dispatchEvent(new Event('change'))"); //Form fill method doesn't fire necessary event
     }
 
 }
