@@ -523,17 +523,20 @@ function includeSideBar() {
                     <li ui="label" index="1"><a href="html5.html">\
                         <span>HTML 5</span>\
                     </a></li>\
-                    <li ui="label" index="2"><a href="bootstrap.html">\
+                    <li ui="label" index="2"><a href="appium-html5.html">\
+                        <span>Appium test page</span>\
+                    </a></li>\
+                    <li ui="label" index="3"><a href="bootstrap.html">\
                         <span>Bootstrap</span>\
                     </a></li>\
-					          <li ui="label" index="3"><a href="bootstrap_form.html">\
-						            <span>Bootstrap form</span>\
-					          </a></li>\
-                              <li ui="label" index="4"><a href="bootstrap_forms.html">\
-                                   <span>Bootstrap forms</span>\
-                              </a></li>\
-					          <li ui="label" index="5"><a href="react-ant.html">\
-		                    <span>React Ant</span>\
+					<li ui="label" index="4"><a href="bootstrap_form.html">\
+					    <span>Bootstrap form</span>\
+					</a></li>\
+                    <li ui="label" index="5"><a href="bootstrap_forms.html">\
+                        <span>Bootstrap forms</span>\
+                    </a></li>\
+					<li ui="label" index="6"><a href="react-ant.html">\
+		                <span>React Ant</span>\
                     </a></li>\
                 </ul>\
             </li>\
