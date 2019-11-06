@@ -44,26 +44,26 @@ public class TheSameTextOfElementsMockTests {
     }
 
     @Test
-    public void JListNumberOfElements() {
+    public void jListNumberOfElements() {
         int NumberUIElementsInJList = jList.size();
         assertThat(actualNumberOfElements, is(equalTo(NumberUIElementsInJList)));
     }
 
     @Test
-    public void WebListNumberOfElements() {
+    public void webListNumberOfElements() {
         int NumberUIElementsInWebList = webList.size();
         assertThat(actualNumberOfElements, is(equalTo(NumberUIElementsInWebList)));
     }
 
     @Test
-    public void WebListTest() {
+    public void webListTest() {
         int NumberUIElementsInWebList = webList.list().elements(0).size();
         int actualNumberOfUIElements = webList.list().size();
         assertThat(NumberUIElementsInWebList, is(equalTo(actualNumberOfUIElements)));
     }
 
     @Test
-    public void JListTest() {
+    public void jListTest() {
         int NumberUIElementsInJList = jList.list().elements(0).size();
         int actualNumberOfUIElements = jList.list().size();
         assertThat(NumberUIElementsInJList, is(equalTo(actualNumberOfUIElements)));
