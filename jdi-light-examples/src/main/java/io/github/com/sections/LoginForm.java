@@ -13,6 +13,6 @@ public class LoginForm extends Form<User> {
 	private WebElement name;
 	@Css("input[type=password]")private WebElement password;
 
-	private @Root @XPath(".//header//form//button[@type='submit']") WebElement enter;
+	@Root @XPath(".//header//form//button[@type='submit']")private WebElement enter;
 
 }

@@ -13,7 +13,7 @@ import io.github.com.entities.Contacts;
 
 @SuppressWarnings("unused")
 public class ContactFormCustom extends Form<Contacts> {
-    private @Mandatory TextField name;
+    @Mandatory private TextField name;
     public TextField lastName;
     public TextField position;
     public TextField passportNumber;

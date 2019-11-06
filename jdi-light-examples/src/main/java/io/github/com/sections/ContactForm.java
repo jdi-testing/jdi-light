@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.epam.entities.User;
 import org.openqa.selenium.WebElement;
 
-@SuppressWarnings("unused")
 public class ContactForm extends Form<User> {
 	public WebElement name;
 	public WebElement lastName;
