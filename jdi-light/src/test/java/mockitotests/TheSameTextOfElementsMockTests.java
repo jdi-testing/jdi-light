@@ -7,10 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.Arrays;
 import java.util.List;
-
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
