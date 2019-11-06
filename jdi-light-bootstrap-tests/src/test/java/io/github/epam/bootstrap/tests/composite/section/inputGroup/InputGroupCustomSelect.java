@@ -68,7 +68,7 @@ public class InputGroupCustomSelect extends TestsInit {
                 .enabled()
                 .core()
                 .hasClass("custom-select")
-                .css("font-size", is("16px"));;
+                .css("font-size", is("16px"));
         customSelect.selector.is().size(4);
     }
 }
