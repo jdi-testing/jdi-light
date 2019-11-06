@@ -6,9 +6,9 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
 
 public class Switches extends Section {
 
-    @UI("#customSwitch1-div") public Checkbox checkbox;
-    //@UI("#customSwitch1-div") public Checkbox checkboxContainer;
-    @UI("#customSwitch2-div") public Checkbox checkboxDisabled;
-    //@UI("#customSwitch2-div") public Checkbox checkboxDisabledContainer;
+    @UI("#customSwitch1-div")
+    public Checkbox checkbox;
+    @UI("#customSwitch2-div")
+    public Checkbox checkboxDisabled;
 
 }

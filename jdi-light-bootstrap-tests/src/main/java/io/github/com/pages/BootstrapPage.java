@@ -116,6 +116,7 @@ import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarExternalContent;
 import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarPlacement;
 import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarSupportedContent;
 import io.github.com.sections.navbar.NavbarText;
@@ -714,6 +715,8 @@ public class BootstrapPage extends WebPage {
     public static NavbarSupportedContent navbarSupportedContent;
     @UI("#navbar-base-for-brand")
     public static NavbarSection navbarSection;
+    @UI("#navbar-sticky-top")
+    public static NavbarPlacement navbarPlacementStickyTop;
     //endregion
 
     //region Ranges

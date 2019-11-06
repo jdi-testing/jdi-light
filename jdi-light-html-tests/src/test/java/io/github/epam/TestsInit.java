@@ -29,6 +29,6 @@ public class TestsInit {
     }
 
     protected static boolean isFireFox() {
-        return DRIVER_NAME.toLowerCase().equals("firefox");
+        return DRIVER_NAME.equalsIgnoreCase("firefox");
     }
 }
