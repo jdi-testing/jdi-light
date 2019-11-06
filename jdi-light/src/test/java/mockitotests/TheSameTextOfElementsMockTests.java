@@ -7,8 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import java.util.Arrays;
 import java.util.List;
+
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -29,7 +31,7 @@ public class TheSameTextOfElementsMockTests {
     private String element2Text = "text2";
 
     private int actualNumberOfElements = 3;
-    private int loopIndex = 1;
+    private int loopIndex = 0;
 
     @BeforeMethod
     public void init() {
@@ -37,12 +39,11 @@ public class TheSameTextOfElementsMockTests {
         element1 = mock(WebElement.class);
         element2 = mock(WebElement.class);
 
-        list = Arrays.asList(element0, element1, element2);
-
         when(element0.getText()).thenReturn(element0Text);
         when(element1.getText()).thenReturn(element1Text);
         when(element2.getText()).thenReturn(element2Text);
 
+        list = Arrays.asList(element0, element1, element2);
         webList = new WebList(list);
         jList = new JList<>(list);
     }
@@ -75,21 +76,21 @@ public class TheSameTextOfElementsMockTests {
 
     @Test
     public void numberOfUIElementsForEachLoopTest() {
-        int[] iarr = {loopIndex};
+        int[] iarr = {0};
         System.out.println("------------UIElements in forEach loop----------");
         jList.forEach(e -> System.out.println(e.getText() + " " + iarr[0]++));
-        assertThat(iarr[0] - 1, is(equalTo(actualNumberOfElements)));
+        assertThat(iarr[0], is(equalTo(actualNumberOfElements)));
     }
 
     @Test
     public void numberOfUIElementsForLoopTest() {
-        int i = loopIndex;
+        int i = 0;
         System.out.println("------------UIElements in for loop--------------");
         while (i < jList.size()) {
             System.out.println(jList.get(i).getText() + " " + i);
             i++;
         }
-        assertThat (i - 1, is(equalTo(actualNumberOfElements)));
+        assertThat(i, is(equalTo(actualNumberOfElements)));
     }
 
     @AfterSuite(alwaysRun = true)
