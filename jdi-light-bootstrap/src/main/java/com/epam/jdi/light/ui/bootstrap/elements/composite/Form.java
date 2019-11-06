@@ -84,16 +84,25 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
     }
 
     @JDIAction("Get all feedback elements")
+    /**
+     * Return map field names to visible bootstrap feedback elements
+     */
     public Map<String, UIElement> getFeedbackElements() {
         return getFeedbackMap(ANY_FEEDBACK_LOCATOR);
     }
 
     @JDIAction("Get valid feedback text")
+    /**
+     * Return map field names to visible valid bootstrap feedback text
+     */
     public Map<String, String> getValidFeedback() {
         return getFeedback(VALID_FEEDBACK_LOCATOR);
     }
 
     @JDIAction("Get invalid feedback text")
+    /**
+     * Return map field names to visible invalid bootstrap feedback text
+     */
     public Map<String, String> getInvalidFeedback() {
         return getFeedback(INVALID_FEEDBACK_LOCATOR);
     }

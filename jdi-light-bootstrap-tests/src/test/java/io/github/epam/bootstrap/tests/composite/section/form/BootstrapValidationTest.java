@@ -126,8 +126,10 @@ public class BootstrapValidationTest extends TestsInit {
 
         Map<String, String> validFeedback = form.getValidationMessages();
 
-        MatcherAssert.assertThat("", validFeedback.get("Email"), Matchers.is("Please include an '@' in the email address. 'InvalidEmail' is missing an '@'."));
-        MatcherAssert.assertThat("", validFeedback.get("Phone"), Matchers.is("Please match the requested format."));
+        MatcherAssert.assertThat("", validFeedback.get("Email"),
+                Matchers.is("Please include an '@' in the email address. 'InvalidEmail' is missing an '@'."));
+        MatcherAssert.assertThat("", validFeedback.get("Phone"),
+                Matchers.is("Please match the requested format."));
         MatcherAssert.assertThat("", validFeedback.get("Name"), Matchers.is(""));
 
         form.reset();
