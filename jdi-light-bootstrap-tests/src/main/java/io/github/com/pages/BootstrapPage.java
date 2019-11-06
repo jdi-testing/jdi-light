@@ -113,16 +113,7 @@ import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
-import io.github.com.sections.navbar.NavbarColorScheme;
-import io.github.com.sections.navbar.NavbarExternalContent;
-import io.github.com.sections.navbar.NavbarForm;
-import io.github.com.sections.navbar.NavbarPlacement;
-import io.github.com.sections.navbar.NavbarSection;
-import io.github.com.sections.navbar.NavbarSupportedContent;
-import io.github.com.sections.navbar.NavbarText;
-import io.github.com.sections.navbar.NavbarWithDropdown;
-import io.github.com.sections.navbar.NavbarWithInputGroupForm;
-import io.github.com.sections.navbar.ScrollSpyNav;
+import io.github.com.sections.navbar.*;
 import io.github.com.sections.navs.NavsAlignmentCenter;
 import io.github.com.sections.navs.NavsAlignmentEnd;
 import io.github.com.sections.navs.NavsBaseA;
@@ -283,6 +274,10 @@ public class BootstrapPage extends WebPage {
     public static Navbar navbarCentredContainer;
     @UI("#navbar-containers-expanded")
     public static Navbar navbarExpandedContainer;
+
+    @UI("//h4[.='Navbar - Nav']/../..")
+    public static NavbarNav navbarNav;
+
     @UI("#button-show-spinner-border")
     public static Button buttonSpinnerBorder;
     @UI("#spinner-border")
