@@ -21,11 +21,7 @@ import static org.mockito.Mockito.when;
 public class TheSameTextOfElementsMockTests {
 
     private WebList webList;
-    private List<WebElement> list;
     private JList<UIElement> jList;
-    private WebElement element0;
-    private WebElement element1;
-    private WebElement element2;
     private String element0Text = "text01";
     private String element1Text = "text01";
     private String element2Text = "text2";
@@ -34,15 +30,15 @@ public class TheSameTextOfElementsMockTests {
 
     @BeforeMethod
     public void init() {
-        element0 = mock(WebElement.class);
-        element1 = mock(WebElement.class);
-        element2 = mock(WebElement.class);
+        WebElement element0 = mock(WebElement.class);
+        WebElement element1 = mock(WebElement.class);
+        WebElement element2 = mock(WebElement.class);
 
         when(element0.getText()).thenReturn(element0Text);
         when(element1.getText()).thenReturn(element1Text);
         when(element2.getText()).thenReturn(element2Text);
 
-        list = Arrays.asList(element0, element1, element2);
+        List<WebElement> list = Arrays.asList(element0, element1, element2);
         webList = new WebList(list);
         jList = new JList<>(list);
     }
@@ -54,7 +50,7 @@ public class TheSameTextOfElementsMockTests {
     }
 
     @Test
-    public void WebListListNumberOfElements() {
+    public void WebListNumberOfElements() {
         int NumberUIElementsInWebList = webList.size();
         assertThat(actualNumberOfElements, is(equalTo(NumberUIElementsInWebList)));
     }
