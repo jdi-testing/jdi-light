@@ -2,6 +2,7 @@ package io.github.com.entities;
 
 import com.epam.jdi.tools.DataClass;
 
+@SuppressWarnings("unused")
 public class SimpleContact extends DataClass<SimpleContact> {
     private String name;
     private String email;

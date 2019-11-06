@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.Form;
 import io.github.com.entities.SimpleContact;
 
+@SuppressWarnings("unused")
 public class FormValidationForm extends Form<SimpleContact> {
 
     @UI("#validated-form-name-field")

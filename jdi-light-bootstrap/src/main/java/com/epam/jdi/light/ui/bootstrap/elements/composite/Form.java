@@ -154,7 +154,7 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
      *
      * @return
      */
-    private List<WebElement> getFormListedElements() {
+    protected List<WebElement> getFormListedElements() {
         List<WebElement> elementList = new ArrayList<>();
         Object elListObj = core().js().executeScript("return arguments[0].elements", core().get());
         List elList = (List) elListObj;
