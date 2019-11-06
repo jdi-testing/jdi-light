@@ -31,7 +31,6 @@ public class TheSameTextOfElementsMockTests {
     private String element2Text = "text2";
 
     private int actualNumberOfElements = 3;
-    private int loopIndex = 0;
 
     @BeforeMethod
     public void init() {
@@ -50,13 +49,13 @@ public class TheSameTextOfElementsMockTests {
 
     @Test
     public void JListNumberOfElements() {
-        int NumberUIElementsInJList = jList.list().size();
+        int NumberUIElementsInJList = jList.size();
         assertThat(actualNumberOfElements, is(equalTo(NumberUIElementsInJList)));
     }
 
     @Test
     public void WebListListNumberOfElements() {
-        int NumberUIElementsInWebList = jList.list().size();
+        int NumberUIElementsInWebList = webList.size();
         assertThat(actualNumberOfElements, is(equalTo(NumberUIElementsInWebList)));
     }
 
