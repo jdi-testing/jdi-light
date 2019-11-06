@@ -21,12 +21,13 @@ public class TheSameTextOfElementsMockTests {
     private WebList webList;
     private List<WebElement> list;
     private JList<UIElement> jList;
-    private String element0Text = "text01";
-    private String element1Text = "text01";
-    private String element2Text = "text2";
     private WebElement element0;
     private WebElement element1;
     private WebElement element2;
+    private String element0Text = "text01";
+    private String element1Text = "text01";
+    private String element2Text = "text2";
+
     private int actualNumberOfElements = 3;
     private int loopIndex = 1;
 
