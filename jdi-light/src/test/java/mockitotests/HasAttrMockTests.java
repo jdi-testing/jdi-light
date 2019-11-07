@@ -35,6 +35,7 @@ public class HasAttrMockTests {
                 {new MapArray<>(new String[]{"type", "value", "class"}, new String[]{"checkbox", "option1", "form-check"}), "type1"},
                 {new MapArray<>(new String[]{"type", "value", "class"}, new String[]{"checkbox", "option1", "form-check"}), "value1"},
                 {new MapArray<>(new String[]{"type", "value", "class"}, new String[]{"", "", ""}), "class1"},
+                {new MapArray<>("class", "form-check"), "class1"}
         };
     }
 
@@ -47,7 +48,7 @@ public class HasAttrMockTests {
     //WORKING:
     // TODO: Need to add regex on exception message--DONE
     @Test(expectedExceptions = {RuntimeException.class}, dataProvider = "attributesNegative",
-            expectedExceptionsMessageRegExp = ".*Expected: an array containing.*")
+            expectedExceptionsMessageRegExp = ".*Expected: an array containing.*[a-zA-Z'].*but: mismatches were:.*[a-zA-Z'].*")
     public void negativeTest(MapArray<String, String> actualMapAttr, String wrongAttr) {
         uiElement = Mockito.spy(new UIElement());
         Mockito.doReturn(actualMapAttr).when(uiElement).attrs();
@@ -67,6 +68,8 @@ public class HasAttrMockTests {
             assertTrue(exp.getMessage().contains(exceptionMessage1));
             assertTrue(exp.getMessage().contains(wrongAttr));
             assertTrue(exp.getMessage().contains(exceptionMessage2));
+            //assertTrue(exp.getMessage().contains(actualMapAttr.keys().toString()));
+            //System.out.println(actualMapAttr.keys());
             assertTrue(exp.getMessage().contains(actualMapAttr.key(0)));
             assertTrue(exp.getMessage().contains(actualMapAttr.key(1)));
             assertTrue(exp.getMessage().contains(actualMapAttr.key(2)));
