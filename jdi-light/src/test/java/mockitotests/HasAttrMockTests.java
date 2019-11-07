@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.actions.ActionHelper.BEFORE_JDI_ACTION;
 import static org.mockito.Mockito.mock;
 import static org.testng.Assert.assertTrue;
 
@@ -81,7 +82,9 @@ public class HasAttrMockTests {
     public void hasAttrPositiveTest(MapArray<String, String> actualMapAttr, String expectedAttr) {
         uiElement = Mockito.spy(new UIElement());
         Mockito.doReturn(actualMapAttr).when(uiElement).attrs();
+        //BEFORE_JDI_ACTION=null; Then NullPointerException
         uiElement.is().hasAttr(expectedAttr);
+
     }
 
 }
