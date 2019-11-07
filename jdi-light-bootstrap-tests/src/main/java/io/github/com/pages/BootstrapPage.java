@@ -25,7 +25,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonToolbar;
@@ -270,10 +269,6 @@ public class BootstrapPage extends WebPage {
     public static Progress progressBackgroundYellow;
     @UI("#progress-backgrounds-red")
     public static Progress progressBackgroundRed;
-    @UI("#navbar-containers-centred")
-    public static Navbar navbarCentredContainer;
-    @UI("#navbar-containers-expanded")
-    public static Navbar navbarExpandedContainer;
 
     @UI("//h4[.='Navbar - Nav']/../..")
     public static NavbarNav navbarNav;
