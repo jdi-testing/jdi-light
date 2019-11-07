@@ -145,7 +145,7 @@ public class WebPage extends DriverBase implements PageObject {
         return params == null || params.length == 0
                 ? url
                 : url.contains("%s")
-                    ? String.format(url, params)
+                    ? format(url, params)
                     : MessageFormat.format(url, params);
     }
 

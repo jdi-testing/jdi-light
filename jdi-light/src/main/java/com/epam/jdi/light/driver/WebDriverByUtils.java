@@ -116,7 +116,7 @@ public final class WebDriverByUtils {
             case "tag": return By.tagName(split[1]);
             case "link": return By.partialLinkText(split[1]);
             default: throw new RuntimeException(
-                    String.format("Can't get By locator from string: %s. Bad suffix: %s. (available: css, xpath, class, id, name, link, tag)",
+                    format("Can't get By locator from string: %s. Bad suffix: %s. (available: css, xpath, class, id, name, link, tag)",
                             stringLocator, split[0]));
         }
     }

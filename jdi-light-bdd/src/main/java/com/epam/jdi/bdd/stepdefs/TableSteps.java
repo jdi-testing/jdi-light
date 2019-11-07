@@ -58,7 +58,7 @@ public class TableSteps {
     public void assertEqualsValues(String name, List<String> values) {
         String tableValues = String.join(", ", table(name).preview().replaceAll(" ", ""));
         String expectedValue = String.join(", ", values).replaceAll(", ", "");
-        Assert.assertEquals(tableValues, expectedValue);
+        assertEquals(tableValues, expectedValue);
     }
     @Then("^the \"([^\"]*)\" (?:table |)is not empty$")
     public void assertNotEmpty(String name) {
