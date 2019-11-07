@@ -735,7 +735,7 @@ function logEvent(elem, descr) {
             value = ' condition changed to ' + elem.checked;
             break;
         case 'button':
-            if (elem.textContent.toLowerCase() === 'calculate' || elem.textContent.toLowerCase() === 'submit') {
+            if (elem.textContent.toLowerCase() === 'calculate' || elem.textContent.toLowerCase() === 'submit' || elem.textContent.toLowerCase() === 'clear') {
                 value = elem.textContent.toLowerCase() + 'button clicked';
             } else {
                 value = 'button clicked';
