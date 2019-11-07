@@ -18,7 +18,7 @@ import static io.github.epam.html.tests.issues.issue69.JDISite69.issuePage69;
 import static org.testng.Assert.assertEquals;
 
 public class IssueTest69 {
-    static boolean first = true;
+    private static boolean first = true;
     @BeforeMethod
     public void before() {
         if (first) {
@@ -34,7 +34,7 @@ public class IssueTest69 {
         assertEquals(p.toString(), "element_0_1,element_0_2,element_0_3");
     }
 
-    ParagraphData expectedParagraph = new ParagraphData().set(p-> {
+    private ParagraphData expectedParagraph = new ParagraphData().set(p-> {
         p.paragraph="element_0_1"; p.paragraph2="element_0_2"; p.paragraph3="element_0_3";
     });
     @Test

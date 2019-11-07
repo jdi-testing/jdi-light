@@ -35,7 +35,7 @@ public class DropdownEx4Tests extends TestsInit {
         metalAndColorsPage.shouldBeOpened();
         colors4.select(text);
     }
-    String text = "Colors";
+    private String text = "Colors";
 
     @Test
     public void getValueTest() {

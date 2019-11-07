@@ -26,7 +26,7 @@ public class LinkTests extends TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    String text = "Github JDI";
+    private String text = "Github JDI";
 
     //TODO Performance issue
     @Test

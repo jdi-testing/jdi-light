@@ -17,148 +17,148 @@ import java.util.List;
 
 public class CustomSection extends Section {
     @FindBy(id = "webElementPackage")
-    WebElement webElementPackage;
+    private WebElement webElementPackage;
     @FindBy(id = "webElementPublic")
     public WebElement webElementPublic;
     @FindBy(id = "webElementPrivate")
     private WebElement webElementPrivate;
     @UI(".webElementPackageUI")
-    WebElement webElementPackageUI;
+    private WebElement webElementPackageUI;
     @UI(".webElementPublicUI")
     public WebElement webElementPublicUI;
     @Css(".webElementPackageCss")
-    WebElement webElementPackageCss;
+    private WebElement webElementPackageCss;
     @XPath("//*[@class='webElementPublicXPath']")
     public WebElement webElementPublicXPath;
 
     @FindBy(id = "listWebElementPackage")
-    WebList listWebElementPackage;
+    private WebList listWebElementPackage;
     @FindBy(id = "listWebElementPublic")
     public WebList listWebElementPublic;
     @FindBy(id = "listWebElementPrivate")
     private WebList listWebElementPrivate;
     @UI(".listWebElementPackageUI")
-    WebList listWebElementPackageUI;
+    private WebList listWebElementPackageUI;
     @UI(".listWebElementPublicUI")
     public WebList listWebElementPublicUI;
     @Css(".listWebElementPackageCss")
-    WebList listWebElementPackageCss;
+    private WebList listWebElementPackageCss;
     @XPath("//*[@class='listWebElementPublicXPath']")
     public WebList listWebElementPublicXPath;
 
     @FindBy(id = "uielementPackage")
-    UIElement uielementPackage;
+    private UIElement uielementPackage;
     @FindBy(id = "uielementPublic")
     public UIElement uielementPublic;
     @FindBy(id = "uielementPrivate")
     private UIElement uielementPrivate;
     @UI(".uielementPackageUI")
-    UIElement uielementPackageUI;
+    private UIElement uielementPackageUI;
     @UI(".uielementPublicUI")
     public UIElement uielementPublicUI;
     @Css(".uielementPackageCss")
-    UIElement uielementPackageCss;
+    private UIElement uielementPackageCss;
     @XPath("//*[@class='uielementPublicXPath']")
     public UIElement uielementPublicXPath;
 
     @FindBy(id = "buttonPackage")
-    Button buttonPackage;
+    private Button buttonPackage;
     @FindBy(id = "buttonPublic")
     public Button buttonPublic;
     @FindBy(id = "buttonPrivate")
     private Button buttonPrivate;
     @UI(".buttonPackageUI")
-    Button buttonPackageUI;
+    private Button buttonPackageUI;
     @UI(".buttonPublicUI")
     public Button buttonPublicUI;
     @Css(".buttonPackageCss")
-    UIElement buttonPackageCss;
+    private UIElement buttonPackageCss;
     @XPath("//*[@class='buttonPublicXPath']")
     public UIElement buttonPublicXPath;
 
     @FindBy(id = "listUIElementPackage")
-    List<UIElement> listUIElementPackage;
+    private List<UIElement> listUIElementPackage;
     @FindBy(id = "listUIElementPublic")
     public List<UIElement> listUIElementPublic;
     @FindBy(id = "listUIElementPrivate")
     private List<UIElement> listUIElementPrivate;
     @UI(".listUIElementPackageUI")
-    List<UIElement> listUIElementPackageUI;
+    private List<UIElement> listUIElementPackageUI;
     @UI(".listUIElementPublicUI")
     public List<UIElement> listUIElementPublicUI;
     @Css(".listUIElementPackageCss")
-    List<UIElement> listUIElementPackageCss;
+    private List<UIElement> listUIElementPackageCss;
     @XPath("//*[@class='listUIElementPublicXPath']")
     public List<UIElement> listUIElementPublicXPath;
 
     @FindBy(id = "listButtonPackage")
-    List<Button> listButtonPackage;
+    private List<Button> listButtonPackage;
     @FindBy(id = "listButtonPublic")
     public List<Button> listButtonPublic;
     @FindBy(id = "listButtonPrivate")
     private List<Button> listButtonPrivate;
     @UI(".listButtonPackageUI")
-    List<Button> listButtonPackageUI;
+    private List<Button> listButtonPackageUI;
     @UI(".listButtonPublicUI")
     public List<Button> listButtonPublicUI;
     @Css(".listButtonPackageCss")
-    List<Button> listButtonPackageCss;
+    private List<Button> listButtonPackageCss;
     @XPath("//*[@class='listButtonPublicXPath']")
     public List<Button> listButtonPublicXPath;
 
     @FindBy(id = "webListPackage")
-    WebList webListPackage;
+    private WebList webListPackage;
     @FindBy(id = "webListPublic")
     public WebList webListPublic;
     @FindBy(id = "webListPrivate")
     private WebList webListPrivate;
     @UI(".webListPackageUI")
-    WebList webListPackageUI;
+    private WebList webListPackageUI;
     @UI(".webListPublicUI")
     public WebList webListPublicUI;
     @Css(".webListPackageCss")
-    WebList webListPackageCss;
+    private WebList webListPackageCss;
     @XPath("//*[@class='webListPublicXPath']")
     public WebList webListPublicXPath;
 
     @FindBy(id = "uilistQuestionPackage")
-    DataList<CustomSection, ?> uilistQuestionPackage;
+    private DataList<CustomSection, ?> uilistQuestionPackage;
     @FindBy(id = "uilistQuestionPublic")
     public DataList<CustomSection, ?> uilistQuestionPublic;
     @FindBy(id = "uilistQuestionPrivate")
     private DataList<CustomSection, ?> uilistQuestionPrivate;
     @UI(".uilistQuestionPackageData")
-    DataList<CustomSection, ?> uilistQuestionPackageData;
+    private DataList<CustomSection, ?> uilistQuestionPackageData;
     @UI(".uilistQuestionPublicData")
     public DataList<CustomSection, ?> uilistQuestionPublicData;
     @Css(".uilistQuestionPackageCss")
-    DataList<CustomSection, ?> uilistQuestionPackageCss;
+    private DataList<CustomSection, ?> uilistQuestionPackageCss;
     @XPath("//*[@class='uilistQuestionPublicXPath']")
     public DataList<CustomSection, ?> uilistQuestionPublicXPath;
 
     @FindBy(id = "uilistSomedataPackage")
-    DataList<CustomSection, SomeData> uilistSomedataPackage;
+    private DataList<CustomSection, SomeData> uilistSomedataPackage;
     @FindBy(id = "uilistSomedataPublic")
     public DataList<CustomSection, SomeData> uilistSomedataPublic;
     @FindBy(id = "uilistSomedataPrivate")
     private DataList<CustomSection, SomeData> uilistSomedataPrivate;
     @UI(".uilistSomedataPackageData")
-    DataList<CustomSection, SomeData> uilistSomedataPackageData;
+    private DataList<CustomSection, SomeData> uilistSomedataPackageData;
     @UI(".uilistSomedataPublicData")
     public DataList<CustomSection, SomeData> uilistSomedataPublicData;
     @Css(".uilistSomedataPackageCss")
-    DataList<CustomSection, SomeData> uilistSomedataPackageCss;
+    private DataList<CustomSection, SomeData> uilistSomedataPackageCss;
     @XPath("//*[@class='uilistSomedataPublicXPath']")
     public DataList<CustomSection, SomeData> uilistSomedataPublicXPath;
 
     @JDropdown(root = "div[ui=droplistPackage", value = "input", list = "li", expand = ".expand")
-    Dropdown droplistPackage;
+    private Dropdown droplistPackage;
     @JDropdown(root = "div[ui=droplistPublic", value = "input", list = "li", expand = ".expand")
     public Dropdown droplistPublic;
     @JDropdown(root = "div[ui=droplistPrivate", value = "input", list = "li", expand = ".expand")
     private Dropdown droplistPrivate;
     @UI(".droplistPackageUI")
-    Dropdown droplistPackageUI;
+    private Dropdown droplistPackageUI;
     @UI(".droplistPublicUI")
     public Dropdown droplistPublicUI;
 

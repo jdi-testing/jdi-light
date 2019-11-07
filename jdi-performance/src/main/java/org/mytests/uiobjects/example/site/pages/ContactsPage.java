@@ -12,6 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import org.mytests.uiobjects.example.site.custom.MultiDropdown;
 
+@SuppressWarnings({"unused"})
 @Url("/contacts.html") @Title("Contact Form")
 public class ContactsPage extends WebPage {
 	public TextField name;
@@ -20,13 +21,13 @@ public class ContactsPage extends WebPage {
 	public TextField passportNumber;
 	public TextField passportSerial;
 
-	DropdownSelect gender;
-	IsCombobox religion;
-	MultiDropdown weather;
+	private DropdownSelect gender;
+	private IsCombobox religion;
+	private MultiDropdown weather;
 
 	public Checkbox passport;
 	public Checkbox acceptConditions;
-	TextArea description;
+	private TextArea description;
 
 	@UI("['Submit']") public Button submit;
 }

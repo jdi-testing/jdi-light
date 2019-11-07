@@ -13,11 +13,14 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class HomePage {
     private String url = "https://jdi-testing.github.io/jdi-light/index.html";
+    @FindBy(css = ".profile-photo")protected WebElement profilePhoto;
+    @FindBy(css = ".profile-photo [ui=label]")protected WebElement userName;
+
     public void open() {
         getDriver().navigate().to(url);
     }
 
-    @FindBy(css = ".sidebar-menu [ui=label]") List<WebElement> navigation;
+    @FindBy(css = ".sidebar-menu [ui=label]")private List<WebElement> navigation;
     public void navigateTo(int num) {
         try {
             navigation.get(num).click();
@@ -34,8 +37,6 @@ public class HomePage {
             }
         }
     }
-    @FindBy(css = ".profile-photo") WebElement profilePhoto;
-    @FindBy(css = ".profile-photo [ui=label]") WebElement userName;
 
     // TODO fix performance
     @UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList leftNavigation;

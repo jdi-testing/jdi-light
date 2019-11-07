@@ -24,9 +24,9 @@ public class BasicExampleTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    String leftButtonClickAlert = "Left Button Clicked!";
-    String middleButtonClickAlert = "Middle Button Clicked!";
-    String rightButtonClickAlert = "Right Button Clicked!";
+    private String leftButtonClickAlert = "Left Button Clicked!";
+    private String middleButtonClickAlert = "Middle Button Clicked!";
+    private String rightButtonClickAlert = "Right Button Clicked!";
 
     @Test
     public void leftButtonTests() {

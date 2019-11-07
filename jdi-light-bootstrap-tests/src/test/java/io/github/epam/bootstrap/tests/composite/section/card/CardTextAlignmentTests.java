@@ -23,10 +23,10 @@ import static org.testng.Assert.assertEquals;
 public class CardTextAlignmentTests extends TestsInit {
 
     // Texts to check
-    String buttonText = "Click Me!";
-    String alertText = "Button Clicked!";
-    String titleText = "SPECIAL TITLE TREATMENT";
-    String descriptionText = "With supporting text below as a natural lead-in to additional content.";
+    private String buttonText = "Click Me!";
+    private String alertText = "Button Clicked!";
+    private String titleText = "SPECIAL TITLE TREATMENT";
+    private String descriptionText = "With supporting text below as a natural lead-in to additional content.";
 
 
     @BeforeMethod
