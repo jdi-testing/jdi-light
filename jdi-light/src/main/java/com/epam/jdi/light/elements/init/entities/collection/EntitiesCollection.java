@@ -106,7 +106,7 @@ public class EntitiesCollection {
             List<Object> elements = ELEMENTS.get(name);
             return elements.size() == 1
                     ? elements.get(0)
-                    : LinqUtils.first(elements, el -> {
+                    : first(elements, el -> {
                 WebPage page = ((ICoreElement) el).base().getPage();
                 return page != null && page.getName().equals(getCurrentPage());
             });
