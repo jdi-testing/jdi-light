@@ -70,7 +70,7 @@ public class InputGroupCustomSelectWithButton extends TestsInit {
                 .enabled()
                 .core()
                 .hasClass("custom-select")
-                .css("font-size", is("16px"));;
+                .css("font-size", is("16px"));
         customSelectWithButton.selector.is().size(4);
     }
 
