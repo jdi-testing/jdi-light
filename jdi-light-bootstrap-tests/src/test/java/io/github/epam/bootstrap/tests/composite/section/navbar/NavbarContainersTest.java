@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.navbarNav;
+import static io.github.com.pages.BootstrapPage.navbarContainers;
 import static org.hamcrest.Matchers.is;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -28,25 +28,25 @@ public class NavbarContainersTest extends TestsInit {
 
     @Test
     public void baseValidationTest() {
-        baseValidation(navbarNav.navLinks1);
-        baseValidation(navbarNav.navbarComplexLinks);
-        baseValidation(navbarNav.navLinks1.brand);
-        baseValidation(navbarNav.navbarComplexLinks.brand);
+        baseValidation(navbarContainers.navLinks1);
+        baseValidation(navbarContainers.navbarComplexLinks);
+        baseValidation(navbarContainers.navLinks1.brand);
+        baseValidation(navbarContainers.navbarComplexLinks.brand);
     }
 
     @Test
     public void isValidationTest() {
-        navbarNav.navLinks1.is().displayed();
-        navbarNav.navLinks1.is().enabled();
-        navbarNav.navLinks1.assertThat().displayed()
+        navbarContainers.navLinks1.is().displayed();
+        navbarContainers.navLinks1.is().enabled();
+        navbarContainers.navLinks1.assertThat().displayed()
                 .core()
                 .css("font-size", is("14px"))
                 .cssClass("container")
                 .tag(is("div"));
 
-        navbarNav.navbarComplexLinks.is().displayed();
-        navbarNav.navbarComplexLinks.is().enabled();
-        navbarNav.navbarComplexLinks.assertThat().displayed()
+        navbarContainers.navbarComplexLinks.is().displayed();
+        navbarContainers.navbarComplexLinks.is().enabled();
+        navbarContainers.navbarComplexLinks.assertThat().displayed()
                 .core()
                 .css("font-size", is("14px"))
                 .hasClass("navbar")
@@ -58,13 +58,13 @@ public class NavbarContainersTest extends TestsInit {
 
     @Test
     public void getNameNavbarContainerBrandTest() {
-        navbarNav.navLinks1.brand.is().text(textNavbarCentredContainer);
-        navbarNav.navbarComplexLinks.brand.is().text(textNavbarExpandedConteiner);
+        navbarContainers.navLinks1.brand.is().text(textNavbarCentredContainer);
+        navbarContainers.navbarComplexLinks.brand.is().text(textNavbarExpandedConteiner);
     }
 
     @Test
     public void clickNavbarCentredContainerLinksTest() {
-        navbarNav.navLinks1.brand.click();
+        navbarContainers.navLinks1.brand.click();
         assertThat(WindowsManager.windowsCount(), is(2));
         WindowsManager.switchToWindow(2);
         assertThat(getUrl(), is(url));
@@ -73,7 +73,7 @@ public class NavbarContainersTest extends TestsInit {
 
     @Test
     public void clickNavbarExpandedContainerLinksTest() {
-        navbarNav.navbarComplexLinks.brand.click();
+        navbarContainers.navbarComplexLinks.brand.click();
         assertThat(WindowsManager.windowsCount(), is(2));
         WindowsManager.switchToWindow(2);
         assertThat(getUrl(), is(url));

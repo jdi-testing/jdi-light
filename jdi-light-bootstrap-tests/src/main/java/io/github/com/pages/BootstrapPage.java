@@ -270,6 +270,8 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-backgrounds-red")
     public static Progress progressBackgroundRed;
 
+    @UI("//h4[.='Navbar - Containers']/../..")
+    public static NavbarContainer navbarContainers;
     @UI("//h4[.='Navbar - Nav']/../..")
     public static NavbarNav navbarNav;
 
