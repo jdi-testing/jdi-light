@@ -27,10 +27,10 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
         return element.find(SUBMITTED_ELEMENT_LOCATOR);
     }
 
-    @JDIAction("Get feedback elements for {0}")
     /**
      * Get get list of visible bootstrap feedback elements.
      */
+    @JDIAction("Get feedback elements for {0}")
     public WebList getFeedbackElements(UIElement element) {
         WebList elements = getFeedbackList(element, ANY_FEEDBACK_LOCATOR);
         elements.searchVisible();
@@ -43,10 +43,11 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
         return feedback;
     }
 
-    @JDIAction("Get browser validation messages")
+
     /**
      * Return map field names to browser validation messages (validationMessage property of html-element)
      */
+    @JDIAction("Get browser validation messages")
     public Map<String, String> getValidationMessages() {
         Map<String, String> feedbackMap = new HashMap<>();
 
@@ -83,26 +84,26 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
         return !this.hasAttribute("novalidate");
     }
 
-    @JDIAction("Get all feedback elements")
     /**
      * Return map field names to visible bootstrap feedback elements
      */
+    @JDIAction("Get all feedback elements")
     public Map<String, UIElement> getFeedbackElements() {
         return getFeedbackMap(ANY_FEEDBACK_LOCATOR);
     }
 
-    @JDIAction("Get valid feedback text")
     /**
      * Return map field names to visible valid bootstrap feedback text
      */
+    @JDIAction("Get valid feedback text")
     public Map<String, String> getValidFeedback() {
         return getFeedback(VALID_FEEDBACK_LOCATOR);
     }
 
-    @JDIAction("Get invalid feedback text")
     /**
      * Return map field names to visible invalid bootstrap feedback text
      */
+    @JDIAction("Get invalid feedback text")
     public Map<String, String> getInvalidFeedback() {
         return getFeedback(INVALID_FEEDBACK_LOCATOR);
     }

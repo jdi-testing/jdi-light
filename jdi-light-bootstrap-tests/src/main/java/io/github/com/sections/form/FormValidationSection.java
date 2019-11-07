@@ -14,7 +14,6 @@ public class FormValidationSection extends Section {
     @UI("#validated-form")
     private FormValidationForm validatedForm;
 
-
     public void switchToBrowserValidation() {
         browserValidationRadio.core().label().click();
     }
@@ -23,10 +22,8 @@ public class FormValidationSection extends Section {
         customValidationRadio.core().label().click();
     }
 
-
-    public FormValidationForm form() {
+    public FormValidationForm getForm() {
         return validatedForm;
     }
-
 
 }

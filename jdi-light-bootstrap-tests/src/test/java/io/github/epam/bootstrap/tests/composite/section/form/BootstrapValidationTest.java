@@ -36,7 +36,7 @@ public class BootstrapValidationTest extends TestsInit {
     @Test(description = "Test validation rules with positive data", dataProvider = "positiveData")
     public void simpleValidationPositiveTest(SimpleContact entity) {
 
-        FormValidationForm form = formPage.formValidationSection.form();
+        FormValidationForm form = formPage.formValidationSection.getForm();
         formPage.formValidationSection.switchToBrowserValidation();
 
         form.fill(entity);
@@ -64,7 +64,7 @@ public class BootstrapValidationTest extends TestsInit {
     @Test(description = "Test validation rules with negative data", dataProvider = "negativeData")
     public void simpleValidationNegativeTest(SimpleContact entity) {
 
-        FormValidationForm form = formPage.formValidationSection.form();
+        FormValidationForm form = formPage.formValidationSection.getForm();
         formPage.formValidationSection.switchToBrowserValidation();
 
         form.fill(entity);
@@ -89,7 +89,7 @@ public class BootstrapValidationTest extends TestsInit {
 
         SimpleContact entity = new SimpleContact(name, email, phone);
 
-        FormValidationForm form = formPage.formValidationSection.form();
+        FormValidationForm form = formPage.formValidationSection.getForm();
         formPage.formValidationSection.switchToCustomValidation();
 
         form.fill(entity);
@@ -118,7 +118,7 @@ public class BootstrapValidationTest extends TestsInit {
 
         SimpleContact entity = new SimpleContact(name, email, phone);
 
-        FormValidationForm form = formPage.formValidationSection.form();
+        FormValidationForm form = formPage.formValidationSection.getForm();
         formPage.formValidationSection.switchToCustomValidation();
 
         form.fill(entity);
@@ -138,7 +138,7 @@ public class BootstrapValidationTest extends TestsInit {
     @AfterMethod
     public void reset() {
         formPage.formValidationSection
-                .form()
+                .getForm()
                 .reset();
     }
 
