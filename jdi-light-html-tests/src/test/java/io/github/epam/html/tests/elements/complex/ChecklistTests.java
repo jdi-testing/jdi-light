@@ -31,7 +31,7 @@ public class ChecklistTests extends TestsInit {
         html5Page.shouldBeOpened();
         weather.check(text);
     }
-    String text = "Hot option";
+    private String text = "Hot option";
 
     @Test
     public void getValueTest() {

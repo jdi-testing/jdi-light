@@ -29,8 +29,8 @@ public class EntitiesCollection {
     public static MapArray<String, WebPage> PAGES = new MapArray<>();
     public static MapArray<String, List<Object>> ELEMENTS = new MapArray<>();
 
-    static MapArray<String, String> jsonPages;
-    static MapArray<String, String> jsonElements;
+    private static MapArray<String, String> jsonPages;
+    private static MapArray<String, String> jsonElements;
 
     private EntitiesCollection() { }
 
@@ -43,7 +43,7 @@ public class EntitiesCollection {
             PAGES.removeByKey(className);
         PAGES.update(page.getName(), page);
     }
-    static void readPagesFromJson() {
+    private static void readPagesFromJson() {
         jsonPages = getMapFromJson("pages", "json.page.objects");
     }
     public static WebPage getPage(String pageName) {
@@ -85,7 +85,7 @@ public class EntitiesCollection {
             return ((ICoreElement) element);
         throw exception("Can't find '%s' element", name);
     }
-    static void readElementsFromJson() {
+    private static void readElementsFromJson() {
         List<String> filePaths = scanFolder("src/test/resources"+getProperty("json.page.objects"));
         jsonElements = new MapArray<>();
         for (String filePath : filePaths)
@@ -96,7 +96,7 @@ public class EntitiesCollection {
             }
     }
 
-    static Object getElement(String name) {
+    private static Object getElement(String name) {
         if (!name.matches("[A-Z].*"))
             return $(name);
         String[] split = name.split("\\.");
@@ -118,7 +118,7 @@ public class EntitiesCollection {
                 : new UIElement().setName(name);
     }
 
-    static Object getElementInSection(String name, String section) {
+    private static Object getElementInSection(String name, String section) {
         if (ELEMENTS.has(name)) {
             List<Object> els = ELEMENTS.get(name);
             Object result = first(els, el -> isInterface(el.getClass(), IBaseElement.class) && ((IBaseElement) el).base().hasParent(section));

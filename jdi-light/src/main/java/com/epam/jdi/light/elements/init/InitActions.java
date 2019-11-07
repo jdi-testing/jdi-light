@@ -71,7 +71,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
     public static void init() {}
-    static void webPageSetup(SiteInfo info) {
+    private static void webPageSetup(SiteInfo info) {
         WebPage page = (WebPage) info.instance;
         defaultSetup(info, page);
         page.updatePageData(

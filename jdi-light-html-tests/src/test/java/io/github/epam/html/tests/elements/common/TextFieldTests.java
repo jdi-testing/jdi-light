@@ -27,7 +27,7 @@ public class TextFieldTests extends TestsInit {
         html5Page.shouldBeOpened();
         name.setText(text);
     }
-    String text = "TextField";
+    private String text = "TextField";
 
     @Test
     public void getTextTest() {
@@ -100,7 +100,7 @@ public class TextFieldTests extends TestsInit {
         name.assertThat().text(is(text));
     }
 
-    final String symbols = "`!@#";//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
+    private final String symbols = "`!@#";//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
 
     @Test
     public void inputSymbolsTest() {

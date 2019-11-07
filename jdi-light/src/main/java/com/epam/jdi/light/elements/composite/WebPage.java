@@ -97,7 +97,7 @@ public class WebPage extends DriverBase implements PageObject {
         return getDriver().getTitle();
     }
 
-    void setUrl(String uri, String template, CheckTypes validate) {
+    private void setUrl(String uri, String template, CheckTypes validate) {
         url = uri;
         checkUrl = template;
         checkUrlType = validate;

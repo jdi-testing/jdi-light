@@ -38,7 +38,7 @@ public class DropdownDressTests extends TestsInit {
         html5Page.shouldBeOpened();
         dressCode2.select(text);
     }
-    String text = "Casual";
+    private String text = "Casual";
 
     @Test
     public void selectTest() {
