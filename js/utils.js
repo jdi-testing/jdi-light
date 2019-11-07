@@ -525,8 +525,8 @@ function includeSideBar() {
                     <li ui="label" index="1"><a href="html5.html">\
                         <span>HTML 5</span>\
                     </a></li>\
-                    <li ui="label" index="2"><a href="appium-html5.html">\
-                        <span>Appium and HTML 5</span>\
+                    <li ui="label" index="2"><a href="mobile-html5.html">\
+                        <span>Mobile and HTML 5</span>\
                     </a></li>\
                     <li ui="label" index="3"><a href="bootstrap.html">\
                         <span>Bootstrap</span>\
