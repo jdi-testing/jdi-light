@@ -13,27 +13,36 @@ import static org.testng.Assert.assertTrue;
 public class HasAttrMockTests {
 
     private UIElement uiElement = null;
-    private String exceptionMessage1 = "Expected: an array containing";
-    private String exceptionMessage2 = "but: mismatches were: [";
+    private static final String exceptionMessageFirstPart = "Expected: an array containing";
+    private static final String exceptionMessageSecondPart = "but: mismatches were: [";
+
+    private MapArray<String, String> attributesSet1 = new MapArray<>(new String[]{"type", "value", "class"},
+            new String[]{"checkbox", "option1", "form-check"});
+    private MapArray<String, String> attributesSet2 = new MapArray<>(new String[]{"type", "value", "class"},
+            new String[]{"checkbox", "option1", "form-check"});
+    private MapArray<String, String> attributesSet3 = new MapArray<>(new String[]{"type", "value", "class"},
+            new String[]{"checkbox", "option1", "form-check"});
+    private MapArray<String, String> attributesSet4 = new MapArray<>(new String[]{"type", "value", "class"},
+            new String[]{"checkbox", "option1", "form-check"});
 
 
     @DataProvider
     public Object[][] attributesPositive() {
         return new Object[][]{
-                {new MapArray<>(new String[]{"type", "value", "class"}, new String[]{"checkbox", "option1", "form-check"}), "type"},
-                {new MapArray<>(new String[]{"type", "value", "class"}, new String[]{"checkbox", "option1", "form-check"}), "value"},
-                {new MapArray<>(new String[]{"type", "value", "class"}, new String[]{"", "", ""}), "class"},
-                {new MapArray<>("class", "form-check"), "class"}
+                {attributesSet1, "type"},
+                {attributesSet2, "value"},
+                {attributesSet3, "class"},
+                {attributesSet4, "class"}
         };
     }
 
     @DataProvider
     public Object[][] attributesNegative() {
         return new Object[][]{
-                {new MapArray<>(new String[]{"type", "value", "class"}, new String[]{"checkbox", "option1", "form-check"}), "type1"},
-                {new MapArray<>(new String[]{"type", "value", "class"}, new String[]{"checkbox", "option1", "form-check"}), "value1"},
-                {new MapArray<>(new String[]{"type", "value", "class"}, new String[]{"", "", ""}), "class1"},
-                {new MapArray<>("class", "form-check"), "class1"}
+                {attributesSet1, "type1"},
+                {attributesSet2, "value1"},
+                {attributesSet3, "class1"},
+                {attributesSet4, "class1"}
         };
     }
 
@@ -42,20 +51,16 @@ public class HasAttrMockTests {
         uiElement = mock(UIElement.class);
     }
 
-    //WORKING:
-    // TODO: Need to add regex on exception message--DONE
     @Test(expectedExceptions = {RuntimeException.class}, dataProvider = "attributesNegative",
             expectedExceptionsMessageRegExp = ".*Expected: an array containing.*[a-zA-Z'].*but: mismatches were:.*[a-zA-Z'].*")
-    public void negativeTest(MapArray<String, String> actualMapAttr, String wrongAttr) {
+    public void hasAttrNegativeOuterExceptionHandlingTest(MapArray<String, String> actualMapAttr, String wrongAttr) {
         uiElement = Mockito.spy(new UIElement());
         Mockito.doReturn(actualMapAttr).when(uiElement).attrs();
         uiElement.is().hasAttr(wrongAttr);
     }
 
-    //WORKING
-    // TODO: Leave assertContains to assertEquals
     @Test(dataProvider = "attributesNegative")
-    public void negativeTest1(MapArray<String, String> actualMapAttr, String wrongAttr) {
+    public void hasAttrNegativeInnerExceptionHandlingTest(MapArray<String, String> actualMapAttr, String wrongAttr) {
         uiElement = Mockito.spy(new UIElement());
         Mockito.doReturn(actualMapAttr).when(uiElement).attrs();
 
@@ -63,8 +68,8 @@ public class HasAttrMockTests {
             uiElement.is().hasAttr(wrongAttr);
         } catch (RuntimeException exp) {
             String expMessage = exp.getMessage();
-            assertTrue(expMessage.contains(exceptionMessage1 + " \"" + wrongAttr + "\""));
-            assertTrue(expMessage.contains(exceptionMessage2));
+            assertTrue(expMessage.contains(exceptionMessageFirstPart + " \"" + wrongAttr + "\""));
+            assertTrue(expMessage.contains(exceptionMessageSecondPart));
             for (String key : actualMapAttr.keys()) {
                 System.out.println("was  \"" + key + "\"");
                 assertTrue(expMessage.contains("was \"" + key + "\""));
@@ -72,10 +77,8 @@ public class HasAttrMockTests {
         }
     }
 
-    //WORKING
-    //TODO: Improve Chrome closing
     @Test(dataProvider = "attributesPositive")
-    public void positiveTest(MapArray<String, String> actualMapAttr, String expectedAttr) {
+    public void hasAttrPositiveTest(MapArray<String, String> actualMapAttr, String expectedAttr) {
         uiElement = Mockito.spy(new UIElement());
         Mockito.doReturn(actualMapAttr).when(uiElement).attrs();
         uiElement.is().hasAttr(expectedAttr);
