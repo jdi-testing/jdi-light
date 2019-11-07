@@ -29,6 +29,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonToolbar;
+import io.github.com.sections.dropdown.DropdownForm;
 import io.github.com.sections.Jumbotron;
 import io.github.com.sections.MediaObjectNesting;
 import io.github.com.sections.MediaObjectSample;
@@ -215,6 +216,8 @@ public class BootstrapPage extends WebPage {
     public static Dropdown offsetDropdown;
     @UI("#referenceDropdown")
     public static Dropdown referenceDropdown;
+    @UI("#dropdownForm")
+    public static DropdownForm dropdownForm;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")
