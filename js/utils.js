@@ -462,7 +462,9 @@ function activateTopElement(top_index, sub_index) {
     }
 }
 function includeSideBar() {
-	var code = '<div name="navigation-sidebar" class="uui-side-bar mCustomScrollbar _mCS_1 mCS_no_scrollbar" style="max-height: inherit; display: block;"><div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0" style="max-height: inherit;"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">\
+	var code = '<div name="navigation-sidebar" class="uui-side-bar mCustomScrollbar _mCS_1 mCS_no_scrollbar" style="max-height: inherit; display: block;">\
+	<div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0" style="max-height: inherit;">\
+	    <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">\
         <ul class="sidebar-menu">\
             <li ui="label" index="1">\
                 <a href="index.html">\
@@ -523,22 +525,33 @@ function includeSideBar() {
                     <li ui="label" index="1"><a href="html5.html">\
                         <span>HTML 5</span>\
                     </a></li>\
-                    <li ui="label" index="2"><a href="bootstrap.html">\
+                    <li ui="label" index="2"><a href="appium-html5.html">\
+                        <span>Appium and HTML 5</span>\
+                    </a></li>\
+                    <li ui="label" index="3"><a href="bootstrap.html">\
                         <span>Bootstrap</span>\
                     </a></li>\
-					          <li ui="label" index="3"><a href="bootstrap_form.html">\
-						            <span>Bootstrap form</span>\
-					          </a></li>\
-                              <li ui="label" index="4"><a href="bootstrap_forms.html">\
-                                   <span>Bootstrap forms</span>\
-                              </a></li>\
-					          <li ui="label" index="5"><a href="react-ant.html">\
-		                    <span>React Ant</span>\
+					<li ui="label" index="4"><a href="bootstrap_form.html">\
+					    <span>Bootstrap form</span>\
+					</a></li>\
+                    <li ui="label" index="5"><a href="bootstrap_forms.html">\
+                        <span>Bootstrap forms</span>\
+                    </a></li>\
+					<li ui="label" index="6"><a href="react-ant.html">\
+		                <span>React Ant</span>\
                     </a></li>\
                 </ul>\
             </li>\
         </ul>\
-    </div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px; height: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>';
+    </div>\
+    <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;">\
+        <div class="mCSB_draggerContainer">\
+            <div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px; height: 0px;" oncontextmenu="return false;">\
+                <div class="mCSB_dragger_bar" style="line-height: 30px;"></div>\
+            </div>\
+            <div class="mCSB_draggerRail"></div>\
+        </div>\
+    </div></div></div>';
 	$('.replace.left-side-bar').replaceWith(code);
 }
 function includeLogBar() {
