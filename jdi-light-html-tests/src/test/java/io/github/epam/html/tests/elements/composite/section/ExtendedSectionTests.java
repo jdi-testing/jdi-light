@@ -7,7 +7,7 @@ import pseudo.site.dataproviders.section.ExtendedSectionDataProvider;
 import pseudo.site.section.ExtendedSection;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
-import static pseudo.site.PseudoSite.extendedSection;
+import static pseudo.site.PseudoSiteUtils.extendedSection;
 
 public class ExtendedSectionTests extends TestsInit {
 

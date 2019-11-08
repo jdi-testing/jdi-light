@@ -2,7 +2,7 @@ package io.github.epam.test.data;
 
 import io.github.epam.entities.UserInfo;
 
-public class TableData {
+public class TableDataHelper {
 
     public static UserInfo GRADY_BROCK = new UserInfo().set(u-> {
         u.name = "Grady Brock";

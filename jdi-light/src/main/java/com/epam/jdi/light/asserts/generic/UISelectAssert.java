@@ -8,7 +8,7 @@ import org.hamcrest.Matcher;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssertUtils.jdiAssert;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static org.hamcrest.Matchers.equalTo;

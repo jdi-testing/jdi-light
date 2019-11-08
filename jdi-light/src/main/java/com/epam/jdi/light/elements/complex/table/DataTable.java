@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+import static com.epam.jdi.light.asserts.core.SoftAssertUtils.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;

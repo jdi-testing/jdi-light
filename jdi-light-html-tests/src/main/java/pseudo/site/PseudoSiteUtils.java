@@ -16,7 +16,7 @@ import pseudo.site.webpage.CustomWebPage;
 import pseudo.site.webpage.ExtendedWebPage;
 
 
-public class PseudoSite {
+public class PseudoSiteUtils {
     public static Header pseudoHeader;
     @UI(".customSectionUI")
     public static CustomSection customSectionUI;

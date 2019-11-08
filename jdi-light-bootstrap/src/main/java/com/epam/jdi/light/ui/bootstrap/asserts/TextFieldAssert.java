@@ -6,7 +6,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import org.hamcrest.Matcher;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssertUtils.jdiAssert;
 import static org.hamcrest.Matchers.is;
 
 public class TextFieldAssert extends UIAssert<TextFieldAssert, IsText>

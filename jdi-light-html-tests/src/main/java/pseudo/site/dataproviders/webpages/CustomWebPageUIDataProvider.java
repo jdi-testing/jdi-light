@@ -2,7 +2,7 @@ package pseudo.site.dataproviders.webpages;
 
 import org.testng.annotations.DataProvider;
 
-import static pseudo.site.PseudoSite.customWebPageUI;
+import static pseudo.site.PseudoSiteUtils.customWebPageUI;
 
 public class CustomWebPageUIDataProvider {
     @DataProvider

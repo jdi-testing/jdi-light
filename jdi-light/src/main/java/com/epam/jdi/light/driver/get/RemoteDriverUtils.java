@@ -6,7 +6,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-public class RemoteDriver {
+public class RemoteDriverUtils {
     public static String DRIVER_REMOTE_URL;
     public static URL getRemoteURL() {
         try {

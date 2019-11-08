@@ -7,7 +7,7 @@ import org.hamcrest.Matcher;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssertUtils.jdiAssert;
 import static org.hamcrest.Matchers.is;
 
 public class MultipleInputsAssert extends UIAssert<MultipleInputsAssert, MultipleInputs> {

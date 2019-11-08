@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssertUtils.jdiAssert;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.entities.FormUsers.INLINE_FORM_CONTACT;

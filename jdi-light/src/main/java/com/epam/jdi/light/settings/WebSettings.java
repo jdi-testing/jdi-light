@@ -5,7 +5,7 @@ package com.epam.jdi.light.settings;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.asserts.core.SoftAssert;
+import com.epam.jdi.light.asserts.core.SoftAssertUtils;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.common.Timeout;
@@ -47,7 +47,7 @@ import static com.epam.jdi.light.driver.get.DriverData.DRIVER_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.LATEST_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.PAGE_LOAD_STRATEGY;
 import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
-import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
+import static com.epam.jdi.light.driver.get.RemoteDriverUtils.DRIVER_REMOTE_URL;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
@@ -150,7 +150,7 @@ public class WebSettings {
         fillAction(p -> BROWSER_SIZE = p, "browser.size");
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
-        fillAction(SoftAssert::setAssertType, "assert.type");
+        fillAction(SoftAssertUtils::setAssertType, "assert.type");
 
         // RemoteWebDriver properties
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");

@@ -12,7 +12,7 @@ import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.PerformancePage.customUsersDataSetup;
 import static io.github.com.pages.PerformancePage.usersData;
 import static io.github.com.pages.PerformancePage.usersDataSetup;
-import static io.github.epam.test.data.TableData.GRADY_BROCK;
+import static io.github.epam.test.data.TableDataHelper.GRADY_BROCK;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;

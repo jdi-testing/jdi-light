@@ -7,7 +7,7 @@ import selenium.entities.User;
 import static selenium.seleniumPO.HomePage.leftNavigation;
 import static selenium.seleniumPO.SiteSelenium.homePage;
 import static selenium.seleniumPO.SiteSelenium.login;
-import static selenium.site.data.DefaultDataProvider.ROMAN_CONTACT;
+import static selenium.site.data.DefaultDataProviderHelper.ROMAN_CONTACT;
 import static selenium.site.pages.ContactPage.seleniumContactForm;
 
 public class SeleniumContactForm implements SimpleTestsInit {

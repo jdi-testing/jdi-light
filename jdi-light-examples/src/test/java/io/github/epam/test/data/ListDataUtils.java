@@ -2,7 +2,7 @@ package io.github.epam.test.data;
 
 import io.github.com.custom.Result;
 
-public class ListData {
+public class ListDataUtils {
     public static Result CORRECT = new Result().set(r -> {
         r.name = "JDI OWNER CONTACT";
         r.description = "Write an email directly to Framework owner and main architect Iovlev Roman";

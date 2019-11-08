@@ -3,7 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import org.openqa.selenium.support.FindBy;
 
-public class GithubPage {
+public class GithubPageHelper {
     @FindBy(css = "[itemprop=about]")
     public static Text repoDescription;
     // @UI(".repository-meta-content")
