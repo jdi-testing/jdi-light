@@ -3,6 +3,7 @@ package io.github.com.sections.form;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Range;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Checkbox;
@@ -23,8 +24,10 @@ public class SuperheroForm extends Form<Superhero> {
     @UI("#superhero-switch-div")
     public Checkbox superheroSwitch;
 
-    @Override
-    public void cancel(Superhero entity) {
+    public Button superheroButtonSubmit;
+    public Button superheroButtonClear;
+
+    public void clear(Superhero entity) {
         submit(entity, "clear");
     }
 }
