@@ -1,15 +1,14 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
-import io.github.com.entities.SupportMessage;
 import io.github.com.sections.form.SuperheroForm;
+import io.github.com.sections.form.SupportMessageForm;
 
 public class BootstrapFormsPage extends WebPage {
     @UI("#support-form")
-    public static Form<SupportMessage> supportMessageForm;
+    public static SupportMessageForm supportMessageForm;
 
     @UI("#superhero-creation-form")
     public static SuperheroForm superheroForm;
