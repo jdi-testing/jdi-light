@@ -26,8 +26,4 @@ public class SuperheroForm extends Form<Superhero> {
 
     public Button superheroButtonSubmit;
     public Button superheroButtonClear;
-
-    public void clear(Superhero entity) {
-        submit(entity, "clear");
-    }
 }

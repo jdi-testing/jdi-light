@@ -13,8 +13,4 @@ public class SupportMessageForm extends Form<SupportMessage> {
 
     public Button supportButtonSubmit;
     public Button supportButtonClear;
-
-    public void clear(SupportMessage entity) {
-        submit(entity, "clear");
-    }
 }
