@@ -16,7 +16,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 public class DropdownMenuContentTests extends TestsInit {
 
 
-    private String headerText = "Dropdown header";
+    private String headerText = "DROPDOWN HEADER";
     private int numberOfItemsHeader = 2;
     private int numberOfChildrenHeader = 3;
 
@@ -65,7 +65,10 @@ public class DropdownMenuContentTests extends TestsInit {
 
     @Test
     public void checkHeaderTest() {
+        dropdownMenuContentHeader.show();
+        dropdownMenuContentHeader.expand();
         dropdownMenuContentHeader.menu().childs().get(1).is().core()
+                .displayed()
                 .tag("h6")
                 .hasClass("dropdown-header")
                 .text(headerText);
