@@ -16,5 +16,4 @@ public class CheckboxAndRadioButtonCustomDisabled extends Section {
     public RadioButton radioButton;
     @UI("label[for='customRadioDisabled2']")
     public Label radio1Label;
-
 }
