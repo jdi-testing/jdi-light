@@ -93,6 +93,9 @@ $(document).ready(function () {
         } else if (text === 'button') {
             logEvent(this);
             return false;
+        } else if (text === 'clear') {
+            logEvent(this);
+            return false;
         } else if (text === 'reestablish') {
             reestablish();
             logEvent(this);
