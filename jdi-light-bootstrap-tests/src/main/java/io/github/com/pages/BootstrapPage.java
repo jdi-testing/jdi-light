@@ -211,6 +211,12 @@ public class BootstrapPage extends WebPage {
     public static Dropdown dropdownMenuItemsActive;
     @UI("#dropdown-menu-disabled-item")
     public static Dropdown dropdownMenuDisabledItem;
+    @UI("#dropdown-content-header")
+    public static Dropdown dropdownMenuContentHeader;
+    @UI("#dropdown-content-divider")
+    public static Dropdown dropdownMenuContentDivider;
+    @UI("#dropdown-content-text")
+    public static Dropdown dropdownMenuContentText;
     @UI("#offsetDropdown")
     public static Dropdown offsetDropdown;
     @UI("#referenceDropdown")
