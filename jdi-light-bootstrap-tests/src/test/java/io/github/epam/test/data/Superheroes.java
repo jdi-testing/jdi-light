@@ -11,7 +11,7 @@ public class Superheroes {
             field.currentAlias = "Venom";
             field.alterEgo = "Peter Parker";
             field.species = "Symbiote";
-            field.selectUniverse = "Marvel";
+            field.selectUniverse = "Marvel Earth-616";
             field.superheroRange = "10.0";
             field.superheroSwitch = "true";
         });
