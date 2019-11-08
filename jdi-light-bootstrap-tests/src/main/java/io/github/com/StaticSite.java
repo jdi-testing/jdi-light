@@ -16,9 +16,6 @@ public class StaticSite {
 	@Url("/bootstrap.html")
 	public static BootstrapPage bsPage;
 	@Url("/bootstrap_forms.html")
-	public static BootstrapFormPage formPage;
-
-	@Url("/bootstrap_forms.html")
 	public static BootstrapFormsPage bsFormsPage;
 
 	@UI("#login-form")

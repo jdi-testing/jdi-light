@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
-import static io.github.com.StaticSite.formPage;
+import static io.github.com.StaticSite.bsFormsPage;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class BootstrapValidationTest extends TestsInit {
@@ -21,7 +21,7 @@ public class BootstrapValidationTest extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        formPage.shouldBeOpened();
+        bsFormsPage.shouldBeOpened();
     }
 
     @DataProvider
@@ -36,15 +36,15 @@ public class BootstrapValidationTest extends TestsInit {
     @Test(description = "Test validation rules with positive data", dataProvider = "positiveData")
     public void simpleValidationPositiveTest(SimpleContact entity) {
 
-        FormValidationForm form = formPage.formValidationSection.getForm();
-        formPage.formValidationSection.switchToBrowserValidation();
+        FormValidationForm form = bsFormsPage.formValidationSection.getForm();
+        bsFormsPage.formValidationSection.switchToBrowserValidation();
 
         form.fill(entity);
         Assert.assertTrue(form.isValid());
 
         form.reset();
 
-        formPage.formValidationSection.switchToCustomValidation();
+        bsFormsPage.formValidationSection.switchToCustomValidation();
 
         form.fill(entity);
         Assert.assertTrue(form.isValid());
@@ -64,15 +64,15 @@ public class BootstrapValidationTest extends TestsInit {
     @Test(description = "Test validation rules with negative data", dataProvider = "negativeData")
     public void simpleValidationNegativeTest(SimpleContact entity) {
 
-        FormValidationForm form = formPage.formValidationSection.getForm();
-        formPage.formValidationSection.switchToBrowserValidation();
+        FormValidationForm form = bsFormsPage.formValidationSection.getForm();
+        bsFormsPage.formValidationSection.switchToBrowserValidation();
 
         form.fill(entity);
         Assert.assertFalse(form.isValid());
 
         form.reset();
 
-        formPage.formValidationSection.switchToCustomValidation();
+        bsFormsPage.formValidationSection.switchToCustomValidation();
 
         form.fill(entity);
         Assert.assertFalse(form.isValid());
@@ -89,8 +89,8 @@ public class BootstrapValidationTest extends TestsInit {
 
         SimpleContact entity = new SimpleContact(name, email, phone);
 
-        FormValidationForm form = formPage.formValidationSection.getForm();
-        formPage.formValidationSection.switchToCustomValidation();
+        FormValidationForm form = bsFormsPage.formValidationSection.getForm();
+        bsFormsPage.formValidationSection.switchToCustomValidation();
 
         form.fill(entity);
         form.submit();
@@ -118,8 +118,8 @@ public class BootstrapValidationTest extends TestsInit {
 
         SimpleContact entity = new SimpleContact(name, email, phone);
 
-        FormValidationForm form = formPage.formValidationSection.getForm();
-        formPage.formValidationSection.switchToCustomValidation();
+        FormValidationForm form = bsFormsPage.formValidationSection.getForm();
+        bsFormsPage.formValidationSection.switchToCustomValidation();
 
         form.fill(entity);
         form.submit();
@@ -137,7 +137,7 @@ public class BootstrapValidationTest extends TestsInit {
 
     @AfterMethod
     public void reset() {
-        formPage.formValidationSection
+        bsFormsPage.formValidationSection
                 .getForm()
                 .reset();
     }
