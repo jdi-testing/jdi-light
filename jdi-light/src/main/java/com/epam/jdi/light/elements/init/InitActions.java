@@ -71,7 +71,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
     public static void init() {}
-    static void webPageSetup(SiteInfo info) {
+    private static void webPageSetup(SiteInfo info) {
         WebPage page = (WebPage) info.instance;
         defaultSetup(info, page);
         page.updatePageData(
@@ -184,7 +184,7 @@ public class InitActions {
     }
     public static boolean isPageObject(Class<?> type) {
         return isClass(type, Section.class) || isClass(type, WebPage.class) ||
-            LinqUtils.any(type.getDeclaredFields(), InitActions::isJDIField);
+            any(type.getDeclaredFields(), InitActions::isJDIField);
     }
     public static boolean isList(Field f, JFunc1<Class<?>, Boolean> func) {
         try {

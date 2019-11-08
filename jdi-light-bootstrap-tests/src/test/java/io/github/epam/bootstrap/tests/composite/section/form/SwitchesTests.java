@@ -67,7 +67,7 @@ public class SwitchesTests extends TestsInit {
     public void clickableTests() {
         switches.checkbox.check();
         switches.checkbox.is().selected();
-        switches.checkbox.check();
+        switches.checkbox.uncheck();
         switches.checkbox.is().deselected();
         switches.checkbox.label().click();
         switches.checkbox.is().selected();

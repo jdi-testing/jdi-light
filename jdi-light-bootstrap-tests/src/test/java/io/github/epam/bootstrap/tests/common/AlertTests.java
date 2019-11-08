@@ -28,12 +28,12 @@ public class AlertTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    String pageTitle = "Home Page";
-    String simpleAlertTextBeforeLink = "Alert with";
-    String simpleAlertTextAfterLink = ".";
-    String simpleAlertLinkText = "index page link";
-    String dismissibleAlertStrongText = "Dismissible alert!";
-    String dismissibleAlertDescriptionText = "Hide alert clicking on \"x\".";
+    private String pageTitle = "Home Page";
+    private String simpleAlertTextBeforeLink = "Alert with";
+    private String simpleAlertTextAfterLink = ".";
+    private String simpleAlertLinkText = "index page link";
+    private String dismissibleAlertStrongText = "Dismissible alert!";
+    private String dismissibleAlertDescriptionText = "Hide alert clicking on \"x\".";
 
     @Test
     public void simpleAlertExistingTest() {

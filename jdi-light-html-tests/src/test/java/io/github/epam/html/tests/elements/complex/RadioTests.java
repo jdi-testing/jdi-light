@@ -25,7 +25,7 @@ public class RadioTests extends TestsInit {
         html5Page.shouldBeOpened();
         colors.select(text);
     }
-    String text = "Blue";
+    private String text = "Blue";
 
     @Test
     public void getValueTest() {

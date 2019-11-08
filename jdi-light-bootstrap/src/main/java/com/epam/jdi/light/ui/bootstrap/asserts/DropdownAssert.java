@@ -43,4 +43,10 @@ public class DropdownAssert<A extends DropdownAssert, E extends Dropdown> extend
         return (A) this;
     }
 
+    @JDIAction("Assert that '{name}' item is active")
+    public A active(int itemIndex) {
+        jdiAssert(element.list().get(itemIndex).core().getAttribute("class"), is("dropdown-item active"));
+        return (A) this;
+    }
+
 }

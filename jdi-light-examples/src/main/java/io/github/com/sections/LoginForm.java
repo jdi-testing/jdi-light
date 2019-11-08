@@ -7,12 +7,12 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import io.github.epam.entities.User;
 import org.openqa.selenium.WebElement;
-
+@SuppressWarnings("unused")
 public class LoginForm extends Form<User> {
 	@UI("*root*//header//form//input[@type='text']")
-	public WebElement name;
-	@Css("input[type=password]") WebElement password;
+	private WebElement name;
+	@Css("input[type=password]")private WebElement password;
 
-	@Root @XPath(".//header//form//button[@type='submit']") WebElement enter;
+	@Root @XPath(".//header//form//button[@type='submit']")private WebElement enter;
 
 }

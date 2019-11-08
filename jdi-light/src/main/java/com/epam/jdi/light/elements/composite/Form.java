@@ -98,6 +98,9 @@ public class Form<T> extends Section {
         pageObject = obj;
         return this;
     }
+    protected Object getPageObject() {
+        return this.pageObject;
+    }
     public List<Field> allFields() {
         return allFields(pageObject);
     }
@@ -402,4 +405,10 @@ public class Form<T> extends Section {
         return false;
     }
     //endregion
+
+    @JDIAction("Return if form valid")
+    public boolean isValid() {
+        Object res = core().js().executeScript("return arguments[0].checkValidity()", core().get());
+        return (Boolean) res;
+    }
 }

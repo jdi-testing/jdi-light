@@ -25,7 +25,7 @@ public class ColorPickerTests extends TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    String color = "#ffd7a6";
+    private String color = "#ffd7a6";
 
     @Test
     public void getLabelTextTest() {

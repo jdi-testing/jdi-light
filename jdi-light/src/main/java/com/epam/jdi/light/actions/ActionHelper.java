@@ -59,7 +59,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class ActionHelper {
 
-    static String getTemplate(LogLevels level) {
+    private static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
     }
     public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = jp -> {
@@ -128,13 +128,13 @@ public class ActionHelper {
             logger.debug("Done");
         return result;
     };
-    static boolean logResult(ProceedingJoinPoint jp) {
+    private static boolean logResult(ProceedingJoinPoint jp) {
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class)) return false;
         JDIAction ja = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
         return ja != null && ja.logResult();
     }
-    static Class<?> getJpClass(JoinPoint jp) {
+    protected static Class<?> getJpClass(JoinPoint jp) {
         return jp.getThis() != null
                 ? jp.getThis().getClass()
                 : jp.getSignature().getDeclaringType();
@@ -144,7 +144,7 @@ public class ActionHelper {
         (jp, result) -> AFTER_STEP_ACTION.execute(jp, result);
 
     //region Private
-    static String getBeforeLogString(ProceedingJoinPoint jp) {
+    private static String getBeforeLogString(ProceedingJoinPoint jp) {
         String actionName = GET_ACTION_NAME.execute(jp);
         String logString = jp.getThis() == null
             ? actionName
@@ -171,7 +171,7 @@ public class ActionHelper {
     }
 
     public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
-    static WebPage getPage(Object element) {
+    private static WebPage getPage(Object element) {
         if (isClass(element.getClass(), DriverBase.class) &&
             !isClass(element.getClass(), WebPage.class))
             return ((DriverBase) element).getPage();
@@ -181,7 +181,7 @@ public class ActionHelper {
         return (MethodSignature) joinPoint.getSignature();
     }
 
-    static String methodNameTemplate(MethodSignature method) {
+    private static String methodNameTemplate(MethodSignature method) {
         try {
             Method m = method.getMethod();
             if (m.isAnnotationPresent(JDIAction.class)) {
@@ -196,14 +196,14 @@ public class ActionHelper {
                     "Can't get method name template: " + safeException(ex));
         }
     }
-    static LogLevels logLevel(JoinPoint joinPoint) {
+    private static LogLevels logLevel(JoinPoint joinPoint) {
         Method m = getJpMethod(joinPoint).getMethod();
         return m.isAnnotationPresent(JDIAction.class)
                 ? m.getAnnotation(JDIAction.class).level()
                 : STEP;
     }
 
-    static String getDefaultName(String method, MapArray<String, Object> args) {
+    private static String getDefaultName(String method, MapArray<String, Object> args) {
         if (args.size() == 1 && args.get(0).value.getClass().isArray())
             return format("%s(%s)", method, arrayToString(args.get(0).value));
         MapArray<String, String> methodArgs = args.toMapArray(Object::toString);
@@ -215,17 +215,17 @@ public class ActionHelper {
         return format("%s%s", method, stringArgs);
     }
 
-    static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
+    private static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
         return toMap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint)));
     }
 
-    static MapArray<String, Object> toMap(JFunc<MapArray<String, Object>> getMap) {
+    private static MapArray<String, Object> toMap(JFunc<MapArray<String, Object>> getMap) {
         IGNORE_NOT_UNIQUE = true;
         MapArray<String, Object> map = getMap.execute();
         IGNORE_NOT_UNIQUE = false;
         return map;
     }
-    static Object[] getArgs(JoinPoint jp) {
+    private static Object[] getArgs(JoinPoint jp) {
         Object[] args = jp.getArgs();
         if (args.length == 1 && args[0] == null)
             return new Object[] {};
@@ -240,7 +240,7 @@ public class ActionHelper {
         return result;
     }
 
-    static MapArray<String, Object> core(JoinPoint jp) {
+    private static MapArray<String, Object> core(JoinPoint jp) {
         Class cl = jp.getSignature().getDeclaringType();
         if (jp.getThis() != null && isInterface(cl, ICoreElement.class)) {
             UIElement el = ((ICoreElement) jp.getThis()).core();
@@ -248,11 +248,11 @@ public class ActionHelper {
         }
         return new MapArray<>();
     }
-    static MapArray<String, Object> classFields(Object obj) {
+    private static MapArray<String, Object> classFields(Object obj) {
         return obj != null ? getAllFields(obj) : new MapArray<>();
     }
 
-    static String getElementName(JoinPoint jp) {
+    private static String getElementName(JoinPoint jp) {
         try {
             Object obj = jp.getThis();
             if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
@@ -263,7 +263,7 @@ public class ActionHelper {
             throw exception("Can't get element name");
         }
     }
-    static String getActionNameFromTemplate(MethodSignature method, String value,
+    private static String getActionNameFromTemplate(MethodSignature method, String value,
                                             MapArray<String, Object>... args) {
         String result;
         try {

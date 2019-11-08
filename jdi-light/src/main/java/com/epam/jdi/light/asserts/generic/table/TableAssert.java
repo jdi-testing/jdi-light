@@ -30,8 +30,8 @@ public class TableAssert extends BaseTableAssert<Table, TableAssert> {
         public String name;
         public String failElement;
         public String type;
-        TableAssert tAssert;
-        boolean exact;
+        private TableAssert tAssert;
+        private boolean exact;
         private Compare(int count, TableAssert tAssert, boolean exact) {
             this.count = count;
             this.tAssert = tAssert;
@@ -47,7 +47,6 @@ public class TableAssert extends BaseTableAssert<Table, TableAssert> {
          */
         @JDIAction("Assert that '{name}' has at least '{0}' rows that {0}")
         public TableAssert rows(TableMatcher... matchers) {
-            int i = TABLE_MATCHER.execute(element, matchers).size();
             jdiAssert(TABLE_MATCHER.execute(element, matchers).size(),
                     greaterThan(table().header().size()*count-1));
             return tAssert;

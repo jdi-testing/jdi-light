@@ -27,12 +27,12 @@ public class NestingTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    String buttonOneClickAlert = "Button 1 Clicked!";
-    String buttonTwoClickAlert = "Button 2 Clicked!";
-    String dropdownMenuLinkOne = "JDI Github";
-    String dropdownMenuLinkTwo = "JDI Docs";
-    String linkOnePageTitle = "GitHub - jdi-testing/jdi-light: Powerful Framework for UI Automation Testing on Java";
-    String linkTwoPageTitle = "JDI Light Framework – API Reference";
+    private String buttonOneClickAlert = "Button 1 Clicked!";
+    private String buttonTwoClickAlert = "Button 2 Clicked!";
+    private String dropdownMenuLinkOne = "JDI Github";
+    private String dropdownMenuLinkTwo = "JDI Docs";
+    private String linkOnePageTitle = "GitHub - jdi-testing/jdi-light: Powerful Framework for UI Automation Testing on Java";
+    private String linkTwoPageTitle = "JDI Light Framework – API Reference";
 
     @Test
     public void buttonOneTests() {

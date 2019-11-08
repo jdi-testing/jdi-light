@@ -13,7 +13,7 @@ import static com.epam.jdi.tools.JsonUtils.getMapFromJson;
 
 public class FormSteps {
 	public static Safe<Form> lastForm = new Safe<>(() -> null);
-	static Form getForm(String name) {
+	private static Form getForm(String name) {
 		Form form = null;
 		try {
 			form = getUI(name, Form.class);
@@ -23,7 +23,7 @@ public class FormSteps {
 		lastForm.set(form);
 		return form;
 	}
-	static Form getLastForm() {
+	private static Form getLastForm() {
 		if (lastForm.get() != null)
 			return lastForm.get();
 		throw exception("You should execute form action with name before steps without form name");

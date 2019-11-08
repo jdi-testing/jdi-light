@@ -27,13 +27,13 @@ public class InputGroupSegmentedButtonTests extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    String testText = "Test text";
-    String action = "Action";
-    String anotherAction = "Another action";
-    String somethingElseHere = "Something else here";
-    String separatedLink = "Separated link";
-    String pageTitle = "Home Page";
-    String actionButtonClickAlert = "Action Button Alert";
+    private String testText = "Test text";
+    private String action = "Action";
+    private String anotherAction = "Another action";
+    private String somethingElseHere = "Something else here";
+    private String separatedLink = "Separated link";
+    private String pageTitle = "Home Page";
+    private String actionButtonClickAlert = "Action Button Alert";
 
     @Test
     public void dropdownMenuIsValidationTests() {

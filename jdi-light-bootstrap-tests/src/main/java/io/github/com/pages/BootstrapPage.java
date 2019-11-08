@@ -9,7 +9,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Checkbox;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
@@ -116,6 +116,7 @@ import io.github.com.sections.modal.gridmodal.GridModalSection;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarExternalContent;
 import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarPlacement;
 import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarSupportedContent;
 import io.github.com.sections.navbar.NavbarText;
@@ -206,6 +207,8 @@ public class BootstrapPage extends WebPage {
     public static Dropdown dropdownMenuItems;
     @UI("#dropdown-menu-text-item")
     public static Dropdown dropdownMenuTextItem;
+    @UI("#dropdown-menu-items-active")
+    public static Dropdown dropdownMenuItemsActive;
     @UI("#dropdown-menu-disabled-item")
     public static Dropdown dropdownMenuDisabledItem;
     @UI("#offsetDropdown")
@@ -712,6 +715,8 @@ public class BootstrapPage extends WebPage {
     public static NavbarSupportedContent navbarSupportedContent;
     @UI("#navbar-base-for-brand")
     public static NavbarSection navbarSection;
+    @UI("#navbar-sticky-top")
+    public static NavbarPlacement navbarPlacementStickyTop;
     //endregion
 
     //region Ranges

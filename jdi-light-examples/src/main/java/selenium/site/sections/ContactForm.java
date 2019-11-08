@@ -8,44 +8,45 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+@SuppressWarnings("unused")
 public class ContactForm {
     @UI("#name")
-    WebElement name;
+    private WebElement name;
     @UI("#last-name")
-    WebElement lastName;
+    private WebElement lastName;
     @UI("#position")
-    WebElement position;
+    private WebElement position;
     @UI("#passport-number")
-    WebElement passportNumber;
+    private WebElement passportNumber;
     @UI("#passport-seria")
-    WebElement passportSerial;
+    private WebElement passportSerial;
     @UI("#passport")
-    WebElement passport;
+    private WebElement passport;
     // Dropdown
     @UI("#gender")
-    WebElement genderExpand;
+    private WebElement genderExpand;
     @UI("#gender")
-    List<WebElement> genderList;
+    private List<WebElement> genderList;
     @UI("#gender")
-    WebElement genderValue;
+    private WebElement genderValue;
     // Combobox
     @UI("#religion")
-    WebElement religion;
+    private WebElement religion;
     // MultiDropdown
     @UI("#gender")
-    WebElement weatherExpand;
+    private WebElement weatherExpand;
     @UI("#gender")
-    List<WebElement> weatherList;
+    private List<WebElement> weatherList;
     @UI("#gender")
-    WebElement weatherValue;
+    private WebElement weatherValue;
 
     @UI("#accept-conditions")
-    WebElement acceptConditions;
+    private WebElement acceptConditions;
     @UI("#description")
-    WebElement description;
+    private WebElement description;
 
     @UI("#contact-form [type=submit]")
-    WebElement submit;
+    private WebElement submit;
 
     public void submit(ContactInfo contact) {
 
