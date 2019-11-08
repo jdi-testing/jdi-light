@@ -30,7 +30,7 @@ public class NumberSelectorTests extends TestsInit {
         html5Page.shouldBeOpened();
         height.setNumber(number);
     }
-    String number = "2.1";
+    private String number = "2.1";
 
     @Test
     public void getLabelTextTest() {

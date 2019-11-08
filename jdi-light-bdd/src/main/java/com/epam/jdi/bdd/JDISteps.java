@@ -43,7 +43,7 @@ public class JDISteps {
 	@Given("^I open \"([^\"]*)\"(?: page|)$")
     public void iOpen(String pageName) {
         if (pageName.startsWith("http"))
-			WebPage.openUrl(pageName);
+			openUrl(pageName);
 		getPage(pageName).shouldBeOpened();
     }
 	@Given("^I'm on \"([^\"]*)\"(?: page|)$")

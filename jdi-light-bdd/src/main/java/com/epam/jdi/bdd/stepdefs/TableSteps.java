@@ -22,8 +22,9 @@ import static org.hamcrest.Matchers.matchesPattern;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("unused")
 public class TableSteps {
-    static Table lastTable;
+    private static Table lastTable;
     public static Table table(String name) { return lastTable = getUI(name, Table.class); }
 
     //#region When
@@ -58,7 +59,7 @@ public class TableSteps {
     public void assertEqualsValues(String name, List<String> values) {
         String tableValues = String.join(", ", table(name).preview().replaceAll(" ", ""));
         String expectedValue = String.join(", ", values).replaceAll(", ", "");
-        Assert.assertEquals(tableValues, expectedValue);
+        assertEquals(tableValues, expectedValue);
     }
     @Then("^the \"([^\"]*)\" (?:table |)is not empty$")
     public void assertNotEmpty(String name) {

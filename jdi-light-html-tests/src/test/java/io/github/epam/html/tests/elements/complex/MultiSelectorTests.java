@@ -28,7 +28,7 @@ public class MultiSelectorTests extends TestsInit {
         html5Page.shouldBeOpened();
         ages.check(text);
     }
-    String text = "Steam";
+    private String text = "Steam";
 
     @Test
     public void getValueTest() {

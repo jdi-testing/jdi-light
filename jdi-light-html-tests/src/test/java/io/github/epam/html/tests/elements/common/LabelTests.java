@@ -27,7 +27,7 @@ public class LabelTests extends TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    String text = "JDI TESTING PLATFORM";
+    private String text = "JDI TESTING PLATFORM";
 
     //TODO Performance issue
     @Test

@@ -27,7 +27,7 @@ public class MultiDropdownTests extends TestsInit {
         if (!isFireFox())
             multiDropdown.check(text);
     }
-    String text = "Steam";
+    private String text = "Steam";
 
     @Test
     public void getValueTest() {

@@ -13,10 +13,10 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static page.objects.selenium.PageBase.JDI_DOMAIN;
 
 public class PageInitTests {
-    static String expecterdUrl(String url) {
+    private static String expecterdUrl(String url) {
         return JDI_DOMAIN + url;
     }
-    boolean first = true;
+    private boolean first = true;
     @BeforeMethod
     public void before() {
         if (first) {

@@ -162,7 +162,7 @@ public class SoftAsserts extends TestsInit {
         }
     }
 
-    void assertList(String actual, List<String> strings) {
+    private void assertList(String actual, List<String> strings) {
         for (String str : strings)
             assertThat(actual, containsString(str));
     }

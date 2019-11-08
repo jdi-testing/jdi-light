@@ -23,12 +23,12 @@ public class InputGroupCustomSelectWithButton extends TestsInit {
         bsPage.shouldBeOpened();
     }
 
-    String buttonClickAlert = "Button clicked, thank you!";
-    String buttonText = "Button";
-    String selectChoose = "Choose...";
-    String selectOne = "One";
-    String selectTwo = "Two";
-    String selectThree = "Three";
+    private String buttonClickAlert = "Button clicked, thank you!";
+    private String buttonText = "Button";
+    private String selectChoose = "Choose...";
+    private String selectOne = "One";
+    private String selectTwo = "Two";
+    private String selectThree = "Three";
 
     @Test
     public void buttonTests() {
@@ -70,7 +70,7 @@ public class InputGroupCustomSelectWithButton extends TestsInit {
                 .enabled()
                 .core()
                 .hasClass("custom-select")
-                .css("font-size", is("16px"));;
+                .css("font-size", is("16px"));
         customSelectWithButton.selector.is().size(4);
     }
 

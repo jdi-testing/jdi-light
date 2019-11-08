@@ -47,7 +47,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     ListBase() {}
     ListBase(By locator) { list = new WebList(locator); }
     ListBase(List<WebElement> elements) { list = new WebList(elements); }
-    Class<?> initClass = UIElement.class;
+    protected Class<?> initClass = UIElement.class;
 
     private boolean actualMapValue() {
         return map.hasValue() && map.get().size() > 0 && isActual(map.get().get(0).value);
