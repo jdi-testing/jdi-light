@@ -28,9 +28,3 @@ public class Superheroes {
         });
     }
 }
-/*public String currentAlias = "Venom";
-    public String alterEgo = "Peter Parker";
-    public String species = "Symbiote";
-    public String selectUniverse = "Marvel";
-    public String superheroRange = "10.0";
-    public String superheroSwitch = "true";*/

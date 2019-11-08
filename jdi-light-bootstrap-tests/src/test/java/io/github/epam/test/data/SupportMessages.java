@@ -4,11 +4,19 @@ import io.github.com.entities.SupportMessage;
 
 public class SupportMessages {
     public static SupportMessage EXAMPLE_MESSAGE = getExampleMessage();
+    public static SupportMessage TEMPLATE_MESSAGE = getTemplateMessage();
 
     private static SupportMessage getExampleMessage() {
         return new SupportMessage().set(field -> {
-            field.supportInputEmail = "help-me.please@mail.org";
-            field.supportTextArea = "Nothing works! Nothing! Answer me, PLEASE!";
+            field.supportEmail = "help-me.please@mail.org";
+            field.supportMessage = "Nothing works! Nothing! Answer me, PLEASE!";
+        });
+    }
+
+    private static SupportMessage getTemplateMessage() {
+        return new SupportMessage().set(field -> {
+            field.supportEmail = "";
+            field.supportMessage = "";
         });
     }
 }
