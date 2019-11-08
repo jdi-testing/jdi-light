@@ -15,6 +15,9 @@ import static org.hamcrest.Matchers.containsString;
 
 public class ComplicatedFormTests extends TestsInit {
 
+    private final String logLineSubmit = "superhero-button-submit:button clicked";
+    private final String logLineClear = "superhero-button-clear:button clicked";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -22,28 +25,44 @@ public class ComplicatedFormTests extends TestsInit {
     }
 
     @Test
-    public void fillAndVerifyForm() {
-        superheroForm.fill(EXAMPLE_HERO);
-        superheroForm.verify(EXAMPLE_HERO);
-        superheroForm.check(EXAMPLE_HERO);
+    public void submitButtonTest() {
+        superheroForm.superheroButtonSubmit.click();
+        lastLogEntry.has().text(containsString(logLineSubmit));
     }
 
     @Test
-    public void submitForm() {
+    public void clearButtonTest() {
+        superheroForm.superheroButtonClear.click();
+        lastLogEntry.has().text(containsString(logLineClear));
+    }
+
+    @Test
+    public void submitFormTest() {
+        setDefaultValues();
         superheroForm.submit(EXAMPLE_HERO);
-        lastLogEntry.has().text(containsString("superhero-button-submit:button clicked"));
+        lastLogEntry.has().text(containsString(logLineSubmit));
         superheroForm.check(EXAMPLE_HERO);
     }
 
     @Test
-    public void clearForm() {
-        superheroForm.cancel(EXAMPLE_HERO);
-        lastLogEntry.has().text(containsString("superhero-button-clear:button clicked"));
+    public void clearFormTest() {
+        setDefaultValues();
+        superheroForm.clear(EXAMPLE_HERO);
+        lastLogEntry.has().text(containsString(logLineClear));
         superheroForm.check(TEMPLATE_HERO);
     }
 
     @Test
     public void baseValidationTest() {
         baseValidation(superheroForm);
+    }
+
+    private void setDefaultValues() {
+        superheroForm.currentAlias.setValue(TEMPLATE_HERO.currentAlias);
+        superheroForm.alterEgo.setValue(TEMPLATE_HERO.alterEgo);
+        superheroForm.species.setValue(TEMPLATE_HERO.species);
+        superheroForm.selectUniverse.setValue(TEMPLATE_HERO.selectUniverse);
+        superheroForm.superheroRange.setValue(TEMPLATE_HERO.superheroRange);
+        superheroForm.superheroSwitch.setValue(TEMPLATE_HERO.superheroSwitch);
     }
 }

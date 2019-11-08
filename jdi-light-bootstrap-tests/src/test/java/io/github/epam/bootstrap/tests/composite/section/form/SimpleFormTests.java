@@ -10,9 +10,13 @@ import static io.github.com.pages.BootstrapFormsPage.supportMessageForm;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.SupportMessages.EXAMPLE_MESSAGE;
+import static io.github.epam.test.data.SupportMessages.TEMPLATE_MESSAGE;
 import static org.hamcrest.Matchers.containsString;
 
 public class SimpleFormTests extends TestsInit {
+
+    private final String logLineSubmit = "support-button-submit:button clicked";
+    private final String logLineClear = "support-button-clear:button clicked";
 
     @BeforeMethod
     public void before() {
@@ -21,20 +25,40 @@ public class SimpleFormTests extends TestsInit {
     }
 
     @Test
-    public void fillAndVerifyForm() {
-        supportMessageForm.fill(EXAMPLE_MESSAGE);
-        supportMessageForm.verify(EXAMPLE_MESSAGE);
+    public void submitButtonTest() {
+        supportMessageForm.supportButtonSubmit.click();
+        lastLogEntry.has().text(containsString(logLineSubmit));
     }
 
     @Test
-    public void submitForm() {
+    public void clearButtonTest() {
+        supportMessageForm.supportButtonClear.click();
+        lastLogEntry.has().text(containsString(logLineClear));
+    }
+
+    @Test
+    public void submitFormTest() {
+        setDefaultValues();
         supportMessageForm.submit(EXAMPLE_MESSAGE);
-        lastLogEntry.has().text(containsString("support-button-submit:button clicked"));
+        lastLogEntry.has().text(containsString(logLineSubmit));
         supportMessageForm.check(EXAMPLE_MESSAGE);
+    }
+
+    @Test
+    public void clearFormTest() {
+        setDefaultValues();
+        supportMessageForm.clear(EXAMPLE_MESSAGE);
+        lastLogEntry.has().text(containsString(logLineClear));
+        supportMessageForm.check(TEMPLATE_MESSAGE);
     }
 
     @Test
     public void baseValidationTest() {
         baseValidation(supportMessageForm);
+    }
+
+    private void setDefaultValues() {
+        supportMessageForm.supportEmail.setValue(TEMPLATE_MESSAGE.supportEmail);
+        supportMessageForm.supportMessage.setValue(TEMPLATE_MESSAGE.supportMessage);
     }
 }
