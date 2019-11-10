@@ -162,8 +162,8 @@ public class UIElement extends JDIBase
      */
     @JDIAction(value = "Check that '{name}' is displayed", timeout = 0)
     public boolean isDisplayed() {
-        if (VISUAL_ACTION_STRATEGY == IS_DISPLAYED && params.keys().contains("visualCheck"))
-            visualCheck("Is Displayed");
+        if (params.keys().contains("visualCheck"))
+            visualCheck("Check that '"+getName()+"' is displayed");
         return displayed();
     }
     /**

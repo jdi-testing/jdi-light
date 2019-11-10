@@ -211,7 +211,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “submit” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Submit '{name}' with {0}")
     public void submit(T entity) {
@@ -251,7 +250,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “login” or ”loginButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Login as {0}")
     public void login(T entity) {
@@ -264,7 +262,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “login” or ”loginButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Login as {0}")
     public void loginAs(T entity) {
@@ -274,7 +271,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “send” or ”sendButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Send {0} in '{name}'")
     public void send(T entity) {
@@ -288,7 +284,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “add” or ”addButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Add {0} in '{name}'")
     public void add(T entity) {
@@ -298,7 +293,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “publish” or ”publishButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Publish {0} for '{name}'")
     public void publish(T entity) {
@@ -308,7 +302,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “save” or ”saveButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Save {0} in '{name}'")
     public void save(T entity) {
@@ -318,7 +311,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “update” or ”updateButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Update {0} in '{name}'")
     public void update(T entity) {
@@ -328,7 +320,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “cancel” or ”cancelButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Fill {0} and cancel '{name}'")
     public void cancel(T entity) {
@@ -338,7 +329,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “close” or ”closeButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Fill {0} and close '{name}'")
     public void close(T entity) {
@@ -348,7 +338,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “back” or ”backButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Fill '{name}' with {0} and go back")
     public void back(T entity) {
@@ -358,7 +347,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “select” or ”selectButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Select {0} for '{name}'")
     public void select(T entity) {
@@ -368,7 +356,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “next” or ”nextButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Fill '{name}' with {0} and go to next")
     public void next(T entity) {
@@ -378,7 +365,6 @@ public class Form<T> extends Section {
     /**
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “search” or ”searchButton” <br>
-     * @apiNote To use this option Form pageObject should have only one IsButton Element
      */
     @JDIAction("Search for {0} in '{name}'")
     public void search(T entity) {

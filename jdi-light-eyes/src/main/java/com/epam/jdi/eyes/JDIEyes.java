@@ -11,11 +11,13 @@ import com.applitools.eyes.TestResults;
 import com.applitools.eyes.selenium.Eyes;
 import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.common.VisualCheckPage;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.tools.Safe;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Method;
@@ -44,7 +46,7 @@ public class JDIEyes {
         return eyes;
     }
 
-    static void visualTestInit(VisualCheckPage checkPageStrategy,
+    public static void visualTestInit(VisualCheckPage checkPageStrategy,
             VisualCheckAction checkActionStrategy) {
         VISUAL_PAGE_STRATEGY = checkPageStrategy;
         VISUAL_ACTION_STRATEGY = checkActionStrategy;
@@ -62,10 +64,8 @@ public class JDIEyes {
     public static void visualTestInit() {
         visualTestInit(CHECK_NEW_PAGE, ON_VISUAL_ACTION);
     }
-    public static void initVisualTest() {
-        visualTestInit();
-    }
-    public static void initVisualTest(String apikey) {
+
+    public static void visualTestInit(String apikey) {
         visualTestInit();
         EYES_CONFIG.apiKey = apikey;
     }
@@ -117,9 +117,14 @@ public class JDIEyes {
     }
     public static void visualCheckElement(WebElement webElement, String name) {
         openEyes();
+        show(webElement);
         eyes.get().check(name, region(webElement));
     }
-
+    static void show(WebElement element) {
+        ((JavascriptExecutor)EYES_CONFIG.webDriver.execute()).executeScript(
+        "return arguments[0].scrollIntoView({behavior:'auto',block:'center',inline:'center'});", element
+        );
+    }
     static TestResults getResult(Eyes eyes) {
         try {
             return eyes.close(false);

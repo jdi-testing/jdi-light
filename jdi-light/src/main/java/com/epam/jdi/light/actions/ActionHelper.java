@@ -107,7 +107,6 @@ public class ActionHelper {
     public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = jp -> {
         BEFORE_STEP_ACTION.execute(jp);
         processNewPage(jp);
-
     };
 
     public static int CUT_STEP_TEXT = 100;

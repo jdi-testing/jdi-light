@@ -100,7 +100,7 @@ public class ActionProcessor {
             do {
                 try {
                     Object result = overrideAction != null
-                        ? overrideAction.execute(jp.getThis()) : jp.proceed();
+                        ? overrideAction.execute(jp) : jp.proceed();
                     if (!condition(jp)) continue;
                     return result;
                 } catch (Throwable ex) {
