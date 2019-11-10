@@ -27,7 +27,7 @@ public class RadioButtonCustomTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        radioButtonsWebList = radioButtonCustom.radioButtons.list(ANY_ELEMENT, JS);
+        radioButtonsWebList = radioButtonCustom.radioButtons.list();
     }
 
     @Test
@@ -71,6 +71,20 @@ public class RadioButtonCustomTests extends TestsInit {
         radioButtonsWebList.select(2);
         radioButtonsWebList.get(2).core().waitFor().selected();
         radioButtonsWebList.get(2).is().selected();
+        radioButtonCustom.radioButtons.is().selected(2);
+    }
+
+    @Test
+    public void radioButtonByIndexInSelectAltTests() {
+        radioButtonCustom.radioButtons.select(1);
+        radioButtonCustom.radioButtons.is().selected("Toggle this custom radio");
+        radioButtonCustom.radioButtons.select(2);
+        radioButtonCustom.radioButtons.is().selected("Or toggle this other custom radio");
+        radioButtonCustom.radioButtons.select("Toggle this custom radio");
+        radioButtonCustom.radioButtons.is().selected("Toggle this custom radio");
+        radioButtonCustom.radioButtons.is().selected(1);
+        radioButtonCustom.radioButtons.select(2);
+        radioButtonCustom.radioButtons.is().selected(2);
     }
 
     @Test

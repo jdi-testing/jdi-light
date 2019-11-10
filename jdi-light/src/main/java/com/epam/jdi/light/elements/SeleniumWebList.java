@@ -153,9 +153,11 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
      */
     @JDIAction(level = DEBUG)
     public UIElement get(String value) {
-        return elements.isUseCache() && hasKey(value)
+        UIElement uiElement = elements.isUseCache() && hasKey(value)
                 ? elements.get().get(value)
                 : getUIElement(value);
+        uiElement.setClickArea(getClickType());
+        return uiElement;
     }
     public UIElement getUIElement(String value) {
         if (locator.isTemplate()) {
@@ -430,6 +432,11 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
     @JDIAction("Check that '{option}' is selected in '{name}'")
     public boolean selected(String option) {
         return get(option).isSelected();
+    }
+
+    @JDIAction("Check that '{0}' is selected in '{name}'")
+    public boolean selected(int index) {
+        return get(index).isSelected();
     }
 
     @JDIAction("Get '{name}' checked values")

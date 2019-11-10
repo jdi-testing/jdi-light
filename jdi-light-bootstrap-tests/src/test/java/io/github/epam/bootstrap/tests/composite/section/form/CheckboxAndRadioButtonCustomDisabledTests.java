@@ -28,7 +28,6 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         radioBtnList = checkboxAndRadioButtonCustomDisabled.radioButtons.list(ANY_ELEMENT, JS);
-        //checkboxAndRadioButtonCustomDisabled.checkbox.hover();
     }
 
     @Test
@@ -72,7 +71,7 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
     }
 
     @Test
-    public void radioButtonTests() {
+    public void radioButtonsTests() {
         radioBtnList.get(1).label().click();
         radioBtnList.get(1).is().deselected();
         radioBtnList.get(1).is().disabled();
