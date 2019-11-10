@@ -196,10 +196,13 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
         if (index-jdiIndex < 0) {
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
         }
-        return (locator.isTemplate()
+        UIElement uiElement = locator.isTemplate()
                 ? tryGetByIndex(index-jdiIndex)
-                : initElement(() -> getList(index).get(index-jdiIndex)))
+                : initElement(() -> getList(index).get(index-jdiIndex))
                 .setName(nameFromIndex(index-jdiIndex));
+
+        uiElement.setClickArea(getClickType());
+        return uiElement;
     }
     protected UIElement tryGetByIndex(int index) {
         try {
