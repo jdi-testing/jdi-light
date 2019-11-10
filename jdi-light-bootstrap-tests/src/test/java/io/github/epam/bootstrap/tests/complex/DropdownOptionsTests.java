@@ -1,6 +1,7 @@
 package io.github.epam.bootstrap.tests.complex;
 
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Dropdown;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.BootstrapDropdown;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.DropdownMenu;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -50,7 +51,7 @@ public class DropdownOptionsTests extends TestsInit {
     }
 
     @Test(dataProvider = "dropdownData")
-    public void expandCollapseTest(Dropdown dropdown) {
+    public void expandCollapseTest(BootstrapDropdown dropdown) {
         dropdown.expand();
         dropdown.is().expanded();
         dropdown.collapse();
@@ -58,7 +59,7 @@ public class DropdownOptionsTests extends TestsInit {
     }
 
     @Test(dataProvider = "dropdownLinkData")
-    public void dropdownLinkTest(Dropdown dropdown, String[] linkArray) {
+    public void dropdownLinkTest(DropdownMenu dropdown, String[] linkArray) {
         for (int i = 1; i <= dropdown.list().size(); i++) {
             dropdown.expand();
             dropdown.list().get(i).click();

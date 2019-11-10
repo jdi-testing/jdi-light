@@ -1,23 +1,24 @@
 package com.epam.jdi.light.ui.bootstrap.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.bootstrap.asserts.DropdownAssert;
+import com.epam.jdi.light.ui.bootstrap.asserts.BootstrapDropdownAssert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class Dropdown extends UIBaseElement<DropdownAssert> {
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+
+public class BootstrapDropdown extends Section {
     @UI(".dropdown-toggle")
     private Button dropdownToggle;
     @UI(".dropdown-menu")
     private UIElement dropdownMenu;
-    @UI(".dropdown-item,.dropdown-item-text")
-    private WebList items;
+
 
     @JDIAction("Expand dropdown '{name}' ")
     public void expand() {
@@ -46,28 +47,37 @@ public class Dropdown extends UIBaseElement<DropdownAssert> {
     }
 
     @Override
-    public DropdownAssert is() {
-        return new DropdownAssert<>().set(this);
+    public BootstrapDropdownAssert is() {
+        return new BootstrapDropdownAssert<>().set(this);
     }
 
-    @JDIAction("Select item '{0}' in dropdown '{name}' ")
-    public void select(String item) {
-        items.select(item);
+    @Override
+    public BootstrapDropdownAssert assertThat() {
+        return is();
     }
 
-    @JDIAction("Get values from dropdown '{name}' ")
-    public List<String> itemValues() {
-        return items.values();
+    @Override
+    public BootstrapDropdownAssert has() {
+        return is();
     }
 
-    @JDIAction("Check that values contains {0} in dropdown '{name}' ")
-    public boolean hasItems(String... item) {
-        return itemValues().containsAll(Arrays.asList(item));
+    @Override
+    public BootstrapDropdownAssert waitFor() {
+        return is();
     }
 
-    public WebList list() {
-        return this.items;
+    @Override
+    public BootstrapDropdownAssert shouldBe() {
+        return is();
     }
+
+    @Override
+    public BootstrapDropdownAssert verify() {
+        assertSoft();
+        return is();
+    }
+
+
 
     public Button expander() {
         return dropdownToggle;
