@@ -61,5 +61,6 @@ public class CheckboxesAndRadiosWithoutLabelsTests extends TestsInit {
         checkboxesAndRadiosWithoutLabels.radioButtons.list().get(1)
                 .is()
                 .selected();
+        checkboxesAndRadiosWithoutLabels.radioButtons.selected(1);
     }
 }

@@ -6,8 +6,6 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.ElementArea.JS;
-import static com.epam.jdi.light.settings.WebSettings.ANY_ELEMENT;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.checkboxAndRadioButtonCustomDisabled;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -27,7 +25,7 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        radioBtnList = checkboxAndRadioButtonCustomDisabled.radioButtons.list(ANY_ELEMENT, JS);
+        radioBtnList = checkboxAndRadioButtonCustomDisabled.radioButtons.list();
     }
 
     @Test

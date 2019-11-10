@@ -5,8 +5,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.ElementArea.JS;
-import static com.epam.jdi.light.settings.WebSettings.ANY_ELEMENT;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.radioButtonCustom;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -32,6 +30,7 @@ public class RadioButtonCustomTests extends TestsInit {
 
     @Test
     public void baseInitTest() {
+        radioButtonCustom.radioButtons.is().size(2);
         radioButtonsWebList.is().size(2);
         radioButtonsWebList.get(1).label().is().text(is(label1));
         radioButtonsWebList.get(2).label().is().text(is(label2));
@@ -41,8 +40,8 @@ public class RadioButtonCustomTests extends TestsInit {
     public void baseInitByIndexTest() {
         /*UIElement uiTry = radioButtonsWebList.get(1);
         uiTry.setClickArea(ACTION_CLICK);
-        uiTry.click()*/
-        ;
+        uiTry.click();*/
+        
         radioButtonsWebList.get(1).click();
         radioButtonsWebList.get(1).is().selected();
         radioButtonsWebList.get(2).is().deselected();

@@ -12,13 +12,6 @@ public class CheckboxAndRadioButtonCustomDisabled extends Section {
     @UI("#customCheckDisabled1-div")
     public Checkbox checkbox;
 
-   /* @UI("#customRadioDisabled2-div")
-    public RadioButton radioButtonContainer;
-    @UI("#customRadioDisabled2")
-    public RadioButton radioButton;
-    @UI("label[for='customRadioDisabled2']")
-    public Label radio1Label;*/
-
     @UI("#customRadioDisabled2")
     public RadioButtons radioButtons;
 }
