@@ -1,7 +1,7 @@
 package io.github.epam.bootstrap.tests.complex;
 
-import com.epam.jdi.light.ui.bootstrap.elements.complex.BootstrapDropdown;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.DropdownMenu;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.BootstrapDropdown;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;

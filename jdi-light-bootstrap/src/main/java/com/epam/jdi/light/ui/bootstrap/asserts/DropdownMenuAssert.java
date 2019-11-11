@@ -1,7 +1,7 @@
 package com.epam.jdi.light.ui.bootstrap.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.DropdownMenu;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
