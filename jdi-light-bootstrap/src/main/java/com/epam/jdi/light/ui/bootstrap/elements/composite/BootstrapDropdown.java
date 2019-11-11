@@ -2,14 +2,10 @@ package com.epam.jdi.light.ui.bootstrap.elements.composite;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.asserts.BootstrapDropdownAssert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 
@@ -39,7 +35,7 @@ public class BootstrapDropdown extends Section {
     @JDIAction("Check that '{name}' is expanded")
     public boolean isExpanded() {
         //return hasClass("show");
-         return this.dropdownMenu.isDisplayed();
+        return this.dropdownMenu.isDisplayed();
     }
 
     @JDIAction("Check that '{name}' is collapsed")
@@ -77,7 +73,6 @@ public class BootstrapDropdown extends Section {
         assertSoft();
         return is();
     }
-
 
 
     public Button expander() {

@@ -22,5 +22,4 @@ public class BootstrapDropdownAssert<A extends BootstrapDropdownAssert, E extend
     }
 
 
-
 }

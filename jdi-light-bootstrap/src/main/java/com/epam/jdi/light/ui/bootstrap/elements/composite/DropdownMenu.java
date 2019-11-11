@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.asserts.DropdownMenuAssert;
-import com.epam.jdi.light.ui.bootstrap.elements.composite.BootstrapDropdown;
 
 import java.util.Arrays;
 import java.util.List;
