@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.complex.dropdown;
+package io.github.epam.bootstrap.tests.composite.dropdown;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.common.WindowsManager;
@@ -24,7 +24,7 @@ public class DropdownActiveTests extends TestsInit {
 
     @DataProvider
     public Object[][] dropdownMenu() {
-        return new Object[][] {
+        return new Object[][]{
                 {"Action", "https://getbootstrap.com/docs/4.3/components/dropdowns/#active"},
                 {"Another action", "https://getbootstrap.com/docs/4.3/components/dropdowns/"},
                 {"Something else here", "https://getbootstrap.com/docs/4.3/getting-started/introduction/"}
@@ -63,7 +63,7 @@ public class DropdownActiveTests extends TestsInit {
     public void baseValidationTest() {
         dropdownMenuItemsActive.expand();
         baseValidation(dropdownMenuItemsActive.expander());
-        for(UIElement item : dropdownMenuItemsActive.list()) {
+        for (UIElement item : dropdownMenuItemsActive.list()) {
             baseValidation(item);
             item.unhighlight();
         }
