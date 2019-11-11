@@ -3,8 +3,6 @@ package io.github.epam.tests.recommended;
 import io.github.epam.StaticTestsInit;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.actions.ActionHelper.AFTER_JDI_ACTION;
-import static com.epam.jdi.light.actions.ActionHelper.BEFORE_STEP_ACTION;
 import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.pages.ContactFormPage.main;

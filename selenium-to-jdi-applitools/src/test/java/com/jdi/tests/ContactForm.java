@@ -4,9 +4,6 @@ import com.jdi.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
-
-import static com.epam.jdi.eyes.JDIEyes.newVisualTest;
 import static com.jdi.states.State.loggedIn;
 import static com.jdi.test.data.DefaultDataProvider.FULL_CONTACT;
 import static com.jdi.test.data.DefaultDataProvider.SIMPLE_CONTACT;

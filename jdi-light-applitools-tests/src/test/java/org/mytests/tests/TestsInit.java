@@ -17,7 +17,7 @@ public class TestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         initSite(SiteJdi.class);
-        visualTestInit();
+        visualTestInitJdi();
         homePage.open();
         logger.info("Run Tests");
     }

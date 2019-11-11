@@ -12,6 +12,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +32,6 @@ import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.currentThread;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -52,7 +52,7 @@ public class ActionProcessor {
                 return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jp);
-            isOverride.set("");
+            isOverride.get().clear();
             if (aroundCount() == 1)
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
@@ -89,7 +89,7 @@ public class ActionProcessor {
                 ? ((ICoreElement) jp.getThis()) : null;
         } catch (Exception ex) { return null; }
     }
-    public static Safe<String> isOverride = new Safe<>(() -> "");
+    public static Safe<List<String>> isOverride = new Safe<>(ArrayList::new);
     public static Object stableAction(ProceedingJoinPoint jp) {
         try {
             String exception = "";
@@ -115,12 +115,13 @@ public class ActionProcessor {
     }
 
     private static JFunc1<Object, Object> getOverride(ProceedingJoinPoint jp) {
-        if (isNotBlank(isOverride.get())) {
+        String name = jp.getSignature().getName();
+        if (isOverride.get().contains(name)) {
             return null;
         }
         JFunc1<Object, Object> override = GetOverrideAction(jp);
         if (override != null)
-            isOverride.set(jp.getSignature().getName());
+            isOverride.get().add(name);
         return override;
     }
 

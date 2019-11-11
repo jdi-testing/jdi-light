@@ -41,9 +41,8 @@ import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.PropertyReader.*;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.epam.jdi.tools.PropertyReader.fillAction;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -61,13 +60,7 @@ public class WebSettings {
         if (DOMAIN != null)
             return DOMAIN;
         preInit();
-        if (loadProperties().size() == 0)
-            throw new RuntimeException(format("Can't find test.properties at: %s%sIn order to get DOMAIN please specify it in test.properties or directly using WebSettings.setDomain('http://...')",
-                getCorrectPath(), LINE_BREAK));
-        if (DOMAIN == null)
-            throw new RuntimeException(format("Can't find 'domain=' in test.properties at: %s%sIn order to get DOMAIN please specify it in test.properties or directly using WebSettings.setDomain('http://...')",
-                getCorrectPath(), LINE_BREAK));
-        return DOMAIN;
+        return "No Domain Found. Use test.properties or WebSettings.DOMAIN";
     }
     public static void setDomain(String domain) {
         DOMAIN = domain;

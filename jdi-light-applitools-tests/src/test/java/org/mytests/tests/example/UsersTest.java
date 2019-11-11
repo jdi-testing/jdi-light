@@ -10,7 +10,7 @@ import static org.mytests.uiobjects.example.entities.Defaults.SPIDER_MAN;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
 import static org.mytests.uiobjects.example.site.pages.MarvelousPage.userTable;
 
-public class FormTests extends TestsInit {
+public class UsersTest extends TestsInit {
     @Test
     public void verifyUsersTest() {
         userIcon.click();

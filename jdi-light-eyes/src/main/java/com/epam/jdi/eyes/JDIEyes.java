@@ -9,9 +9,6 @@ package com.epam.jdi.eyes;
 import com.applitools.eyes.BatchInfo;
 import com.applitools.eyes.TestResults;
 import com.applitools.eyes.selenium.Eyes;
-import com.epam.jdi.light.common.VisualCheckAction;
-import com.epam.jdi.light.common.VisualCheckPage;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
@@ -27,16 +24,15 @@ import java.util.List;
 import static com.applitools.eyes.selenium.fluent.Target.region;
 import static com.epam.jdi.light.actions.ActionHelper.getBeforeLogString;
 import static com.epam.jdi.light.actions.ActionOverride.OverrideAction;
+import static com.epam.jdi.light.common.VisualCheckAction.IS_DISPLAYED;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
-import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
-import static com.epam.jdi.light.settings.WebSettings.VISUAL_PAGE_STRATEGY;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;
 
 public class JDIEyes {
     public static EyesConfig EYES_CONFIG = new EyesConfig();
-    private static Safe<Eyes> eyes = new Safe<>(JDIEyes::defaultEyes);
+    public static Safe<Eyes> eyes = new Safe<>(JDIEyes::defaultEyes);
 
     private static Eyes defaultEyes() {
         Eyes eyes = new Eyes();
@@ -45,11 +41,7 @@ public class JDIEyes {
         eyes.setBatch(new BatchInfo(EYES_CONFIG.batchName));
         return eyes;
     }
-
-    public static void visualTestInit(VisualCheckPage checkPageStrategy,
-            VisualCheckAction checkActionStrategy) {
-        VISUAL_PAGE_STRATEGY = checkPageStrategy;
-        VISUAL_ACTION_STRATEGY = checkActionStrategy;
+    static void visualTestInit() {
         OverrideAction("visualCheck", obj -> {
             ProceedingJoinPoint jp = (ProceedingJoinPoint)obj;
             if (!isClass(jp.getThis().getClass(), IBaseElement.class))
@@ -59,20 +51,20 @@ public class JDIEyes {
             visualCheckElement(ui.base().getWebElement(), name);
         });
         OverrideAction("visualWindowCheck",
-            jp -> visualCheckPage(WebPage.getCurrentPage()));
+                jp -> visualCheckPage(WebPage.getCurrentPage()));
     }
-    public static void visualTestInit() {
-        visualTestInit(CHECK_NEW_PAGE, ON_VISUAL_ACTION);
-    }
-
-    public static void visualTestInit(String apikey) {
+    public static EyesConfig visualTestInitJdi() {
         visualTestInit();
-        EYES_CONFIG.apiKey = apikey;
+        return EYES_CONFIG. pageStrategy(CHECK_NEW_PAGE).actionStrategy(ON_VISUAL_ACTION);
+    }
+    public static EyesConfig visualTestInitSelenium() {
+        visualTestInit();
+        return EYES_CONFIG. pageStrategy(CHECK_NEW_PAGE).actionStrategy(IS_DISPLAYED);
     }
     static Safe<String> TEST_NAME = new Safe<>(() -> "Before tests");
     static Safe<Boolean> NEW_TEST = new Safe<>(() -> true);
     static List<Eyes> eyesList = new ArrayList<>();
-    static void openEyes() {
+    public static void openEyes() {
         Eyes eye = eyes.get();
         if (!eyesList.contains(eye))
             eyesList.add(eye);

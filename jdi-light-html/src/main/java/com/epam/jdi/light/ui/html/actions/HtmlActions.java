@@ -31,7 +31,7 @@ public class HtmlActions {
                 return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jp);
-            isOverride.set("");
+            isOverride.get().clear();
             if (aroundCount() == 1)
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);

@@ -107,5 +107,14 @@ public class DataTableAssert<L extends Section, D>
                     greaterThan(table().header().size()*count-1));
             return dtAssert;
         }
+        public DataTableAssert<L, D> row(JFunc1<D,Boolean> condition) {
+            return rows(condition);
+        }
+        public DataTableAssert<L, D> row(D data) {
+            return rows(data);
+        }
+        public DataTableAssert<L, D> row(TableMatcher... matchers) {
+            return rows(matchers);
+        }
     }
 }
