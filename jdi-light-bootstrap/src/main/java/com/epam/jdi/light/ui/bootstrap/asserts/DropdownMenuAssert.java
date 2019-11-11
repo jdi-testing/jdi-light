@@ -1,8 +1,7 @@
 package com.epam.jdi.light.ui.bootstrap.asserts;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Dropdown;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -11,20 +10,7 @@ import java.util.Arrays;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;
 
-public class DropdownAssert<A extends DropdownAssert, E extends Dropdown> extends UIAssert<A, E> {
-
-    @JDIAction("Assert that dropdown '{name}' expanded")
-    public A expanded() {
-        jdiAssert(element.isExpanded(), is(true));
-        return (A) this;
-    }
-
-    @JDIAction("Assert that dropdown '{name}' collapsed")
-    public A collapsed() {
-        jdiAssert(element.isCollapsed(), is(true));
-        return (A) this;
-    }
-
+public class DropdownMenuAssert<A extends DropdownMenuAssert, E extends DropdownMenu> extends BootstrapDropdownAssert<A, E> {
     @JDIAction("Assert that '{name}' items values {0}")
     public A itemValues(Matcher<Iterable<String>> condition) {
         jdiAssert(element.itemValues(), condition);
@@ -48,5 +34,4 @@ public class DropdownAssert<A extends DropdownAssert, E extends Dropdown> extend
         jdiAssert(element.list().get(itemIndex).core().getAttribute("class"), is("dropdown-item active"));
         return (A) this;
     }
-
 }
