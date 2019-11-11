@@ -34,7 +34,6 @@ public class BootstrapDropdown extends Section {
 
     @JDIAction("Check that '{name}' is expanded")
     public boolean isExpanded() {
-        //return hasClass("show");
         return this.dropdownMenu.isDisplayed();
     }
 
@@ -73,7 +72,6 @@ public class BootstrapDropdown extends Section {
         assertSoft();
         return is();
     }
-
 
     public Button expander() {
         return dropdownToggle;
