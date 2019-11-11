@@ -16,7 +16,6 @@ import static org.hamcrest.Matchers.is;
 public class CardWithHeaderAndFooterTests extends TestsInit {
 
     private String textTitleCardWithHeader = "SPECIAL TITLE TREATMENT";
-    private String textTitleCardWithHeaderAndFooterQuote;
     private String textTitleCardWithHeaderAndFooter = "SPECIAL TITLE TREATMENT";
 
     private String textParagraphCardWithHeader = "With supporting text below as a natural lead-in to additional content.";
@@ -24,14 +23,12 @@ public class CardWithHeaderAndFooterTests extends TestsInit {
     private String textParagraphCardWithHeaderAndFooter = "With supporting text below as a natural lead-in to additional content.";
 
     private String textButtonCardWithHeader = "Click Me!";
-    private String textButtonCardWithHeaderAndFooterQuote;
     private String textButtonCardWithHeaderAndFooter = "Click Me!";
 
     private String textHeaderCardWithHeader = "FEATURED";
     private String textHeaderCardWithHeaderAndFooterQuote = "Quote";
     private String textHeaderCardWithHeaderAndFooter = "Featured";
 
-    private String textFooterCardWithHeader;
     private String textFooterCardWithHeaderAndFooterQuote = "Someone famous in Source Title";
     private String textFooterCardWithHeaderAndFooter = "2 days ago";
 
