@@ -3,6 +3,7 @@ package io.github.epam.bootstrap.tests.complex.dropdown;
 import com.epam.jdi.light.elements.common.WindowsManager;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
+import io.github.com.entities.FormContacts;
 import io.github.epam.TestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -11,14 +12,19 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.entities.FormUsers.DEFAULT_CONTACT;
 import static io.github.com.pages.BootstrapPage.dropdownForm;
-import static io.github.com.pages.BootstrapPage.formBrowserDefaults;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 
 public class DropdownFormTest extends TestsInit {
+
+    private static FormContacts USER = new FormContacts().set(c -> {
+        c.email = "testEmail@test.com";
+        c.password = "qwerty";
+        c.radio = "option2";
+        c.accept = "true";
+    });
 
     @BeforeMethod
     public void before() {
@@ -120,8 +126,8 @@ public class DropdownFormTest extends TestsInit {
     public void fillTest() {
         dropdownForm.expand();
 
-        formBrowserDefaults.fill(DEFAULT_CONTACT);
-        formBrowserDefaults.check(DEFAULT_CONTACT);
+        dropdownForm.form.fill(USER);
+        dropdownForm.form.check(USER);
 
         dropdownForm.collapse();
     }
