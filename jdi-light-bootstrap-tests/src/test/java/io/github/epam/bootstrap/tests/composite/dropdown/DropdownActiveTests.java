@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.complex.dropdown;
+package io.github.epam.bootstrap.tests.composite.dropdown;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.common.WindowsManager;
