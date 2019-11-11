@@ -13,11 +13,6 @@ import static com.epam.jdi.light.settings.WebSettings.ANY_ELEMENT;
 
 public class RadioButtons extends UIListBase<UISelectAssert> {
 
-    /*@Override
-    public WebList list() {
-        return super.list().setUIElementName(LABEL);
-    }*/
-
     @Override
     public WebList list() {
         WebList radioBtnWebList = new WebList(base()).setup(jdiB -> jdiB.setSearchRule(ANY_ELEMENT))

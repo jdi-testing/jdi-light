@@ -38,10 +38,6 @@ public class RadioButtonCustomTests extends TestsInit {
 
     @Test
     public void baseInitByIndexTest() {
-        /*UIElement uiTry = radioButtonsWebList.get(1);
-        uiTry.setClickArea(ACTION_CLICK);
-        uiTry.click();*/
-        
         radioButtonsWebList.get(1).click();
         radioButtonsWebList.get(1).is().selected();
         radioButtonsWebList.get(2).is().deselected();
@@ -71,6 +67,8 @@ public class RadioButtonCustomTests extends TestsInit {
         radioButtonsWebList.get(2).core().waitFor().selected();
         radioButtonsWebList.get(2).is().selected();
         radioButtonCustom.radioButtons.is().selected(2);
+        radioButtonsWebList.select("Toggle this custom radio");
+        radioButtonsWebList.selected("Toggle this custom radio");
     }
 
     @Test
