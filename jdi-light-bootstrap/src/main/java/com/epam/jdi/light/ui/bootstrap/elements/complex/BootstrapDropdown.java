@@ -38,7 +38,8 @@ public class BootstrapDropdown extends Section {
 
     @JDIAction("Check that '{name}' is expanded")
     public boolean isExpanded() {
-        return hasClass("show");
+        //return hasClass("show");
+         return this.dropdownMenu.isDisplayed();
     }
 
     @JDIAction("Check that '{name}' is collapsed")
