@@ -11,15 +11,14 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
+import static io.github.com.entities.FormUsers.DEFAULT_CONTACT;
 import static io.github.com.pages.BootstrapPage.dropdownForm;
+import static io.github.com.pages.BootstrapPage.formBrowserDefaults;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 
 public class DropdownFormTest extends TestsInit {
-
-    private String email = "testemail@epam.com";
-    private String password = "JDI12345";
 
     @BeforeMethod
     public void before() {
@@ -38,14 +37,14 @@ public class DropdownFormTest extends TestsInit {
 
         baseValidation(dropdownForm.form);
         dropdownForm.form.unhighlight();
-        baseValidation(dropdownForm.email);
-        dropdownForm.email.unhighlight();
-        baseValidation(dropdownForm.password);
-        dropdownForm.password.unhighlight();
-        baseValidation(dropdownForm.remember);
-        dropdownForm.remember.unhighlight();
-        baseValidation(dropdownForm.signIn);
-        dropdownForm.signIn.unhighlight();
+        baseValidation(dropdownForm.form.email);
+        dropdownForm.form.email.unhighlight();
+        baseValidation(dropdownForm.form.password);
+        dropdownForm.form.password.unhighlight();
+        baseValidation(dropdownForm.form.remember);
+        dropdownForm.form.remember.unhighlight();
+        baseValidation(dropdownForm.form.signIn);
+        dropdownForm.form.signIn.unhighlight();
 
         dropdownForm.collapse();
     }
@@ -53,14 +52,15 @@ public class DropdownFormTest extends TestsInit {
     @DataProvider
     public Object[][] listFields() {
         return new Object[][]{
-                {dropdownForm.email, "email", "Email address", "email@example.com"},
-                {dropdownForm.password, "password", "Password", "Password"}
+                {dropdownForm.form.email, "email", "Email address", "email@example.com"},
+                {dropdownForm.form.password, "password", "Password", "Password"}
         };
     }
 
     @Test(dataProvider = "listFields")
     public void isValidationTests(TextField element, String type, String label, String value) {
         dropdownForm.expand();
+
         element.clear();
         element
                 .is()
@@ -77,20 +77,22 @@ public class DropdownFormTest extends TestsInit {
                 .enabled()
                 .core()
                 .text(is(label));
+
         dropdownForm.collapse();
     }
 
     @Test
     public void isValidationTests() {
         dropdownForm.expand();
-        dropdownForm.remember
+
+        dropdownForm.form.remember
                 .is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("form-check")
                 .tag(is("div"));
-        dropdownForm.remember.label()
+        dropdownForm.form.remember.label()
                 .is()
                 .displayed()
                 .enabled()
@@ -98,32 +100,39 @@ public class DropdownFormTest extends TestsInit {
                 .hasClass("form-check-label")
                 .text(is("Remember me"))
                 .tag(is("label"));
+
         dropdownForm.collapse();
     }
 
     @Test
     public void checkboxTests() {
         dropdownForm.expand();
-        dropdownForm.remember.check();
-        dropdownForm.remember.is().selected();
-        dropdownForm.remember.uncheck();
-        dropdownForm.remember.is().deselected();
+
+        dropdownForm.form.remember.check();
+        dropdownForm.form.remember.is().selected();
+        dropdownForm.form.remember.uncheck();
+        dropdownForm.form.remember.is().deselected();
+
         dropdownForm.collapse();
     }
 
     @Test
     public void fillTest() {
         dropdownForm.expand();
-        dropdownForm.email.setValue(email);
-        dropdownForm.password.setValue(password);
+
+        formBrowserDefaults.fill(DEFAULT_CONTACT);
+        formBrowserDefaults.check(DEFAULT_CONTACT);
+
         dropdownForm.collapse();
     }
 
     @Test
     public void testButton(){
         dropdownForm.expand();
-        dropdownForm.signIn.click();
+
+        dropdownForm.form.submit();
         validateAlert(is("Sign in"));
+
         dropdownForm.collapse();
     }
 

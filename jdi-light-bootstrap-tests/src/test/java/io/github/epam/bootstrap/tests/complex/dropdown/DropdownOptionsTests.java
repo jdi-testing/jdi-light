@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.complex;
+package io.github.epam.bootstrap.tests.complex.dropdown;
 
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Dropdown;
 import io.github.epam.TestsInit;
