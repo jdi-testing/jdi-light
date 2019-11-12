@@ -22,12 +22,7 @@ after_script:
   - total=""; for r in $(ls -d jdi*/); do allureDir="${r}allure-results"; if [ -d "$allureDir" ] ; then  echo "Results found for $r"; total="${total} ${allureDir}"; else echo "RESULTS NOT FOUND FOR ${r}"; fi ; done ; echo $total; allure generate --clean $total
   - du -d 1 -h ./
   - npm install -g netlify-cli
-  - |
-    travis_wait 30 result=$(netlify deploy --dir allure-report --json); echo "RESULT $result"; deployUrl=$(echo $result |jq '.deploy_url' |sed 's/"//g'); body="Allure report on Netlify $deployUrl"; echo "running curl... for body $body"; curl -H "Authorization: token ${GIT_COMMENT_USER}" -X POST \
-      "https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments" \
-      -d "{
-        \"body\": \"$body\"
-      }"
+  - travis_wait 30 netlify deploy --dir allure-report --json
   - echo "Script finished"
 
 

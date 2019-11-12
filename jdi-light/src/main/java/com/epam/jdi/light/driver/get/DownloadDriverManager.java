@@ -66,10 +66,6 @@ public class DownloadDriverManager {
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
             logger.info("Binary path: " + wdm.getBinaryPath());
-            if(getOs() == OsTypes.LINUX || getOs() == OsTypes.MAC) {
-                new ProcessBuilder("chmod", "777", wdm.getBinaryPath())
-                        .start();  //because there is an error on travis
-            }
         } catch (Exception ex) {
             throw exception("Can't download latest driver for " + driverType
                     + ". Exception " + safeException(ex));
