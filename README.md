@@ -61,7 +61,7 @@ You can ask your questions on StackOverflow with [![htmlelements](https://img.sh
 
 Get Help in active users Skype chat: https://join.skype.com/clvyVvnZvWqc
 
-## Contacts:
+## Contacts
 
 Mail: roman.iovlev.jdi@gmail.com
 
