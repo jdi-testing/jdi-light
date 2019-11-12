@@ -17,18 +17,19 @@ import static org.hamcrest.Matchers.is;
 
 public class InputGroupCustomSelectWithButton extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String buttonClickAlert = "Button clicked, thank you!";
     private String buttonText = "Button";
     private String selectChoose = "Choose...";
     private String selectOne = "One";
     private String selectTwo = "Two";
     private String selectThree = "Three";
+
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void buttonTests() {
