@@ -46,8 +46,8 @@ public class DropdownFormTest extends TestsInit {
         dropdownForm.form.email.unhighlight();
         baseValidation(dropdownForm.form.password);
         dropdownForm.form.password.unhighlight();
-        baseValidation(dropdownForm.form.radio);
-        dropdownForm.form.radio.unhighlight();
+        baseValidation(dropdownForm.form.checkbox);
+        dropdownForm.form.checkbox.unhighlight();
         baseValidation(dropdownForm.form.accept);
         dropdownForm.form.accept.unhighlight();
 
@@ -90,14 +90,14 @@ public class DropdownFormTest extends TestsInit {
     public void isValidationTests() {
         dropdownForm.expand();
 
-        dropdownForm.form.radio
+        dropdownForm.form.checkbox
                 .is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("form-check")
                 .tag(is("div"));
-        dropdownForm.form.radio.label()
+        dropdownForm.form.checkbox.label()
                 .is()
                 .displayed()
                 .enabled()
@@ -113,10 +113,10 @@ public class DropdownFormTest extends TestsInit {
     public void checkboxTests() {
         dropdownForm.expand();
 
-        dropdownForm.form.radio.check();
-        dropdownForm.form.radio.is().selected();
-        dropdownForm.form.radio.uncheck();
-        dropdownForm.form.radio.is().deselected();
+        dropdownForm.form.checkbox.check();
+        dropdownForm.form.checkbox.is().selected();
+        dropdownForm.form.checkbox.uncheck();
+        dropdownForm.form.checkbox.is().deselected();
 
         dropdownForm.collapse();
     }
