@@ -16,11 +16,12 @@ import static io.github.com.pages.BootstrapPage.dropdownForm;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertEquals;
 
 public class DropdownFormTest extends TestsInit {
 
     private static FormContacts USER = new FormContacts().set(c -> {
-        c.email = "testEmail@test.com";
+        c.email = "testEmail@example.com";
         c.password = "qwerty";
         c.accept = "true";
     });
@@ -159,7 +160,7 @@ public class DropdownFormTest extends TestsInit {
 
         WindowsManager.switchToWindow(currWindowNum + 1);
         String url = WebPage.getUrl();
-        Assert.assertEquals(url, itemHref);
+        assertEquals(url, itemHref);
 
         WindowsManager.closeWindow();
         WindowsManager.switchToWindow(currWindowNum);
