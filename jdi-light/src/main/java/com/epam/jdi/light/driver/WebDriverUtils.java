@@ -55,14 +55,16 @@ public final class WebDriverUtils {
 
     private static void killMacOSDriverProcesses(String browserName) {
         String name = null;
-        switch (browserName.toLowerCase()) {
+                switch (browserName.toLowerCase()) {
             case "firefox":
                 name = "geckodriver";
                 break;
             case "chrome":
                 name = "chromedriver";
                 break;
-
+            default:
+                name = null;
+		break;
         }
         if (name != null) {
             killAllMacOSDriverProcessesByName(name);
