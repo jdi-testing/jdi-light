@@ -124,6 +124,7 @@ public class WebDriverFactory {
     public static boolean SWITCH_THREAD = false;
     public static WebDriver INIT_DRIVER;
 
+    @SuppressWarnings("NPathComplexity")
     public static WebDriver getDriver(String driverName) {
         if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
             RUN_DRIVERS.set(map($(driverName, INIT_DRIVER)));
