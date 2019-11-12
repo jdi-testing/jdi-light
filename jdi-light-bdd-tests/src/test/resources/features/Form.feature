@@ -16,7 +16,7 @@ Feature: Form
       |passportSerial|1234|
       |description|JDI - awesome UI automation tool|
       |acceptConditions|true|
-      |gender|Female|
+      |gender|Male|
       |religion|Other|
     Then the form "Contact Form" data equals to:
       |name|Roman|
@@ -26,7 +26,7 @@ Feature: Form
       |passportSerial|1234|
       |description|JDI - awesome UI automation tool|
       |acceptConditions|true|
-      |gender|Female|
+      |gender|Male|
       |religion|Other|
     
   Scenario: fill Contact Form Custom
@@ -39,7 +39,7 @@ Feature: Form
       |passportSerial|1234|
       |description|JDI - awesome UI automation tool|
       |acceptConditions|true|
-      |gender|Female|
+      |gender|Male|
       |religion|Other|
     And submit form
     Then the form "Contact Form" data equals to:
@@ -50,7 +50,7 @@ Feature: Form
       |passportSerial|1234|
       |description|JDI - awesome UI automation tool|
       |acceptConditions|true|
-      |gender|Female|
+      |gender|Male|
       |religion|Other|
     
   Scenario: is displayed

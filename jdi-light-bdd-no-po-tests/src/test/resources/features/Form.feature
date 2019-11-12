@@ -17,7 +17,7 @@ Feature: Form
       | Passport Number   | 654321 |
       | Passport Seria    | 1234 |
       | Description       | JDI - awesome UI automation tool |
-      | Gender            | Female |
+      | Gender            | Male |
       | Religion          | Other |
     And click on "Submit Button"
     Then the form "Contact Form" data equals to:
@@ -27,5 +27,5 @@ Feature: Form
       | Passport Number   | 654321 |
       | Passport Seria    | 1234 |
       | Description       | JDI - awesome UI automation tool |
-      | Gender            | Female |
+      | Gender            | Male |
       | Religion          | Other |
