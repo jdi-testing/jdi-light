@@ -37,14 +37,14 @@ public class RadioButtonsCustomInlineTests extends TestsInit {
     @Test
     public void radioButtonByIndexTests() {
         radioButtonsCustomInline.radioButtons.select(2);
-        radioButtonsCustomInline.radioButtons.selected(2);
+        radioButtonsCustomInline.radioButtons.is().selected(2);
         radioButtonsCustomInline.radioButtons.select(1);
-        radioButtonsCustomInline.radioButtons.selected(1);
+        radioButtonsCustomInline.radioButtons.is().selected(1);
         radioButtonsCustomInline.radioButtons.list().get(1).select();
-        radioButtonsCustomInline.radioButtons.list().selected(text1);
+        radioButtonsCustomInline.radioButtons.list().is().selected(text1);
         radioButtonsCustomInline.radioButtons.select(text2);
-        radioButtonsCustomInline.radioButtons.list().selected(text2);
-        radioButtonsCustomInline.radioButtons.list().selected(2);
+        radioButtonsCustomInline.radioButtons.list().is().selected(text2);
+        radioButtonsCustomInline.radioButtons.list().is().selected(2);
         radioButtonsCustomInline.radioButtons.list().get(2).is().selected();
         radioButtonsCustomInline.radioButtons.list().get(1).click();
         radioButtonsCustomInline.radioButtons.list().get(1).is().selected();
@@ -54,11 +54,11 @@ public class RadioButtonsCustomInlineTests extends TestsInit {
     @Test
     public void radioButtonByLabelTests() {
         radioButtonsCustomInline.radioButtons.list().get(1).label().click();
-        radioButtonsCustomInline.radioButtons.selected(1);
+        radioButtonsCustomInline.radioButtons.is().selected(1);
         radioButtonsCustomInline.radioButtons.list().get(2).label().click();
-        radioButtonsCustomInline.radioButtons.selected(2);
+        radioButtonsCustomInline.radioButtons.is().selected(2);
         radioButtonsCustomInline.radioButtons.list().get(1).label().click();
-        radioButtonsCustomInline.radioButtons.selected(1);
+        radioButtonsCustomInline.radioButtons.is().selected(1);
         radioButtonsCustomInline.radioButtons.list().get(1).label().is().text(text1);
         radioButtonsCustomInline.radioButtons.list().get(2).label().is().text(text2);
     }

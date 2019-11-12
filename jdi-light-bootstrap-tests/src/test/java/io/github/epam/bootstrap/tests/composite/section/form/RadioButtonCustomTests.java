@@ -68,7 +68,7 @@ public class RadioButtonCustomTests extends TestsInit {
         radioButtonsWebList.get(2).is().selected();
         radioButtonCustom.radioButtons.is().selected(2);
         radioButtonsWebList.select("Toggle this custom radio");
-        radioButtonsWebList.selected("Toggle this custom radio");
+        radioButtonsWebList.is().selected("Toggle this custom radio");
     }
 
     @Test
