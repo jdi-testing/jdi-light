@@ -1,5 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.navbar;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -103,10 +104,14 @@ public class NavbarNavsTests extends TestsInit {
         navbarNav.navbarComplexLinks.listPages.get(4)
                 .is()
                 .displayed();
+        UIElement dropdown = navbarNav.navbarComplexLinks.listPages.get(4);
+        dropdown.click();
         navbarNav.navbarComplexLinks.selectMenu(ITEM_BRAND);
         newWindowTitleCheck(NAVBAR_BOOTSTRAP);
+        dropdown.click();
         navbarNav.navbarComplexLinks.selectMenu(ITEM_NAV);
         newWindowTitleCheck(NAVBAR_BOOTSTRAP);
+        dropdown.click();
         navbarNav.navbarComplexLinks.selectMenu(ITEM_FORMS);
         newWindowTitleCheck(NAVBAR_BOOTSTRAP);
     }

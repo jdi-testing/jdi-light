@@ -697,10 +697,6 @@ public class BootstrapPage extends WebPage {
     public static FormRow formRow;
 
     //region Navbars
-    @UI("#navbar-nav-with-disabled")
-    public static Navbar navbarNavWithDisabled;
-    @UI("#navbar-nav-with-dropdown")
-    public static Navbar navbarNavWithDropdown;
     @UI("#navbar-external-content")
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
