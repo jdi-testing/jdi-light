@@ -35,4 +35,3 @@ public class RadioButtons extends UIListBase<UISelectAssert> {
         base().setLocator("input[type=radio]");
     }
 }
-
