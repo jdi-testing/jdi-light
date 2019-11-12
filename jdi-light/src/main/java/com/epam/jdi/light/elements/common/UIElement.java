@@ -14,31 +14,41 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
+import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
+import static com.epam.jdi.light.driver.ScreenshotMaker.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
+import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.switcher.SwitchActions.Case;
 import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
+import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -503,14 +513,53 @@ public class UIElement extends JDIBase
         actions((a,e) -> a.dragAndDropBy(e, x, y));
     }
 
+    public String makePhoto() {
+        return makePhoto("");
+    }
     /**
      * Get element's screen shot with red border
      * @return String
      */
     @JDIAction(level = DEBUG)
-    public String makePhoto() {
-        highlight();
-        return takeScreen();
+    public String makePhoto(String tag) {
+        show();
+        WebElement we = getWebElement();
+        File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+        String filePath = mergePath(getPath(), getName()+tag+SCREEN_FILE_SUFFIX);
+        File file = new File(filePath);
+        try {
+            copyFile(screenshot, file);
+            BufferedImage fullImg = ImageIO.read(file);
+            Point point = we.getLocation();
+            Dimension size = we.getSize();
+            BufferedImage crop = fullImg.getSubimage(point.getX(), point.getY(),
+                    size.getWidth(), size.getHeight());
+            ImageIO.write(crop, SCREEN_FILE_SUFFIX, file);
+        } catch (Exception ex) {throw exception(safeException(ex)); }
+        return filePath;
+    }
+    @JDIAction("Visual compare '{0}'")
+    public void visualValidation(String tag) {
+        try {
+            String basePath = mergePath(getPath(), getName() + tag + SCREEN_FILE_SUFFIX);
+            String comparePath = mergePath(getPath(), getName() + tag + "-new" + SCREEN_FILE_SUFFIX);
+            File baseLine = new File(basePath);
+            File compare = new File(comparePath);
+
+            if (baseLine.exists()) {
+                long actual = baseLine.length();
+                makePhoto(tag + "-new");
+                long expected = compare.length();
+                String result = Math.abs(actual - expected) < 1000
+                    ? "Images are the same"
+                    : format("Images are different %s %s", basePath, comparePath);
+                jdiAssert(result, Matchers.is("Images are the same"));
+            } else {
+                makePhoto(tag);
+                String message = "Set baseline: " + basePath;
+                jdiAssert(message, Matchers.is(message));
+            }
+        } catch (Exception ex) {throw exception("Can't compare files: %s", safeException(ex)); }
     }
 
     /** Click on element if not selected */

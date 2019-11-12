@@ -35,7 +35,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that each of '{name}' elements meet condition")
     public DataListAssert<T, D> each(JFunc1<D, Boolean> condition) {
-        jdiAssert(all(data(), condition::execute), is(true));
+        jdiAssert(LinqUtils.all(data(), condition::execute), is(true));
         return this;
     }
 

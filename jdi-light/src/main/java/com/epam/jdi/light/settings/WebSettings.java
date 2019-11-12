@@ -159,6 +159,7 @@ public class WebSettings {
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> SMART_SEARCH_LOCATORS =
             filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
+        fillAction(p -> COMMON_CAPABILITIES.put("headless", p), "headless");
 
         loadCapabilities("chrome.capabilities.path",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));

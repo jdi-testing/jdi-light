@@ -29,7 +29,7 @@ public class ListAssert<A extends ListAssert, T, E extends IListSelector<T>> ext
      */
     @JDIAction("Assert that each of '{name}' elements meet condition")
     public ListAssert<A, T, E> each(JFunc1<T, Boolean> condition) {
-        jdiAssert(all(list(), condition::execute), is(true));
+        jdiAssert(LinqUtils.all(list(), condition::execute), is(true));
         return this;
     }
     @JDIAction("Assert that any of '{name}' elements meet condition")

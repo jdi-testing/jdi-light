@@ -127,7 +127,7 @@ public class ActionProcessor {
 
     private static int getTimeout(ProceedingJoinPoint jp, IBaseElement obj) {
         JDIAction ja = jp != null
-            ? getJpMethod(jp).getMethod().getAnnotation(JDIAction.class)
+            ? getMethodFromJp(jp).getAnnotation(JDIAction.class)
             : null;
         return ja != null && ja.timeout() != -1
             ? ja.timeout()

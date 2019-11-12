@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
+import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.JAction1;
@@ -98,10 +99,18 @@ public class ActionHelper {
     public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
         String message = getBeforeLogString(jp);
         logger.toLog(message, logLevel(jp));
-        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION
-            && isInterface(jp.getThis().getClass(), JAssert.class)) {
-            JDIBase element = ((IBaseElement) jp.getThis()).base();
-            element.visualCheck(message);
+        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION) {
+            Object obj = jp.getThis();
+            if (obj == null) {
+                if (getMethodFromJp(jp).getAnnotation(VisualCheck.class) != null)
+                    visualWindowCheck();
+            }
+            else {
+                if (isInterface(obj.getClass(), JAssert.class)) {
+                    JDIBase element = ((IBaseElement) obj).base();
+                    element.visualCheck(message);
+                }
+            }
         }
     };
     public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = jp -> {
@@ -128,7 +137,7 @@ public class ActionHelper {
     static boolean logResult(ProceedingJoinPoint jp) {
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class)) return false;
-        JDIAction ja = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
+        JDIAction ja = getMethodFromJp(jp).getAnnotation(JDIAction.class);
         return ja != null && ja.logResult();
     }
     static Class<?> getJpClass(JoinPoint jp) {
@@ -178,6 +187,9 @@ public class ActionHelper {
     public static MethodSignature getJpMethod(JoinPoint joinPoint) {
         return (MethodSignature) joinPoint.getSignature();
     }
+    public static Method getMethodFromJp(JoinPoint jp) {
+        return getJpMethod(jp).getMethod();
+    }
 
     static String methodNameTemplate(MethodSignature method) {
         try {
@@ -195,7 +207,7 @@ public class ActionHelper {
         }
     }
     static LogLevels logLevel(JoinPoint joinPoint) {
-        Method m = getJpMethod(joinPoint).getMethod();
+        Method m = getMethodFromJp(joinPoint);
         return m.isAnnotationPresent(JDIAction.class)
                 ? m.getAnnotation(JDIAction.class).level()
                 : STEP;

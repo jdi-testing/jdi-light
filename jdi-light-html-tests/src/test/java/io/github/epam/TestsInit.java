@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeSuite;
 import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.settings.WebSettings.logger;

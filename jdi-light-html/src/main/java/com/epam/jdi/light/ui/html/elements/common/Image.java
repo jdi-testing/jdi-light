@@ -18,13 +18,22 @@ public class Image extends UIBaseElement<ImageAssert>
     // region Actions
     @JDIAction(value = "Get '{name}' image source path", level = DEBUG)
     public String src() { return uiElement.attr("src"); }
+    @JDIAction(value = "Get '{name}' image source path", level = DEBUG)
+    public String fileName() {
+        String[] split = uiElement.attr("src").split("/");
+        return split[split.length-1];
+    }
     @JDIAction(value = "Get '{name}' image height", level = DEBUG)
     public int height() { return getInt("height", uiElement); }
     @JDIAction(value = "Get '{name}' image width", level = DEBUG)
     public int width() { return getInt("width", uiElement); }
     @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
     public String alt() { return uiElement.attr("alt"); }
-
+    public String makePhoto() { return uiElement.makePhoto(); }
+    public String makePhoto(String tag) { return uiElement.makePhoto(tag); }
+    public void visualValidation(String tag) {
+        uiElement.visualValidation(tag);
+    }
     public String getValue() {
         return src();
     }

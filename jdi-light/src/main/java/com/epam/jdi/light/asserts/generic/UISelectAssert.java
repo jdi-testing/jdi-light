@@ -1,14 +1,20 @@
 package com.epam.jdi.light.asserts.generic;
 
+import com.epam.jdi.light.asserts.generic.table.DataTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
+import com.epam.jdi.light.elements.complex.table.TableMatcher;
 import com.epam.jdi.tools.Timer;
+import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static org.hamcrest.Matchers.*;
@@ -123,5 +129,49 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
                 .wait(() -> element.isDisplayed());
         jdiAssert(result ? "displayed" : "hidden", is("hidden"));
         return (A) this;
+    }
+
+    public Compare exact(int count) {
+        return new Compare(count, this, true);
+    }
+    public Compare atLeast(int count) {
+        return new Compare(count, this, false);
+    }
+    public Compare no() {
+        return exact(0);
+    }
+    public Compare all() {
+        return exact(element.size());
+    }
+    public Compare onlyOne() {
+        return exact(1);
+    }
+
+    public class Compare implements JAssert {
+
+        public int count;
+        public String name;
+        public String type;
+        UISelectAssert<A,E> dtAssert;
+        boolean exact;
+        public JDIBase base() { return UISelectAssert.this.base(); }
+
+        private Compare(int count, UISelectAssert<A,E> dtAssert, boolean exact) {
+            this.count = count;
+            this.dtAssert = dtAssert;
+            this.exact = exact;
+            this.type = exact ? "exactly" : "at least";
+            this.name = dtAssert.name;
+        }
+
+        @JDIAction("Assert that '{name}' has {type} '{count}' elements that meet expected condition")
+        public UISelectAssert<A,E> elements(JFunc1<UIElement, Boolean> condition) {
+            jdiAssert(element.list().filter(condition), hasSize(count));
+            return dtAssert;
+        }
+        @JDIAction("Assert that '{name}' has {type} '{count}' '{0}'")
+        public UISelectAssert<A,E> elements(UIElement data) {
+            return elements(d -> d.equals(data));
+        }
     }
 }

@@ -3,6 +3,7 @@ package org.mytests.tests.example;
 import org.mytests.tests.TestsInit;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.complex.table.Row.inRow;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.hamcrest.Matchers.containsString;
 import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_USER;
@@ -16,6 +17,7 @@ public class UsersTest extends TestsInit {
         userIcon.click();
         loginForm.loginAs(DEFAULT_USER);
         marvelousPage.open();
+        userTable.has().value(SPIDER_MAN, inRow(2));
         userTable.assertThat()
             .all().rows(d -> d.user.length() > 4)
             .no().rows(d -> isBlank(d.user))

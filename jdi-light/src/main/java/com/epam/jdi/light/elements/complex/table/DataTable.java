@@ -441,9 +441,9 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     }
 
     private D getLineData(Line row) {
-        if (lineClass == null)
-            return row.asData(dataClass);
-        return row.asData(dataClass, getLineMap(row));
+        return lineClass == null
+            ? row.asData(dataClass)
+            : row.asData(dataClass, getLineMap(row));
     }
     private MapArray<String, String> getLineMap(Line row) {
         L line = row.asLine(lineClass);
