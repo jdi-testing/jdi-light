@@ -43,7 +43,7 @@ public class ProgressBaseTests extends TestsInit {
 
     @Test(dataProvider = "progressWidth")
     public void getWidthTest(Progress progress, String width) {
-        progress.is().ariaValue(width);
+        progress.is().value(width);
     }
 
     @DataProvider

@@ -43,7 +43,7 @@ public class ProgressBarsListTests extends TestsInit {
                 progressSection.progress.attr("id").equals(progressId)).forEach(
                 progressSection -> {
                     progressSection.progress.is().core().hasClass(classStriped);
-                    progressSection.progress.is().ariaValue(value)
+                    progressSection.progress.is().value(value)
                             .color(color)
                             .minValue(min)
                             .maxValue(max);
