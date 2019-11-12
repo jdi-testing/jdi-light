@@ -1,7 +1,31 @@
 language: java
+jdk:
+- openjdk8
+before_install:
+- sudo apt-get -y install jq
+addons:
+  chrome: stable
 script:
   - mvn clean verify -Ddriver=chrome
 after_failure:
   - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:4.3.0:report
+  - echo "Build was failed"
 after_success:
   - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:4.3.0:report
+  - echo "Build was successful"
+after_script:
+  - ls -la
+  - ls -la /home/travis/.m2/repository/webdriver/chromedriver/linux64/76.0.3809.126/chromedriver
+  - google-chrome-stable --version
+  - npm install -g allure-commandline
+  - allure --version
+  - total=""; for r in $(ls -d jdi*/); do allureDir="${r}allure-results"; if [ -d "$allureDir" ] ; then  echo "Results found for $r"; total="${total} ${allureDir}"; else echo "RESULTS NOT FOUND FOR ${r}"; fi ; done ; echo $total; allure generate --clean $total
+  - echo "Script finished"
+  - npm install -g netlify-cli
+  - |
+    result=$(netlify deploy --dir allure-report --json); echo "RESULT $result"; deployUrl=$(echo $result |jq '.deploy_url' |sed 's/"//g'); body="Allure report on Netlify $deployUrl"; echo "running curl... for body $body"; curl -H "Authorization: token ${GIT_COMMENT_USER}" -X POST \
+      "https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments" \
+      -d "{
+        \"body\": \"$body\"
+      }"
+
