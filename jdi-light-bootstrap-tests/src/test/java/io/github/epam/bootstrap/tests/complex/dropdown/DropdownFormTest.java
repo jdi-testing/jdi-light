@@ -22,7 +22,6 @@ public class DropdownFormTest extends TestsInit {
     private static FormContacts USER = new FormContacts().set(c -> {
         c.email = "testEmail@test.com";
         c.password = "qwerty";
-        c.radio = "option2";
         c.accept = "true";
     });
 
@@ -47,10 +46,10 @@ public class DropdownFormTest extends TestsInit {
         dropdownForm.form.email.unhighlight();
         baseValidation(dropdownForm.form.password);
         dropdownForm.form.password.unhighlight();
-        baseValidation(dropdownForm.form.remember);
-        dropdownForm.form.remember.unhighlight();
-        baseValidation(dropdownForm.form.signIn);
-        dropdownForm.form.signIn.unhighlight();
+        baseValidation(dropdownForm.form.radio);
+        dropdownForm.form.radio.unhighlight();
+        baseValidation(dropdownForm.form.accept);
+        dropdownForm.form.accept.unhighlight();
 
         dropdownForm.collapse();
     }
@@ -91,14 +90,14 @@ public class DropdownFormTest extends TestsInit {
     public void isValidationTests() {
         dropdownForm.expand();
 
-        dropdownForm.form.remember
+        dropdownForm.form.radio
                 .is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("form-check")
                 .tag(is("div"));
-        dropdownForm.form.remember.label()
+        dropdownForm.form.radio.label()
                 .is()
                 .displayed()
                 .enabled()
@@ -114,10 +113,10 @@ public class DropdownFormTest extends TestsInit {
     public void checkboxTests() {
         dropdownForm.expand();
 
-        dropdownForm.form.remember.check();
-        dropdownForm.form.remember.is().selected();
-        dropdownForm.form.remember.uncheck();
-        dropdownForm.form.remember.is().deselected();
+        dropdownForm.form.radio.check();
+        dropdownForm.form.radio.is().selected();
+        dropdownForm.form.radio.uncheck();
+        dropdownForm.form.radio.is().deselected();
 
         dropdownForm.collapse();
     }

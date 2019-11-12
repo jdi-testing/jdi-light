@@ -10,6 +10,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 public class FormDropdownLogin extends  Form<FormContacts> {
     @UI("#exampleDropdownFormEmail1") public TextField email;
     @UI("#exampleDropdownFormPassword1") public TextField password;
-    @UI("//input[@id='dropdownCheck']/..") public Checkbox remember;
-    @UI("//button") public Button signIn;
+    @UI("//input[@id='dropdownCheck']/..") public Checkbox radio;
+    @UI("//button") public Button accept;
 }
