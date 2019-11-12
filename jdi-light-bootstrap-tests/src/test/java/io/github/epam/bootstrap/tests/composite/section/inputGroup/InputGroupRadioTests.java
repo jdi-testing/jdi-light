@@ -18,18 +18,17 @@ import static org.testng.Assert.assertEquals;
 
 public class InputGroupRadioTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String text = "Input text",
             new_text = "New text",
             added_text = " add some text",
             part_of_text = "text",
             placeholder_text = "";
 
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void selectNumTest() {

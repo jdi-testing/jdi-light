@@ -59,6 +59,8 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class ActionHelper {
 
+    public static int CUT_STEP_TEXT = 70;
+
     private static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
     }
@@ -115,7 +117,6 @@ public class ActionHelper {
         processNewPage(jp);
     };
 
-    public static int CUT_STEP_TEXT = 70;
     public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
         if (!logResult(jp)) return result;
         LogLevels logLevel = logLevel(jp);

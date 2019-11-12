@@ -35,6 +35,9 @@ import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 
 abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
+
+    protected String titleFieldName = null;
+
     protected WebList list;
     public WebList list() {
         if (list == null) {
@@ -286,7 +289,6 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
                 ? titles.get(0).getName()
                 : null;
     };
-    protected String titleFieldName = null;
     protected String elementTitle(UIElement el) {
         if (titleFieldName == null)
             titleFieldName = GET_TITLE_FIELD_NAME.execute(initClass.getFields());
