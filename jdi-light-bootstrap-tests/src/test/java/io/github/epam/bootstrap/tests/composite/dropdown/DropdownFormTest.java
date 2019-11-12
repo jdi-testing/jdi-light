@@ -87,7 +87,7 @@ public class DropdownFormTest extends TestsInit {
     }
 
     @Test
-    public void isValidationTests() {
+    public void isCheckboxValidationTest() {
         dropdownForm.expand();
 
         dropdownForm.form.checkbox
