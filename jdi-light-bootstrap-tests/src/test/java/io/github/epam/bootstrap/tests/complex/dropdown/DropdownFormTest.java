@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import io.github.com.entities.FormContacts;
 import io.github.epam.TestsInit;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
