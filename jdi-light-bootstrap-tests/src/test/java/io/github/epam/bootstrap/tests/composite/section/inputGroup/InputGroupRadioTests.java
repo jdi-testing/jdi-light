@@ -34,7 +34,7 @@ public class InputGroupRadioTests extends TestsInit {
     @Test
     public void selectNumTest() {
         inputGroupRadio.radio.select(1);
-        assertEquals(inputGroupRadio.getValue(), "");
+        assertEquals(inputGroupRadio.radio.selected(), "");
     }
 
     @Test

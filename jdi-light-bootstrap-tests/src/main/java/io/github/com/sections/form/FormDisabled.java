@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.MediaObject;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.MediaObject;
 
 public class FormDisabled extends Section {
 
