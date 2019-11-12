@@ -10,6 +10,7 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
@@ -303,6 +304,10 @@ public class UIElement extends JDIBase
                     }
                 } else click(clArea);
                 break;
+            case ACTION_CLICK:
+                Actions builder = new Actions(WebDriverFactory.getDriver());
+                builder.moveToElement(get()).click().build().perform();
+                break;
             default:
                 throw exception("Can't perform click because of unknown Element area: " + area);
         }
@@ -340,6 +345,12 @@ public class UIElement extends JDIBase
         for (String name : names)
             select(name);
     }
+
+    @JDIAction
+    public void select() {
+       click();
+    }
+
     public <TEnum extends Enum> void select(TEnum name) {
         select(getEnumValue(name));
     }

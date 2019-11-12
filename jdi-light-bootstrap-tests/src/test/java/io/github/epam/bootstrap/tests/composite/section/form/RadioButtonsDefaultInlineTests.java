@@ -31,32 +31,24 @@ public class RadioButtonsDefaultInlineTests extends TestsInit {
 
     @Test
     public void baseInitTest() {
-        radioButtonsDefaultInline.radioButton
-                .is()
-                .size(3);
-        radioButtonsDefaultInline.radio1
-                .is()
-                .deselected();
-        radioButtonsDefaultInline.radio2
-                .is()
-                .deselected();
-        radioButtonsDefaultInline.radio3
-                .is()
-                .deselected();
-        radioButtonsDefaultInline.radio3
-                .is()
-                .disabled();
-        radioButtonsDefaultInline.radio1Label
+
+        radioButtonsDefaultInline.radioButtons.is().size(3);
+        radioButtonsDefaultInline.radioButtons.list().get(1).is().deselected();
+        radioButtonsDefaultInline.radioButtons.list().get(2).is().deselected();
+        radioButtonsDefaultInline.radioButtons.list().get(3).is().deselected();
+        radioButtonsDefaultInline.radioButtons.list().get(3).is().disabled();
+
+        radioButtonsDefaultInline.radioButtons.list().get(1).label()
                 .is()
                 .core()
                 .hasClass("form-check-label")
                 .text(is(label1));
-        radioButtonsDefaultInline.radio2Label
+        radioButtonsDefaultInline.radioButtons.list().get(2).label()
                 .is()
                 .core()
                 .hasClass("form-check-label")
                 .text(is(label2));
-        radioButtonsDefaultInline.radio3Label
+        radioButtonsDefaultInline.radioButtons.list().get(3).label()
                 .is()
                 .core()
                 .hasClass("form-check-label")
@@ -64,84 +56,36 @@ public class RadioButtonsDefaultInlineTests extends TestsInit {
     }
 
     @Test
-    public void baseInitByIndexTest() {
-        radioButtonsDefaultInline.radioButton.get(1)
-                .is()
-                .deselected();
-        radioButtonsDefaultInline.radioButton.get(2)
-                .is()
-                .deselected();
-        radioButtonsDefaultInline.radioButton.get(3)
-                .is()
-                .deselected();
-        radioButtonsDefaultInline.radioButton.get(3)
-                .is()
-                .disabled();
-    }
-
-    @Test
     public void radioButtonByIndexTests() {
-        radioButtonsDefaultInline.radioButton.select(2);
-        radioButtonsDefaultInline.radioButton.get(2)
-                .is()
-                .selected();
-        radioButtonsDefaultInline.radioButton.get(1)
-                .is()
-                .deselected();
-        radioButtonsDefaultInline.radioButton.select(1);
-        radioButtonsDefaultInline.radioButton.get(1)
-                .is()
-                .selected();
-        radioButtonsDefaultInline.radioButton.get(2)
-                .is()
-                .deselected();
+        radioButtonsDefaultInline.radioButtons.select(2);
+        radioButtonsDefaultInline.radioButtons.is().selected(2);
+        radioButtonsDefaultInline.radioButtons.is().selected("2");
+        radioButtonsDefaultInline.radioButtons.list().get(2).is().selected();
+        radioButtonsDefaultInline.radioButtons.list().get(1).is().deselected();
+        radioButtonsDefaultInline.radioButtons.select(1);
+        radioButtonsDefaultInline.radioButtons.is().selected(1);
+        radioButtonsDefaultInline.radioButtons.is().selected("1");
+        radioButtonsDefaultInline.radioButtons.list().get(2).is().deselected();
+        radioButtonsDefaultInline.radioButtons.list().get(2).select();
+        radioButtonsDefaultInline.radioButtons.list().get(2).is().selected();
     }
 
     @Test
     public void radioButtonByLabelTests() {
-        radioButtonsDefaultInline.radio2Label.click();
-        radioButtonsDefaultInline.radioButton.get(2)
-                .is()
-                .selected();
-        radioButtonsDefaultInline.radioButton
-                .is()
-                .text(is(value2));
-        radioButtonsDefaultInline.radioButton.get(1)
-                .is()
-                .deselected();
-        radioButtonsDefaultInline.radio1Label.click();
-        radioButtonsDefaultInline.radioButton.get(1)
-                .is()
-                .selected();
-        radioButtonsDefaultInline.radioButton
-                .is()
-                .text(is(value1));
-        radioButtonsDefaultInline.radioButton.get(2)
-                .is()
-                .deselected();
-    }
-
-    @Test
-    public void radioButtonTests() {
-        radioButtonsDefaultInline.radio2.select();
-        radioButtonsDefaultInline.radio2
-                .is()
-                .selected();
-        radioButtonsDefaultInline.radio1
-                .is()
-                .deselected();
-        radioButtonsDefaultInline.radio1.select();
-        radioButtonsDefaultInline.radio1
-                .is()
-                .selected();
-        radioButtonsDefaultInline.radio2
-                .is()
-                .deselected();
+        radioButtonsDefaultInline.radioButtons.list().get(2).label().click();
+        radioButtonsDefaultInline.radioButtons.list().get(2).is().selected();
+        radioButtonsDefaultInline.radioButtons.list().get(1).is().deselected();
+        radioButtonsDefaultInline.radioButtons.list().get(3).label().click();
+        radioButtonsDefaultInline.radioButtons.list().get(3).is().deselected();
+        radioButtonsDefaultInline.radioButtons.list().get(3).is().disabled();
+        radioButtonsDefaultInline.radioButtons.list().get(1).label().click();
+        radioButtonsDefaultInline.radioButtons.list().get(1).is().selected();
+        radioButtonsDefaultInline.radioButtons.list().get(2).is().deselected();
     }
 
     @Test
     public void radioOneIsValidationTests() {
-        radioButtonsDefaultInline.radio1
+        radioButtonsDefaultInline.radioButtons.list().get(1)
                 .is()
                 .displayed()
                 .enabled()
@@ -155,7 +99,7 @@ public class RadioButtonsDefaultInlineTests extends TestsInit {
 
     @Test
     public void radioTwoIsValidationTests() {
-        radioButtonsDefaultInline.radio2
+        radioButtonsDefaultInline.radioButtons.list().get(2)
                 .is()
                 .displayed()
                 .enabled()
@@ -169,7 +113,7 @@ public class RadioButtonsDefaultInlineTests extends TestsInit {
 
     @Test
     public void radioThreeIsValidationTests() {
-        radioButtonsDefaultInline.radio3
+        radioButtonsDefaultInline.radioButtons.list().get(3)
                 .is()
                 .displayed()
                 .disabled()

@@ -16,8 +16,8 @@ import static org.hamcrest.Matchers.is;
 
 public class RadioButtonsCustomInlineTests extends TestsInit {
 
-    private String label1 = "Toggle this\ncustom radio";
-    private String label2 = "Or toggle this\ncustom radio";
+    private String text1 = "Toggle this\ncustom radio";
+    private String text2 = "Or toggle this\ncustom radio";
 
     @BeforeMethod
     public void before() {
@@ -27,58 +27,45 @@ public class RadioButtonsCustomInlineTests extends TestsInit {
 
     @Test
     public void baseInitTest() {
-        radioButtonsCustomInline.radioButton.is()
-                .size(2);
-        radioButtonsCustomInline.radio1.is()
+        radioButtonsCustomInline.radioButtons.is().size(2);
+        radioButtonsCustomInline.radioButtons.list().get(1).is()
                 .deselected();
-        radioButtonsCustomInline.radio2.is()
-                .deselected();
-        radioButtonsCustomInline.radio1Label.is()
-                .text(is(label1));
-        radioButtonsCustomInline.radio2Label.is()
-                .text(is(label2));
-    }
-
-    @Test
-    public void baseInitByIndexTest() {
-        radioButtonsCustomInline.radioButton.get(1).is()
-                .deselected();
-        radioButtonsCustomInline.radioButton.get(2).is()
+        radioButtonsCustomInline.radioButtons.list().get(2).is()
                 .deselected();
     }
 
     @Test
     public void radioButtonByIndexTests() {
-        radioButtonsCustomInline.radioButton.select(2);
-        radioButtonsCustomInline.radio2.is()
-                .selected();
-        radioButtonsCustomInline.radio1.is()
-                .deselected();
-        radioButtonsCustomInline.radioButton.select(1);
-        radioButtonsCustomInline.radio1.is()
-                .selected();
-        radioButtonsCustomInline.radio2.is()
-                .deselected();
+        radioButtonsCustomInline.radioButtons.select(2);
+        radioButtonsCustomInline.radioButtons.is().selected(2);
+        radioButtonsCustomInline.radioButtons.select(1);
+        radioButtonsCustomInline.radioButtons.is().selected(1);
+        radioButtonsCustomInline.radioButtons.list().get(1).select();
+        radioButtonsCustomInline.radioButtons.list().is().selected(text1);
+        radioButtonsCustomInline.radioButtons.select(text2);
+        radioButtonsCustomInline.radioButtons.list().is().selected(text2);
+        radioButtonsCustomInline.radioButtons.list().is().selected(2);
+        radioButtonsCustomInline.radioButtons.list().get(2).is().selected();
+        radioButtonsCustomInline.radioButtons.list().get(1).click();
+        radioButtonsCustomInline.radioButtons.list().get(1).is().selected();
+        radioButtonsCustomInline.radioButtons.list().get(2).is().deselected();
     }
 
     @Test
     public void radioButtonByLabelTests() {
-        radioButtonsCustomInline.radio2Label.click();
-        radioButtonsCustomInline.radio2.is()
-                .selected();
-        radioButtonsCustomInline.radio1.is()
-                .deselected();
-        radioButtonsCustomInline.radio1Label.click();
-        radioButtonsCustomInline.radio1.is()
-                .selected();
-        radioButtonsCustomInline.radio2.is()
-                .deselected();
+        radioButtonsCustomInline.radioButtons.list().get(1).label().click();
+        radioButtonsCustomInline.radioButtons.is().selected(1);
+        radioButtonsCustomInline.radioButtons.list().get(2).label().click();
+        radioButtonsCustomInline.radioButtons.is().selected(2);
+        radioButtonsCustomInline.radioButtons.list().get(1).label().click();
+        radioButtonsCustomInline.radioButtons.is().selected(1);
+        radioButtonsCustomInline.radioButtons.list().get(1).label().is().text(text1);
+        radioButtonsCustomInline.radioButtons.list().get(2).label().is().text(text2);
     }
 
     @Test
     public void radioOneIsValidationTests() {
-        radioButtonsCustomInline.radio1.is()
-                .hidden()
+        radioButtonsCustomInline.radioButtons.list().get(1).is()
                 .enabled()
                 .core()
                 .attr("type", "radio")
@@ -89,8 +76,7 @@ public class RadioButtonsCustomInlineTests extends TestsInit {
 
     @Test
     public void radioTwoIsValidationTests() {
-        radioButtonsCustomInline.radio2.is()
-                .hidden()
+        radioButtonsCustomInline.radioButtons.list().get(2).is()
                 .enabled()
                 .core()
                 .attr("type", "radio")
