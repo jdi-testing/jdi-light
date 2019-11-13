@@ -55,7 +55,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
      * @return D refers to user data object
      */
     @JDIAction("Get row '{0}' for '{name}' table")
-    public D data(int rowNum) {
+    public D dataRow(int rowNum) {
         hasDataClass();
         if (!datas.get().has(rowNum+"")) {
             Line line = row(rowNum);
@@ -86,9 +86,9 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
      * @return D refers to user data object
      */
     @JDIAction("Get row '{0}' for '{name}' table")
-    public D data(String rowName) {
+    public D dataRow(String rowName) {
         hasDataClass();
-        return data(getRowIndexByName(rowName));
+        return dataRow(getRowIndexByName(rowName));
     }
 
     /**
@@ -108,9 +108,9 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
      * @return D refers to user data object
      */
     @JDIAction("Get row '{0}' for '{name}' table")
-    public D data(Enum rowName) {
+    public D dataRow(Enum rowName) {
         hasDataClass();
-        return data(getEnumValue(rowName));
+        return dataRow(getEnumValue(rowName));
     }
 
     /**
@@ -130,7 +130,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
      * @return D refers to user data object
      */
     @JDIAction("Get first '{name}' table row that match criteria")
-    public D data(TableMatcher... matchers) {
+    public D dataRow(TableMatcher... matchers) {
         hasDataClass();
         return getLineData(row(matchers));
     }
@@ -152,10 +152,10 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
      * @return D refers to user data object
      */
     @JDIAction("Get first '{name}' table row that match criteria")
-    public D data(JFunc1<D, Boolean> matcher) {
+    public D dataRow(JFunc1<D, Boolean> matcher) {
         hasDataClass();
         for (int i = 1; i <= count.get(); i++) {
-            D data = data(i);
+            D data = dataRow(i);
             if (matcher.execute(data))
                 return data;
         }
@@ -171,7 +171,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     public L line(JFunc1<D, Boolean> matcher) {
         hasLineClass();
         for (int i = 1; i <= count.get(); i++) {
-            if (matcher.execute(data(i)))
+            if (matcher.execute(dataRow(i)))
                 return line(i);
         }
         return null;
@@ -183,7 +183,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
      * @return List
      */
     @JDIAction("Get all '{name}' table rows that match criteria")
-    public List<D> datas(JFunc1<D, Boolean> matcher) {
+    public List<D> dataRows(JFunc1<D, Boolean> matcher) {
         hasDataClass();
         return filter(allData(), matcher::execute);
     }
@@ -195,12 +195,12 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
      * @return List
      */
     @JDIAction("Get at least {1} '{name}' table rows that match criteria")
-    public List<D> datas(JFunc1<D, Boolean> matcher, int amount) {
+    public List<D> dataRows(JFunc1<D, Boolean> matcher, int amount) {
         hasDataClass();
         List<D> result = new ArrayList<>();
         for (int i = 1; i <= count.get(); i++) {
-            if (matcher.execute(data(i)))
-                result.add(data(i));
+            if (matcher.execute(dataRow(i)))
+                result.add(dataRow(i));
             if (result.size() == amount)
                 return result;
         }
@@ -225,7 +225,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
      * @return List
      */
     @JDIAction("Get all '{name}' table rows that match criteria")
-    public List<D> datas(TableMatcher... matchers) {
+    public List<D> dataRows(TableMatcher... matchers) {
         hasDataClass();
         if (matchers.length == 0) return allData();
         return map(rows(matchers), this::getLineData);
@@ -252,7 +252,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
         if (datas.isGotAll()) return datas.get().values();
         MapArray<String, D> result = new MapArray<>();
         for (int i = 1; i <= count.get(); i++)
-            result.update(i+"", data(i));
+            result.update(i+"", dataRow(i));
         datas.gotAll();
         return datas.set(result).values();
     }
@@ -333,7 +333,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
      * @return D refers to user data object
      */
     @JDIAction("Get '{name}' table row that match criteria in column '{1}'")
-    public D data(Matcher<String> matcher, Column column) {
+    public D dataRow(Matcher<String> matcher, Column column) {
         hasDataClass();
         return getLineData(row(matcher, column));
     }
@@ -356,7 +356,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
      * @return D refers to user data object
      */
     @JDIAction("Get '{name}' table row that match criteria")
-    public D data(Pair<Matcher<String>, Column>... matchers) {
+    public D dataRow(Pair<Matcher<String>, Column>... matchers) {
         hasDataClass();
         return getLineData(row(matchers));
     }
@@ -441,9 +441,9 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     }
 
     private D getLineData(Line row) {
-        if (lineClass == null)
-            return row.asData(dataClass);
-        return row.asData(dataClass, getLineMap(row));
+        return lineClass == null
+            ? row.asData(dataClass)
+            : row.asData(dataClass, getLineMap(row));
     }
     private MapArray<String, String> getLineMap(Line row) {
         L line = row.asLine(lineClass);

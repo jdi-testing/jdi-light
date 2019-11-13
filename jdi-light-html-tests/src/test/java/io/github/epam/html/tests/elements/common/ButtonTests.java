@@ -6,8 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
-import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
+import static com.epam.jdi.light.elements.common.Alerts.*;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.*;
@@ -108,8 +107,7 @@ public class ButtonTests implements TestsInit {
     public void suspendButtonTest() {
         WebPage.reload();
         durationMoreThan(3, () -> suspendButton.click());
-        assertEquals(getAlertText(), "Suspend button");
-        acceptAlert();
+        validateAlert(is("Suspend button"));
     }
 
     //if test fails then run `mvn clean install` in module JDI Light

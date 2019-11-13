@@ -1,8 +1,9 @@
 package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -11,6 +12,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -50,6 +52,7 @@ public class ActionProcessor {
                 return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jp);
+            isOverride.get().clear();
             if (aroundCount() == 1)
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
@@ -75,29 +78,29 @@ public class ActionProcessor {
                 .size();
     }
     public static Object defaultAction(ProceedingJoinPoint jp) throws Throwable {
-        JDIBase obj = getJdi(jp);
-        JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
+        ICoreElement obj = getJdi(jp);
+        JFunc1<Object, Object> overrideAction = getOverride(jp);
         return overrideAction != null
-                ? overrideAction.execute(obj) : jp.proceed();
+                ? overrideAction.execute(jp) : jp.proceed();
     }
-    public static JDIBase getJdi(ProceedingJoinPoint jp) {
+    public static ICoreElement getJdi(ProceedingJoinPoint jp) {
         try {
-            return jp.getThis() != null && isInterface(getJpClass(jp), IBaseElement.class)
-                ? ((IBaseElement) jp.getThis()).base() : null;
+            return jp.getThis() != null && isInterface(getJpClass(jp), ICoreElement.class)
+                ? ((ICoreElement) jp.getThis()) : null;
         } catch (Exception ex) { return null; }
     }
+    public static Safe<List<String>> isOverride = new Safe<>(ArrayList::new);
     public static Object stableAction(ProceedingJoinPoint jp) {
         try {
             String exception = "";
-            JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
-            JDIBase obj = getJdi(jp);
-            JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
-            int timeout = getTimeout(ja, obj);
+            ICoreElement obj = getJdi(jp);
+            JFunc1<Object, Object> overrideAction = getOverride(jp);
+            int timeout = getTimeout(jp, obj);
             long start = currentTimeMillis();
             do {
                 try {
                     Object result = overrideAction != null
-                        ? overrideAction.execute(obj) : jp.proceed();
+                        ? overrideAction.execute(jp) : jp.proceed();
                     if (!condition(jp)) continue;
                     return result;
                 } catch (Throwable ex) {
@@ -111,11 +114,21 @@ public class ActionProcessor {
         } finally { }
     }
 
-    private static JFunc1<JDIBase, Object> getOverride(ProceedingJoinPoint jp, JDIBase obj) {
-        return obj != null ? GetOverrideAction(jp) : null;
+    private static JFunc1<Object, Object> getOverride(ProceedingJoinPoint jp) {
+        String name = jp.getSignature().getName();
+        if (isOverride.get().contains(name)) {
+            return null;
+        }
+        JFunc1<Object, Object> override = GetOverrideAction(jp);
+        if (override != null)
+            isOverride.get().add(name);
+        return override;
     }
 
-    private static int getTimeout(JDIAction ja, IBaseElement obj) {
+    private static int getTimeout(ProceedingJoinPoint jp, IBaseElement obj) {
+        JDIAction ja = jp != null
+            ? getMethodFromJp(jp).getAnnotation(JDIAction.class)
+            : null;
         return ja != null && ja.timeout() != -1
             ? ja.timeout()
             : obj != null

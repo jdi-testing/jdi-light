@@ -30,6 +30,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
+import static com.epam.jdi.light.common.VisualCheckAction.IS_DISPLAYED;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.updatePage;
 import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
@@ -37,6 +38,7 @@ import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
+import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.map.MapArray.map;
@@ -84,7 +86,10 @@ public class InitActions {
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
         $("PageObject", sRule(info -> !isClassOr(info.type(), WebPage.class, Section.class) &&
                 isPageObject(info.instance.getClass()),
-            PageFactory::initElements))
+            PageFactory::initElements)),
+        $("VisualCheck", sRule(
+            info -> VISUAL_ACTION_STRATEGY == IS_DISPLAYED && isInterface(info.instance.getClass(), ICoreElement.class),
+            i-> ((ICoreElement)i.instance).core().params.update("visualCheck","")))
     );
 
     private static boolean isSetupValue(SiteInfo info) {
@@ -135,7 +140,14 @@ public class InitActions {
             FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
             if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
                 e.setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
-            }))
+            })),
+        $("VisualCheck", aRule(VisualCheck.class, (e, a) ->  {
+            if (a.value())
+                e.params.update("visualCheck", "");
+            else
+                if (e.params.keys().contains("visualCheck"))
+                    e.params.removeByKey("visualCheck");
+        }))
     );
 
     public static IBaseElement elementSetup(SiteInfo info) {

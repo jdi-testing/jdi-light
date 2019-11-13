@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDILocator;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -16,6 +17,7 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
+import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
@@ -79,6 +81,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         timeout = base.timeout;
         return this;
     }
+    public MapArray<String, Object> params = new MapArray<>();
+
     public JDILocator locator = new JDILocator();
     @Override
     public DriverBase setParent(Object parent) {
@@ -172,6 +176,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         this.failElement = name;
         return this;
     }
+
+    @JDIAction(value = "{0}", timeout = 0)
+    public void visualCheck(String message) { }
 
     public static final String FAILED_TO_FIND_ELEMENT_MESSAGE
             = "Can't find Element '%s' during %s seconds";

@@ -48,15 +48,15 @@ public class DataTableTests extends StaticTestsInit {
     }
     @Test
     public void filterDataTest() {
-        assertEquals(usersData.data(2), GRADY_BROCK);
-        assertEquals(usersData.data("Grady Brock"), GRADY_BROCK);
-        assertEquals(usersData.data(d -> d.name.contains("Brock")), GRADY_BROCK);
+        assertEquals(usersData.dataRow(2), GRADY_BROCK);
+        assertEquals(usersData.dataRow("Grady Brock"), GRADY_BROCK);
+        assertEquals(usersData.dataRow(d -> d.name.contains("Brock")), GRADY_BROCK);
         usersData.assertThat().row(d -> d.equals(GRADY_BROCK));
         usersData.has().row(GRADY_BROCK);
         // This is just useful example for small tables.
         // Execution takes too much time in case of 400 rows
         //
-        //List<UserInfo> filteredData = usersData.datas(d -> d.name.contains("Brock"));
+        //List<UserInfo> filteredData = usersData.dataRows(d -> d.name.contains("Brock"));
         //assertEquals(filteredData.size(), 1);
         //assertEquals(filteredData.get(0), GRADY_BROCK);
     }

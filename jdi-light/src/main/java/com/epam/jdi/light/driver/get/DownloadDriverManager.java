@@ -35,8 +35,6 @@ public class DownloadDriverManager {
                     wdm = WebDriverManager.iedriver(); break;
                 case EDGE:
                     wdm = WebDriverManager.edgedriver(); break;
-                case PHANTOMJS:
-                    wdm = WebDriverManager.phantomjs(); break;
                 case OPERA:
                     wdm = WebDriverManager.operadriver(); break;
                 default:

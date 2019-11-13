@@ -1,8 +1,9 @@
 package com.epam.jdi.light.driver.get;
 
 import com.epam.jdi.tools.DataClass;
-import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -28,9 +29,10 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 public class DriverInfo extends DataClass<DriverInfo> {
     public DriverTypes type;
-    public JFunc<Capabilities> capabilities;
+    public MutableCapabilities initCapabilities;
+    public JFunc1<MutableCapabilities, Capabilities> capabilities;
     public String properties, path;
-    public JFunc<WebDriver> getDriver;
+    public JFunc1<Object, WebDriver> getDriver;
 
     public WebDriver getDriver() {
         return isRemote()
@@ -39,7 +41,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     }
     private WebDriver setupRemote() {
         try {
-            return new RemoteWebDriver(new URL(getRemoteURL()), capabilities.execute());
+            return new RemoteWebDriver(new URL(getRemoteURL()), capabilities.execute(initCapabilities));
         } catch (Exception ex) {
             throw exception("Failed to setup remote "+type.name+" driver. Exception: " + safeException(ex));
         }
@@ -53,7 +55,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             else {
                 downloadDriver(type, PLATFORM, DRIVER_VERSION);
             }
-            return getDriver.execute();
+            return getDriver.execute(capabilities.execute(initCapabilities));
         } catch (Exception ex) {
             try {
                 if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
@@ -61,7 +63,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                             "TRY TO GET DRIVER PREVIOUS VERSION", type, DRIVER_VERSION);
                     try {
                         downloadDriver(type, PLATFORM, getBelowVersion());
-                        return getDriver.execute();
+                        return getDriver.execute(capabilities.execute(initCapabilities));
                     } catch (Exception ex2) { throw exception("Failed to download driver: " + ex2.getMessage()); }
                 }
                 throw exception(safeException(ex));

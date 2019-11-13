@@ -1,12 +1,20 @@
 package com.epam.jdi.light.asserts.generic.table;
 
+import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.table.DataTable;
+import com.epam.jdi.light.elements.complex.table.Row;
 import com.epam.jdi.light.elements.complex.table.TableMatcher;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.func.JFunc2;
+import org.hamcrest.Matcher;
+
+import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static org.hamcrest.Matchers.*;
 
@@ -24,10 +32,14 @@ public class DataTableAssert<L extends Section, D>
      */
     @JDIAction("Assert that '{name}' has rows that meet expected condition")
     public DataTableAssert<L, D> row(JFunc1<D,Boolean> condition) {
-        jdiAssert(table().data(condition), not(nullValue()));
+        jdiAssert(table().dataRow(condition), not(nullValue()));
         return this;
     }
-
+    @JDIAction("Assert that '{name}' has rows that meet expected condition")
+    public DataTableAssert<L, D> value(JFunc1<D,Boolean> condition, Row row) {
+        jdiAssert(condition.execute(table().dataRow(row.getIndex(table().header()))), is(true));
+        return this;
+    }
     /**
      * Check that the table has row that has expected data
      * @param data to compare
@@ -36,6 +48,35 @@ public class DataTableAssert<L extends Section, D>
     @JDIAction("Assert that '{name}' has {0}")
     public DataTableAssert<L, D> row(D data) {
         return row(d -> d.equals(data));
+    }
+    @JDIAction("Assert that '{name}' has {0}")
+    public DataTableAssert<L, D> value(D expected, Row row) {
+        D actual = table().dataRow(row.getIndex(table().header()));
+        jdiAssert(actual, is(expected));
+        return this;
+    }
+    @JDIAction("Assert that '{name}' rows {0}")
+    public DataTableAssert<L, D> rows(Matcher<? super List<D>> condition) {
+        jdiAssert(table().allData(), condition);
+        return this;
+    }
+    @JDIAction("Assert that '{name}' is sorted")
+    public DataTableAssert<L, D> sortedBy(JFunc2<L, L,Boolean> condition) {
+        List<L> allRows = table().allLines();
+        for (int i = 1; i < allRows.size(); i++)
+            if (!condition.execute(allRows.get(i-1), allRows.get(i)))
+                jdiAssert("Table not sorted at "+(i+1)+" row", is(""));
+        jdiAssert("Table is sorted", is("Table is sorted"));
+        return this;
+    }
+    @JDIAction("Assert that '{name}' is sorted")
+    public DataTableAssert<L, D> dataSortedBy(JFunc2<D, D,Boolean> condition) {
+        List<D> allRows = table().allData();
+        for (int i = 1; i < allRows.size(); i++)
+            if (!condition.execute(allRows.get(i-1), allRows.get(i)))
+                jdiAssert("Table not sorted at "+(i+1)+" row", is(""));
+        jdiAssert("Table is sorted", is("Table is sorted"));
+        return this;
     }
 
     public Compare exact(int count) {
@@ -54,12 +95,15 @@ public class DataTableAssert<L extends Section, D>
         return exact(1);
     }
 
-    public class Compare {
+    public class Compare implements JAssert {
+
         public int count;
         public String name;
         public String type;
         DataTableAssert<L, D> dtAssert;
         boolean exact;
+        public JDIBase base() { return DataTableAssert.this.base(); }
+
         private Compare(int count, DataTableAssert<L, D> dtAssert, boolean exact) {
             this.count = count;
             this.dtAssert = dtAssert;
@@ -74,10 +118,10 @@ public class DataTableAssert<L extends Section, D>
          * @return DataTableAssert
          */
         @JDIAction("Assert that '{name}' has {type} '{count}' rows that meet expected condition")
-        public DataTableAssert<L, D> rows(JFunc1<D,Boolean> condition) {
+        public DataTableAssert<L, D> rows(JFunc1<D, Boolean> condition) {
             jdiAssert(exact
-                ? table().datas(condition)
-                : table().datas(condition, count),
+                ? table().dataRows(condition)
+                : table().dataRows(condition, count),
             hasSize(count));
             return dtAssert;
         }
@@ -101,6 +145,15 @@ public class DataTableAssert<L extends Section, D>
             jdiAssert(TABLE_MATCHER.execute(table(), matchers).size(),
                     greaterThan(table().header().size()*count-1));
             return dtAssert;
+        }
+        public DataTableAssert<L, D> row(JFunc1<D,Boolean> condition) {
+            return rows(condition);
+        }
+        public DataTableAssert<L, D> row(D data) {
+            return rows(data);
+        }
+        public DataTableAssert<L, D> row(TableMatcher... matchers) {
+            return rows(matchers);
         }
     }
 }

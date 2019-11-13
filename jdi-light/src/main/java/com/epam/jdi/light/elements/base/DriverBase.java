@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.PAGES;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -80,7 +81,12 @@ public abstract class DriverBase implements JDIElement {
         if (parent == null) return null;
         if (isClass(parent.getClass(), WebPage.class))
             return (WebPage) parent;
-        if (!isClass(parent.getClass(), DriverBase.class)) return null;
+        if (!isClass(parent.getClass(), DriverBase.class)) {
+            String pageName = splitCamelCase(parent.getClass().getSimpleName());
+            return PAGES.keys().contains(pageName)
+                ? PAGES.get(pageName)
+                : null;
+        }
         return ((DriverBase)parent).getPage();
     }
     public boolean hasParent(String name) {

@@ -45,6 +45,7 @@ public class JDILogger implements ILogger {
     public JDILogger(String name) {
         logger = getLogger(name);
         this.name = name;
+        setLogLevel(INFO);
     }
     public JDILogger(Class clazz) {
         this(clazz.getSimpleName());

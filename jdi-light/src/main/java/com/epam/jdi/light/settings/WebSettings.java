@@ -1,9 +1,7 @@
 package com.epam.jdi.light.settings;
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
-import com.epam.jdi.light.common.ElementArea;
-import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.common.Timeout;
+import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -35,7 +33,7 @@ import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
-import static com.epam.jdi.light.elements.init.PageFactory.initialized;
+import static com.epam.jdi.light.elements.init.PageFactory.preInit;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
@@ -43,9 +41,8 @@ import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.PropertyReader.*;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.epam.jdi.tools.PropertyReader.fillAction;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -62,15 +59,8 @@ public class WebSettings {
     public static String getDomain() {
         if (DOMAIN != null)
             return DOMAIN;
-        if (!initialized)
-            init();
-        if (loadProperties().size() == 0)
-            throw new RuntimeException(format("Can't find test.properties at: %s%sIn order to get DOMAIN please specify it in test.properties or directly using WebSettings.setDomain('http://...')",
-                getCorrectPath(), LINE_BREAK));
-        if (DOMAIN == null)
-            throw new RuntimeException(format("Can't find 'domain=' in test.properties at: %s%sIn order to get DOMAIN please specify it in test.properties or directly using WebSettings.setDomain('http://...')",
-                getCorrectPath(), LINE_BREAK));
-        return DOMAIN;
+        preInit();
+        return "No Domain Found. Use test.properties or WebSettings.DOMAIN";
     }
     public static void setDomain(String domain) {
         DOMAIN = domain;
@@ -104,10 +94,11 @@ public class WebSettings {
 
     public static ElementArea CLICK_TYPE = SMART_CLICK;
     public static TextTypes TEXT_TYPE = SMART_TEXT;
+    public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
+    public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
-        if (!initialized)
-            init();
+        preInit();
         return DOMAIN != null && DOMAIN.contains("://");
     }
     public static String TEST_GROUP = "";
@@ -168,6 +159,7 @@ public class WebSettings {
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> SMART_SEARCH_LOCATORS =
             filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
+        fillAction(p -> COMMON_CAPABILITIES.put("headless", p), "headless");
 
         loadCapabilities("chrome.capabilities.path",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
@@ -175,6 +167,10 @@ public class WebSettings {
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
         loadCapabilities("ie.capabilities.path",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
+        loadCapabilities("edge.capabilities.path",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(),value.toString())));
+        loadCapabilities("opera.capabilities.path",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(),value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);

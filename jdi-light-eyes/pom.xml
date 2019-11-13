@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>jdi-light-eyes</artifactId>
+    <name>JDI Light Applitools Eyes</name>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
+    <groupId>com.epam.jdi</groupId>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <applitools.version>3.157.10</applitools.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light</artifactId>
+            <version>1.1.6</version>
+        </dependency>
+
+        <!-- Applitools SDK -->
+        <!-- https://mvnrepository.com/artifact/com.applitools/eyes-selenium-java4 -->
+        <dependency>
+            <groupId>com.applitools</groupId>
+            <artifactId>eyes-selenium-java3</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- From general pom -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -65,7 +65,6 @@ public class WebDriverFactory {
             Value(CHROME, t -> CHROME_INFO.getDriver()),
             Value(FIREFOX, t -> FF_INFO.getDriver()),
             Value(IE, t -> IE_INFO.getDriver()),
-            Value(PHANTOMJS, t -> CHROME_INFO.getDriver()),
             Value(OPERA, t -> CHROME_INFO.getDriver()),
             Value(EDGE, t -> CHROME_INFO.getDriver())
         );

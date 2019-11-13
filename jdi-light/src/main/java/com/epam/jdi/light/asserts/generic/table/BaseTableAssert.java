@@ -116,7 +116,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
      * @param matcher to compare
      * @return Table
      */
-    @JDIAction("Assert that '{name}' has rows that meet expected condition")
+    @JDIAction("Assert that '{name}' has rows that {0} in column {1}")
     public A row(Matcher<String> matcher, Column column) {
         jdiAssert(table().row(matcher, column), not(nullValue()));
         return (A) this;

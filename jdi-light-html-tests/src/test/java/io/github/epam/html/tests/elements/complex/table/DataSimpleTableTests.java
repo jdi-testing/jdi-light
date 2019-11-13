@@ -61,15 +61,15 @@ public class DataSimpleTableTests implements TestsInit {
     }
     @Test
     public void dataColumnTestIndex() {
-        assertEquals(usersData.data(2), SPIDER_MAN_SIMPLE);
+        assertEquals(usersData.dataRow(2), SPIDER_MAN_SIMPLE);
     }
     @Test
     public void dataFilterTest() {
-        assertEquals(usersData.data(d -> d.user.contains("Ivan")), SPIDER_MAN_SIMPLE);
+        assertEquals(usersData.dataRow(d -> d.user.contains("Ivan")), SPIDER_MAN_SIMPLE);
     }
     @Test
     public void allDataFilterTest() {
-        List<MarvelUserSimple> filteredData = usersData.datas(d -> d.user.contains("Ivan"));
+        List<MarvelUserSimple> filteredData = usersData.dataRows(d -> d.user.contains("Ivan"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), SPIDER_MAN_SIMPLE);
     }

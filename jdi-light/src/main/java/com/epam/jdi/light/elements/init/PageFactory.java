@@ -31,13 +31,13 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.init.InitActions.*;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.addElement;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.addPage;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.lang.String.format;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.asList;
@@ -51,7 +51,7 @@ public class PageFactory {
     public static MapArray<String, JAction> PRE_INIT =
         new MapArray<>("WebSettings", WebSettings::init);
     public static boolean initialized = false;
-    private static void preInit() {
+    public static void preInit() {
         if (PRE_INIT == null) return;
         if (!initialized) {
             for (Pair<String, JAction> action : PRE_INIT)
@@ -249,6 +249,13 @@ public class PageFactory {
     }
     public static <T> T initElements(WebDriver driver, Class<T> pageClassToProxy) {
         T page = getPageObject(driver, pageClassToProxy);
+        String pageName = splitCamelCase(pageClassToProxy.getSimpleName());
+        WebPage webPage = new WebPage();
+        webPage.updatePageData(
+            webPage.getClass().getAnnotation(Url.class),
+            webPage.getClass().getAnnotation(Title.class));
+        webPage.setName(pageName);
+        PAGES.add(pageName, webPage);
         initElements(driver, page);
         return page;
     }

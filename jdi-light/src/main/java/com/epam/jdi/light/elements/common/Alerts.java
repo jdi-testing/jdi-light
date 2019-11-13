@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.Alert;
 

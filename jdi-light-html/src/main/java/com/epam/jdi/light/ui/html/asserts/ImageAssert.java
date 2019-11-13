@@ -19,6 +19,12 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> {
         return this;
     }
     public ImageAssert src(String src) { return src(is(src)); }
+    @JDIAction("Assert that '{name}' fileName {0}")
+    public ImageAssert fileName(Matcher<String> condition) {
+        jdiAssert(element.fileName(), condition);
+        return this;
+    }
+    public ImageAssert fileName(String src) { return fileName(is(src)); }
 
     @JDIAction("Assert that '{name}' alt {0}")
     public ImageAssert alt(Matcher<String> condition) {
