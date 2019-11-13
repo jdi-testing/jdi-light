@@ -66,7 +66,7 @@ public class RadioButtonsDefaultInlineTests extends TestsInit {
         radioButtonsDefaultInline.radioButtons.is().selected(1);
         radioButtonsDefaultInline.radioButtons.is().selected("1");
         radioButtonsDefaultInline.radioButtons.list().get(2).is().deselected();
-        radioButtonsDefaultInline.radioButtons.list().get(2).select();
+        radioButtonsDefaultInline.radioButtons.list().select("2");
         radioButtonsDefaultInline.radioButtons.list().get(2).is().selected();
     }
 

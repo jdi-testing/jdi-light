@@ -25,7 +25,6 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        radioBtnList = checkboxAndRadioButtonCustomDisabled.radioButtons.list();
     }
 
     @Test
@@ -50,7 +49,7 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
 
     @Test
     public void radioButtonIsValidationTests() {
-        radioBtnList.get(1).is()
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1).is()
                 .hidden()
                 .disabled()
                 .core()
@@ -62,18 +61,27 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
 
     @Test
     public void baseInitTest() {
-
-        radioBtnList.is().size(1);
-        radioBtnList.get(1).is().deselected();
-        radioBtnList.get(1).label().is().text(is(label1));
+        checkboxAndRadioButtonCustomDisabled.radioButtons.is().size(1);
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1)
+                .is()
+                .deselected();
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1).label()
+                .is()
+                .text(is(label1));
     }
 
     @Test
     public void radioButtonsTests() {
-        radioBtnList.get(1).label().click();
-        radioBtnList.get(1).is().deselected();
-        radioBtnList.get(1).is().disabled();
-        radioBtnList.get(1).is().deselected();
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1).label().click();
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1)
+                .is()
+                .deselected();
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1)
+                .is()
+                .disabled();
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1)
+                .is()
+                .deselected();
     }
 
     @Test
