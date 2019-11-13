@@ -1,6 +1,8 @@
-package io.github.epam.bootstrap.tests.complex.dropdown;
+package io.github.epam.bootstrap.tests.composite.dropdown;
 
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Dropdown;
+import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -12,6 +14,9 @@ import static io.github.com.pages.BootstrapPage.dropdownMenuContentHeader;
 import static io.github.com.pages.BootstrapPage.dropdownMenuContentText;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.Matchers.not;
 
 public class DropdownMenuContentTests extends TestsInit {
 
@@ -56,7 +61,7 @@ public class DropdownMenuContentTests extends TestsInit {
     }
 
     @Test(dataProvider = "dropdownData")
-    public void expandCollapseTest(Dropdown dropdown) {
+    public void expandCollapseTest(DropdownMenu dropdown) {
         dropdown.expand();
         dropdown.is().expanded();
         dropdown.collapse();
@@ -66,52 +71,47 @@ public class DropdownMenuContentTests extends TestsInit {
     @Test
     public void checkHeaderTest() {
         dropdownMenuContentHeader.show();
+        dropdownMenuContentHeader.is().displayed();
         dropdownMenuContentHeader.expand();
-        dropdownMenuContentHeader.menu().childs().get(1).is().core()
+        dropdownMenuContentHeader.menu().childs().is().size(numberOfChildrenHeader);
+        dropdownMenuContentHeader.list().is()
+                .size(numberOfItemsHeader)
+                .values(TextTypes.TEXT, not(hasItem(headerText)));
+        dropdownMenuContentHeader.header.is().core()
                 .displayed()
                 .tag("h6")
                 .hasClass("dropdown-header")
                 .text(headerText);
     }
 
- /*   @Test
-    public void checkHeaderTest() {
-        dropdownMenuContentHeader.is().displayed();
-        dropdownMenuContentHeader.childs().is().size(numberOfChildrenHeader);
-        dropdownMenuContentHeader.list().is()
-                .size(numberOfItemsHeader)
-                .values(TextTypes.TEXT, not(hasItem(headerText)));
-        dropdownMenuContentHeader.header.is()
-                .displayed()
-                .text(headerText)
-                .core().tag("h6");
-    }
 
-/*
     @Test
     public void checkDividerTest() {
-        dropdownWithContentDivider.is().displayed();
-        dropdownWithContentDivider.childs().is().size(numberOfChildrenDivider);
-        dropdownWithContentDivider.items.is()
+        dropdownMenuContentHeader.show();
+        dropdownMenuContentDivider.is().displayed();
+        dropdownMenuContentHeader.expand();
+        dropdownMenuContentDivider.menu().childs().is().size(numberOfChildrenDivider);
+        dropdownMenuContentDivider.list().is()
                 .size(numberOfItemsDivider);
-        dropdownWithContentDivider.items.is(not(hasItem(dropdownWithContentDivider.divider)));
-        dropdownWithContentDivider.divider.is()
-                .displayed()
-                .core().tag("div");
+        dropdownMenuContentDivider.list().is(not(hasItem(dropdownMenuContentDivider.divider)));
+        dropdownMenuContentDivider.divider.is().core()
+                .hidden()
+                .tag("div")
+                .hasClass("dropdown-divider");
     }
 
-    @Test
+   @Test
     public void checkTextTest() {
-        dropdownWithContentText.is().displayed();
-        dropdownWithContentText.childs().is().size(numberOfChildrenText);
-        dropdownWithContentText.items.is()
+        dropdownMenuContentHeader.show();
+        dropdownMenuContentText.is().displayed();
+        dropdownMenuContentHeader.expand();
+        dropdownMenuContentText.menu().childs().is().size(numberOfChildrenText);
+        dropdownMenuContentText.list().is()
                 .size(numberOfItemsText);
-        for (Text t : dropdownWithContentText.text) {
-            dropdownWithContentText.items.is().values(TextTypes.TEXT, not(hasItem(t.getText())));
-        }
-        dropdownWithContentText.text.is().size(numberOfChildrenText - numberOfItemsText).values(TextTypes.TEXT, hasItems(text1, text2));
+
+        dropdownMenuContentText.text.is().values(TextTypes.TEXT, hasItems(text1));
+       dropdownMenuContentText.text.is().values(TextTypes.TEXT, hasItems(text2));
 
     }
-*/
 
 }
