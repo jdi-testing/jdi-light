@@ -58,7 +58,7 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void radioButtonByLabelTests() {
-        radioButtonGroup.radioButtons.list().select(labelText1);;
+        radioButtonGroup.radioButtons.list().select(labelText1);
         radioButtonGroup.radioButtons.list().is().selected(labelText1);
         radioButtonGroup.radioButtons.is().selected(labelText1);
         radioButtonGroup.radioButtons.list().get(1).is().text(is(value1));
