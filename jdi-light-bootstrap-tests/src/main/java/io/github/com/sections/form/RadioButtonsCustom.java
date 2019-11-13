@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 
 public class RadioButtonsCustom extends Section {
+    //@FindBy(css = "[name='customRadio']")
     @UI("[name='customRadio']")
     public RadioButtons radioButtons;
 }
