@@ -22,6 +22,8 @@ import static org.testng.Assert.assertEquals;
 public class TextFieldTests extends TestsInit {
 
     private String text = "TextField";
+    private final String symbols = "`!@#";//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
+
 
     @BeforeMethod
     public void before() {
@@ -100,8 +102,6 @@ public class TextFieldTests extends TestsInit {
     public void assertValidationTest() {
         name.assertThat().text(is(text));
     }
-
-    private final String symbols = "`!@#";//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
 
     @Test
     public void inputSymbolsTest() {
