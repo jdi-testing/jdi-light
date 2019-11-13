@@ -75,6 +75,36 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public JDILocator locator = new JDILocator();
     public static JFunc1<String, String> STRING_SIMPLIFY =
         s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+    public CacheValue<WebElement> webElement = new CacheValue<>();
+    public CacheValue<List<WebElement>> webElements = new CacheValue<>();
+    public List<JFunc1<WebElement, Boolean>> searchRules = new ArrayList<>();
+    public JAction1<UIElement> beforeSearch = null;
+
+    public static final String FAILED_TO_FIND_ELEMENT_MESSAGE
+            = "Can't find Element '%s' during %s seconds";
+    public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
+            = "Found %s elements instead of one for Element '%s' during %s seconds";
+    public static final String ELEMENTS_FILTERED_MESSAGE
+            = "Found %s elements but none pass results filtering. Please change locator or filtering rules (WebSettings.SEARCH_RULES = el -> ...)" +
+            LINE_BREAK + "Element '%s' search during %s seconds";
+    public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
+        if (element.webElement.hasValue())
+            return printWebElement(element.webElement.get());
+        return Switch(logger.getLogLevel()).get(
+                Case(l -> l == STEP,
+                        l -> msgFormat(PRINT_ELEMENT_STEP, element)),
+                Case(l -> l == INFO,
+                        l -> msgFormat(PRINT_ELEMENT_INFO, element)),
+                Case(l -> l == ERROR,
+                        l -> msgFormat(PRINT_ERROR_STEP, element)),
+                Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
+        );
+    };
+    private ElementArea clickAreaType;
+    private Actions actions = null;
+    protected JFunc<WebElement> getElementFunc = null;
+    protected int timeout = -1;
+
 
     public JDIBase base() {
         return this;
@@ -107,13 +137,11 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         this.locator.isRoot = false;
         return super.setParent(parent);
     }
-    public CacheValue<WebElement> webElement = new CacheValue<>();
-    public CacheValue<List<WebElement>> webElements = new CacheValue<>();
-    public List<JFunc1<WebElement, Boolean>> searchRules = new ArrayList<>();
+
     private List<JFunc1<WebElement, Boolean>> searchRules() {
         return searchRules;
     }
-    public JAction1<UIElement> beforeSearch = null;
+
     public WebElement beforeSearch(WebElement el) {
         (beforeSearch == null ? BEFORE_SEARCH : beforeSearch).execute(new UIElement(el));
         return el;
@@ -177,7 +205,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public By getFrame() { return locator.getFrame(); }
 
-    protected int timeout = -1;
     public IBaseElement waitSec(int sec) {
         timeout = sec;
         return this;
@@ -195,14 +222,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return this;
     }
 
-    public static final String FAILED_TO_FIND_ELEMENT_MESSAGE
-            = "Can't find Element '%s' during %s seconds";
-    public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
-            = "Found %s elements instead of one for Element '%s' during %s seconds";
-    public static final String ELEMENTS_FILTERED_MESSAGE
-            = "Found %s elements but none pass results filtering. Please change locator or filtering rules (WebSettings.SEARCH_RULES = el -> ...)" +
-            LINE_BREAK + "Element '%s' search during %s seconds";
-
     public WebElement getWebElement() {
         return get(new Object[]{});
     }
@@ -214,7 +233,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return element;
 
     }
-    protected JFunc<WebElement> getElementFunc = null;
     public JDIBase setGetFunc(JFunc<WebElement> func) {
         getElementFunc = func;
         return this;
@@ -458,19 +476,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         }
         return asString;
     }
-    public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
-        if (element.webElement.hasValue())
-            return printWebElement(element.webElement.get());
-        return Switch(logger.getLogLevel()).get(
-                Case(l -> l == STEP,
-                        l -> msgFormat(PRINT_ELEMENT_STEP, element)),
-                Case(l -> l == INFO,
-                        l -> msgFormat(PRINT_ELEMENT_INFO, element)),
-                Case(l -> l == ERROR,
-                        l -> msgFormat(PRINT_ERROR_STEP, element)),
-                Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
-        );
-    };
 
     public void actions(JFunc2<Actions, WebElement, Actions> actions) {
         actions.execute(actionsClass(), get()).build().perform();
@@ -478,13 +483,13 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public void actionsWitElement(JFunc2<Actions, WebElement, Actions> actions) {
         actions.execute(actionsClass().moveToElement(get()), get()).build().perform();
     }
-    private Actions actions = null;
+
     private Actions actionsClass() {
         if (actions == null)
             actions = new Actions(driver());
         return actions;
     }
-    private ElementArea clickAreaType;
+
     public ElementArea getClickType() {
         return clickAreaType != null ? clickAreaType : CLICK_TYPE;
     }

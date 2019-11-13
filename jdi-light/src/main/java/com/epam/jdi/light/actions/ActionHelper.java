@@ -61,6 +61,27 @@ public class ActionHelper {
 
     public static int CUT_STEP_TEXT = 70;
 
+    public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
+        logger.toLog(getBeforeLogString(jp), logLevel(jp));
+    };
+    public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = jp -> {
+        BEFORE_STEP_ACTION.execute(jp);
+        processNewPage(jp);
+    };
+    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
+        if (!logResult(jp)) return result;
+        LogLevels logLevel = logLevel(jp);
+        if (result != null) {
+            String text = result.toString();
+            if (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5)
+                text = text.substring(0, CUT_STEP_TEXT) + "...";
+            logger.toLog(">>> " + text, logLevel);
+        } else
+            logger.debug("Done");
+        return result;
+    };
+    public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
+
     private static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
     }
@@ -109,26 +130,6 @@ public class ActionHelper {
         }
     }
 
-    public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
-        logger.toLog(getBeforeLogString(jp), logLevel(jp));
-    };
-    public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = jp -> {
-        BEFORE_STEP_ACTION.execute(jp);
-        processNewPage(jp);
-    };
-
-    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
-        if (!logResult(jp)) return result;
-        LogLevels logLevel = logLevel(jp);
-        if (result != null) {
-            String text = result.toString();
-            if (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5)
-                text = text.substring(0, CUT_STEP_TEXT) + "...";
-            logger.toLog(">>> " + text, logLevel);
-        } else
-            logger.debug("Done");
-        return result;
-    };
     private static boolean logResult(ProceedingJoinPoint jp) {
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class)) return false;
@@ -171,7 +172,6 @@ public class ActionHelper {
         }
     }
 
-    public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
     private static WebPage getPage(Object element) {
         if (isClass(element.getClass(), DriverBase.class) &&
             !isClass(element.getClass(), WebPage.class))

@@ -49,10 +49,7 @@ public class DriverData {
     public static String TEST_PATH = mergePath(PROJECT_PATH, "src" ,"test");
     public static String LOGS_PATH = mergePath(TEST_PATH, ".logs");
     public static String DRIVERS_FOLDER;
-    public static String getDriverFolder() {
-        return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
-                ? DRIVERS_FOLDER : mergePath(TEST_PATH,"resources", "drivers");
-    }
+
     public static String DOWNLOADS_DIR = mergePath(TEST_PATH, "resources", "downloads");
     public static PageLoadStrategy PAGE_LOAD_STRATEGY = NORMAL;
     public static String BROWSER_SIZE = "MAXIMIZE";
@@ -62,6 +59,16 @@ public class DriverData {
     public static Map<String,String> CAPABILITIES_FOR_IE = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_CHROME = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_FF = new HashMap<>();
+
+    public static String  LATEST_VERSION = "LATEST";
+    public static String DRIVER_VERSION = LATEST_VERSION;
+    public static String PRELATEST_VERSION = "PRELATEST";
+    public static Platform PLATFORM = X32;
+
+    public static String getDriverFolder() {
+        return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
+                ? DRIVERS_FOLDER : mergePath(TEST_PATH,"resources", "drivers");
+    }
 
     public static String chromeDriverPath() {
         return mergePath(getDriverFolder(),getOs() == WIN ? "chromedriver.exe" : "chromedriver");
@@ -84,39 +91,6 @@ public class DriverData {
     private static String driverPath(String driverName) {
         return mergePath(getDriverFolder(), getOs() == WIN ? driverName + ".exe" : driverName);
     }
-    public static String  LATEST_VERSION = "LATEST";
-    public static String DRIVER_VERSION = LATEST_VERSION;
-    public static String PRELATEST_VERSION = "PRELATEST";
-    public static Platform PLATFORM = X32;
-
-    public static OsTypes getOs() {
-        String osName = System.getProperty("os.name").toLowerCase();
-        return Switch(osName).get(
-            Case(os -> os.contains("mac"), MAC),
-            Case(os -> os.contains("win") || os.contains("ms"), WIN),
-            Default(LINUX)
-        );
-    }
-
-    // GET DRIVER
-    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver ->
-        getOs().equals(MAC) ? maximizeScreen(driver) : driver;
-
-    private static WebDriver maximizeScreen(WebDriver driver) {
-        try {
-            java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            Point position = new Point(0, 0);
-            driver.manage().window().setPosition(position);
-            Dimension maximizedScreenSize =
-                    new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
-            driver.manage().window().setSize(maximizedScreenSize);
-            return driver;
-        } catch (Exception ex) {
-            logger.error("Failed to Maximize screen: " + safeException(ex));
-            throw ex;
-        }
-    }
-
     public static JFunc<Capabilities> CHROME_OPTIONS = () -> {
         try {
             HashMap<String, Object> chromePrefs = new HashMap<>();
@@ -185,16 +159,44 @@ public class DriverData {
             cap.setCapability(ACCEPT_SSL_CERTS, true);
             // Capabilities from settings
             CAPABILITIES_FOR_IE.forEach(cap::setCapability);
-    //        cap.setCapability("project", WebSettings.DRIVER_REMOTE_PROJECT_NAME);
-    //        cap.setCapability("apm_id", WebSettings.DRIVER_REMOTE_APM_ID);
-    //        cap.setCapability("user", WebSettings.DRIVER_REMOTE_USER_NAME);
-    //        cap.setCapability("password", WebSettings.DRIVER_REMOTE_USER_PASSWORD);
+            //        cap.setCapability("project", WebSettings.DRIVER_REMOTE_PROJECT_NAME);
+            //        cap.setCapability("apm_id", WebSettings.DRIVER_REMOTE_APM_ID);
+            //        cap.setCapability("user", WebSettings.DRIVER_REMOTE_USER_NAME);
+            //        cap.setCapability("password", WebSettings.DRIVER_REMOTE_USER_PASSWORD);
             return cap;
         } catch (Exception ex) {
             throw exception("Failed Init Internet Explorer Driver settings: " + safeException(ex));
         }
     };
 
+
+    public static OsTypes getOs() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        return Switch(osName).get(
+            Case(os -> os.contains("mac"), MAC),
+            Case(os -> os.contains("win") || os.contains("ms"), WIN),
+            Default(LINUX)
+        );
+    }
+
+    // GET DRIVER
+    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver ->
+        getOs().equals(MAC) ? maximizeScreen(driver) : driver;
+
+    private static WebDriver maximizeScreen(WebDriver driver) {
+        try {
+            java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            Point position = new Point(0, 0);
+            driver.manage().window().setPosition(position);
+            Dimension maximizedScreenSize =
+                    new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
+            driver.manage().window().setSize(maximizedScreenSize);
+            return driver;
+        } catch (Exception ex) {
+            logger.error("Failed to Maximize screen: " + safeException(ex));
+            throw ex;
+        }
+    }
     private static String getBrowserSizeOption() {
         List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
         return groups.size() == 2

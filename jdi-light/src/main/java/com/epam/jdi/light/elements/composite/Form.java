@@ -43,11 +43,15 @@ import static java.lang.String.format;
  */
 
 public class Form<T> extends Section {
+    Field setField = null;
+    private Object pageObject = this;
     public static JAction4<Field, Object, Object, String> FILL_ACTION = (field, element, parent, setValue)
         -> ((SetValue) element).setValue(setValue);
 
     public static JFunc3<Field, Object, Object, String> GET_ACTION = (field, element, parent)
         -> ((HasValue) element).getValue().trim();
+
+    private FormFilters filter = ALL;
 
     public void fillAction(Field field, Object element, Object parent, String setValue) {
         FILL_ACTION.execute(field, element, parent, setValue);
@@ -56,7 +60,6 @@ public class Form<T> extends Section {
         return GET_ACTION.execute(field, element, parent);
     }
 
-    private FormFilters filter = ALL;
     public FormFilters getFilter() {
         return filter;
     }
@@ -82,7 +85,6 @@ public class Form<T> extends Section {
             }
             return;
         }
-        Field setField = null;
         for (Pair<String, String> pair : map)
             try {
                 setField = first(allFields, f -> namesEqual(pair.key, getElementName(f)));
@@ -93,7 +95,6 @@ public class Form<T> extends Section {
                     setField != null ? setField.getName() : "UNKNOWN FIELD", safeException(ex)); }
         setFilterAll();
     }
-    private Object pageObject = this;
     public Form<T> setPageObject(Object obj) {
         pageObject = obj;
         return this;

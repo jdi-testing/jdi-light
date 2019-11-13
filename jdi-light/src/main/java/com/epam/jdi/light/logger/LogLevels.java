@@ -24,6 +24,9 @@ public enum LogLevels {
     TRACE(600),       // Trace info (not for prod)
     ALL(MAX_VALUE);   // All log messages
 
+    private static final List<Level> allLog4J2Levels =
+            asList(Level.OFF,  Level.FATAL, Level.ERROR, Level.WARN, Level.INFO,
+                    Level.DEBUG, Level.TRACE, Level.ALL);
     private int level;
     LogLevels(int level) {
         this.level = level;
@@ -38,9 +41,6 @@ public enum LogLevels {
         return getLevel() <= level.getLevel();
     }
 
-    private static final List<Level> allLog4J2Levels =
-        asList(Level.OFF,  Level.FATAL, Level.ERROR, Level.WARN, Level.INFO,
-                Level.DEBUG, Level.TRACE, Level.ALL);
     public static Level getLog4j2Level(LogLevels level) {
         return first(allLog4J2Levels, l -> l.intLevel() >= level.level);
     }
