@@ -550,7 +550,7 @@ public class UIElement extends JDIBase
                 long actual = baseLine.length();
                 makePhoto(tag + "-new");
                 long expected = compare.length();
-                String result = Math.abs(actual - expected) < 1000
+                String result = Math.abs(actual - expected) < 100
                     ? "Images are the same"
                     : format("Images are different %s %s", basePath, comparePath);
                 jdiAssert(result, Matchers.is("Images are the same"));

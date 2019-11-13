@@ -39,6 +39,7 @@ public class JDIEyes {
         eyes.setApiKey(EYES_CONFIG.apiKey);
         eyes.setAppName(EYES_CONFIG.appName);
         eyes.setBatch(new BatchInfo(EYES_CONFIG.batchName));
+        eyes.setForceFullPageScreenshot(true);
         return eyes;
     }
     static void visualTestInit() {
@@ -65,22 +66,22 @@ public class JDIEyes {
     static Safe<Boolean> NEW_TEST = new Safe<>(() -> true);
     static List<Eyes> eyesList = new ArrayList<>();
     public static void openEyes() {
-        Eyes eye = eyes.get();
-        if (!eyesList.contains(eye))
-            eyesList.add(eye);
+        Eyes eyes = JDIEyes.eyes.get();
+        if (!eyesList.contains(eyes))
+            eyesList.add(eyes);
         if (NEW_TEST.get()) {
-            closeEye(eye);
-            eye.open(EYES_CONFIG.webDriver.execute(), EYES_CONFIG.appName, TEST_NAME.get());
+            closeEye(eyes);
+            eyes.open(EYES_CONFIG.webDriver.execute(), EYES_CONFIG.appName, TEST_NAME.get());
             NEW_TEST.set(false);
         }
     }
-    static void closeEye(Eyes eye) {
+    static void closeEye(Eyes eyes) {
         try {
-            if (eye.getIsOpen())
-                eye.close(false);
+            if (eyes.getIsOpen())
+                eyes.close(false);
         } finally {
-            if (eye.getIsOpen())
-                eye.abortIfNotClosed();
+            if (eyes.getIsOpen())
+                eyes.abortIfNotClosed();
         }
     }
 
