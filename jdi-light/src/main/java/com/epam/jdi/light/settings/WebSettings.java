@@ -93,17 +93,19 @@ public class WebSettings {
         SEARCH_RULES = ELEMENT_IN_VIEW;
         BEFORE_SEARCH = UIElement::show;
     }
-
+    public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
+    public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
     public static ElementArea CLICK_TYPE = SMART_CLICK;
     public static TextTypes TEXT_TYPE = SMART_TEXT;
     public static boolean STRICT_SEARCH = true;
-    public static boolean hasDomain() {
-        return DOMAIN != null && DOMAIN.contains("://");
-    }
+
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
+    public static boolean hasDomain() {
+        return DOMAIN != null && DOMAIN.contains("://");
+    }
     public static String useDriver(JFunc<WebDriver> driver) {
         return WebDriverFactory.useDriver(driver);
     }
@@ -114,8 +116,6 @@ public class WebSettings {
         return WebDriverFactory.useDriver(driverType);
     }
 
-    public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
-    public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
         String locatorName = SMART_SEARCH_NAME.execute(el.getName());
         return el.base().timer().getResult(() -> {

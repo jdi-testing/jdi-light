@@ -16,13 +16,14 @@ import static org.testng.Assert.assertEquals;
 
 public class IsComboboxTests extends TestsInit {
 
+    private String text = "Coconut";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         iceCreamIs.select(text);
     }
-    private String text = "Coconut";
 
     @Test
     public void getValueTest() {

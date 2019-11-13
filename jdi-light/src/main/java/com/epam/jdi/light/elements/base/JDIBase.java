@@ -70,6 +70,9 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  */
 
 public abstract class JDIBase extends DriverBase implements IBaseElement, HasCache {
+
+    private TextTypes textType;
+    public JDILocator locator = new JDILocator();
     public static JFunc1<String, String> STRING_SIMPLIFY =
         s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
 
@@ -82,6 +85,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public JDIBase(JDIBase base) {
         setCore(base);
     }
+
     public JDIBase setCore(JDIBase base) {
         locator = base.locator.copy();
         name = base.name;
@@ -98,7 +102,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         timeout = base.timeout;
         return this;
     }
-    public JDILocator locator = new JDILocator();
     @Override
     public DriverBase setParent(Object parent) {
         this.locator.isRoot = false;
@@ -486,7 +489,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return clickAreaType != null ? clickAreaType : CLICK_TYPE;
     }
     public void setClickArea(ElementArea area) { clickAreaType = area; }
-    private TextTypes textType;
+
     public TextTypes getTextType() {
         return textType != null ? textType : TEXT_TYPE;
     }
