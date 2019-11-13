@@ -12,10 +12,9 @@ import static org.testng.Assert.assertTrue;
 
 public class HasAttrMockTests {
 
-    private UIElement uiElement = null;
     private static final String exceptionMessageFirstPart = "Expected: an array containing";
     private static final String exceptionMessageSecondPart = "but: mismatches were: [";
-
+    private UIElement uiElement = null;
     private MapArray<String, String> attributesSet1 = new MapArray<>(new String[]{"type", "value", "class"},
             new String[]{"checkbox", "option1", "form-check"});
     private MapArray<String, String> attributesSet2 = new MapArray<>(new String[]{"type", "value", "class"},
