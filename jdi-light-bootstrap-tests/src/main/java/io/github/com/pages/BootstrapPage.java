@@ -112,7 +112,20 @@ import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
-import io.github.com.sections.navbar.*;
+//import io.github.com.sections.navbar.*;
+import io.github.com.sections.navbar.NavbarColorScheme;
+import io.github.com.sections.navbar.NavbarContainer;
+import io.github.com.sections.navbar.NavbarNav;
+import io.github.com.sections.navbar.ScrollSpyNav;
+import io.github.com.sections.navbar.NavbarWithDropdown;
+import io.github.com.sections.navbar.NavbarText;
+import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarWithInputGroupForm;
+import io.github.com.sections.navbar.NavbarExternalContent;
+import io.github.com.sections.navbar.NavbarSection;
+import io.github.com.sections.navbar.NavbarPlacement;
+import io.github.com.sections.navbar.NavbarSupportedContent;
+//--- navbar package
 import io.github.com.sections.navs.NavsAlignmentCenter;
 import io.github.com.sections.navs.NavsAlignmentEnd;
 import io.github.com.sections.navs.NavsBaseA;
@@ -540,7 +553,7 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-pills-drop")
     public static NavsPillsWithDropdown navsPillsWithDropdown;
     @UI("#navbar-dark-colorscheme")
-    public static NavbarColorScheme navbarDarkColorScheme;
+    public static io.github.com.sections.navbar.NavbarColorScheme navbarDarkColorScheme;
     @UI("#navbar-blue-colorscheme")
     public static NavbarColorScheme navbarBlueColorScheme;
     @UI("#navbar-light-colorscheme")
