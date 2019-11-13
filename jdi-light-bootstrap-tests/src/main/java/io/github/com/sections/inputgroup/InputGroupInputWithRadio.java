@@ -7,6 +7,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.RadioButtons;
 
 
 public class InputGroupInputWithRadio extends Section{
-    @Css("[type=\"radio\"]") public RadioButtons radio;
+    @Css("[type='radio']") public RadioButtons radio;
     @Css(".form-control") public TextField input;
 }

@@ -61,7 +61,7 @@ You can ask your questions on StackOverflow with [![htmlelements](https://img.sh
 
 Get Help in active users Skype chat: <a href = "https://join.skype.com/clvyVvnZvWqc" target = "a_blank"> https://join.skype.com/clvyVvnZvWqc </a>
 
-## Contacts:
+## Contacts
 
 Mail: roman.iovlev.jdi@gmail.com
 
