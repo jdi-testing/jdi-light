@@ -12,11 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
 
 public class TheSameTextOfElementsMockTests {
 
@@ -26,7 +24,7 @@ public class TheSameTextOfElementsMockTests {
     private String element1Text = "text01";
     private String element2Text = "text2";
 
-    private int actualNumberOfElements = 3;
+    private int expectedNumberOfElements = 3;
 
     @BeforeMethod
     public void init() {
@@ -45,28 +43,26 @@ public class TheSameTextOfElementsMockTests {
 
     @Test
     public void jListNumberOfElements() {
-        int NumberUIElementsInJList = jList.size();
-        assertThat(actualNumberOfElements, is(equalTo(NumberUIElementsInJList)));
+        assertEquals(jList.size(), expectedNumberOfElements);
     }
 
     @Test
     public void webListNumberOfElements() {
-        int NumberUIElementsInWebList = webList.size();
-        assertThat(actualNumberOfElements, is(equalTo(NumberUIElementsInWebList)));
+        assertEquals(webList.size(), expectedNumberOfElements);
     }
 
     @Test
     public void webListTest() {
-        int NumberUIElementsInWebList = webList.list().elements(0).size();
+        int shownNumberUIElements = webList.list().elements(0).size();
         int actualNumberOfUIElements = webList.list().size();
-        assertThat(NumberUIElementsInWebList, is(equalTo(actualNumberOfUIElements)));
+        assertEquals(shownNumberUIElements, actualNumberOfUIElements);
     }
 
     @Test
     public void jListTest() {
-        int NumberUIElementsInJList = jList.list().elements(0).size();
+        int shownNumberUIElements = jList.list().elements(0).size();
         int actualNumberOfUIElements = jList.list().size();
-        assertThat(NumberUIElementsInJList, is(equalTo(actualNumberOfUIElements)));
+        assertEquals(shownNumberUIElements, actualNumberOfUIElements);
     }
 
     @Test
@@ -74,7 +70,7 @@ public class TheSameTextOfElementsMockTests {
         int[] iarr = {0};
         System.out.println("------------UIElements in forEach loop----------");
         jList.forEach(e -> System.out.println(e.getText() + " " + iarr[0]++));
-        assertThat(iarr[0], is(equalTo(actualNumberOfElements)));
+        assertEquals(iarr[0], expectedNumberOfElements);
     }
 
     @Test
@@ -85,7 +81,7 @@ public class TheSameTextOfElementsMockTests {
             System.out.println(jList.get(i).getText() + " " + i);
             i++;
         }
-        assertThat(i, is(equalTo(actualNumberOfElements)));
+        assertEquals(i, expectedNumberOfElements);
     }
 
     @AfterSuite(alwaysRun = true)
