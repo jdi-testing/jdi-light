@@ -36,6 +36,8 @@ import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
 
+    protected Class<?> initClass = UIElement.class;
+    protected CacheValue<MapArray<String, T>> map = new CacheValue<>(MapArray::new);
     protected String titleFieldName = null;
 
     protected WebList list;
@@ -50,12 +52,12 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     ListBase() {}
     ListBase(By locator) { list = new WebList(locator); }
     ListBase(List<WebElement> elements) { list = new WebList(elements); }
-    protected Class<?> initClass = UIElement.class;
+
 
     private boolean actualMapValue() {
         return map.hasValue() && map.get().size() > 0 && isActual(map.get().get(0).value);
     }
-    protected CacheValue<MapArray<String, T>> map = new CacheValue<>(MapArray::new);
+
     private boolean isActual(T element) {
         try {
             element.getTagName();

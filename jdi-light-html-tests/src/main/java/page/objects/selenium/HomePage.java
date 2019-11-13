@@ -10,9 +10,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 public class HomePage {
-    public HomePage() {
-        initElements(getDriver(), this);
-    }
+
     @FindBy(css="form #name") public WebElement userName;
     public WebElement password = $("form #password");
     @FindBy(id = "login-button") public WebElement enter;
@@ -20,4 +18,9 @@ public class HomePage {
     @UI("form #name") public UIElement userNameUI;
     public UIElement passwordUI = $("form #password");
     @UI("#login-button") public WebElement enterUI;
+
+    public HomePage() {
+        initElements(getDriver(), this);
+    }
+
 }
