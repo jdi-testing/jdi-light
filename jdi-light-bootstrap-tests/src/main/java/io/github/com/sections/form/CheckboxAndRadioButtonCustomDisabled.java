@@ -6,10 +6,10 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.RadioButtons;
 
 public class CheckboxAndRadioButtonCustomDisabled extends Section {
-
+    //FindBy(css = "#customCheckDisabled1-div")
     @UI("#customCheckDisabled1-div")
     public Checkbox checkbox;
-
+    //FindBy(css = "#customRadioDisabled2")
     @UI("#customRadioDisabled2")
     public RadioButtons radioButtons;
 }
