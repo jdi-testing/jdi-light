@@ -31,7 +31,7 @@ public class CheckboxesAndRadiosWithoutLabelsTests extends TestsInit {
                 .core()
                 .hasClass("form-check")
                 .tag(is("div"));
-        checkboxesAndRadiosWithoutLabels.radioButton
+        checkboxesAndRadiosWithoutLabels.radioButtons
                 .is()
                 .displayed()
                 .enabled()
@@ -57,9 +57,10 @@ public class CheckboxesAndRadiosWithoutLabelsTests extends TestsInit {
 
     @Test
     public void radioButtonTests() {
-        checkboxesAndRadiosWithoutLabels.radioButton.select();
-        checkboxesAndRadiosWithoutLabels.radioButton
+        checkboxesAndRadiosWithoutLabels.radioButtons.select(1);
+        checkboxesAndRadiosWithoutLabels.radioButtons.list().get(1)
                 .is()
                 .selected();
+        checkboxesAndRadiosWithoutLabels.radioButtons.selected(1);
     }
 }

@@ -29,6 +29,11 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
         jdiAssert(element.selected(option), is(true));
         return (A) this;
     }
+    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    public A selected(int i) {
+        jdiAssert(element.selected(i), is(true));
+        return (A) this;
+    }
     public <TEnum extends Enum> UISelectAssert selected(TEnum option) {
         return selected(getEnumValue(option));
     }

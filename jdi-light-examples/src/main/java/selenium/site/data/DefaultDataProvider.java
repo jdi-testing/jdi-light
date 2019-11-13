@@ -8,8 +8,7 @@ public class DefaultDataProvider {
         c.passportNumber = 4321;
         c.passportSerial = 123456;
         c.description = "JDI - awesome UI automation tool";
-
-        c.gender = "Female";
+        c.gender = "Male";
         c.religion = "Other";
         c.weather = "Sun, Snow";
         c.acceptConditions = true; }
