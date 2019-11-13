@@ -86,15 +86,17 @@ public class FormsSizingTests extends TestsInit {
         formsSizing.smallSelect.is()
                 .displayed()
                 .selected("Small select");
-        formsSizing.largeTextField.is()
-                .enabled()
-                .placeholder(placeholderLarge);
+        formsSizing.largeTextField
+                .placeholder()
+                .equalsIgnoreCase(placeholderLarge);
         formsSizing.defaultTextField.is()
                 .enabled()
-                .placeholder(placeholderDefault);
+                .text(is(placeholderDefault));
+//                .placeholder(placeholderDefault);
         formsSizing.smallTextField.is()
                 .enabled()
-                .placeholder(placeholderSmall);
+                .text(is(placeholderSmall));
+//                .placeholder(placeholderSmall);
     }
 
     @Test

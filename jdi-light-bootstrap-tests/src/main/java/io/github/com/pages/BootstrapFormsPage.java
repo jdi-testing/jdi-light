@@ -2,7 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.sections.form.FormValidationSection;
 import io.github.com.sections.form.SuperheroForm;
 import io.github.com.sections.form.SupportMessageForm;
