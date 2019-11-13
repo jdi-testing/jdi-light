@@ -23,7 +23,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Dropdown;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
@@ -168,59 +168,59 @@ public class BootstrapPage extends WebPage {
     @UI("#breadcrumb")
     public static Breadcrumb breadcrumb;
     @UI("#simpleDropdown")
-    public static Dropdown simpleDropdown;
+    public static DropdownMenu simpleDropdown;
     @UI("#linkDropdown")
-    public static Dropdown linkDropdown;
+    public static DropdownMenu linkDropdown;
     @UI("#primaryDropdown")
-    public static Dropdown primaryDropdown;
+    public static DropdownMenu primaryDropdown;
     @UI("#successDropdown")
-    public static Dropdown successDropdown;
+    public static DropdownMenu successDropdown;
     @UI("#infoDropdown")
-    public static Dropdown infoDropdown;
+    public static DropdownMenu infoDropdown;
     @UI("#splitDropdown")
-    public static Dropdown splitDropdown;
+    public static DropdownMenu splitDropdown;
     @UI("#largeDropdown")
-    public static Dropdown largeDropdown;
+    public static DropdownMenu largeDropdown;
     @UI("#largeSplitDropdown")
-    public static Dropdown largeSplitDropdown;
+    public static DropdownMenu largeSplitDropdown;
     @UI("#smallDropdown")
-    public static Dropdown smallDropdown;
+    public static DropdownMenu smallDropdown;
     @UI("#smallSplitDropdown")
-    public static Dropdown smallSplitDropdown;
+    public static DropdownMenu smallSplitDropdown;
     @UI("#dropUpDropdown")
-    public static Dropdown dropUpDropdown;
+    public static DropdownMenu dropUpDropdown;
     @UI("#dropUpSplitDropdown")
-    public static Dropdown dropUpSplitDropdown;
+    public static DropdownMenu dropUpSplitDropdown;
     @UI("#dropRightDropdown")
-    public static Dropdown dropRightDropdown;
+    public static DropdownMenu dropRightDropdown;
     @UI("#dropRightSplitDropdown")
-    public static Dropdown dropRightSplitDropdown;
+    public static DropdownMenu dropRightSplitDropdown;
     @UI("#dropLeftDropdown")
-    public static Dropdown dropLeftDropdown;
+    public static DropdownMenu dropLeftDropdown;
     @UI("#dropLeftSplitDropdown")
-    public static Dropdown dropLeftSplitDropdown;
+    public static DropdownMenu dropLeftSplitDropdown;
     @UI("#rightAllignedDropdown")
-    public static Dropdown rightAllignedDropdown;
+    public static DropdownMenu rightAllignedDropdown;
     @UI("#leftAllignedDropdown")
-    public static Dropdown leftAllignedDropdown;
+    public static DropdownMenu leftAllignedDropdown;
     @UI("#dropdown-menu-items")
-    public static Dropdown dropdownMenuItems;
+    public static DropdownMenu dropdownMenuItems;
     @UI("#dropdown-menu-text-item")
-    public static Dropdown dropdownMenuTextItem;
+    public static DropdownMenu dropdownMenuTextItem;
     @UI("#dropdown-menu-items-active")
-    public static Dropdown dropdownMenuItemsActive;
+    public static DropdownMenu dropdownMenuItemsActive;
     @UI("#dropdown-menu-disabled-item")
-    public static Dropdown dropdownMenuDisabledItem;
+    public static DropdownMenu dropdownMenuDisabledItem;
     @UI("#dropdown-content-header")
-    public static Dropdown dropdownMenuContentHeader;
+    public static DropdownMenu dropdownMenuContentHeader;
     @UI("#dropdown-content-divider")
-    public static Dropdown dropdownMenuContentDivider;
+    public static DropdownMenu dropdownMenuContentDivider;
     @UI("#dropdown-content-text")
-    public static Dropdown dropdownMenuContentText;
+    public static DropdownMenu dropdownMenuContentText;
     @UI("#offsetDropdown")
-    public static Dropdown offsetDropdown;
+    public static DropdownMenu offsetDropdown;
     @UI("#referenceDropdown")
-    public static Dropdown referenceDropdown;
+    public static DropdownMenu referenceDropdown;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")

@@ -64,6 +64,7 @@ public final class WebDriverUtils {
                 break;
             default:
                 name = null;
+		break;
         }
         if (name != null) {
             killAllMacOSDriverProcessesByName(name);

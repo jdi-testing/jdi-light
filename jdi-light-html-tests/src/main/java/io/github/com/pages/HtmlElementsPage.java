@@ -83,12 +83,12 @@ public class HtmlElementsPage extends WebPage {
     public static ProgressBar progress;
     // @UI("#progress") public static ProgressBar progress;
 
-    public static DateTimeSelector birthDate, monthDate, partyTime, bookingTime, autumnWeek;
-    // @UI("#birth-date") public static DateTimeSelector birthDate;
-    // @UI("#month-date") public static DateTimeSelector monthDate;
-    // @UI("#party-date") public static DateTimeSelector partyTime;
-    // @UI("#booking-date") public static DateTimeSelector bookingTime;
-    // @UI("#autumn-week") public static DateTimeSelector autumnWeek;
+    public static DateTimeSelector
+            birthDate,      // @UI("#birth-date") public static DateTimeSelector birthDate;
+            monthDate,      // @UI("#month-date") public static DateTimeSelector monthDate;
+            partyTime,      // @UI("#party-date") public static DateTimeSelector partyTime;
+            bookingTime,    // @UI("#booking-date") public static DateTimeSelector bookingTime;
+            autumnWeek;      // @UI("#autumn-week") public static DateTimeSelector autumnWeek;
 
     public static NumberSelector height;
     // @UI("#height") public static NumberSelector height;

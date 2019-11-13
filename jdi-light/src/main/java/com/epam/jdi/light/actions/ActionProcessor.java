@@ -95,28 +95,26 @@ public class ActionProcessor {
         } catch (Exception ex) { return null; }
     }
     public static Object stableAction(ProceedingJoinPoint jp) {
-        try {
-            String exception = "";
-            JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
-            JDIBase obj = getJdi(jp);
-            JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
-            int timeout = getTimeout(ja, obj);
-            long start = currentTimeMillis();
-            do {
+        String exception = "";
+        JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
+        JDIBase obj = getJdi(jp);
+        JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
+        int timeout = getTimeout(ja, obj);
+        long start = currentTimeMillis();
+        do {
+            try {
+                Object result = overrideAction != null
+                    ? overrideAction.execute(obj) : jp.proceed();
+                if (!condition(jp)) continue;
+                return result;
+            } catch (Throwable ex) {
                 try {
-                    Object result = overrideAction != null
-                        ? overrideAction.execute(obj) : jp.proceed();
-                    if (!condition(jp)) continue;
-                    return result;
-                } catch (Throwable ex) {
-                    try {
-                        exception = safeException(ex);
-                        Thread.sleep(200);
-                    } catch (Exception ignore) { }
-                }
-            } while (currentTimeMillis() - start < timeout * 1000);
-            throw exception(getFailedMessage(jp, exception));
-        } finally { }
+                    exception = safeException(ex);
+                    Thread.sleep(200);
+                } catch (Exception ignore) { }
+            }
+        } while (currentTimeMillis() - start < timeout * 1000);
+        throw exception(getFailedMessage(jp, exception));
     }
 
     private static JFunc1<JDIBase, Object> getOverride(ProceedingJoinPoint jp, JDIBase obj) {
