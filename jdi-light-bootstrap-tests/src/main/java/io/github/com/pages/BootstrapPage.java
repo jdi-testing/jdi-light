@@ -57,6 +57,7 @@ import io.github.com.sections.card.CardWithCustomCss9Rem;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.card.CardWithSubtitlesAndLinks;
+import io.github.com.sections.dropdown.DropdownForm;
 import io.github.com.sections.form.CheckboxAndRadioButtonCustomDisabled;
 import io.github.com.sections.form.CheckboxesAndRadiosWithoutLabels;
 import io.github.com.sections.form.CheckboxesDefault;
@@ -218,6 +219,8 @@ public class BootstrapPage extends WebPage {
     public static DropdownMenu offsetDropdown;
     @UI("#referenceDropdown")
     public static DropdownMenu referenceDropdown;
+    @UI("#dropdownForm")
+    public static DropdownForm dropdownForm;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")
