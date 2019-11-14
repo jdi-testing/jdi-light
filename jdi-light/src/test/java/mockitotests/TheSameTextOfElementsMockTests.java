@@ -20,8 +20,9 @@ public class TheSameTextOfElementsMockTests {
 
     private WebList webList;
     private JList<UIElement> jList;
-    private String element0Text = "text01";
-    private String element1Text = "text01";
+    private String baseText = "text";
+    private String element0Text = "text1";
+    private String element1Text = "text1";
     private String element2Text = "text2";
 
     private int expectedNumberOfElements = 3;
@@ -68,17 +69,27 @@ public class TheSameTextOfElementsMockTests {
     @Test
     public void numberOfUIElementsForEachLoopTest() {
         int[] iarr = {0};
-        System.out.println("------------UIElements in forEach loop----------");
-        jList.forEach(e -> System.out.println(e.getText() + " " + iarr[0]++));
+        jList.forEach(e -> {
+            iarr[0]++;
+        });
         assertEquals(iarr[0], expectedNumberOfElements);
+    }
+
+    @Test
+    public void numberOfUIElementsForEachLoopAltTest() {
+        int i = 0;
+        for (UIElement e : jList) {
+            assertEquals(e.getText(), baseText + i);
+            i++;
+        }
     }
 
     @Test
     public void numberOfUIElementsForLoopTest() {
         int i = 0;
-        System.out.println("------------UIElements in for loop--------------");
         while (i < jList.size()) {
-            System.out.println(jList.get(i).getText() + " " + i);
+            assertEquals(jList.get(i).getText(),
+                    i != 2 ? baseText + 1 : baseText + i);
             i++;
         }
         assertEquals(i, expectedNumberOfElements);
