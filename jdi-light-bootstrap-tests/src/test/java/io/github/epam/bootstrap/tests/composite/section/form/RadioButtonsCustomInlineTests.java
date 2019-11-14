@@ -36,14 +36,9 @@ public class RadioButtonsCustomInlineTests extends TestsInit {
 
     @Test
     public void radioButtonByIndexTests() {
-        radioButtonsCustomInline.radioButtons.select(2);
-        radioButtonsCustomInline.radioButtons.is().selected(2);
         radioButtonsCustomInline.radioButtons.select(1);
         radioButtonsCustomInline.radioButtons.is().selected(1);
-        radioButtonsCustomInline.radioButtons.list().get(1).select();
-        radioButtonsCustomInline.radioButtons.list().is().selected(text1);
-        radioButtonsCustomInline.radioButtons.select(text2);
-        radioButtonsCustomInline.radioButtons.list().is().selected(text2);
+        radioButtonsCustomInline.radioButtons.list().get(2).select();
         radioButtonsCustomInline.radioButtons.list().is().selected(2);
         radioButtonsCustomInline.radioButtons.list().get(2).is().selected();
         radioButtonsCustomInline.radioButtons.list().get(1).click();
@@ -58,7 +53,10 @@ public class RadioButtonsCustomInlineTests extends TestsInit {
         radioButtonsCustomInline.radioButtons.list().get(2).label().click();
         radioButtonsCustomInline.radioButtons.is().selected(2);
         radioButtonsCustomInline.radioButtons.list().get(1).label().click();
-        radioButtonsCustomInline.radioButtons.is().selected(1);
+        radioButtonsCustomInline.radioButtons.is().selected(text1);
+        radioButtonsCustomInline.radioButtons.list().is().selected(text1);
+        radioButtonsCustomInline.radioButtons.select(text2);
+        radioButtonsCustomInline.radioButtons.list().is().selected(text2);
         radioButtonsCustomInline.radioButtons.list().get(1).label().is().text(text1);
         radioButtonsCustomInline.radioButtons.list().get(2).label().is().text(text2);
     }

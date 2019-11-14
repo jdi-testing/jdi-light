@@ -1,11 +1,10 @@
 package io.github.com.sections.navbar;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 
-public class ScrollSpyNav extends Section {
+public class ScrollSpyNav extends Navbar {
     @UI(".//h4 | .//h5") public ListGroup header;//@FindBy(xpath = ".//h4 | .//h5")
     @UI("p") public ListGroup mainText;          // @FindBy(css = "p")
 
