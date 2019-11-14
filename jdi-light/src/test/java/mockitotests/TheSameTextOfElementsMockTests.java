@@ -21,9 +21,9 @@ public class TheSameTextOfElementsMockTests {
     private WebList webList;
     private JList<UIElement> jList;
     private String baseText = "text";
-    private String element0Text = "text1";
-    private String element1Text = "text1";
-    private String element2Text = "text2";
+    private String element0Text = String.format(baseText + "%s", 1);
+    private String element1Text = String.format(baseText + "%s", 1);;
+    private String element2Text = String.format(baseText + "%s", 2);;
 
     private int expectedNumberOfElements = 3;
 
