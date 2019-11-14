@@ -64,33 +64,6 @@ public class DriverData {
     public static String DRIVER_VERSION = LATEST_VERSION;
     public static String PRELATEST_VERSION = "PRELATEST";
     public static Platform PLATFORM = X32;
-
-    public static String getDriverFolder() {
-        return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
-                ? DRIVERS_FOLDER : mergePath(TEST_PATH,"resources", "drivers");
-    }
-
-    public static String chromeDriverPath() {
-        return mergePath(getDriverFolder(),getOs() == WIN ? "chromedriver.exe" : "chromedriver");
-    }
-    public static String ieDriverPath() {
-        return mergePath(getDriverFolder(),"IEDriverServer.exe");
-    }
-    public static String edgeDriverPath() {
-        return mergePath(getDriverFolder(),"MicrosoftWebDriver.exe");
-    }
-    public static String operaDriverPath() {
-        return driverPath("operadriver");
-    }
-    public static String phantomDriverPath() {
-        return driverPath("phantomjs");
-    }
-    public static String firefoxDriverPath() {
-        return driverPath("geckodriver");
-    }
-    private static String driverPath(String driverName) {
-        return mergePath(getDriverFolder(), getOs() == WIN ? driverName + ".exe" : driverName);
-    }
     public static JFunc<Capabilities> CHROME_OPTIONS = () -> {
         try {
             HashMap<String, Object> chromePrefs = new HashMap<>();
@@ -168,7 +141,36 @@ public class DriverData {
             throw exception("Failed Init Internet Explorer Driver settings: " + safeException(ex));
         }
     };
+    // GET DRIVER
+    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver ->
+            getOs().equals(MAC) ? maximizeScreen(driver) : driver;
 
+    public static String getDriverFolder() {
+        return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
+                ? DRIVERS_FOLDER : mergePath(TEST_PATH,"resources", "drivers");
+    }
+
+    public static String chromeDriverPath() {
+        return mergePath(getDriverFolder(),getOs() == WIN ? "chromedriver.exe" : "chromedriver");
+    }
+    public static String ieDriverPath() {
+        return mergePath(getDriverFolder(),"IEDriverServer.exe");
+    }
+    public static String edgeDriverPath() {
+        return mergePath(getDriverFolder(),"MicrosoftWebDriver.exe");
+    }
+    public static String operaDriverPath() {
+        return driverPath("operadriver");
+    }
+    public static String phantomDriverPath() {
+        return driverPath("phantomjs");
+    }
+    public static String firefoxDriverPath() {
+        return driverPath("geckodriver");
+    }
+    private static String driverPath(String driverName) {
+        return mergePath(getDriverFolder(), getOs() == WIN ? driverName + ".exe" : driverName);
+    }
 
     public static OsTypes getOs() {
         String osName = System.getProperty("os.name").toLowerCase();
@@ -178,10 +180,6 @@ public class DriverData {
             Default(LINUX)
         );
     }
-
-    // GET DRIVER
-    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver ->
-        getOs().equals(MAC) ? maximizeScreen(driver) : driver;
 
     private static WebDriver maximizeScreen(WebDriver driver) {
         try {

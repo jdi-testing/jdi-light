@@ -74,6 +74,9 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     // Amount of Columns
     protected CacheValue<Integer> size = new CacheValue<>(this::getTableSize);
 
+    public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
+    protected Boolean headerIsRow = null;
+
     protected int getRowHeaderIndex() {
         if (rowHeaderIndex == -1 && isNotBlank(rowHeaderName)) {
             int index = firstIndex(header(),
@@ -91,7 +94,6 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         this.header.setFinal(header);
     }
 
-    public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
     public SeleniumWebList headerUI() {
         return $$$(headerLocator, this).setName(getName() + " header");
     }
@@ -272,7 +274,6 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         return $(fillByMsgTemplate(cellLocator, getColumnIndex(colNum), getRowIndex(rowNum), this));
     }
 
-    protected Boolean headerIsRow = null;
     protected int getRowIndex(int rowNum) {
         if (headerIsRow == null) {
             List<String> firstRow = new ArrayList<>();

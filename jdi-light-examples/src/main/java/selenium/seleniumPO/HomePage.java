@@ -18,11 +18,11 @@ public class HomePage {
     @FindBy(css = ".profile-photo [ui=label]")protected WebElement userName;
     @UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList leftNavigation;
 
+    @FindBy(css = ".sidebar-menu [ui=label]")private List<WebElement> navigation;
     public void open() {
         getDriver().navigate().to(url);
     }
 
-    @FindBy(css = ".sidebar-menu [ui=label]")private List<WebElement> navigation;
     public void navigateTo(int num) {
         try {
             navigation.get(num).click();

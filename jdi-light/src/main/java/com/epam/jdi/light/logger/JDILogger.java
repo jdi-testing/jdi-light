@@ -42,8 +42,10 @@ public class JDILogger implements ILogger {
     private static MapArray<String, JDILogger> loggers = new MapArray<>();
     private static Marker jdiMarker = MarkerManager.getMarker("JDI");
     public static boolean writeToAllure = true;
+    private Safe<LogLevels> logLevel = new Safe<>(INFO);
 
     public static JDILogger instance(String name) {
+
         if (!loggers.has(name))
             loggers.add(name, new JDILogger(name));
         return loggers.get(name);
@@ -59,8 +61,6 @@ public class JDILogger implements ILogger {
     public JDILogger(Class clazz) {
         this(clazz.getSimpleName());
     }
-
-    private Safe<LogLevels> logLevel = new Safe<>(INFO);
 
     public LogLevels getLogLevel() {
         return logLevel.get();
