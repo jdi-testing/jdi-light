@@ -25,7 +25,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonToolbar;
@@ -113,16 +112,20 @@ import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
+//--- navbar package
 import io.github.com.sections.navbar.NavbarColorScheme;
-import io.github.com.sections.navbar.NavbarExternalContent;
-import io.github.com.sections.navbar.NavbarForm;
-import io.github.com.sections.navbar.NavbarPlacement;
-import io.github.com.sections.navbar.NavbarSection;
-import io.github.com.sections.navbar.NavbarSupportedContent;
-import io.github.com.sections.navbar.NavbarText;
-import io.github.com.sections.navbar.NavbarWithDropdown;
-import io.github.com.sections.navbar.NavbarWithInputGroupForm;
+import io.github.com.sections.navbar.NavbarContainer;
+import io.github.com.sections.navbar.NavbarNav;
 import io.github.com.sections.navbar.ScrollSpyNav;
+import io.github.com.sections.navbar.NavbarWithDropdown;
+import io.github.com.sections.navbar.NavbarText;
+import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarWithInputGroupForm;
+import io.github.com.sections.navbar.NavbarExternalContent;
+import io.github.com.sections.navbar.NavbarSection;
+import io.github.com.sections.navbar.NavbarPlacement;
+import io.github.com.sections.navbar.NavbarSupportedContent;
+//--- navbar package
 import io.github.com.sections.navs.NavsAlignmentCenter;
 import io.github.com.sections.navs.NavsAlignmentEnd;
 import io.github.com.sections.navs.NavsBaseA;
@@ -279,10 +282,12 @@ public class BootstrapPage extends WebPage {
     public static Progress progressBackgroundYellow;
     @UI("#progress-backgrounds-red")
     public static Progress progressBackgroundRed;
-    @UI("#navbar-containers-centred")
-    public static Navbar navbarCentredContainer;
-    @UI("#navbar-containers-expanded")
-    public static Navbar navbarExpandedContainer;
+
+    @UI("//h4[.='Navbar - Containers']/../..")
+    public static NavbarContainer navbarContainers;
+    @UI("//h4[.='Navbar - Nav']/../..")
+    public static NavbarNav navbarNav;
+
     @UI("#button-show-spinner-border")
     public static Button buttonSpinnerBorder;
     @UI("#spinner-border")
@@ -705,10 +710,6 @@ public class BootstrapPage extends WebPage {
     public static FormRow formRow;
 
     //region Navbars
-    @UI("#navbar-nav-with-disabled")
-    public static Navbar navbarNavWithDisabled;
-    @UI("#navbar-nav-with-dropdown")
-    public static Navbar navbarNavWithDropdown;
     @UI("#navbar-external-content")
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")
