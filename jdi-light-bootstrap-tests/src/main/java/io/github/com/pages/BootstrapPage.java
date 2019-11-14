@@ -553,7 +553,7 @@ public class BootstrapPage extends WebPage {
     @UI("#nav-pills-drop")
     public static NavsPillsWithDropdown navsPillsWithDropdown;
     @UI("#navbar-dark-colorscheme")
-    public static io.github.com.sections.navbar.NavbarColorScheme navbarDarkColorScheme;
+    public static NavbarColorScheme navbarDarkColorScheme;
     @UI("#navbar-blue-colorscheme")
     public static NavbarColorScheme navbarBlueColorScheme;
     @UI("#navbar-light-colorscheme")
