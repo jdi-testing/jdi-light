@@ -21,14 +21,14 @@ import static org.testng.Assert.assertEquals;
 
 public class TextAreaTests extends TestsInit {
 
+    private String text = "TextArea";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         textArea.clear();
     }
-    private String text = "TextArea";
-
     @Test
     public void getTextTest() {
         textArea.setText(text);

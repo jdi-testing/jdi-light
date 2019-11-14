@@ -14,18 +14,18 @@ import static com.epam.jdi.tools.StringUtils.format;
 import static com.epam.jdi.tools.pairs.Pair.$;
 
 public class PerfStatistic {
+    private MultiValuedMap<String, Long> stats;
+    private static PerfStatistic instance;
+
     private PerfStatistic() {
         stats = new ArrayListValuedHashMap<>();
     }
-    private MultiValuedMap<String, Long> stats;
     private static LongStream toLong(Collection<Long> collection) {
         return collection.stream().mapToLong(a -> a);
     }
     private LongStream values() {
         return toLong(instance.stats.values());
     }
-
-    private static PerfStatistic instance;
     private static PerfStatistic Statistic() {
         if (instance == null)
             instance = new PerfStatistic();

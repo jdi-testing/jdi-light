@@ -25,14 +25,14 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class DropdownExpand extends UIListBase<UISelectAssert>
         implements IsDropdown, ISetup {
     public String expandLocator = ".caret";
+    public String listLocator = "li";
+    public String valueLocator = "input,button";
+
     public UIElement expander() {
         return linked(expandLocator, "expand");
     }
-
-    public String valueLocator = "input,button";
     public UIElement value() { return linked(valueLocator, "value"); }
 
-    public String listLocator = "li";
     @Override
     public WebList list() {
         return linkedList(listLocator, "list").setUIElementName(INNER);

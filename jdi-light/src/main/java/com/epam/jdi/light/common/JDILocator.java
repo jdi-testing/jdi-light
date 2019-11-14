@@ -20,6 +20,13 @@ import static com.epam.jdi.tools.StringUtils.splitHyphen;
 import static java.lang.String.format;
 
 public class JDILocator {
+
+    private LocatorType locatorType = DEFAULT;
+    private By byLocator;
+    public boolean isRoot = false;
+    private JDIBase element;
+    private Object[] args = new Object[]{};
+
     public JDILocator() {}
     public JDILocator copy() {
         JDILocator locator = new JDILocator();
@@ -29,12 +36,6 @@ public class JDILocator {
         locator.element = element;
         return locator;
     }
-
-    private LocatorType locatorType = DEFAULT;
-    private By byLocator;
-    public boolean isRoot = false;
-    private JDIBase element;
-    private Object[] args = new Object[]{};
 
     public By getLocator() { return byLocator; }
     public By getLocator(Object... args) {
