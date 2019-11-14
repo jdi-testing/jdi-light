@@ -77,6 +77,11 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
     protected Boolean headerIsRow = null;
 
+    public static JFunc1<String, String> TRIM_VALUE =
+            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "\\\\n");
+    public static JFunc1<String, String> TRIM_PREVIEW =
+            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "");
+
     protected int getRowHeaderIndex() {
         if (rowHeaderIndex == -1 && isNotBlank(rowHeaderName)) {
             int index = firstIndex(header(),
@@ -579,11 +584,6 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     public String cell(String colName, String rowName) {
         return cell(getColIndexByName(colName), getRowIndexByName(rowName));
     }
-    public static JFunc1<String, String> TRIM_VALUE =
-            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "\\\\n");
-    public static JFunc1<String, String> TRIM_PREVIEW =
-            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "");
-
     /**
      * Get table preview
      * @return String

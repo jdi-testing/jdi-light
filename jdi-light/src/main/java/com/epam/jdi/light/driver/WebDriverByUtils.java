@@ -35,6 +35,12 @@ import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 
 public final class WebDriverByUtils {
 
+    private static MapArray<String, String> byReplace = new MapArray<>(new Object[][] {
+            {"cssSelector", "css"},
+            {"tagName", "tag"},
+            {"className", "class"}
+    });
+
     private WebDriverByUtils() { }
 
     public static Function<String, By> getByFunc(By by) {
@@ -76,11 +82,7 @@ public final class WebDriverByUtils {
         int index = byAsString.indexOf(": ") + 2;
         return byAsString.substring(index);
     }
-    private static MapArray<String, String> byReplace = new MapArray<>(new Object[][] {
-            {"cssSelector", "css"},
-            {"tagName", "tag"},
-            {"className", "class"}
-    });
+
     public static String getByName(By by) {
         Matcher m = Pattern.compile("By\\.(?<locator>.*):.*").matcher(by.toString());
         if (m.find()) {

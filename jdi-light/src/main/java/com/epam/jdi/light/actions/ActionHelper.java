@@ -80,23 +80,28 @@ public class ActionHelper {
             logger.debug("Done");
         return result;
     };
-    public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
-
-    private static String getTemplate(LogLevels level) {
-        return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
-    }
     public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = jp -> {
         try {
             MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
             return isBlank(template)
-                ? getDefaultName(method.getName(), methodArgs(jp, method))
-                : fillTemplate(template, jp, method);
+                    ? getDefaultName(method.getName(), methodArgs(jp, method))
+                    : fillTemplate(template, jp, method);
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: " +
                     "Can't get action name: " + safeException(ex));
         }
     };
+    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_JDI_ACTION =
+            (jp, result) -> AFTER_STEP_ACTION.execute(jp, result);
+
+    public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
+
+
+    private static String getTemplate(LogLevels level) {
+        return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
+    }
+
     public static String fillTemplate(String template,
         ProceedingJoinPoint jp, MethodSignature method) {
 
@@ -142,8 +147,6 @@ public class ActionHelper {
                 : jp.getSignature().getDeclaringType();
     }
 
-    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_JDI_ACTION =
-        (jp, result) -> AFTER_STEP_ACTION.execute(jp, result);
 
     //region Private
     private static String getBeforeLogString(ProceedingJoinPoint jp) {
