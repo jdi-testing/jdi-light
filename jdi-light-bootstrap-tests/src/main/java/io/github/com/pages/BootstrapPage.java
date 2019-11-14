@@ -23,6 +23,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.MultiplebarsProgress;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
@@ -114,6 +115,7 @@ import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
 //--- navbar package
+import io.github.com.sections.navbar.Navbar;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarContainer;
 import io.github.com.sections.navbar.NavbarNav;
@@ -285,6 +287,12 @@ public class BootstrapPage extends WebPage {
     public static Progress progressBackgroundYellow;
     @UI("#progress-backgrounds-red")
     public static Progress progressBackgroundRed;
+    @UI("#progress-multiple-bars")
+    public static MultiplebarsProgress multiplebarsProgress;
+    @UI("#navbar-containers-centred")
+    public static Navbar navbarCentredContainer;
+    @UI("#navbar-containers-expanded")
+    public static Navbar navbarExpandedContainer;
 
     @UI("//h4[.='Navbar - Containers']/../..")
     public static NavbarContainer navbarContainers;
