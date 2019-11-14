@@ -29,8 +29,6 @@ public class CardKitchenSinkTests extends TestsInit {
     private String link2Text = "JDI Website";
     private String link1Url = "https://github.com/jdi-testing/jdi-light";
     private String link2Url = "https://jdi-testing.github.io/jdi-light/index.html";
-    private UIElement link1;
-    private UIElement link2;
 
     @BeforeMethod
     public void before() {
@@ -76,13 +74,13 @@ public class CardKitchenSinkTests extends TestsInit {
 
     @Test
     public void linksTest(){
-        link1 = cardKitchenSink.links.get(1);
+        UIElement link1 = cardKitchenSink.links.get(1);
         link1.is().displayed();
         link1.is().text(link1Text);
         link1.is().attr("target", "_blank")
                 .and().tag(is("a"));
 
-        link2 = cardKitchenSink.links.get(2);
+        UIElement link2 = cardKitchenSink.links.get(2);
         link2.is().displayed();
         link2.is().text(link2Text);
         link2.is().attr("target", "_blank")
