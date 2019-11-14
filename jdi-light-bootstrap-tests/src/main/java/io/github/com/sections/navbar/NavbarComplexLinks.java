@@ -1,9 +1,9 @@
 package io.github.com.sections.navbar;
 
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Dropdown;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 
 public class NavbarComplexLinks extends Navbar {
