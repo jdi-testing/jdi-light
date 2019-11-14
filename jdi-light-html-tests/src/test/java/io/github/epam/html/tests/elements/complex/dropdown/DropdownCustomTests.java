@@ -29,14 +29,15 @@ import static org.testng.Assert.fail;
  */
 
 public class DropdownCustomTests extends TestsInit {
+
+    private String text = "Colors";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
         colorsCustom.select(text);
     }
-    private String text = "Colors";
-
     @Test
     public void getValueTest() {
         assertEquals(colorsCustom.getValue(), text);

@@ -9,10 +9,10 @@ public class PageBase {
     public static String JDI_DOMAIN = "https://jdi-testing.github.io/jdi-light";
     public String url;
     public String title;
+    public @FindBy(css = "#login-button") WebElement enter;
     public PageBase(String url, String title) {
         this.url = JDI_DOMAIN + url;
         this.title = title;
         initElements(this);
     }
-    public @FindBy(css = "#login-button") WebElement enter;
 }

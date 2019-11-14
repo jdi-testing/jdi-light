@@ -27,6 +27,7 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     public String expandLocator = ".caret";
     public String listLocator = "li";
     public String valueLocator = "input,button";
+    protected boolean setupDone = false;
 
     public UIElement expander() {
         return linked(expandLocator, "expand");
@@ -86,7 +87,6 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
         return list().selected(value);
     }
 
-    protected boolean setupDone = false;
     public IsDropdown setup(String root, String value, String list, String expand) {
         if (isNotBlank(root))
             base().setLocator(root);
