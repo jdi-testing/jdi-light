@@ -37,7 +37,6 @@ import io.github.com.sections.buttongroup.ButtonGroupSizing;
 import io.github.com.sections.buttongroup.ButtonGroupVerticalVariation;
 import io.github.com.sections.buttongroup.ButtonWithDropdown;
 import io.github.com.sections.card.CardBody;
-import io.github.com.sections.card.CardBorder;
 import io.github.com.sections.card.CardColumnsSection;
 import io.github.com.sections.card.CardDeckSection;
 import io.github.com.sections.card.CardExample;
@@ -50,6 +49,7 @@ import io.github.com.sections.card.CardKitchenSink;
 import io.github.com.sections.card.CardListGroups;
 import io.github.com.sections.card.CardMixinsUtilities;
 import io.github.com.sections.card.CardNavigation;
+import io.github.com.sections.card.CardStyled;
 import io.github.com.sections.card.CardTextAlignment;
 import io.github.com.sections.card.CardUtilities;
 import io.github.com.sections.card.CardWithCustomCss;
@@ -396,22 +396,6 @@ public class BootstrapPage extends WebPage {
     //region Cards
     @UI("#card-body")
     public static CardBody cardBody;
-    @UI("#card-border-primary")
-    public static CardBorder cardBorderPrimary;
-    @UI("#card-border-secondary")
-    public static CardBorder cardBorderSecondary;
-    @UI("#card-border-success")
-    public static CardBorder cardBorderSuccess;
-    @UI("#card-border-danger")
-    public static CardBorder cardBorderDanger;
-    @UI("#card-border-warning")
-    public static CardBorder cardBorderWarning;
-    @UI("#card-border-info")
-    public static CardBorder cardBorderInfo;
-    @UI("#card-border-light")
-    public static CardBorder cardBorderLight;
-    @UI("#card-border-dark")
-    public static CardBorder cardBorderDark;
     @UI(".card-columns")
     public static CardColumnsSection cardColumnsSection;
     @UI(".card-deck:nth-of-type(1)")
@@ -442,6 +426,38 @@ public class BootstrapPage extends WebPage {
     public static CardMixinsUtilities cardMixinsUtilities;
     @UI("#card-navigation")
     public static CardNavigation cardNavigation;
+    @UI("#card-bright-blue")
+    public static CardStyled cardBrightBlue;
+    @UI("#card-grey")
+    public static CardStyled cardGrey;
+    @UI("#card-green")
+    public static CardStyled cardGreen;
+    @UI("#card-red")
+    public static CardStyled cardRed;
+    @UI("#card-yellow")
+    public static CardStyled cardYellow;
+    @UI("#card-blue")
+    public static CardStyled cardBlue;
+    @UI("#card-light")
+    public static CardStyled cardLight;
+    @UI("#card-dark")
+    public static CardStyled cardDark;
+    @UI("#card-border-primary")
+    public static CardStyled cardStyledPrimary;
+    @UI("#card-border-secondary")
+    public static CardStyled cardStyledSecondary;
+    @UI("#card-border-success")
+    public static CardStyled cardStyledSuccess;
+    @UI("#card-border-danger")
+    public static CardStyled cardStyledDanger;
+    @UI("#card-border-warning")
+    public static CardStyled cardStyledWarning;
+    @UI("#card-border-info")
+    public static CardStyled cardStyledInfo;
+    @UI("#card-border-light")
+    public static CardStyled cardStyledLight;
+    @UI("#card-border-dark")
+    public static CardStyled cardStyledDark;
     @UI("#card-text-left")
     public static CardTextAlignment cardLeftTextAlignment;
     @UI("#card-text-center")
@@ -464,22 +480,6 @@ public class BootstrapPage extends WebPage {
     public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
     @UI("#card-with-header-and-footer")
     public static CardWithHeaderAndFooter cardWithHeaderAndFooter;
-    @UI("#card-bright-blue")
-    public static CardWithHeaderAndFooter cardBrightBlue;
-    @UI("#card-grey")
-    public static CardWithHeaderAndFooter cardGrey;
-    @UI("#card-green")
-    public static CardWithHeaderAndFooter cardGreen;
-    @UI("#card-red")
-    public static CardWithHeaderAndFooter cardRed;
-    @UI("#card-yellow")
-    public static CardWithHeaderAndFooter cardYellow;
-    @UI("#card-blue")
-    public static CardWithHeaderAndFooter cardBlue;
-    @UI("#card-light")
-    public static CardWithHeaderAndFooter cardLight;
-    @UI("#card-dark")
-    public static CardWithHeaderAndFooter cardDark;
     @UI("#card-subtitle-link")
     public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
     //endregion
