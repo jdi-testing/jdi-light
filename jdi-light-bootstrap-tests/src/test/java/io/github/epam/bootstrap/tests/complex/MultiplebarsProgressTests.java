@@ -6,6 +6,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.multiplebarsProgress;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
@@ -14,6 +17,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class MultiplebarsProgressTests extends TestsInit {
+
+    private List<String> multipleprogressValues = Arrays.asList("15", "30", "20");
 
     @BeforeClass
     public void before() {
@@ -24,9 +29,9 @@ public class MultiplebarsProgressTests extends TestsInit {
     @DataProvider
     public Object[][] progressMultipleBarsData() {
         return new Object[][] {
-                {multiplebarsProgress.barsList.get(1), "rgba(0, 123, 255, 1)", "15", "0", "100"},
-                {multiplebarsProgress.barsList.get(2), "rgba(40, 167, 69, 1)", "30", "0", "100"},
-                {multiplebarsProgress.barsList.get(3), "rgba(23, 162, 184, 1)", "20", "0", "100"}
+                {multiplebarsProgress.getProgress(1), "rgba(0, 123, 255, 1)", "15", "0", "100"},
+                {multiplebarsProgress.getProgress(2), "rgba(40, 167, 69, 1)", "30", "0", "100"},
+                {multiplebarsProgress.getProgress(3), "rgba(23, 162, 184, 1)", "20", "0", "100"}
         };
     }
 
@@ -43,12 +48,18 @@ public class MultiplebarsProgressTests extends TestsInit {
     }
 
     @Test
-    public void wholeMultiplebarsProgressTest() {
-        multiplebarsProgress.barsList.is().size(3);
+    public void entireMultiplebarsProgressTest() {
+        multiplebarsProgress.getProgresses().is().size(3);
         multiplebarsProgress.is()
                 .displayed()
                 .enabled();
         assertThat(multiplebarsProgress.core().css("background-color"), is("rgba(233, 236, 239, 1)"));
         baseValidation(multiplebarsProgress);
+    }
+
+    @Test
+    public void getValuesTest() {
+        assertThat(multiplebarsProgress.getValues(), is(multipleprogressValues));
+        assertThat(multiplebarsProgress.getValues().get(1), is("30"));
     }
 }
