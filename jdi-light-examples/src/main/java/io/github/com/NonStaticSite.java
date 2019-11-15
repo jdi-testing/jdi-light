@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
-import io.github.com.pages.*;
+import io.github.com.pages.HomePage;
 import io.github.com.sections.LoginForm;
 import org.openqa.selenium.WebElement;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;

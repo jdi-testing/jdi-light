@@ -12,7 +12,7 @@ import selenium.site.pages.JDIPerformancePage;
 import selenium.site.sections.LoginForm;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
-public class StaticSiteJdi {
+public class SiteJdi {
     public static HomePage homePage;
     public static ContactPage contactPage;
     public static JDIPerformancePage performancePage;
