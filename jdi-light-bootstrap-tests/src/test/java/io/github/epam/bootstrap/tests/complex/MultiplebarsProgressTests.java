@@ -13,7 +13,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class ProgressMultipleTests extends TestsInit {
+public class MultiplebarsProgressTests extends TestsInit {
 
     @BeforeClass
     public void before() {
@@ -43,7 +43,7 @@ public class ProgressMultipleTests extends TestsInit {
     }
 
     @Test
-    public void wholeMultiplebarProgressTest() {
+    public void wholeMultiplebarsProgressTest() {
         multiplebarsProgress.barsList.is().size(3);
         multiplebarsProgress.is()
                 .displayed()

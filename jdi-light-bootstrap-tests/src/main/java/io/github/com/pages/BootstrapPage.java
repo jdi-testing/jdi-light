@@ -148,7 +148,6 @@ import io.github.com.sections.pagination.PaginationOverview;
 import io.github.com.sections.pagination.PaginationSizeBig;
 import io.github.com.sections.pagination.PaginationSizeSmall;
 import io.github.com.sections.pagination.PaginationStates;
-import io.github.com.sections.progress.ProgressMultipleBars;
 import io.github.com.sections.progress.ProgressSection;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
@@ -569,8 +568,6 @@ public class BootstrapPage extends WebPage {
     public static NavbarColorScheme navbarBlueColorScheme;
     @UI("#navbar-light-colorscheme")
     public static NavbarColorScheme navbarLightColorScheme;
-    @UI("#progress-multiple-bars")
-    public static ProgressMultipleBars progressMultipleBars;
     @UI(".card-columns")
     public static CardColumns cardColumns;
     @UI("#list-example>a")
