@@ -115,7 +115,6 @@ import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
 //--- navbar package
-import io.github.com.sections.navbar.Navbar;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarContainer;
 import io.github.com.sections.navbar.NavbarNav;
@@ -288,10 +287,6 @@ public class BootstrapPage extends WebPage {
     public static Progress progressBackgroundRed;
     @UI("#progress-multiple-bars")
     public static MultiplebarsProgress multiplebarsProgress;
-    @UI("#navbar-containers-centred")
-    public static Navbar navbarCentredContainer;
-    @UI("#navbar-containers-expanded")
-    public static Navbar navbarExpandedContainer;
 
     @UI("//h4[.='Navbar - Containers']/../..")
     public static NavbarContainer navbarContainers;
