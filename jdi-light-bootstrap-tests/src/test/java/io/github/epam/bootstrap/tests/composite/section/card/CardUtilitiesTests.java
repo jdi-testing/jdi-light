@@ -46,7 +46,7 @@ public class CardUtilitiesTests extends TestsInit {
     public static Object[][] cardUtilitiesElementsWithTitle() {
         return new Object[][]{
                 {cardWidth75, "SPIDER MAN (W-75)"},
-                {cardWidth50, "HULK\n(W-50)"}
+                {cardWidth50, "HULK (W-50)"}
         };
     }
 
