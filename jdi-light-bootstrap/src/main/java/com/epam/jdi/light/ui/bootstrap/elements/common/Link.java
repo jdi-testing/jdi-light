@@ -14,6 +14,10 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * To see an example of Link web element please visit https://getbootstrap.com/docs/4.3/utilities/stretched-link/
+ */
+
 public class Link extends UIBaseElement<LinkAssert>
         implements HasValue, HasClick, IsText {
     // region Actions

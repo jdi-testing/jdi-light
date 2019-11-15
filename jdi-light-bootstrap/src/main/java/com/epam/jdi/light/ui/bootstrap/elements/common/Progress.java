@@ -4,6 +4,10 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.ui.bootstrap.asserts.ProgressAssert;
 
+/**
+ * To see an example of bootstrap Progress bar please visit https://getbootstrap.com/docs/4.3/components/progress/
+ */
+
 public class Progress extends UIBaseElement<ProgressAssert> {
     @JDIAction(value = "Get '{name}' background color")
     public String getColor() {

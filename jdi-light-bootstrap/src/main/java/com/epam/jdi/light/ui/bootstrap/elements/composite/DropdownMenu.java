@@ -10,6 +10,10 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 
+/**
+ * To see an example of Dropdown Menu web element please visit https://getbootstrap.com/docs/4.3/components/dropdowns/#menu-items
+ */
+
 public class DropdownMenu extends BootstrapDropdown {
     @UI(".dropdown-item,.dropdown-item-text")
     private WebList items;
