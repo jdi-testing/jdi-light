@@ -2,6 +2,8 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.PageChecks;
+import com.epam.jdi.light.common.VisualCheckPage;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -29,15 +31,16 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
+import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.OutputTemplates.STEP_TEMPLATE;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
@@ -161,6 +164,8 @@ public class ActionHelper {
     }
 
     public static void processNewPage(JoinPoint jp) {
+        if (CHECK_AFTER_OPEN == PageChecks.NONE && VISUAL_PAGE_STRATEGY == VisualCheckPage.NONE)
+            return;
         getWindows();
         Object element = jp.getThis();
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
@@ -177,6 +182,7 @@ public class ActionHelper {
     }
 
     public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
+
     static WebPage getPage(Object element) {
         if (!isClass(element.getClass(), DriverBase.class))
             return null;

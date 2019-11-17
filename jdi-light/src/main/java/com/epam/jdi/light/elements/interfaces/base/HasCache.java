@@ -9,4 +9,5 @@ public interface HasCache {
      * @return Get value of Element
      */
     void offCache();
+    boolean isUseCache();
 }

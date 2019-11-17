@@ -19,12 +19,11 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -32,23 +31,22 @@ import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.driver.ScreenshotMaker.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_FILE_SUFFIX;
+import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
+import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
-import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.switcher.SwitchActions.Case;
 import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
+import static java.lang.Math.abs;
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
-import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -200,7 +198,22 @@ public class UIElement extends JDIBase
     public Rectangle getRect() {
         return getWebElement().getRect();
     }
-
+    @JDIAction(level = DEBUG)
+    public Rectangle getPosition() {
+        Map<String, Object> map = (Map<String, Object>)js().executeScript("const rect = arguments[0].getBoundingClientRect();return {x:rect.x,y:rect.y,width:rect.width,height:rect.height};", getWebElement());
+        return new Rectangle(intValue(map.get("x")), intValue(map.get("y")), intValue(map.get("height")), intValue(map.get("width")));
+    }
+    private int intValue(Object element) {
+        try {
+            return ((Long)element).intValue();
+        } catch (ClassCastException ignore) {
+            try {
+                return ((Double) element).intValue();
+            } catch (ClassCastException ex) {
+                return -1;
+            }
+        }
+    }
     /**
      * Get element css value
      * @param value
@@ -513,55 +526,65 @@ public class UIElement extends JDIBase
         actions((a,e) -> a.dragAndDropBy(e, x, y));
     }
 
-    public String makePhoto() {
+    public File makePhoto() {
         return makePhoto("");
     }
     /**
      * Get element's screen shot with red border
      * @return String
      */
+    private String imageFilePath;
+
+    public boolean hasImage() {
+        return imageFilePath != null;
+    }
+    public File getImageFile() {
+        return hasImage() ? new File(imageFilePath) : null;
+    }
+    private String getScreenshotName(String tag) {
+        return varName+tag+SCREEN_FILE_SUFFIX;
+    }
+
     @JDIAction(level = DEBUG)
-    public String makePhoto(String tag) {
+    public File makePhoto(String tag) {
         show();
-        WebElement we = getWebElement();
-        File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-        String filePath = mergePath(getPath(), getName()+tag+SCREEN_FILE_SUFFIX);
-        File file = new File(filePath);
-        try {
-            copyFile(screenshot, file);
-            BufferedImage fullImg = ImageIO.read(file);
-            Point point = we.getLocation();
-            Dimension size = we.getSize();
-            BufferedImage crop = fullImg.getSubimage(point.getX(), point.getY(),
-                    size.getWidth(), size.getHeight());
-            ImageIO.write(crop, SCREEN_FILE_SUFFIX, file);
-        } catch (Exception ex) {throw exception(safeException(ex)); }
-        return filePath;
+        Rectangle rect = getPosition();
+        imageFilePath = windowScreenshot(
+                multiply(rect.getX()), multiply(rect.getY()),
+                multiply(rect.getWidth()), multiply(rect.getHeight()),
+                getScreenshotName(tag));
+        return getImageFile();
+    }
+    private int multiply(int value) {
+        return (int)Math.round(value*zoomLevel());
     }
     @JDIAction("Visual compare '{0}'")
     public void visualValidation(String tag) {
         try {
-            String basePath = mergePath(getPath(), getName() + tag + SCREEN_FILE_SUFFIX);
-            String comparePath = mergePath(getPath(), getName() + tag + "-new" + SCREEN_FILE_SUFFIX);
-            File baseLine = new File(basePath);
-            File compare = new File(comparePath);
-
-            if (baseLine.exists()) {
-                long actual = baseLine.length();
+            if (hasImage()) {
+                File image = getImageFile();
                 makePhoto(tag + "-new");
-                long expected = compare.length();
-                String result = Math.abs(actual - expected) < 100
-                    ? "Images are the same"
-                    : format("Images are different %s %s", basePath, comparePath);
-                jdiAssert(result, Matchers.is("Images are the same"));
+                compareImageFiles(getImageFile(), image);
             } else {
                 makePhoto(tag);
-                String message = "Set baseline: " + basePath;
+                String message = "Set baseline: " + imageFilePath;
                 jdiAssert(message, Matchers.is(message));
             }
         } catch (Exception ex) {throw exception("Can't compare files: %s", safeException(ex)); }
     }
+    private void compareImageFiles(File image1, File image2) {
+        long actual = image1.length();
+        long expected = image2.length();
+        String result = abs(actual - expected) < 100
+                ? "Images are the same"
+                : format("Images are different %s %s", image1.getAbsolutePath(), image2.getAbsolutePath());
+        jdiAssert(result, Matchers.is("Images are the same"));
+    }
 
+    @JDIAction("Visual compare '{0}'")
+    public void visualValidation(UIElement element) {
+        compareImageFiles(getImageFile(), element.getImageFile());
+    }
     /** Click on element if not selected */
     @JDIAction("Check '{name}'")
     public void check() {

@@ -20,6 +20,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
@@ -65,6 +66,10 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public WebList(By locator) { this(); setLocator(locator);}
     public WebList(List<WebElement> elements) {
         this(); setWebElements(elements);
+    }
+    public WebList setValues(MultiMap<String, UIElement> map) {
+        this.elements.set(map);
+        return this;
     }
     public WebList(JDIBase base) {
         super(base);
@@ -181,6 +186,10 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         setTextType(type);
         return setUIElementName(type.func);
     }
+    @Override
+    public boolean isUseCache() {
+        return elements.isUseCache();
+    }
 
     /**
      * @param index
@@ -189,6 +198,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public UIElement get(int index) {
         if (index < 0)
             throw exception("Can't get element with index '%s'. Index should be 0 or more", index);
+        if (locator.isEmpty() && elements.isUseCache() && elements.get().size() > index)
+            return elements.get().get(index).value;
         return (locator.isTemplate()
             ? tryGetByIndex(index)
             : initElement(() -> getList(index+1).get(index)))
@@ -403,11 +414,14 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @Override
     public int size() {
         try {
+            if (elements.isUseCache() && elements.get().size() > 0)
+                return elements.get().size();
             return noWait(() -> getList(0).size());
         } catch (Exception ex) {
             return 0;
         }
     }
+
     @JDIAction("Check that '{option}' is selected in '{name}'")
     public boolean selected(String option) {
         return get(option).isSelected();

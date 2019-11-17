@@ -2,9 +2,12 @@ package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.ui.html.asserts.ImageAssert;
+
+import java.io.File;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
@@ -29,11 +32,6 @@ public class Image extends UIBaseElement<ImageAssert>
     public int width() { return getInt("width", uiElement); }
     @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
     public String alt() { return uiElement.attr("alt"); }
-    public String makePhoto() { return uiElement.makePhoto(); }
-    public String makePhoto(String tag) { return uiElement.makePhoto(tag); }
-    public void visualValidation(String tag) {
-        uiElement.visualValidation(tag);
-    }
     public String getValue() {
         return src();
     }

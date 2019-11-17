@@ -65,7 +65,7 @@ public class DataTableAssert<L extends Section, D>
         List<L> allRows = table().allLines();
         for (int i = 1; i < allRows.size(); i++)
             if (!condition.execute(allRows.get(i-1), allRows.get(i)))
-                jdiAssert("Table not sorted at "+(i+1)+" row", is(""));
+                jdiAssert("Table not sorted at "+i+" row", is(""));
         jdiAssert("Table is sorted", is("Table is sorted"));
         return this;
     }
@@ -74,7 +74,7 @@ public class DataTableAssert<L extends Section, D>
         List<D> allRows = table().allData();
         for (int i = 1; i < allRows.size(); i++)
             if (!condition.execute(allRows.get(i-1), allRows.get(i)))
-                jdiAssert("Table not sorted at "+(i+1)+" row", is(""));
+                jdiAssert("Table not sorted at "+i+" row", is(""));
         jdiAssert("Table is sorted", is("Table is sorted"));
         return this;
     }

@@ -2,10 +2,7 @@ package com.epam.jdi.light.asserts.generic.table;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.complex.table.BaseTable;
-import com.epam.jdi.light.elements.complex.table.Column;
-import com.epam.jdi.light.elements.complex.table.Single;
-import com.epam.jdi.light.elements.complex.table.TableMatcher;
+import com.epam.jdi.light.elements.complex.table.*;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -13,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static org.hamcrest.Matchers.*;
 
@@ -120,5 +118,26 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
     public A row(Matcher<String> matcher, Column column) {
         jdiAssert(table().row(matcher, column), not(nullValue()));
         return (A) this;
+    }
+
+    @JDIAction("Assert that '{name}' row {0} equals to other row")
+    public A rowVisualValidation(String rowName, Line row) {
+        jdiAssert(table().row(rowName).visualCompareTo(row), is(true));
+        return (A) this;
+    }
+    @JDIAction("Assert that '{name}' row {0} equals to other row")
+    public A rowsVisualValidation(String keyColumn, List<Line> rows) {
+        List<Line> tableRows = table().rowsImages();
+        for (int i = 0; i < table().count(); i++) {
+            Line tableRow = tableRows.get(i);
+            jdiAssert(tableRow.visualCompareTo(findRow(rows, tableRow.get(keyColumn), keyColumn)), is(true));
+        }
+        return (A) this;
+    }
+    private Line findRow(List<Line> rows, String name, String columnName) {
+        for (Line line : rows)
+            if (line.get(columnName).equals(name))
+                return line;
+        throw exception("Can't find %s row with column %s", name, columnName);
     }
 }
