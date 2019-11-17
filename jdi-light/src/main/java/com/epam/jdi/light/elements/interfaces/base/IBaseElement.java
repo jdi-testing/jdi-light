@@ -27,4 +27,7 @@ public interface IBaseElement extends JDIElement, HasCache {
     default void offCache() {
         base().offCache();
     }
+    default boolean isUseCache() {
+        return base().isUseCache();
+    }
 }

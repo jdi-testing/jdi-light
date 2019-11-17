@@ -488,4 +488,5 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         webElement.useCache(false);
         webElements.useCache(false);
     }
+    public boolean isUseCache() { return webElement.isUseCache() && webElements.isUseCache(); }
 }

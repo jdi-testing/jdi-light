@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.complex.table;
 
+import com.epam.jdi.light.elements.complex.table.Line;
 import com.epam.jdi.light.elements.complex.table.Single;
 import io.github.com.entities.MarvelUserInfo;
 import io.github.epam.TestsInit;
@@ -33,6 +34,12 @@ public class DataTableTests implements TestsInit {
             usersPage.open();
             firstTime = false;
         }
+    }
+    @Test
+    public void visualTableChecks() {
+        List<Line> rows = users.rowsImages();
+        users.assertThat()
+            .rowsVisualValidation("User", rows);
     }
 
     @Test

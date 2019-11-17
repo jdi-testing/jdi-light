@@ -52,5 +52,11 @@ public interface ICoreElement extends IBaseElement {
     default String getTagName() {
         return core().getTagName();
     }
+    default void visualValidation(String tag) {
+        core().visualValidation(tag);
+    }
+    default void visualValidation(UIElement element) {
+        core().visualValidation(element);
+    }
 
 }

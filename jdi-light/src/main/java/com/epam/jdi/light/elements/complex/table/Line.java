@@ -6,8 +6,10 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
+import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.map.MultiMap;
@@ -51,12 +53,14 @@ public class Line implements IList<String>, IBaseElement {
     private MultiMap<String, String> data;
     private List<String> list;
     private List<String> getList(int minAmount) {
-        return list != null && list.size() >= minAmount
-                ? list
-                : getData(minAmount).values();
+        if (list == null || list.size() < minAmount)
+            list = getData(minAmount).values();
+        return list;
     }
-    // TODO Implement
-    public String get(String value) {return ""; }
+    public String get(String value) {
+        int index = headers.indexOf(value);
+        return getList(index+1).get(index);
+    }
     private MultiMap<String, String> getData(int minAmount) {
         if (data == null || data.size() < minAmount)
             data = dataMap.execute();
@@ -72,7 +76,27 @@ public class Line implements IList<String>, IBaseElement {
     public MultiMap<String, String> elements(int minAmount) {
         return getData(minAmount);
     }
-
+    public MultiMap<String, UIElement> uiElements() {
+        return new MultiMap<>(headers, elements);
+    }
+    public void saveCellsImages() {
+        String unique = Timer.nowMSecs();
+        List<UIElement> result = new ArrayList<>();
+        for (int i = 0; i < elements.size(); i++) {
+            UIElement cell = elements.get(i);
+            cell.varName = headers.get(i)+unique;
+            cell.makePhoto();
+            result.add(cell);
+        }
+        elements = new WebList().setValues(new MultiMap<>(headers, result));
+    }
+    public boolean visualCompareTo(Line line) {
+        for (Pair<String, UIElement> cell : uiElements())
+            try {
+                cell.value.visualValidation(line.uiElements().get(cell.key));
+            } catch (Exception ex) { return false; }
+        return true;
+    }
 
     public String getValue() {
         return PrintUtils.print(getList(0), ";");
@@ -96,6 +120,7 @@ public class Line implements IList<String>, IBaseElement {
         }
         return instance;
     }
+
     public <D> D asData(Class<D> data, MapArray<String, String> line) {
         D instance;
         try { instance = create(data); }
@@ -134,5 +159,9 @@ public class Line implements IList<String>, IBaseElement {
     @Override
     public String toString() {
         return print();
+    }
+
+    public boolean isUseCache() {
+        return elements.isUseCache();
     }
 }

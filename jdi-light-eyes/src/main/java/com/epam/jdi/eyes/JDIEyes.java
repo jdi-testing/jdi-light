@@ -52,7 +52,7 @@ public class JDIEyes {
             visualCheckElement(ui.base().getWebElement(), name);
         });
         OverrideAction("visualWindowCheck",
-                jp -> visualCheckPage(WebPage.getCurrentPage()));
+            jp -> visualCheckPage(WebPage.getCurrentPage()));
     }
     public static EyesConfig visualTestInitJdi() {
         visualTestInit();

@@ -442,6 +442,18 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     public List<Line> rows() {
         return map(getRows(), row -> new Line(row.value, header()));
     }
+    /**
+     * Get all table rows
+     * @return List
+     */
+    @JDIAction("Get all '{name}' rows")
+    public List<Line> rowsImages() {
+        return map(getRows(), row -> {
+            Line line = new Line(row.value, header());
+            line.saveCellsImages();
+            return line;
+        });
+    }
 
     /**
      * Get all table rows that match criteria in column

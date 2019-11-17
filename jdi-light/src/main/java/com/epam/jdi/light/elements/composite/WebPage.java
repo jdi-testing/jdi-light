@@ -10,16 +10,25 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.text.MessageFormat;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
 import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
+import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
@@ -28,9 +37,15 @@ import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
+import static java.lang.Math.*;
+import static java.lang.Math.round;
 import static java.lang.String.format;
+import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -296,7 +311,6 @@ public class WebPage extends DriverBase implements PageObject {
     public static void scrollToBottom() {
         jsExecute("window.scrollTo(0,document.body.scrollHeight)");
     }
-
     /**
      * Scroll screen down on specific values
      * @param value
@@ -331,6 +345,35 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction("Scroll screen to the left on '{0}'")
     public static void scrollLeft(int value) {
         scroll(-value,0);
+    }
+
+    @JDIAction(level = DEBUG)
+    public static double zoomLevel() {
+        return jsExecute("return window.devicePixelRatio;");
+    }
+    @JDIAction(level = DEBUG)
+    public static long xOffset() {
+        return jsExecute("return window.pageXOffset;");
+    }
+    @JDIAction(level = DEBUG)
+    public static long yOffset() {
+        return jsExecute("return window.pageYOffset;");
+    }
+    @JDIAction(level = DEBUG)
+    public static String windowScreenshot(int x, int y, int w, int h, String name) {
+    {
+        File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+        //show();
+        String path = mergePath(getPath(), name);
+        File imageFile = new File(path);
+        try {
+            BufferedImage fullImg = ImageIO.read(screenshot);
+            BufferedImage crop = fullImg.getSubimage(x, y, w, h);
+            ImageIO.write(crop, "png", screenshot);
+            copyFile(screenshot, imageFile);
+        } catch (Exception ex) {throw exception(safeException(ex)); }
+        return path;
+    }
     }
 
     @Override
