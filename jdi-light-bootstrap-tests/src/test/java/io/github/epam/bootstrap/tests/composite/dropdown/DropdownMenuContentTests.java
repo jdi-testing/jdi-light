@@ -1,6 +1,7 @@
 package io.github.epam.bootstrap.tests.composite.dropdown;
 
 import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import io.github.epam.TestsInit;
@@ -14,24 +15,16 @@ import static io.github.com.pages.BootstrapPage.dropdownMenuContentHeader;
 import static io.github.com.pages.BootstrapPage.dropdownMenuContentText;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.Matchers.not;
 
 public class DropdownMenuContentTests extends TestsInit {
 
-
-    private String headerText = "DROPDOWN HEADER";
-    private int numberOfItemsHeader = 2;
-    private int numberOfChildrenHeader = 3;
-
-    private int numberOfItemsDivider = 3;
-    private int numberOfChildrenDivider = 4;
-
-    private String text1 = "Some example text that's free-flowing within the dropdown menu.";
-    private String text2 = "And this is more example text.";
-    private int numberOfItemsText = 0;
-    private int numberOfChildrenText = 2;
+    private static final String HEADER_TEXT = "DROPDOWN HEADER";
+    private static final int NUMBER_OF_CHILDREN_HEADER = 3;
+    private static final int NUMBER_OF_CHILDREN_DIVIDER = 4;
+    private static final int NUMBER_OF_CHILDREN_TEXT = 2;
+    private static final String TEXT_1_OF_DROPDOWN_TEXT = "Some example text that's free-flowing within the dropdown menu.";
+    private static final String TEXT_2_OF_DROPDOWN_TEXT = "And this is more example text.";
 
     @DataProvider
     public Object[][] dropdownData() {
@@ -42,30 +35,32 @@ public class DropdownMenuContentTests extends TestsInit {
         };
     }
 
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
 
-    @Test
-    public void baseTest() {
-        baseValidation(dropdownMenuContentHeader);
-        dropdownMenuContentHeader.unhighlight();
-        baseValidation(dropdownMenuContentDivider);
-        dropdownMenuContentDivider.unhighlight();
-        baseValidation(dropdownMenuContentText);
-        dropdownMenuContentText.unhighlight();
-
-    }
-
     @Test(dataProvider = "dropdownData")
-    public void expandCollapseTest(DropdownMenu dropdown) {
+    public void baseTest(DropdownMenu dropdown) {
+        baseValidation(dropdown);
+        dropdown.unhighlight();
+
         dropdown.expand();
-        dropdown.is().expanded();
+        baseValidation(dropdown.expander());
+        dropdown.expander().unhighlight();
+        if (dropdown.equals(dropdownMenuContentText)) {
+            for(Text text : dropdownMenuContentText.text) {
+                baseValidation(text);
+                text.unhighlight();
+            }
+        } else {
+            for (UIElement item : dropdown.list()) {
+                baseValidation(item);
+                item.unhighlight();
+            }
+        }
         dropdown.collapse();
-        dropdown.is().collapsed();
     }
 
     @Test
@@ -73,45 +68,34 @@ public class DropdownMenuContentTests extends TestsInit {
         dropdownMenuContentHeader.show();
         dropdownMenuContentHeader.is().displayed();
         dropdownMenuContentHeader.expand();
-        dropdownMenuContentHeader.menu().childs().is().size(numberOfChildrenHeader);
-        dropdownMenuContentHeader.list().is()
-                .size(numberOfItemsHeader)
-                .values(TextTypes.TEXT, not(hasItem(headerText)));
+        dropdownMenuContentHeader.menu().childs().is().size(NUMBER_OF_CHILDREN_HEADER);
         dropdownMenuContentHeader.header.is().core()
                 .displayed()
                 .tag("h6")
                 .hasClass("dropdown-header")
-                .text(headerText);
+                .text(HEADER_TEXT);
     }
-
 
     @Test
     public void checkDividerTest() {
-        dropdownMenuContentHeader.show();
+        dropdownMenuContentDivider.show();
         dropdownMenuContentDivider.is().displayed();
-        dropdownMenuContentHeader.expand();
-        dropdownMenuContentDivider.menu().childs().is().size(numberOfChildrenDivider);
-        dropdownMenuContentDivider.list().is()
-                .size(numberOfItemsDivider);
-        dropdownMenuContentDivider.list().is(not(hasItem(dropdownMenuContentDivider.divider)));
+        dropdownMenuContentDivider.expand();
+        dropdownMenuContentDivider.menu().childs().is().size(NUMBER_OF_CHILDREN_DIVIDER);
         dropdownMenuContentDivider.divider.is().core()
-                .hidden()
+                .displayed()
                 .tag("div")
                 .hasClass("dropdown-divider");
     }
 
    @Test
     public void checkTextTest() {
-        dropdownMenuContentHeader.show();
+        dropdownMenuContentText.show();
         dropdownMenuContentText.is().displayed();
-        dropdownMenuContentHeader.expand();
-        dropdownMenuContentText.menu().childs().is().size(numberOfChildrenText);
-        dropdownMenuContentText.list().is()
-                .size(numberOfItemsText);
-
-        dropdownMenuContentText.text.is().values(TextTypes.TEXT, hasItems(text1));
-       dropdownMenuContentText.text.is().values(TextTypes.TEXT, hasItems(text2));
-
+        dropdownMenuContentText.expand();
+        dropdownMenuContentText.menu().childs().is().size(NUMBER_OF_CHILDREN_TEXT);
+        dropdownMenuContentText.text.is().values(TextTypes.TEXT, hasItems(TEXT_1_OF_DROPDOWN_TEXT));
+        dropdownMenuContentText.text.is().values(TextTypes.TEXT, hasItems(TEXT_2_OF_DROPDOWN_TEXT));
     }
 
 }
