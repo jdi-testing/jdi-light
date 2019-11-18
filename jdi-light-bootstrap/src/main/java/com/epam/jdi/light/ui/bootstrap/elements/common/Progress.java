@@ -11,7 +11,7 @@ public class Progress extends UIBaseElement<ProgressAssert> {
     }
 
     @JDIAction(value = "Get '{name}' progress value")
-    public String getAriaValue() {
+    public String getValue() {
         return uiElement.core().attr("aria-valuenow");
     }
 

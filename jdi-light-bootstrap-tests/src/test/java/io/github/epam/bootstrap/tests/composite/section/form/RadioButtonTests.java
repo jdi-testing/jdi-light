@@ -43,28 +43,28 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void radioButtonByIndexTests() {
-        radioButtonGroup.radioButtons.select(2);
+        radioButtonGroup.radioButtons.list().get(2).click();
         radioButtonGroup.radioButtons.list().get(2).is().selected();
-        radioButtonGroup.radioButtons.list().selected(2);
-        radioButtonGroup.radioButtons.list().selected(labelText2);
-
+        radioButtonGroup.radioButtons.list().is().selected(2);
+        radioButtonGroup.radioButtons.is().selected(2);
         radioButtonGroup.radioButtons.list().get(1).is().deselected();
-        radioButtonGroup.radioButtons.select(labelText1);
+        radioButtonGroup.radioButtons.list().get(1).select();
         radioButtonGroup.radioButtons.list().get(1).is().selected();
-        radioButtonGroup.radioButtons.list().selected(1);
-        radioButtonGroup.radioButtons.list().selected(labelText1);
-
+        radioButtonGroup.radioButtons.list().is().selected(1);
         radioButtonGroup.radioButtons.list().get(2).is().deselected();
+        radioButtonGroup.radioButtons.list().select(2);
+        radioButtonGroup.radioButtons.list().get(2).is().selected();
     }
 
     @Test
     public void radioButtonByLabelTests() {
-        radioButtonGroup.radioButtons.list().get(1).label().click();
+        radioButtonGroup.radioButtons.list().select(labelText1);
         radioButtonGroup.radioButtons.list().is().selected(labelText1);
+        radioButtonGroup.radioButtons.is().selected(labelText1);
         radioButtonGroup.radioButtons.list().get(1).is().text(is(value1));
         radioButtonGroup.radioButtons.list().get(2).is().deselected();
         radioButtonGroup.radioButtons.list().get(2).label().click();
-        radioButtonGroup.radioButtons.list().is().selected(labelText2);
+        radioButtonGroup.radioButtons.is().selected(labelText2);
         radioButtonGroup.radioButtons.list().get(2).is().text(is(value2));
         radioButtonGroup.radioButtons.list().get(1).is().deselected();
         radioButtonGroup.radioButtons.select(labelText1);

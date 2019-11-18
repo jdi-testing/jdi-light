@@ -23,9 +23,9 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.MultiplebarsProgress;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Navbar;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonToolbar;
@@ -58,6 +58,7 @@ import io.github.com.sections.card.CardWithCustomCss9Rem;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.card.CardWithSubtitlesAndLinks;
+import io.github.com.sections.dropdown.DropdownForm;
 import io.github.com.sections.dropdown.DropdownMenuContent;
 import io.github.com.sections.form.CheckboxAndRadioButtonCustomDisabled;
 import io.github.com.sections.form.CheckboxesAndRadiosWithoutLabels;
@@ -114,16 +115,20 @@ import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
+//--- navbar package
 import io.github.com.sections.navbar.NavbarColorScheme;
-import io.github.com.sections.navbar.NavbarExternalContent;
-import io.github.com.sections.navbar.NavbarForm;
-import io.github.com.sections.navbar.NavbarPlacement;
-import io.github.com.sections.navbar.NavbarSection;
-import io.github.com.sections.navbar.NavbarSupportedContent;
-import io.github.com.sections.navbar.NavbarText;
-import io.github.com.sections.navbar.NavbarWithDropdown;
-import io.github.com.sections.navbar.NavbarWithInputGroupForm;
+import io.github.com.sections.navbar.NavbarContainer;
+import io.github.com.sections.navbar.NavbarNav;
 import io.github.com.sections.navbar.ScrollSpyNav;
+import io.github.com.sections.navbar.NavbarWithDropdown;
+import io.github.com.sections.navbar.NavbarText;
+import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarWithInputGroupForm;
+import io.github.com.sections.navbar.NavbarExternalContent;
+import io.github.com.sections.navbar.NavbarSection;
+import io.github.com.sections.navbar.NavbarPlacement;
+import io.github.com.sections.navbar.NavbarSupportedContent;
+//--- navbar package
 import io.github.com.sections.navs.NavsAlignmentCenter;
 import io.github.com.sections.navs.NavsAlignmentEnd;
 import io.github.com.sections.navs.NavsBaseA;
@@ -143,7 +148,6 @@ import io.github.com.sections.pagination.PaginationOverview;
 import io.github.com.sections.pagination.PaginationSizeBig;
 import io.github.com.sections.pagination.PaginationSizeSmall;
 import io.github.com.sections.pagination.PaginationStates;
-import io.github.com.sections.progress.ProgressMultipleBars;
 import io.github.com.sections.progress.ProgressSection;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
@@ -222,6 +226,8 @@ public class BootstrapPage extends WebPage {
     public static DropdownMenu offsetDropdown;
     @UI("#referenceDropdown")
     public static DropdownMenu referenceDropdown;
+    @UI("#dropdownForm")
+    public static DropdownForm dropdownForm;
     @UI("#simple-alert")
     public static Alert simpleAlert;
     @UI("#dismissible-alert")
@@ -286,10 +292,14 @@ public class BootstrapPage extends WebPage {
     public static Progress progressBackgroundYellow;
     @UI("#progress-backgrounds-red")
     public static Progress progressBackgroundRed;
-    @UI("#navbar-containers-centred")
-    public static Navbar navbarCentredContainer;
-    @UI("#navbar-containers-expanded")
-    public static Navbar navbarExpandedContainer;
+    @UI("#progress-multiple-bars")
+    public static MultiplebarsProgress multiplebarsProgress;
+
+    @UI("//h4[.='Navbar - Containers']/../..")
+    public static NavbarContainer navbarContainers;
+    @UI("//h4[.='Navbar - Nav']/../..")
+    public static NavbarNav navbarNav;
+
     @UI("#button-show-spinner-border")
     public static Button buttonSpinnerBorder;
     @UI("#spinner-border")
@@ -560,8 +570,6 @@ public class BootstrapPage extends WebPage {
     public static NavbarColorScheme navbarBlueColorScheme;
     @UI("#navbar-light-colorscheme")
     public static NavbarColorScheme navbarLightColorScheme;
-    @UI("#progress-multiple-bars")
-    public static ProgressMultipleBars progressMultipleBars;
     @UI(".card-columns")
     public static CardColumns cardColumns;
     @UI("#list-example>a")
@@ -712,10 +720,6 @@ public class BootstrapPage extends WebPage {
     public static FormRow formRow;
 
     //region Navbars
-    @UI("#navbar-nav-with-disabled")
-    public static Navbar navbarNavWithDisabled;
-    @UI("#navbar-nav-with-dropdown")
-    public static Navbar navbarNavWithDropdown;
     @UI("#navbar-external-content")
     public static NavbarExternalContent navbarExternalContent;
     @UI("#navbar-supported-content")

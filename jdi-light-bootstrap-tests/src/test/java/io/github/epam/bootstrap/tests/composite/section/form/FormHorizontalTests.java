@@ -75,7 +75,7 @@ public class FormHorizontalTests extends TestsInit {
 
     @Test
     public void radioOneIsValidationTests() {
-        formHorizontal.radio.get(1).is()
+        formHorizontal.radioButtons.list().get(1).is()
                 .displayed()
                 .enabled()
                 .core()
@@ -88,7 +88,7 @@ public class FormHorizontalTests extends TestsInit {
 
     @Test
     public void radioTwoIsValidationTests() {
-        formHorizontal.radio.get(2).is()
+        formHorizontal.radioButtons.list().get(2).is()
                 .displayed()
                 .enabled()
                 .core()
@@ -101,7 +101,7 @@ public class FormHorizontalTests extends TestsInit {
 
     @Test
     public void radioThreeIsValidationTests() {
-        formHorizontal.radio.get(3).is()
+        formHorizontal.radioButtons.list().get(3).is()
                 .displayed()
                 .disabled()
                 .core()
@@ -114,23 +114,23 @@ public class FormHorizontalTests extends TestsInit {
 
     @Test
     public void baseInitRadioTests() {
-        formHorizontal.radio.is()
+        formHorizontal.radioButtons.is()
                 .size(3);
-        formHorizontal.radio.get(1).is()
+        formHorizontal.radioButtons.list().get(1).is()
                 .selected();
-        formHorizontal.radio.get(2).is()
+        formHorizontal.radioButtons.list().get(2).is()
                 .deselected();
-        formHorizontal.radio.get(3).is()
+        formHorizontal.radioButtons.list().get(3).is()
                 .deselected();
-        formHorizontal.radio.get(3).is()
+        formHorizontal.radioButtons.list().get(3).is()
                 .disabled();
-        formHorizontal.radio.get(1).label()
+        formHorizontal.radioButtons.list().get(1).label()
                 .is()
                 .text(is("First radio"));
-        formHorizontal.radio.get(2).label()
+        formHorizontal.radioButtons.list().get(2).label()
                 .is()
                 .text(is("Second radio"));
-        formHorizontal.radio.get(3).label()
+        formHorizontal.radioButtons.list().get(3).label()
                 .is()
                 .text(is("Third disabled radio"));
     }
@@ -138,29 +138,29 @@ public class FormHorizontalTests extends TestsInit {
 
     @Test
     public void radioButtonByIndexTests() {
-        formHorizontal.radio.select(2);
-        formHorizontal.radio.get(2).is()
+        formHorizontal.radioButtons.select(2);
+        formHorizontal.radioButtons.list().get(2).is()
                 .selected();
-        formHorizontal.radio.get(1).is()
+        formHorizontal.radioButtons.list().get(1).is()
                 .deselected();
-        formHorizontal.radio.select(1);
-        formHorizontal.radio.get(1).is()
+        formHorizontal.radioButtons.select(1);
+        formHorizontal.radioButtons.list().get(1).is()
                 .selected();
-        formHorizontal.radio.get(2).is()
+        formHorizontal.radioButtons.list().get(2).is()
                 .deselected();
     }
 
     @Test
     public void radioButtonByLabelTests() {
-        formHorizontal.radio.get(2).label().click();
-        formHorizontal.radio.get(2).is()
+        formHorizontal.radioButtons.list().get(2).label().click();
+        formHorizontal.radioButtons.list().get(2).is()
                 .selected();
-        formHorizontal.radio.get(1).is()
+        formHorizontal.radioButtons.list().get(1).is()
                 .deselected();
-        formHorizontal.radio.get(1).label().click();
-        formHorizontal.radio.get(1).is()
+        formHorizontal.radioButtons.list().get(1).label().click();
+        formHorizontal.radioButtons.list().get(1).is()
                 .selected();
-        formHorizontal.radio.get(2).is()
+        formHorizontal.radioButtons.list().get(2).is()
                 .deselected();
     }
 
@@ -217,7 +217,7 @@ public class FormHorizontalTests extends TestsInit {
         formHorizontal.check(BLANK_CONTACT.set(c -> c.email = email));
         formHorizontal.password.sendKeys(password);
         formHorizontal.check(BLANK_CONTACT.set(c -> c.password = password));
-        formHorizontal.radio.select(2);
+        formHorizontal.radioButtons.select(2);
         formHorizontal.check(BLANK_CONTACT.set(c -> c.radio = radio));
         formHorizontal.accept.setValue(accept);
         formHorizontal.check(BLANK_CONTACT.set(c -> c.accept = accept));
