@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.common;
 
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -71,6 +72,7 @@ public class FileUploadTests extends TestsInit {
         if (isFireFox()) return;
         cleanupDownloads();
         downloadJdiLogo.click();
+        waitFileDownLoaded("jdi-logo.jpg", 32225L, 5L);
         assertThatFile("jdi-logo.jpg")
                 .isDownloaded()
                 .hasSize(is(32225L));
@@ -97,4 +99,16 @@ public class FileUploadTests extends TestsInit {
     public void baseValidationTest() {
         baseValidation(avatar);
     }
+
+    private void waitFileDownLoaded(String fileName, long fileLength, long secondsToWait) {
+        int i = 0;
+        while (!(new File(mergePath(DOWNLOADS_DIR, fileName)).exists() &&
+                new File(mergePath(DOWNLOADS_DIR, fileName)).length() >= fileLength)
+                || secondsToWait > i) {
+            i = i + 100;
+            Timer.sleep(100);
+        }
+    }
+
+    ;
 }
