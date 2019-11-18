@@ -1,9 +1,6 @@
 package com.epam.jdi.light.elements.base;
 
-import com.epam.jdi.light.common.ElementArea;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.JDILocator;
-import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -32,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.LocatorType.FRAME;
+import static com.epam.jdi.light.common.SetTextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
@@ -481,16 +479,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     private Safe<Actions> actions = new Safe<>(() -> new Actions(driver()));
 
-    private ElementArea clickAreaType;
-    public ElementArea getClickType() {
-        return clickAreaType != null ? clickAreaType : CLICK_TYPE;
-    }
-    public void setClickArea(ElementArea area) { clickAreaType = area; }
-    private TextTypes textType;
-    public TextTypes getTextType() {
-        return textType != null ? textType : TEXT_TYPE;
-    }
-    public void setTextType(TextTypes type) { textType = type; }
+    public ElementArea clickAreaType = CLICK_TYPE;
+    public TextTypes textType = TEXT_TYPE;
+    public SetTextTypes setTextType = SET_TEXT_TYPE;
 
     public void offCache() {
         webElement.useCache(false);

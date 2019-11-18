@@ -23,6 +23,7 @@ import static java.lang.String.format;
  */
 public class JDILocator {
     public JDILocator() {}
+    public JDILocator(JDIBase element) { this.element = element; }
     public JDILocator copy() {
         JDILocator locator = new JDILocator();
         locator.byLocator = byLocator;
@@ -93,7 +94,7 @@ public class JDILocator {
     public String toString() {
         try {
             By locator = getLocator(args);
-            if (locator == null || !hasDomain() && !hasFrame())
+            if ((locator == null || !hasDomain() && !hasFrame()) && element != null)
                 return SMART_SEARCH_LOCATORS.size() > 0
                     ? print(select(SMART_SEARCH_LOCATORS, l -> format(l, splitHyphen(element.name))), " or ")
                     : "";
@@ -101,6 +102,6 @@ public class JDILocator {
             if (hasFrame())
                 hasFrame = "Frame: " + print(map(frames, WebDriverByUtils::shortBy));
             return hasFrame + shortBy(locator).replaceAll("%s", "{{VALUE}}");
-        } catch (Exception ex) { throw exception("Can't print locator: " + safeException(ex)); }
+        } catch (Exception ex) { return "Can't print locator"; }
     }
 }

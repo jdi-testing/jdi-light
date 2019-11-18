@@ -60,7 +60,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     public WebList() {
         elements.useCache(true);
-        setTextType(SMART_LIST);
+        textType = SMART_LIST;
         noValidation();
     }
     public WebList(By locator) { this(); setLocator(locator);}
@@ -135,7 +135,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         try {
             return (UIELEMENT_NAME != null
                 ? UIELEMENT_NAME
-                : getTextType().func).execute(element);
+                : textType.func).execute(element);
         } catch (Exception ex) {
             return "";
         }
@@ -183,7 +183,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             nameIndex = true;
             return this;
         }
-        setTextType(type);
+        textType =type;
         return setUIElementName(type.func);
     }
     @Override
@@ -523,7 +523,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     protected UIElement initElement(WebElement el, JFunc<WebElement> func) {
         try {
             UIElement element = new UIElement(base(), el, func);
-            element.locator = new JDILocator();
+            element.locator = new JDILocator(element);
             return element;
         } catch (Exception ex) { throw exception("Can't init func new element for list"); }
     }// TODO to private

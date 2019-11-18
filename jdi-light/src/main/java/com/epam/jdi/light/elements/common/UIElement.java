@@ -104,7 +104,7 @@ public class UIElement extends JDIBase
     /** Click on element */
     @JDIAction("Click on '{name}'") @Override
     public void click() {
-        click(getClickType());
+        click(clickAreaType);
     }
 
     /** Submit form*/
@@ -159,7 +159,7 @@ public class UIElement extends JDIBase
 
     @JDIAction("Get '{name}' text") @Override
     public String getText() {
-        return text(getTextType());
+        return text(textType);
     }
 
     /**
@@ -252,8 +252,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction("Input '{0}' in '{name}'")
     public void input(String value) {
-        clear();
-        setText(value);
+        setTextType.action.execute(this, value);
     }
     /**
      * Focus
@@ -668,7 +667,7 @@ public class UIElement extends JDIBase
     /** getAttribute alias */
     public String attr(String value) { return getAttribute(value); }
     /** getText alias */ @Override
-    public String text() { return text(getTextType()); }
+    public String text() { return text(textType); }
     /** getCssValue alias */
     public String css(String prop) {
         return getCssValue(prop);
@@ -677,7 +676,7 @@ public class UIElement extends JDIBase
 
     //region SetValue
     public void setValue(String value) {
-        setText(value);
+        input(value);
     }
     public String getValue() {
         return getText();
