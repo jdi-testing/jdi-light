@@ -6,9 +6,18 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
+import com.epam.jdi.tools.Timer;
+import org.openqa.selenium.interactions.Actions;
+
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, IsText, SetValue {
     // region Actions
@@ -34,4 +43,41 @@ public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, Is
     // endregion
     @Override
     public TextAssert is() { return new TextAssert().set(this); }
+
+    @JDIAction("Upload file '{0}' for '{name}'")
+    public void uploadFileRobot(String path, long mSec)  {
+
+        Actions builder = new Actions(uiElement.driver());
+        builder.moveToElement(uiElement.getWebElement()).click().build().perform();
+        pasteText(path, mSec);
+
+        if (isDisabled()) {
+            throw exception("FileInput '%s' is disabled. Can't upload file", getName());
+        }
+    }
+
+    public static void pasteText(CharSequence path, long timeToWaitMSec) {
+        try {
+            Robot robot;
+            try {
+                robot = new Robot();
+            } catch (Exception ex) {
+                logger.error("Can't instantiate Robot" + safeException(ex));
+                throw ex;
+            }
+
+            StringSelection stringSelection = new StringSelection(path.toString());
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clipboard.setContents(stringSelection, (clipboard1, contents) -> {
+            });
+            Timer.sleep(timeToWaitMSec);
+            robot.keyPress(17);
+            robot.keyPress(86);
+            robot.keyRelease(17);
+            robot.keyPress(10);
+            robot.keyRelease(10);
+        } catch (Exception ex) {
+            logger.error("Robot Input exception" + safeException(ex));
+        }
+    }
 }

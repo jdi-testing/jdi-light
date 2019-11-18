@@ -25,38 +25,38 @@ public class FileUploadTests extends TestsInit {
     @Test
     public void uploadTest() {
         clearInput();
-        inputFileSection.fileInputBs.uploadFile(mergePath(PROJECT_PATH,
+        inputFileSection.fileInput.uploadFile(mergePath(PROJECT_PATH,
                 "/src/test/resources/general.xml"));
-        inputFileSection.fileInputBs.is().text(containsString("general.xml"));
-        assertThat(inputFileSection.fileInputBs.getValue(), containsString("general.xml"));
-        inputFileSection.fileInputBs.core().is()
+        inputFileSection.fileInput.is().text(containsString("general.xml"));
+        assertThat(inputFileSection.fileInput.getValue(), containsString("general.xml"));
+        inputFileSection.fileInput.core().is()
                 .attr("value", containsString("general.xml"));
     }
 
     @Test
     public void fileInputTest() {
-        assertThat(inputFileSection.fileInputBs.getName(), equalTo("File Input Bs"));
-        assertThat(inputFileSection.fileInputBs.labelText(), equalTo("Example file input"));
+        assertThat(inputFileSection.fileInput.getName(), equalTo("File Input"));
+        assertThat(inputFileSection.fileInput.labelText(), equalTo("Example file input"));
     }
 
     @Test
     public void clearInput() {
-        inputFileSection.fileInputBs.core().jsExecute("value=''");
-        assertThat(inputFileSection.fileInputBs.getValue(), equalTo(""));
+        inputFileSection.fileInput.core().jsExecute("value=''");
+        assertThat(inputFileSection.fileInput.getValue(), equalTo(""));
     }
 
     @Test
     public void baseValidationTest() {
         baseValidation(inputFileSection.labelInputFile);
-        baseValidation(inputFileSection.fileInputBs);
+        baseValidation(inputFileSection.fileInput);
     }
 
     @Test
-    public void uploadJRobotTest() {
+    public void uploadRobotTest() {
         clearInput();
-        inputFileSection.fileInputBs.uploadFile(mergePath(PROJECT_PATH,
+        inputFileSection.fileInput.uploadFileRobot(mergePath(PROJECT_PATH,
                 "/src/test/resources/general.xml"), 1000L);
-        inputFileSection.fileInputBs.is().text(containsString("general.xml"));
-        assertThat(inputFileSection.fileInputBs.getValue(), containsString("general.xml"));
+        inputFileSection.fileInput.is().text(containsString("general.xml"));
+        assertThat(inputFileSection.fileInput.getValue(), containsString("general.xml"));
     }
 }

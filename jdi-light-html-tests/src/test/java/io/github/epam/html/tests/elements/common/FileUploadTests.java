@@ -19,7 +19,9 @@ import static io.github.com.pages.HtmlElementsPage.downloadJdiLogo;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.apache.commons.io.FileUtils.writeStringToFile;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
@@ -40,7 +42,7 @@ public class FileUploadTests extends TestsInit {
 
     @Test
     public void uploadTest() {
-        avatar.uploadFile(mergePath(PROJECT_PATH,"/src/test/resources/general.xml"));
+        avatar.uploadFile(mergePath(PROJECT_PATH, "/src/test/resources/general.xml"));
         avatar.is().text(containsString("general.xml"));
         assertTrue(avatar.getText().contains("general.xml"));
         assertTrue(avatar.getValue().contains("general.xml"));
@@ -48,11 +50,16 @@ public class FileUploadTests extends TestsInit {
 
     @Test
     public void disabledUploadTest() {
+        String value = disabledFileInput.getValue();
+        assertThat(value, equalTo(""));
         try {
             disabledFileInput.uploadFile(mergePath(PROJECT_PATH, "/src/test/resources/general.xml"));
-        } catch (Exception ignore) {}
-        disabledFileInput.is().text(is("C:\\fakepath\\general.xml"));
+        } catch (Exception ignore) {
+            value = disabledFileInput.getValue();
+        }
+        assertThat(value, equalTo(""));
     }
+
     @Test
     public void labelTest() {
         assertEquals(avatar.labelText(), "Profile picture:");
@@ -65,16 +72,18 @@ public class FileUploadTests extends TestsInit {
         cleanupDownloads();
         downloadJdiLogo.click();
         assertThatFile("jdi-logo.jpg")
-            .isDownloaded()
-            .hasSize(is(32225L));
+                .isDownloaded()
+                .hasSize(is(32225L));
         assertThatFile("jdi-logo.jpg").hasSize(greaterThan(100L));
     }
+
     private void createTextFile(String fileName) throws IOException {
         File txtFile = new File(mergePath(DOWNLOADS_DIR, fileName));
         writeStringToFile(txtFile,
                 "Earth provides enough to satisfy every man's needs, but not every man's greed",
                 "UTF-8");
     }
+
     @Test
     public void assertFileTest() throws IOException {
         cleanupDownloads();
@@ -83,6 +92,7 @@ public class FileUploadTests extends TestsInit {
         // Validate file in DOWNLOADS_DFIR folder
         assertThatFile(fileName).text(containsString("enough to satisfy"));
     }
+
     @Test
     public void baseValidationTest() {
         baseValidation(avatar);
