@@ -16,9 +16,9 @@ import static org.hamcrest.Matchers.is;
 
 public class RadioButtonTests extends TestsInit {
 
-    private String label1 = "Default radio";
-    private String label2 = "Second default radio";
-    private String label3 = "Disabled radio";
+    private String labelText1 = "Default radio";
+    private String labelText2 = "Second default radio";
+    private String labelText3 = "Disabled radio";
     private String value1 = "option1";
     private String value2 = "option2";
 
@@ -30,85 +30,57 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void baseInitTest() {
-        radioButtonGroup.radioButton.is()
-                .size(3);
-        radioButtonGroup.radio1.is()
-                .selected();
-        radioButtonGroup.radio2.is()
-                .deselected();
-        radioButtonGroup.radio3.is()
-                .deselected();
-        radioButtonGroup.radio3.is()
-                .disabled();
-        radioButtonGroup.radio1Label.is()
-                .text(is(label1));
-        radioButtonGroup.radio2Label.is()
-                .text(is(label2));
-        radioButtonGroup.radio3Label.is()
-                .text(is(label3));
+        radioButtonGroup.radioButtons.is().size(3);
+        radioButtonGroup.radioButtons.list().get(1).is().selected();
+        radioButtonGroup.radioButtons.list().get(2).is().deselected();
+        radioButtonGroup.radioButtons.list().get(3).is().deselected();
+        radioButtonGroup.radioButtons.list().get(3).is().disabled();
+        radioButtonGroup.radioButtons.list().get(1).label().is().text(is(labelText1));
+        radioButtonGroup.radioButtons.list().get(2).label().is().text(is(labelText2));
+        radioButtonGroup.radioButtons.list().get(3).label().is().text(is(labelText3));
     }
 
-    @Test
-    public void baseInitByIndexTest() {
-        radioButtonGroup.radioButton.get(1).is()
-                .selected();
-        radioButtonGroup.radioButton.get(2).is()
-                .deselected();
-        radioButtonGroup.radioButton.get(3).is()
-                .deselected();
-        radioButtonGroup.radioButton.get(3).is()
-                .disabled();
-    }
 
     @Test
     public void radioButtonByIndexTests() {
-        radioButtonGroup.radioButton.select(2);
-        radioButtonGroup.radioButton.get(2).is()
-                .selected();
-        radioButtonGroup.radioButton.get(1).is()
-                .deselected();
-        radioButtonGroup.radioButton.select(1);
-        radioButtonGroup.radioButton.get(1).is()
-                .selected();
-        radioButtonGroup.radioButton.get(2).is()
-                .deselected();
+        radioButtonGroup.radioButtons.list().get(2).click();
+        radioButtonGroup.radioButtons.list().get(2).is().selected();
+        radioButtonGroup.radioButtons.list().is().selected(2);
+        radioButtonGroup.radioButtons.is().selected(2);
+        radioButtonGroup.radioButtons.list().get(1).is().deselected();
+        radioButtonGroup.radioButtons.list().get(1).select();
+        radioButtonGroup.radioButtons.list().get(1).is().selected();
+        radioButtonGroup.radioButtons.list().is().selected(1);
+        radioButtonGroup.radioButtons.list().get(2).is().deselected();
+        radioButtonGroup.radioButtons.list().select(2);
+        radioButtonGroup.radioButtons.list().get(2).is().selected();
     }
 
     @Test
     public void radioButtonByLabelTests() {
-        radioButtonGroup.radio2Label.click();
-        radioButtonGroup.radioButton.get(2).is()
-                .selected();
-        radioButtonGroup.radioButton.is()
-                .text(is(value2));
-        radioButtonGroup.radioButton.get(1).is()
-                .deselected();
-        radioButtonGroup.radio1Label.click();
-        radioButtonGroup.radioButton.get(1).is()
-                .selected();
-        radioButtonGroup.radioButton.is()
-                .text(is(value1));
-        radioButtonGroup.radioButton.get(2).is()
-                .deselected();
+        radioButtonGroup.radioButtons.list().select(labelText1);
+        radioButtonGroup.radioButtons.list().is().selected(labelText1);
+        radioButtonGroup.radioButtons.is().selected(labelText1);
+        radioButtonGroup.radioButtons.list().get(1).is().text(is(value1));
+        radioButtonGroup.radioButtons.list().get(2).is().deselected();
+        radioButtonGroup.radioButtons.list().get(2).label().click();
+        radioButtonGroup.radioButtons.is().selected(labelText2);
+        radioButtonGroup.radioButtons.list().get(2).is().text(is(value2));
+        radioButtonGroup.radioButtons.list().get(1).is().deselected();
+        radioButtonGroup.radioButtons.select(labelText1);
+        radioButtonGroup.radioButtons.is().selected(labelText1);
+        radioButtonGroup.radioButtons.list().get(2).is().deselected();
     }
 
     @Test
-    public void radioButtonTests() {
-        radioButtonGroup.radio2.select();
-        radioButtonGroup.radio2.is()
-                .selected();
-        radioButtonGroup.radio1.is()
-                .deselected();
-        radioButtonGroup.radio1.select();
-        radioButtonGroup.radio1.is()
-                .selected();
-        radioButtonGroup.radio2.is()
-                .deselected();
+    public void radioButtonLabelsTests() {
+        radioButtonGroup.radioButtons.list().get(1).label().is().text(labelText1);
+        radioButtonGroup.radioButtons.list().get(2).label().is().text(labelText2);
     }
 
     @Test
     public void radioOneIsValidationTests() {
-        radioButtonGroup.radio1.is()
+        radioButtonGroup.radioButtons.list().get(1).is()
                 .displayed()
                 .enabled()
                 .core()
@@ -120,7 +92,7 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void radioTwoIsValidationTests() {
-        radioButtonGroup.radio2.is()
+        radioButtonGroup.radioButtons.list().get(2).is()
                 .displayed()
                 .enabled()
                 .core()
@@ -132,7 +104,7 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void radioThreeIsValidationTests() {
-        radioButtonGroup.radio3.is()
+        radioButtonGroup.radioButtons.list().get(3).is()
                 .displayed()
                 .disabled()
                 .core()

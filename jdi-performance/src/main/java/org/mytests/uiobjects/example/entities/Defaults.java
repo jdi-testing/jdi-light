@@ -13,7 +13,7 @@ public class Defaults {
         c.passportSerial = "123456";
         c.description = "JDI - awesome UI automation tool";
         c.acceptConditions = "true";
-        c.gender = "Female";
+        c.gender = "Male";
         c.religion = "Other";
         c.weather = "Sun, Rain";
     });
