@@ -7,7 +7,6 @@ import io.github.com.NonStaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-
 public class NonStaticTestsInit {
 
     protected NonStaticSite nonStaticSite;
@@ -21,7 +20,6 @@ public class NonStaticTestsInit {
         nonStaticSite.getHomePage().open();
         WebSettings.logger.toLog("Non Static site page opened");
     }
-
 
     @AfterSuite(alwaysRun = true)
     public void cleanUp() {

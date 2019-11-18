@@ -29,7 +29,6 @@ public class NonStaticSite {
     @Css("form")
     private LoginForm loginForm;
 
-
     public static String getUrl() {
 
         return getDriver().getCurrentUrl();
