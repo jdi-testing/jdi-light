@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.bootstrap.elements.common;
+package com.epam.jdi.light.ui.bootstrap.elements.common.fileinput;
 
 import com.epam.jdi.tools.Timer;
 import java.awt.Robot;
@@ -13,7 +13,7 @@ public final class JRobot {
     private JRobot() {
     }
 
-    public static void pasteText(CharSequence text) {
+    public static void pasteText(CharSequence text, long timeToWaitMSec) {
         try {
             Robot robot;
             try {
@@ -27,7 +27,7 @@ public final class JRobot {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(stringSelection, (clipboard1, contents) -> {
             });
-            Timer.sleep(1000L);
+            Timer.sleep(timeToWaitMSec);
             robot.keyPress(17);
             robot.keyPress(86);
             robot.keyRelease(17);
