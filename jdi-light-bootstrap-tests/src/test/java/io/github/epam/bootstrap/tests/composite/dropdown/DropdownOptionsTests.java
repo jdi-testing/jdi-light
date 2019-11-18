@@ -89,11 +89,11 @@ public class DropdownOptionsTests extends TestsInit {
     @Test
     public void optionsCssTest() {
         offsetDropdown.expand();
-        offsetDropdown.childs().get(1).assertThat().core().attr(DATA_OFFSET, is(DATA_OFFSET_VALUE));
+        offsetDropdown.children().get(1).assertThat().core().attr(DATA_OFFSET, is(DATA_OFFSET_VALUE));
         offsetDropdown.collapse();
 
         referenceDropdown.expand();
-        referenceDropdown.childs().get(2).assertThat().core().attr(DATA_REFERENCE, is(DATA_REFERENCE_VALUE));
+        referenceDropdown.children().get(2).assertThat().core().attr(DATA_REFERENCE, is(DATA_REFERENCE_VALUE));
         referenceDropdown.collapse();
     }
 
