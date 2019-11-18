@@ -45,7 +45,7 @@ public interface ICoreElement extends IBaseElement {
     }
     default WebList finds(By by) { return core().finds(by); }
     default UIElement firstChild() { return core().firstChild(); }
-    default WebList childs() { return core().childs(); }
+    default WebList children() { return core().children(); }
     default String getTagName() {
         return core().getTagName();
     }
