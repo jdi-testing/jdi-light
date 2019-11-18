@@ -22,9 +22,10 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.MultiplebarsProgress;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
-import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonToolbar;
 import io.github.com.sections.Jumbotron;
@@ -143,15 +144,10 @@ import io.github.com.sections.pagination.PaginationOverview;
 import io.github.com.sections.pagination.PaginationSizeBig;
 import io.github.com.sections.pagination.PaginationSizeSmall;
 import io.github.com.sections.pagination.PaginationStates;
-import io.github.com.sections.progress.ProgressMultipleBars;
 import io.github.com.sections.progress.ProgressSection;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
-
-//--- navbar package
-//--- navbar package
-
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -285,6 +281,8 @@ public class BootstrapPage extends WebPage {
     public static Progress progressBackgroundYellow;
     @UI("#progress-backgrounds-red")
     public static Progress progressBackgroundRed;
+    @UI("#progress-multiple-bars")
+    public static MultiplebarsProgress multiplebarsProgress;
 
     @UI("//h4[.='Navbar - Containers']/../..")
     public static NavbarContainer navbarContainers;
@@ -580,8 +578,6 @@ public class BootstrapPage extends WebPage {
     public static NavbarColorScheme navbarBlueColorScheme;
     @UI("#navbar-light-colorscheme")
     public static NavbarColorScheme navbarLightColorScheme;
-    @UI("#progress-multiple-bars")
-    public static ProgressMultipleBars progressMultipleBars;
     @UI("#list-example>a")
     public static ListGroup listGroupForScrollSpy;
     @UI("#list-example~div")
