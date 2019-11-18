@@ -51,7 +51,7 @@ public class SpinnerAlignmentTests extends TestsInit {
 
     @Test(dataProvider = "spinnerData")
     public void isValidationTest(Spinner spinner) {
-        spinner.childs().get(1).highlight();
+        spinner.children().get(1).highlight();
         spinner
                 .is()
                 .enabled()
@@ -61,7 +61,7 @@ public class SpinnerAlignmentTests extends TestsInit {
 
     @Test(dataProvider = "spinnerData")
     public void spinnerBorderStyleTest(Spinner spinner) {
-        spinner.childs().get(1).is().core().hasClass(spinnerBorderStyle);
+        spinner.children().get(1).is().core().hasClass(spinnerBorderStyle);
     }
 
     @Test(dataProvider = "spinnerStyleData")
