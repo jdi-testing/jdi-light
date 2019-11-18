@@ -59,7 +59,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
         hasDataClass();
         if (!datas.get().has(rowNum+"")) {
             Line line = row(rowNum);
-            D data = getLineData(line);
+            D data = line.asData(dataClass);
             datas.get().update(rowNum + "", data);
         }
         return datas.get().get(rowNum+"");
@@ -132,7 +132,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Get first '{name}' table row that match criteria")
     public D dataRow(TableMatcher... matchers) {
         hasDataClass();
-        return getLineData(row(matchers));
+        return row(matchers).asData(dataClass);
     }
 
     /**
@@ -215,7 +215,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Get first '{name}' table row that match criteria")
     public List<L> lines(JFunc1<D, Boolean> matcher) {
         hasLineClass();
-        return ifSelect(rows(), r -> matcher.execute(getLineData(r)),
+        return ifSelect(rows(), r -> matcher.execute(r.asData(dataClass)),
                 r -> r.asLine(lineClass));
     }
 
@@ -228,7 +228,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     public List<D> dataRows(TableMatcher... matchers) {
         hasDataClass();
         if (matchers.length == 0) return allData();
-        return map(rows(matchers), this::getLineData);
+        return map(rows(matchers), r -> r.asData(dataClass));
     }
 
     /**
@@ -289,7 +289,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Filter '{name}' table rows that match criteria in column '{1}'")
     public List<D> filterData(Matcher<String> matcher, Column column) {
         hasDataClass();
-        return map(filterRows(matcher, column), this::getLineData);
+        return map(filterRows(matcher, column), r -> r.asData(dataClass));
     }
 
     /**
@@ -312,7 +312,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Filter '{name}' table rows that match criteria")
     public List<D> filterDatas(Pair<Matcher<String>, Column>... matchers) {
         hasDataClass();
-        return map(filterRows(matchers), this::getLineData);
+        return map(filterRows(matchers), r -> r.asData(dataClass));
     }
 
     /**
@@ -335,7 +335,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Get '{name}' table row that match criteria in column '{1}'")
     public D dataRow(Matcher<String> matcher, Column column) {
         hasDataClass();
-        return getLineData(row(matcher, column));
+        return row(matcher, column).asData(dataClass);
     }
 
     /**
@@ -358,7 +358,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Get '{name}' table row that match criteria")
     public D dataRow(Pair<Matcher<String>, Column>... matchers) {
         hasDataClass();
-        return getLineData(row(matchers));
+        return row(matchers).asData(dataClass);
     }
 
     /**
@@ -440,27 +440,8 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
         }
     }
 
-    private D getLineData(Line row) {
-        return lineClass == null
-            ? row.asData(dataClass)
-            : row.asData(dataClass, getLineMap(row));
-    }
     private MapArray<String, String> getLineMap(Line row) {
-        L line = row.asLine(lineClass);
-        List<Field> fields = getFieldsExact(line.getClass(), f -> isInterface(f, HasValue.class));
-        MapArray<String, String> result = new MapArray<>();
-        for (Field field : fields) {
-            String name = "", value = "";
-            try {
-                name = field.getName();
-                value = ((HasValue) field.get(line)).getValue();
-                result.add(name, value);
-            } catch (Exception ex) {
-                throw exception("Can't get '%s' Line Map. Failed to execute getValue() method in class '%s'(name=%s;value=%s).%sException: %s",
-                        getName(), field.getType().getSimpleName(), name, value, LINE_BREAK, safeException(ex));
-            }
-        }
-        return result;
+        return new MapArray<>(header(), row);
     }
 
     @Override

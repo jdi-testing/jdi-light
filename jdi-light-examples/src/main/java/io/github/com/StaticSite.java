@@ -42,5 +42,12 @@ public class StaticSite {
 	@Css("footer") public static Footer footer;
 
 	@Frame("iframe") public static HomePageFrame iframe;
+	@Frame("#first_frame") @UI("img")
+	public static UIElement wolverinFrame;
+	@Frame({"#second_frame", "#frame_in_frame"}) @UI("img")
+	public static UIElement spidermanElement;
+	@Frame({"#second_frame", "#frame_in_frame"})
+	public static FrameSpiderman frameSpiderman;
+
 	public static GithubPage githubPage;
 }

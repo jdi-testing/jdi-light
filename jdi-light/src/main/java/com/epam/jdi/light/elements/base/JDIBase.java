@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.HasCache;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
@@ -20,6 +21,7 @@ import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -147,17 +149,17 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         this.locator.add(locator, this);
         return this;
     }
-    public JDIBase setFrame(By locator) {
-        if (name.isEmpty()) name = shortBy(locator);
-        this.locator.add(locator, FRAME, this);
+    public JDIBase setFrames(List<By> frames) {
+        if (name.isEmpty() && frames.size() > 0)
+            name = shortBy(frames.get(0));
+        this.locator.add(frames, this);
         return this;
     }
     public By getLocator(Object... args) {
         initContext();
-        if (locator.isFrame()) return null;
         return locator.getLocator(args);
     }
-    public By getFrame() { return locator.getFrame(); }
+    public List<By> getFrames() { return locator.getFrames(); }
 
     protected int timeout = -1;
     public IBaseElement waitSec(int sec) {
@@ -376,9 +378,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             return bElement.webElement.get();
         if (bElement.locator.isEmpty() && bElement.locator.isRoot())
             return getDefaultContext();
-        By frame = bElement.getFrame();
-        if (frame != null)
-            return getFrameContext(frame);
+        List<By> frames = bElement.getFrames();
+        if (frames != null)
+            return getFrameContext(frames);
         Object parent = bElement.parent;
         By locator = bElement.getLocator();
         SearchContext searchContext = getContext(parent, bElement.locator);
@@ -394,12 +396,18 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             || !isInterface(parent.getClass(), JDIElement.class);
     }
     private SearchContext getContext(Object parent, JDILocator locator) {
-        return locator.isRoot || isRoot(parent)
-            ? getDefaultContext()
-            : getSearchContext(parent);
+        List<By> frames = getFrames();
+        return frames != null
+            ? getFrameContext(frames)
+            : locator.isRoot || isRoot(parent)
+                ? getDefaultContext()
+                : getSearchContext(parent);
     }
-    private SearchContext getFrameContext(By frame) {
-        return driver().switchTo().frame(uiSearch(driver(),frame).get(0));
+    private SearchContext getFrameContext(List<By> frames) {
+        WebDriver driver = driver();
+        for (By frame : frames)
+            driver = driver.switchTo().frame(uiSearch(driver(),frame).get(0));
+        return driver;
     }
     private SearchContext getDefaultContext() {
         return driver().switchTo().defaultContent();

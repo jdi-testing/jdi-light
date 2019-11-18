@@ -1,15 +1,17 @@
 package com.epam.jdi.light.common;
 
+import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.common.LocatorType.DEFAULT;
-import static com.epam.jdi.light.common.LocatorType.FRAME;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
 import static com.epam.jdi.light.settings.WebSettings.hasDomain;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.select;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.splitHyphen;
@@ -23,20 +25,21 @@ public class JDILocator {
     public JDILocator() {}
     public JDILocator copy() {
         JDILocator locator = new JDILocator();
-        locator.locatorType = locatorType;
         locator.byLocator = byLocator;
         locator.isRoot = isRoot;
         locator.element = element;
+        locator.frames = frames;
         return locator;
     }
 
-    private LocatorType locatorType = DEFAULT;
     private By byLocator;
+    private List<By> frames;
     public boolean isRoot = false;
     private JDIBase element;
     private Object[] args = new Object[]{};
 
     public By getLocator() { return byLocator; }
+    public List<By> getFrames() { return frames; }
     public By getLocator(Object... args) {
         this.args = args;
         if (args.length == 0) return byLocator;
@@ -45,26 +48,24 @@ public class JDILocator {
                 : fillByMsgTemplate(byLocator, args);
     }
     public boolean isEmpty() {
-        return byLocator == null || locatorType == FRAME;
+        return byLocator == null;
     }
-    public boolean isFrame() {
-        return locatorType == FRAME;
+    public boolean hasFrame() {
+        return frames != null && frames.size() > 0;
     }
-    public By getFrame() { return locatorType == FRAME ? byLocator : null; }
-    public By getFrame(Object... args) { return locatorType == FRAME ? getLocator(args) : null; }
 
     public boolean isRoot() {
         return isRoot;
     }
 
     public void add(By locator, JDIBase element) {
-        add(locator, DEFAULT, element);
-    }
-    public void add(By locator, LocatorType type, JDIBase element) {
-        locatorType = type;
         byLocator = setRootLocator(locator)
                 ? trimRoot(locator)
                 : locator;
+        this.element = element;
+    }
+    public void add(List<By> frames, JDIBase element) {
+        this.frames = frames;
         this.element = element;
     }
     public boolean isTemplate() {
@@ -92,17 +93,14 @@ public class JDILocator {
     public String toString() {
         try {
             By locator = getLocator(args);
-            if (locator == null || !hasDomain() && locatorType == DEFAULT)
-                return "";
-            String isFrame = "";
-            if (locatorType == FRAME) {
-                isFrame = "Frame: ";
-                locator = getFrame();
-            }
-            String shortLocator = locator != null
-                    ? shortBy(locator)
-                    : print(select(SMART_SEARCH_LOCATORS, l -> format(l, splitHyphen(element.name))), " or ");
-            return isFrame + shortLocator.replaceAll("%s", "{{VALUE}}");
+            if (locator == null || !hasDomain() && !hasFrame())
+                return SMART_SEARCH_LOCATORS.size() > 0
+                    ? print(select(SMART_SEARCH_LOCATORS, l -> format(l, splitHyphen(element.name))), " or ")
+                    : "";
+            String hasFrame = "";
+            if (hasFrame())
+                hasFrame = "Frame: " + print(map(frames, WebDriverByUtils::shortBy));
+            return hasFrame + shortBy(locator).replaceAll("%s", "{{VALUE}}");
         } catch (Exception ex) { throw exception("Can't print locator: " + safeException(ex)); }
     }
 }

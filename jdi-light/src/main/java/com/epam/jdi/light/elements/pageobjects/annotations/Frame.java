@@ -12,22 +12,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface Frame {
-    // Selenium
-    String css() default "";
-    String tagName() default "";
-    String linkText() default "";
-    String partialLinkText() default "";
-    String xpath() default "";
-
-    // Text
-    String text() default "";
-
-    //Attributes
-    String id() default "";
-    String name() default "";
-    String className() default "";
-
-    // Group
-    String group() default "";
-    String value() default "";
+    String[] value();
 }

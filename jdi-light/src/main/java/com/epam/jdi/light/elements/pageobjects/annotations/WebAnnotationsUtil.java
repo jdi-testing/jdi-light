@@ -7,8 +7,11 @@ import org.openqa.selenium.support.ui.Quotes;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.settings.WebSettings.getDomain;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -49,35 +52,12 @@ public class WebAnnotationsUtil {
         return getDomain().replaceAll("/*$", "") + "/" + uri.replaceAll("^/*", "");
     }
 
-    public static By getFrame(Frame frame) {
-        if (frame == null) return null;
-
-        if (!"".equals(frame.value()))
-            return By.id(frame.value());
-
-        if (!"".equals(frame.xpath()))
-            return By.xpath(frame.xpath());
-        if (!"".equals(frame.css()))
-            return By.cssSelector(frame.css());
-        if (!"".equals(frame.linkText()))
-            return By.linkText(frame.linkText());
-        if (!"".equals(frame.partialLinkText()))
-            return By.partialLinkText(frame.partialLinkText());
-        if (!"".equals(frame.tagName()))
-            return By.tagName(frame.tagName());
-
-        if (!"".equals(frame.text()))
-            return By.xpath(".//*/text()[normalize-space(.) = " +
-                    Quotes.escape(frame.text()) + "]/parent::*");
-
-        if (!"".equals(frame.id()))
-            return By.id(frame.id());
-        if (!"".equals(frame.className()))
-            return By.className(frame.className());
-        if (!"".equals(frame.name()))
-            return By.name(frame.name());
-
-        return null;
+    public static List<By> getFrames(Frame frames) {
+        if (frames == null) return null;
+        List<By> result = new ArrayList<>();
+        for (String frame : frames.value())
+            result.add(defineLocator(frame));
+        return result;
     }
 
     public static By findByToBy(org.openqa.selenium.support.FindBy locator) {
