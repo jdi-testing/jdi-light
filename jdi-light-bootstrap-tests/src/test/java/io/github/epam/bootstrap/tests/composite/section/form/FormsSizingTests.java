@@ -9,6 +9,7 @@ import static io.github.com.pages.BootstrapPage.formsSizing;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
+import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 
 /**
@@ -86,17 +87,9 @@ public class FormsSizingTests extends TestsInit {
         formsSizing.smallSelect.is()
                 .displayed()
                 .selected("Small select");
-        formsSizing.largeTextField
-                .placeholder()
-                .equalsIgnoreCase(placeholderLarge);
-        formsSizing.defaultTextField.is()
-                .enabled()
-                .text(is(placeholderDefault));
-//                .placeholder(placeholderDefault);
-        formsSizing.smallTextField.is()
-                .enabled()
-                .text(is(placeholderSmall));
-//                .placeholder(placeholderSmall);
+        assertTrue(formsSizing.largeTextField.placeholder().equalsIgnoreCase(placeholderLarge));
+        assertTrue(formsSizing.defaultTextField.placeholder().equalsIgnoreCase(placeholderDefault));
+        assertTrue(formsSizing.smallTextField.placeholder().equalsIgnoreCase(placeholderSmall));
     }
 
     @Test
