@@ -103,9 +103,9 @@ public class CardImageCapsTests extends TestsInit {
 
     @Test
     public void imagePositionTest() {
-        assertEquals(cardImageOnTop.childs().get(1).getTagName(), "img");
+        assertEquals(cardImageOnTop.children().get(1).getTagName(), "img");
 
-        WebList children = cardImageOnBottom.childs();
+        WebList children = cardImageOnBottom.children();
         assertEquals(children.get(children.size()).getTagName(), "img");
     }
 }

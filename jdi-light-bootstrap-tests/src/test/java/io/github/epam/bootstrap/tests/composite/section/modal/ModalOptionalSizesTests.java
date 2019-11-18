@@ -67,7 +67,7 @@ public class ModalOptionalSizesTests extends TestsInit {
 
         modal.is().displayed();
 
-        modal.childs().get(1).core().is().hasClass(modalCss);
+        modal.children().get(1).core().is().hasClass(modalCss);
 
         modal.close();
     }
@@ -81,7 +81,7 @@ public class ModalOptionalSizesTests extends TestsInit {
 
         modal.is().displayed();
 
-        assertThat(modal.childs().get(2).core().getRect().width, equalTo(modalWidth));
+        assertThat(modal.children().get(2).core().getRect().width, equalTo(modalWidth));
 
         modal.close();
     }

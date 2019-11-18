@@ -16,13 +16,13 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
     }
 
     public CardAssert imageOnTop() {
-        String elementTag = element.childs().get(1).getTagName();
+        String elementTag = element.children().get(1).getTagName();
         assertTag(elementTag);
         return this;
     }
 
     public CardAssert imageBelow() {
-        WebList children = element.childs();
+        WebList children = element.children();
         String elementTag = children.get(children.size()).getTagName();
         assertTag(elementTag);
         return this;

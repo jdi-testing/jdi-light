@@ -38,10 +38,10 @@ public class ExternalContentTests extends TestsInit {
     @Test
     public void getTextTest() {
         navbarExternalContent.toggler.expand();
-        navbarExternalContent.toggler.value().childs().get(1).is()
+        navbarExternalContent.toggler.value().children().get(1).is()
                 .displayed()
                 .text(text);
-        navbarExternalContent.toggler.value().childs().get(2).is()
+        navbarExternalContent.toggler.value().children().get(2).is()
                 .displayed()
                 .text(mutedText);
         navbarExternalContent.toggler.collapse();
