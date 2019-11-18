@@ -109,6 +109,4 @@ public class FileUploadTests extends TestsInit {
             Timer.sleep(100);
         }
     }
-
-    ;
 }
