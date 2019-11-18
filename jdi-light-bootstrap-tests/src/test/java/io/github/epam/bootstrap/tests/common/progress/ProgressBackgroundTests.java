@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.common;
+package io.github.epam.bootstrap.tests.common.progress;
 
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;

@@ -17,14 +17,16 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Range;
 import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.MultiplebarsProgress;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
-import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonToolbar;
 import io.github.com.sections.Jumbotron;
@@ -97,18 +99,20 @@ import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
+//--- navbar package
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarContainer;
-import io.github.com.sections.navbar.NavbarExternalContent;
-import io.github.com.sections.navbar.NavbarForm;
 import io.github.com.sections.navbar.NavbarNav;
-import io.github.com.sections.navbar.NavbarPlacement;
-import io.github.com.sections.navbar.NavbarSection;
-import io.github.com.sections.navbar.NavbarSupportedContent;
-import io.github.com.sections.navbar.NavbarText;
-import io.github.com.sections.navbar.NavbarWithDropdown;
-import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.navbar.ScrollSpyNav;
+import io.github.com.sections.navbar.NavbarWithDropdown;
+import io.github.com.sections.navbar.NavbarText;
+import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarWithInputGroupForm;
+import io.github.com.sections.navbar.NavbarExternalContent;
+import io.github.com.sections.navbar.NavbarSection;
+import io.github.com.sections.navbar.NavbarPlacement;
+import io.github.com.sections.navbar.NavbarSupportedContent;
+//--- navbar package
 import io.github.com.sections.navs.NavsAlignmentCenter;
 import io.github.com.sections.navs.NavsAlignmentEnd;
 import io.github.com.sections.navs.NavsBaseA;
@@ -128,14 +132,10 @@ import io.github.com.sections.pagination.PaginationOverview;
 import io.github.com.sections.pagination.PaginationSizeBig;
 import io.github.com.sections.pagination.PaginationSizeSmall;
 import io.github.com.sections.pagination.PaginationStates;
-import io.github.com.sections.progress.ProgressMultipleBars;
 import io.github.com.sections.progress.ProgressSection;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
-
-//--- navbar package
-//--- navbar package
 
 
 public class BootstrapPage extends WebPage {
@@ -270,6 +270,8 @@ public class BootstrapPage extends WebPage {
     public static Progress progressBackgroundYellow;
     @UI("#progress-backgrounds-red")
     public static Progress progressBackgroundRed;
+    @UI("#progress-multiple-bars")
+    public static MultiplebarsProgress multiplebarsProgress;
 
     @UI("//h4[.='Navbar - Containers']/../..")
     public static NavbarContainer navbarContainers;
@@ -280,6 +282,8 @@ public class BootstrapPage extends WebPage {
     public static Button buttonSpinnerBorder;
     @UI("#spinner-border")
     public static Spinner spinnerBorder;
+    @UI("#forms-readonly-input")
+    public static TextField readonlyInput;
     @UI("#readonlyPlainText1")
     public static ReadonlyPlainText readonlyPlainText1;
     @UI("#readonlyPlainText2")
@@ -544,8 +548,6 @@ public class BootstrapPage extends WebPage {
     public static NavbarColorScheme navbarBlueColorScheme;
     @UI("#navbar-light-colorscheme")
     public static NavbarColorScheme navbarLightColorScheme;
-    @UI("#progress-multiple-bars")
-    public static ProgressMultipleBars progressMultipleBars;
     @UI(".card-columns")
     public static CardColumns cardColumns;
     @UI("#list-example>a")
