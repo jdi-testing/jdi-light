@@ -28,12 +28,18 @@ public class CardColumnsTests extends TestsInit {
 
     @Test
     public void checkElementsPositionTest() {
-        assertTrue(cardColumnsSection.topLeftCard.core().getLocation().x < cardColumnsSection.topRightCard.core().getLocation().x);
-        assertTrue(cardColumnsSection.topLeftCard.core().getLocation().y < cardColumnsSection.bottomLeftCard.core().getLocation().y);
-        assertTrue(cardColumnsSection.topRightCard.core().getLocation().y < cardColumnsSection.middleRightCard.core().getLocation().y);
-        assertTrue(cardColumnsSection.middleRightCard.core().getLocation().y < cardColumnsSection.bottomRightCard.core().getLocation().y);
-        assertTrue(cardColumnsSection.bottomLeftCard.core().getLocation().x < cardColumnsSection.bottomRightCard.core().getLocation().x);
-        assertTrue(cardColumnsSection.bottomLeftCard.core().getLocation().x < cardColumnsSection.middleRightCard.core().getLocation().x);
+        assertTrue(cardColumnsSection.topLeftCard.core().getLocation().x <
+                cardColumnsSection.topRightCard.core().getLocation().x);
+        assertTrue(cardColumnsSection.topLeftCard.core().getLocation().y <
+                cardColumnsSection.bottomLeftCard.core().getLocation().y);
+        assertTrue(cardColumnsSection.topRightCard.core().getLocation().y <
+                cardColumnsSection.middleRightCard.core().getLocation().y);
+        assertTrue(cardColumnsSection.middleRightCard.core().getLocation().y <
+                cardColumnsSection.bottomRightCard.core().getLocation().y);
+        assertTrue(cardColumnsSection.bottomLeftCard.core().getLocation().x <
+                cardColumnsSection.bottomRightCard.core().getLocation().x);
+        assertTrue(cardColumnsSection.bottomLeftCard.core().getLocation().x <
+                cardColumnsSection.middleRightCard.core().getLocation().x);
     }
 
     @Test
