@@ -43,7 +43,6 @@ import static java.lang.String.format;
  */
 
 public class Form<T> extends Section {
-    Field setField = null;
     private Object pageObject = this;
     public static JAction4<Field, Object, Object, String> FILL_ACTION = (field, element, parent, setValue)
         -> ((SetValue) element).setValue(setValue);
@@ -85,6 +84,7 @@ public class Form<T> extends Section {
             }
             return;
         }
+        Field setField = null;
         for (Pair<String, String> pair : map)
             try {
                 setField = first(allFields, f -> namesEqual(pair.key, getElementName(f)));

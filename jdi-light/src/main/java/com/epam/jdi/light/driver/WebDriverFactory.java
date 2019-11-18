@@ -53,7 +53,6 @@ public class WebDriverFactory {
     public static boolean SWITCH_THREAD = false;
     public static WebDriver INIT_DRIVER;
 
-
     private WebDriverFactory() {
     }
 

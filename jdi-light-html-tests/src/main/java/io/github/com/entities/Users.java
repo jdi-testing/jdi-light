@@ -8,6 +8,7 @@ public class Users {
 
     public static Contacts LOWER_CASE_NAME_CONTACT =
         defaultContact().set(c-> c.name = c.name.toLowerCase());
+
     public static Contacts UPPER_CASE_NAME_CONTACT =
         defaultContact().set(c-> c.name = c.name.toUpperCase());
 

@@ -18,7 +18,6 @@ public class DataListTests extends TestsInit {
 
     private String text = "Coconut";
 
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();

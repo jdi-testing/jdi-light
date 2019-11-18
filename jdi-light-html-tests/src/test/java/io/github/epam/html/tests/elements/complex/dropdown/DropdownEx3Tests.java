@@ -32,7 +32,6 @@ public class DropdownEx3Tests extends TestsInit {
 
     private String text = "Colors";
 
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();

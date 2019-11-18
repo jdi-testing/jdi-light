@@ -7,10 +7,13 @@ import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.tools.func.JFunc1;
 
 public class BaseAssert<E extends IBaseElement> implements IBaseElement {
+
     public String name;
     public String failElement;
     public E element;
+
     public static JFunc1<JDIElement, String> PRINT_ASSERT = JDIElement::toString;
+
     @Override
     public String getName() {
         return name;
