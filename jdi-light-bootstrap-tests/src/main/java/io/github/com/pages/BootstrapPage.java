@@ -67,6 +67,7 @@ import io.github.com.sections.form.RadioButtonsCustomInline;
 import io.github.com.sections.form.RadioButtonsDefaultInline;
 import io.github.com.sections.form.RangeInput;
 import io.github.com.sections.form.ReadonlyPlainText;
+import io.github.com.sections.form.Switches;
 import io.github.com.sections.inputgroup.CustomSelect;
 import io.github.com.sections.inputgroup.CustomSelectWithButton;
 import io.github.com.sections.inputgroup.InputGroupInputWithCheckBox;
@@ -96,20 +97,18 @@ import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
-//--- navbar package
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarContainer;
-import io.github.com.sections.navbar.NavbarNav;
-import io.github.com.sections.navbar.ScrollSpyNav;
-import io.github.com.sections.navbar.NavbarWithDropdown;
-import io.github.com.sections.navbar.NavbarText;
-import io.github.com.sections.navbar.NavbarForm;
-import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.navbar.NavbarExternalContent;
-import io.github.com.sections.navbar.NavbarSection;
+import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarNav;
 import io.github.com.sections.navbar.NavbarPlacement;
+import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarSupportedContent;
-//--- navbar package
+import io.github.com.sections.navbar.NavbarText;
+import io.github.com.sections.navbar.NavbarWithDropdown;
+import io.github.com.sections.navbar.NavbarWithInputGroupForm;
+import io.github.com.sections.navbar.ScrollSpyNav;
 import io.github.com.sections.navs.NavsAlignmentCenter;
 import io.github.com.sections.navs.NavsAlignmentEnd;
 import io.github.com.sections.navs.NavsBaseA;
@@ -134,6 +133,9 @@ import io.github.com.sections.progress.ProgressSection;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
+
+//--- navbar package
+//--- navbar package
 
 
 public class BootstrapPage extends WebPage {
@@ -656,6 +658,8 @@ public class BootstrapPage extends WebPage {
     public static SpinnerAlignment spinnerAlignment;
     @UI("body")
     public static CheckboxAndRadioButtonCustomDisabled checkboxAndRadioButtonCustomDisabled;
+    @UI("body")
+    public static Switches switches;
     @UI("body")
     public static RadioButtonsCustomInline radioButtonsCustomInline;
     @UI("#translucentToastButton")
