@@ -15,7 +15,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
-public class CardImageCapsTest extends TestsInit {
+public class CardImageCapsTests extends TestsInit {
 
     private CardImageData topCardData;
     private CardImageData bottomCardData;
