@@ -63,21 +63,6 @@ import io.github.com.sections.form.CheckboxAndRadioButtonCustomDisabled;
 import io.github.com.sections.form.CheckboxesAndRadiosWithoutLabels;
 import io.github.com.sections.form.CheckboxesDefault;
 import io.github.com.sections.form.CheckboxesDefaultInline;
-import io.github.com.sections.form.FormColumnSizing;
-import io.github.com.sections.form.FormHorizontalLabelSizing;
-import io.github.com.sections.form.FormBrowserDefaults;
-import io.github.com.sections.form.FormCustomStyles;
-import io.github.com.sections.form.FormDisabled;
-import io.github.com.sections.form.FormGrid;
-import io.github.com.sections.form.FormHelpText;
-import io.github.com.sections.form.FormHorizontal;
-import io.github.com.sections.form.FormInlinePreference;
-import io.github.com.sections.form.FormInlineUsername;
-import io.github.com.sections.form.FormOverview;
-import io.github.com.sections.form.FormRow;
-import io.github.com.sections.form.FormServerSide;
-import io.github.com.sections.form.FormTooltip;
-import io.github.com.sections.form.FormsSizing;
 import io.github.com.sections.form.RadioButtonGroup;
 import io.github.com.sections.form.RadioButtonsCustom;
 import io.github.com.sections.form.RadioButtonsCustomInline;
@@ -599,14 +584,6 @@ public class BootstrapPage extends WebPage {
     public static SpinnerSize spinnerSize;
     @UI("body")
     public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
-    @UI("#validation-submit-form")
-    public static FormCustomStyles formCustomStyles;
-    @UI("#form-browser-defaults")
-    public static FormBrowserDefaults formBrowserDefaults;
-    @UI("#form-server-side")
-    public static FormServerSide formServerSide;
-    @UI("#form-tooltip")
-    public static FormTooltip formTooltip;
     @UI("#modalMdo")
     public static Button modalMdoButton;
     @UI("#modalFat")
@@ -627,14 +604,6 @@ public class BootstrapPage extends WebPage {
     public static CardUtilities cardWidth75;
     @UI(".w-50")
     public static CardUtilities cardWidth50;
-    @UI("#forms-overview")
-    public static FormOverview formOverview;
-    @UI("#form-horizontal")
-    public static FormHorizontal formHorizontal;
-    @UI("#form-inline-username")
-    public static FormInlineUsername formInlineUsername;
-    @UI("#form-inline-preference")
-    public static FormInlinePreference formInlinePreference;
 
 
     @UI("//h4[.='Navbar - Text']/../..")
@@ -661,8 +630,6 @@ public class BootstrapPage extends WebPage {
     public static NavbarForm navbarFormWithText;
     @UI("#navbar-form-3")
     public static NavbarWithInputGroupForm navbarFormWithInputGroup;
-    @UI("#form-grid-base")
-    public static FormGrid formGrid;
     //Toasts
 
     @UI("#toastRightTop")
@@ -703,14 +670,6 @@ public class BootstrapPage extends WebPage {
     public static Toast translucentToast;
     @UI("#custom-radio-con")
     public static RadioButtonsCustom radioButtonCustom;
-    @UI("#forms-sizing")
-    public static FormsSizing formsSizing;
-    @UI("#form-help-text")
-    public static FormHelpText formHelpText;
-    @UI("#form-disabled")
-    public static FormDisabled formDisabled;
-    @UI("#form-row")
-    public static FormRow formRow;
 
     //region Navbars
     @UI("#navbar-external-content")
@@ -749,10 +708,4 @@ public class BootstrapPage extends WebPage {
     public static ModalOptionalSizes modalOptionalSizes;
     //endregion
 
-    //region Forms
-    @UI("#form-horizontal-label-size")
-    public static FormHorizontalLabelSizing formHorizontalLabelSizing;
-    @UI("#form-column-size")
-    public static FormColumnSizing formColumnSizing;
-    //endregion
 }
