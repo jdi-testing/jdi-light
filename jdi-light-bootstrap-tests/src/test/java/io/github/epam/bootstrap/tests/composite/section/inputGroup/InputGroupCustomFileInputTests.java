@@ -17,7 +17,7 @@ import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
-public class InputGroupCustomFileInput extends TestsInit {
+public class InputGroupCustomFileInputTests extends TestsInit {
 
     private String alertMessage = "Button clicked, thank you!";
 
