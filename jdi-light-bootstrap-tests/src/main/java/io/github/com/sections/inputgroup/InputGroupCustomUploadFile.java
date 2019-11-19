@@ -16,4 +16,8 @@ public class InputGroupCustomUploadFile extends Section {
     //@FindBy(css = "button")
     @UI("button")
     public Button btnSubmit;
+
+    public void clickSubmitButton() {
+        btnSubmit.click();
+    }
 }

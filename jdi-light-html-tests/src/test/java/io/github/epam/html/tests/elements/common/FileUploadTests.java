@@ -24,7 +24,6 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
@@ -43,8 +42,7 @@ public class FileUploadTests extends TestsInit {
     public void uploadTest() {
         avatar.uploadFile(mergePath(PROJECT_PATH, "/src/test/resources/general.xml"));
         avatar.is().text(containsString("general.xml"));
-        assertTrue(avatar.getText().contains("general.xml"));
-        assertTrue(avatar.getValue().contains("general.xml"));
+        avatar.is().value(containsString("general.xml"));
     }
 
     @Test
