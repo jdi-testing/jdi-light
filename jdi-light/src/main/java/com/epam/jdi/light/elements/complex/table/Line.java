@@ -150,6 +150,7 @@ public class Line implements IList<String>, IBaseElement {
             String header = headers.get(i);
             Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
                 f -> namesEqual(getElementName(f), header));
+            if (field == null) continue;
             try {
                 IBaseElement ui = ((IBaseElement)field.get(instance));
                 ui.base().setWebElement(elements.get(i));
