@@ -20,7 +20,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.MultiplebarsProgress;
@@ -39,22 +38,22 @@ import io.github.com.sections.buttongroup.ButtonGroupSizing;
 import io.github.com.sections.buttongroup.ButtonGroupVerticalVariation;
 import io.github.com.sections.buttongroup.ButtonWithDropdown;
 import io.github.com.sections.card.CardBody;
-import io.github.com.sections.card.CardBorder;
-import io.github.com.sections.card.CardColumns;
-import io.github.com.sections.card.CardDeck;
+import io.github.com.sections.card.CardColumnsSection;
+import io.github.com.sections.card.CardDeckSection;
 import io.github.com.sections.card.CardExample;
-import io.github.com.sections.card.CardGroup;
+import io.github.com.sections.card.CardGroupSection;
 import io.github.com.sections.card.CardHorizontal;
 import io.github.com.sections.card.CardImage;
+import io.github.com.sections.card.CardImageCaps;
 import io.github.com.sections.card.CardImageOverlays;
 import io.github.com.sections.card.CardKitchenSink;
 import io.github.com.sections.card.CardListGroups;
 import io.github.com.sections.card.CardMixinsUtilities;
 import io.github.com.sections.card.CardNavigation;
+import io.github.com.sections.card.CardStyled;
 import io.github.com.sections.card.CardTextAlignment;
 import io.github.com.sections.card.CardUtilities;
-import io.github.com.sections.card.CardWithCustomCss13Rem;
-import io.github.com.sections.card.CardWithCustomCss9Rem;
+import io.github.com.sections.card.CardWithCustomCss;
 import io.github.com.sections.card.CardWithGridMarkup;
 import io.github.com.sections.card.CardWithHeaderAndFooter;
 import io.github.com.sections.card.CardWithSubtitlesAndLinks;
@@ -100,20 +99,19 @@ import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
-//--- navbar package
+
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarContainer;
-import io.github.com.sections.navbar.NavbarNav;
-import io.github.com.sections.navbar.ScrollSpyNav;
-import io.github.com.sections.navbar.NavbarWithDropdown;
-import io.github.com.sections.navbar.NavbarText;
-import io.github.com.sections.navbar.NavbarForm;
-import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.navbar.NavbarExternalContent;
-import io.github.com.sections.navbar.NavbarSection;
+import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarNav;
 import io.github.com.sections.navbar.NavbarPlacement;
+import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarSupportedContent;
-//--- navbar package
+import io.github.com.sections.navbar.NavbarText;
+import io.github.com.sections.navbar.NavbarWithDropdown;
+import io.github.com.sections.navbar.NavbarWithInputGroupForm;
+import io.github.com.sections.navbar.ScrollSpyNav;
 import io.github.com.sections.navs.NavsAlignmentCenter;
 import io.github.com.sections.navs.NavsAlignmentEnd;
 import io.github.com.sections.navs.NavsBaseA;
@@ -320,7 +318,7 @@ public class BootstrapPage extends WebPage {
     public static Carousel carouselWithFadeTransition;
     @UI("#carousel-example-interval")
     public static Carousel carouselWithCustomInterval;
-    // COLLAPSE
+    //region COLLAPSE
     @JDropdown(expand = "#bs-collapse-link",
             value = "#bs-collapse-one",
             list = "#bs-collapse-one-body")
@@ -354,6 +352,7 @@ public class BootstrapPage extends WebPage {
             list = "#bs-group-three-body")
     public static Collapse collapseGroupThree;
     //endregion
+    //endregion
 
     //region Composite Elements
     @UI("#input-group-checkbox")
@@ -385,58 +384,98 @@ public class BootstrapPage extends WebPage {
     public static ButtonAddons inputGroupButtonAddons3;
     @UI("#input-group-button-addon4")
     public static ButtonAddons inputGroupButtonAddons4;
+
+    //region Cards
+    @UI("#card-body")
+    public static CardBody cardBody;
+    @UI(".card-columns")
+    public static CardColumnsSection cardColumnsSection;
+    @UI(".card-deck:nth-of-type(1)")
+    public static CardDeckSection cardDeckSectionWithoutFooter;
+    @UI(".card-deck:nth-of-type(2)")
+    public static CardDeckSection cardDeckSectionWithFooter;
     @UI("#card-example")
     public static CardExample cardExample;
+    @UI(".card-group:nth-of-type(1)")
+    public static CardGroupSection cardGroupSectionWithoutFooter;
+    @UI(".card-group:nth-of-type(2)")
+    public static CardGroupSection cardGroupSectionWithFooter;
+    @UI("#card-horizontal")
+    public static CardHorizontal cardHorizontal;
     @UI("#card-image")
     public static CardImage cardImage;
-    @UI("#card-image-overlay")
-    public static CardImageOverlays cardImageOverlays;
     @UI("#card-image-caps-1")
     public static CardImageCaps cardImageOnTop;
     @UI("#card-image-caps-2")
     public static CardImageCaps cardImageOnBottom;
-    @UI("#card-body")
-    public static CardBody cardBody;
+    @UI("#card-image-overlay")
+    public static CardImageOverlays cardImageOverlays;
+    @UI("#card-kitchen-sink")
+    public static CardKitchenSink cardKitchenSink;
+    @UI("#card-list-groups")
+    public static CardListGroups cardListGroups;
+    @UI("#card-mixins-utilities")
+    public static CardMixinsUtilities cardMixinsUtilities;
+    @UI("#card-navigation")
+    public static CardNavigation cardNavigation;
+    @UI("#card-bright-blue")
+    public static CardStyled cardBrightBlue;
+    @UI("#card-grey")
+    public static CardStyled cardGrey;
+    @UI("#card-green")
+    public static CardStyled cardGreen;
+    @UI("#card-red")
+    public static CardStyled cardRed;
+    @UI("#card-yellow")
+    public static CardStyled cardYellow;
+    @UI("#card-blue")
+    public static CardStyled cardBlue;
+    @UI("#card-light")
+    public static CardStyled cardLight;
+    @UI("#card-dark")
+    public static CardStyled cardDark;
+    @UI("#card-border-primary")
+    public static CardStyled cardStyledPrimary;
+    @UI("#card-border-secondary")
+    public static CardStyled cardStyledSecondary;
+    @UI("#card-border-success")
+    public static CardStyled cardStyledSuccess;
+    @UI("#card-border-danger")
+    public static CardStyled cardStyledDanger;
+    @UI("#card-border-warning")
+    public static CardStyled cardStyledWarning;
+    @UI("#card-border-info")
+    public static CardStyled cardStyledInfo;
+    @UI("#card-border-light")
+    public static CardStyled cardStyledLight;
+    @UI("#card-border-dark")
+    public static CardStyled cardStyledDark;
+    @UI("#card-text-left")
+    public static CardTextAlignment cardLeftTextAlignment;
+    @UI("#card-text-center")
+    public static CardTextAlignment cardCenterTextAlignment;
+    @UI("#card-text-right")
+    public static CardTextAlignment cardRightTextAlignment;
+    @UI(".w-75")
+    public static CardUtilities cardWidth75;
+    @UI(".w-50")
+    public static CardUtilities cardWidth50;
+    @UI("#card-custom-css-1")
+    public static CardWithCustomCss cardWithCustomCss13Rem;
+    @UI("#card-custom-css-2")
+    public static CardWithCustomCss cardWithCustomCss9Rem;
+    @UI("#card-with-grid-markup")
+    public static CardWithGridMarkup cardWithGridMarkup;
     @UI("#card-with-header")
     public static CardWithHeaderAndFooter cardWithHeader;
     @UI("#card-with-header-and-footer-quote")
     public static CardWithHeaderAndFooter cardWithHeaderAndFooterQuote;
     @UI("#card-with-header-and-footer")
     public static CardWithHeaderAndFooter cardWithHeaderAndFooter;
-    @UI("#card-with-grid-markup")
-    public static CardWithGridMarkup cardWithGridMarkup;
-    @UI("#card-bright-blue")
-    public static CardWithHeaderAndFooter cardBrightBlue;
-    @UI("#card-grey")
-    public static CardWithHeaderAndFooter cardGrey;
-    @UI("#card-green")
-    public static CardWithHeaderAndFooter cardGreen;
-    @UI("#card-red")
-    public static CardWithHeaderAndFooter cardRed;
-    @UI("#card-yellow")
-    public static CardWithHeaderAndFooter cardYellow;
-    @UI("#card-blue")
-    public static CardWithHeaderAndFooter cardBlue;
-    @UI("#card-light")
-    public static CardWithHeaderAndFooter cardLight;
-    @UI("#card-dark")
-    public static CardWithHeaderAndFooter cardDark;
-    @UI("#card-border-primary")
-    public static CardBorder cardBorderPrimary;
-    @UI("#card-border-secondary")
-    public static CardBorder cardBorderSecondary;
-    @UI("#card-border-success")
-    public static CardBorder cardBorderSuccess;
-    @UI("#card-border-danger")
-    public static CardBorder cardBorderDanger;
-    @UI("#card-border-warning")
-    public static CardBorder cardBorderWarning;
-    @UI("#card-border-info")
-    public static CardBorder cardBorderInfo;
-    @UI("#card-border-light")
-    public static CardBorder cardBorderLight;
-    @UI("#card-border-dark")
-    public static CardBorder cardBorderDark;
+    @UI("#card-subtitle-link")
+    public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
+    //endregion
+
     @UI("#button-with-dropdown")
     public static ButtonWithDropdown buttonWithDropdown;
     @UI("#segmented-button")
@@ -445,16 +484,6 @@ public class BootstrapPage extends WebPage {
     public static ButtonToolbar buttonToolbar;
     @UI("#buttonToolbar2")
     public static ButtonToolbar buttonToolbarWithInputField;
-    @UI("#card-subtitle-link")
-    public static CardWithSubtitlesAndLinks cardWithSubtitlesAndLinks;
-    @UI("#card-custom-css-1")
-    public static CardWithCustomCss13Rem cardWithCustomCss13Rem;
-    @UI("#card-custom-css-2")
-    public static CardWithCustomCss9Rem cardWithCustomCss9Rem;
-    @UI("#card-mixins-utilities")
-    public static CardMixinsUtilities cardMixinsUtilities;
-    @UI("#card-horizontal")
-    public static CardHorizontal cardHorizontal;
     @UI("#custom-select-01")
     public static CustomSelect customSelect;
     @UI("#custom-select-button-01")
@@ -481,12 +510,6 @@ public class BootstrapPage extends WebPage {
     public static ButtonGroupSizing defaultBtnGroup;
     @UI("#btn-sm-group")
     public static ButtonGroupSizing smallBtnGroup;
-    @UI("#card-text-left")
-    public static CardTextAlignment cardLeftTextAlignment;
-    @UI("#card-text-center")
-    public static CardTextAlignment cardCenterTextAlignment;
-    @UI("#card-text-right")
-    public static CardTextAlignment cardRightTextAlignment;
     @UI("#list-group-basic-example")
     public static ListGroupBasicExample listGroupBasicExample;
     @UI("#list-group-active-items")
@@ -507,12 +530,6 @@ public class BootstrapPage extends WebPage {
     public static ListGroupCustomContent listGroupCustomContent;
     @UI("#radio-buttons")
     public static RadioButtonGroup radioButtonGroup;
-    @UI(".card-group:nth-of-type(1)")
-    public static CardGroup cardGroupWithoutFooter;
-    @UI(".card-group:nth-of-type(2)")
-    public static CardGroup cardGroupWithFooter;
-    @UI("#card-list-groups")
-    public static CardListGroups cardListGroups;
     @UI("#pagination-overview")
     public static PaginationOverview paginationOverview;
     @UI("#pagination-icons")
@@ -555,8 +572,6 @@ public class BootstrapPage extends WebPage {
     public static NavbarColorScheme navbarBlueColorScheme;
     @UI("#navbar-light-colorscheme")
     public static NavbarColorScheme navbarLightColorScheme;
-    @UI(".card-columns")
-    public static CardColumns cardColumns;
     @UI("#list-example>a")
     public static ListGroup listGroupForScrollSpy;
     @UI("#list-example~div")
@@ -579,10 +594,6 @@ public class BootstrapPage extends WebPage {
     public static CheckboxesDefault checkboxesDefault;
     @UI("#customCheck1-div")
     public static Checkbox customCheckbox;
-    @UI(".card-deck:nth-of-type(1)")
-    public static CardDeck cardDeckWithoutFooter;
-    @UI(".card-deck:nth-of-type(2)")
-    public static CardDeck cardDeckWithFooter;
     @UI("#multiple-inputs")
     public static MultipleInputs multipleInputs;
     @UI("#growing-spinners")
@@ -603,16 +614,6 @@ public class BootstrapPage extends WebPage {
     public static Button modalEmbeddedVideoButton;
     @UI("#youTubeModalLabel")
     public static EmbeddedVideoModal embeddedVideoModal;
-    @UI("#card-kitchen-sink")
-    public static CardKitchenSink cardKitchenSink;
-    @UI("#card-navigation")
-    public static CardNavigation cardNavigation;
-    @UI(".w-75")
-    public static CardUtilities cardWidth75;
-    @UI(".w-50")
-    public static CardUtilities cardWidth50;
-
-
     @UI("//h4[.='Navbar - Text']/../..")
     public static NavbarText navbarText;
     @UI("//h4[.='Modal - Tooltips and popovers']/../..")
@@ -622,7 +623,6 @@ public class BootstrapPage extends WebPage {
     public static JList<ProgressSection> progressSections;
     @UI("#progress-height .progress")
     public static JList<ProgressSection> progressHeightSections;
-
     @UI("#button-with-spinner-and-text")
     public static ButtonWithSpinner buttonWithSpinnerAndText;
     @UI("#button-with-spinner")
@@ -638,7 +638,6 @@ public class BootstrapPage extends WebPage {
     @UI("#navbar-form-3")
     public static NavbarWithInputGroupForm navbarFormWithInputGroup;
     //Toasts
-
     @UI("#toastRightTop")
     public static Toast toastWithTopAlign;
     @UI("#linkToastRightTop")
