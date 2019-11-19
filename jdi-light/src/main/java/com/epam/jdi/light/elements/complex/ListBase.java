@@ -34,24 +34,42 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 
 abstract class ListBase<T extends IListBase, A extends UISelectAssert>
-    extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
+        extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
 
     protected Class<?> initClass = UIElement.class;
     protected CacheValue<MapArray<String, T>> map = new CacheValue<>(MapArray::new);
     protected String titleFieldName = null;
 
+    public static JFunc1<Field[], String> GET_TITLE_FIELD_NAME = fields -> {
+        Field expectedField = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
+        if (expectedField != null)
+            return expectedField.getName();
+        List<Field> titles = LinqUtils.filter(fields, f -> f.getType() == Label.class);
+        return titles.size() == 1
+                ? titles.get(0).getName()
+                : null;
+    };
+
     protected WebList list;
+
     public WebList list() {
         if (list == null) {
             list = new WebList(core()).setUIElementName(this::elementTitle)
-                .setName(getName());
+                    .setName(getName());
         }
         return list;
     }
 
-    ListBase() {}
-    ListBase(By locator) { list = new WebList(locator); }
-    ListBase(List<WebElement> elements) { list = new WebList(elements); }
+    ListBase() {
+    }
+
+    ListBase(By locator) {
+        list = new WebList(locator);
+    }
+
+    ListBase(List<WebElement> elements) {
+        list = new WebList(elements);
+    }
 
 
     private boolean actualMapValue() {
@@ -62,7 +80,9 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
         try {
             element.getTagName();
             return true;
-        } catch (Exception ex) { return false; }
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     /**
@@ -84,6 +104,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     public T get(String value) {
         return toT(list().get(value));
     }
+
     /**
      * @param index
      */
@@ -94,6 +115,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
 
     /**
      * Select the item by the value
+     *
      * @param value
      */
     @JDIAction("Select '{0}' for '{name}'")
@@ -103,6 +125,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
 
     /**
      * Select the items by the names
+     *
      * @param values
      */
     @JDIAction("Select ({0}) for '{name}'")
@@ -113,6 +136,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
 
     /**
      * Select the items by the values, hover and click on them
+     *
      * @param values
      */
     @JDIAction("Select ({0}) for '{name}'")
@@ -122,18 +146,21 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
 
     /**
      * Select the items by the values, hover and click on them
+     *
      * @param value
      */
     @JDIAction("Select ({0}) for '{name}'")
     public void hoverAndClick(String value) {
         list().hoverAndClick(value);
     }
+
     public <TEnum extends Enum> void select(TEnum value) {
         list().select(value);
     }
 
     /**
      * Select the items by the names
+     *
      * @param values
      */
     @JDIAction("Select ({0}) for '{name}'")
@@ -142,9 +169,13 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     }
 
     @Override
-    public int size() { return list().size(); }
+    public int size() {
+        return list().size();
+    }
+
     /**
      * Select the item by the index
+     *
      * @param index
      */
     @JDIAction("Select '{0}' for '{name}'")
@@ -154,6 +185,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
 
     /**
      * Select the items by the indexes
+     *
      * @param indexes
      */
     @JDIAction("Select ({0}) for '{name}'")
@@ -163,12 +195,13 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
 
     /**
      * Get the selected element value
+     *
      * @return String
      */
     @JDIAction("Get '{name}' selected value")
     public String selected() {
         refresh();
-        T first = logger.logOff(() -> first(IListBase::isSelected) );
+        T first = logger.logOff(() -> first(IListBase::isSelected));
         return first != null ? first.getText() : "";
     }
 
@@ -229,23 +262,32 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     public List<String> listDisabled() {
         return list().listDisabled();
     }
+
     @Override
     public boolean isDisplayed() {
         return list().isDisplayed();
     }
-    @Override @JDIAction(level = DEBUG)
+
+    @Override
+    @JDIAction(level = DEBUG)
     public void highlight(String color) {
         list().highlight(color);
     }
-    @Override @JDIAction(level = DEBUG)
+
+    @Override
+    @JDIAction(level = DEBUG)
     public void highlight() {
         list().highlight();
     }
-    @Override @JDIAction(level = DEBUG)
+
+    @Override
+    @JDIAction(level = DEBUG)
     public void hover() {
         list().hover();
     }
-    @Override @JDIAction(level = DEBUG)
+
+    @Override
+    @JDIAction(level = DEBUG)
     public void show() {
         get(0).show();
     }
@@ -255,15 +297,20 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
         Type[] types;
         try {
             types = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
-        } catch (Exception ex) { return; }
+        } catch (Exception ex) {
+            return;
+        }
         if (types.length != 1) return;
         try {
             Class<?> initClass = (Class<?>) types[0];
             if (initClass == WebElement.class)
                 initClass = UIElement.class;
             this.initClass = initClass;
-        } catch (Exception ex) { throw  exception("Can't init WebList. Weblist elements should extend UIElement"); }
+        } catch (Exception ex) {
+            throw exception("Can't init WebList. Weblist elements should extend UIElement");
+        }
     }
+
     private T toT(UIElement el) {
         try {
             if (initClass == null)
@@ -279,18 +326,11 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
             T t = (T) info.instance;
             t.base().setCore(el);
             return t;
-        } catch (Exception ex) { throw exception("Can't init new element for list"); }
+        } catch (Exception ex) {
+            throw exception("Can't init new element for list");
+        }
     }
 
-    public static JFunc1<Field[], String> GET_TITLE_FIELD_NAME = fields -> {
-        Field expectedField = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
-        if (expectedField != null)
-            return expectedField.getName();
-        List<Field> titles = LinqUtils.filter(fields, f -> f.getType() == Label.class);
-        return titles.size() == 1
-                ? titles.get(0).getName()
-                : null;
-    };
     protected String elementTitle(UIElement el) {
         if (titleFieldName == null)
             titleFieldName = GET_TITLE_FIELD_NAME.execute(initClass.getFields());
@@ -298,6 +338,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
                 ? el.getText()
                 : getElementTitle(el, titleFieldName);
     }
+
     protected String getElementTitle(UIElement el, String titleField) {
         T element = toT(el);
         Field field = null;
@@ -306,7 +347,13 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
         } catch (Exception ignore) { /* if field name identified it is always exist */ }
         return ((WebElement) getValueField(field, element)).getText();
     }
-    public boolean isEmpty() { return size() == 0; }
-    public boolean isNotEmpty() { return size() > 0; }
+
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    public boolean isNotEmpty() {
+        return size() > 0;
+    }
 
 }

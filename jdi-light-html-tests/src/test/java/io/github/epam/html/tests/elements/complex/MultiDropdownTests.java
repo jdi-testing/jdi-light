@@ -11,14 +11,12 @@ import static io.github.epam.html.tests.elements.complex.enums.Ages.Steam;
 import static io.github.epam.html.tests.elements.complex.enums.Ages.Wood;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
 public class MultiDropdownTests extends TestsInit {
+
+    private String text = "Steam";
 
     @BeforeMethod
     public void before() {
@@ -27,7 +25,6 @@ public class MultiDropdownTests extends TestsInit {
         if (!isFireFox())
             multiDropdown.check(text);
     }
-    private String text = "Steam";
 
     @Test
     public void getValueTest() {
@@ -47,12 +44,14 @@ public class MultiDropdownTests extends TestsInit {
         multiDropdown.check(Wood, Steam);
         assertEquals(multiDropdown.checked(), asList("Steam", "Wood"));
     }
+
     @Test
     public void selectNumTest() {
         if (isFireFox()) return;
         multiDropdown.check(1, 5);
         assertEquals(multiDropdown.checked(), asList("Electro", "Wood"));
     }
+
     @Test
     public void selectedTest() {
         assertEquals(multiDropdown.selected(), text);
@@ -77,15 +76,15 @@ public class MultiDropdownTests extends TestsInit {
         multiDropdown.is().selected(Steam);
         multiDropdown.assertThat().values(hasItem("Wood"));
         multiDropdown.assertThat().disabled(hasItem("Disabled"))
-            .enabled(not(hasItem("Disabled")))
-            .enabled(hasItems("Electro", "Metalic"));
+                .enabled(not(hasItem("Disabled")))
+                .enabled(hasItems("Electro", "Metalic"));
     }
 
     @Test
     public void assertValidationTest() {
         multiDropdown.assertThat()
-            .values(containsInAnyOrder("Disabled", "Electro", "Metalic", "Wood", "Steam"))
-            .selected(Steam);
+                .values(containsInAnyOrder("Disabled", "Electro", "Metalic", "Wood", "Steam"))
+                .selected(Steam);
     }
 
     @Test

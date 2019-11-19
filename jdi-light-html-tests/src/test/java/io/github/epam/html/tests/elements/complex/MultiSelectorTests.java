@@ -13,14 +13,12 @@ import static io.github.epam.html.tests.elements.complex.enums.Ages.Wood;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
 public class MultiSelectorTests extends TestsInit {
+
+    private String text = "Steam";
 
     @BeforeMethod
     public void before() {
@@ -28,7 +26,6 @@ public class MultiSelectorTests extends TestsInit {
         html5Page.shouldBeOpened();
         ages.check(text);
     }
-    private String text = "Steam";
 
     @Test
     public void getValueTest() {
@@ -46,11 +43,13 @@ public class MultiSelectorTests extends TestsInit {
         ages.check(Wood, Steam);
         assertEquals(ages.checked(), asList("Steam", "Wood"));
     }
+
     @Test
     public void selectNumTest() {
         ages.check(1, 5);
         assertEquals(ages.checked(), asList("Electro", "Wood"));
     }
+
     @Test
     public void selectedTest() {
         assertEquals(ages.checked(), asList(text));
