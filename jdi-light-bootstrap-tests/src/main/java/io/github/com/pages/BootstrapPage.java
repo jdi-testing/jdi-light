@@ -74,6 +74,8 @@ import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.form.Switches;
 import io.github.com.sections.inputgroup.CustomSelect;
 import io.github.com.sections.inputgroup.CustomSelectWithButton;
+import io.github.com.sections.inputgroup.InputGroupCustomFileInput;
+import io.github.com.sections.inputgroup.InputGroupCustomUploadFile;
 import io.github.com.sections.inputgroup.InputGroupInputWithCheckBox;
 import io.github.com.sections.inputgroup.InputGroupInputWithLabelAndText;
 import io.github.com.sections.inputgroup.InputGroupInputWithRadio;
@@ -718,4 +720,8 @@ public class BootstrapPage extends WebPage {
 
     @UI("#form-controls-file-input")
     public static InputFileSection inputFileSection;
+    @UI("#file-input .custom-file")
+    public static InputGroupCustomFileInput inputGroupCustomFileInput;
+    @UI(".input-group#upload-file")
+    public static InputGroupCustomUploadFile inputGroupCustomUploadFile;
 }

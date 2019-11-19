@@ -20,9 +20,7 @@ import static io.github.com.pages.HtmlElementsPage.downloadJdiLogo;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.apache.commons.io.FileUtils.writeStringToFile;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
@@ -51,14 +49,12 @@ public class FileUploadTests extends TestsInit {
 
     @Test
     public void disabledUploadTest() {
-        String value = disabledFileInput.getValue();
-        assertThat(value, equalTo(""));
         try {
             disabledFileInput.uploadFile(mergePath(PROJECT_PATH, "/src/test/resources/general.xml"));
         } catch (Exception ignore) {
-            value = disabledFileInput.getValue();
+            disabledFileInput.is().value(is(""));
         }
-        assertThat(value, equalTo(""));
+        disabledFileInput.is().value(is(""));
     }
 
     @Test
@@ -72,7 +68,7 @@ public class FileUploadTests extends TestsInit {
         if (isFireFox()) return;
         cleanupDownloads();
         downloadJdiLogo.click();
-        waitFileDownLoaded("jdi-logo.jpg", 32225L, 5L);
+        waitFileDownLoaded("jdi-logo.jpg", 32225L, 5L, 100L);
         assertThatFile("jdi-logo.jpg")
                 .isDownloaded()
                 .hasSize(is(32225L));
@@ -100,13 +96,13 @@ public class FileUploadTests extends TestsInit {
         baseValidation(avatar);
     }
 
-    private void waitFileDownLoaded(String fileName, long fileLength, long secondsToWait) {
-        int i = 0;
+    private void waitFileDownLoaded(String fileName, long fileLength, long secondsToWait, long pollMSec) {
+        long i = 0;
         while (!(new File(mergePath(DOWNLOADS_DIR, fileName)).exists() &&
                 new File(mergePath(DOWNLOADS_DIR, fileName)).length() >= fileLength)
                 || secondsToWait > i) {
-            i = i + 100;
-            Timer.sleep(100);
+            i = i + pollMSec;
+            Timer.sleep(pollMSec);
         }
     }
 }
