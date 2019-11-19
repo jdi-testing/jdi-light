@@ -33,6 +33,8 @@ import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
+import static com.epam.jdi.light.common.PropertyName.TIMEOUT_WAIT_ELEMENT;
+import static com.epam.jdi.light.common.PropertyValidator.validateProperties;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
@@ -133,8 +135,8 @@ public class WebSettings {
     };
 
     public static synchronized void init() {
-        getProperties(TEST_PROPERTIES_PATH);
-        fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
+        validateProperties(getProperties(TEST_PROPERTIES_PATH));
+        fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_ELEMENT);
         fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
         fillAction(p -> DOMAIN = p, "domain");
         if (DRIVER_NAME.equals(DEFAULT_DRIVER))
