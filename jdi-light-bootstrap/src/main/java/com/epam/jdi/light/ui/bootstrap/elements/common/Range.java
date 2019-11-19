@@ -10,6 +10,11 @@ import com.epam.jdi.light.ui.bootstrap.asserts.RangeAssert;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.bootstrap.BootstrapUtils.getDouble;
 
+/**
+ * To see an example of Range web element please visit https://getbootstrap.com/docs/4.3/components/forms/#range-inputs
+ * or https://getbootstrap.com/docs/4.3/components/forms/#range
+ */
+
 public class Range extends UIBaseElement<UIAssert> implements HasLabel, SetValue {
 
     @JDIAction(value = "Get '{name}' thumbValue", level = DEBUG)

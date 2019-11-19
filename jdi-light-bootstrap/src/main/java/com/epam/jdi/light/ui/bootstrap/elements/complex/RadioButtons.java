@@ -11,6 +11,9 @@ import static com.epam.jdi.light.common.ElementArea.ACTION_CLICK;
 import static com.epam.jdi.light.common.TextTypes.LABEL;
 import static com.epam.jdi.light.settings.WebSettings.ANY_ELEMENT;
 
+/**
+ * To see an example of RadioButtons in bootstrap please visit https://getbootstrap.com/docs/4.3/components/forms/#default-stacked
+ */
 
 public class RadioButtons extends UIListBase<UISelectAssert> {
 

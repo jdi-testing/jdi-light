@@ -68,7 +68,7 @@ public class DropdownMenuContentTests extends TestsInit {
         dropdownMenuContentHeader.show();
         dropdownMenuContentHeader.is().displayed();
         dropdownMenuContentHeader.expand();
-        dropdownMenuContentHeader.menu().childs().is().size(NUMBER_OF_CHILDREN_HEADER);
+        dropdownMenuContentHeader.menu().children().is().size(NUMBER_OF_CHILDREN_HEADER);
         dropdownMenuContentHeader.header.is().core()
                 .displayed()
                 .tag("h6")
@@ -81,7 +81,7 @@ public class DropdownMenuContentTests extends TestsInit {
         dropdownMenuContentDivider.show();
         dropdownMenuContentDivider.is().displayed();
         dropdownMenuContentDivider.expand();
-        dropdownMenuContentDivider.menu().childs().is().size(NUMBER_OF_CHILDREN_DIVIDER);
+        dropdownMenuContentDivider.menu().children().is().size(NUMBER_OF_CHILDREN_DIVIDER);
         dropdownMenuContentDivider.divider.is().core()
                 .displayed()
                 .tag("div")
@@ -93,7 +93,7 @@ public class DropdownMenuContentTests extends TestsInit {
         dropdownMenuContentText.show();
         dropdownMenuContentText.is().displayed();
         dropdownMenuContentText.expand();
-        dropdownMenuContentText.menu().childs().is().size(NUMBER_OF_CHILDREN_TEXT);
+        dropdownMenuContentText.menu().children().is().size(NUMBER_OF_CHILDREN_TEXT);
         dropdownMenuContentText.text.is().values(TextTypes.TEXT, hasItems(TEXT_1_OF_DROPDOWN_TEXT));
         dropdownMenuContentText.text.is().values(TextTypes.TEXT, hasItems(TEXT_2_OF_DROPDOWN_TEXT));
     }

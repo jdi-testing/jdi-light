@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
  * Created by Natalia Amelina on 02.10.2019
  * Email: natalia_amelina@epam.com; Skype: nat_amelina
  */
-public class CardImageOverlaysTest  extends TestsInit {
+public class CardImageOverlaysTests extends TestsInit {
 
     private static final String VECTOR_TEXT_TAG = "text";
     private static final String VECTOR_TEXT = "Card image";

@@ -6,6 +6,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.bootstrap.asserts.PaginationAssert;
 
 /**
+ * To see an example of Pagination web element please visit https://getbootstrap.com/docs/4.3/components/pagination/
+ *
  * Created by Dmitrii Pavlov on 26.09.2019
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */

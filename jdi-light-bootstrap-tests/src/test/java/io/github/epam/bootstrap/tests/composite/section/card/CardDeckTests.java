@@ -5,8 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.cardDeckWithFooter;
-import static io.github.com.pages.BootstrapPage.cardDeckWithoutFooter;
+import static io.github.com.pages.BootstrapPage.cardDeckSectionWithFooter;
+import static io.github.com.pages.BootstrapPage.cardDeckSectionWithoutFooter;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 
@@ -39,96 +39,96 @@ public class CardDeckTests extends TestsInit {
 
     @Test
     public void isCardDeckTest() {
-        cardDeckWithoutFooter.highlight();
-        cardDeckWithoutFooter.is().core().hasClass(cardDeckClass);
+        cardDeckSectionWithoutFooter.highlight();
+        cardDeckSectionWithoutFooter.is().core().hasClass(cardDeckClass);
 
-        cardDeckWithFooter.highlight();
-        cardDeckWithFooter.is().core().hasClass(cardDeckClass);
+        cardDeckSectionWithFooter.highlight();
+        cardDeckSectionWithFooter.is().core().hasClass(cardDeckClass);
     }
 
     @Test
     public void getSrcTest() {
-        cardDeckWithoutFooter.highlight();
-        assertEquals(cardDeckWithoutFooter.card1.image.src(), card1ImageSrc);
-        assertEquals(cardDeckWithoutFooter.card2.image.src(), card2ImageSrc);
+        cardDeckSectionWithoutFooter.highlight();
+        assertEquals(cardDeckSectionWithoutFooter.card1.image.src(), card1ImageSrc);
+        assertEquals(cardDeckSectionWithoutFooter.card2.image.src(), card2ImageSrc);
 
-        cardDeckWithFooter.highlight();
-        assertEquals(cardDeckWithFooter.card1.image.src(), card1ImageSrc);
-        assertEquals(cardDeckWithFooter.card2.image.src(), card2ImageSrc);
+        cardDeckSectionWithFooter.highlight();
+        assertEquals(cardDeckSectionWithFooter.card1.image.src(), card1ImageSrc);
+        assertEquals(cardDeckSectionWithFooter.card2.image.src(), card2ImageSrc);
     }
 
     @Test
     public void getAltTest() {
-        cardDeckWithoutFooter.highlight();
-        assertEquals(cardDeckWithoutFooter.card1.image.alt(), card1ImageAlt);
-        assertEquals(cardDeckWithoutFooter.card2.image.alt(), card2ImageAlt);
+        cardDeckSectionWithoutFooter.highlight();
+        assertEquals(cardDeckSectionWithoutFooter.card1.image.alt(), card1ImageAlt);
+        assertEquals(cardDeckSectionWithoutFooter.card2.image.alt(), card2ImageAlt);
 
-        cardDeckWithFooter.highlight();
-        assertEquals(cardDeckWithFooter.card1.image.alt(), card1ImageAlt);
-        assertEquals(cardDeckWithFooter.card2.image.alt(), card2ImageAlt);
+        cardDeckSectionWithFooter.highlight();
+        assertEquals(cardDeckSectionWithFooter.card1.image.alt(), card1ImageAlt);
+        assertEquals(cardDeckSectionWithFooter.card2.image.alt(), card2ImageAlt);
     }
 
     @Test
     public void getTitleTextTest() {
-        cardDeckWithoutFooter.highlight();
-        assertEquals(cardDeckWithoutFooter.card1.title.getText(), card1Title);
-        assertEquals(cardDeckWithoutFooter.card2.title.getText(), card2Title);
+        cardDeckSectionWithoutFooter.highlight();
+        assertEquals(cardDeckSectionWithoutFooter.card1.title.getText(), card1Title);
+        assertEquals(cardDeckSectionWithoutFooter.card2.title.getText(), card2Title);
 
-        cardDeckWithFooter.highlight();
-        assertEquals(cardDeckWithFooter.card1.title.getText(), card1Title);
-        assertEquals(cardDeckWithFooter.card2.title.getText(), card2Title);
+        cardDeckSectionWithFooter.highlight();
+        assertEquals(cardDeckSectionWithFooter.card1.title.getText(), card1Title);
+        assertEquals(cardDeckSectionWithFooter.card2.title.getText(), card2Title);
     }
 
     @Test
     public void getMainTextTest() {
-        cardDeckWithoutFooter.highlight();
-        assertEquals(cardDeckWithoutFooter.card1.mainText.getText(), card1MainText);
-        assertEquals(cardDeckWithoutFooter.card2.mainText.getText(), card2MainText);
+        cardDeckSectionWithoutFooter.highlight();
+        assertEquals(cardDeckSectionWithoutFooter.card1.mainText.getText(), card1MainText);
+        assertEquals(cardDeckSectionWithoutFooter.card2.mainText.getText(), card2MainText);
 
-        cardDeckWithFooter.highlight();
-        assertEquals(cardDeckWithFooter.card1.mainText.getText(), card1MainText);
-        assertEquals(cardDeckWithFooter.card2.mainText.getText(), card2MainText);
+        cardDeckSectionWithFooter.highlight();
+        assertEquals(cardDeckSectionWithFooter.card1.mainText.getText(), card1MainText);
+        assertEquals(cardDeckSectionWithFooter.card2.mainText.getText(), card2MainText);
     }
 
     @Test
     public void getMutedTextTest() {
-        cardDeckWithoutFooter.highlight();
-        assertEquals(cardDeckWithoutFooter.card1.mutedText.getText(), card1HeroName);
-        assertEquals(cardDeckWithoutFooter.card2.mutedText.getText(), card2HeroName);
+        cardDeckSectionWithoutFooter.highlight();
+        assertEquals(cardDeckSectionWithoutFooter.card1.mutedText.getText(), card1HeroName);
+        assertEquals(cardDeckSectionWithoutFooter.card2.mutedText.getText(), card2HeroName);
     }
 
     @Test
     public void getFooterTextTest() {
-        cardDeckWithFooter.highlight();
-        assertEquals(cardDeckWithFooter.card1.footerText.getText(), card1HeroName);
-        assertEquals(cardDeckWithFooter.card2.footerText.getText(), card2HeroName);
+        cardDeckSectionWithFooter.highlight();
+        assertEquals(cardDeckSectionWithFooter.card1.footerText.getText(), card1HeroName);
+        assertEquals(cardDeckSectionWithFooter.card2.footerText.getText(), card2HeroName);
     }
 
     @Test
     public void isValidationTest() {
-        cardDeckWithoutFooter.highlight();
-        cardDeckWithoutFooter.card1.title.is().text(card1Title);
-        cardDeckWithoutFooter.card2.title.is().text(card2Title);
-        cardDeckWithoutFooter.card1.image.is().src(card1ImageSrc);
-        cardDeckWithoutFooter.card2.image.is().src(card2ImageSrc);
-        cardDeckWithoutFooter.card1.image.is().alt(card1ImageAlt);
-        cardDeckWithoutFooter.card2.image.is().alt(card2ImageAlt);
-        cardDeckWithoutFooter.card1.mainText.is().text(card1MainText);
-        cardDeckWithoutFooter.card2.mainText.is().text(card2MainText);
-        cardDeckWithoutFooter.card1.mutedText.is().text(card1HeroName);
-        cardDeckWithoutFooter.card2.mutedText.is().text(card2HeroName);
+        cardDeckSectionWithoutFooter.highlight();
+        cardDeckSectionWithoutFooter.card1.title.is().text(card1Title);
+        cardDeckSectionWithoutFooter.card2.title.is().text(card2Title);
+        cardDeckSectionWithoutFooter.card1.image.is().src(card1ImageSrc);
+        cardDeckSectionWithoutFooter.card2.image.is().src(card2ImageSrc);
+        cardDeckSectionWithoutFooter.card1.image.is().alt(card1ImageAlt);
+        cardDeckSectionWithoutFooter.card2.image.is().alt(card2ImageAlt);
+        cardDeckSectionWithoutFooter.card1.mainText.is().text(card1MainText);
+        cardDeckSectionWithoutFooter.card2.mainText.is().text(card2MainText);
+        cardDeckSectionWithoutFooter.card1.mutedText.is().text(card1HeroName);
+        cardDeckSectionWithoutFooter.card2.mutedText.is().text(card2HeroName);
 
-        cardDeckWithFooter.highlight();
-        cardDeckWithFooter.card1.title.is().text(card1Title);
-        cardDeckWithFooter.card2.title.is().text(card2Title);
-        cardDeckWithFooter.card1.image.is().src(card1ImageSrc);
-        cardDeckWithFooter.card2.image.is().src(card2ImageSrc);
-        cardDeckWithFooter.card1.image.is().alt(card1ImageAlt);
-        cardDeckWithFooter.card2.image.is().alt(card2ImageAlt);
-        cardDeckWithFooter.card1.mainText.is().text(card1MainText);
-        cardDeckWithFooter.card2.mainText.is().text(card2MainText);
-        cardDeckWithFooter.card1.footerText.is().text(card1HeroName);
-        cardDeckWithFooter.card2.footerText.is().text(card2HeroName);
+        cardDeckSectionWithFooter.highlight();
+        cardDeckSectionWithFooter.card1.title.is().text(card1Title);
+        cardDeckSectionWithFooter.card2.title.is().text(card2Title);
+        cardDeckSectionWithFooter.card1.image.is().src(card1ImageSrc);
+        cardDeckSectionWithFooter.card2.image.is().src(card2ImageSrc);
+        cardDeckSectionWithFooter.card1.image.is().alt(card1ImageAlt);
+        cardDeckSectionWithFooter.card2.image.is().alt(card2ImageAlt);
+        cardDeckSectionWithFooter.card1.mainText.is().text(card1MainText);
+        cardDeckSectionWithFooter.card2.mainText.is().text(card2MainText);
+        cardDeckSectionWithFooter.card1.footerText.is().text(card1HeroName);
+        cardDeckSectionWithFooter.card2.footerText.is().text(card2HeroName);
     }
 
 }

@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
  * Created by Natalia Amelina on 27.09.2019
  * Email: natalia_amelina@epam.com; Skype: nat_amelina
  */
-public class CardImageTest extends TestsInit {
+public class CardImageTests extends TestsInit {
 
     private static final String SRC_ATTR_EXPECTED = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
     private static final String ALT_ATTR_EXPECTED = "image";

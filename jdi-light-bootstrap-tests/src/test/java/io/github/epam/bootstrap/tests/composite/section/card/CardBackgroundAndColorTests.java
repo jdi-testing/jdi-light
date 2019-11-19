@@ -25,12 +25,6 @@ import static org.hamcrest.Matchers.is;
 
 public class CardBackgroundAndColorTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     @DataProvider(name = "cardColors")
     public static Object[][] cardColors() {
         return new Object[][]{
@@ -43,6 +37,12 @@ public class CardBackgroundAndColorTests extends TestsInit {
                 {cardLight, "bg-light", "rgba(248, 249, 250, 1)"},
                 {cardDark, "bg-dark", "rgba(52, 58, 64, 1)"},
         };
+    }
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
     }
 
     @Test(dataProvider = "cardColors")
