@@ -8,6 +8,10 @@ import org.openqa.selenium.By;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * To see an example of Vector Image in bootstrap please visit https://getbootstrap.com/docs/4.3/components/card/#image-overlays
+ */
+
 public class VectorImage extends BaseImage<VectorImageAssert> {
 
     @JDIAction(value = "Get '{name}' vector image internal element", level = DEBUG)

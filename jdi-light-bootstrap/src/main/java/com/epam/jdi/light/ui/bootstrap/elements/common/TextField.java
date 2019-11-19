@@ -9,6 +9,10 @@ import com.epam.jdi.light.ui.bootstrap.asserts.TextFieldAssert;
 
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 
+/**
+ * To see an example of Textfield web element please visit https://getbootstrap.com/docs/4.3/components/forms/
+ */
+
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements HasLabel, SetValue, HasPlaceholder, IsInput {
 

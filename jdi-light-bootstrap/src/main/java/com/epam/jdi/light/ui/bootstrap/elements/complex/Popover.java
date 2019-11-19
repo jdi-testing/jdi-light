@@ -9,6 +9,8 @@ import com.epam.jdi.light.ui.bootstrap.elements.composite.MediaObject;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 /**
+ * To see an example of Popover web element please visit https://getbootstrap.com/docs/4.3/components/popovers/#example
+ *
  * Created by Dmitrii Pavlov on 04.10.2019
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
