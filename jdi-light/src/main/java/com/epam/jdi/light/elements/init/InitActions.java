@@ -112,15 +112,16 @@ public class InitActions {
     }
     public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
         $("Root", aRule(Root.class, (e,a)-> e.locator.isRoot = true)),
-        $("Frame", aRule(Frame.class, (e,a)-> e.setFrame(getFrame(a)))),
+        $("Frame", aRule(Frame.class, (e,a)-> e.setFrames(getFrames(a)))),
         $("FindBySelenium", aRule(org.openqa.selenium.support.FindBy.class,
             (e,a)-> e.setLocator(findByToBy(a)))),
         $("Css", aRule(Css.class, (e,a)-> e.setLocator(findByToBy(a)))),
         $("XPath", aRule(XPath.class, (e,a)-> e.setLocator(findByToBy(a)))),
         $("ByText", aRule(ByText.class, (e,a)-> e.setLocator(findByToBy(a)))),
         $("WithText", aRule(WithText.class, (e,a)-> e.setLocator(findByToBy(a)))),
-        $("ClickArea", aRule(ClickArea.class, (e,a)-> e.setClickArea(a.value()))),
-        $("GetTextAs", aRule(GetTextAs.class, (e,a)-> e.setTextType(a.value()))),
+        $("ClickArea", aRule(ClickArea.class, (e,a)-> e.clickAreaType = a.value())),
+        $("GetTextAs", aRule(GetTextAs.class, (e,a)-> e.textType = a.value())),
+        $("SetTextAs", aRule(SetTextAs.class, (e,a)-> e.setTextType = a.value())),
         $("NoCache", aRule(NoCache.class, (e,a)-> e.offCache())),
 
         $("Timeout", aRule(WaitTimeout.class, (e,a)-> e.waitSec(a.value()))),

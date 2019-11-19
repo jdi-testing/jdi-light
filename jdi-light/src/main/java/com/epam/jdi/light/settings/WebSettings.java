@@ -26,6 +26,7 @@ import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
+import static com.epam.jdi.light.common.SetTextTypes.*;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
@@ -94,6 +95,7 @@ public class WebSettings {
 
     public static ElementArea CLICK_TYPE = SMART_CLICK;
     public static TextTypes TEXT_TYPE = SMART_TEXT;
+    public static SetTextTypes SET_TEXT_TYPE = SET_TEXT;
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
     public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
     public static boolean STRICT_SEARCH = true;
@@ -173,7 +175,8 @@ public class WebSettings {
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(),value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();
-        SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
+        if (SMART_SEARCH_LOCATORS.size() == 0)
+            SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
     }
     private static String getRemoteUrl(String prop) {
         switch (prop.toLowerCase().replaceAll(" ", "")) {

@@ -24,6 +24,7 @@ import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
+import static java.util.Arrays.asList;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -110,12 +111,15 @@ public class Line implements IList<String>, IBaseElement {
         try { instance = create(data); }
         catch (Exception ex) { throw exception("Can't convert row to Data (%s)", data.getSimpleName()); }
         int i = 0;
-        for (Field field : data.getDeclaredFields()) {
-            try {
-                field.set(instance, getList(i).get(i));
-            } catch (Exception ex) {
-                throw exception("Can't set table value '%s' to field '%s'", getData(i).get(i), field.getName());
-            }
+        List<Field> fields = asList(data.getDeclaredFields());
+        for (String name : headers) {
+            Field field = LinqUtils.first(fields, f -> namesEqual(getElementName(f), name));
+            if (field != null)
+                try {
+                    field.set(instance, getList(i).get(i));
+                } catch (Exception ex) {
+                    throw exception("Can't set table value '%s' to field '%s'", getData(i).get(i), field.getName());
+                }
             i++;
         }
         return instance;
@@ -146,6 +150,7 @@ public class Line implements IList<String>, IBaseElement {
             String header = headers.get(i);
             Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
                 f -> namesEqual(getElementName(f), header));
+            if (field == null) continue;
             try {
                 IBaseElement ui = ((IBaseElement)field.get(instance));
                 ui.base().setWebElement(elements.get(i));

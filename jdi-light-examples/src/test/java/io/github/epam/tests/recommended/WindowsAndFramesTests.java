@@ -1,12 +1,12 @@
 package io.github.epam.tests.recommended;
 
+import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.StaticTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.StaticSite.iframe;
+import static io.github.com.StaticSite.*;
 import static io.github.com.pages.GithubPage.repoDescription;
 import static io.github.com.pages.HomePage.githubLink;
 import static io.github.com.pages.HomePage.jdiText;
@@ -47,5 +47,19 @@ public class WindowsAndFramesTests extends StaticTestsInit {
     @Test
     public void frameTest() {
         iframe.userIcon.click();
+    }
+    @Test
+    public void wolverinFrameTest() {
+        wolverinFrame.has().attr("src", containsString("wolverin"));
+    }
+    @Test
+    public void spidermanTest() {
+        WebPage.reload();
+        spidermanElement.has().attr("src", containsString("spider-man"));
+    }
+    @Test
+    public void spidermanFrameTest() {
+        WebPage.reload();
+        frameSpiderman.spiderMan.has().attr("src", containsString("spider-man"));
     }
 }
