@@ -15,18 +15,18 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class InputGroupButtonWithDropdownTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String testText = "Test text";
     private String action = "Action";
     private String anotherAction = "Another action";
     private String somethingElseHere = "Something else here";
     private String separatedLink = "Separated link";
     private String dropdownButton = "Dropdown";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void dropdownMenuIsValidationTests() {

@@ -7,6 +7,8 @@ import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.ui.bootstrap.asserts.ListGroupAssert;
 
 /**
+ * To see an example of List Group web element please visit https://getbootstrap.com/docs/4.3/components/list-group/
+ *
  * Created by Dmitrii Pavlov on 25.09.2019
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */

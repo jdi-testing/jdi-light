@@ -58,11 +58,24 @@ public class WebPage extends DriverBase implements PageObject {
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = CheckTypes.NONE;
 
+    private static Safe<String> currentPage = new Safe<>("Undefined Page");
+    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
+
+    public static JAction1<WebPage> BEFORE_NEW_PAGE = page -> {
+        if (CHECK_AFTER_OPEN == NEW_PAGE)
+            page.checkOpened();
+        logger.toLog("Page: " + page.getName());
+        TIMEOUT.set(PAGE_TIMEOUT.get());
+    };
+    public static JAction1<WebPage> BEFORE_THIS_PAGE = page -> {
+        if (CHECK_AFTER_OPEN == EVERY_PAGE)
+            page.checkOpened();
+    };
+
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this).setup(Form.class,e->e.setName(getName()+" Form"));
     }
 
-    private static Safe<String> currentPage = new Safe<>("Undefined Page");
     public static String getCurrentPage() { return currentPage.get(); }
     public static void setCurrentPage(WebPage page) {
         currentPage.set(page.getName());
@@ -398,15 +411,4 @@ public class WebPage extends DriverBase implements PageObject {
         }
     }
 
-    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
-    public static JAction1<WebPage> BEFORE_NEW_PAGE = page -> {
-        if (CHECK_AFTER_OPEN == NEW_PAGE)
-            page.checkOpened();
-        logger.toLog("Page: " + page.getName());
-        TIMEOUT.set(PAGE_TIMEOUT.get());
-    };
-    public static JAction1<WebPage> BEFORE_THIS_PAGE = page -> {
-        if (CHECK_AFTER_OPEN == EVERY_PAGE)
-            page.checkOpened();
-    };
 }

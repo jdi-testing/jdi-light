@@ -21,13 +21,13 @@ import static org.testng.Assert.assertEquals;
 
 public class LinkTests extends TestsInit {
 
+    private String text = "Github JDI";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    private String text = "Github JDI";
-
     //TODO Performance issue
     @Test
     public void getTextTest() {

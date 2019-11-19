@@ -8,6 +8,17 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 
 public class PerformancePage {
+
+    // Textfield
+    @FindBy(css = "#textarea-performance")
+    public WebElement textfield;
+
+    // Droplist
+    @FindBy(css = "select[ui=dropdown]")
+    private WebElement dropdownValue;
+    @FindBy(css = "#user-names option")
+    private List<WebElement> dropdown;
+
     //Table
     @FindBy(id = "users-table") public WebElement table;
 
@@ -22,12 +33,6 @@ public class PerformancePage {
         return null;
     }
 
-    // Droplist
-    @FindBy(css = "select[ui=dropdown]")
-    private WebElement dropdownValue;
-    @FindBy(css = "#user-names option")
-    private List<WebElement> dropdown;
-
     public void select(String name) {
         for (WebElement option : dropdown) {
             if (option.getText().equals(name)) {
@@ -38,8 +43,4 @@ public class PerformancePage {
     public String isSelected() {
         return new Select(dropdownValue).getFirstSelectedOption().getText();
     }
-
-    // Textfield
-    @FindBy(css = "#textarea-performance")
-    public WebElement textfield;
 }

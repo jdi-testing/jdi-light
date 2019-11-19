@@ -3,6 +3,10 @@ package com.epam.jdi.light.elements.complex.table;
 import org.openqa.selenium.support.ui.Quotes;
 
 public class Single {
+
+    private String locator;
+    private String name;
+
     public static Single hasValue(String value) {
         return new Single("/td[%s]//*/text()[normalize-space(.) = "+ Quotes.escape(value)+"]",
                  "has '"+value +"'");
@@ -12,8 +16,6 @@ public class Single {
                 "contains '"+value +"'");
     }
 
-    private String locator;
-    private String name;
     Single(String locator, String name) {
         this.locator = locator;
         this.name = name;

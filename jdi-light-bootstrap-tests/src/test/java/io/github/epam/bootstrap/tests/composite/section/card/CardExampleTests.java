@@ -20,12 +20,6 @@ import static org.testng.Assert.assertEquals;
 
 public class CardExampleTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String titleText = "CARD TITLE";
     private String mainText = "Some quick example text to build" +
             " on the card title and make up the bulk of the card's content.";
@@ -33,6 +27,12 @@ public class CardExampleTests extends TestsInit {
     private String imageSrc = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
     private String imageAlt = "image";
     private String buttonText = "Click Me!";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void getTitleTextTest() {

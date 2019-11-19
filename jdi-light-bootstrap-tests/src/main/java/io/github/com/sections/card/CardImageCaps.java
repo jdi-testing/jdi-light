@@ -6,6 +6,10 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Image;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.Card;
 
+/**
+ * To see an example of Card Image Caps in bootstrap please visit https://getbootstrap.com/docs/4.3/components/card/#images
+ */
+
 public class CardImageCaps extends Card {
     @UI(".card-img-top")
     public Image image;
