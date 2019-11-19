@@ -1,7 +1,7 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.SeleniumWebList;
+import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -35,7 +35,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.WithText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;

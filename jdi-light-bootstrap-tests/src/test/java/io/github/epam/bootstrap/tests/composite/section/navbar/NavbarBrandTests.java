@@ -6,6 +6,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarSection;

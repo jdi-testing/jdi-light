@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.WebElement;
 
-
 import static com.epam.jdi.light.common.ElementArea.ACTION_CLICK;
 import static com.epam.jdi.light.common.TextTypes.LABEL;
 import static com.epam.jdi.light.settings.WebSettings.ANY_ELEMENT;

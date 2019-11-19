@@ -5,9 +5,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.progressWithLabels;
-import static io.github.com.pages.BootstrapPage.plus;
 import static io.github.com.pages.BootstrapPage.minus;
+import static io.github.com.pages.BootstrapPage.plus;
+import static io.github.com.pages.BootstrapPage.progressWithLabels;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;

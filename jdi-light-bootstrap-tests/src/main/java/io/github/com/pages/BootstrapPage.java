@@ -23,10 +23,10 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.CardImageCaps;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.MultiplebarsProgress;
-import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.MultiplebarsProgress;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonToolbar;
 import io.github.com.sections.Jumbotron;
@@ -100,20 +100,18 @@ import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
-//--- navbar package
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarContainer;
-import io.github.com.sections.navbar.NavbarNav;
-import io.github.com.sections.navbar.ScrollSpyNav;
-import io.github.com.sections.navbar.NavbarWithDropdown;
-import io.github.com.sections.navbar.NavbarText;
-import io.github.com.sections.navbar.NavbarForm;
-import io.github.com.sections.navbar.NavbarWithInputGroupForm;
 import io.github.com.sections.navbar.NavbarExternalContent;
-import io.github.com.sections.navbar.NavbarSection;
+import io.github.com.sections.navbar.NavbarForm;
+import io.github.com.sections.navbar.NavbarNav;
 import io.github.com.sections.navbar.NavbarPlacement;
+import io.github.com.sections.navbar.NavbarSection;
 import io.github.com.sections.navbar.NavbarSupportedContent;
-//--- navbar package
+import io.github.com.sections.navbar.NavbarText;
+import io.github.com.sections.navbar.NavbarWithDropdown;
+import io.github.com.sections.navbar.NavbarWithInputGroupForm;
+import io.github.com.sections.navbar.ScrollSpyNav;
 import io.github.com.sections.navs.NavsAlignmentCenter;
 import io.github.com.sections.navs.NavsAlignmentEnd;
 import io.github.com.sections.navs.NavsBaseA;
@@ -137,6 +135,9 @@ import io.github.com.sections.progress.ProgressSection;
 import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
+
+//--- navbar package
+//--- navbar package
 
 
 public class BootstrapPage extends WebPage {

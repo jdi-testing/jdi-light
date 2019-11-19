@@ -8,7 +8,6 @@ import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.ui.bootstrap.asserts.RangeAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.ui.bootstrap.BootstrapUtils.asDouble;
 import static com.epam.jdi.light.ui.bootstrap.BootstrapUtils.getDouble;
 
 public class Range extends UIBaseElement<UIAssert> implements HasLabel, SetValue {
