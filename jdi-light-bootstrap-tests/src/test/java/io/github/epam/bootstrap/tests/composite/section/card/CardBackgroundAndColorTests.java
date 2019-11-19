@@ -7,14 +7,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
+import static io.github.com.pages.BootstrapPage.cardBlue;
 import static io.github.com.pages.BootstrapPage.cardBrightBlue;
-import static io.github.com.pages.BootstrapPage.cardGrey;
+import static io.github.com.pages.BootstrapPage.cardDark;
 import static io.github.com.pages.BootstrapPage.cardGreen;
+import static io.github.com.pages.BootstrapPage.cardGrey;
+import static io.github.com.pages.BootstrapPage.cardLight;
 import static io.github.com.pages.BootstrapPage.cardRed;
 import static io.github.com.pages.BootstrapPage.cardYellow;
-import static io.github.com.pages.BootstrapPage.cardBlue;
-import static io.github.com.pages.BootstrapPage.cardLight;
-import static io.github.com.pages.BootstrapPage.cardDark;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 
@@ -24,12 +24,6 @@ import static org.hamcrest.Matchers.is;
  */
 
 public class CardBackgroundAndColorTests extends TestsInit {
-
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
 
     @DataProvider(name = "cardColors")
     public static Object[][] cardColors() {
@@ -43,6 +37,12 @@ public class CardBackgroundAndColorTests extends TestsInit {
                 {cardLight, "bg-light", "rgba(248, 249, 250, 1)"},
                 {cardDark, "bg-dark", "rgba(52, 58, 64, 1)"},
         };
+    }
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
     }
 
     @Test(dataProvider = "cardColors")

@@ -23,6 +23,8 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
 
 public class Line implements IList<String>, IBaseElement {
+    private MapArray<String, String> data;
+    private List<String> list;
     private JFunc<MapArray<String, String>> dataMap;
     private SeleniumWebList elements;
     private List<String> headers;
@@ -43,8 +45,6 @@ public class Line implements IList<String>, IBaseElement {
         line.headers = new ArrayList<>(headers);
         return line;
     }
-    private MapArray<String, String> data;
-    private List<String> list;
     private List<String> getList(int minAmount) {
         return list != null && list.size() >= minAmount
                 ? list

@@ -44,6 +44,35 @@ import static java.lang.reflect.Array.get;
 import static java.lang.reflect.Array.getLength;
 
 public final class UIUtils {
+
+
+    public static JFunc2<Object, String, IClickable> GET_DEFAULT_BUTTON =
+            (obj, buttonName) -> $("[type=submit]", obj).setName(buttonName);
+
+    public static JFunc2<Object, String, IClickable> GET_BUTTON = (obj, buttonName) -> {
+        List<Field> fields = getFields(obj, IsButton.class);
+        if (fields.size() == 0)
+            fields = getFieldsExact(obj, WebElement.class, UIElement.class);
+        if (fields.size() > 1) {
+            fields = filter(fields, f ->
+                    isInterfaceAnd(getValueField(f, obj).getClass(), IClickable.class, INamed.class));
+            if (fields.size() >= 1) {
+                Collection<IClickable> buttons = select(fields,
+                        f -> (IClickable) getValueField(f, obj));
+                IClickable button = first(buttons, b -> namesEqual(toButton(((INamed) b).getName()), toButton(buttonName)));
+                if (button != null)
+                    return button;
+            }
+        }
+        if (fields.size() == 1) {
+            Field field = fields.get(0);
+            Object btnObj = getValueField(field, obj);
+            if (isInterface(btnObj.getClass(), IClickable.class))
+                return (IClickable) btnObj;
+        }
+        return GET_DEFAULT_BUTTON.execute(obj, buttonName);
+    };
+
     private UIUtils() {
     }
     public static MapArray<String, String> getMapFromObject(Object obj) {
@@ -76,32 +105,6 @@ public final class UIUtils {
         return print(elements);
     }
 
-    public static JFunc2<Object, String, IClickable> GET_DEFAULT_BUTTON =
-        (obj, buttonName) -> $("[type=submit]", obj).setName(buttonName);
-
-    public static JFunc2<Object, String, IClickable> GET_BUTTON = (obj, buttonName) -> {
-        List<Field> fields = getFields(obj, IsButton.class);
-        if (fields.size() == 0)
-            fields = getFieldsExact(obj, WebElement.class, UIElement.class);
-        if (fields.size() > 1) {
-            fields = filter(fields, f ->
-                isInterfaceAnd(getValueField(f, obj).getClass(), IClickable.class, INamed.class));
-            if (fields.size() >= 1) {
-                Collection<IClickable> buttons = select(fields,
-                    f -> (IClickable) getValueField(f, obj));
-                IClickable button = first(buttons, b -> namesEqual(toButton(((INamed) b).getName()), toButton(buttonName)));
-                if (button != null)
-                    return button;
-            }
-        }
-        if (fields.size() == 1) {
-            Field field = fields.get(0);
-            Object btnObj = getValueField(field, obj);
-            if (isInterface(btnObj.getClass(), IClickable.class))
-                return (IClickable) btnObj;
-        }
-        return GET_DEFAULT_BUTTON.execute(obj, buttonName);
-    };
 
     private static String toButton(String buttonName) {
         return buttonName.toLowerCase().contains("button") ? buttonName : buttonName + "button";

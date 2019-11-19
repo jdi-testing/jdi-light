@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.cardColumns;
+import static io.github.com.pages.BootstrapPage.cardColumnsSection;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
@@ -28,48 +28,54 @@ public class CardColumnsTests extends TestsInit {
 
     @Test
     public void checkElementsPositionTest() {
-        assertTrue(cardColumns.topLeftCard.core().getLocation().x < cardColumns.topRightCard.core().getLocation().x);
-        assertTrue(cardColumns.topLeftCard.core().getLocation().y < cardColumns.bottomLeftCard.core().getLocation().y);
-        assertTrue(cardColumns.topRightCard.core().getLocation().y < cardColumns.middleRightCard.core().getLocation().y);
-        assertTrue(cardColumns.middleRightCard.core().getLocation().y < cardColumns.bottomRightCard.core().getLocation().y);
-        assertTrue(cardColumns.bottomLeftCard.core().getLocation().x < cardColumns.bottomRightCard.core().getLocation().x);
-        assertTrue(cardColumns.bottomLeftCard.core().getLocation().x < cardColumns.middleRightCard.core().getLocation().x);
+        assertTrue(cardColumnsSection.topLeftCard.core().getLocation().x <
+                cardColumnsSection.topRightCard.core().getLocation().x);
+        assertTrue(cardColumnsSection.topLeftCard.core().getLocation().y <
+                cardColumnsSection.bottomLeftCard.core().getLocation().y);
+        assertTrue(cardColumnsSection.topRightCard.core().getLocation().y <
+                cardColumnsSection.middleRightCard.core().getLocation().y);
+        assertTrue(cardColumnsSection.middleRightCard.core().getLocation().y <
+                cardColumnsSection.bottomRightCard.core().getLocation().y);
+        assertTrue(cardColumnsSection.bottomLeftCard.core().getLocation().x <
+                cardColumnsSection.bottomRightCard.core().getLocation().x);
+        assertTrue(cardColumnsSection.bottomLeftCard.core().getLocation().x <
+                cardColumnsSection.middleRightCard.core().getLocation().x);
     }
 
     @Test
     public void getMainTextText() {
-        assertEquals(cardColumns.topLeftCard.mainText.getText(), mainText);
+        assertEquals(cardColumnsSection.topLeftCard.mainText.getText(), mainText);
     }
 
     @Test
     public void getMutedTextTest() {
-        assertEquals(cardColumns.bottomLeftCard.mutedText.getText(), mutedText);
+        assertEquals(cardColumnsSection.bottomLeftCard.mutedText.getText(), mutedText);
     }
 
     @Test
     public void getFooterTextTest() {
-        assertEquals(cardColumns.topRightCard.footerText.getText(), footerText);
+        assertEquals(cardColumnsSection.topRightCard.footerText.getText(), footerText);
     }
 
     @Test
     public void getSrcTest() {
-        assertEquals(cardColumns.bottomLeftCard.image.src(), imageSrc);
+        assertEquals(cardColumnsSection.bottomLeftCard.image.src(), imageSrc);
     }
 
     @Test
     public void isValidationTest() {
-        cardColumns.bottomLeftCard.title.is().text(is(titleText));
-        cardColumns.topLeftCard.mainText.is().text(is(mainText));
-        cardColumns.bottomLeftCard.mutedText.is().displayed()
+        cardColumnsSection.bottomLeftCard.title.is().text(is(titleText));
+        cardColumnsSection.topLeftCard.mainText.is().text(is(mainText));
+        cardColumnsSection.bottomLeftCard.mutedText.is().displayed()
                 .and().text(is(mutedText))
                 .core()
                 .css("font-size", is("11.2px"))
                 .tag(is("small"));
-        cardColumns.bottomLeftCard.image.is().displayed()
+        cardColumnsSection.bottomLeftCard.image.is().displayed()
                 .and().src(is(imageSrc))
                 .core()
                 .attr("alt", imageAlt);
-        cardColumns.bottomLeftCard.image.assertThat().width(is(130));
-        cardColumns.bottomLeftCard.image.assertThat().height(is(160));
+        cardColumnsSection.bottomLeftCard.image.assertThat().width(is(130));
+        cardColumnsSection.bottomLeftCard.image.assertThat().height(is(160));
     }
 }
