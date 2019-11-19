@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.common;
+package io.github.epam.bootstrap.tests.composite.section;
 
 import io.github.epam.TestsInit;
 import io.github.epam.states.States;
