@@ -16,17 +16,17 @@ import static org.hamcrest.Matchers.is;
 
 public class InputGroupCustomSelect extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String optionText = "Options";
     private String selectChoose = "Choose...";
     private String selectOne = "One";
     private String selectTwo = "Two";
     private String selectThree = "Three";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void isValidationOptionsSectionTests() {

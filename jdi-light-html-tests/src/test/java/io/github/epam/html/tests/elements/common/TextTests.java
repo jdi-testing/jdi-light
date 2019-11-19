@@ -19,13 +19,13 @@ import static org.testng.Assert.assertEquals;
 
 public class TextTests extends TestsInit {
 
+    private String text = "Powerful Framework for UI Tests Automation. Suitable for any UI project: Web(Html5, Angular, React...), Mobile(Android IOs), Desktop(Win app) etc.";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    private String text = "Powerful Framework for UI Tests Automation. Suitable for any UI project: Web(Html5, Angular, React...), Mobile(Android IOs), Desktop(Win app) etc.";
-
     //TODO Performance issue
     @Test
     public void getTextTest() {

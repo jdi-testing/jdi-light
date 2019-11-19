@@ -12,12 +12,6 @@ import static org.testng.Assert.assertEquals;
 
 public class CardGroupsTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String card1Title = "SPIDER MAN";
     private String card2Title = "HULK";
     private String card1ImageSrc = "https://jdi-testing.github.io/jdi-light/images/spider-man.jpg";
@@ -28,6 +22,12 @@ public class CardGroupsTests extends TestsInit {
     private String card2MainText = "The Hulk is a fictional superhero appearing in publications by the American publisher Marvel Comics.";
     private String card1HeroName = "Peter Parker";
     private String card2HeroName = "Bruce Banner";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void getSrcTest() {

@@ -24,14 +24,14 @@ import static org.testng.Assert.assertEquals;
 
 public class NumberSelectorTests extends TestsInit {
 
+    private String number = "2.1";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         height.setNumber(number);
     }
-    private String number = "2.1";
-
     @Test
     public void getLabelTextTest() {
         assertEquals(height.labelText(), "Height (metres):");

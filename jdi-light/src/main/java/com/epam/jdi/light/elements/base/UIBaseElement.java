@@ -9,14 +9,16 @@ import com.epam.jdi.light.elements.interfaces.base.IListBase;
 
 public abstract class UIBaseElement<A extends UIAssert>
         implements ICoreElement, HasAssert<A>, IListBase {
+
     protected UIElement uiElement;
+    protected Boolean thisParent = null;
+
     public JDIBase base() { return core().base(); }
     public UIElement core() {
         if (uiElement == null)
             uiElement = new UIElement();
         return uiElement;
     }
-    protected Boolean thisParent = null;
     protected boolean thisParent() {
         if (thisParent == null)
             return base().locator.isEmpty();

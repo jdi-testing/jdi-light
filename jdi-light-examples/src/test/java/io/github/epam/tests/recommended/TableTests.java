@@ -21,6 +21,9 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class TableTests extends StaticTestsInit {
+
+    private static long timeStart;
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -105,7 +108,6 @@ public class TableTests extends StaticTestsInit {
         validateAlert(is("Alcobendas"));
     }
 
-    private static long timeStart;
     private static void start() {
         timeStart = currentTimeMillis();
     }

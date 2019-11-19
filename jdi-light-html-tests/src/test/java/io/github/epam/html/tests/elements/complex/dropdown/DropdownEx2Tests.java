@@ -29,13 +29,15 @@ import static org.testng.Assert.fail;
  */
 
 public class DropdownEx2Tests extends TestsInit {
+
+    private String text = "Colors";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
         colors2.select(text);
     }
-    private String text = "Colors";
 
     @Test
     public void getValueTest() {

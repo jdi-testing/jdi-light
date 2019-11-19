@@ -34,12 +34,13 @@ import static org.testng.Assert.fail;
 
 public class ButtonTests extends TestsInit {
 
+    private String text = "Big Red Button-Input";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    private String text = "Big Red Button-Input";
 
     @Test
     public void getTextTest() {

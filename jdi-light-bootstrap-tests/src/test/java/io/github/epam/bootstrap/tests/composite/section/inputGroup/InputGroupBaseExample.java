@@ -23,12 +23,6 @@ import static org.testng.Assert.assertEquals;
 
 public class InputGroupBaseExample extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String textExample1 = "setting text",
             addonExample1 = "@",
             placeholderExample2 = "Recipient's username",
@@ -40,6 +34,13 @@ public class InputGroupBaseExample extends TestsInit {
             addonAppendExample5 = "With textarea";
 
     private String[] linesTextArea = {"line 1", "line 2", "line 3"};
+
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test(priority = 1)
     public void setTextTestExample1() {
