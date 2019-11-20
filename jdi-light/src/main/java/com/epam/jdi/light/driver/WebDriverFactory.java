@@ -125,7 +125,7 @@ public class WebDriverFactory {
         }
     }
 
-    @SuppressWarnings("PMD.NPathComplexity")
+    //@SuppressWarnings("PMD.NPathComplexity")
     public static WebDriver getDriver(String driverName) {
         if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
             RUN_DRIVERS.set(map($(driverName, INIT_DRIVER)));
