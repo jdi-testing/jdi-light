@@ -616,7 +616,7 @@ public class UIElement extends JDIBase
         return $$(by, this);
     }
     public UIElement firstChild() { return find("*"); }
-    public WebList childs() { return finds("*"); }
+    public WebList children() { return finds("*"); }
     //endregion
 
     //region Aliases

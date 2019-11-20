@@ -11,6 +11,10 @@ import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.asserts.CheckboxAssert;
 
+/**
+ * To see an example of Checkbox web element as form please visit https://getbootstrap.com/docs/4.3/components/forms/#default-stacked
+ */
+
 public class Checkbox extends UIBaseElement<CheckboxAssert>
         implements HasLabel, SetValue, HasClick, HasCheck {
 
