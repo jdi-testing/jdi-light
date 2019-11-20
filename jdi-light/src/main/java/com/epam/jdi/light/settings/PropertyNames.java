@@ -1,4 +1,4 @@
-package com.epam.jdi.light.common;
+package com.epam.jdi.light.settings;
 
 public class PropertyNames {
 
