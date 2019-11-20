@@ -28,7 +28,7 @@ public class TimeoutWaitElementTest {
         Properties properties = new Properties();
         properties.setProperty(TIMEOUT_WAIT_ELEMENT, value);
         validateProperties(properties);
-        Assert.fail("Value " + value + " should not be valid");
+        Assert.fail("Value " + value + " should not be valid for this test.");
     }
 
     @Test(dataProvider = "positiveData")
