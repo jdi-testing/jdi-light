@@ -17,13 +17,14 @@ public class PropertyValidator {
 
     public static void validate(String name, String value) {
         if (PROPERTY_MATCHERS.containsKey(name) && !value.matches(PROPERTY_MATCHERS.get(name))) {
-            throw exception("Value of parameter '%s' is not valid.", name);
+            throw exception("Value of parameter '%s' is not valid." +
+                    " See example: https://jdi-docs.github.io/jdi-light/#driver-settings", name);
         }
     }
 
-    private static Map initMatchers() {
+    private static Map<String, String> initMatchers() {
         PROPERTY_MATCHERS = new HashMap<>();
-        PROPERTY_MATCHERS.put(TIMEOUT_WAIT_ELEMENT, "\\d+");
+        PROPERTY_MATCHERS.put(TIMEOUT_WAIT_ELEMENT, "^[1-9][0-9]{1,2}$|^\\d$");
         return PROPERTY_MATCHERS;
     }
 }
