@@ -2,8 +2,8 @@ package io.github.epam.bootstrap.tests.composite.dropdown;
 
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;

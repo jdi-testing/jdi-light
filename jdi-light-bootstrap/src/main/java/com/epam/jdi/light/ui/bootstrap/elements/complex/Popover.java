@@ -3,8 +3,8 @@ package com.epam.jdi.light.ui.bootstrap.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.MediaObject;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 

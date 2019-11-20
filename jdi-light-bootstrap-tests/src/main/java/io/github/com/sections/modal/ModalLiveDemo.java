@@ -2,8 +2,8 @@ package io.github.com.sections.modal;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ModalLiveDemo extends Modal {
 
