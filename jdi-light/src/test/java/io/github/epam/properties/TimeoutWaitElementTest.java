@@ -1,6 +1,5 @@
 package io.github.epam.properties;
 
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -8,6 +7,7 @@ import java.util.Properties;
 
 import static com.epam.jdi.light.common.PropertyValidator.validateProperties;
 import static com.epam.jdi.light.settings.PropertyNames.TIMEOUT_WAIT_ELEMENT;
+import static org.testng.Assert.fail;
 
 public class TimeoutWaitElementTest {
 
@@ -28,7 +28,7 @@ public class TimeoutWaitElementTest {
         Properties properties = new Properties();
         properties.setProperty(TIMEOUT_WAIT_ELEMENT, value);
         validateProperties(properties);
-        Assert.fail("Value " + value + " should not be valid for this test.");
+        fail("Value " + value + " should not be valid for this test.");
     }
 
     @Test(dataProvider = "positiveData")
