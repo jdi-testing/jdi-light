@@ -33,7 +33,7 @@ import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
-import static com.epam.jdi.light.common.PropertyName.TIMEOUT_WAIT_ELEMENT;
+import static com.epam.jdi.light.common.PropertyNames.TIMEOUT_WAIT_ELEMENT;
 import static com.epam.jdi.light.common.PropertyValidator.validateProperties;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;

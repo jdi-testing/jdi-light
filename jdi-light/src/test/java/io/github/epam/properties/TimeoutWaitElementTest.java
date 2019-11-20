@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.Properties;
 
-import static com.epam.jdi.light.common.PropertyName.TIMEOUT_WAIT_ELEMENT;
+import static com.epam.jdi.light.common.PropertyNames.TIMEOUT_WAIT_ELEMENT;
 import static com.epam.jdi.light.common.PropertyValidator.validateProperties;
 
 public class TimeoutWaitElementTest {

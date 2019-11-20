@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.PropertyName.TIMEOUT_WAIT_ELEMENT;
+import static com.epam.jdi.light.common.PropertyNames.TIMEOUT_WAIT_ELEMENT;
 
 public class PropertyValidator {
 
