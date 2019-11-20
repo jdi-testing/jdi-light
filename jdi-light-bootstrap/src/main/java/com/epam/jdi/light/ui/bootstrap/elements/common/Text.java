@@ -7,6 +7,10 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 
 import static com.epam.jdi.light.common.TextTypes.TEXT;
 
+/**
+ * To see an example of Text in bootstrap please visit https://getbootstrap.com/docs/4.3/utilities/text/
+ */
+
 public class Text extends UIBaseElement<TextAssert>
         implements HasValue, IsText {
 

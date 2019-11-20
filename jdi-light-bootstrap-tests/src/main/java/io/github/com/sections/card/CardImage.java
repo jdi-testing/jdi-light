@@ -1,11 +1,10 @@
 package io.github.com.sections.card;
 
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Image;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
-public class CardImage extends Section {
+public class CardImage extends Card {
     @UI(".card-text")
     public Text text;
     @UI("#bs-card-image")

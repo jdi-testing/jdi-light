@@ -22,13 +22,13 @@ import static org.testng.Assert.assertEquals;
 
 public class LabelTests extends TestsInit {
 
+    private String text = "JDI TESTING PLATFORM";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    private String text = "JDI TESTING PLATFORM";
-
     //TODO Performance issue
     @Test
     public void getTextTest() {

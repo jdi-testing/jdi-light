@@ -10,6 +10,11 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
 
 public class TableMatcher {
+
+    private String name;
+    private String locator;
+    private Column column;
+
     public static JFunc2<BaseTable, TableMatcher[], SeleniumWebList> TABLE_MATCHER = (table, matchers) -> {
         String locator = format("./%s/ancestor::*/td", print(map(matchers, m ->
                 m.getLocator(table)),"/ancestor::*"));
@@ -24,13 +29,10 @@ public class TableMatcher {
                 column, "contains '"+value +"'");
     }
 
-    private String locator;
-    private Column column;
     public TableMatcher setColumn(Column column) {
         this.column = column;
         return this;
     }
-    private String name;
     TableMatcher(String locator, Column column, String name) {
         this.locator = locator;
         this.column = column;

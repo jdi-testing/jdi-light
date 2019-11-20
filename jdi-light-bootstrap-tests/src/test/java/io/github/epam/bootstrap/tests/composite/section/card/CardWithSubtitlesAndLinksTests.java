@@ -23,12 +23,6 @@ import static org.testng.Assert.assertEquals;
 
 public class CardWithSubtitlesAndLinksTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String titleText = "CARD TITLE";
     private String subtitleText = "CARD SUBTITLE";
     private String mainText = "Some quick example text to build on the card title " +
@@ -41,6 +35,12 @@ public class CardWithSubtitlesAndLinksTests extends TestsInit {
     private String link2Text = "JDI Website";
     private String link1Value = "JDI Light Github";
     private String link2Value = "JDI Website";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void getTitleTextTest() {
