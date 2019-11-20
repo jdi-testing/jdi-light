@@ -20,7 +20,6 @@ import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -355,5 +354,4 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     public boolean isNotEmpty() {
         return size() > 0;
     }
-
 }

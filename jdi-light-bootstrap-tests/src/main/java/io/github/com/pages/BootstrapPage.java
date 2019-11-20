@@ -136,10 +136,6 @@ import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
 
-//--- navbar package
-//--- navbar package
-
-
 public class BootstrapPage extends WebPage {
     //region Simple Elements
     public static UIElement inputGroupWrap;
@@ -715,5 +711,4 @@ public class BootstrapPage extends WebPage {
     @UI("#modal-optional-sizes")
     public static ModalOptionalSizes modalOptionalSizes;
     //endregion
-
 }

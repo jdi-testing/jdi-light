@@ -56,11 +56,11 @@ public class ActionProcessor {
     );
 
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
-    protected void jdiPointcut() {
+    protected void jdiPointcut() { // empty
     }
 
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
-    protected void stepPointcut() {
+    protected void stepPointcut() { // empty
     }
 
     @Around("jdiPointcut()")
