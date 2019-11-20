@@ -28,6 +28,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonToolbar;
+import io.github.com.sections.InputFileSection;
 import io.github.com.sections.Jumbotron;
 import io.github.com.sections.MediaObjectNesting;
 import io.github.com.sections.MediaObjectSample;
@@ -72,6 +73,8 @@ import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.form.Switches;
 import io.github.com.sections.inputgroup.CustomSelect;
 import io.github.com.sections.inputgroup.CustomSelectWithButton;
+import io.github.com.sections.inputgroup.InputGroupCustomFileInput;
+import io.github.com.sections.inputgroup.InputGroupCustomUploadFile;
 import io.github.com.sections.inputgroup.InputGroupInputWithCheckBox;
 import io.github.com.sections.inputgroup.InputGroupInputWithLabelAndText;
 import io.github.com.sections.inputgroup.InputGroupInputWithRadio;
@@ -714,4 +717,10 @@ public class BootstrapPage extends WebPage {
     public static ModalOptionalSizes modalOptionalSizes;
     //endregion
 
+    @UI("#form-controls-file-input")
+    public static InputFileSection inputFileSection;
+    @UI("#file-input .custom-file")
+    public static InputGroupCustomFileInput inputGroupCustomFileInput;
+    @UI(".input-group#upload-file")
+    public static InputGroupCustomUploadFile inputGroupCustomUploadFile;
 }
