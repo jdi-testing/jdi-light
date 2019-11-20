@@ -5,11 +5,12 @@ import java.util.Map;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.settings.PropertyNames.TIMEOUT_WAIT_ELEMENT;
 
 public class PropertyValidator {
 
     private static Map<String, String> PROPERTY_MATCHERS = initMatchers();
+
+    public static final String TIMEOUT_WAIT_ELEMENT = "timeout.wait.element";
 
     public static void validateProperties(Properties properties) {
         properties.forEach((k, v) -> validate(k.toString(), v.toString()));
