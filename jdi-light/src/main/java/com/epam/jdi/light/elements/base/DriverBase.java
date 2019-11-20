@@ -19,17 +19,13 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public abstract class DriverBase implements JDIElement {
     public String driverName = DRIVER_NAME;
-    public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
-    public JavascriptExecutor js() { return (JavascriptExecutor) driver(); }
 
-    public <T> T asEntity(Class<T> entityClass) {
-        return UIUtils.asEntity(this, entityClass);
-    }
     public String name = "";
     public String varName = "";
     public String typeName = "";
     public String failElement = "";
     public Object parent;
+
     public List<Object> parents() {
         List<Object> parents = new ArrayList<>();
         Object p = parent;
@@ -39,10 +35,18 @@ public abstract class DriverBase implements JDIElement {
         }
         return parents;
     }
+
+    public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
+    public JavascriptExecutor js() { return (JavascriptExecutor) driver(); }
+
     protected String context;
     public DriverBase setParent(Object parent) {
         this.parent = parent;
         return this;
+    }
+
+    public <T> T asEntity(Class<T> entityClass) {
+        return UIUtils.asEntity(this, entityClass);
     }
 
     public void setName(SiteInfo info) {

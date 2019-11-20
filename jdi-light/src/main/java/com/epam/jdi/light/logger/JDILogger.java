@@ -35,11 +35,17 @@ import static org.apache.logging.log4j.core.config.Configurator.setLevel;
 import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
 
 public class JDILogger implements ILogger {
+    private Safe<Integer> logOffDeepness = new Safe<>(0);
+    private String name;
+    private Logger logger;
+    private List<Long> multiThread = new ArrayList<>();
     private static MapArray<String, JDILogger> loggers = new MapArray<>();
     private static Marker jdiMarker = MarkerManager.getMarker("JDI");
     public static boolean writeToAllure = true;
+    private Safe<LogLevels> logLevel = new Safe<>(INFO);
 
     public static JDILogger instance(String name) {
+
         if (!loggers.has(name))
             loggers.add(name, new JDILogger(name));
         return loggers.get(name);
@@ -56,8 +62,6 @@ public class JDILogger implements ILogger {
         this(clazz.getSimpleName());
     }
 
-    private Safe<LogLevels> logLevel = new Safe<>(INFO);
-
     public LogLevels getLogLevel() {
         return logLevel.get();
     }
@@ -66,7 +70,6 @@ public class JDILogger implements ILogger {
         setRootLevel(getLog4j2Level(level));
         setLevel(name, getLog4j2Level(level));
     }
-    private Safe<Integer> logOffDeepness = new Safe<>(0);
 
     public void logOff() {
         logLevel.set(OFF);
@@ -100,9 +103,6 @@ public class JDILogger implements ILogger {
         logLevel.set(tempLevel);
         return result;
     }
-    private String name;
-    private Logger logger;
-    private List<Long> multiThread = new ArrayList<>();
     private String getRecord(String record, Object... args) {
         long currentThreadId = currentThread().getId();
         if (currentThreadId != INIT_THREAD_ID  && !multiThread.contains(currentThreadId))

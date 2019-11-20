@@ -22,12 +22,13 @@ import static org.testng.Assert.assertEquals;
 
 public class ImageTests extends TestsInit {
 
+    private String text = "https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    private String text = "https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg";
 
     @Test
     public void getSrcTest() {

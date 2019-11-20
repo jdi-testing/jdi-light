@@ -17,16 +17,16 @@ import static org.hamcrest.Matchers.is;
 
 public class BasicExampleTests extends TestsInit {
 
+    private String leftButtonClickAlert = "Left Button Clicked!";
+    private String middleButtonClickAlert = "Middle Button Clicked!";
+    private String rightButtonClickAlert = "Right Button Clicked!";
+
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private String leftButtonClickAlert = "Left Button Clicked!";
-    private String middleButtonClickAlert = "Middle Button Clicked!";
-    private String rightButtonClickAlert = "Right Button Clicked!";
 
     @Test
     public void leftButtonTests() {

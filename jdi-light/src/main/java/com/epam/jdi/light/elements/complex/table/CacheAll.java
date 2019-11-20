@@ -4,9 +4,10 @@ import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JFunc;
 
 public class CacheAll<T> extends CacheValue<T> {
+
+    private boolean gotAll = false;
     public CacheAll() { }
     public CacheAll(JFunc<T> getRule) { setRule(getRule); }
-    private boolean gotAll = false;
     protected boolean isGotAll() {
         if (!hasValue())
             gotAll = false;

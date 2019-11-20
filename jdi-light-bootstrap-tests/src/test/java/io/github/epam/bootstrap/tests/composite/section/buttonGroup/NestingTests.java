@@ -21,18 +21,18 @@ import static org.testng.Assert.assertEquals;
 
 public class NestingTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String buttonOneClickAlert = "Button 1 Clicked!";
     private String buttonTwoClickAlert = "Button 2 Clicked!";
     private String dropdownMenuLinkOne = "JDI Github";
     private String dropdownMenuLinkTwo = "JDI Docs";
     private String linkOnePageTitle = "GitHub - jdi-testing/jdi-light: Powerful Framework for UI Automation Testing on Java";
     private String linkTwoPageTitle = "JDI Light Framework – API Reference";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void buttonOneTests() {
