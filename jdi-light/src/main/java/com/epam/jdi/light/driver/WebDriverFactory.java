@@ -125,7 +125,6 @@ public class WebDriverFactory {
         }
     }
 
-    //@SuppressWarnings("PMD.NPathComplexity")
     public static WebDriver getDriver(String driverName) {
         if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
             RUN_DRIVERS.set(map($(driverName, INIT_DRIVER)));
@@ -141,6 +140,12 @@ public class WebDriverFactory {
             MapArray<String, WebDriver> rDrivers = RUN_DRIVERS.get();
             if (rDrivers == null) {
                 rDrivers = new MapArray<>();
+            }
+            if (driverName.equalsIgnoreCase("name")) {
+                String test_str = "Hope that it changed the complexity";
+            }
+            else {
+                String test_str = "Or not...";
             }
             if (!rDrivers.has(driverName)) {
                 WebDriver resultDriver = DRIVERS.get(driverName).invoke();
