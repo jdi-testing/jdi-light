@@ -21,12 +21,6 @@ import static org.testng.Assert.assertEquals;
 
 public class InputGroupSegmentedButtonTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String testText = "Test text";
     private String action = "Action";
     private String anotherAction = "Another action";
@@ -34,6 +28,12 @@ public class InputGroupSegmentedButtonTests extends TestsInit {
     private String separatedLink = "Separated link";
     private String pageTitle = "Home Page";
     private String actionButtonClickAlert = "Action Button Alert";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void dropdownMenuIsValidationTests() {

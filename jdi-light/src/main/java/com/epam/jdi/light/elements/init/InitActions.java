@@ -35,7 +35,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.WithText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -70,6 +69,63 @@ import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class InitActions {
+
+    public static MapArray<Class<?>, Class<?>> INTERFACES = map(
+            $(WebElement.class, UIElement.class),
+            $(IsDropdown.class, Dropdown.class)
+    );
+    public static MapArray<String, InitRule> INIT_RULES = map(
+            $("WebList", iRule(f -> isList(f, WebElement.class), info -> new SeleniumWebList())),
+            $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
+                    info -> new DataList())),
+            $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), ICoreElement.class),
+                    info -> new JList())),
+            $("Interface", iRule(f -> INTERFACES.keys().contains(f.getType()),
+                    info -> create(INTERFACES.get(info.field.getType()))))
+    );
+
+    public static MapArray<String, SetupRule> SETUP_RULES = map(
+            $("Element", sRule(info -> isInterface(info.instance.getClass(), IBaseElement.class),
+                    InitActions::elementSetup)),
+            $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
+            $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
+            $("PageObject", sRule(info -> !isClassOr(info.type(), WebPage.class, Section.class) &&
+                            isPageObject(info.instance.getClass()),
+                    PageFactory::initElements))
+    );
+    public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
+            $("Root", aRule(Root.class, (e,a)-> e.locator.isRoot = true)),
+            $("Frame", aRule(Frame.class, (e,a)-> e.setFrame(getFrame(a)))),
+            $("FindBySelenium", aRule(org.openqa.selenium.support.FindBy.class,
+                    (e,a)-> e.setLocator(findByToBy(a)))),
+            $("Css", aRule(Css.class, (e,a)-> e.setLocator(findByToBy(a)))),
+            $("XPath", aRule(XPath.class, (e,a)-> e.setLocator(findByToBy(a)))),
+            $("ByText", aRule(ByText.class, (e,a)-> e.setLocator(findByToBy(a)))),
+            $("WithText", aRule(WithText.class, (e,a)-> e.setLocator(findByToBy(a)))),
+            $("ClickArea", aRule(ClickArea.class, (e,a)-> e.setClickArea(a.value()))),
+            $("GetTextAs", aRule(GetTextAs.class, (e,a)-> e.setTextType(a.value()))),
+            $("NoCache", aRule(NoCache.class, (e,a)-> e.offCache())),
+
+            $("Timeout", aRule(WaitTimeout.class, (e,a)-> e.waitSec(a.value()))),
+            $("NoWait", aRule(NoWait.class, (e,a)-> e.waitSec(0))),
+            $("Name", aRule(Name.class, (e,a)-> e.setName(a.value()))),
+            $("GetAny", aRule(GetAny.class, (e, a)-> e.noValidation())),
+            $("GetVisible", aRule(GetVisible.class, (e, a)-> e.searchVisible())),
+            $("GetVisibleEnabled", aRule(GetVisibleEnabled.class, (e, a)-> e.visibleEnabled())),
+            $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.inView())),
+
+            $("ListUI", aRule(UI.class, (e,a,f)-> {
+                UI[] uis = f.getAnnotationsByType(UI.class);
+                if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
+                    e.setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
+            })),
+            $("FindByUI", aRule(FindBy.class, (e,a,f)-> {
+                FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
+                if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
+                    e.setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
+            }))
+    );
+
     public static void init() {}
     private static void webPageSetup(SiteInfo info) {
         WebPage page = (WebPage) info.instance;
@@ -82,30 +138,6 @@ public class InitActions {
         );
         updatePage(page);
     }
-
-    public static MapArray<Class<?>, Class<?>> INTERFACES = map(
-        $(WebElement.class, UIElement.class),
-        $(IsDropdown.class, Dropdown.class)
-    );
-    public static MapArray<String, InitRule> INIT_RULES = map(
-        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new SeleniumWebList())),
-        $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
-            info -> new DataList())),
-        $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), ICoreElement.class),
-            info -> new JList())),
-        $("Interface", iRule(f -> INTERFACES.keys().contains(f.getType()),
-            info -> create(INTERFACES.get(info.field.getType()))))
-    );
-
-    public static MapArray<String, SetupRule> SETUP_RULES = map(
-        $("Element", sRule(info -> isInterface(info.instance.getClass(), IBaseElement.class),
-            InitActions::elementSetup)),
-        $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
-        $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
-        $("PageObject", sRule(info -> !isClassOr(info.type(), WebPage.class, Section.class) &&
-                isPageObject(info.instance.getClass()),
-            PageFactory::initElements))
-    );
 
     private static boolean isSetupValue(SiteInfo info) {
         try {
@@ -125,38 +157,7 @@ public class InitActions {
         jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
         return jdi;
     }
-    public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
-        $("Root", aRule(Root.class, (e,a)-> e.locator.isRoot = true)),
-        $("Frame", aRule(Frame.class, (e,a)-> e.setFrame(getFrame(a)))),
-        $("FindBySelenium", aRule(org.openqa.selenium.support.FindBy.class,
-            (e,a)-> e.setLocator(findByToBy(a)))),
-        $("Css", aRule(Css.class, (e,a)-> e.setLocator(findByToBy(a)))),
-        $("XPath", aRule(XPath.class, (e,a)-> e.setLocator(findByToBy(a)))),
-        $("ByText", aRule(ByText.class, (e,a)-> e.setLocator(findByToBy(a)))),
-        $("WithText", aRule(WithText.class, (e,a)-> e.setLocator(findByToBy(a)))),
-        $("ClickArea", aRule(ClickArea.class, (e,a)-> e.setClickArea(a.value()))),
-        $("GetTextAs", aRule(GetTextAs.class, (e,a)-> e.setTextType(a.value()))),
-        $("NoCache", aRule(NoCache.class, (e,a)-> e.offCache())),
 
-        $("Timeout", aRule(WaitTimeout.class, (e,a)-> e.waitSec(a.value()))),
-        $("NoWait", aRule(NoWait.class, (e,a)-> e.waitSec(0))),
-        $("Name", aRule(Name.class, (e,a)-> e.setName(a.value()))),
-        $("GetAny", aRule(GetAny.class, (e, a)-> e.noValidation())),
-        $("GetVisible", aRule(GetVisible.class, (e, a)-> e.searchVisible())),
-        $("GetVisibleEnabled", aRule(GetVisibleEnabled.class, (e, a)-> e.visibleEnabled())),
-        $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.inView())),
-
-        $("ListUI", aRule(UI.class, (e,a,f)-> {
-            UI[] uis = f.getAnnotationsByType(UI.class);
-            if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
-                e.setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
-            })),
-        $("FindByUI", aRule(FindBy.class, (e,a,f)-> {
-            FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
-            if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
-                e.setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
-            }))
-    );
 
     public static IBaseElement elementSetup(SiteInfo info) {
         IBaseElement jdi = (IBaseElement) info.instance;

@@ -21,18 +21,18 @@ import static org.testng.Assert.assertEquals;
 
 public class VerticalVariationTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String buttonOneClickAlert = "Button One Clicked!";
     private String buttonTwoClickAlert = "Button Two Clicked!";
     private String dropdownMenuLinkOne = "JDI Light";
     private String dropdownMenuLinkTwo = "JDI Docs";
     private String linkOnePageTitle = "GitHub - jdi-testing/jdi-light: Powerful Framework for UI Automation Testing on Java";
     private String linkTwoPageTitle = "JDI Light Framework – API Reference";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void buttonOneTests() {

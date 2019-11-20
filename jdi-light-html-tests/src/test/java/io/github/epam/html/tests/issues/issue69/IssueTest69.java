@@ -19,6 +19,10 @@ import static org.testng.Assert.assertEquals;
 
 public class IssueTest69 {
     private static boolean first = true;
+    private ParagraphData expectedParagraph = new ParagraphData().set(p-> {
+        p.paragraph="element_0_1"; p.paragraph2="element_0_2"; p.paragraph3="element_0_3";
+    });
+
     @BeforeMethod
     public void before() {
         if (first) {
@@ -34,9 +38,6 @@ public class IssueTest69 {
         assertEquals(p.toString(), "element_0_1,element_0_2,element_0_3");
     }
 
-    private ParagraphData expectedParagraph = new ParagraphData().set(p-> {
-        p.paragraph="element_0_1"; p.paragraph2="element_0_2"; p.paragraph3="element_0_3";
-    });
     @Test
     public void issue69DataTests() {
         ParagraphData p = templateData.getData(1);

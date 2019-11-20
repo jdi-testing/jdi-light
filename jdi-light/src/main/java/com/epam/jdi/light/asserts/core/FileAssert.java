@@ -15,10 +15,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class FileAssert extends BaseAssert {
+
+    private File file;
+
     public static FileAssert assertThatFile(String fileName) {
         return new FileAssert(fileName);
     }
-    private File file;
 
     public FileAssert(String fileName) {
         super(fileName);

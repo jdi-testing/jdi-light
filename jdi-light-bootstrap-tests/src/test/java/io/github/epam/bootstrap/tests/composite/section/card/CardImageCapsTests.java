@@ -15,7 +15,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
-public class CardImageCapsTest extends TestsInit {
+public class CardImageCapsTests extends TestsInit {
 
     private CardImageData topCardData;
     private CardImageData bottomCardData;
@@ -103,9 +103,9 @@ public class CardImageCapsTest extends TestsInit {
 
     @Test
     public void imagePositionTest() {
-        assertEquals(cardImageOnTop.childs().get(1).getTagName(), "img");
+        assertEquals(cardImageOnTop.children().get(1).getTagName(), "img");
 
-        WebList children = cardImageOnBottom.childs();
+        WebList children = cardImageOnBottom.children();
         assertEquals(children.get(children.size()).getTagName(), "img");
     }
 }
