@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Table;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -24,17 +23,20 @@ import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("unused")
 public class TableSteps {
-    private static Table lastTable;
-    public static Table table(String name) { return lastTable = getUI(name, Table.class); }
+    public static Table lastTable;
 
-    //#region When
+    public static Table table(String name)
+    {
+        return lastTable = getUI(name, Table.class);
+    }
+
+
     @When("^(?:I |)click the cell \\(([^\\)]*)\\) in the \"([^\"]*)\"(?: table|)$")
     public void selectCell(String cellPair, String name) {
         cell(name, cellPair).click();
     }
-    //endregion
 
-    //#region Then
+
     @Then("^the \"([^\"]*)\" (?:table |)has \"([^\"]*)\" columns$")
     public void assertColumnsCount(String name, int columns) {
         assertEquals(table(name).size(), columns);
@@ -113,7 +115,7 @@ public class TableSteps {
     public void isTextMatches(String name, String cellPair, String regex) {
         cellIs(name, cellPair).text(matchesPattern(regex));
     }
-    //endregion
+
     private IsAssert cellIs(String name, String cellPair) {
         return cell(name, cellPair).is();
     }
