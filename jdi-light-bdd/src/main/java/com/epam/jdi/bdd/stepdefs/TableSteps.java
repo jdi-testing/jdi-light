@@ -30,21 +30,13 @@ public class TableSteps {
         return lastTable = getUI(name, Table.class);
     }
 
-    //#region "When"
+
     @When("^(?:I |)click the cell \\(([^\\)]*)\\) in the \"([^\"]*)\"(?: table|)$")
     public void selectCell(String cellPair, String name) {
         cell(name, cellPair).click();
     }
 
-    //#region "When"
-    /*
-    @When("^(?:I |)click the cell \\(([^\\)]*)\\) in the \"([^\"]*)\"(?: table|)$")
-    public void selectCell(String cellPair, String name) {
-        cell(name, cellPair).click();
-    }*/
-    //endregion "When"
 
-//    #region "Then"
     @Then("^the \"([^\"]*)\" (?:table |)has \"([^\"]*)\" columns$")
     public void assertColumnsCount(String name, int columns) {
         assertEquals(table(name).size(), columns);
@@ -123,7 +115,7 @@ public class TableSteps {
     public void isTextMatches(String name, String cellPair, String regex) {
         cellIs(name, cellPair).text(matchesPattern(regex));
     }
-    //endregion
+
     private IsAssert cellIs(String name, String cellPair) {
         return cell(name, cellPair).is();
     }
