@@ -10,7 +10,8 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class SoftAssertUtils {
+@SuppressWarnings("PMD.ClassNamingConventions")
+public class SoftAssert {
     private static Safe<List<String>> listOfErrors = new Safe<>(new ArrayList<>());
     private static boolean IS_SOFT_ASSERT = false;
 

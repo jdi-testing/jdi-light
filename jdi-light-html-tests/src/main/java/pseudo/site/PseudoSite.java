@@ -15,8 +15,8 @@ import pseudo.site.section.ExtendedSection;
 import pseudo.site.webpage.CustomWebPage;
 import pseudo.site.webpage.ExtendedWebPage;
 
-
-public class PseudoSiteUtils {
+@SuppressWarnings("PMD.ClassNamingConventions")
+public class PseudoSite {
     public static Header pseudoHeader;
     @UI(".customSectionUI")
     public static CustomSection customSectionUI;

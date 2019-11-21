@@ -3,7 +3,7 @@ package cucmberTests;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
-import io.github.com.StaticSiteUtils;
+import io.github.com.StaticSite;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.ui.html.HtmlSettings.init;
-import static io.github.com.StaticSiteUtils.homePage;
+import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.UsersUtils.DEFAULT_USER;
 import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.userIcon;
@@ -31,7 +31,7 @@ public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass
     public static void setUp() {
         init();
-        initElements(StaticSiteUtils.class);
+        initElements(StaticSite.class);
         homePage.open();
         logger.toLog("Run Tests");
         userIcon.click();

@@ -11,6 +11,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.settings.WebSettings.useDriver;
 import static io.github.com.StaticSite.homePage;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class CustomDriverTestsInit {
 
     @BeforeSuite(alwaysRun = true)

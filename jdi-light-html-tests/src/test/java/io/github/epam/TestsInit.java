@@ -4,7 +4,7 @@ import com.epam.jdi.light.ui.html.HtmlSettings;
 import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import pseudo.site.PseudoSiteUtils;
+import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
@@ -17,7 +17,7 @@ public class TestsInit {
     public static void setUp() {
         HtmlSettings.init();
         initSite(StaticSite.class);
-        initSite(PseudoSiteUtils.class);
+        initSite(PseudoSite.class);
         homePage.open();
         logger.toLog("Run Tests");
     }

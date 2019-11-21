@@ -11,6 +11,7 @@ import static com.epam.jdi.tools.LinqUtils.toIntArray;
 import static org.hamcrest.Matchers.hasSize;
 import static org.testng.Assert.assertEquals;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class CheckListSteps {
     public static Checklist checklist(String name) {
         return getUI(name, Checklist.class);

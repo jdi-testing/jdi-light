@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.pages.ContactFormPage;
 import io.github.com.pages.DatesPage;
 import io.github.com.pages.Footer;
-import io.github.com.pages.GithubPageHelper;
+import io.github.com.pages.GithubPage;
 import io.github.com.pages.Header;
 import io.github.com.pages.HomePage;
 import io.github.com.pages.HomePageFrame;
@@ -18,8 +18,9 @@ import io.github.com.pages.MetalAndColorsPage;
 import io.github.com.pages.SimplePage;
 import io.github.com.pages.UsersPage;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
-public class StaticSiteUtils {
+public class StaticSite {
 	@Url("/index.html") public static HomePage homePage;
 	@Url("/metals-colors.html") @Title("Metal and Colors")
 	public static MetalAndColorsPage metalAndColorsPage;
@@ -38,5 +39,5 @@ public class StaticSiteUtils {
 	@UI(".sidebar-menu span") public static Menu leftMenu;
 
 	@Frame("iframe") public static HomePageFrame iframe;
-	public static GithubPageHelper githubPageHelper;
+	public static GithubPage githubPage;
 }

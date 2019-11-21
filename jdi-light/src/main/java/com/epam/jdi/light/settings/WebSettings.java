@@ -5,7 +5,7 @@ package com.epam.jdi.light.settings;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.asserts.core.SoftAssertUtils;
+import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.common.Timeout;
@@ -131,7 +131,7 @@ public class WebSettings {
         fillAction(p -> BROWSER_SIZE = p, "browser.size");
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
-        fillAction(SoftAssertUtils::setAssertType, "assert.type");
+        fillAction(SoftAssert::setAssertType, "assert.type");
 
         // RemoteWebDriver properties
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");

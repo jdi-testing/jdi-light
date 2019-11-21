@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.issues.issue67;
 
-import com.epam.jdi.light.asserts.core.SoftAssertUtils;
+import com.epam.jdi.light.asserts.core.SoftAssert;
 import io.github.epam.TestsInit;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -9,9 +9,9 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssertUtils.assertSoft;
-import static com.epam.jdi.light.asserts.core.SoftAssertUtils.assertStrict;
-import static com.epam.jdi.light.asserts.core.SoftAssertUtils.clearResults;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertStrict;
+import static com.epam.jdi.light.asserts.core.SoftAssert.clearResults;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.HtmlElementsPage.acceptConditions;
@@ -24,8 +24,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
-
-public class SoftAssertsUtils extends TestsInit {
+@SuppressWarnings("PMD.ClassNamingConventions")
+public class SoftAsserts extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -76,7 +76,7 @@ public class SoftAssertsUtils extends TestsInit {
                 .height(is(100))
                 .width(is(1000));
 
-            SoftAssertUtils.assertResults();
+            SoftAssert.assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
             assertList(tr.getMessage(), asList(

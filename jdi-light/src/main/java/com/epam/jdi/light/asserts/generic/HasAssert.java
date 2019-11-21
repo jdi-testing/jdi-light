@@ -1,6 +1,6 @@
 package com.epam.jdi.light.asserts.generic;
 
-import static com.epam.jdi.light.asserts.core.SoftAssertUtils.assertSoft;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

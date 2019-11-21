@@ -5,7 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.bootstrap.elements.common.BaseImage;
 import org.hamcrest.Matcher;
 
-import static com.epam.jdi.light.asserts.core.SoftAssertUtils.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;
 
 public abstract class BaseImageAssert<E extends BaseImage> extends UIAssert<BaseImageAssert, BaseImage> {

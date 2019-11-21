@@ -5,7 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.Card;
 
-import static com.epam.jdi.light.asserts.core.SoftAssertUtils.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;
 
 public class CardAssert extends UIAssert<CardAssert, Card> {

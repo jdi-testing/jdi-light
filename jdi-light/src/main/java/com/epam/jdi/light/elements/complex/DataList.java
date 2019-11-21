@@ -17,7 +17,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssertUtils.assertSoft;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.UIUtils.asEntity;

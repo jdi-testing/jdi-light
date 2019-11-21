@@ -1,6 +1,6 @@
 package com.epam.jdi.light.asserts.generic;
 
-import com.epam.jdi.light.asserts.core.SoftAssertUtils;
+import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
@@ -42,7 +42,7 @@ public class BaseAssert<E extends IBaseElement> implements IBaseElement {
     }
 
     public void assertResults() {
-        SoftAssertUtils.assertResults();
+        SoftAssert.assertResults();
     }
 
 }

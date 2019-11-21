@@ -6,7 +6,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.DateTimeSelector;
 import org.hamcrest.Matcher;
 
-import static com.epam.jdi.light.asserts.core.SoftAssertUtils.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getFloat;
 import static org.hamcrest.Matchers.is;
 

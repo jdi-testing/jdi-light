@@ -2,7 +2,7 @@ package pseudo.site.dataproviders.section;
 
 import org.testng.annotations.DataProvider;
 
-import static pseudo.site.PseudoSiteUtils.customSectionUI;
+import static pseudo.site.PseudoSite.customSectionUI;
 
 public class CustomSectionUIDataProvider {
     @DataProvider

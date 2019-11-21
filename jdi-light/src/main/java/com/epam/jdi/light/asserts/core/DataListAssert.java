@@ -11,7 +11,7 @@ import org.hamcrest.MatcherAssert;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssertUtils.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.LinqUtils.all;
 import static com.epam.jdi.tools.LinqUtils.first;
