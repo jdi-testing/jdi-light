@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
@@ -219,8 +219,6 @@ public class BootstrapPage extends WebPage {
     public static Alert dismissibleAlert;
     @UI("#badge-secondary")
     public static Badge badgeSecondary;
-    @UI("#btn-primary")
-    public static Button buttonPrimary;
     @UI("#badge-success")
     public static Link badgeSuccess;
     @UI("#spinner-text-primary")

@@ -1,6 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.modal;
 
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;

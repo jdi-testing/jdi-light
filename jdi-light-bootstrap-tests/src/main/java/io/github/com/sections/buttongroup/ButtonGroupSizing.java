@@ -1,10 +1,10 @@
 package io.github.com.sections.buttongroup;
 
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonGroup;
 
-public class ButtonGroupSizing extends Section {
+public class ButtonGroupSizing extends ButtonGroup {
 
     @UI("//button[contains(text(), 'Left')]")
     public Button leftBtn;
