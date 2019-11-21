@@ -11,7 +11,7 @@ public class UsersUtils {
     public static final String defaultpassportSerial = "123456";
     public static final String defaultDescription = "JDI - awesome UI automation tool";
     public static final String defaultAcceptConditions = "true";
-    public static final String defaultGender = "Female";
+    public static final String defaultGender = "Male";
     public static final String defaultReligion = "Other";
     public static final String lowerCaseName = defaultName.toLowerCase();
 

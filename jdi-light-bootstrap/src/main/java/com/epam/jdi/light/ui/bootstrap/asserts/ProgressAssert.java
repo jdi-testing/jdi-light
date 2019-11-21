@@ -14,30 +14,12 @@ import static org.hamcrest.Matchers.is;
  */
 public class ProgressAssert extends UIAssert<ProgressAssert, Progress> {
     @JDIAction("Assert that '{name}' value {0}")
-    public ProgressAssert ariaValue(Matcher<String> condition) {
-        jdiAssert(element.getAriaValue(), condition);
+    public ProgressAssert value(Matcher<String> condition) {
+        jdiAssert(element.getValue(), condition);
         return this;
     }
-    public ProgressAssert ariaValue(String value) {
-        return ariaValue(is(value));
-    }
-
-    @JDIAction("Assert that '{name}' value {0}")
-    public ProgressAssert ariaMaxValue(Matcher<String> condition) {
-        jdiAssert(element.getMaxValue(), condition);
-        return this;
-    }
-    public ProgressAssert ariaMaxValue(String value) {
-        return ariaValue(is(value));
-    }
-
-    @JDIAction("Assert that '{name}' value {0}")
-    public ProgressAssert ariaMinValue(Matcher<String> condition) {
-        jdiAssert(element.getMinValue(), condition);
-        return this;
-    }
-    public ProgressAssert ariaMinValue(String value) {
-        return ariaValue(is(value));
+    public ProgressAssert value(String value) {
+        return value(is(value));
     }
 
     @JDIAction("Assert that '{name}' color {0}")

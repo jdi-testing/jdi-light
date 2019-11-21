@@ -32,13 +32,14 @@ import static org.testng.Assert.fail;
 
 public class DropdownITests extends TestsInit {
 
+    private String text = "Casual";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         dressCode3.select(text);
     }
-    private String text = "Casual";
 
     @Test
     public void selectTest() {

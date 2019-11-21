@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.section.ExtendedSectionDataProvider;
-import pseudo.site.section.ExtendedSection;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 import static pseudo.site.PseudoSiteUtils.extendedSection;
@@ -43,7 +42,6 @@ public class ExtendedSectionTests extends TestsInit {
 
     @Test(dataProvider = "extendedSectionListButtonPublicDataProvider", dataProviderClass = ExtendedSectionDataProvider.class)
     public void extendedSectionListButtonPublicTest(ICoreElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
-        ExtendedSection e = extendedSection;
         checkInitializedElement(htmlElementToCheck, expectedLocator, expectedParent, expectedName);
     }
 

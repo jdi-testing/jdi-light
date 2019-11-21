@@ -43,10 +43,15 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class WebDriverFactory {
+
     public static MapArray<String, JFunc<WebDriver>> DRIVERS
             = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
     private static Safe<MapArray<String, WebDriver>> RUN_DRIVERS
             = new Safe<>(MapArray::new);
+
+    public static long INIT_THREAD_ID = -1;
+    public static boolean SWITCH_THREAD = false;
+    public static WebDriver INIT_DRIVER;
 
     private WebDriverFactory() {
     }
@@ -119,11 +124,8 @@ public class WebDriverFactory {
             throw exception("Can't get WebDriver. " + LINE_BREAK + safeException(ex));
         }
     }
-
-    public static long INIT_THREAD_ID = -1;
-    public static boolean SWITCH_THREAD = false;
-    public static WebDriver INIT_DRIVER;
-
+  
+    @SuppressWarnings("NPathComplexity")
     public static WebDriver getDriver(String driverName) {
         if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
             RUN_DRIVERS.set(map($(driverName, INIT_DRIVER)));

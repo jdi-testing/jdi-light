@@ -7,6 +7,10 @@ import com.epam.jdi.light.ui.bootstrap.asserts.TooltipAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * To see an example of Tooltip web element please visit https://getbootstrap.com/docs/4.3/components/tooltips/#examples
+ */
+
 public class Tooltip extends UIBaseElement<TooltipAssert> implements IsButton {
 
     @JDIAction(value = "Get '{name}' tooltip text", level = DEBUG)

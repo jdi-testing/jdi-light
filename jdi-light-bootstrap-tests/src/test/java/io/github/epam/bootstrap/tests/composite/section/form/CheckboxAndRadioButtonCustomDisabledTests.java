@@ -1,5 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.form;
 
+import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
@@ -18,12 +19,12 @@ import static org.hamcrest.CoreMatchers.is;
 public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
 
     private String label1 = "Toggle this custom radio";
+    private WebList radioBtnList;
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        checkboxAndRadioButtonCustomDisabled.checkbox.hover();
     }
 
     @Test
@@ -48,7 +49,7 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
 
     @Test
     public void radioButtonIsValidationTests() {
-        checkboxAndRadioButtonCustomDisabled.radioButton.is()
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1).is()
                 .hidden()
                 .disabled()
                 .core()
@@ -60,21 +61,26 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
 
     @Test
     public void baseInitTest() {
-        checkboxAndRadioButtonCustomDisabled.radioButtonContainer.is()
-                .size(1);
-        checkboxAndRadioButtonCustomDisabled.radioButton.is()
+        checkboxAndRadioButtonCustomDisabled.radioButtons.is().size(1);
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1)
+                .is()
                 .deselected();
-        checkboxAndRadioButtonCustomDisabled.radio1Label.is()
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1).label()
+                .is()
                 .text(is(label1));
     }
 
     @Test
-    public void radioButtonTests() {
-        checkboxAndRadioButtonCustomDisabled.radioButtonContainer.select();
-        checkboxAndRadioButtonCustomDisabled.radioButton.is()
+    public void radioButtonsTests() {
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1).label().click();
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1)
+                .is()
                 .deselected();
-        checkboxAndRadioButtonCustomDisabled.radio1Label.click();
-        checkboxAndRadioButtonCustomDisabled.radioButton.is()
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1)
+                .is()
+                .disabled();
+        checkboxAndRadioButtonCustomDisabled.radioButtons.list().get(1)
+                .is()
                 .deselected();
     }
 

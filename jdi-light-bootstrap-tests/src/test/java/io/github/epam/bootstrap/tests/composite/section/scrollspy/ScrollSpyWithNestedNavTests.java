@@ -6,8 +6,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
@@ -99,16 +100,87 @@ public class ScrollSpyWithNestedNavTests extends TestsInit {
 
     @DataProvider
     public Object[][] focusCheck() {
+        Map<Integer, String> map1 = convertObjectToMap(
+                new Object[][]{
+                        {1, CLASS_NAME_NAV_LINK_ACTIVE},
+                        {2, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {3, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {4, CLASS_NAME_NAV_LINK},
+                        {5, CLASS_NAME_NAV_LINK},
+                        {6, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {7, CLASS_NAME_NAV_LINK_ML_3_MY_1}
+                });
+        Map<Integer, String> map2 = convertObjectToMap(
+                new Object[][]{
+                        {1, CLASS_NAME_NAV_LINK_ACTIVE},
+                        {2, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE},
+                        {3, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {4, CLASS_NAME_NAV_LINK},
+                        {5, CLASS_NAME_NAV_LINK},
+                        {6, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {7, CLASS_NAME_NAV_LINK_ML_3_MY_1}
+                });
+        Map<Integer, String> map3 = convertObjectToMap(
+                new Object[][]{
+                        {1, CLASS_NAME_NAV_LINK_ACTIVE},
+                        {2, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {3, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE},
+                        {4, CLASS_NAME_NAV_LINK},
+                        {5, CLASS_NAME_NAV_LINK},
+                        {6, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {7, CLASS_NAME_NAV_LINK_ML_3_MY_1}
+                });
+        Map<Integer, String> map4 = convertObjectToMap(
+                new Object[][]{
+                        {1, CLASS_NAME_NAV_LINK},
+                        {2, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {3, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {4, CLASS_NAME_NAV_LINK_ACTIVE},
+                        {5, CLASS_NAME_NAV_LINK},
+                        {6, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {7, CLASS_NAME_NAV_LINK_ML_3_MY_1}
+                });
+        Map<Integer, String> map5 = convertObjectToMap(
+                new Object[][]{
+                        {1, CLASS_NAME_NAV_LINK},
+                        {2, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {3, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {4, CLASS_NAME_NAV_LINK},
+                        {5, CLASS_NAME_NAV_LINK_ACTIVE},
+                        {6, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {7, CLASS_NAME_NAV_LINK_ML_3_MY_1}
+                });
+        Map<Integer, String> map6 = convertObjectToMap(
+                new Object[][]{
+                        {1, CLASS_NAME_NAV_LINK},
+                        {2, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {3, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {4, CLASS_NAME_NAV_LINK},
+                        {5, CLASS_NAME_NAV_LINK_ACTIVE},
+                        {6, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE},
+                        {7, CLASS_NAME_NAV_LINK_ML_3_MY_1}
+                });
+        Map<Integer, String> map7 = convertObjectToMap(
+                new Object[][]{
+                        {1, CLASS_NAME_NAV_LINK},
+                        {2, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {3, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {4, CLASS_NAME_NAV_LINK},
+                        {5, CLASS_NAME_NAV_LINK_ACTIVE},
+                        {6, CLASS_NAME_NAV_LINK_ML_3_MY_1},
+                        {7, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE}
+                });
         return new Object[][]{
-                {1, 1, CLASS_NAME_NAV_LINK_ACTIVE, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
-                {2, 1, CLASS_NAME_NAV_LINK_ACTIVE, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
-                {3, 1, CLASS_NAME_NAV_LINK_ACTIVE, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
-                {4, 1, CLASS_NAME_NAV_LINK, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK_ACTIVE, 5, CLASS_NAME_NAV_LINK, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
-                {5, 1, CLASS_NAME_NAV_LINK, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK_ACTIVE, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
-                {6, 1, CLASS_NAME_NAV_LINK, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK_ACTIVE, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1},
-                {7, 1, CLASS_NAME_NAV_LINK, 2, CLASS_NAME_NAV_LINK_ML_3_MY_1, 3, CLASS_NAME_NAV_LINK_ML_3_MY_1, 4, CLASS_NAME_NAV_LINK, 5, CLASS_NAME_NAV_LINK_ACTIVE, 6, CLASS_NAME_NAV_LINK_ML_3_MY_1, 7, CLASS_NAME_NAV_LINK_ML_3_MY_1_ACTIVE}
+                {1, map1},
+                {2, map2},
+                {3, map3},
+                {4, map4},
+                {5, map5},
+                {6, map6},
+                {7, map7}
         };
     }
+
     @DataProvider
     public Object[][] itemsCheck() {
         return new Object[][]{
@@ -198,29 +270,17 @@ public class ScrollSpyWithNestedNavTests extends TestsInit {
 
 
     @Test(dataProvider = "focusCheck")
-    public void highlightFocusedItemsTests(int itemToClick,
-                                           int index_1, String class_1,
-                                           int index_2, String class_2,
-                                           int index_3, String class_3,
-                                           int index_4, String class_4,
-                                           int index_5, String class_5,
-                                           int index_6, String class_6,
-                                           int index_7, String class_7) {
-        List<Integer> elementsIndex = Arrays.asList(index_1, index_2, index_3, index_4, index_5, index_6, index_7);
-        List<String> elementsClass = Arrays.asList(class_1, class_2, class_3, class_4, class_5, class_6, class_7);
-        int classIndex = 0;
+    public void highlightFocusedItemsTests(int itemToClick, Map<Integer, String> itemsMap) {
 
         nestedNav.navItemLink.get(itemToClick).highlight();
         nestedNav.navItemLink.get(itemToClick).click();
 
-        for (int elIndex : elementsIndex) {
-            nestedNav.navItemLink.get(elIndex).is()
-                    .core()
-                    .displayed()
-                    .enabled()
-                    .cssClass(elementsClass.get(classIndex));
-            classIndex++;
-        }
+        itemsMap.keySet().forEach(key ->
+                nestedNav.navItemLink.get(key).is()
+                        .core()
+                        .displayed()
+                        .enabled()
+                        .cssClass(itemsMap.get(key)));
 
         nestedNav.navItemLink.get(itemToClick).unhighlight();
     }
@@ -245,5 +305,9 @@ public class ScrollSpyWithNestedNavTests extends TestsInit {
     public void baseValidationTest() {
         baseValidation(scrollSpyWithNestedNav);
         baseValidation(nestedNav);
+    }
+
+    private Map<Integer, String> convertObjectToMap(Object[][] object) {
+        return Stream.of(object).collect(Collectors.toMap(data -> (Integer) data[0], data -> (String) data[1]));
     }
 }

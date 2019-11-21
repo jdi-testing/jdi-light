@@ -22,18 +22,19 @@ import static org.testng.Assert.assertEquals;
 
 public class AlertTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
-
     private String pageTitle = "Home Page";
     private String simpleAlertTextBeforeLink = "Alert with";
     private String simpleAlertTextAfterLink = ".";
     private String simpleAlertLinkText = "index page link";
     private String dismissibleAlertStrongText = "Dismissible alert!";
     private String dismissibleAlertDescriptionText = "Hide alert clicking on \"x\".";
+
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void simpleAlertExistingTest() {

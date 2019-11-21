@@ -10,6 +10,7 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
@@ -66,6 +67,35 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class UIElement extends JDIBase
         implements WebElement, SetValue, HasAssert<IsAssert>, IListBase,
         HasClick, IsText, HasLabel, HasPlaceholder, IsInput, HasCheck {
+    public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
+        String text = ui.text(TEXT);
+        if (isNotBlank(text))
+            return text;
+        text = ui.text(INNER);
+        if (isNotBlank(text))
+            return text;
+        text = ui.text(VALUE);
+        return isNotBlank(text)
+                ? text
+                : isNotBlank(text) ? text : "";
+    };
+    public static JFunc1<UIElement, String> SMART_LIST_TEXT = ui -> {
+        String text = ui.text(TEXT);
+        if (isNotBlank(text))
+            return text;
+        text = ui.text(INNER);
+        if (isNotBlank(text))
+            return text;
+        String id = ui.attr("id");
+        if (isNotBlank(id)) {
+            UIElement label = $(By.cssSelector("[for=" + id + "]"));
+            label.waitSec(0);
+            try {
+                text = label.getText();
+            } catch (Throwable ignore) { }
+        }
+        return isNotBlank(text) ? text : ui.text(VALUE);
+    };
     //region Constructors
     public UIElement() { }
     public UIElement(WebElement el) { setWebElement(el); }
@@ -303,6 +333,10 @@ public class UIElement extends JDIBase
                     }
                 } else click(clArea);
                 break;
+            case ACTION_CLICK:
+                Actions builder = new Actions(WebDriverFactory.getDriver());
+                builder.moveToElement(get()).click().build().perform();
+                break;
             default:
                 throw exception("Can't perform click because of unknown Element area: " + area);
         }
@@ -340,6 +374,12 @@ public class UIElement extends JDIBase
         for (String name : names)
             select(name);
     }
+
+    @JDIAction
+    public void select() {
+       click();
+    }
+
     public <TEnum extends Enum> void select(TEnum name) {
         select(getEnumValue(name));
     }
@@ -562,35 +602,7 @@ public class UIElement extends JDIBase
     public String text(TextTypes type) {
         return timer().getResult(() -> noWait(() -> type.func.execute(this)));
     }
-    public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
-        String text = ui.text(TEXT);
-        if (isNotBlank(text))
-            return text;
-        text = ui.text(INNER);
-        if (isNotBlank(text))
-            return text;
-        text = ui.text(VALUE);
-        return isNotBlank(text)
-            ? text
-            : isNotBlank(text) ? text : "";
-    };
-    public static JFunc1<UIElement, String> SMART_LIST_TEXT = ui -> {
-        String text = ui.text(TEXT);
-        if (isNotBlank(text))
-            return text;
-        text = ui.text(INNER);
-        if (isNotBlank(text))
-            return text;
-        String id = ui.attr("id");
-        if (isNotBlank(id)) {
-            UIElement label = $(By.cssSelector("[for=" + id + "]"));
-            label.waitSec(0);
-            try {
-                text = label.getText();
-            } catch (Throwable ignore) { }
-        }
-        return isNotBlank(text) ? text : ui.text(VALUE);
-    };
+
     public UIElement find(String by) {
         return $(by, this);
     }
@@ -604,7 +616,7 @@ public class UIElement extends JDIBase
         return $$(by, this);
     }
     public UIElement firstChild() { return find("*"); }
-    public WebList childs() { return finds("*"); }
+    public WebList children() { return finds("*"); }
     //endregion
 
     //region Aliases

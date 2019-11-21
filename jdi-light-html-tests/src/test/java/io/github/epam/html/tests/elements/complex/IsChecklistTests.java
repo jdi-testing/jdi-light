@@ -25,13 +25,14 @@ import static org.testng.Assert.fail;
 
 public class IsChecklistTests extends TestsInit {
 
+    private String text = "Hot option";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         isWeather.check(text);
     }
-    private String text = "Hot option";
 
     @Test
     public void getValueTest() {

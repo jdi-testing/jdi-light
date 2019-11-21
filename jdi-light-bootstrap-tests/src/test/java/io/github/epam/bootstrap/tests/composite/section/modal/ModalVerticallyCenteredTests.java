@@ -1,7 +1,7 @@
 package io.github.epam.bootstrap.tests.composite.section.modal;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -89,7 +89,7 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         showButton.show();
         showButton.click();
 
-        modal.childs().get(1).is().hasClass(modalBgCss);
+        modal.children().get(1).is().hasClass(modalBgCss);
 
         modal.close();
     }
@@ -103,7 +103,7 @@ public class ModalVerticallyCenteredTests extends TestsInit {
         showButton.core().waitFor().hidden();
 
         boolean execResult = WebDriverFactory.jsExecute(
-                "var modal = document.getElementById('" + modal.childs().get(2).getAttribute("id") + "');" +
+                "var modal = document.getElementById('" + modal.children().get(2).getAttribute("id") + "');" +
                         "var modalTop = modal.getBoundingClientRect().top;" +
                         "var modalBottom = window.innerHeight - modal.getBoundingClientRect().bottom;" +
                         "return modalTop == modalBottom;"

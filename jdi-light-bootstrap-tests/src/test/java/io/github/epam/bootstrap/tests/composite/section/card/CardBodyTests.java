@@ -18,13 +18,13 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class CardBodyTests extends TestsInit {
 
+    private String text = "This is some text within a card body.";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private String text = "This is some text within a card body.";
 
     @Test
     public void getBodyTextTest() {
