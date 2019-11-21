@@ -3,8 +3,8 @@ package io.github.com.sections.navbar;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.ByText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.html.elements.common.Link;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 
 public class NavbarColorScheme extends Navbar {
 
