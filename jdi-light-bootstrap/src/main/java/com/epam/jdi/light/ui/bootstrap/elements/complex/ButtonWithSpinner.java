@@ -11,7 +11,10 @@ import com.epam.jdi.light.ui.html.elements.common.TextField;
  */
 
 public class ButtonWithSpinner extends Button implements PageObject {
-    public @UI("[class*='spinner']") Spinner spinner;
-    public @UI("[class*='spinner'] + span")
-    TextField span;
+
+    @UI("[class*='spinner']")
+    public Spinner spinner;
+
+    @UI("[class*='spinner'] + span")
+    public TextField span;
 }

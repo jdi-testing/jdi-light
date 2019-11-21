@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 
-
 public class InputGroupInputWithTwoText extends Section{
     @UI(".input-group-prepend .input-group-text") public Text text_pretend;
     @UI(".input-group-append .input-group-text") public Text text_append;
