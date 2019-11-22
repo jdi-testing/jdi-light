@@ -16,6 +16,7 @@ import org.mytests.uiobjects.example.site.pages.Html5Page;
 import org.mytests.uiobjects.example.site.pages.JDIPerformancePage;
 import org.openqa.selenium.WebElement;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 //@JSite("https://jdi-testing.github.io/jdi-light/")
 public class SiteJdi {
     public static HomePage homePage;

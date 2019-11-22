@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class FillFromAnnotationRules {
 
     public static boolean fieldHasAnnotation(Field field, Class annotationClass, Class interfaceClass) {

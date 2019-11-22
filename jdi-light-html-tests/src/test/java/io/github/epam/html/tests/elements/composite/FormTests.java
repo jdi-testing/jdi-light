@@ -7,7 +7,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.FormFilters.ALL;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.TimeoutSettingsUtils.TIMEOUT;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT;
 import static io.github.com.entities.Users.DEFAULT_CONTACT;

@@ -1,7 +1,7 @@
 package org.mytests.uiobjects.example.entities;
 
 
-public class Defaults {
+public class DefaultsUtils {
     public static User DEFAULT_USER = new User();
 
     public static Contacts DEFAULT_CONTACT = new Contacts().set(c-> {

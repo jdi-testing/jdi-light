@@ -7,6 +7,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 /**
  * Created by Roman_Iovlev on 3/19/2018.
  */
+
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class Exceptions {
     public static RuntimeException exception(String msg, Object... args) {
         String message = args.length == 0 ? msg : format(msg, args);

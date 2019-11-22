@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 
 import static org.mytests.tests.states.States.shouldBeLoggedIn;
 import static org.mytests.tests.states.States.shouldBeLoggedOut;
-import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_CONTACT;
-import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_USER;
+import static org.mytests.uiobjects.example.entities.DefaultsUtils.DEFAULT_CONTACT;
+import static org.mytests.uiobjects.example.entities.DefaultsUtils.DEFAULT_USER;
 import static org.mytests.uiobjects.example.site.SiteJdi.contactFormPage;
 import static org.mytests.uiobjects.example.site.SiteJdi.contactsPage;
 import static org.mytests.uiobjects.example.site.SiteJdi.homePage;

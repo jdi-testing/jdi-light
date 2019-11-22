@@ -22,7 +22,7 @@ import static io.github.com.pages.UsersPage.users;
 import static io.github.com.pages.UsersPage.usersRow;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN_SIMPLE;
+import static io.github.epam.test.data.MarvelHeroesUtils.SPIDER_MAN_SIMPLE;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasItems;

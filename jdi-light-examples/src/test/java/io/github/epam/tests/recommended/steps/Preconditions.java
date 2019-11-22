@@ -8,11 +8,13 @@ import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.logout;
 import static io.github.com.pages.Header.userIcon;
 import static io.github.com.pages.Header.userName;
-import static io.github.epam.entities.Users.DEFAULT_USER;
+import static io.github.epam.entities.UsersUtils.DEFAULT_USER;
 
 /**
  * Created by Roman_Iovlev on 3/1/2018.
  */
+
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class Preconditions {
     @Step
     public static void shouldBeLoggedIn() {
