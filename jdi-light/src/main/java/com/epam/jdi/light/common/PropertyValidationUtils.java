@@ -3,7 +3,7 @@ package com.epam.jdi.light.common;
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
-public class PropertyValidator {
+public class PropertyValidationUtils {
 
     public static void validateProperties(Properties properties) {
         properties.forEach((k, v) -> validate(k.toString(), v.toString()));

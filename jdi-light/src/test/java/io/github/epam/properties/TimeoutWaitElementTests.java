@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT;
-import static com.epam.jdi.light.common.PropertyValidator.validateProperties;
+import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
