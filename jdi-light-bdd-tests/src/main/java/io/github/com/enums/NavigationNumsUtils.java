@@ -3,7 +3,7 @@ package io.github.com.enums;
 /**
  * Created by Roman_Iovlev on 3/2/2018.
  */
-public class NavigationNums {
+public class NavigationNumsUtils {
     public static int nHome = 1;
     public static int nContactForm = 2;
     public static int nSupport = 3;

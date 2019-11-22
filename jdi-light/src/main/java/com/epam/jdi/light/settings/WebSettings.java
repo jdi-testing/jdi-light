@@ -47,7 +47,7 @@ import static com.epam.jdi.light.driver.get.DriverData.DRIVER_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.LATEST_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.PAGE_LOAD_STRATEGY;
 import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
-import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
+import static com.epam.jdi.light.driver.get.RemoteDriverUtils.DRIVER_REMOTE_URL;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;

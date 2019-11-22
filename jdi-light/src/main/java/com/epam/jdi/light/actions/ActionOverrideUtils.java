@@ -8,8 +8,8 @@ import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.aspectj.lang.ProceedingJoinPoint;
 
-public class ActionOverride {
-    private ActionOverride() { }
+public class ActionOverrideUtils {
+    private ActionOverrideUtils() { }
     private static MapArray<JFunc1<ProceedingJoinPoint, Boolean>, JFunc1<JDIBase, Object>> OVERRIDE_ACTIONS_LIST =
         new MapArray<>();
     public static void OverrideFunction(JFunc1<ProceedingJoinPoint, Boolean> condition, JFunc1<JDIBase, Object> func) {

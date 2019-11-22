@@ -27,7 +27,7 @@ import static com.epam.jdi.light.actions.ActionHelper.BEFORE_STEP_ACTION;
 import static com.epam.jdi.light.actions.ActionHelper.fillTemplate;
 import static com.epam.jdi.light.actions.ActionHelper.getJpClass;
 import static com.epam.jdi.light.actions.ActionHelper.getJpMethod;
-import static com.epam.jdi.light.actions.ActionOverride.GetOverrideAction;
+import static com.epam.jdi.light.actions.ActionOverrideUtils.GetOverrideAction;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;

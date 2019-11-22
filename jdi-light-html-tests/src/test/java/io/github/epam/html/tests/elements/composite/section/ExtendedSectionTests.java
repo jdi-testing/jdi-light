@@ -7,7 +7,6 @@ import pseudo.site.dataproviders.section.ExtendedSectionDataProvider;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 
-
 public class ExtendedSectionTests extends TestsInit {
 
     @Test(dataProvider = "extendedSectionWebElementDataProvider", dataProviderClass = ExtendedSectionDataProvider.class)
