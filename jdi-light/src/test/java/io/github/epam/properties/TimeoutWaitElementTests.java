@@ -3,6 +3,7 @@ package io.github.epam.properties;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.security.InvalidParameterException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT;
@@ -29,7 +30,7 @@ public class TimeoutWaitElementTests {
         try {
             validateProperties(properties);
             fail("Value '" + value + "' should not be valid for this test.");
-        } catch (Exception exp) {
+        } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
             assertEquals(expMessage, TIMEOUT_WAIT_ELEMENT.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
         }
