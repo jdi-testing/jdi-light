@@ -6,8 +6,8 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class ButtonGroupBasicExample extends Section {
 
-    @UI("//button[text()='Left']") public Button leftButton;
-    @UI("//button[text()='Middle']") public Button middleButton;
-    @UI("//button[text()='Right']") public Button rightButton;
+    @UI("//button[contains(., 'Left')]") public Button leftButton;
+    @UI("//button[contains(., 'Middle')]") public Button middleButton;
+    @UI("//button[contains(., 'Right')]") public Button rightButton;
 
 }
