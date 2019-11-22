@@ -33,6 +33,7 @@ import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
+import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT;
 import static com.epam.jdi.light.common.PropertyValidator.validateProperties;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
@@ -53,7 +54,6 @@ import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
-import static com.epam.jdi.light.settings.PropertyNames.TIMEOUT_WAIT_ELEMENT;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.LinqUtils.filter;
@@ -117,7 +117,7 @@ public class WebSettings {
 
     public static synchronized void init() {
         validateProperties(getProperties(TEST_PROPERTIES_PATH));
-        fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_ELEMENT);
+        fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_ELEMENT.getName());
         fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
         fillAction(p -> DOMAIN = p, "domain");
         if (DRIVER_NAME.equals(DEFAULT_DRIVER))

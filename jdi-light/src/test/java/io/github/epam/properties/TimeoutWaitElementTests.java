@@ -5,11 +5,12 @@ import org.testng.annotations.Test;
 
 import java.util.Properties;
 
+import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT;
 import static com.epam.jdi.light.common.PropertyValidator.validateProperties;
-import static com.epam.jdi.light.settings.PropertyNames.TIMEOUT_WAIT_ELEMENT;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
-public class TimeoutWaitElementTest {
+public class TimeoutWaitElementTests {
 
     @DataProvider
     public static Object[] negativeData() {
@@ -21,20 +22,23 @@ public class TimeoutWaitElementTest {
         return new Object[]{"0", "1", "998", "999"};
     }
 
-    @Test(expectedExceptions = {RuntimeException.class}, dataProvider = "negativeData",
-            expectedExceptionsMessageRegExp = ".*Value of parameter '" + TIMEOUT_WAIT_ELEMENT + "' is not valid." +
-                    " See example: https://jdi-docs.github.io/jdi-light/#driver-settings.*")
+    @Test(dataProvider = "negativeData")
     public void negativeTest(String value) {
         Properties properties = new Properties();
-        properties.setProperty(TIMEOUT_WAIT_ELEMENT, value);
-        validateProperties(properties);
-        fail("Value " + value + " should not be valid for this test.");
+        properties.setProperty(TIMEOUT_WAIT_ELEMENT.getName(), value);
+        try {
+            validateProperties(properties);
+            fail("Value " + value + " should not be valid for this test.");
+        } catch (Exception exp) {
+            String expMessage = exp.getMessage();
+            assertEquals(expMessage, TIMEOUT_WAIT_ELEMENT.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
+        }
     }
 
     @Test(dataProvider = "positiveData")
     public void positiveTest(String value) {
         Properties properties = new Properties();
-        properties.setProperty(TIMEOUT_WAIT_ELEMENT, value);
+        properties.setProperty(TIMEOUT_WAIT_ELEMENT.getName(), value);
         validateProperties(properties);
     }
 
