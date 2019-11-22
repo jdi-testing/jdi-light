@@ -1,7 +1,7 @@
-package io.github.epam.bootstrap.tests.composite.section.inputGroup;
+package io.github.epam.bootstrap.tests.composite.section.inputgroup;
 
 import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;

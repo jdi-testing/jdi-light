@@ -2,7 +2,7 @@ package io.github.epam.bootstrap.tests.composite.dropdown;
 
 import com.epam.jdi.light.elements.common.WindowsManager;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.entities.FormContacts;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;

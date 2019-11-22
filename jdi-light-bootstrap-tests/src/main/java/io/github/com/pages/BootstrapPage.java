@@ -8,26 +8,27 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
 import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Range;
 import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
-import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.MultiplebarsProgress;
-import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.MultiplebarsProgress;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
+import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
+import com.epam.jdi.light.ui.html.elements.common.Link;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.sections.ButtonAddons;
 import io.github.com.sections.ButtonToolbar;
+import io.github.com.sections.InputFileSection;
 import io.github.com.sections.Jumbotron;
 import io.github.com.sections.MediaObjectNesting;
 import io.github.com.sections.MediaObjectSample;
@@ -72,6 +73,8 @@ import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.form.Switches;
 import io.github.com.sections.inputgroup.CustomSelect;
 import io.github.com.sections.inputgroup.CustomSelectWithButton;
+import io.github.com.sections.inputgroup.InputGroupCustomFileInput;
+import io.github.com.sections.inputgroup.InputGroupCustomUploadFile;
 import io.github.com.sections.inputgroup.InputGroupInputWithCheckBox;
 import io.github.com.sections.inputgroup.InputGroupInputWithLabelAndText;
 import io.github.com.sections.inputgroup.InputGroupInputWithRadio;
@@ -99,7 +102,6 @@ import io.github.com.sections.modal.ModalVaryingContent;
 import io.github.com.sections.modal.ModalVerticallyCentered;
 import io.github.com.sections.modal.SectionModalLongScrolling;
 import io.github.com.sections.modal.gridmodal.GridModalSection;
-
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.com.sections.navbar.NavbarContainer;
 import io.github.com.sections.navbar.NavbarExternalContent;
@@ -217,8 +219,6 @@ public class BootstrapPage extends WebPage {
     public static Alert dismissibleAlert;
     @UI("#badge-secondary")
     public static Badge badgeSecondary;
-    @UI("#btn-primary")
-    public static Button buttonPrimary;
     @UI("#badge-success")
     public static Link badgeSuccess;
     @UI("#spinner-text-primary")
@@ -714,4 +714,10 @@ public class BootstrapPage extends WebPage {
     public static ModalOptionalSizes modalOptionalSizes;
     //endregion
 
+    @UI("#form-controls-file-input")
+    public static InputFileSection inputFileSection;
+    @UI("#file-input .custom-file")
+    public static InputGroupCustomFileInput inputGroupCustomFileInput;
+    @UI(".input-group#upload-file")
+    public static InputGroupCustomUploadFile inputGroupCustomUploadFile;
 }

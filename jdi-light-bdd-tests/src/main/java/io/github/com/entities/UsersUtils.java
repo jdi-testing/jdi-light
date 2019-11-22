@@ -1,7 +1,7 @@
 package io.github.com.entities;
 
 
-public class Users {
+public class UsersUtils {
     public static User DEFAULT_USER = new User();
 
     public static final String defaultName = "Roman";
