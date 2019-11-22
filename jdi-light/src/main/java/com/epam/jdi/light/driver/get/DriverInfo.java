@@ -17,7 +17,7 @@ import static com.epam.jdi.light.driver.get.DriverData.DRIVERS_FOLDER;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.LATEST_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.PLATFORM;
-import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
+import static com.epam.jdi.light.driver.get.RemoteDriverUtils.getRemoteURL;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Integer.parseInt;
 import static java.lang.System.setProperty;

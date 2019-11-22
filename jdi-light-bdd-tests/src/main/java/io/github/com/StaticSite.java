@@ -18,6 +18,7 @@ import io.github.com.pages.MetalAndColorsPage;
 import io.github.com.pages.SimplePage;
 import io.github.com.pages.UsersPage;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 	@Url("/index.html") public static HomePage homePage;

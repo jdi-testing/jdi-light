@@ -12,7 +12,7 @@ import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarWithDropdown;
 import static io.github.com.pages.BootstrapPage.scrollSpyInNavbar;
 import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
-import static io.github.epam.bootstrap.tests.composite.section.navs.ClickVerification.newWindowTitleCheck;
+import static io.github.epam.bootstrap.tests.composite.section.navs.ClickVerificationUtils.newWindowTitleCheck;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

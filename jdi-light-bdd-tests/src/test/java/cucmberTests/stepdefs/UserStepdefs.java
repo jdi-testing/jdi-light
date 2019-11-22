@@ -15,7 +15,7 @@ import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.homePage;
-import static io.github.com.entities.Users.DEFAULT_USER;
+import static io.github.com.entities.UsersUtils.DEFAULT_USER;
 import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.userIcon;
 import static io.github.com.pages.Header.userName;

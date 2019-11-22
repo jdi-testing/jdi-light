@@ -31,7 +31,7 @@ import static com.epam.jdi.light.driver.get.DriverTypes.IE;
 import static com.epam.jdi.light.driver.get.DriverTypes.OPERA;
 import static com.epam.jdi.light.driver.get.DriverTypes.PHANTOMJS;
 import static com.epam.jdi.light.driver.get.DriverTypes.getByName;
-import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
+import static com.epam.jdi.light.driver.get.RemoteDriverUtils.DRIVER_REMOTE_URL;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
