@@ -9,7 +9,7 @@ import static io.github.com.StaticSite.loginForm;
 import static io.github.com.StaticSite.logout;
 import static io.github.com.StaticSite.userIcon;
 import static io.github.com.StaticSite.userName;
-import static io.github.epam.test.data.Users.defaultUserUtils;
+import static io.github.epam.test.data.UsersUtils.defaultUserUtils;
 
 /**
  * Created by Roman_Iovlev on 3/1/2018.
