@@ -1,6 +1,6 @@
 package selenium.site.data;
 
-public class DefaultDataProviderHelper {
+public class DefaultDataProviderUtils {
     public static ContactInfo ROMAN_CONTACT = new ContactInfo().set(c -> {
         c.name = "Roman";
         c.lastName = "Full Contact";

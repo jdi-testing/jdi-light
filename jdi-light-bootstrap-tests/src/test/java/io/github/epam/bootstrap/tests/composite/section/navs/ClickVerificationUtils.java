@@ -12,8 +12,7 @@ import static org.testng.Assert.assertEquals;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-@SuppressWarnings("PMD.ClassNamingConventions")
-public class ClickVerification {
+public class ClickVerificationUtils {
 
     public static void testElementClick(UIElement element, String pageTitle) {
         element.highlight();
