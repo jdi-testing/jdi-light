@@ -28,7 +28,7 @@ public class TimeoutWaitElementTests {
         properties.setProperty(TIMEOUT_WAIT_ELEMENT.getName(), value);
         try {
             validateProperties(properties);
-            fail("Value " + value + " should not be valid for this test.");
+            fail("Value '" + value + "' should not be valid for this test.");
         } catch (Exception exp) {
             String expMessage = exp.getMessage();
             assertEquals(expMessage, TIMEOUT_WAIT_ELEMENT.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
