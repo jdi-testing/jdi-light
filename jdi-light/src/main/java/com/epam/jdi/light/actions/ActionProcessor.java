@@ -68,7 +68,6 @@ public class ActionProcessor {
                 reverse(failedMethods);
                 logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
             }
-            System.out.println(Timer.nowTime());
             throw exception(ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
         }
     }
