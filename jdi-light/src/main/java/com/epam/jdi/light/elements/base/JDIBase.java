@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.HasCache;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
@@ -28,8 +27,6 @@ import java.util.concurrent.TimeUnit;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.common.LocatorType.FRAME;
-import static com.epam.jdi.light.common.SetTextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
@@ -160,6 +157,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public List<By> getFrames() { return locator.getFrames(); }
 
     protected int timeout = -1;
+    @Override
     public IBaseElement waitSec(int sec) {
         timeout = sec;
         return this;

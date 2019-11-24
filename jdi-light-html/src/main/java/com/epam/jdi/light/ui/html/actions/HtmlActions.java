@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.actions;
 
+import com.epam.jdi.tools.PrintUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,6 +13,8 @@ import static com.epam.jdi.light.actions.ActionProcessor.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.util.Collections.reverse;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -27,6 +30,7 @@ public class HtmlActions {
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
         try {
+            failedMethods.clear();
             if (aroundCount() > 1)
                 return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
@@ -36,6 +40,11 @@ public class HtmlActions {
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
+            addFailedMethod(jp);
+            if (aroundCount() == 1) {
+                reverse(failedMethods);
+                logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
+            }
             throw exception(ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
         }
     }

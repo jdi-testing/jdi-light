@@ -7,15 +7,19 @@ import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Row;
 import com.epam.jdi.light.elements.complex.table.TableMatcher;
 import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import org.hamcrest.Matcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.generic.table.DataTableAssert.CompareType.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
+import static java.lang.String.format;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -80,35 +84,47 @@ public class DataTableAssert<L extends Section, D>
     }
 
     public Compare exact(int count) {
-        return new Compare(count, this, true);
+        return new Compare(count, this, EXACT);
     }
     public Compare atLeast(int count) {
-        return new Compare(count, this, false);
+        return new Compare(count, this, ATLEAST);
     }
     public Compare no() {
         return exact(0);
     }
     public Compare all() {
-        return exact(table().count());
+        return new Compare(this);
     }
     public Compare onlyOne() {
         return exact(1);
+    }
+
+    public enum CompareType {
+        EXACT("exactly"), ATLEAST("at least"), ALL("all");
+        public String text;
+        CompareType(String text) { this.text = text; }
     }
 
     public class Compare implements JAssert {
 
         public int count;
         public String name;
-        public String type;
+        public String printText;
         DataTableAssert<L, D> dtAssert;
-        boolean exact;
+        CompareType compareType;
         public JDIBase base() { return DataTableAssert.this.base(); }
 
-        private Compare(int count, DataTableAssert<L, D> dtAssert, boolean exact) {
+        private Compare(DataTableAssert<L, D> dtAssert) {
+            this.dtAssert = dtAssert;
+            this.compareType = ALL;
+            this.printText = "all rows";
+            this.name = dtAssert.name;
+        }
+        private Compare(int count, DataTableAssert<L, D> dtAssert, CompareType compareType) {
             this.count = count;
             this.dtAssert = dtAssert;
-            this.exact = exact;
-            this.type = exact ? "exactly" : "at least";
+            this.compareType = compareType;
+            this.printText = format("has %s %s rows that", compareType.text, count);
             this.name = dtAssert.name;
         }
 
@@ -117,12 +133,20 @@ public class DataTableAssert<L extends Section, D>
          * @param condition to compare
          * @return DataTableAssert
          */
-        @JDIAction("Assert that '{name}' has {type} '{count}' rows that meet expected condition")
+        @JDIAction("Assert that '{name}' {printText} meet expected condition")
         public DataTableAssert<L, D> rows(JFunc1<D, Boolean> condition) {
-            jdiAssert(exact
-                ? table().dataRows(condition)
-                : table().dataRows(condition, count),
-            hasSize(count));
+            switch (compareType) {
+                case EXACT:
+                    jdiAssert(table().dataRows(condition), hasSize(count));
+                    break;
+                case ALL:
+                    List<D> rows = table().allData();
+                    jdiAssert(LinqUtils.all(rows, condition), is(true));
+                    break;
+                case ATLEAST:
+                    jdiAssert(table().dataRows(condition, count), hasSize(count));
+                    break;
+            }
             return dtAssert;
         }
 
@@ -131,7 +155,7 @@ public class DataTableAssert<L extends Section, D>
          * @param data to compare
          * @return DataTableAssert
          */
-        @JDIAction("Assert that '{name}' has {type} '{count}' '{0}'")
+        @JDIAction("Assert that '{name}' {printText} has '{0}'")
         public DataTableAssert<L, D> rows(D data) {
             return rows(d -> d.equals(data));
         }
@@ -140,7 +164,7 @@ public class DataTableAssert<L extends Section, D>
          * Make sure that the table has at least a certain number of the specified line
          * @param matchers to compare
          */
-        @JDIAction("Assert that '{name}' has at least '{0}' rows that {0}")
+        @JDIAction("Assert that '{name}' {printText} has {0}")
         public DataTableAssert<L, D> rows(TableMatcher... matchers) {
             jdiAssert(TABLE_MATCHER.execute(table(), matchers).size(),
                     greaterThan(table().header().size()*count-1));
