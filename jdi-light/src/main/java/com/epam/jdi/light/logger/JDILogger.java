@@ -9,12 +9,17 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
+import io.qameta.allure.model.Status;
 import io.qameta.allure.model.StepResult;
+import io.qameta.allure.Attachment;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,6 +27,7 @@ import java.util.UUID;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.logger.LogLevels.ERROR;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.OFF;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
@@ -30,10 +36,12 @@ import static com.epam.jdi.light.logger.LogLevels.getLog4j2Level;
 import static com.epam.jdi.tools.StringUtils.format;
 import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
 import static io.qameta.allure.model.Status.PASSED;
+import static io.qameta.allure.model.Status.FAILED;
 import static java.lang.Thread.currentThread;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.apache.logging.log4j.core.config.Configurator.setLevel;
 import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
+import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 
 public class JDILogger implements ILogger {
     private Safe<Integer> logOffDeepness = new Safe<>(0);
@@ -44,6 +52,7 @@ public class JDILogger implements ILogger {
     private static Marker jdiMarker = MarkerManager.getMarker("JDI");
     public static boolean writeToAllure = true;
     private Safe<LogLevels> logLevel = new Safe<>(INFO);
+    private String screenshotStrategy;
 
     public static JDILogger instance(String name) {
 
@@ -70,6 +79,13 @@ public class JDILogger implements ILogger {
         logLevel = new Safe<>(level);
         setRootLevel(getLog4j2Level(level));
         setLevel(name, getLog4j2Level(level));
+    }
+
+    public String getScreenshotStrategy() {
+        return screenshotStrategy;
+    }
+    public void setScreenshotStrategy(String strategy) {
+        screenshotStrategy = strategy;
     }
 
     public void logOff() {
@@ -122,18 +138,34 @@ public class JDILogger implements ILogger {
         return name;
     }
 
-    private static void writeToAllure(String message) {
+    private static void writeToAllure(String message, Status status) {
         if (!writeToAllure) return;
         final String uuid = UUID.randomUUID().toString();
-        StepResult step = new StepResult().withName(message).withStatus(PASSED);
+        StepResult step = new StepResult().withName(message).withStatus(status);
         getLifecycle().startStep(uuid, step);
         getLifecycle().stopStep(uuid);
+    }
+
+    private static void screenshotToAllure() {
+        if (!writeToAllure) return;
+        takeAndWriteScreenshot(takeScreen());
+    }
+
+    @Attachment
+    private static byte[] takeAndWriteScreenshot(String screenName) {
+        System.out.println("ScreenName: "+screenName);
+        try {
+            return Files.readAllBytes(Paths.get(screenName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void step(String s, Object... args) {
         if (logLevel.get().equalOrLessThan(STEP)) {
             logger.log(Level.forName("STEP", 350), jdiMarker, getRecord(s, args));
-            writeToAllure(getRecord(s, args));
+            writeToAllure(getRecord(s, args), PASSED);
         }
     }
 
@@ -154,6 +186,10 @@ public class JDILogger implements ILogger {
     }
     public void error(String s, Object... args) {
         logger.error(jdiMarker, getRecord(s, args));
+        writeToAllure(getRecord(s, args), FAILED);
+        if (screenshotStrategy.equals("on fail")) {
+            screenshotToAllure();
+        }
     }
 
     public void toLog(String msg) {
