@@ -14,7 +14,7 @@ import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.usersData;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN_SIMPLE;
+import static io.github.epam.test.data.MarvelHeroesUtils.SPIDER_MAN_SIMPLE;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.hamcrest.Matchers.greaterThan;

@@ -1,7 +1,7 @@
 package io.github.epam.bootstrap.tests.composite.section.modal;
 
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -12,7 +12,7 @@ import static io.github.com.pages.BootstrapPage.modalFatButton;
 import static io.github.com.pages.BootstrapPage.modalGetbootstrapButton;
 import static io.github.com.pages.BootstrapPage.modalMdoButton;
 import static io.github.com.pages.BootstrapPage.modalVaryingContentWindow;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class ModalVaryingContentTests extends TestsInit {

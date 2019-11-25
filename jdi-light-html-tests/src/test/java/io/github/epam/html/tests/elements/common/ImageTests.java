@@ -9,7 +9,7 @@ import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
 import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.jdiLogo;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;

@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bsFormsPage;
 import static io.github.com.pages.BootstrapFormsPage.lastLogEntry;
 import static io.github.com.pages.BootstrapFormsPage.superheroForm;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.Superheroes.EXAMPLE_HERO;
 import static io.github.epam.test.data.Superheroes.TEMPLATE_HERO;

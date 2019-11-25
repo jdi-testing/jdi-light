@@ -11,6 +11,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class TestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {

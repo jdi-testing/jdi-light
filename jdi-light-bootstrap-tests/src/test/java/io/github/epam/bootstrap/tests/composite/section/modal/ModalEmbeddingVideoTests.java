@@ -9,7 +9,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.embeddedVideoModal;
 import static io.github.com.pages.BootstrapPage.modalEmbeddedVideoButton;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class ModalEmbeddingVideoTests extends TestsInit {

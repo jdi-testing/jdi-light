@@ -15,7 +15,7 @@ import static io.github.com.pages.BootstrapPage.cardStyledPrimary;
 import static io.github.com.pages.BootstrapPage.cardStyledSecondary;
 import static io.github.com.pages.BootstrapPage.cardStyledSuccess;
 import static io.github.com.pages.BootstrapPage.cardStyledWarning;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 

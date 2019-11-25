@@ -11,6 +11,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class WindowsManager {
     private static Set<String> windowHandlers;
     private static MapArray<String, String> windowHandles = new MapArray<>();

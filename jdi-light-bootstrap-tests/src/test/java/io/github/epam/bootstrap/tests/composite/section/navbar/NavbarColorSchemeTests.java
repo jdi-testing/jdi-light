@@ -2,7 +2,7 @@ package io.github.epam.bootstrap.tests.composite.section.navbar;
 
 import com.epam.jdi.light.elements.common.Alerts;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Link;
+import com.epam.jdi.light.ui.html.elements.common.Link;
 import io.github.com.sections.navbar.NavbarColorScheme;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -13,7 +13,7 @@ import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarBlueColorScheme;
 import static io.github.com.pages.BootstrapPage.navbarDarkColorScheme;
 import static io.github.com.pages.BootstrapPage.navbarLightColorScheme;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 

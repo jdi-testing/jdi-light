@@ -3,7 +3,7 @@ package io.github.com.sections.modal;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class SectionModalLongScrolling extends Section {
 

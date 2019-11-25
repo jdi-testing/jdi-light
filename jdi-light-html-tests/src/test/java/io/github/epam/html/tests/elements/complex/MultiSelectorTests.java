@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.ages;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.Ages.Steam;
 import static io.github.epam.html.tests.elements.complex.enums.Ages.Wood;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;

@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.iceCream;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Strawberry;
 import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Vanilla;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;

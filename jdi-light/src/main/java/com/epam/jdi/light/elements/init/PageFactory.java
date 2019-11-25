@@ -52,6 +52,7 @@ import static java.util.Arrays.asList;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class PageFactory {
     // region initSite
     public static MapArray<String, JAction> PRE_INIT =

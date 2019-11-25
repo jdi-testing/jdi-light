@@ -30,8 +30,8 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
-import static com.epam.jdi.light.elements.base.OutputTemplates.STEP_TEMPLATE;
+import static com.epam.jdi.light.elements.base.OutputTemplatesUtils.DEFAULT_TEMPLATE;
+import static com.epam.jdi.light.elements.base.OutputTemplatesUtils.STEP_TEMPLATE;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_NEW_PAGE;
 import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_THIS_PAGE;

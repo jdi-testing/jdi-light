@@ -7,17 +7,15 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.buttonPrimary;
 import static io.github.com.pages.BootstrapPage.disabledButton;
-import static io.github.com.pages.BootstrapPage.doubleButton;
 import static io.github.com.pages.BootstrapPage.redButton;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.com.pages.BootstrapPage.doubleButton;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 /**
@@ -61,21 +59,17 @@ public class ButtonTests extends TestsInit {
                 containsString("Can't perform click. Element is disabled"));
         }
     }
+
     @Test
     public void doubleClickTest() {
         doubleButton.doubleClick();
         validateAlert(is("Double Click"));
     }
+
     @Test
     public void rightClickTest() {
         redButton.rightClick();
         validateAlert(is("Right Click"));
-    }
-    @Test
-    public void badgeTest() {
-        assertTrue(buttonPrimary.badge().isDisplayed());
-        assertEquals(buttonPrimary.badgeText(), "9");
-        assertEquals(buttonPrimary.badgeValue(), "9");
     }
     @Test
     public void isValidationTest() {

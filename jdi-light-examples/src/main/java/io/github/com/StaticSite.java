@@ -24,6 +24,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
 import static com.epam.jdi.light.common.CheckTypes.MATCH;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 	@Url("/index.html")  @Title(value = "Home", validate = CONTAINS)
