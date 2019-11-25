@@ -187,7 +187,7 @@ public class JDILogger implements ILogger {
     public void error(String s, Object... args) {
         logger.error(jdiMarker, getRecord(s, args));
         writeToAllure(getRecord(s, args), FAILED);
-        if (screenshotStrategy.equals("on fail")) {
+        if ("on fail".equals(screenshotStrategy)) {
             takeScreenshot();
         }
     }
