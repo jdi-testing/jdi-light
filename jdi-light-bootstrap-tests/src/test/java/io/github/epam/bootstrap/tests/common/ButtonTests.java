@@ -27,12 +27,13 @@ import static org.testng.Assert.fail;
 
 public class ButtonTests extends TestsInit {
 
+    private String text = "Red button";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-    private String text = "Red button";
 
     @Test
     public void getTextTest() {

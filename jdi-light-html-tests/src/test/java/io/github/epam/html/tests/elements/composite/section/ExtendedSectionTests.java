@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import pseudo.site.dataproviders.section.ExtendedSectionDataProvider;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
-import static pseudo.site.PseudoSite.extendedSection;
 
 public class ExtendedSectionTests extends TestsInit {
 

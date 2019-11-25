@@ -11,6 +11,10 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.TEXT;
 
+/**
+ * To see an example of Carousel web element please visit https://getbootstrap.com/docs/4.3/components/carousel/#example
+ */
+
 public class Carousel extends UIBaseElement<TextAssert> implements IsText, IsButton {
 	public String currentSlideLocator = "//div[contains(@class,'carousel-item active')]";
 	public String nextLocator = ".carousel-control-next";

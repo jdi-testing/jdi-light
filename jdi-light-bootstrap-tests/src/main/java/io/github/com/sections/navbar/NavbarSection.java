@@ -1,10 +1,9 @@
 package io.github.com.sections.navbar;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
-public class NavbarSection extends Section {
+public class NavbarSection extends Navbar {
 
     //FindBy(css = "#brand-heading")
     @UI("#brand-heading")

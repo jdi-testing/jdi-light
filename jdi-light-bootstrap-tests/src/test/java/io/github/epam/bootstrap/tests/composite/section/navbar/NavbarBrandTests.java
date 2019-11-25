@@ -6,6 +6,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarSection;
@@ -75,7 +76,7 @@ public class NavbarBrandTests extends TestsInit {
 
     @Test(dataProvider = "navbarBrandsWithImage")
     public void checkNavbarImage(UIElement brandWithImage) {
-        UIElement imgFromNavbar = brandWithImage.childs().get(1);
+        UIElement imgFromNavbar = brandWithImage.children().get(1);
         imgFromNavbar.highlight("blue");
         imgFromNavbar.is().core().tag("img").attr("src", containsString(imgPath));
         imgFromNavbar.unhighlight();

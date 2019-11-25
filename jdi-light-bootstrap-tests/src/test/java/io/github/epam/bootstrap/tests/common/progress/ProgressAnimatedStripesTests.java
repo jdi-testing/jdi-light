@@ -35,7 +35,7 @@ public class ProgressAnimatedStripesTests extends TestsInit {
 
     @Test
     public void getValueTest() {
-        assertEquals(progressAnimated.getAriaValue(), "75");
+        assertEquals(progressAnimated.getValue(), "75");
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ProgressAnimatedStripesTests extends TestsInit {
         progressAnimated.is()
                 .animated("progress-bar-stripes")
                 .color("rgba(0, 123, 255, 1)")
-                .ariaValue("75");
+                .value("75");
     }
 
     @Test

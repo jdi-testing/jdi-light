@@ -22,13 +22,14 @@ import static org.testng.Assert.assertEquals;
 
 public class MultiSelectorTests extends TestsInit {
 
+    private String text = "Steam";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         ages.check(text);
     }
-    private String text = "Steam";
 
     @Test
     public void getValueTest() {
@@ -46,11 +47,13 @@ public class MultiSelectorTests extends TestsInit {
         ages.check(Wood, Steam);
         assertEquals(ages.checked(), asList("Steam", "Wood"));
     }
+
     @Test
     public void selectNumTest() {
         ages.check(1, 5);
         assertEquals(ages.checked(), asList("Electro", "Wood"));
     }
+
     @Test
     public void selectedTest() {
         assertEquals(ages.checked(), asList(text));
