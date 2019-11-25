@@ -51,19 +51,31 @@ public class ActionProcessor {
     protected void jdiPointcut() { }
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() { }
-    @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) {
-        try {
-            if (aroundCount() > 1)
-                return defaultAction(jp);
-            BEFORE_JDI_ACTION.execute(jp);
-            Object result = stableAction(jp);
-            if (aroundCount() == 1)
-                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
-            return AFTER_JDI_ACTION.execute(jp, result);
-        } catch (Throwable ex) {
-            throw exception(ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
-        }
+
+    public static Object stableAction(ProceedingJoinPoint jp) {
+        String exceptionMsg = "";
+        JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
+        JDIBase obj = getJdi(jp);
+        JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
+        int timeout = getTimeout(ja, obj);
+        long start = currentTimeMillis();
+        Throwable exception = null;
+        do {
+            try {
+                Object result = overrideAction != null
+                        ? overrideAction.execute(obj) : jp.proceed();
+                if (!condition(jp)) continue;
+                return result;
+            } catch (Throwable ex) {
+                exception = ex;
+                try {
+                    exceptionMsg = safeException(ex);
+                    Thread.sleep(200);
+                } catch (Exception ignore) {
+                }
+            }
+        } while (currentTimeMillis() - start < timeout * 1000);
+        throw exception(exception, getFailedMessage(jp, exceptionMsg));
     }
     public static Object getObjAround(ProceedingJoinPoint jp) { return jp.getThis() != null ? jp.getThis() : new Object(); }
     public static String getExceptionAround(Throwable ex, boolean time) {
@@ -94,27 +106,20 @@ public class ActionProcessor {
                 ? ((IBaseElement) jp.getThis()).base() : null;
         } catch (Exception ex) { return null; }
     }
-    public static Object stableAction(ProceedingJoinPoint jp) {
-        String exception = "";
-        JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
-        JDIBase obj = getJdi(jp);
-        JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
-        int timeout = getTimeout(ja, obj);
-        long start = currentTimeMillis();
-        do {
-            try {
-                Object result = overrideAction != null
-                    ? overrideAction.execute(obj) : jp.proceed();
-                if (!condition(jp)) continue;
-                return result;
-            } catch (Throwable ex) {
-                try {
-                    exception = safeException(ex);
-                    Thread.sleep(200);
-                } catch (Exception ignore) { }
-            }
-        } while (currentTimeMillis() - start < timeout * 1000);
-        throw exception(getFailedMessage(jp, exception));
+
+    private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
+        MethodSignature method = getJpMethod(jp);
+        try {
+            String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
+                    $("exception", exception),
+                    $("timeout", getTimeout(jp)),
+                    $("action", method.getMethod().getName())
+            ));
+            return fillTemplate(result, jp, method);
+        } catch (Exception ex) {
+            throw exception(ex, "Surround method issue: " +
+                    "Can't get failed message: " + safeException(ex));
+        }
     }
 
     private static JFunc1<JDIBase, Object> getOverride(ProceedingJoinPoint jp, JDIBase obj) {
@@ -128,18 +133,19 @@ public class ActionProcessor {
                 ? obj.base().getTimeout()
                 : TIMEOUT.get();
     }
-    private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
-        MethodSignature method = getJpMethod(jp);
+
+    @Around("jdiPointcut()")
+    public Object jdiAround(ProceedingJoinPoint jp) {
         try {
-            String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
-                $("exception", exception),
-                $("timeout", getTimeout(jp)),
-                $("action", method.getMethod().getName())
-            ));
-            return fillTemplate(result, jp, method);
-        } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: " +
-                    "Can't get failed message: " + safeException(ex));
+            if (aroundCount() > 1)
+                return defaultAction(jp);
+            BEFORE_JDI_ACTION.execute(jp);
+            Object result = stableAction(jp);
+            if (aroundCount() == 1)
+                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
+            return AFTER_JDI_ACTION.execute(jp, result);
+        } catch (Throwable ex) {
+            throw exception(ex, ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
         }
     }
     private static int getTimeout(ProceedingJoinPoint jp) {
@@ -172,7 +178,7 @@ public class ActionProcessor {
             return AFTER_STEP_ACTION.execute(jp, result);
         } catch (Throwable ex) {
             Object element = jp.getThis() != null ? jp.getThis() : new Object();
-            throw exception(ACTION_FAILED.execute(element, safeException(ex)));
+            throw exception(ex, ACTION_FAILED.execute(element, safeException(ex)));
         }
     }
 }
