@@ -284,8 +284,9 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
 
     public static JFunc1<Field[], String> GET_TITLE_FIELD_NAME = fields -> {
         Field expectedField = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
-        if (expectedField != null)
+        if (expectedField != null) {
             return expectedField.getName();
+        }
         List<Field> titles = LinqUtils.filter(fields, f -> f.getType() == Label.class);
         return titles.size() == 1
                 ? titles.get(0).getName()
