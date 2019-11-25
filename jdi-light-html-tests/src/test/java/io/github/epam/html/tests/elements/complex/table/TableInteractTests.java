@@ -20,7 +20,7 @@ import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.users;
 import static io.github.com.pages.UsersPage.usersRow;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.MarvelHeroesUtils.SPIDER_MAN_SIMPLE;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -11,7 +11,7 @@ import java.util.List;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.multiplebarsProgress;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
