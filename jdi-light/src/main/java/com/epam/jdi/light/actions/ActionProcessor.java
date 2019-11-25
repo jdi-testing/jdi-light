@@ -3,7 +3,9 @@ package com.epam.jdi.light.actions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -23,6 +25,7 @@ import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.base.OutputTemplates.FAILED_ACTION_TEMPLATE;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.where;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
@@ -32,6 +35,7 @@ import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.currentThread;
+import static java.util.Collections.reverse;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -48,18 +52,31 @@ public class ActionProcessor {
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
         try {
+            failedMethods.clear();
             if (aroundCount() > 1)
                 return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jp);
             isOverride.get().clear();
             if (aroundCount() == 1)
-                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
+                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get()*100, TimeUnit.MILLISECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
+            addFailedMethod(jp);
+            if (aroundCount() == 1) {
+                reverse(failedMethods);
+                logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
+            }
             throw exception(ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
         }
     }
+    public static void addFailedMethod(ProceedingJoinPoint jp) {
+        String[] s = jp.toString().split("\\.");
+        String result = s[s.length-2]+"."+s[s.length-1].replaceAll("\\)\\)", ")");
+        if (!failedMethods.contains(result))
+            failedMethods.add(result);
+    }
+    public static List<String> failedMethods = new ArrayList<>();
     public static Object getObjAround(ProceedingJoinPoint jp) { return jp.getThis() != null ? jp.getThis() : new Object(); }
     public static String getExceptionAround(Throwable ex, boolean time) {
         String result = safeException(ex);

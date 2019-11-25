@@ -76,8 +76,16 @@ public abstract class DriverBase implements JDIElement {
     public String getName() {
         return isBlank(name) ? getClass().getSimpleName() : name;
     }
+    private String pageName;
+    public void setPage(String page) {
+        pageName = page;
+    }
 
     public WebPage getPage() {
+        if (pageName != null)
+            return PAGES.keys().contains(pageName)
+                    ? PAGES.get(pageName)
+                    : null;
         if (parent == null) return null;
         if (isClass(parent.getClass(), WebPage.class))
             return (WebPage) parent;

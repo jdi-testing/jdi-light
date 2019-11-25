@@ -6,8 +6,6 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
 import static com.epam.jdi.light.settings.WebSettings.hasDomain;

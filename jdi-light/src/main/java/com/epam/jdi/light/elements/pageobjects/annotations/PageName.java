@@ -1,7 +1,5 @@
 package com.epam.jdi.light.elements.pageobjects.annotations;
 
-import com.epam.jdi.light.common.SetTextTypes;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -13,6 +11,6 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface SetTextAs {
-    SetTextTypes value();
+public @interface PageName {
+    String value();
 }

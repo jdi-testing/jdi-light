@@ -131,6 +131,7 @@ public class InitActions {
         $("GetVisible", aRule(GetVisible.class, (e, a)-> e.searchVisible())),
         $("GetVisibleEnabled", aRule(GetVisibleEnabled.class, (e, a)-> e.visibleEnabled())),
         $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.inView())),
+        $("Page", aRule(PageName.class, (e, a)-> e.setPage(a.value()))),
 
         $("ListUI", aRule(UI.class, (e,a,f)-> {
             UI[] uis = f.getAnnotationsByType(UI.class);

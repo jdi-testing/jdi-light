@@ -31,9 +31,7 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
-import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.OutputTemplates.STEP_TEMPLATE;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
@@ -106,12 +104,20 @@ public class ActionHelper {
             Object obj = jp.getThis();
             if (obj == null) {
                 if (getMethodFromJp(jp).getAnnotation(VisualCheck.class) != null)
-                    visualWindowCheck();
+                    try {
+                        visualWindowCheck();
+                    } catch (Exception ex) {
+                        logger.debug("BEFORE: Can't do visualWindowCheck");
+                    }
             }
             else {
                 if (isInterface(obj.getClass(), JAssert.class)) {
                     JDIBase element = ((IBaseElement) obj).base();
-                    element.visualCheck(message);
+                    try {
+                        element.visualCheck(message);
+                    } catch (Exception ex) {
+                        logger.debug("BEFORE: Can't do visualCheck for element");
+                    }
                 }
             }
         }

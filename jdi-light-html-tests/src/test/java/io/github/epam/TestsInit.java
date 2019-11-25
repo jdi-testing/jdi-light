@@ -31,23 +31,6 @@ public interface TestsInit {
         homePage.open();
         logger.toLog("Run Tests");
     }
-    default void tryScreenshot(int x, int y, int width, int height) {
-        try {
-// Get entire page screenshot
-        File screenshot = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
-        BufferedImage fullImg = ImageIO.read(screenshot);
-
-// Crop the entire page screenshot to get only element screenshot
-        BufferedImage eleScreenshot= fullImg.getSubimage(x, y, width, height);
-        ImageIO.write(eleScreenshot, "png", screenshot);
-
-// Copy the element screenshot to disk
-        File screenshotLocation = new File("C:\\images\\GoogleLogo_screenshot.png");
-        FileUtils.copyFile(screenshot, screenshotLocation);
-        } catch (Exception ex) {
-            System.out.println("Failed");
-        }
-    }
 
 
     @AfterSuite(alwaysRun = true)

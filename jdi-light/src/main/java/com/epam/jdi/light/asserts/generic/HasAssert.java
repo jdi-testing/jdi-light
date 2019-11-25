@@ -1,5 +1,7 @@
 package com.epam.jdi.light.asserts.generic;
 
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 
 /**
@@ -15,6 +17,10 @@ public interface HasAssert<T> {
         return is();
     }
     default T waitFor() {
+        return is();
+    }
+    default T waitFor(int sec) {
+        ((IBaseElement)this).waitSec(sec);
         return is();
     }
     default T shouldBe() {

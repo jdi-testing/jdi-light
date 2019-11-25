@@ -1,7 +1,5 @@
 package io.github.epam.tests.epam;
 
-import com.epam.jdi.light.common.JDILocator;
-import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
