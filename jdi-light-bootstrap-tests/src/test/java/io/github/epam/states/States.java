@@ -14,6 +14,8 @@ import static io.github.epam.test.data.UsersUtils.DEFAULT_USER;
 /**
  * Created by Roman_Iovlev on 3/1/2018.
  */
+
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class States {
     @Step
     public static void shouldBeLoggedIn() {
