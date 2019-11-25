@@ -23,27 +23,27 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-eyes</artifactId>
-            <version>1.0.1</version>
+            <artifactId>jdi-light</artifactId>
+            <version>1.1.9</version>
         </dependency>
 
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
             <version>1.1.9</version>
-            <!--exclusions>
+            <exclusions>
                 <exclusion>
                     <groupId>com.epam.jdi</groupId>
                     <artifactId>jdi-light</artifactId>
                 </exclusion>
-            </exclusions-->
+            </exclusions>
         </dependency>
 
-        <!--dependency>
+        <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-selenium-java3</artifactId>
             <version>RELEASE</version>
-        </dependency-->
+        </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>

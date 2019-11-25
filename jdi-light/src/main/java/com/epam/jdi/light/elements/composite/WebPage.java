@@ -347,7 +347,12 @@ public class WebPage extends DriverBase implements PageObject {
 
     @JDIAction(level = DEBUG)
     public static double zoomLevel() {
-        return jsExecute("return window.devicePixelRatio;");
+        Object obj = jsExecute("return window.devicePixelRatio;");
+        try {
+            return (double) obj;
+        } catch (Exception ex) {
+            return new Double((Long)obj);
+        }
     }
     @JDIAction(level = DEBUG)
     public static long xOffset() {
