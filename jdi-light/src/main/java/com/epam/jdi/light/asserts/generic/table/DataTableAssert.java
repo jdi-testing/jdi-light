@@ -12,12 +12,10 @@ import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import org.hamcrest.Matcher;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.asserts.generic.table.DataTableAssert.CompareType.*;
-import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static java.lang.String.format;
 import static org.hamcrest.Matchers.*;

@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.pageobjects.annotations;
 
 import com.epam.jdi.light.common.SetTextTypes;
-import com.epam.jdi.light.common.TextTypes;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

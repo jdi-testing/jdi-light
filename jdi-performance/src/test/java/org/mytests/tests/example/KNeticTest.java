@@ -1,7 +1,6 @@
 package org.mytests.tests.example;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.tools.Timer;
 import org.mytests.uiobjects.example.knection.KnectionSite;
 import org.mytests.uiobjects.example.knection.Workspace;
 import org.testng.annotations.Test;
