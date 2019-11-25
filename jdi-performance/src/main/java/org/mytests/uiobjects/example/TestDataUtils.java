@@ -1,6 +1,6 @@
-package selenium.entities;
+package org.mytests.uiobjects.example;
 
-public class TestData {
+public class TestDataUtils {
     public static String TABLE_SNAPSHOOT = "Name Phone Email City" +
             "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe" +
             "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas" +

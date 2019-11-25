@@ -8,7 +8,7 @@ import static io.github.com.pages.BootstrapPage.carouselWithCustomInterval;
 import static io.github.com.pages.BootstrapPage.carouselWithFadeTransition;
 import static io.github.com.pages.BootstrapPage.carouselWithIndicators;
 import static io.github.com.pages.BootstrapPage.carouselWithSlidesOnly;
-import static io.github.epam.bootstrap.tests.BaseValidations.durationMoreThan;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.durationMoreThan;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 import org.testng.annotations.BeforeMethod;

@@ -9,6 +9,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class StaticTestsInit {
 
     @BeforeSuite(alwaysRun = true)

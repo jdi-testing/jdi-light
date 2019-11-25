@@ -11,7 +11,7 @@ import static io.github.com.pages.BootstrapPage.formsSelectMenuLarge;
 import static io.github.com.pages.BootstrapPage.formsSelectMenuMultiple;
 import static io.github.com.pages.BootstrapPage.formsSelectMenuSize;
 import static io.github.com.pages.BootstrapPage.formsSelectMenuSmall;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.AssertJUnit.assertEquals;

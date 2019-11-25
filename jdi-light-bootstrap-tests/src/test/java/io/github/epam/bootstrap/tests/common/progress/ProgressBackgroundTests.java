@@ -11,7 +11,7 @@ import static io.github.com.pages.BootstrapPage.progressBackgroundBlue;
 import static io.github.com.pages.BootstrapPage.progressBackgroundGreen;
 import static io.github.com.pages.BootstrapPage.progressBackgroundRed;
 import static io.github.com.pages.BootstrapPage.progressBackgroundYellow;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 

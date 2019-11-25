@@ -13,6 +13,8 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 /**
  * Created by Roman_Iovlev on 11/28/2017.
  */
+
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class DownloadDriverManager {
     public static boolean DOWNLOAD_DRIVER = true;
 

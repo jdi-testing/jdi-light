@@ -12,7 +12,7 @@ import io.github.com.sections.LoginForm;
 import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static io.github.epam.entities.Users.DEFAULT_USER;
+import static io.github.epam.entities.UsersUtils.DEFAULT_USER;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class NonStaticSite {

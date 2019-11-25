@@ -12,7 +12,7 @@ import static io.github.com.pages.BootstrapPage.modalFatButton;
 import static io.github.com.pages.BootstrapPage.modalGetbootstrapButton;
 import static io.github.com.pages.BootstrapPage.modalMdoButton;
 import static io.github.com.pages.BootstrapPage.modalVaryingContentWindow;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class ModalVaryingContentTests extends TestsInit {

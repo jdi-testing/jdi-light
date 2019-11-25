@@ -22,7 +22,7 @@ import static com.epam.jdi.light.actions.ActionProcessor.getObjAround;
 import static com.epam.jdi.light.actions.ActionProcessor.stableAction;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.TimeoutSettingsUtils.TIMEOUT;
 
 @SuppressWarnings("unused")
 @Aspect

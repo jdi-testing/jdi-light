@@ -17,6 +17,7 @@ import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
 import static com.epam.jdi.light.driver.get.DriverTypes.FIREFOX;
 import static com.epam.jdi.light.driver.get.DriverTypes.IE;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class DriverInfos {
     public static DriverInfo CHROME_INFO = new DriverInfo()
         .set(d -> {

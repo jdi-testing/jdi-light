@@ -68,6 +68,7 @@ import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class InitActions {
 
     public static MapArray<Class<?>, Class<?>> INTERFACES = map(

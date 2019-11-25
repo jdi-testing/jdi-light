@@ -11,6 +11,7 @@ import io.github.com.entities.User;
 import io.github.com.pages.BootstrapFormsPage;
 import io.github.com.pages.BootstrapPage;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 	@Url("/bootstrap.html")

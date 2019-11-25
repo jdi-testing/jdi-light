@@ -18,6 +18,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class EpamGithubSite {
 	@Url("/index.html") public static HomePage homePage;

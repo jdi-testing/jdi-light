@@ -9,7 +9,7 @@ import static com.epam.jdi.light.common.TextTypes.INNER;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.com.pages.MetalAndColorsPage.colors5;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.Colors.Green;
 import static io.github.epam.html.tests.elements.complex.enums.Colors.Yellow;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;

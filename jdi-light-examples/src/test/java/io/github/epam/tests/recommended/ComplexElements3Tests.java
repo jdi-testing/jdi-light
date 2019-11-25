@@ -24,8 +24,8 @@ import static io.github.epam.enums.Navigation.ComplexTable;
 import static io.github.epam.enums.Navigation.ContactForm;
 import static io.github.epam.enums.Navigation.Home;
 import static io.github.epam.enums.Navigation.Service;
-import static io.github.epam.enums.NavigationNums.nContactForm;
-import static io.github.epam.enums.NavigationNums.nHome;
+import static io.github.epam.enums.NavigationNumsUtils.nContactForm;
+import static io.github.epam.enums.NavigationNumsUtils.nHome;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 

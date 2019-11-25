@@ -3,7 +3,7 @@ package com.epam.jdi.light.elements.base;
 /**
  * Created by Roman_Iovlev on 4/8/2018.
  */
-public class OutputTemplates {
+public class OutputTemplatesUtils {
     public static String PRINT_PAGE_STEP = "(url={url}; title={title})";
     public static String PRINT_PAGE_INFO = "{varName} (url={url}; title={title})";
     public static String PRINT_PAGE_DEBUG = "{varName} (url={url}; title={title})";

@@ -42,6 +42,7 @@ import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class WebDriverFactory {
 
     public static MapArray<String, JFunc<WebDriver>> DRIVERS

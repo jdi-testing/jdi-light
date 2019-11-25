@@ -20,6 +20,7 @@ import static org.testng.Assert.assertEquals;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class StatesTests extends TestsInit {
 
     private String prev = "Previous";
