@@ -146,14 +146,14 @@ public class JDILogger implements ILogger {
         getLifecycle().stopStep(uuid);
     }
 
-    private static void screenshotToAllure() {
+    private static void takeScreenshot() {
+        String screenName = takeScreen();
         if (!writeToAllure) return;
-        takeAndWriteScreenshot(takeScreen());
+        screenToAllure(screenName);
     }
 
     @Attachment
-    private static byte[] takeAndWriteScreenshot(String screenName) {
-        System.out.println("ScreenName: "+screenName);
+    private static byte[] screenToAllure(String screenName) {
         try {
             return Files.readAllBytes(Paths.get(screenName));
         } catch (IOException e) {
@@ -188,7 +188,7 @@ public class JDILogger implements ILogger {
         logger.error(jdiMarker, getRecord(s, args));
         writeToAllure(getRecord(s, args), FAILED);
         if (screenshotStrategy.equals("on fail")) {
-            screenshotToAllure();
+            takeScreenshot();
         }
     }
 
