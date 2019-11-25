@@ -8,6 +8,7 @@ import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.light.elements.init.PageFactory.PRE_INIT;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class HtmlSettings {
     public static void init() {
         PRE_INIT.add("HtmlSettings", () -> INTERFACES.add(new Object[][]{

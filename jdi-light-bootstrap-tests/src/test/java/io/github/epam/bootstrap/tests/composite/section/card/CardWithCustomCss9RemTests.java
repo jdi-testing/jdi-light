@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.cardWithCustomCss9Rem;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
@@ -23,7 +23,7 @@ import static org.testng.Assert.assertEquals;
 
 public class CardWithCustomCss9RemTests extends TestsInit {
 
-    private String title = "HULK\n(9REM)";
+    private String title = "HULK (9REM)";
     private String text = "The Hulk is a fictional superhero appearing in publications by the American publisher Marvel Comics.";
     private String buttonText = "Read more";
     private String link = "https://en.wikipedia.org/wiki/Hulk_(film)";

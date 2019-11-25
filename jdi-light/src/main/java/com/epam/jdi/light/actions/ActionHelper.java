@@ -30,8 +30,8 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
-import static com.epam.jdi.light.elements.base.OutputTemplates.STEP_TEMPLATE;
+import static com.epam.jdi.light.elements.base.OutputTemplatesUtils.DEFAULT_TEMPLATE;
+import static com.epam.jdi.light.elements.base.OutputTemplatesUtils.STEP_TEMPLATE;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_NEW_PAGE;
 import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_THIS_PAGE;
@@ -59,21 +59,49 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class ActionHelper {
 
-    private static String getTemplate(LogLevels level) {
-        return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
-    }
+    public static int CUT_STEP_TEXT = 70;
+
+    public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
+        logger.toLog(getBeforeLogString(jp), logLevel(jp));
+    };
+    public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = jp -> {
+        BEFORE_STEP_ACTION.execute(jp);
+        processNewPage(jp);
+    };
+    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
+        if (!logResult(jp)) return result;
+        LogLevels logLevel = logLevel(jp);
+        if (result != null) {
+            String text = result.toString();
+            if (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5)
+                text = text.substring(0, CUT_STEP_TEXT) + "...";
+            logger.toLog(">>> " + text, logLevel);
+        } else
+            logger.debug("Done");
+        return result;
+    };
     public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = jp -> {
         try {
             MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
             return isBlank(template)
-                ? getDefaultName(method.getName(), methodArgs(jp, method))
-                : fillTemplate(template, jp, method);
+                    ? getDefaultName(method.getName(), methodArgs(jp, method))
+                    : fillTemplate(template, jp, method);
         } catch (Exception ex) {
             throw new RuntimeException("Surround method issue: " +
                     "Can't get action name: " + safeException(ex));
         }
     };
+    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_JDI_ACTION =
+            (jp, result) -> AFTER_STEP_ACTION.execute(jp, result);
+
+    public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
+
+
+    private static String getTemplate(LogLevels level) {
+        return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
+    }
+
     public static String fillTemplate(String template,
         ProceedingJoinPoint jp, MethodSignature method) {
 
@@ -107,27 +135,6 @@ public class ActionHelper {
         }
     }
 
-    public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
-        logger.toLog(getBeforeLogString(jp), logLevel(jp));
-    };
-    public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = jp -> {
-        BEFORE_STEP_ACTION.execute(jp);
-        processNewPage(jp);
-    };
-
-    public static int CUT_STEP_TEXT = 70;
-    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
-        if (!logResult(jp)) return result;
-        LogLevels logLevel = logLevel(jp);
-        if (result != null) {
-            String text = result.toString();
-            if (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5)
-                text = text.substring(0, CUT_STEP_TEXT) + "...";
-            logger.toLog(">>> " + text, logLevel);
-        } else
-            logger.debug("Done");
-        return result;
-    };
     private static boolean logResult(ProceedingJoinPoint jp) {
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class)) return false;
@@ -140,8 +147,6 @@ public class ActionHelper {
                 : jp.getSignature().getDeclaringType();
     }
 
-    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_JDI_ACTION =
-        (jp, result) -> AFTER_STEP_ACTION.execute(jp, result);
 
     //region Private
     private static String getBeforeLogString(ProceedingJoinPoint jp) {
@@ -170,7 +175,6 @@ public class ActionHelper {
         }
     }
 
-    public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
     private static WebPage getPage(Object element) {
         if (isClass(element.getClass(), DriverBase.class) &&
             !isClass(element.getClass(), WebPage.class))

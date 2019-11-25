@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.iceCreamIs;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Strawberry;
 import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Vanilla;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -16,13 +16,14 @@ import static org.testng.Assert.assertEquals;
 
 public class IsComboboxTests extends TestsInit {
 
+    private String text = "Coconut";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         iceCreamIs.select(text);
     }
-    private String text = "Coconut";
 
     @Test
     public void getValueTest() {

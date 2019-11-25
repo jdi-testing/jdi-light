@@ -9,6 +9,10 @@ import com.epam.jdi.light.ui.bootstrap.asserts.ImageAssert;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.bootstrap.BootstrapUtils.getInt;
 
+/**
+ * To see an example of Image in bootstrap please visit https://getbootstrap.com/docs/4.3/content/images/
+ */
+
 public class Image extends UIBaseElement<ImageAssert>
         implements HasClick, HasValue {
     // region Actions

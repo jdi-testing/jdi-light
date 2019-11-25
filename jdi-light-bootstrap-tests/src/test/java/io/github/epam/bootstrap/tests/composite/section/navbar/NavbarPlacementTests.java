@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.getUrl;
 import static io.github.com.pages.BootstrapPage.navbarPlacementStickyTop;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static java.lang.Integer.parseInt;
 import static org.testng.Assert.assertEquals;

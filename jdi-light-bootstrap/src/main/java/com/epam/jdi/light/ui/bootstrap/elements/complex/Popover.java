@@ -2,13 +2,15 @@ package com.epam.jdi.light.ui.bootstrap.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Text;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.MediaObject;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 /**
+ * To see an example of Popover web element please visit https://getbootstrap.com/docs/4.3/components/popovers/#example
+ *
  * Created by Dmitrii Pavlov on 04.10.2019
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */

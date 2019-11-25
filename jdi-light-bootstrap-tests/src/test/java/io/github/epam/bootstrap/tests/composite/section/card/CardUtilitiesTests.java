@@ -11,7 +11,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.cardWidth50;
 import static io.github.com.pages.BootstrapPage.cardWidth75;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 
@@ -46,7 +46,7 @@ public class CardUtilitiesTests extends TestsInit {
     public static Object[][] cardUtilitiesElementsWithTitle() {
         return new Object[][]{
                 {cardWidth75, "SPIDER MAN (W-75)"},
-                {cardWidth50, "HULK\n(W-50)"}
+                {cardWidth50, "HULK (W-50)"}
         };
     }
 

@@ -1,20 +1,20 @@
 package io.github.epam.bootstrap.tests.composite.section.card;
 
-import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.card.CardStyled;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
+import static io.github.com.pages.BootstrapPage.cardBlue;
 import static io.github.com.pages.BootstrapPage.cardBrightBlue;
-import static io.github.com.pages.BootstrapPage.cardGrey;
+import static io.github.com.pages.BootstrapPage.cardDark;
 import static io.github.com.pages.BootstrapPage.cardGreen;
+import static io.github.com.pages.BootstrapPage.cardGrey;
+import static io.github.com.pages.BootstrapPage.cardLight;
 import static io.github.com.pages.BootstrapPage.cardRed;
 import static io.github.com.pages.BootstrapPage.cardYellow;
-import static io.github.com.pages.BootstrapPage.cardBlue;
-import static io.github.com.pages.BootstrapPage.cardLight;
-import static io.github.com.pages.BootstrapPage.cardDark;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 
@@ -24,12 +24,6 @@ import static org.hamcrest.Matchers.is;
  */
 
 public class CardBackgroundAndColorTests extends TestsInit {
-
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
 
     @DataProvider(name = "cardColors")
     public static Object[][] cardColors() {
@@ -45,8 +39,14 @@ public class CardBackgroundAndColorTests extends TestsInit {
         };
     }
 
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
+
     @Test(dataProvider = "cardColors")
-    public void checkColorCardsTest(CardWithHeaderAndFooter card, String cssClass, String color) {
+    public void checkColorCardsTest(CardStyled card, String cssClass, String color) {
         card.is()
                 .core()
                 .hasClass(cssClass)
@@ -56,7 +56,7 @@ public class CardBackgroundAndColorTests extends TestsInit {
                 .displayed().and()
                 .core().css("background-color", is("rgba(0, 0, 0, 0.03)"));
 
-        card.paragraph.is()
+        card.title.is()
                 .displayed().and()
                 .core().css("background-color", is("rgba(0, 0, 0, 0)"));
 

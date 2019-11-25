@@ -2,12 +2,12 @@ package io.github.com.sections.buttongroup;
 
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class ButtonGroupBasicExample extends Section {
 
-    @UI("//button[text()='Left']") public Button leftButton;
-    @UI("//button[text()='Middle']") public Button middleButton;
-    @UI("//button[text()='Right']") public Button rightButton;
+    @UI("//button[contains(., 'Left')]") public Button leftButton;
+    @UI("//button[contains(., 'Middle')]") public Button middleButton;
+    @UI("//button[contains(., 'Right')]") public Button rightButton;
 
 }

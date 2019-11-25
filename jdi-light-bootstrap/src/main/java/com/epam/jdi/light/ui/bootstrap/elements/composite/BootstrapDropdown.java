@@ -5,9 +5,13 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.asserts.BootstrapDropdownAssert;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+
+/**
+ * To see an example of Dropdown web element in bootstrap please visit https://getbootstrap.com/docs/4.3/components/dropdowns/#examples
+ */
 
 public class BootstrapDropdown extends Section {
     @UI(".dropdown-toggle")

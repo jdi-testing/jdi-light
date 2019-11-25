@@ -38,7 +38,7 @@ public class CardImageData {
         private String imageClass = "card-img-top";
         private String text = "CARD TITLE\nThis is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.\nLast updated 3 mins ago";
         private int width = 86;
-        private int height = 105;
+        private int height = 106;
 
         public Builder srcAttr(String srcAttr) {
             this.srcAttr = srcAttr;

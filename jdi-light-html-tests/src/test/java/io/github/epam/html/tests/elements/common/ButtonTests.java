@@ -17,9 +17,9 @@ import static io.github.com.pages.HtmlElementsPage.ghostButton;
 import static io.github.com.pages.HtmlElementsPage.redButton;
 import static io.github.com.pages.HtmlElementsPage.rightClickButton;
 import static io.github.com.pages.HtmlElementsPage.suspendButton;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.elements.BaseValidations.durationImmediately;
-import static io.github.epam.html.tests.elements.BaseValidations.durationMoreThan;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.durationImmediately;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.durationMoreThan;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -34,12 +34,13 @@ import static org.testng.Assert.fail;
 
 public class ButtonTests extends TestsInit {
 
+    private String text = "Big Red Button-Input";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    private String text = "Big Red Button-Input";
 
     @Test
     public void getTextTest() {

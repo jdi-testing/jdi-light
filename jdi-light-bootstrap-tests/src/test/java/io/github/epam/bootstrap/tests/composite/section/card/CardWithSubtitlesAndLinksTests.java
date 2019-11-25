@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.cardWithSubtitlesAndLinks;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
@@ -22,12 +22,6 @@ import static org.testng.Assert.assertEquals;
  */
 
 public class CardWithSubtitlesAndLinksTests extends TestsInit {
-
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-    }
 
     private String titleText = "CARD TITLE";
     private String subtitleText = "CARD SUBTITLE";
@@ -41,6 +35,12 @@ public class CardWithSubtitlesAndLinksTests extends TestsInit {
     private String link2Text = "JDI Website";
     private String link1Value = "JDI Light Github";
     private String link2Value = "JDI Website";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        bsPage.shouldBeOpened();
+    }
 
     @Test
     public void getTitleTextTest() {

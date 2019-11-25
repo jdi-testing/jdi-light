@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.colorPicker;
 import static io.github.com.pages.HtmlElementsPage.disabledPicker;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
@@ -20,12 +20,13 @@ import static org.testng.Assert.assertEquals;
 
 public class ColorPickerTests extends TestsInit {
 
+    private String color = "#ffd7a6";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    private String color = "#ffd7a6";
 
     @Test
     public void getLabelTextTest() {

@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.progressSections;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 
@@ -43,7 +43,7 @@ public class ProgressBarsListTests extends TestsInit {
                 progressSection.progress.attr("id").equals(progressId)).forEach(
                 progressSection -> {
                     progressSection.progress.is().core().hasClass(classStriped);
-                    progressSection.progress.is().ariaValue(value)
+                    progressSection.progress.is().value(value)
                             .color(color)
                             .minValue(min)
                             .maxValue(max);

@@ -47,13 +47,13 @@ import static com.epam.jdi.light.driver.get.DriverData.DRIVER_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.LATEST_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.PAGE_LOAD_STRATEGY;
 import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
-import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
+import static com.epam.jdi.light.driver.get.RemoteDriverUtils.DRIVER_REMOTE_URL;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
-import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.TimeoutSettingsUtils.PAGE_TIMEOUT;
+import static com.epam.jdi.light.settings.TimeoutSettingsUtils.TIMEOUT;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
@@ -64,6 +64,7 @@ import static org.openqa.selenium.PageLoadStrategy.EAGER;
 import static org.openqa.selenium.PageLoadStrategy.NONE;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String DOMAIN;
@@ -76,34 +77,33 @@ public class WebSettings {
         el != null && !el.isDisplayed() && $(el).isClickable();
     public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
     public static JAction1<UIElement> BEFORE_SEARCH = b -> {};
-    public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
-        SEARCH_RULES = rule;
-    }
-    public static void noValidation() {
-        SEARCH_RULES = ANY_ELEMENT;
-        CLICK_TYPE = CENTER;
-    }
-    public static void onlyVisible() {
-        SEARCH_RULES = VISIBLE_ELEMENT;
-    }
-    public static void visibleEnabled() {
-        SEARCH_RULES = ENABLED_ELEMENT;
-    }
-    public static void inView() {
-        SEARCH_RULES = ELEMENT_IN_VIEW;
-        BEFORE_SEARCH = UIElement::show;
-    }
-
+    public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
+    public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
     public static ElementArea CLICK_TYPE = SMART_CLICK;
     public static TextTypes TEXT_TYPE = SMART_TEXT;
     public static boolean STRICT_SEARCH = true;
-    public static boolean hasDomain() {
-        return DOMAIN != null && DOMAIN.contains("://");
-    }
+    public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
+        String locatorName = SMART_SEARCH_NAME.execute(el.getName());
+        return el.base().timer().getResult(() -> {
+            for (String template : SMART_SEARCH_LOCATORS) {
+                UIElement ui = (("#%s").equals(template)
+                        ? $(String.format(template, locatorName))
+                        : $(String.format(template, locatorName), el.base().parent))
+                        .setup(e -> e.setName(el.getName()).noWait());
+                try {
+                    return ui.getWebElement();
+                } catch (Exception ignore) { }
+            }
+            throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
+        });
+    };
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
+    public static boolean hasDomain() {
+        return DOMAIN != null && DOMAIN.contains("://");
+    }
     public static String useDriver(JFunc<WebDriver> driver) {
         return WebDriverFactory.useDriver(driver);
     }
@@ -113,24 +113,6 @@ public class WebSettings {
     public static String useDriver(DriverTypes driverType) {
         return WebDriverFactory.useDriver(driverType);
     }
-
-    public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
-    public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
-    public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
-        String locatorName = SMART_SEARCH_NAME.execute(el.getName());
-        return el.base().timer().getResult(() -> {
-            for (String template : SMART_SEARCH_LOCATORS) {
-                UIElement ui = (("#%s").equals(template)
-                    ? $(String.format(template, locatorName))
-                    : $(String.format(template, locatorName), el.base().parent))
-                        .setup(e -> e.setName(el.getName()).noWait());
-                try {
-                    return ui.getWebElement();
-                } catch (Exception ignore) { }
-            }
-            throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
-        });
-    };
 
     public static synchronized void init() {
         getProperties(TEST_PROPERTIES_PATH);
@@ -167,6 +149,23 @@ public class WebSettings {
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
+    }
+    public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
+        SEARCH_RULES = rule;
+    }
+    public static void noValidation() {
+        SEARCH_RULES = ANY_ELEMENT;
+        CLICK_TYPE = CENTER;
+    }
+    public static void onlyVisible() {
+        SEARCH_RULES = VISIBLE_ELEMENT;
+    }
+    public static void visibleEnabled() {
+        SEARCH_RULES = ENABLED_ELEMENT;
+    }
+    public static void inView() {
+        SEARCH_RULES = ELEMENT_IN_VIEW;
+        BEFORE_SEARCH = UIElement::show;
     }
 
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {

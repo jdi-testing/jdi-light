@@ -8,7 +8,7 @@ import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
 import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.jdiTitle;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
@@ -22,13 +22,13 @@ import static org.testng.Assert.assertEquals;
 
 public class LabelTests extends TestsInit {
 
+    private String text = "JDI TESTING PLATFORM";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    private String text = "JDI TESTING PLATFORM";
-
     //TODO Performance issue
     @Test
     public void getTextTest() {

@@ -16,6 +16,10 @@ import java.util.Map;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 
+/**
+ * To see an example of different Forms in bootstrap please visit https://getbootstrap.com/docs/4.3/components/forms/
+ */
+
 public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
 
     private final static String VALID_FEEDBACK_LOCATOR = "./following-sibling::*[contains(concat(' ',normalize-space(@class),' '),' valid-feedback ')]";

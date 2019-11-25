@@ -6,8 +6,8 @@ import org.testng.annotations.Test;
 import static io.github.epam.EpamGithubSite.contactFormPage;
 import static io.github.epam.EpamGithubSite.header;
 import static io.github.epam.EpamGithubSite.homePage;
-import static io.github.epam.entities.Users.DEFAULT_USER;
-import static io.github.epam.entities.Users.USER_WITH_CONTACTS;
+import static io.github.epam.entities.UsersUtils.DEFAULT_USER;
+import static io.github.epam.entities.UsersUtils.USER_WITH_CONTACTS;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedOut;
 

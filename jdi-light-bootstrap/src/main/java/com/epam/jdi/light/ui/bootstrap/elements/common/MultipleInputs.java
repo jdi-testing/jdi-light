@@ -15,6 +15,10 @@ import org.openqa.selenium.By;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * To see an example of Multiple Inputs web element please visit https://getbootstrap.com/docs/4.3/components/input-group/#multiple-inputs
+ */
+
 public class MultipleInputs extends UIBaseElement<MultipleInputsAssert>
         implements IsInput, HasLabel, HasValue, SetValue {
 

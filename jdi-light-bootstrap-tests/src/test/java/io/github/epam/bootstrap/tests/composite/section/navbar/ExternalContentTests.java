@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.navbarExternalContent;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 /**
@@ -38,10 +38,10 @@ public class ExternalContentTests extends TestsInit {
     @Test
     public void getTextTest() {
         navbarExternalContent.toggler.expand();
-        navbarExternalContent.toggler.value().childs().get(1).is()
+        navbarExternalContent.toggler.value().children().get(1).is()
                 .displayed()
                 .text(text);
-        navbarExternalContent.toggler.value().childs().get(2).is()
+        navbarExternalContent.toggler.value().children().get(2).is()
                 .displayed()
                 .text(mutedText);
         navbarExternalContent.toggler.collapse();

@@ -10,7 +10,7 @@ import static com.epam.jdi.light.common.Exceptions.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
 import static io.github.com.pages.HtmlElementsPage.dressCode3;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.Casual;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.Fancy;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.Pirate;
@@ -32,13 +32,14 @@ import static org.testng.Assert.fail;
 
 public class DropdownITests extends TestsInit {
 
+    private String text = "Casual";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         dressCode3.select(text);
     }
-    private String text = "Casual";
 
     @Test
     public void selectTest() {

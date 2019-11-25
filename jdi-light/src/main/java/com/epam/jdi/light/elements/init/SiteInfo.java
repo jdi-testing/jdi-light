@@ -5,9 +5,15 @@ import com.epam.jdi.tools.DataClass;
 import java.lang.reflect.Field;
 
 public class SiteInfo extends DataClass<SiteInfo> {
+
+    public Class<?> parentClass;
+    public Object parent;
+    public Object instance;
+    public String driverName;
     public Field field;
     public Class<?> cl;
     public String name;
+
     public Class<?> type() {
         if (cl != null)
             return cl;
@@ -23,8 +29,6 @@ public class SiteInfo extends DataClass<SiteInfo> {
                 ? field.getName()
                 : "Undefined element");
     }
-    public Class<?> parentClass;
-    public Object parent;
     public String parentName() {
         if (parent != null)
             return parent.getClass().getSimpleName();
@@ -32,8 +36,6 @@ public class SiteInfo extends DataClass<SiteInfo> {
             ? parentClass.getSimpleName()
             : "";
     }
-    public Object instance;
-    public String driverName;
 
     public SiteInfo(String driver) {
         this.driverName = driver;

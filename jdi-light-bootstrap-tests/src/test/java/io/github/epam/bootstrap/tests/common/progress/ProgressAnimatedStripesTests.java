@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.progressAnimated;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -35,7 +35,7 @@ public class ProgressAnimatedStripesTests extends TestsInit {
 
     @Test
     public void getValueTest() {
-        assertEquals(progressAnimated.getAriaValue(), "75");
+        assertEquals(progressAnimated.getValue(), "75");
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ProgressAnimatedStripesTests extends TestsInit {
         progressAnimated.is()
                 .animated("progress-bar-stripes")
                 .color("rgba(0, 123, 255, 1)")
-                .ariaValue("75");
+                .value("75");
     }
 
     @Test

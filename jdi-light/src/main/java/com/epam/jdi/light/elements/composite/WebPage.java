@@ -23,16 +23,16 @@ import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
-import static com.epam.jdi.light.elements.base.OutputTemplates.PRINT_PAGE_DEBUG;
-import static com.epam.jdi.light.elements.base.OutputTemplates.PRINT_PAGE_INFO;
-import static com.epam.jdi.light.elements.base.OutputTemplates.PRINT_PAGE_STEP;
+import static com.epam.jdi.light.elements.base.OutputTemplatesUtils.PRINT_PAGE_DEBUG;
+import static com.epam.jdi.light.elements.base.OutputTemplatesUtils.PRINT_PAGE_INFO;
+import static com.epam.jdi.light.elements.base.OutputTemplatesUtils.PRINT_PAGE_STEP;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
-import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.TimeoutSettingsUtils.PAGE_TIMEOUT;
+import static com.epam.jdi.light.settings.TimeoutSettingsUtils.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
@@ -58,11 +58,24 @@ public class WebPage extends DriverBase implements PageObject {
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = CheckTypes.NONE;
 
+    private static Safe<String> currentPage = new Safe<>("Undefined Page");
+    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
+
+    public static JAction1<WebPage> BEFORE_NEW_PAGE = page -> {
+        if (CHECK_AFTER_OPEN == NEW_PAGE)
+            page.checkOpened();
+        logger.toLog("Page: " + page.getName());
+        TIMEOUT.set(PAGE_TIMEOUT.get());
+    };
+    public static JAction1<WebPage> BEFORE_THIS_PAGE = page -> {
+        if (CHECK_AFTER_OPEN == EVERY_PAGE)
+            page.checkOpened();
+    };
+
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this).setup(Form.class,e->e.setName(getName()+" Form"));
     }
 
-    private static Safe<String> currentPage = new Safe<>("Undefined Page");
     public static String getCurrentPage() { return currentPage.get(); }
     public static void setCurrentPage(WebPage page) {
         currentPage.set(page.getName());
@@ -398,15 +411,4 @@ public class WebPage extends DriverBase implements PageObject {
         }
     }
 
-    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
-    public static JAction1<WebPage> BEFORE_NEW_PAGE = page -> {
-        if (CHECK_AFTER_OPEN == NEW_PAGE)
-            page.checkOpened();
-        logger.toLog("Page: " + page.getName());
-        TIMEOUT.set(PAGE_TIMEOUT.get());
-    };
-    public static JAction1<WebPage> BEFORE_THIS_PAGE = page -> {
-        if (CHECK_AFTER_OPEN == EVERY_PAGE)
-            page.checkOpened();
-    };
 }

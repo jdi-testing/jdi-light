@@ -1,6 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.modal;
 
-import com.epam.jdi.light.ui.bootstrap.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import io.github.com.sections.modal.ModalWithButtons;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.sectionModalLongScrolling;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class ModalScrollingLongContentTests extends TestsInit {

@@ -13,7 +13,7 @@ import static io.github.com.pages.BootstrapPage.progressBaseWidth50;
 import static io.github.com.pages.BootstrapPage.progressBaseWidth75;
 import static io.github.com.pages.BootstrapPage.progressBaseWidth100;
 import static io.github.com.pages.BootstrapPage.progressBaseProgress0;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 
@@ -43,7 +43,7 @@ public class ProgressBaseTests extends TestsInit {
 
     @Test(dataProvider = "progressWidth")
     public void getWidthTest(Progress progress, String width) {
-        progress.is().ariaValue(width);
+        progress.is().value(width);
     }
 
     @DataProvider

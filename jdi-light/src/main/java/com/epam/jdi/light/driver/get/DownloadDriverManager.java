@@ -13,14 +13,17 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 /**
  * Created by Roman_Iovlev on 11/28/2017.
  */
+
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class DownloadDriverManager {
     public static boolean DOWNLOAD_DRIVER = true;
+
+    public static WebDriverManager wdm;
 
     private static boolean hasVersion(String version) {
         char c = version.charAt(0);
         return (c >= '0' && c <= '9');
     }
-    public static WebDriverManager wdm;
 
     public static void downloadDriver(DriverTypes driverType,
           Platform platform, String version) {
@@ -65,6 +68,7 @@ public class DownloadDriverManager {
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
+            logger.info("Binary path: " + wdm.getBinaryPath());
         } catch (Exception ex) {
             throw exception("Can't download latest driver for " + driverType
                     + ". Exception " + safeException(ex));

@@ -11,7 +11,7 @@ import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.PerformancePage.users;
 import static io.github.com.pages.PerformancePage.usersSetup;
-import static io.github.epam.test.data.TableData.GRADY_BROCK;
+import static io.github.epam.test.data.TableDataUtils.GRADY_BROCK;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
@@ -21,6 +21,9 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class TableTests extends StaticTestsInit {
+
+    private static long timeStart;
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -105,7 +108,6 @@ public class TableTests extends StaticTestsInit {
         validateAlert(is("Alcobendas"));
     }
 
-    private static long timeStart;
     private static void start() {
         timeStart = currentTimeMillis();
     }

@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.disabledTextArea;
 import static io.github.com.pages.HtmlElementsPage.textArea;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
@@ -21,14 +21,14 @@ import static org.testng.Assert.assertEquals;
 
 public class TextAreaTests extends TestsInit {
 
+    private String text = "TextArea";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         textArea.clear();
     }
-    private String text = "TextArea";
-
     @Test
     public void getTextTest() {
         textArea.setText(text);

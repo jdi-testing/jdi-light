@@ -9,7 +9,7 @@ import static com.epam.jdi.light.common.TextTypes.INNER;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.com.pages.MetalAndColorsPage.colorsCustom;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.Colors.Green;
 import static io.github.epam.html.tests.elements.complex.enums.Colors.Yellow;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -29,14 +29,15 @@ import static org.testng.Assert.fail;
  */
 
 public class DropdownCustomTests extends TestsInit {
+
+    private String text = "Colors";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
         colorsCustom.select(text);
     }
-    private String text = "Colors";
-
     @Test
     public void getValueTest() {
         assertEquals(colorsCustom.getValue(), text);

@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.cardBody;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.core.Is.is;
 import static org.testng.AssertJUnit.assertEquals;
@@ -18,13 +18,13 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class CardBodyTests extends TestsInit {
 
+    private String text = "This is some text within a card body.";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private String text = "This is some text within a card body.";
 
     @Test
     public void getBodyTextTest() {

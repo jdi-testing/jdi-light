@@ -15,6 +15,10 @@ import static com.epam.jdi.light.ui.bootstrap.BootstrapUtils.getInt;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
+/**
+ * To see an example of Text area web element please visit https://getbootstrap.com/docs/4.3/components/forms/#form-controls
+ */
+
 public class TextArea extends UIBaseElement<TextAreaAssert>
         implements HasLabel, SetValue, HasPlaceholder, IsInput {
     // region Actions

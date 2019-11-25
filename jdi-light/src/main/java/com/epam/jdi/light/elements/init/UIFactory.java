@@ -16,6 +16,8 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 /**
  * Created by Roman_Iovlev on 3/28/2018.
  */
+
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class UIFactory {
     public static UIElement element(String locator) {
         return locator.matches("[A-Z].*]")
