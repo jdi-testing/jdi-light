@@ -126,6 +126,7 @@ public class WebSettings {
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
         // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
+        fillAction(p -> logger.setScreenshotStrategy(p), "screenshot.strategy");
         fillAction(p -> KILL_BROWSER = p, "browser.kill");
         fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
         fillAction(p -> BROWSER_SIZE = p, "browser.size");
