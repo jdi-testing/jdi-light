@@ -27,6 +27,7 @@ import static com.epam.jdi.light.actions.ActionOverride.OverrideAction;
 import static com.epam.jdi.light.common.VisualCheckAction.IS_DISPLAYED;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;
 
@@ -44,23 +45,31 @@ public class JDIEyes {
     }
     static void visualTestInit() {
         OverrideAction("visualCheck", obj -> {
-            ProceedingJoinPoint jp = (ProceedingJoinPoint)obj;
-            if (!isClass(jp.getThis().getClass(), IBaseElement.class))
-                return;
-            IBaseElement ui = (IBaseElement) jp.getThis();
-            String name = getBeforeLogString(jp);
-            visualCheckElement(ui.base().getWebElement(), name);
+            try {
+                ProceedingJoinPoint jp = (ProceedingJoinPoint) obj;
+                if (!isClass(jp.getThis().getClass(), IBaseElement.class))
+                    return;
+                IBaseElement ui = (IBaseElement) jp.getThis();
+                String name = getBeforeLogString(jp);
+                visualCheckElement(ui.base().getWebElement(), name);
+            } catch (Exception ex) {
+                visualCheckPage(WebPage.getCurrentPage());
+            }
         });
         OverrideAction("visualWindowCheck",
             jp -> visualCheckPage(WebPage.getCurrentPage()));
     }
+    public static EyesConfig visualTestInit(Class<?> cl) {
+        initSite(cl);
+        return visualTestInitJdi();
+    }
     public static EyesConfig visualTestInitJdi() {
         visualTestInit();
-        return EYES_CONFIG. pageStrategy(CHECK_NEW_PAGE).actionStrategy(ON_VISUAL_ACTION);
+        return EYES_CONFIG.pageStrategy(CHECK_NEW_PAGE).actionStrategy(ON_VISUAL_ACTION);
     }
     public static EyesConfig visualTestInitSelenium() {
         visualTestInit();
-        return EYES_CONFIG. pageStrategy(CHECK_NEW_PAGE).actionStrategy(IS_DISPLAYED);
+        return EYES_CONFIG.pageStrategy(CHECK_NEW_PAGE).actionStrategy(IS_DISPLAYED);
     }
     static Safe<String> TEST_NAME = new Safe<>(() -> "Before tests");
     static Safe<Boolean> NEW_TEST = new Safe<>(() -> true);
@@ -102,8 +111,10 @@ public class JDIEyes {
         newVisualTest(format("%s.%s", method.getDeclaringClass().getSimpleName(), method.getName()));
     }
     public static void visualCheckPage(String pageName) {
-        openEyes();
-        eyes.get().checkWindow(pageName);
+        try {
+            openEyes();
+            eyes.get().checkWindow(pageName);
+        } catch (Exception ignore) { }
     }
     public static void visualCheckPage(INamed page) {
         visualCheckPage(page.getName());

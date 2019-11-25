@@ -106,12 +106,20 @@ public class ActionHelper {
             Object obj = jp.getThis();
             if (obj == null) {
                 if (getMethodFromJp(jp).getAnnotation(VisualCheck.class) != null)
-                    visualWindowCheck();
+                    try {
+                        visualWindowCheck();
+                    } catch (Exception ex) {
+                        logger.debug("BEFORE: Can't do visualWindowCheck");
+                    }
             }
             else {
                 if (isInterface(obj.getClass(), JAssert.class)) {
                     JDIBase element = ((IBaseElement) obj).base();
-                    element.visualCheck(message);
+                    try {
+                        element.visualCheck(message);
+                    } catch (Exception ex) {
+                        logger.debug("BEFORE: Can't do visualCheck for element");
+                    }
                 }
             }
         }

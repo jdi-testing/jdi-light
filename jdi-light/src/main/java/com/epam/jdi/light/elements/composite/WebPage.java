@@ -8,12 +8,11 @@ import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
 import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebElement;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -37,13 +36,11 @@ import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.lang.Float.parseFloat;
-import static java.lang.Integer.parseInt;
-import static java.lang.Math.*;
-import static java.lang.Math.round;
 import static java.lang.String.format;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -62,7 +59,7 @@ public class WebPage extends DriverBase implements PageObject {
     public CheckTypes checkTitleType = NONE;
 
     public <T> Form<T> asForm() {
-        return new Form<>().setPageObject(this).setup(Form.class,e->e.setName(getName()+" Form"));
+        return new Form<>().setPageObject(this).setup(Form.class,e->e.setName(getName()+" Form").setParent(this));
     }
 
     private static Safe<String> currentPage = new Safe<>("Undefined Page");
@@ -161,7 +158,9 @@ public class WebPage extends DriverBase implements PageObject {
                 ? url
                 : url.contains("%s")
                     ? String.format(url, params)
-                    : MessageFormat.format(url, params);
+                    : url.contains("{0}")
+                        ? MessageFormat.format(url, params)
+                        : url + "?" + print(map(params, Object::toString), "&");
     }
 
     /**

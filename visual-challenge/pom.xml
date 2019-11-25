@@ -12,9 +12,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <environment>V2</environment>
-        <testSuite>traditional</testSuite>
+        <environment>V1</environment>
         <!--environment>V2</environment-->
+        <testSuite>traditional</testSuite>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.1</aspectj.version>
@@ -23,26 +23,27 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light</artifactId>
-            <version>1.1.8</version>
+            <artifactId>jdi-light-eyes</artifactId>
+            <version>1.0.1</version>
         </dependency>
+
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.1.8</version>
-            <exclusions>
+            <version>1.1.9</version>
+            <!--exclusions>
                 <exclusion>
                     <groupId>com.epam.jdi</groupId>
                     <artifactId>jdi-light</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions-->
         </dependency>
 
-        <dependency>
+        <!--dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-selenium-java3</artifactId>
             <version>RELEASE</version>
-        </dependency>
+        </dependency-->
 
         <dependency>
             <groupId>org.testng</groupId>

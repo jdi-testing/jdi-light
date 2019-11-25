@@ -160,6 +160,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     @Override
     public IBaseElement waitSec(int sec) {
         timeout = sec;
+        driver().manage().timeouts().implicitlyWait(sec*100, TimeUnit.MILLISECONDS);
         return this;
     }
     public int getTimeout() {
@@ -327,7 +328,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         TR result;
         try {
             waitSec(sec);
-            manageTimeout(sec);
             result = action.execute((TE) this);
         }
         finally {
@@ -350,13 +350,10 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public void manageTimeout() {
         if (timeout > -1)
-            manageTimeout(timeout);
+            waitSec(timeout);
     }
     public void dropToGlobalTimeout() {
-        manageTimeout(TIMEOUT.get());
-    }
-    protected void manageTimeout(int time) {
-        driver().manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
+        waitSec(TIMEOUT.get());
     }
 
     private JDIBase getBase(Object element) {

@@ -60,7 +60,7 @@ public class ActionProcessor {
             Object result = stableAction(jp);
             isOverride.get().clear();
             if (aroundCount() == 1)
-                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
+                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get()*100, TimeUnit.MILLISECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
             addFailedMethod(jp);
