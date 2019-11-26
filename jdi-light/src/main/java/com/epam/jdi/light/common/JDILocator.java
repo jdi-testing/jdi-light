@@ -27,7 +27,6 @@ public class JDILocator {
     private JDIBase element;
     private Object[] args = new Object[]{};
 
-    public JDILocator() {}
     public JDILocator copy() {
         JDILocator locator = new JDILocator();
         locator.locatorType = locatorType;
