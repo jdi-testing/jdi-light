@@ -144,13 +144,11 @@ public class JDILogger implements ILogger {
         final String uuid = UUID.randomUUID().toString();
         StepResult step = new StepResult().withName(message).withStatus(status);
         getLifecycle().startStep(uuid, step);
-        if (FAILED.equals(status)) {
-            if ("on fail".equals(screenshotStrategy)) {
-                try {
-                    takeScreenshot();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        if (FAILED.equals(status) && ("on fail".equals(screenshotStrategy))) {
+            try {
+                takeScreenshot();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         getLifecycle().stopStep(uuid);
