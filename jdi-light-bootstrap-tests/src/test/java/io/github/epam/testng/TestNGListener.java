@@ -37,10 +37,13 @@ public class TestNGListener implements IInvokedMethodListener {
     public void afterInvocation(IInvokedMethod method, ITestResult r) {
         if (method.isTestMethod()) {
             String result = getTestResult(r);
-            logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
-                    new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())));
             if ("FAILED".equals(result)) {
-                logger.error("ERROR: " + r.getThrowable().getMessage());
+                logger.error("=== Test '%s' %s [%s] === ERROR: [%s] ===", TEST_NAME.get(), result,
+                        new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())), r.getThrowable().getMessage());
+            }
+            else {
+                logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
+                        new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())));
             }
         }
     }
