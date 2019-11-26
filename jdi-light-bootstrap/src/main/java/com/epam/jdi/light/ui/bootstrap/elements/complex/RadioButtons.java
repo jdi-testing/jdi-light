@@ -30,7 +30,4 @@ public class RadioButtons extends com.epam.jdi.light.ui.html.elements.complex.Ra
         return radioBtnWebList;
     }
 
-    public RadioButtons() {
-        super();
-    }
 }
