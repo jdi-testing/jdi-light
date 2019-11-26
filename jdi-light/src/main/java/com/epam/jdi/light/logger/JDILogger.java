@@ -9,14 +9,15 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
+import io.qameta.allure.Allure;
 import io.qameta.allure.model.Status;
 import io.qameta.allure.model.StepResult;
-import io.qameta.allure.Attachment;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -51,7 +52,7 @@ public class JDILogger implements ILogger {
     private static Marker jdiMarker = MarkerManager.getMarker("JDI");
     public static boolean writeToAllure = true;
     private Safe<LogLevels> logLevel = new Safe<>(INFO);
-    private String screenshotStrategy;
+    private static String screenshotStrategy = "on fail";
 
     public static JDILogger instance(String name) {
 
@@ -137,23 +138,22 @@ public class JDILogger implements ILogger {
         final String uuid = UUID.randomUUID().toString();
         StepResult step = new StepResult().withName(message).withStatus(status);
         getLifecycle().startStep(uuid, step);
+        if (FAILED.equals(status)) {
+            if ("on fail".equals(screenshotStrategy)) {
+                try {
+                    takeScreenshot();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         getLifecycle().stopStep(uuid);
     }
 
-    private static void takeScreenshot() {
+    private static void takeScreenshot() throws IOException {
         String screenName = takeScreen();
         if (!writeToAllure) return;
-        screenToAllure(screenName);
-    }
-
-    @Attachment
-    private static byte[] screenToAllure(String screenName) {
-        try {
-            return Files.readAllBytes(Paths.get(screenName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        Allure.addAttachment("Page screenshot", new ByteArrayInputStream(Files.readAllBytes(Paths.get(screenName))));
     }
 
     public void step(String s, Object... args) {
@@ -181,9 +181,6 @@ public class JDILogger implements ILogger {
     public void error(String s, Object... args) {
         logger.error(jdiMarker, getRecord(s, args));
         writeToAllure(getRecord(s, args), FAILED);
-        if ("on fail".equals(screenshotStrategy)) {
-            takeScreenshot();
-        }
     }
 
     public void toLog(String msg) {
