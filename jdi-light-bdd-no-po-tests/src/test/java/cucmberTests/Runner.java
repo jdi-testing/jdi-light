@@ -1,8 +1,8 @@
-package cucmberTests;
+package cucmbertests;
 
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
-import cucmberTests.steps.User;
+import cucmbertests.steps.User;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import cucumber.api.testng.AbstractTestNGCucumberTests;

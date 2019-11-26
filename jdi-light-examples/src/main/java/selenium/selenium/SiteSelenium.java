@@ -1,6 +1,7 @@
-package selenium.seleniumPO;
+package selenium.selenium;
 
 import selenium.entities.User;
+import selenium.selenium.HomePage;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
