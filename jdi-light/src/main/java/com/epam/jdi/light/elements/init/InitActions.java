@@ -1,7 +1,7 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.SeleniumWebList;
+import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.ISetup;

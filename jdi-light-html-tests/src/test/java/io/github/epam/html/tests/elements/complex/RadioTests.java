@@ -19,13 +19,14 @@ import static org.testng.Assert.assertEquals;
 
 public class RadioTests extends TestsInit {
 
+    private String text = "Blue";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         colors.select(text);
     }
-    private String text = "Blue";
 
     @Test
     public void getValueTest() {
@@ -47,15 +48,18 @@ public class RadioTests extends TestsInit {
         colorsNoLocator.select(Red);
         colorsNoLocator.is().selected(Red);
     }
+
     @Test
     public void selectNumTest() {
         colors.select(1);
         assertEquals(colors.getValue(), "Red");
     }
+
     @Test
     public void selectedTest() {
         assertEquals(colors.selected(), text);
     }
+
     @Test
     public void valuesTest() {
         assertEquals(colors.values(), asList("Red", "Green", "Blue", "Yellow"));

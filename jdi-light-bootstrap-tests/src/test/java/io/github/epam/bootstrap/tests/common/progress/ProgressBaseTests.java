@@ -7,12 +7,12 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
+import static io.github.com.pages.BootstrapPage.progressBaseProgress0;
 import static io.github.com.pages.BootstrapPage.progressBaseWidth0;
+import static io.github.com.pages.BootstrapPage.progressBaseWidth100;
 import static io.github.com.pages.BootstrapPage.progressBaseWidth25;
 import static io.github.com.pages.BootstrapPage.progressBaseWidth50;
 import static io.github.com.pages.BootstrapPage.progressBaseWidth75;
-import static io.github.com.pages.BootstrapPage.progressBaseWidth100;
-import static io.github.com.pages.BootstrapPage.progressBaseProgress0;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 

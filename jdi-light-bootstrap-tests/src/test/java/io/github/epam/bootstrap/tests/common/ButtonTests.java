@@ -25,13 +25,13 @@ import static org.testng.Assert.fail;
 
 public class ButtonTests extends TestsInit {
 
+    private String text = "Red button";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private String text = "Red button";
 
     @Test
     public void getTextTest() {
@@ -56,7 +56,7 @@ public class ButtonTests extends TestsInit {
             fail("Disabled button should not work, but work");
         } catch (Exception ex) {
             assertThat(safeException(ex),
-                    containsString("Can't perform click. Element is disabled"));
+                containsString("Can't perform click. Element is disabled"));
         }
     }
 
