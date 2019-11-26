@@ -29,37 +29,40 @@ import static org.testng.Assert.fail;
  */
 
 public class DropdownEx4Tests extends TestsInit {
+
+    private String text = "Colors";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
         colors4.select(text);
     }
-    private String text = "Colors";
 
     @Test
     public void getValueTest() {
         assertEquals(colors4.getValue(), text);
     }
+
     @Test
     public void selectStringTest() {
         colors4.select("Red");
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Red"));
+                .text(containsString("Colors: value changed to Red"));
     }
 
     @Test
     public void selectEnumTest() {
         colors4.select(Green);
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Green"));
+                .text(containsString("Colors: value changed to Green"));
     }
 
     @Test
     public void selectIndexTest() {
         colors4.select(4);
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Blue"));
+                .text(containsString("Colors: value changed to Blue"));
     }
 
     @Test
@@ -91,16 +94,19 @@ public class DropdownEx4Tests extends TestsInit {
     public void assertValidationTest() {
         colors4.assertThat().values(INNER, contains("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void innerValuesTest() {
         assertThat(colors4.values(INNER), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void expandTests() {
         assertThat(colors4.listEnabled(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
         assertThat(colors4.listDisabled(), empty());
         assertThat(colors4.values(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void baseValidationTest() {
         baseValidation(colors4);

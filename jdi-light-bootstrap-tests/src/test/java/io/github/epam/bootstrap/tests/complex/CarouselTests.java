@@ -1,5 +1,10 @@
 package io.github.epam.bootstrap.tests.complex;
 
+import com.epam.jdi.light.elements.composite.WebPage;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.carouselWithCaptions;
@@ -10,13 +15,6 @@ import static io.github.com.pages.BootstrapPage.carouselWithIndicators;
 import static io.github.com.pages.BootstrapPage.carouselWithSlidesOnly;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.durationMoreThan;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import com.epam.jdi.light.elements.composite.WebPage;
-
-import io.github.epam.TestsInit;
 
 public class CarouselTests extends TestsInit {
 

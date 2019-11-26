@@ -138,7 +138,6 @@ import io.github.com.sections.spinner.GrowingSpinners;
 import io.github.com.sections.spinner.SpinnerAlignment;
 import io.github.com.sections.spinner.SpinnerSize;
 
-
 public class BootstrapPage extends WebPage {
     //region Simple Elements
     public static UIElement inputGroupWrap;

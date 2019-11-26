@@ -20,6 +20,8 @@ import static org.testng.Assert.assertEquals;
 
 public class MultiDropdownTests extends TestsInit {
 
+    private String text = "Steam";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -27,7 +29,6 @@ public class MultiDropdownTests extends TestsInit {
         if (!isFireFox())
             multiDropdown.check(text);
     }
-    private String text = "Steam";
 
     @Test
     public void getValueTest() {
@@ -47,12 +48,14 @@ public class MultiDropdownTests extends TestsInit {
         multiDropdown.check(Wood, Steam);
         assertEquals(multiDropdown.checked(), asList("Steam", "Wood"));
     }
+
     @Test
     public void selectNumTest() {
         if (isFireFox()) return;
         multiDropdown.check(1, 5);
         assertEquals(multiDropdown.checked(), asList("Electro", "Wood"));
     }
+
     @Test
     public void selectedTest() {
         assertEquals(multiDropdown.selected(), text);
@@ -77,15 +80,15 @@ public class MultiDropdownTests extends TestsInit {
         multiDropdown.is().selected(Steam);
         multiDropdown.assertThat().values(hasItem("Wood"));
         multiDropdown.assertThat().disabled(hasItem("Disabled"))
-            .enabled(not(hasItem("Disabled")))
-            .enabled(hasItems("Electro", "Metalic"));
+                .enabled(not(hasItem("Disabled")))
+                .enabled(hasItems("Electro", "Metalic"));
     }
 
     @Test
     public void assertValidationTest() {
         multiDropdown.assertThat()
-            .values(containsInAnyOrder("Disabled", "Electro", "Metalic", "Wood", "Steam"))
-            .selected(Steam);
+                .values(containsInAnyOrder("Disabled", "Electro", "Metalic", "Wood", "Steam"))
+                .selected(Steam);
     }
 
     @Test

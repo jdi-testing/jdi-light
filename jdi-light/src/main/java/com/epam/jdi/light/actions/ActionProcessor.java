@@ -47,10 +47,73 @@ import static java.lang.Thread.currentThread;
 @Aspect
 public class ActionProcessor {
 
+    public static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
+            $("", result -> true),
+            $("true", result -> result instanceof Boolean && (Boolean) result),
+            $("false", result -> result instanceof Boolean && !(Boolean) result),
+            $("not empty", result -> result instanceof List && ((List) result).size() > 0),
+            $("empty", result -> result instanceof List && ((List) result).size() == 0)
+    );
+
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
-    protected void jdiPointcut() { }
+    protected void jdiPointcut() { // empty
+    }
+
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
-    protected void stepPointcut() { }
+    protected void stepPointcut() { // empty
+    }
+
+    @Around("jdiPointcut()")
+    public Object jdiAround(ProceedingJoinPoint jp) {
+        try {
+            if (aroundCount() > 1)
+                return defaultAction(jp);
+            BEFORE_JDI_ACTION.execute(jp);
+            Object result = stableAction(jp);
+            if (aroundCount() == 1)
+                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
+            return AFTER_JDI_ACTION.execute(jp, result);
+        } catch (Throwable ex) {
+            throw exception(ex, ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
+        }
+    }
+
+    public static Object getObjAround(ProceedingJoinPoint jp) {
+        return jp.getThis() != null ? jp.getThis() : new Object();
+    }
+
+    public static String getExceptionAround(Throwable ex, boolean time) {
+        String result = safeException(ex);
+        while (result.contains("\n\n"))
+            result = result.replaceFirst("\\n\\n", LINE_BREAK);
+        result = result.replace("java.lang.RuntimeException:", "").trim();
+        if (aroundCount() == 1)
+            result = "[" + nowTime("mm:ss.S") + "] " + result.replaceFirst("\n", "");
+        return result;
+    }
+
+    public static int aroundCount() {
+        return where(currentThread().getStackTrace(),
+                s -> s.getMethodName().equals("jdiAround")/* ||
+                s.getClassName().equals("io.qameta.allure.aspects.StepsAspects")*/)
+                .size();
+    }
+
+    public static Object defaultAction(ProceedingJoinPoint jp) throws Throwable {
+        JDIBase obj = getJdi(jp);
+        JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
+        return overrideAction != null
+                ? overrideAction.execute(obj) : jp.proceed();
+    }
+
+    public static JDIBase getJdi(ProceedingJoinPoint jp) {
+        try {
+            return jp.getThis() != null && isInterface(getJpClass(jp), IBaseElement.class)
+                    ? ((IBaseElement) jp.getThis()).base() : null;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 
     public static Object stableAction(ProceedingJoinPoint jp) {
         String exceptionMsg = "";
@@ -77,34 +140,17 @@ public class ActionProcessor {
         } while (currentTimeMillis() - start < timeout * 1000);
         throw exception(exception, getFailedMessage(jp, exceptionMsg));
     }
-    public static Object getObjAround(ProceedingJoinPoint jp) { return jp.getThis() != null ? jp.getThis() : new Object(); }
-    public static String getExceptionAround(Throwable ex, boolean time) {
-        String result = safeException(ex);
-        while (result.contains("\n\n"))
-            result = result.replaceFirst("\\n\\n", LINE_BREAK);
-        result = result.replace("java.lang.RuntimeException:", "").trim();
-        if (aroundCount() == 1)
-            result = "["+nowTime("mm:ss.S")+"] " + result.replaceFirst("\n", "");
-        return result;
+
+    private static JFunc1<JDIBase, Object> getOverride(ProceedingJoinPoint jp, JDIBase obj) {
+        return obj != null ? GetOverrideAction(jp) : null;
     }
 
-    public static int aroundCount() {
-        return where(currentThread().getStackTrace(),
-                s -> s.getMethodName().equals("jdiAround")/* ||
-                s.getClassName().equals("io.qameta.allure.aspects.StepsAspects")*/)
-                .size();
-    }
-    public static Object defaultAction(ProceedingJoinPoint jp) throws Throwable {
-        JDIBase obj = getJdi(jp);
-        JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
-        return overrideAction != null
-                ? overrideAction.execute(obj) : jp.proceed();
-    }
-    public static JDIBase getJdi(ProceedingJoinPoint jp) {
-        try {
-            return jp.getThis() != null && isInterface(getJpClass(jp), IBaseElement.class)
-                ? ((IBaseElement) jp.getThis()).base() : null;
-        } catch (Exception ex) { return null; }
+    private static int getTimeout(JDIAction ja, IBaseElement obj) {
+        return ja != null && ja.timeout() != -1
+                ? ja.timeout()
+                : obj != null
+                ? obj.base().getTimeout()
+                : TIMEOUT.get();
     }
 
     private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
@@ -122,52 +168,20 @@ public class ActionProcessor {
         }
     }
 
-    private static JFunc1<JDIBase, Object> getOverride(ProceedingJoinPoint jp, JDIBase obj) {
-        return obj != null ? GetOverrideAction(jp) : null;
-    }
-
-    private static int getTimeout(JDIAction ja, IBaseElement obj) {
-        return ja != null && ja.timeout() != -1
-            ? ja.timeout()
-            : obj != null
-                ? obj.base().getTimeout()
-                : TIMEOUT.get();
-    }
-
-    @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) {
-        try {
-            if (aroundCount() > 1)
-                return defaultAction(jp);
-            BEFORE_JDI_ACTION.execute(jp);
-            Object result = stableAction(jp);
-            if (aroundCount() == 1)
-                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
-            return AFTER_JDI_ACTION.execute(jp, result);
-        } catch (Throwable ex) {
-            throw exception(ex, ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
-        }
-    }
     private static int getTimeout(ProceedingJoinPoint jp) {
         return getTimeout(null, getJdi(jp));
     }
 
     private static String getConditionName(ProceedingJoinPoint jp) {
-        JDIAction ja = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
+        JDIAction ja = ((MethodSignature) jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
         return ja != null ? ja.condition() : "";
     }
-    public static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
-        $("", result -> true),
-        $("true", result -> result instanceof Boolean && (Boolean)result),
-        $("false", result -> result instanceof Boolean && !(Boolean)result),
-        $("not empty", result -> result instanceof List && ((List)result).size() > 0),
-        $("empty", result -> result instanceof List && ((List)result).size() == 0)
-    );
+
     private static boolean condition(ProceedingJoinPoint jp) {
         String conditionName = getConditionName(jp);
         return CONDITIONS.has(conditionName)
-            ? CONDITIONS.get(conditionName).execute(jp)
-            : true;
+                ? CONDITIONS.get(conditionName).execute(jp)
+                : true;
     }
 
     @Around("stepPointcut()")
