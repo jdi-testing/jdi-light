@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-public class BaseValidations {
+public class BaseValidationsUtils {
 
     public static void baseValidation(ICoreElement el) {
         // EXCLUDED el.hover();

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class Cookies {
 
     private static WebDriver.Options manage() { return WebDriverFactory.getDriver().manage(); }

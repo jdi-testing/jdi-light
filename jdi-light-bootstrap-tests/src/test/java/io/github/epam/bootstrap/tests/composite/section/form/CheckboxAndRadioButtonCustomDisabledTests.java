@@ -19,7 +19,6 @@ import static org.hamcrest.CoreMatchers.is;
 public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
 
     private String label1 = "Toggle this custom radio";
-    private WebList radioBtnList;
 
     @BeforeMethod
     public void before() {

@@ -18,8 +18,10 @@ import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public abstract class DriverBase implements JDIElement {
+
     public String driverName = DRIVER_NAME;
 
+    protected String context;
     public String name = "";
     public String varName = "";
     public String typeName = "";
@@ -31,15 +33,19 @@ public abstract class DriverBase implements JDIElement {
         Object p = parent;
         while (p != null) {
             parents.add(p);
-            p = isClass(p.getClass(), DriverBase.class) ? ((DriverBase)p).parent : null;
+            p = isClass(p.getClass(), DriverBase.class) ? ((DriverBase) p).parent : null;
         }
         return parents;
     }
 
-    public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
-    public JavascriptExecutor js() { return (JavascriptExecutor) driver(); }
+    public WebDriver driver() {
+        return WebDriverFactory.getDriver(driverName);
+    }
 
-    protected String context;
+    public JavascriptExecutor js() {
+        return (JavascriptExecutor) driver();
+    }
+
     public DriverBase setParent(Object parent) {
         this.parent = parent;
         return this;
@@ -57,21 +63,25 @@ public abstract class DriverBase implements JDIElement {
             setTypeName(info.type().getSimpleName());
         }
     }
+
     public DriverBase setName(String name) {
         this.name = name;
         this.varName = name;
         this.failElement = name;
         return this;
     }
+
     public void setName(Field field, String className) {
         this.name = splitCamelCase(field.getName());
         this.failElement = this.name;
         this.varName = className + "." + field.getName();
         this.typeName = field.getType().getSimpleName();
     }
+
     public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
+
     public String getName() {
         return isBlank(name) ? getClass().getSimpleName() : name;
     }
@@ -81,13 +91,14 @@ public abstract class DriverBase implements JDIElement {
         if (isClass(parent.getClass(), WebPage.class))
             return (WebPage) parent;
         if (!isClass(parent.getClass(), DriverBase.class)) return null;
-        return ((DriverBase)parent).getPage();
+        return ((DriverBase) parent).getPage();
     }
+
     public boolean hasParent(String name) {
         if (parent == null) return false;
         if (isClass(parent.getClass(), WebPage.class))
             return ((WebPage) parent).getName().equals(name);
         if (!isClass(parent.getClass(), JDIBase.class)) return false;
-        return ((JDIBase)parent).hasParent(name);
+        return ((JDIBase) parent).hasParent(name);
     }
 }

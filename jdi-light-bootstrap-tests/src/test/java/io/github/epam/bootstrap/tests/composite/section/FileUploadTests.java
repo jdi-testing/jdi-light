@@ -9,7 +9,7 @@ import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.inputFileSection;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static org.hamcrest.Matchers.containsString;
 
 public class FileUploadTests extends TestsInit {

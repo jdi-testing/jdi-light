@@ -2,7 +2,7 @@ package io.github.epam.bootstrap.tests.composite.dropdown;
 
 import com.epam.jdi.light.elements.common.WindowsManager;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.ui.bootstrap.elements.common.TextField;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.entities.FormContacts;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.dropdownForm;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;

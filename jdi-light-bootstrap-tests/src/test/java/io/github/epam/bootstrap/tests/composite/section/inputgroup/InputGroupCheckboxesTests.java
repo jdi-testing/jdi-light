@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.inputGroupCheckBox;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
@@ -19,17 +19,17 @@ import static org.testng.Assert.assertEquals;
 
 public class InputGroupCheckboxesTests extends TestsInit {
 
+    private String text = "Input text";
+    private String new_text = "New text";
+    private String added_text=" add some text";
+    private String part_of_text = "text";
+    private String placeholder_text = "";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private String text = "Input text",
-            new_text = "New text",
-            added_text=" add some text",
-            part_of_text = "text",
-            placeholder_text = "";
 
     @Test
     public void clickCheckboxTest() {

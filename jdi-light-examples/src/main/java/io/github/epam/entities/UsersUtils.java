@@ -1,7 +1,7 @@
 package io.github.epam.entities;
 
 
-public class Users {
+public class UsersUtils {
     public static User DEFAULT_USER = new User();
 
     public static User USER_WITH_CONTACTS = new User().set(u-> {

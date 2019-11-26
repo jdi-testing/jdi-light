@@ -14,7 +14,7 @@ import static com.epam.jdi.light.ui.bootstrap.BootstrapUtils.isElementInViewPort
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.multipleInputs;
 import static io.github.com.pages.BootstrapPage.redButton;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.InputDataHelper.inputDataAsMap;
 import static org.hamcrest.Matchers.containsString;

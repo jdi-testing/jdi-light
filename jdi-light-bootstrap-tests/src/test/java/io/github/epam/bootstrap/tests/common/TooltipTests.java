@@ -8,20 +8,20 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.tooltipOnTopButton;
 import static io.github.com.pages.BootstrapPage.tooltipOnBottomButton;
+import static io.github.com.pages.BootstrapPage.tooltipOnDisabledButton;
 import static io.github.com.pages.BootstrapPage.tooltipOnLeftButton;
 import static io.github.com.pages.BootstrapPage.tooltipOnRightButton;
+import static io.github.com.pages.BootstrapPage.tooltipOnTopButton;
 import static io.github.com.pages.BootstrapPage.tooltipWithHTML;
-import static io.github.com.pages.BootstrapPage.tooltipOnDisabledButton;
 import static io.github.com.pages.BootstrapPage.wrapperForDisabledButton;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.fail;
 
 public class TooltipTests extends TestsInit {

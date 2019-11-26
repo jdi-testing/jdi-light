@@ -13,6 +13,8 @@ import static org.mytests.uiobjects.example.site.SiteJdi.userName;
 /**
  * Created by Roman_Iovlev on 3/1/2018.
  */
+
+@SuppressWarnings("PMD.ClassNamingConventions")
 public class States {
     private static void onSite() {
         if (!WebPage.getUrl().contains("https://jdi-testing.github.io/jdi-light/"))

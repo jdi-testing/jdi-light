@@ -27,6 +27,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 	@Url("/index.html") public static HomePage homePage;

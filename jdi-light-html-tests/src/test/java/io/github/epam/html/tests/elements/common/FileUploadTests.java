@@ -17,7 +17,7 @@ import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.avatar;
 import static io.github.com.pages.HtmlElementsPage.disabledFileInput;
 import static io.github.com.pages.HtmlElementsPage.downloadJdiLogo;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.apache.commons.io.FileUtils.writeStringToFile;
 import static org.hamcrest.Matchers.containsString;

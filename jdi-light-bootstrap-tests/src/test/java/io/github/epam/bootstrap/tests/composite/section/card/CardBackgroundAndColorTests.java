@@ -1,6 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.card;
 
-import io.github.com.sections.card.CardWithHeaderAndFooter;
+import io.github.com.sections.card.CardStyled;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -46,7 +46,7 @@ public class CardBackgroundAndColorTests extends TestsInit {
     }
 
     @Test(dataProvider = "cardColors")
-    public void checkColorCardsTest(CardWithHeaderAndFooter card, String cssClass, String color) {
+    public void checkColorCardsTest(CardStyled card, String cssClass, String color) {
         card.is()
                 .core()
                 .hasClass(cssClass)
@@ -56,7 +56,7 @@ public class CardBackgroundAndColorTests extends TestsInit {
                 .displayed().and()
                 .core().css("background-color", is("rgba(0, 0, 0, 0.03)"));
 
-        card.paragraph.is()
+        card.title.is()
                 .displayed().and()
                 .core().css("background-color", is("rgba(0, 0, 0, 0)"));
 

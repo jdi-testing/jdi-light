@@ -3,7 +3,6 @@ package io.github.com.sections.modal.gridmodal;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-//import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 
 public class GridModalSection extends Section {
 

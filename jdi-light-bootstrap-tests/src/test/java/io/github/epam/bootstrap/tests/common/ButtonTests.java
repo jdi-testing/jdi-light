@@ -10,7 +10,7 @@ import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.disabledButton;
 import static io.github.com.pages.BootstrapPage.redButton;
 import static io.github.com.pages.BootstrapPage.doubleButton;
-import static io.github.epam.bootstrap.tests.BaseValidations.baseValidation;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -25,13 +25,13 @@ import static org.testng.Assert.fail;
 
 public class ButtonTests extends TestsInit {
 
+    private String text = "Red button";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
     }
-
-    private String text = "Red button";
 
     @Test
     public void getTextTest() {
@@ -56,7 +56,7 @@ public class ButtonTests extends TestsInit {
             fail("Disabled button should not work, but work");
         } catch (Exception ex) {
             assertThat(safeException(ex),
-                    containsString("Can't perform click. Element is disabled"));
+                containsString("Can't perform click. Element is disabled"));
         }
     }
 
