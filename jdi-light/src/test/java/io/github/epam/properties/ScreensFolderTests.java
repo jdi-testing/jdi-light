@@ -15,12 +15,12 @@ public class ScreensFolderTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"cd:\\fd", "c:\\f//d", "\\nyet"};
+        return new Object[]{"cd:\\fd", "c:\\f[d", "C:\\Program*Files\\tests"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"C:\\ProgramFiles\\tests", "D:\\t1ests"};
+        return new Object[]{"C:\\ProgramFiles\\tests", "D:\\tests", "c:\\files"};
     }
 
     @Test(dataProvider = "negativeData")
