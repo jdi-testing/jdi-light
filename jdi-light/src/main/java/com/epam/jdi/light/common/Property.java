@@ -3,7 +3,13 @@ package com.epam.jdi.light.common;
 public enum Property {
 
     TIMEOUT_WAIT_ELEMENT("timeout.wait.element", "^[1-9][0-9]{1,2}$|^\\d$",
-            "Value of 'timeout.wait.element' must be an integer from 0 to 999.");
+            "Value of 'timeout.wait.element' must be an integer from 0 to 999."),
+
+    DRIVER("driver", "chrome|firefox|ie|${driver}", "driver parameter value is incorrect"),
+
+    DRIVERS_VERSION("drivers.version", "LATEST|PRELATEST|[0-9][.][0-9][0-9]", "drivers.version parameter value is incorrect"),
+
+    DRIVERS_FOLDER("drivers.folder", "C:\\/[a-zA-Z]+", "drivers.folder parameter value is incorrect");
 
     private final String name;
     private final String check;
