@@ -77,7 +77,9 @@ public class Line implements IList<String>, IBaseElement {
 
     public <D> D asData(Class<D> data) {
         D instance;
-        try { instance = create(data); } catch (Exception ex) {
+        try {
+            instance = create(data);
+        } catch (Exception ex) {
             throw exception(ex, "Can't convert row to Data (%s)", data.getSimpleName());
         }
         int i = 0;
@@ -93,7 +95,9 @@ public class Line implements IList<String>, IBaseElement {
     }
     public <D> D asData(Class<D> data, MapArray<String, String> line) {
         D instance;
-        try { instance = create(data); } catch (Exception ex) {
+        try {
+            instance = create(data);
+        } catch (Exception ex) {
             throw exception(ex, "Can't convert row to Entity (%s)", data.getSimpleName());
         }
         for (Pair<String, String> cell : line) {
@@ -111,7 +115,9 @@ public class Line implements IList<String>, IBaseElement {
 
     public <T> T asLine(Class<T> cl) {
         T instance;
-        try { instance = create(cl); } catch (Exception ex) {
+        try {
+            instance = create(cl);
+        } catch (Exception ex) {
             throw exception(ex, "Can't convert row to Entity (%s)", cl.getSimpleName());
         }
         for (int i = 0; i < headers.size(); i++) {

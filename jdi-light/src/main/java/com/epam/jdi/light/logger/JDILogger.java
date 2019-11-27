@@ -101,7 +101,9 @@ public class JDILogger implements ILogger {
         }
         logLevel.set(OFF);
         T result;
-        try{ result = func.invoke(); } catch (Exception ex) {
+        try {
+            result = func.invoke();
+        } catch (Exception ex) {
             throw exception(ex, ex.getMessage());
         }
         logLevel.set(tempLevel);
