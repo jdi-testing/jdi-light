@@ -7,33 +7,32 @@ import java.security.InvalidParameterException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.BROWSER_SIZE;
-import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
-public class TimeoutWaitElementTests {
-
+public class BrowserSizeTests {
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"-1", "1000", "01", "", "1.1", "10,11", "ten"};
+        return new Object[]{"maximize", "MAXIMIZE1234x1234", "99x99", "", "1024x", "1000.56x1024", "0x0", "10000x10000",
+        "1000x10000", "1000x99", "10abc20x100"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"x", "MAXIMIZE", "99x8", "999"};
+        return new Object[]{"MAXIMIZE", "1536x864", "1366x768", "1920x1080", "360x640", "100x100", "9999x9999"};
     }
 
     @Test(dataProvider = "negativeData")
     public void negativeTest(String value) {
         Properties properties = new Properties();
-        properties.setProperty(TIMEOUT_WAIT_ELEMENT.getName(), value);
+        properties.setProperty(BROWSER_SIZE.getName(), value);
         try {
             validateProperties(properties);
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, TIMEOUT_WAIT_ELEMENT.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
+            assertEquals(expMessage,BROWSER_SIZE.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
         }
     }
 
@@ -43,5 +42,4 @@ public class TimeoutWaitElementTests {
         properties.setProperty(BROWSER_SIZE.getName(), value);
         validateProperties(properties);
     }
-
 }
