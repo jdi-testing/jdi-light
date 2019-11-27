@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
-import static com.epam.jdi.light.common.Property.BROWSER_SIZE;
 import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
@@ -21,7 +20,7 @@ public class TimeoutWaitElementTests {
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"x", "MAXIMIZE", "99x8", "999"};
+        return new Object[]{"0", "1", "998", "999"};
     }
 
     @Test(dataProvider = "negativeData")
@@ -40,7 +39,7 @@ public class TimeoutWaitElementTests {
     @Test(dataProvider = "positiveData")
     public void positiveTest(String value) {
         Properties properties = new Properties();
-        properties.setProperty(BROWSER_SIZE.getName(), value);
+        properties.setProperty(TIMEOUT_WAIT_ELEMENT.getName(), value);
         validateProperties(properties);
     }
 
