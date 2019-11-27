@@ -11,6 +11,15 @@ public enum Property {
             "Value of 'page.load.strategy' must be 'normal', 'eager' or 'none'."),
     PAGE_CHECK_AFTER_OPEN("page.check.after.open", "NONE|NEW_PAGE|EVERY_PAGE",
             "Value of 'page.check.after.open' must be 'NONE', 'NEW_PAGE', 'EVERY_PAGE'.");
+            "Value of 'timeout.wait.element' must be an integer from 0 to 999."),
+    SMART_LOCATORS("smart.locators", "((#%s|\\[[a-z]+=%s\\])[;, ]{0,1})+",
+        "Value of 'smart.locators' must be a list of regular expressions."),
+    CHROME_CAPABILITIES_PATH("chrome.capabilities.path", "^([A-z]:\\/|[A-z0-9-_+.]+\\/)*([A-z0-9.]+\\/)*(chrome\\.properties)$",
+            "Value of 'chrome.capabilities.path' must be a path to a chrome.options file."),
+    FF_CAPABILITIES_PATH("ff.capabilities.path", "^([A-z]:\\/|[A-z0-9-_+.]+\\/)*([A-z0-9.]+\\/)*(ff\\.properties)$",
+            "Value of 'chrome.capabilities.path' must be a path to a ff.options file."),
+    IE_CAPABILITIES_PATH("ie.capabilities.path", "^([A-z]:\\/|[A-z0-9-_+.]+\\/)*([A-z0-9.]+\\/)*(ie\\.properties)$",
+            "Value of 'chrome.capabilities.path' must be a path to a ie.options file.");
 
     private final String name;
     private final String check;
