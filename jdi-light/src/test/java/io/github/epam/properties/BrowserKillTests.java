@@ -15,7 +15,7 @@ public class BrowserKillTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"avter", "afterAndBe", "be4"};
+        return new Object[]{"avter", "afterAndBe", "be4", "", "123"};
     }
 
     @DataProvider
