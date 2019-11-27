@@ -7,6 +7,7 @@ import java.security.InvalidParameterException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.PAGE_LOAD_STRATEGY;
+import static com.epam.jdi.light.common.PropertyValidationUtils.EXAMPLE_MESSAGE;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -31,7 +32,7 @@ public class PageLoadStrategyTests {
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, PAGE_LOAD_STRATEGY.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
+            assertEquals(expMessage, PAGE_LOAD_STRATEGY.getExMsg() + EXAMPLE_MESSAGE);
         }
     }
 
