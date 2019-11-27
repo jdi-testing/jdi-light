@@ -23,9 +23,8 @@ public class ChromeCapabilitiesPathTests {
     @DataProvider
     public static Object[] positiveData() {
         return new Object[]{"../../../chrome.properties",
-                "C:/chrome.properties",
                 "../chrome.properties",
-                "C:/directory/chrome.properties"};
+                "../directory/chrome.properties"};
     }
 
     @Test(dataProvider = "negativeData")
