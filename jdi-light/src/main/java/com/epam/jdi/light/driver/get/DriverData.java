@@ -17,7 +17,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
-import java.awt.*;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
