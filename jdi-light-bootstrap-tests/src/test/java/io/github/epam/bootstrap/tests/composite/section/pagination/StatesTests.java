@@ -42,7 +42,7 @@ public class StatesTests extends TestsInit {
     @DataProvider
     public Object[][] listData() {
         return new Object[][]{
-                {1, prev}, {2, one}, {3, two}, {4, three}, {5, next}
+                {2, one}, {3, two}, {4, three}, {5, next}
         };
     }
 
@@ -76,6 +76,16 @@ public class StatesTests extends TestsInit {
                 .css("font-size", is("14px"))
                 .hasClass("page-item")
                 .text(is(containsString(linkText)));
+    }
+
+    @Test
+    public void linkDisabledTests() {
+        paginationStates.paginationItems.get(1).is()
+                .displayed()
+                .disabled()
+                .css("font-size", is("14px"))
+                .hasClass("page-item")
+                .text(is(containsString(prev)));
     }
 
     @Test(dataProvider = "listPageTitles")
