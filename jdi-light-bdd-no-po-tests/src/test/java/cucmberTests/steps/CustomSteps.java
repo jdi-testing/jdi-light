@@ -1,4 +1,4 @@
-package cucmberTests.steps;
+package cucmbertests.steps;
 
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
