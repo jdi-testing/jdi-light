@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite.section.mediaoSbject;
+package io.github.epam.bootstrap.tests.composite.section.mediaobject;
 
 
 import io.github.epam.TestsInit;
