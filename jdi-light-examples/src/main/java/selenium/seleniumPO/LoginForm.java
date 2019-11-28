@@ -1,4 +1,4 @@
-package selenium.seleniumPO;
+package selenium.selenium.po;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
