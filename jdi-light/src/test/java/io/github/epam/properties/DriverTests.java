@@ -4,6 +4,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.security.InvalidParameterException;
 import java.util.Properties;
+
 import static com.epam.jdi.light.common.Property.DRIVER;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
@@ -13,14 +14,13 @@ public class DriverTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"-1", "1000", "01", "", "1.1", "10,11", "ten"};
+        return new Object[]{"opera", "1000", "{driver}", "", "$driver", "$driver}", "${driver"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
         return new Object[]{"ie", "chrome", "firefox", "${driver}"};
     }
-
 
     @Test(dataProvider = "negativeData")
     public void negativeTest(String value) {

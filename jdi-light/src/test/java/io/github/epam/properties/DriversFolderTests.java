@@ -2,7 +2,6 @@ package io.github.epam.properties;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
@@ -15,14 +14,13 @@ public class DriversFolderTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"-1", "1000", "01", "", "1.1", "10,11", "ten"};
+        return new Object[]{"folder", "///FOLDER", "01:/02", "", "c folder", "c:folder", "FOLDER///"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"C:/folder", "c:/Folder", "c:/folder/SUBFOLDER", "C:/FOLDER/subfolder"};
+        return new Object[]{"A:/folder", "b:/Folder", "c:/folder/SUBFOLDER", "d/FOLDER/subfolder"};
     }
-
 
     @Test(dataProvider = "negativeData")
     public void negativeTest(String value) {

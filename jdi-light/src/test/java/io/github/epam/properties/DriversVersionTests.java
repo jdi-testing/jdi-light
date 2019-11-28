@@ -4,6 +4,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.security.InvalidParameterException;
 import java.util.Properties;
+
 import static com.epam.jdi.light.common.Property.DRIVERS_VERSION;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
@@ -13,14 +14,13 @@ public class DriversVersionTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"-1", "1000", "01", "", "1.1", "10,11", "ten"};
+        return new Object[]{"latest", "LATES", "prelatest", "", "RELATEST", "2,31", "ten.eleven"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"LATEST", "1.23", "PRELATEST", "3.21"};
+        return new Object[]{"LATEST", "1.23", "PRELATEST", "33.44"};
     }
-
 
     @Test(dataProvider = "negativeData")
     public void negativeTest(String value) {
