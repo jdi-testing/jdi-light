@@ -91,7 +91,8 @@ public class Form<T> extends Section {
                 if (setField == null)
                     continue;
                 fillAction(setField, getValueField(setField, pageObject), pageObject, pair.value);
-            } catch (Exception ex) { throw exception("Can't fill element '%s'. %s",
+            } catch (Exception ex) {
+                throw exception(ex, "Can't fill element '%s'. %s",
                     setField != null ? setField.getName() : "UNKNOWN FIELD", safeException(ex)); }
         setFilterAll();
     }

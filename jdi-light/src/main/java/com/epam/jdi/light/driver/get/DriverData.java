@@ -84,7 +84,7 @@ public class DriverData {
             CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
             return cap;
         } catch (Exception ex) {
-            throw exception("Failed Init Chrome Driver settings: " + safeException(ex));
+            throw exception(ex, "Failed Init Chrome Driver settings: " + safeException(ex));
         }
     };
 
@@ -113,7 +113,7 @@ public class DriverData {
             CAPABILITIES_FOR_FF.forEach(cap::setCapability);
             return cap;
         } catch (Exception ex) {
-            throw exception("Failed Init Firefox Driver settings: " + safeException(ex));
+            throw exception(ex, "Failed Init Firefox Driver settings: " + safeException(ex));
         }
     };
 
@@ -138,7 +138,7 @@ public class DriverData {
             //        cap.setCapability("password", WebSettings.DRIVER_REMOTE_USER_PASSWORD);
             return cap;
         } catch (Exception ex) {
-            throw exception("Failed Init Internet Explorer Driver settings: " + safeException(ex));
+            throw exception(ex, "Failed Init Internet Explorer Driver settings: " + safeException(ex));
         }
     };
     // GET DRIVER

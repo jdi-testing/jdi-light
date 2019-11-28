@@ -66,7 +66,7 @@ public class PageFactory {
                 try {
                     action.value.execute();
                 } catch (Exception ex) {
-                    throw exception("Preinit '%s' failed. Please correct PageFactory.PRE_INIT function. %s", action.key, safeException(ex));
+                    throw exception(ex, "Preinit '%s' failed. Please correct PageFactory.PRE_INIT function. %s", action.key, safeException(ex));
                 }
             initialized = true;
         }
@@ -96,7 +96,7 @@ public class PageFactory {
                 info.field = pageField;
                 setFieldWithInstance(info, null);
             } catch (Exception ex) {
-                throw exception(initException(pageField, site, ex));
+                throw exception(ex, initException(pageField, site, ex));
             }
         }
     }
@@ -137,7 +137,7 @@ public class PageFactory {
                 rule.value.action.execute(info);
             }
         } catch (Exception ex) {
-            throw exception("Setup rule '%s' failed. Can't setup field '%s' on page '%s'.%sException: %s",
+            throw exception(ex, "Setup rule '%s' failed. Can't setup field '%s' on page '%s'.%sException: %s",
                     ruleName, info.name(), info.parentName(), LINE_BREAK, safeException(ex));
         }
     }
@@ -173,7 +173,7 @@ public class PageFactory {
             Object obj = isStatic(field.getModifiers()) ? null : info.instance;
             setFieldWithInstance(pageInfo, obj);
         } catch (Exception ex) {
-            throw exception(initException(field, info.type(), ex));
+            throw exception(ex, initException(field, info.type(), ex));
         }
     }
 
@@ -188,7 +188,7 @@ public class PageFactory {
                     info.instance = create(info.type(), getDriver(info.driverName));
                 throw exception(msg);
             } catch (Exception ex) {
-                throw exception("Can't create field '%s' instance of type '%s'. %sException: %s",
+                throw exception(ex, "Can't create field '%s' instance of type '%s'. %sException: %s",
                         info.name(), info.type(), LINE_BREAK, safeException(ex));
             }
         }
@@ -201,7 +201,7 @@ public class PageFactory {
             try {
                 return (T) (info.instance = firstRule.value.func.execute(info));
             } catch (Exception ex) {
-                throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'.%s %s",
+                throw exception(ex, "Init rule '%s' failed. Can't init field '%s' on page '%s'.%s %s",
                         firstRule.key, info.name(), info.parentName(), LINE_BREAK, safeException(ex));
             }
         else
@@ -223,7 +223,7 @@ public class PageFactory {
             try {
                 return create(pageClassToProxy);
             } catch (Exception ex) {
-                throw exception(pageClassToProxy + " class should has constructor with WebDriver parameter");
+                throw exception(ex, pageClassToProxy + " class should has constructor with WebDriver parameter");
             }
         }
     }

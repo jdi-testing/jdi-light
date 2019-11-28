@@ -397,7 +397,9 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
                 if (field != null)
                     try {
                         list.add(field.get(instance).toString());
-                    } catch (Exception ex) { throw exception("Can't get field %s", field.getName()); }
+                    } catch (Exception ex) {
+                        throw exception(ex, "Can't get field %s", field.getName());
+                    }
             }
             value += "||" + i + "||" + print(map(list, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         }
@@ -425,7 +427,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
             lineClass = types[0].toString().equals("?") ? null : (Class<L>) types[0];
             dataClass = types[1].toString().equals("?") ? null : (Class<D>) types[1];
         } catch (Exception ex) {
-            throw exception("Can't get DataTable %s data or entity class", getName());
+            throw exception(ex, "Can't get DataTable %s data or entity class", getName());
         }
         if (header.hasValue()) {
             return;
@@ -475,7 +477,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
                 value = ((HasValue) field.get(line)).getValue();
                 result.add(name, value);
             } catch (Exception ex) {
-                throw exception("Can't get '%s' Line Map. Failed to execute getValue() method in class '%s'(name=%s;value=%s).%sException: %s",
+                throw exception(ex, "Can't get '%s' Line Map. Failed to execute getValue() method in class '%s'(name=%s;value=%s).%sException: %s",
                         getName(), field.getType().getSimpleName(), name, value, LINE_BREAK, safeException(ex));
             }
         }
