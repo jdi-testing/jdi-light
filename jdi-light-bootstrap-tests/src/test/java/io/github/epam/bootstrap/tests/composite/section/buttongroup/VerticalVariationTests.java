@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite.section.buttonGroup;
+package io.github.epam.bootstrap.tests.composite.section.buttongroup;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -9,7 +9,7 @@ import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.switchToNewWindow;
 import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.buttonGroupNesting;
+import static io.github.com.pages.BootstrapPage.buttonGroupVerticalVariation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
@@ -19,11 +19,11 @@ import static org.testng.Assert.assertEquals;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-public class NestingTests extends TestsInit {
+public class VerticalVariationTests extends TestsInit {
 
-    private String buttonOneClickAlert = "Button 1 Clicked!";
-    private String buttonTwoClickAlert = "Button 2 Clicked!";
-    private String dropdownMenuLinkOne = "JDI Github";
+    private String buttonOneClickAlert = "Button One Clicked!";
+    private String buttonTwoClickAlert = "Button Two Clicked!";
+    private String dropdownMenuLinkOne = "JDI Light";
     private String dropdownMenuLinkTwo = "JDI Docs";
     private String linkOnePageTitle = "GitHub - jdi-testing/jdi-light: Powerful Framework for UI Automation Testing on Java";
     private String linkTwoPageTitle = "JDI Light Framework – API Reference";
@@ -36,39 +36,39 @@ public class NestingTests extends TestsInit {
 
     @Test
     public void buttonOneTests() {
-        buttonGroupNesting.one.is()
+        buttonGroupVerticalVariation.buttonOne.is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("btn btn-secondary")
                 .css("font-size", "16px");
-        buttonGroupNesting.one.click();
+        buttonGroupVerticalVariation.buttonOne.click();
         validateAlert(is(buttonOneClickAlert));
     }
 
     @Test
     public void buttonTwoTests() {
-        buttonGroupNesting.two.is()
+        buttonGroupVerticalVariation.buttonTwo.is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("btn btn-secondary")
                 .css("font-size", "16px");
-        buttonGroupNesting.two.click();
+        buttonGroupVerticalVariation.buttonTwo.click();
         validateAlert(is(buttonTwoClickAlert));
     }
 
     @Test
     public void dropdownMenuTests() {
-        buttonGroupNesting.dropdownMenu.expand();
-        buttonGroupNesting.dropdownMenu.is().expanded();
-        buttonGroupNesting.dropdownMenu.is().size(2);
-        buttonGroupNesting.dropdownMenu.list().get(1).is().text(dropdownMenuLinkOne);
-        buttonGroupNesting.dropdownMenu.list().get(2).is().text(dropdownMenuLinkTwo);
-        buttonGroupNesting.dropdownMenu.highlight();
-        buttonGroupNesting.dropdownMenu.select(dropdownMenuLinkOne);
+        buttonGroupVerticalVariation.dropdownMenu.expand();
+        buttonGroupVerticalVariation.dropdownMenu.is().expanded();
+        buttonGroupVerticalVariation.dropdownMenu.is().size(2);
+        buttonGroupVerticalVariation.dropdownMenu.list().get(1).is().text(dropdownMenuLinkOne);
+        buttonGroupVerticalVariation.dropdownMenu.list().get(2).is().text(dropdownMenuLinkTwo);
+        buttonGroupVerticalVariation.dropdownMenu.highlight();
+        buttonGroupVerticalVariation.dropdownMenu.select(dropdownMenuLinkOne);
         newWindowTitleCheck(linkOnePageTitle);
-        buttonGroupNesting.dropdownMenu.select(dropdownMenuLinkTwo);
+        buttonGroupVerticalVariation.dropdownMenu.select(dropdownMenuLinkTwo);
         newWindowTitleCheck(linkTwoPageTitle);
     }
 

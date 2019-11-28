@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite.section.listGroup;
+package io.github.epam.bootstrap.tests.composite.section.lisgtroup;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
