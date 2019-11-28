@@ -14,7 +14,7 @@ public class DriversFolderTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"folder", "01:/02", "", "c folder", "c:folder", "FOLDER//"};
+        return new Object[]{"01:/02", "", "c folder", "c:folder", "FOLDER//"};
     }
 
     @DataProvider
