@@ -1,6 +1,5 @@
 package io.github.epam.bootstrap.tests.composite.section.form;
 
-import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
@@ -23,7 +22,7 @@ public class CheckboxAndRadioButtonCustomDisabledTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
+        bsPage.open();
     }
 
     @Test
