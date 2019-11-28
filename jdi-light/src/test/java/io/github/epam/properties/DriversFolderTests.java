@@ -14,12 +14,12 @@ public class DriversFolderTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"folder", "//FOLDER", "01:/02", "", "c folder", "c:folder", "FOLDER//"};
+        return new Object[]{"folder", "01:/02", "", "c folder", "c:folder", "FOLDER//"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"A:/folder", "b:/Folder", "c:/folder/SUBFOLDER", "\\FoLdeR"};
+        return new Object[]{"A:/folder", "b:/Folder", "c:/folder/SUBFOLDER", "//FOLDER", "\\FoLdeR"};
     }
 
     @Test(dataProvider = "negativeData")
