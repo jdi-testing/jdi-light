@@ -31,7 +31,7 @@ public class StatesTests extends TestsInit {
     private String pageTitle2 = "JDI Testing tools · GitHub";
     private String pageTitle3 = "Home Page";
     private String pageTitle4 = "Bootstrap · The most popular HTML, CSS, and JS library in the world.";
-    private String pageTitle5 = "JDI Light Framework – API Reference";
+    private String pageTitle5 = "API Reference";
 
     @BeforeMethod
     public void before() {
