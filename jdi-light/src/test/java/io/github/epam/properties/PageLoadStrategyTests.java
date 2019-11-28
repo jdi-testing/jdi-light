@@ -7,12 +7,13 @@ import java.security.InvalidParameterException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.PAGE_LOAD_STRATEGY;
-import static com.epam.jdi.light.common.PropertyValidationUtils.EXAMPLE_MESSAGE;
+import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 public class PageLoadStrategyTests {
+
     @DataProvider
     public static Object[] negativeData() {
         return new Object[]{"555", "NORMAL", "none123", "", "eaGer", "abcdefg"};
@@ -32,7 +33,7 @@ public class PageLoadStrategyTests {
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, PAGE_LOAD_STRATEGY.getExMsg() + EXAMPLE_MESSAGE);
+            assertEquals(expMessage, PAGE_LOAD_STRATEGY.getExMsg() + LINK_TO_EXAMPLES);
         }
     }
 
