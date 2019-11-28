@@ -7,16 +7,17 @@ import java.security.InvalidParameterException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.BROWSER_SIZE;
-import static com.epam.jdi.light.common.PropertyValidationUtils.EXAMPLE_MESSAGE;
+import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 public class BrowserSizeTests {
+
     @DataProvider
     public static Object[] negativeData() {
         return new Object[]{"maximize", "MAXIMIZE1234x1234", "99x99", "", "1024x", "1000.56x1024", "0x0", "10000x10000",
-        "1000x10000", "1000x99", "10abc20x100"};
+                "1000x10000", "1000x99", "10abc20x100", "MAXIMIZE 1234x1234"};
     }
 
     @DataProvider
@@ -33,7 +34,7 @@ public class BrowserSizeTests {
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage,BROWSER_SIZE.getExMsg() + EXAMPLE_MESSAGE);
+            assertEquals(expMessage, BROWSER_SIZE.getExMsg() + LINK_TO_EXAMPLES);
         }
     }
 
