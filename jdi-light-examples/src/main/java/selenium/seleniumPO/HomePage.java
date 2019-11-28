@@ -1,4 +1,4 @@
-package selenium.seleniumPO;
+package selenium.selenium.po;
 
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
