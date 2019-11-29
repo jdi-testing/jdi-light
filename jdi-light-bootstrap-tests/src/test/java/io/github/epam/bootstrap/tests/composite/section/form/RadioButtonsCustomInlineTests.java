@@ -22,7 +22,7 @@ public class RadioButtonsCustomInlineTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
+        bsPage.open();
     }
 
     @Test

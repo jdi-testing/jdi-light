@@ -70,7 +70,7 @@ public class DownloadDriverManager {
             logger.info("Download driver: '" +  driverName + "' successfully");
             logger.info("Binary path: " + wdm.getBinaryPath());
         } catch (Exception ex) {
-            throw exception("Can't download latest driver for " + driverType
+            throw exception(ex, "Can't download latest driver for " + driverType
                     + ". Exception " + safeException(ex));
         }
     }

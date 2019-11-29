@@ -15,6 +15,11 @@ public class Exceptions {
         return new RuntimeException(LINE_BREAK + message);
     }
 
+    public static RuntimeException exception(Throwable ex, String msg, Object... args) {
+        String message = args.length == 0 ? msg : format(msg, args);
+        return new RuntimeException(LINE_BREAK + message, ex);
+    }
+
     public static String safeException(Throwable ex) {
         String msg = ex.getMessage();
         return isNotBlank(msg) ? msg : ex.toString();

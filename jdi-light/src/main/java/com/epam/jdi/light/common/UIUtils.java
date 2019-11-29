@@ -125,7 +125,7 @@ public final class UIUtils {
             });
             return data;
         } catch (Exception ex) {
-            throw exception("Can't get entity from '" + getName(obj) + "' for class: " + entityClass.getClass());
+            throw exception(ex, "Can't get entity from '" + getName(obj) + "' for class: " + entityClass.getClass());
         }
     }
     private static String getName(Object obj) {
