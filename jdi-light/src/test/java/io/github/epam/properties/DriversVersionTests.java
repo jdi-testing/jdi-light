@@ -2,10 +2,12 @@ package io.github.epam.properties;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.DRIVERS_VERSION;
+import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -14,12 +16,12 @@ public class DriversVersionTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"latest", "LATES", "prelatest", "", "RELATEST", "2,31", "ten.eleven"};
+        return new Object[]{"latest", "LATES", "prelatest", "", "RELATEST", "2,31", "ten.eleven", "1.76", "2"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"LATEST", "1.23", "PRELATEST", "33.44"};
+        return new Object[]{"LATEST", "PRELATEST", "1.23.3", "3.141.59", "4.0.0-alpha-2"};
     }
 
     @Test(dataProvider = "negativeData")
@@ -31,7 +33,7 @@ public class DriversVersionTests {
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, DRIVERS_VERSION.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
+            assertEquals(expMessage, DRIVERS_VERSION.getExMsg() + LINK_TO_EXAMPLES);
         }
     }
 
@@ -41,4 +43,5 @@ public class DriversVersionTests {
         properties.setProperty(DRIVERS_VERSION.getName(), value);
         validateProperties(properties);
     }
+
 }

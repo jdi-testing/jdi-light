@@ -15,12 +15,25 @@ public class SmartLocatorsTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"", "ui=%s", "%s", "#%s;[ui=%d]", "[#name=%s]", "#%s, [ui=%s], [qa=%s]"};
+        return new Object[]{
+                "",
+                "ui=%s",
+                "%s",
+                "#%s;[ui=%d]",
+                "[#name=%s]",
+                "#%s, [ui=%s], [qa=%s]"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"#%s", "#%s;[ui=%s]", "[ui=%s]", "[qa=%s]", "[name=%s]", "[ui=%s],#%s,[qa=%s]", "#%s,[name=%s],[ui=%s]"};
+        return new Object[]{
+                "#%s",
+                "#%s;[ui=%s]",
+                "[ui=%s]",
+                "[qa=%s]",
+                "[name=%s]",
+                "[ui=%s],#%s,[qa=%s]",
+                "#%s,[name=%s],[ui=%s]"};
     }
 
     @Test(dataProvider = "negativeData")

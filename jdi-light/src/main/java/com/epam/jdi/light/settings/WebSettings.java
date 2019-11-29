@@ -34,6 +34,9 @@ import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.common.Property.CHROME_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.DRIVER;
+import static com.epam.jdi.light.common.Property.DRIVERS_FOLDER_PATH;
+import static com.epam.jdi.light.common.Property.DRIVERS_VERSION;
 import static com.epam.jdi.light.common.Property.FF_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.IE_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.SMART_LOCATORS;
@@ -126,11 +129,11 @@ public class WebSettings {
         fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
         fillAction(p -> DOMAIN = p, "domain");
         if (DRIVER_NAME.equals(DEFAULT_DRIVER))
-            fillAction(p -> DRIVER_NAME = p, "driver");
+            fillAction(p -> DRIVER_NAME = p, DRIVER.getName());
         fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
                 ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
-                    ? PRELATEST_VERSION : p, "driver.version");
-        fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
+                ? PRELATEST_VERSION : p, DRIVERS_VERSION.getName());
+        fillAction(p -> DRIVERS_FOLDER = p, DRIVERS_FOLDER_PATH.getName());
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
         // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
         fillAction(p -> KILL_BROWSER = p, "browser.kill");

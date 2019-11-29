@@ -2,10 +2,12 @@ package io.github.epam.properties;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.DRIVER;
+import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -31,7 +33,7 @@ public class DriverTests {
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, DRIVER.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
+            assertEquals(expMessage, DRIVER.getExMsg() + LINK_TO_EXAMPLES);
         }
     }
 
@@ -41,4 +43,5 @@ public class DriverTests {
         properties.setProperty(DRIVER.getName(), value);
         validateProperties(properties);
     }
+
 }
