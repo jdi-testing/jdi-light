@@ -6,41 +6,40 @@ import org.testng.annotations.Test;
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
-import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT;
-import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
+import static com.epam.jdi.light.common.Property.SMART_LOCATORS;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
-public class TimeoutWaitElementTests {
+public class SmartLocatorsTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"-1", "1000", "01", "", "1.1", "10,11", "ten"};
+        return new Object[]{"", "ui=%s", "%s", "#%s;[ui=%d]", "[#name=%s]", "#%s, [ui=%s], [qa=%s]"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"0", "1", "998", "999"};
+        return new Object[]{"#%s", "#%s;[ui=%s]", "[ui=%s]", "[qa=%s]", "[name=%s]", "[ui=%s],#%s,[qa=%s]", "#%s,[name=%s],[ui=%s]"};
     }
 
     @Test(dataProvider = "negativeData")
     public void negativeTest(String value) {
         Properties properties = new Properties();
-        properties.setProperty(TIMEOUT_WAIT_ELEMENT.getName(), value);
+        properties.setProperty(SMART_LOCATORS.getName(), value);
         try {
             validateProperties(properties);
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, TIMEOUT_WAIT_ELEMENT.getExMsg() + LINK_TO_EXAMPLES);
+            assertEquals(expMessage, SMART_LOCATORS.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
         }
     }
 
     @Test(dataProvider = "positiveData")
     public void positiveTest(String value) {
         Properties properties = new Properties();
-        properties.setProperty(TIMEOUT_WAIT_ELEMENT.getName(), value);
+        properties.setProperty(SMART_LOCATORS.getName(), value);
         validateProperties(properties);
     }
 

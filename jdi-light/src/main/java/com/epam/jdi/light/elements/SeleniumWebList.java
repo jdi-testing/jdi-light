@@ -210,7 +210,7 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
         try {
             return new UIElement(base(), getLocator(index), nameFromIndex(index));
         } catch (Exception ex) {
-            throw exception("Can't get element with index '%s' for template locator. " +
+            throw exception(ex, "Can't get element with index '%s' for template locator. " +
                             "Maybe locator is wrong or you need to get element by name. %s",
                     index, safeException(ex));
         }
@@ -525,7 +525,9 @@ public class SeleniumWebList extends JDIBase implements IList<UIElement>, SetVal
             UIElement element = new UIElement(base(), el, func);
             element.locator = new JDILocator();
             return element;
-        } catch (Exception ex) { throw exception("Can't init func new element for list"); }
+        } catch (Exception ex) {
+            throw exception(ex, "Can't init func new element for list");
+        }
     }// TODO to private
     public UIElement initElement(WebElement el, JFunc<WebElement> func, int i) {
         return initElement(el, func, nameFromIndex(i));

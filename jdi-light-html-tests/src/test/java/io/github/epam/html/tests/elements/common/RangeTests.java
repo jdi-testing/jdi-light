@@ -29,7 +29,7 @@ public class RangeTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        volume.setVolume(90);
+        volume.setValue(90);
     }
 
     @Test
@@ -39,36 +39,39 @@ public class RangeTests extends TestsInit {
 
     @Test
     public void getValueTest() {
-        assertEquals(disabledRange.volume(), 50);
-    }
-    @Test
-    public void minTest() {
-        assertEquals(volume.min(), "10");
-    }
-    @Test
-    public void maxTest() {
-        assertEquals(volume.max(), "100");
-    }
-    @Test
-    public void stepTest() {
-        assertEquals(volume.step(), "5");
+        assertEquals(disabledRange.value(), 50);
     }
 
     @Test
-    public void setVolumeTest() {
-        volume.setVolume(10);
-        assertEquals(volume.volume(), 10);
+    public void minTest() {
+        assertEquals(volume.min(), 10.0);
+    }
+
+    @Test
+    public void maxTest() {
+        assertEquals(volume.max(), 100.0);
+    }
+
+    @Test
+    public void stepTest() {
+        assertEquals(volume.step(), 5.0);
+    }
+
+    @Test
+    public void setValueTest() {
+        volume.setValue(10);
+        assertEquals(volume.value(), 10);
     }
 
     @Test
     public void isValidationTest() {
         volume.is().enabled();
-        volume.assertThat().minVolume(is(10));
-        volume.assertThat().maxVolume(is(100));
-        volume.assertThat().step(is(5));
-        volume.is().volume(greaterThanOrEqualTo(10));
-        volume.is().volume(lessThanOrEqualTo(100));
-        volume.is().volume(is(90));
+        volume.assertThat().minValue(is(10.0));
+        volume.assertThat().maxValue(is(100.0));
+        volume.assertThat().step(is(5.0));
+        volume.is().value(greaterThanOrEqualTo(10.0));
+        volume.is().value(lessThanOrEqualTo(100.0));
+        volume.is().value(is(90.0));
     }
 
     @Test
@@ -80,9 +83,9 @@ public class RangeTests extends TestsInit {
 
     @Test
     public void assertValidationTest() {
-        volume.assertThat().volume(greaterThan(0));
-        volume.assertThat().volume(lessThan(200));
-        disabledRange.assertThat().volume(is(50));
+        volume.assertThat().value(greaterThan(0.0));
+        volume.assertThat().value(lessThan(200.0));
+        disabledRange.assertThat().value(is(50.0));
     }
 
     @Test

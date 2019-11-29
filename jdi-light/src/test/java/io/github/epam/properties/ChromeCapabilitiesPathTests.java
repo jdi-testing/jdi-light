@@ -6,41 +6,48 @@ import org.testng.annotations.Test;
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
-import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT;
+import static com.epam.jdi.light.common.Property.CHROME_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
-public class TimeoutWaitElementTests {
+public class ChromeCapabilitiesPathTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"-1", "1000", "01", "", "1.1", "10,11", "ten"};
+        return new Object[]{"../../../ff.properties",
+                "C:chrome.properties",
+                "C:/directory/chrome.properties",
+                "/chrome.properties",
+                "ff.properties"
+        };
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"0", "1", "998", "999"};
+        return new Object[]{
+                "chrome.properties",
+                "directory/chrome.properties"};
     }
 
     @Test(dataProvider = "negativeData")
     public void negativeTest(String value) {
         Properties properties = new Properties();
-        properties.setProperty(TIMEOUT_WAIT_ELEMENT.getName(), value);
+        properties.setProperty(CHROME_CAPABILITIES_PATH.getName(), value);
         try {
             validateProperties(properties);
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, TIMEOUT_WAIT_ELEMENT.getExMsg() + LINK_TO_EXAMPLES);
+            assertEquals(expMessage, CHROME_CAPABILITIES_PATH.getExMsg() + LINK_TO_EXAMPLES);
         }
     }
 
     @Test(dataProvider = "positiveData")
     public void positiveTest(String value) {
         Properties properties = new Properties();
-        properties.setProperty(TIMEOUT_WAIT_ELEMENT.getName(), value);
+        properties.setProperty(CHROME_CAPABILITIES_PATH.getName(), value);
         validateProperties(properties);
     }
 

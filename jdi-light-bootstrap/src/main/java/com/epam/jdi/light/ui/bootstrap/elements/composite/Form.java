@@ -1,6 +1,5 @@
 package com.epam.jdi.light.ui.bootstrap.elements.composite;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -14,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 
 /**
@@ -67,7 +67,7 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
             } else if (fieldObj instanceof UIBaseElement) {
                 feedback = getValidationMessage(((UIBaseElement) fieldObj).core());
             } else {
-                throw Exceptions.exception("Cant make checking against field %s because it is not %s or %s",
+                throw exception("Cant make checking against field %s because it is not %s or %s",
                         fieldName, UIElement.class.getName(), UIBaseElement.class.getName());
             }
 
@@ -139,12 +139,12 @@ public class Form<T> extends com.epam.jdi.light.elements.composite.Form<T> {
             } else if (fieldObj instanceof UIBaseElement) {
                 feedbackList = getFeedbackList(((UIBaseElement) fieldObj).core(), locator);
             } else {
-                throw Exceptions.exception("Cant make checking against field %s because it is not %s or %s",
+                throw exception("Cant make checking against field %s because it is not %s or %s",
                         fieldName, UIElement.class.getName(), UIBaseElement.class.getName());
             }
             feedbackList.searchVisible();
             if (feedbackList.size() > 1) {
-                throw Exceptions.exception("Cant get feedback for field %s, founded %s feedback", fieldName, feedbackList.size());
+                throw exception("Cant get feedback for field %s, founded %s feedback", fieldName, feedbackList.size());
             } else if (feedbackList.size() == 1) {
                 feedbackMap.put(fieldName, feedbackList.get(1));
             }
