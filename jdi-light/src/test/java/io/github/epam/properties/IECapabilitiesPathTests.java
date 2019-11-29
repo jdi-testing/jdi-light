@@ -16,7 +16,8 @@ public class IECapabilitiesPathTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"../../../ff.properties",
+        return new Object[]{
+                "../../../ff.properties",
                 "../../../ie.txt",
                 "C:ie.properties",
                 "/ie.properties",
@@ -25,7 +26,8 @@ public class IECapabilitiesPathTests {
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"../../../ie.properties",
+        return new Object[]{
+                "../../../ie.properties",
                 "folder/ie.properties",
                 "ie.properties",
                 "folder\\ie.properties"};

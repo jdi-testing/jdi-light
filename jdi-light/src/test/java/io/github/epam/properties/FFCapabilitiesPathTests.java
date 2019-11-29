@@ -16,7 +16,8 @@ public class FFCapabilitiesPathTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"../../../chrome.properties",
+        return new Object[]{
+                "../../../chrome.properties",
                 "../../../ff.txt",
                 "C:ff.properties",
                 "chrome.properties",
@@ -25,7 +26,8 @@ public class FFCapabilitiesPathTests {
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"../../../ff.properties",
+        return new Object[]{
+                "../../../ff.properties",
                 "../ff.properties",
                 "ff.properties",
                 "folder/ff.properties"};
