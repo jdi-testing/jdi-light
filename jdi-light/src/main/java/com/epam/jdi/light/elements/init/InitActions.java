@@ -127,7 +127,6 @@ public class InitActions {
             }))
     );
 
-    public static void init() {}
     private static void webPageSetup(SiteInfo info) {
         WebPage page = (WebPage) info.instance;
         defaultSetup(info, page);
