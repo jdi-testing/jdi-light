@@ -16,16 +16,18 @@ public class ChromeCapabilitiesPathTests {
     @DataProvider
     public static Object[] negativeData() {
         return new Object[]{"../../../ff.properties",
-                            "../../../chrome.txt",
-                            "C:chrome.properties"};
+                "C:chrome.properties",
+                "C:/directory/chrome.properties",
+                "/chrome.properties",
+                "ff.properties"
+        };
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"../../../chrome.properties",
-                "C:/chrome.properties",
-                "../chrome.properties",
-                "C:/directory/chrome.properties"};
+        return new Object[]{
+                "chrome.properties",
+                "directory/chrome.properties"};
     }
 
     @Test(dataProvider = "negativeData")

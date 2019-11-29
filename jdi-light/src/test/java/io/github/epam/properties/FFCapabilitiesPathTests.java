@@ -16,16 +16,18 @@ public class FFCapabilitiesPathTests {
     @DataProvider
     public static Object[] negativeData() {
         return new Object[]{"../../../chrome.properties",
-                            "../../../ff.txt",
-                            "C:ff.properties"};
+                "../../../ff.txt",
+                "C:ff.properties",
+                "chrome.properties",
+                "/ff.properties"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
         return new Object[]{"../../../ff.properties",
-                "C:/ff.properties",
                 "../ff.properties",
-                "C:/directory/ff.properties"};
+                "ff.properties",
+                "folder/ff.properties"};
     }
 
     @Test(dataProvider = "negativeData")
