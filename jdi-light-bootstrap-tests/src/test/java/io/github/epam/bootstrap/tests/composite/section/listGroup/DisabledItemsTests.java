@@ -1,7 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.listGroup;
 
 import io.github.epam.TestsInit;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -57,11 +56,6 @@ public class DisabledItemsTests extends TestsInit {
         listGroupDisabledItems.listGroup.get(num).is()
                 .text(text)
                 .css("font-size", is("14px"));
-    }
-
-    @Test(dataProvider = "listData")
-    public void listGroupClassesTextValidationTests(int num, String text) {
-        Assert.assertEquals(listGroupDisabledItems.listGroup.get(num).getText(), text);
     }
 
     @Test()
