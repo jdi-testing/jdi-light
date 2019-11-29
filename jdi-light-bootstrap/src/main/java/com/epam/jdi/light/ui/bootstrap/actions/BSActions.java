@@ -29,7 +29,10 @@ import static com.epam.jdi.light.settings.TimeoutSettingsUtils.TIMEOUT;
 public class BSActions {
 
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
-    protected void jdiPointcut() { }
+    protected void jdiPointcut() {
+        // hollow-method
+        //required d not remove
+    }
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
