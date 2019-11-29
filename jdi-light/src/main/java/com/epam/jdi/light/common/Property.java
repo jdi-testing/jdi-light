@@ -13,11 +13,11 @@ public enum Property {
             "Value of 'page.check.after.open' must be 'NONE', 'NEW_PAGE', 'EVERY_PAGE'."),
     SMART_LOCATORS("smart.locators", "((#%s|\\[[a-z]+=%s\\])[;, ]{0,1})+",
         "Value of 'smart.locators' must be a list of regular expressions."),
-    CHROME_CAPABILITIES_PATH("chrome.capabilities.path", "^([A-z0-9-_+.]+\\/)*(chrome\\.properties)$",
+    CHROME_CAPABILITIES_PATH("chrome.capabilities.path", "^([A-z0-9-_+.])*(\\.properties)$",
             "Value of 'chrome.capabilities.path' must be a path to a chrome.options file."),
-    FF_CAPABILITIES_PATH("ff.capabilities.path", "^([A-z0-9-_+.]+\\/)*(ff\\.properties)$",
+    FF_CAPABILITIES_PATH("ff.capabilities.path", "^([A-z0-9-_+.])*(\\.properties)$",
             "Value of 'chrome.capabilities.path' must be a path to a ff.options file."),
-    IE_CAPABILITIES_PATH("ie.capabilities.path", "^([A-z0-9-_+.]+\\/)*(ie\\.properties)$",
+    IE_CAPABILITIES_PATH("ie.capabilities.path", "^([A-z0-9-_+.])*(\\.properties)$",
             "Value of 'chrome.capabilities.path' must be a path to a ie.options file.");
 
     private final String name;

@@ -7,6 +7,7 @@ import java.security.InvalidParameterException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.FF_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -15,16 +16,16 @@ public class FFCapabilitiesPathTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"../../../chrome.properties",
-                            "../../../ff.txt",
-                            "C:ff.properties"};
+        return new Object[]{"../../../ff.properties",
+                "ff.txt",
+                "C:ff.properties"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"../../../ff.properties",
-                "../ff.properties",
-                "../directory/ff.properties"};
+        return new Object[]{"ff.properties",
+                "ff_1.properties",
+                "FF.properties"};
     }
 
     @Test(dataProvider = "negativeData")
@@ -36,7 +37,7 @@ public class FFCapabilitiesPathTests {
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, FF_CAPABILITIES_PATH.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
+            assertEquals(expMessage, FF_CAPABILITIES_PATH.getExMsg() + LINK_TO_EXAMPLES);
         }
     }
 

@@ -7,6 +7,7 @@ import java.security.InvalidParameterException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.CHROME_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -15,16 +16,16 @@ public class ChromeCapabilitiesPathTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"../../../ff.properties",
-                            "../../../chrome.txt",
+        return new Object[]{"../../../chrome.properties",
+                            "chrome.txt",
                             "C:chrome.properties"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"../../../chrome.properties",
-                "../chrome.properties",
-                "../directory/chrome.properties"};
+        return new Object[]{"chrome.properties",
+                "chrome_1.properties",
+                "Chrome.properties"};
     }
 
     @Test(dataProvider = "negativeData")
@@ -36,7 +37,7 @@ public class ChromeCapabilitiesPathTests {
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, CHROME_CAPABILITIES_PATH.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
+            assertEquals(expMessage, CHROME_CAPABILITIES_PATH.getExMsg() + LINK_TO_EXAMPLES);
         }
     }
 

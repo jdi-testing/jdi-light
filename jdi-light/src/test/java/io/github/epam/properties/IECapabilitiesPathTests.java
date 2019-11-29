@@ -7,6 +7,7 @@ import java.security.InvalidParameterException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.IE_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -15,16 +16,16 @@ public class IECapabilitiesPathTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"../../../ff.properties",
-                            "../../../ie.txt",
-                            "C:ie.properties"};
+        return new Object[]{"../../../ie.properties",
+                "ie.txt",
+                "C:ie.properties"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"../../../ie.properties",
-                "../ie.properties",
-                "../directory/ie.properties"};
+        return new Object[]{"ie.properties",
+                "ie_1.properties",
+                "IE.properties"};
     }
 
     @Test(dataProvider = "negativeData")
@@ -36,7 +37,7 @@ public class IECapabilitiesPathTests {
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, IE_CAPABILITIES_PATH.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
+            assertEquals(expMessage, IE_CAPABILITIES_PATH.getExMsg() + LINK_TO_EXAMPLES);
         }
     }
 
