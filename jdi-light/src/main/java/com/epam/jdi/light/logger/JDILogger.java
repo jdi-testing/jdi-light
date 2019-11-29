@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
@@ -81,7 +82,7 @@ public class JDILogger implements ILogger {
         if (logOffDeepness.get() == 0)
             logLevel.reset();
         if (logOffDeepness.get() < 0)
-            throw new RuntimeException("Log Off Deepness to high. Please check that each logOff has appropriate logOn");
+            throw exception("Log Off Deepness to high. Please check that each logOff has appropriate logOn");
     }
     public void dropLogOff() {
         logOffDeepness.set(0);
@@ -94,12 +95,17 @@ public class JDILogger implements ILogger {
         LogLevels tempLevel = logLevel.get();
         if (logLevel.get() == OFF) {
             try { return func.invoke();
-            } catch (Exception ex) { throw new RuntimeException(ex); }
+            } catch (Exception ex) {
+                throw exception(ex, ex.getMessage());
+            }
         }
         logLevel.set(OFF);
         T result;
-        try{ result = func.invoke(); }
-        catch (Exception ex) {throw new RuntimeException(ex); }
+        try {
+            result = func.invoke();
+        } catch (Exception ex) {
+            throw exception(ex, ex.getMessage());
+        }
         logLevel.set(tempLevel);
         return result;
     }
@@ -161,7 +167,8 @@ public class JDILogger implements ILogger {
                 case INFO: info(msg); break;
                 case DEBUG: debug(msg); break;
                 case OFF: break;
-                default: throw new RuntimeException("Unknown log level: " + level);
+                default:
+                    throw exception("Unknown log level: " + level);
             }
     }
 }

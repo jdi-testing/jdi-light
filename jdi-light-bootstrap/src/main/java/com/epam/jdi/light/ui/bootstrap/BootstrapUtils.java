@@ -13,7 +13,7 @@ public class BootstrapUtils {
         try {
             return parseInt(value);
         } catch (Exception ex) {
-            throw exception("Can't parse attribute '%s=%s' to Integer", attr, value);
+            throw exception(ex, "Can't parse attribute '%s=%s' to Integer", attr, value);
         }
     }
 
@@ -22,7 +22,7 @@ public class BootstrapUtils {
         try {
             return parseDouble(value);
         } catch (Exception ex) {
-            throw exception("Can't parse attribute '%s=%s' to Double", attr, value);
+            throw exception(ex, "Can't parse attribute '%s=%s' to Double", attr, value);
         }
     }
 
@@ -30,7 +30,7 @@ public class BootstrapUtils {
         try {
             return parseInt(value);
         } catch (Exception ex) {
-            throw exception("Can't parse value %s to Integer", value);
+            throw exception(ex, "Can't parse value %s to Integer", value);
         }
     }
 
@@ -38,7 +38,7 @@ public class BootstrapUtils {
         try {
             return parseDouble(value);
         } catch (Exception ex) {
-            throw exception("Can't parse value %s to Double", value);
+            throw exception(ex, "Can't parse value %s to Double", value);
         }
     }
 

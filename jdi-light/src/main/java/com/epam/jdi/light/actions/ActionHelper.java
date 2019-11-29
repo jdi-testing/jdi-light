@@ -88,7 +88,7 @@ public class ActionHelper {
                     ? getDefaultName(method.getName(), methodArgs(jp, method))
                     : fillTemplate(template, jp, method);
         } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: " +
+            throw exception(ex, "Surround method issue: " +
                     "Can't get action name: " + safeException(ex));
         }
     };
@@ -130,7 +130,7 @@ public class ActionHelper {
             }
             return filledTemplate;
         } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName() +
+            throw exception(ex, "Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName() +
                 LINE_BREAK + "" + safeException(ex));
         }
     }
@@ -196,7 +196,7 @@ public class ActionHelper {
             }
             return null;
         } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: " +
+            throw exception(ex, "Surround method issue: " +
                     "Can't get method name template: " + safeException(ex));
         }
     }
@@ -264,7 +264,7 @@ public class ActionHelper {
                 ? ((INamed) obj).getName()
                 : obj.toString();
         } catch (Exception ex) {
-            throw exception("Can't get element name");
+            throw exception(ex, "Can't get element name");
         }
     }
     private static String getActionNameFromTemplate(MethodSignature method, String value,
@@ -282,7 +282,7 @@ public class ActionHelper {
             }
             return result;
         } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: " +
+            throw exception(ex, "Surround method issue: " +
                     "Can't get action name: " + safeException(ex));
         }
     }
