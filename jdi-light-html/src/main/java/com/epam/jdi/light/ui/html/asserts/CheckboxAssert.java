@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.SelectedAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;
@@ -16,12 +17,12 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox>
         implements SelectedAssert<CheckboxAssert> {
     @JDIAction("Assert that '{name}' is selected")
     public CheckboxAssert selected() {
-        jdiAssert(getIsSelected(), is("selected"));
+        jdiAssert(getIsSelected(), Matchers.is("selected"));
         return this;
     }
     @JDIAction("Assert that '{name}' is not selected")
     public CheckboxAssert deselected() {
-        jdiAssert(getIsSelected(), is("not selected"));
+        jdiAssert(getIsSelected(), Matchers.is("not selected"));
         return this;
     }
 

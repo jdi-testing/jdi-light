@@ -8,6 +8,7 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that each of '{name}' elements meet condition")
     public DataListAssert<T, D> each(JFunc1<D, Boolean> condition) {
-        jdiAssert(LinqUtils.all(data(), condition::execute), is(true));
+        jdiAssert(LinqUtils.all(data(), condition::execute), Matchers.is(true));
         return this;
     }
 
@@ -46,7 +47,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that any of '{name}' elements meet condition")
     public DataListAssert<T, D> any(JFunc1<D, Boolean> condition) {
-        jdiAssert(LinqUtils.any(data(), condition::execute), is(true));
+        jdiAssert(LinqUtils.any(data(), condition::execute), Matchers.is(true));
         return this;
     }
 
@@ -57,7 +58,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that only one of '{name}' elements meet condition")
     public DataListAssert<T, D> onlyOne(JFunc1<D, Boolean> condition) {
-        jdiAssert(single(data(), condition::execute), is(notNullValue()));
+        jdiAssert(single(data(), condition::execute), Matchers.is(notNullValue()));
         return this;
     }
 
@@ -68,7 +69,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that none of '{name}' meet condition")
     public DataListAssert<T, D> noOne(JFunc1<D, Boolean> condition) {
-        jdiAssert(first(data(), condition::execute), is(nullValue()));
+        jdiAssert(first(data(), condition::execute), Matchers.is(nullValue()));
         return this;
     }
 
@@ -111,7 +112,7 @@ public class DataListAssert<T extends IListBase, D>
     @JDIAction("Assert that '{name}' elements [{0}] are displayed")
     public DataListAssert<T, D> displayed(String... names) {
         for (String name : names)
-            jdiAssert(element.get(name).isDisplayed() ? name + "displayed" : "hidden", is(name + "displayed"));
+            jdiAssert(element.get(name).isDisplayed() ? name + "displayed" : "hidden", Matchers.is(name + "displayed"));
         return this;
     }
 
@@ -121,7 +122,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that '{name}' has at least one displayed element")
     public DataListAssert<T, D> displayed() {
-        jdiAssert(element.isDisplayed() ? "displayed" : "hidden", is("displayed"));
+        jdiAssert(element.isDisplayed() ? "displayed" : "hidden", Matchers.is("displayed"));
         return this;
     }
 
@@ -131,7 +132,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that '{name}' is hidden")
     public DataListAssert<T, D> hidden() {
-        jdiAssert(map(element, this::isDisplayed), everyItem(is(false)));
+        jdiAssert(map(element, this::isDisplayed), everyItem(Matchers.is(false)));
         return this;
     }
     private boolean isDisplayed(T element) {
@@ -146,7 +147,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that '{name}' is empty")
     public DataListAssert<T, D> empty() {
-        jdiAssert(element.isEmpty() ? "list is empty" : "list is not empty", is("list is empty"));
+        jdiAssert(element.isEmpty() ? "list is empty" : "list is not empty", Matchers.is("list is empty"));
         return this;
     }
 
@@ -156,7 +157,7 @@ public class DataListAssert<T extends IListBase, D>
      */
     @JDIAction("Assert that '{name}' is not empty")
     public DataListAssert<T, D> notEmpty() {
-        jdiAssert(element.isEmpty() ? "list is empty" : "list is not empty", is("list is not empty"));
+        jdiAssert(element.isEmpty() ? "list is empty" : "list is not empty", Matchers.is("list is not empty"));
         return this;
     }
 

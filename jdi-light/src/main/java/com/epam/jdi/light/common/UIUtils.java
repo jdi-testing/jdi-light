@@ -8,6 +8,8 @@ import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.map.MultiMap;
+import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Constructor;
@@ -41,7 +43,17 @@ public final class UIUtils {
             return new MapArray<>();
         List<Field> notNullFields = filter(getFields(obj, Object.class),
             f -> getValueField(f, obj) != null);
-        return new MapArray<>(notNullFields, UIUtils::getElementName,
+        List<Field> withOrder = filter(notNullFields, f -> f.getAnnotation(Order.class) != null);
+        List<Field> ordered = new ArrayList<>();
+        if (withOrder.size() > 0) {
+            MultiMap<Integer, Field> orderMap = new MultiMap<>(withOrder,
+                k -> k.getAnnotation(Order.class).value(), v -> v);
+            orderMap.pairs.sort((d1, d2) -> d2.key - d1.key);
+            for (Pair<Integer, Field> pairs : orderMap.pairs)
+                ordered.add(pairs.value);
+            ordered.addAll(filter(notNullFields, f -> f.getAnnotation(Order.class) == null));
+        } else ordered = notNullFields;
+        return new MapArray<>(ordered, UIUtils::getElementName,
             field -> {
                 Object value = getValueField(field, obj);
                 if (isClassOr(value.getClass(), String.class, Integer.class, Boolean.class))

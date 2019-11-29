@@ -3,6 +3,7 @@ package com.epam.jdi.light.asserts.generic;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;
@@ -18,5 +19,5 @@ public class TextAssert extends UIAssert<TextAssert, IsText>
         jdiAssert(element.getText(), condition);
         return this;
     }
-    public TextAssert text(String text) { return text(is(text)); }
+    public TextAssert text(String text) { return text(Matchers.is(text)); }
 }

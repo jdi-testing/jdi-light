@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
@@ -19,12 +20,12 @@ public class ProgressAssert extends UIAssert<ProgressAssert, ProgressBar> {
         jdiAssert(getInt("max", element.core()), max);
         return this;
     }
-    public ProgressAssert maxVolume(int maxVolume) { return maxVolume(is(maxVolume)); }
+    public ProgressAssert maxVolume(int maxVolume) { return maxVolume(Matchers.is(maxVolume)); }
 
     @JDIAction("Assert that '{name}' volume {0}")
     public ProgressAssert volume(Matcher<Integer> volume) {
         jdiAssert(getInt("value", element.core()), volume);
         return this;
     }
-    public ProgressAssert volume(int volume) { return volume(is(volume)); }
+    public ProgressAssert volume(int volume) { return volume(Matchers.is(volume)); }
 }

@@ -25,6 +25,7 @@ import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
@@ -44,9 +45,11 @@ public class Form<T> extends Section {
         -> ((HasValue) element).getValue().trim();
 
     public void fillAction(Field field, Object element, Object parent, String setValue) {
+        logger.debug("Fill element '%s' with value '%s'", field.getName(), setValue);
         FILL_ACTION.execute(field, element, parent, setValue);
     }
     public String getAction(Field field, Object element, Object parent) {
+        logger.debug("Try to get element '%s' value", field.getName());
         return GET_ACTION.execute(field, element, parent);
     }
 
@@ -146,7 +149,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      * Verify that form filled correctly. If not returns list of keys where verification fails
      */
-    @JDIAction("Verify that '{name}' values are: {0}")
+    @JDIAction(value = "Verify that '{name}' values are: {0}", timeout = 0)
     public List<String> verify(T entity) {
         return verify(getMapFromObject(entity));
     }
@@ -155,7 +158,7 @@ public class Form<T> extends Section {
      * @param map Specify entity as mapArray
      *            Verify that form filled correctly. If not throws error
      */
-    @JDIAction("Check that '{name}' values are: {0}")
+    @JDIAction(value = "Check that '{name}' values are: {0}", timeout = 0)
     public void check(MapArray<String, String> map) {
         List<String> result = verify(map);
         if (result.size() != 0)
@@ -165,7 +168,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Verify that form filled correctly. If not throws error
      */
-    @JDIAction("Check that '{name}' values are: {0}")
+    @JDIAction(value = "Check that '{name}' values are: {0}", timeout = 0)
     public void check(T entity) {
         check(getMapFromObject(entity));
     }
@@ -175,7 +178,7 @@ public class Form<T> extends Section {
      *             Fill first setable field with value and click on Button “submit” <br>
      * @apiNote To use this option Form pageObject should have at least one SetValue element and only one IsButton Element
      */
-    @JDIAction("Submit '{name}' with value '{0}'")
+    @JDIAction(value = "Submit '{name}' with value '{0}'", timeout = 0)
     public void submit(String text) {
         submit(text, "submit");
     }
@@ -187,7 +190,7 @@ public class Form<T> extends Section {
      * @apiNote To use this option Form pageObject should have at least one SetValue element <br>
      * Allowed different buttons to send one form e.g. save/ publish / cancel / search update ...
      */
-    @JDIAction("Submit '{name}' with value '{0}' and press '{1}' button")
+    @JDIAction(value = "Submit '{name}' with value '{0}' and press '{1}' button", timeout = 0)
     public void submit(String text, String buttonName) {
         List<Field> fields = getFields(pageObject, SetValue.class);
         if (fields.isEmpty())
@@ -200,7 +203,7 @@ public class Form<T> extends Section {
     /**
      * Allowed different buttons to send one form e.g. save/ publish / cancel / search update ...
      */
-    @JDIAction("Submit '{name}' and press '{0}' button")
+    @JDIAction(value = "Submit '{name}' and press '{0}' button", timeout = 0)
     public void pressButton(String buttonName) {
         IClickable button = GET_BUTTON.execute(pageObject, buttonName);
         button.click();
@@ -212,7 +215,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “submit” <br>
      */
-    @JDIAction("Submit '{name}' with {0}")
+    @JDIAction(value = "Submit '{name}' with {0}", timeout = 0)
     public void submit(T entity) {
         submit(entity, "submit");
     }
@@ -225,7 +228,7 @@ public class Form<T> extends Section {
      * e.g. if you call "submit(user, "Publish") then you should have Element 'publishButton'. <br>
      * * Letters case in button name  no matters
      */
-    @JDIAction("Fill '{name}' with {0} and press '{1}'")
+    @JDIAction(value = "Fill '{name}' with {0} and press '{1}'", timeout = 0)
     public void submit(T entity, String buttonName) {
         submit(getMapFromObject(entity), buttonName);
     }
@@ -241,7 +244,7 @@ public class Form<T> extends Section {
      * e.g. if you call "submit(user, "Publish") then you should have Element 'publishButton'. <br>
      * * Letters case in button name  no matters
      */
-    @JDIAction("Submit '{name}' with {0}")
+    @JDIAction(value = "Submit '{name}' with {0}", timeout = 0)
     public void submit(MapArray<String, String> objStrings) {
         submit(objStrings, "submit");
     }
@@ -251,7 +254,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “login” or ”loginButton” <br>
      */
-    @JDIAction("Login as {0}")
+    @JDIAction(value = "Login as {0}", timeout = 0)
     public void login(T entity) {
         submit(entity, "login");
     }
@@ -263,7 +266,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “login” or ”loginButton” <br>
      */
-    @JDIAction("Login as {0}")
+    @JDIAction(value = "Login as {0}", timeout = 0)
     public void loginAs(T entity) {
         login(entity);
     }
@@ -272,12 +275,12 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “send” or ”sendButton” <br>
      */
-    @JDIAction("Send {0} in '{name}'")
+    @JDIAction(value = "Send {0} in '{name}'", timeout = 0)
     public void send(T entity) {
         submit(entity, "send");
     }
 
-    @JDIAction("Send '{name}'")
+    @JDIAction(value = "Send '{name}'", timeout = 0)
     public void send() {
         pressButton("send");
     }
@@ -285,7 +288,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “add” or ”addButton” <br>
      */
-    @JDIAction("Add {0} in '{name}'")
+    @JDIAction(value = "Add {0} in '{name}'", timeout = 0)
     public void add(T entity) {
         submit(entity, "add");
     }
@@ -294,7 +297,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “publish” or ”publishButton” <br>
      */
-    @JDIAction("Publish {0} for '{name}'")
+    @JDIAction(value = "Publish {0} for '{name}'", timeout = 0)
     public void publish(T entity) {
         submit(entity, "publish");
     }
@@ -303,7 +306,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “save” or ”saveButton” <br>
      */
-    @JDIAction("Save {0} in '{name}'")
+    @JDIAction(value = "Save {0} in '{name}'", timeout = 0)
     public void save(T entity) {
         submit(entity, "save");
     }
@@ -312,7 +315,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “update” or ”updateButton” <br>
      */
-    @JDIAction("Update {0} in '{name}'")
+    @JDIAction(value = "Update {0} in '{name}'", timeout = 0)
     public void update(T entity) {
         submit(entity, "update");
     }
@@ -321,7 +324,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “cancel” or ”cancelButton” <br>
      */
-    @JDIAction("Fill {0} and cancel '{name}'")
+    @JDIAction(value = "Fill {0} and cancel '{name}'", timeout = 0)
     public void cancel(T entity) {
         submit(entity, "cancel");
     }
@@ -330,7 +333,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “close” or ”closeButton” <br>
      */
-    @JDIAction("Fill {0} and close '{name}'")
+    @JDIAction(value = "Fill {0} and close '{name}'", timeout = 0)
     public void close(T entity) {
         submit(entity, "close");
     }
@@ -339,7 +342,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “back” or ”backButton” <br>
      */
-    @JDIAction("Fill '{name}' with {0} and go back")
+    @JDIAction(value = "Fill '{name}' with {0} and go back", timeout = 0)
     public void back(T entity) {
         submit(entity, "back");
     }
@@ -348,7 +351,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “select” or ”selectButton” <br>
      */
-    @JDIAction("Select {0} for '{name}'")
+    @JDIAction(value = "Select {0} for '{name}'", timeout = 0)
     public void select(T entity) {
         submit(entity, "select");
     }
@@ -357,7 +360,7 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “next” or ”nextButton” <br>
      */
-    @JDIAction("Fill '{name}' with {0} and go to next")
+    @JDIAction(value = "Fill '{name}' with {0} and go to next", timeout = 0)
     public void next(T entity) {
         submit(entity, "next");
     }
@@ -366,9 +369,18 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Fill all SetValue elements and click on Button “search” or ”searchButton” <br>
      */
-    @JDIAction("Search for {0} in '{name}'")
+    @JDIAction(value = "Search for {0} in '{name}'", timeout = 0)
     public void search(T entity) {
         submit(entity, "search");
+    }
+
+    /**
+     * @param entity Specify entity
+     *               Fill all SetValue elements and click on Button “search” or ”searchButton” <br>
+     */
+    @JDIAction(value = "Create {0} in '{name}'", timeout = 0)
+    public void create(T entity) {
+        submit(entity, "create");
     }
 
     @Override

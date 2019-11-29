@@ -6,10 +6,10 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -33,7 +33,7 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
         return this;
     }
     public IsAssert attr(String attrName, String value) {
-        return attr(attrName, is(value));
+        return attr(attrName, Matchers.is(value));
     }
 
     /**
@@ -47,7 +47,7 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
         return this;
     }
     public IsAssert css(String css, String value) {
-        return css(css, is(value));
+        return css(css, Matchers.is(value));
     }
 
     /**
@@ -60,7 +60,7 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
         return this;
     }
     public IsAssert tag(String tagName) {
-        return tag(is(tagName));
+        return tag(Matchers.is(tagName));
     }
 
     /**
@@ -82,7 +82,7 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
         return this;
     }
     public IsAssert cssClass(String className) {
-        return cssClass(is(className));
+        return cssClass(Matchers.is(className));
     }
 
 
@@ -91,7 +91,7 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
      */
     @JDIAction("Assert that '{name}' is selected")
     public IsAssert selected() {
-        jdiAssert(element.isSelected() ? "selected" : "not selected", is("selected"));
+        jdiAssert(element.isSelected() ? "selected" : "not selected", Matchers.is("selected"));
         return this;
     }
 
@@ -100,7 +100,7 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
      */
     @JDIAction("Assert that '{name}' is deselected")
     public IsAssert deselected() {
-        jdiAssert(element.isSelected() ? "selected" : "not selected", is("not selected"));
+        jdiAssert(element.isSelected() ? "selected" : "not selected", Matchers.is("not selected"));
         return this;
     }
 

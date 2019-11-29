@@ -7,8 +7,7 @@ import org.openqa.selenium.By;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH_LOCATORS;
-import static com.epam.jdi.light.settings.WebSettings.hasDomain;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.select;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -94,7 +93,7 @@ public class JDILocator {
             By locator = getLocator(args);
             if ((locator == null || !hasDomain() && !hasFrame()) && element != null)
                 return SMART_SEARCH_LOCATORS.size() > 0
-                    ? print(select(SMART_SEARCH_LOCATORS, l -> format(l, splitHyphen(element.name))), " or ")
+                    ? print(select(SMART_SEARCH_LOCATORS, l -> format(l, SMART_SEARCH_NAME.execute(element.name))), " or ")
                     : "";
             String hasFrame = "";
             if (hasFrame())

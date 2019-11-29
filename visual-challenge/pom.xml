@@ -24,13 +24,13 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.1.9</version>
+            <version>1.1.10</version>
         </dependency>
 
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.1.9</version>
+            <version>1.1.10</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.epam.jdi</groupId>

@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     }
     @JDIAction("Assert that '{0}' option selected for '{name}'")
     public A selected(String option) {
-        jdiAssert(element.selected(option), is(true));
+        jdiAssert(element.selected(option), Matchers.is(true));
         return (A) this;
     }
     public <TEnum extends Enum> UISelectAssert selected(TEnum option) {
@@ -103,12 +104,12 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     }
     @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {
-        jdiAssert(element.isDisplayed() ? "displayed" : "hidden", is("displayed"));
+        jdiAssert(element.isDisplayed() ? "displayed" : "hidden", Matchers.is("displayed"));
         return (A) this;
     }
     @JDIAction("Assert that '{name}' is disappeared")
     public A disappear() {
-        jdiAssert(element.isHidden() ? "hidden" : "displayed", is("hidden"));
+        jdiAssert(element.isHidden() ? "hidden" : "displayed", Matchers.is("hidden"));
         return (A) this;
     }
 
@@ -124,7 +125,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     public A notAppear(int timeoutSec) {
         boolean result = new Timer(timeoutSec * 1000)
                 .wait(() -> element.isDisplayed());
-        jdiAssert(result ? "displayed" : "hidden", is("hidden"));
+        jdiAssert(result ? "displayed" : "hidden", Matchers.is("hidden"));
         return (A) this;
     }
 

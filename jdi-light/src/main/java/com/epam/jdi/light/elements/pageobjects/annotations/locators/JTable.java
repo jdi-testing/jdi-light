@@ -16,6 +16,7 @@ public @interface JTable {
     String[] header() default {};
 
     String headers() default "";
+    String filter() default "";
     String row() default "";
     String column() default "";
     String cell() default "";
