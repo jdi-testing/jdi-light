@@ -12,15 +12,15 @@ public class RangeSteps {
     public static Range range(String name) { return getUI(name, Range.class); }
 
     @When("^(?:I |)set \"([^\"]*)\" value to (\\d+)$")
-    public void installTo(String name, int value) {
-        range(name).setVolume(value);
+    public void installTo(String name, double value) {
+        range(name).setValue(value);
     }
     @Then("^the \"([^\"]*)\" range volume less or equal to (\\d+)$")
-    public void rangeLessOrEqualTo(String name, int value) {
-        range(name).is().volume(lessThanOrEqualTo(value));
+    public void rangeLessOrEqualTo(String name, double value) {
+        range(name).is().value(lessThanOrEqualTo(value));
     }
     @Then("^the \"([^\"]*)\" range volume greater or equal to (\\d+)$")
-    public void rangeGreaterOrEqualTo(String name, int value) {
-        range(name).is().volume(greaterThanOrEqualTo(value));
+    public void rangeGreaterOrEqualTo(String name, double value) {
+        range(name).is().value(greaterThanOrEqualTo(value));
     }
 }

@@ -40,9 +40,9 @@ public class RangeTests extends TestsInit {
 
     @Test
     public void getValueTest() {
-        range1.is().thumbValue(50);
-        range2.is().thumbValue(3);
-        range3.is().thumbValue(2.5);
+        range1.is().value(50);
+        range2.is().value(3);
+        range3.is().value(2.5);
     }
 
     @Test
@@ -63,16 +63,16 @@ public class RangeTests extends TestsInit {
     }
 
     @Test
-    public void setThumbValueTest() {
+    public void setValueTest() {
         range3.hover();
-        range1.setValue(10);
-        range1.is().thumbValue(10);
+        range1.setValue(10.0);
+        range1.is().value(10);
         range1.setValue(50);
         range2.setValue(2);
-        range2.is().thumbValue(2);
+        range2.is().value(2);
         range2.setValue(3);
         range3.setValue(5);
-        range3.is().thumbValue(5);
+        range3.is().value(5);
         range3.setValue(2.5);
     }
 }
