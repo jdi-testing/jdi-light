@@ -14,7 +14,7 @@ public class DriversVersionTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"latest", "LATES", "prelatest", "", "RELATEST", "2,31", "1.23"};
+        return new Object[]{"latest", "LATES", "prelatest", "", "RELATEST", "2,31", "1.23", "1.23.", "1.23.*"};
     }
 
     @DataProvider
