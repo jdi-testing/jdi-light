@@ -34,8 +34,7 @@ import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
-import static com.epam.jdi.light.common.Property.SCREENS_FOLDER;
-import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT;
+import static com.epam.jdi.light.common.Property.*;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
@@ -72,7 +71,7 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String DOMAIN;
-    public static String KILL_BROWSER = "afterAndBefore";
+    public static String BROWSER_KILL = "afterAndBefore";
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
@@ -131,8 +130,8 @@ public class WebSettings {
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
         fillAction(p -> SCREEN_PATH = p, SCREENS_FOLDER.getName());
         // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
-        fillAction(p -> KILL_BROWSER = p, Property.KILL_BROWSER.getName());
-        fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
+        fillAction(p -> BROWSER_KILL = p, KILL_BROWSER.getName());
+        fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY.getName());
         fillAction(p -> BROWSER_SIZE = p, "browser.size");
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
