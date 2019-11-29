@@ -14,12 +14,12 @@ public class DriversVersionTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"latest", "LATES", "prelatest", "", "RELATEST", "2,31", "ten.eleven"};
+        return new Object[]{"latest", "LATES", "prelatest", "", "RELATEST", "2,31", "1.23"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"LATEST", "1.23", "PRELATEST", "33.44"};
+        return new Object[]{"LATEST", "1.23.1", "PRELATEST", "33.44.55"};
     }
 
     @Test(dataProvider = "negativeData")
