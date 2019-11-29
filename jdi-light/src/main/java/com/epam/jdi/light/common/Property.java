@@ -10,7 +10,15 @@ public enum Property {
     PAGE_LOAD_STRATEGY("page.load.strategy", "normal|eager|none",
             "Value of 'page.load.strategy' must be 'normal', 'eager' or 'none'."),
     PAGE_CHECK_AFTER_OPEN("page.check.after.open", "NONE|NEW_PAGE|EVERY_PAGE",
-            "Value of 'page.check.after.open' must be 'NONE', 'NEW_PAGE', 'EVERY_PAGE'.");
+            "Value of 'page.check.after.open' must be 'NONE', 'NEW_PAGE', 'EVERY_PAGE'."),
+    SMART_LOCATORS("smart.locators", "((#%s|\\[[a-z]+=%s\\])[;, ]{0,1})+",
+        "Value of 'smart.locators' must be a list of regular expressions."),
+    CHROME_CAPABILITIES_PATH("chrome.capabilities.path", "^([\\w-.]+[\\\\\\/])*(chrome\\.properties)$",
+            "Value of 'chrome.capabilities.path' must be a path to a chrome.properties file."),
+    FF_CAPABILITIES_PATH("ff.capabilities.path", "^([\\w-.]+[\\\\\\/])*(ff\\.properties)$",
+            "Value of 'ff.capabilities.path' must be a path to a ff.properties file."),
+    IE_CAPABILITIES_PATH("ie.capabilities.path", "^([\\w-.]+[\\\\\\/])*(ie\\.properties)$",
+            "Value of 'ie.capabilities.path' must be a path to a ie.properties file.");
 
     private final String name;
     private final String check;
