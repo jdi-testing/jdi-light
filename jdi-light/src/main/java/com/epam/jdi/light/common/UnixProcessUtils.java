@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.StringUtils.inputStreamToList;
 
 
@@ -23,8 +24,8 @@ public class UnixProcessUtils {
                 killChildProcesses(pid);
             }
             killProcessesByNamePart(rootNamePart);
-        } catch (InterruptedException | IOException e) {
-            throw new RuntimeException("Can't kill drivers");
+        } catch (InterruptedException | IOException ex) {
+            throw exception(ex, "Can't kill drivers");
         }
     }
 
@@ -71,8 +72,8 @@ public class UnixProcessUtils {
         try {
             Process child = new ProcessBuilder(list.toArray(new String[list.size()])).start();
             child.waitFor();
-        } catch (InterruptedException | IOException e) {
-            throw new RuntimeException("Can't kill process: " + e.getMessage());
+        } catch (InterruptedException | IOException ex) {
+            throw exception(ex, "Can't kill process: " + ex.getMessage());
         }
     }
 

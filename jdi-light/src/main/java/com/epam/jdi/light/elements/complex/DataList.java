@@ -46,7 +46,7 @@ public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert
             if (dataType == null) return null;
             return elements(1).select((k, v) -> asEntity(v, dataType));
         } catch (Exception ex) {
-            throw exception("Can't get DataList data" + LINE_BREAK + safeException(ex));
+            throw exception(ex, "Can't get DataList data" + LINE_BREAK + safeException(ex));
         }
     }
     @Override
@@ -89,7 +89,7 @@ public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert
             initClass = types[0].toString().equals("?") ? null : (Class<T>)types[0];
             dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>)types[1];
         } catch (Exception ex) {
-            throw exception("Can't instantiate List<%s, %s> field '%s'", initClass == null
+            throw exception(ex, "Can't instantiate List<%s, %s> field '%s'", initClass == null
                             ? "?" : initClass.getSimpleName(), dataType == null ? "?" : dataType.getSimpleName(),
                     field.getName());
         }

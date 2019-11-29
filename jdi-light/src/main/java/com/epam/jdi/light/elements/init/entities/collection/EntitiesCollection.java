@@ -90,8 +90,8 @@ public class EntitiesCollection {
         for (String filePath : filePaths)
             try {
                 jsonElements.addAll(new ObjectMapper().readValue(new File(filePath), HashMap.class));
-            } catch (IOException e) {
-                throw new RuntimeException("Can't read elements from json");
+            } catch (IOException ex) {
+                throw exception(ex, "Can't read elements from json");
             }
     }
 

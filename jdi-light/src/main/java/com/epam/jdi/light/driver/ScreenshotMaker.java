@@ -57,7 +57,7 @@ public class ScreenshotMaker {
         try {
             copyFile(screensFile, new File(screensFilePath));
         } catch (Exception ex) {
-            throw exception("Failed to do screenshot: " + safeException(ex));
+            throw exception(ex, "Failed to do screenshot: " + safeException(ex));
         }
         logger.info("Screenshot: " + screensFilePath);
         return screensFilePath;
