@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite.section.inputgroup;
+package io.github.epam.bootstrap.tests.composite.section.inputGroup;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;

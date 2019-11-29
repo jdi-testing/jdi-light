@@ -6,8 +6,8 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.buttonToolbar;
-import static io.github.com.pages.BootstrapPage.buttonToolbarWithInputField;
+import static io.github.com.pages.BootstrapPage.buttonGroupToolbar;
+import static io.github.com.pages.BootstrapPage.buttonGroupToolbarWithInputField;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
  * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
  */
 
-public class ButtonToolbarTests extends TestsInit {
+public class ToolbarTests extends TestsInit {
 
     private String borderColorBeforeClicking = "rgb(108, 117, 125)";
     private String borderColorAfterClicking = "rgb(84, 91, 98)";
@@ -35,20 +35,20 @@ public class ButtonToolbarTests extends TestsInit {
     @Test
     public void getTextTest() {
         for (int i = 1; i < 9; i++) {
-            assertEquals(buttonToolbar.buttonsInToolbar.get(i).getText(), String.valueOf(i));
+            assertEquals(buttonGroupToolbar.buttonsInToolbar.get(i).getText(), String.valueOf(i));
         }
     }
 
     @Test
     public void isValidationTest() {
         for (int i = 1; i < 9; i++) {
-            buttonToolbar.buttonsInToolbar.get(i).is().text(String.valueOf(i));
+            buttonGroupToolbar.buttonsInToolbar.get(i).is().text(String.valueOf(i));
         }
     }
 
     @Test
     public void buttonsInButtonToolbarTest() {
-        buttonToolbar.buttonsInToolbar.forEach(button -> {
+        buttonGroupToolbar.buttonsInToolbar.forEach(button -> {
             button.is().displayed();
             button.is().enabled();
             button.assertThat().css("background-color", backgroundColorBeforeHovering);
@@ -63,10 +63,10 @@ public class ButtonToolbarTests extends TestsInit {
 
     @Test
     public void inputFieldInButtonToolbarTest() {
-        buttonToolbarWithInputField.inputAreaInToolbar.is().displayed();
-        buttonToolbarWithInputField.inputAreaInToolbar.is().enabled();
-        buttonToolbarWithInputField.inputAreaInToolbar.is().core().attr("placeholder", placeholderForInputField);
-        buttonToolbarWithInputField.inputAreaInToolbar.setValue(textForTestingInputField);
-        assertEquals(buttonToolbarWithInputField.inputAreaInToolbar.getValue(), textForTestingInputField);
+        buttonGroupToolbarWithInputField.inputAreaInToolbar.is().displayed();
+        buttonGroupToolbarWithInputField.inputAreaInToolbar.is().enabled();
+        buttonGroupToolbarWithInputField.inputAreaInToolbar.is().core().attr("placeholder", placeholderForInputField);
+        buttonGroupToolbarWithInputField.inputAreaInToolbar.setValue(textForTestingInputField);
+        assertEquals(buttonGroupToolbarWithInputField.inputAreaInToolbar.getValue(), textForTestingInputField);
     }
 }
