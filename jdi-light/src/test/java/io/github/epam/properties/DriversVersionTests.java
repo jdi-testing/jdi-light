@@ -2,7 +2,6 @@ package io.github.epam.properties;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
