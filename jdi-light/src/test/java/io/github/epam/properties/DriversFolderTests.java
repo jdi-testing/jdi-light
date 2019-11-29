@@ -17,7 +17,8 @@ public class DriversFolderTests {
     @DataProvider
     public static Object[] negativeData() {
         return new Object[]{
-                "01:/02",
+                "../../folder",
+                "..\\..\\folder",
                 "",
                 "c folder",
                 "c:folder",
@@ -27,11 +28,14 @@ public class DriversFolderTests {
     @DataProvider
     public static Object[] positiveData() {
         return new Object[]{
-                "A:/folder",
-                "b:/Folder",
-                "c:/folder/SUBFOLDER",
-                "//FOLDER",
-                "\\FoLdeR"};
+                "A:/unixfolder",
+                "C:/unix/Folder",
+                "c:/unixfolder/SUBFOLDER",
+                "/unix/folder",
+                "/unix/folder/slashattheend/",
+                "C:\\win\\subfolder",
+                "C:\\winfolder",
+                "C:\\win\\folder\\slashattheend\\"};
     }
 
     @Test(dataProvider = "negativeData")

@@ -23,7 +23,7 @@ public enum Property {
             "driver parameter value is incorrect. Valid values are: 'chrome', 'firefox', 'ie' or '${driver}'"),
     DRIVERS_VERSION("drivers.version", "LATEST|PRELATEST|^([0-9])+([.][0-9]{1,3}[.][a-zA-Z0-9_-]+)$",
             "drivers.version parameter value is incorrect"),
-    DRIVERS_FOLDER_PATH("drivers.folder", "^([A-z]:[\\\\\\/]|[\\\\\\/]|[\\w+\\.])+([\\w+\\.]+[\\\\\\/]|[\\w+\\.])+$",
+    DRIVERS_FOLDER_PATH("drivers.folder", "^([a-zA-Z]:[\\\\\\/]+|[\\\\\\/]+)([\\w-_]+|[\\w-_]+[\\\\\\/]+)*?$",
             "Value of 'drivers.folder' must be a path to driver");
 
     private final String name;
