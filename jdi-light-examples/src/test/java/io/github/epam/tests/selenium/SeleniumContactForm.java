@@ -4,9 +4,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import selenium.entities.User;
 
-import static selenium.seleniumPO.HomePage.leftNavigation;
-import static selenium.seleniumPO.SiteSelenium.homePage;
-import static selenium.seleniumPO.SiteSelenium.login;
+import static selenium.selenium.HomePage.leftNavigation;
+import static selenium.selenium.SiteSelenium.homePage;
+import static selenium.selenium.SiteSelenium.login;
 import static selenium.site.data.DefaultDataProviderUtils.ROMAN_CONTACT;
 import static selenium.site.pages.ContactPage.seleniumContactForm;
 
