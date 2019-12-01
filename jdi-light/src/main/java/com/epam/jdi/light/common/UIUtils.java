@@ -26,8 +26,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
+import static com.epam.jdi.tools.StringUtils.*;
 import static java.lang.reflect.Array.get;
 import static java.lang.reflect.Array.getLength;
 
@@ -119,7 +118,7 @@ public final class UIUtils {
                 if (field == null)
                     return;
                 try {
-                    field.set(data, ((HasValue) getValueField(item, obj)).getValue());
+                    setPrimitiveField(field, data, ((HasValue) getValueField(item, obj)).getValue());
                 } catch (Exception ignore) { }
             });
             return data;

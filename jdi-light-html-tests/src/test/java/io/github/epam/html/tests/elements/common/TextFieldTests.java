@@ -67,10 +67,6 @@ public class TextFieldTests implements TestsInit {
             disabledName.sendKeys(text);
         } catch (Exception ignore) {}
         assertEquals(disabledName.getText(), "");
-        try {
-            disabledName.input(text);
-        } catch (Exception ignore) {}
-        assertEquals(disabledName.getText(), "");
     }
 
     @Test

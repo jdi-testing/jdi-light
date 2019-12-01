@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.InitActions;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -19,12 +20,13 @@ import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.create;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
+import static com.epam.jdi.tools.StringUtils.*;
 import static java.util.Arrays.asList;
 
 /**
@@ -57,8 +59,9 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     public D dataRow(int rowNum) {
         hasDataClass();
         if (!datas.get().has(rowNum+"")) {
-            Line line = row(rowNum);
-            D data = line.asData(dataClass);
+            D data = lineClass != null
+                ? lineToData(line(rowNum))
+                : row(rowNum).asData(dataClass);
             datas.get().update(rowNum + "", data);
         }
         return datas.get().get(rowNum+"");
@@ -255,14 +258,6 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
         datas.gotAll();
         return datas.set(result).values();
     }
-    @JDIAction("Get all '{name}' rows")
-    private String printTable() {
-        getTable();
-        String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
-        for (int i = 1; i <= count.get(); i++)
-            value += "||" + i + "||" + print(map(getLineMap(row(i)).values(), TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
-        return value;
-    }
 
     /**
      * Get all table rows
@@ -378,28 +373,58 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @Override
     @JDIAction("Get '{name}' table value")
     public String getValue() {
-        if (dataClass == null) {
-            return lineClass == null
-                ? super.getValue()
-                : printTable();
-        }
+        if (dataClass == null && lineClass == null)
+            super.getValue();
         getTable();
         String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
-        List<D> data = allData();
+        List<Object> rows = dataClass != null
+            ? map(allData(), l -> l)
+            : map(allLines(), l -> l);
+        List<List<Field>> fields = map(rows, d -> getFieldsExact(d.getClass()));
         for (int i = 1; i <= count.get(); i++) {
-            D instance = data.get(i-1);
             List<String> list = new ArrayList<>();
-            List<Field> fields = getFieldsExact(instance.getClass());
             for (String h : header()) {
-                Field field = first(fields, f -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(f.getName())));
+                Field field = first(fields.get(i-1), f -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(f.getName())));
                 if (field != null)
                     try {
-                        list.add(field.get(instance).toString());
+                        Object fieldObj = field.get(rows.get(i-1));
+                        String val = isInterface(field.getType(), HasValue.class)
+                            ? ((HasValue)fieldObj).getValue()
+                            : fieldObj.toString();
+                        list.add(val);
                     } catch (Exception ex) { throw exception("Can't get field %s", field.getName()); }
             }
             value += "||" + i + "||" + print(map(list, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         }
         return value;
+    }
+    private D lineToData(L line) {
+        D instance;
+        try { instance = create(dataClass); }
+        catch (Exception ex) { throw exception("Can't create %s instance in lineToData(line)", dataClass.getSimpleName()); }
+        Field[] dataFields = instance.getClass().getDeclaredFields();
+        Field[] lineFields = line.getClass().getDeclaredFields();
+        for (Field lineField : lineFields) {
+            for (Field dataField : dataFields) {
+                if (namesEqual(getElementName(lineField), getElementName(dataField))) {
+                    Object lineFieldValue;
+                    try {
+                        lineFieldValue = lineField.get(line);
+                    } catch (Exception ex) {
+                        throw exception("Can't get lineField '%s' value", lineField.getName());
+                    }
+                    String value = isInterface(lineField.getType(), HasValue.class)
+                        ? ((HasValue)lineFieldValue).getValue()
+                        : lineFieldValue.toString();
+                    try {
+                        setPrimitiveField(dataField, instance, value);
+                    } catch (Exception ex) {
+                        throw exception("Can't set table value '%s' to field '%s'", value, dataField.getName());
+                    }
+                }
+            }
+        }
+        return instance;
     }
     @Override
     public void refresh() {
@@ -437,10 +462,6 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
             if (!size.hasValue())
                 size.setFinal(headers.size());
         }
-    }
-
-    private MapArray<String, String> getLineMap(Line row) {
-        return new MapArray<>(header(), row);
     }
 
     @Override

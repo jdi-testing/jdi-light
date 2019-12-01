@@ -610,8 +610,11 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         getTable();
         String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
         for (int i = 1; i <= count.get(); i++)
-            value += "||" + i + "||" + print(map(row(i), TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
+            value += "||" + i + "||" + print(map(getLineMap(row(i)).values(), TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         return value;
+    }
+    private MapArray<String, String> getLineMap(Line row) {
+        return new MapArray<>(header(), row);
     }
 
 }

@@ -45,12 +45,16 @@ public class Form<T> extends Section {
         -> ((HasValue) element).getValue().trim();
 
     public void fillAction(Field field, Object element, Object parent, String setValue) {
-        logger.debug("Fill element '%s' with value '%s'", field.getName(), setValue);
+        logger.debug("Fill element '%s' with value '%s'", getFieldName(field, element), setValue);
         FILL_ACTION.execute(field, element, parent, setValue);
     }
     public String getAction(Field field, Object element, Object parent) {
-        logger.debug("Try to get element '%s' value", field.getName());
+        logger.debug("Try to get element '%s' value", getFieldName(field, element));
         return GET_ACTION.execute(field, element, parent);
+    }
+    private String getFieldName(Field field, Object element) {
+        return field != null ? field.getName() :
+                (element != null ? element.toString() : "");
     }
 
     private FormFilters filter = ALL;

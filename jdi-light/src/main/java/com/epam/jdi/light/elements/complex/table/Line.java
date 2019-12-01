@@ -23,6 +23,7 @@ import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
+import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
 import static java.util.Arrays.asList;
 
 /**
@@ -108,14 +109,14 @@ public class Line implements IList<String>, IBaseElement {
     public <D> D asData(Class<D> data) {
         D instance;
         try { instance = create(data); }
-        catch (Exception ex) { throw exception("Can't convert row to Data (%s)", data.getSimpleName()); }
+        catch (Exception ex) { throw exception("Can't create '%s' instance in row.asData() method", data.getSimpleName()); }
         int i = 0;
         List<Field> fields = asList(data.getDeclaredFields());
         for (String name : headers) {
             Field field = LinqUtils.first(fields, f -> namesEqual(getElementName(f), name));
             if (field != null)
                 try {
-                    field.set(instance, getList(i).get(i));
+                    setPrimitiveField(field, instance, getList(i).get(i));
                 } catch (Exception ex) {
                     throw exception("Can't set table value '%s' to field '%s'", getData(i).get(i), field.getName());
                 }
@@ -133,7 +134,7 @@ public class Line implements IList<String>, IBaseElement {
                 f -> namesEqual(getElementName(f), cell.key));
             if (field != null)
                 try {
-                    field.set(instance, cell.value);
+                    setPrimitiveField(field, instance, cell.value);
                 } catch (Exception ex) {
                     throw exception("Can't set table entity to field '%s'", field.getName());
                 }
