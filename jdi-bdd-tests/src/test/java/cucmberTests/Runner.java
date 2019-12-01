@@ -20,7 +20,7 @@ import static io.github.com.pages.Header.userIcon;
 @CucumberOptions(
         features = "classpath:features"
         , glue = {"com.epam.jdi.bdd", "cucmberTests"}
-        //, tags = {"@fileinput"}
+        , tags = {"@combobox"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass

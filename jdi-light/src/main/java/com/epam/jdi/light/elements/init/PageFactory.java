@@ -255,7 +255,7 @@ public class PageFactory {
             webPage.getClass().getAnnotation(Url.class),
             webPage.getClass().getAnnotation(Title.class));
         webPage.setName(pageName);
-        PAGES.add(pageName, webPage);
+        PAGES.update(pageName, webPage);
         initElements(driver, page);
         return page;
     }
