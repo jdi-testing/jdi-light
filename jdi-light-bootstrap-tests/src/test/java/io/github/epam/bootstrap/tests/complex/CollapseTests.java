@@ -134,4 +134,18 @@ public class CollapseTests extends TestsInit {
         collapseGroupThree.is().collapsed();
     }
 
+    @Test
+    public void collapseGroupOneListTest() {
+        collapseGroupOne.highlight();
+        collapseGroupOne.expand();
+
+        collapseGroupOne.is().expanded();
+        collapseGroupOne.list().is().size(1);
+        collapseGroupOne.list().get(1).is().text(groupOneText);
+        collapseGroupOne.isDisplayed();
+        collapseGroupOne.isEnabled();
+
+        collapseGroupOne.collapse();
+        collapseGroupOne.is().collapsed();
+    }
 }
