@@ -1,4 +1,4 @@
-package cucmberTests;
+package cucmbertests;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -24,7 +24,7 @@ import static io.github.com.pages.Header.userIcon;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "classpath:features"
-        , glue = {"com.epam.jdi.bdd", "cucmberTests"}
+        , glue = {"com.epam.jdi.bdd", "cucmbertests"}
         //, tags = {"@fileinput"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
