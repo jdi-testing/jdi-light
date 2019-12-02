@@ -15,12 +15,12 @@ public class DomainTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"https://", "https://!jdi-testing.github.io/jdi-light/", "0123./", "zeroonetwothree"};
+        return new Object[]{"https://", "https://!jdi-testing.github.io/jdi-light/", "0123./", "zeroonetwothree", "https://jdi-testing/jdi-light"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"https://jdi-testing.github.io/jdi-light/", "jdi-testing.github.io/jdi-light/", "https://jdi-testing.github.io/jdi-light"};
+        return new Object[]{"https://jdi-testing.github.io/jdi-light/", "jdi-testing.github.io/jdi-light/", "https://jdi-testing.github.io/jdi-light", "jdi-testing.github.io", "jdi.io"};
     }
 
     @Test(dataProvider = "negativeData")
