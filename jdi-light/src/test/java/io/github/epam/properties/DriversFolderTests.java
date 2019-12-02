@@ -22,17 +22,17 @@ public class DriversFolderTests {
                 "",
                 "c folder",
                 "c:folder",
-                "FOLDER//"};
+                "FOLDER//",
+                "/unix/folder/relative",
+                "/unix/folder/slashattheend/",
+                "folder"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
         return new Object[]{
-                "A:/unixfolder",
-                "C:/unix/Folder",
-                "c:/unixfolder/SUBFOLDER",
-                "/unix/folder",
-                "/unix/folder/slashattheend/",
+                "C:/unixfolder",
+                "C:/unix/subfolder",
                 "C:\\win\\subfolder",
                 "C:\\winfolder",
                 "C:\\win\\folder\\slashattheend\\"};
@@ -57,4 +57,5 @@ public class DriversFolderTests {
         properties.setProperty(DRIVERS_FOLDER_PATH.getName(), value);
         validateProperties(properties);
     }
+
 }
