@@ -7,7 +7,6 @@ package com.epam.jdi.light.settings;
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.common.ElementArea;
-import com.epam.jdi.light.common.Property;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.driver.WebDriverFactory;
@@ -38,10 +37,9 @@ import static com.epam.jdi.light.common.Property.CHROME_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.DRIVER;
 import static com.epam.jdi.light.common.Property.DRIVERS_FOLDER_PATH;
 import static com.epam.jdi.light.common.Property.DRIVERS_VERSION;
+import static com.epam.jdi.light.common.Property.ELEMENT_SEARCH_STRATEGY;
 import static com.epam.jdi.light.common.Property.FF_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.IE_CAPABILITIES_PATH;
-import static com.epam.jdi.light.common.Property.KILL_BROWSER_PROPERTY;
-import static com.epam.jdi.light.common.Property.ELEMENT_SEARCH_STRATEGY;
 import static com.epam.jdi.light.common.Property.KILL_BROWSER_PROPERTY;
 import static com.epam.jdi.light.common.Property.SCREENS_FOLDER;
 import static com.epam.jdi.light.common.Property.SMART_LOCATORS;
@@ -144,7 +142,7 @@ public class WebSettings {
         fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
         fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY.getName());
         fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
-        fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
+        fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY.getName());
         fillAction(p -> BROWSER_SIZE = p, "browser.size");
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
