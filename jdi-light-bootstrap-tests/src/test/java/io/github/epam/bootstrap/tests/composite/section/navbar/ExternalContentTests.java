@@ -31,7 +31,7 @@ public class ExternalContentTests extends TestsInit {
         navbarExternalContent.toggler.expander().is().core().attr(ariaExpanded, "false");
         navbarExternalContent.toggler.expand();
         navbarExternalContent.toggler.expander().is().core().attr(ariaExpanded, "true");
-        navbarExternalContent.toggler.collapse();
+        navbarExternalContent.toggler.close();
         navbarExternalContent.toggler.expander().is().core().attr(ariaExpanded, "false");
     }
 
@@ -44,7 +44,7 @@ public class ExternalContentTests extends TestsInit {
         navbarExternalContent.toggler.value().children().get(2).is()
                 .displayed()
                 .text(mutedText);
-        navbarExternalContent.toggler.collapse();
+        navbarExternalContent.toggler.close();
     }
 
     @Test
@@ -53,6 +53,6 @@ public class ExternalContentTests extends TestsInit {
         baseValidation(navbarExternalContent);
         baseValidation(navbarExternalContent.collapsedText);
         baseValidation(navbarExternalContent.collapsedMutedText);
-        navbarExternalContent.toggler.collapse();
+        navbarExternalContent.toggler.close();
     }
 }
