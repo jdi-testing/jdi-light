@@ -25,9 +25,12 @@ public enum Property {
             "drivers.version parameter value is incorrect"),
     DRIVERS_FOLDER_PATH("drivers.folder", "^([a-zA-Z]:[\\\\\\/]+|[\\\\\\/]+)([\\w-_]+|[\\w-_]+[\\\\\\/]+)*?$",
             "Value of 'drivers.folder' must be a path to driver"),
-    SCREENS_FOLDER("screens.folder", "^([A-z]:[\\\\\\/]|[\\\\\\/]|[\\w+\\.])+([\\w+\\.]+[\\\\\\/]|[\\w+\\.])+$", "'screens.folder' must contain the correct folder path"),
-    KILL_BROWSER("browser.kill", "^afterAndBefore|after|before", "Value of 'browser.kill' must be one of the following:'afterAndBefore', 'after', 'before'"),
-    ELEMENT_SEARCH_STRATEGY("element.search.strategy", "^strict|soft|visible, multiple|any, single", "Value of 'element.search.strategy' must be one of the following: 'strict', 'soft', 'visible, multiple', 'any, single'");
+    SCREENS_FOLDER("screens.folder", "^([A-z]:[\\\\\\/]|[\\\\\\/]|[\\w+\\.])+([\\w+\\.]+[\\\\\\/]|[\\w+\\.])+$",
+            "Value of 'screens.folder' must be the correct folder path"),
+    KILL_BROWSER_PROPERTY("browser.kill", "^afterAndBefore|after|before",
+            "Value of 'browser.kill' must be one of the following:'afterAndBefore', 'after', 'before'"),
+    ELEMENT_SEARCH_STRATEGY("element.search.strategy", "^strict|soft|visible, multiple|any, single",
+            "Value of 'element.search.strategy' must be one of the following: 'strict', 'soft', 'visible, multiple', 'any, single'");
 
     private final String name;
     private final String check;
