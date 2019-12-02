@@ -45,6 +45,15 @@ public class SimpleFormTests extends TestsInit {
     }
 
     @Test
+    public void fillFormTest() {
+        setDefaultValues();
+        supportMessageForm.fill(EXAMPLE_MESSAGE);
+        supportMessageForm.supportEmail.has().text(EXAMPLE_MESSAGE.supportEmail);
+        supportMessageForm.supportMessage.has().text(EXAMPLE_MESSAGE.supportMessage);
+        supportMessageForm.check(EXAMPLE_MESSAGE);
+    }
+
+    @Test
     public void clearFormTest() {
         setDefaultValues();
         supportMessageForm.clear(EXAMPLE_MESSAGE);
