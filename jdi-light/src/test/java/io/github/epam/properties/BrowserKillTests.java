@@ -7,6 +7,7 @@ import java.security.InvalidParameterException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Property.KILL_BROWSER_PROPERTY;
+import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -32,7 +33,7 @@ public class BrowserKillTests {
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, KILL_BROWSER_PROPERTY.getExMsg() + " See example: https://jdi-docs.github.io/jdi-light/#driver-settings");
+            assertEquals(expMessage, KILL_BROWSER_PROPERTY.getExMsg() + LINK_TO_EXAMPLES);
         }
     }
 
