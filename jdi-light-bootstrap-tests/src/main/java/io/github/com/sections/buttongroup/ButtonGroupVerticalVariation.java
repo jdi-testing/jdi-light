@@ -8,8 +8,12 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class ButtonGroupVerticalVariation extends Section {
 
-    @UI("//button[text()='Button one']") public Button buttonOne;
-    @UI("//button[text()='Button two']") public Button buttonTwo;
+    @UI("button[onclick*='Button One']")
+    public Button buttonOne;
+
+    @UI("button[onclick*='Button Two']")
+    public Button buttonTwo;
+
     @JDropdown(expand = ".btn-group",
             value = ".dropdown-menu",
             list = ".dropdown-item")
