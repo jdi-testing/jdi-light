@@ -19,7 +19,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.MultiplebarsProgress;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.MultipleProgressBars;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import com.epam.jdi.light.ui.html.elements.common.Button;
@@ -275,7 +275,7 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-backgrounds-red")
     public static Progress progressBackgroundRed;
     @UI("#progress-multiple-bars")
-    public static MultiplebarsProgress multiplebarsProgress;
+    public static MultipleProgressBars multipleProgressBars;
 
     @UI("//h4[.='Navbar - Containers']/../..")
     public static NavbarContainer navbarContainers;
