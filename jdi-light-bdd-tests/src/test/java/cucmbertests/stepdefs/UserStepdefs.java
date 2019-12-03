@@ -1,4 +1,4 @@
-package cucmbertests.stepdefs;
+package cucmbertests1.stepdefs;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
