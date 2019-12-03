@@ -1,4 +1,4 @@
-package cucmberTests.steps;
+package cucmbertests.steps;
 
 
 import com.epam.jdi.tools.DataClass;
