@@ -16,7 +16,7 @@ public class BrowserKillTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"avter", "afterAndBe", "be4", "", "123"};
+        return new Object[]{"avter", "afterAnd Before", "be4", "", "123"};
     }
 
     @DataProvider
@@ -43,4 +43,5 @@ public class BrowserKillTests {
         properties.setProperty(KILL_BROWSER_PROPERTY.getName(), value);
         validateProperties(properties);
     }
+
 }

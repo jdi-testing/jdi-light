@@ -16,7 +16,7 @@ public class ElementSearchStrategyTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"strct", "s0ft", "visible", ""};
+        return new Object[]{"strct", "s0ft", "visible", "", "any,  single"};
     }
 
     @DataProvider
@@ -43,4 +43,5 @@ public class ElementSearchStrategyTests {
         properties.setProperty(ELEMENT_SEARCH_STRATEGY.getName(), value);
         validateProperties(properties);
     }
+
 }

@@ -33,6 +33,7 @@ import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
+import static com.epam.jdi.light.common.Property.BROWSER_SIZE_PROPERTY;
 import static com.epam.jdi.light.common.Property.CHROME_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.DRIVER;
 import static com.epam.jdi.light.common.Property.DRIVERS_FOLDER_PATH;
@@ -143,7 +144,7 @@ public class WebSettings {
         fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY.getName());
         fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
         fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY.getName());
-        fillAction(p -> BROWSER_SIZE = p, "browser.size");
+        fillAction(p -> BROWSER_SIZE = p, BROWSER_SIZE_PROPERTY.getName());
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
         fillAction(SoftAssert::setAssertType, "assert.type");

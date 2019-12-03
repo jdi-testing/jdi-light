@@ -20,7 +20,8 @@ public class ScreensFolderTests {
                 "cd;\\fd",
                 "c:\\f[d",
                 "C:\\Program*Files\\tests",
-                "C:\\Program Files\\tests", ""};
+                "C:\\Program Files\\tests",
+                ""};
     }
 
     @DataProvider
@@ -52,4 +53,5 @@ public class ScreensFolderTests {
         properties.setProperty(SCREENS_FOLDER.getName(), value);
         validateProperties(properties);
     }
+
 }
