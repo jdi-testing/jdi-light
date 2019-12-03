@@ -77,7 +77,6 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String DOMAIN;
-    public static String DOMAIN_DOCS;
     public static String KILL_BROWSER = "afterAndBefore";
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
