@@ -28,7 +28,6 @@ import java.util.UUID;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.logger.LogLevels.ERROR;
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.OFF;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
@@ -147,8 +146,8 @@ public class JDILogger implements ILogger {
         if (FAILED.equals(status) && ("on fail".equals(screenshotStrategy))) {
             try {
                 takeScreenshot();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ex) {
+                throw exception(ex, ex.getMessage());
             }
         }
         getLifecycle().stopStep(uuid);
