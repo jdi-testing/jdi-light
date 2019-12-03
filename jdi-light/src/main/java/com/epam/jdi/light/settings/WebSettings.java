@@ -129,7 +129,6 @@ public class WebSettings {
         fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_ELEMENT.getName());
         fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
         fillAction(p -> DOMAIN = p, "domain");
-        fillAction(p -> DOMAIN_DOCS = p, "domain_docs");
         if (DRIVER_NAME.equals(DEFAULT_DRIVER))
             fillAction(p -> DRIVER_NAME = p, DRIVER.getName());
         fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
