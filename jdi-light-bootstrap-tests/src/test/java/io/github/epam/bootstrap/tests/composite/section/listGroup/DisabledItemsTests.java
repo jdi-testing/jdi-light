@@ -58,11 +58,11 @@ public class DisabledItemsTests extends TestsInit {
                 .css("font-size", is("14px"));
     }
 
-    @Test(dataProvider = "listData")
-    public void listGroupClassesIsValidationTests(int num, String text) {
-        listGroupDisabledItems.listGroup.get(num).is()
+    @Test()
+    public void listGroupClassesIsDisabledValidationTest() {
+        listGroupDisabledItems.listGroup.get(1).is()
                 .displayed()
-                .enabled()
+                .disabled()
                 .core()
                 .hasClass(listClass);
     }
