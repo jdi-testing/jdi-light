@@ -10,15 +10,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.multiplebarsProgress;
+import static io.github.com.pages.BootstrapPage.multipleProgressBars;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class MultiplebarsProgressTests extends TestsInit {
+public class MultipleProgressBarsTests extends TestsInit {
 
-    private List<String> multipleprogressValues = Arrays.asList("15", "30", "20");
+    private List<String> multipleProgressBarsValues = Arrays.asList("15", "30", "20");
 
     @BeforeClass
     public void before() {
@@ -27,15 +27,15 @@ public class MultiplebarsProgressTests extends TestsInit {
     }
 
     @DataProvider
-    public Object[][] progressMultipleBarsData() {
+    public Object[][] multipleProgressBarsData() {
         return new Object[][] {
-                {multiplebarsProgress.getProgress(1), "rgba(0, 123, 255, 1)", "15", "0", "100"},
-                {multiplebarsProgress.getProgress(2), "rgba(40, 167, 69, 1)", "30", "0", "100"},
-                {multiplebarsProgress.getProgress(3), "rgba(23, 162, 184, 1)", "20", "0", "100"}
+                {multipleProgressBars.getProgress(1), "rgba(0, 123, 255, 1)", "15", "0", "100"},
+                {multipleProgressBars.getProgress(2), "rgba(40, 167, 69, 1)", "30", "0", "100"},
+                {multipleProgressBars.getProgress(3), "rgba(23, 162, 184, 1)", "20", "0", "100"}
         };
     }
 
-    @Test(dataProvider = "progressMultipleBarsData")
+    @Test(dataProvider = "multipleProgressBarsData")
     public void separateBarTest(Progress progress, String color, String value, String minValue, String maxValue) {
         baseValidation(progress);
         progress.is()
@@ -48,18 +48,18 @@ public class MultiplebarsProgressTests extends TestsInit {
     }
 
     @Test
-    public void entireMultiplebarsProgressTest() {
-        multiplebarsProgress.getProgresses().is().size(3);
-        multiplebarsProgress.is()
+    public void entireMultipleProgressBarsTest() {
+        multipleProgressBars.getProgresses().is().size(3);
+        multipleProgressBars.is()
                 .displayed()
                 .enabled();
-        assertThat(multiplebarsProgress.core().css("background-color"), is("rgba(233, 236, 239, 1)"));
-        baseValidation(multiplebarsProgress);
+        assertThat(multipleProgressBars.core().css("background-color"), is("rgba(233, 236, 239, 1)"));
+        baseValidation(multipleProgressBars);
     }
 
     @Test
     public void getValuesTest() {
-        assertThat(multiplebarsProgress.getValues(), is(multipleprogressValues));
-        assertThat(multiplebarsProgress.getValues().get(1), is("30"));
+        assertThat(multipleProgressBars.getValues(), is(multipleProgressBarsValues));
+        assertThat(multipleProgressBars.getValues().get(1), is("30"));
     }
 }

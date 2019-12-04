@@ -6,20 +6,17 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.buttonGroupBasicExample;
+import static io.github.com.pages.BootstrapPage.buttonGroupBasic;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
-
-/**
- * Created by Dmitrii Pavlov on 19.09.2019
- * Email: delnote@gmail.com; Skype: Dmitrii Pavlov
- */
-
-public class BasicExampleTests extends TestsInit {
+public class BasicTests extends TestsInit {
 
     private String leftButtonClickAlert = "Left Button Clicked!";
     private String middleButtonClickAlert = "Middle Button Clicked!";
     private String rightButtonClickAlert = "Right Button Clicked!";
+    private String leftButtonText = "Left";
+    private String middleButtonText = "Middle";
+    private String rightButtonText = "Right";
 
 
     @BeforeMethod
@@ -30,37 +27,44 @@ public class BasicExampleTests extends TestsInit {
 
     @Test
     public void leftButtonTests() {
-        buttonGroupBasicExample.leftButton.is()
+        buttonGroupBasic.leftButton.is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("btn btn-secondary")
                 .css("font-size", "16px");
-        buttonGroupBasicExample.leftButton.click();
+        buttonGroupBasic.leftButton.click();
         validateAlert(is(leftButtonClickAlert));
     }
 
     @Test
     public void middleButtonTests() {
-        buttonGroupBasicExample.middleButton.is()
+        buttonGroupBasic.middleButton.is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("btn btn-secondary")
                 .css("font-size", "16px");
-        buttonGroupBasicExample.middleButton.click();
+        buttonGroupBasic.middleButton.click();
         validateAlert(is(middleButtonClickAlert));
     }
 
     @Test
+    public void buttonGroupTextTest() {
+        buttonGroupBasic.leftButton.is().text(leftButtonText);
+        buttonGroupBasic.middleButton.is().text(middleButtonText);
+        buttonGroupBasic.rightButton.is().text(rightButtonText);
+    }
+
+    @Test
     public void rightButtonTests() {
-        buttonGroupBasicExample.rightButton.is()
+        buttonGroupBasic.rightButton.is()
                 .displayed()
                 .enabled()
                 .core()
                 .hasClass("btn btn-secondary")
                 .css("font-size", "16px");
-        buttonGroupBasicExample.rightButton.click();
+        buttonGroupBasic.rightButton.click();
         validateAlert(is(rightButtonClickAlert));
     }
 }

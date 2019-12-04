@@ -8,8 +8,12 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class ButtonGroupNesting extends Section {
 
-    @UI("//button[text()='1']") public Button one;
-    @UI("//button[text()='2']") public Button two;
+    @UI("button[onclick*='Button 1']")
+    public Button one;
+
+    @UI("button[onclick*='Button 2']")
+    public Button two;
+
     @JDropdown(expand = ".btn-group",
             value = ".dropdown-menu",
             list = ".dropdown-item")

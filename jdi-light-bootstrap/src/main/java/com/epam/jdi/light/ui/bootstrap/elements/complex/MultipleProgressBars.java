@@ -8,7 +8,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MultiplebarsProgress extends UIBaseElement {
+public class MultipleProgressBars extends UIBaseElement {
 
     @UI(".progress-bar")
     private JList<Progress> barsList;
