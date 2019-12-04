@@ -13,7 +13,7 @@ import selenium.site.sections.LoginForm;
 
 @SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
-                                public class SiteJdi {
+public class SiteJdi {
     public static HomePage homePage;
     public static ContactPage contactPage;
     public static JDIPerformancePage performancePage;
