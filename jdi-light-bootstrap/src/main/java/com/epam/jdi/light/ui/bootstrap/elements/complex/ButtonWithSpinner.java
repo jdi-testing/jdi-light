@@ -10,11 +10,8 @@ import com.epam.jdi.light.ui.html.elements.common.TextField;
  * To see an example of Button With Spinner web element please visit https://getbootstrap.com/docs/4.3/components/spinners/#buttons
  */
 
-public class ButtonWithSpinner extends Button implements PageObject {
+public class ButtonWithSpinner extends Button {
 
     @UI("[class*='spinner']")
     public Spinner spinner;
-
-    @UI("[class*='spinner'] + span")
-    public TextField span;
 }
