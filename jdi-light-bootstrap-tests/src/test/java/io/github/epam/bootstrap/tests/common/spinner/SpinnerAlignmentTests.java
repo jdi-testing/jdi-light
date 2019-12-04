@@ -1,6 +1,6 @@
-package io.github.epam.bootstrap.tests.composite.section.spinner;
+package io.github.epam.bootstrap.tests.common.spinner;
 
-import io.github.com.sections.spinner.Spinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -24,22 +24,22 @@ public class SpinnerAlignmentTests extends TestsInit {
     @DataProvider
     public Object[][] spinnerData() {
         return new Object[][]{
-                {spinnerAlignment.spinnerLeft},
-                {spinnerAlignment.flexJustifySpinner},
-                {spinnerAlignment.flexAlignCenterSpinner},
-                {spinnerAlignment.clearfixSpinner},
-                {spinnerAlignment.textCenterSpinner},
+                {spinnerAlignment.spinnerSectionLeft},
+                {spinnerAlignment.flexJustifySpinnerSection},
+                {spinnerAlignment.flexAlignCenterSpinnerSection},
+                {spinnerAlignment.clearfixSpinnerSection},
+                {spinnerAlignment.textCenterSpinnerSection},
         };
     }
 
     @DataProvider
     public Object[][] spinnerStyleData() {
         return new Object[][]{
-                {spinnerAlignment.spinnerLeft, spinnerMarginStyle},
-                {spinnerAlignment.flexJustifySpinner, spinnerJustifyContentStyle},
-                {spinnerAlignment.flexAlignCenterSpinner, spinnerAlignCenterStyle},
-                {spinnerAlignment.clearfixSpinner, spinnerClearfixStyle},
-                {spinnerAlignment.textCenterSpinner, spinnerTextCenterStyle},
+                {spinnerAlignment.spinnerSectionLeft, spinnerMarginStyle},
+                {spinnerAlignment.flexJustifySpinnerSection, spinnerJustifyContentStyle},
+                {spinnerAlignment.flexAlignCenterSpinnerSection, spinnerAlignCenterStyle},
+                {spinnerAlignment.clearfixSpinnerSection, spinnerClearfixStyle},
+                {spinnerAlignment.textCenterSpinnerSection, spinnerTextCenterStyle},
         };
     }
 

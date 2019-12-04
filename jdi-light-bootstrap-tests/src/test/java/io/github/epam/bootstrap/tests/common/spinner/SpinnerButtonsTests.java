@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite.section.spinner;
+package io.github.epam.bootstrap.tests.common.spinner;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
@@ -21,7 +21,7 @@ import static org.testng.Assert.assertTrue;
 public class SpinnerButtonsTests extends TestsInit {
 
     private final String buttonText = "Loading...";
-    private final String spinnerClass = "spinner-border";
+    private final String spinnerClassName = "spinner-border";
 
     @BeforeMethod
     public void before() {
@@ -45,7 +45,7 @@ public class SpinnerButtonsTests extends TestsInit {
 
     @Test()
     public void checkSpinnerInButtonWithText() {
-        buttonWithSpinnerAndText.spinner.is().core().hasClass(spinnerClass);
+        buttonWithSpinnerAndText.spinner.is().core().hasClass(spinnerClassName);
         buttonWithSpinnerAndText.spinner
                 .is()
                 .displayed()
@@ -55,8 +55,8 @@ public class SpinnerButtonsTests extends TestsInit {
 
     @Test()
     public void checkButtonWithoutText() {
-        buttonWithSpinner.span.assertThat().core().css("overflow", "hidden");
-        buttonWithSpinnerAndText.assertThat().text(is(buttonText));
+        buttonWithSpinner.assertThat().text(is(buttonText));
+
     }
 
     @Test()

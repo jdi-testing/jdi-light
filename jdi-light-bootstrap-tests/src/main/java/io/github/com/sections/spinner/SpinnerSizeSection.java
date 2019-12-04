@@ -7,15 +7,15 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 public class SpinnerSizeSection extends Section {
 
     @UI(".spinner-border-sm")
-    public Spinner smallSpinnerSection;
+    public Spinner smallSpinner;
 
     @UI(".spinner-grow-sm")
-    public Spinner smallGrowingSpinnerSection;
+    public Spinner smallGrowingSpinner;
 
     @UI("#spinBorder")
-    public Spinner spinnerSection;
+    public Spinner spinner;
 
     @UI("#spinGrow")
-    public Spinner growingSpinnerSection;
+    public Spinner growingSpinner;
 
 }

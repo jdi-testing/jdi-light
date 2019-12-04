@@ -1,6 +1,6 @@
-package io.github.epam.bootstrap.tests.composite.section.spinner;
+package io.github.epam.bootstrap.tests.common.spinner;
 
-import io.github.com.sections.spinner.Spinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
