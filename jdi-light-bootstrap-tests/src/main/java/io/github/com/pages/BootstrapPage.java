@@ -8,7 +8,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
-import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
@@ -135,9 +134,9 @@ import io.github.com.sections.pagination.PaginationSizeBig;
 import io.github.com.sections.pagination.PaginationSizeSmall;
 import io.github.com.sections.pagination.PaginationStates;
 import io.github.com.sections.progress.ProgressSection;
-import io.github.com.sections.spinner.GrowingSpinners;
-import io.github.com.sections.spinner.SpinnerAlignment;
-import io.github.com.sections.spinner.SpinnerSize;
+import io.github.com.sections.spinner.GrowingSpinnersSection;
+import io.github.com.sections.spinner.SpinnerAlignmentSection;
+import io.github.com.sections.spinner.SpinnerSizeSection;
 
 public class BootstrapPage extends WebPage {
     //region Simple Elements
@@ -224,21 +223,21 @@ public class BootstrapPage extends WebPage {
     @UI("#btn-primary")
     public static ButtonWithBadge buttonWithBadge;
     @UI("#spinner-text-primary")
-    public static ColorSpinner spinnerWithTextPrimary;
+    public static Spinner spinnerWithTextPrimary;
     @UI("#spinner-text-secondary")
-    public static ColorSpinner spinnerWithTextSecondary;
+    public static Spinner spinnerWithTextSecondary;
     @UI("#spinner-text-success")
-    public static ColorSpinner spinnerWithTextSuccess;
+    public static Spinner spinnerWithTextSuccess;
     @UI("#spinner-text-danger")
-    public static ColorSpinner spinnerWithTextDanger;
+    public static Spinner spinnerWithTextDanger;
     @UI("#spinner-text-warning")
-    public static ColorSpinner spinnerWithTextWarning;
+    public static Spinner spinnerWithTextWarning;
     @UI("#spinner-text-info")
-    public static ColorSpinner spinnerWithTextInfo;
+    public static Spinner spinnerWithTextInfo;
     @UI("#spinner-text-light")
-    public static ColorSpinner spinnerWithTextLight;
+    public static Spinner spinnerWithTextLight;
     @UI("#spinner-text-dark")
-    public static ColorSpinner spinnerWithTextDark;
+    public static Spinner spinnerWithTextDark;
     @UI("#tooltipOnTop")
     public static Tooltip tooltipOnTopButton;
     @UI("#tooltipOnBottom")
@@ -599,9 +598,9 @@ public class BootstrapPage extends WebPage {
     @UI("#multiple-inputs")
     public static MultipleInputs multipleInputs;
     @UI("#growing-spinners")
-    public static GrowingSpinners growingSpinners;
+    public static GrowingSpinnersSection growingSpinners;
     @UI("#spinner-size")
-    public static SpinnerSize spinnerSize;
+    public static SpinnerSizeSection spinnerSize;
     @UI("body")
     public static CheckboxesAndRadiosWithoutLabels checkboxesAndRadiosWithoutLabels;
     @UI("#modalMdo")
@@ -665,7 +664,7 @@ public class BootstrapPage extends WebPage {
     @UI("#toastCenterTop")
     public static Toast toastWithCenterAlign;
     @UI("#spinner-alignment")
-    public static SpinnerAlignment spinnerAlignment;
+    public static SpinnerAlignmentSection spinnerAlignment;
     @UI("body")
     public static CheckboxAndRadioButtonCustomDisabled checkboxAndRadioButtonCustomDisabled;
     @UI("body")

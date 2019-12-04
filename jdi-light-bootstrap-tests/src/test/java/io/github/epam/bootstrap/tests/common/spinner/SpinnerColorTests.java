@@ -1,6 +1,6 @@
-package io.github.epam.bootstrap.tests.common;
+package io.github.epam.bootstrap.tests.common.spinner;
 
-import com.epam.jdi.light.ui.bootstrap.elements.common.ColorSpinner;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -19,7 +19,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.StringContains.containsString;
 
-public class ColorSpinnersTests extends TestsInit {
+public class SpinnerColorTests extends TestsInit {
 
     @DataProvider(name = "Color Spinners")
     public static Object[][] colorSpinners() {
@@ -42,24 +42,25 @@ public class ColorSpinnersTests extends TestsInit {
     }
 
     @Test(dataProvider = "Color Spinners")
-    public void assertColorTests(ColorSpinner colorSpinner, String color) {
+    public void assertColorTests(Spinner colorSpinner, String color) {
+
         colorSpinner.is().color(color);
     }
 
     @Test(dataProvider = "Color Spinners")
-    public void assertSpinnerColorTests(ColorSpinner colorSpinner, String color) {
+    public void assertSpinnerColorTests(Spinner colorSpinner, String color) {
         colorSpinner.is()
                 .core()
                 .cssClass(containsString(color));
     }
 
     @Test(dataProvider = "Color Spinners")
-    public void assertColorByHasClassTests(ColorSpinner colorSpinner, String color) {
+    public void assertColorByHasClassTests(Spinner colorSpinner, String color) {
         colorSpinner.core().hasClass("spinner-border" + color);
     }
 
     @Test(dataProvider = "Color Spinners")
-    public void isValidationTest(ColorSpinner colorSpinner, String __) {
+    public void isValidationTest(Spinner colorSpinner, String __) {
         colorSpinner.is()
                 .displayed()
                 .core()

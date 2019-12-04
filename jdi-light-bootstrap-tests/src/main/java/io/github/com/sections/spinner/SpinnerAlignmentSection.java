@@ -1,8 +1,10 @@
 package io.github.com.sections.spinner;
 
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 
-public class SpinnerAlignment extends Spinner {
+public class SpinnerAlignmentSection extends Section {
 
     @UI("//div[@class='border mb-3 p-3']")
     public Spinner spinnerLeft;
