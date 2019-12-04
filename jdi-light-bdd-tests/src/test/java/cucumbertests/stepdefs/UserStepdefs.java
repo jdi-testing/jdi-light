@@ -1,4 +1,4 @@
-package cucmberTests.stepdefs;
+package cucumbertests.stepdefs;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -47,6 +47,7 @@ public class UserStepdefs {
         el.highlight();
         el.show();
     }
+
     @Given("^I should be logged in$")
     public void iShouldBeLogin() {
         String url = WebPage.getUrl();
@@ -72,11 +73,14 @@ public class UserStepdefs {
             assertTrue(ex.getLocalizedMessage().contains("FileInput 'Disabled File Input' is disabled. Can't upload file"));
         }
     }
+
     @When("^I select \"([^\"]*)\" disabled option \"([^\"]*)\"")
     public void iSelectDisabled(String name, String option) {
         try {
             multiSelect(name, asList(option));
             fail("Select disabled should throw exception");
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {
+        }
     }
+
 }
