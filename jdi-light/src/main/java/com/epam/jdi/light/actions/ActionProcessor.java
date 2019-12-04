@@ -27,7 +27,7 @@ import static com.epam.jdi.light.actions.ActionHelper.BEFORE_STEP_ACTION;
 import static com.epam.jdi.light.actions.ActionHelper.fillTemplate;
 import static com.epam.jdi.light.actions.ActionHelper.getJpClass;
 import static com.epam.jdi.light.actions.ActionHelper.getJpMethod;
-import static com.epam.jdi.light.actions.ActionOverrideUtils.GetOverrideAction;
+import static com.epam.jdi.light.actions.ActionOverrideUtils.getOverrideAction;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
@@ -74,7 +74,7 @@ public class ActionProcessor {
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            throw exception(ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
+            throw exception(ex, ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
         }
     }
 
@@ -116,12 +116,13 @@ public class ActionProcessor {
     }
 
     public static Object stableAction(ProceedingJoinPoint jp) {
-        String exception = "";
+        String exceptionMsg = "";
         JDIAction ja = getJpMethod(jp).getMethod().getAnnotation(JDIAction.class);
         JDIBase obj = getJdi(jp);
         JFunc1<JDIBase, Object> overrideAction = getOverride(jp, obj);
         int timeout = getTimeout(ja, obj);
         long start = currentTimeMillis();
+        Throwable exception = null;
         do {
             try {
                 Object result = overrideAction != null
@@ -129,18 +130,19 @@ public class ActionProcessor {
                 if (!condition(jp)) continue;
                 return result;
             } catch (Throwable ex) {
+                exception = ex;
                 try {
-                    exception = safeException(ex);
+                    exceptionMsg = safeException(ex);
                     Thread.sleep(200);
                 } catch (Exception ignore) {
                 }
             }
         } while (currentTimeMillis() - start < timeout * 1000);
-        throw exception(getFailedMessage(jp, exception));
+        throw exception(exception, getFailedMessage(jp, exceptionMsg));
     }
 
     private static JFunc1<JDIBase, Object> getOverride(ProceedingJoinPoint jp, JDIBase obj) {
-        return obj != null ? GetOverrideAction(jp) : null;
+        return obj != null ? getOverrideAction(jp) : null;
     }
 
     private static int getTimeout(JDIAction ja, IBaseElement obj) {
@@ -161,7 +163,7 @@ public class ActionProcessor {
             ));
             return fillTemplate(result, jp, method);
         } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: " +
+            throw exception(ex, "Surround method issue: " +
                     "Can't get failed message: " + safeException(ex));
         }
     }
@@ -190,7 +192,7 @@ public class ActionProcessor {
             return AFTER_STEP_ACTION.execute(jp, result);
         } catch (Throwable ex) {
             Object element = jp.getThis() != null ? jp.getThis() : new Object();
-            throw exception(ACTION_FAILED.execute(element, safeException(ex)));
+            throw exception(ex, ACTION_FAILED.execute(element, safeException(ex)));
         }
     }
 }

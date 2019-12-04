@@ -127,7 +127,6 @@ public class InitActions {
             }))
     );
 
-    public static void init() {}
     private static void webPageSetup(SiteInfo info) {
         WebPage page = (WebPage) info.instance;
         defaultSetup(info, page);
@@ -170,7 +169,7 @@ public class InitActions {
                     if (hasAnnotation(info.field, annotation))
                         aRule.value.action.execute(jdi.base(), info.field.getAnnotation(annotation), info.field);
                 } catch (Exception ex) {
-                    throw exception("Setup element '%s' with Annotation '%s' failed", info.name(), aRule.key);
+                    throw exception(ex, "Setup element '%s' with Annotation '%s' failed", info.name(), aRule.key);
                 }
             }
         }
@@ -208,21 +207,21 @@ public class InitActions {
         try {
             return ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
         } catch (Exception ex) {
-            throw exception( "'%s' is List but has no Generic types", field.getName());
+            throw exception(ex, "'%s' is List but has no Generic types", field.getName());
         }
     }
     public static Class<?> getGenericType(Field field) {
         try {
             return (Class<?>)((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
         } catch (Exception ex) {
-            throw exception( "'%s' is List but has no Generic types", field.getName());
+            throw exception(ex, "'%s' is List but has no Generic types", field.getName());
         }
     }
     public static Class<?> getGenericType(Class<?> clazz) {
         try {
             return (Class<?>) ((ParameterizedType) clazz.getGenericSuperclass()).getActualTypeArguments()[0];
         } catch (Exception ex) {
-            throw exception("'%s' is List but has no Generic type", clazz.getName());
+            throw exception(ex, "'%s' is List but has no Generic type", clazz.getName());
         }
     }
 }

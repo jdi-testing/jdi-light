@@ -19,7 +19,7 @@ public class CheckboxesAndRadiosWithoutLabelsTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
+        bsPage.open();
     }
 
     @Test

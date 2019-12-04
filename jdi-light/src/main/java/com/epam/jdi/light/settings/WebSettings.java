@@ -33,6 +33,17 @@ import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
+import static com.epam.jdi.light.common.Property.BROWSER_SIZE_PROPERTY;
+import static com.epam.jdi.light.common.Property.CHROME_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.DRIVER;
+import static com.epam.jdi.light.common.Property.DRIVERS_FOLDER_PATH;
+import static com.epam.jdi.light.common.Property.DRIVERS_VERSION;
+import static com.epam.jdi.light.common.Property.ELEMENT_SEARCH_STRATEGY;
+import static com.epam.jdi.light.common.Property.FF_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.IE_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.KILL_BROWSER_PROPERTY;
+import static com.epam.jdi.light.common.Property.SCREENS_FOLDER;
+import static com.epam.jdi.light.common.Property.SMART_LOCATORS;
 import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT;
 import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_PAGE;
 import static com.epam.jdi.light.common.Property.DOMAIN_PROPERTY;
@@ -124,16 +135,18 @@ public class WebSettings {
         fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_PAGE.getName());
         fillAction(p -> DOMAIN = p, DOMAIN_PROPERTY.getName());
         if (DRIVER_NAME.equals(DEFAULT_DRIVER))
-            fillAction(p -> DRIVER_NAME = p, "driver");
+            fillAction(p -> DRIVER_NAME = p, DRIVER.getName());
         fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
                 ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
-                    ? PRELATEST_VERSION : p, "driver.version");
-        fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
-        fillAction(p -> SCREEN_PATH = p, "screens.folder");
-        // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
-        fillAction(p -> KILL_BROWSER = p, "browser.kill");
-        fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
-        fillAction(p -> BROWSER_SIZE = p, "browser.size");
+                ? PRELATEST_VERSION : p, DRIVERS_VERSION.getName());
+        fillAction(p -> DRIVERS_FOLDER = p, DRIVERS_FOLDER_PATH.getName());
+        fillAction(p -> SCREEN_PATH = p, SCREENS_FOLDER.getName());
+        fillAction(p -> logger.setScreenshotStrategy(p), "screenshot.strategy");
+        fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
+        fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY.getName());
+        fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
+        fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY.getName());
+        fillAction(p -> BROWSER_SIZE = p, BROWSER_SIZE_PROPERTY.getName());
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
         fillAction(SoftAssert::setAssertType, "assert.type");
@@ -142,13 +155,13 @@ public class WebSettings {
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> SMART_SEARCH_LOCATORS =
-            filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
+                filter(p.split(";"), l -> isNotBlank(l)), SMART_LOCATORS.getName());
 
-        loadCapabilities("chrome.capabilities.path",
+        loadCapabilities(CHROME_CAPABILITIES_PATH.getName(),
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
-        loadCapabilities("ff.capabilities.path",
+        loadCapabilities(FF_CAPABILITIES_PATH.getName(),
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
-        loadCapabilities("ie.capabilities.path",
+        loadCapabilities(IE_CAPABILITIES_PATH.getName(),
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();

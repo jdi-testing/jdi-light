@@ -23,7 +23,9 @@ public class Link extends UIBaseElement<LinkAssert>
 
     public URL url() {
         try { return new URL(ref());
-        } catch (MalformedURLException ex) { throw exception(safeException(ex)); }
+        } catch (MalformedURLException ex) {
+            throw exception(ex, safeException(ex));
+        }
     }
     @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
     public String alt() { return uiElement.attr("alt"); }

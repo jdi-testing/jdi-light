@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
 
 import java.io.File;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
@@ -47,7 +48,7 @@ public class FileAssert extends BaseAssert {
             assertThat(readFileToString(file, "UTF-8"), text);
             return this;
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            throw exception(ex, "Error reading file");
         }
     }
     public FileAssert text(String text) { return text(is(text)); }

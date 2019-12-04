@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.badgeSecondary;
 import static io.github.com.pages.BootstrapPage.badgeSuccess;
+import static io.github.com.pages.BootstrapPage.buttonWithBadge;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
@@ -16,6 +17,7 @@ import static org.testng.Assert.assertTrue;
 public class BadgeTests extends TestsInit {
     private String badgeSecondaryText = "BADGE";
     private String badgeSuccessText = "Github JDI";
+    private String badgeInButtonText = "9";
 
     @BeforeMethod
     public void before() {
@@ -55,5 +57,11 @@ public class BadgeTests extends TestsInit {
                 .attr("id", "badge-success")
                 .attr("alt", "Github JDI Link")
                 .tag(is("a"));
+    }
+
+    @Test
+    public void checkBadgeInButton(){
+        buttonWithBadge.badge.is().displayed();
+        buttonWithBadge.badge.is().text(badgeInButtonText);
     }
 }

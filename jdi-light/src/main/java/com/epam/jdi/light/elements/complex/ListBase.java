@@ -40,6 +40,17 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     protected CacheValue<MapArray<String, T>> map = new CacheValue<>(MapArray::new);
     protected String titleFieldName = null;
 
+    public static JFunc1<Field[], String> GET_TITLE_FIELD_NAME = fields -> {
+        Field expectedField = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
+        if (expectedField != null) {
+            return expectedField.getName();
+        }
+        List<Field> titles = LinqUtils.filter(fields, f -> f.getType() == Label.class);
+        return titles.size() == 1
+                ? titles.get(0).getName()
+                : null;
+    };
+
     protected WebList list;
     public WebList list() {
         if (list == null) {
@@ -262,7 +273,9 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
             if (initClass == WebElement.class)
                 initClass = UIElement.class;
             this.initClass = initClass;
-        } catch (Exception ex) { throw  exception("Can't init WebList. Weblist elements should extend UIElement"); }
+        } catch (Exception ex) {
+            throw exception(ex, "Can't init WebList. Weblist elements should extend UIElement");
+        }
     }
     private T toT(UIElement el) {
         try {
@@ -279,19 +292,11 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
             T t = (T) info.instance;
             t.base().setCore(el);
             return t;
-        } catch (Exception ex) { throw exception("Can't init new element for list"); }
+        } catch (Exception ex) {
+            throw exception(ex, "Can't init new element for list");
+        }
     }
 
-    public static JFunc1<Field[], String> GET_TITLE_FIELD_NAME = fields -> {
-        Field expectedField = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
-        if (expectedField != null) {
-            return expectedField.getName();
-        }
-        List<Field> titles = LinqUtils.filter(fields, f -> f.getType() == Label.class);
-        return titles.size() == 1
-                ? titles.get(0).getName()
-                : null;
-    };
     protected String elementTitle(UIElement el) {
         if (titleFieldName == null)
             titleFieldName = GET_TITLE_FIELD_NAME.execute(initClass.getFields());

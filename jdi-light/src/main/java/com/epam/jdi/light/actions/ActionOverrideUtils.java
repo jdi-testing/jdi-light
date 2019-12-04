@@ -15,15 +15,15 @@ public class ActionOverrideUtils {
     private ActionOverrideUtils() {
     }
 
-    public static void OverrideFunction(JFunc1<ProceedingJoinPoint, Boolean> condition, JFunc1<JDIBase, Object> func) {
+    public static void overrideFunction(JFunc1<ProceedingJoinPoint, Boolean> condition, JFunc1<JDIBase, Object> func) {
         OVERRIDE_ACTIONS_LIST.add(condition, func);
     }
 
-    public static void OverrideFunction(String actionName, JFunc1<JDIBase, Object> func) {
+    public static void overrideFunction(String actionName, JFunc1<JDIBase, Object> func) {
         OVERRIDE_ACTIONS_LIST.add(jp -> jp.getSignature().getName().equals(actionName), func);
     }
 
-    public static void OverrideFunction(String typeName, String actionName, JFunc1<JDIBase, Object> func) {
+    public static void overrideFunction(String typeName, String actionName, JFunc1<JDIBase, Object> func) {
         OVERRIDE_ACTIONS_LIST.add(jp -> getJpTypeName(jp).equals(typeName)
                 && jp.getSignature().getName().equals(actionName), func);
     }
@@ -32,28 +32,28 @@ public class ActionOverrideUtils {
         return ((DriverBase) jp.getThis()).typeName;
     }
 
-    public static void OverrideAction(JFunc1<ProceedingJoinPoint, Boolean> condition, JAction1<JDIBase> action) {
-        OverrideFunction(condition, jdi -> {
+    public static void overrideAction(JFunc1<ProceedingJoinPoint, Boolean> condition, JAction1<JDIBase> action) {
+        overrideFunction(condition, jdi -> {
             action.execute(jdi);
             return null;
         });
     }
 
-    public static void OverrideAction(String actionName, JAction1<JDIBase> action) {
-        OverrideFunction(actionName, jdi -> {
+    public static void overrideAction(String actionName, JAction1<JDIBase> action) {
+        overrideFunction(actionName, jdi -> {
             action.execute(jdi);
             return null;
         });
     }
 
-    public static void OverrideAction(String className, String actionName, JAction1<JDIBase> action) {
-        OverrideFunction(className, actionName, jdi -> {
+    public static void overrideAction(String className, String actionName, JAction1<JDIBase> action) {
+        overrideFunction(className, actionName, jdi -> {
             action.execute(jdi);
             return null;
         });
     }
 
-    public static JFunc1<JDIBase, Object> GetOverrideAction(ProceedingJoinPoint jp) {
+    public static JFunc1<JDIBase, Object> getOverrideAction(ProceedingJoinPoint jp) {
         if (OVERRIDE_ACTIONS_LIST.isEmpty()) return null;
         for (Pair<JFunc1<ProceedingJoinPoint, Boolean>, JFunc1<JDIBase, Object>> override : OVERRIDE_ACTIONS_LIST)
             if (override.key.execute(jp))
