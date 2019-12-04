@@ -24,22 +24,22 @@ public class SpinnerAlignmentTests extends TestsInit {
     @DataProvider
     public Object[][] spinnerData() {
         return new Object[][]{
-                {spinnerAlignment.spinnerSectionLeft},
-                {spinnerAlignment.flexJustifySpinnerSection},
-                {spinnerAlignment.flexAlignCenterSpinnerSection},
-                {spinnerAlignment.clearfixSpinnerSection},
-                {spinnerAlignment.textCenterSpinnerSection},
+                {spinnerAlignment.spinnerLeft},
+                {spinnerAlignment.flexJustifySpinner},
+                {spinnerAlignment.flexAlignCenterSpinner},
+                {spinnerAlignment.clearfixSpinner},
+                {spinnerAlignment.textCenterSpinner},
         };
     }
 
     @DataProvider
     public Object[][] spinnerStyleData() {
         return new Object[][]{
-                {spinnerAlignment.spinnerSectionLeft, spinnerMarginStyle},
-                {spinnerAlignment.flexJustifySpinnerSection, spinnerJustifyContentStyle},
-                {spinnerAlignment.flexAlignCenterSpinnerSection, spinnerAlignCenterStyle},
-                {spinnerAlignment.clearfixSpinnerSection, spinnerClearfixStyle},
-                {spinnerAlignment.textCenterSpinnerSection, spinnerTextCenterStyle},
+                {spinnerAlignment.spinnerLeft, spinnerMarginStyle},
+                {spinnerAlignment.flexJustifySpinner, spinnerJustifyContentStyle},
+                {spinnerAlignment.flexAlignCenterSpinner, spinnerAlignCenterStyle},
+                {spinnerAlignment.clearfixSpinner, spinnerClearfixStyle},
+                {spinnerAlignment.textCenterSpinner, spinnerTextCenterStyle},
         };
     }
 

@@ -7,18 +7,18 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 public class SpinnerAlignmentSection extends Section {
 
     @UI("//div[@class='border mb-3 p-3']")
-    public Spinner spinnerSectionLeft;
+    public Spinner spinnerLeft;
 
     @UI("//div[@class='d-flex justify-content-center border mb-3 p-3']")
-    public Spinner flexJustifySpinnerSection;
+    public Spinner flexJustifySpinner;
 
     @UI("//div[@class='d-flex align-items-center border mb-3 p-3']")
-    public Spinner flexAlignCenterSpinnerSection;
+    public Spinner flexAlignCenterSpinner;
 
     @UI("//div[@class='clearfix border mb-3 p-3']")
-    public Spinner clearfixSpinnerSection;
+    public Spinner clearfixSpinner;
 
     @UI("//div[@class='text-center mb-3 border p-3']")
-    public Spinner textCenterSpinnerSection;
+    public Spinner textCenterSpinner;
 
 }
