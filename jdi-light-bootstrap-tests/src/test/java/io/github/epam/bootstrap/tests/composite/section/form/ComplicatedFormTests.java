@@ -1,5 +1,6 @@
 package io.github.epam.bootstrap.tests.composite.section.form;
 
+import io.github.com.entities.Superhero;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -38,15 +39,21 @@ public class ComplicatedFormTests extends TestsInit {
 
     @Test
     public void submitFormTest() {
-        setDefaultValues();
+        setDefaultValues(TEMPLATE_HERO);
         superheroForm.submit(EXAMPLE_HERO);
         lastLogEntry.has().text(containsString(logLineSubmit));
         superheroForm.check(EXAMPLE_HERO);
     }
 
     @Test
+    public void validateFormBeforeSubmitTest() {
+        setDefaultValues(EXAMPLE_HERO);
+        superheroForm.check(EXAMPLE_HERO);
+    }
+
+    @Test
     public void clearFormTest() {
-        setDefaultValues();
+        setDefaultValues(TEMPLATE_HERO);
         superheroForm.clear(EXAMPLE_HERO);
         lastLogEntry.has().text(containsString(logLineClear));
         superheroForm.check(TEMPLATE_HERO);
@@ -57,12 +64,12 @@ public class ComplicatedFormTests extends TestsInit {
         baseValidation(superheroForm);
     }
 
-    private void setDefaultValues() {
-        superheroForm.currentAlias.setValue(TEMPLATE_HERO.currentAlias);
-        superheroForm.alterEgo.setValue(TEMPLATE_HERO.alterEgo);
-        superheroForm.species.setValue(TEMPLATE_HERO.species);
-        superheroForm.selectUniverse.setValue(TEMPLATE_HERO.selectUniverse);
-        superheroForm.superheroRange.setValue(TEMPLATE_HERO.superheroRange);
-        superheroForm.superheroSwitch.setValue(TEMPLATE_HERO.superheroSwitch);
+    private void setDefaultValues(Superhero superhero) {
+        superheroForm.currentAlias.setValue(superhero.currentAlias);
+        superheroForm.alterEgo.setValue(superhero.alterEgo);
+        superheroForm.species.setValue(superhero.species);
+        superheroForm.selectUniverse.setValue(superhero.selectUniverse);
+        superheroForm.superheroRange.setValue(superhero.superheroRange);
+        superheroForm.superheroSwitch.setValue(superhero.superheroSwitch);
     }
 }
