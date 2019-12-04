@@ -1,9 +1,10 @@
 package io.github.com.sections.spinner;
 
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 
-public class GrowingSpinnersSection extends SpinnerSection {
+public class GrowingSpinnersSection extends Section {
 
     @UI(".text-primary")
     public Spinner primarySpinner;
