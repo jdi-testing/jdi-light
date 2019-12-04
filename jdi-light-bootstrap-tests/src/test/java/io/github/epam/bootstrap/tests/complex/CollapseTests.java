@@ -45,7 +45,7 @@ public class CollapseTests extends TestsInit {
         collapseLink.is().expanded();
         collapseLink.value().is().text(cardOneText);
 
-        collapseLink.close();
+        collapseLink.collapse();
         collapseLink.is().collapsed();
     }
 
@@ -57,7 +57,7 @@ public class CollapseTests extends TestsInit {
         collapseToggleOne.is().expanded();
         collapseToggleOne.value().is().text(cardTwoText);
 
-        collapseToggleOne.close();
+        collapseToggleOne.collapse();
         collapseToggleOne.is().collapsed();
     }
 
@@ -69,7 +69,7 @@ public class CollapseTests extends TestsInit {
         collapseDataTarget.is().expanded();
         collapseDataTarget.value().is().text(cardOneText);
 
-        collapseDataTarget.close();
+        collapseDataTarget.collapse();
         collapseDataTarget.is().collapsed();
     }
 
@@ -81,7 +81,7 @@ public class CollapseTests extends TestsInit {
         collapseToggleTwo.is().expanded();
         collapseToggleTwo.value().is().text(cardThreeText);
 
-        collapseToggleTwo.close();
+        collapseToggleTwo.collapse();
         collapseToggleTwo.is().collapsed();
     }
 
@@ -94,7 +94,7 @@ public class CollapseTests extends TestsInit {
         collapseToggleBoth.value().is().text(cardTwoText);
         collapseToggleTwo.value().is().text(cardThreeText);
 
-        collapseToggleBoth.close();
+        collapseToggleBoth.collapse();
         collapseToggleBoth.is().collapsed();
     }
 
@@ -106,7 +106,7 @@ public class CollapseTests extends TestsInit {
         collapseGroupOne.is().expanded();
         collapseGroupOne.value().is().text(groupOneText);
 
-        collapseGroupOne.close();
+        collapseGroupOne.collapse();
         collapseGroupOne.is().collapsed();
     }
 
@@ -118,7 +118,7 @@ public class CollapseTests extends TestsInit {
         collapseGroupTwo.is().expanded();
         collapseGroupTwo.value().is().text(groupTwoText);
 
-        collapseGroupTwo.close();
+        collapseGroupTwo.collapse();
         collapseGroupTwo.is().collapsed();
     }
 
@@ -130,7 +130,7 @@ public class CollapseTests extends TestsInit {
         collapseGroupThree.is().expanded();
         collapseGroupThree.value().is().text(groupThreeText);
 
-        collapseGroupThree.close();
+        collapseGroupThree.collapse();
         collapseGroupThree.is().collapsed();
     }
 
@@ -145,7 +145,7 @@ public class CollapseTests extends TestsInit {
         collapseGroupOne.isDisplayed();
         collapseGroupOne.isEnabled();
 
-        collapseGroupOne.close();
+        collapseGroupOne.collapse();
         collapseGroupOne.is().collapsed();
     }
 }
