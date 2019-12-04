@@ -54,6 +54,12 @@ import static java.util.Arrays.asList;
 
 @SuppressWarnings("PMD.ClassNamingConventions")
 public class PageFactory {
+
+    public static List<Class<?>> STOP_INIT_CLASSES = asList(
+            Object.class, WebPage.class, Section.class, UIElement.class,
+            UIBaseElement.class, UIListBase.class,
+            DataList.class, JList.class, WebList.class);
+
     // region initSite
     public static MapArray<String, JAction> PRE_INIT =
             new MapArray<>("WebSettings", WebSettings::init);
@@ -71,11 +77,6 @@ public class PageFactory {
             initialized = true;
         }
     }
-
-    public static List<Class<?>> STOP_INIT_CLASSES = asList(
-            Object.class, WebPage.class, Section.class, UIElement.class,
-            UIBaseElement.class, UIListBase.class,
-            DataList.class, JList.class, WebList.class);
 
     public static void initSite(Class<?> site) {
         preInit();
