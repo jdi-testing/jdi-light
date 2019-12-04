@@ -9,10 +9,10 @@ import selenium.entities.User;
 
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
+import static selenium.HomePage.leftNavigation;
+import static selenium.SiteSelenium.homePage;
+import static selenium.SiteSelenium.login;
 import static selenium.entities.TestDataUtils.TABLE_SNAPSHOOT;
-import static selenium.selenium.HomePage.leftNavigation;
-import static selenium.selenium.SiteSelenium.homePage;
-import static selenium.selenium.SiteSelenium.login;
 import static selenium.site.pages.JDIPerformancePage.textareaPerformance;
 import static selenium.site.pages.JDIPerformancePage.userNames;
 import static selenium.site.pages.JDIPerformancePage.usersTable;

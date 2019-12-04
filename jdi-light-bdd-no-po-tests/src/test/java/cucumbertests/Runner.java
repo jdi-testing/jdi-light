@@ -2,10 +2,10 @@ package cucumbertests;
 
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
-import cucumbertests.steps.User;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
+import cucumbertests.steps.User;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -16,7 +16,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 @RunWith(Cucumber.class)
 @CucumberOptions(
     features = "classpath:features"
-    , glue = {"com.epam.jdi.bdd", "cucmberTests"}
+        , glue = {"com.epam.jdi.bdd", "cucumberTests"}
     //, tags = {"@fail-test"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
