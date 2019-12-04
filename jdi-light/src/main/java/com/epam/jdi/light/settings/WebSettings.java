@@ -139,7 +139,7 @@ public class WebSettings {
                 ? PRELATEST_VERSION : p, DRIVERS_VERSION.getName());
         fillAction(p -> DRIVERS_FOLDER = p, DRIVERS_FOLDER_PATH.getName());
         fillAction(p -> SCREEN_PATH = p, SCREENS_FOLDER.getName());
-        // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
+        fillAction(p -> logger.setScreenshotStrategy(p), "screenshot.strategy");
         fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
         fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY.getName());
         fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
