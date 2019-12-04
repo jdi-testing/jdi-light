@@ -33,7 +33,7 @@ public enum Property {
             "Value of 'element.search.strategy' must be one of the following: 'strict', 'soft', 'visible, multiple', 'any, single'"),
     TIMEOUT_WAIT_PAGE("timeout.wait.page", "^[1-9][0-9]{1,2}$|^\\d$",
                               "Value of 'timeout.wait.page' must be an integer from 0 to 999."),
-    DOMAIN_PROPERTY("domain", "(https://|http://)?([a-zA-Z0-9|-]+[.][a-zA-Z0-9|-|.]+)[/]?(a-zA-Z0-9|-|.|/)*",
+    DOMAIN_PROPERTY("domain", "^(https:\\/\\/|http:\\/\\/)?([\\w][^#\\s!<>{}\\*]+)*$",
                             "Value of 'domain' must be a string with URL type: consists characters, digits, '/', '.' in appropriate sequence.");
 
     private final String name;
