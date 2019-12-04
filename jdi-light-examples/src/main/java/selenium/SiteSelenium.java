@@ -1,4 +1,4 @@
-package selenium.selenium;
+package selenium;
 
 import selenium.entities.User;
 
