@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Badge;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
 import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
@@ -14,29 +13,30 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithBadge;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.MultiplebarsProgress;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.MultipleProgressBars;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Link;
 import com.epam.jdi.light.ui.html.elements.common.Range;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.sections.ButtonAddons;
-import io.github.com.sections.ButtonToolbar;
 import io.github.com.sections.InputFileSection;
 import io.github.com.sections.Jumbotron;
 import io.github.com.sections.MediaObjectNesting;
 import io.github.com.sections.MediaObjectSample;
 import io.github.com.sections.Toast;
-import io.github.com.sections.buttongroup.ButtonGroupBasicExample;
+import io.github.com.sections.buttongroup.ButtonGroupBasic;
 import io.github.com.sections.buttongroup.ButtonGroupNesting;
 import io.github.com.sections.buttongroup.ButtonGroupSizing;
+import io.github.com.sections.buttongroup.ButtonGroupToolbar;
 import io.github.com.sections.buttongroup.ButtonGroupVerticalVariation;
-import io.github.com.sections.buttongroup.ButtonWithDropdown;
 import io.github.com.sections.card.CardBody;
 import io.github.com.sections.card.CardColumnsSection;
 import io.github.com.sections.card.CardDeckSection;
@@ -72,6 +72,7 @@ import io.github.com.sections.form.ReadonlyPlainText;
 import io.github.com.sections.form.Switches;
 import io.github.com.sections.inputgroup.CustomSelect;
 import io.github.com.sections.inputgroup.CustomSelectWithButton;
+import io.github.com.sections.inputgroup.InputGroupButtonWithDropdown;
 import io.github.com.sections.inputgroup.InputGroupCustomFileInput;
 import io.github.com.sections.inputgroup.InputGroupCustomUploadFile;
 import io.github.com.sections.inputgroup.InputGroupInputWithCheckBox;
@@ -216,9 +217,11 @@ public class BootstrapPage extends WebPage {
     @UI("#dismissible-alert")
     public static Alert dismissibleAlert;
     @UI("#badge-secondary")
-    public static Badge badgeSecondary;
+    public static Text badgeSecondary;
     @UI("#badge-success")
     public static Link badgeSuccess;
+    @UI("#btn-primary")
+    public static ButtonWithBadge buttonWithBadge;
     @UI("#spinner-text-primary")
     public static Spinner spinnerWithTextPrimary;
     @UI("#spinner-text-secondary")
@@ -274,7 +277,7 @@ public class BootstrapPage extends WebPage {
     @UI("#progress-backgrounds-red")
     public static Progress progressBackgroundRed;
     @UI("#progress-multiple-bars")
-    public static MultiplebarsProgress multiplebarsProgress;
+    public static MultipleProgressBars multipleProgressBars;
 
     @UI("//h4[.='Navbar - Containers']/../..")
     public static NavbarContainer navbarContainers;
@@ -475,13 +478,13 @@ public class BootstrapPage extends WebPage {
     //endregion
 
     @UI("#button-with-dropdown")
-    public static ButtonWithDropdown buttonWithDropdown;
+    public static InputGroupButtonWithDropdown inputGroupButtonWithDropdown;
     @UI("#segmented-button")
     public static SegmentedButton segmentedButton;
     @UI("#buttonToolbar1")
-    public static ButtonToolbar buttonToolbar;
+    public static ButtonGroupToolbar buttonGroupToolbar;
     @UI("#buttonToolbar2")
-    public static ButtonToolbar buttonToolbarWithInputField;
+    public static ButtonGroupToolbar buttonGroupToolbarWithInputField;
     @UI("#custom-select-01")
     public static CustomSelect customSelect;
     @UI("#custom-select-button-01")
@@ -497,7 +500,7 @@ public class BootstrapPage extends WebPage {
     @UI("#multiple-addons-2")
     public static InputGroupMultipleAddonsLower multipleAddonLower;
     @UI("#basic-example")
-    public static ButtonGroupBasicExample buttonGroupBasicExample;
+    public static ButtonGroupBasic buttonGroupBasic;
     @UI("#vertical-variation")
     public static ButtonGroupVerticalVariation buttonGroupVerticalVariation;
     @UI("#button-group-nesting")
