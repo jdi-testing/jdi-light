@@ -50,18 +50,6 @@ public class CollapseTests extends TestsInit {
     }
 
     @Test(priority = 2)
-    public void collapseButtonTest() {
-        collapseDataTarget.highlight();
-        collapseDataTarget.expand();
-
-        collapseDataTarget.is().expanded();
-        collapseDataTarget.value().is().text(cardOneText);
-
-        collapseDataTarget.collapse();
-        collapseDataTarget.is().collapsed();
-    }
-
-    @Test(priority = 3)
     public void collapseToggleOneTest() {
         collapseToggleOne.highlight();
         collapseToggleOne.expand();
@@ -71,6 +59,18 @@ public class CollapseTests extends TestsInit {
 
         collapseToggleOne.collapse();
         collapseToggleOne.is().collapsed();
+    }
+
+    @Test(priority = 3)
+    public void collapseButtonTest() {
+        collapseDataTarget.highlight();
+        collapseDataTarget.expand();
+
+        collapseDataTarget.is().expanded();
+        collapseDataTarget.value().is().text(cardOneText);
+
+        collapseDataTarget.collapse();
+        collapseDataTarget.is().collapsed();
     }
 
     @Test(priority = 4)
@@ -134,4 +134,18 @@ public class CollapseTests extends TestsInit {
         collapseGroupThree.is().collapsed();
     }
 
+    @Test
+    public void collapseGroupOneListTest() {
+        collapseGroupOne.highlight();
+        collapseGroupOne.expand();
+
+        collapseGroupOne.is().expanded();
+        collapseGroupOne.list().is().size(1);
+        collapseGroupOne.list().get(1).is().text(groupOneText);
+        collapseGroupOne.isDisplayed();
+        collapseGroupOne.isEnabled();
+
+        collapseGroupOne.collapse();
+        collapseGroupOne.is().collapsed();
+    }
 }
