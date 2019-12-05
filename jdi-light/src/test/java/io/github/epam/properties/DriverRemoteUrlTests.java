@@ -24,7 +24,8 @@ public class DriverRemoteUrlTests {
                 "http://remo#te.com",
                 "http://remote.com\\backslash\\url",
                 "localhost:8",
-                "http://10.1.21.0:8"};
+                "http://10.1.21.0:8",
+                ""};
     }
 
     @DataProvider
