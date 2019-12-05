@@ -16,12 +16,12 @@ public class ScreenshotStrategyTests {
 
     @DataProvider
     public static Object[] negativeData() {
-        return new Object[]{"onfail", "on", "", "0", "on-fail"};
+        return new Object[]{"onfail", "", "0", "on-fail"};
     }
 
     @DataProvider
     public static Object[] positiveData() {
-        return new Object[]{"off", "on fail"};
+        return new Object[]{"off", "on", "on fail"};
     }
 
     @Test(dataProvider = "negativeData")

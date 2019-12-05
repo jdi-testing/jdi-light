@@ -41,8 +41,8 @@ public enum Property {
             "Value of 'driver.remote.url' must be a string with URL type: consists characters, digits, '/', '.' or ':' in appropriate sequence."),
     LOG_LEVEL_PROPERTY("log.level", "OFF|FATAL|ERROR|WARNING|STEP|INFO|DEBUG|TRACE|ALL",
             "Value of 'log.level' must be: 'OFF', 'FATAL', 'ERROR', 'WARNING', 'STEP', 'INFO', 'DEBUG', 'TRACE' or 'ALL'."),
-    SCREENSHOT_STRATEGY_PROPERTY("screenshot.strategy", "(?i)off|on fail",
-            "Value of 'screenshot.strategy' must be either 'off' or 'on fail'.");
+    SCREENSHOT_STRATEGY_PROPERTY("screenshot.strategy", "off|on|on fail",
+            "Value of 'screenshot.strategy' must be either 'off', 'on' or 'on fail'.");
 
 
     private final String name;
