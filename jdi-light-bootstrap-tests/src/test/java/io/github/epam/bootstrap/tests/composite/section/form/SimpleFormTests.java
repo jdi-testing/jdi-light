@@ -41,7 +41,6 @@ public class SimpleFormTests extends TestsInit {
         setDefaultValues();
         supportMessageForm.submit(EXAMPLE_MESSAGE);
         lastLogEntry.has().text(containsString(logLineSubmit));
-        supportMessageForm.check(EXAMPLE_MESSAGE);
     }
 
     @Test
@@ -58,7 +57,6 @@ public class SimpleFormTests extends TestsInit {
         setDefaultValues();
         supportMessageForm.clear(EXAMPLE_MESSAGE);
         lastLogEntry.has().text(containsString(logLineClear));
-        supportMessageForm.check(TEMPLATE_MESSAGE);
     }
 
     @Test
