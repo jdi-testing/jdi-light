@@ -36,6 +36,8 @@ public class DriverRemoteUrlTests {
                 "remote.com",
                 "localhost:8080",
                 "localhost:80/wd/hub",
+                "http://localhost:8080",
+                "10.1.21.0:8080",
                 "www.remote.ru",
                 "http://10.1.21.0:8080"};
     }
