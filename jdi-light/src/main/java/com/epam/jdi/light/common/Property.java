@@ -30,7 +30,11 @@ public enum Property {
     KILL_BROWSER_PROPERTY("browser.kill", "afterAndBefore|after|before",
             "Value of 'browser.kill' must be one of the following:'afterAndBefore', 'after', 'before'"),
     ELEMENT_SEARCH_STRATEGY("element.search.strategy", "strict|soft|visible, multiple|any,\\s?single",
-            "Value of 'element.search.strategy' must be one of the following: 'strict', 'soft', 'visible, multiple', 'any, single'");
+            "Value of 'element.search.strategy' must be one of the following: 'strict', 'soft', 'visible, multiple', 'any, single'"),
+    TIMEOUT_WAIT_PAGE("timeout.wait.page", "^[1-9][0-9]{1,2}$|^\\d$",
+                              "Value of 'timeout.wait.page' must be an integer from 0 to 999."),
+    DOMAIN_PROPERTY("domain", "^(http:\\/\\/www\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*[\\.|:][a-z0-9]{2,5}(:[0-9]{1,5})?(\\/.*)?$",
+            "Value of 'domain' must be a string with URL type: consists characters, digits, '/', '.' or ':' in appropriate sequence.");
 
     private final String name;
     private final String check;
