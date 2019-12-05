@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite.section.listprogressbars;
+package io.github.epam.bootstrap.tests.common.progress;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
