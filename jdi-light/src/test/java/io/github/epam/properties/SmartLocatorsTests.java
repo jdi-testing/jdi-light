@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
-import static com.epam.jdi.light.common.Property.SMART_LOCATORS;
+import static com.epam.jdi.light.common.Property.SMART_LOCATORS_PROPERTY;
 import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
@@ -40,21 +40,20 @@ public class SmartLocatorsTests {
     @Test(dataProvider = "negativeData")
     public void negativeTest(String value) {
         Properties properties = new Properties();
-        properties.setProperty(SMART_LOCATORS.getName(), value);
+        properties.setProperty(SMART_LOCATORS_PROPERTY.getName(), value);
         try {
             validateProperties(properties);
             fail("Value '" + value + "' should not be valid for this test.");
         } catch (InvalidParameterException exp) {
             String expMessage = exp.getMessage();
-            assertEquals(expMessage, SMART_LOCATORS.getExMsg() + LINK_TO_EXAMPLES);
+            assertEquals(expMessage, SMART_LOCATORS_PROPERTY.getExMsg() + LINK_TO_EXAMPLES);
         }
     }
 
     @Test(dataProvider = "positiveData")
     public void positiveTest(String value) {
         Properties properties = new Properties();
-        properties.setProperty(SMART_LOCATORS.getName(), value);
+        properties.setProperty(SMART_LOCATORS_PROPERTY.getName(), value);
         validateProperties(properties);
     }
-
 }

@@ -60,6 +60,4 @@ public class DomainTests {
         properties.setProperty(DOMAIN_PROPERTY.getName(), value);
         validateProperties(properties);
     }
-
 }
-

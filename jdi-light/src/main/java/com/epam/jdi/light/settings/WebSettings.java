@@ -33,20 +33,26 @@ import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
+import static com.epam.jdi.light.common.Property.ASSERT_TYPE_PROPERTY;
 import static com.epam.jdi.light.common.Property.BROWSER_SIZE_PROPERTY;
 import static com.epam.jdi.light.common.Property.CHROME_CAPABILITIES_PATH;
-import static com.epam.jdi.light.common.Property.DRIVER;
-import static com.epam.jdi.light.common.Property.DRIVERS_FOLDER_PATH;
-import static com.epam.jdi.light.common.Property.DRIVERS_VERSION;
-import static com.epam.jdi.light.common.Property.ELEMENT_SEARCH_STRATEGY;
+import static com.epam.jdi.light.common.Property.DOMAIN_PROPERTY;
+import static com.epam.jdi.light.common.Property.DRIVERS_FOLDER_PROPERTY;
+import static com.epam.jdi.light.common.Property.DRIVERS_VERSION_PROPERTY;
+import static com.epam.jdi.light.common.Property.DRIVER_PROPERTY;
+import static com.epam.jdi.light.common.Property.DRIVER_REMOTE_URL_PROPERTY;
+import static com.epam.jdi.light.common.Property.ELEMENT_SEARCH_STRATEGY_PROPERTY;
 import static com.epam.jdi.light.common.Property.FF_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.IE_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.KILL_BROWSER_PROPERTY;
-import static com.epam.jdi.light.common.Property.SCREENS_FOLDER;
-import static com.epam.jdi.light.common.Property.SMART_LOCATORS;
-import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT;
-import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_PAGE;
-import static com.epam.jdi.light.common.Property.DOMAIN_PROPERTY;
+import static com.epam.jdi.light.common.Property.LOG_LEVEL_PROPERTY;
+import static com.epam.jdi.light.common.Property.PAGE_CHECK_AFTER_OPEN;
+import static com.epam.jdi.light.common.Property.PAGE_LOAD_STRATEGY_PROPERTY;
+import static com.epam.jdi.light.common.Property.SCREENSHOT_STRATEGY_PROPERTY;
+import static com.epam.jdi.light.common.Property.SCREENS_FOLDER_PROPERTY;
+import static com.epam.jdi.light.common.Property.SMART_LOCATORS_PROPERTY;
+import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT_PROPERTY;
+import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_PAGE_PROPERTY;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
@@ -131,31 +137,29 @@ public class WebSettings {
 
     public static synchronized void init() {
         validateProperties(getProperties(TEST_PROPERTIES_PATH));
-        fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_ELEMENT.getName());
-        fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_PAGE.getName());
+        fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_ELEMENT_PROPERTY.getName());
+        fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_PAGE_PROPERTY.getName());
         fillAction(p -> DOMAIN = p, DOMAIN_PROPERTY.getName());
         if (DRIVER_NAME.equals(DEFAULT_DRIVER))
-            fillAction(p -> DRIVER_NAME = p, DRIVER.getName());
+            fillAction(p -> DRIVER_NAME = p, DRIVER_PROPERTY.getName());
         fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
                 ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
-                ? PRELATEST_VERSION : p, DRIVERS_VERSION.getName());
-        fillAction(p -> DRIVERS_FOLDER = p, DRIVERS_FOLDER_PATH.getName());
-        fillAction(p -> SCREEN_PATH = p, SCREENS_FOLDER.getName());
-        fillAction(p -> logger.setScreenshotStrategy(p), "screenshot.strategy");
+                ? PRELATEST_VERSION : p, DRIVERS_VERSION_PROPERTY.getName());
+        fillAction(p -> DRIVERS_FOLDER = p, DRIVERS_FOLDER_PROPERTY.getName());
+        fillAction(p -> SCREEN_PATH = p, SCREENS_FOLDER_PROPERTY.getName());
+        fillAction(p -> logger.setScreenshotStrategy(p), SCREENSHOT_STRATEGY_PROPERTY.getName());
         fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
-        fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY.getName());
-        fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
-        fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY.getName());
+        fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY_PROPERTY.getName());
         fillAction(p -> BROWSER_SIZE = p, BROWSER_SIZE_PROPERTY.getName());
-        fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
-        fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
-        fillAction(SoftAssert::setAssertType, "assert.type");
+        fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), PAGE_LOAD_STRATEGY_PROPERTY.name());
+        fillAction(p -> CHECK_AFTER_OPEN = parse(p), PAGE_CHECK_AFTER_OPEN.getName());
+        fillAction(SoftAssert::setAssertType, ASSERT_TYPE_PROPERTY.getName());
 
         // RemoteWebDriver properties
-        fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
-        fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
+        fillAction(p -> DRIVER_REMOTE_URL = p, DRIVER_REMOTE_URL_PROPERTY.getName());
+        fillAction(p -> logger.setLogLevel(parseLogLevel(p)), LOG_LEVEL_PROPERTY.getName());
         fillAction(p -> SMART_SEARCH_LOCATORS =
-                filter(p.split(";"), l -> isNotBlank(l)), SMART_LOCATORS.getName());
+                filter(p.split(";"), l -> isNotBlank(l)), SMART_LOCATORS_PROPERTY.getName());
 
         loadCapabilities(CHROME_CAPABILITIES_PATH.getName(),
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
