@@ -59,7 +59,7 @@ public final class UIUtils {
             if (fields.size() >= 1) {
                 Collection<IClickable> buttons = select(fields,
                         f -> (IClickable) getValueField(f, obj));
-                IClickable button = first(buttons, b -> namesEqual(toButton(((INamed) b).getName()), toButton(buttonName)));
+                IClickable button = first(buttons, b -> namesEqual(toButton(((HasValue) b).getValue()), toButton(buttonName)));
                 if (button != null)
                     return button;
             }
