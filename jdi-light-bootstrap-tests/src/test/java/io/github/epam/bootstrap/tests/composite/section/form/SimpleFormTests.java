@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.containsString;
 public class SimpleFormTests extends TestsInit {
 
     private final String logLineSubmit = "support-button-submit:button clicked";
-    private final String logLineClear = "support-button-clear:button clicked";
+    private final String logLineClear = " support-button-clear:button clicked";
 
     @BeforeMethod
     public void before() {
