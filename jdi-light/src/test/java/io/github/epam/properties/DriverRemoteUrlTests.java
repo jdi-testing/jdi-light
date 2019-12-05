@@ -31,6 +31,7 @@ public class DriverRemoteUrlTests {
     public static Object[] positiveData() {
         return new Object[]{
                 "http://remote.driver.com/wd/hub/",
+                "https://remote.driver.com/wd/hub/",
                 "remote-driver.com/wd/hub/",
                 "remote.driver.com",
                 "remote.com",
