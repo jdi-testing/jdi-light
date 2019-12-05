@@ -23,22 +23,22 @@
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-testng</artifactId>
-            <version>RELEASE</version>
+            <version>[1.2.6,)</version>
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>RELEASE</version>
+            <version>[1.2.6,)</version>
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>RELEASE</version>
+            <version>[1.2.6,)</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>RELEASE</version>
+            <version>[4.13-rc-2,)</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
