@@ -8,9 +8,7 @@ before_script:
 - google-chrome-stable --version
 addons:
   chrome: stable
-branches:
-    only:
-    - master
+
 env:
   global:
   - CHROME_PROPERTIES="chrome.properties"
