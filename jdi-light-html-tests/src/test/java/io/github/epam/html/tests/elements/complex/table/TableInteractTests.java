@@ -43,18 +43,20 @@ public class TableInteractTests extends TestsInit {
     public void lineByIndexTest() {
         MarvelUser line = usersRow.line(1);
         line.type.select("User");
-        assertEquals(typeSelected(),"User");
+        assertEquals(typeSelected(), "User");
         line.type.select("Admin");
-        assertEquals(typeSelected(),"Admin");
+        assertEquals(typeSelected(), "Admin");
         line.description.vip.uncheck();
         assertFalse(isVip());
         line.description.vip.check();
         assertTrue(isVip());
     }
+
     private String typeSelected() {
         return new Select(getDriver().findElement(By.cssSelector("#user-table select")))
                 .getFirstSelectedOption().getText();
     }
+
     private boolean isVip() {
         WebElement element = getDriver().findElement(By.cssSelector("#user-table input[type=checkbox]"));
         return element.isSelected();
@@ -84,6 +86,7 @@ public class TableInteractTests extends TestsInit {
             "5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip" +
             "6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
     }
+
     @Test
     public void valueTest() {
         String value = usersRow.getValue();
@@ -96,23 +99,27 @@ public class TableInteractTests extends TestsInit {
             "||5||5|User|Yoshi Tannamuri|Cyclope\\nsome description:Dude||" + LINE_BREAK +
             "||6||6|User|Giovanni Rovelli|Hulk\\nsome description:Dude||" + LINE_BREAK);
     }
+
     @Test
     public void dataColumnTestIndex() {
         assertEquals(usersRow.row(2)
                 .asData(MarvelUserSimple.class), SPIDER_MAN_SIMPLE);
     }
+
     @Test
     public void dataFilterTest() {
         assertEquals(usersRow.row(hasValue("Sergey Ivan", inColumn("User")),
                 containsValue("User", inColumn("Type")))
                 .asData(MarvelUserSimple.class), SPIDER_MAN_SIMPLE);
     }
+
     @Test
     public void allDataFilterTest() {
         List<Line> filteredData = usersRow.rows(containsValue("Ivan", inColumn("User")));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0).asData(MarvelUserSimple.class), SPIDER_MAN_SIMPLE);
     }
+
     @Test
     public void commonMatchersTest() {
         usersRow.is().displayed();
@@ -120,27 +127,33 @@ public class TableInteractTests extends TestsInit {
         usersRow.assertThat().size(greaterThan(3));
         usersRow.is().notEmpty().size(lessThanOrEqualTo(6));
     }
+
     // Compare Matchers
     @Test
     public void rowMatcherTest() {
         usersRow.has().rowThat(containsValue("Ivan", inColumn("User")));
     }
+
     @Test
     public void rowsAllTest() {
         usersRow.assertThat().all().rows(containsValue("Vip", inColumn("Description")));
     }
+
     @Test
     public void noRowsTest() {
         usersRow.assertThat().no().rows(containsValue("Alex", inColumn("User")));
     }
+
     @Test
     public void atLeastTest() {
         usersRow.assertThat().atLeast(3).rows(containsValue(" ", inColumn("User")));
     }
+
     @Test
     public void exactMatcherTest() {
         usersRow.assertThat().exact(2).rows(containsValue("R", inColumn("User")));
     }
+
     @Test
     public void rowDataExactMatcherTest() {
         usersRow.assertThat().exact(1).rows(hasValue("Roman", inColumn("User")));
