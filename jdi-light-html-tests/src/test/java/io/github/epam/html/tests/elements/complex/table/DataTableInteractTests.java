@@ -28,16 +28,19 @@ public class DataTableInteractTests extends TestsInit {
         MarvelUser line = users.line(2);
         validateUserRow(line);
     }
+
     @Test
     public void lineByNameTest() {
         MarvelUser line = usersSetup.line("Sergey Ivan");
         validateUserRow(line);
     }
+
     @Test
     public void lineFilterTest() {
         MarvelUser line = users.line(d -> d.user.contains("Ivan"));
         validateUserRow(line);
     }
+
     @Test
     public void linesFilterTest() {
         List<MarvelUser> filteredData = users.lines(d -> d.user.contains("Ivan"));
