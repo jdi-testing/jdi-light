@@ -13,11 +13,11 @@ public class SupportMessageForm extends Form<SupportMessage> {
     public TextField supportEmail;
     public TextArea supportMessage;
 
-    @UI("['Submit']")
+    @UI("#support-button-submit")
     @Name(value = "submit")
     public Button supportButtonSubmit;
 
-    @UI("['Clear']")
+    @UI("#support-button-clear")
     @Name(value = "clear")
     public Button supportButtonClear;
 }
