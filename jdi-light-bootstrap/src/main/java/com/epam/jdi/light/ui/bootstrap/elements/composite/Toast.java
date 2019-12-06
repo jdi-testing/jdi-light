@@ -28,4 +28,5 @@ public abstract class Toast extends Section {
     public void close() {
         linked(".toast-header button", "Close").click();
     }
+
 }
