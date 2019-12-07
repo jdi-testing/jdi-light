@@ -39,6 +39,7 @@ jobs:
     name: Compile jdi code
     script:
     - mvn install -DskipTests
+    - mvn versions:use-latest-releases
 
   - stage: test
     name: Run tests - no po
