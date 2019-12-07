@@ -31,7 +31,7 @@
         <dependency>
             <groupId>com.epam.jdi.tools</groupId>
             <artifactId>jdi-light-saber</artifactId>
-            <version>2.0.57</version>
+            <version>2.0.62</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -59,17 +59,17 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>RELEASE</version>
+            <version>3.141.59</version>
         </dependency>
         <dependency>
             <groupId>net.lingala.zip4j</groupId>
             <artifactId>zip4j</artifactId>
-            <version>RELEASE</version>
+            <version>2.2.7</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>RELEASE</version>
+            <version>3.7.1</version>
         </dependency>
 
         <!--AOP Spring -->
@@ -82,20 +82,20 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
-            <version>RELEASE</version>
+            <version>2.2</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>RELEASE</version>
+            <version>3.9</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
-            <version>1.8.4</version>
+            <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
         <dependency>
