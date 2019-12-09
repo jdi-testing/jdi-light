@@ -10,6 +10,7 @@ import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.setWindowName;
 import static com.epam.jdi.light.elements.common.WindowsManager.switchToWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.windowsCount;
+import static com.epam.jdi.light.settings.WebSettings.ANY_ELEMENT;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.StaticSite.iframe;
 import static io.github.com.pages.GithubPage.repoDescription;
@@ -49,5 +50,7 @@ public class WindowsAndFramesTests extends TestsInit {
     @Test
     public void frameTest() {
         iframe.userIcon.click();
+        iframe.userName.setup(jdiB -> jdiB.setSearchRule(ANY_ELEMENT));
+        iframe.userName.assertThat().text("Piter Chailovskii");
     }
 }
