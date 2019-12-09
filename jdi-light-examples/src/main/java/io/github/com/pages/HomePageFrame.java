@@ -7,7 +7,8 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.WebElement;
 
 public class HomePageFrame extends Section {
-	@Css("img#user-icon") public WebElement userIcon;
-	@UI("#user-name")
-	public UIElement userName;
+    @Css("img#user-icon")
+    public WebElement userIcon;
+    @UI("#user-name")
+    public UIElement userName;
 }

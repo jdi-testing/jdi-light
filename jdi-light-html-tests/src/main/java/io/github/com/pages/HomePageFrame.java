@@ -7,7 +7,8 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
 
 public class HomePageFrame extends Section {
-	@Css("img#user-icon") public Icon userIcon;
-	@UI("#user-name")
-	public UIElement userName;
+    @Css("img#user-icon")
+    public Icon userIcon;
+    @UI("#user-name")
+    public UIElement userName;
 }
