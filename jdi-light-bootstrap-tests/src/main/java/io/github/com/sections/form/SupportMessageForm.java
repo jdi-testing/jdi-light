@@ -12,6 +12,5 @@ public class SupportMessageForm extends Form<SupportMessage> {
     public TextArea supportMessage;
 
     public Button supportButtonSubmit;
-
     public Button supportButtonClear;
 }
