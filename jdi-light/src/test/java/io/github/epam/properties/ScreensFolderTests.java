@@ -3,8 +3,10 @@ package io.github.epam.properties;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.security.InvalidParameterException;
 import java.util.Properties;
+import java.util.regex.Matcher;
 
 import static com.epam.jdi.light.common.Property.SCREENS_FOLDER_PROPERTY;
 import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
@@ -52,5 +54,37 @@ public class ScreensFolderTests {
         Properties properties = new Properties();
         properties.setProperty(SCREENS_FOLDER_PROPERTY.getName(), value);
         validateProperties(properties);
+    }
+
+    public static String getCrossPlatformPath(String path) {
+        return path.replaceAll("[\\\\|/]", Matcher.quoteReplacement(File.separator));
+    }
+
+    @Test
+    public void crossPlatformPathTests() {
+//        String chromeBinary = System.getProperty("drivers.folder");
+        String chromePath = "";
+        System.getProperties().list(System.out);
+
+//        if (chromeBinary == null || chromeBinary.equals("")) {
+            String os = System.getProperty("os.name");
+            switch (os) {
+                case "Windows 10":
+                    chromePath = "C:\\my\\win\\absolute\\path";
+                    break;
+                case "Linux":
+                    chromePath = "~/my/relative/path";
+                    break;
+                case "Mac OS X":
+                    chromePath = "my/predefined/path";
+                    break;
+                default:
+                    chromePath = "C:\\my\\win\\absolute\\path";
+                    System.out.println("os.name = " + os);
+            }
+            String uPath = getCrossPlatformPath(chromePath);
+            System.out.println("os.name = " + os);
+            System.out.println("Cross Platform Path = " + uPath);
+//        }
     }
 }
