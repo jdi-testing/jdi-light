@@ -77,12 +77,6 @@ public class DriverData {
             chromePrefs.put("profile.password_manager_enabled", false);
             ChromeOptions cap = new ChromeOptions();
             cap.addArguments("--disable-web-security", "--disable-extensions", "test-type");
-            cap.addArguments("--verbose");
-            cap.addArguments("--whitelisted-ips");
-            cap.addArguments("--no-sandbox");
-            cap.addArguments("--disable-extensions");
-            //cap.addArguments("--headless");
-            System.out.println("REAAAAADY");
             cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY);
             cap.setCapability(ACCEPT_SSL_CERTS, true);
             cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT);
@@ -100,9 +94,6 @@ public class DriverData {
                     .filter(arguments -> arguments.getKey().equals(ARGUMENTS_PROPERTY))
                     .flatMap(arguments -> Arrays.stream(arguments.getValue().split(" ")))
                     .forEach(cap::addArguments);
-            System.out.println("CAPA: " + cap.toString());
-            System.out.println("ARGS: " + cap.asMap());
-            System.out.println("CHROME: " + CAPABILITIES_FOR_CHROME);
             return cap;
         } catch (Exception ex) {
             throw exception(ex, "Failed Init Chrome Driver settings: " + safeException(ex));
