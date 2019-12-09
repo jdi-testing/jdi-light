@@ -62,29 +62,26 @@ public class ScreensFolderTests {
 
     @Test
     public void crossPlatformPathTests() {
-//        String chromeBinary = System.getProperty("drivers.folder");
         String chromePath = "";
         System.getProperties().list(System.out);
 
-//        if (chromeBinary == null || chromeBinary.equals("")) {
-            String os = System.getProperty("os.name");
-            switch (os) {
-                case "Windows 10":
-                    chromePath = "C:\\my\\win\\absolute\\path";
-                    break;
-                case "Linux":
-                    chromePath = "~/my/relative/path";
-                    break;
-                case "Mac OS X":
-                    chromePath = "my/predefined/path";
-                    break;
-                default:
-                    chromePath = "C:\\my\\win\\absolute\\path";
-                    System.out.println("os.name = " + os);
-            }
-            String uPath = getCrossPlatformPath(chromePath);
-            System.out.println("os.name = " + os);
-            System.out.println("Cross Platform Path = " + uPath);
-//        }
+        String os = System.getProperty("os.name");
+        switch (os) {
+        case "Windows 10":
+             chromePath = "C:\\my\\win\\absolute\\path";
+             break;
+        case "Linux":
+             chromePath = "~/my/relative/path";
+             break;
+        case "Mac OS X":
+             chromePath = "my/predefined/path";
+             break;
+         default:
+             chromePath = "C:\\my\\win\\absolute\\path";
+             System.out.println("os.name = " + os);
+        }
+        String uPath = getCrossPlatformPath(chromePath);
+        System.out.println("os.name = " + os);
+        System.out.println("Cross Platform Path = " + uPath);
     }
 }
