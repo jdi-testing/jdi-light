@@ -32,7 +32,6 @@ public class EyesConfig extends DataClass<EyesConfig> {
             apiKey = System.getenv("APPLITOOLS_API_KEY");
         } catch (Exception ignore) { }
         batchName = format("%s %s", appName, Timer.nowDate());
-
     }
     public EyesConfig pageStrategy(VisualCheckPage checkPageStrategy) {
         VISUAL_PAGE_STRATEGY = checkPageStrategy;

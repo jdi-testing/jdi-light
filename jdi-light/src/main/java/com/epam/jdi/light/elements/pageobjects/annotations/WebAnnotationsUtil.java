@@ -14,6 +14,7 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.WebSettings.getDomain;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.openqa.selenium.support.How.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -77,6 +78,27 @@ public class WebAnnotationsUtil {
             return By.partialLinkText(locator.partialLinkText());
         if (!locator.tagName().isEmpty())
             return By.tagName(locator.tagName());
+        if (locator.how() != UNSET)
+            return getHowLocator(locator);
+        return null;
+    }
+    private static By getHowLocator(org.openqa.selenium.support.FindBy locator) {
+        if (locator.how() == ID)
+            return By.id(locator.using());
+        if (locator.how() == CLASS_NAME)
+            return By.className(locator.using());
+        if (locator.how() == XPATH)
+            return By.xpath(locator.using());
+        if (locator.how() == CSS)
+            return By.cssSelector(locator.using());
+        if (locator.how() == LINK_TEXT)
+            return By.linkText(locator.using());
+        if (locator.how() == NAME)
+            return By.name(locator.using());
+        if (locator.how() == PARTIAL_LINK_TEXT)
+            return By.partialLinkText(locator.using());
+        if (locator.how() == TAG_NAME)
+            return By.tagName(locator.using());
         return null;
     }
 

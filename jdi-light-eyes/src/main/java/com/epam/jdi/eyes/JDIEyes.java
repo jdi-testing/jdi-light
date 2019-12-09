@@ -51,6 +51,7 @@ public class JDIEyes {
                     return;
                 IBaseElement ui = (IBaseElement) jp.getThis();
                 String name = getBeforeLogString(jp);
+                show(ui.base().getWebElement());
                 visualCheckElement(ui.base().getWebElement(), name);
             } catch (Exception ex) {
                 visualCheckPage(WebPage.getCurrentPage());
@@ -121,7 +122,6 @@ public class JDIEyes {
     }
     public static void visualCheckElement(WebElement webElement, String name) {
         openEyes();
-        show(webElement);
         eyes.get().check(name, region(webElement));
     }
     static void show(WebElement element) {
