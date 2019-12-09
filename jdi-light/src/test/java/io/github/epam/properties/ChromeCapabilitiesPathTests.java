@@ -51,5 +51,4 @@ public class ChromeCapabilitiesPathTests {
         properties.setProperty(CHROME_CAPABILITIES_PATH.getName(), value);
         validateProperties(properties);
     }
-
 }

@@ -23,6 +23,7 @@ import static org.testng.Assert.assertEquals;
 
 public class DataSimpleTableTests extends TestsInit {
     private boolean firstTime = true;
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -44,35 +45,39 @@ public class DataSimpleTableTests extends TestsInit {
     public void previewTest() {
         String value = usersData.preview();
         assertEquals(value.replaceAll(" ", ""),
-            "NumberTypeUserDescription1AdminUserManagerRomanWolverineVip2AdminUserManagerSergeyIvanSpiderManVip3AdminUserManagerVladzimirPunisherVip4AdminUserManagerHelenBennettCaptainAmericasomedescriptionVip5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
+                "NumberTypeUserDescription1AdminUserManagerRomanWolverineVip2AdminUserManagerSergeyIvanSpiderManVip3AdminUserManagerVladzimirPunisherVip4AdminUserManagerHelenBennettCaptainAmericasomedescriptionVip5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
     }
 
     @Test
     public void valueTest() {
         String value = usersData.getValue().replaceAll("\r", "");
         assertEquals(value,
-        "||X||Number|Type|User|Description||\n" +
-            "||1||1|Admin\\n User\\n Manager|Roman|Wolverine\\nVip||\n" +
-            "||2||2|Admin\\n User\\n Manager|Sergey Ivan|Spider Man\\nVip||\n" +
-            "||3||3|Admin\\n User\\n Manager|Vladzimir|Punisher\\nVip||\n" +
-            "||4||4|Admin\\n User\\n Manager|Helen Bennett|Captain America\\nsome description\\nVip||\n" +
-            "||5||5|Admin\\n User\\n Manager|Yoshi Tannamuri|Cyclope\\nsome description\\nVip||\n" +
-            "||6||6|Admin\\n User\\n Manager|Giovanni Rovelli|Hulk\\nsome description\\nVip||\n");
+                "||X||Number|Type|User|Description||\n" +
+                        "||1||1|Admin\\n User\\n Manager|Roman|Wolverine\\nVip||\n" +
+                        "||2||2|Admin\\n User\\n Manager|Sergey Ivan|Spider Man\\nVip||\n" +
+                        "||3||3|Admin\\n User\\n Manager|Vladzimir|Punisher\\nVip||\n" +
+                        "||4||4|Admin\\n User\\n Manager|Helen Bennett|Captain America\\nsome description\\nVip||\n" +
+                        "||5||5|Admin\\n User\\n Manager|Yoshi Tannamuri|Cyclope\\nsome description\\nVip||\n" +
+                        "||6||6|Admin\\n User\\n Manager|Giovanni Rovelli|Hulk\\nsome description\\nVip||\n");
     }
+
     @Test
     public void dataColumnTestIndex() {
         assertEquals(usersData.data(2), SPIDER_MAN_SIMPLE);
     }
+
     @Test
     public void dataFilterTest() {
         assertEquals(usersData.data(d -> d.user.contains("Ivan")), SPIDER_MAN_SIMPLE);
     }
+
     @Test
     public void allDataFilterTest() {
         List<MarvelUserSimple> filteredData = usersData.datas(d -> d.user.contains("Ivan"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), SPIDER_MAN_SIMPLE);
     }
+
     @Test
     public void commonMatchersTest() {
         usersData.is().displayed();
@@ -80,41 +85,50 @@ public class DataSimpleTableTests extends TestsInit {
         usersData.assertThat().size(greaterThan(3));
         usersData.is().notEmpty().size(lessThanOrEqualTo(6));
     }
+
     // Compare Matchers
     @Test
     public void rowMatcherTest() {
         usersData.has().row(d -> d.user.contains("Ivan"));
     }
+
     @Test
     public void rowDataMatcherTest() {
         usersData.has().row(SPIDER_MAN_SIMPLE);
     }
+
     @Test
     public void rowTableMatcherSingleTest() {
         usersData.has().rowThat(Single.hasValue("Sergey Ivan"), inColumn("User"));
     }
+
     @Test
     public void rowTableMatcherTest() {
         usersData.has().rowThat(
             containsValue("User", inColumn("Type")),
             hasValue("Sergey Ivan", inColumn("User")));
     }
+
     @Test
     public void rowsAllTest() {
         usersData.assertThat().all().rows(d -> d.user.length() > 4);
     }
+
     @Test
     public void noRowsTest() {
         usersData.assertThat().no().rows(d -> isBlank(d.user));
     }
+
     @Test
     public void atLeastTest() {
         usersData.assertThat().atLeast(3).rows(d -> d.type.contains("User"));
     }
+
     @Test
     public void exactMatcherTest() {
         usersData.assertThat().exact(2).rows(d -> d.user.contains("R"));
     }
+
     @Test
     public void rowDataExactMatcherTest() {
         usersData.assertThat().exact(1).rows(SPIDER_MAN_SIMPLE);

@@ -52,5 +52,4 @@ public class IECapabilitiesPathTests {
         properties.setProperty(IE_CAPABILITIES_PATH.getName(), value);
         validateProperties(properties);
     }
-
 }

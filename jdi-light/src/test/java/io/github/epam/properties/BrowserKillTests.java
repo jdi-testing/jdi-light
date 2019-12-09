@@ -43,5 +43,4 @@ public class BrowserKillTests {
         properties.setProperty(KILL_BROWSER_PROPERTY.getName(), value);
         validateProperties(properties);
     }
-
 }

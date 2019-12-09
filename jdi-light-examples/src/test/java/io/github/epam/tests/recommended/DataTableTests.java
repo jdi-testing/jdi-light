@@ -29,25 +29,30 @@ public class DataTableTests extends StaticTestsInit {
     public void dataTableTest() {
         dataTableValidation(usersData);
     }
+
     @Test
     public void jDataTableTest() {
         dataTableValidation(usersDataSetup);
     }
+
     @Test
     public void customDataTableTest() {
         dataTableValidation(customUsersDataSetup);
     }
+
+    @Test
     private void dataTableValidation(DataTable<UserRow, UserInfo> table) {
         assertEquals(table.size(), 4);
         assertEquals(table.count(), 400);
         assertEquals(table.header(), asList("Name", "Phone", "Email", "City"));
         String value = table.preview();
-        assertEquals(value.substring(0,194),
-        "Name Phone Email City" +
-            "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe" +
-            "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas" +
-            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauvais");
+        assertEquals(value.substring(0, 194),
+                "Name Phone Email City" +
+                        "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe" +
+                        "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas" +
+                        "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauvais");
     }
+
     @Test
     public void filterDataTest() {
         assertEquals(usersData.data(2), GRADY_BROCK);
@@ -65,11 +70,11 @@ public class DataTableTests extends StaticTestsInit {
 
     @Test
     public void filterLinesTest() {
-        UserRow line =  usersData.line(2);
+        UserRow line = usersData.line(2);
         validateUserRow(line);
-        line =  usersData.line("Grady Brock");
+        line = usersData.line("Grady Brock");
         validateUserRow(line);
-        line =  usersData.line(d -> d.name.contains("Brock"));
+        line = usersData.line(d -> d.name.contains("Brock"));
         validateUserRow(line);
         // This is just useful example for small tables.
         // Execution takes too much time in case of 400 rows
