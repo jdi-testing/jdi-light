@@ -12,6 +12,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.WithText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.Quotes;
 
 import java.lang.annotation.Annotation;
@@ -168,23 +169,18 @@ public class WebAnnotationsUtil {
         return withText(locator.value());
     }
     private static By getHowLocator(org.openqa.selenium.support.FindBy locator) {
-        if (locator.how() == ID)
-            return By.id(locator.using());
-        if (locator.how() == CLASS_NAME)
-            return By.className(locator.using());
-        if (locator.how() == XPATH)
-            return By.xpath(locator.using());
-        if (locator.how() == CSS)
-            return By.cssSelector(locator.using());
-        if (locator.how() == LINK_TEXT)
-            return By.linkText(locator.using());
-        if (locator.how() == NAME)
-            return By.name(locator.using());
-        if (locator.how() == PARTIAL_LINK_TEXT)
-            return By.partialLinkText(locator.using());
-        if (locator.how() == TAG_NAME)
-            return By.tagName(locator.using());
-        return null;
+        How value = locator.how();
+        switch (value) {
+            case ID: return By.id(locator.using());
+            case CLASS_NAME: return By.className(locator.using());
+            case XPATH: return By.xpath(locator.using());
+            case CSS: return By.cssSelector(locator.using());
+            case LINK_TEXT: return By.linkText(locator.using());
+            case NAME: return By.name(locator.using());
+            case PARTIAL_LINK_TEXT: return By.partialLinkText(locator.using());
+            case TAG_NAME: return By.tagName(locator.using());
+            default: return null;
+        }
     }
 
 }
