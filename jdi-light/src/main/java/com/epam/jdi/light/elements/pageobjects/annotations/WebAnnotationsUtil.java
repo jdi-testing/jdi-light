@@ -12,6 +12,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.WithText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.Quotes;
 
 import java.lang.annotation.Annotation;
@@ -27,6 +28,15 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.withText;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.openqa.selenium.support.How.CLASS_NAME;
+import static org.openqa.selenium.support.How.CSS;
+import static org.openqa.selenium.support.How.ID;
+import static org.openqa.selenium.support.How.LINK_TEXT;
+import static org.openqa.selenium.support.How.NAME;
+import static org.openqa.selenium.support.How.PARTIAL_LINK_TEXT;
+import static org.openqa.selenium.support.How.TAG_NAME;
+import static org.openqa.selenium.support.How.UNSET;
+import static org.openqa.selenium.support.How.XPATH;
 
 public class WebAnnotationsUtil {
 
@@ -84,6 +94,10 @@ public class WebAnnotationsUtil {
     public static By findByToBy(org.openqa.selenium.support.FindBy locator) {
         if (locator == null) {
             return null;
+        }
+
+        if (locator.how() != UNSET) {
+            return getHowLocator(locator);
         }
 
         List<Pair<Supplier<String>, Function<String,By>>> remap = new ArrayList<>();
@@ -153,6 +167,20 @@ public class WebAnnotationsUtil {
     public static By findByToBy(WithText locator){
         if (locator == null) return null;
         return withText(locator.value());
+    }
+    private static By getHowLocator(org.openqa.selenium.support.FindBy locator) {
+        How value = locator.how();
+        switch (value) {
+            case ID: return By.id(locator.using());
+            case CLASS_NAME: return By.className(locator.using());
+            case XPATH: return By.xpath(locator.using());
+            case CSS: return By.cssSelector(locator.using());
+            case LINK_TEXT: return By.linkText(locator.using());
+            case NAME: return By.name(locator.using());
+            case PARTIAL_LINK_TEXT: return By.partialLinkText(locator.using());
+            case TAG_NAME: return By.tagName(locator.using());
+            default: return null;
+        }
     }
 
 }
