@@ -27,6 +27,15 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.withText;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.openqa.selenium.support.How.CLASS_NAME;
+import static org.openqa.selenium.support.How.CSS;
+import static org.openqa.selenium.support.How.ID;
+import static org.openqa.selenium.support.How.LINK_TEXT;
+import static org.openqa.selenium.support.How.NAME;
+import static org.openqa.selenium.support.How.PARTIAL_LINK_TEXT;
+import static org.openqa.selenium.support.How.TAG_NAME;
+import static org.openqa.selenium.support.How.UNSET;
+import static org.openqa.selenium.support.How.XPATH;
 
 public class WebAnnotationsUtil {
 
@@ -84,6 +93,10 @@ public class WebAnnotationsUtil {
     public static By findByToBy(org.openqa.selenium.support.FindBy locator) {
         if (locator == null) {
             return null;
+        }
+
+        if (locator.how() != UNSET) {
+            return getHowLocator(locator);
         }
 
         List<Pair<Supplier<String>, Function<String,By>>> remap = new ArrayList<>();
@@ -153,6 +166,25 @@ public class WebAnnotationsUtil {
     public static By findByToBy(WithText locator){
         if (locator == null) return null;
         return withText(locator.value());
+    }
+    private static By getHowLocator(org.openqa.selenium.support.FindBy locator) {
+        if (locator.how() == ID)
+            return By.id(locator.using());
+        if (locator.how() == CLASS_NAME)
+            return By.className(locator.using());
+        if (locator.how() == XPATH)
+            return By.xpath(locator.using());
+        if (locator.how() == CSS)
+            return By.cssSelector(locator.using());
+        if (locator.how() == LINK_TEXT)
+            return By.linkText(locator.using());
+        if (locator.how() == NAME)
+            return By.name(locator.using());
+        if (locator.how() == PARTIAL_LINK_TEXT)
+            return By.partialLinkText(locator.using());
+        if (locator.how() == TAG_NAME)
+            return By.tagName(locator.using());
+        return null;
     }
 
 }
