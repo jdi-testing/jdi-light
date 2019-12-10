@@ -162,6 +162,9 @@ public class UIElement extends JDIBase
     public boolean isDisplayed() {
         return displayed();
     }
+    public boolean isMissed() {
+        return missing();
+    }
     /**
      * Get element location as Point
      * @return Point
@@ -633,6 +636,11 @@ public class UIElement extends JDIBase
             return result.size() == 1 && result.get(0).isDisplayed();
         }
         return false;
+    }
+
+    protected boolean missing() {
+        List<WebElement> result = getAllElements();
+        return result.size() == 0;
     }
 
     public boolean isClickable() {

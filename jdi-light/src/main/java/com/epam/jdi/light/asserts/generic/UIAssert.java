@@ -29,7 +29,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction("Assert that '{name}' disappeared")
     public A disappear() {
-        jdiAssert(element.isDisplayed() ? "displayed" : "disappeared", is("disappeared"));
+        jdiAssert(element.isMissed() ? "missed" : "displayed", is("missed"));
         return (A) this;
     }
 

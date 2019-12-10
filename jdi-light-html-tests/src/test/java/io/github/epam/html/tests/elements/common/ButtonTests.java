@@ -165,7 +165,7 @@ public class ButtonTests implements TestsInit {
 
     @Test
     public void isThereAnybodyOutThereTest() {
-        missingButton.isDisplayed();
+        missingButton.isMissed();
         missingButton.is().disappear();
     }
 
