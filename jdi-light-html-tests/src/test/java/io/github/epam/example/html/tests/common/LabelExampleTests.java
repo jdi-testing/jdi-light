@@ -15,7 +15,9 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.hamcrest.Matchers.is;
 
-
+/**
+ * Test examples for Label with JDI Light asserts
+ */
 public class LabelExampleTests extends TestsInit {
 
     private String text = "JDI TESTING PLATFORM";
