@@ -11,6 +11,7 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class DataTableAssert<L extends Section, D>
     }
     @JDIAction("Assert that '{name}' has rows that meet expected condition")
     public DataTableAssert<L, D> value(JFunc1<D,Boolean> condition, Row row) {
-        jdiAssert(condition.execute(table().dataRow(row.getIndex(table().header()))), is(true));
+        jdiAssert(condition.execute(table().dataRow(row.getIndex(table().header()))), Matchers.is(true));
         return this;
     }
     /**
@@ -54,7 +55,7 @@ public class DataTableAssert<L extends Section, D>
     @JDIAction("Assert that '{name}' has {0}")
     public DataTableAssert<L, D> value(D expected, Row row) {
         D actual = table().dataRow(row.getIndex(table().header()));
-        jdiAssert(actual, is(expected));
+        jdiAssert(actual, Matchers.is(expected));
         return this;
     }
     @JDIAction("Assert that '{name}' rows {0}")
@@ -67,8 +68,8 @@ public class DataTableAssert<L extends Section, D>
         List<L> allRows = table().allLines();
         for (int i = 1; i < allRows.size(); i++)
             if (!condition.execute(allRows.get(i-1), allRows.get(i)))
-                jdiAssert("Table not sorted at "+i+" row", is(""));
-        jdiAssert("Table is sorted", is("Table is sorted"));
+                jdiAssert("Table not sorted at "+i+" row", Matchers.is(""));
+        jdiAssert("Table is sorted", Matchers.is("Table is sorted"));
         return this;
     }
     @JDIAction("Assert that '{name}' is sorted")
@@ -76,8 +77,8 @@ public class DataTableAssert<L extends Section, D>
         List<D> allRows = table().allData();
         for (int i = 1; i < allRows.size(); i++)
             if (!condition.execute(allRows.get(i-1), allRows.get(i)))
-                jdiAssert("Table not sorted at "+i+" row", is(""));
-        jdiAssert("Table is sorted", is("Table is sorted"));
+                jdiAssert("Table not sorted at "+i+" row", Matchers.is(""));
+        jdiAssert("Table is sorted", Matchers.is("Table is sorted"));
         return this;
     }
 
@@ -139,7 +140,7 @@ public class DataTableAssert<L extends Section, D>
                     break;
                 case ALL:
                     List<D> rows = table().allData();
-                    jdiAssert(LinqUtils.all(rows, condition), is(true));
+                    jdiAssert(LinqUtils.all(rows, condition), Matchers.is(true));
                     break;
                 case ATLEAST:
                     jdiAssert(table().dataRows(condition, count), hasSize(count));

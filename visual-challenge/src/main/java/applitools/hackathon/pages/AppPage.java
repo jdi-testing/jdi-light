@@ -15,12 +15,14 @@ import com.epam.jdi.light.elements.pageobjects.annotations.GetVisible;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Link;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
 
 public class AppPage extends WebPage {
     @UI("#transactionsTable")
     public static DataTable<TransactionRow, Transaction> transactionsTable;
     @UI("#showExpensesChart") public static Link compareExpenses;
     @GetVisible @UI("div.balance") public static WebList advertisement;
+    @UI(".element-balances") public static UIElement advertisements;
 
     public static boolean advertismentPresent(Object element) {
         UIElement adv = (UIElement)element;

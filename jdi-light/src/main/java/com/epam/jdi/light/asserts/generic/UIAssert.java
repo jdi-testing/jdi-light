@@ -5,10 +5,10 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.tools.StringUtils.format;
-import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -21,7 +21,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {
-        jdiAssert(element.isDisplayed() ? "displayed" : "hidden", is("displayed"));
+        jdiAssert(element.isDisplayed() ? "displayed" : "hidden", Matchers.is("displayed"));
         return (A) this;
     }
     /**
@@ -29,7 +29,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction("Assert that '{name}' disappeared")
     public A disappear() {
-        jdiAssert(element.isDisplayed() ? "displayed" : "disappeared", is("disappeared"));
+        jdiAssert(element.isDisplayed() ? "displayed" : "disappeared", Matchers.is("disappeared"));
         return (A) this;
     }
 
@@ -38,7 +38,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction("Assert that '{name}' is hidden")
     public A hidden() {
-        jdiAssert(element.isDisplayed() ? "displayed" : "hidden", is("hidden"));
+        jdiAssert(element.isDisplayed() ? "displayed" : "hidden", Matchers.is("hidden"));
         return (A) this;
     }
 
@@ -54,7 +54,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
     public A notAppear(int timeoutSec) {
         boolean result = new Timer(timeoutSec * 1000)
                 .wait(() -> element.isDisplayed());
-        jdiAssert(result ? "displayed" : "hidden", is("hidden"));
+        jdiAssert(result ? "displayed" : "hidden", Matchers.is("hidden"));
         return (A) this;
     }
 
@@ -63,7 +63,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction("Assert that '{name}' is enabled")
     public A enabled() {
-        jdiAssert(element.isEnabled() ? "enabled" : "disabled", is("enabled"));
+        jdiAssert(element.isEnabled() ? "enabled" : "disabled", Matchers.is("enabled"));
         return (A) this;
     }
 
@@ -72,7 +72,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction("Assert that '{name}' is disabled")
     public A disabled() {
-         jdiAssert(element.isEnabled() ? "enabled" : "disabled", is("disabled"));
+         jdiAssert(element.isEnabled() ? "enabled" : "disabled", Matchers.is("disabled"));
         return (A) this;
     }
 
@@ -86,6 +86,10 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
         this.element = element;
         name = element.getName();
         failElement = format("%s(%s)", name, element.core().printFullLocator());
+        return (A) this;
+    }
+
+    public A is() {
         return (A) this;
     }
 }

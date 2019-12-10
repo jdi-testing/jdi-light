@@ -27,7 +27,7 @@ public class TableTests extends StaticTestsInit {
         tablePage.shouldBeOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void tablePerformanceTest() {
         tablePerformance(users);
     }

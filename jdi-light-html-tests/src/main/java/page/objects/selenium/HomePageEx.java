@@ -15,5 +15,5 @@ public class HomePageEx extends PageBase {
 
     @UI("form #name") public UIElement userNameUI;
     public UIElement passwordUI = $("form #password");
-    @UI("#login-button") public WebElement enterUI;
+    @UI("#login-button") public UIElement enterUI;
 }

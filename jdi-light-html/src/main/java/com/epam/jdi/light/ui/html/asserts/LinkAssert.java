@@ -5,6 +5,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.Link;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;
@@ -26,12 +27,12 @@ public class LinkAssert extends UIAssert<LinkAssert, Link>
         jdiAssert(element.alt(), condition);
         return this;
     }
-    public LinkAssert alt(String alt) { return alt(is(alt)); }
+    public LinkAssert alt(String alt) { return alt(Matchers.is(alt)); }
 
     @JDIAction("Assert that '{name}' ref {0}")
     public LinkAssert ref(Matcher<String> condition) {
         jdiAssert(element.ref(), condition);
         return this;
     }
-    public LinkAssert ref(String ref) { return ref(is(ref)); }
+    public LinkAssert ref(String ref) { return ref(Matchers.is(ref)); }
 }

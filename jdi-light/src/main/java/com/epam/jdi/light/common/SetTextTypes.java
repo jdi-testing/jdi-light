@@ -5,11 +5,12 @@ import com.epam.jdi.tools.func.JAction2;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ * Email: romClickTextFieldClickTextFieldan.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public enum SetTextTypes {
     SET_TEXT(UIElement::setText),
-    SEND_KEYS((uiElement, value) -> {
+    SEND_KEYS(UIElement::sendKeys),
+    CLEAR_SEND_KEYS((uiElement, value) -> {
         uiElement.clear();
         uiElement.sendKeys(value);
     });

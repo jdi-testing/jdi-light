@@ -4,13 +4,13 @@ Feature: Combobox
 Background:
   Given I should be logged in
   And I open "Html5 Page"
-  When select "Coconut" field from "Ice Cream"
+  When input "Coconut" in "Ice Cream"
 
 Scenario: Get combobox value test
   Then the "Ice Cream" selected value is "Coconut"
 
 Scenario: select combobox value test
-  When select "Chocolate" field from "Ice Cream"
+  When input "Chocolate" in "Ice Cream"
   Then the "Ice Cream" selected value is "Chocolate"
 
 Scenario: select num combobox value test
@@ -27,7 +27,7 @@ Scenario: Combobox label test
 Scenario: Combobox is validation test
   Then the "Ice Cream" is enabled
   And the "Ice Cream" text equals to "Coconut"
-  When select "Vanilla" field from "Ice Cream"
+  When input "Vanilla" in "Ice Cream"
   Then the "Ice Cream" text contains "Van"
 
 Scenario: Assert validation test
@@ -37,7 +37,7 @@ Scenario: Base validation test
   Then the "Ice Cream" is basically valid
 
 Scenario: Send keys test
-  When select "Chocolate" field from "Ice Cream"
+  When input "Chocolate" in "Ice Cream"
   When I send keys "Test" to "Ice Cream"
   Then the "Ice Cream" text equals to "ChocolateTest"
 

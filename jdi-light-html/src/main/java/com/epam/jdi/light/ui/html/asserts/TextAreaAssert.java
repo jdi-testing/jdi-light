@@ -5,6 +5,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;
@@ -24,27 +25,27 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
         jdiAssert(element.rows(), condition);
         return this;
     }
-    public TextAreaAssert rowsCount(int rowsCount) { return rowsCount(is(rowsCount)); }
+    public TextAreaAssert rowsCount(int rowsCount) { return rowsCount(Matchers.is(rowsCount)); }
 
     @JDIAction("Assert that '{name}' columns count {0}")
     public TextAreaAssert colsCount(Matcher<Integer> condition) {
         jdiAssert(element.cols(), condition);
         return this;
     }
-    public TextAreaAssert colsCount(int colsCount) { return colsCount(is(colsCount)); }
+    public TextAreaAssert colsCount(int colsCount) { return colsCount(Matchers.is(colsCount)); }
 
     @JDIAction("Assert that '{name}' minlength {0}")
     public TextAreaAssert minlength(Matcher<Integer> condition) {
         jdiAssert(element.minlength(), condition);
         return this;
     }
-    public TextAreaAssert minlength(int minlength) { return minlength(is(minlength)); }
+    public TextAreaAssert minlength(int minlength) { return minlength(Matchers.is(minlength)); }
 
     @JDIAction("Assert that '{name}' maxlength {0}")
     public TextAreaAssert maxlength(Matcher<Integer> condition) {
         jdiAssert(element.maxlength(), condition);
         return this;
     }
-    public TextAreaAssert maxlength(int maxlength) { return maxlength(is(maxlength)); }
+    public TextAreaAssert maxlength(int maxlength) { return maxlength(Matchers.is(maxlength)); }
 
 }

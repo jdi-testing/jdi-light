@@ -3,6 +3,7 @@ package com.epam.jdi.light.ui.html.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.ColorPicker;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.is;
@@ -14,7 +15,7 @@ import static org.hamcrest.Matchers.is;
 public class ColorAssert extends UIAssert<ColorAssert, ColorPicker> {
     @JDIAction("Assert that '{name}' color is {0}")
     public ColorAssert color(String color) {
-        jdiAssert(element.color(), is(color));
+        jdiAssert(element.color(), Matchers.is(color));
         return this;
     }
 }

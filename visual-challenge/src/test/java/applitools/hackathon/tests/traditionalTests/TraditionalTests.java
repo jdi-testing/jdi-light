@@ -10,9 +10,11 @@ import applitools.hackathon.entities.Transaction;
 import applitools.hackathon.entities.User;
 import applitools.hackathon.test.data.TestDataProvider;
 import applitools.hackathon.utils.Utils;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Line;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.tools.Timer;
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -34,7 +36,7 @@ public class TraditionalTests extends TestsInit {
     @Test(suiteName = "Login Page UI Elements Test")
     public void loginPageValidation() {
         loginPage.validatateForm();
-        loginPage.alert.is().hidden();
+        //loginPage.alert.is().hidden();
     }
 
     @Test(suiteName = "Data-Driven Test", dataProvider = "correctUsers", dataProviderClass = TestDataProvider.class)
@@ -83,7 +85,7 @@ public class TraditionalTests extends TestsInit {
 
     @Test(suiteName = "Dynamic Content Test")
     public void dynamicAdTest() {
-        loginPage.open("?showAd=true");
+        loginPage.open("showAd=true");
         loginForm().loginAs(new User());
         advertisement.has().size(3)
             .all().elements(Utils::advertismentPresent);

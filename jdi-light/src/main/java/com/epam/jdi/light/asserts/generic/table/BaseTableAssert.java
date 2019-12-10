@@ -28,7 +28,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
      */
     @JDIAction("Assert is '{name}' empty")
     public A empty() {
-        jdiAssert(table().isEmpty() ? "is empty" : "is not empty", is("is empty"));
+        jdiAssert(table().isEmpty() ? "is empty" : "is not empty", Matchers.is("is empty"));
         return (A) this;
     }
 
@@ -37,7 +37,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
      */
     @JDIAction("Assert is '{name}' not empty")
     public A notEmpty() {
-        jdiAssert(table().isEmpty() ? "is empty" : "is not empty", is("is not empty"));
+        jdiAssert(table().isEmpty() ? "is empty" : "is not empty", Matchers.is("is not empty"));
         return (A) this;
     }
 
@@ -57,7 +57,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
      */
     @JDIAction("Assert that '{name}' size {0}")
     public A size(int size) {
-        return size(is(size));
+        return size(Matchers.is(size));
     }
 
     /**
@@ -96,7 +96,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
      */
     @JDIAction("Assert that '{name}' has at least one row that {0}}")
     public A rowThat(TableMatcher... matchers) {
-        jdiAssert(TABLE_MATCHER.execute(table(), matchers), is(not(Matchers.empty())));
+        jdiAssert(TABLE_MATCHER.execute(table(), matchers), Matchers.is(not(Matchers.empty())));
         return (A) this;
     }
     /**
@@ -105,7 +105,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
      */
     @JDIAction("Assert that '{name}' has at least one row that {0}}")
     public A rowThat(Single matcher, Column column) {
-        jdiAssert(TABLE_MATCHER.execute(table(), new TableMatcher[] {matcher.toTableMatcher(column)}), is(not(Matchers.empty())));
+        jdiAssert(TABLE_MATCHER.execute(table(), new TableMatcher[] {matcher.toTableMatcher(column)}), Matchers.is(not(Matchers.empty())));
         return (A) this;
     }
 
@@ -122,7 +122,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
 
     @JDIAction("Assert that '{name}' row {0} equals to other row")
     public A rowVisualValidation(String rowName, Line row) {
-        jdiAssert(table().row(rowName).visualCompareTo(row), is(true));
+        jdiAssert(table().row(rowName).visualCompareTo(row), Matchers.is(true));
         return (A) this;
     }
     @JDIAction("Assert that '{name}' row {0} equals to other row")
@@ -130,7 +130,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
         List<Line> tableRows = table().rowsImages();
         for (int i = 0; i < table().count(); i++) {
             Line tableRow = tableRows.get(i);
-            jdiAssert(tableRow.visualCompareTo(findRow(rows, tableRow.get(keyColumn), keyColumn)), is(true));
+            jdiAssert(tableRow.visualCompareTo(findRow(rows, tableRow.get(keyColumn), keyColumn)), Matchers.is(true));
         }
         return (A) this;
     }

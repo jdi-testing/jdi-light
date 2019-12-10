@@ -6,24 +6,34 @@ package applitools.hackathon;
  */
 
 import applitools.hackathon.pages.ApplitoolsSite;
+import com.epam.jdi.eyes.JDIEyes;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import java.lang.reflect.Method;
+
+import static applitools.hackathon.pages.ApplitoolsSite.loginPage;
+import static com.epam.jdi.eyes.JDIEyes.*;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.tools.PropertyReader.readProperties;
 
 public class TestsInit {
-    protected static String startUrl = "https://demo.applitools.com/hackathon.html";
 
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        initSite(ApplitoolsSite.class);
+        visualTestInit(ApplitoolsSite.class);
         if (readProperties().getProperty("environment").equals("V2"))
-            startUrl = "https://demo.applitools.com/hackathonV2.html";
+            loginPage.url = "https://demo.applitools.com/hackathonV2.html";
+    }
+    @BeforeMethod
+    public void before(Method method) {
+        newVisualTest(method);
     }
     @AfterSuite(alwaysRun = true)
     public static void teardown() {
+        closeAllEyes();
         killAllSeleniumDrivers();
     }
 }

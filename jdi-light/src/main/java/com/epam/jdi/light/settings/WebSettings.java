@@ -40,7 +40,9 @@ import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
 import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
@@ -154,6 +156,8 @@ public class WebSettings {
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
         fillAction(SoftAssert::setAssertType, "assert.type");
+        fillAction(p -> TEXT_TYPE = getTextType(p), "text.type");
+        fillAction(p -> SET_TEXT_TYPE = getSetTextType(p), "set.text.type");
 
         // RemoteWebDriver properties
         fillAction(p -> DRIVER_REMOTE_URL = getRemoteUrl(p), "remote.type");
@@ -161,6 +165,7 @@ public class WebSettings {
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> SMART_SEARCH_LOCATORS =
             filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
+        fillAction(p -> SMART_SEARCH_NAME = getSmartSearchFunc(p), "smart.locators.toName");
         fillAction(p -> COMMON_CAPABILITIES.put("headless", p), "headless");
 
         loadCapabilities("chrome.capabilities.path",
@@ -178,6 +183,18 @@ public class WebSettings {
         if (SMART_SEARCH_LOCATORS.size() == 0)
             SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
     }
+    private static TextTypes getTextType(String type) {
+        TextTypes textType = first(getAllEnumValues(TextTypes.class),
+            t -> t.toString().equals(type));
+        return textType != null
+            ? textType : SMART_TEXT;
+    }
+    private static SetTextTypes getSetTextType(String type) {
+        SetTextTypes textType = first(getAllEnumValues(SetTextTypes.class),
+                t -> t.toString().equals(type));
+        return textType != null
+                ? textType : SET_TEXT;
+    }
     private static String getRemoteUrl(String prop) {
         switch (prop.toLowerCase().replaceAll(" ", "")) {
             case "sauce":
@@ -188,6 +205,22 @@ public class WebSettings {
             default: return seleniumLocalhost();
         }
     }
+    private static JFunc1<String, String> getSmartSearchFunc(String name) {
+        switch (name) {
+            case "camelCase":
+                return StringUtils::toCamelCase;
+            case "snake_case":
+                return StringUtils::toSnakeCase;
+            case "kebab-case":
+                return StringUtils::toKebabCase;
+            case "PascalCase":
+                return StringUtils::toPascalCase;
+            case "UPPER_SNAKE_CASE":
+                return StringUtils::toUpperSnakeCase;
+            default: return StringUtils::toKebabCase;
+        }
+    }
+
 
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {
         String path = "";

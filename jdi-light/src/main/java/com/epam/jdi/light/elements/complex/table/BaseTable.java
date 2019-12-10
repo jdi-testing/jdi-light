@@ -53,6 +53,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     protected By cellLocator = By.xpath("//tr[{1}]/td[{0}]");
     protected By allCellsLocator = By.cssSelector("td");
     protected By headerLocator = By.cssSelector("th");
+    protected By filterLocator = By.cssSelector("th input[type=search],th input[type=text]");
     protected int rowHeaderIndex = -1;
     protected int firstColumnIndex = -1;
     protected int[] columnsMapping = new int[]{};
@@ -281,6 +282,14 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         return headerIsRow ? rowNum + 1 : rowNum;
     }
 
+    public UIElement filterBy(String filterName) {
+        return searchBy(filterName);
+    }
+    @JDIAction("Filter {name} by column {0}")
+    public UIElement searchBy(String filterName) {
+        int index = header().indexOf(filterName);
+        return $$(filterLocator).get(index);
+    }
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JTable.class, BaseTable.class))
@@ -301,6 +310,8 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
             this.allCellsLocator = defineLocator(j.allCells());
         if (isNotBlank(j.headers()))
             this.headerLocator = defineLocator(j.headers());
+        if (isNotBlank(j.filter()))
+            this.filterLocator = defineLocator(j.filter());
         if (header.size() > 0)
             this.header.setFinal(header);
         if (j.columnsMapping().length > 0)
@@ -599,8 +610,11 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         getTable();
         String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
         for (int i = 1; i <= count.get(); i++)
-            value += "||" + i + "||" + print(map(row(i), TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
+            value += "||" + i + "||" + print(map(getLineMap(row(i)).values(), TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         return value;
+    }
+    private MapArray<String, String> getLineMap(Line row) {
+        return new MapArray<>(header(), row);
     }
 
 }
