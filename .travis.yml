@@ -29,7 +29,7 @@ stages:
 
 logging:
   level:
-    ROOT: ERROR
+    ROOT: INFO
 
 jobs:
   include:
