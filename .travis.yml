@@ -27,6 +27,10 @@ stages:
 - test
 - reports
 
+logging:
+  level:
+    ROOT: DEBUG
+
 jobs:
   include:
   - stage: prepare
