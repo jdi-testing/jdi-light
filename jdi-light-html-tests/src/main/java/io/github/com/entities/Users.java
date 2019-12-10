@@ -24,8 +24,8 @@ public class Users {
             c.lastName = "Iovlev";
             c.position = "ChiefQA";
             //c.passport = true;
-            c.passportNumber = "4321";
-            c.passportSerial = "123456";
+            c.number = "4321";
+            c.serial = "123456";
             c.description = "JDI - awesome UI automation tool";
             c.acceptConditions = "true";
             c.gender = "Male";
