@@ -68,9 +68,10 @@
     </Root>
 
     <!-- additivity means, that parent-logger (in every case the root-logger) will also get the chance to log this stuff -->
-    <Logger name="JDI" additivity="TRUE" level="INFO">
+    <Logger name="JDI" additivity="FALSE" level="INFO">
       <AppenderRef ref="fileAppender"/>
       <AppenderRef ref="htmlFileLogger"/>
+      <AppenderRef ref="ColoredConsoleAppender"/>
     </Logger>
 
   </Loggers>
