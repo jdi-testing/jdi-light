@@ -17,6 +17,7 @@ import static org.hamcrest.Matchers.is;
 
 /**
  * Test examples for Label with JDI Light asserts
+ *
  */
 public class LabelExampleTests implements TestsInit {
 

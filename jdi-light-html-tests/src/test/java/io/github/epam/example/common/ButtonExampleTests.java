@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.is;
 
 /**
  * Test examples for Button with JDI Light asserts
+ *
  */
 public class ButtonExampleTests implements TestsInit {
 
