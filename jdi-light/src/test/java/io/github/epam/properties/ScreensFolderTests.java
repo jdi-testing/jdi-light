@@ -57,27 +57,10 @@ public class ScreensFolderTests {
 
     @Test
     public void crossPlatformPathTests() {
-        String chromePath = "";
-
-        String os = System.getProperty("os.name");
-        switch (os) {
-        case "Windows 10":
-             chromePath = "C:\\my\\win\\absolute\\path";
-             break;
-        case "Linux":
-             chromePath = "~/my/relative/path";
-             break;
-        case "Mac OS X":
-             chromePath = "my/predefined/path";
-             break;
-         default:
-             chromePath = "C:\\my\\win\\absolute\\path";
-             System.out.println("os.name = " + os);
-        }
+        String linuxPath = "~/my/relative/path";
         String userdir = System.getProperty("user.dir");
-        String uPath = AdditionalPathUtils.getCrossPlatformPath(chromePath);
-        System.out.println("os.name = " + os);
+        String workPath = AdditionalPathUtils.getCrossPlatformPath(linuxPath);
         System.out.println("user.dir = " + userdir);
-        System.out.println("Cross Platform Path = " + uPath);
+        System.out.println("Cross Platform Path = " + workPath);
     }
 }
