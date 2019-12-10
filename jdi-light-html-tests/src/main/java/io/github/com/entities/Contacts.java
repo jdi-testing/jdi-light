@@ -9,8 +9,8 @@ public class Contacts extends DataClass<Contacts> {
     //public boolean passport;
     public String acceptConditions;
     public String position;
-    public String passportNumber;
-    public String passportSerial;
+    public String number;
+    public String serial;
     public String description;
     public String gender;
     public String religion;
