@@ -27,10 +27,6 @@ stages:
 - test
 - reports
 
-logging:
-  level:
-    ROOT: INFO
-
 jobs:
   include:
   - stage: prepare
