@@ -22,6 +22,4 @@ public interface ILogger {
     void toLog(String msg);
     void setLogLevel(LogLevels levels);
     LogLevels getLogLevel();
-    void setScreenshotStrategy(String screenshotStrategy);
-    String getScreenshotStrategy();
 }

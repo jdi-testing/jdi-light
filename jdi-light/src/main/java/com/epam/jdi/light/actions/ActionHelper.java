@@ -13,11 +13,13 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.light.logger.LogLevels;
+import com.epam.jdi.light.logger.AllureLoggerHelper;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
+import com.epam.jdi.tools.func.JFunc3;
 import com.epam.jdi.tools.map.MapArray;
 import io.qameta.allure.Step;
 import org.aspectj.lang.JoinPoint;
@@ -30,6 +32,7 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreenOnFailure;
 import static com.epam.jdi.light.elements.base.OutputTemplatesUtils.DEFAULT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.OutputTemplatesUtils.STEP_TEMPLATE;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
@@ -37,6 +40,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_NEW_PAGE;
 import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_THIS_PAGE;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
 import static com.epam.jdi.light.elements.composite.WebPage.setCurrentPage;
+import static com.epam.jdi.light.logger.LogLevels.ERROR;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.ReflectionUtils.getAllFields;
@@ -61,10 +65,11 @@ public class ActionHelper {
 
     public static int CUT_STEP_TEXT = 70;
 
-    public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
+    public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = (jp) -> {
         logger.toLog(getBeforeLogString(jp), logLevel(jp));
+        AllureLoggerHelper.startStep(Integer.toString(jp.hashCode()), getBeforeLogString(jp));
     };
-    public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = jp -> {
+    public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = (jp) -> {
         BEFORE_STEP_ACTION.execute(jp);
         processNewPage(jp);
     };
@@ -78,6 +83,7 @@ public class ActionHelper {
             logger.toLog(">>> " + text, logLevel);
         } else
             logger.debug("Done");
+        AllureLoggerHelper.passStep(Integer.toString(jp.hashCode()));
         return result;
     };
     public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = jp -> {
@@ -95,8 +101,24 @@ public class ActionHelper {
     public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_JDI_ACTION =
             (jp, result) -> AFTER_STEP_ACTION.execute(jp, result);
 
-    public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
+    public static JFunc3<Object, ProceedingJoinPoint, String, String> ACTION_FAILED = (el, jp, ex) -> {
+        if (jp != null) {
+            logFailure(jp, el);
+        }
+        return ex;
+    };
 
+    private static void logFailure (ProceedingJoinPoint jp, Object el) {
+        logger.toLog(">>> " + el.toString(), ERROR);
+        String screenName = null;
+        try {
+            screenName = takeScreenOnFailure();
+        }
+        catch (Exception screenEx) {
+            logger.toLog(">>> " + screenEx.getMessage());
+        }
+        AllureLoggerHelper.failStep(Integer.toString(jp.hashCode()), screenName);
+    }
 
     private static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;

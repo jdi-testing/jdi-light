@@ -5,6 +5,7 @@ package io.github.epam.testng;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.logger.AllureLoggerHelper;
 import com.epam.jdi.tools.Safe;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -30,6 +31,7 @@ public class TestNGListener implements IInvokedMethodListener {
                 TEST_NAME.set(tr.getTestClass().getRealClass().getSimpleName()+"."+testMethod.getName());
                 start.set(currentTimeMillis());
                 logger.step("== Test '%s' START ==", TEST_NAME.get());
+                AllureLoggerHelper.startStep(Integer.toString(m.hashCode()), testMethod.getName());
             }
         }
     }
@@ -38,11 +40,16 @@ public class TestNGListener implements IInvokedMethodListener {
     public void afterInvocation(IInvokedMethod method, ITestResult r) {
         if (method.isTestMethod()) {
             String result = getTestResult(r);
-            logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
-                    new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())));
-            if ("FAILED".equals(result)) {
-                takeScreen();
+            if (r.isSuccess()) {
+                logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
+                        new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())));
+                AllureLoggerHelper.passStep(Integer.toString(method.hashCode()));
+            }
+            else
+            {
+                String screenName = takeScreen();
                 logger.step("ERROR: " + r.getThrowable().getMessage());
+                AllureLoggerHelper.failStep(Integer.toString(method.hashCode()), screenName);
             }
             logger.step("");
         }
