@@ -3,27 +3,104 @@ jdk:
 - openjdk8
 before_install:
 - sudo apt-get -y install jq
+before_script:
+- ls -lah
+- google-chrome-stable --version
 addons:
   chrome: stable
-script:
-  - echo "headless=true" > chrome.properties
-  - mvn clean verify -Ddriver=chrome -Dchrome.capabilities.path="../../../chrome.properties"
-after_failure:
-  - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:4.3.0:report
-  - echo "Build was failed"
-after_success:
-  - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:4.3.0:report
-  - echo "Build was successful"
-after_script:
-  - ls -la
-  - ls -la /home/travis/.m2/repository/webdriver/chromedriver/linux64/76.0.3809.126/chromedriver
-  - google-chrome-stable --version
-  - npm install -g allure-commandline
-  - allure --version
-  - total=""; for r in $(ls -d jdi*/); do allureDir="${r}allure-results"; if [ -d "$allureDir" ] ; then  echo "Results found for $r"; total="${total} ${allureDir}"; else echo "RESULTS NOT FOUND FOR ${r}"; fi ; done ; echo $total; allure generate --clean $total
-  - du -d 1 -h ./
-  - npm install -g netlify-cli
-  - travis_wait 30 netlify deploy --dir allure-report --json
-  - echo "Script finished"
 
+env:
+  global:
+  - CHROME_PROPERTIES="chrome.properties"
+  - WITH_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=../$CHROME_PROPERTIES" #add -ntp when maven will be >=3.6.1 on travis
+  - NOPO_TESTS="com.epam.jdi:jdi-light-bdd-no-po-tests"
+  - BDD_TESTS="com.epam.jdi:jdi-light-bdd-tests"
+  - BOOTSTRAP_TESTS="com.epam.jdi:jdi-light-bootstrap-tests"
+  - HTML_TESTS="com.epam.jdi:jdi-light-html-tests"
+  - EXAMPLES="com.epam.jdi:jdi-light-examples"
+  - PERFORMANCE="com.epam.jdi:jdi-performance"
+  - CHROME_ARGS="--headless"
+  
+stages:
+- prepare
+- compile
+- test
+- reports
+
+jobs:
+  include:
+  - stage: prepare
+    name: Welcome to jdi
+    script:
+    - echo ------------------- WELCOME TO JDI ----------------------
+    - mvn --version #it is helpful
+
+  - stage: compile
+    name: Compile jdi code
+    script:
+    - mvn install -DskipTests
+
+  - stage: test
+    name: Run tests - no po
+    script:
+    - mvn install -DskipTests
+    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    - mvn verify $WITH_PARAMS -pl $NOPO_TESTS
+
+  - stage: test
+    name: Run tests - bdd
+    script:
+    - mvn install -DskipTests
+    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    - mvn verify $WITH_PARAMS -pl $BDD_TESTS
+
+#TODO: bootstrap tests exceeded the maximum time limit for jobs (>50min)
+#  - stage: test
+#    name: Run tests - bootstrap
+#    script:
+#    - mvn install -DskipTests
+#    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+#    - mvn verify $WITH_PARAMS -pl $BOOTSTRAP_TESTS
+
+  - stage: test
+    name: Run tests - html
+    script:
+    - mvn install -DskipTests
+    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    - mvn verify $WITH_PARAMS -pl $HTML_TESTS
+
+  - stage: test
+    name: Run tests - examples
+    script:
+    - mvn install -DskipTests
+    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    - mvn verify $WITH_PARAMS -pl $EXAMPLES
+
+  - stage: test
+    name: Run tests - performance
+    script:
+    - mvn install -DskipTests
+    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    - mvn verify $WITH_PARAMS -pl $PERFORMANCE
+
+  - stage: reports
+    name: Deploy allure reports to netlify
+    script:
+    - npm install -g allure-commandline
+    - npm install -g netlify-cli
+    - allure --version
+    - source reports.sh
+    - deployAllureResults
+after_failure:
+- echo "Build was failed"
+after_success:
+- echo "Build was successful"
+after_script:
+- source reports.sh
+- grubAllureResults
+- du -d 1 -h ./
+- ls -la
+# extra time during long builds
+install:
+- travis_wait
 
