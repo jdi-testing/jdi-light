@@ -19,6 +19,7 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 
 import java.awt.Toolkit;
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +46,8 @@ import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
 
 public class DriverData {
     public static final String PROJECT_PATH = path("");
-    public static String SRC_PATH = mergePath(PROJECT_PATH,"src", "main");
-    public static String TEST_PATH = mergePath(PROJECT_PATH, "src" ,"test");
+    public static String SRC_PATH = mergePath(PROJECT_PATH, "src", "main");
+    public static String TEST_PATH = mergePath(PROJECT_PATH, "src", "test");
     public static String LOGS_PATH = mergePath(TEST_PATH, ".logs");
     public static String DRIVERS_FOLDER;
 
@@ -56,13 +57,14 @@ public class DriverData {
     public static final String DEFAULT_DRIVER = "chrome";
     public static String DRIVER_NAME = DEFAULT_DRIVER;
 
-    public static Map<String,String> CAPABILITIES_FOR_IE = new HashMap<>();
-    public static Map<String,String> CAPABILITIES_FOR_CHROME = new HashMap<>();
-    public static Map<String,String> CAPABILITIES_FOR_FF = new HashMap<>();
+    public static Map<String, String> CAPABILITIES_FOR_IE = new HashMap<>();
+    public static Map<String, String> CAPABILITIES_FOR_CHROME = new HashMap<>();
+    public static Map<String, String> CAPABILITIES_FOR_FF = new HashMap<>();
 
-    public static String  LATEST_VERSION = "LATEST";
+    public static String LATEST_VERSION = "LATEST";
     public static String DRIVER_VERSION = LATEST_VERSION;
     public static String PRELATEST_VERSION = "PRELATEST";
+    public static String ARGUMENTS_PROPERTY = "arguments";
     public static Platform PLATFORM = X32;
     public static JFunc<Capabilities> CHROME_OPTIONS = () -> {
         try {
@@ -81,7 +83,17 @@ public class DriverData {
             cap.addArguments(getBrowserSizeOption());
             cap.setExperimentalOption("prefs", chromePrefs);
             // Capabilities from settings
-            CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
+            CAPABILITIES_FOR_CHROME
+                    .entrySet()
+                    .stream()
+                    .filter(capability -> !capability.getKey().equals(ARGUMENTS_PROPERTY))
+                    .forEach(capability -> cap.setCapability(capability.getKey(), capability.getValue()));
+            CAPABILITIES_FOR_CHROME
+                    .entrySet()
+                    .stream()
+                    .filter(arguments -> arguments.getKey().equals(ARGUMENTS_PROPERTY))
+                    .flatMap(arguments -> Arrays.stream(arguments.getValue().split(" ")))
+                    .forEach(cap::addArguments);
             return cap;
         } catch (Exception ex) {
             throw exception(ex, "Failed Init Chrome Driver settings: " + safeException(ex));
@@ -147,27 +159,33 @@ public class DriverData {
 
     public static String getDriverFolder() {
         return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
-                ? DRIVERS_FOLDER : mergePath(TEST_PATH,"resources", "drivers");
+                ? DRIVERS_FOLDER : mergePath(TEST_PATH, "resources", "drivers");
     }
 
     public static String chromeDriverPath() {
-        return mergePath(getDriverFolder(),getOs() == WIN ? "chromedriver.exe" : "chromedriver");
+        return mergePath(getDriverFolder(), getOs() == WIN ? "chromedriver.exe" : "chromedriver");
     }
+
     public static String ieDriverPath() {
-        return mergePath(getDriverFolder(),"IEDriverServer.exe");
+        return mergePath(getDriverFolder(), "IEDriverServer.exe");
     }
+
     public static String edgeDriverPath() {
-        return mergePath(getDriverFolder(),"MicrosoftWebDriver.exe");
+        return mergePath(getDriverFolder(), "MicrosoftWebDriver.exe");
     }
+
     public static String operaDriverPath() {
         return driverPath("operadriver");
     }
+
     public static String phantomDriverPath() {
         return driverPath("phantomjs");
     }
+
     public static String firefoxDriverPath() {
         return driverPath("geckodriver");
     }
+
     private static String driverPath(String driverName) {
         return mergePath(getDriverFolder(), getOs() == WIN ? driverName + ".exe" : driverName);
     }
@@ -175,9 +193,9 @@ public class DriverData {
     public static OsTypes getOs() {
         String osName = System.getProperty("os.name").toLowerCase();
         return Switch(osName).get(
-            Case(os -> os.contains("mac"), MAC),
-            Case(os -> os.contains("win") || os.contains("ms"), WIN),
-            Default(LINUX)
+                Case(os -> os.contains("mac"), MAC),
+                Case(os -> os.contains("win") || os.contains("ms"), WIN),
+                Default(LINUX)
         );
     }
 
@@ -195,10 +213,11 @@ public class DriverData {
             throw ex;
         }
     }
+
     private static String getBrowserSizeOption() {
         List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
         return groups.size() == 2
-                ? "--window-size=" + groups.get(0) + ","+ groups.get(1)
+                ? "--window-size=" + groups.get(0) + "," + groups.get(1)
                 : "--start-maximized";
     }
 

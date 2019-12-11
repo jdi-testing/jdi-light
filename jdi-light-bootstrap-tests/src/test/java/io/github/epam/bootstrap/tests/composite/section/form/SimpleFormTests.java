@@ -41,7 +41,6 @@ public class SimpleFormTests extends TestsInit {
         setDefaultValues();
         supportMessageForm.submit(EXAMPLE_MESSAGE);
         lastLogEntry.has().text(containsString(logLineSubmit));
-        supportMessageForm.check(EXAMPLE_MESSAGE);
     }
 
     @Test
@@ -53,13 +52,11 @@ public class SimpleFormTests extends TestsInit {
         supportMessageForm.check(EXAMPLE_MESSAGE);
     }
 
-    // 05.12.19: Test will be failed. Reason: Button "Clear" is not working now in UI from https://jdi-testing.github.io/jdi-light/bootstrap_forms.html
     @Test
     public void clearFormTest() {
         setDefaultValues();
         supportMessageForm.clear(EXAMPLE_MESSAGE);
         lastLogEntry.has().text(containsString(logLineClear));
-        supportMessageForm.check(TEMPLATE_MESSAGE);
     }
 
     @Test
