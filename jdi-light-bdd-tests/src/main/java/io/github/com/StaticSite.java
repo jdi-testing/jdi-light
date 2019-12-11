@@ -38,6 +38,7 @@ public class StaticSite {
 	@UI("footer") public static Footer footer;
 	@UI(".sidebar-menu span") public static Menu leftMenu;
 
-	@Frame("iframe") public static HomePageFrame iframe;
+	@Frame("frame")
+	public static HomePageFrame iframe;
 	public static GithubPage githubPage;
 }

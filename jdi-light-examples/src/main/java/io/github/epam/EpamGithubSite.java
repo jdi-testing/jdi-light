@@ -35,6 +35,7 @@ public class EpamGithubSite {
 	@Css("header") public static Header header;
 	@Css("footer") public static Footer footer;
 
-	@Frame("iframe") public static HomePageFrame iframe;
+    @Frame("frame")
+    public static HomePageFrame iframe;
 	public static GithubPage githubPage;
 }
