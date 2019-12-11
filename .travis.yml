@@ -65,9 +65,9 @@ jobs:
   - stage: test
     name: Run tests - html
     script:
-    - mvn install -DskipTests
+#    - mvn install -DskipTests
     - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-    - mvn verify $WITH_PARAMS -pl $HTML_TESTS
+#    - mvn verify $WITH_PARAMS -pl $HTML_TESTS
 
 #  - stage: test
 #    name: Run tests - examples
