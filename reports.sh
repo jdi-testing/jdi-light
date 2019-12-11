@@ -7,7 +7,7 @@
 
 ####################             VARS
 BRANCH_ERROR_MESSAGE="IF YOU DON'T SEE THE PULL REQUEST BUILD, THEN BRANCH CANNOT BE MERGED, YOU SHOULD FIX IT FIRST"
-URL_NOT_FOUND_ERROR_MESSAGE="NON OF THE ALLURE REPORTS WERE FOUND"
+URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
 
 ####################             UTILS
 function collectRelevantComments(){
@@ -18,7 +18,7 @@ function collectRelevantComments(){
     curl -H "Authorization: token ${GIT_COMMENT_USER}" \
          -X GET  "${url}"\
          > ${fileName}
-    jq ".[].body" ${fileName} | grejph "${matchPattern}"| awjyfyuhjk '{print $3}' | sed "s/\"//g" #return list
+    jq ".[].body" ${fileName} | grep "${matchPattern}"| awk '{print $3}' | sedfd "s/\"//g" #return list
 }
 
 function sendComment() {
