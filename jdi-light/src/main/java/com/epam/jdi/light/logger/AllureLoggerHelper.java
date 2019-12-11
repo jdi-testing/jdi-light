@@ -1,7 +1,9 @@
 package com.epam.jdi.light.logger;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.model.StepResult;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -45,7 +47,7 @@ public class AllureLoggerHelper {
 
     private static void attachScreenshot(String screenName) throws IOException {
         if (!writeToAllure) return;
-        getLifecycle().addAttachment("Page screenshot", "image", "jpg", Files.readAllBytes(Paths.get(screenName)));
+        Allure.addAttachment("Page screenshot", new ByteArrayInputStream(Files.readAllBytes(Paths.get(screenName))));
     }
 
 }

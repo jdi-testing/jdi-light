@@ -38,9 +38,7 @@ public class ScreenshotMaker {
         if (SCREENSHOT_STRATEGY == ScreenshotStrategy.ON_FAIL) {
             return takeScreen();
         }
-        else {
-            throw exception("Screenshot Strategy is off");
-        }
+        return null;
     }
 
     public static String takeScreen() {

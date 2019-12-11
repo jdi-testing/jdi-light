@@ -108,15 +108,9 @@ public class ActionHelper {
         return ex;
     };
 
-    private static void logFailure (ProceedingJoinPoint jp, Object el) {
+    private static void logFailure(ProceedingJoinPoint jp, Object el) {
         logger.toLog(">>> " + el.toString(), ERROR);
-        String screenName = null;
-        try {
-            screenName = takeScreenOnFailure();
-        }
-        catch (Exception screenEx) {
-            logger.toLog(">>> " + screenEx.getMessage());
-        }
+        String screenName = takeScreenOnFailure();
         AllureLoggerHelper.failStep(Integer.toString(jp.hashCode()), screenName);
     }
 

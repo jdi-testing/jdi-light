@@ -31,7 +31,6 @@ public class TestNGListener implements IInvokedMethodListener {
                 TEST_NAME.set(tr.getTestClass().getRealClass().getSimpleName()+"."+testMethod.getName());
                 start.set(currentTimeMillis());
                 logger.step("== Test '%s' START ==", TEST_NAME.get());
-                AllureLoggerHelper.startStep(Integer.toString(m.hashCode()), testMethod.getName());
             }
         }
     }
@@ -40,17 +39,8 @@ public class TestNGListener implements IInvokedMethodListener {
     public void afterInvocation(IInvokedMethod method, ITestResult r) {
         if (method.isTestMethod()) {
             String result = getTestResult(r);
-            if (r.isSuccess()) {
-                logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
+            logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
                         new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())));
-                AllureLoggerHelper.passStep(Integer.toString(method.hashCode()));
-            }
-            else
-            {
-                String screenName = takeScreen();
-                logger.step("ERROR: " + r.getThrowable().getMessage());
-                AllureLoggerHelper.failStep(Integer.toString(method.hashCode()), screenName);
-            }
             logger.step("");
         }
     }
