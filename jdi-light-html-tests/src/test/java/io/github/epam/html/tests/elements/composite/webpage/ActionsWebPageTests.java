@@ -10,7 +10,6 @@ import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.StaticSite.leftMenu;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 
-
 public class ActionsWebPageTests implements TestsInit {
 
     @BeforeMethod

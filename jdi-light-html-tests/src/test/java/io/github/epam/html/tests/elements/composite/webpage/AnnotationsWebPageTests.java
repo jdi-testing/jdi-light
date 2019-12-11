@@ -6,7 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.webpages.WebPageDataProvider;
 
-
 public class AnnotationsWebPageTests implements TestsInit {
 
     @Test(dataProvider = "annotationsWebPageDataProvider", dataProviderClass = WebPageDataProvider.class)
