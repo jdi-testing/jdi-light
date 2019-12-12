@@ -51,4 +51,5 @@ public class StaticSite {
     @Frame("frame")
     public static HomePageFrame iframe;
     public static GithubPage githubPage;
+
 }
