@@ -74,7 +74,7 @@ public class ActionProcessor {
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            throw exception(ex, ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
+            throw exception(ex, ACTION_FAILED.execute(getObjAround(jp), (aroundCount() > 1) ? null : jp, getExceptionAround(ex, aroundCount() == 1)));
         }
     }
 
@@ -192,7 +192,7 @@ public class ActionProcessor {
             return AFTER_STEP_ACTION.execute(jp, result);
         } catch (Throwable ex) {
             Object element = jp.getThis() != null ? jp.getThis() : new Object();
-            throw exception(ex, ACTION_FAILED.execute(element, safeException(ex)));
+            throw exception(ex, ACTION_FAILED.execute(element, jp, safeException(ex)));
         }
     }
 }
