@@ -175,7 +175,6 @@ public class DriverData {
         setUp("Chrome: setExperimentalOption: prefs",
             () -> cap.setExperimentalOption("prefs", chromePrefs));
         // Capabilities from settings
-        CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
         CAPABILITIES_FOR_CHROME
                 .entrySet()
                 .stream()
