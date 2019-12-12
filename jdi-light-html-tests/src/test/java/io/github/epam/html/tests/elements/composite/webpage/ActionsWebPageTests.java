@@ -35,7 +35,6 @@ public class ActionsWebPageTests extends TestsInit {
         contactFormPage.checkOpened();
     }
 
-
     @Test
     public void isOpenedTest() {
         Assert.assertTrue(contactFormPage.isOpened());
