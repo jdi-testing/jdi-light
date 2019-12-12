@@ -44,7 +44,7 @@ public class CardImageOverlaysTests extends TestsInit {
     public static Object[][] getElement() {
         return new Object[][] {
             {cardImageOverlays.overlaySection.title},
-            {cardImageOverlays.vectorImage}
+            {cardImageOverlays.image}
         };
     }
 
@@ -58,13 +58,13 @@ public class CardImageOverlaysTests extends TestsInit {
     @Test
     public void isValidationTest() {
         cardImageOverlays.overlaySection.title.is().text(is(TITLE));
-        cardImageOverlays.vectorImage.assertThat().height(is(HEIGHT));
-        cardImageOverlays.vectorImage.assertThat().width(is(WIDTH));
+        cardImageOverlays.image.assertThat().height(is(HEIGHT));
+        cardImageOverlays.image.assertThat().width(is(WIDTH));
     }
 
     @Test
     public void baseValidationTest() {
-        baseValidation(cardImageOverlays.vectorImage);
+        baseValidation(cardImageOverlays.image);
         baseValidation(cardImageOverlays.overlaySection.title);
     }
 
@@ -72,13 +72,13 @@ public class CardImageOverlaysTests extends TestsInit {
     public void classTest() {
         cardImageOverlays.overlaySection.is().core().hasClass(OVERLAY_CLASS);
         cardImageOverlays.overlaySection.assertThat().core().hasClass(OVERLAY_CLASS);
-        cardImageOverlays.vectorImage.is().core().hasClass(IMAGE_TOP_CLASS);
-        cardImageOverlays.vectorImage.assertThat().core().hasClass(IMAGE_TOP_CLASS);
+        cardImageOverlays.image.is().core().hasClass(IMAGE_TOP_CLASS);
+        cardImageOverlays.image.assertThat().core().hasClass(IMAGE_TOP_CLASS);
     }
 
     @Test
     public void vectorInternalElementsTest() {
-        assertEquals(cardImageOverlays.vectorImage.getText(VECTOR_TEXT_TAG), VECTOR_TEXT);
-        assertEquals(cardImageOverlays.vectorImage.getAttribute(VECTOR_TEXT_TAG, VECTOR_TEXT_ATTR), VECTOR_TEXT_VALUE);
+        assertEquals(cardImageOverlays.image.getText(VECTOR_TEXT_TAG), VECTOR_TEXT);
+        assertEquals(cardImageOverlays.image.getAttribute(VECTOR_TEXT_TAG, VECTOR_TEXT_ATTR), VECTOR_TEXT_VALUE);
     }
 }
