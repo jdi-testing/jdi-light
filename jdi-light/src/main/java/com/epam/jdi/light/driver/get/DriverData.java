@@ -12,10 +12,7 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
@@ -86,6 +83,7 @@ public class DriverData {
     public static String  LATEST_VERSION = "LATEST";
     public static String DRIVER_VERSION = LATEST_VERSION;
     public static String PRELATEST_VERSION = "PRELATEST";
+    public static String ARGUMENTS_PROPERTY = "arguments";
     public static Platform PLATFORM = X32;
 
     public static OsTypes getOs() {
@@ -178,6 +176,17 @@ public class DriverData {
             () -> cap.setExperimentalOption("prefs", chromePrefs));
         // Capabilities from settings
         CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
+        CAPABILITIES_FOR_CHROME
+                .entrySet()
+                .stream()
+                .filter(capability -> !capability.getKey().equals(ARGUMENTS_PROPERTY))
+                .forEach(capability -> cap.setCapability(capability.getKey(), capability.getValue()));
+        CAPABILITIES_FOR_CHROME
+                .entrySet()
+                .stream()
+                .filter(arguments -> arguments.getKey().equals(ARGUMENTS_PROPERTY))
+                .flatMap(arguments -> Arrays.stream(arguments.getValue().split(" ")))
+                .forEach(cap::addArguments);
     };
 
     public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = cap -> {
