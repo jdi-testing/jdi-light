@@ -5,7 +5,11 @@ import org.testng.annotations.Test;
 
 import java.util.Properties;
 
-import static com.epam.jdi.light.common.Property.*;
+import static com.epam.jdi.light.common.Property.DRIVERS_FOLDER_PROPERTY;
+import static com.epam.jdi.light.common.Property.CHROME_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.FF_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.IE_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.SCREENS_FOLDER_PROPERTY;
 
 public class CrossPathTests {
     private final String osName = System.getProperty("os.name");
