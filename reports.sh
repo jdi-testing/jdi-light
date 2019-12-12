@@ -18,7 +18,7 @@ function collectRelevantComments(){
     curl -H "Authorization: token ${GIT_COMMENT_USER}" \
          -X GET  "${url}"\
          > ${fileName}
-    jq ".[].body" ${fileName} | grep "${matchPattern}"| awk '{print $3}' | sedfd "s/\"//g" #return list
+    jq ".[].body" ${fileName} | grep "${matchPattern}"| awk '{print $3}' | sed "s/\"//g" #return list
 }
 
 function sendComment() {
