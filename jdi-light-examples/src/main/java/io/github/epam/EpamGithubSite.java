@@ -21,20 +21,29 @@ import java.util.List;
 @SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class EpamGithubSite {
-	@Url("/index.html") public static HomePage homePage;
-	@Url("/metals-colors.html") @Title("Metal and Colors")
-	public static MetalAndColorsPage metalAndColorsPage;
-	@Url("/contacts.html") @Title("Contact Form")
-	public static ContactFormPage contactFormPage;
-	@Url("/performance.html") @Title("Performance page")
-	public static PerformancePage tablePage;
+    @Url("/index.html")
+    public static HomePage homePage;
+    @Url("/metals-colors.html")
+    @Title("Metal and Colors")
+    public static MetalAndColorsPage metalAndColorsPage;
+    @Url("/contacts.html")
+    @Title("Contact Form")
+    public static ContactFormPage contactFormPage;
+    @Url("/performance.html")
+    @Title("Performance page")
+    public static PerformancePage tablePage;
 
-	@Css("[ui=label]") public static List<WebElement> navigation;
-	@Css("[ui=label]") public static WebList navigationL;
+    @Css("[ui=label]")
+    public static List<WebElement> navigation;
+    @Css("[ui=label]")
+    public static WebList navigationL;
 
-	@Css("header") public static Header header;
-	@Css("footer") public static Footer footer;
+    @Css("header")
+    public static Header header;
+    @Css("footer")
+    public static Footer footer;
 
-	@Frame("iframe") public static HomePageFrame iframe;
-	public static GithubPage githubPage;
+    @Frame("frame")
+    public static HomePageFrame iframe;
+    public static GithubPage githubPage;
 }

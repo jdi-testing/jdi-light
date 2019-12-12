@@ -11,7 +11,6 @@ import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.setWindowName;
 import static com.epam.jdi.light.elements.common.WindowsManager.switchToWindow;
 import static com.epam.jdi.light.elements.common.WindowsManager.windowsCount;
-import static com.epam.jdi.light.settings.WebSettings.ANY_ELEMENT;
 import static io.github.epam.EpamGithubSite.githubPage;
 import static io.github.epam.EpamGithubSite.homePage;
 import static io.github.epam.EpamGithubSite.iframe;
@@ -50,8 +49,6 @@ public class WindowsAndFramesTests extends TestsInit {
 
     @Test
     public void frameTest() {
-        iframe.userIcon.click();
-        iframe.userName.setup(jdiB -> jdiB.setSearchRule(ANY_ELEMENT));
-        iframe.userName.assertThat().text("Piter Chailovskii");
+        iframe.button.assertThat().value(containsString("Frame Button"));
     }
 }
