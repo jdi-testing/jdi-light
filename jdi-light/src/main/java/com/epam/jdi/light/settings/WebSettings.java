@@ -59,6 +59,8 @@ import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_PAGE_PROPERTY;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
+import static com.epam.jdi.light.driver.ScreenshotMaker.SCREENSHOT_STRATEGY;
+import static com.epam.jdi.light.driver.ScreenshotMaker.ScreenshotStrategy;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.BROWSER_SIZE;
 import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_CHROME;
@@ -156,7 +158,7 @@ public class WebSettings {
                 ? PRELATEST_VERSION : p, DRIVERS_VERSION_PROPERTY.getName());
         fillAction(p -> DRIVERS_FOLDER = p, DRIVERS_FOLDER_PROPERTY.getName());
         fillAction(p -> SCREEN_PATH = p, SCREENS_FOLDER_PROPERTY.getName());
-        fillAction(p -> logger.setScreenshotStrategy(p), SCREENSHOT_STRATEGY_PROPERTY.getName());
+        fillAction(p -> SCREENSHOT_STRATEGY = getScreenshotStrategy(p), SCREENSHOT_STRATEGY_PROPERTY.getName());
         fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
         fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY_PROPERTY.getName());
         fillAction(p -> BROWSER_SIZE = p, BROWSER_SIZE_PROPERTY.getName());
@@ -289,5 +291,11 @@ public class WebSettings {
             properties = PropertyReader.getProperties(propertyFilePath);
         }
         return properties;
+    }
+    private static ScreenshotStrategy getScreenshotStrategy(String strategy) {
+        switch (strategy.toLowerCase()) {
+            case "off": return ScreenshotStrategy.OFF;
+            default: return ScreenshotStrategy.ON_FAIL;
+        }
     }
 }
