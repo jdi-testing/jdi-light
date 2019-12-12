@@ -55,12 +55,12 @@ jobs:
     - mvn verify $WITH_PARAMS -pl $BDD_TESTS
 
 #TODO: bootstrap tests exceeded the maximum time limit for jobs (>50min)
-  - stage: test
-    name: Run tests - bootstrap
-    script:
-    - mvn install -DskipTests
-    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-    - mvn verify $WITH_PARAMS -pl $BOOTSTRAP_TESTS
+#  - stage: test
+#    name: Run tests - bootstrap
+#    script:
+#    - mvn install -DskipTests
+#    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+#    - mvn verify $WITH_PARAMS -pl $BOOTSTRAP_TESTS
 
   - stage: test
     name: Run tests - html
