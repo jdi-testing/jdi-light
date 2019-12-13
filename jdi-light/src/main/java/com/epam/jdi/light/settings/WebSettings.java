@@ -24,6 +24,9 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -56,6 +59,8 @@ import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_PAGE_PROPERTY;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
+import static com.epam.jdi.light.driver.ScreenshotMaker.SCREENSHOT_STRATEGY;
+import static com.epam.jdi.light.driver.ScreenshotMaker.ScreenshotStrategy;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.BROWSER_SIZE;
 import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_CHROME;
@@ -76,7 +81,6 @@ import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.settings.TimeoutSettingsUtils.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettingsUtils.TIMEOUT;
 import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
@@ -94,11 +98,12 @@ public class WebSettings {
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
-        el != null && el.isDisplayed() && el.isEnabled();
+            el != null && el.isDisplayed() && el.isEnabled();
     public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
-        el != null && !el.isDisplayed() && $(el).isClickable();
+            el != null && !el.isDisplayed() && $(el).isClickable();
     public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
-    public static JAction1<UIElement> BEFORE_SEARCH = b -> {};
+    public static JAction1<UIElement> BEFORE_SEARCH = b -> {
+    };
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
     public static ElementArea CLICK_TYPE = SMART_CLICK;
@@ -114,7 +119,8 @@ public class WebSettings {
                         .setup(e -> e.setName(el.getName()).noWait());
                 try {
                     return ui.getWebElement();
-                } catch (Exception ignore) { }
+                } catch (Exception ignore) {
+                }
             }
             throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
         });
@@ -123,21 +129,25 @@ public class WebSettings {
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
+
     public static boolean hasDomain() {
         return DOMAIN != null && DOMAIN.contains("://");
     }
+
     public static String useDriver(JFunc<WebDriver> driver) {
         return WebDriverFactory.useDriver(driver);
     }
+
     public static String useDriver(String driverName) {
         return WebDriverFactory.useDriver(driverName);
     }
+
     public static String useDriver(DriverTypes driverType) {
         return WebDriverFactory.useDriver(driverType);
     }
 
     public static synchronized void init() {
-        validateProperties(getCapabilitiesPath(TEST_PROPERTIES_PATH));
+        validateProperties(getProperties(TEST_PROPERTIES_PATH));
         fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_ELEMENT_PROPERTY.getName());
         fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_PAGE_PROPERTY.getName());
         fillAction(p -> DOMAIN = p, DOMAIN_PROPERTY.getName());
@@ -148,7 +158,7 @@ public class WebSettings {
                 ? PRELATEST_VERSION : p, DRIVERS_VERSION_PROPERTY.getName());
         fillAction(p -> DRIVERS_FOLDER = p, DRIVERS_FOLDER_PROPERTY.getName());
         fillAction(p -> SCREEN_PATH = p, SCREENS_FOLDER_PROPERTY.getName());
-        fillAction(p -> logger.setScreenshotStrategy(p), SCREENSHOT_STRATEGY_PROPERTY.getName());
+        fillAction(p -> SCREENSHOT_STRATEGY = getScreenshotStrategy(p), SCREENSHOT_STRATEGY_PROPERTY.getName());
         fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
         fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY_PROPERTY.getName());
         fillAction(p -> BROWSER_SIZE = p, BROWSER_SIZE_PROPERTY.getName());
@@ -163,28 +173,33 @@ public class WebSettings {
                 filter(p.split(";"), l -> isNotBlank(l)), SMART_LOCATORS_PROPERTY.getName());
 
         loadCapabilities(CHROME_CAPABILITIES_PATH.getName(),
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
+                p -> p.forEach((key, value) -> CAPABILITIES_FOR_CHROME.put(key.toString(), value.toString())));
         loadCapabilities(FF_CAPABILITIES_PATH.getName(),
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
+                p -> p.forEach((key, value) -> CAPABILITIES_FOR_FF.put(key.toString(), value.toString())));
         loadCapabilities(IE_CAPABILITIES_PATH.getName(),
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
+                p -> p.forEach((key, value) -> CAPABILITIES_FOR_IE.put(key.toString(), value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
     }
+
     public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
         SEARCH_RULES = rule;
     }
+
     public static void noValidation() {
         SEARCH_RULES = ANY_ELEMENT;
         CLICK_TYPE = CENTER;
     }
+
     public static void onlyVisible() {
         SEARCH_RULES = VISIBLE_ELEMENT;
     }
+
     public static void visibleEnabled() {
         SEARCH_RULES = ENABLED_ELEMENT;
     }
+
     public static void inView() {
         SEARCH_RULES = ELEMENT_IN_VIEW;
         BEFORE_SEARCH = UIElement::show;
@@ -192,10 +207,12 @@ public class WebSettings {
 
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {
         String path = "";
-        try { path = getProperty(property);
-        } catch (Exception ignore) { }
-        if(isNotEmpty(path)) {
-            setCapabilities.execute(getCapabilitiesPath(path));
+        try {
+            path = System.getProperty(property, getProperty(property));
+        } catch (Exception ignore) {
+        }
+        if (isNotEmpty(path)) {
+            setCapabilities.execute(getProperties(path));
         }
     }
 
@@ -247,14 +264,38 @@ public class WebSettings {
 
     private static PageLoadStrategy getPageLoadStrategy(String strategy) {
         switch (strategy.toLowerCase()) {
-            case "normal": return NORMAL;
-            case "none": return NONE;
-            case "eager": return EAGER;
-            default: return NORMAL;
+            case "normal":
+                return NORMAL;
+            case "none":
+                return NONE;
+            case "eager":
+                return EAGER;
+            default:
+                return NORMAL;
         }
     }
-    private static Properties getCapabilitiesPath(String path) {
-        Properties p = PropertyReader.getProperties(mergePath("/../../target/classes/", path));
-        return p.size() > 0 ? p : PropertyReader.getProperties(path);
+
+    public static Properties getProperties(String path) {
+        File propertyFile = new File(path);
+        Properties properties = new Properties();
+        if (propertyFile.exists()) {
+            try {
+                System.out.println("Property file found: " + propertyFile.getAbsolutePath());
+                properties.load(new FileInputStream(propertyFile));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // TODO use mergePath macos and windows
+            String propertyFilePath = "/../../target/classes/" + path;
+            properties = PropertyReader.getProperties(propertyFilePath);
+        }
+        return properties;
+    }
+    private static ScreenshotStrategy getScreenshotStrategy(String strategy) {
+        switch (strategy.toLowerCase()) {
+            case "off": return ScreenshotStrategy.OFF;
+            default: return ScreenshotStrategy.ON_FAIL;
+        }
     }
 }

@@ -28,6 +28,18 @@ public class ScreenshotMaker {
     public static String SCREEN_PATH = LOGS_PATH + "\\screens";
     public static String SCREEN_NAME = "screen";
     public static String SCREEN_FILE_SUFFIX = ".jpg";
+    public static ScreenshotStrategy SCREENSHOT_STRATEGY = ScreenshotStrategy.ON_FAIL;
+
+    public enum ScreenshotStrategy {
+        ON_FAIL, OFF
+    }
+
+    public static String takeScreenOnFailure() {
+        if (SCREENSHOT_STRATEGY == ScreenshotStrategy.ON_FAIL) {
+            return takeScreen();
+        }
+        return null;
+    }
 
     public static String takeScreen() {
         return new ScreenshotMaker().takeScreenshot();

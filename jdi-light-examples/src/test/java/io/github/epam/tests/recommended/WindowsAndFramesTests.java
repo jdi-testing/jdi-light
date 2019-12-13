@@ -52,6 +52,6 @@ public class WindowsAndFramesTests extends StaticTestsInit {
 
     @Test
     public void frameTest() {
-        iframe.userIcon.click();
+        iframe.button.assertThat().value(containsString("Frame Button"));
     }
 }

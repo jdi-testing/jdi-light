@@ -31,13 +31,7 @@ public class TestNGListener implements IInvokedMethodListener {
     public void afterInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
         if (iInvokedMethod.isTestMethod()) {
             String result = getTestResult(iTestResult);
-            if ("FAILED".equals(result)) {
-                logger.error("=== Test '%s' %s ===", TEST_NAME.get(), result);
-            }
-            else {
-                System.out.println("STEP PASSED");
-                logger.step("=== Test '%s' %s ===", TEST_NAME.get(), result);
-            }
+            logger.step("=== Test '%s' %s ===", TEST_NAME.get(), result);
         }
     }
 

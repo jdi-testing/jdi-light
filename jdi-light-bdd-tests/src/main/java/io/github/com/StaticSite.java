@@ -21,23 +21,35 @@ import io.github.com.pages.UsersPage;
 @SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
-	@Url("/index.html") public static HomePage homePage;
-	@Url("/metals-colors.html") @Title("Metal and Colors")
-	public static MetalAndColorsPage metalAndColorsPage;
-	@Url("/contacts.html") @Title("Contact Form")
-	public static ContactFormPage contactFormPage;
-	@Url("/html5.html") public static HtmlElementsPage html5Page;
-	@Url("/dates.html") @Title("Dates")
-	public static DatesPage datesPage;
-	@Url("/user-table.html") @Title("User Table")
-	public static UsersPage usersPage;
-	@Url("/simple-table.html") @Title("Simple Table")
-	public static SimplePage simplePage;
+    @Url("/index.html")
+    public static HomePage homePage;
+    @Url("/metals-colors.html")
+    @Title("Metal and Colors")
+    public static MetalAndColorsPage metalAndColorsPage;
+    @Url("/contacts.html")
+    @Title("Contact Form")
+    public static ContactFormPage contactFormPage;
+    @Url("/html5.html")
+    public static HtmlElementsPage html5Page;
+    @Url("/dates.html")
+    @Title("Dates")
+    public static DatesPage datesPage;
+    @Url("/user-table.html")
+    @Title("User Table")
+    public static UsersPage usersPage;
+    @Url("/simple-table.html")
+    @Title("Simple Table")
+    public static SimplePage simplePage;
 
-	@UI("header") public static Header header;
-	@UI("footer") public static Footer footer;
-	@UI(".sidebar-menu span") public static Menu leftMenu;
+    @UI("header")
+    public static Header header;
+    @UI("footer")
+    public static Footer footer;
+    @UI(".sidebar-menu span")
+    public static Menu leftMenu;
 
-	@Frame("iframe") public static HomePageFrame iframe;
-	public static GithubPage githubPage;
+    @Frame("frame")
+    public static HomePageFrame iframe;
+    public static GithubPage githubPage;
+
 }

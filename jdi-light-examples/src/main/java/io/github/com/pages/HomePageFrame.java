@@ -1,8 +1,10 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import org.openqa.selenium.WebElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
-public class HomePageFrame {
-	@Css("img#user-icon") public WebElement userIcon;
+public class HomePageFrame extends Section {
+    @UI("#frame-button")
+    public UIElement button;
 }

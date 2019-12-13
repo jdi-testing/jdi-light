@@ -45,7 +45,7 @@ public class HtmlActions {
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            throw exception(ex, ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
+            throw exception(ex, ACTION_FAILED.execute(getObjAround(jp), jp, getExceptionAround(ex, aroundCount() == 1)));
         }
     }
 
