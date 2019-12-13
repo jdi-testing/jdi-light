@@ -19,7 +19,7 @@ env:
   - EXAMPLES="com.epam.jdi:jdi-light-examples"
   - PERFORMANCE="com.epam.jdi:jdi-performance"
   - CHROME_ARGS="--headless"
-
+  
 stages:
 - prepare
 - compile
@@ -38,7 +38,6 @@ jobs:
     name: Compile jdi code
     script:
     - mvn install -DskipTests
-    - mvn versions:use-latest-releases
 
   - stage: test
     name: Run tests - no po
