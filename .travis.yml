@@ -43,8 +43,8 @@ jobs:
     name: Run tests - no po
     script:
     - mvn install -DskipTests
-    - echo "arguments=${CHROME_ARGS}" > ${CHROME_PROPERTIES}
-    - mvn verify ${WITH_PARAMS} -pl ${NOPO_TESTS}
+    - echo "arguments=--headless" > "chrome.properties"
+    - mvn verify -Ddriver=chrome -Dchrome.capabilities.path=../chrome.properties -pl "com.epam.jdi:jdi-bdd-no-po-tests"
 
   - stage: test
     name: Run tests - bdd
