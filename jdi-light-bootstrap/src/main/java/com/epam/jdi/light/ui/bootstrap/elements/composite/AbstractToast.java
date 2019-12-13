@@ -9,7 +9,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
  * To see an example of Toast in bootstrap please visit https://getbootstrap.com/docs/4.3/components/toasts/#examples
  */
 
-public abstract class Toast extends Section {
+public abstract class AbstractToast extends Section {
 
     @UI(".toast-header .mr-auto")
     public Text title;
