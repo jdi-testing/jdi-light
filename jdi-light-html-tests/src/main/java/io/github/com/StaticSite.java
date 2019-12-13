@@ -26,8 +26,8 @@ public class StaticSite {
 	public static MetalAndColorsPage metalAndColorsPage;
 	@Url("/contacts.html") @Title("Contact Form")
 	public static ContactFormPage contactFormPage;
-	@Url(value = "/html5/%s", template = "/html5/+*", validate = CONTAINS)
-	public static HtmlElementsPage htmlElementsPage2;
+//	@Url(value = "/html5/%s", template = "/html5/+*", validate = CONTAINS)
+//	public static HtmlElementsPage htmlElementsPage2;
 	@Url("/html5.html") public static HtmlElementsPage html5Page;
 	@Url("/suspend-html-page.html") public static HtmlElementsPage suspendHtml5Page;
 	@Url("/dates.html") @Title("Dates")
