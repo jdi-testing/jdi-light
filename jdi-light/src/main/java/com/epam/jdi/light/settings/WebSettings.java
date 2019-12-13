@@ -76,6 +76,7 @@ import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.settings.TimeoutSettingsUtils.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettingsUtils.TIMEOUT;
 import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
@@ -136,7 +137,7 @@ public class WebSettings {
     }
 
     public static synchronized void init() {
-        validateProperties(getProperties(TEST_PROPERTIES_PATH));
+        validateProperties(getCapabilitiesPath(TEST_PROPERTIES_PATH));
         fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_ELEMENT_PROPERTY.getName());
         fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), TIMEOUT_WAIT_PAGE_PROPERTY.getName());
         fillAction(p -> DOMAIN = p, DOMAIN_PROPERTY.getName());
@@ -194,7 +195,7 @@ public class WebSettings {
         try { path = getProperty(property);
         } catch (Exception ignore) { }
         if(isNotEmpty(path)) {
-            setCapabilities.execute(getProperties(path));
+            setCapabilities.execute(getCapabilitiesPath(path));
         }
     }
 
@@ -252,9 +253,8 @@ public class WebSettings {
             default: return NORMAL;
         }
     }
-    public static Properties getProperties(String path) {
-        // TODO use mergePath macos and windows
-        Properties p = PropertyReader.getProperties("/../../target/classes/" + path);
+    private static Properties getCapabilitiesPath(String path) {
+        Properties p = PropertyReader.getProperties(mergePath("/../../target/classes/", path));
         return p.size() > 0 ? p : PropertyReader.getProperties(path);
     }
 }

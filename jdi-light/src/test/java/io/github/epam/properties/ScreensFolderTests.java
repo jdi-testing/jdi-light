@@ -1,6 +1,5 @@
 package io.github.epam.properties;
 
-import com.epam.jdi.light.common.AdditionalPathUtils;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -53,14 +52,5 @@ public class ScreensFolderTests {
         Properties properties = new Properties();
         properties.setProperty(SCREENS_FOLDER_PROPERTY.getName(), value);
         validateProperties(properties);
-    }
-
-    @Test
-    public void crossPlatformPathTests() {
-        String linuxPath = "~/my/relative/path";
-        String userdir = System.getProperty("user.dir");
-        String workPath = AdditionalPathUtils.getCrossPlatformPath(linuxPath);
-        System.out.println("user.dir = " + userdir);
-        System.out.println("Cross Platform Path = " + workPath);
     }
 }
