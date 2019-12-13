@@ -19,12 +19,6 @@ env:
     - EXAMPLES="com.epam.jdi:jdi-light-examples"
     - PERFORMANCE="com.epam.jdi:jdi-performance"
     - CHROME_ARGS="--headless"
-#    - NOPO_TESTS="com.epam.jdi:jdi-light-bdd-no-po-tests"
-#    - BDD_TESTS="com.epam.jdi:jdi-light-bdd-tests"
-#    - BOOTSTRAP_TESTS="com.epam.jdi:jdi-light-bootstrap-tests"
-#    - HTML_TESTS="com.epam.jdi:jdi-light-html-tests"
-#    - EXAMPLES="com.epam.jdi:jdi-light-examples"
-#    - PERFORMANCE="com.epam.jdi:jdi-performance"
 
 stages:
   - prepare
