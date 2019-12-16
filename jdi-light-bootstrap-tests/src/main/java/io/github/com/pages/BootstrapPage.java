@@ -31,7 +31,7 @@ import io.github.com.sections.InputFileSection;
 import io.github.com.sections.Jumbotron;
 import io.github.com.sections.MediaObjectNesting;
 import io.github.com.sections.MediaObjectSample;
-import io.github.com.sections.Toast;
+import io.github.com.sections.toast.Toast;
 import io.github.com.sections.buttongroup.ButtonGroupBasic;
 import io.github.com.sections.buttongroup.ButtonGroupNesting;
 import io.github.com.sections.buttongroup.ButtonGroupSizing;
