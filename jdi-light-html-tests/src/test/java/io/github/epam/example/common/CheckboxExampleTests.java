@@ -1,4 +1,4 @@
-package io.github.epam.exapmle.common;
+package io.github.epam.example.common;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -39,9 +39,9 @@ public class CheckboxExampleTests implements TestsInit {
 
     @Test
     public void clickTest() {
-        acceptConditions.isSelected();
+        acceptConditions.is().selected();
         acceptConditions.click();
-        acceptConditions.isSelected();
+        acceptConditions.is().deselected();
     }
 
     @Test
