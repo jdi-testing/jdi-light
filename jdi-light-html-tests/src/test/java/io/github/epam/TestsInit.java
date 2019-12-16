@@ -28,6 +28,7 @@ public interface TestsInit {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
+        homePage.checkOpened();
         homePage.open();
         logger.toLog("Run Tests");
     }
