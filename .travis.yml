@@ -18,7 +18,7 @@ env:
   - HTML_TESTS="com.epam.jdi:jdi-light-html-tests"
   - EXAMPLES="com.epam.jdi:jdi-light-examples"
   - PERFORMANCE="com.epam.jdi:jdi-performance"
-  - CHROME_ARGS="--headless"
+  - CHROME_ARGS="--headless, --whitelisted-ips"
   
 stages:
 - prepare
@@ -65,7 +65,7 @@ jobs:
     name: Run tests - html
     script:
     - mvn install -DskipTests
-    - echo "arguments=--headless" > "chrome.properties"
+    - echo "arguments=$CHROME_ARGS" > "chrome.properties"
     - mvn verify -Ddriver=chrome -Dchrome.capabilities.path=../chrome.properties -pl "com.epam.jdi:jdi-light-html-tests"
 
 #  - stage: test
