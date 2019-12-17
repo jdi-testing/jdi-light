@@ -23,6 +23,7 @@ public class BrowserOpen {
         driver = new ChromeDriver();
         driver.get("https://jdi-testing.github.io/jdi-light/");
         logger.info(driver.getTitle());
+        driver.quit();
 
 //        WebSettings.init();
 //        WebDriverFactory.getDriver();
