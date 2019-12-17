@@ -49,7 +49,6 @@ public class LinkExampleTests implements TestsInit {
     public void clickLinkTest() {
         githubLink.click();
         assertEquals(getUrl(), EXPECTED_URL);
-        html5Page.open();
     }
 
     @Test
