@@ -23,7 +23,7 @@ public class DownloadDriverManager {
     public static WebDriverManager wdm;
 
     public static void downloadDriver(DriverTypes driverType,
-          Platform platform, String version) {
+                                      Platform platform, String version) {
         try {
             String driverName = driverType.toString();
             switch (driverType) {
@@ -35,6 +35,9 @@ public class DownloadDriverManager {
                     wdm = WebDriverManager.iedriver(); break;
                 case EDGE:
                     wdm = WebDriverManager.edgedriver(); break;
+                case PHANTOMJS:
+                    wdm = WebDriverManager.phantomjs();
+                    break;
                 case OPERA:
                     wdm = WebDriverManager.operadriver(); break;
                 default:
@@ -48,6 +51,8 @@ public class DownloadDriverManager {
                     case X64:
                         wdm = wdm.arch64();
                         break;
+                    default:
+                        throw exception("Unknown platform type: " + platform);
                 }
                 driverName += " " + platform;
             }
@@ -61,6 +66,7 @@ public class DownloadDriverManager {
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
+            logger.info("Binary path: " + wdm.getBinaryPath());
         } catch (Exception ex) {
             throw exception("Can't download latest driver for " + driverType
                     + ". Exception " + safeException(ex));

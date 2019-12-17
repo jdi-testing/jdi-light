@@ -11,7 +11,8 @@ public enum DriverTypes {
     FIREFOX("firefox"),
     IE("ie"),
     EDGE("edge"),
-    OPERA("opera");
+    OPERA("opera"),
+    PHANTOMJS("phantomjs");
 
     public final String name;
     public static DriverTypes getByName(String name) {
