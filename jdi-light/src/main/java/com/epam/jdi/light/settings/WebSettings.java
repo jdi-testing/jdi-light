@@ -1,7 +1,12 @@
 package com.epam.jdi.light.settings;
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.SetTextTypes;
+import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.common.Timeout;
+import com.epam.jdi.light.common.VisualCheckAction;
+import com.epam.jdi.light.common.VisualCheckPage;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -33,8 +38,19 @@ import static com.epam.jdi.light.common.SetTextTypes.SET_TEXT;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
-import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.RemoteDriver.*;
+import static com.epam.jdi.light.driver.get.DriverData.BROWSER_SIZE;
+import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_CHROME;
+import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_FF;
+import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_IE;
+import static com.epam.jdi.light.driver.get.DriverData.COMMON_CAPABILITIES;
+import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVERS_FOLDER;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_VERSION;
+import static com.epam.jdi.light.driver.get.DriverData.LATEST_VERSION;
+import static com.epam.jdi.light.driver.get.DriverData.PAGE_LOAD_STRATEGY;
+import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
+import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.PageFactory.preInit;
@@ -46,14 +62,15 @@ import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-import static org.openqa.selenium.PageLoadStrategy.*;
+import static org.openqa.selenium.PageLoadStrategy.EAGER;
+import static org.openqa.selenium.PageLoadStrategy.NONE;
+import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -177,10 +194,10 @@ public class WebSettings {
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
         loadCapabilities("ie.capabilities.path",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
-        loadCapabilities("edge.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(),value.toString())));
-        loadCapabilities("opera.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(),value.toString())));
+//        loadCapabilities("edge.capabilities.path",
+//            p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(),value.toString())));
+//        loadCapabilities("opera.capabilities.path",
+//            p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(),value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         if (SMART_SEARCH_LOCATORS.size() == 0)
