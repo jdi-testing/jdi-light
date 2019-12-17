@@ -46,6 +46,7 @@ import static com.epam.jdi.light.common.Property.DRIVER_PROPERTY;
 import static com.epam.jdi.light.common.Property.DRIVER_REMOTE_URL_PROPERTY;
 import static com.epam.jdi.light.common.Property.ELEMENT_SEARCH_STRATEGY_PROPERTY;
 import static com.epam.jdi.light.common.Property.FF_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.HTML_CODE_LOGGING_PROPERTY;
 import static com.epam.jdi.light.common.Property.IE_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.KILL_BROWSER_PROPERTY;
 import static com.epam.jdi.light.common.Property.LOG_LEVEL_PROPERTY;
@@ -58,9 +59,8 @@ import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT_PROPERTY;
 import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_PAGE_PROPERTY;
 import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
-import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREENSHOT_STRATEGY;
-import static com.epam.jdi.light.driver.ScreenshotMaker.ScreenshotStrategy;
+import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.BROWSER_SIZE;
 import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_CHROME;
@@ -76,6 +76,8 @@ import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
 import static com.epam.jdi.light.driver.get.RemoteDriverUtils.DRIVER_REMOTE_URL;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy;
+import static com.epam.jdi.light.logger.AllureLoggerHelper.HTML_CODE_LOGGING;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.settings.TimeoutSettingsUtils.PAGE_TIMEOUT;
@@ -159,7 +161,8 @@ public class WebSettings {
                 ? PRELATEST_VERSION : p, DRIVERS_VERSION_PROPERTY.getName());
         fillAction(p -> DRIVERS_FOLDER = p, DRIVERS_FOLDER_PROPERTY.getName());
         fillAction(p -> SCREEN_PATH = p, SCREENS_FOLDER_PROPERTY.getName());
-        fillAction(p -> SCREENSHOT_STRATEGY = getScreenshotStrategy(p), SCREENSHOT_STRATEGY_PROPERTY.getName());
+        fillAction(p -> SCREENSHOT_STRATEGY = getAttachmentStrategy(p), SCREENSHOT_STRATEGY_PROPERTY.getName());
+        fillAction(p -> HTML_CODE_LOGGING = getAttachmentStrategy(p), HTML_CODE_LOGGING_PROPERTY.getName());
         fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
         fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY_PROPERTY.getName());
         fillAction(p -> BROWSER_SIZE = p, BROWSER_SIZE_PROPERTY.getName());
@@ -292,10 +295,13 @@ public class WebSettings {
         }
         return properties;
     }
-    private static ScreenshotStrategy getScreenshotStrategy(String strategy) {
+
+    private static AttachmentStrategy getAttachmentStrategy(String strategy) {
         switch (strategy.toLowerCase()) {
-            case "off": return ScreenshotStrategy.OFF;
-            default: return ScreenshotStrategy.ON_FAIL;
+            case "off":
+                return AttachmentStrategy.OFF;
+            default:
+                return AttachmentStrategy.ON_FAIL;
         }
     }
 }

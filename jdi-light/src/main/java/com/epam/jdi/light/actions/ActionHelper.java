@@ -12,8 +12,8 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
-import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.light.logger.AllureLoggerHelper;
+import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
@@ -40,6 +40,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_NEW_PAGE;
 import static com.epam.jdi.light.elements.composite.WebPage.BEFORE_THIS_PAGE;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
 import static com.epam.jdi.light.elements.composite.WebPage.setCurrentPage;
+import static com.epam.jdi.light.logger.AllureLoggerHelper.takeHtmlCodeOnFailure;
 import static com.epam.jdi.light.logger.LogLevels.ERROR;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -111,7 +112,8 @@ public class ActionHelper {
     private static void logFailure(ProceedingJoinPoint jp, Object el) {
         logger.toLog(">>> " + el.toString(), ERROR);
         String screenName = takeScreenOnFailure();
-        AllureLoggerHelper.failStep(Integer.toString(jp.hashCode()), screenName);
+        String htmlSnapshot = takeHtmlCodeOnFailure();
+        AllureLoggerHelper.failStep(Integer.toString(jp.hashCode()), screenName, htmlSnapshot);
     }
 
     private static String getTemplate(LogLevels level) {
