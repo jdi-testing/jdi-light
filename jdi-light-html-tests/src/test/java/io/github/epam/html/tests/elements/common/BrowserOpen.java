@@ -14,7 +14,9 @@ public class BrowserOpen {
 
     @BeforeClass
     public static void setupClass() {
+        logger.info("Setting up driver");
         WebDriverManager.chromedriver().setup();
+        logger.info("Driver ready");
     }
 
     @Test
