@@ -1,17 +1,32 @@
 package io.github.epam.html.tests.elements.common;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.driver.WebDriverUtils;
-import com.epam.jdi.light.settings.WebSettings;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class BrowserOpen  {
+import static com.epam.jdi.light.settings.WebSettings.logger;
+
+public class BrowserOpen {
+
+    private WebDriver driver;
+
+    @BeforeClass
+    public static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
 
     @Test
     public void before() {
-        WebSettings.init();
-        WebDriverFactory.getDriver();
-        WebDriverUtils.killAllSeleniumDrivers();
+
+        driver = new ChromeDriver();
+        driver.get("https://jdi-testing.github.io/jdi-light/");
+        logger.info(driver.getTitle());
+
+//        WebSettings.init();
+//        WebDriverFactory.getDriver();
+//        WebDriverUtils.killAllSeleniumDrivers();
 
     }
 
