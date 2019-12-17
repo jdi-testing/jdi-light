@@ -19,6 +19,8 @@ import static org.hamcrest.Matchers.not;
 public class TextExampleTests implements TestsInit {
 
     private static final String TEXT = "Powerful Framework for UI Tests Automation. Suitable for any UI project: Web(Html5, Angular, React...), Mobile(Android IOs), Desktop(Win app) etc.";
+    private static final String PART_OF_TEXT = "Powerful Framework for UI Tests Automation.";
+    private static final String NOT_EXPECTED_TEXT = "GITHUB";
 
     @BeforeMethod
     public void before() {
@@ -27,38 +29,28 @@ public class TextExampleTests implements TestsInit {
     }
 
     @Test
-    public void  textTest() {
-        jdiText.is().enabled().and().displayed()
+    public void textTest() {
+        jdiText.is()
+                .enabled()
+                .and()
+                .displayed()
                 .core()
                 .css("font-size", is("14px"));
-
     }
-    @Test
-    public void  textEqualsTest() {
 
+    @Test
+    public void textEqualsTest() {
         jdiText.is().text(equalTo(TEXT));
         jdiText.is().text(TEXT);
-
     }
 
     @Test
-    public void  textContainsTest() {
-
-        jdiText.is().text(containsString("Powerful Framework for UI"));
+    public void textContainsTest() {
+        jdiText.is().text(containsString(PART_OF_TEXT));
     }
 
     @Test
-    public void  textNotContainsWordTest() {
-        jdiText.is().enabled();
-        jdiText.is().text(is(TEXT));
-        jdiText.is().text(not("NOT THIS WORLD"));
+    public void textNotContainsWordTest() {
+        jdiText.is().text(not(NOT_EXPECTED_TEXT));
     }
-
-    @Test
-    public void  textMatchesTest() {
-        jdiText.is().enabled();
-        jdiText.is().text(is(TEXT));
-        jdiText.is().text(containsString("Powerful Framework for UI"));
-    }
-
 }
