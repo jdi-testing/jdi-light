@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.githubLink;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -11,6 +12,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.matchesPattern;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Test examples for Link with JDI Light asserts
@@ -41,6 +43,13 @@ public class LinkExampleTests implements TestsInit {
                 .and()
                 .core()
                 .css("font-size", is("14px"));
+    }
+
+    @Test
+    public void clickLinkTest() {
+        githubLink.click();
+        assertEquals(getUrl(), EXPECTED_URL);
+        html5Page.open();
     }
 
     @Test
