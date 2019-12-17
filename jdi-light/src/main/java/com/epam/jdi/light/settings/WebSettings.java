@@ -51,7 +51,6 @@ import static com.epam.jdi.light.driver.get.DriverData.LATEST_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.PAGE_LOAD_STRATEGY;
 import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
 import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
-import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.PageFactory.preInit;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -180,7 +179,7 @@ public class WebSettings {
         fillAction(p -> SET_TEXT_TYPE = getSetTextType(p), "set.text.type");
 
         // RemoteWebDriver properties
-        fillAction(p -> DRIVER_REMOTE_URL = getRemoteUrl(p), "remote.type");
+//        fillAction(p -> DRIVER_REMOTE_URL = getRemoteUrl(p), "remote.type");
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> SMART_SEARCH_LOCATORS =
@@ -215,16 +214,17 @@ public class WebSettings {
         return textType != null
                 ? textType : SET_TEXT;
     }
-    private static String getRemoteUrl(String prop) {
-        switch (prop.toLowerCase().replaceAll(" ", "")) {
-            case "sauce":
-            case "saucelabs":
-                COMMON_CAPABILITIES = sauceCapabilities();
-                return sauceLabs();
-            case "browserstack": return browserstack();
-            default: return seleniumLocalhost();
-        }
-    }
+
+    //    private static String getRemoteUrl(String prop) {
+//        switch (prop.toLowerCase().replaceAll(" ", "")) {
+//            case "sauce":
+//            case "saucelabs":
+//                COMMON_CAPABILITIES = sauceCapabilities();
+//                return sauceLabs();
+//            case "browserstack": return browserstack();
+//            default: return seleniumLocalhost();
+//        }
+//    }
     private static JFunc1<String, String> getSmartSearchFunc(String name) {
         switch (name) {
             case "camelCase":
