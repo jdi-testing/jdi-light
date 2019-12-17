@@ -20,4 +20,9 @@ public class TextAssert extends UIAssert<TextAssert, IsText>
         return this;
     }
     public TextAssert text(String text) { return text(is(text)); }
+
+    @Override
+    public String toString() {
+        return element + " had value " + element.getValue();
+    }
 }
