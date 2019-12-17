@@ -15,7 +15,6 @@ env:
     - WITH_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=../$CHROME_PROPERTIES" #add -ntp when maven will be >=3.6.1 on travis
     - NOPO_TESTS="com.epam.jdi:jdi-light-bdd-no-po-tests"
     - BDD_TESTS="com.epam.jdi:jdi-light-bdd-tests"
-    - BOOTSTRAP_TESTS="com.epam.jdi:jdi-light-bootstrap-tests"
     - HTML_TESTS="com.epam.jdi:jdi-light-html-tests"
     - EXAMPLES="com.epam.jdi:jdi-light-examples"
     - PERFORMANCE="com.epam.jdi:jdi-performance"
@@ -41,19 +40,19 @@ jobs:
         - mvn install -DskipTests
         - mvn versions:use-latest-releases
 
-    - stage: test
-      name: Run tests - no po
-      script:
-        - mvn install -DskipTests
-        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-        - mvn verify $WITH_PARAMS -pl $NOPO_TESTS
-
-    - stage: test
-      name: Run tests - bdd
-      script:
-        - mvn install -DskipTests
-        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-        - mvn verify $WITH_PARAMS -pl $BDD_TESTS
+    #    - stage: test
+    #      name: Run tests - no po
+    #      script:
+    #        - mvn install -DskipTests
+    #        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    #        - mvn verify $WITH_PARAMS -pl $NOPO_TESTS
+    #
+    #    - stage: test
+    #      name: Run tests - bdd
+    #      script:
+    #        - mvn install -DskipTests
+    #        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    #        - mvn verify $WITH_PARAMS -pl $BDD_TESTS
 
     #TODO: bootstrap tests exceeded the maximum time limit for jobs (>50min)
     #  - stage: test
@@ -70,19 +69,19 @@ jobs:
         - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
         - mvn verify $WITH_PARAMS -pl $HTML_TESTS
 
-    - stage: test
-      name: Run tests - examples
-      script:
-        - mvn install -DskipTests
-        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-        - mvn verify $WITH_PARAMS -pl $EXAMPLES
-
-    - stage: test
-      name: Run tests - performance
-      script:
-        - mvn install -DskipTests
-        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-        - mvn verify $WITH_PARAMS -pl $PERFORMANCE
+    #    - stage: test
+    #      name: Run tests - examples
+    #      script:
+    #        - mvn install -DskipTests
+    #        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    #        - mvn verify $WITH_PARAMS -pl $EXAMPLES
+    #
+    #    - stage: test
+    #      name: Run tests - performance
+    #      script:
+    #        - mvn install -DskipTests
+    #        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    #        - mvn verify $WITH_PARAMS -pl $PERFORMANCE
 
     - stage: reports
       name: Deploy allure reports to netlify
