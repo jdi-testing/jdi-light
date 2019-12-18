@@ -14,6 +14,7 @@ import static org.hamcrest.Matchers.not;
 
 /**
  * Test examples for Text with JDI Light asserts
+ *
  */
 public class TextExampleTests implements TestsInit {
 
@@ -38,7 +39,7 @@ public class TextExampleTests implements TestsInit {
     }
 
     @Test
-    public void textPositiveTest() {
+    public void textPositiveTest(){
         jdiText.is().text(equalTo(TEXT));
         jdiText.is().text(TEXT);
     }
