@@ -12,7 +12,17 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JMenu;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.custom.MenuItem;
-import io.github.com.pages.*;
+import io.github.com.pages.ContactFormPage;
+import io.github.com.pages.DatesPage;
+import io.github.com.pages.Footer;
+import io.github.com.pages.GithubPage;
+import io.github.com.pages.Header;
+import io.github.com.pages.HomePage;
+import io.github.com.pages.HomePageFrame;
+import io.github.com.pages.HtmlElementsPage;
+import io.github.com.pages.MetalAndColorsPage;
+import io.github.com.pages.SimpleTablePage;
+import io.github.com.pages.UsersPage;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -26,8 +36,8 @@ public class StaticSite {
 	public static MetalAndColorsPage metalAndColorsPage;
 	@Url("/contacts.html") @Title("Contact Form")
 	public static ContactFormPage contactFormPage;
-//	@Url(value = "/html5/%s", template = "/html5/+*", validate = CONTAINS)
-//	public static HtmlElementsPage htmlElementsPage2;
+	@Url(value = "/html5/%s", template = "/html5/+*", validate = CONTAINS)
+	public static HtmlElementsPage htmlElementsPage2;
 	@Url("/html5.html") public static HtmlElementsPage html5Page;
 	@Url("/suspend-html-page.html") public static HtmlElementsPage suspendHtml5Page;
 	@Url("/dates.html") @Title("Dates")

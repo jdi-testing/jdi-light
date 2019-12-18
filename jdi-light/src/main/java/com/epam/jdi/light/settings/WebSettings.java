@@ -294,7 +294,6 @@ public class WebSettings {
                 e.printStackTrace();
             }
         } else {
-            // TODO use mergePath macos and windows
             String propertyFilePath = mergePath("/../../target/classes/" + path);
             properties = PropertyReader.getProperties(propertyFilePath);
         }
