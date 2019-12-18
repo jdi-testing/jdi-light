@@ -19,6 +19,8 @@ public interface ICoreElement extends IBaseElement {
     default boolean isDisabled() { return !isEnabled(); }
     @JDIAction("Check that '{name}' is displayed")
     default boolean isDisplayed() { return core().isDisplayed(); }
+    @JDIAction("Check that '{name}' is missed")
+    default boolean isMissed() { return core().isMissed(); }
     @JDIAction("Check that '{name}' is hidden")
     default boolean isHidden() { return !isDisplayed(); }
     default void highlight(String color) { core().highlight(); }
