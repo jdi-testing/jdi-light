@@ -13,12 +13,10 @@ import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.isRemote;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
-import static com.epam.jdi.light.driver.get.DriverData.CHROME_OPTIONS;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVERS_FOLDER;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.LATEST_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.PLATFORM;
-import static com.epam.jdi.light.driver.get.DriverInfos.CHROME_INFO;
 import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Integer.parseInt;
@@ -57,9 +55,6 @@ public class DriverInfo extends DataClass<DriverInfo> {
             return getDriver.execute();
         } catch (Exception ex) {
             try {
-                logger.info("!!! " + CHROME_OPTIONS.toString());
-                logger.info("!!! " + CHROME_INFO.properties);
-                logger.info("!!! " + CHROME_INFO.path);
                 logger.info("!!! " + ex.getMessage());
                 if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
                     logger.info("Failed to download driver (%s %s) of latest version:" +
