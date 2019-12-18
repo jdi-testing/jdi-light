@@ -20,8 +20,6 @@ public class TextAreaExampleTests implements TestsInit {
         textArea.clear();
     }
 
-    String text = "TextArea";
-
     @Test
     public void addNewLineTest() {
         textArea.setLines("line1", "line2");
@@ -34,7 +32,7 @@ public class TextAreaExampleTests implements TestsInit {
     @Test
     public void isValidationTest() {
         textArea.is().enabled();
-        textArea.setText(text);
+        textArea.setText("TextArea");
         textArea.is().text(containsString("Area"));
         disabledTextArea.is().disabled();
     }
