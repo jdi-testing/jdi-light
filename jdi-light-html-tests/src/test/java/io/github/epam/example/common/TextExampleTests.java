@@ -39,7 +39,7 @@ public class TextExampleTests implements TestsInit {
     }
 
     @Test
-    public void textEqualsTest() {
+    public void textPositiveTest(){
         jdiText.is().text(equalTo(TEXT));
         jdiText.is().text(TEXT);
     }
@@ -50,7 +50,7 @@ public class TextExampleTests implements TestsInit {
     }
 
     @Test
-    public void textNotContainsWordTest() {
+    public void textDoesNotContainWordTest() {
         jdiText.is().text(not(NOT_EXPECTED_TEXT));
     }
 }
