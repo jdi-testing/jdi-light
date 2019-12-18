@@ -28,7 +28,7 @@ public class BrowserOpen {
             chromePrefs.put("profile.password_manager_enabled", false);
 
             options.addArguments("--headless");
-            options.setExperimentalOption("prefs", chromePrefs);
+//            options.setExperimentalOption("prefs", chromePrefs);
 
             ChromeDriver driver = new ChromeDriver(options);
             driver.get("google.com");
