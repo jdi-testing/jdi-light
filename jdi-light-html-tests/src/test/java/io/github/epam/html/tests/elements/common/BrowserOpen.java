@@ -17,11 +17,15 @@ public class BrowserOpen {
 
     @Test
     public void getTextTest() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        ChromeDriver driver = new ChromeDriver(options);
-        driver.get("google.com");
-        logger.info(driver.getTitle());
-        driver.quit();
+        try {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            ChromeDriver driver = new ChromeDriver(options);
+            driver.get("google.com");
+            logger.info(driver.getTitle());
+            driver.quit();
+        } catch (Exception ex) {
+            logger.info("!!! " + ex.getMessage());
+        }
     }
 }

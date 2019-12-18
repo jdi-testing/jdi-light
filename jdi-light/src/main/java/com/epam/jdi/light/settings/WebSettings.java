@@ -12,7 +12,6 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
-import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
@@ -325,7 +324,7 @@ public class WebSettings {
         } else {
             // TODO use mergePath macos and windows
             String propertyFilePath = "/../../target/classes/" + path;
-            properties = PropertyReader.getProperties(propertyFilePath);
+            properties = getProperties(propertyFilePath);
         }
         return properties;
     }
