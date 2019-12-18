@@ -15,6 +15,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.LOGS_PATH;
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
+import static com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy;
 import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
@@ -28,14 +29,10 @@ public class ScreenshotMaker {
     public static String SCREEN_PATH = LOGS_PATH + "\\screens";
     public static String SCREEN_NAME = "screen";
     public static String SCREEN_FILE_SUFFIX = ".jpg";
-    public static ScreenshotStrategy SCREENSHOT_STRATEGY = ScreenshotStrategy.ON_FAIL;
-
-    public enum ScreenshotStrategy {
-        ON_FAIL, OFF
-    }
+    public static AttachmentStrategy SCREENSHOT_STRATEGY = AttachmentStrategy.ON_FAIL;
 
     public static String takeScreenOnFailure() {
-        if (SCREENSHOT_STRATEGY == ScreenshotStrategy.ON_FAIL) {
+        if (SCREENSHOT_STRATEGY == AttachmentStrategy.ON_FAIL) {
             return takeScreen();
         }
         return null;
