@@ -6,8 +6,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class BrowserOpen {
@@ -23,17 +21,17 @@ public class BrowserOpen {
             ChromeOptions options = new ChromeOptions();
 
 
-            HashMap<String, Object> chromePrefs = new HashMap<>();
-            chromePrefs.put("credentials_enable_service", false);
-            chromePrefs.put("profile.password_manager_enabled", false);
+//            HashMap<String, Object> chromePrefs = new HashMap<>();
+//            chromePrefs.put("credentials_enable_service", false);
+//            chromePrefs.put("profile.password_manager_enabled", false);
 
-            options.addArguments("--headless");
+            options.setHeadless(true);
 //            options.setExperimentalOption("prefs", chromePrefs);
 
             ChromeDriver driver = new ChromeDriver(options);
-            driver.get("google.com");
-            logger.info(driver.getTitle());
-            driver.quit();
+//            driver.get("google.com");
+//            logger.info(driver.getTitle());
+//            driver.quit();
         } catch (Exception ex) {
             logger.info("!!! " + ex.getMessage());
         }
