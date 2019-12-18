@@ -52,7 +52,6 @@ public class DriverInfo extends DataClass<DriverInfo> {
             else {
                 downloadDriver(type, PLATFORM, DRIVER_VERSION);
             }
-            logger.info("Call getDriver()");
             return getDriver.execute();
         } catch (Exception ex) {
             try {

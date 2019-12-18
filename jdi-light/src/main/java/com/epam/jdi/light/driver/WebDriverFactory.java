@@ -26,7 +26,6 @@ import static com.epam.jdi.light.driver.get.DriverTypes.IE;
 import static com.epam.jdi.light.driver.get.DriverTypes.OPERA;
 import static com.epam.jdi.light.driver.get.DriverTypes.getByName;
 import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
@@ -78,7 +77,6 @@ public class WebDriverFactory {
             Value(OPERA, t -> CHROME_INFO.getDriver()),
             Value(EDGE, t -> CHROME_INFO.getDriver())
         );
-        logger.info("getDriver() has been invoked");
         if (driver == null)
             throw exception("Unknown driver: " + type);
         return DRIVER_SETTINGS.execute(driver);
