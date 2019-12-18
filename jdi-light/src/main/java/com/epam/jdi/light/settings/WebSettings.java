@@ -68,6 +68,7 @@ import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
+import static com.epam.jdi.tools.PropertyReader.getProperties;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
@@ -84,15 +85,6 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String DOMAIN;
-    public static String getDomain() {
-        if (DOMAIN != null)
-            return DOMAIN;
-        preInit();
-        return "No Domain Found. Use test.properties or WebSettings.DOMAIN";
-    }
-    public static void setDomain(String domain) {
-        DOMAIN = domain;
-    }
     public static String KILL_BROWSER = "afterAndBefore";
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
@@ -101,49 +93,18 @@ public class WebSettings {
     public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
             el != null && !el.isDisplayed() && $(el).isClickable();
     public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
-    public static JAction1<UIElement> BEFORE_SEARCH = b -> {};
-    public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
-        SEARCH_RULES = rule;
-    }
-    public static void noValidation() {
-        SEARCH_RULES = ANY_ELEMENT;
-        CLICK_TYPE = CENTER;
-    }
-    public static void onlyVisible() {
-        SEARCH_RULES = VISIBLE_ELEMENT;
-    }
-    public static void visibleEnabled() {
-        SEARCH_RULES = ENABLED_ELEMENT;
-    }
-    public static void inView() {
-        SEARCH_RULES = ELEMENT_IN_VIEW;
-        BEFORE_SEARCH = UIElement::show;
-    }
-
+    public static JAction1<UIElement> BEFORE_SEARCH = b -> {
+    };
     public static ElementArea CLICK_TYPE = SMART_CLICK;
     public static TextTypes TEXT_TYPE = SMART_TEXT;
     public static SetTextTypes SET_TEXT_TYPE = SET_TEXT;
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
     public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
     public static boolean STRICT_SEARCH = true;
-    public static boolean hasDomain() {
-        preInit();
-        return DOMAIN != null && DOMAIN.contains("://");
-    }
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
-    public static String useDriver(JFunc<WebDriver> driver) {
-        return WebDriverFactory.useDriver(driver);
-    }
-    public static String useDriver(String driverName) {
-        return WebDriverFactory.useDriver(driverName);
-    }
-    public static String useDriver(DriverTypes driverType) {
-        return WebDriverFactory.useDriver(driverType);
-    }
-
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
@@ -156,11 +117,62 @@ public class WebSettings {
                         .setup(e -> e.setName(el.getName()).noWait());
                 try {
                     return ui.getWebElement();
-                } catch (Exception ignore) { }
+                } catch (Exception ignore) {
+                }
             }
             throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
         });
     };
+
+    public static String getDomain() {
+        if (DOMAIN != null)
+            return DOMAIN;
+        preInit();
+        return "No Domain Found. Use test.properties or WebSettings.DOMAIN";
+    }
+
+    public static void setDomain(String domain) {
+        DOMAIN = domain;
+    }
+
+    public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
+        SEARCH_RULES = rule;
+    }
+
+    public static void noValidation() {
+        SEARCH_RULES = ANY_ELEMENT;
+        CLICK_TYPE = CENTER;
+    }
+
+    public static void onlyVisible() {
+        SEARCH_RULES = VISIBLE_ELEMENT;
+    }
+
+    public static void visibleEnabled() {
+        SEARCH_RULES = ENABLED_ELEMENT;
+    }
+
+    public static void inView() {
+        SEARCH_RULES = ELEMENT_IN_VIEW;
+        BEFORE_SEARCH = UIElement::show;
+    }
+
+    public static boolean hasDomain() {
+        preInit();
+        return DOMAIN != null && DOMAIN.contains("://");
+    }
+
+    public static String useDriver(JFunc<WebDriver> driver) {
+        return WebDriverFactory.useDriver(driver);
+    }
+
+    public static String useDriver(String driverName) {
+        return WebDriverFactory.useDriver(driverName);
+    }
+
+    public static String useDriver(DriverTypes driverType) {
+        return WebDriverFactory.useDriver(driverType);
+    }
 
     public static synchronized void init() {
         getProperties(TEST_PROPERTIES_PATH);
@@ -208,18 +220,21 @@ public class WebSettings {
         if (SMART_SEARCH_LOCATORS.size() == 0)
             SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
     }
+
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
                 t -> t.toString().equals(type));
         return textType != null
                 ? textType : SMART_TEXT;
     }
+
     private static SetTextTypes getSetTextType(String type) {
         SetTextTypes textType = first(getAllEnumValues(SetTextTypes.class),
                 t -> t.toString().equals(type));
         return textType != null
                 ? textType : SET_TEXT;
     }
+
     private static String getRemoteUrl(String prop) {
         switch (prop.toLowerCase().replaceAll(" ", "")) {
             case "sauce":
@@ -232,6 +247,7 @@ public class WebSettings {
                 return seleniumLocalhost();
         }
     }
+
     private static JFunc1<String, String> getSmartSearchFunc(String name) {
         switch (name) {
             case "camelCase":
@@ -244,17 +260,19 @@ public class WebSettings {
                 return StringUtils::toPascalCase;
             case "UPPER_SNAKE_CASE":
                 return StringUtils::toUpperSnakeCase;
-            default: return StringUtils::toKebabCase;
+            default:
+                return StringUtils::toKebabCase;
         }
     }
 
-
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {
         String path = "";
-        try { path = getProperty(property);
-        } catch (Exception ignore) { }
-        if(isNotEmpty(path)) {
-            setCapabilities.execute(getProperties(path));
+        try {
+            path = getProperty(property);
+        } catch (Exception ignore) {
+        }
+        if (isNotEmpty(path)) {
+            setCapabilities.execute(getCapabilities(path));
         }
     }
 
@@ -283,13 +301,17 @@ public class WebSettings {
 
     private static PageLoadStrategy getPageLoadStrategy(String strategy) {
         switch (strategy.toLowerCase()) {
-            case "normal": return NORMAL;
-            case "none": return NONE;
-            case "eager": return EAGER;
+            case "normal":
+                return NORMAL;
+            case "none":
+                return NONE;
+            case "eager":
+                return EAGER;
         }
         return NORMAL;
     }
-    public static Properties getProperties(String path) {
+
+    public static Properties getCapabilities(String path) {
         File propertyFile = new File(path);
         Properties properties = new Properties();
         if (propertyFile.exists()) {
