@@ -112,6 +112,4 @@ public class HtmlElementsPage extends WebPage {
 
     //endregion
 
-    //gf
-
 }
