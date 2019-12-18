@@ -3,7 +3,8 @@
 <suite name="Test suite" parallel="methods" thread-count="1">
     <test name="Tests">
         <classes>
-            <class name="io.github.epam.html.tests.elements.common.BrowserOpen"></class>
+            <class name="io.github.epam.html.tests.elements.common.BrowserOpen"/>
+            <class name="io.github.epam.html.tests.elements.common.BrowserOpenJDI"/>
         </classes>
         <!--        <packages>-->
         <!--            <package name="io.github.epam.html.tests.elements.complex.*"/>-->
