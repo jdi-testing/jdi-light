@@ -158,7 +158,7 @@ public class WebSettings {
     };
 
     public static synchronized void init() {
-        getProperties(TEST_PROPERTIES_PATH);
+        PropertyReader.getProperties(TEST_PROPERTIES_PATH);
         fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
         fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
         fillAction(p -> setDomain(p), "domain");
