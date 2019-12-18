@@ -8,18 +8,6 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class RemoteDriver {
     public static String DRIVER_REMOTE_URL;
-//    public static String seleniumLocalhost() {
-//        return getRemoteURL("http://localhost:4444/");
-//    }
-//    public static String sauceLabs() {
-//        return getRemoteURL("http://ondemand.eu-central-1.saucelabs.com/");
-//    }
-//    public static String browserstack() {
-//        return browserstack(getenv("USERNAME"), getenv("ACCESS_KEY"));
-//    }
-//    public static String browserstack(String userName, String accessKey) {
-//        return getRemoteURL(format("https://%s:%s/@hub-cloud.browserstack.com/", userName, accessKey));
-//    }
 
     public static URL getRemoteURL() {
         try {

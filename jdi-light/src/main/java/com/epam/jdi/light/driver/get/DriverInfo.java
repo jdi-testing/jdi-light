@@ -36,6 +36,16 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 ? setupRemote()
                 : setupLocal();
     }
+
+    public static String getBelowVersion() {
+        String currentMajor = wdm.getDownloadedVersion().split("\\.")[0];
+        List<String> allVersions = wdm.getVersions();
+        for (int i = allVersions.size() - 1; i >= 0; i--)
+            if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
+                return allVersions.get(i);
+        throw exception("Can't find version below current(" + wdm.getDownloadedVersion() + ")");
+    }
+
     private WebDriver setupRemote() {
         try {
             return new RemoteWebDriver(getRemoteURL(), capabilities.execute());
@@ -43,6 +53,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             throw exception("Failed to setup remote " + type.name + " driver");
         }
     }
+
     private WebDriver setupLocal() {
         try {
             if (isNotBlank(DRIVERS_FOLDER)) {
@@ -70,14 +81,5 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 throw exception("Failed to setup local driver: " + ex2.getMessage());
             }
         }
-    }
-
-    public static String getBelowVersion() {
-        String currentMajor = wdm.getDownloadedVersion().split("\\.")[0];
-        List<String> allVersions = wdm.getVersions();
-        for (int i = allVersions.size() - 1; i >= 0; i--)
-            if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
-                return allVersions.get(i);
-        throw exception("Can't find version below current(" + wdm.getDownloadedVersion() + ")");
     }
 }
