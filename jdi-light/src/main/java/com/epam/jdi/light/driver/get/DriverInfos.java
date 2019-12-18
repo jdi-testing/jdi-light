@@ -16,21 +16,16 @@ import static com.epam.jdi.light.driver.get.DriverData.ieDriverPath;
 import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
 import static com.epam.jdi.light.driver.get.DriverTypes.FIREFOX;
 import static com.epam.jdi.light.driver.get.DriverTypes.IE;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 
 @SuppressWarnings("PMD.ClassNamingConventions")
 public class DriverInfos {
     public static DriverInfo CHROME_INFO = new DriverInfo()
             .set(d -> {
                         d.type = CHROME;
-                logger.info("type = CHROME");
                         d.capabilities = CHROME_OPTIONS;
-                logger.info("capabilities = CHROME_OPTIONS" + CHROME_OPTIONS);
                         d.properties = "webdriver.chrome.driver";
                         d.path = chromeDriverPath();
-                logger.info("path = chromeDriverPath()" + chromeDriverPath());
                         d.getDriver = () -> new ChromeDriver((ChromeOptions) d.capabilities.execute());
-                logger.info("getDriver");
                     }
             );
     public static DriverInfo FF_INFO = new DriverInfo()
