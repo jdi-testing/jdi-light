@@ -29,9 +29,9 @@ public class BrowserOpen {
 //            options.setExperimentalOption("prefs", chromePrefs);
 
             ChromeDriver driver = new ChromeDriver(options);
-//            driver.get("google.com");
-//            logger.info(driver.getTitle());
-//            driver.quit();
+            driver.get("google.com");
+            logger.info(driver.getTitle());
+            driver.quit();
         } catch (Exception ex) {
             logger.info("!!! " + ex.getMessage());
         }
