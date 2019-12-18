@@ -1,6 +1,7 @@
 package io.github.epam.html.tests.elements.common;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeMethod;
@@ -28,12 +29,15 @@ public class BrowserOpen {
             options.setHeadless(true);
 //            options.setExperimentalOption("prefs", chromePrefs);
 
-            ChromeDriver driver = new ChromeDriver(options);
+            logger.info("!!! Setting options");
+            WebDriver driver = new ChromeDriver(options);
+            logger.info("!!! driver.get()");
             driver.get("google.com");
             logger.info(driver.getTitle());
+            logger.info("!!! driver.get()");
             driver.quit();
         } catch (Exception ex) {
-            logger.info("!!! " + ex.getMessage());
+            logger.info("EXEX " + ex.getMessage());
         }
     }
 }
