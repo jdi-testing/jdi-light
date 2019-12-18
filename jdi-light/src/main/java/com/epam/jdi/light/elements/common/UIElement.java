@@ -675,7 +675,7 @@ public class UIElement extends JDIBase
 
     protected boolean missing() {
         List<WebElement> result = getAllElements();
-        return result.size() == 0;
+        return result.isEmpty();
     }
 
     public boolean isClickable() {
