@@ -1,11 +1,13 @@
 package com.epam.jdi.light.driver.get;
 
 import com.epam.jdi.tools.DataClass;
-import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.URL;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -24,12 +26,16 @@ import static java.lang.System.setProperty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
 public class DriverInfo extends DataClass<DriverInfo> {
     public DriverTypes type;
-    public JFunc<Capabilities> capabilities;
-    public String properties;
-    public String path;
-    public JFunc<WebDriver> getDriver;
+    public MutableCapabilities initCapabilities;
+    public JFunc1<MutableCapabilities, Capabilities> capabilities;
+    public String properties, path;
+    public JFunc1<Object, WebDriver> getDriver;
 
     public WebDriver getDriver() {
         return isRemote()
@@ -48,9 +54,9 @@ public class DriverInfo extends DataClass<DriverInfo> {
 
     private WebDriver setupRemote() {
         try {
-            return new RemoteWebDriver(getRemoteURL(), capabilities.execute());
+            return new RemoteWebDriver(new URL(getRemoteURL()), capabilities.execute(initCapabilities));
         } catch (Exception ex) {
-            throw exception("Failed to setup remote " + type.name + " driver");
+            throw exception("Failed to setup remote " + type.name + " driver. Exception: " + safeException(ex));
         }
     }
 
@@ -59,11 +65,10 @@ public class DriverInfo extends DataClass<DriverInfo> {
             if (isNotBlank(DRIVERS_FOLDER)) {
                 setProperty(properties, path);
                 logger.info("Get local driver: " + path);
-            }
-            else {
+            } else {
                 downloadDriver(type, PLATFORM, DRIVER_VERSION);
             }
-            return getDriver.execute();
+            return getDriver.execute(capabilities.execute(initCapabilities));
         } catch (Exception ex) {
             try {
                 if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
@@ -71,7 +76,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                             "TRY TO GET DRIVER PREVIOUS VERSION", type, DRIVER_VERSION);
                     try {
                         downloadDriver(type, PLATFORM, getBelowVersion());
-                        return getDriver.execute();
+                        return getDriver.execute(capabilities.execute(initCapabilities));
                     } catch (Exception ex2) {
                         throw exception("Failed to download driver: " + ex2.getMessage());
                     }

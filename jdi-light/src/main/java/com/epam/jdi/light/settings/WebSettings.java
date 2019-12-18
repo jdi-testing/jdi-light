@@ -40,8 +40,10 @@ import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.BROWSER_SIZE;
 import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_CHROME;
+import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_EDGE;
 import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_FF;
 import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_IE;
+import static com.epam.jdi.light.driver.get.DriverData.CAPABILITIES_FOR_OPERA;
 import static com.epam.jdi.light.driver.get.DriverData.COMMON_CAPABILITIES;
 import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVERS_FOLDER;
@@ -51,6 +53,9 @@ import static com.epam.jdi.light.driver.get.DriverData.LATEST_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.PAGE_LOAD_STRATEGY;
 import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
 import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
+import static com.epam.jdi.light.driver.get.RemoteDriver.browserstack;
+import static com.epam.jdi.light.driver.get.RemoteDriver.sauceLabs;
+import static com.epam.jdi.light.driver.get.RemoteDriver.seleniumLocalhost;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.PageFactory.preInit;
@@ -194,10 +199,10 @@ public class WebSettings {
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
         loadCapabilities("ie.capabilities.path",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
-//        loadCapabilities("edge.capabilities.path",
-//            p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(),value.toString())));
-//        loadCapabilities("opera.capabilities.path",
-//            p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(),value.toString())));
+        loadCapabilities("edge.capabilities.path",
+                p -> p.forEach((key, value) -> CAPABILITIES_FOR_EDGE.put(key.toString(), value.toString())));
+        loadCapabilities("opera.capabilities.path",
+                p -> p.forEach((key, value) -> CAPABILITIES_FOR_OPERA.put(key.toString(), value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         if (SMART_SEARCH_LOCATORS.size() == 0)

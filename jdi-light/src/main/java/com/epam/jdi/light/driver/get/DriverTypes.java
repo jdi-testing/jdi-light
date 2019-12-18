@@ -12,7 +12,7 @@ public enum DriverTypes {
     IE("ie"),
     EDGE("edge"),
     OPERA("opera"),
-    PHANTOMJS("phantom");
+    PHANTOMJS("phantomjs");
 
     public final String name;
     public static DriverTypes getByName(String name) {
@@ -24,8 +24,6 @@ public enum DriverTypes {
                 return IE;
             case "edge": return EDGE;
             case "phantom":
-            case "phantomjs":
-                return PHANTOMJS;
             case "opera": return OPERA;
             default:
                 throw exception("Unknown driver: " + name);
