@@ -7,6 +7,7 @@
 
 ####################             VARS
 BRANCH_ERROR_MESSAGE="IF YOU DON'T SEE THE PULL REQUEST BUILD, THEN BRANCH CANNOT BE MERGED, YOU SHOULD FIX IT FIRST"
+URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
 
 ####################             UTILS
 function collectRelevantComments(){
@@ -102,12 +103,17 @@ function deployAllureResults() {
 }
 
 function downloadAllureResults() {
+    urlExistence=false
     for url in $(collectRelevantComments "${TRAVIS_BUILD_NUMBER}")
     do
+        urlExistence=true
         echo "Found: ${url}"
         fileName="$(echo "${url}"| awk -F/ '{print $5}')"
         curl ${url} --output ${fileName}
     done
+    if [[ "x${urlExistence}" == "xfalse" ]] ; then
+        exitWithError
+    fi
 }
 
 function extractAllureResults() {
@@ -119,8 +125,10 @@ function extractAllureResults() {
 
 function generateAllureReports() {
     reportDirList="";
+    allureDirExistence=false
     for report in $(ls -d1 jdi-light*/)
     do
+        allureDirExistence=true
         allureDir="${report}allure-results"
         if [[ -d "$allureDir" ]] ; then
             echo "Results found for ${report}"
@@ -129,6 +137,9 @@ function generateAllureReports() {
             echo "RESULTS NOT FOUND FOR ${report}"
         fi
     done
+    if [[ "x${allureDirExistence}" == "xfalse" ]] ; then
+        exitWithError
+    fi
     echo ${reportDirList}
     allure generate --clean ${reportDirList}
 }
@@ -138,5 +149,11 @@ function deployToNetlify() {
     result=$(netlify deploy --dir ${directory} --json);
     deployUrl=$(echo ${result}r |jq '.deploy_url' |sed 's/"//g');
     echo ${deployUrl}
+}
+
+function exitWithError() {
+    echo "${URL_NOT_FOUND_ERROR_MESSAGE}"
+    sleep 3
+    exit 1
 }
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
