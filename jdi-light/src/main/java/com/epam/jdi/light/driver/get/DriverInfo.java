@@ -52,11 +52,11 @@ public class DriverInfo extends DataClass<DriverInfo> {
             else {
                 downloadDriver(type, PLATFORM, DRIVER_VERSION);
             }
+            logger.info("Call getDriver()");
             return getDriver.execute();
         } catch (Exception ex) {
             try {
                 if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
-                    logger.debug("CHECKING DRIVER PATH: " + DRIVERS_FOLDER);
                     logger.info("Failed to download driver (%s %s) of latest version:" +
                             "TRY TO GET DRIVER PREVIOUS VERSION", type, DRIVER_VERSION);
                     try {
