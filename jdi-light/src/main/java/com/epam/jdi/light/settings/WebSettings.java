@@ -61,6 +61,7 @@ import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
@@ -294,7 +295,7 @@ public class WebSettings {
             }
         } else {
             // TODO use mergePath macos and windows
-            String propertyFilePath = "/../../target/classes/" + path;
+            String propertyFilePath = mergePath("/../../target/classes/" + path);
             properties = PropertyReader.getProperties(propertyFilePath);
         }
         return properties;
