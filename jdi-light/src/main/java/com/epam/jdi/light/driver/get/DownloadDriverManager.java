@@ -20,7 +20,6 @@ public class DownloadDriverManager {
         char c = version.charAt(0);
         return (c >= '0' && c <= '9');
     }
-
     public static WebDriverManager wdm;
 
     public static void downloadDriver(DriverTypes driverType,
@@ -36,9 +35,6 @@ public class DownloadDriverManager {
                     wdm = WebDriverManager.iedriver(); break;
                 case EDGE:
                     wdm = WebDriverManager.edgedriver(); break;
-                case PHANTOMJS:
-                    wdm = WebDriverManager.phantomjs();
-                    break;
                 case OPERA:
                     wdm = WebDriverManager.operadriver(); break;
                 default:
@@ -52,8 +48,6 @@ public class DownloadDriverManager {
                     case X64:
                         wdm = wdm.arch64();
                         break;
-                    default:
-                        throw exception("Unknown platform type: " + platform);
                 }
                 driverName += " " + platform;
             }
@@ -67,7 +61,6 @@ public class DownloadDriverManager {
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
-            logger.info("Binary path: " + wdm.getBinaryPath());
         } catch (Exception ex) {
             throw exception("Can't download latest driver for " + driverType
                     + ". Exception " + safeException(ex));

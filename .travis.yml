@@ -13,8 +13,8 @@ env:
   global:
     - CHROME_PROPERTIES="chrome.properties"
     - WITH_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=../$CHROME_PROPERTIES" #add -ntp when maven will be >=3.6.1 on travis
-    - NOPO_TESTS="com.epam.jdi:jdi-light-bdd-no-po-tests"
-    - BDD_TESTS="com.epam.jdi:jdi-light-bdd-tests"
+    - NOPO_TESTS="com.epam.jdi:jdi-bdd-no-po-tests"
+    - BDD_TESTS="com.epam.jdi:jdi-bdd-tests"
     - HTML_TESTS="com.epam.jdi:jdi-light-html-tests"
     - EXAMPLES="com.epam.jdi:jdi-light-examples"
     - PERFORMANCE="com.epam.jdi:jdi-performance"
@@ -38,21 +38,20 @@ jobs:
       name: Compile jdi code
       script:
         - mvn install -DskipTests
-        - mvn versions:use-latest-releases
 
-    #    - stage: test
-    #      name: Run tests - no po
-    #      script:
-    #        - mvn install -DskipTests
-    #        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-    #        - mvn verify $WITH_PARAMS -pl $NOPO_TESTS
+    #  - stage: test
+    #    name: Run tests - no po
+    #    script:
+    #    - mvn install -DskipTests
+    #    - echo "arguments=--headless" > "chrome.properties"
+    #    - mvn verify -Ddriver=chrome -Dchrome.capabilities.path=../chrome.properties -pl "com.epam.jdi:jdi-bdd-no-po-tests"
     #
-    #    - stage: test
-    #      name: Run tests - bdd
-    #      script:
-    #        - mvn install -DskipTests
-    #        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-    #        - mvn verify $WITH_PARAMS -pl $BDD_TESTS
+    #  - stage: test
+    #    name: Run tests - bdd
+    #    script:
+    #    - mvn install -DskipTests
+    #    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    #    - mvn verify $WITH_PARAMS -pl $BDD_TESTS
 
     #TODO: bootstrap tests exceeded the maximum time limit for jobs (>50min)
     #  - stage: test
@@ -66,22 +65,22 @@ jobs:
       name: Run tests - html
       script:
         - mvn install -DskipTests
-        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-        - mvn verify $WITH_PARAMS -pl $HTML_TESTS
+        - echo "arguments=--headless" > "chrome.properties"
+        - mvn verify -Ddriver=chrome -Dchrome.capabilities.path=../chrome.properties -pl "com.epam.jdi:jdi-light-html-tests"
 
-    #    - stage: test
-    #      name: Run tests - examples
-    #      script:
-    #        - mvn install -DskipTests
-    #        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-    #        - mvn verify $WITH_PARAMS -pl $EXAMPLES
+    #  - stage: test
+    #    name: Run tests - examples
+    #    script:
+    #    - mvn install -DskipTests
+    #    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    #    - mvn verify $WITH_PARAMS -pl $EXAMPLES
     #
-    #    - stage: test
-    #      name: Run tests - performance
-    #      script:
-    #        - mvn install -DskipTests
-    #        - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-    #        - mvn verify $WITH_PARAMS -pl $PERFORMANCE
+    #  - stage: test
+    #    name: Run tests - performance
+    #    script:
+    #    - mvn install -DskipTests
+    #    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    #    - mvn verify $WITH_PARAMS -pl $PERFORMANCE
 
     - stage: reports
       name: Deploy allure reports to netlify

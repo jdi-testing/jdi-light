@@ -42,7 +42,6 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 ? setupRemote()
                 : setupLocal();
     }
-
     public static String getBelowVersion() {
         String currentMajor = wdm.getDownloadedVersion().split("\\.")[0];
         List<String> allVersions = wdm.getVersions();

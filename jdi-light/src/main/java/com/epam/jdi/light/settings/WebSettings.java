@@ -97,9 +97,9 @@ public class WebSettings {
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
-        el != null && el.isDisplayed() && el.isEnabled();
+            el != null && el.isDisplayed() && el.isEnabled();
     public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
-        el != null && !el.isDisplayed() && $(el).isClickable();
+            el != null && !el.isDisplayed() && $(el).isClickable();
     public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
     public static JAction1<UIElement> BEFORE_SEARCH = b -> {};
     public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
@@ -151,8 +151,8 @@ public class WebSettings {
         return el.base().timer().getResult(() -> {
             for (String template : SMART_SEARCH_LOCATORS) {
                 UIElement ui = (template.equals("#%s")
-                    ? $(String.format(template, locatorName))
-                    : $(String.format(template, locatorName), el.base().parent))
+                        ? $(String.format(template, locatorName))
+                        : $(String.format(template, locatorName), el.base().parent))
                         .setup(e -> e.setName(el.getName()).noWait());
                 try {
                     return ui.getWebElement();
@@ -171,7 +171,7 @@ public class WebSettings {
             fillAction(p -> DRIVER_NAME = p, "driver");
         fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
                 ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
-                    ? PRELATEST_VERSION : p, "driver.version");
+                ? PRELATEST_VERSION : p, "driver.version");
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
         // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
@@ -189,16 +189,16 @@ public class WebSettings {
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> SMART_SEARCH_LOCATORS =
-            filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
+                filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
         fillAction(p -> SMART_SEARCH_NAME = getSmartSearchFunc(p), "smart.locators.toName");
         fillAction(p -> COMMON_CAPABILITIES.put("headless", p), "headless");
 
         loadCapabilities("chrome.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
+                p -> p.forEach((key, value) -> CAPABILITIES_FOR_CHROME.put(key.toString(), value.toString())));
         loadCapabilities("ff.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
+                p -> p.forEach((key, value) -> CAPABILITIES_FOR_FF.put(key.toString(), value.toString())));
         loadCapabilities("ie.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
+                p -> p.forEach((key, value) -> CAPABILITIES_FOR_IE.put(key.toString(), value.toString())));
         loadCapabilities("edge.capabilities.path",
                 p -> p.forEach((key, value) -> CAPABILITIES_FOR_EDGE.put(key.toString(), value.toString())));
         loadCapabilities("opera.capabilities.path",
@@ -210,9 +210,9 @@ public class WebSettings {
     }
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
-            t -> t.toString().equals(type));
+                t -> t.toString().equals(type));
         return textType != null
-            ? textType : SMART_TEXT;
+                ? textType : SMART_TEXT;
     }
     private static SetTextTypes getSetTextType(String type) {
         SetTextTypes textType = first(getAllEnumValues(SetTextTypes.class),
@@ -220,7 +220,6 @@ public class WebSettings {
         return textType != null
                 ? textType : SET_TEXT;
     }
-
     private static String getRemoteUrl(String prop) {
         switch (prop.toLowerCase().replaceAll(" ", "")) {
             case "sauce":
