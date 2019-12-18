@@ -1,26 +1,27 @@
 package io.github.epam.html.tests.elements.common;
 
-import io.github.epam.TestsInit;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.githubLink;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.testng.Assert.assertEquals;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
-public class BrowserOpen implements TestsInit {
-
-    String text = "Github JDI";
+public class BrowserOpen {
 
     @BeforeMethod
     public void before() {
-        shouldBeLoggedIn();
-        html5Page.shouldBeOpened();
+        WebDriverManager.chromedriver().setup();
     }
 
     @Test
     public void getTextTest() {
-        assertEquals(githubLink.getText(), text);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        ChromeDriver driver = new ChromeDriver(options);
+        driver.get("google.com");
+        logger.info(driver.getTitle());
+        driver.quit();
     }
 }
