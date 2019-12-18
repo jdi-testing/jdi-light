@@ -18,7 +18,7 @@ env:
     - HTML_TESTS="com.epam.jdi:jdi-light-html-tests"
     - EXAMPLES="com.epam.jdi:jdi-light-examples"
     - PERFORMANCE="com.epam.jdi:jdi-performance"
-    - CHROME_ARGS="--headless; --disable-gpu; --no-sandbox; --disable-dev-shm-usage"
+    - CHROME_ARGS="--headless"
 
 stages:
   - prepare
