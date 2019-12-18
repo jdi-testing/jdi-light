@@ -180,7 +180,6 @@ public class WebSettings {
         fillAction(p -> setDomain(p), "domain");
         if (DRIVER_NAME.equals(DEFAULT_DRIVER))
             fillAction(p -> DRIVER_NAME = p, "driver");
-        logger.info("!!! " + DRIVER_NAME);
         fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
                 ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
                 ? PRELATEST_VERSION : p, "driver.version");
@@ -268,7 +267,7 @@ public class WebSettings {
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {
         String path = "";
         try {
-            path = getProperty(property);
+            path = System.getProperty(property, getProperty(property));
         } catch (Exception ignore) {
         }
         if (isNotEmpty(path)) {
