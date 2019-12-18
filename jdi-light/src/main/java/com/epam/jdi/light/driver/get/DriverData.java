@@ -185,8 +185,8 @@ public class DriverData {
             chromePrefs.put("profile.default_content_settings.popups", 0);
             chromePrefs.put("profile.password_manager_enabled", false);
         });
-        setUp("Chrome: '--disable-web-security', '--disable-extensions', 'test-type'",
-                () -> cap.addArguments("--disable-web-security", "--disable-extensions", "test-type"));
+        setUp("Chrome: '--disable-web-security', '--disable-extensions', 'test-type', '--headless'",
+                () -> cap.addArguments("--disable-web-security", "--disable-extensions", "test-type", "--headless"));
         setUp("Chrome: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
                 () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
         setUp("Chrome: ACCEPT_SSL_CERTS:true",
