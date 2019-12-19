@@ -60,6 +60,7 @@ public class HtmlElementsPage extends WebPage {
     public static ColorPicker colorPicker;
     @UI("#disabled-picker") public static ColorPicker disabledPicker;
 
+    public static TextField volumeValue;
     public static Range volume;
     // @UI("#volume") public static Range volume;
     @UI("[type=range][disabled]") public static Range disabledRange;
