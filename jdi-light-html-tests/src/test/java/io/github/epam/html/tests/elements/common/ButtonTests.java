@@ -6,28 +6,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
-import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
-import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Alerts.*;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.blueButton;
-import static io.github.com.pages.HtmlElementsPage.dblClickButton;
-import static io.github.com.pages.HtmlElementsPage.disabledButton;
-import static io.github.com.pages.HtmlElementsPage.disabledButtonInput;
-import static io.github.com.pages.HtmlElementsPage.ghostButton;
-import static io.github.com.pages.HtmlElementsPage.redButton;
-import static io.github.com.pages.HtmlElementsPage.rightClickButton;
-import static io.github.com.pages.HtmlElementsPage.suspendButton;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.elements.BaseValidations.durationImmediately;
-import static io.github.epam.html.tests.elements.BaseValidations.durationMoreThan;
+import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.epam.html.tests.elements.BaseValidations.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
@@ -70,7 +57,7 @@ public class ButtonTests implements TestsInit {
             fail("Disabled button should not work, but work");
         } catch (Exception ex) {
             assertThat(safeException(ex),
-                    containsString("Can't perform click. Element is disabled"));
+                containsString("Can't perform click. Element is disabled"));
         }
     }
     @Test
@@ -93,12 +80,12 @@ public class ButtonTests implements TestsInit {
         redButton.is().text(containsString("Red Button"));
         assertThat(redButton.core().css("font-size"), is("14px"));
         redButton.assertThat().displayed()
-                .and().text(is(text))
-                .core()
-                .css("font-size", is("14px"))
-                .cssClass("uui-button red")
-                .attr("type", "button")
-                .tag(is("input"));
+            .and().text(is(text))
+            .core()
+            .css("font-size", is("14px"))
+            .cssClass("uui-button red")
+            .attr("type", "button")
+            .tag(is("input"));
         blueButton.is().text(containsString("Blue Button".toUpperCase()));
         disabledButton.is().text(containsString("Disabled Button".toUpperCase()));
         disabledButtonInput.is().text(containsString("Disabled Button"));
@@ -128,7 +115,7 @@ public class ButtonTests implements TestsInit {
     public void vanishButtonTest() {
         WebPage.reload();
         durationMoreThan(3, () ->
-                ghostButton.is().disappear());
+            ghostButton.is().disappear());
     }
 
     //if test fails then run `mvn clean install` in module JDI Light
@@ -136,7 +123,7 @@ public class ButtonTests implements TestsInit {
     public void isNotAppearTimeoutFailedButtonTest() {
         WebPage.reload();
         durationMoreThan(2, () ->
-                suspendButton.is().notAppear(2));
+            suspendButton.is().notAppear(2));
     }
 
     @Test
@@ -152,7 +139,7 @@ public class ButtonTests implements TestsInit {
         WebPage.reload();
         try {
             durationImmediately(() ->
-                    ghostButton.is().notAppear());
+                ghostButton.is().notAppear());
             fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
         } catch (Exception ex) {
             assertThat(safeException(ex), containsString("but: was \"displayed\""));
@@ -171,7 +158,7 @@ public class ButtonTests implements TestsInit {
     public void isNotAppearTimeoutButtonTest() {
         ghostButton.is().hidden();
         durationMoreThan(2, () ->
-                ghostButton.is().notAppear(2));
+            ghostButton.is().notAppear(2));
     }
 
 }

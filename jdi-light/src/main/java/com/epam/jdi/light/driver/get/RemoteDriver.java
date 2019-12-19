@@ -36,8 +36,6 @@ public class RemoteDriver {
                 return url;
             }
             throw exception("You run tests in Remote mode, please specify 'remote.url' in test.properties");
-        } catch (Exception ex) {
-            throw exception("Can't get remote Url: " + safeException(ex));
-        }
+        } catch(Exception ex) { throw exception("Can't get remote Url: " + safeException(ex)); }
     }
 }

@@ -4,20 +4,11 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
-import static com.epam.jdi.light.elements.common.Alerts.dismissAlert;
-import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
-import static com.epam.jdi.light.elements.common.Alerts.inputAndAcceptAlert;
-import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Alerts.*;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.blueButton;
-import static io.github.com.pages.HtmlElementsPage.ghostButton;
-import static io.github.com.pages.HtmlElementsPage.redButton;
-import static io.github.com.pages.HtmlElementsPage.refresh;
+import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalToIgnoringCase;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
 /**
