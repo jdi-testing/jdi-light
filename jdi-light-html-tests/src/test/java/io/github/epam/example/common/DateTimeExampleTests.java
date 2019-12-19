@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.birthDate;
 import static io.github.com.pages.HtmlElementsPage.partyTime;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
@@ -30,24 +29,38 @@ public class DateTimeExampleTests implements TestsInit {
 
     @Test
     public void getDateTest() {
-        birthDate.is().text("1985-06-18");
+        partyTime.is().text("2018-06-12T19:30");
     }
 
     @Test
     public void getLabelTextTest() {
-        partyTime.label().is().text( "Date/time:");
+        assertEquals(partyTime.labelText(), "Date/time:");
     }
 
     @Test
-    public void minMaxTest() {
+    public void minTest() {
         assertEquals(partyTime.min(), "2018-05-07T00:00");
+    }
+
+    @Test
+    public void maxTest() {
         assertEquals(partyTime.max(), "2018-06-14T00:00");
     }
 
     @Test
+    public void isValidationTest() {
+        partyTime.is().date(equalToIgnoringCase("2018-06-12t19:30"));
+        partyTime.is().enabled();
+    }
+
+    @Test
     public void labelTest() {
-        birthDate.label().assertThat().text(is("Birth date"));
-        birthDate.label().is().text(equalToIgnoringCase("birth date"));
-        birthDate.assertThat().date(containsString("1985"));
+        partyTime.label().assertThat().text(is("Date/time:"));
+        partyTime.label().is().text(equalToIgnoringCase("date/time:"));
+    }
+
+    @Test
+    public void assertValidationTest() {
+        partyTime.assertThat().date(containsString("2018"));
     }
 }
