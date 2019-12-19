@@ -23,7 +23,6 @@ public final class WebDriverUtils {
     public static void killAllSeleniumDrivers() {
         String os = System.getProperty("os.name");
         try {
-            logger.info("!!! OS is: " + os);
             if (os.contains("Mac")) {
                 killAllMacOSDriverProcesses();
             } else {
@@ -31,17 +30,12 @@ public final class WebDriverUtils {
             }
         } catch (Exception ex) {
             logger.info("Can't kill driver processes");
-            logger.info("EX: " + ex.getMessage());
         }
     }
 
     private static void killAllMacOSDriverProcesses() {
-        logger.info("Killing firefox");
         killMacOSDriverProcesses("firefox");
-        logger.info("Firefox killed");
-        logger.info("Killing chrome");
         killMacOSDriverProcesses("chrome");
-        logger.info("Chrome killed");
     }
 
     /**
