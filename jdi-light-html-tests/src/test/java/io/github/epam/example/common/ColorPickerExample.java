@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 
 public class ColorPickerExample implements TestsInit {
-    final private static String COLOR = "#ffd7a6";
+    final private static String COLOR = "#3fd7a6";
     final private static String DISABLED_COLOR = "#ffd7a6";
     final private static String SETTING_COLOR = "#432376";
 
