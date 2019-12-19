@@ -28,10 +28,9 @@ public final class WebDriverUtils {
             } else {
                 killAllWindowsDriverProcesses();
             }
-        }
-        catch (Exception ignore){
+        } catch (Exception ex) {
             logger.info("Can't kill driver processes");
-            ignore.getMessage();
+            logger.info("EX: " + ex.getMessage());
         }
     }
 
