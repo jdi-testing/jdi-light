@@ -41,8 +41,8 @@ public class HtmlElementsPage extends WebPage {
     @UI("[value*='Disabled Button']") public static Button disabledButtonInput;
     // @UI("input[type=button][disabled]") public static Button disabledButtonInput;
     public static Button blueButton, dblClickButton, rightClickButton;
-    //@WaitTimeout(4)
-    //public static Button ghostButton, suspendButton;
+    @WaitTimeout(4)
+    public static Button ghostButton, suspendButton;
     @NoWait
     public static Button disabledButton;
     // @UI("#blue-button") public static Button blueButton;

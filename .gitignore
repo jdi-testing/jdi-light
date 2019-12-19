@@ -5,8 +5,15 @@ target/
 *.exe
 .logs/
 *.xlsx
-.DS_Store/
+.DS_Store
 allure-results/
+allure-report/
 downloads/
 *.log
+.settings/
+.project
+.classpath
 .allure/
+test-output/
+.vscode/
+*.factorypath

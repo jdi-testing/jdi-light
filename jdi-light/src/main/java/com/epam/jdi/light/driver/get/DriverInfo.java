@@ -37,11 +37,6 @@ public class DriverInfo extends DataClass<DriverInfo> {
     public String properties, path;
     public JFunc1<Object, WebDriver> getDriver;
 
-    public WebDriver getDriver() {
-        return isRemote()
-                ? setupRemote()
-                : setupLocal();
-    }
     public static String getBelowVersion() {
         String currentMajor = wdm.getDownloadedVersion().split("\\.")[0];
         List<String> allVersions = wdm.getVersions();
@@ -49,6 +44,12 @@ public class DriverInfo extends DataClass<DriverInfo> {
             if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
                 return allVersions.get(i);
         throw exception("Can't find version below current(" + wdm.getDownloadedVersion() + ")");
+    }
+
+    public WebDriver getDriver() {
+        return isRemote()
+                ? setupRemote()
+                : setupLocal();
     }
 
     private WebDriver setupRemote() {
