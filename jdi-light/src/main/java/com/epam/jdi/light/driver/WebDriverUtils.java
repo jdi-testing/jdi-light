@@ -35,8 +35,12 @@ public final class WebDriverUtils {
     }
 
     private static void killAllMacOSDriverProcesses() {
+        logger.info("Killing firefox");
         killMacOSDriverProcesses("firefox");
+        logger.info("Firefox killed");
+        logger.info("Killing chrome");
         killMacOSDriverProcesses("chrome");
+        logger.info("Chrome killed");
     }
 
     /**
