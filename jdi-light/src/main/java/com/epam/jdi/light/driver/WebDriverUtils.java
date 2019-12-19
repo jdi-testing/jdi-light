@@ -23,6 +23,7 @@ public final class WebDriverUtils {
     public static void killAllSeleniumDrivers() {
         String os = System.getProperty("os.name");
         try {
+            logger.info("!!! OS is: " + os);
             if (os.contains("Mac")) {
                 killAllMacOSDriverProcesses();
             } else {
