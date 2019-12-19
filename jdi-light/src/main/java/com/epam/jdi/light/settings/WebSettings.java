@@ -62,6 +62,15 @@ import static org.openqa.selenium.PageLoadStrategy.*;
 public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String DOMAIN;
+    public static String getDomain() {
+        if (DOMAIN != null)
+            return DOMAIN;
+        preInit();
+        return "No Domain Found. Use test.properties or WebSettings.DOMAIN";
+    }
+    public static void setDomain(String domain) {
+        DOMAIN = domain;
+    }
     public static String KILL_BROWSER = "afterAndBefore";
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
@@ -70,18 +79,49 @@ public class WebSettings {
     public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
         el != null && !el.isDisplayed() && $(el).isClickable();
     public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
-    public static JAction1<UIElement> BEFORE_SEARCH = b -> {
-    };
+    public static JAction1<UIElement> BEFORE_SEARCH = b -> {};
+    public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
+        SEARCH_RULES = rule;
+    }
+    public static void noValidation() {
+        SEARCH_RULES = ANY_ELEMENT;
+        CLICK_TYPE = CENTER;
+    }
+    public static void onlyVisible() {
+        SEARCH_RULES = VISIBLE_ELEMENT;
+    }
+    public static void visibleEnabled() {
+        SEARCH_RULES = ENABLED_ELEMENT;
+    }
+    public static void inView() {
+        SEARCH_RULES = ELEMENT_IN_VIEW;
+        BEFORE_SEARCH = UIElement::show;
+    }
+
     public static ElementArea CLICK_TYPE = SMART_CLICK;
     public static TextTypes TEXT_TYPE = SMART_TEXT;
     public static SetTextTypes SET_TEXT_TYPE = SET_TEXT;
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
     public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
     public static boolean STRICT_SEARCH = true;
+    public static boolean hasDomain() {
+        preInit();
+        return DOMAIN != null && DOMAIN.contains("://");
+    }
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
+    public static String useDriver(JFunc<WebDriver> driver) {
+        return WebDriverFactory.useDriver(driver);
+    }
+    public static String useDriver(String driverName) {
+        return WebDriverFactory.useDriver(driverName);
+    }
+    public static String useDriver(DriverTypes driverType) {
+        return WebDriverFactory.useDriver(driverType);
+    }
+
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
@@ -99,56 +139,6 @@ public class WebSettings {
             throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
         });
     };
-
-    public static String getDomain() {
-        if (DOMAIN != null)
-            return DOMAIN;
-        preInit();
-        return "No Domain Found. Use test.properties or WebSettings.DOMAIN";
-    }
-
-    public static void setDomain(String domain) {
-        DOMAIN = domain;
-    }
-
-    public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
-        SEARCH_RULES = rule;
-    }
-
-    public static void noValidation() {
-        SEARCH_RULES = ANY_ELEMENT;
-        CLICK_TYPE = CENTER;
-    }
-
-    public static void onlyVisible() {
-        SEARCH_RULES = VISIBLE_ELEMENT;
-    }
-
-    public static void visibleEnabled() {
-        SEARCH_RULES = ENABLED_ELEMENT;
-    }
-
-    public static void inView() {
-        SEARCH_RULES = ELEMENT_IN_VIEW;
-        BEFORE_SEARCH = UIElement::show;
-    }
-
-    public static boolean hasDomain() {
-        preInit();
-        return DOMAIN != null && DOMAIN.contains("://");
-    }
-
-    public static String useDriver(JFunc<WebDriver> driver) {
-        return WebDriverFactory.useDriver(driver);
-    }
-
-    public static String useDriver(String driverName) {
-        return WebDriverFactory.useDriver(driverName);
-    }
-
-    public static String useDriver(DriverTypes driverType) {
-        return WebDriverFactory.useDriver(driverType);
-    }
 
     public static synchronized void init() {
         getProperties(TEST_PROPERTIES_PATH);
