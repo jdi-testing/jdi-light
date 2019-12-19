@@ -257,7 +257,7 @@ public class WebSettings {
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {
         String path = "";
         try {
-            path = getProperty(property);
+            path = System.getProperty(property, getProperty(property));
         } catch (Exception ignore) {
         }
         if (isNotEmpty(path)) {

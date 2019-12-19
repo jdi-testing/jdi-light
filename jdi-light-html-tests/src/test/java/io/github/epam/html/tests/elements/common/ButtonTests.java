@@ -41,7 +41,6 @@ public class ButtonTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-
     String text = "Big Red Button-Input";
 
     @Test
