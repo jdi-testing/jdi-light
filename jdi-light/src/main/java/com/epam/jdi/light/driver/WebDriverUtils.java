@@ -31,6 +31,7 @@ public final class WebDriverUtils {
         }
         catch (Exception ignore){
             logger.info("Can't kill driver processes");
+            ignore.getMessage();
         }
     }
 
