@@ -45,12 +45,6 @@ public class DateTimeExampleTests implements TestsInit {
     }
 
     @Test
-    public void isValidationTest() {
-        partyTime.is().date(equalToIgnoringCase("2018-06-12t19:30"));
-        partyTime.is().enabled();
-    }
-
-    @Test
     public void labelTest() {
         birthDate.label().assertThat().text(is("Birth date"));
         birthDate.label().is().text(equalToIgnoringCase("birth date"));
