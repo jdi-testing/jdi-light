@@ -35,7 +35,7 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> {
     }
     public ImageAssert height(int height) { return height(is(height)); }
 
-    public ImageAssert width(int width) { return width(is(width)); }
+    public ImageAssert width(String width) { return width(is(width)); }
 
     @JDIAction("Assert that '{name}' width {0}")
     public ImageAssert width(Matcher<Object> condition) {
