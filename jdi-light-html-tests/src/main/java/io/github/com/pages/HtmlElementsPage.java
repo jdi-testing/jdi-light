@@ -33,8 +33,8 @@ public class HtmlElementsPage extends WebPage {
 
     public static Label jdiTitle;
     // @UI("[ui=jdi-title]") public static Label jdiTitle;
-	public static Text jdiText;
-	// @UI("[ui=jdi-text]") public static Text jdiText;
+    public static Text jdiText;
+    // @UI("[ui=jdi-text]") public static Text jdiText;
 
     @UI("[value*='Red Button']") public static Button redButton;
     // @UI("input[type=button].red") public static Button redButton;

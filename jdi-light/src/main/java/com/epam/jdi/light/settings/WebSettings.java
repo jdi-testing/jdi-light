@@ -22,9 +22,6 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -85,28 +82,8 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String DOMAIN;
-    public static String KILL_BROWSER = "afterAndBefore";
-    public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
-    public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
-    public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
-            el != null && el.isDisplayed() && el.isEnabled();
-    public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
-            el != null && !el.isDisplayed() && $(el).isClickable();
-    public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
     public static JAction1<UIElement> BEFORE_SEARCH = b -> {
     };
-    public static ElementArea CLICK_TYPE = SMART_CLICK;
-    public static TextTypes TEXT_TYPE = SMART_TEXT;
-    public static SetTextTypes SET_TEXT_TYPE = SET_TEXT;
-    public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
-    public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
-    public static boolean STRICT_SEARCH = true;
-    public static String TEST_GROUP = "";
-    // TODO multi properties example
-    public static String TEST_PROPERTIES_PATH = "test.properties";
-    public static Safe<String> TEST_NAME = new Safe<>((String) null);
-    public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
-    public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
         String locatorName = SMART_SEARCH_NAME.execute(el.getName());
         return el.base().timer().getResult(() -> {
@@ -123,6 +100,14 @@ public class WebSettings {
             throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
         });
     };
+    public static String KILL_BROWSER = "afterAndBefore";
+    public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
+    public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
+    public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
+            el != null && el.isDisplayed() && el.isEnabled();
+    public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
+            el != null && !el.isDisplayed() && $(el).isClickable();
+    public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
 
     public static String getDomain() {
         if (DOMAIN != null)
@@ -152,10 +137,22 @@ public class WebSettings {
         SEARCH_RULES = ENABLED_ELEMENT;
     }
 
+    public static ElementArea CLICK_TYPE = SMART_CLICK;
+    public static TextTypes TEXT_TYPE = SMART_TEXT;
+    public static SetTextTypes SET_TEXT_TYPE = SET_TEXT;
+    public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
+    public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
+    public static boolean STRICT_SEARCH = true;
+
     public static void inView() {
         SEARCH_RULES = ELEMENT_IN_VIEW;
         BEFORE_SEARCH = UIElement::show;
     }
+
+    public static String TEST_GROUP = "";
+    // TODO multi properties example
+    public static String TEST_PROPERTIES_PATH = "test.properties";
+    public static Safe<String> TEST_NAME = new Safe<>((String) null);
 
     public static boolean hasDomain() {
         preInit();
@@ -169,6 +166,9 @@ public class WebSettings {
     public static String useDriver(String driverName) {
         return WebDriverFactory.useDriver(driverName);
     }
+
+    public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
+    public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
 
     public static String useDriver(DriverTypes driverType) {
         return WebDriverFactory.useDriver(driverType);
@@ -220,21 +220,18 @@ public class WebSettings {
         if (SMART_SEARCH_LOCATORS.size() == 0)
             SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
     }
-
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
                 t -> t.toString().equals(type));
         return textType != null
                 ? textType : SMART_TEXT;
     }
-
     private static SetTextTypes getSetTextType(String type) {
         SetTextTypes textType = first(getAllEnumValues(SetTextTypes.class),
                 t -> t.toString().equals(type));
         return textType != null
                 ? textType : SET_TEXT;
     }
-
     private static String getRemoteUrl(String prop) {
         switch (prop.toLowerCase().replaceAll(" ", "")) {
             case "sauce":
@@ -247,7 +244,6 @@ public class WebSettings {
                 return seleniumLocalhost();
         }
     }
-
     private static JFunc1<String, String> getSmartSearchFunc(String name) {
         switch (name) {
             case "camelCase":
@@ -265,10 +261,11 @@ public class WebSettings {
         }
     }
 
+
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {
         String path = "";
         try {
-            path = System.getProperty(property, getProperty(property));
+            path = getProperty(property);
         } catch (Exception ignore) {
         }
         if (isNotEmpty(path)) {
@@ -310,22 +307,15 @@ public class WebSettings {
         }
         return NORMAL;
     }
-
     public static Properties getProperties(String path) {
-        File propertyFile = new File(path);
-        Properties properties = new Properties();
-        if (propertyFile.exists()) {
-            try {
-                System.out.println("Property file found: " + propertyFile.getAbsolutePath());
-                properties.load(new FileInputStream(propertyFile));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            // TODO use mergePath macos and windows
-            String propertyFilePath = mergePath("/../../target/classes/" + path);
-            properties = PropertyReader.getProperties(propertyFilePath);
-        }
-        return properties;
+        // TODO use mergePath macos and windows
+        Properties pTest = PropertyReader.getProperties(mergePath(path));
+        Properties pTarget = PropertyReader.getProperties(mergePath("/../../target/classes/" + path));
+        if (pTarget.size() > 0)
+            return pTarget;
+        String propertiesPath = pTest.size() > 0
+                ? path
+                : "/../../target/classes/" + path;
+        return PropertyReader.getProperties(mergePath(propertiesPath));
     }
 }

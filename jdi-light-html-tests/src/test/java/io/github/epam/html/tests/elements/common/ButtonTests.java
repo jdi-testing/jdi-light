@@ -36,13 +36,13 @@ import static org.testng.Assert.fail;
 
 public class ButtonTests implements TestsInit {
 
-    String text = "Big Red Button-Input";
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
+
+    String text = "Big Red Button-Input";
 
     @Test
     public void getTextTest() {
@@ -64,7 +64,6 @@ public class ButtonTests implements TestsInit {
         assertEquals(getAlertText(), "Blue button");
         acceptAlert();
     }
-
     @Test
     public void disableButtonTest() {
         try {
@@ -75,21 +74,18 @@ public class ButtonTests implements TestsInit {
                     containsString("Can't perform click. Element is disabled"));
         }
     }
-
     @Test
     public void doubleClickTest() {
         dblClickButton.doubleClick();
         assertEquals(getAlertText(), "Double Click");
         acceptAlert();
     }
-
     @Test
     public void rightClickTest() {
         rightClickButton.rightClick();
         assertEquals(getAlertText(), "Right Click");
         acceptAlert();
     }
-
     @Test
     public void isValidationTest() {
         redButton.is().displayed();
@@ -151,7 +147,6 @@ public class ButtonTests implements TestsInit {
         durationMoreThan(2, () ->
                 suspendButton.is().displayed());
     }
-
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void isNotAppearFailedButtonTest() {
