@@ -38,12 +38,8 @@ public class DateTimeExampleTests implements TestsInit {
     }
 
     @Test
-    public void minTest() {
+    public void minMaxTest() {
         assertEquals(partyTime.min(), "2018-05-07T00:00");
-    }
-
-    @Test
-    public void maxTest() {
         assertEquals(partyTime.max(), "2018-06-14T00:00");
     }
 
@@ -57,10 +53,6 @@ public class DateTimeExampleTests implements TestsInit {
     public void labelTest() {
         partyTime.label().assertThat().text(is("Date/time:"));
         partyTime.label().is().text(equalToIgnoringCase("date/time:"));
-    }
-
-    @Test
-    public void assertValidationTest() {
         partyTime.assertThat().date(containsString("2018"));
     }
 }
