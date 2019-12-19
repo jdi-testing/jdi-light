@@ -12,6 +12,7 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
@@ -66,8 +67,8 @@ import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
-import static com.epam.jdi.tools.PropertyReader.getProperties;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
@@ -271,7 +272,7 @@ public class WebSettings {
         } catch (Exception ignore) {
         }
         if (isNotEmpty(path)) {
-            setCapabilities.execute(getCapabilities(path));
+            setCapabilities.execute(getProperties(path));
         }
     }
 
@@ -310,7 +311,7 @@ public class WebSettings {
         return NORMAL;
     }
 
-    public static Properties getCapabilities(String path) {
+    public static Properties getProperties(String path) {
         File propertyFile = new File(path);
         Properties properties = new Properties();
         if (propertyFile.exists()) {
@@ -322,8 +323,8 @@ public class WebSettings {
             }
         } else {
             // TODO use mergePath macos and windows
-            String propertyFilePath = "/../../target/classes/" + path;
-            properties = getProperties(propertyFilePath);
+            String propertyFilePath = mergePath("/../../target/classes/" + path);
+            properties = PropertyReader.getProperties(propertyFilePath);
         }
         return properties;
     }
