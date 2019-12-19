@@ -28,7 +28,8 @@ public final class WebDriverUtils {
             } else {
                 killAllWindowsDriverProcesses();
             }
-        } catch (Exception ex) {
+        }
+        catch (Exception ignore){
             logger.info("Can't kill driver processes");
         }
     }
@@ -53,7 +54,7 @@ public final class WebDriverUtils {
     }
 
     private static void killMacOSDriverProcesses(String browserName) {
-        String name;
+        String name = null;
         switch (browserName.toLowerCase()) {
             case "firefox":
                 name = "geckodriver";
@@ -61,9 +62,7 @@ public final class WebDriverUtils {
             case "chrome":
                 name = "chromedriver";
                 break;
-            default:
-                name = null;
-                break;
+
         }
         if (name != null) {
             killAllMacOSDriverProcessesByName(name);
