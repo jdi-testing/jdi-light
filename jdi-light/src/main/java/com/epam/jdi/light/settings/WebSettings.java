@@ -267,18 +267,13 @@ public class WebSettings {
         }
         return NORMAL;
     }
-    public static Properties getProperties(String path) {
+
+    private static Properties getProperties(String path) {
         File propertyFile = new File(path);
-        Properties properties = new Properties();
+        Properties properties;
         if (propertyFile.exists()) {
-            try {
-                System.out.println("Property file found: " + propertyFile.getAbsolutePath());
-                properties.load(new FileInputStream(propertyFile));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            properties = getCiProperties(path, propertyFile);
         } else {
-            // TODO use mergePath macos and windows
             Properties pTest = PropertyReader.getProperties(mergePath(path));
             Properties pTarget = PropertyReader.getProperties(mergePath("/../../target/classes/" + path));
             if (pTarget.size() > 0)
@@ -287,6 +282,17 @@ public class WebSettings {
                     ? path
                     : "/../../target/classes/" + path;
             properties = PropertyReader.getProperties(propertiesPath);
+        }
+        return properties;
+    }
+
+    private static Properties getCiProperties(String path, File propertyFile){
+        Properties properties = new Properties();
+        try {
+            System.out.println("Property file found: " + propertyFile.getAbsolutePath());
+            properties.load(new FileInputStream(propertyFile));
+        } catch (IOException ex) {
+            throw exception("Couldn't load properties for CI Server" + path);
         }
         return properties;
     }
