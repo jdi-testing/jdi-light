@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite.section.card;
+package io.github.epam.bootstrap.tests.common;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -11,18 +11,12 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
-/**
- * Created by Natalia Amelina on 27.09.2019
- * Email: natalia_amelina@epam.com; Skype: nat_amelina
- */
-public class CardImageTests extends TestsInit {
-
+public class ImageTests extends TestsInit {
     private static final String SRC_ATTR_EXPECTED = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
     private static final String ALT_ATTR_EXPECTED = "image";
     private static final String IMAGE_TOP_CLASS = "card-img-top";
-    private static final String TEXT = "Some quick example text.";
     private static final String WIDTH = "86";
-    private static final String HEIGHT = "137";
+    private static final String HEIGHT = "138";
 
     @BeforeMethod
     public void before() {
@@ -31,23 +25,10 @@ public class CardImageTests extends TestsInit {
     }
 
     @Test
-    public void getMainTextTest() {
-        assertEquals(cardImage.text.getText(), TEXT);
-    }
-
-    @Test
     public void availabilityTest() {
-        cardImage.text.is()
-                .displayed()
-                .enabled();
         cardImage.image.is()
                 .displayed()
                 .enabled();
-    }
-
-    @Test
-    public void getSrcTest() {
-        assertEquals(cardImage.image.src(), SRC_ATTR_EXPECTED);
     }
 
     @Test
@@ -57,7 +38,6 @@ public class CardImageTests extends TestsInit {
 
     @Test
     public void isValidationTest() {
-        cardImage.text.is().text(is(TEXT));
         cardImage.image.is().src(is(SRC_ATTR_EXPECTED));
         cardImage.image.is().alt(is(ALT_ATTR_EXPECTED));
         cardImage.image.unhighlight();
@@ -68,7 +48,6 @@ public class CardImageTests extends TestsInit {
     @Test
     public void baseValidationTest() {
         baseValidation(cardImage.image);
-        baseValidation(cardImage.text);
     }
 
     @Test

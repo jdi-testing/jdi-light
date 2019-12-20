@@ -28,17 +28,19 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> {
     }
     public ImageAssert alt(String alt) { return alt(is(alt)); }
 
+    public ImageAssert height(String height) { return height(is(height)); }
+
+    public ImageAssert width(String width) { return width(is(width)); }
+
     @JDIAction("Assert that '{name}' height {0}")
-    public ImageAssert height(Matcher<Integer> condition) {
+    public ImageAssert height(Matcher<Object> condition) {
         jdiAssert(element.height(), condition);
         return this;
     }
-    public ImageAssert height(int height) { return height(is(height)); }
 
     @JDIAction("Assert that '{name}' width {0}")
-    public ImageAssert width(Matcher<Integer> condition) {
+    public ImageAssert width(Matcher<Object> condition) {
         jdiAssert(element.width(), condition);
         return this;
     }
-    public ImageAssert width(int width) { return width(is(width)); }
 }

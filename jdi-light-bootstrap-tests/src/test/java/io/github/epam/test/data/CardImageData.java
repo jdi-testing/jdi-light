@@ -5,8 +5,8 @@ public class CardImageData {
     private final String altAttr;
     private final String imageClass;
     private final String text;
-    private final int width;
-    private final int height;
+    private final String width;
+    private final String height;
 
     public String getSrcAttr() {
         return srcAttr;
@@ -24,11 +24,11 @@ public class CardImageData {
         return text;
     }
 
-    public int getWidth() {
+    public String getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
@@ -37,8 +37,8 @@ public class CardImageData {
         private String altAttr = "Captain America image";
         private String imageClass = "card-img-top";
         private String text = "CARD TITLE\nThis is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.\nLast updated 3 mins ago";
-        private int width = 86;
-        private int height = 106;
+        private String width = "86";
+        private String height = "106";
 
         public Builder srcAttr(String srcAttr) {
             this.srcAttr = srcAttr;
@@ -60,11 +60,11 @@ public class CardImageData {
             return this;
         }
 
-        public Builder width(int width) {
+        public Builder width(String width) {
             this.width = width;
             return this;
         }
-        public Builder height(int height) {
+        public Builder height(String height) {
             this.height = height;
             return this;
         }
