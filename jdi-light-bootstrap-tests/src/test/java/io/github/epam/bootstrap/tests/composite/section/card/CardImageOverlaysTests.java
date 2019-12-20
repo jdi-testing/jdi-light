@@ -27,7 +27,7 @@ public class CardImageOverlaysTests extends TestsInit {
     private static final String OVERLAY_CLASS = "card-img-overlay";
     private static final String TITLE = "CARD TITLE";
     private static final String WIDTH = "100%";
-    private static final int HEIGHT = 270;
+    private static final String HEIGHT = "270";
 
     @BeforeMethod
     public void before() {

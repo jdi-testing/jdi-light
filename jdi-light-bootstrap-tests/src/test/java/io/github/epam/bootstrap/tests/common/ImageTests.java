@@ -15,8 +15,8 @@ public class ImageTests extends TestsInit {
     private static final String SRC_ATTR_EXPECTED = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
     private static final String ALT_ATTR_EXPECTED = "image";
     private static final String IMAGE_TOP_CLASS = "card-img-top";
-    private static final int WIDTH = 86;
-    private static final int HEIGHT = 138;
+    private static final String WIDTH = "86";
+    private static final String HEIGHT = "138";
 
     @BeforeMethod
     public void before() {

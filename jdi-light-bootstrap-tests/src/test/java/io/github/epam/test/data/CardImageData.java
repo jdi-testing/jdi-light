@@ -6,7 +6,7 @@ public class CardImageData {
     private final String imageClass;
     private final String text;
     private final String width;
-    private final int height;
+    private final String height;
 
     public String getSrcAttr() {
         return srcAttr;
@@ -28,7 +28,7 @@ public class CardImageData {
         return width;
     }
 
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
@@ -38,7 +38,7 @@ public class CardImageData {
         private String imageClass = "card-img-top";
         private String text = "CARD TITLE\nThis is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.\nLast updated 3 mins ago";
         private String width = "86";
-        private int height = 106;
+        private String height = "106";
 
         public Builder srcAttr(String srcAttr) {
             this.srcAttr = srcAttr;
@@ -64,7 +64,7 @@ public class CardImageData {
             this.width = width;
             return this;
         }
-        public Builder height(int height) {
+        public Builder height(String height) {
             this.height = height;
             return this;
         }

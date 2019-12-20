@@ -26,7 +26,7 @@ public class CardImageCapsTests extends TestsInit {
         bottomCardData = new CardImageData.Builder()
                 .srcAttr("https://jdi-testing.github.io/jdi-light/images/punisher.jpg")
                 .altAttr("...")
-                .height(138)
+                .height("138")
                 .build();
     }
     @BeforeMethod

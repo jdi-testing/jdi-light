@@ -21,20 +21,20 @@ public class Image extends UIBaseElement<ImageAssert>
     @JDIAction(value = "Get '{name}' image source path", level = DEBUG)
     public String src() { return uiElement.attr("src"); }
     @JDIAction(value = "Get '{name}' image height", level = DEBUG)
-    public int height() { return getInt("height", uiElement); }
+    public String height() { return uiElement.attr("height"); }
     @JDIAction(value = "Get '{name}' image width", level = DEBUG)
     public String width() { return uiElement.attr("width"); }
     @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
     public String alt() { return uiElement.attr("alt"); }
-    @JDIAction(value = "Get '{name}' vector image tag attribute by its name", level = DEBUG)
+    @JDIAction(value = "Get '{name}' image tag attribute by its name", level = DEBUG)
     public String getAttribute(final String tagName, final String attribute) {
         return getInnerElement(tagName).core().getAttribute(attribute);
     }
-    @JDIAction(value = "Get '{name}' vector image internal element", level = DEBUG)
+    @JDIAction(value = "Get '{name}' image internal element", level = DEBUG)
     public UIElement getInnerElement(final String tagName) {
         return core().find(By.tagName(tagName));
     }
-    @JDIAction(value = "Get '{name}' vector image tag text", level = DEBUG)
+    @JDIAction(value = "Get '{name}' image tag text", level = DEBUG)
     public String getText(final String tagName) {
         return getInnerElement(tagName).core().getText();
     }
