@@ -40,8 +40,4 @@ public class ProgressExampleTests implements TestsInit {
     public void baseValidationTest() {
         baseValidation(progress);
     }
-
-
-
-
 }
