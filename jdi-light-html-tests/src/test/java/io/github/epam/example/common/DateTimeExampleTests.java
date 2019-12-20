@@ -35,7 +35,7 @@ public class DateTimeExampleTests implements TestsInit {
 
     @Test
     public void getLabelTextTest() {
-        assertEquals(partyTime.labelText(), "Date/time:");
+        partyTime.label().is().text( "Date/time:");
     }
 
     @Test
