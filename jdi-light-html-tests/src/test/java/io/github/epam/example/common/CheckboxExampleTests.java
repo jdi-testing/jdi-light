@@ -11,7 +11,7 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 
 public class CheckboxExampleTests implements TestsInit {
 
-    String labelText = "Accept terms and conditions";
+    private String labelText = "Accept terms and conditions";
 
     @BeforeMethod
     public void before() {

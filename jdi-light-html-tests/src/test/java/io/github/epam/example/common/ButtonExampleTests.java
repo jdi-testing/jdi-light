@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.is;
  */
 public class ButtonExampleTests implements TestsInit {
 
-    String text = "Big Red Button-Input";
+    private String text = "Big Red Button-Input";
 
     @BeforeMethod
     public void before() {
