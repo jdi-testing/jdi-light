@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.birthDate;
+import static io.github.com.pages.HtmlElementsPage.bookingTime;
 import static io.github.com.pages.HtmlElementsPage.partyTime;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
@@ -26,16 +27,14 @@ public class DateTimeExampleTests implements TestsInit {
         partyTime.setDateTime("2017-05-10T00:00");
         partyTime.show();
         partyTime.is().text("2017-05-10T00:00");
+        bookingTime.setDateTime("05:00");
+        bookingTime.show();
+        bookingTime.is().text("05:00");
     }
 
     @Test
     public void getDateTest() {
         birthDate.is().text("1985-06-18");
-    }
-
-    @Test
-    public void getLabelTextTest() {
-        partyTime.label().is().text("Date/time:");
     }
 
     @Test
