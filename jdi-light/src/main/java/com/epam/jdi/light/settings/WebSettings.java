@@ -269,13 +269,31 @@ public class WebSettings {
     }
 
     private static Properties getProperties(String path) {
-        Properties pTest = PropertyReader.getProperties(mergePath(path));
-        Properties pTarget = PropertyReader.getProperties(mergePath("/../../target/classes/" + path));
-        if (pTarget.size() > 0)
-            return pTarget;
-        String propertiesPath = pTest.size() > 0
-                ? path
-                : "/../../target/classes/" + path;
-        return PropertyReader.getProperties(propertiesPath);
+        File propertyFile = new File(path);
+        Properties properties;
+        if (propertyFile.exists()) {
+            properties = getCiProperties(path, propertyFile);
+        } else {
+            Properties pTest = PropertyReader.getProperties(mergePath(path));
+            Properties pTarget = PropertyReader.getProperties(mergePath("/../../target/classes/" + path));
+            if (pTarget.size() > 0)
+                return pTarget;
+            String propertiesPath = pTest.size() > 0
+                    ? path
+                    : "/../../target/classes/" + path;
+            properties = PropertyReader.getProperties(propertiesPath);
+        }
+        return properties;
+    }
+
+    private static Properties getCiProperties(String path, File propertyFile){
+        Properties properties = new Properties();
+        try {
+            System.out.println("Property file found: " + propertyFile.getAbsolutePath());
+            properties.load(new FileInputStream(propertyFile));
+        } catch (IOException ex) {
+            throw exception("Couldn't load properties for CI Server" + path);
+        }
+        return properties;
     }
 }

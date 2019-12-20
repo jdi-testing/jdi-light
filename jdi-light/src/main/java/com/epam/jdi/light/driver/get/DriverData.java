@@ -13,7 +13,6 @@ import org.openqa.selenium.opera.OperaOptions;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +57,6 @@ public class DriverData {
     public static String BROWSER_SIZE = "MAXIMIZE";
     public static final String DEFAULT_DRIVER = "chrome";
     public static String DRIVER_NAME = DEFAULT_DRIVER;
-    public static String ARGUMENTS_PROPERTY = "arguments";
 
     public static Map<String,String> CAPABILITIES_FOR_IE = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_CHROME = new HashMap<>();
@@ -179,17 +177,7 @@ public class DriverData {
         setUp("Chrome: setExperimentalOption: prefs",
             () -> cap.setExperimentalOption("prefs", chromePrefs));
         // Capabilities from settings
-        CAPABILITIES_FOR_CHROME
-                .entrySet()
-                .stream()
-                .filter(capability -> !capability.getKey().equals(ARGUMENTS_PROPERTY))
-                .forEach(capability -> cap.setCapability(capability.getKey(), capability.getValue()));
-        CAPABILITIES_FOR_CHROME
-                .entrySet()
-                .stream()
-                .filter(arguments -> arguments.getKey().equals(ARGUMENTS_PROPERTY))
-                .flatMap(arguments -> Arrays.stream(arguments.getValue().split(" ")))
-                .forEach(cap::addArguments);
+        CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
     };
 
     public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = cap -> {
