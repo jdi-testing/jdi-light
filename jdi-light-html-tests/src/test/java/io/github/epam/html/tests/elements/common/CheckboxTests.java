@@ -7,9 +7,7 @@ import org.testng.annotations.Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
-import static com.epam.jdi.light.common.UnixProcessUtils.getPIDsByNamePart;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.acceptConditions;
