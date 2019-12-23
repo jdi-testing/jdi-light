@@ -40,9 +40,7 @@ public class UnixProcessUtils {
      * @throws InterruptedException
      */
     private static List<String> getPIDsByNamePart(String value) throws IOException, InterruptedException {
-        Process process = new ProcessBuilder(
-            "/usr/bin/pgrep", "-afi", value)
-            .start();
+        Process process = Runtime.getRuntime().exec("ps -aux | grep " + value);
         process.waitFor();
         return inputStreamToList(process.getInputStream());
     }
