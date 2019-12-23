@@ -18,7 +18,7 @@ public class JustTest {
     @Test
     public void justTest(){
         try {
-            ProcessBuilder pb = new ProcessBuilder("java", "-version");
+            ProcessBuilder pb = new ProcessBuilder("/bin/bash", "java -version");
             Process process = pb.start();
             List<String> results = readOutput(process.getInputStream());
             logger.info("!!! " + results);
