@@ -14,12 +14,13 @@ import static org.testng.Assert.assertEquals;
 
 public class TitleExampleTests implements TestsInit {
 
+    String titleText = "JDI TESTING PLATFORM";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    String titleText = "JDI TESTING PLATFORM";
 
     @Test
     public void textTest() {
