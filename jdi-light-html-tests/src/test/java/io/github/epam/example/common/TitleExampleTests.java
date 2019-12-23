@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 
 public class TitleExampleTests implements TestsInit {
 
-    String titleText = "JDI TESTING PLATFORM";
+    private String titleText = "JDI TESTING PLATFORM";
 
     @BeforeMethod
     public void before() {
