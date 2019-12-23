@@ -53,7 +53,7 @@ public class TextFieldExampleTests implements TestsInit {
 
     @Test
     public void labelTest() {
-        name.label().is().text(containsString("Your"));
+        name.label().is().text("Your name:");
         name.label().is().text(containsString("Your"));
         disabledName.label().is().text(equalToIgnoringCase("Surname:"));
     }
