@@ -3,7 +3,7 @@
 <suite name="Test suite" parallel="methods" thread-count="1">
     <test name="Tests">
         <classes>
-            <class name="io.github.epam.html.tests.elements.common.CheckboxTests"/>
+            <class name="io.github.epam.html.tests.elements.common.JustTest"/>
         </classes>
 <!--        <packages>-->
 <!--            <package name="io.github.epam.html.tests.elements.common"/>-->
