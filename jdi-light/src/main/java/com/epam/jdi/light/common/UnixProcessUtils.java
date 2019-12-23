@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.StringUtils.inputStreamToList;
 
 /**
@@ -21,7 +20,6 @@ public class UnixProcessUtils {
         List<String> chrome;
         try {
             chrome = getPIDsByNamePart(rootNamePart);
-            logger.info("!!! " + chrome);
             for (String s : chrome) {
                 int pid = Integer.parseInt(s);
                 killChildProcesses(pid);
@@ -40,7 +38,9 @@ public class UnixProcessUtils {
      * @throws InterruptedException
      */
     private static List<String> getPIDsByNamePart(String value) throws IOException, InterruptedException {
-        Process process = Runtime.getRuntime().exec("ps -aux | grep java");
+        Process process = new ProcessBuilder(
+            "/usr/bin/pgrep", "-afi", value)
+            .start();
         process.waitFor();
         return inputStreamToList(process.getInputStream());
     }
