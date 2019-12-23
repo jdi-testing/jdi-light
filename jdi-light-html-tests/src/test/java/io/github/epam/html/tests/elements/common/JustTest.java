@@ -18,7 +18,7 @@ public class JustTest {
     @Test
     public void justTest(){
         try {
-            ProcessBuilder pb = new ProcessBuilder("sh", "ps", "-aux", "grep java");
+            ProcessBuilder pb = new ProcessBuilder("java", "-version");
             Process process = pb.start();
             List<String> results = readOutput(process.getInputStream());
             logger.info("!!! " + results);
