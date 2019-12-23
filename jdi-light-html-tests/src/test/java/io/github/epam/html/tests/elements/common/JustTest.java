@@ -16,10 +16,11 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 public class JustTest {
 
     @Test
-    public void justTest(){
+    public void justTest() throws InterruptedException {
         try {
-            ProcessBuilder pb = new ProcessBuilder("/bin/bash", "java -version");
-            Process process = pb.start();
+            ProcessBuilder processBuilder = new ProcessBuilder("sh", "-c", "java -version");
+            processBuilder.redirectErrorStream(true);
+            Process process = processBuilder.start();
             List<String> results = readOutput(process.getInputStream());
             logger.info("!!! " + results);
         } catch (IOException e) {
