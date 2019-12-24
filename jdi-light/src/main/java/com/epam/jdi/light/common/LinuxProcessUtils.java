@@ -22,7 +22,7 @@ public class LinuxProcessUtils {
         try {
             chrome = getPIDsByNamePart(rootNamePart);
             logger.info("!!! rootNamePart " + rootNamePart);
-            logger.info("!!! GET CHROME PIDS " + chrome);
+            logger.info("!!! GET CHROMEDRIVER PIDS " + chrome);
             for (String pid : chrome) {
                 killProcessByPid(pid);
             }
@@ -34,20 +34,20 @@ public class LinuxProcessUtils {
 
     private static void killProcessByPid(String pid) throws IOException, InterruptedException {
         Process process = new ProcessBuilder(
-                "pgrep", "chrome")
+                "pgrep", "chromedriver")
                 .start();
         process.waitFor();
 
-        logger.info("!!! READ CHROME PROCESSES " + inputStreamToList(process.getInputStream()));
+        logger.info("!!! READ CHROMEDRIVER PROCESSES " + inputStreamToList(process.getInputStream()));
         Process process2 = new ProcessBuilder(
                 "kill", "-9", pid)
                 .start();
         process2.waitFor();
 
-        logger.info("!!! CHROME PROCESSES WAS KILLED");
+        logger.info("!!! CHROMEDRIVER PROCESSES WAS KILLED");
 
         Process process3 = new ProcessBuilder(
-                "pgrep", "chrome")
+                "pgrep", "chromedriver")
                 .start();
         process3.waitFor();
 
