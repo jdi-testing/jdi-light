@@ -6,16 +6,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.StringUtils.inputStreamToList;
 
 public class JustTest {
 
-    @Test
     public void justTest() throws InterruptedException {
         try {
             ProcessBuilder processBuilder = new ProcessBuilder("sh", "-c", "java -version");
@@ -26,6 +24,15 @@ public class JustTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void pgrepTest() throws InterruptedException, IOException {
+        Process process = new ProcessBuilder(
+                "/usr/bin/pgrep", "-afi", "java")
+                .start();
+        process.waitFor();
+        logger.info("!!! " + inputStreamToList(process.getInputStream()));
     }
 
     private List<String> readOutput(InputStream inputStream) throws IOException {
