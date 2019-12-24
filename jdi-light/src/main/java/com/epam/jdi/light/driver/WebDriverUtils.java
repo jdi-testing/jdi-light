@@ -25,6 +25,8 @@ public final class WebDriverUtils {
         try {
             if (os.contains("Mac")) {
                 killAllMacOSDriverProcesses();
+            } else if (os.contains("Linux")) {
+                killAllLinuxOSDriverProcesses();
             } else {
                 killAllWindowsDriverProcesses();
             }
@@ -37,6 +39,11 @@ public final class WebDriverUtils {
     private static void killAllMacOSDriverProcesses() {
         killMacOSDriverProcesses("firefox");
         killMacOSDriverProcesses("chrome");
+    }
+
+    private static void killAllLinuxOSDriverProcesses() {
+        killMacOSDriverProcesses("chrome");
+        killMacOSDriverProcesses("firefox");
     }
 
     /**

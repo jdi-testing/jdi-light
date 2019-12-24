@@ -29,7 +29,7 @@ public class JustTest {
     @Test
     public void pgrepTest() throws InterruptedException, IOException {
         Process process = new ProcessBuilder(
-                "/usr/bin/pgrep", "-afi", "java")
+                "pgrep", "-afi", "java")
                 .start();
         process.waitFor();
         logger.info("!!! " + inputStreamToList(process.getInputStream()));
