@@ -8,7 +8,6 @@ import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.iceCream;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class DataListExampleTests implements TestsInit {
@@ -30,9 +29,9 @@ public class DataListExampleTests implements TestsInit {
     }
 
     @Test
-    public void getValueTest() {
-        iceCream.is().text(dataListText);
-        iceCream.is().value(dataListText);
+    public void selectNumTest() {
+        iceCream.select(5);
+        iceCream.is().selected("Vanilla");
     }
 
     @Test
@@ -48,14 +47,14 @@ public class DataListExampleTests implements TestsInit {
     }
 
     @Test
-    public void placeholderTest() {
-        assertEquals(iceCream.placeholder(), "Ice cream");
+    public void sendKeysTest() {
+        iceCream.sendKeys("Test");
+        iceCream.is().text("CoconutTest");
     }
 
     @Test
-    public void sendKeysTest() {
-        iceCream.sendKeys("Test");
-        iceCream.is().text(dataListText + "Test");
+    public void placeholderTest() {
+        assertEquals(iceCream.placeholder(), "Ice cream");
     }
 
     @Test
