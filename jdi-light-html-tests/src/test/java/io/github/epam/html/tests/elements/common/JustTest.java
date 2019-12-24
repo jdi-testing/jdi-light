@@ -28,7 +28,7 @@ public class JustTest {
     @Test
     public void pgrepTest() throws InterruptedException, IOException {
         Process process = new ProcessBuilder(
-                "ps", "aux")
+                "pgrep", "java")
                 .start();
         process.waitFor();
         logger.info("!!! " + readOutput(process.getInputStream()));
