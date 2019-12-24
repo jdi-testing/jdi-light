@@ -1,8 +1,11 @@
 package com.epam.jdi.light.driver;
 
+import com.epam.jdi.light.common.LinuxProcessUtils;
+import com.epam.jdi.light.common.UnixProcessUtils;
+import com.epam.jdi.tools.func.JAction1;
+
 import java.io.IOException;
 
-import static com.epam.jdi.light.common.UnixProcessUtils.killProcessesTree;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Runtime.getRuntime;
 import static java.lang.String.format;
@@ -37,13 +40,13 @@ public final class WebDriverUtils {
     }
 
     private static void killAllMacOSDriverProcesses() {
-        killMacOSDriverProcesses("firefox");
-        killMacOSDriverProcesses("chrome");
+        killOSDriverProcesses(WebDriverUtils::killAllMacOSDriverProcessesByName,"firefox");
+        killOSDriverProcesses(WebDriverUtils::killAllMacOSDriverProcessesByName,"chrome");
     }
 
     private static void killAllLinuxOSDriverProcesses() {
-        killMacOSDriverProcesses("chrome");
-        killMacOSDriverProcesses("firefox");
+        killOSDriverProcesses(WebDriverUtils::killAllLinuxOSDriverProcessesByName, "chrome");
+        killOSDriverProcesses(WebDriverUtils::killAllLinuxOSDriverProcessesByName,"firefox");
     }
 
     /**
@@ -60,7 +63,14 @@ public final class WebDriverUtils {
         getRuntime().exec(format("taskkill /F /IM %s.exe /T", value));
     }
 
-    private static void killMacOSDriverProcesses(String browserName) {
+    private static void killOSDriverProcesses(JAction1<String> killDriverByProcessName, String browserName) {
+        String processName = getDriverProcessName(browserName);
+        if (processName != null) {
+            killDriverByProcessName.execute(processName);
+        }
+    }
+
+    private static String getDriverProcessName(String browserName){
         String name = null;
         switch (browserName.toLowerCase()) {
             case "firefox":
@@ -71,16 +81,18 @@ public final class WebDriverUtils {
                 break;
 
         }
-        if (name != null) {
-            killAllMacOSDriverProcessesByName(name);
-        }
+        return name;
     }
 
     /**
      * @param driverName
      */
     private static void killAllMacOSDriverProcessesByName(String driverName) {
-            killProcessesTree(driverName);
+        UnixProcessUtils.killProcessesTree(driverName);
+    }
+
+    private static void killAllLinuxOSDriverProcessesByName(String driverName) {
+        LinuxProcessUtils.killProcessesTree(driverName);
     }
 
 }
