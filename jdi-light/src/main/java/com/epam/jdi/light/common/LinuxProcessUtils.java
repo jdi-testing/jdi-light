@@ -21,6 +21,8 @@ public class LinuxProcessUtils {
         List<String> chrome;
         try {
             chrome = getPIDsByNamePart(rootNamePart);
+            logger.info("!!! rootNamePart " + rootNamePart);
+            logger.info("!!! GET CHROME PIDS " + chrome);
             for (String pid : chrome) {
                 killProcessByPid(pid);
             }
