@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.StringUtils.inputStreamToList;
 
 public class JustTest {
 
@@ -32,7 +31,7 @@ public class JustTest {
                 "pgrep", "-afi", "java")
                 .start();
         process.waitFor();
-        logger.info("!!! " + inputStreamToList(process.getInputStream()));
+        logger.info("!!! " + readOutput(process.getInputStream()));
     }
 
     private List<String> readOutput(InputStream inputStream) throws IOException {
