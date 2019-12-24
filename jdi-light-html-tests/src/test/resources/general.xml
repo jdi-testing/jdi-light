@@ -2,19 +2,16 @@
         <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Test suite" parallel="methods" thread-count="1">
     <test name="Tests">
-        <classes>
-            <class name="io.github.epam.html.tests.elements.common.CheckboxTests"/>
-        </classes>
-<!--        <packages>-->
-<!--            <package name="io.github.epam.html.tests.elements.common"/>-->
-<!--            <package name="io.github.epam.html.tests.elements.complex.*"/>-->
-<!--            <package name="io.github.epam.html.tests.elements.complex"/>-->
-<!--            <package name="io.github.epam.html.tests.elements.composite.*"/>-->
-<!--            <package name="io.github.epam.html.tests.elements.composite.page.init"/>-->
-<!--            <package name="io.github.epam.html.tests.elements.composite"/>-->
-<!--            <package name="io.github.epam.html.tests.issues.*"/>-->
-<!--            <package name="io.github.epam.html.tests.site"/>-->
-<!--        </packages>-->
+        <packages>
+            <package name="io.github.epam.html.tests.elements.common"/>
+            <package name="io.github.epam.html.tests.elements.complex.*"/>
+            <package name="io.github.epam.html.tests.elements.complex"/>
+            <package name="io.github.epam.html.tests.elements.composite.*"/>
+            <package name="io.github.epam.html.tests.elements.composite.page.init"/>
+            <package name="io.github.epam.html.tests.elements.composite"/>
+            <package name="io.github.epam.html.tests.issues.*"/>
+            <package name="io.github.epam.html.tests.site"/>
+        </packages>
     </test>
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener" />

@@ -4,11 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.acceptConditions;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
@@ -32,13 +27,7 @@ public class CheckboxTests implements TestsInit {
     }
 
     @Test
-    public void getLabelTextTest() throws IOException, InterruptedException {
-        Process process = Runtime.getRuntime().exec("ps -aux | grep java");
-        BufferedReader r =  new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line = null;
-        while((line=r.readLine())!=null) {
-            logger.info("!!! " + line);
-        }
+    public void getLabelTextTest() {
         assertEquals(acceptConditions.labelText(),
             "Accept terms and conditions");
     }
