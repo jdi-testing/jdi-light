@@ -25,7 +25,7 @@ public class TextFieldExampleTests implements TestsInit {
         html5Page.shouldBeOpened();
     }
 
-    @Test(priority = 1)
+    @Test
     public void setTextTest() {
         name.setText(text);
         name.is().text(text);
@@ -33,8 +33,9 @@ public class TextFieldExampleTests implements TestsInit {
         name.is().text(containsString("Field"));
     }
 
-    @Test(priority = 2)
+    @Test
     public void sendKeysTest() {
+        name.setText(text);
         name.sendKeys("Test");
         name.is().text(text + "Test");
     }
