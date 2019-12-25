@@ -94,7 +94,7 @@ public class TextFieldTests implements TestsInit {
         name.assertThat().text(is(text));
     }
 
-   private final String symbols = "`!@#\";$%ˆ*()_+˜@[\\\"№;:?-=]{}'/|<>";
+    private final String symbols = "!@#\";$%ˆ*()_+˜@[\\\"№;:?-=]{}'/|<>";
 
     @Test
     public void inputSymbolsTest() {
