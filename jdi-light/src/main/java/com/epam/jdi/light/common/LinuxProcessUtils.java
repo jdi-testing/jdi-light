@@ -3,6 +3,7 @@ package com.epam.jdi.light.common;
 import java.io.IOException;
 import java.util.List;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.StringUtils.inputStreamToList;
 
 /**
@@ -16,10 +17,14 @@ public class LinuxProcessUtils {
     public static void killProcessesTree(String rootNamePart) {
         List<String> chrome;
         try {
+            logger.info("rootNamePart: " + rootNamePart);
             chrome = getPIDsByNamePart(rootNamePart);
+            logger.info("Driver PID: " + chrome);
             for (String pid : chrome) {
                 killProcessByPid(pid);
             }
+            chrome = getPIDsByNamePart(rootNamePart);
+            logger.info("Driver PID after it got killed: " + chrome);
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException("Can't kill drivers");
         }
