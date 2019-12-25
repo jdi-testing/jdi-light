@@ -14,22 +14,14 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
-import static org.testng.Assert.assertEquals;
 
 public class NumberSelectorExampleTests implements TestsInit {
-
-    String number = "2.1";
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        height.setNumber(number);
-    }
-
-    @Test
-    public void getNumberTest() {
-        assertEquals(height.value(), number);
+        height.setNumber("2.1");
     }
 
     @Test
