@@ -265,7 +265,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction("Set '{0}' in '{name}'") @Override
     public void setText(String value) {
-        jsExecute("value='"+value.replace("'", "\\'")+"'");
+        jsExecute("value='"+value.replace("\\", "\\\\").replace("'", "\\'")+"'");
     }
 
     public void click(int x, int y) {
