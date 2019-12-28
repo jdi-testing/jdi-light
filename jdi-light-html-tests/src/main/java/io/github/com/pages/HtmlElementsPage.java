@@ -18,7 +18,6 @@ import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 
 public class HtmlElementsPage extends WebPage {
     //region Simple Elements
-
     public static Label jdiTitle;
     // @UI("[ui=jdi-title]") public static Label jdiTitle;
 	public static Text jdiText;

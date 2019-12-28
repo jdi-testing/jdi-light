@@ -187,7 +187,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<D> dataRows(JFunc1<D, Boolean> matcher) {
         hasDataClass();
-        return filter(allData(), matcher::execute);
+        return LinqUtils.filter(allData(), matcher::execute);
     }
 
     /**

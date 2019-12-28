@@ -388,6 +388,10 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return parent == null || isClass(parent.getClass(), WebPage.class)
             || !isInterface(parent.getClass(), JDIElement.class);
     }
+
+    public boolean hasLocator() {
+        return !locator.isEmpty();
+    }
     private SearchContext getContext(Object parent, JDILocator locator) {
         List<By> frames = getFrames();
         return frames != null
@@ -438,13 +442,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     private static String printWebElement(WebElement element) {
         String asString = element.toString().replaceAll("css selector", "css");
-        String result = asString.startsWith("WebElement->")
-                ? "" : "WebElement->";
-        if (asString.contains(")]")) {
-            String s = asString.split("-> ")[1];
-            return result + s.substring(0,s.length()-1);
-        }
-        return asString;
+        return asString.startsWith("WebElement-> ")
+            ? asString
+            : "WebElement-> " + asString.substring(asString.indexOf("-> ")+3);
     }
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
         if (element.webElement.hasValue())

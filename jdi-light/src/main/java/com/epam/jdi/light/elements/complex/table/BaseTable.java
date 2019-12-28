@@ -281,14 +281,19 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         }
         return headerIsRow ? rowNum + 1 : rowNum;
     }
-
+    public WebList filter() {
+        return $$(filterLocator).setup(b-> {
+                b.setParent(this);
+                b.setName(getName()+" filter");}
+            );
+    }
     public UIElement filterBy(String filterName) {
         return searchBy(filterName);
     }
     @JDIAction("Filter {name} by column {0}")
     public UIElement searchBy(String filterName) {
         int index = header().indexOf(filterName);
-        return $$(filterLocator).get(index);
+        return filter().get(index);
     }
     @Override
     public void setup(Field field) {
@@ -474,7 +479,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
      */
     @JDIAction("Filter '{name}' table rows that match criteria in column '{1}'")
     public List<Line> filterRows(Matcher<String> matcher, Column column) {
-        return filter(rows(),
+        return LinqUtils.filter(rows(),
                 line -> matcher.matches(line.get(column.getIndex(header()))));
     }
 
@@ -485,7 +490,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
      */
     @JDIAction("Filter '{name}' table rows that match criteria")
     public List<Line> filterRows(Pair<Matcher<String>, Column>... matchers) {
-        return filter(rows(), line ->
+        return LinqUtils.filter(rows(), line ->
                 all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header())))));
     }
 
