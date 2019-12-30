@@ -15,7 +15,6 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItems;
 import static org.testng.Assert.assertEquals;
 
 public class MultiSelectorExampleTests implements TestsInit {
@@ -37,19 +36,19 @@ public class MultiSelectorExampleTests implements TestsInit {
     @Test
     public void selectTest() {
         ages.check("Electro", "Metalic");
-        ages.is().enabled(hasItems("Electro", "Metalic"));
+        assertEquals(ages.checked(), asList("Electro", "Metalic"));
     }
 
     @Test
     public void selectEnumTest() {
         ages.check(Wood, Steam);
-        ages.is().enabled(hasItems("Wood", "Steam"));
+        assertEquals(ages.checked(), asList("Steam", "Wood"));
     }
 
     @Test
     public void selectNumTest() {
         ages.check(1, 5);
-        ages.is().enabled(hasItems("Electro", "Wood"));
+        assertEquals(ages.checked(), asList("Electro", "Wood"));
     }
 
     @Test
