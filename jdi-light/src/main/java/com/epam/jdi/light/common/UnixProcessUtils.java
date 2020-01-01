@@ -50,7 +50,7 @@ public class UnixProcessUtils {
      * @param pid
      */
     private static void killChildProcesses(int pid) {
-        String ppid = String.valueOf("-P "+pid);
+        String ppid = "-P " + pid;
         killProcessWithArgs(Collections.singletonList(ppid));
     }
 
@@ -71,7 +71,7 @@ public class UnixProcessUtils {
         list.add("/usr/bin/pkill");
         list.addAll(args);
         try {
-            Process child = new ProcessBuilder(list.toArray(new String[list.size()])).start();
+            Process child = new ProcessBuilder(list.toArray(new String[0])).start();
             child.waitFor();
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException("Can't kill process: " + e.getMessage());
