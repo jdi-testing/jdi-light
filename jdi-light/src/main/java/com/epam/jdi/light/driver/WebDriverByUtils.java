@@ -23,6 +23,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 
 /**
@@ -97,25 +98,6 @@ public final class WebDriverByUtils {
                 ? "No locator"
                 : format("%s='%s'", getByName(by), getByLocator(by))).replaceAll("%s", "{{VALUE}}");
     }
-    public static By getByFromString(String stringLocator) {
-        if (stringLocator == null || stringLocator.equals(""))
-            throw new RuntimeException("Can't get By locator from string empty or null string");
-        String[] split = stringLocator.split("(^=)*=.*");
-        if (split.length == 1)
-            return defineLocator(split[0]);
-        switch (split[0]) {
-            case "css": return By.cssSelector(split[1]);
-            case "xpath": return By.xpath(split[1]);
-            case "class": return By.className(split[1]);
-            case "name": return By.name(split[1]);
-            case "id": return By.id(split[1]);
-            case "tag": return By.tagName(split[1]);
-            case "link": return By.partialLinkText(split[1]);
-            default: throw new RuntimeException(
-                    String.format("Can't get By locator from string: %s. Bad suffix: %s. (available: css, xpath, class, id, name, link, tag)",
-                            stringLocator, split[0]));
-        }
-    }
 
     private static Map<String, Function<String, By>> getMapByTypes() {
         Map<String, Function<String, By>> map = new HashMap<>();
@@ -157,12 +139,17 @@ public final class WebDriverByUtils {
         } catch (Exception ex) { throw exception("Search By failed"); }
     }
     public static By defineLocator(String locator) {
-        String by = locator.contains("*root*")
-            ? locator.replaceAll("\\*root\\*", "")
-            : locator;
-        return by.length() > 1 && (by.charAt(1) == '/' || by.substring(0,2).equals(".."))
-                ? By.xpath(locator)
-                : By.cssSelector(locator);
+        if (isBlank(locator))
+            return By.cssSelector("");
+        if (locator.length() > 1) {
+            if (locator.charAt(1) == '/' || locator.substring(0,2).equals(".."))
+                return By.xpath(locator);
+            if (locator.substring(0, 2).equals("*="))
+                return withText(locator.substring(2));
+        }
+        if (locator.charAt(0) == '=')
+            return byText(locator.substring(1));
+        return By.cssSelector(locator);
     }
 
     private static List<Object> one(By by) {
@@ -211,9 +198,10 @@ public final class WebDriverByUtils {
             String[] locs = loc.split("\\[\\*?'"+m.group("text")+"']");
             if (locs.length > 0)
                 result.add(By.cssSelector(locs[0]));
+            String text = m.group("text");
             result.add(m.group("modifier").equals("")
-                ? By.xpath(".//*[text()='" + m.group("text") + "']")
-                : By.xpath(".//*[contains(text(),'" + m.group("text") + "')]"));
+                ? byText(text)
+                : withText(text));
             loc = locs.length == 2 ?  locs[1] : "";
         }
         if (isNotEmpty(loc))

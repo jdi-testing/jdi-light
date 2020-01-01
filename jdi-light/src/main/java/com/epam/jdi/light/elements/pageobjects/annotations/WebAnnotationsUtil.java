@@ -115,11 +115,10 @@ public class WebAnnotationsUtil {
             return By.partialLinkText(locator.partialLinkText());
         if (!"".equals(locator.tagName()))
             return By.tagName(locator.tagName());
-
         if (!"".equals(locator.text()))
-            return By.xpath(".//*/text()[normalize-space(.) = " +
-                Quotes.escape(locator.text()) + "]/parent::*");
-
+            return byText(locator.text());
+        if (!"".equals(locator.containsText()))
+            return withText(locator.containsText());
         if (!"".equals(locator.id()))
             return By.id(locator.id());
         if (!"".equals(locator.className()))
@@ -140,7 +139,7 @@ public class WebAnnotationsUtil {
     }
     public static By findByToBy(UI locator){
         if (locator == null) return null;
-        return defineLocator(locator.value());
+        return By.cssSelector(locator.value());
     }
     public static By findByToBy(ByText locator){
         if (locator == null) return null;

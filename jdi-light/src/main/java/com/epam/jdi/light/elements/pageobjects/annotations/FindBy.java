@@ -19,6 +19,7 @@ public @interface FindBy {
 
     // Text
     String text() default "";
+    String containsText() default "";
 
     //Attributes
     String id() default "";

@@ -5,11 +5,11 @@ import org.testng.annotations.Test;
 
 public class PerfGrafanaTest extends TestsInit {
 
-    @Test
+    //@Test
     public void loginTest() {
-        /*String host = System.getenv().getOrDefault("influx.host", "influxdb");
-        InfluxDB db = connect("http://"+host+":8086", "root", "root");
-        db.createDataCore();*/
+        //String host = System.getenv().getOrDefault("influx.host", "influxdb");
+        //InfluxDB db = connect("http://"+host+":8086", "root", "root");
+        //db.createDataCore();
 
     }
 }

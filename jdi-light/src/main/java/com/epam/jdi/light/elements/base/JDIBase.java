@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -83,7 +84,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public JDILocator locator = new JDILocator();
     @Override
     public DriverBase setParent(Object parent) {
-        //this.locator.isRoot = false;
         return super.setParent(parent);
     }
     public CacheValue<WebElement> webElement = new CacheValue<>();
@@ -137,7 +137,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
 
     public JDIBase setLocator(String locator) {
-        return setLocator(defineLocator(locator));
+        return setLocator(By.cssSelector(locator));
     }
     public JDIBase setLocator(By locator) {
         if (name.isEmpty()) name = shortBy(locator);
@@ -377,7 +377,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         Object parent = bElement.parent;
         By locator = bElement.getLocator();
         SearchContext searchContext = getContext(parent, bElement.locator);
-        //TODO rethink SMART SEARCH
         return locator != null
             ? uiSearch(searchContext, correctLocator(locator)).get(0)
             : isPageObject(element.getClass())
@@ -402,8 +401,20 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     private SearchContext getFrameContext(List<By> frames) {
         WebDriver driver = driver();
-        for (By frame : frames)
-            driver = driver.switchTo().frame(uiSearch(driver(),frame).get(0));
+        By frameLocator;
+        for (By frame : frames) {
+            try {
+                driver.findElement(frame).getTagName();
+                frameLocator = frame;
+            } catch (Exception ignore) {
+                frameLocator = By.id(WebDriverByUtils.getByLocator(frame));
+            }
+            try {
+                driver = driver.switchTo().frame(uiSearch(driver(), frameLocator).get(0));
+            } catch (Exception ex) {
+                throw exception("Can't find frame by locator: '%s'. Exception: %s", frame, safeException(ex));
+            }
+        }
         return driver;
     }
     private SearchContext getDefaultContext() {
