@@ -103,7 +103,7 @@ public class WebDriverFactory {
             useDriver(CHROME);
             return getDriver(CHROME.name);
         } catch (Exception ex) {
-            throw exception("Can't get WebDriver. " + LINE_BREAK + safeException(ex));
+            throw exception(ex, "Can't get WebDriver");
         }
     }
 
@@ -142,9 +142,8 @@ public class WebDriverFactory {
             lock.unlock();
             return result;
         } catch (Exception ex) {
-            throw exception("Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
-                    format("Drivers: %s; Run: %s", DRIVERS, RUN_DRIVERS.get()) +
-                    "Exception: " + safeException(ex));
+            throw exception(ex, "Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
+                    format("Drivers: %s; Run: %s", DRIVERS, RUN_DRIVERS.get()));
         }
     }
 

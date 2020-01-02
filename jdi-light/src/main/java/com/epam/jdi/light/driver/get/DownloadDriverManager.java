@@ -62,8 +62,7 @@ public class DownloadDriverManager {
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
         } catch (Exception ex) {
-            throw exception("Can't download latest driver for " + driverType
-                    + ". Exception " + safeException(ex));
+            throw exception(ex, "Can't download latest driver for " + driverType);
         }
     }
 }

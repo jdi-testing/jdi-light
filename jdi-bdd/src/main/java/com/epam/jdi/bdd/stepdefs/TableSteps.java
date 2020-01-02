@@ -123,7 +123,7 @@ public class TableSteps {
             String[] xy = cellPair.split(",");
             x = Integer.parseInt(xy[0].trim());
             y = Integer.parseInt(xy[1].trim());
-        } catch (Exception ex) { throw exception("Can't parse cell. Correct format is (col,row): " + safeException(ex)); }
+        } catch (Exception ex) { throw exception(ex, "Can't parse cell. Correct format is (col,row)"); }
         return table(name).webCell(x, y);
     }
 }

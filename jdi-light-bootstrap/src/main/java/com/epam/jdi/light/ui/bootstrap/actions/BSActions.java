@@ -1,0 +1,56 @@
+package com.epam.jdi.light.ui.bootstrap.actions;
+
+/**
+ * Created by Roman Iovlev on 14.02.2018
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
+
+import com.epam.jdi.light.settings.TimeoutSettings;
+import com.epam.jdi.tools.PrintUtils;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+
+import java.util.concurrent.TimeUnit;
+
+import static com.epam.jdi.light.actions.ActionHelper.ACTION_FAILED;
+import static com.epam.jdi.light.actions.ActionHelper.AFTER_JDI_ACTION;
+import static com.epam.jdi.light.actions.ActionHelper.BEFORE_JDI_ACTION;
+import static com.epam.jdi.light.actions.ActionProcessor.*;
+import static com.epam.jdi.light.actions.ActionProcessor.failedMethods;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.util.Collections.reverse;
+
+@SuppressWarnings("unused")
+@Aspect
+public class BSActions {
+
+    @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
+    protected void jdiPointcut() { }
+
+    @Around("jdiPointcut()")
+    public Object jdiAround(ProceedingJoinPoint jp) {
+        try {
+            failedMethods.clear();
+            if (aroundCount() > 1)
+                return defaultAction(jp);
+            BEFORE_JDI_ACTION.execute(jp);
+            Object result = stableAction(jp);
+            isOverride.get().clear();
+            if (aroundCount() == 1)
+                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get()*100, TimeUnit.MILLISECONDS);
+            return AFTER_JDI_ACTION.execute(jp, result);
+        } catch (Throwable ex) {
+            addFailedMethod(jp);
+            if (aroundCount() == 1) {
+                reverse(failedMethods);
+                logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
+            }
+            throw exception(ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
+        }
+    }
+}

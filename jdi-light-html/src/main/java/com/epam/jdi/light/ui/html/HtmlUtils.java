@@ -21,12 +21,12 @@ public class HtmlUtils {
         String value = el.getAttribute(attr);
         try {
             return parseInt(value);
-        } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Integer", attr, value); }
+        } catch (Exception ex) { throw exception(ex, "Can't parse attribute '%s=%s' to Integer", attr, value); }
     }
     public static int asInt(String value) {
         try {
             return parseInt(value);
-        } catch (Exception ex) { throw exception("Can't parse value %s to Integer", value); }
+        } catch (Exception ex) { throw exception(ex, "Can't parse value %s to Integer", value); }
     }
     /**
      * Gets attribute and casts it to double
@@ -37,7 +37,7 @@ public class HtmlUtils {
         String value = el.getAttribute(attr);
         try {
             return parseDouble(value);
-        } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Double", attr, value); }
+        } catch (Exception ex) { throw exception(ex, "Can't parse attribute '%s=%s' to Double", attr, value); }
     }
     /**
      * Gets attribute and casts it to float
@@ -48,6 +48,6 @@ public class HtmlUtils {
         String value = el.getAttribute(attr);
         try {
             return parseFloat(value);
-        } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Double", attr, value); }
+        } catch (Exception ex) { throw exception(ex, "Can't parse attribute '%s=%s' to Double", attr, value); }
     }
 }

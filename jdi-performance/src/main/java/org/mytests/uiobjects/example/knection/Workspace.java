@@ -25,7 +25,7 @@ public class Workspace extends DataClass<Workspace> {
             Field fOther = LinqUtils.first(otherFields, fo -> fo.getName().equals(f.getName()));
             fOther.set(ws, f.get(this));
         }
-        } catch(Exception ex) { throw exception("Can't copy class"); }
+        } catch(Exception ex) { throw exception(ex, "Can't copy class"); }
         return ws;
     }
 }

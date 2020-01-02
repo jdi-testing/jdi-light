@@ -65,8 +65,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
                 h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowHeaderName)));
             if (index > -1)
                 rowHeaderIndex = index + 1;
-            else throw exception(
-            "Can't find rowHeader '%s' in 'header' [%s]. Please correct JTable params",
+            else throw exception("Can't find rowHeader '%s' in 'header' [%s]. Please correct JTable params",
                 rowHeaderName, print(header()));
         }
         return rowHeaderIndex;
@@ -347,7 +346,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
                     j++;
                 }
                 cells.gotAll();
-            } catch (Exception ex) {throw exception("Can't get all cells. " + safeException(ex)); }
+            } catch (Exception ex) {throw exception(ex, "Can't get all cells"); }
         }
         return (T) this;
     }

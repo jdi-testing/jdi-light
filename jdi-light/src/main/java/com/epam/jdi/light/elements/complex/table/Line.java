@@ -110,7 +110,9 @@ public class Line implements IList<String>, IBaseElement {
     public <D> D asData(Class<D> data) {
         D instance;
         try { instance = create(data); }
-        catch (Exception ex) { throw exception("Can't create '%s' instance in row.asData() method", data.getSimpleName()); }
+        catch (Exception ex) { throw exception(ex,
+                "Can't create '%s' instance in row.asData() method", data.getSimpleName());
+        }
         int i = 0;
         List<Field> fields = asList(data.getDeclaredFields());
         for (String name : headers) {
@@ -119,7 +121,8 @@ public class Line implements IList<String>, IBaseElement {
                 try {
                     setPrimitiveField(field, instance, getList(i).get(i));
                 } catch (Exception ex) {
-                    throw exception("Can't set table value '%s' to field '%s'", getData(i).get(i), field.getName());
+                    throw exception(ex,
+                        "Can't set table value '%s' to field '%s'", getData(i).get(i), field.getName());
                 }
             i++;
         }
@@ -129,7 +132,7 @@ public class Line implements IList<String>, IBaseElement {
     public <D> D asData(Class<D> data, MapArray<String, String> line) {
         D instance;
         try { instance = create(data); }
-        catch (Exception ex) { throw exception("Can't convert row to Entity (%s)", data.getSimpleName()); }
+        catch (Exception ex) { throw exception(ex, "Can't convert row to Entity (%s)", data.getSimpleName()); }
         for (Pair<String, String> cell : line) {
             Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
                 f -> namesEqual(getElementName(f), cell.key));
@@ -137,7 +140,7 @@ public class Line implements IList<String>, IBaseElement {
                 try {
                     setPrimitiveField(field, instance, cell.value);
                 } catch (Exception ex) {
-                    throw exception("Can't set table entity to field '%s'", field.getName());
+                    throw exception(ex, "Can't set table entity to field '%s'", field.getName());
                 }
         }
         return instance;
@@ -146,7 +149,7 @@ public class Line implements IList<String>, IBaseElement {
     public <T> T asLine(Class<T> cl) {
         T instance;
         try { instance = create(cl); }
-        catch (Exception ex) { throw exception("Can't convert row to Entity (%s)", cl.getSimpleName()); }
+        catch (Exception ex) { throw exception(ex, "Can't convert row to Entity (%s)", cl.getSimpleName()); }
         for (int i = 0; i < headers.size(); i++) {
             String header = headers.get(i);
             Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
@@ -160,7 +163,7 @@ public class Line implements IList<String>, IBaseElement {
                     : listElement.getWebElement();
                 ui.base().setWebElement(element);
             } catch (Exception ex) {
-                throw exception("Can't set table entity to field '%s'", field.getName());
+                throw exception(ex, "Can't set table entity to field '%s'", field.getName());
             }
         }
         return instance;

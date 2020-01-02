@@ -1,0 +1,11 @@
+package io.github.com.sections.form;
+
+import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
+
+public class RadioButtonsDefaultInline extends Section {
+    //@FindBy(css = "input[name='inlineRadioOptions']")
+    @UI("input[name='inlineRadioOptions']")
+    public RadioButtons radioButtons;
+}

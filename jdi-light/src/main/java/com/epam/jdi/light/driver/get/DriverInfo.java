@@ -43,7 +43,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
         try {
             return new RemoteWebDriver(new URL(getRemoteURL()), capabilities.execute(initCapabilities));
         } catch (Exception ex) {
-            throw exception("Failed to setup remote "+type.name+" driver. Exception: " + safeException(ex));
+            throw exception(ex, "Failed to setup remote "+type.name+" driver");
         }
     }
     private WebDriver setupLocal() {
@@ -64,20 +64,21 @@ public class DriverInfo extends DataClass<DriverInfo> {
                     try {
                         downloadDriver(type, PLATFORM, getBelowVersion());
                         return getDriver.execute(capabilities.execute(initCapabilities));
-                    } catch (Exception ex2) { throw exception("Failed to download driver: " + ex2.getMessage()); }
+                    } catch (Exception ex2) { throw exception(ex2, "Failed to download driver"); }
                 }
                 throw exception(safeException(ex));
             } catch (Exception ex2) {
-                throw exception("Failed to setup local driver: " + ex2.getMessage());
+                throw exception(ex2, "Failed to setup local driver");
             }
         }
     }
     public static String getBelowVersion() {
         String currentMajor = wdm.getDownloadedVersion().split("\\.")[0];
         List<String> allVersions = wdm.getVersions();
-        for (int i = allVersions.size()-1; i>=0; i--)
-             if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
-                 return allVersions.get(i);
-         throw exception("Can't find version below current(" + wdm.getDownloadedVersion()+")");
+        for (int i = allVersions.size()-1; i>=0; i--) {
+            if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
+                return allVersions.get(i);
+        }
+        throw exception("Can't find version below current("+wdm.getDownloadedVersion()+")");
     }
 }

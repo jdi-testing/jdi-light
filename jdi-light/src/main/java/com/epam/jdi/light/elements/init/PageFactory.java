@@ -58,7 +58,7 @@ public class PageFactory {
                 try {
                     action.value.execute();
                 } catch (Exception ex) {
-                    throw exception("Preinit '%s' failed. Please correct PageFactory.PRE_INIT function. %s", action.key, safeException(ex));
+                    throw exception(ex, "Preinit '%s' failed. Please correct PageFactory.PRE_INIT function", action.key);
                 }
             initialized = true;
         }
@@ -80,7 +80,7 @@ public class PageFactory {
                 info.field = pageField;
                 setFieldWithInstance(info, null);
             } catch (Exception ex) {
-                throw exception(initException(pageField, site, ex));
+                throw exception(ex, initException(pageField, site));
             }
         }
     }
@@ -118,21 +118,20 @@ public class PageFactory {
                 rule.value.action.execute(info);
             }
         } catch (Exception ex) {
-            throw exception("Setup rule '%s' failed. Can't setup field '%s' on page '%s'.%sException: %s",
-                    ruleName, info.name(), info.parentName(), LINE_BREAK, safeException(ex));
+            throw exception(ex, "Setup rule '%s' failed. Can't setup field '%s' on page '%s'",
+                    ruleName, info.name(), info.parentName());
         }
     }
     // endregion
 
     // region Private local methods
-    private static String initException(Field field, Class<?> parent, Exception ex) {
-        return format("Can't init '%s' '%s' on '%s'. %s",
+    private static String initException(Field field, Class<?> parent) {
+        return format("Can't init '%s' '%s' on '%s'",
             getSafe(() -> isClass(field.getType(), WebPage.class) ? "page" : "element",
                 "Element Type"),
             // DO NOT REPLACE LAMBDAS BELOW
             getSafe(() -> field.getName(), "Field Name"),
-            getSafe(() -> parent.getSimpleName(), "Parent Type"),
-            safeException(ex));
+            getSafe(() -> parent.getSimpleName(), "Parent Type"));
     }
     private static String getSafe(JFunc<String> value, String defaultValue) {
         try {
@@ -149,7 +148,7 @@ public class PageFactory {
             Object obj = isStatic(field.getModifiers()) ? null : info.instance;
             setFieldWithInstance(pageInfo, obj);
         } catch (Exception ex) {
-            throw exception(initException(field, info.type(), ex));
+            throw exception(ex, initException(field, info.type()));
         }
     }
     private static void initWithConstructor(SiteInfo info) {
@@ -163,8 +162,8 @@ public class PageFactory {
                     info.instance = create(info.type(), getDriver(info.driverName));
                     throw exception(msg);
             } catch (Exception ex) {
-                throw exception("Can't create field '%s' instance of type '%s'. Try new %s() to get more details. %sException: %s",
-                        info.name(), info.type(), info.type(), LINE_BREAK, safeException(ex));
+                throw exception(ex, "Can't create field '%s' instance of type '%s'. Try new %s() to get more details",
+                        info.name(), info.type(), info.type());
             }
         }
     }
@@ -175,8 +174,8 @@ public class PageFactory {
             try {
                 return (T)(info.instance = firstRule.value.func.execute(info));
             } catch (Exception ex) {
-                throw exception("Init rule '%s' failed. Can't init field '%s' on page '%s'.%s %s",
-                    firstRule.key, info.name(), info.parentName(), LINE_BREAK, safeException(ex));
+                throw exception(ex, "Init rule '%s' failed. Can't init field '%s' on page '%s'",
+                    firstRule.key, info.name(), info.parentName());
             }
         else
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
@@ -196,7 +195,7 @@ public class PageFactory {
         } catch (Exception ignore) {
             try {
                 return create(pageClassToProxy);
-            } catch (Exception ex) { throw exception(pageClassToProxy + " class should has constructor with WebDriver parameter"); }
+            } catch (Exception ex) { throw exception(ex, pageClassToProxy + " class should has constructor with WebDriver parameter"); }
         }
     }
     //endregion

@@ -296,7 +296,6 @@ public class UIElement extends JDIBase
                 break;
             case JS:
                 jsExecute("click()");
-                break;
             case SMART_CLICK:
                 show();
                 ElementArea clArea = timer().getResultByCondition(
@@ -569,7 +568,7 @@ public class UIElement extends JDIBase
                 String message = "Set baseline: " + imageFilePath;
                 jdiAssert(message, Matchers.is(message));
             }
-        } catch (Exception ex) {throw exception("Can't compare files: %s", safeException(ex)); }
+        } catch (Exception ex) {throw exception(ex, "Can't compare files"); }
     }
     private void compareImageFiles(File image1, File image2) {
         long actual = image1.length();
@@ -658,7 +657,7 @@ public class UIElement extends JDIBase
         return $$(by, this);
     }
     public UIElement firstChild() { return find("*"); }
-    public WebList childs() { return finds("*"); }
+    public WebList children() { return finds("*"); }
     //endregion
 
     //region Aliases

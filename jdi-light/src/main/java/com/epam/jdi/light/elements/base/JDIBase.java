@@ -262,7 +262,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 return element;
             throw exception("");
         } catch (Exception ex) {
-            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
+            throw exception(ex, FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
         }
     }
     public List<WebElement> getWebElements(Object... args) {
@@ -412,7 +412,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             try {
                 driver = driver.switchTo().frame(uiSearch(driver(), frameLocator).get(0));
             } catch (Exception ex) {
-                throw exception("Can't find frame by locator: '%s'. Exception: %s", frame, safeException(ex));
+                throw exception(ex, "Can't find frame by locator: '%s'", frame);
             }
         }
         return driver;
@@ -449,7 +449,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         initContext();
         try {
             return PRINT_ELEMENT.execute(this);
-        } catch (Exception ex) { throw exception("Can't print element: " + safeException(ex)); }
+        } catch (Exception ex) { throw exception(ex, "Can't print element"); }
     }
     private static String printWebElement(WebElement element) {
         String asString = element.toString().replaceAll("css selector", "css");

@@ -136,7 +136,7 @@ public final class WebDriverByUtils {
             List<By> result = replaceUp(locator);
             result = replaceText(result);
             return valueOrDefault(replaceChildren(result), one(by));
-        } catch (Exception ex) { throw exception("Search By failed"); }
+        } catch (Exception ex) { throw exception(ex, "Search By failed"); }
     }
     public static By defineLocator(String locator) {
         if (isBlank(locator))
