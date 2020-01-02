@@ -26,7 +26,6 @@ public class WindowsManager {
      * Check the new window is opened
      * @return boolean
      */
-    @JDIAction("Check that new window is opened")
     public static boolean newWindowIsOpened() {
         return windowHandlers.size() < getDriver().getWindowHandles().size();
     }

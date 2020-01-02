@@ -170,9 +170,9 @@ public class ActionHelper {
     }
 
     public static void processNewPage(JoinPoint jp) {
+        getWindows();
         if (CHECK_AFTER_OPEN == PageChecks.NONE && VISUAL_PAGE_STRATEGY == VisualCheckPage.NONE)
             return;
-        getWindows();
         Object element = jp.getThis();
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
             WebPage page = getPage(element);

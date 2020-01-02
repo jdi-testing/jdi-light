@@ -13,6 +13,7 @@ import static io.github.com.pages.HomePage.jdiText;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class WindowsAndFramesTests implements TestsInit {
 
@@ -24,8 +25,12 @@ public class WindowsAndFramesTests implements TestsInit {
     @Test
     public void windowsTest() {
         githubLink.click();
-        System.out.println("New window is opened: " + newWindowIsOpened());
-        System.out.println("Windows count: " + windowsCount());
+        boolean windowOpen = newWindowIsOpened();
+        System.out.println("New window is opened: " + windowOpen);
+        assertTrue(windowOpen);
+        int windowsCount = windowsCount();
+        System.out.println("Windows count: " + windowsCount);
+        assertEquals(windowsCount, 2);
         originalWindow(); // open original (first) window
         switchToWindow(2); // open second window
         assertEquals(repoDescription.getText(),
