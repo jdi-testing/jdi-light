@@ -1,4 +1,4 @@
-package io.github.epam.bootstrap.tests.composite.section.buttonroup;
+package io.github.epam.bootstrap.tests.composite.section.buttongroup;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -61,7 +61,7 @@ public class NestingTests extends TestsInit {
     @Test
     public void dropdownMenuTests() {
         buttonGroupNesting.dropdownMenu.expand();
-        buttonGroupNesting.dropdownMenu.is().expanded();
+        //buttonGroupNesting.dropdownMenu.is().expanded();
         buttonGroupNesting.dropdownMenu.is().size(2);
         buttonGroupNesting.dropdownMenu.list().get(1).is().text(dropdownMenuLinkOne);
         buttonGroupNesting.dropdownMenu.list().get(2).is().text(dropdownMenuLinkTwo);

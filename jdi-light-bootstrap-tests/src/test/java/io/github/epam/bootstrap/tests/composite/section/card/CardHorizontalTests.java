@@ -80,7 +80,7 @@ public class CardHorizontalTests extends TestsInit {
                 .and().src(is(imageSrc))
                 .core()
                 .attr("title", imageTitle);
-        cardHorizontal.image.unhighlight();
+        //cardHorizontal.image.unhighlight();
         cardHorizontal.image.assertThat().width(anyOf(is(91), is(94)));
         cardHorizontal.image.assertThat().height(anyOf(is(146), is(150)));
     }

@@ -56,9 +56,9 @@ public class NavbarBrandTests extends TestsInit {
 
     @Test (dataProvider = "navbarBrandsWithLink")
     public void  checkNavbarLink(UIElement brandAsLink) {
-        brandAsLink.is().core().hasAttr("href");
+        //brandAsLink.is().core().hasAttr("href");
         brandAsLink.highlight("blue");
-        brandAsLink.unhighlight();
+        //brandAsLink.unhighlight();
         int winNumber = WindowsManager.windowsCount();
         brandAsLink.click();
         WindowsManager.switchToWindow(winNumber + 1);
@@ -71,7 +71,7 @@ public class NavbarBrandTests extends TestsInit {
     public void checkNavbarText(UIElement uiBaseElement, String navbarText) {
                 uiBaseElement.highlight();
                 uiBaseElement.is().core().text(navbarText);
-                uiBaseElement.unhighlight();
+                //uiBaseElement.unhighlight();
             }
 
     @Test(dataProvider = "navbarBrandsWithImage")
@@ -79,7 +79,7 @@ public class NavbarBrandTests extends TestsInit {
         UIElement imgFromNavbar = brandWithImage.children().get(1);
         imgFromNavbar.highlight("blue");
         imgFromNavbar.is().core().tag("img").attr("src", containsString(imgPath));
-        imgFromNavbar.unhighlight();
+        //imgFromNavbar.unhighlight();
         int winNumber = WindowsManager.windowsCount();
         imgFromNavbar.click();
         WindowsManager.switchToWindow(winNumber + 1);
@@ -91,6 +91,6 @@ public class NavbarBrandTests extends TestsInit {
     @Test(dataProvider = "navbarBrands")
     public void baseValidationNavbarBrand(Object...nbBrand) {
         baseValidation((UIElement) nbBrand[0]);
-       ((UIElement) nbBrand[0]).unhighlight();
+       //((UIElement) nbBrand[0]).unhighlight();
     }
 }

@@ -77,7 +77,7 @@ public class OverviewTests extends TestsInit {
         paginationOverview.paginationItems.get(index).highlight();
         paginationOverview.paginationItems.get(index).click();
         newWindowTitleCheck(pageTitle);
-        paginationOverview.paginationItems.get(index).unhighlight();
+        //paginationOverview.paginationItems.get(index).unhighlight();
     }
 
     private void newWindowTitleCheck(String pageTitle) {

@@ -94,12 +94,12 @@ public class JDILocator {
             By locator = getLocator(args);
             if ((locator == null || !hasDomain() && !hasFrame()) && element != null)
                 return SMART_SEARCH_LOCATORS.size() > 0
-                    ? print(select(SMART_SEARCH_LOCATORS, l -> format(l, SMART_SEARCH_NAME.execute(element.name))), " or ")
+                    ? printSmartLocators(element)
                     : "";
             String hasFrame = "";
             if (hasFrame())
                 hasFrame = "Frame: " + print(map(frames, WebDriverByUtils::shortBy));
-            return hasFrame + shortBy(locator).replaceAll("%s", "{{VALUE}}");
+            return hasFrame + shortBy(locator, element).replaceAll("%s", "{{VALUE}}");
         } catch (Exception ex) { return "Can't print locator"; }
     }
 }

@@ -1,6 +1,7 @@
 package io.github.epam;
 
 import io.github.com.StaticSite;
+import io.github.com.sections.modal.SectionModalLongScrolling;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 

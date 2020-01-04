@@ -40,10 +40,10 @@ public class ProgressTests implements TestsInit {
 
     @Test
     public void isValidationTest() {
-        progress.assertThat().maxVolume(is(100));
-        progress.is().volume(greaterThanOrEqualTo(10));
-        progress.is().volume(lessThanOrEqualTo(100));
-        progress.assertThat().volume(is(70));
+        progress.assertThat().maxValue(is(100));
+        progress.is().value(greaterThanOrEqualTo(10));
+        progress.is().value(lessThanOrEqualTo(100));
+        progress.assertThat().value(is(70));
         progress.is().enabled();
     }
 
@@ -56,9 +56,9 @@ public class ProgressTests implements TestsInit {
 
     @Test
     public void assertValidationTest() {
-        progress.assertThat().volume(greaterThan(0));
-        progress.assertThat().volume(lessThan(200));
-        progress.assertThat().volume(is(70));
+        progress.assertThat().value(greaterThan(0));
+        progress.assertThat().value(lessThan(200));
+        progress.assertThat().value(is(70));
     }
 
     @Test

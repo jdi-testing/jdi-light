@@ -7,7 +7,7 @@
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-performance</artifactId>
     <version>1.1.11</version>
-    <name>JDI Performance</name>
+    <name>Tests: JDI Performance</name>
 
     <properties>
         <driver>chrome</driver>

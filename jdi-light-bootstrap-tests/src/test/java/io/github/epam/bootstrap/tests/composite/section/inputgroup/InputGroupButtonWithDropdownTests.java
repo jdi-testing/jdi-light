@@ -45,7 +45,7 @@ public class InputGroupButtonWithDropdownTests extends TestsInit {
     @Test
     public void dropdownMenuTests() {
         inputGroupButtonWithDropdown.dropdownMenu.expand();
-        inputGroupButtonWithDropdown.dropdownMenu.is().expanded();
+        //inputGroupButtonWithDropdown.dropdownMenu.is().expanded();
         inputGroupButtonWithDropdown.dropdownMenu.is().size(4);
         inputGroupButtonWithDropdown.dropdownMenu.list().get(1).is().text(action);
         inputGroupButtonWithDropdown.dropdownMenu.list().get(2).is().text(anotherAction);

@@ -1,10 +1,8 @@
 package com.epam.jdi.light.ui.bootstrap.elements.composite;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.tools.ReflectionUtils;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -14,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 
 /**
  * To see an example of different Forms in bootstrap please visit https://getbootstrap.com/docs/4.3/components/forms/

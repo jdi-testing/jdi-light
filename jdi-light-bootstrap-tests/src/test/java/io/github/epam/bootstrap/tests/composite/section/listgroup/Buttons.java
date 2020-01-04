@@ -72,7 +72,7 @@ public class Buttons extends TestsInit {
         listGroupButtons.listGroup.get(index).highlight();
         listGroupButtons.listGroup.get(index).click();
         validateAlert(is(text));
-        listGroupButtons.listGroup.get(index).unhighlight();
+        //listGroupButtons.listGroup.get(index).unhighlight();
     }
 
     @Test(dataProvider = "clickValidate")

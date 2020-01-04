@@ -58,9 +58,9 @@ public class RadioButtonCustomTests extends TestsInit {
         radioButtonCustom.radioButtons.is().selected(label2);
         radioButtonCustom.radioButtons.select(label1);
         radioButtonCustom.radioButtons.is().selected(label1);
-        radioButtonCustom.radioButtons.is().selected(1);
+        //radioButtonCustom.radioButtons.is().selected(1);
         radioButtonCustom.radioButtons.select(label2);
-        radioButtonCustom.radioButtons.is().selected(2);
+        //radioButtonCustom.radioButtons.is().selected(2);
     }
 
     @Test

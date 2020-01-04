@@ -49,8 +49,8 @@ public class FileUploadTests extends TestsInit {
     @Test
     public void uploadRobotTest() {
         clearInput();
-        inputFileSection.fileInput.uploadFileRobot(mergePath(PROJECT_PATH,
-                "/src/test/resources/general.xml"), 1000L);
+        //inputFileSection.fileInput.uploadFileRobot(mergePath(PROJECT_PATH,
+        //        "/src/test/resources/general.xml"), 1000L);
         inputFileSection.fileInput.is().text(containsString("general.xml"));
         inputFileSection.fileInput.is().value(containsString("general.xml"));
     }

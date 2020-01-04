@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.complex.WebList;
 
 import static com.epam.jdi.light.common.TextTypes.LABEL;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -13,9 +14,6 @@ import static com.epam.jdi.light.common.TextTypes.LABEL;
 public class RadioButtons extends UIListBase<UISelectAssert> {
     @Override
     public WebList list() {
-        return super.list().setUIElementName(LABEL);
-    }
-    public RadioButtons() {
-        base().setLocator("input[type=radio]");
+        return $$("input[type=radio]", this).setUIElementName(LABEL);
     }
 }

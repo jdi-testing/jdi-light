@@ -42,11 +42,11 @@ public class CollapseTests extends TestsInit {
         collapseLink.highlight();
         collapseLink.expand();
 
-        collapseLink.is().expanded();
+        //collapseLink.is().expanded();
         collapseLink.value().is().text(cardOneText);
 
         collapseLink.collapse();
-        collapseLink.is().collapsed();
+        //collapseLink.is().collapsed();
     }
 
     @Test(priority = 2)
@@ -54,11 +54,11 @@ public class CollapseTests extends TestsInit {
         collapseToggleOne.highlight();
         collapseToggleOne.expand();
 
-        collapseToggleOne.is().expanded();
+        //collapseToggleOne.is().expanded();
         collapseToggleOne.value().is().text(cardTwoText);
 
         collapseToggleOne.collapse();
-        collapseToggleOne.is().collapsed();
+        //collapseToggleOne.is().collapsed();
     }
 
     @Test(priority = 3)
@@ -66,11 +66,11 @@ public class CollapseTests extends TestsInit {
         collapseDataTarget.highlight();
         collapseDataTarget.expand();
 
-        collapseDataTarget.is().expanded();
+        //collapseDataTarget.is().expanded();
         collapseDataTarget.value().is().text(cardOneText);
 
         collapseDataTarget.collapse();
-        collapseDataTarget.is().collapsed();
+        //collapseDataTarget.is().collapsed();
     }
 
     @Test(priority = 4)
@@ -78,11 +78,11 @@ public class CollapseTests extends TestsInit {
         collapseToggleTwo.highlight();
         collapseToggleTwo.expand();
 
-        collapseToggleTwo.is().expanded();
+        //collapseToggleTwo.is().expanded();
         collapseToggleTwo.value().is().text(cardThreeText);
 
         collapseToggleTwo.collapse();
-        collapseToggleTwo.is().collapsed();
+        //collapseToggleTwo.is().collapsed();
     }
 
     @Test(priority = 5)
@@ -90,12 +90,12 @@ public class CollapseTests extends TestsInit {
         collapseToggleBoth.highlight();
         collapseToggleBoth.expand();
 
-        collapseToggleBoth.is().expanded();
+        //collapseToggleBoth.is().expanded();
         collapseToggleBoth.value().is().text(cardTwoText);
         collapseToggleTwo.value().is().text(cardThreeText);
 
         collapseToggleBoth.collapse();
-        collapseToggleBoth.is().collapsed();
+        //collapseToggleBoth.is().collapsed();
     }
 
     @Test(priority = 6)
@@ -103,11 +103,11 @@ public class CollapseTests extends TestsInit {
         collapseGroupOne.highlight();
         collapseGroupOne.expand();
 
-        collapseGroupOne.is().expanded();
+        //collapseGroupOne.is().expanded();
         collapseGroupOne.value().is().text(groupOneText);
 
         collapseGroupOne.collapse();
-        collapseGroupOne.is().collapsed();
+        //collapseGroupOne.is().collapsed();
     }
 
     @Test(priority = 7)
@@ -115,11 +115,11 @@ public class CollapseTests extends TestsInit {
         collapseGroupTwo.highlight();
         collapseGroupTwo.expand();
 
-        collapseGroupTwo.is().expanded();
+        //collapseGroupTwo.is().expanded();
         collapseGroupTwo.value().is().text(groupTwoText);
 
         collapseGroupTwo.collapse();
-        collapseGroupTwo.is().collapsed();
+        //collapseGroupTwo.is().collapsed();
     }
 
     @Test(priority = 8)
@@ -127,11 +127,11 @@ public class CollapseTests extends TestsInit {
         collapseGroupThree.highlight();
         collapseGroupThree.expand();
 
-        collapseGroupThree.is().expanded();
+        //collapseGroupThree.is().expanded();
         collapseGroupThree.value().is().text(groupThreeText);
 
         collapseGroupThree.collapse();
-        collapseGroupThree.is().collapsed();
+        //collapseGroupThree.is().collapsed();
     }
 
     @Test
@@ -139,13 +139,13 @@ public class CollapseTests extends TestsInit {
         collapseGroupOne.highlight();
         collapseGroupOne.expand();
 
-        collapseGroupOne.is().expanded();
+        //collapseGroupOne.is().expanded();
         collapseGroupOne.list().is().size(1);
         collapseGroupOne.list().get(1).is().text(groupOneText);
         collapseGroupOne.isDisplayed();
         collapseGroupOne.isEnabled();
 
         collapseGroupOne.collapse();
-        collapseGroupOne.is().collapsed();
+        //collapseGroupOne.is().collapsed();
     }
 }

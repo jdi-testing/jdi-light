@@ -15,13 +15,11 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
         jdiAssert(tagName, Matchers.is("img"));
         return this;
     }
-
     public CardAssert imageOnTop() {
         String elementTag = element.children().get(1).getTagName();
         assertTag(elementTag);
         return this;
     }
-
     public CardAssert imageBelow() {
         WebList children = element.children();
         String elementTag = children.get(children.size()).getTagName();

@@ -17,7 +17,7 @@ import com.epam.jdi.light.ui.bootstrap.asserts.CheckboxAssert;
 
 public class Checkbox extends UIBaseElement<CheckboxAssert>
         implements HasLabel, SetValue, HasClick, HasCheck {
-
+    //TODO REFACTOR REMOVE CLASS
     @UI("input")
     private UIElement input;
 

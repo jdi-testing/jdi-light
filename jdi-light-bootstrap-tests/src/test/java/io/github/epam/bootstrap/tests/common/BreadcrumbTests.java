@@ -38,38 +38,38 @@ public class BreadcrumbTests extends TestsInit {
 
     @Test
     public void getTextTest() {
-        breadcrumb.items.has().size(ITEMS_VALUES.length);
-        breadcrumb.items.assertThat().values(TEXT, hasItems(ITEMS_VALUES));
+        breadcrumb.has().size(ITEMS_VALUES.length);
+        breadcrumb.assertThat().values(TEXT, hasItems(ITEMS_VALUES));
     }
 
     @Test
     public void getValueTest() {
-        breadcrumb.items.has().size(ITEMS_VALUES.length);
-        assertThat(breadcrumb.items.values().toArray(), is(ITEMS_VALUES));
+        breadcrumb.has().size(ITEMS_VALUES.length);
+        assertThat(breadcrumb.values().toArray(), is(ITEMS_VALUES));
     }
 
     @Test
     public void getFirstItemTest() {
-        breadcrumb.items.first().has().value(HOME);
-        breadcrumb.items.first().is().text(HOME);
+        breadcrumb.first().has().value(HOME);
+        breadcrumb.first().is().text(HOME);
     }
 
     @Test
     public void getCurrectItemTest() {
-        breadcrumb.items.last().has().value(BOOTSTRAP);
-        breadcrumb.items.last().has().text(BOOTSTRAP);
+        breadcrumb.last().has().value(BOOTSTRAP);
+        breadcrumb.last().has().text(BOOTSTRAP);
     }
 
     @Test
     public void clickCurrectItemTest(){
-        breadcrumb.items.last().click();
+        breadcrumb.last().click();
 
         assertThat(windowsCount(), is(1));
     }
 
     @Test
     public void clickByNameTest() {
-        breadcrumb.items.get(HTML5).click();
+        breadcrumb.get(HTML5).click();
 
         switchToWindow(2);
 
@@ -81,7 +81,7 @@ public class BreadcrumbTests extends TestsInit {
 
     @Test
     public void clickByIDTest() {
-        breadcrumb.items.get(1).click();
+        breadcrumb.get(1).click();
 
         switchToWindow(2);
 
@@ -104,20 +104,20 @@ public class BreadcrumbTests extends TestsInit {
                 .css("color", is("rgba(102, 102, 102, 1)"))//#666 Color Hex
                 .css("font-size", is("14px"));
 
-        for (UIElement item : breadcrumb.items) {
+        for (UIElement item : breadcrumb) {
             item.shouldBe().enabled();
             item.shouldBe().displayed()
                     .core()
                     .tag(is("li"));
         }
 
-        breadcrumb.items.last().shouldBe().displayed()
+        breadcrumb.last().shouldBe().displayed()
                 .core()
                 .attr("aria-current", "page")
                 .cssClass("breadcrumb-item active")
                 .css("color", is("rgba(108, 117, 125, 1)")); //#6c757d Color Hex
 
-        for (UIElement item : breadcrumb.items.finds(By.tagName("a"))) {
+        for (UIElement item : breadcrumb.finds(By.tagName("a"))) {
             item.shouldBe().enabled();
             item.shouldBe().displayed()
                     .core()

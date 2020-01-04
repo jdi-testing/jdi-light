@@ -103,7 +103,7 @@ public class ModalVaryingContentTests extends TestsInit {
 
     private void baseValidationAndUnhighlight(ICoreElement elem) {
         baseValidation(elem);
-        elem.unhighlight();
+        //elem.unhighlight();
     }
 
     private void checkButton(Button button, String text, String color, String backgroundColor, String borderColor) {

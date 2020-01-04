@@ -81,7 +81,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public MapArray<String, Object> params = new MapArray<>();
 
-    public JDILocator locator = new JDILocator();
+    public JDILocator locator = new JDILocator(this);
     @Override
     public DriverBase setParent(Object parent) {
         return super.setParent(parent);
@@ -137,10 +137,10 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
 
     public JDIBase setLocator(String locator) {
-        return setLocator(By.cssSelector(locator));
+        return setLocator(defineLocator(locator));
     }
     public JDIBase setLocator(By locator) {
-        if (name.isEmpty()) name = shortBy(locator);
+        if (name.isEmpty()) name = shortBy(locator, this);
         this.locator.add(locator, this);
         return this;
     }

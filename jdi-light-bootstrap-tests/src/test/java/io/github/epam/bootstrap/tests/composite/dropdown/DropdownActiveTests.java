@@ -65,7 +65,7 @@ public class DropdownActiveTests extends TestsInit {
         baseValidation(dropdownMenuItemsActive.expander());
         for (UIElement item : dropdownMenuItemsActive.list()) {
             baseValidation(item);
-            item.unhighlight();
+            //item.unhighlight();
         }
     }
 }

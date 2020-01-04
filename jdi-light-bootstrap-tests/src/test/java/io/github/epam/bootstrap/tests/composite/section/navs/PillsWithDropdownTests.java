@@ -87,11 +87,11 @@ public class PillsWithDropdownTests extends TestsInit {
         navsPillsWithDropdown.dropdownMenu
                 .is()
                 .displayed()
-                .expanded()
+                //.expanded()
                 .enabled();
         navsPillsWithDropdown.dropdownMenu
                 .is()
-                .expanded()
+                //.expanded()
                 .size(4)
                 .core()
                 .attr("data-toggle", "dropdown")

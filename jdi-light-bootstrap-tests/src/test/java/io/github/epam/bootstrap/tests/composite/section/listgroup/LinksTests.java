@@ -81,7 +81,7 @@ public class LinksTests extends TestsInit {
         listGroupLinks.listGroup.get(index).highlight();
         listGroupLinks.listGroup.get(index).click();
         newWindowTitleCheck(pageTitle);
-        listGroupLinks.listGroup.get(index).unhighlight();
+        //listGroupLinks.listGroup.get(index).unhighlight();
     }
 
     private void newWindowTitleCheck(String pageTitle) {

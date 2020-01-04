@@ -76,7 +76,7 @@ public class FormsSelectMenuTests extends TestsInit {
                 .core()
                 .css("font-size", is("16px"))
                 .hasClass("custom-select")
-                .hasAttr("multiple")
+                //.hasAttr("multiple")
                 .tag(is("select"));
 
         formsSelectMenuSize.is().displayed();

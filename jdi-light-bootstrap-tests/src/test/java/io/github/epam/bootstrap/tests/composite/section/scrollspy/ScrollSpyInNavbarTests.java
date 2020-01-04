@@ -35,7 +35,7 @@ public class ScrollSpyInNavbarTests extends TestsInit {
     public static final String ATTR_VALUE_NAVBAR_EXAMPLE_2 = "#navbar-example2";
     public static final String ATTR_VALUE_SEPARATOR = "separator";
 
-    private String itemLink = "https://jdi-testing.github.io/jdi-light/bootstrap.html#";
+    private String itemLink = "https://jdi-testing.github.io/jdi-light/bootstrap-new.html#";
     private String navbarLink = "https://getbootstrap.com/docs/4.3/components/scrollspy/#example-in-navbar";
     private String navbarText = "Navbar";
     private String pageTitle = "Scrollspy · Bootstrap";
@@ -230,7 +230,7 @@ public class ScrollSpyInNavbarTests extends TestsInit {
                 .enabled()
                 .cssClass(CLASS_NAME_NAV_LINK_ACTIVE);
 
-        scrollSpyInNavbar.mainText.get(index).unhighlight();
+        //scrollSpyInNavbar.mainText.get(index).unhighlight();
     }
 
     @Test(dataProvider = "dropdownCheck")
@@ -245,7 +245,7 @@ public class ScrollSpyInNavbarTests extends TestsInit {
                 .enabled()
                 .cssClass(CLASS_NAME_DROPDOWN_ITEM_ACTIVE);
 
-        scrollSpyInNavbar.mainText.get(index).unhighlight();
+        //scrollSpyInNavbar.mainText.get(index).unhighlight();
     }
 
     @Test

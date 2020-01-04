@@ -34,22 +34,22 @@ public class DropdownFormTest extends TestsInit {
     @Test
     public void baseValidationTest() {
         baseValidation(dropdownForm);
-        dropdownForm.unhighlight();
+        //dropdownForm.unhighlight();
 
         dropdownForm.expand();
         baseValidation(dropdownForm.expander());
-        dropdownForm.expander().unhighlight();
+        //dropdownForm.expander().unhighlight();
 
         baseValidation(dropdownForm.form);
-        dropdownForm.form.unhighlight();
+        //dropdownForm.form.unhighlight();
         baseValidation(dropdownForm.form.email);
-        dropdownForm.form.email.unhighlight();
+        //dropdownForm.form.email.unhighlight();
         baseValidation(dropdownForm.form.password);
-        dropdownForm.form.password.unhighlight();
+        //dropdownForm.form.password.unhighlight();
         baseValidation(dropdownForm.form.checkbox);
-        dropdownForm.form.checkbox.unhighlight();
+        //dropdownForm.form.checkbox.unhighlight();
         baseValidation(dropdownForm.form.accept);
-        dropdownForm.form.accept.unhighlight();
+        //dropdownForm.form.accept.unhighlight();
 
         dropdownForm.collapse();
     }

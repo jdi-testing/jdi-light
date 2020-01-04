@@ -111,7 +111,7 @@ public class AlignTests extends TestsInit {
         paginationAlignCenter.paginationItems.get(index).highlight();
         paginationAlignCenter.paginationItems.get(index).click();
         newWindowTitleCheck(pageTitle);
-        paginationAlignCenter.paginationItems.get(index).unhighlight();
+        //paginationAlignCenter.paginationItems.get(index).unhighlight();
     }
 
     @Test(dataProvider = "listPageTitles")
@@ -120,7 +120,7 @@ public class AlignTests extends TestsInit {
         paginationAlignEnd.paginationItems.get(index).highlight();
         paginationAlignEnd.paginationItems.get(index).click();
         newWindowTitleCheck(pageTitle);
-        paginationAlignEnd.paginationItems.get(index).unhighlight();
+        //paginationAlignEnd.paginationItems.get(index).unhighlight();
     }
 
     private void newWindowTitleCheck(String pageTitle) {

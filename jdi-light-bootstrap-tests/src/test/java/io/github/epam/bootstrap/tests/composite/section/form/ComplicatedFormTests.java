@@ -54,7 +54,7 @@ public class ComplicatedFormTests extends TestsInit {
     @Test
     public void clearFormTest() {
         setDefaultValues(TEMPLATE_HERO);
-        superheroForm.clear(EXAMPLE_HERO);
+        //superheroForm.clear(EXAMPLE_HERO);
         lastLogEntry.has().text(containsString(logLineClear));
         superheroForm.check(TEMPLATE_HERO);
     }

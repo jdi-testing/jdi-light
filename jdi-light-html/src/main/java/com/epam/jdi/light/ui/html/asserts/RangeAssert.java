@@ -16,25 +16,25 @@ import static org.hamcrest.Matchers.is;
  */
 public class RangeAssert extends UIAssert<RangeAssert, Range> {
 
-    @JDIAction("Assert that '{name}' volume {0}")
-    public RangeAssert volume(Matcher<Integer> volume) {
-        jdiAssert(getInt("value", element.core()), volume);
+    @JDIAction("Assert that '{name}' value {0}")
+    public RangeAssert value(Matcher<Integer> value) {
+        jdiAssert(getInt("value", element.core()), value);
         return this;
     }
-    public RangeAssert volume(int volume) { return volume(Matchers.is(volume)); }
+    public RangeAssert value(int value) { return value(Matchers.is(value)); }
 
-    @JDIAction("Assert that '{name}' min volume {0}")
-    public RangeAssert minVolume(Matcher<Integer> min) {
+    @JDIAction("Assert that '{name}' min value {0}")
+    public RangeAssert minValue(Matcher<Integer> min) {
         jdiAssert(getInt("min", element.core()), min);
         return this;
     }
-    public RangeAssert minVolume(int minVolume) { return minVolume(Matchers.is(minVolume)); }
-    @JDIAction("Assert that '{name}' max volume {0}")
-    public RangeAssert maxVolume(Matcher<Integer> max) {
+    public RangeAssert minValue(int minValue) { return minValue(Matchers.is(minValue)); }
+    @JDIAction("Assert that '{name}' max value {0}")
+    public RangeAssert maxValue(Matcher<Integer> max) {
         jdiAssert(getInt("max", element.core()), max);
         return this;
     }
-    public RangeAssert maxVolume(int maxVolume) { return maxVolume(Matchers.is(maxVolume)); }
+    public RangeAssert maxValue(int maxValue) { return maxValue(Matchers.is(maxValue)); }
 
     @JDIAction("Assert that '{name}' step {0}")
     public RangeAssert step(Matcher<Integer> step) {

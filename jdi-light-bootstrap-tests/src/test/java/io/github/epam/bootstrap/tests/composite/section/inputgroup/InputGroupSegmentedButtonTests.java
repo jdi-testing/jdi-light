@@ -54,7 +54,7 @@ public class InputGroupSegmentedButtonTests extends TestsInit {
     @Test
     public void dropdownMenuTests() {
         segmentedButton.dropdownMenu.expand();
-        segmentedButton.dropdownMenu.is().expanded();
+        //segmentedButton.dropdownMenu.is().expanded();
         segmentedButton.dropdownMenu.is().size(4);
         segmentedButton.dropdownMenu.list().get(1).is().text(action);
         segmentedButton.dropdownMenu.list().get(2).is().text(anotherAction);

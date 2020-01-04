@@ -35,7 +35,7 @@ public class ScrollSpyWithListGroupTests extends TestsInit {
     public static final String ATTR_VALUE_SCROLL = "scroll";
     public static final String ATTR_VALUE_LIST_EXAMPLE = "#list-example";
     public static final String ATRR_VALUE_0 = "0";
-    private String itemLink = "https://jdi-testing.github.io/jdi-light/bootstrap.html#";
+    private String itemLink = "https://jdi-testing.github.io/jdi-light/bootstrap-new.html#";
     private String paragraphN1 = "list-item-1";
     private String paragraphN2 = "list-item-2";
     private String paragraphN3 = "list-item-3";
@@ -168,7 +168,7 @@ public class ScrollSpyWithListGroupTests extends TestsInit {
                 .value(is(mainText));
 
         assertEquals(y_Start, y_Current);
-        listGroupForScrollSpy.get(index).unhighlight();
+        //listGroupForScrollSpy.get(index).unhighlight();
     }
 
     @Test(dataProvider = "itemsCheck")
@@ -186,7 +186,7 @@ public class ScrollSpyWithListGroupTests extends TestsInit {
                 .css(CSS_NAME_BACKGROUND_COLOR, "rgba(0, 123, 255, 1)")//#007bff Color Hex
                 .css(CSS_NAME_BORDER_COLOR, "rgb(0, 123, 255)");//#007bff Color Hex
 
-        listGroupForScrollSpy.get(index).unhighlight();
+        //listGroupForScrollSpy.get(index).unhighlight();
     }
 
     @Test

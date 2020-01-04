@@ -34,7 +34,7 @@ public class ReadonlyPlainTextTests extends TestsInit {
     @Test(dataProvider = "itemsUnderTesting")
     public void baseValidationTest(ReadonlyPlainText item) {
         baseValidation(item);
-        item.unhighlight();
+        //item.unhighlight();
     }
 
     @Test(dataProvider = "itemsUnderTesting")

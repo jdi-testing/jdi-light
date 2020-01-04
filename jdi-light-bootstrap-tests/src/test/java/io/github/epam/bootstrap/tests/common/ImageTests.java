@@ -40,7 +40,7 @@ public class ImageTests extends TestsInit {
     public void isValidationTest() {
         cardImage.image.is().src(is(SRC_ATTR_EXPECTED));
         cardImage.image.is().alt(is(ALT_ATTR_EXPECTED));
-        cardImage.image.unhighlight();
+        //cardImage.image.unhighlight();
         cardImage.image.assertThat().width(is(WIDTH));
         cardImage.image.assertThat().height(is(HEIGHT));
     }

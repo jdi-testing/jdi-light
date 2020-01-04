@@ -63,7 +63,7 @@ public class CardKitchenSinkTests extends TestsInit {
     public void isValidationTest() {
         cardKitchenSink.image.is().src(is(imgSrc));
         cardKitchenSink.image.is().alt(is(imgAlt));
-        cardKitchenSink.image.unhighlight();
+        //cardKitchenSink.image.unhighlight();
         cardKitchenSink.image.assertThat().width(is(86));
         cardKitchenSink.image.assertThat().height(is(137));
         cardKitchenSink.title.is().text(is(titleText));

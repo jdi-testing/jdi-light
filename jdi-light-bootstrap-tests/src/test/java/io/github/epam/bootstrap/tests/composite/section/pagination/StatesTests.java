@@ -94,7 +94,7 @@ public class StatesTests extends TestsInit {
         paginationStates.paginationItems.get(index).highlight();
         paginationStates.paginationItems.get(index).click();
         newWindowTitleCheck(pageTitle);
-        paginationStates.paginationItems.get(index).unhighlight();
+        //paginationStates.paginationItems.get(index).unhighlight();
     }
 
     private void newWindowTitleCheck(String pageTitle) {

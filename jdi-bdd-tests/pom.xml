@@ -7,7 +7,7 @@
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd-tests</artifactId>
     <version>1.0.2</version>
-    <name>JDI BDD Tests</name>
+    <name>Tests: JDI BDD with Page Objects</name>
 
     <properties>
         <driver>chrome</driver>

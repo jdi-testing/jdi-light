@@ -5,7 +5,6 @@ package com.epam.jdi.light.ui.bootstrap.actions;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.settings.TimeoutSettings;
 import com.epam.jdi.tools.PrintUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -14,11 +13,8 @@ import org.aspectj.lang.annotation.Pointcut;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.epam.jdi.light.actions.ActionHelper.ACTION_FAILED;
-import static com.epam.jdi.light.actions.ActionHelper.AFTER_JDI_ACTION;
-import static com.epam.jdi.light.actions.ActionHelper.BEFORE_JDI_ACTION;
+import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionProcessor.*;
-import static com.epam.jdi.light.actions.ActionProcessor.failedMethods;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;

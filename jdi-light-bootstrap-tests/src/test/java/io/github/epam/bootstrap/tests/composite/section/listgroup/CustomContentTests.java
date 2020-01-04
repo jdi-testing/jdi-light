@@ -125,7 +125,7 @@ public class CustomContentTests extends TestsInit {
         listGroupCustomContent.listGroup.get(index).highlight();
         listGroupCustomContent.listGroup.get(index).click();
         newWindowTitleCheck(pageTitle);
-        listGroupCustomContent.listGroup.get(index).unhighlight();
+        //listGroupCustomContent.listGroup.get(index).unhighlight();
     }
 
     private void newWindowTitleCheck(String pageTitle) {

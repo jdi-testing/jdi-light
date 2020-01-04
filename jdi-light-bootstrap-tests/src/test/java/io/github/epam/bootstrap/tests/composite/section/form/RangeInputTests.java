@@ -23,7 +23,7 @@ public class RangeInputTests extends TestsInit {
     @Test
     public void baseValidationTest() {
         baseValidation(rangeInput);
-        rangeInput.unhighlight();
+        //rangeInput.unhighlight();
     }
 
     @Test

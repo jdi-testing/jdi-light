@@ -83,7 +83,7 @@ public class AlertTests extends TestsInit {
 
     @Test
     public void dismissibleAlertButtonIsValidationTest() {
-        dismissibleAlert.dismissButton().is().displayed()
+        dismissibleAlert.dismissibleAlertCloseButton.is().displayed()
                 .enabled()
                 .core()
                 .attr("type", "button")
@@ -94,7 +94,7 @@ public class AlertTests extends TestsInit {
 
     @Test(priority = 1)
     public void dismissibleAlertButtonClickTest() {
-        dismissibleAlert.dismissButton().click();
+        dismissibleAlert.dismissibleAlertCloseButton.click();
         dismissibleAlert.base().waitSec(1);
         dismissibleAlert.is().hidden();
     }

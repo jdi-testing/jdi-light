@@ -5,7 +5,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
 
 public class EmbeddedVideoModal extends Modal {
 
-    @Frame(xpath = "//iframe")
+    @Frame("iframe")
     private EmbeddedVideoModalFrame videoModalFrameInModal;
 
     public EmbeddedVideoModalFrame getVideoModalFrame() {

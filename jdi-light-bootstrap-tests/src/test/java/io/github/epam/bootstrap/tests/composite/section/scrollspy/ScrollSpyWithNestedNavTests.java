@@ -39,7 +39,7 @@ public class ScrollSpyWithNestedNavTests extends TestsInit {
     public static final String ATTR_VALUE_NAVBAR_EXAMPLE_3 = "#navbar-example3";
     public static final String ATTR_VALUE_0 = "0";
 
-    private String itemLink = "https://jdi-testing.github.io/jdi-light/bootstrap.html#";
+    private String itemLink = "https://jdi-testing.github.io/jdi-light/bootstrap-new.html#";
     private String navbarLink = "https://getbootstrap.com/docs/4.3/components/scrollspy/#example-with-nested-nav";
     private String navbarText = "Navbar";
     private String pageTitle = "Scrollspy · Bootstrap";
@@ -265,7 +265,7 @@ public class ScrollSpyWithNestedNavTests extends TestsInit {
             assertThat(y_header_start, is(y_header_current - 92));
         }
 
-        nestedNav.navItemLink.get(index).unhighlight();
+        //nestedNav.navItemLink.get(index).unhighlight();
     }
 
 
@@ -282,7 +282,7 @@ public class ScrollSpyWithNestedNavTests extends TestsInit {
                         .enabled()
                         .cssClass(itemsMap.get(key)));
 
-        nestedNav.navItemLink.get(itemToClick).unhighlight();
+        //nestedNav.navItemLink.get(itemToClick).unhighlight();
     }
 
     @Test(dataProvider = "itemsCheck")
@@ -292,7 +292,7 @@ public class ScrollSpyWithNestedNavTests extends TestsInit {
         scrollSpyWithNestedNav.scrollParagraph(nestedNav.navItemLink, index, CLASS_NAME_ACTIVE);
 
         assertTrue(nestedNav.navItemLink.get(index).hasClass(CLASS_NAME_ACTIVE));
-        nestedNav.navItemLink.get(index).unhighlight();
+        //nestedNav.navItemLink.get(index).unhighlight();
     }
 
     @Test

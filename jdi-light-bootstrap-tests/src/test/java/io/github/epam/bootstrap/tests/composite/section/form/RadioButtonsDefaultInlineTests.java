@@ -58,12 +58,12 @@ public class RadioButtonsDefaultInlineTests extends TestsInit {
     @Test
     public void radioButtonByIndexTests() {
         radioButtonsDefaultInline.radioButtons.select(2);
-        radioButtonsDefaultInline.radioButtons.is().selected(2);
+        //radioButtonsDefaultInline.radioButtons.is().selected(2);
         radioButtonsDefaultInline.radioButtons.is().selected("2");
         radioButtonsDefaultInline.radioButtons.list().get(2).is().selected();
         radioButtonsDefaultInline.radioButtons.list().get(1).is().deselected();
         radioButtonsDefaultInline.radioButtons.select(1);
-        radioButtonsDefaultInline.radioButtons.is().selected(1);
+        //radioButtonsDefaultInline.radioButtons.is().selected(1);
         radioButtonsDefaultInline.radioButtons.is().selected("1");
         radioButtonsDefaultInline.radioButtons.list().get(2).is().deselected();
         radioButtonsDefaultInline.radioButtons.list().select("2");

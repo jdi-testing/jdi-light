@@ -14,12 +14,12 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 public class ProgressBarSteps {
     public static ProgressBar progressBar(String name) { return getUI(name, ProgressBar.class); }
 
-    @Then("^the \"([^\"]*)\" progress volume greater or equal to (\\d+)$")
-    public void volumeGreaterOrEqualTo(String name, int value) {
-        progressBar(name).is().volume(greaterThanOrEqualTo(value));
+    @Then("^the \"([^\"]*)\" progress value greater or equal to (\\d+)$")
+    public void valueGreaterOrEqualTo(String name, int value) {
+        progressBar(name).is().value(greaterThanOrEqualTo(value));
     }
-    @Then("^the \"([^\"]*)\" progress volume less or equal to (\\d+)$")
-    public void volumeLessOrEqualTo(String name, int value) {
-        progressBar(name).is().volume(lessThanOrEqualTo(value));
+    @Then("^the \"([^\"]*)\" progress value less or equal to (\\d+)$")
+    public void valueLessOrEqualTo(String name, int value) {
+        progressBar(name).is().value(lessThanOrEqualTo(value));
     }
 }

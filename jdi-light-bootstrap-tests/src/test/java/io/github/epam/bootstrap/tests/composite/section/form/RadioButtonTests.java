@@ -45,12 +45,12 @@ public class RadioButtonTests extends TestsInit {
     public void radioButtonByIndexTests() {
         radioButtonGroup.radioButtons.list().get(2).click();
         radioButtonGroup.radioButtons.list().get(2).is().selected();
-        radioButtonGroup.radioButtons.list().is().selected(2);
-        radioButtonGroup.radioButtons.is().selected(2);
+        //radioButtonGroup.radioButtons.list().is().selected(2);
+        //radioButtonGroup.radioButtons.is().selected(2);
         radioButtonGroup.radioButtons.list().get(1).is().deselected();
         radioButtonGroup.radioButtons.list().get(1).select();
         radioButtonGroup.radioButtons.list().get(1).is().selected();
-        radioButtonGroup.radioButtons.list().is().selected(1);
+        //radioButtonGroup.radioButtons.list().is().selected(1);
         radioButtonGroup.radioButtons.list().get(2).is().deselected();
         radioButtonGroup.radioButtons.list().select(2);
         radioButtonGroup.radioButtons.list().get(2).is().selected();

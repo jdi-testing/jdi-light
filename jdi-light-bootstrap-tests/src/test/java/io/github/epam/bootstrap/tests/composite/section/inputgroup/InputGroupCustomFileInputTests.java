@@ -5,7 +5,6 @@ import io.github.epam.states.States;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.ElementArea.ACTION_CLICK;
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static com.epam.jdi.light.settings.WebSettings.ANY_ELEMENT;
@@ -26,9 +25,11 @@ public class InputGroupCustomFileInputTests extends TestsInit {
         States.shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         inputGroupCustomFileInput.fileInput.core().setup(jdiB -> jdiB.setSearchRule(ANY_ELEMENT));
-        inputGroupCustomFileInput.fileInput.core().setClickArea(ACTION_CLICK);
+        //TODO REFACTOR
+        //inputGroupCustomFileInput.fileInput.core().setClickArea(ACTION_CLICK);
         inputGroupCustomUploadFile.fileInput.core().setup(jdiB -> jdiB.setSearchRule(ANY_ELEMENT));
-        inputGroupCustomUploadFile.fileInput.core().setClickArea(ACTION_CLICK);
+        //TODO REFACTOR
+        //inputGroupCustomUploadFile.fileInput.core().setClickArea(ACTION_CLICK);
     }
 
     @Test
@@ -64,8 +65,9 @@ public class InputGroupCustomFileInputTests extends TestsInit {
     @Test
     public void uploadRobotTest() {
         clearInput();
-        inputGroupCustomFileInput.fileInput.uploadFileRobot(mergePath(PROJECT_PATH,
-                "/src/test/resources/general.xml"), 1000L);
+        //TODO REFACTOR
+        //inputGroupCustomFileInput.fileInput.uploadFileRobot(mergePath(PROJECT_PATH,
+        //        "/src/test/resources/general.xml"), 1000L);
         inputGroupCustomFileInput.fileInput.is().text(containsString("general.xml"));
         inputGroupCustomFileInput.fileInput.is().value(containsString("general.xml"));
     }

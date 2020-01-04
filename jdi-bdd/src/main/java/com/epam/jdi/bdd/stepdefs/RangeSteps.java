@@ -17,14 +17,14 @@ public class RangeSteps {
 
     @When("^(?:I |)set \"([^\"]*)\" value to (\\d+)$")
     public void installTo(String name, int value) {
-        range(name).setVolume(value);
+        range(name).setupValue(value);
     }
-    @Then("^the \"([^\"]*)\" range volume less or equal to (\\d+)$")
+    @Then("^the \"([^\"]*)\" range value less or equal to (\\d+)$")
     public void rangeLessOrEqualTo(String name, int value) {
-        range(name).is().volume(lessThanOrEqualTo(value));
+        range(name).is().value(lessThanOrEqualTo(value));
     }
-    @Then("^the \"([^\"]*)\" range volume greater or equal to (\\d+)$")
+    @Then("^the \"([^\"]*)\" range value greater or equal to (\\d+)$")
     public void rangeGreaterOrEqualTo(String name, int value) {
-        range(name).is().volume(greaterThanOrEqualTo(value));
+        range(name).is().value(greaterThanOrEqualTo(value));
     }
 }

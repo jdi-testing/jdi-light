@@ -60,7 +60,7 @@ public class CardImageTests extends TestsInit {
         cardImage.text.is().text(is(TEXT));
         cardImage.image.is().src(is(SRC_ATTR_EXPECTED));
         cardImage.image.is().alt(is(ALT_ATTR_EXPECTED));
-        cardImage.image.unhighlight();
+        //cardImage.image.unhighlight();
         cardImage.image.assertThat().width(is(WIDTH));
         cardImage.image.assertThat().height(is(HEIGHT));
     }

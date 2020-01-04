@@ -7,12 +7,14 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
+import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,6 +46,7 @@ import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.PrintUtils.*;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
@@ -120,20 +123,30 @@ public class WebSettings {
     }
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
+    public static String printSmartLocators(IBaseElement el) {
+        try {
+            return "smart: " + print(SMART_SEARCH_LOCATORS, l -> String.format(l, SMART_SEARCH_NAME.execute(el.getName())), " or ");
+        } catch (Exception ex) {
+            return "Can't define smart locator";
+        }
+    }
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
         String locatorName = SMART_SEARCH_NAME.execute(el.getName());
         return el.base().timer().getResult(() -> {
             for (String template : SMART_SEARCH_LOCATORS) {
+                String locator = String.format(template, locatorName);
                 UIElement ui = (template.equals("#%s")
-                    ? $(String.format(template, locatorName))
-                    : $(String.format(template, locatorName), el.base().parent))
+                    ? $(locator)
+                    : $(locator, el.base().parent))
                         .setup(e -> e.setName(el.getName()).noWait());
                 try {
-                    return ui.getWebElement();
+                    WebElement result =  ui.getWebElement();
+                    el.base().setLocator(locator);
+                    return result;
                 } catch (Exception ignore) { }
             }
-            throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
+            throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
         });
     };
 

@@ -1,9 +1,11 @@
 package com.epam.jdi.light.ui.bootstrap.elements.common;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
-import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
+import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
  * To see an example of Breadcrumb web element please visit https://getbootstrap.com/docs/4.3/components/breadcrumb/
@@ -12,7 +14,17 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
  * Email: olga_ivanova@epam.com
  */
 
-public class Breadcrumb extends UIBaseElement<UIAssert>{
-    // @FindBy(css = ".breadcrumb-item")
-    @Css(".breadcrumb-item") public WebList items;
+public class Breadcrumb extends WebList {
+    @Override
+    public WebList list() {
+        return $$(".breadcrumb-item", this);
+    }
+    @Override
+    public String selected() {
+        return $(".active").getText();
+    }
+    @Override
+    public boolean selected(String option) {
+        return selected().equals(option);
+    }
 }

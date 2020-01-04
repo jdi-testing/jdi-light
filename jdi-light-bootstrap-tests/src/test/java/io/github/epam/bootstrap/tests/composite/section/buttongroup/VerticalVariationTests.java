@@ -61,7 +61,7 @@ public class VerticalVariationTests extends TestsInit {
     @Test
     public void dropdownMenuTests() {
         buttonGroupVerticalVariation.dropdownMenu.expand();
-        buttonGroupVerticalVariation.dropdownMenu.is().expanded();
+        //buttonGroupVerticalVariation.dropdownMenu.is().expanded();
         buttonGroupVerticalVariation.dropdownMenu.is().size(2);
         buttonGroupVerticalVariation.dropdownMenu.list().get(1).is().text(dropdownMenuLinkOne);
         buttonGroupVerticalVariation.dropdownMenu.list().get(2).is().text(dropdownMenuLinkTwo);

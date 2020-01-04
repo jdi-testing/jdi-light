@@ -18,7 +18,7 @@ public class ClickVerificationUtils {
         element.highlight();
         element.click();
         newWindowTitleCheck(pageTitle);
-        element.unhighlight();
+        //element.unhighlight();
     }
 
     public static void newWindowTitleCheck(String pageTitle) {

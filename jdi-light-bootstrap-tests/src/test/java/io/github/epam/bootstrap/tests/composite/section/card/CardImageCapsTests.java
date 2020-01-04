@@ -68,14 +68,14 @@ public class CardImageCapsTests extends TestsInit {
         cardImageOnTop.text.is().text(is(topCardData.getText()));
         cardImageOnTop.image.is().src(is(topCardData.getSrcAttr()));
         cardImageOnTop.image.is().alt(is(topCardData.getAltAttr()));
-        cardImageOnTop.image.unhighlight();
+        //cardImageOnTop.image.unhighlight();
         cardImageOnTop.image.assertThat().width(is(topCardData.getWidth()));
         cardImageOnTop.image.assertThat().height(is(topCardData.getHeight()));
 
         cardImageOnBottom.text.is().text(is(bottomCardData.getText()));
         cardImageOnBottom.image.is().src(is(bottomCardData.getSrcAttr()));
         cardImageOnBottom.image.is().alt(is(bottomCardData.getAltAttr()));
-        cardImageOnBottom.image.unhighlight();
+        //cardImageOnBottom.image.unhighlight();
         cardImageOnBottom.image.assertThat().width(is(bottomCardData.getWidth()));
         cardImageOnBottom.image.assertThat().height(is(bottomCardData.getHeight()));
 

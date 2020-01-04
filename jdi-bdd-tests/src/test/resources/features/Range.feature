@@ -30,8 +30,8 @@ Scenario: Validation Volume element test
   And the "Volume" attribute "min" equals to "10"
   And the "Volume" attribute "max" equals to "100"
   And the "Volume" attribute "step" equals to "5"
-  And the "Volume" range volume greater or equal to 10
-  And the "Volume" range volume less or equal to 100
+  And the "Volume" range value greater or equal to 10
+  And the "Volume" range value less or equal to 100
   And the "Volume" attribute "value" equals to "90"
 
 Scenario: Label Test

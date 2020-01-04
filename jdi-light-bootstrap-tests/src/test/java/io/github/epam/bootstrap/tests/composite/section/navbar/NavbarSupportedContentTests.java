@@ -21,7 +21,7 @@ public class NavbarSupportedContentTests extends TestsInit {
     private static final String navbarBrandText = "Navbar brand";
     private static final String bootstrapNavPageUrl = "https://getbootstrap.com/docs/4.3/components/navbar/#nav";
     private static final String jdiPageUrl = "https://github.com/jdi-testing/jdi-light/";
-    private static final String jdiBootstrapPageUrl = "https://jdi-testing.github.io/jdi-light/bootstrap.html#";
+    private static final String jdiBootstrapPageUrl = "https://jdi-testing.github.io/jdi-light/bootstrap-new.html#";
     private static final String activeLinkText = "Active link";
     private static final String jdiLinkText = "JDI Light";
     private static final String disabledLinkText = "Disabled link";
@@ -115,12 +115,12 @@ public class NavbarSupportedContentTests extends TestsInit {
 
     @Test(priority = 10)
     public void resizeLinkTest() {
-        WindowsManager.resizeWindow(900, 600);
+        //WindowsManager.resizeWindow(900, 600);
 
         navbarSupportedContent.navExpand.show();
         navbarSupportedContent.navExpand.click();
 
-        navbarSupportedContent.nav.is().expanded();
+        //navbarSupportedContent.nav.is().expanded();
 
         navbarSupportedContent.nav.list().select("Active link");
         WindowsManager.switchToWindow(2);
@@ -137,12 +137,12 @@ public class NavbarSupportedContentTests extends TestsInit {
 
     @Test(dataProvider = "collapseLinkTextData", priority = 11)
     public void collapseLinkTextTest(String linkText) {
-        WindowsManager.resizeWindow(900, 600);
+        //WindowsManager.resizeWindow(900, 600);
 
         navbarSupportedContent.navExpand.show();
         navbarSupportedContent.navExpand.click();
 
-        navbarSupportedContent.nav.is().expanded();
+        //navbarSupportedContent.nav.is().expanded();
 
         assertTrue(navbarSupportedContent.nav.list().values().contains(linkText));
     }

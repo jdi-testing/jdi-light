@@ -105,7 +105,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             return elements.get();
         if (locator.isTemplate())
             throw exception("You call method that can't be used with template locator. " +
-                "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator()));
+                "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator(), this));
         MultiMap<String, UIElement> result = getListElements(minAmount);
         if (elements.isUseCache())
             elements.set(result);

@@ -55,7 +55,7 @@ public class SimpleFormTests extends TestsInit {
     @Test
     public void clearFormTest() {
         setDefaultValues();
-        supportMessageForm.clear(EXAMPLE_MESSAGE);
+        //supportMessageForm.clear(EXAMPLE_MESSAGE);
         lastLogEntry.has().text(containsString(logLineClear));
     }
 

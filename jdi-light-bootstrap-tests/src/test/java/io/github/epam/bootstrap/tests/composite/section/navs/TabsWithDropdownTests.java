@@ -87,11 +87,11 @@ public class TabsWithDropdownTests extends TestsInit {
         navsTabsWithDropdown.dropdownMenu
                 .is()
                 .displayed()
-                .expanded()
+                //.expanded()
                 .enabled();
         navsTabsWithDropdown.dropdownMenu
                 .is()
-                .expanded()
+                //.expanded()
                 .size(4)
                 .core()
                 .attr("data-toggle", "dropdown")

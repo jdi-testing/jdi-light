@@ -14,7 +14,7 @@ public class DropdownMenuContent extends DropdownMenu {
     @UI(".dropdown-divider")
     public UIElement divider;
 
-    @UI("p")
-    public JList<Text> text;
+    //@UI("p")
+    //public JList<Text> text;
 
 }

@@ -77,7 +77,7 @@ public class IconsTests extends TestsInit {
         paginationIcons.paginationItems.get(index).highlight();
         paginationIcons.paginationItems.get(index).click();
         newWindowTitleCheck(pageTitle);
-        paginationIcons.paginationItems.get(index).unhighlight();
+        //paginationIcons.paginationItems.get(index).unhighlight();
     }
 
     private void newWindowTitleCheck(String pageTitle) {

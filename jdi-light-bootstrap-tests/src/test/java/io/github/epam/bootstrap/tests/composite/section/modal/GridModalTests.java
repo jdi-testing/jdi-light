@@ -37,7 +37,7 @@ public class GridModalTests extends TestsInit {
                         e -> {
                             e.highlight();
                             baseValidation(e);
-                            e.unhighlight();
+                            //e.unhighlight();
                         }
                 );
     }
@@ -51,7 +51,7 @@ public class GridModalTests extends TestsInit {
                         e -> {
                             e.highlight();
                             baseValidation(e);
-                            e.unhighlight();
+                            //e.unhighlight();
                         }
                 );
     }
@@ -75,7 +75,7 @@ public class GridModalTests extends TestsInit {
         cell.is().core().text(textExpected)
                 .and()
                 .css("max-width", startsWith(max_width));
-        cell.unhighlight();
+        //cell.unhighlight();
     }
 
     @Test
@@ -112,9 +112,9 @@ public class GridModalTests extends TestsInit {
         baseValidation(gridModalSection.getGridModalWindow().getBtnCloseX());
         baseValidation(gridModalSection.getGridModalWindow().getTitle());
 
-        gridModalSection.getGridModalWindow().getTitle().unhighlight();
-        gridModalSection.getGridModalWindow().getBtnCloseX().unhighlight();
-        gridModalSection.getGridModalWindow().getBtnSave().unhighlight();
-        gridModalSection.getGridModalWindow().getBtnClose().unhighlight();
+        //gridModalSection.getGridModalWindow().getTitle().unhighlight();
+        //gridModalSection.getGridModalWindow().getBtnCloseX().unhighlight();
+        //gridModalSection.getGridModalWindow().getBtnSave().unhighlight();
+        //gridModalSection.getGridModalWindow().getBtnClose().unhighlight();
     }
 }

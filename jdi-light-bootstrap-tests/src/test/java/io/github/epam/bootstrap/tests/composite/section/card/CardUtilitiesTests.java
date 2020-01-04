@@ -75,7 +75,7 @@ public class CardUtilitiesTests extends TestsInit {
     @Test(dataProvider = "cardUtilitiesElements")
     public void baseValidationTest(CardUtilities cardUtilitiesElem) {
         baseValidation(cardUtilitiesElem);
-        cardUtilitiesElem.unhighlight();
+        //cardUtilitiesElem.unhighlight();
     }
 
     @Test(dataProvider = "cardUtilitiesElementsWithWidth")

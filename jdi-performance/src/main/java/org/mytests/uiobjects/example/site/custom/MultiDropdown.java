@@ -31,14 +31,14 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
     By valuesConatiner = By.tagName("ul");
 
     UIElement root() { return $(By.xpath(".."),this).setName("root"); }
-    UIElement expander() { return root().find(expandArrow).setName("expandArrow"); }
-    UIElement valuesList() { return root().find(valuesConatiner).setName("valuesContainer"); }
+    UIElement expander() { return root().$(expandArrow).setName("expandArrow"); }
+    UIElement valuesList() { return root().$(valuesConatiner).setName("valuesContainer"); }
     UIElement value(String name) {
-        return root().find(fillByTemplate(valueTemplate, name)).setName("valueTemplate");
+        return root().$(fillByTemplate(valueTemplate, name)).setName("valueTemplate");
     }
-    UIElement valueText() { return root().find(value).setName("value"); }
+    UIElement valueText() { return root().$(value).setName("value"); }
     List<UIElement> allValues() {
-        return root().finds(values);
+        return root().$$(values);
     }
 
     @JDIAction(level = DEBUG)
@@ -90,7 +90,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
         List<String> listNames = map(names, String::trim);
         for (String name : values()) {
             UIElement value = value(name);
-            boolean valueSelected = value.find("input").setup(JDIBase::noValidation)
+            boolean valueSelected = value.$("input").setup(JDIBase::noValidation)
                 .isSelected();
             if (valueSelected && !listNames.contains(name.trim())
                     || !valueSelected && listNames.contains(name.trim()))

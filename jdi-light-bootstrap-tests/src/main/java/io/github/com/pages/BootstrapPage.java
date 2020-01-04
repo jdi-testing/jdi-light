@@ -5,32 +5,17 @@ import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Alert;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Breadcrumb;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Checkbox;
-import com.epam.jdi.light.ui.bootstrap.elements.common.MultipleInputs;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
-import com.epam.jdi.light.ui.bootstrap.elements.common.SelectMenu;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Spinner;
-import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
+import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithBadge;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.MultipleProgressBars;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Link;
-import com.epam.jdi.light.ui.html.elements.common.Range;
-import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
-import io.github.com.sections.ButtonAddons;
-import io.github.com.sections.InputFileSection;
-import io.github.com.sections.Jumbotron;
-import io.github.com.sections.MediaObjectNesting;
-import io.github.com.sections.MediaObjectSample;
+import com.epam.jdi.light.ui.html.elements.common.*;
+import com.epam.jdi.light.ui.html.elements.common.Checkbox;
+import io.github.com.sections.*;
 import io.github.com.sections.toast.Toast;
 import io.github.com.sections.buttongroup.ButtonGroupBasic;
 import io.github.com.sections.buttongroup.ButtonGroupNesting;
@@ -146,10 +131,12 @@ public class BootstrapPage extends WebPage {
     public static Button doubleButton;
     public static Button disabledButton;
 
-    @UI("//input[contains(@class, 'progress-change plus')]")
-    public static Button plus;
-    @UI("//input[contains(@class, 'progress-change minus')]")
-    public static Button minus;
+    @UI("[type=button][value='+']") public static Button increaseProgress;
+    @UI("[type=button][value='-']") public static Button decreaseProgress;
+    @UI("[type=button][value='reset']") public static Button resetProgress;
+    public static Progress progressbar;
+    public static Progress multiProgressbars;
+
     @UI("#jumbotron-fluid")
     public static Jumbotron jumbotronFluid;
     @UI("#jumbotron")
@@ -206,16 +193,11 @@ public class BootstrapPage extends WebPage {
     public static DropdownMenuContent dropdownMenuContentDivider;
     @UI("#dropdown-content-text")
     public static DropdownMenuContent dropdownMenuContentText;
-    @UI("#offsetDropdown")
     public static DropdownMenu offsetDropdown;
-    @UI("#referenceDropdown")
     public static DropdownMenu referenceDropdown;
-    @UI("#dropdownForm")
     public static DropdownForm dropdownForm;
-    @UI("#simple-alert")
     public static Alert simpleAlert;
-    @UI("#dismissible-alert")
-    public static Alert dismissibleAlert;
+    public static DismissAlert dismissibleAlert;
     @UI("#badge-secondary")
     public static Text badgeSecondary;
     @UI("#badge-success")
@@ -252,42 +234,16 @@ public class BootstrapPage extends WebPage {
     public static Tooltip wrapperForDisabledButton;
     @UI("#tooltipOnDisabledButton")
     public static Tooltip tooltipOnDisabledButton;
-    @UI("#progress-bar-base-width-0")
-    public static Progress progressBaseProgress0;
-    @UI("#progress-bar-base-width-0 .progress-bar")
-    public static Progress progressBaseWidth0;
-    @UI("#progress-bar-base-width-25 .progress-bar")
-    public static Progress progressBaseWidth25;
-    @UI("#progress-bar-base-width-50 .progress-bar")
-    public static Progress progressBaseWidth50;
-    @UI("#progress-bar-base-width-75 .progress-bar")
-    public static Progress progressBaseWidth75;
-    @UI("#progress-bar-base-width-100 .progress-bar")
-    public static Progress progressBaseWidth100;
-    @UI("#progress-animated")
-    public static Progress progressAnimated;
-    @UI("#progress-with-labels")
-    public static Progress progressWithLabels;
-    @UI("#progress-backgrounds-green")
-    public static Progress progressBackgroundGreen;
-    @UI("#progress-backgrounds-blue")
-    public static Progress progressBackgroundBlue;
-    @UI("#progress-backgrounds-yellow")
-    public static Progress progressBackgroundYellow;
-    @UI("#progress-backgrounds-red")
-    public static Progress progressBackgroundRed;
-    @UI("#progress-multiple-bars")
-    public static MultipleProgressBars multipleProgressBars;
 
     @UI("//h4[.='Navbar - Containers']/../..")
     public static NavbarContainer navbarContainers;
     @UI("//h4[.='Navbar - Nav']/../..")
     public static NavbarNav navbarNav;
 
-    @UI("#button-show-spinner-border")
-    public static Button buttonSpinnerBorder;
-    @UI("#spinner-border")
-    public static Spinner spinnerBorder;
+    public static Button startButton;
+    public static Spinner spinnerLoading;
+    @UI("#spinner-rotate")public static Loading spinnerRotate;
+
     @UI("#forms-readonly-input")
     public static TextField readonlyInput;
     @UI("#readonlyPlainText1")
@@ -703,7 +659,7 @@ public class BootstrapPage extends WebPage {
     //region Modals
     @UI("#grid-modal-base")
     public static GridModalSection gridModalSection;
-    @UI("#modal-scroll-long")
+    //@UI("#modal-scroll-long")
     public static SectionModalLongScrolling sectionModalLongScrolling;
     @UI("#modal-live-demo .bd-example .btn")
     public static Button modalLiveDemoLaunchButton;

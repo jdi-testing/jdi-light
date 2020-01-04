@@ -28,26 +28,26 @@ public class DropdownMenuItemsTest extends TestsInit {
     @Test
     public void baseValidationTest() {
         baseValidation(dropdownMenuItems);
-        dropdownMenuItems.unhighlight();
+        //dropdownMenuItems.unhighlight();
 
         dropdownMenuItems.expand();
         baseValidation(dropdownMenuItems.expander());
-        dropdownMenuItems.expander().unhighlight();
+        //dropdownMenuItems.expander().unhighlight();
         for (UIElement item : dropdownMenuItems.list()) {
             baseValidation(item);
-            item.unhighlight();
+            //item.unhighlight();
         }
         dropdownMenuItems.collapse();
 
         baseValidation(dropdownMenuTextItem);
-        dropdownMenuTextItem.unhighlight();
+        //dropdownMenuTextItem.unhighlight();
 
         dropdownMenuTextItem.expand();
         baseValidation(dropdownMenuTextItem.expander());
-        dropdownMenuTextItem.expander().unhighlight();
+        //dropdownMenuTextItem.expander().unhighlight();
         for (UIElement item : dropdownMenuTextItem.list()) {
             baseValidation(item);
-            item.unhighlight();
+           // item.unhighlight();
         }
         dropdownMenuTextItem.collapse();
     }
@@ -79,8 +79,6 @@ public class DropdownMenuItemsTest extends TestsInit {
                 .tag("span");
 
         textItem.waitSec(1);
-        textItem.assertThat()
-                .hasAttr("href");
     }
 
     @DataProvider(name = "linksDataProvider")

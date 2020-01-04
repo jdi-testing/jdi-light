@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.tools.map.MapArray;
+import org.openqa.selenium.Dimension;
 
 import java.util.Set;
 
@@ -119,5 +120,14 @@ public class WindowsManager {
     public static void closeWindow(String value) {
         switchToWindow(value);
         closeWindow();
+    }
+    /**
+     * Resize window according to specified width and height
+     * @param width - window width
+     * @param height - window height
+     */
+    @JDIAction("Resize window '{0}'")
+    public static void resizeWindow(int width, int height) {
+        getDriver().manage().window().setSize(new Dimension(width, height));
     }
 }
