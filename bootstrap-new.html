@@ -1745,8 +1745,8 @@
                         <div class="html-left">
                             <br>
                             <p>progress bar</p>
-                            <input type="button" onclick="increase_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="-">
-                            <input type="button" onclick="decrease_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="+">
+                            <input type="button" onclick="decrease_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="-">
+                            <input type="button" onclick="increase_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="+">
 						    <input type="button" onclick="reset_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="reset">
                             <div id="progressbar" class="progress">
                                 <div class="progress-bar" role="progressbar"
@@ -7079,73 +7079,37 @@ $(function(){
 </script>
 
 <script>
+
+function progress_element() {
+	return $("#progressbar .progress-bar");
+} 
+function now_value() {
+	return parseInt(progress_element().attr('aria-valuenow'));
+} 
 function increase_progress() {
-	let now = $('#progressbar').attr('aria-valuenow');
-	if (now < 100) {
-		progress_change(now + 5);
+    let now = now_value();
+	if (now_value() < 100) {
+		change_progress(now_value() + 5);
 	} 
 }
 function decrease_progress() {
-	let now = $('#progressbar').attr('aria-valuenow');
-	if (now > 0) {
-		progress_change(now + 5);
+	if (now_value() > 0) {
+		change_progress(now_value() - 5);
 	} 
 }
 function reset_progress() {
-	progress_change(25);
+	change_progress(25);
 }
-function progress_change(changeTo) {
-	let now = $('#progressbar').attr('aria-valuenow');
-	let step = (now > changeTo) ? -1 : 1;
+function change_progress(changeTo) {
+	let now = now_value();
+	let step = now > changeTo ? -1 : 1;
 	while (now != changeTo) {
-		clearInterval(interval);
-		interval = setTimeout(function () {
-			$('#progressbar').attr('aria-valuenow', now + step);
-			progress_change();
-		}, 30); 
-		now = $('progressbar').attr('aria-valuenow');
+		now = now + step;
+		progress_element().attr('aria-valuenow', now);
+		progress_element().text(now + '%');
+		progress_element().width(now + '%');
 	}
 }
-</script>
-
-<script>
-        var progress_val = parseInt($('#progress-with-labels').attr('aria-valuenow'));
-        var progress_max = $('#progress-with-labels').attr('aria-valuemax');
-        var interval = null;
-        $('.progress-change').on('click', function () {
-            if ($(this).hasClass('minus') && progress_val > 0) {
-                progress_val -= 5;
-            } 
-			if ($(this).hasClass('plus') && progress_val < 100) {
-                progress_val += 5;
-            }
-			if ($(this).hasClass('reset')) {
-                progress_val = 25;
-            }
-            $('#progress-with-labels').text(progress_val + '%');
-            $('#progress-with-labels').width(progress_val + '%');
-            $('#progress-with-labels').attr('aria-valuenow', progress_val);
-
-            progress_change();
-        });
-
-
-        function progress_change() {
-
-            var step = 1;
-
-            if ($('#progress-with-labels').attr('aria-valuenow') > progress_val) {
-                step = -1;
-            }
-
-            if ($('#progress-with-labels').attr('aria-valuenow') != progress_val) {
-                clearInterval(interval);
-                interval = setTimeout(function () {
-                    $('#progress-with-labels').attr('aria-valuenow', ($('.progress-bar').attr('aria-valuenow') + step));
-                    progress_change();
-                }, 30);  // чем выше значение, тем медленнее заполняется прогресс
-            }
-        }
 </script>
 
 </body>
