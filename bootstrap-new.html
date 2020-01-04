@@ -1745,11 +1745,11 @@
                         <div class="html-left">
                             <br>
                             <p>progress bar</p>
-                            <input type="button" style="margin-bottom: 5px;" class="progress-change minus btn btn-primary btn-sm" value="-">
-                            <input type="button" style="margin-bottom: 5px;" class="progress-change plus btn btn-primary btn-sm" value="+">
-						    <input type="button" style="margin-bottom: 5px;" class="progress-change reset btn btn-primary btn-sm" value="reset">
-                            <div class="progress">
-                                <div id="progressbar" class="progress-bar" role="progressbar"
+                            <input type="button" onclick="increase_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="-">
+                            <input type="button" onclick="decrease_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="+">
+						    <input type="button" onclick="reset_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="reset">
+                            <div id="progressbar" class="progress">
+                                <div class="progress-bar" role="progressbar"
                                      style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
                                 </div>
                             </div>
@@ -7076,6 +7076,36 @@ $(function(){
 <script>
 		includeSideBar();
 		activateTopElement(5,3);
+</script>
+
+<script>
+function increase_progress() {
+	let now = $('#progressbar').attr('aria-valuenow');
+	if (now < 100) {
+		progress_change(now + 5);
+	} 
+}
+function decrease_progress() {
+	let now = $('#progressbar').attr('aria-valuenow');
+	if (now > 0) {
+		progress_change(now + 5);
+	} 
+}
+function reset_progress() {
+	progress_change(25);
+}
+function progress_change(changeTo) {
+	let now = $('#progressbar').attr('aria-valuenow');
+	let step = (now > changeTo) ? -1 : 1;
+	while (now != changeTo) {
+		clearInterval(interval);
+		interval = setTimeout(function () {
+			$('#progressbar').attr('aria-valuenow', now + step);
+			progress_change();
+		}, 30); 
+		now = $('progressbar').attr('aria-valuenow');
+	}
+}
 </script>
 
 <script>
