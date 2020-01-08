@@ -43,7 +43,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList, HasAssert<UISelectAssert<UISelectAssert, WebList>> {
+public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList, HasAssert<UISelectAssert<UISelectAssert<?, ?>, WebList>> {
     @Override
     public WebList list() { return this; }
     public UIElement core() {
@@ -490,16 +490,16 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public void show() {
         get(0).show();
     }
-    public UISelectAssert<UISelectAssert, WebList> is() {
+    public UISelectAssert<UISelectAssert<?,?>, WebList> is() {
         refresh();
         return new UISelectAssert<>().set(this);
     }
     @JDIAction("Assert that {name} list meet condition")
-    public UISelectAssert<UISelectAssert, WebList> is(Matcher<? super List<UIElement>> condition) {
+    public UISelectAssert<UISelectAssert<?,?>, WebList> is(Matcher<? super List<UIElement>> condition) {
         MatcherAssert.assertThat(this, condition);
         return is();
     }
-    public UISelectAssert<UISelectAssert, WebList> assertThat(Matcher<? super List<UIElement>> condition) {
+    public UISelectAssert<UISelectAssert<?,?>, WebList> assertThat(Matcher<? super List<UIElement>> condition) {
         return is(condition);
     }
     //endregion

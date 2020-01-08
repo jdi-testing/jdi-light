@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.settings.WebSettings;
@@ -201,7 +202,7 @@ public class PageFactory {
     //endregion
 
     public static List<Class<?>> STOP_INIT_CLASSES = asList(
-        Object.class, WebPage.class, Section.class, UIElement.class,
+        Object.class, WebPage.class, PageObject.class, UIElement.class,
             UIBaseElement.class, UIListBase.class,
             DataList.class, JList.class, WebList.class);
 

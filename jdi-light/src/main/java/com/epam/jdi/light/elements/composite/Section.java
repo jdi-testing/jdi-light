@@ -11,8 +11,6 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
  * Created by Roman Iovlev on 29.03.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class Section extends UIBaseElement<UIAssert> implements PageObject, IListBase {
-    public Section() {
-        initElements(this);
-    }
+public class Section extends UIBaseElement<UIAssert<?,?>> implements PageObject, IListBase {
+    public Section() { initElements(this); }
 }

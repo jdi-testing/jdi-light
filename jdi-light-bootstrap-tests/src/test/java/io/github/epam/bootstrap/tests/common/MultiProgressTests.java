@@ -11,6 +11,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+//APPROVED
 public class MultiProgressTests extends TestsInit {
     @BeforeMethod
     public void before() {
@@ -20,36 +21,36 @@ public class MultiProgressTests extends TestsInit {
 
     @Test
     public void getValueTest() {
-        assertThat(multiProgressbars.value(), is("15$;45$;30$"));
+        assertThat(multiProgressbar.value(), is("15$;45$;30$"));
     }
     @Test
     public void valuesTest() {
-        assertThat(multiProgressbars.values(), hasItems("15$", "45$", "30$"));
+        assertThat(multiProgressbar.values(), hasItems("15$", "45$", "30$"));
     }
     @Test
     public void minTest() {
-        assertThat(multiProgressbars.min(), is(0));
+        assertThat(multiProgressbar.min(), is(0));
     }
     @Test
     public void maxTest() {
-        assertThat(multiProgressbars.max(), is(150));
+        assertThat(multiProgressbar.max(), is(150));
     }
     @Test
     public void isValidationTest() {
-        multiProgressbars.is().displayed().enabled().value("15$;45$;30$");
-        multiProgressbars.assertThat().min(0).and().max(150);
-        multiProgressbars.has().min(lessThan(10))
+        multiProgressbar.is().displayed().enabled().value("15$;45$;30$");
+        multiProgressbar.assertThat().min(0).and().max(150);
+        multiProgressbar.has().min(lessThan(10))
             .and().max(greaterThan(140))
             .and().value(containsString("45$;30$"));
     }
     @Test
     public void isValuesValidationTest() {
-        multiProgressbars.has().values("15$", "45$", "30$");
-        multiProgressbars.assertThat().values(hasItems("15$", "30$"));
+        multiProgressbar.has().values("15$", "45$", "30$");
+        multiProgressbar.assertThat().values(hasItems("15$", "30$"));
     }
 
     @Test
     public void baseValidationTest() {
-        baseValidation(multiProgressbars);
+        baseValidation(multiProgressbar);
     }
 }

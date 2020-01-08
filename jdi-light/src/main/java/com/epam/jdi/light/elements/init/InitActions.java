@@ -14,6 +14,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.tools.LinqUtils;
@@ -84,7 +85,7 @@ public class InitActions {
             InitActions::elementSetup)),
         $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
-        $("PageObject", sRule(info -> !isClassOr(info.type(), WebPage.class, Section.class) &&
+        $("PageObject", sRule(info -> !isClassOr(info.type(), WebPage.class, PageObject.class) &&
                 isPageObject(info.instance.getClass()),
             PageFactory::initElements)),
         $("VisualCheck", sRule(
@@ -174,7 +175,7 @@ public class InitActions {
             isInterface(field, ICoreElement.class) ||
             isListOf(field, WebElement.class) ||
             isListOf(field, ICoreElement.class) ||
-            isListOf(field, Section.class);
+            isListOf(field, PageObject.class);
     }
     public static boolean isPageObject(Class<?> type) {
         return isClass(type, Section.class) || isClass(type, WebPage.class) ||

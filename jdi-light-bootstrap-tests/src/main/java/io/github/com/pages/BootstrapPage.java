@@ -135,14 +135,13 @@ public class BootstrapPage extends WebPage {
     @UI("[type=button][value='-']") public static Button decreaseProgress;
     @UI("[type=button][value='reset']") public static Button resetProgress;
     public static Progress progressbar;
-    public static Progress multiProgressbars;
+    public static Progress multiProgressbar;
+    public static Breadcrumb breadcrumb;
 
     @UI("#jumbotron-fluid")
     public static Jumbotron jumbotronFluid;
     @UI("#jumbotron")
     public static Jumbotron jumbotron;
-    @UI("#breadcrumb")
-    public static Breadcrumb breadcrumb;
     @UI("#simpleDropdown")
     public static DropdownMenu simpleDropdown;
     @UI("#linkDropdown")

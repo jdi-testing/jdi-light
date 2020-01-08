@@ -1,11 +1,12 @@
 package com.epam.jdi.light.ui.bootstrap.elements.common;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.elements.base.UIListBase;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.tools.map.MultiMap;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 /**
  * To see an example of Breadcrumb web element please visit https://getbootstrap.com/docs/4.3/components/breadcrumb/
@@ -16,15 +17,23 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 public class Breadcrumb extends WebList {
     @Override
-    public WebList list() {
-        return $$(".breadcrumb-item", this);
+    public MultiMap<String, UIElement> elements(int minAmount) {
+        return $$(".breadcrumb-item", this).elements(minAmount);
+    }
+    @JDIAction(level = DEBUG) @Override
+    public UIElement get(int index) {
+        return elements(index+1).get(index).value;
     }
     @Override
     public String selected() {
-        return $(".active").getText();
+        return first(el -> el.hasClass("active")).getText();
     }
     @Override
     public boolean selected(String option) {
         return selected().equals(option);
+    }
+    @Override
+    public int size() {
+        return elements(0).size();
     }
 }

@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.InitActions;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
@@ -33,7 +34,7 @@ import static java.util.Arrays.asList;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, DataTableAssert<L, D>> {
+public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D>, DataTableAssert<L, D>> {
     private Class<L> lineClass;
     private Class<D> dataClass;
 
@@ -43,7 +44,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
         = new CacheAll<>(MapArray::new);
 
     private void hasLineClass() {
-        if (lineClass == null || !isClass(lineClass, Section.class))
+        if (lineClass == null || !isClass(lineClass, PageObject.class))
             throw exception("In order to use this method you must specify LineClass that extends Section for '%s' DataTable<LineClass, ?>", getName());
     }
     private void hasDataClass() {

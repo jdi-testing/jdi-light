@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.common.WindowsManager;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
@@ -29,6 +30,7 @@ import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.LogLevels.*;
@@ -161,7 +163,11 @@ public class WebPage extends DriverBase implements PageObject {
                         ? MessageFormat.format(url, params)
                         : url + "?" + print(map(params, Object::toString), "&");
     }
-
+    @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}') in new window")
+    public void checkOpenedInNewWindow() {
+        checkNewWindowIsOpened();
+        checkOpened();
+    }
     /**
      * Check that page opened
      */

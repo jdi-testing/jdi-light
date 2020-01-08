@@ -1,7 +1,9 @@
 package io.github.com;
 
 import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
+import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -14,6 +16,7 @@ import io.github.com.pages.BootstrapPage;
 @SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
+	@Url("/index.html") @Title("Home Page") public static WebPage homePage;
 	@Url("/bootstrap-new.html")
 	public static BootstrapPage bsPage;
 	@Url("/bootstrap_forms.html")
