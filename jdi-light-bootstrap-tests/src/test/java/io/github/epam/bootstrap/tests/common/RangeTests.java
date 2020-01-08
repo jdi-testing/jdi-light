@@ -19,6 +19,7 @@ public class RangeTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        range2.show();
     }
 
     @Test

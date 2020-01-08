@@ -17,6 +17,7 @@ public class MultiProgressTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        multiProgressbar.show();
     }
 
     @Test

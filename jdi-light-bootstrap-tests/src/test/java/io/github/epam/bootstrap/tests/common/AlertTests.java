@@ -27,6 +27,7 @@ public class AlertTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        simpleAlert.show();
     }
     @Test
     public void simpleAlertExistingTest() {

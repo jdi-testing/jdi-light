@@ -1,17 +1,12 @@
 package com.epam.jdi.light.ui.bootstrap.elements.common;
 
-import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.ui.bootstrap.asserts.BSProgressAssert;
-import com.epam.jdi.light.ui.html.asserts.ProgressAssert;
-import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.TextTypes.TEXT;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -20,6 +15,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
  * To see an example of bootstrap Progress bar please visit https://getbootstrap.com/docs/4.3/components/progress/
  */
 
+//APPROVED
 public class Progress extends UIBaseElement<BSProgressAssert> implements HasValue {
     // region Actions
     @JDIAction(value = "Get '{name}' max limit", level = DEBUG)

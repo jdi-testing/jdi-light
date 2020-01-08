@@ -10,6 +10,7 @@ import static io.github.com.pages.BootstrapPage.simpleAlert;
 import static io.github.com.pages.DocsPage.facebookLink;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
+// QUESTIONS: What is this about?
 public class MultipleDomainsExampleTest extends MultipleDomainsTestInit {
 
     @BeforeMethod

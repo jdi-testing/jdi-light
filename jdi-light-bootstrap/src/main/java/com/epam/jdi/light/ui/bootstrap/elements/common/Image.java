@@ -14,6 +14,7 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
  * To see an example of Image in bootstrap please visit https://getbootstrap.com/docs/4.3/content/images/
  */
 
+// QUESTIONS: Why we need this class in Bootstrap while have the same in html? - remove
 public class Image extends UIBaseElement<ImageAssert>
         implements HasClick, HasValue {
     //TODO REFACTOR REMOVE CLASS

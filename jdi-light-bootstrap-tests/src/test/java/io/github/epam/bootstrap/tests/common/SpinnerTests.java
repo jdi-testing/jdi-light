@@ -15,6 +15,7 @@ public class SpinnerTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        spinnerLoading.show();
         spinnerLoading.waitFor().hidden();
     }
     @Test

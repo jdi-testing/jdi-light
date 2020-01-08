@@ -17,6 +17,7 @@ public class ProgressTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        progressbar.show();
         resetProgress.click();
     }
 

@@ -10,6 +10,8 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
  * To see an example of Select Menu web element please visit https://getbootstrap.com/docs/4.3/components/forms/#select-menu
  */
 
+//QUESTIONS: Why not in complex
+//QUESTIONS: SelectMenu and MultiSelect should be two different elements
 public class SelectMenu extends Section implements ISelector {
 
     @UI("option")

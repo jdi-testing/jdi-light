@@ -35,6 +35,9 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
     public IsAssert attr(String attrName, String value) {
         return attr(attrName, Matchers.is(value));
     }
+    public IsAssert attr(String attrName) {
+        return attr(attrName, Matchers.not(Matchers.is("")));
+    }
 
     /**
      * Match passed value with the element css

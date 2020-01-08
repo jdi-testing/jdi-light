@@ -15,6 +15,7 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
  * Email: olga_ivanova@epam.com
  */
 
+//APPROVED
 public class Breadcrumb extends WebList {
     @Override
     public MultiMap<String, UIElement> elements(int minAmount) {

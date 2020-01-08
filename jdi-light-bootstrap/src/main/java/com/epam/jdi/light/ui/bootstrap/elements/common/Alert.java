@@ -16,6 +16,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
  * To see an example of Alert web element please visit https://getbootstrap.com/docs/4.3/components/alerts/
  */
 
+//APPROVED
 public class Alert extends UIBaseElement<TextAssert> implements PageObject, IListBase, IsText, HasValue, HasAssert<TextAssert> {
     public Alert() { initElements(this); }
     public String getValue() { return getText(); }
