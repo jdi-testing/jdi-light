@@ -20,9 +20,8 @@ public class MultiDropdownExampleTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        multiDropdown.check(text);
+        multiDropdown.check("Steam");
     }
-    String text = "Steam";
 
     @Test
     public void selectTest() {
@@ -48,8 +47,8 @@ public class MultiDropdownExampleTests implements TestsInit {
     public void isValidationTest() {
         multiDropdown.is().selected("Steam");
         multiDropdown.is().selected(Steam);
-        multiDropdown.assertThat().values(hasItem("Wood"));
-        multiDropdown.shouldBe().value("Wood");
+        multiDropdown.assertThat().values(hasItem("Steam"));
+        multiDropdown.shouldBe().value("Steam");
         multiDropdown.assertThat().disabled(hasItem("Disabled"))
                 .enabled(not(hasItem("Disabled")))
                 .enabled(hasItems("Electro", "Metalic"));

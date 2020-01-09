@@ -19,13 +19,12 @@ public class ComboboxExampleTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        iceCreamIs.select(text);
+        iceCreamIs.select("Coconut");
     }
-    String text = "Coconut";
 
     @Test
     public void getTextTest() {
-        iceCreamIs.is().text(text);
+        iceCreamIs.is().text("Coconut");
     }
 
     @Test
@@ -63,9 +62,9 @@ public class ComboboxExampleTests implements TestsInit {
         iceCreamIs.listEnabled();
         iceCreamIs.assertThat().equals(asList("Chocolate", "Strawberry"));
         iceCreamIs.is().enabled();
-        iceCreamIs.is().text(text);
-        iceCreamIs.is().selected(text);
-        iceCreamIs.is().selected(is(text));
+        iceCreamIs.is().text("Coconut");
+        iceCreamIs.is().selected("Coconut");
+        iceCreamIs.is().selected(is("Coconut"));
         iceCreamIs.select(Vanilla);
         iceCreamIs.is().text(containsString("Van"));
     }
