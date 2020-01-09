@@ -36,7 +36,11 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     public WebList list() {
         return linkedList(listLocator, "list").setUIElementName(INNER);
     }
-
+    @Override
+    public int size() {
+        WebList list = new WebList(base(), listLocator, "list", this);
+        return list.noValidation().size();
+    }
     public void toggle() {
         expander().click();
     }
@@ -112,5 +116,4 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     public boolean isEnabled() {
         return value().isEnabled();
     }
-
 }

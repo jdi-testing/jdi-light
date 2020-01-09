@@ -58,7 +58,6 @@ public class DropdownExampleTests implements TestsInit {
 
     @Test
     public void dropdownTestSize() {
-        colors2.expand();
         colors2.assertThat().notEmpty();
         colors2.assertThat().size(5);
     }
