@@ -186,7 +186,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     private void validateColumnIndex(int colNum) {
         if (colNum < 1)
             throw exception("Columns numeration starts from 1 (but requested index is %s)", colNum);
-        if (colNum > count.get())
+        if (colNum > size.get())
             throw exception("Table has %s columns (but requested index is %s)", size.get(), colNum);
     }
     public WebList webColumn(String colName) {
