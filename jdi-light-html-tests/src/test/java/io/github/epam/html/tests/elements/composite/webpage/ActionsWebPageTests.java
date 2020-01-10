@@ -26,15 +26,24 @@ public class ActionsWebPageTests implements TestsInit {
     }
 
     @Test
+    public void checkUrlPageTest() {
+        contactFormPage.url().check();
+    }
+
+    @Test
     public void getTitleTest() {
         Assert.assertEquals(WebPage.getTitle(), "Contact Form");
+    }
+
+    @Test
+    public void checkTitlePageTest() {
+        contactFormPage.title().check();
     }
 
     @Test
     public void checkOpenedTest() {
         contactFormPage.checkOpened();
     }
-
 
     @Test
     public void isOpenedTest() {
