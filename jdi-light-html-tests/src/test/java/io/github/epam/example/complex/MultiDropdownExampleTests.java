@@ -29,6 +29,7 @@ public class MultiDropdownExampleTests implements TestsInit {
         multiDropdown.checked().equals(asList("Electro", "Metalic"));
         multiDropdown.is().selected("Electro");
         multiDropdown.uncheck("Metalic");
+        multiDropdown.checked().equals(asList("Electro"));
     }
 
     @Test
