@@ -361,11 +361,10 @@ Textarea with sizing and wrap attribute (try values of hard, soft, and off to se
                     <div class="doc-space line">
                         <div class="html-left">
                             <label for="volume">Volume</label>
-                            <input type="text" disabled id="volume-value"/> <br>
+                            <input type="text" disabled id="volume-value" class="range-value" value="90"/> <br>
                             <span>10</span>
-                            <input type="range" id="volume"
-                                   min="10" max="100" value="90" step="5" class="range" list="volume-list"
-                                   oninput="showVal(this.value)" onchange="showVal(this.value)"/>
+                            <input type="range" id="volume" min="10" max="100" value="90" step="5" class="range" list="volume-list"
+                                   oninput="showVal(this)" onchange="showVal(this)"/>
                             <span>100</span>
 
                             <datalist id="volume-list">
@@ -376,8 +375,21 @@ Textarea with sizing and wrap attribute (try values of hard, soft, and off to se
                                 <option value="80">
                                 <option value="100">
                             </datalist> <br> <br>
+							
+                            <label for="default-range">Default range 0-100</label>
+                            <input type="text" disabled id="default-range-value" class="range-value" value="50"/> <br>
+                            <input type="range" id="default-range" oninput="showVal(this)" onchange="showVal(this)">
 
-                            <input type="range" disabled/>
+                            <label for="min-max-range">Min Max range 0-10</label>
+                            <input type="text" disabled id="min-max-range-value" class="range-value" value="5"/> <br>
+                            <input type="range" min="0" max="10" step="2" id="min-max-range" oninput="showVal(this)" onchange="showVal(this)">
+
+                            <label for="fractional-range">Fractional range with step 0.5</label>
+                            <input type="text" disabled id="fractional-range-value" class="range-value" value="2.5"/> <br>
+                            <input type="range" min="0" max="5" step="0.5" id="fractional-range" oninput="showVal(this)" onchange="showVal(this)">
+
+                            <label for="disabled-range">Disabled</label>
+                            <input type="range" disabled id="disabled-range"/>
                         </div>
                         <div class="html-right">
                             <h4>Input type range</h4>
@@ -505,10 +517,9 @@ Textarea with sizing and wrap attribute (try values of hard, soft, and off to se
 	}, 3000);
 </script>
 <script>
-    const volumeSpan = $('#volume-value')[0];
-    volumeSpan.value = $('#volume')[0].value;
-    function showVal(val) {
-        volumeSpan.value = val;
+    function showVal(element) {
+		const locator = "#" + element.getAttribute("id") + "-value";
+		$(locator)[0].value = element.value;
     }
 </script>
 <script type="text/javascript">

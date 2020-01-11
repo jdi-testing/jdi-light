@@ -1002,7 +1002,7 @@ input[type=number] {
 input[type=range] {
     width: 100px
 }
-#volume-value {
+.range-value {
     width: 30px
 }
 input[type=range].range {

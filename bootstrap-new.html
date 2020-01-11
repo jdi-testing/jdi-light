@@ -3737,16 +3737,19 @@
                     <div class="doc-space line">
                         <div class="html-left">
                             <label for="default-range">Default range 0-100</label>
-                            <input type="range" class="custom-range" id="default-range">
-
+                            <input type="text" disabled id="default-range-value" class="range-value" value="50"/> <br>
+                            <input type="range" class="custom-range" id="default-range" oninput="showVal(this)" onchange="showVal(this)">
+							<br>
                             <label for="min-max-range">Min Max range 0-10</label>
-                            <input type="range" class="custom-range" min="0" max="10" id="min-max-range">
-
+                            <input type="text" disabled id="min-max-range-value" class="range-value" value="5"/> <br>
+                            <input type="range" class="custom-range" min="0" max="10" step="2" id="min-max-range" oninput="showVal(this)" onchange="showVal(this)">
+							<br>
                             <label for="fractional-range">Fractional range with step 0.5</label>
-                            <input type="range" class="custom-range" min="0" max="5" step="0.5" id="fractional-range">
-							
-                            <label for="disabled-range">Disabled range</label>
-                            <input type="range" class="custom-range" min="0" max="5" step="0.5" disabled id="disabled-range">
+                            <input type="text" disabled id="fractional-range-value" class="range-value" value="2.5"/> <br>
+                            <input type="range" class="custom-range" min="0" max="5" step="0.5" id="fractional-range" oninput="showVal(this)" onchange="showVal(this)">
+							<br>
+                            <label for="disabled-range">Disabled</label> <br>
+                            <input type="range" class="custom-range" disabled id="disabled-range"/>
                         </div>
                         <div class="html-right">
                             <h4>Forms - Range</h4>
@@ -7076,6 +7079,12 @@ function change_progress(changeTo) {
 		progress_element().width(now + '%');
 	}
 }
+</script>
+<script>
+    function showVal(element) {
+		const locator = "#" + element.getAttribute("id") + "-value";
+		$(locator)[0].value = element.value;
+    }
 </script>
 
 </body>
