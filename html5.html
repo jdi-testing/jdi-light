@@ -364,7 +364,7 @@ Textarea with sizing and wrap attribute (try values of hard, soft, and off to se
                             <input type="text" disabled id="volume-value" class="range-value" value="90"/> <br>
                             <span>10</span>
                             <input type="range" id="volume" min="10" max="100" value="90" step="5" class="range" list="volume-list"
-                                   oninput="showVal(this)" onchange="showVal(this)"/>
+                                   oninput="show_val(this)" onchange="show_val(this)"/>
                             <span>100</span>
 
                             <datalist id="volume-list">
@@ -378,15 +378,15 @@ Textarea with sizing and wrap attribute (try values of hard, soft, and off to se
 							
                             <label for="default-range">Default range 0-100</label>
                             <input type="text" disabled id="default-range-value" class="range-value" value="50"/> <br>
-                            <input type="range" id="default-range" oninput="showVal(this)" onchange="showVal(this)">
+                            <input type="range" id="default-range" oninput="show_val(this)" onchange="show_val(this)">
 
                             <label for="min-max-range">Min Max range 0-10</label>
                             <input type="text" disabled id="min-max-range-value" class="range-value" value="5"/> <br>
-                            <input type="range" min="1" max="10" step="2" id="min-max-range" oninput="showVal(this)" onchange="showVal(this)">
+                            <input type="range" min="1" max="10" step="2" id="min-max-range" oninput="show_val(this)" onchange="show_val(this)">
 
                             <label for="fractional-range">Fractional range with step 0.5</label>
                             <input type="text" disabled id="fractional-range-value" class="range-value" value="2.5"/> <br>
-                            <input type="range" min="2" max="7" step="0.5" id="fractional-range" oninput="showVal(this)" onchange="showVal(this)">
+                            <input type="range" min="2" max="7" step="0.5" id="fractional-range" oninput="show_val(this)" onchange="show_val(this)">
 
                             <label for="disabled-range">Disabled</label>
                             <input type="range" disabled id="disabled-range"/>
@@ -517,7 +517,7 @@ Textarea with sizing and wrap attribute (try values of hard, soft, and off to se
 	}, 3000);
 </script>
 <script>
-    function showVal(element) {
+    function show_val(element) {
 		const locator = "#" + element.getAttribute("id") + "-value";
 		$(locator)[0].value = element.value;
     }
