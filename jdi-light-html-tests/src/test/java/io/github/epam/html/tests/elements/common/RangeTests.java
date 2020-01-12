@@ -5,8 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.disabledRange;
-import static io.github.com.pages.HtmlElementsPage.volume;
+import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
@@ -37,32 +36,48 @@ public class RangeTests implements TestsInit {
     }
     @Test
     public void minTest() {
-        assertEquals(volume.min(), "10");
+        assertEquals(volume.min(), 10);
+        assertEquals(defaultRange.min(), 0);
+        assertEquals(minMaxRange.min(), 1);
+        assertEquals(fractionalRange.min(), 2);
     }
     @Test
     public void maxTest() {
-        assertEquals(volume.max(), "100");
+        assertEquals(volume.max(), 100);
+        assertEquals(defaultRange.max(), 100);
+        assertEquals(minMaxRange.max(), 10);
+        assertEquals(fractionalRange.max(), 7);
     }
     @Test
     public void stepTest() {
-        assertEquals(volume.step(), "5");
+        assertEquals(volume.step(), 5);
+        assertEquals(defaultRange.step(), 1);
+        assertEquals(minMaxRange.step(), 2);
+        assertEquals(fractionalRange.step(), 0.5);
     }
 
     @Test
-    public void setVolumeTest() {
+    public void setupValueTest() {
         volume.setupValue(10);
         assertEquals(volume.value(), 10);
+
+        defaultRange.setupValue(65);
+        assertEquals(defaultRange.value(), 65);
+
+        minMaxRange.setupValue(3);
+        assertEquals(minMaxRange.value(), 3);
+
+        fractionalRange.setupValue(3.5);
+        assertEquals(fractionalRange.value(), 3.5);
     }
 
     @Test
     public void isValidationTest() {
         volume.is().enabled();
-        volume.assertThat().minValue(is(10));
-        volume.assertThat().maxValue(is(100));
-        volume.assertThat().step(is(5));
-        volume.is().value(greaterThanOrEqualTo(10));
-        volume.is().value(lessThanOrEqualTo(100));
-        volume.is().value(is(90));
+        volume.assertThat().minValue(10).and().maxValue(100).and().step(5);
+        volume.is().value(greaterThanOrEqualTo(10.0));
+        volume.is().value(lessThanOrEqualTo(100.0));
+        volume.has().value(90);
     }
 
     @Test
@@ -74,9 +89,9 @@ public class RangeTests implements TestsInit {
 
     @Test
     public void assertValidationTest() {
-        volume.assertThat().value(greaterThan(0));
-        volume.assertThat().value(lessThan(200));
-        disabledRange.assertThat().value(is(50));
+        volume.assertThat().value(greaterThan(0.0));
+        volume.assertThat().value(lessThan(200.0));
+        disabledRange.assertThat().value(50);
     }
 
     @Test

@@ -1,79 +1,101 @@
 package io.github.epam.bootstrap.tests.common;
 
+import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.range1;
-import static io.github.com.pages.BootstrapPage.range2;
-import static io.github.com.pages.BootstrapPage.range3;
+import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.lessThan;
+import static org.testng.Assert.assertEquals;
 
 public class RangeTests extends TestsInit {
-    private String labelText = "Example range";
-
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
-        range2.show();
+        defaultRange.show();
+        defaultRange.setupValue(50);
     }
 
     @Test
-    public void baseValidationTest() {
-        baseValidation(range1);
-        //range1.unhighlight();
-        baseValidation(range2);
-        //range2.unhighlight();
-        baseValidation(range3);
-        //range3.unhighlight();
-    }
-
-    @Test
-    public void labelTest() {
-        range1.label().is().text(labelText);
-        range2.label().is().text(labelText);
-        range3.label().is().text(labelText);
+    public void getLabelTextTest() {
+        assertEquals(defaultRange.labelText(), "Default range 0-100");
     }
 
     @Test
     public void getValueTest() {
-        range1.is().value(50);
-        range2.is().value(3);
-        //range3.is().value(2.5);
+        assertEquals(defaultRange.value(), 50);
     }
-
     @Test
     public void minTest() {
-        range2.is().minValue(0);
-        range3.is().minValue(0);
+        assertEquals(defaultRange.min(), 0);
+        assertEquals(minMaxRange.min(), 1);
+        assertEquals(fractionalRange.min(), 2);
     }
-
     @Test
     public void maxTest() {
-        range2.is().maxValue(5);
-        range3.is().maxValue(5);
+        assertEquals(defaultRange.max(), 100);
+        assertEquals(minMaxRange.max(), 10);
+        assertEquals(fractionalRange.max(), 7);
     }
-
     @Test
     public void stepTest() {
-        //range3.is().step(0.5);
+        assertEquals(defaultRange.step(), 1);
+        assertEquals(minMaxRange.step(), 2);
+        assertEquals(fractionalRange.step(), 0.5);
     }
 
     @Test
-    public void setValueTest() {
-        //range3.hover();
-        //range1.setValue(10.0);
-        //range1.is().value(10);
-        //range1.setValue(50);
-        //range2.setValue(2);
-        //range2.is().value(2);
-        //range2.setValue(3);
-        //range3.setValue(5);
-        //range3.is().value(5);
-        //range3.setValue(2.5);
+    public void setupValueTest() {
+        defaultRange.setupValue(65);
+        assertEquals(defaultRange.value(), 65);
+
+        minMaxRange.setupValue(3);
+        assertEquals(minMaxRange.value(), 3);
+
+        fractionalRange.setupValue(3.5);
+        assertEquals(fractionalRange.value(), 3.5);
+    }
+
+    @Test
+    public void isValidationTest() {
+        defaultRange.is().enabled();
+        defaultRange.assertThat().minValue(0).and().maxValue(100).and().step(1);
+        defaultRange.is().value(greaterThanOrEqualTo(10.0));
+        defaultRange.is().value(lessThanOrEqualTo(100.0));
+        defaultRange.has().value(50);
+    }
+
+    @Test
+    public void labelTest() {
+        assertEquals(defaultRange.label().getText(), "Default range 0-100");
+        defaultRange.label().is().text(containsString("range 0-100"));
+        defaultRange.label().assertThat().text(equalToIgnoringCase("default range 0-100"));
+    }
+
+    @Test
+    public void assertValidationTest() {
+        disabledRange.assertThat().value(greaterThan(0.0));
+        disabledRange.assertThat().value(lessThan(200.0));
+        disabledRange.assertThat().value(50);
+    }
+
+    @Test
+    public void customRangeTest() {
+        rangeControl.increase(2);
+        rangeControl.assertThat().value(60);
+        rangeControl.decrease(3);
+        rangeControl.assertThat().value(45);
+        WebPage.refresh();
+    }
+
+    @Test
+    public void baseValidationTest() {
+        baseValidation(defaultRange);
     }
 }

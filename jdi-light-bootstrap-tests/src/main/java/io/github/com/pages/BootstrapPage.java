@@ -11,6 +11,7 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.navs.*;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.*;
+import io.github.com.RangeControl;
 import io.github.com.sections.*;
 import io.github.com.sections.buttongroup.*;
 import io.github.com.sections.card.*;
@@ -523,12 +524,12 @@ public class BootstrapPage extends WebPage {
     //region Ranges
     @UI("#formControlRange")
     public static RangeInput rangeInput;
-    @UI("#customRange1")
-    public static Range range1;
-    @UI("#customRange2")
-    public static Range range2;
-    @UI("#customRange3")
-    public static Range range3;
+    public static Range defaultRange;
+    public static Range minMaxRange;
+    public static Range fractionalRange;
+    public static Range disabledRange;
+    @UI("#default-range")
+    public static RangeControl rangeControl;
     //endregion
 
     //region Modals

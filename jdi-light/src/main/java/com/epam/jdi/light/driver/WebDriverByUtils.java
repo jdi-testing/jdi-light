@@ -125,10 +125,16 @@ public final class WebDriverByUtils {
     public static List<WebElement> uiSearch(SearchContext ctx, By by) {
         List<WebElement> els = null;
         for (Object step : searchBy(by)) {
-            if (isClass(step.getClass(), By.class))
-                els = els == null
-                    ? ctx.findElements((By)step)
-                    : selectMany(els, e -> e.findElements((By)step));
+            if (isClass(step.getClass(), By.class)) {
+                String byName = getByName((By)step);
+                if (byName.equals("id") || (byName.equals("css") && getByLocator((By)step).matches("^#.+")))
+                    els = getDriver().findElements((By)step);
+                else {
+                    els = els == null
+                        ? ctx.findElements((By) step)
+                        : selectMany(els, e -> e.findElements((By) step));
+                }
+            }
             else if (isClass(step.getClass(), Integer.class))
                 els = asList(els.get((Integer)step-1));
         }
