@@ -13,6 +13,6 @@ public class Contacts extends DataClass<Contacts> {
     public String passportSeria;
     public String description;
     public String gender;
-    public String religion2;
+    public String religion;
     public String weather;
 }

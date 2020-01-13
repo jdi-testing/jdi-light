@@ -6,7 +6,7 @@ public class Users {
 
     private static Contacts defaultContact() {
         return new Contacts().set(c -> {
-            c.name = "";
+            c.name = "Roman";
             c.lastName = "Iovlev";
             c.position = "ChiefQA";
        //     c.passport = true;
@@ -15,28 +15,11 @@ public class Users {
             c.description = "JDI - awesome UI automation tool";
             c.acceptConditions = "true";
             c.gender = "Female";
-            c.religion2 = "Other";
-            c.weather="wewew";
+            c.religion= "Other";
         });
     }
-    private static Contacts defaultContact2() {
-        return new Contacts().set(c -> {
-            c.name = "Roman";
-            c.lastName = "Iovlev";
-            c.position = "ChiefQA";
-           // c.passport = false;
-            c.passportNumber = "4321";
-            c.passportSeria = "123456";
-            c.description = "JDI - awesome UI automation tool";
-            c.acceptConditions = "true";
-            c.gender = "Female";
-            c.religion2 = "Other";
-            c.weather="wewew";
-        });
-    }
-    public static Contacts DEFAULT_CONTACT = defaultContact();
-    public static Contacts TWICE =  defaultContact2();
 
+    public static Contacts DEFAULT_CONTACT = defaultContact();
     public static Contacts LOWER_CASE_NAME_CONTACT =
         defaultContact().set(c-> c.name = c.name.toLowerCase());
     public static Contacts UPPER_CASE_NAME_CONTACT =
