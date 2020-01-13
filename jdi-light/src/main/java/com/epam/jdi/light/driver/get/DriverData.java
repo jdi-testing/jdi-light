@@ -13,7 +13,6 @@ import org.openqa.selenium.opera.OperaOptions;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -179,18 +178,16 @@ public class DriverData {
         setUp("Chrome: setExperimentalOption: prefs",
             () -> cap.setExperimentalOption("prefs", chromePrefs));
         // Capabilities from settings
-        CAPABILITIES_FOR_CHROME
-                .entrySet()
-                .stream()
-                .filter(capability -> !capability.getKey().equals(ARGUMENTS_PROPERTY))
-                .forEach(capability -> cap.setCapability(capability.getKey(), capability.getValue()));
-        CAPABILITIES_FOR_CHROME
-                .entrySet()
-                .stream()
-                .filter(arguments -> arguments.getKey().equals(ARGUMENTS_PROPERTY))
-                .flatMap(arguments -> Arrays.stream(arguments.getValue().split(" ")))
-                .forEach(cap::addArguments);
+        CAPABILITIES_FOR_CHROME.forEach((key, value) -> setupCapability(cap, key, value));
     };
+
+    public static void setupCapability(ChromeOptions cap, String key, String value){
+        if(!key.equals(ARGUMENTS_PROPERTY)){
+            cap.setCapability(key, value);
+        } else {
+            cap.addArguments(value.split(" "));
+        }
+    }
 
     public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = cap -> {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
