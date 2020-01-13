@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -117,8 +118,8 @@ public class Selector extends UIBaseElement<UISelectAssert>
         List<WebElement> options = asSelect().getOptions();
         for (int i = 0; i < options.size(); i++) {
             WebElement opt = options.get(i);
-            if (opt.isSelected() && asList(values).contains(i)
-                    || !opt.isSelected() && !asList(values).contains(i))
+            if (opt.isSelected() && ArrayUtils.contains(values, i)
+                    || !opt.isSelected() && !ArrayUtils.contains(values, i))
                 opt.click();
         }
     }
