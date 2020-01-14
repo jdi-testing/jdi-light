@@ -34,6 +34,7 @@ public class MultiDropdownExampleTests implements TestsInit {
 
     @Test
     public void disabledTest() {
+        multiDropdown.check("Steam");
         multiDropdown.select("Disabled");
         multiDropdown.is().selected("Steam");
     }
