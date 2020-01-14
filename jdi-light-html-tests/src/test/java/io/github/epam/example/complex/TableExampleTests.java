@@ -52,8 +52,5 @@ public class TableExampleTests implements TestsInit {
         usersSetup.is().size(4);
         usersSetup.is().count(400);
         usersSetup.is().columns(asList("Name", "Phone", "Email", "City"));
-       /* assertThat(usersSetup.size(), is(4));
-        assertThat(usersSetup.count(), is(400));
-        assertThat(usersSetup.header(), hasItems("Name", "Phone", "Email", "City"));*/
     }
 }
