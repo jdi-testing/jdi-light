@@ -9,11 +9,11 @@ import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsVal
 import static io.github.com.StaticSite.tablePagePerformance;
 import static io.github.com.pages.PerformancePage.usersSetup;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 
-public class TableTestsExample implements TestsInit {
+public class TableExampleTests implements TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -49,8 +49,11 @@ public class TableTestsExample implements TestsInit {
 
     @Test
     public void tableParamTest() {
-        assertThat(usersSetup.size(), is(4));
+        usersSetup.is().size(4);
+        usersSetup.is().count(400);
+        usersSetup.is().columns(asList("Name", "Phone", "Email", "City"));
+       /* assertThat(usersSetup.size(), is(4));
         assertThat(usersSetup.count(), is(400));
-        assertThat(usersSetup.header(), hasItems("Name", "Phone", "Email", "City"));
+        assertThat(usersSetup.header(), hasItems("Name", "Phone", "Email", "City"));*/
     }
 }

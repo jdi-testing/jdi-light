@@ -42,12 +42,31 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
     }
 
     /**
+     * Match passed value with table count
+     * @param condition to compare
+     */
+    @JDIAction("Assert that '{name}' count {0}")
+    public A count(Matcher<Integer> condition) {
+        jdiAssert(table().count(), condition);
+        return (A) this;
+    }
+
+    /**
+     * Match passed value with table count
+     * @param count to compare
+     */
+    @JDIAction("Assert that '{name}' count {0}")
+    public A count(int count) {
+        return count(Matchers.is(count));
+    }
+
+    /**
      * Match passed value with table size
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' size {0}")
     public A size(Matcher<Integer> condition) {
-        jdiAssert(table().count(), condition);
+        jdiAssert(table().size(), condition);
         return (A) this;
     }
 

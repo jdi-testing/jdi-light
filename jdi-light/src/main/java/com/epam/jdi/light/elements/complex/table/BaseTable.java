@@ -160,7 +160,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
             throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
         if (rowNum > count.get()) {
             boolean gotAll = cells.isGotAll();
-            waitFor().size(greaterThanOrEqualTo(rowNum));
+            waitFor().count(greaterThanOrEqualTo(rowNum));
             if (rowNum > count.get())
                 throw exception("Table has %s rows (but requested index is %s)", count.get(), rowNum);
             if (gotAll)
