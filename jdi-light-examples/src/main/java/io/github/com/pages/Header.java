@@ -12,7 +12,7 @@ public class Header extends Section {
 	@Css(".fa-sign-out") public static WebElement logout;
 	@Css("#epam_logo") public static WebElement epamLogo;
 	public static WebElement userIcon;
-	@XPath("//*[@ui='label']") public static UIElement userName;
+	@Css("#user-name") public static UIElement userName;
 
 	@Css(".search-field input") static UIElement searchInput;
 	@Css(".icon-search") static WebElement searchIcon;
