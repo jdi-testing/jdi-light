@@ -9,16 +9,15 @@ public class Users {
             c.name = "Roman";
             c.lastName = "Iovlev";
             c.position = "ChiefQA";
-       //     c.passport = true;
+            //c.passport = true;
             c.passportNumber = "4321";
             c.passportSeria = "123456";
             c.description = "JDI - awesome UI automation tool";
             c.acceptConditions = "true";
             c.gender = "Female";
-            c.religion= "Other";
+            c.religion = "Other";
         });
     }
-
     public static Contacts DEFAULT_CONTACT = defaultContact();
     public static Contacts LOWER_CASE_NAME_CONTACT =
         defaultContact().set(c-> c.name = c.name.toLowerCase());

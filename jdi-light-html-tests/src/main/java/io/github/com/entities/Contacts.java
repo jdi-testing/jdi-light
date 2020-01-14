@@ -6,7 +6,7 @@ import com.epam.jdi.tools.DataClass;
 public class Contacts extends DataClass<Contacts> {
     public String name;
     public String lastName;
-  //  public boolean passport;
+    //public boolean passport;
     public String acceptConditions;
     public String position;
     public String passportNumber;
