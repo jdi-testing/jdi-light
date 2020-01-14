@@ -26,8 +26,6 @@ public class TestsInit {
     public static void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initSite(SiteJdi.class);
-        assertThat(TIMEOUT.get(), is(15));
-        assertThat(PAGE_TIMEOUT.get(), is(25));
         BEFORE_JDI_ACTION = jp -> {
             BEFORE_STEP_ACTION.execute(jp);
             processNewPage(jp);

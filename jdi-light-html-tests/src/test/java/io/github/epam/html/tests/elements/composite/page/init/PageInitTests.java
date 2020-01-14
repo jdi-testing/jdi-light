@@ -16,9 +16,7 @@ public class PageInitTests {
     static String expecterdUrl(String url) {
         return JDI_DOMAIN + url;
     }
-
     boolean first = true;
-
     @BeforeMethod
     public void before() {
         if (first) {
@@ -29,7 +27,6 @@ public class PageInitTests {
             $(".fa-sign-out").click();
         }
     }
-
     @Test
     public void loginPageExTest() {
         HomePageEx page = new HomePageEx();
@@ -43,7 +40,6 @@ public class PageInitTests {
         page.enterUI.click();
         $("#user-name").is().displayed();
     }
-
     @Test
     public void loginPageTest() {
         HomePage page = new HomePage();
@@ -55,7 +51,6 @@ public class PageInitTests {
         page.enterUI.click();
         $("#user-name").is().displayed();
     }
-
     @Test
     public void loginPageUITest() {
         HomePageWeb page = new HomePageWeb();
