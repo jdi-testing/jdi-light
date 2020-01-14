@@ -49,7 +49,7 @@ public class TableTestsExample implements TestsInit {
 
     @Test
     public void tableParamTest() {
-        usersSetup.is().size(4);
+        assertThat(usersSetup.size(), is(4));
         assertThat(usersSetup.count(), is(400));
         assertThat(usersSetup.header(), hasItems("Name", "Phone", "Email", "City"));
     }
