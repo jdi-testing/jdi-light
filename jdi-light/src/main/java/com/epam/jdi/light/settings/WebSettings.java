@@ -17,6 +17,9 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -224,9 +227,11 @@ public class WebSettings {
 
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {
         String path = "";
-        try { path = getProperty(property);
-        } catch (Exception ignore) { }
-        if(isNotEmpty(path)) {
+        try {
+            path = System.getProperty(property, getProperty(property));
+        } catch (Exception ignore) {
+        }
+        if (isNotEmpty(path)) {
             setCapabilities.execute(getProperties(path));
         }
     }
@@ -262,15 +267,33 @@ public class WebSettings {
         }
         return NORMAL;
     }
-    public static Properties getProperties(String path) {
-        // TODO use mergePath macos and windows
-        Properties pTest = PropertyReader.getProperties(mergePath(path));
-        Properties pTarget = PropertyReader.getProperties(mergePath("/../../target/classes/" + path));
-        if (pTarget.size() > 0)
-            return pTarget;
-        String propertiesPath = pTest.size() > 0
-                ? path
-                : "/../../target/classes/" + path;
-        return PropertyReader.getProperties(mergePath(propertiesPath));
+
+    private static Properties getProperties(String path) {
+        File propertyFile = new File(path);
+        Properties properties;
+        if (propertyFile.exists()) {
+            properties = getCiProperties(path, propertyFile);
+        } else {
+            Properties pTest = PropertyReader.getProperties(mergePath(path));
+            Properties pTarget = PropertyReader.getProperties(mergePath("/../../target/classes/" + path));
+            if (pTarget.size() > 0)
+                return pTarget;
+            String propertiesPath = pTest.size() > 0
+                    ? path
+                    : "/../../target/classes/" + path;
+            properties = PropertyReader.getProperties(propertiesPath);
+        }
+        return properties;
+    }
+
+    private static Properties getCiProperties(String path, File propertyFile){
+        Properties properties = new Properties();
+        try {
+            System.out.println("Property file found: " + propertyFile.getAbsolutePath());
+            properties.load(new FileInputStream(propertyFile));
+        } catch (IOException ex) {
+            throw exception("Couldn't load properties for CI Server" + path);
+        }
+        return properties;
     }
 }
