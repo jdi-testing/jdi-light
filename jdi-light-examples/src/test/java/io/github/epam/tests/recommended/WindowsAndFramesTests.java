@@ -46,7 +46,7 @@ public class WindowsAndFramesTests extends StaticTestsInit {
 
     @Test
     public void frameTest() {
-        iframe.frameBtn.click();
+        iframe.userIcon.click();
     }
     @Test
     public void wolverinFrameTest() {
