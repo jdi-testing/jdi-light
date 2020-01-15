@@ -42,7 +42,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
     }
 
     /**
-     * Match passed value with table count
+     * Match passed value with table rows count
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' count {0}")
@@ -52,7 +52,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
     }
 
     /**
-     * Match passed value with table count
+     * Match passed value with table rows count
      * @param count to compare
      */
     @JDIAction("Assert that '{name}' count {0}")
@@ -61,7 +61,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
     }
 
     /**
-     * Match passed value with table size
+     * Match passed value with number of table columns
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' size {0}")
@@ -71,7 +71,7 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
     }
 
     /**
-     * Match passed value with table size
+     * Match passed value with number of table columns
      * @param size to compare
      */
     @JDIAction("Assert that '{name}' size {0}")
