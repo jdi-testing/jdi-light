@@ -76,9 +76,9 @@ public class DataSimpleTableTests implements TestsInit {
     @Test
     public void commonMatchersTest() {
         usersData.is().displayed();
-        usersData.has().size(6);
-        usersData.assertThat().size(greaterThan(3));
-        usersData.is().notEmpty().size(lessThanOrEqualTo(6));
+        usersData.has().count(6);
+        usersData.assertThat().count(greaterThan(3));
+        usersData.is().notEmpty().count(lessThanOrEqualTo(6));
     }
     // Compare Matchers
     @Test
@@ -124,7 +124,7 @@ public class DataSimpleTableTests implements TestsInit {
     @Test
     public void tableChainTest() {
         usersData.assertThat()
-            .displayed().size(6).size(greaterThan(3)).notEmpty()
+            .displayed().count(6).count(greaterThan(3)).notEmpty()
             .row(d -> d.user.contains("Ivan"))
             .all().rows(d -> d.user.length() > 4)
             .no().rows(d -> isBlank(d.user))

@@ -41,15 +41,15 @@ public class TableSteps {
     }
     @Then("^the \"([^\"]*)\" (?:table |)has \"([^\"]*)\" rows$")
     public void assertRowsCount(String name, int count) {
-        table(name).has().size(count);
+        table(name).has().count(count);
     }
     @Then("^the \"([^\"]*)\" (?:table |)has at least \"([^\"]*)\" rows$")
     public void atLeastRows(String name, int count) {
-        table(name).has().size(greaterThanOrEqualTo(count));
+        table(name).has().count(greaterThanOrEqualTo(count));
     }
     @Then("^the \"([^\"]*)\" (?:table |)has not more than \"([^\"]*)\" rows$")
     public void notMoreThan(String name, int count) {
-        table(name).has().size(lessThanOrEqualTo(count));
+        table(name).has().count(lessThanOrEqualTo(count));
     }
     @Then("^the \"([^\"]*)\" (?:table |)header is:$")
     public void assertHasItems(String name, List<String> values) {

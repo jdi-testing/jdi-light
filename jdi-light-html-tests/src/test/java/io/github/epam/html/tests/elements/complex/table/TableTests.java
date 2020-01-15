@@ -83,9 +83,9 @@ public class TableTests implements TestsInit {
     @Test
     public void commonMatchersTest() {
         usersTable.is().displayed();
-        usersTable.has().size(6);
-        usersTable.assertThat().size(greaterThan(3));
-        usersTable.is().notEmpty().size(lessThanOrEqualTo(6));
+        usersTable.has().count(6);
+        usersTable.assertThat().count(greaterThan(3));
+        usersTable.is().notEmpty().count(lessThanOrEqualTo(6));
     }
     // Compare Matchers
     @Test
@@ -116,7 +116,7 @@ public class TableTests implements TestsInit {
     @Test
     public void tableChainTest() {
         usersTable.assertThat()
-            .displayed().size(6).size(greaterThan(3)).notEmpty()
+            .displayed().count(6).count(greaterThan(3)).notEmpty()
             .and().rowThat(containsValue("Ivan", inColumn("User")))
             .all().rows(containsValue("Vip", inColumn("Description")))
             .no().rows(containsValue("Alex", inColumn("User")))

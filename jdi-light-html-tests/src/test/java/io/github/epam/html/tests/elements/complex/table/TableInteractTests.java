@@ -112,9 +112,9 @@ public class TableInteractTests implements TestsInit {
     @Test
     public void commonMatchersTest() {
         usersRow.is().displayed();
-        usersRow.has().size(6);
-        usersRow.assertThat().size(greaterThan(3));
-        usersRow.is().notEmpty().size(lessThanOrEqualTo(6));
+        usersRow.has().count(6);
+        usersRow.assertThat().count(greaterThan(3));
+        usersRow.is().notEmpty().count(lessThanOrEqualTo(6));
     }
     // Compare Matchers
     @Test
@@ -145,7 +145,7 @@ public class TableInteractTests implements TestsInit {
     @Test
     public void tableChainTest() {
         usersRow.assertThat()
-            .displayed().size(6).size(greaterThan(3)).notEmpty()
+            .displayed().count(6).count(greaterThan(3)).notEmpty()
             .and().rowThat(containsValue("Ivan", inColumn("User")))
             .all().rows(containsValue("Vip", inColumn("Description")))
             .no().rows(containsValue("Alex", inColumn("User")))
