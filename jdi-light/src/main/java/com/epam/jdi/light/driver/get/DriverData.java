@@ -178,12 +178,12 @@ public class DriverData {
         setUp("Chrome: setExperimentalOption: prefs",
             () -> cap.setExperimentalOption("prefs", chromePrefs));
         // Capabilities from settings
-        CAPABILITIES_FOR_CHROME.forEach((key, value) -> setupCapability(cap, key, value));
+        CAPABILITIES_FOR_CHROME.forEach((property, value) -> setupCapability(cap, property, value));
     };
 
-    public static void setupCapability(ChromeOptions cap, String key, String value){
-        if(!key.equals(ARGUMENTS_PROPERTY)){
-            cap.setCapability(key, value);
+    public static void setupCapability(ChromeOptions cap, String property, String value){
+        if(!property.equals(ARGUMENTS_PROPERTY)){
+            cap.setCapability(property, value);
         } else {
             cap.addArguments(value.split(" "));
         }
