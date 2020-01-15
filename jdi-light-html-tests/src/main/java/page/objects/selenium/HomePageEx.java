@@ -10,10 +10,10 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 public class HomePageEx extends PageBase {
     public HomePageEx() { super("/index.html", "Home");}
-    @FindBy(css="form #name") public WebElement userName;
-    public WebElement password = $("form #password");
+    @FindBy(css="#name") public WebElement userName;
+    public WebElement password = $("#password");
 
-    @UI("form #name") public UIElement userNameUI;
-    public UIElement passwordUI = $("form #password");
+    @UI("#name") public UIElement userNameUI;
+    public UIElement passwordUI = $("#password");
     @UI("#login-button") public UIElement enterUI;
 }

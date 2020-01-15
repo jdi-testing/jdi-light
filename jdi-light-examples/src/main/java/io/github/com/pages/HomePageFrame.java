@@ -5,5 +5,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import org.openqa.selenium.WebElement;
 
 public class HomePageFrame extends Section {
-	@Css("img#user-icon") public WebElement userIcon;
+    @Css("#frame-button")
+    public WebElement frameBtn;
 }
