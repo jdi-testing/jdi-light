@@ -160,7 +160,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     @Override
     public IBaseElement waitSec(int sec) {
         timeout = sec;
-        driver().manage().timeouts().implicitlyWait(sec*100, TimeUnit.MILLISECONDS);
+        driver().manage().timeouts().implicitlyWait(sec*1000, TimeUnit.MILLISECONDS);
         return this;
     }
     public int getTimeout() {
@@ -378,9 +378,11 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         By locator = bElement.getLocator();
         SearchContext searchContext = getContext(parent, bElement.locator);
         //TODO rethink SMART SEARCH
-        return locator != null
-            ? uiSearch(searchContext, correctLocator(locator)).get(0)
-            : isPageObject(element.getClass())
+        if (locator != null) {
+            List<WebElement> result = uiSearch(searchContext, correctLocator(locator));
+            return result.size() > 0 ? result.get(0) : getDefaultContext();
+        }
+        return isPageObject(element.getClass())
                 ? searchContext
                 : SMART_SEARCH.execute(bElement.waitSec(getTimeout()));
     }
