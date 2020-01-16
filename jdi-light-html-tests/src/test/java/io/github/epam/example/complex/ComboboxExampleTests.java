@@ -23,11 +23,6 @@ public class ComboboxExampleTests implements TestsInit {
     }
 
     @Test
-    public void getTextTest() {
-        iceCreamIs.is().text("Coconut");
-    }
-
-    @Test
     public void inputTest() {
         iceCreamIs.input("New text");
         iceCreamIs.is().text("New text");
@@ -43,12 +38,8 @@ public class ComboboxExampleTests implements TestsInit {
     @Test
     public void selectTest() {
         iceCreamIs.select("Chocolate");
-        iceCreamIs.is().text("Chocolate");
         iceCreamIs.select(Strawberry);
-        iceCreamIs.is().text("Strawberry");
-        iceCreamIs.clear();
         iceCreamIs.select(5);
-        iceCreamIs.is().text("Vanilla");
     }
 
     @Test
@@ -62,7 +53,6 @@ public class ComboboxExampleTests implements TestsInit {
         iceCreamIs.listEnabled();
         iceCreamIs.assertThat().equals(asList("Chocolate", "Strawberry"));
         iceCreamIs.is().enabled();
-        iceCreamIs.is().text("Coconut");
         iceCreamIs.is().selected("Coconut");
         iceCreamIs.is().selected(is("Coconut"));
         iceCreamIs.select(Vanilla);
