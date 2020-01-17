@@ -64,8 +64,7 @@ jobs:
     - stage: test
       name: Run tests - html
       script:
-        - mvn --no-transfer-progress
-        - mvn install -DskipTests
+        - mvn -ntp install -DskipTests
         - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
         - mvn verify $WITH_PARAMS -pl $HTML_TESTS
 
