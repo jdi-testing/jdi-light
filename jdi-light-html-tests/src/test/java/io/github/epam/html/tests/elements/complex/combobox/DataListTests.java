@@ -16,14 +16,15 @@ import static org.testng.Assert.assertEquals;
 
 public class DataListTests implements TestsInit {
 
+    private String text = "Coconut";
+    private String[] values = {"Chocolate", "Coconut", "Mint", "Strawberry", "Vanilla"};
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         iceCream.select(text);
     }
-    private String text = "Coconut";
-    private String[] values = {"Chocolate", "Coconut", "Mint", "Strawberry", "Vanilla"};
 
     @Test
     public void getValueTest() {
