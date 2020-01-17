@@ -443,6 +443,11 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         return values();
     }
 
+    @JDIAction("Get list of attributes for '{name}'")
+    public List<String> attrs(String value) {
+        return noValidation(() -> map(e -> e.attr(value)));
+    }
+
     @JDIAction("Get list of enabled values for '{name}'")
     public List<String> listEnabled() {
         return noValidation(() -> ifSelect(IListBase::isEnabled, this::getElementName));

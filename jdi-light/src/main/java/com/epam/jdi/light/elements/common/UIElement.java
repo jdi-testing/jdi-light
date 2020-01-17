@@ -97,6 +97,16 @@ public class UIElement extends JDIBase
         super.setName(name);
         return this;
     }
+    @Override
+    public UIElement waitSec(int timeout) {
+        super.waitSec(timeout);
+        return this;
+    }
+    @Override
+    public UIElement noWait() {
+        super.noWait();
+        return this;
+    }
 
     //endregion
 
@@ -172,6 +182,7 @@ public class UIElement extends JDIBase
             visualCheck("Check that '"+getName()+"' is displayed");
         return displayed();
     }
+
     /**
      * Get element location as Point
      * @return Point
