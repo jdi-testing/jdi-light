@@ -392,7 +392,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
                             ? ((HasValue)fieldObj).getValue()
                             : fieldObj.toString();
                         list.add(val);
-                    } catch (Exception ex) { throw exception("Can't get field %s", field.getName()); }
+                    } catch (Exception ex) { throw exception(ex, "Can't get field %s", field.getName()); }
             }
             value += "||" + i + "||" + print(map(list, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         }
@@ -400,8 +400,12 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     }
     private D lineToData(L line) {
         D instance;
-        try { instance = create(dataClass); }
-        catch (Exception ex) { throw exception("Can't create %s instance in lineToData(line)", dataClass.getSimpleName()); }
+        try {
+            instance = create(dataClass);
+        }
+        catch (Exception ex) {
+            throw exception(ex, "Can't create %s instance in lineToData(line)", dataClass.getSimpleName());
+        }
         Field[] dataFields = instance.getClass().getDeclaredFields();
         Field[] lineFields = line.getClass().getDeclaredFields();
         for (Field lineField : lineFields) {
@@ -411,7 +415,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
                     try {
                         lineFieldValue = lineField.get(line);
                     } catch (Exception ex) {
-                        throw exception("Can't get lineField '%s' value", lineField.getName());
+                        throw exception(ex, "Can't get lineField '%s' value", lineField.getName());
                     }
                     String value = isInterface(lineField.getType(), HasValue.class)
                         ? ((HasValue)lineFieldValue).getValue()
@@ -419,7 +423,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
                     try {
                         setPrimitiveField(dataField, instance, value);
                     } catch (Exception ex) {
-                        throw exception("Can't set table value '%s' to field '%s'", value, dataField.getName());
+                        throw exception(ex, "Can't set table value '%s' to field '%s'", value, dataField.getName());
                     }
                 }
             }
@@ -447,7 +451,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
             lineClass = types[0].toString().equals("?") ? null : (Class<L>) types[0];
             dataClass = types[1].toString().equals("?") ? null : (Class<D>) types[1];
         } catch (Exception ex) {
-            throw exception("Can't get DataTable %s data or entity class", getName());
+            throw exception(ex, "Can't get DataTable %s data or entity class", getName());
         }
         if (header.hasValue()) return;
         List<Field> entityFields = new ArrayList<>();

@@ -43,6 +43,6 @@ public class WindowsAndFramesTests implements TestsInit {
 
     @Test
     public void frameTest() {
-        iframe.userIcon.click();
+        iframe.epamLogo.click();
     }
 }

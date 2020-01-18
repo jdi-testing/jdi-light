@@ -62,7 +62,7 @@ public class FileUploadTests implements TestsInit {
         downloadJdiLogo.click();
         assertThatFile("jdi-logo.jpg")
             .isDownloaded()
-            .hasSize(is(32225L));
+            .hasSize(32225L);
         assertThatFile("jdi-logo.jpg").hasSize(greaterThan(100L));
     }
     private void createTextFile(String fileName) throws IOException {
