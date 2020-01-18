@@ -375,7 +375,7 @@ public class WebPage extends DriverBase implements PageObject {
             BufferedImage crop = fullImg.getSubimage(x, y, w, h);
             ImageIO.write(crop, "png", screenshot);
             copyFile(screenshot, imageFile);
-        } catch (Exception ex) {throw exception(safeException(ex)); }
+        } catch (Exception ex) {throw exception(ex, "Can't do windowScreenshot"); }
         return path;
     }
     }

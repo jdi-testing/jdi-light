@@ -138,7 +138,7 @@ public class DataListAssert<T extends IListBase, D>
     private boolean isDisplayed(T element) {
         try {
             return element.core().isDisplayed();
-        } catch (Exception ex) { throw exception("Is element Displayed failed. DataList element not a Section. Only Sections can be assert on isDisplayed"); }
+        } catch (Exception ex) { throw exception(ex, "Is element Displayed failed. DataList element not a Section. Only Sections can be assert on isDisplayed"); }
     }
 
     /**
