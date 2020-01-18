@@ -161,8 +161,7 @@ public class ActionProcessor {
             ));
             return fillTemplate(result, jp, method);
         } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: " +
-                    "Can't get failed message: " + safeException(ex));
+            throw exception("Surround method issue: Can't get failed message");
         }
     }
     private static int getTimeout(ProceedingJoinPoint jp) {

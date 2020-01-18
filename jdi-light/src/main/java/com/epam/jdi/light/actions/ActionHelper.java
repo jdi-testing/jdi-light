@@ -66,8 +66,7 @@ public class ActionHelper {
                 ? getDefaultName(method.getName(), methodArgs(jp, method))
                 : fillTemplate(template, jp, method);
         } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: " +
-                    "Can't get action name: " + safeException(ex));
+            throw exception(ex, "Surround method issue: Can't get action name");
         }
     };
     public static String fillTemplate(String template,
@@ -92,8 +91,7 @@ public class ActionHelper {
             }
             return template;
         } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName() +
-                LINE_BREAK + "" + safeException(ex));
+            throw exception(ex, "Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName());
         }
     }
 
@@ -214,8 +212,7 @@ public class ActionHelper {
             }
             return null;
         } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: " +
-                    "Can't get method name template: " + safeException(ex));
+            throw exception("Surround method issue: Can't get method name template");
         }
     }
     static LogLevels logLevel(JoinPoint joinPoint) {
@@ -300,8 +297,7 @@ public class ActionHelper {
             }
             return result;
         } catch (Exception ex) {
-            throw new RuntimeException("Surround method issue: " +
-                    "Can't get action name: " + safeException(ex));
+            throw exception("Surround method issue: Can't get action name");
         }
     }
     //endregion
