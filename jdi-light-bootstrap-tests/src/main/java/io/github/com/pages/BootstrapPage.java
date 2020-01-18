@@ -48,6 +48,7 @@ public class BootstrapPage extends WebPage {
     public static Switch disabledSwitcher;
     public static Button buttonWithTooltip;
     public static Button simpleToastButton;
+    public static Checkbox acceptCheckbox;
 
     @UI("#jumbotron-fluid")
     public static Jumbotron jumbotronFluid;
@@ -108,12 +109,7 @@ public class BootstrapPage extends WebPage {
     public static DropdownForm dropdownForm;
     public static Alert simpleAlert;
     public static DismissAlert dismissibleAlert;
-    @UI("#badge-secondary")
-    public static Text badgeSecondary;
-    @UI("#badge-success")
-    public static Link badgeSuccess;
-    @UI("#btn-primary")
-    public static ButtonWithBadge buttonWithBadge;
+    public static Badge badge;
 
     @UI("//h4[.='Navbar - Containers']/../..")
     public static NavbarContainer navbarContainers;
@@ -429,8 +425,6 @@ public class BootstrapPage extends WebPage {
     public static RadioButtonsDefaultInline radioButtonsDefaultInline;
     @UI("body")
     public static CheckboxesDefault checkboxesDefault;
-    @UI("#customCheck1-div")
-    public static Checkbox customCheckbox;
     @UI("#multiple-inputs")
     public static MultipleInputs multipleInputs;
     @UI("#growing-spinners")

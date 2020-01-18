@@ -23,6 +23,7 @@ import static org.testng.Assert.fail;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+//APPROVED
 public class ButtonTests extends TestsInit {
 
     private String text = "Red button";
@@ -31,6 +32,7 @@ public class ButtonTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        redButton.show();
     }
 
     @Test

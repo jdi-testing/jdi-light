@@ -11,6 +11,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
+//TODO
 public class ImageTests extends TestsInit {
     private static final String SRC_ATTR_EXPECTED = "https://jdi-testing.github.io/jdi-light/images/wolverin.jpg";
     private static final String ALT_ATTR_EXPECTED = "image";

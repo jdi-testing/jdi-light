@@ -17,6 +17,6 @@ public interface HasLabel extends ICoreElement {
      */
     @JDIAction("Get '{name}' label text")
     default String labelText() {
-        return core().labelText();
+        return label().getText();
     }
 }

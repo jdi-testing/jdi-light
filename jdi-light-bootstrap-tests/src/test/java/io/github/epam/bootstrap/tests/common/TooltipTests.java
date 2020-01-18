@@ -16,13 +16,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.AssertJUnit.*;
 
+//TODO
 public class TooltipTests extends TestsInit {
     Thread showHideTooltipAction() {
         return new Thread(() -> {
             Timer.sleep(500);
             buttonWithTooltip.hover();
             Timer.sleep(500);
-            simpleToastButton.hover();
+            simpleToastButton.show();
         });
     }
 

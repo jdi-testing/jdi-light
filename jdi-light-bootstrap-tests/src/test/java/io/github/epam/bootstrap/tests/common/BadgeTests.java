@@ -4,64 +4,64 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.badgeSecondary;
-import static io.github.com.pages.BootstrapPage.badgeSuccess;
-import static io.github.com.pages.BootstrapPage.buttonWithBadge;
+import static io.github.com.pages.BootstrapPage.badge;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
+//APPROVED
 public class BadgeTests extends TestsInit {
-    private String badgeSecondaryText = "BADGE";
-    private String badgeSuccessText = "Github JDI";
-    private String badgeInButtonText = "9";
+    private String text = "Unread Messages 9";
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
+        badge.show();
     }
 
     @Test
     public void getTextTest() {
-        assertEquals(badgeSecondary.getText(), badgeSecondaryText);
-        assertEquals(badgeSecondary.getValue(), badgeSecondaryText);
-        assertEquals(badgeSuccess.getText(), badgeSuccessText);
-        assertEquals(badgeSuccess.getValue(), badgeSuccessText);
+        assertEquals(badge.getText(), text);
     }
 
     @Test
-    public void simpleVisibilityTest() {
-        assertTrue(badgeSecondary.isDisplayed());
-        assertTrue(badgeSuccess.isDisplayed());
+    public void getValueTest() {
+        assertEquals(badge.getValue(), text);
+    }
+
+    @Test
+    public void clickTest() {
+        badge.click();
+        validateAlert(is("Button with badge"));
     }
 
     @Test
     public void isValidationTest() {
-        badgeSecondary.assertThat().displayed()
-                .and()
+        badge.is().displayed().and().enabled().and().text(is(text));
+        badge.is().text(containsString("Messages"));
+        assertThat(badge.core().css("font-size"), is("16px"));
+        badge.assertThat().displayed()
+                .and().text(is(text))
                 .core()
-                .cssClass("badge badge-secondary")
-                .attr("id", "badge-secondary")
-                .tag(is("span"));
-
-        badgeSuccess.assertThat().displayed()
-                .and()
-                .text(is(badgeSuccessText))
-                .text(containsString(badgeSuccessText))
-                .core()
-                .cssClass("badge badge-success")
-                .attr("id", "badge-success")
-                .attr("alt", "Github JDI Link")
-                .tag(is("a"));
+                .css("font-size", is("16px"))
+                .cssClass("btn btn-primary")
+                .attr("type", "button")
+                .tag(is("button"));
     }
 
     @Test
-    public void checkBadgeInButton(){
-        buttonWithBadge.badge.is().displayed();
-        buttonWithBadge.badge.is().text(badgeInButtonText);
+    public void assertValidationTest() {
+        badge.assertThat().text(is(text));
+    }
+
+    @Test
+    public void baseValidationTest() {
+        baseValidation(badge);
     }
 }

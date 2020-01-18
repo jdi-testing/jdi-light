@@ -128,6 +128,9 @@ public class UIElement extends JDIBase
     public String getTagName() {
         return getWebElement().getTagName();
     }
+    public String tag() {
+        return getTagName();
+    }
 
     /**
      * Get the attribute value
