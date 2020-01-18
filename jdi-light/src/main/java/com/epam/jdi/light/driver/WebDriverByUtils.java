@@ -26,6 +26,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.logging.log4j.util.Strings.isBlank;
+import static java.util.Collections.singletonList;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 
 /**
@@ -144,7 +145,7 @@ public final class WebDriverByUtils {
     public static List<Object> searchBy(By by) {
         try {
             if (!getByName(by).equals("css"))
-                return asList(by);
+                return singletonList(by);
             String locator = getByLocator(by);
             List<By> result = replaceUp(locator);
             result = replaceText(result);
@@ -152,17 +153,20 @@ public final class WebDriverByUtils {
         } catch (Exception ex) { throw exception(ex, "Search By failed"); }
     }
     public static By defineLocator(String locator) {
-        if (isBlank(locator))
+        String by = locator.contains("*root*")
+                ? locator.replaceAll("\\*root\\*", "")
+                : locator;
+        if (isBlank(by))
             return By.cssSelector("");
-        if (locator.length() > 1) {
-            if (locator.charAt(1) == '/' || locator.substring(0,2).equals(".."))
-                return By.xpath(locator);
-            if (locator.substring(0, 2).equals("*="))
-                return withText(locator.substring(2));
+        if (by.length() > 1) {
+            if (by.charAt(1) == '/' || by.startsWith(".."))
+                return By.xpath(by);
+            if (by.startsWith("*="))
+                return withText(by.substring(2));
         }
-        if (locator.charAt(0) == '=')
-            return byText(locator.substring(1));
-        return By.cssSelector(locator);
+        return by.charAt(0) == '='
+            ? byText(by.substring(1))
+            : By.cssSelector(by);
     }
 
     private static List<Object> one(By by) {
@@ -182,13 +186,14 @@ public final class WebDriverByUtils {
                 if (locs.length > 0)
                     result.add(By.cssSelector(locs[0]));
                 result.add(getUpXpath(m.group("up")));
-                loc = locs.length == 2 ?  locs[1] : "";
+                loc = locs.length == 2 ? locs[1] : "";
             }
             if (isNotEmpty(loc))
                 result.add(By.cssSelector(loc));
         }
-        return valueOrDefault(result, asList(By.cssSelector(locator)));
+        return valueOrDefault(result, singletonList(By.cssSelector(locator)));
     }
+
     private static By getUpXpath(String group) {
         String result = ".." + StringUtils.repeat("/..", group.length()-1);
         return By.xpath(result);

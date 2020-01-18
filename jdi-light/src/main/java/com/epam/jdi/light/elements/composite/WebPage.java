@@ -353,10 +353,11 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction(level = DEBUG)
     public static double zoomLevel() {
         Object obj = jsExecute("return window.devicePixelRatio;");
+        if (obj == null) return 0.0;
         try {
             return (double) obj;
         } catch (Exception ex) {
-            return new Double((Long)obj);
+            return ((Long) obj).doubleValue();
         }
     }
     @JDIAction(level = DEBUG)
@@ -395,7 +396,7 @@ public class WebPage extends DriverBase implements PageObject {
         );
     }
 
-    public class StringCheckType {
+    public static class StringCheckType {
         private Supplier<String> actual;
         private String equals;
         private String what;
