@@ -9,9 +9,12 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.navs.*;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.DropdownMenu;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
-import com.epam.jdi.light.ui.html.elements.common.*;
+import com.epam.jdi.light.ui.html.elements.common.Range;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.RangeControl;
+import io.github.com.custom.ButtonWithTooltip;
 import io.github.com.sections.*;
 import io.github.com.sections.buttongroup.*;
 import io.github.com.sections.card.*;
@@ -38,15 +41,15 @@ public class BootstrapPage extends WebPage {
     public static Button doubleButton;
     public static Button disabledButton;
 
-    @UI("[type=button][value='+']") public static Button increaseProgress;
-    @UI("[type=button][value='-']") public static Button decreaseProgress;
-    @UI("[type=button][value='reset']") public static Button resetProgress;
+    public static Button increaseProgress;
+    public static Button decreaseProgress;
+    public static Button resetProgress;
     public static Progress progressbar;
     public static Progress multiProgressbar;
     public static Breadcrumb breadcrumb;
     public static Switch switcher;
     public static Switch disabledSwitcher;
-    public static Button buttonWithTooltip;
+    public static ButtonWithTooltip buttonWithTooltip;
     public static Button simpleToastButton;
     public static Checkbox acceptCheckbox;
 

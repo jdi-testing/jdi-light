@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-
 /**
  * To see an example of different Forms in bootstrap please visit https://getbootstrap.com/docs/4.3/components/forms/
  */

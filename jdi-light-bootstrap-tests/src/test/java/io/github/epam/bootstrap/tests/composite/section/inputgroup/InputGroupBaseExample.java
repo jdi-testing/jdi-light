@@ -5,11 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.inputGroupBasicExample1;
-import static io.github.com.pages.BootstrapPage.inputGroupBasicExample2;
-import static io.github.com.pages.BootstrapPage.inputGroupBasicExample3;
-import static io.github.com.pages.BootstrapPage.inputGroupBasicExample4;
-import static io.github.com.pages.BootstrapPage.inputGroupBasicExample5;
+import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;

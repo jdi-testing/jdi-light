@@ -5,10 +5,7 @@ import io.qameta.allure.Step;
 
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
-import static io.github.com.StaticSite.loginForm;
-import static io.github.com.StaticSite.logout;
-import static io.github.com.StaticSite.userIcon;
-import static io.github.com.StaticSite.userName;
+import static io.github.com.StaticSite.*;
 import static io.github.epam.test.data.UsersUtils.DEFAULT_USER;
 
 /**

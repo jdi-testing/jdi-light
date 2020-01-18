@@ -6,11 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.formsSelectMenu;
-import static io.github.com.pages.BootstrapPage.formsSelectMenuLarge;
-import static io.github.com.pages.BootstrapPage.formsSelectMenuMultiple;
-import static io.github.com.pages.BootstrapPage.formsSelectMenuSize;
-import static io.github.com.pages.BootstrapPage.formsSelectMenuSmall;
+import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;

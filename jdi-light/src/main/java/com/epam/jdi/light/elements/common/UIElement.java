@@ -29,7 +29,6 @@ import java.util.Objects;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_FILE_SUFFIX;
 import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;

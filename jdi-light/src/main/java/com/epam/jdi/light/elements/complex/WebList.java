@@ -24,7 +24,6 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.TextTypes.INDEX;
 import static com.epam.jdi.light.common.TextTypes.SMART_LIST;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;

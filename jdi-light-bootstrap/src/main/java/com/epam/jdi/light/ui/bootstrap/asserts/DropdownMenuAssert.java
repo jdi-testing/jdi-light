@@ -8,7 +8,6 @@ import org.hamcrest.Matchers;
 import java.util.Arrays;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.is;
 
 public class DropdownMenuAssert<A extends DropdownMenuAssert, E extends DropdownMenu> extends BootstrapDropdownAssert<A, E> {
     @JDIAction("Assert that '{name}' items values {0}")

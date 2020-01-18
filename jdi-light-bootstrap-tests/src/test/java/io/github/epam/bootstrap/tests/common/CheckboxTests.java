@@ -8,11 +8,10 @@ import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.acceptCheckbox;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.testng.Assert.*;
-import static org.testng.Assert.assertEquals;
 
-//APPROVED
 public class CheckboxTests extends TestsInit {
     final String label = "Accept terms and conditions";
     @BeforeMethod

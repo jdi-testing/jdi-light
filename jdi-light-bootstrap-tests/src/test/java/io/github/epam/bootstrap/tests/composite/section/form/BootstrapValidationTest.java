@@ -5,7 +5,6 @@ import io.github.com.sections.form.FormValidationForm;
 import io.github.epam.TestsInit;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;

@@ -21,8 +21,8 @@ public class CardImageTests extends TestsInit {
     private static final String ALT_ATTR_EXPECTED = "image";
     private static final String IMAGE_TOP_CLASS = "card-img-top";
     private static final String TEXT = "Some quick example text.";
-    private static final String WIDTH = "86";
-    private static final String HEIGHT = "137";
+    private static final int WIDTH = 86;
+    private static final int HEIGHT = 137;
 
     @BeforeMethod
     public void before() {

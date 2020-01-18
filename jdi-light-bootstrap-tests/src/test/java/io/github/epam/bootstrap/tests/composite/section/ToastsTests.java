@@ -5,20 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.firstStackToast;
-import static io.github.com.pages.BootstrapPage.firstTopAlignStackToast;
-import static io.github.com.pages.BootstrapPage.secondStackToast;
-import static io.github.com.pages.BootstrapPage.secondTopAlignStackToast;
-import static io.github.com.pages.BootstrapPage.simpleToast;
-import static io.github.com.pages.BootstrapPage.simpleToastButton;
-import static io.github.com.pages.BootstrapPage.stackOfToastsButton;
-import static io.github.com.pages.BootstrapPage.stackOfToastsWithTopAlignButton;
-import static io.github.com.pages.BootstrapPage.toastWithCenterAlign;
-import static io.github.com.pages.BootstrapPage.toastWithCenterAlignButton;
-import static io.github.com.pages.BootstrapPage.toastWithTopAlign;
-import static io.github.com.pages.BootstrapPage.toastWithTopAlignButton;
-import static io.github.com.pages.BootstrapPage.translucentToast;
-import static io.github.com.pages.BootstrapPage.translucentToastButton;
+import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class ToastsTests extends TestsInit {

@@ -1,19 +1,13 @@
 package io.github.epam.bootstrap.tests.complex;
 
-import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.bsPage;
-import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
 public class MultipleProgressBarsTests extends TestsInit {
 

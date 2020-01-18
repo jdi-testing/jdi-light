@@ -9,7 +9,6 @@ import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.modalTooltipsAndPopovers;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.CoreMatchers.is;
-import static org.testng.Assert.assertEquals;
 
 public class ModalTooltipsAndPopoversTests extends TestsInit {
     private static final String JS_SCROLL_TO_ELEMENT = "scrollIntoView(true);";

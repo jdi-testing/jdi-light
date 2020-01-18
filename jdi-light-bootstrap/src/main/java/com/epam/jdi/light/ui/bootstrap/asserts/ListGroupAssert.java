@@ -7,7 +7,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Dmitrii Pavlov on 25.09.2019

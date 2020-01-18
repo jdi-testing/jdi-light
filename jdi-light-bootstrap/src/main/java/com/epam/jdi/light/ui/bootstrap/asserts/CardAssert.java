@@ -7,7 +7,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.composite.Card;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.is;
 
 public class CardAssert extends UIAssert<CardAssert, Card> {
     @JDIAction("Assert that {0} is equal \'img\'")

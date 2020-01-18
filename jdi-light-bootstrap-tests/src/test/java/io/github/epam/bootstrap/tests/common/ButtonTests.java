@@ -7,9 +7,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.disabledButton;
-import static io.github.com.pages.BootstrapPage.redButton;
-import static io.github.com.pages.BootstrapPage.doubleButton;
+import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -23,7 +21,6 @@ import static org.testng.Assert.fail;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-//APPROVED
 public class ButtonTests extends TestsInit {
 
     private String text = "Red button";

@@ -1,8 +1,8 @@
 package io.github.epam.bootstrap.tests.composite.section.modal;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.bootstrap.elements.composite.Modal;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;

@@ -1,6 +1,7 @@
 package com.epam.jdi.light.ui.bootstrap.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
 /**
@@ -24,7 +25,7 @@ public class Tooltips {
         element.core().waitFor().attr("aria-describedby", "");
     }
     public static boolean isHiddenFor(ICoreElement element) {
-        return element.core().attr("aria-describedby").equals("");
+        return element.core().setup(JDIBase::noWait).attr("aria-describedby").equals("");
     }
 
     private String tooltipText;
@@ -43,7 +44,7 @@ public class Tooltips {
     }
     public boolean isDisplayedFor(ICoreElement element) {
         try {
-            element.core().has().attr("aria-describedby");
+            element.core().setup(JDIBase::noWait).has().attr("aria-describedby");
             return element.core().attr("data-original-title").equals(tooltipText);
         } catch (Exception ex) {
             return false;

@@ -10,7 +10,6 @@ import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.lessThan;
 import static org.testng.Assert.assertEquals;
 
 public class RangeTests extends TestsInit {

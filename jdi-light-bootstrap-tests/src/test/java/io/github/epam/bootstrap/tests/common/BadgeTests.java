@@ -14,7 +14,6 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
-//APPROVED
 public class BadgeTests extends TestsInit {
     private String text = "Unread Messages 9";
 

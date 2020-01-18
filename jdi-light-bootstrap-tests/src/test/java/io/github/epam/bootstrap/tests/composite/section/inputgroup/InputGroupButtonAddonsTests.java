@@ -6,10 +6,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static io.github.com.StaticSite.bsPage;
-import static io.github.com.pages.BootstrapPage.inputGroupButtonAddons1;
-import static io.github.com.pages.BootstrapPage.inputGroupButtonAddons2;
-import static io.github.com.pages.BootstrapPage.inputGroupButtonAddons3;
-import static io.github.com.pages.BootstrapPage.inputGroupButtonAddons4;
+import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 
 public class InputGroupButtonAddonsTests extends TestsInit {
