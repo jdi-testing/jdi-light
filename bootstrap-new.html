@@ -520,14 +520,14 @@
 
                     <div class="doc-space line">
                         <div class="html-left">
-                            <div class="custom-control custom-switch" id="switcher">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                <label class="custom-control-label" for="customSwitch1">Toggle this switch
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="switcher">
+                                <label class="custom-control-label" for="switcher">Toggle this switch
                                     element</label>
                             </div>
-                            <div class="custom-control custom-switch" id="disabled-switcher">
-                                <input type="checkbox" class="custom-control-input" disabled id="customSwitch2">
-                                <label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" disabled id="disabled-switcher">
+                                <label class="custom-control-label" for="disabled-switcher">Disabled switch element</label>
                             </div>
                         </div>
                     </div>
@@ -1730,9 +1730,9 @@
                         <div class="html-left">
                             <br>
                             <p>progress bar</p>
-                            <input type="button" onclick="decrease_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="-">
-                            <input type="button" onclick="increase_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="+">
-						    <input type="button" onclick="reset_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="reset">
+                            <input type="button" id="decrease-progress" onclick="decrease_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="-">
+                            <input type="button" id="increase-progress" onclick="increase_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="+">
+						    <input type="button" id="reset-progress" onclick="reset_progress()" style="margin-bottom: 5px;" class="progress-change btn btn-primary btn-sm" value="reset">
                             <div id="progressbar" class="progress">
                                 <div class="progress-bar" role="progressbar"
                                      style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
