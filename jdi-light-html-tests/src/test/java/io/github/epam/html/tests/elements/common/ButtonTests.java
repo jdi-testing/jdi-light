@@ -141,7 +141,7 @@ public class ButtonTests implements TestsInit {
             durationImmediately(() ->
                 ghostButton.is().notAppear());
             fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
-        } catch (Exception ex) {
+        } catch (AssertionError ex) {
             assertThat(safeException(ex), containsString("but: was \"displayed\""));
         }
     }

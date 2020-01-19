@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
