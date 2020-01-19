@@ -13,6 +13,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
+import com.epam.jdi.light.logger.AllureLoggerHelper;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.JAction1;
@@ -28,14 +29,18 @@ import org.aspectj.lang.reflect.MethodSignature;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
+import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreenOnFailure;
 import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
 import static com.epam.jdi.light.elements.base.OutputTemplates.STEP_TEMPLATE;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.logger.AllureLoggerHelper.*;
+import static com.epam.jdi.light.logger.LogLevels.ERROR;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
@@ -47,6 +52,7 @@ import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.Character.toUpperCase;
 import static java.lang.String.format;
+import static java.util.UUID.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -54,7 +60,6 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class ActionHelper {
-
     static String getTemplate(LogLevels level) {
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
     }
@@ -186,6 +191,12 @@ public class ActionHelper {
     }
 
     public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
+    static void logFailure(Object el) {
+        logger.toLog(">>> " + el.toString(), ERROR);
+        String screenName = takeScreenOnFailure();
+        String htmlSnapshot = takeHtmlCodeOnFailure();
+        failStep(randomUUID().toString(), screenName, htmlSnapshot);
+    }
 
     static WebPage getPage(Object element) {
         if (!isClass(element.getClass(), DriverBase.class))
