@@ -1,7 +1,6 @@
 package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.PrintUtils;
@@ -51,15 +50,12 @@ public class ActionProcessor {
             $("not empty", result -> result instanceof List && ((List) result).size() > 0),
             $("empty", result -> result instanceof List && ((List) result).size() == 0)
     );
-
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { // empty
     }
-
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() { // empty
     }
-
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
         try {
@@ -102,21 +98,18 @@ public class ActionProcessor {
             result = "[" + nowTime("mm:ss.S") + "] " + result.replaceFirst("\n", "");
         return result;
     }
-
     public static int aroundCount() {
         return where(currentThread().getStackTrace(),
                 s -> s.getMethodName().equals("jdiAround")/* ||
                 s.getClassName().equals("io.qameta.allure.aspects.StepsAspects")*/)
                 .size();
     }
-
     public static Object defaultAction(ProceedingJoinPoint jp) throws Throwable {
         ICoreElement obj = getJdi(jp);
         JFunc1<Object, Object> overrideAction = getOverride(jp);
         return overrideAction != null
                 ? overrideAction.execute(obj) : jp.proceed();
     }
-
     public static ICoreElement getJdi(ProceedingJoinPoint jp) {
         try {
             return jp.getThis() != null && isInterface(getJpClass(jp), ICoreElement.class)
@@ -125,7 +118,6 @@ public class ActionProcessor {
             return null;
         }
     }
-
     public static Safe<List<String>> isOverride = new Safe<>(ArrayList::new);
     public static Object stableAction(ProceedingJoinPoint jp) {
         String exceptionMsg = "";
@@ -151,8 +143,7 @@ public class ActionProcessor {
         } while (currentTimeMillis() - start < timeout * 1000);
         throw exception(exception, getFailedMessage(jp, exceptionMsg));
     }
-
-    private static JFunc1<Object, Object> getOverride(ProceedingJoinPoint jp) {
+    static JFunc1<Object, Object> getOverride(ProceedingJoinPoint jp) {
         String name = jp.getSignature().getName();
         if (isOverride.get().contains(name)) {
             return null;
@@ -162,10 +153,9 @@ public class ActionProcessor {
             isOverride.get().add(name);
         return override;
     }
-
-    private static int getTimeout(ProceedingJoinPoint jp, IBaseElement obj) {
+    static int getTimeout(ProceedingJoinPoint jp, IBaseElement obj) {
         JDIAction ja = jp != null
-                ? getMethodFromJp(jp).getAnnotation(JDIAction.class)
+                ? getJdiAction(jp)
                 : null;
         return ja != null && ja.timeout() != -1
             ? ja.timeout()
@@ -173,8 +163,7 @@ public class ActionProcessor {
                 ? obj.base().getTimeout()
                 : TIMEOUT.get();
     }
-
-    private static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
+    static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
         MethodSignature method = getJpMethod(jp);
         try {
             String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
@@ -187,23 +176,19 @@ public class ActionProcessor {
             throw exception(ex, "Surround method issue: Can't get failed message");
         }
     }
-
-    private static int getTimeout(ProceedingJoinPoint jp) {
+    static int getTimeout(ProceedingJoinPoint jp) {
         return getTimeout(null, getJdi(jp));
     }
-
-    private static String getConditionName(ProceedingJoinPoint jp) {
-        JDIAction ja = ((MethodSignature) jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
+    static String getConditionName(ProceedingJoinPoint jp) {
+        JDIAction ja = getJdiAction(jp);
         return ja != null ? ja.condition() : "";
     }
-
-    private static boolean condition(ProceedingJoinPoint jp) {
+    static boolean condition(ProceedingJoinPoint jp) {
         String conditionName = getConditionName(jp);
         return CONDITIONS.has(conditionName)
             ? CONDITIONS.get(conditionName).execute(jp)
             : true;
     }
-
     @Around("stepPointcut()")
     public Object stepAround(ProceedingJoinPoint jp) {
         try {
