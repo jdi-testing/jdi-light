@@ -6,6 +6,7 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.logger.AllureLoggerHelper;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
@@ -17,6 +18,9 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +32,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.common.SetTextTypes.SET_TEXT;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
+import static com.epam.jdi.light.driver.ScreenshotMaker.SCREENSHOT_STRATEGY;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
@@ -36,6 +41,7 @@ import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.PageFactory.preInit;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.logger.AllureLoggerHelper.*;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
@@ -149,7 +155,8 @@ public class WebSettings {
                     ? PRELATEST_VERSION : p, "driver.version");
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
-        // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
+        fillAction(p -> SCREENSHOT_STRATEGY = getAttachmentStrategy(p), "screenshot.strategy");
+        fillAction(p -> HTML_CODE_LOGGING = getAttachmentStrategy(p), "html.code.logging");
         fillAction(p -> KILL_BROWSER = p, "browser.kill");
         fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
         fillAction(p -> BROWSER_SIZE = p, "browser.size");
@@ -224,9 +231,11 @@ public class WebSettings {
 
     private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {
         String path = "";
-        try { path = getProperty(property);
-        } catch (Exception ignore) { }
-        if(isNotEmpty(path)) {
+        try {
+            path = System.getProperty(property, getProperty(property));
+        } catch (Exception ignore) {
+        }
+        if (isNotEmpty(path)) {
             setCapabilities.execute(getProperties(path));
         }
     }
@@ -262,15 +271,38 @@ public class WebSettings {
         }
         return NORMAL;
     }
-    public static Properties getProperties(String path) {
-        // TODO use mergePath macos and windows
-        Properties pTest = PropertyReader.getProperties(mergePath(path));
-        Properties pTarget = PropertyReader.getProperties(mergePath("/../../target/classes/" + path));
-        if (pTarget.size() > 0)
-            return pTarget;
-        String propertiesPath = pTest.size() > 0
-                ? path
-                : "/../../target/classes/" + path;
-        return PropertyReader.getProperties(mergePath(propertiesPath));
+
+    private static Properties getProperties(String path) {
+        File propertyFile = new File(path);
+        Properties properties;
+        if (propertyFile.exists()) {
+            properties = getCiProperties(path, propertyFile);
+        } else {
+            Properties pTest = PropertyReader.getProperties(mergePath(path));
+            Properties pTarget = PropertyReader.getProperties(mergePath("/../../target/classes/" + path));
+            if (pTarget.size() > 0)
+                return pTarget;
+            String propertiesPath = pTest.size() > 0
+                    ? path
+                    : mergePath("/../../target/classes/" + path);
+            properties = PropertyReader.getProperties(propertiesPath);
+        }
+        return properties;
+    }
+
+    private static Properties getCiProperties(String path, File propertyFile){
+        Properties properties = new Properties();
+        try {
+            System.out.println("Property file found: " + propertyFile.getAbsolutePath());
+            properties.load(new FileInputStream(propertyFile));
+        } catch (IOException ex) {
+            throw exception("Couldn't load properties for CI Server" + path);
+        }
+        return properties;
+    }
+    private static AttachmentStrategy getAttachmentStrategy(String strategy) {
+        return strategy.toLowerCase().equals("off")
+            ? AttachmentStrategy.OFF
+            : AttachmentStrategy.ON_FAIL;
     }
 }

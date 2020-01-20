@@ -64,7 +64,9 @@ public class FileAssert extends BaseAssert {
         assertThat(file.length(), size);
         return this;
     }
-
+    public FileAssert hasSize(Long size) {
+        return hasSize(is(size));
+    }
     public static void cleanupDownloads() {
         File dir = new File(DOWNLOADS_DIR);
         for(File file : requireNonNull(dir.listFiles()))

@@ -342,7 +342,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
                     j++;
                 }
                 cells.gotAll();
-            } catch (Exception ex) {throw exception("Can't get all cells. " + safeException(ex)); }
+            } catch (Exception ex) {throw exception(ex, "Can't get all cells"); }
         }
         return (T) this;
     }
