@@ -23,7 +23,7 @@ import java.util.List;
 
 import static com.applitools.eyes.selenium.fluent.Target.region;
 import static com.epam.jdi.light.actions.ActionHelper.getBeforeLogString;
-import static com.epam.jdi.light.actions.ActionOverride.OverrideAction;
+import static com.epam.jdi.light.actions.ActionOverride.overrideAction;
 import static com.epam.jdi.light.common.VisualCheckAction.IS_DISPLAYED;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
@@ -44,7 +44,7 @@ public class JDIEyes {
         return eyes;
     }
     static void visualTestInit() {
-        OverrideAction("visualCheck", obj -> {
+        overrideAction("visualCheck", obj -> {
             try {
                 ProceedingJoinPoint jp = (ProceedingJoinPoint) obj;
                 if (!isClass(jp.getThis().getClass(), IBaseElement.class))
@@ -57,7 +57,7 @@ public class JDIEyes {
                 visualCheckPage(WebPage.getCurrentPage());
             }
         });
-        OverrideAction("visualWindowCheck",
+        overrideAction("visualWindowCheck",
             jp -> visualCheckPage(WebPage.getCurrentPage()));
     }
     public static EyesConfig visualTestInit(Class<?> cl) {

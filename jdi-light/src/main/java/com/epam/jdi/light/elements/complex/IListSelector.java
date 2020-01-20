@@ -9,7 +9,7 @@ public interface IListSelector<T> extends ISelector, IList<T> {
         try {
             return base().noWait(() -> base().getList(0).size());
         } catch (Exception ex) {
-            throw exception("Get size failed: "+ safeException(ex));
+            throw exception(ex, "Get size failed");
         }
     }
     @Override

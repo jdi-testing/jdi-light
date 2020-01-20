@@ -57,6 +57,7 @@ public class DriverData {
     public static String BROWSER_SIZE = "MAXIMIZE";
     public static final String DEFAULT_DRIVER = "chrome";
     public static String DRIVER_NAME = DEFAULT_DRIVER;
+    public static String ARGUMENTS_PROPERTY = "arguments";
 
     public static Map<String,String> CAPABILITIES_FOR_IE = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_CHROME = new HashMap<>();
@@ -177,8 +178,16 @@ public class DriverData {
         setUp("Chrome: setExperimentalOption: prefs",
             () -> cap.setExperimentalOption("prefs", chromePrefs));
         // Capabilities from settings
-        CAPABILITIES_FOR_CHROME.forEach(cap::setCapability);
+        CAPABILITIES_FOR_CHROME.forEach((property, value) -> setupCapability(cap, property, value));
     };
+
+    public static void setupCapability(ChromeOptions cap, String property, String value){
+        if(!property.equals(ARGUMENTS_PROPERTY)){
+            cap.setCapability(property, value);
+        } else {
+            cap.addArguments(value.split(" "));
+        }
+    }
 
     public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = cap -> {
         FirefoxProfile firefoxProfile = new FirefoxProfile();

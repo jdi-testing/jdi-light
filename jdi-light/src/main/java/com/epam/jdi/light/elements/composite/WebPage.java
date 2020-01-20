@@ -21,7 +21,6 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
 import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
@@ -348,10 +347,11 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction(level = DEBUG)
     public static double zoomLevel() {
         Object obj = jsExecute("return window.devicePixelRatio;");
+        if (obj == null) return 0.0;
         try {
             return (double) obj;
         } catch (Exception ex) {
-            return new Double((Long)obj);
+            return ((Long) obj).doubleValue();
         }
     }
     @JDIAction(level = DEBUG)
@@ -374,7 +374,7 @@ public class WebPage extends DriverBase implements PageObject {
             BufferedImage crop = fullImg.getSubimage(x, y, w, h);
             ImageIO.write(crop, "png", screenshot);
             copyFile(screenshot, imageFile);
-        } catch (Exception ex) {throw exception(safeException(ex)); }
+        } catch (Exception ex) {throw exception(ex, "Can't do windowScreenshot"); }
         return path;
     }
     }
@@ -390,7 +390,7 @@ public class WebPage extends DriverBase implements PageObject {
         );
     }
 
-    public class StringCheckType {
+    public static class StringCheckType {
         private Supplier<String> actual;
         private String equals;
         private String what;

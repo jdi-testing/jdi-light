@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.InitActions.isPageObject;
@@ -42,7 +41,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -262,7 +261,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 return element;
             throw exception("");
         } catch (Exception ex) {
-            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
+            throw exception(ex, FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
         }
     }
     public List<WebElement> getWebElements(Object... args) {
@@ -282,7 +281,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             } catch (Exception ignore) { webElements.clear(); }
         }
         if (locator.isEmpty())
-            return asList(beforeSearch(SMART_SEARCH.execute(this)));
+            return singletonList(beforeSearch(SMART_SEARCH.execute(this)));
         SearchContext searchContext = getContext(parent, locator);
         List<WebElement> result = uiSearch(searchContext, correctLocator(getLocator(args)));
         if (result.size() > 0)
@@ -434,7 +433,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         initContext();
         try {
             return PRINT_ELEMENT.execute(this);
-        } catch (Exception ex) { throw exception("Can't print element: " + safeException(ex)); }
+        } catch (Exception ex) { throw exception(ex, "Can't print element"); }
     }
     private static String printWebElement(WebElement element) {
         String asString = element.toString().replaceAll("css selector", "css");
