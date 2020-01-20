@@ -37,7 +37,7 @@ jobs:
     - stage: compile
       name: Compile jdi code
       script:
-        - mvn -ntp install -DskipTests
+        - mvn install -DskipTests
 
     - stage: test
       name: Run tests - no po
