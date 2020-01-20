@@ -3,6 +3,7 @@ package com.epam.jdi.light.common;
 import java.io.IOException;
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.StringUtils.inputStreamToList;
 
 public class LinuxProcessUtils {
@@ -18,7 +19,7 @@ public class LinuxProcessUtils {
                 killProcessByPid(pid);
             }
         } catch (InterruptedException | IOException e) {
-            throw new RuntimeException("Can't kill drivers");
+            throw exception("Can't kill drivers");
         }
     }
 
