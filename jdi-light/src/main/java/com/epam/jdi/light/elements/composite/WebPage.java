@@ -21,7 +21,6 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
 import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
@@ -375,7 +374,7 @@ public class WebPage extends DriverBase implements PageObject {
             BufferedImage crop = fullImg.getSubimage(x, y, w, h);
             ImageIO.write(crop, "png", screenshot);
             copyFile(screenshot, imageFile);
-        } catch (Exception ex) {throw exception(safeException(ex)); }
+        } catch (Exception ex) {throw exception(ex, "Can't do windowScreenshot"); }
         return path;
     }
     }

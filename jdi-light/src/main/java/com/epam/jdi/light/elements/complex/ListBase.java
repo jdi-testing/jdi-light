@@ -251,7 +251,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
             if (initClass == WebElement.class)
                 initClass = UIElement.class;
             this.initClass = initClass;
-        } catch (Exception ex) { throw  exception("Can't init WebList. Weblist elements should extend UIElement"); }
+        } catch (Exception ex) { throw  exception(ex, "Can't init WebList. Weblist elements should extend UIElement"); }
     }
     private T toT(UIElement el) {
         try {
@@ -268,7 +268,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
             T t = (T) info.instance;
             t.base().setCore(el);
             return t;
-        } catch (Exception ex) { throw exception("Can't init new element for list"); }
+        } catch (Exception ex) { throw exception(ex, "Can't init new element for list"); }
     }
 
     public static JFunc1<Field[], String> GET_TITLE_FIELD_NAME = fields -> {

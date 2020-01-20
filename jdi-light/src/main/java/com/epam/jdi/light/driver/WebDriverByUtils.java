@@ -154,7 +154,7 @@ public final class WebDriverByUtils {
             List<By> result = replaceUp(locator);
             result = replaceText(result);
             return valueOrDefault(replaceChildren(result), one(by));
-        } catch (Exception ex) { throw exception("Search By failed"); }
+        } catch (Exception ex) { throw new RuntimeException("Search By failed"); }
     }
     public static By defineLocator(String locator) {
         String by = locator.contains("*root*")
