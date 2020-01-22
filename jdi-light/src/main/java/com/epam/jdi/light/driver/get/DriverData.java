@@ -35,6 +35,7 @@ import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.trim;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;
 import static org.openqa.selenium.ie.InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR;
@@ -102,13 +103,12 @@ public class DriverData {
     }
 
     // GET DRIVER
-    private static WebDriver setBrowserSizeForMac(WebDriver driver,
+    private static void setBrowserSizeForMac(WebDriver driver,
             int width, int height) {
         try {
             Point position = new Point(0, 0);
             driver.manage().window().setPosition(position);
             driver.manage().window().setSize(new Dimension(width, height));
-            return driver;
         } catch (Exception ex) {
             logger.error("Failed to Set resolution (%s, %s): %s", width, height, safeException(ex));
             throw ex;
@@ -235,21 +235,20 @@ public class DriverData {
 
     };
     // GET DRIVER
-    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver ->
-            getOs().equals(MAC) ? maximizeScreen(driver) : driver;
+    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = DriverData::maximizeScreen;
 
     private static WebDriver maximizeScreen(WebDriver driver) {
         try {
-            java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            Point position = new Point(0, 0);
-            driver.manage().window().setPosition(position);
-            Dimension maximizedScreenSize =
-                    new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
-            driver.manage().window().setSize(maximizedScreenSize);
+            switch (getOs()) {
+                case WIN:
+                    driver.manage().window().maximize();
+                case MAC:
+                    java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
+                    setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
+            }
             return driver;
         } catch (Exception ex) {
-            logger.error("Failed to Maximize screen: " + safeException(ex));
-            throw ex;
+            throw new RuntimeException("Failed to maximize window: ", ex);
         }
     }
 
