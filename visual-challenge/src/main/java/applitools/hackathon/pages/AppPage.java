@@ -27,7 +27,7 @@ public class AppPage extends WebPage {
     public static boolean advertismentPresent(Object element) {
         UIElement adv = (UIElement)element;
         Dimension size = adv.getSize();
-        return adv.isDisplayed() && adv.childs().size() > 0 &&
+        return adv.isDisplayed() && adv.children().size() > 0 &&
                 size.getWidth() >= 5 && size.height >= 5;
     }
 }
