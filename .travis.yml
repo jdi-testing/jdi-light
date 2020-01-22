@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - openjdk11
+  - openjdk8
 before_install:
   - sudo apt-get -y install jq
 before_script:
@@ -29,13 +29,13 @@ stages:
 jobs:
   include:
     - stage: prepare
-      name: Welcome to jdi mobile
+      name: Welcome to jdi mobile (back to jdk8)
       script:
-        - echo ------------------- WELCOME TO JDI MOBILE (trying openjdk11)----------------------
+        - echo ------------------- WELCOME TO JDI MOBILE ----------------------
         - mvn --version #it is helpful
 
     - stage: compile
-      name: Compile jdi code
+      name: Compile jdi code by openjdk8
       script:
         - echo -------------- compiling jdi mobile code --------------------
         - mvn install -DskipTests
