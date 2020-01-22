@@ -29,14 +29,15 @@ stages:
 jobs:
   include:
     - stage: prepare
-      name: Welcome to jdi
+      name: Welcome to jdi mobile
       script:
-        - echo ------------------- WELCOME TO JDI ----------------------
+        - echo ------------------- WELCOME TO JDI MOBILE----------------------
         - mvn --version #it is helpful
 
     - stage: compile
       name: Compile jdi code
       script:
+        - echo -------------- compiling jdi mobile code --------------------
         - mvn install -DskipTests
 
     - stage: test
@@ -91,7 +92,7 @@ jobs:
         - source reports.sh
         - deployAllureResults
 after_failure:
-  - echo "Build was failed"
+  - echo "Build failed !!!!!!!!!!!!!!!!!!!!!!!!"
 after_success:
   - echo "Build was successful"
 after_script:
