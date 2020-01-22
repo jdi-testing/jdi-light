@@ -16,6 +16,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -32,6 +33,11 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     @JDIAction("Assert that '{0}' option selected for '{name}'")
     public A selected(String option) {
         jdiAssert(element.selected(option), Matchers.is(true));
+        return (A) this;
+    }
+    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    public A selected(int i) {
+        jdiAssert(element.selected(i), Matchers.is(true));
         return (A) this;
     }
     public <TEnum extends Enum> UISelectAssert selected(TEnum option) {
@@ -105,6 +111,16 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {
         jdiAssert(element.isDisplayed() ? "displayed" : "hidden", Matchers.is("displayed"));
+        return (A) this;
+    }
+    @JDIAction("Assert that '{name}' is expanded")
+    public A expanded() {
+        jdiAssert(element.list().isDisplayed() ? "expanded" : "hidden", Matchers.is("expanded"));
+        return (A) this;
+    }
+    @JDIAction("Assert that '{name}' is collapsed")
+    public A collapsed() {
+        jdiAssert(element.list().isHidden() ? "collapsed" : "expanded", Matchers.is("expanded"));
         return (A) this;
     }
     @JDIAction("Assert that '{name}' is disappeared")

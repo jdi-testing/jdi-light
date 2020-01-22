@@ -4,6 +4,8 @@ import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -11,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
 
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,13 +47,13 @@ import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
  */
 public class DriverData {
     public static final String PROJECT_PATH = path("");
-    public static String SRC_PATH = mergePath(PROJECT_PATH,"src", "main");
-    public static String TEST_PATH = mergePath(PROJECT_PATH, "src" ,"test");
+    public static String SRC_PATH = mergePath(PROJECT_PATH, "src", "main");
+    public static String TEST_PATH = mergePath(PROJECT_PATH, "src", "test");
     public static String LOGS_PATH = mergePath(TEST_PATH, ".logs");
     public static String DRIVERS_FOLDER;
     public static String getDriverFolder() {
         return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
-                ? DRIVERS_FOLDER : mergePath(TEST_PATH,"resources", "drivers");
+                ? DRIVERS_FOLDER : mergePath(TEST_PATH, "resources", "drivers");
     }
     public static String DOWNLOADS_DIR = mergePath(TEST_PATH, "resources", "downloads");
     public static PageLoadStrategy PAGE_LOAD_STRATEGY = NORMAL;
@@ -84,7 +87,7 @@ public class DriverData {
     private static String driverPath(String driverName) {
         return mergePath(getDriverFolder(), getOs() == WIN ? driverName + ".exe" : driverName);
     }
-    public static String  LATEST_VERSION = "LATEST";
+    public static String LATEST_VERSION = "LATEST";
     public static String DRIVER_VERSION = LATEST_VERSION;
     public static String PRELATEST_VERSION = "PRELATEST";
     public static Platform PLATFORM = X32;
@@ -99,19 +102,6 @@ public class DriverData {
     }
 
     // GET DRIVER
-    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver -> {
-        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
-        if (groups.size() == 2)
-            driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
-        else {
-            if (getOs().equals(MAC))
-                maximizeScreen(driver);
-            else
-                driver.manage().window().maximize();
-        }
-        return driver;
-    };
-
     private static WebDriver setBrowserSizeForMac(WebDriver driver,
             int width, int height) {
         try {
@@ -124,10 +114,7 @@ public class DriverData {
             throw ex;
         }
     }
-    private static WebDriver maximizeScreen(WebDriver driver) {
-        java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
-        return setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
-    }
+
     public static Capabilities getCapabilities(
         MutableCapabilities capabilities, JAction1<Object> defaultCapabilities) {
         try {
@@ -247,5 +234,29 @@ public class DriverData {
     public static JAction1<OperaOptions> OPERA_OPTIONS = cap -> {
 
     };
+    // GET DRIVER
+    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver ->
+            getOs().equals(MAC) ? maximizeScreen(driver) : driver;
 
+    private static WebDriver maximizeScreen(WebDriver driver) {
+        try {
+            java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            Point position = new Point(0, 0);
+            driver.manage().window().setPosition(position);
+            Dimension maximizedScreenSize =
+                    new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
+            driver.manage().window().setSize(maximizedScreenSize);
+            return driver;
+        } catch (Exception ex) {
+            logger.error("Failed to Maximize screen: " + safeException(ex));
+            throw ex;
+        }
+    }
+
+    private static String getBrowserSizeOption() {
+        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
+        return groups.size() == 2
+                ? "--window-size=" + groups.get(0) + "," + groups.get(1)
+                : "--start-maximized";
+    }
 }
