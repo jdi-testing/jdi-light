@@ -333,7 +333,10 @@ public class UIElement extends JDIBase
     public void select(String value) {
         get(value).click();
     }
-
+    @JDIAction("Select '{name}' element")
+    public void select() { click(); }
+    @JDIAction("Select '{0}' in '{name}'")
+    public void select(int index) { getWebElements().get(index).click(); }
     /**
      * Select items by the values
      * @param names
@@ -658,7 +661,7 @@ public class UIElement extends JDIBase
         return $$(by, this);
     }
     public UIElement firstChild() { return find("*"); }
-    public WebList childs() { return finds("*"); }
+    public WebList children() { return finds("*"); }
     //endregion
 
     //region Aliases

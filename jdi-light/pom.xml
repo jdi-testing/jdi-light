@@ -72,7 +72,7 @@
             <version>RELEASE</version>
         </dependency>
 
-        <!--AOP Spring -->
+        <!--AOP -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
