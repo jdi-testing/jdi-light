@@ -37,7 +37,7 @@ public class DataTableTests extends TestsInit {
 
     @Test
     public void tableParamsTest() {
-        assertEquals(users.size(), 4);
+        assertEquals(users.size(), 5);
         assertEquals(users.count(), 6);
         assertEquals(users.header(), asList("Number", "Type", "User", "Description"));
     }
