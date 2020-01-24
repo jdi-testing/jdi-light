@@ -14,11 +14,9 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.UIUtils.asEntity;
 import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

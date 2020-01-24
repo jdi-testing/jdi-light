@@ -6,7 +6,6 @@ package applitools.hackathon;
  */
 
 import applitools.hackathon.pages.ApplitoolsSite;
-import com.epam.jdi.eyes.JDIEyes;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -16,7 +15,6 @@ import java.lang.reflect.Method;
 import static applitools.hackathon.pages.ApplitoolsSite.loginPage;
 import static com.epam.jdi.eyes.JDIEyes.*;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.tools.PropertyReader.readProperties;
 
 public class TestsInit {

@@ -22,11 +22,13 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
     }
     @JDIAction("Check '{name}'")
     public void check() {
-        uiElement.check();
+        if (!isSelected())
+            click();
     }
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
-        uiElement.uncheck();
+        if (isSelected())
+            click();
     }
     @JDIAction("Check that '{name}' is selected")
     public boolean isSelected() {
