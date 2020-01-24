@@ -10,7 +10,9 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class ComboboxSteps {
-    public static IsCombobox combobox(String name) { return getUI(name, IsCombobox.class); }
+    public static IsCombobox combobox(String name) {
+        return getUI(name, IsCombobox.class);
+    }
 
     @When("^select index (\\d+) in \"([^\"]*)\"$")
     public void comboboxSelect(int index, String name) {

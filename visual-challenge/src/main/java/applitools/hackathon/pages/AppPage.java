@@ -15,7 +15,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.GetVisible;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Link;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
 
 public class AppPage extends WebPage {
     @UI("#transactionsTable")

@@ -12,7 +12,9 @@ import static com.epam.jdi.tools.PathUtils.mergePath;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class FileInputSteps {
-    public static FileInput fileInput(String name) { return getUI(name, FileInput.class); }
+    public static FileInput fileInput(String name) {
+        return getUI(name, FileInput.class);
+    }
 
     @When("^I upload file \"([^\"]*)\" by \"([^\"]*)\" file input element$")
     public void iUploadFileByFileInputElement(String pathToFile, String name) {

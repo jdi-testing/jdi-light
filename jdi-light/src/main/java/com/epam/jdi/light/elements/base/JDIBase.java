@@ -213,7 +213,13 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             WebElement element = purify(webElement.get());
             try {
                 element.getTagName();
-                return beforeSearch(element);
+                beforeSearch(element);
+                return !locator.isEmpty()
+                    ? purify(new UIElement(element).find(getLocator()).setup(b -> {
+                        b.searchRules = searchRules;
+                        b.timeout = timeout;
+                    }))
+                    : element;
             } catch (Exception ignore) {
                 if (getElementFunc == null)
                     webElement.clear();

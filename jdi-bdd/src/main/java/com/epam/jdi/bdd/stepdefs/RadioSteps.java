@@ -16,7 +16,9 @@ import static org.testng.Assert.assertEquals;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class RadioSteps {
-    public static RadioButtons radioButtons(String name) { return getUI(name, RadioButtons.class); }
+    public static RadioButtons radioButtons(String name) {
+        return getUI(name, RadioButtons.class);
+    }
 
     @When("^(?:I |)select the radio button with \"([^\"]*)\" index from \"([^\"]*)\"$")
     public void selectRadioIndex(int index, String name) {
@@ -28,18 +30,22 @@ public class RadioSteps {
     public void theConsistOfNextValues(String name, List<String> values) {
         assertEquals(radioButtons(name).values(), values);
     }
+
     @Then("^the \"([^\"]*)\" contains \"([^\"]*)\" radio button$")
     public void theContainsRadioButton(String name, String value) {
         radioButtons(name).is().values(hasItem(value));
     }
+
     @Then("^the \"([^\"]*)\" contains \"([^\"]*)\" disabled radio button$")
     public void theContainsDisabledRadioButton(String name, String value) {
         radioButtons(name).is().disabled(hasItem(value));
     }
+
     @Then("^the \"([^\"]*)\" does not contain \"([^\"]*)\" enabled radio button$")
     public void theDoesNotContainEnabledRadioButton(String name, String value) {
         radioButtons(name).is().enabled(not(hasItem(value)));
     }
+
     @Then("^the \"([^\"]*)\" contains next enabled values:$")
     public void theContainsNextValues(String name, List<String> values) {
         for (String string : values) {

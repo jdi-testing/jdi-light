@@ -10,11 +10,9 @@ import applitools.hackathon.entities.Transaction;
 import applitools.hackathon.entities.User;
 import applitools.hackathon.test.data.TestDataProvider;
 import applitools.hackathon.utils.Utils;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Line;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.tools.Timer;
-import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

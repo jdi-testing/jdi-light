@@ -12,43 +12,52 @@ import static org.hamcrest.Matchers.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class NumberSelectorSteps {
-	public static NumberSelector numberSelector(String name) { return getUI(name, NumberSelector.class); }
+    public static NumberSelector numberSelector(String name) {
+        return getUI(name, NumberSelector.class);
+    }
 
-	@When("^(?:I |)set number \"([^\"]*)\" in \"([^\"]*)\"$")
-	public void setNumber(String value, String name) {
-		numberSelector(name).setNumber(value);
-	}
+    @When("^(?:I |)set number \"([^\"]*)\" in \"([^\"]*)\"$")
+    public void setNumber(String value, String name) {
+        numberSelector(name).setNumber(value);
+    }
 
-	@Then("^the \"([^\"]*)\" number selector value equals to \"([^\"]*)\"$")
-	public void getValue(String name, String value) {
-		numberSelector(name).has().number(is(Double.valueOf((value))));
-	}
-	@Then("^the \"([^\"]*)\" number selector min is \"([^\"]*)\"$")
-	public void getMin(String name, String value) {
-		numberSelector(name).has().min(is(Double.valueOf((value))));
-	}
-	@Then("^the \"([^\"]*)\" number selector max is \"([^\"]*)\"$")
-	public void getMax(String name, String value) {
-		numberSelector(name).has().max(is(Double.valueOf((value))));
-	}
-	@Then("^the \"([^\"]*)\" number selector step is \"([^\"]*)\"$")
-	public void getStep(String name, String value) {
-		numberSelector(name).has().step(is(Double.valueOf((value))));
-	}
-	@Then("^the \"([^\"]*)\" number selector value is greater or equal to \"([^\"]*)\"$")
-	public void numberIsGreaterOrEqual(String name, String value) {
-		numberSelector(name).is().number(greaterThanOrEqualTo(Double.valueOf(value)));
-	}
-	@Then("^the \"([^\"]*)\" number selector value less or equal to \"([^\"]*)\"$")
-	public void numberLessThanOrEqual(String name, String value) {
-		numberSelector(name).is().number(lessThanOrEqualTo(Double.valueOf(value)));
-	}
-	@Then("^the \"([^\"]*)\" number selector value is greater than \"([^\"]*)\"$")
-	public void numberIsGreaterThan(String name, String value) {
-		numberSelector(name).is().number(greaterThan(Double.valueOf(value)));
-	}
-	@Then("^the \"([^\"]*)\" number selector value less than \"([^\"]*)\"$")
-	public void numberLessThan(String name, String value) {
-		numberSelector(name).is().number(lessThan(Double.valueOf(value)));
-	}
+    @Then("^the \"([^\"]*)\" number selector value equals to \"([^\"]*)\"$")
+    public void getValue(String name, String value) {
+        numberSelector(name).has().number(is(Double.valueOf((value))));
+    }
+
+    @Then("^the \"([^\"]*)\" number selector min is \"([^\"]*)\"$")
+    public void getMin(String name, String value) {
+        numberSelector(name).has().min(is(Double.valueOf((value))));
+    }
+
+    @Then("^the \"([^\"]*)\" number selector max is \"([^\"]*)\"$")
+    public void getMax(String name, String value) {
+        numberSelector(name).has().max(is(Double.valueOf((value))));
+    }
+
+    @Then("^the \"([^\"]*)\" number selector step is \"([^\"]*)\"$")
+    public void getStep(String name, String value) {
+        numberSelector(name).has().step(is(Double.valueOf((value))));
+    }
+
+    @Then("^the \"([^\"]*)\" number selector value is greater or equal to \"([^\"]*)\"$")
+    public void numberIsGreaterOrEqual(String name, String value) {
+        numberSelector(name).is().number(greaterThanOrEqualTo(Double.valueOf(value)));
+    }
+
+    @Then("^the \"([^\"]*)\" number selector value less or equal to \"([^\"]*)\"$")
+    public void numberLessThanOrEqual(String name, String value) {
+        numberSelector(name).is().number(lessThanOrEqualTo(Double.valueOf(value)));
+    }
+
+    @Then("^the \"([^\"]*)\" number selector value is greater than \"([^\"]*)\"$")
+    public void numberIsGreaterThan(String name, String value) {
+        numberSelector(name).is().number(greaterThan(Double.valueOf(value)));
+    }
+
+    @Then("^the \"([^\"]*)\" number selector value less than \"([^\"]*)\"$")
+    public void numberLessThan(String name, String value) {
+        numberSelector(name).is().number(lessThan(Double.valueOf(value)));
+    }
 }

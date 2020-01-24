@@ -1,7 +1,6 @@
 package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.asserts.generic.TextAssert;
-import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
@@ -14,11 +13,9 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
-import static com.epam.jdi.light.common.ElementArea.*;
+import static com.epam.jdi.light.common.ElementArea.JS;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

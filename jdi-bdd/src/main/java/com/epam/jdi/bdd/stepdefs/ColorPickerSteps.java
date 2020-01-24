@@ -12,17 +12,21 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class ColorPickerSteps {
-    public static ColorPicker colorPicker(String name) { return getUI(name, ColorPicker.class); }
+    public static ColorPicker colorPicker(String name) {
+        return getUI(name, ColorPicker.class);
+    }
 
     @Given("^the \"([^\"]*)\" was set to \"([^\"]*)\" color$")
     @When("^I set \"([^\"]*)\" to \"([^\"]*)\" color$")
-    public void preSetColor(String name, String color){
+    public void preSetColor(String name, String color) {
         colorPicker(name).setColor(color);
     }
+
     @Then("^the \"([^\"]*)\" color equals to \"([^\"]*)\"$")
     public void haveColor(String name, String expectedColor) {
         colorPicker(name).is().color(expectedColor);
     }
+
     @Then("^the \"([^\"]*)\" color is \"([^\"]*)\"$")
     public void assertThatColor(String name, String color) {
         colorPicker(name).is().color(color);

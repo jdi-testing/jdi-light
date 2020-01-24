@@ -13,16 +13,20 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class RangeSteps {
-    public static Range range(String name) { return getUI(name, Range.class); }
+    public static Range range(String name) {
+        return getUI(name, Range.class);
+    }
 
     @When("^(?:I |)set \"([^\"]*)\" value to (\\d+)$")
     public void installTo(String name, int value) {
         range(name).setRangeValue(value);
     }
+
     @Then("^the \"([^\"]*)\" range value less or equal to (\\d+)$")
     public void rangeLessOrEqualTo(String name, int value) {
         range(name).is().value(lessThanOrEqualTo(value));
     }
+
     @Then("^the \"([^\"]*)\" range value greater or equal to (\\d+)$")
     public void rangeGreaterOrEqualTo(String name, int value) {
         range(name).is().value(greaterThanOrEqualTo(value));

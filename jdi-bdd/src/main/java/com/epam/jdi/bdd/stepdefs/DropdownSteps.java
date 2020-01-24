@@ -10,7 +10,9 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class DropdownSteps {
-    public static Dropdown dropdown(String name) { return getUI(name, Dropdown.class); }
+    public static Dropdown dropdown(String name) {
+        return getUI(name, Dropdown.class);
+    }
 
     @Then("^the \"([^\"]*)\" in \"([^\"]*)\" is selected$")
     public void theInIsSelected(String textValue, String name) {
