@@ -39,7 +39,7 @@ public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, Is
     }
     static Robot robot;
     static Robot getRobot() {
-        if (robot != null)
+        if (robot == null)
             try {
                 robot = new Robot();
             } catch (Exception ex) {
