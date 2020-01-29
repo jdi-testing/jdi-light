@@ -51,11 +51,13 @@
 
     <modules>
         <module>jdi-light</module>
+        <module>jdi-light-mobile</module>
         <module>jdi-light-html</module>
         <module>jdi-light-eyes</module>
         <module>jdi-bdd</module>
         <module>jdi-performance</module>
         <module>jdi-light-examples</module>
+        <module>jdi-light-examples-mobile</module>
         <module>jdi-light-html-tests</module>
         <module>jdi-bdd-tests</module>
         <module>jdi-bdd-no-po-tests</module>
