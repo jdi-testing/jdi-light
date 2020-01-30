@@ -5,11 +5,10 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 
 import static com.epam.jdi.eyes.JDIEyes.*;
-import static java.lang.Runtime.getRuntime;
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static jdisite.utils.DriverUtils.DRIVER;
 import static jdisite.utils.DriverUtils.runChromeDriver;
 
@@ -26,9 +25,9 @@ public class TestsInit {
         newVisualTest(method);
     }
 
-    @AfterSuite(alwaysRun = true)
-    public static void teardown() throws IOException {
-        closeAllEyes();
-        getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
+    @AfterSuite (alwaysRun = true)
+    public void tearDownSuite()
+    {
+        killAllSeleniumDrivers();
     }
 }

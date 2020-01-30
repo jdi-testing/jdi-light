@@ -7,7 +7,7 @@ public class DriverUtils {
     public static WebDriver DRIVER;
 
     public static void runChromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\Drivers\\chromedriver.exe");
         DRIVER = new ChromeDriver();
         DRIVER.manage().window().maximize();
     }
