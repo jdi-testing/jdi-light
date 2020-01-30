@@ -48,20 +48,10 @@ public class WaitJListTests extends StaticTestsInit {
     @Test
     public void sizeTest() {
         assertEquals(jsearchTitle.size(), 6);
-         try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         jsearchTitle.is().size(equalTo(8));
     }
     @Test
     public void sizeNotEmptyTest() {
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         jsearchTitle.is().size(greaterThan(7));
     }
 
