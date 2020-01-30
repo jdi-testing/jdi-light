@@ -1,14 +1,15 @@
 package jdisite.utils;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import static com.epam.jdi.light.driver.get.DriverData.*;
 
 public class DriverUtils {
     public static WebDriver DRIVER;
 
     public static void runChromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\Drivers\\chromedriver.exe");
-        DRIVER = new ChromeDriver();
-        DRIVER.manage().window().maximize();
+        WebDriverFactory.useDriver(DRIVER_NAME);
+        DRIVER = WebDriverFactory.getDriver();
     }
 }
