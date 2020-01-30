@@ -1,6 +1,7 @@
 package io.github.epam;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
@@ -17,6 +18,7 @@ import static io.github.com.StaticSite.homePage;
 public interface TestsInit {
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
+        WebSettings.init();
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
