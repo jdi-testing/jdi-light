@@ -53,6 +53,11 @@ public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert
     
     @Override
     public DataListAssert<T, D> is() {
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         refresh();
         return new DataListAssert<T, D>().set(this);
     }
