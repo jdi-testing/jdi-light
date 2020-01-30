@@ -146,6 +146,7 @@ public class WebPage extends DriverBase implements PageObject {
         preInit();
         CacheValue.reset();
         driver().navigate().to(url);
+        driver().manage().window().maximize();
         setCurrentPage(this);
     }
     public void open(Object... params) {

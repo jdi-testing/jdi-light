@@ -59,10 +59,10 @@ Feature: Textarea
     When I clear "Text Area"
     When I input in the "Text Area" line "line1"
     And I input in the "Text Area" line ""
+#    FYI: addLine do not add empty lines.
     And I input in the "Text Area" line "line2"
     Then the lines in the "Text Area" are equal
       | line1 |
-      |       |
       | line2 |
 
   Scenario: Label text test
