@@ -1,5 +1,6 @@
 package com.jdi;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.settings.WebSettings;
 import jdisite.pages.HomePage;
@@ -11,27 +12,21 @@ import java.lang.reflect.Method;
 
 import static com.epam.jdi.eyes.JDIEyes.*;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static jdisite.utils.DriverUtils.DRIVER;
-import static jdisite.utils.DriverUtils.runChromeDriver;
 
 public class TestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         WebSettings.init();
-        runChromeDriver();
+        WebDriverFactory.useDriver(DRIVER_NAME);
+        DRIVER = WebDriverFactory.getDriver();
+//        runChromeDriver();
         DRIVER.navigate().to(HomePage.URL);
         visualTestInitSelenium();
         logger.toLog("Run Tests");
     }
-
-//    private void mySetUp() {
-//        INTERFACES.update(IsCombobox.class, DataListOptions.class);
-//        initSite(StaticSite.class);
-//        initSite(PseudoSite.class);
-//        homePage.open();
-//        logger.toLog("Run Tests");
-//    }
 
     @BeforeMethod
     public void before(Method method) {
