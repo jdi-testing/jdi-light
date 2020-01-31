@@ -1,6 +1,7 @@
 package org.mytests.tests;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
@@ -24,6 +25,7 @@ public class TestsInit {
     public static Safe<Timer> TIMER = new Safe<>();
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
+        WebSettings.init();
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initSite(SiteJdi.class);
         assertThat(TIMEOUT.get(), is(5));
