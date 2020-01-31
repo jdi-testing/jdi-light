@@ -16,5 +16,5 @@ public @interface JDropdown {
     String value() default "";
     String list() default "";
     String expand() default "";
-
+    boolean autoclose() default false;
 }
