@@ -6,6 +6,7 @@ package applitools.hackathon;
  */
 
 import applitools.hackathon.pages.ApplitoolsSite;
+import com.epam.jdi.light.settings.WebSettings;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -21,6 +22,7 @@ public class TestsInit {
 
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
+        WebSettings.init();
         visualTestInit(ApplitoolsSite.class);
         if (readProperties().getProperty("environment").equals("V2"))
             loginPage.url = "https://demo.applitools.com/hackathonV2.html";
