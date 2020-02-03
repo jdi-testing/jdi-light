@@ -49,7 +49,7 @@ public class TraditionalTests extends TestsInit {
         loginPage.validatateAlert(message);
     }
 
-    @Test(suiteName = "Table Sort Test")
+    @Test(suiteName = "Table Sort Test", enabled = false)
     public void sortTableValidation() {
         loginForm().loginAs(new User());
         List<Transaction> unsortedTransactions = transactionsTable.allData();
