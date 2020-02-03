@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Table;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.qameta.allure.Issue;
 import org.testng.Assert;
 
 import java.util.List;
@@ -115,6 +116,7 @@ public class TableSteps {
         cellIs(name, cellPair).selected();
     }
 
+    @Issue("1691")
     @Then("^the cell \\(([^\\)]*)\\) in the \"([^\"]*)\" (?:table |)is deselected$")
     public void isCellDeselected(String cellPair, String name) {
         cellIs(name, cellPair).deselected();
