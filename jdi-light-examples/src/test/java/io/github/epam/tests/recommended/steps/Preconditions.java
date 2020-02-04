@@ -1,5 +1,6 @@
 package io.github.epam.tests.recommended.steps;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 

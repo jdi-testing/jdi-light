@@ -9,6 +9,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
+import com.epam.jdi.light.settings.TimeoutSettings;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
@@ -27,6 +29,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.setupFieldUsingRules;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static java.lang.Thread.sleep;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -166,6 +169,11 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
      */
     @JDIAction(level = DEBUG)
     public void refresh() {
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         clear();
     }
 
