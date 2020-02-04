@@ -104,9 +104,12 @@ public class JDIEyes {
             for (Eyes eye : eyesList)
                 closeEye(eye);
         } finally {
-            Eyes eyes_ = eyes.get();
-            if ( eyes_ != null && eyes_.getIsOpen())
-                eyes_.abortIfNotClosed();
+            try {
+                if (eyes.get().getIsOpen())
+                    eyes.get().abortIfNotClosed();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     public static void newVisualTest(String testName) {

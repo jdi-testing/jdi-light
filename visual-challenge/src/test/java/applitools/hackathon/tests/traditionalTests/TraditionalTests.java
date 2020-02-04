@@ -34,7 +34,7 @@ public class TraditionalTests extends TestsInit {
     @Test(suiteName = "Login Page UI Elements Test")
     public void loginPageValidation() {
         loginPage.validatateForm();
-        //loginPage.alert.is().hidden();
+        loginPage.alert.is().hidden();
     }
 
     @Test(suiteName = "Data-Driven Test", dataProvider = "correctUsers", dataProviderClass = TestDataProvider.class)
