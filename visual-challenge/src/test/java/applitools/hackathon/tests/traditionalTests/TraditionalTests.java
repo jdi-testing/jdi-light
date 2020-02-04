@@ -68,19 +68,6 @@ public class TraditionalTests extends TestsInit {
             .rowsVisualValidation("Description", images);
     }
 
-    @Test(suiteName = "Canvas Chart Test")
-    public void canvasChartTest() {
-        loginForm().loginAs(new User());
-        compareExpenses.click();
-        WebPage.zoom(0.8);
-        Timer.sleep(1000);
-        expensesChart.visualValidation("Expense Chart 2017-2018");
-        showNextYear.click();
-        Timer.sleep(1000);
-        expensesChart.visualValidation("Expense Chart 2017-2019");
-        WebPage.zoom(1);
-    }
-
     @Test(suiteName = "Dynamic Content Test")
     public void dynamicAdTest() {
         loginPage.open("showAd=true");
