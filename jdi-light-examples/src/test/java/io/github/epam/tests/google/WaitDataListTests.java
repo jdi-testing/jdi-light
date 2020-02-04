@@ -43,10 +43,20 @@ public class WaitDataListTests extends StaticTestsInit {
     @Test
     public void sizeTest() {
         assertEquals(searchS.size(), 6);
+        /*try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } */
         searchS.is().size(equalTo(8));
     }
     @Test
     public void sizeGreaterTest() {
+        /*try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
         searchS.is().size(greaterThan(7));
     }
 
