@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
     <version>1.1.11</version>
-    <artifactId>jdi-light-examples</artifactId>
+    <artifactId>jdi-light-mobile-examples</artifactId>
     <name>JDI Web Tests</name>
     <groupId>com.epam.jdi</groupId>
 
