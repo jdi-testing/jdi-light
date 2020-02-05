@@ -1,4 +1,4 @@
-package cucmberTests.stepdefs;
+package cucumberTests.stepdefs;
 
 import com.epam.jdi.light.settings.WebSettings;
 import cucumber.api.java.Before;

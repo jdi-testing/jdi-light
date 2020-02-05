@@ -1,7 +1,8 @@
 @properties
 Feature: TestsWithProperties
   Background:
-    Given I'm on "Html5 Page" page
+    Given I'm logged in as "Roman" with "Jdi1234" password
+    And I'm on "Html5 Page" page
 
   Scenario: click element
     When I click on "Red Button"

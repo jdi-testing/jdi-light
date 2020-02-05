@@ -1,4 +1,4 @@
-package cucmberTests;
+package cucumberTests;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -10,7 +10,7 @@ import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "classpath:features"
-        , glue = {"com.epam.jdi.bdd", "cucmberTests"}
+        , glue = {"com.epam.jdi.bdd", "cucumberTests"}
         , plugin = {"pretty"}
 //        , tags = {"@textarea"}
 )
