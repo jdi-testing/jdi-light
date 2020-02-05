@@ -4,6 +4,7 @@ Feature: Combobox
 Background:
   Given I should be logged in
   And I open "Html5 Page"
+  And I focus on "Ice Cream"
   When input "Coconut" in "Ice Cream"
 
 Scenario: Get combobox value test
@@ -16,9 +17,6 @@ Scenario: select combobox value test
 Scenario: select num combobox value test
   When select index 5 in "Ice Cream"
   Then the "Ice Cream" selected value is "Vanilla"
-
-Scenario: Selected combobox value test
-  Then the "Ice Cream" selected value is "Coconut"
 
 Scenario: Combobox label test
   Then the "Ice Cream" label text equals to "Choose your lovely icecream"
@@ -53,6 +51,3 @@ Scenario: Check placeholder
   Then the "Ice Cream" placeholder equals to "Ice cream"
   Then the "Ice Cream" placeholder contains "cream"
   And the "Ice Cream" placeholder matches to "(.*)cream"
-
-Scenario: Focus
-  When I focus on "Ice Cream"

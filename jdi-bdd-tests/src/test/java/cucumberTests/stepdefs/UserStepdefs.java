@@ -1,4 +1,4 @@
-package cucmberTests.stepdefs;
+package cucumberTests.stepdefs;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -16,9 +16,14 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
-import static io.github.com.pages.Header.*;
+import static io.github.com.pages.Header.loginForm;
+import static io.github.com.pages.Header.userIcon;
+import static io.github.com.pages.Header.userName;
 import static java.util.Arrays.asList;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 public class UserStepdefs {
 
@@ -64,6 +69,7 @@ public class UserStepdefs {
             assertTrue(ex.getLocalizedMessage().contains("FileInput 'Disabled File Input' is disabled. Can't upload file"));
         }
     }
+
     @When("^I select \"([^\"]*)\" disabled option \"([^\"]*)\"")
     public void iSelectDisabled(String name, String option) {
         try {

@@ -1,8 +1,12 @@
 package com.epam.jdi.bdd.stepdefs;
 
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Menu;
+import com.epam.jdi.light.elements.complex.WebList;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.qameta.allure.Issue;
 
 import java.util.List;
 
@@ -21,14 +25,16 @@ public class MenuSteps {
     public void select(String value, String name) {
         list(name).select(value);
     }
-
+    
+    @Issue("1692")
+    @JDIAction(timeout = 15)
     @When("^(?:I |)select items in \"([^\"]*)\" menu:$")
     public void selectItems(String name, List<String> values) {
-        String[] items = values.toArray(new String[0]);
-        for (String item : items)
+        for (String item : values)
             list(name).select(item);
     }
 
+    @Issue("1692")
     @Then("^the \"([^\"]*)\" in \"([^\"]*)\" menu is selected$")
     public void isSelected(String value, String name) {
         list(name).selected(value);

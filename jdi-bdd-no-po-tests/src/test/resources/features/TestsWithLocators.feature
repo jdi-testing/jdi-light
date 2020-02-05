@@ -1,6 +1,8 @@
 @locators
 Feature: TestsWithLocators
+
   Background:
+    Given I'm logged in as "Roman" with "Jdi1234" password
     Given Page with url "https://jdi-testing.github.io/jdi-light/html5.html" openned
 
   Scenario: click element

@@ -8,6 +8,4 @@ import io.github.com.sections.ContactForm;
 public class Main {
 	@UI("form#contact-form")
 	public ContactForm contactForm;
-	@XPath(".//button[@type='submit']")
-	public Button calculate;
 }

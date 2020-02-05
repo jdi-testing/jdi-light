@@ -2,6 +2,7 @@
 Feature: Form
 
   Background:
+    Given I'm logged in as "Roman" with "Jdi1234" password
     Given I'm on "Contacts Page" page
 
   Scenario: fill Contact Form from json
