@@ -1,6 +1,6 @@
 package org.mytests.uiobjects.example.knection;
 
-import com.epam.jdi.light.elements.complex.table.DataTable;
+import com.epam.jdi.mobile.elements.complex.table.DataTable;
 
 import static java.util.Arrays.asList;
 

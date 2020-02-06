@@ -1,7 +1,7 @@
 package selenium.site;
 
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
+import com.epam.jdi.mobile.elements.complex.WebList;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.JSite;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

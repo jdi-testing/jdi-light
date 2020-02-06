@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.issues.issue69;
 
-import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.mobile.elements.composite.Section;
 import com.epam.jdi.mobile.ui.html.elements.common.Button;
 
 import static com.epam.jdi.tools.PrintUtils.print;

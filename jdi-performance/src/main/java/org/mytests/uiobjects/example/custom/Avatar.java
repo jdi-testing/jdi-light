@@ -1,8 +1,8 @@
 package org.mytests.uiobjects.example.custom;
 
-import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.interfaces.base.HasValue;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.mobile.elements.composite.Section;
+import com.epam.jdi.mobile.elements.interfaces.base.HasValue;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.mobile.ui.html.elements.common.Checkbox;
 import com.epam.jdi.mobile.ui.html.elements.common.Image;
 import com.epam.jdi.mobile.ui.html.elements.common.Text;

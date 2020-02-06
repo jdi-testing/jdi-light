@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 
-import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.mobile.settings.WebSettings.TEST_NAME;
+import static com.epam.jdi.mobile.settings.WebSettings.logger;
 
 public class TestNGListener implements IInvokedMethodListener {
     @Override

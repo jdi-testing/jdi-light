@@ -1,12 +1,12 @@
 package com.epam.jdi.mobile.ui.html.elements.common;
 
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.elements.interfaces.base.SetValue;
+import com.epam.jdi.mobile.common.JDIAction;
+import com.epam.jdi.mobile.elements.base.UIBaseElement;
+import com.epam.jdi.mobile.elements.interfaces.base.HasLabel;
+import com.epam.jdi.mobile.elements.interfaces.base.SetValue;
 import com.epam.jdi.mobile.ui.html.asserts.RangeAssert;
 
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.mobile.logger.LogLevels.DEBUG;
 import static com.epam.jdi.mobile.ui.html.HtmlUtils.asInt;
 import static com.epam.jdi.mobile.ui.html.HtmlUtils.getInt;
 

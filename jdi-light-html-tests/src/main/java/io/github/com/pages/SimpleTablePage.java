@@ -1,8 +1,8 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.complex.table.DataTable;
-import com.epam.jdi.light.elements.complex.table.Table;
-import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.mobile.elements.complex.table.DataTable;
+import com.epam.jdi.mobile.elements.complex.table.Table;
+import com.epam.jdi.mobile.elements.composite.WebPage;
 import io.github.com.entities.Furniture;
 
 public class SimpleTablePage extends WebPage {

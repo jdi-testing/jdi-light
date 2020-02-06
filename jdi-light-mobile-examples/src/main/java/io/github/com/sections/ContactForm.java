@@ -1,8 +1,8 @@
 package io.github.com.sections;
 
-import com.epam.jdi.light.elements.complex.Selector;
-import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.mobile.elements.complex.Selector;
+import com.epam.jdi.mobile.elements.composite.Form;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
 import io.github.epam.entities.User;
 import org.openqa.selenium.WebElement;
 

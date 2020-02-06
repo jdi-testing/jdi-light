@@ -1,10 +1,10 @@
 package io.github.epam.pages;
 
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.mobile.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.mobile.elements.composite.WebPage;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.JDropdown;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
 import io.github.epam.sections.LogSidebar;
 import org.openqa.selenium.WebElement;
 

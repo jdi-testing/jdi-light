@@ -8,12 +8,12 @@ import org.aspectj.lang.annotation.Pointcut;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.epam.jdi.light.actions.ActionHelper.*;
-import static com.epam.jdi.light.actions.ActionProcessor.*;
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.mobile.actions.ActionHelper.*;
+import static com.epam.jdi.mobile.actions.ActionProcessor.*;
+import static com.epam.jdi.mobile.common.Exceptions.exception;
+import static com.epam.jdi.mobile.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.mobile.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.mobile.settings.WebSettings.logger;
 import static java.util.Collections.reverse;
 
 /**

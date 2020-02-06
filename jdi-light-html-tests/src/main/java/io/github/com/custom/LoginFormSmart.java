@@ -1,6 +1,6 @@
 package io.github.com.custom;
 
-import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.mobile.elements.composite.Form;
 import com.epam.jdi.mobile.ui.html.elements.common.Button;
 import com.epam.jdi.mobile.ui.html.elements.common.TextField;
 import io.github.com.entities.User;

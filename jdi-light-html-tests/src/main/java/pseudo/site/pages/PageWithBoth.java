@@ -1,5 +1,5 @@
 package pseudo.site.pages;
 
-import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.mobile.elements.composite.WebPage;
 
 public class PageWithBoth extends WebPage {}

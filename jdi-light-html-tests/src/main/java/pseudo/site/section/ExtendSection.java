@@ -1,6 +1,6 @@
 package pseudo.site.section;
 
-import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.mobile.elements.composite.Section;
 
 public class ExtendSection extends Section {
 }

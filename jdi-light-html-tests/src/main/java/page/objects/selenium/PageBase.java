@@ -3,7 +3,7 @@ package page.objects.selenium;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.mobile.elements.init.PageFactory.initElements;
 
 public class PageBase {
     public static String JDI_DOMAIN = "https://jdi-testing.github.io/jdi-light";

@@ -1,13 +1,13 @@
 package com.epam.jdi.mobile.ui.html.elements.common;
 
-import com.epam.jdi.light.asserts.generic.TextAssert;
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
-import com.epam.jdi.light.elements.interfaces.base.SetValue;
-import com.epam.jdi.light.elements.interfaces.common.IsInput;
+import com.epam.jdi.mobile.asserts.generic.TextAssert;
+import com.epam.jdi.mobile.elements.base.UIBaseElement;
+import com.epam.jdi.mobile.elements.interfaces.base.HasLabel;
+import com.epam.jdi.mobile.elements.interfaces.base.HasPlaceholder;
+import com.epam.jdi.mobile.elements.interfaces.base.SetValue;
+import com.epam.jdi.mobile.elements.interfaces.common.IsInput;
 
-import static com.epam.jdi.light.common.TextTypes.VALUE;
+import static com.epam.jdi.mobile.common.TextTypes.VALUE;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

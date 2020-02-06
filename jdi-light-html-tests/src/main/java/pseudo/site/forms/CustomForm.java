@@ -1,14 +1,14 @@
 package pseudo.site.forms;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
-import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
+import com.epam.jdi.mobile.elements.common.UIElement;
+import com.epam.jdi.mobile.elements.complex.WebList;
+import com.epam.jdi.mobile.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.mobile.elements.composite.Form;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.FindBy;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.JDropdown;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.mobile.ui.html.elements.common.Button;
 import org.openqa.selenium.WebElement;
 import pseudo.site.entities.User;
