@@ -1,7 +1,7 @@
 package com.epam.jdi.mobile.ui.html.elements.complex;
 
-import com.epam.jdi.mobile.elements.complex.Selector;
-import com.epam.jdi.mobile.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.complex.Selector;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

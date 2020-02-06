@@ -1,7 +1,7 @@
 package org.mytests.uiobjects.example.site.custom;
 
-import com.epam.jdi.mobile.elements.common.UIElement;
-import com.epam.jdi.mobile.elements.complex.Checklist;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.Checklist;
 
 public class MyCheckList extends Checklist {
     @Override

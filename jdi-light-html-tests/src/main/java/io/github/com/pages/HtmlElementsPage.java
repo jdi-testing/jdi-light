@@ -1,16 +1,16 @@
 package io.github.com.pages;
 
-import com.epam.jdi.mobile.elements.common.Label;
-import com.epam.jdi.mobile.elements.complex.Checklist;
-import com.epam.jdi.mobile.elements.complex.dropdown.Dropdown;
-import com.epam.jdi.mobile.elements.complex.dropdown.DropdownSelect;
-import com.epam.jdi.mobile.elements.composite.WebPage;
-import com.epam.jdi.mobile.elements.interfaces.complex.IsChecklist;
-import com.epam.jdi.mobile.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.mobile.elements.interfaces.complex.IsDropdown;
-import com.epam.jdi.mobile.elements.pageobjects.annotations.NoWait;
-import com.epam.jdi.mobile.elements.pageobjects.annotations.WaitTimeout;
-import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.complex.Checklist;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.light.elements.complex.dropdown.DropdownSelect;
+import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
+import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.NoWait;
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.mobile.ui.html.elements.common.*;
 import com.epam.jdi.mobile.ui.html.elements.common.*;
 import com.epam.jdi.mobile.ui.html.elements.complex.DataListOptions;

@@ -1,7 +1,7 @@
 package org.mytests.uiobjects.example.knection;
 
-import com.epam.jdi.mobile.elements.composite.Section;
-import com.epam.jdi.mobile.elements.pageobjects.annotations.Title;
+import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.mobile.ui.html.elements.common.Link;
 import com.epam.jdi.mobile.ui.html.elements.common.Text;
 

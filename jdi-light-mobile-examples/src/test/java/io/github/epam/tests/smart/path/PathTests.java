@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.mobile.driver.WebDriverByUtils.searchBy;
-import static com.epam.jdi.mobile.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.driver.WebDriverByUtils.searchBy;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.StaticSite.navigationL;

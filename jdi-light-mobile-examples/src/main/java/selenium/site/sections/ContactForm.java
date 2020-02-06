@@ -1,6 +1,6 @@
 package selenium.site.sections;
 
-import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.WebElement;
 import selenium.site.data.ContactInfo;
 

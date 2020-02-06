@@ -1,7 +1,7 @@
 package org.mytests.uiobjects.example.site.custom;
 
 
-import com.epam.jdi.mobile.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.UIElement;
 
 public class MenuItem extends UIElement {
     @Override

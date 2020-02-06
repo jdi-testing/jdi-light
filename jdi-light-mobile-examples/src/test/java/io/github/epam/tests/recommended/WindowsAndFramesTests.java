@@ -1,11 +1,11 @@
 package io.github.epam.tests.recommended;
 
-import com.epam.jdi.mobile.elements.composite.WebPage;
+import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.StaticTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.mobile.elements.common.WindowsManager.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.GithubPage.repoDescription;
 import static io.github.com.pages.HomePage.githubLink;

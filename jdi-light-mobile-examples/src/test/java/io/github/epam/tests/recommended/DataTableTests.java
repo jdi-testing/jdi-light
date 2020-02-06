@@ -1,13 +1,13 @@
 package io.github.epam.tests.recommended;
 
-import com.epam.jdi.mobile.elements.complex.table.DataTable;
+import com.epam.jdi.light.elements.complex.table.DataTable;
 import io.github.epam.StaticTestsInit;
 import io.github.epam.custom.UserRow;
 import io.github.epam.entities.UserInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.mobile.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.PerformancePage.*;
 import static io.github.epam.test.data.TableData.GRADY_BROCK;

@@ -1,6 +1,6 @@
 package org.mytests.tests.example;
 
-import com.epam.jdi.mobile.elements.composite.Form;
+import com.epam.jdi.light.elements.composite.Form;
 import org.mytests.tests.TestsInit;
 import org.mytests.uiobjects.example.entities.Contacts;
 import org.testng.annotations.Test;

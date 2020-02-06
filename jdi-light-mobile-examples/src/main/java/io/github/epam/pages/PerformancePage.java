@@ -1,8 +1,8 @@
 package io.github.epam.pages;
 
-import com.epam.jdi.mobile.elements.complex.table.Table;
-import com.epam.jdi.mobile.elements.composite.WebPage;
-import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.complex.table.Table;
+import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 
 public class PerformancePage extends WebPage {
 	@Css("#users-table") public Table users;

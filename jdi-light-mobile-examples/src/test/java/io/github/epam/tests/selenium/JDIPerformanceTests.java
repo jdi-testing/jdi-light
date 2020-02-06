@@ -1,14 +1,14 @@
 package io.github.epam.tests.selenium;
 
-import com.epam.jdi.mobile.elements.complex.table.Line;
+import com.epam.jdi.light.elements.complex.table.Line;
 import org.apache.commons.lang3.time.StopWatch;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import selenium.entities.User;
 
-import static com.epam.jdi.mobile.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.mobile.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
 import static selenium.entities.TestData.TABLE_SNAPSHOOT;
 import static selenium.seleniumPO.HomePage.leftNavigation;
 import static selenium.seleniumPO.SiteSelenium.homePage;

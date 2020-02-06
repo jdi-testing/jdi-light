@@ -1,6 +1,6 @@
 package io.github.epam.tests.epam.steps;
 
-import com.epam.jdi.mobile.elements.composite.WebPage;
+import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 
 import static io.github.com.StaticSite.homePage;

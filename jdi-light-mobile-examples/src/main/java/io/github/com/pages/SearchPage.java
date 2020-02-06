@@ -1,11 +1,11 @@
 package io.github.com.pages;
 
-import com.epam.jdi.mobile.elements.common.UIElement;
-import com.epam.jdi.mobile.elements.complex.DataList;
-import com.epam.jdi.mobile.elements.complex.JList;
-import com.epam.jdi.mobile.elements.pageobjects.annotations.WaitTimeout;
-import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.XPath;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.DataList;
+import com.epam.jdi.light.elements.complex.JList;
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import io.github.com.custom.Result;
 import io.github.com.custom.SearchResult;
 

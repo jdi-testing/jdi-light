@@ -1,7 +1,7 @@
 package io.github.com.custom;
 
-import com.epam.jdi.mobile.elements.complex.table.DataTable;
-import com.epam.jdi.mobile.elements.composite.Section;
+import com.epam.jdi.light.elements.complex.table.DataTable;
+import com.epam.jdi.light.elements.composite.Section;
 import org.openqa.selenium.By;
 
 public class UserTable<L extends Section, D> extends DataTable<L, D> {

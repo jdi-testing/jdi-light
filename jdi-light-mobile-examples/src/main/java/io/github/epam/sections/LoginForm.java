@@ -1,6 +1,6 @@
 package io.github.epam.sections;
 
-import com.epam.jdi.mobile.elements.composite.Form;
+import com.epam.jdi.light.elements.composite.Form;
 import io.github.epam.entities.User;
 import org.openqa.selenium.WebElement;
 

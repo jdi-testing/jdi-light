@@ -2,7 +2,7 @@ package com.epam.jdi.mobile.ui.html;
 
 import org.openqa.selenium.WebElement;
 
-import static com.epam.jdi.mobile.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static java.lang.Double.parseDouble;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;

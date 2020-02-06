@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.mobile.elements.common.WindowsManager.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.epam.EpamGithubSite.*;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;

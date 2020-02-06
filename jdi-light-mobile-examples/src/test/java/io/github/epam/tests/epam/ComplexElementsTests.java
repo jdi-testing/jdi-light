@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.mobile.elements.common.WindowsManager.originalWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
 import static io.github.epam.EpamGithubSite.*;
 import static io.github.epam.enums.ColorsList.Green;
 import static io.github.epam.enums.Metals.Gold;

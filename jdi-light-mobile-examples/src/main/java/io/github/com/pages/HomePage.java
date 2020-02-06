@@ -1,8 +1,8 @@
 package io.github.com.pages;
 
-import com.epam.jdi.mobile.elements.common.UIElement;
-import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.WebElement;
 
 public class HomePage extends BasePage {

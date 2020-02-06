@@ -6,7 +6,7 @@ import com.epam.jdi.tools.func.JAction1;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.mobile.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.exception;
 
 public class Workspace extends DataClass<Workspace> {
     public String category, name, projectCode, apiId, therapeuticArea, processes,

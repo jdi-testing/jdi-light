@@ -1,7 +1,7 @@
 package pseudo.site.pages;
 
-import com.epam.jdi.mobile.elements.composite.Form;
-import com.epam.jdi.mobile.elements.composite.Section;
+import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.light.elements.composite.Section;
 import pseudo.site.entities.User;
 import pseudo.site.forms.CustomForm;
 import pseudo.site.forms.CustomFormSmart;

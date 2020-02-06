@@ -1,12 +1,12 @@
 package io.github.epam.html.tests.elements.common;
 
-import com.epam.jdi.mobile.elements.composite.WebPage;
+import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.mobile.common.Exceptions.safeException;
-import static com.epam.jdi.mobile.elements.common.Alerts.*;
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.elements.common.Alerts.*;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.*;
