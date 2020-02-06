@@ -44,13 +44,13 @@ import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
  */
 public class DriverData {
     public static final String PROJECT_PATH = path("");
-    public static String SRC_PATH = mergePath(PROJECT_PATH,"src", "main");
-    public static String TEST_PATH = mergePath(PROJECT_PATH, "src" ,"test");
+    public static String SRC_PATH = mergePath(PROJECT_PATH, "src", "main");
+    public static String TEST_PATH = mergePath(PROJECT_PATH, "src", "test");
     public static String LOGS_PATH = mergePath(TEST_PATH, ".logs");
     public static String DRIVERS_FOLDER;
     public static String getDriverFolder() {
         return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
-                ? DRIVERS_FOLDER : mergePath(TEST_PATH,"resources", "drivers");
+            ? DRIVERS_FOLDER : mergePath(TEST_PATH, "resources", "drivers");
     }
     public static String DOWNLOADS_DIR = mergePath(TEST_PATH, "resources", "downloads");
     public static PageLoadStrategy PAGE_LOAD_STRATEGY = NORMAL;
@@ -84,7 +84,7 @@ public class DriverData {
     private static String driverPath(String driverName) {
         return mergePath(getDriverFolder(), getOs() == WIN ? driverName + ".exe" : driverName);
     }
-    public static String  LATEST_VERSION = "LATEST";
+    public static String LATEST_VERSION = "LATEST";
     public static String DRIVER_VERSION = LATEST_VERSION;
     public static String PRELATEST_VERSION = "PRELATEST";
     public static Platform PLATFORM = X32;
@@ -92,9 +92,9 @@ public class DriverData {
     public static OsTypes getOs() {
         String osName = System.getProperty("os.name").toLowerCase();
         return Switch(osName).get(
-                Case(os -> os.contains("mac"), MAC),
-                Case(os -> os.contains("win") || os.contains("ms"), WIN),
-                Default(LINUX)
+            Case(os -> os.contains("mac"), MAC),
+            Case(os -> os.contains("win") || os.contains("ms"), WIN),
+            Default(LINUX)
         );
     }
 
@@ -112,8 +112,7 @@ public class DriverData {
         return driver;
     };
 
-    private static WebDriver setBrowserSizeForMac(WebDriver driver,
-                                                  int width, int height) {
+    private static WebDriver setBrowserSizeForMac(WebDriver driver, int width, int height) {
         try {
             Point position = new Point(0, 0);
             driver.manage().window().setPosition(position);
@@ -123,10 +122,6 @@ public class DriverData {
             logger.error("Failed to Set resolution (%s, %s): %s", width, height, safeException(ex));
             throw ex;
         }
-    }
-    private static WebDriver maximizeScreen(WebDriver driver) {
-        java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
-        return setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
     }
     public static Capabilities getCapabilities(
             MutableCapabilities capabilities, JAction1<Object> defaultCapabilities) {
@@ -167,15 +162,15 @@ public class DriverData {
             chromePrefs.put("profile.password_manager_enabled", false);
         });
         setUp("Chrome: '--disable-web-security', '--disable-extensions', 'test-type'",
-                () -> cap.addArguments("--disable-web-security", "--disable-extensions", "test-type"));
+            () -> cap.addArguments("--disable-web-security", "--disable-extensions", "test-type"));
         setUp("Chrome: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
-                () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
+            () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
         setUp("Chrome: ACCEPT_SSL_CERTS:true",
-                () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
         setUp("Chrome: " + UNEXPECTED_ALERT_BEHAVIOR + "=" + ACCEPT,
-                () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+            () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
         setUp("Chrome: setExperimentalOption: prefs",
-                () -> cap.setExperimentalOption("prefs", chromePrefs));
+            () -> cap.setExperimentalOption("prefs", chromePrefs));
         // Capabilities from settings
         CAPABILITIES_FOR_CHROME.forEach((property, value) -> setupCapability(cap, property, value));
     }
@@ -206,13 +201,13 @@ public class DriverData {
             firefoxProfile.setPreference("network.http.phishy-userpass-length", 255);
         });
         setUp("Firefox: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
-                () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
+            () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
         setUp("Firefox: ACCEPT_SSL_CERTS: true",
-                () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
         setUp("Firefox: UNEXPECTED_ALERT_BEHAVIOR, ACCEPT",
-                () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+            () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
         setUp("Firefox: Firefox Profile",
-                () -> cap.setProfile(firefoxProfile));
+            () -> cap.setProfile(firefoxProfile));
         // Capabilities from settings
         CAPABILITIES_FOR_FF.forEach(cap::setCapability);
     }
@@ -220,25 +215,25 @@ public class DriverData {
 
     public static void defaultIEOptions(InternetExplorerOptions cap) {
         setUp("IE: introduceFlakinessByIgnoringSecurityDomains",
-                cap::introduceFlakinessByIgnoringSecurityDomains);
+            cap::introduceFlakinessByIgnoringSecurityDomains);
         setUp("ignoreZoomSettings",
-                cap::ignoreZoomSettings);
+            cap::ignoreZoomSettings);
         setUp("IE: requireWindowFocus:true",
-                () -> cap.setCapability("requireWindowFocus", true));
+            () -> cap.setCapability("requireWindowFocus", true));
         setUp("IE: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
-                () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
+            () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
         setUp("IE: takeFullPageScreenshot",
-                cap::takeFullPageScreenshot);
+            cap::takeFullPageScreenshot);
         setUp("IE: ACCEPT_SSL_CERTS: true",
-                () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
         setUp("IE: destructivelyEnsureCleanSession",
-                cap::destructivelyEnsureCleanSession);
+            cap::destructivelyEnsureCleanSession);
         setUp("IE: UNEXPECTED_ALERT_BEHAVIOR: ACCEPT)",
-                () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+            () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
         setUp("IE: SUPPORTS_JAVASCRIPT",
-                () -> cap.is(SUPPORTS_JAVASCRIPT));
+            () -> cap.is(SUPPORTS_JAVASCRIPT));
         setUp("IE: ACCEPT_SSL_CERTS: true",
-                () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
         // Capabilities from settings
         CAPABILITIES_FOR_IE.forEach(cap::setCapability);
     }
@@ -250,4 +245,25 @@ public class DriverData {
     public static void defaultOperaOptions(OperaOptions cap) { }
     public static JAction1<OperaOptions> OPERA_OPTIONS = DriverData::defaultOperaOptions;
 
+    private static WebDriver maximizeScreen(WebDriver driver) {
+        try {
+            switch (getOs()) {
+                case WIN:
+                    driver.manage().window().maximize();
+                case MAC:
+                    java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
+                    setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
+            }
+            return driver;
+        } catch (Exception ex) {
+            throw new RuntimeException("Failed to maximize window: ", ex);
+        }
+    }
+
+    private static String getBrowserSizeOption() {
+        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
+        return groups.size() == 2
+                ? "--window-size=" + groups.get(0) + "," + groups.get(1)
+                : "--start-maximized";
+    }
 }
