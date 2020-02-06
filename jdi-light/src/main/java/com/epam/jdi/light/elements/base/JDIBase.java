@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.HasCache;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
@@ -43,6 +44,7 @@ import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -251,7 +253,18 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, els.size(), toString(), getTimeout());
         return (filtered.size() > 1 ? filtered : els).get(0);
     }
-
+    private WebElement getElement(List<WebElement> els) {
+        if (els.size() == 1)
+            return els.get(0);
+        if (els.size() == 0)
+            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
+        List<WebElement> filtered = filterElements(els);
+        if (filtered.size() == 1)
+            return filtered.get(0);
+        if (STRICT_SEARCH)
+            throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, els.size(), toString(), getTimeout());
+        return (filtered.size() > 1 ? filtered : els).get(0);
+    }
     private List<WebElement> filterElements(List<WebElement> elements) {
         List<WebElement> result = elements;
         for (JFunc1<WebElement, Boolean> rule : searchRules())
@@ -379,15 +392,24 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         List<By> frames = bElement.getFrames();
         if (frames != null)
             return getFrameContext(frames);
-        Object parent = bElement.parent;
         By locator = bElement.getLocator();
-        SearchContext searchContext = getContext(parent, bElement.locator);
-        //TODO rethink SMART SEARCH
-        return locator != null
-            ? uiSearch(searchContext, correctLocator(locator)).get(0)
-            : isPageObject(element.getClass())
-                ? searchContext
-                : SMART_SEARCH.execute(bElement.waitSec(getTimeout()));
+        return locator != null && isNotBlank(getByLocator(locator))
+                ? getContextByLocator(bElement, locator)
+                : getSmartSearchContext(bElement);
+    }
+    private SearchContext getContextByLocator(JDIBase bElement, By locator) {
+        List<WebElement> els = uiSearch(getContext(bElement.parent, bElement.locator), correctLocator(locator));
+        return getElement(els);
+    }
+
+    private SearchContext getSmartSearchContext(JDIBase bElement) {
+        if (!isInterface(bElement.getClass(), PageObject.class) || bElement.getLocator() != null)
+            try {
+                WebElement result = SMART_SEARCH.execute(bElement.waitSec(getTimeout()));
+                if (result != null)
+                    return result;
+            } catch (Exception ignore) { }
+        return getContext(bElement.parent, bElement.locator);
     }
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)
@@ -456,11 +478,11 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             return printWebElement(element.webElement.get());
         return Switch(logger.getLogLevel()).get(
                 Case(l -> l == STEP,
-                        l -> msgFormat(PRINT_ELEMENT_STEP, element)),
+                    l -> msgFormat(PRINT_ELEMENT_STEP, element)),
                 Case(l -> l == INFO,
-                        l -> msgFormat(PRINT_ELEMENT_INFO, element)),
+                    l -> msgFormat(PRINT_ELEMENT_INFO, element)),
                 Case(l -> l == ERROR,
-                        l -> msgFormat(PRINT_ERROR_STEP, element)),
+                    l -> msgFormat(PRINT_ERROR_STEP, element)),
                 Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
         );
     };

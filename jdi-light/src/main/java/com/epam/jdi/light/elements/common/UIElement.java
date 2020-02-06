@@ -284,7 +284,7 @@ public class UIElement extends JDIBase
                 break;
             case BOTTOM_LEFT:
                 click(1,getRect().getHeight()-1);
-                logger.debug("Click Bottom Left");
+                logger.debug("CTexlick Bottom Left");
                 break;
             case BOTTOM_RIGHT:
                 click(getRect().getWidth()-1,getRect().getHeight()-1);
@@ -405,7 +405,7 @@ public class UIElement extends JDIBase
     public boolean isExist() {
         return noWait(() -> {
             try {
-                get(); return true;
+                getWebElement(); return true;
             } catch (Exception ignore) { return false; }
         });
     }
@@ -701,13 +701,10 @@ public class UIElement extends JDIBase
     }
     protected boolean displayed() {
         try {
-            if (getWebElement().isDisplayed())
-                return true;
+            return getWebElement().isDisplayed();
         } catch (Exception ex) {
-            List<WebElement> result = getAllElements();
-            return result.size() == 1 && result.get(0).isDisplayed();
+            return false;
         }
-        return false;
     }
 
     public boolean isClickable() {
