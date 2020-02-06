@@ -65,7 +65,7 @@ public class DriverInfos {
             d.initCapabilities = new EdgeOptions();
             d.capabilities = c -> getCapabilities(c, cap -> EDGE_OPTIONS.execute((EdgeOptions) cap));
             d.properties = "webdriver.edge.driver";
-            d.path = operaDriverPath();
+            d.path = edgeDriverPath();
             d.getDriver = c -> new EdgeDriver((EdgeOptions) c);
         }
     );
