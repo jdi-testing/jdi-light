@@ -1,6 +1,6 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
+import com.epam.jdi.mobile.ui.html.elements.complex.MultiSelector;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 

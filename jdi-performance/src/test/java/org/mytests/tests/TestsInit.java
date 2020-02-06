@@ -1,7 +1,7 @@
 package org.mytests.tests;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
+import com.epam.jdi.mobile.ui.html.elements.complex.DataListOptions;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
 import org.mytests.uiobjects.example.site.SiteJdi;

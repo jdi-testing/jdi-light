@@ -3,7 +3,7 @@ package pseudo.site.forms;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.mobile.ui.html.elements.common.Button;
 import org.openqa.selenium.WebElement;
 import pseudo.site.entities.User;
 

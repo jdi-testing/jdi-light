@@ -6,9 +6,10 @@ import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.*;
-import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
-import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
+import com.epam.jdi.mobile.ui.html.elements.common.*;
+import com.epam.jdi.mobile.ui.html.elements.common.*;
+import com.epam.jdi.mobile.ui.html.elements.complex.MultiSelector;
+import com.epam.jdi.mobile.ui.html.elements.complex.RadioButtons;
 
 public class HtmlElementsPage extends WebPage {
     //region Simple Elements

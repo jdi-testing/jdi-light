@@ -2,7 +2,7 @@ package cucmberTests.stepdefs;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.ui.html.elements.common.FileInput;
+import com.epam.jdi.mobile.ui.html.elements.common.FileInput;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
