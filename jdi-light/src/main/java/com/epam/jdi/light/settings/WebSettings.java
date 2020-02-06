@@ -13,6 +13,7 @@ import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,7 +32,6 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.common.SetTextTypes.SET_TEXT;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
-import static com.epam.jdi.light.driver.ScreenshotMaker.SCREENSHOT_STRATEGY;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
@@ -40,8 +40,6 @@ import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.PageFactory.preInit;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy;
-import static com.epam.jdi.light.logger.AllureLoggerHelper.HTML_CODE_LOGGING;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
@@ -50,12 +48,12 @@ import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
 /**
@@ -65,6 +63,7 @@ import static org.openqa.selenium.PageLoadStrategy.*;
 public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String DOMAIN;
+    public static String APP_NAME;
     public static String getDomain() {
         if (DOMAIN != null)
             return DOMAIN;
@@ -78,26 +77,26 @@ public class WebSettings {
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
-        el != null && el.isDisplayed() && el.isEnabled();
+            el != null && el.isDisplayed() && el.isEnabled();
     public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
-        el != null && !el.isDisplayed() && $(el).isClickable();
-    public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
+            el != null && !el.isDisplayed() && $(el).isClickable();
+    public static Pair<String, JFunc1<WebElement, Boolean>> SEARCH_RULE = Pair.$("Visible", VISIBLE_ELEMENT);
     public static JAction1<UIElement> BEFORE_SEARCH = b -> {};
-    public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
-        SEARCH_RULES = rule;
+    public static void setSearchRule(String name, JFunc1<WebElement, Boolean> rule) {
+        SEARCH_RULE = Pair.$(name, rule);
     }
     public static void noValidation() {
-        SEARCH_RULES = ANY_ELEMENT;
+        SEARCH_RULE = Pair.$("Any", ANY_ELEMENT);
         CLICK_TYPE = CENTER;
     }
     public static void onlyVisible() {
-        SEARCH_RULES = VISIBLE_ELEMENT;
+        SEARCH_RULE = Pair.$("Visible", VISIBLE_ELEMENT);
     }
     public static void visibleEnabled() {
-        SEARCH_RULES = ENABLED_ELEMENT;
+        SEARCH_RULE = Pair.$("Enabled", ENABLED_ELEMENT);
     }
     public static void inView() {
-        SEARCH_RULES = ELEMENT_IN_VIEW;
+        SEARCH_RULE = Pair.$("Element in view", ELEMENT_IN_VIEW);
         BEFORE_SEARCH = UIElement::show;
     }
 
@@ -126,20 +125,33 @@ public class WebSettings {
     }
 
     public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
+    public static String printSmartLocators(IBaseElement el) {
+        try {
+            return "smart: " + print(SMART_SEARCH_LOCATORS, l -> String.format(l, SMART_SEARCH_NAME.execute(el.getName())), " or ");
+        } catch (Exception ex) {
+            return "Can't define smart locator";
+        }
+    }
     public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
+    public static boolean USE_SMART_SEARCH = true;
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
+        if (!USE_SMART_SEARCH)
+            return null;
         String locatorName = SMART_SEARCH_NAME.execute(el.getName());
         return el.base().timer().getResult(() -> {
             for (String template : SMART_SEARCH_LOCATORS) {
+                String locator = String.format(template, locatorName);
                 UIElement ui = (template.equals("#%s")
-                    ? $(String.format(template, locatorName))
-                    : $(String.format(template, locatorName), el.base().parent))
+                        ? $(locator)
+                        : $(locator, el.base().parent))
                         .setup(e -> e.setName(el.getName()).noWait());
                 try {
-                    return ui.getWebElement();
+                    WebElement result =  ui.getWebElement();
+                    el.base().setLocator(locator);
+                    return result;
                 } catch (Exception ignore) { }
             }
-            throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
+            throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
         });
     };
 
@@ -152,11 +164,10 @@ public class WebSettings {
             fillAction(p -> DRIVER_NAME = p, "driver");
         fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
                 ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
-                    ? PRELATEST_VERSION : p, "driver.version");
+                ? PRELATEST_VERSION : p, "driver.version");
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
-        fillAction(p -> SCREENSHOT_STRATEGY = getAttachmentStrategy(p), "screenshot.strategy");
-        fillAction(p -> HTML_CODE_LOGGING = getAttachmentStrategy(p), "html.code.logging");
+        // TODO fillAction(p -> asserter.doScreenshot(p), "screenshot.strategy");
         fillAction(p -> KILL_BROWSER = p, "browser.kill");
         fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
         fillAction(p -> BROWSER_SIZE = p, "browser.size");
@@ -171,30 +182,36 @@ public class WebSettings {
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> SMART_SEARCH_LOCATORS =
-            filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
+                filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
         fillAction(p -> SMART_SEARCH_NAME = getSmartSearchFunc(p), "smart.locators.toName");
+        fillAction(p -> USE_SMART_SEARCH = getBoolean(p), "smart.search");
         fillAction(p -> COMMON_CAPABILITIES.put("headless", p), "headless");
 
-        loadCapabilities("chrome.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
-        loadCapabilities("ff.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
-        loadCapabilities("ie.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
-        loadCapabilities("edge.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(),value.toString())));
-        loadCapabilities("opera.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(),value.toString())));
+        loadCapabilities("chrome.capabilities.path", "chrome.properties",
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(), value.toString())));
+        loadCapabilities("ff.capabilities.path","ff.properties",
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(), value.toString())));
+        loadCapabilities("ie.capabilities.path","ie.properties",
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(), value.toString())));
+        loadCapabilities("edge.capabilities.path","edge.properties",
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(), value.toString())));
+        loadCapabilities("opera.capabilities.path","opera.properties",
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(), value.toString())));
+        loadCapabilities("common.capabilities.path","common.properties",
+                p -> p.forEach((key,value) -> COMMON_CAPABILITIES.put(key.toString(), value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         if (SMART_SEARCH_LOCATORS.size() == 0)
             SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
     }
+    private static boolean getBoolean(String param) {
+        return !param.toLowerCase().equals("off") && !param.toLowerCase().equals("false");
+    }
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
-            t -> t.toString().equals(type));
+                t -> t.toString().equals(type));
         return textType != null
-            ? textType : SMART_TEXT;
+                ? textType : SMART_TEXT;
     }
     private static SetTextTypes getSetTextType(String type) {
         SetTextTypes textType = first(getAllEnumValues(SetTextTypes.class),
@@ -229,15 +246,16 @@ public class WebSettings {
     }
 
 
-    private static void loadCapabilities(String property, JAction1<Properties> setCapabilities) {
+    private static void loadCapabilities(String property, String defaultPath, JAction1<Properties> setCapabilities) {
         String path = "";
         try {
             path = System.getProperty(property, getProperty(property));
-        } catch (Exception ignore) {
-        }
-        if (isNotEmpty(path)) {
+        } catch (Exception ignore) { }
+        if (isEmpty(path))
+            path = defaultPath;
+        try {
             setCapabilities.execute(getProperties(path));
-        }
+        } catch (Exception ignore) { }
     }
 
     private static void setSearchStrategy(String p) {
@@ -284,7 +302,7 @@ public class WebSettings {
                 return pTarget;
             String propertiesPath = pTest.size() > 0
                     ? path
-                    : mergePath("/../../target/classes/" + path);
+                    : "/../../target/classes/" + path;
             properties = PropertyReader.getProperties(propertiesPath);
         }
         return properties;
@@ -299,10 +317,5 @@ public class WebSettings {
             throw exception("Couldn't load properties for CI Server" + path);
         }
         return properties;
-    }
-    private static AttachmentStrategy getAttachmentStrategy(String strategy) {
-        return strategy.toLowerCase().equals("off")
-            ? AttachmentStrategy.OFF
-            : AttachmentStrategy.ON_FAIL;
     }
 }
