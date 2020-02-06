@@ -11,11 +11,10 @@ import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.NoWait;
 import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.mobile.ui.html.elements.common.*;
-import com.epam.jdi.mobile.ui.html.elements.common.*;
-import com.epam.jdi.mobile.ui.html.elements.complex.DataListOptions;
-import com.epam.jdi.mobile.ui.html.elements.complex.MultiSelector;
-import com.epam.jdi.mobile.ui.html.elements.complex.RadioButtons;
+import com.epam.jdi.light.ui.html.elements.common.*;
+import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
+import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
+import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 
 public class HtmlElementsPage extends WebPage {
     //region Simple Elements

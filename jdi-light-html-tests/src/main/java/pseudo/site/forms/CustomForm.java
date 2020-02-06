@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
-import com.epam.jdi.mobile.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.WebElement;
 import pseudo.site.entities.User;
 

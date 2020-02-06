@@ -1,7 +1,7 @@
 package io.github.epam;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.mobile.ui.html.elements.complex.DataListOptions;
+import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;

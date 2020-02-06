@@ -1,6 +1,6 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.mobile.ui.html.elements.common.TextArea;
+import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 

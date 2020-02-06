@@ -2,7 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
-import com.epam.jdi.mobile.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import io.github.com.custom.ContactFormCustom;
 import io.github.com.custom.ContactFormCustomFill;
 import io.github.com.custom.ContactFormCustomGet;
