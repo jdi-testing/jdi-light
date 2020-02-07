@@ -284,7 +284,7 @@ public class UIElement extends JDIBase
                 break;
             case BOTTOM_LEFT:
                 click(1,getRect().getHeight()-1);
-                logger.debug("CTexlick Bottom Left");
+                logger.debug("Click Bottom Left");
                 break;
             case BOTTOM_RIGHT:
                 click(getRect().getWidth()-1,getRect().getHeight()-1);

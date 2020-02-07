@@ -8,6 +8,7 @@ import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.StringUtils.format;
 
 /**
@@ -29,7 +30,9 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction("Assert that '{name}' disappeared")
     public A disappear() {
+        logger.info("!>>");
         jdiAssert(element.isDisplayed() ? "displayed" : "disappeared", Matchers.is("disappeared"));
+        logger.info("<<!");
         return (A) this;
     }
 
@@ -52,8 +55,10 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
     public A notAppear(int timeoutSec) {
+        logger.toLog(">!!! " + timeoutSec * 1000);
         boolean result = new Timer(timeoutSec * 1000)
                 .wait(() -> element.isDisplayed());
+        logger.toLog("<!!! ");
         jdiAssert(result ? "displayed" : "hidden", Matchers.is("hidden"));
         return (A) this;
     }

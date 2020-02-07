@@ -8,6 +8,7 @@ import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -24,6 +25,7 @@ import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static com.epam.jdi.tools.switcher.SwitchActions.Value;
 import static java.lang.String.format;
 import static java.lang.Thread.currentThread;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 

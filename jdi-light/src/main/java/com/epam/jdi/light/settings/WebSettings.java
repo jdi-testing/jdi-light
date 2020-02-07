@@ -140,6 +140,18 @@ public class WebSettings {
             }
             throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
         });
+        //return el.base().timer().getResult(() -> {
+        //    for (String template : SMART_SEARCH_LOCATORS) {
+        //        UIElement ui = (template.equals("#%s")
+        //                ? $(String.format(template, locatorName))
+        //                : $(String.format(template, locatorName), el.base().parent))
+        //                .setup(e -> e.setName(el.getName()).noWait());
+        //        try {
+        //            return ui.getWebElement();
+        //        } catch (Exception ignore) { }
+        //    }
+        //    throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
+        //});
     };
 
     public static synchronized void init() {

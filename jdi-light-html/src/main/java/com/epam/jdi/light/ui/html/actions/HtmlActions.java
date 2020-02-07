@@ -1,5 +1,7 @@
 package com.epam.jdi.light.ui.html.actions;
 
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.PrintUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -32,7 +34,11 @@ public class HtmlActions {
             if (aroundCount() > 1)
                 return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
-            Object result = stableAction(jp);
+            IBaseElement element = getJdi(jp);
+            int timeout = element != null ? element.base().getTimeout() : TIMEOUT.get();
+            Object result = stableAction(jp, element, timeout);
+            if (element != null)
+                element.base().waitSec(timeout);
             isOverride.get().clear();
             if (aroundCount() == 1)
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);

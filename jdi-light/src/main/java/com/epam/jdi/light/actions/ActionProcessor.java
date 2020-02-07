@@ -26,6 +26,7 @@ import static com.epam.jdi.light.elements.base.OutputTemplates.FAILED_ACTION_TEM
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.where;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
@@ -63,7 +64,11 @@ public class ActionProcessor {
             if (aroundCount() > 1)
                 return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
-            Object result = stableAction(jp);
+            IBaseElement element = getJdi(jp);
+            int timeout = element != null ? element.base().getTimeout() : TIMEOUT.get();
+            Object result = stableAction(jp, element, timeout);
+            if (element != null)
+                element.base().waitSec(timeout);
             isOverride.get().clear();
             if (aroundCount() == 1)
                 getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
@@ -105,31 +110,33 @@ public class ActionProcessor {
                 .size();
     }
     public static Object defaultAction(ProceedingJoinPoint jp) throws Throwable {
-        ICoreElement obj = getJdi(jp);
+        IBaseElement obj = getJdi(jp);
         JFunc1<Object, Object> overrideAction = getOverride(jp);
         return overrideAction != null
                 ? overrideAction.execute(obj) : jp.proceed();
     }
-    public static ICoreElement getJdi(ProceedingJoinPoint jp) {
+    public static IBaseElement getJdi(ProceedingJoinPoint jp) {
         try {
-            return jp.getThis() != null && isInterface(getJpClass(jp), ICoreElement.class)
-                    ? ((ICoreElement) jp.getThis()) : null;
+            return jp.getThis() != null && isInterface(getJpClass(jp), IBaseElement.class)
+                    ? ((IBaseElement) jp.getThis()) : null;
         } catch (Exception ex) {
             return null;
         }
     }
     public static Safe<List<String>> isOverride = new Safe<>(ArrayList::new);
-    public static Object stableAction(ProceedingJoinPoint jp) {
+    public static Object stableAction(ProceedingJoinPoint jp, IBaseElement element, int elementTimeout) {
         String exceptionMsg = "";
-        ICoreElement obj = getJdi(jp);
         JFunc1<Object, Object> overrideAction = getOverride(jp);
-        int timeout = getTimeout(jp, obj);
+        JDIAction ja = getJdiAction(jp);
+        int timeout = ja != null && ja.timeout() != -1 ? ja.timeout() : elementTimeout;
+        if (element != null)
+            element.base().waitSec(timeout);
         long start = currentTimeMillis();
         Throwable exception = null;
         do {
             try {
                 Object result = overrideAction != null
-                        ? overrideAction.execute(obj) : jp.proceed();
+                    ? overrideAction.execute(element) : jp.proceed();
                 if (!condition(jp)) continue;
                 return result;
             } catch (Throwable ex) {
@@ -159,7 +166,7 @@ public class ActionProcessor {
                 : null;
         return ja != null && ja.timeout() != -1
             ? ja.timeout()
-            : obj != null
+            : obj != null && isInterface(obj.getClass(), IBaseElement.class)
                 ? obj.base().getTimeout()
                 : TIMEOUT.get();
     }

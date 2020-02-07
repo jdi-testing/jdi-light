@@ -48,6 +48,9 @@ public class BaseValidations {
     public static void durationLessThan(int duration, JAction action) {
         validateDuration(duration-1, duration, action);
     }
+    public static void duration(int duration, JAction action) {
+        validateDuration(duration, duration, action);
+    }
     public static void durationImmediately(JAction action) {
         durationMoreThan(0, action);
     }

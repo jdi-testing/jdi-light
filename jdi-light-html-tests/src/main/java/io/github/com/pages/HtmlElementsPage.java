@@ -30,7 +30,7 @@ public class HtmlElementsPage extends WebPage {
     // @UI("input[type=button][disabled]") public static Button disabledButtonInput;
     public static Button blueButton, dblClickButton, rightClickButton;
     @WaitTimeout(4)
-    public static Button ghostButton, suspendButton;
+    public static Button ghostButton, suspendButton, removeButton;
     @NoWait
     public static Button disabledButton;
     // @UI("#blue-button") public static Button blueButton;

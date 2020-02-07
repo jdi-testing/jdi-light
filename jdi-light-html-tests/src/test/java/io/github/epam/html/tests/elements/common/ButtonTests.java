@@ -1,12 +1,17 @@
 package io.github.epam.html.tests.elements.common;
 
+import com.epam.jdi.light.elements.common.Keyboard;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.common.Alerts.*;
+import static com.epam.jdi.light.elements.common.Keyboard.*;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.*;
@@ -43,12 +48,10 @@ public class ButtonTests implements TestsInit {
     @Test
     public void clickTest() {
         redButton.click();
-        assertEquals(getAlertText(), "Red button");
-        acceptAlert();
+        validateAlert("Red button");
 
         blueButton.click();
-        assertEquals(getAlertText(), "Blue button");
-        acceptAlert();
+        validateAlert("Blue button");
     }
     @Test
     public void disableButtonTest() {
@@ -63,14 +66,13 @@ public class ButtonTests implements TestsInit {
     @Test
     public void doubleClickTest() {
         dblClickButton.doubleClick();
-        assertEquals(getAlertText(), "Double Click");
-        acceptAlert();
+        validateAlert("Double Click");
     }
     @Test
     public void rightClickTest() {
         rightClickButton.rightClick();
-        assertEquals(getAlertText(), "Right Click");
-        acceptAlert();
+        validateAlert("Right Click");
+        keyPress("Escape");
     }
     @Test
     public void isValidationTest() {
@@ -107,7 +109,7 @@ public class ButtonTests implements TestsInit {
     public void suspendButtonTest() {
         WebPage.reload();
         durationMoreThan(3, () -> suspendButton.click());
-        validateAlert(is("Suspend button"));
+        validateAlert("Suspend button");
     }
 
     //if test fails then run `mvn clean install` in module JDI Light
@@ -161,4 +163,31 @@ public class ButtonTests implements TestsInit {
             ghostButton.is().notAppear(2));
     }
 
+    //if test fails then run `mvn clean install` in module JDI Light
+    @Test
+    public void isNotAppearRemoveFailedButtonTest() {
+        WebPage.reload();
+        try {
+            durationImmediately(() ->
+                    removeButton.is().notAppear());
+            fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
+        } catch (AssertionError ex) {
+            assertThat(safeException(ex), containsString("but: was \"displayed\""));
+        }
+    }
+
+    //if test fails then run `mvn clean install` in module JDI Light
+    @Test
+    public void isNotAppearRemoveButtonTest() {
+        removeButton.is().hidden();
+        duration(4, () -> removeButton.is().notAppear());
+    }
+
+    //if test fails then run `mvn clean install` in module JDI Light
+    @Test
+    public void isNotAppearRemoveTimeoutButtonTest() {
+        removeButton.is().hidden();
+        duration(2, () ->
+            removeButton.is().notAppear(2));
+    }
 }
