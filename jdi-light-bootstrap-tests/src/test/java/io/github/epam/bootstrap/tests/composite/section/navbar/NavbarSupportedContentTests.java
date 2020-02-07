@@ -6,6 +6,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static com.epam.jdi.light.elements.composite.WebPage.getUrl;
 import static io.github.com.StaticSite.bsPage;
@@ -53,19 +57,6 @@ public class NavbarSupportedContentTests extends TestsInit {
                 {dropdownAction, dropdownActionAlert},
                 {dropdownAnotherAction, dropdownAnotherActionAlert},
                 {dropdownSmthElse, dropdownSmthElseAlert},
-        };
-    }
-
-    @DataProvider
-    public Object[][] collapseLinkTextData() {
-        return new Object[][]{
-                {activeLinkText},
-                {jdiLinkText},
-                {dropdownLinkText},
-                {dropdownAction},
-                {dropdownAnotherAction},
-                {dropdownSmthElse},
-                {disabledLinkText}
         };
     }
 
@@ -135,16 +126,27 @@ public class NavbarSupportedContentTests extends TestsInit {
         WindowsManager.switchToWindow(1);
     }
 
-    @Test(dataProvider = "collapseLinkTextData", priority = 11)
-    public void collapseLinkTextTest(String linkText) {
+    @Test(priority = 11)
+    public void collapseLinkTextTest() {
+        List<String> links = Arrays.asList(
+                activeLinkText,
+                jdiLinkText,
+                dropdownLinkText,
+                dropdownAction,
+                dropdownAnotherAction,
+                dropdownSmthElse,
+                disabledLinkText
+        );
+        
         WindowsManager.resizeWindow(900, 600);
 
         navbarSupportedContent.navExpand.show();
         navbarSupportedContent.navExpand.click();
 
         navbarSupportedContent.nav.is().expanded();
-
-        assertTrue(navbarSupportedContent.nav.list().values().contains(linkText));
+        
+        List<String> actual = navbarSupportedContent.nav.list().values().stream().map(s->s.replaceAll("\\s+", " ")).collect(Collectors.toList());
+        assertTrue(actual.containsAll(links));
     }
 
     @Test

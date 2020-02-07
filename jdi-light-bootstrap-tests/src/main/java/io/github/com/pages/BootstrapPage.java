@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.JList;
+import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -16,7 +17,6 @@ import com.epam.jdi.light.ui.bootstrap.elements.common.Tooltip;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithBadge;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ButtonWithSpinner;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.Collapse;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.ListGroup;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.MultipleProgressBars;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Popover;
@@ -323,35 +323,35 @@ public class BootstrapPage extends WebPage {
     @JDropdown(expand = "#bs-collapse-link",
             value = "#bs-collapse-one",
             list = "#bs-collapse-one-body")
-    public static Collapse collapseLink;
+    public static DropdownExpand collapseLink;
     @JDropdown(expand = "#bs-collapse-btn",
             value = "#bs-collapse-one",
             list = "#bs-collapse-one-body")
-    public static Collapse collapseDataTarget;
+    public static DropdownExpand collapseDataTarget;
     @JDropdown(expand = "#bs-multi-toggle-one",
             value = "#bs-multi-one",
             list = "#bs-multi-one-body")
-    public static Collapse collapseToggleOne;
+    public static DropdownExpand collapseToggleOne;
     @JDropdown(expand = "#bs-multi-toggle-two",
             value = "#bs-multi-two",
             list = "#bs-multi-two-body")
-    public static Collapse collapseToggleTwo;
+    public static DropdownExpand collapseToggleTwo;
     @JDropdown(expand = "#bs-multi-toggle-both",
             value = "#bs-multi-one",
             list = "#bs-multi-one-body")
-    public static Collapse collapseToggleBoth;
+    public static DropdownExpand collapseToggleBoth;
     @JDropdown(expand = "#bs-group-toggle-one",
             value = "#bs-group-one",
             list = "#bs-group-one-body")
-    public static Collapse collapseGroupOne;
+    public static DropdownExpand collapseGroupOne;
     @JDropdown(expand = "#bs-group-toggle-two",
             value = "#bs-group-two",
             list = "#bs-group-two-body")
-    public static Collapse collapseGroupTwo;
+    public static DropdownExpand collapseGroupTwo;
     @JDropdown(expand = "#bs-group-toggle-three",
             value = "#bs-group-three",
             list = "#bs-group-three-body")
-    public static Collapse collapseGroupThree;
+    public static DropdownExpand collapseGroupThree;
     //endregion
     //endregion
 

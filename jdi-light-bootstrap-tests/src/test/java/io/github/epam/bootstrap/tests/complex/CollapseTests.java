@@ -1,5 +1,6 @@
 package io.github.epam.bootstrap.tests.complex;
 
+import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -39,50 +40,33 @@ public class CollapseTests extends TestsInit {
 
     @Test(priority = 1)
     public void collapseLinkTest() {
-        collapseLink.highlight();
-        collapseLink.expand();
-
-        collapseLink.is().expanded();
-        collapseLink.value().is().text(cardOneText);
-
-        collapseLink.collapse();
-        collapseLink.is().collapsed();
+        testCollapse(collapseLink, cardOneText);
     }
 
     @Test(priority = 2)
     public void collapseToggleOneTest() {
-        collapseToggleOne.highlight();
-        collapseToggleOne.expand();
-
-        collapseToggleOne.is().expanded();
-        collapseToggleOne.value().is().text(cardTwoText);
-
-        collapseToggleOne.collapse();
-        collapseToggleOne.is().collapsed();
+        testCollapse(collapseToggleOne, cardTwoText);
     }
 
     @Test(priority = 3)
     public void collapseButtonTest() {
+        testCollapse(collapseDataTarget, cardOneText);
+    }
+    
+    private void testCollapse(DropdownExpand collapseDataTarget, String cardOneText) {
         collapseDataTarget.highlight();
         collapseDataTarget.expand();
-
+        
         collapseDataTarget.is().expanded();
         collapseDataTarget.value().is().text(cardOneText);
-
-        collapseDataTarget.collapse();
+        
+        collapseDataTarget.close();
         collapseDataTarget.is().collapsed();
     }
-
+    
     @Test(priority = 4)
     public void collapseToggleTwoTest() {
-        collapseToggleTwo.highlight();
-        collapseToggleTwo.expand();
-
-        collapseToggleTwo.is().expanded();
-        collapseToggleTwo.value().is().text(cardThreeText);
-
-        collapseToggleTwo.collapse();
-        collapseToggleTwo.is().collapsed();
+        testCollapse(collapseToggleTwo, cardThreeText);
     }
 
     @Test(priority = 5)
@@ -94,44 +78,23 @@ public class CollapseTests extends TestsInit {
         collapseToggleBoth.value().is().text(cardTwoText);
         collapseToggleTwo.value().is().text(cardThreeText);
 
-        collapseToggleBoth.collapse();
+        collapseToggleBoth.close();
         collapseToggleBoth.is().collapsed();
     }
 
     @Test(priority = 6)
     public void collapseGroupOneTest() {
-        collapseGroupOne.highlight();
-        collapseGroupOne.expand();
-
-        collapseGroupOne.is().expanded();
-        collapseGroupOne.value().is().text(groupOneText);
-
-        collapseGroupOne.collapse();
-        collapseGroupOne.is().collapsed();
+        testCollapse(collapseGroupOne, groupOneText);
     }
 
     @Test(priority = 7)
     public void collapseGroupTwoTest() {
-        collapseGroupTwo.highlight();
-        collapseGroupTwo.expand();
-
-        collapseGroupTwo.is().expanded();
-        collapseGroupTwo.value().is().text(groupTwoText);
-
-        collapseGroupTwo.collapse();
-        collapseGroupTwo.is().collapsed();
+        testCollapse(collapseGroupTwo, groupTwoText);
     }
 
     @Test(priority = 8)
     public void collapseGroupThreeTest() {
-        collapseGroupThree.highlight();
-        collapseGroupThree.expand();
-
-        collapseGroupThree.is().expanded();
-        collapseGroupThree.value().is().text(groupThreeText);
-
-        collapseGroupThree.collapse();
-        collapseGroupThree.is().collapsed();
+        testCollapse(collapseGroupThree, groupThreeText);
     }
 
     @Test
@@ -145,7 +108,7 @@ public class CollapseTests extends TestsInit {
         collapseGroupOne.isDisplayed();
         collapseGroupOne.isEnabled();
 
-        collapseGroupOne.collapse();
+        collapseGroupOne.close();
         collapseGroupOne.is().collapsed();
     }
 }

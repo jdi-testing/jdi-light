@@ -3,6 +3,7 @@ package com.epam.jdi.light.asserts.generic;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.complex.ISelector;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matcher;
 
@@ -114,7 +115,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     }
     @JDIAction("Assert that '{name}' is collapsed")
     public A collapsed() {
-        jdiAssert(element.list().isHidden() ? "collapsed" : "expanded", is("expanded"));
+        jdiAssert(element.list().isHidden() ? "collapsed" : "expanded", is("collapsed"));
         return (A) this;
     }
     @JDIAction("Assert that '{name}' is disappeared")

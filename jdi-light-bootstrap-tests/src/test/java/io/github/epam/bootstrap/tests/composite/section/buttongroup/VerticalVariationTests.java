@@ -25,6 +25,7 @@ public class VerticalVariationTests extends TestsInit {
     private String buttonTwoClickAlert = "Button Two Clicked!";
     private String dropdownMenuLinkOne = "JDI Light";
     private String dropdownMenuLinkTwo = "JDI Docs";
+    // FYI: These titles are for chrome only. Firefox return different titles. Second page - unicode char (8211) instead of - (47)
     private String linkOnePageTitle = "GitHub - jdi-testing/jdi-light: Powerful Framework for UI Automation Testing on Java";
     private String linkTwoPageTitle = "JDI Light Framework – API Reference";
 
@@ -74,6 +75,7 @@ public class VerticalVariationTests extends TestsInit {
 
     public void newWindowTitleCheck(String pageTitle) {
         switchToNewWindow();
+        String q = getTitle();
         assertEquals(getTitle(), pageTitle);
         closeWindow();
     }
