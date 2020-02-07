@@ -1,13 +1,13 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
+import com.epam.jdi.mobile.ui.html.elements.complex.MultiSelector;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import java.util.List;
 
 import static com.epam.jdi.bdd.BDDUtils.selectAssert;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.mobile.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.tools.LinqUtils.toIntArray;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.not;

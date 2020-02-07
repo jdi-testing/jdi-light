@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.elements.composite;
 
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.mobile.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.FormDataProvider;

@@ -1,9 +1,9 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.mobile.elements.interfaces.complex.IsCombobox;
 import cucumber.api.java.en.When;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.mobile.elements.init.entities.collection.EntitiesCollection.getUI;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

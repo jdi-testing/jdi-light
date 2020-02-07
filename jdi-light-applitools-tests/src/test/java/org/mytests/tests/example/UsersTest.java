@@ -3,7 +3,7 @@ package org.mytests.tests.example;
 import org.mytests.tests.TestsInit;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.complex.table.Row.inRow;
+import static com.epam.jdi.mobile.elements.complex.table.Row.inRow;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.hamcrest.Matchers.containsString;
 import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_USER;

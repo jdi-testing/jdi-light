@@ -1,15 +1,15 @@
-package com.epam.jdi.light.ui.html.elements.complex;
+package com.epam.jdi.mobile.ui.html.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.mobile.asserts.generic.UISelectAssert;
+import com.epam.jdi.mobile.common.JDIAction;
+import com.epam.jdi.mobile.common.TextTypes;
+import com.epam.jdi.mobile.elements.base.UIListBase;
+import com.epam.jdi.mobile.elements.common.UIElement;
 import com.epam.jdi.tools.func.JFunc1;
 
 import java.util.List;
 
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.mobile.logger.LogLevels.DEBUG;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

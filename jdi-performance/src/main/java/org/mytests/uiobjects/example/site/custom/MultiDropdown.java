@@ -1,21 +1,21 @@
 package org.mytests.uiobjects.example.site.custom;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.mobile.asserts.generic.UISelectAssert;
+import com.epam.jdi.mobile.common.JDIAction;
+import com.epam.jdi.mobile.common.TextTypes;
+import com.epam.jdi.mobile.elements.base.JDIBase;
+import com.epam.jdi.mobile.elements.base.UIListBase;
+import com.epam.jdi.mobile.elements.common.UIElement;
+import com.epam.jdi.mobile.elements.interfaces.base.HasLabel;
+import com.epam.jdi.mobile.elements.interfaces.base.ICoreElement;
 import org.openqa.selenium.By;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.mobile.driver.WebDriverByUtils.fillByTemplate;
+import static com.epam.jdi.mobile.elements.init.UIFactory.$;
+import static com.epam.jdi.mobile.elements.init.UIFactory.$$;
+import static com.epam.jdi.mobile.logger.LogLevels.DEBUG;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.util.Arrays.asList;

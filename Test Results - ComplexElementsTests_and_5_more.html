@@ -806,7 +806,45 @@ jQuery.cookie = function(name, value, options) {
                                                 <span class="stdout">[ STEP 22:38.881] : Input &#39;Rom&#39; in &#39;User Name&#39; (User Name)<br/>[ERROR 23:03.950] : &gt;&gt;&gt; HomePageEx.userName (css=&#39;form #name&#39;)<br/>[ INFO 23:04.269] : Screenshot: D:\temp\JDILight\jdi-light-html-tests\src\test\.logs\screens\screen2020-01-19-23-23-03.jpg<br/>[ERROR 23:04.282] : Failed actions chain: <br/></span>
                                             </li>
                                             <li class="text">
-                                                <span class="stderr">java.lang.RuntimeException: <br/>[23:04.282] Failed to execute &#39;sendKeys&#39; for element &#39;User Name&#39; during &#39;25&#39; seconds. Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)<br/>Exception: <br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)<br/>Exception: <br/>Failed to execute &#39;sendKeys&#39; for element &#39;User Name&#39; during &#39;25&#39; seconds. <br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)<br/>Exception: <br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)<br/><br/>	at com.epam.jdi.light.common.Exceptions.exception(Exceptions.java:25)<br/>	at com.epam.jdi.light.ui.html.actions.HtmlActions.jdiAround(HtmlActions.java:48)<br/>	at com.epam.jdi.light.elements.common.UIElement.sendKeys(UIElement.java:119)<br/>	at io.github.epam.html.tests.elements.composite.page.init.PageInitTests.loginPageExTest(PageInitTests.java:35)<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br/>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br/>	at java.lang.reflect.Method.invoke(Method.java:498)<br/>	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:131)<br/>	at org.testng.internal.Invoker.invokeMethod(Invoker.java:658)<br/>	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:792)<br/>	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1103)<br/>	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:140)<br/>	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)<br/>	at org.testng.TestRunner.privateRun(TestRunner.java:739)<br/>	at org.testng.TestRunner.run(TestRunner.java:589)<br/>	at org.testng.SuiteRunner.runTest(SuiteRunner.java:398)<br/>	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:392)<br/>	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:354)<br/>	at org.testng.SuiteRunner.run(SuiteRunner.java:302)<br/>	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)<br/>	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)<br/>	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1145)<br/>	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)<br/>	at org.testng.TestNG.runSuites(TestNG.java:997)<br/>	at org.testng.TestNG.run(TestNG.java:965)<br/>	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)<br/></span>
+                                                <span class="stderr">java.lang.RuntimeException: 
+<br/>[23:04.282] Failed to execute &#39;sendKeys&#39; for element &#39;User Name&#39; during &#39;25&#39; seconds. 
+Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)
+<br/>Exception: 
+<br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)
+<br/>Exception: 
+<br/>Failed to execute &#39;sendKeys&#39; for element &#39;User Name&#39; during &#39;25&#39; seconds. 
+<br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)
+<br/>Exception: 
+<br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)<br/>
+<br/>	at com.epam.jdi.mobile.common.Exceptions.exception(Exceptions.java:25)
+<br/>	at com.epam.jdi.mobile.ui.html.actions.HtmlActions.jdiAround(HtmlActions.java:48)
+<br/>	at com.epam.jdi.mobile.elements.common.UIElement.sendKeys(UIElement.java:119)
+<br/>	at io.github.epam.html.tests.elements.composite.page.init.PageInitTests.loginPageExTest(PageInitTests.java:35)
+<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br/>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br/>	at java.lang.reflect.Method.invoke(Method.java:498)
+<br/>	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:131)
+<br/>	at org.testng.internal.Invoker.invokeMethod(Invoker.java:658)
+<br/>	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:792)
+<br/>	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1103)
+<br/>	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:140)
+<br/>	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)
+<br/>	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+<br/>	at org.testng.TestRunner.run(TestRunner.java:589)
+<br/>	at org.testng.SuiteRunner.runTest(SuiteRunner.java:398)
+<br/>	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:392)
+<br/>	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:354)
+<br/>	at org.testng.SuiteRunner.run(SuiteRunner.java:302)
+<br/>	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+<br/>	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+<br/>	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1145)
+<br/>	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+<br/>	at org.testng.TestNG.runSuites(TestNG.java:997)
+<br/>	at org.testng.TestNG.run(TestNG.java:965)
+<br/>	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+<br/>	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)
+<br/></span>
                                             </li>
                                         </ul>
                                     </li>
@@ -819,7 +857,45 @@ jQuery.cookie = function(name, value, options) {
                                                 <span class="stdout">[ STEP 23:04.801] : Input &#39;Rom&#39; in &#39;User Name&#39; (User Name)<br/>[ERROR 23:29.911] : &gt;&gt;&gt; HomePage.userName (css=&#39;form #name&#39;)<br/>[ INFO 23:30.219] : Screenshot: D:\temp\JDILight\jdi-light-html-tests\src\test\.logs\screens\screen2020-01-19-23-23-29.jpg<br/>[ERROR 23:30.228] : Failed actions chain: <br/></span>
                                             </li>
                                             <li class="text">
-                                                <span class="stderr">java.lang.RuntimeException: <br/>[23:30.229] Failed to execute &#39;sendKeys&#39; for element &#39;User Name&#39; during &#39;25&#39; seconds. Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)<br/>Exception: <br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)<br/>Exception: <br/>Failed to execute &#39;sendKeys&#39; for element &#39;User Name&#39; during &#39;25&#39; seconds. <br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)<br/>Exception: <br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)<br/><br/>	at com.epam.jdi.light.common.Exceptions.exception(Exceptions.java:25)<br/>	at com.epam.jdi.light.ui.html.actions.HtmlActions.jdiAround(HtmlActions.java:48)<br/>	at com.epam.jdi.light.elements.common.UIElement.sendKeys(UIElement.java:119)<br/>	at io.github.epam.html.tests.elements.composite.page.init.PageInitTests.loginPageTest(PageInitTests.java:46)<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br/>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br/>	at java.lang.reflect.Method.invoke(Method.java:498)<br/>	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:131)<br/>	at org.testng.internal.Invoker.invokeMethod(Invoker.java:658)<br/>	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:792)<br/>	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1103)<br/>	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:140)<br/>	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)<br/>	at org.testng.TestRunner.privateRun(TestRunner.java:739)<br/>	at org.testng.TestRunner.run(TestRunner.java:589)<br/>	at org.testng.SuiteRunner.runTest(SuiteRunner.java:398)<br/>	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:392)<br/>	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:354)<br/>	at org.testng.SuiteRunner.run(SuiteRunner.java:302)<br/>	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)<br/>	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)<br/>	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1145)<br/>	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)<br/>	at org.testng.TestNG.runSuites(TestNG.java:997)<br/>	at org.testng.TestNG.run(TestNG.java:965)<br/>	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)<br/></span>
+                                                <span class="stderr">java.lang.RuntimeException: 
+<br/>[23:30.229] Failed to execute &#39;sendKeys&#39; for element &#39;User Name&#39; during &#39;25&#39; seconds. 
+Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)
+<br/>Exception: 
+<br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)
+<br/>Exception: 
+<br/>Failed to execute &#39;sendKeys&#39; for element &#39;User Name&#39; during &#39;25&#39; seconds. 
+<br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)
+<br/>Exception: 
+<br/>Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)<br/>
+<br/>	at com.epam.jdi.mobile.common.Exceptions.exception(Exceptions.java:25)
+<br/>	at com.epam.jdi.mobile.ui.html.actions.HtmlActions.jdiAround(HtmlActions.java:48)
+<br/>	at com.epam.jdi.mobile.elements.common.UIElement.sendKeys(UIElement.java:119)
+<br/>	at io.github.epam.html.tests.elements.composite.page.init.PageInitTests.loginPageTest(PageInitTests.java:46)
+<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br/>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br/>	at java.lang.reflect.Method.invoke(Method.java:498)
+<br/>	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:131)
+<br/>	at org.testng.internal.Invoker.invokeMethod(Invoker.java:658)
+<br/>	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:792)
+<br/>	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1103)
+<br/>	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:140)
+<br/>	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)
+<br/>	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+<br/>	at org.testng.TestRunner.run(TestRunner.java:589)
+<br/>	at org.testng.SuiteRunner.runTest(SuiteRunner.java:398)
+<br/>	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:392)
+<br/>	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:354)
+<br/>	at org.testng.SuiteRunner.run(SuiteRunner.java:302)
+<br/>	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+<br/>	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+<br/>	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1145)
+<br/>	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+<br/>	at org.testng.TestNG.runSuites(TestNG.java:997)
+<br/>	at org.testng.TestNG.run(TestNG.java:965)
+<br/>	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+<br/>	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)
+<br/></span>
                                             </li>
                                         </ul>
                                     </li>
@@ -832,7 +908,56 @@ jQuery.cookie = function(name, value, options) {
                                                 <span class="stdout">[ STEP 23:30.231] : Click on &#39;css=&#39;.fa-sign-out&#39;&#39; (css=&#39;.fa-sign-out&#39;)<br/>[ERROR 23:55.700] : &gt;&gt;&gt;  (css=&#39;.fa-sign-out&#39;)<br/>[ INFO 23:56.063] : Screenshot: D:\temp\JDILight\jdi-light-html-tests\src\test\.logs\screens\screen2020-01-19-23-23-55.jpg<br/>[ERROR 23:56.078] : Failed actions chain: <br/></span>
                                             </li>
                                             <li class="text">
-                                                <span class="stderr">java.lang.RuntimeException: <br/>[23:56.78] Failed to execute &#39;click&#39; for element &#39;&#39; during &#39;25&#39; seconds. css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong<br/>Exception: <br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong<br/>Exception: <br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong<br/>Exception: <br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong<br/>Exception: <br/>Failed to execute &#39;click&#39; for element &#39;&#39; during &#39;25&#39; seconds. <br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong<br/>Exception: <br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong<br/>Exception: <br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong<br/>Exception: <br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong<br/><br/>	at com.epam.jdi.light.common.Exceptions.exception(Exceptions.java:25)<br/>	at com.epam.jdi.light.ui.html.actions.HtmlActions.jdiAround(HtmlActions.java:48)<br/>	at com.epam.jdi.light.elements.common.UIElement.click(UIElement.java:106)<br/>	at io.github.epam.html.tests.elements.composite.page.init.PageInitTests.before(PageInitTests.java:27)<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br/>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br/>	at java.lang.reflect.Method.invoke(Method.java:498)<br/>	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:131)<br/>	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:61)<br/>	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:511)<br/>	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:241)<br/>	at org.testng.internal.Invoker.invokeMethod(Invoker.java:581)<br/>	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:792)<br/>	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1103)<br/>	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:140)<br/>	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)<br/>	at org.testng.TestRunner.privateRun(TestRunner.java:739)<br/>	at org.testng.TestRunner.run(TestRunner.java:589)<br/>	at org.testng.SuiteRunner.runTest(SuiteRunner.java:398)<br/>	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:392)<br/>	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:354)<br/>	at org.testng.SuiteRunner.run(SuiteRunner.java:302)<br/>	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)<br/>	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)<br/>	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1145)<br/>	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)<br/>	at org.testng.TestNG.runSuites(TestNG.java:997)<br/>	at org.testng.TestNG.run(TestNG.java:965)<br/>	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)<br/></span>
+                                                <span class="stderr">java.lang.RuntimeException: 
+<br/>[23:56.78] Failed to execute &#39;click&#39; for element &#39;&#39; during &#39;25&#39; seconds. 
+css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong
+<br/>Exception: 
+<br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong
+<br/>Exception: 
+<br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong
+<br/>Exception: 
+<br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong
+<br/>Exception: 
+<br/>Failed to execute &#39;click&#39; for element &#39;&#39; during &#39;25&#39; seconds. 
+<br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong
+<br/>Exception: 
+<br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong
+<br/>Exception: 
+<br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong
+<br/>Exception: 
+<br/>css=&#39;.fa-sign-out&#39; is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong<br/>
+<br/>	at com.epam.jdi.mobile.common.Exceptions.exception(Exceptions.java:25)
+<br/>	at com.epam.jdi.mobile.ui.html.actions.HtmlActions.jdiAround(HtmlActions.java:48)
+<br/>	at com.epam.jdi.mobile.elements.common.UIElement.click(UIElement.java:106)
+<br/>	at io.github.epam.html.tests.elements.composite.page.init.PageInitTests.before(PageInitTests.java:27)
+<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br/>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br/>	at java.lang.reflect.Method.invoke(Method.java:498)
+<br/>	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:131)
+<br/>	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:61)
+<br/>	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:511)
+<br/>	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:241)
+<br/>	at org.testng.internal.Invoker.invokeMethod(Invoker.java:581)
+<br/>	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:792)
+<br/>	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1103)
+<br/>	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:140)
+<br/>	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)
+<br/>	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+<br/>	at org.testng.TestRunner.run(TestRunner.java:589)
+<br/>	at org.testng.SuiteRunner.runTest(SuiteRunner.java:398)
+<br/>	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:392)
+<br/>	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:354)
+<br/>	at org.testng.SuiteRunner.run(SuiteRunner.java:302)
+<br/>	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+<br/>	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+<br/>	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1145)
+<br/>	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+<br/>	at org.testng.TestNG.runSuites(TestNG.java:997)
+<br/>	at org.testng.TestNG.run(TestNG.java:965)
+<br/>	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+<br/>	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)
+<br/></span>
                                             </li>
                                         </ul>
                                     </li>
@@ -883,7 +1008,71 @@ jQuery.cookie = function(name, value, options) {
                                             </em><em class="status">failed</em>ButtonTests.isNotAppearFailedButtonTest</span>
                                         <ul>
                                             <li class="text">
-                                                <span class="stderr">java.lang.AssertionError: <br/>[23:57.986] Failed to execute &#39;notAppear&#39; for element &#39;Ghost Button(No locator)&#39; during &#39;25&#39; seconds. java.lang.AssertionError: <br/>Expected: is &quot;hidden&quot;<br/>     but: was &quot;displayed&quot;<br/>Exception: java.lang.AssertionError: <br/>Expected: is &quot;hidden&quot;<br/>     but: was &quot;displayed&quot;<br/>Exception: <br/>java.lang.AssertionError: <br/>Expected: is &quot;hidden&quot;<br/>     but: was &quot;displayed&quot;<br/>Exception: java.lang.AssertionError: <br/>Expected: is &quot;hidden&quot;<br/>     but: was &quot;displayed&quot;<br/>Exception: <br/>Failed to execute &#39;notAppear&#39; for element &#39;Ghost Button(No locator)&#39; during &#39;25&#39; seconds. <br/>java.lang.AssertionError: <br/>Expected: is &quot;hidden&quot;<br/>     but: was &quot;displayed&quot;<br/>Exception: java.lang.AssertionError: <br/>Expected: is &quot;hidden&quot;<br/>     but: was &quot;displayed&quot;<br/>Exception: <br/>java.lang.AssertionError: <br/>Expected: is &quot;hidden&quot;<br/>     but: was &quot;displayed&quot;<br/>Exception: java.lang.AssertionError: <br/>Expected: is &quot;hidden&quot;<br/>     but: was &quot;displayed&quot;<br/><br/>	at com.epam.jdi.light.common.Exceptions.exception(Exceptions.java:23)<br/>	at com.epam.jdi.light.ui.html.actions.HtmlActions.jdiAround(HtmlActions.java:48)<br/>	at com.epam.jdi.light.asserts.generic.UIAssert.notAppear(UIAssert.java:54)<br/>	at com.epam.jdi.light.asserts.generic.UIAssert.notAppear(UIAssert.java:46)<br/>	at io.github.epam.html.tests.elements.common.ButtonTests.lambda$isNotAppearFailedButtonTest$4(ButtonTests.java:142)<br/>	at com.epam.jdi.tools.func.JAction.execute(JAction.java:14)<br/>	at io.github.epam.html.tests.elements.BaseValidations.validateDuration(BaseValidations.java:57)<br/>	at io.github.epam.html.tests.elements.BaseValidations.durationMoreThan(BaseValidations.java:46)<br/>	at io.github.epam.html.tests.elements.BaseValidations.durationImmediately(BaseValidations.java:52)<br/>	at io.github.epam.html.tests.elements.common.ButtonTests.isNotAppearFailedButtonTest(ButtonTests.java:141)<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br/>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br/>	at java.lang.reflect.Method.invoke(Method.java:498)<br/>	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:131)<br/>	at org.testng.internal.Invoker.invokeMethod(Invoker.java:658)<br/>	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:792)<br/>	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1103)<br/>	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:140)<br/>	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)<br/>	at org.testng.TestRunner.privateRun(TestRunner.java:739)<br/>	at org.testng.TestRunner.run(TestRunner.java:589)<br/>	at org.testng.SuiteRunner.runTest(SuiteRunner.java:398)<br/>	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:392)<br/>	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:354)<br/>	at org.testng.SuiteRunner.run(SuiteRunner.java:302)<br/>	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)<br/>	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)<br/>	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1145)<br/>	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)<br/>	at org.testng.TestNG.runSuites(TestNG.java:997)<br/>	at org.testng.TestNG.run(TestNG.java:965)<br/>	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)<br/></span>
+                                                <span class="stderr">java.lang.AssertionError: 
+<br/>[23:57.986] Failed to execute &#39;notAppear&#39; for element &#39;Ghost Button(No locator)&#39; during &#39;25&#39; seconds. 
+java.lang.AssertionError: 
+<br/>Expected: is &quot;hidden&quot;
+<br/>     but: was &quot;displayed&quot;
+<br/>Exception: java.lang.AssertionError: 
+<br/>Expected: is &quot;hidden&quot;
+<br/>     but: was &quot;displayed&quot;
+<br/>Exception: 
+<br/>java.lang.AssertionError: 
+<br/>Expected: is &quot;hidden&quot;
+<br/>     but: was &quot;displayed&quot;
+<br/>Exception: java.lang.AssertionError: 
+<br/>Expected: is &quot;hidden&quot;
+<br/>     but: was &quot;displayed&quot;
+<br/>Exception: 
+<br/>Failed to execute &#39;notAppear&#39; for element &#39;Ghost Button(No locator)&#39; during &#39;25&#39; seconds. 
+<br/>java.lang.AssertionError: 
+<br/>Expected: is &quot;hidden&quot;
+<br/>     but: was &quot;displayed&quot;
+<br/>Exception: java.lang.AssertionError: 
+<br/>Expected: is &quot;hidden&quot;
+<br/>     but: was &quot;displayed&quot;
+<br/>Exception: 
+<br/>java.lang.AssertionError: 
+<br/>Expected: is &quot;hidden&quot;
+<br/>     but: was &quot;displayed&quot;
+<br/>Exception: java.lang.AssertionError: 
+<br/>Expected: is &quot;hidden&quot;
+<br/>     but: was &quot;displayed&quot;<br/>
+<br/>	at com.epam.jdi.mobile.common.Exceptions.exception(Exceptions.java:23)
+<br/>	at com.epam.jdi.mobile.ui.html.actions.HtmlActions.jdiAround(HtmlActions.java:48)
+<br/>	at com.epam.jdi.mobile.asserts.generic.UIAssert.notAppear(UIAssert.java:54)
+<br/>	at com.epam.jdi.mobile.asserts.generic.UIAssert.notAppear(UIAssert.java:46)
+<br/>	at io.github.epam.html.tests.elements.common.ButtonTests.lambda$isNotAppearFailedButtonTest$4(ButtonTests.java:142)
+<br/>	at com.epam.jdi.tools.func.JAction.execute(JAction.java:14)
+<br/>	at io.github.epam.html.tests.elements.BaseValidations.validateDuration(BaseValidations.java:57)
+<br/>	at io.github.epam.html.tests.elements.BaseValidations.durationMoreThan(BaseValidations.java:46)
+<br/>	at io.github.epam.html.tests.elements.BaseValidations.durationImmediately(BaseValidations.java:52)
+<br/>	at io.github.epam.html.tests.elements.common.ButtonTests.isNotAppearFailedButtonTest(ButtonTests.java:141)
+<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br/>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br/>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br/>	at java.lang.reflect.Method.invoke(Method.java:498)
+<br/>	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:131)
+<br/>	at org.testng.internal.Invoker.invokeMethod(Invoker.java:658)
+<br/>	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:792)
+<br/>	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1103)
+<br/>	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:140)
+<br/>	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)
+<br/>	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+<br/>	at org.testng.TestRunner.run(TestRunner.java:589)
+<br/>	at org.testng.SuiteRunner.runTest(SuiteRunner.java:398)
+<br/>	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:392)
+<br/>	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:354)
+<br/>	at org.testng.SuiteRunner.run(SuiteRunner.java:302)
+<br/>	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+<br/>	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+<br/>	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1145)
+<br/>	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+<br/>	at org.testng.TestNG.runSuites(TestNG.java:997)
+<br/>	at org.testng.TestNG.run(TestNG.java:965)
+<br/>	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+<br/>	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:110)
+<br/></span>
                                             </li>
                                         </ul>
                                     </li>

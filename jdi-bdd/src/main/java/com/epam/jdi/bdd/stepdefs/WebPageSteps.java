@@ -1,11 +1,11 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.mobile.elements.composite.WebPage;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import static com.epam.jdi.mobile.driver.WebDriverFactory.jsExecute;
 import static org.testng.Assert.assertEquals;
 
 /**

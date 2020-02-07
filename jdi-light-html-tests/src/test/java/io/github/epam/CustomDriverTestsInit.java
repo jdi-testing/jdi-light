@@ -1,17 +1,17 @@
 package io.github.epam;
 
-import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
+import com.epam.jdi.mobile.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.mobile.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.driver.get.DriverInfos.FF_INFO;
-import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
-import static com.epam.jdi.light.elements.init.PageFactory.initSite;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.light.settings.WebSettings.useDriver;
+import static com.epam.jdi.mobile.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.mobile.driver.get.DriverInfos.FF_INFO;
+import static com.epam.jdi.mobile.elements.init.InitActions.INTERFACES;
+import static com.epam.jdi.mobile.elements.init.PageFactory.initSite;
+import static com.epam.jdi.mobile.settings.WebSettings.logger;
+import static com.epam.jdi.mobile.settings.WebSettings.useDriver;
 import static io.github.com.StaticSite.homePage;
 
 public class CustomDriverTestsInit {

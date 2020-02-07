@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.elements.complex.table;
 
-import com.epam.jdi.light.elements.complex.table.Line;
+import com.epam.jdi.mobile.elements.complex.table.Line;
 import io.github.com.entities.MarvelUserSimple;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -8,9 +8,9 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.mobile.elements.complex.table.Column.inColumn;
+import static com.epam.jdi.mobile.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.mobile.elements.complex.table.TableMatcher.hasValue;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.usersTable;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;

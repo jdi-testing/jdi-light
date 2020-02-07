@@ -1,7 +1,7 @@
 package io.github.epam;
 
-import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
+import com.epam.jdi.mobile.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.mobile.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -14,12 +14,12 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
-import static com.epam.jdi.light.elements.init.PageFactory.initSite;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.mobile.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.mobile.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.mobile.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.mobile.elements.init.InitActions.INTERFACES;
+import static com.epam.jdi.mobile.elements.init.PageFactory.initSite;
+import static com.epam.jdi.mobile.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
 
 public interface TestsInit {

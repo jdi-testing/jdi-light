@@ -15,8 +15,8 @@ import java.lang.reflect.Method;
 
 import static applitools.hackathon.pages.ApplitoolsSite.loginPage;
 import static com.epam.jdi.eyes.JDIEyes.*;
-import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.elements.init.PageFactory.initSite;
+import static com.epam.jdi.mobile.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.mobile.elements.init.PageFactory.initSite;
 import static com.epam.jdi.tools.PropertyReader.readProperties;
 
 public class TestsInit {

@@ -1,14 +1,14 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.mobile.elements.composite.Form;
 import com.epam.jdi.tools.Safe;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import static com.epam.jdi.bdd.BDDUtils.getMapFromTable;
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.mobile.common.Exceptions.exception;
+import static com.epam.jdi.mobile.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.tools.JsonUtils.getMapFromJson;
 
 /**

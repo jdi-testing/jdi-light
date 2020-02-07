@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.elements.complex.table;
 
-import com.epam.jdi.light.elements.complex.table.Line;
+import com.epam.jdi.mobile.elements.complex.table.Line;
 import io.github.com.custom.MarvelUser;
 import io.github.com.entities.MarvelUserSimple;
 import io.github.epam.TestsInit;
@@ -12,10 +12,10 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.mobile.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.mobile.elements.complex.table.Column.inColumn;
+import static com.epam.jdi.mobile.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.mobile.elements.complex.table.TableMatcher.hasValue;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.users;

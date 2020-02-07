@@ -4,7 +4,7 @@ import jdisite.enums.MenuOptions;
 import jdisite.sections.LoginForm;
 import org.openqa.selenium.By;
 
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.mobile.elements.init.PageFactory.initElements;
 import static jdisite.utils.DriverUtils.DRIVER;
 
 public class JDISite {

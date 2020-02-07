@@ -1,26 +1,26 @@
 package com.epam.jdi.bdd;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.elements.complex.ISelector;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.base.HasCheck;
-import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.elements.interfaces.base.IClickable;
+import com.epam.jdi.mobile.driver.WebDriverFactory;
+import com.epam.jdi.mobile.elements.complex.ISelector;
+import com.epam.jdi.mobile.elements.composite.WebPage;
+import com.epam.jdi.mobile.elements.interfaces.base.HasCheck;
+import com.epam.jdi.mobile.elements.interfaces.base.HasClick;
+import com.epam.jdi.mobile.elements.interfaces.base.HasLabel;
+import com.epam.jdi.mobile.elements.interfaces.base.IClickable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.Dimension;
 
 import static com.epam.jdi.bdd.BDDUtils.*;
-import static com.epam.jdi.light.common.ElementArea.JS;
-import static com.epam.jdi.light.driver.WebDriverByUtils.byText;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.elements.init.PageFactory.preInit;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static com.epam.jdi.light.settings.WebSettings.getDomain;
+import static com.epam.jdi.mobile.common.ElementArea.JS;
+import static com.epam.jdi.mobile.driver.WebDriverByUtils.byText;
+import static com.epam.jdi.mobile.elements.composite.WebPage.*;
+import static com.epam.jdi.mobile.elements.init.PageFactory.preInit;
+import static com.epam.jdi.mobile.elements.init.UIFactory.$;
+import static com.epam.jdi.mobile.elements.init.entities.collection.EntitiesCollection.getPage;
+import static com.epam.jdi.mobile.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.mobile.settings.WebSettings.getDomain;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 

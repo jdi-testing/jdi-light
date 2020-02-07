@@ -1,16 +1,16 @@
-package com.epam.jdi.light.ui.html.elements.complex;
+package com.epam.jdi.mobile.ui.html.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.mobile.asserts.generic.UISelectAssert;
+import com.epam.jdi.mobile.common.JDIAction;
+import com.epam.jdi.mobile.elements.base.UIListBase;
+import com.epam.jdi.mobile.elements.common.UIElement;
+import com.epam.jdi.mobile.elements.complex.WebList;
+import com.epam.jdi.mobile.elements.interfaces.complex.IsCombobox;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.TextTypes.VALUE;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.mobile.common.TextTypes.VALUE;
+import static com.epam.jdi.mobile.elements.init.UIFactory.$$;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 
 /**

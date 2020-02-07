@@ -1,11 +1,11 @@
 package io.github.epam.html.tests.issues.issue70;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.JSite;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.Url;
 import io.github.epam.html.tests.issues.issue70.po.DashboardPage;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.init.PageFactory.initSite;
+import static com.epam.jdi.mobile.elements.init.PageFactory.initSite;
 
 @JSite("https://jdi-testing.github.io/jdi-light/table-with-href/")
 public class TestJDIList {

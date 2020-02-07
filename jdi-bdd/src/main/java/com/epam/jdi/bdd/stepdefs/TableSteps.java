@@ -1,20 +1,20 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.asserts.core.IsAssert;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.table.Table;
+import com.epam.jdi.mobile.asserts.core.IsAssert;
+import com.epam.jdi.mobile.elements.common.UIElement;
+import com.epam.jdi.mobile.elements.complex.table.Table;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.mobile.common.Exceptions.exception;
+import static com.epam.jdi.mobile.common.Exceptions.safeException;
+import static com.epam.jdi.mobile.elements.complex.table.Column.inColumn;
+import static com.epam.jdi.mobile.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.mobile.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.mobile.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

@@ -1,12 +1,12 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.ui.html.elements.common.TextArea;
+import com.epam.jdi.mobile.ui.html.elements.common.TextArea;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.mobile.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 

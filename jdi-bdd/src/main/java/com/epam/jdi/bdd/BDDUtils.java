@@ -1,15 +1,15 @@
 package com.epam.jdi.bdd;
 
-import com.epam.jdi.light.asserts.core.IsAssert;
-import com.epam.jdi.light.asserts.generic.*;
-import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.elements.interfaces.common.IsInput;
+import com.epam.jdi.mobile.asserts.core.IsAssert;
+import com.epam.jdi.mobile.asserts.generic.*;
+import com.epam.jdi.mobile.elements.common.Label;
+import com.epam.jdi.mobile.elements.common.UIElement;
+import com.epam.jdi.mobile.elements.interfaces.base.HasLabel;
+import com.epam.jdi.mobile.elements.interfaces.common.IsInput;
 import com.epam.jdi.tools.map.MapArray;
 import cucumber.api.DataTable;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.mobile.elements.init.entities.collection.EntitiesCollection.getUI;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

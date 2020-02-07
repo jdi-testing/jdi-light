@@ -1,11 +1,11 @@
 package io.github.com.custom;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.mobile.elements.common.UIElement;
+import com.epam.jdi.mobile.elements.composite.Section;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.Title;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.Css;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.mobile.settings.WebSettings.logger;
 import static java.lang.String.format;
 
 public class SearchResult extends Section {

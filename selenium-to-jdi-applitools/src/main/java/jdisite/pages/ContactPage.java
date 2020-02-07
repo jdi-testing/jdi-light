@@ -3,7 +3,7 @@ package jdisite.pages;
 import jdisite.sections.ContactForm;
 import jdisite.sections.ShortContactForm;
 
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.mobile.elements.init.PageFactory.initElements;
 import static jdisite.utils.DriverUtils.DRIVER;
 import static org.testng.Assert.assertEquals;
 

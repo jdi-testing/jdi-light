@@ -6,17 +6,17 @@ package com.epam.jdi.eyes;
  * Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.common.VisualCheckAction;
-import com.epam.jdi.light.common.VisualCheckPage;
-import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.mobile.common.VisualCheckAction;
+import com.epam.jdi.mobile.common.VisualCheckPage;
+import com.epam.jdi.mobile.driver.WebDriverFactory;
 import com.epam.jdi.tools.DataClass;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.WebDriver;
 
 import static com.epam.jdi.eyes.JDIEyes.EYES_CONFIG;
-import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
-import static com.epam.jdi.light.settings.WebSettings.VISUAL_PAGE_STRATEGY;
+import static com.epam.jdi.mobile.settings.WebSettings.VISUAL_ACTION_STRATEGY;
+import static com.epam.jdi.mobile.settings.WebSettings.VISUAL_PAGE_STRATEGY;
 import static com.epam.jdi.tools.StringUtils.format;
 
 public class EyesConfig extends DataClass<EyesConfig> {

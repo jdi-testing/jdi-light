@@ -1,11 +1,11 @@
 package org.mytests.uiobjects.example.knection;
 
-import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.complex.table.DataTable;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
+import com.epam.jdi.mobile.elements.common.Label;
+import com.epam.jdi.mobile.elements.complex.table.DataTable;
+import com.epam.jdi.mobile.elements.composite.WebPage;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.JTable;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.mobile.ui.html.elements.common.TextField;
 
 public class KHomePage extends WebPage {
     @UI("[aria-label='Knection']")

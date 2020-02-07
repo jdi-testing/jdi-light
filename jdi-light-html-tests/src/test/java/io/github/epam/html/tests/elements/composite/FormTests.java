@@ -5,10 +5,10 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.FormFilters.ALL;
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static com.epam.jdi.light.elements.init.UIFactory.loginAs;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.mobile.common.FormFilters.ALL;
+import static com.epam.jdi.mobile.elements.composite.WebPage.refresh;
+import static com.epam.jdi.mobile.elements.init.UIFactory.loginAs;
+import static com.epam.jdi.mobile.settings.TimeoutSettings.TIMEOUT;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.*;
 import static io.github.com.pages.ContactFormPage.main;

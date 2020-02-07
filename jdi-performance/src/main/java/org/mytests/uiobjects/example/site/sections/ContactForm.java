@@ -1,11 +1,11 @@
 package org.mytests.uiobjects.example.site.sections;
 
-import com.epam.jdi.light.elements.complex.dropdown.DropdownSelect;
-import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.light.ui.html.elements.common.Checkbox;
-import com.epam.jdi.light.ui.html.elements.common.TextArea;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
+import com.epam.jdi.mobile.elements.complex.dropdown.DropdownSelect;
+import com.epam.jdi.mobile.elements.composite.Form;
+import com.epam.jdi.mobile.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.mobile.ui.html.elements.common.Checkbox;
+import com.epam.jdi.mobile.ui.html.elements.common.TextArea;
+import com.epam.jdi.mobile.ui.html.elements.common.TextField;
 import org.mytests.uiobjects.example.entities.Contacts;
 import org.mytests.uiobjects.example.site.custom.MultiDropdown;
 

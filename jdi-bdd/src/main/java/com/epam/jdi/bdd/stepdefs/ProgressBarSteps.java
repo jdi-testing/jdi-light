@@ -1,9 +1,9 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
+import com.epam.jdi.mobile.ui.html.elements.common.ProgressBar;
 import cucumber.api.java.en.Then;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.mobile.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 

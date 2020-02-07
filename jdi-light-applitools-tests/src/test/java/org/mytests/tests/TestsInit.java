@@ -8,8 +8,8 @@ import org.testng.annotations.BeforeSuite;
 import java.lang.reflect.Method;
 
 import static com.epam.jdi.eyes.JDIEyes.*;
-import static com.epam.jdi.light.elements.init.PageFactory.initSite;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.mobile.elements.init.PageFactory.initSite;
+import static com.epam.jdi.mobile.settings.WebSettings.logger;
 import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
 
 public class TestsInit {

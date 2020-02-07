@@ -7,13 +7,13 @@ package applitools.hackathon.pages;
 
 import applitools.hackathon.custom.TransactionRow;
 import applitools.hackathon.entities.Transaction;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.complex.table.DataTable;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.GetVisible;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Link;
+import com.epam.jdi.mobile.elements.common.UIElement;
+import com.epam.jdi.mobile.elements.complex.WebList;
+import com.epam.jdi.mobile.elements.complex.table.DataTable;
+import com.epam.jdi.mobile.elements.composite.WebPage;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.GetVisible;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.mobile.ui.html.elements.common.Link;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 

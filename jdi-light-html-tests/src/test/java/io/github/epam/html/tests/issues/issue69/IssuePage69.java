@@ -1,8 +1,8 @@
 package io.github.epam.html.tests.issues.issue69;
 
-import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.mobile.elements.complex.DataList;
+import com.epam.jdi.mobile.elements.composite.WebPage;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
 
 import java.util.List;
 

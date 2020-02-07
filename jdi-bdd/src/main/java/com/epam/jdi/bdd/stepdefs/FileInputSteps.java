@@ -1,10 +1,10 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.ui.html.elements.common.FileInput;
+import com.epam.jdi.mobile.ui.html.elements.common.FileInput;
 import cucumber.api.java.en.When;
 
-import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.mobile.driver.get.DriverData.PROJECT_PATH;
+import static com.epam.jdi.mobile.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 
 /**

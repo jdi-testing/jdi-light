@@ -1,11 +1,11 @@
 package io.github.epam.html.tests.elements;
 
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.mobile.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.func.JAction;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.mobile.settings.WebSettings.logger;
 import static java.lang.System.currentTimeMillis;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;

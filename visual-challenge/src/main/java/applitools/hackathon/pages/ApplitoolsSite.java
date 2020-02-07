@@ -6,13 +6,13 @@ package applitools.hackathon.pages;
  */
 
 import applitools.hackathon.entities.User;
-import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
-import com.epam.jdi.light.elements.pageobjects.annotations.PageName;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.mobile.elements.composite.Form;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.JSite;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.PageName;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.Title;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.Url;
 
-import static com.epam.jdi.light.common.CheckTypes.MATCH;
+import static com.epam.jdi.mobile.common.CheckTypes.MATCH;
 
 @JSite("https://demo.applitools.com")
 public class ApplitoolsSite {

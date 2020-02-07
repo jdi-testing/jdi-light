@@ -1,9 +1,9 @@
 package applitools.hackathon.custom;
 
-import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.interfaces.base.HasValue;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Text;
+import com.epam.jdi.mobile.elements.composite.Section;
+import com.epam.jdi.mobile.elements.interfaces.base.HasValue;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.mobile.ui.html.elements.common.Text;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.String.format;

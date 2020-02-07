@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jdi-light-eyes</artifactId>
-    <name>JDI Light Applitools Eyes</name>
+    <artifactId>jdi-mobile-eyes</artifactId>
+    <name>JDI Mobile Applitools Eyes</name>
     <packaging>jar</packaging>
     <version>1.0.3</version>
     <groupId>com.epam.jdi</groupId>
@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light</artifactId>
+            <artifactId>jdi-mobile</artifactId>
             <version>1.1.11</version>
         </dependency>
 

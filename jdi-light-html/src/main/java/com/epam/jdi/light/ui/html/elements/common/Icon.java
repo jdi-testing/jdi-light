@@ -1,4 +1,4 @@
-package com.epam.jdi.light.ui.html.elements.common;
+package com.epam.jdi.mobile.ui.html.elements.common;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

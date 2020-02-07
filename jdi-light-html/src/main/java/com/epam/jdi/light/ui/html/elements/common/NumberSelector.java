@@ -1,13 +1,13 @@
-package com.epam.jdi.light.ui.html.elements.common;
+package com.epam.jdi.mobile.ui.html.elements.common;
 
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
-import com.epam.jdi.light.elements.interfaces.base.HasValue;
-import com.epam.jdi.light.ui.html.asserts.NumberAssert;
+import com.epam.jdi.mobile.common.JDIAction;
+import com.epam.jdi.mobile.elements.base.UIBaseElement;
+import com.epam.jdi.mobile.elements.interfaces.base.HasLabel;
+import com.epam.jdi.mobile.elements.interfaces.base.HasPlaceholder;
+import com.epam.jdi.mobile.elements.interfaces.base.HasValue;
+import com.epam.jdi.mobile.ui.html.asserts.NumberAssert;
 
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.mobile.logger.LogLevels.DEBUG;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

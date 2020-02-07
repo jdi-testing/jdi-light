@@ -1,10 +1,10 @@
 package io.github.epam.html.tests.issues.issue70.po;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.mobile.elements.common.UIElement;
+import com.epam.jdi.mobile.elements.complex.WebList;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.mobile.elements.init.UIFactory.$;
+import static com.epam.jdi.mobile.elements.init.UIFactory.$$;
 
 public class DocumentActions extends UIElement {
     private UIElement documentActionsBtn = $(".document-actions-btn");

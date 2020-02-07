@@ -1,8 +1,8 @@
-package com.epam.jdi.light.ui.html.elements.common;
+package com.epam.jdi.mobile.ui.html.elements.common;
 
-import com.epam.jdi.light.asserts.generic.TextAssert;
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.common.IsButton;
+import com.epam.jdi.mobile.asserts.generic.TextAssert;
+import com.epam.jdi.mobile.elements.base.UIBaseElement;
+import com.epam.jdi.mobile.elements.interfaces.common.IsButton;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

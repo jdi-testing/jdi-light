@@ -61,6 +61,6 @@
         <module>jdi-bdd-no-po-tests</module>
         <module>jdi-light-applitools-tests</module>
         <module>selenium-to-jdi-applitools</module>
-        <module>visual-challenge</module>
+        <!--module>visual-challenge</module-->
     </modules>
 </project>

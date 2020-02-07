@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-eyes</artifactId>
+            <artifactId>jdi-mobile-eyes</artifactId>
             <version>1.0.3</version>
         </dependency>
 

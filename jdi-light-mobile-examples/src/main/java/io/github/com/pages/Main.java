@@ -1,7 +1,7 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.XPath;
 import io.github.com.sections.ContactForm;
 import org.openqa.selenium.WebElement;
 

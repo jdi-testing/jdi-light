@@ -1,6 +1,6 @@
 package applitools.hackathon.custom;
 
-import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.mobile.elements.composite.Section;
 
 public class TransactionRow extends Section {
     public StatusCell status;

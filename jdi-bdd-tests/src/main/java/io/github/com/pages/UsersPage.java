@@ -1,10 +1,10 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.complex.table.DataTable;
-import com.epam.jdi.light.elements.complex.table.Table;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.mobile.elements.complex.table.DataTable;
+import com.epam.jdi.mobile.elements.complex.table.Table;
+import com.epam.jdi.mobile.elements.composite.WebPage;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.JTable;
+import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
 import io.github.com.custom.MarvelUser;
 import io.github.com.entities.MarvelUserInfo;
 import io.github.com.entities.MarvelUserSimple;
