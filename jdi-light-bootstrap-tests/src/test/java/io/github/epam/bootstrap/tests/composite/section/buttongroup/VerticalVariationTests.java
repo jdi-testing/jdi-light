@@ -75,7 +75,6 @@ public class VerticalVariationTests extends TestsInit {
 
     public void newWindowTitleCheck(String pageTitle) {
         switchToNewWindow();
-        String q = getTitle();
         assertEquals(getTitle(), pageTitle);
         closeWindow();
     }
