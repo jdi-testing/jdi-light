@@ -17,6 +17,7 @@ import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
@@ -49,7 +50,7 @@ import static java.util.Arrays.asList;
 public class PageFactory {
     // region initSite
     public static MapArray<String, JAction> PRE_INIT =
-        new MapArray<>("WebSettings", WebSettings::init);
+            new MapArray<>("WebSettings", WebSettings::init);
     public static boolean initialized = false;
     public static void preInit() {
         if (PRE_INIT == null) return;
@@ -70,7 +71,7 @@ public class PageFactory {
     public static void initSite(Class<?> site, String driverName) {
         preInit();
         SiteInfo info = new SiteInfo(driverName)
-            .set(s->s.parentClass = site);
+                .set(s->s.parentClass = site);
         initialize(site, info);
     }
     private static void initialize(Class<?> site, SiteInfo info) {
@@ -127,11 +128,11 @@ public class PageFactory {
     // region Private local methods
     private static String initException(Field field, Class<?> parent) {
         return format("Can't init '%s' '%s' on '%s'",
-            getSafe(() -> isClass(field.getType(), WebPage.class) ? "page" : "element",
-                "Element Type"),
-            // DO NOT REPLACE LAMBDAS BELOW
-            getSafe(() -> field.getName(), "Field Name"),
-            getSafe(() -> parent.getSimpleName(), "Parent Type"));
+                getSafe(() -> isClass(field.getType(), WebPage.class) ? "page" : "element",
+                        "Element Type"),
+                // DO NOT REPLACE LAMBDAS BELOW
+                getSafe(() -> field.getName(), "Field Name"),
+                getSafe(() -> parent.getSimpleName(), "Parent Type"));
     }
     private static String getSafe(JFunc<String> value, String defaultValue) {
         try {
@@ -158,9 +159,9 @@ public class PageFactory {
             try {
                 String msg = safeException(exception);
                 if (msg.contains("has no empty constructors")
-                    || msg.contains("Can't init class. Class Type is null"))
+                        || msg.contains("Can't init class. Class Type is null"))
                     info.instance = create(info.type(), getDriver(info.driverName));
-                    throw exception(msg);
+                throw exception(msg);
             } catch (Exception ex) {
                 throw exception(ex, "Can't create field '%s' instance of type '%s'. Try new %s() to get more details",
                         info.name(), info.type(), info.type());
@@ -175,13 +176,13 @@ public class PageFactory {
                 return (T)(info.instance = firstRule.value.func.execute(info));
             } catch (Exception ex) {
                 throw exception(ex, "Init rule '%s' failed. Can't init field '%s' on page '%s'",
-                    firstRule.key, info.name(), info.parentName());
+                        firstRule.key, info.name(), info.parentName());
             }
         else
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
-                    "Maybe you can solve you problem by adding HtmlSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
-                    "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
-                info.name());
+                            "Maybe you can solve you problem by adding HtmlSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
+                            "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
+                    info.name());
     }
     private static void initWebPage(WebPage webPage) {
         webPage.driverName = DRIVER_NAME;
@@ -203,14 +204,14 @@ public class PageFactory {
     //endregion
 
     public static List<Class<?>> STOP_INIT_CLASSES = asList(
-        Object.class, WebPage.class, Section.class, UIElement.class,
+            Object.class, WebPage.class, Section.class, UIElement.class,
             UIBaseElement.class, UIListBase.class,
             DataList.class, JList.class, WebList.class);
 
     public static void initElements(SiteInfo info) {
         List<Field> poFields = recursion(info.instance.getClass(),
-            t -> !STOP_INIT_CLASSES.contains(t),
-            t -> asList(t.getDeclaredFields()));
+                t -> !STOP_INIT_CLASSES.contains(t),
+                t -> asList(t.getDeclaredFields()));
         List<Field> fields = filter(poFields, f -> isJDIField(f) || isPageObject(f.getType()));
         SiteInfo pageInfo = new SiteInfo(info);
         pageInfo.parent = info.instance;
@@ -226,7 +227,7 @@ public class PageFactory {
     }
 
     // region Selenium PageFactory
-    public static void initElements(JFunc<WebDriver> driver, Object... pages) {
+    public static void initElements(JFunc<AppiumDriver> driver, Object... pages) {
         preInit();
         useDriver(driver);
         initElements(pages);
@@ -253,14 +254,14 @@ public class PageFactory {
         String pageName = splitCamelCase(pageClassToProxy.getSimpleName());
         WebPage webPage = new WebPage();
         webPage.updatePageData(
-            webPage.getClass().getAnnotation(Url.class),
-            webPage.getClass().getAnnotation(Title.class));
+                webPage.getClass().getAnnotation(Url.class),
+                webPage.getClass().getAnnotation(Title.class));
         webPage.setName(pageName);
         PAGES.update(pageName, webPage);
         initElements(driver, page);
         return page;
     }
-    public static void initElements(WebDriver driver, Object page) {
+    public static void initElements(AppiumDriver driver, Object page) {
         initElements(() -> driver, page);
     }
     public static void initElements(ElementLocatorFactory factory, Object page) {

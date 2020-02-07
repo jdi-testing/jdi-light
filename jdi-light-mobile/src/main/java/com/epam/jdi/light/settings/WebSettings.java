@@ -14,6 +14,7 @@ import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -74,13 +75,12 @@ public class WebSettings {
     public static void setDomain(String domain) {
         DOMAIN = domain;
     }
-    public static String KILL_BROWSER = "afterAndBefore";
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
-        el != null && el.isDisplayed() && el.isEnabled();
+            el != null && el.isDisplayed() && el.isEnabled();
     public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
-        el != null && !el.isDisplayed() && $(el).isClickable();
+            el != null && !el.isDisplayed() && $(el).isClickable();
     public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
     public static JAction1<UIElement> BEFORE_SEARCH = b -> {};
     public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
@@ -115,7 +115,7 @@ public class WebSettings {
     // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
-    public static String useDriver(JFunc<WebDriver> driver) {
+    public static String useDriver(JFunc<AppiumDriver> driver) {
         return WebDriverFactory.useDriver(driver);
     }
     public static String useDriver(String driverName) {
@@ -132,8 +132,8 @@ public class WebSettings {
         return el.base().timer().getResult(() -> {
             for (String template : SMART_SEARCH_LOCATORS) {
                 UIElement ui = (template.equals("#%s")
-                    ? $(String.format(template, locatorName))
-                    : $(String.format(template, locatorName), el.base().parent))
+                        ? $(String.format(template, locatorName))
+                        : $(String.format(template, locatorName), el.base().parent))
                         .setup(e -> e.setName(el.getName()).noWait());
                 try {
                     return ui.getWebElement();
@@ -152,12 +152,12 @@ public class WebSettings {
             fillAction(p -> DRIVER_NAME = p, "driver");
         fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
                 ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
-                    ? PRELATEST_VERSION : p, "driver.version");
+                ? PRELATEST_VERSION : p, "driver.version");
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
         fillAction(p -> SCREENSHOT_STRATEGY = getAttachmentStrategy(p), "screenshot.strategy");
         fillAction(p -> HTML_CODE_LOGGING = getAttachmentStrategy(p), "html.code.logging");
-        fillAction(p -> KILL_BROWSER = p, "browser.kill");
+//        fillAction(p -> KILL_BROWSER = p, "browser.kill");
         fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
         fillAction(p -> BROWSER_SIZE = p, "browser.size");
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
@@ -171,20 +171,22 @@ public class WebSettings {
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> SMART_SEARCH_LOCATORS =
-            filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
+                filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
         fillAction(p -> SMART_SEARCH_NAME = getSmartSearchFunc(p), "smart.locators.toName");
         fillAction(p -> COMMON_CAPABILITIES.put("headless", p), "headless");
 
         loadCapabilities("chrome.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(),value.toString())));
         loadCapabilities("ff.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(),value.toString())));
         loadCapabilities("ie.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(),value.toString())));
         loadCapabilities("edge.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(),value.toString())));
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(),value.toString())));
         loadCapabilities("opera.capabilities.path",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(),value.toString())));
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(),value.toString())));
+        loadCapabilities("appium.capabilities.path",
+                p -> p.forEach((key, value) -> CAPABILITIES_FOR_MOBILE.put(key.toString(), value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         if (SMART_SEARCH_LOCATORS.size() == 0)
@@ -192,9 +194,9 @@ public class WebSettings {
     }
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
-            t -> t.toString().equals(type));
+                t -> t.toString().equals(type));
         return textType != null
-            ? textType : SMART_TEXT;
+                ? textType : SMART_TEXT;
     }
     private static SetTextTypes getSetTextType(String type) {
         SetTextTypes textType = first(getAllEnumValues(SetTextTypes.class),
@@ -302,7 +304,7 @@ public class WebSettings {
     }
     private static AttachmentStrategy getAttachmentStrategy(String strategy) {
         return strategy.toLowerCase().equals("off")
-            ? AttachmentStrategy.OFF
-            : AttachmentStrategy.ON_FAIL;
+                ? AttachmentStrategy.OFF
+                : AttachmentStrategy.ON_FAIL;
     }
 }
