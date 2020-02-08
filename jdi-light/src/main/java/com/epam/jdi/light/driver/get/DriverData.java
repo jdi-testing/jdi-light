@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.safari.SafariOptions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ public class DriverData {
     public static Map<String,String> CAPABILITIES_FOR_FF = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_EDGE = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_OPERA = new HashMap<>();
+    public static Map<String,String> CAPABILITIES_FOR_SAFARI = new HashMap<>();
     public static Map<String,String> COMMON_CAPABILITIES = new HashMap<>();
 
     public static String chromeDriverPath() {
@@ -77,6 +79,9 @@ public class DriverData {
     }
     public static String operaDriverPath() {
         return driverPath("operadriver");
+    }
+    public static String safariDriverPath() {
+        return driverPath("safaridriver");
     }
     public static String firefoxDriverPath() {
         return driverPath("geckodriver");
@@ -244,6 +249,9 @@ public class DriverData {
 
     public static void defaultOperaOptions(OperaOptions cap) { }
     public static JAction1<OperaOptions> OPERA_OPTIONS = DriverData::defaultOperaOptions;
+
+    public static void defaultSafariOptions(SafariOptions cap) { }
+    public static JAction1<SafariOptions> SAFARI_OPTIONS = DriverData::defaultSafariOptions;
 
     private static WebDriver maximizeScreen(WebDriver driver) {
         try {

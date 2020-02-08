@@ -1,21 +1,23 @@
 package io.github.epam.html.tests.elements.common;
 
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.settings.WebSettings;
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
-import static com.epam.jdi.light.elements.common.Keyboard.keyPress;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.fail;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
@@ -84,7 +86,7 @@ public class PerformanceTests implements TestsInit {
         WebPage.reload();
         assertFalse(suspendButton.isDisplayed());
         durationMoreThan(2, () ->
-                suspendButton.is().displayed());
+            suspendButton.is().displayed());
     }
     //if test fails then run `mvn clean install` in module JDI Light
     @Test

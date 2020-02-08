@@ -459,7 +459,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
     public boolean isHidden() {
-        return !isDisplayed();
+        refresh();
+        return isEmpty();
     }
 
     @JDIAction(value = "Check that '{name}' is enabled", timeout = 0)

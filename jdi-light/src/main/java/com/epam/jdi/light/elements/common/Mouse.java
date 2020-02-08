@@ -4,9 +4,6 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 
-import java.awt.*;
-import java.awt.event.InputEvent;
-
 import static com.epam.jdi.light.elements.common.Keyboard.getRobot;
 import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
 import static com.epam.jdi.tools.Timer.sleep;

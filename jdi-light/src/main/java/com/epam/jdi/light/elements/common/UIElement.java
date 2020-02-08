@@ -42,7 +42,6 @@ import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.switcher.SwitchActions.Case;
 import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
-import static java.lang.Boolean.parseBoolean;
 import static java.lang.Math.abs;
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
@@ -732,6 +731,7 @@ public class UIElement extends JDIBase
         try {
             return getWebElement().isDisplayed();
         } catch (Exception ex) {
+            logger.info("?<<");
             return false;
         }
     }
