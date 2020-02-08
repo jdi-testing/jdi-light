@@ -1,25 +1,21 @@
 package io.github.epam.html.tests.elements.common;
 
-import com.epam.jdi.light.elements.common.Keyboard;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.elements.common.Alerts.*;
-import static com.epam.jdi.light.elements.common.Keyboard.*;
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Keyboard.keyPress;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
-import static io.github.epam.html.tests.elements.BaseValidations.*;
+import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
@@ -104,90 +100,4 @@ public class ButtonTests implements TestsInit {
         baseValidation(redButton);
     }
 
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void suspendButtonTest() {
-        WebPage.reload();
-        durationMoreThan(3, () -> suspendButton.click());
-        validateAlert("Suspend button");
-    }
-
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void vanishButtonTest() {
-        WebPage.reload();
-        durationMoreThan(3, () ->
-            ghostButton.is().disappear());
-    }
-
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void isNotAppearTimeoutFailedButtonTest() {
-        WebPage.reload();
-        durationMoreThan(2, () ->
-            suspendButton.is().notAppear(2));
-    }
-
-    @Test
-    public void displayButtonTest() {
-        WebPage.reload();
-        assertFalse(suspendButton.isDisplayed());
-        durationMoreThan(2, () ->
-                suspendButton.is().displayed());
-    }
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void isNotAppearFailedButtonTest() {
-        WebPage.reload();
-        try {
-            durationImmediately(() ->
-                ghostButton.is().notAppear());
-            fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
-        } catch (AssertionError ex) {
-            assertThat(safeException(ex), containsString("but: was \"displayed\""));
-        }
-    }
-
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void isNotAppearButtonTest() {
-        ghostButton.is().hidden();
-        durationMoreThan(3, () -> ghostButton.is().notAppear());
-    }
-
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void isNotAppearTimeoutButtonTest() {
-        ghostButton.is().hidden();
-        durationMoreThan(2, () ->
-            ghostButton.is().notAppear(2));
-    }
-
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void isNotAppearRemoveFailedButtonTest() {
-        WebPage.reload();
-        try {
-            durationImmediately(() ->
-                    removeButton.is().notAppear());
-            fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
-        } catch (AssertionError ex) {
-            assertThat(safeException(ex), containsString("but: was \"displayed\""));
-        }
-    }
-
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void isNotAppearRemoveButtonTest() {
-        removeButton.is().hidden();
-        duration(4, () -> removeButton.is().notAppear());
-    }
-
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void isNotAppearRemoveTimeoutButtonTest() {
-        removeButton.is().hidden();
-        duration(2, () ->
-            removeButton.is().notAppear(2));
-    }
 }

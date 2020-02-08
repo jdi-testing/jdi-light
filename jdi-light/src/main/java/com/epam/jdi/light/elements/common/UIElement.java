@@ -42,6 +42,7 @@ import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.switcher.SwitchActions.Case;
 import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
+import static java.lang.Boolean.parseBoolean;
 import static java.lang.Math.abs;
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
@@ -246,6 +247,25 @@ public class UIElement extends JDIBase
     }
 
     /**
+     * Check the element is displayed
+     * @return boolean
+     */
+    @JDIAction(value = "Check that '{name}' is visible by user", timeout = 0)
+    public boolean isVisible() {
+        if (isHidden())
+            return false;
+        Object isInView = js().executeScript(
+            "const rect = arguments[0].getBoundingClientRect();\n" +
+            "if (!rect) return false;\n" +
+            "const windowHeight = (window.innerHeight || document.documentElement.clientHeight);\n" +
+            "const windowWidth = (window.innerWidth || document.documentElement.clientWidth);\n" +
+            "const vertInView = (rect.top <= windowHeight) && ((rect.top + rect.height) > 0);\n" +
+            "const horInView = (rect.left <= windowWidth) && ((rect.left + rect.width) > 0);\n" +
+            "return (vertInView && horInView);", getWebElement());
+        return (boolean)isInView;
+    }
+
+    /**
      * Input specified value as keys
      * @param value
      */
@@ -399,6 +419,15 @@ public class UIElement extends JDIBase
     @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
     public boolean isHidden() {
         return !displayed();
+    }
+
+    /**
+     * Check the element is visible by user
+     * @return boolean
+     */
+    @JDIAction(value = "Check that '{name}' is not visible by user", timeout = 0)
+    public boolean isNotVisible() {
+        return !isVisible();
     }
 
     @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)

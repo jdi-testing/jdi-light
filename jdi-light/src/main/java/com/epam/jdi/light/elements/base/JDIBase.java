@@ -192,11 +192,12 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return get(new Object[]{});
     }
     public WebElement get() {
-        WebElement element = get(new Object[]{});
-        for (JFunc1<WebElement, Boolean> rule : searchRules())
-            if (!rule.execute(element))
-                throw exception("Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)");
-        return element;
+        return get(new Object[]{});
+        //WebElement element = get(new Object[]{});
+        //for (JFunc1<WebElement, Boolean> rule : searchRules())
+        //    if (!rule.execute(element))
+        //        throw exception("Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)");
+        //return element;
 
     }
     protected JFunc<WebElement> getElementFunc = null;

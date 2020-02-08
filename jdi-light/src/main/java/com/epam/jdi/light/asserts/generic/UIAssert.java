@@ -26,13 +26,27 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
         return (A) this;
     }
     /**
+     * Check that the element is visible for user
+     */
+    @JDIAction("Assert that '{name}' is visible for user")
+    public A visible() {
+        jdiAssert(element.isVisible() ? "in user view" : "out of user view", Matchers.is("in user view"));
+        return (A) this;
+    }
+    /**
+     * Check that the element is not visible by user
+     */
+    @JDIAction("Assert that '{name}' is not visible by user")
+    public A notVisible() {
+        jdiAssert(element.isNotVisible() ? "in user view" : "out of user view", Matchers.is("out of user view"));
+        return (A) this;
+    }
+    /**
      * Check that the element is disappeared
      */
     @JDIAction("Assert that '{name}' disappeared")
     public A disappear() {
-        logger.info("!>>");
         jdiAssert(element.isDisplayed() ? "displayed" : "disappeared", Matchers.is("disappeared"));
-        logger.info("<<!");
         return (A) this;
     }
 
@@ -55,10 +69,8 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
     public A notAppear(int timeoutSec) {
-        logger.toLog(">!!! " + timeoutSec * 1000);
         boolean result = new Timer(timeoutSec * 1000)
                 .wait(() -> element.isDisplayed());
-        logger.toLog("<!!! ");
         jdiAssert(result ? "displayed" : "hidden", Matchers.is("hidden"));
         return (A) this;
     }

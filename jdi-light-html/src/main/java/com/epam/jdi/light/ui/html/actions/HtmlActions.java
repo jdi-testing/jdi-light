@@ -29,29 +29,31 @@ public class HtmlActions {
     protected void jdiPointcut() { }
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
+        Object obj = getObjAround(jp);
+        IBaseElement element = getJdi(jp);
+        int timeout = element != null
+                ? element.base().getTimeout()
+                : TIMEOUT.get();
         try {
             failedMethods.clear();
             if (aroundCount() > 1)
                 return defaultAction(jp);
             BEFORE_JDI_ACTION.execute(jp);
-            IBaseElement element = getJdi(jp);
-            int timeout = element != null ? element.base().getTimeout() : TIMEOUT.get();
             Object result = stableAction(jp, element, timeout);
-            if (element != null)
-                element.base().waitSec(timeout);
-            isOverride.get().clear();
-            if (aroundCount() == 1)
-                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            Object element = getObjAround(jp);
             addFailedMethod(jp);
             if (aroundCount() == 1) {
-                logFailure(element);
+                logFailure(obj);
                 reverse(failedMethods);
                 logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
             }
-            throw exception(ex, ACTION_FAILED.execute(element, getExceptionAround(ex, aroundCount() == 1)));
+            throw exception(ex, ACTION_FAILED.execute(obj, getExceptionAround(ex, aroundCount() == 1)));
+        }
+        finally {
+            if (element != null)
+                element.base().waitSec(timeout);
+            isOverride.get().clear();
         }
     }
 }
