@@ -1,6 +1,5 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.tools.ReflectionUtils;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;

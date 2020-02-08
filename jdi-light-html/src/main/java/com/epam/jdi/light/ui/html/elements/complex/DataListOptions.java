@@ -89,4 +89,6 @@ public class DataListOptions extends UIListBase<UISelectAssert> implements IsCom
     }
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() { return core().isDisplayed(); }
+    @JDIAction("Check that '{name}' is hidden") @Override
+    public boolean isHidden() { return core().isHidden(); }
 }

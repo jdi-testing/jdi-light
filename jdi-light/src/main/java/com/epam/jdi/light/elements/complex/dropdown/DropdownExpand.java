@@ -112,6 +112,10 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     public boolean isDisplayed() {
         return value().isDisplayed();
     }
+    @JDIAction("Check that '{name}' is hidden") @Override
+    public boolean isHidden() {
+        return value().isHidden();
+    }
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isEnabled() {
         return value().isEnabled();

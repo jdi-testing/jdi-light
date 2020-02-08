@@ -67,5 +67,5 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IsD
     @Override
     public boolean isDisplayed() { return list().isDisplayed(); }
     @Override
-    public boolean isHidden() { return !isDisplayed(); }
+    public boolean isHidden() { return list().isHidden(); }
 }
