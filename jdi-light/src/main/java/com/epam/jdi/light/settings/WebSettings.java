@@ -188,19 +188,19 @@ public class WebSettings {
         fillAction(p -> COMMON_CAPABILITIES.put("headless", p), "headless");
 
         loadCapabilities("chrome.capabilities.path", "chrome.properties",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(), value.toString())));
         loadCapabilities("ff.capabilities.path","ff.properties",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(), value.toString())));
         loadCapabilities("ie.capabilities.path","ie.properties",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(), value.toString())));
         loadCapabilities("edge.capabilities.path","edge.properties",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(), value.toString())));
         loadCapabilities("opera.capabilities.path","opera.properties",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(), value.toString())));
         loadCapabilities("safari.capabilities.path","safari.properties",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_SAFARI.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_SAFARI.put(key.toString(), value.toString())));
         loadCapabilities("common.capabilities.path","common.properties",
-                p -> p.forEach((key,value) -> COMMON_CAPABILITIES.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> COMMON_CAPABILITIES.put(key.toString(), value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         if (SMART_SEARCH_LOCATORS.size() == 0)

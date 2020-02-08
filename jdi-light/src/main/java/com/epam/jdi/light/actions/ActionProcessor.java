@@ -11,6 +11,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
@@ -91,8 +92,10 @@ public class ActionProcessor {
         return result;
     }
     private static List<StackTraceElement> arounds() {
-        return where(currentThread().getStackTrace(),
+        List<StackTraceElement> arounds = where(currentThread().getStackTrace(),
                 s -> s.getMethodName().equals("jdiAround"));
+        Collections.reverse(arounds);
+        return arounds;
     }
     public static boolean notThisAround(String name) {
         return !arounds().get(0).getClassName().equals(name);

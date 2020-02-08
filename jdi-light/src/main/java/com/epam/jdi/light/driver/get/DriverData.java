@@ -1,5 +1,6 @@
 package com.epam.jdi.light.driver.get;
 
+import com.epam.jdi.tools.ReflectionUtils;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
@@ -25,6 +26,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.stringToPrimitive;
 import static com.epam.jdi.tools.RegExUtils.matches;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
@@ -183,7 +185,7 @@ public class DriverData {
 
     public static void setupCapability(ChromeOptions cap, String property, String value){
         if(!property.equals(ARGUMENTS_PROPERTY)){
-            cap.setCapability(property, value);
+            cap.setCapability(property, stringToPrimitive(value));
         } else {
             cap.addArguments(value.split(" "));
         }
