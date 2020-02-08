@@ -1,9 +1,7 @@
 package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -16,14 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
-import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.base.OutputTemplates.FAILED_ACTION_TEMPLATE;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.where;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.Timer.nowTime;
@@ -53,24 +48,27 @@ public class ActionProcessor {
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() { // empty
     }
+    private final String className = "com.epam.jdi.light.actions.ActionProcessor";
     @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) {
+    public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {
+        if (notThisAround(className))
+            return jp.proceed();
         ActionObject jInfo = new ActionObject(jp);
         try {
             failedMethods.clear();
-            if (aroundCount() > 1)
+            if (aroundCount(className) > 1)
                 return defaultAction(jInfo);
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jInfo);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
             addFailedMethod(jp);
-            if (aroundCount() == 1) {
+            if (aroundCount(className) == 1) {
                 logFailure(jInfo.object());
                 reverse(failedMethods);
                 logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
             }
-            throw exception(ex, ACTION_FAILED.execute(jInfo.object(), getExceptionAround(ex, aroundCount() == 1)));
+            throw exception(ex, ACTION_FAILED.execute(jInfo.object(), getExceptionAround(ex, aroundCount(className) == 1)));
         }
         finally {
             jInfo.clear();
@@ -83,19 +81,25 @@ public class ActionProcessor {
             failedMethods.add(result);
     }
     public static List<String> failedMethods = new ArrayList<>();
-    public static String getExceptionAround(Throwable ex, boolean time) {
+    public static String getExceptionAround(Throwable ex, boolean top) {
         String result = safeException(ex);
         while (result.contains("\n\n"))
             result = result.replaceFirst("\\n\\n", LINE_BREAK);
         result = result.replace("java.lang.RuntimeException:", "").trim();
-        if (aroundCount() == 1)
+        if (top)
             result = "[" + nowTime("mm:ss.S") + "] " + result.replaceFirst("\n", "");
         return result;
     }
-    public static int aroundCount() {
+    private static List<StackTraceElement> arounds() {
         return where(currentThread().getStackTrace(),
-                s -> s.getMethodName().equals("jdiAround")/* ||
-                s.getClassName().equals("io.qameta.allure.aspects.StepsAspects")*/)
+                s -> s.getMethodName().equals("jdiAround"));
+    }
+    public static boolean notThisAround(String name) {
+        return !arounds().get(0).getClassName().equals(name);
+    }
+    public static int aroundCount(String name) {
+        return where(currentThread().getStackTrace(),
+                s -> s.getMethodName().equals("jdiAround") && s.getClassName().equals(name))
                 .size();
     }
     public static Object defaultAction(ActionObject jInfo) throws Throwable {
@@ -110,10 +114,8 @@ public class ActionProcessor {
         Throwable exception = null;
         do {
             try {
-                logger.info("!>>");
                 Object result = jInfo.overrideAction() != null
-                        ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
-                logger.info("!<<");
+                    ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
                 if (!condition(jInfo.jp())) continue;
                 return result;
             } catch (Throwable ex) {

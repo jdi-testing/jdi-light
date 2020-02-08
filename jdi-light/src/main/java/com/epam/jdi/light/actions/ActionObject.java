@@ -1,5 +1,6 @@
 package com.epam.jdi.light.actions;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
@@ -9,6 +10,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.actions.ActionHelper.getJdiAction;
 import static com.epam.jdi.light.actions.ActionHelper.getJpClass;
 import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
@@ -17,6 +19,9 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 public class ActionObject {
     public ActionObject(ProceedingJoinPoint joinPoint) {
         this.jp = joinPoint;
+        this.elementTimeout = element() != null
+                ? element().base().getTimeout()
+                : TIMEOUT.get();
     }
     public ProceedingJoinPoint jp() { return jp; }
     private ProceedingJoinPoint jp;
@@ -40,10 +45,22 @@ public class ActionObject {
     }
 
     public int timeout() { return timeout.get(); }
-    private CacheValue<Integer> timeout = new CacheValue<>(
-        () -> element() != null ? element().base().getTimeout(): TIMEOUT.get());
+    private int elementTimeout;
+    private CacheValue<Integer> timeout = new CacheValue<>(this::getTimeout);
+    private int getTimeout() {
+        JDIAction ja = jp != null
+                ? getJdiAction(jp)
+                : null;
+        return ja != null && ja.timeout() != -1
+                ? ja.timeout()
+                : elementTimeout;
+    }
 
-    void setElementTimeout() {
+    private void resetElementTimeout() {
+        if (element() != null)
+            element().base().waitSec(elementTimeout);
+    }
+    public void setElementTimeout() {
         if (element() != null)
             element().base().waitSec(timeout());
     }
@@ -62,7 +79,7 @@ public class ActionObject {
     }
     private static Safe<List<String>> isOverride = new Safe<>(ArrayList::new);
     public void clear() {
-        setElementTimeout();
+        resetElementTimeout();
         isOverride.get().clear();
     }
 }

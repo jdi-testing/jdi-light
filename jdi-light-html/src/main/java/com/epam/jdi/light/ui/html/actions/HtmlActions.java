@@ -22,24 +22,27 @@ import static java.util.Collections.reverse;
 public class HtmlActions {
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { }
+    private final String className = "com.epam.jdi.light.ui.html.actions.HtmlActions";
     @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) {
+    public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {        if (notThisAround(className))
+        if (notThisAround(className))
+            return jp.proceed();
         ActionObject jInfo = new ActionObject(jp);
         try {
             failedMethods.clear();
-            if (aroundCount() > 1)
+            if (aroundCount(className) > 1)
                 return defaultAction(jInfo);
             BEFORE_JDI_ACTION.execute(jp);
             Object result = stableAction(jInfo);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
             addFailedMethod(jp);
-            if (aroundCount() == 1) {
+            if (aroundCount(className) == 1) {
                 logFailure(jInfo.object());
                 reverse(failedMethods);
                 logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
             }
-            throw exception(ex, ACTION_FAILED.execute(jInfo.object(), getExceptionAround(ex, aroundCount() == 1)));
+            throw exception(ex, ACTION_FAILED.execute(jInfo.object(), getExceptionAround(ex, aroundCount(className) == 1)));
         }
         finally {
             jInfo.clear();

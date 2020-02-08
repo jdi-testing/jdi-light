@@ -731,7 +731,6 @@ public class UIElement extends JDIBase
         try {
             return getWebElement().isDisplayed();
         } catch (Exception ex) {
-            logger.info("?<<");
             return false;
         }
     }
