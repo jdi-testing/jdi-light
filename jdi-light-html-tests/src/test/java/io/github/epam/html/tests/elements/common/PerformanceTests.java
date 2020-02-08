@@ -76,7 +76,7 @@ public class PerformanceTests implements TestsInit {
     @Test
     public void displayButtonTest() {
         assertFalse(suspendButton.isDisplayed());
-        durationMoreThan(2, () ->
+        durationMoreThan(3, () ->
             suspendButton.is().displayed());
     }
     //if test fails then run `mvn clean install` in module JDI Light

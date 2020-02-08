@@ -191,12 +191,11 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return get(new Object[]{});
     }
     public WebElement get() {
-        return get(new Object[]{});
-        //WebElement element = get(new Object[]{});
-        //for (JFunc1<WebElement, Boolean> rule : searchRules())
-        //    if (!rule.execute(element))
-        //        throw exception("Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)");
-        //return element;
+        WebElement element = get(new Object[]{});
+        for (JFunc1<WebElement, Boolean> rule : searchRules())
+            if (!rule.execute(element))
+                throw exception("Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULES)");
+        return element;
 
     }
     protected JFunc<WebElement> getElementFunc = null;
@@ -374,42 +373,40 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         waitSec(TIMEOUT.get());
     }
 
-    private JDIBase getBase(Object element) {
-        if (isClass(element.getClass(), JDIBase.class))
-            return  (JDIBase) element;
-        else { if (isInterface(element.getClass(), IBaseElement.class))
-            return  ((IBaseElement) element).base(); }
-        return null;
+    private IBaseElement getBase(Object element) {
+        return isInterface(element.getClass(), IBaseElement.class)
+            ? (IBaseElement) element
+            : null;
     }
     private SearchContext getSearchContext(Object element) {
-        JDIBase bElement = getBase(element);
+        IBaseElement bElement = getBase(element);
         if (bElement == null)
             return getDefaultContext();
-        if (bElement.webElement.hasValue())
-            return bElement.webElement.get();
-        if (bElement.locator.isEmpty() && bElement.locator.isRoot())
+        if (bElement.base().webElement.hasValue())
+            return bElement.base().webElement.get();
+        if (bElement.base().locator.isEmpty() && bElement.base().locator.isRoot())
             return getDefaultContext();
-        List<By> frames = bElement.getFrames();
+        List<By> frames = bElement.base().getFrames();
         if (frames != null)
             return getFrameContext(frames);
-        By locator = bElement.getLocator();
+        By locator = bElement.base().getLocator();
         return locator != null && isNotBlank(getByLocator(locator))
                 ? getContextByLocator(bElement, locator)
                 : getSmartSearchContext(bElement);
     }
-    private SearchContext getContextByLocator(JDIBase bElement, By locator) {
-        List<WebElement> els = uiSearch(getContext(bElement.parent, bElement.locator), correctLocator(locator));
+    private SearchContext getContextByLocator(IBaseElement bElement, By locator) {
+        List<WebElement> els = uiSearch(getContext(bElement.base().parent, bElement.base().locator), correctLocator(locator));
         return getElement(els);
     }
 
-    private SearchContext getSmartSearchContext(JDIBase bElement) {
-        if (!isInterface(bElement.getClass(), PageObject.class) || bElement.getLocator() != null)
+    private SearchContext getSmartSearchContext(IBaseElement bElement) {
+        if (!isInterface(bElement.getClass(), PageObject.class) || bElement.base().getLocator() != null)
             try {
                 WebElement result = SMART_SEARCH.execute(bElement.waitSec(getTimeout()));
                 if (result != null)
                     return result;
             } catch (Exception ignore) { }
-        return getContext(bElement.parent, bElement.locator);
+        return getContext(bElement.base().parent, bElement.base().locator);
     }
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)
@@ -438,14 +435,14 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
 
     public String printContext() {
-        JDIBase jdiBase = getBase(parent);
+        IBaseElement jdiBase = getBase(parent);
         if (jdiBase == null) return "";
-        String locator = jdiBase.getLocator() == null ? "" : jdiBase.locator.toString();
-        if (jdiBase.parent == null)
+        String locator = jdiBase.base().getLocator() == null ? "" : jdiBase.base().locator.toString();
+        if (jdiBase.base().parent == null)
             return locator;
         if (isBlank(locator))
-            return jdiBase.printContext();
-        return jdiBase.printContext() + ">" + locator;
+            return jdiBase.base().printContext();
+        return jdiBase.base().printContext() + ">" + locator;
     }
     public String printFullLocator() {
         return parent == null || isBlank(printContext())
