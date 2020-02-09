@@ -43,7 +43,7 @@ public class Timeout {
         if (freeze.get() > 0) return;
         if (freeze.get() < 0) throw exception("Timeout freeze broken");
         current.set(seconds);
-        logger.info("Set timeout " + seconds + " seconds");
+        logger.debug("Set timeout " + seconds + " seconds");
     }
     public void reset() {
         if (freeze.get() > 0) return;

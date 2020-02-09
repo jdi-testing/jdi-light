@@ -134,13 +134,14 @@ public class ActionHelper {
     public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
         if (!logResult(jp)) return result;
         LogLevels logLevel = logLevel(jp);
-        if (result != null) {
+        if (result == null || isInterface(getJpClass(jp), JAssert.class))
+            logger.debug("Done");
+        else {
             String text = result.toString();
             if (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5)
                 text = text.substring(0, CUT_STEP_TEXT) + "...";
             logger.toLog(">>> " + text, logLevel);
-        } else
-            logger.debug("Done");
+        }
         AllureLoggerHelper.passStep(randomUUID().toString());
         if (getJpMethod(jp).getName().equals("open"))
             BEFORE_NEW_PAGE.execute(getPage(jp.getThis()));

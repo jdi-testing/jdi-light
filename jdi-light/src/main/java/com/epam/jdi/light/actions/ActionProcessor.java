@@ -1,10 +1,7 @@
 package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,19 +11,15 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
-import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.base.OutputTemplates.FAILED_ACTION_TEMPLATE;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.where;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.Timer.nowTime;
@@ -44,11 +37,11 @@ import static java.util.Collections.reverse;
 @Aspect
 public class ActionProcessor {
     public static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
-            $("", result -> true),
-            $("true", result -> result instanceof Boolean && (Boolean) result),
-            $("false", result -> result instanceof Boolean && !(Boolean) result),
-            $("not empty", result -> result instanceof List && ((List) result).size() > 0),
-            $("empty", result -> result instanceof List && ((List) result).size() == 0)
+        $("", result -> true),
+        $("true", result -> result instanceof Boolean && (Boolean) result),
+        $("false", result -> result instanceof Boolean && !(Boolean) result),
+        $("not empty", result -> result instanceof List && ((List) result).size() > 0),
+        $("empty", result -> result instanceof List && ((List) result).size() == 0)
     );
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { // empty
@@ -56,27 +49,30 @@ public class ActionProcessor {
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() { // empty
     }
+    private final String className = "com.epam.jdi.light.actions.ActionProcessor";
     @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) {
+    public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {
+        if (notThisAround(className))
+            return jp.proceed();
+        ActionObject jInfo = new ActionObject(jp);
         try {
             failedMethods.clear();
-            if (aroundCount() > 1)
-                return defaultAction(jp);
+            if (aroundCount(className) > 1)
+                return defaultAction(jInfo);
             BEFORE_JDI_ACTION.execute(jp);
-            Object result = stableAction(jp);
-            isOverride.get().clear();
-            if (aroundCount() == 1)
-                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get(), TimeUnit.SECONDS);
+            Object result = stableAction(jInfo);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            Object element = getObjAround(jp);
             addFailedMethod(jp);
-            if (aroundCount() == 1) {
-                logFailure(element);
+            if (aroundCount(className) == 1) {
+                logFailure(jInfo.object());
                 reverse(failedMethods);
                 logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
             }
-            throw exception(ex, ACTION_FAILED.execute(element, getExceptionAround(ex, aroundCount() == 1)));
+            throw exception(ex, ACTION_FAILED.execute(jInfo.object(), getExceptionAround(ex, aroundCount(className) == 1)));
+        }
+        finally {
+            jInfo.clear();
         }
     }
     public static void addFailedMethod(ProceedingJoinPoint jp) {
@@ -86,51 +82,44 @@ public class ActionProcessor {
             failedMethods.add(result);
     }
     public static List<String> failedMethods = new ArrayList<>();
-    public static Object getObjAround(ProceedingJoinPoint jp) {
-        return jp.getThis() != null ? jp.getThis() : new Object();
-    }
-    public static String getExceptionAround(Throwable ex, boolean time) {
+    public static String getExceptionAround(Throwable ex, boolean top) {
         String result = safeException(ex);
         while (result.contains("\n\n"))
             result = result.replaceFirst("\\n\\n", LINE_BREAK);
         result = result.replace("java.lang.RuntimeException:", "").trim();
-        if (aroundCount() == 1)
+        if (top)
             result = "[" + nowTime("mm:ss.S") + "] " + result.replaceFirst("\n", "");
         return result;
     }
-    public static int aroundCount() {
+    private static List<StackTraceElement> arounds() {
+        List<StackTraceElement> arounds = where(currentThread().getStackTrace(),
+                s -> s.getMethodName().equals("jdiAround"));
+        Collections.reverse(arounds);
+        return arounds;
+    }
+    public static boolean notThisAround(String name) {
+        return !arounds().get(0).getClassName().equals(name);
+    }
+    public static int aroundCount(String name) {
         return where(currentThread().getStackTrace(),
-                s -> s.getMethodName().equals("jdiAround")/* ||
-                s.getClassName().equals("io.qameta.allure.aspects.StepsAspects")*/)
+                s -> s.getMethodName().equals("jdiAround") && s.getClassName().equals(name))
                 .size();
     }
-    public static Object defaultAction(ProceedingJoinPoint jp) throws Throwable {
-        ICoreElement obj = getJdi(jp);
-        JFunc1<Object, Object> overrideAction = getOverride(jp);
-        return overrideAction != null
-                ? overrideAction.execute(obj) : jp.proceed();
+    public static Object defaultAction(ActionObject jInfo) throws Throwable {
+        jInfo.setElementTimeout();
+        return jInfo.overrideAction() != null
+                ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
     }
-    public static ICoreElement getJdi(ProceedingJoinPoint jp) {
-        try {
-            return jp.getThis() != null && isInterface(getJpClass(jp), ICoreElement.class)
-                    ? ((ICoreElement) jp.getThis()) : null;
-        } catch (Exception ex) {
-            return null;
-        }
-    }
-    public static Safe<List<String>> isOverride = new Safe<>(ArrayList::new);
-    public static Object stableAction(ProceedingJoinPoint jp) {
+    public static Object stableAction(ActionObject jInfo) {
         String exceptionMsg = "";
-        ICoreElement obj = getJdi(jp);
-        JFunc1<Object, Object> overrideAction = getOverride(jp);
-        int timeout = getTimeout(jp, obj);
+        jInfo.setElementTimeout();
         long start = currentTimeMillis();
         Throwable exception = null;
         do {
             try {
-                Object result = overrideAction != null
-                        ? overrideAction.execute(obj) : jp.proceed();
-                if (!condition(jp)) continue;
+                Object result = jInfo.overrideAction() != null
+                    ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
+                if (!condition(jInfo.jp())) continue;
                 return result;
             } catch (Throwable ex) {
                 exception = ex;
@@ -140,44 +129,21 @@ public class ActionProcessor {
                 } catch (Exception ignore) {
                 }
             }
-        } while (currentTimeMillis() - start < timeout * 1000);
-        throw exception(exception, getFailedMessage(jp, exceptionMsg));
+        } while (currentTimeMillis() - start < jInfo.timeout() * 1000);
+        throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
     }
-    static JFunc1<Object, Object> getOverride(ProceedingJoinPoint jp) {
-        String name = jp.getSignature().getName();
-        if (isOverride.get().contains(name)) {
-            return null;
-        }
-        JFunc1<Object, Object> override = getOverrideAction(jp);
-        if (override != null)
-            isOverride.get().add(name);
-        return override;
-    }
-    static int getTimeout(ProceedingJoinPoint jp, IBaseElement obj) {
-        JDIAction ja = jp != null
-                ? getJdiAction(jp)
-                : null;
-        return ja != null && ja.timeout() != -1
-            ? ja.timeout()
-            : obj != null
-                ? obj.base().getTimeout()
-                : TIMEOUT.get();
-    }
-    static String getFailedMessage(ProceedingJoinPoint jp, String exception) {
-        MethodSignature method = getJpMethod(jp);
+    static String getFailedMessage(ActionObject jInfo, String exception) {
+        MethodSignature method = getJpMethod(jInfo.jp());
         try {
             String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
                 $("exception", exception),
-                $("timeout", getTimeout(jp)),
+                $("timeout", jInfo.timeout()),
                 $("action", method.getMethod().getName())
             ));
-            return fillTemplate(result, jp, method);
+            return fillTemplate(result, jInfo.jp(), method);
         } catch (Exception ex) {
             throw exception(ex, "Surround method issue: Can't get failed message");
         }
-    }
-    static int getTimeout(ProceedingJoinPoint jp) {
-        return getTimeout(null, getJdi(jp));
     }
     static String getConditionName(ProceedingJoinPoint jp) {
         JDIAction ja = getJdiAction(jp);

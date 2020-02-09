@@ -8,14 +8,12 @@ import org.apache.commons.lang3.ArrayUtils;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.LinqUtils.first;
-import static java.awt.event.KeyEvent.*;
 import static java.lang.reflect.Modifier.isStatic;
 
 public class Keyboard {

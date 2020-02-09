@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.safari.SafariOptions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.stringToPrimitive;
 import static com.epam.jdi.tools.RegExUtils.matches;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
@@ -64,6 +66,7 @@ public class DriverData {
     public static Map<String,String> CAPABILITIES_FOR_FF = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_EDGE = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_OPERA = new HashMap<>();
+    public static Map<String,String> CAPABILITIES_FOR_SAFARI = new HashMap<>();
     public static Map<String,String> COMMON_CAPABILITIES = new HashMap<>();
 
     public static String chromeDriverPath() {
@@ -77,6 +80,9 @@ public class DriverData {
     }
     public static String operaDriverPath() {
         return driverPath("operadriver");
+    }
+    public static String safariDriverPath() {
+        return driverPath("safaridriver");
     }
     public static String firefoxDriverPath() {
         return driverPath("geckodriver");
@@ -178,7 +184,7 @@ public class DriverData {
 
     public static void setupCapability(ChromeOptions cap, String property, String value){
         if(!property.equals(ARGUMENTS_PROPERTY)){
-            cap.setCapability(property, value);
+            cap.setCapability(property, stringToPrimitive(value));
         } else {
             cap.addArguments(value.split(" "));
         }
@@ -244,6 +250,9 @@ public class DriverData {
 
     public static void defaultOperaOptions(OperaOptions cap) { }
     public static JAction1<OperaOptions> OPERA_OPTIONS = DriverData::defaultOperaOptions;
+
+    public static void defaultSafariOptions(SafariOptions cap) { }
+    public static JAction1<SafariOptions> SAFARI_OPTIONS = DriverData::defaultSafariOptions;
 
     private static WebDriver maximizeScreen(WebDriver driver) {
         try {

@@ -54,7 +54,8 @@ import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
 /**
@@ -140,6 +141,18 @@ public class WebSettings {
             }
             throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
         });
+        //return el.base().timer().getResult(() -> {
+        //    for (String template : SMART_SEARCH_LOCATORS) {
+        //        UIElement ui = (template.equals("#%s")
+        //                ? $(String.format(template, locatorName))
+        //                : $(String.format(template, locatorName), el.base().parent))
+        //                .setup(e -> e.setName(el.getName()).noWait());
+        //        try {
+        //            return ui.getWebElement();
+        //        } catch (Exception ignore) { }
+        //    }
+        //    throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
+        //});
     };
 
     public static synchronized void init() {
@@ -175,17 +188,19 @@ public class WebSettings {
         fillAction(p -> COMMON_CAPABILITIES.put("headless", p), "headless");
 
         loadCapabilities("chrome.capabilities.path", "chrome.properties",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(), value.toString())));
         loadCapabilities("ff.capabilities.path","ff.properties",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(), value.toString())));
         loadCapabilities("ie.capabilities.path","ie.properties",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(), value.toString())));
         loadCapabilities("edge.capabilities.path","edge.properties",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(), value.toString())));
         loadCapabilities("opera.capabilities.path","opera.properties",
-                p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(), value.toString())));
+        loadCapabilities("safari.capabilities.path","safari.properties",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_SAFARI.put(key.toString(), value.toString())));
         loadCapabilities("common.capabilities.path","common.properties",
-                p -> p.forEach((key,value) -> COMMON_CAPABILITIES.put(key.toString(), value.toString())));
+            p -> p.forEach((key,value) -> COMMON_CAPABILITIES.put(key.toString(), value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         if (SMART_SEARCH_LOCATORS.size() == 0)

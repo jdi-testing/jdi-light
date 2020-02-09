@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
@@ -21,8 +22,12 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
     protected void setList(WebList webList) { list = webList; }
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() { return list().isDisplayed(); }
+    @JDIAction("Check that '{name}' is visible by user") @Override
+    public boolean isVisible() { return isDisplayed() && list().hasAny(UIElement::isVisible); }
+    @JDIAction("Check that '{name}' is not visible by user") @Override
+    public boolean isNotVisible() { return isHidden() || list().all(UIElement::isNotVisible); }
     @Override
-    public boolean isHidden() { return !isDisplayed(); }
+    public boolean isHidden() { return list().isHidden(); }
     @JDIAction(level = DEBUG) @Override
     public boolean isDisabled() {
         return !isEnabled();
