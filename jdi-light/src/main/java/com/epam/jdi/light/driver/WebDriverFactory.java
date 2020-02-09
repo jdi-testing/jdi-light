@@ -138,10 +138,10 @@ public class WebDriverFactory {
             }
             RUN_DRIVERS.set(rDrivers);
 
-            WebDriver result = RUN_DRIVERS.get().get(driverName);
+            WebDriver result = rDrivers.get(driverName);
             if (result.toString().contains("(null)")) {
                 result = DRIVERS.get(driverName).invoke();
-                RUN_DRIVERS.get().update(driverName, result);
+                rDrivers.update(driverName, result);
             }
             if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId())
                 INIT_DRIVER = result;

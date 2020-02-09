@@ -93,7 +93,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         return $$(headerLocator, this).setName(getName() + " header");
     }
     protected List<String> getHeader() {
-        return LinqUtils.select(headerUI(), UIElement::getText);
+        return select(headerUI(), UIElement::getText);
     }
 
     /**
@@ -106,13 +106,20 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     }
 
     protected List<String> getRowHeader() {
-        if (getRowHeaderIndex() == -1) {
-            List<String> result = new ArrayList<>();
-            for (int i = 1; i <= count(); i++)
-                result.add(i+"");
-            return result;
-        }
-        return LinqUtils.select(webColumn(getRowHeaderIndex()), UIElement::getText);
+        int index = getRowHeaderIndex();
+        return index != -1
+            ? namedHeader(index)
+            : indexHeader();
+    }
+    protected List<String> indexHeader() {
+        List<String> result = new ArrayList<>();
+        for (int i = 1; i <= count(); i++)
+            result.add(i+"");
+        return result;
+    }
+    protected List<String> namedHeader(int index) {
+        WebList column = webColumn(index);
+        return select(column, UIElement::getText);
     }
     public List<String> rowHeader() {
         return rowHeader.get();
@@ -148,7 +155,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         validateRowIndex(rowNum);
         if (!rows.get().has(rowNum+"")) {
             WebList result = cells.isGotAll()
-                ? new WebList(LinqUtils.select(cells.get(), c -> c.value.get(rowNum+"")))
+                ? new WebList(select(cells.get(), c -> c.value.get(rowNum+"")))
                 : getRow(rowNum);
             rows.get().update(rowNum+"", result);
         }
@@ -202,7 +209,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     }
     protected int getRowIndexByName(String rowName) {
         List<String> rowHeader = getRowHeaderIndex() == -1
-            ? LinqUtils.select(webColumn(1), UIElement::getText)
+            ? select(webColumn(1), UIElement::getText)
             : rowHeader();
         int rowIndex = firstIndex(rowHeader, h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowName)));
         if (rowIndex == -1)

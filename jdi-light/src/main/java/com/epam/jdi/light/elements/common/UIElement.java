@@ -286,9 +286,11 @@ public class UIElement extends JDIBase
         jsExecute("value='"+value.replace("'", "\\'")+"'");
     }
 
+    @JDIAction("Click on '{name}' (x:{0}, y:{1})")
     public void click(int x, int y) {
         actionsWithElement(a -> a.moveByOffset(x-getRect().width/2, y-getRect().height/2).click());
     }
+    @JDIAction("Click on '{name}'")
     public void click(ElementArea area) {
         if (isDisabled())
             throw exception("Can't perform click. Element is disabled");
@@ -642,9 +644,10 @@ public class UIElement extends JDIBase
     public String labelText() {
         return label().getText();
     }
-    @Override
+    @JDIAction("Get '{name}' text") @Override
     public String text(TextTypes type) {
-        return timer().getResult(() -> noWait(() -> type.func.execute(this)));
+        String result = timer().getResult(() -> noWait(() -> type.func.execute(this)));
+        return result;
     }
     public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
         String text = ui.text(TEXT);
