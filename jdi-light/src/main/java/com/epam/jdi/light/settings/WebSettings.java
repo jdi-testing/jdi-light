@@ -175,6 +175,7 @@ public class WebSettings {
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
         fillAction(SoftAssert::setAssertType, "assert.type");
+        fillAction(p -> CLICK_TYPE = getClickType(p), "click.type");
         fillAction(p -> TEXT_TYPE = getTextType(p), "text.type");
         fillAction(p -> SET_TEXT_TYPE = getSetTextType(p), "set.text.type");
 
@@ -206,6 +207,14 @@ public class WebSettings {
         if (SMART_SEARCH_LOCATORS.size() == 0)
             SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
     }
+
+    private static ElementArea getClickType(String type) {
+        ElementArea clickType = first(getAllEnumValues(ElementArea.class),
+                t -> t.toString().equals(type));
+        return clickType != null
+                ? clickType : SMART_CLICK;
+    }
+
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
                 t -> t.toString().equals(type));
