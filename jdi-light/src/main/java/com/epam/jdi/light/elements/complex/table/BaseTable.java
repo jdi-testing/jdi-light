@@ -181,13 +181,6 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     public WebList webRow(String rowName) {
         int index = getRowHeaderIndex() == -1 ? 1 : getRowHeaderIndex();
         return webRow(index, rowName);
-
-        //List<String> rowHeader = rowHeader();
-        //int rowIndex = firstIndex(rowHeader, h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowName)));
-        //if (rowIndex == -1)
-        //    throw exception("Can't find row '%s'", rowName);
-        //return webRow(rowIndex + 1);
-        //return webRow(getRowIndexByName(rowName));
     }
     public WebList webRow(Enum rowName) {
         return webRow(getEnumValue(rowName));
