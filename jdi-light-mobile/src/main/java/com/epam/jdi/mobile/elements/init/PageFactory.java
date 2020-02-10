@@ -30,6 +30,7 @@ import static com.epam.jdi.mobile.common.UIUtils.create;
 import static com.epam.jdi.mobile.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.mobile.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.mobile.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.mobile.driver.get.DriverInfos.MOBILE_INFO;
 import static com.epam.jdi.mobile.elements.init.InitActions.*;
 import static com.epam.jdi.mobile.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.mobile.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
@@ -228,7 +229,7 @@ public class PageFactory {
     // region Selenium PageFactory
     public static void initElements(JFunc<WebDriver> driver, Object... pages) {
         preInit();
-        useDriver(driver);
+        useDriver(() -> MOBILE_INFO.getDriver());
         initElements(pages);
     }
     public static void initElements(Class<?> site) {

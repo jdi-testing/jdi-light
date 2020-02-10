@@ -7,6 +7,7 @@ import static com.epam.jdi.mobile.common.Exceptions.exception;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public enum DriverTypes {
+    APPIUM("appium"),
     CHROME("chrome"),
     FIREFOX("firefox"),
     IE("ie"),
@@ -16,6 +17,7 @@ public enum DriverTypes {
     public final String name;
     public static DriverTypes getByName(String name) {
         switch (name.toLowerCase()) {
+            case "appium": return APPIUM;
             case "chrome": return CHROME;
             case "firefox": return FIREFOX;
             case "ie":
@@ -32,5 +34,4 @@ public enum DriverTypes {
     DriverTypes(String name) {
         this.name = name;
     }
-
 }

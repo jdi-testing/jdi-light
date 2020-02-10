@@ -36,6 +36,7 @@ import static com.epam.jdi.mobile.driver.ScreenshotMaker.SCREENSHOT_STRATEGY;
 import static com.epam.jdi.mobile.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.mobile.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.mobile.driver.get.DriverData.*;
+import static com.epam.jdi.mobile.driver.get.DriverInfos.MOBILE_INFO;
 import static com.epam.jdi.mobile.driver.get.RemoteDriver.*;
 import static com.epam.jdi.mobile.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.mobile.elements.composite.WebPage.CHECK_AFTER_OPEN;
@@ -116,7 +117,7 @@ public class WebSettings {
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
     public static String useDriver(JFunc<WebDriver> driver) {
-        return WebDriverFactory.useDriver(driver);
+        return WebDriverFactory.useDriver(() -> MOBILE_INFO.getDriver());
     }
     public static String useDriver(String driverName) {
         return WebDriverFactory.useDriver(driverName);

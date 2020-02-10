@@ -7,7 +7,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.mobile.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.mobile.driver.get.DriverInfos.FF_INFO;
+//import static com.epam.jdi.mobile.driver.get.DriverInfos.FF_INFO;
 import static com.epam.jdi.mobile.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.mobile.elements.init.PageFactory.initSite;
 import static com.epam.jdi.mobile.settings.WebSettings.logger;
@@ -18,7 +18,7 @@ public class CustomDriverTestsInit {
 
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        useDriver(() -> FF_INFO.getDriver() );
+//        useDriver(() -> FF_INFO.getDriver() );
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initSite(StaticSite.class);
         homePage.open();

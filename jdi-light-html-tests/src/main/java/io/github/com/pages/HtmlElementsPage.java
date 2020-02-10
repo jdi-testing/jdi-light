@@ -8,10 +8,16 @@ import com.epam.jdi.mobile.elements.composite.WebPage;
 import com.epam.jdi.mobile.elements.interfaces.complex.IsChecklist;
 import com.epam.jdi.mobile.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.mobile.elements.interfaces.complex.IsDropdown;
+import com.epam.jdi.mobile.ui.html.elements.common.FileInput;
+import com.epam.jdi.mobile.ui.html.elements.common.ColorPicker;
+import com.epam.jdi.mobile.ui.html.elements.common.Range;
+import com.epam.jdi.mobile.ui.html.elements.common.ProgressBar;
+import com.epam.jdi.mobile.ui.html.elements.common.DateTimeSelector;
+import com.epam.jdi.mobile.ui.html.elements.common.NumberSelector;
+import com.epam.jdi.mobile.ui.html.elements.common.Checkbox;
 import com.epam.jdi.mobile.elements.pageobjects.annotations.NoWait;
 import com.epam.jdi.mobile.elements.pageobjects.annotations.WaitTimeout;
 import com.epam.jdi.mobile.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.mobile.ui.html.elements.common.*;
 import com.epam.jdi.mobile.ui.html.elements.complex.DataListOptions;
 import com.epam.jdi.mobile.ui.html.elements.complex.MultiSelector;
 import com.epam.jdi.mobile.ui.html.elements.complex.RadioButtons;
@@ -21,40 +27,40 @@ public class HtmlElementsPage extends WebPage {
 
     public static Label jdiTitle;
     // @UI("[ui=jdi-title]") public static Label jdiTitle;
-	public static Text jdiText;
+	public static com.epam.jdi.mobile.ui.html.elements.common.Text jdiText;
 	// @UI("[ui=jdi-text]") public static Text jdiText;
 
-    @UI("[value*='Red Button']") public static Button redButton;
+    @UI("[value*='Red Button']") public static com.epam.jdi.mobile.ui.html.elements.common.Button redButton;
     // @UI("input[type=button].red") public static Button redButton;
-    @UI("[value*='Disabled Button']") public static Button disabledButtonInput;
+    @UI("[value*='Disabled Button']") public static com.epam.jdi.mobile.ui.html.elements.common.Button disabledButtonInput;
     // @UI("input[type=button][disabled]") public static Button disabledButtonInput;
-    public static Button blueButton, dblClickButton, rightClickButton;
+    public static com.epam.jdi.mobile.ui.html.elements.common.Button blueButton, dblClickButton, rightClickButton;
     @WaitTimeout(4)
-    public static Button ghostButton, suspendButton;
+    public static com.epam.jdi.mobile.ui.html.elements.common.Button ghostButton, suspendButton;
     @NoWait
-    public static Button disabledButton;
+    public static com.epam.jdi.mobile.ui.html.elements.common.Button disabledButton;
     // @UI("#blue-button") public static Button blueButton;
     // @UI("#disabled-button") public static Button disabledButton;
 
-    public static Link githubLink;
+    public static com.epam.jdi.mobile.ui.html.elements.common.Link githubLink;
     // @UI("[ui=github-link]") public static Link gitHubLink;
 
-    public static TextField name;
-    @WaitTimeout(2) public static TextField disabledName;
+    public static com.epam.jdi.mobile.ui.html.elements.common.TextField name;
+    @WaitTimeout(2) public static com.epam.jdi.mobile.ui.html.elements.common.TextField disabledName;
     // @UI("#name") public static TextField name;
     // @UI("#disabled-name") public static TextField disabledName;
 
-    public static TextArea textArea;
+    public static com.epam.jdi.mobile.ui.html.elements.common.TextArea textArea;
     // @UI("#text-area") public static TextArea textArea;
-    @UI("textarea[disabled]") public static TextArea disabledTextArea;
+    @UI("textarea[disabled]") public static com.epam.jdi.mobile.ui.html.elements.common.TextArea disabledTextArea;
 
     public static FileInput avatar;
     // @UI("#avatar") public static FileInput avatar;
     @UI("input[type=file][disabled]")
     public static FileInput disabledFileInput;
-    @UI("[download]") public static Link downloadJdiLogo;
+    @UI("[download]") public static com.epam.jdi.mobile.ui.html.elements.common.Link downloadJdiLogo;
 
-    public static Image jdiLogo;
+    public static com.epam.jdi.mobile.ui.html.elements.common.Image jdiLogo;
     // @UI("#jdi-logo") public static Image jdiLogo;
 
     public static ColorPicker colorPicker;
