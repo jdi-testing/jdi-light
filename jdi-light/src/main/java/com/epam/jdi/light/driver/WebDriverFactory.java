@@ -65,8 +65,9 @@ public class WebDriverFactory {
             Value(CHROME, t -> CHROME_INFO.getDriver()),
             Value(FIREFOX, t -> FF_INFO.getDriver()),
             Value(IE, t -> IE_INFO.getDriver()),
-            Value(OPERA, t -> CHROME_INFO.getDriver()),
-            Value(EDGE, t -> CHROME_INFO.getDriver())
+            Value(OPERA, t -> OPERA_INFO.getDriver()),
+            Value(EDGE, t -> EDGE_INFO.getDriver()),
+            Value(SAFARI, t -> SAFARI_INFO.getDriver())
         );
         if (driver == null)
             throw exception("Unknown driver: " + type);
@@ -137,10 +138,10 @@ public class WebDriverFactory {
             }
             RUN_DRIVERS.set(rDrivers);
 
-            WebDriver result = RUN_DRIVERS.get().get(driverName);
+            WebDriver result = rDrivers.get(driverName);
             if (result.toString().contains("(null)")) {
                 result = DRIVERS.get(driverName).invoke();
-                RUN_DRIVERS.get().update(driverName, result);
+                rDrivers.update(driverName, result);
             }
             if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId())
                 INIT_DRIVER = result;

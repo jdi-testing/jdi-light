@@ -10,6 +10,8 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
@@ -67,6 +69,16 @@ public class DriverInfos {
             d.properties = "webdriver.edge.driver";
             d.path = edgeDriverPath();
             d.getDriver = c -> new EdgeDriver((EdgeOptions) c);
+        }
+    );
+    public static DriverInfo SAFARI_INFO = new DriverInfo()
+        .set(d -> {
+            d.type = SAFARI;
+            d.initCapabilities = new SafariOptions();
+            d.capabilities = c -> getCapabilities(c, cap -> SAFARI_OPTIONS.execute((SafariOptions) cap));
+            d.properties = "webdriver.safari.driver";
+            d.path = safariDriverPath();
+            d.getDriver = c -> new SafariDriver((SafariOptions) c);
         }
     );
 }
