@@ -306,6 +306,24 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             beforeSearch(result.get(0));
         return result;
     }
+    public WebElement getFast() {
+        return getEl(getContext(parent, locator));
+    }
+    public List<WebElement> getListFast() {
+        return getEls(getContext(parent, locator));
+    }
+    public WebElement seleniumElement() {
+        return getEl(driver());
+    }
+    public List<WebElement> seleniumList() {
+        return getEls(driver());
+    }
+    private WebElement getEl(SearchContext ctx) {
+        return ctx.findElement(getLocator());
+    }
+    private List<WebElement> getEls(SearchContext ctx) {
+        return ctx.findElements(getLocator());
+    }
     public List<WebElement> getList(int minAmount) {
         List<WebElement> result = timer().getResultByCondition(this::tryGetList,
                 els -> els.size() >= minAmount);

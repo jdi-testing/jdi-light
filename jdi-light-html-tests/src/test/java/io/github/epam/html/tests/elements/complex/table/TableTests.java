@@ -53,15 +53,16 @@ public class TableTests implements TestsInit {
 
     @Test
     public void valueTest() {
-        String value = usersTable.getValue().replaceAll("\r", "");
+        String value = usersTable.getValue().replaceAll("\r", "")
+            .replaceAll("\\\\n", "*").replaceAll("\\* ", "*");
         assertEquals(value,
         "||X||Number|Type|User|Description||\n" +
-            "||1||1|Admin\\n User\\n Manager|Roman|Wolverine\\nVip||\n" +
-            "||2||2|Admin\\n User\\n Manager|Sergey Ivan|Spider Man\\nVip||\n" +
-            "||3||3|Admin\\n User\\n Manager|Vladzimir|Punisher\\nVip||\n" +
-            "||4||4|Admin\\n User\\n Manager|Helen Bennett|Captain America\\nsome description\\nVip||\n" +
-            "||5||5|Admin\\n User\\n Manager|Yoshi Tannamuri|Cyclope\\nsome description\\nVip||\n" +
-            "||6||6|Admin\\n User\\n Manager|Giovanni Rovelli|Hulk\\nsome description\\nVip||\n");
+            "||1||1|Admin*User*Manager|Roman|Wolverine*Vip||\n" +
+            "||2||2|Admin*User*Manager|Sergey Ivan|Spider Man*Vip||\n" +
+            "||3||3|Admin*User*Manager|Vladzimir|Punisher*Vip||\n" +
+            "||4||4|Admin*User*Manager|Helen Bennett|Captain America*some description*Vip||\n" +
+            "||5||5|Admin*User*Manager|Yoshi Tannamuri|Cyclope*some description*Vip||\n" +
+            "||6||6|Admin*User*Manager|Giovanni Rovelli|Hulk*some description*Vip||\n");
     }
     @Test
     public void dataColumnTestIndex() {

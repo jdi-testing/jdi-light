@@ -7,7 +7,7 @@
     <artifactId>jdi-light-eyes</artifactId>
     <name>JDI Light Applitools Eyes</name>
     <packaging>jar</packaging>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.1.14</version>
+            <version>1.1.15</version>
         </dependency>
 
         <!-- Applitools SDK -->

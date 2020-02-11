@@ -24,7 +24,7 @@ public class HtmlActions {
     protected void jdiPointcut() { }
     private final String className = "com.epam.jdi.light.ui.html.actions.HtmlActions";
     @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {        if (notThisAround(className))
+    public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {
         if (notThisAround(className))
             return jp.proceed();
         ActionObject jInfo = new ActionObject(jp);

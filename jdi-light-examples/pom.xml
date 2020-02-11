@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-    <version>1.1.14</version>
+    <version>1.1.15</version>
     <artifactId>jdi-light-examples</artifactId>
     <name>JDI Web Tests</name>
     <groupId>com.epam.jdi</groupId>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.1.14</version>
+            <version>1.1.15</version>
         </dependency>
 
         <!--Allure config in parent-->
