@@ -90,8 +90,12 @@ public class JDIEyes {
             if (eyes.getIsOpen())
                 eyes.close(false);
         } finally {
-            if (eyes.getIsOpen())
-                eyes.abortIfNotClosed();
+            try {
+                if (eyes.getIsOpen())
+                    eyes.abortIfNotClosed();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -100,8 +104,12 @@ public class JDIEyes {
             for (Eyes eye : eyesList)
                 closeEye(eye);
         } finally {
-            if (eyes.get().getIsOpen())
-                eyes.get().abortIfNotClosed();
+            try {
+                if (eyes.get().getIsOpen())
+                    eyes.get().abortIfNotClosed();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     public static void newVisualTest(String testName) {

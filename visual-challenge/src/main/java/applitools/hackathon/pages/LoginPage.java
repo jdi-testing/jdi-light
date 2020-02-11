@@ -52,7 +52,7 @@ public class LoginPage extends WebPage {
     }
     public LoginPage validatateAlert(String message) {
         alert.has().text(message)
-            .core().css("background-color", "rgba(252, 237, 190, 1)");
+            .core().css("background-color", "rgb(252, 237, 190)");
         return this;
     }
 }
