@@ -16,6 +16,7 @@ import static com.epam.jdi.mobile.common.Exceptions.exception;
 import static com.epam.jdi.mobile.common.Exceptions.safeException;
 import static com.epam.jdi.mobile.driver.get.DriverData.DEFAULT_DRIVER;
 import static com.epam.jdi.mobile.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.mobile.driver.get.DriverInfos.CHROME_INFO;
 import static com.epam.jdi.mobile.driver.get.DriverInfos.MOBILE_INFO;
 import static com.epam.jdi.mobile.driver.get.DriverTypes.APPIUM;
 import static com.epam.jdi.mobile.driver.get.DriverTypes.CHROME;
@@ -37,9 +38,9 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebDriverFactory {
-    public static MapArray<String, JFunc<AppiumDriver>> DRIVERS
-            = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(APPIUM));
-    private static Safe<MapArray<String, AppiumDriver>> RUN_DRIVERS
+    public static MapArray<String, JFunc<WebDriver>> DRIVERS
+            = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
+    private static Safe<MapArray<String, WebDriver>> RUN_DRIVERS
             = new Safe<>(MapArray::new);
 
     private WebDriverFactory() {
@@ -50,7 +51,7 @@ public class WebDriverFactory {
     }
 
     // REGISTER DRIVER
-    public static String useDriver(JFunc<AppiumDriver> driver) {
+    public static String useDriver(JFunc<WebDriver> driver) {
         return useDriver("Driver" + (DRIVERS.size() + 1), driver);
     }
 
@@ -70,14 +71,20 @@ public class WebDriverFactory {
         return isNotEmpty(DRIVER_MOBILE_URL);
     }
 
-    private static AppiumDriver initDriver(DriverTypes type) {
+    private static WebDriver initDriver(DriverTypes type) {
         return Switch(type).get(
-                Value(APPIUM, t -> MOBILE_INFO.getDriver())
+                Value(APPIUM, t -> MOBILE_INFO.getDriver()),
+                Value(CHROME, t -> CHROME_INFO.getDriver())
+//                Value(FIREFOX, t -> FF_INFO.getDriver()),
+//                Value(IE, t -> IE_INFO.getDriver()),
+//                Value(OPERA, t -> OPERA_INFO.getDriver()),
+//                Value(EDGE, t -> EDGE_INFO.getDriver()),
+//                Value(SAFARI, t -> SAFARI_INFO.getDriver())
         );
     }
 
     // GET DRIVER
-    public static String useDriver(DriverTypes driverType, JFunc<AppiumDriver> driver) {
+    public static String useDriver(DriverTypes driverType, JFunc<WebDriver> driver) {
         String driverName = driverType.name;
         if (DRIVERS.has(driverName))
             driverName = driverName + System.currentTimeMillis();
@@ -86,7 +93,7 @@ public class WebDriverFactory {
         return driverName;
     }
 
-    public static String useDriver(String driverName, JFunc<AppiumDriver> driver) {
+    public static String useDriver(String driverName, JFunc<WebDriver> driver) {
         if (!DRIVERS.has(driverName))
             DRIVERS.add(driverName, driver);
         else
@@ -112,10 +119,10 @@ public class WebDriverFactory {
 
     public static long INIT_THREAD_ID = -1;
     public static boolean SWITCH_THREAD = false;
-    public static AppiumDriver INIT_DRIVER;
+    public static WebDriver INIT_DRIVER;
 
     @SuppressWarnings("PMD.NPathComplexity")
-    public static AppiumDriver getDriver(String driverName) {
+    public static WebDriver getDriver(String driverName) {
         if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
             RUN_DRIVERS.set(map($(driverName, INIT_DRIVER)));
             SWITCH_THREAD = true;
@@ -127,12 +134,12 @@ public class WebDriverFactory {
             Lock lock = new ReentrantLock();
             lock.lock();
 
-            MapArray<String, AppiumDriver> rDrivers = RUN_DRIVERS.get();
+            MapArray<String, WebDriver> rDrivers = RUN_DRIVERS.get();
             if (rDrivers == null) {
                 rDrivers = new MapArray<>();
             }
             if (!rDrivers.has(driverName)) {
-                AppiumDriver resultDriver = DRIVERS.get(driverName).invoke();
+                WebDriver resultDriver = DRIVERS.get(driverName).invoke();
                 if (resultDriver == null) {
                     throw exception("Can't get WebDriver '%s'. This Driver name not registered", driverName);
                 }
@@ -140,7 +147,7 @@ public class WebDriverFactory {
             }
             RUN_DRIVERS.set(rDrivers);
 
-            AppiumDriver result = RUN_DRIVERS.get().get(driverName);
+            WebDriver result = RUN_DRIVERS.get().get(driverName);
             if (result.toString().contains("(null)")) {
                 result = DRIVERS.get(driverName).invoke();
                 RUN_DRIVERS.get().update(driverName, result);
@@ -168,7 +175,7 @@ public class WebDriverFactory {
     }
 
     public static void reopenDriver(String driverName) {
-        MapArray<String, AppiumDriver> rDriver = RUN_DRIVERS.get();
+        MapArray<String, WebDriver> rDriver = RUN_DRIVERS.get();
         if (rDriver.has(driverName)) {
             rDriver.get(driverName).close();
             rDriver.removeByKey(driverName);
@@ -186,7 +193,7 @@ public class WebDriverFactory {
     }
 
     public static void close() {
-        for (Pair<String, AppiumDriver> pair : RUN_DRIVERS.get())
+        for (Pair<String, WebDriver> pair : RUN_DRIVERS.get())
             try {
                 pair.value.quit();
             } catch (Exception ignore) {

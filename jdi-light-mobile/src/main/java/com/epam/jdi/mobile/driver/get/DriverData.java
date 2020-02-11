@@ -66,7 +66,7 @@ public class DriverData {
     public static String DOWNLOADS_DIR = mergePath(TEST_PATH, "resources", "downloads");
     public static PageLoadStrategy PAGE_LOAD_STRATEGY = NORMAL;
     public static String BROWSER_SIZE = "MAXIMIZE";
-    public static final String DEFAULT_DRIVER = "appium";
+    public static final String DEFAULT_DRIVER = "chrome";
     public static String DRIVER_NAME = DEFAULT_DRIVER;
     public static String ARGUMENTS_PROPERTY = "arguments";
 
@@ -160,38 +160,38 @@ public class DriverData {
         }
     }
 
-//    public static JAction1<ChromeOptions> CHROME_OPTIONS = cap -> {
-//        HashMap<String, Object> chromePrefs = new HashMap<>();
-//        setUp("Set Chrome Prefs", () -> {
-//            chromePrefs.put("credentials_enable_service", false);
-//            new File(DOWNLOADS_DIR).mkdirs();
-//            chromePrefs.put("download.default_directory", DOWNLOADS_DIR);
-//            chromePrefs.put("profile.default_content_setting_values.notifications", 0);
-//            chromePrefs.put("profile.default_content_settings.popups", 0);
-//            chromePrefs.put("profile.password_manager_enabled", false);
-//        });
-//        setUp("Chrome: '--disable-web-security', '--disable-extensions', 'test-type'",
-//                () -> cap.addArguments("--disable-web-security", "--disable-extensions", "test-type"));
-//        setUp("Chrome: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
-//                () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
-//        setUp("Chrome: ACCEPT_SSL_CERTS:true",
-//                () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
-//        setUp("Chrome: " + UNEXPECTED_ALERT_BEHAVIOR + "=" + ACCEPT,
-//                () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
-//        setUp("Chrome: setExperimentalOption: prefs",
-//                () -> cap.setExperimentalOption("prefs", chromePrefs));
-//        // Capabilities from settings
-//        CAPABILITIES_FOR_CHROME.forEach((property, value) -> setupCapability(cap, property, value));
-//    };
-//
-//    public static void setupCapability(ChromeOptions cap, String property, String value) {
-//        if (!property.equals(ARGUMENTS_PROPERTY)) {
-//            cap.setCapability(property, value);
-//        } else {
-//            cap.addArguments(value.split(" "));
-//        }
-//    }
+    public static JAction1<ChromeOptions> CHROME_OPTIONS = cap -> {
+        HashMap<String, Object> chromePrefs = new HashMap<>();
+        setUp("Set Chrome Prefs", () -> {
+            chromePrefs.put("credentials_enable_service", false);
+            new File(DOWNLOADS_DIR).mkdirs();
+            chromePrefs.put("download.default_directory", DOWNLOADS_DIR);
+            chromePrefs.put("profile.default_content_setting_values.notifications", 0);
+            chromePrefs.put("profile.default_content_settings.popups", 0);
+            chromePrefs.put("profile.password_manager_enabled", false);
+        });
+        setUp("Chrome: '--disable-web-security', '--disable-extensions', 'test-type'",
+                () -> cap.addArguments("--disable-web-security", "--disable-extensions", "test-type"));
+        setUp("Chrome: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
+                () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
+        setUp("Chrome: ACCEPT_SSL_CERTS:true",
+                () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+        setUp("Chrome: " + UNEXPECTED_ALERT_BEHAVIOR + "=" + ACCEPT,
+                () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+        setUp("Chrome: setExperimentalOption: prefs",
+                () -> cap.setExperimentalOption("prefs", chromePrefs));
+        // Capabilities from settings
+        CAPABILITIES_FOR_CHROME.forEach((property, value) -> setupCapability(cap, property, value));
+    };
 
+    public static void setupCapability(ChromeOptions cap, String property, String value) {
+        if (!property.equals(ARGUMENTS_PROPERTY)) {
+            cap.setCapability(property, value);
+        } else {
+            cap.addArguments(value.split(" "));
+        }
+    }
+//
 //    public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = cap -> {
 //        FirefoxProfile firefoxProfile = new FirefoxProfile();
 //        setUp("Set FirefoxProfile", () -> {
@@ -219,7 +219,7 @@ public class DriverData {
 //        // Capabilities from settings
 //        CAPABILITIES_FOR_FF.forEach(cap::setCapability);
 //    };
-
+//
 //    public static JAction1<InternetExplorerOptions> IE_OPTIONS = cap -> {
 //        setUp("IE: introduceFlakinessByIgnoringSecurityDomains",
 //                cap::introduceFlakinessByIgnoringSecurityDomains);
