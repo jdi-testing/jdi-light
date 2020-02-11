@@ -35,6 +35,9 @@ public class PerfStatistic {
     public static void addStatistic(String action, Long time) {
         Statistic().stats.put(action, time);
     }
+    public static void StartStatistic() {
+        instance = new PerfStatistic();
+    }
 
     public static double getAverage(String action) {
         return toLong(instance.stats.get(action)).average().orElse(-1);

@@ -122,8 +122,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         return result;
     }
     protected List<String> namedHeader(int index) {
-        WebList column = webColumn(index);
-        return select(column, UIElement::getText);
+        return jsColumn(index);
     }
     public List<String> rowHeader() {
         return rowHeader.get();
@@ -210,7 +209,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         return getJSValues(format("%s %s:nth-child(%s) %s", getByLocator(base().getLocator()), getByLocator(jsRow), getRowIndex(rowIndex), getByLocator(jsColumn)));
     }
     public List<String> jsRow(String rowName) {
-        return jsColumn(getRowIndexByName(rowName));
+        return jsRow(getRowIndexByName(rowName));
     }
     private void validateColumnIndex(int colNum) {
         if (colNum < 1)
@@ -232,7 +231,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     }
     public int getRowIndexByName(String rowName) {
         List<String> rowHeader = getRowHeaderIndex() == -1
-            ? webColumn(1).values()
+            ? jsColumn(1)
             : rowHeader();
         int rowIndex = firstIndex(rowHeader, h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowName)));
         if (rowIndex == -1)

@@ -15,8 +15,7 @@ import java.util.stream.Collectors;
 
 import static io.github.com.StaticSite.performancePage;
 import static io.github.com.pages.PerformancePage.*;
-import static io.github.epam.html.tests.performance.PerfStatistic.addStatistic;
-import static io.github.epam.html.tests.performance.PerfStatistic.getAverage;
+import static io.github.epam.html.tests.performance.PerfStatistic.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -45,11 +44,9 @@ public class ListTests implements TestsInit {
         elements.stream().map(WebElement::getText).collect(Collectors.toList());
         firstRow.values();
 
-        testScenario(() -> {
-            return elements.stream().filter(el -> el.getText().equals(value)).findFirst().get().getText();
-        }, () -> {
-            return firstRow.get(value).getText();
-        }, 70, 10);
+        testScenario(() -> elements.stream().filter(
+            el -> el.getText().equals(value)).findFirst().get().getText(),
+            () -> firstRow.get(value).getText(), 70, 10);
     }
     @Test(invocationCount = repeat)
     public void getValueTest() {
@@ -67,6 +64,7 @@ public class ListTests implements TestsInit {
     }
 
     private <T> void testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, double expectedRatio, int count) {
+        StartStatistic();
         for (int i = 0; i < count; i++) {
             Timer t = new Timer();
             T seleniumResult = seleniumAction.execute();
@@ -80,7 +78,11 @@ public class ListTests implements TestsInit {
             System.out.println("Ratio: "+(double)seleniumTime/jdiTime);
             assertThat(seleniumResult, equalTo(jdiResult));
         }
-        System.out.println("Average Ratio: "+getAverage("Selenium")/getAverage("Jdi"));
-        assertThat(getAverage("Selenium"), greaterThan(getAverage("Jdi")*expectedRatio));
+        double avSelenium = getAverage("Selenium");
+        double avJdi = getAverage("Jdi");
+        System.out.println("Average Selenium: " + avSelenium);
+        System.out.println("Average Jdi: " + avJdi);
+        System.out.println("Average Ratio: "+avSelenium/avJdi);
+        assertThat(avSelenium, greaterThan(avJdi*expectedRatio));
     }
 }

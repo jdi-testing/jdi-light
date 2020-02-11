@@ -39,7 +39,7 @@ public class DataTableTests implements TestsInit {
         notMoreThan(200, table::count);
         assertEquals(table.count(), 400);
         assertEquals(table.header(), asList("Name", "Phone", "Email", "City"));
-        notMoreThan(1000, table::preview);
+        notMoreThan(1500, table::preview);
         String value = table.preview();
         assertEquals(value.substring(0,194),
         "Name Phone Email City" +
@@ -71,7 +71,7 @@ public class DataTableTests implements TestsInit {
         //long n = getDuration(() -> table.getValue()); // 1500
 
         List<String> row = notMoreThan(1000, () -> table.jsRow(395));
-        notMoreThan(1000, () -> table.jsRow("Aileen Rodriguez"));
+        notMoreThan(100, () -> table.jsRow("Aileen Rodriguez"));
         String aileenText = "Aileen Rodriguez;0845 46 46;mattis.velit.justo@Maurismolestie.com;Portico e San Benedetto";
         assertEquals(print(row, ";"), aileenText);
 

@@ -68,7 +68,7 @@ public class JDILocator {
     public boolean isTemplate() {
         return byLocator != null && byLocator.toString().contains("%s");
     }
-    public boolean isXPath() { return byLocator.toString().contains("xpath"); }
+    public boolean isXPath() { return byLocator != null && byLocator.toString().contains("xpath"); }
     public String addIndex(int index) {
         String locator = getByLocator(byLocator);
         return locator.equals("..")
@@ -76,7 +76,7 @@ public class JDILocator {
             : format("(%s)[%s]", getByLocator(byLocator), index+1);
     }
     public String addText(String text) {
-        return format("(%s)[text()='%s']", getByLocator(byLocator), text);
+        return format("(%s)[.='%s']", getByLocator(byLocator), text);
     }
     public int argsCount() {
         return byLocator != null

@@ -65,17 +65,12 @@ public class BaseValidations {
     }
     public static long getDuration(JAction action) {
         long start = currentTimeMillis();
-        try {
-            action.execute();
-        } catch (Throwable ignore) { }
+        action.execute();
         return currentTimeMillis() - start;
     }
     private static <T> Pair<Long, T> getDuration(JFunc<T> action) {
         long start = currentTimeMillis();
-        T result = null;
-        try {
-            result = action.execute();
-        } catch (Throwable ignore) { }
+        T result = action.execute();
         return $(currentTimeMillis() - start, result);
     }
     private static void validateDuration(long min, long max, JAction action) {

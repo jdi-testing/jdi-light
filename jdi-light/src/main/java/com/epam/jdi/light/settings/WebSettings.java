@@ -101,7 +101,7 @@ public class WebSettings {
         BEFORE_SEARCH = UIElement::show;
     }
 
-    public static ElementArea CLICK_TYPE = SMART_CLICK;
+    public static ElementArea CLICK_TYPE = CENTER;
     public static TextTypes TEXT_TYPE = SMART_TEXT;
     public static SetTextTypes SET_TEXT_TYPE = SET_TEXT;
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
@@ -212,7 +212,7 @@ public class WebSettings {
         ElementArea clickType = first(getAllEnumValues(ElementArea.class),
                 t -> t.toString().equals(type));
         return clickType != null
-                ? clickType : SMART_CLICK;
+                ? clickType : CENTER;
     }
 
     private static TextTypes getTextType(String type) {

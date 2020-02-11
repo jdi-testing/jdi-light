@@ -52,6 +52,11 @@ public class PerformanceTests implements TestsInit {
     }
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
+    public void vanishGhostButtonTest() {
+        durationMoreThan(3, () -> ghostButton.is().disappear());
+    }
+    //if test fails then run `mvn clean install` in module JDI Light
+    @Test
     public void vanishRemoveButtonTest() {
         durationMoreThan(3, () -> removeButton.is().disappear());
     }
@@ -180,7 +185,7 @@ public class PerformanceTests implements TestsInit {
     @Test
     public void displayButtonUITest() {
         assertFalse(suspendButtonUI.isDisplayed());
-        durationMoreThan(2, () ->
+        durationMoreThan(3, () ->
                 suspendButtonUI.is().displayed());
     }
     //if test fails then run `mvn clean install` in module JDI Light
