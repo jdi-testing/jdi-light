@@ -199,8 +199,7 @@ public class WebDriverFactory {
         for (Pair<String, WebDriver> pair : RUN_DRIVERS.get())
             try {
                 pair.value.quit();
-            } catch (Exception ignore) {
-            }
+            } catch (Exception ignore) {}
         RUN_DRIVERS.get().clear();
     }
 
