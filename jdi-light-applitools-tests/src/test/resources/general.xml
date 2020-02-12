@@ -6,8 +6,8 @@
             <package name="org.mytests.tests.example"/>
         </packages>
     </test>
-    <listeners>
+    <!-- listeners>
         <listener class-name="org.mytests.tests.testng.TestNGListener" />
         <listener class-name="org.mytests.tests.testng.RetryListenerClass"/>
-    </listeners>
+    </listeners -->
 </suite>
