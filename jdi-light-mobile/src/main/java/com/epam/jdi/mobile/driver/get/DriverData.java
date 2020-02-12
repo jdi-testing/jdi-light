@@ -11,11 +11,11 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.opera.OperaOptions;
+//import org.openqa.selenium.edge.EdgeOptions;
+//import org.openqa.selenium.firefox.FirefoxOptions;
+//import org.openqa.selenium.firefox.FirefoxProfile;
+//import org.openqa.selenium.ie.InternetExplorerOptions;
+//import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -33,7 +33,7 @@ import static com.epam.jdi.mobile.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.RegExUtils.matches;
+//import static com.epam.jdi.tools.RegExUtils.matches;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.switcher.SwitchActions.Case;
 import static com.epam.jdi.tools.switcher.SwitchActions.Default;
@@ -45,7 +45,7 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;
 import static org.openqa.selenium.ie.InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR;
 import static org.openqa.selenium.remote.CapabilityType.ACCEPT_SSL_CERTS;
-import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
+//import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -57,11 +57,6 @@ public class DriverData {
     public static String TEST_PATH = mergePath(PROJECT_PATH, "src", "test");
     public static String LOGS_PATH = mergePath(TEST_PATH, ".logs");
     public static String DRIVERS_FOLDER;
-
-    public static String getDriverFolder() {
-        return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
-                ? DRIVERS_FOLDER : mergePath(TEST_PATH, "resources", "drivers");
-    }
 
     public static String DOWNLOADS_DIR = mergePath(TEST_PATH, "resources", "downloads");
     public static PageLoadStrategy PAGE_LOAD_STRATEGY = NORMAL;
@@ -77,6 +72,11 @@ public class DriverData {
     public static Map<String, String> CAPABILITIES_FOR_OPERA = new HashMap<>();
     public static Map<String, String> CAPABILITIES_FOR_MOBILE = new HashMap<>();
     public static Map<String, String> COMMON_CAPABILITIES = new HashMap<>();
+
+    public static String getDriverFolder() {
+        return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
+                ? DRIVERS_FOLDER : mergePath(TEST_PATH, "resources", "drivers");
+    }
 
     public static String chromeDriverPath() {
         return mergePath(getDriverFolder(), getOs() == WIN ? "chromedriver.exe" : "chromedriver");
@@ -269,10 +269,10 @@ public class DriverData {
         CAPABILITIES_FOR_MOBILE.forEach(cap::setCapability);
     };
 
-    private static String getBrowserSizeOption() {
-        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
-        return groups.size() == 2
-                ? "--window-size=" + groups.get(0) + "," + groups.get(1)
-                : "--start-maximized";
-    }
+//    private static String getBrowserSizeOption() {
+//        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
+//        return groups.size() == 2
+//                ? "--window-size=" + groups.get(0) + "," + groups.get(1)
+//                : "--start-maximized";
+//    }
 }

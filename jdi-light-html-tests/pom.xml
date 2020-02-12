@@ -10,7 +10,7 @@
     <groupId>com.epam.jdi</groupId>
 
     <properties>
-        <driver>chrome</driver>
+        <driver>appium</driver>
         <!--driver>firefox</driver-->
         <allure.testng>2.7.0</allure.testng>
         <allure.maven>2.9</allure.maven>

@@ -1,7 +1,6 @@
 package com.epam.jdi.mobile.driver.get;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
