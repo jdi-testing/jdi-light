@@ -71,6 +71,55 @@ public class DriverData {
     public static Map<String, String> CAPABILITIES_FOR_MOBILE = new HashMap<>();
     public static Map<String, String> COMMON_CAPABILITIES = new HashMap<>();
 
+    public static String LATEST_VERSION = "LATEST";
+    public static String DRIVER_VERSION = LATEST_VERSION;
+    public static String PRELATEST_VERSION = "PRELATEST";
+    public static Platform PLATFORM = X32;
+
+    public static List<String> setupErrors = new ArrayList<>();
+
+    public static JAction1<DesiredCapabilities> MOBILE_OPTIONS = cap -> {
+//        setUp("Mobile: deviceName: iPad Pro",
+//                () -> cap.setCapability(MobileCapabilityType.DEVICE_NAME, "iPad Pro"));
+//        setUp("Mobile: platformName: iOS",
+//                () -> cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS"));
+//        setUp("Mobile: browserName: Safari",
+//                () -> cap.setCapability(MobileCapabilityType.BROWSER_NAME, MobileBrowserType.SAFARI));
+//        setUp("Mobile: UDID: EECE640D-B952-44C9-87FD-1887A8EF65D4",
+//                () -> cap.setCapability(MobileCapabilityType.UDID, "EECE640D-B952-44C9-87FD-1887A8EF65D4"));
+        setUp("Mobile: deviceName: emulator-5554",
+                () -> cap.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554"));
+        setUp("Mobile: platformName: Android",
+                () -> cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android"));
+        setUp("Mobile: browserName: Chrome",
+                () -> cap.setCapability(MobileCapabilityType.BROWSER_NAME, MobileBrowserType.CHROME));
+        CAPABILITIES_FOR_MOBILE.forEach(cap::setCapability);
+    };
+
+    public static JAction1<ChromeOptions> CHROME_OPTIONS = cap -> {
+        HashMap<String, Object> chromePrefs = new HashMap<>();
+        setUp("Set Chrome Prefs", () -> {
+            chromePrefs.put("credentials_enable_service", false);
+            new File(DOWNLOADS_DIR).mkdirs();
+            chromePrefs.put("download.default_directory", DOWNLOADS_DIR);
+            chromePrefs.put("profile.default_content_setting_values.notifications", 0);
+            chromePrefs.put("profile.default_content_settings.popups", 0);
+            chromePrefs.put("profile.password_manager_enabled", false);
+        });
+        setUp("Chrome: '--disable-web-security', '--disable-extensions', 'test-type'",
+                () -> cap.addArguments("--disable-web-security", "--disable-extensions", "test-type"));
+        setUp("Chrome: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
+                () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
+        setUp("Chrome: ACCEPT_SSL_CERTS:true",
+                () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+        setUp("Chrome: " + UNEXPECTED_ALERT_BEHAVIOR + "=" + ACCEPT,
+                () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+        setUp("Chrome: setExperimentalOption: prefs",
+                () -> cap.setExperimentalOption("prefs", chromePrefs));
+        // Capabilities from settings
+        CAPABILITIES_FOR_CHROME.forEach((property, value) -> setupCapability(cap, property, value));
+    };
+
     public static String getDriverFolder() {
         return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
                 ? DRIVERS_FOLDER : mergePath(TEST_PATH, "resources", "drivers");
@@ -99,11 +148,6 @@ public class DriverData {
     private static String driverPath(String driverName) {
         return mergePath(getDriverFolder(), getOs() == WIN ? driverName + ".exe" : driverName);
     }
-
-    public static String LATEST_VERSION = "LATEST";
-    public static String DRIVER_VERSION = LATEST_VERSION;
-    public static String PRELATEST_VERSION = "PRELATEST";
-    public static Platform PLATFORM = X32;
 
     public static OsTypes getOs() {
         String osName = System.getProperty("os.name").toLowerCase();
@@ -161,8 +205,6 @@ public class DriverData {
         return capabilities;
     }
 
-    public static List<String> setupErrors = new ArrayList<>();
-
     public static void setUp(String name, JAction action) {
         try {
             action.invoke();
@@ -170,30 +212,6 @@ public class DriverData {
             setupErrors.add(format("%s: %s", name, safeException(ex)));
         }
     }
-
-    public static JAction1<ChromeOptions> CHROME_OPTIONS = cap -> {
-        HashMap<String, Object> chromePrefs = new HashMap<>();
-        setUp("Set Chrome Prefs", () -> {
-            chromePrefs.put("credentials_enable_service", false);
-            new File(DOWNLOADS_DIR).mkdirs();
-            chromePrefs.put("download.default_directory", DOWNLOADS_DIR);
-            chromePrefs.put("profile.default_content_setting_values.notifications", 0);
-            chromePrefs.put("profile.default_content_settings.popups", 0);
-            chromePrefs.put("profile.password_manager_enabled", false);
-        });
-        setUp("Chrome: '--disable-web-security', '--disable-extensions', 'test-type'",
-                () -> cap.addArguments("--disable-web-security", "--disable-extensions", "test-type"));
-        setUp("Chrome: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
-                () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
-        setUp("Chrome: ACCEPT_SSL_CERTS:true",
-                () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
-        setUp("Chrome: " + UNEXPECTED_ALERT_BEHAVIOR + "=" + ACCEPT,
-                () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
-        setUp("Chrome: setExperimentalOption: prefs",
-                () -> cap.setExperimentalOption("prefs", chromePrefs));
-        // Capabilities from settings
-        CAPABILITIES_FOR_CHROME.forEach((property, value) -> setupCapability(cap, property, value));
-    };
 
     public static void setupCapability(ChromeOptions cap, String property, String value) {
         if (!property.equals(ARGUMENTS_PROPERTY)) {
@@ -261,24 +279,6 @@ public class DriverData {
 //    public static JAction1<OperaOptions> OPERA_OPTIONS = cap -> {
 //
 //    };
-
-    public static JAction1<DesiredCapabilities> MOBILE_OPTIONS = cap -> {
-//        setUp("Mobile: deviceName: iPad Pro",
-//                () -> cap.setCapability(MobileCapabilityType.DEVICE_NAME, "iPad Pro"));
-//        setUp("Mobile: platformName: iOS",
-//                () -> cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS"));
-//        setUp("Mobile: browserName: Safari",
-//                () -> cap.setCapability(MobileCapabilityType.BROWSER_NAME, MobileBrowserType.SAFARI));
-//        setUp("Mobile: UDID: EECE640D-B952-44C9-87FD-1887A8EF65D4",
-//                () -> cap.setCapability(MobileCapabilityType.UDID, "EECE640D-B952-44C9-87FD-1887A8EF65D4"));
-        setUp("Mobile: deviceName: emulator-5554",
-                () -> cap.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554"));
-        setUp("Mobile: platformName: Android",
-                () -> cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android"));
-        setUp("Mobile: browserName: Chrome",
-                () -> cap.setCapability(MobileCapabilityType.BROWSER_NAME, MobileBrowserType.CHROME));
-        CAPABILITIES_FOR_MOBILE.forEach(cap::setCapability);
-    };
 
 //    private static WebDriver maximizeScreen(WebDriver driver) {
 //        try {
