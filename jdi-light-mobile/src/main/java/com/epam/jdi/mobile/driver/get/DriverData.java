@@ -2,11 +2,15 @@ package com.epam.jdi.mobile.driver.get;
 
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc1;
 import io.appium.java_client.remote.MobileBrowserType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -25,10 +29,13 @@ import static com.epam.jdi.mobile.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.RegExUtils.matches;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.switcher.SwitchActions.Case;
 import static com.epam.jdi.tools.switcher.SwitchActions.Default;
 import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
+import static java.awt.Toolkit.getDefaultToolkit;
+import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -159,30 +166,32 @@ public class DriverData {
     }
 
     // GET DRIVER
-//    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver -> {
-//        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
-//        if (groups.size() == 2)
-//            driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
-//        else {
-//            if (getOs().equals(MAC))
-//                maximizeScreen(driver);
-//            else
+    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver -> {
+        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
+        if (groups.size() == 2)
+            driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
+        else {
+            if (getOs().equals(MAC) && !DRIVER_NAME.equals("appium")) {
+                maximizeScreen(driver);
+            }
+//            else {
 //                driver.manage().window().maximize();
-//        }
-//        return driver;
-//    };
+//            }
+        }
+        return driver;
+    };
 
-//    private static void setBrowserSizeForMac(WebDriver driver,
-//                                             int width, int height) {
-//        try {
-//            Point position = new Point(0, 0);
-//            driver.manage().window().setPosition(position);
-//            driver.manage().window().setSize(new Dimension(width, height));
-//        } catch (Exception ex) {
-//            logger.error("Failed to Set resolution (%s, %s): %s", width, height, safeException(ex));
-//            throw ex;
-//        }
-//    }
+    private static void setBrowserSizeForMac(WebDriver driver,
+                                             int width, int height) {
+        try {
+            Point position = new Point(0, 0);
+            driver.manage().window().setPosition(position);
+            driver.manage().window().setSize(new Dimension(width, height));
+        } catch (Exception ex) {
+            logger.error("Failed to Set resolution (%s, %s): %s", width, height, safeException(ex));
+            throw ex;
+        }
+    }
 
     public static Capabilities getCapabilities(
             MutableCapabilities capabilities, JAction1<Object> defaultCapabilities) {
@@ -280,25 +289,25 @@ public class DriverData {
 //
 //    };
 
-//    private static WebDriver maximizeScreen(WebDriver driver) {
-//        try {
-//            switch (getOs()) {
-//                case WIN:
-//                    driver.manage().window().maximize();
-//                case MAC:
-//                    java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
-//                    setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
-//            }
-//            return driver;
-//        } catch (Exception ex) {
-//            throw new RuntimeException("Failed to maximize window: ", ex);
-//        }
-//    }
+    private static WebDriver maximizeScreen(WebDriver driver) {
+        try {
+            switch (getOs()) {
+                case WIN:
+                    driver.manage().window().maximize();
+                case MAC:
+                    java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
+                    setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
+            }
+            return driver;
+        } catch (Exception ex) {
+            throw new RuntimeException("Failed to maximize window: ", ex);
+        }
+    }
 
-//    private static String getBrowserSizeOption() {
-//        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
-//        return groups.size() == 2
-//                ? "--window-size=" + groups.get(0) + "," + groups.get(1)
-//                : "--start-maximized";
-//    }
+    private static String getBrowserSizeOption() {
+        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
+        return groups.size() == 2
+                ? "--window-size=" + groups.get(0) + "," + groups.get(1)
+                : "--start-maximized";
+    }
 }
