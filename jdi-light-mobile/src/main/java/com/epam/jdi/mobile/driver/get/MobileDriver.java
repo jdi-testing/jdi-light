@@ -1,6 +1,7 @@
 package com.epam.jdi.mobile.driver.get;
 
 public class MobileDriver {
+    // assign an empty string to this variable to run selenium tests
     public static String DRIVER_MOBILE_URL = "http://127.0.0.1:4723/wd/hub";
 
 //    public static String PLATFORM = "iOS";

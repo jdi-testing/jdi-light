@@ -229,7 +229,7 @@ public class PageFactory {
     // region Selenium PageFactory
     public static void initElements(JFunc<WebDriver> driver, Object... pages) {
         preInit();
-        useDriver(() -> MOBILE_INFO.getDriver());
+        useDriver(driver);
         initElements(pages);
     }
     public static void initElements(Class<?> site) {
