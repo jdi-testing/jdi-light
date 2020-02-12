@@ -5,17 +5,9 @@ import com.epam.jdi.tools.func.JAction1;
 import io.appium.java_client.remote.MobileBrowserType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-//import org.openqa.selenium.edge.EdgeOptions;
-//import org.openqa.selenium.firefox.FirefoxOptions;
-//import org.openqa.selenium.firefox.FirefoxProfile;
-//import org.openqa.selenium.ie.InternetExplorerOptions;
-//import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -33,7 +25,6 @@ import static com.epam.jdi.mobile.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.PrintUtils.print;
-//import static com.epam.jdi.tools.RegExUtils.matches;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.switcher.SwitchActions.Case;
 import static com.epam.jdi.tools.switcher.SwitchActions.Default;
@@ -45,6 +36,13 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;
 import static org.openqa.selenium.ie.InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR;
 import static org.openqa.selenium.remote.CapabilityType.ACCEPT_SSL_CERTS;
+
+//import org.openqa.selenium.edge.EdgeOptions;
+//import org.openqa.selenium.firefox.FirefoxOptions;
+//import org.openqa.selenium.firefox.FirefoxProfile;
+//import org.openqa.selenium.ie.InternetExplorerOptions;
+//import org.openqa.selenium.opera.OperaOptions;
+//import static com.epam.jdi.tools.RegExUtils.matches;
 //import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
 
 /**
@@ -117,17 +115,30 @@ public class DriverData {
     }
 
     // GET DRIVER
-    private static void setBrowserSizeForMac(WebDriver driver,
-                                             int width, int height) {
-        try {
-            Point position = new Point(0, 0);
-            driver.manage().window().setPosition(position);
-            driver.manage().window().setSize(new Dimension(width, height));
-        } catch (Exception ex) {
-            logger.error("Failed to Set resolution (%s, %s): %s", width, height, safeException(ex));
-            throw ex;
-        }
-    }
+//    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver -> {
+//        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
+//        if (groups.size() == 2)
+//            driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
+//        else {
+//            if (getOs().equals(MAC))
+//                maximizeScreen(driver);
+//            else
+//                driver.manage().window().maximize();
+//        }
+//        return driver;
+//    };
+
+//    private static void setBrowserSizeForMac(WebDriver driver,
+//                                             int width, int height) {
+//        try {
+//            Point position = new Point(0, 0);
+//            driver.manage().window().setPosition(position);
+//            driver.manage().window().setSize(new Dimension(width, height));
+//        } catch (Exception ex) {
+//            logger.error("Failed to Set resolution (%s, %s): %s", width, height, safeException(ex));
+//            throw ex;
+//        }
+//    }
 
     public static Capabilities getCapabilities(
             MutableCapabilities capabilities, JAction1<Object> defaultCapabilities) {
@@ -268,6 +279,21 @@ public class DriverData {
                 () -> cap.setCapability(MobileCapabilityType.BROWSER_NAME, MobileBrowserType.CHROME));
         CAPABILITIES_FOR_MOBILE.forEach(cap::setCapability);
     };
+
+//    private static WebDriver maximizeScreen(WebDriver driver) {
+//        try {
+//            switch (getOs()) {
+//                case WIN:
+//                    driver.manage().window().maximize();
+//                case MAC:
+//                    java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
+//                    setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
+//            }
+//            return driver;
+//        } catch (Exception ex) {
+//            throw new RuntimeException("Failed to maximize window: ", ex);
+//        }
+//    }
 
 //    private static String getBrowserSizeOption() {
 //        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
