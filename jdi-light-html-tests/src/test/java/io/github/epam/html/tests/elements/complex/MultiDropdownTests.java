@@ -13,6 +13,7 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertThrows;
 
 public class MultiDropdownTests implements TestsInit {
 
@@ -20,7 +21,7 @@ public class MultiDropdownTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        if (!isFireFox())
+//        if (!isFireFox())
             multiDropdown.check(text);
     }
     String text = "Steam";
@@ -32,20 +33,17 @@ public class MultiDropdownTests implements TestsInit {
 
     @Test
     public void selectTest() {
-        if (isFireFox()) return;
         multiDropdown.check("Electro", "Metalic");
         assertEquals(multiDropdown.checked(), asList("Electro", "Metalic"));
     }
 
     @Test
     public void selectEnumTest() {
-        if (isFireFox()) return;
         multiDropdown.check(Wood, Steam);
         assertEquals(multiDropdown.checked(), asList("Steam", "Wood"));
     }
     @Test
     public void selectNumTest() {
-        if (isFireFox()) return;
         multiDropdown.check(1, 5);
         assertEquals(multiDropdown.checked(), asList("Electro", "Wood"));
     }
@@ -56,13 +54,18 @@ public class MultiDropdownTests implements TestsInit {
 
     @Test
     public void disabledTest() {
-        if (isFireFox()) return;
-        multiDropdown.select("Disabled");
-        assertEquals(multiDropdown.selected(), "Steam");
+        // FYI: Firefox do not allow click on disabled element.
+        if (!isFireFox()) {
+            multiDropdown.select("Disabled");
+            assertEquals(multiDropdown.selected(), "Steam");
+        } else {
+            assertThrows(Exception.class, () -> {multiDropdown.select("Disabled");});
+        }
     }
 
     @Test
     public void labelTest() {
+        if ("".equals(multiDropdown.core().attr("id"))) multiDropdown.core().setAttribute("id", "multi-dropdown");
         assertEquals(multiDropdown.label().getText(), "Multi dropdown:");
         multiDropdown.label().is().text(containsString("Multi"));
     }

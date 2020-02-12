@@ -35,6 +35,7 @@ Feature: MultiDropDown
       | Electro | Wood |
 
   Scenario: Get label text tests
+    When the "Multi Dropdown" element is initialized for Firefox
     Then the "Multi Dropdown" label text equals to "Multi dropdown:"
     And the "Multi Dropdown" label text contains "dropdown:"
     And the "Multi Dropdown" label text matches to "(.*)dropdown:"
