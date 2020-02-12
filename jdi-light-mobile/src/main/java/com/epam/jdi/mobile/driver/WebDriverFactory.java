@@ -71,7 +71,7 @@ public class WebDriverFactory {
     }
 
     private static WebDriver initDriver(DriverTypes type) {
-        return Switch(type).get(
+        WebDriver driver = Switch(type).get(
                 Value(APPIUM, t -> MOBILE_INFO.getDriver()),
                 Value(CHROME, t -> CHROME_INFO.getDriver())
 //                Value(FIREFOX, t -> FF_INFO.getDriver()),
@@ -80,6 +80,10 @@ public class WebDriverFactory {
 //                Value(EDGE, t -> EDGE_INFO.getDriver()),
 //                Value(SAFARI, t -> SAFARI_INFO.getDriver())
         );
+
+        if(driver == null)
+            throw exception("Unknown driver:" + type);
+        return driver;
     }
 
     // GET DRIVER
@@ -195,8 +199,7 @@ public class WebDriverFactory {
         for (Pair<String, WebDriver> pair : RUN_DRIVERS.get())
             try {
                 pair.value.quit();
-            } catch (Exception ignore) {
-            }
+            } catch (Exception ignore) {}
         RUN_DRIVERS.get().clear();
     }
 
