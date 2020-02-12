@@ -28,7 +28,9 @@ public class HtmlElementsPage extends WebPage {
     // @UI("input[type=button].red") public static Button redButton;
     @UI("[value*='Disabled Button']") public static Button disabledButtonInput;
     // @UI("input[type=button][disabled]") public static Button disabledButtonInput;
-    public static Button blueButton, dblClickButton, rightClickButton;
+    public static Button blueButton;
+    public static Button dblClickButton;
+    public static Button rightClickButton;
     @WaitTimeout(4)
     public static Button ghostButton, suspendButton;
     @NoWait
@@ -91,7 +93,6 @@ public class HtmlElementsPage extends WebPage {
     public static MultiSelector ages;
     //@UI("#ages") public static MultiSelector ages;
     public static MultiSelector multiDropdown;
-    // @UI("#multi-dropdown") public static MultiSelector multiDropdown;
 
     public static DataListOptions iceCream;
     @UI("#ice-cream")

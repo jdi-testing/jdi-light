@@ -68,6 +68,7 @@ public class ButtonTests implements TestsInit {
     }
     @Test
     public void rightClickTest() {
+        rightClickButton.show();
         rightClickButton.rightClick();
         assertEquals(getAlertText(), "Right Click");
         acceptAlert();

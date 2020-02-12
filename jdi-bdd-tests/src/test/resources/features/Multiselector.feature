@@ -20,13 +20,13 @@ Feature: Multiselector
     | Electro | Steam| Metalic | Disabled | Wood |
 
   Scenario: Multiple selection in multiselector
-    When I check in the "Multi Dropdown" values:
+    When I check in the "Ages" values:
       | Electro | Metalic |
-    Then the "Multi Dropdown" selected values:
+    Then the "Ages" selected values:
       | Electro | Metalic |
 
   Scenario: Select values by number in multiselector
-    When I check in the "Multi Dropdown" values by number:
+    When I check in the "Ages" values by number:
       | 1 | 5 |
-    Then the "Multi Dropdown" selected values:
+    Then the "Ages" selected values:
       | Electro | Wood |

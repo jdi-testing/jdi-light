@@ -11,7 +11,7 @@
 
     <properties>
         <driver>chrome</driver>
-        <!--<driver>firefox</driver>-->
+<!--        <driver>firefox</driver>-->
         <allure.testng>2.7.0</allure.testng>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
