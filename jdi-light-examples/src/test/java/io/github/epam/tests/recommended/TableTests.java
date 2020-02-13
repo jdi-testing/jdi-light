@@ -45,7 +45,8 @@ public class TableTests extends StaticTestsInit {
         assertEquals(table.row(1).getValue(),
                 "Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe");
         logTime("Get 1 row");
-        // TODO fix performance
+        //assertEquals(table.row("Imphal").getValue(),
+        //        "Yen Stevenson;07624 310007;in@Sedeu.edu;Imphal");
         assertEquals(table.row("Burke Tucker").getValue(),
                 "Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe");
         logTime("Get 'Burke Tucker' row");
@@ -56,22 +57,14 @@ public class TableTests extends StaticTestsInit {
         assertEquals(table.cell("Email",4), zacharyEmail);
         logTime("Get cell(Email,4)");
         assertEquals(table.cell(3,"Zachary Hendrix"), zacharyEmail);
-        // TODO fix performance
         logTime("Get cell(3,Zachary Hendrix)");
         assertEquals(table.cell("Email","Zachary Hendrix"), zacharyEmail);
-        // TODO fix performance
         logTime("Get cell(Email,Zachary Hendrix)");
 
-        // TODO fix performance
-        assertEquals(table.column(2).getValue().substring(0, 30),
-                "076 1971 1687;(011307) 16843;0");
-        // TODO fix performance
+        assertEquals(table.jsColumn(2).get(1), "(011307) 16843");
         logTime("Get column(2)");
 
-        // TODO fix performance
-        assertEquals(table.column("Phone").getValue().substring(0, 30),
-                "076 1971 1687;(011307) 16843;0");
-        // TODO fix performance
+        assertEquals(table.jsColumn("Phone").get(1),"(011307) 16843");
         logTime("Get column(Phone)");
 
         String value = table.preview();

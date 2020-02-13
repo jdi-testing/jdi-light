@@ -42,7 +42,7 @@ public class Line implements IList<String>, IBaseElement {
     public Line(WebList elements, List<String> headers) {
         this.elements = elements;
         this.headers = headers;
-        List<String> values = LinqUtils.map(elements, UIElement::getText);
+        List<String> values = elements.values();
         this.dataMap = () -> new MultiMap<>(headers, values);
     }
     public static Line initLine(List<String> list, List<String> headers) {

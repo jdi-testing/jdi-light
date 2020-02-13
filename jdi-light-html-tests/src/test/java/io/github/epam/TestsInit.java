@@ -20,12 +20,12 @@ public interface TestsInit {
     default void setUp() {
         WebSettings.init();
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
+        killAllSeleniumDrivers();
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
         homePage.open();
         logger.toLog("Run Tests");
     }
-
 
     @AfterSuite(alwaysRun = true)
     default void tearDown() {

@@ -26,7 +26,6 @@ import java.util.Objects;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.ElementArea.CENTER;
-import static com.epam.jdi.light.common.ElementArea.SMART_CLICK;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.common.SetTextTypes.SET_TEXT;
@@ -101,7 +100,7 @@ public class WebSettings {
         BEFORE_SEARCH = UIElement::show;
     }
 
-    public static ElementArea CLICK_TYPE = SMART_CLICK;
+    public static ElementArea CLICK_TYPE = CENTER;
     public static TextTypes TEXT_TYPE = SMART_TEXT;
     public static SetTextTypes SET_TEXT_TYPE = SET_TEXT;
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
@@ -141,18 +140,6 @@ public class WebSettings {
             }
             throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
         });
-        //return el.base().timer().getResult(() -> {
-        //    for (String template : SMART_SEARCH_LOCATORS) {
-        //        UIElement ui = (template.equals("#%s")
-        //                ? $(String.format(template, locatorName))
-        //                : $(String.format(template, locatorName), el.base().parent))
-        //                .setup(e -> e.setName(el.getName()).noWait());
-        //        try {
-        //            return ui.getWebElement();
-        //        } catch (Exception ignore) { }
-        //    }
-        //    throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
-        //});
     };
 
     public static synchronized void init() {
@@ -175,6 +162,7 @@ public class WebSettings {
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
         fillAction(SoftAssert::setAssertType, "assert.type");
+        fillAction(p -> CLICK_TYPE = getClickType(p), "click.type");
         fillAction(p -> TEXT_TYPE = getTextType(p), "text.type");
         fillAction(p -> SET_TEXT_TYPE = getSetTextType(p), "set.text.type");
 
@@ -206,6 +194,14 @@ public class WebSettings {
         if (SMART_SEARCH_LOCATORS.size() == 0)
             SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
     }
+
+    private static ElementArea getClickType(String type) {
+        ElementArea clickType = first(getAllEnumValues(ElementArea.class),
+                t -> t.toString().equals(type));
+        return clickType != null
+                ? clickType : CENTER;
+    }
+
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
                 t -> t.toString().equals(type));
