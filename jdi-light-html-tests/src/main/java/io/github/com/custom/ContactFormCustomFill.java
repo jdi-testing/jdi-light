@@ -13,8 +13,7 @@ import io.github.com.entities.Contacts;
 import java.lang.reflect.Field;
 
 public class ContactFormCustomFill extends Form<Contacts> {
-    TextField name;
-    TextField lastName, position, passportNumber, passportSeria;
+    TextField name,  lastName, position, passportNumber, passportSeria;
 
     Dropdown gender;
     IsCombobox religion;
