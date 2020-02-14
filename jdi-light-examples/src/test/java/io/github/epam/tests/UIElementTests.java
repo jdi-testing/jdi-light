@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import com.sun.javafx.runtime.async.AsyncOperationListener;
+
 import io.github.com.pages.UIElementContactFormPage;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
@@ -15,8 +15,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
-import java.util.List;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static io.github.com.pages.UIElementContactFormPage.*;
@@ -174,6 +174,8 @@ public class UIElementTests extends TestsInit{
     public void hasNotAttribute(){
         Assert.assertFalse(submit.hasAttribute("no-attr"));
     }
+
+
     @Test
     public void highlight(){
         String style = (result.getAttribute("style"));
@@ -203,6 +205,10 @@ public class UIElementTests extends TestsInit{
     @Test
     public void attrs(){
         Assert.assertEquals(submit.attrs(), MapArray.map(Pair.$("class", "uui-button dark-blue"), Pair.$("type", "submit")));
+        /*MapArray<String, String> map = new MapArray<String, String>();
+        map.add("class", "uui-button dark-blue");
+        map.add("type", "submit");
+        Assert.assertEquals(submit.attrs(), map);*/
     }
     @Test
     public void text(){
