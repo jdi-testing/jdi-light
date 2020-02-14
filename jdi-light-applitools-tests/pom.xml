@@ -16,7 +16,7 @@
         <driver>firefox</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <aspectj.version>1.9.1</aspectj.version>
-        <allure.testng>2.7.0</allure.testng>
+        <allure.testng>2.13.1</allure.testng>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
     </properties>
