@@ -3,6 +3,8 @@ package io.github.epam.tests;
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.pairs.Pair;
+import com.sun.javafx.runtime.async.AsyncOperationListener;
 import io.github.com.pages.UIElementContactFormPage;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
@@ -13,6 +15,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static io.github.com.pages.UIElementContactFormPage.*;
@@ -49,24 +53,24 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void checkIfSelected(){
-        Assert.assertEquals(forCalculateOne.isSelected(), true);
+        Assert.assertTrue(forCalculateOne.isSelected());
     }
     @Test
     public void checkIfDeselected(){
-        Assert.assertEquals(forCalculateThree.isDeselected(), true);
+        Assert.assertTrue(forCalculateThree.isDeselected());
     }
     @Test
     public void checkIfEnabled(){
-        Assert.assertEquals(submit.isEnabled(), true);
+        Assert.assertTrue(submit.isEnabled());
     }
     //TODO add not enabled, possible for button on another page
     @Test
     public void isDisplayed(){
-        Assert.assertEquals(submit.isDisplayed(), true);
+        Assert.assertTrue(submit.isDisplayed());
     }
     @Test
     public void isHidden(){
-        Assert.assertEquals(submitNotDisplayed.isHidden(), true);
+        Assert.assertTrue(submitNotDisplayed.isHidden());
     }
     @Test
     public void cantFindBySmartLocator(){
@@ -111,7 +115,7 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void isClickable(){
-        Assert.assertEquals(submit.isClickable(), true);
+        Assert.assertTrue(submit.isClickable());
     }
     //TODO add isNotClickable
     @Test
@@ -141,32 +145,29 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void isExist(){
-        Assert.assertEquals(submit.isExist(), true);
+        Assert.assertTrue(submit.isExist());
     }
     @Test
     public void isNotExist(){
-        Assert.assertEquals(submitNotDisplayed.isNotExist(), true);
+        Assert.assertTrue(submitNotDisplayed.isNotExist());
     }
     @Test
     public void classes(){
-        ArrayList<String> list = new ArrayList<>();
-        list.add("uui-button");
-        list.add("dark-blue");
-        Assert.assertEquals(submit.classes(), list);
+        Assert.assertEquals(submit.classes(), new ArrayList<>(Arrays.asList("uui-button", "dark-blue"));
     }
     @Test
     public void hasClass() {
-        Assert.assertEquals(submit.hasClass("uui-button"), true);
-        Assert.assertEquals(submit.hasClass("dark-blue"), true);
+        Assert.assertTrue(submit.hasClass("uui-button"));
+        Assert.assertTrue(submit.hasClass("dark-blue"));
     }
     @Test
     public void hasNotClass(){
-        Assert.assertEquals(submit.hasClass("no-class"), false);
+        Assert.assertFalse(submit.hasClass("no-class"));
     }
     @Test
     public void hasAttribute() {
-        Assert.assertEquals(submit.hasAttribute("class"), true);
-        Assert.assertEquals(submit.hasAttribute("type"), true);
+        Assert.assertTrue(submit.hasAttribute("class"));
+        Assert.assertTrue(submit.hasAttribute("type"));
     }
     @Test
     public void printHtml(){
@@ -174,7 +175,7 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void hasNotAttribute(){
-        Assert.assertEquals(submit.hasAttribute("no-attr"), false);
+        Assert.assertFalse(submit.hasAttribute("no-attr"));
     }
     @Test
     public void highlight(){
@@ -204,10 +205,7 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void attrs(){
-        MapArray<String, String> map = new MapArray<String, String>();
-        map.add("class", "uui-button dark-blue");
-        map.add("type", "submit");
-        Assert.assertEquals(submit.attrs(), map);
+        Assert.assertEquals(submit.attrs(), MapArray.map(Pair.$("class", "uui-button dark-blue"), Pair.$("type", "submit")));
     }
     @Test
     public void text(){
