@@ -16,7 +16,7 @@
         <aspectj.version>1.9.5</aspectj.version>
         <aspectj.maven>1.11</aspectj.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <allure.testng>2.7.0</allure.testng>
+        <allure.testng>2.13.1</allure.testng>
         <java.version>1.8</java.version>
         <testng.version>7.0.0-beta1</testng.version>
         <log4j2.version>2.11.1</log4j2.version>
