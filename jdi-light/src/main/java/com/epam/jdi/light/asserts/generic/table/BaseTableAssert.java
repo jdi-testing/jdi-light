@@ -23,75 +23,83 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
         element.refresh();
         return element;
     }
+    
     /**
      * Check that the table is empty
      */
     @JDIAction("Assert is '{name}' empty")
-    public A empty() {
-        jdiAssert(table().isEmpty() ? "is empty" : "is not empty", Matchers.is("is empty"));
+    public A empty(String... messages) {
+        jdiAssert(table().isEmpty() ? "is empty" : "is not empty", Matchers.is("is empty"), messages);
         return (A) this;
     }
-
+    
     /**
      * Check that the table isn't empty
      */
     @JDIAction("Assert is '{name}' not empty")
-    public A notEmpty() {
-        jdiAssert(table().isEmpty() ? "is empty" : "is not empty", Matchers.is("is not empty"));
+    public A notEmpty(String... messages) {
+        jdiAssert(table().isEmpty() ? "is empty" : "is not empty", Matchers.is("is not empty"), messages);
         return (A) this;
     }
-
+    
     /**
      * Match passed value with table size
+     *
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' size {0}")
-    public A size(Matcher<Integer> condition) {
-        jdiAssert(table().count(), condition);
+    public A size(Matcher<Integer> condition, String... messages) {
+        jdiAssert(table().count(), condition, messages);
         return (A) this;
     }
-
+    
     /**
      * Match passed value with table size
+     *
      * @param size to compare
      */
     @JDIAction("Assert that '{name}' size {0}")
-    public A size(int size) {
-        return size(Matchers.is(size));
+    public A size(int size, String... messages) {
+        return size(Matchers.is(size), messages);
     }
-
+    
     /**
      * Check that the table has the specified column
+     *
      * @param column to compare
      */
     @JDIAction("Assert that '{name}' has column'{0}'")
-    public A column(String column) {
-        jdiAssert(table().header(), hasItem(column));
+    public A column(String column, String... messages) {
+        jdiAssert(table().header(), hasItem(column), messages);
         return (A) this;
     }
-
+    
     /**
      * Check that the table has the specified columns
+     *
      * @param columns to compare
      */
     @JDIAction("Assert that '{name}' has columns '{0}'")
-    public A columns(List<String> columns) {
-        for(String column : columns)
-            column(column);
+    public A columns(List<String> columns, String... messages) {
+        for (String column : columns)
+            column(column, messages);
         return (A) this;
     }
-
+    
     /**
      * Match passed value with table columns
+     *
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' columns {0}")
-    public A columns(Matcher<Collection<? extends String>> condition) {
-        jdiAssert(table().header(), condition);
+    public A columns(Matcher<Collection<? extends String>> condition, String ... messages) {
+        jdiAssert(table().header(), condition, messages);
         return (A) this;
     }
+    
     /**
      * Check that the table has at list one specified row
+     *
      * @param matchers to compare
      */
     @JDIAction("Assert that '{name}' has at least one row that {0}}")
@@ -99,41 +107,46 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
         jdiAssert(TABLE_MATCHER.execute(table(), matchers), Matchers.is(not(Matchers.empty())));
         return (A) this;
     }
+    
     /**
      * Check that the table has at list one specified row
+     *
      * @param matcher to compare
      */
     @JDIAction("Assert that '{name}' has at least one row that {0}}")
-    public A rowThat(Single matcher, Column column) {
-        jdiAssert(TABLE_MATCHER.execute(table(), new TableMatcher[] {matcher.toTableMatcher(column)}), Matchers.is(not(Matchers.empty())));
+    public A rowThat(Single matcher, Column column, String ... messages) {
+        jdiAssert(TABLE_MATCHER.execute(table(), new TableMatcher[]{matcher.toTableMatcher(column)}), Matchers.is(not(Matchers.empty())), messages);
         return (A) this;
     }
-
+    
     /**
      * Check that the table has rows that meet expected condition
+     *
      * @param matcher to compare
      * @return Table
      */
     @JDIAction("Assert that '{name}' has rows that {0} in column {1}")
-    public A row(Matcher<String> matcher, Column column) {
-        jdiAssert(table().row(matcher, column), not(nullValue()));
+    public A row(Matcher<String> matcher, Column column, String ... messages) {
+        jdiAssert(table().row(matcher, column), not(nullValue()), messages);
         return (A) this;
     }
-
+    
     @JDIAction("Assert that '{name}' row {0} equals to other row")
-    public A rowVisualValidation(String rowName, Line row) {
-        jdiAssert(table().row(rowName).visualCompareTo(row), Matchers.is(true));
+    public A rowVisualValidation(String rowName, Line row, String ... messages) {
+        jdiAssert(table().row(rowName).visualCompareTo(row), Matchers.is(true), messages);
         return (A) this;
     }
+    
     @JDIAction("Assert that '{name}' row {0} equals to other row")
-    public A rowsVisualValidation(String keyColumn, List<Line> rows) {
+    public A rowsVisualValidation(String keyColumn, List<Line> rows, String ... messages) {
         List<Line> tableRows = table().rowsImages();
         for (int i = 0; i < table().count(); i++) {
             Line tableRow = tableRows.get(i);
-            jdiAssert(tableRow.visualCompareTo(findRow(rows, tableRow.get(keyColumn), keyColumn)), Matchers.is(true));
+            jdiAssert(tableRow.visualCompareTo(findRow(rows, tableRow.get(keyColumn), keyColumn)), Matchers.is(true), messages);
         }
         return (A) this;
     }
+    
     private Line findRow(List<Line> rows, String name, String columnName) {
         for (Line line : rows)
             if (line.get(columnName).equals(name))

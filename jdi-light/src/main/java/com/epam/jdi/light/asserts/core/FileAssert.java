@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matcher;
 
 import java.io.File;
+import java.util.Arrays;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
@@ -23,54 +24,67 @@ public class FileAssert extends BaseAssert {
     public static FileAssert assertThatFile(String fileName) {
         return new FileAssert(fileName);
     }
+    
     private File file;
-
+    
     public FileAssert(String fileName) {
         super(fileName);
         file = new File(mergePath(DOWNLOADS_DIR, fileName));
     }
+    
     /**
      * Check that file is downloaded
+     *
      * @return FileAssert
      */
     @JDIAction("Assert that file '{name}' is downloaded")
-    public FileAssert isDownloaded() {
-        assertThat(file.exists(), is(true));
+    public FileAssert isDownloaded(String... messages) {
+        String message = BaseAssert.prepareOptionalMessage(messages);
+        assertThat(message, file.exists(), is(true));
         return this;
     }
-
+    
     /**
      * Match passed value with file text
+     *
      * @param text to compare
      * @return FileAssert
      */
     @JDIAction("Assert that file '{name}' text {0}")
-    public FileAssert text(Matcher<String> text) {
+    public FileAssert text(Matcher<String> text, String... messages) {
         try {
-            assertThat(readFileToString(file, "UTF-8"), text);
+            String message = BaseAssert.prepareOptionalMessage(messages);
+            assertThat(message, readFileToString(file, "UTF-8"), text);
             return this;
         } catch (Exception ex) {
             throw exception(ex, "Error reading file");
         }
     }
-    public FileAssert text(String text) { return text(is(text)); }
-
+    
+    public FileAssert text(String text, String ... messages) {
+        return text(is(text), messages);
+    }
+    
     /**
      * Match passed value with file size
+     *
      * @param size to compare
      * @return FileAssert
      */
     @JDIAction("Assert file '{name}' size")
-    public FileAssert hasSize(Matcher<Long> size) {
-        assertThat(file.length(), size);
+    public FileAssert hasSize(Matcher<Long> size, String... messages) {
+        String message = Arrays.stream(messages).reduce("", (s, s1) -> s += " " + s1);
+        assertThat(message, file.length(), size);
         return this;
     }
-    public FileAssert hasSize(Long size) {
-        return hasSize(is(size));
+    
+    public FileAssert hasSize(Long size, String... messages) {
+        return hasSize(is(size), messages);
     }
+    
     public static void cleanupDownloads() {
         File dir = new File(DOWNLOADS_DIR);
-        for(File file : requireNonNull(dir.listFiles()))
+        for (File file : requireNonNull(dir.listFiles()))
             file.delete();
         logger.info("Remove all downloads successfully");
     }

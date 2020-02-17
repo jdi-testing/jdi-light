@@ -8,13 +8,13 @@ import com.epam.jdi.tools.func.JFunc1;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public interface CommonAssert<A> extends JAssert, HasAssert<A> {
-    A displayed();
-    A disappear();
-    A hidden();
-    A notAppear();
-    A notAppear(int timeoutSec);
-    A enabled();
-    A disabled();
+    A displayed(String ... messages);
+    A disappear(String ... messages);
+    A hidden(String ... messages);
+    A notAppear(String ... messages);
+    A notAppear(int timeoutSec, String ... messages);
+    A enabled(String ... messages);
+    A disabled(String ... messages);
 
     default A and() { return (A) this; }
     default A condition(JFunc1<A, A> t) {

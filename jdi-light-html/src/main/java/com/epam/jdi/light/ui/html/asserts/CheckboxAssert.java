@@ -15,13 +15,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox>
         implements SelectedAssert<CheckboxAssert> {
     @JDIAction("Assert that '{name}' is selected")
-    public CheckboxAssert selected() {
-        jdiAssert(getIsSelected(), Matchers.is("selected"));
+    public CheckboxAssert selected(String... messages) {
+        jdiAssert(getIsSelected(), Matchers.is("selected"), messages);
         return this;
     }
     @JDIAction("Assert that '{name}' is not selected")
-    public CheckboxAssert deselected() {
-        jdiAssert(getIsSelected(), Matchers.is("not selected"));
+    public CheckboxAssert deselected(String... messages) {
+        jdiAssert(getIsSelected(), Matchers.is("not selected"), messages);
         return this;
     }
 
