@@ -1,12 +1,12 @@
 package io.github.epam.example.complex;
 
-import io.github.com.custom.PerformanceUserRow;
+import io.github.com.custom.UserRow;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
-import static io.github.com.StaticSite.tablePagePerformance;
+import static io.github.com.StaticSite.performancePage;
 import static io.github.com.entities.TableData.GRADY_BROCK;
 import static io.github.com.pages.PerformancePage.usersData;
 import static io.github.com.pages.PerformancePage.usersDataSetup;
@@ -20,7 +20,7 @@ public class DataTableExampleTests implements TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        tablePagePerformance.shouldBeOpened();
+        performancePage.shouldBeOpened();
     }
 
     @Test
