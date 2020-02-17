@@ -1,7 +1,7 @@
 package selenium.site.sections;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import selenium.site.data.ContactInfo;
 
 import java.util.List;
@@ -11,41 +11,27 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class ContactForm {
-    @UI("#name")
-    WebElement name;
-    @UI("#last-name")
-    WebElement lastName;
-    @UI("#position")
-    WebElement position;
-    @UI("#passport-number")
-    WebElement passportNumber;
-    @UI("#passport-seria")
-    WebElement passportSeria;
-    @UI("#passport")
-    WebElement passport;
+    @FindBy(id = "name") WebElement name;
+    @FindBy(id = "last-name") WebElement lastName;
+    @FindBy(id = "position") WebElement position;
+    @FindBy(id = "passport-number") WebElement passportNumber;
+    @FindBy(id = "passport-seria") WebElement passportSeria;
+    @FindBy(id = "passport") WebElement passport;
     // Dropdown
-    @UI("#gender")
-    WebElement genderExpand;
-    @UI("#gender") List<WebElement> genderList;
-    @UI("#gender")
-    WebElement genderValue;
+    @FindBy(id = "gender") WebElement genderExpand;
+    @FindBy(id = "gender") List<WebElement> genderList;
+    @FindBy(id = "gender") WebElement genderValue;
     // Combobox
-    @UI("#religion")
-    WebElement religion;
+    @FindBy(id = "religion") WebElement religion;
     // MultiDropdown
-    @UI("#gender")
-    WebElement weatherExpand;
-    @UI("#gender") List<WebElement> weatherList;
-    @UI("#gender")
-    WebElement weatherValue;
+    @FindBy(id = "gender") WebElement weatherExpand;
+    @FindBy(id = "gender") List<WebElement> weatherList;
+    @FindBy(id = "gender") WebElement weatherValue;
 
-    @UI("#accept-conditions")
-    WebElement acceptConditions;
-    @UI("#description")
-    WebElement description;
+    @FindBy(id = "accept-conditions") WebElement acceptConditions;
+    @FindBy(id = "description") WebElement description;
 
-    @UI("#contact-form [type=submit]")
-    WebElement submit;
+    @FindBy(css = "#contact-form [type=submit]") WebElement submit;
 
     public void submit(ContactInfo contact) {
         // TextFields
