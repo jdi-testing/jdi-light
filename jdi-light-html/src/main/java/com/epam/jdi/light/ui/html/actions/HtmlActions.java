@@ -36,13 +36,7 @@ public class HtmlActions {
             Object result = stableAction(jInfo);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            addFailedMethod(jp);
-            if (aroundCount(className) == 1) {
-                logFailure(jInfo.object());
-                reverse(failedMethods);
-                logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
-            }
-            throw exception(ex, ACTION_FAILED.execute(jInfo.object(), getExceptionAround(ex, aroundCount(className) == 1)));
+            throw exceptionJdiAround(jInfo, className, ex);
         }
         finally {
             jInfo.clear();

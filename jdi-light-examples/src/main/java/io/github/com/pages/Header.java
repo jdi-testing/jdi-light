@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 public class Header extends Section {
 	@Css("form") public static LoginForm loginForm;
 	@Css(".fa-sign-out") public static WebElement logout;
-	@Css("#epam_logo") public static WebElement epamLogo;
+	@Css("#epam-logo") public static WebElement epamLogo;
 	public static WebElement userIcon;
 	@XPath("//*[@ui='label']") public static UIElement userName;
 

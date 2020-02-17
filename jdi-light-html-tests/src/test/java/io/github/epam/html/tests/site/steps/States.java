@@ -16,8 +16,7 @@ public class States {
     @Step
     public static void shouldBeLoggedIn() {
         String url = WebPage.getUrl();
-        if (!url.contains("https://jdi-testing.github.io/jdi-light/")
-            || url.contains("issue"))
+        if (!url.contains("https://jdi-testing.github.io/jdi-light/") || epamLogo.isNotExist())
             homePage.open();
         if (userName.isHidden())
             login();
@@ -46,10 +45,4 @@ public class States {
         logout.click();
     }
 
-    @Step
-    public static void shouldContactPageBeOpenedAndRefreshed(){
-        shouldBeLoggedIn();
-        contactFormPage.shouldBeOpened();
-        refresh();
-    }
 }
