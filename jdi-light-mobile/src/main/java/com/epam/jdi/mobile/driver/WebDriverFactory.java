@@ -61,12 +61,14 @@ public class WebDriverFactory {
     }
 
     private static WebDriver initDriver(DriverTypes type) {
+        System.out.println("==== INIT DRIVER ====");
         WebDriver driver = Switch(type).get(
             Value(CHROME, t -> CHROME_INFO.getDriver()),
             Value(FIREFOX, t -> FF_INFO.getDriver()),
             Value(IE, t -> IE_INFO.getDriver()),
             Value(OPERA, t -> CHROME_INFO.getDriver()),
-            Value(EDGE, t -> CHROME_INFO.getDriver())
+            Value(EDGE, t -> CHROME_INFO.getDriver()),
+            Value(APPIUM, t -> APPIUM_INFO.getDriver())
         );
         if (driver == null)
             throw exception("Unknown driver: " + type);

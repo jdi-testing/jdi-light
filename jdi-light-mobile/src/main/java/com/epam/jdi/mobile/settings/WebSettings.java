@@ -35,6 +35,7 @@ import static com.epam.jdi.mobile.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.mobile.driver.ScreenshotMaker.SCREENSHOT_STRATEGY;
 import static com.epam.jdi.mobile.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.mobile.driver.WebDriverFactory.INIT_THREAD_ID;
+import static com.epam.jdi.mobile.driver.appium.AppiumSettings.appiumCapabilities;
 import static com.epam.jdi.mobile.driver.get.DriverData.*;
 import static com.epam.jdi.mobile.driver.get.RemoteDriver.*;
 import static com.epam.jdi.mobile.driver.sauce.SauceSettings.sauceCapabilities;
@@ -209,6 +210,9 @@ public class WebSettings {
                 COMMON_CAPABILITIES = sauceCapabilities();
                 return sauceLabs();
             case "browserstack": return browserstack();
+            case "appium":
+                COMMON_CAPABILITIES = appiumCapabilities();
+                return appium();
             default: return seleniumLocalhost();
         }
     }
