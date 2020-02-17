@@ -40,6 +40,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.PageFactory.preInit;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy;
+import static com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy.*;
 import static com.epam.jdi.light.logger.AllureLoggerHelper.HTML_CODE_LOGGING;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
@@ -236,6 +237,10 @@ public class WebSettings {
                 return StringUtils::toPascalCase;
             case "UPPER_SNAKE_CASE":
                 return StringUtils::toUpperSnakeCase;
+            case "First Upper Case":
+                return StringUtils::splitCamelCase;
+            case "ALL UPPER CASE":
+                return value -> StringUtils.splitCamelCase(value).toUpperCase();
             default: return StringUtils::toKebabCase;
         }
     }
@@ -305,16 +310,14 @@ public class WebSettings {
     private static Properties getCiProperties(String path, File propertyFile){
         Properties properties = new Properties();
         try {
-            System.out.println("Property file found: " + propertyFile.getAbsolutePath());
             properties.load(new FileInputStream(propertyFile));
+            System.out.println("Property file found: " + propertyFile.getAbsolutePath());
         } catch (IOException ex) {
             throw exception("Couldn't load properties for CI Server" + path);
         }
         return properties;
     }
     private static AttachmentStrategy getAttachmentStrategy(String strategy) {
-        return strategy.toLowerCase().equals("off")
-                ? AttachmentStrategy.OFF
-                : AttachmentStrategy.ON_FAIL;
+        return strategy.toLowerCase().equals("off") ? OFF : ON_FAIL;
     }
 }

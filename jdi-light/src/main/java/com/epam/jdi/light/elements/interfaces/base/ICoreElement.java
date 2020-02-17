@@ -29,6 +29,10 @@ public interface ICoreElement extends IBaseElement {
     default boolean isNotVisible() { return core().isNotVisible(); }
     @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
     default boolean isHidden() { return core().isHidden(); }
+    @JDIAction(value = "Check that '{name}' is exist on the page", timeout = 0)
+    default boolean isExist() { return core().isExist(); }
+    @JDIAction(value = "Check that '{name}' is missed on the page", timeout = 0)
+    default boolean isNotExist() { return core().isNotExist(); }
     default void highlight(String color) { core().highlight(); }
     default void highlight() { core().highlight(); }
     default void show() { core().show(); }
