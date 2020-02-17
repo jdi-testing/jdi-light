@@ -36,7 +36,7 @@ public class ListTests implements TestsInit {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList());
-        }, () -> firstRow.getValuesFast(), 0.9, 10);
+        }, () -> firstRow.getValuesFast(), 0.8, 10);
     }
     @Test(invocationCount = repeat)
     public void getValuesValueTest() {
