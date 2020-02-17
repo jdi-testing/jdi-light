@@ -30,7 +30,7 @@ public class DataTableInteractTests implements TestsInit {
     }
     @Test
     public void lineByNameTest() {
-        MarvelUser line = usersTableSetup.line("Sergey Ivan");
+        MarvelUser line = usersSetup.line("Sergey Ivan");
         validateUserRow(line);
     }
     @Test

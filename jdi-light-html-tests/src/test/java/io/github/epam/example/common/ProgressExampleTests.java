@@ -26,14 +26,14 @@ public class ProgressExampleTests implements TestsInit {
 
     @Test
     public void valueTest() {
-        progress.is().volume(70);
-        progress.is().volume(greaterThanOrEqualTo(10));
-        progress.is().volume(lessThanOrEqualTo(100));
+        progress.is().value(70);
+        progress.is().value(greaterThanOrEqualTo(10));
+        progress.is().value(lessThanOrEqualTo(100));
     }
 
     @Test
     public void maxTest() {
-        progress.is().maxVolume(100);
+        progress.is().max(100);
     }
 
     @Test
