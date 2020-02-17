@@ -16,10 +16,13 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.smart.*;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.lang.annotation.Annotation;
@@ -31,6 +34,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.common.VisualCheckAction.IS_DISPLAYED;
+import static com.epam.jdi.light.driver.WebDriverByUtils.asTextLocator;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.updatePage;
 import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
@@ -41,6 +45,7 @@ import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
 import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -133,6 +138,22 @@ public class InitActions {
         $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.inView())),
         $("Page", aRule(PageName.class, (e, a)-> e.setPage(a.value()))),
 
+        $("Smart Id", aRule(SId.class, (e,a) -> {
+            e.setLocator("#" + toKebabCase(e.getName()));
+            e.locator.isRoot = true;
+        })),
+        $("Smart Text", aRule(SText.class, (e, a) -> {
+            e.setLocator(asTextLocator(splitCamelCase(e.getName())));
+        })),
+        $("Smart Name", aRule(SName.class, (e, a) -> {
+            e.setLocator(format("[name='%s']", toKebabCase(e.getName())));
+        })),
+        $("Smart", aRule(Smart.class, (e, a) -> {
+            e.setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName())));
+        })),
+        $("Smart Class", aRule(SClass.class, (e, a) -> {
+            e.setLocator(format(".%s", toKebabCase(e.getName())));
+        })),
         $("ListUI", aRule(UI.class, (e,a,f)-> {
             UI[] uis = f.getAnnotationsByType(UI.class);
             if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
