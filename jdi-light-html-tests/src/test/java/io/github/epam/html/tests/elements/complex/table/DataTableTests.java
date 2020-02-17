@@ -74,7 +74,7 @@ public class DataTableTests implements TestsInit {
     }
     @Test
     public void dataColumnNameTest() {
-        assertEquals(usersSetup.dataRow("Sergey Ivan"), SPIDER_MAN);
+        assertEquals(usersTableSetup.dataRow("Sergey Ivan"), SPIDER_MAN);
     }
     @Test
     public void dataFilterTest() {

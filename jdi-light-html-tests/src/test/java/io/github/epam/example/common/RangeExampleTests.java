@@ -19,7 +19,7 @@ public class RangeExampleTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        volume.setVolume(90);
+        volume.setRangeValue(90);
     }
 
     @Test
@@ -36,22 +36,22 @@ public class RangeExampleTests implements TestsInit {
 
     @Test
     public void checkRangeVolumeTest() {
-        disabledRange.assertThat().volume(50);
-        volume.assertThat().volume(90);
-        volume.is().volume(greaterThanOrEqualTo(10));
-        volume.is().volume(lessThanOrEqualTo(100));
+        disabledRange.assertThat().value(50);
+        volume.assertThat().value(90) ;
+        volume.is().value(greaterThanOrEqualTo(10)) ;
+        volume.is().value(lessThanOrEqualTo(100));
     }
 
     @Test
     public void checkMinTest() {
-        volume.assertThat().minVolume(10);
-        volume.assertThat().minVolume(is(10));
+        volume.assertThat().min(10);
+        volume.assertThat().min(is(10));
     }
 
     @Test
     public void checkMaxTest() {
-        volume.assertThat().maxVolume(100);
-        volume.assertThat().maxVolume(is(100));
+        volume.assertThat().max(100);
+        volume.assertThat().max(is(100));
     }
 
     @Test
@@ -62,8 +62,8 @@ public class RangeExampleTests implements TestsInit {
 
     @Test
     public void setVolumeTest() {
-        volume.setVolume(10);
-        volume.assertThat().volume(10);
+        volume.setRangeValue(10);
+        volume.assertThat().value(10);
     }
 
     @Test

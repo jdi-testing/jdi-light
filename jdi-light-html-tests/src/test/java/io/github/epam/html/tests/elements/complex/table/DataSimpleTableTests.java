@@ -35,21 +35,21 @@ public class DataSimpleTableTests implements TestsInit {
 
     @Test
     public void tableParamsTest() {
-        assertEquals(usersData.size(), 4);
-        assertEquals(usersData.count(), 6);
-        assertEquals(usersData.header(), asList("Number", "Type", "User", "Description"));
+        assertEquals(usersDataTable.size(), 4);
+        assertEquals(usersDataTable.count(), 6);
+        assertEquals(usersDataTable.header(), asList("Number", "Type", "User", "Description"));
     }
 
     @Test
     public void previewTest() {
-        String value = usersData.preview();
+        String value = usersDataTable.preview();
         assertEquals(value.replaceAll(" ", ""),
             "NumberTypeUserDescription1AdminUserManagerRomanWolverineVip2AdminUserManagerSergeyIvanSpiderManVip3AdminUserManagerVladzimirPunisherVip4AdminUserManagerHelenBennettCaptainAmericasomedescriptionVip5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
     }
 
     @Test
     public void valueTest() {
-        String value = usersData.getValue().replaceAll("\r", "");
+        String value = usersDataTable.getValue().replaceAll("\r", "");
         assertEquals(value,
         "||X||Number|Type|User|Description||\n" +
             "||1||1|Admin\\n User\\n Manager|Roman|Wolverine\\nVip||\n" +
@@ -61,69 +61,69 @@ public class DataSimpleTableTests implements TestsInit {
     }
     @Test
     public void dataColumnTestIndex() {
-        assertEquals(usersData.dataRow(2), SPIDER_MAN_SIMPLE);
+        assertEquals(usersDataTable.dataRow(2), SPIDER_MAN_SIMPLE);
     }
     @Test
     public void dataFilterTest() {
-        assertEquals(usersData.dataRow(d -> d.user.contains("Ivan")), SPIDER_MAN_SIMPLE);
+        assertEquals(usersDataTable.dataRow(d -> d.user.contains("Ivan")), SPIDER_MAN_SIMPLE);
     }
     @Test
     public void allDataFilterTest() {
-        List<MarvelUserSimple> filteredData = usersData.dataRows(d -> d.user.contains("Ivan"));
+        List<MarvelUserSimple> filteredData = usersDataTable.dataRows(d -> d.user.contains("Ivan"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), SPIDER_MAN_SIMPLE);
     }
     @Test
     public void commonMatchersTest() {
-        usersData.is().displayed();
-        usersData.has().size(6);
-        usersData.assertThat().size(greaterThan(3));
-        usersData.is().notEmpty().size(lessThanOrEqualTo(6));
+        usersDataTable.is().displayed();
+        usersDataTable.has().size(6);
+        usersDataTable.assertThat().size(greaterThan(3));
+        usersDataTable.is().notEmpty().size(lessThanOrEqualTo(6));
     }
     // Compare Matchers
     @Test
     public void rowMatcherTest() {
-        usersData.has().row(d -> d.user.contains("Ivan"));
+        usersDataTable.has().row(d -> d.user.contains("Ivan"));
     }
     @Test
     public void rowDataMatcherTest() {
-        usersData.has().row(SPIDER_MAN_SIMPLE);
+        usersDataTable.has().row(SPIDER_MAN_SIMPLE);
     }
     @Test
     public void rowTableMatcherSingleTest() {
-        usersData.has().rowThat(Single.hasValue("Sergey Ivan"), inColumn("User"));
+        usersDataTable.has().rowThat(Single.hasValue("Sergey Ivan"), inColumn("User"));
     }
     @Test
     public void rowTableMatcherTest() {
-        usersData.has().rowThat(
+        usersDataTable.has().rowThat(
             containsValue("User", inColumn("Type")),
             hasValue("Sergey Ivan", inColumn("User")));
     }
     @Test
     public void rowsAllTest() {
-        usersData.assertThat().all().rows(d -> d.user.length() > 4);
+        usersDataTable.assertThat().all().rows(d -> d.user.length() > 4);
     }
     @Test
     public void noRowsTest() {
-        usersData.assertThat().no().rows(d -> isBlank(d.user));
+        usersDataTable.assertThat().no().rows(d -> isBlank(d.user));
     }
     @Test
     public void atLeastTest() {
-        usersData.assertThat().atLeast(3).rows(d -> d.type.contains("User"));
+        usersDataTable.assertThat().atLeast(3).rows(d -> d.type.contains("User"));
     }
     @Test
     public void exactMatcherTest() {
-        usersData.assertThat().exact(2).rows(d -> d.user.contains("R"));
+        usersDataTable.assertThat().exact(2).rows(d -> d.user.contains("R"));
     }
     @Test
     public void rowDataExactMatcherTest() {
-        usersData.assertThat().exact(1).rows(SPIDER_MAN_SIMPLE);
+        usersDataTable.assertThat().exact(1).rows(SPIDER_MAN_SIMPLE);
     }
     //
 
     @Test
     public void tableChainTest() {
-        usersData.assertThat()
+        usersDataTable.assertThat()
             .displayed().size(6).size(greaterThan(3)).notEmpty()
             .row(d -> d.user.contains("Ivan"))
             .all().rows(d -> d.user.length() > 4)

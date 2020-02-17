@@ -48,31 +48,31 @@ public class DataTableTests extends StaticTestsInit {
     }
     @Test
     public void filterDataTest() {
-        assertEquals(usersData.dataRow(2), GRADY_BROCK);
-        assertEquals(usersData.dataRow("Grady Brock"), GRADY_BROCK);
-        assertEquals(usersData.dataRow(d -> d.name.contains("Brock")), GRADY_BROCK);
-        usersData.assertThat().row(d -> d.equals(GRADY_BROCK));
-        usersData.has().row(GRADY_BROCK);
+        assertEquals(usersDataTable.dataRow(2), GRADY_BROCK);
+        assertEquals(usersDataTable.dataRow("Grady Brock"), GRADY_BROCK);
+        assertEquals(usersDataTable.dataRow(d -> d.name.contains("Brock")), GRADY_BROCK);
+        usersDataTable.assertThat().row(d -> d.equals(GRADY_BROCK));
+        usersDataTable.has().row(GRADY_BROCK);
         // This is just useful example for small tables.
         // Execution takes too much time in case of 400 rows
         //
-        //List<UserInfo> filteredData = usersData.dataRows(d -> d.name.contains("Brock"));
+        //List<UserInfo> filteredData = usersDataTable.dataRows(d -> d.name.contains("Brock"));
         //assertEquals(filteredData.size(), 1);
         //assertEquals(filteredData.get(0), GRADY_BROCK);
     }
 
     @Test
     public void filterLinesTest() {
-        UserRow line =  usersData.line(2);
+        UserRow line =  usersDataTable.line(2);
         validateUserRow(line);
-        line =  usersData.line("Grady Brock");
+        line =  usersDataTable.line("Grady Brock");
         validateUserRow(line);
-        line =  usersData.line(d -> d.name.contains("Brock"));
+        line =  usersDataTable.line(d -> d.name.contains("Brock"));
         validateUserRow(line);
         // This is just useful example for small tables.
         // Execution takes too much time in case of 400 rows
         //
-        //List<UserRow> filteredData = usersData.lines(d -> d.name.contains("Brock"));
+        //List<UserRow> filteredData = usersDataTable.lines(d -> d.name.contains("Brock"));
         //assertEquals(filteredData.size(), 1);
         //validateUserRow(filteredData.get(0));
     }
