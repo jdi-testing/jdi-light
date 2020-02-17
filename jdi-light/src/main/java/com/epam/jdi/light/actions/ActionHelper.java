@@ -13,7 +13,6 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
-import com.epam.jdi.light.logger.AllureLoggerHelper;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.JAction1;
@@ -25,12 +24,10 @@ import io.qameta.allure.Step;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.openqa.selenium.logging.LogEntries;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
@@ -39,8 +36,9 @@ import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreenOnFailure;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.logger.AllureLoggerHelper.failStep;
-import static com.epam.jdi.light.logger.AllureLoggerHelper.takeHtmlCodeOnFailure;
+import static com.epam.jdi.light.logger.AllureLogger.*;
+import static com.epam.jdi.light.logger.AllureLogger.failStep;
+import static com.epam.jdi.light.logger.AllureLogger.takeHtmlCodeOnFailure;
 import static com.epam.jdi.light.logger.LogLevels.ERROR;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
@@ -109,10 +107,11 @@ public class ActionHelper {
             throw exception(ex, "Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName());
         }
     }
-    public static void beforeStepAction(ProceedingJoinPoint jp) {
+    public static void beforeStepAction(ActionObject jInfo) {
+        ProceedingJoinPoint jp = jInfo.jp();
         String message = getBeforeLogString(jp);
         logger.toLog(message, logLevel(jp));
-        AllureLoggerHelper.startStep(Integer.toString(jp.hashCode()), message);
+        jInfo.stepUId = startStep(message);
         if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION) {
             Object obj = jp.getThis();
             if (obj == null) {
@@ -135,13 +134,14 @@ public class ActionHelper {
             }
         }
     }
-    public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = ActionHelper::beforeStepAction;
-    public static void beforeJdiAction(ProceedingJoinPoint jp) {
+    public static JAction1<ActionObject> BEFORE_STEP_ACTION = ActionHelper::beforeStepAction;
+    public static void beforeJdiAction(ActionObject jp) {
         BEFORE_STEP_ACTION.execute(jp);
         processNewPage(jp);
     }
-    public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = ActionHelper::beforeJdiAction;
-    public static Object afterStepAction(ProceedingJoinPoint jp, Object result) {
+    public static JAction1<ActionObject> BEFORE_JDI_ACTION = ActionHelper::beforeJdiAction;
+    public static Object afterStepAction(ActionObject jInfo, Object result) {
+        ProceedingJoinPoint jp = jInfo.jp();
         if (!logResult(jp)) return result;
         LogLevels logLevel = logLevel(jp);
         if (result == null || isInterface(getJpClass(jp), JAssert.class))
@@ -152,13 +152,13 @@ public class ActionHelper {
                 text = text.substring(0, CUT_STEP_TEXT) + "...";
             logger.toLog(">>> " + text, logLevel);
         }
-        AllureLoggerHelper.passStep(randomUUID().toString());
+        passStep(jInfo.stepUId);
         if (getJpMethod(jp).getName().equals("open"))
             BEFORE_NEW_PAGE.execute(getPage(jp.getThis()));
         TIMEOUT.reset();
         return result;
     }
-    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
+    public static JFunc2<ActionObject, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
     static boolean logResult(ProceedingJoinPoint jp) {
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class)) return false;
@@ -173,10 +173,10 @@ public class ActionHelper {
                 ? jp.getThis().getClass()
                 : jp.getSignature().getDeclaringType();
     }
-    public static Object afterJdiAction(ProceedingJoinPoint jp, Object result) {
-        return AFTER_STEP_ACTION.execute(jp, result);
+    public static Object afterJdiAction(ActionObject jInfo, Object result) {
+        return AFTER_STEP_ACTION.execute(jInfo, result);
     }
-    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_JDI_ACTION = ActionHelper::afterJdiAction;
+    public static JFunc2<ActionObject, Object, Object> AFTER_JDI_ACTION = ActionHelper::afterJdiAction;
     //region Private
     public static String getBeforeLogString(ProceedingJoinPoint jp) {
         String actionName = GET_ACTION_NAME.execute(jp);
@@ -187,11 +187,11 @@ public class ActionHelper {
                 $("element", getElementName(jp))));
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
-    public static void processNewPage(JoinPoint jp) {
+    public static void processNewPage(ActionObject jInfo) {
         if (CHECK_AFTER_OPEN == PageChecks.NONE && VISUAL_PAGE_STRATEGY == VisualCheckPage.NONE)
             return;
         getWindows();
-        Object element = jp.getThis();
+        Object element = jInfo.jp().getThis();
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
             WebPage page = getPage(element);
             String currentPage = getCurrentPage();
@@ -205,11 +205,12 @@ public class ActionHelper {
         }
     }
     public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
-    public static void logFailure(Object el) {
-        logger.toLog(">>> " + el.toString(), ERROR);
+    public static void logFailure(ActionObject jInfo) {
+        logger.toLog(">>> " + jInfo.object().toString(), ERROR);
         String screenName = takeScreenOnFailure();
         String htmlSnapshot = takeHtmlCodeOnFailure();
-        failStep(randomUUID().toString(), screenName, htmlSnapshot);
+        //LogEntries requests = jInfo.element().base().driver().manage().logs().get("performance");
+        failStep(jInfo.stepUId, screenName, htmlSnapshot, "");
     }
     static WebPage getPage(Object element) {
         if (!isClass(element.getClass(), DriverBase.class))
@@ -319,7 +320,7 @@ public class ActionHelper {
     public static RuntimeException exceptionJdiAround(ActionObject jInfo, String className, Throwable ex) {
         addFailedMethod(jInfo.jp());
         if (aroundCount(className) == 1) {
-            logFailure(jInfo.object());
+            logFailure(jInfo);
             reverse(failedMethods);
             logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
         }

@@ -32,9 +32,9 @@ public class ActionProcessor {
             failedMethods.clear();
             if (aroundCount(className) > 1)
                 return defaultAction(jInfo);
-            BEFORE_JDI_ACTION.execute(jp);
+            BEFORE_JDI_ACTION.execute(jInfo);
             Object result = stableAction(jInfo);
-            return AFTER_JDI_ACTION.execute(jp, result);
+            return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
             throw exceptionJdiAround(jInfo, className, ex);
         }
@@ -45,9 +45,10 @@ public class ActionProcessor {
     @Around("stepPointcut()")
     public Object stepAround(ProceedingJoinPoint jp) {
         try {
-            BEFORE_STEP_ACTION.execute(jp);
+            ActionObject jInfo = new ActionObject(jp);
+            BEFORE_STEP_ACTION.execute(jInfo);
             Object result = jp.proceed();
-            return AFTER_STEP_ACTION.execute(jp, result);
+            return AFTER_STEP_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
             Object element = jp.getThis() != null ? jp.getThis() : new Object();
             throw exception(ex, ACTION_FAILED.execute(element, safeException(ex)));

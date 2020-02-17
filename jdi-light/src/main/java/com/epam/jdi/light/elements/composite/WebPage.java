@@ -12,6 +12,7 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.logging.LogEntries;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -282,6 +283,9 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction
     public static String getHtml() {
         return getDriver().getPageSource();
+    }
+    public static LogEntries getHttpRequests() {
+        return getDriver().manage().logs().get("performance");
     }
 
     /**

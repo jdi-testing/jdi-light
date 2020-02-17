@@ -9,6 +9,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static com.epam.jdi.light.actions.ActionHelper.getJdiAction;
 import static com.epam.jdi.light.actions.ActionHelper.getJpClass;
@@ -25,6 +26,7 @@ public class ActionObject {
     }
     public ProceedingJoinPoint jp() { return jp; }
     private ProceedingJoinPoint jp;
+    public String stepUId = "";
     public Object object() { return obj.get(); }
     private CacheValue<Object> obj = new CacheValue<>(
         () -> jp.getThis() != null ? jp.getThis() : new Object());

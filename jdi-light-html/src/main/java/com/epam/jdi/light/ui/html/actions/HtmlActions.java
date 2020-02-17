@@ -27,9 +27,9 @@ public class HtmlActions {
             failedMethods.clear();
             if (aroundCount(className) > 1)
                 return defaultAction(jInfo);
-            BEFORE_JDI_ACTION.execute(jp);
+            BEFORE_JDI_ACTION.execute(jInfo);
             Object result = stableAction(jInfo);
-            return AFTER_JDI_ACTION.execute(jp, result);
+            return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
             throw exceptionJdiAround(jInfo, className, ex);
         }
