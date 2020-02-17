@@ -35,7 +35,6 @@ import static com.epam.jdi.mobile.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.mobile.driver.ScreenshotMaker.SCREENSHOT_STRATEGY;
 import static com.epam.jdi.mobile.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.mobile.driver.WebDriverFactory.INIT_THREAD_ID;
-import static com.epam.jdi.mobile.driver.appium.AppiumSettings.appiumCapabilities;
 import static com.epam.jdi.mobile.driver.get.DriverData.*;
 import static com.epam.jdi.mobile.driver.get.RemoteDriver.*;
 import static com.epam.jdi.mobile.driver.sauce.SauceSettings.sauceCapabilities;
@@ -113,7 +112,6 @@ public class WebSettings {
         return DOMAIN != null && DOMAIN.contains("://");
     }
     public static String TEST_GROUP = "";
-    // TODO multi properties example
     public static String TEST_PROPERTIES_PATH = "test.properties";
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
     public static String useDriver(JFunc<WebDriver> driver) {
@@ -210,9 +208,6 @@ public class WebSettings {
                 COMMON_CAPABILITIES = sauceCapabilities();
                 return sauceLabs();
             case "browserstack": return browserstack();
-            case "appium":
-                COMMON_CAPABILITIES = appiumCapabilities();
-                return appium();
             default: return seleniumLocalhost();
         }
     }

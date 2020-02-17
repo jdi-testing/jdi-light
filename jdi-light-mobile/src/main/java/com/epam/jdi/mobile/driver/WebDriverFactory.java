@@ -61,7 +61,6 @@ public class WebDriverFactory {
     }
 
     private static WebDriver initDriver(DriverTypes type) {
-        System.out.println("==== INIT DRIVER ====");
         WebDriver driver = Switch(type).get(
             Value(CHROME, t -> CHROME_INFO.getDriver()),
             Value(FIREFOX, t -> FF_INFO.getDriver()),

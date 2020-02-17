@@ -21,11 +21,6 @@ public class RemoteDriver {
     public static String browserstack() {
         return browserstack(getenv("USERNAME"), getenv("ACCESS_KEY"));
     }
-    //TODO Remove hardcode
-    public static String appium() {
-        return getRemoteURL("ttp://0.0.0.0:4723/wd/hub");
-    }
-
     public static String browserstack(String userName, String accessKey) {
         return getRemoteURL(format("https://%s:%s/@hub-cloud.browserstack.com/", userName, accessKey));
     }
@@ -40,7 +35,7 @@ public class RemoteDriver {
                     url += "wd/hub/";
                 return url;
             }
-            throw exception("You run tests in Remote mode, please specify 'remote.url' in test.properties");
+            throw exception("You run tests in Remote mode, please specify 'driver.remote.url' in test.properties");
         } catch(Exception ex) { throw exception("Can't get remote Url: " + safeException(ex)); }
     }
 }

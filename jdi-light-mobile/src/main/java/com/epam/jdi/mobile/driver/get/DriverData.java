@@ -10,7 +10,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.epam.jdi.mobile.common.Exceptions.safeException;
-import static com.epam.jdi.mobile.driver.appium.AppiumSettings.appiumCapabilities;
+import static com.epam.jdi.mobile.driver.WebDriverFactory.isRemote;
 import static com.epam.jdi.mobile.driver.get.OsTypes.*;
 import static com.epam.jdi.mobile.driver.get.Platform.X32;
 import static com.epam.jdi.mobile.settings.WebSettings.logger;
@@ -105,12 +104,14 @@ public class DriverData {
         List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
         if (groups.size() == 2)
             driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
-        /*else {
-            if (getOs().equals(MAC))
-                maximizeScreen(driver);
-            else
-                driver.manage().window().maximize();
-        }*/
+        else {
+            if(!isRemote()) {
+                if (getOs().equals(MAC))
+                    maximizeScreen(driver);
+                else
+                    driver.manage().window().maximize();
+            }
+        }
         return driver;
     };
 
@@ -243,12 +244,6 @@ public class DriverData {
         // Capabilities from settings
         CAPABILITIES_FOR_IE.forEach(cap::setCapability);
     };
-
-    public static JAction1<DesiredCapabilities> APPIUM_OPTIONS = cap -> {
-        COMMON_CAPABILITIES = appiumCapabilities();
-        COMMON_CAPABILITIES.forEach(cap::setCapability);
-    };
-
     public static JAction1<EdgeOptions> EDGE_OPTIONS = cap -> {
 
     };

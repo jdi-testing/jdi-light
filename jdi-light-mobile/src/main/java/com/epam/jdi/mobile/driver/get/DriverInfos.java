@@ -33,15 +33,15 @@ public class DriverInfos {
         }
     );
     public static DriverInfo APPIUM_INFO = new DriverInfo()
-            .set(d -> {
-                        d.type = APPIUM;
-                        DesiredCapabilities capabilities = new DesiredCapabilities();
-                        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554");
-                        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-                        capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
-                        d.initCapabilities = capabilities;
-                        //d.capabilities = c -> getCapabilities(c, cap -> APPIUM_OPTIONS.execute((DesiredCapabilities) cap)); //This piece of code doesn't work!!!
-                        d.getDriver = c -> new AppiumDriver<>(capabilities);
+        .set(d -> {
+            d.type = APPIUM;
+            //TODO Remove hardcode in creating capabilities
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554");
+            capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+            capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+            d.initCapabilities = capabilities;
+            d.getDriver = c -> new AppiumDriver<>(capabilities);
                     }
             );
     public static DriverInfo FF_INFO = new DriverInfo()
