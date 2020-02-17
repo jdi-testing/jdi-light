@@ -12,7 +12,7 @@
     <properties>
         <!-- driver>chrome driver -->
         <driver>firefox</driver>
-        <allure.testng>2.7.0</allure.testng>
+        <allure.testng>2.13.1</allure.testng>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.1</aspectj.version>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.0.0-beta1</version>
+            <version>6.14.2</version>
         </dependency>
     </dependencies>
 
