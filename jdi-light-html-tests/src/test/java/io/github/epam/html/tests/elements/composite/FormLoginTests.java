@@ -4,22 +4,12 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-import static com.epam.jdi.light.common.FormFilters.ALL;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.elements.init.UIFactory.loginAs;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.StaticSite.homePage;
-import static io.github.com.entities.Users.*;
-import static io.github.com.pages.ContactFormPage.main;
+import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
-import static io.github.com.pages.LogSidebar.lastLogEntry;
-import static io.github.epam.html.tests.site.steps.States.*;
-import static org.hamcrest.Matchers.containsString;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedOut;
 
 public class FormLoginTests implements TestsInit {
     @BeforeMethod

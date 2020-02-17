@@ -10,7 +10,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -75,10 +74,11 @@ public class WebPage extends DriverBase implements PageObject {
     }
     public WebPage(String url, String title) { this(url); this.title = title; }
     public static void openUrl(String url) {
+        init();
         new WebPage(url).open();
     }
     public static void openSite() {
-        preInit();
+        init();
         new WebPage(getDomain()).open();
     }
     public static void openSite(Class<?> site) {
@@ -144,7 +144,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Open '{name}'(url={0})")
     private void open(String url) {
-        preInit();
+        init();
         CacheValue.reset();
         driver().navigate().to(url);
         setCurrentPage(this);

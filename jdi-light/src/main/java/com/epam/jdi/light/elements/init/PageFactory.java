@@ -12,8 +12,6 @@ import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.settings.WebSettings;
-import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -33,6 +31,7 @@ import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
+import static com.epam.jdi.light.settings.WebSettings.init;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.*;
@@ -48,27 +47,12 @@ import static java.util.Arrays.asList;
  */
 public class PageFactory {
     // region initSite
-    public static MapArray<String, JAction> PRE_INIT =
-        new MapArray<>("WebSettings", WebSettings::init);
-    public static boolean initialized = false;
-    public static void preInit() {
-        if (PRE_INIT == null) return;
-        if (!initialized) {
-            for (Pair<String, JAction> action : PRE_INIT)
-                try {
-                    action.value.execute();
-                } catch (Exception ex) {
-                    throw exception(ex, "Preinit '%s' failed. Please correct PageFactory.PRE_INIT function", action.key);
-                }
-            initialized = true;
-        }
-    }
     public static void initSite(Class<?> site) {
-        preInit();
+        init();
         initSite(site, DRIVER_NAME);
     }
     public static void initSite(Class<?> site, String driverName) {
-        preInit();
+        init();
         SiteInfo info = new SiteInfo(driverName)
             .set(s->s.parentClass = site);
         initialize(site, info);
@@ -179,7 +163,7 @@ public class PageFactory {
             }
         else
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
-                    "Maybe you can solve you problem by adding HtmlSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
+                    "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
                     "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
                 info.name());
     }
@@ -227,7 +211,7 @@ public class PageFactory {
 
     // region Selenium PageFactory
     public static void initElements(JFunc<WebDriver> driver, Object... pages) {
-        preInit();
+        init();
         useDriver(driver);
         initElements(pages);
     }
@@ -235,11 +219,11 @@ public class PageFactory {
         initSite(site);
     }
     public static void initElements(Object page) {
-        preInit();
+        init();
         initPage(page);
     }
     public static void initElements(Object... pages) {
-        preInit();
+        init();
         for (Object page : pages) {
             initPage(page);
         }

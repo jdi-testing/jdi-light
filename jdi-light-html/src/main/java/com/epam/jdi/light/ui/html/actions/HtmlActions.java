@@ -1,17 +1,12 @@
 package com.epam.jdi.light.ui.html.actions;
 
 import com.epam.jdi.light.actions.ActionObject;
-import com.epam.jdi.tools.PrintUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
-import static com.epam.jdi.light.actions.ActionProcessor.*;
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static java.util.Collections.reverse;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

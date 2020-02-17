@@ -7,6 +7,7 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.tools.PropReader;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.StringUtils;
@@ -37,10 +38,10 @@ import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
-import static com.epam.jdi.light.elements.init.PageFactory.preInit;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy;
-import static com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy.*;
+import static com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy.OFF;
+import static com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy.ON_FAIL;
 import static com.epam.jdi.light.logger.AllureLoggerHelper.HTML_CODE_LOGGING;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
@@ -68,7 +69,7 @@ public class WebSettings {
     public static String getDomain() {
         if (DOMAIN != null)
             return DOMAIN;
-        preInit();
+        init();
         return "No Domain Found. Use test.properties or WebSettings.DOMAIN";
     }
     public static void setDomain(String domain) {
@@ -108,7 +109,7 @@ public class WebSettings {
     public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
-        preInit();
+        init();
         return DOMAIN != null && DOMAIN.contains("://");
     }
     public static String TEST_GROUP = "";
@@ -142,8 +143,9 @@ public class WebSettings {
             throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
         });
     };
-
+    private static boolean initialized = false;
     public static synchronized void init() {
+        if (initialized) return;
         getProperties(TEST_PROPERTIES_PATH);
         fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
         fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
@@ -193,7 +195,8 @@ public class WebSettings {
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         if (SMART_SEARCH_LOCATORS.size() == 0)
-            SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
+            SMART_SEARCH_LOCATORS.add("#%s");
+        initialized = true;
     }
 
     private static ElementArea getClickType(String type) {
@@ -252,8 +255,11 @@ public class WebSettings {
         } catch (Exception ignore) { }
         if (isEmpty(path))
             path = defaultPath;
+        Properties properties = new PropReader(path).getProperties();
+        if (properties.isEmpty())
+            return;
         try {
-            setCapabilities.execute(getProperties(path));
+            setCapabilities.execute(properties);
         } catch (Exception ignore) { }
     }
 

@@ -5,7 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Quotes;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
-import static org.openqa.selenium.support.ui.Quotes.*;
+import static org.openqa.selenium.support.ui.Quotes.escape;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import io.github.epam.entities.User;
 import org.openqa.selenium.WebElement;
 
