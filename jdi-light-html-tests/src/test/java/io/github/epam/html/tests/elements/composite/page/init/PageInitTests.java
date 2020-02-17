@@ -21,10 +21,16 @@ public class PageInitTests {
     public void before() {
         if (first) {
             openUrl(JDI_DOMAIN);
-            $("#user-icon").click();
             first = false;
-        } else {
+        }
+        if ($("#user-name").isDisplayed()) {
+            if (!$(".fa-sign-out").isDisplayed()) {
+                $("#user-icon").click();
+            }
             $(".fa-sign-out").click();
+        }
+        if (!$("form #name").isDisplayed()) {
+            $("#user-icon").click();
         }
     }
     @Test
