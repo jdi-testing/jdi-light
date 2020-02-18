@@ -173,18 +173,18 @@ public class WebPage extends DriverBase implements PageObject {
         if (!hasRunDrivers())
             throw exception("Page '%s' is not opened: Driver is not run", toString());
         String result = Switch(checkUrlType).get(
-                Value(NONE, ""),
-                Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
-                Value(MATCH, t -> !url().match() ? "Url '%s' doesn't match to '%s'" : ""),
-                Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
+            Value(NONE, ""),
+            Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
+            Value(MATCH, t -> !url().match() ? "Url '%s' doesn't match to '%s'" : ""),
+            Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
         );
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getCurrentUrl(), checkUrl));
         result = Switch(checkTitleType).get(
-                Value(NONE, ""),
-                Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
-                Value(MATCH, t -> !title().match() ? "Title '%s' doesn't match to '%s'" : ""),
-                Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
+            Value(NONE, ""),
+            Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
+            Value(MATCH, t -> !title().match() ? "Title '%s' doesn't match to '%s'" : ""),
+            Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
         );
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
@@ -419,7 +419,7 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean check() {
             String value = actual.get();
-            logger.toLog(format("Check that page %s(%s) equals to '%s'", what, value, equals));
+            //logger.toLog(format("Check that page %s(%s) equals to '%s'", what, value, equals));
             return equals == null
                     || equals.equals("")
                     || value.equals(equals);
@@ -430,7 +430,7 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean match() {
             String value = actual.get();
-            logger.toLog(format("Check that page %s(%s) matches to '%s'", what, value, equals));
+            //logger.toLog(format("Check that page %s(%s) matches to '%s'", what, value, equals));
             return equals == null
                     || equals.equals("")
                     || value.matches(equals);
@@ -441,7 +441,7 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean contains() {
             String value = actual.get();
-            logger.toLog(format("Check that page %s(%s) contains '%s'", what, value, equals));
+            //logger.toLog(format("Check that page %s(%s) contains '%s'", what, value, equals));
             return equals == null || equals.equals("") || value.contains(equals);
         }
     }
@@ -453,7 +453,7 @@ public class WebPage extends DriverBase implements PageObject {
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
             visualWindowCheck();
         getHttpRequests();
-        logger.toLog("Page '%s' opened" + page.getName());
+        logger.toLog("Page '"+page.getName()+"' opened");
         TIMEOUT.set(PAGE_TIMEOUT.get());
     }
     public static JAction1<WebPage> BEFORE_NEW_PAGE = WebPage::beforeNewPage;
