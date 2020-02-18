@@ -94,7 +94,17 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
 
     public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
     public WebList headerUI() {
-        return $$(headerLocator, this).setName(getName() + " header");
+        WebList header = $$(headerLocator, this).setName(getName() + " header");
+        if (header.size() == 0) {
+            header = getRowByIndex(1);
+            if (header.size() > 0) {
+                this.header.setRule(() -> getRowByIndex(1).values());
+                this.size.setRule(() -> getRowByIndex(1).size());
+            } else {
+                throw exception("Can't find header using locator '%s'. Please specify JTable.headers locator or set JTable.header list");
+            }
+        }
+        return header.setName(getName() + " header");
     }
     protected List<String> getHeader() {
         return headerUI().values();
@@ -298,7 +308,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         return $$(fillByTemplate(columnLocator, getColumnIndex(colNum)), this).noValidation();
     }
     protected UIElement getCell(int colNum, int rowNum) {
-        return $(fillByMsgTemplate(cellLocator, getColumnIndex(colNum), getRowIndex(rowNum), this));
+        return $(fillByMsgTemplate(cellLocator, getColumnIndex(colNum), getRowIndex(rowNum)), this);
     }
 
     protected Boolean headerIsRow = null;
@@ -626,7 +636,6 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     public String cell(int colNum, String rowName) {
         validateColumnIndex(colNum);
         return webRow(rowName).get(colNum-1).getText();
-        //return cell(colNum, getRowIndexByName(rowName));
     }
 
     /**
@@ -638,7 +647,6 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     @JDIAction("Get cell({0}, {1}) from '{name}' table")
     public String cell(String colName, String rowName) {
         return cell(getColIndexByName(colName), rowName);
-        //return cell(getColIndexByName(colName), getRowIndexByName(rowName));
     }
     public static JFunc1<String, String> TRIM_VALUE =
             el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "\\\\n");
@@ -661,12 +669,10 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
     @JDIAction("Get '{name}' table value")
     public String getValue() {
         getTableJs();
-        //getTable();
         String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
         for (int i = 1; i <= count(); i++) {
             List<String> row = cellsValues.get().get(i+"").values();
             value += "||" + i + "||" + print(map(row, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
-            //value += "||" + i + "||" + print(map(getLineMap(row(i)).values(), TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         }
         return value;
     }

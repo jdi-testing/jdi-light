@@ -26,6 +26,9 @@ public class DataListOptions extends UIListBase<UISelectAssert> implements IsCom
             .setup(e->e.noValidation().setName(getName() + "list"))
             .setUIElementName(VALUE);
     }
+    public String value() {
+        return uiElement.attr("value");
+    }
     /**
     *
      * Selects the value
@@ -44,15 +47,6 @@ public class DataListOptions extends UIListBase<UISelectAssert> implements IsCom
     @JDIAction("Select '{0}' for '{name}'") @Override
     public void select(int index) {
         setText(list().elements(index).keys().get(index-1));
-    }
-    /**
-    *
-     * Gets selected option
-     * @return String
-     **/
-    @JDIAction("Get selected in '{name}' option") @Override
-    public String selected() {
-        return uiElement.attr("value");
     }
     /**
     *

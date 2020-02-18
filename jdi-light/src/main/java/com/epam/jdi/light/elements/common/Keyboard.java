@@ -60,14 +60,14 @@ public class Keyboard {
     }
     private static int getKeyCode(String key) {
         List<Field> keys = getKeys();
-        Field keyField = first(keys, f -> getKeyName(f).equals(key.toLowerCase()));
+        Field keyField = first(keys, f -> getKeyName(f).equals(key.toLowerCase().replaceAll(" ", "").replaceAll("_", "")));
         if (keyField != null)
             return (int) ReflectionUtils.getValueField(keyField, null);
         throw exception("Unknown key '%s'", key);
     }
     private static String getKeyName(Field field) {
         int underscore = field.getName().indexOf('_');
-        return field.getName().substring(underscore+1).toLowerCase();
+        return field.getName().substring(underscore+1).toLowerCase().replaceAll(" ", "").replaceAll("_", "");
     }
     private static List<Field> getKeys() {
         return LinqUtils.filter(KeyEvent.class.getDeclaredFields(),

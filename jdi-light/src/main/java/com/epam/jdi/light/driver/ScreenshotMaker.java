@@ -1,6 +1,6 @@
 package com.epam.jdi.light.driver;
 
-import com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy;
+import com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
@@ -10,6 +10,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.LOGS_PATH;
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
+import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.ON_FAIL;
 import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
@@ -27,12 +28,7 @@ public class ScreenshotMaker {
     public static String SCREEN_PATH = LOGS_PATH + "\\screens";
     public static String SCREEN_NAME = "screen";
     public static String SCREEN_FILE_SUFFIX = ".jpg";
-    public static AttachmentStrategy SCREENSHOT_STRATEGY = AttachmentStrategy.ON_FAIL;
-    public static String takeScreenOnFailure() {
-        return SCREENSHOT_STRATEGY == AttachmentStrategy.ON_FAIL
-            ? takeScreen()
-            : null;
-    }
+    public static AttachmentStrategy SCREENSHOT_STRATEGY = ON_FAIL;
 
     public static String takeScreen() {
         return new ScreenshotMaker().takeScreenshot();

@@ -30,9 +30,15 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
 
     default T get(Enum name) { return get(getEnumValue(name)); }
     default T last() {
-        return elements(1).last().value;
+        MultiMap<String, T> elements = elements(1);
+        Pair<String, T> last = elements.last();
+        return last == null ? null : last.value;
     }
-    default T first() { return elements(1).first().value; }
+    default T first() {
+        MultiMap<String, T> elements = elements(1);
+        Pair<String, T> first = elements.first();
+        return first == null ? null : first.value;
+    }
     default List<T> where(JFunc1<T, Boolean> condition) {
         return elements(0).values(condition);
     }
@@ -46,10 +52,14 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
         return select(transform);
     }
     default T first(JFunc1<T, Boolean> condition) {
-        return elements(1).first((k,v) -> condition.execute(v)).value;
+        MultiMap<String, T> elements = elements(1);
+        Pair<String, T> first = elements.first((k,v) -> condition.execute(v));
+        return first == null ? null : first.value;
     }
     default T last(JFunc1<T, Boolean> condition) {
-        return elements(1).last((k,v) -> condition.execute(v)).value;
+        MultiMap<String, T> elements = elements(1);
+        Pair<String, T> last = elements.last((k,v) -> condition.execute(v));
+        return last == null ? null : last.value;
     }
     default void ifDo(JFunc1<T, Boolean> condition, JAction1<T> action) {
         elements(1).ifDo(p -> condition.execute(p.value), action::execute);
@@ -152,7 +162,9 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
     }
     @Override
     default T remove(int index) {
-        return elements(index).removeByIndex(index).value;
+        MultiMap<String, T> elements = elements(index);
+        Pair<String, T> removed = elements.removeByIndex(index);
+        return removed == null ? null : removed.value;
     }
     @Override
     default int indexOf(Object o) {

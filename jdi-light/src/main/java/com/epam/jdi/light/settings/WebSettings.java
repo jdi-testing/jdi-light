@@ -7,6 +7,8 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.light.logger.Strategy;
+import com.epam.jdi.tools.PropReader;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.StringUtils;
@@ -30,32 +32,27 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.common.SetTextTypes.SET_TEXT;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
-import static com.epam.jdi.light.driver.ScreenshotMaker.SCREENSHOT_STRATEGY;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
-import static com.epam.jdi.light.elements.init.PageFactory.preInit;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy;
-import static com.epam.jdi.light.logger.AllureLoggerHelper.AttachmentStrategy.*;
-import static com.epam.jdi.light.logger.AllureLoggerHelper.HTML_CODE_LOGGING;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
+import static com.epam.jdi.light.logger.LogStrategy.*;
+import static com.epam.jdi.light.logger.Strategy.parseStrategy;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
 /**
@@ -68,7 +65,7 @@ public class WebSettings {
     public static String getDomain() {
         if (DOMAIN != null)
             return DOMAIN;
-        preInit();
+        init();
         return "No Domain Found. Use test.properties or WebSettings.DOMAIN";
     }
     public static void setDomain(String domain) {
@@ -108,7 +105,7 @@ public class WebSettings {
     public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
     public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
-        preInit();
+        init();
         return DOMAIN != null && DOMAIN.contains("://");
     }
     public static String TEST_GROUP = "";
@@ -142,8 +139,9 @@ public class WebSettings {
             throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
         });
     };
-
+    private static boolean initialized = false;
     public static synchronized void init() {
+        if (initialized) return;
         getProperties(TEST_PROPERTIES_PATH);
         fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
         fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
@@ -155,8 +153,9 @@ public class WebSettings {
                 ? PRELATEST_VERSION : p, "driver.version");
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
-        fillAction(p -> SCREENSHOT_STRATEGY = getAttachmentStrategy(p), "screenshot.strategy");
-        fillAction(p -> HTML_CODE_LOGGING = getAttachmentStrategy(p), "html.code.logging");
+        fillAction(p -> SCREEN_STRATEGY = getStrategy(p), "screenshot.strategy");
+        fillAction(p -> HTML_CODE_STRATEGY = getStrategy(p), "html.code.strategy");
+        fillAction(p -> REQUESTS_STRATEGY = getStrategy(p), "requests.strategy");
         fillAction(p -> KILL_BROWSER = p, "browser.kill");
         fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
         fillAction(p -> BROWSER_SIZE = p, "browser.size");
@@ -193,7 +192,8 @@ public class WebSettings {
 
         INIT_THREAD_ID = Thread.currentThread().getId();
         if (SMART_SEARCH_LOCATORS.size() == 0)
-            SMART_SEARCH_LOCATORS.add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
+            SMART_SEARCH_LOCATORS.add("#%s");
+        initialized = true;
     }
 
     private static ElementArea getClickType(String type) {
@@ -252,8 +252,11 @@ public class WebSettings {
         } catch (Exception ignore) { }
         if (isEmpty(path))
             path = defaultPath;
+        Properties properties = new PropReader(path).getProperties();
+        if (properties.isEmpty())
+            return;
         try {
-            setCapabilities.execute(getProperties(path));
+            setCapabilities.execute(properties);
         } catch (Exception ignore) { }
     }
 
@@ -317,7 +320,14 @@ public class WebSettings {
         }
         return properties;
     }
-    private static AttachmentStrategy getAttachmentStrategy(String strategy) {
-        return strategy.toLowerCase().equals("off") ? OFF : ON_FAIL;
+    private static List<Strategy> getStrategy(String strategy) {
+        if (isBlank(strategy))
+            return new ArrayList<>();
+        List<Strategy> strategies = new ArrayList<>();
+        try {
+            String[] split = strategy.split(";");
+            strategies = map(split, s -> parseStrategy(s.trim()));
+        } catch (Exception ignore) { }
+        return strategies;
     }
 }

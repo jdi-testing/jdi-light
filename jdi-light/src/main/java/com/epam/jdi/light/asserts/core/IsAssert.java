@@ -100,7 +100,7 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
      */
     @JDIAction("Assert that '{name}' is deselected")
     public IsAssert deselected() {
-        jdiAssert(element.isSelected() ? "selected" : "not selected", Matchers.is("not selected"));
+        jdiAssert(element.isDeselected() ? "not selected" : "selected", Matchers.is("not selected"));
         return this;
     }
 

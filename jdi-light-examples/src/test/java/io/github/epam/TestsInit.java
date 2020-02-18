@@ -16,7 +16,6 @@ public class TestsInit extends TestNGListener {
         initElements(EpamGithubSite.class);
         homePage.open();
         logger.toLog("Run Tests");
-
     }
     @AfterSuite(alwaysRun = true)
     public static void tearDown() {

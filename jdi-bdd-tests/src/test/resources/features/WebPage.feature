@@ -22,16 +22,16 @@ Feature: Checking Basic WebPage Actions
   Scenario: scroll down and up test
     When I scroll "30" px down
     And I scroll "20" px up
-    Then the page is scrolled "10" px down
+    Then the page scrolled by "10" px down
 
   Scenario: scroll right and left test
     When I scroll "10" px right
     And I scroll "5" px left
-    Then the page is scrolled "5" px right
-
-  Scenario: zoom test
-    When I zoom in "2" times
-    Then the page is zoomed "2" times
+    Then the page scrolled by "5" px right
+  # TODO
+  #Scenario: zoom test
+  #  When I zoom in "2" times
+  #  Then the page is zoomed "2" times
 
   Scenario: go back test
     When I go back

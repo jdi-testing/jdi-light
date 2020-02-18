@@ -126,7 +126,7 @@ public class JDILogger implements ILogger {
     public void step(String s, Object... args) {
         if (logLevel.get().equalOrLessThan(STEP)) {
             logger.log(Level.forName("STEP", 350), jdiMarker, getRecord(s, args));
-            writeToAllure(getRecord(s, args));
+            //writeToAllure(getRecord(s, args));
         }
     }
 

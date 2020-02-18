@@ -18,11 +18,11 @@ public class Exceptions {
     }
     public static RuntimeException exception(Throwable ex, String msg, Object... args) {
         String message = args.length == 0 ? msg : format(msg, args);
-        String errorMessage = LINE_BREAK + message + LINE_BREAK + "Exception: " + safeException(ex);
+        //String errorMessage = LINE_BREAK + message + LINE_BREAK + "Exception: " + safeException(ex);
         if (isClass(AssertionError.class, ex.getClass()))
-            throw new AssertionError(errorMessage);
+            throw new AssertionError(message, ex);
         else
-            return new RuntimeException(errorMessage);
+            return new RuntimeException(message, ex);
     }
     public static String safeException(Throwable ex) {
         String msg = ex.getMessage();

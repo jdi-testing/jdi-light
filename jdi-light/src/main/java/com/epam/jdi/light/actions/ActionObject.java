@@ -25,6 +25,7 @@ public class ActionObject {
     }
     public ProceedingJoinPoint jp() { return jp; }
     private ProceedingJoinPoint jp;
+    public String stepUId = "";
     public Object object() { return obj.get(); }
     private CacheValue<Object> obj = new CacheValue<>(
         () -> jp.getThis() != null ? jp.getThis() : new Object());

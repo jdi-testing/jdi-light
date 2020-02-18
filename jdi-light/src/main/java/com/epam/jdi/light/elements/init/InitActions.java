@@ -18,11 +18,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.*;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.lang.annotation.Annotation;
@@ -55,7 +53,6 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class InitActions {
-    public static void init() {}
     static void webPageSetup(SiteInfo info) {
         WebPage page = (WebPage) info.instance;
         defaultSetup(info, page);

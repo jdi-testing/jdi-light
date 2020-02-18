@@ -10,14 +10,15 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.logging.LogEntry;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
@@ -29,7 +30,8 @@ import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
@@ -75,10 +77,11 @@ public class WebPage extends DriverBase implements PageObject {
     }
     public WebPage(String url, String title) { this(url); this.title = title; }
     public static void openUrl(String url) {
+        init();
         new WebPage(url).open();
     }
     public static void openSite() {
-        preInit();
+        init();
         new WebPage(getDomain()).open();
     }
     public static void openSite(Class<?> site) {
@@ -144,7 +147,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Open '{name}'(url={0})")
     private void open(String url) {
-        preInit();
+        init();
         CacheValue.reset();
         driver().navigate().to(url);
         setCurrentPage(this);
@@ -170,18 +173,18 @@ public class WebPage extends DriverBase implements PageObject {
         if (!hasRunDrivers())
             throw exception("Page '%s' is not opened: Driver is not run", toString());
         String result = Switch(checkUrlType).get(
-                Value(NONE, ""),
-                Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
-                Value(MATCH, t -> !url().match() ? "Url '%s' doesn't match to '%s'" : ""),
-                Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
+            Value(NONE, ""),
+            Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
+            Value(MATCH, t -> !url().match() ? "Url '%s' doesn't match to '%s'" : ""),
+            Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
         );
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getCurrentUrl(), checkUrl));
         result = Switch(checkTitleType).get(
-                Value(NONE, ""),
-                Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
-                Value(MATCH, t -> !title().match() ? "Title '%s' doesn't match to '%s'" : ""),
-                Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
+            Value(NONE, ""),
+            Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
+            Value(MATCH, t -> !title().match() ? "Title '%s' doesn't match to '%s'" : ""),
+            Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
         );
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
@@ -283,6 +286,9 @@ public class WebPage extends DriverBase implements PageObject {
     public static String getHtml() {
         return getDriver().getPageSource();
     }
+    public static List<LogEntry> getHttpRequests() {
+        return getDriver().manage().logs().get("performance").getAll();
+    }
 
     /**
      * Scroll screen on specific values
@@ -292,6 +298,12 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction(level = DEBUG)
     private static void scroll(int x, int y) {
         jsExecute("window.scrollBy("+x+","+y+")");
+    }
+    public static boolean isBottomOfThePage() {
+        return jsExecute("return ((window.innerHeight + window.scrollY) >= document.body.scrollHeight);");
+    }
+    public static boolean isTopOfThePage() {
+        return jsExecute("return window.scrollX == window.scrollY;");
     }
 
     /**
@@ -407,7 +419,7 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean check() {
             String value = actual.get();
-            logger.toLog(format("Check that page %s(%s) equals to '%s'", what, value, equals));
+            //logger.toLog(format("Check that page %s(%s) equals to '%s'", what, value, equals));
             return equals == null
                     || equals.equals("")
                     || value.equals(equals);
@@ -418,7 +430,7 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean match() {
             String value = actual.get();
-            logger.toLog(format("Check that page %s(%s) matches to '%s'", what, value, equals));
+            //logger.toLog(format("Check that page %s(%s) matches to '%s'", what, value, equals));
             return equals == null
                     || equals.equals("")
                     || value.matches(equals);
@@ -429,18 +441,19 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean contains() {
             String value = actual.get();
-            logger.toLog(format("Check that page %s(%s) contains '%s'", what, value, equals));
+            //logger.toLog(format("Check that page %s(%s) contains '%s'", what, value, equals));
             return equals == null || equals.equals("") || value.contains(equals);
         }
     }
 
     public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
     public static void beforeNewPage(WebPage page) {
-        if (CHECK_AFTER_OPEN == NEW_PAGE)
+        if (CHECK_AFTER_OPEN == NEW_PAGE || CHECK_AFTER_OPEN == EVERY_PAGE)
             page.checkOpened();
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
             visualWindowCheck();
-        logger.toLog("Page: " + page.getName());
+        getHttpRequests();
+        logger.toLog("Page '"+page.getName()+"' opened");
         TIMEOUT.set(PAGE_TIMEOUT.get());
     }
     public static JAction1<WebPage> BEFORE_NEW_PAGE = WebPage::beforeNewPage;
@@ -448,5 +461,5 @@ public class WebPage extends DriverBase implements PageObject {
         if (CHECK_AFTER_OPEN == EVERY_PAGE)
             page.checkOpened();
     }
-    public static JAction1<WebPage> BEFORE_THIS_PAGE  = WebPage::beforeThisPage;
+    public static JAction1<WebPage> BEFORE_EACH_STEP = WebPage::beforeThisPage;
 }

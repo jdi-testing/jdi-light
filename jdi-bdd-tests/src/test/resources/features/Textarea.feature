@@ -4,15 +4,15 @@ Feature: Textarea
   Scenario: Text equivalence test
     Given I open "Html5 Page"
     When I clear "Text Area"
-    And I set text "This is draft `!@#$%ˆ*()_+˜@[№;:?-=]{}'/|<>" in "Text Area"
-    And I set text "Hello, I'm TextArea! `!@#$%ˆ*()_+˜@[№;:?-=]{}'/|<>" in "Text Area"
-    Then the "Text Area" text equals to "Hello, I'm TextArea! `!@#$%ˆ*()_+˜@[№;:?-=]{}'/|<>"
+    And I set text "This is draft `!@#$%ˆ*()_+˜@[№;:?-=]{}'/\|<>" in "Text Area"
+    And I set text "Hello, I'm TextArea! `!@#$%ˆ*()_+˜@[№;:?-=]{}'/\|<>" in "Text Area"
+    Then the "Text Area" text equals to "Hello, I'm TextArea! `!@#$%ˆ*()_+˜@[№;:?-=]{}'/\|<>"
 
   Scenario: Text contains test
     Given I open "Html5 Page"
     When I clear "Text Area"
-    And I set text "Text in TextArea, containing jedi power `!@#$%ˆ*()_+˜@[№;:?-=]{}'/|<>" in "Text Area"
-    Then the "Text Area" text contains "jedi power `!@#$%ˆ*()_+˜@[№;:?-=]{}'/|<>"
+    And I set text "Text in TextArea, containing jedi power `!@#$%ˆ*()_+˜@[№;:?-=]{}'/\|<>" in "Text Area"
+    Then the "Text Area" text contains "jedi power `!@#$%ˆ*()_+˜@[№;:?-=]{}'/\|<>"
 
   Scenario: Text matches test
     Given I open "Html5 Page"
@@ -24,19 +24,20 @@ Feature: Textarea
     Given I open "Html5 Page"
     When I clear "Text Area"
     When I send keys "first" to "Text Area"
-    And I send keys " second `!@#$%ˆ*()_+˜@[№;:?-=]{}'/|<>" to "Text Area"
-    Then the "Text Area" text equals to "first second `!@#$%ˆ*()_+˜@[№;:?-=]{}'/|<>"
+    And I send keys " second `!@#$%ˆ*()_+˜@[№;:?-=]{}'/\|<>" to "Text Area"
+    Then the "Text Area" text equals to "first second `!@#$%ˆ*()_+˜@[№;:?-=]{}'/\|<>"
 
   Scenario: Input text test
     Given I open "Html5 Page"
     When clear "Text Area"
     When send keys "Draft text" to "Text Area"
     Then the "Text Area" text equals to "Draft text"
-    When input "Final text `!@#$%ˆ*()_+˜@[№;:?-=]{}'/|<>" in "Text Area"
-    Then the "Text Area" text equals to "Final text `!@#$%ˆ*()_+˜@[№;:?-=]{}'/|<>"
+    When input "Final text `!@#$%ˆ*()_+˜@[№;:?-=]{}'/\|<>" in "Text Area"
+    Then the "Text Area" text equals to "Final text `!@#$%ˆ*()_+˜@[№;:?-=]{}'/\|<>"
 
   Scenario: Get lines test
     Given I open "Html5 Page"
+    When clear "Text Area"
     When input in the "Text Area" lines
       | test 111 11 1 |
       | test2         |

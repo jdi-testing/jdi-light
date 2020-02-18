@@ -9,6 +9,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.safari.SafariOptions;
 
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
@@ -37,8 +39,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;
 import static org.openqa.selenium.ie.InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR;
-import static org.openqa.selenium.remote.CapabilityType.ACCEPT_SSL_CERTS;
-import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
+import static org.openqa.selenium.logging.LogType.PERFORMANCE;
+import static org.openqa.selenium.remote.CapabilityType.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -177,6 +179,12 @@ public class DriverData {
             () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
         setUp("Chrome: setExperimentalOption: prefs",
             () -> cap.setExperimentalOption("prefs", chromePrefs));
+        setUp("Chrome: setExperimentalOption: prefs",
+            () -> {
+                LoggingPreferences logPrefs = new LoggingPreferences();
+                logPrefs.enable(PERFORMANCE, Level.ALL);
+                cap.setCapability(LOGGING_PREFS, logPrefs);
+            });
         // Capabilities from settings
         CAPABILITIES_FOR_CHROME.forEach((property, value) -> setupCapability(cap, property, value));
     }

@@ -12,7 +12,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
-import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
 /**
@@ -24,7 +23,10 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     // region Actions
     @JDIAction("Set lines '{0}' in '{name}'")
     public void setLines(String... lines) {
-        setText(print(asList(lines), "\\n"));
+        int length = lines.length;
+        for (int i = 0; i < length-1; i++)
+            sendKeys(lines[i]+"\n");
+        sendKeys(lines[lines.length-1]);
     }
     @JDIAction("Get '{name}' lines")
     public List<String> getLines() {
@@ -40,8 +42,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     @JDIAction(level = DEBUG)
     public int maxlength() { return getInt("maxlength", uiElement); }
     @JDIAction("Add ne line '{0}' in '{name}'")
-    public void addNewLine(String line) {
-        if (isNotEmpty())
+    public void addNewLine(String line) { if (isNotEmpty())
             line = "\n" + line;
         sendKeys(line);
     }

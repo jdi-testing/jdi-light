@@ -17,6 +17,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.settings.WebSettings.init;
 import static com.epam.jdi.tools.JsonUtils.getMapFromJson;
 import static com.epam.jdi.tools.JsonUtils.scanFolder;
 import static com.epam.jdi.tools.LinqUtils.first;
@@ -51,6 +52,7 @@ public class EntitiesCollection {
         jsonPages = getMapFromJson("pages", "json.page.objects");
     }
     public static WebPage getPage(String pageName) {
+        init();
         WebPage page = PAGES.get(pageName);
         if (page == null)
             page = PAGES.get(pageName + " Page");

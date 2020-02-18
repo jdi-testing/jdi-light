@@ -17,14 +17,14 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 @CucumberOptions(
     features = "classpath:features"
     , glue = {"com.epam.jdi.bdd", "cucmberTests"}
-    , tags = {"@form"}
+    //, tags = {"@form"}
 )
 public class Runner extends AbstractTestNGCucumberTests {
     @BeforeClass
     public static void setUp() {
         WebPage.openUrl("https://jdi-testing.github.io/jdi-light/");
         $("img#user-icon").click();
-        new Form<User>().submit(new User().set(u -> {u.name = "Roman"; u.password = "Jdi1234"; }));
+        new Form<User>().submit(new User().set(u -> { u.name = "Roman"; u.password = "Jdi1234"; }));
     }
     @AfterClass
     public static void shutDown() {
