@@ -3,42 +3,40 @@ package com.epam.jdi.light.driver.get;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.DriverInfo.getBelowVersion;
 import static com.epam.jdi.light.driver.get.OsTypes.WIN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static io.github.bonigarcia.wdm.WebDriverManager.*;
 
 /**
  * Created by Roman_Iovlev on 11/28/2017.
  */
-public class DownloadDriverManager {
-    public static boolean DOWNLOAD_DRIVER = true;
-
+class DownloadDriverManager {
     private static boolean hasVersion(String version) {
         char c = version.charAt(0);
         return (c >= '0' && c <= '9');
     }
-    public static WebDriverManager wdm;
+    static WebDriverManager wdm;
 
-    public static void downloadDriver(DriverTypes driverType,
+    static void downloadDriver(DriverTypes driverType,
           Platform platform, String version) {
         try {
             String driverName = driverType.toString();
             switch (driverType) {
                 case CHROME:
-                    wdm = WebDriverManager.chromedriver(); break;
+                    wdm = chromedriver(); break;
                 case FIREFOX:
-                    wdm = WebDriverManager.firefoxdriver(); break;
+                    wdm = firefoxdriver(); break;
                 case IE:
-                    wdm = WebDriverManager.iedriver(); break;
+                    wdm = iedriver(); break;
                 case EDGE:
-                    wdm = WebDriverManager.edgedriver(); break;
+                    wdm = edgedriver(); break;
                 case OPERA:
-                    wdm = WebDriverManager.operadriver(); break;
+                    wdm = operadriver(); break;
                 default:
-                    throw exception("Unknown driver: " + driverType);
+                    throw exception("%s driver not supported for download");
             }
             if (getOs() == WIN) {
                 switch (platform) {
@@ -62,8 +60,7 @@ public class DownloadDriverManager {
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
         } catch (Exception ex) {
-            throw exception("Can't download latest driver for " + driverType
-                    + ". Exception " + safeException(ex));
+            throw exception(ex, "Can't download latest driver for " + driverType);
         }
     }
 }

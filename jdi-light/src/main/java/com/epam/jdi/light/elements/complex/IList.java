@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 
 /**
@@ -88,7 +87,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
         try {
             return base().noWait(() -> base().getList(0).size());
         } catch (Exception ex) {
-            throw exception("Get size failed: "+ safeException(ex));
+            throw exception(ex,"Get size failed");
         }
     }
     @Override

@@ -1,18 +1,15 @@
 package com.epam.jdi.light.ui.html.actions;
 
+import com.epam.jdi.light.actions.ActionObject;
 import com.epam.jdi.tools.PrintUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
-import java.util.concurrent.TimeUnit;
-
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionProcessor.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.util.Collections.reverse;
 
@@ -23,30 +20,26 @@ import static java.util.Collections.reverse;
 @SuppressWarnings("unused")
 @Aspect
 public class HtmlActions {
-
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { }
-
+    private final String className = "com.epam.jdi.light.ui.html.actions.HtmlActions";
     @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) {
+    public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {
+        if (notThisAround(className))
+            return jp.proceed();
+        ActionObject jInfo = new ActionObject(jp);
         try {
             failedMethods.clear();
-            if (aroundCount() > 1)
-                return defaultAction(jp);
+            if (aroundCount(className) > 1)
+                return defaultAction(jInfo);
             BEFORE_JDI_ACTION.execute(jp);
-            Object result = stableAction(jp);
-            isOverride.get().clear();
-            if (aroundCount() == 1)
-                getDriver().manage().timeouts().implicitlyWait(TIMEOUT.get()*100, TimeUnit.MILLISECONDS);
+            Object result = stableAction(jInfo);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            addFailedMethod(jp);
-            if (aroundCount() == 1) {
-                reverse(failedMethods);
-                logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
-            }
-            throw exception(ACTION_FAILED.execute(getObjAround(jp), getExceptionAround(ex, aroundCount() == 1)));
+            throw exceptionJdiAround(jInfo, className, ex);
+        }
+        finally {
+            jInfo.clear();
         }
     }
-
 }

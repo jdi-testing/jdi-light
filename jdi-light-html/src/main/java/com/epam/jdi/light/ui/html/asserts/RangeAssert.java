@@ -8,7 +8,6 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
-import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -16,25 +15,25 @@ import static org.hamcrest.Matchers.is;
  */
 public class RangeAssert extends UIAssert<RangeAssert, Range> {
 
-    @JDIAction("Assert that '{name}' volume {0}")
-    public RangeAssert volume(Matcher<Integer> volume) {
-        jdiAssert(getInt("value", element.core()), volume);
+    @JDIAction("Assert that '{name}' value {0}")
+    public RangeAssert value(Matcher<Integer> value) {
+        jdiAssert(getInt("value", element.core()), value);
         return this;
     }
-    public RangeAssert volume(int volume) { return volume(Matchers.is(volume)); }
+    public RangeAssert value(int value) { return value(Matchers.is(value)); }
 
-    @JDIAction("Assert that '{name}' min volume {0}")
-    public RangeAssert minVolume(Matcher<Integer> min) {
+    @JDIAction("Assert that '{name}' min value {0}")
+    public RangeAssert min(Matcher<Integer> min) {
         jdiAssert(getInt("min", element.core()), min);
         return this;
     }
-    public RangeAssert minVolume(int minVolume) { return minVolume(Matchers.is(minVolume)); }
-    @JDIAction("Assert that '{name}' max volume {0}")
-    public RangeAssert maxVolume(Matcher<Integer> max) {
+    public RangeAssert min(int minVolume) { return min(Matchers.is(minVolume)); }
+    @JDIAction("Assert that '{name}' max value {0}")
+    public RangeAssert max(Matcher<Integer> max) {
         jdiAssert(getInt("max", element.core()), max);
         return this;
     }
-    public RangeAssert maxVolume(int maxVolume) { return maxVolume(Matchers.is(maxVolume)); }
+    public RangeAssert max(int maxVolume) { return max(Matchers.is(maxVolume)); }
 
     @JDIAction("Assert that '{name}' step {0}")
     public RangeAssert step(Matcher<Integer> step) {

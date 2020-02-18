@@ -12,29 +12,32 @@ import static org.hamcrest.Matchers.*;
  */
 public class AlertSteps {
 
-	// region Actions
-	@When("^(?:I |)accept alert")
-	public void accept() {
-		acceptAlert();
-	}
-	@When("^(?:I |)dismiss alert")
-	public void dismiss() {
-		dismissAlert();
-	}
-	// endregion
+    // region Actions
+    @When("^(?:I |)accept alert")
+    public void accept() {
+        acceptAlert();
+    }
 
-	// region Verification
-	@Then("^the Alert text equals to \"([^\"]*)\"$")
+    @When("^(?:I |)dismiss alert")
+    public void dismiss() {
+        dismissAlert();
+    }
+    // endregion
+
+    // region Verification
+    @Then("^the Alert text equals to \"([^\"]*)\"$")
     public void alertTextEquals(String alertText) {
-		validateAlert(is(alertText));
+        validateAlert(is(alertText));
     }
-	@Then("^the Alert text contains \"([^\"]*)\"$")
+
+    @Then("^the Alert text contains \"([^\"]*)\"$")
     public void alertTextContains(String alertText) {
-    	validateAlert(containsString(alertText));
+        validateAlert(containsString(alertText));
     }
-	@Then("^the Alert text matches to \"([^\"]*)\"$")
+
+    @Then("^the Alert text matches to \"([^\"]*)\"$")
     public void alertTextMatches(String alertText) {
-    	validateAlert(matchesPattern(alertText));
+        validateAlert(matchesPattern(alertText));
     }
-	// endregion
+    // endregion
 }

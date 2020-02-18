@@ -36,6 +36,7 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     public WebList list() {
         return linkedList(listLocator, "list").setUIElementName(INNER);
     }
+    public boolean autoClose = false;
 
     public void toggle() {
         expander().click();
@@ -58,7 +59,8 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     public void select(String value) {
         expand();
         list().select(value);
-        close();
+        if (autoClose)
+            toggle();
     }
     @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(int index) {
@@ -66,7 +68,8 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
         expand();
         list().select(index-1);
-        close();
+        if (autoClose)
+            close();
     }
     @JDIAction("Get selected value") @Override
     public String selected() {
@@ -103,10 +106,15 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
             return;
         JDropdown j = field.getAnnotation(JDropdown.class);
         setup(j.root(), j.value(), j.list(), j.expand());
+        autoClose = j.autoclose();
     }
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() {
         return value().isDisplayed();
+    }
+    @JDIAction("Check that '{name}' is hidden") @Override
+    public boolean isHidden() {
+        return value().isHidden();
     }
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isEnabled() {

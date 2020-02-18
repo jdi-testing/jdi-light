@@ -11,7 +11,6 @@ import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.select;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.StringUtils.splitHyphen;
 import static java.lang.String.format;
 
 /**
@@ -68,6 +67,16 @@ public class JDILocator {
     }
     public boolean isTemplate() {
         return byLocator != null && byLocator.toString().contains("%s");
+    }
+    public boolean isXPath() { return byLocator != null && byLocator.toString().contains("xpath"); }
+    public String addIndex(int index) {
+        String locator = getByLocator(byLocator);
+        return locator.equals("..")
+            ? "../*["+index+1+"]"
+            : format("(%s)[%s]", getByLocator(byLocator), index+1);
+    }
+    public String addText(String text) {
+        return format("(%s)[.='%s']", getByLocator(byLocator), text);
     }
     public int argsCount() {
         return byLocator != null

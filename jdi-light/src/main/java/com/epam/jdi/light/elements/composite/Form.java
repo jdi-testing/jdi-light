@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.FormFilters.*;
 import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
@@ -90,8 +89,10 @@ public class Form<T> extends Section {
                 if (setField == null)
                     continue;
                 fillAction(setField, getValueField(setField, pageObject), pageObject, pair.value);
-            } catch (Exception ex) { throw exception("Can't fill element '%s'. %s",
-                    setField != null ? setField.getName() : "UNKNOWN FIELD", safeException(ex)); }
+            } catch (Exception ex) {
+                throw exception(ex, "Can't fill element '%s'",
+                    setField != null ? setField.getName() : "UNKNOWN FIELD");
+            }
         setFilterAll();
     }
     private Object pageObject = this;
@@ -394,8 +395,8 @@ public class Form<T> extends Section {
                 return true;
             if (base().locator.isEmpty()) {
                 List<Field> fields = getFieldsInterfaceOf(pageObject, HasValue.class);
-                if (fields.isEmpty() && core().isDisplayed())
-                    return true;
+                if (fields.isEmpty())
+                    return false;
                 Object po = fields.get(0).get(pageObject);
                 if (isInterface(po.getClass(), ICoreElement.class) && ((ICoreElement) po).core().isDisplayed())
                     return true;
@@ -403,5 +404,14 @@ public class Form<T> extends Section {
         } catch (Exception ignore) { }
         return false;
     }
+    @Override
+    public boolean isHidden() {
+        return !isDisplayed();
+    }
     //endregion
+    @JDIAction("Return if form valid")
+    public boolean isValid() {
+        Object res = core().js().executeScript("return arguments[0].checkValidity()", core().get());
+        return (Boolean) res;
+    }
 }

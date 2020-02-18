@@ -12,16 +12,20 @@ import static org.testng.Assert.assertEquals;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class DateTimeSelectorSteps {
-    public static DateTimeSelector dateTimeSelector(String name) { return getUI(name, DateTimeSelector.class); }
+    public static DateTimeSelector dateTimeSelector(String name) {
+        return getUI(name, DateTimeSelector.class);
+    }
 
     @Then("^the \"([^\"]*)\" min equals to \"([^\"]*)\"$")
     public void attributeMinEquals(String name, String date) {
         assertEquals(dateTimeSelector(name).min(), date);
     }
+
     @Then("^the \"([^\"]*)\" max equals to \"([^\"]*)\"$")
     public void attributeMaxEquals(String name, String date) {
         assertEquals(dateTimeSelector(name).max(), date);
     }
+
     @When("^(?:I |)set date \"([^\"]*)\" in the \"([^\"]*)\"$")
     public void iSetDate(String date, String name) {
         dateTimeSelector(name).setDateTime(date);

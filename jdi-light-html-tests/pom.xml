@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <version>1.1.10</version>
+    <version>1.1.16</version>
     <artifactId>jdi-light-html-tests</artifactId>
     <name>JDI Html Tests</name>
     <groupId>com.epam.jdi</groupId>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.1.10</version>
+            <version>1.1.16</version>
         </dependency>
 
         <!--Allure config in parent-->
@@ -31,6 +31,11 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.testng}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.2</version>
         </dependency>
 
         <dependency>

@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd-no-po-tests</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.4</version>
     <name>JDI BDD no Page Objects Tests</name>
 
     <properties>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-bdd</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.4</version>
         </dependency>
 
         <dependency>

@@ -65,8 +65,9 @@ public class WebDriverFactory {
             Value(CHROME, t -> CHROME_INFO.getDriver()),
             Value(FIREFOX, t -> FF_INFO.getDriver()),
             Value(IE, t -> IE_INFO.getDriver()),
-            Value(OPERA, t -> CHROME_INFO.getDriver()),
-            Value(EDGE, t -> CHROME_INFO.getDriver())
+            Value(OPERA, t -> OPERA_INFO.getDriver()),
+            Value(EDGE, t -> EDGE_INFO.getDriver()),
+            Value(SAFARI, t -> SAFARI_INFO.getDriver())
         );
         if (driver == null)
             throw exception("Unknown driver: " + type);
@@ -103,7 +104,7 @@ public class WebDriverFactory {
             useDriver(CHROME);
             return getDriver(CHROME.name);
         } catch (Exception ex) {
-            throw exception("Can't get WebDriver. " + LINE_BREAK + safeException(ex));
+            throw exception(ex, "Can't get WebDriver");
         }
     }
 
@@ -111,6 +112,7 @@ public class WebDriverFactory {
     public static boolean SWITCH_THREAD = false;
     public static WebDriver INIT_DRIVER;
 
+    @SuppressWarnings("PMD.NPathComplexity")
     public static WebDriver getDriver(String driverName) {
         if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
             RUN_DRIVERS.set(map($(driverName, INIT_DRIVER)));
@@ -122,27 +124,31 @@ public class WebDriverFactory {
         try {
             Lock lock = new ReentrantLock();
             lock.lock();
-            if (!RUN_DRIVERS.get().has(driverName)) {
-                MapArray<String, WebDriver> rDrivers = RUN_DRIVERS.get();
-                if (rDrivers == null)
-                    rDrivers = new MapArray<>();
-                WebDriver resultDriver = DRIVERS.get(driverName).invoke();
-                if (resultDriver == null)
-                    throw exception("Can't get WebDriver '%s'. This Driver name not registered", driverName);
-                rDrivers.add(driverName, resultDriver);
-                RUN_DRIVERS.set(rDrivers);
+
+            MapArray<String, WebDriver> rDrivers = RUN_DRIVERS.get();
+            if (rDrivers == null) {
+                rDrivers = new MapArray<>();
             }
-            WebDriver result = RUN_DRIVERS.get().get(driverName);
+            if (!rDrivers.has(driverName)) {
+                WebDriver resultDriver = DRIVERS.get(driverName).invoke();
+                if (resultDriver == null) {
+                    throw exception("Can't get WebDriver '%s'. This Driver name not registered", driverName);
+                }
+                rDrivers.add(driverName, resultDriver);
+            }
+            RUN_DRIVERS.set(rDrivers);
+
+            WebDriver result = rDrivers.get(driverName);
             if (result.toString().contains("(null)")) {
                 result = DRIVERS.get(driverName).invoke();
-                RUN_DRIVERS.get().update(driverName, result);
+                rDrivers.update(driverName, result);
             }
             if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId())
                 INIT_DRIVER = result;
             lock.unlock();
             return result;
         } catch (Exception ex) {
-            throw exception("Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
+            throw exception(ex, "Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
                     format("Drivers: %s; Run: %s", DRIVERS, RUN_DRIVERS.get()) +
                     "Exception: " + safeException(ex));
         }

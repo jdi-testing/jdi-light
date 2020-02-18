@@ -36,6 +36,8 @@ public class StaticSite {
 	public static UsersPage usersPage;
 	@Url("/simple-table.html") @Title("Simple Table")
 	public static SimpleTablePage tablePage;
+	@Url("/performance.html") @Title("Performance page")
+	public static PerformancePage performancePage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;
@@ -55,6 +57,6 @@ public class StaticSite {
 	@Css("header") public static Header header;
 	@Css("footer") public static Footer footer;
 
-	@Frame("iframe") public static HomePageFrame iframe;
+	@Frame("#jdi-frame-site") public static HomePageFrame iframe;
 	public static GithubPage githubPage;
 }

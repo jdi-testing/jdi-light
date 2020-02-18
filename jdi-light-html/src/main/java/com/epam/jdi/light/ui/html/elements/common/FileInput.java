@@ -7,8 +7,10 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 
+import static com.epam.jdi.light.common.ElementArea.JS;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
+import static com.epam.jdi.light.elements.common.Keyboard.pasteText;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -21,6 +23,14 @@ public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, Is
         if (isDisabled())
             throw exception("FileInput '%s' is disabled. Can't upload file", getName());
         uiElement.sendKeys(path);
+    }
+
+    @JDIAction("Upload file '{0}' for '{name}'")
+    public void uploadFileWithRobot(String path, long mSec) {
+        if (isDisabled())
+            throw exception("FileInput '%s' is disabled. Can't upload file", getName());
+        uiElement.click(JS);
+        pasteText(path, mSec);
     }
     // endregion
 
