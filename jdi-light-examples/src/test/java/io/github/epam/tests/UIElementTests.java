@@ -4,7 +4,6 @@ import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import com.sun.javafx.runtime.async.AsyncOperationListener;
 import io.github.com.pages.UIElementContactFormPage;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
@@ -16,7 +15,6 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static io.github.com.pages.UIElementContactFormPage.*;
