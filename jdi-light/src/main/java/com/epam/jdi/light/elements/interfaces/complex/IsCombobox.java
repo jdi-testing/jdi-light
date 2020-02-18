@@ -10,4 +10,13 @@ import com.epam.jdi.light.elements.interfaces.common.IsInput;
 public interface IsCombobox extends IsDropdown, IsInput {
     @JDIAction("Is '{0}' selected") @Override
     default boolean selected(String option) { return selected().equals(option); }
+    String value();
+    @JDIAction("Get '{name}' text") @Override
+    default String getText() {
+        return value();
+    }
+    @JDIAction("Get selected in '{name}' option") @Override
+    default String selected() {
+        return getText();
+    }
 }

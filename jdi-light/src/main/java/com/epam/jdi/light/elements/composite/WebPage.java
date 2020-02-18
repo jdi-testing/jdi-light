@@ -299,6 +299,12 @@ public class WebPage extends DriverBase implements PageObject {
     private static void scroll(int x, int y) {
         jsExecute("window.scrollBy("+x+","+y+")");
     }
+    public static boolean isBottomOfThePage() {
+        return jsExecute("return ((window.innerHeight + window.scrollY) >= document.body.scrollHeight);");
+    }
+    public static boolean isTopOfThePage() {
+        return jsExecute("return window.scrollX == window.scrollY;");
+    }
 
     /**
      * Scroll screen to top

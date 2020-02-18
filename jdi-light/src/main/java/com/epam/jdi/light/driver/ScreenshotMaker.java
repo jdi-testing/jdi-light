@@ -10,7 +10,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.LOGS_PATH;
 import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
-import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.*;
+import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.ON_FAIL;
 import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;

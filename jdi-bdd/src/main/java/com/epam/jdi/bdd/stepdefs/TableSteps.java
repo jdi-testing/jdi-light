@@ -15,6 +15,7 @@ import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static java.lang.Integer.parseInt;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -144,8 +145,8 @@ public class TableSteps {
         int x, y;
         try {
             String[] xy = cellPair.split(",");
-            x = Integer.parseInt(xy[0].trim());
-            y = Integer.parseInt(xy[1].trim());
+            x = parseInt(xy[0].trim());
+            y = parseInt(xy[1].trim());
         } catch (Exception ex) {
             throw exception("Can't parse cell. Correct format is (col,row): " + safeException(ex));
         }

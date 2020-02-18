@@ -9,7 +9,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static com.epam.jdi.light.actions.ActionHelper.getJdiAction;
 import static com.epam.jdi.light.actions.ActionHelper.getJpClass;

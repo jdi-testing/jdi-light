@@ -97,6 +97,13 @@ public class TextAreaTests implements TestsInit {
         assertEquals(textArea.getText(), "line1\nline2");
     }
     @Test
+    public void addEmptyLineTest(){
+        textArea.addNewLine("line1");
+        textArea.addNewLine("");
+        textArea.addNewLine("line2");
+        assertEquals(textArea.getText(), "line1\n\nline2");
+    }
+    @Test
     public void focusTest() {
         textArea.focus();
     }

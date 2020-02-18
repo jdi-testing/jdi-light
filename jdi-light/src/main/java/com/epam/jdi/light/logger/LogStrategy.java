@@ -1,6 +1,5 @@
 package com.epam.jdi.light.logger;
 
-import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.logging.LogEntry;
 

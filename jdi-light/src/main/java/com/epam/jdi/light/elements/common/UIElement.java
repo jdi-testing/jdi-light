@@ -47,6 +47,7 @@ import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.openqa.selenium.Keys.BACK_SPACE;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -115,7 +116,14 @@ public class UIElement extends JDIBase
      * @param value
      */
     @JDIAction("Input '{0}' in '{name}'") @Override
-    public void sendKeys(CharSequence... value) { get().sendKeys(value);}
+    public void sendKeys(CharSequence... value) {
+        WebElement el = get();
+        if (value.length == 1 && value[0].equals("\n")) {
+            el.sendKeys("\n " + BACK_SPACE);
+        } else {
+            el.sendKeys(value);
+        }
+    }
     @Override
     public void clear() { get().clear();}
 
@@ -283,7 +291,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction("Set '{0}' in '{name}'") @Override
     public void setText(String value) {
-        jsExecute("value='"+value.replace("'", "\\'")+"'");
+        jsExecute("value='"+value.replace("\\", "\\\\").replace("'", "\\'")+"'");
     }
 
     @JDIAction("Click on '{name}' (x:{0}, y:{1})")

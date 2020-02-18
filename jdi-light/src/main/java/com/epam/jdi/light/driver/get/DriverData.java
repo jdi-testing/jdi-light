@@ -9,10 +9,8 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.opera.OperaOptions;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.safari.SafariOptions;
 
 import java.io.File;
@@ -41,10 +39,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;
 import static org.openqa.selenium.ie.InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR;
-import static org.openqa.selenium.logging.LogType.*;
+import static org.openqa.selenium.logging.LogType.PERFORMANCE;
 import static org.openqa.selenium.remote.CapabilityType.*;
-import static org.openqa.selenium.remote.CapabilityType.ACCEPT_SSL_CERTS;
-import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
