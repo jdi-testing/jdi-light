@@ -7,6 +7,8 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.light.logger.LogStrategy;
+import com.epam.jdi.light.logger.Strategy;
 import com.epam.jdi.tools.PropReader;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
@@ -39,24 +41,21 @@ import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy;
-import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.OFF;
-import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.ON_FAIL;
 import static com.epam.jdi.light.logger.AllureLogger.HTML_CODE_LOGGING;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
+import static com.epam.jdi.light.logger.LogStrategy.*;
+import static com.epam.jdi.light.logger.Strategy.parseStrategy;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
 /**
@@ -157,8 +156,9 @@ public class WebSettings {
                 ? PRELATEST_VERSION : p, "driver.version");
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
-        fillAction(p -> SCREENSHOT_STRATEGY = getAttachmentStrategy(p), "screenshot.strategy");
-        fillAction(p -> HTML_CODE_LOGGING = getAttachmentStrategy(p), "html.code.logging");
+        fillAction(p -> SCREEN_STRATEGY = getStrategy(p), "screenshot.strategy");
+        fillAction(p -> HTML_CODE_STRATEGY = getStrategy(p), "html.code.strategy");
+        fillAction(p -> REQUESTS_STRATEGY = getStrategy(p), "requests.strategy");
         fillAction(p -> KILL_BROWSER = p, "browser.kill");
         fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
         fillAction(p -> BROWSER_SIZE = p, "browser.size");
@@ -323,7 +323,14 @@ public class WebSettings {
         }
         return properties;
     }
-    private static AttachmentStrategy getAttachmentStrategy(String strategy) {
-        return strategy.toLowerCase().equals("off") ? OFF : ON_FAIL;
+    private static List<Strategy> getStrategy(String strategy) {
+        if (isBlank(strategy))
+            return new ArrayList<>();
+        List<Strategy> strategies = new ArrayList<>();
+        try {
+            String[] split = strategy.split(";");
+            strategies = map(split, s -> parseStrategy(s.trim()));
+        } catch (Exception ignore) { }
+        return strategies;
     }
 }

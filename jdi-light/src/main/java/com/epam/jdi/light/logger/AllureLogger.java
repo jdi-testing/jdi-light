@@ -52,7 +52,10 @@ public class AllureLogger {
             }
         }
         if (isNotBlank(htmlSnapshot)) {
-            attachHtmlSnapshot(htmlSnapshot);
+            attachText("HTML Code Snapshot", "text/html", htmlSnapshot);
+        }
+        if (isNotBlank(htmlSnapshot)) {
+            attachText("HTTP Requests", "text/plain", requests);
         }
 
         getLifecycle().stopStep(uuid);
@@ -65,8 +68,8 @@ public class AllureLogger {
         getLifecycle().stopStep(uuid);
     }
 
-    private static void attachHtmlSnapshot(String htmlSnapshot) {
-        addAttachment("HTML Code Snapshot", "text/html", htmlSnapshot, "html");
+    private static void attachText(String name, String type, String htmlSnapshot) {
+        addAttachment(name, type, htmlSnapshot, "html");
     }
 
     private static void attachScreenshot(String screenName) throws IOException {

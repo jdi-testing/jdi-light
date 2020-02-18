@@ -12,12 +12,13 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
@@ -29,7 +30,8 @@ import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
@@ -284,8 +286,8 @@ public class WebPage extends DriverBase implements PageObject {
     public static String getHtml() {
         return getDriver().getPageSource();
     }
-    public static LogEntries getHttpRequests() {
-        return getDriver().manage().logs().get("performance");
+    public static List<LogEntry> getHttpRequests() {
+        return getDriver().manage().logs().get("performance").getAll();
     }
 
     /**
@@ -440,11 +442,12 @@ public class WebPage extends DriverBase implements PageObject {
 
     public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
     public static void beforeNewPage(WebPage page) {
-        if (CHECK_AFTER_OPEN == NEW_PAGE)
+        if (CHECK_AFTER_OPEN == NEW_PAGE || CHECK_AFTER_OPEN == EVERY_PAGE)
             page.checkOpened();
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
             visualWindowCheck();
-        logger.toLog("Page: " + page.getName());
+        getHttpRequests();
+        logger.toLog("Page '%s' opened" + page.getName());
         TIMEOUT.set(PAGE_TIMEOUT.get());
     }
     public static JAction1<WebPage> BEFORE_NEW_PAGE = WebPage::beforeNewPage;
@@ -452,5 +455,5 @@ public class WebPage extends DriverBase implements PageObject {
         if (CHECK_AFTER_OPEN == EVERY_PAGE)
             page.checkOpened();
     }
-    public static JAction1<WebPage> BEFORE_THIS_PAGE  = WebPage::beforeThisPage;
+    public static JAction1<WebPage> BEFORE_EACH_STEP = WebPage::beforeThisPage;
 }

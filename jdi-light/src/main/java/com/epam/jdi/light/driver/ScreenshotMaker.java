@@ -29,11 +29,6 @@ public class ScreenshotMaker {
     public static String SCREEN_NAME = "screen";
     public static String SCREEN_FILE_SUFFIX = ".jpg";
     public static AttachmentStrategy SCREENSHOT_STRATEGY = ON_FAIL;
-    public static String takeScreenOnFailure() {
-        return SCREENSHOT_STRATEGY == ON_FAIL
-            ? takeScreen()
-            : null;
-    }
 
     public static String takeScreen() {
         return new ScreenshotMaker().takeScreenshot();
