@@ -74,10 +74,7 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void cantFindBySmartLocator(){
-        try {
-            //if no RuntimeException catched, test will fail on this step
-            Assert.assertEquals(smartLocator.isHidden(), "some text");
-       } catch (RuntimeException exception){ }
+        Assert.assertTrue(smartLocator.isHidden());
     }
     @Test
     public void getLocation(){
@@ -153,7 +150,7 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void classes(){
-        Assert.assertEquals(submit.classes(), new ArrayList<>(Arrays.asList("uui-button", "dark-blue"));
+        Assert.assertEquals(submit.classes(), new ArrayList<>(Arrays.asList("uui-button", "dark-blue")));
     }
     @Test
     public void hasClass() {
