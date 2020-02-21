@@ -45,4 +45,11 @@ public class States {
         logout.click();
     }
 
+    @Step
+    public static void shouldContactPageBeOpenedAndRefreshed(){
+        shouldBeLoggedIn();
+        contactFormPage.shouldBeOpened();
+        refresh();
+    }
+
 }
