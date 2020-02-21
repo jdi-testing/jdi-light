@@ -49,7 +49,6 @@ public class TableExampleTests implements TestsInit {
 
     @Test
     public void tableParamTest() {
-        usersTableSetup.is().size(4);
         usersTableSetup.is().count(400);
         usersTableSetup.is().columns(asList("Name", "Phone", "Email", "City"));
     }
