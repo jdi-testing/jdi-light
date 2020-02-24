@@ -139,18 +139,10 @@ public class InitActions {
             e.setLocator("#" + toKebabCase(e.getName()));
             e.locator.isRoot = true;
         })),
-        $("Smart Text", aRule(SText.class, (e, a) -> {
-            e.setLocator(asTextLocator(splitCamelCase(e.getName())));
-        })),
-        $("Smart Name", aRule(SName.class, (e, a) -> {
-            e.setLocator(format("[name='%s']", toKebabCase(e.getName())));
-        })),
-        $("Smart", aRule(Smart.class, (e, a) -> {
-            e.setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName())));
-        })),
-        $("Smart Class", aRule(SClass.class, (e, a) -> {
-            e.setLocator(format(".%s", toKebabCase(e.getName())));
-        })),
+        $("Smart Text", aRule(SText.class, (e, a) -> e.setLocator(asTextLocator(splitCamelCase(e.getName()))))),
+        $("Smart Name", aRule(SName.class, (e, a) -> e.setLocator(format("[name='%s']", toKebabCase(e.getName()))))),
+        $("Smart", aRule(Smart.class, (e, a) -> e.setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName()))))),
+        $("Smart Class", aRule(SClass.class, (e, a) -> e.setLocator(format(".%s", toKebabCase(e.getName()))))),
         $("ListUI", aRule(UI.class, (e,a,f)-> {
             UI[] uis = f.getAnnotationsByType(UI.class);
             if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))

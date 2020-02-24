@@ -110,7 +110,7 @@ public class PageFactory {
 
     // region Private local methods
     private static String initException(Field field, Class<?> parent) {
-        return format("Can't init '%s' '%s' on '%s'",
+        return format("Can't init %s '%s' on '%s'",
             getSafe(() -> isClass(field.getType(), WebPage.class) ? "page" : "element",
                 "Element Type"),
             // DO NOT REPLACE LAMBDAS BELOW

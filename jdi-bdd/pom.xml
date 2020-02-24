@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.4</version>
     <name>JDI BDD</name>
 
     <properties>

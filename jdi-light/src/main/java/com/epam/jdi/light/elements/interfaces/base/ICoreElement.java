@@ -38,9 +38,7 @@ public interface ICoreElement extends IBaseElement {
     default void show() { core().show(); }
     default String attr(String name) { return core().attr(name); }
     default MapArray<String, String> attrs() { return core().attrs(); }
-    default String css(String prop) {
-        return core().css(prop);
-    }
+    default String css(String prop) { return core().css(prop); }
     default boolean hasClass(String className) { return core().hasClass(className); }
     default boolean hasAttribute(String attrName) { return core().hasAttribute(attrName); }
     default String printHtml() { return core().printHtml(); }

@@ -7,7 +7,7 @@
     <artifactId>jdi-light-eyes</artifactId>
     <name>JDI Light Applitools Eyes</name>
     <packaging>jar</packaging>
-    <version>1.0.5</version>
+    <version>1.0.4</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
@@ -23,7 +23,6 @@
         </dependency>
 
         <!-- Applitools SDK -->
-        <!-- https://mvnrepository.com/artifact/com.applitools/eyes-selenium-java4 -->
         <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-selenium-java3</artifactId>
