@@ -29,9 +29,8 @@ public class TestsInit {
         initSite(SiteJdi.class);
         assertThat(TIMEOUT.get(), is(5));
         assertThat(PAGE_TIMEOUT.get(), is(15));
-        BEFORE_JDI_ACTION = jp -> {
-            BEFORE_STEP_ACTION.execute(jp);
-            processPage(jp);
+        BEFORE_JDI_ACTION = jInfo -> {
+            ActionHelper.beforeJdiAction(jInfo);
             TIMER.set(new Timer());
         };
         AFTER_JDI_ACTION = (jInfo, result) -> {
