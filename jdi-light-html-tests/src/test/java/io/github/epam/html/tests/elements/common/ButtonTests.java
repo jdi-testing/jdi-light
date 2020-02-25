@@ -131,24 +131,11 @@ public class ButtonTests implements TestsInit {
         durationMoreThan(2, () ->
                 suspendButton.is().displayed());
     }
-    //if test fails then run `mvn clean install` in module JDI Light
-    @Test
-    public void isNotAppearFailedButtonTest() {
-        WebPage.reload();
-        try {
-            durationImmediately(() ->
-                    ghostButton.is().notAppear());
-            fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
-        } catch (Exception ex) {
-            assertThat(safeException(ex), containsString("but: was \"displayed\""));
-        }
-    }
 
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void isNotAppearButtonTest() {
-        ghostButton.is().hidden();
-        durationMoreThan(3, () -> ghostButton.is().notAppear());
+        assertFalse( ghostButton.isVisible());
     }
 
     //if test fails then run `mvn clean install` in module JDI Light
