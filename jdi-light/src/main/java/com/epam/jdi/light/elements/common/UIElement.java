@@ -589,9 +589,9 @@ public class UIElement extends JDIBase
         show();
         Rectangle rect = getPosition();
         imageFilePath = windowScreenshot(
-                multiply(rect.getX()), multiply(rect.getY()),
-                multiply(rect.getWidth()), multiply(rect.getHeight()),
-                getScreenshotName(tag));
+            multiply(rect.getX()), multiply(rect.getY()),
+            multiply(rect.getWidth()), multiply(rect.getHeight()),
+            getScreenshotName(tag));
         return getImageFile();
     }
     private int multiply(int value) {

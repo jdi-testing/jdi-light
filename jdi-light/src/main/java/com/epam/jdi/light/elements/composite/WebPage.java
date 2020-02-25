@@ -376,20 +376,36 @@ public class WebPage extends DriverBase implements PageObject {
         return jsExecute("return window.pageYOffset;");
     }
     @JDIAction(level = DEBUG)
+    public static String windowScreenshot() {
+        try {
+            File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            //show();
+            String path = mergePath(getPath(), getCurrentPage()+".png");
+            File imageFile = new File(path);
+            //BufferedImage fullImg = ImageIO.read(screenshot);
+            //ImageIO.write(fullImg, "png", screenshot);
+            copyFile(screenshot, imageFile);
+            return path;
+        } catch (Exception ex) { throw exception(ex, "Can't take screenshot"); }
+    }
+    @JDIAction(level = DEBUG)
     public static String windowScreenshot(int x, int y, int w, int h, String name) {
-    {
-        File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-        //show();
-        String path = mergePath(getPath(), name);
-        File imageFile = new File(path);
+        File screenshot;
+        File imageFile;
+        String path;
+        try {
+            screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            //show();
+            path = mergePath(getPath(), name);
+            imageFile = new File(path);
+        } catch (Exception ex) { throw exception(ex, "Can't take windowScreenshot"); }
         try {
             BufferedImage fullImg = ImageIO.read(screenshot);
             BufferedImage crop = fullImg.getSubimage(x, y, w, h);
             ImageIO.write(crop, "png", screenshot);
             copyFile(screenshot, imageFile);
-        } catch (Exception ex) {throw exception(ex, "Can't do windowScreenshot"); }
+        } catch (Exception ex) { throw exception(ex, "Can't crop windowScreenshot"); }
         return path;
-    }
     }
 
     @Override

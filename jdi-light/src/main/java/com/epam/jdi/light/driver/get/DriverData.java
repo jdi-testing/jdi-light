@@ -50,7 +50,7 @@ public class DriverData {
     public static final String PROJECT_PATH = path("");
     public static String SRC_PATH = mergePath(PROJECT_PATH, "src", "main");
     public static String TEST_PATH = mergePath(PROJECT_PATH, "src", "test");
-    public static String LOGS_PATH = mergePath(TEST_PATH, ".logs");
+    public static String LOGS_PATH = mergePath("target", ".logs");
     public static String DRIVERS_FOLDER;
     public static String getDriverFolder() {
         return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")

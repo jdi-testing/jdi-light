@@ -25,7 +25,7 @@ import static org.openqa.selenium.OutputType.FILE;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class ScreenshotMaker {
-    public static String SCREEN_PATH = LOGS_PATH + "\\screens";
+    public static String SCREEN_PATH = mergePath(LOGS_PATH, "screens");
     public static String SCREEN_NAME = "screen";
     public static String SCREEN_FILE_SUFFIX = ".jpg";
     public static AttachmentStrategy SCREENSHOT_STRATEGY = ON_FAIL;
@@ -39,7 +39,7 @@ public class ScreenshotMaker {
         String result = SCREEN_PATH.replace("/", "\\");
         return result.contains(":")
             ? SCREEN_PATH
-            : PROJECT_PATH + SCREEN_PATH;
+            : mergePath(PROJECT_PATH, SCREEN_PATH);
     }
     public String takeScreenshot() {
         String name = TEST_NAME.get();

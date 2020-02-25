@@ -1,6 +1,7 @@
 package io.github.epam.html.tests.elements.complex.table;
 
 import com.epam.jdi.light.elements.complex.table.Single;
+import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.com.entities.MarvelUserSimple;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -34,7 +35,13 @@ public class DataSimpleTableTests implements TestsInit {
     }
 
     @Test
+    public void screenshotTest() {
+        // TODO
+        //usersData.core().makePhoto();
+    }
+    @Test
     public void tableParamsTest() {
+        WebPage.windowScreenshot();
         assertEquals(usersData.size(), 4);
         assertEquals(usersData.count(), 6);
         assertEquals(usersData.header(), asList("Number", "Type", "User", "Description"));
