@@ -22,16 +22,16 @@ public class HtmlActions {
     public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {
         if (notThisAround(className))
             return jp.proceed();
-        ActionObject jInfo = new ActionObject(jp);
+        ActionObject jInfo = new ActionObject(jp, className);
         try {
             failedMethods.clear();
-            if (aroundCount(className) > 1)
-                return defaultAction(jInfo);
             BEFORE_JDI_ACTION.execute(jInfo);
-            Object result = stableAction(jInfo);
+            Object result = aroundCount(className) == 1
+                ? stableAction(jInfo)
+                : defaultAction(jInfo);
             return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
-            throw exceptionJdiAround(jInfo, className, ex);
+            throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {
             jInfo.clear();

@@ -3,6 +3,7 @@ package com.epam.jdi.light.actions;
 import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
+import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.common.VisualCheckPage;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
@@ -16,10 +17,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
+import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
 import io.qameta.allure.Step;
 import org.aspectj.lang.JoinPoint;
@@ -36,7 +34,9 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.common.PageChecks.*;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
+import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
@@ -143,24 +143,57 @@ public class ActionHelper {
         }
     }
     public static JAction1<ActionObject> BEFORE_STEP_ACTION = ActionHelper::beforeStepAction;
-    public static void beforeJdiAction(ActionObject jp) {
-        BEFORE_STEP_ACTION.execute(jp);
-        processNewPage(jp);
+    public static JFunc1<String, String> TRANSFORM_LOG_STRING = s -> s;
+    public static void beforeJdiAction(ActionObject jInfo) {
+        ProceedingJoinPoint jp = jInfo.jp();
+        String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
+        if (WRITE_TO_ALLURE)
+            jInfo.stepUId = startStep(message);
+        if (jInfo.topLevel()) {
+            if (WRITE_TO_LOG)
+                logger.toLog(message, logLevel(jp));
+            if (CHECK_PAGE_OPEN != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
+                processPage(jInfo);
+            if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
+                visualValidation(jp, message);
+        }
+    }
+    private static void visualValidation(ProceedingJoinPoint jp, String message) {
+        Object obj = jp.getThis();
+        if (obj == null) {
+            if (getJpMethod(jp).getMethod().getAnnotation(VisualCheck.class) != null)
+                try {
+                    visualWindowCheck();
+                } catch (Exception ex) {
+                    logger.debug("BEFORE: Can't do visualWindowCheck");
+                }
+        }
+        else {
+            if (isInterface(obj.getClass(), JAssert.class)) {
+                JDIBase element = ((IBaseElement) obj).base();
+                try {
+                    element.visualCheck(message);
+                } catch (Exception ex) {
+                    logger.debug("BEFORE: Can't do visualCheck for element");
+                }
+            }
+        }
     }
     public static JAction1<ActionObject> BEFORE_JDI_ACTION = ActionHelper::beforeJdiAction;
     public static Object afterStepAction(ActionObject jInfo, Object result) {
-        ProceedingJoinPoint jp = jInfo.jp();
-        if (!logResult(jp)) return result;
-        LogLevels logLevel = logLevel(jp);
-        if (result == null || isInterface(getJpClass(jp), JAssert.class))
-            logger.debug("Done");
-        else {
-            String text = result.toString();
-            if (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5)
-                text = text.substring(0, CUT_STEP_TEXT) + "...";
-            logger.toLog(">>> " + text, logLevel);
-        }
         passStep(jInfo.stepUId);
+        ProceedingJoinPoint jp = jInfo.jp();
+        if (logResult(jp)) {
+            LogLevels logLevel = logLevel(jp);
+            if (result == null || isInterface(getJpClass(jp), JAssert.class))
+                logger.debug("Done");
+            else {
+                String text = result.toString();
+                if (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5)
+                    text = text.substring(0, CUT_STEP_TEXT) + "...";
+                logger.toLog(">>> " + text, logLevel);
+            }
+        }
         if (getJpMethod(jp).getName().equals("open"))
             BEFORE_NEW_PAGE.execute(getPage(jp.getThis()));
         TIMEOUT.reset();
@@ -168,8 +201,11 @@ public class ActionHelper {
     }
     public static JFunc2<ActionObject, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
     static boolean logResult(ProceedingJoinPoint jp) {
+        if (!WRITE_TO_LOG)
+            return false;
         Class<?> cl = getJpClass(jp);
-        if (!isInterface(cl, JDIElement.class)) return false;
+        if (!isInterface(cl, JDIElement.class))
+            return false;
         JDIAction ja = getJdiAction(jp);
         return ja != null && ja.logResult();
     }
@@ -182,7 +218,25 @@ public class ActionHelper {
                 : jp.getSignature().getDeclaringType();
     }
     public static Object afterJdiAction(ActionObject jInfo, Object result) {
-        return AFTER_STEP_ACTION.execute(jInfo, result);
+        passStep(jInfo.stepUId);
+        ProceedingJoinPoint jp = jInfo.jp();
+        if (jInfo.topLevel()) {
+            if (logResult(jp)) {
+                LogLevels logLevel = logLevel(jp);
+                if (result == null || isInterface(getJpClass(jp), JAssert.class))
+                    logger.debug("Done");
+                else {
+                    String text = result.toString();
+                    if (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5)
+                        text = text.substring(0, CUT_STEP_TEXT) + "...";
+                    logger.toLog(">>> " + text, logLevel);
+                }
+            }
+            if (getJpMethod(jp).getName().equals("open"))
+                BEFORE_NEW_PAGE.execute(getPage(jp.getThis()));
+            TIMEOUT.reset();
+        }
+        return result;
     }
     public static JFunc2<ActionObject, Object, Object> AFTER_JDI_ACTION = ActionHelper::afterJdiAction;
     //region Private
@@ -195,9 +249,7 @@ public class ActionHelper {
                 $("element", getElementName(jp))));
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
-    public static void processNewPage(ActionObject jInfo) {
-        if (CHECK_AFTER_OPEN == PageChecks.NONE && VISUAL_PAGE_STRATEGY == VisualCheckPage.NONE)
-            return;
+    public static void processPage(ActionObject jInfo) {
         getWindows();
         Object element = jInfo.jp().getThis();
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
@@ -208,11 +260,21 @@ public class ActionHelper {
                     setCurrentPage(page);
                     BEFORE_NEW_PAGE.execute(page);
                 }
-                else BEFORE_EACH_STEP.execute(page);
+                BEFORE_EACH_STEP.execute(page);
             }
         }
     }
-    public static JFunc2<Object, String, String> ACTION_FAILED = (el, ex) -> ex;
+    public static List<String> failedMethods = new ArrayList<>();
+    public static RuntimeException actionFailed(ActionObject jInfo, Throwable ex) {
+        addFailedMethod(jInfo.jp());
+        if (jInfo.topLevel()) {
+            logFailure(jInfo);
+            reverse(failedMethods);
+            logger.error("Failed actions chain: " + print(failedMethods, " > "));
+        }
+        return exception(ex, getExceptionAround(ex, jInfo.topLevel()));
+    }
+    public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
     public static void logFailure(ActionObject jInfo) {
         logger.toLog(">>> " + jInfo.object().toString(), ERROR);
         String screenName = "";
@@ -339,13 +401,14 @@ public class ActionHelper {
     //endregion
 
     public static RuntimeException exceptionJdiAround(ActionObject jInfo, String className, Throwable ex) {
-        addFailedMethod(jInfo.jp());
-        if (aroundCount(className) == 1) {
-            logFailure(jInfo);
-            reverse(failedMethods);
-            logger.error("Failed actions chain: " + print(failedMethods, " > "));
-        }
-        return exception(ex, ACTION_FAILED.execute(jInfo.object(), getExceptionAround(ex, aroundCount(className) == 1)));
+        //addFailedMethod(jInfo.jp());
+        //if (aroundCount(className) == 1) {
+        //    logFailure(jInfo);
+        //    reverse(failedMethods);
+        //    logger.error("Failed actions chain: " + print(failedMethods, " > "));
+        //}
+        //return exception(ex, ACTION_FAILED.execute(jInfo.object(), getExceptionAround(ex, aroundCount(className) == 1)));
+        return new RuntimeException();
     }
     public static void addFailedMethod(ProceedingJoinPoint jp) {
         String[] s = jp.toString().split("\\.");
@@ -353,7 +416,6 @@ public class ActionHelper {
         if (!failedMethods.contains(result))
             failedMethods.add(result);
     }
-    public static List<String> failedMethods = new ArrayList<>();
     public static String getExceptionAround(Throwable ex, boolean top) {
         String result = safeException(ex);
         while (result.contains("\n\n"))
@@ -390,7 +452,7 @@ public class ActionHelper {
         do {
             try {
                 Object result = jInfo.overrideAction() != null
-                        ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
+                    ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
                 if (!condition(jInfo.jp())) continue;
                 return result;
             } catch (Throwable ex) {

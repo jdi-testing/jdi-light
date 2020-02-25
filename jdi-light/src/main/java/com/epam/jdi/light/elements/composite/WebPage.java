@@ -441,24 +441,20 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean contains() {
             String value = actual.get();
-            //logger.toLog(format("Check that page %s(%s) contains '%s'", what, value, equals));
             return equals == null || equals.equals("") || value.contains(equals);
         }
     }
 
-    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
+    public static PageChecks CHECK_PAGE_OPEN = PageChecks.NONE;
     public static void beforeNewPage(WebPage page) {
-        if (CHECK_AFTER_OPEN == NEW_PAGE || CHECK_AFTER_OPEN == EVERY_PAGE)
-            page.checkOpened();
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
             visualWindowCheck();
-        getHttpRequests();
         logger.toLog("Page '"+page.getName()+"' opened");
         TIMEOUT.set(PAGE_TIMEOUT.get());
     }
     public static JAction1<WebPage> BEFORE_NEW_PAGE = WebPage::beforeNewPage;
     public static void beforeThisPage(WebPage page) {
-        if (CHECK_AFTER_OPEN == EVERY_PAGE)
+        if (CHECK_PAGE_OPEN != PageChecks.NONE)
             page.checkOpened();
     }
     public static JAction1<WebPage> BEFORE_EACH_STEP = WebPage::beforeThisPage;

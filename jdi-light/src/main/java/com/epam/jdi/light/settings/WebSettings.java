@@ -37,7 +37,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
-import static com.epam.jdi.light.elements.composite.WebPage.CHECK_AFTER_OPEN;
+import static com.epam.jdi.light.elements.composite.WebPage.CHECK_PAGE_OPEN;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
@@ -50,6 +50,7 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
+import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.*;
@@ -72,6 +73,8 @@ public class WebSettings {
         DOMAIN = domain;
     }
     public static String KILL_BROWSER = "afterAndBefore";
+    public static boolean WRITE_TO_ALLURE = true;
+    public static boolean WRITE_TO_LOG = true;
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
@@ -160,7 +163,7 @@ public class WebSettings {
         fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
         fillAction(p -> BROWSER_SIZE = p, "browser.size");
         fillAction(p -> PAGE_LOAD_STRATEGY = getPageLoadStrategy(p), "page.load.strategy");
-        fillAction(p -> CHECK_AFTER_OPEN = parse(p), "page.check.after.open");
+        fillAction(p -> CHECK_PAGE_OPEN = parse(p), "page.check.after.open");
         fillAction(SoftAssert::setAssertType, "assert.type");
         fillAction(p -> CLICK_TYPE = getClickType(p), "click.type");
         fillAction(p -> TEXT_TYPE = getTextType(p), "text.type");
@@ -170,6 +173,7 @@ public class WebSettings {
         fillAction(p -> DRIVER_REMOTE_URL = getRemoteUrl(p), "remote.type");
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
+        fillAction(p -> WRITE_TO_ALLURE = parseBoolean(p), "allure.steps");
         fillAction(p -> SMART_SEARCH_LOCATORS =
                 filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
         fillAction(p -> SMART_SEARCH_NAME = getSmartSearchFunc(p), "smart.locators.toName");

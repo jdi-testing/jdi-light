@@ -31,7 +31,6 @@ import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
 public class JDILogger implements ILogger {
     private static MapArray<String, JDILogger> loggers = new MapArray<>();
     private static Marker jdiMarker = MarkerManager.getMarker("JDI");
-    public static boolean writeToAllure = true;
 
     public static JDILogger instance(String name) {
         if (!loggers.has(name))
@@ -115,18 +114,9 @@ public class JDILogger implements ILogger {
         return name;
     }
 
-    private static void writeToAllure(String message) {
-        if (!writeToAllure) return;
-        final String uuid = UUID.randomUUID().toString();
-        StepResult step = new StepResult().withName(message).withStatus(PASSED);
-        getLifecycle().startStep(uuid, step);
-        getLifecycle().stopStep(uuid);
-    }
-
     public void step(String s, Object... args) {
         if (logLevel.get().equalOrLessThan(STEP)) {
             logger.log(Level.forName("STEP", 350), jdiMarker, getRecord(s, args));
-            //writeToAllure(getRecord(s, args));
         }
     }
 

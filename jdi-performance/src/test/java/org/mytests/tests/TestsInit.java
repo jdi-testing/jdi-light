@@ -31,7 +31,7 @@ public class TestsInit {
         assertThat(PAGE_TIMEOUT.get(), is(15));
         BEFORE_JDI_ACTION = jp -> {
             BEFORE_STEP_ACTION.execute(jp);
-            processNewPage(jp);
+            processPage(jp);
             TIMER.set(new Timer());
         };
         AFTER_JDI_ACTION = (jInfo, result) -> {

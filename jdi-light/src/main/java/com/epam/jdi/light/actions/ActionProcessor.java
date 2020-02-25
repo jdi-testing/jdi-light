@@ -27,31 +27,31 @@ public class ActionProcessor {
     public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {
         if (notThisAround(className))
             return jp.proceed();
-        ActionObject jInfo = new ActionObject(jp);
+        ActionObject jInfo = new ActionObject(jp, className);
         try {
             failedMethods.clear();
-            if (aroundCount(className) > 1)
-                return defaultAction(jInfo);
             BEFORE_JDI_ACTION.execute(jInfo);
-            Object result = stableAction(jInfo);
+            Object result = jInfo.topLevel()
+                ? stableAction(jInfo)
+                : defaultAction(jInfo);
             return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
-            throw exceptionJdiAround(jInfo, className, ex);
+            throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {
             jInfo.clear();
         }
     }
-    @Around("stepPointcut()")
-    public Object stepAround(ProceedingJoinPoint jp) {
-        try {
-            ActionObject jInfo = new ActionObject(jp);
-            BEFORE_STEP_ACTION.execute(jInfo);
-            Object result = jp.proceed();
-            return AFTER_STEP_ACTION.execute(jInfo, result);
-        } catch (Throwable ex) {
-            Object element = jp.getThis() != null ? jp.getThis() : new Object();
-            throw exception(ex, ACTION_FAILED.execute(element, safeException(ex)));
-        }
-    }
+    //@Around("stepPointcut()")
+    //public Object stepAround(ProceedingJoinPoint jp) {
+    //    try {
+    //        ActionObject jInfo = new ActionObject(jp);
+    //        BEFORE_STEP_ACTION.execute(jInfo);
+    //        Object result = jp.proceed();
+    //        return AFTER_STEP_ACTION.execute(jInfo, result);
+    //    } catch (Throwable ex) {
+    //        Object element = jp.getThis() != null ? jp.getThis() : new Object();
+    //        throw exception(ex, ACTION_FAILED.execute(element, safeException(ex)));
+    //    }
+    //}
 }
