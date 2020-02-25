@@ -382,8 +382,6 @@ public class WebPage extends DriverBase implements PageObject {
             //show();
             String path = mergePath(getPath(), getCurrentPage()+".png");
             File imageFile = new File(path);
-            //BufferedImage fullImg = ImageIO.read(screenshot);
-            //ImageIO.write(fullImg, "png", screenshot);
             copyFile(screenshot, imageFile);
             return path;
         } catch (Exception ex) { throw exception(ex, "Can't take screenshot"); }
