@@ -67,7 +67,8 @@ public class WebDriverFactory {
             Value(IE, t -> IE_INFO.getDriver()),
             Value(OPERA, t -> OPERA_INFO.getDriver()),
             Value(EDGE, t -> EDGE_INFO.getDriver()),
-            Value(SAFARI, t -> SAFARI_INFO.getDriver())
+            Value(SAFARI, t -> SAFARI_INFO.getDriver()),
+            Value(APPIUM, t -> APPIUM_INFO.getDriver())
         );
         if (driver == null)
             throw exception("Unknown driver: " + type);

@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.logging.Level;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.driver.WebDriverFactory.isRemote;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.driver.get.Platform.X32;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -112,10 +113,12 @@ public class DriverData {
         if (groups.size() == 2)
             driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
         else {
-            if (getOs().equals(MAC))
-                maximizeScreen(driver);
-            else
-                driver.manage().window().maximize();
+            if(!isRemote()) {
+                if (getOs().equals(MAC))
+                    maximizeScreen(driver);
+                else
+                    driver.manage().window().maximize();
+            }
         }
         return driver;
     };
