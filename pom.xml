@@ -54,11 +54,16 @@
         <module>jdi-light-html</module>
         <module>jdi-light-eyes</module>
         <module>jdi-bdd</module>
-        <module>jdi-performance</module>
-        <module>jdi-light-examples</module>
         <module>jdi-light-html-tests</module>
         <module>jdi-bdd-tests</module>
-        <module>jdi-bdd-no-po-tests</module>
         <module>jdi-light-applitools-tests</module>
+        <module>test-examples/jdi-performance</module>
+        <module>test-examples/jdi-light-examples</module>
+        <module>test-examples/jdi-bdd-no-po-tests</module>
+        <module>test-templates/jdi-dark-testng-template</module>
+        <module>test-templates/jdi-light-junit-template</module>
+        <module>test-templates/jdi-light-saucelabs-template</module>
+        <module>test-templates/jdi-light-selenoid-template</module>
+        <module>test-templates/jdi-light-testng-template</module>
     </modules>
 </project>
