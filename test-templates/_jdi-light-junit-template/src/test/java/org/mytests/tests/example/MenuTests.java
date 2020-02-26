@@ -6,14 +6,13 @@ import org.mytests.tests.TestsInit;
 import org.mytests.tests.states.States;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mytests.tests.states.States.*;
 import static org.mytests.uiobjects.example.entities.LeftMenuData.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
 
 class MenuTests extends TestsInit {
     @BeforeEach
     public void openPerformancePage() {
-        shouldBeLoggedIn();
+        States.shouldBeLoggedIn();
         homePage.shouldBeOpened();
     }
     @Test

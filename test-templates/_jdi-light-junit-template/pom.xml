@@ -7,7 +7,7 @@
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-junit-template</artifactId>
     <version>1.0</version>
-    <name>Test Automation project template</name>
+    <name>Template: JDI Light JUnit</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,11 +26,6 @@
             <version>RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>27.1-jre</version>
-        </dependency>
-        <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
             <version>${allure.version}</version>
@@ -38,21 +33,7 @@
     </dependencies>
 
     <build>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>false</filtering>
-            </testResource>
-        </testResources>
         <plugins>
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>${allure.maven.version}</version>
-                <configuration>
-                    <reportDirectory>target/allure-report</reportDirectory>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -60,6 +41,14 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.maven.version}</version>
+                <configuration>
+                    <reportDirectory>target/allure-report</reportDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -86,6 +75,12 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>false</filtering>
+            </testResource>
+        </testResources>
     </build>
 
     <!-- Allure reporting config in parent-->
