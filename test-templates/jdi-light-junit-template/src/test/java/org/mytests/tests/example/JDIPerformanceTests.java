@@ -15,7 +15,7 @@ import static org.mytests.uiobjects.example.TestData.TABLE_SNAPSHOOT;
 import static org.mytests.uiobjects.example.site.SiteJdi.performancePage;
 import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.*;
 
-class JDIPerformanceTests extends TestsInit {
+public class JDIPerformanceTests extends TestsInit {
 
     @BeforeEach
     void openPerformancePage() {

@@ -3,15 +3,7 @@ package org.mytests.uiobjects.example.entities;
 import com.epam.jdi.tools.DataClass;
 
 public class Contacts extends DataClass<Contacts> {
-    public String name;
-    public String lastName;
+    public String name, lastName, acceptConditions, position, passportNumber,
+            passportSeria, description, gender, weather;
     public boolean passport;
-    public String acceptConditions;
-    public String position;
-    public String passportNumber;
-    public String passportSeria;
-    public String description;
-    public String gender;
-    public String religion;
-    public String weather;
 }

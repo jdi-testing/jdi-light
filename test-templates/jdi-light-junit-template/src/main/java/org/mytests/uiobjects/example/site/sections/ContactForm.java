@@ -17,7 +17,6 @@ public class ContactForm extends Form<Contacts> {
 	TextField name, lastName, position, passportNumber, passportSeria;
 
 	DropdownSelect gender;
-	IsCombobox religion;
 	MultiDropdown weather;
 
 	Checkbox passport, acceptConditions;

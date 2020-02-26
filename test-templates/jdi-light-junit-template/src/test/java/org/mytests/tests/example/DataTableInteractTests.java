@@ -13,7 +13,7 @@ import static org.mytests.tests.states.States.shouldBeLoggedIn;
 import static org.mytests.uiobjects.example.site.SiteJdi.usersPage;
 import static org.mytests.uiobjects.example.site.pages.UsersPage.*;
 
-class DataTableInteractTests extends TestsInit {
+public class DataTableInteractTests extends TestsInit {
 
     @BeforeEach
     void before() {

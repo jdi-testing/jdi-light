@@ -8,11 +8,9 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import org.apache.commons.lang3.time.StopWatch;
 import org.openqa.selenium.By;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -99,11 +97,6 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
                 value.click();
         }
         label().click();
-    }
-    private long getTime(StopWatch s) {
-        long result = s.getTime(TimeUnit.MILLISECONDS);
-        s.reset(); s.start();
-        return result;
     }
 
     /**
