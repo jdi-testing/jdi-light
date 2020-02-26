@@ -60,10 +60,7 @@
         <module>test-examples/jdi-performance</module>
         <module>test-examples/jdi-light-examples</module>
         <module>test-examples/jdi-bdd-no-po-tests</module>
-        <module>test-templates/jdi-dark-testng-template</module>
         <module>test-templates/jdi-light-junit-template</module>
-        <module>test-templates/jdi-light-saucelabs-template</module>
-        <module>test-templates/jdi-light-selenoid-template</module>
         <module>test-templates/jdi-light-testng-template</module>
     </modules>
 </project>
