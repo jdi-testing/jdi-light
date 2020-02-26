@@ -4,17 +4,16 @@ import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-
 import io.github.com.pages.UIElementContactFormPage;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-
 import java.util.Arrays;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
@@ -59,7 +58,7 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void checkIfDeselected(){
-        assertTrue(forCalculateThree.isDeselected());
+        Assert.assertTrue(forCalculateThree.isDeselected());
     }
     @Test
     public void checkIfEnabled(){
@@ -78,6 +77,7 @@ public class UIElementTests extends TestsInit{
     public void cantFindBySmartLocator(){
         assertTrue(smartLocator.isHidden());
     }
+
     @Test
     public void getLocation(){
         assertEquals(submit.getLocation(), new Point(1042, 477));
@@ -139,6 +139,7 @@ public class UIElementTests extends TestsInit{
     public void getAllAttributes(){
         assertEquals(submit.getAllAttributes(), MapArray.map(Pair.$("class", "uui-button dark-blue"), Pair.$("type", "submit")));
     }
+
     @Test
     public void isExist(){
         assertTrue(submit.isExist());
