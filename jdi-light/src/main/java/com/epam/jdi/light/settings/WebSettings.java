@@ -42,6 +42,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.logger.LogStrategy.*;
+import static com.epam.jdi.light.logger.Strategy.FAIL;
 import static com.epam.jdi.light.logger.Strategy.parseStrategy;
 import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
@@ -156,6 +157,7 @@ public class WebSettings {
                 ? PRELATEST_VERSION : p, "driver.version");
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
+        SCREEN_STRATEGY.add(FAIL);
         fillAction(p -> SCREEN_STRATEGY = getStrategy(p), "screenshot.strategy");
         fillAction(p -> HTML_CODE_STRATEGY = getStrategy(p), "html.code.strategy");
         fillAction(p -> REQUESTS_STRATEGY = getStrategy(p), "requests.strategy");
