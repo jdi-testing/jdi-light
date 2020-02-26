@@ -203,7 +203,7 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void attrs(){
-        assertEquals(submit.attrs(),MapArray.map(Pair.$("class", "uui-button dark-blue"), Pair.$("type", "submit")));
+        assertEquals(submit.attrs(), MapArray.map(Pair.$("class", "uui-button dark-blue"), Pair.$("type", "submit")));
     }
     @Test
     public void text(){
