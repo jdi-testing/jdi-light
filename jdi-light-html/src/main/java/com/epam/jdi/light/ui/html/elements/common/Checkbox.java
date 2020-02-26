@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.asserts.CheckboxAssert;
 
 /**
@@ -13,12 +14,16 @@ import com.epam.jdi.light.ui.html.asserts.CheckboxAssert;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class Checkbox extends UIBaseElement<CheckboxAssert>
-    implements HasLabel, SetValue, HasClick, HasCheck {
+    implements HasLabel, SetValue, HasClick, HasCheck, IsText {
     // region Actions
     public void check(String value) {
         if (value.equalsIgnoreCase("true") || value.equals("1"))
             check();
         else uncheck();
+    }
+    @JDIAction("Get '{name}' text") @Override
+    public String getText() {
+        return labelText();
     }
     @JDIAction("Check '{name}'")
     public void check() {

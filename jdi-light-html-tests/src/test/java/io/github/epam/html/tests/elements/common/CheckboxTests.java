@@ -28,19 +28,22 @@ public class CheckboxTests implements TestsInit {
 
     @Test
     public void getLabelTextTest() {
-        assertEquals(acceptConditions.labelText(),
-            "Accept terms and conditions");
+        assertEquals(acceptConditions.labelText(), "Accept terms and conditions");
+    }
+    @Test
+    public void getTextTest() {
+        assertEquals(acceptConditions.getText(), "Accept terms and conditions");
     }
 
     @Test
     public void checkTest() {
         acceptConditions.check();
-        assertEquals(acceptConditions.isSelected(), true);
+        assertTrue(acceptConditions.isSelected());
     }
     @Test
     public void uncheckTest() {
         acceptConditions.uncheck();
-        assertEquals(acceptConditions.isSelected(), false);
+        assertFalse(acceptConditions.isSelected());
     }
 
     @Test

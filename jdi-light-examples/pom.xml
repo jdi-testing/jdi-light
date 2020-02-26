@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-    <version>1.1.16</version>
+    <version>1.1.17</version>
     <artifactId>jdi-light-examples</artifactId>
     <name>JDI Web Tests</name>
     <groupId>com.epam.jdi</groupId>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.1.16</version>
+            <version>1.1.17</version>
         </dependency>
 
         <!--Allure config in parent-->
@@ -41,6 +41,15 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
             <!--Allure reporting config in parent-->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
@@ -74,23 +83,10 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>${allure.maven}</version>
-            </plugin>
-
-
-            <!-- From general pom -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
             </plugin>
         </plugins>
 
@@ -112,17 +108,7 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>LATEST</version>
-                <configuration>
-                    <properties>
-                        <allure.results.directory>target/allure-results</allure.results.directory>
-                    </properties>
-                    <properties>
-                        <allure.link.issue.pattern>https://example.org/issue/{}</allure.link.issue.pattern>
-                    </properties>
-                </configuration>
             </plugin>
         </plugins>
     </reporting>
-    
 </project>

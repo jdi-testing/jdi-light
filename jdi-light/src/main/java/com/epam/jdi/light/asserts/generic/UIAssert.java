@@ -5,10 +5,12 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.tools.StringUtils.format;
+import static org.hamcrest.Matchers.containsString;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -71,6 +73,53 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
         boolean result = new Timer(timeoutSec * 1000)
                 .wait(() -> element.isDisplayed());
         jdiAssert(result ? "displayed" : "hidden", Matchers.is("hidden"));
+        return (A) this;
+    }
+
+    /**
+     * Match passed value with the element attribute
+     * @param attrName
+     * @param condition to compare
+     */
+    @JDIAction("Assert that '{name}' attribute '{0}' {1}")
+    public A attr(String attrName, Matcher<String> condition) {
+        jdiAssert(element.attr(attrName), condition);
+        return (A) this;
+    }
+    public A attr(String attrName, String value) {
+        return attr(attrName, Matchers.is(value));
+    }
+
+    /**
+     * Match passed value with the element css
+     * @param css
+     * @param condition to compare
+     */
+    @JDIAction("Assert that '{name}' css '{0}' {1}")
+    public A css(String css, Matcher<String> condition) {
+        jdiAssert(element.css(css), condition);
+        return (A) this;
+    }
+    public A css(String css, String value) {
+        return css(css, Matchers.is(value));
+    }
+
+    /**
+     * Match passed value with the element class
+     * @param className to compare hasClass(String className)
+     */
+    @JDIAction("Assert that '{name}' has css class {0}")
+    public A hasClass(String className) {
+        jdiAssert(format(element.classes().contains(className) ? "has class '%s'" : "has no class '%s'", className) , Matchers.is("has class '"+className+"'"));
+        return (A) this;
+    }
+    /**
+     * Match passed value with the element class
+     * @param attrName to compare hasAttribute(String className)
+     */
+    @JDIAction("Assert that '{name}' has css class {0}")
+    public A hasAttribute(String attrName) {
+        jdiAssert(format(element.hasAttribute(attrName) ? "has attribute '%s'" : "has no attribute '%s'", attrName) , Matchers.is("has attribute '"+attrName+"'"));
         return (A) this;
     }
 

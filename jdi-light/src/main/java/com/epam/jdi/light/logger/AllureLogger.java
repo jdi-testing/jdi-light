@@ -9,6 +9,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.composite.WebPage.getHtml;
 import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.OFF;
 import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.ON_FAIL;
+import static com.epam.jdi.light.settings.WebSettings.WRITE_TO_ALLURE;
 import static io.qameta.allure.Allure.addAttachment;
 import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
 import static io.qameta.allure.model.Status.FAILED;
@@ -20,14 +21,11 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class AllureLogger {
-    public static boolean writeToAllure = true;
     public static AttachmentStrategy HTML_CODE_LOGGING = ON_FAIL;
 
     public static String startStep(String message) {
-        if (!writeToAllure) return "";
-
         try {
-            StepResult step = new StepResult().withName(message);//.withStatus(PASSED);
+            StepResult step = new StepResult().withName(message);
             if (getLifecycle().getCurrentTestCase().isPresent()) {
                 String uuid = randomUUID().toString();
                 getLifecycle().startStep(uuid, step);
@@ -38,7 +36,7 @@ public class AllureLogger {
     }
 
     public static void failStep(String uuid, String screenName, String htmlSnapshot, String requests) {
-        if (!writeToAllure || isBlank(uuid)) return;
+        if (!WRITE_TO_ALLURE || isBlank(uuid)) return;
 
         getLifecycle().updateStep(uuid, s -> s.withStatus(FAILED));
         if (isNotBlank(screenName)) {
@@ -59,7 +57,7 @@ public class AllureLogger {
     }
 
     public static void passStep(String uuid) {
-        if (!writeToAllure || isBlank(uuid)) return;
+        if (!WRITE_TO_ALLURE || isBlank(uuid)) return;
 
         getLifecycle().updateStep(uuid, s -> s.withStatus(PASSED));
         getLifecycle().stopStep(uuid);

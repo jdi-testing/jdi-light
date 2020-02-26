@@ -10,22 +10,31 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.actions.ActionHelper.getJdiAction;
-import static com.epam.jdi.light.actions.ActionHelper.getJpClass;
+import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class ActionObject {
-    public ActionObject(ProceedingJoinPoint joinPoint) {
+    public ActionObject(ProceedingJoinPoint joinPoint, String className) {
         this.jp = joinPoint;
-        this.elementTimeout = element() != null
+        this.className = className;
+        try {
+            this.elementTimeout = element() != null
                 ? element().base().getTimeout()
                 : TIMEOUT.get();
+        } catch (Throwable ex) {
+            this.elementTimeout = 10;
+        }
     }
     public ProceedingJoinPoint jp() { return jp; }
     private ProceedingJoinPoint jp;
+    public String className() { return className; }
+    private String className;
     public String stepUId = "";
+    public boolean topLevel() {
+        return aroundCount(className()) == 1;
+    }
     public Object object() { return obj.get(); }
     private CacheValue<Object> obj = new CacheValue<>(
         () -> jp.getThis() != null ? jp.getThis() : new Object());

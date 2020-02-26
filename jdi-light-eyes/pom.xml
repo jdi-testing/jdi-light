@@ -19,11 +19,10 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.1.16</version>
+            <version>1.1.17</version>
         </dependency>
 
         <!-- Applitools SDK -->
-        <!-- https://mvnrepository.com/artifact/com.applitools/eyes-selenium-java4 -->
         <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-selenium-java3</artifactId>

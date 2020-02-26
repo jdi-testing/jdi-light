@@ -376,20 +376,34 @@ public class WebPage extends DriverBase implements PageObject {
         return jsExecute("return window.pageYOffset;");
     }
     @JDIAction(level = DEBUG)
+    public static String windowScreenshot() {
+        try {
+            File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            //show();
+            String path = mergePath(getPath(), getCurrentPage()+".png");
+            File imageFile = new File(path);
+            copyFile(screenshot, imageFile);
+            return path;
+        } catch (Exception ex) { throw exception(ex, "Can't take screenshot"); }
+    }
+    @JDIAction(level = DEBUG)
     public static String windowScreenshot(int x, int y, int w, int h, String name) {
-    {
-        File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-        //show();
-        String path = mergePath(getPath(), name);
-        File imageFile = new File(path);
+        File screenshot;
+        File imageFile;
+        String path;
+        try {
+            screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            //show();
+            path = mergePath(getPath(), name);
+            imageFile = new File(path);
+        } catch (Exception ex) { throw exception(ex, "Can't take windowScreenshot"); }
         try {
             BufferedImage fullImg = ImageIO.read(screenshot);
             BufferedImage crop = fullImg.getSubimage(x, y, w, h);
             ImageIO.write(crop, "png", screenshot);
             copyFile(screenshot, imageFile);
-        } catch (Exception ex) {throw exception(ex, "Can't do windowScreenshot"); }
+        } catch (Exception ex) { throw exception(ex, "Can't crop windowScreenshot"); }
         return path;
-    }
     }
 
     @Override
@@ -441,24 +455,20 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean contains() {
             String value = actual.get();
-            //logger.toLog(format("Check that page %s(%s) contains '%s'", what, value, equals));
             return equals == null || equals.equals("") || value.contains(equals);
         }
     }
 
-    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
+    public static PageChecks CHECK_PAGE_OPEN = PageChecks.NONE;
     public static void beforeNewPage(WebPage page) {
-        if (CHECK_AFTER_OPEN == NEW_PAGE || CHECK_AFTER_OPEN == EVERY_PAGE)
-            page.checkOpened();
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
             visualWindowCheck();
-        getHttpRequests();
         logger.toLog("Page '"+page.getName()+"' opened");
         TIMEOUT.set(PAGE_TIMEOUT.get());
     }
     public static JAction1<WebPage> BEFORE_NEW_PAGE = WebPage::beforeNewPage;
     public static void beforeThisPage(WebPage page) {
-        if (CHECK_AFTER_OPEN == EVERY_PAGE)
+        if (CHECK_PAGE_OPEN != PageChecks.NONE)
             page.checkOpened();
     }
     public static JAction1<WebPage> BEFORE_EACH_STEP = WebPage::beforeThisPage;

@@ -1,9 +1,11 @@
 package com.epam.jdi.light.logger;
 
+import com.epam.jdi.light.settings.WebSettings;
 import org.apache.logging.log4j.Level;
 
 import java.util.List;
 
+import static com.epam.jdi.light.settings.WebSettings.WRITE_TO_LOG;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static java.lang.Integer.MAX_VALUE;
 import static java.util.Arrays.asList;
@@ -44,15 +46,17 @@ public enum LogLevels {
         return first(allLog4J2Levels, l -> l.intLevel() >= level.level);
     }
     public static LogLevels parseLogLevel(String logLevel) {
-        switch (logLevel) {
-            case "OFF": return OFF;
-            case "FATAL": return FATAL;
-            case "ERROR": return ERROR;
-            case "WARNING": return WARNING;
-            case "STEP": return STEP;
-            case "DEBUG": return DEBUG;
-            case "TRACE": return TRACE;
-            case "ALL": return ALL;
+        switch (logLevel.toLowerCase()) {
+            case "off":
+                WRITE_TO_LOG = false;
+                return OFF;
+            case "fatal": return FATAL;
+            case "error": return ERROR;
+            case "warning": return WARNING;
+            case "step": return STEP;
+            case "degug": return DEBUG;
+            case "trace": return TRACE;
+            case "all": return ALL;
             default: return INFO;
         }
     }
