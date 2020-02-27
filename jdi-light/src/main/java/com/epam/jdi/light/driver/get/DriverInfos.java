@@ -1,8 +1,7 @@
 package com.epam.jdi.light.driver.get;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
-import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -16,8 +15,6 @@ import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
-
-import java.util.function.Function;
 
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
@@ -40,14 +37,9 @@ public class DriverInfos {
     public static DriverInfo APPIUM_INFO = new DriverInfo()
         .set(d -> {
             d.type = APPIUM;
-            //TODO Remove hardcode in creating capabilities
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554");
-            capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-            capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
-            d.initCapabilities = capabilities;
-            d.capabilities = c -> c;
-            d.getDriver = c -> new AppiumDriver<>(capabilities);
+            d.initCapabilities = new DesiredCapabilities();
+            d.capabilities = c -> getCapabilities(c, cap -> APPIUM_OPTIONS.execute((MutableCapabilities) cap));
+            d.getDriver = c -> new AppiumDriver<>(d.capabilities.execute(d.initCapabilities));
         }
     );
     public static DriverInfo FF_INFO = new DriverInfo()

@@ -192,6 +192,8 @@ public class WebSettings {
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(), value.toString())));
         loadCapabilities("safari.capabilities.path","safari.properties",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_SAFARI.put(key.toString(), value.toString())));
+        loadCapabilities("appium.capabilities.path","appium.properties",
+            p -> p.forEach((key,value) -> CAPABILITIES_FOR_APPIUM.put(key.toString(), value.toString())));
         loadCapabilities("common.capabilities.path","common.properties",
             p -> p.forEach((key,value) -> COMMON_CAPABILITIES.put(key.toString(), value.toString())));
 

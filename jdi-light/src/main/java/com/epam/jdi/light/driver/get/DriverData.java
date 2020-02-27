@@ -70,6 +70,7 @@ public class DriverData {
     public static Map<String,String> CAPABILITIES_FOR_EDGE = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_OPERA = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_SAFARI = new HashMap<>();
+    public static Map<String,String> CAPABILITIES_FOR_APPIUM = new HashMap<>();
     public static Map<String,String> COMMON_CAPABILITIES = new HashMap<>();
 
     public static String chromeDriverPath() {
@@ -261,6 +262,12 @@ public class DriverData {
 
     public static void defaultOperaOptions(OperaOptions cap) { }
     public static JAction1<OperaOptions> OPERA_OPTIONS = DriverData::defaultOperaOptions;
+
+    public static void defaultAppiumOptions(MutableCapabilities cap) {
+        // Capabilities from settings
+        CAPABILITIES_FOR_APPIUM.forEach(cap::setCapability);
+    }
+    public static JAction1<MutableCapabilities> APPIUM_OPTIONS = DriverData::defaultAppiumOptions;
 
     public static void defaultSafariOptions(SafariOptions cap) { }
     public static JAction1<SafariOptions> SAFARI_OPTIONS = DriverData::defaultSafariOptions;
