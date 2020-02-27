@@ -2,6 +2,7 @@ package com.epam.jdi.light.asserts.generic.table;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.*;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -12,6 +13,7 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
+import static com.epam.jdi.tools.LinqUtils.isSorted;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -139,5 +141,21 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
             if (line.get(columnName).equals(name))
                 return line;
         throw exception("Can't find %s row with column %s", name, columnName);
+    }
+    @JDIAction("Assert that '{name}' is sorted by ascending")
+    public A sortedByAsc(String columnName) {
+        WebList allRows = table().webColumn(columnName);
+        for (int i = 1; i < allRows.size(); i++)
+            if (!isSorted(allRows.get(i-1).getText(), allRows.get(i).getText(), true, false))
+                jdiAssert("Table is not by ascending at "+i+" row", Matchers.is(""));
+        return (A)this;
+    }
+    @JDIAction("Assert that '{name}' is sorted by descending")
+    public A sortedByDesc(String columnName) {
+        WebList allRows = table().webColumn(columnName);
+        for (int i = 1; i < allRows.size(); i++)
+            if (!isSorted(allRows.get(i).getText(), allRows.get(i-1).getText(), true, false))
+                jdiAssert("Table is not by descending at "+i+" row", Matchers.is(""));
+        return (A)this;
     }
 }

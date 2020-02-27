@@ -3,21 +3,27 @@ package com.epam.jdi.light.asserts.generic.table;
 import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Row;
 import com.epam.jdi.light.elements.complex.table.TableMatcher;
 import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.asserts.generic.table.DataTableAssert.CompareType.*;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
+import static com.epam.jdi.tools.LinqUtils.isSorted;
 import static java.lang.String.format;
 import static org.hamcrest.Matchers.*;
 
@@ -63,12 +69,44 @@ public class DataTableAssert<L extends Section, D>
         jdiAssert(table().allData(), condition);
         return this;
     }
+    @JDIAction("Assert that '{name}' is sorted by ascending")
+    public <C extends HasValue> DataTableAssert<L, D> sortedByAsc(String columnName, JFunc1<UIElement, Object> getValue) {
+        WebList column = table().webColumn(columnName);
+        for (int i = 1; i < column.size(); i++)
+            if (!isSorted(getValue.execute(column.get(i-1)), getValue.execute(column.get(i)), true, false))
+                jdiAssert("Table is not by ascending at "+i+" row", Matchers.is(""));
+        return this;
+    }
+    @JDIAction("Assert that '{name}' is sorted by descending")
+    public <C extends HasValue> DataTableAssert<L, D> sortedByDesc(String columnName, JFunc1<UIElement, Object> getValue) {
+        WebList column = table().webColumn(columnName);
+        for (int i = 1; i < column.size(); i++)
+            if (!isSorted(getValue.execute(column.get(i-1)), getValue.execute(column.get(i)), false, false))
+                jdiAssert("Table is not by descending at "+i+" row", Matchers.is(""));
+        return this;
+    }
+    @JDIAction("Assert that '{name}' is sorted by ascending")
+    public <C extends HasValue> DataTableAssert<L, D> sortedByAsc(String columnName, Class<C> cl) {
+        List<C> column = table().columnValues(columnName, cl);
+        for (int i = 1; i < column.size(); i++)
+            if (!isSorted(column.get(i-1).getValue(), column.get(i).getValue(), true, false))
+                jdiAssert("Table is not by ascending at "+i+" row", Matchers.is(""));
+        return this;
+    }
+    @JDIAction("Assert that '{name}' is sorted by descending")
+    public <C extends HasValue> DataTableAssert<L, D> sortedByDesc(String columnName, Class<C> cl) {
+        List<C> column = table().columnValues(columnName, cl);
+        for (int i = 1; i < column.size(); i++)
+            if (!isSorted(column.get(i-1).getValue(), column.get(i).getValue(), false, false))
+                jdiAssert("Table is not by descending at "+i+" row", Matchers.is(""));
+        return this;
+    }
     @JDIAction("Assert that '{name}' is sorted")
     public DataTableAssert<L, D> sortedBy(JFunc2<L, L,Boolean> condition) {
         List<L> allRows = table().allLines();
         for (int i = 1; i < allRows.size(); i++)
             if (!condition.execute(allRows.get(i-1), allRows.get(i)))
-                jdiAssert("Table not sorted at "+i+" row", Matchers.is(""));
+                jdiAssert("Table is not sorted at "+i+" row", Matchers.is(""));
         jdiAssert("Table is sorted", Matchers.is("Table is sorted"));
         return this;
     }
@@ -77,7 +115,7 @@ public class DataTableAssert<L extends Section, D>
         List<D> allRows = table().allData();
         for (int i = 1; i < allRows.size(); i++)
             if (!condition.execute(allRows.get(i-1), allRows.get(i)))
-                jdiAssert("Table not sorted at "+i+" row", Matchers.is(""));
+                jdiAssert("Table is not sorted at "+i+" row", Matchers.is(""));
         jdiAssert("Table is sorted", Matchers.is("Table is sorted"));
         return this;
     }

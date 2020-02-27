@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.generic.table.DataTableAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.InitActions;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
@@ -363,6 +364,11 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     public L line(Pair<Matcher<String>, Column>... matchers) {
         hasLineClass();
         return row(matchers).asLine(lineClass);
+    }
+    public <C extends HasValue> List<C> columnValues(String columnName, Class<C> cl) {
+        WebList column = webColumn(columnName);
+        List<C> result = column.map(el -> el.asEntity(cl));
+        return result;
     }
 
     /**
