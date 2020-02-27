@@ -8,6 +8,9 @@ package com.epam.jdi.light.driver;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.TakesScreenshot;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -88,6 +91,31 @@ public class ScreenshotMaker {
             logger.step(format("Can't get file %s.", filePath));
             return new byte[0];
         }
+    }
+
+//    public static void takeScreenshotByAShot(String name, String dateFormat) {
+//        try {
+//            ImageIO.write(new AShot().takeScreenshot(getDriver()).getImage(), "png", new File(mergePath(getPath(), name + nowTime(dateFormat))));
+//        } catch (IOException ex) {
+//            System.out.println("Failed to do screenshot: " + ex.getMessage());
+//        }
+//    }
+
+    public String takeScreenshotByRobot(int x, int y, int width, int height, String name, String dateFormat) {
+        if (!hasRunDrivers())
+            throw exception("Failed to do screenshot. No Drivers run");
+        String screensFilePath = getFileName(mergePath(getPath(), name + nowTime(dateFormat)));
+        new File(screensFilePath).getParentFile().mkdirs();
+        try {
+            BufferedImage screenCapturedByRobot = new Robot().createScreenCapture(new Rectangle(x, y, width, height));
+            ImageIO.write(screenCapturedByRobot, "png", new File(screensFilePath));
+        } catch (Exception ex) {
+            throw exception("Failed to do screenshot: " + ex.getMessage());
+        }
+        logger.info("Screenshot: " + screensFilePath);
+        //TODO: think about static addScreenShotToAllure()
+        addScreenShotToAllure(screensFilePath);
+        return screensFilePath;
     }
 
 }
