@@ -24,65 +24,83 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class DropdownExpand extends UIListBase<UISelectAssert>
         implements IsDropdown, ISetup {
     public String expandLocator = ".caret";
+    
     public UIElement expander() {
         return linked(expandLocator, "expand");
     }
-
+    
     public String valueLocator = "input,button";
-    public UIElement value() { return linked(valueLocator, "value"); }
-
+    
+    public UIElement value() {
+        return linked(valueLocator, "value");
+    }
+    
     public String listLocator = "li";
+    
     @Override
     public WebList list() {
         return linkedList(listLocator, "list").setUIElementName(INNER);
     }
+    
     public boolean autoClose = false;
-
+    
     public void toggle() {
         expander().click();
     }
+    
     @JDIAction(value = "Is '{name}' expanded", level = DEBUG)
     public boolean isExpanded() {
         return list().noWait(WebList::isDisplayed, WebList.class);
     }
+    
     @JDIAction(level = DEBUG)
     public void expand() {
         if (!isExpanded())
             toggle();
     }
+    
     @JDIAction(level = DEBUG)
     public void close() {
         if (isExpanded())
             toggle();
     }
-    @JDIAction("Select '{0}' in '{name}'") @Override
+    
+    @JDIAction("Select '{0}' in '{name}'")
+    @Override
     public void select(String value) {
         expand();
         list().select(value);
         if (autoClose)
             toggle();
     }
-    @JDIAction("Select '{0}' in '{name}'") @Override
+    
+    @JDIAction("Select '{0}' in '{name}'")
+    @Override
     public void select(int index) {
         if (index < 1)
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
         expand();
-        list().select(index-1);
+        list().select(index - 1);
         if (autoClose)
             close();
     }
-    @JDIAction("Get selected value") @Override
+    
+    @JDIAction("Get selected value")
+    @Override
     public String selected() {
         expand();
         return list().selected();
     }
-    @JDIAction("Is '{0}' selected") @Override
+    
+    @JDIAction("Is '{0}' selected")
+    @Override
     public boolean selected(String value) {
         expand();
         return list().selected(value);
     }
-
+    
     protected boolean setupDone = false;
+    
     public IsDropdown setup(String root, String value, String list, String expand) {
         if (isNotBlank(root))
             base().setLocator(root);
@@ -101,6 +119,7 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
         setupDone = true;
         return this;
     }
+    
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDropdown.class, IsDropdown.class))
             return;
@@ -108,17 +127,23 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
         setup(j.root(), j.value(), j.list(), j.expand());
         autoClose = j.autoclose();
     }
-    @JDIAction("Check that '{name}' is displayed") @Override
+    
+    @JDIAction("Check that '{name}' is displayed")
+    @Override
     public boolean isDisplayed() {
         return value().isDisplayed();
     }
-    @JDIAction("Check that '{name}' is hidden") @Override
+    
+    @JDIAction("Check that '{name}' is hidden")
+    @Override
     public boolean isHidden() {
         return value().isHidden();
     }
-    @JDIAction("Check that '{name}' is displayed") @Override
+    
+    @JDIAction("Check that '{name}' is displayed")
+    @Override
     public boolean isEnabled() {
         return value().isEnabled();
     }
-
+    
 }
