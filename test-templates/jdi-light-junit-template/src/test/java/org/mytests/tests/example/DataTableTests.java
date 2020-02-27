@@ -20,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mytests.tests.states.States.shouldBeLoggedIn;
 import static org.mytests.tests.test.data.MarvelHeroes.SPIDER_MAN;
 import static org.mytests.uiobjects.example.site.SiteJdi.usersPage;
-import static org.mytests.uiobjects.example.site.pages.UsersPage.*;
+import static org.mytests.uiobjects.example.site.pages.UsersPage.users;
+import static org.mytests.uiobjects.example.site.pages.UsersPage.usersSetup;
 
 public class DataTableTests extends TestsInit {
     private boolean firstTime = true;
