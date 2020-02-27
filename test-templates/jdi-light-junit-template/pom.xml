@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
-        <allure.version>2.6.0</allure.version>
+        <allure.version>2.13.2</allure.version>
         <allure.maven>2.9</allure.maven>
         <surfire.version>2.19.1</surfire.version>
         <aspectj.version>1.9.1</aspectj.version>
