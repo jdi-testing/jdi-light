@@ -227,6 +227,7 @@ public class WebSettings {
                 COMMON_CAPABILITIES = sauceCapabilities();
                 return sauceLabs();
             case "browserstack": return browserstack();
+            case "appium": return appium();
             default: return seleniumLocalhost();
         }
     }
