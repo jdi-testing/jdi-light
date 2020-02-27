@@ -45,7 +45,7 @@ public class FurnitureTests implements TestsInit {
 //    }
 //    @Test
 //    public void dataColumnNameTest() {
-//        assertEquals(usersSetup.data("Sergey Ivan"), SPIDER_MAN);
+//        assertEquals(usersTableSetup.data("Sergey Ivan"), SPIDER_MAN);
 //    }
 //    @Test
 //    public void dataFilterTest() {
