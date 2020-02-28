@@ -23,6 +23,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
+import static org.openqa.selenium.support.ui.Quotes.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -159,7 +160,7 @@ public final class WebDriverByUtils {
         String by = locator.contains("*root*")
             ? locator.replaceAll("\\*root\\*", "")
             : locator;
-        return by.length() > 1 && (by.charAt(1) == '/' || by.startsWith(".."))
+        return by.contains("/") || by.contains("..")
                 ? By.xpath(locator)
                 : By.cssSelector(locator);
     }
@@ -245,13 +246,16 @@ public final class WebDriverByUtils {
             result.add(By.cssSelector(loc));
         return result;
     }
-
+    public static String asTextLocator(String text) {
+        return format(".//*/text()[normalize-space(.) = %s]/parent::*", escape(text));
+    }
+    public static String asContainsTextLocator(String text) {
+        return format(".//*/text()[contains(normalize-space(.), %s)]/parent::*", escape(text));
+    }
     public static By byText(String text) {
-        return By.xpath(".//*/text()[normalize-space(.) = " +
-                Quotes.escape(text) + "]/parent::*");
+        return By.xpath(asTextLocator(text));
     }
     public static By withText(String text) {
-        return By.xpath(".//*/text()[contains(normalize-space(.), "+
-                Quotes.escape(text)+")]/parent::*");
+        return By.xpath(asContainsTextLocator(text));
     }
 }

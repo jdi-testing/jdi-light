@@ -14,6 +14,7 @@ import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.map.MultiMap;
 import org.apache.commons.lang3.ArrayUtils;
 import org.hamcrest.Matcher;
@@ -22,6 +23,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.INDEX;
@@ -64,6 +66,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public WebList(By locator) { this(); setLocator(locator);}
     public WebList(List<WebElement> elements) {
         this(); setWebElements(elements);
+    }
+    public WebList(MapArray<String, UIElement> map) {
+        elements.set(new MultiMap<>(map));
     }
     public WebList setValues(MultiMap<String, UIElement> map) {
         this.elements.set(map);
@@ -139,9 +144,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         }
     }
     protected boolean hasKey(String value) {
-        List<String> keys = elements(1).keys();
-        if (keys.isEmpty())
+        if (elements.get().isEmpty())
             return false;
+        List<String> keys = elements.get().keys();
         for (String key : keys)
             if (namesEqual(key, value))
                 return true;
@@ -162,6 +167,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             return new UIElement(base(), getLocator(value), nameFromValue(value));
         else {
             refresh();
+            if (locator.isXPath())
+                return new UIElement(base(), locator.addText(value), nameFromValue(value), parent);
             MultiMap<String, UIElement> result = timer().getResultByCondition(
                 () -> elements(1), els -> hasKey(value));
             if (result != null)
@@ -200,7 +207,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             return elements.get().get(index).value;
         return (locator.isTemplate()
             ? tryGetByIndex(index)
-            : initElement(() -> getList(index+1).get(index)))
+            : locator.isXPath()
+                ? new UIElement(base(), locator.addIndex(index), index+1+"", parent)
+                : initElement(() -> getList(index+1).get(index)))
         .setName(nameFromIndex(index));
     }
     protected UIElement tryGetByIndex(int index) {
@@ -428,13 +437,15 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public List<String> checked() {
         return ifSelect(IListBase::isSelected, this::getElementName);
     }
-
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         refresh();
         return noValidation(() -> elements(0)).keys();
     }
-
+    @JDIAction("Get '{name}' values")
+    public List<String> getValuesFast() {
+        return getListFast().stream().map(WebElement::getText).collect(Collectors.toList());
+    }
     @JDIAction("Get '{name}' values")
     public List<String> values(TextTypes type) {
         setUIElementName(type);
@@ -459,7 +470,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
     public boolean isHidden() {
-        return !isDisplayed();
+        refresh();
+        return isEmpty();
     }
 
     @JDIAction(value = "Check that '{name}' is enabled", timeout = 0)

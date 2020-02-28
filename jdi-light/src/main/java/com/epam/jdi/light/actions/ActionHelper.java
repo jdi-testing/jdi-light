@@ -27,14 +27,16 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreenOnFailure;
-import static com.epam.jdi.light.elements.base.OutputTemplates.DEFAULT_TEMPLATE;
-import static com.epam.jdi.light.elements.base.OutputTemplates.STEP_TEMPLATE;
+import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.AllureLoggerHelper.failStep;
@@ -43,14 +45,19 @@ import static com.epam.jdi.light.logger.LogLevels.ERROR;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
 import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.LinqUtils.where;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.Timer.nowTime;
 import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.Character.toUpperCase;
 import static java.lang.String.format;
+import static java.lang.System.currentTimeMillis;
+import static java.lang.Thread.currentThread;
+import static java.util.Collections.reverse;
 import static java.util.UUID.randomUUID;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -63,17 +70,18 @@ public class ActionHelper {
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
     }
     public static int CUT_STEP_TEXT = 70;
-    public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = jp -> {
+    public static String getActionName(ProceedingJoinPoint jp) {
         try {
             MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
             return isBlank(template)
-                ? getDefaultName(method.getName(), methodArgs(jp, method))
-                : fillTemplate(template, jp, method);
-        } catch (Exception ex) {
+                    ? getDefaultName(method.getName(), methodArgs(jp, method))
+                    : fillTemplate(template, jp, method);
+        } catch (Throwable ex) {
             throw exception(ex, "Surround method issue: Can't get action name: ");
         }
-    };
+    }
+    public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = ActionHelper::getActionName;
     public static String fillTemplate(String template, ProceedingJoinPoint jp, MethodSignature method) {
         String filledTemplate = template;
         try {
@@ -101,7 +109,7 @@ public class ActionHelper {
             throw exception(ex, "Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName());
         }
     }
-    public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = jp -> {
+    public static void beforeStepAction(ProceedingJoinPoint jp) {
         String message = getBeforeLogString(jp);
         logger.toLog(message, logLevel(jp));
         AllureLoggerHelper.startStep(Integer.toString(jp.hashCode()), message);
@@ -126,27 +134,31 @@ public class ActionHelper {
                 }
             }
         }
-    };
-    public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = jp -> {
+    }
+    public static JAction1<ProceedingJoinPoint> BEFORE_STEP_ACTION = ActionHelper::beforeStepAction;
+    public static void beforeJdiAction(ProceedingJoinPoint jp) {
         BEFORE_STEP_ACTION.execute(jp);
         processNewPage(jp);
-    };
-    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = (jp, result) -> {
+    }
+    public static JAction1<ProceedingJoinPoint> BEFORE_JDI_ACTION = ActionHelper::beforeJdiAction;
+    public static Object afterStepAction(ProceedingJoinPoint jp, Object result) {
         if (!logResult(jp)) return result;
         LogLevels logLevel = logLevel(jp);
-        if (result != null) {
+        if (result == null || isInterface(getJpClass(jp), JAssert.class))
+            logger.debug("Done");
+        else {
             String text = result.toString();
             if (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5)
                 text = text.substring(0, CUT_STEP_TEXT) + "...";
             logger.toLog(">>> " + text, logLevel);
-        } else
-            logger.debug("Done");
+        }
         AllureLoggerHelper.passStep(randomUUID().toString());
         if (getJpMethod(jp).getName().equals("open"))
             BEFORE_NEW_PAGE.execute(getPage(jp.getThis()));
         TIMEOUT.reset();
         return result;
-    };
+    }
+    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
     static boolean logResult(ProceedingJoinPoint jp) {
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class)) return false;
@@ -161,8 +173,10 @@ public class ActionHelper {
                 ? jp.getThis().getClass()
                 : jp.getSignature().getDeclaringType();
     }
-    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_JDI_ACTION =
-            (jp, result) -> AFTER_STEP_ACTION.execute(jp, result);
+    public static Object afterJdiAction(ProceedingJoinPoint jp, Object result) {
+        return AFTER_STEP_ACTION.execute(jp, result);
+    }
+    public static JFunc2<ProceedingJoinPoint, Object, Object> AFTER_JDI_ACTION = ActionHelper::afterJdiAction;
     //region Private
     public static String getBeforeLogString(ProceedingJoinPoint jp) {
         String actionName = GET_ACTION_NAME.execute(jp);
@@ -301,4 +315,101 @@ public class ActionHelper {
         }
     }
     //endregion
+
+    public static RuntimeException exceptionJdiAround(ActionObject jInfo, String className, Throwable ex) {
+        addFailedMethod(jInfo.jp());
+        if (aroundCount(className) == 1) {
+            logFailure(jInfo.object());
+            reverse(failedMethods);
+            logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
+        }
+        return exception(ex, ACTION_FAILED.execute(jInfo.object(), getExceptionAround(ex, aroundCount(className) == 1)));
+    }
+    public static void addFailedMethod(ProceedingJoinPoint jp) {
+        String[] s = jp.toString().split("\\.");
+        String result = s[s.length-2]+"."+s[s.length-1].replaceAll("\\)\\)", ")");
+        if (!failedMethods.contains(result))
+            failedMethods.add(result);
+    }
+    public static List<String> failedMethods = new ArrayList<>();
+    public static String getExceptionAround(Throwable ex, boolean top) {
+        String result = safeException(ex);
+        while (result.contains("\n\n"))
+            result = result.replaceFirst("\\n\\n", LINE_BREAK);
+        result = result.replace("java.lang.RuntimeException:", "").trim();
+        if (top)
+            result = "[" + nowTime("mm:ss.S") + "] " + result.replaceFirst("\n", "");
+        return result;
+    }
+    private static List<StackTraceElement> arounds() {
+        List<StackTraceElement> arounds = where(currentThread().getStackTrace(),
+                s -> s.getMethodName().equals("jdiAround"));
+        Collections.reverse(arounds);
+        return arounds;
+    }
+    public static boolean notThisAround(String name) {
+        return !arounds().get(0).getClassName().equals(name);
+    }
+    public static int aroundCount(String name) {
+        return where(currentThread().getStackTrace(),
+                s -> s.getMethodName().equals("jdiAround") && s.getClassName().equals(name))
+                .size();
+    }
+    public static Object defaultAction(ActionObject jInfo) throws Throwable {
+        jInfo.setElementTimeout();
+        return jInfo.overrideAction() != null
+                ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
+    }
+    public static Object stableAction(ActionObject jInfo) {
+        String exceptionMsg = "";
+        jInfo.setElementTimeout();
+        long start = currentTimeMillis();
+        Throwable exception = null;
+        do {
+            try {
+                Object result = jInfo.overrideAction() != null
+                        ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
+                if (!condition(jInfo.jp())) continue;
+                return result;
+            } catch (Throwable ex) {
+                exception = ex;
+                try {
+                    exceptionMsg = safeException(ex);
+                    Thread.sleep(200);
+                } catch (Exception ignore) {
+                }
+            }
+        } while (currentTimeMillis() - start < jInfo.timeout() * 1000);
+        throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
+    }
+    static String getFailedMessage(ActionObject jInfo, String exception) {
+        MethodSignature method = getJpMethod(jInfo.jp());
+        try {
+            String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
+                    $("exception", exception),
+                    $("timeout", jInfo.timeout()),
+                    $("action", method.getMethod().getName())
+            ));
+            return fillTemplate(result, jInfo.jp(), method);
+        } catch (Exception ex) {
+            throw exception(ex, "Surround method issue: Can't get failed message");
+        }
+    }
+    static String getConditionName(ProceedingJoinPoint jp) {
+        JDIAction ja = getJdiAction(jp);
+        return ja != null ? ja.condition() : "";
+    }
+    public static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
+            $("", result -> true),
+            $("true", result -> result instanceof Boolean && (Boolean) result),
+            $("false", result -> result instanceof Boolean && !(Boolean) result),
+            $("not empty", result -> result instanceof List && ((List) result).size() > 0),
+            $("empty", result -> result instanceof List && ((List) result).size() == 0)
+    );
+    static boolean condition(ProceedingJoinPoint jp) {
+        String conditionName = getConditionName(jp);
+        return CONDITIONS.has(conditionName)
+                ? CONDITIONS.get(conditionName).execute(jp)
+                : true;
+    }
 }

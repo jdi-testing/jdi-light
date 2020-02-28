@@ -230,6 +230,10 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     public boolean isDisplayed() {
         return list().isDisplayed();
     }
+    @Override
+    public boolean isHidden() {
+        return list().isHidden();
+    }
     @Override @JDIAction(level = DEBUG)
     public void highlight(String color) {
         list().highlight(color);

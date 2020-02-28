@@ -32,7 +32,10 @@ public class HtmlElementsPage extends WebPage {
     public static Button dblClickButton;
     public static Button rightClickButton;
     @WaitTimeout(4)
-    public static Button ghostButton, suspendButton;
+    public static Button ghostButton, suspendButton, removeButton;
+    @WaitTimeout(4) @UI("#ghost-button") public static Button ghostButtonUI;
+    @WaitTimeout(4) @UI("#suspend-button") public static Button suspendButtonUI;
+    @WaitTimeout(4) @UI("#remove-button") public static Button removeButtonUI;
     @NoWait
     public static Button disabledButton;
     // @UI("#blue-button") public static Button blueButton;

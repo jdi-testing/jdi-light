@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -435,16 +436,18 @@ public class WebPage extends DriverBase implements PageObject {
     }
 
     public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
-    public static JAction1<WebPage> BEFORE_NEW_PAGE = page -> {
+    public static void beforeNewPage(WebPage page) {
         if (CHECK_AFTER_OPEN == NEW_PAGE)
             page.checkOpened();
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
             visualWindowCheck();
         logger.toLog("Page: " + page.getName());
         TIMEOUT.set(PAGE_TIMEOUT.get());
-    };
-    public static JAction1<WebPage> BEFORE_THIS_PAGE = page -> {
+    }
+    public static JAction1<WebPage> BEFORE_NEW_PAGE = WebPage::beforeNewPage;
+    public static void beforeThisPage(WebPage page) {
         if (CHECK_AFTER_OPEN == EVERY_PAGE)
             page.checkOpened();
-    };
+    }
+    public static JAction1<WebPage> BEFORE_THIS_PAGE  = WebPage::beforeThisPage;
 }

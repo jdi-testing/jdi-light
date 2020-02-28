@@ -6,7 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.elements.common.Alerts.*;
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Keyboard.keyPress;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.*;
@@ -43,12 +44,10 @@ public class ButtonTests implements TestsInit {
     @Test
     public void clickTest() {
         redButton.click();
-        assertEquals(getAlertText(), "Red button");
-        acceptAlert();
+        validateAlert("Red button");
 
         blueButton.click();
-        assertEquals(getAlertText(), "Blue button");
-        acceptAlert();
+        validateAlert("Blue button");
     }
     @Test
     public void disableButtonTest() {
@@ -63,15 +62,14 @@ public class ButtonTests implements TestsInit {
     @Test
     public void doubleClickTest() {
         dblClickButton.doubleClick();
-        assertEquals(getAlertText(), "Double Click");
-        acceptAlert();
+        validateAlert("Double Click");
     }
     @Test
     public void rightClickTest() {
         rightClickButton.show();
         rightClickButton.rightClick();
-        assertEquals(getAlertText(), "Right Click");
-        acceptAlert();
+        validateAlert("Right Click");
+        keyPress("Escape");
     }
     @Test
     public void isValidationTest() {
@@ -116,7 +114,7 @@ public class ButtonTests implements TestsInit {
     public void vanishButtonTest() {
         WebPage.reload();
         durationMoreThan(3, () ->
-            ghostButton.is().disappear());
+                ghostButton.is().disappear());
     }
 
     //if test fails then run `mvn clean install` in module JDI Light
@@ -124,7 +122,7 @@ public class ButtonTests implements TestsInit {
     public void isNotAppearTimeoutFailedButtonTest() {
         WebPage.reload();
         durationMoreThan(2, () ->
-            suspendButton.is().notAppear(2));
+                suspendButton.is().notAppear(2));
     }
 
     @Test
@@ -140,9 +138,9 @@ public class ButtonTests implements TestsInit {
         WebPage.reload();
         try {
             durationImmediately(() ->
-                ghostButton.is().notAppear());
+                    ghostButton.is().notAppear());
             fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
-        } catch (AssertionError ex) {
+        } catch (Exception ex) {
             assertThat(safeException(ex), containsString("but: was \"displayed\""));
         }
     }
@@ -159,7 +157,7 @@ public class ButtonTests implements TestsInit {
     public void isNotAppearTimeoutButtonTest() {
         ghostButton.is().hidden();
         durationMoreThan(2, () ->
-            ghostButton.is().notAppear(2));
+                ghostButton.is().notAppear(2));
     }
 
 }

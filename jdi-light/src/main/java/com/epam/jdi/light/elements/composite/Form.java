@@ -395,14 +395,18 @@ public class Form<T> extends Section {
                 return true;
             if (base().locator.isEmpty()) {
                 List<Field> fields = getFieldsInterfaceOf(pageObject, HasValue.class);
-                if (fields.isEmpty() && core().isDisplayed())
-                    return true;
+                if (fields.isEmpty())
+                    return false;
                 Object po = fields.get(0).get(pageObject);
                 if (isInterface(po.getClass(), ICoreElement.class) && ((ICoreElement) po).core().isDisplayed())
                     return true;
             }
         } catch (Exception ignore) { }
         return false;
+    }
+    @Override
+    public boolean isHidden() {
+        return !isDisplayed();
     }
     //endregion
     @JDIAction("Return if form valid")

@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.safari.SafariOptions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,10 +25,12 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.stringToPrimitive;
 import static com.epam.jdi.tools.RegExUtils.matches;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.awt.Toolkit.getDefaultToolkit;
+import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -49,7 +52,7 @@ public class DriverData {
     public static String DRIVERS_FOLDER;
     public static String getDriverFolder() {
         return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
-                ? DRIVERS_FOLDER : mergePath(TEST_PATH, "resources", "drivers");
+            ? DRIVERS_FOLDER : mergePath(TEST_PATH, "resources", "drivers");
     }
     public static String DOWNLOADS_DIR = mergePath(TEST_PATH, "resources", "downloads");
     public static PageLoadStrategy PAGE_LOAD_STRATEGY = NORMAL;
@@ -63,6 +66,7 @@ public class DriverData {
     public static Map<String,String> CAPABILITIES_FOR_FF = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_EDGE = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_OPERA = new HashMap<>();
+    public static Map<String,String> CAPABILITIES_FOR_SAFARI = new HashMap<>();
     public static Map<String,String> COMMON_CAPABILITIES = new HashMap<>();
 
     public static String chromeDriverPath() {
@@ -76,6 +80,9 @@ public class DriverData {
     }
     public static String operaDriverPath() {
         return driverPath("operadriver");
+    }
+    public static String safariDriverPath() {
+        return driverPath("safaridriver");
     }
     public static String firefoxDriverPath() {
         return driverPath("geckodriver");
@@ -98,20 +105,32 @@ public class DriverData {
     }
 
     // GET DRIVER
-    private static void setBrowserSizeForMac(WebDriver driver,
-            int width, int height) {
+    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver -> {
+        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
+        if (groups.size() == 2)
+            driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
+        else {
+            if (getOs().equals(MAC))
+                maximizeScreen(driver);
+            else
+                driver.manage().window().maximize();
+        }
+        return driver;
+    };
+
+    private static WebDriver setBrowserSizeForMac(WebDriver driver, int width, int height) {
         try {
             Point position = new Point(0, 0);
             driver.manage().window().setPosition(position);
             driver.manage().window().setSize(new Dimension(width, height));
+            return driver;
         } catch (Exception ex) {
             logger.error("Failed to Set resolution (%s, %s): %s", width, height, safeException(ex));
             throw ex;
         }
     }
-
     public static Capabilities getCapabilities(
-        MutableCapabilities capabilities, JAction1<Object> defaultCapabilities) {
+            MutableCapabilities capabilities, JAction1<Object> defaultCapabilities) {
         try {
             setupErrors.clear();
             defaultCapabilities.execute(capabilities);
@@ -138,8 +157,7 @@ public class DriverData {
             setupErrors.add(format("%s: %s", name, safeException(ex)));
         }
     }
-
-    public static JAction1<ChromeOptions> CHROME_OPTIONS = cap -> {
+    public static void defaultChromeOptions(ChromeOptions cap) {
         HashMap<String, Object> chromePrefs = new HashMap<>();
         setUp("Set Chrome Prefs", () -> {
             chromePrefs.put("credentials_enable_service", false);
@@ -161,17 +179,18 @@ public class DriverData {
             () -> cap.setExperimentalOption("prefs", chromePrefs));
         // Capabilities from settings
         CAPABILITIES_FOR_CHROME.forEach((property, value) -> setupCapability(cap, property, value));
-    };
+    }
+    public static JAction1<ChromeOptions> CHROME_OPTIONS = DriverData::defaultChromeOptions;
 
     public static void setupCapability(ChromeOptions cap, String property, String value){
         if(!property.equals(ARGUMENTS_PROPERTY)){
-            cap.setCapability(property, value);
+            cap.setCapability(property, stringToPrimitive(value));
         } else {
             cap.addArguments(value.split(" "));
         }
     }
 
-    public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = cap -> {
+    public static void defaultFirefoxOptions(FirefoxOptions cap) {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         setUp("Set FirefoxProfile", () -> {
             firefoxProfile.setAssumeUntrustedCertificateIssuer(false);
@@ -197,9 +216,10 @@ public class DriverData {
             () -> cap.setProfile(firefoxProfile));
         // Capabilities from settings
         CAPABILITIES_FOR_FF.forEach(cap::setCapability);
-    };
+    }
+    public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = DriverData::defaultFirefoxOptions;
 
-    public static JAction1<InternetExplorerOptions> IE_OPTIONS = cap -> {
+    public static void defaultIEOptions(InternetExplorerOptions cap) {
         setUp("IE: introduceFlakinessByIgnoringSecurityDomains",
             cap::introduceFlakinessByIgnoringSecurityDomains);
         setUp("ignoreZoomSettings",
@@ -222,15 +242,17 @@ public class DriverData {
             () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
         // Capabilities from settings
         CAPABILITIES_FOR_IE.forEach(cap::setCapability);
-    };
-    public static JAction1<EdgeOptions> EDGE_OPTIONS = cap -> {
+    }
+    public static JAction1<InternetExplorerOptions> IE_OPTIONS = DriverData::defaultIEOptions;
 
-    };
-    public static JAction1<OperaOptions> OPERA_OPTIONS = cap -> {
+    public static void defaultEdgeOptions(EdgeOptions cap) { }
+    public static JAction1<EdgeOptions> EDGE_OPTIONS = DriverData::defaultEdgeOptions;
 
-    };
-    // GET DRIVER
-    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = DriverData::maximizeScreen;
+    public static void defaultOperaOptions(OperaOptions cap) { }
+    public static JAction1<OperaOptions> OPERA_OPTIONS = DriverData::defaultOperaOptions;
+
+    public static void defaultSafariOptions(SafariOptions cap) { }
+    public static JAction1<SafariOptions> SAFARI_OPTIONS = DriverData::defaultSafariOptions;
 
     private static WebDriver maximizeScreen(WebDriver driver) {
         try {

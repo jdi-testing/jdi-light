@@ -17,14 +17,22 @@ public interface ICoreElement extends IBaseElement {
 
     @JDIAction("Hover to '{name}'")
     default void hover() { core().hover(); }
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction(value = "Check that '{name}' is enabled", timeout = 0)
     default boolean isEnabled() { return core().isEnabled(); }
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction(value = "Check that '{name}' is disabled", timeout = 0)
     default boolean isDisabled() { return !isEnabled(); }
-    @JDIAction("Check that '{name}' is displayed")
+    @JDIAction(value = "Check that '{name}' is displayed", timeout = 0)
     default boolean isDisplayed() { return core().isDisplayed(); }
-    @JDIAction("Check that '{name}' is hidden")
-    default boolean isHidden() { return !isDisplayed(); }
+    @JDIAction(value = "Check that '{name}' is visible for user", timeout = 0)
+    default boolean isVisible() { return core().isVisible(); }
+    @JDIAction(value = "Check that '{name}' is not visible by user", timeout = 0)
+    default boolean isNotVisible() { return core().isNotVisible(); }
+    @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
+    default boolean isHidden() { return core().isHidden(); }
+    @JDIAction(value = "Check that '{name}' is exist on the page", timeout = 0)
+    default boolean isExist() { return core().isExist(); }
+    @JDIAction(value = "Check that '{name}' is missed on the page", timeout = 0)
+    default boolean isNotExist() { return core().isNotExist(); }
     default void highlight(String color) { core().highlight(); }
     default void highlight() { core().highlight(); }
     default void show() { core().show(); }

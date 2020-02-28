@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeSuite;
 import java.lang.reflect.Method;
 
 import static com.epam.jdi.eyes.JDIEyes.*;
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
@@ -27,6 +28,6 @@ public class TestsInit {
     }
     @AfterSuite(alwaysRun = true)
     public static void teardown() {
-        closeAllEyes();
+        killAllSeleniumDrivers();
     }
 }

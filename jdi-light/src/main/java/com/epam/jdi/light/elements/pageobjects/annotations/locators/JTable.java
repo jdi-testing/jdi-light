@@ -22,6 +22,7 @@ public @interface JTable {
     String cell() default "";
     String allCells() default "";
     String rowHeader() default "";
+    String fromCellToRow() default "";
     int size() default -1;
     int count() default -1;
     int firstColumnIndex() default -1;

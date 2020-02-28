@@ -246,6 +246,25 @@ public class UIElement extends JDIBase
     }
 
     /**
+     * Check the element is displayed
+     * @return boolean
+     */
+    @JDIAction(value = "Check that '{name}' is visible by user", timeout = 0)
+    public boolean isVisible() {
+        if (isHidden())
+            return false;
+        Object isInView = js().executeScript(
+            "const rect = arguments[0].getBoundingClientRect();\n" +
+            "if (!rect) return false;\n" +
+            "const windowHeight = (window.innerHeight || document.documentElement.clientHeight);\n" +
+            "const windowWidth = (window.innerWidth || document.documentElement.clientWidth);\n" +
+            "const vertInView = (rect.top <= windowHeight) && ((rect.top + rect.height) > 0);\n" +
+            "const horInView = (rect.left <= windowWidth) && ((rect.left + rect.width) > 0);\n" +
+            "return (vertInView && horInView);", getWebElement());
+        return (boolean)isInView;
+    }
+
+    /**
      * Input specified value as keys
      * @param value
      */
@@ -267,9 +286,11 @@ public class UIElement extends JDIBase
         jsExecute("value='"+value.replace("'", "\\'")+"'");
     }
 
+    @JDIAction("Click on '{name}' (x:{0}, y:{1})")
     public void click(int x, int y) {
         actionsWithElement(a -> a.moveByOffset(x-getRect().width/2, y-getRect().height/2).click());
     }
+    @JDIAction("Click on '{name}'")
     public void click(ElementArea area) {
         if (isDisabled())
             throw exception("Can't perform click. Element is disabled");
@@ -401,15 +422,24 @@ public class UIElement extends JDIBase
         return !displayed();
     }
 
-    @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
+    /**
+     * Check the element is visible by user
+     * @return boolean
+     */
+    @JDIAction(value = "Check that '{name}' is not visible by user", timeout = 0)
+    public boolean isNotVisible() {
+        return !isVisible();
+    }
+
+    @JDIAction(value = "Check that '{name}' is exist on the page", timeout = 0)
     public boolean isExist() {
         return noWait(() -> {
             try {
-                get(); return true;
+                getWebElement(); return true;
             } catch (Exception ignore) { return false; }
         });
     }
-    @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
+    @JDIAction(value = "Check that '{name}' is missed on the page", timeout = 0)
     public boolean isNotExist() {
         return !isExist();
     }
@@ -426,7 +456,7 @@ public class UIElement extends JDIBase
      * Get all elements classes as list.
      * Example: <div class="btn submit color"> </a> will return list of elements [btn, submit, color]
      */
-    @JDIAction(value = "Execute javascript '{0}' for '{name}'", level = DEBUG)
+    @JDIAction(value = "Get classes of '{name}'", level = DEBUG)
     public List<String> classes() {
         String cl = attr("class");
         return cl.length() > 0
@@ -614,9 +644,10 @@ public class UIElement extends JDIBase
     public String labelText() {
         return label().getText();
     }
-    @Override
+    @JDIAction("Get '{name}' text") @Override
     public String text(TextTypes type) {
-        return timer().getResult(() -> noWait(() -> type.func.execute(this)));
+        String result = timer().getResult(() -> noWait(() -> type.func.execute(this)));
+        return result;
     }
     public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
         String text = ui.text(TEXT);
@@ -701,13 +732,10 @@ public class UIElement extends JDIBase
     }
     protected boolean displayed() {
         try {
-            if (getWebElement().isDisplayed())
-                return true;
+            return getWebElement().isDisplayed();
         } catch (Exception ex) {
-            List<WebElement> result = getAllElements();
-            return result.size() == 1 && result.get(0).isDisplayed();
+            return false;
         }
-        return false;
     }
 
     public boolean isClickable() {

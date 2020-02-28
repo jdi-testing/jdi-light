@@ -74,6 +74,10 @@ public class Dropdown extends DropdownExpand {
     public boolean isDisplayed() {
         return setupDone ? super.isDisplayed() : ds().isDisplayed();
     }
+    @JDIAction("Check that '{name}' is hidden") @Override
+    public boolean isHidden() {
+        return setupDone ? super.isHidden() : ds().isHidden();
+    }
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isEnabled() {
         return setupDone ? super.isEnabled() : ds().isEnabled();
