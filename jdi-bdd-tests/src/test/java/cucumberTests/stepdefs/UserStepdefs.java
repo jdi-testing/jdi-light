@@ -3,8 +3,6 @@ package cucumberTests.stepdefs;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.elements.common.FileInput;
-import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -21,7 +19,6 @@ import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.userIcon;
 import static io.github.com.pages.Header.userName;
-import static io.github.com.pages.HtmlElementsPage.multiDropdown;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -79,11 +76,5 @@ public class UserStepdefs {
             multiSelect(name, asList(option));
             fail("Select disabled should throw exception");
         } catch (Exception ignore) {}
-    }
-    
-    @When("^the \"([^\"]*)\" element is initialized for Firefox$")
-    public void theElementIsInitializedForFirefox(String name) throws Throwable {
-        MultiSelector multiDropdown = getUI(name, MultiSelector.class);
-        if ("".equals(multiDropdown.core().attr("id"))) multiDropdown.core().setAttribute("id", "multi-dropdown");
     }
 }

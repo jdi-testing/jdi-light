@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.complex.Checklist;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.*;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
@@ -34,8 +33,7 @@ public class HtmlElementsPage extends WebPage {
 
     //region Complex Elements
     public static Dropdown dressCode;
-    public static MultiSelector ages;
-    @UI(".multiselect-native-select") public static MultiSelector multiDropdown;
+    public static MultiSelector ages, multiDropdown;
 //    public static IsCombobox iceCream;
     public static DataListOptions iceCream;
 //    public static IsCombobox iceCreamCombo;
