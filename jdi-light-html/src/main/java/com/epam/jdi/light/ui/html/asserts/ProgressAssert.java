@@ -15,16 +15,22 @@ import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
  */
 public class ProgressAssert extends UIAssert<ProgressAssert, ProgressBar> {
     @JDIAction("Assert that '{name}' max value {0}")
-    public ProgressAssert max(Matcher<Integer> max) {
-        jdiAssert(getInt("max", element.core()), max);
+    public ProgressAssert max(Matcher<Integer> max, String... messages) {
+        jdiAssert(getInt("max", element.core()), max, messages);
         return this;
     }
-    public ProgressAssert max(int maxVolume) { return max(Matchers.is(maxVolume)); }
-
+    
+    public ProgressAssert max(int maxVolume, String... messages) {
+        return max(Matchers.is(maxVolume), messages);
+    }
+    
     @JDIAction("Assert that '{name}' value {0}")
-    public ProgressAssert value(Matcher<Integer> value) {
-        jdiAssert(getInt("value", element.core()), value);
+    public ProgressAssert value(Matcher<Integer> value, String... messages) {
+        jdiAssert(getInt("value", element.core()), value, messages);
         return this;
     }
-    public ProgressAssert value(int value) { return value(Matchers.is(value)); }
+    
+    public ProgressAssert value(int value, String... messages) {
+        return value(Matchers.is(value), messages);
+    }
 }

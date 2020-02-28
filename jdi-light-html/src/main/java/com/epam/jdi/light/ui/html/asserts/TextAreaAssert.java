@@ -15,36 +15,36 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  */
 public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implements ITextAssert<TextAreaAssert> {
     @JDIAction("Assert that '{name}' text {0}")
-    public TextAreaAssert text(Matcher<String> condition) {
-        jdiAssert(element.getText(), condition);
+    public TextAreaAssert text(Matcher<String> condition, String ... messages) {
+        jdiAssert(element.getText(), condition, messages);
         return this;
     }
     @JDIAction("Assert that '{name}' rows count {0}")
-    public TextAreaAssert rowsCount(Matcher<Integer> condition) {
-        jdiAssert(element.rows(), condition);
+    public TextAreaAssert rowsCount(Matcher<Integer> condition, String ... messages) {
+        jdiAssert(element.rows(), condition, messages);
         return this;
     }
-    public TextAreaAssert rowsCount(int rowsCount) { return rowsCount(Matchers.is(rowsCount)); }
+    public TextAreaAssert rowsCount(int rowsCount, String ... messages) { return rowsCount(Matchers.is(rowsCount), messages); }
 
     @JDIAction("Assert that '{name}' columns count {0}")
-    public TextAreaAssert colsCount(Matcher<Integer> condition) {
-        jdiAssert(element.cols(), condition);
+    public TextAreaAssert colsCount(Matcher<Integer> condition, String ... messages) {
+        jdiAssert(element.cols(), condition, messages);
         return this;
     }
-    public TextAreaAssert colsCount(int colsCount) { return colsCount(Matchers.is(colsCount)); }
+    public TextAreaAssert colsCount(int colsCount, String ... messages) { return colsCount(Matchers.is(colsCount), messages); }
 
     @JDIAction("Assert that '{name}' minlength {0}")
-    public TextAreaAssert minlength(Matcher<Integer> condition) {
-        jdiAssert(element.minlength(), condition);
+    public TextAreaAssert minlength(Matcher<Integer> condition, String ... messages) {
+        jdiAssert(element.minlength(), condition, messages);
         return this;
     }
-    public TextAreaAssert minlength(int minlength) { return minlength(Matchers.is(minlength)); }
+    public TextAreaAssert minlength(int minlength, String ... messages) { return minlength(Matchers.is(minlength), messages); }
 
     @JDIAction("Assert that '{name}' maxlength {0}")
-    public TextAreaAssert maxlength(Matcher<Integer> condition) {
-        jdiAssert(element.maxlength(), condition);
+    public TextAreaAssert maxlength(Matcher<Integer> condition, String ... messages) {
+        jdiAssert(element.maxlength(), condition, messages);
         return this;
     }
-    public TextAreaAssert maxlength(int maxlength) { return maxlength(Matchers.is(maxlength)); }
+    public TextAreaAssert maxlength(int maxlength, String ... messages) { return maxlength(Matchers.is(maxlength), messages); }
 
 }

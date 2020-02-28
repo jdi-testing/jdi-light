@@ -13,20 +13,20 @@ import static org.hamcrest.Matchers.greaterThan;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class TableAssert extends BaseTableAssert<Table, TableAssert> {
-    public Compare exact(int count) {
-        return new Compare(count, this, true);
+    public Compare exact(int count, String ... messages) {
+        return new Compare(count, this, true, messages);
     }
-    public Compare atLeast(int count) {
-        return new Compare(count, this, false);
+    public Compare atLeast(int count, String ... messages) {
+        return new Compare(count, this, false, messages);
     }
-    public Compare no() {
-        return exact(0);
+    public Compare no(String ... messages) {
+        return exact(0, messages);
     }
-    public Compare all() {
-        return exact(table().count());
+    public Compare all(String ... messages) {
+        return exact(table().count(), messages);
     }
-    public Compare onlyOne() {
-        return exact(1);
+    public Compare onlyOne(String ... messages) {
+        return exact(1, messages);
     }
 
     public class Compare {
@@ -36,13 +36,16 @@ public class TableAssert extends BaseTableAssert<Table, TableAssert> {
         public String type;
         TableAssert tAssert;
         boolean exact;
-        private Compare(int count, TableAssert tAssert, boolean exact) {
+        String[] messages;
+        
+        private Compare(int count, TableAssert tAssert, boolean exact, String ... messages) {
             this.count = count;
             this.tAssert = tAssert;
             this.exact = exact;
             this.type = exact ? "exactly" : "at least";
             this.name = tAssert.name;
             this.failElement = tAssert.failElement;
+            this.messages = messages;
         }
 
         /**
@@ -52,7 +55,7 @@ public class TableAssert extends BaseTableAssert<Table, TableAssert> {
         @JDIAction("Assert that '{name}' has at least '{0}' rows that {0}")
         public TableAssert rows(TableMatcher... matchers) {
             jdiAssert(TABLE_MATCHER.execute(element, matchers).size(),
-                    greaterThan(table().header().size()*count-1));
+                    greaterThan(table().header().size()*count-1), messages);
             return tAssert;
         }
     }

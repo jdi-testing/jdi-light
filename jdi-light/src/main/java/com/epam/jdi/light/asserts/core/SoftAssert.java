@@ -1,9 +1,11 @@
 package com.epam.jdi.light.asserts.core;
 
+import com.epam.jdi.light.asserts.generic.BaseAssert;
 import com.epam.jdi.tools.Safe;
 import org.hamcrest.Matcher;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -28,9 +30,10 @@ public class SoftAssert {
     public static void assertStrict() {
         setAssertType("strict");
     }
-    public static <T> void jdiAssert(List<T> actual, Matcher<? super List<T>> matcher) {
+    public static <T> void jdiAssert(List<T> actual, Matcher<? super List<T>> matcher, String ... messages) {
         try {
-            assertThat(actual, matcher);
+            String message = BaseAssert.prepareOptionalMessage(messages);
+            assertThat(message, actual, matcher);
         } catch (Throwable error) {
             if (IS_SOFT_ASSERT) {
                 addError(error);
@@ -38,9 +41,10 @@ public class SoftAssert {
                 throw new AssertionError(error);
         }
     }
-    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
+    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher, String ... messages) {
         try {
-            assertThat(actual, matcher);
+            String message = BaseAssert.prepareOptionalMessage(messages);
+            assertThat(message, actual, matcher);
             logger.debug(">>> " + actual);
         } catch (Throwable error) {
             if (IS_SOFT_ASSERT) {
