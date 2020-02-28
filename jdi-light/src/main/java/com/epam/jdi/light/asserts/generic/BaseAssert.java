@@ -6,6 +6,8 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.tools.func.JFunc1;
 
+import java.util.Arrays;
+
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
@@ -19,6 +21,9 @@ public class BaseAssert<E extends IBaseElement> implements IBaseElement {
     public String failElement;
     public E element;
     public static JFunc1<JDIElement, String> PRINT_ASSERT = JDIElement::toString;
+    public static String prepareOptionalMessage(String ... messages) {
+        return Arrays.stream(messages).reduce("", (s, s1) -> s += "\n" + s1);
+    }
 
     public JDIBase base() {
         return element.base();

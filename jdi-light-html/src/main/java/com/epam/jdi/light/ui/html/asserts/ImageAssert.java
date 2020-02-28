@@ -14,36 +14,52 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  */
 public class ImageAssert extends UIAssert<ImageAssert, Image> {
     @JDIAction("Assert that '{name}' src {0}")
-    public ImageAssert src(Matcher<String> condition) {
-        jdiAssert(element.src(), condition);
+    public ImageAssert src(Matcher<String> condition, String... messages) {
+        jdiAssert(element.src(), condition, messages);
         return this;
     }
-    public ImageAssert src(String src) { return src(Matchers.is(src)); }
+    
+    public ImageAssert src(String src, String... messages) {
+        return src(Matchers.is(src), messages);
+    }
+    
     @JDIAction("Assert that '{name}' fileName {0}")
-    public ImageAssert fileName(Matcher<String> condition) {
-        jdiAssert(element.fileName(), condition);
+    public ImageAssert fileName(Matcher<String> condition, String... messages) {
+        jdiAssert(element.fileName(), condition, messages);
         return this;
     }
-    public ImageAssert fileName(String src) { return fileName(Matchers.is(src)); }
-
+    
+    public ImageAssert fileName(String src, String... messages) {
+        return fileName(Matchers.is(src), messages);
+    }
+    
     @JDIAction("Assert that '{name}' alt {0}")
-    public ImageAssert alt(Matcher<String> condition) {
-        jdiAssert(element.alt(), condition);
+    public ImageAssert alt(Matcher<String> condition, String... messages) {
+        jdiAssert(element.alt(), condition, messages);
         return this;
     }
-    public ImageAssert alt(String alt) { return alt(Matchers.is(alt)); }
-
+    
+    public ImageAssert alt(String alt, String... messages) {
+        return alt(Matchers.is(alt), messages);
+    }
+    
     @JDIAction("Assert that '{name}' height {0}")
-    public ImageAssert height(Matcher<Integer> condition) {
-        jdiAssert(element.height(), condition);
+    public ImageAssert height(Matcher<Integer> condition, String... messages) {
+        jdiAssert(element.height(), condition, messages);
         return this;
     }
-    public ImageAssert height(int height) { return height(Matchers.is(height)); }
-
+    
+    public ImageAssert height(int height, String... messages) {
+        return height(Matchers.is(height), messages);
+    }
+    
     @JDIAction("Assert that '{name}' width {0}")
-    public ImageAssert width(Matcher<Integer> condition) {
-        jdiAssert(element.width(), condition);
+    public ImageAssert width(Matcher<Integer> condition, String... messages) {
+        jdiAssert(element.width(), condition, messages);
         return this;
     }
-    public ImageAssert width(int width) { return width(Matchers.is(width)); }
+    
+    public ImageAssert width(int width, String... messages) {
+        return width(Matchers.is(width), messages);
+    }
 }
