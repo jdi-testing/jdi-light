@@ -2,8 +2,6 @@ package io.github.epam.tests;
 
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.ElementArea;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
 import io.github.com.pages.UIElementContactFormPage;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
@@ -137,7 +135,7 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void getAllAttributes(){
-        assertEquals(submit.getAllAttributes(), MapArray.map(Pair.$("class", "uui-button dark-blue"), Pair.$("type", "submit")));
+        assertEquals(submit.getAllAttributes().toString(), "class:uui-button dark-blue,type:submit");
     }
 
     @Test
@@ -204,7 +202,7 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void attrs(){
-        assertEquals(submit.attrs(), MapArray.map(Pair.$("class", "uui-button dark-blue"), Pair.$("type", "submit")));
+        assertEquals(submit.attrs().toString(), "class:uui-button dark-blue,type:submit");
     }
     @Test
     public void text(){
