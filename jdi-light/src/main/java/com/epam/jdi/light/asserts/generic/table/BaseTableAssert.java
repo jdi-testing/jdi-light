@@ -64,6 +64,26 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
     }
     
     /**
+     * Match passed value with table rows count
+     * @param condition to compare
+     */
+    @JDIAction("Assert that '{name}' count {0}")
+    public A count(Matcher<Integer> condition) {
+        jdiAssert(table().count(), condition);
+        return (A) this;
+    }
+
+    /**
+     * Match passed value with table rows count
+     * @param count to compare
+     */
+    @JDIAction("Assert that '{name}' count {0}")
+    public A count(int count) {
+        return count(Matchers.is(count));
+    }
+
+
+    /**
      * Check that the table has the specified column
      *
      * @param column to compare

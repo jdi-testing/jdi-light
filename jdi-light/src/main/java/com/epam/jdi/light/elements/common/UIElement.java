@@ -431,7 +431,7 @@ public class UIElement extends JDIBase
         return !isVisible();
     }
 
-    @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
+    @JDIAction(value = "Check that '{name}' is exist on the page", timeout = 0)
     public boolean isExist() {
         return noWait(() -> {
             try {
@@ -439,7 +439,7 @@ public class UIElement extends JDIBase
             } catch (Exception ignore) { return false; }
         });
     }
-    @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
+    @JDIAction(value = "Check that '{name}' is missed on the page", timeout = 0)
     public boolean isNotExist() {
         return !isExist();
     }
@@ -456,7 +456,7 @@ public class UIElement extends JDIBase
      * Get all elements classes as list.
      * Example: <div class="btn submit color"> </a> will return list of elements [btn, submit, color]
      */
-    @JDIAction(value = "Execute javascript '{0}' for '{name}'", level = DEBUG)
+    @JDIAction(value = "Get classes of '{name}'", level = DEBUG)
     public List<String> classes() {
         String cl = attr("class");
         return cl.length() > 0

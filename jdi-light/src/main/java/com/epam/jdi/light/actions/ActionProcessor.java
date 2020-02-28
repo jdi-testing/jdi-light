@@ -36,13 +36,6 @@ import static java.util.Collections.reverse;
 @SuppressWarnings("unused")
 @Aspect
 public class ActionProcessor {
-    public static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
-        $("", result -> true),
-        $("true", result -> result instanceof Boolean && (Boolean) result),
-        $("false", result -> result instanceof Boolean && !(Boolean) result),
-        $("not empty", result -> result instanceof List && ((List) result).size() > 0),
-        $("empty", result -> result instanceof List && ((List) result).size() == 0)
-    );
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { // empty
     }
@@ -63,97 +56,11 @@ public class ActionProcessor {
             Object result = stableAction(jInfo);
             return AFTER_JDI_ACTION.execute(jp, result);
         } catch (Throwable ex) {
-            addFailedMethod(jp);
-            if (aroundCount(className) == 1) {
-                logFailure(jInfo.object());
-                reverse(failedMethods);
-                logger.error("Failed actions chain: " + PrintUtils.print(failedMethods, " > "));
-            }
-            throw exception(ex, ACTION_FAILED.execute(jInfo.object(), getExceptionAround(ex, aroundCount(className) == 1)));
+            throw exceptionJdiAround(jInfo, className, ex);
         }
         finally {
             jInfo.clear();
         }
-    }
-    public static void addFailedMethod(ProceedingJoinPoint jp) {
-        String[] s = jp.toString().split("\\.");
-        String result = s[s.length-2]+"."+s[s.length-1].replaceAll("\\)\\)", ")");
-        if (!failedMethods.contains(result))
-            failedMethods.add(result);
-    }
-    public static List<String> failedMethods = new ArrayList<>();
-    public static String getExceptionAround(Throwable ex, boolean top) {
-        String result = safeException(ex);
-        while (result.contains("\n\n"))
-            result = result.replaceFirst("\\n\\n", LINE_BREAK);
-        result = result.replace("java.lang.RuntimeException:", "").trim();
-        if (top)
-            result = "[" + nowTime("mm:ss.S") + "] " + result.replaceFirst("\n", "");
-        return result;
-    }
-    private static List<StackTraceElement> arounds() {
-        List<StackTraceElement> arounds = where(currentThread().getStackTrace(),
-                s -> s.getMethodName().equals("jdiAround"));
-        Collections.reverse(arounds);
-        return arounds;
-    }
-    public static boolean notThisAround(String name) {
-        return !arounds().get(0).getClassName().equals(name);
-    }
-    public static int aroundCount(String name) {
-        return where(currentThread().getStackTrace(),
-                s -> s.getMethodName().equals("jdiAround") && s.getClassName().equals(name))
-                .size();
-    }
-    public static Object defaultAction(ActionObject jInfo) throws Throwable {
-        jInfo.setElementTimeout();
-        return jInfo.overrideAction() != null
-                ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
-    }
-    public static Object stableAction(ActionObject jInfo) {
-        String exceptionMsg = "";
-        jInfo.setElementTimeout();
-        long start = currentTimeMillis();
-        Throwable exception = null;
-        do {
-            try {
-                Object result = jInfo.overrideAction() != null
-                    ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
-                if (!condition(jInfo.jp())) continue;
-                return result;
-            } catch (Throwable ex) {
-                exception = ex;
-                try {
-                    exceptionMsg = safeException(ex);
-                    Thread.sleep(200);
-                } catch (Exception ignore) {
-                }
-            }
-        } while (currentTimeMillis() - start < jInfo.timeout() * 1000);
-        throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
-    }
-    static String getFailedMessage(ActionObject jInfo, String exception) {
-        MethodSignature method = getJpMethod(jInfo.jp());
-        try {
-            String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
-                $("exception", exception),
-                $("timeout", jInfo.timeout()),
-                $("action", method.getMethod().getName())
-            ));
-            return fillTemplate(result, jInfo.jp(), method);
-        } catch (Exception ex) {
-            throw exception(ex, "Surround method issue: Can't get failed message");
-        }
-    }
-    static String getConditionName(ProceedingJoinPoint jp) {
-        JDIAction ja = getJdiAction(jp);
-        return ja != null ? ja.condition() : "";
-    }
-    static boolean condition(ProceedingJoinPoint jp) {
-        String conditionName = getConditionName(jp);
-        return CONDITIONS.has(conditionName)
-            ? CONDITIONS.get(conditionName).execute(jp)
-            : true;
     }
     @Around("stepPointcut()")
     public Object stepAround(ProceedingJoinPoint jp) {

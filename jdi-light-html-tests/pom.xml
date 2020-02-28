@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <version>1.1.15</version>
+    <version>1.1.16</version>
     <artifactId>jdi-light-html-tests</artifactId>
     <name>JDI Html Tests</name>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
-        <driver>chrome</driver>
-        <!--<driver>firefox</driver>-->
+        <driver>firefox</driver>
+        <!--<driver>chrome</driver>-->
         <allure.testng>2.13.1</allure.testng>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.1.15</version>
+            <version>1.1.16</version>
         </dependency>
 
         <!--Allure config in parent-->
