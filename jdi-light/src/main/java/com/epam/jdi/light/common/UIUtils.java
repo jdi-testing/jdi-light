@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -157,5 +158,40 @@ public final class UIUtils {
             } catch (Exception ignore) { }
         }
         throw exception("%s has no appropriate constructors", cs.getSimpleName());
+    }
+
+    public static int intValue(Object element) {
+        try {
+            return ((Long)element).intValue();
+        } catch (ClassCastException ignore) {
+            try {
+                return ((Double) element).intValue();
+            } catch (ClassCastException ex) {
+                return -1;
+            }
+        }
+    }
+    public static int getInt(Object value) {
+        try {
+            return (int)value;
+        } catch (Exception ignore) { }
+        try {
+            return ((Double)value).intValue();
+        } catch (Exception ignore) { }
+        try {
+            return ((Long)value).intValue();
+        } catch (Exception ignore) { }
+        try {
+            return ((Float)value).intValue();
+        } catch (Exception ignore) { }
+        return -1;
+    }
+    public static double getDouble(Object obj) {
+        if (obj == null) return 0.0;
+        try {
+            return (double) obj;
+        } catch (Exception ex) {
+            return ((Long) obj).doubleValue();
+        }
     }
 }

@@ -25,6 +25,7 @@ import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
 import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
+import static com.epam.jdi.light.common.UIUtils.getDouble;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
@@ -359,13 +360,7 @@ public class WebPage extends DriverBase implements PageObject {
 
     @JDIAction(level = DEBUG)
     public static double zoomLevel() {
-        Object obj = jsExecute("return window.devicePixelRatio;");
-        if (obj == null) return 0.0;
-        try {
-            return (double) obj;
-        } catch (Exception ex) {
-            return ((Long) obj).doubleValue();
-        }
+        return getDouble(jsExecute("return window.devicePixelRatio;"));
     }
     @JDIAction(level = DEBUG)
     public static long xOffset() {

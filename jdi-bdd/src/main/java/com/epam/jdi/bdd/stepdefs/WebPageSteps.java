@@ -5,6 +5,7 @@ import cucumber.api.java.en.When;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
 
+import static com.epam.jdi.light.common.UIUtils.getInt;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -79,21 +80,6 @@ public class WebPageSteps {
         int execResult = getInt(jsExecute("return Math.ceil(window.scrollX);"));
         assertThat(execResult, Matchers.greaterThan(SCROLLX + x-2));
         assertThat(execResult, Matchers.lessThan(SCROLLX + x+1));
-    }
-    private int getInt(Object value) {
-        try {
-            return (int)value;
-        } catch (Exception ignore) { }
-        try {
-            return ((Double)value).intValue();
-        } catch (Exception ignore) { }
-        try {
-            return ((Long)value).intValue();
-        } catch (Exception ignore) { }
-        try {
-            return ((Float)value).intValue();
-        } catch (Exception ignore) { }
-        return -1;
     }
 
     @Then("^the page is zoomed \"(\\d+)\" times$")
