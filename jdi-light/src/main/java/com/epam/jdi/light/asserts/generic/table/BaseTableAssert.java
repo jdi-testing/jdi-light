@@ -14,6 +14,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.tools.LinqUtils.isSorted;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -144,17 +145,33 @@ public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> ext
     }
     @JDIAction("Assert that '{name}' is sorted by ascending")
     public A sortedByAsc(String columnName) {
-        WebList allRows = table().webColumn(columnName);
-        for (int i = 1; i < allRows.size(); i++)
-            if (!isSorted(allRows.get(i-1).getText(), allRows.get(i).getText(), true, false))
+        List<String> column = table().webColumn(columnName).values();
+        for (int i = 1; i < column.size(); i++)
+            if (!isSorted(column.get(i-1), column.get(i), true, false))
                 jdiAssert("Table is not by ascending at "+i+" row", Matchers.is(""));
         return (A)this;
     }
     @JDIAction("Assert that '{name}' is sorted by descending")
     public A sortedByDesc(String columnName) {
-        WebList allRows = table().webColumn(columnName);
-        for (int i = 1; i < allRows.size(); i++)
-            if (!isSorted(allRows.get(i).getText(), allRows.get(i-1).getText(), true, false))
+        List<String> column = table().webColumn(columnName).values();
+        for (int i = 1; i < column.size(); i++)
+            if (!isSorted(column.get(i), column.get(i-1), true, false))
+                jdiAssert("Table is not by descending at "+i+" row", Matchers.is(""));
+        return (A)this;
+    }
+    @JDIAction("Assert that '{name}' is sorted by ascending")
+    public A sortedNumByAsc(String columnName) {
+        List<String> column = map(table().webColumn(columnName).values(), el -> el.replaceAll("[^0-9.,]", ""));
+        for (int i = 1; i < column.size(); i++)
+            if (!isSorted(column.get(i-1), column.get(i), true, false))
+                jdiAssert("Table is not by ascending at "+i+" row", Matchers.is(""));
+        return (A)this;
+    }
+    @JDIAction("Assert that '{name}' is sorted by descending")
+    public A sortedNumByDesc(String columnName) {
+        List<String> column = map(table().webColumn(columnName).values(), el -> el.replaceAll("[^0-9.,+\\-]", ""));
+        for (int i = 1; i < column.size(); i++)
+            if (!isSorted(column.get(i), column.get(i-1), true, false))
                 jdiAssert("Table is not by descending at "+i+" row", Matchers.is(""));
         return (A)this;
     }
