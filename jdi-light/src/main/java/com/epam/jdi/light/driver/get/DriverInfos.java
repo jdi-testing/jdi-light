@@ -1,6 +1,8 @@
 package com.epam.jdi.light.driver.get;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,6 +17,8 @@ import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+
+import java.net.URL;
 
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
@@ -40,6 +44,22 @@ public class DriverInfos {
             d.initCapabilities = new DesiredCapabilities();
             d.capabilities = c -> getCapabilities(c, cap -> APPIUM_OPTIONS.execute((MutableCapabilities) cap));
             d.getDriver = c -> new AppiumDriver<>(d.capabilities.execute(d.initCapabilities));
+        }
+    );
+    public static DriverInfo ANDROID_INFO = new DriverInfo()
+        .set(d -> {
+            d.type = ANDROID;
+            d.initCapabilities = new DesiredCapabilities();
+            d.capabilities = c -> getCapabilities(c, cap -> ANDROID_OPTIONS.execute((MutableCapabilities) cap));
+            d.getDriver = c -> new AndroidDriver<>(new URL(LOCAL_URL), (MutableCapabilities) c);
+        }
+    );
+    public static DriverInfo IOS_INFO = new DriverInfo()
+        .set(d -> {
+            d.type = IOS;
+            d.initCapabilities = new DesiredCapabilities();
+            d.capabilities = c -> getCapabilities(c, cap -> IOS_OPTIONS.execute((MutableCapabilities) cap));
+            d.getDriver = c -> new IOSDriver<>(new URL(LOCAL_URL), (MutableCapabilities) c);
         }
     );
     public static DriverInfo FF_INFO = new DriverInfo()

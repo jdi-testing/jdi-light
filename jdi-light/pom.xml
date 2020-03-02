@@ -56,11 +56,11 @@
         <artifactId>log4j-1.2-api</artifactId>
         <version>${log4j2.version}</version>
       </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>RELEASE</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>net.lingala.zip4j</groupId>
             <artifactId>zip4j</artifactId>

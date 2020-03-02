@@ -68,7 +68,9 @@ public class WebDriverFactory {
             Value(OPERA, t -> OPERA_INFO.getDriver()),
             Value(EDGE, t -> EDGE_INFO.getDriver()),
             Value(SAFARI, t -> SAFARI_INFO.getDriver()),
-            Value(APPIUM, t -> APPIUM_INFO.getDriver())
+            Value(APPIUM, t -> APPIUM_INFO.getDriver()),
+            Value(ANDROID, t -> ANDROID_INFO.getDriver()),
+            Value(IOS, t -> IOS_INFO.getDriver())
         );
         if (driver == null)
             throw exception("Unknown driver: " + type);

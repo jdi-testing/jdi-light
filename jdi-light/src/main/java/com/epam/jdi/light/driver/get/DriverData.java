@@ -36,6 +36,7 @@ import static java.awt.Toolkit.getDefaultToolkit;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;
@@ -62,6 +63,7 @@ public class DriverData {
     public static String BROWSER_SIZE = "MAXIMIZE";
     public static final String DEFAULT_DRIVER = "chrome";
     public static String DRIVER_NAME = DEFAULT_DRIVER;
+    public static String LOCAL_URL;
     public static String ARGUMENTS_PROPERTY = "arguments";
 
     public static Map<String,String> CAPABILITIES_FOR_IE = new HashMap<>();
@@ -71,6 +73,8 @@ public class DriverData {
     public static Map<String,String> CAPABILITIES_FOR_OPERA = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_SAFARI = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_APPIUM = new HashMap<>();
+    public static Map<String,String> CAPABILITIES_FOR_ANDROID = new HashMap<>();
+    public static Map<String,String> CAPABILITIES_FOR_IOS = new HashMap<>();
     public static Map<String,String> COMMON_CAPABILITIES = new HashMap<>();
 
     public static String chromeDriverPath() {
@@ -114,7 +118,7 @@ public class DriverData {
         if (groups.size() == 2)
             driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
         else {
-            if(!isRemote()) {
+            if(!isRemote()&&isBlank(LOCAL_URL)) {
                 if (getOs().equals(MAC))
                     maximizeScreen(driver);
                 else
@@ -268,6 +272,18 @@ public class DriverData {
         CAPABILITIES_FOR_APPIUM.forEach(cap::setCapability);
     }
     public static JAction1<MutableCapabilities> APPIUM_OPTIONS = DriverData::defaultAppiumOptions;
+
+    public static void defaultAndroidOptions(MutableCapabilities cap) {
+        // Capabilities from settings
+        CAPABILITIES_FOR_ANDROID.forEach(cap::setCapability);
+    }
+    public static JAction1<MutableCapabilities> ANDROID_OPTIONS = DriverData::defaultAndroidOptions;
+
+    public static void defaultIOSOptions(MutableCapabilities cap) {
+        // Capabilities from settings
+        CAPABILITIES_FOR_IOS.forEach(cap::setCapability);
+    }
+    public static JAction1<MutableCapabilities> IOS_OPTIONS = DriverData::defaultIOSOptions;
 
     public static void defaultSafariOptions(SafariOptions cap) { }
     public static JAction1<SafariOptions> SAFARI_OPTIONS = DriverData::defaultSafariOptions;

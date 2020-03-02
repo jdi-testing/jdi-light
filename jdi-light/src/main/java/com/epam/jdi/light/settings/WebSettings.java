@@ -155,6 +155,7 @@ public class WebSettings {
                 ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
                 ? PRELATEST_VERSION : p, "driver.version");
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
+        fillAction(p -> LOCAL_URL = p, "local.url");
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
         addStrategy(FAIL, SCREEN_STRATEGY);
         fillAction(p -> SCREEN_STRATEGY = getStrategy(p), "screenshot.strategy");
@@ -194,6 +195,10 @@ public class WebSettings {
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_SAFARI.put(key.toString(), value.toString())));
         loadCapabilities("appium.capabilities.path","appium.properties",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_APPIUM.put(key.toString(), value.toString())));
+        loadCapabilities("android.capabilities.path","android.properties",
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_ANDROID.put(key.toString(), value.toString())));
+        loadCapabilities("ios.capabilities.path","ios.properties",
+                p -> p.forEach((key,value) -> CAPABILITIES_FOR_IOS.put(key.toString(), value.toString())));
         loadCapabilities("common.capabilities.path","common.properties",
             p -> p.forEach((key,value) -> COMMON_CAPABILITIES.put(key.toString(), value.toString())));
 
