@@ -29,6 +29,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 public class DriverInfo extends DataClass<DriverInfo> {
     public DriverTypes type;
+    public boolean alwaysRemote = false;
     public MutableCapabilities initCapabilities;
     public JFunc1<MutableCapabilities, Capabilities> capabilities;
     public String properties, path;
@@ -41,15 +42,16 @@ public class DriverInfo extends DataClass<DriverInfo> {
     }
     private WebDriver setupRemote() {
         try {
-            return new RemoteWebDriver(new URL(getRemoteURL()), capabilities.execute(initCapabilities));
+            if (this.alwaysRemote) {
+                return getDriver.execute(capabilities.execute(initCapabilities));
+            } else {
+                return new RemoteWebDriver(new URL(getRemoteURL()), capabilities.execute(initCapabilities));
+            }
         } catch (Exception ex) {
             throw exception(ex, "Failed to setup remote "+type.name+" driver");
         }
     }
     private WebDriver setupLocal() {
-        if(isNotBlank(LOCAL_URL)) {
-            return getDriver.execute(capabilities.execute(initCapabilities));
-        }
         try {
             if (isNotBlank(DRIVERS_FOLDER)) {
                 setProperty(properties, path);

@@ -22,6 +22,7 @@ import java.net.URL;
 
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
+import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -38,28 +39,22 @@ public class DriverInfos {
             d.getDriver = c -> new ChromeDriver((ChromeOptions) c);
         }
     );
-    public static DriverInfo APPIUM_INFO = new DriverInfo()
-        .set(d -> {
-            d.type = APPIUM;
-            d.initCapabilities = new DesiredCapabilities();
-            d.capabilities = c -> getCapabilities(c, cap -> APPIUM_OPTIONS.execute((MutableCapabilities) cap));
-            d.getDriver = c -> new AppiumDriver<>(d.capabilities.execute(d.initCapabilities));
-        }
-    );
     public static DriverInfo ANDROID_INFO = new DriverInfo()
         .set(d -> {
             d.type = ANDROID;
+            d.alwaysRemote = true;
             d.initCapabilities = new DesiredCapabilities();
             d.capabilities = c -> getCapabilities(c, cap -> ANDROID_OPTIONS.execute((MutableCapabilities) cap));
-            d.getDriver = c -> new AndroidDriver<>(new URL(LOCAL_URL), (MutableCapabilities) c);
+            d.getDriver = c -> new AndroidDriver<>(new URL(getRemoteURL()), (MutableCapabilities) c);
         }
     );
     public static DriverInfo IOS_INFO = new DriverInfo()
         .set(d -> {
             d.type = IOS;
+            d.alwaysRemote = true;
             d.initCapabilities = new DesiredCapabilities();
             d.capabilities = c -> getCapabilities(c, cap -> IOS_OPTIONS.execute((MutableCapabilities) cap));
-            d.getDriver = c -> new IOSDriver<>(new URL(LOCAL_URL), (MutableCapabilities) c);
+            d.getDriver = c -> new IOSDriver<>(new URL(getRemoteURL()), (MutableCapabilities) c);
         }
     );
     public static DriverInfo FF_INFO = new DriverInfo()

@@ -13,7 +13,6 @@ public enum DriverTypes {
     EDGE("edge"),
     OPERA("opera"),
     SAFARI("safari"),
-    APPIUM("appium"),
     ANDROID("android"),
     IOS("ios");
 
@@ -29,7 +28,6 @@ public enum DriverTypes {
             case "phantom":
             case "opera": return OPERA;
             case "safari": return SAFARI;
-            case "appium": return APPIUM;
             case "android": return ANDROID;
             case "ios": return IOS;
             default:

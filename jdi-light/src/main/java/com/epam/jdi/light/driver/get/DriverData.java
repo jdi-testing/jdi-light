@@ -63,7 +63,6 @@ public class DriverData {
     public static String BROWSER_SIZE = "MAXIMIZE";
     public static final String DEFAULT_DRIVER = "chrome";
     public static String DRIVER_NAME = DEFAULT_DRIVER;
-    public static String LOCAL_URL;
     public static String ARGUMENTS_PROPERTY = "arguments";
 
     public static Map<String,String> CAPABILITIES_FOR_IE = new HashMap<>();
@@ -72,7 +71,6 @@ public class DriverData {
     public static Map<String,String> CAPABILITIES_FOR_EDGE = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_OPERA = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_SAFARI = new HashMap<>();
-    public static Map<String,String> CAPABILITIES_FOR_APPIUM = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_ANDROID = new HashMap<>();
     public static Map<String,String> CAPABILITIES_FOR_IOS = new HashMap<>();
     public static Map<String,String> COMMON_CAPABILITIES = new HashMap<>();
@@ -118,7 +116,7 @@ public class DriverData {
         if (groups.size() == 2)
             driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
         else {
-            if(!isRemote()&&isBlank(LOCAL_URL)) {
+            if(!isRemote()) {
                 if (getOs().equals(MAC))
                     maximizeScreen(driver);
                 else
@@ -266,12 +264,6 @@ public class DriverData {
 
     public static void defaultOperaOptions(OperaOptions cap) { }
     public static JAction1<OperaOptions> OPERA_OPTIONS = DriverData::defaultOperaOptions;
-
-    public static void defaultAppiumOptions(MutableCapabilities cap) {
-        // Capabilities from settings
-        CAPABILITIES_FOR_APPIUM.forEach(cap::setCapability);
-    }
-    public static JAction1<MutableCapabilities> APPIUM_OPTIONS = DriverData::defaultAppiumOptions;
 
     public static void defaultAndroidOptions(MutableCapabilities cap) {
         // Capabilities from settings
