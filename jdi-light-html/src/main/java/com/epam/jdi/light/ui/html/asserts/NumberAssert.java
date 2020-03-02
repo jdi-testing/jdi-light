@@ -15,45 +15,61 @@ import static com.epam.jdi.light.ui.html.HtmlUtils.getDouble;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class NumberAssert extends UIAssert<NumberAssert, NumberSelector>
-    implements ITextAssert<NumberAssert> {
-
+        implements ITextAssert<NumberAssert> {
+    
     @JDIAction("Assert that '{name}' text {0}")
-    public NumberAssert text(Matcher<String> condition) {
-        jdiAssert(element.attr("value"), condition);
+    public NumberAssert text(Matcher<String> condition, String... messages) {
+        jdiAssert(element.attr("value"), condition, messages);
         return this;
     }
+    
     @JDIAction("Assert that '{name}' minValue {0}")
-    public NumberAssert min(Matcher<Double> min) {
-        jdiAssert(getDouble("min", element.core()), min);
+    public NumberAssert min(Matcher<Double> min, String... messages) {
+        jdiAssert(getDouble("min", element.core()), min, messages);
         return this;
     }
-    public NumberAssert min(double min) { return min(Matchers.is(min)); }
-
+    
+    public NumberAssert min(double min, String... messages) {
+        return min(Matchers.is(min), messages);
+    }
+    
     @JDIAction("Assert that '{name}' maxValue {0}")
-    public NumberAssert max(Matcher<Double> max) {
-        jdiAssert(getDouble("max", element.core()), max);
+    public NumberAssert max(Matcher<Double> max, String... messages) {
+        jdiAssert(getDouble("max", element.core()), max, messages);
         return this;
     }
-    public NumberAssert max(double max) { return max(Matchers.is(max)); }
-
+    
+    public NumberAssert max(double max, String... messages) {
+        return max(Matchers.is(max), messages);
+    }
+    
     @JDIAction("Assert that '{name}' step {0}")
-    public NumberAssert step(Matcher<Double> step) {
-        jdiAssert(getDouble("step", element.core()), step);
+    public NumberAssert step(Matcher<Double> step, String... messages) {
+        jdiAssert(getDouble("step", element.core()), step, messages);
         return this;
     }
-    public NumberAssert step(double step) { return step(Matchers.is(step)); }
-
+    
+    public NumberAssert step(double step, String... messages) {
+        return step(Matchers.is(step), messages);
+    }
+    
     @JDIAction("Assert that '{name}' placeholder {0}")
-    public NumberAssert placeholder(Matcher<String> placeholder) {
-        jdiAssert(element.placeholder(), placeholder);
+    public NumberAssert placeholder(Matcher<String> placeholder, String... messages) {
+        jdiAssert(element.placeholder(), placeholder, messages);
         return this;
     }
-    public NumberAssert placeholder(String placeholder) { return placeholder(Matchers.is(placeholder)); }
-
+    
+    public NumberAssert placeholder(String placeholder, String... messages) {
+        return placeholder(Matchers.is(placeholder), messages);
+    }
+    
     @JDIAction("Assert that '{name}' number {0}")
-    public NumberAssert number(Matcher<Double> number) {
-        jdiAssert(getDouble("value", element.core()), number);
+    public NumberAssert number(Matcher<Double> number, String... messages) {
+        jdiAssert(getDouble("value", element.core()), number, messages);
         return this;
     }
-    public NumberAssert number(double number) { return number(Matchers.is(number)); }
+    
+    public NumberAssert number(double number, String... messages) {
+        return number(Matchers.is(number), messages);
+    }
 }

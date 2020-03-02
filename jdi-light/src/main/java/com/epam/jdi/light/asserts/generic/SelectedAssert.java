@@ -5,6 +5,6 @@ package com.epam.jdi.light.asserts.generic;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public interface SelectedAssert<A> {
-    A selected();
-    A deselected();
+    A selected(String... messages);
+    A deselected(String... messages);
 }

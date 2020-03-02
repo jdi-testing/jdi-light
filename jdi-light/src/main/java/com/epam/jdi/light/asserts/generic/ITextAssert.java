@@ -11,15 +11,15 @@ import static org.hamcrest.Matchers.is;
  */
 public interface ITextAssert<A> {
     @JDIAction("Assert that '{name}' text {0}")
-    A text(Matcher<String> condition);
+    A text(Matcher<String> condition, String... messages);
     @JDIAction("Assert that '{name}' text {0}")
-    default A text(String text) { return text(is(text)); }
+    default A text(String text, String... messages) { return text(is(text), messages); }
     @JDIAction("Assert that '{name}' value {0}")
-    default A value(Matcher<String> condition) {
-        return text(condition);
+    default A value(Matcher<String> condition, String... messages) {
+        return text(condition, messages);
     }
     @JDIAction("Assert that '{name}' value {0}")
-    default A value(String condition) {
-        return text(condition);
+    default A value(String condition, String... messages) {
+        return text(condition, messages);
     }
 }

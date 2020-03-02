@@ -21,8 +21,8 @@ public class ChecklistAssert extends UISelectAssert<ChecklistAssert, IsChecklist
      * @return SelectAssert
      */
     @JDIAction("Assert that '{name}' selected option {0}")
-    public ChecklistAssert checked(Matcher<? super List<String>> condition) {
-        jdiAssert(element.checked(), condition);
+    public ChecklistAssert checked(Matcher<? super List<String>> condition, String ... messages) {
+        jdiAssert(element.checked(), condition, messages);
         return this;
     }
 }
