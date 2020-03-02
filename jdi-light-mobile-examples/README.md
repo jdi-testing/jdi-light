@@ -9,8 +9,8 @@ The version of Chrome browser in the Android emulator must be the same.
 <b>remote.type=appium</b>; <br>
 If your version of appium has its own URL (not http://0.0.0.0:4723), specify it in the <b>driver.remote.url</b> property  
 
-2) Launch Android emulator (e.g. Pixel 3 API 29) and wait until home screen is ready
-2) Launch Appium client  
+3) Launch Android or iOS emulator and wait until home screen is ready
+4) Launch Appium client  
 appium -p 4723 --chromedriver-executable /path/to/your/chromedriver  
 
 <br>
