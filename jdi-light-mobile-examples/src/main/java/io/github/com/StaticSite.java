@@ -16,7 +16,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
 import static com.epam.jdi.light.common.CheckTypes.MATCH;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("https://jdi-testing.github.io/jdi-mobile-web/")
 public class StaticSite {
 	@Url("/index.html")  @Title(value = "Home", validate = CONTAINS)
 	public static HomePage homePage;

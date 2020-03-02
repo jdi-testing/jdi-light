@@ -47,6 +47,9 @@ public class DriverInfo extends DataClass<DriverInfo> {
         }
     }
     private WebDriver setupLocal() {
+        if(isNotBlank(LOCAL_URL)) {
+            return getDriver.execute(capabilities.execute(initCapabilities));
+        }
         try {
             if (isNotBlank(DRIVERS_FOLDER)) {
                 setProperty(properties, path);
