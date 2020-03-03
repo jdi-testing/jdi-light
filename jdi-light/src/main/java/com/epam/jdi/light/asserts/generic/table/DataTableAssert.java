@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.complex.table.Row;
 import com.epam.jdi.light.elements.complex.table.TableMatcher;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -31,7 +32,7 @@ import static org.hamcrest.Matchers.*;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DataTableAssert<L extends Section, D>
+public class DataTableAssert<L extends PageObject, D>
         extends BaseTableAssert<DataTable<L, D>, DataTableAssert<L, D>> {
 
     /**

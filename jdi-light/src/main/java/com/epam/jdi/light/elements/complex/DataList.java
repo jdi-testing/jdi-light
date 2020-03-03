@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.core.DataListAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
@@ -22,7 +23,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert<T,D>> {
+public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAssert<T,D>> {
     public Class<D> dataType;
 
     public DataList() {}

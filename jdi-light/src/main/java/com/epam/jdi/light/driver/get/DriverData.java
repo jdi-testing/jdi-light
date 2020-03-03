@@ -109,7 +109,7 @@ public class DriverData {
     }
 
     // GET DRIVER
-    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver -> {
+    public static WebDriver driverSettings(WebDriver driver) {
         List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
         if (groups.size() == 2)
             driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
@@ -119,9 +119,9 @@ public class DriverData {
             else
                 driver.manage().window().maximize();
         }
-        driver.manage().timeouts().implicitlyWait(0, MILLISECONDS);
         return driver;
-    };
+    }
+    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = DriverData::driverSettings;
 
     private static WebDriver setBrowserSizeForMac(WebDriver driver, int width, int height) {
         try {
@@ -134,6 +134,7 @@ public class DriverData {
             throw ex;
         }
     }
+
     public static Capabilities getCapabilities(
             MutableCapabilities capabilities, JAction1<Object> defaultCapabilities) {
         try {

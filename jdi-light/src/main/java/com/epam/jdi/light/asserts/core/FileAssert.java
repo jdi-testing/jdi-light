@@ -2,6 +2,7 @@ package com.epam.jdi.light.asserts.core;
 
 import com.epam.jdi.light.asserts.generic.BaseAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import org.hamcrest.Matcher;
 
 import java.io.File;
@@ -19,7 +20,7 @@ import static org.hamcrest.Matchers.is;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class FileAssert extends BaseAssert {
+public class FileAssert extends BaseAssert<IBaseElement> {
     public static FileAssert assertThatFile(String fileName) {
         return new FileAssert(fileName);
     }

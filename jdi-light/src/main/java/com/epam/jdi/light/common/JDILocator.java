@@ -8,10 +8,12 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.select;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -59,6 +61,8 @@ public class JDILocator {
         byLocator = setRootLocator(locator)
                 ? trimRoot(locator)
                 : locator;
+        if (byLocator.toString().contains("By.cssSelector"))
+            byLocator = defineLocator(getByLocator(byLocator));
         this.element = element;
     }
     public void add(List<By> frames, JDIBase element) {
@@ -80,7 +84,7 @@ public class JDILocator {
     }
     public int argsCount() {
         return byLocator != null
-            ? org.apache.commons.lang3.StringUtils.countMatches(byLocator.toString(), "%s")
+            ? countMatches(byLocator.toString(), "%s")
             : 0;
     }
     private boolean setRootLocator(By locator) {
@@ -101,13 +105,13 @@ public class JDILocator {
         try {
             By locator = getLocator(args);
             if ((locator == null || !hasDomain() && !hasFrame()) && element != null)
-                return SMART_SEARCH_LOCATORS.size() > 0
-                    ? print(select(SMART_SEARCH_LOCATORS, l -> format(l, SMART_SEARCH_NAME.execute(element.name))), " or ")
-                    : "";
+                return isNotBlank(SMART_SEARCH_LOCATOR)
+                        ? printSmartLocators(element)
+                        : "";
             String hasFrame = "";
             if (hasFrame())
                 hasFrame = "Frame: " + print(map(frames, WebDriverByUtils::shortBy));
-            return hasFrame + shortBy(locator).replaceAll("%s", "{{VALUE}}");
+            return hasFrame + shortBy(locator, element).replaceAll("%s", "{{VALUE}}");
         } catch (Exception ex) { return "Can't print locator"; }
     }
 }

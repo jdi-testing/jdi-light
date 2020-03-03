@@ -85,6 +85,11 @@ public class EntitiesCollection {
             return (T) element;
         throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
     }
+    public static <T> T getByType(ICoreElement element, Class<T> type) {
+        return (T) (isClass(element.getClass(), type)
+                ? element
+                : element.core());
+    }
     public static ICoreElement getUI(String name) {
         Object element = getElement(name);
         if (element != null && isInterface(element.getClass(), ICoreElement.class))

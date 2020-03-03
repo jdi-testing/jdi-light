@@ -1,7 +1,9 @@
 package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
@@ -21,6 +23,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -47,7 +50,7 @@ public final class UIUtils {
         List<Field> ordered = new ArrayList<>();
         if (withOrder.size() > 0) {
             MultiMap<Integer, Field> orderMap = new MultiMap<>(withOrder,
-                k -> k.getAnnotation(Order.class).value(), v -> v);
+                k -> k.getAnnotation(Order.class).value(), v -> v).ignoreKeyCase();
             orderMap.pairs.sort((d1, d2) -> d2.key - d1.key);
             for (Pair<Integer, Field> pairs : orderMap.pairs)
                 ordered.add(pairs.value);
@@ -127,6 +130,26 @@ public final class UIUtils {
             throw exception(ex, "Can't get entity from '" + getName(obj) + "' for class: " + entityClass);
         }
     }
+    public static <T extends IBaseElement> T initT(UIElement el, IBaseElement parent, Class<?> initClass) {
+        try {
+            if (initClass == null)
+                throw exception("Can't init List of UI Elements. Class Type is null");
+            SiteInfo info = new SiteInfo(parent.base().driverName).set(s -> {
+                s.cl = initClass;
+                s.name = el.getName();
+                s.parent = el.parent;
+            });
+            initJdiField(info);
+            if (info.instance != null)
+                setupFieldUsingRules(info);
+            T t = (T) info.instance;
+            t.base().setCore(el);
+            t.base().searchRules = parent.base().searchRules;
+            initElements(t);
+            return t;
+        } catch (Exception ex) { throw exception(ex, "Can't init new element for list"); }
+    }
+
     private static String getName(Object obj) {
         return isInterface(obj.getClass(), INamed.class)
             ? ((INamed)obj).getName()

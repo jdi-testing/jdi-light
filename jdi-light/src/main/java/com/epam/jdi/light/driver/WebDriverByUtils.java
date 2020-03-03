@@ -1,5 +1,6 @@
 package com.epam.jdi.light.driver;
 
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.map.MapArray;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
@@ -15,7 +16,9 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
@@ -92,8 +95,15 @@ public final class WebDriverByUtils {
                 : byValue;
     }
     public static String shortBy(By by) {
+        return shortBy(by, "No locator");
+    }
+    public static String shortBy(By by, IBaseElement el) {
+        return shortBy(by, printSmartLocators(el));
+    }
+
+    private static String shortBy(By by, String noLocator) {
         return (by == null
-                ? "No locator"
+                ? noLocator
                 : format("%s='%s'", getByName(by), getByLocator(by))).replaceAll("%s", "{{VALUE}}");
     }
     public static By getByFromString(String stringLocator) {
@@ -135,16 +145,26 @@ public final class WebDriverByUtils {
     public static List<WebElement> uiSearch(SearchContext ctx, By by) {
         List<WebElement> els = null;
         for (Object step : searchBy(by)) {
-            if (isClass(step.getClass(), By.class))
-                els = els == null
-                    ? ctx.findElements((By)step)
-                    : selectMany(els, e -> e.findElements((By)step));
-            else if (isClass(step.getClass(), Integer.class) && els != null)
-                els = singletonList(els.get((Integer) step - 1));
+            els = getEls(step, ctx, els);
         }
         return els;
     }
-
+    private static List<WebElement> getEls(Object step, SearchContext ctx, List<WebElement> els) {
+        if (isClass(step.getClass(), By.class)) {
+            String byName = getByName((By) step);
+            if (byName.equals("id") ||
+                    (byName.equals("css") && getByLocator((By) step).matches("^#[a-zA-Z-]+$"))) {
+                return getDriver().findElements((By) step);
+            } else {
+                return els == null
+                    ? ctx.findElements((By) step)
+                    : selectMany(els, e -> e.findElements((By) step));
+            }
+        }
+        else if (isClass(step.getClass(), Integer.class) && els != null)
+            return singletonList(els.get((Integer) step - 1));
+        throw exception("Unknown locator part '%s'. Can't get element. Please correct locator");
+    }
     public static List<Object> searchBy(By by) {
         try {
             if (!getByName(by).equals("css"))

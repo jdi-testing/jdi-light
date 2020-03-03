@@ -37,7 +37,7 @@ public class Timeout {
     public void setUp(int seconds) {
         DEFAULT.set(seconds);
         current.set(seconds);
-        logger.info("Setup timeout " + seconds + " seconds");
+        logger.debug("Setup timeout " + seconds + " seconds");
     }
     public void set(int seconds) {
         if (freeze.get() > 0) return;
