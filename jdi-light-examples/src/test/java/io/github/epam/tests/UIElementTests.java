@@ -13,13 +13,16 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.swing.plaf.basic.BasicListUI;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static io.github.com.pages.UIElementContactFormPage.*;
 import static io.github.epam.EpamGithubSite.contactFormPage;
+import static io.github.epam.EpamGithubSite.metalAndColorsPage;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
+import static jdk.nashorn.internal.objects.NativeDebug.map;
 import static junit.framework.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
@@ -210,7 +213,7 @@ public class UIElementTests extends TestsInit{
     public void text(){
         assertEquals(submit.text(), "SUBMIT");
     }
-    //endregion
+    //end region
 
     @Test
     public void isAssert(){
@@ -231,4 +234,90 @@ public class UIElementTests extends TestsInit{
         isAssertForCalculateThree.set(forCalculateThree);
         isAssertForCalculateThree.deselected();
     }
+
+    //region annotations
+    @Test
+    public void clickArea(){
+        submitClickArea.click();
+    }
+    @Test
+    public void getTextAs(){
+        submit.click();
+        assertEquals(sumGetTextAs.getText(), "Summary: 3");
+    }
+    @Test
+    public void isRoot(){
+        assertTrue(sumGetTextAs.locator.isRoot);
+    }
+    @Test
+    public void setTextAs(){
+        descriptionSetTextAs.input("Hello world!");
+        assertEquals(descriptionSetTextAs.getText(), "Hello world!");
+        descriptionSetTextAs.clear();
+    }
+    @Test
+    public void noWait(){
+        assertTrue(submitNotDisplayedNoWait.isHidden());
+    }
+    @Test
+    public void waitTimeout(){
+        descriptionWaitTimeout.input("Hello world!");
+        assertEquals(descriptionWaitTimeout.getText(), "Hello world!");
+        descriptionWaitTimeout.clear();
+    }
+    @Test
+    public void name(){
+        assertEquals(submitNotDisplayedNoWait.getName(), "HappyName");
+    }
+    @Test
+    public void get(){
+        submit.click();
+        assertEquals(sumGet.getText(), "Summary: 3");
+    }
+    @Test
+    public void getInView(){
+        assertTrue(submitGetShowInView.isClickable());
+        assertTrue(submitGetShowInView.isDisplayed());
+    }
+    @Test
+    public void pageName(){
+        assertEquals(submitPage.getPage().getTitle(), metalAndColorsPage.getTitle());
+    }
+    @Test
+    public void sId(){
+        assertEquals(sId.getLocator().toString(), "By.cssSelector: #sid");
+    }
+    @Test
+    public void sText(){
+        assertEquals(sText.getLocator().toString(), "By.xpath: .//*/text()[normalize-space(.) = \"S Text\"]/parent::*");
+    }
+    @Test
+    public void smart(){
+        assertEquals(smart.getLocator().toString(), "By.cssSelector: [name='smart']");
+    }
+    @Test
+    public void smartId(){
+        assertEquals(smartId.getLocator().toString(), "By.cssSelector: [id='smart']");
+    }
+    @Test
+    public void sClass(){
+        assertEquals(sClass.getLocator().toString(), "By.cssSelector: .sclass");
+    }
+    @Test
+    public void findBy(){
+        assertEquals(findBy.getLocator().toString(), "By.cssSelector: findBy");
+    }
+    @Test
+    public void findByNull(){
+        assertEquals(findByNull.toString(), "UIElementContactFormPage.findByNull (#find-by-null or [ui=find-by-null])");
+    }
+    @Test
+    public void uiNull(){
+        assertEquals(uiNull.toString(), "UIElementContactFormPage.uiNull (css='')");
+    }
+    @Test
+    public void visualCheck(){
+        assertTrue(visualCheck.params.has("visualCheck"));
+    }
+    //end region
 }
