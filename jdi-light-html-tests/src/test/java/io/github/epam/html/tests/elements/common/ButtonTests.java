@@ -67,6 +67,7 @@ public class ButtonTests implements TestsInit {
     }
     @Test
     public void rightClickTest() {
+        rightClickButton.show();
         rightClickButton.rightClick();
         validateAlert("Right Click");
         keyPress("Escape");

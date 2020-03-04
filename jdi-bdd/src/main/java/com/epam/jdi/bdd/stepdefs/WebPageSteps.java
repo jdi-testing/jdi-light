@@ -80,14 +80,16 @@ public class WebPageSteps {
 
     @Then("^the page is scrolled \"(\\d+)\" px right$")
     public void pageScrolledNPxRight(int x) {
-        long execResult = jsExecute("return Math.ceil(window.scrollX);");
-        assertEquals(execResult, SCROLLX + x);
+        double execResult = jsExecute("return window.scrollX;");
+        // FYI: there are rounding errors, I suppose 0.5 of pixel is a good accuracy
+        assertEquals(execResult, (double) SCROLLX + x, 0.5);
     }
 
     @Then("^the page is scrolled \"(\\d+)\" px left$")
     public void pageScrolledNPxLeft(int x) {
-        long execResult = jsExecute("return Math.ceil(window.scrollX);");
-        assertEquals(execResult, SCROLLX - x);
+        double execResult = jsExecute("return window.scrollX;");
+        // FYI: there are rounding errors, I suppose 0.5 of pixel is a good accuracy
+        assertEquals(execResult, SCROLLX - x, 0.5);
     }
 
     @Then("^the page is zoomed \"(\\d+)\" times$")

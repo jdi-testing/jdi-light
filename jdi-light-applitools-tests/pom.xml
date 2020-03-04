@@ -13,7 +13,8 @@
     <properties>
         <java.version>1.8</java.version>
         <applitools.version>3.157.10</applitools.version>
-        <driver>firefox</driver>
+        <driver>chrome</driver>
+<!--        <driver>firefox</driver>-->
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <aspectj.version>1.9.1</aspectj.version>
         <allure.testng>2.13.1</allure.testng>

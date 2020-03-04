@@ -11,6 +11,7 @@
 
     <properties>
         <driver>chrome</driver>
+<!--        <driver>firefox</driver>-->
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <aspectj.version>1.9.1</aspectj.version>
