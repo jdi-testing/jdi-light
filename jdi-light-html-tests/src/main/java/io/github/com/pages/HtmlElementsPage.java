@@ -96,6 +96,7 @@ public class HtmlElementsPage extends WebPage {
     public static MultiSelector ages;
     //@UI("#ages") public static MultiSelector ages;
     public static MultiSelector multiDropdown;
+    // @UI("#multi-dropdown") public static MultiSelector multiDropdown;
 
     public static DataListOptions iceCream;
     @UI("#ice-cream")
