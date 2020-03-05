@@ -43,8 +43,7 @@ import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.AllureLogger.*;
-import static com.epam.jdi.light.logger.LogLevels.ERROR;
-import static com.epam.jdi.light.logger.LogLevels.STEP;
+import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.LogStrategy.*;
 import static com.epam.jdi.light.logger.Strategy.FAIL;
 import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
@@ -115,40 +114,14 @@ public class ActionHelper {
             throw exception(ex, "Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName());
         }
     }
-    public static void beforeStepAction(ActionObject jInfo) {
-        ProceedingJoinPoint jp = jInfo.jp();
-        String message = getBeforeLogString(jp);
-        logger.toLog(message, logLevel(jp));
-        jInfo.stepUId = startStep(message);
-        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION) {
-            Object obj = jp.getThis();
-            if (obj == null) {
-                if (getJpMethod(jp).getMethod().getAnnotation(VisualCheck.class) != null)
-                    try {
-                        visualWindowCheck();
-                    } catch (Exception ex) {
-                        logger.debug("BEFORE: Can't do visualWindowCheck");
-                    }
-            }
-            else {
-                if (isInterface(obj.getClass(), JAssert.class)) {
-                    JDIBase element = ((IBaseElement) obj).base();
-                    try {
-                        element.visualCheck(message);
-                    } catch (Exception ex) {
-                        logger.debug("BEFORE: Can't do visualCheck for element");
-                    }
-                }
-            }
-        }
-    }
-    public static JAction1<ActionObject> BEFORE_STEP_ACTION = ActionHelper::beforeStepAction;
     public static JFunc1<String, String> TRANSFORM_LOG_STRING = s -> s;
+    static String previousAllureStep = "";
     public static void beforeJdiAction(ActionObject jInfo) {
         ProceedingJoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
-        if (WRITE_TO_ALLURE)
+        if (WRITE_TO_ALLURE && logLevel(jp).equalOrMoreThan(INFO) && !previousAllureStep.equals(message))
             jInfo.stepUId = startStep(message);
+        previousAllureStep = message;
         if (jInfo.topLevel()) {
             if (WRITE_TO_LOG)
                 logger.toLog(message, logLevel(jp));
@@ -323,7 +296,7 @@ public class ActionHelper {
         Method m = getJpMethod(joinPoint).getMethod();
         return m.isAnnotationPresent(JDIAction.class)
             ? m.getAnnotation(JDIAction.class).level()
-            : STEP;
+            : INFO;
     }
     static String getDefaultName(String method, MapArray<String, Object> args) {
         if (args.size() == 1 && args.get(0).value.getClass().isArray())
@@ -375,8 +348,8 @@ public class ActionHelper {
             Object obj = jp.getThis();
             if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
             return isInterface(getJpClass(jp), INamed.class)
-                    ? ((INamed) obj).getName()
-                    : obj.toString();
+                ? ((INamed) obj).getName()
+                : obj.toString();
         } catch (Exception ex) {
             throw exception(ex, "Can't get element name");
         }
@@ -399,17 +372,6 @@ public class ActionHelper {
         }
     }
     //endregion
-
-    public static RuntimeException exceptionJdiAround(ActionObject jInfo, String className, Throwable ex) {
-        //addFailedMethod(jInfo.jp());
-        //if (aroundCount(className) == 1) {
-        //    logFailure(jInfo);
-        //    reverse(failedMethods);
-        //    logger.error("Failed actions chain: " + print(failedMethods, " > "));
-        //}
-        //return exception(ex, ACTION_FAILED.execute(jInfo.object(), getExceptionAround(ex, aroundCount(className) == 1)));
-        return new RuntimeException();
-    }
     public static void addFailedMethod(ProceedingJoinPoint jp) {
         String[] s = jp.toString().split("\\.");
         String result = s[s.length-2]+"."+s[s.length-1].replaceAll("\\)\\)", ")");
@@ -427,7 +389,7 @@ public class ActionHelper {
     }
     private static List<StackTraceElement> arounds() {
         List<StackTraceElement> arounds = where(currentThread().getStackTrace(),
-                s -> s.getMethodName().equals("jdiAround"));
+            s -> s.getMethodName().equals("jdiAround"));
         Collections.reverse(arounds);
         return arounds;
     }

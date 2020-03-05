@@ -160,7 +160,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     @Override
     public IBaseElement waitSec(int sec) {
         timeout = sec;
-        driver().manage().timeouts().implicitlyWait(sec*1000, TimeUnit.MILLISECONDS);
+        //driver().manage().timeouts().implicitlyWait(sec*1000, TimeUnit.MILLISECONDS);
         return this;
     }
     public int getTimeout() {

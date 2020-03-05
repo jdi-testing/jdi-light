@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jdi-light-applitools-tests</artifactId>
-    <name>JDI Light Applitools Eyes Tests</name>
+    <name>Tests: JDI Light Applitools Eyes</name>
     <packaging>jar</packaging>
     <version>1.0.0</version>
     <groupId>com.epam.jdi</groupId>
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.1.17</version>
+            <version>1.1.18</version>
         </dependency>
         <dependency>
             <groupId>com.epam.jdi</groupId>

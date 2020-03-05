@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
@@ -35,6 +36,7 @@ import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.awt.Toolkit.getDefaultToolkit;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
+import static java.util.concurrent.TimeUnit.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -123,6 +125,7 @@ public class DriverData {
                     driver.manage().window().maximize();
             }
         }
+        driver.manage().timeouts().implicitlyWait(0, MILLISECONDS);
         return driver;
     };
 

@@ -5,6 +5,7 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.*;
@@ -30,6 +31,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.common.UIUtils.intValue;
 import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_FILE_SUFFIX;
 import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
 import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
@@ -173,7 +175,7 @@ public class UIElement extends JDIBase
      * Check the element is displayed
      * @return boolean
      */
-    @JDIAction(value = "Check that '{name}' is displayed", timeout = 0)
+    @JDIAction(value = "Check that '{name}' is displayed", timeout = 0, level = DEBUG)
     public boolean isDisplayed() {
         if (params.keys().contains("visualCheck"))
             visualCheck("Check that '"+getName()+"' is displayed");
@@ -209,17 +211,6 @@ public class UIElement extends JDIBase
     public Rectangle getPosition() {
         Map<String, Object> map = (Map<String, Object>)js().executeScript("const rect = arguments[0].getBoundingClientRect();return {x:rect.x,y:rect.y,width:rect.width,height:rect.height};", getWebElement());
         return new Rectangle(intValue(map.get("x")), intValue(map.get("y")), intValue(map.get("height")), intValue(map.get("width")));
-    }
-    private int intValue(Object element) {
-        try {
-            return ((Long)element).intValue();
-        } catch (ClassCastException ignore) {
-            try {
-                return ((Double) element).intValue();
-            } catch (ClassCastException ex) {
-                return -1;
-            }
-        }
     }
     /**
      * Get element css value
