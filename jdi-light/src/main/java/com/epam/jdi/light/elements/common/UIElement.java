@@ -6,6 +6,7 @@ import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.complex.CanBeSelected;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
@@ -56,7 +57,7 @@ import static org.openqa.selenium.Keys.BACK_SPACE;
  */
 public class UIElement extends JDIBase
         implements WebElement, SetValue, HasAssert<IsAssert>,
-        HasClick, IsText, HasLabel, HasPlaceholder, IsInput, HasCheck {
+        HasClick, IsText, HasLabel, HasPlaceholder, IsInput, HasCheck, CanBeSelected {
     //region Constructors
     public UIElement() { }
     public UIElement(WebElement el) { setWebElement(el); }
@@ -136,7 +137,7 @@ public class UIElement extends JDIBase
     public String getTagName() {
         return getWebElement().getTagName();
     }
-
+    public String tag() { return getTagName(); }
     /**
      * Get the attribute value
      * @param value
@@ -492,7 +493,7 @@ public class UIElement extends JDIBase
     /**
      * Scroll screen view to item
      */
-    @JDIAction
+    @JDIAction(timeout = 0)
     public void show() {
         jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
     }
@@ -730,10 +731,13 @@ public class UIElement extends JDIBase
     }
     protected boolean displayed() {
         try {
-            return getWebElement().isDisplayed();
+            if (getWebElement().isDisplayed())
+                return true;
         } catch (Exception ex) {
-            return false;
+            List<WebElement> result = getAllElements();
+            return result.size() == 1 && result.get(0).isDisplayed();
         }
+        return false;
     }
 
     public boolean isClickable() {

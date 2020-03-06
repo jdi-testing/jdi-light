@@ -15,6 +15,7 @@ import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.map.MultiMap;
+import com.google.common.primitives.Ints;
 import org.apache.commons.lang3.ArrayUtils;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
@@ -23,6 +24,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +43,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
+import static java.util.Collections.max;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -215,7 +219,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         return (locator.isTemplate()
             ? tryGetByIndex(getIndex)
             : locator.isXPath()
-                ? new UIElement(base(), locator.addIndex(getIndex), getIndex+1+"", parent)
+                ? new UIElement(base(), locator.addIndex(getIndex), index+"", parent)
                 : initElement(() -> getList(getIndex+1).get(getIndex)))
         .setName(nameFromIndex(getIndex));
     }
@@ -286,23 +290,29 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction("Check '{0}' checkboxes in '{name}' checklist")
     public void check(int... indexes) {
         List<Integer> listIndexes = toList(indexes);
-        for (int i = startIndex; i < startIndex + values().size(); i++) {
-            UIElement value = get(i);
+        int max = max(Ints.asList(indexes));
+        MultiMap<String, UIElement> elements = elements(max - startIndex + 1);
+        int i = startIndex;
+        for (UIElement value : elements.values()) {
             if (value.isDisabled()) continue;
             if (selected(value) && !listIndexes.contains(i)
                     || !selected(value) && listIndexes.contains(i))
                 value.click();
+            startIndex++;
         }
     }
     @JDIAction("Uncheck '{0}' checkboxes in '{name}' checklist")
     public void uncheck(int... indexes) {
         List<Integer> listIndexes = toList(indexes);
-        for (int i = startIndex; i < startIndex + values().size(); i++) {
-            UIElement value = get(i);
+        int max = max(Ints.asList(indexes));
+        MultiMap<String, UIElement> elements = elements(max - startIndex + 1);
+        int i = startIndex;
+        for (UIElement value : elements.values()) {
             if (value.isDisabled()) continue;
             if (selected(value) && listIndexes.contains(i)
                     || !selected(value) && !listIndexes.contains(i))
                 value.click();
+            startIndex++;
         }
     }
     public <TEnum extends Enum> void check(TEnum... values) {
@@ -508,7 +518,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     public UISelectAssert<UISelectAssert<?,?>, WebList> is() {
         refresh();
-        return new UISelectAssert<>().set(this);
+        UISelectAssert<UISelectAssert<?,?>, WebList> is = new UISelectAssert<>();
+        is.set(this);
+        return is;
     }
     @JDIAction("Assert that {name} list meet condition")
     public UISelectAssert<UISelectAssert<?,?>, WebList> is(Matcher<? super List<UIElement>> condition) {
@@ -553,10 +565,10 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         return get(startIndex).getLocation();
     }
     public Dimension getSize() {
-        Point lFirst = first().getLocation();
-        Point lLast = last().getLocation();
+        Point firstPoint = first().getLocation();
+        Point lastPoint = last().getLocation();
         Dimension dLast = last().getSize();
-        return new Dimension(lLast.x+dLast.width-lFirst.x, lLast.y+dLast.height-lFirst.y);
+        return new Dimension(lastPoint.x+dLast.width-firstPoint.x, lastPoint.y+dLast.height-firstPoint.y);
     }
     public void offCache() {
         super.offCache();

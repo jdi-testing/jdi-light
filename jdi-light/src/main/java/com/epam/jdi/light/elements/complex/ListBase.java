@@ -33,7 +33,7 @@ import static com.epam.jdi.tools.ReflectionUtils.getValueField;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-abstract class ListBase<T extends ICoreElement, A extends UISelectAssert>
+abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
     protected WebList list;
     public WebList list() {
@@ -161,9 +161,9 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert>
         refresh();
         T first = logger.logOff(() ->
                 first(item -> getByType(item, CanBeSelected.class).isSelected()));
-        if (first == null)
-            return "";
-        return getByType(first, IsText.class).getText();
+        return first != null
+            ? getByType(first, IsText.class).getText()
+            : "";
     }
 
     /**
