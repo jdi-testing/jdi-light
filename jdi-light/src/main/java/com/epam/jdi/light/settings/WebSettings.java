@@ -46,7 +46,7 @@ import static com.epam.jdi.light.common.Property.DRIVER_PROPERTY;
 import static com.epam.jdi.light.common.Property.DRIVER_REMOTE_URL_PROPERTY;
 import static com.epam.jdi.light.common.Property.ELEMENT_SEARCH_STRATEGY_PROPERTY;
 import static com.epam.jdi.light.common.Property.FF_CAPABILITIES_PATH;
-import static com.epam.jdi.light.common.Property.HTML_CODE_LOGGING_PROPERTY;
+import static com.epam.jdi.light.common.Property.HTML_CODE_STRATEGY_PROPERTY;
 import static com.epam.jdi.light.common.Property.IE_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.KILL_BROWSER_PROPERTY;
 import static com.epam.jdi.light.common.Property.LOG_LEVEL_PROPERTY;
@@ -162,7 +162,7 @@ public class WebSettings {
         fillAction(p -> DRIVERS_FOLDER = p, DRIVERS_FOLDER_PROPERTY.getName());
         fillAction(p -> SCREEN_PATH = p, SCREENS_FOLDER_PROPERTY.getName());
         fillAction(p -> SCREENSHOT_STRATEGY = getAttachmentStrategy(p), SCREENSHOT_STRATEGY_PROPERTY.getName());
-        fillAction(p -> HTML_CODE_LOGGING = getAttachmentStrategy(p), HTML_CODE_LOGGING_PROPERTY.getName());
+        fillAction(p -> HTML_CODE_LOGGING = getAttachmentStrategy(p), HTML_CODE_STRATEGY_PROPERTY.getName());
         fillAction(p -> KILL_BROWSER = p, KILL_BROWSER_PROPERTY.getName());
         fillAction(WebSettings::setSearchStrategy, ELEMENT_SEARCH_STRATEGY_PROPERTY.getName());
         fillAction(p -> BROWSER_SIZE = p, BROWSER_SIZE_PROPERTY.getName());

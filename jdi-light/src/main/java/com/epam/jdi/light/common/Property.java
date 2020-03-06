@@ -41,10 +41,14 @@ public enum Property {
             "Value of 'driver.remote.url' must be a string with URL type: consists characters, digits, '/', '.' or ':' in appropriate sequence."),
     LOG_LEVEL_PROPERTY("log.level", "OFF|FATAL|ERROR|WARNING|STEP|INFO|DEBUG|TRACE|ALL",
             "Value of 'log.level' must be: 'OFF', 'FATAL', 'ERROR', 'WARNING', 'STEP', 'INFO', 'DEBUG', 'TRACE' or 'ALL'."),
-    SCREENSHOT_STRATEGY_PROPERTY("screenshot.strategy", "off|on fail",
-            "Value of 'screenshot.strategy' must be either 'off' or 'on fail'."),
-    HTML_CODE_LOGGING_PROPERTY("html.code.logging", "off|on fail",
-            "Value of 'html.code.logging' must be either 'off' or 'on fail'.");
+    SCREENSHOT_STRATEGY_PROPERTY("screenshot.strategy", "off|on fail|on assert|new page",
+            "Value of 'screenshot.strategy' must be: 'off', 'on fail', 'on assert' or 'new page'."),
+    HTML_CODE_STRATEGY_PROPERTY("html.code.strategy", "off|on fail|on assert|new page",
+            "Value of 'html.code.strategy' must be: 'off', 'on fail', 'on assert' or 'new page'."),
+    REQUESTS_STRATEGY_PROPERTY("requests.strategy", "off|on fail|on assert|new page",
+        "Value of 'requests.strategy' must be: 'off', 'on fail', 'on assert' or 'new page'."),
+    ALLURE_STEPS_PROPERTY("allure.steps", "true|false",
+        "Value of 'requests.strategy' must be either 'true' or 'false'.");
 
 
     private final String name;
