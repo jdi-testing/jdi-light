@@ -1,14 +1,8 @@
 package com.epam.jdi.light.asserts.generic;
 
-import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.asserts.core.SoftAssert;
-import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
-
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.containsString;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -18,6 +12,7 @@ public interface CommonAssert<A> extends JAssert, HasAssert<A> {
     A displayed();
     A disappear();
     A hidden();
+    A shown();
     A notAppear();
     A notAppear(int timeoutSec);
     A enabled();
@@ -28,6 +23,7 @@ public interface CommonAssert<A> extends JAssert, HasAssert<A> {
     A css(String css, String value);
     A hasClass(String className);
     A hasAttribute(String className);
+    A visible();
 
     default A and() { return (A) this; }
     default A condition(JFunc1<A, A> t) {

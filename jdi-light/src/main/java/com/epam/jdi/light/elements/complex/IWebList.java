@@ -2,12 +2,15 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.elements.interfaces.base.IListBase;
+import com.epam.jdi.light.elements.interfaces.base.IClickable;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getByType;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
@@ -18,7 +21,7 @@ import static java.util.Arrays.asList;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public interface IWebList<T extends IListBase> extends IList<T> {
+public interface IWebList<T extends ICoreElement> extends IList<T> {
 
     /**
      * Select the item by the value
@@ -26,7 +29,7 @@ public interface IWebList<T extends IListBase> extends IList<T> {
      */
     @JDIAction("Select '{0}' for '{name}'")
     default void select(String value) {
-        get(value).click();
+        getByType(get(value), IClickable.class).click();
     }
 
     /**
@@ -41,16 +44,16 @@ public interface IWebList<T extends IListBase> extends IList<T> {
     @JDIAction("Check all '{name}' unchecked options")
     default void checkAll() {
         for (T checkbox : this) {
-            if (checkbox.isEnabled() && !checkbox.isSelected()) {
-                checkbox.click();
+            if (checkbox.isEnabled() && !getByType(checkbox, CanBeSelected.class).isSelected()) {
+                getByType(checkbox, IClickable.class).click();
             }
         }
     }
     @JDIAction("Uncheck all '{name}' checked options")
     default void uncheckAll() {
         for (T checkbox : this) {
-            if (checkbox.isEnabled() && checkbox.isSelected()) {
-                checkbox.click();
+            if (checkbox.isEnabled() && getByType(checkbox, CanBeSelected.class).isSelected()) {
+                getByType(checkbox, IClickable.class).click();
             }
         }
     }
@@ -59,9 +62,9 @@ public interface IWebList<T extends IListBase> extends IList<T> {
         List<String> listNames = asList(names);
         for (T value : elements(names.length).values()) {
             if (value.isDisabled()) continue;
-            if (value.isSelected() && !listNames.contains(value.text(base().textType).trim())
-                    || !value.isSelected() && listNames.contains(value.getText().trim()))
-                value.click();
+            if (getByType(value, CanBeSelected.class).isSelected() && !listNames.contains(getByType(value, IsText.class).text(base().textType).trim())
+                    || !getByType(value, CanBeSelected.class).isSelected() && listNames.contains(getByType(value, IsText.class).getText().trim()))
+                getByType(value, IClickable.class).click();
         }
     }
     @JDIAction("Uncheck '{0}' checkboxes in '{name}' checklist")
@@ -69,9 +72,9 @@ public interface IWebList<T extends IListBase> extends IList<T> {
         List<String> listNames = asList(names);
         for (T value : elements(names.length).values()) {
             if (value.isDisabled()) continue;
-            if (value.isSelected() && listNames.contains(value.text(base().textType).trim())
-                    || !value.isSelected() && !listNames.contains(value.text(base().textType).trim()))
-                value.click();
+            if (getByType(value, CanBeSelected.class).isSelected() && listNames.contains(getByType(value, IsText.class).text(base().textType).trim())
+                    || !getByType(value, CanBeSelected.class).isSelected() && !listNames.contains(getByType(value, IsText.class).text(base().textType).trim()))
+                getByType(value, IClickable.class).click();
         }
     }
     @JDIAction("Check '{0}' checkboxes in '{name}' checklist")
@@ -80,9 +83,9 @@ public interface IWebList<T extends IListBase> extends IList<T> {
         for (int i = 0; i < values().size(); i++) {
             T value = get(i);
             if (value.isDisabled()) continue;
-            if (value.isSelected() && !listIndexes.contains(i+1)
-                    || !value.isSelected() && listIndexes.contains(i+1))
-                value.click();
+            if (getByType(value, CanBeSelected.class).isSelected() && !listIndexes.contains(i+1)
+                    || !getByType(value, CanBeSelected.class).isSelected() && listIndexes.contains(i+1))
+                getByType(value, IClickable.class).click();
         }
     }
     @JDIAction("Uncheck '{0}' checkboxes in  '{name}' checklist")
@@ -92,9 +95,9 @@ public interface IWebList<T extends IListBase> extends IList<T> {
             for (int i = 0; i < values().size(); i++) {
                 T value = get(i);
                 if (value.isDisabled()) continue;
-                if (value.isSelected() && listIndexes.contains(i+1)
-                        || !value.isSelected() && !listIndexes.contains(i+1))
-                    value.click();
+                if (getByType(value, CanBeSelected.class).isSelected() && listIndexes.contains(i+1)
+                        || !getByType(value, CanBeSelected.class).isSelected() && !listIndexes.contains(i+1))
+                    getByType(value, IClickable.class).click();
             }
         }
     }
@@ -119,7 +122,7 @@ public interface IWebList<T extends IListBase> extends IList<T> {
         for (int i=0; i < length-1;i++) {
             get(values[i]).hover();
         }
-        get(values[length-1]).click();
+        getByType(get(values[length-1]), IClickable.class).click();
     }
 
     /**
@@ -153,7 +156,7 @@ public interface IWebList<T extends IListBase> extends IList<T> {
      */
     @JDIAction("Select '{0}' for '{name}'")
     default void select(int index) {
-        get(index).click();
+        getByType(get(index), IClickable.class).click();
     }
 
     /**
@@ -173,19 +176,19 @@ public interface IWebList<T extends IListBase> extends IList<T> {
     @JDIAction("Get '{name}' selected value")
     default String selected() {
         refresh();
-        T first = logger.logOff(() -> first(T::isSelected) );
+        T first = logger.logOff(() -> first(val -> getByType(val, CanBeSelected.class).isSelected()) );
         return first != null ? getElementName(first) : "";
     }
     default String getElementName(T element) { return element.getName(); }
 
     @JDIAction("Check that '{option}' is selected in '{name}'")
     default boolean selected(String option) {
-        return get(option).isSelected();
+        return getByType(get(option), CanBeSelected.class).isSelected();
     }
 
     @JDIAction("Get '{name}' checked values")
     default List<String> checked() {
-        return ifSelect(IListBase::isSelected, this::getElementName);
+        return ifSelect(val -> getByType(val, CanBeSelected.class).isSelected(), this::getElementName);
     }
 
     @JDIAction("Get '{name}' values")
@@ -203,12 +206,12 @@ public interface IWebList<T extends IListBase> extends IList<T> {
 
     @JDIAction("Get list of enabled values for '{name}'")
     default List<String> listEnabled() {
-        return ifSelect(IListBase::isEnabled, this::getElementName);
+        return ifSelect(ICoreElement::isEnabled, this::getElementName);
     }
 
     @JDIAction("Get list of disabled values for '{name}'")
     default List<String> listDisabled() {
-        return ifSelect(IListBase::isDisabled, this::getElementName);
+        return ifSelect(ICoreElement::isDisabled, this::getElementName);
     }
 
     @JDIAction("Check that '{name}' is displayed")

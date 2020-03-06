@@ -42,7 +42,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     private WebDriver setupRemote() {
         try {
             return new RemoteWebDriver(new URL(getRemoteURL()), capabilities.execute(initCapabilities));
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             throw exception(ex, "Failed to setup remote "+type.name+" driver");
         }
     }
@@ -56,7 +56,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 downloadDriver(type, PLATFORM, DRIVER_VERSION);
             }
             return getDriver.execute(capabilities.execute(initCapabilities));
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             try {
                 if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
                     logger.info("Failed to download driver (%s %s) of latest version:" +
@@ -64,10 +64,10 @@ public class DriverInfo extends DataClass<DriverInfo> {
                     try {
                         downloadDriver(type, PLATFORM, getBelowVersion());
                         return getDriver.execute(capabilities.execute(initCapabilities));
-                    } catch (Exception ex2) { throw exception(ex2, "Failed to download driver"); }
+                    } catch (Throwable ex2) { throw exception(ex2, "Failed to download driver"); }
                 }
                 throw exception(safeException(ex));
-            } catch (Exception ex2) {
+            } catch (Throwable ex2) {
                 throw exception(ex2, "Failed to setup local driver");
             }
         }

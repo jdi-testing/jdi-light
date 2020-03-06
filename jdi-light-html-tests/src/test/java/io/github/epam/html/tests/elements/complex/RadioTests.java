@@ -12,7 +12,6 @@ import static io.github.epam.html.tests.elements.complex.enums.Colors.Red;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
 
 public class RadioTests implements TestsInit {
 

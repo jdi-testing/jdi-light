@@ -13,7 +13,6 @@ import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.performancePage;
 import static io.github.com.pages.PerformancePage.usersTableSetup;
 import static io.github.com.pages.PerformancePage.usersTableUI;
-import static io.github.epam.html.tests.elements.BaseValidations.notMoreThan;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;

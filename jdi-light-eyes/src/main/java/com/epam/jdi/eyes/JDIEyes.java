@@ -53,7 +53,7 @@ public class JDIEyes {
                 String name = getBeforeLogString(jp);
                 show(ui.base().getWebElement());
                 visualCheckElement(ui.base().getWebElement(), name);
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 visualCheckPage(WebPage.getCurrentPage());
             }
         });
@@ -115,7 +115,7 @@ public class JDIEyes {
         try {
             openEyes();
             eyes.get().checkWindow(pageName);
-        } catch (Exception ignore) { }
+        } catch (Throwable ignore) { }
     }
     public static void visualCheckPage(INamed page) {
         visualCheckPage(page.getName());
@@ -133,7 +133,7 @@ public class JDIEyes {
         try {
             return eyes.close(false);
             //return testResults.getStatus() != Failed;
-        } catch (Exception ex){
+        } catch (Exception ex) {
             eyes.abortIfNotClosed();
         }
         return null;

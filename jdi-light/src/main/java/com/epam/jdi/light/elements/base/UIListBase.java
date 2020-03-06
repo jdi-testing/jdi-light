@@ -6,6 +6,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
@@ -28,6 +30,8 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
     public boolean isNotVisible() { return isHidden() || list().all(UIElement::isNotVisible); }
     @Override
     public boolean isHidden() { return list().isHidden(); }
+    @Override
+    public boolean isEnabled() { return list().isEnabled(); }
     @JDIAction(level = DEBUG) @Override
     public boolean isDisabled() {
         return !isEnabled();
@@ -38,7 +42,24 @@ public abstract class UIListBase<A extends UISelectAssert> extends UIBaseElement
     public void offCache() { list().offCache(); super.offCache(); }
     public boolean isEmpty() { return size() == 0; }
     public boolean isNotEmpty() { return size() > 0; }
-
+    @Override
+    public Point getLocation() {
+        return list().getLocation();
+    }
+    @Override
+    public void highlight() {
+        list().highlight();
+    }
+    @Override
+    public void highlight(String color) {
+        list().highlight(color);
+    }
+    @Override
+    public void show() {
+        list().show();
+    }
+    @Override
+    public Dimension getSize() { return list().getSize(); }
     @Override
     public A is() {
         list().refresh();

@@ -10,7 +10,6 @@ import static io.github.com.pages.HtmlElementsPage.name;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Roman Iovlev on 19.08.2019

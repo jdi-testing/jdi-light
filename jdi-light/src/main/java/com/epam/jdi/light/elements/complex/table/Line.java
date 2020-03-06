@@ -13,6 +13,7 @@ import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.map.MultiMap;
 import com.epam.jdi.tools.pairs.Pair;
+import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -161,7 +162,11 @@ public class Line implements IList<String>, IBaseElement {
             if (field == null) continue;
             try {
                 IBaseElement ui = ((IBaseElement)field.get(instance));
-                ui.base().setWebElement(elements.get(i));
+                UIElement listElement = elements.get(i);
+                WebElement element = ui.base().hasLocator()
+                    ? listElement.findElement(ui.base().getLocator())
+                    : listElement.getWebElement();
+                ui.base().setWebElement(element);
             } catch (Exception ex) {
                 throw exception(ex, "Can't set table entity to field '%s'", field.getName());
             }

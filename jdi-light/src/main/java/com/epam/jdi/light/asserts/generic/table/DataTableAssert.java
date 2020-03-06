@@ -8,16 +8,13 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Row;
 import com.epam.jdi.light.elements.complex.table.TableMatcher;
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 

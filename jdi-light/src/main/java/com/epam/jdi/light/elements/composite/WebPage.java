@@ -23,14 +23,14 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
-import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
 import static com.epam.jdi.light.common.UIUtils.getDouble;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.checkNewWindowIsOpened;
+import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
@@ -77,6 +77,11 @@ public class WebPage extends DriverBase implements PageObject {
         setUrl(url, url, CONTAINS);
     }
     public WebPage(String url, String title) { this(url); this.title = title; }
+    public static void openUrl(String url, String pageName) {
+        WebPage page = new WebPage(url);
+        page.setName(isNotBlank(pageName) ? pageName : "");
+        page.open();
+    }
     public static void openUrl(String url) {
         init();
         new WebPage(url).open();
@@ -151,6 +156,7 @@ public class WebPage extends DriverBase implements PageObject {
         init();
         CacheValue.reset();
         driver().navigate().to(url);
+        getWindows();
         setCurrentPage(this);
     }
     public void open(Object... params) {
@@ -165,7 +171,11 @@ public class WebPage extends DriverBase implements PageObject {
                         ? MessageFormat.format(url, params)
                         : url + "?" + print(map(params, Object::toString), "&");
     }
-
+    @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}') in new window")
+    public void checkOpenedInNewWindow() {
+        checkNewWindowIsOpened();
+        checkOpened();
+    }
     /**
      * Check that page opened
      */
@@ -428,7 +438,6 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean check() {
             String value = actual.get();
-            //logger.toLog(format("Check that page %s(%s) equals to '%s'", what, value, equals));
             return equals == null
                     || equals.equals("")
                     || value.equals(equals);
@@ -439,7 +448,6 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean match() {
             String value = actual.get();
-            //logger.toLog(format("Check that page %s(%s) matches to '%s'", what, value, equals));
             return equals == null
                     || equals.equals("")
                     || value.matches(equals);

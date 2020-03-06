@@ -3,7 +3,6 @@ package com.epam.jdi.light.elements.pageobjects.annotations;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.settings.WebSettings;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Quotes;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

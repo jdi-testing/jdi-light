@@ -5,7 +5,6 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.common.UIUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.*;
@@ -56,7 +55,7 @@ import static org.openqa.selenium.Keys.BACK_SPACE;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class UIElement extends JDIBase
-        implements WebElement, SetValue, HasAssert<IsAssert>, IListBase,
+        implements WebElement, SetValue, HasAssert<IsAssert>,
         HasClick, IsText, HasLabel, HasPlaceholder, IsInput, HasCheck {
     //region Constructors
     public UIElement() { }

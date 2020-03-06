@@ -4,7 +4,6 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
-import io.qameta.allure.model.StepResult;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
@@ -12,13 +11,10 @@ import org.apache.logging.log4j.MarkerManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.StringUtils.format;
-import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
-import static io.qameta.allure.model.Status.PASSED;
 import static java.lang.Thread.currentThread;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.apache.logging.log4j.core.config.Configurator.setLevel;

@@ -30,7 +30,7 @@ public class EyesConfig extends DataClass<EyesConfig> {
         webDriver = WebDriverFactory::getDriver;
         try {
             apiKey = System.getenv("APPLITOOLS_API_KEY");
-        } catch (Exception ignore) { }
+        } catch (Throwable ignore) { }
         batchName = format("%s %s", appName, Timer.nowDate());
     }
     public EyesConfig pageStrategy(VisualCheckPage checkPageStrategy) {

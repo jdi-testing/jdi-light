@@ -48,14 +48,14 @@ public class UIFactory {
 
     public static WebList list(String locator) {
         return locator.matches("[A-Z].*]")
-                ? new WebList().setName(locator)
+                ? new WebList().indexFromZero().setName(locator)
                 : list(defineLocator(locator));
     }
     public static WebList list(By byLocator) {
-        return new WebList(byLocator);
+        return new WebList(byLocator).indexFromZero();
     }
     public static WebList list(List<WebElement> els, String name) {
-        return new WebList(els).setup(e->e.setName(name));
+        return new WebList(els).indexFromZero().setup(e->e.setName(name));
     }
     public static WebList $$(String locator) {
         return list(locator);

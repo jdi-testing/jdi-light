@@ -4,7 +4,6 @@ import com.epam.jdi.light.asserts.complex.ChecklistAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 
 import java.util.List;
@@ -193,11 +192,11 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     }
     @Override
     public List<String> listEnabled() {
-        return list().ifSelect(IListBase::isEnabled, UIElement::labelText);
+        return list().ifSelect(UIElement::isEnabled, UIElement::labelText);
     }
     @Override
     public List<String> listDisabled() {
-        return list().ifSelect(IListBase::isDisabled, UIElement::labelText);
+        return list().ifSelect(UIElement::isDisabled, UIElement::labelText);
     }
 
     @Override

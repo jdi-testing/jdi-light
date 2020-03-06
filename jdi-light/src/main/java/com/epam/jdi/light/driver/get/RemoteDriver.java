@@ -1,7 +1,6 @@
 package com.epam.jdi.light.driver.get;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static java.lang.String.format;
 import static java.lang.System.getenv;
 import static org.apache.commons.lang3.StringUtils.isBlank;

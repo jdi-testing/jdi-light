@@ -8,7 +8,6 @@ import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
 
 public class MenuTests implements TestsInit {
 

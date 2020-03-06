@@ -8,12 +8,10 @@ import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
@@ -38,8 +36,8 @@ public class WebDriverFactory {
         = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
     private static MapArray<String, WebDriver> getRunDrivers() {
         return SINGLE_THREAD
-                ? RUN_DRIVERS
-                : THREAD_RUN_DRIVERS.get();
+            ? RUN_DRIVERS
+            : THREAD_RUN_DRIVERS.get();
     }
     private static void setRunDrivers(MapArray<String, WebDriver> map) {
         if (SINGLE_THREAD) {
@@ -147,9 +145,6 @@ public class WebDriverFactory {
             }
             if (!rDrivers.has(driverName)) {
                 WebDriver resultDriver = DRIVERS.get(driverName).invoke();
-                if (resultDriver == null) {
-                    throw exception("Can't get WebDriver '%s'. This Driver name not registered", driverName);
-                }
                 rDrivers.add(driverName, resultDriver);
                 setRunDrivers(rDrivers);
             }
@@ -163,9 +158,9 @@ public class WebDriverFactory {
             driver.manage().timeouts().implicitlyWait(0, SECONDS);
             lock.unlock();
             return driver;
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             throw exception(ex, "Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
-                    format("Drivers: %s; Run: %s", DRIVERS, getRunDrivers()));
+                format("Drivers: %s; Run: %s", DRIVERS, getRunDrivers()));
         }
     }
 

@@ -22,4 +22,6 @@ public interface ITextAssert<A> {
     default A value(String condition) {
         return text(condition);
     }
+    @JDIAction("Assert that '{name}' is empty")
+    default A empty() { return text(""); }
 }

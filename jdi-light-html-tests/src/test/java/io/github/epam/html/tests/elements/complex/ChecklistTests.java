@@ -12,7 +12,6 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 public class ChecklistTests implements TestsInit {

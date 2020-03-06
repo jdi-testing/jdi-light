@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
@@ -14,6 +15,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.*;
@@ -72,7 +74,7 @@ public class InitActions {
         $(IsChecklist.class, Checklist.class)
     );
     public static MapArray<String, InitRule> INIT_RULES = map(
-        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList())),
+        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList().indexFromZero())),
         $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
             info -> new DataList())),
         $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), ICoreElement.class),
@@ -86,7 +88,7 @@ public class InitActions {
             InitActions::elementSetup)),
         $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
-        $("PageObject", sRule(info -> !isClassOr(info.type(), WebPage.class, Section.class) &&
+        $("PageObject", sRule(info -> !isClassOr(info.type(), WebPage.class, PageObject.class) &&
                 isPageObject(info.instance.getClass()),
             PageFactory::initElements)),
         $("VisualCheck", sRule(
@@ -165,6 +167,11 @@ public class InitActions {
     public static IBaseElement elementSetup(SiteInfo info) {
         IBaseElement jdi = (IBaseElement) info.instance;
         defaultSetup(info, jdi.base());
+        Object parent = jdi.base().parent;
+        if (parent != null && isClass(parent.getClass(), IBaseElement.class)) {
+            JDIBase parentBase = ((IBaseElement)parent).base();
+            jdi.base().searchRules = parentBase.searchRules.copy();
+        }
         if (info.field != null) {
             for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
                 try {
@@ -184,7 +191,7 @@ public class InitActions {
             isInterface(field, ICoreElement.class) ||
             isListOf(field, WebElement.class) ||
             isListOf(field, ICoreElement.class) ||
-            isListOf(field, Section.class);
+            isListOf(field, PageObject.class);
     }
     public static boolean isPageObject(Class<?> type) {
         return isClass(type, Section.class) || isClass(type, WebPage.class) ||

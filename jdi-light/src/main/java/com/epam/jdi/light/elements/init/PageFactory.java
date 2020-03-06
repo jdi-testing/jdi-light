@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.func.JFunc;
@@ -63,7 +64,7 @@ public class PageFactory {
             try {
                 info.field = pageField;
                 setFieldWithInstance(info, null);
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 throw exception(ex, initException(pageField, site));
             }
         }
@@ -101,7 +102,7 @@ public class PageFactory {
                 ruleName = rule.key;
                 rule.value.action.execute(info);
             }
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             throw exception(ex, "Setup rule '%s' failed. Can't setup field '%s' on page '%s'",
                     ruleName, info.name(), info.parentName());
         }
@@ -110,7 +111,7 @@ public class PageFactory {
 
     // region Private local methods
     private static String initException(Field field, Class<?> parent) {
-        return format("Can't init %s '%s' on '%s'",
+        return format("Can't init '%s' '%s' on '%s'",
             getSafe(() -> isClass(field.getType(), WebPage.class) ? "page" : "element",
                 "Element Type"),
             // DO NOT REPLACE LAMBDAS BELOW
@@ -120,7 +121,7 @@ public class PageFactory {
     private static String getSafe(JFunc<String> value, String defaultValue) {
         try {
             return value.execute();
-        } catch (Exception ignore) { return "Error " + defaultValue; }
+        } catch (Throwable ignore) { return "Error " + defaultValue; }
     }
     private static List<Field> getSiteFields(Class<?> site) {
         Field[] pages = site.getDeclaredFields();
@@ -131,21 +132,21 @@ public class PageFactory {
         try {
             Object obj = isStatic(field.getModifiers()) ? null : info.instance;
             setFieldWithInstance(pageInfo, obj);
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             throw exception(ex, initException(field, info.type()));
         }
     }
     private static void initWithConstructor(SiteInfo info) {
         try {
             info.instance = create(info.type());
-        } catch (Exception exception) {
+        } catch (Throwable exception) {
             try {
                 String msg = safeException(exception);
                 if (msg.contains("has no empty constructors")
                     || msg.contains("Can't init class. Class Type is null"))
                     info.instance = create(info.type(), getDriver(info.driverName));
                     throw exception(msg);
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 throw exception(ex, "Can't create field '%s' instance of type '%s'. Try new %s() to get more details",
                         info.name(), info.type(), info.type());
             }
@@ -187,7 +188,7 @@ public class PageFactory {
     //endregion
 
     public static List<Class<?>> STOP_INIT_CLASSES = asList(
-        Object.class, WebPage.class, Section.class, UIElement.class,
+        Object.class, WebPage.class, PageObject.class, UIElement.class,
             UIBaseElement.class, UIListBase.class,
             DataList.class, JList.class, WebList.class);
 
