@@ -2,10 +2,10 @@ package com.epam.jdi.light.ui.html;
 
 import org.openqa.selenium.WebElement;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static java.lang.Double.parseDouble;
-import static java.lang.Float.parseFloat;
-import static java.lang.Integer.parseInt;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static java.lang.Double.*;
+import static java.lang.Float.*;
+import static java.lang.Integer.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

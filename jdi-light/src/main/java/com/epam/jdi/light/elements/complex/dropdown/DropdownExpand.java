@@ -4,18 +4,17 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.TextTypes.INNER;
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 02.03.2018

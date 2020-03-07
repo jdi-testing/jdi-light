@@ -1,15 +1,12 @@
 package com.epam.jdi.light.asserts.core;
 
-import com.epam.jdi.light.asserts.generic.ITextAssert;
-import com.epam.jdi.light.asserts.generic.SelectedAssert;
-import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.asserts.generic.*;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.*;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.containsString;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

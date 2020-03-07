@@ -6,16 +6,14 @@ import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
-import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.*;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.PrintUtils.*;
 import static org.hamcrest.Matchers.*;
 
 /**

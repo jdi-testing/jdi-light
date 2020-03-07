@@ -3,17 +3,14 @@ package com.epam.jdi.light.asserts.generic.table;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.*;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.*;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
-import static com.epam.jdi.tools.LinqUtils.isSorted;
-import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static org.hamcrest.Matchers.*;
 
 /**

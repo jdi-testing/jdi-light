@@ -5,27 +5,23 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.*;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
-import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.map.MapArray.map;
-import static com.epam.jdi.tools.pairs.Pair.$;
-import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
-import static com.epam.jdi.tools.switcher.SwitchActions.Value;
+import static com.epam.jdi.light.driver.get.RemoteDriver.*;
+import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.map.MapArray.*;
+import static com.epam.jdi.tools.pairs.Pair.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.String.format;
-import static java.lang.Thread.currentThread;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static java.lang.Thread.*;
+import static java.util.concurrent.TimeUnit.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -1,29 +1,24 @@
 package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
-import com.epam.jdi.light.elements.interfaces.base.SetValue;
+import com.epam.jdi.light.elements.interfaces.base.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.util.Strings;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.ifSelect;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static java.util.Arrays.asList;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static java.util.Arrays.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

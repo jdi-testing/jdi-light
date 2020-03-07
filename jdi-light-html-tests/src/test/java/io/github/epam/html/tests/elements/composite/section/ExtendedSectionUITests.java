@@ -5,7 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.section.ExtendedSectionUIDataProvider;
 
-import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
+import static io.github.epam.html.tests.elements.composite.CompositeUtils.*;
 
 public class ExtendedSectionUITests implements TestsInit {
 

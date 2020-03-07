@@ -1,20 +1,17 @@
 package com.epam.jdi.light.elements.common;
 
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.ReflectionUtils;
-import com.epam.jdi.tools.Timer;
+import com.epam.jdi.tools.*;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.*;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static java.lang.reflect.Modifier.isStatic;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static java.lang.reflect.Modifier.*;
 
 public class Keyboard {
     static Robot robot;

@@ -1,18 +1,15 @@
 package io.github.epam.html.tests.elements.complex;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.colors;
-import static io.github.com.pages.HtmlElementsPage.colorsNoLocator;
-import static io.github.epam.html.tests.elements.complex.enums.Colors.Blue;
-import static io.github.epam.html.tests.elements.complex.enums.Colors.Red;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static java.util.Arrays.asList;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.epam.html.tests.elements.complex.enums.Colors.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static java.util.Arrays.*;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class RadioTests implements TestsInit {
 

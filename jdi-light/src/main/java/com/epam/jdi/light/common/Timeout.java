@@ -2,8 +2,8 @@ package com.epam.jdi.light.common;
 
 import com.epam.jdi.tools.Safe;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -1,7 +1,6 @@
 package com.epam.jdi.light.logger;
 
-import com.epam.jdi.tools.func.JAction;
-import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

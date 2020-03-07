@@ -5,21 +5,18 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.openqa.selenium.*;
+import org.testng.annotations.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.github.com.StaticSite.performancePage;
+import static io.github.com.StaticSite.*;
 import static io.github.com.pages.PerformancePage.*;
 import static io.github.epam.html.tests.performance.PerfStatistic.*;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 public class ListTests implements TestsInit {
     final String value = "Yen Stevenson";

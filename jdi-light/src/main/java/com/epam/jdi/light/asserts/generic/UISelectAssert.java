@@ -1,20 +1,18 @@
 package com.epam.jdi.light.asserts.generic;
 
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.*;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.tools.EnumUtils.*;
 import static org.hamcrest.Matchers.*;
 
 /**

@@ -2,29 +2,23 @@ package com.epam.jdi.light.elements.init.entities.collection;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.settings.WebSettings.init;
-import static com.epam.jdi.tools.JsonUtils.getMapFromJson;
-import static com.epam.jdi.tools.JsonUtils.scanFolder;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.PropertyReader.getProperty;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.JsonUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.PropertyReader.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

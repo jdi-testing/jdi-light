@@ -1,9 +1,9 @@
 package com.epam.jdi.light.driver.get;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static java.lang.String.format;
-import static java.lang.System.getenv;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static java.lang.String.*;
+import static java.lang.System.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

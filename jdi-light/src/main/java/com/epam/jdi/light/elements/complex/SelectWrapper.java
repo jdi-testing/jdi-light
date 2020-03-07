@@ -3,12 +3,11 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ISelect;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.*;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

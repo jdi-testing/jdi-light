@@ -4,42 +4,29 @@ import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.base.HasCache;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.JDIElement;
-import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
+import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.tools.*;
+import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
-import org.openqa.selenium.By;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.TimeoutSettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.msgFormat;
+import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.util.Collections.singletonList;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static java.util.Collections.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -241,7 +228,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     private WebElement getElement(List<WebElement> els) {
         if (els.size() == 1)
             return els.get(0);
-        if (els.size() == 0)
+        if (els.isEmpty())
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
         List<WebElement> filtered = filterElements(els);
         if (filtered.size() == 1)

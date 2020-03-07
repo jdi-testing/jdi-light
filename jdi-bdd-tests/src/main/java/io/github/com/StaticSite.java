@@ -1,10 +1,7 @@
 package io.github.com;
 
 import com.epam.jdi.light.elements.complex.Menu;
-import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
-import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.pages.*;
 

@@ -6,14 +6,12 @@ import org.openqa.selenium.By;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.settings.WebSettings.APP_NAME;
-import static com.epam.jdi.light.settings.WebSettings.getDomain;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.openqa.selenium.support.How.*;
 
 /**

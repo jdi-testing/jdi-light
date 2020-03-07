@@ -2,9 +2,8 @@ package pseudo.site.dataproviders;
 
 import org.testng.annotations.DataProvider;
 
-import static pseudo.site.PseudoSite.pseudoHeader;
-import static pseudo.site.pages.Header.pseudoForm;
-import static pseudo.site.pages.Header.pseudoFormSmart;
+import static pseudo.site.PseudoSite.*;
+import static pseudo.site.pages.Header.*;
 
 public class FormDataProvider {
     @DataProvider

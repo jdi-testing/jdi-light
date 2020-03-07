@@ -1,11 +1,9 @@
 package io.github.epam.testng;
 
-import org.testng.IAnnotationTransformer;
-import org.testng.IRetryAnalyzer;
+import org.testng.*;
 import org.testng.annotations.ITestAnnotation;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 
 public class RetryListenerClass implements IAnnotationTransformer {
 

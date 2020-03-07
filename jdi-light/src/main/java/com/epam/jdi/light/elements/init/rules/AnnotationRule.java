@@ -1,9 +1,7 @@
 package com.epam.jdi.light.elements.init.rules;
 
-import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.tools.func.JAction2;
-import com.epam.jdi.tools.func.JAction3;
+import com.epam.jdi.tools.func.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

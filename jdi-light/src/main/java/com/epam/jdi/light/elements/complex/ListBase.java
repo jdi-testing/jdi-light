@@ -1,33 +1,26 @@
 package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.IClickable;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.common.*;
+import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.*;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MultiMap;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.UIUtils.initT;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getByType;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.UIUtils.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

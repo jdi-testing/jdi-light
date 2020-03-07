@@ -3,21 +3,18 @@ package cucmberTests.stepdefs;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.elements.common.FileInput;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
+import cucumber.api.java.en.*;
+import org.openqa.selenium.*;
 
-import static com.epam.jdi.bdd.BDDUtils.core;
-import static com.epam.jdi.bdd.stepdefs.CheckListSteps.multiSelect;
-import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.entities.Users.DEFAULT_USER;
+import static com.epam.jdi.bdd.BDDUtils.*;
+import static com.epam.jdi.bdd.stepdefs.CheckListSteps.*;
+import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.tools.PathUtils.*;
+import static io.github.com.StaticSite.*;
+import static io.github.com.entities.Users.*;
 import static io.github.com.pages.Header.*;
-import static java.util.Arrays.asList;
+import static java.util.Arrays.*;
 import static org.testng.Assert.*;
 
 public class UserStepdefs {

@@ -8,11 +8,10 @@ import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.TextTypes.LABEL;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.ifSelect;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

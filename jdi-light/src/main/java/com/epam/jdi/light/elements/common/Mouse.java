@@ -1,14 +1,12 @@
 package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import org.openqa.selenium.Rectangle;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
-import static com.epam.jdi.light.elements.common.Keyboard.getRobot;
-import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
-import static com.epam.jdi.tools.Timer.sleep;
-import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
-import static java.awt.event.InputEvent.BUTTON2_DOWN_MASK;
+import static com.epam.jdi.light.elements.common.Keyboard.*;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.tools.Timer.*;
+import static java.awt.event.InputEvent.*;
 
 public class Mouse {
     public static int startX = 100;

@@ -3,8 +3,7 @@ package com.epam.jdi.light.logger;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.logging.LogEntry;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LogStrategy {
     public static List<Strategy> SCREEN_STRATEGY = new ArrayList<>();

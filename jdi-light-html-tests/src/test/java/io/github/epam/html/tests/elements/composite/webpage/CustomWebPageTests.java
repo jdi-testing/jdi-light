@@ -5,7 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.webpages.CustomWebPageDataProvider;
 
-import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
+import static io.github.epam.html.tests.elements.composite.CompositeUtils.*;
 
 public class CustomWebPageTests implements TestsInit {
 

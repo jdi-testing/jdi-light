@@ -2,12 +2,11 @@ package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.ui.html.asserts.ImageAssert;
 
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.ui.html.HtmlUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

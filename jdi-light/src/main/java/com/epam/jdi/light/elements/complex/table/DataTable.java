@@ -10,25 +10,23 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
+import org.hamcrest.*;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.PrintUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
-import static java.util.Arrays.asList;
+import static java.util.Arrays.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

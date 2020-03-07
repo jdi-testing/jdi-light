@@ -3,29 +3,23 @@ package com.epam.jdi.light.driver;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.map.MapArray;
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static java.lang.String.format;
-import static java.util.Collections.singletonList;
-import static org.apache.logging.log4j.util.Strings.isNotEmpty;
-import static org.openqa.selenium.support.ui.Quotes.escape;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
+import static java.lang.String.*;
+import static java.util.Collections.*;
+import static org.apache.logging.log4j.util.Strings.*;
+import static org.openqa.selenium.support.ui.Quotes.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

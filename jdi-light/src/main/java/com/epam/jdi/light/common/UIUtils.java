@@ -2,36 +2,28 @@ package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.init.SiteInfo;
-import com.epam.jdi.light.elements.interfaces.base.HasValue;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.IClickable;
-import com.epam.jdi.light.elements.interfaces.base.INamed;
+import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.epam.jdi.tools.func.JFunc2;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.map.MultiMap;
+import com.epam.jdi.tools.map.*;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.lang.reflect.*;
+import java.util.*;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
+import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.PrintUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static java.lang.reflect.Array.get;
-import static java.lang.reflect.Array.getLength;
+import static java.lang.reflect.Array.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

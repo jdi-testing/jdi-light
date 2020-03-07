@@ -1,19 +1,14 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
-import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
+import com.epam.jdi.light.elements.complex.dropdown.*;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.ByText;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
 import io.github.com.custom.CustomDropdown;
 
 public class MetalAndColorsPage extends WebPage {
-    // TODO simple html dropdowns
 	@Css(".uui-side-bar[name='log-sidebar']") public static LogSidebar logSidebar;
 
 	@JDropdown(root = "div[ui=dropdown]", value = ".filter-option",

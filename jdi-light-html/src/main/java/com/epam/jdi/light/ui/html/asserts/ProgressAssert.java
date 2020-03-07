@@ -3,11 +3,10 @@ package com.epam.jdi.light.ui.html.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.*;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.ui.html.HtmlUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

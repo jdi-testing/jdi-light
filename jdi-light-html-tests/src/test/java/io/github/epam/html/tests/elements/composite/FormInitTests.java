@@ -5,9 +5,9 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 import pseudo.site.dataproviders.FormDataProvider;
 
-import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
-import static pseudo.site.PseudoSite.pseudoHeader;
-import static pseudo.site.pages.Header.pseudoFormLight;
+import static io.github.epam.html.tests.elements.composite.CompositeUtils.*;
+import static pseudo.site.PseudoSite.*;
+import static pseudo.site.pages.Header.*;
 
 public class FormInitTests implements TestsInit {
 

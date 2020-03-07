@@ -6,58 +6,45 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.logger.ILogger;
-import com.epam.jdi.light.logger.Strategy;
-import com.epam.jdi.tools.PropReader;
-import com.epam.jdi.tools.PropertyReader;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.light.logger.*;
+import com.epam.jdi.tools.*;
+import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 
-import static com.epam.jdi.light.common.ElementArea.CENTER;
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
-import static com.epam.jdi.light.common.PageChecks.parse;
-import static com.epam.jdi.light.common.SetTextTypes.SET_TEXT;
-import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
-import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
-import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
+import static com.epam.jdi.light.common.ElementArea.*;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.NameToLocator.*;
+import static com.epam.jdi.light.common.PageChecks.*;
+import static com.epam.jdi.light.common.SetTextTypes.*;
+import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.driver.ScreenshotMaker.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
-import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
-import static com.epam.jdi.light.elements.composite.WebPage.CHECK_PAGE_OPEN;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.logger.JDILogger.instance;
-import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
+import static com.epam.jdi.light.driver.sauce.SauceSettings.*;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.logger.JDILogger.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.LogStrategy.*;
 import static com.epam.jdi.light.logger.Strategy.*;
-import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.PropertyReader.fillAction;
-import static com.epam.jdi.tools.PropertyReader.getProperty;
-import static java.lang.Boolean.parseBoolean;
-import static java.lang.Integer.parseInt;
-import static java.lang.String.format;
-import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PathUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.PropertyReader.*;
+import static java.lang.Boolean.*;
+import static java.lang.Integer.*;
+import static java.lang.String.*;
+import static java.util.Arrays.*;
+import static org.apache.commons.lang3.StringUtils.*;
+import static org.openqa.selenium.PageLoadStrategy.NONE;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
 /**
@@ -146,15 +133,16 @@ public class WebSettings {
             return null;
         String locatorName = SMART_SEARCH_NAME.value.execute(el.getName());
         return el.base().timer().getResult(() -> {
-                String locator = format(SMART_SEARCH_LOCATOR, locatorName);
-                UIElement ui = (SMART_SEARCH_LOCATOR.equals("#%s")
-                    ? $(locator)
-                    : $(locator, el.base().parent))
-                        .setup(e -> e.setName(el.getName()).noWait());
-                try {
-                    return ui.getWebElement();
-                } catch (Exception ignore) { }
-            throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
+            String locator = format(SMART_SEARCH_LOCATOR, locatorName);
+            UIElement ui = (SMART_SEARCH_LOCATOR.equals("#%s")
+                ? $(locator)
+                : $(locator, el.base().parent))
+                    .setup(e -> e.setName(el.getName()).noWait());
+            try {
+                return ui.getWebElement();
+            } catch (Exception ignore) {
+                throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
+            }
         });
     };
     private static boolean initialized = false;
@@ -190,7 +178,7 @@ public class WebSettings {
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> WRITE_TO_ALLURE = parseBoolean(p), "allure.steps");
-        fillAction(p -> SMART_SEARCH_LOCATOR = p, "smart.locators");
+        fillAction(p -> SMART_SEARCH_LOCATOR = p.split(";")[0], "smart.locators");
         fillAction(p -> SMART_SEARCH_NAME = getSmartSearchFunc(p), "smart.locators.toName");
         fillAction(p -> USE_SMART_SEARCH = getBoolean(p), "smart.search");
         fillAction(p -> COMMON_CAPABILITIES.put("headless", p), "headless");
@@ -247,8 +235,8 @@ public class WebSettings {
     }
     private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
         if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
-            throw exception("Unknown SMART_SEARCH_NAME. Please correct value 'smart.locators.toName' in test.properties." +
-                "Available names: [%s]", SMART_MAP_NAME_TO_LOCATOR);
+            throw exception("Unknown SMART_SEARCH_NAME: '%s'. Please correct value 'smart.locators.toName' in test.properties." +
+                "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
         }
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
     }

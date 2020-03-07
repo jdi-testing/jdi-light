@@ -1,12 +1,10 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.Range;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

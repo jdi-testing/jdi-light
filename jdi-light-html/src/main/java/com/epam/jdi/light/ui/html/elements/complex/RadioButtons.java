@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.complex.WebList;
 
-import static com.epam.jdi.light.common.TextTypes.LABEL;
+import static com.epam.jdi.light.common.TextTypes.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

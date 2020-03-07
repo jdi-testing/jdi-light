@@ -5,10 +5,7 @@ package com.epam.jdi.light.common;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

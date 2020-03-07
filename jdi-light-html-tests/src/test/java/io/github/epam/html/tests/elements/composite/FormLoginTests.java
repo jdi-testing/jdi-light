@@ -1,15 +1,14 @@
 package io.github.epam.html.tests.elements.composite;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static com.epam.jdi.light.elements.init.UIFactory.loginAs;
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.entities.Users.DEFAULT_USER;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static io.github.com.StaticSite.*;
+import static io.github.com.entities.Users.*;
 import static io.github.com.pages.Header.*;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedOut;
+import static io.github.epam.html.tests.site.steps.States.*;
 
 public class FormLoginTests implements TestsInit {
     @BeforeMethod

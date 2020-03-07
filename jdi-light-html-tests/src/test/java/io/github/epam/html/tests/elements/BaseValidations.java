@@ -1,18 +1,15 @@
 package io.github.epam.html.tests.elements;
 
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.tools.func.JAction;
-import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
+import org.openqa.selenium.*;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.pairs.Pair.$;
-import static java.lang.System.currentTimeMillis;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.lessThan;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.pairs.Pair.*;
+import static java.lang.System.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 
 public class BaseValidations {

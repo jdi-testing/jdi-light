@@ -4,10 +4,10 @@ import org.apache.logging.log4j.Level;
 
 import java.util.List;
 
-import static com.epam.jdi.light.settings.WebSettings.WRITE_TO_LOG;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static java.lang.Integer.MAX_VALUE;
-import static java.util.Arrays.asList;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static java.lang.Integer.*;
+import static java.util.Arrays.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

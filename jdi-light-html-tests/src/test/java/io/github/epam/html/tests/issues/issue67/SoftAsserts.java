@@ -3,22 +3,18 @@ package io.github.epam.html.tests.issues.issue67;
 import com.epam.jdi.light.asserts.core.SoftAssert;
 import io.github.epam.TestsInit;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static io.github.com.StaticSite.html5Page;
-import static io.github.com.StaticSite.usersPage;
+import static io.github.com.StaticSite.*;
 import static io.github.com.pages.HtmlElementsPage.*;
-import static io.github.com.pages.UsersPage.users;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static java.util.Arrays.asList;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
+import static io.github.com.pages.UsersPage.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static java.util.Arrays.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 
 public class SoftAsserts implements TestsInit {

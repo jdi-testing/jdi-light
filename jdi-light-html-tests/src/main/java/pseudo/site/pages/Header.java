@@ -1,10 +1,8 @@
 package pseudo.site.pages;
 
-import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.composite.*;
 import pseudo.site.entities.User;
-import pseudo.site.forms.CustomForm;
-import pseudo.site.forms.CustomFormSmart;
+import pseudo.site.forms.*;
 
 public class Header extends Section {
     public static Form<User> pseudoFormLight;

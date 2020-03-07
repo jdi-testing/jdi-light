@@ -1,21 +1,13 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.DriverBase;
-import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.*;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
-import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
-import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.init.rules.AnnotationRule;
-import com.epam.jdi.light.elements.init.rules.InitRule;
-import com.epam.jdi.light.elements.init.rules.SetupRule;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
-import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
+import com.epam.jdi.light.elements.complex.dropdown.*;
+import com.epam.jdi.light.elements.composite.*;
+import com.epam.jdi.light.elements.init.rules.*;
+import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.complex.*;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
@@ -27,29 +19,26 @@ import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.UIUtils.create;
-import static com.epam.jdi.light.common.VisualCheckAction.IS_DISPLAYED;
-import static com.epam.jdi.light.driver.WebDriverByUtils.asTextLocator;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.updatePage;
-import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
-import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
-import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
+import static com.epam.jdi.light.common.VisualCheckAction.*;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.elements.init.rules.AnnotationRule.*;
+import static com.epam.jdi.light.elements.init.rules.InitRule.*;
+import static com.epam.jdi.light.elements.init.rules.SetupRule.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
-import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
-import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.map.MapArray.map;
-import static com.epam.jdi.tools.pairs.Pair.$;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static com.epam.jdi.tools.pairs.Pair.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

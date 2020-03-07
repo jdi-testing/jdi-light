@@ -1,24 +1,18 @@
 package com.epam.jdi.light.logger;
 
 import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JAction;
-import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
+import org.apache.logging.log4j.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.tools.StringUtils.format;
-import static java.lang.Thread.currentThread;
-import static org.apache.logging.log4j.LogManager.getLogger;
-import static org.apache.logging.log4j.core.config.Configurator.setLevel;
-import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
+import static com.epam.jdi.tools.StringUtils.*;
+import static java.lang.Thread.*;
+import static org.apache.logging.log4j.LogManager.*;
+import static org.apache.logging.log4j.core.config.Configurator.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
