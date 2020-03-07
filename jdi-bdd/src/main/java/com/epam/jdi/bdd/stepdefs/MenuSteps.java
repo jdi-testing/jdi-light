@@ -31,6 +31,6 @@ public class MenuSteps {
 
     @Then("^the \"([^\"]*)\" in \"([^\"]*)\" menu is selected$")
     public void isSelected(String value, String name) {
-        list(name).selected(value);
+        list(name).is().selected(value);
     }
 }

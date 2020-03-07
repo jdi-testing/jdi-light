@@ -12,6 +12,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -44,7 +45,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> extends UIBaseElement<A>
+public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAssert<?,?>> extends UIBaseElement<A>
         implements ISetup, HasValue, HasAssert<A>, IHasSize, IsText {
     protected By rowLocator = By.xpath("//tr[%s]/td");
     protected By columnLocator = By.xpath("//tr/td[%s]");
@@ -322,14 +323,19 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
         }
         return headerIsRow ? rowNum + 1 : rowNum;
     }
-
+    public WebList filter() {
+        return $$(filterLocator).setup(b-> {
+            b.setParent(this);
+            b.setName(getName()+" filter");}
+        );
+    }
     public UIElement filterBy(String filterName) {
         return searchBy(filterName);
     }
     @JDIAction("Filter {name} by column {0}")
     public UIElement searchBy(String filterName) {
         int index = header().indexOf(filterName);
-        return $$(filterLocator).get(index);
+        return filter().get(index);
     }
     @Override
     public void setup(Field field) {
@@ -535,7 +541,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
      */
     @JDIAction("Filter '{name}' table rows that match criteria in column '{1}'")
     public List<Line> filterRows(Matcher<String> matcher, Column column) {
-        return filter(rows(),
+        return LinqUtils.filter(rows(),
                 line -> matcher.matches(line.get(column.getIndex(header()))));
     }
 
@@ -546,7 +552,7 @@ public abstract class BaseTable<T extends BaseTable, A extends BaseTableAssert> 
      */
     @JDIAction("Filter '{name}' table rows that match criteria")
     public List<Line> filterRows(Pair<Matcher<String>, Column>... matchers) {
-        return filter(rows(), line ->
+        return LinqUtils.filter(rows(), line ->
                 all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header())))));
     }
 

@@ -19,7 +19,7 @@ import static com.epam.jdi.tools.LinqUtils.ifSelect;
  */
 // Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
-public class DataListOptions extends UIListBase<UISelectAssert> implements IsCombobox {
+public class DataListOptions extends UIListBase<UISelectAssert<?,?>> implements IsCombobox {
     @Override
     public WebList list() {
         return $$("#"+ uiElement.attr("list")+" option")

@@ -32,7 +32,7 @@ public class SauceSettings extends DataClass<SauceSettings> {
 
     public static Map<String, String> sauceCapabilities() {
         Map<String, String> result = new HashMap<>();
-        for (Map.Entry<String, Object> pair : new SauceSettings().getFieldsAsMap().entrySet()) {
+        for (Map.Entry<String, Object> pair : new SauceSettings().fieldsAsMap().entrySet()) {
             Object value = pair.getValue();
             if (value != null && isNotBlank(value.toString()))
                 result.put(pair.getKey(), pair.getValue().toString());

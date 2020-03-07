@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.AnnotationRule;
@@ -115,52 +116,59 @@ public class InitActions {
         return jdi;
     }
     public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
-        $("Root", aRule(Root.class, (e,a)-> e.locator.isRoot = true)),
-        $("Frame", aRule(Frame.class, (e,a)-> e.setFrames(getFrames(a)))),
+        $("Root", aRule(Root.class, (e,a)-> e.base().locator.isRoot = true)),
+        $("Frame", aRule(Frame.class, (e,a)-> e.base().setFrames(getFrames(a)))),
         $("FindBySelenium", aRule(org.openqa.selenium.support.FindBy.class,
-            (e,a)-> e.setLocator(findByToBy(a)))),
-        $("Css", aRule(Css.class, (e,a)-> e.setLocator(findByToBy(a)))),
-        $("XPath", aRule(XPath.class, (e,a)-> e.setLocator(findByToBy(a)))),
-        $("ByText", aRule(ByText.class, (e,a)-> e.setLocator(findByToBy(a)))),
-        $("WithText", aRule(WithText.class, (e,a)-> e.setLocator(findByToBy(a)))),
-        $("ClickArea", aRule(ClickArea.class, (e,a)-> e.clickAreaType = a.value())),
-        $("GetTextAs", aRule(GetTextAs.class, (e,a)-> e.textType = a.value())),
-        $("SetTextAs", aRule(SetTextAs.class, (e,a)-> e.setTextType = a.value())),
+            (e,a)-> e.base().setLocator(findByToBy(a)))),
+        $("Css", aRule(Css.class, (e,a)-> e.base().setLocator(findByToBy(a)))),
+        $("XPath", aRule(XPath.class, (e,a)-> e.base().setLocator(findByToBy(a)))),
+        $("ByText", aRule(ByText.class, (e,a)-> e.base().setLocator(findByToBy(a)))),
+        $("WithText", aRule(WithText.class, (e,a)-> e.base().setLocator(findByToBy(a)))),
+        $("ClickArea", aRule(ClickArea.class, (e,a)-> e.base().clickAreaType = a.value())),
+        $("GetTextAs", aRule(GetTextAs.class, (e,a)-> e.base().textType = a.value())),
+        $("SetTextAs", aRule(SetTextAs.class, (e,a)-> e.base().setTextType = a.value())),
         $("NoCache", aRule(NoCache.class, (e,a)-> e.offCache())),
 
         $("Timeout", aRule(WaitTimeout.class, (e,a)-> e.waitSec(a.value()))),
         $("NoWait", aRule(NoWait.class, (e,a)-> e.waitSec(0))),
         $("Name", aRule(Name.class, (e,a)-> e.setName(a.value()))),
-        $("GetAny", aRule(GetAny.class, (e, a)-> e.noValidation())),
-        $("GetVisible", aRule(GetVisible.class, (e, a)-> e.searchVisible())),
-        $("GetVisibleEnabled", aRule(GetVisibleEnabled.class, (e, a)-> e.visibleEnabled())),
-        $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.inView())),
-        $("Page", aRule(PageName.class, (e, a)-> e.setPage(a.value()))),
-
-        $("Smart Id", aRule(SId.class, (e,a) -> {
-            e.setLocator("#" + toKebabCase(e.getName()));
-            e.locator.isRoot = true;
+        $("GetAny", aRule(GetAny.class, (e, a)-> e.base().noValidation())),
+        $("GetVisible", aRule(GetVisible.class, (e, a)-> e.base().searchVisible())),
+        $("GetVisibleEnabled", aRule(GetVisibleEnabled.class, (e, a)-> e.base().visibleEnabled())),
+        $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.base().inView())),
+        $("Page", aRule(PageName.class, (e, a)-> e.base().setPage(a.value()))),
+        $("StartIndex", aRule(StartIndex.class, (e, a)-> {
+            if (isClass(e.getClass(), WebList.class))
+                ((WebList)e).startIndex(a.value());
         })),
-        $("Smart Text", aRule(SText.class, (e, a) -> e.setLocator(asTextLocator(splitCamelCase(e.getName()))))),
-        $("Smart Name", aRule(SName.class, (e, a) -> e.setLocator(format("[name='%s']", toKebabCase(e.getName()))))),
-        $("Smart", aRule(Smart.class, (e, a) -> e.setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName()))))),
-        $("Smart Class", aRule(SClass.class, (e, a) -> e.setLocator(format(".%s", toKebabCase(e.getName()))))),
+        $("CloseAfterSelect", aRule(CloseAfterSelect.class, (e, a)-> {
+            if (isClass(e.getClass(), DropdownExpand.class))
+                ((DropdownExpand)e).autoClose = true;
+        })),
+        $("Smart Id", aRule(SId.class, (e,a) -> {
+            e.base().setLocator("#" + toKebabCase(e.getName()));
+            e.base().locator.isRoot = true;
+        })),
+        $("Smart Text", aRule(SText.class, (e, a) -> e.base().setLocator(asTextLocator(splitCamelCase(e.getName()))))),
+        $("Smart Name", aRule(SName.class, (e, a) -> e.base().setLocator(format("[name='%s']", toKebabCase(e.getName()))))),
+        $("Smart", aRule(Smart.class, (e, a) -> e.base().setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName()))))),
+        $("Smart Class", aRule(SClass.class, (e, a) -> e.base().setLocator(format(".%s", toKebabCase(e.getName()))))),
         $("ListUI", aRule(UI.class, (e,a,f)-> {
             UI[] uis = f.getAnnotationsByType(UI.class);
             if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
-                e.setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
+                e.base().setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
             })),
         $("FindByUI", aRule(FindBy.class, (e,a,f)-> {
             FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
             if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
-                e.setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
+                e.base().setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
             })),
         $("VisualCheck", aRule(VisualCheck.class, (e, a) ->  {
             if (a.value())
-                e.params.update("visualCheck", "");
+                e.base().params.update("visualCheck", "");
             else
-                if (e.params.keys().contains("visualCheck"))
-                    e.params.removeByKey("visualCheck");
+                if (e.base().params.keys().contains("visualCheck"))
+                    e.base().params.removeByKey("visualCheck");
         }))
     );
 
@@ -177,7 +185,7 @@ public class InitActions {
                 try {
                     Class<? extends Annotation> annotation = aRule.value.annotation;
                     if (hasAnnotation(info.field, annotation))
-                        aRule.value.action.execute(jdi.base(), info.field.getAnnotation(annotation), info.field);
+                        aRule.value.action.execute(jdi, info.field.getAnnotation(annotation), info.field);
                 } catch (Exception ex) {
                     throw exception(ex, "Setup element '%s' with Annotation '%s' failed", info.name(), aRule.key);
                 }

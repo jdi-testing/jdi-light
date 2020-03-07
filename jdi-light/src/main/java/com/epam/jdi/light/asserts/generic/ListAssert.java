@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.nullValue;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class ListAssert<A extends ListAssert, T, E extends IListSelector<T>> extends UISelectAssert<A, E>
+public class ListAssert<A extends ListAssert<?,?,?>, T, E extends IListSelector<T>> extends UISelectAssert<A, E>
         implements ITextAssert<A> {
 
     private List<T> list() {

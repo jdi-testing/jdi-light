@@ -3,10 +3,10 @@ package com.epam.jdi.light.elements.complex.table;
 import com.epam.jdi.light.asserts.generic.table.DataTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.init.InitActions;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -44,8 +44,8 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         = new CacheAll<>(MapArray::new);
 
     private void hasLineClass() {
-        if (lineClass == null || !isClass(lineClass, Section.class))
-            throw exception("In order to use this method you must specify LineClass that extends Section for '%s' DataTable<LineClass, ?>", getName());
+        if (lineClass == null || !isClass(lineClass, PageObject.class))
+            throw exception("In order to use this method you must specify LineClass that extends PageObject for '%s' DataTable<LineClass, ?>", getName());
     }
     private void hasDataClass() {
         if (dataClass == null)
@@ -188,7 +188,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<D> dataRows(JFunc1<D, Boolean> matcher) {
         hasDataClass();
-        return filter(allData(), matcher::execute);
+        return LinqUtils.filter(allData(), matcher::execute);
     }
 
     /**

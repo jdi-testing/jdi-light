@@ -12,7 +12,7 @@ import static io.github.com.pages.Header.search;
 import static io.github.com.pages.SearchPage.jsearchTitle;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman_Iovlev on 3/2/2018.

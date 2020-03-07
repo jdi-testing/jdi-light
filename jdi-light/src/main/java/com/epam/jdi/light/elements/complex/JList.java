@@ -25,7 +25,9 @@ public class JList<T extends ICoreElement> extends ListBase<T, UISelectAssert<UI
     @Override
     public UISelectAssert<UISelectAssert<?,?>, JList<T>> is() {
         refresh();
-        return new UISelectAssert<UISelectAssert, JList<T>>().set(this);
+        UISelectAssert<UISelectAssert<?,?>, JList<T>> is = new UISelectAssert<>();
+        is.set(this);
+        return is;
     }
     @JDIAction("Assert that {name} list meet condition")
     public UISelectAssert<UISelectAssert<?,?>, JList<T>> is(Matcher<? super List<T>> condition) {

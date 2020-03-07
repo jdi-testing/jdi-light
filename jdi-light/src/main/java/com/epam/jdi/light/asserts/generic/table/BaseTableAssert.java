@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.*;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class BaseTableAssert<T extends BaseTable, A extends BaseTableAssert> extends UIAssert<A, T> {
+public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert<?,?>> extends UIAssert<A, T> {
     protected T table() {
         element.refresh();
         return element;

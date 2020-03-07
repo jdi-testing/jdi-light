@@ -15,7 +15,7 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class Tabs extends UIListBase<UISelectAssert> {
+public class Tabs extends UIListBase<UISelectAssert<?,?>> {
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) { list().select(value); }
     @JDIAction("Select '{0}' in '{name}'")
@@ -24,7 +24,7 @@ public class Tabs extends UIListBase<UISelectAssert> {
     @JDIAction(level = DEBUG)
     public UIElement get(String value) { return list().get(value);}
     @JDIAction(level = DEBUG)
-    public <TEnum extends Enum> UIElement get(TEnum value) { return list().get(value);}
+    public <TEnum extends Enum<?>> UIElement get(TEnum value) { return list().get(value);}
     @JDIAction(level = DEBUG)
     public UIElement get(int index) { return list().get(index);  }
 

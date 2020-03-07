@@ -22,7 +22,7 @@ import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class DataTableTests implements TestsInit {
     private boolean firstTime = true;

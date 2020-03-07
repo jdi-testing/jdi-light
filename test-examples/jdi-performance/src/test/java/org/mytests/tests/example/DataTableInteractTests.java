@@ -12,7 +12,7 @@ import static org.mytests.tests.states.States.shouldBeLoggedIn;
 import static org.mytests.uiobjects.example.site.SiteJdi.usersPage;
 import static org.mytests.uiobjects.example.site.pages.UsersPage.users;
 import static org.mytests.uiobjects.example.site.pages.UsersPage.usersSetup;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class DataTableInteractTests extends TestsInit {
 

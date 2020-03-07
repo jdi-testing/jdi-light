@@ -12,7 +12,7 @@ import static io.github.com.pages.HomePage.githubLink;
 import static io.github.com.pages.HomePage.jdiText;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class WindowsAndFramesTests extends StaticTestsInit {
 

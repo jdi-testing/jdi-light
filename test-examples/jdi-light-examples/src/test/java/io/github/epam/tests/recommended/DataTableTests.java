@@ -14,7 +14,7 @@ import static io.github.epam.test.data.TableData.GRADY_BROCK;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class DataTableTests extends StaticTestsInit {
     @BeforeMethod

@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import static org.mytests.uiobjects.example.entities.LeftMenuData.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class MenuTests extends TestsInit {
     @BeforeMethod

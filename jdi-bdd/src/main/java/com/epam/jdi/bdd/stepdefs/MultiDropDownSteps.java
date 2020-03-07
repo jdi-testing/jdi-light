@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
 import static org.hamcrest.core.IsIterableContaining.hasItems;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -13,7 +13,7 @@ import static io.github.com.pages.UsersPage.usersSetup;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class DataTableInteractTests implements TestsInit {
 

@@ -9,7 +9,7 @@ import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 19.08.2019

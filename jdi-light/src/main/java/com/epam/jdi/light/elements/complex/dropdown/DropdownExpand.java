@@ -21,7 +21,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Created by Roman Iovlev on 02.03.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DropdownExpand extends UIListBase<UISelectAssert>
+public class DropdownExpand extends UIListBase<UISelectAssert<?,?>>
         implements IsDropdown, ISetup {
     public String expandLocator = ".caret";
     public UIElement expander() {
@@ -43,7 +43,9 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     }
     @JDIAction(value = "Is '{name}' expanded", level = DEBUG)
     public boolean isExpanded() {
-        return list().noWait(WebList::isDisplayed, WebList.class);
+        try {
+            return list().noWait(WebList::isDisplayed, WebList.class);
+        } catch (Exception ex) { return false; }
     }
     @JDIAction(level = DEBUG)
     public void expand() {
@@ -80,6 +82,16 @@ public class DropdownExpand extends UIListBase<UISelectAssert>
     public boolean selected(String value) {
         expand();
         return list().selected(value);
+    }
+
+    @Override
+    public String getText() { return value().getText(); }
+    @Override
+    public String getValue() { return getText(); }
+    @Override
+    public int size() {
+        WebList list = list();
+        return list.noValidation(list::size);
     }
 
     protected boolean setupDone = false;

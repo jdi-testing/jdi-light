@@ -101,10 +101,10 @@ public interface IWebList<T extends ICoreElement> extends IList<T> {
             }
         }
     }
-    default <TEnum extends Enum> void check(TEnum... values) {
+    default <TEnum extends Enum<?>> void check(TEnum... values) {
         check(getEnumValues(values));
     }
-    default <TEnum extends Enum> void uncheck(TEnum... values) {
+    default <TEnum extends Enum<?>> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
 
@@ -136,7 +136,7 @@ public interface IWebList<T extends ICoreElement> extends IList<T> {
             select(split[0]);
         else hoverAndClick(split);
     }
-    default <TEnum extends Enum> void select(TEnum value) {
+    default <TEnum extends Enum<?>> void select(TEnum value) {
         select(getEnumValue(value));
     }
 
@@ -145,7 +145,7 @@ public interface IWebList<T extends ICoreElement> extends IList<T> {
      * @param values
      */
     @JDIAction("Select ({0}) for '{name}'")
-    default <TEnum extends Enum> void select(TEnum... values) {
+    default <TEnum extends Enum<?>> void select(TEnum... values) {
         for (TEnum value : values)
             select(value);
     }

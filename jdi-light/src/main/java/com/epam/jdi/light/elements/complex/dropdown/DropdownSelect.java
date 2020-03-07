@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Roman Iovlev on 02.03.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IsDropdown {
+public class DropdownSelect extends UIBaseElement<UISelectAssert<?,?>> implements IsDropdown {
     protected Selector selector() {
         return new Selector().setCore(Selector.class, base());
     }

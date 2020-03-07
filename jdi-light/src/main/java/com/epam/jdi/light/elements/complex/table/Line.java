@@ -44,7 +44,7 @@ public class Line implements IList<String>, IBaseElement {
         this.elements = elements;
         this.headers = headers;
         List<String> values = elements.values();
-        this.dataMap = () -> new MultiMap<>(headers, values);
+        this.dataMap = () -> new MultiMap<>(headers, values).ignoreKeyCase();;
     }
     public static Line initLine(List<String> list, List<String> headers) {
         Line line = new Line();
@@ -79,7 +79,7 @@ public class Line implements IList<String>, IBaseElement {
         return getData(minAmount);
     }
     public MultiMap<String, UIElement> uiElements() {
-        return new MultiMap<>(headers, elements);
+        return new MultiMap<>(headers, elements).ignoreKeyCase();
     }
     public void saveCellsImages() {
         String unique = Timer.nowMSecs();
@@ -90,7 +90,7 @@ public class Line implements IList<String>, IBaseElement {
             cell.makePhoto();
             result.add(cell);
         }
-        elements = new WebList().setValues(new MultiMap<>(headers, result));
+        elements = new WebList().setValues(new MultiMap<>(headers, result).ignoreKeyCase());
     }
     public boolean visualCompareTo(Line line) {
         for (Pair<String, UIElement> cell : uiElements())

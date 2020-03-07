@@ -29,7 +29,7 @@ import static java.util.Arrays.asList;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class Selector extends UIBaseElement<UISelectAssert>
+public class Selector extends UIBaseElement<UISelectAssert<?,?>>
         implements ISelector, SetValue, HasPlaceholder {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
     protected Select asSelect() {
@@ -91,10 +91,10 @@ public class Selector extends UIBaseElement<UISelectAssert>
                 opt.click();
         }
     }
-    public <TEnum extends Enum> void check(TEnum... values) {
+    public <TEnum extends Enum<?>> void check(TEnum... values) {
         check(getEnumValues(values));
     }
-    public <TEnum extends Enum> void uncheck(TEnum... values) {
+    public <TEnum extends Enum<?>> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
 
@@ -200,7 +200,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
         return asSelect().isMultiple() ? print(checked(),";") : selected();
     }
     @Override
-    public UISelectAssert is() {
+    public UISelectAssert<?,?> is() {
         return new UISelectAssert<>().set(this);
     }
 }

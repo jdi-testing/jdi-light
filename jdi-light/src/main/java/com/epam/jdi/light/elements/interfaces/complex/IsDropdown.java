@@ -9,6 +9,6 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public interface IsDropdown extends ISelector, HasLabel, HasAssert<UISelectAssert> {
+public interface IsDropdown extends ISelector, HasLabel, HasAssert<UISelectAssert<?,?>> {
 
 }

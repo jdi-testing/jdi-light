@@ -18,7 +18,7 @@ import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.apache.commons.io.FileUtils.writeStringToFile;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 19.08.2019

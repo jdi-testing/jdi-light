@@ -97,7 +97,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
         try {
             return base().noWait(() -> base().getList(0).size());
         } catch (Exception ex) {
-            throw exception(ex,"Get size failed");
+            throw exception(ex, "Get size failed");
         }
     }
     @Override

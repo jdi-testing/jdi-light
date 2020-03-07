@@ -15,7 +15,7 @@ import static com.epam.jdi.tools.StringUtils.format;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAssert<E>
+public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends BaseAssert<E>
     implements CommonAssert<A> {
     /**
      * Check that the element is displayed

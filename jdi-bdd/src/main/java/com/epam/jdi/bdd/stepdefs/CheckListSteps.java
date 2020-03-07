@@ -9,7 +9,7 @@ import java.util.List;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.tools.LinqUtils.toIntArray;
 import static org.hamcrest.Matchers.hasSize;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

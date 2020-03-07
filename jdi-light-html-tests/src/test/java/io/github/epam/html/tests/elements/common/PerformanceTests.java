@@ -14,7 +14,7 @@ import static io.github.epam.html.tests.elements.BaseValidations.durationMoreTha
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.*;
 import static org.testng.Assert.fail;
 
 /**

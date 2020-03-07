@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.performance;
 
-
 import com.epam.jdi.light.elements.complex.table.Table;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -13,9 +12,10 @@ import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.performancePage;
 import static io.github.com.pages.PerformancePage.usersTableSetup;
 import static io.github.com.pages.PerformancePage.usersTableUI;
+import static io.github.epam.html.tests.elements.BaseValidations.notMoreThan;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class DataTableTests implements TestsInit {
     @BeforeMethod

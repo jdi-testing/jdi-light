@@ -26,7 +26,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
     public Class<D> dataType;
 
     public DataList() {}
-    public DataList(Class<T> type) { initClass = type; }
+    public DataList(Class<T> type, Class<D> dataType) { initClass = type; this.dataType = dataType; }
 
     public D getData(String name) {
         return asEntity(get(name), dataType);

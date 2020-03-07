@@ -22,7 +22,7 @@ import static java.util.Arrays.asList;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 class FurnitureTests implements TestsInit {
     @BeforeMethod

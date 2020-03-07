@@ -24,8 +24,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,10 +48,14 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList, HasAssert<UISelectAssert<UISelectAssert<?,?>, WebList>> {
+public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList,
+        HasAssert<UISelectAssert<UISelectAssert<?,?>, WebList>> {
     protected int startIndex = 1;
     public WebList indexFromZero() {
-        startIndex = 0;
+        return startIndex(0);
+    }
+    public WebList startIndex(int index) {
+        startIndex = index;
         return this;
     }
     @Override
@@ -315,10 +317,10 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             startIndex++;
         }
     }
-    public <TEnum extends Enum> void check(TEnum... values) {
+    public <TEnum extends Enum<?>> void check(TEnum... values) {
         check(getEnumValues(values));
     }
-    public <TEnum extends Enum> void uncheck(TEnum... values) {
+    public <TEnum extends Enum<?>> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
 
@@ -353,7 +355,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             select(split[0]);
         else hoverAndClick(split);
     }
-    public <TEnum extends Enum> void select(TEnum value) {
+    public <TEnum extends Enum<?>> void select(TEnum value) {
         select(getEnumValue(value));
     }
 
@@ -362,7 +364,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      * @param values
      */
     @JDIAction("Select ({0}) for '{name}'")
-    public <TEnum extends Enum> void select(TEnum... values) {
+    public <TEnum extends Enum<?>> void select(TEnum... values) {
         for (TEnum value : values)
             select(value);
     }
