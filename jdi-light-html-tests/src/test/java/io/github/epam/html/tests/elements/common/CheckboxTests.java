@@ -11,7 +11,6 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.testng.Assert.*;
-import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 19.08.2019

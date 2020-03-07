@@ -15,8 +15,8 @@ import static io.github.com.pages.ContactFormPage.main;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
-import static org.testng.Assert.*;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class FormContactsTests implements TestsInit {
     @BeforeMethod

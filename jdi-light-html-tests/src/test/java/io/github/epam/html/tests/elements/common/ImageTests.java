@@ -13,6 +13,7 @@ import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Roman Iovlev on 19.08.2019

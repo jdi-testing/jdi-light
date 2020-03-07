@@ -12,6 +12,7 @@ import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.V
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertEquals;
 
 public class DataListTests implements TestsInit {
 
