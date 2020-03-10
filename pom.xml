@@ -53,6 +53,7 @@
         <module>jdi-light</module>
         <module>jdi-light-html</module>
         <module>jdi-light-eyes</module>
+        <module>jdi-light-mobile</module>
         <module>jdi-bdd</module>
         <module>jdi-light-html-tests</module>
         <module>jdi-bdd-tests</module>
