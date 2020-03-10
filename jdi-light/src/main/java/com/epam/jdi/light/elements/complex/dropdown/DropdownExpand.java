@@ -7,8 +7,11 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
+import com.epam.jdi.tools.map.MapArray;
+import org.openqa.selenium.*;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.TextTypes.*;
@@ -27,7 +30,8 @@ public class DropdownExpand extends UIListBase<UISelectAssert<?,?>>
         return linked(expandLocator, "expand");
     }
 
-    public String valueLocator = "input,button";
+    public String valueLocator = "input span:not(.caret),button span:not(.caret)";
+    @Override
     public UIElement value() { return linked(valueLocator, "value"); }
 
     public String listLocator = "li";
@@ -68,7 +72,7 @@ public class DropdownExpand extends UIListBase<UISelectAssert<?,?>>
         if (index < 1)
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
         expand();
-        list().select(index-1);
+        list().select(index);
         if (autoClose)
             close();
     }
@@ -104,7 +108,8 @@ public class DropdownExpand extends UIListBase<UISelectAssert<?,?>>
         if (isNotBlank(value)) {
             valueLocator = value;
             expandLocator = isNotBlank(expand)
-                    ? expand : value;
+                    ? expand
+                    : value;
         } else if (isNotBlank(expand))
             expandLocator = expand;
         if (isNotBlank(list))
@@ -119,17 +124,4 @@ public class DropdownExpand extends UIListBase<UISelectAssert<?,?>>
         setup(j.root(), j.value(), j.list(), j.expand());
         autoClose = j.autoclose();
     }
-    @JDIAction("Check that '{name}' is displayed") @Override
-    public boolean isDisplayed() {
-        return value().isDisplayed();
-    }
-    @JDIAction("Check that '{name}' is hidden") @Override
-    public boolean isHidden() {
-        return value().isHidden();
-    }
-    @JDIAction("Check that '{name}' is displayed") @Override
-    public boolean isEnabled() {
-        return value().isEnabled();
-    }
-
 }

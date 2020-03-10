@@ -33,7 +33,7 @@ public class BaseValidations {
         //Rectangle rect = el.getRect();
         //assertTrue(rect.height > 0 && rect.width > 0 && rect.x > 0 && rect.y > 0, "Size: " + location);
         logger.info("Check setAttribute");
-        el.core().setAttribute("test-jdi", "test-value");
+        el.setAttribute("test-jdi", "test-value");
         assertEquals(el.attr("test-jdi"), "test-value");
         logger.info("Check highlight");
         el.highlight("blue");

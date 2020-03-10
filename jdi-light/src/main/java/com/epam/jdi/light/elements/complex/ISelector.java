@@ -17,7 +17,7 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     @JDIAction("Select '{0}' in '{name}'")
     default void select(String value) { list().select(value); }
     @JDIAction("Select '{0}' in '{name}'")
-    default void select(int index) { list().select(index-1); }
+    default void select(int index) { list().select(index); }
     @JDIAction("Select '{0}' in '{name}'")
     default <TEnum extends Enum<?>> void select(TEnum value) {
         select(getEnumValue(value));
@@ -39,7 +39,7 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     @JDIAction("Is '{0}' selected")
     default boolean selected(String option) { return list().selected(option); }
     @JDIAction("Is '{0}' selected")
-    default boolean selected(int index) { return list().selected(index-1); }
+    default boolean selected(int index) { return list().selected(index); }
     @JDIAction(level = DEBUG)
     default List<String> values() { return list().values(); }
     @JDIAction(level = DEBUG)

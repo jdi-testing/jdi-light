@@ -44,7 +44,7 @@ public class PerformanceTests implements TestsInit {
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void vanishButtonTest() {
-        durationImmediately(() -> suspendButton.is().displayed());
+        durationImmediately(() -> suspendButton.is().hidden());
         durationMoreThan(3, () -> ghostButton.is().disappear());
     }
     //if test fails then run `mvn clean install` in module JDI Light
@@ -153,7 +153,7 @@ public class PerformanceTests implements TestsInit {
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void vanishButtonUITest() {
-        durationImmediately(() -> suspendButtonUI.is().displayed());
+        durationImmediately(() -> suspendButtonUI.is().hidden());
         durationMoreThan(3, () -> ghostButtonUI.is().disappear());
     }
     //if test fails then run `mvn clean install` in module JDI Light

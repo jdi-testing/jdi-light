@@ -721,7 +721,7 @@ public class UIElement extends JDIBase
     protected boolean displayed() {
         try {
             return getWebElement().isDisplayed();
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             return false;
         }
     }

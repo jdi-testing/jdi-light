@@ -95,7 +95,7 @@ public class DropdownCustomTests implements TestsInit {
     }
     @Test
     public void baseValidationTest() {
-        baseValidation(colorsCustom);
+        baseValidation(colorsCustom.value());
     }
 }
 

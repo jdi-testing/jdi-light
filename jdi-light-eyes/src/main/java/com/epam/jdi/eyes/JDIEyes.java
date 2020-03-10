@@ -42,7 +42,11 @@ public class JDIEyes {
         overrideAction("visualCheck", obj -> {
             try {
                 ProceedingJoinPoint jp = (ProceedingJoinPoint) obj;
-                if (!isClass(jp.getThis().getClass(), IBaseElement.class))
+                if (jp.getThis() == null) {
+                    visualCheckPage(WebPage.getCurrentPage());
+                    return;
+                }
+                if (!isClass(getJpClass(jp), IBaseElement.class))
                     return;
                 IBaseElement ui = (IBaseElement) jp.getThis();
                 String name = getBeforeLogString(jp);

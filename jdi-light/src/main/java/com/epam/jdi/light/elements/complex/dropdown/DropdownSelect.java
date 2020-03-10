@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.complex.dropdown;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.tools.func.JFunc1;
@@ -55,15 +56,8 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert<?,?>> implement
     public List<String> values(TextTypes type) { return selector().values(); }
 
     @Override
-    public UISelectAssert is() {
+    public UISelectAssert<?,?> is() {
         return new UISelectAssert<>().set(this);
     }
-    @Override
-    public boolean isEnabled() { return list().isEnabled(); }
-    @Override
-    public boolean isDisabled() { return !isEnabled(); }
-    @Override
-    public boolean isDisplayed() { return list().isDisplayed(); }
-    @Override
-    public boolean isHidden() { return list().isHidden(); }
+
 }

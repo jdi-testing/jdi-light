@@ -50,7 +50,7 @@ public class Selector extends UIBaseElement<UISelectAssert<?,?>>
     public void select(int index) {
         if (index < 1)
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
-        asSelect().selectByIndex(index-1);
+        asSelect().selectByIndex(index - 1);
     }
 
     /**

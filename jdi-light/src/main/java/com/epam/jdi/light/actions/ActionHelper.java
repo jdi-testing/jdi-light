@@ -387,18 +387,31 @@ public class ActionHelper {
                 s -> s.getMethodName().equals("jdiAround") && s.getClassName().equals(name))
                 .size();
     }
+    private static String getMethodName(ProceedingJoinPoint jp) {
+        String className = getJpClass(jp).getSimpleName();
+        String methodName = getJpMethod(jp).getMethod().getName();
+        return className + "." + methodName;
+    }
+    public static Class<?> getJpClass(ProceedingJoinPoint jp) {
+        return jp.getThis() != null
+            ? jp.getThis().getClass()
+            : jp.getSignature().getDeclaringType();
+    }
     public static Object defaultAction(ActionObject jInfo) throws Throwable {
+        logger.debug("defaultAction: " + getMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         return jInfo.overrideAction() != null
                 ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
     }
     public static Object stableAction(ActionObject jInfo) {
+        logger.debug("stableAction: " + getMethodName(jInfo.jp()));
         String exceptionMsg = "";
         jInfo.setElementTimeout();
         long start = currentTimeMillis();
         Throwable exception = null;
         do {
             try {
+                logger.debug("do-while: " + getMethodName(jInfo.jp()));
                 Object result = jInfo.overrideAction() != null
                     ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
                 if (!condition(jInfo.jp())) continue;

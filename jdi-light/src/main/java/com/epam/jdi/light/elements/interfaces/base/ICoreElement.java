@@ -38,6 +38,7 @@ public interface ICoreElement extends IBaseElement {
     default Point getLocation() { return core().getLocation(); }
     default Dimension getSize() { return core().getSize(); }
     default void show() { core().show(); }
+    default void setAttribute(String name, String value) { core().setAttribute(name, value); }
     default String attr(String name) { return core().attr(name); }
     default MapArray<String, String> attrs() { return core().attrs(); }
     default String css(String prop) { return core().css(prop); }

@@ -98,7 +98,7 @@ public class DropdownExTests implements TestsInit {
     }
     @Test
     public void baseValidationTest() {
-        baseValidation(colors);
+        baseValidation(colors.value());
     }
 }
 

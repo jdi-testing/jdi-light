@@ -207,10 +207,13 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             return elements.get().get(getIndex).value;
         return (locator.isTemplate()
             ? tryGetByIndex(getIndex)
-            : locator.isXPath()
-                ? new UIElement(base(), locator.addIndex(getIndex), index+"", parent)
-                : initElement(() -> getList(getIndex+1).get(getIndex)))
+            : getElementByLocator(getIndex, index))
         .setName(nameFromIndex(getIndex));
+    }
+    private UIElement getElementByLocator(int getIndex, int index) {
+        return locator.isXPath()
+            ? new UIElement(base(), locator.addIndex(getIndex), index+"", parent)
+            : initElement(() -> getList(getIndex+1).get(getIndex));
     }
     protected UIElement tryGetByIndex(int index) {
         try {
@@ -280,9 +283,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public void check(int... indexes) {
         List<Integer> listIndexes = toList(indexes);
         int max = max(Ints.asList(indexes));
-        MultiMap<String, UIElement> elements = elements(max - startIndex + 1);
+        MultiMap<String, UIElement> elementsMap = elements(max - startIndex + 1);
         int i = startIndex;
-        for (UIElement value : elements.values()) {
+        for (UIElement value : elementsMap.values()) {
             if (value.isDisabled()) continue;
             if (selected(value) && !listIndexes.contains(i)
                     || !selected(value) && listIndexes.contains(i))
@@ -294,9 +297,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public void uncheck(int... indexes) {
         List<Integer> listIndexes = toList(indexes);
         int max = max(Ints.asList(indexes));
-        MultiMap<String, UIElement> elements = elements(max - startIndex + 1);
+        MultiMap<String, UIElement> elementsMap = elements(max - startIndex + 1);
         int i = startIndex;
-        for (UIElement value : elements.values()) {
+        for (UIElement value : elementsMap.values()) {
             if (value.isDisabled()) continue;
             if (selected(value) && listIndexes.contains(i)
                     || !selected(value) && !listIndexes.contains(i))

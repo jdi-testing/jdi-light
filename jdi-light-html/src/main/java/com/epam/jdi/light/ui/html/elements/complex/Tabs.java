@@ -79,7 +79,7 @@ public class Tabs extends UIListBase<UISelectAssert<?,?>> {
         return list().listEnabled().size() > 0;
     }
     @Override
-    public UISelectAssert is() {
+    public UISelectAssert<?,?> is() {
         return new UISelectAssert<>().set(this);
     }
 }

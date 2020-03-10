@@ -3,6 +3,7 @@ package com.epam.jdi.light.asserts.generic;
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.*;
@@ -49,9 +50,7 @@ public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends B
      */
     @JDIAction("Assert that '{name}' is disappear")
     public A disappear() {
-        displayed();
-        hidden();
-        return (A) this;
+        return hidden();
     }
 
     /**
@@ -59,7 +58,9 @@ public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends B
      */
     @JDIAction("Assert that '{name}' is hidden")
     public A hidden() {
+        WebSettings.logger.info("start");
         jdiAssert(element.isHidden() ? "hidden" : "displayed", Matchers.is("hidden"));
+        WebSettings.logger.info("end");
         return (A) this;
     }
 

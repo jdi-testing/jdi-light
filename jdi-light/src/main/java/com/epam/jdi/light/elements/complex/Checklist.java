@@ -57,7 +57,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
-        list().select(index-1);
+        list().select(index);
     }
     /**
      * Selects particular elements by index
