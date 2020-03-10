@@ -443,7 +443,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (lines == null || lines.size() == 0)
             return null;
         List<String> result = new ArrayList<>();
-        for (int i = 0; i < header().size(); i++)
+        for (int i = 1; i <= header().size(); i++)
             result.add(lines.get(i).getText());
         return initLine(result, header());
     }

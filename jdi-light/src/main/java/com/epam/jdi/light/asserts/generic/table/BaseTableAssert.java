@@ -3,6 +3,7 @@ package com.epam.jdi.light.asserts.generic.table;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.*;
+import com.epam.jdi.tools.LinqUtils;
 import org.hamcrest.*;
 
 import java.util.*;
@@ -129,15 +130,17 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
         List<Line> tableRows = table().rowsImages();
         for (int i = 0; i < table().count(); i++) {
             Line tableRow = tableRows.get(i);
-            jdiAssert(tableRow.visualCompareTo(findRow(rows, tableRow.get(keyColumn), keyColumn)), Matchers.is(true));
+            String valueToSearch = tableRow.get(keyColumn);
+            Line searchRow = findRow(rows, valueToSearch, keyColumn);
+            jdiAssert(tableRow.visualCompareTo(searchRow), Matchers.is(true));
         }
         return (A) this;
     }
     private Line findRow(List<Line> rows, String name, String columnName) {
-        for (Line line : rows)
-            if (line.get(columnName).equals(name))
-                return line;
-        throw exception("Can't find %s row with column %s", name, columnName);
+        Line line = LinqUtils.first(rows, l -> l.get(columnName).equals(name));
+        if (line == null)
+            throw exception("Can't find %s row with column %s", name, columnName);
+        return line;
     }
     @JDIAction("Assert that '{name}' is sorted by ascending")
     public A sortedByAsc(String columnName) {

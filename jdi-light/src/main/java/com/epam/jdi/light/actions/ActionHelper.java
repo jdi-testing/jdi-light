@@ -453,8 +453,6 @@ public class ActionHelper {
     );
     static boolean condition(ProceedingJoinPoint jp) {
         String conditionName = getConditionName(jp);
-        return CONDITIONS.has(conditionName)
-                ? CONDITIONS.get(conditionName).execute(jp)
-                : true;
+        return CONDITIONS.has(conditionName) && CONDITIONS.get(conditionName).execute(jp) || !CONDITIONS.has(conditionName) && true;
     }
 }
