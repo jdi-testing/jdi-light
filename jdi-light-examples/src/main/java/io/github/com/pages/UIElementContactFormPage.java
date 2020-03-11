@@ -6,9 +6,9 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
-import com.epam.jdi.light.elements.pageobjects.annotations.smart.SClass;
-import com.epam.jdi.light.elements.pageobjects.annotations.smart.SId;
-import com.epam.jdi.light.elements.pageobjects.annotations.smart.SText;
+import com.epam.jdi.light.elements.pageobjects.annotations.smart.SmartClass;
+import com.epam.jdi.light.elements.pageobjects.annotations.smart.SmartId;
+import com.epam.jdi.light.elements.pageobjects.annotations.smart.SmartText;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.Smart;
 
 import static com.epam.jdi.light.common.TextTypes.TEXT;
@@ -33,14 +33,14 @@ public class UIElementContactFormPage extends WebPage {
     @Css("li[class='summ-res']") @GetAny @GetVisible @GetVisibleEnabled public static UIElement sumGet;
     @ByText("Submit") @GetShowInView public static UIElement submitGetShowInView;
     @ByText("Submit") @PageName("Metal and Colors") public static UIElement submitPage; //as contact page is default set different page
-    @Name("SId") @SId public static UIElement sId;
-    @Name("SText") @SText public static UIElement sText;
+    @Name("SId") @SmartId public static UIElement sId;
+    @Name("SText") @SmartText public static UIElement sText;
     @Name("Smart") @Smart public static UIElement smart;
     @Name("Smart") @Smart("id") public static UIElement smartId;
-    @Name("SClass") @SClass public static UIElement sClass;
+    @Name("SClass") @SmartClass public static UIElement sClass;
     @UI public static UIElement uiNull;
-    @FindBy(css="findBy") public static UIElement findBy;
-    @FindBy public static UIElement findByNull;
+    @FindByUI(css="findBy") public static UIElement findBy;
+    @FindByUI public static UIElement findByNull;
     @VisualCheck public static UIElement visualCheck;
 }
 

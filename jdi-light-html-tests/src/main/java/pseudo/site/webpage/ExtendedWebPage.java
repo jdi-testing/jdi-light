@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
-import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
+import com.epam.jdi.light.elements.pageobjects.annotations.FindByUI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -17,11 +17,11 @@ import pseudo.site.section.SomeData;
 import java.util.List;
 
 public class ExtendedWebPage extends ExtendWebPage {
-    @FindBy(id = "webElementPackage")
+    @FindByUI(id = "webElementPackage")
     WebElement webElementPackage;
-    @FindBy(id = "webElementPublic")
+    @FindByUI(id = "webElementPublic")
     public WebElement webElementPublic;
-    @FindBy(id = "webElementPrivate")
+    @FindByUI(id = "webElementPrivate")
     private WebElement webElementPrivate;
     @UI(".webElementPackageUI")
     WebElement webElementPackageUI;
@@ -32,11 +32,11 @@ public class ExtendedWebPage extends ExtendWebPage {
     @XPath("//*[@class='webElementPublicXPath']")
     public WebElement webElementPublicXPath;
 
-    @FindBy(id = "listWebElementPackage")
+    @FindByUI(id = "listWebElementPackage")
     List<WebElement> listWebElementPackage;
-    @FindBy(id = "listWebElementPublic")
+    @FindByUI(id = "listWebElementPublic")
     public List<WebElement> listWebElementPublic;
-    @FindBy(id = "listWebElementPrivate")
+    @FindByUI(id = "listWebElementPrivate")
     private List<WebElement> listWebElementPrivate;
     @UI(".listWebElementPackageUI")
     List<WebElement> listWebElementPackageUI;
@@ -47,11 +47,11 @@ public class ExtendedWebPage extends ExtendWebPage {
     @XPath("//*[@class='listWebElementPublicXPath']")
     public List<WebElement> listWebElementPublicXPath;
 
-    @FindBy(id = "uielementPackage")
+    @FindByUI(id = "uielementPackage")
     UIElement uielementPackage;
-    @FindBy(id = "uielementPublic")
+    @FindByUI(id = "uielementPublic")
     public UIElement uielementPublic;
-    @FindBy(id = "uielementPrivate")
+    @FindByUI(id = "uielementPrivate")
     private UIElement uielementPrivate;
     @UI(".uielementPackageUI")
     UIElement uielementPackageUI;
@@ -62,11 +62,11 @@ public class ExtendedWebPage extends ExtendWebPage {
     @XPath("//*[@class='uielementPublicXPath']")
     public UIElement uielementPublicXPath;
 
-    @FindBy(id = "buttonPackage")
+    @FindByUI(id = "buttonPackage")
     Button buttonPackage;
-    @FindBy(id = "buttonPublic")
+    @FindByUI(id = "buttonPublic")
     public Button buttonPublic;
-    @FindBy(id = "buttonPrivate")
+    @FindByUI(id = "buttonPrivate")
     private Button buttonPrivate;
     @UI(".buttonPackageUI")
     Button buttonPackageUI;
@@ -77,11 +77,11 @@ public class ExtendedWebPage extends ExtendWebPage {
     @XPath("//*[@class='buttonPublicXPath']")
     public UIElement buttonPublicXPath;
 
-    @FindBy(id = "listUIElementPackage")
+    @FindByUI(id = "listUIElementPackage")
     List<UIElement> listUIElementPackage;
-    @FindBy(id = "listUIElementPublic")
+    @FindByUI(id = "listUIElementPublic")
     public List<UIElement> listUIElementPublic;
-    @FindBy(id = "listUIElementPrivate")
+    @FindByUI(id = "listUIElementPrivate")
     private List<UIElement> listUIElementPrivate;
     @UI(".listUIElementPackageUI")
     List<UIElement> listUIElementPackageUI;
@@ -92,11 +92,11 @@ public class ExtendedWebPage extends ExtendWebPage {
     @XPath("//*[@class='listUIElementPublicXPath']")
     public List<UIElement> listUIElementPublicXPath;
 
-    @FindBy(id = "listButtonPackage")
+    @FindByUI(id = "listButtonPackage")
     List<Button> listButtonPackage;
-    @FindBy(id = "listButtonPublic")
+    @FindByUI(id = "listButtonPublic")
     public List<Button> listButtonPublic;
-    @FindBy(id = "listButtonPrivate")
+    @FindByUI(id = "listButtonPrivate")
     private List<Button> listButtonPrivate;
     @UI(".listButtonPackageUI")
     List<Button> listButtonPackageUI;
@@ -107,11 +107,11 @@ public class ExtendedWebPage extends ExtendWebPage {
     @XPath("//*[@class='listButtonPublicXPath']")
     public List<Button> listButtonPublicXPath;
 
-    @FindBy(id = "webListPackage")
+    @FindByUI(id = "webListPackage")
     WebList webListPackage;
-    @FindBy(id = "webListPublic")
+    @FindByUI(id = "webListPublic")
     public WebList webListPublic;
-    @FindBy(id = "webListPrivate")
+    @FindByUI(id = "webListPrivate")
     private WebList webListPrivate;
     @UI(".webListPackageUI")
     WebList webListPackageUI;
@@ -122,11 +122,11 @@ public class ExtendedWebPage extends ExtendWebPage {
     @XPath("//*[@class='webListPublicXPath']")
     public WebList webListPublicXPath;
 
-    @FindBy(id = "uilistQuestionPackage")
+    @FindByUI(id = "uilistQuestionPackage")
     DataList<CustomSection, ?> uilistQuestionPackage;
-    @FindBy(id = "uilistQuestionPublic")
+    @FindByUI(id = "uilistQuestionPublic")
     public DataList<CustomSection, ?> uilistQuestionPublic;
-    @FindBy(id = "uilistQuestionPrivate")
+    @FindByUI(id = "uilistQuestionPrivate")
     private DataList<CustomSection, ?> uilistQuestionPrivate;
     @UI(".uilistQuestionPackageUI")
     DataList<CustomSection, ?> uilistQuestionPackageUI;
@@ -137,11 +137,11 @@ public class ExtendedWebPage extends ExtendWebPage {
     @XPath("//*[@class='uilistQuestionPublicXPath']")
     public DataList<CustomSection, ?> uilistQuestionPublicXPath;
 
-    @FindBy(id = "uilistSomedataPackage")
+    @FindByUI(id = "uilistSomedataPackage")
     DataList<CustomSection, SomeData> uilistSomedataPackage;
-    @FindBy(id = "uilistSomedataPublic")
+    @FindByUI(id = "uilistSomedataPublic")
     public DataList<CustomSection, SomeData> uilistSomedataPublic;
-    @FindBy(id = "uilistSomedataPrivate")
+    @FindByUI(id = "uilistSomedataPrivate")
     private DataList<CustomSection, SomeData> uilistSomedataPrivate;
     @UI(".uilistSomedataPackageUI")
     DataList<CustomSection, SomeData> uilistSomedataPackageUI;

@@ -102,7 +102,7 @@ public class WebAnnotationsUtil {
         return null;
     }
 
-    public static By findByToBy(FindBy locator) {
+    public static By findByToBy(FindByUI locator) {
         if (locator == null) return null;
 
         if (!"".equals(locator.xpath()))

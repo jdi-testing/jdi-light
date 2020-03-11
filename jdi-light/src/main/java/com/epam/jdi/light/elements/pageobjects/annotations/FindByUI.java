@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 @Repeatable(FindBys.class)
-public @interface FindBy {
+public @interface FindByUI {
     // Selenium
     String css() default "";
     String tagName() default "";

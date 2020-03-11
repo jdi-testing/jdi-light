@@ -18,11 +18,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.*;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.lang.annotation.Annotation;
@@ -118,7 +116,7 @@ public class InitActions {
     public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
         $("Root", aRule(Root.class, (e,a)-> e.locator.isRoot = true)),
         $("Frame", aRule(Frame.class, (e,a)-> e.setFrames(getFrames(a)))),
-        $("FindBySelenium", aRule(org.openqa.selenium.support.FindBy.class,
+        $("FindBy", aRule(org.openqa.selenium.support.FindBy.class,
             (e,a)-> e.setLocator(findByToBy(a)))),
         $("Css", aRule(Css.class, (e,a)-> e.setLocator(findByToBy(a)))),
         $("XPath", aRule(XPath.class, (e,a)-> e.setLocator(findByToBy(a)))),
@@ -129,38 +127,38 @@ public class InitActions {
         $("SetTextAs", aRule(SetTextAs.class, (e,a)-> e.setTextType = a.value())),
         $("NoCache", aRule(NoCache.class, (e,a)-> e.offCache())),
 
-        $("Timeout", aRule(WaitTimeout.class, (e,a)-> e.waitSec(a.value()))),
+        $("WaitTimeout", aRule(WaitTimeout.class, (e,a)-> e.waitSec(a.value()))),
         $("NoWait", aRule(NoWait.class, (e,a)-> e.waitSec(0))),
         $("Name", aRule(Name.class, (e,a)-> e.setName(a.value()))),
         $("GetAny", aRule(GetAny.class, (e, a)-> e.noValidation())),
         $("GetVisible", aRule(GetVisible.class, (e, a)-> e.searchVisible())),
         $("GetVisibleEnabled", aRule(GetVisibleEnabled.class, (e, a)-> e.visibleEnabled())),
         $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.inView())),
-        $("Page", aRule(PageName.class, (e, a)-> e.setPage(a.value()))),
+        $("PageName", aRule(PageName.class, (e, a)-> e.setPage(a.value()))),
 
-        $("Smart Id", aRule(SId.class, (e,a) -> {
+        $("SmartId", aRule(SmartId.class, (e, a) -> {
             e.setLocator("#" + toKebabCase(e.getName()));
             e.locator.isRoot = true;
         })),
-        $("Smart Text", aRule(SText.class, (e, a) -> {
+        $("SmartText", aRule(SmartText.class, (e, a) -> {
             e.setLocator(asTextLocator(splitCamelCase(e.getName())));
         })),
-        $("Smart Name", aRule(SName.class, (e, a) -> {
+        $("SmartName", aRule(SmartName.class, (e, a) -> {
             e.setLocator(format("[name='%s']", toKebabCase(e.getName())));
         })),
         $("Smart", aRule(Smart.class, (e, a) -> {
             e.setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName())));
         })),
-        $("Smart Class", aRule(SClass.class, (e, a) -> {
+        $("SmartClass", aRule(SmartClass.class, (e, a) -> {
             e.setLocator(format(".%s", toKebabCase(e.getName())));
         })),
-        $("ListUI", aRule(UI.class, (e,a,f)-> {
+        $("UI", aRule(UI.class, (e,a,f)-> {
             UI[] uis = f.getAnnotationsByType(UI.class);
             if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
                 e.setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
             })),
-        $("FindByUI", aRule(FindBy.class, (e,a,f)-> {
-            FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
+        $("FindByUI", aRule(FindByUI.class, (e, a, f)-> {
+            FindByUI[] jfindbys = f.getAnnotationsByType(FindByUI.class);
             if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
                 e.setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
             })),
