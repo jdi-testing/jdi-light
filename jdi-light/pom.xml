@@ -12,7 +12,7 @@
 
     <properties>
         <surefire.version>2.20</surefire.version>
-        <allure.maven>2.9</allure.maven>
+        <allure.maven>2.10.0</allure.maven>
         <aspectj.version>1.9.5</aspectj.version>
         <aspectj.maven>1.11</aspectj.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
