@@ -4,6 +4,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
+
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.ages;
@@ -24,6 +26,7 @@ public class MultiSelectorTests implements TestsInit {
         html5Page.shouldBeOpened();
         ages.check(text);
     }
+
     String text = "Steam";
 
     @Test
@@ -42,14 +45,17 @@ public class MultiSelectorTests implements TestsInit {
         ages.check(Wood, Steam);
         assertEquals(ages.checked(), asList("Steam", "Wood"));
     }
+
     @Test
     public void selectNumTest() {
         ages.check(1, 5);
         assertEquals(ages.checked(), asList("Electro", "Wood"));
+
     }
+
     @Test
     public void selectedTest() {
-        assertEquals(ages.checked(), asList(text));
+        assertEquals(ages.checked(), Collections.singletonList(text));
     }
 
     @Test

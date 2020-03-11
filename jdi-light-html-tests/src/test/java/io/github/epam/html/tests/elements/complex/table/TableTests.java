@@ -21,7 +21,7 @@ import static org.testng.Assert.assertEquals;
 
 public class TableTests implements TestsInit {
     private boolean firstTime = true;
-    
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -31,14 +31,14 @@ public class TableTests implements TestsInit {
             firstTime = false;
         }
     }
-    
+
     @Test
     public void tableParamsTest() {
         assertEquals(usersTable.size(), 4);
         assertEquals(usersTable.count(), 6);
         assertThat(usersTable.header(), hasItems("Number", "Type", "User", "Description"));
     }
-    
+
     @Test
     public void previewTest() {
         String value = usersTable.preview();
@@ -51,12 +51,12 @@ public class TableTests implements TestsInit {
                         "5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip" +
                         "6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
     }
-    
+
     @Test
     public void valueTest() {
         String expectedList;
         if ("chrome".equals(usersTable.core().driverName)) {
-            expectedList = "Admin\\n User\\n Manager";
+            expectedList = "Admin\\nUser\\nManager";
         } else if ("firefox".equals(usersTable.core().driverName)) {
             expectedList = "Admin\\nUser\\nManager";
         } else {
@@ -65,34 +65,34 @@ public class TableTests implements TestsInit {
         String value = usersTable.getValue().replaceAll("\r", "");
         assertEquals(value,
                 "||X||Number|Type|User|Description||\n" +
-                        "||1||1|"+expectedList+"|Roman|Wolverine\\nVip||\n" +
-                        "||2||2|"+expectedList+"|Sergey Ivan|Spider Man\\nVip||\n" +
-                        "||3||3|"+expectedList+"|Vladzimir|Punisher\\nVip||\n" +
-                        "||4||4|"+expectedList+"|Helen Bennett|Captain America\\nsome description\\nVip||\n" +
-                        "||5||5|"+expectedList+"|Yoshi Tannamuri|Cyclope\\nsome description\\nVip||\n" +
-                        "||6||6|"+expectedList+"|Giovanni Rovelli|Hulk\\nsome description\\nVip||\n");
+                        "||1||1|" + expectedList + "|Roman|Wolverine\\n Vip||\n" +
+                        "||2||2|" + expectedList + "|Sergey Ivan|Spider Man\\n Vip||\n" +
+                        "||3||3|" + expectedList + "|Vladzimir|Punisher\\n Vip||\n" +
+                        "||4||4|" + expectedList + "|Helen Bennett|Captain America\\nsome description\\n Vip||\n" +
+                        "||5||5|" + expectedList + "|Yoshi Tannamuri|Cyclope\\nsome description\\n Vip||\n" +
+                        "||6||6|" + expectedList + "|Giovanni Rovelli|Hulk\\nsome description\\n Vip||\n");
     }
-    
+
     @Test
     public void dataColumnTestIndex() {
         assertEquals(usersTable.row(2)
                 .asData(MarvelUserSimple.class), SPIDER_MAN_SIMPLE);
     }
-    
+
     @Test
     public void dataFilterTest() {
         assertEquals(usersTable.row(hasValue("Sergey Ivan", inColumn("User")),
                 containsValue("User", inColumn("Type")))
                 .asData(MarvelUserSimple.class), SPIDER_MAN_SIMPLE);
     }
-    
+
     @Test
     public void allDataFilterTest() {
         List<Line> filteredData = usersTable.rows(containsValue("Ivan", inColumn("User")));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0).asData(MarvelUserSimple.class), SPIDER_MAN_SIMPLE);
     }
-    
+
     @Test
     public void commonMatchersTest() {
         usersTable.is().displayed();
@@ -100,38 +100,38 @@ public class TableTests implements TestsInit {
         usersTable.assertThat().size(greaterThan(3));
         usersTable.is().notEmpty().size(lessThanOrEqualTo(6));
     }
-    
+
     // Compare Matchers
     @Test
     public void rowMatcherTest() {
         usersTable.has().rowThat(containsValue("Ivan", inColumn("User")));
     }
-    
+
     @Test
     public void rowsAllTest() {
         usersTable.assertThat().all().rows(containsValue("Vip", inColumn("Description")));
     }
-    
+
     @Test
     public void noRowsTest() {
         usersTable.assertThat().no().rows(containsValue("Alex", inColumn("User")));
     }
-    
+
     @Test
     public void atLeastTest() {
         usersTable.assertThat().atLeast(3).rows(containsValue(" ", inColumn("User")));
     }
-    
+
     @Test
     public void exactMatcherTest() {
         usersTable.assertThat().exact(2).rows(containsValue("R", inColumn("User")));
     }
-    
+
     @Test
     public void rowDataExactMatcherTest() {
         usersTable.assertThat().exact(1).rows(hasValue("Roman", inColumn("User")));
     }
-    
+
     @Test
     public void tableChainTest() {
         usersTable.assertThat()
