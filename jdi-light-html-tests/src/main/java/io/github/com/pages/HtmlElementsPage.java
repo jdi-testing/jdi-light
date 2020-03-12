@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.complex.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.elements.pageobjects.annotations.smart.Smart;
+import com.epam.jdi.light.elements.pageobjects.annotations.smart.*;
 import com.epam.jdi.light.ui.html.elements.common.*;
 import com.epam.jdi.light.ui.html.elements.complex.*;
 
@@ -102,7 +102,7 @@ public class HtmlElementsPage extends WebPage {
     public static Checklist weather;
     @UI("[name=checks-group]")
     public static IsChecklist isWeather;
-    public static Checklist weatherNoLocator;
+    @SName public static Checklist checksGroup;
 
     @UI("[name=colors]")
     public static RadioButtons colors;

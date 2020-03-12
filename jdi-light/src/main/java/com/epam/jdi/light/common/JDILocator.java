@@ -74,8 +74,8 @@ public class JDILocator {
     public String addIndex(int index) {
         String locator = getByLocator(byLocator);
         return locator.equals("..")
-            ? "../*["+index+1+"]"
-            : format("(%s)[%s]", getByLocator(byLocator), index+1);
+            ? "../*["+index+"]"
+            : format("(%s)[%s]", getByLocator(byLocator), index);
     }
     public String addText(String text) {
         return format("(%s)[.='%s']", getByLocator(byLocator), text);
@@ -97,6 +97,9 @@ public class JDILocator {
     private By trimRoot(By by) {
         String byLocator = getByLocator(by).replace("*root*", " ").trim();
         return getByFunc(by).apply(byLocator);
+    }
+    public String printLocator() {
+        return toString().replaceAll("\\{\\{VALUE}}", "%s");
     }
     @Override
     public String toString() {

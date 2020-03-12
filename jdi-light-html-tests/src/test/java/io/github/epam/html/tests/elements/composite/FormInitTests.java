@@ -23,7 +23,7 @@ public class FormInitTests implements TestsInit {
 
     @Test
     public void lightFormInitializationTest() {
-        checkInitializedElement(pseudoFormLight, "No locator", pseudoHeader, "Pseudo Form Light");
+        checkInitializedElement(pseudoFormLight, "smart: #pseudo-form-light", pseudoHeader, "Pseudo Form Light");
     }
 
 }

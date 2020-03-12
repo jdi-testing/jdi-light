@@ -57,7 +57,7 @@ public class ListTests implements TestsInit {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.get(index).getText();
-        }, () -> firstXpath.get(index).getText(), 0.9, 100);
+        }, () -> firstXpath.get(index+1).getText(), 0.9, 100);
     }
 
     private <T> void testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, double expectedRatio, int count) {

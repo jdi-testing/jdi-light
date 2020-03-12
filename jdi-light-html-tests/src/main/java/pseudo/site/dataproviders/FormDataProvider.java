@@ -9,7 +9,7 @@ public class FormDataProvider {
     @DataProvider
     public Object[][] formDataProvider() {
         return new Object[][]{
-                {pseudoForm, "No locator", pseudoHeader, "Pseudo Form"},
+                {pseudoForm, "smart: #pseudo-form", pseudoHeader, "Pseudo Form"},
 
                 {pseudoForm.getFbWebElement(), "css='#fbWebElement-id'", pseudoForm, "Fb Web Element"},
                 {pseudoForm.getFbPublicWebElement(), "css='#fbPublicWebElement-id'", pseudoForm, "Fb Public Web Element"},
@@ -76,35 +76,35 @@ public class FormDataProvider {
     @DataProvider
     public Object[][] smartFormDataProvider() {
         return new Object[][]{
-                {pseudoFormSmart, "No locator", pseudoHeader, "Pseudo Form Smart"},
+                {pseudoFormSmart, "smart: #pseudo-form-smart", pseudoHeader, "Pseudo Form Smart"},
 
-                {pseudoFormSmart.getFbWebElement(), "No locator", pseudoFormSmart, "Fb Web Element"},
-                {pseudoFormSmart.getFbPublicWebElement(), "No locator", pseudoFormSmart, "Fb Public Web Element"},
-                {pseudoFormSmart.getFbPrivateWebElement(), "No locator", pseudoFormSmart, "Fb Private Web Element"},
+                {pseudoFormSmart.getFbWebElement(), "smart: #fb-web-element", pseudoFormSmart, "Fb Web Element"},
+                {pseudoFormSmart.getFbPublicWebElement(), "smart: #fb-public-web-element", pseudoFormSmart, "Fb Public Web Element"},
+                {pseudoFormSmart.getFbPrivateWebElement(), "smart: #fb-private-web-element", pseudoFormSmart, "Fb Private Web Element"},
 
-                {pseudoFormSmart.getFbWebElementList(), "No locator", pseudoFormSmart, "Fb Web Element List"},
-                {pseudoFormSmart.getFbPublicWebElementList(), "No locator", pseudoFormSmart, "Fb Public Web Element List"},
-                {pseudoFormSmart.getFbPrivateWebElementList(), "No locator", pseudoFormSmart, "Fb Private Web Element List"},
+                {pseudoFormSmart.getFbWebElementList(), "smart: #fb-web-element-list", pseudoFormSmart, "Fb Web Element List"},
+                {pseudoFormSmart.getFbPublicWebElementList(), "smart: #fb-public-web-element-list", pseudoFormSmart, "Fb Public Web Element List"},
+                {pseudoFormSmart.getFbPrivateWebElementList(), "smart: #fb-private-web-element-list", pseudoFormSmart, "Fb Private Web Element List"},
 
-                {pseudoFormSmart.getFbUIElement(), "No locator", pseudoFormSmart, "Fb UI Element"},
-                {pseudoFormSmart.getFbPublicUIElement(), "No locator", pseudoFormSmart, "Fb Public UI Element"},
-                {pseudoFormSmart.getFbPrivateUIElement(), "No locator", pseudoFormSmart, "Fb Private UI Element"},
+                {pseudoFormSmart.getFbUIElement(), "smart: #fb-ui-element", pseudoFormSmart, "Fb UI Element"},
+                {pseudoFormSmart.getFbPublicUIElement(), "smart: #fb-public-ui-element", pseudoFormSmart, "Fb Public UI Element"},
+                {pseudoFormSmart.getFbPrivateUIElement(), "smart: #fb-private-ui-element", pseudoFormSmart, "Fb Private UI Element"},
 
-                {pseudoFormSmart.getFbUIElementList(), "No locator", pseudoFormSmart, "Fb UI Element List"},
-                {pseudoFormSmart.getFbPublicUIElementList(), "No locator", pseudoFormSmart, "Fb Public UI Element List"},
-                {pseudoFormSmart.getFbPrivateUIElementList(), "No locator", pseudoFormSmart, "Fb Private UI Element List"},
+                {pseudoFormSmart.getFbUIElementList(), "smart: #fb-ui-element-list", pseudoFormSmart, "Fb UI Element List"},
+                {pseudoFormSmart.getFbPublicUIElementList(), "smart: #fb-public-ui-element-list", pseudoFormSmart, "Fb Public UI Element List"},
+                {pseudoFormSmart.getFbPrivateUIElementList(), "smart: #fb-private-ui-element-list", pseudoFormSmart, "Fb Private UI Element List"},
 
-                {pseudoFormSmart.getFbButton(), "No locator", pseudoFormSmart, "Fb Button"},
-                {pseudoFormSmart.getFbPublicButton(), "No locator", pseudoFormSmart, "Fb Public Button"},
-                {pseudoFormSmart.getFbPrivateButton(), "No locator", pseudoFormSmart, "Fb Private Button"},
+                {pseudoFormSmart.getFbButton(), "smart: #fb-button", pseudoFormSmart, "Fb Button"},
+                {pseudoFormSmart.getFbPublicButton(), "smart: #fb-public-button", pseudoFormSmart, "Fb Public Button"},
+                {pseudoFormSmart.getFbPrivateButton(), "smart: #fb-private-button", pseudoFormSmart, "Fb Private Button"},
 
-                {pseudoFormSmart.getFbButtonList(), "No locator", pseudoFormSmart, "Fb Button List"},
-                {pseudoFormSmart.getFbPublicButtonList(), "No locator", pseudoFormSmart, "Fb Public Button List"},
-                {pseudoFormSmart.getFbPrivateButtonList(), "No locator", pseudoFormSmart, "Fb Private Button List"},
+                {pseudoFormSmart.getFbButtonList(), "smart: #fb-button-list", pseudoFormSmart, "Fb Button List"},
+                {pseudoFormSmart.getFbPublicButtonList(), "smart: #fb-public-button-list", pseudoFormSmart, "Fb Public Button List"},
+                {pseudoFormSmart.getFbPrivateButtonList(), "smart: #fb-private-button-list", pseudoFormSmart, "Fb Private Button List"},
 
-                {pseudoFormSmart.getFbWebList(), "No locator", pseudoFormSmart, "Fb Web List"},
-                {pseudoFormSmart.getFbPublicWebList(), "No locator", pseudoFormSmart, "Fb Public Web List"},
-                {pseudoFormSmart.getFbPrivateWebList(), "No locator", pseudoFormSmart, "Fb Private Web List"}
+                {pseudoFormSmart.getFbWebList(), "smart: #fb-web-list", pseudoFormSmart, "Fb Web List"},
+                {pseudoFormSmart.getFbPublicWebList(), "smart: #fb-public-web-list", pseudoFormSmart, "Fb Public Web List"},
+                {pseudoFormSmart.getFbPrivateWebList(), "smart: #fb-private-web-list", pseudoFormSmart, "Fb Private Web List"}
         };
     }
 }

@@ -15,7 +15,7 @@ import static com.epam.jdi.tools.StringUtils.*;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends BaseAssert<E>
+public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAssert<E>
     implements CommonAssert<A> {
     /**
      * Check that the element is displayed
@@ -58,9 +58,7 @@ public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends B
      */
     @JDIAction("Assert that '{name}' is hidden")
     public A hidden() {
-        WebSettings.logger.info("start");
         jdiAssert(element.isHidden() ? "hidden" : "displayed", Matchers.is("hidden"));
-        WebSettings.logger.info("end");
         return (A) this;
     }
 

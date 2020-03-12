@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public abstract class UIBaseElement<A extends UIAssert<?,?>>
+public abstract class UIBaseElement<A extends UIAssert>
         implements ICoreElement, HasAssert<A> {
     protected UIElement uiElement;
     public JDIBase base() { return core().base(); }

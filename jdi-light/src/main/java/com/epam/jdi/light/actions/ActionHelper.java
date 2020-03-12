@@ -231,7 +231,7 @@ public class ActionHelper {
             reverse(failedMethods);
             logger.error("Failed actions chain: " + print(failedMethods, " > "));
         }
-        return exception(ex, getExceptionAround(ex, jInfo.topLevel()));
+        return exception(ex, getExceptionAround(ex, jInfo));
     }
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
     public static void logFailure(ActionObject jInfo) {
@@ -364,12 +364,16 @@ public class ActionHelper {
         if (!failedMethods.contains(result))
             failedMethods.add(result);
     }
-    public static String getExceptionAround(Throwable ex, boolean top) {
+    public static String getExceptionAround(Throwable ex, ActionObject jInfo) {
         String result = safeException(ex);
         while (result.contains("\n\n"))
             result = result.replaceFirst("\\n\\n", LINE_BREAK);
         result = result.replace("java.lang.RuntimeException:", "").trim();
-        if (top)
+        Object[] args = jInfo.jp().getArgs();
+        if (result.contains("{{VALUE}}") && args.length > 0) {
+            result = result.replaceAll("\\{\\{VALUE}}", args[0].toString());
+        }
+        if (jInfo.topLevel())
             result = "[" + nowTime("mm:ss.S") + "] " + result.replaceFirst("\n", "");
         return result;
     }
@@ -421,8 +425,7 @@ public class ActionHelper {
                 try {
                     exceptionMsg = safeException(ex);
                     Thread.sleep(200);
-                } catch (Exception ignore) {
-                }
+                } catch (Exception ignore) { }
             }
         } while (currentTimeMillis() - start < jInfo.timeout() * 1000);
         throw exception(exception, getFailedMessage(jInfo, exceptionMsg));

@@ -53,7 +53,7 @@ public class SoftAsserts implements TestsInit {
             assertList(tr.getMessage(), asList(
                 "Expected: is \"hidden\"", "but: was \"displayed\",",
                 "Expected: is \"disabled\"",  "but: was \"enabled\",",
-                "Expected: is \"disappeared\"", "but: was \"displayed\",",
+                "Expected: is \"hidden\"", "but: was \"displayed\",",
                 "Expected: is \"Big Red *** Button-Input\"", "but: was \"Big Red Button-Input\""
             ));
         }

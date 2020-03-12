@@ -22,21 +22,22 @@ public class IssueTest69 {
 
     @Test(dataProvider = "paragraphs")
     public void issue69Tests(String paragraphName) {
-        Paragraph p = paragraph(paragraphName).get(0);
-        assertEquals(p.toString(), "element_0_1,element_0_2,element_0_3");
+        int index = paragraphName.contains("template") ? 1 : 2;
+        Paragraph p = paragraph(paragraphName).get(index);
+        assertEquals(p.toString(), "element_1_1,element_1_2,element_1_3");
     }
 
     ParagraphData expectedParagraph = new ParagraphData().set(p-> {
-        p.paragraph="element_0_1"; p.paragraph2="element_0_2"; p.paragraph3="element_0_3";
+        p.paragraph="element_1_1"; p.paragraph2="element_1_2"; p.paragraph3="element_1_3";
     });
     @Test
     public void issue69DataTests() {
-        ParagraphData p = templateData.getData(0);
+        ParagraphData p = templateData.getData(1);
         assertEquals(p, expectedParagraph);
     }
     @Test
     public void issue69DataParagraphTests() {
-        ParagraphData p = paragraphsData.getData(0);
+        ParagraphData p = paragraphsData.getData(2);
         assertEquals(p, expectedParagraph);
     }
 

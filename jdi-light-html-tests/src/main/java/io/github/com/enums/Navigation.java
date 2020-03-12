@@ -9,7 +9,7 @@ public enum Navigation {
     Support("Support"),
     Dates("Dates"),
     Service("Service"),
-    ComplexTable("Complex Table "),
+    ComplexTable("Complex Table"),
     SimpleTable("Simple Table"),
     UserTable("User Table"),
     TableWithPages("Table with pages"),

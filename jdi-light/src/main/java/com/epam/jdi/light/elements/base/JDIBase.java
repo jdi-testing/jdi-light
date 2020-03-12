@@ -443,7 +443,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public String printContext() {
         JDIBase jdiBase = getBase(parent);
         if (jdiBase == null) return "";
-        String locator = jdiBase.getLocator() == null ? "" : jdiBase.locator.toString();
+        String locator = jdiBase.getLocator() == null
+                ? ""
+                : jdiBase.locator.printLocator();
         if (jdiBase.parent == null)
             return locator;
         if (isBlank(locator))
@@ -452,8 +454,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public String printFullLocator() {
         return parent == null || isBlank(printContext())
-                ? locator.toString()
-                : printContext() + ">" + locator.toString();
+                ? locator.printLocator()
+                : printContext() + ">" + locator.printLocator();
     }
     private void initContext() {
         context = printFullLocator();

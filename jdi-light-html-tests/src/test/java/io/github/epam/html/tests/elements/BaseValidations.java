@@ -73,12 +73,12 @@ public class BaseValidations {
     private static void validateDuration(long min, long max, JAction action) {
         long passedTime = getDuration(action);
         assertThat(passedTime, greaterThan(min));
-        assertThat(passedTime, lessThan(max));
+        assertThat(passedTime, lessThan(max+500));
     }
     private static <T> T validateDuration(long min, long max, JFunc<T> func) {
         Pair<Long, T> result = getDuration(func);
         assertThat(result.key, greaterThan(min));
-        assertThat(result.key, lessThan(max));
+        assertThat(result.key, lessThan(max + 500));
         return result.value;
     }
 }

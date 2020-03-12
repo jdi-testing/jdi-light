@@ -38,7 +38,7 @@ public class StaticSite {
 	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList navigationS;
 	//TODO
 	//@UI("[ui=label][*'%s']") public static WebList navigationS;
-	@UI("//*[@class='sidebar-menu']//span/..//*[text()='%s']/../..") public static Menu leftMenu;
+	@UI(".sidebar-menu [ui=label]") public static Menu leftMenu;
 	//TODO
 	//@UI(".sidebar-menu span<[*'%s']<<") public static Menu leftMenu;
 	@UI("//*[@class='sidebar-menu']//span/..//*[text()='%s']/../..") public static WebList leftMenuList;

@@ -206,13 +206,13 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         if (locator.isEmpty() && elements.isUseCache() && elements.get().size() > getIndex)
             return elements.get().get(getIndex).value;
         return (locator.isTemplate()
-            ? tryGetByIndex(getIndex)
+            ? tryGetByIndex(index)
             : getElementByLocator(getIndex, index))
-        .setName(nameFromIndex(getIndex));
+        .setName(nameFromIndex(index));
     }
     private UIElement getElementByLocator(int getIndex, int index) {
         return locator.isXPath()
-            ? new UIElement(base(), locator.addIndex(getIndex), index+"", parent)
+            ? new UIElement(base(), locator.addIndex(index), index+"", parent)
             : initElement(() -> getList(getIndex+1).get(getIndex));
     }
     protected UIElement tryGetByIndex(int index) {
@@ -231,7 +231,10 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
-        get(value).click();
+        UIElement element = get(value);
+        if (element == null)
+            throw exception("Can't get element '%s'", value);
+        element.click();
     }
 
     /**
@@ -290,7 +293,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             if (selected(value) && !listIndexes.contains(i)
                     || !selected(value) && listIndexes.contains(i))
                 value.click();
-            startIndex++;
+            i++;
         }
     }
     @JDIAction("Uncheck '{0}' checkboxes in '{name}' checklist")
@@ -304,7 +307,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             if (selected(value) && listIndexes.contains(i)
                     || !selected(value) && !listIndexes.contains(i))
                 value.click();
-            startIndex++;
+            i++;
         }
     }
     public <TEnum extends Enum<?>> void check(TEnum... values) {

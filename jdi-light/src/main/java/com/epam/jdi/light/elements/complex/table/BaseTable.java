@@ -180,8 +180,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
                 cells.clear();
         }
     }
-    protected WebList webRow(int columnIndex, String rowName) {
-        return webColumn(columnIndex).get(rowName).finds(fromCellToRow);
+    public WebList webRow(int columnIndex, String rowName) {
+        return webColumn(columnIndex).get(getRowIndexByName(rowName)).finds(fromCellToRow);
     }
     public WebList webRow(String rowName) {
         int index = getRowHeaderIndex() == -1 ? 1 : getRowHeaderIndex();
@@ -250,9 +250,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         validateRowIndex(rowNum);
         if (!cells.isGotAll()) {
             if (rows.get().has(rowNum + ""))
-                return rows.get().get(rowNum + "").get(colNum - 1);
+                return rows.get().get(rowNum + "").get(colNum);
             if (columns.get().has(colNum + ""))
-                return columns.get().get(colNum + "").get(rowNum - 1);
+                return columns.get().get(colNum + "").get(rowNum);
             if (!cells.get().has(colNum + ""))
                 cells.get().update(colNum + "", new MapArray<>(rowNum + "", getCell(colNum, rowNum)));
             else if (!cells.get().get(colNum + "").has(rowNum + ""))
@@ -274,7 +274,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return row;
     }
 
-    protected WebList getRow(int rowNum) {
+    public WebList getRow(int rowNum) {
         WebList row = getRowByIndex(getRowIndex(rowNum));
         return firstColumnIndex > 1 || columnsMapping.length > 0
             ? getMappedRow(row)
@@ -301,10 +301,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             return columnsMapping[index-1];
         return index;
     }
-    protected WebList getColumn(int colNum) {
+    public WebList getColumn(int colNum) {
         return $$(fillByTemplate(columnLocator, getColumnIndex(colNum)), this).noValidation();
     }
-    protected UIElement getCell(int colNum, int rowNum) {
+    public UIElement getCell(int colNum, int rowNum) {
         return $(fillByMsgTemplate(cellLocator, getColumnIndex(colNum), getRowIndex(rowNum)), this);
     }
 
@@ -637,7 +637,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get cell({0}, {1}) from '{name}' table")
     public String cell(int colNum, String rowName) {
         validateColumnIndex(colNum);
-        return webRow(rowName).get(colNum-1).getText();
+        return webRow(rowName).get(colNum).getText();
     }
 
     /**

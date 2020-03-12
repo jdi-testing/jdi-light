@@ -162,7 +162,7 @@ public class IsChecklistTests implements TestsInit {
     public void assertValidationTest() {
         isWeather.assertThat().values(containsInAnyOrder(
                 "Hot option", "Cold", "Rainy day", "Sunny", "Disabled"));
-        weatherNoLocator.assertThat().selected("Hot option");
+        checksGroup.assertThat().selected("Hot option");
     }
 
     @Test
