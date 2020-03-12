@@ -11,7 +11,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.swing.plaf.basic.BasicListUI;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -20,7 +19,6 @@ import static io.github.com.pages.UIElementContactFormPage.*;
 import static io.github.epam.EpamGithubSite.contactFormPage;
 import static io.github.epam.EpamGithubSite.metalAndColorsPage;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
-import static jdk.nashorn.internal.objects.NativeDebug.map;
 import static junit.framework.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
