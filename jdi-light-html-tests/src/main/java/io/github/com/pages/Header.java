@@ -8,10 +8,10 @@ import io.github.com.entities.User;
 import io.github.com.sections.LoginForm;
 
 public class Header extends Section {
-	//@Css("form")
+	//@UI("form")
 	public static LoginForm loginForm;
 	public static LoginFormSmart loginFormSmart;
-	public static Form<User> loginFormLight;
+	@UI("#login-form") public static Form<User> loginFormLight;
 	@UI("#login-form") public static Form<User> loginFormLightLocator;
 	@Css(".fa-sign-out") public static Button logout;
 	public static Icon userIcon;

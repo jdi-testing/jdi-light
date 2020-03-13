@@ -41,8 +41,6 @@ public class FormLoginTests implements TestsInit {
     @Test
     public void loginWithUserToLightLocatorFormTest() {
         userIcon.click();
-        //loginFormLightLocator.login(DEFAULT_USER);
-        //form("#login-form", User.class).login(DEFAULT_USER);
         loginAs("#login-form", DEFAULT_USER);
         homePage.checkOpened();
     }

@@ -53,6 +53,8 @@ public class PageFactory {
         for (Field pageField : getSiteFields(site)) {
             try {
                 info.field = pageField;
+                if (info.field.getName().equals("searchPage"))
+                    System.out.println("");
                 setFieldWithInstance(info, null);
             } catch (Throwable ex) {
                 throw exception(ex, initException(pageField, site));

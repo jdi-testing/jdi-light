@@ -42,8 +42,8 @@ public class ElementsGoogleTests extends StaticTestsInit {
     public void validateEntities2Tests() {
         DataList<SearchResult, ?> jobs = searchPage.search2;
 
-        assertEquals(jobs.get(0).name.getText(),"JDI SKYPE");
-        assertEquals(jobs.get(1).name.getText(),"JDI OWNER CONTACT");
+        assertEquals(jobs.get(1).name.getText(),"JDI SKYPE");
+        assertEquals(jobs.get(2).name.getText(),"JDI OWNER CONTACT");
         try {
             jobs.is().empty();
             Assert.fail("List should not be empty");

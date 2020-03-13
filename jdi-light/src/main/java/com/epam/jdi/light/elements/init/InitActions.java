@@ -78,7 +78,7 @@ public class InitActions {
             InitActions::elementSetup)),
         $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
         $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
-        $("PageObject", sRule(info -> !isClassOr(info.type(), WebPage.class, PageObject.class) &&
+        $("PageObject", sRule(info -> isClassOr(info.type(), WebPage.class, PageObject.class) ||
                 isPageObject(info.instance.getClass()),
             PageFactory::initElements)),
         $("VisualCheck", sRule(
