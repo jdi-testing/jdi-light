@@ -1,12 +1,11 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.elements.complex.Menu;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -31,6 +30,6 @@ public class MenuSteps {
 
     @Then("^the \"([^\"]*)\" in \"([^\"]*)\" menu is selected$")
     public void isSelected(String value, String name) {
-        list(name).selected(value);
+        list(name).is().selected(value);
     }
 }

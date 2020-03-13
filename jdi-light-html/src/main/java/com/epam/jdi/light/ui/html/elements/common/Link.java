@@ -2,17 +2,14 @@ package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.asserts.LinkAssert;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.*;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

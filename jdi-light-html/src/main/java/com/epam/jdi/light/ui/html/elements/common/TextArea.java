@@ -2,17 +2,15 @@ package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
-import com.epam.jdi.light.elements.interfaces.base.SetValue;
+import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.ui.html.asserts.TextAreaAssert;
 
 import java.util.List;
 
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
-import static java.util.Arrays.asList;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.ui.html.HtmlUtils.*;
+import static java.util.Arrays.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

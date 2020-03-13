@@ -7,6 +7,8 @@ import io.github.epam.entities.UserInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.PerformancePage.*;
@@ -14,7 +16,7 @@ import static io.github.epam.test.data.TableData.GRADY_BROCK;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class DataTableTests extends StaticTestsInit {
     @BeforeMethod
@@ -55,10 +57,9 @@ public class DataTableTests extends StaticTestsInit {
         usersData.has().row(GRADY_BROCK);
         // This is just useful example for small tables.
         // Execution takes too much time in case of 400 rows
-        //
-        //List<UserInfo> filteredData = usersData.dataRows(d -> d.name.contains("Brock"));
-        //assertEquals(filteredData.size(), 1);
-        //assertEquals(filteredData.get(0), GRADY_BROCK);
+        // List<UserInfo> filteredData = usersData.dataRows(d -> d.name.contains("Brock"));
+        // assertEquals(filteredData.size(), 1);
+        // assertEquals(filteredData.get(1), GRADY_BROCK);
     }
 
     @Test

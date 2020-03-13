@@ -2,11 +2,10 @@ package com.epam.jdi.light.common;
 
 import java.lang.reflect.InvocationTargetException;
 
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.StringUtils.*;
 import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman_Iovlev on 3/19/2018.
@@ -18,7 +17,6 @@ public class Exceptions {
     }
     public static RuntimeException exception(Throwable ex, String msg, Object... args) {
         String message = args.length == 0 ? msg : format(msg, args);
-        //String errorMessage = LINE_BREAK + message + LINE_BREAK + "Exception: " + safeException(ex);
         if (isClass(AssertionError.class, ex.getClass()))
             throw new AssertionError(message, ex);
         else

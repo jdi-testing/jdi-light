@@ -1,21 +1,16 @@
 package com.epam.jdi.light.elements.complex;
 
-import com.epam.jdi.light.elements.interfaces.base.HasValue;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MultiMap;
 import com.epam.jdi.tools.pairs.Pair;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.tools.EnumUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -97,7 +92,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
         try {
             return base().noWait(() -> base().getList(0).size());
         } catch (Exception ex) {
-            throw exception(ex,"Get size failed");
+            throw exception(ex, "Get size failed");
         }
     }
     @Override

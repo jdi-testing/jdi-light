@@ -2,18 +2,12 @@ package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
-import com.epam.jdi.light.common.ElementArea;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.common.UIUtils;
+import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.interfaces.base.*;
-import com.epam.jdi.light.elements.interfaces.common.IsInput;
-import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.light.elements.interfaces.common.*;
+import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
@@ -23,41 +17,36 @@ import org.openqa.selenium.support.ui.Select;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static com.epam.jdi.light.common.ElementArea.*;
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.common.UIUtils.intValue;
-import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_FILE_SUFFIX;
-import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
-import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.switcher.SwitchActions.Case;
-import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
-import static java.lang.Math.abs;
-import static java.lang.String.format;
+import static com.epam.jdi.light.common.UIUtils.*;
+import static com.epam.jdi.light.driver.ScreenshotMaker.*;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static java.lang.Math.*;
 import static java.lang.String.valueOf;
-import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.openqa.selenium.Keys.BACK_SPACE;
+import static java.lang.String.*;
+import static java.util.Arrays.*;
+import static org.apache.commons.lang3.StringUtils.*;
+import static org.openqa.selenium.Keys.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class UIElement extends JDIBase
-        implements WebElement, SetValue, HasAssert<IsAssert>, IListBase,
-        HasClick, IsText, HasLabel, HasPlaceholder, IsInput, HasCheck {
+        implements WebElement, SetValue, HasAssert<IsAssert>,
+        HasClick, IsText, HasLabel, HasPlaceholder, IsInput, HasCheck, CanBeSelected {
     //region Constructors
     public UIElement() { }
     public UIElement(WebElement el) { setWebElement(el); }
@@ -137,7 +126,7 @@ public class UIElement extends JDIBase
     public String getTagName() {
         return getWebElement().getTagName();
     }
-
+    public String tag() { return getTagName(); }
     /**
      * Get the attribute value
      * @param value
@@ -365,7 +354,7 @@ public class UIElement extends JDIBase
         for (String name : names)
             select(name);
     }
-    public <TEnum extends Enum> void select(TEnum name) {
+    public <TEnum extends Enum<?>> void select(TEnum name) {
         select(getEnumValue(name));
     }
 
@@ -493,7 +482,7 @@ public class UIElement extends JDIBase
     /**
      * Scroll screen view to item
      */
-    @JDIAction
+    @JDIAction(timeout = 0)
     public void show() {
         jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
     }
@@ -732,7 +721,7 @@ public class UIElement extends JDIBase
     protected boolean displayed() {
         try {
             return getWebElement().isDisplayed();
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             return false;
         }
     }

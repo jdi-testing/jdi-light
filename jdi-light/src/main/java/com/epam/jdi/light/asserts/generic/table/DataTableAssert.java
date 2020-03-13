@@ -5,33 +5,27 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.complex.table.DataTable;
-import com.epam.jdi.light.elements.complex.table.Row;
-import com.epam.jdi.light.elements.complex.table.TableMatcher;
-import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.complex.table.*;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
-import org.openqa.selenium.WebElement;
+import com.epam.jdi.tools.func.*;
+import org.hamcrest.*;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static com.epam.jdi.light.asserts.generic.table.DataTableAssert.CompareType.*;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
-import static com.epam.jdi.tools.LinqUtils.isSorted;
-import static java.lang.String.format;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static java.lang.String.*;
 import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DataTableAssert<L extends Section, D>
+public class DataTableAssert<L extends PageObject, D>
         extends BaseTableAssert<DataTable<L, D>, DataTableAssert<L, D>> {
 
     /**

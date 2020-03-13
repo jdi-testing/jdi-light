@@ -2,12 +2,11 @@ package com.epam.jdi.light.driver.get;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.get.DriverData.PRELATEST_VERSION;
-import static com.epam.jdi.light.driver.get.DriverData.getOs;
-import static com.epam.jdi.light.driver.get.DriverInfo.getBelowVersion;
-import static com.epam.jdi.light.driver.get.OsTypes.WIN;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.driver.get.DriverInfo.*;
+import static com.epam.jdi.light.driver.get.OsTypes.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
 
 /**

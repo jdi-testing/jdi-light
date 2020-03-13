@@ -17,7 +17,7 @@ import static io.github.com.StaticSite.navigationL;
 import static io.github.epam.enums.Navigation.Service;
 import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class PathTests extends StaticTestsInit {
 

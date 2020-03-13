@@ -3,12 +3,10 @@ package io.github.epam.html.tests.elements.composite.webpage;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import static io.github.com.StaticSite.contactFormPage;
-import static io.github.com.StaticSite.leftMenu;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static io.github.com.StaticSite.*;
+import static io.github.epam.html.tests.site.steps.States.*;
 
 
 public class ActionsWebPageTests implements TestsInit {

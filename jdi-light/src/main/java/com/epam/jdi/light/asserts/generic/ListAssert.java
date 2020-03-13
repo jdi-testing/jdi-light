@@ -8,17 +8,15 @@ import org.hamcrest.Matchers;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.LinqUtils.single;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class ListAssert<A extends ListAssert, T, E extends IListSelector<T>> extends UISelectAssert<A, E>
+public class ListAssert<A extends ListAssert<?,?,?>, T, E extends IListSelector<T>> extends UISelectAssert<A, E>
         implements ITextAssert<A> {
 
     private List<T> list() {

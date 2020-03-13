@@ -9,7 +9,8 @@ import org.mytests.uiobjects.example.site.SiteJdi;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static com.epam.jdi.light.actions.ActionHelper.*;
+import static com.epam.jdi.light.actions.ActionHelper.AFTER_JDI_ACTION;
+import static com.epam.jdi.light.actions.ActionHelper.BEFORE_JDI_ACTION;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;

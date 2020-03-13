@@ -19,7 +19,7 @@ import static java.lang.System.out;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class TableTests extends StaticTestsInit {
     @BeforeMethod

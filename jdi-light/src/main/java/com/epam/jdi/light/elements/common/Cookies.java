@@ -2,8 +2,7 @@ package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.WebDriverFactory;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 import java.util.Set;
 

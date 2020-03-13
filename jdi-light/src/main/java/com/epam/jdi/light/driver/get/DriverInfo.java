@@ -2,26 +2,21 @@ package com.epam.jdi.light.driver.get;
 
 import com.epam.jdi.tools.DataClass;
 import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.driver.WebDriverFactory.isRemote;
-import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
-import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.driver.get.DownloadDriverManager.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static java.lang.Integer.parseInt;
-import static java.lang.System.setProperty;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static com.epam.jdi.light.driver.get.RemoteDriver.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static java.lang.Integer.*;
+import static java.lang.System.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -42,7 +37,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     private WebDriver setupRemote() {
         try {
             return new RemoteWebDriver(new URL(getRemoteURL()), capabilities.execute(initCapabilities));
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             throw exception(ex, "Failed to setup remote "+type.name+" driver");
         }
     }
@@ -56,7 +51,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 downloadDriver(type, PLATFORM, DRIVER_VERSION);
             }
             return getDriver.execute(capabilities.execute(initCapabilities));
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             try {
                 if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
                     logger.info("Failed to download driver (%s %s) of latest version:" +
@@ -64,10 +59,10 @@ public class DriverInfo extends DataClass<DriverInfo> {
                     try {
                         downloadDriver(type, PLATFORM, getBelowVersion());
                         return getDriver.execute(capabilities.execute(initCapabilities));
-                    } catch (Exception ex2) { throw exception(ex2, "Failed to download driver"); }
+                    } catch (Throwable ex2) { throw exception(ex2, "Failed to download driver"); }
                 }
                 throw exception(safeException(ex));
-            } catch (Exception ex2) {
+            } catch (Throwable ex2) {
                 throw exception(ex2, "Failed to setup local driver");
             }
         }
@@ -75,9 +70,10 @@ public class DriverInfo extends DataClass<DriverInfo> {
     public static String getBelowVersion() {
         String currentMajor = wdm.getDownloadedVersion().split("\\.")[0];
         List<String> allVersions = wdm.getVersions();
-        for (int i = allVersions.size()-1; i>=0; i--)
-             if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
-                 return allVersions.get(i);
-         throw exception("Can't find version below current(" + wdm.getDownloadedVersion()+")");
+        for (int i = allVersions.size()-1; i>=0; i--) {
+            if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
+                return allVersions.get(i);
+        }
+        throw exception("Can't find version below current(" + wdm.getDownloadedVersion()+")");
     }
 }

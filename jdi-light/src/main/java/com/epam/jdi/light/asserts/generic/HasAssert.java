@@ -2,7 +2,7 @@ package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

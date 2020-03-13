@@ -1,13 +1,14 @@
 package io.github.epam.html.tests.issues.issue69;
 
 import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.pageobjects.annotations.smart.Smart;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
-import static com.epam.jdi.tools.PrintUtils.print;
-import static java.util.Arrays.asList;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static java.util.Arrays.*;
 
 public class Paragraph extends Section {
-    public Button paragraph, paragraph2, paragraph3;
+    @Smart("ui") public Button paragraph, paragraph2, paragraph3;
 
     @Override
     public String toString() {

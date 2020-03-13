@@ -2,8 +2,8 @@ package com.epam.jdi.light.elements.pageobjects.annotations.objects;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

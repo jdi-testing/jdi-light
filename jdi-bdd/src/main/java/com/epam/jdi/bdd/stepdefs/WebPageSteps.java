@@ -1,15 +1,14 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
 
-import static com.epam.jdi.light.common.UIUtils.getInt;
-import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import static com.epam.jdi.light.common.UIUtils.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.*;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

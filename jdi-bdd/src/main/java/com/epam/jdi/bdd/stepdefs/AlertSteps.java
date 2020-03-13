@@ -1,7 +1,6 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 
 import static com.epam.jdi.light.elements.common.Alerts.*;
 import static org.hamcrest.Matchers.*;

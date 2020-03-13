@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.map.MapArray;
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
 
 import java.util.List;
 
@@ -35,7 +35,10 @@ public interface ICoreElement extends IBaseElement {
     default boolean isNotExist() { return core().isNotExist(); }
     default void highlight(String color) { core().highlight(); }
     default void highlight() { core().highlight(); }
+    default Point getLocation() { return core().getLocation(); }
+    default Dimension getSize() { return core().getSize(); }
     default void show() { core().show(); }
+    default void setAttribute(String name, String value) { core().setAttribute(name, value); }
     default String attr(String name) { return core().attr(name); }
     default MapArray<String, String> attrs() { return core().attrs(); }
     default String css(String prop) { return core().css(prop); }

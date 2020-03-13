@@ -4,9 +4,8 @@ import com.epam.jdi.tools.DataClass;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.firstIndex;
-import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

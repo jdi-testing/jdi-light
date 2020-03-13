@@ -1,23 +1,16 @@
 package io.github.com;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.JList;
-import com.epam.jdi.light.elements.complex.Menu;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
-import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.JMenu;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import io.github.com.custom.MenuItem;
 import io.github.com.pages.*;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
+import static com.epam.jdi.light.common.CheckTypes.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
@@ -45,7 +38,7 @@ public class StaticSite {
 	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList navigationS;
 	//TODO
 	//@UI("[ui=label][*'%s']") public static WebList navigationS;
-	@UI("//*[@class='sidebar-menu']//span/..//*[text()='%s']/../..") public static Menu leftMenu;
+	@UI(".sidebar-menu [ui=label]") public static Menu leftMenu;
 	//TODO
 	//@UI(".sidebar-menu span<[*'%s']<<") public static Menu leftMenu;
 	@UI("//*[@class='sidebar-menu']//span/..//*[text()='%s']/../..") public static WebList leftMenuList;

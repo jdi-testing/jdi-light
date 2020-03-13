@@ -1,14 +1,13 @@
 package io.github.epam.html.tests.site;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 public class MenuTests implements TestsInit {
 
@@ -54,8 +53,8 @@ public class MenuTests implements TestsInit {
     }
     @Test
     public void refreshIndexSelectTest() {
-        menu.select(2);
-        menu.select(8);
+        menu.select(3);
+        menu.select(9);
         usersPage.checkOpened();
     }
 

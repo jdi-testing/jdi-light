@@ -2,18 +2,15 @@ package io.github.epam.html.tests.elements.common;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import static com.epam.jdi.light.elements.common.Alerts.acceptAlert;
-import static com.epam.jdi.light.elements.common.Alerts.getAlertText;
-import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.jdiLogo;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
+import static com.epam.jdi.light.elements.common.Alerts.*;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.epam.html.tests.elements.BaseValidations.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 19.08.2019

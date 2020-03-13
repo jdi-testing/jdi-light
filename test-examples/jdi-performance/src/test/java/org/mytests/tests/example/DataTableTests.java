@@ -21,7 +21,7 @@ import static org.mytests.tests.test.data.MarvelHeroes.SPIDER_MAN;
 import static org.mytests.uiobjects.example.site.SiteJdi.usersPage;
 import static org.mytests.uiobjects.example.site.pages.UsersPage.users;
 import static org.mytests.uiobjects.example.site.pages.UsersPage.usersSetup;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class DataTableTests extends TestsInit {
     private boolean firstTime = true;

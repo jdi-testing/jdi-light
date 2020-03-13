@@ -3,17 +3,15 @@ package com.epam.jdi.light.elements.pageobjects.annotations;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.settings.WebSettings;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Quotes;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.settings.WebSettings.getDomain;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.openqa.selenium.support.How.*;
 
 /**
@@ -40,11 +38,14 @@ public class WebAnnotationsUtil {
         return splitCamelCase(field.getName());
     }
 
-    public static void setDomain(Class<?> parentClass) {
-        if (parentClass != null && parentClass.isAnnotationPresent(JSite.class)) {
-            String siteDomain = parentClass.getAnnotation(JSite.class).value();
-            if (!isBlank(siteDomain))
-                WebSettings.setDomain(siteDomain);
+    public static void setDomain(Class<?> siteClass) {
+        if (siteClass != null) {
+            APP_NAME = siteClass.getSimpleName();
+            if (siteClass.isAnnotationPresent(JSite.class)) {
+                String siteDomain = siteClass.getAnnotation(JSite.class).value();
+                if (!isBlank(siteDomain))
+                    WebSettings.setDomain(siteDomain);
+            }
         }
     }
     public static String getUrlFromUri(String uri) {
@@ -115,11 +116,10 @@ public class WebAnnotationsUtil {
             return By.partialLinkText(locator.partialLinkText());
         if (!"".equals(locator.tagName()))
             return By.tagName(locator.tagName());
-
         if (!"".equals(locator.text()))
-            return By.xpath(".//*/text()[normalize-space(.) = " +
-                Quotes.escape(locator.text()) + "]/parent::*");
-
+            return byText(locator.text());
+        if (!"".equals(locator.containsText()))
+            return withText(locator.containsText());
         if (!"".equals(locator.id()))
             return By.id(locator.id());
         if (!"".equals(locator.className()))

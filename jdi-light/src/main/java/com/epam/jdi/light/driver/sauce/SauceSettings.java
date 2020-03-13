@@ -2,11 +2,10 @@ package com.epam.jdi.light.driver.sauce;
 
 import com.epam.jdi.tools.DataClass;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import static java.lang.System.getenv;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static java.lang.System.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class SauceSettings extends DataClass<SauceSettings> {
     public static String username = getenv("SAUCE_USERNAME");
@@ -32,7 +31,7 @@ public class SauceSettings extends DataClass<SauceSettings> {
 
     public static Map<String, String> sauceCapabilities() {
         Map<String, String> result = new HashMap<>();
-        for (Map.Entry<String, Object> pair : new SauceSettings().getFieldsAsMap().entrySet()) {
+        for (Map.Entry<String, Object> pair : new SauceSettings().fieldsAsMap().entrySet()) {
             Object value = pair.getValue();
             if (value != null && isNotBlank(value.toString()))
                 result.put(pair.getKey(), pair.getValue().toString());

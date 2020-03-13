@@ -1,7 +1,6 @@
 package page.objects.jdi;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.elements.pageobjects.annotations.*;
 
 public class TestSite {
     @Url("/index.html") @Title("Home Page Static")

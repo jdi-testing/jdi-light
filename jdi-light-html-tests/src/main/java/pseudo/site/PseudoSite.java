@@ -1,13 +1,10 @@
 package pseudo.site;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import pseudo.site.pages.*;
-import pseudo.site.section.CustomSection;
-import pseudo.site.section.ExtendedSection;
-import pseudo.site.webpage.CustomWebPage;
-import pseudo.site.webpage.ExtendedWebPage;
+import pseudo.site.section.*;
+import pseudo.site.webpage.*;
 
 
 public class PseudoSite {

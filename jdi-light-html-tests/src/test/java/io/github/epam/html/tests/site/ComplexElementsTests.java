@@ -2,21 +2,17 @@ package io.github.epam.html.tests.site;
 
 import io.github.epam.TestsInit;
 import io.github.epam.html.tests.site.steps.States;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.com.StaticSite.*;
-import static io.github.com.enums.ColorsList.Green;
-import static io.github.com.enums.Metals.Gold;
-import static io.github.com.enums.Metals.Silver;
+import static io.github.com.enums.ColorsList.*;
+import static io.github.com.enums.Metals.*;
 import static io.github.com.enums.Navigation.*;
-import static io.github.com.enums.NavigationNums.nContactForm;
-import static io.github.com.enums.NavigationNums.nHome;
-import static io.github.com.pages.HomePage.githubLink;
-import static io.github.com.pages.HomePage.jdiText;
+import static io.github.com.enums.NavigationNums.*;
+import static io.github.com.pages.HomePage.*;
 import static io.github.com.pages.MetalAndColorsPage.*;
-import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.*;
 
 public class ComplexElementsTests implements TestsInit {
 

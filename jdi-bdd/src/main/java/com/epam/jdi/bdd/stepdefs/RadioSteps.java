@@ -1,15 +1,14 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static org.hamcrest.Matchers.not;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

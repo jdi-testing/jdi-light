@@ -1,7 +1,6 @@
 package io.github.epam.testng;
 
-import org.testng.IRetryAnalyzer;
-import org.testng.ITestResult;
+import org.testng.*;
 
 public class RetryFailedTestCases implements IRetryAnalyzer {
     private int retryCnt = 0;

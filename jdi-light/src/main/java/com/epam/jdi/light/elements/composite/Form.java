@@ -1,35 +1,27 @@
 package com.epam.jdi.light.elements.composite;
 
-import com.epam.jdi.light.common.FormFilters;
-import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.HasValue;
-import com.epam.jdi.light.elements.interfaces.base.IClickable;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.light.elements.interfaces.base.SetValue;
+import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JAction4;
-import com.epam.jdi.tools.func.JFunc3;
+import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.FormFilters.*;
-import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
-import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
+import static com.epam.jdi.light.common.UIUtils.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
+import static com.epam.jdi.tools.StringUtils.*;
 import static java.lang.String.format;
 
 /**
@@ -398,8 +390,7 @@ public class Form<T> extends Section {
                 if (fields.isEmpty())
                     return false;
                 Object po = fields.get(0).get(pageObject);
-                if (isInterface(po.getClass(), ICoreElement.class) && ((ICoreElement) po).core().isDisplayed())
-                    return true;
+                return isInterface(po.getClass(), ICoreElement.class) && ((ICoreElement) po).core().isDisplayed();
             }
         } catch (Exception ignore) { }
         return false;

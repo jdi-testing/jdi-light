@@ -1,47 +1,38 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.tools.func.JAction;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.func.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.*;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.safari.SafariOptions;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
 import java.util.logging.Level;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
-import static com.epam.jdi.light.driver.get.Platform.X32;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.PathUtils.path;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.stringToPrimitive;
-import static com.epam.jdi.tools.RegExUtils.matches;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.light.driver.get.Platform.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.PathUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.RegExUtils.*;
+import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.awt.Toolkit.getDefaultToolkit;
-import static java.lang.Integer.parseInt;
+import static java.awt.Toolkit.*;
+import static java.lang.Integer.*;
 import static java.lang.String.format;
-import static java.util.concurrent.TimeUnit.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.openqa.selenium.PageLoadStrategy.NORMAL;
-import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;
-import static org.openqa.selenium.ie.InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR;
-import static org.openqa.selenium.logging.LogType.PERFORMANCE;
+import static org.apache.commons.lang3.StringUtils.*;
+import static org.openqa.selenium.PageLoadStrategy.*;
+import static org.openqa.selenium.UnexpectedAlertBehaviour.*;
+import static org.openqa.selenium.ie.InternetExplorerDriver.*;
+import static org.openqa.selenium.logging.LogType.*;
 import static org.openqa.selenium.remote.CapabilityType.*;
 
 /**
@@ -109,7 +100,7 @@ public class DriverData {
     }
 
     // GET DRIVER
-    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = driver -> {
+    public static WebDriver driverSettings(WebDriver driver) {
         List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
         if (groups.size() == 2)
             driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
@@ -119,9 +110,9 @@ public class DriverData {
             else
                 driver.manage().window().maximize();
         }
-        driver.manage().timeouts().implicitlyWait(0, MILLISECONDS);
         return driver;
-    };
+    }
+    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = DriverData::driverSettings;
 
     private static WebDriver setBrowserSizeForMac(WebDriver driver, int width, int height) {
         try {
@@ -134,6 +125,7 @@ public class DriverData {
             throw ex;
         }
     }
+
     public static Capabilities getCapabilities(
             MutableCapabilities capabilities, JAction1<Object> defaultCapabilities) {
         try {

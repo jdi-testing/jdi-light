@@ -1,11 +1,10 @@
 package io.github.com.custom;
 
 import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
+import com.epam.jdi.light.ui.html.elements.common.*;
 import io.github.com.entities.User;
 
-import static io.github.com.pages.Header.userIcon;
+import static io.github.com.pages.Header.*;
 
 public class LoginFormSmart extends Form<User> {
     TextField name, password;

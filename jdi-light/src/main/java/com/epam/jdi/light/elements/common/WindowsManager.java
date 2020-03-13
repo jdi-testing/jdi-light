@@ -6,10 +6,9 @@ import org.openqa.selenium.Dimension;
 
 import java.util.Set;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

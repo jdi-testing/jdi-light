@@ -3,7 +3,7 @@ package com.epam.jdi.light.asserts.generic;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matcher;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -22,4 +22,6 @@ public interface ITextAssert<A> {
     default A value(String condition) {
         return text(condition);
     }
+    @JDIAction("Assert that '{name}' is empty")
+    default A empty() { return text(""); }
 }

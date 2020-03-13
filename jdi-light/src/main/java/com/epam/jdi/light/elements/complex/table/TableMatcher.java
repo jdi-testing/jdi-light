@@ -4,10 +4,10 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.func.JFunc2;
 import org.openqa.selenium.support.ui.Quotes;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static java.lang.String.format;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static java.lang.String.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
