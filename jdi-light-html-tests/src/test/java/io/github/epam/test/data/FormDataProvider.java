@@ -1,4 +1,4 @@
-package pseudo.site.dataproviders;
+package io.github.epam.test.data;
 
 import org.testng.annotations.DataProvider;
 

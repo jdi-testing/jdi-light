@@ -3,7 +3,7 @@ package io.github.epam.html.tests.elements.composite.section;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
-import pseudo.site.dataproviders.section.ExtendedSectionUIDataProvider;
+import io.github.epam.test.data.sections.ExtendedSectionUIDataProvider;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.*;
 
