@@ -2,14 +2,12 @@ package selenium.seleniumPO;
 
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 
 public class HomePage {
     private String url = "https://jdi-testing.github.io/jdi-light/index.html";

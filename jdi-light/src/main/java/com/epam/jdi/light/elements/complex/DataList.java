@@ -12,8 +12,8 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.UIUtils.*;
-import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

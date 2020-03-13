@@ -2,8 +2,8 @@ package selenium.seleniumPO;
 
 import selenium.entities.User;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.elements.init.PageFactory.*;
 
 public class SiteSelenium {
     public static HomePage homePage = initElements(getDriver(), HomePage.class);

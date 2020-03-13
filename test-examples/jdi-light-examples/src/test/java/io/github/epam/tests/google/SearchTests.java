@@ -3,18 +3,14 @@ package io.github.epam.tests.google;
 import com.epam.jdi.light.elements.complex.DataList;
 import io.github.com.custom.SearchResult;
 import io.github.epam.StaticTestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import static com.epam.jdi.tools.PrintUtils.print;
-import static io.github.com.pages.Header.epamLogo;
-import static io.github.com.pages.Header.search;
-import static io.github.com.pages.SearchPage.search3;
-import static io.github.com.pages.SearchPage.searchS;
-import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static io.github.com.pages.Header.*;
+import static io.github.com.pages.SearchPage.*;
+import static io.github.epam.tests.recommended.steps.Preconditions.*;
 import static org.testng.Assert.*;
 
 /**

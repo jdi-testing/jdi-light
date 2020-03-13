@@ -2,16 +2,14 @@ package org.mytests.tests.example;
 
 import org.mytests.tests.TestsInit;
 import org.mytests.uiobjects.example.custom.MarvelUser;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
-import static org.mytests.tests.states.States.shouldBeLoggedIn;
-import static org.mytests.uiobjects.example.site.SiteJdi.usersPage;
-import static org.mytests.uiobjects.example.site.pages.UsersPage.users;
-import static org.mytests.uiobjects.example.site.pages.UsersPage.usersSetup;
+import static org.hamcrest.Matchers.*;
+import static org.mytests.tests.states.States.*;
+import static org.mytests.uiobjects.example.site.SiteJdi.*;
+import static org.mytests.uiobjects.example.site.pages.UsersPage.*;
 import static org.testng.Assert.*;
 
 public class DataTableInteractTests extends TestsInit {

@@ -1,22 +1,18 @@
 package io.github.epam.tests.smart.path;
 
 import io.github.epam.StaticTestsInit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.openqa.selenium.*;
+import org.testng.annotations.*;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.searchBy;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static io.github.com.StaticSite.contactFormPage;
-import static io.github.com.StaticSite.navigationL;
-import static io.github.epam.enums.Navigation.Service;
-import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
-import static java.util.Arrays.asList;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
+import static io.github.com.StaticSite.*;
+import static io.github.epam.enums.Navigation.*;
+import static io.github.epam.tests.recommended.steps.Preconditions.*;
+import static java.util.Arrays.*;
 import static org.testng.Assert.*;
 
 public class PathTests extends StaticTestsInit {

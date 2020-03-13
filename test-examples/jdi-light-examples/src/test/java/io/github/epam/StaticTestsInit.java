@@ -1,13 +1,12 @@
 package io.github.epam;
 
 import io.github.com.StaticSite;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
-import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.driver.WebDriverUtils.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static io.github.com.StaticSite.homePage;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static io.github.com.StaticSite.*;
 
 public class StaticTestsInit {
 

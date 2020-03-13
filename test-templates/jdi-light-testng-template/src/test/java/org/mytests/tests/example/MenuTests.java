@@ -2,8 +2,7 @@ package org.mytests.tests.example;
 
 import org.mytests.tests.TestsInit;
 import org.mytests.tests.states.States;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.mytests.uiobjects.example.entities.LeftMenuData.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;

@@ -1,16 +1,12 @@
 package io.github.epam.html.tests.performance;
 
 
-import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.Table;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
 import org.testng.annotations.*;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.tools.PrintUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static io.github.com.StaticSite.*;

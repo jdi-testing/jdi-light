@@ -4,9 +4,9 @@ import cucumber.api.java.en.*;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
 
-import static com.epam.jdi.light.common.UIUtils.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.tools.JsonUtils.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.testng.Assert.*;
 

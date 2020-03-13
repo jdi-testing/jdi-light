@@ -2,16 +2,14 @@ package io.github.epam.tests.recommended;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.StaticTestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.com.StaticSite.*;
-import static io.github.com.pages.GithubPage.repoDescription;
-import static io.github.com.pages.HomePage.githubLink;
-import static io.github.com.pages.HomePage.jdiText;
-import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
+import static io.github.com.pages.GithubPage.*;
+import static io.github.com.pages.HomePage.*;
+import static io.github.epam.tests.recommended.steps.Preconditions.*;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 
 public class WindowsAndFramesTests extends StaticTestsInit {

@@ -8,26 +8,17 @@ import static java.lang.System.*;
 import static org.apache.commons.lang3.StringUtils.*;
 
 public class SauceSettings extends DataClass<SauceSettings> {
-    public static String username = getenv("SAUCE_USERNAME");
-    public static String accessKey = getenv("SAUCE_ACCESS_KEY");
-    public static String seleniumVersion;
-    public static String name = "Jdi tests";
-    public static String maxDuration = "3600";
-    public static String commandTimeout = "600";
-    public static String idleTimeout = "1000";
-    public static String build = "JDI uild";
-    public static String browserName;
-    public static String browserVersion;
-    public static String platformName;
-    public static String screenResolution;
-    public static String timeZone;
-    public static boolean recordVideo;
-    public static boolean videoUploadOnPass;
-    public static boolean recordScreenshots;
-    public static boolean recordLogs ;
+    public static String username = getenv("SAUCE_USERNAME"),
+        accessKey = getenv("SAUCE_ACCESS_KEY"),
+        seleniumVersion, name = "Jdi tests",
+        maxDuration = "3600",
+        commandTimeout = "600",
+        idleTimeout = "1000",
+        build = "JDI uild",
+        browserName, browserVersion, platformName, screenResolution, timeZone;
+    public static boolean recordVideo, videoUploadOnPass, recordScreenshots, recordLogs, extendedDebugging, capturePerformance;
+
     public static int priority;
-    public static boolean extendedDebugging;
-    public static boolean capturePerformance;
 
     public static Map<String, String> sauceCapabilities() {
         Map<String, String> result = new HashMap<>();

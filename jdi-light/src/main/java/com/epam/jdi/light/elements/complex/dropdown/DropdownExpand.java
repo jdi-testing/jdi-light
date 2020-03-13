@@ -7,11 +7,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
-import com.epam.jdi.tools.map.MapArray;
-import org.openqa.selenium.*;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.TextTypes.*;

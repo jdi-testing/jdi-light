@@ -1,10 +1,7 @@
 package com.epam.jdi.light.elements.complex.dropdown;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.tools.map.MapArray;
-import org.openqa.selenium.*;
 
 import java.util.List;
 

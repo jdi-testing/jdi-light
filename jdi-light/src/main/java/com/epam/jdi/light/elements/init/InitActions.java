@@ -12,18 +12,15 @@ import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.*;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.common.VisualCheckAction.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
@@ -194,43 +191,6 @@ public class InitActions {
     }
     public static boolean isPageObject(Class<?> type) {
         return isClass(type, Section.class) || isClass(type, WebPage.class) ||
-            LinqUtils.any(type.getDeclaredFields(), InitActions::isJDIField);
-    }
-    public static boolean isList(Field f, JFunc1<Class<?>, Boolean> func) {
-        try {
-            return f.getType() == List.class && func.execute(getGenericType(f));
-        } catch (Exception ex) { return false; }
-    }
-    public static boolean isList(Class<?> clazz, JFunc1<Class<?>, Boolean> func) {
-        try {
-            return clazz == List.class && func.execute(getGenericType(clazz));
-        } catch (Exception ex) { return false; }
-    }
-    public static boolean isList(Field f, Class<?> type) {
-        return isList(f, g -> g == type);
-    }
-    public static boolean isListOf(Field field, Class<?> type) {
-        return isList(field, g -> isClass(g, type) || isInterface(g, type));
-    }
-    public static Type[] getGenericTypes(Field field) {
-        try {
-            return ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
-        } catch (Exception ex) {
-            throw exception( ex, "'%s' is List but has no Generic types", field.getName());
-        }
-    }
-    public static Class<?> getGenericType(Field field) {
-        try {
-            return (Class<?>)((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
-        } catch (Exception ex) {
-            throw exception( ex, "'%s' is List but has no Generic types", field.getName());
-        }
-    }
-    public static Class<?> getGenericType(Class<?> clazz) {
-        try {
-            return (Class<?>) ((ParameterizedType) clazz.getGenericSuperclass()).getActualTypeArguments()[0];
-        } catch (Exception ex) {
-            throw exception(ex, "'%s' is List but has no Generic type", clazz.getName());
-        }
+            any(type.getDeclaredFields(), InitActions::isJDIField);
     }
 }

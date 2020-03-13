@@ -17,7 +17,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.UIUtils.create;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
