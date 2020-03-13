@@ -2,17 +2,15 @@ package org.mytests.tests.example;
 
 import com.epam.jdi.light.elements.complex.table.Line;
 import org.apache.commons.lang3.time.StopWatch;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mytests.tests.TestsInit;
 
-import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mytests.tests.states.States.shouldBeLoggedIn;
-import static org.mytests.uiobjects.example.TestData.TABLE_SNAPSHOOT;
-import static org.mytests.uiobjects.example.site.SiteJdi.performancePage;
+import static com.epam.jdi.light.elements.complex.table.Column.*;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mytests.tests.states.States.*;
+import static org.mytests.uiobjects.example.TestData.*;
+import static org.mytests.uiobjects.example.site.SiteJdi.*;
 import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.*;
 
 public class JDIPerformanceTests extends TestsInit {

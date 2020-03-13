@@ -10,7 +10,7 @@ import com.epam.jdi.tools.map.*;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
 import java.util.*;
 
 import static com.epam.jdi.light.common.Exceptions.*;
@@ -19,11 +19,8 @@ import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
 import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
-import static java.lang.reflect.Array.get;
-import static java.lang.reflect.Array.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -63,13 +60,6 @@ public final class UIUtils {
         if (field.getType().isAnnotationPresent(Name.class))
             return field.getType().getAnnotation(Name.class).value();
         return splitCamelCase(field.getName());
-    }
-
-    public static String printObjectAsArray(Object array) {
-        List<String> elements = new ArrayList<>();
-        for (int i = 0; i <= getLength(array); i++)
-            elements.add(get(array, i).toString());
-        return print(elements);
     }
 
     public static JFunc2<Object, String, IClickable> GET_DEFAULT_BUTTON =
@@ -145,67 +135,5 @@ public final class UIUtils {
         return isInterface(obj.getClass(), INamed.class)
             ? ((INamed)obj).getName()
             : obj.getClass().getSimpleName();
-    }
-    private static <T> T csInit(Constructor<?> cs, Object... params) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        cs.setAccessible(true);
-        return (T) cs.newInstance(params);
-    }
-    public static <T> T create(Class<?> cs) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        if (cs == null)
-            throw exception("Can't init class. Class Type is null.");
-        Constructor<?>[] constructors = cs.getDeclaredConstructors();
-        Constructor<?> constructor = first(constructors, c -> c.getParameterCount() == 0);
-        if (constructor != null)
-            return csInit(constructor);
-        throw exception("%s has no empty constructors", cs.getSimpleName());
-    }
-    public static <T> T create(Class<?> cs, Object... params) {
-        if (cs == null)
-            throw exception("Can't init class. Class Type is null.");
-        Constructor<?>[] constructors = cs.getDeclaredConstructors();
-        List<Constructor<?>> listConst = filter(constructors, c -> c.getParameterCount() == params.length);
-        if (listConst.size() == 0)
-            throw exception("%s has no constructor with %s params", cs.getSimpleName(), params.length);
-        for(Constructor<?> cnst : listConst) {
-            try {
-                return csInit(cnst, params);
-            } catch (Exception ignore) { }
-        }
-        throw exception("%s has no appropriate constructors", cs.getSimpleName());
-    }
-
-    public static int intValue(Object element) {
-        try {
-            return ((Long)element).intValue();
-        } catch (ClassCastException ignore) {
-            try {
-                return ((Double) element).intValue();
-            } catch (ClassCastException ex) {
-                return -1;
-            }
-        }
-    }
-    public static int getInt(Object value) {
-        try {
-            return (int)value;
-        } catch (Exception ignore) { }
-        try {
-            return ((Double)value).intValue();
-        } catch (Exception ignore) { }
-        try {
-            return ((Long)value).intValue();
-        } catch (Exception ignore) { }
-        try {
-            return ((Float)value).intValue();
-        } catch (Exception ignore) { }
-        return -1;
-    }
-    public static double getDouble(Object obj) {
-        if (obj == null) return 0.0;
-        try {
-            return (double) obj;
-        } catch (Exception ex) {
-            return ((Long) obj).doubleValue();
-        }
     }
 }

@@ -1,19 +1,16 @@
 package io.github.epam.tests.google;
 
 import com.epam.jdi.light.elements.complex.DataList;
-import io.github.com.custom.Result;
-import io.github.com.custom.SearchResult;
+import io.github.com.custom.*;
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import static io.github.com.StaticSite.searchPage;
-import static io.github.com.pages.Header.epamLogo;
-import static io.github.com.pages.Header.search;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.Header.*;
 import static io.github.epam.test.data.ListData.*;
-import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static io.github.epam.tests.recommended.steps.Preconditions.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 

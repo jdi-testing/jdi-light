@@ -261,10 +261,13 @@ public class DriverData {
         try {
             switch (getOs()) {
                 case WIN:
+                case LINUX:
                     driver.manage().window().maximize();
+                    break;
                 case MAC:
                     java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
                     setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
+                    break;
             }
             return driver;
         } catch (Exception ex) {

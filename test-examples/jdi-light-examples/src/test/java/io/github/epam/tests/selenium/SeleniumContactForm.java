@@ -1,14 +1,12 @@
 package io.github.epam.tests.selenium;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import selenium.entities.User;
 
-import static selenium.seleniumPO.HomePage.leftNavigation;
-import static selenium.seleniumPO.SiteSelenium.homePage;
-import static selenium.seleniumPO.SiteSelenium.login;
-import static selenium.site.data.DefaultDataProvider.ROMAN_CONTACT;
-import static selenium.site.pages.ContactPage.seleniumContactForm;
+import static selenium.seleniumPO.HomePage.*;
+import static selenium.seleniumPO.SiteSelenium.*;
+import static selenium.site.data.DefaultDataProvider.*;
+import static selenium.site.pages.ContactPage.*;
 
 public class SeleniumContactForm implements SimpleTestsInit {
 

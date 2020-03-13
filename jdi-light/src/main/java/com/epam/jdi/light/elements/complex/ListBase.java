@@ -245,7 +245,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     public void setup(Field field) {
         Type[] types;
         try {
-            types = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+            types = getGenericTypes(field);
         } catch (Exception ex) { return; }
         if (types.length != 1) return;
         try {
@@ -253,7 +253,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
             if (initClass == WebElement.class)
                 initClass = UIElement.class;
             this.initClass = initClass;
-        } catch (Exception ex) { throw  exception(ex, "Can't init WebList. Weblist elements should extend UIElement"); }
+        } catch (Exception ex) { throw  exception(ex, "Can't init WebList. WebList elements should extend UIElement"); }
     }
     protected T toT(UIElement el) {
         return initT(el, this, initClass);

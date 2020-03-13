@@ -1,8 +1,7 @@
 package com.epam.jdi.light.elements.composite;
 
-import com.epam.jdi.light.asserts.generic.*;
+import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 

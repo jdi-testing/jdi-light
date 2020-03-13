@@ -2,13 +2,12 @@ package io.github.epam.tests.google;
 
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.pages.Header.search;
-import static io.github.com.pages.SearchPage.searchS;
-import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.Header.*;
+import static io.github.com.pages.SearchPage.*;
+import static io.github.epam.tests.recommended.steps.Preconditions.*;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 

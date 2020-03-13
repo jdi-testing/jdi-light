@@ -5,12 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.mytests.tests.TestsInit;
 import org.mytests.uiobjects.example.entities.Contacts;
 
-import static org.mytests.tests.states.States.shouldBeLoggedIn;
-import static org.mytests.tests.states.States.shouldBeLoggedOut;
-import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_CONTACT;
-import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_USER;
+import static org.mytests.tests.states.States.*;
+import static org.mytests.uiobjects.example.entities.Defaults.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
-import static org.mytests.uiobjects.example.site.pages.ContactFormPage.contactForm;
+import static org.mytests.uiobjects.example.site.pages.ContactFormPage.*;
 
 public class FormTests extends TestsInit {
 

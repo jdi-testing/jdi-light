@@ -19,7 +19,6 @@ import java.util.function.Supplier;
 import static com.epam.jdi.light.common.CheckTypes.NONE;
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.UIUtils.*;
 import static com.epam.jdi.light.common.VisualCheckPage.*;
 import static com.epam.jdi.light.driver.ScreenshotMaker.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
@@ -30,6 +29,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.TimeoutSettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.JsonUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PathUtils.*;
 import static com.epam.jdi.tools.PrintUtils.*;

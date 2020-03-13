@@ -23,13 +23,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.common.UIUtils.*;
 import static com.epam.jdi.light.driver.ScreenshotMaker.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.JsonUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
@@ -199,7 +199,7 @@ public class UIElement extends JDIBase
     @JDIAction(level = DEBUG)
     public Rectangle getPosition() {
         Map<String, Object> map = (Map<String, Object>)js().executeScript("const rect = arguments[0].getBoundingClientRect();return {x:rect.x,y:rect.y,width:rect.width,height:rect.height};", getWebElement());
-        return new Rectangle(intValue(map.get("x")), intValue(map.get("y")), intValue(map.get("height")), intValue(map.get("width")));
+        return new Rectangle(getInt(map.get("x")), getInt(map.get("y")), getInt(map.get("height")), getInt(map.get("width")));
     }
     /**
      * Get element css value

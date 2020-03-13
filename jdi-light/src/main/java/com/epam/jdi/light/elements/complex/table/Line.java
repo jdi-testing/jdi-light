@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.*;
 
 import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.UIUtils.*;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static java.util.Arrays.*;
 
