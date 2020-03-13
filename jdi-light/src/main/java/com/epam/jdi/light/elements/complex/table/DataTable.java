@@ -57,13 +57,13 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get row '{0}' for '{name}' table")
     public D dataRow(int rowNum) {
         hasDataClass();
-        if (!datas.get().has(rowNum+"")) {
-            D data = lineClass != null
-                ? lineToData(line(rowNum))
-                : row(rowNum).asData(dataClass);
-            datas.get().update(rowNum + "", data);
-        }
-        return datas.get().get(rowNum+"");
+        if (datas.get().has(rowNum+""))
+            return datas.get().get(rowNum+"");
+        D data = lineClass != null
+            ? lineToData(line(rowNum))
+            : row(rowNum).asData(dataClass);
+        datas.get().update(rowNum + "", data);
+        return data;
     }
 
     /**
@@ -74,11 +74,11 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get row '{0}' for '{name}' table")
     public L line(int rowNum) {
         hasLineClass();
-        if (!lines.get().has(rowNum+"")) {
-            L value = row(rowNum).asLine(lineClass);
-            lines.get().update(rowNum + "", value);
-        }
-        return lines.get().get(rowNum+"");
+        if (lines.get().has(rowNum+""))
+            return lines.get().get(rowNum+"");
+        L value = row(rowNum).asLine(lineClass);
+        lines.get().update(rowNum + "", value);
+        return value;
     }
 
     /**

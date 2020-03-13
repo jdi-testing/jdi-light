@@ -160,13 +160,13 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
 
     public WebList webRow(int rowNum) {
         validateRowIndex(rowNum);
-        if (!rows.get().has(rowNum+"")) {
-            WebList result = cells.isGotAll()
-                ? new WebList(select(cells.get(), c -> c.value.get(rowNum+"")))
-                : getRow(rowNum);
-            rows.get().update(rowNum+"", result);
-        }
-        return rows.get().get(rowNum+"");
+        if (rows.get().has(rowNum+""))
+            return rows.get().get(rowNum+"");
+        WebList result = cells.isGotAll()
+            ? new WebList(select(cells.get(), c -> c.value.get(rowNum+"")))
+            : getRow(rowNum);
+        rows.get().update(rowNum+"", result);
+        return result;
     }
     private void validateRowIndex(int rowNum) {
         if (rowNum < 1)
@@ -192,13 +192,13 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
     public WebList webColumn(int colNum) {
         validateColumnIndex(colNum) ;
-        if (!columns.get().has(colNum+"")) {
-            WebList result = cells.isGotAll()
-                ? new WebList(cells.get().get(colNum + ""))
-                : getColumn(colNum);
-            columns.get().update(colNum + "", result);
-        }
-        return columns.get().get(colNum+"");
+        if (columns.get().has(colNum+""))
+            return columns.get().get(colNum+"");
+        WebList result = cells.isGotAll()
+            ? new WebList(cells.get().get(colNum + ""))
+            : getColumn(colNum);
+        columns.get().update(colNum + "", result);
+        return result;
     }
     protected List<String> getJSValues(String locator) {
         return (List<String>) core().js().executeScript("return Array.from(document.querySelectorAll('"+locator+"')).map(el=>el.innerText)");
@@ -248,17 +248,17 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public UIElement webCell(int colNum, int rowNum) {
         validateColumnIndex(colNum);
         validateRowIndex(rowNum);
-        if (!cells.isGotAll()) {
-            if (rows.get().has(rowNum + ""))
-                return rows.get().get(rowNum + "").get(colNum);
-            if (columns.get().has(colNum + ""))
-                return columns.get().get(colNum + "").get(rowNum);
-            if (!cells.get().has(colNum + ""))
-                cells.get().update(colNum + "", new MapArray<>(rowNum + "", getCell(colNum, rowNum)));
-            else if (!cells.get().get(colNum + "").has(rowNum + ""))
-                cells.get().get(colNum + "").update(rowNum + "", getCell(colNum, rowNum));
-        }
-        return cells.get().get(colNum+"").get(rowNum+"");
+        if (cells.isGotAll())
+            return cells.get().get(colNum+"").get(rowNum+"");
+        if (rows.get().has(rowNum + ""))
+            return rows.get().get(rowNum + "").get(colNum);
+        if (columns.get().has(colNum + ""))
+            return columns.get().get(colNum + "").get(rowNum);
+        if (cells.get().has(colNum + "") && cells.get().get(colNum + "").has(rowNum + ""))
+            return cells.get().get(colNum+"").get(rowNum+"");
+        UIElement cell = getCell(colNum, rowNum);
+        cells.get().update(colNum + "", new MapArray<>(rowNum + "", cell));
+        return cell;
     }
     protected MapArray<String, WebList> getRows() {
         if (rows.isGotAll()) return rows.get();

@@ -67,7 +67,7 @@ public class ComplexElements3Tests extends StaticTestsInit {
         contactFormPage.checkOpened();
         menu.select(Home);
         homePage.checkOpened();
-        navigationL.select(3);
+        navigationL.select(4);
         menu.select(ComplexTable);
     }
 }
