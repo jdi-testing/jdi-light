@@ -20,6 +20,7 @@ import java.util.*;
 import static com.applitools.eyes.selenium.fluent.Target.*;
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.*;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.VisualCheckAction.*;
 import static com.epam.jdi.light.common.VisualCheckPage.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
@@ -89,8 +90,11 @@ public class JDIEyes {
             if (eyes.getIsOpen())
                 eyes.close(false);
         } finally {
-            if (eyes.getIsOpen())
-                eyes.abortIfNotClosed();
+            try {
+                if (eyes.getIsOpen())
+                    eyes.abortIfNotClosed();
+            } catch (Exception ignore) { //ignore
+            }
         }
     }
 
@@ -99,8 +103,11 @@ public class JDIEyes {
             for (Eyes eye : eyesList)
                 closeEye(eye);
         } finally {
+            try {
             if (eyes.get().getIsOpen())
                 eyes.get().abortIfNotClosed();
+            } catch (Exception ignore) { //ignore
+            }
         }
     }
     public static void newVisualTest(String testName) {

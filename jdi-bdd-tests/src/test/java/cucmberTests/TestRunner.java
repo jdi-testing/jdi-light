@@ -23,7 +23,7 @@ import static io.github.com.pages.Header.*;
         , glue = {"com.epam.jdi.bdd", "cucmberTests"}
         //, tags = {"@base"}
 )
-public class Runner extends AbstractTestNGCucumberTests {
+public class TestRunner extends AbstractTestNGCucumberTests {
     @BeforeClass
     public static void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);

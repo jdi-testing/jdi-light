@@ -71,7 +71,7 @@ public class FileUploadTests implements TestsInit {
         cleanupDownloads();
         String fileName = "gandhi.txt";
         createTextFile(fileName);
-        // Validate file in DOWNLOADS_DFIR folder
+        // Validate file in DOWNLOADS_DIR folder
         assertThatFile(fileName).text(containsString("enough to satisfy"));
     }
     @Test

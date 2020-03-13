@@ -17,7 +17,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.*;
     , glue = {"com.epam.jdi.bdd", "cucmberTests"}
     //, tags = {"@form"}
 )
-public class Runner extends AbstractTestNGCucumberTests {
+public class TestRunner extends AbstractTestNGCucumberTests {
     @BeforeClass
     public static void setUp() {
         WebPage.openUrl("https://jdi-testing.github.io/jdi-light/");

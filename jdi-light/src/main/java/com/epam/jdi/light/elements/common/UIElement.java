@@ -444,7 +444,7 @@ public class UIElement extends JDIBase
      * Get all elements classes as list.
      * Example: <div class="btn submit color"> </a> will return list of elements [btn, submit, color]
      */
-    @JDIAction(value = "Execute javascript '{0}' for '{name}'", level = DEBUG)
+    @JDIAction(value = "Get '{name}' list of classes ", level = DEBUG)
     public List<String> classes() {
         String cl = attr("class");
         return cl.length() > 0

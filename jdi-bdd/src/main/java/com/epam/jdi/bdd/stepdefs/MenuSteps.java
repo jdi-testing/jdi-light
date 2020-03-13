@@ -23,8 +23,7 @@ public class MenuSteps {
 
     @When("^(?:I |)select items in \"([^\"]*)\" menu:$")
     public void selectItems(String name, List<String> values) {
-        String[] items = values.toArray(new String[0]);
-        for (String item : items)
+        for (String item : values)
             list(name).select(item);
     }
 
