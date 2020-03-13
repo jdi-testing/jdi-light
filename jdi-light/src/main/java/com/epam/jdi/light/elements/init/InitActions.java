@@ -66,9 +66,9 @@ public class InitActions {
     public static MapArray<String, InitRule> INIT_RULES = map(
         $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList().indexFromZero())),
         $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
-            info -> new DataList())),
+            info -> new DataList<>())),
         $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), ICoreElement.class),
-            info -> new JList())),
+            info -> new JList<>())),
         $("Interface", iRule(f -> INTERFACES.keys().contains(f.getType()),
             info -> create(INTERFACES.get(info.field.getType()))))
     );
@@ -83,7 +83,9 @@ public class InitActions {
             PageFactory::initElements)),
         $("VisualCheck", sRule(
             info -> VISUAL_ACTION_STRATEGY == IS_DISPLAYED && isInterface(info.instance.getClass(), ICoreElement.class),
-            i-> ((ICoreElement)i.instance).core().params.update("visualCheck","")))
+            i-> ((ICoreElement)i.instance).core().params.update("visualCheck",""))),
+        $("List", sRule(info -> info.type() == List.class && isInterface(info.type(), HasUIList.class),
+            i -> ((HasUIList)i.instance).list().indexFromZero()))
     );
 
     private static boolean isSetupValue(SiteInfo info) {
