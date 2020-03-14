@@ -66,8 +66,20 @@ public class FileAssert extends BaseAssert<IBaseElement> {
         assertThat(file.length(), size);
         return this;
     }
-    public FileAssert hasSize(Long size) {
-        return hasSize(is(size));
+    /**
+     * Match passed value with file size
+     * @param min, max to compare
+     * @return FileAssert
+     */
+    @JDIAction("Assert file '{name}' size")
+    public FileAssert hasSize(long min, long max) {
+        long fileSize = file.length();
+        assertThat(fileSize, greaterThan(min));
+        assertThat(fileSize, lessThan(max));
+        return this;
+    }
+    public FileAssert hasSize(long size) {
+        return hasSize(size-10, size+10);
     }
     public static void cleanupDownloads() {
         File dir = new File(DOWNLOADS_DIR);

@@ -191,6 +191,12 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             ? ((IBaseElement)element).base().get()
             : element;
     }
+    private UIElement getUIElementByLocator(WebElement element) {
+        return new UIElement(element).find(getLocator()).setup(b -> {
+            b.searchRules = searchRules;
+            b.timeout = timeout;
+        });
+    }
     public WebElement get(Object... args) {
         manageTimeout();
         if (webElement.hasValue()) {
@@ -199,10 +205,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 element.getTagName();
                 beforeSearch(element);
                 return !locator.isEmpty()
-                    ? purify(new UIElement(element).find(getLocator()).setup(b -> {
-                        b.searchRules = searchRules;
-                        b.timeout = timeout;
-                    }))
+                    ? purify(getUIElementByLocator(element))
                     : element;
             } catch (Exception ignore) {
                 if (getElementFunc == null)
@@ -223,7 +226,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             }
             throw exception("Can't get element with template locator '%s'. Expected %s arguments but found %s", getLocator(), locator.argsCount(), args.length);
         }
-        return getElement(getAllElements(args));
+        List<WebElement> els = getAllElements(args);
+        return getElement(els);
     }
     private WebElement getElement(List<WebElement> els) {
         if (els.size() == 1)

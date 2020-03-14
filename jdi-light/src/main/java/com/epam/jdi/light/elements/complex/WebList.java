@@ -125,6 +125,14 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         }
         return result;
     }
+    @Override
+    public UIElement first() {
+        return get(startIndex);
+    }
+    @Override
+    public UIElement last() {
+        return get(size() - startIndex + 1);
+    }
     protected String getElementName(int i, UIElement element) {
         if (nameIndex)
             return nameFromIndex(i);
@@ -486,7 +494,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     @JDIAction(value = "Check that '{name}' is enabled", timeout = 0)
     public boolean isEnabled() {
-        return isNotEmpty() && get(startIndex).isEnabled();
+        return isNotEmpty() && first().isEnabled();
     }
 
     @JDIAction(value = "Check that '{name}' is disabled", timeout = 0)
@@ -504,12 +512,12 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     @JDIAction(level = DEBUG)
     public void hover() {
-        get(startIndex).hover();
+        first().hover();
     }
 
     @JDIAction(level = DEBUG)
     public void show() {
-        get(startIndex).show();
+        first().show();
     }
     public UISelectAssert<UISelectAssert<?,?>, WebList> is() {
         refresh();
@@ -557,7 +565,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public boolean isEmpty() { return size() == 0; }
     public boolean isNotEmpty() { return size() > 0; }
     public Point getLocation() {
-        return get(startIndex).getLocation();
+        return first().getLocation();
     }
     public Dimension getSize() {
         Point firstPoint = first().getLocation();

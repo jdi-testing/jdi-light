@@ -77,10 +77,9 @@ public class PageFactory {
     }
 
     public static void initJdiField(SiteInfo info) {
-        if (!info.type().isInterface())
-            initWithConstructor(info);
-        else
+        if (info.type().isInterface())
             initUsingRules(info);
+        initWithConstructor(info);
     }
     public static void setupFieldUsingRules(SiteInfo info) {
         MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) ->

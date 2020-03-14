@@ -39,6 +39,14 @@ public class HtmlUtils {
             return parseDouble(value);
         } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Double", attr, value); }
     }
+
+    public static double getDouble(String attr, WebElement el, double defaultValue) {
+        String value = el.getAttribute(attr);
+        try {
+            return parseDouble(value);
+        } catch (Exception ex) {
+            return defaultValue; }
+    }
     /**
      * Gets attribute and casts it to float
      * @param attr String - attribute to find

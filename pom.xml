@@ -54,9 +54,11 @@
         <module>jdi-light-html</module>
         <module>jdi-light-eyes</module>
         <module>jdi-bdd</module>
+        <module>jdi-light-bootstrap</module>
         <module>jdi-light-html-tests</module>
         <module>jdi-bdd-tests</module>
         <module>jdi-light-applitools-tests</module>
+        <module>jdi-light-bootstrap-tests</module>
         <module>test-examples/jdi-performance</module>
         <module>test-examples/jdi-light-examples</module>
         <module>test-examples/jdi-bdd-no-po-tests</module>

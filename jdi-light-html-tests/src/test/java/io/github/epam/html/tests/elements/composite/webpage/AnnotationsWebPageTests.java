@@ -2,9 +2,9 @@ package io.github.epam.html.tests.elements.composite.webpage;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
+import io.github.epam.test.data.webpages.WebPageDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pseudo.site.dataproviders.webpages.WebPageDataProvider;
 
 
 public class AnnotationsWebPageTests implements TestsInit {

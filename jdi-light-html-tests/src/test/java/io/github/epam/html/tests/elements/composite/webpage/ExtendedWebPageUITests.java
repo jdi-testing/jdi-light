@@ -2,8 +2,8 @@ package io.github.epam.html.tests.elements.composite.webpage;
 
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import io.github.epam.TestsInit;
+import io.github.epam.test.data.webpages.ExtendedWebPageUIDataProvider;
 import org.testng.annotations.Test;
-import pseudo.site.dataproviders.webpages.ExtendedWebPageUIDataProvider;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.*;
 

@@ -80,12 +80,12 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
             if (types.length > 2)
                 throw exception("Can't setup DataList generic parameters for field '%s'. Actual more than %s but expected 1 or 2",
                         field.getName(), types.length);
-            initClass = types[0].toString().equals("?") ? null : (Class<T>)types[0];
-            dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>)types[1];
-        } catch (Exception ex) {
-            throw exception(ex, "Can't instantiate List<%s, %s> field '%s'", initClass == null
-                            ? "?" : initClass.getSimpleName(), dataType == null ? "?" : dataType.getSimpleName(),
-                    field.getName());
+                initClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
+                dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>) types[1];
+        } catch (Exception ignore) {
+            //throw exception(ex, "Can't instantiate List<%s, %s> field '%s'", initClass == null
+            //                ? "?" : initClass.getSimpleName(), dataType == null ? "?" : dataType.getSimpleName(),
+            //        field.getName());
         }
     }
 }

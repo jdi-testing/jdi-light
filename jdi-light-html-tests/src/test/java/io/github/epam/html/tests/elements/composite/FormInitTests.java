@@ -2,8 +2,8 @@ package io.github.epam.html.tests.elements.composite;
 
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;
-import org.testng.annotations.Test;
 import io.github.epam.test.data.FormDataProvider;
+import org.testng.annotations.Test;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.*;
 import static pseudo.site.PseudoSite.*;

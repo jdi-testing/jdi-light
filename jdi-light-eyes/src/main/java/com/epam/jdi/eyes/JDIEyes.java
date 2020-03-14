@@ -20,7 +20,6 @@ import java.util.*;
 import static com.applitools.eyes.selenium.fluent.Target.*;
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.*;
-import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.VisualCheckAction.*;
 import static com.epam.jdi.light.common.VisualCheckPage.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;

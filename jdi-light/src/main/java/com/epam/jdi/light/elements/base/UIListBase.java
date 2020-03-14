@@ -20,6 +20,12 @@ public abstract class UIListBase<A extends UISelectAssert<?,?>> extends UIBaseEl
         return new WebList(base()).setup(JDIBase::searchVisible);
     }
     protected void setList(WebList webList) { list = webList; }
+    public UIElement first() { return list().first(); }
+    public UIElement last() {
+        return list().last();
+    }
+    public UIElement get(String value) { return list().get(value); }
+    public UIElement get(int index) { return list().get(index); }
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() { return list().isDisplayed(); }
     @JDIAction("Check that '{name}' is visible by user") @Override

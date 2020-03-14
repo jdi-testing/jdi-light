@@ -2,8 +2,8 @@ package io.github.epam.html.tests.elements.composite.section;
 
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import io.github.epam.TestsInit;
-import org.testng.annotations.Test;
 import io.github.epam.test.data.sections.CustomSectionDataProvider;
+import org.testng.annotations.Test;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.*;
 
