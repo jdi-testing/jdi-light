@@ -14,7 +14,7 @@ import static com.epam.jdi.light.common.Exceptions.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class Checkbox extends UIBaseElement<CheckboxAssert>
-        implements HasLabel, SetValue, HasClick, HasCheck, CanBeSelected {
+    implements HasLabel, SetValue, HasClick, HasCheck, CanBeSelected {
 
     @Override
     public Label label() {

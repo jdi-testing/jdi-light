@@ -69,6 +69,8 @@ public class PageFactory {
     }
     private static Object getElementInstance(SiteInfo info) {
         info.instance = getValueField(info.field, info.parent);
+        //if (info.name().equals("colors3"))
+        //    System.out.println("test");
         if (info.instance == null)
             initJdiField(info);
         if (info.instance != null)
@@ -79,7 +81,8 @@ public class PageFactory {
     public static void initJdiField(SiteInfo info) {
         if (info.type().isInterface())
             initUsingRules(info);
-        initWithConstructor(info);
+        else
+            initWithConstructor(info);
     }
     public static void setupFieldUsingRules(SiteInfo info) {
         MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) ->
