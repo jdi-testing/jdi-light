@@ -117,23 +117,23 @@ public class InitActions {
         $("SetTextAs", aRule(SetTextAs.class, (e,a)-> e.base().setTextType = a.value())),
         $("NoCache", aRule(NoCache.class, (e,a)-> e.offCache())),
 
-        $("Timeout", aRule(WaitTimeout.class, (e,a)-> e.waitSec(a.value()))),
+        $("WaitTimeout", aRule(WaitTimeout.class, (e,a)-> e.waitSec(a.value()))),
         $("NoWait", aRule(NoWait.class, (e,a)-> e.waitSec(0))),
         $("Name", aRule(Name.class, (e,a)-> e.setName(a.value()))),
         $("GetAny", aRule(GetAny.class, (e, a)-> e.base().noValidation())),
         $("GetVisible", aRule(GetVisible.class, (e, a)-> e.base().searchVisible())),
         $("GetVisibleEnabled", aRule(GetVisibleEnabled.class, (e, a)-> e.base().visibleEnabled())),
         $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.base().inView())),
-        $("Page", aRule(PageName.class, (e, a)-> e.base().setPage(a.value()))),
+        $("PageName", aRule(PageName.class, (e, a)-> e.base().setPage(a.value()))),
         $("StartIndex", aRule(StartIndex.class, (e, a)-> {
-            if (isClass(e.getClass(), WebList.class))
-                ((WebList)e).startIndex(a.value());
+            if (isInterface(e.getClass(), HasUIList.class))
+                ((HasUIList)e).list().startIndex(a.value());
         })),
         $("CloseAfterSelect", aRule(CloseAfterSelect.class, (e, a)-> {
             if (isClass(e.getClass(), DropdownExpand.class))
                 ((DropdownExpand)e).autoClose = true;
         })),
-        $("Smart Id", aRule(SId.class, (e,a) -> {
+        $("SId", aRule(SId.class, (e,a) -> {
             e.base().setLocator("#" + toKebabCase(e.getName()));
             e.base().locator.isRoot = true;
         })),
@@ -141,17 +141,17 @@ public class InitActions {
         $("Smart Name", aRule(SName.class, (e, a) -> e.base().setLocator(format("[name='%s']", toKebabCase(e.getName()))))),
         $("Smart", aRule(Smart.class, (e, a) -> e.base().setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName()))))),
         $("Smart Class", aRule(SClass.class, (e, a) -> e.base().setLocator(format(".%s", toKebabCase(e.getName()))))),
-        $("ListUI", aRule(UI.class, (e,a,f)-> {
+        $("List UI", aRule(UI.class, (e,a,f)-> {
             UI[] uis = f.getAnnotationsByType(UI.class);
             if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
                 e.base().setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
             })),
-        $("FindByUI", aRule(FindBy.class, (e,a,f)-> {
+        $("FindBy UI", aRule(FindBy.class, (e,a,f)-> {
             FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
             if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
                 e.base().setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
             })),
-        $("VisualCheck", aRule(VisualCheck.class, (e, a) ->  {
+        $("Visual Check", aRule(VisualCheck.class, (e, a) ->  {
             if (a.value())
                 e.base().params.update("visualCheck", "");
             else

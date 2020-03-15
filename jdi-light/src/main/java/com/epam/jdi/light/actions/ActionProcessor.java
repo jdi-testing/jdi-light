@@ -13,11 +13,9 @@ import static com.epam.jdi.light.actions.ActionHelper.*;
 @Aspect
 public class ActionProcessor {
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
-    protected void jdiPointcut() { // empty
-    }
+    protected void jdiPointcut() {  }
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
-    protected void stepPointcut() { // empty
-    }
+    protected void stepPointcut() {  }
     private final String className = "com.epam.jdi.light.actions.ActionProcessor";
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {

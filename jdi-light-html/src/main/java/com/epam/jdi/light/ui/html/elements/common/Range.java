@@ -16,28 +16,28 @@ public class Range extends UIBaseElement<RangeAssert> implements HasLabel, SetVa
 
     // region Actions
     @JDIAction(value = "Get '{name}' value", level = DEBUG)
-    public int value() {
-        return getInt("value", uiElement);
+    public double value() {
+        return getDouble("value", uiElement, 0);
     }
 
     @JDIAction(value = "Get '{name}' min limit", level = DEBUG)
-    public String min() { return uiElement.attr("min"); }
+    public double min() { return getDouble("min", uiElement, 0); }
 
     @JDIAction(value = "Get '{name}' max limit", level = DEBUG)
-    public String max() { return uiElement.attr("max"); }
+    public double max() { return getDouble("max", uiElement, 100); }
 
     @JDIAction(value = "Get '{name}' step size", level = DEBUG)
-    public String step() { return uiElement.attr("step"); }
+    public double step() { return getDouble("step", uiElement, 1); }
 
     @JDIAction(value = "Set value '{0}' for '{name}'", level = DEBUG)
-    public void setRangeValue(int value) {
+    public void setupValue(double value) {
         uiElement.setAttribute("value", value+"");
     }
     // endregion
 
     // region Set and get value for Forms
     public void setValue(String value) {
-        setRangeValue(asInt(value));
+        uiElement.setAttribute("value", value);
     }
     public String getValue() {
         return value()+"";

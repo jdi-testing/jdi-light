@@ -59,6 +59,9 @@ public class HtmlElementsPage extends WebPage {
     @UI("#disabled-picker") public static ColorPicker disabledPicker;
 
     public static Range volume;
+    public static Range defaultRange;
+    public static Range minMaxRange;
+    public static Range fractionalRange;
     // @UI("#volume") public static Range volume;
     @UI("[type=range][disabled]") public static Range disabledRange;
 

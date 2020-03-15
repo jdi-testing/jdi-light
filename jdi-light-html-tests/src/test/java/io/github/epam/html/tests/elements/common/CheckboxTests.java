@@ -16,6 +16,7 @@ import static org.testng.Assert.*;
  */
 
 public class CheckboxTests implements TestsInit {
+    final String label = "Accept terms and conditions";
 
     @BeforeMethod
     public void before() {
@@ -26,11 +27,7 @@ public class CheckboxTests implements TestsInit {
 
     @Test
     public void getLabelTextTest() {
-        assertEquals(acceptConditions.labelText(), "Accept terms and conditions");
-    }
-    @Test
-    public void getTextTest() {
-        assertEquals(acceptConditions.getText(), "Accept terms and conditions");
+        assertEquals(acceptConditions.labelText(), label);
     }
 
     @Test
@@ -55,15 +52,12 @@ public class CheckboxTests implements TestsInit {
     public void isValidationTest() {
         acceptConditions.is().selected();
         acceptConditions.click();
-        acceptConditions.is().deselected();
-        acceptConditions.is().enabled();
-        acceptConditions.is().displayed();
+        acceptConditions.is().deselected().and().enabled().and().displayed();
     }
 
     @Test
     public void labelTest() {
-        assertEquals(acceptConditions.label().getText(),
-            "Accept terms and conditions");
+        assertEquals(acceptConditions.label().getText(), label);
         acceptConditions.label().is().text(containsString("terms and conditions"));
         acceptConditions.label().is().text(equalToIgnoringCase("accept terms and conditions"));
     }

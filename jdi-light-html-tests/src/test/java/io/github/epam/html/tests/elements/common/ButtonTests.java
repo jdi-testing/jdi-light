@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.common;
 
+import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.*;
 
@@ -85,6 +86,65 @@ public class ButtonTests implements TestsInit {
         disabledButton.is().text(containsString("Disabled Button".toUpperCase()));
         disabledButtonInput.is().text(containsString("Disabled Button"));
         disabledButton.is().disabled();
+    }
+
+    //if test fails then run `mvn clean install` in module JDI Light
+    @Test
+    public void suspendButtonTest() {
+        WebPage.reload();
+        durationMoreThan(3, () -> suspendButton.click());
+        validateAlert(is("Suspend button"));
+    }
+
+    //if test fails then run `mvn clean install` in module JDI Light
+    @Test
+    public void vanishButtonTest() {
+        WebPage.reload();
+        durationMoreThan(3, () ->
+                ghostButton.is().disappear());
+    }
+
+    //if test fails then run `mvn clean install` in module JDI Light
+    @Test
+    public void isNotAppearTimeoutFailedButtonTest() {
+        WebPage.reload();
+        durationMoreThan(2, () ->
+                suspendButton.is().notAppear(2));
+    }
+
+    @Test
+    public void displayButtonTest() {
+        WebPage.reload();
+        assertFalse(suspendButton.isDisplayed());
+        durationMoreThan(2, () ->
+                suspendButton.is().displayed());
+    }
+    //if test fails then run `mvn clean install` in module JDI Light
+    @Test
+    public void isNotAppearFailedButtonTest() {
+        WebPage.reload();
+        try {
+            durationImmediately(() ->
+                    ghostButton.is().notAppear());
+            fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
+        } catch (Exception ex) {
+            assertThat(safeException(ex), containsString("but: was \"displayed\""));
+        }
+    }
+
+    //if test fails then run `mvn clean install` in module JDI Light
+    @Test
+    public void isNotAppearButtonTest() {
+        ghostButton.is().hidden();
+        durationMoreThan(3, () -> ghostButton.is().notAppear());
+    }
+
+    //if test fails then run `mvn clean install` in module JDI Light
+    @Test
+    public void isNotAppearTimeoutButtonTest() {
+        ghostButton.is().hidden();
+        durationMoreThan(2, () ->
+                ghostButton.is().notAppear(2));
     }
 
     @Test
