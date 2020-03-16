@@ -1,6 +1,7 @@
 package io.github.epam.html.tests.issues.issue70;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import io.github.epam.html.tests.issues.issue70.po.DashboardPage;
 import org.testng.annotations.Test;
 

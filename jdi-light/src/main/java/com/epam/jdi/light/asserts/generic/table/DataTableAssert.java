@@ -9,8 +9,10 @@ import com.epam.jdi.light.elements.complex.table.*;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.*;
-import org.hamcrest.*;
+import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.func.JFunc2;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import java.util.List;
 

@@ -1,7 +1,9 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.composite.*;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
+import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.*;
 import io.github.com.custom.LoginFormSmart;
 import io.github.com.entities.User;

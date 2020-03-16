@@ -3,7 +3,8 @@ package com.epam.jdi.light.asserts.core;
 import com.epam.jdi.tools.Safe;
 import org.hamcrest.Matcher;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.PrintUtils.*;

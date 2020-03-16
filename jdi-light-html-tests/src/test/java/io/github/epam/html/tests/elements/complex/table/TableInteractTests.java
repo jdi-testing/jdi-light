@@ -4,9 +4,11 @@ import com.epam.jdi.light.elements.complex.table.Line;
 import io.github.com.custom.MarvelUser;
 import io.github.com.entities.MarvelUserSimple;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.List;
 

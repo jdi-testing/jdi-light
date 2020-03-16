@@ -2,7 +2,8 @@ package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import org.hamcrest.*;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 

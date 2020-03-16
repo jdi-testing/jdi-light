@@ -1,6 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
 

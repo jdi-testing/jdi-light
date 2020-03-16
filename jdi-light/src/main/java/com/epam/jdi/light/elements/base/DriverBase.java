@@ -5,10 +5,12 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;

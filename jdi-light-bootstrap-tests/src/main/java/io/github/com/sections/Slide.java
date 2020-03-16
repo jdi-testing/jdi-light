@@ -1,6 +1,7 @@
 package io.github.com.sections;
 
-import com.epam.jdi.light.asserts.generic.*;
+import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.interfaces.common.IsText;

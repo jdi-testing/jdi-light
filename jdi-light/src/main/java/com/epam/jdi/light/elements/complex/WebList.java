@@ -1,16 +1,20 @@
 package com.epam.jdi.light.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.*;
+import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.base.HasUIList;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.*;
-import com.epam.jdi.tools.map.*;
+import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.map.MultiMap;
 import com.google.common.primitives.Ints;
 import org.apache.commons.lang3.ArrayUtils;
-import org.hamcrest.*;
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.*;
 
 import java.util.List;

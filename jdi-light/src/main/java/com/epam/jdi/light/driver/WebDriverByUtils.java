@@ -8,7 +8,8 @@ import org.openqa.selenium.*;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.function.Function;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;

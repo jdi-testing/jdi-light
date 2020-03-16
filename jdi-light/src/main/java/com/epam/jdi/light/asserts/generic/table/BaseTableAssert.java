@@ -4,9 +4,11 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.*;
 import com.epam.jdi.tools.LinqUtils;
-import org.hamcrest.*;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static com.epam.jdi.light.common.Exceptions.*;

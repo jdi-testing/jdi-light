@@ -1,6 +1,7 @@
 package com.epam.jdi.light.ui.html.asserts;
 
-import com.epam.jdi.light.asserts.generic.*;
+import com.epam.jdi.light.asserts.generic.SelectedAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import org.hamcrest.Matchers;

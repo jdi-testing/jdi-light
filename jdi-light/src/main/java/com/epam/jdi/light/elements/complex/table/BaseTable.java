@@ -9,16 +9,18 @@ import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
-import com.epam.jdi.tools.*;
+import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.hamcrest.Matcher;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;

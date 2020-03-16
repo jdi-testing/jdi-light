@@ -4,7 +4,8 @@ import com.epam.jdi.light.elements.complex.table.Single;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.com.entities.MarvelUserSimple;
 import io.github.epam.TestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.List;
 

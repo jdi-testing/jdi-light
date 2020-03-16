@@ -3,7 +3,8 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.*;
+import org.openqa.selenium.support.ui.ISelect;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 

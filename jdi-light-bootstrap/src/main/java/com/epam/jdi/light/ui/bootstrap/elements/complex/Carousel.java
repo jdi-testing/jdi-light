@@ -5,12 +5,15 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.light.elements.pageobjects.annotations.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.GetAny;
+import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.UIUtils.*;

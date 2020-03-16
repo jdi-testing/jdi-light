@@ -3,7 +3,8 @@ package io.github.epam;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.*;

@@ -1,7 +1,8 @@
 package com.epam.jdi.light.elements.init.rules;
 
 import com.epam.jdi.light.elements.init.SiteInfo;
-import com.epam.jdi.tools.func.*;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc1;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

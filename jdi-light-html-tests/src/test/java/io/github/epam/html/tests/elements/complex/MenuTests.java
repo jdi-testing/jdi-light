@@ -2,7 +2,8 @@ package io.github.epam.html.tests.elements.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;

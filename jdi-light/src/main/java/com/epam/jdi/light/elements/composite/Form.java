@@ -1,16 +1,19 @@
 package com.epam.jdi.light.elements.composite;
 
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.FormFilters;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.*;
+import com.epam.jdi.tools.func.JAction4;
+import com.epam.jdi.tools.func.JFunc3;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.FormFilters.*;

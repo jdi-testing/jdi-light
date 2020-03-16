@@ -1,7 +1,8 @@
 package io.github.epam.html.tests.elements.composite;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.List;
 

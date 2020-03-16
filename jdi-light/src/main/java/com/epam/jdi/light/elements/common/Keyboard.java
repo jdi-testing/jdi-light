@@ -4,7 +4,8 @@ import com.epam.jdi.tools.*;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.awt.*;
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.util.List;

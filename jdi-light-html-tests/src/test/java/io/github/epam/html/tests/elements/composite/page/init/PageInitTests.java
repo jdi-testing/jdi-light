@@ -1,9 +1,12 @@
 package io.github.epam.html.tests.elements.composite.page.init;
 
 import org.testng.Assert;
-import org.testng.annotations.*;
-import page.objects.jdi.*;
-import page.objects.selenium.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import page.objects.jdi.HomePageWeb;
+import page.objects.jdi.HomePageWebEx;
+import page.objects.selenium.HomePage;
+import page.objects.selenium.HomePageEx;
 
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;

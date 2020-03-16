@@ -3,7 +3,8 @@ package com.epam.jdi.light.ui.bootstrap.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.bootstrap.elements.common.Progress;
-import org.hamcrest.*;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import java.util.List;
 

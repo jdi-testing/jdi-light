@@ -1,13 +1,16 @@
 package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.util.Strings;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;

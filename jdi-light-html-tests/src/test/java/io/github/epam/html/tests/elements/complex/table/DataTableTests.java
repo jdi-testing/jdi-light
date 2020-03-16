@@ -1,9 +1,11 @@
 package io.github.epam.html.tests.elements.complex.table;
 
-import com.epam.jdi.light.elements.complex.table.*;
+import com.epam.jdi.light.elements.complex.table.Line;
+import com.epam.jdi.light.elements.complex.table.Single;
 import io.github.com.entities.MarvelUserInfo;
 import io.github.epam.TestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.List;
 

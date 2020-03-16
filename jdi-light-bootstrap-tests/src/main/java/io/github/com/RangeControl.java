@@ -1,6 +1,7 @@
 package io.github.com;
 
-import com.epam.jdi.light.ui.html.elements.common.*;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Range;
 
 import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.light.ui.html.HtmlUtils.*;
