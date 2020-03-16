@@ -124,10 +124,9 @@ public class ButtonTests implements TestsInit {
     public void isNotAppearFailedButtonTest() {
         WebPage.reload();
         try {
-            durationImmediately(() ->
-                    ghostButton.is().notAppear());
+            durationImmediately(() -> ghostButton.is().notAppear());
             fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             assertThat(safeException(ex), containsString("but: was \"displayed\""));
         }
     }
