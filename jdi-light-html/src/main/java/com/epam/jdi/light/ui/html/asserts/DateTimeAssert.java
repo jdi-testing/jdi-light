@@ -1,9 +1,11 @@
 package com.epam.jdi.light.ui.html.asserts;
 
-import com.epam.jdi.light.asserts.generic.*;
+import com.epam.jdi.light.asserts.generic.ITextAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.DateTimeSelector;
-import org.hamcrest.*;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static com.epam.jdi.light.ui.html.HtmlUtils.*;

@@ -3,7 +3,8 @@ package com.epam.jdi.bdd.stepdefs;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.tools.Safe;
 import cucumber.api.DataTable;
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import static com.epam.jdi.bdd.BDDUtils.*;
 import static com.epam.jdi.light.common.Exceptions.*;

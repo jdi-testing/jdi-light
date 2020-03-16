@@ -1,7 +1,8 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import java.util.List;
 

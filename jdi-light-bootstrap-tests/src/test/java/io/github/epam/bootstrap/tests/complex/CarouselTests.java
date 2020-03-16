@@ -4,7 +4,8 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.com.entities.SlideInfo;
 import io.github.com.sections.Slide;
 import io.github.epam.TestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.BootstrapPage.*;

@@ -1,6 +1,7 @@
 package io.github.epam.test.data;
 
-import io.github.com.entities.*;
+import io.github.com.entities.MarvelUserInfo;
+import io.github.com.entities.MarvelUserSimple;
 
 public class MarvelHeroes {
     public static MarvelUserInfo SPIDER_MAN = new MarvelUserInfo().set(m -> {

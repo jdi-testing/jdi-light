@@ -2,7 +2,8 @@ package com.epam.jdi.light.logger;
 
 import io.qameta.allure.model.StepResult;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;

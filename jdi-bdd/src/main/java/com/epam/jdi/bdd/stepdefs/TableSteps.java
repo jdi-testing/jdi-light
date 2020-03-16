@@ -3,7 +3,8 @@ package com.epam.jdi.bdd.stepdefs;
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Table;
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.testng.Assert;
 
 import java.util.List;

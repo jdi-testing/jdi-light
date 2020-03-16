@@ -1,6 +1,7 @@
 package com.epam.jdi.light.driver;
 
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.LinuxProcessUtils;
+import com.epam.jdi.light.common.UnixProcessUtils;
 import com.epam.jdi.tools.func.JAction1;
 
 import java.io.IOException;

@@ -2,7 +2,8 @@ package io.github.epam.html.tests.elements.common;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.elements.common.Alerts.*;
@@ -124,10 +125,9 @@ public class ButtonTests implements TestsInit {
     public void isNotAppearFailedButtonTest() {
         WebPage.reload();
         try {
-            durationImmediately(() ->
-                    ghostButton.is().notAppear());
+            durationImmediately(() -> ghostButton.is().notAppear());
             fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             assertThat(safeException(ex), containsString("but: was \"displayed\""));
         }
     }

@@ -1,10 +1,13 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.base.*;
+import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
-import com.epam.jdi.light.elements.complex.dropdown.*;
-import com.epam.jdi.light.elements.composite.*;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
+import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.*;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.complex.*;

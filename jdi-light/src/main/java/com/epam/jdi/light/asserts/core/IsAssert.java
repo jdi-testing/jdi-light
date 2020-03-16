@@ -3,7 +3,8 @@ package com.epam.jdi.light.asserts.core;
 import com.epam.jdi.light.asserts.generic.*;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import org.hamcrest.*;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static org.hamcrest.Matchers.*;

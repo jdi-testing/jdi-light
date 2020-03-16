@@ -4,7 +4,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.elements.common.FileInput;
 import cucumber.api.java.en.*;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 
 import static com.epam.jdi.bdd.BDDUtils.*;
 import static com.epam.jdi.bdd.stepdefs.CheckListSteps.*;

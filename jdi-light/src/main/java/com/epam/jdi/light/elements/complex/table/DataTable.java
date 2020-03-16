@@ -9,11 +9,13 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.hamcrest.*;
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;

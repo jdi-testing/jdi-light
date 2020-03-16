@@ -1,7 +1,8 @@
 package com.epam.jdi.light.elements.interfaces.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.common.*;
+import com.epam.jdi.light.elements.interfaces.common.IsInput;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

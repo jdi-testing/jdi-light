@@ -1,6 +1,7 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.complex.table.*;
+import com.epam.jdi.light.elements.complex.table.DataTable;
+import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.com.entities.Furniture;
 

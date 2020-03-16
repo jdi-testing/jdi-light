@@ -6,16 +6,20 @@ package com.epam.jdi.eyes;
  * Skype: roman.iovlev
  */
 
-import com.applitools.eyes.*;
+import com.applitools.eyes.BatchInfo;
+import com.applitools.eyes.TestResults;
 import com.applitools.eyes.selenium.Eyes;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.tools.Safe;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.applitools.eyes.selenium.fluent.Target.*;
 import static com.epam.jdi.light.actions.ActionHelper.*;

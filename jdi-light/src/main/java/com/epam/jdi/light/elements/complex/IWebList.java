@@ -1,7 +1,9 @@
 package com.epam.jdi.light.elements.complex;
 
-import com.epam.jdi.light.common.*;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.elements.interfaces.base.IClickable;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import org.apache.commons.lang3.ArrayUtils;
 

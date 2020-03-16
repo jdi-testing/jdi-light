@@ -1,17 +1,21 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.complex.Checklist;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.*;
-import com.epam.jdi.light.ui.bootstrap.elements.complex.*;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
+import com.epam.jdi.light.ui.bootstrap.elements.complex.DropdownMenu;
 import com.epam.jdi.light.ui.html.elements.common.*;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import io.github.com.RangeControl;
-import io.github.com.custom.*;
+import io.github.com.custom.ButtonWithTooltip;
+import io.github.com.custom.FullName;
 import io.github.com.entities.SlideInfo;
-import io.github.com.sections.*;
+import io.github.com.sections.DismissAlert;
+import io.github.com.sections.Slide;
 
 public class BootstrapPage extends WebPage {
     public static UIElement inputGroupWrap, inputGroupNowrap;

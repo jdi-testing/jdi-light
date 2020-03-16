@@ -1,9 +1,11 @@
 package io.github.epam.bootstrap.tests.common;
 
-import com.epam.jdi.light.elements.common.*;
+import com.epam.jdi.light.elements.common.Keyboard;
+import com.epam.jdi.light.elements.common.Mouse;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.elements.common.Alerts.*;

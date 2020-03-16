@@ -3,10 +3,13 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.core.DataListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.tools.*;
-import org.hamcrest.*;
+import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.PrintUtils;
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;

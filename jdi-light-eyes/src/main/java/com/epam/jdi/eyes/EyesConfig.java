@@ -6,9 +6,11 @@ package com.epam.jdi.eyes;
  * Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.VisualCheckAction;
+import com.epam.jdi.light.common.VisualCheckPage;
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.tools.*;
+import com.epam.jdi.tools.DataClass;
+import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.WebDriver;
 

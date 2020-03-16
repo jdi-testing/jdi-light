@@ -1,11 +1,13 @@
 package com.epam.jdi.light.logger;
 
 import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.*;
+import com.epam.jdi.tools.func.JAction;
+import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import org.apache.logging.log4j.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.logger.LogLevels.*;

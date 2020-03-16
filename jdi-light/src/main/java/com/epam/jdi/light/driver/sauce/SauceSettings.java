@@ -2,7 +2,8 @@ package com.epam.jdi.light.driver.sauce;
 
 import com.epam.jdi.tools.DataClass;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.System.*;
 import static org.apache.commons.lang3.StringUtils.*;

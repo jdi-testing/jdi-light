@@ -1,7 +1,8 @@
 package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.elements.common.Keyboard.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;

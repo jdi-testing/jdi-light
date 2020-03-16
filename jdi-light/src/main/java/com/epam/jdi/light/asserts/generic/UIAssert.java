@@ -5,7 +5,8 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
-import org.hamcrest.*;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static com.epam.jdi.tools.StringUtils.*;
@@ -71,7 +72,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
     public A notAppear(int timeoutSec) {
-        boolean result = new Timer(timeoutSec * 1000)
+        boolean result = new Timer(timeoutSec * 1000L)
                 .wait(() -> element.isDisplayed());
         jdiAssert(result ? "displayed" : "hidden", Matchers.is("hidden"));
         return (A) this;

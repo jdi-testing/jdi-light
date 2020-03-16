@@ -2,7 +2,8 @@ package io.github.epam.html.tests.issues.issue69;
 
 import org.testng.annotations.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static io.github.epam.html.tests.issues.issue69.IssuePage69.*;
