@@ -215,6 +215,10 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         return list().values(type);
     }
 
+    public List<String> attrs(String value) {
+        return list().attrs(value);
+    }
+
     public List<String> listEnabled() {
         return list().listEnabled();
     }
