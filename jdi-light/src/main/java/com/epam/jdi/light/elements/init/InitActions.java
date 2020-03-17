@@ -153,6 +153,11 @@ public class InitActions {
             if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
                 e.setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
             })),
+        $("MobileFindByUI", aRule(MobileFindBy.class, (e,a,f)-> {
+            MobileFindBy[] jfindbys = f.getAnnotationsByType(MobileFindBy.class);
+            if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
+                e.setLocator(mobileFindByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
+        })),
         $("VisualCheck", aRule(VisualCheck.class, (e, a) ->  {
             if (a.value())
                 e.params.update("visualCheck", "");
