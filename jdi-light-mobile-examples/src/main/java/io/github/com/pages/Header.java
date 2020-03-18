@@ -16,14 +16,8 @@ public class Header extends Section {
 	@Css(".fa-sign-out") public static WebElement logout;
 	@Css("#epam_logo") public static WebElement epamLogo;
 	//public static WebElement userIcon;
-	@FindBy (id = "user-icon") public static WebElement userIcon;
-	@MobileFindBy (name = "main-title") public static WebElement mainTitleNames;
+	@MobileFindBy (id = "user-icon") public static WebElement userIcon;
 	@MobileFindBy (className = "icon-search") public static WebElement iconSearch;
-	@XPath ("//*[text()='About']") public static WebElement linkTexts;
-	@FindBy (xpath = "//*[text()='About']") public static WebElement linkText;
-	//@MobileFindBy (tagName = "title") public static List<WebElement> titleTags;
-	//@XPath ("//title") public static List<WebElement> titleTag;
-	//@XPath ("//h3[@name='main-title']") public static WebElement mainTitleName;
 	@XPath("//*[@ui='label']") public static UIElement userName;
 	@FindBy(id = "name") public static WebElement name;
 

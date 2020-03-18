@@ -108,13 +108,21 @@ public class WebAnnotationsUtil {
         if (!"".equals(locator.id()))
             return MobileBy.cssSelector("#" + locator.id());
         if (!"".equals(locator.name()))
-            return MobileBy.cssSelector("[name=\"" + locator.name() + "\"]");
+            return MobileBy.cssSelector("[name='" + locator.name() + "']");
         if (!"".equals(locator.className()))
             return MobileBy.cssSelector("." + locator.className());
-        if(!"".equals(locator.tagName()))
+        if (!"".equals(locator.tagName()))
             return MobileBy.cssSelector(locator.tagName());
+        if (!"".equals(locator.linkText()))
+            return MobileBy.xpath("//*[text()='" + locator.linkText() + "']");
+        if (!"".equals(locator.partialLinkText()))
+            return MobileBy.xpath("//*[contains(text(),'" + locator.partialLinkText() + "')]");
         if (!"".equals(locator.accessibilityId()))
             return MobileBy.AccessibilityId(locator.accessibilityId());
+        if(!"".equals(locator.css()))
+            return MobileBy.cssSelector(locator.css());
+        if(!"".equals(locator.xpath()))
+            return MobileBy.cssSelector(locator.xpath());
         return null;
     }
 
@@ -142,11 +150,6 @@ public class WebAnnotationsUtil {
             return By.className(locator.className());
         if (!"".equals(locator.name()))
             return By.name(locator.name());
-
-
-        if (!"".equals(locator.accessibilityId()))
-            return MobileBy.AccessibilityId(locator.accessibilityId());
-
         return null;
     }
 

@@ -24,8 +24,6 @@ public @interface FindBy {
     String id() default "";
     String name() default "";
     String className() default "";
-    String accessibilityId() default "";
-
 
     // Group
     String group() default "";
