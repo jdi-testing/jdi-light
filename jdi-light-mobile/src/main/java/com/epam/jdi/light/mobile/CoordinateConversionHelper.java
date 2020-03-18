@@ -1,10 +1,10 @@
 package com.epam.jdi.light.mobile;
 
-import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.*;
 
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
@@ -24,12 +24,22 @@ public class CoordinateConversionHelper {
     private static final String iosBottomToolbarXpath = "//XCUIElementTypeToolbar[@name='BottomBrowserToolbar']";
     private static double xRatio;
     private static double yRatio;
-    private static Dimension screenSize = MobileScreen.getScreenSize();
 
     static {
         if (getDriver() instanceof AndroidDriver) {
             TOOLBAR = d -> ((AndroidDriver) d).findElementById(androidToolbarId).getRect();
-            WEBVIEW = d -> ((AndroidDriver) d).findElementByXPath(androidWebviewShortXpath).getRect();
+            WEBVIEW = d -> {
+                // TODO: fix this awful approach
+                try {
+                    return ((AndroidDriver) d).findElementByClassName("android.webkit.WebView").getRect();
+                } catch (NoSuchElementException ex) {
+                    try {
+                        TimeUnit.SECONDS.sleep(2);
+                    } catch (InterruptedException e) {
+                    }
+                    return ((AndroidDriver) d).findElementByClassName("android.webkit.WebView").getRect();
+                }
+            };
         } else if (getDriver() instanceof IOSDriver) {
             TOOLBAR = d -> ((IOSDriver) d).findElementByAccessibilityId(iosToolbarAccessibilityId).getRect();
             WEBVIEW = d -> {
@@ -55,24 +65,42 @@ public class CoordinateConversionHelper {
         return webviewRect;
     }
 
-    public static Point getBrowserCoordinates(int x, int y) {
-        return getBrowserCoordinates(new Point(x, y));
+    public static Point getCoordinatesOnWebPage(int x, int y) {
+        int xOffset = (int) js.executeScript("return window.pageXOffset;");
+        int yOffset = (int) js.executeScript("return window.pageYOffset;");
+        return getCoordinatesInViewport(x, y).moveBy(xOffset, yOffset);
     }
-    public static Point getBrowserCoordinates(Point point) {
-        return point.moveBy(0, - toolbar().y - toolbar().height / 2);
+    public static Point getCoordinatesOnWebPage(Point point) {
+        return getCoordinatesOnWebPage(point.x, point.y);
     }
-    public static Point getAbsoluteCoordinates(int x, int y) {
+
+    public static Point getCoordinatesInViewport(int x, int y) {
+        Rectangle webviewRect = webview();
+        prepareForConversion(webviewRect);
+        x -= webviewRect.x;
+        y -= webviewRect.y;
+        return new Point((int) round(x / xRatio), (int) round(y / yRatio));
+    }
+    public static Point getCoordinatesInViewport(Point point) {
+        return getCoordinatesInViewport(point.x, point.y);
+    }
+
+    /**
+     * The next two methods need to be used with the viewport coordinates only
+     */
+    public static Point getCoordinatesOnScreen(int x, int y) {
         Rectangle webviewRect = webview();
         prepareForConversion(webviewRect);
         return new Point((int) round(x * xRatio), (int) round(y * yRatio))
                 .moveBy(webviewRect.x, webviewRect.y);
     }
-    public static Point getAbsoluteCoordinates(Point point) {
-        return getAbsoluteCoordinates(point.x, point.y);
+    public static Point getCoordinatesOnScreen(Point point) {
+        return getCoordinatesOnScreen(point.x, point.y);
     }
 
-    /** This method needs to be fired each time the conversion takes place
-     *  because the toolbar (and therefore the webview) can change its size after scrolling
+    /**
+     * This method needs to be fired each time the conversion takes place
+     * because the toolbar (and therefore the webview) can change its size after scrolling
      */
     private static void prepareForConversion(Rectangle webviewRect) {
         double screenWebViewWidth = ((Long) js.executeScript("return window.innerWidth")).doubleValue();
