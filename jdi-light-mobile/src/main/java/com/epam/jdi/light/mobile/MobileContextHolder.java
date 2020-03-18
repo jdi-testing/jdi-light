@@ -31,7 +31,9 @@ public class MobileContextHolder {
         return executeDriverMethod(AppiumDriver.class, (Function<AppiumDriver, String>) AppiumDriver::getContext);
     }
     public static void setContext(String context) {
-        executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.context(context));
+        if (!getContext().equalsIgnoreCase(context)) {
+            executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.context(context));
+        }
     }
     public static Set<String> getAvailableContexts() {
         return executeDriverMethod(AppiumDriver.class, (Function<AppiumDriver, Set<String>>) AppiumDriver::getContextHandles);
