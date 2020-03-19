@@ -122,7 +122,7 @@ public class WebAnnotationsUtil {
         if(!"".equals(locator.css()))
             return MobileBy.cssSelector(locator.css());
         if(!"".equals(locator.xpath()))
-            return MobileBy.cssSelector(locator.xpath());
+            return MobileBy.xpath(locator.xpath());
         return null;
     }
 
