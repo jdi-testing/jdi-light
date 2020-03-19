@@ -444,7 +444,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             driver = driver.switchTo().frame(uiSearch(driver(),frame).get(0));
         return driver;
     }
-    private SearchContext getDefaultContext() {
+    protected SearchContext getDefaultContext() {
         return driver().switchTo().defaultContent();
     }
     private By correctLocator(By locator) {

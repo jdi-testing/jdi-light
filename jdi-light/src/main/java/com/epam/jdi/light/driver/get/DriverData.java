@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
@@ -39,7 +38,6 @@ import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static java.util.concurrent.TimeUnit.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;
@@ -271,6 +269,17 @@ public class DriverData {
 
     public static void defaultAndroidOptions(MutableCapabilities cap) {
         // Capabilities from settings
+        MutableCapabilities chromeOptions = new MutableCapabilities();
+        CAPABILITIES_FOR_CHROME.forEach((k, v) -> {
+            if (v.equalsIgnoreCase("false")) {
+                chromeOptions.setCapability(k, false);
+            } else if (v.equalsIgnoreCase("true")) {
+                chromeOptions.setCapability(k, true);
+            } else {
+                chromeOptions.setCapability(k, v);
+            }
+        });
+        cap.setCapability("appium:chromeOptions", chromeOptions);
         CAPABILITIES_FOR_ANDROID.forEach(cap::setCapability);
     }
     public static JAction1<MutableCapabilities> ANDROID_OPTIONS = DriverData::defaultAndroidOptions;
