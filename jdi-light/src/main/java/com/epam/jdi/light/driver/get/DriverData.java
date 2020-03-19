@@ -272,7 +272,6 @@ public class DriverData {
     public static void defaultAndroidOptions(MutableCapabilities cap) {
         // Capabilities from settings
         CAPABILITIES_FOR_ANDROID.forEach(cap::setCapability);
-        //cap.setCapability("appium:chromeOptions", ImmutableMap.of("w3c", false));
     }
     public static JAction1<MutableCapabilities> ANDROID_OPTIONS = DriverData::defaultAndroidOptions;
 

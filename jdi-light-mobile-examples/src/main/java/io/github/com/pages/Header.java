@@ -9,8 +9,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import io.github.com.sections.LoginForm;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
 public class Header extends Section {
 	@Css("form") public static LoginForm loginForm;
 	@Css(".fa-sign-out") public static WebElement logout;
