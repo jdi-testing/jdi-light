@@ -23,11 +23,6 @@ public class HtmlUtils {
             return parseInt(value);
         } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Integer", attr, value); }
     }
-    public static int asInt(String value) {
-        try {
-            return parseInt(value);
-        } catch (Exception ex) { throw exception("Can't parse value %s to Integer", value); }
-    }
     /**
      * Gets attribute and casts it to double
      * @param attr String - attribute to find

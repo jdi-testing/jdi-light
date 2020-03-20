@@ -15,7 +15,6 @@ import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
-import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.map.MapArray.*;
 import static com.epam.jdi.tools.pairs.Pair.*;

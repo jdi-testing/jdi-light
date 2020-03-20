@@ -9,7 +9,6 @@ import java.net.URL;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
