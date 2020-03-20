@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.settings.WebSettings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Quotes;
-import io.appium.java_client.MobileBy;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -100,29 +99,6 @@ public class WebAnnotationsUtil {
             return By.partialLinkText(locator.using());
         if (locator.how() == TAG_NAME)
             return By.tagName(locator.using());
-        return null;
-    }
-
-    public static By mobileFindByToBy(MobileFindBy locator) {
-        if (locator == null) return null;
-        if (!"".equals(locator.id()))
-            return MobileBy.cssSelector("#" + locator.id());
-        if (!"".equals(locator.name()))
-            return MobileBy.cssSelector("[name='" + locator.name() + "']");
-        if (!"".equals(locator.className()))
-            return MobileBy.cssSelector("." + locator.className());
-        if (!"".equals(locator.tagName()))
-            return MobileBy.cssSelector(locator.tagName());
-        if (!"".equals(locator.linkText()))
-            return MobileBy.xpath("//*[text()='" + locator.linkText() + "']");
-        if (!"".equals(locator.partialLinkText()))
-            return MobileBy.xpath("//*[contains(text(),'" + locator.partialLinkText() + "')]");
-        if (!"".equals(locator.accessibilityId()))
-            return MobileBy.AccessibilityId(locator.accessibilityId());
-        if(!"".equals(locator.css()))
-            return MobileBy.cssSelector(locator.css());
-        if(!"".equals(locator.xpath()))
-            return MobileBy.xpath(locator.xpath());
         return null;
     }
 

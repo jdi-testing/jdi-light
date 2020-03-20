@@ -1,4 +1,4 @@
-package com.epam.jdi.light.elements.pageobjects.annotations;
+package com.epam.jdi.light.mobile.elements.pageobjects.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
