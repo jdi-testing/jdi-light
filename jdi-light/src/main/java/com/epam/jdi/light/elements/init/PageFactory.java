@@ -57,7 +57,7 @@ public class PageFactory {
             .set(s->s.parentClass = site);
         initialize(site, info);
     }
-    protected static void initialize(Class<?> site, SiteInfo info) {
+    private static void initialize(Class<?> site, SiteInfo info) {
         setDomain(site);
         for (Field pageField : getSiteFields(site)) {
             try {
