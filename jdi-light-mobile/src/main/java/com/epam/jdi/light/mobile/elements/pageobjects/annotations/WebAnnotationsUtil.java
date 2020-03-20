@@ -3,7 +3,7 @@ package com.epam.jdi.light.mobile.elements.pageobjects.annotations;
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.By;
 
-public class WebAnnotationsUtilMobile {
+public class WebAnnotationsUtil {
 
     public static By mobileFindByToBy(MobileFindBy locator) {
         if (locator == null) return null;
