@@ -23,22 +23,25 @@ import static org.apache.commons.lang3.StringUtils.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class DriverInfo extends DataClass<DriverInfo> {
-    public DriverTypes type;
+    public DriverTypes downloadType;
     public MutableCapabilities initCapabilities;
     public JFunc1<MutableCapabilities, Capabilities> capabilities;
     public String properties, path;
-    public JFunc1<Object, WebDriver> getDriver;
+    public JFunc1<Capabilities, WebDriver> getDriver;
 
+    public boolean isLocal() {
+        return isEmpty(DRIVER_REMOTE_URL) && (isNotBlank(DRIVERS_FOLDER) || downloadType != null);
+    }
     public WebDriver getDriver() {
-        return isRemote()
-                ? setupRemote()
-                : setupLocal();
+        return isLocal()
+                ? setupLocal()
+                : setupRemote();
     }
     private WebDriver setupRemote() {
         try {
             return new RemoteWebDriver(new URL(getRemoteURL()), capabilities.execute(initCapabilities));
         } catch (Throwable ex) {
-            throw exception(ex, "Failed to setup remote "+type.name+" driver");
+            throw exception(ex, "Failed to setup remote "+ downloadType.name+" driver");
         }
     }
     private WebDriver setupLocal() {
@@ -48,16 +51,16 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 logger.info("Get local driver: " + path);
             }
             else {
-                downloadDriver(type, PLATFORM, DRIVER_VERSION);
+                downloadDriver(downloadType, PLATFORM, DRIVER_VERSION);
             }
             return getDriver.execute(capabilities.execute(initCapabilities));
         } catch (Throwable ex) {
             try {
                 if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
                     logger.info("Failed to download driver (%s %s) of latest version:" +
-                            "TRY TO GET DRIVER PREVIOUS VERSION", type, DRIVER_VERSION);
+                            "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER_VERSION);
                     try {
-                        downloadDriver(type, PLATFORM, getBelowVersion());
+                        downloadDriver(downloadType, PLATFORM, getBelowVersion());
                         return getDriver.execute(capabilities.execute(initCapabilities));
                     } catch (Throwable ex2) { throw exception(ex2, "Failed to download driver"); }
                 }

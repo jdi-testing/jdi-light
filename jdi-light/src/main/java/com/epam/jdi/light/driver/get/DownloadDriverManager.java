@@ -19,8 +19,7 @@ class DownloadDriverManager {
     }
     static WebDriverManager wdm;
 
-    static void downloadDriver(DriverTypes driverType,
-          Platform platform, String version) {
+    static void downloadDriver(DriverTypes driverType, Platform platform, String version) {
         try {
             String driverName = driverType.toString();
             switch (driverType) {

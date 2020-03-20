@@ -19,7 +19,6 @@ import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.map.MapArray.*;
 import static com.epam.jdi.tools.pairs.Pair.*;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.String.format;
 import static java.lang.Thread.*;
 import static java.util.concurrent.TimeUnit.*;
@@ -52,8 +51,8 @@ public class WebDriverFactory {
     private WebDriverFactory() {
     }
 
-    public static boolean hasRunDrivers() {
-        return getRunDrivers().any();
+    public static boolean noRunDrivers() {
+        return !getRunDrivers().any();
     }
 
     // REGISTER DRIVER
@@ -68,21 +67,12 @@ public class WebDriverFactory {
     public static String useDriver(DriverTypes driverType) {
         return useDriver(driverType, () -> initDriver(driverType));
     }
-    public static boolean isRemote() {
-        return isNotEmpty(DRIVER_REMOTE_URL);
-    }
 
     private static WebDriver initDriver(DriverTypes type) {
-        WebDriver driver = Switch(type).get(
-            Value(CHROME, t -> CHROME_INFO.getDriver()),
-            Value(FIREFOX, t -> FF_INFO.getDriver()),
-            Value(IE, t -> IE_INFO.getDriver()),
-            Value(OPERA, t -> OPERA_INFO.getDriver()),
-            Value(EDGE, t -> EDGE_INFO.getDriver()),
-            Value(SAFARI, t -> SAFARI_INFO.getDriver())
-        );
-        if (driver == null)
+        if (!DRIVER_TYPES.has(type.name)) {
             throw exception("Unknown driver: " + type);
+        }
+        WebDriver driver = DRIVER_TYPES.get(type.name).getDriver();
         return DRIVER_SETTINGS.execute(driver);
     }
 
@@ -124,7 +114,6 @@ public class WebDriverFactory {
     public static boolean SWITCH_THREAD = false;
     public static WebDriver INIT_DRIVER;
 
-    @SuppressWarnings("PMD.NPathComplexity")
     public static WebDriver getDriver(String driverName) {
         if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
             setRunDrivers(map($(driverName, INIT_DRIVER)));
@@ -133,10 +122,9 @@ public class WebDriverFactory {
         }
         if (!DRIVERS.has(driverName))
             useDriver(driverName);
+        Lock lock = new ReentrantLock();
         try {
-            Lock lock = new ReentrantLock();
             lock.lock();
-
             MapArray<String, WebDriver> rDrivers = getRunDrivers();
             if (rDrivers == null) {
                 rDrivers = new MapArray<>();
@@ -154,11 +142,12 @@ public class WebDriverFactory {
             if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId())
                 INIT_DRIVER = driver;
             driver.manage().timeouts().implicitlyWait(0, SECONDS);
-            lock.unlock();
             return driver;
         } catch (Throwable ex) {
             throw exception(ex, "Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
                 format("Drivers: %s; Run: %s", DRIVERS, getRunDrivers()));
+        } finally {
+            lock.unlock();
         }
     }
 
@@ -188,14 +177,14 @@ public class WebDriverFactory {
         if (DRIVERS.has(driverName))
             DRIVER_NAME = driverName;
         else
-            throw exception("Can't switch to Webdriver '%s'. This Driver name not registered", driverName);
+            throw exception("Can't switch to WebDriver '%s'. This Driver name not registered", driverName);
     }
 
     public static void close() {
         for (Pair<String, WebDriver> pair : getRunDrivers())
             try {
                 pair.value.quit();
-            } catch (Exception ignore) {}
+            } catch (Exception ignore) { }
         getRunDrivers().clear();
     }
 

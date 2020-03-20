@@ -175,7 +175,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
     public void checkOpened() {
-        if (!hasRunDrivers())
+        if (noRunDrivers())
             throw exception("Page '%s' is not opened: Driver is not run", toString());
         String result = Switch(checkUrlType).get(
             Value(NONE, ""),
@@ -209,7 +209,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(level = DEBUG)
     public boolean isOpened() {
-        if (!hasRunDrivers())
+        if (noRunDrivers())
             return false;
         boolean result = Switch(checkUrlType).get(
                 Value(NONE, t -> true),
