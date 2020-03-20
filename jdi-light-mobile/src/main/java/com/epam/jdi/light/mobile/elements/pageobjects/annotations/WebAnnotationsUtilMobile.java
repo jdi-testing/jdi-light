@@ -1,10 +1,9 @@
 package com.epam.jdi.light.mobile.elements.pageobjects.annotations;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil;
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.By;
 
-public class WebAnnotationsUtilMobile extends WebAnnotationsUtil {
+public class WebAnnotationsUtilMobile {
 
     public static By mobileFindByToBy(MobileFindBy locator) {
         if (locator == null) return null;
