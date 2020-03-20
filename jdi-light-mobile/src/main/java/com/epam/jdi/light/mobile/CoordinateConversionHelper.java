@@ -1,5 +1,6 @@
 package com.epam.jdi.light.mobile;
 
+import com.epam.jdi.light.common.JDIAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.*;
@@ -28,18 +29,19 @@ public class CoordinateConversionHelper {
     static {
         if (getDriver() instanceof AndroidDriver) {
             TOOLBAR = d -> ((AndroidDriver) d).findElementById(androidToolbarId).getRect();
-            WEBVIEW = d -> {
-                // TODO: fix this awful approach
-                try {
-                    return ((AndroidDriver) d).findElementByClassName("android.webkit.WebView").getRect();
-                } catch (NoSuchElementException ex) {
-                    try {
-                        TimeUnit.SECONDS.sleep(2);
-                    } catch (InterruptedException e) {
-                    }
-                    return ((AndroidDriver) d).findElementByClassName("android.webkit.WebView").getRect();
-                }
-            };
+//            WEBVIEW = d -> {
+//                // TODO: fix this awful approach
+//                try {
+//                    return ((AndroidDriver) d).findElementByClassName("android.webkit.WebView").getRect();
+//                } catch (NoSuchElementException ex) {
+//                    try {
+//                        TimeUnit.SECONDS.sleep(2);
+//                    } catch (InterruptedException e) {
+//                    }
+//                    return ((AndroidDriver) d).findElementByClassName("android.webkit.WebView").getRect();
+//                }
+//            };
+            WEBVIEW = d -> ((AndroidDriver) d).findElementByClassName("android.webkit.WebView").getRect();
         } else if (getDriver() instanceof IOSDriver) {
             TOOLBAR = d -> ((IOSDriver) d).findElementByAccessibilityId(iosToolbarAccessibilityId).getRect();
             WEBVIEW = d -> {
@@ -50,6 +52,7 @@ public class CoordinateConversionHelper {
         }
     }
 
+    @JDIAction(timeout = 5)
     private static Rectangle toolbar() {
         String initialContext = MobileContextHolder.getContext();
         MobileContextHolder.setContext("NATIVE_APP");
@@ -57,6 +60,7 @@ public class CoordinateConversionHelper {
         MobileContextHolder.setContext(initialContext);
         return toolbarRect;
     }
+    @JDIAction(timeout = 5)
     private static Rectangle webview() {
         String initialContext = MobileContextHolder.getContext();
         MobileContextHolder.setContext("NATIVE_APP");
