@@ -28,6 +28,8 @@ import static org.apache.commons.lang3.StringUtils.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebDriverFactory {
+    private WebDriverFactory() { }
+
     public static MapArray<String, JFunc<WebDriver>> DRIVERS
         = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
     private static MapArray<String, WebDriver> getRunDrivers() {
@@ -45,10 +47,7 @@ public class WebDriverFactory {
     public static boolean SINGLE_THREAD = false;
     private static MapArray<String, WebDriver> RUN_DRIVERS = new MapArray<>();
     private static Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS
-            = new Safe<>(MapArray::new);
-
-    private WebDriverFactory() {
-    }
+        = new Safe<>(MapArray::new);
 
     public static boolean noRunDrivers() {
         return !getRunDrivers().any();

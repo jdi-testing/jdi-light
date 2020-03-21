@@ -1,6 +1,5 @@
 package io.github.com;
 
-import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.custom.CustomMenu;

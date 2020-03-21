@@ -45,13 +45,11 @@ public class DriverInfo extends DataClass<DriverInfo> {
     }
     private WebDriver setupLocal() {
         try {
-            if (isNotBlank(DRIVERS_FOLDER)) {
-                setProperty(properties, path);
-                logger.info("Get local driver: " + path);
-            }
-            else {
-                downloadDriver(downloadType, PLATFORM, DRIVER_VERSION);
-            }
+            String driverPath = isBlank(DRIVERS_FOLDER)
+                ? downloadDriver(downloadType, PLATFORM, DRIVER_VERSION)
+                : path;
+            logger.info("Use driver path: " + driverPath);
+            setProperty(properties, driverPath);
             return getDriver.execute(capabilities.execute(initCapabilities));
         } catch (Throwable ex) {
             try {

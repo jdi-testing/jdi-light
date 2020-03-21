@@ -19,7 +19,7 @@ class DownloadDriverManager {
     }
     static WebDriverManager wdm;
 
-    static void downloadDriver(DriverTypes driverType, Platform platform, String version) {
+    static String downloadDriver(DriverTypes driverType, Platform platform, String version) {
         try {
             String driverName = driverType.toString();
             switch (driverType) {
@@ -36,6 +36,7 @@ class DownloadDriverManager {
                 default:
                     throw exception("%s driver not supported for download");
             }
+            // wdm.config().getProperty("wdm.targetPath");
             if (getOs() == WIN) {
                 switch (platform) {
                     case X32:
@@ -57,6 +58,7 @@ class DownloadDriverManager {
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
+            return wdm.getBinaryPath();
         } catch (Exception ex) {
             throw exception(ex, "Can't download latest driver for " + driverType);
         }
