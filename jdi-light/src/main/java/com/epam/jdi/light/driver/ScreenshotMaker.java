@@ -45,7 +45,7 @@ public class ScreenshotMaker {
         return takeScreenshot(value, "yyyy-MM-dd-HH-mm-ss");
     }
     public String takeScreenshot(String name, String dateFormat) {
-        if (!hasRunDrivers())
+        if (noRunDrivers())
             throw exception("Failed to do screenshot. No Drivers run");
         String screensFilePath = getFileName(mergePath(
             getPath(), name + nowTime(dateFormat)));

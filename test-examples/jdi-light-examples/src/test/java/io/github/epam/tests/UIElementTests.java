@@ -21,7 +21,7 @@ import static io.github.epam.EpamGithubSite.metalAndColorsPage;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.testng.Assert.*;
 
-public class UIElementTests extends TestsInit{
+public class UIElementTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -303,7 +303,7 @@ public class UIElementTests extends TestsInit{
     }
     @Test
     public void findByNull(){
-        assertEquals(findByNull.toString(), "UIElementContactFormPage.findByNull (#find-by-null or [ui=find-by-null])");
+        assertEquals(findByNull.toString(), "UIElementContactFormPage.findByNull (smart: #find-by-null)");
     }
     @Test
     public void uiNull(){

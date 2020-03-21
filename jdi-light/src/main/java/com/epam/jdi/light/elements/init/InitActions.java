@@ -151,8 +151,12 @@ public class InitActions {
             })),
         $("FindBy UI", aRule(FindBy.class, (e,a,f)-> {
             FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
-            if (jfindbys.length > 0 && any(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
-                e.base().setLocator(findByToBy(first(jfindbys, j -> j.group().equals(TEST_GROUP))));
+            if (jfindbys.length > 0) {
+                FindBy findBy = first(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP));
+                if (findBy != null) {
+                    e.base().setLocator(findByToBy(findBy));
+                }
+            }
             })),
         $("Visual Check", aRule(VisualCheck.class, (e, a) ->  {
             if (a.value())

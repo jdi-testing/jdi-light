@@ -80,9 +80,9 @@ public class CheckListSteps {
         checklist(name).uncheckAll();
     }
 
-    @Then("^in \"([^\"]*)\" checklist checked element is \"([^\"]*)\"$")
+    @Then("^in \"([^\"]*)\" checklist \"([^\"]*)\" is checked$")
     public static void isCheckBoxChecked(String name, String value) {
-        checklist(name).is().selected(value);
+        checklist(name).is().selected(containsString(value));
     }
 
     @Then("count of selected elements in \"([^\"]*)\" checklist is (\\d+)")

@@ -146,7 +146,7 @@ public class WebSettings {
             }
         });
     };
-    private static boolean initialized = false;
+    public static boolean initialized = false;
     public static synchronized void init() {
         if (initialized) return;
         getProperties(TEST_PROPERTIES_PATH);
@@ -242,7 +242,7 @@ public class WebSettings {
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
     }
 
-    private static void loadCapabilities(String property, String defaultPath, JAction1<Properties> setCapabilities) {
+    public static void loadCapabilities(String property, String defaultPath, JAction1<Properties> setCapabilities) {
         String path = "";
         try {
             path = System.getProperty(property, getProperty(property));

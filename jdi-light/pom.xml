@@ -16,23 +16,28 @@
         <aspectj.version>1.9.1</aspectj.version>
         <aspectj.maven>1.11</aspectj.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <allure.testng>2.13.1</allure.testng>
         <java.version>1.8</java.version>
-        <testng.version>7.0.0-beta1</testng.version>
         <log4j2.version>2.11.1</log4j2.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-java-commons</artifactId>
-            <version>${allure.testng}</version>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.epam.jdi.tools</groupId>
             <artifactId>jdi-light-saber</artifactId>
             <version>2.0.71</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -43,42 +48,33 @@
             <artifactId>log4j-core</artifactId>
             <version>${log4j2.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>${log4j2.version}</version>
         </dependency>
-
-      <!--adapter for log4j 1 -->
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-1.2-api</artifactId>
-        <version>${log4j2.version}</version>
-      </dependency>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>RELEASE</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>${log4j2.version}</version>
         </dependency>
         <dependency>
             <groupId>net.lingala.zip4j</groupId>
             <artifactId>zip4j</artifactId>
             <version>RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>RELEASE</version>
         </dependency>
 
-        <!--AOP -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
@@ -94,6 +90,15 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
@@ -129,25 +134,10 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
-            <!-- From general pom -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
-                <configuration>
-                    <repoToken></repoToken>
-                </configuration>
             </plugin>
 
             <plugin>

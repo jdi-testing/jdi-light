@@ -127,8 +127,8 @@ public class DriverData {
         }
     }
 
-    public static Capabilities getCapabilities(
-            MutableCapabilities capabilities, JAction1<Object> defaultCapabilities) {
+    public static MutableCapabilities getCapabilities(
+            MutableCapabilities capabilities, JAction1<MutableCapabilities> defaultCapabilities) {
         try {
             setupErrors.clear();
             defaultCapabilities.execute(capabilities);

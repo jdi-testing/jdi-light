@@ -13,7 +13,7 @@ Feature: CheckList
     When I check elements in "Weather" checklist:
       | Hot option |
       | Cold       |
-    Then in "Weather" checklist checked element is "Cold"
+    Then in "Weather" checklist "Cold" is checked
 
   Scenario: Uncheck elements test
     When I check elements in "Weather" checklist:
@@ -22,7 +22,7 @@ Feature: CheckList
     Then count of selected elements in "Weather" checklist is 2
     Then in the "Weather" checklist checked elements are:
         | Rainy day |
-        | Sunny       |
+        | Sunny     |
     And I uncheck in "Weather" checklist elements:
       | Rainy day |
       | Sunny     |
@@ -35,7 +35,7 @@ Feature: CheckList
     When I Select fields from "Weather":
     |Cold|
     |Hot option|
-    Then in "Weather" checklist checked element is "Cold"
+    Then in "Weather" checklist "Cold" is checked
 
   Scenario: Check element via numbers test
     When I check in "Weather" checklist elements by numbers:
@@ -58,7 +58,7 @@ Feature: CheckList
     When I select elements in "Weather" checklist by numbers:
       | 1 |
       | 4 |
-    Then in "Weather" checklist checked element is "Sunny"
+    Then in "Weather" checklist "Sunny" is checked
 
   Scenario: Disable element test
     When I select "Weather" disabled option "Disabled"

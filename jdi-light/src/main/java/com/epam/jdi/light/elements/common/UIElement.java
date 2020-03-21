@@ -682,6 +682,11 @@ public class UIElement extends JDIBase
     public UIElement find(String by) {
         return $(by, this);
     }
+    public UIElement findFirst(String by) {
+        UIElement element = $(by, this);
+        element.strictSearch(false);
+        return element;
+    }
     public UIElement find(By by) {
         return $(by, this);
     }
@@ -721,7 +726,7 @@ public class UIElement extends JDIBase
     protected boolean selected() {
         if (getWebElement().isSelected())
             return true;
-        return hasClass("checked") || hasClass("active")||
+        return hasClass("checked") || hasClass("active") ||
             hasClass("selected") || attr("checked").equals("true");
     }
     protected boolean enabled() {

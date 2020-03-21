@@ -21,7 +21,6 @@ public class SiteJdi {
 
     public static Icon userIcon;
     public static Text userName;
-    @UI(".sidebar-menu span")
-    public static Menu leftMenu;
+    @UI(".sidebar-menu li") public static Menu leftMenu;
 
 }

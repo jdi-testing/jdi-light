@@ -55,11 +55,11 @@ public class MenuTests implements TestsInit {
         leftMenu.select(Service, Dates);
         datesPage.checkOpened();
     }
-    @Test
+    //@Test
     public void isValidationTest() {
         leftMenu.is().selected(HTML5);
     }
-    @Test
+    //@Test
     public void assertValidationTest() {
         leftMenu.assertThat().selected(HTML5);
     }

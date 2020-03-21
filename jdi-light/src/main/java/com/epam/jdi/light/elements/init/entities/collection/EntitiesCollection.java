@@ -77,7 +77,7 @@ public class EntitiesCollection {
 
     public static <T> T getUI(String name, Class<T> type) {
         Object element = getElement(name);
-        if (isClass(element.getClass(), type))
+        if (element != null && isClass(element.getClass(), type))
             return (T) element;
         throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
     }
@@ -111,18 +111,22 @@ public class EntitiesCollection {
             return getElementInSection(split[1], split[0]);
         if (ELEMENTS.has(name)) {
             List<Object> elements = ELEMENTS.get(name);
-            return elements.size() == 1
-                    ? elements.get(0)
-                    : LinqUtils.first(elements, el -> {
-                WebPage page = ((ICoreElement) el).base().getPage();
-                return page != null && page.getName().equals(getCurrentPage());
-            });
+            if (elements.size() > 1) {
+                Object element = LinqUtils.first(elements, el -> {
+                    WebPage page = ((ICoreElement) el).base().getPage();
+                    return page != null && page.getName().equals(getCurrentPage());
+                });
+                if (element != null) {
+                    return element;
+                }
+            }
+            return elements.get(0);
         }
         if (jsonElements == null)
             readElementsFromJson();
         return jsonElements.keys().contains(name)
-                ? $(jsonElements.get(name))
-                : new UIElement().setName(name);
+            ? $(jsonElements.get(name))
+            : new UIElement().setName(name);
     }
 
     static Object getElementInSection(String name, String section) {

@@ -123,8 +123,11 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return setLocator(defineLocator(locator));
     }
     public JDIBase setLocator(By locator) {
-        if (name.isEmpty()) name = shortBy(locator, this);
-        this.locator.add(locator, this);
+        if (locator != null) {
+            if (name.isEmpty())
+                name = shortBy(locator, this);
+            this.locator.add(locator, this);
+        }
         return this;
     }
     public JDIBase setFrames(List<By> frames) {
@@ -200,34 +203,46 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public WebElement get(Object... args) {
         manageTimeout();
         if (webElement.hasValue()) {
-            WebElement element = purify(webElement.get());
-            try {
-                element.getTagName();
-                beforeSearch(element);
-                return !locator.isEmpty()
-                    ? purify(getUIElementByLocator(element))
-                    : element;
-            } catch (Exception ignore) {
-                if (getElementFunc == null)
-                    webElement.clear();
-                else {
-                    return beforeSearch(webElement.set(purify(getElementFunc.execute())));
-                }
-            }
+            WebElement webElement = getCachedElement();
+            if (webElement != null)
+                return webElement;
         }
         if (locator.isEmpty())
             return beforeSearch(getSmart());
-        if (locator.argsCount() != args.length) {
-            if (locator.argsCount() == 0 && args.length == 1) {
-                if (args[0].getClass() == String.class)
-                    return new WebList(this).get(args[0].toString());
-                if (isClass(args[0].getClass(), Enum.class))
-                    return new WebList(this).get(getEnumValue((Enum)args[0]));
-            }
-            throw exception("Can't get element with template locator '%s'. Expected %s arguments but found %s", getLocator(), locator.argsCount(), args.length);
-        }
+        if (locator.argsCount() != args.length)
+            return getWebListFromArgs(args);
         List<WebElement> els = getAllElements(args);
         return getElement(els);
+    }
+    private UIElement getWebListFromArgs(Object... args) {
+        if (locator.argsCount() == 0 && args.length == 1) {
+            if (args[0].getClass() == String.class)
+                return new WebList(this).get(args[0].toString());
+            if (isClass(args[0].getClass(), Enum.class))
+                return new WebList(this).get(getEnumValue((Enum<?>)args[0]));
+        }
+        throw exception("Can't get element with template locator '%s'. Expected %s arguments but found %s", getLocator(), locator.argsCount(), args.length);
+    }
+    private WebElement getCachedElement() {
+        WebElement element = purify(webElement.get());
+        try {
+            element.getTagName();
+            beforeSearch(element);
+            return !locator.isEmpty()
+                    ? purify(getUIElementByLocator(element))
+                    : element;
+        } catch (Exception ignore) {
+            if (getElementFunc == null) {
+                webElement.clear();
+                return null;
+            } else {
+                return beforeSearch(webElement.set(purify(getElementFunc.execute())));
+            }
+        }
+    }
+    public Boolean strictSearch;
+    public void strictSearch(boolean strictSearch) {
+        this.strictSearch = strictSearch;
     }
     private WebElement getElement(List<WebElement> els) {
         if (els.size() == 1)
@@ -237,7 +252,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         List<WebElement> filtered = filterElements(els);
         if (filtered.size() == 1)
             return filtered.get(0);
-        if (STRICT_SEARCH)
+        if ((strictSearch == null && STRICT_SEARCH) || (strictSearch != null && strictSearch))
             throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, els.size(), toString(), getTimeout());
         return (filtered.size() > 1 ? filtered : els).get(0);
     }
