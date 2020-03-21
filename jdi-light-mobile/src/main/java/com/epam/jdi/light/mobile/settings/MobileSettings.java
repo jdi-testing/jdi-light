@@ -28,6 +28,6 @@ public class MobileSettings {
     }
     private static String getRemoteUrl(String prop) {
         String trimProp = prop.toLowerCase().replaceAll(" ", "");
-        return trimProp.equals("appium") ? "appium" : "";
+        return trimProp.equals("appium") ? appium() : "";
     }
 }
