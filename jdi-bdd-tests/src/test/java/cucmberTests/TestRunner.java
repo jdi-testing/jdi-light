@@ -22,7 +22,7 @@ import static io.github.com.pages.Header.*;
 @CucumberOptions(
         features = "classpath:features"
         , glue = {"com.epam.jdi.bdd", "cucmberTests"}
-        //, tags = {"@base"}
+        //, tags = {"@menu"}
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
     @BeforeClass

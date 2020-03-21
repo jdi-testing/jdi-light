@@ -3,6 +3,7 @@ package io.github.com;
 import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import io.github.com.custom.CustomMenu;
 import io.github.com.pages.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
@@ -22,7 +23,7 @@ public class StaticSite {
 
 	@UI("header") public static Header header;
 	@UI("footer") public static Footer footer;
-	@UI(".sidebar-menu span") public static Menu leftMenu;
+	@UI(".sidebar-menu li") public static CustomMenu leftMenu;
 
 	@Frame("#jdi-frame-site") public static HomePageFrame iframe;
 	public static GithubPage githubPage;

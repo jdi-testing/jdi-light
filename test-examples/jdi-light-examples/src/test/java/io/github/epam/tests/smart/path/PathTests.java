@@ -102,10 +102,11 @@ public class PathTests extends StaticTestsInit {
                     els = ctx.findElements((By) locator);
                 else
                     throw exception("First locator should be by locator");
+            } else {
+                els = isClass(locator.getClass(), By.class)
+                    ? els.get(0).findElements((By) locator)
+                    : getElementsByIndex(els, locator);
             }
-            els = isClass(locator.getClass(), By.class)
-                ? els.get(0).findElements((By) locator)
-                : getElementsByIndex(els, locator);
         }
         if (isEmpty(els))
             throw exception("Get element failed to find at least one element");

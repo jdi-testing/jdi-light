@@ -1,6 +1,6 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import cucumber.api.java.en.Then;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
@@ -10,8 +10,8 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class DropdownSteps {
-    public static Dropdown dropdown(String name) {
-        return getUI(name, Dropdown.class);
+    public static IsDropdown dropdown(String name) {
+        return getUI(name, IsDropdown.class);
     }
 
     @Then("^the \"([^\"]*)\" in \"([^\"]*)\" is selected$")
