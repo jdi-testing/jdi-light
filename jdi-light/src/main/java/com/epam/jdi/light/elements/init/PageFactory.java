@@ -23,10 +23,10 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
@@ -43,7 +43,7 @@ public class PageFactory {
     // region initSite
     public static void initSite(Class<?> site) {
         init();
-        initSite(site, DRIVER_NAME);
+        initSite(site, DRIVER.name);
     }
     public static void initSite(Class<?> site, String driverName) {
         init();
@@ -166,7 +166,7 @@ public class PageFactory {
                 info.name());
     }
     private static void initWebPage(WebPage webPage) {
-        webPage.driverName = DRIVER_NAME;
+        webPage.driverName = DRIVER.name;
         webPage.updatePageData(webPage.getClass().getAnnotation(Url.class),
                 webPage.getClass().getAnnotation(Title.class));
         addPage(webPage);
@@ -201,7 +201,7 @@ public class PageFactory {
     }
 
     private static void initPage(Object page) {
-        SiteInfo info = new SiteInfo(DRIVER_NAME, page);
+        SiteInfo info = new SiteInfo(DRIVER.name, page);
         if (isClass(page.getClass(), WebPage.class))
             initWebPage((WebPage) page);
         initElements(info);

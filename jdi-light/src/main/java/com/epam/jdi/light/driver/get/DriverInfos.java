@@ -1,6 +1,5 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -16,8 +15,6 @@ import org.openqa.selenium.safari.SafariOptions;
 
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
-import static com.epam.jdi.tools.map.MapArray.*;
-import static com.epam.jdi.tools.pairs.Pair.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -83,13 +80,5 @@ public class DriverInfos {
             d.path = safariDriverPath();
             d.getDriver = c -> new SafariDriver((SafariOptions) c);
         }
-    );
-    public static MapArray<String, DriverInfo> DRIVER_TYPES = map(
-        $(CHROME.name, CHROME_INFO),
-        $(FIREFOX.name, FIREFOX_INFO),
-        $(IE.name, IE_INFO),
-        $(EDGE.name, EDGE_INFO),
-        $(OPERA.name, OPERA_INFO),
-        $(SAFARI.name, SAFARI_INFO)
     );
 }

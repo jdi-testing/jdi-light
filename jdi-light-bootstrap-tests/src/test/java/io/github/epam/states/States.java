@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 
 import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static io.github.com.StaticSite.*;
 import static io.github.epam.test.data.UsersUtils.*;
@@ -17,9 +18,9 @@ public class States {
     @Step
     public static void shouldBeLoggedIn() {
         String url = WebPage.getUrl();
-        if (!url.contains(DOMAIN)
+        if (!url.contains(DRIVER.domain)
             || url.contains("issue"))
-            openUrl(DOMAIN);
+            openUrl(DRIVER.domain);
         if (userName.isHidden())
             login();
     }
@@ -33,8 +34,8 @@ public class States {
 
     @Step
     public static void shouldBeLoggedOut() {
-        if (!WebPage.getUrl().contains(DOMAIN))
-            openUrl(DOMAIN);
+        if (!WebPage.getUrl().contains(DRIVER.domain))
+            openUrl(DRIVER.domain);
         if (userName.isDisplayed())
             logout();
         if (loginForm.isDisplayed())

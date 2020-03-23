@@ -1,6 +1,7 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.tools.func.*;
+import com.epam.jdi.tools.func.JAction;
+import com.epam.jdi.tools.func.JAction1;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -18,15 +19,14 @@ import java.util.logging.Level;
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.driver.get.Platform.*;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.PathUtils.*;
 import static com.epam.jdi.tools.PrintUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.RegExUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.awt.Toolkit.*;
-import static java.lang.Integer.*;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.*;
@@ -42,19 +42,13 @@ import static org.openqa.selenium.remote.CapabilityType.*;
  */
 public class DriverData {
     public static final String PROJECT_PATH = path("");
-    public static String SRC_PATH = mergePath(PROJECT_PATH, "src", "main");
     public static String TEST_PATH = mergePath(PROJECT_PATH, "src", "test");
-    public static String LOGS_PATH = mergePath("target", ".logs");
-    public static String DRIVERS_FOLDER;
     public static String getDriverFolder() {
-        return isNotBlank(DRIVERS_FOLDER) && !DRIVERS_FOLDER.equalsIgnoreCase("default")
-            ? DRIVERS_FOLDER : mergePath(TEST_PATH, "resources", "drivers");
+        return isNotBlank(DRIVER.path) && !DRIVER.path.equalsIgnoreCase("default")
+            ? DRIVER.path : mergePath(TEST_PATH, "resources", "drivers");
     }
     public static String DOWNLOADS_DIR = mergePath(TEST_PATH, "resources", "downloads");
-    public static PageLoadStrategy PAGE_LOAD_STRATEGY = NORMAL;
-    public static String BROWSER_SIZE = "MAXIMIZE";
     public static final String DEFAULT_DRIVER = "chrome";
-    public static String DRIVER_NAME = DEFAULT_DRIVER;
     public static String ARGUMENTS_PROPERTY = "arguments";
 
     public static Map<String,String> CAPABILITIES_FOR_IE = new HashMap<>();
@@ -66,7 +60,7 @@ public class DriverData {
     public static Map<String,String> COMMON_CAPABILITIES = new HashMap<>();
 
     public static String chromeDriverPath() {
-        return mergePath(getDriverFolder(),getOs() == WIN ? "chromedriver.exe" : "chromedriver");
+        return mergePath(getDriverFolder(), getOs() == WIN ? "chromedriver.exe" : "chromedriver");
     }
     public static String ieDriverPath() {
         return mergePath(getDriverFolder(),"IEDriverServer.exe");
@@ -86,9 +80,6 @@ public class DriverData {
     private static String driverPath(String driverName) {
         return mergePath(getDriverFolder(), getOs() == WIN ? driverName + ".exe" : driverName);
     }
-    public static String LATEST_VERSION = "LATEST";
-    public static String DRIVER_VERSION = LATEST_VERSION;
-    public static String PRELATEST_VERSION = "PRELATEST";
     public static Platform PLATFORM = X32;
 
     public static OsTypes getOs() {
@@ -102,19 +93,16 @@ public class DriverData {
 
     // GET DRIVER
     public static WebDriver driverSettings(WebDriver driver) {
-        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
-        if (groups.size() == 2)
-            driver.manage().window().setSize(new Dimension(parseInt(groups.get(0)), parseInt(groups.get(1))));
-        else {
+        if (DRIVER.screenSize.maximize){
             if (getOs().equals(MAC))
                 maximizeScreen(driver);
             else
                 driver.manage().window().maximize();
+        } else {
+            driver.manage().window().setSize(DRIVER.screenSize.asDimension());
         }
         return driver;
     }
-    public static JFunc1<WebDriver, WebDriver> DRIVER_SETTINGS = DriverData::driverSettings;
-
     private static WebDriver setBrowserSizeForMac(WebDriver driver, int width, int height) {
         try {
             Point position = new Point(0, 0);
@@ -167,8 +155,8 @@ public class DriverData {
         });
         setUp("Chrome: '--disable-web-security', '--disable-extensions', 'test-type'",
             () -> cap.addArguments("--disable-web-security", "--disable-extensions", "test-type"));
-        setUp("Chrome: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
-            () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
+        setUp("Chrome: PageLoadStrategy:" + DRIVER.pageLoadStrategy,
+            () -> cap.setPageLoadStrategy(DRIVER.pageLoadStrategy));
         setUp("Chrome: ACCEPT_SSL_CERTS:true",
             () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
         setUp("Chrome: " + UNEXPECTED_ALERT_BEHAVIOR + "=" + ACCEPT,
@@ -210,8 +198,8 @@ public class DriverData {
             firefoxProfile.setPreference("startup.homepage_welcome_url.additional", "about:blank");
             firefoxProfile.setPreference("network.http.phishy-userpass-length", 255);
         });
-        setUp("Firefox: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
-            () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
+        setUp("Firefox: PageLoadStrategy:" + DRIVER.pageLoadStrategy,
+            () -> cap.setPageLoadStrategy(DRIVER.pageLoadStrategy));
         setUp("Firefox: ACCEPT_SSL_CERTS: true",
             () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
         setUp("Firefox: UNEXPECTED_ALERT_BEHAVIOR, ACCEPT",
@@ -230,8 +218,8 @@ public class DriverData {
             cap::ignoreZoomSettings);
         setUp("IE: requireWindowFocus:true",
             () -> cap.setCapability("requireWindowFocus", true));
-        setUp("IE: PageLoadStrategy:" + PAGE_LOAD_STRATEGY,
-            () -> cap.setPageLoadStrategy(PAGE_LOAD_STRATEGY));
+        setUp("IE: PageLoadStrategy:" + DRIVER.pageLoadStrategy,
+            () -> cap.setPageLoadStrategy(DRIVER.pageLoadStrategy));
         setUp("IE: takeFullPageScreenshot",
             cap::takeFullPageScreenshot);
         setUp("IE: ACCEPT_SSL_CERTS: true",
@@ -277,9 +265,8 @@ public class DriverData {
     }
 
     private static String getBrowserSizeOption() {
-        List<String> groups = matches(BROWSER_SIZE, "([0-9]+)[^0-9]*([0-9]+)");
-        return groups.size() == 2
-                ? "--window-size=" + groups.get(0) + "," + groups.get(1)
-                : "--start-maximized";
+        return DRIVER.screenSize.maximize
+            ? "--start-maximized"
+            : "--window-size=" + DRIVER.screenSize.width + "," + DRIVER.screenSize.height;
     }
 }

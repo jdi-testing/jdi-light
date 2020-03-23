@@ -8,6 +8,7 @@ import java.io.IOException;
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static io.qameta.allure.Allure.*;
 import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
@@ -33,7 +34,7 @@ public class AllureLogger {
     }
 
     public static void failStep(String uuid, String screenName, String htmlSnapshot, String requests) {
-        if (!WRITE_TO_ALLURE || isBlank(uuid)) return;
+        if (!LOGS.writeToAllure || isBlank(uuid)) return;
 
         getLifecycle().updateStep(uuid, s -> s.withStatus(FAILED));
         if (isNotBlank(screenName)) {
@@ -54,7 +55,7 @@ public class AllureLogger {
     }
 
     public static void passStep(String uuid) {
-        if (!WRITE_TO_ALLURE || isBlank(uuid)) return;
+        if (!LOGS.writeToAllure || isBlank(uuid)) return;
 
         getLifecycle().updateStep(uuid, s -> s.withStatus(PASSED));
         getLifecycle().stopStep(uuid);

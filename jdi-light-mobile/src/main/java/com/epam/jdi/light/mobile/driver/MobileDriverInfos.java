@@ -20,14 +20,14 @@ public class MobileDriverInfos {
         .set(d -> {
             d.initCapabilities = new DesiredCapabilities();
             d.capabilities = c -> getCapabilities(c, ANDROID_OPTIONS::execute);
-            d.getDriver = c -> new AndroidDriver<>(new URL(getRemoteURL()), c);
+            d.getRemoteDriver = c -> new AndroidDriver<>(new URL(getRemoteURL()), c);
         }
     );
-    public static DriverInfo IOS_INFO = new DriverInfo()
+public static DriverInfo IOS_INFO = new DriverInfo()
         .set(d -> {
             d.initCapabilities = new DesiredCapabilities();
             d.capabilities = c -> getCapabilities(c, IOS_OPTIONS::execute);
-            d.getDriver = c -> new IOSDriver<>(new URL(getRemoteURL()), c);
+            d.getRemoteDriver = c -> new IOSDriver<>(new URL(getRemoteURL()), c);
         }
     );
 }

@@ -9,6 +9,7 @@ import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.PathUtils.*;
 import static com.epam.jdi.tools.Timer.*;
@@ -21,7 +22,7 @@ import static org.openqa.selenium.OutputType.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class ScreenshotMaker {
-    public static String SCREEN_PATH = mergePath(LOGS_PATH, "screens");
+    public static String SCREEN_PATH = mergePath(COMMON.logsPath, "screens");
     public static String SCREEN_NAME = "screen";
     public static String SCREEN_FILE_SUFFIX = ".jpg";
     public static AttachmentStrategy SCREENSHOT_STRATEGY = ON_FAIL;

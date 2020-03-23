@@ -3,6 +3,7 @@ package com.epam.jdi.light.driver;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.JavascriptExecutor;
@@ -13,8 +14,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.map.MapArray.*;
 import static com.epam.jdi.tools.pairs.Pair.*;
@@ -67,11 +68,11 @@ public class WebDriverFactory {
     }
 
     private static WebDriver initDriver(DriverTypes type) {
-        if (!DRIVER_TYPES.has(type.name)) {
+        if (!DRIVER.types.has(type.name)) {
             throw exception("Unknown driver: " + type);
         }
-        WebDriver driver = DRIVER_TYPES.get(type.name).getDriver();
-        return DRIVER_SETTINGS.execute(driver);
+        WebDriver driver = DRIVER.types.get(type.name).getDriver();
+        return DRIVER.setup.execute(driver);
     }
 
     // GET DRIVER
@@ -80,7 +81,7 @@ public class WebDriverFactory {
         if (DRIVERS.has(driverName))
             driverName = driverName + System.currentTimeMillis();
         DRIVERS.add(driverName, driver);
-        DRIVER_NAME = driverName;
+        DRIVER.name = driverName;
         return driverName;
     }
 
@@ -89,7 +90,7 @@ public class WebDriverFactory {
             DRIVERS.add(driverName, driver);
         else
             throw exception("Can't register WebDriver '%s'. Driver with same name already registered", driverName);
-        DRIVER_NAME = driverName;
+        DRIVER.name = driverName;
         return driverName;
     }
 
@@ -99,8 +100,8 @@ public class WebDriverFactory {
 
     public static WebDriver getDriver() {
         try {
-            if (isNotBlank(DRIVER_NAME))
-                return getDriver(DRIVER_NAME);
+            if (isNotBlank(DRIVER.name))
+                return getDriver(DRIVER.name);
             useDriver(CHROME);
             return getDriver(CHROME.name);
         } catch (Exception ex) {
@@ -112,7 +113,9 @@ public class WebDriverFactory {
     public static boolean SWITCH_THREAD = false;
     public static WebDriver INIT_DRIVER;
 
-    public static WebDriver getDriver(String driverName) {
+    public static JFunc1<String, WebDriver> GET_DRIVER_BY_NAME = driverName -> {
+        Lock lock = new ReentrantLock();
+        lock.lock();
         if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
             setRunDrivers(map($(driverName, INIT_DRIVER)));
             SWITCH_THREAD = true;
@@ -120,9 +123,7 @@ public class WebDriverFactory {
         }
         if (!DRIVERS.has(driverName))
             useDriver(driverName);
-        Lock lock = new ReentrantLock();
         try {
-            lock.lock();
             MapArray<String, WebDriver> rDrivers = getRunDrivers();
             if (rDrivers == null) {
                 rDrivers = new MapArray<>();
@@ -143,10 +144,13 @@ public class WebDriverFactory {
             return driver;
         } catch (Throwable ex) {
             throw exception(ex, "Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
-                format("Drivers: %s; Run: %s", DRIVERS, getRunDrivers()));
+                    format("Drivers: %s; Run: %s", DRIVERS, getRunDrivers()));
         } finally {
             lock.unlock();
         }
+    };
+    public static WebDriver getDriver(String driverName) {
+        return GET_DRIVER_BY_NAME.execute(driverName);
     }
 
     public static JavascriptExecutor getJSExecutor() {
@@ -157,7 +161,7 @@ public class WebDriverFactory {
     }
 
     public static void reopenDriver() {
-        reopenDriver(DRIVER_NAME);
+        reopenDriver(DRIVER.name);
     }
 
     public static void reopenDriver(String driverName) {
@@ -173,7 +177,7 @@ public class WebDriverFactory {
 
     public static void switchToDriver(String driverName) {
         if (DRIVERS.has(driverName))
-            DRIVER_NAME = driverName;
+            DRIVER.name = driverName;
         else
             throw exception("Can't switch to WebDriver '%s'. This Driver name not registered", driverName);
     }
