@@ -27,6 +27,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     public JFunc1<MutableCapabilities, Capabilities> capabilities;
     public String properties, path;
     public JFunc1<Capabilities, WebDriver> getDriver;
+    public JFunc1<Capabilities, WebDriver> getRemoteDriver;
 
     public boolean isLocal() {
         return isEmpty(DRIVER_REMOTE_URL) && (isNotBlank(DRIVERS_FOLDER) || downloadType != null);
@@ -36,9 +37,14 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 ? setupLocal()
                 : setupRemote();
     }
+    private Capabilities getCapabilities() {
+        return capabilities.execute(initCapabilities);
+    }
     private WebDriver setupRemote() {
         try {
-            return new RemoteWebDriver(new URL(getRemoteURL()), capabilities.execute(initCapabilities));
+            return getRemoteDriver != null
+                ? getRemoteDriver.execute(getCapabilities())
+                : new RemoteWebDriver(new URL(getRemoteURL()), getCapabilities());
         } catch (Throwable ex) {
             throw exception(ex, "Failed to setup remote "+ downloadType.name+" driver");
         }
@@ -50,7 +56,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 : path;
             logger.info("Use driver path: " + driverPath);
             setProperty(properties, driverPath);
-            return getDriver.execute(capabilities.execute(initCapabilities));
+            return getDriver.execute(getCapabilities());
         } catch (Throwable ex) {
             try {
                 if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
@@ -58,7 +64,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                             "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER_VERSION);
                     try {
                         downloadDriver(downloadType, PLATFORM, getBelowVersion());
-                        return getDriver.execute(capabilities.execute(initCapabilities));
+                        return getDriver.execute(getCapabilities());
                     } catch (Throwable ex2) { throw exception(ex2, "Failed to download driver"); }
                 }
                 throw exception(safeException(ex));
