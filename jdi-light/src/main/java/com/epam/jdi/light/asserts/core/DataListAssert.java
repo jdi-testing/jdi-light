@@ -3,26 +3,24 @@ package com.epam.jdi.light.asserts.core;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.light.elements.interfaces.base.IListBase;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
-import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.*;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.PrintUtils.*;
 import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DataListAssert<T extends IListBase, D>
+public class DataListAssert<T extends ICoreElement, D>
         extends UISelectAssert<DataListAssert<T, D>, DataList<T, D>> {
     public List<D> data() {
         element.refresh();

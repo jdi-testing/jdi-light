@@ -8,16 +8,16 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.Column.*;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static io.github.com.StaticSite.usersPage;
-import static io.github.com.pages.UsersPage.usersTable;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN_SIMPLE;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.UsersPage.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static io.github.epam.test.data.MarvelHeroes.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class TableTests implements TestsInit {
     private boolean firstTime = true;

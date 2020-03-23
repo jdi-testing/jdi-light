@@ -8,9 +8,8 @@ import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.tools.StringUtils.format;
-import static org.hamcrest.Matchers.containsString;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.tools.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -27,11 +26,11 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
         return (A) this;
     }
     /**
-     * Check that the element is visible for user
+     * Check that the element is visible by user
      */
-    @JDIAction("Assert that '{name}' is visible for user")
+    @JDIAction("Assert that '{name}' is visible by user")
     public A visible() {
-        jdiAssert(element.isVisible() ? "in user view" : "out of user view", Matchers.is("in user view"));
+        jdiAssert(element.isVisible() ? "is in the user view" : "out of the screen or hidden", Matchers.is("is in the user view"));
         return (A) this;
     }
     /**
@@ -39,16 +38,19 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction("Assert that '{name}' is not visible by user")
     public A notVisible() {
-        jdiAssert(element.isNotVisible() ? "in user view" : "out of user view", Matchers.is("out of user view"));
+        jdiAssert(element.isNotVisible() ? "out of the user view" : "is in the user view", Matchers.is("out of the user view"));
         return (A) this;
+    }
+    @JDIAction("Assert that '{name}' is shown")
+    public A shown() {
+        return displayed();
     }
     /**
      * Check that the element is disappeared
      */
-    @JDIAction("Assert that '{name}' disappeared")
+    @JDIAction("Assert that '{name}' is disappear")
     public A disappear() {
-        jdiAssert(element.isDisplayed() ? "displayed" : "disappeared", Matchers.is("disappeared"));
-        return (A) this;
+        return hidden();
     }
 
     /**
@@ -70,7 +72,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      */
     @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
     public A notAppear(int timeoutSec) {
-        boolean result = new Timer(timeoutSec * 1000)
+        boolean result = new Timer(timeoutSec * 1000L)
                 .wait(() -> element.isDisplayed());
         jdiAssert(result ? "displayed" : "hidden", Matchers.is("hidden"));
         return (A) this;

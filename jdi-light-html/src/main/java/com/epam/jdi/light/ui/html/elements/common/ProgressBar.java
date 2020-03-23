@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.ui.html.asserts.ProgressAssert;
 
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.logger.LogLevels.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

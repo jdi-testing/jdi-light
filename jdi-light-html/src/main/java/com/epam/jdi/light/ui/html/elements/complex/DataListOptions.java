@@ -9,9 +9,9 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.TextTypes.VALUE;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.tools.LinqUtils.ifSelect;
+import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.tools.LinqUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -19,14 +19,15 @@ import static com.epam.jdi.tools.LinqUtils.ifSelect;
  */
 // Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
-public class DataListOptions extends UIListBase<UISelectAssert> implements IsCombobox {
+public class DataListOptions extends UIListBase<UISelectAssert<?,?>> implements IsCombobox {
     @Override
     public WebList list() {
         return $$("#"+ uiElement.attr("list")+" option")
             .setup(e->e.noValidation().setName(getName() + "list"))
             .setUIElementName(VALUE);
     }
-    public String value() {
+    @Override
+    public String getText() {
         return uiElement.attr("value");
     }
     /**

@@ -1,10 +1,9 @@
 package com.epam.jdi.light.driver.get;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
-import static java.lang.String.format;
-import static java.lang.System.getenv;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static java.lang.String.*;
+import static java.lang.System.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -37,6 +36,6 @@ public class RemoteDriver {
                 return url;
             }
             throw exception("You run tests in Remote mode, please specify 'driver.remote.url' in test.properties");
-        } catch(Exception ex) { throw exception("Can't get remote Url: " + safeException(ex)); }
+        } catch(Exception ex) { throw exception(ex, "Can't get remote Url"); }
     }
 }

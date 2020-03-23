@@ -14,10 +14,9 @@ import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.WebDriver;
 
-import static com.epam.jdi.eyes.JDIEyes.EYES_CONFIG;
-import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
-import static com.epam.jdi.light.settings.WebSettings.VISUAL_PAGE_STRATEGY;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.epam.jdi.eyes.JDIEyes.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.StringUtils.*;
 
 public class EyesConfig extends DataClass<EyesConfig> {
     public String appName;
@@ -30,7 +29,7 @@ public class EyesConfig extends DataClass<EyesConfig> {
         webDriver = WebDriverFactory::getDriver;
         try {
             apiKey = System.getenv("APPLITOOLS_API_KEY");
-        } catch (Exception ignore) { }
+        } catch (Throwable ignore) { }
         batchName = format("%s %s", appName, Timer.nowDate());
     }
     public EyesConfig pageStrategy(VisualCheckPage checkPageStrategy) {

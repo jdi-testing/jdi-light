@@ -3,9 +3,9 @@ package com.epam.jdi.light.elements.complex.table;
 import com.epam.jdi.light.asserts.generic.table.DataTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.init.InitActions;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -18,22 +18,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.UIUtils.create;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
+import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.PrintUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
-import static java.util.Arrays.asList;
+import static java.util.Arrays.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, DataTableAssert<L, D>> {
+public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D>, DataTableAssert<L, D>> {
     private Class<L> lineClass;
     private Class<D> dataClass;
 
@@ -43,8 +42,8 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
         = new CacheAll<>(MapArray::new);
 
     private void hasLineClass() {
-        if (lineClass == null || !isClass(lineClass, Section.class))
-            throw exception("In order to use this method you must specify LineClass that extends Section for '%s' DataTable<LineClass, ?>", getName());
+        if (lineClass == null || !isClass(lineClass, PageObject.class))
+            throw exception("In order to use this method you must specify LineClass that extends PageObject for '%s' DataTable<LineClass, ?>", getName());
     }
     private void hasDataClass() {
         if (dataClass == null)
@@ -58,13 +57,13 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Get row '{0}' for '{name}' table")
     public D dataRow(int rowNum) {
         hasDataClass();
-        if (!datas.get().has(rowNum+"")) {
-            D data = lineClass != null
-                ? lineToData(line(rowNum))
-                : row(rowNum).asData(dataClass);
-            datas.get().update(rowNum + "", data);
-        }
-        return datas.get().get(rowNum+"");
+        if (datas.get().has(rowNum+""))
+            return datas.get().get(rowNum+"");
+        D data = lineClass != null
+            ? lineToData(line(rowNum))
+            : row(rowNum).asData(dataClass);
+        datas.get().update(rowNum + "", data);
+        return data;
     }
 
     /**
@@ -75,11 +74,11 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Get row '{0}' for '{name}' table")
     public L line(int rowNum) {
         hasLineClass();
-        if (!lines.get().has(rowNum+"")) {
-            L value = row(rowNum).asLine(lineClass);
-            lines.get().update(rowNum + "", value);
-        }
-        return lines.get().get(rowNum+"");
+        if (lines.get().has(rowNum+""))
+            return lines.get().get(rowNum+"");
+        L value = row(rowNum).asLine(lineClass);
+        lines.get().update(rowNum + "", value);
+        return value;
     }
 
     /**
@@ -187,7 +186,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<D> dataRows(JFunc1<D, Boolean> matcher) {
         hasDataClass();
-        return filter(allData(), matcher::execute);
+        return LinqUtils.filter(allData(), matcher::execute);
     }
 
     /**
@@ -449,7 +448,7 @@ public class DataTable<L extends Section, D> extends BaseTable<DataTable<L, D>, 
     @Override
     public void setup(Field field) {
         super.setup(field);
-        Type[] types = InitActions.getGenericTypes(field);
+        Type[] types = getGenericTypes(field);
         if (types.length != 2)
             return;
         try {

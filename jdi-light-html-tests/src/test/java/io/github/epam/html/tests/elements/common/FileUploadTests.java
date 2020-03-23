@@ -7,19 +7,16 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static com.epam.jdi.light.asserts.core.FileAssert.assertThatFile;
-import static com.epam.jdi.light.asserts.core.FileAssert.cleanupDownloads;
-import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
-import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static io.github.com.StaticSite.html5Page;
+import static com.epam.jdi.light.asserts.core.FileAssert.*;
+import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.tools.PathUtils.*;
+import static io.github.com.StaticSite.*;
 import static io.github.com.pages.HtmlElementsPage.*;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.apache.commons.io.FileUtils.writeStringToFile;
+import static io.github.epam.html.tests.elements.BaseValidations.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static org.apache.commons.io.FileUtils.*;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
@@ -76,7 +73,7 @@ public class FileUploadTests implements TestsInit {
         cleanupDownloads();
         String fileName = "gandhi.txt";
         createTextFile(fileName);
-        // Validate file in DOWNLOADS_DFIR folder
+        // Validate file in DOWNLOADS_DIR folder
         assertThatFile(fileName).text(containsString("enough to satisfy"));
     }
     @Test

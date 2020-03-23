@@ -3,23 +3,20 @@ package org.mytests.tests;
 import com.epam.jdi.light.actions.ActionHelper;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.Timer;
+import com.epam.jdi.tools.*;
 import org.mytests.uiobjects.example.site.SiteJdi;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
-import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
-import static com.epam.jdi.light.elements.init.PageFactory.initSite;
-import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static com.epam.jdi.light.driver.WebDriverUtils.*;
+import static com.epam.jdi.light.elements.init.InitActions.*;
+import static com.epam.jdi.light.elements.init.PageFactory.*;
+import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 import static org.mytests.tests.PerfStatistic.*;
-import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
+import static org.mytests.uiobjects.example.site.SiteJdi.*;
 
 public class TestsInit {
     public static Safe<Timer> TIMER = new Safe<>();

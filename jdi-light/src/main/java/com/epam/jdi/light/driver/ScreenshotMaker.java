@@ -5,20 +5,16 @@ import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
-import static com.epam.jdi.light.driver.get.DriverData.LOGS_PATH;
-import static com.epam.jdi.light.driver.get.DriverData.PROJECT_PATH;
-import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.ON_FAIL;
-import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.Timer.nowTime;
-import static org.apache.commons.io.FileUtils.copyFile;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.openqa.selenium.OutputType.FILE;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.PathUtils.*;
+import static com.epam.jdi.tools.Timer.*;
+import static org.apache.commons.io.FileUtils.*;
+import static org.apache.commons.lang3.StringUtils.*;
+import static org.openqa.selenium.OutputType.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -49,7 +45,7 @@ public class ScreenshotMaker {
         return takeScreenshot(value, "yyyy-MM-dd-HH-mm-ss");
     }
     public String takeScreenshot(String name, String dateFormat) {
-        if (!hasRunDrivers())
+        if (noRunDrivers())
             throw exception("Failed to do screenshot. No Drivers run");
         String screensFilePath = getFileName(mergePath(
             getPath(), name + nowTime(dateFormat)));

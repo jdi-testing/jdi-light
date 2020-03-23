@@ -4,16 +4,14 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.isWeather;
-import static io.github.com.pages.HtmlElementsPage.weatherNoLocator;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.complex.enums.Weather.*;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static java.util.Arrays.asList;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static java.util.Arrays.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.*;
 
 public class IsChecklistTests implements TestsInit {
 
@@ -165,7 +163,7 @@ public class IsChecklistTests implements TestsInit {
     public void assertValidationTest() {
         isWeather.assertThat().values(containsInAnyOrder(
                 "Hot option", "Cold", "Rainy day", "Sunny", "Disabled"));
-        weatherNoLocator.assertThat().selected("Hot option");
+        checksGroup.assertThat().selected("Hot option");
     }
 
     @Test

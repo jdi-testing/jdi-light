@@ -1,9 +1,6 @@
 package com.epam.jdi.light.driver.get;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
-import org.openqa.selenium.MutableCapabilities;
+import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -14,15 +11,13 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
-import java.net.URL;
-
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
-import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
+import static com.epam.jdi.tools.map.MapArray.*;
+import static com.epam.jdi.tools.pairs.Pair.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -31,7 +26,7 @@ import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
 public class DriverInfos {
     public static DriverInfo CHROME_INFO = new DriverInfo()
         .set(d -> {
-            d.type = CHROME;
+            d.downloadType = CHROME;
             d.initCapabilities = new ChromeOptions();
             d.capabilities = c -> getCapabilities(c, cap -> CHROME_OPTIONS.execute((ChromeOptions) cap));
             d.properties = "webdriver.chrome.driver";
@@ -39,27 +34,9 @@ public class DriverInfos {
             d.getDriver = c -> new ChromeDriver((ChromeOptions) c);
         }
     );
-    public static DriverInfo ANDROID_INFO = new DriverInfo()
+    public static DriverInfo FIREFOX_INFO = new DriverInfo()
         .set(d -> {
-            d.type = ANDROID;
-            d.alwaysRemote = true;
-            d.initCapabilities = new DesiredCapabilities();
-            d.capabilities = c -> getCapabilities(c, cap -> ANDROID_OPTIONS.execute((MutableCapabilities) cap));
-            d.getDriver = c -> new AndroidDriver<>(new URL(getRemoteURL()), (MutableCapabilities) c);
-        }
-    );
-    public static DriverInfo IOS_INFO = new DriverInfo()
-        .set(d -> {
-            d.type = IOS;
-            d.alwaysRemote = true;
-            d.initCapabilities = new DesiredCapabilities();
-            d.capabilities = c -> getCapabilities(c, cap -> IOS_OPTIONS.execute((MutableCapabilities) cap));
-            d.getDriver = c -> new IOSDriver<>(new URL(getRemoteURL()), (MutableCapabilities) c);
-        }
-    );
-    public static DriverInfo FF_INFO = new DriverInfo()
-        .set(d -> {
-            d.type = FIREFOX;
+            d.downloadType = FIREFOX;
             d.initCapabilities = new FirefoxOptions();
             d.capabilities = c -> getCapabilities(c, cap -> FIREFOX_OPTIONS.execute((FirefoxOptions) cap));
             d.properties = "webdriver.gecko.driver";
@@ -69,7 +46,7 @@ public class DriverInfos {
     );
     public static DriverInfo IE_INFO = new DriverInfo()
         .set(d -> {
-            d.type = IE;
+            d.downloadType = IE;
             d.initCapabilities = new InternetExplorerOptions();
             d.capabilities = c -> getCapabilities(c, cap -> IE_OPTIONS.execute((InternetExplorerOptions) cap));
             d.properties = "webdriver.ie.driver";
@@ -79,7 +56,7 @@ public class DriverInfos {
     );
     public static DriverInfo OPERA_INFO = new DriverInfo()
         .set(d -> {
-            d.type = OPERA;
+            d.downloadType = OPERA;
             d.initCapabilities = new OperaOptions();
             d.capabilities = c -> getCapabilities(c, cap -> OPERA_OPTIONS.execute((OperaOptions) cap));
             d.properties = "webdriver.opera.driver";
@@ -89,22 +66,30 @@ public class DriverInfos {
     );
     public static DriverInfo EDGE_INFO = new DriverInfo()
         .set(d -> {
-            d.type = EDGE;
+            d.downloadType = EDGE;
             d.initCapabilities = new EdgeOptions();
             d.capabilities = c -> getCapabilities(c, cap -> EDGE_OPTIONS.execute((EdgeOptions) cap));
             d.properties = "webdriver.edge.driver";
-            d.path = operaDriverPath();
+            d.path = edgeDriverPath();
             d.getDriver = c -> new EdgeDriver((EdgeOptions) c);
         }
     );
     public static DriverInfo SAFARI_INFO = new DriverInfo()
         .set(d -> {
-            d.type = SAFARI;
+            d.downloadType = SAFARI;
             d.initCapabilities = new SafariOptions();
             d.capabilities = c -> getCapabilities(c, cap -> SAFARI_OPTIONS.execute((SafariOptions) cap));
             d.properties = "webdriver.safari.driver";
             d.path = safariDriverPath();
             d.getDriver = c -> new SafariDriver((SafariOptions) c);
         }
+    );
+    public static MapArray<String, DriverInfo> DRIVER_TYPES = map(
+        $(CHROME.name, CHROME_INFO),
+        $(FIREFOX.name, FIREFOX_INFO),
+        $(IE.name, IE_INFO),
+        $(EDGE.name, EDGE_INFO),
+        $(OPERA.name, OPERA_INFO),
+        $(SAFARI.name, SAFARI_INFO)
     );
 }

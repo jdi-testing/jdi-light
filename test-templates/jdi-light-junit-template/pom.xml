@@ -14,7 +14,7 @@
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <allure.version>2.13.2</allure.version>
-        <allure.maven>2.9</allure.maven>
+        <allure.maven>2.10.0</allure.maven>
         <surfire.version>2.19.1</surfire.version>
         <aspectj.version>1.9.1</aspectj.version>
     </properties>
@@ -44,7 +44,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

@@ -3,8 +3,8 @@ package com.epam.jdi.light.common;
 import java.io.IOException;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.StringUtils.inputStreamToList;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.tools.StringUtils.*;
 
 public class LinuxProcessUtils {
 

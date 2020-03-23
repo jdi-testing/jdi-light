@@ -8,9 +8,9 @@ import page.objects.jdi.HomePageWebEx;
 import page.objects.selenium.HomePage;
 import page.objects.selenium.HomePageEx;
 
-import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static page.objects.selenium.PageBase.JDI_DOMAIN;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static page.objects.selenium.PageBase.*;
 
 public class PageInitTests {
     static String expecterdUrl(String url) {

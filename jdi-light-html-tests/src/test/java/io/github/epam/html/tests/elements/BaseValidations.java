@@ -7,12 +7,11 @@ import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.pairs.Pair.$;
-import static java.lang.System.currentTimeMillis;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.lessThan;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.pairs.Pair.*;
+import static java.lang.System.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 
 public class BaseValidations {
@@ -36,7 +35,7 @@ public class BaseValidations {
         //Rectangle rect = el.getRect();
         //assertTrue(rect.height > 0 && rect.width > 0 && rect.x > 0 && rect.y > 0, "Size: " + location);
         logger.info("Check setAttribute");
-        el.core().setAttribute("test-jdi", "test-value");
+        el.setAttribute("test-jdi", "test-value");
         assertEquals(el.attr("test-jdi"), "test-value");
         logger.info("Check highlight");
         el.highlight("blue");
@@ -76,12 +75,12 @@ public class BaseValidations {
     private static void validateDuration(long min, long max, JAction action) {
         long passedTime = getDuration(action);
         assertThat(passedTime, greaterThan(min));
-        assertThat(passedTime, lessThan(max));
+        assertThat(passedTime, lessThan(max+500));
     }
     private static <T> T validateDuration(long min, long max, JFunc<T> func) {
         Pair<Long, T> result = getDuration(func);
         assertThat(result.key, greaterThan(min));
-        assertThat(result.key, lessThan(max));
+        assertThat(result.key, lessThan(max + 500));
         return result.value;
     }
 }

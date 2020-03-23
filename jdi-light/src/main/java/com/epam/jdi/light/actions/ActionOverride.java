@@ -7,6 +7,9 @@ import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.aspectj.lang.ProceedingJoinPoint;
 
+import static com.epam.jdi.light.actions.ActionHelper.*;
+import static org.apache.logging.log4j.util.Strings.*;
+
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
@@ -26,7 +29,14 @@ public class ActionOverride {
                 && jp.getSignature().getName().equals(actionName), func);
     }
     private static String getJpTypeName(ProceedingJoinPoint jp) {
-        return ((DriverBase) jp.getThis()).typeName;
+        Object obj = jp.getThis();
+        if (obj == null) {
+            return getJpClass(jp).getSimpleName();
+        }
+        String typeName = ((DriverBase) jp.getThis()).typeName;
+        return isNotBlank(typeName)
+            ? typeName
+            : jp.getThis().getClass().getSimpleName();
     }
     public static void overrideAction(JFunc1<ProceedingJoinPoint, Boolean> condition, JAction1<Object> action) {
         overrideFunction(condition, jdi -> {

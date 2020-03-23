@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Roman Iovlev on 02.03.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IsDropdown {
+public class DropdownSelect extends UIBaseElement<UISelectAssert<?,?>> implements IsDropdown {
     protected Selector selector() {
         return new Selector().setCore(Selector.class, base());
     }
@@ -57,15 +57,8 @@ public class DropdownSelect extends UIBaseElement<UISelectAssert> implements IsD
     public List<String> values(TextTypes type) { return selector().values(); }
 
     @Override
-    public UISelectAssert is() {
+    public UISelectAssert<?,?> is() {
         return new UISelectAssert<>().set(this);
     }
-    @Override
-    public boolean isEnabled() { return list().isEnabled(); }
-    @Override
-    public boolean isDisabled() { return !isEnabled(); }
-    @Override
-    public boolean isDisplayed() { return list().isDisplayed(); }
-    @Override
-    public boolean isHidden() { return list().isHidden(); }
+
 }

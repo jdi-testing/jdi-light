@@ -10,9 +10,5 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
  */
 // Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
-public class Combobox extends UIListBase<UISelectAssert> implements IsCombobox {
-    public String value() {
-        return core().getText();
-    }
-
+public class Combobox extends UIListBase<UISelectAssert<?,?>> implements IsCombobox {
 }

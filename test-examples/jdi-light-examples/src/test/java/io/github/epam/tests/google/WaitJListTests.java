@@ -2,17 +2,16 @@ package io.github.epam.tests.google;
 
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.pages.Header.search;
-import static io.github.com.pages.SearchPage.jsearchTitle;
-import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.Header.*;
+import static io.github.com.pages.SearchPage.*;
+import static io.github.epam.tests.recommended.steps.Preconditions.*;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman_Iovlev on 3/2/2018.

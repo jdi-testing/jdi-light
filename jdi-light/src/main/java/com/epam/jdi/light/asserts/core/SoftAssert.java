@@ -6,9 +6,9 @@ import org.hamcrest.Matcher;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static org.hamcrest.MatcherAssert.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

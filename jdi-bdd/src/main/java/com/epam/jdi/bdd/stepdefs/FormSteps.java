@@ -6,10 +6,10 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static com.epam.jdi.bdd.BDDUtils.getMapFromTable;
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static com.epam.jdi.tools.JsonUtils.getMapFromJson;
+import static com.epam.jdi.bdd.BDDUtils.*;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.tools.JsonUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

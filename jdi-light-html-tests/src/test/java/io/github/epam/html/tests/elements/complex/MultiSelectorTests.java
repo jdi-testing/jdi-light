@@ -4,17 +4,16 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
-import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.ages;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.elements.complex.enums.Ages.Steam;
-import static io.github.epam.html.tests.elements.complex.enums.Ages.Wood;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static java.util.Arrays.asList;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.epam.html.tests.elements.BaseValidations.*;
+import static io.github.epam.html.tests.elements.complex.enums.Ages.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static java.util.Arrays.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class MultiSelectorTests implements TestsInit {
 

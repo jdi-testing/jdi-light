@@ -6,10 +6,10 @@ import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static com.epam.jdi.tools.LinqUtils.toIntArray;
-import static org.hamcrest.Matchers.hasSize;
-import static org.testng.Assert.assertEquals;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -80,9 +80,9 @@ public class CheckListSteps {
         checklist(name).uncheckAll();
     }
 
-    @Then("^in \"([^\"]*)\" checklist checked element is \"([^\"]*)\"$")
+    @Then("^in \"([^\"]*)\" checklist \"([^\"]*)\" is checked$")
     public static void isCheckBoxChecked(String name, String value) {
-        checklist(name).is().selected(value);
+        checklist(name).is().selected(containsString(value));
     }
 
     @Then("count of selected elements in \"([^\"]*)\" checklist is (\\d+)")

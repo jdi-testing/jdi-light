@@ -5,20 +5,17 @@ import io.qameta.allure.model.StepResult;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.composite.WebPage.getHtml;
-import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.OFF;
-import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.ON_FAIL;
-import static com.epam.jdi.light.settings.WebSettings.WRITE_TO_ALLURE;
-import static io.qameta.allure.Allure.addAttachment;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static io.qameta.allure.Allure.*;
 import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
-import static io.qameta.allure.model.Status.FAILED;
-import static io.qameta.allure.model.Status.PASSED;
-import static java.nio.file.Files.readAllBytes;
-import static java.nio.file.Paths.get;
-import static java.util.UUID.randomUUID;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static io.qameta.allure.model.Status.*;
+import static java.nio.file.Files.*;
+import static java.nio.file.Paths.*;
+import static java.util.UUID.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class AllureLogger {
     public static AttachmentStrategy HTML_CODE_LOGGING = ON_FAIL;

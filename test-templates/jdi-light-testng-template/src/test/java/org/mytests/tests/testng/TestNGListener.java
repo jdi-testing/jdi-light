@@ -5,15 +5,12 @@ package org.mytests.tests.testng;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import org.testng.IInvokedMethod;
-import org.testng.IInvokedMethodListener;
-import org.testng.ITestResult;
+import org.testng.*;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 
-import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.light.settings.WebSettings.*;
 
 public class TestNGListener implements IInvokedMethodListener {
     @Override

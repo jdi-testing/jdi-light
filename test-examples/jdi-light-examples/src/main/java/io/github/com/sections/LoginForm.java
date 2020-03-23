@@ -2,9 +2,7 @@ package io.github.com.sections;
 
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.Root;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import io.github.epam.entities.User;
 import org.openqa.selenium.WebElement;
 

@@ -1,12 +1,11 @@
 package org.mytests.uiobjects.example.knection;
 
-import com.epam.jdi.tools.DataClass;
-import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.*;
 import com.epam.jdi.tools.func.JAction1;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 
 public class Workspace extends DataClass<Workspace> {
     public String category, name, projectCode, apiId, therapeuticArea, processes,

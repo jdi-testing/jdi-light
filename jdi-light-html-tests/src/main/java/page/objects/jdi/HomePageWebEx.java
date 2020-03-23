@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
 
 @Url("/index.html") @Title("Home Page")
 public class HomePageWebEx extends WebPageBase {

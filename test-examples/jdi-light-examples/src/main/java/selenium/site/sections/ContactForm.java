@@ -6,9 +6,9 @@ import selenium.site.data.ContactInfo;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static java.util.Arrays.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 public class ContactForm {
     @FindBy(id = "name") WebElement name;

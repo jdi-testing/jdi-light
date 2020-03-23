@@ -8,52 +8,44 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.light.logger.Strategy;
-import com.epam.jdi.tools.PropReader;
-import com.epam.jdi.tools.PropertyReader;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.StringUtils;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.epam.jdi.tools.*;
+import com.epam.jdi.tools.func.*;
+import com.epam.jdi.tools.pairs.Pair;
+import org.openqa.selenium.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 
-import static com.epam.jdi.light.common.ElementArea.CENTER;
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.PageChecks.parse;
-import static com.epam.jdi.light.common.SetTextTypes.SET_TEXT;
-import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
-import static com.epam.jdi.light.driver.ScreenshotMaker.SCREEN_PATH;
-import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
+import static com.epam.jdi.light.common.ElementArea.*;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.NameToLocator.*;
+import static com.epam.jdi.light.common.PageChecks.*;
+import static com.epam.jdi.light.common.SetTextTypes.*;
+import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.driver.ScreenshotMaker.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
-import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
-import static com.epam.jdi.light.elements.composite.WebPage.CHECK_PAGE_OPEN;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.logger.JDILogger.instance;
-import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
+import static com.epam.jdi.light.driver.sauce.SauceSettings.*;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.logger.JDILogger.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.LogStrategy.*;
 import static com.epam.jdi.light.logger.Strategy.*;
-import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
+import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.PropertyReader.fillAction;
-import static com.epam.jdi.tools.PropertyReader.getProperty;
-import static java.lang.Boolean.parseBoolean;
-import static java.lang.Integer.parseInt;
-import static java.util.Arrays.asList;
+import static com.epam.jdi.tools.PathUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.PropertyReader.*;
+import static java.lang.Boolean.*;
+import static java.lang.Integer.*;
+import static java.lang.String.*;
+import static java.util.Arrays.*;
 import static org.apache.commons.lang3.StringUtils.*;
+import static org.openqa.selenium.PageLoadStrategy.NONE;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
 /**
@@ -63,6 +55,7 @@ import static org.openqa.selenium.PageLoadStrategy.*;
 public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String DOMAIN;
+    public static String APP_NAME;
     public static String getDomain() {
         if (DOMAIN != null)
             return DOMAIN;
@@ -81,23 +74,24 @@ public class WebSettings {
             el != null && el.isDisplayed() && el.isEnabled();
     public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
             el != null && !el.isDisplayed() && $(el).isClickable();
-    public static JFunc1<WebElement, Boolean> SEARCH_RULES = VISIBLE_ELEMENT;
+    public static Pair<String, JFunc1<WebElement, Boolean>> SEARCH_RULE = Pair.$("Visible", VISIBLE_ELEMENT);
+
     public static JAction1<UIElement> BEFORE_SEARCH = b -> {};
-    public static void setSearchRule(JFunc1<WebElement, Boolean> rule) {
-        SEARCH_RULES = rule;
+    public static void setSearchRule(String name, JFunc1<WebElement, Boolean> rule) {
+        SEARCH_RULE = Pair.$(name, rule);
     }
     public static void noValidation() {
-        SEARCH_RULES = ANY_ELEMENT;
+        SEARCH_RULE = Pair.$("Any", ANY_ELEMENT);
         CLICK_TYPE = CENTER;
     }
     public static void onlyVisible() {
-        SEARCH_RULES = VISIBLE_ELEMENT;
+        SEARCH_RULE = Pair.$("Visible", VISIBLE_ELEMENT);
     }
     public static void visibleEnabled() {
-        SEARCH_RULES = ENABLED_ELEMENT;
+        SEARCH_RULE = Pair.$("Enabled", ENABLED_ELEMENT);
     }
     public static void inView() {
-        SEARCH_RULES = ELEMENT_IN_VIEW;
+        SEARCH_RULE = Pair.$("Element in view", ELEMENT_IN_VIEW);
         BEFORE_SEARCH = UIElement::show;
     }
 
@@ -125,24 +119,34 @@ public class WebSettings {
         return WebDriverFactory.useDriver(driverType);
     }
 
-    public static List<String> SMART_SEARCH_LOCATORS = new ArrayList<>();
-    public static JFunc1<String, String> SMART_SEARCH_NAME = StringUtils::splitHyphen;
+    public static String SMART_SEARCH_LOCATOR = "#%s";
+    public static Pair<String, JFunc1<String, String>> SMART_SEARCH_NAME = Pair.$("kebab-case", SMART_MAP_NAME_TO_LOCATOR.get("kebab-case"));
+    public static String printSmartLocators(IBaseElement el) {
+        try {
+            return "smart: " + format(SMART_SEARCH_LOCATOR, SMART_SEARCH_NAME.value.execute(el.getName()));
+        } catch (Exception ex) {
+            return format("Can't define smart locator(%s, %s)", SMART_SEARCH_LOCATOR, SMART_SEARCH_NAME.key);
+        }
+    }
+    public static boolean USE_SMART_SEARCH = true;
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
-        String locatorName = SMART_SEARCH_NAME.execute(el.getName());
+        if (!USE_SMART_SEARCH)
+            return null;
+        String locatorName = SMART_SEARCH_NAME.value.execute(el.getName());
         return el.base().timer().getResult(() -> {
-            for (String template : SMART_SEARCH_LOCATORS) {
-                UIElement ui = (template.equals("#%s")
-                    ? $(String.format(template, locatorName))
-                    : $(String.format(template, locatorName), el.base().parent))
+            String locator = format(SMART_SEARCH_LOCATOR, locatorName);
+            UIElement ui = (SMART_SEARCH_LOCATOR.equals("#%s")
+                ? $(locator)
+                : $(locator, el.base().parent))
                     .setup(e -> e.setName(el.getName()).noWait());
-                try {
-                    return ui.getWebElement();
-                } catch (Exception ignore) { }
+            try {
+                return ui.getWebElement();
+            } catch (Exception ignore) {
+                throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
             }
-            throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
         });
     };
-    private static boolean initialized = false;
+    public static boolean initialized = false;
     public static synchronized void init() {
         if (initialized) return;
         getProperties(TEST_PROPERTIES_PATH);
@@ -175,9 +179,9 @@ public class WebSettings {
         fillAction(p -> DRIVER_REMOTE_URL = p, "driver.remote.url");
         fillAction(p -> logger.setLogLevel(parseLogLevel(p)), "log.level");
         fillAction(p -> WRITE_TO_ALLURE = parseBoolean(p), "allure.steps");
-        fillAction(p -> SMART_SEARCH_LOCATORS =
-                filter(p.split(";"), l -> isNotBlank(l)), "smart.locators");
+        fillAction(p -> SMART_SEARCH_LOCATOR = p.split(";")[0], "smart.locators");
         fillAction(p -> SMART_SEARCH_NAME = getSmartSearchFunc(p), "smart.locators.toName");
+        fillAction(p -> USE_SMART_SEARCH = getBoolean(p), "smart.search");
         fillAction(p -> COMMON_CAPABILITIES.put("headless", p), "headless");
 
         loadCapabilities("chrome.capabilities.path", "chrome.properties",
@@ -200,8 +204,6 @@ public class WebSettings {
             p -> p.forEach((key,value) -> COMMON_CAPABILITIES.put(key.toString(), value.toString())));
 
         INIT_THREAD_ID = Thread.currentThread().getId();
-        if (SMART_SEARCH_LOCATORS.size() == 0)
-            SMART_SEARCH_LOCATORS.add("#%s");
         initialized = true;
     }
 
@@ -211,7 +213,9 @@ public class WebSettings {
         return clickType != null
                 ? clickType : CENTER;
     }
-
+    private static boolean getBoolean(String param) {
+        return !param.toLowerCase().equals("off") && !param.toLowerCase().equals("false");
+    }
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
                 t -> t.toString().equals(type));
@@ -235,27 +239,15 @@ public class WebSettings {
             default: return seleniumLocalhost();
         }
     }
-    private static JFunc1<String, String> getSmartSearchFunc(String name) {
-        switch (name) {
-            case "camelCase":
-                return StringUtils::toCamelCase;
-            case "snake_case":
-                return StringUtils::toSnakeCase;
-            case "kebab-case":
-                return StringUtils::toKebabCase;
-            case "PascalCase":
-                return StringUtils::toPascalCase;
-            case "UPPER_SNAKE_CASE":
-                return StringUtils::toUpperSnakeCase;
-            case "First Upper Case":
-                return StringUtils::splitCamelCase;
-            case "ALL UPPER CASE":
-                return value -> StringUtils.splitCamelCase(value).toUpperCase();
-            default: return StringUtils::toKebabCase;
+    private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
+        if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
+            throw exception("Unknown SMART_SEARCH_NAME: '%s'. Please correct value 'smart.locators.toName' in test.properties." +
+                "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
         }
+        return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
     }
 
-    private static void loadCapabilities(String property, String defaultPath, JAction1<Properties> setCapabilities) {
+    public static void loadCapabilities(String property, String defaultPath, JAction1<Properties> setCapabilities) {
         String path = "";
         try {
             path = System.getProperty(property, getProperty(property));

@@ -3,16 +3,14 @@ package io.github.epam.tests.selenium;
 import com.epam.jdi.light.elements.complex.table.Line;
 import org.apache.commons.lang3.time.StopWatch;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import selenium.entities.User;
 
-import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static selenium.entities.TestData.TABLE_SNAPSHOOT;
-import static selenium.seleniumPO.HomePage.leftNavigation;
-import static selenium.seleniumPO.SiteSelenium.homePage;
-import static selenium.seleniumPO.SiteSelenium.login;
+import static com.epam.jdi.light.elements.complex.table.Column.*;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
+import static selenium.entities.TestData.*;
+import static selenium.seleniumPO.HomePage.*;
+import static selenium.seleniumPO.SiteSelenium.*;
 import static selenium.site.pages.JDIPerformancePage.*;
 
 public class JDIPerformanceTests implements SimpleTestsInit {

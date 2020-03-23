@@ -2,12 +2,9 @@ package com.epam.jdi.light.elements.pageobjects.annotations;
 
 import com.epam.jdi.light.common.CheckTypes;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
-import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
+import static com.epam.jdi.light.common.CheckTypes.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

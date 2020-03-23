@@ -4,16 +4,14 @@ import com.epam.jdi.light.asserts.complex.ChecklistAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.IListBase;
 import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.TextTypes.LABEL;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.ifSelect;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -44,11 +42,11 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
         list().select(values);
     }
 
-    public <TEnum extends Enum> void select(TEnum value) {
+    public <TEnum extends Enum<?>> void select(TEnum value) {
         list().select(value);
     }
 
-    public <TEnum extends Enum> void select(TEnum... values) {
+    public <TEnum extends Enum<?>> void select(TEnum... values) {
         list().select(values);
     }
 
@@ -59,7 +57,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
-        list().select(index-1);
+        list().select(index);
     }
     /**
      * Selects particular elements by index
@@ -93,17 +91,17 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
         list().uncheck(names);
     }
 
-    public <TEnum extends Enum> void check(TEnum value) {
+    public <TEnum extends Enum<?>> void check(TEnum value) {
         check(getEnumValue(value));
     }
-    public <TEnum extends Enum> void check(TEnum... values) {
+    public <TEnum extends Enum<?>> void check(TEnum... values) {
         list().check(values);
     }
 
-    public <TEnum extends Enum> void uncheck(TEnum value) {
+    public <TEnum extends Enum<?>> void uncheck(TEnum value) {
         uncheck(getEnumValue(value));
     }
-    public <TEnum extends Enum> void uncheck(TEnum... values) {
+    public <TEnum extends Enum<?>> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
 
@@ -193,11 +191,11 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     }
     @Override
     public List<String> listEnabled() {
-        return list().ifSelect(IListBase::isEnabled, UIElement::labelText);
+        return list().ifSelect(UIElement::isEnabled, UIElement::labelText);
     }
     @Override
     public List<String> listDisabled() {
-        return list().ifSelect(IListBase::isDisabled, UIElement::labelText);
+        return list().ifSelect(UIElement::isDisabled, UIElement::labelText);
     }
 
     @Override

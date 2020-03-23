@@ -2,10 +2,10 @@ package io.github.epam.html.tests.elements.composite.webpage;
 
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import io.github.epam.TestsInit;
+import io.github.epam.test.data.webpages.CustomWebPageUIDataProvider;
 import org.testng.annotations.Test;
-import pseudo.site.dataproviders.webpages.CustomWebPageUIDataProvider;
 
-import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
+import static io.github.epam.html.tests.elements.composite.CompositeUtils.*;
 
 public class CustomWebPageUITests implements TestsInit {
 

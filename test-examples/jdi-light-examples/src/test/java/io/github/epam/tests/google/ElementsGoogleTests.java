@@ -1,21 +1,18 @@
 package io.github.epam.tests.google;
 
 import com.epam.jdi.light.elements.complex.DataList;
-import io.github.com.custom.Result;
-import io.github.com.custom.SearchResult;
+import io.github.com.custom.*;
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import static io.github.com.StaticSite.searchPage;
-import static io.github.com.pages.Header.epamLogo;
-import static io.github.com.pages.Header.search;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.Header.*;
 import static io.github.epam.test.data.ListData.*;
-import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static io.github.epam.tests.recommended.steps.Preconditions.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman_Iovlev on 3/2/2018.
@@ -42,8 +39,8 @@ public class ElementsGoogleTests extends StaticTestsInit {
     public void validateEntities2Tests() {
         DataList<SearchResult, ?> jobs = searchPage.search2;
 
-        assertEquals(jobs.get(0).name.getText(),"JDI SKYPE");
-        assertEquals(jobs.get(1).name.getText(),"JDI OWNER CONTACT");
+        assertEquals(jobs.get(1).name.getText(),"JDI SKYPE");
+        assertEquals(jobs.get(2).name.getText(),"JDI OWNER CONTACT");
         try {
             jobs.is().empty();
             Assert.fail("List should not be empty");

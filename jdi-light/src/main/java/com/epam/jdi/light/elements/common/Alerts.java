@@ -4,9 +4,9 @@ import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.Alert;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

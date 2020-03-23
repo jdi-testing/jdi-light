@@ -5,23 +5,21 @@ import com.epam.jdi.light.elements.complex.Checklist;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.complex.dropdown.DropdownSelect;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
-import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
+import com.epam.jdi.light.elements.interfaces.complex.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.NoWait;
 import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.smart.SName;
+import com.epam.jdi.light.elements.pageobjects.annotations.smart.Smart;
 import com.epam.jdi.light.ui.html.elements.common.*;
-import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
-import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
-import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
+import com.epam.jdi.light.ui.html.elements.complex.*;
 
 public class HtmlElementsPage extends WebPage {
     //region Simple Elements
 
-    public static Label jdiTitle;
+    @Smart("ui") public static Label jdiTitle;
     // @UI("[ui=jdi-title]") public static Label jdiTitle;
-	public static Text jdiText;
+    @Smart("ui") public static Text jdiText;
 	// @UI("[ui=jdi-text]") public static Text jdiText;
 
     @UI("[value*='Red Button']") public static Button redButton;
@@ -38,7 +36,7 @@ public class HtmlElementsPage extends WebPage {
     public static Button disabledButton;
     // @UI("#blue-button") public static Button blueButton;
     // @UI("#disabled-button") public static Button disabledButton;
-
+    @Smart("ui")
     public static Link githubLink;
     // @UI("[ui=github-link]") public static Link gitHubLink;
 
@@ -64,6 +62,9 @@ public class HtmlElementsPage extends WebPage {
     @UI("#disabled-picker") public static ColorPicker disabledPicker;
 
     public static Range volume;
+    public static Range defaultRange;
+    public static Range minMaxRange;
+    public static Range fractionalRange;
     // @UI("#volume") public static Range volume;
     @UI("[type=range][disabled]") public static Range disabledRange;
 
@@ -107,7 +108,7 @@ public class HtmlElementsPage extends WebPage {
     public static Checklist weather;
     @UI("[name=checks-group]")
     public static IsChecklist isWeather;
-    public static Checklist weatherNoLocator;
+    @SName public static Checklist checksGroup;
 
     @UI("[name=colors]")
     public static RadioButtons colors;
