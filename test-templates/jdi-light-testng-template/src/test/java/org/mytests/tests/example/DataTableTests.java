@@ -3,7 +3,8 @@ package org.mytests.tests.example;
 import com.epam.jdi.light.elements.complex.table.Single;
 import org.mytests.tests.TestsInit;
 import org.mytests.uiobjects.example.entities.MarvelUserInfo;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.List;
 

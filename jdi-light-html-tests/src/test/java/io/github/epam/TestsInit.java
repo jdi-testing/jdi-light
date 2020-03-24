@@ -8,9 +8,9 @@ import org.testng.annotations.BeforeSuite;
 import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static io.github.com.StaticSite.*;
 
@@ -31,6 +31,6 @@ public interface TestsInit {
     }
 
     default boolean isFireFox() {
-        return DRIVER_NAME.toLowerCase().equals("firefox");
+        return DRIVER.name.toLowerCase().equals("firefox");
     }
 }

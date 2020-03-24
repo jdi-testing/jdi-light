@@ -1,14 +1,12 @@
 package com.epam.jdi.light.driver;
 
-import com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.PathUtils.*;
 import static com.epam.jdi.tools.Timer.*;
@@ -21,21 +19,18 @@ import static org.openqa.selenium.OutputType.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class ScreenshotMaker {
-    public static String SCREEN_PATH = mergePath(LOGS_PATH, "screens");
     public static String SCREEN_NAME = "screen";
-    public static String SCREEN_FILE_SUFFIX = ".jpg";
-    public static AttachmentStrategy SCREENSHOT_STRATEGY = ON_FAIL;
 
     public static String takeScreen() {
         return new ScreenshotMaker().takeScreenshot();
     }
 
     public static String getPath() {
-        if (isBlank((SCREEN_PATH))) return "";
-        String result = SCREEN_PATH.replace("/", "\\");
+        if (isBlank((SCREEN.path))) return "";
+        String result = SCREEN.path.replace("/", "\\");
         return result.contains(":")
-            ? SCREEN_PATH
-            : mergePath(PROJECT_PATH, SCREEN_PATH);
+            ? SCREEN.path
+            : mergePath(COMMON.projectPath, SCREEN.path);
     }
     public String takeScreenshot() {
         String name = TEST_NAME.get();
@@ -63,8 +58,8 @@ public class ScreenshotMaker {
     private String getFileName(String fileName) {
         int num = 1;
         String newName = fileName;
-        while (new File(newName + SCREEN_FILE_SUFFIX).exists())
+        while (new File(newName + SCREEN.fileSuffix).exists())
             newName = fileName + "_" + num++;
-        return newName + SCREEN_FILE_SUFFIX;
+        return newName + SCREEN.fileSuffix;
     }
 }

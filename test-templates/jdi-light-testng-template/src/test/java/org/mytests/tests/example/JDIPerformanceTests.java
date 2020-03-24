@@ -4,7 +4,8 @@ import com.epam.jdi.light.elements.complex.table.Line;
 import org.apache.commons.lang3.time.StopWatch;
 import org.mytests.tests.TestsInit;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.complex.table.Column.*;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;

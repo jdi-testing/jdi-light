@@ -1,6 +1,7 @@
 package org.mytests.tests.example;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mytests.tests.TestsInit;
 import org.mytests.tests.states.States;
 

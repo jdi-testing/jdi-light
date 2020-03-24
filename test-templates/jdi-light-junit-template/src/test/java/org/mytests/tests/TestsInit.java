@@ -1,6 +1,7 @@
 package org.mytests.tests;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.mytests.uiobjects.example.site.SiteJdi;
 
 import static com.epam.jdi.light.elements.init.PageFactory.*;

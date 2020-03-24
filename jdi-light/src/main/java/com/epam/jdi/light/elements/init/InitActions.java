@@ -26,12 +26,12 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.VisualCheckAction.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.elements.init.rules.AnnotationRule.*;
 import static com.epam.jdi.light.elements.init.rules.InitRule.*;
 import static com.epam.jdi.light.elements.init.rules.SetupRule.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
@@ -103,7 +103,7 @@ public class InitActions {
             jdi.setParent(info.parent);
         if (!jdi.name.matches("[A-Z].*]"))
             jdi.setName(info);
-        jdi.driverName = isBlank(info.driverName) ? DRIVER_NAME : info.driverName;
+        jdi.driverName = isBlank(info.driverName) ? DRIVER.name : info.driverName;
         return jdi;
     }
     public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(

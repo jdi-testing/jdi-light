@@ -1,6 +1,7 @@
 package org.mytests.tests.testng;
 
-import org.testng.*;
+import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
 
 public class RetryFailedTestCases implements IRetryAnalyzer {
     private int retryCnt = 0;
