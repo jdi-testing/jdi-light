@@ -1,6 +1,7 @@
 package com.epam.jdi.light.driver.get;
 
 import com.epam.jdi.tools.DataClass;
+import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -11,7 +12,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverVersion.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -28,12 +28,13 @@ public class DriverInfo extends DataClass<DriverInfo> {
     public DriverTypes downloadType;
     public MutableCapabilities initCapabilities = new DesiredCapabilities();
     public JFunc1<MutableCapabilities, Capabilities> capabilities = c -> c;
-    public String properties, path;
+    public JFunc<String> path;
+    public String properties;
     public JFunc1<Capabilities, WebDriver> getDriver;
     public JFunc1<Capabilities, WebDriver> getRemoteDriver;
 
     public boolean isLocal() {
-        return isEmpty(DRIVER.remoteUrl) && (isNotBlank(DRIVER.path) && isNotBlank(path) || downloadType != null);
+        return isEmpty(DRIVER.remoteUrl) && (isNotBlank(DRIVER.path) && isNotBlank(path.execute()) || downloadType != null);
     }
     public WebDriver getDriver() {
         return isLocal()
@@ -54,8 +55,8 @@ public class DriverInfo extends DataClass<DriverInfo> {
     private WebDriver setupLocal() {
         try {
             String driverPath = isBlank(DRIVER.path)
-                ? downloadDriver(downloadType, PLATFORM, DRIVER.version)
-                : path;
+                ? downloadDriver(downloadType, DRIVER.platform, DRIVER.version)
+                : path.execute();
             logger.info("Use driver path: " + driverPath);
             setProperty(properties, driverPath);
             return getDriver.execute(getCapabilities());
@@ -65,7 +66,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                     logger.info("Failed to download driver (%s %s) of latest version:" +
                             "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER.version);
                     try {
-                        downloadDriver(downloadType, PLATFORM, getBelowVersion());
+                        downloadDriver(downloadType, DRIVER.platform, getBelowVersion());
                         return getDriver.execute(getCapabilities());
                     } catch (Throwable ex2) { throw exception(ex2, "Failed to download driver"); }
                 }

@@ -23,7 +23,6 @@ import static com.epam.jdi.light.common.PageChecks.*;
 import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.common.SetTextTypes.*;
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.driver.ScreenshotMaker.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
@@ -108,59 +107,63 @@ public class WebSettings {
     public static boolean initialized = false;
     public static synchronized void init() {
         if (initialized) return;
-        getProperties(COMMON.testPropertiesPath);
-        fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
-        COMMON.strategy.action.execute();
-        fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
-        fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
-        fillAction(WebSettings::setDomain, "domain");
-        if (DRIVER.name.equals(DEFAULT_DRIVER))
-            fillAction(p -> DRIVER.name = p, "driver");
-        fillAction(p -> DRIVER.version = p, "driver.version");
-        fillAction(p -> DRIVER.path = p, "drivers.folder");
-        fillAction(p -> SCREEN_PATH = p, "screens.folder");
-        addStrategy(FAIL, LOGS.screenStrategy);
-        fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
-        fillAction(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");
-        fillAction(p -> LOGS.requestsStrategy = getLoggerStrategy(p), "requests.strategy");
-        fillAction(p -> COMMON.killBrowser = p, "browser.kill");
-        fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
-        fillAction(p -> DRIVER.screenSize.read(p), "browser.size");
-        fillAction(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
-        fillAction(p -> PAGE.checkPageOpen = parse(p), "page.check.after.open");
-        fillAction(SoftAssert::setAssertType, "assert.type");
-        fillAction(p -> ELEMENT.clickType = getClickType(p), "click.type");
-        fillAction(p -> ELEMENT.getTextType = getTextType(p), "text.type");
-        fillAction(p -> ELEMENT.setTextType = getSetTextType(p), "set.text.type");
+        try {
+            getProperties(COMMON.testPropertiesPath);
+            fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
+            COMMON.strategy.action.execute();
+            fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
+            fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
+            fillAction(WebSettings::setDomain, "domain");
+            if (DRIVER.name.equals(DEFAULT_DRIVER))
+                fillAction(p -> DRIVER.name = p, "driver");
+            fillAction(p -> DRIVER.version = p, "driver.version");
+            fillAction(p -> DRIVER.path = p, "drivers.folder");
+            fillAction(p -> SCREEN.path = p, "screens.folder");
+            addStrategy(FAIL, LOGS.screenStrategy);
+            fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
+            fillAction(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");
+            fillAction(p -> LOGS.requestsStrategy = getLoggerStrategy(p), "requests.strategy");
+            fillAction(p -> COMMON.killBrowser = p, "browser.kill");
+            fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
+            fillAction(p -> DRIVER.screenSize.read(p), "browser.size");
+            fillAction(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
+            fillAction(p -> PAGE.checkPageOpen = parse(p), "page.check.after.open");
+            fillAction(SoftAssert::setAssertType, "assert.type");
+            fillAction(p -> ELEMENT.clickType = getClickType(p), "click.type");
+            fillAction(p -> ELEMENT.getTextType = getTextType(p), "text.type");
+            fillAction(p -> ELEMENT.setTextType = getSetTextType(p), "set.text.type");
 
-        // RemoteWebDriver properties
-        fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
-        fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
-        fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
-        logger.setLogLevel(LOGS.logLevel);
-        fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
-        fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locators");
-        fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locators.toName");
-        fillAction(p -> ELEMENT.useSmartSearch = getBoolean(p), "smart.search");
-        fillAction(p -> COMMON_CAPABILITIES.put("headless", p), "headless");
+            // RemoteWebDriver properties
+            fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
+            fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
+            fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
+            logger.setLogLevel(LOGS.logLevel);
+            fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
+            fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locators");
+            fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locators.toName");
+            fillAction(p -> ELEMENT.useSmartSearch = getBoolean(p), "smart.search");
+            fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
 
-        loadCapabilities("chrome.capabilities.path", "chrome.properties",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_CHROME.put(key.toString(), value.toString())));
-        loadCapabilities("ff.capabilities.path","ff.properties",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_FF.put(key.toString(), value.toString())));
-        loadCapabilities("ie.capabilities.path","ie.properties",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_IE.put(key.toString(), value.toString())));
-        loadCapabilities("edge.capabilities.path","edge.properties",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_EDGE.put(key.toString(), value.toString())));
-        loadCapabilities("opera.capabilities.path","opera.properties",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_OPERA.put(key.toString(), value.toString())));
-        loadCapabilities("safari.capabilities.path","safari.properties",
-            p -> p.forEach((key,value) -> CAPABILITIES_FOR_SAFARI.put(key.toString(), value.toString())));
-        loadCapabilities("common.capabilities.path","common.properties",
-            p -> p.forEach((key,value) -> COMMON_CAPABILITIES.put(key.toString(), value.toString())));
+            loadCapabilities("chrome.capabilities.path", "chrome.properties",
+                p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
+            loadCapabilities("ff.capabilities.path","ff.properties",
+                p -> p.forEach((key,value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
+            loadCapabilities("ie.capabilities.path","ie.properties",
+                p -> p.forEach((key,value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
+            loadCapabilities("edge.capabilities.path","edge.properties",
+                p -> p.forEach((key,value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
+            loadCapabilities("opera.capabilities.path","opera.properties",
+                p -> p.forEach((key,value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
+            loadCapabilities("safari.capabilities.path","safari.properties",
+                p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
+            loadCapabilities("common.capabilities.path","common.properties",
+                p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
 
-        INIT_THREAD_ID = Thread.currentThread().getId();
-        initialized = true;
+            INIT_THREAD_ID = Thread.currentThread().getId();
+            initialized = true;
+        } catch (Throwable ex) {
+            throw exception(ex, "Failed to init test.properties");
+        }
     }
 
     private static ElementArea getClickType(String type) {
@@ -189,7 +192,7 @@ public class WebSettings {
         switch (prop.toLowerCase().replaceAll(" ", "")) {
             case "sauce":
             case "saucelabs":
-                COMMON_CAPABILITIES = sauceCapabilities();
+                DRIVER.capabilities.common = sauceCapabilities();
                 return sauceLabs();
             case "browserstack": return browserstack();
             default: return seleniumLocalhost();

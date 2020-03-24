@@ -5,7 +5,8 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import io.github.epam.pages.*;
-import io.github.epam.sections.*;
+import io.github.epam.sections.Footer;
+import io.github.epam.sections.Header;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

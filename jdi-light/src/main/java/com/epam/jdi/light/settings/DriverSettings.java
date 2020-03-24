@@ -11,8 +11,9 @@ import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
 import static com.epam.jdi.light.driver.get.DriverVersion.*;
 import static com.epam.jdi.light.driver.get.GetDriverTypes.*;
-import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.driver.get.Platform.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.tools.PathUtils.*;
 import static com.epam.jdi.tools.map.MapArray.*;
 import static com.epam.jdi.tools.pairs.Pair.*;
 import static org.openqa.selenium.PageLoadStrategy.*;
@@ -20,7 +21,7 @@ import static org.openqa.selenium.PageLoadStrategy.*;
 public class DriverSettings {
     public String name = CHROME.name;
     public String version = LATEST.value;
-    public OsTypes os = WIN;
+    public OsTypes os;
     public Platform platform = X64;
     public GetDriverTypes getType = DOWNLOAD;
     public String path = "C:/Selenium";
@@ -28,6 +29,7 @@ public class DriverSettings {
     public ScreenSize screenSize = new ScreenSize();
     public String domain;
     public String remoteUrl;
+    public String downloadsFolder = mergePath(COMMON.testPath, "resources", "downloads");
 
     public JFunc1<WebDriver, WebDriver> setup = DriverData::driverSettings;
     public MapArray<String, DriverInfo> types = map(
@@ -38,5 +40,6 @@ public class DriverSettings {
         $(OPERA.name, OPERA_INFO),
         $(SAFARI.name, SAFARI_INFO)
     );
-    public JFunc1<String, WebDriver> getFunc = WebDriverFactory.GET_DRIVER_BY_NAME;
+    public JFunc1<String, WebDriver> getFunc = WebDriverFactory::getDriverByName;
+    public CapabilitiesSettings capabilities = new CapabilitiesSettings();
 }

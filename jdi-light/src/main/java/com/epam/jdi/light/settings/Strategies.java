@@ -7,8 +7,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.pairs.Pair;
 
+import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
 
 public enum Strategies {
     JDI(() -> {
@@ -30,5 +30,5 @@ public enum Strategies {
     });
 
     public JAction action;
-    Strategies(JAction action) { }
+    Strategies(JAction action) { this.action = action; }
 }

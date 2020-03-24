@@ -4,9 +4,7 @@ import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.ElementArea;
 import io.github.com.pages.UIElementContactFormPage;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,11 +12,10 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static io.github.com.pages.UIElementContactFormPage.*;
-import static io.github.epam.EpamGithubSite.contactFormPage;
-import static io.github.epam.EpamGithubSite.metalAndColorsPage;
-import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
+import static io.github.epam.EpamGithubSite.*;
+import static io.github.epam.tests.epam.steps.Preconditions.*;
 import static org.testng.Assert.*;
 
 public class UIElementTests extends TestsInit {

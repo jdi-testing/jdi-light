@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Level;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.lang.Integer.*;
 import static java.util.Arrays.*;

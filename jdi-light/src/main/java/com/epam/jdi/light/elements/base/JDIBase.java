@@ -14,6 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
@@ -219,16 +220,15 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         WebElement element = purify(webElement.get());
         try {
             element.getTagName();
-            beforeSearch(element);
-            return !locator.isEmpty()
-                    ? purify(getUIElementByLocator(element))
-                    : element;
+            if (locator.isEmpty())
+                return element;
+            return purify(getUIElementByLocator(element));
         } catch (Exception ignore) {
             if (getElementFunc == null) {
                 webElement.clear();
                 return null;
             } else {
-                return beforeSearch(webElement.set(purify(getElementFunc.execute())));
+                return webElement.set(purify(getElementFunc.execute()));
             }
         }
     }

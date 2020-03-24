@@ -43,6 +43,7 @@ public class ButtonTests implements TestsInit {
     @Test
     public void clickTest() {
         redButton.click();
+        redButton.core().hover();
         validateAlert("Red button");
 
         blueButton.click();

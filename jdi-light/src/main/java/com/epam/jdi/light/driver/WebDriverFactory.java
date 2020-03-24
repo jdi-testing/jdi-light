@@ -3,7 +3,6 @@ package com.epam.jdi.light.driver;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.JavascriptExecutor;
@@ -33,6 +32,14 @@ public class WebDriverFactory {
 
     public static MapArray<String, JFunc<WebDriver>> DRIVERS
         = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
+    public static boolean SINGLE_THREAD = false;
+    private static MapArray<String, WebDriver> RUN_DRIVERS = new MapArray<>();
+    private static Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS
+        = new Safe<>(MapArray::new);
+
+    public static boolean noRunDrivers() {
+        return !getRunDrivers().any();
+    }
     private static MapArray<String, WebDriver> getRunDrivers() {
         return SINGLE_THREAD
             ? RUN_DRIVERS
@@ -45,13 +52,41 @@ public class WebDriverFactory {
             THREAD_RUN_DRIVERS.set(map);
         }
     }
-    public static boolean SINGLE_THREAD = false;
-    private static MapArray<String, WebDriver> RUN_DRIVERS = new MapArray<>();
-    private static Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS
-        = new Safe<>(MapArray::new);
-
-    public static boolean noRunDrivers() {
-        return !getRunDrivers().any();
+    public static WebDriver getDriverByName(String driverName) {
+        Lock lock = new ReentrantLock();
+        if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
+            setRunDrivers(map($(driverName, INIT_DRIVER)));
+            SWITCH_THREAD = true;
+            return INIT_DRIVER;
+        }
+        if (!DRIVERS.has(driverName))
+            useDriver(driverName);
+        try {
+            lock.lock();
+            MapArray<String, WebDriver> rDrivers = getRunDrivers();
+            if (rDrivers == null) {
+                rDrivers = new MapArray<>();
+            }
+            if (!rDrivers.has(driverName)) {
+                WebDriver resultDriver = DRIVERS.get(driverName).invoke();
+                rDrivers.add(driverName, resultDriver);
+                setRunDrivers(rDrivers);
+            }
+            WebDriver driver = rDrivers.get(driverName);
+            if (driver.toString().contains("(null)")) {
+                driver = DRIVERS.get(driverName).invoke();
+                rDrivers.update(driverName, driver);
+            }
+            if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId())
+                INIT_DRIVER = driver;
+            driver.manage().timeouts().implicitlyWait(0, SECONDS);
+            return driver;
+        } catch (Throwable ex) {
+            throw exception(ex, "Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
+                    format("Drivers: %s; Run: %s", DRIVERS, getRunDrivers()));
+        } finally {
+            lock.unlock();
+        }
     }
 
     // REGISTER DRIVER
@@ -60,11 +95,11 @@ public class WebDriverFactory {
     }
 
     public static String useDriver(String driverName) {
-        return useDriver(getByName(driverName));
+        return useDriver(driverName, () -> DRIVER.types.get(driverName).getDriver());
     }
 
     public static String useDriver(DriverTypes driverType) {
-        return useDriver(driverType, () -> initDriver(driverType));
+        return useDriver(driverType.name);
     }
 
     private static WebDriver initDriver(DriverTypes type) {
@@ -77,12 +112,7 @@ public class WebDriverFactory {
 
     // GET DRIVER
     public static String useDriver(DriverTypes driverType, JFunc<WebDriver> driver) {
-        String driverName = driverType.name;
-        if (DRIVERS.has(driverName))
-            driverName = driverName + System.currentTimeMillis();
-        DRIVERS.add(driverName, driver);
-        DRIVER.name = driverName;
-        return driverName;
+        return useDriver(driverType.name, driver);
     }
 
     public static String useDriver(String driverName, JFunc<WebDriver> driver) {
@@ -112,45 +142,8 @@ public class WebDriverFactory {
     public static long INIT_THREAD_ID = -1;
     public static boolean SWITCH_THREAD = false;
     public static WebDriver INIT_DRIVER;
-
-    public static JFunc1<String, WebDriver> GET_DRIVER_BY_NAME = driverName -> {
-        Lock lock = new ReentrantLock();
-        lock.lock();
-        if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
-            setRunDrivers(map($(driverName, INIT_DRIVER)));
-            SWITCH_THREAD = true;
-            return INIT_DRIVER;
-        }
-        if (!DRIVERS.has(driverName))
-            useDriver(driverName);
-        try {
-            MapArray<String, WebDriver> rDrivers = getRunDrivers();
-            if (rDrivers == null) {
-                rDrivers = new MapArray<>();
-            }
-            if (!rDrivers.has(driverName)) {
-                WebDriver resultDriver = DRIVERS.get(driverName).invoke();
-                rDrivers.add(driverName, resultDriver);
-                setRunDrivers(rDrivers);
-            }
-            WebDriver driver = rDrivers.get(driverName);
-            if (driver.toString().contains("(null)")) {
-                driver = DRIVERS.get(driverName).invoke();
-                rDrivers.update(driverName, driver);
-            }
-            if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId())
-                INIT_DRIVER = driver;
-            driver.manage().timeouts().implicitlyWait(0, SECONDS);
-            return driver;
-        } catch (Throwable ex) {
-            throw exception(ex, "Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
-                    format("Drivers: %s; Run: %s", DRIVERS, getRunDrivers()));
-        } finally {
-            lock.unlock();
-        }
-    };
     public static WebDriver getDriver(String driverName) {
-        return GET_DRIVER_BY_NAME.execute(driverName);
+        return DRIVER.getFunc.execute(driverName);
     }
 
     public static JavascriptExecutor getJSExecutor() {

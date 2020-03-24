@@ -5,7 +5,6 @@ import io.qameta.allure.Step;
 
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
 import static io.github.com.StaticSite.*;
 import static io.github.epam.test.data.UsersUtils.*;
 

@@ -9,4 +9,6 @@ public class CommonSettings {
     public String logsPath = mergePath("target", ".logs");
     public String killBrowser = "afterAndBefore";
     public String applicationName;
+    public String projectPath = path("");
+    public String testPath = mergePath(projectPath, "src", "test");
 }
