@@ -1,6 +1,7 @@
 package io.github.epam.tests.selenium;
 
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import selenium.entities.User;
 
 import static selenium.seleniumPO.HomePage.*;

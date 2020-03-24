@@ -1,10 +1,13 @@
 package org.mytests.uiobjects.example.site.custom;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.*;
-import com.epam.jdi.light.elements.base.*;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import org.openqa.selenium.By;
 
 import java.util.List;

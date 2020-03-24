@@ -1,6 +1,7 @@
 package com.epam.jdi.light.driver.get;
 
 import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static java.lang.String.*;
 import static java.lang.System.*;
 import static org.apache.commons.lang3.StringUtils.*;
@@ -10,7 +11,6 @@ import static org.apache.commons.lang3.StringUtils.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class RemoteDriver {
-    public static String DRIVER_REMOTE_URL;
     public static String seleniumLocalhost() {
         return getRemoteURL("http://localhost:4444/");
     }
@@ -25,7 +25,7 @@ public class RemoteDriver {
     }
     public static String appium() {return getRemoteURL("http://0.0.0.0:4723/");}
     public static String getRemoteURL() {
-        return getRemoteURL(DRIVER_REMOTE_URL);
+        return getRemoteURL(DRIVER.remoteUrl);
     }
     public static String getRemoteURL(String remoteUrl) {
         try {

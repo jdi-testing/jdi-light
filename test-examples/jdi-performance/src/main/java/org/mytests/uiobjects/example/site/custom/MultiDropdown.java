@@ -1,13 +1,17 @@
 package org.mytests.uiobjects.example.site.custom;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.*;
-import com.epam.jdi.light.elements.base.*;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import org.openqa.selenium.By;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
@@ -24,11 +28,11 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
     By values = By.tagName("li");
     By valueTemplate = By.xpath(".//a[label[text()='%s']]");
     By value = By.cssSelector("button");
-    By valuesConatiner = By.tagName("ul");
+    By valuesContainer = By.tagName("ul");
 
     UIElement root() { return $(By.xpath(".."),this).setName("root"); }
     UIElement expander() { return root().find(expandArrow).setName("expandArrow"); }
-    UIElement valuesList() { return root().find(valuesConatiner).setName("valuesContainer"); }
+    UIElement valuesList() { return root().find(valuesContainer).setName("valuesContainer"); }
     UIElement value(String name) {
         return root().find(fillByTemplate(valueTemplate, name)).setName("valueTemplate");
     }

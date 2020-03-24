@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static org.apache.commons.lang3.StringUtils.*;
@@ -41,7 +42,7 @@ public class WebAnnotationsUtil {
 
     public static void setDomain(Class<?> siteClass) {
         if (siteClass != null) {
-            APP_NAME = siteClass.getSimpleName();
+            COMMON.applicationName = siteClass.getSimpleName();
             if (siteClass.isAnnotationPresent(JSite.class)) {
                 String siteDomain = siteClass.getAnnotation(JSite.class).value();
                 if (!isBlank(siteDomain))

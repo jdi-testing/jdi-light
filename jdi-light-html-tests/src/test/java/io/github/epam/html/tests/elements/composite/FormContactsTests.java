@@ -8,7 +8,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.FormFilters.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static io.github.com.StaticSite.*;
 import static io.github.com.entities.Users.*;
 import static io.github.com.pages.ContactFormPage.*;
@@ -110,7 +110,7 @@ public class FormContactsTests implements TestsInit {
     @Test(expectedExceptions = RuntimeException.class)
     public void checkMethodNegativeTest() {
         main.contactForm.fill(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
-        TIMEOUT.set(1);
+        TIMEOUTS.element.set(1);
         main.contactForm.check(DEFAULT_CONTACT);
     }
 

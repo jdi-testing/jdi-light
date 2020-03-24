@@ -4,7 +4,8 @@ import com.epam.jdi.light.elements.complex.table.DataTable;
 import io.github.epam.StaticTestsInit;
 import io.github.epam.custom.UserRow;
 import io.github.epam.entities.UserInfo;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.*;
 import static io.github.com.StaticSite.*;

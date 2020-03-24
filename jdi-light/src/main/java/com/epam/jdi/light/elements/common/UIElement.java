@@ -25,10 +25,10 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.driver.ScreenshotMaker.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.JsonUtils.*;
@@ -241,7 +241,7 @@ public class UIElement extends JDIBase
      * Execute Java Script call
      * @param jsCode
      */
-    @JDIAction(value = "Execute javascript '{0}' for '{name}'", level = DEBUG)
+    @JDIAction(value = "Execute javascript '{0}' for '{name}'", level = DEBUG, timeout = 0)
     public String jsExecute(String jsCode) {
         return valueOf(js().executeScript("return arguments[0]."+ jsCode +";", getWebElement()));
     }
@@ -574,7 +574,7 @@ public class UIElement extends JDIBase
         return hasImage() ? new File(imageFilePath) : null;
     }
     private String getScreenshotName(String tag) {
-        return varName+tag+SCREEN_FILE_SUFFIX;
+        return varName + tag + SCREEN.fileSuffix;
     }
 
     @JDIAction(level = DEBUG)

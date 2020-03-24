@@ -14,11 +14,12 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -40,7 +41,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return this;
     }
     public JDIBase() {
-        searchRules.add(SEARCH_RULE);
+        searchRules.add(ELEMENT.searchRule);
     }
     public JDIBase(JDIBase base) {
         setCore(base);
@@ -76,8 +77,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return searchRules;
     }
     public JAction1<UIElement> beforeSearch = null;
-    public WebElement beforeSearch(WebElement el) {
-        (beforeSearch == null ? BEFORE_SEARCH : beforeSearch).execute(new UIElement(el));
+    WebElement beforeSearch(WebElement el) {
+        (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new UIElement(el));
         return el;
     }
 
@@ -146,11 +147,10 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     @Override
     public IBaseElement waitSec(int sec) {
         timeout = sec;
-        //driver().manage().timeouts().implicitlyWait(sec*1000, TimeUnit.MILLISECONDS);
         return this;
     }
     public int getTimeout() {
-        return timeout > -1 ? timeout : TIMEOUT.get();
+        return timeout > -1 ? timeout : TIMEOUTS.element.get();
     }
     public Timer timer() { return new Timer(getTimeout()*1000); }
 
@@ -178,11 +178,15 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public WebElement get() {
         WebElement element = get(new Object[]{});
-        for (JFunc1<WebElement, Boolean> rule : searchRules().values())
-            if (!rule.execute(element))
-                throw exception("Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULE)");
+        VALIDATE_FOUND_ELEMENT.execute(this, element);
         return element;
 
+    }
+    public static JAction2<JDIBase, WebElement> VALIDATE_FOUND_ELEMENT = JDIBase::validateFoundElement;
+    private static void validateFoundElement(JDIBase base, WebElement element) {
+        for (JFunc1<WebElement, Boolean> rule : base.searchRules().values())
+            if (!rule.execute(element))
+                throw exception("Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULE)");
     }
     protected JFunc<WebElement> getElementFunc = null;
     public JDIBase setGetFunc(JFunc<WebElement> func) {
@@ -201,20 +205,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         });
     }
     public WebElement get(Object... args) {
-        manageTimeout();
-        if (webElement.hasValue()) {
-            WebElement webElement = getCachedElement();
-            if (webElement != null)
-                return webElement;
-        }
-        if (locator.isEmpty())
-            return beforeSearch(getSmart());
-        if (locator.argsCount() != args.length)
-            return getWebListFromArgs(args);
-        List<WebElement> els = getAllElements(args);
-        return getElement(els);
+        return ELEMENT.getElementWithArgs.execute(this, args);
     }
-    private UIElement getWebListFromArgs(Object... args) {
+    UIElement getWebListFromArgs(Object... args) {
         if (locator.argsCount() == 0 && args.length == 1) {
             if (args[0].getClass() == String.class)
                 return new WebList(this).get(args[0].toString());
@@ -223,20 +216,19 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         }
         throw exception("Can't get element with template locator '%s'. Expected %s arguments but found %s", getLocator(), locator.argsCount(), args.length);
     }
-    private WebElement getCachedElement() {
+    WebElement getCachedElement() {
         WebElement element = purify(webElement.get());
         try {
             element.getTagName();
-            beforeSearch(element);
-            return !locator.isEmpty()
-                    ? purify(getUIElementByLocator(element))
-                    : element;
+            if (locator.isEmpty())
+                return element;
+            return purify(getUIElementByLocator(element));
         } catch (Exception ignore) {
             if (getElementFunc == null) {
                 webElement.clear();
                 return null;
             } else {
-                return beforeSearch(webElement.set(purify(getElementFunc.execute())));
+                return webElement.set(purify(getElementFunc.execute()));
             }
         }
     }
@@ -244,7 +236,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public void strictSearch(boolean strictSearch) {
         this.strictSearch = strictSearch;
     }
-    private WebElement getElement(List<WebElement> els) {
+    WebElement getElement(List<WebElement> els) {
         if (els.size() == 1)
             return els.get(0);
         if (els.isEmpty())
@@ -264,7 +256,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             throw exception(ELEMENTS_FILTERED_MESSAGE, elements.size(), toString(), getTimeout());
         return result;
     }
-    private WebElement getSmart() {
+    public WebElement getSmart() {
         try {
             WebElement element = SMART_SEARCH.execute(this);
             if (element != null)
@@ -278,7 +270,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return noValidation(() -> getAll(args));
     }
     public List<WebElement> getAll(Object... args) {
-        manageTimeout();
         return getAllElements(args);
     }
     public List<WebElement> getAllElements(Object... args) {
@@ -375,12 +366,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public <TE extends IBaseElement, TR> TR noWait(JFunc1<TE, TR> action, Class<TE> type) {
         return waitFunc(0, action, type);
     }
-    public void manageTimeout() {
-        if (timeout > -1)
-            waitSec(timeout);
-    }
     public void dropToGlobalTimeout() {
-        waitSec(TIMEOUT.get());
+        waitSec(TIMEOUTS.element.get());
     }
     private JDIBase getBase(Object element) {
         if (isClass(element.getClass(), JDIBase.class))
@@ -501,7 +488,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
         if (element.webElement.hasValue())
             return printWebElement(element.webElement.get());
-        return Switch(logger.getLogLevel()).get(
+        return Switch(LOGS.logLevel).get(
                 Case(l -> l == STEP,
                     l -> msgFormat(PRINT_ELEMENT_STEP, element)),
                 Case(l -> l == INFO,
@@ -526,9 +513,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     private Safe<Actions> actions = new Safe<>(() -> new Actions(driver()));
 
-    public ElementArea clickAreaType = CLICK_TYPE;
-    public TextTypes textType = TEXT_TYPE;
-    public SetTextTypes setTextType = SET_TEXT_TYPE;
+    public ElementArea clickAreaType = ELEMENT.clickType;
+    public TextTypes textType = ELEMENT.getTextType;
+    public SetTextTypes setTextType = ELEMENT.setTextType;
 
     public void offCache() {
         webElement.useCache(false);

@@ -12,7 +12,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.*;
-import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 
 public class ActionObject {
@@ -22,7 +22,7 @@ public class ActionObject {
         try {
             this.elementTimeout = element() != null
                 ? element().base().getTimeout()
-                : TIMEOUT.get();
+                : TIMEOUTS.element.get();
         } catch (Throwable ex) {
             this.elementTimeout = 10;
         }

@@ -1,10 +1,12 @@
 package io.github.epam.tests.google;
 
 import com.epam.jdi.light.elements.complex.DataList;
-import io.github.com.custom.*;
+import io.github.com.custom.Result;
+import io.github.com.custom.SearchResult;
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.Header.*;

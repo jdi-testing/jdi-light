@@ -34,9 +34,8 @@ import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.AllureLogger.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.logger.LogStrategy.*;
 import static com.epam.jdi.light.logger.Strategy.*;
-import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.JsonUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -108,13 +107,13 @@ public class ActionHelper {
     public static void beforeJdiAction(ActionObject jInfo) {
         ProceedingJoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
-        if (WRITE_TO_ALLURE && logLevel(jp).equalOrMoreThan(INFO) && !previousAllureStep.equals(message))
+        if (LOGS.writeToAllure && logLevel(jp).equalOrMoreThan(INFO) && !previousAllureStep.equals(message))
             jInfo.stepUId = startStep(message);
         previousAllureStep = message;
         if (jInfo.topLevel()) {
-            if (WRITE_TO_LOG)
+            if (LOGS.writeToLog)
                 logger.toLog(message, logLevel(jp));
-            if (CHECK_PAGE_OPEN != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
+            if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
                 processPage(jInfo);
             if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
                 visualValidation(jp, message);
@@ -157,13 +156,13 @@ public class ActionHelper {
             }
         }
         if (getJpMethod(jp).getName().equals("open"))
-            BEFORE_NEW_PAGE.execute(getPage(jp.getThis()));
-        TIMEOUT.reset();
+            PAGE.beforeNewPage.execute(getPage(jp.getThis()));
+        TIMEOUTS.element.reset();
         return result;
     }
     public static JFunc2<ActionObject, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
     static boolean logResult(ProceedingJoinPoint jp) {
-        if (!WRITE_TO_LOG)
+        if (!LOGS.writeToLog)
             return false;
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class))
@@ -195,8 +194,8 @@ public class ActionHelper {
                 }
             }
             if (getJpMethod(jp).getName().equals("open"))
-                BEFORE_NEW_PAGE.execute(getPage(jp.getThis()));
-            TIMEOUT.reset();
+                PAGE.beforeNewPage.execute(getPage(jp.getThis()));
+            TIMEOUTS.element.reset();
         }
         return result;
     }
@@ -206,7 +205,7 @@ public class ActionHelper {
         String actionName = GET_ACTION_NAME.execute(jp);
         String logString = jp.getThis() == null
             ? actionName
-            : msgFormat(getTemplate(logger.getLogLevel()), map(
+            : msgFormat(getTemplate(LOGS.logLevel), map(
                 $("action", actionName),
                 $("element", getElementName(jp))));
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
@@ -220,9 +219,9 @@ public class ActionHelper {
             if (currentPage != null && page != null) {
                 if (!currentPage.equals(page.getName())) {
                     setCurrentPage(page);
-                    BEFORE_NEW_PAGE.execute(page);
+                    PAGE.beforeNewPage.execute(page);
                 }
-                BEFORE_EACH_STEP.execute(page);
+                PAGE.beforeEachStep.execute(page);
             }
         }
     }
@@ -242,16 +241,16 @@ public class ActionHelper {
         String screenName = "";
         String htmlSnapshot = "";
         String errors = "";
-        if (SCREEN_STRATEGY.contains(FAIL))
+        if (LOGS.screenStrategy.contains(FAIL))
             screenName = takeScreen();
-        if (HTML_CODE_STRATEGY.contains(FAIL))
+        if (LOGS.htmlCodeStrategy.contains(FAIL))
             htmlSnapshot = takeHtmlCodeOnFailure();
-        if (REQUESTS_STRATEGY.contains(FAIL)) {
+        if (LOGS.requestsStrategy.contains(FAIL)) {
             WebDriver driver = jInfo.element() != null
                 ? jInfo.element().base().driver()
                 : getDriver();
             List<LogEntry> requests = driver.manage().logs().get("performance").getAll();
-            List<String> errorEntries = LinqUtils.map(filter(requests, FILTER_REQUESTS),
+            List<String> errorEntries = LinqUtils.map(filter(requests, LOGS.filterHttpRequests),
                 logEntry -> beautifyJson(logEntry.getMessage()));
             errors = print(errorEntries);
         }

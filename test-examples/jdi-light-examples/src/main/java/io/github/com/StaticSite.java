@@ -3,7 +3,8 @@ package io.github.com;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.pages.*;
 import org.openqa.selenium.WebElement;
 
