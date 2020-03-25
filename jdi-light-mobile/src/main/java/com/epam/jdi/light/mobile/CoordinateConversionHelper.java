@@ -29,18 +29,6 @@ public class CoordinateConversionHelper {
     static {
         if (getDriver() instanceof AndroidDriver) {
             TOOLBAR = d -> ((AndroidDriver) d).findElementById(androidToolbarId).getRect();
-//            WEBVIEW = d -> {
-//                // TODO: fix this awful approach
-//                try {
-//                    return ((AndroidDriver) d).findElementByClassName("android.webkit.WebView").getRect();
-//                } catch (NoSuchElementException ex) {
-//                    try {
-//                        TimeUnit.SECONDS.sleep(2);
-//                    } catch (InterruptedException e) {
-//                    }
-//                    return ((AndroidDriver) d).findElementByClassName("android.webkit.WebView").getRect();
-//                }
-//            };
             WEBVIEW = d -> ((AndroidDriver) d).findElementByClassName("android.webkit.WebView").getRect();
         } else if (getDriver() instanceof IOSDriver) {
             TOOLBAR = d -> ((IOSDriver) d).findElementByAccessibilityId(iosToolbarAccessibilityId).getRect();
