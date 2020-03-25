@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Angular</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <script src="https://unpkg.com/core-js@2.4.1/client/shim.min.js"></script>
+  <script src="https://unpkg.com/zone.js/dist/zone.min.js"></script>
+  <script src="https://unpkg.com/rxjs@5.0.0/bundles/Rx.min.js"></script>
+
+  <script src="https://unpkg.com/@angular/core@2.0.0/bundles/core.umd.js"></script>
+  <script src="https://unpkg.com/@angular/common@2.0.0/bundles/common.umd.js"></script>
+  <script src="https://unpkg.com/@angular/compiler@2.0.0/bundles/compiler.umd.js"></script>
+  <script src="https://unpkg.com/@angular/forms@2.0.0/bundles/forms.umd.js"></script>
+  <script src="https://unpkg.com/@angular/platform-browser@2.0.0/bundles/platform-browser.umd.js"></script>
+  <script src="https://unpkg.com/@angular/platform-browser-dynamic@2.0.0/bundles/platform-browser-dynamic.umd.js"></script>
+
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/uui-all.css"/>
+  <link rel="stylesheet" href="css/custom-styles.css"/>
+  <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css"/>
+  <script src="js/lib/jquery-1.11.1.min.js"></script>
+  <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="js/lib/jquery.cookie.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/uui-core.min.js" type="text/javascript"></script>
+  <script src="js/utils.js" type="text/javascript"></script>
+  <!-- IE9- support of HTML5 -->
+  <!--[if lt IE 9]>
+  <script src="js/lib/html5shiv.js"></script>
+  <script src="js/lib/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+  <div class="replace site-header">replace</div>
+</header>
+
+<div class="wrapper">
+  <div class="replace left-side-bar">replace</div>
+  <div class="uui-main-container page-inside">
+    <main>
+      <my-app>Загрузка...</my-app>
+      <script src="angular/app.component.js"></script>
+      <script src="angular/app.module.js"></script>
+      <script src="angular/main.js"></script>
+    </main>
+  </div>
+</div>
+<footer>
+  <div class="replace footer">replace</div>
+</footer>
+</body>
+<Script language="JavaScript">
+        UUI.Vertical_Menu.init({"open": true});
+    </script>
+<script>
+		includeSideBar();
+		activateTopElement(1);
+	</script>
+</html>
