@@ -12,16 +12,16 @@ import org.hamcrest.Matchers;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.tools.EnumUtils.*;
 import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class UISelectAssert<A extends UISelectAssert, E extends ISelector> extends UIAssert<A, E>
+public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> extends UIAssert<A, E>
         implements ITextAssert<A> {
 
     @JDIAction("Assert that '{0}' option selected for '{name}'")
@@ -31,15 +31,14 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     }
     @JDIAction("Assert that '{0}' option selected for '{name}'")
     public A selected(String option) {
-        jdiAssert(element.selected(option), Matchers.is(true));
-        return (A) this;
+        return selected(Matchers.is(option));
     }
     @JDIAction("Assert that '{0}' option selected for '{name}'")
     public A selected(int i) {
         jdiAssert(element.selected(i), Matchers.is(true));
         return (A) this;
     }
-    public <TEnum extends Enum> UISelectAssert selected(TEnum option) {
+    public <TEnum extends Enum<?>> UISelectAssert<?, ?> selected(TEnum option) {
         return selected(getEnumValue(option));
     }
     public A text(Matcher<String> condition) {
@@ -48,7 +47,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
     public A text(String condition) {
         return selected(condition);
     }
-    public <TEnum extends Enum> UISelectAssert value(TEnum option) {
+    public <TEnum extends Enum<?>> UISelectAssert<?, ?> value(TEnum option) {
         return selected(option);
     }
     @JDIAction("Assert that '{name}' values {0}")
@@ -112,16 +111,6 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
         jdiAssert(element.isDisplayed() ? "displayed" : "hidden", Matchers.is("displayed"));
         return (A) this;
     }
-    @JDIAction("Assert that '{name}' is expanded")
-    public A expanded() {
-        jdiAssert(element.list().isDisplayed() ? "expanded" : "hidden", Matchers.is("expanded"));
-        return (A) this;
-    }
-    @JDIAction("Assert that '{name}' is collapsed")
-    public A collapsed() {
-        jdiAssert(element.list().isHidden() ? "collapsed" : "expanded", Matchers.is("expanded"));
-        return (A) this;
-    }
     @JDIAction("Assert that '{name}' is disappeared")
     public A disappear() {
         jdiAssert(element.isHidden() ? "hidden" : "displayed", Matchers.is("hidden"));
@@ -133,7 +122,7 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
         return disappear();
     }
     public A notAppear() {
-        return notAppear(TIMEOUT.get());
+        return notAppear(TIMEOUTS.element.get());
     }
 
     @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
@@ -187,4 +176,5 @@ public class UISelectAssert<A extends UISelectAssert, E extends ISelector> exten
             return elements(d -> d.equals(data));
         }
     }
+    public A and() { return (A) this; }
 }

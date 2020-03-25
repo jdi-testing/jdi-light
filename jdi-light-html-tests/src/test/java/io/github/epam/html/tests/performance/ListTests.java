@@ -13,13 +13,12 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.github.com.StaticSite.performancePage;
+import static io.github.com.StaticSite.*;
 import static io.github.com.pages.PerformancePage.*;
 import static io.github.epam.html.tests.performance.PerfStatistic.*;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 public class ListTests implements TestsInit {
     final String value = "Yen Stevenson";
@@ -60,7 +59,7 @@ public class ListTests implements TestsInit {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.get(index).getText();
-        }, () -> firstXpath.get(index).getText(), 0.9, 100);
+        }, () -> firstXpath.get(index+1).getText(), 0.9, 100);
     }
 
     private <T> void testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, double expectedRatio, int count) {

@@ -10,21 +10,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.settings.WebSettings.init;
-import static com.epam.jdi.tools.JsonUtils.getMapFromJson;
-import static com.epam.jdi.tools.JsonUtils.scanFolder;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.PropertyReader.getProperty;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.JsonUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.PropertyReader.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -81,9 +77,14 @@ public class EntitiesCollection {
 
     public static <T> T getUI(String name, Class<T> type) {
         Object element = getElement(name);
-        if (isClass(element.getClass(), type))
+        if (element != null && isClass(element.getClass(), type))
             return (T) element;
         throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
+    }
+    public static <T> T getByType(ICoreElement element, Class<T> type) {
+        return (T) (isClass(element.getClass(), type)
+                ? element
+                : element.core());
     }
     public static ICoreElement getUI(String name) {
         Object element = getElement(name);
@@ -110,18 +111,22 @@ public class EntitiesCollection {
             return getElementInSection(split[1], split[0]);
         if (ELEMENTS.has(name)) {
             List<Object> elements = ELEMENTS.get(name);
-            return elements.size() == 1
-                    ? elements.get(0)
-                    : LinqUtils.first(elements, el -> {
-                WebPage page = ((ICoreElement) el).base().getPage();
-                return page != null && page.getName().equals(getCurrentPage());
-            });
+            if (elements.size() > 1) {
+                Object element = LinqUtils.first(elements, el -> {
+                    WebPage page = ((ICoreElement) el).base().getPage();
+                    return page != null && page.getName().equals(getCurrentPage());
+                });
+                if (element != null) {
+                    return element;
+                }
+            }
+            return elements.get(0);
         }
         if (jsonElements == null)
             readElementsFromJson();
         return jsonElements.keys().contains(name)
-                ? $(jsonElements.get(name))
-                : new UIElement().setName(name);
+            ? $(jsonElements.get(name))
+            : new UIElement().setName(name);
     }
 
     static Object getElementInSection(String name, String section) {

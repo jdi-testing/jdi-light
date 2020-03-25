@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.core.DataListAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.base.IListBase;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
 import org.hamcrest.Matcher;
@@ -12,21 +12,21 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.UIUtils.asEntity;
-import static com.epam.jdi.light.elements.init.InitActions.getGenericTypes;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.UIUtils.*;
+import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert<T,D>> {
+public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAssert<T,D>> {
     public Class<D> dataType;
 
     public DataList() {}
-    public DataList(Class<T> type) { initClass = type; }
+    public DataList(Class<T> type, Class<D> dataType) { initClass = type; this.dataType = dataType; }
 
     public D getData(String name) {
         return asEntity(get(name), dataType);
@@ -83,12 +83,12 @@ public class DataList<T extends IListBase, D> extends ListBase<T, DataListAssert
             if (types.length > 2)
                 throw exception("Can't setup DataList generic parameters for field '%s'. Actual more than %s but expected 1 or 2",
                         field.getName(), types.length);
-            initClass = types[0].toString().equals("?") ? null : (Class<T>)types[0];
-            dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>)types[1];
-        } catch (Exception ex) {
-            throw exception(ex, "Can't instantiate List<%s, %s> field '%s'", initClass == null
-                            ? "?" : initClass.getSimpleName(), dataType == null ? "?" : dataType.getSimpleName(),
-                    field.getName());
+                initClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
+                dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>) types[1];
+        } catch (Exception ignore) {
+            //throw exception(ex, "Can't instantiate List<%s, %s> field '%s'", initClass == null
+            //                ? "?" : initClass.getSimpleName(), dataType == null ? "?" : dataType.getSimpleName(),
+            //        field.getName());
         }
     }
 }

@@ -2,7 +2,7 @@ package org.mytests.uiobjects.example.knection;
 
 import com.epam.jdi.light.elements.complex.table.DataTable;
 
-import static java.util.Arrays.asList;
+import static java.util.Arrays.*;
 
 public class ProjectTable extends DataTable<ProjectRow, Workspace> {
     public ProjectTable() {

@@ -15,21 +15,19 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.ifSelect;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static java.util.Arrays.asList;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static java.util.Arrays.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class Selector extends UIBaseElement<UISelectAssert>
+public class Selector extends UIBaseElement<UISelectAssert<?,?>>
         implements ISelector, SetValue, HasPlaceholder {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
     protected Select asSelect() {
@@ -55,7 +53,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
     public void select(int index) {
         if (index < 1)
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
-        asSelect().selectByIndex(index-1);
+        asSelect().selectByIndex(index - 1);
     }
 
     /**
@@ -91,10 +89,10 @@ public class Selector extends UIBaseElement<UISelectAssert>
                 opt.click();
         }
     }
-    public <TEnum extends Enum> void check(TEnum... values) {
+    public <TEnum extends Enum<?>> void check(TEnum... values) {
         check(getEnumValues(values));
     }
-    public <TEnum extends Enum> void uncheck(TEnum... values) {
+    public <TEnum extends Enum<?>> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
 
@@ -200,7 +198,7 @@ public class Selector extends UIBaseElement<UISelectAssert>
         return asSelect().isMultiple() ? print(checked(),";") : selected();
     }
     @Override
-    public UISelectAssert is() {
+    public UISelectAssert<?,?> is() {
         return new UISelectAssert<>().set(this);
     }
 }

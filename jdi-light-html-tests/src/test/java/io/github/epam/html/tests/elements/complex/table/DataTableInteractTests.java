@@ -7,13 +7,12 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static io.github.com.StaticSite.usersPage;
-import static io.github.com.pages.UsersPage.users;
-import static io.github.com.pages.UsersPage.usersSetup;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.UsersPage.*;
+import static io.github.epam.html.tests.elements.BaseValidations.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 public class DataTableInteractTests implements TestsInit {
 

@@ -2,10 +2,7 @@ package io.github.com;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
-import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.pages.*;
@@ -13,8 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
-import static com.epam.jdi.light.common.CheckTypes.MATCH;
+import static com.epam.jdi.light.common.CheckTypes.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {

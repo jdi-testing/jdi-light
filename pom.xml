@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.jdi</groupId>
-    <version>1.1.18</version>
+    <version>1.2.0</version>
     <artifactId>jdi-2</artifactId>
     <name>JDI UI 2.0</name>
     <packaging>pom</packaging>
@@ -28,17 +28,17 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.1</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
             </plugin>
 
             <plugin>
@@ -52,12 +52,16 @@
     <modules>
         <module>jdi-light</module>
         <module>jdi-light-html</module>
+        <module>jdi-light-mobile</module>
+        <module>jdi-light-mobile-tests</module>
         <module>jdi-light-eyes</module>
         <module>jdi-light-mobile</module>
         <module>jdi-bdd</module>
+        <module>jdi-light-bootstrap</module>
         <module>jdi-light-html-tests</module>
         <module>jdi-bdd-tests</module>
         <module>jdi-light-applitools-tests</module>
+        <module>jdi-light-bootstrap-tests</module>
         <module>test-examples/jdi-performance</module>
         <module>test-examples/jdi-light-examples</module>
         <module>test-examples/jdi-bdd-no-po-tests</module>

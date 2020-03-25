@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
-import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.light.actions.ActionOverride.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 
 public class ActionObject {
     public ActionObject(ProceedingJoinPoint joinPoint, String className) {
@@ -22,7 +22,7 @@ public class ActionObject {
         try {
             this.elementTimeout = element() != null
                 ? element().base().getTimeout()
-                : TIMEOUT.get();
+                : TIMEOUTS.element.get();
         } catch (Throwable ex) {
             this.elementTimeout = 10;
         }

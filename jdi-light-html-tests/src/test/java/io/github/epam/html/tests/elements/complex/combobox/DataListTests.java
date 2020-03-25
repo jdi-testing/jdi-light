@@ -4,17 +4,18 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.iceCream;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Strawberry;
-import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Vanilla;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.epam.html.tests.elements.BaseValidations.*;
+import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 public class DataListTests implements TestsInit {
+
+    private String text = "Coconut";
+    private String[] values = {"Chocolate", "Coconut", "Mint", "Strawberry", "Vanilla"};
 
     @BeforeMethod
     public void before() {
@@ -22,7 +23,6 @@ public class DataListTests implements TestsInit {
         html5Page.shouldBeOpened();
         iceCream.select(text);
     }
-    String text = "Coconut";
 
     @Test
     public void getValueTest() {
@@ -105,5 +105,15 @@ public class DataListTests implements TestsInit {
     @Test
     public void baseValidationTest() {
         baseValidation(iceCream);
+    }
+
+    @Test
+    public void valuesTest() {
+        iceCream.is().values(values);
+    }
+
+    @Test
+    public void attrsTest() {
+        assertEquals(iceCream.list().attrs("value").toArray(), values);
     }
 }

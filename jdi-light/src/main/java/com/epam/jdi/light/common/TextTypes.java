@@ -3,8 +3,7 @@ package com.epam.jdi.light.common;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.func.JFunc1;
 
-import static com.epam.jdi.light.elements.common.UIElement.SMART_GET_TEXT;
-import static com.epam.jdi.light.elements.common.UIElement.SMART_LIST_TEXT;
+import static com.epam.jdi.light.elements.common.UIElement.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

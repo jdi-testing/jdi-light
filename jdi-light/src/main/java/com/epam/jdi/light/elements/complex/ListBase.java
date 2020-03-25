@@ -6,8 +6,9 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.init.SiteInfo;
-import com.epam.jdi.light.elements.interfaces.base.IListBase;
+import com.epam.jdi.light.elements.interfaces.base.IClickable;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
@@ -17,22 +18,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.PageFactory.initJdiField;
-import static com.epam.jdi.light.elements.init.PageFactory.setupFieldUsingRules;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.UIUtils.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-abstract class ListBase<T extends IListBase, A extends UISelectAssert>
+abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
     protected WebList list;
     public WebList list() {
@@ -46,12 +46,12 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     ListBase() {}
     ListBase(By locator) { list = new WebList(locator); }
     ListBase(List<WebElement> elements) { list = new WebList(elements); }
-    Class<?> initClass = UIElement.class;
+    public Class<?> initClass = UIElement.class;
 
     private boolean actualMapValue() {
         return map.hasValue() && map.get().size() > 0 && isActual(map.get().get(0).value);
     }
-    protected CacheValue<MultiMap<String, T>> map = new CacheValue<>(MultiMap::new);
+    protected CacheValue<MultiMap<String, T>> map = new CacheValue<>(() -> new MultiMap<String, T>().ignoreKeyCase());
     private boolean isActual(T element) {
         try {
             element.getTagName();
@@ -87,7 +87,8 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
-        get(value).click();
+        T item = get(value);
+        getByType(item, IClickable.class).click();
     }
 
     /**
@@ -117,7 +118,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     public void hoverAndClick(String value) {
         list().hoverAndClick(value);
     }
-    public <TEnum extends Enum> void select(TEnum value) {
+    public <TEnum extends Enum<?>> void select(TEnum value) {
         list().select(value);
     }
 
@@ -126,7 +127,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
      * @param values
      */
     @JDIAction("Select ({0}) for '{name}'")
-    public <TEnum extends Enum> void select(TEnum... values) {
+    public <TEnum extends Enum<?>> void select(TEnum... values) {
         list().select(values);
     }
 
@@ -157,8 +158,11 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     @JDIAction("Get '{name}' selected value")
     public String selected() {
         refresh();
-        T first = logger.logOff(() -> first(IListBase::isSelected) );
-        return first != null ? first.getText() : "";
+        T first = logger.logOff(() ->
+                first(item -> getByType(item, CanBeSelected.class).isSelected()));
+        return first != null
+            ? getByType(first, IsText.class).getText()
+            : "";
     }
 
     /**
@@ -211,6 +215,10 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
         return list().values(type);
     }
 
+    public List<String> attrs(String value) {
+        return list().attrs(value);
+    }
+
     public List<String> listEnabled() {
         return list().listEnabled();
     }
@@ -247,7 +255,7 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
     public void setup(Field field) {
         Type[] types;
         try {
-            types = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+            types = getGenericTypes(field);
         } catch (Exception ex) { return; }
         if (types.length != 1) return;
         try {
@@ -255,24 +263,10 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
             if (initClass == WebElement.class)
                 initClass = UIElement.class;
             this.initClass = initClass;
-        } catch (Exception ex) { throw  exception(ex, "Can't init WebList. Weblist elements should extend UIElement"); }
+        } catch (Exception ex) { throw  exception(ex, "Can't init WebList. WebList elements should extend UIElement"); }
     }
-    private T toT(UIElement el) {
-        try {
-            if (initClass == null)
-                throw exception("Can't init List of UI Elements. Class Type is null");
-            SiteInfo info = new SiteInfo(base().driverName).set(s -> {
-                s.cl = initClass;
-                s.name = el.getName();
-                s.parent = el.parent;
-            });
-            initJdiField(info);
-            if (info.instance != null)
-                setupFieldUsingRules(info);
-            T t = (T) info.instance;
-            t.base().setCore(el);
-            return t;
-        } catch (Exception ex) { throw exception(ex, "Can't init new element for list"); }
+    protected T toT(UIElement el) {
+        return initT(el, this, initClass);
     }
 
     public static JFunc1<Field[], String> GET_TITLE_FIELD_NAME = fields -> {
@@ -298,7 +292,13 @@ abstract class ListBase<T extends IListBase, A extends UISelectAssert>
         try {
             field = element.getClass().getField(titleField);
         } catch (Exception ignore) { /* if field name identified it is always exist */ }
-        return ((WebElement) getValueField(field, element)).getText();
+        return getTextElement(field, element).getText();
+    }
+    private IsText getTextElement(Field field, Object element) {
+        Object title = getValueField(field, element);
+        IsText textElement = getByType((ICoreElement) title, IsText.class);
+        textElement.base().noValidation();
+        return textElement;
     }
     public boolean isEmpty() { return size() == 0; }
     public boolean isNotEmpty() { return size() > 0; }

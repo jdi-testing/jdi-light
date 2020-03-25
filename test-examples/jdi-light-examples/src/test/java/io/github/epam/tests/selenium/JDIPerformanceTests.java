@@ -7,12 +7,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import selenium.entities.User;
 
-import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static selenium.entities.TestData.TABLE_SNAPSHOOT;
-import static selenium.seleniumPO.HomePage.leftNavigation;
-import static selenium.seleniumPO.SiteSelenium.homePage;
-import static selenium.seleniumPO.SiteSelenium.login;
+import static com.epam.jdi.light.elements.complex.table.Column.*;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
+import static selenium.entities.TestData.*;
+import static selenium.seleniumPO.HomePage.*;
+import static selenium.seleniumPO.SiteSelenium.*;
 import static selenium.site.pages.JDIPerformancePage.*;
 
 public class JDIPerformanceTests implements SimpleTestsInit {

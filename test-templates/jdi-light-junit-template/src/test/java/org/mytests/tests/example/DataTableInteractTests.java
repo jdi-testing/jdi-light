@@ -7,12 +7,11 @@ import org.mytests.uiobjects.example.custom.MarvelUser;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mytests.tests.states.States.shouldBeLoggedIn;
-import static org.mytests.uiobjects.example.site.SiteJdi.usersPage;
-import static org.mytests.uiobjects.example.site.pages.UsersPage.users;
-import static org.mytests.uiobjects.example.site.pages.UsersPage.usersSetup;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mytests.tests.states.States.*;
+import static org.mytests.uiobjects.example.site.SiteJdi.*;
+import static org.mytests.uiobjects.example.site.pages.UsersPage.*;
 
 public class DataTableInteractTests extends TestsInit {
 

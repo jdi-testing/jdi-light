@@ -1,12 +1,9 @@
 package com.epam.jdi.light.common;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-import static com.epam.jdi.tools.StringUtils.inputStreamToList;
+import static com.epam.jdi.tools.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

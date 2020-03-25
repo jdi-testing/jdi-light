@@ -4,18 +4,16 @@ import io.github.epam.StaticTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.com.StaticSite.*;
-import static io.github.com.pages.HomePage.githubLink;
-import static io.github.com.pages.HomePage.jdiText;
+import static io.github.com.pages.HomePage.*;
 import static io.github.com.pages.MetalAndColorsPage.*;
-import static io.github.epam.enums.ColorsList.Green;
-import static io.github.epam.enums.Metals.Gold;
+import static io.github.epam.enums.ColorsList.*;
+import static io.github.epam.enums.Metals.*;
 import static io.github.epam.enums.Navigation.*;
-import static io.github.epam.enums.NavigationNums.nContactForm;
-import static io.github.epam.enums.NavigationNums.nHome;
-import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
+import static io.github.epam.enums.NavigationNums.*;
+import static io.github.epam.tests.recommended.steps.Preconditions.*;
+import static org.hamcrest.Matchers.*;
 
 public class ComplexElements3Tests extends StaticTestsInit {
 
@@ -67,7 +65,7 @@ public class ComplexElements3Tests extends StaticTestsInit {
         contactFormPage.checkOpened();
         menu.select(Home);
         homePage.checkOpened();
-        navigationL.select(3);
+        navigationL.select(4);
         menu.select(ComplexTable);
     }
 }

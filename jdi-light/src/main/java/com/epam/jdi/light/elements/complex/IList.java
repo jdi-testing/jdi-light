@@ -7,15 +7,11 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MultiMap;
 import com.epam.jdi.tools.pairs.Pair;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.tools.EnumUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -28,16 +24,14 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
     MultiMap<String, T> elements(int minAmount);
     T get(String value);
 
-    default T get(Enum name) { return get(getEnumValue(name)); }
+    default T get(Enum<?> name) { return get(getEnumValue(name)); }
     default T last() {
         MultiMap<String, T> elements = elements(1);
         Pair<String, T> last = elements.last();
         return last == null ? null : last.value;
     }
     default T first() {
-        MultiMap<String, T> elements = elements(1);
-        Pair<String, T> first = elements.first();
-        return first == null ? null : first.value;
+        return get(0);
     }
     default List<T> where(JFunc1<T, Boolean> condition) {
         return elements(0).values(condition);
@@ -97,7 +91,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
         try {
             return base().noWait(() -> base().getList(0).size());
         } catch (Exception ex) {
-            throw exception(ex,"Get size failed");
+            throw exception(ex, "Get size failed");
         }
     }
     @Override
@@ -121,11 +115,11 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
     }
     @Override
     default boolean add(T t) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
     @Override
     default boolean remove(Object o) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
     @Override
     default boolean containsAll(Collection<?> c) {
@@ -133,19 +127,19 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
     }
     @Override
     default boolean addAll(Collection<? extends T> c) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
     @Override
     default boolean addAll(int index, Collection<? extends T> c) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
     @Override
     default boolean removeAll(Collection<?> c) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
     @Override
     default boolean retainAll(Collection<?> c) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
     @Override
     default T get(int index) {
@@ -154,11 +148,11 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize {
     }
     @Override
     default T set(int index, T element) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
     @Override
     default void add(int index, T element) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
     @Override
     default T remove(int index) {

@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static io.github.epam.html.tests.site.steps.States.*;
 
 public class MenuTests implements TestsInit {
 
@@ -55,11 +55,11 @@ public class MenuTests implements TestsInit {
         leftMenu.select(Service, Dates);
         datesPage.checkOpened();
     }
-    @Test
+    //@Test
     public void isValidationTest() {
         leftMenu.is().selected(HTML5);
     }
-    @Test
+    //@Test
     public void assertValidationTest() {
         leftMenu.assertThat().selected(HTML5);
     }

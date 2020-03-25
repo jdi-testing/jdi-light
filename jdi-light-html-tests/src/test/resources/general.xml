@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
-        <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="JDI-Light HTML Tests" parallel="methods" thread-count="1">
     <test name="Tests">
         <packages>
@@ -10,6 +10,7 @@
             <package name="io.github.epam.html.tests.elements.composite.page.init"/>
             <package name="io.github.epam.html.tests.elements.composite"/>
             <package name="io.github.epam.html.tests.issues.*"/>
+            <package name="io.github.epam.html.tests.performance"/>
             <package name="io.github.epam.html.tests.site"/>
         </packages>
     </test>

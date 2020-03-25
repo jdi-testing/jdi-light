@@ -7,12 +7,11 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.com.StaticSite.*;
-import static io.github.com.pages.GithubPage.repoDescription;
-import static io.github.com.pages.HomePage.githubLink;
-import static io.github.com.pages.HomePage.jdiText;
-import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
-import static org.testng.Assert.assertEquals;
+import static io.github.com.pages.GithubPage.*;
+import static io.github.com.pages.HomePage.*;
+import static io.github.epam.tests.recommended.steps.Preconditions.*;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 public class WindowsAndFramesTests extends StaticTestsInit {
 

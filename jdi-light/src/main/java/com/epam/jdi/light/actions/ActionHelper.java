@@ -2,17 +2,11 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.PageChecks;
-import com.epam.jdi.light.common.VisualCheckAction;
-import com.epam.jdi.light.common.VisualCheckPage;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.light.elements.interfaces.base.INamed;
-import com.epam.jdi.light.elements.interfaces.base.JDIElement;
+import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.LinqUtils;
@@ -27,44 +21,38 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.common.PageChecks.*;
-import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
-import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
-import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.PageChecks.NONE;
+import static com.epam.jdi.light.common.VisualCheckAction.*;
+import static com.epam.jdi.light.common.VisualCheckPage.*;
+import static com.epam.jdi.light.driver.ScreenshotMaker.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
-import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.AllureLogger.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.logger.LogStrategy.*;
-import static com.epam.jdi.light.logger.Strategy.FAIL;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.logger.Strategy.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.JsonUtils.beautifyJson;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.where;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.JsonUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
-import static com.epam.jdi.tools.Timer.nowTime;
-import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
+import static com.epam.jdi.tools.Timer.*;
 import static com.epam.jdi.tools.map.MapArray.map;
-import static com.epam.jdi.tools.pairs.Pair.$;
+import static com.epam.jdi.tools.map.MapArray.*;
+import static com.epam.jdi.tools.pairs.Pair.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.lang.Character.toUpperCase;
+import static java.lang.Character.*;
 import static java.lang.String.format;
-import static java.lang.System.currentTimeMillis;
-import static java.lang.Thread.currentThread;
+import static java.lang.System.*;
+import static java.lang.Thread.*;
 import static java.util.Collections.reverse;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -119,13 +107,13 @@ public class ActionHelper {
     public static void beforeJdiAction(ActionObject jInfo) {
         ProceedingJoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
-        if (WRITE_TO_ALLURE && logLevel(jp).equalOrMoreThan(INFO) && !previousAllureStep.equals(message))
+        if (LOGS.writeToAllure && logLevel(jp).equalOrMoreThan(INFO) && !previousAllureStep.equals(message))
             jInfo.stepUId = startStep(message);
         previousAllureStep = message;
         if (jInfo.topLevel()) {
-            if (WRITE_TO_LOG)
+            if (LOGS.writeToLog)
                 logger.toLog(message, logLevel(jp));
-            if (CHECK_PAGE_OPEN != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
+            if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
                 processPage(jInfo);
             if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
                 visualValidation(jp, message);
@@ -168,13 +156,13 @@ public class ActionHelper {
             }
         }
         if (getJpMethod(jp).getName().equals("open"))
-            BEFORE_NEW_PAGE.execute(getPage(jp.getThis()));
-        TIMEOUT.reset();
+            PAGE.beforeNewPage.execute(getPage(jp.getThis()));
+        TIMEOUTS.element.reset();
         return result;
     }
     public static JFunc2<ActionObject, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
     static boolean logResult(ProceedingJoinPoint jp) {
-        if (!WRITE_TO_LOG)
+        if (!LOGS.writeToLog)
             return false;
         Class<?> cl = getJpClass(jp);
         if (!isInterface(cl, JDIElement.class))
@@ -206,8 +194,8 @@ public class ActionHelper {
                 }
             }
             if (getJpMethod(jp).getName().equals("open"))
-                BEFORE_NEW_PAGE.execute(getPage(jp.getThis()));
-            TIMEOUT.reset();
+                PAGE.beforeNewPage.execute(getPage(jp.getThis()));
+            TIMEOUTS.element.reset();
         }
         return result;
     }
@@ -217,7 +205,7 @@ public class ActionHelper {
         String actionName = GET_ACTION_NAME.execute(jp);
         String logString = jp.getThis() == null
             ? actionName
-            : msgFormat(getTemplate(logger.getLogLevel()), map(
+            : msgFormat(getTemplate(LOGS.logLevel), map(
                 $("action", actionName),
                 $("element", getElementName(jp))));
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
@@ -231,9 +219,9 @@ public class ActionHelper {
             if (currentPage != null && page != null) {
                 if (!currentPage.equals(page.getName())) {
                     setCurrentPage(page);
-                    BEFORE_NEW_PAGE.execute(page);
+                    PAGE.beforeNewPage.execute(page);
                 }
-                BEFORE_EACH_STEP.execute(page);
+                PAGE.beforeEachStep.execute(page);
             }
         }
     }
@@ -245,7 +233,7 @@ public class ActionHelper {
             reverse(failedMethods);
             logger.error("Failed actions chain: " + print(failedMethods, " > "));
         }
-        return exception(ex, getExceptionAround(ex, jInfo.topLevel()));
+        return exception(ex, getExceptionAround(ex, jInfo));
     }
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
     public static void logFailure(ActionObject jInfo) {
@@ -253,16 +241,16 @@ public class ActionHelper {
         String screenName = "";
         String htmlSnapshot = "";
         String errors = "";
-        if (SCREEN_STRATEGY.contains(FAIL))
+        if (LOGS.screenStrategy.contains(FAIL))
             screenName = takeScreen();
-        if (HTML_CODE_STRATEGY.contains(FAIL))
+        if (LOGS.htmlCodeStrategy.contains(FAIL))
             htmlSnapshot = takeHtmlCodeOnFailure();
-        if (REQUESTS_STRATEGY.contains(FAIL)) {
+        if (LOGS.requestsStrategy.contains(FAIL)) {
             WebDriver driver = jInfo.element() != null
                 ? jInfo.element().base().driver()
                 : getDriver();
             List<LogEntry> requests = driver.manage().logs().get("performance").getAll();
-            List<String> errorEntries = LinqUtils.map(filter(requests, FILTER_REQUESTS),
+            List<String> errorEntries = LinqUtils.map(filter(requests, LOGS.filterHttpRequests),
                 logEntry -> beautifyJson(logEntry.getMessage()));
             errors = print(errorEntries);
         }
@@ -378,12 +366,16 @@ public class ActionHelper {
         if (!failedMethods.contains(result))
             failedMethods.add(result);
     }
-    public static String getExceptionAround(Throwable ex, boolean top) {
+    public static String getExceptionAround(Throwable ex, ActionObject jInfo) {
         String result = safeException(ex);
         while (result.contains("\n\n"))
             result = result.replaceFirst("\\n\\n", LINE_BREAK);
         result = result.replace("java.lang.RuntimeException:", "").trim();
-        if (top)
+        Object[] args = jInfo.jp().getArgs();
+        if (result.contains("{{VALUE}}") && args.length > 0) {
+            result = result.replaceAll("\\{\\{VALUE}}", args[0].toString());
+        }
+        if (jInfo.topLevel())
             result = "[" + nowTime("mm:ss.S") + "] " + result.replaceFirst("\n", "");
         return result;
     }
@@ -401,18 +393,31 @@ public class ActionHelper {
                 s -> s.getMethodName().equals("jdiAround") && s.getClassName().equals(name))
                 .size();
     }
+    private static String getMethodName(ProceedingJoinPoint jp) {
+        String className = getJpClass(jp).getSimpleName();
+        String methodName = getJpMethod(jp).getMethod().getName();
+        return className + "." + methodName;
+    }
+    public static Class<?> getJpClass(ProceedingJoinPoint jp) {
+        return jp.getThis() != null
+            ? jp.getThis().getClass()
+            : jp.getSignature().getDeclaringType();
+    }
     public static Object defaultAction(ActionObject jInfo) throws Throwable {
+        logger.debug("defaultAction: " + getMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         return jInfo.overrideAction() != null
                 ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
     }
     public static Object stableAction(ActionObject jInfo) {
+        logger.debug("stableAction: " + getMethodName(jInfo.jp()));
         String exceptionMsg = "";
         jInfo.setElementTimeout();
         long start = currentTimeMillis();
         Throwable exception = null;
         do {
             try {
+                logger.debug("do-while: " + getMethodName(jInfo.jp()));
                 Object result = jInfo.overrideAction() != null
                     ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
                 if (!condition(jInfo.jp())) continue;
@@ -422,8 +427,7 @@ public class ActionHelper {
                 try {
                     exceptionMsg = safeException(ex);
                     Thread.sleep(200);
-                } catch (Exception ignore) {
-                }
+                } catch (Exception ignore) { }
             }
         } while (currentTimeMillis() - start < jInfo.timeout() * 1000);
         throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
@@ -454,8 +458,6 @@ public class ActionHelper {
     );
     static boolean condition(ProceedingJoinPoint jp) {
         String conditionName = getConditionName(jp);
-        return CONDITIONS.has(conditionName)
-                ? CONDITIONS.get(conditionName).execute(jp)
-                : true;
+        return CONDITIONS.has(conditionName) && CONDITIONS.get(conditionName).execute(jp) || !CONDITIONS.has(conditionName) && true;
     }
 }

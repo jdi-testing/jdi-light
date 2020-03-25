@@ -10,16 +10,15 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
-import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
-import static com.epam.jdi.light.elements.init.PageFactory.initSite;
-import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static com.epam.jdi.light.driver.WebDriverUtils.*;
+import static com.epam.jdi.light.elements.init.InitActions.*;
+import static com.epam.jdi.light.elements.init.PageFactory.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 import static org.mytests.tests.PerfStatistic.*;
-import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
+import static org.mytests.uiobjects.example.site.SiteJdi.*;
 
 public class TestsInit {
     public static Safe<Timer> TIMER = new Safe<>();
@@ -27,8 +26,8 @@ public class TestsInit {
     public static void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initSite(SiteJdi.class);
-        assertThat(TIMEOUT.get(), is(5));
-        assertThat(PAGE_TIMEOUT.get(), is(15));
+        assertThat(TIMEOUTS.element.get(), is(5));
+        assertThat(TIMEOUTS.page.get(), is(15));
         BEFORE_JDI_ACTION = jInfo -> {
             ActionHelper.beforeJdiAction(jInfo);
             TIMER.set(new Timer());

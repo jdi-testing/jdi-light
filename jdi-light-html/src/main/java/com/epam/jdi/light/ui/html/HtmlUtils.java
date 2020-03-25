@@ -2,10 +2,10 @@ package com.epam.jdi.light.ui.html;
 
 import org.openqa.selenium.WebElement;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static java.lang.Double.parseDouble;
-import static java.lang.Float.parseFloat;
-import static java.lang.Integer.parseInt;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static java.lang.Double.*;
+import static java.lang.Float.*;
+import static java.lang.Integer.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -23,11 +23,6 @@ public class HtmlUtils {
             return parseInt(value);
         } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Integer", attr, value); }
     }
-    public static int asInt(String value) {
-        try {
-            return parseInt(value);
-        } catch (Exception ex) { throw exception("Can't parse value %s to Integer", value); }
-    }
     /**
      * Gets attribute and casts it to double
      * @param attr String - attribute to find
@@ -38,6 +33,14 @@ public class HtmlUtils {
         try {
             return parseDouble(value);
         } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Double", attr, value); }
+    }
+
+    public static double getDouble(String attr, WebElement el, double defaultValue) {
+        String value = el.getAttribute(attr);
+        try {
+            return parseDouble(value);
+        } catch (Exception ex) {
+            return defaultValue; }
     }
     /**
      * Gets attribute and casts it to float

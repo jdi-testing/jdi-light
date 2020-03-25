@@ -4,15 +4,13 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.disabledTextArea;
-import static io.github.com.pages.HtmlElementsPage.textArea;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static java.util.Arrays.asList;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.epam.html.tests.elements.BaseValidations.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static java.util.Arrays.*;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 19.08.2019

@@ -3,13 +3,11 @@ package com.epam.jdi.light.elements.init;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.light.elements.complex.JList;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.func.JFunc;
@@ -22,24 +20,20 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.common.UIUtils.create;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
-import static com.epam.jdi.light.settings.WebSettings.init;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
+import static com.epam.jdi.tools.StringUtils.*;
 import static java.lang.String.format;
-import static java.lang.reflect.Modifier.isStatic;
-import static java.util.Arrays.asList;
+import static java.lang.reflect.Modifier.*;
+import static java.util.Arrays.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -49,7 +43,7 @@ public class PageFactory {
     // region initSite
     public static void initSite(Class<?> site) {
         init();
-        initSite(site, DRIVER_NAME);
+        initSite(site, DRIVER.name);
     }
     public static void initSite(Class<?> site, String driverName) {
         init();
@@ -62,8 +56,10 @@ public class PageFactory {
         for (Field pageField : getSiteFields(site)) {
             try {
                 info.field = pageField;
+                if (info.field.getName().equals("searchPage"))
+                    System.out.println("");
                 setFieldWithInstance(info, null);
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 throw exception(ex, initException(pageField, site));
             }
         }
@@ -77,6 +73,8 @@ public class PageFactory {
     }
     private static Object getElementInstance(SiteInfo info) {
         info.instance = getValueField(info.field, info.parent);
+        //if (info.name().equals("colors3"))
+        //    System.out.println("test");
         if (info.instance == null)
             initJdiField(info);
         if (info.instance != null)
@@ -85,10 +83,10 @@ public class PageFactory {
     }
 
     public static void initJdiField(SiteInfo info) {
-        if (!info.type().isInterface())
-            initWithConstructor(info);
-        else
+        if (info.type().isInterface())
             initUsingRules(info);
+        else
+            initWithConstructor(info);
     }
     public static void setupFieldUsingRules(SiteInfo info) {
         MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) ->
@@ -101,7 +99,7 @@ public class PageFactory {
                 ruleName = rule.key;
                 rule.value.action.execute(info);
             }
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             throw exception(ex, "Setup rule '%s' failed. Can't setup field '%s' on page '%s'",
                     ruleName, info.name(), info.parentName());
         }
@@ -110,7 +108,7 @@ public class PageFactory {
 
     // region Private local methods
     private static String initException(Field field, Class<?> parent) {
-        return format("Can't init %s '%s' on '%s'",
+        return format("Can't init '%s' '%s' on '%s'",
             getSafe(() -> isClass(field.getType(), WebPage.class) ? "page" : "element",
                 "Element Type"),
             // DO NOT REPLACE LAMBDAS BELOW
@@ -120,7 +118,7 @@ public class PageFactory {
     private static String getSafe(JFunc<String> value, String defaultValue) {
         try {
             return value.execute();
-        } catch (Exception ignore) { return "Error " + defaultValue; }
+        } catch (Throwable ignore) { return "Error " + defaultValue; }
     }
     private static List<Field> getSiteFields(Class<?> site) {
         Field[] pages = site.getDeclaredFields();
@@ -131,21 +129,21 @@ public class PageFactory {
         try {
             Object obj = isStatic(field.getModifiers()) ? null : info.instance;
             setFieldWithInstance(pageInfo, obj);
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             throw exception(ex, initException(field, info.type()));
         }
     }
     private static void initWithConstructor(SiteInfo info) {
         try {
             info.instance = create(info.type());
-        } catch (Exception exception) {
+        } catch (Throwable exception) {
             try {
                 String msg = safeException(exception);
                 if (msg.contains("has no empty constructors")
                     || msg.contains("Can't init class. Class Type is null"))
                     info.instance = create(info.type(), getDriver(info.driverName));
                     throw exception(msg);
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 throw exception(ex, "Can't create field '%s' instance of type '%s'. Try new %s() to get more details",
                         info.name(), info.type(), info.type());
             }
@@ -168,7 +166,7 @@ public class PageFactory {
                 info.name());
     }
     private static void initWebPage(WebPage webPage) {
-        webPage.driverName = DRIVER_NAME;
+        webPage.driverName = DRIVER.name;
         webPage.updatePageData(webPage.getClass().getAnnotation(Url.class),
                 webPage.getClass().getAnnotation(Title.class));
         addPage(webPage);
@@ -187,7 +185,7 @@ public class PageFactory {
     //endregion
 
     public static List<Class<?>> STOP_INIT_CLASSES = asList(
-        Object.class, WebPage.class, Section.class, UIElement.class,
+        Object.class, WebPage.class, PageObject.class, UIElement.class,
             UIBaseElement.class, UIListBase.class,
             DataList.class, JList.class, WebList.class);
 
@@ -203,7 +201,7 @@ public class PageFactory {
     }
 
     private static void initPage(Object page) {
-        SiteInfo info = new SiteInfo(DRIVER_NAME, page);
+        SiteInfo info = new SiteInfo(DRIVER.name, page);
         if (isClass(page.getClass(), WebPage.class))
             initWebPage((WebPage) page);
         initElements(info);

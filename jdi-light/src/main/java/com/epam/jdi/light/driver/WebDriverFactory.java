@@ -11,37 +11,82 @@ import org.openqa.selenium.WebDriver;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
-import static com.epam.jdi.light.driver.get.RemoteDriver.DRIVER_REMOTE_URL;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.map.MapArray.map;
-import static com.epam.jdi.tools.pairs.Pair.$;
-import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
-import static com.epam.jdi.tools.switcher.SwitchActions.Value;
+import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.map.MapArray.*;
+import static com.epam.jdi.tools.pairs.Pair.*;
 import static java.lang.String.format;
-import static java.lang.Thread.currentThread;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static java.lang.Thread.*;
+import static java.util.concurrent.TimeUnit.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebDriverFactory {
+    private WebDriverFactory() { }
+
     public static MapArray<String, JFunc<WebDriver>> DRIVERS
         = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
-    private static Safe<MapArray<String, WebDriver>> RUN_DRIVERS
+    public static boolean SINGLE_THREAD = false;
+    private static MapArray<String, WebDriver> RUN_DRIVERS = new MapArray<>();
+    private static Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS
         = new Safe<>(MapArray::new);
 
-    private WebDriverFactory() {
+    public static boolean noRunDrivers() {
+        return !getRunDrivers().any();
     }
-
-    public static boolean hasRunDrivers() {
-        return RUN_DRIVERS.get().any();
+    private static MapArray<String, WebDriver> getRunDrivers() {
+        return SINGLE_THREAD
+            ? RUN_DRIVERS
+            : THREAD_RUN_DRIVERS.get();
+    }
+    private static void setRunDrivers(MapArray<String, WebDriver> map) {
+        if (SINGLE_THREAD) {
+            RUN_DRIVERS = map;
+        } else {
+            THREAD_RUN_DRIVERS.set(map);
+        }
+    }
+    public static WebDriver getDriverByName(String driverName) {
+        Lock lock = new ReentrantLock();
+        if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
+            setRunDrivers(map($(driverName, INIT_DRIVER)));
+            SWITCH_THREAD = true;
+            return INIT_DRIVER;
+        }
+        if (!DRIVERS.has(driverName))
+            useDriver(driverName);
+        try {
+            lock.lock();
+            MapArray<String, WebDriver> rDrivers = getRunDrivers();
+            if (rDrivers == null) {
+                rDrivers = new MapArray<>();
+            }
+            if (!rDrivers.has(driverName)) {
+                WebDriver resultDriver = DRIVERS.get(driverName).invoke();
+                rDrivers.add(driverName, resultDriver);
+                setRunDrivers(rDrivers);
+            }
+            WebDriver driver = rDrivers.get(driverName);
+            if (driver.toString().contains("(null)")) {
+                driver = DRIVERS.get(driverName).invoke();
+                rDrivers.update(driverName, driver);
+            }
+            if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId())
+                INIT_DRIVER = driver;
+            driver.manage().timeouts().implicitlyWait(0, SECONDS);
+            return driver;
+        } catch (Throwable ex) {
+            throw exception(ex, "Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
+                    format("Drivers: %s; Run: %s", DRIVERS, getRunDrivers()));
+        } finally {
+            lock.unlock();
+        }
     }
 
     // REGISTER DRIVER
@@ -50,40 +95,24 @@ public class WebDriverFactory {
     }
 
     public static String useDriver(String driverName) {
-        return useDriver(getByName(driverName));
+        return useDriver(driverName, () -> DRIVER.types.get(driverName).getDriver());
     }
 
     public static String useDriver(DriverTypes driverType) {
-        return useDriver(driverType, () -> initDriver(driverType));
-    }
-    public static boolean isRemote() {
-        return isNotEmpty(DRIVER_REMOTE_URL);
+        return useDriver(driverType.name);
     }
 
     private static WebDriver initDriver(DriverTypes type) {
-        WebDriver driver = Switch(type).get(
-            Value(CHROME, t -> CHROME_INFO.getDriver()),
-            Value(FIREFOX, t -> FF_INFO.getDriver()),
-            Value(IE, t -> IE_INFO.getDriver()),
-            Value(OPERA, t -> OPERA_INFO.getDriver()),
-            Value(EDGE, t -> EDGE_INFO.getDriver()),
-            Value(SAFARI, t -> SAFARI_INFO.getDriver()),
-            Value(ANDROID, t -> ANDROID_INFO.getDriver()),
-            Value(IOS, t -> IOS_INFO.getDriver())
-        );
-        if (driver == null)
+        if (!DRIVER.types.has(type.name)) {
             throw exception("Unknown driver: " + type);
-        return DRIVER_SETTINGS.execute(driver);
+        }
+        WebDriver driver = DRIVER.types.get(type.name).getDriver();
+        return DRIVER.setup.execute(driver);
     }
 
     // GET DRIVER
     public static String useDriver(DriverTypes driverType, JFunc<WebDriver> driver) {
-        String driverName = driverType.name;
-        if (DRIVERS.has(driverName))
-            driverName = driverName + System.currentTimeMillis();
-        DRIVERS.add(driverName, driver);
-        DRIVER_NAME = driverName;
-        return driverName;
+        return useDriver(driverType.name, driver);
     }
 
     public static String useDriver(String driverName, JFunc<WebDriver> driver) {
@@ -91,7 +120,7 @@ public class WebDriverFactory {
             DRIVERS.add(driverName, driver);
         else
             throw exception("Can't register WebDriver '%s'. Driver with same name already registered", driverName);
-        DRIVER_NAME = driverName;
+        DRIVER.name = driverName;
         return driverName;
     }
 
@@ -101,8 +130,8 @@ public class WebDriverFactory {
 
     public static WebDriver getDriver() {
         try {
-            if (isNotBlank(DRIVER_NAME))
-                return getDriver(DRIVER_NAME);
+            if (isNotBlank(DRIVER.name))
+                return getDriver(DRIVER.name);
             useDriver(CHROME);
             return getDriver(CHROME.name);
         } catch (Exception ex) {
@@ -113,47 +142,8 @@ public class WebDriverFactory {
     public static long INIT_THREAD_ID = -1;
     public static boolean SWITCH_THREAD = false;
     public static WebDriver INIT_DRIVER;
-
-    @SuppressWarnings("PMD.NPathComplexity")
     public static WebDriver getDriver(String driverName) {
-        if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
-            RUN_DRIVERS.set(map($(driverName, INIT_DRIVER)));
-            SWITCH_THREAD = true;
-            return INIT_DRIVER;
-        }
-        if (!DRIVERS.has(driverName))
-            useDriver(driverName);
-        try {
-            Lock lock = new ReentrantLock();
-            lock.lock();
-
-            MapArray<String, WebDriver> rDrivers = RUN_DRIVERS.get();
-            if (rDrivers == null) {
-                rDrivers = new MapArray<>();
-            }
-            if (!rDrivers.has(driverName)) {
-                WebDriver resultDriver = DRIVERS.get(driverName).invoke();
-                if (resultDriver == null) {
-                    throw exception("Can't get WebDriver '%s'. This Driver name not registered", driverName);
-                }
-                rDrivers.add(driverName, resultDriver);
-            }
-            RUN_DRIVERS.set(rDrivers);
-
-            WebDriver result = rDrivers.get(driverName);
-            if (result.toString().contains("(null)")) {
-                result = DRIVERS.get(driverName).invoke();
-                rDrivers.update(driverName, result);
-            }
-            if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId())
-                INIT_DRIVER = result;
-            lock.unlock();
-            return result;
-        } catch (Exception ex) {
-            throw exception(ex, "Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
-                    format("Drivers: %s; Run: %s", DRIVERS, RUN_DRIVERS.get()) +
-                    "Exception: " + safeException(ex));
-        }
+        return DRIVER.getFunc.execute(driverName);
     }
 
     public static JavascriptExecutor getJSExecutor() {
@@ -164,15 +154,15 @@ public class WebDriverFactory {
     }
 
     public static void reopenDriver() {
-        reopenDriver(DRIVER_NAME);
+        reopenDriver(DRIVER.name);
     }
 
     public static void reopenDriver(String driverName) {
-        MapArray<String, WebDriver> rDriver = RUN_DRIVERS.get();
+        MapArray<String, WebDriver> rDriver = getRunDrivers();
         if (rDriver.has(driverName)) {
             rDriver.get(driverName).close();
             rDriver.removeByKey(driverName);
-            RUN_DRIVERS.set(rDriver);
+            setRunDrivers(rDriver);
         }
         if (DRIVERS.has(driverName))
             getDriver();
@@ -180,17 +170,17 @@ public class WebDriverFactory {
 
     public static void switchToDriver(String driverName) {
         if (DRIVERS.has(driverName))
-            DRIVER_NAME = driverName;
+            DRIVER.name = driverName;
         else
-            throw exception("Can't switch to Webdriver '%s'. This Driver name not registered", driverName);
+            throw exception("Can't switch to WebDriver '%s'. This Driver name not registered", driverName);
     }
 
     public static void close() {
-        for (Pair<String, WebDriver> pair : RUN_DRIVERS.get())
+        for (Pair<String, WebDriver> pair : getRunDrivers())
             try {
                 pair.value.quit();
-            } catch (Exception ignore) {}
-        RUN_DRIVERS.get().clear();
+            } catch (Exception ignore) { }
+        getRunDrivers().clear();
     }
 
     public static void quit() {

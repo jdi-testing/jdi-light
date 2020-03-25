@@ -6,25 +6,24 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.Timer;
+import com.epam.jdi.tools.*;
 import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.map.MultiMap;
 import com.epam.jdi.tools.pairs.Pair;
+import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.UIUtils.create;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
-import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
-import static java.util.Arrays.asList;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.StringUtils.*;
+import static java.util.Arrays.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -43,7 +42,7 @@ public class Line implements IList<String>, IBaseElement {
         this.elements = elements;
         this.headers = headers;
         List<String> values = elements.values();
-        this.dataMap = () -> new MultiMap<>(headers, values);
+        this.dataMap = () -> new MultiMap<>(headers, values).ignoreKeyCase();;
     }
     public static Line initLine(List<String> list, List<String> headers) {
         Line line = new Line();
@@ -78,18 +77,18 @@ public class Line implements IList<String>, IBaseElement {
         return getData(minAmount);
     }
     public MultiMap<String, UIElement> uiElements() {
-        return new MultiMap<>(headers, elements);
+        return new MultiMap<>(headers, elements.indexFromZero()).ignoreKeyCase();
     }
     public void saveCellsImages() {
         String unique = Timer.nowMSecs();
         List<UIElement> result = new ArrayList<>();
         for (int i = 0; i < elements.size(); i++) {
-            UIElement cell = elements.get(i);
+            UIElement cell = elements.get(i+1);
             cell.varName = headers.get(i)+unique;
             cell.makePhoto();
             result.add(cell);
         }
-        elements = new WebList().setValues(new MultiMap<>(headers, result));
+        elements = new WebList().setValues(new MultiMap<>(headers, result).ignoreKeyCase());
     }
     public boolean visualCompareTo(Line line) {
         for (Pair<String, UIElement> cell : uiElements())
@@ -106,67 +105,69 @@ public class Line implements IList<String>, IBaseElement {
 
     public void clear() { data = null; }
 
-    public <D> D asData(Class<D> data) {
-        D instance;
-        try { instance = create(data); }
-        catch (Exception ex) { throw exception(ex, "Can't create '%s' instance in row.asData() method", data.getSimpleName()); }
-        int i = 0;
-        List<Field> fields = asList(data.getDeclaredFields());
-        for (String name : headers) {
-            Field field = LinqUtils.first(fields, f -> namesEqual(getElementName(f), name));
-            if (field != null)
-                try {
-                    setPrimitiveField(field, instance, getList(i).get(i));
-                } catch (Exception ex) {
-                    throw exception(ex, "Can't set table value '%s' to field '%s'", getData(i).get(i), field.getName());
-                }
-            i++;
-        }
-        return instance;
-    }
-
-    public <D> D asData(Class<D> data, MapArray<String, String> line) {
-        D instance;
-        try {
-            instance = create(data);
-        }
-        catch (Exception ex) {
-            throw exception(ex, "Can't convert row to Entity (%s)", data.getSimpleName());
-        }
-        for (Pair<String, String> cell : line) {
-            Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
-                f -> namesEqual(getElementName(f), cell.key));
-            if (field != null)
-                try {
-                    setPrimitiveField(field, instance, cell.value);
-                } catch (Exception ex) {
-                    throw exception(ex, "Can't set table entity to field '%s'", field.getName());
-                }
-        }
-        return instance;
-    }
-
-    public <T> T asLine(Class<T> cl) {
+    private <T> T getType(String methodName, Class<T> cl, JFunc1<T, T> setupInstance) {
         T instance;
         try {
             instance = create(cl);
         }
         catch (Exception ex) {
-            throw exception(ex, "Can't convert row to Entity (%s)", cl.getSimpleName());
+            throw exception(ex, methodName + ": Can't convert row to Entity (%s)", cl.getSimpleName());
         }
-        for (int i = 0; i < headers.size(); i++) {
-            String header = headers.get(i);
-            Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
-                f -> namesEqual(getElementName(f), header));
-            if (field == null) continue;
-            try {
-                IBaseElement ui = ((IBaseElement)field.get(instance));
-                ui.base().setWebElement(elements.get(i));
-            } catch (Exception ex) {
-                throw exception(ex, "Can't set table entity to field '%s'", field.getName());
+        return setupInstance.execute(instance);
+    }
+    public <D> D asData(Class<D> data) {
+        return getType("asData", data, instance -> {
+            int i = 0;
+            List<Field> fields = asList(data.getDeclaredFields());
+            for (String name : headers) {
+                Field field = LinqUtils.first(fields, f -> namesEqual(getElementName(f), name));
+                if (field != null)
+                    try {
+                        setPrimitiveField(field, instance, getList(i).get(i));
+                    } catch (Exception ex) {
+                        throw exception(ex, "Can't set table value '%s' to field '%s'", getData(i).get(i), field.getName());
+                    }
+                i++;
             }
-        }
-        return instance;
+            return instance;
+        });
+    }
+    public <D> D asData(Class<D> data, MapArray<String, String> line) {
+        return getType("asDataLine", data, instance -> {
+            for (Pair<String, String> cell : line) {
+                Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
+                    f -> namesEqual(getElementName(f), cell.key));
+                if (field == null) continue;
+                try {
+                    setPrimitiveField(field, instance, cell.value);
+                } catch (Exception ex) {
+                    throw exception(ex, "asDataLine: Can't set table entity to field '%s'", field.getName());
+                }
+            }
+            return instance;
+        });
+    }
+
+    public <T> T asLine(Class<T> cl) {
+        return getType("asLine", cl, instance -> {
+            for (int i = 1; i <= headers.size(); i++) {
+                String header = headers.get(i-1);
+                Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
+                        f -> namesEqual(getElementName(f), header));
+                if (field == null) continue;
+                try {
+                    IBaseElement ui = ((IBaseElement)field.get(instance));
+                    UIElement listElement = elements.get(i);
+                    WebElement element = ui.base().hasLocator()
+                        ? listElement.findElement(ui.base().getLocator())
+                        : listElement.getWebElement();
+                    ui.base().setWebElement(element);
+                } catch (Exception ex) {
+                    throw exception(ex, "asLine: Can't set table entity to field '%s'", field.getName());
+                }
+            }
+            return instance;
+        });
     }
 
     @Override

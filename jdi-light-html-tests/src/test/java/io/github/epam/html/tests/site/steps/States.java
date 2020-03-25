@@ -3,8 +3,8 @@ package io.github.epam.html.tests.site.steps;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.entities.Users.DEFAULT_USER;
+import static io.github.com.StaticSite.*;
+import static io.github.com.entities.Users.*;
 import static io.github.com.pages.Header.*;
 
 /**

@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.complex;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 
 public interface IListSelector<T> extends ISelector, IList<T> {
     @Override

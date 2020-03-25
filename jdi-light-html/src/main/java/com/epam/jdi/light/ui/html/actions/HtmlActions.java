@@ -2,9 +2,7 @@ package com.epam.jdi.light.ui.html.actions;
 
 import com.epam.jdi.light.actions.ActionObject;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
 
@@ -17,6 +15,7 @@ import static com.epam.jdi.light.actions.ActionHelper.*;
 public class HtmlActions {
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { }
+
     private final String className = "com.epam.jdi.light.ui.html.actions.HtmlActions";
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {
@@ -26,7 +25,7 @@ public class HtmlActions {
         try {
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
-            Object result = aroundCount(className) == 1
+            Object result = jInfo.topLevel()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
             return AFTER_JDI_ACTION.execute(jInfo, result);

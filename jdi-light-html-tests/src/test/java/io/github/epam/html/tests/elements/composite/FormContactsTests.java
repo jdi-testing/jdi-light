@@ -6,17 +6,16 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.FormFilters.ALL;
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static io.github.com.StaticSite.contactFormPage;
+import static com.epam.jdi.light.common.FormFilters.*;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
+import static io.github.com.StaticSite.*;
 import static io.github.com.entities.Users.*;
-import static io.github.com.pages.ContactFormPage.main;
-import static io.github.com.pages.LogSidebar.lastLogEntry;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static io.github.com.pages.ContactFormPage.*;
+import static io.github.com.pages.LogSidebar.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 public class FormContactsTests implements TestsInit {
     @BeforeMethod
@@ -111,7 +110,7 @@ public class FormContactsTests implements TestsInit {
     @Test(expectedExceptions = RuntimeException.class)
     public void checkMethodNegativeTest() {
         main.contactForm.fill(ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT);
-        TIMEOUT.set(1);
+        TIMEOUTS.element.set(1);
         main.contactForm.check(DEFAULT_CONTACT);
     }
 

@@ -14,8 +14,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 
 /**
  * Created by Roman Iovlev on 03.28.2018
@@ -48,7 +48,7 @@ public class UIFactory {
 
     public static WebList list(String locator) {
         return locator.matches("[A-Z].*]")
-                ? new WebList().setName(locator)
+                ? new WebList()
                 : list(defineLocator(locator));
     }
     public static WebList list(By byLocator) {

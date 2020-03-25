@@ -4,19 +4,17 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.common.TextTypes.INNER;
-import static io.github.com.StaticSite.metalAndColorsPage;
-import static io.github.com.pages.LogSidebar.lastLogEntry;
-import static io.github.com.pages.MetalAndColorsPage.colors2;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.elements.complex.enums.Colors.Green;
-import static io.github.epam.html.tests.elements.complex.enums.Colors.Yellow;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.TextTypes.*;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.LogSidebar.*;
+import static io.github.com.pages.MetalAndColorsPage.*;
+import static io.github.epam.html.tests.elements.BaseValidations.*;
+import static io.github.epam.html.tests.elements.complex.enums.Colors.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
@@ -101,7 +99,7 @@ public class DropdownEx2Tests implements TestsInit {
     }
     @Test
     public void baseValidationTest() {
-        baseValidation(colors2);
+        baseValidation(colors2.value());
     }
 }
 

@@ -12,16 +12,15 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.EnumUtils.getEnumValues;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static java.util.Arrays.asList;
-import static org.jsoup.helper.StringUtil.isBlank;
+import static java.util.Arrays.*;
+import static org.jsoup.helper.StringUtil.*;
 
-public class MultiDropdown extends UIListBase<UISelectAssert>
+public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
         implements ICoreElement, HasLabel {
 
     By expandArrow = By.cssSelector(".caret");
@@ -38,7 +37,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
     }
     UIElement valueText() { return root().find(value).setName("value"); }
     List<UIElement> allValues() {
-        return root().finds(values);
+        return root().finds(values).indexFromZero();
     }
 
     @JDIAction(level = DEBUG)
@@ -115,11 +114,11 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
                 value.click();
         }
     }
-    public <TEnum extends Enum> void check(TEnum... values) {
+    public <TEnum extends Enum<?>> void check(TEnum... values) {
         check(getEnumValues(values));
     }
 
-    public <TEnum extends Enum> void uncheck(TEnum... values) {
+    public <TEnum extends Enum<?>> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
 

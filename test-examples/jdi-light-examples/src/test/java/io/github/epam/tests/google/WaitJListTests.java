@@ -5,14 +5,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.pages.Header.search;
-import static io.github.com.pages.SearchPage.jsearchTitle;
-import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.Header.*;
+import static io.github.com.pages.SearchPage.*;
+import static io.github.epam.tests.recommended.steps.Preconditions.*;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 /**
  * Created by Roman_Iovlev on 3/2/2018.
@@ -35,13 +35,13 @@ public class WaitJListTests extends StaticTestsInit {
     }
     @Test
     public void emptyTest() {
-        TIMEOUT.setUp(2);
+        TIMEOUTS.element.setUp(2);
         try {
             jsearchTitle.is().empty();
             Assert.fail("List should not be empty");
         } catch (Throwable ignored) { }
         finally {
-            TIMEOUT.drop();
+            TIMEOUTS.element.drop();
         }
         logger.info("Done");
     }

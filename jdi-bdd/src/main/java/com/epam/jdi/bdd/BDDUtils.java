@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.tools.map.MapArray;
 import cucumber.api.DataTable;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -4,12 +4,11 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.acceptConditions;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.epam.html.tests.elements.BaseValidations.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 
 /**
@@ -18,6 +17,7 @@ import static org.testng.Assert.*;
  */
 
 public class CheckboxTests implements TestsInit {
+    final String label = "Accept terms and conditions";
 
     @BeforeMethod
     public void before() {
@@ -28,11 +28,7 @@ public class CheckboxTests implements TestsInit {
 
     @Test
     public void getLabelTextTest() {
-        assertEquals(acceptConditions.labelText(), "Accept terms and conditions");
-    }
-    @Test
-    public void getTextTest() {
-        assertEquals(acceptConditions.getText(), "Accept terms and conditions");
+        assertEquals(acceptConditions.labelText(), label);
     }
 
     @Test
@@ -57,15 +53,12 @@ public class CheckboxTests implements TestsInit {
     public void isValidationTest() {
         acceptConditions.is().selected();
         acceptConditions.click();
-        acceptConditions.is().deselected();
-        acceptConditions.is().enabled();
-        acceptConditions.is().displayed();
+        acceptConditions.is().deselected().and().enabled().and().displayed();
     }
 
     @Test
     public void labelTest() {
-        assertEquals(acceptConditions.label().getText(),
-            "Accept terms and conditions");
+        assertEquals(acceptConditions.label().getText(), label);
         acceptConditions.label().is().text(containsString("terms and conditions"));
         acceptConditions.label().is().text(equalToIgnoringCase("accept terms and conditions"));
     }

@@ -2,24 +2,25 @@ package com.epam.jdi.light.asserts.core;
 
 import com.epam.jdi.light.asserts.generic.BaseAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import org.hamcrest.Matcher;
 
 import java.io.File;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.get.DriverData.DOWNLOADS_DIR;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static java.util.Objects.requireNonNull;
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.PathUtils.*;
+import static java.util.Objects.*;
+import static org.apache.commons.io.FileUtils.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class FileAssert extends BaseAssert {
+public class FileAssert extends BaseAssert<IBaseElement> {
     public static FileAssert assertThatFile(String fileName) {
         return new FileAssert(fileName);
     }
@@ -27,7 +28,7 @@ public class FileAssert extends BaseAssert {
 
     public FileAssert(String fileName) {
         super(fileName);
-        file = new File(mergePath(DOWNLOADS_DIR, fileName));
+        file = new File(mergePath(DRIVER.downloadsFolder, fileName));
     }
     /**
      * Check that file is downloaded
@@ -65,11 +66,23 @@ public class FileAssert extends BaseAssert {
         assertThat(file.length(), size);
         return this;
     }
-    public FileAssert hasSize(Long size) {
-        return hasSize(is(size));
+    /**
+     * Match passed value with file size
+     * @param min, max to compare
+     * @return FileAssert
+     */
+    @JDIAction("Assert file '{name}' size")
+    public FileAssert hasSize(long min, long max) {
+        long fileSize = file.length();
+        assertThat(fileSize, greaterThan(min));
+        assertThat(fileSize, lessThan(max));
+        return this;
+    }
+    public FileAssert hasSize(long size) {
+        return hasSize(size-10, size+10);
     }
     public static void cleanupDownloads() {
-        File dir = new File(DOWNLOADS_DIR);
+        File dir = new File(DRIVER.downloadsFolder);
         for(File file : requireNonNull(dir.listFiles()))
             file.delete();
         logger.info("Remove all downloads successfully");

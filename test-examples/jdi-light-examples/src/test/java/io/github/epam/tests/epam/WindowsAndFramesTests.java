@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.epam.EpamGithubSite.*;
-import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
-import static org.testng.Assert.assertEquals;
+import static io.github.epam.tests.epam.steps.Preconditions.*;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 public class WindowsAndFramesTests extends TestsInit {
 

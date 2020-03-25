@@ -10,9 +10,8 @@ import com.epam.jdi.light.ui.html.asserts.LinkAssert;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

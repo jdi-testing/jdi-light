@@ -5,14 +5,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.StaticSite.iframe;
-import static io.github.com.pages.GithubPage.repoDescription;
-import static io.github.com.pages.HomePage.githubLink;
-import static io.github.com.pages.HomePage.jdiText;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.containsString;
-import static org.testng.Assert.assertEquals;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.GithubPage.*;
+import static io.github.com.pages.HomePage.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 public class WindowsAndFramesTests implements TestsInit {
 

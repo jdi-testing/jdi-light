@@ -11,28 +11,28 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import org.openqa.selenium.By;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.EnumUtils.getEnumValues;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static java.util.Arrays.asList;
-import static org.jsoup.helper.StringUtil.isBlank;
+import static java.util.Arrays.*;
+import static org.jsoup.helper.StringUtil.*;
 
-public class MultiDropdown extends UIListBase<UISelectAssert>
+public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
         implements ICoreElement, HasLabel {
 
     By expandArrow = By.cssSelector(".caret");
     By values = By.tagName("li");
     By valueTemplate = By.xpath(".//a[label[text()='%s']]");
     By value = By.cssSelector("button");
-    By valuesConatiner = By.tagName("ul");
+    By valuesContainer = By.tagName("ul");
 
     UIElement root() { return $(By.xpath(".."),this).setName("root"); }
     UIElement expander() { return root().find(expandArrow).setName("expandArrow"); }
-    UIElement valuesList() { return root().find(valuesConatiner).setName("valuesContainer"); }
+    UIElement valuesList() { return root().find(valuesContainer).setName("valuesContainer"); }
     UIElement value(String name) {
         return root().find(fillByTemplate(valueTemplate, name)).setName("valueTemplate");
     }
@@ -115,11 +115,11 @@ public class MultiDropdown extends UIListBase<UISelectAssert>
                 value.click();
         }
     }
-    public <TEnum extends Enum> void check(TEnum... values) {
+    public <TEnum extends Enum<?>> void check(TEnum... values) {
         check(getEnumValues(values));
     }
 
-    public <TEnum extends Enum> void uncheck(TEnum... values) {
+    public <TEnum extends Enum<?>> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
 

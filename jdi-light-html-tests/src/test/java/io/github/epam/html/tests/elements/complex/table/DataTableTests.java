@@ -9,20 +9,18 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.Column.*;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static io.github.com.StaticSite.usersPage;
-import static io.github.com.pages.UsersPage.users;
-import static io.github.com.pages.UsersPage.usersSetup;
-import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN;
-import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
-import static org.testng.Assert.assertEquals;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
+import static com.epam.jdi.tools.StringUtils.*;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.UsersPage.*;
+import static io.github.epam.html.tests.site.steps.States.*;
+import static io.github.epam.test.data.MarvelHeroes.*;
+import static java.util.Arrays.*;
+import static org.apache.commons.lang3.StringUtils.*;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 public class DataTableTests implements TestsInit {
     private boolean firstTime = true;

@@ -1,15 +1,12 @@
 package com.epam.jdi.light.elements.composite;
 
-import com.epam.jdi.light.common.CheckTypes;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.PageChecks;
+import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JAction1;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.logging.LogEntry;
@@ -21,32 +18,28 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static com.epam.jdi.light.common.CheckTypes.NONE;
 import static com.epam.jdi.light.common.CheckTypes.*;
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.PageChecks.EVERY_PAGE;
-import static com.epam.jdi.light.common.PageChecks.NEW_PAGE;
-import static com.epam.jdi.light.common.UIUtils.getDouble;
-import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
-import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
-import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.VisualCheckPage.*;
+import static com.epam.jdi.light.driver.ScreenshotMaker.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
-import static com.epam.jdi.light.elements.init.PageFactory.initElements;
-import static com.epam.jdi.light.elements.init.PageFactory.initSite;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
+import static com.epam.jdi.light.elements.init.PageFactory.*;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.settings.TimeoutSettings.PAGE_TIMEOUT;
-import static com.epam.jdi.light.settings.TimeoutSettings.TIMEOUT;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.StringUtils.msgFormat;
+import static com.epam.jdi.tools.JsonUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PathUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.String.format;
-import static org.apache.commons.io.FileUtils.copyFile;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.io.FileUtils.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 25.03.2018
@@ -77,6 +70,11 @@ public class WebPage extends DriverBase implements PageObject {
         setUrl(url, url, CONTAINS);
     }
     public WebPage(String url, String title) { this(url); this.title = title; }
+    public static void openUrl(String url, String pageName) {
+        WebPage page = new WebPage(url);
+        page.setName(isNotBlank(pageName) ? pageName : "");
+        page.open();
+    }
     public static void openUrl(String url) {
         init();
         new WebPage(url).open();
@@ -151,27 +149,33 @@ public class WebPage extends DriverBase implements PageObject {
         init();
         CacheValue.reset();
         driver().navigate().to(url);
+        getWindows();
         setCurrentPage(this);
     }
     public void open(Object... params) {
         open(getUrlWithParams(params));
     }
     private String getUrlWithParams(Object... params) {
-        return params == null || params.length == 0
-                ? url
-                : url.contains("%s")
-                    ? String.format(url, params)
-                    : url.contains("{0}")
-                        ? MessageFormat.format(url, params)
-                        : url + "?" + print(map(params, Object::toString), "&");
+        if (params == null || params.length == 0)
+            return url;
+        if (url.contains("%s")) {
+            return String.format(url, params);
+        }
+        return url.contains("{0}")
+            ? MessageFormat.format(url, params)
+            : url + "?" + print(map(params, Object::toString), "&");
     }
-
+    @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}') in new window")
+    public void checkOpenedInNewWindow() {
+        checkNewWindowIsOpened();
+        checkOpened();
+    }
     /**
      * Check that page opened
      */
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
     public void checkOpened() {
-        if (!hasRunDrivers())
+        if (noRunDrivers())
             throw exception("Page '%s' is not opened: Driver is not run", toString());
         String result = Switch(checkUrlType).get(
             Value(NONE, ""),
@@ -205,7 +209,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(level = DEBUG)
     public boolean isOpened() {
-        if (!hasRunDrivers())
+        if (noRunDrivers())
             return false;
         boolean result = Switch(checkUrlType).get(
                 Value(NONE, t -> true),
@@ -403,7 +407,7 @@ public class WebPage extends DriverBase implements PageObject {
 
     @Override
     public String toString() {
-        return Switch(logger.getLogLevel()).get(
+        return Switch(LOGS.logLevel).get(
             Case(l -> l == STEP,
                 l -> msgFormat(PRINT_PAGE_STEP, this)),
             Case(l -> l == INFO,
@@ -428,7 +432,6 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean check() {
             String value = actual.get();
-            //logger.toLog(format("Check that page %s(%s) equals to '%s'", what, value, equals));
             return equals == null
                     || equals.equals("")
                     || value.equals(equals);
@@ -439,7 +442,6 @@ public class WebPage extends DriverBase implements PageObject {
          */
         public boolean match() {
             String value = actual.get();
-            //logger.toLog(format("Check that page %s(%s) matches to '%s'", what, value, equals));
             return equals == null
                     || equals.equals("")
                     || value.matches(equals);
@@ -453,18 +455,14 @@ public class WebPage extends DriverBase implements PageObject {
             return equals == null || equals.equals("") || value.contains(equals);
         }
     }
-
-    public static PageChecks CHECK_PAGE_OPEN = PageChecks.NONE;
     public static void beforeNewPage(WebPage page) {
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
             visualWindowCheck();
         logger.toLog("Page '"+page.getName()+"' opened");
-        TIMEOUT.set(PAGE_TIMEOUT.get());
+        TIMEOUTS.element.set(TIMEOUTS.page.get());
     }
-    public static JAction1<WebPage> BEFORE_NEW_PAGE = WebPage::beforeNewPage;
     public static void beforeThisPage(WebPage page) {
-        if (CHECK_PAGE_OPEN != PageChecks.NONE)
+        if (PAGE.checkPageOpen != PageChecks.NONE)
             page.checkOpened();
     }
-    public static JAction1<WebPage> BEFORE_EACH_STEP = WebPage::beforeThisPage;
 }
