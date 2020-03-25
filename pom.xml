@@ -55,7 +55,6 @@
         <module>jdi-light-mobile</module>
         <module>jdi-light-mobile-tests</module>
         <module>jdi-light-eyes</module>
-        <module>jdi-light-mobile</module>
         <module>jdi-bdd</module>
         <module>jdi-light-bootstrap</module>
         <module>jdi-light-html-tests</module>
