@@ -82,9 +82,14 @@ public class EntitiesCollection {
         throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
     }
     public static <T> T getByType(ICoreElement element, Class<T> type) {
-        return (T) (isClass(element.getClass(), type)
-                ? element
-                : element.core());
+        try {
+            ICoreElement core = isClass(element.getClass(), type)
+                    ? element
+                    : element.core();
+            return (T) core;
+        } catch (Exception ex) {
+            throw exception(ex, "Can't get element '%s' of type '%s'", element.getName(), type.getSimpleName());
+        }
     }
     public static ICoreElement getUI(String name) {
         Object element = getElement(name);

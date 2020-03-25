@@ -28,7 +28,7 @@ public interface ICoreElement extends IBaseElement {
     @JDIAction(value = "Check that '{name}' is not visible by user", timeout = 0)
     default boolean isNotVisible() { return core().isNotVisible(); }
     @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
-    default boolean isHidden() { return core().isHidden(); }
+    default boolean isHidden() { return !isDisplayed(); }
     @JDIAction(value = "Check that '{name}' is exist on the page", timeout = 0)
     default boolean isExist() { return core().isExist(); }
     @JDIAction(value = "Check that '{name}' is missed on the page", timeout = 0)
