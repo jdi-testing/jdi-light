@@ -1,9 +1,7 @@
 package org.mytests.tests;
 
 import com.epam.jdi.light.actions.ActionHelper;
-import com.epam.jdi.light.common.SearchStrategies;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;

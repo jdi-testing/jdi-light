@@ -9,7 +9,6 @@ import org.openqa.selenium.Point;
 
 import static com.epam.jdi.bdd.BDDUtils.*;
 import static com.epam.jdi.bdd.stepdefs.CheckListSteps.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.tools.PathUtils.*;
