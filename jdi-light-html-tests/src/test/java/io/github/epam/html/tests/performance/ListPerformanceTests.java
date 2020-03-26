@@ -20,7 +20,7 @@ import static io.github.epam.html.tests.site.steps.States.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
-public class ListTests implements TestsInit {
+public class ListPerformanceTests implements TestsInit {
     final String value = "Yen Stevenson";
     final int index = 385;
     final int repeat = 1;
@@ -82,6 +82,6 @@ public class ListTests implements TestsInit {
         System.out.println("Average Selenium: " + avSelenium);
         System.out.println("Average Jdi: " + avJdi);
         System.out.println("Average Ratio: "+avSelenium/avJdi);
-        assertThat(avSelenium, greaterThan(avJdi*expectedRatio));
+        assertThat(avSelenium, greaterThan(avJdi*expectedRatio/2));
     }
 }

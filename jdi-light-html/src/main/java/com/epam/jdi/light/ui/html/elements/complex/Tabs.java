@@ -59,10 +59,6 @@ public class Tabs extends UIListBase<UISelectAssert<?,?>> {
     public boolean isDisplayed() {
         return list().isDisplayed();
     }
-    @JDIAction("Check that '{name}' is hidden")
-    public boolean isHidden() {
-        return list().isHidden();
-    }
     @JDIAction(level = DEBUG)
     public void highlight(String color) {
         list().highlight(color);

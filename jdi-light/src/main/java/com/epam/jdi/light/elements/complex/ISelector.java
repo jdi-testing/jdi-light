@@ -60,7 +60,7 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     @JDIAction("Check that '{name}' is displayed")
     default boolean isDisplayed() { return list().isDisplayed(); }
     @JDIAction("Check that '{name}' is hidden")
-    default boolean isHidden() { return list().isHidden(); }
+    default boolean isHidden() { return !isDisplayed();}
     default int size() { return list().size(); }
     default boolean isEmpty() { return size() == 0; }
     default boolean isNotEmpty() { return size() > 0; }

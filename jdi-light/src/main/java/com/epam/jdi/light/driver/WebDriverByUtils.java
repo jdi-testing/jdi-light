@@ -1,6 +1,7 @@
 package com.epam.jdi.light.driver;
 
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
@@ -75,7 +76,7 @@ public final class WebDriverByUtils {
             {"className", "class"}
     });
     public static String getByName(By by) {
-        Matcher m = Pattern.compile("By\\.(?<locator>.*):.*").matcher(by.toString());
+        Matcher m = Pattern.compile("By\\.(?<locator>[a-zA-Z]+):.*").matcher(by.toString());
         if (m.find()) {
             String result = m.group("locator");
             return byReplace.has(result) ? byReplace.get(result) : result;
@@ -90,15 +91,15 @@ public final class WebDriverByUtils {
                 : byValue;
     }
     public static String shortBy(By by) {
-        return shortBy(by, "No locator");
+        return shortBy(by, () -> "No locator");
     }
     public static String shortBy(By by, IBaseElement el) {
-        return shortBy(by, printSmartLocators(el));
+        return shortBy(by, () -> printSmartLocators(el));
     }
 
-    private static String shortBy(By by, String noLocator) {
+    private static String shortBy(By by, JFunc<String> noLocator) {
         return (by == null
-                ? noLocator
+                ? noLocator.execute()
                 : format("%s='%s'", getByName(by), getByLocator(by))).replaceAll("%s", "{{VALUE}}");
     }
     public static By getByFromString(String stringLocator) {
