@@ -60,5 +60,7 @@
         <module>jdi-bdd-tests</module>
         <module>jdi-bdd-no-po-tests</module>
         <module>jdi-light-applitools-tests</module>
+        <module>jdi-light-angular</module>
+        <module>jdi-light-angular-tests</module>
     </modules>
 </project>
