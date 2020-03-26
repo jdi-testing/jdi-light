@@ -84,6 +84,7 @@ public class Line implements IList<String>, IBaseElement {
         List<UIElement> result = new ArrayList<>();
         for (int i = 0; i < elements.size(); i++) {
             UIElement cell = elements.get(i+1);
+            cell.show();
             cell.varName = headers.get(i)+unique;
             cell.makePhoto();
             result.add(cell);

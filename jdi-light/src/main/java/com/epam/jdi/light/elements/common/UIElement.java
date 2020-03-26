@@ -255,13 +255,18 @@ public class UIElement extends JDIBase
         if (isHidden())
             return false;
         Object isInView = js().executeScript(
-            "const rect = arguments[0].getBoundingClientRect();\n" +
+    "const rect = arguments[0].getBoundingClientRect();\n" +
             "if (!rect) return false;\n" +
-            "const windowHeight = (window.innerHeight || document.documentElement.clientHeight);\n" +
-            "const windowWidth = (window.innerWidth || document.documentElement.clientWidth);\n" +
-            "const vertInView = (rect.top <= windowHeight) && ((rect.top + rect.height) > 0);\n" +
-            "const horInView = (rect.left <= windowWidth) && ((rect.left + rect.width) > 0);\n" +
-            "return (vertInView && horInView);", getWebElement());
+            "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight);\n" +
+            "const windowWidth = Math.min(window.innerWidth || document.documentElement.clientWidth);\n" +
+            "const ratio = arguments[1];\n" +
+            "const reduceHeight = ratio*windowHeight;\n" +
+            "const reduceWidth = ratio*windowWidth\n" +
+            "if (rect.top < reduceHeight) return false;\n" +
+            "if (rect.left < reduceWidth) return false;\n" +
+            "if (rect.bottom > windowHeight-reduceHeight) return false;\n" +
+            "if (rect.right > windowWidth-reduceWidth) return false;\n" +
+            "return true;", getWebElement(), 0.05);
         return (boolean)isInView;
     }
 
@@ -497,7 +502,8 @@ public class UIElement extends JDIBase
      */
     @JDIAction(timeout = 0)
     public void show() {
-        jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
+        if (isDisplayed() && !isVisible())
+            jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
     }
 
     /**

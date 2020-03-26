@@ -14,58 +14,59 @@ import java.util.List;
  */
 public interface ICoreElement extends IBaseElement {
     UIElement core();
+    default UIElement iCore() { return core(); }
 
     @JDIAction("Hover to '{name}'")
-    default void hover() { core().hover(); }
+    default void hover() { iCore().hover(); }
     @JDIAction(value = "Check that '{name}' is enabled", timeout = 0)
-    default boolean isEnabled() { return core().isEnabled(); }
+    default boolean isEnabled() { return iCore().isEnabled(); }
     @JDIAction(value = "Check that '{name}' is disabled", timeout = 0)
     default boolean isDisabled() { return !isEnabled(); }
     @JDIAction(value = "Check that '{name}' is displayed", timeout = 0)
-    default boolean isDisplayed() { return core().isDisplayed(); }
+    default boolean isDisplayed() { return iCore().isDisplayed(); }
     @JDIAction(value = "Check that '{name}' is visible for user", timeout = 0)
-    default boolean isVisible() { return core().isVisible(); }
+    default boolean isVisible() { return iCore().isVisible(); }
     @JDIAction(value = "Check that '{name}' is not visible by user", timeout = 0)
-    default boolean isNotVisible() { return core().isNotVisible(); }
+    default boolean isNotVisible() { return iCore().isNotVisible(); }
     @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
     default boolean isHidden() { return !isDisplayed(); }
     @JDIAction(value = "Check that '{name}' is exist on the page", timeout = 0)
-    default boolean isExist() { return core().isExist(); }
+    default boolean isExist() { return iCore().isExist(); }
     @JDIAction(value = "Check that '{name}' is missed on the page", timeout = 0)
-    default boolean isNotExist() { return core().isNotExist(); }
-    default void highlight(String color) { core().highlight(); }
-    default void highlight() { core().highlight(); }
-    default Point getLocation() { return core().getLocation(); }
-    default Dimension getSize() { return core().getSize(); }
-    default void show() { core().show(); }
-    default void setAttribute(String name, String value) { core().setAttribute(name, value); }
-    default String attr(String name) { return core().attr(name); }
-    default MapArray<String, String> attrs() { return core().attrs(); }
-    default String css(String prop) { return core().css(prop); }
-    default boolean hasClass(String className) { return core().hasClass(className); }
-    default boolean hasAttribute(String attrName) { return core().hasAttribute(attrName); }
-    default String printHtml() { return core().printHtml(); }
-    default List<String> classes() {return core().classes(); }
+    default boolean isNotExist() { return iCore().isNotExist(); }
+    default void highlight(String color) { iCore().highlight(); }
+    default void highlight() { iCore().highlight(); }
+    default Point getLocation() { return iCore().getLocation(); }
+    default Dimension getSize() { return iCore().getSize(); }
+    default void show() { iCore().show(); }
+    default void setAttribute(String name, String value) { iCore().setAttribute(name, value); }
+    default String attr(String name) { return iCore().attr(name); }
+    default MapArray<String, String> attrs() { return iCore().attrs(); }
+    default String css(String prop) { return iCore().css(prop); }
+    default boolean hasClass(String className) { return iCore().hasClass(className); }
+    default boolean hasAttribute(String attrName) { return iCore().hasAttribute(attrName); }
+    default String printHtml() { return iCore().printHtml(); }
+    default List<String> classes() {return iCore().classes(); }
     default UIElement find(String by) {
-        return core().find(by);
+        return iCore().find(by);
     }
     default UIElement find(By by) {
-        return core().find(by);
+        return iCore().find(by);
     }
     default WebList finds(String by) {
-        return core().finds(by);
+        return iCore().finds(by);
     }
-    default WebList finds(By by) { return core().finds(by); }
-    default UIElement firstChild() { return core().firstChild(); }
-    default WebList children() { return core().children(); }
+    default WebList finds(By by) { return iCore().finds(by); }
+    default UIElement firstChild() { return iCore().firstChild(); }
+    default WebList children() { return iCore().children(); }
     default String getTagName() {
-        return core().getTagName();
+        return iCore().getTagName();
     }
     default void visualValidation(String tag) {
-        core().visualValidation(tag);
+        iCore().visualValidation(tag);
     }
     default void visualValidation(UIElement element) {
-        core().visualValidation(element);
+        iCore().visualValidation(element);
     }
 
 }
