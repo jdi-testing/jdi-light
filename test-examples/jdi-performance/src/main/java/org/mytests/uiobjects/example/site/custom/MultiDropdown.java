@@ -11,7 +11,6 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import org.openqa.selenium.By;
 
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
