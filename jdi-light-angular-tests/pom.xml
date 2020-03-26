@@ -17,7 +17,7 @@
         <allure.testng>2.7.0</allure.testng>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.1</aspectj.version>
+        <aspectj.version>1.9.5</aspectj.version>
     </properties>
 
     <dependencies>
@@ -45,6 +45,24 @@
             <artifactId>testng</artifactId>
             <version>7.0.0</version>
             <!--version>6.14.3</version-->
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light</artifactId>
+            <version>1.2.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html-tests</artifactId>
+            <version>1.1.16</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>1.2.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

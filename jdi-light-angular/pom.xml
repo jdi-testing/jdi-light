@@ -11,6 +11,12 @@
 
     <artifactId>jdi-light-angular</artifactId>
 
+    <properties>
+        <aspectj.version>1.9.5</aspectj.version>
+        <aspectj.maven>1.11</aspectj.maven>
+        <java.version>1.8</java.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
@@ -31,9 +37,12 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <version>${aspectj.maven}</version>
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>aspectj-maven-plugin</artifactId>-->
+<!--                <version>${aspectj.maven}</version>-->
+                    <groupId>com.nickwongdev</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>1.12.6</version>
                 <configuration>
                     <showWeaveInfo>true</showWeaveInfo>
                     <source>${java.version}</source>
