@@ -2,6 +2,7 @@ package io.github.com;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -30,6 +31,8 @@ public class StaticSite {
 	public static PerformancePage tablePage;
 	@Url("/search.html")
 	public static SearchPage searchPage;
+	@Url("/support") @Title("Support")
+	public static WebPage supportPage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;

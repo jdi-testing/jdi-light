@@ -11,6 +11,12 @@ import java.util.function.Function;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static java.lang.Math.round;
 
+/**
+ * This is a helper class that performs the coordinate transformation.
+ * All touch actions work with the absolute screen coordinates, whereas
+ * most of the methods return the browser coordinates. Thus this transformation
+ * is invoked when the touch actions are used
+ */
 public class CoordinateConversionHelper {
 
     private static JavascriptExecutor js = (JavascriptExecutor) getDriver();
@@ -19,8 +25,7 @@ public class CoordinateConversionHelper {
     private static final String androidToolbarId = "com.android.chrome:id/toolbar";
     private static final String iosToolbarXpath = "//XCUIElementTypeOther[@name='topBrowserBar']";
     private static final String iosToolbarAccessibilityId = "topBrowserBar";
-    private static final String androidWebviewXpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]/android.webkit.WebView";
-    private static final String androidWebviewShortXpath = "//android.webkit.WebView";
+    private static final String androidWebviewClassName = "android.webkit.WebView";
     private static final String iosBottomToolbarAccessibilityId = "BottomBrowserToolbar";
     private static final String iosBottomToolbarXpath = "//XCUIElementTypeToolbar[@name='BottomBrowserToolbar']";
     private static double xRatio;
@@ -29,7 +34,7 @@ public class CoordinateConversionHelper {
     static {
         if (getDriver() instanceof AndroidDriver) {
             TOOLBAR = d -> ((AndroidDriver) d).findElementById(androidToolbarId).getRect();
-            WEBVIEW = d -> ((AndroidDriver) d).findElementByClassName("android.webkit.WebView").getRect();
+            WEBVIEW = d -> ((AndroidDriver) d).findElementByClassName(androidWebviewClassName).getRect();
         } else if (getDriver() instanceof IOSDriver) {
             TOOLBAR = d -> ((IOSDriver) d).findElementByAccessibilityId(iosToolbarAccessibilityId).getRect();
             WEBVIEW = d -> {
@@ -57,6 +62,9 @@ public class CoordinateConversionHelper {
         return webviewRect;
     }
 
+    /**
+     * The next two methods convert screen coordinates to absolute browser coordinates
+     */
     public static Point getCoordinatesOnWebPage(int x, int y) {
         int xOffset = (int) js.executeScript("return window.pageXOffset;");
         int yOffset = (int) js.executeScript("return window.pageYOffset;");
@@ -66,6 +74,9 @@ public class CoordinateConversionHelper {
         return getCoordinatesOnWebPage(point.x, point.y);
     }
 
+    /**
+     * The next two methods convert screen coordinates to viewport coordinates
+     */
     public static Point getCoordinatesInViewport(int x, int y) {
         Rectangle webviewRect = webview();
         prepareForConversion(webviewRect);
@@ -78,7 +89,7 @@ public class CoordinateConversionHelper {
     }
 
     /**
-     * The next two methods need to be used with the viewport coordinates only
+     * The next two methods convert viewport coordinates to screen coordinates
      */
     public static Point getCoordinatesOnScreen(int x, int y) {
         Rectangle webviewRect = webview();

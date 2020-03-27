@@ -10,6 +10,9 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
+/**
+ * This class helps to perform different interactions with mobile contexts: NATIVE_APP and WEBVIEW
+ */
 public class MobileContextHolder {
     public static String switchContext() {
         WebDriver driver = getDriver();

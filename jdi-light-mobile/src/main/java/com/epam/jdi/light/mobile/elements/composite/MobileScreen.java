@@ -1,5 +1,6 @@
 package com.epam.jdi.light.mobile.elements.composite;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.mobile.MobileContextHolder;
 import io.appium.java_client.MultiTouchAction;
 import io.appium.java_client.PerformsTouchActions;
@@ -49,7 +50,7 @@ public class MobileScreen {
     }
     private static void scroll(Point startingPoint, int xOffset, int yOffset) {
         executeDriverMethod(PerformsTouchActions.class, (PerformsTouchActions driver) -> {
-            new TouchAction(driver)
+            new TouchAction<>(driver)
                     .press(PointOption.point(startingPoint))
                     .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
                     .moveTo(PointOption.point(startingPoint.moveBy(xOffset, yOffset)))
@@ -73,15 +74,19 @@ public class MobileScreen {
         scroll(screenCenter, offset % (width / 2), 0);
     }
 
+    @JDIAction("Scroll up by {0} px")
     public static void scrollUp(int offset) {
         scrollVertically(offset);
     }
+    @JDIAction("Scroll down by {0} px")
     public static void scrollDown(int offset) {
         scrollVertically(-offset);
     }
+    @JDIAction("Scroll right by {0} px")
     public static void scrollRight(int offset) {
         scrollHorizontally(-offset);
     }
+    @JDIAction("Scroll left by {0} px")
     public static void scrollLeft(int offset) {
         scrollHorizontally(offset);
     }
@@ -95,12 +100,12 @@ public class MobileScreen {
 
     private static void pinch(Point startPoint1, Point startPoint2, Point endPoint1, Point endPoint2) {
         executeDriverMethod(PerformsTouchActions.class, (PerformsTouchActions driver) -> {
-            TouchAction ta1 = new TouchAction(driver)
+            TouchAction<?> ta1 = new TouchAction<>(driver)
                     .press(PointOption.point(startPoint1))
                     .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
                     .moveTo(PointOption.point(endPoint1))
                     .release();
-            TouchAction ta2 = new TouchAction(driver)
+            TouchAction<?> ta2 = new TouchAction<>(driver)
                     .press(PointOption.point(startPoint2))
                     .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
                     .moveTo(PointOption.point(endPoint2))
@@ -108,16 +113,19 @@ public class MobileScreen {
             new MultiTouchAction(driver).add(ta1).add(ta2).perform();
         });
     }
+    @JDIAction("Zoom in")
     public static void zoomIn() {
         Dimension dimension = getScreenSize();
         pinch(screenCenter.moveBy(1, 1), screenCenter,
                 new Point(dimension.width - 1, dimension.height - 1), new Point(0, 0));
     }
+    @JDIAction("Zoom out")
     public static void zoomOut() {
         Dimension dimension = getScreenSize();
         pinch(new Point(dimension.width - 1, dimension.height - 1), new Point(0, 0),
                 screenCenter, screenCenter);
     }
+    @JDIAction("Zoom in by {0}")
     public static void zoomIn(double ratio) {
         if ((ratio < 0 ) || (ratio > 1)) {
             throw exception("The zoom ratio needs to be between 0 and 1");
@@ -128,6 +136,7 @@ public class MobileScreen {
                     screenCenter.moveBy(-(int) round(ratio * dimension.width / 2), -(int) round(ratio * dimension.height / 2)));
         }
     }
+    @JDIAction("Zoom out by {0}")
     public static void zoomOut(double ratio) {
         if ((ratio < 0 ) || (ratio > 1)) {
             throw exception("The zoom ratio needs to be between 0 and 1");
@@ -143,7 +152,7 @@ public class MobileScreen {
         return executeDriverMethod(CanRecordScreen.class,
                 (Function<CanRecordScreen, String>) CanRecordScreen::startRecordingScreen);
     }
-    public static <T extends BaseStartScreenRecordingOptions> String startRecordingScreen(T options) {
+    public static <T extends BaseStartScreenRecordingOptions<?>> String startRecordingScreen(T options) {
         return executeDriverMethod(CanRecordScreen.class,
                 (CanRecordScreen driver) ->  driver.startRecordingScreen(options));
     }
@@ -151,7 +160,7 @@ public class MobileScreen {
         return executeDriverMethod(CanRecordScreen.class,
                 (Function<CanRecordScreen, String>) CanRecordScreen::stopRecordingScreen);
     }
-    public static <T extends BaseStopScreenRecordingOptions> String stopRecordingScreen(T options) {
+    public static <T extends BaseStopScreenRecordingOptions<?>> String stopRecordingScreen(T options) {
         return executeDriverMethod(CanRecordScreen.class,
                 (CanRecordScreen driver) ->  driver.stopRecordingScreen(options));
     }
