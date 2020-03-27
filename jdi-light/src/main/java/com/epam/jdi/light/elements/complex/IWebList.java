@@ -28,7 +28,10 @@ public interface IWebList<T extends ICoreElement> extends IList<T> {
      */
     @JDIAction("Select '{0}' for '{name}'")
     default void select(String value) {
-        getByType(get(value), IClickable.class).click();
+        IClickable element = getByType(get(value), IClickable.class);
+        if (element == null)
+            throw exception("Can't get element '%s'", value);
+        element.click();
     }
 
     /**

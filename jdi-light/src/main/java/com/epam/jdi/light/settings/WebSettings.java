@@ -6,6 +6,7 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.*;
 import com.epam.jdi.tools.func.*;
@@ -23,6 +24,8 @@ import static com.epam.jdi.light.common.PageChecks.*;
 import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.common.SetTextTypes.*;
 import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.common.UseSmartSearch.FALSE;
+import static com.epam.jdi.light.common.UseSmartSearch.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
@@ -38,6 +41,7 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PathUtils.*;
 import static com.epam.jdi.tools.PrintUtils.*;
 import static com.epam.jdi.tools.PropertyReader.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 import static java.lang.Boolean.*;
 import static java.lang.Integer.*;
 import static java.lang.String.*;
@@ -88,7 +92,9 @@ public class WebSettings {
         }
     }
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
-        if (!ELEMENT.useSmartSearch)
+        if (ELEMENT.useSmartSearch == FALSE ||
+            ELEMENT.useSmartSearch == ONLY_UI && el.base().locator == null ||
+            ELEMENT.useSmartSearch == UI_AND_ELEMENTS && el.base().locator == null && isInterface(el.getClass(), PageObject.class))
             return null;
         String locatorName = ELEMENT.smartName.value.execute(el.getName());
         return el.base().timer().getResult(() -> {
@@ -141,7 +147,7 @@ public class WebSettings {
             fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
             fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locators");
             fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locators.toName");
-            fillAction(p -> ELEMENT.useSmartSearch = getBoolean(p), "smart.search");
+            fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
             fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
 
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
@@ -205,6 +211,16 @@ public class WebSettings {
                 "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
         }
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
+    }
+    private static UseSmartSearch getSmartSearchUse(String prop) {
+        String propLower = prop.toLowerCase().trim().replaceAll(" ", "");
+        switch (propLower) {
+            case "false": return FALSE;
+            case "onlyui": return ONLY_UI;
+            case "uiandelements": return UI_AND_ELEMENTS;
+            case "always": return ALWAYS;
+            default: return UI_AND_ELEMENTS;
+        }
     }
 
     public static void loadCapabilities(String property, String defaultPath, JAction1<Properties> setCapabilities) {

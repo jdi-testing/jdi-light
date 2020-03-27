@@ -15,7 +15,6 @@ import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 
 public class BaseValidations {
-
     public static void baseValidation(ICoreElement el) {
         // EXCLUDED el.hover();
         logger.info("Check enabled");

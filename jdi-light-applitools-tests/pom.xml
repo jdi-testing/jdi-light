@@ -7,7 +7,7 @@
     <artifactId>jdi-light-applitools-tests</artifactId>
     <name>Tests: JDI Light Applitools Eyes</name>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.6</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
