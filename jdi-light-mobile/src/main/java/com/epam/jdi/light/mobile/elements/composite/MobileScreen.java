@@ -48,6 +48,7 @@ public class MobileScreen {
         }
         return screenSize;
     }
+    @JDIAction
     private static void scroll(Point startingPoint, int xOffset, int yOffset) {
         executeDriverMethod(PerformsTouchActions.class, (PerformsTouchActions driver) -> {
             new TouchAction<>(driver)

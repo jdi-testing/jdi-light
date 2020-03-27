@@ -14,6 +14,9 @@ import static io.github.epam.entities.Users.DEFAULT_USER;
 
 public class RootTests extends StaticTestsInit {
 
+    private static final String nativeAppIos = "com.apple.Preferences";
+    private static final String nativeAppAndroid = "com.android.settings";
+
     @Test
     public void rootTest() {
         shouldBeLoggedOut();
@@ -25,7 +28,7 @@ public class RootTests extends StaticTestsInit {
 //        MobileScreen.zoomIn(0.2);
         aboutLink.tap();
         supportPage.checkOpened();
-        AppManager.activateApp("com.android.settings");
+        AppManager.activateApp(nativeAppIos);
         MobileScreen.scrollDown(800);
     }
     @Test
