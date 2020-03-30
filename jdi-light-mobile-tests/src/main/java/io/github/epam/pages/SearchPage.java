@@ -1,4 +1,4 @@
-package io.github.com.pages;
+package io.github.epam.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
@@ -6,8 +6,8 @@ import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
-import io.github.com.custom.Result;
-import io.github.com.custom.SearchResult;
+import io.github.epam.custom.Result;
+import io.github.epam.custom.SearchResult;
 
 import java.util.List;
 

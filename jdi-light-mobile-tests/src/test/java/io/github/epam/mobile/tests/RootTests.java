@@ -3,10 +3,10 @@ package io.github.epam.mobile.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.StaticSite.searchPage;
-import static io.github.com.pages.Header.loginForm;
-import static io.github.com.pages.Header.userIcon;
+import static io.github.epam.StaticSite.homePage;
+import static io.github.epam.StaticSite.searchPage;
+import static io.github.epam.sections.Header.loginForm;
+import static io.github.epam.sections.Header.userIcon;
 import static io.github.epam.steps.Preconditions.shouldBeLoggedOut;
 import static io.github.epam.entities.Users.DEFAULT_USER;
 

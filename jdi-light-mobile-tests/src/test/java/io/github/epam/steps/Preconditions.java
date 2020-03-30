@@ -3,9 +3,10 @@ package io.github.epam.steps;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.pages.Header.*;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static io.github.epam.StaticSite.homePage;
 import static io.github.epam.entities.Users.DEFAULT_USER;
+import static io.github.epam.sections.Header.*;
 
 /**
  * Created by Roman_Iovlev on 3/1/2018.
@@ -13,7 +14,7 @@ import static io.github.epam.entities.Users.DEFAULT_USER;
 public class Preconditions {
     @Step
     public static void shouldBeLoggedIn() {
-        if (!WebPage.getUrl().contains("https://jdi-testing.github.io/jdi-light/"))
+        if (!WebPage.getUrl().contains(DRIVER.domain))
             homePage.open();
         if (!userName.isDisplayed())
             login();
@@ -25,7 +26,7 @@ public class Preconditions {
     }
     @Step
     public static void shouldBeLoggedOut() {
-        if (!WebPage.getUrl().contains("https://jdi-testing.github.io/jdi-light/"))
+        if (!WebPage.getUrl().contains(DRIVER.domain))
             homePage.open();
         if (userName.isDisplayed())
             logout();

@@ -4,11 +4,11 @@ import com.epam.jdi.light.mobile.elements.common.AppManager;
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.StaticSite.supportPage;
-import static io.github.com.pages.Footer.aboutLink;
-import static io.github.com.pages.Header.loginForm;
-import static io.github.com.pages.Header.userIcon;
+import static io.github.epam.StaticSite.homePage;
+import static io.github.epam.StaticSite.supportPage;
+import static io.github.epam.sections.Footer.aboutLink;
+import static io.github.epam.sections.Header.loginForm;
+import static io.github.epam.sections.Header.userIcon;
 import static io.github.epam.steps.Preconditions.shouldBeLoggedOut;
 import static io.github.epam.entities.Users.DEFAULT_USER;
 

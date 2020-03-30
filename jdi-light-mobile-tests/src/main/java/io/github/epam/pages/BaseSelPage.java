@@ -1,4 +1,4 @@
-package io.github.com.pages;
+package io.github.epam.pages;
 
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;

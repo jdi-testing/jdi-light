@@ -1,4 +1,4 @@
-package io.github.com.pages;
+package io.github.epam.sections;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;

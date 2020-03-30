@@ -1,4 +1,4 @@
-package io.github.com.custom;
+package io.github.epam.custom;
 
 import com.epam.jdi.tools.DataClass;
 

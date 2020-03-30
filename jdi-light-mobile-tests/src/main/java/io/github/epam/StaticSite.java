@@ -1,4 +1,4 @@
-package io.github.com;
+package io.github.epam;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -9,7 +9,10 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import io.github.com.pages.*;
+import io.github.epam.pages.*;
+import io.github.epam.sections.Footer;
+import io.github.epam.sections.FrameSpiderman;
+import io.github.epam.sections.Header;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

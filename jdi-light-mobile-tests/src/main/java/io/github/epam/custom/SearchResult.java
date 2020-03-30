@@ -1,4 +1,4 @@
-package io.github.com.custom;
+package io.github.epam.custom;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
@@ -9,13 +9,13 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.String.format;
 
 public class SearchResult extends Section {
-@Title  @Css("h3") public UIElement name;
-        @Css("p") public UIElement description;
-        @Css("a") public UIElement link;
+    @Title  @Css("h3") public UIElement name;
+    @Css("p") public UIElement description;
+    @Css("a") public UIElement link;
 
     public String print() {
         return logger.logOff(
-            () -> format("SearchResult{NAME=%s; DESCRIPTION=%s; LINK=%s}",
-                name.getText(), description.getText(), link.getAttribute("href")));
+                () -> format("SearchResult{NAME=%s; DESCRIPTION=%s; LINK=%s}",
+                        name.getText(), description.getText(), link.getAttribute("href")));
     }
 }
