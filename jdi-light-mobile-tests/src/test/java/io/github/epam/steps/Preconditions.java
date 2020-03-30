@@ -1,4 +1,4 @@
-package io.github.com.tests.recommended.steps;
+package io.github.epam.steps;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;

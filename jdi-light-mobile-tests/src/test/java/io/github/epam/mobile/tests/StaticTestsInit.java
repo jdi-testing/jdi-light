@@ -1,3 +1,5 @@
+package io.github.epam.mobile.tests;
+
 import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
