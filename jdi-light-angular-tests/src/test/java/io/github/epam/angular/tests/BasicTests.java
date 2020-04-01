@@ -4,10 +4,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angPage;
+import static io.github.com.StaticSite.userName;
 import static io.github.com.pages.AngularPage.firstBasicRadioButton;
 import static states.States.shouldBeLoggedIn;
 
-public class BasicRadiosTests {
+public class BasicTests {
 
     @BeforeMethod
     public void before() {
@@ -16,8 +17,7 @@ public class BasicRadiosTests {
     }
 
     @Test
-    public void checkFirstBasicRadioButtonVisibility() {
-        firstBasicRadioButton.is().displayed();
+    public void checkUsernameOnAngularPage() {
+        userName.is().displayed();
     }
-
 }
