@@ -38,9 +38,9 @@ public class WebAnnotationsUtil {
             if (!"".equals(locator.accessibilityId()))
                 return MobileBy.AccessibilityId(locator.accessibilityId());
             if (!"".equals(locator.className()))
-                return By.className(locator.className());
+                return MobileBy.className(locator.className());
             if (!"".equals(locator.name()))
-                return By.name(locator.name());
+                return MobileBy.name(locator.name());
             if (!"".equals(locator.androidUIAutomator()))
                 return MobileBy.AndroidUIAutomator(locator.androidUIAutomator());
             //TODO: Yet to be checked (native app needed)
