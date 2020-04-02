@@ -43,7 +43,7 @@ public class WebAnnotationsUtil {
                 return MobileBy.name(locator.name());
             if (!"".equals(locator.androidUIAutomator()))
                 return MobileBy.AndroidUIAutomator(locator.androidUIAutomator());
-            //TODO: Yet to be checked (native app needed)
+            //TODO: Yet to be checked   (native app needed)
 /*            if (!"".equals(locator.androidDataMatcher()))
                 return MobileBy.androidDataMatcher(locator.androidDataMatcher());
             if (!"".equals(locator.androidViewTag()))
