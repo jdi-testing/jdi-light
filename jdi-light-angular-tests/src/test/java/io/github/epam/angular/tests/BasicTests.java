@@ -8,7 +8,7 @@ import static io.github.com.StaticSite.angPage;
 import static io.github.com.StaticSite.userName;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
-public class BasicTests implements TestsInit {
+public class BasicTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
