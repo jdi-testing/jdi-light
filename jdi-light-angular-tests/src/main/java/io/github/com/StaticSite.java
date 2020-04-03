@@ -9,13 +9,13 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
 import io.github.com.pages.AngularPage;
+import io.github.com.pages.HomePage;
 
 
-@SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
-    @Url("/angular.html")
-    public static AngularPage angPage;
+    @Url("/index.html") public static HomePage homePage;
+    @Url("/angular.html") public static AngularPage angPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;

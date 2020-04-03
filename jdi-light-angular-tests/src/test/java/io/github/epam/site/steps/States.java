@@ -1,14 +1,13 @@
-package states;
+package io.github.epam.site.steps;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
-import static io.github.com.StaticSite.angPage;
-import static io.github.com.StaticSite.logout;
+import static io.github.com.StaticSite.*;
 import static io.github.com.entities.Users.DEFAULT_USER;
-import static io.github.com.pages.Header.*;
+import static io.github.com.pages.Header.epamLogo;
 
 
 @SuppressWarnings("PMD.ClassNamingConventions")
