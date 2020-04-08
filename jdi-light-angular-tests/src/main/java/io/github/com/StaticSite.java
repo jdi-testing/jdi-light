@@ -7,18 +7,27 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import io.github.com.entities.User;
+import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.AngularPage;
 
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
-    @Url("/angular.html") public static AngularPage angPage;
+    public static User DEFAULT_USER = new User();
+
+    @Url("/angular.html")
+    public static AngularPage angPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
 
-    @Css(".fa-sign-out") public static Button logout;
+    @Css(".fa-sign-out")
+    public static Button logout;
     public static Button userIcon;
     public static Text userName;
+
+    public static class User extends DataClass<User> {
+        public String name = "Roman";
+        public String password = "Jdi1234";
+    }
 }
