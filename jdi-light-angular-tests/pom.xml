@@ -2,20 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>jdi-2</artifactId>
-        <groupId>com.epam.jdi</groupId>
-        <version>1.1.16</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jdi-light-angular-tests</artifactId>
+    <name>JDI Angular Tests</name>
+    <version>1.1.16</version>
+    <groupId>com.epam.jdi</groupId>
 
     <properties>
         <driver>chrome</driver>
-        <!--driver>firefox</driver-->
-        <allure.testng>2.7.0</allure.testng>
-        <allure.maven>2.9</allure.maven>
+        <allure.testng>2.13.1</allure.testng>
+        <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.5</aspectj.version>
     </properties>
@@ -24,45 +21,24 @@
         <!--JDI-->
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-html</artifactId>
+            <artifactId>jdi-light-angular</artifactId>
+            <version>1.1.16</version>
         </dependency>
-
         <!--Allure config in parent-->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.testng}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-lang3</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.2</version>
+        </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.0.0</version>
-            <!--version>6.14.3</version-->
-        </dependency>
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light</artifactId>
-            <version>1.2.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-html-tests</artifactId>
-            <version>1.1.16</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-html</artifactId>
-            <version>1.2.0</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 

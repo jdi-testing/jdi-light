@@ -1,31 +1,35 @@
 package io.github.epam.site.steps;
 
 import com.epam.jdi.light.elements.composite.WebPage;
+import io.github.com.StaticSite;
 import io.qameta.allure.Step;
 
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
 import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
-import static io.github.com.StaticSite.*;
-import static io.github.com.entities.Users.DEFAULT_USER;
-import static io.github.com.pages.Header.epamLogo;
-
+import static io.github.com.StaticSite.angPage;
+import static io.github.com.StaticSite.loginForm;
+import static io.github.com.StaticSite.logout;
+import static io.github.com.StaticSite.userIcon;
+import static io.github.com.StaticSite.userName;
 
 @SuppressWarnings("PMD.ClassNamingConventions")
 public class States {
     @Step
     public static void shouldBeLoggedIn() {
         String url = WebPage.getUrl();
-        if (!url.contains("https://jdi-testing.github.io/jdi-light/") || epamLogo.isNotExist())
+        if (!url.contains("https://jdi-testing.github.io/jdi-light/")) {
             angPage.open();
-        if (userName.isHidden())
+        }
+        if (userName.isHidden()) {
             login();
+        }
     }
 
     @Step
     public static void login() {
         if (loginForm.isHidden())
             userIcon.click();
-        loginForm.submit(DEFAULT_USER);
+        loginForm.submit(StaticSite.DEFAULT_USER);
     }
 
     @Step
@@ -37,6 +41,7 @@ public class States {
         if (loginForm.isDisplayed())
             userIcon.click();
     }
+
     @Step
     public static void logout() {
         if (!logout.isDisplayed())
