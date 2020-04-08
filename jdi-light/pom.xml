@@ -100,9 +100,12 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>aspectj-maven-plugin</artifactId>-->
+<!--                <version>${aspectj.maven}</version>-->
+                <groupId>com.nickwongdev</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>${aspectj.maven}</version>
+                <version>1.12.6</version>
                 <configuration>
                     <showWeaveInfo>true</showWeaveInfo>
                     <source>${java.version}</source>
