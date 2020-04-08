@@ -120,10 +120,6 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public boolean isDisplayed() {
         return list().isDisplayed();
     }
-    @Override
-    public boolean isHidden() {
-        return list().isHidden();
-    }
 
     /**
      * Checks all elements

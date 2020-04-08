@@ -35,8 +35,6 @@ public abstract class UIListBase<A extends UISelectAssert<?,?>> extends UIBaseEl
     @JDIAction("Check that '{name}' is not visible by user") @Override
     public boolean isNotVisible() { return isHidden() || list().all(UIElement::isNotVisible); }
     @Override
-    public boolean isHidden() { return list().isHidden(); }
-    @Override
     public boolean isEnabled() { return list().isEnabled(); }
     @JDIAction(level = DEBUG) @Override
     public boolean isDisabled() {

@@ -12,8 +12,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static org.apache.commons.lang3.StringUtils.*;
@@ -23,7 +23,7 @@ import static org.apache.commons.lang3.StringUtils.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public abstract class DriverBase implements JDIElement {
-    public String driverName = DRIVER_NAME;
+    public String driverName = DRIVER.name;
     public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
     public JavascriptExecutor js() { return (JavascriptExecutor) driver(); }
 

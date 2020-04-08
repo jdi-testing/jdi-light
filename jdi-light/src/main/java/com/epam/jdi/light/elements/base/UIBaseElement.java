@@ -10,8 +10,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public abstract class UIBaseElement<A extends UIAssert<?,?>>
-        implements ICoreElement, HasAssert<A> {
+public abstract class UIBaseElement<A extends UIAssert<?,?>> implements ICoreElement, HasAssert<A> {
     protected UIElement uiElement;
     public JDIBase base() { return core().base(); }
     public UIElement core() {
@@ -19,22 +18,17 @@ public abstract class UIBaseElement<A extends UIAssert<?,?>>
             uiElement = new UIElement();
         return uiElement;
     }
-    protected Boolean thisParent = null;
-    protected boolean thisParent() {
-        if (thisParent == null)
-            return base().locator.isEmpty();
-        return thisParent;
-    }
+    protected boolean thisParent = false;
     protected UIElement linked(String locator, String name) {
         UIElement el = new UIElement(base(), locator, getName() + " " + name, this);
-        if (thisParent())
+        if (thisParent)
             el.setParent(base().parent);
         return el;
     }
     protected WebList linkedList(String locator, String name) {
         WebList list = new WebList(base(), locator, getName() + " " + name, this);
         list.searchVisible();
-        if (thisParent())
+        if (thisParent)
             list.setParent(base().parent);
         return list;
     }

@@ -2,9 +2,10 @@ package io.github.epam.tests.google;
 
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.Header.*;
@@ -34,13 +35,13 @@ public class WaitJListTests extends StaticTestsInit {
     }
     @Test
     public void emptyTest() {
-        TIMEOUT.setUp(2);
+        TIMEOUTS.element.setUp(2);
         try {
             jsearchTitle.is().empty();
             Assert.fail("List should not be empty");
         } catch (Throwable ignored) { }
         finally {
-            TIMEOUT.drop();
+            TIMEOUTS.element.drop();
         }
         logger.info("Done");
     }

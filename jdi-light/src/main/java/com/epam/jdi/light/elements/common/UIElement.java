@@ -25,10 +25,10 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.driver.ScreenshotMaker.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.JsonUtils.*;
@@ -241,7 +241,7 @@ public class UIElement extends JDIBase
      * Execute Java Script call
      * @param jsCode
      */
-    @JDIAction(value = "Execute javascript '{0}' for '{name}'", level = DEBUG)
+    @JDIAction(value = "Execute javascript '{0}' for '{name}'", level = DEBUG, timeout = 0)
     public String jsExecute(String jsCode) {
         return valueOf(js().executeScript("return arguments[0]."+ jsCode +";", getWebElement()));
     }
@@ -255,13 +255,18 @@ public class UIElement extends JDIBase
         if (isHidden())
             return false;
         Object isInView = js().executeScript(
-            "const rect = arguments[0].getBoundingClientRect();\n" +
+    "const rect = arguments[0].getBoundingClientRect();\n" +
             "if (!rect) return false;\n" +
-            "const windowHeight = (window.innerHeight || document.documentElement.clientHeight);\n" +
-            "const windowWidth = (window.innerWidth || document.documentElement.clientWidth);\n" +
-            "const vertInView = (rect.top <= windowHeight) && ((rect.top + rect.height) > 0);\n" +
-            "const horInView = (rect.left <= windowWidth) && ((rect.left + rect.width) > 0);\n" +
-            "return (vertInView && horInView);", getWebElement());
+            "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight);\n" +
+            "const windowWidth = Math.min(window.innerWidth || document.documentElement.clientWidth);\n" +
+            "const ratio = arguments[1];\n" +
+            "const reduceHeight = ratio*windowHeight;\n" +
+            "const reduceWidth = ratio*windowWidth\n" +
+            "if (rect.top < reduceHeight) return false;\n" +
+            "if (rect.left < reduceWidth) return false;\n" +
+            "if (rect.bottom > windowHeight-reduceHeight) return false;\n" +
+            "if (rect.right > windowWidth-reduceWidth) return false;\n" +
+            "return true;", getWebElement(), 0.05);
         return (boolean)isInView;
     }
 
@@ -497,7 +502,8 @@ public class UIElement extends JDIBase
      */
     @JDIAction(timeout = 0)
     public void show() {
-        jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
+        if (isDisplayed() && !isVisible())
+            jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
     }
 
     /**
@@ -574,7 +580,7 @@ public class UIElement extends JDIBase
         return hasImage() ? new File(imageFilePath) : null;
     }
     private String getScreenshotName(String tag) {
-        return varName+tag+SCREEN_FILE_SUFFIX;
+        return varName + tag + SCREEN.fileSuffix;
     }
 
     @JDIAction(level = DEBUG)

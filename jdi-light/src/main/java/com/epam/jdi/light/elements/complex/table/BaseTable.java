@@ -524,7 +524,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get all '{name}' rows")
     public List<Line> rowsImages() {
-        return map(getRows(), row -> {
+        MapArray<String, WebList> rows = getRows();
+        return map(rows, row -> {
             Line line = new Line(row.value, header());
             line.saveCellsImages();
             return line;

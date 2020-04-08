@@ -3,9 +3,11 @@ package io.github.epam.tests.google;
 import com.epam.jdi.light.elements.complex.DataList;
 import io.github.com.custom.SearchResult;
 import io.github.epam.StaticTestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.*;
 import static io.github.com.pages.Header.*;

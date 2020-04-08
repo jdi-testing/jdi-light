@@ -6,12 +6,9 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
-import com.epam.jdi.light.elements.pageobjects.annotations.smart.SClass;
-import com.epam.jdi.light.elements.pageobjects.annotations.smart.SId;
-import com.epam.jdi.light.elements.pageobjects.annotations.smart.SText;
-import com.epam.jdi.light.elements.pageobjects.annotations.smart.Smart;
+import com.epam.jdi.light.elements.pageobjects.annotations.smart.*;
 
-import static com.epam.jdi.light.common.TextTypes.TEXT;
+import static com.epam.jdi.light.common.TextTypes.*;
 
 public class UIElementContactFormPage extends WebPage {
     //Elements are described in different formats to cover all variants of initialization

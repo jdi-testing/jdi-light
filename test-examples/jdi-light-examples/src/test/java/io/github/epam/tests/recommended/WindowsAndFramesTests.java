@@ -2,7 +2,8 @@ package io.github.epam.tests.recommended;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.StaticTestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static io.github.com.StaticSite.*;

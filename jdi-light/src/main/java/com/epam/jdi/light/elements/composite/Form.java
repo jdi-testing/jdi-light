@@ -398,10 +398,6 @@ public class Form<T> extends Section {
         } catch (Exception ignore) { }
         return false;
     }
-    @Override
-    public boolean isHidden() {
-        return !isDisplayed();
-    }
     //endregion
     @JDIAction("Return if form valid")
     public boolean isValid() {

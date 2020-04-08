@@ -2,7 +2,8 @@ package org.mytests.tests.example;
 
 import org.mytests.tests.TestsInit;
 import org.mytests.uiobjects.example.custom.MarvelUser;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.List;
 

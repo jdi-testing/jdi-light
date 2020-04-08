@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JAction1;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.logging.LogEntry;
@@ -30,7 +29,7 @@ import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.settings.TimeoutSettings.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.JsonUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -157,13 +156,14 @@ public class WebPage extends DriverBase implements PageObject {
         open(getUrlWithParams(params));
     }
     private String getUrlWithParams(Object... params) {
-        return params == null || params.length == 0
-                ? url
-                : url.contains("%s")
-                    ? String.format(url, params)
-                    : url.contains("{0}")
-                        ? MessageFormat.format(url, params)
-                        : url + "?" + print(map(params, Object::toString), "&");
+        if (params == null || params.length == 0)
+            return url;
+        if (url.contains("%s")) {
+            return String.format(url, params);
+        }
+        return url.contains("{0}")
+            ? MessageFormat.format(url, params)
+            : url + "?" + print(map(params, Object::toString), "&");
     }
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}') in new window")
     public void checkOpenedInNewWindow() {
@@ -407,7 +407,7 @@ public class WebPage extends DriverBase implements PageObject {
 
     @Override
     public String toString() {
-        return Switch(logger.getLogLevel()).get(
+        return Switch(LOGS.logLevel).get(
             Case(l -> l == STEP,
                 l -> msgFormat(PRINT_PAGE_STEP, this)),
             Case(l -> l == INFO,
@@ -455,18 +455,14 @@ public class WebPage extends DriverBase implements PageObject {
             return equals == null || equals.equals("") || value.contains(equals);
         }
     }
-
-    public static PageChecks CHECK_PAGE_OPEN = PageChecks.NONE;
     public static void beforeNewPage(WebPage page) {
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
             visualWindowCheck();
         logger.toLog("Page '"+page.getName()+"' opened");
-        TIMEOUT.set(PAGE_TIMEOUT.get());
+        TIMEOUTS.element.set(TIMEOUTS.page.get());
     }
-    public static JAction1<WebPage> BEFORE_NEW_PAGE = WebPage::beforeNewPage;
     public static void beforeThisPage(WebPage page) {
-        if (CHECK_PAGE_OPEN != PageChecks.NONE)
+        if (PAGE.checkPageOpen != PageChecks.NONE)
             page.checkOpened();
     }
-    public static JAction1<WebPage> BEFORE_EACH_STEP = WebPage::beforeThisPage;
 }

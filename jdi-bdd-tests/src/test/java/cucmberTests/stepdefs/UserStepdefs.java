@@ -9,8 +9,8 @@ import org.openqa.selenium.Point;
 
 import static com.epam.jdi.bdd.BDDUtils.*;
 import static com.epam.jdi.bdd.stepdefs.CheckListSteps.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.tools.PathUtils.*;
 import static io.github.com.StaticSite.*;
 import static io.github.com.entities.Users.*;
@@ -56,7 +56,7 @@ public class UserStepdefs {
     public void iTryToUploadFileByFileInputElement(String pathToFile, String elementName) {
         FileInput fileInput = getUI(elementName, FileInput.class);
         try {
-            fileInput.uploadFile(mergePath(PROJECT_PATH, pathToFile));
+            fileInput.uploadFile(mergePath(COMMON.projectPath, pathToFile));
             fail("Can't upload file in disabled FileInput");
         } catch (Exception ex) {
             assertTrue(ex.getLocalizedMessage().contains("FileInput 'Disabled File Input' is disabled. Can't upload file"));

@@ -8,7 +8,7 @@ import org.hamcrest.Matcher;
 import java.io.File;
 
 import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.PathUtils.*;
 import static java.util.Objects.*;
@@ -28,7 +28,7 @@ public class FileAssert extends BaseAssert<IBaseElement> {
 
     public FileAssert(String fileName) {
         super(fileName);
-        file = new File(mergePath(DOWNLOADS_DIR, fileName));
+        file = new File(mergePath(DRIVER.downloadsFolder, fileName));
     }
     /**
      * Check that file is downloaded
@@ -82,7 +82,7 @@ public class FileAssert extends BaseAssert<IBaseElement> {
         return hasSize(size-10, size+10);
     }
     public static void cleanupDownloads() {
-        File dir = new File(DOWNLOADS_DIR);
+        File dir = new File(DRIVER.downloadsFolder);
         for(File file : requireNonNull(dir.listFiles()))
             file.delete();
         logger.info("Remove all downloads successfully");

@@ -4,7 +4,7 @@ import org.apache.logging.log4j.Level;
 
 import java.util.List;
 
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.lang.Integer.*;
 import static java.util.Arrays.*;
@@ -47,7 +47,7 @@ public enum LogLevels {
     public static LogLevels parseLogLevel(String logLevel) {
         switch (logLevel.toLowerCase()) {
             case "off":
-                WRITE_TO_LOG = false;
+                LOGS.writeToLog = false;
                 return OFF;
             case "fatal": return FATAL;
             case "error": return ERROR;

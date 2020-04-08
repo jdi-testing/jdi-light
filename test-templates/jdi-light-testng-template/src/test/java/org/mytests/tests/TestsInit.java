@@ -2,7 +2,8 @@ package org.mytests.tests;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import org.mytests.uiobjects.example.site.SiteJdi;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;

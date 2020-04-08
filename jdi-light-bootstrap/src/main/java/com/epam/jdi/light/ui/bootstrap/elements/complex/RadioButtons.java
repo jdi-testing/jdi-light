@@ -5,8 +5,8 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.WebElement;
 
+import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
 
 /**
  * To see an example of RadioButtons in bootstrap please visit https://getbootstrap.com/docs/4.3/components/forms/#default-stacked

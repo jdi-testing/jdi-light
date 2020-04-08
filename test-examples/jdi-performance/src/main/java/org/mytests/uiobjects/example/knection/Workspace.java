@@ -1,6 +1,7 @@
 package org.mytests.uiobjects.example.knection;
 
-import com.epam.jdi.tools.*;
+import com.epam.jdi.tools.DataClass;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 
 import java.lang.reflect.Field;

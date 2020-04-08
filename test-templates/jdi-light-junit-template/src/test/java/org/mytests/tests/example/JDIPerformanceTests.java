@@ -2,7 +2,8 @@ package org.mytests.tests.example;
 
 import com.epam.jdi.light.elements.complex.table.Line;
 import org.apache.commons.lang3.time.StopWatch;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mytests.tests.TestsInit;
 
 import static com.epam.jdi.light.elements.complex.table.Column.*;

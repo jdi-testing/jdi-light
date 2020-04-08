@@ -37,7 +37,6 @@ class DownloadDriverManager {
                 default:
                     throw exception("%s driver not supported for download");
             }
-            // wdm.config().getProperty("wdm.targetPath");
             if (getOs() == WIN) {
                 switch (platform) {
                     case X32:

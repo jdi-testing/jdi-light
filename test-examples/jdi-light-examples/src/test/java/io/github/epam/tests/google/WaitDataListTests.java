@@ -2,7 +2,8 @@ package io.github.epam.tests.google;
 
 import io.github.epam.StaticTestsInit;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.Header.*;
