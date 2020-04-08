@@ -28,6 +28,7 @@ import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.awt.Toolkit.*;
 import static java.lang.Integer.*;
 import static java.lang.String.format;
+import static java.util.jar.Pack200.Packer.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.openqa.selenium.PageLoadStrategy.*;
@@ -86,9 +87,7 @@ public class DriverData {
     private static String driverPath(String driverName) {
         return mergePath(getDriverFolder(), getOs() == WIN ? driverName + ".exe" : driverName);
     }
-    public static String LATEST_VERSION = "LATEST";
-    public static String DRIVER_VERSION = LATEST_VERSION;
-    public static String PRELATEST_VERSION = "PRELATEST";
+    public static String DRIVER_VERSION = LATEST;
     public static Platform PLATFORM = X32;
 
     public static OsTypes getOs() {

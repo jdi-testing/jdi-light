@@ -11,6 +11,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.driver.get.DriverVersion.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static java.lang.Integer.*;
@@ -34,8 +35,8 @@ public class DriverInfo extends DataClass<DriverInfo> {
     }
     public WebDriver getDriver() {
         return isLocal()
-                ? setupLocal()
-                : setupRemote();
+            ? setupLocal()
+            : setupRemote();
     }
     private Capabilities getCapabilities() {
         return capabilities.execute(initCapabilities);
@@ -59,7 +60,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             return getDriver.execute(getCapabilities());
         } catch (Throwable ex) {
             try {
-                if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST_VERSION)) {
+                if (isBlank(DRIVERS_FOLDER) && DRIVER_VERSION.equals(LATEST.value)) {
                     logger.info("Failed to download driver (%s %s) of latest version:" +
                             "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER_VERSION);
                     try {

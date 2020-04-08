@@ -26,6 +26,7 @@ import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.ScreenshotMaker.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.driver.get.DriverVersion.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
@@ -155,9 +156,9 @@ public class WebSettings {
         fillAction(p -> setDomain(p), "domain");
         if (DRIVER_NAME.equals(DEFAULT_DRIVER))
             fillAction(p -> DRIVER_NAME = p, "driver");
-        fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST_VERSION)
-                ? LATEST_VERSION : (p.equalsIgnoreCase(PRELATEST_VERSION))
-                ? PRELATEST_VERSION : p, "driver.version");
+        fillAction(p -> DRIVER_VERSION = p.equalsIgnoreCase(LATEST.value)
+                ? LATEST.value : (p.equalsIgnoreCase(PENULT.value))
+                ? PENULT.value : p, "driver.version");
         fillAction(p -> DRIVERS_FOLDER = p, "drivers.folder");
         fillAction(p -> SCREEN_PATH = p, "screens.folder");
         addStrategy(FAIL, SCREEN_STRATEGY);
