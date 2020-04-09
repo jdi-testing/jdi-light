@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.logger.ILogger;
@@ -114,6 +115,9 @@ public class WebSettings {
     public static synchronized void init() {
         if (initialized) return;
         try {
+            logger.info("RESEARCH1 websettings");
+            logger.info(WebPage.class.toString());
+            logger.info("RESEARCH2 websettings");
             getProperties(COMMON.testPropertiesPath);
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
             COMMON.strategy.action.execute();

@@ -455,12 +455,17 @@ public class WebPage extends DriverBase implements PageObject {
             return equals == null || equals.equals("") || value.contains(equals);
         }
     }
+
     public static void beforeNewPage(WebPage page) {
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
             visualWindowCheck();
         logger.toLog("Page '"+page.getName()+"' opened");
         TIMEOUTS.element.set(TIMEOUTS.page.get());
     }
+
+    public static void k(Integer page) {
+    }
+
     public static void beforeThisPage(WebPage page) {
         if (PAGE.checkPageOpen != PageChecks.NONE)
             page.checkOpened();
