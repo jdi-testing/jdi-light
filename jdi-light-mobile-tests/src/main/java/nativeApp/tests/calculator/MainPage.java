@@ -3,15 +3,12 @@ package nativeApp.calculator;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.mobile.elements.common.Button;
+import com.epam.jdi.light.mobile.elements.common.Text;
 import com.epam.jdi.light.mobile.elements.init.PageFactory;
-import com.epam.jdi.light.ui.html.elements.common.Text;
-import org.openqa.selenium.WebElement;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
-
-//import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class MainPage {
 
@@ -24,7 +21,7 @@ public class MainPage {
     Button del;
 
     @FindBy(id = LOCATOR_PATH + "formula")
-    WebElement formula;
+    Text formula;
 
     @FindBy(id = LOCATOR_PATH + "dec_point")
     Button dec_point;
@@ -37,7 +34,6 @@ public class MainPage {
 
     @FindBy(id = LOCATOR_PATH + "digit_0")
     Button digit_0;
-    // /hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.support.v4.view.ViewPager/android.widget.LinearLayout/android.view.View[1]/android.widget.Button[7]
     @FindBy(id = LOCATOR_PATH + "digit_1")
     Button digit_1;
     @FindBy(id = LOCATOR_PATH + "digit_2")
@@ -70,30 +66,12 @@ public class MainPage {
         PageFactory.initElements(this);
     }
 
-//    public double calculate(double number1, double number2, Operations operation){
-//        try{
-//            switch (operation){
-//                case ADDITION:
-//                    break;
-//                case SUBTRACTION:
-//                    break;
-//                case MULTIPLICATION:
-//                    break;
-//                case DIVISION:
-//                    break;
-//            }
-//        } catch(Exception exc){
-//            exc.getMessage();
-//        }
-//        return 0;
-//    }
-
     public double addition() {
         digit_1.click();
         op_add.click();
         digit_8.click();
         eq.click();
-        return Double.parseDouble(formula.getText());
+        return Double.parseDouble(formula.getValue());
     }
 
     public double additionReal() {
@@ -108,7 +86,7 @@ public class MainPage {
         digit_4.click();
 
         eq.click();
-        return parseDouble(formula.getText());
+        return parseDouble(formula.getValue());
     }
 
     private double parseDouble(String numberToParse) {
