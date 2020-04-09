@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.mobile.elements.init.PageFactory.initElements;
-import static nativeApp.contacts.StaticApp.mainPage;
-import static nativeApp.contacts.StaticApp.newContactPage;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class ContactsTests {
@@ -20,9 +18,9 @@ public class ContactsTests {
 
     @Test
     public void selectPhoneTypeTest(){
-        mainPage.createNewContact();
+        StaticApp.mainPage.createNewContact();
         //newContactPage.checkOpened();
-        newContactPage.fillInNewContactInformation();
+        StaticApp.newContactPage.fillInNewContactInformation();
     }
 
     @AfterClass(alwaysRun = true)
