@@ -24,7 +24,7 @@ public class DriverSettings {
     public OsTypes os;
     public Platform platform = X64;
     public GetDriverTypes getType = DOWNLOAD;
-    public String path = "C:/Selenium";
+    public String path = "";
     public PageLoadStrategy pageLoadStrategy = NORMAL;
     public ScreenSize screenSize = new ScreenSize();
     public String domain;
