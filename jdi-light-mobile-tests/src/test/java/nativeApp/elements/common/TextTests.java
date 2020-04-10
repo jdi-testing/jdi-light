@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class TextTests implements TestsInit {
-    private String text = "В этом аккаунте нет контактов";
+    private String text = "No contacts in this account";
 
     @Test
     public void getTextTest() {
@@ -25,7 +25,7 @@ public class TextTests implements TestsInit {
     public void isValidationTest() {
         noContactsInThisAccountText.is().enabled();
         noContactsInThisAccountText.is().text(is(text));
-        noContactsInThisAccountText.is().text(containsString("В этом аккаунте"));
+        noContactsInThisAccountText.is().text(containsString("No contacts in"));
     }
 
     @Test
