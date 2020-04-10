@@ -1,6 +1,6 @@
-package nativeApp.contacts;
+package nativeapp.contacts;
 
-public class StaticApp {
+public class StaticNativeApp {
 
     public static ContactsMainPage mainPage;
     public static CreateNewContact newContactPage;

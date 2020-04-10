@@ -1,6 +1,6 @@
-package nativeApp;
+package nativeapp;
 
-import nativeApp.contacts.StaticApp;
+import nativeapp.contacts.StaticNativeApp;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -12,7 +12,7 @@ public interface TestsInit {
 
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
-        initElements(StaticApp.class);
+        initElements(StaticNativeApp.class);
         logger.toLog("Run Tests");
     }
 
