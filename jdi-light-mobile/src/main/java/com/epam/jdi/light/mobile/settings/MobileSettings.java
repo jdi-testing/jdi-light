@@ -1,5 +1,6 @@
 package com.epam.jdi.light.mobile.settings;
 
+import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.settings.WebSettings;
 
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
@@ -19,6 +20,8 @@ public class MobileSettings {
         WebSettings.init();
         DRIVER.types.add("android", ANDROID_INFO);
         DRIVER.types.add("ios", IOS_INFO);
+        ELEMENT.beforeSearch = el -> {};
+        ELEMENT.clickType = ElementArea.CENTER;
         fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
         loadCapabilities("android.capabilities.path","android.properties",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_ANDROID.put(key.toString(), value.toString())));
