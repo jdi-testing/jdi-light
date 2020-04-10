@@ -7,14 +7,14 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.mobile.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static nativeapp.contacts.StaticNativeApp.mainPage;
-import static nativeapp.contacts.StaticNativeApp.newContactPage;
+import static nativeapp.contacts.StaticAppUtil.mainPage;
+import static nativeapp.contacts.StaticAppUtil.newContactPage;
 
 public class ContactsTests {
 
     @BeforeClass(alwaysRun = true)
     public static void setUp() {
-        initElements(StaticNativeApp.class);
+        initElements(StaticAppUtil.class);
         logger.toLog("Run Tests");
     }
 

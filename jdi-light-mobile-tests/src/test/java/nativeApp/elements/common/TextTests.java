@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import static nativeapp.contacts.ContactsMainPage.noContactsInThisAccountText;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class TextTests implements TestsInit {
     private String text = "В этом аккаунте нет контактов";
