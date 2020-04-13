@@ -311,6 +311,7 @@ public class WebSettings {
         String strategy = prop.trim().toLowerCase();
         switch (strategy) {
             case "jdi": return JDI;
+            case "jdi-stable": return JDI_STABLE;
             case "selenium": return SELENIUM;
             default: return JDI;
         }

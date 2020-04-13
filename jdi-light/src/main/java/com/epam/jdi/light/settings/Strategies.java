@@ -11,7 +11,7 @@ import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 
 public enum Strategies {
-    JDI(() -> {
+    JDI_STABLE(() -> {
         ELEMENT.getElementWithArgs = JdiSettings.GET_WITH_ARGS;
         ELEMENT.clickType = ElementArea.SMART_CLICK;
         ELEMENT.getTextType = TextTypes.SMART_TEXT;
@@ -19,6 +19,14 @@ public enum Strategies {
         ELEMENT.searchRule = Pair.$("Visible", VISIBLE_ELEMENT);
         COMMON.killBrowser = "afterAndBefore";
         ELEMENT.beforeSearch = UIElement::show;
+    }),
+    JDI(() -> {
+        ELEMENT.getElementWithArgs = JdiSettings.GET_WITH_ARGS;
+        ELEMENT.clickType = ElementArea.CENTER;
+        ELEMENT.getTextType = TextTypes.SMART_TEXT;
+        ELEMENT.setTextType = SetTextTypes.CLEAR_SEND_KEYS;
+        ELEMENT.searchRule = Pair.$("Visible", VISIBLE_ELEMENT);
+        ELEMENT.beforeSearch = el -> {};
     }),
     SELENIUM(() -> {
         ELEMENT.getElementWithArgs = SeleniumSettings.GET_WITH_ARGS;
