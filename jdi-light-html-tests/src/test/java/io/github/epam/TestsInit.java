@@ -1,5 +1,12 @@
 package io.github.epam;
 
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static io.github.com.StaticSite.homePage;
+
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
@@ -9,15 +16,10 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 import pseudo.site.PseudoSite;
 
-import static com.epam.jdi.light.driver.WebDriverUtils.*;
-import static com.epam.jdi.light.elements.init.InitActions.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static io.github.com.StaticSite.*;
 
 @Listeners(TestNGListener.class)
 public interface TestsInit {
+
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
