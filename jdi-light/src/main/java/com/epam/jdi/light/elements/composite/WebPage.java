@@ -434,8 +434,8 @@ public class WebPage extends DriverBase implements PageObject {
             return equals == null || equals.equals("") || value.contains(equals);
         }
     }
-
     public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
+
     public static void beforeNewPage(WebPage page) {
         if (CHECK_AFTER_OPEN == NEW_PAGE)
             page.checkOpened();

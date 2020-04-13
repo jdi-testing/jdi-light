@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.PropertyReader;
@@ -144,6 +145,7 @@ public class WebSettings {
     };
 
     public static synchronized void init() {
+//<<<<<<< HEAD
         getProperties(TEST_PROPERTIES_PATH);
         fillAction(p -> TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.element");
         fillAction(p -> PAGE_TIMEOUT = new Timeout(parseInt(p)), "timeout.wait.page");
@@ -166,6 +168,37 @@ public class WebSettings {
         fillAction(p -> CLICK_TYPE = getClickType(p), "click.type");
         fillAction(p -> TEXT_TYPE = getTextType(p), "text.type");
         fillAction(p -> SET_TEXT_TYPE = getSetTextType(p), "set.text.type");
+//=======
+//        if (initialized) return;
+//        try {
+//            logger.info("RESEARCH1 websettings");
+//            logger.info(WebPage.class.toString());
+//            logger.info("RESEARCH2 websettings");
+//            getProperties(COMMON.testPropertiesPath);
+//            fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
+//            COMMON.strategy.action.execute();
+//            fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
+//            fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
+//            fillAction(WebSettings::setDomain, "domain");
+//            if (DRIVER.name.equals(DEFAULT_DRIVER))
+//                fillAction(p -> DRIVER.name = p, "driver");
+//            fillAction(p -> DRIVER.version = p, "driver.version");
+//            fillAction(p -> DRIVER.path = p, "drivers.folder");
+//            fillAction(p -> SCREEN.path = p, "screens.folder");
+//            addStrategy(FAIL, LOGS.screenStrategy);
+//            fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
+//            fillAction(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");
+//            fillAction(p -> LOGS.requestsStrategy = getLoggerStrategy(p), "requests.strategy");
+//            fillAction(p -> COMMON.killBrowser = p, "browser.kill");
+//            fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
+//            fillAction(p -> DRIVER.screenSize.read(p), "browser.size");
+//            fillAction(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
+//            fillAction(p -> PAGE.checkPageOpen = parse(p), "page.check.after.open");
+//            fillAction(SoftAssert::setAssertType, "assert.type");
+//            fillAction(p -> ELEMENT.clickType = getClickType(p), "click.type");
+//            fillAction(p -> ELEMENT.getTextType = getTextType(p), "text.type");
+//            fillAction(p -> ELEMENT.setTextType = getSetTextType(p), "set.text.type");
+//>>>>>>> 404898b33... to reproduce
 
         // RemoteWebDriver properties
         fillAction(p -> DRIVER_REMOTE_URL = getRemoteUrl(p), "remote.type");
