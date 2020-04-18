@@ -74,8 +74,7 @@ public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implement
             toggle();
     }
 
-    @JDIAction("Select '{0}' in '{name}'")
-    @Override
+    @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(String value) {
         expand();
         list().select(value);

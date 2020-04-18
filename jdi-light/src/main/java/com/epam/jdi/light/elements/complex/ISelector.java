@@ -2,6 +2,8 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 
@@ -9,6 +11,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -64,5 +67,8 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     default int size() { return list().size(); }
     default boolean isEmpty() { return size() == 0; }
     default boolean isNotEmpty() { return size() > 0; }
+    default List<Label> labels() {
+        return map(list(), UIElement::label);
+    }
 
 }

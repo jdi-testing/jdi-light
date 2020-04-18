@@ -154,9 +154,9 @@ public class IsChecklistTests implements TestsInit {
         isWeather.is().displayed().selected("Hot option");
         isWeather.is().selected(Hot);
         isWeather.assertThat().values(hasItem("Sunny"))
-                .disabled(hasItem("Disabled"))
-                .enabled(not(hasItem("Disabled")))
-                .enabled(hasItems("Cold", "Sunny"));
+            .disabled(hasItem("Disabled"))
+            .enabled(not(hasItem("Disabled")))
+            .enabled(hasItems("Cold", "Sunny"));
     }
 
     @Test

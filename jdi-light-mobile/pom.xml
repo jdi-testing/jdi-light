@@ -7,14 +7,14 @@
     <artifactId>jdi-light-mobile</artifactId>
     <name>JDI Light Mobile</name>
     <packaging>pom</packaging>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
     <groupId>com.epam.jdi</groupId>
     
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.2.1</version>
+            <version>1.2.2</version>
         </dependency>
 
         <dependency>

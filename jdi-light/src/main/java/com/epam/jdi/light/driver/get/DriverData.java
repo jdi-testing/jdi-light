@@ -28,7 +28,6 @@ import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.awt.Toolkit.*;
 import static java.lang.String.format;
-import static java.util.jar.Pack200.Packer.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.*;

@@ -28,7 +28,6 @@ import static com.epam.jdi.light.common.UseSmartSearch.FALSE;
 import static com.epam.jdi.light.common.UseSmartSearch.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.DriverVersion.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;

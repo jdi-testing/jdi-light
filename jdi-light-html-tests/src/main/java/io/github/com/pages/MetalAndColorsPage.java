@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
+import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import io.github.com.custom.CustomDropdown;
 
 public class MetalAndColorsPage extends WebPage {
@@ -50,5 +51,8 @@ public class MetalAndColorsPage extends WebPage {
 	public static MultiSelector vegetables;
 	@ByText("Calculate") public static Button calculate;
 	@ByText("Submit") public static Button submit;
+
+	@UI("[name=custom_radio_odd]")
+	public static RadioButtons odds;
 
 }

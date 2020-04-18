@@ -15,6 +15,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.SearchStrategies.*;
+import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
@@ -252,8 +253,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         List<WebElement> result = elements;
         for (JFunc1<WebElement, Boolean> rule : searchRules().values())
             result = filter(result, rule::execute);
-        if (result.size() == 0)
-            throw exception(ELEMENTS_FILTERED_MESSAGE, elements.size(), toString(), getTimeout());
+        if (result.size() == 0 && textType == LABEL)
+            return elements;
         return result;
     }
     public WebElement getSmart() {
@@ -312,8 +313,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 els -> els.size() >= minAmount);
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
-        result = filterElements(result);
-        return result;
+        return result.size() > 1
+            ? filterElements(result)
+            : result;
     }
     protected List<WebElement> tryGetList() {
         List<WebElement> elements = getAll();

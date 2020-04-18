@@ -210,17 +210,24 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     /**
      * @param index
      */
-    @JDIAction(level = DEBUG) @Override
+    @Override
     public UIElement get(int index) {
         if (index < startIndex)
+            throw exception("Can't get element with index '%s'. Index should be %s or more", index, startIndex);
+        return getByIndex(index);
+    }
+
+    @JDIAction(level = DEBUG)
+    private UIElement getByIndex(int index) {
+        if (index < startIndex && startIndex > 0)
             throw exception("Can't get element with index '%s'. Index should be %s or more", index, startIndex);
         int getIndex = index - startIndex;
         if (locator.isEmpty() && elements.isUseCache() && elements.get().size() > getIndex)
             return elements.get().get(getIndex).value;
         return (locator.isTemplate()
-            ? tryGetByIndex(index)
-            : getElementByLocator(getIndex, index))
-        .setName(nameFromIndex(index));
+                ? tryGetByIndex(index)
+                : getElementByLocator(getIndex, index))
+                .setName(nameFromIndex(index));
     }
     private UIElement getElementByLocator(int getIndex, int index) {
         return locator.isXPath()
@@ -243,10 +250,17 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
-        UIElement element = get(value);
+        clickOnElement(get(value), value);
+    }
+    private void clickOnElement(UIElement element, String value) {
         if (element == null)
             throw exception("Can't get element '%s'", value);
-        element.click();
+        if (textType == LABEL) {
+            if (element.isDisabled())
+                throw exception("Can't perform click. Element is disabled");
+            element.label().click();
+        }
+        else element.click();
     }
 
     /**
@@ -380,7 +394,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
-        get(index).click();
+        clickOnElement(get(index), index+"");
     }
 
     /**
