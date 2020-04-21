@@ -7,7 +7,7 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MultiMap;
 import com.epam.jdi.tools.pairs.Pair;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.Collection;
 import java.util.Iterator;

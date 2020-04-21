@@ -16,8 +16,8 @@
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <aspectj.version>1.9.1</aspectj.version>
-        <allure.testng>2.7.0</allure.testng>
-        <allure.maven>2.9</allure.maven>
+        <allure.testng>2.13.2</allure.testng>
+        <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
     </properties>
 
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-eyes</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.6</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
