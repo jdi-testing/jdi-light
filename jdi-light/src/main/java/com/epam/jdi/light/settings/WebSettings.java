@@ -125,6 +125,7 @@ public class WebSettings {
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
             fillAction(p -> SCREEN.path = p, "screens.folder");
+            fillAction(p -> ELEMENT.startIndex = parseInt(p), "list.start.index");
             addStrategy(FAIL, LOGS.screenStrategy);
             fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
             fillAction(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");

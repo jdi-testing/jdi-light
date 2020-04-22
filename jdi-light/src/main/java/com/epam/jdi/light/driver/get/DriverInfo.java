@@ -12,7 +12,10 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.*;
+import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverVersion.*;
+import static com.epam.jdi.light.driver.get.OsTypes.*;
+import static com.epam.jdi.light.driver.get.Platform.*;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
@@ -53,10 +56,19 @@ public class DriverInfo extends DataClass<DriverInfo> {
             throw exception(ex, "Failed to setup remote "+ downloadType.name+" driver");
         }
     }
+    private Platform getDriverPlatform() {
+        if (DRIVER.platform != null)
+            return DRIVER.platform;
+        if (getOs() == WIN || getProperty("os.arch").contains("32"))
+            return X32;
+        if (getProperty("os.arch").contains("64"))
+            return X64;
+        throw exception("Unknown driver platform: %s. Only X32 or X64 allowed. Please specify exact platform in JDISettings.DRIVER.platform", getProperty("os.arch"));
+    }
     private WebDriver setupLocal() {
         try {
             String driverPath = isBlank(DRIVER.path)
-                ? downloadDriver(downloadType, DRIVER.platform, DRIVER.version)
+                ? downloadDriver(downloadType, getDriverPlatform(), DRIVER.version)
                 : path.execute();
             logger.info("Use driver path: " + driverPath);
             setProperty(properties, driverPath);
@@ -67,7 +79,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                     logger.info("Failed to download driver (%s %s) of latest version:" +
                             "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER.version);
                     try {
-                        downloadDriver(downloadType, DRIVER.platform, getBelowVersion());
+                        downloadDriver(downloadType, getDriverPlatform(), getBelowVersion());
                         return getDriver.execute(getCapabilities());
                     } catch (Throwable ex2) { throw exception(ex2, "Failed to download driver"); }
                 }

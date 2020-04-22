@@ -16,6 +16,7 @@ public class ElementSettings {
     public ElementArea clickType;
     public TextTypes getTextType;
     public SetTextTypes setTextType;
+    public int startIndex = 1;
     public Pair<String, JFunc1<WebElement, Boolean>> searchRule;
     public String smartTemplate = "#%s";
     public Pair<String, JFunc1<String, String>> smartName

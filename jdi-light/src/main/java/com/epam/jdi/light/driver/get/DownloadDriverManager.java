@@ -3,10 +3,8 @@ package com.epam.jdi.light.driver.get;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverInfo.*;
 import static com.epam.jdi.light.driver.get.DriverVersion.*;
-import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
 
@@ -37,17 +35,15 @@ class DownloadDriverManager {
                 default:
                     throw exception("%s driver not supported for download");
             }
-            if (getOs() == WIN) {
-                switch (platform) {
-                    case X32:
-                        wdm = wdm.arch32();
-                        break;
-                    case X64:
-                        wdm = wdm.arch64();
-                        break;
-                }
-                driverName += " " + platform;
+            switch (platform) {
+                case X32:
+                    wdm = wdm.arch32();
+                    break;
+                case X64:
+                    wdm = wdm.arch64();
+                    break;
             }
+            driverName += " " + platform;
             if (hasVersion(version)) {
                 wdm = wdm.version(version);
                 driverName += " " + version;

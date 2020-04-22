@@ -31,6 +31,8 @@ public class StaticSite {
 	public static SimpleTablePage tablePage;
 	@Url("/performance.html") @Title("Performance page")
 	public static PerformancePage performancePage;
+	@Url("/search.html")
+	public static SearchPage searchPage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;

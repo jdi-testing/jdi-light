@@ -25,6 +25,7 @@ import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -41,7 +42,7 @@ import static org.apache.commons.lang3.StringUtils.*;
  */
 public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList,
         HasAssert<UISelectAssert<UISelectAssert<?,?>, WebList>> {
-    protected int startIndex = 1;
+    protected int startIndex = ELEMENT.startIndex;
     public WebList indexFromZero() {
         return startIndex(0);
     }
@@ -219,7 +220,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     @JDIAction(level = DEBUG)
     private UIElement getByIndex(int index) {
-        if (index < startIndex && startIndex > 0)
+        if (index < startIndex)
             throw exception("Can't get element with index '%s'. Index should be %s or more", index, startIndex);
         int getIndex = index - startIndex;
         if (locator.isEmpty() && elements.isUseCache() && elements.get().size() > getIndex)
