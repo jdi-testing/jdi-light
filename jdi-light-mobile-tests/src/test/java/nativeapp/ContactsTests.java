@@ -1,4 +1,4 @@
-package nativeApp;
+package nativeapp;
 
 import nativeapp.contacts.StaticAppUtil;
 import org.testng.annotations.AfterClass;

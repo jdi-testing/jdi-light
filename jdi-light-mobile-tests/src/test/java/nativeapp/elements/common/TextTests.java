@@ -1,4 +1,4 @@
-package nativeApp.elements.common;
+package nativeapp.elements.common;
 
 import nativeapp.TestsInit;
 import org.testng.annotations.Test;
