@@ -1,5 +1,6 @@
-package nativeapp.contacts;
+package nativeapp;
 
+import nativeapp.contacts.StaticAppUtil;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
