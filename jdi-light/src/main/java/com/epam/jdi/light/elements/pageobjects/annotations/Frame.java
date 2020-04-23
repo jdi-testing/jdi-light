@@ -1,5 +1,7 @@
 package com.epam.jdi.light.elements.pageobjects.annotations;
 
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
+
 import java.lang.annotation.*;
 
 /**
@@ -9,5 +11,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface Frame {
-    String[] value();
+    @MarkupLocator String[] value();
 }

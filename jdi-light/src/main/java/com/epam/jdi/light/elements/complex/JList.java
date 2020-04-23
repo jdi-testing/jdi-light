@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class JList<T extends ICoreElement> extends ListBase<T, UISelectAssert<UISelectAssert<?,?>, JList<T>>> {
     public JList() {}
-    public JList(By locator) { super(locator); }
+    public JList(@MarkupLocator By locator) { super(locator); }
     public JList(List<WebElement> elements) {
         super(elements);
     }

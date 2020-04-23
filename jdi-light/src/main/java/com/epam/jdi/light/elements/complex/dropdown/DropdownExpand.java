@@ -150,7 +150,7 @@ public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implement
             return;
         JDropdown j = field.getAnnotation(JDropdown.class);
         setup(j.root(), j.value(), j.list(), j.expand());
-        autoClose = j.autoclose();
+        autoClose = j.autoClose();
     }
 
     @JDIAction("Check that '{name}' is displayed")

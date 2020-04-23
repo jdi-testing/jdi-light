@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
@@ -68,7 +69,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         textType = SMART_LIST;
         noValidation();
     }
-    public WebList(By locator) { this(); setLocator(locator);}
+    public WebList(@MarkupLocator By locator) { this(); setLocator(locator);}
     public WebList(List<WebElement> elements) {
         this(); setWebElements(elements);
     }
