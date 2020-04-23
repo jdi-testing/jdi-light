@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.*;
 import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
@@ -121,10 +122,10 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return this;
     }
 
-    public JDIBase setLocator(String locator) {
+    public JDIBase setLocator(@MarkupLocator String locator) {
         return setLocator(defineLocator(locator));
     }
-    public JDIBase setLocator(By locator) {
+    public JDIBase setLocator(@MarkupLocator By locator) {
         if (locator != null) {
             if (name.isEmpty())
                 name = shortBy(locator, this);
