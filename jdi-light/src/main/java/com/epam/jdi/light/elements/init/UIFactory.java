@@ -52,7 +52,7 @@ public class UIFactory {
                 ? new WebList()
                 : list(defineLocator(locator));
     }
-    public static WebList list(By byLocator) {
+    public static WebList list(@MarkupLocator By byLocator) {
         return new WebList(byLocator);
     }
     public static WebList list(List<WebElement> els, String name) {

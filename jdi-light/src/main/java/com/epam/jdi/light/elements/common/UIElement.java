@@ -686,21 +686,21 @@ public class UIElement extends JDIBase
         }
         return isNotBlank(text) ? text : ui.text(VALUE);
     };
-    public UIElement find(String by) {
+    public UIElement find(@MarkupLocator String by) {
         return $(by, this);
     }
-    public UIElement findFirst(String by) {
+    public UIElement findFirst(@MarkupLocator String by) {
         UIElement element = $(by, this);
         element.strictSearch(false);
         return element;
     }
-    public UIElement find(By by) {
+    public UIElement find(@MarkupLocator By by) {
         return $(by, this);
     }
-    public WebList finds(String by) {
+    public WebList finds(@MarkupLocator String by) {
         return $$(by, this);
     }
-    public WebList finds(By by) {
+    public WebList finds(@MarkupLocator By by) {
         return $$(by, this);
     }
     public UIElement firstChild() { return find("*"); }
