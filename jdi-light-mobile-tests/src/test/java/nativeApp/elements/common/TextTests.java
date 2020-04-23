@@ -3,7 +3,7 @@ package nativeApp.elements.common;
 import nativeapp.TestsInit;
 import org.testng.annotations.Test;
 
-import static nativeApp.contacts.ContactsMainPage.noContactsInThisAccountText;
+import static nativeapp.contacts.ContactsMainPage.noContactsInThisAccountText;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;

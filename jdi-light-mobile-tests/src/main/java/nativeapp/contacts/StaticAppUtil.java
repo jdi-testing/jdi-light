@@ -1,4 +1,4 @@
-package nativeApp.contacts;
+package nativeapp.contacts;
 
 public class StaticAppUtil {
 

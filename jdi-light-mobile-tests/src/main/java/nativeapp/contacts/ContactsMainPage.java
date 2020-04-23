@@ -1,4 +1,4 @@
-package nativeApp.contacts;
+package nativeapp.contacts;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.mobile.elements.common.Button;

@@ -1,4 +1,4 @@
-package nativeApp.contacts;
+package nativeapp.contacts;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
@@ -15,7 +15,7 @@ public class CreateNewContact {
     @FindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Spinner")
     private DataListOptions phoneType;
 
-//    public CreateNewContact(){
+//    public nativeapp.contacts.CreateNewContact(){
 //        PageFactory.initElements(this);
 //    }
 

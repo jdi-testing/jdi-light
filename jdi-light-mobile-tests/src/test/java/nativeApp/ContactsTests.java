@@ -1,5 +1,6 @@
-package nativeApp.contacts;
+package nativeApp;
 
+import nativeapp.contacts.StaticAppUtil;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -7,8 +8,8 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.mobile.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static nativeApp.contacts.StaticAppUtil.mainPage;
-import static nativeApp.contacts.StaticAppUtil.newContactPage;
+import static nativeapp.contacts.StaticAppUtil.mainPage;
+import static nativeapp.contacts.StaticAppUtil.newContactPage;
 
 public class ContactsTests {
 
