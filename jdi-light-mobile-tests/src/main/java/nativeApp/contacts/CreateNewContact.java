@@ -1,4 +1,4 @@
-package nativeapp.contacts;
+package nativeApp.contacts;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
