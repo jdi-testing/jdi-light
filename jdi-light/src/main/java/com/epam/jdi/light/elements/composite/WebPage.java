@@ -68,6 +68,7 @@ import org.openqa.selenium.logging.LogEntry;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebPage extends DriverBase implements PageObject {
+
     public String url = "";
     public String title = "";
 
@@ -75,12 +76,19 @@ public class WebPage extends DriverBase implements PageObject {
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = NONE;
 
+    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
+
     public <T> Form<T> asForm() {
-        return new Form<>().setPageObject(this).setup(Form.class,e->e.setName(getName()+" Form").setParent(this));
+        return new Form<>().setPageObject(this)
+            .setup(Form.class, e -> e.setName(getName() + " Form").setParent(this));
     }
 
     private static Safe<String> currentPage = new Safe<>("Undefined Page");
-    public static String getCurrentPage() { return currentPage.get(); }
+
+    public static String getCurrentPage() {
+        return currentPage.get();
+    }
+
     public static void setCurrentPage(WebPage page) {
         currentPage.set(page.getName());
     }
@@ -477,8 +485,6 @@ public class WebPage extends DriverBase implements PageObject {
             return equals == null || equals.equals("") || value.contains(equals);
         }
     }
-
-    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
 
     public static void beforeNewPage(WebPage page) {
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE) {

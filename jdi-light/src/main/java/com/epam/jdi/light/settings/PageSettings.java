@@ -8,23 +8,23 @@ import java.lang.reflect.InvocationTargetException;
 public class PageSettings {
 
     static {
-        TestLoaded.test("com.epam.jdi.light.elements.composite.WebPage");
+        TestLoadedUtil.test("com.epam.jdi.light.elements.composite.WebPage");
     }
 
     public PageChecks checkPageOpen = PageChecks.NONE;
 
     static {
-        TestLoaded.test("com.epam.jdi.light.elements.composite.WebPage");
+        TestLoadedUtil.test("com.epam.jdi.light.elements.composite.WebPage");
     }
 
     static {
-        TestLoaded.test("com.epam.jdi.light.elements.composite.WebPage");
+        TestLoadedUtil.test("com.epam.jdi.light.elements.composite.WebPage");
     }
 
     public JAction1<WebPage> beforeNewPage = (x) -> WebPage.beforeNewPage(x);
     public JAction1<WebPage> beforeEachStep = (x) -> WebPage.beforeThisPage(x);
 
-    public static class TestLoaded {
+    public static class TestLoadedUtil {
 
         public static void test(String path) {
             java.lang.reflect.Method m = null;

@@ -10,9 +10,10 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.AngularPage;
 
-
+@SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
+
     public static User DEFAULT_USER = new User();
 
     @Url("/angular.html")
@@ -27,6 +28,7 @@ public class StaticSite {
     public static Text userName;
 
     public static class User extends DataClass<User> {
+
         public String name = "Roman";
         public String password = "Jdi1234";
     }
