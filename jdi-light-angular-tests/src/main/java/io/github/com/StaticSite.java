@@ -17,7 +17,7 @@ public class StaticSite {
     public static User DEFAULT_USER = new User();
 
     @Url("/angular.html")
-    public static AngularPage angPage;
+    public static AngularPage angularPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
@@ -28,7 +28,6 @@ public class StaticSite {
     public static Text userName;
 
     public static class User extends DataClass<User> {
-
         public String name = "Roman";
         public String password = "Jdi1234";
     }

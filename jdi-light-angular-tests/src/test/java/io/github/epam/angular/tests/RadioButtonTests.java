@@ -1,6 +1,6 @@
 package io.github.epam.angular.tests;
 
-import static io.github.com.StaticSite.angPage;
+import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.basicRadioButtons;
 import static io.github.com.pages.AngularPage.firstBasicRadioButton;
 import static io.github.com.pages.AngularPage.secondBasicRadioButton;
@@ -16,7 +16,7 @@ public class RadioButtonTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        angPage.shouldBeOpened();
+        angularPage.shouldBeOpened();
     }
 
     @Test

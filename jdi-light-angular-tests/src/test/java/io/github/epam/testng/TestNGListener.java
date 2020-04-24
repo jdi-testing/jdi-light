@@ -1,10 +1,5 @@
 package io.github.epam.testng;
 
-/**
- * Created by Roman Iovlev on 14.02.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;

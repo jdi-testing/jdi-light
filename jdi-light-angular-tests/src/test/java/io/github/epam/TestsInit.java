@@ -1,6 +1,5 @@
 package io.github.epam;
 
-
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
