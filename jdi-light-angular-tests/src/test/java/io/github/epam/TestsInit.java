@@ -1,10 +1,9 @@
 package io.github.epam;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.driver.get.DriverData.DRIVER_NAME;
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
-import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 import com.epam.jdi.light.settings.WebSettings;
@@ -24,7 +23,7 @@ public class TestsInit {
         WebSettings.init();
         killAllSeleniumDrivers();
         initSite(StaticSite.class);
-        openUrl(DOMAIN);
+        openUrl(DRIVER.domain);
         logger.toLog("Run Tests");
     }
 
@@ -34,6 +33,6 @@ public class TestsInit {
     }
 
     protected static boolean isFireFox() {
-        return DRIVER_NAME.equalsIgnoreCase("firefox");
+        return DRIVER.name.equalsIgnoreCase("firefox");
     }
 }

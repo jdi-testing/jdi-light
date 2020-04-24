@@ -1,7 +1,7 @@
 package io.github.epam.site.steps;
 
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
-import static com.epam.jdi.light.settings.WebSettings.DOMAIN;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.StaticSite.loginForm;
 import static io.github.com.StaticSite.logout;
@@ -35,8 +35,8 @@ public class States {
 
     @Step
     public static void shouldBeLoggedOut() {
-        if (!WebPage.getUrl().contains(DOMAIN)) {
-            openUrl(DOMAIN);
+        if (!WebPage.getUrl().contains(DRIVER.domain)) {
+            openUrl(DRIVER.domain);
         }
         if (userName.isDisplayed()) {
             logout();

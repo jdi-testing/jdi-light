@@ -6,23 +6,12 @@
 
     <artifactId>jdi-light-angular-tests</artifactId>
     <name>JDI Angular Tests</name>
-    <version>1.1.16</version>
-    <groupId>com.epam.jdi</groupId>
-
-    <properties>
-        <driver>chrome</driver>
-        <allure.testng>2.13.1</allure.testng>
-        <allure.maven>2.10.0</allure.maven>
-        <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.5</aspectj.version>
-    </properties>
-
     <dependencies>
         <!--JDI-->
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-angular</artifactId>
-            <version>1.1.16</version>
+            <version>1.2.3</version>
         </dependency>
         <!--Allure config in parent-->
         <dependency>
@@ -41,6 +30,17 @@
             <version>7.0.0</version>
         </dependency>
     </dependencies>
+    <groupId>com.epam.jdi</groupId>
+
+    <properties>
+        <driver>chrome</driver>
+        <allure.testng>2.13.1</allure.testng>
+        <allure.maven>2.10.0</allure.maven>
+        <jetty.version>9.4.12.RC2</jetty.version>
+        <aspectj.version>1.9.1</aspectj.version>
+    </properties>
+
+    <version>1.2.3</version>
 
     <build>
         <plugins>
