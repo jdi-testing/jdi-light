@@ -1,224 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Angular</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-  <script src="https://unpkg.com/core-js@2.4.1/client/shim.min.js"></script>
-  <script src="https://unpkg.com/zone.js/dist/zone.min.js"></script>
-  <script src="https://unpkg.com/rxjs@5.0.0/bundles/Rx.min.js"></script>
+    <meta charset="utf-8"/>
+    <title>Angular</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://unpkg.com/core-js@2.4.1/client/shim.min.js"></script>
+    <script src="https://unpkg.com/zone.js/dist/zone.min.js"></script>
+    <script src="https://unpkg.com/rxjs@5.0.0/bundles/Rx.min.js"></script>
 
-  <script src="https://unpkg.com/@angular/core@2.0.0/bundles/core.umd.js"></script>
-  <script src="https://unpkg.com/@angular/common@2.0.0/bundles/common.umd.js"></script>
-  <script src="https://unpkg.com/@angular/compiler@2.0.0/bundles/compiler.umd.js"></script>
-  <script src="https://unpkg.com/@angular/forms@2.0.0/bundles/forms.umd.js"></script>
-  <script src="https://unpkg.com/@angular/platform-browser@2.0.0/bundles/platform-browser.umd.js"></script>
-  <script src="https://unpkg.com/@angular/platform-browser-dynamic@2.0.0/bundles/platform-browser-dynamic.umd.js"></script>
+    <script src="https://unpkg.com/@angular/core@2.0.0/bundles/core.umd.js"></script>
+    <script src="https://unpkg.com/@angular/common@2.0.0/bundles/common.umd.js"></script>
+    <script src="https://unpkg.com/@angular/compiler@2.0.0/bundles/compiler.umd.js"></script>
+    <script src="https://unpkg.com/@angular/forms@2.0.0/bundles/forms.umd.js"></script>
+    <script src="https://unpkg.com/@angular/platform-browser@2.0.0/bundles/platform-browser.umd.js"></script>
+    <script src="https://unpkg.com/@angular/platform-browser-dynamic@2.0.0/bundles/platform-browser-dynamic.umd.js"></script>
 
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="css/uui-all.css"/>
-  <link rel="stylesheet" href="css/custom-styles.css"/>
-  <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css"/>
-  <script src="js/lib/jquery-1.11.1.min.js"></script>
-  <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
-  <script src="js/lib/jquery.cookie.js"></script>
-  <script src="bootstrap/js/bootstrap.min.js"></script>
-  <script src="js/uui-core.min.js" type="text/javascript"></script>
-  <script src="js/utils.js" type="text/javascript"></script>
-  <!-- IE9- support of HTML5 -->
-  <!--[if lt IE 9]>
-  <script src="js/lib/html5shiv.js"></script>
-  <script src="js/lib/respond.min.js"></script>
-  <![endif]-->
-  <!-- Angular Section -->
-  <link rel="stylesheet" href="angular/styles.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <style>
-   hr {
-    border: none;
-    color: #464547;
-    background-color: #464547;
-    height: 2px;
-    margin-top: 30px;
-   }
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/uui-all.css"/>
+    <link rel="stylesheet" href="css/custom-styles.css"/>
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css"/>
+    <script src="js/lib/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/uui-core.min.js" type="text/javascript"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
+    <!-- IE9- support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/lib/html5shiv.js"></script>
+    <script src="js/lib/respond.min.js"></script>
+    <![endif]-->
+    <!-- Angular Section -->
+    <link rel="stylesheet" href="angular/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
    .example-h2 {
     margin-top: 20px;
     margin-bottom: 25px;
+    font-size: 175%;
    }
-  </style>
+   .angular-h2 {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 30px;
+   }
+    </style>
 </head>
 <body>
 <header>
-  <div class="replace site-header">replace</div>
+    <div class="replace site-header">replace</div>
 </header>
 
 <div class="wrapper">
-  <div class="replace left-side-bar">replace</div>
-  <div class="uui-main-container page-inside">
-    <div class="mat-app-background basic-container">
-      <radio-overview-example>loading basic radios</radio-overview-example><hr>
-      <radio-ng-model-example>loading radios with ngModel</radio-ng-model-example><hr>
-      <checkbox-overview-example>loading basic checkbox</checkbox-overview-example><hr>
-      <checkbox-configurable-example>loading checkbox configuration</checkbox-configurable-example><hr>
-      <slide-toggle-overview-example>loading</slide-toggle-overview-example><hr>
-      <slide-toggle-configurable-example>loading</slide-toggle-configurable-example><hr>
-      <autocomplete-overview-example>loading</autocomplete-overview-example><hr>
-      <autocomplete-simple-example>loading</autocomplete-simple-example><hr>
-      <autocomplete-display-example>loading</autocomplete-display-example><hr>
-      <autocomplete-filter-example>loading</autocomplete-filter-example><hr>
-      <autocomplete-optgroup-example>loading</autocomplete-optgroup-example><hr>
-      <autocomplete-auto-active-first-option-example>loading</autocomplete-auto-active-first-option-example><hr>
-      <select-overview-example>loading</select-overview-example><hr>
-      <select-value-binding-example>loading</select-value-binding-example><hr>
-      <select-form-example>loading</select-form-example><hr>
-      <select-hint-error-example>loading</select-hint-error-example><hr>
-      <select-disabled-example>loading</select-disabled-example><hr>
-      <select-reset-example>loading</select-reset-example><hr>
-      <select-optgroup-example>loading</select-optgroup-example><hr>
-      <select-multiple-example>loading</select-multiple-example><hr>
-      <select-custom-trigger-example>loading</select-custom-trigger-example><hr>
-      <select-no-ripple-example>loading</select-no-ripple-example><hr>
-      <select-panel-class-example>loading</select-panel-class-example><hr>
-      <select-error-state-matcher-example>loading</select-error-state-matcher-example><hr>
-      <input-overview-example>loading</input-overview-example><hr>
-      <input-error-state-matcher-example>loading</input-error-state-matcher-example><hr>
-      <text-field-autosize-textarea-example>loading</text-field-autosize-textarea-example><hr>
-      <input-clearable-example>loading</input-clearable-example><hr>
-      <input-errors-example>loading</input-errors-example><hr>
-      <input-form-example>loading</input-form-example><hr>
-      <input-hint-example>loading</input-hint-example><hr>
-      <input-prefix-suffix-example>loading</input-prefix-suffix-example><hr>
-      <slider-overview-example>loading</slider-overview-example><hr>
-      <slider-formatting-example>loading</slider-formatting-example><hr>
-      <slider-configurable-example>loading</slider-configurable-example><hr>
-      <datepicker-overview-example>loading</datepicker-overview-example><hr>
-      <datepicker-start-view-example>loading</datepicker-start-view-example><hr>
-      <datepicker-value-example>loading</datepicker-value-example><hr>
-      <datepicker-min-max-example>loading</datepicker-min-max-example><hr>
-      <datepicker-filter-example>loading</datepicker-filter-example><hr>
-      <datepicker-events-example>loading</datepicker-events-example><hr>
-      <datepicker-disabled-example>loading</datepicker-disabled-example><hr>
-      <datepicker-touch-example>loading</datepicker-touch-example><hr>
-      <datepicker-api-example>loading</datepicker-api-example><hr>
-      <!--<datepicker-locale-example>loading</datepicker-locale-example><hr>
-      <datepicker-moment-example>loading</datepicker-moment-example><hr>
-      <datepicker-formats-example>loading</datepicker-formats-example><hr>-->
-      <form-field-overview-example>loading</form-field-overview-example><hr>
-      <form-field-label-example>loading</form-field-label-example><hr>
-      <form-field-appearance-example>loading</form-field-appearance-example><hr>
-      <form-field-hint-example>loading</form-field-hint-example><hr>
-      <form-field-error-example>loading</form-field-error-example><hr>
-      <form-field-prefix-suffix-example>loading</form-field-prefix-suffix-example><hr>
-      <form-field-theming-example>loading</form-field-theming-example><hr>
-      <form-field-custom-control-example>loading</form-field-custom-control-example><hr>
-      <menu-overview-example>loading</menu-overview-example><hr>
-      <menu-icons-example>loading</menu-icons-example><hr>
-      <nested-menu-example>loading</nested-menu-example><hr>
-      <toolbar-overview-example>loading</toolbar-overview-example><hr>
-      <toolbar-multirow-example>loading</toolbar-multirow-example><hr>
-      <sidenav-overview-example>loading</sidenav-overview-example><hr>
-      <sidenav-drawer-overview-example>loading</sidenav-drawer-overview-example><hr>
-      <!-- There should be some more sidenavs-->
-      <sidenav-autosize-example>loading</sidenav-autosize-example><hr>
-      <!-- There should be some more sidenavs-->
-      <card-overview-example>loading</card-overview-example><hr>
-      <card-fancy-example>loading</card-fancy-example><hr>
-      <divider-overview-example>loading</divider-overview-example><hr>
-      <expansion-overview-example>loading</expansion-overview-example><hr>
-      <expansion-steps-example>loading</expansion-steps-example><hr>
-      <grid-list-overview-example>loading</grid-list-overview-example><hr>
-      <grid-list-dynamic-example>loading</grid-list-dynamic-example><hr>
-      <list-overview-example>loading</list-overview-example><hr>
-      <list-sections-example>loading</list-sections-example><hr>
-      <tree-dynamic-example>loading</tree-dynamic-example><hr>
-      <tree-flat-overview-example>loading</tree-flat-overview-example><hr>
-      <tree-checklist-example>loading</tree-checklist-example><hr>
-      <tree-nested-overview-example>loading</tree-nested-overview-example><hr>
-      <tree-loadmore-example>loading</tree-loadmore-example><hr>
-      <stepper-overview-example>loading</stepper-overview-example><hr>
-      <stepper-optional-example>loading</stepper-optional-example><hr>
-      <tab-group-basic-example>loading</tab-group-basic-example><hr>
-      <tab-group-custom-label-example>loading</tab-group-custom-label-example><hr>
-      <tab-group-dynamic-height-example>loading</tab-group-dynamic-height-example><hr>
-      <tab-group-dynamic-example>loading</tab-group-dynamic-example><hr>
-      <tab-group-header-below-example>loading</tab-group-header-below-example><hr>
-      <tab-group-lazy-loaded-example>loading</tab-group-lazy-loaded-example><hr>
-      <tab-group-theme-example>loading</tab-group-theme-example><hr>
-      <tab-group-async-example>loading</tab-group-async-example><hr>
-      <tab-nav-bar-basic-example>loading</tab-nav-bar-basic-example><hr>
-
-      <button-types-example>loading buttons</button-types-example><hr>
-      <button-toggle-overview-example>loading basic button-toggles</button-toggle-overview-example><hr>
-      <button-toggle-exclusive-example>loading basic exclusive selection button-toggles</button-toggle-exclusive-example><hr>
-      <badge-overview-example>loading basic badge</badge-overview-example><hr>
-      <chips-overview-example>loading basic chips</chips-overview-example><hr>
-      <chips-stacked-example>loading stacked chips</chips-stacked-example><hr>
-      <chips-autocomplete-example>loading chips autocomplete</chips-autocomplete-example><hr>
-      <chips-input-example>loading chips with input</chips-input-example><hr>
-      <icon-overview-example>loading basic icon</icon-overview-example><hr>
-      <!--<icon-svg-example>loading SVG icon</icon-svg-example><hr>-->
-      <progress-spinner-overview-example>loading basic progress spinner</progress-spinner-overview-example><hr>
-      <progress-spinner-configurable-example>loading configurable spinner</progress-spinner-configurable-example><hr>
-      <progress-bar-configurable-example>loading configurable progress bar</progress-bar-configurable-example><hr>
-      <ripple-overview-example>loading ripple</ripple-overview-example><hr>
-
-      <bottom-sheet-overview-example>loading bottom sheet</bottom-sheet-overview-example><hr>
-      <dialog-overview-example>loading dialog</dialog-overview-example><hr>
-      <snack-bar-overview-example>loading basic snack-bar</snack-bar-overview-example><hr>
-      <snack-bar-component-example>loading snack-bar with a custom component</snack-bar-component-example><hr>
-      <tooltip-overview-example>loading tooltip overview</tooltip-overview-example><hr>
-      <tooltip-position-example>loading tooltip with a custom position</tooltip-position-example><hr>
-      <tooltip-custom-class-example>loading red tooltip</tooltip-custom-class-example><hr>
-      <tooltip-delay-example>loading tooltip with a show and hide delay</tooltip-delay-example><hr>
-      <tooltip-disabled-example>loading tooltip that can be disabled</tooltip-disabled-example><hr>
-      <tooltip-manual-example>loading tooltip that can be manually shown/hidden</tooltip-manual-example><hr>
-      <tooltip-message-example>loading tooltip with a changing message</tooltip-message-example><hr>
-      <tooltip-modified-defaults-example>loading tooltip with a show and hide delay</tooltip-modified-defaults-example><hr>
-      <tooltip-auto-hide-example>loading tooltip that demonstrates auto-hiding when it clips out of its scrolling container</tooltip-auto-hide-example><hr>
-
-      <paginator-configurable-example>loading configurable paginator</paginator-configurable-example><hr>
-      <sort-overview-example>loading sorting overview</sort-overview-example><hr>
-      <table-basic-example>loading basic use of &apos;&lt;table mat-table&gt;&apos;</table-basic-example><hr>
-      <table-basic-flex-example>loading basic use of &apos;&lt;mat-table&gt;&apos;(uses display flex)</table-basic-flex-example><hr>
-      <table-dynamic-columns-example>loading table with dynamically changing the columns</table-dynamic-columns-example><hr>
-      <table-expandable-rows-example>loading table with expandable rows</table-expandable-rows-example><hr>
-      <table-filtering-example>loading table with filtering</table-filtering-example><hr>
-      <table-footer-row-example>loading footer row table</table-footer-row-example><hr>
-      <table-http-example>loading table retrieving data through HTTP</table-http-example><hr>
-      <table-multiple-header-footer-example>loading table with multiple header and footer rows</table-multiple-header-footer-example><hr>
-      <table-overview-example>loading table with sorting, pagination, and filtering</table-overview-example><hr>
-      <table-pagination-example>loading table with pagination</table-pagination-example><hr>
-      <table-row-context-example>loading table showing each row context properties</table-row-context-example><hr>
-      <table-selection-example>loading table with selection</table-selection-example><hr>
-      <table-sorting-example>loading table with sorting</table-sorting-example><hr>
-      <table-sticky-columns-example>loading table with sticky columns</table-sticky-columns-example><hr>
-      <table-sticky-footer-example>loading table with sticky footer</table-sticky-footer-example><hr>
-      <table-sticky-header-example>loading table with sticky header</table-sticky-header-example><hr>
-      <table-reorderable-example>loading table with re-orderable columns</table-reorderable-example><hr>
+    <div class="replace left-side-bar">replace</div>
+    <div class="uui-main-container page-inside">
+        <div class="mat-app-background basic-container">
+            <h2 class="angular-h2">
+                <a href="https://material.angular.io/components/radio/overview"><i class="fa fa-info-circle"></i>
+                    Radio button</a></h2>
+            <radio-overview-example>loading basic radios</radio-overview-example>
+            <radio-ng-model-example>loading radios with ngModel</radio-ng-model-example>
+            <h2 class="angular-h2">
+                <a href="https://material.angular.io/components/checkbox/overview"><i class="fa fa-info-circle"></i>
+                    Checkbox</a></h2>
+            <checkbox-overview-example>loading basic checkbox</checkbox-overview-example>
+            <div class="doc-space line"></div>
+            <checkbox-configurable-example>loading checkbox configuration</checkbox-configurable-example>
+            <h2 class="angular-h2">
+                <a href="https://material.angular.io/components/slide-toggle/overview"><i class="fa fa-info-circle"></i>
+                    Slide toggle</a>
+            </h2>
+            <slide-toggle-overview-example>loading</slide-toggle-overview-example>
+            <div class="doc-space line"></div>
+            <slide-toggle-configurable-example>loading</slide-toggle-configurable-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <autocomplete-overview-example>loading</autocomplete-overview-example>
+            <div class="doc-space line"></div>
+            <autocomplete-simple-example>loading</autocomplete-simple-example>
+            <div class="doc-space line"></div>
+            <autocomplete-display-example>loading</autocomplete-display-example>
+            <div class="doc-space line"></div>
+            <autocomplete-filter-example>loading</autocomplete-filter-example>
+            <div class="doc-space line"></div>
+            <autocomplete-optgroup-example>loading</autocomplete-optgroup-example>
+            <div class="doc-space line"></div>
+            <autocomplete-auto-active-first-option-example>loading</autocomplete-auto-active-first-option-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <select-overview-example>loading</select-overview-example>
+            <div class="doc-space line"></div>
+            <select-value-binding-example>loading</select-value-binding-example>
+            <div class="doc-space line"></div>
+            <select-form-example>loading</select-form-example>
+            <div class="doc-space line"></div>
+            <select-hint-error-example>loading</select-hint-error-example>
+            <div class="doc-space line"></div>
+            <select-disabled-example>loading</select-disabled-example>
+            <div class="doc-space line"></div>
+            <select-reset-example>loading</select-reset-example>
+            <div class="doc-space line"></div>
+            <select-optgroup-example>loading</select-optgroup-example>
+            <div class="doc-space line"></div>
+            <select-multiple-example>loading</select-multiple-example>
+            <div class="doc-space line"></div>
+            <select-custom-trigger-example>loading</select-custom-trigger-example>
+            <div class="doc-space line"></div>
+            <select-no-ripple-example>loading</select-no-ripple-example>
+            <div class="doc-space line"></div>
+            <select-panel-class-example>loading</select-panel-class-example>
+            <div class="doc-space line"></div>
+            <select-error-state-matcher-example>loading</select-error-state-matcher-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <input-overview-example>loading</input-overview-example>
+            <div class="doc-space line"></div>
+            <input-error-state-matcher-example>loading</input-error-state-matcher-example>
+            <div class="doc-space line"></div>
+            <text-field-autosize-textarea-example>loading</text-field-autosize-textarea-example>
+            <div class="doc-space line"></div>
+            <input-clearable-example>loading</input-clearable-example>
+            <div class="doc-space line"></div>
+            <input-errors-example>loading</input-errors-example>
+            <div class="doc-space line"></div>
+            <input-form-example>loading</input-form-example>
+            <div class="doc-space line"></div>
+            <input-hint-example>loading</input-hint-example>
+            <div class="doc-space line"></div>
+            <input-prefix-suffix-example>loading</input-prefix-suffix-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <slider-overview-example>loading</slider-overview-example>
+            <div class="doc-space line"></div>
+            <slider-formatting-example>loading</slider-formatting-example>
+            <div class="doc-space line"></div>
+            <slider-configurable-example>loading</slider-configurable-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <datepicker-overview-example>loading</datepicker-overview-example>
+            <div class="doc-space line"></div>
+            <datepicker-start-view-example>loading</datepicker-start-view-example>
+            <div class="doc-space line"></div>
+            <datepicker-value-example>loading</datepicker-value-example>
+            <div class="doc-space line"></div>
+            <datepicker-min-max-example>loading</datepicker-min-max-example>
+            <div class="doc-space line"></div>
+            <datepicker-filter-example>loading</datepicker-filter-example>
+            <div class="doc-space line"></div>
+            <datepicker-events-example>loading</datepicker-events-example>
+            <div class="doc-space line"></div>
+            <datepicker-disabled-example>loading</datepicker-disabled-example>
+            <div class="doc-space line"></div>
+            <datepicker-touch-example>loading</datepicker-touch-example>
+            <div class="doc-space line"></div>
+            <datepicker-api-example>loading</datepicker-api-example>
+            <div class="doc-space line"></div>
+            <!--<datepicker-locale-example>loading</datepicker-locale-example><div class="doc-space line"></div>
+            <datepicker-moment-example>loading</datepicker-moment-example><div class="doc-space line"></div>
+            <datepicker-formats-example>loading</datepicker-formats-example><div class="doc-space line"></div>-->
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <form-field-overview-example>loading</form-field-overview-example>
+            <div class="doc-space line"></div>
+            <form-field-label-example>loading</form-field-label-example>
+            <div class="doc-space line"></div>
+            <form-field-appearance-example>loading</form-field-appearance-example>
+            <div class="doc-space line"></div>
+            <form-field-hint-example>loading</form-field-hint-example>
+            <div class="doc-space line"></div>
+            <form-field-error-example>loading</form-field-error-example>
+            <div class="doc-space line"></div>
+            <form-field-prefix-suffix-example>loading</form-field-prefix-suffix-example>
+            <div class="doc-space line"></div>
+            <form-field-theming-example>loading</form-field-theming-example>
+            <div class="doc-space line"></div>
+            <form-field-custom-control-example>loading</form-field-custom-control-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <menu-overview-example>loading</menu-overview-example>
+            <div class="doc-space line"></div>
+            <menu-icons-example>loading</menu-icons-example>
+            <div class="doc-space line"></div>
+            <nested-menu-example>loading</nested-menu-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <toolbar-overview-example>loading</toolbar-overview-example>
+            <div class="doc-space line"></div>
+            <toolbar-multirow-example>loading</toolbar-multirow-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <sidenav-overview-example>loading</sidenav-overview-example>
+            <div class="doc-space line"></div>
+            <sidenav-drawer-overview-example>loading</sidenav-drawer-overview-example>
+            <div class="doc-space line"></div>
+            <!-- There should be some more sidenavs-->
+            <sidenav-autosize-example>loading</sidenav-autosize-example>
+            <div class="doc-space line"></div>
+            <!-- There should be some more sidenavs-->
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <card-overview-example>loading</card-overview-example>
+            <div class="doc-space line"></div>
+            <card-fancy-example>loading</card-fancy-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <divider-overview-example>loading</divider-overview-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <expansion-overview-example>loading</expansion-overview-example>
+            <div class="doc-space line"></div>
+            <expansion-steps-example>loading</expansion-steps-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <grid-list-overview-example>loading</grid-list-overview-example>
+            <div class="doc-space line"></div>
+            <grid-list-dynamic-example>loading</grid-list-dynamic-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <list-overview-example>loading</list-overview-example>
+            <div class="doc-space line"></div>
+            <list-sections-example>loading</list-sections-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <tree-dynamic-example>loading</tree-dynamic-example>
+            <div class="doc-space line"></div>
+            <tree-flat-overview-example>loading</tree-flat-overview-example>
+            <div class="doc-space line"></div>
+            <tree-checklist-example>loading</tree-checklist-example>
+            <div class="doc-space line"></div>
+            <tree-nested-overview-example>loading</tree-nested-overview-example>
+            <div class="doc-space line"></div>
+            <tree-loadmore-example>loading</tree-loadmore-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <stepper-overview-example>loading</stepper-overview-example>
+            <div class="doc-space line"></div>
+            <stepper-optional-example>loading</stepper-optional-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <tab-group-basic-example>loading</tab-group-basic-example>
+            <div class="doc-space line"></div>
+            <tab-group-custom-label-example>loading</tab-group-custom-label-example>
+            <div class="doc-space line"></div>
+            <tab-group-dynamic-height-example>loading</tab-group-dynamic-height-example>
+            <div class="doc-space line"></div>
+            <tab-group-dynamic-example>loading</tab-group-dynamic-example>
+            <div class="doc-space line"></div>
+            <tab-group-header-below-example>loading</tab-group-header-below-example>
+            <div class="doc-space line"></div>
+            <tab-group-lazy-loaded-example>loading</tab-group-lazy-loaded-example>
+            <div class="doc-space line"></div>
+            <tab-group-theme-example>loading</tab-group-theme-example>
+            <div class="doc-space line"></div>
+            <tab-group-async-example>loading</tab-group-async-example>
+            <div class="doc-space line"></div>
+            <tab-nav-bar-basic-example>loading</tab-nav-bar-basic-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <button-types-example>loading buttons</button-types-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <button-toggle-overview-example>loading basic button-toggles</button-toggle-overview-example>
+            <div class="doc-space line"></div>
+            <button-toggle-exclusive-example>loading basic exclusive selection button-toggles
+            </button-toggle-exclusive-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <badge-overview-example>loading basic badge</badge-overview-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <chips-overview-example>loading basic chips</chips-overview-example>
+            <div class="doc-space line"></div>
+            <chips-stacked-example>loading stacked chips</chips-stacked-example>
+            <div class="doc-space line"></div>
+            <chips-autocomplete-example>loading chips autocomplete</chips-autocomplete-example>
+            <div class="doc-space line"></div>
+            <chips-input-example>loading chips with input</chips-input-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <icon-overview-example>loading basic icon</icon-overview-example>
+            <div class="doc-space line"></div>
+            <!--<icon-svg-example>loading SVG icon</icon-svg-example><div class="doc-space line"></div>-->
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <progress-spinner-overview-example>loading basic progress spinner</progress-spinner-overview-example>
+            <div class="doc-space line"></div>
+            <progress-spinner-configurable-example>loading configurable spinner</progress-spinner-configurable-example>
+            <div class="doc-space line"></div>
+            <progress-bar-configurable-example>loading configurable progress bar</progress-bar-configurable-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <ripple-overview-example>loading ripple</ripple-overview-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <bottom-sheet-overview-example>loading bottom sheet</bottom-sheet-overview-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <dialog-overview-example>loading dialog</dialog-overview-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <snack-bar-overview-example>loading basic snack-bar</snack-bar-overview-example>
+            <div class="doc-space line"></div>
+            <snack-bar-component-example>loading snack-bar with a custom component</snack-bar-component-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <tooltip-overview-example>loading tooltip overview</tooltip-overview-example>
+            <div class="doc-space line"></div>
+            <tooltip-position-example>loading tooltip with a custom position</tooltip-position-example>
+            <div class="doc-space line"></div>
+            <tooltip-custom-class-example>loading red tooltip</tooltip-custom-class-example>
+            <div class="doc-space line"></div>
+            <tooltip-delay-example>loading tooltip with a show and hide delay</tooltip-delay-example>
+            <div class="doc-space line"></div>
+            <tooltip-disabled-example>loading tooltip that can be disabled</tooltip-disabled-example>
+            <div class="doc-space line"></div>
+            <tooltip-manual-example>loading tooltip that can be manually shown/hidden</tooltip-manual-example>
+            <div class="doc-space line"></div>
+            <tooltip-message-example>loading tooltip with a changing message</tooltip-message-example>
+            <div class="doc-space line"></div>
+            <tooltip-modified-defaults-example>loading tooltip with a show and hide delay
+            </tooltip-modified-defaults-example>
+            <div class="doc-space line"></div>
+            <tooltip-auto-hide-example>loading tooltip that demonstrates auto-hiding when it clips out of its scrolling
+                container
+            </tooltip-auto-hide-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <paginator-configurable-example>loading configurable paginator</paginator-configurable-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <sort-overview-example>loading sorting overview</sort-overview-example>
+            <h2 class="angular-h2">
+                <a href=""><i class="fa fa-info-circle"></i></a></h2>
+            <table-basic-example>loading basic use of &apos;&lt;table mat-table&gt;&apos;</table-basic-example>
+            <div class="doc-space line"></div>
+            <table-basic-flex-example>loading basic use of &apos;&lt;mat-table&gt;&apos;(uses display flex)
+            </table-basic-flex-example>
+            <div class="doc-space line"></div>
+            <table-dynamic-columns-example>loading table with dynamically changing the columns
+            </table-dynamic-columns-example>
+            <div class="doc-space line"></div>
+            <table-expandable-rows-example>loading table with expandable rows</table-expandable-rows-example>
+            <div class="doc-space line"></div>
+            <table-filtering-example>loading table with filtering</table-filtering-example>
+            <div class="doc-space line"></div>
+            <table-footer-row-example>loading footer row table</table-footer-row-example>
+            <div class="doc-space line"></div>
+            <table-http-example>loading table retrieving data through HTTP</table-http-example>
+            <div class="doc-space line"></div>
+            <table-multiple-header-footer-example>loading table with multiple header and footer rows
+            </table-multiple-header-footer-example>
+            <div class="doc-space line"></div>
+            <table-overview-example>loading table with sorting, pagination, and filtering</table-overview-example>
+            <div class="doc-space line"></div>
+            <table-pagination-example>loading table with pagination</table-pagination-example>
+            <div class="doc-space line"></div>
+            <table-row-context-example>loading table showing each row context properties</table-row-context-example>
+            <div class="doc-space line"></div>
+            <table-selection-example>loading table with selection</table-selection-example>
+            <div class="doc-space line"></div>
+            <table-sorting-example>loading table with sorting</table-sorting-example>
+            <div class="doc-space line"></div>
+            <table-sticky-columns-example>loading table with sticky columns</table-sticky-columns-example>
+            <div class="doc-space line"></div>
+            <table-sticky-footer-example>loading table with sticky footer</table-sticky-footer-example>
+            <div class="doc-space line"></div>
+            <table-sticky-header-example>loading table with sticky header</table-sticky-header-example>
+            <div class="doc-space line"></div>
+            <table-reorderable-example>loading table with re-orderable columns</table-reorderable-example>
+            <div class="doc-space line"></div>
+        </div>
+        <!-- Angular Modules. Don't change type! -->
+        <script src="angular/runtime-es2015.js" type="text/javascript"></script>
+        <script src="angular/runtime-es5.js" nomodule defer></script>
+        <script src="angular/polyfills-es5.js" nomodule defer></script>
+        <script src="angular/polyfills-es2015.js" type="text/javascript"></script>
+        <script src="angular/vendor-es2015.js" type="text/javascript"></script>
+        <script src="angular/vendor-es5.js" nomodule defer></script>
+        <script src="angular/main-es2015.js" type="text/javascript"></script>
+        <script src="angular/main-es5.js" nomodule defer></script>
     </div>
-    <!-- Angular Modules. Don't change type! -->
-    <script src="angular/runtime-es2015.js" type="text/javascript"></script>
-    <script src="angular/runtime-es5.js" nomodule defer></script>
-    <script src="angular/polyfills-es5.js" nomodule defer></script>
-    <script src="angular/polyfills-es2015.js" type="text/javascript"></script>
-    <script src="angular/vendor-es2015.js" type="text/javascript"></script>
-    <script src="angular/vendor-es5.js" nomodule defer></script>
-    <script src="angular/main-es2015.js" type="text/javascript"></script>
-    <script src="angular/main-es5.js" nomodule defer></script>
-  </div>
 </div>
 <footer>
-  <div class="replace footer">replace</div>
+    <div class="replace footer">replace</div>
 </footer>
 </body>
 <Script language="JavaScript">
         UUI.Vertical_Menu.init({"open": true});
-    </script>
+
+
+
+
+
+</script>
 <script>
 		includeSideBar();
 		activateTopElement(5,7);
-	</script>
+
+
+
+
+
+</script>
 </html>
