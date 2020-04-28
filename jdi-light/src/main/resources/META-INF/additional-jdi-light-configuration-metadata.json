@@ -1,0 +1,173 @@
+{
+  "properties": [
+    {
+      "name": "strategy",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "jdi"
+    },
+    {
+      "name": "timeout.wait.element",
+      "type": "java.lang.Integer",
+      "description": "Timeout in seconds to wait for an element on the opened page",
+      "defaultValue": 5
+    },
+    {
+      "name": "timeout.wait.page",
+      "type": "java.lang.Integer",
+      "description": "Timeout in seconds to wait for a newly opened page to load",
+      "defaultValue": 20
+    },
+    {
+      "name": "domain",
+      "type": "java.lang.String",
+      "description": "Web application root URL (used if we work with a single application in tests)"
+    },
+    {
+      "name": "driver",
+      "type": "java.lang.String",
+      "description": "Type of web driver which is used to run the tests.",
+      "defaultValue": "chrome"
+    },
+    {
+      "name": "driver.version",
+      "type": "java.lang.String",
+      "description": "Version of web driver",
+      "defaultValue": "latest"
+    },
+    {
+      "name": "drivers.folder",
+      "type": "java.lang.String",
+      "description": ""
+    },
+    {
+      "name": "screens.folder",
+      "type": "java.lang.String",
+      "description": ""
+    },
+    {
+      "name": "list.start.index",
+      "type": "java.lang.Integer",
+      "description": "",
+      "defaultValue": 1
+    },
+    {
+      "name": "screenshot.strategy",
+      "type": "java.lang.String",
+      "description": "When to take screenshot, used by AllureLogger.class"
+    },
+    {
+      "name": "html.code.strategy",
+      "type": "java.lang.String",
+      "description": "When to log html code of pages"
+    },
+    {
+      "name": "requests.strategy",
+      "type": "java.lang.String",
+      "description": "When to log requests statuses"
+    },
+    {
+      "name": "browser.kill",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "afterAndBefore"
+    },
+    {
+      "name": "element.search.strategy",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "browser.size",
+      "type": "java.lang.String",
+      "description": "The size of the tested browser",
+      "defaultValue": "MAXIMIZED"
+    },
+    {
+      "name": "page.load.strategy",
+      "type": "java.lang.String",
+      "description": "Similarly to Selenium, strategies to load the page",
+      "defaultValue": "normal"
+    },
+    {
+      "name": "page.check.after.open",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "NONE"
+    },
+    {
+      "name": "assert.type",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "strict"
+    },
+    {
+      "name": "click.type",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "CENTER"
+    },
+    {
+      "name": "text.type",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "SMART_TEXT"
+    },
+    {
+      "name": "set.text.type",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "SET_TEXT"
+    },
+    {
+      "name": "remote.type",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "http://localhost:4444/"
+    },
+    {
+      "name": "driver.remote.url",
+      "type": "java.lang.String",
+      "description": ""
+    },
+    {
+      "name": "log.level",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "info"
+    },
+    {
+      "name": "allure.steps",
+      "type": "java.lang.Boolean",
+      "description": "Whether to turn on the steps for Allure or not",
+      "defaultValue": true
+    },
+    {
+      "name": "smart.locators",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "#%s"
+    },
+    {
+      "name": "smart.locators.toName",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "kebab-case"
+    },
+    {
+      "name": "smart.search",
+      "type": "java.lang.String",
+      "description": "",
+      "defaultValue": "uiandelements"
+    },
+    {
+      "name": "headless",
+      "type": "java.lang.String",
+      "description": ""
+    }
+  ],
+  "hints": [
+  ]
+}
+
