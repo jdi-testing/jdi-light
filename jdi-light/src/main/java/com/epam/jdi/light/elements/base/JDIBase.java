@@ -314,9 +314,14 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 els -> els.size() >= minAmount);
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
-        return result.size() > 1
-            ? filterElements(result)
-            : result;
+        return filterElements(result);
+    }
+    public List<WebElement> getFilterList(int minAmount) {
+        List<WebElement> result = timer().getResultByCondition(this::tryGetList,
+                els -> els.size() >= minAmount);
+        if (result == null)
+            throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
+        return filterElements(result);
     }
     protected List<WebElement> tryGetList() {
         List<WebElement> elements = getAll();
