@@ -12,7 +12,6 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.com.StaticSite;
 import io.qameta.allure.Step;
 
-@SuppressWarnings("PMD.ClassNamingConventions")
 public class States {
     @Step
     public static void shouldBeLoggedIn() {

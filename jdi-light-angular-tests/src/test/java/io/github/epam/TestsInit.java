@@ -13,8 +13,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
-
-@SuppressWarnings("PMD.ClassNamingConventions")
 @Listeners(TestNGListener.class)
 public class TestsInit {
 
