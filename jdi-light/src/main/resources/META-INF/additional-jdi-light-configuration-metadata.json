@@ -3,7 +3,7 @@
     {
       "name": "strategy",
       "type": "java.lang.String",
-      "description": "",
+      "description": "Strategy which defines basic settings for elements interaction",
       "defaultValue": "jdi"
     },
     {
@@ -38,17 +38,17 @@
     {
       "name": "drivers.folder",
       "type": "java.lang.String",
-      "description": ""
+      "description": "Absolute path to the driver folder"
     },
     {
       "name": "screens.folder",
       "type": "java.lang.String",
-      "description": ""
+      "description": "Path to folder for screenshots"
     },
     {
       "name": "list.start.index",
       "type": "java.lang.Integer",
-      "description": "",
+      "description": "Index of initial element in WebList",
       "defaultValue": 1
     },
     {
@@ -59,24 +59,23 @@
     {
       "name": "html.code.strategy",
       "type": "java.lang.String",
-      "description": "When to log html code of pages"
+      "description": "A strategy for writing html-code of the web element last processed before test failure to log"
     },
     {
       "name": "requests.strategy",
       "type": "java.lang.String",
-      "description": "When to log requests statuses"
+      "description": "When to log requests 4ХХ, 5ХХ errors"
     },
     {
       "name": "browser.kill",
       "type": "java.lang.String",
-      "description": "",
+      "description": "At what time browser should be shut down",
       "defaultValue": "afterAndBefore"
     },
     {
       "name": "element.search.strategy",
       "type": "java.lang.String",
-      "description": "",
-      "defaultValue": ""
+      "description": "Can find only one or many elements on a page, visible elements only or not."
     },
     {
       "name": "browser.size",
@@ -93,48 +92,48 @@
     {
       "name": "page.check.after.open",
       "type": "java.lang.String",
-      "description": "",
+      "description": "When to check the page has been opened.",
       "defaultValue": "NONE"
     },
     {
       "name": "assert.type",
       "type": "java.lang.String",
-      "description": "",
+      "description": "Type of used assertions - strict or soft",
       "defaultValue": "strict"
     },
     {
       "name": "click.type",
       "type": "java.lang.String",
-      "description": "",
+      "description": "Area of the element which is clicked during click action",
       "defaultValue": "CENTER"
     },
     {
       "name": "text.type",
       "type": "java.lang.String",
-      "description": "",
+      "description": "Strategy for getting text of the element",
       "defaultValue": "SMART_TEXT"
     },
     {
       "name": "set.text.type",
       "type": "java.lang.String",
-      "description": "",
+      "description": "The way of setting text to the element",
       "defaultValue": "SET_TEXT"
     },
     {
       "name": "remote.type",
       "type": "java.lang.String",
-      "description": "",
+      "description": "Type or URL of remote web server",
       "defaultValue": "http://localhost:4444/"
     },
     {
       "name": "driver.remote.url",
       "type": "java.lang.String",
-      "description": ""
+      "description": "Remote URL used to run tests"
     },
     {
       "name": "log.level",
       "type": "java.lang.String",
-      "description": "",
+      "description": "A level of categorizing the entries in the log file.",
       "defaultValue": "info"
     },
     {
@@ -146,25 +145,25 @@
     {
       "name": "smart.locators",
       "type": "java.lang.String",
-      "description": "",
+      "description": "A list of templates for Smart locators. Should be separated by ; symbol.",
       "defaultValue": "#%s"
     },
     {
       "name": "smart.locators.toName",
       "type": "java.lang.String",
-      "description": "",
+      "description": "Case style for element names used in smart locators template",
       "defaultValue": "kebab-case"
     },
     {
       "name": "smart.search",
       "type": "java.lang.String",
-      "description": "",
+      "description": "When to use smart locators",
       "defaultValue": "uiandelements"
     },
     {
       "name": "headless",
-      "type": "java.lang.String",
-      "description": ""
+      "type": "java.lang.Boolean",
+      "description": "Whether to use headless browser or not"
     }
   ],
   "hints": [
