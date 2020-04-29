@@ -3,25 +3,25 @@
     {
       "name": "strategy",
       "type": "java.lang.String",
-      "description": "Strategy which defines basic settings for elements interaction",
+      "description": "Strategy which defines basic settings for elements interaction.",
       "defaultValue": "jdi"
     },
     {
       "name": "timeout.wait.element",
       "type": "java.lang.Integer",
-      "description": "Timeout in seconds to wait for an element on the opened page",
+      "description": "Timeout in seconds to wait for an element on the opened page.",
       "defaultValue": 5
     },
     {
       "name": "timeout.wait.page",
       "type": "java.lang.Integer",
-      "description": "Timeout in seconds to wait for a newly opened page to load",
+      "description": "Timeout in seconds to wait for a newly opened page to load.",
       "defaultValue": 20
     },
     {
       "name": "domain",
       "type": "java.lang.String",
-      "description": "Web application root URL (used if we work with a single application in tests)"
+      "description": "Web application root URL (used if we work with a single application in tests)."
     },
     {
       "name": "driver",
@@ -32,44 +32,44 @@
     {
       "name": "driver.version",
       "type": "java.lang.String",
-      "description": "Version of web driver",
+      "description": "Version of web driver.",
       "defaultValue": "latest"
     },
     {
       "name": "drivers.folder",
       "type": "java.lang.String",
-      "description": "Absolute path to the driver folder"
+      "description": "Absolute path to the driver folder."
     },
     {
       "name": "screens.folder",
       "type": "java.lang.String",
-      "description": "Path to folder for screenshots"
+      "description": "Path to folder for screenshots."
     },
     {
       "name": "list.start.index",
       "type": "java.lang.Integer",
-      "description": "Index of initial element in WebList",
+      "description": "Index of initial element in WebList.",
       "defaultValue": 1
     },
     {
       "name": "screenshot.strategy",
       "type": "java.lang.String",
-      "description": "When to take screenshot, used by AllureLogger.class"
+      "description": "When to take screenshot, used by AllureLogger.class."
     },
     {
       "name": "html.code.strategy",
       "type": "java.lang.String",
-      "description": "A strategy for writing html-code of the web element last processed before test failure to log"
+      "description": "A strategy for writing html-code of the web element last processed before test failure to log."
     },
     {
       "name": "requests.strategy",
       "type": "java.lang.String",
-      "description": "When to log requests 4ХХ, 5ХХ errors"
+      "description": "When to log requests 4ХХ, 5ХХ errors."
     },
     {
       "name": "browser.kill",
       "type": "java.lang.String",
-      "description": "At what time browser should be shut down",
+      "description": "At what time browser should be shut down.",
       "defaultValue": "afterAndBefore"
     },
     {
@@ -80,13 +80,13 @@
     {
       "name": "browser.size",
       "type": "java.lang.String",
-      "description": "The size of the tested browser",
+      "description": "The size of the tested browser.",
       "defaultValue": "MAXIMIZED"
     },
     {
       "name": "page.load.strategy",
       "type": "java.lang.String",
-      "description": "Similarly to Selenium, strategies to load the page",
+      "description": "Similarly to Selenium, strategies to load the page.",
       "defaultValue": "normal"
     },
     {
@@ -98,37 +98,37 @@
     {
       "name": "assert.type",
       "type": "java.lang.String",
-      "description": "Type of used assertions - strict or soft",
+      "description": "Type of used assertions - strict or soft.",
       "defaultValue": "strict"
     },
     {
       "name": "click.type",
       "type": "java.lang.String",
-      "description": "Area of the element which is clicked during click action",
+      "description": "Area of the element which is clicked during click action.",
       "defaultValue": "CENTER"
     },
     {
       "name": "text.type",
       "type": "java.lang.String",
-      "description": "Strategy for getting text of the element",
+      "description": "Strategy for getting text of the element.",
       "defaultValue": "SMART_TEXT"
     },
     {
       "name": "set.text.type",
       "type": "java.lang.String",
-      "description": "The way of setting text to the element",
+      "description": "The way of setting text to the element.",
       "defaultValue": "SET_TEXT"
     },
     {
       "name": "remote.type",
       "type": "java.lang.String",
-      "description": "Type or URL of remote web server",
+      "description": "Type or URL of remote web server.",
       "defaultValue": "http://localhost:4444/"
     },
     {
       "name": "driver.remote.url",
       "type": "java.lang.String",
-      "description": "Remote URL used to run tests"
+      "description": "Remote URL used to run tests."
     },
     {
       "name": "log.level",
@@ -139,7 +139,7 @@
     {
       "name": "allure.steps",
       "type": "java.lang.Boolean",
-      "description": "Whether to turn on the steps for Allure or not",
+      "description": "Whether to turn on the steps for Allure or not.",
       "defaultValue": true
     },
     {
@@ -151,22 +151,328 @@
     {
       "name": "smart.locators.toName",
       "type": "java.lang.String",
-      "description": "Case style for element names used in smart locators template",
+      "description": "Case style for element names used in smart locators template.",
       "defaultValue": "kebab-case"
     },
     {
       "name": "smart.search",
       "type": "java.lang.String",
-      "description": "When to use smart locators",
+      "description": "When to use smart locators.",
       "defaultValue": "uiandelements"
     },
     {
       "name": "headless",
       "type": "java.lang.Boolean",
-      "description": "Whether to use headless browser or not"
+      "description": "Whether to use headless browser or not."
     }
   ],
   "hints": [
+    {
+      "name": "strategy",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "driver",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "screenshot.strategy",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "html.code.strategy",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "requests.strategy",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "browser.kill",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "element.search.strategy",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "browser.size",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "page.load.strategy",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "page.check.after.open",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "assert.type",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "click.type",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "text.type",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "set.text.type",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "remote.type",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "log.level",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "smart.locators.toName",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    },
+    {
+      "name": "smart.search",
+      "values": [
+        {
+          "value": "UNKNOWN"
+        },
+        {
+          "value": "UP"
+        },
+        {
+          "value": "DOWN"
+        },
+        {
+          "value": "OUT_OF_SERVICE"
+        }
+      ]
+    }
   ]
 }
 
