@@ -6,15 +6,16 @@ package com.jdi.tests;
  */
 
 import com.jdi.TestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.complex.table.Row.inRow;
-import static com.jdi.states.State.loggedIn;
-import static jdisite.entities.DefaultData.SPIDER_MAN;
+import static com.epam.jdi.light.elements.complex.table.Row.*;
+import static com.jdi.states.State.*;
+import static jdisite.entities.DefaultData.*;
 import static jdisite.enums.MenuOptions.*;
-import static jdisite.pages.JDISite.leftMenu;
-import static jdisite.pages.MarvelousPage.userTable;
-import static org.hamcrest.Matchers.containsString;
+import static jdisite.pages.JDISite.*;
+import static jdisite.pages.MarvelousPage.*;
+import static org.hamcrest.Matchers.*;
 
 public class UsersTest extends TestsInit {
     @BeforeMethod

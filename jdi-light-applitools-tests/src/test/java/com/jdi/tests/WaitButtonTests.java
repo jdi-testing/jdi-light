@@ -6,14 +6,15 @@ package com.jdi.tests;
  */
 
 import com.jdi.TestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.*;
-import static com.jdi.states.State.loggedIn;
+import static com.jdi.states.State.*;
 import static jdisite.enums.MenuOptions.*;
-import static jdisite.pages.Html5Page.suspendButton;
+import static jdisite.pages.Html5Page.*;
 import static jdisite.pages.JDISite.*;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 public class WaitButtonTests extends TestsInit {
     @BeforeMethod

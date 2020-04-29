@@ -8,7 +8,7 @@ package com.jdi.states;
 import jdisite.entities.DefaultData;
 
 import static jdisite.pages.HomePage.*;
-import static jdisite.pages.JDISite.loginForm;
+import static jdisite.pages.JDISite.*;
 
 public class State {
     public static void loggedOut() {

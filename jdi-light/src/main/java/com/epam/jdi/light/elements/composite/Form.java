@@ -2,7 +2,6 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;

@@ -6,12 +6,13 @@ package com.jdi.tests;
  */
 
 import com.jdi.TestsInit;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import static com.jdi.states.State.loggedIn;
+import static com.jdi.states.State.*;
 import static com.jdi.test.data.DefaultDataProvider.*;
 import static jdisite.enums.MenuOptions.ContactForm;
-import static jdisite.pages.ContactPage.contactForm;
+import static jdisite.pages.ContactPage.*;
 import static jdisite.pages.JDISite.*;
 
 public class ContactForm extends TestsInit {

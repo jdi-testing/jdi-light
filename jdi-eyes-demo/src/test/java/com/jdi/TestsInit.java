@@ -11,8 +11,8 @@ import org.testng.annotations.*;
 import java.lang.reflect.Method;
 
 import static com.epam.jdi.eyes.JDIEyes.*;
-import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.elements.composite.WebPage.openSite;
+import static com.epam.jdi.light.driver.WebDriverUtils.*;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
 
 public class TestsInit {
     @BeforeSuite(alwaysRun = true)

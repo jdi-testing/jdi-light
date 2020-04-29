@@ -10,9 +10,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
 import java.util.List;
 
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static org.jsoup.helper.StringUtil.isBlank;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static org.jsoup.helper.StringUtil.*;
 
 public class MultiSelect extends UIListBase<UISelectAssert<?,?>> implements HasLabel {
     @UI(".caret") UIElement expander;
