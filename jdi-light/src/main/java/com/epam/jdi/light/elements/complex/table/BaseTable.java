@@ -477,14 +477,26 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      * @return boolean
      */
     @JDIAction("Is '{name}' table empty")
-    public boolean isEmpty() { return size() == 0; }
+    public boolean isEmpty() {
+        try {
+            return count() == 0;
+        } catch (Exception ex) {
+            return true;
+        }
+    }
 
     /**
      * Check the table isn't empty
      * @return boolean
      */
     @JDIAction("Is '{name}' table not empty")
-    public boolean isNotEmpty() { return size() != 0; }
+    public boolean isNotEmpty() {
+        try {
+            return count() != 0;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
 
     // Rows
     /**

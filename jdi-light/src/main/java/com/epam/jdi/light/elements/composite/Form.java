@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
@@ -62,6 +63,13 @@ public class Form<T> extends Section {
         this.filter = filter;
     }
 
+    private String elementLocator(UIElement element) {
+        try {
+            return element.locator.toString();
+        } catch (Exception ex) {
+            return "Failed get locator";
+        }
+    }
     /**
      * @param map Specify entity as map
      *            Fills all elements on the form which implements SetValue interface and can be matched with fields in input entity
@@ -70,24 +78,29 @@ public class Form<T> extends Section {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
-                UIElement element = new UIElement().setup(e->e
-                    .setName(pair.key)
-                    .setParent(this));
-                fillAction(null, element, pageObject, pair.value);
+                UIElement element = new UIElement();
+                try {
+                    element = new UIElement().setup(e -> e
+                            .setName(pair.key)
+                            .setParent(this));
+                    fillAction(null, element, pageObject, pair.value);
+                } catch (Exception ex) {
+                    throw exception(ex, "Failed to fill element '%s' (locator: %s) with value '%s'", pair.key, elementLocator(element), pair.value);
+                }
             }
             return;
         }
-        Field setField = null;
-        for (Pair<String, String> pair : map)
+        for (Pair<String, String> pair : map) {
+            Field setField = null;
             try {
                 setField = first(allFields, f -> namesEqual(pair.key, getElementName(f)));
                 if (setField == null)
                     continue;
                 fillAction(setField, getValueField(setField, pageObject), pageObject, pair.value);
             } catch (Exception ex) {
-                throw exception(ex, "Can't fill element '%s'",
-                    setField != null ? setField.getName() : "UNKNOWN FIELD");
+                throw exception(ex, "Can't fill element '%s' with value '%s'", pair.key, pair.value);
             }
+        }
         setFilterAll();
     }
     private Object pageObject = this;
