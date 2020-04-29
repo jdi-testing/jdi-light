@@ -171,16 +171,13 @@
       "name": "strategy",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "jdi"
         },
         {
-          "value": "UP"
+          "value": "jdi-stable"
         },
         {
-          "value": "DOWN"
-        },
-        {
-          "value": "OUT_OF_SERVICE"
+          "value": "selenium"
         }
       ]
     },
@@ -188,16 +185,22 @@
       "name": "driver",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "chrome"
         },
         {
-          "value": "UP"
+          "value": "firefox"
         },
         {
-          "value": "DOWN"
+          "value": "ie"
         },
         {
-          "value": "OUT_OF_SERVICE"
+          "value": "edge"
+        },
+        {
+          "value": "opera"
+        },
+        {
+          "value": "safari"
         }
       ]
     },
@@ -205,16 +208,16 @@
       "name": "screenshot.strategy",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "off"
         },
         {
-          "value": "UP"
+          "value": "onfail"
         },
         {
-          "value": "DOWN"
+          "value": "onassert"
         },
         {
-          "value": "OUT_OF_SERVICE"
+          "value": "newpage"
         }
       ]
     },
@@ -222,16 +225,16 @@
       "name": "html.code.strategy",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "off"
         },
         {
-          "value": "UP"
+          "value": "onfail"
         },
         {
-          "value": "DOWN"
+          "value": "onassert"
         },
         {
-          "value": "OUT_OF_SERVICE"
+          "value": "newpage"
         }
       ]
     },
@@ -239,16 +242,16 @@
       "name": "requests.strategy",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "off"
         },
         {
-          "value": "UP"
+          "value": "onfail"
         },
         {
-          "value": "DOWN"
+          "value": "onassert"
         },
         {
-          "value": "OUT_OF_SERVICE"
+          "value": "newpage"
         }
       ]
     },
@@ -256,16 +259,13 @@
       "name": "browser.kill",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "afterAndBefore"
         },
         {
-          "value": "UP"
+          "value": "after"
         },
         {
-          "value": "DOWN"
-        },
-        {
-          "value": "OUT_OF_SERVICE"
+          "value": "before"
         }
       ]
     },
@@ -273,16 +273,16 @@
       "name": "element.search.strategy",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "strict"
         },
         {
-          "value": "UP"
+          "value": "soft"
         },
         {
-          "value": "DOWN"
+          "value": "visible, multiple"
         },
         {
-          "value": "OUT_OF_SERVICE"
+          "value": "any, single"
         }
       ]
     },
@@ -290,16 +290,10 @@
       "name": "browser.size",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "MAXIMIZED"
         },
         {
-          "value": "UP"
-        },
-        {
-          "value": "DOWN"
-        },
-        {
-          "value": "OUT_OF_SERVICE"
+          "value": "1024x762"
         }
       ]
     },
@@ -307,16 +301,13 @@
       "name": "page.load.strategy",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "normal"
         },
         {
-          "value": "UP"
+          "value": "none"
         },
         {
-          "value": "DOWN"
-        },
-        {
-          "value": "OUT_OF_SERVICE"
+          "value": "eager"
         }
       ]
     },
@@ -324,16 +315,13 @@
       "name": "page.check.after.open",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "NONE"
         },
         {
-          "value": "UP"
+          "value": "NEW_PAGE"
         },
         {
-          "value": "DOWN"
-        },
-        {
-          "value": "OUT_OF_SERVICE"
+          "value": "EVERY_PAGE"
         }
       ]
     },
@@ -341,16 +329,10 @@
       "name": "assert.type",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "strict"
         },
         {
-          "value": "UP"
-        },
-        {
-          "value": "DOWN"
-        },
-        {
-          "value": "OUT_OF_SERVICE"
+          "value": "soft"
         }
       ]
     },
@@ -358,16 +340,25 @@
       "name": "click.type",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "SMART_CLICK"
         },
         {
-          "value": "UP"
+          "value": "TOP_LEFT"
         },
         {
-          "value": "DOWN"
+          "value": "TOP_RIGHT"
         },
         {
-          "value": "OUT_OF_SERVICE"
+          "value": "BOTTOM_LEFT"
+        },
+        {
+          "value": "BOTTOM_RIGHT"
+        },
+        {
+          "value": "CENTER"
+        },
+        {
+          "value": "JS"
         }
       ]
     },
@@ -375,16 +366,19 @@
       "name": "text.type",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "SMART_TEXT"
         },
         {
-          "value": "UP"
+          "value": "TEXT"
         },
         {
-          "value": "DOWN"
+          "value": "VALUE"
         },
         {
-          "value": "OUT_OF_SERVICE"
+          "value": "INNER"
+        },
+        {
+          "value": "LABEL"
         }
       ]
     },
@@ -392,16 +386,13 @@
       "name": "set.text.type",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "SET_TEXT"
         },
         {
-          "value": "UP"
+          "value": "SEND_KEYS"
         },
         {
-          "value": "DOWN"
-        },
-        {
-          "value": "OUT_OF_SERVICE"
+          "value": "CLEAR_SEND_KEYS"
         }
       ]
     },
@@ -409,16 +400,16 @@
       "name": "remote.type",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "sauce"
         },
         {
-          "value": "UP"
+          "value": "saucelabs"
         },
         {
-          "value": "DOWN"
+          "value": "browserstack"
         },
         {
-          "value": "OUT_OF_SERVICE"
+          "value": "selenium_localhost"
         }
       ]
     },
@@ -426,16 +417,28 @@
       "name": "log.level",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "off"
         },
         {
-          "value": "UP"
+          "value": "fatal"
         },
         {
-          "value": "DOWN"
+          "value": "error"
         },
         {
-          "value": "OUT_OF_SERVICE"
+          "value": "warning"
+        },
+        {
+          "value": "step"
+        },
+        {
+          "value": "debug"
+        },
+        {
+          "value": "trace"
+        },
+        {
+          "value": "all"
         }
       ]
     },
@@ -443,16 +446,25 @@
       "name": "smart.locators.toName",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "kebab-case"
         },
         {
-          "value": "UP"
+          "value": "camelCase"
         },
         {
-          "value": "DOWN"
+          "value": "snake_case"
         },
         {
-          "value": "OUT_OF_SERVICE"
+          "value": "PascalCase"
+        },
+        {
+          "value": "UPPER_SNAKE_CASE"
+        },
+        {
+          "value": "First Upper Case"
+        },
+        {
+          "value": "ALL UPPER CASE"
         }
       ]
     },
@@ -460,16 +472,16 @@
       "name": "smart.search",
       "values": [
         {
-          "value": "UNKNOWN"
+          "value": "false"
         },
         {
-          "value": "UP"
+          "value": "onlyui"
         },
         {
-          "value": "DOWN"
+          "value": "uiandelements"
         },
         {
-          "value": "OUT_OF_SERVICE"
+          "value": "always"
         }
       ]
     }
