@@ -123,7 +123,7 @@
       "name": "remote.type",
       "type": "java.lang.String",
       "description": "Type or URL of remote web server.",
-      "defaultValue": "http://localhost:4444/"
+      "defaultValue": "selenium_localhost"
     },
     {
       "name": "driver.remote.url",
@@ -171,13 +171,16 @@
       "name": "strategy",
       "values": [
         {
-          "value": "jdi"
+          "value": "jdi",
+          "description": "click.type - CENTER, text.type - SMART_TEXT, set.text.type - CLEAR_SEND_KEYS, element.search.strategy - visible."
         },
         {
-          "value": "jdi-stable"
+          "value": "jdi-stable",
+          "description": "click.type - SMART_CLICK, text.type - SMART_TEXT, set.text.type - SET_TEXT, element.search.strategy - visible., kill.browser - afterAndBefore."
         },
         {
-          "value": "selenium"
+          "value": "selenium",
+          "description": "click.type - CENTER, text.type - TEXT, set.text.type - SEND_KEYS, element.search.strategy - any."
         }
       ]
     },
@@ -185,22 +188,28 @@
       "name": "driver",
       "values": [
         {
-          "value": "chrome"
+          "value": "chrome",
+          "description": "WebDriver for Chrome browser."
         },
         {
-          "value": "firefox"
+          "value": "firefox",
+          "description": "WebDriver for Firefox browser."
         },
         {
-          "value": "ie"
+          "value": "ie",
+          "description": "WebDriver for Internet Explorer."
         },
         {
-          "value": "edge"
+          "value": "edge",
+          "description": "WebDriver for Edge browser."
         },
         {
-          "value": "opera"
+          "value": "opera",
+          "description": "WebDriver for Opera browser."
         },
         {
-          "value": "safari"
+          "value": "safari",
+          "description": "WebDriver for Safari browser."
         }
       ]
     },
@@ -208,16 +217,20 @@
       "name": "screenshot.strategy",
       "values": [
         {
-          "value": "off"
+          "value": "off",
+          "description": "Screenshots will not be taken."
         },
         {
-          "value": "onfail"
+          "value": "onfail",
+          "description": "When test fails, web element last processed will be highlighted and page screenshot will be taken, saved and added to Allure report as well, if possible."
         },
         {
-          "value": "onassert"
+          "value": "onassert",
+          "description": "Page screenshot will be taken when assert is performed."
         },
         {
-          "value": "newpage"
+          "value": "newpage",
+          "description": "Page screenshot will be taken after opening a new page."
         }
       ]
     },
@@ -225,16 +238,20 @@
       "name": "html.code.strategy",
       "values": [
         {
-          "value": "off"
+          "value": "off",
+          "description": "Do not write html-code of the web element to log."
         },
         {
-          "value": "onfail"
+          "value": "onfail",
+          "description": "Write html-code of the web element last processed before test failure to log."
         },
         {
-          "value": "onassert"
+          "value": "onassert",
+          "description": "Write html-code of the web element to log when assert is performed."
         },
         {
-          "value": "newpage"
+          "value": "newpage",
+          "description": "Write html-code of the page to log when the page is opened."
         }
       ]
     },
@@ -242,16 +259,20 @@
       "name": "requests.strategy",
       "values": [
         {
-          "value": "off"
+          "value": "off",
+          "description": "Do not log requests 4ХХ, 5ХХ errors."
         },
         {
-          "value": "onfail"
+          "value": "onfail",
+          "description": "Log requests 4ХХ, 5ХХ errors when test fails."
         },
         {
-          "value": "onassert"
+          "value": "onassert",
+          "description": "Log requests 4ХХ, 5ХХ errors when assert is performed."
         },
         {
-          "value": "newpage"
+          "value": "newpage",
+          "description": "Log requests 4ХХ, 5ХХ errors when new page is opened."
         }
       ]
     },
@@ -259,13 +280,16 @@
       "name": "browser.kill",
       "values": [
         {
-          "value": "afterAndBefore"
+          "value": "afterAndBefore",
+          "description": "Shut down the browser after and before the test."
         },
         {
-          "value": "after"
+          "value": "after",
+          "description": "Shut down the browser after the test."
         },
         {
-          "value": "before"
+          "value": "before",
+          "description": "Shut down the browser before the test."
         }
       ]
     },
@@ -294,10 +318,12 @@
       "name": "browser.size",
       "values": [
         {
-          "value": "MAXIMIZED"
+          "value": "MAXIMIZED",
+          "description": "Browser window will be maximized."
         },
         {
-          "value": "1024x762"
+          "value": "1024x762",
+          "description": "Browser window will be set to 1024x762."
         }
       ]
     },
@@ -322,13 +348,16 @@
       "name": "page.check.after.open",
       "values": [
         {
-          "value": "NONE"
+          "value": "NONE",
+          "description": "Do not check the page has been opened."
         },
         {
-          "value": "NEW_PAGE"
+          "value": "NEW_PAGE",
+          "description": "Check the page has been opened for new page."
         },
         {
-          "value": "EVERY_PAGE"
+          "value": "EVERY_PAGE",
+          "description": "Check the page has been opened for every page."
         }
       ]
     },
@@ -336,10 +365,12 @@
       "name": "assert.type",
       "values": [
         {
-          "value": "strict"
+          "value": "strict",
+          "description": "Soft assertions are disabled."
         },
         {
-          "value": "soft"
+          "value": "soft",
+          "description": "Soft assertions are enabled."
         }
       ]
     },
@@ -347,25 +378,32 @@
       "name": "click.type",
       "values": [
         {
-          "value": "SMART_CLICK"
+          "value": "SMART_CLICK",
+          "description": "Click at the element clickable area."
         },
         {
-          "value": "TOP_LEFT"
+          "value": "TOP_LEFT",
+          "description": "Click at the top left corner of the element."
         },
         {
-          "value": "TOP_RIGHT"
+          "value": "TOP_RIGHT",
+          "description": "Click at the top right corner of the element."
         },
         {
-          "value": "BOTTOM_LEFT"
+          "value": "BOTTOM_LEFT",
+          "description": "Click at the bottom left corner of the element."
         },
         {
-          "value": "BOTTOM_RIGHT"
+          "value": "BOTTOM_RIGHT",
+          "description": "Click at the bottom right corner of the element."
         },
         {
-          "value": "CENTER"
+          "value": "CENTER",
+          "description": "Click at element center."
         },
         {
-          "value": "JS"
+          "value": "JS",
+          "description": "Click using JavascriptExecutor."
         }
       ]
     },
@@ -373,19 +411,24 @@
       "name": "text.type",
       "values": [
         {
-          "value": "SMART_TEXT"
+          "value": "SMART_TEXT",
+          "description": "Combination of TEXT, INNER and VALUE, which are used consistently until the result is not empty."
         },
         {
-          "value": "TEXT"
+          "value": "TEXT",
+          "description": "Method getText() is used for getting text of the element."
         },
         {
-          "value": "VALUE"
+          "value": "VALUE",
+          "description": "Attribute \"value\" is used for getting text of the element."
         },
         {
-          "value": "INNER"
+          "value": "INNER",
+          "description": "Attribute \"innerText\" is used for getting text of the element."
         },
         {
-          "value": "LABEL"
+          "value": "LABEL",
+          "description": "label().getText() is used for getting text of the element."
         }
       ]
     },
@@ -393,13 +436,16 @@
       "name": "set.text.type",
       "values": [
         {
-          "value": "SET_TEXT"
+          "value": "SET_TEXT",
+          "description": "Text is assigned to the element using UIElement's setText() method."
         },
         {
-          "value": "SEND_KEYS"
+          "value": "SEND_KEYS",
+          "description": "Text is assigned to the element using UIElement's sendKeys() method."
         },
         {
-          "value": "CLEAR_SEND_KEYS"
+          "value": "CLEAR_SEND_KEYS",
+          "description": "Text is assigned to the element using clear() and sendKeys() methods."
         }
       ]
     },
@@ -407,16 +453,20 @@
       "name": "remote.type",
       "values": [
         {
-          "value": "sauce"
+          "value": "sauce",
+          "description": "Use Sauce Labs capabilities to run the tests."
         },
         {
-          "value": "saucelabs"
+          "value": "saucelabs",
+          "description": "Use Sauce Labs capabilities to run the tests."
         },
         {
-          "value": "browserstack"
+          "value": "browserstack",
+          "description": "Use BrowserStack capabilities to run the tests."
         },
         {
-          "value": "selenium_localhost"
+          "value": "selenium_localhost",
+          "description": "Use Selenium localhost, driver.remote.url should be specified."
         }
       ]
     },
@@ -424,28 +474,40 @@
       "name": "log.level",
       "values": [
         {
-          "value": "off"
+          "value": "off",
+          "description": "No logging."
         },
         {
-          "value": "fatal"
+          "value": "fatal",
+          "description": "Log unexpected errors."
         },
         {
-          "value": "error"
+          "value": "error",
+          "description": "Log critical errors."
         },
         {
-          "value": "warning"
+          "value": "warning",
+          "description": "Log errors due to wrong params."
         },
         {
-          "value": "step"
+          "value": "step",
+          "description": "Log steps - business related info."
         },
         {
-          "value": "debug"
+          "value": "info",
+          "description": "Log actions info."
         },
         {
-          "value": "trace"
+          "value": "debug",
+          "description": "Log debug messages."
         },
         {
-          "value": "all"
+          "value": "trace",
+          "description": "Log trace info."
+        },
+        {
+          "value": "all",
+          "description": "Log all messages."
         }
       ]
     },
@@ -453,25 +515,32 @@
       "name": "smart.locators.toName",
       "values": [
         {
-          "value": "kebab-case"
+          "value": "kebab-case",
+          "description": "Will produce [ui=last-name] locator for public WebElement lastName if smart.locators=[ui=%s]."
         },
         {
-          "value": "camelCase"
+          "value": "camelCase",
+          "description": "Will produce [ui=lastName] locator for public WebElement lastName if smart.locators=[ui=%s]."
         },
         {
-          "value": "snake_case"
+          "value": "snake_case",
+          "description": "Will produce [ui=last_name] locator for public WebElement lastName if smart.locators=[ui=%s]."
         },
         {
-          "value": "PascalCase"
+          "value": "PascalCase",
+          "description": "Will produce [ui=LastName] locator for public WebElement lastName if smart.locators=[ui=%s]."
         },
         {
-          "value": "UPPER_SNAKE_CASE"
+          "value": "UPPER_SNAKE_CASE",
+          "description": "Will produce [ui=LAST_NAME] locator for public WebElement lastName if smart.locators=[ui=%s]."
         },
         {
-          "value": "First Upper Case"
+          "value": "First Upper Case",
+          "description": "Will produce //*[text()='Submit Form'] locator for public WebElement submitForm if smart.locators=//*[text()='%s']"
         },
         {
-          "value": "ALL UPPER CASE"
+          "value": "ALL UPPER CASE",
+          "description": "Will produce //*[text()='SUBMIT FORM'] locator for public WebElement submitForm if smart.locators=//*[text()='%s']"
         }
       ]
     },
@@ -479,16 +548,20 @@
       "name": "smart.search",
       "values": [
         {
-          "value": "false"
+          "value": "false",
+          "description": "Do not use smart search."
         },
         {
-          "value": "onlyui"
+          "value": "onlyui",
+          "description": "Use smart search for for UI elements."
         },
         {
-          "value": "uiandelements"
+          "value": "uiandelements",
+          "description": "Use smart search for UI elements and Page Objects."
         },
         {
-          "value": "always"
+          "value": "always",
+          "description": "Always use smart search."
         }
       ]
     }
