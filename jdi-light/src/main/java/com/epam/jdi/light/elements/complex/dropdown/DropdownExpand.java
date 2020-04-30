@@ -53,7 +53,7 @@ public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implement
         expander().click();
     }
 
-    @JDIAction(value = "Is '{name}' expanded", level = DEBUG)
+    @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
     public boolean isExpanded() {
         try {
             return list().noWait(WebList::isDisplayed, WebList.class);
@@ -62,13 +62,13 @@ public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implement
         }
     }
 
-    @JDIAction(level = DEBUG)
+    @JDIAction(level = DEBUG, timeout = 0)
     public void expand() {
         if (!isExpanded())
             toggle();
     }
 
-    @JDIAction(level = DEBUG)
+    @JDIAction(level = DEBUG, timeout = 0)
     public void close() {
         if (isExpanded())
             toggle();

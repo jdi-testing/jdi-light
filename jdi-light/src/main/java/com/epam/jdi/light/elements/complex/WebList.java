@@ -460,7 +460,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         try {
             return elements.isUseCache() && elements.get().size() > 0
                 ? elements.get().size()
-                : noWait(() -> getList(0).size());
+                : IList.super.size();
         } catch (Exception ex) {
             return 0;
         }

@@ -21,6 +21,7 @@ public class SearchPage extends BaseSelPage {
 
 	@UI(".box") public JList<SearchResult> jsearch2;
 	@UI(".box") public static JList<SearchResult> jsearchS;
+	@UI(".wrong-locator") public static JList<SearchResult> jEmptySearch;
 	@UI(".box h3") public static JList<UIElement> jsearchTitle;
 	@UI("//*[@class='box']/h3[text()=\"%s\"]")
 	public JList<SearchResult> jsearchT2;

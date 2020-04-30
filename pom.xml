@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.jdi</groupId>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
     <artifactId>jdi-2</artifactId>
     <name>JDI UI 2.0</name>
     <packaging>pom</packaging>
@@ -58,6 +58,7 @@
         <module>jdi-bdd</module>
         <module>jdi-light-bootstrap</module>
         <module>jdi-light-html-tests</module>
+        <module>jdi-eyes-demo</module>
         <module>jdi-bdd-tests</module>
         <module>jdi-light-applitools-tests</module>
         <module>jdi-light-bootstrap-tests</module>
