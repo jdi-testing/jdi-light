@@ -273,16 +273,20 @@
       "name": "element.search.strategy",
       "values": [
         {
-          "value": "strict"
+          "value": "strict",
+          "description": "Find only one element on a page (single), search through visible elements only (visible)."
         },
         {
-          "value": "soft"
+          "value": "soft",
+          "description": "Find many elements on a page (multiple), search through not only visible elements (any)."
         },
         {
-          "value": "visible, multiple"
+          "value": "visible, multiple",
+          "description": "Find many elements on a page (multiple), search through visible elements only."
         },
         {
-          "value": "any, single"
+          "value": "any, single",
+          "description": "Find only one element on a page, search through not only visible elements."
         }
       ]
     },
@@ -301,13 +305,16 @@
       "name": "page.load.strategy",
       "values": [
         {
-          "value": "normal"
+          "value": "normal",
+          "description": "Indicates WebDriver should wait for the document readiness state to be \"complete\" after navigation."
         },
         {
-          "value": "none"
+          "value": "none",
+          "description": "Indicates WebDriver should not wait on the document readiness state after a navigation event."
         },
         {
-          "value": "eager"
+          "value": "eager",
+          "description": "Indicates WebDriver should wait for the document readiness state to become \"interactive\" after navigation."
         }
       ]
     },
