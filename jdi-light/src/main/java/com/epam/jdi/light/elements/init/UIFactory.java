@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.init;
 
+import com.epam.jdi.light.asserts.complex.DropdownAssert;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.WebList;

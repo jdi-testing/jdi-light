@@ -45,7 +45,7 @@ public class JDILocator {
                 ? fillByTemplate(byLocator, args)
                 : fillByMsgTemplate(byLocator, args);
     }
-    public boolean isEmpty() {
+    public boolean isNull() {
         return byLocator == null;
     }
     public boolean hasFrame() {

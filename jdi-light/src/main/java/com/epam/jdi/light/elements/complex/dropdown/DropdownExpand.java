@@ -1,11 +1,11 @@
 package com.epam.jdi.light.elements.complex.dropdown;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
+import com.epam.jdi.light.asserts.complex.DropdownAssert;
+import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 
@@ -21,7 +21,7 @@ import static org.apache.commons.lang3.StringUtils.*;
  * Created by Roman Iovlev on 02.03.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implements IsDropdown, ISetup {
+public class DropdownExpand extends UIBaseElement<DropdownAssert> implements IsDropdown, ISetup, ISelector, HasAssert<DropdownAssert> {
     public String expandLocator = ".caret";
 
     public UIElement expander() {
@@ -158,7 +158,7 @@ public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implement
         return value().isDisplayed();
     }
     @Override
-    public UISelectAssert<?,?> is() {
-        return (UISelectAssert<?,?>) new UISelectAssert().set(this);
+    public DropdownAssert is() {
+        return new DropdownAssert().set(this);
     }
 }

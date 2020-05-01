@@ -400,7 +400,7 @@ public class Form<T> extends Section {
         try {
             if (core().isDisplayed())
                 return true;
-            if (base().locator.isEmpty()) {
+            if (base().locator.isNull()) {
                 List<Field> fields = getFieldsInterfaceOf(pageObject, HasValue.class);
                 if (fields.isEmpty())
                     return false;

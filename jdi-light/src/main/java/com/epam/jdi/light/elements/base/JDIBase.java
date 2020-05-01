@@ -222,7 +222,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         WebElement element = purify(webElement.get());
         try {
             element.getTagName();
-            if (locator.isEmpty())
+            if (locator.isNull())
                 return element;
             return purify(getUIElementByLocator(element));
         } catch (Exception ignore) {
@@ -283,7 +283,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 return elements;
             } catch (Exception ignore) { webElements.clear(); }
         }
-        if (locator.isEmpty())
+        if (locator.isNull())
             return singletonList(beforeSearch(getSmart()));
         SearchContext searchContext = getContext(parent, locator);
         List<WebElement> result = uiSearch(searchContext, correctLocator(getLocator(args)));
@@ -380,45 +380,47 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     private JDIBase getBase(Object element) {
         if (isClass(element.getClass(), JDIBase.class))
             return  (JDIBase) element;
-        else { if (isInterface(element.getClass(), IBaseElement.class))
-            return  ((IBaseElement) element).base(); }
+        else {
+            if (isInterface(element.getClass(), IBaseElement.class))
+                return  ((IBaseElement) element).base(); }
         return null;
     }
     private SearchContext getSearchContext(Object parent) {
-        JDIBase bElement = getBase(parent);
-        if (bElement == null)
+        JDIBase base = getBase(parent);
+        if (base == null)
             return getDefaultContext();
-        if (bElement.webElement.hasValue())
-            return bElement.webElement.get();
-        if (bElement.locator.isRoot() && bElement.locator.isEmpty())
+        if (base.webElement.hasValue())
+            return base.webElement.get();
+        if (base.locator.isRoot() && base.locator.isNull())
             return getDefaultContext();
-        List<By> frames = bElement.getFrames();
+        List<By> frames = base.getFrames();
         if (frames != null)
             return getFrameContext(frames);
-        By locator = bElement.getLocator();
-        return locator == null || isBlank(getByLocator(locator))
-                ? getSmartSearchContext(bElement)
-                : getContextByLocator(bElement, locator);
+        By byLocator = base.getLocator();
+        IBaseElement asBaseElement = (IBaseElement) parent;
+        return byLocator == null || isBlank(getByLocator(byLocator))
+                ? getSmartSearchContext(asBaseElement)
+                : getContextByLocator(base, byLocator);
     }
-    private SearchContext getContextByLocator(JDIBase bElement, By locator) {
-        List<WebElement> els = uiSearch(getContext(bElement.parent, bElement.locator), correctLocator(locator));
+    private SearchContext getContextByLocator(JDIBase base, By locator) {
+        List<WebElement> els = uiSearch(getContext(base.parent, base.locator), correctLocator(locator));
         return getElement(els);
     }
 
-    private SearchContext getSmartSearchContext(JDIBase bElement) {
+    private SearchContext getSmartSearchContext(IBaseElement bElement) {
         try {
             WebElement result = SMART_SEARCH.execute(bElement.waitSec(getTimeout()));
             if (result != null)
                 return result;
         } catch (Exception ignore) { }
-        return getContext(bElement.parent, bElement.locator);
+        return getContext(bElement.base().parent, bElement.base().locator);
     }
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)
             || !isInterface(parent.getClass(), JDIElement.class);
     }
     public boolean hasLocator() {
-        return !locator.isEmpty();
+        return !locator.isNull();
     }
     private SearchContext getContext(Object parent, JDILocator locator) {
         List<By> frames = getFrames();

@@ -66,6 +66,7 @@ public final class WebDriverByUtils {
     }
 
     public static String getByLocator(By by) {
+        if (by == null) return null;
         String byAsString = by.toString();
         int index = byAsString.indexOf(": ") + 2;
         return byAsString.substring(index);
