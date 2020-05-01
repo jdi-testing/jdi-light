@@ -224,7 +224,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         if (index < startIndex)
             throw exception("Can't get element with index '%s'. Index should be %s or more", index, startIndex);
         int getIndex = index - startIndex;
-        if (locator.isEmpty() && elements.isUseCache() && elements.get().size() > getIndex)
+        if (locator.isNull() && elements.isUseCache() && elements.get().size() > getIndex)
             return elements.get().get(getIndex).value;
         return (locator.isTemplate()
                 ? tryGetByIndex(index)

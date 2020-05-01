@@ -97,6 +97,14 @@ public class DropdownExTests implements TestsInit {
         assertThat(colors.listDisabled(), empty());
         assertThat(colors.values(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
+    @Test
+    public void expandedTests() {
+        colors.is().collapsed();
+        colors.expand();
+        colors.is().expanded();
+    }
+
     @Test
     public void baseValidationTest() {
         baseValidation(colors.value());

@@ -69,5 +69,17 @@ public interface ICoreElement extends IBaseElement {
     default void visualValidation(UIElement element) {
         iCore().visualValidation(element);
     }
+    default void dragAndDropTo(WebElement element) {
+        iCore().dragAndDropTo(element);
+    }
+    default void dragAndDropTo(int x, int y) {
+        iCore().dragAndDropTo(x, y);
+    }
+    default void rightClick() {
+        iCore().rightClick();
+    }
+    default void doubleClick() {
+        iCore().doubleClick();
+    }
 
 }

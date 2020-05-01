@@ -92,10 +92,18 @@ public class WebSettings {
         }
     }
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
-        if (ELEMENT.useSmartSearch == FALSE ||
-            ELEMENT.useSmartSearch == ONLY_UI && el.base().locator == null ||
-            ELEMENT.useSmartSearch == UI_AND_ELEMENTS && el.base().locator == null && isInterface(el.getClass(), PageObject.class))
-            return null;
+        switch (ELEMENT.useSmartSearch) {
+            case FALSE:
+                return null;
+            case ONLY_UI:
+                if (el.base().locator.isNull())
+                    return null;
+                break;
+            case UI_AND_ELEMENTS:
+                if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
+                    return null;
+                break;
+        }
         String locatorName = ELEMENT.smartName.value.execute(el.getName());
         return el.base().timer().getResult(() -> {
             String locator = format(ELEMENT.smartTemplate, locatorName);
