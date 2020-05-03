@@ -3,7 +3,6 @@ package com.epam.jdi.light.ui.html.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
-import com.epam.jdi.light.settings.JDISettings;
 import com.epam.jdi.light.ui.html.elements.annotations.*;
 import com.epam.jdi.light.ui.html.elements.enums.MenuBehaviour;
 import com.epam.jdi.tools.func.JAction1;
@@ -17,7 +16,6 @@ import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.*;
 import static java.lang.String.*;
@@ -28,17 +26,17 @@ import static org.apache.commons.lang3.StringUtils.*;
  * Created by Roman Iovlev on 02.05.2020
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class Menu extends Selector implements ISetup {
+public class Menu2D extends Selector implements ISetup {
     protected List<String> locators = new ArrayList<>();
     protected String separator = ">";
     protected String printFormat = "%s[%s]";
     protected String printSeparator = ";";
     protected JAction1<UIElement> pathAction = UIElement::click;
     protected JAction1<UIElement> lastAction = UIElement::click;
-    protected boolean inheritLocators = false;
+    protected boolean inheritLocators = true;
 
-    public Menu() { }
-    public Menu(String... locators) {
+    public Menu2D() { }
+    public Menu2D(String... locators) {
         this.locators = asList(locators);
     }
 
@@ -67,7 +65,7 @@ public class Menu extends Selector implements ISetup {
         }
     }
     protected void inheritLocators() {
-        inheritLocators = true;
+        inheritLocators = false;
     }
 
     public UIElement get(String value) {
@@ -89,7 +87,7 @@ public class Menu extends Selector implements ISetup {
 
     protected UIElement getElementByLocator(List<String> values, Iterator<String> iterator) {
         Object parent = base().parent;
-        UIElement element = null;
+        UIElement element;
         for (int i = 0; i < values.size(); i++) {
             String value = values.get(i);
             element = (iterator == null
@@ -246,27 +244,27 @@ public class Menu extends Selector implements ISetup {
     public String selected() { return list().selected(); }
 
     public void setup(Field field) {
-        if (fieldHasAnnotation(field, JMenu.class, Menu.class)) {
+        if (fieldHasAnnotation(field, JMenu.class, Menu2D.class)) {
             JMenu jMenu = field.getAnnotation(JMenu.class);
             locators = asList(jMenu.value());
         }
 
-        if (fieldHasAnnotation(field, Separator.class, Menu.class)) {
+        if (fieldHasAnnotation(field, Separator.class, Menu2D.class)) {
             Separator jSeparator = field.getAnnotation(Separator.class);
             this.separator = jSeparator.value();
         }
 
-        if (fieldHasAnnotation(field, MenuActions.class, Menu.class)) {
+        if (fieldHasAnnotation(field, MenuActions.class, Menu2D.class)) {
             MenuActions behaviour = field.getAnnotation(MenuActions.class);
             setActions(behaviour.value());
         }
 
-        if (fieldHasAnnotation(field, MenuPrint.class, Menu.class)) {
+        if (fieldHasAnnotation(field, MenuPrint.class, Menu2D.class)) {
             MenuPrint menuPrint = field.getAnnotation(MenuPrint.class);
             setPrint(menuPrint.format(), menuPrint.separator());
         }
 
-        if (fieldHasAnnotation(field, InheritLocators.class, Menu.class)) {
+        if (fieldHasAnnotation(field, InheritLocators.class, Menu2D.class)) {
             inheritLocators();
         }
     }

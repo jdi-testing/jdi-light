@@ -3,7 +3,6 @@ package com.epam.jdi.light.settings;
 import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
