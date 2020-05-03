@@ -67,14 +67,13 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public WebList() {
         elements.useCache(true);
         textType = SMART_LIST;
-        noValidation();
     }
     public WebList(@MarkupLocator By locator) { this(); setLocator(locator);}
     public WebList(List<WebElement> elements) {
         this(); setWebElements(elements);
     }
     public WebList(MapArray<String, UIElement> map) {
-        elements.set(new MultiMap<>(map));
+        this(); elements.set(new MultiMap<>(map));
     }
     public WebList setValues(MultiMap<String, UIElement> map) {
         this.elements.set(map);
@@ -201,7 +200,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             nameIndex = true;
             return this;
         }
-        textType =type;
+        textType = type;
         return setUIElementName(type.func);
     }
     @Override
@@ -234,7 +233,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     private UIElement getElementByLocator(int getIndex, int index) {
         return locator.isXPath()
             ? new UIElement(base(), locator.addIndex(index), index+"", parent)
-            : initElement(() -> getList(getIndex+1).get(getIndex));
+            : initElement(() -> getList(getIndex + 1).get(getIndex));
     }
     protected UIElement tryGetByIndex(int index) {
         try {
@@ -365,17 +364,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         get(values[length-1]).click();
     }
 
-    /**
-     * Select the items by the values, hover and click on them
-     * @param value
-     */
-    @JDIAction("Select ({0}) for '{name}'")
-    public void hoverAndClick(String value) {
-        String[] split = value.split(">");
-        if (split.length == 1)
-            select(split[0]);
-        else hoverAndClick(split);
-    }
     public <TEnum extends Enum<?>> void select(TEnum value) {
         select(getEnumValue(value));
     }
