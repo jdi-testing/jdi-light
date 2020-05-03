@@ -4,6 +4,9 @@
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
+## 1.2.6 (release 03.05.2020)
+* Add Menu2D
+
 ## 1.2.5 (release 01.05.2020)
 * Add is().expand() / is().collapsed() functionality for all dropdowns
 * Fix Smart Search identification for UI_AND_ELEMENTS option
