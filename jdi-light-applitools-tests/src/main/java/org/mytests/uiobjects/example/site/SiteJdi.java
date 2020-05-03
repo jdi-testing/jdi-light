@@ -1,6 +1,6 @@
 package org.mytests.uiobjects.example.site;
 
-import com.epam.jdi.light.elements.complex.Menu;
+import com.epam.jdi.light.ui.html.elements.complex.Menu;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;

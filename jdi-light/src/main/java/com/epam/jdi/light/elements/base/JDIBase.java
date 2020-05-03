@@ -43,10 +43,10 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return this;
     }
     public JDIBase() {
-        searchRules.add(ELEMENT.searchRule);
+        searchRules.update(ELEMENT.searchRule);
     }
     public JDIBase(JDIBase base) {
-        setCore(base);
+        this(); setCore(base);
     }
     public JDIBase setCore(JDIBase base) {
         locator = base.locator.copy();
@@ -69,7 +69,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public JDILocator locator = new JDILocator(this);
     @Override
     public DriverBase setParent(Object parent) {
-        //this.locator.isRoot = false;
         return super.setParent(parent);
     }
     public CacheValue<WebElement> webElement = new CacheValue<>();
@@ -182,7 +181,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         WebElement element = get(new Object[]{});
         VALIDATE_FOUND_ELEMENT.execute(this, element);
         return element;
-
     }
     public static JAction2<JDIBase, WebElement> VALIDATE_FOUND_ELEMENT = JDIBase::validateFoundElement;
     private static void validateFoundElement(JDIBase base, WebElement element) {
@@ -316,13 +314,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
         return filterElements(result);
     }
-    public List<WebElement> getFilterList(int minAmount) {
-        List<WebElement> result = timer().getResultByCondition(this::tryGetList,
-                els -> els.size() >= minAmount);
-        if (result == null)
-            throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
-        return filterElements(result);
-    }
+
     protected List<WebElement> tryGetList() {
         List<WebElement> elements = getAll();
         if (elements == null)

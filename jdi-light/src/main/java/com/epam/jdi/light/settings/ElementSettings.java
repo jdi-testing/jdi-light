@@ -3,6 +3,7 @@ package com.epam.jdi.light.settings;
 import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
@@ -22,4 +23,5 @@ public class ElementSettings {
     public Pair<String, JFunc1<String, String>> smartName
         = Pair.$("kebab-case", SMART_MAP_NAME_TO_LOCATOR.get("kebab-case"));
     public UseSmartSearch useSmartSearch = UI_AND_ELEMENTS;
+    public JFunc1<UIElement, String> listLabel = el -> el.getText().trim();
 }

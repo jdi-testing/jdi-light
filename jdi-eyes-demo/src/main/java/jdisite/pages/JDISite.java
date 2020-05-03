@@ -5,7 +5,7 @@ package jdisite.pages;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.elements.complex.Menu;
+import com.epam.jdi.light.ui.html.elements.complex.Menu;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import jdisite.entities.User;
