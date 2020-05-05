@@ -16,12 +16,9 @@ public class ActionProcessor {
     protected void jdiPointcut() {  }
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() {  }
-    private final String className = "com.epam.jdi.light.actions.ActionProcessor";
     @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {
-        if (notThisAround(className))
-            return jp.proceed();
-        ActionObject jInfo = new ActionObject(jp, className);
+    public Object jdiAround(ProceedingJoinPoint jp) {
+        ActionObject jInfo = new ActionObject(jp);
         try {
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);

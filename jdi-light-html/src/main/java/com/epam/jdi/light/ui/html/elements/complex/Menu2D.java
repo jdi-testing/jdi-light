@@ -64,7 +64,7 @@ public class Menu2D extends Selector implements ISetup {
                 break;
         }
     }
-    protected void inheritLocators() {
+    protected void offInheritance() {
         inheritLocators = false;
     }
 
@@ -264,8 +264,8 @@ public class Menu2D extends Selector implements ISetup {
             setPrint(menuPrint.format(), menuPrint.separator());
         }
 
-        if (fieldHasAnnotation(field, InheritLocators.class, Menu2D.class)) {
-            inheritLocators();
+        if (fieldHasAnnotation(field, NoInheritance.class, Menu2D.class)) {
+            offInheritance();
         }
     }
 

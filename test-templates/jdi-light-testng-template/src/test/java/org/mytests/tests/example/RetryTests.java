@@ -2,7 +2,7 @@ package org.mytests.tests.example;
 
 import org.mytests.tests.TestsInit;
 
-public class RetryTests extends TestsInit {
+public class RetryTests implements TestsInit {
 /*
     int count = 0;
     @Test

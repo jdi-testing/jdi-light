@@ -1,4 +1,4 @@
-package com.epam.jdi.light.elements.base;
+package com.epam.jdi.light.common;
 
 
 /**
