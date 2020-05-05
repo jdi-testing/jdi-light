@@ -10,7 +10,7 @@ import static org.mytests.uiobjects.example.entities.Defaults.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
 import static org.mytests.uiobjects.example.site.pages.ContactFormPage.*;
 
-public class FormTests extends TestsInit {
+public class FormTests implements TestsInit {
 
     @Test
     public void loginTest() {

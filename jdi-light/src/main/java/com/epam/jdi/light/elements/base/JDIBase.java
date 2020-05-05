@@ -18,7 +18,7 @@ import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.elements.base.OutputTemplates.*;
+import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -401,7 +401,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
 
     private SearchContext getSmartSearchContext(IBaseElement bElement) {
         try {
-            WebElement result = SMART_SEARCH.execute(bElement.waitSec(getTimeout()));
+            WebElement result = SMART_SEARCH.execute(bElement);
             if (result != null)
                 return result;
         } catch (Exception ignore) { }

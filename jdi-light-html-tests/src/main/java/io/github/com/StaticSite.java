@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.annotations.InheritLocators;
+import com.epam.jdi.light.ui.html.elements.annotations.NoInheritance;
 import com.epam.jdi.light.ui.html.elements.annotations.JMenu;
 import com.epam.jdi.light.ui.html.elements.complex.Menu2D;
 import io.github.com.custom.MenuItem;
@@ -51,8 +51,8 @@ public class StaticSite {
 	//TODO
 	//@UI(".sidebar-menu span<[*'%s']<<") public static WebList leftMenuList;
 	@UI(".sidebar-menu span") public static JList<MenuItem> menu;
+	@NoInheritance
 	@JMenu({"[ui=label][*'%s']", "[ui=label][*'%s']"}) public static Menu2D leftMenu2D;
-	@InheritLocators
 	@JMenu({"[ui=label] span", "../..//ul//li[@ui='label']"}) public static Menu2D menu2D;
 
 	@Css("header") public static Header header;

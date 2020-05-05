@@ -7,6 +7,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pseudo.site.PseudoSite;
 
+import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.driver.WebDriverUtils.*;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;

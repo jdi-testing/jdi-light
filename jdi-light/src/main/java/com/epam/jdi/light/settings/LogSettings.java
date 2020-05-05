@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.settings.LogInfoDetails.*;
 
 public class LogSettings {
     public LogLevels logLevel = INFO;
@@ -19,4 +20,5 @@ public class LogSettings {
     public List<Strategy> requestsStrategy = new ArrayList<>();
     public JFunc1<LogEntry, Boolean> filterHttpRequests =
         l -> l.getMessage().contains("\"status\":\"4") || l.getMessage().contains("\"status\":\"5");
+    public LogInfoDetails logInfoDetails = null;
 }

@@ -11,7 +11,7 @@ import io.github.com.sections.LoginForm;
 import org.openqa.selenium.WebElement;
 
 public class Header extends Section {
-	//@UI("form")
+	// @UI("form")
 	public static LoginForm loginForm;
 	public static LoginFormSmart loginFormSmart;
 	@UI("#login-form") public static Form<User> loginFormLight;
