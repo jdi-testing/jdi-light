@@ -9,7 +9,7 @@
 * Use methods in JDIAction (Step) in logs #1918
 * Fix issue #1916
 
-## 1.2.7 (release 03.05.2020)
+## 1.2.6 (release 03.05.2020)
 * Add Menu2D
 
 ## 1.2.5 (release 01.05.2020)
