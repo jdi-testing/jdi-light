@@ -2,7 +2,6 @@ package com.epam.jdi.bdd.stepdefs;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;

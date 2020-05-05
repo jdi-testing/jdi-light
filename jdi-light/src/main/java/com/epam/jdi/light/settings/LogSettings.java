@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.settings.LogInfoDetails.*;
 
 public class LogSettings {
     public LogLevels logLevel = INFO;

@@ -35,8 +35,6 @@ import static com.epam.jdi.light.logger.JDILogger.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.light.settings.LogInfoDetails.*;
 import static com.epam.jdi.light.settings.Strategies.*;
 import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -49,7 +47,6 @@ import static java.lang.Integer.*;
 import static java.lang.String.*;
 import static java.util.Arrays.*;
 import static org.apache.commons.lang3.StringUtils.*;
-import static org.openqa.selenium.PageLoadStrategy.NONE;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
 /**
