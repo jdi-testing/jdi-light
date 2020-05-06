@@ -6,16 +6,19 @@ package io.github.epam.testng;
  */
 
 import com.epam.jdi.tools.Safe;
-import org.testng.*;
+import org.testng.IInvokedMethod;
+import org.testng.IInvokedMethodListener;
+import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.epam.jdi.light.driver.ScreenshotMaker.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static java.lang.System.*;
+import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
+import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
     private Safe<Long> start = new Safe<>(0L);

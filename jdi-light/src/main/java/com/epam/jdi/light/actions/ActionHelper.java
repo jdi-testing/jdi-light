@@ -91,6 +91,20 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class ActionHelper {
+    public static int CUT_STEP_TEXT = 70;
+    public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = ActionHelper::getActionName;
+    public static JFunc1<String, String> TRANSFORM_LOG_STRING = s -> s;
+    public static JAction1<ActionObject> BEFORE_JDI_ACTION = ActionHelper::beforeJdiAction;
+    static String previousAllureStep = "";
+    public static JFunc2<ActionObject, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
+    public static JFunc2<ActionObject, Object, Object> AFTER_JDI_ACTION = ActionHelper::afterJdiAction;
+    public static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
+            $("", result -> true),
+            $("true", result -> result instanceof Boolean && (Boolean) result),
+            $("false", result -> result instanceof Boolean && !(Boolean) result),
+            $("not empty", result -> result instanceof List && ((List) result).size() > 0),
+            $("empty", result -> result instanceof List && ((List) result).size() == 0)
+    );
     static String getTemplate(LogLevels level) {
         if (LOGS.logInfoDetails != null) {
             switch (LOGS.logInfoDetails) {
@@ -99,11 +113,11 @@ public class ActionHelper {
                 case LOCATOR: return "{action} ({locator})";
                 case CONTEXT: return "{action} ({context})";
                 case ELEMENT: return "{action} ({element})";
+                default: return "{action}";
             }
         }
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
     }
-    public static int CUT_STEP_TEXT = 70;
     public static String getActionName(ProceedingJoinPoint jp) {
         try {
             MethodSignature method = getJpMethod(jp);
@@ -115,7 +129,6 @@ public class ActionHelper {
             throw exception(ex, "Surround method issue: Can't get action name: ");
         }
     }
-    public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = ActionHelper::getActionName;
     public static String fillTemplate(String template, ProceedingJoinPoint jp, MethodSignature method) {
         String filledTemplate = template;
         try {
@@ -144,8 +157,6 @@ public class ActionHelper {
             throw exception(ex, "Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName());
         }
     }
-    public static JFunc1<String, String> TRANSFORM_LOG_STRING = s -> s;
-    static String previousAllureStep = "";
     public static void beforeJdiAction(ActionObject jInfo) {
         ProceedingJoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
@@ -182,7 +193,6 @@ public class ActionHelper {
             }
         }
     }
-    public static JAction1<ActionObject> BEFORE_JDI_ACTION = ActionHelper::beforeJdiAction;
     public static Object afterStepAction(ActionObject jInfo, Object result) {
         passStep(jInfo.stepUId);
         ProceedingJoinPoint jp = jInfo.jp();
@@ -202,7 +212,6 @@ public class ActionHelper {
         TIMEOUTS.element.reset();
         return result;
     }
-    public static JFunc2<ActionObject, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
     static boolean logResult(ProceedingJoinPoint jp) {
         if (!LOGS.writeToLog)
             return false;
@@ -241,7 +250,6 @@ public class ActionHelper {
         }
         return result;
     }
-    public static JFunc2<ActionObject, Object, Object> AFTER_JDI_ACTION = ActionHelper::afterJdiAction;
     //region Private
     public static String getBeforeLogString(ProceedingJoinPoint jp) {
         String actionName = GET_ACTION_NAME.execute(jp);
@@ -556,13 +564,6 @@ public class ActionHelper {
         JDIAction ja = getJdiAction(jp);
         return ja != null ? ja.condition() : "";
     }
-    public static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
-            $("", result -> true),
-            $("true", result -> result instanceof Boolean && (Boolean) result),
-            $("false", result -> result instanceof Boolean && !(Boolean) result),
-            $("not empty", result -> result instanceof List && ((List) result).size() > 0),
-            $("empty", result -> result instanceof List && ((List) result).size() == 0)
-    );
     static boolean condition(ProceedingJoinPoint jp) {
         String conditionName = getConditionName(jp);
         return CONDITIONS.has(conditionName) && CONDITIONS.get(conditionName).execute(jp) || !CONDITIONS.has(conditionName) && true;

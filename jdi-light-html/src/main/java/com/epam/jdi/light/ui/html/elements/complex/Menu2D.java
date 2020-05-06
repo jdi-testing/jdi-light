@@ -2,25 +2,32 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.*;
-import com.epam.jdi.light.ui.html.elements.annotations.*;
+import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.complex.Selector;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.ui.html.elements.annotations.JMenu;
+import com.epam.jdi.light.ui.html.elements.annotations.MenuActions;
+import com.epam.jdi.light.ui.html.elements.annotations.MenuPrint;
+import com.epam.jdi.light.ui.html.elements.annotations.NoInheritance;
+import com.epam.jdi.light.ui.html.elements.annotations.Separator;
 import com.epam.jdi.light.ui.html.elements.enums.MenuBehaviour;
 import com.epam.jdi.tools.func.JAction1;
 import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static java.lang.String.*;
-import static java.util.Arrays.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static java.lang.String.format;
+import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 02.05.2020
@@ -35,7 +42,9 @@ public class Menu2D extends Selector implements ISetup {
     protected JAction1<UIElement> lastAction = UIElement::click;
     protected boolean inheritLocators = true;
 
-    public Menu2D() { }
+    public Menu2D() {
+    }
+
     public Menu2D(String... locators) {
         this.locators = asList(locators);
     }
@@ -43,14 +52,17 @@ public class Menu2D extends Selector implements ISetup {
     protected void setSeparator(String separator) {
         this.separator = separator;
     }
+
     protected void setPrint(String printFormat, String printSeparator) {
         this.printFormat = printFormat;
         this.printSeparator = printSeparator;
     }
+
     protected void setActions(JAction1<UIElement> pathAction, JAction1<UIElement> lastAction) {
         this.pathAction = pathAction;
         this.lastAction = lastAction;
     }
+
     protected void setActions(MenuBehaviour behaviour) {
         switch (behaviour) {
             case HOVER:
@@ -62,8 +74,12 @@ public class Menu2D extends Selector implements ISetup {
             case SELECT:
                 setActions(UIElement::click, UIElement::click);
                 break;
+            default:
+                setActions(UIElement::click, UIElement::click);
+                break;
         }
     }
+
     protected void offInheritance() {
         inheritLocators = false;
     }
@@ -81,8 +97,8 @@ public class Menu2D extends Selector implements ISetup {
         if (locators.size() == 0)
             return getElementByLocator(values, null);
         return values.size() == 1
-            ? list().get(values.get(0))
-            : getElementByLocator(values, locators.iterator());
+                ? list().get(values.get(0))
+                : getElementByLocator(values, locators.iterator());
     }
 
     protected UIElement getElementByLocator(List<String> values, Iterator<String> iterator) {
@@ -91,9 +107,9 @@ public class Menu2D extends Selector implements ISetup {
         for (int i = 0; i < values.size(); i++) {
             String value = values.get(i);
             element = (iterator == null
-                ? $$(base().getLocator(), parent)
-                : $$(iterator.next(), parent))
-                .get(value);
+                    ? $$(base().getLocator(), parent)
+                    : $$(iterator.next(), parent))
+                    .get(value);
             if (i < values.size() - 1)
                 pathAction.execute(element);
             else
@@ -106,18 +122,22 @@ public class Menu2D extends Selector implements ISetup {
 
     /**
      * Selects particular element by index
+     *
      * @param items String var arg, elements with text to select
      */
-    @JDIAction("Select '{0}' value in '{name}'") @Override
+    @JDIAction("Select '{0}' value in '{name}'")
+    @Override
     public void select(String... items) {
         lastAction.execute(get(items));
     }
 
     /**
      * Selects particular element by index
+     *
      * @param value String var arg, elements with text to select
      */
-    @JDIAction("Select '{0}' value in '{name}'") @Override
+    @JDIAction("Select '{0}' value in '{name}'")
+    @Override
     public void select(String value) {
         lastAction.execute(get(value));
     }
@@ -143,8 +163,8 @@ public class Menu2D extends Selector implements ISetup {
         if (locators.size() == 0)
             return getElementByLocator(indexes, null);
         return indexes.length == 1
-            ? list().get(indexes[0])
-            : getElementByLocator(indexes, locators.iterator());
+                ? list().get(indexes[0])
+                : getElementByLocator(indexes, locators.iterator());
     }
 
     protected UIElement getElementByLocator(int[] indexes, Iterator<String> iterator) {
@@ -155,7 +175,7 @@ public class Menu2D extends Selector implements ISetup {
                 String locator = iterator.next();
                 element = $$(locator, parent).get(indexes[i]);
             } else {
-               element = $$(base().getLocator(), parent).get(indexes[i]);
+                element = $$(base().getLocator(), parent).get(indexes[i]);
             }
             if (i < indexes.length - 1)
                 pathAction.execute(element);
@@ -169,18 +189,22 @@ public class Menu2D extends Selector implements ISetup {
 
     /**
      * Selects particular element by index
+     *
      * @param index int var arg, elements with text to select
      */
-    @JDIAction("Select '{0}' value in '{name}'") @Override
+    @JDIAction("Select '{0}' value in '{name}'")
+    @Override
     public void select(int index) {
         lastAction.execute(get(index));
     }
 
     /**
      * Selects particular element by index
+     *
      * @param indexes int var arg, elements with text to select
      */
-    @JDIAction("Select '{0}' value in '{name}'") @Override
+    @JDIAction("Select '{0}' value in '{name}'")
+    @Override
     public void select(int... indexes) {
         lastAction.execute(get(indexes));
     }
@@ -190,6 +214,7 @@ public class Menu2D extends Selector implements ISetup {
     public List<String> values() {
         return list().noValidation().values();
     }
+
     @Override
     @JDIAction("Get {name} value")
     public String getValue() {
@@ -206,8 +231,8 @@ public class Menu2D extends Selector implements ISetup {
             String value = element.getText();
             String subValues = printValues(inheritParent(element), index + 1);
             result.add(isBlank(subValues)
-                ? value
-                : format(printFormat, value, subValues));
+                    ? value
+                    : format(printFormat, value, subValues));
         }
         return print(result, printSeparator);
     }
@@ -229,6 +254,7 @@ public class Menu2D extends Selector implements ISetup {
         }
         return result;
     }
+
     private Object inheritParent(UIElement element) {
         return inheritLocators ? element : base().parent;
     }
@@ -240,8 +266,12 @@ public class Menu2D extends Selector implements ISetup {
         if (objs.size() > locators.size())
             throw exception("Menu has only '%s' levels but select called for '%s' levels", locators.size(), objs.size());
     }
-    @JDIAction("Get selected value") @Override
-    public String selected() { return list().selected(); }
+
+    @JDIAction("Get selected value")
+    @Override
+    public String selected() {
+        return list().selected();
+    }
 
     public void setup(Field field) {
         if (fieldHasAnnotation(field, JMenu.class, Menu2D.class)) {
@@ -272,8 +302,8 @@ public class Menu2D extends Selector implements ISetup {
     @Override
     public WebList list() {
         By locator = locators.isEmpty()
-            ? base().getLocator()
-            : defineLocator(locators.get(0));
+                ? base().getLocator()
+                : defineLocator(locators.get(0));
         return $$(locator, base().parent);
     }
 }

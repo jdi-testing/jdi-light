@@ -6,17 +6,20 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Link;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static java.lang.String.*;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.lang.String.format;
 
 public class SearchResult extends Section {
-        @UI("h3") public Label name;
-        @UI("p") public Text description;
-        @UI("a") public Link link;
+    @UI("h3")
+    public Label name;
+    @UI("p")
+    public Text description;
+    @UI("a")
+    public Link link;
 
     public String print() {
         return logger.logOff(
-            () -> format("SearchResult{NAME=%s; DESCRIPTION=%s; LINK=%s}",
-                name.getText(), description.getText(), link.ref()));
+                () -> format("SearchResult{NAME=%s; DESCRIPTION=%s; LINK=%s}",
+                        name.getText(), description.getText(), link.ref()));
     }
 }
