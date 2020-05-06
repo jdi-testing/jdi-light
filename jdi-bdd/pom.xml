@@ -21,6 +21,16 @@
             <version>1.2.7</version>
         </dependency>
         <dependency>
+            <artifactId>cucumber-testng</artifactId>
+            <groupId>info.cukes</groupId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <artifactId>cucumber-junit</artifactId>
+            <groupId>info.cukes</groupId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>RELEASE</version>
