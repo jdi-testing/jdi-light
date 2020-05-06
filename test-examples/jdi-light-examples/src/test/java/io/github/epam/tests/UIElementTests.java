@@ -13,12 +13,39 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static io.github.com.pages.UIElementContactFormPage.*;
-import static io.github.epam.EpamGithubSite.*;
-import static io.github.epam.tests.epam.steps.Preconditions.*;
-import static org.testng.Assert.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static io.github.com.pages.UIElementContactFormPage.description;
+import static io.github.com.pages.UIElementContactFormPage.descriptionSetTextAs;
+import static io.github.com.pages.UIElementContactFormPage.descriptionWaitTimeout;
+import static io.github.com.pages.UIElementContactFormPage.findBy;
+import static io.github.com.pages.UIElementContactFormPage.findByNull;
+import static io.github.com.pages.UIElementContactFormPage.forCalculateOne;
+import static io.github.com.pages.UIElementContactFormPage.forCalculateThree;
+import static io.github.com.pages.UIElementContactFormPage.result;
+import static io.github.com.pages.UIElementContactFormPage.sClass;
+import static io.github.com.pages.UIElementContactFormPage.sId;
+import static io.github.com.pages.UIElementContactFormPage.sText;
+import static io.github.com.pages.UIElementContactFormPage.smart;
+import static io.github.com.pages.UIElementContactFormPage.smartId;
+import static io.github.com.pages.UIElementContactFormPage.smartLocator;
+import static io.github.com.pages.UIElementContactFormPage.submit;
+import static io.github.com.pages.UIElementContactFormPage.submitClickArea;
+import static io.github.com.pages.UIElementContactFormPage.submitGetShowInView;
+import static io.github.com.pages.UIElementContactFormPage.submitNotDisplayed;
+import static io.github.com.pages.UIElementContactFormPage.submitNotDisplayedNoWait;
+import static io.github.com.pages.UIElementContactFormPage.submitPage;
+import static io.github.com.pages.UIElementContactFormPage.sum;
+import static io.github.com.pages.UIElementContactFormPage.sumGet;
+import static io.github.com.pages.UIElementContactFormPage.sumGetTextAs;
+import static io.github.com.pages.UIElementContactFormPage.uiNull;
+import static io.github.com.pages.UIElementContactFormPage.visualCheck;
+import static io.github.epam.EpamGithubSite.contactFormPage;
+import static io.github.epam.EpamGithubSite.metalAndColorsPage;
+import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class UIElementTests extends TestsInit {
 

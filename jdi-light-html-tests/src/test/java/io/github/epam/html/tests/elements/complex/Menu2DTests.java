@@ -4,9 +4,16 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.enums.Navigation.*;
-import static io.github.epam.html.tests.site.steps.States.*;
+import static io.github.com.StaticSite.contactFormPage;
+import static io.github.com.StaticSite.datesPage;
+import static io.github.com.StaticSite.html5Page;
+import static io.github.com.StaticSite.leftMenu2D;
+import static io.github.com.StaticSite.menu2D;
+import static io.github.com.StaticSite.metalAndColorsPage;
+import static io.github.com.enums.Navigation.Dates;
+import static io.github.com.enums.Navigation.MetalsColors;
+import static io.github.com.enums.Navigation.Service;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 
 public class Menu2DTests implements TestsInit {
 
