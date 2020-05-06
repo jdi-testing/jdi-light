@@ -6,7 +6,7 @@
 
 ## 1.2.7 (release 05.05.2020)
 * Add log option 'log.info.details' for different levels of the element details in logs #1917
-* Use methods in JDIAction (Step) in logs #1918
+* Use methods in JDIAction (Step) in logs #1920
 * Fix issue #1916
 
 ## 1.2.6 (release 03.05.2020)
