@@ -16,12 +16,9 @@ public class HtmlActions {
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { }
 
-    private final String className = "com.epam.jdi.light.ui.html.actions.HtmlActions";
     @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {
-        if (notThisAround(className))
-            return jp.proceed();
-        ActionObject jInfo = new ActionObject(jp, className);
+    public Object jdiAround(ProceedingJoinPoint jp) {
+        ActionObject jInfo = new ActionObject(jp);
         try {
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);

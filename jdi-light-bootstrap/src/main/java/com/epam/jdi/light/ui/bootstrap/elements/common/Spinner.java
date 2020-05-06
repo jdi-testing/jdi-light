@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.bootstrap.elements.common;
 
+
 import com.epam.jdi.light.elements.common.UIElement;
 
 /**

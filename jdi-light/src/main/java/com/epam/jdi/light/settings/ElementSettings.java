@@ -22,4 +22,5 @@ public class ElementSettings {
     public Pair<String, JFunc1<String, String>> smartName
         = Pair.$("kebab-case", SMART_MAP_NAME_TO_LOCATOR.get("kebab-case"));
     public UseSmartSearch useSmartSearch = UI_AND_ELEMENTS;
+    public JFunc1<UIElement, String> listLabel = el -> el.getText().trim();
 }
