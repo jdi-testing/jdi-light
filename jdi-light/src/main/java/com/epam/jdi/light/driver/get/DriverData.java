@@ -68,7 +68,6 @@ public class DriverData {
     private static String driverPath(String driverName) {
         return mergePath(getDriverFolder(), getOs() == WIN ? driverName + ".exe" : driverName);
     }
-
     public static OsTypes getOs() {
         if (DRIVER.os != null)
             return DRIVER.os;

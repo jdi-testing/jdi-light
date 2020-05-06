@@ -98,11 +98,11 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
     public A size(int size) {
         return size(equalTo(size));
     }
-    @JDIAction("Assert that '{name}' size {0}")
+    @JDIAction("Assert that '{name}' is empty")
     public A empty() {
         return size(0);
     }
-    @JDIAction("Assert that '{name}' size {0}")
+    @JDIAction("Assert that '{name}' is not empty")
     public A notEmpty() {
         return size(greaterThan(0));
     }

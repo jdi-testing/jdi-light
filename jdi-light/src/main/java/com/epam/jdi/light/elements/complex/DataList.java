@@ -86,9 +86,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
                 initClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
                 dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>) types[1];
         } catch (Exception ignore) {
-            //throw exception(ex, "Can't instantiate List<%s, %s> field '%s'", initClass == null
-            //                ? "?" : initClass.getSimpleName(), dataType == null ? "?" : dataType.getSimpleName(),
-            //        field.getName());
+
         }
     }
 }
