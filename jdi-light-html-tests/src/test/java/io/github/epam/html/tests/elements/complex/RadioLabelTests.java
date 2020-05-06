@@ -4,12 +4,14 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.MetalAndColorsPage.*;
-import static io.github.epam.html.tests.site.steps.States.*;
-import static java.util.Arrays.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static io.github.com.StaticSite.metalAndColorsPage;
+import static io.github.com.pages.MetalAndColorsPage.odds;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static java.util.Arrays.asList;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
+import static org.testng.Assert.assertEquals;
 
 public class RadioLabelTests implements TestsInit {
 

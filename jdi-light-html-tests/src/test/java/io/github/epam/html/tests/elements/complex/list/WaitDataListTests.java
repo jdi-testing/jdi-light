@@ -1,16 +1,16 @@
 package io.github.epam.html.tests.elements.complex.list;
 
 import io.github.epam.TestsInit;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.Header.*;
-import static io.github.com.pages.SearchPage.*;
-import static io.github.epam.html.tests.site.steps.States.*;
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.pages.Header.search;
+import static io.github.com.pages.SearchPage.searchS;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 /**
  * Created by Roman_Iovlev on 3/2/2018.
@@ -36,7 +36,7 @@ public class WaitDataListTests implements TestsInit {
 
         try {
             searchS.is().empty();
-            Assert.fail("List should not be empty");
+            fail("List should not be empty");
         } catch (Throwable ignored) { }
         searchS.is().notEmpty();
     }
