@@ -5,14 +5,16 @@ package com.jdi.testng;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import org.testng.*;
+import org.testng.IInvokedMethod;
+import org.testng.IInvokedMethodListener;
+import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static java.lang.System.*;
+import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
     long timeStart = 0;

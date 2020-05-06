@@ -10,8 +10,8 @@ public class ContactInfo extends DataClass<ContactInfo> {
     public String religion;
     public String weather;
     public String description;
-    public int passportNumber;
-    public int passportSeria;
-    public boolean passport;
-    public boolean acceptConditions;
+    public Integer passportNumber;
+    public Integer passportSeria;
+    public Boolean passport;
+    public Boolean acceptConditions;
 }
