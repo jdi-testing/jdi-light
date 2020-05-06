@@ -9,11 +9,13 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.tools.PrintUtils.*;
-import static io.github.com.pages.Header.*;
-import static io.github.com.pages.SearchPage.*;
-import static io.github.epam.tests.recommended.steps.Preconditions.*;
-import static org.testng.Assert.*;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static io.github.com.pages.Header.epamLogo;
+import static io.github.com.pages.Header.search;
+import static io.github.com.pages.SearchPage.search3;
+import static io.github.com.pages.SearchPage.searchS;
+import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Roman_Iovlev on 3/2/2018.

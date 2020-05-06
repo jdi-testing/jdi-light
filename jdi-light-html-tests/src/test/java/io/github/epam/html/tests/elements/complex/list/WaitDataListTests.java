@@ -8,7 +8,10 @@ import static io.github.com.StaticSite.homePage;
 import static io.github.com.pages.Header.search;
 import static io.github.com.pages.SearchPage.searchS;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 

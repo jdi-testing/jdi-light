@@ -3,9 +3,12 @@ package io.github.epam.tests.recommended.steps;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.Header.*;
-import static io.github.epam.entities.Users.*;
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.pages.Header.loginForm;
+import static io.github.com.pages.Header.logout;
+import static io.github.com.pages.Header.userIcon;
+import static io.github.com.pages.Header.userName;
+import static io.github.epam.entities.Users.DEFAULT_USER;
 
 /**
  * Created by Roman_Iovlev on 3/1/2018.
