@@ -92,10 +92,11 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  */
 public class ActionHelper {
     public static int CUT_STEP_TEXT = 70;
+    static String previousAllureStep = "";
     public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = ActionHelper::getActionName;
     public static JFunc1<String, String> TRANSFORM_LOG_STRING = s -> s;
     public static JAction1<ActionObject> BEFORE_JDI_ACTION = ActionHelper::beforeJdiAction;
-    static String previousAllureStep = "";
+    public static JFunc1<ProceedingJoinPoint, MapArray<String, Object>> LOG_VALUES = ActionHelper::getLogOptions;
     public static JFunc2<ActionObject, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
     public static JFunc2<ActionObject, Object, Object> AFTER_JDI_ACTION = ActionHelper::afterJdiAction;
     public static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
@@ -263,7 +264,6 @@ public class ActionHelper {
         }
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
-    public static JFunc1<ProceedingJoinPoint, MapArray<String, Object>> LOG_VALUES = ActionHelper::getLogOptions;
     public static MapArray<String, Object> getLogOptions(ProceedingJoinPoint jp) {
         MapArray<String, Object> map = new MapArray<>();
         JFunc<String> elementName = () -> getElementName(jp);

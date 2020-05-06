@@ -15,13 +15,14 @@ import static org.testng.Assert.assertEquals;
 
 public class RadioLabelTests implements TestsInit {
 
+    String text = "5";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
         odds.select(text);
     }
-    String text = "5";
 
     @Test
     public void getValueTest() {
@@ -39,10 +40,12 @@ public class RadioLabelTests implements TestsInit {
         odds.select(1);
         assertEquals(odds.getValue(), "1");
     }
+
     @Test
     public void selectedTest() {
         assertEquals(odds.selected(), text);
     }
+
     @Test
     public void valuesTest() {
         assertEquals(odds.values(), asList("1", "3", "5", "7"));
