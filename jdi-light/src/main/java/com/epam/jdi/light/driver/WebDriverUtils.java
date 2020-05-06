@@ -6,9 +6,9 @@ import com.epam.jdi.tools.func.JAction1;
 
 import java.io.IOException;
 
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static java.lang.Runtime.*;
-import static java.lang.String.*;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static java.lang.Runtime.getRuntime;
+import static java.lang.String.format;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -35,7 +35,7 @@ public final class WebDriverUtils {
             }
         }
         catch (Exception ignore){
-            logger.info("Can't kill driver processes");
+            getWebSettings().logger.info("Can't kill driver processes");
         }
     }
 

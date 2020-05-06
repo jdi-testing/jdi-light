@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.StringUtils.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static com.epam.jdi.light.settings.CommonSettings.getCommonSettings;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static com.epam.jdi.tools.StringUtils.splitCamelCase;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.openqa.selenium.support.How.*;
 
 /**
@@ -21,7 +21,7 @@ import static org.openqa.selenium.support.How.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebAnnotationsUtil {
-
+    private static final WebSettings webSettings = getWebSettings();
     public static boolean hasAnnotation(Field field, Class<? extends Annotation> annotation) {
         return field.isAnnotationPresent(annotation)
                 || field.getType().isAnnotationPresent(annotation);
@@ -42,17 +42,17 @@ public class WebAnnotationsUtil {
 
     public static void setDomain(Class<?> siteClass) {
         if (siteClass != null) {
-            COMMON.applicationName = siteClass.getSimpleName();
+            getCommonSettings().applicationName = siteClass.getSimpleName();
             if (siteClass.isAnnotationPresent(JSite.class)) {
                 String siteDomain = siteClass.getAnnotation(JSite.class).value();
                 if (!isBlank(siteDomain))
-                    WebSettings.setDomain(siteDomain);
+                    webSettings.setDomain(siteDomain);
             }
         }
     }
     public static String getUrlFromUri(String uri) {
-        if (isBlank(uri)) return getDomain();
-        return getDomain().replaceAll("/*$", "") + "/" + uri.replaceAll("^/*", "");
+        if (isBlank(uri)) return webSettings.getDomain();
+        return webSettings.getDomain().replaceAll("/*$", "") + "/" + uri.replaceAll("^/*", "");
     }
 
     public static List<By> getFrames(Frame frames) {

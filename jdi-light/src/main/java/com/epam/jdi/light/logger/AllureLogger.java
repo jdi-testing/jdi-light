@@ -1,23 +1,28 @@
 package com.epam.jdi.light.logger;
 
+import com.epam.jdi.light.settings.JDISettings;
 import io.qameta.allure.model.StepResult;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static io.qameta.allure.Allure.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.composite.WebPage.getHtml;
+import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.OFF;
+import static com.epam.jdi.light.logger.AllureLogger.AttachmentStrategy.ON_FAIL;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static io.qameta.allure.Allure.addAttachment;
 import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
-import static io.qameta.allure.model.Status.*;
-import static java.nio.file.Files.*;
-import static java.nio.file.Paths.*;
-import static java.util.UUID.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static io.qameta.allure.model.Status.FAILED;
+import static io.qameta.allure.model.Status.PASSED;
+import static java.nio.file.Files.readAllBytes;
+import static java.nio.file.Paths.get;
+import static java.util.UUID.randomUUID;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class AllureLogger {
+    private static final JDISettings jdiSettings = getJDISettings();
     public static AttachmentStrategy HTML_CODE_LOGGING = ON_FAIL;
 
     public static String startStep(String message) {
@@ -33,7 +38,7 @@ public class AllureLogger {
     }
 
     public static void failStep(String uuid, String screenName, String htmlSnapshot, String requests) {
-        if (!LOGS.writeToAllure || isBlank(uuid)) return;
+        if (!jdiSettings.LOGS.writeToAllure || isBlank(uuid)) return;
 
         getLifecycle().updateStep(uuid, s -> s.withStatus(FAILED));
         if (isNotBlank(screenName)) {
@@ -54,7 +59,7 @@ public class AllureLogger {
     }
 
     public static void passStep(String uuid) {
-        if (!LOGS.writeToAllure || isBlank(uuid)) return;
+        if (!jdiSettings.LOGS.writeToAllure || isBlank(uuid)) return;
 
         getLifecycle().updateStep(uuid, s -> s.withStatus(PASSED));
         getLifecycle().stopStep(uuid);

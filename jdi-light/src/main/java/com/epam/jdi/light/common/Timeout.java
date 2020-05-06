@@ -2,18 +2,18 @@ package com.epam.jdi.light.common;
 
 import com.epam.jdi.tools.Safe;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class Timeout {
-    private int INITIAL;
-    private Safe<Integer> DEFAULT;
+    private final int INITIAL;
+    private final Safe<Integer> DEFAULT;
     public Safe<Integer> current;
-    private Safe<Integer> freeze;
+    private final Safe<Integer> freeze;
 
     public Timeout(int timeoutSec) {
         INITIAL = timeoutSec;
@@ -21,6 +21,7 @@ public class Timeout {
         current = new Safe<>(timeoutSec);
         freeze = new Safe<>(0);
     }
+
     public int get() {
         int result = current.get();
         reset();
@@ -37,13 +38,13 @@ public class Timeout {
     public void setUp(int seconds) {
         DEFAULT.set(seconds);
         current.set(seconds);
-        logger.debug("Setup timeout " + seconds + " seconds");
+        getWebSettings().logger.debug("Setup timeout " + seconds + " seconds");
     }
     public void set(int seconds) {
         if (freeze.get() > 0) return;
         if (freeze.get() < 0) throw exception("Timeout freeze broken");
         current.set(seconds);
-        logger.debug("Set timeout " + seconds + " seconds");
+        getWebSettings().logger.debug("Set timeout " + seconds + " seconds");
     }
     public void reset() {
         if (freeze.get() > 0) return;

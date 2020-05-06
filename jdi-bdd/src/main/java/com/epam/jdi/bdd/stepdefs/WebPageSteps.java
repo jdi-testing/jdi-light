@@ -1,15 +1,16 @@
 package com.epam.jdi.bdd.stepdefs;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.tools.JsonUtils.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.testng.Assert.*;
+import static com.epam.jdi.tools.JsonUtils.getInt;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -18,6 +19,7 @@ import static org.testng.Assert.*;
 public class WebPageSteps {
     private final int SCROLLY = 0;
     private final int SCROLLX = 0;
+    private final WebDriverFactory driverFactory = getWebDriverFactory();
 
     //    ACTIONS
     @When("^(?:I |)scroll to the bottom of the page$")
@@ -70,14 +72,14 @@ public class WebPageSteps {
 
     @Then("^the page scrolled by \"(\\d+)\" px down$")
     public void pageScrolledDown(int y) {
-        int execResult = getInt(jsExecute("return window.scrollY;"));
+        int execResult = getInt(driverFactory.jsExecute("return window.scrollY;"));
         assertThat(execResult, Matchers.greaterThan(SCROLLY + y-2));
         assertThat(execResult, Matchers.lessThan(SCROLLY + y+1));
     }
 
     @Then("^the page scrolled by \"(\\d+)\" px right$")
     public void pageScrolledRight(int x) {
-        int execResult = getInt(jsExecute("return Math.ceil(window.scrollX);"));
+        int execResult = getInt(driverFactory.jsExecute("return Math.ceil(window.scrollX);"));
         assertThat(execResult, Matchers.greaterThan(SCROLLX + x-2));
         assertThat(execResult, Matchers.lessThan(SCROLLX + x+1));
     }

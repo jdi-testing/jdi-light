@@ -4,10 +4,10 @@ import org.apache.logging.log4j.Level;
 
 import java.util.List;
 
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static java.lang.Integer.*;
-import static java.util.Arrays.*;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static java.lang.Integer.MAX_VALUE;
+import static java.util.Arrays.asList;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -24,7 +24,7 @@ public enum LogLevels {
     TRACE(600),       // Trace info (not for prod)
     ALL(MAX_VALUE);   // All log messages
 
-    private int level;
+    private final int level;
     LogLevels(int level) {
         this.level = level;
     }
@@ -47,7 +47,7 @@ public enum LogLevels {
     public static LogLevels parseLogLevel(String logLevel) {
         switch (logLevel.toLowerCase()) {
             case "off":
-                LOGS.writeToLog = false;
+                getJDISettings().LOGS.writeToLog = false;
                 return OFF;
             case "fatal": return FATAL;
             case "error": return ERROR;

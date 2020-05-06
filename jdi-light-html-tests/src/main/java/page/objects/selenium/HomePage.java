@@ -5,13 +5,13 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 public class HomePage {
     public HomePage() {
-        initElements(getDriver(), this);
+        initElements(getWebDriverFactory().getDriver(), this);
     }
     @FindBy(css="form #name") public WebElement userName;
     public WebElement password = $("form #password");

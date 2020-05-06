@@ -2,14 +2,19 @@ package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.CanBeSelected;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.tools.func.*;
+import com.epam.jdi.light.settings.WebSettings;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
@@ -19,28 +24,33 @@ import org.openqa.selenium.support.ui.Select;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.ElementArea.*;
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.EnumUtils.*;
-import static com.epam.jdi.tools.JsonUtils.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.lang.Math.*;
+import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
+import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.JsonUtils.getInt;
+import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.switcher.SwitchActions.Case;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
+import static java.lang.Math.abs;
+import static java.lang.String.format;
 import static java.lang.String.valueOf;
-import static java.lang.String.*;
-import static java.util.Arrays.*;
-import static org.apache.commons.lang3.StringUtils.*;
-import static org.openqa.selenium.Keys.*;
+import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.openqa.selenium.Keys.BACK_SPACE;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -49,6 +59,7 @@ import static org.openqa.selenium.Keys.*;
 public class UIElement extends JDIBase
         implements WebElement, SetValue, HasAssert<IsAssert>,
         HasClick, IsText, HasLabel, HasPlaceholder, IsInput, HasCheck, CanBeSelected {
+    private final WebSettings webSettings = getWebSettings();
     //region Constructors
     public UIElement() { }
     public UIElement(WebElement el) { setWebElement(el); }
@@ -302,20 +313,20 @@ public class UIElement extends JDIBase
             throw exception("Can't perform click. Element is disabled");
         switch (area) {
             case TOP_LEFT:
-                click(1,1);
-                logger.debug("Click Top Left");
+                click(1, 1);
+                webSettings.logger.debug("Click Top Left");
                 break;
             case TOP_RIGHT:
-                click(getRect().getWidth()-1,1);
-                logger.debug("Click Top Right");
+                click(getRect().getWidth() - 1, 1);
+                webSettings.logger.debug("Click Top Right");
                 break;
             case BOTTOM_LEFT:
-                click(1,getRect().getHeight()-1);
-                logger.debug("Click Bottom Left");
+                click(1, getRect().getHeight() - 1);
+                webSettings.logger.debug("Click Bottom Left");
                 break;
             case BOTTOM_RIGHT:
-                click(getRect().getWidth()-1,getRect().getHeight()-1);
-                logger.debug("Click Bottom Right");
+                click(getRect().getWidth() - 1, getRect().getHeight() - 1);
+                webSettings.logger.debug("Click Bottom Right");
                 break;
             case CENTER:
                 get().click();
@@ -580,7 +591,7 @@ public class UIElement extends JDIBase
         return hasImage() ? new File(imageFilePath) : null;
     }
     private String getScreenshotName(String tag) {
-        return varName + tag + SCREEN.fileSuffix;
+        return varName + tag + getJDISettings().SCREEN.fileSuffix;
     }
 
     @JDIAction(level = DEBUG)

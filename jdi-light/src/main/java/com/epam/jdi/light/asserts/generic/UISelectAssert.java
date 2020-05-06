@@ -12,9 +12,9 @@ import org.hamcrest.Matchers;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -122,7 +122,7 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
         return disappear();
     }
     public A notAppear() {
-        return notAppear(TIMEOUTS.element.get());
+        return notAppear(getJDISettings().TIMEOUTS.element.get());
     }
 
     @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)

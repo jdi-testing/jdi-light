@@ -7,12 +7,12 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pseudo.site.PseudoSite;
 
-import static com.epam.jdi.light.driver.WebDriverUtils.*;
-import static com.epam.jdi.light.elements.init.InitActions.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static io.github.com.StaticSite.*;
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static io.github.com.StaticSite.homePage;
 
 public interface TestsInit {
     @BeforeSuite(alwaysRun = true)
@@ -22,7 +22,7 @@ public interface TestsInit {
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
         homePage.open();
-        logger.toLog("Run Tests");
+        getWebSettings().logger.toLog("Run Tests");
     }
 
     @AfterSuite(alwaysRun = true)
@@ -31,6 +31,6 @@ public interface TestsInit {
     }
 
     default boolean isFireFox() {
-        return DRIVER.name.toLowerCase().equals("firefox");
+        return getJDISettings().DRIVER.name.toLowerCase().equals("firefox");
     }
 }

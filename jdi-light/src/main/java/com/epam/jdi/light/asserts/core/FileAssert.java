@@ -7,13 +7,13 @@ import org.hamcrest.Matcher;
 
 import java.io.File;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.PathUtils.*;
-import static java.util.Objects.*;
-import static org.apache.commons.io.FileUtils.*;
-import static org.hamcrest.MatcherAssert.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static java.util.Objects.requireNonNull;
+import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -24,14 +24,17 @@ public class FileAssert extends BaseAssert<IBaseElement> {
     public static FileAssert assertThatFile(String fileName) {
         return new FileAssert(fileName);
     }
-    private File file;
+
+    private final File file;
 
     public FileAssert(String fileName) {
         super(fileName);
-        file = new File(mergePath(DRIVER.downloadsFolder, fileName));
+        file = new File(mergePath(getJDISettings().DRIVER.downloadsFolder, fileName));
     }
+
     /**
      * Check that file is downloaded
+     *
      * @return FileAssert
      */
     @JDIAction("Assert that file '{name}' is downloaded")
@@ -82,9 +85,9 @@ public class FileAssert extends BaseAssert<IBaseElement> {
         return hasSize(size-10, size+10);
     }
     public static void cleanupDownloads() {
-        File dir = new File(DRIVER.downloadsFolder);
+        File dir = new File(getJDISettings().DRIVER.downloadsFolder);
         for(File file : requireNonNull(dir.listFiles()))
             file.delete();
-        logger.info("Remove all downloads successfully");
+        getWebSettings().logger.info("Remove all downloads successfully");
     }
 }

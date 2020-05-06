@@ -1,21 +1,27 @@
 package com.epam.jdi.bdd;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.base.*;
-import cucumber.api.java.en.*;
+import com.epam.jdi.light.elements.interfaces.base.HasCheck;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.IClickable;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.openqa.selenium.Dimension;
 
 import static com.epam.jdi.bdd.BDDUtils.*;
-import static com.epam.jdi.light.common.ElementArea.*;
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.common.ElementArea.JS;
+import static com.epam.jdi.light.driver.WebDriverByUtils.byText;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -24,7 +30,7 @@ import static org.junit.Assert.*;
 public class JDISteps {
     @Given("^I open application$")
     public void iMOpenSite() {
-        openUrl(getDomain());
+        openUrl(getWebSettings().getDomain());
     }
 
     @Given("^I open \"([^\"]*)\"(?: page|)$")
@@ -140,7 +146,7 @@ public class JDISteps {
     @When("^(?:I |)set browser size to \"(\\d+)\"px width and \"(\\d+)\"px height$")
     public void setBrowserSize(int width, int height) {
         Dimension dimension = new Dimension(width, height);
-        WebDriverFactory.getDriver().manage().window().setSize(dimension);
+        getWebDriverFactory().getDriver().manage().window().setSize(dimension);
     }
 
     @Given("Page with url \"([^\"]*)\" openned$")

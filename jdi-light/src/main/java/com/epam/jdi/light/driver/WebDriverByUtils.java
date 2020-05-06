@@ -4,33 +4,37 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static java.lang.String.*;
-import static java.util.Collections.*;
-import static org.apache.logging.log4j.util.Strings.*;
-import static org.openqa.selenium.support.ui.Quotes.*;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static java.lang.String.format;
+import static java.util.Collections.singletonList;
+import static org.apache.logging.log4j.util.Strings.isNotEmpty;
+import static org.openqa.selenium.support.ui.Quotes.escape;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public final class WebDriverByUtils {
-
-    private WebDriverByUtils() { }
-
+    private static final WebDriver webDriver = getWebDriverFactory().getDriver();
     public static Function<String, By> getByFunc(By by) {
         return first(getMapByTypes(), key -> by.toString().contains(key));
     }
@@ -70,11 +74,13 @@ public final class WebDriverByUtils {
         int index = byAsString.indexOf(": ") + 2;
         return byAsString.substring(index);
     }
-    private static MapArray<String, String> byReplace = new MapArray<>(new Object[][] {
+
+    private static final MapArray<String, String> byReplace = new MapArray<>(new Object[][]{
             {"cssSelector", "css"},
             {"tagName", "tag"},
             {"className", "class"}
     });
+
     public static String getByName(By by) {
         Matcher m = Pattern.compile("By\\.(?<locator>[a-zA-Z]+):.*").matcher(by.toString());
         if (m.find()) {
@@ -94,7 +100,7 @@ public final class WebDriverByUtils {
         return shortBy(by, () -> "No locator");
     }
     public static String shortBy(By by, IBaseElement el) {
-        return shortBy(by, () -> printSmartLocators(el));
+        return shortBy(by, () -> getWebSettings().printSmartLocators(el));
     }
 
     private static String shortBy(By by, JFunc<String> noLocator) {
@@ -135,7 +141,7 @@ public final class WebDriverByUtils {
         return map;
     }
     public static List<WebElement> uiSearch(By by) {
-        return uiSearch(getDriver(), by);
+        return uiSearch(webDriver, by);
     }
 
     public static List<WebElement> uiSearch(SearchContext ctx, By by) {
@@ -150,7 +156,7 @@ public final class WebDriverByUtils {
             String byName = getByName((By) step);
             if (byName.equals("id") ||
                     (byName.equals("css") && getByLocator((By) step).matches("^#[a-zA-Z-]+$"))) {
-                return getDriver().findElements((By) step);
+                return webDriver.findElements((By) step);
             } else {
                 return els == null
                     ? ctx.findElements((By) step)

@@ -4,25 +4,29 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.tools.StringUtils.*;
-import static java.lang.Thread.*;
-import static org.apache.logging.log4j.LogManager.*;
-import static org.apache.logging.log4j.core.config.Configurator.*;
+import static com.epam.jdi.tools.StringUtils.format;
+import static java.lang.Thread.currentThread;
+import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.apache.logging.log4j.core.config.Configurator.setLevel;
+import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class JDILogger implements ILogger {
-    private static MapArray<String, JDILogger> loggers = new MapArray<>();
-    private static Marker jdiMarker = MarkerManager.getMarker("JDI");
+    private static final MapArray<String, JDILogger> loggers = new MapArray<>();
+    private static final Marker jdiMarker = MarkerManager.getMarker("JDI");
 
     public static JDILogger instance(String name) {
         if (!loggers.has(name))
@@ -47,19 +51,22 @@ public class JDILogger implements ILogger {
     public LogLevels getLogLevel() {
         return logLevel.get();
     }
+
     public void setLogLevel(LogLevels level) {
         logLevel = new Safe<>(level);
         setRootLevel(getLog4j2Level(level));
         setLevel(name, getLog4j2Level(level));
     }
-    private Safe<Integer> logOffDeepness = new Safe<>(0);
+
+    private final Safe<Integer> logOffDeepness = new Safe<>(0);
 
     public void logOff() {
         logLevel.set(OFF);
-        logOffDeepness.update(v->v+1);
+        logOffDeepness.update(v -> v + 1);
     }
+
     public void logOn() {
-        logOffDeepness.update(v->v-1);
+        logOffDeepness.update(v -> v - 1);
         if (logOffDeepness.get() > 0) return;
         if (logOffDeepness.get() == 0)
             logLevel.reset();
@@ -76,26 +83,30 @@ public class JDILogger implements ILogger {
     public <T> T logOff(JFunc<T> func) {
         LogLevels tempLevel = logLevel.get();
         if (logLevel.get() == OFF) {
-            try { return func.invoke();
+            try {
+                return func.invoke();
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
         }
         logLevel.set(OFF);
         T result;
-        try{ result = func.invoke(); }
-        catch (Exception ex) {
+        try {
+            result = func.invoke();
+        } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
         logLevel.set(tempLevel);
         return result;
     }
-    private String name;
-    private Logger logger;
-    private List<Long> multiThread = new ArrayList<>();
+
+    private final String name;
+    private final Logger logger;
+    private final List<Long> multiThread = new ArrayList<>();
+
     private String getRecord(String record, Object... args) {
         long currentThreadId = currentThread().getId();
-        if (currentThreadId != INIT_THREAD_ID  && !multiThread.contains(currentThreadId))
+        if (currentThreadId != getWebDriverFactory().getInitThreadId() && !multiThread.contains(currentThreadId))
             multiThread.add(currentThreadId);
         return format(multiThread.size() > 1
                 ? "[" + currentThread().getId() + "]" + record

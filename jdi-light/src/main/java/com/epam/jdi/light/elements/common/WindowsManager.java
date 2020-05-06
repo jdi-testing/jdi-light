@@ -1,14 +1,16 @@
 package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -16,11 +18,13 @@ import static org.apache.commons.lang3.StringUtils.*;
  */
 public class WindowsManager {
     private static Set<String> windowHandles;
-    private static MapArray<String, String> windowHandlesMap = new MapArray<>();
+    private static final MapArray<String, String> windowHandlesMap = new MapArray<>();
     private static boolean newWindow = false;
+    private static final WebDriverFactory driverFactory = getWebDriverFactory();
+    private static final WebDriver webDriver = driverFactory.getDriver();
 
     public static Set<String> getWindows() {
-        Set<String> wHandles = getDriver().getWindowHandles();
+        Set<String> wHandles = webDriver.getWindowHandles();
         if (windowHandles != null && windowHandles.size() < wHandles.size())
             newWindow = true;
         return windowHandles = wHandles;
@@ -45,7 +49,7 @@ public class WindowsManager {
         switchToNewWindow();
     }
     public static void setWindowName(String value) {
-        windowHandlesMap.update(value, getDriver().getWindowHandle());
+        windowHandlesMap.update(value, webDriver.getWindowHandle());
     }
 
     /**
@@ -63,11 +67,14 @@ public class WindowsManager {
     @JDIAction("Switch to new window")
     public static void switchToNewWindow() {
         String last = "";
-        for (String window : getWindows())
+        for (String window : getWindows()) {
             last = window;
-        if (!isBlank(last))
-            getDriver().switchTo().window(last);
-        else throw exception("No windows found");
+        }
+        if (!isBlank(last)) {
+            webDriver.switchTo().window(last);
+        } else {
+            throw exception("No windows found");
+        }
     }
 
     /**
@@ -75,7 +82,7 @@ public class WindowsManager {
      */
     @JDIAction("Open new tab")
     public static void openNewTab() {
-        jsExecute("window.open()");
+        driverFactory.jsExecute("window.open()");
     }
 
     /**
@@ -83,7 +90,7 @@ public class WindowsManager {
      */
     @JDIAction("Go back to original window")
     public static void originalWindow() {
-        getDriver().switchTo().window(getWindows().iterator().next());
+        webDriver.switchTo().window(getWindows().iterator().next());
     }
 
     /**
@@ -100,7 +107,7 @@ public class WindowsManager {
         for (String window : getWindows()) {
             counter++;
             if (counter == index) {
-                getDriver().switchTo().window(window);
+                webDriver.switchTo().window(window);
                 return;
             }
         }
@@ -114,7 +121,7 @@ public class WindowsManager {
     public static void switchToWindow(String value) {
         if (!windowHandlesMap.has(value))
             throw exception("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", value);
-        getDriver().switchTo().window(windowHandlesMap.get(value));
+        webDriver.switchTo().window(windowHandlesMap.get(value));
     }
 
     /**
@@ -122,7 +129,7 @@ public class WindowsManager {
      */
     @JDIAction("Close current window")
     public static void closeWindow() {
-        getDriver().close();
+        webDriver.close();
         originalWindow();
     }
 
@@ -142,6 +149,6 @@ public class WindowsManager {
      */
     @JDIAction("Resize window '{0}'")
     public static void resizeWindow(int width, int height) {
-        getDriver().manage().window().setSize(new Dimension(width, height));
+        webDriver.manage().window().setSize(new Dimension(width, height));
     }
 }

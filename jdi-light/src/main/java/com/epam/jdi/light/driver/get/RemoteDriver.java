@@ -1,10 +1,10 @@
 package com.epam.jdi.light.driver.get;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static java.lang.String.*;
-import static java.lang.System.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static java.lang.String.format;
+import static java.lang.System.getenv;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -25,7 +25,7 @@ public class RemoteDriver {
     }
     public static String appium() {return getRemoteURL("http://0.0.0.0:4723/");}
     public static String getRemoteURL() {
-        return getRemoteURL(DRIVER.remoteUrl);
+        return getRemoteURL(getJDISettings().DRIVER.remoteUrl);
     }
     public static String getRemoteURL(String remoteUrl) {
         try {

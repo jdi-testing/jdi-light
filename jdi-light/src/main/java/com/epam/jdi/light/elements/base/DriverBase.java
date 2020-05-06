@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.UIUtils;
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
@@ -12,24 +11,32 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.PAGES;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.StringUtils.splitCamelCase;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public abstract class DriverBase implements JDIElement {
-    public String driverName = DRIVER.name;
-    public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
-    public JavascriptExecutor js() { return (JavascriptExecutor) driver(); }
+    public String driverName = getJDISettings().DRIVER.name;
+
+    public WebDriver driver() {
+        return getWebDriverFactory().getDriverByName(driverName);
+    }
+
+    public JavascriptExecutor js() {
+        return (JavascriptExecutor) driver();
+    }
 
     public <T> T asEntity(Class<T> entityClass) {
         return UIUtils.asEntity(this, entityClass);
     }
+
     public String name = "";
     public String varName = "";
     public String typeName = "";

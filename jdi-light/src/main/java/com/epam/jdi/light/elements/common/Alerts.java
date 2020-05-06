@@ -1,18 +1,21 @@
 package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.WebDriverFactory;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.Alert;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class Alerts {
+
+    private static final WebDriverFactory driverFactory = getWebDriverFactory();
 
     /**
      * Accept alert
@@ -62,6 +65,6 @@ public class Alerts {
     }
 
     private static Alert alert() {
-        return getDriver().switchTo().alert();
+        return driverFactory.getDriver().switchTo().alert();
     }
 }

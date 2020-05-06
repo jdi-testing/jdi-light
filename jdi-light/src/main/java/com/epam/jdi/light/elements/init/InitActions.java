@@ -8,9 +8,15 @@ import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.init.rules.*;
-import com.epam.jdi.light.elements.interfaces.base.*;
-import com.epam.jdi.light.elements.interfaces.complex.*;
+import com.epam.jdi.light.elements.init.rules.AnnotationRule;
+import com.epam.jdi.light.elements.init.rules.InitRule;
+import com.epam.jdi.light.elements.init.rules.SetupRule;
+import com.epam.jdi.light.elements.interfaces.base.HasUIList;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
+import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
@@ -23,22 +29,22 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.VisualCheckAction.*;
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
-import static com.epam.jdi.light.elements.init.rules.AnnotationRule.*;
-import static com.epam.jdi.light.elements.init.rules.InitRule.*;
-import static com.epam.jdi.light.elements.init.rules.SetupRule.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.VisualCheckAction.IS_DISPLAYED;
+import static com.epam.jdi.light.driver.WebDriverByUtils.asTextLocator;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.updatePage;
+import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
+import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
+import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.map.MapArray.map;
-import static com.epam.jdi.tools.pairs.Pair.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static com.epam.jdi.tools.pairs.Pair.$;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -74,18 +80,18 @@ public class InitActions {
     );
 
     public static MapArray<String, SetupRule> SETUP_RULES = map(
-        $("Element", sRule(info -> isInterface(info.instance.getClass(), IBaseElement.class),
-            InitActions::elementSetup)),
-        $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
-        $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
-        $("PageObject", sRule(info -> isClassOr(info.type(), WebPage.class, PageObject.class) ||
-                isPageObject(info.instance.getClass()),
-            PageFactory::initElements)),
-        $("VisualCheck", sRule(
-            info -> VISUAL_ACTION_STRATEGY == IS_DISPLAYED && isInterface(info.instance.getClass(), ICoreElement.class),
-            i-> ((ICoreElement)i.instance).core().params.update("visualCheck",""))),
-        $("List", sRule(info -> info.type() == List.class && isInterface(info.type(), HasUIList.class),
-            i -> ((HasUIList)i.instance).list().indexFromZero()))
+            $("Element", sRule(info -> isInterface(info.instance.getClass(), IBaseElement.class),
+                    InitActions::elementSetup)),
+            $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup) info.instance).setup(info.field))),
+            $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
+            $("PageObject", sRule(info -> isClassOr(info.type(), WebPage.class, PageObject.class) ||
+                            isPageObject(info.instance.getClass()),
+                    PageFactory::initElements)),
+            $("VisualCheck", sRule(
+                    info -> getWebSettings().VISUAL_ACTION_STRATEGY == IS_DISPLAYED && isInterface(info.instance.getClass(), ICoreElement.class),
+                    i -> ((ICoreElement) i.instance).core().params.update("visualCheck", ""))),
+            $("List", sRule(info -> info.type() == List.class && isInterface(info.type(), HasUIList.class),
+                    i -> ((HasUIList) i.instance).list().indexFromZero()))
     );
 
     private static boolean isSetupValue(SiteInfo info) {
@@ -103,7 +109,7 @@ public class InitActions {
             jdi.setParent(info.parent);
         if (!jdi.name.matches("[A-Z].*]"))
             jdi.setName(info);
-        jdi.driverName = isBlank(info.driverName) ? DRIVER.name : info.driverName;
+        jdi.driverName = isBlank(info.driverName) ? getJDISettings().DRIVER.name : info.driverName;
         return jdi;
     }
     public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
@@ -126,45 +132,44 @@ public class InitActions {
         $("GetAny", aRule(GetAny.class, (e, a)-> e.base().noValidation())),
         $("GetVisible", aRule(GetVisible.class, (e, a)-> e.base().searchVisible())),
         $("GetVisibleEnabled", aRule(GetVisibleEnabled.class, (e, a)-> e.base().visibleEnabled())),
-        $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.base().inView())),
-        $("PageName", aRule(PageName.class, (e, a)-> e.base().setPage(a.value()))),
-        $("StartIndex", aRule(StartIndex.class, (e, a)-> {
-            if (isInterface(e.getClass(), HasUIList.class))
-                ((HasUIList)e).list().startIndex(a.value());
-        })),
-        $("CloseAfterSelect", aRule(CloseAfterSelect.class, (e, a)-> {
-            if (isClass(e.getClass(), DropdownExpand.class))
-                ((DropdownExpand)e).autoClose = true;
-        })),
-        $("SId", aRule(SId.class, (e,a) -> {
-            e.base().setLocator("#" + toKebabCase(e.getName()));
-            e.base().locator.isRoot = true;
-        })),
-        $("Smart Text", aRule(SText.class, (e, a) -> e.base().setLocator(asTextLocator(splitCamelCase(e.getName()))))),
-        $("Smart Name", aRule(SName.class, (e, a) -> e.base().setLocator(format("[name='%s']", toKebabCase(e.getName()))))),
-        $("Smart", aRule(Smart.class, (e, a) -> e.base().setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName()))))),
-        $("Smart Class", aRule(SClass.class, (e, a) -> e.base().setLocator(format(".%s", toKebabCase(e.getName()))))),
-        $("List UI", aRule(UI.class, (e,a,f)-> {
-            UI[] uis = f.getAnnotationsByType(UI.class);
-            if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
-                e.base().setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
+            $("GetShowInView", aRule(GetShowInView.class, (e, a) -> e.base().inView())),
+            $("PageName", aRule(PageName.class, (e, a) -> e.base().setPage(a.value()))),
+            $("StartIndex", aRule(StartIndex.class, (e, a) -> {
+                if (isInterface(e.getClass(), HasUIList.class))
+                    ((HasUIList) e).list().startIndex(a.value());
             })),
-        $("FindBy UI", aRule(FindBy.class, (e,a,f)-> {
-            FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
-            if (jfindbys.length > 0) {
-                FindBy findBy = first(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP));
-                if (findBy != null) {
-                    e.base().setLocator(findByToBy(findBy));
+            $("CloseAfterSelect", aRule(CloseAfterSelect.class, (e, a) -> {
+                if (isClass(e.getClass(), DropdownExpand.class))
+                    ((DropdownExpand) e).autoClose = true;
+            })),
+            $("SId", aRule(SId.class, (e, a) -> {
+                e.base().setLocator("#" + toKebabCase(e.getName()));
+                e.base().locator.isRoot = true;
+            })),
+            $("Smart Text", aRule(SText.class, (e, a) -> e.base().setLocator(asTextLocator(splitCamelCase(e.getName()))))),
+            $("Smart Name", aRule(SName.class, (e, a) -> e.base().setLocator(format("[name='%s']", toKebabCase(e.getName()))))),
+            $("Smart", aRule(Smart.class, (e, a) -> e.base().setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName()))))),
+            $("Smart Class", aRule(SClass.class, (e, a) -> e.base().setLocator(format(".%s", toKebabCase(e.getName()))))),
+            $("List UI", aRule(UI.class, (e, a, f) -> {
+                UI[] uis = f.getAnnotationsByType(UI.class);
+                if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(getWebSettings().TEST_GROUP)))
+                    e.base().setLocator(findByToBy(first(uis, j -> j.group().equals(getWebSettings().TEST_GROUP))));
+            })),
+            $("FindBy UI", aRule(FindBy.class, (e, a, f) -> {
+                FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
+                if (jfindbys.length > 0) {
+                    FindBy findBy = first(jfindbys, j -> j.group().equals("") || j.group().equals(getWebSettings().TEST_GROUP));
+                    if (findBy != null) {
+                        e.base().setLocator(findByToBy(findBy));
+                    }
                 }
-            }
             })),
-        $("Visual Check", aRule(VisualCheck.class, (e, a) ->  {
-            if (a.value())
-                e.base().params.update("visualCheck", "");
-            else
-                if (e.base().params.keys().contains("visualCheck"))
+            $("Visual Check", aRule(VisualCheck.class, (e, a) -> {
+                if (a.value())
+                    e.base().params.update("visualCheck", "");
+                else if (e.base().params.keys().contains("visualCheck"))
                     e.base().params.removeByKey("visualCheck");
-        }))
+            }))
     );
 
     public static IBaseElement elementSetup(SiteInfo info) {

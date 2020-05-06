@@ -8,15 +8,15 @@ package com.epam.jdi.eyes;
 
 import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.common.VisualCheckPage;
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.tools.DataClass;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.WebDriver;
 
-import static com.epam.jdi.eyes.JDIEyes.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.eyes.JDIEyes.EYES_CONFIG;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static com.epam.jdi.tools.StringUtils.format;
 
 public class EyesConfig extends DataClass<EyesConfig> {
     public String appName;
@@ -26,18 +26,18 @@ public class EyesConfig extends DataClass<EyesConfig> {
 
     public EyesConfig() {
         appName = "JDI Application";
-        webDriver = WebDriverFactory::getDriver;
+        webDriver = (JFunc<WebDriver>) getWebDriverFactory().getDriver();
         try {
             apiKey = System.getenv("APPLITOOLS_API_KEY");
         } catch (Throwable ignore) { }
         batchName = format("%s %s", appName, Timer.nowDate());
     }
     public EyesConfig pageStrategy(VisualCheckPage checkPageStrategy) {
-        VISUAL_PAGE_STRATEGY = checkPageStrategy;
+        getWebSettings().VISUAL_PAGE_STRATEGY = checkPageStrategy;
         return EYES_CONFIG;
     }
     public EyesConfig actionStrategy(VisualCheckAction checkActionStrategy) {
-        VISUAL_ACTION_STRATEGY = checkActionStrategy;
+        getWebSettings().VISUAL_ACTION_STRATEGY = checkActionStrategy;
         return EYES_CONFIG;
     }
 }

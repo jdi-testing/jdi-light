@@ -1,14 +1,20 @@
 package com.epam.jdi.light.elements.composite;
 
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.CheckTypes;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.PageChecks;
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.settings.JDISettings;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 
 import javax.imageio.ImageIO;
@@ -18,34 +24,41 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static com.epam.jdi.light.common.CheckTypes.NONE;
 import static com.epam.jdi.light.common.CheckTypes.*;
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.VisualCheckPage.*;
-import static com.epam.jdi.light.driver.ScreenshotMaker.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
+import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
+import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
 import static com.epam.jdi.light.elements.base.OutputTemplates.*;
-import static com.epam.jdi.light.elements.common.WindowsManager.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.checkNewWindowIsOpened;
+import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.JsonUtils.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PathUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static com.epam.jdi.tools.JsonUtils.getDouble;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.lang.String.format;
-import static org.apache.commons.io.FileUtils.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.io.FileUtils.copyFile;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 25.03.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebPage extends DriverBase implements PageObject {
+    private static final WebDriverFactory driverFactory = getWebDriverFactory();
+    private static final WebDriver webDriver = driverFactory.getDriver();
+    private static final JDISettings jdiSettings = getJDISettings();
+    private static final WebSettings webSettings = getWebSettings();
     public String url = "";
     public String title = "";
 
@@ -54,10 +67,10 @@ public class WebPage extends DriverBase implements PageObject {
     public CheckTypes checkTitleType = NONE;
 
     public <T> Form<T> asForm() {
-        return new Form<>().setPageObject(this).setup(Form.class,e->e.setName(getName()+" Form").setParent(this));
+        return new Form<>().setPageObject(this).setup(Form.class, e -> e.setName(getName() + " Form").setParent(this));
     }
 
-    private static Safe<String> currentPage = new Safe<>("Undefined Page");
+    private static final Safe<String> currentPage = new Safe<>("Undefined Page");
     public static String getCurrentPage() { return currentPage.get(); }
     public static void setCurrentPage(WebPage page) {
         currentPage.set(page.getName());
@@ -76,12 +89,12 @@ public class WebPage extends DriverBase implements PageObject {
         page.open();
     }
     public static void openUrl(String url) {
-        init();
+        webSettings.init();
         new WebPage(url).open();
     }
     public static void openSite() {
-        init();
-        new WebPage(getDomain()).open();
+        webSettings.init();
+        new WebPage(webSettings.getDomain()).open();
     }
     public static void openSite(Class<?> site) {
         initSite(site);
@@ -93,7 +106,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(level = DEBUG)
     public static String getUrl() {
-        return getDriver().getCurrentUrl();
+        return webDriver.getCurrentUrl();
     }
 
     /**
@@ -102,7 +115,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(level = DEBUG)
     public static String getTitle() {
-        return getDriver().getTitle();
+        return webDriver.getTitle();
     }
 
     void setUrl(String uri) {
@@ -120,12 +133,14 @@ public class WebPage extends DriverBase implements PageObject {
         } else if (validate == null) checkUrlType = MATCH;
         if (!uri.contains("://"))
             url = getUrlFromUri(uri);
-        else  { if (isBlank(uri)) url = getDomain(); }
+        else {
+            if (isBlank(uri)) url = webSettings.getDomain();
+        }
     }
     public void updatePageData(Url urlAnnotation, Title titleAnnotation) {
         if (urlAnnotation != null)
             setUrl(urlAnnotation.value(), urlAnnotation.template(), urlAnnotation.validate());
-        else setUrl(getDomain());
+        else setUrl(webSettings.getDomain());
         if (titleAnnotation != null) {
             title = titleAnnotation.value();
             checkTitleType = titleAnnotation.validate();
@@ -146,7 +161,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Open '{name}'(url={0})")
     private void open(String url) {
-        init();
+        webSettings.init();
         CacheValue.reset();
         driver().navigate().to(url);
         getWindows();
@@ -175,7 +190,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
     public void checkOpened() {
-        if (noRunDrivers())
+        if (driverFactory.noRunDrivers())
             throw exception("Page '%s' is not opened: Driver is not run", toString());
         String result = Switch(checkUrlType).get(
             Value(NONE, ""),
@@ -194,7 +209,7 @@ public class WebPage extends DriverBase implements PageObject {
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
         setCurrentPage(this);
-        if (VISUAL_PAGE_STRATEGY == CHECK_PAGE)
+        if (webSettings.VISUAL_PAGE_STRATEGY == CHECK_PAGE)
             visualWindowCheck();
     }
     /**
@@ -209,7 +224,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(level = DEBUG)
     public boolean isOpened() {
-        if (noRunDrivers())
+        if (driverFactory.noRunDrivers())
             return false;
         boolean result = Switch(checkUrlType).get(
                 Value(NONE, t -> true),
@@ -253,7 +268,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Reload current page")
     public static void refresh() {
-        getDriver().navigate().refresh();
+        webDriver.navigate().refresh();
     }
     public static void reload() { refresh(); }
 
@@ -262,7 +277,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Go back to previous page")
     public static void back() {
-        getDriver().navigate().back();
+        webDriver.navigate().back();
     }
 
     /**
@@ -270,7 +285,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Go forward to next page")
     public static void forward() {
-        getDriver().navigate().forward();
+        webDriver.navigate().forward();
     }
 
     /**
@@ -279,8 +294,8 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(level = DEBUG)
     public static void zoom(double factor) {
-        jsExecute("document.body.style.transform = 'scale(' + arguments[0] + ')';" +
-                        "document.body.style.transformOrigin = '0 0';", factor);
+        driverFactory.jsExecute("document.body.style.transform = 'scale(' + arguments[0] + ')';" +
+                "document.body.style.transformOrigin = '0 0';", factor);
     }
 
     /**
@@ -289,10 +304,10 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction
     public static String getHtml() {
-        return getDriver().getPageSource();
+        return webDriver.getPageSource();
     }
     public static List<LogEntry> getHttpRequests() {
-        return getDriver().manage().logs().get("performance").getAll();
+        return webDriver.manage().logs().get("performance").getAll();
     }
 
     /**
@@ -302,13 +317,13 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(level = DEBUG)
     private static void scroll(int x, int y) {
-        jsExecute("window.scrollBy("+x+","+y+")");
+        driverFactory.jsExecute("window.scrollBy(" + x + "," + y + ")");
     }
     public static boolean isBottomOfThePage() {
-        return jsExecute("return ((window.innerHeight + window.scrollY) >= document.body.scrollHeight);");
+        return driverFactory.jsExecute("return ((window.innerHeight + window.scrollY) >= document.body.scrollHeight);");
     }
     public static boolean isTopOfThePage() {
-        return jsExecute("return window.scrollX == window.scrollY;");
+        return driverFactory.jsExecute("return window.scrollX == window.scrollY;");
     }
 
     /**
@@ -316,7 +331,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction
     public static void scrollToTop() {
-        jsExecute("window.scrollTo(0,0)");
+        driverFactory.jsExecute("window.scrollTo(0,0)");
     }
 
     /**
@@ -324,7 +339,7 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction
     public static void scrollToBottom() {
-        jsExecute("window.scrollTo(0,document.body.scrollHeight)");
+        driverFactory.jsExecute("window.scrollTo(0,document.body.scrollHeight)");
     }
     /**
      * Scroll screen down on specific values
@@ -364,20 +379,20 @@ public class WebPage extends DriverBase implements PageObject {
 
     @JDIAction(level = DEBUG)
     public static double zoomLevel() {
-        return getDouble(jsExecute("return window.devicePixelRatio;"));
+        return getDouble(driverFactory.jsExecute("return window.devicePixelRatio;"));
     }
     @JDIAction(level = DEBUG)
     public static long xOffset() {
-        return jsExecute("return window.pageXOffset;");
+        return driverFactory.jsExecute("return window.pageXOffset;");
     }
     @JDIAction(level = DEBUG)
     public static long yOffset() {
-        return jsExecute("return window.pageYOffset;");
+        return driverFactory.jsExecute("return window.pageYOffset;");
     }
     @JDIAction(level = DEBUG)
     public static String windowScreenshot() {
         try {
-            File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            File screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
             //show();
             String path = mergePath(getPath(), getCurrentPage()+".png");
             File imageFile = new File(path);
@@ -391,7 +406,7 @@ public class WebPage extends DriverBase implements PageObject {
         File imageFile;
         String path;
         try {
-            screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
             //show();
             path = mergePath(getPath(), name);
             imageFile = new File(path);
@@ -407,19 +422,19 @@ public class WebPage extends DriverBase implements PageObject {
 
     @Override
     public String toString() {
-        return Switch(LOGS.logLevel).get(
-            Case(l -> l == STEP,
-                l -> msgFormat(PRINT_PAGE_STEP, this)),
-            Case(l -> l == INFO,
-                l -> msgFormat(PRINT_PAGE_INFO, this)),
-            Default(msgFormat(PRINT_PAGE_DEBUG, this))
+        return Switch(jdiSettings.LOGS.logLevel).get(
+                Case(l -> l == STEP,
+                        l -> msgFormat(PRINT_PAGE_STEP, this)),
+                Case(l -> l == INFO,
+                        l -> msgFormat(PRINT_PAGE_INFO, this)),
+                Default(msgFormat(PRINT_PAGE_DEBUG, this))
         );
     }
 
     public static class StringCheckType {
-        private Supplier<String> actual;
-        private String equals;
-        private String what;
+        private final Supplier<String> actual;
+        private final String equals;
+        private final String what;
 
         StringCheckType(Supplier<String> actual, String equals, String what) {
             this.actual = actual;
@@ -456,13 +471,13 @@ public class WebPage extends DriverBase implements PageObject {
         }
     }
     public static void beforeNewPage(WebPage page) {
-        if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
+        if (webSettings.VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
             visualWindowCheck();
-        logger.toLog("Page '"+page.getName()+"' opened");
-        TIMEOUTS.element.set(TIMEOUTS.page.get());
+        webSettings.logger.toLog("Page '" + page.getName() + "' opened");
+        jdiSettings.TIMEOUTS.element.set(jdiSettings.TIMEOUTS.page.get());
     }
     public static void beforeThisPage(WebPage page) {
-        if (PAGE.checkPageOpen != PageChecks.NONE)
+        if (jdiSettings.PAGE.checkPageOpen != PageChecks.NONE)
             page.checkOpened();
     }
 }

@@ -5,6 +5,7 @@ import io.github.com.custom.MarvelUser;
 import io.github.com.entities.MarvelUserSimple;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeMethod;
@@ -12,24 +13,27 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.elements.complex.table.Column.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
+import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
-import static com.epam.jdi.tools.StringUtils.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.UsersPage.*;
-import static io.github.epam.html.tests.elements.BaseValidations.*;
-import static io.github.epam.html.tests.site.steps.States.*;
-import static io.github.epam.test.data.MarvelHeroes.*;
-import static org.hamcrest.MatcherAssert.*;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static io.github.com.StaticSite.usersPage;
+import static io.github.com.pages.UsersPage.users;
+import static io.github.com.pages.UsersPage.usersRow;
+import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN_SIMPLE;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 
 public class TableInteractTests implements TestsInit {
+    private WebDriver webDriver;
 
     @BeforeMethod
     public void before() {
+        webDriver = getWebDriverFactory().getDriver();
         shouldBeLoggedIn();
         usersPage.shouldBeOpened();
     }
@@ -47,11 +51,11 @@ public class TableInteractTests implements TestsInit {
         assertTrue(isVip());
     }
     private String typeSelected() {
-        return new Select(getDriver().findElement(By.cssSelector("#user-table select")))
+        return new Select(webDriver.findElement(By.cssSelector("#user-table select")))
                 .getFirstSelectedOption().getText();
     }
     private boolean isVip() {
-        WebElement element = getDriver().findElement(By.cssSelector("#user-table input[type=checkbox]"));
+        WebElement element = webDriver.findElement(By.cssSelector("#user-table input[type=checkbox]"));
         return element.isSelected();
     }
 

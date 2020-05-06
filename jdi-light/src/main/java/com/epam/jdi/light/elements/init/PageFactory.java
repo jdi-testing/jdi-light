@@ -1,15 +1,20 @@
 package com.epam.jdi.light.elements.init;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.complex.DataList;
+import com.epam.jdi.light.elements.complex.JList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.settings.JDISettings;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -20,35 +25,42 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.lang.String.format;
-import static java.lang.reflect.Modifier.*;
-import static java.util.Arrays.*;
+import static java.lang.reflect.Modifier.isStatic;
+import static java.util.Arrays.asList;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class PageFactory {
+    private static final JDISettings jdiSettings = getJDISettings();
+    private static final WebSettings webSettings = getWebSettings();
+    private static final WebDriverFactory driverFactory = getWebDriverFactory();
+
     // region initSite
     public static void initSite(Class<?> site) {
-        init();
-        initSite(site, DRIVER.name);
+        webSettings.init();
+        initSite(site, jdiSettings.DRIVER.name);
     }
+
     public static void initSite(Class<?> site, String driverName) {
-        init();
+        webSettings.init();
         SiteInfo info = new SiteInfo(driverName)
-            .set(s->s.parentClass = site);
+                .set(s -> s.parentClass = site);
         initialize(site, info);
     }
     private static void initialize(Class<?> site, SiteInfo info) {
@@ -57,7 +69,7 @@ public class PageFactory {
             try {
                 info.field = pageField;
                 if (info.field.getName().equals("searchPage"))
-                    System.out.println("");
+                    System.out.println();
                 setFieldWithInstance(info, null);
             } catch (Throwable ex) {
                 throw exception(ex, initException(pageField, site));
@@ -141,7 +153,7 @@ public class PageFactory {
                 String msg = safeException(exception);
                 if (msg.contains("has no empty constructors")
                     || msg.contains("Can't init class. Class Type is null"))
-                    info.instance = create(info.type(), getDriver(info.driverName));
+                    info.instance = create(info.type(), getWebDriverFactory().getDriver(info.driverName));
                     throw exception(msg);
             } catch (Throwable ex) {
                 throw exception(ex, "Can't create field '%s' instance of type '%s'. Try new %s() to get more details",
@@ -166,7 +178,7 @@ public class PageFactory {
                 info.name());
     }
     private static void initWebPage(WebPage webPage) {
-        webPage.driverName = DRIVER.name;
+        webPage.driverName = jdiSettings.DRIVER.name;
         webPage.updatePageData(webPage.getClass().getAnnotation(Url.class),
                 webPage.getClass().getAnnotation(Title.class));
         addPage(webPage);
@@ -201,7 +213,7 @@ public class PageFactory {
     }
 
     private static void initPage(Object page) {
-        SiteInfo info = new SiteInfo(DRIVER.name, page);
+        SiteInfo info = new SiteInfo(jdiSettings.DRIVER.name, page);
         if (isClass(page.getClass(), WebPage.class))
             initWebPage((WebPage) page);
         initElements(info);
@@ -209,25 +221,25 @@ public class PageFactory {
 
     // region Selenium PageFactory
     public static void initElements(JFunc<WebDriver> driver, Object... pages) {
-        init();
-        useDriver(driver);
+        webSettings.init();
+        driverFactory.useDriver(driver);
         initElements(pages);
     }
     public static void initElements(Class<?> site) {
         initSite(site);
     }
     public static void initElements(Object page) {
-        init();
+        webSettings.init();
         initPage(page);
     }
     public static void initElements(Object... pages) {
-        init();
+        webSettings.init();
         for (Object page : pages) {
             initPage(page);
         }
     }
     public static void initElements(Class<?>... pages) {
-        List<Object> pageList = map(asList(pages), p -> getPageObject(getDriver(), p));
+        List<Object> pageList = map(asList(pages), p -> getPageObject(driverFactory.getDriver(), p));
         initElements(pageList.toArray(new Object[pageList.size()]));
     }
     public static <T> T initElements(WebDriver driver, Class<T> pageClassToProxy) {

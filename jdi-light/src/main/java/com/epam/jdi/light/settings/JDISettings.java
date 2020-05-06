@@ -1,11 +1,28 @@
 package com.epam.jdi.light.settings;
 
 public class JDISettings {
-    public static CommonSettings COMMON = new CommonSettings();
-    public static LogSettings LOGS = new LogSettings();
-    public static Timeouts TIMEOUTS = new Timeouts();
-    public static DriverSettings DRIVER = new DriverSettings();
-    public static ElementSettings ELEMENT = new ElementSettings();
-    public static PageSettings PAGE = new PageSettings();
-    public static ScreenSettings SCREEN = new ScreenSettings();
+    private JDISettings() {
+        LOGS = new LogSettings();
+        TIMEOUTS = new Timeouts();
+        ELEMENT = new ElementSettings();
+        PAGE = new PageSettings();
+        SCREEN = new ScreenSettings();
+        DRIVER = new DriverSettings();
+    }
+
+    private static JDISettings jdiSettings;
+
+    public static JDISettings getJDISettings() {
+        if (jdiSettings == null) {
+            jdiSettings = new JDISettings();
+        }
+        return jdiSettings;
+    }
+
+    public LogSettings LOGS;
+    public Timeouts TIMEOUTS;
+    public DriverSettings DRIVER;
+    public ElementSettings ELEMENT;
+    public PageSettings PAGE;
+    public ScreenSettings SCREEN;
 }

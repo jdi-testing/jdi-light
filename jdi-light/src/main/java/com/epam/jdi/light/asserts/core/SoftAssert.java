@@ -6,16 +6,16 @@ import org.hamcrest.Matcher;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static org.hamcrest.MatcherAssert.*;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class SoftAssert {
-    private static Safe<List<String>> listOfErrors = new Safe<>(new ArrayList<>());
+    private static final Safe<List<String>> listOfErrors = new Safe<>(new ArrayList<>());
     private static boolean IS_SOFT_ASSERT = false;
 
     public static void setAssertType(String type) {
@@ -41,7 +41,7 @@ public class SoftAssert {
     public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
         try {
             assertThat(actual, matcher);
-            logger.debug(">>> " + actual);
+            getWebSettings().logger.debug(">>> " + actual);
         } catch (Throwable error) {
             if (IS_SOFT_ASSERT) {
                 addError(error);
