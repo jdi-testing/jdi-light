@@ -112,8 +112,9 @@ function downloadAllureResults() {
     do
         urlExistence=true
         echo "Found: ${url}"
-        fileName="$(echo "${url}"| awk -F/ '{print $4}')"
-        curl ${url} --output ${fileName}
+        fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $4}')" # TODO: $4 for file.io, #5 for transfer.sh, add an IF
+        tmpResult=curl ${url} --output ${fileName}
+        echo "Loading result: ${tmpResult}"
     done
     if [[ "x${urlExistence}" == "xfalse" ]] ; then
         echo "Failed inside downloadAllureResults()"
