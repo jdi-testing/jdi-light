@@ -70,7 +70,8 @@ function grubAllureResults() {
     echo "Stage was: ${TRAVIS_BUILD_STAGE_NAME}"
     checkBranchIsOk #there is an exit inside
 
-    if [[ "x${TRAVIS_BUILD_STAGE_NAME}" == "xTest" ]] ; then #don't remove x, it's useful
+    if [[ "x${TRAVIS_BUILD_STAGE_NAME}" == "xtest" ]] ; then #don't remove x, it's useful
+        echo "Starting grubAllureResults()'s IF clause"
         for result in $(find jdi*/allure-results -maxdepth 1 -type d)
         do
             echo RESULT: ${result}
