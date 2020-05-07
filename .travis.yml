@@ -12,8 +12,9 @@ addons:
 env:
   global:
     - CHROME_PROPERTIES="chrome.properties"
-    - WITH_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=../$CHROME_PROPERTIES" #add -ntp when maven will be >=3.6.1 on travis
-    - NOPO_TESTS="com.epam.jdi:jdi-bdd-no-po-tests"
+    - WITH_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES" #add -ntp when maven will be >=3.6.1 on travis
+    - GROUP_ID="com.epam.jdi"
+    - NOPO_TESTS="jdi-bdd-no-po-tests"
     - BDD_TESTS="com.epam.jdi:jdi-bdd-tests"
     - HTML_TESTS="com.epam.jdi:jdi-light-html-tests"
     - ANGULAR_TESTS="com.epam.jdi:jdi-light-angular-tests"
