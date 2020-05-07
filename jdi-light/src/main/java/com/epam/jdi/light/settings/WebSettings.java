@@ -196,7 +196,6 @@ public class WebSettings {
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
                 p -> p.forEach((key, value) -> DRIVER.capabilities.chrome
                     .put(key.toString(), value.toString())));
-            DRIVER.capabilities.chrome.put("arguments", "--headless");
             loadCapabilities("ff.capabilities.path", "ff.properties",
                 p -> p.forEach((key, value) -> DRIVER.capabilities.firefox
                     .put(key.toString(), value.toString())));

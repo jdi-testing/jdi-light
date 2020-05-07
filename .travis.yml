@@ -12,7 +12,7 @@ addons:
 env:
   global:
     - CHROME_PROPERTIES="chrome.properties"
-    - WITH_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=../$CHROME_PROPERTIES" #add -ntp when maven will be >=3.6.1 on travis
+    - WITH_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES" #add -ntp when maven will be >=3.6.1 on travis
     - NOPO_TESTS="com.epam.jdi:jdi-bdd-no-po-tests"
     - BDD_TESTS="com.epam.jdi:jdi-bdd-tests"
     - HTML_TESTS="com.epam.jdi:jdi-light-html-tests"
@@ -44,7 +44,7 @@ jobs:
       script:
         - mvn -ntp install -DskipTests
         - echo "arguments=--headless" > "chrome.properties"
-        - mvn verify -Ddriver=chrome -Dchrome.capabilities.path=../chrome.properties -pl "com.epam.jdi:jdi-bdd-no-po-tests"
+        - mvn verify -Ddriver=chrome -Dchrome.capabilities.path=chrome.properties -pl "com.epam.jdi:jdi-bdd-no-po-tests"
 
     - stage: test
       name: Run tests - bdd
