@@ -27,6 +27,7 @@ public class ActionObject {
     private final CacheValue<Integer> timeout = new CacheValue<>(this::getTimeout);
     private final CacheValue<JFunc1<Object, Object>> overrideAction = new CacheValue<>(this::getOverride);
     private static final Safe<List<String>> isOverride = new Safe<>(ArrayList::new);
+    private final CacheValue<IBaseElement> element = new CacheValue<>(this::getElement);
 
     public ActionObject(ProceedingJoinPoint joinPoint, String className) {
         this.jp = joinPoint;
@@ -59,8 +60,6 @@ public class ActionObject {
     public IBaseElement element() {
         return element.get();
     }
-
-    private final CacheValue<IBaseElement> element = new CacheValue<>(this::getElement);
 
     private IBaseElement getElement() {
         try {
