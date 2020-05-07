@@ -79,8 +79,8 @@ jobs:
         - mvn install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
-        - ls -lah ./$ANGULAR_TEST/target
-        - ls -lah ./$ANGULAR_TEST/target/allure-results
+        - ls -lah ./$ANGULAR_TESTS/target
+        - ls -lah ./$ANGULAR_TESTS/target/allure-results
 
 #    - stage: test
 #      name: Run tests - examples
