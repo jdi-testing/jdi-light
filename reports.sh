@@ -103,6 +103,7 @@ function deployAllureResults() {
 }
 
 function downloadAllureResults() {
+    echo "Starting downloadAllureResults()"
     urlExistence=false
     for url in $(collectRelevantComments "${TRAVIS_BUILD_NUMBER}")
     do
@@ -112,6 +113,7 @@ function downloadAllureResults() {
         curl ${url} --output ${fileName}
     done
     if [[ "x${urlExistence}" == "xfalse" ]] ; then
+        echo "Failed inside downloadAllureResults()"
         exitWithError
     fi
 }
@@ -124,6 +126,7 @@ function extractAllureResults() {
 }
 
 function generateAllureReports() {
+    echo "Starting generateAllureReports()"
     reportDirList="";
     allureDirExistence=false
     for report in $(ls -d1 jdi-light*/)
@@ -138,6 +141,7 @@ function generateAllureReports() {
         fi
     done
     if [[ "x${allureDirExistence}" == "xfalse" ]] ; then
+        echo "Failed inside generateAllureReports()"
         exitWithError
     fi
     echo ${reportDirList}
