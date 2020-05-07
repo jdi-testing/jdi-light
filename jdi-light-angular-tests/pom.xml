@@ -6,6 +6,8 @@
 
     <artifactId>jdi-light-angular-tests</artifactId>
     <name>JDI Angular Tests</name>
+    <groupId>com.epam.jdi</groupId>
+
     <dependencies>
         <!--JDI-->
         <dependency>
@@ -30,7 +32,6 @@
             <version>7.0.0</version>
         </dependency>
     </dependencies>
-    <groupId>com.epam.jdi</groupId>
 
     <properties>
         <driver>chrome</driver>
