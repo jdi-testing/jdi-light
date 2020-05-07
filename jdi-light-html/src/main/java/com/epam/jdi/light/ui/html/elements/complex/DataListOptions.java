@@ -1,6 +1,6 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
+import com.epam.jdi.light.asserts.complex.DropdownAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -19,11 +20,11 @@ import static com.epam.jdi.tools.LinqUtils.*;
  */
 // Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
-public class DataListOptions extends UIListBase<UISelectAssert<?,?>> implements IsCombobox {
+public class DataListOptions extends UIListBase<DropdownAssert> implements IsCombobox {
     @Override
     public WebList list() {
         return $$("#"+ uiElement.attr("list")+" option")
-            .setup(e->e.noValidation().setName(getName() + "list"))
+            .setup(e -> e.noValidation().setName(getName() + "list"))
             .setUIElementName(VALUE);
     }
     @Override
@@ -85,4 +86,10 @@ public class DataListOptions extends UIListBase<UISelectAssert<?,?>> implements 
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() { return core().isDisplayed(); }
 
+    public boolean isExpanded() { throw exception("isExpanded can not be used with this element"); }
+
+    @Override
+    public DropdownAssert is() {
+        return new DropdownAssert().set(this);
+    }
 }

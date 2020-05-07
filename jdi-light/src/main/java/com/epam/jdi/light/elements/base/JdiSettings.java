@@ -12,7 +12,7 @@ public class JdiSettings {
             if (webElement != null)
                 return webElement;
         }
-        if (b.locator.isEmpty())
+        if (b.locator.isNull())
             return b.beforeSearch(b.getSmart());
         if (b.locator.argsCount() != args.length)
             return b.getWebListFromArgs(args);

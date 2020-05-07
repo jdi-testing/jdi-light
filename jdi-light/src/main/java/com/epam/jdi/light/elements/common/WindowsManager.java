@@ -38,6 +38,7 @@ public class WindowsManager {
         }
         return false;
     }
+    @JDIAction("Check that new window is opened")
     public static void checkNewWindowIsOpened() {
         boolean isNewWindow = newWindowIsOpened();
         if (!isNewWindow)

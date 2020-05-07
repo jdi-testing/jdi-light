@@ -131,7 +131,6 @@ public class DataTableTests implements TestsInit {
     }
     //
 
-
     @Test
     public void tableChainTest() {
         users.assertThat()

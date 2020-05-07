@@ -86,6 +86,10 @@ public class DataSimpleTableTests implements TestsInit {
         usersData.assertThat().size(greaterThan(3));
         usersData.is().notEmpty().size(lessThanOrEqualTo(6));
     }
+    @Test
+    public void isEmptyTest() {
+        emptyTable.is().empty();
+    }
     // Compare Matchers
     @Test
     public void rowMatcherTest() {

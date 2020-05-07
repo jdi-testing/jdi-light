@@ -14,7 +14,7 @@ public class ContactForm extends Form<Contacts> {
 	IsCombobox religion;
 
 	Checkbox passport, acceptConditions;
-	TextArea description;
+	public TextArea description;
 
 	@UI("['Submit']") public Button submit;
 }
