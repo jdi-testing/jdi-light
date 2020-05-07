@@ -14,7 +14,7 @@ import static org.mytests.uiobjects.example.TestData.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
 import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.*;
 
-public class JDIPerformanceTests extends TestsInit {
+public class JDIPerformanceTests implements TestsInit {
 
     @BeforeMethod
     public void openPerformancePage() {

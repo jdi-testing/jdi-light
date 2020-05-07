@@ -9,9 +9,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDropdown {
-    String root() default "";
-    String value() default "";
-    String list() default "";
-    String expand() default "";
-    boolean autoclose() default false;
+    @MarkupLocator String root() default "";
+    @MarkupLocator String value() default "";
+    @MarkupLocator String list() default "";
+    @MarkupLocator String expand() default "";
+    boolean autoClose() default false;
 }

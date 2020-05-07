@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matchers;
@@ -53,7 +54,7 @@ public class UIElement extends JDIBase
     public UIElement() { }
     public UIElement(WebElement el) { setWebElement(el); }
     public UIElement(List<WebElement> els) { setWebElements(els); }
-    public UIElement(By locator) { setLocator(locator); }
+    public UIElement(@MarkupLocator By locator) { setLocator(locator); }
     public UIElement(JDIBase base) {
         super(base);
     }
@@ -225,9 +226,9 @@ public class UIElement extends JDIBase
     }
 
     @JDIAction(level = DEBUG)
-    public WebElement findElement(By locator) { return $(locator, this).getWebElement(); }
+    public WebElement findElement(@MarkupLocator By locator) { return $(locator, this).getWebElement(); }
     @JDIAction(level = DEBUG)
-    public List<WebElement> findElements(By locator) { return $(locator, this).getWebElements(); }
+    public List<WebElement> findElements(@MarkupLocator By locator) { return $(locator, this).getWebElements(); }
 
     /** Get screen screen shot */
     @JDIAction(level = DEBUG)
@@ -685,21 +686,21 @@ public class UIElement extends JDIBase
         }
         return isNotBlank(text) ? text : ui.text(VALUE);
     };
-    public UIElement find(String by) {
+    public UIElement find(@MarkupLocator String by) {
         return $(by, this);
     }
-    public UIElement findFirst(String by) {
+    public UIElement findFirst(@MarkupLocator String by) {
         UIElement element = $(by, this);
         element.strictSearch(false);
         return element;
     }
-    public UIElement find(By by) {
+    public UIElement find(@MarkupLocator By by) {
         return $(by, this);
     }
-    public WebList finds(String by) {
+    public WebList finds(@MarkupLocator String by) {
         return $$(by, this);
     }
-    public WebList finds(By by) {
+    public WebList finds(@MarkupLocator By by) {
         return $$(by, this);
     }
     public UIElement firstChild() { return find("*"); }

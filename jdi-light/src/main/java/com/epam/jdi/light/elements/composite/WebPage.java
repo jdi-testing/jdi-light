@@ -115,7 +115,9 @@ public class WebPage extends DriverBase implements PageObject {
     }
     public static void openSite(Class<?> site) {
         initSite(site);
-        openSite();
+        WebPage page = new WebPage(getDomain());
+        page.setName(site.getSimpleName());
+        page.open();
     }
     /**
      * Get Web page URL
@@ -174,7 +176,7 @@ public class WebPage extends DriverBase implements PageObject {
      * Opens url specified for page
      * @param url
      */
-    @JDIAction("Open '{name}'(url={0})")
+    @JDIAction(value = "Open '{name}'(url={0})", timeout = 0)
     private void open(String url) {
         init();
         CacheValue.reset();
