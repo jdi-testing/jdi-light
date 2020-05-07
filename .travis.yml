@@ -67,7 +67,7 @@ jobs:
       name: Run tests - html
       script:
         - mvn -ntp install -DskipTests
-        - echo "arguments=chrome.properties" > "jdi-light-html-tests\src\test\resources\chrome.properties"
+        - echo arguments=chrome.properties > "jdi-light-html-tests\src\test\resources\chrome.properties"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
 
 #    - stage: test
