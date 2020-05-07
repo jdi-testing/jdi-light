@@ -10,7 +10,6 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.AngularPage;
 
-@SuppressWarnings("PMD.ClassNamingConventions")
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 
