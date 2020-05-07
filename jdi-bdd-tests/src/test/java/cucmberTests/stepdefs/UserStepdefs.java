@@ -16,7 +16,10 @@ import static io.github.com.StaticSite.*;
 import static io.github.com.entities.Users.*;
 import static io.github.com.pages.Header.*;
 import static java.util.Arrays.*;
-import static org.testng.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class UserStepdefs {
 
@@ -28,9 +31,9 @@ public class UserStepdefs {
         assertFalse(el.isDisabled());
         assertFalse(el.isHidden());
         Point location = el.getLocation();
-        assertTrue(location.x > 0 && location.y > 0, "Location: " + location);
+        assertTrue("Location: " + location, location.x > 0 && location.y > 0);
         Dimension size = el.getSize();
-        assertTrue(size.height > 0 && size.width > 0, "Size: " + location);
+        assertTrue("Size: " + location, size.height > 0 && size.width > 0);
         el.setAttribute("test-jdi", "test-value");
         assertEquals(el.getAttribute("test-jdi"), "test-value");
         el.highlight("blue");

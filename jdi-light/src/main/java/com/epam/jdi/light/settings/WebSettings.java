@@ -1,5 +1,37 @@
 package com.epam.jdi.light.settings;
 
+import com.epam.jdi.light.asserts.core.SoftAssert;
+import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.SetTextTypes;
+import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.common.Timeout;
+import com.epam.jdi.light.common.UseSmartSearch;
+import com.epam.jdi.light.common.VisualCheckAction;
+import com.epam.jdi.light.common.VisualCheckPage;
+import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.driver.get.DriverTypes;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
+import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.tools.PropReader;
+import com.epam.jdi.tools.PropertyReader;
+import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.pairs.Pair;
+import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
 import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
@@ -34,6 +66,7 @@ import static com.epam.jdi.light.settings.JDISettings.PAGE;
 import static com.epam.jdi.light.settings.JDISettings.SCREEN;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static com.epam.jdi.light.settings.Strategies.JDI;
+import static com.epam.jdi.light.settings.Strategies.JDI_STABLE;
 import static com.epam.jdi.light.settings.Strategies.SELENIUM;
 import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
 import static com.epam.jdi.tools.LinqUtils.first;
@@ -50,39 +83,7 @@ import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.openqa.selenium.PageLoadStrategy.EAGER;
-import static org.openqa.selenium.PageLoadStrategy.NONE;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
-
-import com.epam.jdi.light.asserts.core.SoftAssert;
-import com.epam.jdi.light.common.ElementArea;
-import com.epam.jdi.light.common.SetTextTypes;
-import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.common.Timeout;
-import com.epam.jdi.light.common.UseSmartSearch;
-import com.epam.jdi.light.common.VisualCheckAction;
-import com.epam.jdi.light.common.VisualCheckPage;
-import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.driver.get.DriverTypes;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.composite.PageObject;
-import com.epam.jdi.light.logger.ILogger;
-import com.epam.jdi.tools.PropReader;
-import com.epam.jdi.tools.PropertyReader;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.pairs.Pair;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
