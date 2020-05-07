@@ -112,7 +112,7 @@ function downloadAllureResults() {
     do
         urlExistence=true
         echo "Found: ${url}"
-        fileName="$(echo "${url}"| awk -F/ '{print $5}')"
+        fileName="$(echo "${url}"| awk -F/ '{print $4}')"
         curl ${url} --output ${fileName}
     done
     if [[ "x${urlExistence}" == "xfalse" ]] ; then
